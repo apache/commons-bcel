@@ -208,7 +208,7 @@ public final class ClassParser {
   }
 
   /**
-   * Read information about the attributes of the attributes of the class.
+   * Read information about the attributes of the class.
    * @throws  IOException
    * @throws  ClassFormatException
    */
