@@ -55,7 +55,6 @@ package org.apache.bcel.classfile;
  */
 
 import  org.apache.bcel.Constants;
-import  org.apache.bcel.Repository;
 import  org.apache.bcel.util.SyntheticRepository;
 import  org.apache.bcel.util.ClassVector;
 import  org.apache.bcel.util.ClassQueue;
@@ -203,8 +202,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   /**
    * Constructor gets all contents as arguments.
    *
-   * @param class_name Class name
-   * @param superclass_name Superclass name
+   * @param class_name_index Class name
+   * @param superclass_name_index Superclass name
    * @param file_name File name
    * @param major Major compiler version
    * @param minor Minor compiler version
@@ -461,35 +460,35 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   }
 
   /**
-   * @param attributes.
+   * @param attributes .
    */
   public void setAttributes(Attribute[] attributes) {
     this.attributes = attributes;
   }    
 
   /**
-   * @param class_name.
+   * @param class_name .
    */
   public void setClassName(String class_name) {
     this.class_name = class_name;
   }    
 
   /**
-   * @param class_name_index.
+   * @param class_name_index .
    */
   public void setClassNameIndex(int class_name_index) {
     this.class_name_index = class_name_index;
   }    
 
   /**
-   * @param constant_pool.
+   * @param constant_pool .
    */
   public void setConstantPool(ConstantPool constant_pool) {
     this.constant_pool = constant_pool;
   }    
 
   /**
-   * @param fields.
+   * @param fields .
    */
   public void setFields(Field[] fields) {
     this.fields = fields;
@@ -503,35 +502,35 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   }    
 
   /**
-   * @param interface_names.
+   * @param interface_names .
    */
   public void setInterfaceNames(String[] interface_names) {
     this.interface_names = interface_names;
   }    
 
   /**
-   * @param interfaces.
+   * @param interfaces .
    */
   public void setInterfaces(int[] interfaces) {
     this.interfaces = interfaces;
   }    
 
   /**
-   * @param major.
+   * @param major .
    */
   public void setMajor(int major) {
     this.major = major;
   }    
 
   /**
-   * @param methods.
+   * @param methods .
    */
   public void setMethods(Method[] methods) {
     this.methods = methods;
   }    
 
   /**
-   * @param minor.
+   * @param minor .
    */
   public void setMinor(int minor) {
     this.minor = minor;
@@ -545,14 +544,14 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   }    
 
   /**
-   * @param superclass_name.
+   * @param superclass_name .
    */
   public void setSuperclassName(String superclass_name) {
     this.superclass_name = superclass_name;
   }    
 
   /**
-   * @param superclass_name_index.
+   * @param superclass_name_index .
    */
   public void setSuperclassNameIndex(int superclass_name_index) {
     this.superclass_name_index = superclass_name_index;
