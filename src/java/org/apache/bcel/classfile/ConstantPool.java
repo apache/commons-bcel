@@ -91,7 +91,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
   /**
    * Resolve constant to a string representation.
    *
-   * @param  constant Constant to be printed
+   * @param  c Constant to be printed
    * @return String representation
    */
   public String constantToString(Constant c)

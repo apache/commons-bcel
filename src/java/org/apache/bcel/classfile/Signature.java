@@ -56,8 +56,8 @@ public final class Signature extends Attribute {
   /**
    * @param name_index Index in constant pool to CONSTANT_Utf8
    * @param length Content length in bytes
+   * @param signature_index Index in constant pool to CONSTANT_Utf8
    * @param constant_pool Array of constants
-   * @param Signature_index Index in constant pool to CONSTANT_Utf8
    */
   public Signature(int name_index, int length, int signature_index,
 		  ConstantPool constant_pool)
@@ -96,7 +96,7 @@ public final class Signature extends Attribute {
   public final int getSignatureIndex() { return signature_index; }    
 
   /**
-   * @param Signature_index.
+   * @param signature_index.
    */
   public final void setSignatureIndex(int signature_index) {
     this.signature_index = signature_index;

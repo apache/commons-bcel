@@ -246,7 +246,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * Convenience method.
    *
    * Add an empty constructor to this class that does nothing but calling super().
-   * @param access rights for constructor
+   * @param access_flags rights for constructor
    */
   public void addEmptyConstructor(int access_flags) {
     InstructionList il = new InstructionList();

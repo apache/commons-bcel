@@ -58,8 +58,8 @@ public final class StackMap extends Attribute implements Node {
    * @param name_index Index of name
    * @param length Content length in bytes
    * @param file Input stream
-   * @throws IOException
    * @param constant_pool Array of constants
+   * @throws IOException
    */
   StackMap(int name_index, int length, DataInputStream file,
 	   ConstantPool constant_pool) throws IOException

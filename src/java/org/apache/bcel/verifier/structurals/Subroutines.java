@@ -343,7 +343,7 @@ public class Subroutines{
 
 	/**
 	 * Constructor.
-	 * @param il A MethodGen object representing method to
+	 * @param mg A MethodGen object representing method to
 	 * create the Subroutine objects of.
 	 */
 	public Subroutines(MethodGen mg){

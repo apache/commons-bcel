@@ -729,7 +729,7 @@ public abstract class Utility {
    *
    * @param str String to permute
    * @param old String to be replaced
-   * @param new Replacement string
+   * @param new_ Replacement string
    * @return new String object
    */
   public static final String replace(String str, String old, String new_) {
@@ -1198,7 +1198,7 @@ public abstract class Utility {
 
   /** Decode a string back to a byte array.
    *
-   * @param bytes the byte array to convert
+   * @param s the string to convert
    * @param uncompress use gzip to uncompress the stream of bytes
    */
   public static byte[] decode(String s, boolean uncompress) throws IOException {

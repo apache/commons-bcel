@@ -59,8 +59,9 @@ public final class PMGClass extends Attribute {
   /**
    * @param name_index Index in constant pool to CONSTANT_Utf8
    * @param length Content length in bytes
+   * @param pmg_index index in constant pool for source file name
+   * @param pmg_class_index Index in constant pool to CONSTANT_Utf8
    * @param constant_pool Array of constants
-   * @param PMGClass_index Index in constant pool to CONSTANT_Utf8
    */
   public PMGClass(int name_index, int length, int pmg_index, int pmg_class_index,
 		  ConstantPool constant_pool)

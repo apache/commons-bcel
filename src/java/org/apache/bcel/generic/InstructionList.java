@@ -405,7 +405,7 @@ public class InstructionList implements Serializable {
    * Insert another list before Instruction handle ih contained in this list.
    * Consumes argument list, i.e., it becomes empty.
    *
-   * @param i  where to append the instruction list 
+   * @param ih  where to append the instruction list 
    * @param il Instruction list to insert
    * @return instruction handle of the first inserted instruction
    */

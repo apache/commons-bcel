@@ -52,7 +52,7 @@ public abstract class Select extends BranchInstruction
    *
    * @param match array of matching values
    * @param targets instruction targets
-   * @param target default instruction target
+   * @param defaultTarget default instruction target
    */
   Select(short opcode, int[] match, InstructionHandle[] targets,
 	 InstructionHandle defaultTarget) {

@@ -131,7 +131,7 @@ public abstract class Instruction implements Cloneable, Serializable {
    * Read an instruction from (byte code) input stream and return the
    * appropiate object.
    *
-   * @param file file to read from
+   * @param bytes input stream bytes
    * @return instruction object being read
    */
   public static final Instruction readInstruction(ByteSequence bytes)
