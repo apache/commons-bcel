@@ -116,11 +116,11 @@ public abstract class ReferenceType extends Type {
 
     /* If this is a class type then
      */
-    if ((this instanceof ObjectType) && (((ObjectType) this).referencesClass())) {
+    if ((this instanceof ObjectType) && (((ObjectType) this).referencesClassExact())) {
       /* If T is a class type, then this must be the same class as T,
 	 or this must be a subclass of T;
       */
-      if ((T instanceof ObjectType) && (((ObjectType) T).referencesClass())) {
+      if ((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) {
 	if (this.equals(T))
 	  return true;
 
@@ -131,7 +131,7 @@ public abstract class ReferenceType extends Type {
 
       /* If T is an interface type, this must implement interface T.
        */
-      if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterface())) {
+      if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
 	if (Repository.implementationOf(((ObjectType) this).getClassName(),
 					((ObjectType) T).getClassName()))
 	  return true;
@@ -140,17 +140,17 @@ public abstract class ReferenceType extends Type {
 
     /* If this is an interface type, then:
      */
-    if ((this instanceof ObjectType) && (((ObjectType) this).referencesInterface())) {
+    if ((this instanceof ObjectType) && (((ObjectType) this).referencesInterfaceExact())) {
       /* If T is a class type, then T must be Object (§2.4.7).
        */
-      if ((T instanceof ObjectType) && (((ObjectType) T).referencesClass())) {
+      if ((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) {
 	if (T.equals(Type.OBJECT)) return true;
       }
 
       /* If T is an interface type, then T must be the same interface
        * as this or a superinterface of this (§2.13.2).
        */
-      if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterface())) {
+       if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
 	if (this.equals(T)) return true;
 	if (Repository.implementationOf(((ObjectType) this).getClassName(),
 					((ObjectType) T).getClassName()))
@@ -164,7 +164,7 @@ public abstract class ReferenceType extends Type {
     if (this instanceof ArrayType) {
       /* If T is a class type, then T must be Object (§2.4.7).
        */
-      if ((T instanceof ObjectType) && (((ObjectType) T).referencesClass())) {
+      if ((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) {
 	if (T.equals(Type.OBJECT)) return true;
       }
 
@@ -194,7 +194,7 @@ public abstract class ReferenceType extends Type {
       // are at least two different pages where assignment compatibility is defined and
       // on one of them "interfaces implemented by arrays" is exchanged with "'Cloneable' or
       // 'java.io.Serializable'"
-      if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterface())) {
+      if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
 	for (int ii = 0; ii < Constants.INTERFACES_IMPLEMENTED_BY_ARRAYS.length; ii++) {
 	  if (T.equals(new ObjectType(Constants.INTERFACES_IMPLEMENTED_BY_ARRAYS[ii]))) return true;
 	}
