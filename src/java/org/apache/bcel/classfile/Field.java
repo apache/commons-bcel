@@ -53,8 +53,10 @@ package org.apache.bcel.classfile;
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
  */
-import  org.apache.bcel.Constants;
+import org.apache.bcel.Constants;
 import org.apache.bcel.generic.Type;
+import org.apache.bcel.util.BCELComparator;
+
 import java.io.*;
 
 /**
@@ -62,13 +64,28 @@ import java.io.*;
  * for a variable in the class. See JVM specification for details.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class Field extends FieldOrMethod {
+  private static BCELComparator _cmp = new BCELComparator() {
+    public boolean equals(Object o1, Object o2) {
+      Field THIS = (Field)o1;
+      Field THAT = (Field)o2;
+
+      return THIS.getName().equals(THAT.getName())
+        && THIS.getSignature().equals(THAT.getSignature());
+    }
+
+    public int hashCode(Object o) {
+      Field THIS = (Field)o;
+      return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
+    }
+  };
+
   /**
-   * Initialize from another object. Note that both objects use the same
-   * references (shallow copy). Use clone() for a physical copy.
-   */
+    * Initialize from another object. Note that both objects use the same
+    * references (shallow copy). Use clone() for a physical copy.
+    */
   public Field(Field c) {
     super(c);
   }
@@ -78,8 +95,7 @@ public final class Field extends FieldOrMethod {
    * @param file Input stream
    */
   Field(DataInputStream file, ConstantPool constant_pool)
-       throws IOException, ClassFormatException
-  {
+    throws IOException, ClassFormatException {
     super(file, constant_pool);
   }
 
@@ -90,9 +106,12 @@ public final class Field extends FieldOrMethod {
    * @param attributes Collection of attributes
    * @param constant_pool Array of constants
    */
-  public Field(int access_flags, int name_index, int signature_index,
-	       Attribute[] attributes, ConstantPool constant_pool)
-  {
+  public Field(
+    int access_flags,
+    int name_index,
+    int signature_index,
+    Attribute[] attributes,
+    ConstantPool constant_pool) {
     super(access_flags, name_index, signature_index, attributes, constant_pool);
   }
 
@@ -111,9 +130,9 @@ public final class Field extends FieldOrMethod {
    * @return constant value associated with this field (may be null)
    */
   public final ConstantValue getConstantValue() {
-    for(int i=0; i < attributes_count; i++)
-      if(attributes[i].getTag() == Constants.ATTR_CONSTANT_VALUE)
-	return (ConstantValue)attributes[i];
+    for (int i = 0; i < attributes_count; i++)
+      if (attributes[i].getTag() == Constants.ATTR_CONSTANT_VALUE)
+        return (ConstantValue)attributes[i];
 
     return null;
   }
@@ -128,22 +147,22 @@ public final class Field extends FieldOrMethod {
     String name, signature, access; // Short cuts to constant pool
 
     // Get names from constant pool
-    access    = Utility.accessToString(access_flags);
-    access    = access.equals("")? "" : (access + " ");
+    access = Utility.accessToString(access_flags);
+    access = access.equals("") ? "" : (access + " ");
     signature = Utility.signatureToString(getSignature());
-    name      = getName();
+    name = getName();
 
-    StringBuffer  buf = new StringBuffer(access + signature + " " + name);
-    ConstantValue cv  = getConstantValue();
+    StringBuffer buf = new StringBuffer(access + signature + " " + name);
+    ConstantValue cv = getConstantValue();
 
-    if(cv != null)
+    if (cv != null)
       buf.append(" = " + cv);
 
-    for(int i=0; i < attributes_count; i++) {
+    for (int i = 0; i < attributes_count; i++) {
       Attribute a = attributes[i];
 
-      if(!(a instanceof ConstantValue))
-	buf.append(" [" + a.toString() + "]");
+      if (!(a instanceof ConstantValue))
+        buf.append(" [" + a.toString() + "]");
     }
 
     return buf.toString();
@@ -161,5 +180,40 @@ public final class Field extends FieldOrMethod {
    */
   public Type getType() {
     return Type.getReturnType(getSignature());
+  }
+
+  /**
+   * @return Comparison strategy object
+   */
+  public static BCELComparator getComparator() {
+    return _cmp;
+  }
+
+  /**
+   * @param comparator Comparison strategy object
+   */
+  public static void setComparator(BCELComparator comparator) {
+    _cmp = comparator;
+  }
+
+  /**
+   * Return value as defined by given BCELComparator strategy.
+   * By default two Field objects are said to be equal when
+   * their names and signatures are equal.
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  public boolean equals(Object obj) {
+    return _cmp.equals(this, obj);
+  }
+
+  /**
+   * Return value as defined by given BCELComparator strategy.
+   * By default return the hashcode of the field's name XOR signature.
+   * 
+   * @see java.lang.Object#hashCode()
+   */
+  public int hashCode() {
+    return _cmp.hashCode(this);
   }
 }

@@ -55,6 +55,8 @@ package org.apache.bcel.classfile;
  */
 
 import  org.apache.bcel.Constants;
+import org.apache.bcel.util.BCELComparator;
+
 import  java.io.*;
 
 /**
@@ -63,9 +65,23 @@ import  java.io.*;
  * the JVM specification.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class Constant implements Cloneable, Node, Serializable {
+	private static BCELComparator _cmp = new BCELComparator() {
+		public boolean equals(Object o1, Object o2) {
+			Constant THIS = (Constant)o1;
+			Constant THAT = (Constant)o2;
+
+			return THIS.toString().equals(THAT.toString());
+		}
+
+		public int hashCode(Object o) {
+			Constant THIS = (Constant)o;
+			return THIS.toString().hashCode();
+		}
+	};
+
   /* In fact this tag is redundant since we can distinguish different
    * `Constant' objects by their type, i.e., via `instanceof'. In some
    * places we will use the tag for switch()es anyway.
@@ -144,5 +160,41 @@ public abstract class Constant implements Cloneable, Node, Serializable {
     default:                          
       throw new ClassFormatException("Invalid byte tag in constant pool: " + b);
     }
-  }    
+  }
+  
+  
+	/**
+	 * @return Comparison strategy object
+	 */
+	public static BCELComparator getComparator() {
+		return _cmp;
+	}
+
+	/**
+	 * @param comparator Comparison strategy object
+	 */
+	public static void setComparator(BCELComparator comparator) {
+		_cmp = comparator;
+	}
+
+	/**
+	 * Return value as defined by given BCELComparator strategy.
+	 * By default two Constant objects are said to be equal when
+	 * the result of toString() is equal.
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object obj) {
+		return _cmp.equals(this, obj);
+	}
+
+	/**
+	 * Return value as defined by given BCELComparator strategy.
+	 * By default return the hashcode of the result of toString().
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	public int hashCode() {
+		return _cmp.hashCode(this);
+	}
 }
