@@ -74,7 +74,7 @@ import org.apache.bcel.classfile.*;
 /**
  * Abstract definition of a class repository. Instances may be used
  * to load classes from different sources and may be used in the
- * Repository.setRpeository method.
+ * Repository.setRepository method.
  *
  * @see org.apache.bcel.Repository
  *

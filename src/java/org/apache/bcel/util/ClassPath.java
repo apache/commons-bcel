@@ -308,7 +308,7 @@ public class ClassPath implements Serializable {
     public abstract String getPath();
 
     /** @return base path of found class, i.e. class is contained relative
-     * to that path
+     * to that path, which may either denote a directory, or zip file
      */
     public abstract String getBase();
 

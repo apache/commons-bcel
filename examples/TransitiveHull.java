@@ -5,16 +5,20 @@ import java.io.*;
 import java.util.*;
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
+import org.apache.regexp.*;
 
 /**
  * Find all classes referenced by given start class and all classes
- * referenced by tjose and so on. In other words: Compute the tranitive
+ * referenced by those and so on. In other words: Compute the transitive
  * hull of classes used by a given class. This is done by checking all
  * ConstantClass entries and all method and field signatures.<br> This
  * may be useful in order to put all class files of an application
- * into a single JAR file.
+ * into a single JAR file, e.g..
  * <p>
- * It fails however in the presence of reflection code.
+ * It fails however in the presence of reflexive code aka introspection.
+ * <p>
+ * You'll need Apache's regular expression library supplied together
+ * with BCEL to use this class.
  *
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
@@ -24,13 +28,19 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
   private ClassQueue   _queue;
   private ClassSet     _set;
   private ConstantPool _cp;
+  private String[]     _ignored = IGNORED;  
 
-  private String[] _ignored = {
+  public static final String[] IGNORED = {
     "java[.].*",
     "javax[.].*",
-    "com[.]sun[.].*"
+    "sun[.].*",
+    "sunw[.].*",
+    "com[.]sun[.].*",
+    "org[.]omg[.].*",
+    "org[.]w3c[.].*",
+    "org[.]xml[.].*",
+    "net[.]jini[.].*"
   };
-
 
   public TransitiveHull(JavaClass clazz) {
     _queue = new ClassQueue();
@@ -63,14 +73,21 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
   private void add(String class_name) {
     class_name = class_name.replace('/', '.');
 
-    for(int i = 0; i < _ignored.length; i++) {
-      if(class_name.matches(_ignored[i])) {
-	return; // Ihh
+    try {
+      for(int i = 0; i < _ignored.length; i++) {
+	RE regex = new RE(_ignored[i]);
+
+	if(regex.match(class_name)) {
+	  return; // Ihh
+	}
       }
+    } catch(RESyntaxException ex) {
+      System.out.println(ex);
+      return;
     }
-
+    
     JavaClass clazz = Repository.lookupClass(class_name);
-
+    
     if(clazz != null && _set.add(clazz)) {
       _queue.enqueue(clazz);
     }
@@ -79,6 +96,16 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
   public void visitConstantClass(ConstantClass cc) {
     String class_name = (String)cc.getConstantValue(_cp);
     add(class_name);
+  }
+
+  private void checkType(Type type) {
+    if(type instanceof ArrayType) {
+      type = ((ArrayType)type).getBasicType();
+    }
+    
+    if(type instanceof ObjectType) {
+      add(((ObjectType)type).getClassName());
+    }
   }
 
   private void visitRef(ConstantCP ccp, boolean method) {
@@ -92,24 +119,16 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
 
     if(method) {
       Type type = Type.getReturnType(signature);
-
-      if(type instanceof ObjectType) {
-	add(((ObjectType)type).getClassName());
-      }
+      
+      checkType(type);
 
       Type[] types = Type.getArgumentTypes(signature);
 
       for(int i = 0; i < types.length; i++) {
-	type = types[i];
-	if(type instanceof ObjectType) {
-	  add(((ObjectType)type).getClassName());
-	}
+	checkType(types[i]);
       }
     } else {
-      Type type = Type.getType(signature);
-      if(type instanceof ObjectType) {
-	add(((ObjectType)type).getClassName());
-      }
+      checkType(Type.getType(signature));
     }
   }
 
@@ -123,6 +142,18 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
 
   public void visitConstantFieldref(ConstantFieldref cfr) {
     visitRef(cfr, false);
+  }
+  
+  public String[] getIgnored() {
+    return _ignored;
+  }
+  
+  /**
+   * Set the value of _ignored.
+   * @param v  Value to assign to _ignored.
+   */
+  public void setIgnored(String[]  v) {
+    _ignored = v;
   }
 
   public static void main(String[] argv) { 
