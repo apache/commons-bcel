@@ -306,7 +306,7 @@ public class InstructionFinder {
    * I.e., check constraints that can not expressed with regular expressions.
    *
    */
-  public interface CodeConstraint {
+  public static interface CodeConstraint {
     /**
      * @param match array of instructions matching the requested pattern
      * @return true if the matched area is really useful
