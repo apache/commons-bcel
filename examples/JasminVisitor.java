@@ -85,10 +85,10 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
   }
 
   public void visitMethod(Method method) {
+    this._method = method; // Remember for use in subsequent visitXXX calls
+
     out.println("\n.method " + Utility.accessToString(_method.getAccessFlags()) +
 		" " + _method.getName() + _method.getSignature());
-
-    this._method = method; // Remember for use in subsequent visitXXX calls
 
     Attribute[] attributes = _method.getAttributes();
     if((attributes == null) || (attributes.length == 0))
