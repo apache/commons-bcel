@@ -34,6 +34,10 @@
     </li>
  
     <li>
+      <a HREF="http://profiler.cougaar.org">Cougaar</a> Memory Profiler
+    </li>
+
+    <li>
       <a HREF="http://jcredo.com/">JCredo</a> JDO-Implementation
     </li>
 
