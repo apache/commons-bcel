@@ -1330,8 +1330,7 @@
   
   </section>
 
-  <section name="A Appendix">
-  </section>
+  <section name="A Appendix"/>
 
   <section name="HelloWorldBuilder">
   <p>
@@ -1642,6 +1641,16 @@ public class Peephole {
 }
  </source>
  </section>
+
+  <section name="BCELifier">
+  <p>
+  If you want to learn how certain things are generated using BCEL you
+  can do the following: Write your program with the needed features in 
+  Java and compile it as usual. Then use <tt>BCELifier</tt> to create
+  a class that creates that very input class using BCEL.<br/>
+  (Think about this sentence for a while, or just try it ...)
+  </p>
+
  <section name="Constant pool UML diagram">
 
   <p align="center">
