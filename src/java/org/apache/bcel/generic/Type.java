@@ -230,7 +230,11 @@ public abstract class Type {
     return types;
   }
 
-  public static Type getType(Class cl) {
+  /** Convert runtime java.lang.Class to BCEL Type object.
+   * @param cl Java class
+   * @return corresponding Type object
+   */
+  public static Type getType(java.lang.Class cl) {
     if(cl == null) {
       throw new IllegalArgumentException("Class must not be null");
     }
