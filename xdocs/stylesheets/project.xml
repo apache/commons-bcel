@@ -2,7 +2,7 @@
 <project name="BCEL" href="http://jakarta.apache.org/bcel">
 
   <title>BCEL</title>
-  <logo href="/images/logo.gif">BCEL</logo>
+  <logo href="/images/bcel-logo.gif">BCEL</logo>
 
   <body>
     <menu name="BCEL">
