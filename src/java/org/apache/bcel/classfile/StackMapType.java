@@ -95,9 +95,11 @@ public final class StackMapType implements Cloneable {
   }
 
   private String printIndex() {
-    if(type == Constants.ITEM_Object)
-      return ", class=" + constant_pool.constantToString(index, Constants.CONSTANT_Class);
-    else if(type == Constants.ITEM_NewObject)
+    if(type == Constants.ITEM_Object) {
+        if (index < 0)
+          return ", class=<unknown>";
+        return ", class=" + constant_pool.constantToString(index, Constants.CONSTANT_Class);
+    } else if(type == Constants.ITEM_NewObject)
       return ", offset=" + index;
     else
       return "";
