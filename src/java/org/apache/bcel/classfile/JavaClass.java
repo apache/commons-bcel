@@ -56,6 +56,11 @@ package org.apache.bcel.classfile;
 
 import  org.apache.bcel.Constants;
 import  org.apache.bcel.Repository;
+import  org.apache.bcel.util.Repository;
+import  org.apache.bcel.util.SyntheticRepository;
+import  org.apache.bcel.util.ClassVector;
+import  org.apache.bcel.util.ClassQueue;
+
 import  java.io.*;
 import  java.util.StringTokenizer;
 
@@ -96,6 +101,14 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
 
   static boolean debug = false; // Debugging on/off
   static char    sep   = '/';   // directory separator
+
+    /**
+     * In cases where we go ahead and create something,
+     * use the default SyntheticRepository, because we
+     * don't know any better.
+     */
+    private org.apache.bcel.util.Repository repository = 
+	SyntheticRepository.getInstance();
 
   /**
    * Constructor gets all contents as arguments.
@@ -622,7 +635,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   }
 
   public final boolean instanceOf(JavaClass super_class) {
-    return Repository.instanceOf(this, super_class);
+    return org.apache.bcel.Repository.instanceOf(this, super_class);
   }
 
   public final boolean isSuper() {
@@ -638,4 +651,71 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   public final byte getSource() {
     return source;
   }
+
+    // Added on 4/16/2002 to deprecate the old Repository class. -- DDP
+
+    /**
+     * Gets the ClassRepository which holds its definition.
+     */
+    public org.apache.bcel.util.Repository getRepository() {
+	return repository;
+    }
+
+    /**
+     * Sets the ClassRepository which loaded the JavaClass.
+     * Should be called immediately after parsing is done.
+     */
+    public void setRepository( org.apache.bcel.util.Repository repository ) {
+	this.repository = repository;
+    }
+
+    /**
+     * Get the Superclass for this JavaClass object.
+     */
+    public JavaClass getSuperclass() {
+	try {
+	    return repository.loadClass( getSuperclassName() );
+	} catch (ClassNotFoundException cnfe) {
+	    System.err.println("WARNING:  Could not find Superclass.");
+	    cnfe.printStackTrace();
+	    return null;
+	}
+    }
+
+    /**
+     * Get all interfaces implemented by the JavaClass object.
+     */
+    public JavaClass [] getAllInterfaces() {
+	try {
+	    ClassQueue queue = new ClassQueue();
+	    ClassVector vec = new ClassVector();
+	    
+	    queue.enqueue( this );
+	    
+	    while (!queue.empty()) {
+		JavaClass clazz = queue.dequeue();
+
+		JavaClass souper    = clazz.getSuperclass();
+		String interfaces[] = clazz.getInterfaceNames();
+		
+		if (clazz.isInterface()) {
+		    vec.addElement( clazz );
+		} else {
+		    if (souper != null) {
+			queue.enqueue( souper );
+		    }
+		}
+		
+		for (int i = 0; i < interfaces.length; i++) {
+		    queue.enqueue( repository.loadClass( interfaces[i] ));
+		}
+	    }
+	    
+	    return vec.toArray();
+	} catch (ClassNotFoundException cnfe) {
+	    System.err.println("WARNING: Class not found.");
+	    cnfe.printStackTrace();
+	    return null;
+	}
+    }
 }

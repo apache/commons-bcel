@@ -203,7 +203,12 @@ public class Verifier{
 			String[] p3am = pv.getMessages();
 			int meth = pv.getMethodNo();
 			for (int i=0; i<p3am.length; i++){
-				messages.add("Pass 3a, method "+meth+" ('"+Repository.lookupClass(classname).getMethods()[meth]+"'): "+p3am[i]);
+				messages.add("Pass 3a, method "+meth+
+					     " ('"+
+					     org.apache.bcel.Repository
+					     .lookupClass(classname)
+					     .getMethods()[meth] +
+					     "'): "+p3am[i]);
 			}
 		}
 		Iterator p3bs = p3bvs.values().iterator();
@@ -212,7 +217,12 @@ public class Verifier{
 			String[] p3bm = pv.getMessages();
 			int meth = pv.getMethodNo();
 			for (int i=0; i<p3bm.length; i++){
-				messages.add("Pass 3b, method "+meth+" ('"+Repository.lookupClass(classname).getMethods()[meth]+"'): "+p3bm[i]);
+				messages.add("Pass 3b, method "+meth+
+					     " ('"+
+					     org.apache.bcel.Repository.
+					     lookupClass(classname).
+					     getMethods()[meth] +
+					     "'): "+p3bm[i]);
 			}
 		}
 
@@ -257,7 +267,8 @@ public class Verifier{
 			System.out.println("Pass 2:\n"+vr);
 
 			if (vr == VerificationResult.VR_OK){
-				JavaClass jc = Repository.lookupClass(args[k]);
+				JavaClass jc = org.apache.bcel.Repository
+				    .lookupClass(args[k]);
 				for (int i=0; i<jc.getMethods().length; i++){
 					vr = v.doPass3a(i);
 					System.out.println("Pass 3a, method number "+i+" ['"+jc.getMethods()[i]+"']:\n"+vr);
@@ -278,8 +289,8 @@ public class Verifier{
 	  
 			// avoid swapping.
 	  	v.flush();
-	  	Repository.clearCache();
-			System.gc();
+	  	org.apache.bcel.Repository.clearCache();
+		System.gc();
 	  }
 	}
 }
