@@ -66,6 +66,7 @@ import java.util.ArrayList;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class Type implements java.io.Serializable {
+
   protected byte   type;
   protected String signature; // signature for the type
 
@@ -145,7 +146,19 @@ public abstract class Type implements java.io.Serializable {
     return buf.toString();
   }
 
-  private static int consumed_chars=0; // Remember position in string, see getArgumentTypes
+    private static ThreadLocal consumed_chars = new ThreadLocal() {
+      protected Object initialValue() {
+          return new Integer(0);
+      }
+    };//int consumed_chars=0; // Remember position in string, see getArgumentTypes
+
+    private static int unwrap(ThreadLocal tl) {
+        return ((Integer)tl.get()).intValue();
+    }
+
+    private static void wrap(ThreadLocal tl, int value) {
+        tl.set(new Integer(value));
+    }
 
   /**
    * Convert signature to a Type object.
@@ -158,7 +171,8 @@ public abstract class Type implements java.io.Serializable {
     byte type = Utility.typeOfSignature(signature);
 
     if(type <= Constants.T_VOID) {
-      consumed_chars = 1;
+      //corrected concurrent private static field acess
+      wrap(consumed_chars, 1);
       return BasicType.getType(type);
     } else if(type == Constants.T_ARRAY) {
       int dim=0;
@@ -169,7 +183,10 @@ public abstract class Type implements java.io.Serializable {
       // Recurse, but just once, if the signature is ok
       Type t = getType(signature.substring(dim));
 
-      consumed_chars += dim; // update counter
+      //corrected concurrent private static field acess
+      //  consumed_chars += dim; // update counter - is replaced by
+      int _temp = unwrap(consumed_chars) + dim;
+      wrap(consumed_chars, _temp);
 
       return new ArrayType(t, dim);
     } else { // type == T_REFERENCE
@@ -177,8 +194,9 @@ public abstract class Type implements java.io.Serializable {
 
       if(index < 0)
 	throw new ClassFormatException("Invalid signature: " + signature);
-	
-      consumed_chars = index + 1; // "Lblabla;" `L' and `;' are removed
+
+      //corrected concurrent private static field acess
+      wrap(consumed_chars, index + 1); // "Lblabla;" `L' and `;' are removed
 
       return new ObjectType(signature.substring(1, index).replace('/', '.'));
     }
@@ -218,7 +236,8 @@ public abstract class Type implements java.io.Serializable {
 
       while(signature.charAt(index) != ')') {
 	vec.add(getType(signature.substring(index)));
-	index += consumed_chars; // update position
+    //corrected concurrent private static field acess
+	index += unwrap(consumed_chars); // update position
       }
     } catch(StringIndexOutOfBoundsException e) { // Should never occur
       throw new ClassFormatException("Invalid method signature: " + signature);

@@ -67,11 +67,25 @@ import java.util.zip.*;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class Utility {
-  private static int consumed_chars; /* How many chars have been consumed
+
+    private static int unwrap(ThreadLocal tl) {
+        return ((Integer)tl.get()).intValue();
+    }
+
+    private static void wrap(ThreadLocal tl, int value) {
+        tl.set(new Integer(value));
+    }
+
+  private static ThreadLocal consumed_chars = new ThreadLocal() {
+      protected Object initialValue() {
+          return new Integer(0);
+      }
+  };/* How many chars have been consumed
 				      * during parsing in signatureToString().
 				      * Read by methodSignatureToString().
 				      * Set by side effect,but only internally.
 				      */
+
   private static boolean wide=false; /* The `WIDE' instruction is used in the
 				      * byte code to allow 16-bit wide indices
 				      * for local variables. This opcode
@@ -591,7 +605,8 @@ public abstract class Utility {
 
       while(signature.charAt(index) != ')') {
 	vec.add(signatureToString(signature.substring(index), chopit));
-	index += consumed_chars; // update position
+    //corrected concurrent private static field acess
+	index += unwrap(consumed_chars); // update position
       }
     } catch(StringIndexOutOfBoundsException e) { // Should never occur
       throw new ClassFormatException("Invalid method signature: " + signature);
@@ -719,7 +734,8 @@ public abstract class Utility {
 	  var_index++;
 
 	buf.append(", ");
-	index += consumed_chars; // update position
+    //corrected concurrent private static field acess
+	index += unwrap(consumed_chars); // update position
       }
 
       index++; // update position
@@ -826,7 +842,8 @@ public abstract class Utility {
   public static final String signatureToString(String signature,
 					       boolean chopit)
   {
-    consumed_chars = 1; // This is the default, read just one char like `B'
+    //corrected concurrent private static field acess
+    wrap(consumed_chars, 1); // This is the default, read just one char like `B'
 
     try {
       switch(signature.charAt(0)) {
@@ -842,8 +859,9 @@ public abstract class Utility {
 
 	if(index < 0)
 	  throw new ClassFormatException("Invalid signature: " + signature);
-	
-	consumed_chars = index + 1; // "Lblabla;" `L' and `;' are removed
+
+    //corrected concurrent private static field acess
+	wrap(consumed_chars, index + 1); // "Lblabla;" `L' and `;' are removed
 
 	return compactClassName(signature.substring(1, index), chopit);
       }
@@ -868,8 +886,12 @@ public abstract class Utility {
 
 	// The rest of the string denotes a `<field_type>'
 	type = signatureToString(signature.substring(n), chopit);
-	
-	Utility.consumed_chars += consumed_chars;
+
+    //corrected concurrent private static field acess
+	//Utility.consumed_chars += consumed_chars; is replaced by:
+    int _temp = unwrap(Utility.consumed_chars)+consumed_chars;
+    wrap(Utility.consumed_chars, _temp);
+
 	return type + brackets.toString();
       }
 
