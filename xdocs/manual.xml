@@ -1056,72 +1056,91 @@
   <p>
     When transforming code, for instance during optimization or when
     inserting analysis method calls, one typically searches for
-    certain patterns of code to perform the transformation at.  To
-    simplify handling such situations <font face="helvetica,arial">BCEL
-    </font>introduces a special feature: One can search for given code
-    patterns within an instruction list using <em>regular
-    expressions</em>.  In such expressions, instructions are
-    represented by symbolic names, e.g.  "<tt>`IfInstruction'</tt>".
-    Meta characters like <tt>+</tt>, <tt>*</tt>, and <tt>(..|..)</tt>
-    have their usual meanings. Thus, the expression
+    certain patterns of code to perform the transformation at. To
+    simplify handling such situations <font
+    face="helvetica,arial">BCEL </font>introduces a special feature:
+    One can search for given code patterns within an instruction list
+    using <em>regular expressions</em>. In such expressions,
+    instructions are represented by their opcode names, e.g.,
+    <tt>LDC</tt>, one may also use their respective super classes, e.g.,
+    "<tt>IfInstruction</tt>". Meta characters like <tt>+</tt>,
+    <tt>*</tt>, and <tt>(..|..)</tt> have their usual meanings. Thus,
+    the expression
   </p>
   
-  <source>
-  "`NOP'+(`ILOAD__'|`ALOAD__')*"
-  </source>
+  <source>"NOP+(ILOAD|ALOAD)*"</source>
 
   <p>
-    represents a  piece of  code consisting of  at least  one <tt>NOP</tt>
-    followed  by   a  possibly   empty  sequence  of   <tt>ILOAD</tt>  and
+    represents a piece of code consisting of at least one <tt>NOP</tt>
+    followed by a possibly empty sequence of <tt>ILOAD</tt> and
     <tt>ALOAD</tt> instructions.
   </p>
 
   <p>
-    The  <tt>search()</tt> method  of class  <tt>FindPattern</tt>  gets an
-    instruction list and a regular  expression as arguments and returns an
-    array  describing   the  area  of   matched  instructions.  Additional
-    constraints to  the matching  area of instructions,  which can  not be
-    implemented via  regular expressions, may be  expressed via <em>code
-    constraints</em>.
+    The <tt>search()</tt> method of class
+    <tt>org.apache.bcel.util.InstructionFinder</tt> gets a regular
+    expression and a starting point as arguments and returns an
+    iterator describing the area of matched instructions. Additional
+    constraints to the matching area of instructions, which can not be
+    implemented via regular expressions, may be expressed via <em>code
+    constraint</em> objects.
   </p>
   
   </section>
   
   <section name="3.3.8 Example: Optimizing boolean expressions">
   <p>
-    In Java, boolean  values are mapped to 1 and  to 0, respectively. Thus,
-    the simplest way to evaluate boolean expressions is to push a 1 or a 0
-    onto the operand stack depending on the truth value of the expression.
-    But this  way, the subsequent combination of  boolean expressions (with
-    <tt>&amp;&amp;</tt>, e.g) yields  long chunks of code that push  lots of 1s and
-    0s onto the stack.
+    In Java, boolean values are mapped to 1 and to 0,
+    respectively. Thus, the simplest way to evaluate boolean
+    expressions is to push a 1 or a 0 onto the operand stack depending
+    on the truth value of the expression. But this way, the
+    subsequent combination of boolean expressions (with
+    <tt>&amp;&amp;</tt>, e.g) yields long chunks of code that push
+    lots of 1s and 0s onto the stack.
   </p>
 
   <p>
-    When the code has been finalized  these chunks can be optimized with a
-    <em>peep  hole</em>  algorithm:  An  <tt>IfInstruction</tt>  (e.g.   the
-    comparison of two  integers: <tt>if_icmpeq</tt>) that either produces
-    a  1  or  a 0  on  the  stack  and  is  followed by  an  <tt>ifne</tt>
-    instruction (branch  if stack value 
-      0) may be  replaced by the
-    <tt>IfInstruction</tt> with  its branch target replaced  by the target
-    of  the  <tt>ifne</tt>  instruction:
+    When the code has been finalized these chunks can be optimized
+    with a <em>peep hole</em> algorithm: An <tt>IfInstruction</tt>
+    (e.g.  the comparison of two integers: <tt>if_icmpeq</tt>) that
+    either produces a 1 or a 0 on the stack and is followed by an
+    <tt>ifne</tt> instruction (branch if stack value 0) may be
+    replaced by the <tt>IfInstruction</tt> with its branch target
+    replaced by the target of the <tt>ifne</tt> instruction:
   </p>
 
-  <p>
-    <font size="-1"></font>The  applied code  constraint  object ensures  that  the matched  code
-    really  corresponds to  the targeted  expression  pattern.  Subsequent
-    application of this algorithm removes all unnecessary stack operations
-    and  branch instructions from  the byte  code. If  any of  the deleted
-    instructions  is still  referenced by  an <tt>InstructionTargeter</tt>
-    object, the reference has to be updated in the <tt>catch</tt>-clause.
-  </p>
+  <source>
+  CodeConstraint constraint = new CodeConstraint() {
+    public boolean checkCode(InstructionHandle[] match) {
+      IfInstruction if1 = (IfInstruction)match[0].getInstruction();
+      GOTO          g   = (GOTO)match[2].getInstruction();
+      return (if1.getTarget() == match[3]) &amp;&amp;
+             (g.getTarget() == match[4]);
+    }  
+  };
+
+  InstructionFinder f    = new InstructionFinder(il);
+  String            pat = "IfInstruction ICONST_0 GOTO ICONST_1 NOP(IFEQ|IFNE)";
+
+  for(Iterator e = f.search(pat, constraint); e.hasNext(); ) {
+    InstructionHandle[] match = (InstructionHandle[])e.next();;
+    ...
+    match[0].setTarget(match[5].getTarget()); // Update target
+    ...
+    try {
+      il.delete(match[1], match[5]);
+    } catch(TargetLostException e) { ... }
+  }
+  </source>
 
   <p>
-    Code example  gives a  verbose example of how to create
-    a class  file, while  example  shows  how to  implement a
-    simple  peephole optimizer  and how  to deal  with <tt>TargetLost</tt>
-    exceptions.
+    The applied code constraint object ensures that the matched code
+    really corresponds to the targeted expression pattern. Subsequent
+    application of this algorithm removes all unnecessary stack
+    operations and branch instructions from the byte code. If any of
+    the deleted instructions is still referenced by an
+    <tt>InstructionTargeter</tt> object, the reference has to be
+    updated in the <tt>catch</tt>-clause.
   </p>
 
   <p>
@@ -1135,105 +1154,161 @@
   </source>
 
   <p>
-    can be mapped to both of the chunks of byte code shown in figure
-    . The left column represents the unoptimized code while
-    the right column displays the same code after an aggressively
-    optimizing peep hole algorithm has been applied:
+    can be mapped to both of the chunks of byte code shown in <a
+    href="#Figure 6">figure 6</a>. The left column represents the
+    unoptimized code while the right column displays the same code
+    after the peep hole algorithm has been applied:
   </p>
   
-  <p>
-    FIX ME!
+  <p align="center"><a name="Figure 6">
+  <table>
+  <tr>
+  <td valign="top"><pre>
+5:  aload_0
+6:  ifnull        #13
+9:  iconst_0
+10: goto          #14
+13: iconst_1
+14: nop
+15: ifne          #36
+18: iload_1
+19: iconst_2
+20: if_icmplt     #27
+23: iconst_0
+24: goto          #28
+27: iconst_1
+28: nop
+29: ifne          #36
+32: iconst_0
+33: goto          #37
+36: iconst_1
+37: nop
+38: ifeq          #52
+41: getstatic     System.out
+44: ldc           "Ooops"
+46: invokevirtual println
+52: return
+  </pre></td>
+  <td valign="top"><pre>
+10: aload_0
+11: ifnull        #19
+14: iload_1
+15: iconst_2
+16: if_icmpge     #27
+19: getstatic     System.out
+22: ldc           "Ooops"
+24: invokevirtual println
+27: return
+  </pre></td>
+  </tr>
+  </table>
+  </a>
   </p>
 
   </section>
   
   <section name="4 Application areas">
   <p>
-    There are many possible application areas for <font face="helvetica">BCEL </font>ranging from class
+    There are many possible application areas for <font
+    face="helvetica,arial">BCEL</font> ranging from class
     browsers, profilers, byte code optimizers, and compilers to
     sophisticated run-time analysis tools and extensions to the Java
-    language [,].
+    language.
   </p>
 
   <p>
-    Compilers like the Barat compiler  [] use <font face="helvetica">BCEL </font>to implement a
-    byte code  generating back end.  Other possible  application areas are
-    the  static  analysis   of  byte code []  or  examining  the
-    run-time behavior  of classes by inserting calls  to profiling methods
-    into the  code. Further examples  are extending Java  with Eiffel-like
-    assertions  [], automated delegation  [], or
-    with the concepts of ``Aspect-Oriented Programming'' [].
+    Compilers like the <a
+    href="http://barat.sourceforge.net">Barat</a> compiler use <font
+    face="helvetica,arial">BCEL</font> to implement a byte code
+    generating back end. Other possible application areas are the
+    static analysis of byte code or examining the run-time behavior of
+    classes by inserting calls to profiling methods into the
+    code. Further examples are extending Java with Eiffel-like
+    assertions, automated delegation, or with the concepts of <a
+    href="http://aspectj.org">Aspect-Oriented Programming</a>.<br/> A
+    list of projects using <font face="helvetica,arial">BCEL</font> can
+    be found <a href="projects.html">here</a>.
   </p>
 
   </section>
 
   <section name="4.1 Class loaders">
   <p>
-    Class loaders  are responsible for  loading class files from  the file
-    system  or  other resources  and  passing the  byte  code  to the  Virtual Machine 
-    [].  A custom  <tt>ClassLoader</tt> object may be used
-    to  intercept the  standard procedure  of  loading a  class, i.e.  the
-    system class loader, and  perform some transformations before actually
-    passing the byte code to the JVM.
+    Class loaders are responsible for loading class files from the
+    file system or other resources and passing the byte code to the
+    Virtual Machine. A custom <tt>ClassLoader</tt> object may be used
+    to intercept the standard procedure of loading a class, i.e.m  the
+    system class loader, and perform some transformations before
+    actually passing the byte code to the JVM.
   </p>
   
   <p>
-    A  possible  scenario is  described  in figure  :
-    During run-time the Virtual Machine requests a custom class loader to load a given
-    class.  But before  the JVM  actually sees  the byte  code,  the class
-    loader makes  a ``side-step'' and performs some  transformation to the
-    class. To  make sure that  the modified byte  code is still  valid and
-    does not violate any of the  JVM's rules it is checked by the verifier
-    before the JVM finally executes it.
+    A  possible  scenario is  described  in <a href="#Figure 7">figure
+    7</a>:
+    During run-time the Virtual Machine requests a custom class loader
+    to load a given class. But before the JVM actually sees the byte
+    code, the class loader makes a "side-step" and performs some
+    transformation to the class. To make sure that the modified byte
+    code is still valid and does not violate any of the JVM's rules it
+    is checked by the verifier before the JVM finally executes it.
   </p>
   
-  <p>
-    <a href="images/classloader.gif">Figure</a>
+  <p align="center">
+    <a name="Figure 7">
+    <img src="images/classloader.gif"/>
     <br/>
     Figure 7: Class loaders
+    </a>
   </p>
 
   <p>
-    Using class loaders  is an elegant way of extending  the Java Virtual Machine with new
-    features  without   actually  modifying  it.    This  concept  enables
-    developers to use <em>load-time reflection</em> to implement their ideas
-    as opposed to  the static reflection supported by  the Java Reflection
-    API [].  Load-time transformations supply the user with
-    a new  level of abstraction.   He is not  strictly tied to  the static
-    constraints of the  original authors of the classes  but may customize
-    the applications  with third-party code  in order to benefit  from new
-    features. Such  transformations may be executed on  demand and neither
-    interfere with other users, nor alter the original byte code. In fact,
-    class loaders may even create  classes <em>ad hoc</em> without loading a
-    file at all.
+    Using class loaders is an elegant way of extending the Java
+    Virtual Machine with new features without actually modifying it.
+    This concept enables developers to use <em>load-time
+    reflection</em> to implement their ideas as opposed to the static
+    reflection supported by the <a
+    href="http://java.sun.com/j2se/1.3/docs/guide/reflection/index.html">Java
+    Reflection API</a>. Load-time transformations supply the user with
+    a new level of abstraction. He is not strictly tied to the static
+    constraints of the original authors of the classes but may
+    customize the applications with third-party code in order to
+    benefit from new features. Such transformations may be executed on
+    demand and neither interfere with other users, nor alter the
+    original byte code. In fact, class loaders may even create classes
+    <em>ad hoc</em> without loading a file at all.<br/> <font
+    face="helvetica,arial">BCEL</font> has already builtin support for
+    dynamically creating classes, an example is the <a
+    href="../examples/ProxyCreator.java">ProxyCreator</a> class.
   </p>
   
   </section>
   
   <section name="4.1.1 Example: Poor Man's Genericity">
   <p>
-    The  ``Poor Man's  Genericity'' project  [] that  extends Java
-    with parameterized  classes, for  example, uses <font face="helvetica">BCEL </font>in two  places to
-    generate instances of  parameterized classes: During compile-time (the
-    standard  <tt>javac</tt> with  some slightly  changed classes)  and at
-    run-time  using  a  custom  class  loader.   The  compiler  puts  some
-    additional  type information into  class files  which is  evaluated at
-    load-time  by  the  class  loader.   The class  loader  performs  some
-    transformations on  the loaded  class and passes  them to the  VM. The
-    following  algorithm illustrates  how  the load  method  of the  class
-    loader   fulfills    the   request   for    a   parameterized   class,
-    e.g. <tt>Stack&lt;String&gt;</tt>
+    The <a href="http://www.inf.fu-berlin.de/~bokowski/pmgjava/">"Poor
+    Man's Genericity"</a> project that extends Java with parameterized
+    classes, for example, uses <font
+    face="helvetica,arial">BCEL</font> in two places to generate
+    instances of parameterized classes: During compile-time (with the
+    standard <tt>javac</tt> with some slightly changed classes) and at
+    run-time using a custom class loader. The compiler puts some
+    additional type information into class files (attributes) which is
+    evaluated at load-time by the class loader. The class loader
+    performs some transformations on the loaded class and passes them
+    to the VM. The following algorithm illustrates how the load method
+    of the class loader fulfills the request for a parameterized
+    class, e.g., <tt>Stack&lt;String&gt;</tt>
   </p>
   
   <p>
     <ol type="1">
-    <li>  Search for  class  <tt>Stack</tt>,  load it,  and  check for  a
-    certain class  attribute containing additional  type information. I.e.
-    the   attribute   defines   the    ``real''   name   of   the   class,
-    i.e. <tt>Stack&lt;A&gt;</tt>.</li>
+    <li> Search for class <tt>Stack</tt>, load it, and check for a
+    certain class attribute containing additional type
+    information. I.e.  the attribute defines the "real" name of the
+    class, i.e., <tt>Stack&lt;A&gt;</tt>.</li>
 
-    <li>  Replace  all  occurrences  and  references to  the  formal  type
-    <tt>A</tt>  with references  to the  actual type  <tt>String</tt>. For
+    <li>Replace all occurrences and references to the formal type
+    <tt>A</tt> with references to the actual type <tt>String</tt>. For
     example the method
     </li>
 
@@ -1254,6 +1329,318 @@
   </p>
   
   </section>
-  
+
+  <section name="A Appendix">
+  </section>
+
+  <section name="HelloWorldBuilder">
+  <p>
+  The following program reads a name from the standard input and
+  prints a friendly "Hello". Since the <tt>readLine()</tt> method may
+  throw an <tt>IOException</tt> it is enclosed by a <tt>try-catch</tt>
+  clause.
+  </p>
+
+  <source>
+  import java.io.*;
+
+  public class HelloWorld {
+    public static void main(String[] argv) {
+      BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+      String name = null;
+
+      try {
+	System.out.print("Please enter your name&gt; ");
+	name = in.readLine();
+      } catch(IOException e) { return; }
+
+      System.out.println("Hello, " + name);
+    }
+  }
+  </source>
+
+  <p>
+  We will sketch here how the above Java class can be created from the
+  scratch using the <font face="helvetica,arial">BCEL</font> API. For
+  ease of reading we will use textual signatures and not create them
+  dynamically. For example, the signature
+  </p>
+
+  <source>"(Ljava/lang/String;)Ljava/lang/StringBuffer;"</source>
+
+  <p>
+   actually be created with
+  </p>
+
+  <source>Type.getMethodSignature(Type.STRINGBUFFER, new Type[] { Type.STRING });</source>
+
+  <p><b>Initialization:</b>
+  First we create an empty class and an instruction list:
+  </p>
+
+  <source>
+  ClassGen cg = new ClassGen("HelloWorld", "java.lang.Object",
+                             "&lt;generated&gt;", ACC_PUBLIC | ACC_SUPER,
+                             null);
+  ConstantPoolGen cp = cg.getConstantPool(); // cg creates constant pool
+  InstructionList il = new InstructionList();
+  </source>
+
+  <p>
+We then create the main method, supplying the method's name and the
+symbolic type signature encoded with <tt>Type</tt> objects.
+  </p>
+
+  <source>
+  MethodGen  mg = new MethodGen(ACC_STATIC | ACC_PUBLIC, // access flags
+                                Type.VOID,               // return type
+                                new Type[] {             // argument types
+                                  new ArrayType(Type.STRING, 1) },
+                                new String[] { "argv" }, // arg names
+                                "main", "HelloWorld",    // method, class
+                                il, cp);
+  InstructionFactory factory = new InstructionFactory(cg);
+  </source>
+
+  <p>
+  We now define some often used types:
+  </p>
+
+  <source>
+  ObjectType i_stream = new ObjectType("java.io.InputStream");
+  ObjectType p_stream = new ObjectType("java.io.PrintStream");
+  </source>
+
+  <p><b>Create variables <tt>in</tt> and <tt>name</tt>:</b> We call
+  the constructors, i.e., execute
+  <tt>BufferedReader(InputStreamReader(System.in))</tt>. The reference
+  to the <tt>BufferedReader</tt> object stays on top of the stack and
+  is stored in the newly allocated <tt>in</tt> variable.
+  </p>
+
+  <source>
+  il.append(factory.createNew("java.io.BufferedReader"));
+  il.append(InstructionConstants.DUP); // Use predefined constant
+  il.append(factory.createNew("java.io.InputStreamReader"));
+  il.append(InstructionConstants.DUP);
+  il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
+                                      Constants.GETSTATIC));
+  il.append(factory.createInvoke("java.io.InputStreamReader", "&lt;init&gt;",
+                                 Type.VOID, new Type[] { i_stream },
+                                 Constants.INVOKESPECIAL));
+  il.append(factory.createInvoke("java.io.BufferedReader", "&lt;init&gt;", Type.VOID,
+                                 new Type[] {new ObjectType("java.io.Reader")},
+                                 Constants.INVOKESPECIAL));
+
+  LocalVariableGen lg = mg.addLocalVariable("in",
+                          new ObjectType("java.io.BufferedReader"), null, null);
+  int in = lg.getIndex();
+  lg.setStart(il.append(new ASTORE(in))); // "i" valid from here
+  </source>
+
+  <p>
+  Create local variable <tt>name</tt> and  initialize it to <tt>null</tt>.
+  </p>
+
+  <source>
+  lg = mg.addLocalVariable("name", Type.STRING, null, null);
+  int name = lg.getIndex();
+  il.append(InstructionConstants.ACONST_NULL);
+  lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
+  </source>
+
+  <p><b>Create try-catch block:</b> We remember the start of the
+  block, read a line from the standard input and store it into the
+  variable <tt>name</tt>.
+  </p>
+
+  <source>
+  InstructionHandle try_start =
+    il.append(factory.createFieldAccess("java.lang.System", "out", p_stream,
+                                        Constants.GETSTATIC));
+
+  il.append(new PUSH(cp, "Please enter your name&gt; "));
+  il.append(factory.createInvoke("java.io.PrintStream", "print", Type.VOID, 
+                                 new Type[] { Type.STRING },
+                                 Constants.INVOKEVIRTUAL));
+  il.append(new ALOAD(in));
+  il.append(factory.createInvoke("java.io.BufferedReader", "readLine",
+                                 Type.STRING, Type.NO_ARGS,
+                                 Constants.INVOKEVIRTUAL));
+  il.append(new ASTORE(name));
+  </source>
+
+  <p>
+  Upon normal execution we jump behind exception handler, the target
+  address is not known yet.
+  </p>
+
+  <source>
+  GOTO g = new GOTO(null);
+  InstructionHandle try_end = il.append(g);
+  </source>
+
+  <p>
+  We add the exception handler which simply returns from the method.
+  </p>
+
+  <source>
+  InstructionHandle handler = il.append(InstructionConstants.RETURN);
+  mg.addExceptionHandler(try_start, try_end, handler, "java.io.IOException");
+  </source>
+
+  <p>
+  "Normal" code continues, now we can set the branch target of the <tt>GOTO</tt>.
+  </p>
+
+  <source>
+  InstructionHandle ih =
+    il.append(factory.createFieldAccess("java.lang.System", "out", p_stream,
+                                        Constants.GETSTATIC));
+  g.setTarget(ih);
+  </source>
+
+  <p><b>Printing "Hello":</b>
+  String concatenation compiles to <tt>StringBuffer</tt> operations.
+  </p>
+
+  <source>
+  il.append(factory.createNew(Type.STRINGBUFFER));
+  il.append(InstructionConstants.DUP);
+  il.append(new PUSH(cp, "Hello, "));
+  il.append(factory.createInvoke("java.lang.StringBuffer", "&lt;init&gt;",
+                                 Type.VOID, new Type[] { Type.STRING },
+                                 Constants.INVOKESPECIAL));
+  il.append(new ALOAD(name));
+  il.append(factory.createInvoke("java.lang.StringBuffer", "append",
+                                 Type.STRINGBUFFER, new Type[] { Type.STRING },
+                                 Constants.INVOKEVIRTUAL));
+  il.append(factory.createInvoke("java.lang.StringBuffer", "toString",
+                                 Type.STRING, Type.NO_ARGS,
+                                 Constants.INVOKEVIRTUAL));
+    
+  il.append(factory.createInvoke("java.io.PrintStream", "println",
+                                 Type.VOID, new Type[] { Type.STRING },
+                                 Constants.INVOKEVIRTUAL));
+  il.append(InstructionConstants.RETURN);
+  </source>
+
+
+  <p><b>Finalization:</b> Finally, we have to set the stack size,
+  which normally would have to be computed on the fly and add a
+  default constructor method to the class, which is empty in this
+  case.
+  </p>
+
+  <source>
+  mg.setMaxStack();
+  cg.addMethod(mg.getMethod());
+  il.dispose(); // Allow instruction handles to be reused
+  cg.addEmptyConstructor(ACC_PUBLIC);
+  </source>
+
+  <p>
+  Last but not least we dump the <tt>JavaClass</tt> object to a file.
+  </p>
+
+  <source>
+  try {
+    cg.getJavaClass().dump("HelloWorld.class");
+  } catch(java.io.IOException e) { System.err.println(e); }
+  </source>
+
+ </section>
+
+ <section name="Peephole optimizer">
+ <p>
+ This class implements a simple peephole optimizer that removes any NOP
+ instructions from the given class.
+ </p>
+
+ <source>
+import java.io.*;
+
+import java.util.Iterator;
+import org.apache.bcel.classfile.*;
+import org.apache.bcel.generic.*;
+import org.apache.bcel.Repository;
+import org.apache.bcel.util.InstructionFinder;
+
+public class Peephole {
+  public static void main(String[] argv) {
+    try {
+      /* Load the class from CLASSPATH.
+       */
+      JavaClass       clazz   = Repository.lookupClass(argv[0]);
+      Method[]        methods = clazz.getMethods();
+      ConstantPoolGen cp      = new ConstantPoolGen(clazz.getConstantPool());
+
+      for(int i=0; i &lt; methods.length; i++) {
+	if(!(methods[i].isAbstract() || methods[i].isNative())) {
+	  MethodGen mg       = new MethodGen(methods[i],
+					     clazz.getClassName(), cp);
+	  Method    stripped = removeNOPs(mg);
+	  
+	  if(stripped != null)     // Any NOPs stripped?
+	    methods[i] = stripped; // Overwrite with stripped method
+	}
+      }
+
+      /* Dump the class to "class name"_.class
+       */
+      clazz.setConstantPool(cp.getFinalConstantPool());
+      clazz.dump(clazz.getClassName() + "_.class");
+    } catch(Exception e) { e.printStackTrace(); }
+  }
+
+  private static final Method removeNOPs(MethodGen mg) {
+    InstructionList   il    = mg.getInstructionList();
+    InstructionFinder f     = new InstructionFinder(il);
+    String            pat   = "NOP+"; // Find at least one NOP
+    InstructionHandle next  = null;
+    int               count = 0;
+
+    for(Iterator i = f.search(pat); i.hasNext(); ) {
+      InstructionHandle[] match = (InstructionHandle[])e.next();
+      InstructionHandle   first = match[0];
+      InstructionHandle   last  = match[match.length - 1];
+      
+      /* Some nasty Java compilers may add NOP at end of method.
+       */
+      if((next = last.getNext()) == null)
+	break;
+
+      count += match.length;
+
+      /* Delete NOPs and redirect any references to them to the following
+       * (non-nop) instruction.
+       */
+      try {
+	il.delete(first, last);
+      } catch(TargetLostException e) {
+	InstructionHandle[] targets = e.getTargets();
+	for(int i=0; i &lt; targets.length; i++) {
+	  InstructionTargeter[] targeters = targets[i].getTargeters();
+	  
+	  for(int j=0; j &lt; targeters.length; j++)
+	    targeters[j].updateTarget(targets[i], next);
+	}
+      }
+    }
+
+    Method m = null;
+    
+    if(count &gt; 0) {
+      System.out.println("Removed " + count + " NOP instructions from method " +
+			 mg.getName());
+      m = mg.getMethod();
+    }
+
+    il.dispose(); // Reuse instruction handles
+    return m;
+  }
+}
+ </source>
+ </section>
 </body>
 </document>
