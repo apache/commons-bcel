@@ -153,9 +153,7 @@ public abstract class Select extends BranchInstruction
     padding = (4 - (bytes.getIndex() % 4)) % 4; // Compute number of pad bytes
 
     for(int i=0; i < padding; i++) {
-      byte b;
-      if((b=bytes.readByte()) != 0)
-	throw new ClassGenException("Padding byte != 0: " + b);
+      bytes.readByte();
     }
     
     // Default branch target common for both cases (TABLESWITCH, LOOKUPSWITCH)
