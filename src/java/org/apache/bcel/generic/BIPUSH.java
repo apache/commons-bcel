@@ -113,7 +113,6 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     return Type.BYTE;
   }
 
-
   /**
    * Call corresponding visitor method(s). The order is:
    * Call visitor methods of implemented interfaces first, then

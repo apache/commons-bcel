@@ -79,21 +79,20 @@ public abstract class JsrInstruction extends BranchInstruction
     return new ReturnaddressType(physicalSuccessor());
   }
 
-
- /**
-  * Returns an InstructionHandle to the physical successor
-  * of this JsrInstruction. <B>For this method to work,
-  * this JsrInstruction object must not be shared between
-  * multiple InstructionHandle objects!</B>
-  * Formally, there must not be InstructionHandle objects
-  * i, j where i != j and i.getInstruction() == this ==
-  * j.getInstruction().
-  * @return an InstructionHandle to the "next" instruction that
-  * will be executed when RETurned from a subroutine.
-  */
+  /**
+   * Returns an InstructionHandle to the physical successor
+   * of this JsrInstruction. <B>For this method to work,
+   * this JsrInstruction object must not be shared between
+   * multiple InstructionHandle objects!</B>
+   * Formally, there must not be InstructionHandle objects
+   * i, j where i != j and i.getInstruction() == this ==
+   * j.getInstruction().
+   * @return an InstructionHandle to the "next" instruction that
+   * will be executed when RETurned from a subroutine.
+   */
   public InstructionHandle physicalSuccessor(){
     InstructionHandle ih = this.target;
-		
+    
     // Rewind!
     while(ih.getPrev() != null)
       ih = ih.getPrev();

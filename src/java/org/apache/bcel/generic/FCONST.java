@@ -95,7 +95,6 @@ public class FCONST extends Instruction
     return Type.FLOAT;
   }
 
-
   /**
    * Call corresponding visitor method(s). The order is:
    * Call visitor methods of implemented interfaces first, then

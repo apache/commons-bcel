@@ -93,7 +93,6 @@ public class LCONST extends Instruction
     return Type.LONG;
   }
 
-
   /**
    * Call corresponding visitor method(s). The order is:
    * Call visitor methods of implemented interfaces first, then

@@ -55,16 +55,15 @@ package org.apache.bcel.generic;
  */
 
 /**
- * BREAKPOINT
+ * BREAKPOINT, JVM dependent, ignored by default
  *
  * @version $Id$
- * @author Enver Haase
+ * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public class BREAKPOINT extends Instruction {
   public BREAKPOINT() {
     super(org.apache.bcel.Constants.BREAKPOINT, (short)1);
   }
-
 
   /**
    * Call corresponding visitor method(s). The order is:

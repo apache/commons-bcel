@@ -70,6 +70,8 @@ public abstract class Instruction implements Cloneable, Serializable {
   protected short length = 1;  // Length of instruction in bytes 
   protected short opcode = -1; // Opcode number
 
+  private static InstructionComparator cmp = InstructionComparator.DEFAULT;
+
   /**
    * Empty constructor needed for the Class.newInstance() statement in
    * Instruction.readInstruction(). Not to be used otherwise.
@@ -270,7 +272,7 @@ public abstract class Instruction implements Cloneable, Serializable {
 
   /** Some instructions may be reused, so don't do anything by default.
    */
-  void dispose() {  }
+  void dispose() {}
 
   /**
    * Call corresponding visitor method(s). The order is:
@@ -281,4 +283,23 @@ public abstract class Instruction implements Cloneable, Serializable {
    * @param v Visitor object
    */
   public abstract void accept(Visitor v);
+
+  /** Get Comparator object used in the equals() method to determine
+   * equality of instructions.
+   *
+   * @return currently used comparator for equals()
+   */
+  public static InstructionComparator getComparator() { return cmp; }
+
+  /** Set comparator to be used for equals().
+   */
+  public static void setComparator(InstructionComparator c) { cmp = c; }
+
+  /** Check for equality, delegated to comparator
+   * @return true if that is an Instruction and has the same opcode
+   */
+  public boolean equals(Object that) {
+    return (that instanceof Instruction)?
+      cmp.equals(this, (Instruction)that) : false;
+  }
 }

@@ -54,56 +54,54 @@ package org.apache.bcel.generic;
  * <http://www.apache.org/>.
  */
 
-/** 
- * ICONST - Push value between -1, ..., 5, other values cause an exception
+/**
+ * Equality of instructions isn't clearly to be defined. You might
+ * wish, for example, to compare whether instructions have the same
+ * meaning. E.g., whether two INVOKEVIRTUALs describe the same
+ * call.<br>The DEFAULT comparator however, considers two instructions
+ * to be equal if they have same opcode and point to the same indexes
+ * (if any) in the constant pool or the same local variable index. Branch
+ * instructions must have the same target.
  *
- * <PRE>Stack: ... -&gt; ..., </PRE>
- *
+ * @see Instruction
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
-public class ICONST extends Instruction
-  implements ConstantPushInstruction, TypedInstruction {
-  private int value;
+public interface InstructionComparator {
+  public static final InstructionComparator DEFAULT =
+    new InstructionComparator() {
+	public boolean equals(Instruction i1, Instruction i2) {
+	  if(i1.opcode == i2.opcode) {
+	    if(i1 instanceof Select) {
+	      InstructionHandle[] t1 = ((Select)i1).getTargets();
+	      InstructionHandle[] t2 = ((Select)i2).getTargets();
 
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  ICONST() {}
+	      if(t1.length == t2.length) {
+		for(int i = 0; i < t1.length; i++) {
+		  if(t1[i] != t2[i]) {
+		    return false;
+		  }
+		}
+		
+		return true;
+	      }
+	    } else if(i1 instanceof BranchInstruction) {
+	      return ((BranchInstruction)i1).target == 
+		((BranchInstruction)i2).target;
+	    } else if(i1 instanceof ConstantPushInstruction) {
+	      return ((ConstantPushInstruction)i1).getValue().
+		equals(((ConstantPushInstruction)i2).getValue());
+	    } else if(i1 instanceof IndexedInstruction) {
+	      return ((IndexedInstruction)i1).getIndex() == 
+		((IndexedInstruction)i2).getIndex();
+	    } else if(i1 instanceof NEWARRAY) {
+	      return ((NEWARRAY)i1).type == ((NEWARRAY)i2).type;
+	    }
+	  }
 
-  public ICONST(int i) {
-    super(org.apache.bcel.Constants.ICONST_0, (short)1);
+	  return false;
+	}
+      };
 
-    if((i >= -1) && (i <= 5))
-      opcode = (short)(org.apache.bcel.Constants.ICONST_0 + i); // Even works for i == -1
-    else
-      throw new ClassGenException("ICONST can be used only for value between -1 and 5: " +
-				  i);
-    value = i;
-  }
-  
-  public Number getValue() { return new Integer(value); }
-
-  /** @return Type.INT
-   */
-  public Type getType(ConstantPoolGen cp) {
-    return Type.INT;
-  }
-
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    v.visitPushInstruction(this);
-    v.visitStackProducer(this);
-    v.visitTypedInstruction(this);
-    v.visitConstantPushInstruction(this);
-    v.visitICONST(this);
-  }
+  public boolean equals(Instruction i1, Instruction i2);
 }

@@ -93,7 +93,6 @@ public class DCONST extends Instruction
     return Type.DOUBLE;
   }
 
-
   /**
    * Call corresponding visitor method(s). The order is:
    * Call visitor methods of implemented interfaces first, then

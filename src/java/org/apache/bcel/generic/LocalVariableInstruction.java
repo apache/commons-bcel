@@ -224,4 +224,3 @@ public abstract class LocalVariableInstruction extends Instruction
     }
   }
 }
-

@@ -85,7 +85,7 @@ public abstract class Type implements java.io.Serializable {
   public static final ObjectType    STRINGBUFFER = new ObjectType("java.lang.StringBuffer");
   public static final ObjectType    THROWABLE    = new ObjectType("java.lang.Throwable");
   public static final Type[]        NO_ARGS      = new Type[0];
-  public static final ReferenceType NULL         = new ReferenceType();
+  public static final ReferenceType NULL         = new ReferenceType(){};
   public static final Type          UNKNOWN      = new Type(Constants.T_UNKNOWN,
 							    "<unknown object>"){};
 

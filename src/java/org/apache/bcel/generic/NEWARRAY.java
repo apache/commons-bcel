@@ -123,7 +123,6 @@ public class NEWARRAY extends Instruction
     return new Class[] { org.apache.bcel.ExceptionConstants.NEGATIVE_ARRAY_SIZE_EXCEPTION };
   }
 
-
   /**
    * Call corresponding visitor method(s). The order is:
    * Call visitor methods of implemented interfaces first, then
