@@ -66,12 +66,17 @@ import java.io.*;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public class ClassPath {
+  public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath();
+
   private PathEntry[] paths;
+  private String      class_path;
 
   /**
    * Search for classes in given path.
    */
   public ClassPath(String class_path) {
+    this.class_path = class_path;
+
     ArrayList vec = new ArrayList();
 
     for(StringTokenizer tok=new StringTokenizer(class_path,
@@ -102,9 +107,28 @@ public class ClassPath {
 
   /**
    * Search for classes in CLASSPATH.
+   * @deprecated Use SYSTEM_CLASS_PATH constant
    */
   public ClassPath() {
     this(getClassPath());
+  }
+
+  /** @return used class path string
+   */
+  public String toString() {
+    return class_path;
+  }
+  
+  public int hashCode() {
+    return class_path.hashCode();
+  }
+
+  public boolean equals(Object o) {
+    if(o instanceof ClassPath) {
+      return class_path.equals(((ClassPath)o).class_path);
+    }
+
+    return false;
   }
 
   private static final void getPathComponents(String path, ArrayList list) {
@@ -162,7 +186,7 @@ public class ClassPath {
 	buf.append(File.pathSeparatorChar);
     }
 
-    return buf.toString();
+    return buf.toString().intern();
   }
 
   /**
