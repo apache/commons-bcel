@@ -102,12 +102,22 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
    * This relies on that the instruction list has already been dumped to byte code or
    * or that the `setPositions' methods has been called for the instruction list.
    *
+   * Note that for local variables whose scope end at the last
+   * instruction of the method's code, the JVM specification is ambiguous:
+   * both a start_pc+length ending at the last instruction and
+   * start_pc+length ending at first index beyond the end of the code are
+   * valid.
+   *
    * @param il instruction list (byte code) which this variable belongs to
    * @param cp constant pool
    */
   public LocalVariable getLocalVariable(ConstantPoolGen cp) {
     int start_pc        = start.getPosition();
     int length          = end.getPosition() - start_pc;
+
+    if(length > 0)
+      length += end.getInstruction().getLength();
+    
     int name_index      = cp.addUtf8(name);
     int signature_index = cp.addUtf8(type.getSignature());
 
