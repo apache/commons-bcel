@@ -251,7 +251,7 @@ public class OperandStack{
 			if (! stack.get(i).equals(s.stack.get(i))){
 				if (	(stack.get(i) instanceof ReferenceType) &&
 							(s.stack.get(i) instanceof ReferenceType)  ){
-					stack.set(i, ((ReferenceType) stack.get(i)).firstCommonSuperclass((ReferenceType) (s.stack.get(i))));
+					stack.set(i, ((ReferenceType) stack.get(i)).getFirstCommonSuperclass((ReferenceType) (s.stack.get(i))));
 				}
 				else{
 					throw new StructuralCodeConstraintException("Cannot merge stacks of different types:\nStack A:\n"+this+"\nStack B:\n"+s);

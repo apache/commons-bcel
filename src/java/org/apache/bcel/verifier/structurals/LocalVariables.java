@@ -180,7 +180,7 @@ public class LocalVariables{
 		}
 		if ((locals[i] instanceof ReferenceType) && (lv.locals[i] instanceof ReferenceType)){
 			if (! locals[i].equals(lv.locals[i])){ // needed in case of two UninitializedObjectType instances
-				Type sup = ((ReferenceType) locals[i]).firstCommonSuperclass((ReferenceType) (lv.locals[i]));
+				Type sup = ((ReferenceType) locals[i]).getFirstCommonSuperclass((ReferenceType) (lv.locals[i]));
 
 				if (sup != null){
 					locals[i] = sup;
