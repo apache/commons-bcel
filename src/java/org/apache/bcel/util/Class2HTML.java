@@ -206,16 +206,26 @@ public class Class2HTML implements Constants
     short_type = Utility.compactClassName(short_type, class_package + ".", true);
 
     int index = type.indexOf('['); // Type is an array?
-    if(index > -1)
-      type = type.substring(0, index); // Tack of the `['  		
+    String base_type = type;
+
+    if (index > -1) {
+      base_type = type.substring(0, index); // Tack of the `['  		
+    }
 
     // test for basic type
-    if(type.equals("int")  || type.equals("short") || type.equals("boolean") || type.equals("void")   ||
-       type.equals("char") || type.equals("byte")  || type.equals("long")    || type.equals("double") ||
-       type.equals("float"))
+    if (base_type.equals("int")
+      || base_type.equals("short")
+      || base_type.equals("boolean")
+      || base_type.equals("void")
+      || base_type.equals("char")
+      || base_type.equals("byte")
+      || base_type.equals("long")
+      || base_type.equals("double")
+      || base_type.equals("float")) {
       return "<FONT COLOR=\"#00FF00\">" + type + "</FONT>";
-    else
-      return "<A HREF=\"" + type + ".html\" TARGET=_top>" + short_type + "</A>";
+    } else {
+      return "<A HREF=\"" + base_type + ".html\" TARGET=_top>" + short_type + "</A>";
+    }
   }
 
   static String toHTML(String str) {
