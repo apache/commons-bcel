@@ -59,7 +59,7 @@ import org.apache.bcel.util.ByteSequence;
 /** 
  * RET - Return from subroutine
  *
- * <PRE>Stack: ..., -&gt; ..., address</PRE>
+ * <PRE>Stack: ... -&gt; ...</PRE>
  *
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
