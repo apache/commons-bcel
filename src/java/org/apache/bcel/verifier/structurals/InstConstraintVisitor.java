@@ -1758,9 +1758,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 					ReferenceType rFromDesc = (ReferenceType) fromDesc;
 					// TODO: This can only be checked using Staerk-et-al's "set of object types", not
 					// using a "wider cast object type".
-					//if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
-					//	constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
-					//}
+					if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
+						constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
+					}
 				}
 				else{
 					constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack.");
@@ -1836,11 +1836,11 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 				if (fromStack instanceof ReferenceType && fromDesc instanceof ReferenceType){
 					ReferenceType rFromStack = (ReferenceType) fromStack;
 					ReferenceType rFromDesc = (ReferenceType) fromDesc;
-					// TODO: This check can only be done using Staerk-et-al's "set of object types"
+					// TODO: This check can possibly only be done using Staerk-et-al's "set of object types"
 					// instead of a "wider cast object type" created during verification.
-					//if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
-					//	constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
-					//}
+					if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
+						constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
+					}
 				}
 				else{
 					constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack.");
@@ -1882,11 +1882,11 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 				if (fromStack instanceof ReferenceType && fromDesc instanceof ReferenceType){
 					ReferenceType rFromStack = (ReferenceType) fromStack;
 					ReferenceType rFromDesc = (ReferenceType) fromDesc;
-					// TODO: This can only be checked when using Staerk-et-al's "set of object types" instead
+					// TODO: This can possibly only be checked when using Staerk-et-al's "set of object types" instead
 					// of a single "wider cast object type" created during verification.
-					//if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
-					//	constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
-					//}
+					if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
+						constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
+					}
 				}
 				else{
 					constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack.");

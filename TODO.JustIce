@@ -5,7 +5,15 @@ $Id$
 
 - JustIce uses object generalization during pass 3b,  as  supposed  by
 Sun.  However,  there  are better methods such as the idea proposed by
-Staerk et al.: using sets of object types.
+Staerk et al.: using sets of object types.  JustIce  may  reject  code
+that is not rejected by traditional JVM-internal  verifiers  for  this
+reason. The corresponding checks all have  some  "TODO"  tag  with  an
+explanation; they're all  in  the  'InstConstraint.java'  file.  Users
+encountering problems should simply comment  them  out  (or  uncomment
+them) as they like. The  default  is  some  setting  that  works  well
+when using  'java org.apache.bcel.verifier.TransHull java.lang.String'
+- that is, there are no rejects caused by the above problem in  a  lot
+of usual classes.
 
 - There are a few bugs concerning access rights of referenced  methods
 and  probably  fields.  The  tests  for access rights that Sun defines
