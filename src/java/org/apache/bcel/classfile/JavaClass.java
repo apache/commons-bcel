@@ -362,29 +362,37 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   public ConstantPool getConstantPool() { return constant_pool; }
 
   /**
-   * @return Fields, i.e., variables of the class.
+   * @return Fields, i.e., variables of the class. Like the JVM spec
+   * mandates for the classfile format, these fields are those specific to
+   * this class, and not those of the superclass or superinterfaces.
    */
   public Field[] getFields()         { return fields; }    
+
   /**
    * @return File name of class, aka SourceFile attribute value
    */
   public String getFileName()        { return file_name; }    
+
   /**
    * @return Names of implemented interfaces.
    */
   public String[] getInterfaceNames()  { return interface_names; }    
+
   /**
    * @return Implemented interfaces.
    */
   public int[] getInterfaces()     { return interfaces; }    
+
   /**
    * @return Major number of compiler version.
    */
   public int  getMajor()           { return major; }    
+
   /**
    * @return Methods of the class.
    */
   public Method[] getMethods()       { return methods; }    
+
   /**
    * @return Minor number of compiler version.
    */
@@ -399,6 +407,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
    * @return Superclass name.
    */
   public String getSuperclassName()  { return superclass_name; }    
+
   /**
    * @return Class name index.
    */
@@ -426,84 +435,98 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   public void setAttributes(Attribute[] attributes) {
     this.attributes = attributes;
   }    
+
   /**
    * @param class_name.
    */
   public void setClassName(String class_name) {
     this.class_name = class_name;
   }    
+
   /**
    * @param class_name_index.
    */
   public void setClassNameIndex(int class_name_index) {
     this.class_name_index = class_name_index;
   }    
+
   /**
    * @param constant_pool.
    */
   public void setConstantPool(ConstantPool constant_pool) {
     this.constant_pool = constant_pool;
   }    
+
   /**
    * @param fields.
    */
   public void setFields(Field[] fields) {
     this.fields = fields;
   }    
+
   /**
    * Set File name of class, aka SourceFile attribute value
    */
   public void setFileName(String file_name) {
     this.file_name = file_name;
   }    
+
   /**
    * @param interface_names.
    */
   public void setInterfaceNames(String[] interface_names) {
     this.interface_names = interface_names;
   }    
+
   /**
    * @param interfaces.
    */
   public void setInterfaces(int[] interfaces) {
     this.interfaces = interfaces;
   }    
+
   /**
    * @param major.
    */
   public void setMajor(int major) {
     this.major = major;
   }    
+
   /**
    * @param methods.
    */
   public void setMethods(Method[] methods) {
     this.methods = methods;
   }    
+
   /**
    * @param minor.
    */
   public void setMinor(int minor) {
     this.minor = minor;
   }    
+
   /**
    * Set absolute path to file this class was read from.
    */
   public void setSourceFileName(String source_file_name) {
     this.source_file_name = source_file_name;
   }    
+
   /**
    * @param superclass_name.
    */
   public void setSuperclassName(String superclass_name) {
     this.superclass_name = superclass_name;
   }    
+
   /**
    * @param superclass_name_index.
    */
   public void setSuperclassNameIndex(int superclass_name_index) {
     this.superclass_name_index = superclass_name_index;
   }    
+
   /**
    * @return String representing class contents.
    */
