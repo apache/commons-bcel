@@ -7,7 +7,7 @@ $Id$
 Sun.  However,  there  are better methods such as the idea proposed by
 Staerk et al.: using sets of object types.
 
-- There are a few bugs concerning access rights of  referenced  method
+- There are a few bugs concerning access rights of referenced  methods
 and  probably  fields.  The  tests  for access rights that Sun defines
 should happen in pass four (which JustIce performs during pass 3a) are
 unintentionally  omitted.  This also happened to Sun and IBM with some
