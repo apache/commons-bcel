@@ -86,7 +86,8 @@ public abstract class Attribute implements Cloneable, Node {
   protected byte         tag;        // Tag to distiguish subclasses
   protected ConstantPool constant_pool;
 
-  Attribute(byte tag, int name_index, int length, ConstantPool constant_pool) {
+  protected Attribute(byte tag, int name_index, int length,
+		      ConstantPool constant_pool) {
     this.tag           = tag;
     this.name_index    = name_index;
     this.length        = length;
