@@ -265,20 +265,28 @@ public class MethodGen extends FieldGenOrMethodGen {
   public LocalVariableGen addLocalVariable(String name, Type type, int slot,
 					   InstructionHandle start,
 					   InstructionHandle end) {
-    byte t   = type.getType();
-    int  add = type.getSize();
+    byte t = type.getType();
+
+    if(t != Constants.T_ADDRESS) {
+      int  add = type.getSize();
     
-    if(slot + add > max_locals) 
-      max_locals = slot + add;
+      if(slot + add > max_locals) 
+	max_locals = slot + add;
+      
+      LocalVariableGen l = new LocalVariableGen(slot, name, type, start, end);
+      int i;
+      
+      if((i = variable_vec.indexOf(l)) >= 0) // Overwrite if necessary
+	variable_vec.set(i, l);
+      else
+	variable_vec.add(l);
 
-    LocalVariableGen l = new LocalVariableGen(slot, name, type, start, end);
-    int i;
-
-    if((i = variable_vec.indexOf(l)) >= 0) // Overwrite if necessary
-      variable_vec.set(i, l);
-    else
-      variable_vec.add(l);
-    return l;
+      return l;
+    } else {
+      throw new IllegalArgumentException("Can not use " + type + 
+					 " as type for local variable");
+					 
+    }
   }
 
   /**

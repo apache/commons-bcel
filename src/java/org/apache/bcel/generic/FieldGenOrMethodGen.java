@@ -1,4 +1,5 @@
 package org.apache.bcel.generic;
+import org.apache.bcel.Constants;
 
 /* ====================================================================
  * The Apache Software License, Version 1.1
@@ -74,7 +75,12 @@ public abstract class FieldGenOrMethodGen extends AccessFlags
 
   protected FieldGenOrMethodGen() {}
 
-  public void            setType(Type type)   { this.type = type; }
+  public void            setType(Type type)   {
+    if(type.getType() == Constants.T_ADDRESS)
+      throw new IllegalArgumentException("Type can not be " + type);
+
+    this.type = type;
+  }
   public Type            getType()            { return type; }
 
   /** @return name of method/field.
