@@ -235,7 +235,7 @@ public class Verifier{
 	 * into the BCEL Repository yourself (via 'addClass(JavaClass)').
 	 */
 	public static void main(String [] args){
-		System.out.println("JustIce by Enver Haase, (C) 2001. http://bcel.sourceforge.net\n");
+		System.out.println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<http://jakarta.apache.org/bcel>\n");
 	  for(int k=0; k < args.length; k++) {
 
 			if (args[k].endsWith(".class")){
