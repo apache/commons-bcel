@@ -34,6 +34,7 @@ public class EmptyVisitor implements Visitor {
   public void visitAnnotation(Annotations obj) {}
   public void visitParameterAnnotation(ParameterAnnotations obj) {}
   public void visitAnnotationEntry(AnnotationEntry obj) {}
+  public void visitAnnotationDefault(AnnotationDefault obj) {}
   public void visitCode(Code obj) {}
   public void visitCodeException(CodeException obj) {}
   public void visitConstantClass(ConstantClass obj) {}

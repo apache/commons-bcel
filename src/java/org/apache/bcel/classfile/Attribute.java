@@ -195,6 +195,9 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
 //    case Constants.ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS:
 //      return new RuntimeInvisibleParameterAnnotations(name_index, length, file, constant_pool);
 
+//    case Constants.ATTR_ANNOTATION_DEFAULT:
+//      return new AnnotationDefault(name_index, length, file, constant_pool);
+
     default: // Never reached
       throw new IllegalStateException("Ooops! default case reached.");
     }

@@ -715,8 +715,9 @@ public interface Constants {
   public static final byte ATTR_RUNTIMEINVISIBLE_ANNOTATIONS  			= 13;
   public static final byte ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS 	= 14;
   public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS 	= 15;
+  public static final byte ATTR_ANNOTATION_DEFAULT                      = 16;
 
-  public static final short KNOWN_ATTRIBUTES = 12;//should be 16
+  public static final short KNOWN_ATTRIBUTES = 12;//should be 17
 
   public static final String[] ATTRIBUTE_NAMES = {
     "SourceFile", "ConstantValue", "Code", "Exceptions",
@@ -724,7 +725,8 @@ public interface Constants {
     "InnerClasses", "Synthetic", "Deprecated",
     "PMGClass", "Signature", "StackMap", 
     "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
-    "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations"
+    "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations",
+    "AnnotationDefault"
   };
 
   /** Constants used in the StackMap attribute.
