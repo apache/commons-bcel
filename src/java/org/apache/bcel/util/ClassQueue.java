@@ -65,14 +65,19 @@ import org.apache.bcel.classfile.JavaClass;
  * @see ClassVector
 */
 public class ClassQueue {
-  protected int       left = 0;
-  private   ArrayList vec  = new ArrayList();
+  protected ArrayList vec  = new ArrayList();
 
-  public void      enqueue(JavaClass clazz) { vec.add(clazz); }
+  public void enqueue(JavaClass clazz) { vec.add(clazz); }
+
   public JavaClass dequeue()                {
-    JavaClass clazz = (JavaClass)vec.get(left);
-    vec.remove(left++);
+    JavaClass clazz = (JavaClass)vec.get(0);
+    vec.remove(0);
     return clazz;
   }
-  public boolean   empty()                  { return vec.size() <= left; }
+
+  public boolean empty() { return vec.size() == 0; }
+
+  public String toString() {
+    return vec.toString();
+  }
 }  
