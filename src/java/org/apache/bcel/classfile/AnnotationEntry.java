@@ -60,7 +60,7 @@ public class AnnotationEntry implements Node, Constants
 	   * @param v Visitor object
 	   */
 	  public void accept(Visitor v) {
-	    v.visitAnnotationEntry(this);
+//	    v.visitAnnotationEntry(this);
 	  }
 	  
 	  /**

@@ -73,7 +73,7 @@ public abstract class Annotations extends Attribute {
 	   * @param v Visitor object
 	   */
 	  public void accept(Visitor v) {
-	    v.visitAnnotation(this);
+//	    v.visitAnnotation(this);
 	  }
 	  
 	  /**
@@ -89,7 +89,7 @@ public abstract class Annotations extends Attribute {
 	  /**
 	   * @returns the annotation entry table
 	   */
-	  public final AnnotationEntry[] GetAnnotationTable()
+	  public final AnnotationEntry[] getAnnotationTable()
 	  {
 	    return annotation_table;
 	  }
