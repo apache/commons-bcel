@@ -231,7 +231,7 @@ public abstract class Repository {
 
       String   s          = clazz.getSuperclassName();
       String[] interfaces = clazz.getInterfaceNames();
-System.out.println(java.util.Arrays.asList(interfaces));
+
       if(clazz.isInterface())
 	vec.addElement(clazz);
       else if(!s.equals("java.lang.Object"))
