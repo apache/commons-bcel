@@ -104,5 +104,5 @@ public abstract class Annotations extends Attribute {
 	  /**
 	   * @returns the number of annotation entries in this annotation
 	   */
-	  public final int getNumAnnotation() { return annotation_table_length; }
+	  public final int getNumAnnotations() { return annotation_table_length; }
 }

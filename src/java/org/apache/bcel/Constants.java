@@ -698,21 +698,23 @@ public interface Constants {
 
   /** Attributes and their corresponding names.
    */
-  public static final byte ATTR_UNKNOWN                       = -1;
-  public static final byte ATTR_SOURCE_FILE                   = 0;
-  public static final byte ATTR_CONSTANT_VALUE                = 1;
-  public static final byte ATTR_CODE                          = 2;
-  public static final byte ATTR_EXCEPTIONS                    = 3;
-  public static final byte ATTR_LINE_NUMBER_TABLE             = 4;
-  public static final byte ATTR_LOCAL_VARIABLE_TABLE          = 5;
-  public static final byte ATTR_INNER_CLASSES                 = 6;
-  public static final byte ATTR_SYNTHETIC                     = 7;
-  public static final byte ATTR_DEPRECATED                    = 8;
-  public static final byte ATTR_PMG                           = 9;
-  public static final byte ATTR_SIGNATURE                     = 10;
-  public static final byte ATTR_STACK_MAP                     = 11;
-  public static final byte ATTR_RUNTIMEVISIBLE_ANNOTATIONS    = 12;
-  public static final byte ATTR_RUNTIMEINVISIBLE_ANNOTATIONS  = 13;
+  public static final byte ATTR_UNKNOWN                       			= -1;
+  public static final byte ATTR_SOURCE_FILE                   			= 0;
+  public static final byte ATTR_CONSTANT_VALUE                			= 1;
+  public static final byte ATTR_CODE                          			= 2;
+  public static final byte ATTR_EXCEPTIONS                    			= 3;
+  public static final byte ATTR_LINE_NUMBER_TABLE             			= 4;
+  public static final byte ATTR_LOCAL_VARIABLE_TABLE          			= 5;
+  public static final byte ATTR_INNER_CLASSES                 			= 6;
+  public static final byte ATTR_SYNTHETIC                     			= 7;
+  public static final byte ATTR_DEPRECATED                    			= 8;
+  public static final byte ATTR_PMG                           			= 9;
+  public static final byte ATTR_SIGNATURE                     			= 10;
+  public static final byte ATTR_STACK_MAP                     			= 11;
+  public static final byte ATTR_RUNTIMEVISIBLE_ANNOTATIONS    			= 12;
+  public static final byte ATTR_RUNTIMEINVISIBLE_ANNOTATIONS  			= 13;
+  public static final byte ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS 	= 14;
+  public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS 	= 14;
 
   public static final short KNOWN_ATTRIBUTES = 14;
 
@@ -721,7 +723,8 @@ public interface Constants {
     "LineNumberTable", "LocalVariableTable",
     "InnerClasses", "Synthetic", "Deprecated",
     "PMGClass", "Signature", "StackMap", 
-    "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations"
+    "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
+    "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations"
   };
 
   /** Constants used in the StackMap attribute.
