@@ -93,7 +93,6 @@ public abstract class StoreInstruction extends LocalVariableInstruction
   public void accept(Visitor v) {
     v.visitStackConsumer(this);
     v.visitPopInstruction(this);
-    v.visitStoreInstruction(this);
     v.visitTypedInstruction(this);
     v.visitLocalVariableInstruction(this);
     v.visitStoreInstruction(this);
