@@ -138,6 +138,26 @@ public class InstructionFactory implements InstructionConstants {
     return il;
   }
 
+  /** Uses PUSH to push a constant value onto the stack.
+   * @param value must be of type Number, Boolean, Character or String
+   */
+  public Instruction createConstant(Object value) {
+    PUSH push;
+
+    if(value instanceof Number)
+      push = new PUSH(cp, (Number)value);
+    else if(value instanceof String)
+      push = new PUSH(cp, (String)value);
+    else if(value instanceof Boolean)
+      push = new PUSH(cp, (Boolean)value);
+    else if(value instanceof Character)
+      push = new PUSH(cp, (Character)value);
+    else
+      throw new ClassGenException("Illegal type: " + value.getClass());
+
+    return push.getInstruction();
+  }
+
   private static class MethodObject {
     Type[]   arg_types;
     Type     result_type;
