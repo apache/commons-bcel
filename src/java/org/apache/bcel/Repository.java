@@ -76,7 +76,13 @@ public abstract class Repository {
    */
   public static JavaClass lookupClass(String class_name) {
     try {
-      return _repository.loadClass(class_name);
+      JavaClass clazz = _repository.findClass(class_name);
+
+      if(clazz == null) {
+	return _repository.loadClass(class_name);
+      } else {
+	return clazz;
+      }
     } catch(ClassNotFoundException ex) { return null; }
   }
 

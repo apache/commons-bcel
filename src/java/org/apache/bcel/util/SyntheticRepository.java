@@ -108,7 +108,7 @@ public class SyntheticRepository implements Repository {
   public void storeClass(JavaClass clazz) {
     _loadedClasses.put(clazz.getClassName(), clazz);
     clazz.setRepository(this);
-  }
+ }
 
   /**
    * Remove class from repository
@@ -118,14 +118,15 @@ public class SyntheticRepository implements Repository {
   }
 
   /**
-   * Find an already defined JavaClass.
+   * Find an already defined (cached) JavaClass object by name.
    */
   public JavaClass findClass(String className) {
     return (JavaClass)_loadedClasses.get(className);
   }
 
   /**
-   * Lookup a JavaClass object from the class name provided.
+   * Load a JavaClass object for the given class name using
+   * the CLASSPATH environment variable.
    */
   public JavaClass loadClass(String className) 
     throws ClassNotFoundException
