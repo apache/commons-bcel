@@ -108,7 +108,15 @@ public class LocalVariableTable extends Attribute {
     return local_variable_table;
   }    
 
-  /** @return first matching variable using index
+  /** 
+   * @return first matching variable using index
+   * 
+   * @param index the variable slot
+   * 
+   * @returns the first LocalVariable that matches the slot or null if not found
+   * 
+   * @deprecated since 5.2 because multiple variables can share the
+   *             same slot, use getLocalVariable(int index, int pc) instead.
    */
   public final LocalVariable getLocalVariable(int index) {
     for(int i=0; i < local_variable_table_length; i++)
@@ -118,6 +126,26 @@ public class LocalVariableTable extends Attribute {
     return null;
   }
 
+  /** 
+   * @return matching variable using index when variable is used at supplied pc
+   * 
+   * @param index the variable slot
+   * @param pc the current pc that this variable is alive
+   * 
+   * @returns the LocalVariable that matches or null if not found
+   */
+  public final LocalVariable getLocalVariable(int index, int pc) {
+    for(int i=0; i < local_variable_table_length; i++)
+      if(local_variable_table[i].getIndex() == index) {
+        int start_pc = local_variable_table[i].getStartPC();
+        int end_pc = start_pc + local_variable_table[i].getLength();
+        if ((pc >= start_pc) && (pc < end_pc))
+	      return local_variable_table[i];
+	  }
+
+    return null;
+  }
+  
   public final void setLocalVariableTable(LocalVariable[] local_variable_table)
   {
     this.local_variable_table = local_variable_table;
