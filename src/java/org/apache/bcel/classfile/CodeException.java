@@ -66,7 +66,9 @@ import  java.io.*;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see     Code
  */
-public final class CodeException implements Cloneable, Constants, Node {
+public final class CodeException
+  implements Cloneable, Constants, Node, Serializable
+{
   private int start_pc;   // Range in the code the exception handler is
   private int end_pc;     // active. start_pc is inclusive, end_pc exclusive
   private int handler_pc; /* Starting address of exception handler, i.e.,

@@ -65,7 +65,9 @@ import  java.io.*;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see     LocalVariableTable
  */
-public final class LocalVariable implements Constants, Cloneable, Node {
+public final class LocalVariable
+  implements Constants, Cloneable, Node, Serializable
+{
   private int start_pc;        // Range in which the variable is valid
   private int length;
   private int name_index;      // Index in constant pool of variable name

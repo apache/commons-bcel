@@ -64,7 +64,7 @@ import org.apache.bcel.classfile.JavaClass;
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
  * @see ClassVector
 */
-public class ClassQueue {
+public class ClassQueue implements java.io.Serializable {
   protected ArrayList vec  = new ArrayList();
 
   public void enqueue(JavaClass clazz) { vec.add(clazz); }

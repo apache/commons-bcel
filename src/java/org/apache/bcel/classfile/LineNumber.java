@@ -66,7 +66,7 @@ import  java.io.*;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see     LineNumberTable
  */
-public final class LineNumber implements Cloneable, Node {
+public final class LineNumber implements Cloneable, Node, Serializable {
   private int start_pc;    // Program Counter (PC) corresponds to line
   private int line_number; // number in source file
 

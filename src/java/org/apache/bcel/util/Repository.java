@@ -56,8 +56,7 @@ package org.apache.bcel.util;
 
 import org.apache.bcel.classfile.JavaClass;
 
-public interface Repository
-{
+public interface Repository extends java.io.Serializable {
     /**
      * Store the provided class under "clazz.getClassName()" 
      */

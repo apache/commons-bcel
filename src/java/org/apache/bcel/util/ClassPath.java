@@ -65,7 +65,7 @@ import java.io.*;
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
-public class ClassPath {
+public class ClassPath implements Serializable {
   public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath();
 
   private PathEntry[] paths;
@@ -292,7 +292,7 @@ public class ClassPath {
     return getClassFile(name, suffix).getPath();
   }
 
-  private static abstract class PathEntry {
+  private static abstract class PathEntry implements Serializable {
     abstract ClassFile getClassFile(String name, String suffix) throws IOException;
   }
 

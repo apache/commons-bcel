@@ -68,7 +68,10 @@ import org.apache.bcel.classfile.*;
  * @see     LocalVariable
  * @see     MethodGen
  */
-public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Cloneable {
+public class LocalVariableGen
+  implements InstructionTargeter, NamedAndTyped, Cloneable,
+	     java.io.Serializable
+{
   private int         index;
   private String      name;
   private Type        type;

@@ -66,7 +66,7 @@ import java.util.ArrayList;
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
-public abstract class Type {
+public abstract class Type implements java.io.Serializable {
   protected byte   type;
   protected String signature; // signature for the type
 

@@ -65,7 +65,7 @@ import  java.io.*;
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
-public abstract class Constant implements Cloneable, Node {
+public abstract class Constant implements Cloneable, Node, Serializable {
   /* In fact this tag is redundant since we can distinguish different
    * `Constant' objects by their type, i.e., via `instanceof'. In some
    * places we will use the tag for switch()es anyway.

@@ -63,7 +63,7 @@ import  org.apache.bcel.Constants;
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
-public abstract class AccessFlags {
+public abstract class AccessFlags implements java.io.Serializable {
   protected int access_flags;
   
   public AccessFlags() {}

@@ -58,7 +58,6 @@ import  org.apache.bcel.Constants;
 import  java.io.*;
 
 /**
-
  * This class represents the constant pool, i.e., a table of constants, of
  * a parsed classfile. It may contain null references, due to the JVM
  * specification that skips an entry after an 8-byte constant (double,
@@ -71,7 +70,7 @@ import  java.io.*;
  * @see     org.apache.bcel.generic.ConstantPoolGen
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
-public class ConstantPool implements Cloneable, Node {
+public class ConstantPool implements Cloneable, Node, Serializable {
   private int        constant_pool_count;
   private Constant[] constant_pool;
 

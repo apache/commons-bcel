@@ -65,7 +65,9 @@ import org.apache.bcel.Constants;
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see Constants
  */
-public class InstructionFactory implements InstructionConstants {
+public class InstructionFactory
+  implements InstructionConstants, java.io.Serializable
+{
   protected ClassGen        cg;
   protected ConstantPoolGen cp;
 

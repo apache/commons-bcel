@@ -72,7 +72,8 @@ import org.apache.bcel.classfile.*;
  * @see     CodeException
  * @see     InstructionHandle
  */
-public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
+public final class CodeExceptionGen
+  implements InstructionTargeter, Cloneable, java.io.Serializable {
   private InstructionHandle start_pc;
   private InstructionHandle end_pc;
   private InstructionHandle handler_pc;

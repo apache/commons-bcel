@@ -106,7 +106,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
    * use the default SyntheticRepository, because we
    * don't know any better.
    */
-  private org.apache.bcel.util.Repository repository = 
+  private transient org.apache.bcel.util.Repository repository = 
     SyntheticRepository.getInstance();
 
   /**

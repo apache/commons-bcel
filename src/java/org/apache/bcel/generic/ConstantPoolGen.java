@@ -72,7 +72,7 @@ import java.util.HashMap;
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see Constant
  */
-public class ConstantPoolGen {
+public class ConstantPoolGen implements java.io.Serializable {
   protected int        size      = 1024; // Inital size, sufficient in most cases
   protected Constant[] constants = new Constant[size];
   protected int        index     = 1; // First entry (0) used by JVM
@@ -82,7 +82,7 @@ public class ConstantPoolGen {
   private static final String FIELDREF_DELIM   = "&";
   private static final String NAT_DELIM        = "%";
 
-  private static class Index {
+  private static class Index implements java.io.Serializable {
     int index;
     Index(int i) { index = i; }
   }

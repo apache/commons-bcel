@@ -80,7 +80,7 @@ import java.util.HashMap;
  * @see     Deprecated
  * @see     Signature
 */
-public abstract class Attribute implements Cloneable, Node {
+public abstract class Attribute implements Cloneable, Node, Serializable {
   protected int          name_index; // Points to attribute name in constant pool
   protected int          length;     // Content length of attribute field
   protected byte         tag;        // Tag to distiguish subclasses
@@ -149,7 +149,7 @@ public abstract class Attribute implements Cloneable, Node {
    * @throws  ClassFormatException
    */
   public static final Attribute readAttribute(DataInputStream file,
-						 ConstantPool constant_pool)
+					      ConstantPool constant_pool)
     throws IOException, ClassFormatException
   {
     ConstantUtf8 c;
@@ -159,7 +159,7 @@ public abstract class Attribute implements Cloneable, Node {
     byte         tag = Constants.ATTR_UNKNOWN; // Unknown attribute
 
     // Get class name from constant pool via `name_index' indirection
-    name_index = (int)(file.readUnsignedShort());
+    name_index = (int)file.readUnsignedShort();
     c          = (ConstantUtf8)constant_pool.getConstant(name_index, 
 							 Constants.CONSTANT_Utf8);
     name       = c.getBytes();

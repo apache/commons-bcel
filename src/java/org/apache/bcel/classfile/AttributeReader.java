@@ -55,10 +55,9 @@ package org.apache.bcel.classfile;
  */
 
 /**
-
  * Unknown (non-standard) attributes may be read via user-defined factory
  * objects that can be registered with the Attribute.addAttributeReader
- * method.  These factory objects should implement this interface.
+ * method. These factory objects should implement this interface.
 
  * @see Attribute
  * @version $Id$
@@ -91,8 +90,8 @@ public interface AttributeReader {
 
      @see Attribute#addAttributeReader( String, AttributeReader )
   */
-  public Attribute createAttribute( int name_index, 
-				    int length,
-				    java.io.DataInputStream file,
-				    ConstantPool constant_pool );
+  public Attribute createAttribute(int name_index, 
+				   int length,
+				   java.io.DataInputStream file,
+				   ConstantPool constant_pool);
 }

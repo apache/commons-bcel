@@ -66,7 +66,9 @@ import org.apache.bcel.classfile.*;
  * @see     LineNumber
  * @see     MethodGen
  */
-public class LineNumberGen implements InstructionTargeter, Cloneable {
+public class LineNumberGen
+  implements InstructionTargeter, Cloneable, java.io.Serializable
+{
   private InstructionHandle ih;
   private int               src_line;
 

@@ -63,7 +63,7 @@ import org.apache.bcel.classfile.JavaClass;
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
  * @see Stack
 */
-public class ClassStack {
+public class ClassStack implements java.io.Serializable {
   private Stack stack = new Stack();
 
   public void      push(JavaClass clazz) { stack.push(clazz); }
