@@ -92,7 +92,14 @@ public class SyntheticRepository
     }
 
     public static SyntheticRepository getInstance() {
-	return (SyntheticRepository) instances.get( defaultPath );
+      SyntheticRepository rep =(SyntheticRepository)
+	instances.get( defaultPath );
+
+      if(rep == null) {
+	rep = new SyntheticRepository(); // adds itself to instances
+      }
+      
+      return rep;
     }
 
     public static SyntheticRepository getInstance(String classPath) {
