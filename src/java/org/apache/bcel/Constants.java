@@ -420,12 +420,29 @@ public interface Constants {
   public static final byte T_UNKNOWN   = 15;
   public static final byte T_ADDRESS   = 16;
 
+  /** The primitive type names corresponding to the T_XX constants,
+   * e.g., TYPE_NAMES[T_INT] = "int"
+   */
   public static final String[] TYPE_NAMES = {
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
     "boolean", "char", "float", "double", "byte", "short", "int", "long",
     "void", "array", "object", "unknown" // Non-standard
   };
 
+  /** The primitive class names corresponding to the T_XX constants,
+   * e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
+   */
+  public static final String[] CLASS_TYPE_NAMES = {
+    ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
+    "java.lang.Boolean", "java.lang.Character", "java.lang.Float",
+    "java.lang.Double", "java.lang.Byte", "java.lang.Short",
+    "java.lang.Integer", "java.lang.Long", "java.lang.Void",
+    ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE
+  };
+
+  /** The signature characters corresponding to primitive types,
+   * e.g., SHORT_TYPE_NAMES[T_INT] = "I"
+   */
   public static final String[] SHORT_TYPE_NAMES = {
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
     "Z", "C", "F", "D", "B", "S", "I", "J",
