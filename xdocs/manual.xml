@@ -2,7 +2,7 @@
 <document>
 
   <properties>
-    <author email="markus.dahm@inf.fu-berlin.de">Markus Dahm</author>
+    <author email="markus.dahm@berlin.de">Markus Dahm</author>
     <title>Byte Code Engineering Library (BCEL)</title>
   </properties>
 
@@ -45,10 +45,10 @@
     very popular and many research projects deal with further
     improvements of the language or its run-time behavior. The
     possibility to extend a language with new concepts is surely a
-    desirable feature, but the implementation issues should be hidden from
-    the user. Fortunately, the concepts of the Java Virtual Machine
-    permit the user-transparent implementation of such extensions with
-    relatively little effort.
+    desirable feature, but the implementation issues should be hidden
+    from the user. Fortunately, the concepts of the Java Virtual
+    Machine permit the user-transparent implementation of such
+    extensions with relatively little effort.
   </p>
 
   <p>
@@ -121,9 +121,10 @@
   </p>
   
   <p align="center">
+  <a name="Figure 1">
   <img src="images/jvm.gif"/>
   <br/>
-  <a name="Figure 1">Figure 1: Compilation and execution of Java classes</a>
+  Figure 1: Compilation and execution of Java classes</a>
   </p>
     
   <p>
@@ -172,9 +173,10 @@
   </p>
 
   <p align="center">
+  <a name="Figure 2">
   <img src="images/classfile.gif"/>
   <br/>
-  <a name="Figure 2">Figure 2: Java class file format</a>
+  Figure 2: Java class file format</a>
   </p>    
 
   <p>
@@ -286,7 +288,7 @@
   <p>
     <b>Control flow:</b> There are branch instructions like
      <tt>goto</tt>, and <tt>if_icmpeq</tt>, which compares two integers
-     for equality. There is also a <tt>jsr</tt> (jump sub-routine)
+     for equality. There is also a <tt>jsr</tt> (jump to sub-routine)
      and <tt>ret</tt> pair of instructions that is used to implement
      the <tt>finally</tt> clause of <tt>try-catch</tt> blocks.
      Exceptions may be thrown with the <tt>athrow</tt> instruction.
@@ -296,7 +298,7 @@
   
   <p>
     <b>Load and store operations</b> for local variables like
-      <tt>iload</tt> and <tt>istore</tt>.  There are also array
+      <tt>iload</tt> and <tt>istore</tt>. There are also array
       operations like <tt>iastore</tt> which stores an integer value
       into an array.
   </p>
@@ -344,119 +346,128 @@
   </p>
 
   <p>
-    We  will not list  all byte  code instructions  here, since  these are
-    explained in  detail in the  JVM specification.  The opcode  names are
-    mostly self-explaining,  so understanding the  following code examples
-    should be fairly intuitive.
+    We will not list all byte code instructions here, since these are
+    explained in detail in the <a
+    href="http://java.sun.com/docs/books/vmspec/index.html">JVM
+    specification</a>. The opcode names are mostly self-explaining,
+    so understanding the following code examples should be fairly
+    intuitive.
   </p>
 
   </section>
 
   <section name="2.3 Method code">
   <p>
-    Non-abstract methods  contain an attribute  (<tt>Code</tt>) that holds
-    the following data: The maximum  size of the method's stack frame, the
-    number   of   local   variables    and   an   array   of   byte   code
-    instructions. Optionally,  it may  also contain information  about the
-    names of local variables and source file line numbers that can be used
-    by a debugger.
+    Non-abstract (and non-native) methods contain an attribute
+    "<tt>Code</tt>" that holds the following data: The maximum size of
+    the method's stack frame, the number of local variables and an
+    array of byte code instructions. Optionally, it may also contain
+    information about the names of local variables and source file
+    line numbers that can be used by a debugger.
   </p>
   
   <p>
-    Whenever  an exception is thrown, the  JVM performs exception handling
-    by looking   into a  table  of exception  handlers.   The table  marks
-    handlers, i.e.  pieces  of code, to  be responsible for  exceptions of
-    certain types  that  are raised   within a  given  area  of  the  byte
-    code. When there is no appropriate handler the exception is propagated
-    back to the caller of the method. The handler information is itself
-    stored in an attribute contained within the <tt>Code</tt> attribute.
+    Whenever an exception is raised during execution, the JVM performs
+    exception handling by looking into a table of exception
+    handlers. The table marks handlers, i.e., code chunks, to be
+    responsible for exceptions of certain types that are raised within
+    a given area of the byte code. When there is no appropriate
+    handler the exception is propagated back to the caller of the
+    method. The handler information is itself stored in an attribute
+    contained within the <tt>Code</tt> attribute.
   </p>
   
   </section>
   
   <section name="2.4 Byte code offsets">
   <p>
-    Targets  of  branch instructions  like  <tt>goto</tt>  are encoded  as
-    relative offsets  in the array  of byte codes. Exception  handlers and
-    local variables refer to absolute addresses within the byte code.  The
-    former  contains  references   to  the  start  and  the   end  of  the
-    <tt>try</tt> block,  and to the instruction handler  code.  The latter
-    marks the  range in which a  local variable is valid,  i.e. its scope.
-    This makes it  difficult to insert or delete code  areas on this level
-    of abstraction, since one has  to recompute the offsets every time and
-    update the referring objects. We will see in section 
-    how <font face="helvetica">BCEL </font>remedies this restriction.
+    Targets of branch instructions like <tt>goto</tt> are encoded as
+    relative offsets in the array of byte codes. Exception handlers
+    and local variables refer to absolute addresses within the byte
+    code.  The former contains references to the start and the end of
+    the <tt>try</tt> block, and to the instruction handler code. The
+    latter marks the range in which a local variable is valid, i.e.,
+    its scope. This makes it difficult to insert or delete code areas
+    on this level of abstraction, since one has to recompute the
+    offsets every time and update the referring objects. We will see
+    in <a href="#3.3 ClassGen">section 3.3</a> how <font
+    face="helvetica,arial">BCEL</font> remedies this restriction.
   </p>
 
   </section>
 
-
   <section name="2.5 Type information">
   <p>
-    Java is  a type-safe language and  the information about  the types of
-    fields,    local    variables,    and    methods    is    stored    in
-    <em>signatures</em>. These are strings stored  in the constant pool and encoded in
-    a special  format.  For example the  argument and return  types of the
-    <tt>main</tt> method
+    Java is a type-safe language and the information about the types
+    of fields, local variables, and methods is stored in so called
+    <em>signatures</em>. These are strings stored in the constant pool
+    and encoded in a special format. For example the argument and
+    return types of the <tt>main</tt> method
   </p>
 
-  <source>
-  public static void main(String[] argv)
-  </source>
+  <p align="center">
+  <source>public static void main(String[] argv)</source>
+  </p>
 
   <p>
   are represented by the signature
   </p>
 
-  <source>
-  ([java/lang/String;)V
-  </source>
+  <p align="center">
+  <source>([java/lang/String;)V</source>
+  </p>
 
   <p>
-    Classes  and  arrays  are   internally  represented  by  strings  like
-    <tt>"java/lang/String"</tt>,  basic types  like  <tt>float</tt> by  an
+    Classes are internally represented by strings like
+    <tt>"java/lang/String"</tt>, basic types like <tt>float</tt> by an
     integer number. Within signatures they are represented by single
-    characters, e.g., <tt>&#207;</tt>, for integer.
+    characters, e.g., <tt>I</tt>, for integer. Arrays are denoted with
+    a <tt>[</tt> at the start of the signature.
   </p>
 
   </section>
 
   <section name="2.6 Code example">
   <p>
-    The  following example  program prompts  for a  number and  prints the
-    faculty  of  it.  The  <tt>readLine()</tt>  method  reading  from  the
-    standard input  may raise an <tt>IOException</tt> and  if a misspelled
-    number    is    passed   to    <tt>parseInt()</tt>    it   throws    a
-    <tt>NumberFormatException</tt>. Thus, the critical area of code must be
-    encapsulated in a <tt>try-catch</tt> block.
+    The following example program prompts for a number and prints the
+    faculty of it. The <tt>readLine()</tt> method reading from the
+    standard input may raise an <tt>IOException</tt> and if a
+    misspelled number is passed to <tt>parseInt()</tt> it throws a
+    <tt>NumberFormatException</tt>. Thus, the critical area of code
+    must be encapsulated in a <tt>try-catch</tt> block.
   </p>
   
   <source>  
     import java.io.*;
+
     public class Faculty {
-    private static BufferedReader in = new BufferedReader(new
+      private static BufferedReader in = new BufferedReader(new
                                 InputStreamReader(System.in));
-    public static final int fac(int n) {
+
+      public static final int fac(int n) {
         return (n == 0)? 1 : n * fac(n - 1);
-    }
-    public static final int readInt() {
+      }
+
+      public static final int readInt() {
         int n = 4711;
         try {
-        System.out.print("Please enter a number&#62; ");
+        System.out.print("Please enter a number&gt; ");
         n = Integer.parseInt(in.readLine());
         } catch(IOException e1) { System.err.println(e1); }
         catch(NumberFormatException e2) { System.err.println(e2); }
         return n;
-    }
-    public static void main(String[] argv) {
+      }
+
+      public static void main(String[] argv) {
         int n = readInt();
         System.out.println("Faculty of " + n + " is " + fac(n));
-    }}
+      }
+    }
   </source>
 
   <p>
-    This code example  typically compiles to the following  chunks of byte
-    code:
+    This code example typically compiles to the following chunks of
+    byte code:
   </p>
   
   <source>
@@ -475,32 +486,32 @@
     LocalVariable(start_pc = 0, length = 16, index = 0:int n)
   </source>
 
-  <p>
-    The  method <tt>fac</tt>  has only  one local  variable,  the argument
-    <tt>n</tt>, stored in  slot 0.  This variable's scope  ranges from the
-    start of  the byte  code sequence to  the very  end.  If the  value of
-    <tt>n</tt> (stored  in local variable  0, i.e. the value  fetched with
-    <tt>iload_0</tt>) is  not equal  to 0, the  <tt>ifne</tt> instruction
-    branches to  the byte code at offset  8, otherwise a 1  is pushed onto
-    the operand stack  and the control flow branches  to the final return.
-    For ease of reading, the offsets of the branch instructions, which are
-    actually   relative,  are displayed  as  absolute  addresses in  these
+  <p><b>fac():</b>
+    The method <tt>fac</tt> has only one local variable, the argument
+    <tt>n</tt>, stored at index 0. This variable's scope ranges from
+    the start of the byte code sequence to the very end.  If the value
+    of <tt>n</tt> (the value fetched with <tt>iload_0</tt>) is not
+    equal to 0, the <tt>ifne</tt> instruction branches to the byte
+    code at offset 8, otherwise a 1 is pushed onto the operand stack
+    and the control flow branches to the final return.  For ease of
+    reading, the offsets of the branch instructions, which are
+    actually relative, are displayed as absolute addresses in these
     examples.
   </p>
   
   <p>
-    If  recursion has to  continue, the  arguments for  the multiplication
-    (<tt>n</tt>  and <tt>fac(n -  1)</tt>) are  evaluated and  the results
-    pushed onto the operand stack.  After the multiplication operation has
-    been performed the function returns the computed value from the top of
-    the stack.
+    If recursion has to continue, the arguments for the multiplication
+    (<tt>n</tt> and <tt>fac(n - 1)</tt>) are evaluated and the results
+    pushed onto the operand stack.  After the multiplication operation
+    has been performed the function returns the computed value from
+    the top of the stack.
   </p>
 
   <source>
     0:  sipush        4711
     3:  istore_0
     4:  getstatic     java.lang.System.out Ljava/io/PrintStream;
-    7:  ldc           "Please enter a number&#62; "
+    7:  ldc           "Please enter a number&gt; "
     9:  invokevirtual java.io.PrintStream.print (Ljava/lang/String;)V
     12: getstatic     Faculty.in Ljava/io/BufferedReader;
     15: invokevirtual java.io.BufferedReader.readLine ()Ljava/lang/String;
@@ -523,129 +534,138 @@
     From    To      Handler Type
     4       22      25      java.io.IOException(6)
     4       22      36      NumberFormatException(10)
-
   </source>
   
-  <p>
-    First the local variable <tt>n</tt>  (in slot 0) is initialized to the
-    value  4711.   The  next  instruction, <tt>getstatic</tt>,  loads  the
-    static  <tt>System.out</tt> field onto  the stack.   Then a  string is
-    loaded and  printed, a number   read from the  standard input and
-    assigned to <tt>n</tt>.
+  <p><b>readInt():</b> First the local variable <tt>n</tt> (at index 0)
+    is initialized to the value 4711.  The next instruction,
+    <tt>getstatic</tt>, loads the referencs held by the static
+    <tt>System.out</tt> field onto the stack. Then a string is loaded
+    and printed, a number read from the standard input and assigned to
+    <tt>n</tt>.
   </p>
 
   <p>
-    If    one   of   the    called   methods    (<tt>readLine()</tt>   and
-    <tt>parseInt()</tt>) throws  an exception, the  Java Virtual Machine calls one  of the
-    declared exception  handlers, depending on the type  of the exception.
-    The <tt>try</tt>-clause  itself does not  produce any code,  it merely
-    defines the range in which  the following handlers are active.  In the
-    example  the specified  source  code area  maps  to a  byte code  area
-    ranging from offset 4 (inclusive)  to 22 (exclusive).  If no exception
-    has   occurred   (``normal''   execution   flow)   the   <tt>goto</tt>
-    instructions  branch behind  the  handler code.   There  the value  of
-    <tt>n</tt> is loaded and returned.
+    If one of the called methods (<tt>readLine()</tt> and
+    <tt>parseInt()</tt>) throws an exception, the Java Virtual Machine
+    calls one of the declared exception handlers, depending on the
+    type of the exception.  The <tt>try</tt>-clause itself does not
+    produce any code, it merely defines the range in which the
+    subsequent handlers are active. In the example, the specified
+    source code area maps to a byte code area ranging from offset 4
+    (inclusive) to 22 (exclusive).  If no exception has occurred
+    ("normal" execution flow) the <tt>goto</tt> instructions branch
+    behind the handler code. There the value of <tt>n</tt> is loaded
+    and returned.
   </p>
 
   <p>
-    For  example the handler   for <tt>java.io.IOException</tt>  starts at
-    offset 25. It simply prints the error  and branches back to the normal
-    execution flow, i.e. as if no exception had occurred.
+    The handler for <tt>java.io.IOException</tt> starts at
+    offset 25. It simply prints the error and branches back to the
+    normal execution flow, i.e., as if no exception had occurred.
   </p>
 
   </section>
 
   <section name="3 The BCEL API">
   <p>
-    The <font face="helvetica">BCEL </font>API abstracts from  the concrete circumstances of the Java Virtual Machine and
-    how  to  read and  write  binary Java  class  files.   The API  mainly
-    consists of three parts:
+    The <font face="helvetica,arial">BCEL</font> API abstracts from
+    the concrete circumstances of the Java Virtual Machine and how to
+    read and write binary Java class files. The API mainly consists
+    of three parts:
   </p>
 
   <p>
 
     <ol type="1">
-    <li> A package that contains classes that describe ``static''
-    constraints of class files, i.e., reflect the class file format and
-    is not intended for byte code modifications.  The classes may be
+    <li> A package that contains classes that describe "static"
+    constraints of class files, i.e., reflects the class file format and
+    is not intended for byte code modifications. The classes may be
     used to read and write class files from or to a file.  This is
     useful especially for analyzing Java classes without having the
     source files at hand.  The main data structure is called
     <tt>JavaClass</tt> which contains methods, fields, etc..</li>
 
-    <li> A  package to dynamically generate  or modify <tt>JavaClass</tt>
-    objects.  It  may be  used  e.g. to  insert  analysis  code, to  strip
-    unnecessary  information from class  files, or  to implement  the code
-    generator back-end of a Java compiler.</li>
+    <li> A package to dynamically generate or modify
+    <tt>JavaClass</tt> or <tt>Method</tt> objects.  It may be used to
+    insert analysis code, to strip unnecessary information from class
+    files, or to implement the code generator back-end of a Java
+    compiler.</li>
 
-    <li> Various code examples and  utilities like a class file viewer, a
-    tool  to convert class  files into  HTML, and  a converter  from class
-    files to the Jasmin assembly language [].</li>
+    <li> Various code examples and utilities like a class file viewer,
+    a tool to convert class files into HTML, and a converter from
+    class files to the <a
+    href="http://mrl.nyu.edu/~meyer/jasmin/">Jasmin</a> assembly
+    language.</li>
     </ol>
   </p>
-  
   </section>
   
   <section name="3.1 JavaClass">
   <p>
-    The  ``static''  component of  the  <font face="helvetica">BCEL </font>API  resides in  the  package
-     and represents class files.  All of the
-    binary   components  and   data   structures  declared   in  the   JVM
-    specification  [] and described  in section  <a href="#sec:jvm">2</a> are
-    mapped to classes.  Figure  shows an UML diagram of the
-    hierarchy of  classes of the  <font face="helvetica">BCEL </font>API.  Figure   in the
-    appendix also  shows a  detailed diagram of  the <tt>ConstantPool</tt>
-    components.
+    The "static" component of the <font
+     face="helvetica,arial">BCEL</font> API resides in the package
+     <tt>org.apache.bcel.classfile</tt> and closely represents class
+     files. All of the binary components and data structures declared
+     in the <a
+     href="http://java.sun.com/docs/books/vmspec/index.html">JVM
+     specification</a> and described in section <a
+     href="#2 The Java Virtual Machine">2</a> are mapped to classes.
+
+     <a href="#Figure 3">Figure 3</a> shows an UML
+     diagram of the hierarchy of classes of the <font
+     face="helvetica,arial">BCEL </font>API. Figure TODO in the appendix also
+     shows a detailed diagram of the <tt>ConstantPool</tt> components.
   </p>
   
-  <p>
-  <a href="images/javaclass.gif">Figure</a>
-  <br/>
-  Figure 3: UML diagram for the <font face="helvetica">BCEL</font>API
+  <p align="center">
+  <a name="Figure 3">
+  <img src="images/javaclass.gif"/> <br/>
+  Figure 3: UML diagram for the JavaClass API</a>
   </p>
 
   <p>
-    The  top-level data  structure  is <tt>JavaClass</tt>,  which in  most
-    cases is created by  a <tt>ClassParser</tt> object that is capable
-    of parsing  binary class files. A  <tt>JavaClass</tt> object basically
-    consists of  fields, methods, symbolic  references to the  super class
-    and to the implemented interfaces.
+    The top-level data structure is <tt>JavaClass</tt>, which in most
+    cases is created by a <tt>ClassParser</tt> object that is capable
+    of parsing binary class files. A <tt>JavaClass</tt> object
+    basically consists of fields, methods, symbolic references to the
+    super class and to the implemented interfaces.
   </p>
   
   <p>
-    The  constant pool serves  as some  kind of  central repository  and is  thus of
-    outstanding  importance  for  all  components.   <tt>ConstantPool</tt>
-    objects contain  an array of fixed size  of <tt>Constant</tt> entries,
-    which may be retrieved via the <tt>getConstant()</tt> method taking an
-    integer  index as argument.  Indexes to  the constant pool may be  contained in
-    instructions as well as in other components of a class file and in constant pool 
+    The constant pool serves as some kind of central repository and is
+    thus of outstanding importance for all components.
+    <tt>ConstantPool</tt> objects contain an array of fixed size of
+    <tt>Constant</tt> entries, which may be retrieved via the
+    <tt>getConstant()</tt> method taking an integer index as argument.
+    Indexes to the constant pool may be contained in instructions as
+    well as in other components of a class file and in constant pool
     entries themselves.
   </p>
   
   <p>
-    Methods and  fields contain  a signature, symbolically  defining their
-    types.   Access  flags  like  <tt>public static  final</tt>  occur  in
-    several  places  and  are  encoded   by  an  integer  bit  mask,  e.g.
+    Methods and fields contain a signature, symbolically defining
+    their types.  Access flags like <tt>public static final</tt> occur
+    in several places and are encoded by an integer bit mask, e.g.,
     <tt>public static final</tt> matches to the Java expression
   </p>
 
 
-  <source>
-  int access_flags = ACC_PUBLIC | ACC_STATIC | ACC_FINAL;
-  </source>
+  <source>int access_flags = ACC_PUBLIC | ACC_STATIC | ACC_FINAL;</source>
 
   <p>
-    As mentioned in section <a href="#sec:format">2.1</a> already, several components
-    may contain <em>attribute</em> objects: classes, fields, methods, and
-    <tt>Code</tt> objects (introduced in section <a href="#sec:code2">2.3</a>).  The
+    As mentioned in <a href="#2.1 Java class file format">section
+    2.1</a> already, several components may contain <em>attribute</em>
+    objects: classes, fields, methods, and <tt>Code</tt> objects
+    (introduced in <a href="#2.3 Method code">section 2.3</a>).  The
     latter is an attribute itself that contains the actual byte code
-    array, the maximum stack size, the number of local variables, a table
-    of handled exceptions, and some optional debugging information coded
-    as <tt>LineNumberTable</tt> and <tt>LocalVariableTable</tt>
-    attributes. Attributes are in general specific to some data structure,
-    i.e. no two components share the same kind of attribute, though this
-    is not explicitly forbidden. In the figure the <tt>Attribute</tt>
-    classes are marked with the component they belong to.
+    array, the maximum stack size, the number of local variables, a
+    table of handled exceptions, and some optional debugging
+    information coded as <tt>LineNumberTable</tt> and
+    <tt>LocalVariableTable</tt> attributes. Attributes are in general
+    specific to some data structure, i.e., no two components share the
+    same kind of attribute, though this is not explicitly
+    forbidden. In the figure the <tt>Attribute</tt> classes are stereotyped
+    with the component they belong to.
   </p>
 
   </section>
@@ -656,9 +676,7 @@
     a <tt>JavaClass</tt> object is quite simple:
   </p>
 
-  <source>
-  JavaClass clazz = Repository.lookupClass("java.lang.String");
-  </source>
+  <source>JavaClass clazz = Repository.lookupClass("java.lang.String");</source>
 
   <p>
     The repository also contains methods providing the dynamic equivalent
@@ -668,19 +686,18 @@
   <source>
   if(Repository.instanceOf(clazz, super_class) {
     ...
-  }
-  </source>
+  }</source>
 
   </section>
   
   <section name="3.2.1 Accessing class file data">
 
   <p>
-    Information within the class file components may be accessed like Java
-    Beans via intuitive set/get methods.  All of them also define a
-    <tt>toString()</tt> method so that implementing a simple class viewer
-    is very easy. In fact all of the examples used here have been produced
-    this way:
+    Information within the class file components may be accessed like
+    Java Beans via intuitive set/get methods. All of them also define
+    a <tt>toString()</tt> method so that implementing a simple class
+    viewer is very easy. In fact all of the examples used here have
+    been produced this way:
   </p>
 
   <source>
@@ -702,32 +719,35 @@
 
   <section name="3.2.2 Analyzing class data">
   <p>
-    Last but not least, <font face="helvetica">BCEL </font>supports the <em>Visitor</em> design
-    pattern [],  so one can write visitor  objects to traverse
-    and analyze the contents of a class file. Included in the distribution
-    is a  class <tt>JasminVisitor</tt> that converts class  files into the
-    Jasmin assembler language [].
+    Last but not least, <font face="helvetica,arial">BCEL</font>
+    supports the <em>Visitor</em> design pattern, so one can write
+    visitor objects to traverse and analyze the contents of a class
+    file. Included in the distribution is a class
+    <tt>JasminVisitor</tt> that converts class files into the <a
+    href="http://mrl.nyu.edu/~meyer/jasmin/">Jasmin</a>
+    assembler language.
   </p>
 
   </section>
 
   <section name="3.3 ClassGen">
   <p>
-    This part of the API (package ) supplies
-    an abstraction level for creating or transforming class files
-    dynamically.  It makes the static constraints of Java class files like
-    the hard-coded byte code addresses generic.  The generic constant pool, for
-    example, is implemented by the class <tt>ConstantPoolGen</tt> which
-    offers methods for adding different types of constants.  Accordingly,
-    <tt>ClassGen</tt> offers an interface to add methods, fields, and
-    attributes.  Figure  gives an overview of this part of
-    the API.
+    This part of the API (package <tt>org.apache.bcel.generic</tt>)
+    supplies an abstraction level for creating or transforming class
+    files dynamically. It makes the static constraints of Java class
+    files like the hard-coded byte code addresses "generic". The
+    generic constant pool, for example, is implemented by the class
+    <tt>ConstantPoolGen</tt> which offers methods for adding different
+    types of constants. Accordingly, <tt>ClassGen</tt> offers an
+    interface to add methods, fields, and attributes.
+     <a href="#Figure 4">Figure 4</a> gives an overview of this part of the API.
   </p>
 
-  <p>
-    <a href="images/classgen.gif">Figure</a>
+  <p align="center">
+    <a name="Figure 4">
+    <img src="images/classgen.gif"/>
     <br/>
-    Figure 4: UML diagram of the ClassGen API
+    Figure 4: UML diagram of the ClassGen API</a>
   </p>
 
   </section>
@@ -735,14 +755,15 @@
   <section name="3.3.1 Types">
   <p>
     We abstract from the concrete details of the type signature syntax
-    (see <a href="#sec:types">2.5</a>) by introducing the <tt>Type</tt> class, which is
-    used, for example, by methods to define their return and argument
-    types.  Concrete sub-classes are <tt>BasicType</tt>,
-    <tt>ObjectType</tt>, and <tt>ArrayType</tt> which consists of the
-    element type and the number of dimensions. For commonly used types the
-    class offers some predefined constants.  For example the method
-    signature of the <tt>main</tt> method as shown in section
-    <a href="#sec:types">2.5</a> is represented by:
+    (see <a href="#2.5 Type information">2.5</a>) by introducing the
+    <tt>Type</tt> class, which is used, for example, by methods to
+    define their return and argument types. Concrete sub-classes are
+    <tt>BasicType</tt>, <tt>ObjectType</tt>, and <tt>ArrayType</tt>
+    which consists of the element type and the number of
+    dimensions. For commonly used types the class offers some
+    predefined constants. For example, the method signature of the
+    <tt>main</tt> method as shown in 
+    <a href="#2.5 Type information">section 2.5</a> is represented by:
   </p>
 
   <source>
@@ -752,38 +773,39 @@
 
   <p>
     <tt>Type</tt> also contains methods to convert types into textual
-    signatures and vice versa. The sub-classes contain implementations of
-    the routines and constraints specified by the Java Language
-    Specification [].
+    signatures and vice versa. The sub-classes contain implementations
+    of the routines and constraints specified by the Java Language
+    Specification.
   </p>
-
   </section>
 
   <section name="3.3.2 Generic fields and methods">
   <p>
-    Fields  are represented  by  <tt>FieldGen</tt> objects,  which may  be
-    freely  modified  by  the  user.   If  they  have  the  access  rights
-    <tt>static final</tt>, i.e. are constants  and of basic type, they may
-    optionally have an initializing value.
+    Fields are represented by <tt>FieldGen</tt> objects, which may be
+    freely modified by the user. If they have the access rights
+    <tt>static final</tt>, i.e., are constants and of basic type, they
+    may optionally have an initializing value.
   </p>
   
   <p>
-    Generic  methods contain  methods  to add  exceptions  the method  may
-    throw,  local variables, and  exception handlers.  The latter  two are
-    represented by  user-configurable objects as  well.  Because exception
-    handlers  and   local  variables  contain  references   to  byte  code
-    addresses, they  also take the role of  an <em>instruction targeter</em>
-    in   our  terminology.    Instruction  targeters   contain   a  method
-    <tt>updateTarget()</tt>    to   redirect    a    reference.    Generic
-    (non-abstract) methods refer  to <em>instruction lists</em> that consist
-    of  instruction  objects.   References  to  byte  code  addresses  are
-    implemented by  handles to instruction  objects. This is  explained in
-    more detail in the following sections.
+    Generic methods contain methods to add exceptions the method may
+    throw, local variables, and exception handlers. The latter two are
+    represented by user-configurable objects as well. Because
+    exception handlers and local variables contain references to byte
+    code addresses, they also take the role of an <em>instruction
+    targeter</em> in our terminology. Instruction targeters contain a
+    method <tt>updateTarget()</tt> to redirect a reference. This is
+    somewhat related to the Observer design pattern. Generic
+    (non-abstract) methods refer to <em>instruction lists</em> that
+    consist of instruction objects. References to byte code addresses
+    are implemented by handles to instruction objects. If the list is
+    updated the instruction targeters will be informed about it. This
+    is explained in more detail in the following sections.
   </p>
   
   <p>
-    The maximum stack size needed by the method and the maximum number of
-    local variables used may be set manually or computed via the
+    The maximum stack size needed by the method and the maximum number
+    of local variables used may be set manually or computed via the
     <tt>setMaxStack()</tt> and <tt>setMaxLocals()</tt> methods
     automatically.
   </p>
@@ -792,57 +814,59 @@
 
   <section name="3.3.3 Instructions">
   <p>
-    Modeling instructions as objects may look somewhat odd at first sight,
-    but in fact enables programmers to obtain a high-level view upon
-    control flow without handling details like concrete byte code offsets.
-    Instructions consist of a tag, i.e. an opcode, their length in bytes
-    and an offset (or index) within the byte code. Since many instructions
-    are immutable, the <tt>InstructionConstants</tt> interface offers
-    shareable predefined ``fly-weight'' constants to use.
+    Modeling instructions as objects may look somewhat odd at first
+    sight, but in fact enables programmers to obtain a high-level view
+    upon control flow without handling details like concrete byte code
+    offsets.  Instructions consist of an opcode (sometimes called
+    tag), their length in bytes and an offset (or index) within the
+    byte code. Since many instructions are immutable (stack operators,
+    e.g.), the <tt>InstructionConstants</tt> interface offers
+    shareable predefined "fly-weight" constants to use.
   </p>
   
   <p>
     Instructions are grouped via sub-classing, the type hierarchy of
-    instruction classes is illustrated by (incomplete) figure
-     in the appendix.  The most important family of
-    instructions are the <em>branch instructions</em>, e.g.  <tt>goto</tt>,
-    that branch to targets somewhere within the byte code.  Obviously,
-    this makes them candidates for playing an <tt>InstructionTargeter</tt>
-    role, too. Instructions are further grouped by the interfaces they
+    instruction classes is illustrated by (incomplete) figure in the
+    appendix. The most important family of instructions are the
+    <em>branch instructions</em>, e.g., <tt>goto</tt>, that branch to
+    targets somewhere within the byte code. Obviously, this makes them
+    candidates for playing an <tt>InstructionTargeter</tt> role,
+    too. Instructions are further grouped by the interfaces they
     implement, there are, e.g., <tt>TypedInstruction</tt>s that are
     associated with a specific type like <tt>ldc</tt>, or
-    <tt>ExceptionThrower</tt> instructions that may raise exceptions when
-    executed.
+    <tt>ExceptionThrower</tt> instructions that may raise exceptions
+    when executed.
   </p>
   
   <p>
-    All instructions can be traversed via <tt>accept(Visitor v)</tt> methods,
-    i.e., the Visitor design pattern. There is however some special trick
-    in these methods that allows to merge the handling of certain
-    instruction groups. The <tt>accept()</tt> do not only call the
-    corresponding <tt>visit()</tt> method, but call <tt>visit()</tt>
-    methods of their respective super classes and implemented interfaces
-    first, i.e. the most specific <tt>visit()</tt> call is last. Thus one
-    can group the handling of, say, all <tt>BranchInstruction</tt>s into
-    one single method.
+    All instructions can be traversed via <tt>accept(Visitor v)</tt>
+    methods, i.e., the Visitor design pattern. There is however some
+    special trick in these methods that allows to merge the handling
+    of certain instruction groups. The <tt>accept()</tt> do not only
+    call the corresponding <tt>visit()</tt> method, but call
+    <tt>visit()</tt> methods of their respective super classes and
+    implemented interfaces first, i.e., the most specific
+    <tt>visit()</tt> call is last. Thus one can group the handling of,
+    say, all <tt>BranchInstruction</tt>s into one single method.
   </p>
   
   <p>
-    For debugging purposes  it may even make sense  to ``invent'' your own
-    instructions. In a sophisticated code generator like the one used as a
-    backend of  the Barat framework  [] one often has  to insert
-    temporary  <tt>nop</tt> (No  operation) instructions.   When examining
-    the produced  code it may  be very difficult  to track back  where the
-    <tt>nop</tt>  was actually  inserted.  One  could think  of  a derived
-    <tt>nop2</tt>   instruction   that   contains   additional   debugging
-    information. When  the instruction  list is dumped  to byte  code, the
+    For debugging purposes it may even make sense to "invent" your own
+    instructions. In a sophisticated code generator like the one used
+    as a backend of the <a href="http://barat.sourceforge.net">Barat
+    framework</a> for static analysis one often has to insert
+    temporary <tt>nop</tt> (No operation) instructions. When examining
+    the produced code it may be very difficult to track back where the
+    <tt>nop</tt> was actually inserted. One could think of a derived
+    <tt>nop2</tt> instruction that contains additional debugging
+    information. When the instruction list is dumped to byte code, the
     extra data is simply dropped.
   </p>
   
   <p>
-    One  could also  think  of  new byte  code  instructions operating  on
-    complex numbers that  are replaced by normal byte  code upon load-time
-    or are recognized by a new JVM.
+    One could also think of new byte code instructions operating on
+    complex numbers that are replaced by normal byte code upon
+    load-time or are recognized by a new JVM.
   </p>
   
   </section>
@@ -853,23 +877,24 @@
     <em>instruction handles</em> encapsulating instruction objects.
     References to instructions in the list are thus not implemented by
     direct pointers to instructions but by pointers to instruction
-    <em>handles</em>. This makes appending, inserting and deleting areas of
-    code very simple. Since we use symbolic references, computation of
-    concrete byte code offsets does not need to occur until finalization,
-    i.e.  until the user has finished the process of generating or
-    transforming code.  We will use the term instruction handle and
-    instruction synonymously throughout the rest of the paper.
-    Instruction handles may contain additional user-defined data using the
-    <tt>addAttribute()</tt> method.
+    <em>handles</em>. This makes appending, inserting and deleting
+    areas of code very simple and also allows us to reuse immutable
+    instruction objects (fly-weight objects). Since we use symbolic
+    references, computation of concrete byte code offsets does not
+    need to occur until finalization, i.e., until the user has
+    finished the process of generating or transforming code. We will
+    use the term instruction handle and instruction synonymously
+    throughout the rest of the paper. Instruction handles may contain
+    additional user-defined data using the <tt>addAttribute()</tt>
+    method.
   </p>
   
   <p>
-    <b>Appending</b>
-    One can append instructions or  other instruction lists anywhere to an
-    existing  list.   The  instructions   are  appended  after  the  given
-    instruction  handle.   All append  methods  return  a new  instruction
-    handle which may  then be used as the target  of a branch instruction,
-    e.g..
+    <b>Appending:</b> One can append instructions or other instruction
+    lists anywhere to an existing list. The instructions are appended
+    after the given instruction handle. All append methods return a
+    new instruction handle which may then be used as the target of a
+    branch instruction, e.g.:
   </p>
 
   <source>
@@ -878,16 +903,17 @@
   GOTO g = new GOTO(null);
   il.append(g);
   ...
+  // Use immutable fly-weight object
   InstructionHandle ih = il.append(InstructionConstants.ACONST_NULL);
   g.setTarget(ih);
   </source>
 
   <p>
-    <b>Inserting</b>
-    Instructions may be  inserted anywhere into an existing  list.  They are
-    inserted  before the  given  instruction handle.   All insert  methods
-    return a  new instruction handle which  may then be used  as the start
-    address of an exception handler, for example.
+    <b>Inserting:</b> Instructions may be inserted anywhere into an
+    existing list. They are inserted before the given instruction
+    handle. All insert methods return a new instruction handle which
+    may then be used as the start address of an exception handler, for
+    example.
   </p>
 
   <source>
@@ -898,16 +924,16 @@
   </source>
 
   <p>
-    <b>Deleting</b>
-    Deletion of instructions is also very straightforward; all instruction
-    handles and the contained instructions within a given range are
-    removed from the instruction list and disposed.  The <tt>delete()</tt>
-    method may however throw a <tt>TargetLostException</tt> when there are
-    instruction targeters still referencing one of the deleted
-    instructions.  The user is forced to handle such exceptions in a
-    <tt>try-catch</tt> block and redirect these references elsewhere. The
-    <em>peep hole</em> optimizer described in section  gives a
-    detailed example for this.
+    <b>Deleting:</b> Deletion of instructions is also very
+    straightforward; all instruction handles and the contained
+    instructions within a given range are removed from the instruction
+    list and disposed. The <tt>delete()</tt> method may however throw
+    a <tt>TargetLostException</tt> when there are instruction
+    targeters still referencing one of the deleted instructions. The
+    user is forced to handle such exceptions in a <tt>try-catch</tt>
+    clause and redirect these references elsewhere. The <em>peep
+    hole</em> optimizer described in the appendix gives a detailed
+    example for this.
   </p>
 
   <source>
@@ -924,13 +950,13 @@
   </source>
 
   <p>
-    <b>Finalizing</b>
-    When the instruction list is ready to be dumped to pure byte code, all
-    symbolic references must be mapped to real byte code offsets.  This is
-    done by the <tt>getByteCode()</tt> method which is called by default
-    by <tt>MethodGen.getMethod()</tt>. Afterwards you should call
+    <b>Finalizing:</b> When the instruction list is ready to be dumped
+    to pure byte code, all symbolic references must be mapped to real
+    byte code offsets. This is done by the <tt>getByteCode()</tt>
+    method which is called by default by
+    <tt>MethodGen.getMethod()</tt>. Afterwards you should call
     <tt>dispose()</tt> so that the instruction handles can be reused
-    internally. This helps to reduce memory usage.
+    internally. This helps to improve memory usage.
   </p>
   
   <source>
@@ -953,78 +979,91 @@
 
   <section name="3.3.5 Code example revisited">
   <p>
-    Using  instruction lists gives  us a  generic view  upon the  code: In
-    Figure     we  again  present   the  code  chunk   of  the
-    <tt>readInt()</tt>   method  of   the  faculty   example   in  section
-    <a href="#sec:fac">2.6</a>:  The local  variables <tt>n</tt>  and  <tt>e1</tt> both
-    hold two references to  instructions, defining their scope.  There are
-    two <tt>goto</tt>s branching  to the <tt>iload</tt> at the  end of the
-    method. One of the exception handlers is displayed, too: it references
-    the start and the end of the <tt>try</tt> block and also the exception
+    Using instruction lists gives us a generic view upon the code: In
+    <a href="#Figure 5">Figure 5</a> we again present the code chunk
+    of the <tt>readInt()</tt> method of the faculty example in section
+    <a href="#2.6 Code example">2.6</a>: The local variables
+    <tt>n</tt> and <tt>e1</tt> both hold two references to
+    instructions, defining their scope.  There are two <tt>goto</tt>s
+    branching to the <tt>iload</tt> at the end of the method. One of
+    the exception handlers is displayed, too: it references the start
+    and the end of the <tt>try</tt> block and also the exception
     handler code.
   </p>
   
-  <p>
-    <a href="images/il.gif">Figure</a>
+  <p align="center">
+    <a name="Figure 5">
+    <img src="images/il.gif"/>
     <br/>
-    Figure 5: Instruction list for <tt>readInt()</tt> method
+    Figure 5: Instruction list for <tt>readInt()</tt> method</a>
   </p>
   
   </section>
   
   <section name="3.3.6 Instruction factories">
   <p>
-    To simplify the creation of certain instructions the user can use the
-    supplied <tt>InstructionFactory</tt> class which offers a lot of
-    useful methods to create instructions from scratch. Alternatively, he
-    can also use <em>compound instructions</em>: When producing byte code,
-    some patterns typically occur very frequently, for instance the
-    compilation of arithmetic or comparison expressions.  You certainly do
-    not want to rewrite the code that translates such expressions into
-    byte code in every place they may appear. In order to support this,
-    the <font face="helvetica">BCEL </font>API includes a <em>compound instruction</em> (an interface with
-    a single <tt>getInstructionList()</tt> method).  Instances of this
-    class may be used in any place where normal instructions would occur,
+    To simplify the creation of certain instructions the user can use
+    the supplied <tt>InstructionFactory</tt> class which offers a lot
+    of useful methods to create instructions from
+    scratch. Alternatively, he can also use <em>compound
+    instructions</em>: When producing byte code, some patterns
+    typically occur very frequently, for instance the compilation of
+    arithmetic or comparison expressions. You certainly do not want
+    to rewrite the code that translates such expressions into byte
+    code in every place they may appear. In order to support this, the
+    <font face="helvetica,arial">BCEL</font> API includes a <em>compound
+    instruction</em> (an interface with a single
+    <tt>getInstructionList()</tt> method). Instances of this class
+    may be used in any place where normal instructions would occur,
     particularly in append operations.
   </p>
 
   <p>
-    <b>Example: Pushing constants</b>
-    Pushing constants  onto the  operand stack may  be coded  in different
-    ways.  As   explained  in   section  <a href="#sec:code">2.2</a>  there   are  some
-    ``short-cut'' instructions that can be  used to make the produced byte
-    code  more  compact.  The   smallest  instruction  to  push  a  single
-    <tt>1</tt> onto  the stack is  <tt>iconst_1</tt>, other possibilities
-    are <tt>bipush</tt> (can be used to push values between -128 and 127),
-    <tt>sipush</tt>  (between  -32768 and  32767),  or <tt>ldc</tt>  (load
-    constant from constant pool).
+    <b>Example: Pushing constants</b> Pushing constants onto the
+    operand stack may be coded in different ways. As explained in <a
+    href="#2.2 Byte code instruction set">section 2.2</a> there are
+    some "short-cut" instructions that can be used to make the
+    produced byte code more compact. The smallest instruction to push
+    a single <tt>1</tt> onto the stack is <tt>iconst_1</tt>, other
+    possibilities are <tt>bipush</tt> (can be used to push values
+    between -128 and 127), <tt>sipush</tt> (between -32768 and 32767),
+    or <tt>ldc</tt> (load constant from constant pool).
   </p>
   
   <p>
-    Instead of repeatedly selecting  the most compact instruction in, say,
-    a switch, one can  use the compound <tt>PUSH</tt> instruction whenever
-    pushing a constant  number or string. It will  produce the appropriate
-    byte code instruction and insert entries into to constant pool if necessary.
+    Instead of repeatedly selecting the most compact instruction in,
+    say, a switch, one can use the compound <tt>PUSH</tt> instruction
+    whenever pushing a constant number or string. It will produce the
+    appropriate byte code instruction and insert entries into to
+    constant pool if necessary.
   </p>
 
   <source>
+  InstructionFactory f  = new InstructionFactory(class_gen);
+  InstructionList    il = new InstructionList();
+  ...
   il.append(new PUSH(cp, "Hello, world"));
   il.append(new PUSH(cp, 4711));
+  ...
+  il.append(f.createPrintln("Hello World"));
+  ...
+  il.append(f.createReturn(type));
   </source>
 
   </section>
       
   <section name="3.3.7 Code patterns using regular expressions">
   <p>
-    When  transforming  code, for  instance  during  optimization or  when
-    inserting analysis  method calls,  one typically searches  for certain
-    patterns  of  code to  perform  the  transformation  at.  To  simplify
-    handling such situations <font face="helvetica">BCEL </font>introduces a special feature: One can
-    search  for  given code  patterns  within  an  instruction list  using
-    <em>regular  expressions</em>.   In  such expressions,  instructions  are
-    represented by symbolic names, e.g.  "<tt>`IfInstruction'</tt>".  Meta
-    characters  like  <tt>+</tt>, <tt>*</tt>,  and  <tt>(..|..)</tt> have  their
-    usual meanings. Thus, the expression
+    When transforming code, for instance during optimization or when
+    inserting analysis method calls, one typically searches for
+    certain patterns of code to perform the transformation at.  To
+    simplify handling such situations <font face="helvetica,arial">BCEL
+    </font>introduces a special feature: One can search for given code
+    patterns within an instruction list using <em>regular
+    expressions</em>.  In such expressions, instructions are
+    represented by symbolic names, e.g.  "<tt>`IfInstruction'</tt>".
+    Meta characters like <tt>+</tt>, <tt>*</tt>, and <tt>(..|..)</tt>
+    have their usual meanings. Thus, the expression
   </p>
   
   <source>
