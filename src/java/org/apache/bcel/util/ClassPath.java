@@ -121,7 +121,12 @@ public class ClassPath {
     }
   }
 
-  private static final String getClassPath() {
+  /** Checks for class path components in the following properties:
+   * "java.class.path", "sun.boot.class.path", "java.ext.dirs"
+   *
+   * @return class path as used by default by BCEL
+   */
+  public static final String getClassPath() {
     String class_path = System.getProperty("java.class.path");
     String boot_path  = System.getProperty("sun.boot.class.path");
     String ext_path   = System.getProperty("java.ext.dirs");
