@@ -72,10 +72,11 @@ import org.apache.bcel.classfile.*;
  * method. "Normal" classes class can be modified by overriding the
  * modifyClass() method which is called just before defineClass().</p>
  *
- * <p>There may be a number of packages where you have to use the default
- * class loader (which may also be faster). You can define the set of packages
- * where to use the system class loader in the constructor. The default value contains
- * "java.", "sun.", "javax."</p>
+ * <p>There may be a number of packages where you have to use the
+ * default class loader (which may also be faster). You can define the
+ * set of packages where to use the system class loader in the
+ * constructor. The default value contains "java.", "sun.",
+ * "javax."</p>
  *
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
@@ -83,16 +84,25 @@ import org.apache.bcel.classfile.*;
  * @see ClassPath
  */
 public class ClassLoader extends java.lang.ClassLoader {
-  private Hashtable classes = new Hashtable(); // Hashtable is synchronized thus thread-safe
-  private String[] ignored_packages = {
+  public static final String[] DEFAULT_IGNORED_PACKAGES = {
     "java.", "javax.", "sun."
   };
+
+  private Hashtable classes = new Hashtable(); // Hashtable is synchronized thus thread-safe
+  private String[] ignored_packages;
+
   private Repository repository = SyntheticRepository.getInstance();
   private java.lang.ClassLoader deferTo = ClassLoader.getSystemClassLoader();
 
+  /** Ignored packages are by default ( "java.", "sun.",
+   * "javax."), i.e. loaded by system class loader
+   */
   public ClassLoader() {
+    this(DEFAULT_IGNORED_PACKAGES);
   }
 
+  /** @param deferTo delegate class loader to use for ignored packages
+   */
   public ClassLoader(java.lang.ClassLoader deferTo) {
     this.deferTo = deferTo;
     this.repository = new ClassLoaderRepository(deferTo);
@@ -105,21 +115,14 @@ public class ClassLoader extends java.lang.ClassLoader {
     this.ignored_packages = ignored_packages;
   }
 
+  /** @param ignored_packages classes contained in these packages will be loaded
+   * with the system class loader
+   * @param deferTo delegate class loader to use for ignored packages
+   */
   public ClassLoader(java.lang.ClassLoader deferTo, String [] ignored_packages) {
+    this(ignored_packages);
     this.deferTo = deferTo;
     this.repository = new ClassLoaderRepository(deferTo);
-
-    addIgnoredPkgs(ignored_packages);
-  }
-
-  private void addIgnoredPkgs(String[] ignored_packages) {
-    String[] new_p = new String[ignored_packages.length + this.ignored_packages.length];
-	
-    System.arraycopy(this.ignored_packages, 0, new_p, 0, this.ignored_packages.length);
-    System.arraycopy(ignored_packages, 0, new_p, this.ignored_packages.length,
-		     ignored_packages.length);
-
-    this.ignored_packages = new_p;
   }
   
   protected Class loadClass(String class_name, boolean resolve) 
