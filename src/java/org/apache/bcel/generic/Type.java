@@ -291,6 +291,19 @@ public abstract class Type implements java.io.Serializable {
     }
   }
 
+  /**
+   * Convert runtime java.lang.Class[] to BCEL Type objects.
+   * @param classes an array of runtime class objects
+   * @return array of corresponding Type objects
+   */
+  public static Type[] getTypes(java.lang.Class[] classes){
+      Type[] ret = new Type[classes.length];
+      for (int i = 0; i < ret.length; i++) {
+          ret[i] = getType(classes[i]);
+      }
+      return ret;
+  }
+
   public static String getSignature(java.lang.reflect.Method meth) {
     StringBuffer sb = new StringBuffer("(");
     Class[] params = meth.getParameterTypes(); // avoid clone
