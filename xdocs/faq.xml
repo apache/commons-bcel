@@ -10,6 +10,14 @@
   <body>
 
   <section name="FAQ">
+    <p>
+      <b>Q: </b>How can I ... with BCEL?
+      <br/>
+      <b>A: </b>Take a look at
+      <tt>org.apache.bcel.util.BCELifier</tt>, it takes a given class
+      and converts it to a BCEL program (in Java, of course). It will
+      show you how certain code is generated using BCEL.
+    </p>
 
     <p>
       <b>Q: </b> Is the BCEL thread-safe?
@@ -19,6 +27,7 @@
       "Concurrent Programming in Java"</a>, by Doug Lea,
       for an excellent reference on how to build thread-safe wrappers.
     </p>
+
     <p>
       <b>Q: </b> Can I use BCEL in a commercial product?
       <br/>
