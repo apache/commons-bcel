@@ -61,16 +61,33 @@ import java.io.*;
 /**
  * The repository maintains informations about class interdependencies, e.g.,
  * whether a class is a sub-class of another. Delegates actual class loading
- * to SyntheticRepository.
+ * to SyntheticRepository with current class path by default.
+ *
+ * @see org.apache.bcel.util.Repository
+ * @see org.apache.bcel.util.SyntheticRepository
  *
  * @version $Id$
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class Repository {
-  private static org.apache.bcel.util.SyntheticRepository _repository =
+  private static org.apache.bcel.util.Repository _repository =
     SyntheticRepository.getInstance();
 
-  /** Lookup class somewhere found in your CLASSPATH.
+  /** @return currently used repository instance
+   */
+  public static org.apache.bcel.util.Repository getRepository() {
+    return _repository;
+  }
+
+  /** Set repository instance to be used for class loading
+   */
+  public static void setRepository(org.apache.bcel.util.Repository rep) {
+    _repository = rep;
+  }
+
+  /** Lookup class somewhere found on your CLASSPATH, or whereever the
+   * repository instance looks for it.
+   *
    * @return class object for given fully qualified class name, or null
    * if the class could not be found or parsed correctly
    */
@@ -135,12 +152,6 @@ public abstract class Repository {
   public static void removeClass(JavaClass clazz) {
     _repository.removeClass(clazz);
   }
-
-  /*
-  private static final JavaClass getSuperClass(JavaClass clazz) {
-    return clazz.getSuperClass();
-  }
-  */
 
   /**
    * @return list of super classes of clazz in ascending order, i.e.,
@@ -234,3 +245,4 @@ public abstract class Repository {
     return implementationOf(lookupClass(clazz), inter);
   }
 }
+
