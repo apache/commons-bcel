@@ -102,7 +102,7 @@ public class ClassLoader extends java.lang.ClassLoader {
    * with the system class loader
    */
   public ClassLoader(String[] ignored_packages) {
-    addIgnoredPkgs(ignored_packages);
+    this.ignored_packages = ignored_packages;
   }
 
   public ClassLoader(java.lang.ClassLoader deferTo, String [] ignored_packages) {
