@@ -99,8 +99,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
     cp = new ConstantPoolGen(); // Create empty constant pool
 
     // Put everything needed by default into the constant pool and the vectors
-    addAttribute(new SourceFile(cp.addUtf8("SourceFile"), 2,
-				cp.addUtf8(file_name), cp.getConstantPool()));
+    if(file_name != null)
+      addAttribute(new SourceFile(cp.addUtf8("SourceFile"), 2,
+				  cp.addUtf8(file_name), cp.getConstantPool()));
+
     class_name_index      = cp.addClass(class_name);
     superclass_name_index = cp.addClass(super_class_name);
 
