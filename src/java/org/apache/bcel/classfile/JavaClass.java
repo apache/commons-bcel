@@ -734,7 +734,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
    * is java.lang.Object
    */
   public JavaClass getSuperClass() {
-    if("java.lang.Object".equals(getSuperclassName())) {
+    if("java.lang.Object".equals(getClassName())) {
       return null;
     }
 
