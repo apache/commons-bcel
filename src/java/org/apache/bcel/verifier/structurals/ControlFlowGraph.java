@@ -350,16 +350,17 @@ public class ControlFlowGraph{
 				if (s==null){ //return empty; // RET in dead code. "empty" would be the correct answer, but we know something about the surrounding project...
 					throw new AssertionViolatedException("Asking for successors of a RET in dead code?!");
 				}
-//TODO: remove
-throw new AssertionViolatedException("DID YOU REALLY WANT TO ASK FOR RET'S SUCCS?");
-/*
+
+//TODO: remove. Only JustIce must not use it, but foreign users of the ControlFlowGraph
+//      will want it. Thanks Johannes Wust.
+//throw new AssertionViolatedException("DID YOU REALLY WANT TO ASK FOR RET'S SUCCS?");
+
 				InstructionHandle[] jsrs = s.getEnteringJsrInstructions();
 				InstructionHandle[] ret = new InstructionHandle[jsrs.length];
 				for (int i=0; i<jsrs.length; i++){
 					ret[i] = jsrs[i].getNext();
 				}
 				return ret;
-*/
 			}
 		
 			// Terminates method normally.
