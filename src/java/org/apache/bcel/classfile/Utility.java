@@ -702,7 +702,8 @@ public abstract class Utility {
       index = 1; // current string position
 
       while(signature.charAt(index) != ')') {
-	buf.append(signatureToString(signature.substring(index), chopit));
+	String param_type = signatureToString(signature.substring(index), chopit);
+	buf.append(param_type);
 
 	if(vars != null) {
 	  LocalVariable l = vars.getLocalVariable(var_index);
@@ -712,7 +713,11 @@ public abstract class Utility {
 	} else
 	  buf.append(" arg" + var_index);
 
-	var_index++;
+	if("double".equals(param_type) || "long".equals(param_type))
+	  var_index += 2;
+	else
+	  var_index++;
+
 	buf.append(", ");
 	index += consumed_chars; // update position
       }
