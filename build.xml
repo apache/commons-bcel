@@ -239,7 +239,7 @@ Available targets:
 
   <target 
     name="dist"
-    depends="jar,apidocs,xdocs">
+    depends="init,jar,apidocs,xdocs">
 
     <property name="distDir" value="${build.dir}/${final.name}"/>
 
@@ -261,6 +261,13 @@ Available targets:
     <copy todir="${distDir}">
       <fileset dir="${build.dir}">
         <include name="**/*.jar"/>
+      </fileset>
+    </copy>
+
+    <!-- Copy lib directory -->
+    <copy todir="${distDir}/lib">
+      <fileset dir="${lib.dir}">
+        <include name="*.jar"/>
       </fileset>
     </copy>
 
@@ -298,7 +305,7 @@ Available targets:
 
     <delete>
       <fileset dir="${distDir}">
-        <include name="**/*.jar"/>
+        <include name="**/bcel*.jar"/>
       </fileset>
     </delete>
     
@@ -306,7 +313,7 @@ Available targets:
     <copy todir="${distDir}" file="build.xml"/>
 
     <!-- Copy Source -->
-    <copy todir="${distDir}/src">
+    <copy todir="${distDir}/src/java">
       <fileset dir="${src.dir}">
         <include name="**/*.java"/>
       </fileset>
