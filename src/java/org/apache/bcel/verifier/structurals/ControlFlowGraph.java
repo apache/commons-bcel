@@ -408,7 +408,7 @@ throw new AssertionViolatedException("DID YOU REALLY WANT TO ASK FOR RET'S SUCCS
 
 	} // End Inner InstructionContextImpl Class.
 
-	/** The MethofGen object we're working on. */
+	/** The MethodGen object we're working on. */
 	private final MethodGen method_gen;
 
 	/** The Subroutines object for the method whose control flow is represented by this ControlFlowGraph. */
