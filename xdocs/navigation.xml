@@ -14,6 +14,11 @@
       <item name="FAQ" href="/faq.html"/>
     </menu>
 
+    <menu name="Distribution">
+      <item name="Source Code" href="http://jakarta.apache.org/site/sourceindex.cgi"/>
+      <item name="Binary Code" href="http://jakarta.apache.org/site/binindex.cgi"/>
+    </menu>
+
     <menu name="Get Involved">
       <item name="Projects" href="/projects.html"/>
     </menu>
