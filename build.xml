@@ -25,7 +25,6 @@ Available targets:
  - test<x>  -> Run example number x
  - test     -> Run all examples
  - mini     -> Run Mini compiler and test results
- - docs     -> Build documentation from TeX sources
  - apidocs  -> Build API documentation (javadoc) in "docs/api"
 -->
 
@@ -73,14 +72,6 @@ Available targets:
   <!-- Compile the examples -->
   <target name="examples" depends="compile">
     <javac srcdir="${examples.dir}" destdir="${build.dest}" classpath="${class.path}" />
-  </target>
-
-  <target name="docs" depends="init">
-    <exec dir="${docs.dir}" executable="latex"> <arg line="manual.tex"/> </exec>
-    <exec dir="${docs.dir}" executable="bibtex">  <arg line="manual"/> </exec>
-    <exec dir="${docs.dir}" executable="latex"> <arg line="manual.tex"/> </exec>
-    <exec dir="${docs.dir}" executable="latex"> <arg line="manual.tex"/> </exec>
-    <exec dir="${docs.dir}" executable="dvips"> <arg line="manual.dvi"/> </exec>
   </target>
 
   <!-- Creates the API documentation -->
