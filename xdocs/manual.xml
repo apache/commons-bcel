@@ -131,7 +131,7 @@
   </p>
   
   <p>
-  <img src="images/jvm.gif"/>
+  <a href="images/jvm.gif">Figure</a>
   <br/>
   Figure 1: Compilation and execution of Java classes
   </p>
@@ -179,7 +179,7 @@
   </p>
 
   <p>
-  <img src="images/classfile.gif"/>
+  <a href="images/classfile.gif">Figure</a>
   <br/>
   Figure 2: Java class file format
   </p>    
@@ -602,7 +602,7 @@
   </p>
   
   <p>
-  <img src="eps/javaclass.gif"/>
+  <a href="images/javaclass.gif">Figure</a>
   <br/>
   Figure 3: UML diagram for the <font face="helvetica">BCEL</font>API
   </p>
@@ -728,7 +728,7 @@
   </p>
 
   <p>
-    <img src="images/classgen.gif"/>
+    <a href="images/classgen.gif">Figure</a>
     <br/>
     Figure 4: UML diagram of the ClassGen API
   </p>
@@ -968,7 +968,7 @@
   </p>
   
   <p>
-    <img src="images/il.gif"/>
+    <a href="images/il.gif">Figure</a>
     <br/>
     Figure 5: Instruction list for <tt>readInt()</tt> method
   </p>
@@ -1152,7 +1152,7 @@
   </p>
   
   <p>
-    <img src="images/classloader.gif"/>
+    <a href="images/classloader.gif">Figure</a>
     <br/>
     Figure 7: Class loaders
   </p>
