@@ -12,7 +12,7 @@
   <inceptionYear>2002</inceptionYear>
   <package>org.apache.bcel</package>
 
-  <logo>bcel-logo.gif</logo>
+  <logo>/images/bcel-logo.gif</logo>
 
   <shortDescription>Bytecode Engineering Library</shortDescription>
 
@@ -39,8 +39,8 @@
     </mailingList>
     <mailingList>
       <name>BCEL Developer List</name>
-      <subscribe>mailto:bcel-dev-subscribe@jakarta.apache.org</subscribe>
-      <unsubscribe>mailto:bcel-dev-unsubscribe@jakarta.apache.org</unsubscribe>
+      <subscribe>bcel-dev-subscribe@jakarta.apache.org</subscribe>
+      <unsubscribe>bcel-dev-unsubscribe@jakarta.apache.org</unsubscribe>
       <archive>http://www.mail-archive.com/bcel-dev@jakarta.apache.org/</archive>
     </mailingList>
   </mailingLists>
