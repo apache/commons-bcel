@@ -68,6 +68,13 @@
       <organization>convergence</organization>
     </developer>
 
+    <developer>
+      <name>Dave Brosius</name>
+      <id>dbrosius</id>
+      <email>dbrosius@qis.net</email>
+      <organization></organization>
+    </developer>
+
   </developers>
 
   <dependencies>
