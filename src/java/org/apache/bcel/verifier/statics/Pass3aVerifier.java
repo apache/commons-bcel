@@ -464,10 +464,15 @@ public final class Pass3aVerifier extends PassVerifier{
 		public void visitLDC(LDC o){
 			indexValid(o, o.getIndex());
 			Constant c = cpg.getConstant(o.getIndex());
-			if (! ( (c instanceof ConstantInteger)	||
-							(c instanceof ConstantFloat) 		||
-							(c instanceof ConstantString) ) ){
-				constraintViolated(o, "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float or CONSTANT_String, but is '"+c+"'.");
+			if (c instanceof ConstantClass){
+			  addMessage("Operand of LDC or LDC_W is CONSTANT_Class '"+c+"' - this is only supported in JDK 1.5 and higher.");
+			}
+			else{
+			  if (! ( (c instanceof ConstantInteger)	||
+			          (c instanceof ConstantFloat) 		||
+                (c instanceof ConstantString) ) ){
+            constraintViolated(o, "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float or CONSTANT_String, but is '"+c+"'.");
+			  }
 			}
 		}
 
@@ -527,7 +532,7 @@ public final class Pass3aVerifier extends PassVerifier{
 				Type o_type = o.getType(cpg);
 								
 				// Argh. Sun's implementation allows us to have multiple fields of
-				// the same name but wirth a different signature.
+				// the same name but with a different signature.
 				//if (! f_type.equals(o_type)){
 				//	constraintViolated(o, "Referenced field '"+field_name+"' has type '"+f_type+"' instead of '"+o_type+"' as expected.");
 				//}
