@@ -23,15 +23,16 @@
       <b>Q: </b> Can I use BCEL in a commercial product?
       <br/>
       <b>A: </b> Yes, this is covered by the <a
-      href="LGPL.html">LGPL</a>, if you add a note about the original
+      href="license.html">Apache License</a>, if you add a note about the original
       author and where to find the sources, i.e., this URL.
     </p>
 
     <p>
-      <b>Q: </b> (Typically for users of SUN's XSLTC) I'm getting
+      <b>Q: </b> (Typically for users of  XSLTC) I'm getting
 
     <pre>
-    de.fub.bytecode.generic.ClassGenException: Branch target offset too large for short
+    ...
+    ClassGenException: Branch target offset too large for short
     </pre>
 
      when compiling large files.
@@ -40,17 +41,17 @@
       branch instruction like goto can not address offsets larger than
       a short integer, i.e. offsets >= 32767.<br/>
       The solution is to split the branch into in intermediate hops,
-      which the XSLTC obviously doesn't take care off. Blame SUN ;-)
+      which the XSLTC obviously doesn't take care off.
       (In fact you could replace gotos with the goto_w instruction,
       but this would help in the other cases).
     </p>
 
     <p>
-      <b>Q: Can I create or modify classes dynmically with BCEL?</b>
+      <b>Q: Can I create or modify classes dynamically with BCEL?</b>
       <br/>
       <b>A: Since 4.4.0 BCEL contains useful classes in the
-      de.fub.bytecode.util package, namely ClassLoader and
-      JavaWrapper. Take a look at the  ProxyCreator example.</b>
+      util package, namely <tt>ClassLoader</tt> and
+       <tt>JavaWrapper</tt>. Take a look at the <tt> ProxyCreator</tt> example.</b>
     </p>
     
     </section>
