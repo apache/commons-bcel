@@ -989,7 +989,7 @@ public final class Pass3aVerifier extends PassVerifier{
 				}
 			}
 			if (m == null){
-				constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature not found in class '"+jc.getClassName()+"'. The native verifier does allow the method to be declared in some superinterface, which the Java Virtual Machine Specification, Second Edition does not.");
+				constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'. The native verifier does allow the method to be declared in some superinterface, which the Java Virtual Machine Specification, Second Edition does not.");
 			}
 			if (jc.isClass()){
 				constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is a class, but not an interface as expected.");
@@ -1020,7 +1020,7 @@ public final class Pass3aVerifier extends PassVerifier{
 				}
 			}
 			if (m == null){
-				constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature not found in class '"+jc.getClassName()+"'. The native verifier does allow the method to be declared in some superclass or implemented interface, which the Java Virtual Machine Specification, Second Edition does not.");
+				constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'. The native verifier does allow the method to be declared in some superclass or implemented interface, which the Java Virtual Machine Specification, Second Edition does not.");
 			}
 			
 			JavaClass current = Repository.lookupClass(myOwner.getClassName());
@@ -1083,7 +1083,7 @@ public final class Pass3aVerifier extends PassVerifier{
 				}
 			}
 			if (m == null){
-				constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature not found in class '"+jc.getClassName()+"'. The native verifier possibly allows the method to be declared in some superclass or implemented interface, which the Java Virtual Machine Specification, Second Edition does not.");
+				constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg) +"' not found in class '"+jc.getClassName()+"'. The native verifier possibly allows the method to be declared in some superclass or implemented interface, which the Java Virtual Machine Specification, Second Edition does not.");
 			}
 			
 			if (! (m.isStatic())){ // implies it's not abstract, verified in pass 2.
@@ -1117,7 +1117,7 @@ public final class Pass3aVerifier extends PassVerifier{
 				}
 			}
 			if (m == null){
-				constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature not found in class '"+jc.getClassName()+"'. The native verifier does allow the method to be declared in some superclass or implemented interface, which the Java Virtual Machine Specification, Second Edition does not.");
+				constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'. The native verifier does allow the method to be declared in some superclass or implemented interface, which the Java Virtual Machine Specification, Second Edition does not.");
 			}
 			if (! (jc.isClass())){
 				constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is an interface, but not a class as expected.");
