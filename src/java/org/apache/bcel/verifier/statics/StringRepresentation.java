@@ -55,6 +55,7 @@ package org.apache.bcel.verifier.statics;
  */
 
 import org.apache.bcel.classfile.*;
+import org.apache.bcel.classfile.Deprecated; // use _this_ one!
 import org.apache.bcel.verifier.exc.*;
 
 /**

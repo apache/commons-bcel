@@ -63,7 +63,7 @@ import org.apache.bcel.classfile.JavaClass;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public final class ObjectType extends ReferenceType {
+public class ObjectType extends ReferenceType {
   private String class_name; // Class name of type
 
   /**

@@ -134,6 +134,9 @@ public class LDC extends CPInstruction
     case org.apache.bcel.Constants.CONSTANT_Integer:
 	return new Integer(((org.apache.bcel.classfile.ConstantInteger)c).getBytes());
 
+    case org.apache.bcel.Constants.CONSTANT_Class:
+	return (org.apache.bcel.classfile.ConstantClass) c;
+
     default: // Never reached
       throw new RuntimeException("Unknown or invalid constant type at " + index);
       }
@@ -144,6 +147,7 @@ public class LDC extends CPInstruction
     case org.apache.bcel.Constants.CONSTANT_String:  return Type.STRING;
     case org.apache.bcel.Constants.CONSTANT_Float:   return Type.FLOAT;
     case org.apache.bcel.Constants.CONSTANT_Integer: return Type.INT;
+    case org.apache.bcel.Constants.CONSTANT_Class:   return Type.CLASS;
     default: // Never reached
       throw new RuntimeException("Unknown or invalid constant type at " + index);
     }

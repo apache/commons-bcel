@@ -158,6 +158,10 @@
 
     <li><a HREF="http://jbackbrowse.sourceforge.net/">jBackBrowse</a>
     </li>
+
+    <li>
+      <a href="http://findbugs.sourceforge.net/">FindBugs</a> static analysis tool
+    </li>
   </ul>
 
   <H2>Related Projects</H2>

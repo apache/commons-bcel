@@ -82,6 +82,7 @@ public abstract class Type implements java.io.Serializable {
   public static final BasicType     FLOAT        = new BasicType(Constants.T_FLOAT);
   public static final BasicType     CHAR         = new BasicType(Constants.T_CHAR);
   public static final ObjectType    OBJECT       = new ObjectType("java.lang.Object");
+  public static final ObjectType    CLASS        = new ObjectType("java.lang.Class");
   public static final ObjectType    STRING       = new ObjectType("java.lang.String");
   public static final ObjectType    STRINGBUFFER = new ObjectType("java.lang.StringBuffer");
   public static final ObjectType    THROWABLE    = new ObjectType("java.lang.Throwable");

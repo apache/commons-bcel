@@ -60,6 +60,7 @@ import org.apache.bcel.classfile.*;
 import org.apache.bcel.classfile.DescendingVisitor; // Use _this_ one!
 import org.apache.bcel.classfile.EmptyVisitor; // Use _this_ one!
 import org.apache.bcel.classfile.Visitor; // Use _this_ one!
+import org.apache.bcel.classfile.Deprecated; // Use _this_ one!
 import org.apache.bcel.generic.*;
 import org.apache.bcel.verifier.*;
 import org.apache.bcel.verifier.exc.*;

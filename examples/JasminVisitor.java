@@ -1,3 +1,4 @@
+import org.apache.bcel.classfile.Deprecated;
 import org.apache.bcel.classfile.*;
 import org.apache.bcel.generic.*;
 import java.io.*;
