@@ -1,0 +1,10 @@
+-- Compute factorial
+
+FUN fac (n) = 	IF n == 0 THEN 1
+		ELSE n * fac(n - 1)
+		FI
+
+FUN main()  = 	LET
+		  n = READ()
+		IN
+		  WRITE(fac(n))

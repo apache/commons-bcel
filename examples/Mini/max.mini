@@ -1,0 +1,21 @@
+FUN max(a, b) = IF a > b THEN a ELSE b FI
+
+-- n anzahl schleifendurchlaeufe
+-- m bisheriges maximum
+FUN LOOP(n, m) = IF n > 0 THEN
+		 LET
+			x = READ()
+		 IN
+			LOOP(n - 1, max(m, x))
+		 ELSE
+			m
+		 FI
+
+FUN abs(n) = IF n > 0 THEN n ELSE -n FI
+
+FUN main() = 
+	LET a = READ()
+--	    b = READ()
+	IN
+	    --WRITE(max(a, b))
+	    WRITE(LOOP(abs(a), -47110815))

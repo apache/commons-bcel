@@ -1,0 +1,293 @@
+options {
+   MULTI=true;
+   NODE_SCOPE_HOOK=true; /* Call methods on entry/exit of node */
+}
+
+PARSER_BEGIN(MiniParser)
+package Mini;
+
+public class MiniParser {
+  private static Token expr_token;
+
+  final static void jjtreeOpenNodeScope(Node n) {}
+  final static void jjtreeCloseNodeScope(Node n) {((SimpleNode)n).closeNode();}
+}
+
+PARSER_END(MiniParser)
+
+SKIP : /* WHITE SPACE */
+{
+	" "
+|	"\t"
+|	"\n"
+|	"\r"
+|	"\f"
+}
+
+/* Single-line Comments
+ */
+MORE :
+{
+  "--" : SINGLE_LINE_COMMENT_STATE
+}
+
+<SINGLE_LINE_COMMENT_STATE> SPECIAL_TOKEN :
+{
+  <SINGLE_LINE_COMMENT: "\n" | "\r" | "\r\n" > : DEFAULT
+}
+
+<SINGLE_LINE_COMMENT_STATE> MORE :
+{
+  < ~[] >
+}
+
+/* A program consists of a number of function declarations with a
+ * distinguished function `main' that starts the program.
+ */
+void Program() : {}
+{
+	(FunDecl())*
+	<EOF>
+}
+
+/* "FUN" Ident() "(" NameList() ")" = Expr()
+ */
+void FunDecl() :
+{
+  String   s;
+  Token    t;
+}
+{
+	t = "FUN"  { jjtThis.setPosition(t.beginLine, t.beginColumn); }
+
+	Ident()
+
+	<LPAREN> 
+	[
+	 Ident() (<COMMA> Ident())*
+	]
+	<RPAREN>
+
+	<ASSIGN>
+
+	Expr() /* Body expression */
+}
+
+void Expr() :
+{
+  int kind=-1;
+  int un_op=-1;
+}
+{
+  	IfExpr()
+|
+	LetExpr()
+|
+	Term() [kind = AddOp() Expr() { jjtThis.setKind(kind); }] 
+|
+	un_op = UnOp() { jjtThis.setUnOp(un_op); } Expr() 
+}
+
+/*
+ * The disambiguating algorithm of JavaCC automatically binds dangling
+ * else's to the innermost if statement. The LOOKAHEAD specification
+ * is to tell JavaCC that we know what we are doing.
+ */
+void IfExpr() :
+{
+  Token t=null;
+}
+{
+	t = "IF"  { jjtThis.setPosition(t.beginLine, t.beginColumn); }
+	Expr() "THEN" Expr() [ LOOKAHEAD(1) "ELSE" Expr() ] "FI"
+}
+
+void LetExpr() :
+{
+  Token t=null;
+}
+{
+	t = "LET" { jjtThis.setPosition(t.beginLine, t.beginColumn); }
+	(Ident() <ASSIGN> Expr())+ "IN" Expr()
+}
+
+Token FunAppl() :
+{
+  Token t=null;
+}
+{
+	t = Ident() { jjtThis.setPosition(t.beginLine, t.beginColumn); }
+	<LPAREN>
+	[Expr() (<COMMA> Expr())*] <RPAREN>
+	{ return t; }
+  
+}
+
+void Term():
+{
+  int kind=-1;
+}
+{
+	Factor() [kind = MultOp() { jjtThis.setKind(kind); } Term()]
+	{ jjtThis.setPosition(expr_token.beginLine, expr_token.beginColumn); }
+}
+
+void Factor() :
+{
+  int kind=-1;
+}
+{
+	Element() [kind = CmpOp() { jjtThis.setKind(kind); } Factor()]
+	{ jjtThis.setPosition(expr_token.beginLine, expr_token.beginColumn); }
+}
+
+void Element() #void : {}
+{
+/* expr_token is a global variable used to remember the position of an Expr() node 
+*/
+  LOOKAHEAD(2)
+	expr_token = FunAppl()
+|
+	expr_token = Ident()
+|
+	expr_token = Integer()
+|
+	expr_token = <LPAREN> Expr() <RPAREN>
+}
+
+Token Integer() : 
+{
+  int num;
+  Token t; // Contains lexem and line/column number
+}
+{
+	t = <INTEGER>
+	{ 
+          jjtThis.setValue(Integer.parseInt(t.image));
+          jjtThis.setPosition(t.beginLine, t.beginColumn);
+	  return t;
+  	}
+}
+
+Token Ident() : 
+{
+  String name;
+  Token t; // Contains lexem and line/column number
+}
+{
+	(t = <TRUE> | t = <FALSE> | t = <READ> | t = <WRITE> | 
+	 t = <IDENT>)
+	{ 
+	  jjtThis.setName(t.image);
+	  jjtThis.setPosition(t.beginLine, t.beginColumn);
+	  return t;
+	}
+}
+
+int AddOp() #void :
+{
+  Token t=null;
+}
+{
+	(t = <PLUS> | t = <MINUS> | t = <OR>)
+  {
+    return t.kind;
+  }
+}
+
+int MultOp() #void :
+{
+  Token t=null;
+}
+{
+	(t = <MULT> | t = <DIV> | t = <MOD> | t = <AND>)
+  {
+    return t.kind;
+  }
+}
+
+int CmpOp() #void :
+{
+  Token t=null;
+}
+{
+	(t = <EQ> | t = <NEQ> | t = <LEQ> | t = <GEQ> | t = <GT> | t = <LT>)
+  {
+    return t.kind;
+  }
+}
+
+int UnOp() #void :
+{
+  Token t=null;
+}
+{
+	(t = <MINUS> | t = <NOT>)
+  {
+    return t.kind;
+  }
+}
+
+
+TOKEN : /* Boolean and arithmetic operands */
+{
+	< GT  : ">" >
+|
+	< LT  : "<" >
+|
+	< GEQ : ">=" >
+|
+	< LEQ : "<=" >
+|
+	< EQ  : "==" >
+|
+	< NEQ : "!=" >
+|
+	< NOT : "!" >
+|
+	< FALSE : "FALSE" >
+|
+	< TRUE : "TRUE" >
+|
+	< AND : "AND" >
+|
+	< OR : "OR" >
+|
+	< PLUS : "+">
+|
+	< MINUS : "-">
+|
+	< MULT : "*">
+|
+	< MOD : "%">
+|
+	< DIV : "/">
+|
+	< LPAREN : "(">
+|
+	< RPAREN : ")">
+|
+	< ASSIGN : "=">
+|
+	< COMMA : ",">
+|
+	< READ : "READ">
+|
+	< WRITE : "WRITE">
+}
+
+/* Has to be and the, otherwise every string wil become an <IDENT> token
+ * Who knows why ...
+ */
+TOKEN : /* LITERALS */
+{
+	< #DIGIT:   ["0"-"9"] >
+|
+	< #LETTER:  ["a"-"z", "A"-"Z"] >
+|
+	< IDENT:    <LETTER> (<LETTER> | <DIGIT> | "_")* >
+|
+	< INTEGER:  (<DIGIT>)+ >
+|
+	< STRING:   "\"" (~["\"", "\n", "\r"])* "\""  >
+}

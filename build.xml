@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+
+<!--
+   Build file for BCEL
+   $Id$
+
+Notes:
+   This is a build file for use with the Jakarta Ant build tool.
+
+Prerequisites:
+
+   jakarta-ant from http://jakarta.apache.org/ant/index.html
+
+Build Instructions:
+   To build, run
+
+   ant <target>
+
+   in the directory where this file is located with the target you want.
+
+Available targets:
+
+ - compile  -> compile source classes and places result in "classes" directory
+ - jar      -> Create file "lib/bcel.jar"
+ - test<x>  -> Run example number x
+ - test     -> Run all examples
+ - mini     -> Run Mini compiler and test results
+ - docs     -> Build documentation from TeX sources
+ - apidocs  -> Build API documentation (javadoc) in "docs/api"
+-->
+
+<project default="jar" basedir=".">
+  <target name="init">
+    <property name="name"         value="bcel"/>
+    <property name="packages"     value="org.apache.bcel.*"/>
+    <property name="src.dir"      value="${basedir}/src/java"/>
+    <property name="build.dir"    value="${basedir}/bin"/>
+    <property name="examples.dir" value="${basedir}/examples"/>
+    <property name="mini.dir"     value="${examples.dir}/Mini"/>
+    <property name="docs.dir"     value="${basedir}/docs"/>
+    <property name="apidocs.dir"  value="${docs.dir}/api"/>
+    <property name="build.dest"   value="${build.dir}/classes"/>
+    <property name="lib.dir"      value="${basedir}/lib"/>
+    <property name="class.path"   value="${lib.dir}/Regex.jar:${build.dir}"/>
+
+    <!-- Use jikes compiler, if you don't have it comment out the next lines -->
+    <!-- property name="build.compiler.emacs" value="true"/ -->
+    <!-- property name="build.compiler" value="jikes"/ -->
+  </target>
+
+  <!-- Compile the sources -->
+  <target name="compile" depends="init">
+    <mkdir dir="${build.dest}"/>
+    <javac srcdir="${src.dir}" destdir="${build.dest}" classpath="${class.path}" debug="true"/>
+  </target>
+
+  <!-- Jar the library -->
+  <target name="jar" depends="compile">
+    <jar jarfile="${build.dir}/${name}.jar" 
+         basedir="${build.dest}"
+	 includes="org/**"
+    />
+  </target>
+
+  <!-- Compile the examples -->
+  <target name="examples" depends="compile">
+    <javac srcdir="${examples.dir}" destdir="${build.dir}" classpath="${class.path}" />
+  </target>
+
+  <target name="docs" depends="init">
+    <exec dir="${docs.dir}" executable="latex"> <arg line="manual.tex"/> </exec>
+    <exec dir="${docs.dir}" executable="bibtex">  <arg line="manual"/> </exec>
+    <exec dir="${docs.dir}" executable="latex"> <arg line="manual.tex"/> </exec>
+    <exec dir="${docs.dir}" executable="latex"> <arg line="manual.tex"/> </exec>
+    <exec dir="${docs.dir}" executable="dvips"> <arg line="manual.dvi"/> </exec>
+  </target>
+
+  <!-- Creates the API documentation -->
+  <target name="apidoc" depends="init">
+    <mkdir dir="${apidocs.dir}"/>
+    <javadoc packagenames="${packages}"
+             sourcepath="${src.dir}"
+             destdir="${apidocs.dir}"
+             author="true"
+             version="true"
+             use="true"
+             windowtitle="${name} API"
+             doctitle="${name}"
+    />
+  </target>
+
+  <target name="test1" depends="examples"> 
+    <echo message="Display class file contents"/>
+
+    <java classname="listclass" classpath="${class.path}">
+	<arg value="-code"/>
+	<arg value="java.lang.String"/>
+    </java>
+  </target>
+
+  <target name="test2" depends="examples">
+    <echo message="Decompile class file to Jasmin format"/>
+
+    <java classname="JasminVisitor" classpath="${class.path}">
+	<arg value="java.lang.String"/>
+    </java>
+  </target>
+
+  <target name="test3" depends="examples">
+    <echo message="Create Hello World class from scratch"/>
+    <java classname="HelloWorldBuilder" classpath="${class.path}"/>
+
+    <echo message="Running Hello World"/>
+    <java classname="HelloWorld" classpath="."/>
+  </target>
+
+  <target name="test4" depends="examples">
+    <echo message="Run fancy classloader example"/>
+
+    <java classname="org.apache.bcel.util.JavaWrapper" fork="true"
+          classpath="${class.path}">
+	<arg value="ProxyCreator"/>
+    </java>
+  </target>
+
+  <target name="test" depends="test1,test2,test3,test4"/>
+
+  <target name="mini" depends="examples">
+    <echo message="Run Mini compiler"/>
+
+    <java classname="Mini.MiniC" classpath="${class.path}" fork="true" dir="${mini.dir}">
+	<arg value="fac.mini"/>
+	<arg value="fib.mini"/>
+	<arg value="max.mini"/>
+    </java>
+
+    <echo message="Faculty"/>
+    <java classname="fac" classpath="${mini.dir}" />
+    <echo message="Fibonacci"/>
+    <java classname="fib" classpath="${mini.dir}" />
+    <echo message="Maximum of numbers"/>
+    <java classname="max" classpath="${mini.dir}" />
+  </target>
+
+  <!-- Clean everything up -->
+  <target name="clean" depends="init">
+    <delete dir="${build.dir}"/>
+    <delete>
+      <fileset dir="${docs.dir}"
+	       includes="manual.blg,manual.bbl,manual.dvi,manual.log"/>
+      <fileset dir="${docs.dir}" includes="**/*.aux"/>
+      <fileset dir="${basedir}" includes="**/*~"/>
+    </delete>
+
+  </target>
+
+</project>

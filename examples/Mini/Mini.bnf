@@ -1,0 +1,75 @@
+Program:
+	(FunDecl)*
+
+FunDecl:
+	"FUN" Ident "=" Expr
+
+Expr: 
+	"(" Expr ")"
+|
+	Expr AddOp  Expr
+|
+	Expr MultOp Expr
+|
+	Expr CmpOp  Expr
+|
+	Ident
+|
+	Number
+|
+	FunAppl
+|
+	UnOp Expr
+|
+	IfExpr
+
+IfExpr:
+	"IF" Expr "THEN" Expr ["ELSE" Expr] "FI"
+
+FunAppl:
+	Ident "(" [Expr ("," Expr)*] ")"
+
+AddOp:
+	("+" | "-" | "OR")
+
+MultOp:
+	("*" | "/" | "%" | "AND")
+
+CmpOp:
+	("==" | "!=" | "<=" | ">=" | ">" | "<"")
+
+UnOp:
+	("-" | "!")
+
+Ident:
+	LETTER (LETTER|DIGIT)*
+
+Number:
+	DIGIT+
+
+LETTER:
+	[a-zA-Z]
+
+DIGIT:
+	[0-9]
+
+---------------------------------------------------------
+Expr:
+	Term [AddOp Term]
+|
+	UnOp Expr
+|
+	FunAppl
+
+Term:
+	Factor [MultOp Factor]
+
+Factor:
+	Element [CmpOp Element]
+
+Element:
+	Ident
+|
+	Number
+|
+	"(" Expr ")"
