@@ -586,7 +586,6 @@ public class MethodGen extends FieldGenOrMethodGen {
     if(il != null)
       byte_code = il.getByteCode();
 
-    
     LineNumberTable    lnt = null;
     LocalVariableTable lvt = null;
 
@@ -610,7 +609,17 @@ public class MethodGen extends FieldGenOrMethodGen {
     int             exc_len = c_exc.length * 8; // Every entry takes 8 bytes
 
     Code code = null;
+
     if((il != null) && !isAbstract()) {
+      // Remove any stale code attribute
+      Attribute[] attributes = getAttributes();
+      for(int i=0; i < attributes.length; i++) {
+	Attribute a = attributes[i];
+
+	if(a instanceof Code)
+	  removeAttribute(a);
+      }
+
       code = new Code(cp.addUtf8("Code"),
 		      8 + byte_code.length + // prologue byte code
 		      2 + exc_len +          // exceptions
