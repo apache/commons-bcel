@@ -158,7 +158,7 @@ public class OperandStack{
 	/**
 	 * Returns the size of this OperandStack; that means, how many Type objects there are.
 	 */
-	int size(){
+	public int size(){
 		return stack.size();
 	}
 
