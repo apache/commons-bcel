@@ -33,6 +33,10 @@ import java.io.*;
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  */
 public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
+  private static final int FLAG_FOR_UNKNOWN = -1;
+  private static final int FLAG_FOR_CLASS = 0;
+  private static final int FLAG_FOR_METHOD = 1;
+  
   private JavaClass         _clazz;
   private PrintWriter       _out;
   private ConstantPoolGen   _cp;
@@ -83,7 +87,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 		  package_name + "." + class_name) +
 		 "\", \"" + super_name + "\", " +
 		 "\"" + clazz.getSourceFileName() + "\", " +
-		 printFlags(clazz.getAccessFlags(), true) + ", " +
+		 printFlags(clazz.getAccessFlags(), FLAG_FOR_CLASS) + ", " +
 		 "new String[] { " + inter + " });");
     _out.println();
     
@@ -177,7 +181,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 
     _out.println("    InstructionList il = new InstructionList();");
     _out.println("    MethodGen method = new MethodGen(" +
-		 printFlags(method.getAccessFlags()) +
+		 printFlags(method.getAccessFlags(), FLAG_FOR_METHOD) +
 		 ", " + printType(result_type) +
 		 ", " + printArgumentTypes(arg_types) + ", " +
 		 "new String[] { " +
@@ -196,20 +200,24 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
   }
 
   static String printFlags(int flags) {
-    return printFlags(flags, false);
+    return printFlags(flags, FLAG_FOR_UNKNOWN);
   }
 
-  static String printFlags(int flags, boolean for_class) {
+  static String printFlags(int flags, int reason) {
     if(flags == 0)
       return "0";
 
     StringBuffer buf = new StringBuffer();
     for(int i=0, pow=1; i <= Constants.MAX_ACC_FLAG; i++) {
       if((flags & pow) != 0) {
-	if((pow == Constants.ACC_SYNCHRONIZED) && for_class)
-	  buf.append("ACC_SUPER | ");
-	else
-	  buf.append("ACC_" + Constants.ACCESS_NAMES[i].toUpperCase() + " | ");
+	    if((pow == Constants.ACC_SYNCHRONIZED) && (reason == FLAG_FOR_CLASS))
+	      buf.append("ACC_SUPER | ");
+	    else if ((pow == Constants.ACC_VOLATILE) && (reason == FLAG_FOR_METHOD))
+		  buf.append("ACC_BRIDGE | ");
+	    else if ((pow == Constants.ACC_TRANSIENT) && (reason == FLAG_FOR_METHOD))
+	      buf.append("ACC_VARARGS | ");
+	    else
+	      buf.append("ACC_" + Constants.ACCESS_NAMES[i].toUpperCase() + " | ");
       }
 
       pow <<= 1;
