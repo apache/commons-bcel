@@ -7,17 +7,19 @@
     <menu name="BCEL">
       <item name="Front Page" href="/index.html"/>
       <item name="News and Status" href="/news.html"/>
-      <item name="Distributions" href="http://jakarta.apache.org/builds/jakarta-bcel/release/"/>
+      <item name="Downloads" href="http://jakarta.apache.org/builds/jakarta-bcel/release/"/>
     </menu>
 
     <menu name="Documentation">
       <item name="Manual" href="/manual.html"/>
       <item name="FAQ" href="/faq.html"/>
+      <item name="Japanese translation" href="http://jakarta.terra-intl.com/bcel/"/>
     </menu>
 
     <menu name="Get Involved">
       <item name="Projects" href="/projects.html"/>
     </menu>
+
 
 </body>
 </project>
