@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="BCEL" href="http://jakarta.apache.org/bcel">
+
+  <title>BCEL</title>
+  <logo href="/images/logo.gif">BCEL</logo>
+
+  <body>
+    <menu name="BCEL">
+      <item name="Overview" href="/index.html"/>
+    </menu>
+  </body>
+</project>

@@ -30,6 +30,14 @@ Available targets:
 -->
 
 <project default="jar" basedir=".">
+  
+  <!-- Allow any user specific values to override the defaults -->
+  <property file="${user.home}/build.properties" />
+  <!-- Allow user defaults for this project -->
+  <property file="build.properties" />
+  <!-- Set default values for the build -->
+  <property file="default.properties" />
+  
   <target name="init">
     <property name="name"         value="bcel"/>
     <property name="packages"     value="org.apache.bcel.*"/>
@@ -152,6 +160,77 @@ Available targets:
       <fileset dir="${basedir}" includes="**/*~"/>
     </delete>
 
+  </target>
+
+  <!-- can rename this target when we get the docs sorted out -->
+
+  <!-- ================================================================== -->
+  <!-- D O C S                                                            -->
+  <!-- ================================================================== -->
+  
+  <target 
+    name="check_for_jdom">
+    
+    <available 
+      property="jdom.present"
+      classname="org.jdom.JDOMException">
+      <classpath>
+        <pathelement location="${jakarta.site2}/lib/${jdom.jar}"/>
+      </classpath>
+    </available>
+  </target>
+    
+  <target 
+    depends="check_for_jdom" 
+    name="docs-prepare-error" 
+    unless="jdom.present">
+    
+    <echo>
+      The Jakarta-Site2 module is not present! Please check
+      to make sure that you have checked it out from CVS.
+
+      &lt;http://jakarta.apache.org/site/jakarta-site2.html&gt;
+    </echo>
+  </target>
+
+  <target 
+    name="xdocs"
+    depends="docs-prepare-error"
+    description="--> generates the HTML documentation"
+    if="jdom.present">
+
+    <taskdef 
+      name="anakia"
+      classname="org.apache.velocity.anakia.AnakiaTask">
+      <classpath>
+        <fileset dir="${jakarta.site2}/lib">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+    </taskdef>
+        
+    <anakia 
+      basedir="${docs.src}" 
+      destdir="${docs.dest}/"
+      extension=".html" 
+      style="./site.vsl"
+      projectFile="stylesheets/project.xml"
+      excludes="**/stylesheets/** empty.xml"
+      includes="**/*.xml"
+      lastModifiedCheck="true"
+      templatePath="${jakarta.site2}/xdocs/stylesheets">
+    </anakia>
+
+    <copy 
+      todir="${docs.dest}/images" 
+      filtering="no">
+      
+      <fileset dir="${docs.src}/images">
+        <include name="**/*.gif"/>
+        <include name="**/*.jpeg"/>
+        <include name="**/*.jpg"/>
+      </fileset>
+    </copy>
   </target>
 
 </project>
