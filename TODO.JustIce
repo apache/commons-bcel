@@ -1,0 +1,35 @@
+
+$Id$
+
+"TODO" list for JustIce, the Java Class File Verifier by Enver Haase.
+
+- JustIce uses object generalization during pass 3b,  as  supposed  by
+Sun.  However,  there  are better methods such as the idea proposed by
+Staerk et al.: using sets of object types.
+
+- There are a few bugs concerning access rights of  referenced  method
+and  probably  fields.  The  tests  for access rights that Sun defines
+should happen in pass four (which JustIce performs during pass 3a) are
+unintentionally  omitted.  This also happened to Sun and IBM with some
+of their version 1.3 JVMs. Thanks Markus Dahm.
+
+- There are bugs because of an ambiguity in the Java  Virtual  Machine
+Specification,  Second  Edition.  These have to do with inheritance: A
+method invocation like MyObject::equals(Object) is considered illegal,
+if  MyObject  has  no  overriding  definition  of  equals(Object). Sun
+clarified this issue via electronic mail:  the  invocation  is  legal,
+because  MyObject  inherits  the  member  function equals(Object) from
+Object::equals(Object). The search algorithms don't seem to be trivial
+because  interfaces  can  not  only  specify methods, but also declare
+fields. Also, access modifiers have to be honoured (see above).
+
+- It is not verified if classes that propose they would  implement  an
+interface _really_ implement all the methods.
+
+- The InstructionContext.getSuccessors() method may return the same
+successor more than one time. For performance reasons the ControlFlow-
+Graph.InstructionContextImpl class should return an array where the
+successors are pairwise disjoint. It should also be cached so that we
+don't have to do this calculation every time.
+
+***End of File***

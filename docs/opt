@@ -1,0 +1,24 @@
+10: aload_0
+11: ifnull        #19
+14: iload_1
+15: iconst_2
+16: if_icmpge     #27
+19: getstatic     System.out
+22: ldc           "Ooops"
+24: invokevirtual println
+27: return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,2134 @@
+
+(object Petal
+    version    	42
+    _written   	"Rose 4.5.8054a"
+    charSet    	0)
+
+(object Design "Logical View"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    defaults   	(object defaults
+	rightMargin 	0.000000
+	leftMargin 	0.000000
+	topMargin  	0.000000
+	bottomMargin 	0.000000
+	pageOverlap 	0.000000
+	clipIconLabels 	TRUE
+	autoResize 	TRUE
+	snapToGrid 	TRUE
+	gridX      	16
+	gridY      	16
+	defaultFont 	(object Font
+	    size       	10
+	    face       	"Arial"
+	    bold       	FALSE
+	    italics    	FALSE
+	    underline  	FALSE
+	    strike     	FALSE
+	    color      	0
+	    default_color 	TRUE)
+	showMessageNum 	1
+	showClassOfObject 	TRUE
+	notation   	"Unified")
+    root_usecase_package 	(object Class_Category "Use Case View"
+	quid       	"36597149004C"
+	exportControl 	"Public"
+	global     	TRUE
+	logical_models 	(list unit_reference_list)
+	logical_presentations 	(list unit_reference_list
+	    (object UseCaseDiagram "Main"
+		quid       	"3659714A03A0"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    root_category 	(object Class_Category "Logical View"
+	quid       	"36597149004B"
+	exportControl 	"Public"
+	global     	TRUE
+	subsystem  	"Component View"
+	quidu      	"365971490054"
+	logical_models 	(list unit_reference_list
+	    (object Class "JavaClass"
+		quid       	"3659716E02C4"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"3783415D015E"
+			supplier   	"Logical View::AccessFlags"
+			quidu      	"3783404E0032"))
+		operations 	(list Operations
+		    (object Operation "getInterfaceNames"
+			quid       	"365973DC00DE"
+			result     	"String[]"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getSuperclassName"
+			quid       	"365974050213"
+			result     	"String"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)))
+	    (object Class "Field"
+		quid       	"3659719C025C"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"378340240028"
+			supplier   	"Logical View::FieldOrMethod"
+			quidu      	"37833DF6035A")))
+	    (object Class "Method"
+		quid       	"365971AB002D"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"3783403702BA"
+			supplier   	"Logical View::FieldOrMethod"
+			quidu      	"37833DF6035A")))
+	    (object Class "Attribute"
+		quid       	"365974430259")
+	    (object Class "Code"
+		quid       	"3659744C02AC"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"36597457033E"
+			stereotype 	"Method attribute"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259"))
+		operations 	(list Operations
+		    (object Operation "getCode"
+			quid       	"365977B9022A"
+			result     	"byte[]"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "max_stack"
+			quid       	"3659775703CE"
+			type       	"int")
+		    (object ClassAttribute "max_locals"
+			quid       	"36597761015C"
+			type       	"int")
+		    (object ClassAttribute "exception_handlers"
+			quid       	"3659837E02EB")))
+	    (object Class "LineNumberTable"
+		quid       	"365974D401FD"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"3659752A01B0"
+			stereotype 	"Code attribute"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259")))
+	    (object Class "LocalVariableTable"
+		quid       	"365974E4034A"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365975320072"
+			stereotype 	"Code attribute"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259")))
+	    (object Class "SourceFile"
+		quid       	"365974F201D8"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"3659753B002E"
+			stereotype 	"Class attribute"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259")))
+	    (object Class "InnerClasses"
+		quid       	"3659751A0398"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"3659756B010A"
+			stereotype 	"Class attribute"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259")))
+	    (object Class "ConstantPool"
+		quid       	"365976440134"
+		operations 	(list Operations
+		    (object Operation "getConstant"
+			quid       	"365987690117"
+			result     	"Constant"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)))
+	    (object Class "Constant"
+		quid       	"3659764E01CE")
+	    (object Class "ConstantCP"
+		quid       	"365976530348"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"36597AFA0160"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "ExceptionTable"
+		quid       	"365976ED0187"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"3659781D03A1"
+			stereotype 	"Method attribute"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259")))
+	    (object Class "ConstantInterfaceMethodref"
+		quid       	"36597B2E03DC"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9E870042"
+			supplier   	"Logical View::ConstantCP"
+			quidu      	"365976530348")))
+	    (object Class "ConstantMethodref"
+		quid       	"36597B3F01C3"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9E8D0091"
+			supplier   	"Logical View::ConstantCP"
+			quidu      	"365976530348")))
+	    (object Class "ConstantFieldref"
+		quid       	"36597B460340"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9E84020B"
+			supplier   	"Logical View::ConstantCP"
+			quidu      	"365976530348")))
+	    (object Class "Deprecated"
+		quid       	"36597C6901C2"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"36597CC90075"
+			stereotype 	"Method attribute"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259")))
+	    (object Class "Unknown"
+		quid       	"36597C7100E7"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"36597CB500BD"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259")))
+	    (object Class "Synthetic"
+		quid       	"36597C7B00CD"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"36597CAF01A4"
+			stereotype 	"Class attribute"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259")))
+	    (object Class "ConstantValue"
+		quid       	"36597D720032"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"36597D8000D3"
+			stereotype 	"Field attribute"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259")))
+	    (object Class_Utility "ClassParser"
+		quid       	"365982D0039F"
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"365982F50013"
+			stereotype 	"creates"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"))
+		operations 	(list Operations
+		    (object Operation "parse"
+			quid       	"36598B7B03D2"
+			result     	"JavaClass"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)))
+	    (object Class "Visitor"
+		quid       	"3659848103DE"
+		stereotype 	"Interface")
+	    (object Class "ConstantString"
+		quid       	"365A9EE901C0"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9F9D0010"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "ConstantClass"
+		quid       	"365A9EFB005D"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9F8A00C7"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "ConstantInteger"
+		quid       	"365A9F020374"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365AA0090278"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "ConstantDouble"
+		quid       	"365A9F0902C0"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9FA002A9"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "ConstantFloat"
+		quid       	"365A9F1003E3"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9FA302D6"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "ConstantLong"
+		quid       	"365A9F3F0228"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9FAB016F"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "ConstantUnicode"
+		quid       	"365A9F4E01CF"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9FA80110"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "ConstantNameAndType"
+		quid       	"365A9F5B00A1"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9FAE01FF"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "ConstantUtf8"
+		quid       	"365A9F7400A7"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"365A9FB1031C"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE")))
+	    (object Class "FieldOrMethod"
+		quid       	"37833DF6035A"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"3783415403D2"
+			supplier   	"Logical View::AccessFlags"
+			quidu      	"3783404E0032"))
+		operations 	(list Operations
+		    (object Operation "getName"
+			quid       	"37833E050063"
+			result     	"String"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		abstract   	TRUE)
+	    (object Class "AccessFlags"
+		quid       	"3783404E0032"
+		operations 	(list Operations
+		    (object Operation "isPublic"
+			quid       	"3783405602D2"
+			result     	"boolean"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		abstract   	TRUE)
+	    (object Association "$UNNAMED$0"
+		quid       	"3659721C01B6"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$1"
+			quid       	"3659721C03DD"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$2"
+			quid       	"3659721D0009"
+			supplier   	"Logical View::Method"
+			quidu      	"365971AB002D"
+			client_cardinality 	(value cardinality "n")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$3"
+		quid       	"36597228027C"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$4"
+			quid       	"365972290129"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$5"
+			quid       	"36597229013D"
+			supplier   	"Logical View::Field"
+			quidu      	"3659719C025C"
+			client_cardinality 	(value cardinality "n")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$6"
+		quid       	"3659760E010E"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$7"
+			quid       	"36597610005D"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$8"
+			quid       	"365976100071"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259"
+			client_cardinality 	(value cardinality "n")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$9"
+		quid       	"365979BF00B3"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$10"
+			quid       	"365979C0001E"
+			supplier   	"Logical View::Method"
+			quidu      	"365971AB002D"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$11"
+			quid       	"365979C00028"
+			supplier   	"Logical View::Code"
+			quidu      	"3659744C02AC"
+			client_cardinality 	(value cardinality "0..1")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$12"
+		quid       	"365979F60198"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$13"
+			quid       	"365979F803B8"
+			supplier   	"Logical View::Method"
+			quidu      	"365971AB002D"
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$14"
+			quid       	"365979F803B9"
+			supplier   	"Logical View::ExceptionTable"
+			quidu      	"365976ED0187"
+			client_cardinality 	(value cardinality "0..1")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$15"
+		quid       	"36597A20015D"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$16"
+			quid       	"36597A2101E0"
+			supplier   	"Logical View::Code"
+			quidu      	"3659744C02AC"
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$17"
+			quid       	"36597A2101EA"
+			supplier   	"Logical View::LineNumberTable"
+			quidu      	"365974D401FD"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$18"
+		quid       	"36597A2A0233"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$19"
+			quid       	"36597A2B0203"
+			supplier   	"Logical View::Code"
+			quidu      	"3659744C02AC"
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$20"
+			quid       	"36597A2B020D"
+			supplier   	"Logical View::LocalVariableTable"
+			quidu      	"365974E4034A"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$21"
+		quid       	"36597A4703BB"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$22"
+			quid       	"36597A49001B"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$23"
+			quid       	"36597A49002F"
+			supplier   	"Logical View::InnerClasses"
+			quidu      	"3659751A0398"
+			client_cardinality 	(value cardinality "0..1")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$24"
+		quid       	"36597A54005D"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$25"
+			quid       	"36597A5403CE"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$26"
+			quid       	"36597A5403E2"
+			supplier   	"Logical View::SourceFile"
+			quidu      	"365974F201D8"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$27"
+		quid       	"36597ADA000F"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$28"
+			quid       	"36597ADA0327"
+			supplier   	"Logical View::ConstantPool"
+			quidu      	"365976440134"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$29"
+			quid       	"36597ADA0331"
+			supplier   	"Logical View::Constant"
+			quidu      	"3659764E01CE"
+			client_cardinality 	(value cardinality "n")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$30"
+		quid       	"36597D490047"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$31"
+			quid       	"36597D4903B9"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$32"
+			quid       	"36597D4903C3"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259"
+			client_cardinality 	(value cardinality "n")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$33"
+		quid       	"36597D8E01EB"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$34"
+			quid       	"36597D8F0124"
+			supplier   	"Logical View::Field"
+			quidu      	"3659719C025C"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$35"
+			quid       	"36597D8F012E"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259"
+			client_cardinality 	(value cardinality "n")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$36"
+		quid       	"36597D930315"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$37"
+			quid       	"36597D9500B5"
+			supplier   	"Logical View::Method"
+			quidu      	"365971AB002D"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$38"
+			quid       	"36597D9500BF"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259"
+			client_cardinality 	(value cardinality "n")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$39"
+		quid       	"36597F6600FA"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$40"
+			quid       	"36597F680070"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$41"
+			quid       	"36597F68007A"
+			supplier   	"Logical View::Attribute"
+			quidu      	"365974430259"
+			client_cardinality 	(value cardinality "n")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$42"
+		quid       	"36598570008E"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$43"
+			quid       	"365985700265"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$44"
+			quid       	"36598570026F"
+			supplier   	"Logical View::ConstantPool"
+			quidu      	"365976440134"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE)))
+	    (object Association "$UNNAMED$45"
+		quid       	"365985A101F7"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$46"
+			quid       	"365985A10392"
+			supplier   	"Logical View::JavaClass"
+			quidu      	"3659716E02C4"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$47"
+			quid       	"365985A1039C"
+			supplier   	"Logical View::ConstantPool"
+			quidu      	"365976440134"
+			is_navigable 	TRUE))))
+	logical_presentations 	(list unit_reference_list
+	    (object ClassDiagram "Java class"
+		quid       	"3659714A03C7"
+		title      	"Java class"
+		zoom       	90
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	414
+		items      	(list diagram_item_list
+		    (object ClassView "Class" "Logical View::ExceptionTable" @1
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1104, 1920)
+			label      	(object ItemLabel
+			    Parent_View 	@1
+			    location   	(949, 1869)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	310
+			    justify    	0
+			    label      	"ExceptionTable")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365976ED0187"
+			width      	328
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::LineNumberTable" @2
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2144, 1936)
+			label      	(object ItemLabel
+			    Parent_View 	@2
+			    location   	(1970, 1885)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	348
+			    justify    	0
+			    label      	"LineNumberTable")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365974D401FD"
+			width      	366
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::Code" @3
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1584, 2032)
+			label      	(object ItemLabel
+			    Parent_View 	@3
+			    location   	(1382, 1876)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	404
+			    justify    	0
+			    label      	"Code")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"3659744C02AC"
+			compartment 	(object Compartment
+			    Parent_View 	@3
+			    location   	(1382, 1931)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	5
+			    max_width  	409)
+			width      	422
+			height     	336
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$15" @4
+			location   	(1877, 1981)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"36597A20015D"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$16" @5
+				Parent_View 	@4
+				location   	(197, 877)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597A2101E0"
+				client     	@4
+				supplier   	@3
+				line_style 	0)
+			    (object RoleView "$UNNAMED$17" @6
+				Parent_View 	@4
+				location   	(197, 877)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597A2101EA"
+				client     	@4
+				supplier   	@2
+				line_style 	0
+				label      	(object SegLabel @7
+				    Parent_View 	@6
+				    location   	(1943, 1915)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"1"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	0))))
+		    (object ClassView "Class" "Logical View::LocalVariableTable" @8
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2496, 2144)
+			label      	(object ItemLabel
+			    Parent_View 	@8
+			    location   	(2311, 2093)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	370
+			    justify    	0
+			    label      	"LocalVariableTable")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365974E4034A"
+			width      	388
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$18" @9
+			location   	(2048, 2088)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"36597A2A0233"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$19" @10
+				Parent_View 	@9
+				location   	(-183, 852)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597A2B0203"
+				client     	@9
+				supplier   	@3
+				line_style 	0)
+			    (object RoleView "$UNNAMED$20" @11
+				Parent_View 	@9
+				location   	(-183, 852)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597A2B020D"
+				client     	@9
+				supplier   	@8
+				line_style 	0
+				label      	(object SegLabel @12
+				    Parent_View 	@11
+				    location   	(2269, 2170)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"1"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	1))))
+		    (object ClassView "Class" "Logical View::InnerClasses" @13
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2224, 1552)
+			label      	(object ItemLabel
+			    Parent_View 	@13
+			    location   	(2088, 1501)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	272
+			    justify    	0
+			    label      	"InnerClasses")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"3659751A0398"
+			width      	290
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::SourceFile" @14
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2576, 1552)
+			label      	(object ItemLabel
+			    Parent_View 	@14
+			    location   	(2461, 1501)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	230
+			    justify    	0
+			    label      	"SourceFile")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365974F201D8"
+			width      	248
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::Deprecated" @15
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(720, 1920)
+			label      	(object ItemLabel
+			    Parent_View 	@15
+			    location   	(602, 1869)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	236
+			    justify    	0
+			    label      	"Deprecated")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"36597C6901C2"
+			width      	254
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::Unknown" @16
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2816, 1936)
+			label      	(object ItemLabel
+			    Parent_View 	@16
+			    location   	(2717, 1885)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	198
+			    justify    	0
+			    label      	"Unknown")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"36597C7100E7"
+			width      	216
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::Synthetic" @17
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2896, 1552)
+			label      	(object ItemLabel
+			    Parent_View 	@17
+			    location   	(2791, 1501)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	210
+			    justify    	0
+			    label      	"Synthetic")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"36597C7B00CD"
+			width      	228
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantValue" @18
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(848, 1552)
+			label      	(object ItemLabel
+			    Parent_View 	@18
+			    location   	(697, 1501)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	302
+			    justify    	0
+			    label      	"ConstantValue")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"36597D720032"
+			width      	320
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "ClassUtility" "Logical View::ClassParser" @19
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(784, 912)
+			label      	(object ItemLabel
+			    Parent_View 	@19
+			    location   	(657, 839)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	254
+			    justify    	0
+			    label      	"ClassParser")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365982D0039F"
+			compartment 	(object Compartment
+			    Parent_View 	@19
+			    location   	(657, 894)
+			    icon_style 	"Icon"
+			    fill_color 	16777215
+			    anchor     	2
+			    nlines     	2
+			    max_width  	148)
+			width      	272
+			height     	168
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::Attribute" @20
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1648, 1536)
+			label      	(object ItemLabel
+			    Parent_View 	@20
+			    location   	(1552, 1484)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	192
+			    justify    	0
+			    label      	"Attribute")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365974430259"
+			width      	210
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object InheritTreeView "" @21
+			location   	(1620, 1691)
+			line_color 	3342489
+			fill_color 	13434879
+			supplier   	@20
+			vertices   	(list Points
+			    (1620, 1691)
+			    (1620, 1599)))
+		    (object InheritView "" @22
+			stereotype 	(object SegLabel @23
+			    Parent_View 	@22
+			    location   	(1625, 1778)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<Method attribute>>"
+			    pctDist    	0.505747
+			    height     	52
+			    orientation 	1)
+			line_color 	3342489
+			quidu      	"36597457033E"
+			client     	@3
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(1573, 1864)
+			terminal_attachment 	(1573, 1691)
+			drawSupplier 	@21)
+		    (object InheritView "" @24
+			stereotype 	(object SegLabel @25
+			    Parent_View 	@24
+			    location   	(2121, 1847)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<Code attribute>>"
+			    pctDist    	0.143488
+			    height     	3
+			    orientation 	1)
+			line_color 	3342489
+			quidu      	"3659752A01B0"
+			client     	@2
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(2118, 1873)
+			terminal_attachment 	(2118, 1691)
+			drawSupplier 	@21)
+		    (object InheritView "" @26
+			stereotype 	(object SegLabel @27
+			    Parent_View 	@26
+			    location   	(2579, 1653)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<Class attribute>>"
+			    pctDist    	0.497717
+			    height     	13
+			    orientation 	0)
+			line_color 	3342489
+			quidu      	"3659753B002E"
+			client     	@14
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(2566, 1615)
+			terminal_attachment 	(2566, 1691)
+			drawSupplier 	@21)
+		    (object InheritView "" @28
+			stereotype 	(object SegLabel @29
+			    Parent_View 	@28
+			    location   	(1145, 1774)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<Method attribute>>"
+			    pctDist    	0.497006
+			    height     	34
+			    orientation 	1)
+			line_color 	3342489
+			quidu      	"3659781D03A1"
+			client     	@1
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(1111, 1857)
+			terminal_attachment 	(1111, 1691)
+			drawSupplier 	@21)
+		    (object InheritView "" @30
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"36597CB500BD"
+			client     	@16
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(2819, 1873)
+			terminal_attachment 	(2819, 1691)
+			drawSupplier 	@21)
+		    (object InheritView "" @31
+			stereotype 	(object SegLabel @32
+			    Parent_View 	@31
+			    location   	(732, 1774)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<Method attribute>>"
+			    pctDist    	0.497006
+			    height     	34
+			    orientation 	1)
+			line_color 	3342489
+			quidu      	"36597CC90075"
+			client     	@15
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(698, 1857)
+			terminal_attachment 	(698, 1691)
+			drawSupplier 	@21)
+		    (object ClassView "Class" "Logical View::Method" @33
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2064, 1408)
+			label      	(object ItemLabel
+			    Parent_View 	@33
+			    location   	(1983, 1362)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	162
+			    justify    	0
+			    label      	"Method")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365971AB002D"
+			height     	114
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$36" @34
+			location   	(1863, 1469)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"36597D930315"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$37" @35
+				Parent_View 	@34
+				location   	(-57, 797)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597D9500B5"
+				client     	@34
+				supplier   	@33
+				line_style 	0
+				label      	(object SegLabel @36
+				    Parent_View 	@35
+				    location   	(1978, 1491)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"1"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	1))
+			    (object RoleView "$UNNAMED$38" @37
+				Parent_View 	@34
+				location   	(-57, 797)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597D9500BF"
+				client     	@34
+				supplier   	@20
+				line_style 	0
+				label      	(object SegLabel @38
+				    Parent_View 	@37
+				    location   	(1781, 1551)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"*"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	0))))
+		    (object ClassView "Class" "Logical View::Field" @39
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1232, 1408)
+			label      	(object ItemLabel
+			    Parent_View 	@39
+			    location   	(1151, 1362)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	162
+			    justify    	0
+			    label      	"Field")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"3659719C025C"
+			height     	114
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$33" @40
+			location   	(1432, 1469)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"36597D8E01EB"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$34" @41
+				Parent_View 	@40
+				location   	(-488, 797)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597D8F0124"
+				client     	@40
+				supplier   	@39
+				line_style 	0
+				label      	(object SegLabel @42
+				    Parent_View 	@41
+				    location   	(1319, 1491)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"1"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	0))
+			    (object RoleView "$UNNAMED$35" @43
+				Parent_View 	@40
+				location   	(-488, 797)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597D8F012E"
+				client     	@40
+				supplier   	@20
+				line_style 	0
+				label      	(object SegLabel @44
+				    Parent_View 	@43
+				    location   	(1546, 1448)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"*"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	0))))
+		    (object ClassView "Class" "Logical View::ConstantPool" @45
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2448, 1152)
+			label      	(object ItemLabel
+			    Parent_View 	@45
+			    location   	(2300, 1070)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	296
+			    justify    	0
+			    label      	"ConstantPool")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365976440134"
+			compartment 	(object Compartment
+			    Parent_View 	@45
+			    location   	(2300, 1125)
+			    icon_style 	"Icon"
+			    fill_color 	16777215
+			    anchor     	2
+			    nlines     	2
+			    max_width  	303)
+			width      	314
+			height     	186
+			annotation 	8
+			autoResize 	TRUE)
+		    (object InheritView "" @46
+			stereotype 	(object SegLabel @47
+			    Parent_View 	@46
+			    location   	(2476, 2035)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<Code attribute>>"
+			    pctDist    	0.118199
+			    height     	4
+			    orientation 	1)
+			line_color 	3342489
+			quidu      	"365975320072"
+			client     	@8
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(2472, 2081)
+			terminal_attachment 	(2472, 1691)
+			drawSupplier 	@21)
+		    (object InheritView "" @48
+			stereotype 	(object SegLabel @49
+			    Parent_View 	@48
+			    location   	(2206, 1653)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<Class attribute>>"
+			    pctDist    	0.497717
+			    height     	7
+			    orientation 	1)
+			line_color 	3342489
+			quidu      	"3659756B010A"
+			client     	@13
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(2212, 1615)
+			terminal_attachment 	(2212, 1691)
+			drawSupplier 	@21)
+		    (object InheritView "" @50
+			label      	(object ItemLabel
+			    Parent_View 	@50
+			    location   	(2892, 1653)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	264
+			    justify    	0
+			    label      	"")
+			stereotype 	(object SegLabel @51
+			    Parent_View 	@50
+			    location   	(2902, 1653)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<Class attribute>>"
+			    pctDist    	0.497717
+			    height     	10
+			    orientation 	0)
+			line_color 	3342489
+			quidu      	"36597CAF01A4"
+			client     	@17
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(2892, 1615)
+			terminal_attachment 	(2892, 1691)
+			drawSupplier 	@21)
+		    (object InheritView "" @52
+			stereotype 	(object SegLabel @53
+			    Parent_View 	@52
+			    location   	(871, 1651)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<Field attribute>>"
+			    pctDist    	0.480000
+			    height     	27
+			    orientation 	0)
+			line_color 	3342489
+			quidu      	"36597D8000D3"
+			client     	@18
+			supplier   	@20
+			line_style 	3
+			origin_attachment 	(844, 1615)
+			terminal_attachment 	(844, 1691)
+			drawSupplier 	@21)
+		    (object ClassView "Class" "Logical View::FieldOrMethod" @54
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1648, 1200)
+			font       	(object Font
+			    italics    	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@54
+			    location   	(1502, 1127)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	292
+			    justify    	0
+			    label      	"FieldOrMethod")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"37833DF6035A"
+			compartment 	(object Compartment
+			    Parent_View 	@54
+			    location   	(1502, 1182)
+			    font       	(object Font
+				italics    	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	2
+			    max_width  	208)
+			width      	310
+			height     	168
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::AccessFlags" @55
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(896, 1200)
+			font       	(object Font
+			    italics    	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@55
+			    location   	(762, 1127)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	268
+			    justify    	0
+			    label      	"AccessFlags")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"3783404E0032"
+			compartment 	(object Compartment
+			    Parent_View 	@55
+			    location   	(762, 1182)
+			    font       	(object Font
+				italics    	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	2
+			    max_width  	192)
+			width      	286
+			height     	168
+			annotation 	8
+			autoResize 	TRUE)
+		    (object InheritView "" @56
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"3783415403D2"
+			client     	@54
+			supplier   	@55
+			line_style 	0)
+		    (object InheritTreeView "" @57
+			location   	(1635, 1379)
+			line_color 	3342489
+			fill_color 	13434879
+			supplier   	@54
+			vertices   	(list Points
+			    (1635, 1379)
+			    (1635, 1284)))
+		    (object InheritView "" @58
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"3783403702BA"
+			client     	@33
+			supplier   	@54
+			line_style 	3
+			origin_attachment 	(1979, 1358)
+			terminal_attachment 	(1979, 1379)
+			drawSupplier 	@57)
+		    (object InheritView "" @59
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"378340240028"
+			client     	@39
+			supplier   	@54
+			line_style 	3
+			origin_attachment 	(1312, 1410)
+			terminal_attachment 	(1312, 1379)
+			drawSupplier 	@57)
+		    (object ClassView "Class" "Logical View::JavaClass" @60
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1648, 912)
+			label      	(object ItemLabel
+			    Parent_View 	@60
+			    location   	(1446, 816)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	404
+			    justify    	0
+			    label      	"JavaClass")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"3659716E02C4"
+			compartment 	(object Compartment
+			    Parent_View 	@60
+			    location   	(1446, 871)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	3
+			    max_width  	450)
+			width      	422
+			height     	214
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$0" @61
+			location   	(1876, 1184)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"3659721C01B6"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$1" @62
+				Parent_View 	@61
+				location   	(1508, 768)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"3659721C03DD"
+				client     	@61
+				supplier   	@60
+				line_style 	0
+				label      	(object SegLabel @63
+				    Parent_View 	@62
+				    location   	(1712, 1071)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"1"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	0))
+			    (object RoleView "$UNNAMED$2" @64
+				Parent_View 	@61
+				location   	(1508, 768)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"3659721D0009"
+				client     	@61
+				supplier   	@33
+				line_style 	0
+				label      	(object SegLabel @65
+				    Parent_View 	@64
+				    location   	(2042, 1299)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"*"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	0))))
+		    (object UsesView "" @66
+			label      	(object ItemLabel
+			    Parent_View 	@66
+			    location   	(1178, 912)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	60
+			    justify    	0
+			    label      	"")
+			stereotype 	(object SegLabel @67
+			    Parent_View 	@66
+			    location   	(1228, 869)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<creates>>"
+			    pctDist    	0.598000
+			    height     	44
+			    orientation 	0)
+			line_color 	3342489
+			quidu      	"365982F50013"
+			client     	@19
+			supplier   	@60
+			line_style 	0)
+		    (object AssociationViewNew "$UNNAMED$45" @68
+			location   	(2074, 1039)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365985A101F7"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$46" @69
+				Parent_View 	@68
+				location   	(-278, 847)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"365985A10392"
+				client     	@68
+				supplier   	@60
+				line_style 	0)
+			    (object RoleView "$UNNAMED$47" @70
+				Parent_View 	@68
+				location   	(-278, 847)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"365985A1039C"
+				client     	@68
+				supplier   	@45
+				line_style 	0)))
+		    (object InheritView "" @71
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"3783415D015E"
+			client     	@60
+			supplier   	@55
+			line_style 	0)
+		    (object AssociationViewNew "$UNNAMED$3" @72
+			location   	(1418, 1184)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"36597228027C"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$4" @73
+				Parent_View 	@72
+				location   	(426, 400)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"365972290129"
+				client     	@72
+				supplier   	@60
+				line_style 	0
+				label      	(object SegLabel @74
+				    Parent_View 	@73
+				    location   	(1583, 1071)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"1"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	1))
+			    (object RoleView "$UNNAMED$5" @75
+				Parent_View 	@72
+				location   	(426, 400)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597229013D"
+				client     	@72
+				supplier   	@39
+				line_style 	0
+				label      	(object SegLabel @76
+				    Parent_View 	@75
+				    location   	(1334, 1368)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"*"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	0))))))
+	    (object ClassDiagram "Constant pool"
+		quid       	"36597BC201E0"
+		title      	"Constant pool"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	995
+		origin_y   	0
+		items      	(list diagram_item_list
+		    (object ClassView "Class" "Logical View::ConstantCP" @77
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2192, 800)
+			label      	(object ItemLabel
+			    Parent_View 	@77
+			    location   	(2065, 751)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	254
+			    justify    	0
+			    label      	"ConstantCP")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365976530348"
+			width      	272
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantInterfaceMethodref" @78
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2160, 1104)
+			label      	(object ItemLabel
+			    Parent_View 	@78
+			    location   	(1894, 1055)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	532
+			    justify    	0
+			    label      	"ConstantInterfaceMethodref")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"36597B2E03DC"
+			width      	550
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantMethodref" @79
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2688, 1104)
+			label      	(object ItemLabel
+			    Parent_View 	@79
+			    location   	(2504, 1055)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	368
+			    justify    	0
+			    label      	"ConstantMethodref")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"36597B3F01C3"
+			width      	386
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantFieldref" @80
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1648, 1104)
+			label      	(object ItemLabel
+			    Parent_View 	@80
+			    location   	(1484, 1055)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	328
+			    justify    	0
+			    label      	"ConstantFieldref")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"36597B460340"
+			width      	346
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantPool" @81
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2368, 176)
+			label      	(object ItemLabel
+			    Parent_View 	@81
+			    location   	(2220, 97)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	296
+			    justify    	0
+			    label      	"ConstantPool")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365976440134"
+			width      	314
+			height     	186
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::Constant" @82
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2368, 448)
+			label      	(object ItemLabel
+			    Parent_View 	@82
+			    location   	(2270, 399)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	196
+			    justify    	0
+			    label      	"Constant")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"3659764E01CE"
+			width      	214
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$27" @83
+			location   	(2368, 326)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"36597ADA000F"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$28" @84
+				Parent_View 	@83
+				location   	(1968, -2298)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597ADA0327"
+				client     	@83
+				supplier   	@81
+				line_style 	0
+				label      	(object SegLabel @85
+				    Parent_View 	@84
+				    location   	(2422, 276)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"1"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	1))
+			    (object RoleView "$UNNAMED$29" @86
+				Parent_View 	@83
+				location   	(1968, -2298)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"36597ADA0331"
+				client     	@83
+				supplier   	@82
+				line_style 	0
+				label      	(object SegLabel @87
+				    Parent_View 	@86
+				    location   	(2422, 378)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"*"
+				    pctDist    	0.900000
+				    height     	54
+				    orientation 	0))))
+		    (object InheritTreeView "" @88
+			location   	(2181, 956)
+			line_color 	3342489
+			fill_color 	13434879
+			supplier   	@77
+			vertices   	(list Points
+			    (2181, 956)
+			    (2181, 863)))
+		    (object InheritView "" @89
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9E84020B"
+			client     	@80
+			supplier   	@77
+			line_style 	3
+			origin_attachment 	(1640, 1041)
+			terminal_attachment 	(1640, 956)
+			drawSupplier 	@88)
+		    (object ClassView "Class" "Logical View::ConstantString" @90
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2704, 800)
+			label      	(object ItemLabel
+			    Parent_View 	@90
+			    location   	(2552, 751)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	304
+			    justify    	0
+			    label      	"ConstantString")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365A9EE901C0"
+			width      	322
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantClass" @91
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1360, 800)
+			label      	(object ItemLabel
+			    Parent_View 	@91
+			    location   	(1208, 751)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	304
+			    justify    	0
+			    label      	"ConstantClass")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365A9EFB005D"
+			width      	322
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantInteger" @92
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1968, 432)
+			label      	(object ItemLabel
+			    Parent_View 	@92
+			    location   	(1812, 383)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	312
+			    justify    	0
+			    label      	"ConstantInteger")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365A9F020374"
+			width      	330
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantDouble" @93
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1568, 432)
+			label      	(object ItemLabel
+			    Parent_View 	@93
+			    location   	(1406, 383)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	324
+			    justify    	0
+			    label      	"ConstantDouble")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365A9F0902C0"
+			width      	342
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantFloat" @94
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1760, 800)
+			label      	(object ItemLabel
+			    Parent_View 	@94
+			    location   	(1617, 751)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	286
+			    justify    	0
+			    label      	"ConstantFloat")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365A9F1003E3"
+			width      	304
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantLong" @95
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1184, 432)
+			label      	(object ItemLabel
+			    Parent_View 	@95
+			    location   	(1041, 383)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	286
+			    justify    	0
+			    label      	"ConstantLong")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365A9F3F0228"
+			width      	304
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantUnicode" @96
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(3136, 800)
+			label      	(object ItemLabel
+			    Parent_View 	@96
+			    location   	(2964, 751)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	344
+			    justify    	0
+			    label      	"ConstantUnicode")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365A9F4E01CF"
+			width      	362
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantNameAndType" @97
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2848, 432)
+			label      	(object ItemLabel
+			    Parent_View 	@97
+			    location   	(2620, 383)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	456
+			    justify    	0
+			    label      	"ConstantNameAndType")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365A9F5B00A1"
+			width      	474
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ConstantUtf8" @98
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(3312, 432)
+			label      	(object ItemLabel
+			    Parent_View 	@98
+			    location   	(3178, 383)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	268
+			    justify    	0
+			    label      	"ConstantUtf8")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"365A9F7400A7"
+			width      	286
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object InheritTreeView "" @99
+			location   	(2374, 625)
+			line_color 	3342489
+			fill_color 	13434879
+			supplier   	@82
+			vertices   	(list Points
+			    (2374, 625)
+			    (2374, 511)))
+		    (object InheritView "" @100
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9F8A00C7"
+			client     	@91
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(1362, 737)
+			terminal_attachment 	(1362, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @101
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9F9D0010"
+			client     	@90
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(2698, 737)
+			terminal_attachment 	(2698, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @102
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9FA002A9"
+			client     	@93
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(1559, 495)
+			terminal_attachment 	(1559, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @103
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9FA80110"
+			client     	@96
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(3133, 737)
+			terminal_attachment 	(3133, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @104
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9FAB016F"
+			client     	@95
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(1181, 495)
+			terminal_attachment 	(1181, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @105
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9FB1031C"
+			client     	@98
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(3312, 495)
+			terminal_attachment 	(3312, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @106
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"36597AFA0160"
+			client     	@77
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(2190, 737)
+			terminal_attachment 	(2190, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @107
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365AA0090278"
+			client     	@92
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(1950, 495)
+			terminal_attachment 	(1950, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @108
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9FA302D6"
+			client     	@94
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(1753, 737)
+			terminal_attachment 	(1753, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @109
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9FAE01FF"
+			client     	@97
+			supplier   	@82
+			line_style 	3
+			origin_attachment 	(2812, 495)
+			terminal_attachment 	(2812, 625)
+			drawSupplier 	@99)
+		    (object InheritView "" @110
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9E870042"
+			client     	@78
+			supplier   	@77
+			line_style 	3
+			origin_attachment 	(2143, 1041)
+			terminal_attachment 	(2143, 956)
+			drawSupplier 	@88)
+		    (object InheritView "" @111
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"365A9E8D0091"
+			client     	@79
+			supplier   	@77
+			line_style 	3
+			origin_attachment 	(2668, 1041)
+			terminal_attachment 	(2668, 956)
+			drawSupplier 	@88)))))
+    root_subsystem 	(object SubSystem "Component View"
+	quid       	"365971490054"
+	physical_models 	(list unit_reference_list)
+	physical_presentations 	(list unit_reference_list
+	    (object Module_Diagram "Main"
+		quid       	"3659714A039F"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    process_structure 	(object Processes
+	quid       	"365971490055"
+	ProcsNDevs 	(list
+	    (object Process_Diagram "Deployment View"
+		quid       	"36597149005E"
+		title      	"Deployment View"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    properties 	(object Properties
+	quid       	"365971490056"))
