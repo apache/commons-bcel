@@ -108,8 +108,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 
     _out.println("public class " + class_name + "Creator implements Constants {");
     _out.println("  private InstructionFactory _factory;");
-    _out.println("  private ConstantPoolGen   _cp;");
-    _out.println("  private ClassGen          _cg;\n");
+    _out.println("  private ConstantPoolGen    _cp;");
+    _out.println("  private ClassGen           _cg;\n");
 
     _out.println("  public " + class_name  + "Creator() {");
     _out.println("    _cg = new ClassGen(\"" +
