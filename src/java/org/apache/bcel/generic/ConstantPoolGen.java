@@ -323,11 +323,13 @@ public class ConstantPoolGen implements java.io.Serializable {
    * @return index on success, -1 otherwise
    */
   public int lookupFloat(float n) {
+    int bits = Float.floatToIntBits(n);
+
     for(int i=1; i < index; i++) {
       if(constants[i] instanceof ConstantFloat) {
 	ConstantFloat c = (ConstantFloat)constants[i];
 
-	if(c.getBytes() == n)
+	if(Float.floatToIntBits(c.getBytes()) == bits)
 	  return i;
       }
     }
@@ -438,11 +440,13 @@ public class ConstantPoolGen implements java.io.Serializable {
    * @return index on success, -1 otherwise
    */
   public int lookupDouble(double n) {
+    long bits = Double.doubleToLongBits(n);
+
     for(int i=1; i < index; i++) {
       if(constants[i] instanceof ConstantDouble) {
 	ConstantDouble c = (ConstantDouble)constants[i];
-
-	if(c.getBytes() == n)
+	
+	if(Double.doubleToLongBits(c.getBytes()) == bits)
 	  return i;
       }
     }

@@ -54,6 +54,7 @@ package org.apache.bcel.classfile;
  * <http://www.apache.org/>.
  */
 import org.apache.bcel.Constants;
+import org.apache.bcel.generic.Type;
 import java.io.*;
 
 /**
@@ -86,7 +87,7 @@ public final class Method extends FieldOrMethod {
    * @throws ClassFormatException
    */
   Method(DataInputStream file, ConstantPool constant_pool)
-       throws IOException, ClassFormatException
+    throws IOException, ClassFormatException
   {
     super(file, constant_pool);
   }
@@ -209,5 +210,19 @@ public final class Method extends FieldOrMethod {
    */
   public final Method copy(ConstantPool constant_pool) {
     return (Method)copy_(constant_pool);
+  }
+
+  /**
+   * @return return type of method
+   */
+  public Type getReturnType() {
+    return Type.getReturnType(getSignature());
+  }
+
+  /**
+   * @return array of method argument types
+   */
+  public Type[] getArgumentTypes() {
+    return Type.getArgumentTypes(getSignature());
   }
 }

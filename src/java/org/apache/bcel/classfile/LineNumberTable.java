@@ -213,6 +213,12 @@ public final class LineNumberTable extends Attribute {
       }
     } while(l <= r);
 
+    /* It's possible that we did not find any valid entry for the bytecode
+     * offset we were looking for.
+     */
+    if (min_index < 0)
+      return -1;
+
     return line_number_table[min_index].getLineNumber();
   }
 

@@ -84,6 +84,5 @@ public class LDC_W extends LDC {
     setIndex(bytes.readUnsignedShort());
     // Override just in case it has been changed
     opcode = org.apache.bcel.Constants.LDC_W;
-    length = 3;
   }
 }

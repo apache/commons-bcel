@@ -54,6 +54,7 @@ package org.apache.bcel.classfile;
  * <http://www.apache.org/>.
  */
 import  org.apache.bcel.Constants;
+import org.apache.bcel.generic.Type;
 import java.io.*;
 
 /**
@@ -153,5 +154,12 @@ public final class Field extends FieldOrMethod {
    */
   public final Field copy(ConstantPool constant_pool) {
     return (Field)copy_(constant_pool);
+  }
+
+  /**
+   * @return type of field
+   */
+  public Type getType() {
+    return Type.getReturnType(getSignature());
   }
 }

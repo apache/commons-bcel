@@ -59,9 +59,9 @@ import org.apache.bcel.ExceptionConstants;
 
 /** 
  * PUTSTATIC - Put static field in class
- * <PRE>Stack: ..., objectref, value -&gt; ...</PRE>
+ * <PRE>Stack: ..., value -&gt; ...</PRE>
  * OR
- * <PRE>Stack: ..., objectref, value.word1, value.word2 -&gt; ...</PRE>
+ * <PRE>Stack: ..., value.word1, value.word2 -&gt; ...</PRE>
  *
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
