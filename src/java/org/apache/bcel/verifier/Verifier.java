@@ -258,7 +258,7 @@ public class Verifier{
 				JavaClass jc = Repository.lookupClass(args[k]);
 				for (int i=0; i<jc.getMethods().length; i++){
 					vr = v.doPass3a(i);
-					System.out.println("Pass 3a, method "+i+" ['"+jc.getMethods()[i]+"']:\n"+vr);
+					System.out.println("Pass 3a, method number "+i+" ['"+jc.getMethods()[i]+"']:\n"+vr);
 
 					vr = v.doPass3b(i);
 					System.out.println("Pass 3b, method number "+i+" ['"+jc.getMethods()[i]+"']:\n"+vr);
