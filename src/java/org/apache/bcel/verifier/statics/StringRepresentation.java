@@ -200,6 +200,9 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 	public void visitMethod(Method obj){
 		tostring = toString(obj);
 	}
+  public void visitSignature(Signature obj){
+    tostring = toString(obj);
+  }
 	public void visitSourceFile(SourceFile obj){
 		tostring = toString(obj);
 	} 

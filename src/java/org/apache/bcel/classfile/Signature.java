@@ -112,6 +112,7 @@ public final class Signature extends Attribute {
    */
    public void accept(Visitor v) {
      System.err.println("Visiting non-standard Signature object");
+     v.visitSignature(this);
    }
    
   /**

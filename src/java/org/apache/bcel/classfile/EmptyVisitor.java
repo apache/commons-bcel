@@ -96,6 +96,7 @@ public class EmptyVisitor implements Visitor {
   public void visitLocalVariable(LocalVariable obj) {}
   public void visitLocalVariableTable(LocalVariableTable obj) {}
   public void visitMethod(Method obj) {}
+  public void visitSignature(Signature obj) {}
   public void visitSourceFile(SourceFile obj) {}
   public void visitSynthetic(Synthetic obj) {}
   public void visitUnknown(Unknown obj) {}

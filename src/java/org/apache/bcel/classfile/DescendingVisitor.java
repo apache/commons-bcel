@@ -331,6 +331,12 @@ public class DescendingVisitor implements Visitor {
     stack.pop();
   }
 
+  public void visitSignature(Signature attribute) {
+    stack.push(attribute);
+    attribute.accept(visitor);
+    stack.pop();
+  }
+  
   public void visitSourceFile(SourceFile attribute) {
     stack.push(attribute);
     attribute.accept(visitor);
