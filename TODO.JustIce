@@ -35,6 +35,8 @@ fields. Also, access modifiers have to be honoured (see above).
 - It is not verified if classes that propose they would  implement  an
 interface _really_ implement all the methods.
 
+- It is not verified that interfaces are actually  tagged  'abstract'.
+
 - The InstructionContext.getSuccessors() method may return the same
 successor more than one time. For performance reasons the ControlFlow-
 Graph.InstructionContextImpl class should return an array where the
