@@ -258,7 +258,7 @@ public final class Pass3bVerifier extends PassVerifier{
 		do{
 			if ((ih.getInstruction() instanceof ReturnInstruction) && (!(cfg.isDead(ih)))) {
 				InstructionContext ic = cfg.contextOf(ih);
-				Frame f = ic.getOutFrame(new ArrayList()); // TODO: This is buggy, we check only the top-level return instructions this way.
+				Frame f = ic.getOutFrame(new ArrayList()); // TODO: This is buggy, we check only the top-level return instructions this way. Maybe some maniac returns from a method when in a subroutine?
 				LocalVariables lvs = f.getLocals();
 				for (int i=0; i<lvs.maxLocals(); i++){
 					if (lvs.get(i) instanceof UninitializedObjectType){
