@@ -182,7 +182,7 @@ public final class Code extends Attribute {
    * Dump code attribute to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

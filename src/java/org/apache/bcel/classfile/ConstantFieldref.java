@@ -75,7 +75,7 @@ public final class ConstantFieldref extends ConstantCP {
    * Initialize instance from file data.
    *
    * @param file input stream
-   * @throw IOException
+   * @throws IOException
    */
   ConstantFieldref(DataInputStream file) throws IOException
   {

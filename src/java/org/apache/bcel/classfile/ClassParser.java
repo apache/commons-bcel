@@ -111,7 +111,7 @@ public final class ClassParser {
   /** Parse class from given .class file.
    *
    * @param file_name file name
-   * @throw IOException
+   * @throws IOException
    */
   public ClassParser(String file_name) throws IOException
   {    
@@ -124,7 +124,7 @@ public final class ClassParser {
   /** Parse class from given .class file in a ZIP-archive
    *
    * @param file_name file name
-   * @throw IOException
+   * @throws IOException
    */
   public ClassParser(String zip_file, String file_name) throws IOException
   {    
@@ -146,8 +146,8 @@ public final class ClassParser {
    * is performed by the java interpreter).
    *
    * @return Class object representing the parsed class file
-   * @throw  IOException
-   * @throw  ClassFormatError
+   * @throws  IOException
+   * @throws  ClassFormatError
    */  
   public JavaClass parse() throws IOException, ClassFormatError
   {
@@ -209,8 +209,8 @@ public final class ClassParser {
 
   /**
    * Read information about the attributes of the attributes of the class.
-   * @throw  IOException
-   * @throw  ClassFormatError
+   * @throws  IOException
+   * @throws  ClassFormatError
    */
   private final void readAttributes() throws IOException, ClassFormatError
   {
@@ -225,8 +225,8 @@ public final class ClassParser {
 
   /**
    * Read information about the class and its super class.
-   * @throw  IOException
-   * @throw  ClassFormatError
+   * @throws  IOException
+   * @throws  ClassFormatError
    */
   private final void readClassInfo() throws IOException, ClassFormatError
   {
@@ -247,8 +247,8 @@ public final class ClassParser {
   }    
   /**
    * Read constant pool entries.
-   * @throw  IOException
-   * @throw  ClassFormatError
+   * @throws  IOException
+   * @throws  ClassFormatError
    */
   private final void readConstantPool() throws IOException, ClassFormatError
   {
@@ -257,8 +257,8 @@ public final class ClassParser {
 
   /**
    * Read information about the fields of the class, i.e., its variables.
-   * @throw  IOException
-   * @throw  ClassFormatError
+   * @throws  IOException
+   * @throws  ClassFormatError
    */
   private final void readFields() throws IOException, ClassFormatError
   {
@@ -276,8 +276,8 @@ public final class ClassParser {
   /**
    * Check whether the header of the file is ok.
    * Of course, this has to be the first action on successive file reads.
-   * @throw  IOException
-   * @throw  ClassFormatError
+   * @throws  IOException
+   * @throws  ClassFormatError
    */
   private final void readID() throws IOException, ClassFormatError
   {
@@ -288,8 +288,8 @@ public final class ClassParser {
   }    
   /**
    * Read information about the interfaces implemented by this class.
-   * @throw  IOException
-   * @throw  ClassFormatError
+   * @throws  IOException
+   * @throws  ClassFormatError
    */
   private final void readInterfaces() throws IOException, ClassFormatError
   {
@@ -303,8 +303,8 @@ public final class ClassParser {
   }     
   /**
    * Read information about the methods of the class.
-   * @throw  IOException
-   * @throw  ClassFormatError
+   * @throws  IOException
+   * @throws  ClassFormatError
    */
   private final void readMethods() throws IOException, ClassFormatError
   {
@@ -318,8 +318,8 @@ public final class ClassParser {
   }      
   /**
    * Read major and minor version of compiler which created the file.
-   * @throw  IOException
-   * @throw  ClassFormatError
+   * @throws  IOException
+   * @throws  ClassFormatError
    */
   private final void readVersion() throws IOException, ClassFormatError
   {

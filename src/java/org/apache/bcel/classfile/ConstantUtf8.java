@@ -80,7 +80,7 @@ public final class ConstantUtf8 extends Constant {
    * Initialize instance from file data.
    *
    * @param file Input stream
-   * @throw IOException
+   * @throws IOException
    */
   ConstantUtf8(DataInputStream file) throws IOException
   {    
@@ -113,7 +113,7 @@ public final class ConstantUtf8 extends Constant {
    * Dump String in Utf8 format to file stream.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

@@ -243,7 +243,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
    * Dump class to a file.
    *
    * @param file Output file
-   * @throw IOException
+   * @throws IOException
    */
   public void dump(File file) throws IOException
   {

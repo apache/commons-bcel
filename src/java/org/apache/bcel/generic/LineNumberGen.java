@@ -74,7 +74,6 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
    * Create a line number.
    *
    * @param ih instruction handle to reference
-   * @return new line number object
    */
   public LineNumberGen(InstructionHandle ih, int src_line) {
     setInstruction(ih);

@@ -84,7 +84,7 @@ public final class ConstantValue extends Attribute {
    * @param length Content length in bytes
    * @param file Input stream
    * @param constant_pool Array of constants
-   * @throw IOException
+   * @throws IOException
    */
   ConstantValue(int name_index, int length, DataInputStream file,
 		ConstantPool constant_pool) throws IOException
@@ -120,7 +120,7 @@ public final class ConstantValue extends Attribute {
    * Dump constant value attribute to file stream on binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

@@ -107,7 +107,7 @@ public abstract class Attribute implements Cloneable, Node {
    * Dump attribute to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */
   public void dump(DataOutputStream file) throws IOException
   {
@@ -145,9 +145,9 @@ public abstract class Attribute implements Cloneable, Node {
    * @param  file Input stream
    * @param  constant_pool Array of constants
    * @return Attribute
-   * @throw  IOException
-   * @throw  ClassFormatError
-   * @throw InternalError
+   * @throws  IOException
+   * @throws  ClassFormatError
+   * @throws InternalError
    */
   public static final Attribute readAttribute(DataInputStream file,
 						 ConstantPool constant_pool)

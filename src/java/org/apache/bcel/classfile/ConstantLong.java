@@ -87,7 +87,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
    * Initialize instance from file data.
    *
    * @param file Input stream
-   * @throw IOException
+   * @throws IOException
    */
   ConstantLong(DataInputStream file) throws IOException
   {    
@@ -107,7 +107,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
    * Dump constant long to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

@@ -99,7 +99,7 @@ public final class LineNumberTable extends Attribute {
    * @param name_index Index of name
    * @param length Content length in bytes
    * @param file Input stream
-   * @throw IOException
+   * @throws IOException
    * @param constant_pool Array of constants
    */
   LineNumberTable(int name_index, int length, DataInputStream file,
@@ -126,7 +126,7 @@ public final class LineNumberTable extends Attribute {
    * Dump line number table attribute to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

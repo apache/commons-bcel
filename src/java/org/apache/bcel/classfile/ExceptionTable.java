@@ -102,7 +102,7 @@ public final class ExceptionTable extends Attribute {
    * @param length Content length in bytes
    * @param file Input stream
    * @param constant_pool Array of constants
-   * @throw IOException
+   * @throws IOException
    */
   ExceptionTable(int name_index, int length, DataInputStream file,
 		 ConstantPool constant_pool) throws IOException
@@ -131,7 +131,7 @@ public final class ExceptionTable extends Attribute {
    * Dump exceptions attribute to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

@@ -83,7 +83,7 @@ public final class InnerClass implements Cloneable, Node {
   /**
    * Construct object from file stream.
    * @param file Input stream
-   * @throw IOException
+   * @throws IOException
    */  
   InnerClass(DataInputStream file) throws IOException
   {
@@ -120,7 +120,7 @@ public final class InnerClass implements Cloneable, Node {
    * Dump inner class attribute to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

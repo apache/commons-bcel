@@ -82,8 +82,8 @@ public final class Method extends FieldOrMethod {
   /**
    * Construct object from file stream.
    * @param file Input stream
-   * @throw IOException
-   * @throw ClassFormatError
+   * @throws IOException
+   * @throws ClassFormatError
    */
   Method(DataInputStream file, ConstantPool constant_pool)
        throws IOException, ClassFormatError

@@ -95,7 +95,7 @@ public final class StackMap extends Attribute implements Node {
    * @param name_index Index of name
    * @param length Content length in bytes
    * @param file Input stream
-   * @throw IOException
+   * @throws IOException
    * @param constant_pool Array of constants
    */
   StackMap(int name_index, int length, DataInputStream file,
@@ -114,7 +114,7 @@ public final class StackMap extends Attribute implements Node {
    * Dump line number table attribute to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

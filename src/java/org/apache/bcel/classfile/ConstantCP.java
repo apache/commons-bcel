@@ -82,7 +82,7 @@ public abstract class ConstantCP extends Constant {
    *
    * @param tag  Constant type tag
    * @param file Input stream
-   * @throw IOException
+   * @throws IOException
    */
   ConstantCP(byte tag, DataInputStream file) throws IOException
   {
@@ -104,7 +104,7 @@ public abstract class ConstantCP extends Constant {
    * Dump constant field reference to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

@@ -80,7 +80,7 @@ public final class LineNumber implements Cloneable, Node {
   /**
    * Construct object from file stream.
    * @param file Input stream
-   * @throw IOException
+   * @throws IOException
    */
   LineNumber(DataInputStream file) throws IOException
   {
@@ -112,7 +112,7 @@ public final class LineNumber implements Cloneable, Node {
    * Dump line number/pc pair to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

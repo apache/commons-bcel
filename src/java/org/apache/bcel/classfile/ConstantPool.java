@@ -87,8 +87,8 @@ public class ConstantPool implements Cloneable, Node {
    * Read constants from given file stream.
    *
    * @param file Input stream
-   * @throw IOException
-   * @throw ClassFormatError
+   * @throws IOException
+   * @throws ClassFormatError
    */
   ConstantPool(DataInputStream file) throws IOException, ClassFormatError
   {
@@ -220,7 +220,7 @@ public class ConstantPool implements Cloneable, Node {
    * Dump constant pool to file stream in binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */
   public void dump(DataOutputStream file) throws IOException
   {
@@ -254,7 +254,7 @@ public class ConstantPool implements Cloneable, Node {
    * @param  tag Tag of expected constant, i.e., its type
    * @return Constant value
    * @see    Constant
-   * @throw  ClassFormatError
+   * @throws  ClassFormatError
    */
   public Constant getConstant(int index, byte tag)
        throws ClassFormatError
@@ -289,7 +289,7 @@ public class ConstantPool implements Cloneable, Node {
    * @return Contents of string reference
    * @see    ConstantClass
    * @see    ConstantString
-   * @throw  ClassFormatError
+   * @throws  ClassFormatError
    */
   public String getConstantString(int index, byte tag) 
        throws ClassFormatError

@@ -561,7 +561,7 @@ public abstract class Utility {
   /**
    * @param  signature    Method signature
    * @return Array of argument types
-   * @throw  ClassFormatError  
+   * @throws  ClassFormatError  
    */
   public static final String[] methodSignatureArgumentTypes(String signature)
     throws ClassFormatError 
@@ -573,7 +573,7 @@ public abstract class Utility {
    * @param  signature    Method signature
    * @param chopit Shorten class names ?
    * @return Array of argument types
-   * @throw  ClassFormatError  
+   * @throws  ClassFormatError  
    */
   public static final String[] methodSignatureArgumentTypes(String signature,
 							    boolean chopit)
@@ -604,7 +604,7 @@ public abstract class Utility {
   /**
    * @param  signature    Method signature
    * @return return type of method
-   * @throw  ClassFormatError  
+   * @throws  ClassFormatError  
    */
   public static final String methodSignatureReturnType(String signature)
        throws ClassFormatError 
@@ -615,7 +615,7 @@ public abstract class Utility {
    * @param  signature    Method signature
    * @param chopit Shorten class names ?
    * @return return type of method
-   * @throw  ClassFormatError  
+   * @throws  ClassFormatError  
    */
   public static final String methodSignatureReturnType(String signature,
 						       boolean chopit)
@@ -681,7 +681,7 @@ public abstract class Utility {
    * @param  name         Method name
    * @param  access       Method access rights
    * @return Java type declaration
-   * @throw  ClassFormatError  
+   * @throws  ClassFormatError  
    */
   public static final String methodSignatureToString(String signature,
 						     String name,
@@ -1128,6 +1128,11 @@ public abstract class Utility {
   }
 
   public static final String printArray(Object[] obj, boolean braces) {
+    return printArray(obj, braces, false);
+  }
+
+  public static final String printArray(Object[] obj, boolean braces,
+					boolean quote) {
     if(obj == null)
       return null;
 
@@ -1136,13 +1141,15 @@ public abstract class Utility {
       buf.append('{');
 
     for(int i=0; i < obj.length; i++) {
-      if(obj[i] != null)
-	buf.append(obj[i].toString());
-      else
+      if(obj[i] != null) {
+	buf.append((quote? "\"" : "") + obj[i].toString() + (quote? "\"" : ""));
+      } else {
 	buf.append("null");
+      }
 
-      if(i < obj.length - 1)
+      if(i < obj.length - 1) {
 	buf.append(", ");
+      }
     }
 
     if(braces)

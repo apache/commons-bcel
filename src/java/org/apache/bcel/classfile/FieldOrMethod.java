@@ -83,8 +83,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
   /**
    * Construct object from file stream.
    * @param file Input stream
-   * @throw IOException
-   * @throw ClassFormatError
+   * @throws IOException
+   * @throws ClassFormatError
    */
   protected FieldOrMethod(DataInputStream file, ConstantPool constant_pool)
     throws IOException, ClassFormatError
@@ -120,7 +120,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
    * Dump object to file stream on binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

@@ -126,7 +126,7 @@ public final class Unknown extends Attribute {
    * @param length Content length in bytes
    * @param file Input stream
    * @param constant_pool Array of constants
-   * @throw IOException
+   * @throws IOException
    */
   Unknown(int name_index, int length, DataInputStream file,
 	  ConstantPool constant_pool)
@@ -154,7 +154,7 @@ public final class Unknown extends Attribute {
    * Dump unknown bytes to file stream.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

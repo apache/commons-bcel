@@ -75,7 +75,7 @@ public final class ConstantInterfaceMethodref extends ConstantCP {
    * Initialize instance from file data.
    *
    * @param file input stream
-   * @throw IOException
+   * @throws IOException
    */
   ConstantInterfaceMethodref(DataInputStream file) throws IOException
   {
