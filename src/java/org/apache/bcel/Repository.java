@@ -127,7 +127,8 @@ public abstract class Repository {
 	InputStream is = clazz.getResourceAsStream(name + ".class");
 	j_class = new ClassParser(is, class_name).parse();
       } catch(IOException e) {
-	throw new RuntimeException(e.getMessage());
+	//System.err.println(e);
+	return null; // Use same behaviour as above
       }
 
       classes.put(class_name, j_class);
