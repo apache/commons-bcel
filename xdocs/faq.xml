@@ -41,12 +41,12 @@
       <b>Q: </b> (Typically for users of Xalan (XSLTC)) I'm getting
 
     <pre>
-    ...
     ClassGenException: Branch target offset too large for short
     </pre>
 
      when compiling large files.
       <br/>
+
       <b>A: </b> The answer lies in internal limitations of the JVM,
       branch instruction like goto can not address offsets larger than
       a short integer, i.e. offsets >= 32767.<br/>
@@ -68,7 +68,9 @@
       <b>Q:</b> I get a verification error, what can I do?
       <br/>
       <b>A:</b> Use the JustIce verifier that comes together with BCEL
-      to get more detailed information.
+      to get more detailed information:
+       <pre>
+       java org.apache.bcel.verifier.Verifier &lt;your class&gt;</pre>
     </p>
     
     </section>
