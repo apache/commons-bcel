@@ -56,7 +56,6 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.*;
-import java.io.*;
 import java.util.ArrayList;
 
 /** 
