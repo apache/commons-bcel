@@ -54,8 +54,9 @@ package org.apache.bcel.classfile;
  * <http://www.apache.org/>.
  */
 
-import  org.apache.bcel.Constants;
-import  java.io.*;
+import org.apache.bcel.Constants;
+import java.io.*;
+import java.util.HashMap;
 
 /**
  * Abstract super class for <em>Attribute</em> objects. Currently the
@@ -110,7 +111,28 @@ public abstract class Attribute implements Cloneable, Node {
   {
     file.writeShort(name_index);
     file.writeInt(length);
-  }    
+  }
+
+  private static HashMap readers = new HashMap();
+
+  /** Add an Attribute reader capable of parsing (user-defined) attributes
+   * named "name". You should not add readers for the standard attributes
+   * such as "LineNumberTable", because those are handled internally.
+   *
+   * @param name the name of the attribute as stored in the class file
+   * @param r the reader object
+   */ 
+  public static void addAttributeReader(String name, AttributeReader r) {
+    readers.put(name, r);
+  }
+
+  /** Remove attribute reader
+   *
+   * @param name the name of the attribute as stored in the class file
+   */
+  public static void removeAttributeReader(String name) {
+    readers.remove(name);
+  }
 
   /* Class method reads one attribute from the input data stream.
    * This method must not be accessible from the outside.  It is
@@ -155,7 +177,12 @@ public abstract class Attribute implements Cloneable, Node {
     // Call proper constructor, depending on `tag'
     switch(tag) {
     case Constants.ATTR_UNKNOWN:
-      return new Unknown(name_index, length, file, constant_pool);
+      AttributeReader r = (AttributeReader)readers.get(name);
+
+      if(r != null)
+	return r.createAttribute(name_index, length, file, constant_pool);
+      else
+	return new Unknown(name_index, length, file, constant_pool);
 
     case Constants.ATTR_CONSTANT_VALUE:
       return new ConstantValue(name_index, length, file, constant_pool);
