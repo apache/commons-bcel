@@ -64,7 +64,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     out.println(" = " + cv);
   }
 
-  private Method method;
+  private Method _method;
 
   /**
    * Unfortunately Jasmin expects ".end method" after each method. Thus we've to check
@@ -72,7 +72,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
    * then.
    */
   private final void printEndMethod(Attribute attr) {
-    Attribute[] attributes = method.getAttributes();
+    Attribute[] attributes = _method.getAttributes();
 
     if(attr == attributes[attributes.length - 1])
       out.println(".end method");
@@ -80,17 +80,17 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
   public void visitDeprecated(Deprecated attribute) { printEndMethod(attribute); }
   public void visitSynthetic(Synthetic attribute) {
-    if(method != null)
+    if(_method != null)
       printEndMethod(attribute);
   }
 
   public void visitMethod(Method method) {
-    out.println("\n.method " + Utility.accessToString(method.getAccessFlags()) +
-		" " + method.getName() + method.getSignature());
+    out.println("\n.method " + Utility.accessToString(_method.getAccessFlags()) +
+		" " + _method.getName() + _method.getSignature());
 
-    this.method = method; // Remember for use in subsequent visitXXX calls
+    this._method = method; // Remember for use in subsequent visitXXX calls
 
-    Attribute[] attributes = method.getAttributes();
+    Attribute[] attributes = _method.getAttributes();
     if((attributes == null) || (attributes.length == 0))
       out.println(".end method");
   }
@@ -111,7 +111,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     out.println(".limit stack " + code.getMaxStack());
     out.println(".limit locals " + code.getMaxLocals());
 
-    MethodGen           mg  = new MethodGen(method, class_name, cp);
+    MethodGen           mg  = new MethodGen(_method, class_name, cp);
     InstructionList     il  = mg.getInstructionList();
     InstructionHandle[] ihs = il.getInstructionHandles();
 
@@ -229,7 +229,6 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     printEndMethod(code);
   }
-
  
   private final String get(InstructionHandle ih) {
     String str = new StringTokenizer((String)map.get(ih), "\n").nextToken();
