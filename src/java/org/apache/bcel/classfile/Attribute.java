@@ -149,8 +149,8 @@ public abstract class Attribute implements Cloneable, Node {
    * @throw  ClassFormatError
    * @throw InternalError
    */
-  static final Attribute readAttribute(DataInputStream file,
-				       ConstantPool constant_pool)
+  public static final Attribute readAttribute(DataInputStream file,
+						 ConstantPool constant_pool)
     throws IOException, ClassFormatError, InternalError
   {
     ConstantUtf8 c;
