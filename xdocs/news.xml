@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <author email="jvanzyl@zenplex.com">Jason van Zyl</author>
+    <title>News and Status</title>
+  </properties>
+
+  <body>
+
+  <section name="News &amp; Status">
+
+  <h3>27 October 2001 - BCEL moves to Jakarta!</h3>
+
+  <p>
+    The Byte Code Engineering Library is now an official
+    subproject of Jakarta. A special thanks goes to Markus Dahm
+    for donating the code to the Jakarta Project.
+  </p>
+
+  <hr noshade="" size="1"/>
+                       
+  </section>
+
+  </body>
+</document>

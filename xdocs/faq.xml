@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>BCEL FAQ</title>
+    <author email="jvanzyl@zenplex.com">Jason van Zyl</author>
+  </properties>
+
+  <body>
+
+  <section name="FAQ">
+
+    <p>
+      <b>Q: </b> Is the BCEL thread-safe?
+      <br/>
+      <b>A: </b>BCEL was (deliberately) not designed for thread
+      safety. See <a href="http://java.sun.com/docs/books/cp/">
+      "Concurrent Programming in Java"</a>, by Doug Lea,
+      for an excellent reference on how to build thread-safe wrappers.
+    </p>
+    <p>
+      <b>Q: </b> Can I use BCEL in a commercial product?
+      <br/>
+      <b>A: </b> Yes, this is covered by the <a
+      href="LGPL.html">LGPL</a>, if you add a note about the original
+      author and where to find the sources, i.e., this URL.
+    </p>
+
+    <p>
+      <b>Q: </b> (Typically for users of SUN's XSLTC) I'm getting
+
+    <pre>
+    de.fub.bytecode.generic.ClassGenException: Branch target offset too large for short
+    </pre>
+
+     when compiling large files.
+      <br/>
+      <b>A: </b> The answer lies in internal limitations of the JVM,
+      branch instruction like goto can not address offsets larger than
+      a short integer, i.e. offsets >= 32767.<br/>
+      The solution is to split the branch into in intermediate hops,
+      which the XSLTC obviously doesn't take care off. Blame SUN ;-)
+      (In fact you could replace gotos with the goto_w instruction,
+      but this would help in the other cases).
+    </p>
+
+    <p>
+      <b>Q: Can I create or modify classes dynmically with BCEL?</b>
+      <br/>
+      <b>A: Since 4.4.0 BCEL contains useful classes in the
+      de.fub.bytecode.util package, namely ClassLoader and
+      JavaWrapper. Take a look at the  ProxyCreator example.</b>
+    </p>
+    
+    </section>
+<!--
+    <p>
+      <b>Q: </b>
+      <br/>
+      <b>A: </b>
+    </p>
+-->
+</body>
+</document>

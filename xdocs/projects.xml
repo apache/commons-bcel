@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>BCEL Projects</title>
+    <author email="jvanzyl@zenplex.com">Jason van Zyl</author>
+  </properties>
+
+  <body>
+
+  <section name="BCEL Projects">
+
+  <ul>
+    <li>
+      Apache's <a href="http://xml.apache.org/xalan-j/">Xalan</a>XSLT Compiler
+    </li>
+    <li>
+      <a HREF="http://objectscript.sourceforge.net/">ObjectScript</a>
+    </li>
+    <li>
+      <a HREF="http://jde.sunsite.dk/">Java Development Environment</a> for Emacs
+    </li>
+    <li>
+      <a HREF="http://www.geocities.com/vamp201/">Venus Application Publisher</a>
+    </li>
+
+    <li><a HREF="http://www.cs.arizona.edu/sandmark/">SandMark: Software Watermarking for Java</a>
+    </li>
+
+    <li><a
+    HREF="http://www-i2.informatik.rwth-aachen.de/~markusj/jopt/index.html">Byte
+    code optimization</a>
+    </li>
+
+    <li><a HREF="http://www.cs.uoregon.edu/research/perpetual/dasada/Software/Gretel/">
+    Gretel</a> - Residual Test Coverage Tool
+    </li>
+
+    <li><a HREF="http://www.inf.fu-berlin.de/~bokowski/pmgjava/index.html">
+    Poor Man's Genericity</a>
+    </li>
+
+    <li><a HREF="http://Theory.Stanford.EDU/~vganesh/project.html">Mobile
+    Code Security Through Java Byte-Code Modification</a>
+    </li>
+
+    <li><a HREF="http://abone.unige.ch/">Portable Resource Accounting
+    for Java</a>
+    </li>
+
+    <li><a HREF="http://lampwww.epfl.ch/funnel/">Funnel</a>
+    </li>
+
+    <li><a HREF="http://www.uni-paderborn.de/fachbereich/AG/agkastens/wir/mthies/index.htm">
+    Static analysis of class libraries</a>
+    </li>
+
+    <li><a HREF="http://www.cs.ncl.ac.uk/research/dependability/reflection/"
+    >Kava: Reflective Java</a>
+    </li>
+
+    <li>one.world - <a HREF="http://one.cs.washington.edu/"
+    >Programming for pervasive computing environments</a>
+    </li>
+
+    <li><a
+    HREF="http://www.cs.uni-essen.de/dawis/research/aop/sally/"
+    >Sally: Simple Aspect Language</a>
+    </li>
+
+    <li><a
+    HREF="http://www.cs.kuleuven.ac.be/~tim/MOS/brakes.html"
+    >Brakes: Thread serialization</a>
+    </li>
+
+    <li><a
+    HREF="http://www.cs.sunysb.edu/~stoller/SPIN2001.html"
+    >Transformations for Model Checking Distributed Java Programs</a>
+    </li>
+
+    <li><a
+    HREF="http://ozone-db.org/">Ozone Data base</a>
+    </li>
+
+    <li><a
+    HREF="http://www.jmonde.org/Trace">Method tracing tool</a>
+    </li>
+
+    <li><a HREF="http://javalab.cs.uni-bonn.de/research/jmangler/"
+    >JMangler</a>
+    </li>
+
+    <li><a href="http://barat.sourceforge.net/">Barat compiler
+    framework</a>
+    </li>
+
+    <li><a href="http://www.cse.unsw.edu.au/~peteg/src/prolog/prolog.html">Prolog</a>
+    </li>
+
+    <li><a href="http://www.cs.fit.edu/~jheat/">JHEAT</a></li>
+
+    <li><a HREF="http://importscrubber.sourceforge.net/">Import Scrubber</a>
+    </li>
+
+    <li><a HREF="http://jbackbrowse.sourceforge.net/">jBackBrowse</a>
+    </li>
+  </ul>
+
+  <H2>Related Projects</H2>
+  <ul>
+    <li><a href="http://www.cs.duke.edu/ari/joie/">JOIE: The Java Object Instrumentation Environment</a></li>
+
+    <li><a href="http://www.cat.nyu.edu/meyer/jasmin/">Jasmin Assembler</a></li>
+
+    <li><a href="http://www.cs.colorado.edu/~hanlee/BIT/index.html">BIT: Bytecode Instrumenting Tool</a></li>
+    <li><a href="http://www.alphaworks.ibm.com/tech/cfparse">CFParse</a></li>
+
+    <li><a href="http://www.alphaworks.ibm.com/tech/jikesbt">JikesBT</a></li>
+
+    <li><a href="http://sourceware.cygnus.com/kawa/api/gnu/bytecode/package-summary.html">gnu.bytecode
+    package</a></li>
+
+    <li><a href="http://www.digital.com/java/download/jtrek/index.html">JTrek</a></li>
+  </ul>
+
+</section>
+
+</body>
+</document>
+
+
+
+
+
+

@@ -6,8 +6,26 @@
 
   <body>
     <menu name="BCEL">
-      <item name="Overview" href="/index.html"/>
-      <item name="Manual" href="/manual.html"/>
+      <item name="Front Page" href="/index.html"/>
+      <item name="News &amp; Status" href="/news.html"/>
     </menu>
-  </body>
+
+    <menu name="Documentation">
+      <item name="Manual" href="/manual.html"/>
+      <item name="FAQ" href="/faq.html"/>
+    </menu>
+
+    <menu name="Download">
+      <item name="Binaries" href="/site/binindex.html"/>
+      <item name="Source Code" href="/site/sourceindex.html"/>
+    </menu>
+
+    <menu name="Get Involved">
+      <item name="CVS Repository" href="http://cvs.apache.org/viewcvs/jakarta-bcel/"/>
+      <item name="Mailing Lists" href="http://jakarta.apache.org/site/mail.html"/>
+      <item name="Issue Tracking" href="http://jakarta.apache.org/site/bugs.html"/>
+      <item name="Contributors" href="/contributors.html"/>
+      <item name="License" href="/license.html"/>
+    </menu>
+</body>
 </project>

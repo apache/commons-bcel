@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>BCEL Contributors</title>
+    <author email="jvanzyl@zenplex.com">Jason van Zyl</author>
+  </properties>
+
+  <body>
+
+  <section name="Contributors">
+
+  <p>
+    <table>
+      <tr>
+        <td>Markus Dahm</td>
+        <td><a href="mailto:markus.dahm@berlin.de">markus.dahm@berlin.de</a></td>
+      </tr>
+      <tr>
+        <td>Conor MacNeill</td>
+        <td><a href="mailto:conor@cortexbusiness.com.au">conor@cortexbusiness.com.au</a></td>
+      </tr>
+      <tr>
+        <td>Costin Manolache</td>
+        <td><a href="mailto:cmanolache@yahoo.com">cmanolache@yahoo.com</a></td>
+      </tr>
+      <tr>
+        <td>Jason van Zyl</td>
+        <td><a href="mailto:jvanzyl@zenplex.com">jvanzyl@zenplex.com</a></td>
+      </tr>
+    </table>
+  </p>
+
+  </section>
+</body>
+</document>
