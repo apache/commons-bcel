@@ -169,11 +169,22 @@ public class ClassPath {
   }
     
   /**
+   * Return stream for class or resource on CLASSPATH.
+   *
    * @param name fully qualified file name, e.g. java/lang/String
    * @param suffix file name ends with suff, e.g. .java
    * @return input stream for file on class path
    */
   public InputStream getInputStream(String name, String suffix) throws IOException {
+    InputStream is = null;
+
+    try {
+      is = getClass().getClassLoader().getResourceAsStream(name + suffix);
+    } catch(Exception e) { }
+
+    if(is != null)
+      return is;
+    
     return getClassFile(name, suffix).getInputStream();
   }
 
