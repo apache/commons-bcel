@@ -89,6 +89,13 @@ public class ClassLoaderRepository
 	clazz.setRepository( this );
     }
 
+  /**
+   * Remove class from repository
+   */
+  public void removeClass(JavaClass clazz) {
+    loadedClasses.remove(clazz.getClassName());
+  }
+
     /**
      * Find an already defined JavaClass.
      */

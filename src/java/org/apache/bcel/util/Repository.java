@@ -62,12 +62,18 @@ public interface Repository
      * Store the provided class under "clazz.getClassName()" 
      */
     public void storeClass( JavaClass clazz );
+
+    /**
+     * Remove class from repository
+     */
+    public void removeClass( JavaClass clazz );
     
     /**
      * Find the class with the name provided, if the class
      * isn't there, return NULL.
      */
     public JavaClass findClass( String className );
+
 
     /**
      * Find the class with the name provided, if the class
