@@ -49,7 +49,7 @@ Available targets:
     <property name="apidocs.dir"  value="${docs.dir}/api"/>
     <property name="build.dest"   value="${build.dir}/classes"/>
     <property name="lib.dir"      value="${basedir}/lib"/>
-    <property name="class.path"   value="${lib.dir}/Regex.jar:${build.dir}"/>
+    <property name="class.path"   value="${lib.dir}/Regex.jar:${build.dest}"/>
 
     <!-- Use jikes compiler, if you don't have it comment out the next lines -->
     <!-- property name="build.compiler.emacs" value="true"/ -->
@@ -72,7 +72,7 @@ Available targets:
 
   <!-- Compile the examples -->
   <target name="examples" depends="compile">
-    <javac srcdir="${examples.dir}" destdir="${build.dir}" classpath="${class.path}" />
+    <javac srcdir="${examples.dir}" destdir="${build.dest}" classpath="${class.path}" />
   </target>
 
   <target name="docs" depends="init">
