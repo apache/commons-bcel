@@ -28,6 +28,10 @@
     <li><a HREF="http://www.cs.arizona.edu/sandmark/">SandMark: Software Watermarking for Java</a>
     </li>
 
+    <li><a HREF="http://jcontractor.sourceforge.net/">jContractor -
+    Design by contract</a>
+    </li>
+
     <li><a
     HREF="http://www-i2.informatik.rwth-aachen.de/~markusj/jopt/index.html">Byte
     code optimization</a>
