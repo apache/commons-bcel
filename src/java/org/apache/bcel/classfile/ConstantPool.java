@@ -296,7 +296,6 @@ public class ConstantPool implements Cloneable, Node {
   {
     Constant c;
     int    i;
-    String   s;
 
     c = getConstant(index, tag);
 
