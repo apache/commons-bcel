@@ -107,7 +107,7 @@ Available targets:
   </target>
 
   <target name="test2" depends="examples">
-    <echo message="Decompile class file to Jasmin format"/>
+    <echo message="Decompile class file to Jasmin format (see java/lang/String.j)"/>
 
     <java classname="JasminVisitor" classpath="${class.path}">
 	<arg value="java.lang.String"/>
