@@ -12,7 +12,7 @@ public interface BCELComparator {
 	 * 
 	 * @param THIS
 	 * @param THAT
-	 * @return
+	 * @return true if and only if THIS equals THAT
 	 */
 	public boolean equals(Object THIS, Object THAT);
 	
@@ -20,8 +20,7 @@ public interface BCELComparator {
 	 * Return hashcode for THIS.hashCode()
 	 * 
 	 * @param THIS
-	 * @param THAT
-	 * @return
+	 * @return hashcode for THIS.hashCode()
 	 */
 	public int hashCode(Object THIS);
 }
