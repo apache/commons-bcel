@@ -8,6 +8,7 @@
   <organization>
     <name>Apache Software Foundation</name>
     <url>http://www.apache.org</url>
+    <logo>bcel-logo.gif</logo>
   </organization>
   <inceptionYear>2002</inceptionYear>
   <package>org.apache.bcel</package>
