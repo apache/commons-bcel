@@ -59,12 +59,11 @@ import  java.io.*;
 import  java.util.zip.*;
 
 /**
- * Wrapper class that parses a given Java .class file. The method
- * <A href ="#parse">parse</A> returns a
- * <A href ="org.apache.bcel.classfile.JavaClass.html">
+ * Wrapper class that parses a given Java .class file. The method <A
+ * href ="#parse">parse</A> returns a <A href ="JavaClass.html">
  * JavaClass</A> object on success. When an I/O error or an
- * inconsistency occurs an appropiate exception is propagated back
- * to the caller.
+ * inconsistency occurs an appropiate exception is propagated back to
+ * the caller.
  *
  * The structure and the names comply, except for a few conveniences,
  * exactly with the <A href="ftp://java.sun.com/docs/specs/vmspec.ps">
@@ -72,7 +71,7 @@ import  java.util.zip.*;
  * further details about the structure of a bytecode file.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
  */
 public final class ClassParser {
   private DataInputStream file;
