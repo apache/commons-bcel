@@ -57,7 +57,7 @@ package org.apache.bcel.generic;
 /** 
  * ICONST - Push value between -1, ..., 5, other values cause an exception
  *
- * <PRE>Stack: ... -&gt; ..., <i></PRE>
+ * <PRE>Stack: ... -&gt; ..., </PRE>
  *
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>

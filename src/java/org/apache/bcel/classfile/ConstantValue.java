@@ -84,7 +84,7 @@ public final class ConstantValue extends Attribute {
    * @param length Content length in bytes
    * @param file Input stream
    * @param constant_pool Array of constants
-   * @throws IOException
+   * @throw IOException
    */
   ConstantValue(int name_index, int length, DataInputStream file,
 		ConstantPool constant_pool) throws IOException
@@ -120,7 +120,7 @@ public final class ConstantValue extends Attribute {
    * Dump constant value attribute to file stream on binary format.
    *
    * @param file Output file stream
-   * @throws IOException
+   * @throw IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {
@@ -158,39 +158,12 @@ public final class ConstantValue extends Attribute {
     case Constants.CONSTANT_String:  
       i   = ((ConstantString)c).getStringIndex();
       c   = constant_pool.getConstant(i, Constants.CONSTANT_Utf8);
-      buf = "\"" + convertString(((ConstantUtf8)c).getBytes()) + "\"";
+      buf = "\"" + Utility.convertString(((ConstantUtf8)c).getBytes()) + "\"";
       break;
     default: throw new InternalError("Type of ConstValue invalid: " + c);
     }
 
     return buf;
-  }
-
-  /**
-   * Escape all occurences of newline chars '\n', quotes \", etc.
-   */
-  private static final String convertString(String label) {
-    char[]       ch  = label.toCharArray();
-    StringBuffer buf = new StringBuffer();
-
-    for(int i=0; i < ch.length; i++) {
-      switch(ch[i]) {
-      case '\n':
-	buf.append("\\n"); break;
-      case '\r':
-	buf.append("\\r"); break;
-      case '\"':
-	buf.append("\\\""); break;
-      case '\'':
-	buf.append("\\'"); break;
-      case '\\':
-	buf.append("\\\\"); break;
-      default:
-	buf.append(ch[i]); break;
-      }
-    }
-
-    return buf.toString();
   }
 
   /**

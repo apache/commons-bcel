@@ -1359,4 +1359,31 @@ public abstract class Utility {
       write(str.toCharArray(), off, len);
     }
   }
+
+  /**
+   * Escape all occurences of newline chars '\n', quotes \", etc.
+   */
+  public static final String convertString(String label) {
+    char[]       ch  = label.toCharArray();
+    StringBuffer buf = new StringBuffer();
+
+    for(int i=0; i < ch.length; i++) {
+      switch(ch[i]) {
+      case '\n':
+	buf.append("\\n"); break;
+      case '\r':
+	buf.append("\\r"); break;
+      case '\"':
+	buf.append("\\\""); break;
+      case '\'':
+	buf.append("\\'"); break;
+      case '\\':
+	buf.append("\\\\"); break;
+      default:
+	buf.append(ch[i]); break;
+      }
+    }
+
+    return buf.toString();
+  }
 }
