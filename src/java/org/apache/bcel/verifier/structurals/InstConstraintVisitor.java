@@ -418,8 +418,21 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 * Assures the generic preconditions of a ReturnInstruction instance.
 	 */
 	public void visitReturnInstruction(ReturnInstruction o){
-		if (o instanceof RETURN){
-			return;
+		Type method_type = mg.getType();
+		if (method_type == Type.BOOLEAN ||
+			method_type == Type.BYTE ||
+			method_type == Type.SHORT ||
+			method_type == Type.CHAR){
+		        method_type = Type.INT;
+			}
+
+        if (o instanceof RETURN){
+            if (method_type != Type.VOID){
+                constraintViolated(o, "RETURN instruction in non-void method.");
+            }
+            else{
+			    return;
+            }
 		}
 		if (o instanceof ARETURN){
 			if (stack().peek() == Type.NULL){
@@ -439,13 +452,6 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 			}
 		}
 		else{
-			Type method_type = mg.getType();
-			if (method_type == Type.BOOLEAN ||
-					method_type == Type.BYTE ||
-					method_type == Type.SHORT ||
-					method_type == Type.CHAR){
-				method_type = Type.INT;
-			}
 			if (! ( method_type.equals( stack().peek() ))){
 				constraintViolated(o, "Current method has return type of '"+mg.getType()+"' expecting a '"+method_type+"' on top of the stack. But stack top is a '"+stack().peek()+"'.");
 			}
