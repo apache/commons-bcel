@@ -170,11 +170,8 @@ public final class Method extends FieldOrMethod {
    */
   public final String toString() {
     ConstantUtf8  c;
-    ConstantValue cv;
     String        name, signature, access; // Short cuts to constant pool
-    String        exceptions;
     StringBuffer  buf;
-    Attribute[]   attr;
 
     access = Utility.accessToString(access_flags);
 

@@ -171,9 +171,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
       }
     }
 	
-    // Get class name and superclass name
-    ConstantUtf8  name;
-
     /* According to the specification the following entries must be of type
      * `ConstantClass' but we check that anyway via the 
      * `ConstPool.getConstant' method.
@@ -293,7 +290,11 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
     try {
       dump(ds);
       ds.close();
-    } catch(IOException e) { e.printStackTrace(); }
+    } catch(IOException e) {
+      e.printStackTrace();
+    } finally {
+     try { ds.close(); } catch(IOException e2) { e2.printStackTrace(); }
+    }
 
     return s.toByteArray();
   }
