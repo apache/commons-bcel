@@ -29,6 +29,8 @@ package org.apache.bcel.classfile;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface Visitor {
+  public void visitAnnotation(Annotations obj);
+  public void visitAnnotationEntry(AnnotationEntry obj);
   public void visitCode(Code obj);    
   public void visitCodeException(CodeException obj);    
   public void visitConstantClass(ConstantClass obj);    

@@ -31,6 +31,8 @@ package org.apache.bcel.classfile;
 public class EmptyVisitor implements Visitor {
   protected EmptyVisitor() { }
 
+  public void visitAnnotation(Annotations obj) {}
+  public void visitAnnotationEntry(AnnotationEntry obj) {}
   public void visitCode(Code obj) {}
   public void visitCodeException(CodeException obj) {}
   public void visitConstantClass(ConstantClass obj) {}

@@ -183,6 +183,12 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
     case Constants.ATTR_STACK_MAP:
       return new StackMap(name_index, length, file, constant_pool);
 
+//    case Constants.ATTR_RUNTIMEVISIBLE_ANNOTATIONS:
+//        return new RuntimeVisibleAnnotations(name_index, length, file, constant_pool);
+        
+//    case Constants.ATTR_RUNTIMEINVISIBLE_ANNOTATIONS:
+//      return new RuntimeInvisibleAnnotations(name_index, length, file, constant_pool);
+      
     default: // Never reached
       throw new IllegalStateException("Ooops! default case reached.");
     }
