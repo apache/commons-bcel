@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
-
 <!--
    Build file for BCEL
    $Id$
 
+   Copyright (c) 2002-2004 The Apache Software Foundation.  All rights
+   reserved.
+   
 Notes:
    This is a build file for use with the Jakarta Ant build tool.
 
