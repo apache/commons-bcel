@@ -229,4 +229,43 @@ public abstract class Type {
     vec.toArray(types);
     return types;
   }
+
+  public static Type getType(Class cl) {
+    if(cl == null) {
+      throw new IllegalArgumentException("Class must not be null");
+    }
+
+    /* That's an amzingly easy case, because getName() returns
+     * the signature. That's what we would have liked anyway.
+     */
+    if(cl.isArray()) {
+      return getType(cl.getName());
+    } else if(cl.isPrimitive()) {
+      if(cl == Integer.TYPE) {
+	return INT;
+      } else if(cl == Void.TYPE) {
+	return VOID;
+      } else if(cl == Double.TYPE) {
+	return DOUBLE;
+      } else if(cl == Float.TYPE) {
+	return FLOAT;
+      } else if(cl == Boolean.TYPE) {
+	return BOOLEAN;
+      } else if(cl == Byte.TYPE) {
+	return BYTE;
+      } else if(cl == Short.TYPE) {
+	return SHORT;
+      } else if(cl == Byte.TYPE) {
+	return BYTE;
+      } else if(cl == Long.TYPE) {
+	return LONG;
+      } else if(cl == Character.TYPE) {
+	return CHAR;
+      } else {
+	throw new IllegalStateException("Ooops, what primitive type is " + cl);
+      }
+    } else { // "Real" class
+      return new ObjectType(cl.getName());
+    }
+  }
 }
