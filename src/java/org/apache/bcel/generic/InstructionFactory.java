@@ -525,6 +525,13 @@ public class InstructionFactory implements InstructionConstants {
       return new CHECKCAST(cp.addClass((ObjectType)t));
   }
 
+  public INSTANCEOF createInstanceOf(ReferenceType t) {
+    if(t instanceof ArrayType)
+      return new INSTANCEOF(cp.addArrayClass((ArrayType)t));
+    else
+      return new INSTANCEOF(cp.addClass((ObjectType)t));
+  }
+
   public NEW createNew(ObjectType t) {
     return new NEW(cp.addClass(t));
   }
