@@ -470,7 +470,7 @@ throw new AssertionViolatedException("DID YOU REALLY WANT TO ASK FOR RET'S SUCCS
 
 	/**
 	 * Returns true, if and only if the said instruction is not reachable; that means,
-	 * if it not part of this ControlFlowGraph.
+	 * if it is not part of this ControlFlowGraph.
 	 */
 	public boolean isDead(InstructionHandle i){
 		return instructionContexts.containsKey(i);
