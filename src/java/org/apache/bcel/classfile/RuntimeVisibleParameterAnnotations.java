@@ -28,7 +28,7 @@ import org.apache.bcel.Constants;
  * @version $Id: RuntimeVisibleParameterAnnotations
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  */
-public class RuntimeVisibleParameterAnnotations extends Annotations
+public class RuntimeVisibleParameterAnnotations extends ParameterAnnotations
 {
 	/**
 	 * @param name_index Index pointing to the name <em>Code</em>
