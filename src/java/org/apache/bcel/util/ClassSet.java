@@ -64,7 +64,7 @@ import org.apache.bcel.classfile.JavaClass;
  *
  * @version $Id$
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
- * @see Stack
+ * @see ClassStack
 */
 public class ClassSet implements java.io.Serializable {
   private HashMap _map = new HashMap();

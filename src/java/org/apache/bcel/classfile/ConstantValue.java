@@ -120,7 +120,7 @@ public final class ConstantValue extends Attribute {
    * Dump constant value attribute to file stream on binary format.
    *
    * @param file Output file stream
-   * @throw IOException
+   * @throws IOException
    */ 
   public final void dump(DataOutputStream file) throws IOException
   {

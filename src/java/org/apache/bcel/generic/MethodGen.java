@@ -70,6 +70,7 @@ import java.util.*;
  *
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="http://www.vmeng.com/beard">Patrick C. Beard</A> [setMaxStack()]
  * @see     InstructionList
  * @see     Method
  */
@@ -747,7 +748,6 @@ public class MethodGen extends FieldGenOrMethodGen {
 
   /**
    * Computes max. stack size by performing control flow analysis.
-   * @author  <A HREF="http://www.vmeng.com/beard">Patrick C. Beard</A>
    */
   public void setMaxStack() {
     if(il != null)
