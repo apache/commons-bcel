@@ -112,6 +112,11 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 			String s = obj.getClass().getName();
 			s = s.substring(s.lastIndexOf(".")+1);
 			ret = "<<"+s+">>";
+    }
+    catch(ClassFormatError e){ /* BCEL can be harsh e.g. trying to convert the "signature" of a ReturnaddressType LocalVariable (shouldn't occur, but people do crazy things) */
+      String s = obj.getClass().getName();
+      s = s.substring(s.lastIndexOf(".")+1);
+      ret = "<<"+s+">>";
 		}
 		return ret;
 	}
