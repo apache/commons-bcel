@@ -1650,8 +1650,9 @@ public class Peephole {
   a class that creates that very input class using BCEL.<br/>
   (Think about this sentence for a while, or just try it ...)
   </p>
+  </section>
 
- <section name="Constant pool UML diagram">
+  <section name="Constant pool UML diagram">
 
   <p align="center">
     <a name="Figure 8">
@@ -1660,7 +1661,6 @@ public class Peephole {
     Figure 8: UML diagram for constant pool classes
     </a>
   </p> 
- </section>
- </section>
+  </section>
 </body>
 </document>
