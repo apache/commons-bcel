@@ -63,7 +63,7 @@ import  java.io.*;
  * and represents a reference to a String object.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Constant
  */
 public final class ConstantString extends Constant implements ConstantObject {

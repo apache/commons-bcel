@@ -58,7 +58,7 @@ package org.apache.bcel.generic;
  * Super class for instructions dealing with array access such as IALOAD.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class ArrayInstruction extends Instruction
   implements ExceptionThrower, TypedInstruction {

@@ -54,8 +54,10 @@ package org.apache.bcel.classfile;
  * <http://www.apache.org/>.
  */
 
-import  org.apache.bcel.Constants;
-import  java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * This class represents a (PC offset, line number) pair, i.e., a line number in
@@ -63,7 +65,7 @@ import  java.io.*;
  * is used for debugging purposes.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     LineNumberTable
  */
 public final class LineNumber implements Cloneable, Node, Serializable {

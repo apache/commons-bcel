@@ -67,7 +67,7 @@ import java.util.HashMap;
  * <em>Unknown</em> attribute stands for non-standard-attributes.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     ConstantValue
  * @see     SourceFile
  * @see     Code

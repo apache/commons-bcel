@@ -64,7 +64,7 @@ import org.apache.bcel.util.ByteSequence;
  *
  * @see InstructionList
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class BranchInstruction extends Instruction implements InstructionTargeter {
   protected int               index;    // Branch target relative to this instruction

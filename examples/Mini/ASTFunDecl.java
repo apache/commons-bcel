@@ -11,7 +11,7 @@ import org.apache.bcel.util.InstructionFinder;
 /**
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ASTFunDecl extends SimpleNode
 implements MiniParserTreeConstants, org.apache.bcel.Constants {

@@ -76,7 +76,7 @@ import java.util.ArrayList;
  * href="#getByteCode()">getByteCode</a>.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Instruction
  * @see     InstructionHandle
  * @see BranchHandle

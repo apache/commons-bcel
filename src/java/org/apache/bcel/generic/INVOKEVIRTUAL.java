@@ -62,7 +62,7 @@ import org.apache.bcel.ExceptionConstants;
  * <PRE>Stack: ..., objectref, [arg1, [arg2 ...]] -&gt; ...</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class INVOKEVIRTUAL extends InvokeInstruction {
   /**

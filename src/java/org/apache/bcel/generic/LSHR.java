@@ -59,7 +59,7 @@ package org.apache.bcel.generic;
  * <PRE>Stack: ..., value1.word1, value1.word2, value2 -&gt; ..., result.word1, result.word2</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class LSHR extends ArithmeticInstruction {
   public LSHR() {

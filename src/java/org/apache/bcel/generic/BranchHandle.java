@@ -64,7 +64,7 @@ package org.apache.bcel.generic;
  * @see Instruction
  * @see InstructionList
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class BranchHandle extends InstructionHandle {
   private BranchInstruction bi; // An alias in fact, but saves lots of casts

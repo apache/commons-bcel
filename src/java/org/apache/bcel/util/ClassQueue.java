@@ -61,7 +61,7 @@ import org.apache.bcel.classfile.JavaClass;
  * objects.
  *
  * @version $Id$
- * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  * @see ClassVector
 */
 public class ClassQueue implements java.io.Serializable {

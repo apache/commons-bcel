@@ -6,7 +6,7 @@ import org.apache.bcel.generic.*;
  * Represents a variable declared in a LET expression or a FUN declaration.
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class Variable implements EnvEntry {
   private ASTIdent name;         // Reference to the original declaration

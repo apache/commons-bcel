@@ -66,7 +66,7 @@ package org.apache.bcel.generic;
  * `templates' or `macros' for such reuseable code patterns.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see PUSH
  * @see SWITCH
  */

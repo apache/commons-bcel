@@ -60,7 +60,7 @@ import org.apache.bcel.util.ByteSequence;
  * Select - Abstract super class for LOOKUPSWITCH and TABLESWITCH instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see LOOKUPSWITCH
  * @see TABLESWITCH
  * @see InstructionList

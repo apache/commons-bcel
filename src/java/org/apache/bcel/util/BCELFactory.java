@@ -66,7 +66,7 @@ import java.util.*;
  *
  * @see BCELifier
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 class BCELFactory extends EmptyVisitor {
   private MethodGen       _mg;

@@ -82,7 +82,7 @@ import org.apache.regexp.*;
     }
 </pre>
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see Instruction
  * @see InstructionList
  */

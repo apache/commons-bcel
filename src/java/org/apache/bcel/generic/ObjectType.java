@@ -61,7 +61,7 @@ import org.apache.bcel.classfile.JavaClass;
  * Denotes reference such as java.lang.String.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class ObjectType extends ReferenceType {
   private String class_name; // Class name of type
@@ -93,12 +93,13 @@ public final class ObjectType extends ReferenceType {
    * If "this" doesn't reference a class, it references an interface
    * or a non-existant entity.
    */
-  public boolean referencesClass(){
-    JavaClass jc = Repository.lookupClass(class_name);
-    if (jc == null)
-      return false;
-    else
+  public boolean referencesClass() {
+    try {
+      JavaClass jc = Repository.lookupClass(class_name);
       return jc.isClass();
+    } catch (ClassNotFoundException e) {
+      return false;
+    }
   }
   
   /**
@@ -106,14 +107,22 @@ public final class ObjectType extends ReferenceType {
    * or a non-existant entity.
    */
   public boolean referencesInterface(){
-    JavaClass jc = Repository.lookupClass(class_name);
-    if (jc == null)
-      return false;
-    else
+    try {
+      JavaClass jc = Repository.lookupClass(class_name);
       return !jc.isClass();
+    } catch (ClassNotFoundException e) {
+      return false;
+    }
   }
 
-  public boolean subclassOf(ObjectType superclass){
+  /**
+   * Return true if this type is a subclass of given ObjectType.
+   * @throws ClassNotFoundException if any of this class's superclasses
+   *  can't be found
+   */
+  public boolean subclassOf(ObjectType superclass)
+    throws ClassNotFoundException {
+
     if (this.referencesInterface() || superclass.referencesInterface())
       return false;
 
@@ -122,8 +131,10 @@ public final class ObjectType extends ReferenceType {
 
   /**
    * Java Virtual Machine Specification edition 2, § 5.4.4 Access Control
+   * @throws ClassNotFoundException if the class referenced by this type
+   *   can't be found
    */
-  public boolean accessibleTo(ObjectType accessor) {
+  public boolean accessibleTo(ObjectType accessor) throws ClassNotFoundException {
     JavaClass jc = Repository.lookupClass(class_name);
 
     if(jc.isPublic()) {

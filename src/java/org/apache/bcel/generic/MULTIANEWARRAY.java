@@ -63,7 +63,7 @@ import org.apache.bcel.ExceptionConstants;
  * <PRE>Stack: ..., count1, [count2, ...] -&gt; ..., arrayref</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class MULTIANEWARRAY extends CPInstruction implements LoadClass, AllocationInstruction, ExceptionThrower {
   private short dimensions;

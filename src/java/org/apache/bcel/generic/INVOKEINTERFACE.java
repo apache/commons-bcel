@@ -65,7 +65,7 @@ import org.apache.bcel.util.ByteSequence;
  * <PRE>Stack: ..., objectref, [arg1, [arg2 ...]] -&gt; ...</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class INVOKEINTERFACE extends InvokeInstruction {
   private int nargs; // Number of arguments on stack (number of stack slots), called "count" in vmspec2

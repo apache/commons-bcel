@@ -67,7 +67,7 @@ import java.io.*;
  * but tries to mimic hand-written code as close as possible.
  *
  * @version $Id$
- * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  */
 public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
   private JavaClass         _clazz;

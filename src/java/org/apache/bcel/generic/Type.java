@@ -63,7 +63,7 @@ import java.util.ArrayList;
  * such as int, object types like String and array types, e.g. int[]
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class Type implements java.io.Serializable {
   protected byte   type;

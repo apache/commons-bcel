@@ -54,9 +54,8 @@ package org.apache.bcel.verifier;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.verifier.*;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.*;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
 
 /**
  * This class has a main method implementing a demonstration program
@@ -77,7 +76,7 @@ public class TransitiveHull implements VerifierFactoryObserver{
 	}
 	
 	/* Implementing VerifierFactoryObserver. */
-	public void update(String classname){
+	public void update(String classname) {
 
 		System.gc(); // avoid swapping if possible.
 
@@ -99,15 +98,19 @@ public class TransitiveHull implements VerifierFactoryObserver{
 			System.out.println("Pass 2:\n"+vr);
 
 		if (vr == VerificationResult.VR_OK){
-			JavaClass jc = Repository.lookupClass(v.getClassName());
-			for (int i=0; i<jc.getMethods().length; i++){
-				vr = v.doPass3a(i);
-				if (vr != VerificationResult.VR_OK) //System.exit(1);
-					System.out.println(v.getClassName()+", Pass 3a, method "+i+" ['"+jc.getMethods()[i]+"']:\n"+vr);
-
-				vr = v.doPass3b(i);
-				if (vr != VerificationResult.VR_OK) //System.exit(1);
-					System.out.println(v.getClassName()+", Pass 3b, method "+i+" ['"+jc.getMethods()[i]+"']:\n"+vr);
+			try {
+				JavaClass jc = Repository.lookupClass(v.getClassName());
+				for (int i=0; i<jc.getMethods().length; i++){
+					vr = v.doPass3a(i);
+					if (vr != VerificationResult.VR_OK) //System.exit(1);
+						System.out.println(v.getClassName()+", Pass 3a, method "+i+" ['"+jc.getMethods()[i]+"']:\n"+vr);
+	
+					vr = v.doPass3b(i);
+					if (vr != VerificationResult.VR_OK) //System.exit(1);
+						System.out.println(v.getClassName()+", Pass 3b, method "+i+" ['"+jc.getMethods()[i]+"']:\n"+vr);
+				}
+			} catch (ClassNotFoundException e) {
+				System.err.println("Could not find class " + v.getClassName() + " in Repository");
 			}
 		}
 

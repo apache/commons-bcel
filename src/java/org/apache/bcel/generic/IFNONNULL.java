@@ -60,7 +60,7 @@ package org.apache.bcel.generic;
  * <PRE>Stack: ..., reference -&gt; ...</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IFNONNULL extends IfInstruction {
   /**

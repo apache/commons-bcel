@@ -46,7 +46,7 @@ import org.apache.bcel.*;
  * </p>
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm">M. Dahm</A>,
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>,
  * <a href="mailto:twheeler@objectspace.com">Thomas Wheeler</A>
  */
 public class listclass {

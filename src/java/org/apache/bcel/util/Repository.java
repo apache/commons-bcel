@@ -63,7 +63,7 @@ import org.apache.bcel.classfile.JavaClass;
  *
  * @see org.apache.bcel.Repository
  * @version $Id$
- * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @author David Dixon-Peugh
  */
 public interface Repository extends java.io.Serializable {
@@ -99,6 +99,11 @@ public interface Repository extends java.io.Serializable {
   /** Clear all entries from cache.
    */
   public void clear();
+  
+	/** Get the ClassPath associated with this Repository
+	 */
+	public ClassPath getClassPath();
+
 }
 
 

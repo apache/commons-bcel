@@ -53,16 +53,17 @@ package org.apache.bcel.generic;
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
  */
-import java.io.*;
-import org.apache.bcel.util.ByteSequence;
-import org.apache.bcel.classfile.Utility;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import org.apache.bcel.Constants;
+import org.apache.bcel.util.ByteSequence;
 
 /**
  * Abstract super class for instructions dealing with local variables.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class LocalVariableInstruction extends Instruction
   implements TypedInstruction, IndexedInstruction {

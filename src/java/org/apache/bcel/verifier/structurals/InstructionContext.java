@@ -54,9 +54,9 @@ package org.apache.bcel.verifier.structurals;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.generic.InstructionHandle;
 import java.util.ArrayList;
-import java.util.Iterator;
+
+import org.apache.bcel.generic.InstructionHandle;
 
 /**
  * An InstructionContext offers convenient access

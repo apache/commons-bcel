@@ -62,7 +62,7 @@ import java.io.*;
  * Convert constant pool into HTML file.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * 
  */
 final class ConstantHTML implements org.apache.bcel.Constants {

@@ -62,7 +62,7 @@ import  java.io.*;
  * method. This attribute is contained in the <em>Code</em> attribute.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Code
  * @see LocalVariable
  */

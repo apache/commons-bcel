@@ -54,17 +54,30 @@ package org.apache.bcel.verifier.structurals;
  * <http://www.apache.org/>.
  */
 
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.generic.*;
-import org.apache.bcel.verifier.*;
-import org.apache.bcel.verifier.statics.*;
-import org.apache.bcel.verifier.exc.*;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.JsrInstruction;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.RET;
+import org.apache.bcel.generic.ReturnInstruction;
+import org.apache.bcel.generic.ReturnaddressType;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.PassVerifier;
+import org.apache.bcel.verifier.VerificationResult;
+import org.apache.bcel.verifier.Verifier;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.VerifierConstraintViolatedException;
 
 /**
  * This PassVerifier verifies a method of class file according to pass 3,
@@ -292,7 +305,13 @@ public final class Pass3bVerifier extends PassVerifier{
 
 		// Pass 3a ran before, so it's safe to assume the JavaClass object is
 		// in the BCEL repository.
-		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
+		JavaClass jc;
+		try {
+			jc = Repository.lookupClass(myOwner.getClassName());
+		} catch (ClassNotFoundException e) {
+			// FIXME: maybe not the best way to handle this
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		}
 
 		ConstantPoolGen constantPoolGen = new ConstantPoolGen(jc.getConstantPool());
 		// Init Visitors
@@ -319,11 +338,11 @@ public final class Pass3bVerifier extends PassVerifier{
 				Frame f = new Frame(mg.getMaxLocals(),mg.getMaxStack());
 				if ( !mg.isStatic() ){
 					if (mg.getName().equals(Constants.CONSTRUCTOR_NAME)){
-						f._this = new UninitializedObjectType(new ObjectType(jc.getClassName()));
-						f.getLocals().set(0, f._this);
+						Frame._this = new UninitializedObjectType(new ObjectType(jc.getClassName()));
+						f.getLocals().set(0, Frame._this);
 					}
 					else{
-						f._this = null;
+						Frame._this = null;
 						f.getLocals().set(0, new ObjectType(jc.getClassName()));
 					}
 				}

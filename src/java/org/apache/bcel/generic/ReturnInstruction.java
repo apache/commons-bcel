@@ -60,7 +60,7 @@ import org.apache.bcel.ExceptionConstants;
  * Super class for the xRETURN family of instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class ReturnInstruction extends Instruction
   implements ExceptionThrower, TypedInstruction, StackConsumer {

@@ -4,7 +4,7 @@ package Mini;
  * Entry in environment.
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface EnvEntry {
   public String getHashKey();

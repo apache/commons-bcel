@@ -54,8 +54,9 @@ package org.apache.bcel.classfile;
  * <http://www.apache.org/>.
  */
 
-import  org.apache.bcel.Constants;
-import  java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 /**
  * This class represents a stack map entry recording the types of
@@ -63,7 +64,7 @@ import  java.io.*;
  * See CLDC specification §5.3.1.2
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     StackMap
  * @see     StackMapType
  */

@@ -59,7 +59,7 @@ package org.apache.bcel.generic;
  * and register yourself with addObserver().
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface ClassObserver {
   public void notify(ClassGen clazz);

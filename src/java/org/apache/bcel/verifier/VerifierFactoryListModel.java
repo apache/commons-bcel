@@ -53,8 +53,7 @@ package org.apache.bcel.verifier;
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
  */
-import org.apache.bcel.verifier.*;
-import javax.swing.event.*;
+import javax.swing.event.ListDataEvent;
 /**
  * This class implements an adapter; it implements both a Swing ListModel and
  * a VerifierFactoryObserver.

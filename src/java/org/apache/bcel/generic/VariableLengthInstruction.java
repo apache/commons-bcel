@@ -59,7 +59,7 @@ package org.apache.bcel.generic;
  * GOTO, JSR, LOOKUPSWITCH and TABLESWITCH.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
 
  * @see GOTO
  * @see JSR

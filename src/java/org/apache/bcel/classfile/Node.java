@@ -58,7 +58,7 @@ package org.apache.bcel.classfile;
  * Denote class to have an accept method();
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface Node {
   public void accept(Visitor obj);    

@@ -54,8 +54,6 @@ package org.apache.bcel.classfile;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.*;
 
 /**
  * Visitor with empty method bodies, can be extended and used in conjunction with the

@@ -228,6 +228,7 @@ public class OperandStack{
 	 * for details.
 	 */
 	public void merge(OperandStack s){
+	    try {
 		if ( (slotsUsed() != s.slotsUsed()) || (size() != s.size()) )
 			throw new StructuralCodeConstraintException("Cannot merge stacks of different size:\nOperandStack A:\n"+this+"\nOperandStack B:\n"+s);
 		
@@ -258,6 +259,10 @@ public class OperandStack{
 				}
 			}
 		}
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**

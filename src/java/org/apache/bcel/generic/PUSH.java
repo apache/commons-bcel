@@ -54,14 +54,13 @@ package org.apache.bcel.generic;
  * <http://www.apache.org/>.
  */
 import org.apache.bcel.Constants;
-import java.io.*;
 
 /** 
  * Wrapper class for push operations, which are implemented either as BIPUSH,
  * LDC or xCONST_n instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class PUSH
   implements CompoundInstruction, VariableLengthInstruction, InstructionConstants

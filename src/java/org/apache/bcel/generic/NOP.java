@@ -58,7 +58,7 @@ package org.apache.bcel.generic;
  * NOP - Do nothing
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class NOP extends Instruction {
   public NOP() {

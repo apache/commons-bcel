@@ -59,7 +59,7 @@ package org.apache.bcel.generic;
  * <PRE>Stack: ..., word -&gt; ..., word, word</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class DUP extends StackInstruction implements PushInstruction {
   public DUP() {

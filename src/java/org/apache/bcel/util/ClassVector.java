@@ -61,7 +61,7 @@ import org.apache.bcel.classfile.JavaClass;
  * objects. Contains the most important methods of a Vector.
  *
  * @version $Id$
- * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  * @see ClassQueue
 */
 public class ClassVector implements java.io.Serializable {

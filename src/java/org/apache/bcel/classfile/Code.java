@@ -70,7 +70,7 @@ import  java.io.*;
  * contains information about the local variables.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Attribute
  * @see     CodeException
  * @see     LineNumberTable

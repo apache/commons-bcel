@@ -59,7 +59,7 @@ package org.apache.bcel.generic;
  * <PRE>Stack: ..., value.word1, value.word2 -&gt; ..., result</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class D2I extends ConversionInstruction {
   /** Convert double to int

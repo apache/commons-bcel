@@ -54,9 +54,6 @@ package org.apache.bcel.verifier.structurals;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.generic.*;
-import org.apache.bcel.verifier.exc.*;
-import java.util.ArrayList;
 
 /**
  * This class represents a JVM execution frame; that means,

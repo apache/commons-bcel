@@ -59,16 +59,19 @@ import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
-import org.apache.bcel.classfile.ConstantInteger;
 import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
 import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.generic.*;
-import org.apache.bcel.verifier.*;
-import org.apache.bcel.verifier.exc.*;
+import org.apache.bcel.verifier.VerificationResult;
+import org.apache.bcel.verifier.Verifier;
+import org.apache.bcel.verifier.VerifierFactory;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 
 /**
@@ -473,6 +476,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 * Ensures the specific preconditions of the said instruction.
 	 */
 	public void visitAASTORE(AASTORE o){
+	    try {
 		Type arrayref = stack().peek(2);
 		Type index    = stack().peek(1);
 		Type value    = stack().peek(0);
@@ -493,6 +497,10 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 				constraintViolated(o, "The type of 'value' ('"+value+"') is not assignment compatible to the components of the array 'arrayref' refers to. ('"+((ArrayType) arrayref).getElementType()+"')");
 			}
 		}
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
@@ -563,6 +571,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 * Ensures the specific preconditions of the said instruction.
 	 */
 	public void visitATHROW(ATHROW o){
+	    try {
 		// It's stated that 'objectref' must be of a ReferenceType --- but since Throwable is
 		// not derived from an ArrayType, it follows that 'objectref' must be of an ObjectType or Type.NULL.
 		if (! ((stack().peek() instanceof ObjectType) || (stack().peek().equals(Type.NULL))) ){
@@ -577,6 +586,10 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if ( (! (exc.subclassOf(throwable)) ) && (! (exc.equals(throwable))) ){
 			constraintViolated(o, "The 'objectref' is not of class Throwable or of a subclass of Throwable, but of '"+stack().peek()+"'.");
 		}
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
@@ -1167,6 +1180,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 * Ensures the specific preconditions of the said instruction.
 	 */
 	public void visitGETFIELD(GETFIELD o){
+	    try {
 		Type objectref = stack().peek();
 		if (! ( (objectref instanceof ObjectType) || (objectref == Type.NULL) ) ){
 			constraintViolated(o, "Stack top should be an object reference that's not an array reference, but is '"+objectref+"'.");
@@ -1215,6 +1229,11 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if (f.isStatic()){
 			constraintViolated(o, "Referenced field '"+f+"' is static which it shouldn't be.");
 		}
+
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
@@ -1716,6 +1735,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 * Ensures the specific preconditions of the said instruction.
 	 */
 	public void visitINVOKESPECIAL(INVOKESPECIAL o){
+	    try {
 		// Don't init an object twice.
 		if ( (o.getMethodName(cpg).equals(Constants.CONSTRUCTOR_NAME)) && (!(stack().peek(o.getArgumentTypes(cpg).length) instanceof UninitializedObjectType)) ){
 			constraintViolated(o, "Possibly initializing object twice. A valid instruction sequence must not have an uninitialized object on the operand stack or in a local variable during a backwards branch, or in a local variable in code protected by an exception handler. Please see The Java Virtual Machine Specification, Second Edition, 4.9.4 (pages 147 and 148) for details.");
@@ -1796,12 +1816,17 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 			constraintViolated(o, "The 'objref' item '"+objref+"' does not implement '"+theClass+"' as expected.");
 		}	
 		
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
 	 * Ensures the specific preconditions of the said instruction.
 	 */
 	public void visitINVOKESTATIC(INVOKESTATIC o){
+	    try {
 		// Method is not native, otherwise pass 3 would not happen.
 		
 		Type t = o.getType(cpg);
@@ -1841,12 +1866,17 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 				}
 			}
 		}
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
 	 * Ensures the specific preconditions of the said instruction.
 	 */
 	public void visitINVOKEVIRTUAL(INVOKEVIRTUAL o){
+	    try {
 		// the o.getClassType(cpg) type has passed pass 2; see visitLoadClass(o).
 
 		Type t = o.getType(cpg);
@@ -1912,6 +1942,10 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if ( ! Repository.instanceOf(objref_classname, theClass) ){
 			constraintViolated(o, "The 'objref' item '"+objref+"' does not implement '"+theClass+"' as expected.");
 		}	
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
@@ -2427,6 +2461,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 * Ensures the specific preconditions of the said instruction.
 	 */
 	public void visitPUTFIELD(PUTFIELD o){
+	    try {
 
 		Type objectref = stack().peek(1);
 		if (! ( (objectref instanceof ObjectType) || (objectref == Type.NULL) ) ){
@@ -2504,12 +2539,18 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if (f.isStatic()){
 			constraintViolated(o, "Referenced field '"+f+"' is static which it shouldn't be.");
 		}
+
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
 	 * Ensures the specific preconditions of the said instruction.
 	 */
 	public void visitPUTSTATIC(PUTSTATIC o){
+	    try {
 		String field_name = o.getFieldName(cpg);
 		JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
 		Field[] fields = jc.getFields();
@@ -2555,6 +2596,11 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		}
 		// TODO: Interface fields may be assigned to only once. (Hard to implement in
 		//       JustIce's execution model). This may only happen in <clinit>, see Pass 3a.
+
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
@@ -2576,7 +2622,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 */
 	public void visitRETURN(RETURN o){
 		if (mg.getName().equals(Constants.CONSTRUCTOR_NAME)){// If we leave an <init> method
-			if ((frame._this != null) && (!(mg.getClassName().equals(Type.OBJECT.getClassName()))) ) {
+			if ((Frame._this != null) && (!(mg.getClassName().equals(Type.OBJECT.getClassName()))) ) {
 				constraintViolated(o, "Leaving a constructor that itself did not call a constructor.");
 			}
 		}

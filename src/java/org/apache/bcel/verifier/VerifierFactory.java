@@ -91,8 +91,6 @@ public class VerifierFactory{
 	 * @return the (only) verifier responsible for the class with the given name.
 	 */
 	public static Verifier getVerifier(String fully_qualified_classname){
-		fully_qualified_classname = fully_qualified_classname;
-		
 		Verifier v = (Verifier) (hashMap.get(fully_qualified_classname));
 		if (v==null){
 			v = new Verifier(fully_qualified_classname);

@@ -62,7 +62,7 @@ import org.apache.bcel.Constants;
  * add your own create methods.
  *
  * @version $Id$
- * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see Constants
  */
 public class InstructionFactory

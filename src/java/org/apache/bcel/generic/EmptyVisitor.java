@@ -58,7 +58,7 @@ package org.apache.bcel.generic;
  * Supplies empty method bodies to be overridden by subclasses.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class EmptyVisitor implements Visitor {
   public void visitStackInstruction(StackInstruction obj) { }

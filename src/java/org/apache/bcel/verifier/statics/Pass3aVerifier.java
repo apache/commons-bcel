@@ -112,6 +112,7 @@ public final class Pass3aVerifier extends PassVerifier{
 	 * @throws InvalidMethodException if the method to verify does not exist.
 	 */
 	public VerificationResult do_verify(){
+	    try {
 		if (myOwner.doPass2().equals(VerificationResult.VR_OK)){
 			// Okay, class file was loaded correctly by Pass 1
 			// and satisfies static constraints of Pass 2.
@@ -167,6 +168,10 @@ public final class Pass3aVerifier extends PassVerifier{
 		else{ //did not pass Pass 2.
 			return VerificationResult.VR_NOTYET;
 		}
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
@@ -330,6 +335,7 @@ public final class Pass3aVerifier extends PassVerifier{
 	 * @throws StaticCodeConstraintException if the verification fails.
 	 */
 	private void pass3StaticInstructionOperandsChecks(){
+	    try {
 		// When building up the InstructionList, BCEL has already done all those checks
 		// mentioned in The Java Virtual Machine Specification, Second Edition, as
 		// "static constraints on the operands of instructions in the code array".
@@ -366,6 +372,10 @@ public final class Pass3aVerifier extends PassVerifier{
 			ih = ih.getNext();
 		}
 
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 	
 	/** A small utility method returning if a given int i is in the given int[] ints. */
@@ -399,7 +409,12 @@ public final class Pass3aVerifier extends PassVerifier{
 		 * by the surrounding Pass3aVerifier instance.
 		 */
 		private int max_locals(){
+		   try {
 			return Repository.lookupClass(myOwner.getClassName()).getMethods()[method_no].getCode().getMaxLocals();
+		    } catch (ClassNotFoundException e) {
+			// FIXME: maybe not the best way to handle this
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
 		}
 
 		/**
@@ -476,6 +491,7 @@ public final class Pass3aVerifier extends PassVerifier{
 		/** Checks if the constraints of operands of the said instruction(s) are satisfied. */
  		//getfield, putfield, getstatic, putstatic
  		public void visitFieldInstruction(FieldInstruction o){
+		   try {
 			indexValid(o, o.getIndex());
 			Constant c = cpg.getConstant(o.getIndex());
 			if (! (c instanceof ConstantFieldref)){
@@ -511,6 +527,10 @@ public final class Pass3aVerifier extends PassVerifier{
 				}
 				/* TODO: Check for access modifiers here. */
 			}
+		    } catch (ClassNotFoundException e) {
+			// FIXME: maybe not the best way to handle this
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
 		}	
 
 		/** Checks if the constraints of operands of the said instruction(s) are satisfied. */
@@ -869,6 +889,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
 		/** Checks if the constraints of operands of the said instruction(s) are satisfied. */
 		public void visitPUTSTATIC(PUTSTATIC o){
+		    try {
 			String field_name = o.getFieldName(cpg);
 			JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
 			Field[] fields = jc.getFields();
@@ -899,10 +920,15 @@ public final class Pass3aVerifier extends PassVerifier{
 			if ((!(jc.isClass())) && (!(meth_name.equals(Constants.STATIC_INITIALIZER_NAME)))){
 				constraintViolated(o, "Interface field '"+f+"' must be set in a '"+Constants.STATIC_INITIALIZER_NAME+"' method.");
 			}
+		    } catch (ClassNotFoundException e) {
+			// FIXME: maybe not the best way to handle this
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
 		}
 
 		/** Checks if the constraints of operands of the said instruction(s) are satisfied. */
 		public void visitGETSTATIC(GETSTATIC o){
+		    try {
 			String field_name = o.getFieldName(cpg);
 			JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
 			Field[] fields = jc.getFields();
@@ -920,6 +946,10 @@ public final class Pass3aVerifier extends PassVerifier{
 			if (! (f.isStatic())){
 				constraintViolated(o, "Referenced field '"+f+"' is not static which it should be.");
 			}
+		    } catch (ClassNotFoundException e) {
+			// FIXME: maybe not the best way to handle this
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
 		}
 
 		/* Checks if the constraints of operands of the said instruction(s) are satisfied. */
@@ -934,6 +964,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
 		/** Checks if the constraints of operands of the said instruction(s) are satisfied. */
 		public void visitINVOKEINTERFACE(INVOKEINTERFACE o){
+		    try {
 			// INVOKEINTERFACE is a LoadClass; the Class where the referenced method is declared in,
 			// is therefore resolved/verified.
 			// INVOKEINTERFACE is an InvokeInstruction, the argument and return types are resolved/verified,
@@ -956,10 +987,15 @@ public final class Pass3aVerifier extends PassVerifier{
 			if (jc.isClass()){
 				constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is a class, but not an interface as expected.");
 			}
+		    } catch (ClassNotFoundException e) {
+			// FIXME: maybe not the best way to handle this
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
 		}
 
 		/** Checks if the constraints of operands of the said instruction(s) are satisfied. */
 		public void visitINVOKESPECIAL(INVOKESPECIAL o){
+		    try {
 			// INVOKESPECIAL is a LoadClass; the Class where the referenced method is declared in,
 			// is therefore resolved/verified.
 			// INVOKESPECIAL is an InvokeInstruction, the argument and return types are resolved/verified,
@@ -1013,11 +1049,16 @@ public final class Pass3aVerifier extends PassVerifier{
 				}
 			}
 			
+		    } catch (ClassNotFoundException e) {
+			// FIXME: maybe not the best way to handle this
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
 			
 		}
 		
 		/** Checks if the constraints of operands of the said instruction(s) are satisfied. */
 		public void visitINVOKESTATIC(INVOKESTATIC o){
+		    try {
 			// INVOKESTATIC is a LoadClass; the Class where the referenced method is declared in,
 			// is therefore resolved/verified.
 			// INVOKESTATIC is an InvokeInstruction, the argument and return types are resolved/verified,
@@ -1042,11 +1083,16 @@ public final class Pass3aVerifier extends PassVerifier{
 				constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' has ACC_STATIC unset.");
 			}
 		
+		    } catch (ClassNotFoundException e) {
+			// FIXME: maybe not the best way to handle this
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
 		}
 
 
 		/** Checks if the constraints of operands of the said instruction(s) are satisfied. */
 		public void visitINVOKEVIRTUAL(INVOKEVIRTUAL o){
+		    try {
 			// INVOKEVIRTUAL is a LoadClass; the Class where the referenced method is declared in,
 			// is therefore resolved/verified.
 			// INVOKEVIRTUAL is an InvokeInstruction, the argument and return types are resolved/verified,
@@ -1070,6 +1116,10 @@ public final class Pass3aVerifier extends PassVerifier{
 				constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is an interface, but not a class as expected.");
 			}
 					
+		    } catch (ClassNotFoundException e) {
+			// FIXME: maybe not the best way to handle this
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
 		}
 
 		

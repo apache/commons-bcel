@@ -54,17 +54,19 @@ package org.apache.bcel.generic;
  * <http://www.apache.org/>.
  */
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
+
 import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.classfile.ConstantPool;
-import java.io.*;
 import org.apache.bcel.util.ByteSequence;
 
 /** 
  * Abstract super class for all Java byte codes.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class Instruction implements Cloneable, Serializable {
   protected short length = 1;  // Length of instruction in bytes 

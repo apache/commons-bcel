@@ -17,7 +17,7 @@ import org.apache.bcel.generic.*;
  * <pre>
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class id {
   public static void main(String[] argv) throws Exception { 

@@ -60,7 +60,7 @@ import org.apache.bcel.util.ByteSequence;
  * LOOKUPSWITCH - Switch with unordered set of values
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see SWITCH
  */
 public class LOOKUPSWITCH extends Select {

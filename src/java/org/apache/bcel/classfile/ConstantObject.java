@@ -59,7 +59,7 @@ package org.apache.bcel.classfile;
  * such as ConstantLong, ConstantString, etc..
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Constant
  */
 public interface ConstantObject {

@@ -71,7 +71,7 @@ import org.apache.bcel.Constants;
  * it's possible to write il.append(Instruction.ICONST_0);
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface InstructionConstants {
   /** Predefined instruction objects

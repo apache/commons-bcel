@@ -54,8 +54,7 @@ package org.apache.bcel.generic;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.*;
+import org.apache.bcel.classfile.CodeException;
 
 /** 
  * This class represents an exception handler, i.e., specifies the  region where
@@ -67,7 +66,7 @@ import org.apache.bcel.classfile.*;
  * getCodeException(), i.e., there is no difference semantically.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     MethodGen
  * @see     CodeException
  * @see     InstructionHandle

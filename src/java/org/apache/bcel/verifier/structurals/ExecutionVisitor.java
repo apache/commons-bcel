@@ -55,19 +55,13 @@ package org.apache.bcel.verifier.structurals;
  */
 
 import org.apache.bcel.Constants;
-import org.apache.bcel.Repository;
-import org.apache.bcel.generic.*;
-import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantDouble;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
 import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantString;
-import org.apache.bcel.verifier.Verifier;
-import org.apache.bcel.verifier.exc.*;
-import java.util.ArrayList;
-import java.util.Hashtable;
+import org.apache.bcel.generic.*;
 
 /**
  * This Visitor class may be used for a type-based Java Virtual Machine
@@ -754,8 +748,8 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 	public void visitINVOKESPECIAL(INVOKESPECIAL o){
 		if (o.getMethodName(cpg).equals(Constants.CONSTRUCTOR_NAME)){
 			UninitializedObjectType t = (UninitializedObjectType) stack().peek(o.getArgumentTypes(cpg).length);
-			if (t == frame._this){	
-				frame._this = null;
+			if (t == Frame._this){	
+				Frame._this = null;
 			}
 			stack().initializeObject(t);
 			locals().initializeObject(t);

@@ -162,6 +162,7 @@ public class LocalVariables{
 	 * @see #merge(LocalVariables)
 	 */
 	private void merge(LocalVariables lv, int i){
+	    try {
 		
 		// We won't accept an unitialized object if we know it was initialized;
 		// compare vmspec2, 4.9.4, last paragraph.
@@ -202,6 +203,10 @@ public class LocalVariables{
 				locals[i] = Type.UNKNOWN;
 			}
 		}
+	    } catch (ClassNotFoundException e) {
+		// FIXME: maybe not the best way to handle this
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**

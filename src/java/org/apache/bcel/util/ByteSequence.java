@@ -61,7 +61,7 @@ import java.io.*;
  * Java byte code stream to gain some more readability.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class ByteSequence extends DataInputStream {
   private ByteArrayStream byte_stream;

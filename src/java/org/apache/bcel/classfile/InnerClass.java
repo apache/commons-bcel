@@ -63,7 +63,7 @@ import  java.io.*;
  * of the inner class.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see InnerClasses
  */
 public final class InnerClass implements Cloneable, Node {

@@ -54,10 +54,18 @@ package org.apache.bcel.util;
  * <http://www.apache.org/>.
  */
 
-import java.io.*;
-import java.util.BitSet;
-import org.apache.bcel.classfile.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Read class file(s) and convert them into HTML files.
@@ -79,7 +87,7 @@ import org.apache.bcel.Constants;
  * the Code frame.
  *
  * @version $Id$
- * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
 */
 public class Class2HTML implements Constants
 {

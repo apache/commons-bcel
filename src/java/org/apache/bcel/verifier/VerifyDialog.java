@@ -54,10 +54,10 @@ package org.apache.bcel.verifier;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.*;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.verifier.*;
 import java.awt.Color;
+
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
 
 /**
  * A class for simple graphical class file verification.
@@ -539,7 +539,13 @@ public void pass4Button_ActionPerformed(java.awt.event.ActionEvent actionEvent) 
 	Verifier v = VerifierFactory.getVerifier(class_name);
 	VerificationResult vr = v.doPass2();
 	if (vr.getStatus() == VerificationResult.VERIFIED_OK){
-		JavaClass jc = Repository.lookupClass(class_name);
+		JavaClass jc = null;
+		try {
+			jc = Repository.lookupClass(class_name);
+		} catch (ClassNotFoundException ex) {
+			// FIXME: report the error
+			ex.printStackTrace();
+		}
 		int nr = jc.getMethods().length;
 		for (int i=0; i<nr; i++) {
 			vr = v.doPass3b(i);

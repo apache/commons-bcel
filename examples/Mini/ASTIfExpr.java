@@ -8,7 +8,7 @@ import org.apache.bcel.generic.*;
 /**
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   private ASTExpr if_expr, then_expr, else_expr;

@@ -54,13 +54,30 @@ package org.apache.bcel.verifier;
  * <http://www.apache.org/>.
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import org.apache.bcel.*;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.verifier.*;
+import java.awt.AWTEvent;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
 
 /**
  * This class implements a machine-generated frame for use with
@@ -242,11 +259,16 @@ public class VerifierAppFrame extends JFrame {
   synchronized void classNamesJList_valueChanged(ListSelectionEvent e) {
     if (e.getValueIsAdjusting()) return;
     current_class = classNamesJList.getSelectedValue().toString();
-    verify();
+    try {
+      verify();
+    } catch (ClassNotFoundException ex) {
+      // FIXME: report the error using the GUI
+      ex.printStackTrace();
+    }
     classNamesJList.setSelectedValue(current_class, true);
   }
 
-  private void verify(){
+  private void verify() throws ClassNotFoundException {
     setTitle("PLEASE WAIT");
 
     Verifier v = VerifierFactory.getVerifier(current_class);
@@ -345,7 +367,14 @@ public class VerifierAppFrame extends JFrame {
           all3aok = false;
           rejected = true;
         }
-        all3amsg += "Method '"+Repository.lookupClass(v.getClassName()).getMethods()[i]+"': "+vr.getMessage().replace('\n',' ')+"\n\n";
+        JavaClass jc = null;
+	try {
+          jc = Repository.lookupClass(v.getClassName());
+        } catch (ClassNotFoundException ex) {
+          // FIXME: handle the error
+          ex.printStackTrace();
+        }
+        all3amsg += "Method '"+jc.getMethods()[i]+"': "+vr.getMessage().replace('\n',' ')+"\n\n";
       }
     }
     pass3aTextPane.setText(all3amsg);
@@ -370,7 +399,14 @@ public class VerifierAppFrame extends JFrame {
           all3bok = false;
           rejected = true;
         }
-        all3bmsg += "Method '"+Repository.lookupClass(v.getClassName()).getMethods()[i]+"': "+vr.getMessage().replace('\n',' ')+"\n\n";
+        JavaClass jc = null;
+	try {
+          jc = Repository.lookupClass(v.getClassName());
+        } catch (ClassNotFoundException ex) {
+          // FIXME: handle the error
+          ex.printStackTrace();
+        }
+        all3bmsg += "Method '"+jc.getMethods()[i]+"': "+vr.getMessage().replace('\n',' ')+"\n\n";
       }
     }
     pass3bTextPane.setText(all3bmsg);

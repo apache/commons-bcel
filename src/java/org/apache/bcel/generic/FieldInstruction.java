@@ -55,16 +55,12 @@ package org.apache.bcel.generic;
  */
 
 import org.apache.bcel.classfile.ConstantPool;
-import org.apache.bcel.classfile.ConstantUtf8;
-import org.apache.bcel.classfile.ConstantNameAndType;
-import org.apache.bcel.classfile.ConstantCP;
-import org.apache.bcel.classfile.*;
 
 /**
  * Super class for the GET/PUTxxx family of instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class FieldInstruction extends FieldOrMethod
   implements TypedInstruction {

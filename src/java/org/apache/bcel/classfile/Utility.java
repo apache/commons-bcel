@@ -64,7 +64,7 @@ import java.util.zip.*;
  * Utility functions that do not really belong to any class in particular.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class Utility {
   private static int consumed_chars; /* How many chars have been consumed

@@ -61,7 +61,7 @@ import java.util.StringTokenizer;
  * Super class for the INVOKExxx family of instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class InvokeInstruction extends FieldOrMethod
   implements ExceptionThrower, TypedInstruction, StackConsumer, StackProducer {

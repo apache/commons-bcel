@@ -8,7 +8,7 @@ import org.apache.bcel.classfile.*;
  * Usage: patch <oldstring> <newstring> files
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class patchclass {
   public static void main(String[] argv) { 

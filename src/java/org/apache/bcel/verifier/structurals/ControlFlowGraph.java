@@ -54,10 +54,22 @@ package org.apache.bcel.verifier.structurals;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.generic.*;
-import org.apache.bcel.verifier.VerifierFactory;
-import org.apache.bcel.verifier.exc.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+
+import org.apache.bcel.generic.ATHROW;
+import org.apache.bcel.generic.BranchInstruction;
+import org.apache.bcel.generic.GotoInstruction;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.JsrInstruction;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.RET;
+import org.apache.bcel.generic.ReturnInstruction;
+import org.apache.bcel.generic.Select;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
  * This class represents a control flow graph of a method.

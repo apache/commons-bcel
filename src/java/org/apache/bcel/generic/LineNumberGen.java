@@ -54,15 +54,14 @@ package org.apache.bcel.generic;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.*;
+import org.apache.bcel.classfile.LineNumber;
 
 /** 
  * This class represents a line number within a method, i.e., give an instruction
  * a line number corresponding to the source code line.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     LineNumber
  * @see     MethodGen
  */

@@ -72,7 +72,7 @@ import java.util.*;
  * @version $Id$
  * @see org.apache.bcel.classfile.Attribute
  * @see org.apache.bcel.classfile.AttributeReader
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class Unknown extends Attribute {
   private byte[] bytes;

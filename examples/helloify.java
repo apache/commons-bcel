@@ -7,7 +7,7 @@ import org.apache.bcel.Constants;
  * "hello" and their name and signature before doing anything else.
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class helloify implements Constants {
   private static String          class_name;

@@ -58,7 +58,7 @@ package org.apache.bcel.generic;
  * IMPDEP1 - Implementation dependent
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IMPDEP1 extends Instruction {
   public IMPDEP1() {

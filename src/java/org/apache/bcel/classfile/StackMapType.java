@@ -62,7 +62,7 @@ import  java.io.*;
  * used in the StackMap entries.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     StackMapEntry
  * @see     StackMap
  * @see     Constants

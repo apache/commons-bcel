@@ -60,7 +60,7 @@ import org.apache.bcel.util.ByteSequence;
  * TABLESWITCH - Switch within given range of values, i.e., low..high
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see SWITCH
  */
 public class TABLESWITCH extends Select {

@@ -59,7 +59,7 @@ import java.io.*;
  * GOTO - Branch always (to relative offset, not absolute address)
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class GOTO extends GotoInstruction implements VariableLengthInstruction {
   /**

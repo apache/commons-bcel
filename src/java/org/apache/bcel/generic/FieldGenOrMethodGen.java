@@ -63,7 +63,7 @@ import java.util.ArrayList;
  * some methods in common!
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class FieldGenOrMethodGen extends AccessFlags
   implements NamedAndTyped, Cloneable

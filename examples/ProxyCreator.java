@@ -20,7 +20,7 @@ import java.util.zip.*;
  * <tt>java.lang.reflect.Proxy</tt>, but much more flexible.
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see org.apache.bcel.util.JavaWrapper
  * @see org.apache.bcel.util.ClassLoader
  * @see Utility

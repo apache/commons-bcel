@@ -8,7 +8,7 @@ import org.apache.bcel.*;
  * maximum stack depth used by analyzing control flow.
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class maxstack {
   public static void main(String[] argv) { 

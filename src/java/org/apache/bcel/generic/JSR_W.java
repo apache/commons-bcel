@@ -60,7 +60,7 @@ import org.apache.bcel.util.ByteSequence;
  * JSR_W - Jump to subroutine
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class JSR_W extends JsrInstruction {
   /**

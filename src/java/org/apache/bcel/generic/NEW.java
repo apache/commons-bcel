@@ -53,7 +53,6 @@ package org.apache.bcel.generic;
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
  */
-import java.io.*;
 import org.apache.bcel.ExceptionConstants;
 
 /** 
@@ -61,7 +60,7 @@ import org.apache.bcel.ExceptionConstants;
  * <PRE>Stack: ... -&gt; ..., objectref</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class NEW extends CPInstruction
   implements LoadClass, AllocationInstruction, ExceptionThrower, StackProducer {

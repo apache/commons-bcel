@@ -54,10 +54,12 @@ package org.apache.bcel.verifier;
  * <http://www.apache.org/>.
  */
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.UIManager;
-import java.awt.*;
-import org.apache.bcel.verifier.*;
-import org.apache.bcel.generic.*;
+
+import org.apache.bcel.generic.Type;
 
 
 /**

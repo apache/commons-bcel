@@ -58,7 +58,7 @@ package org.apache.bcel;
  * Constants for the project, mostly defined in the JVM specification.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface Constants {
   /** Major and minor version of the code.

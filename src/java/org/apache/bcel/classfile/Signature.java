@@ -62,7 +62,7 @@ import  java.io.*;
  * to a <href="http://wwwipd.ira.uka.de/~pizza/gj/">GJ</a> attribute.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Attribute
  */
 public final class Signature extends Attribute {
@@ -111,7 +111,7 @@ public final class Signature extends Attribute {
    * @param v Visitor object
    */
    public void accept(Visitor v) {
-     System.err.println("Visiting non-standard Signature object");
+     //System.err.println("Visiting non-standard Signature object");
      v.visitSignature(this);
    }
    

@@ -54,10 +54,13 @@ package org.apache.bcel.generic;
  * <http://www.apache.org/>.
  */
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.ByteSequence;
-import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.*;
 
 /** 
  * Abstract super class for instructions that use an index into the 
@@ -68,7 +71,7 @@ import org.apache.bcel.classfile.*;
  * @see INVOKEVIRTUAL
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class CPInstruction extends Instruction
   implements TypedInstruction, IndexedInstruction

@@ -60,7 +60,7 @@ package org.apache.bcel.generic;
  * sorted with no gaps between the numbers.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class SWITCH implements CompoundInstruction {
   private int[]               match;

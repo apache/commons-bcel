@@ -139,6 +139,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * @see org.apache.bcel.verifier.statics.Pass3aVerifier
 	 */
 	public VerificationResult do_verify(){
+	    try {
 		VerificationResult vr1 = myOwner.doPass1();
 		if (vr1.equals(VerificationResult.VR_OK)){
 			
@@ -160,6 +161,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		}
 		else
 			return VerificationResult.VR_NOTYET;
+
+	    } catch (ClassNotFoundException e) {
+		// FIXME: this might not be the best way to handle missing classes.
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
@@ -176,6 +182,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * @throws ClassConstraintException otherwise.
 	 */
 	private void every_class_has_an_accessible_superclass(){
+	    try {
 		HashSet hs = new HashSet(); // save class names to detect circular inheritance
 		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 		int supidx = -1;
@@ -206,6 +213,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				}
 			}
 		}
+
+	    } catch (ClassNotFoundException e) {
+		// FIXME: this might not be the best way to handle missing classes.
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
@@ -220,6 +232,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * @see #every_class_has_an_accessible_superclass()
 	 */
 	private void final_methods_are_not_overridden(){
+	    try {
 		HashMap hashmap = new HashMap();
 		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 		
@@ -251,6 +264,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			jc = Repository.lookupClass(jc.getSuperclassName());	// Well, for OBJECT this returns OBJECT so it works (could return anything but must not throw an Exception).
 		}
 
+	    } catch (ClassNotFoundException e) {
+		// FIXME: this might not be the best way to handle missing classes.
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
+
 	}
 
 	/**
@@ -260,11 +278,17 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * @throws ClassConstraintException otherwise.
 	 */
 	private void constant_pool_entries_satisfy_static_constraints(){
+	    try {
 		// Most of the consistency is handled internally by BCEL; here
 		// we only have to verify if the indices of the constants point
 		// to constants of the appropriate type and such.
 		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 		new CPESSC_Visitor(jc); // constructor implicitely traverses jc
+
+	    } catch (ClassNotFoundException e) {
+		// FIXME: this might not be the best way to handle missing classes.
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**
@@ -799,6 +823,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		// method_info-structure-ATTRIBUTES (vmspec2 4.6, 4.7) //
 		/////////////////////////////////////////////////////////
 		public void visitCode(Code obj){//vmspec2 4.7.3
+		    try {
 			// No code attribute allowed for native or abstract methods: see visitMethod(Method).
 			// Code array constraints are checked in Pass3 (3a and 3b).
 
@@ -945,9 +970,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 					}
 				}// if atts[a] instanceof LocalVariableTable END
 			}// for all attributes atts[a] END
+
+		    } catch (ClassNotFoundException e) {
+			// FIXME: this might not be the best way to handle missing classes.
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
+
 		}// visitCode(Code) END
 
 		public void visitExceptionTable(ExceptionTable obj){//vmspec2 4.7.4
+		    try {
 			// incorrectly named, it's the Exceptions attribute (vmspec2 4.7.4)
 			checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
@@ -992,6 +1024,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 					if (e != t) throw new ClassConstraintException("Exceptions attribute '"+tostring(obj)+"' references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
 				}
 			}
+
+		    } catch (ClassNotFoundException e) {
+			// FIXME: this might not be the best way to handle missing classes.
+			throw new AssertionViolatedException("Missing class: " + e.toString());
+		    }
 		}
 		// SYNTHETIC: see above
 		// DEPRECATED: see above
@@ -1073,9 +1110,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * @see #constant_pool_entries_satisfy_static_constraints()
 	 */
 	private void field_and_method_refs_are_valid(){
+	    try {
 		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 		DescendingVisitor v = new DescendingVisitor(jc, new FAMRAV_Visitor(jc));
 		v.visit();
+
+	    } catch (ClassNotFoundException e) {
+		// FIXME: this might not be the best way to handle missing classes.
+		throw new AssertionViolatedException("Missing class: " + e.toString());
+	    }
 	}
 
 	/**

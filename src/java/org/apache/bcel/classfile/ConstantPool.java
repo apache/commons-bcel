@@ -68,7 +68,7 @@ import  java.io.*;
  * @version $Id$
  * @see     Constant
  * @see     org.apache.bcel.generic.ConstantPoolGen
- * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ConstantPool implements Cloneable, Node, Serializable {
   private int        constant_pool_count;

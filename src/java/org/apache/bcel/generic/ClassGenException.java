@@ -59,7 +59,7 @@ package org.apache.bcel.generic;
  * in the throws clause every time.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ClassGenException extends RuntimeException {
   public ClassGenException() { super(); }

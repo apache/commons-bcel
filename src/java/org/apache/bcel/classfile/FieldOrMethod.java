@@ -53,31 +53,38 @@ package org.apache.bcel.classfile;
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
  */
-import  org.apache.bcel.Constants;
+import org.apache.bcel.Constants;
 import java.io.*;
 
 /** 
  * Abstract super class for fields and methods.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
-  protected int          name_index;      // Points to field name in constant pool 
-  protected int          signature_index; // Points to encoded signature
-  protected int          attributes_count;// No. of attributes
-  protected Attribute[]  attributes;      // Collection of attributes
+public abstract class FieldOrMethod extends AccessFlags
+  implements Cloneable, Node
+{
+  protected int name_index; // Points to field name in constant pool 
+  protected int signature_index; // Points to encoded signature
+  protected int attributes_count; // No. of attributes
+  protected Attribute[] attributes; // Collection of attributes
   protected ConstantPool constant_pool;
 
-  FieldOrMethod() {}
-  
+  FieldOrMethod() {
+  }
+
   /**
    * Initialize from another object. Note that both objects use the same
    * references (shallow copy). Use clone() for a physical copy.
    */
   protected FieldOrMethod(FieldOrMethod c) {
-    this(c.getAccessFlags(), c.getNameIndex(), c.getSignatureIndex(),
-	 c.getAttributes(), c.getConstantPool());
+    this(
+      c.getAccessFlags(),
+      c.getNameIndex(),
+      c.getSignatureIndex(),
+      c.getAttributes(),
+      c.getConstantPool());
   }
 
   /**
@@ -87,14 +94,17 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
    * @throws ClassFormatException
    */
   protected FieldOrMethod(DataInputStream file, ConstantPool constant_pool)
-    throws IOException, ClassFormatException
-  {
-    this(file.readUnsignedShort(), file.readUnsignedShort(),
-	 file.readUnsignedShort(), null, constant_pool);
+    throws IOException, ClassFormatException {
+    this(
+      file.readUnsignedShort(),
+      file.readUnsignedShort(),
+      file.readUnsignedShort(),
+      null,
+      constant_pool);
 
     attributes_count = file.readUnsignedShort();
-    attributes       = new Attribute[attributes_count];
-    for(int i=0; i < attributes_count; i++)
+    attributes = new Attribute[attributes_count];
+    for (int i = 0; i < attributes_count; i++)
       attributes[i] = Attribute.readAttribute(file, constant_pool);
   }
 
@@ -105,13 +115,16 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
    * @param attributes Collection of attributes
    * @param constant_pool Array of constants
    */
-  protected FieldOrMethod(int access_flags, int name_index, int signature_index,
-			  Attribute[] attributes, ConstantPool constant_pool)
-  {
-    this.access_flags    = access_flags;
-    this.name_index      = name_index;
+  protected FieldOrMethod(
+    int access_flags,
+    int name_index,
+    int signature_index,
+    Attribute[] attributes,
+    ConstantPool constant_pool) {
+    this.access_flags = access_flags;
+    this.name_index = name_index;
     this.signature_index = signature_index;
-    this.constant_pool   = constant_pool;
+    this.constant_pool = constant_pool;
 
     setAttributes(attributes);
   }
@@ -121,47 +134,52 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
    *
    * @param file Output file stream
    * @throws IOException
-   */ 
-  public final void dump(DataOutputStream file) throws IOException
-  {
+   */
+  public final void dump(DataOutputStream file) throws IOException {
     file.writeShort(access_flags);
     file.writeShort(name_index);
     file.writeShort(signature_index);
     file.writeShort(attributes_count);
 
-    for(int i=0; i < attributes_count; i++)
+    for (int i = 0; i < attributes_count; i++)
       attributes[i].dump(file);
   }
 
   /**
    * @return Collection of object attributes.
-   */   
-  public final Attribute[] getAttributes() { return attributes; }
+   */
+  public final Attribute[] getAttributes() {
+    return attributes;
+  }
 
   /**
    * @param attributes Collection of object attributes.
    */
   public final void setAttributes(Attribute[] attributes) {
-    this.attributes  = attributes;
-    attributes_count = (attributes == null)? 0 : attributes.length;
+    this.attributes = attributes;
+    attributes_count = (attributes == null) ? 0 : attributes.length;
   }
 
   /**
    * @return Constant pool used by this object.
-   */   
-  public final ConstantPool getConstantPool() { return constant_pool; }
+   */
+  public final ConstantPool getConstantPool() {
+    return constant_pool;
+  }
 
   /**
    * @param constant_pool Constant pool to be used for this object.
-   */   
+   */
   public final void setConstantPool(ConstantPool constant_pool) {
     this.constant_pool = constant_pool;
   }
 
   /**
    * @return Index in constant pool of object's name.
-   */   
-  public final int getNameIndex() { return name_index; }
+   */
+  public final int getNameIndex() {
+    return name_index;
+  }
 
   /**
    * @param name_index Index in constant pool of object's name.
@@ -172,8 +190,10 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
   /**
    * @return Index in constant pool of field signature.
-   */   
-  public final int getSignatureIndex() { return signature_index; }    
+   */
+  public final int getSignatureIndex() {
+    return signature_index;
+  }
 
   /**
    * @param signature_index Index in constant pool of field signature.
@@ -184,21 +204,25 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
   /**
    * @return Name of object, i.e., method name or field name
-   */   
+   */
   public final String getName() {
-    ConstantUtf8  c;
-    c = (ConstantUtf8)constant_pool.getConstant(name_index, 
-						Constants.CONSTANT_Utf8);
+    ConstantUtf8 c;
+    c =
+      (ConstantUtf8)constant_pool.getConstant(
+        name_index,
+        Constants.CONSTANT_Utf8);
     return c.getBytes();
   }
 
   /**
    * @return String representation of object's type signature (java style)
-   */   
+   */
   public final String getSignature() {
-    ConstantUtf8  c;
-    c = (ConstantUtf8)constant_pool.getConstant(signature_index,
-						Constants.CONSTANT_Utf8);
+    ConstantUtf8 c;
+    c =
+      (ConstantUtf8)constant_pool.getConstant(
+        signature_index,
+        Constants.CONSTANT_Utf8);
     return c.getBytes();
   }
 
@@ -210,12 +234,13 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
     try {
       c = (FieldOrMethod)clone();
-    } catch(CloneNotSupportedException e) {}
+    } catch (CloneNotSupportedException e) {
+    }
 
-    c.constant_pool    = constant_pool;
-    c.attributes       = new Attribute[attributes_count];
+    c.constant_pool = constant_pool;
+    c.attributes = new Attribute[attributes_count];
 
-    for(int i=0; i < attributes_count; i++)
+    for (int i = 0; i < attributes_count; i++)
       c.attributes[i] = attributes[i].copy(constant_pool);
 
     return c;

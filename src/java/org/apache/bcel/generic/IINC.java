@@ -60,7 +60,7 @@ import org.apache.bcel.util.ByteSequence;
  * IINC - Increment local variable by constant
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IINC extends LocalVariableInstruction {
   private boolean wide;

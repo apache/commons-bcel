@@ -10,7 +10,7 @@ import org.apache.bcel.Repository;
  * JASMIN</A> format.
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
   private JavaClass       clazz;

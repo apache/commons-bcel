@@ -25,7 +25,7 @@ import org.apache.bcel.Constants;
  * </PRE>
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class HelloWorldBuilder {
   public static void main(String[] argv) {

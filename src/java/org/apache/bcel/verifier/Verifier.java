@@ -54,13 +54,15 @@ package org.apache.bcel.verifier;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.*;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.verifier.statics.*;
-import org.apache.bcel.verifier.structurals.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.verifier.statics.Pass1Verifier;
+import org.apache.bcel.verifier.statics.Pass2Verifier;
+import org.apache.bcel.verifier.statics.Pass3aVerifier;
+import org.apache.bcel.verifier.structurals.Pass3bVerifier;
 
 /**
  * A Verifier instance is there to verify a class file according to The Java Virtual
@@ -172,7 +174,7 @@ public class Verifier{
 	 * This returns all the (warning) messages collected during verification.
 	 * A prefix shows from which verifying pass a message originates.
 	 */
-	public String[] getMessages(){
+	public String[] getMessages() throws ClassNotFoundException {
 		ArrayList messages = new ArrayList();
 
 		if (p1v != null){
@@ -237,7 +239,7 @@ public class Verifier{
 	public static void main(String [] args){
 		System.out.println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<http://jakarta.apache.org/bcel>\n");
 	  for(int k=0; k < args.length; k++) {
-
+		try {
 			if (args[k].endsWith(".class")){
 				int dotclasspos = args[k].lastIndexOf(".class");
 				if (dotclasspos != -1) args[k] = args[k].substring(0,dotclasspos);
@@ -278,9 +280,12 @@ public class Verifier{
 			System.out.println("\n");
 
 			// avoid swapping.
-	  	v.flush();
-	  	org.apache.bcel.Repository.clearCache();
-		System.gc();
+	  		v.flush();
+	  		org.apache.bcel.Repository.clearCache();
+			System.gc();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	  }
 	}
 }

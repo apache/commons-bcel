@@ -60,7 +60,7 @@ package org.apache.bcel.generic;
  * <PRE>Stack: ... -&gt; ..., item.word1, item.word2</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class LDC2_W extends CPInstruction
   implements PushInstruction, TypedInstruction {

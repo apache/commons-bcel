@@ -59,7 +59,7 @@ import org.apache.bcel.Constants;
  * Denotes basic type such as int.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class BasicType extends Type {
   /**

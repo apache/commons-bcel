@@ -85,7 +85,14 @@ public final class Pass1Verifier extends PassVerifier{
 	/** Used to load in and return the myOwner-matching JavaClass object when needed. Avoids loading in a class file when it's not really needed! */
 	private JavaClass getJavaClass(){
 		if (jc == null){
-			jc = Repository.lookupClass(myOwner.getClassName());
+			try {
+				jc = Repository.lookupClass(myOwner.getClassName());
+			} catch (ClassNotFoundException e) {
+				// FIXME: currently, Pass1Verifier treats jc == null as a special
+				// case, so we don't need to do anything here.  A better solution
+				// would be to simply throw the ClassNotFoundException
+				// out of this method.
+			}
 		}
 		return jc;
 	}

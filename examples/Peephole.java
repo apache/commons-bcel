@@ -10,7 +10,7 @@ import org.apache.bcel.util.InstructionFinder;
  * Remove NOPs from given class
  *
  * @version $Id$
- * @author  <A HREF="http://www.berlin.de/~markus.dahm/">M. Dahm</A>
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class Peephole {
   public static void main(String[] argv) {

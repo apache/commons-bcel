@@ -21,9 +21,15 @@ import org.apache.regexp.*;
  * with BCEL to use this class.
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
+  private static class LookupFailure extends RuntimeException {
+    public LookupFailure(String msg) {
+      super(msg);
+    }
+  }
+
   private JavaClass    _class;
   private ClassQueue   _queue;
   private ClassSet     _set;
@@ -86,10 +92,14 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
       return;
     }
     
-    JavaClass clazz = Repository.lookupClass(class_name);
+    try {
+      JavaClass clazz = Repository.lookupClass(class_name);
     
-    if(clazz != null && _set.add(clazz)) {
-      _queue.enqueue(clazz);
+      if(_set.add(clazz)) {
+        _queue.enqueue(clazz);
+      }
+    } catch (ClassNotFoundException e) {
+      throw new LookupFailure("Missing class: " + e.toString());
     }
   }
 

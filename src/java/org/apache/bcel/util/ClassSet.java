@@ -63,7 +63,7 @@ import org.apache.bcel.classfile.JavaClass;
  * used for comparison.
  *
  * @version $Id$
- * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
+ * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  * @see ClassStack
 */
 public class ClassSet implements java.io.Serializable {
