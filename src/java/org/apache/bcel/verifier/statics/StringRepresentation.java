@@ -211,6 +211,9 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 	public void visitSourceFile(SourceFile obj){
 		tostring = toString(obj);
 	} 
+  public void visitStackMap(StackMap obj){
+    tostring = toString(obj);
+  }
 	public void visitSynthetic(Synthetic obj){
 		tostring = toString(obj);
 	} 
