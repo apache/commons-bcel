@@ -30,7 +30,11 @@
     </li>
 
     <li>
-      <a HREF="http://www.exadel.com/">JCredo</a> JDO-Implementation
+      <a HREF="http://xmlc.enhydra.org">XMLC</a>
+    </li>
+ 
+    <li>
+      <a HREF="http://jcredo.com/">JCredo</a> JDO-Implementation
     </li>
 
     <li>
@@ -83,8 +87,8 @@
     Static analysis of class libraries</a>
     </li>
 
-    <li><a HREF="http://www.cs.ncl.ac.uk/research/dependability/reflection/"
-    >Kava: Reflective Java</a>
+    <li><a HREF="http://www.cs.ncl.ac.uk/research/dependability/reflection/">
+    Kava: Reflective Java</a>
     </li>
 
     <li>one.world - <a HREF="http://one.cs.washington.edu/"
@@ -173,9 +177,3 @@
 
 </body>
 </document>
-
-
-
-
-
-
