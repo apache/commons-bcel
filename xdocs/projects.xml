@@ -26,14 +26,19 @@
     </li>
 
     <li>
-      <a HREF="http://www.libelis.com/">LIDO</a> JDO-Implementation
-    </li>
-    <li>
       <a HREF="http://www.cs.put.poznan.pl/dweiss/index.php/projects/bsh-binding/index.xml?lang=en">BeanShell</a>
     </li>
 
     <li>
       <a HREF="http://www.exadel.com/">JCredo</a> JDO-Implementation
+    </li>
+
+    <li>
+      <a HREF="http://www.libelis.com/">LIDO</a> JDO-Implementation
+    </li>
+
+    <li>
+      <a HREF="http://www.objectindustries.com/">JRelay</a> JDO-Implementation
     </li>
 
     <li>
