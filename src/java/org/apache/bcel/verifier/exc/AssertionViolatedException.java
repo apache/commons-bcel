@@ -104,12 +104,4 @@ public final class AssertionViolatedException extends RuntimeException{
 		throw ave;
 	}
 
-	/**
-	 * Returns the backtrace of this AssertionViolatedException as a String.
-	 * @return The backtrace of this AssertionViolatedException as a String.
-	 */
-	public String getStackTrace(){
-		return Utility.getStackTrace(this);
-	}
-
 }
