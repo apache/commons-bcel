@@ -9,7 +9,7 @@
 
   <body>
 
-  <section name="Contributors">
+  <section name="Developers">
 
   <p>
     <table>
@@ -29,9 +29,29 @@
         <td>Jason van Zyl</td>
         <td><a href="mailto:jvanzyl@zenplex.com">jvanzyl@zenplex.com</a></td>
       </tr>
+      <tr>
+        <td>David Dixon-Peugh</td>
+        <td><a href="mailto:dixonpeugh@yahoo.com">dixonpeugh@yahoo.com</a></td>
+      </tr>
+      <tr>
+        <td>Enver Haase</td>
+        <td><a href="mailto:enver@convergence.de">enver@convergence.de</a></td>
+      </tr>
     </table>
   </p>
-
   </section>
+
+  <section name="Past Contributors">
+  <p>
+    <table>
+      <tr>
+        <td>Patrick Beard</td>
+        <td><a href="mailto:beard@netscape.com">beard@netscape.com</a></td>
+      </tr>
+    </table>
+  </p>
+  </section>
+
+
 </body>
 </document>
