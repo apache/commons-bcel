@@ -66,7 +66,9 @@ import org.apache.bcel.ExceptionConstants;
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
-public class PUTFIELD extends FieldInstruction implements ExceptionThrower{
+public class PUTFIELD 
+    extends FieldInstruction 
+    implements PopInstruction,ExceptionThrower{
   /**
    * Empty constructor needed for the Class.newInstance() statement in
    * Instruction.readInstruction(). Not to be used otherwise.
