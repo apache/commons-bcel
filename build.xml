@@ -269,6 +269,13 @@ Available targets:
       </fileset>
     </copy>
 
+    <!-- Copy examples -->
+    <copy todir="${distDir}/examples">
+      <fileset dir="${examples.dir}">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+
     <!-- Create a tar.gz file -->
     <tar longfile="gnu" tarfile="${final.name}.tar">
       <tarfileset dir="${build.dir}">
@@ -303,9 +310,16 @@ Available targets:
     <copy todir="${distDir}" file="default.properties"/>
     <copy todir="${distDir}" file="build.xml"/>
 
-    <!-- Copy Source -->
+    <!-- Copy Sources -->
     <copy todir="${distDir}/src/java">
       <fileset dir="${src.dir}">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+
+    <!-- Copy examples -->
+    <copy todir="${distDir}/examples">
+      <fileset dir="${examples.dir}">
         <include name="**/*.java"/>
       </fileset>
     </copy>
