@@ -95,8 +95,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   /**
    * Constructor gets all contents as arguments.
    *
-   * @param class_name Class name
-   * @param superclass_name Superclass name
+   * @param class_name_index Index into constant pool referencing a
+   * ConstantClass that represents this class.
+   * @param superclass_name_index Index into constant pool referencing a
+   * ConstantClass that represents this class's superclass.
    * @param file_name File name
    * @param major Major compiler version
    * @param minor Minor compiler version

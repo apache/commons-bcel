@@ -88,7 +88,8 @@ public final class ConstantClass extends Constant implements ConstantObject {
   }    
 
   /**
-   * @param name_index Name index in constant pool
+   * @param name_index Name index in constant pool.  Should refer to a
+   * ConstantUtf8.
    */
   public ConstantClass(int name_index) {
     super(Constants.CONSTANT_Class);
