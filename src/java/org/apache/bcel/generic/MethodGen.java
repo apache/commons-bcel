@@ -70,7 +70,6 @@ import java.util.*;
  *
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
- * @author  <A HREF="http://www.vmeng.com/beard">Patrick C. Beard</A>
  * @see     InstructionList
  * @see     Method
  */
@@ -443,7 +442,7 @@ public class MethodGen extends FieldGenOrMethodGen {
    * @param start_pc Start of region (inclusive)
    * @param end_pc End of region (inclusive)
    * @param handler_pc Where handling is done
-   * @param catch_type fully qualified class name of handled exception or null if any
+   * @param catch_type class type of handled exception or null if any
    * exception is handled
    * @return new exception handler object
    */
