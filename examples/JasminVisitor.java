@@ -79,7 +79,10 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
   }
 
   public void visitDeprecated(Deprecated attribute) { printEndMethod(attribute); }
-  public void visitSynthetic(Synthetic attribute) { printEndMethod(attribute); }
+  public void visitSynthetic(Synthetic attribute) {
+    if(method != null)
+      printEndMethod(attribute);
+  }
 
   public void visitMethod(Method method) {
     out.println("\n.method " + Utility.accessToString(method.getAccessFlags()) +
