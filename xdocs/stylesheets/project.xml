@@ -22,7 +22,7 @@
     </menu>
 
     <menu name="Get Involved">
-      <item name="CVS Repository" href="http://cvs.apache.org/viewcvs/jakarta-bcel/"/>
+      <item name="SVN Repository" href="http://svn.apache.org/viewcvs.cgi/jakarta/bcel/"/>
       <item name="Mailing Lists" href="http://jakarta.apache.org/site/mail.html"/>
       <item name="Issue Tracking" href="http://jakarta.apache.org/site/bugs.html"/>
       <item name="Contributors" href="/contributors.html"/>
