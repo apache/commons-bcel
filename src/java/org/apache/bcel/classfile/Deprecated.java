@@ -123,8 +123,10 @@ public final class Deprecated extends Attribute {
   public Attribute copy(ConstantPool constant_pool) {
     Deprecated c = (Deprecated)clone();
 
-    if(bytes != null)
-      c.bytes = bytes.clone();
+    if (bytes != null) {
+        c.bytes = new byte[bytes.length];
+        System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
+    }
 
     c.constant_pool = constant_pool;
     return c;

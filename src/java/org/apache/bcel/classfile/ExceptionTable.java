@@ -158,7 +158,12 @@ public final class ExceptionTable extends Attribute {
    */
   public Attribute copy(ConstantPool constant_pool) {
     ExceptionTable c = (ExceptionTable)clone();
-    c.exception_index_table = exception_index_table.clone();
+
+    if (exception_index_table != null) {
+        c.exception_index_table = new int[exception_index_table.length];
+        System.arraycopy(exception_index_table, 0, c.exception_index_table, 0, exception_index_table.length);
+    }
+    
     c.constant_pool = constant_pool;
     return c;
   }

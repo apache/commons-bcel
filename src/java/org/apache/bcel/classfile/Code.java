@@ -320,8 +320,13 @@ public final class Code extends Attribute {
    * @param constant_pool the constant pool to duplicate
    */
   public Attribute copy(ConstantPool constant_pool) {
-    Code c = (Code)clone();
-    c.code          = code.clone();
+    Code c = (Code) clone();
+
+    if (code != null) {
+        c.code = new byte[code.length];
+        System.arraycopy(code, 0, c.code, 0, code.length);
+    }
+
     c.constant_pool = constant_pool;
   
     c.exception_table = new CodeException[exception_table_length];
