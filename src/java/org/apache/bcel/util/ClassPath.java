@@ -298,7 +298,7 @@ public class ClassPath implements Serializable {
 
   /** Contains information about file/ZIP entry of the Java class.
    */
-  public abstract static class ClassFile {
+  public interface ClassFile {
     /** @return input stream for class file.
      */
     public abstract InputStream getInputStream() throws IOException;
@@ -306,6 +306,11 @@ public class ClassPath implements Serializable {
     /** @return canonical path to class file.
      */
     public abstract String getPath();
+
+    /** @return base path of found class, i.e. class is contained relative
+     * to that path
+     */
+    public abstract String getBase();
 
     /** @return modification time of class file.
      */
@@ -335,6 +340,8 @@ public class ClassPath implements Serializable {
 	}
 	public long        getTime()        { return file.lastModified(); }
 	public long        getSize()        { return file.length(); }
+        public String getBase() {  return dir;  }
+
       } : null;
     }
 
@@ -354,6 +361,9 @@ public class ClassPath implements Serializable {
 	public String      getPath()        { return entry.toString(); }
 	public long        getTime()        { return entry.getTime(); }
 	public long        getSize()       { return entry.getSize(); }
+        public String getBase() {
+	  return zip.getName();
+	}
       } : null;
     }
   }
