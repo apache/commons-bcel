@@ -1193,8 +1193,15 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		Field f = null;
 		for (int i=0; i<fields.length; i++){
 			if (fields[i].getName().equals(field_name)){
-				f = fields[i];
-				break;
+				  Type f_type = Type.getType(fields[i].getSignature());
+				  Type o_type = o.getType(cpg);
+					/* TODO: Check if assignment compatibility is sufficient.
+				   * What does Sun do?
+				   */
+				  if (f_type.equals(o_type)){
+						f = fields[i];
+						break;
+					}
 			}
 		}
 		if (f == null){
@@ -2475,8 +2482,15 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		Field f = null;
 		for (int i=0; i<fields.length; i++){
 			if (fields[i].getName().equals(field_name)){
-				f = fields[i];
-				break;
+				  Type f_type = Type.getType(fields[i].getSignature());
+				  Type o_type = o.getType(cpg);
+					/* TODO: Check if assignment compatibility is sufficient.
+				   * What does Sun do?
+				   */
+				  if (f_type.equals(o_type)){
+						f = fields[i];
+						break;
+					}
 			}
 		}
 		if (f == null){
@@ -2557,8 +2571,15 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		Field f = null;
 		for (int i=0; i<fields.length; i++){
 			if (fields[i].getName().equals(field_name)){
-				f = fields[i];
-				break;
+					Type f_type = Type.getType(fields[i].getSignature());
+				  Type o_type = o.getType(cpg);
+					/* TODO: Check if assignment compatibility is sufficient.
+				   * What does Sun do?
+				   */
+				  if (f_type.equals(o_type)){
+						f = fields[i];
+						break;
+					}
 			}
 		}
 		if (f == null){
