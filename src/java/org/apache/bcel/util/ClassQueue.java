@@ -67,15 +67,13 @@ import org.apache.bcel.classfile.JavaClass;
 public class ClassQueue implements java.io.Serializable {
   protected LinkedList vec  = new LinkedList();
 
-  public void enqueue(JavaClass clazz) { vec.add(clazz); }
+  public void enqueue(JavaClass clazz) { vec.addLast(clazz); }
 
   public JavaClass dequeue()                {
-    JavaClass clazz = (JavaClass)vec.get(0);
-    vec.remove(0);
-    return clazz;
+    return (JavaClass)vec.removeFirst();
   }
 
-  public boolean empty() { return vec.size() == 0; }
+  public boolean empty() { return vec.isEmpty(); }
 
   public String toString() {
     return vec.toString();
