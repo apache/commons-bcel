@@ -715,7 +715,7 @@ m.getName(),
 
     Code code = null;
 
-    if ((il != null) && !isAbstract()) {
+    if ((il != null) && !isAbstract() && !isNative()) {
       // Remove any stale code attribute
       Attribute[] attributes = getAttributes();
       for (int i = 0; i < attributes.length; i++) {
