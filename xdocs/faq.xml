@@ -28,7 +28,7 @@
     </p>
 
     <p>
-      <b>Q: </b> (Typically for users of  XSLTC) I'm getting
+      <b>Q: </b> (Typically for users of Xalan (XSLTC)) I'm getting
 
     <pre>
     ...
@@ -47,11 +47,11 @@
     </p>
 
     <p>
-      <b>Q: Can I create or modify classes dynamically with BCEL?</b>
+      <b>Q:</b> Can I create or modify classes dynamically with BCEL?
       <br/>
-      <b>A: Since 4.4.0 BCEL contains useful classes in the
-      util package, namely <tt>ClassLoader</tt> and
-       <tt>JavaWrapper</tt>. Take a look at the <tt> ProxyCreator</tt> example.</b>
+      <b>A:</b> BCEL contains useful classes in the
+      <tt>util</tt> package, namely <tt>ClassLoader</tt> and
+       <tt>JavaWrapper</tt>. Take a look at the <tt> ProxyCreator</tt> example.
     </p>
     
     </section>

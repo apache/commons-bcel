@@ -3,347 +3,344 @@
 
   <properties>
     <author email="markus.dahm@inf.fu-berlin.de">Markus Dahm</author>
-    <title>Byte Code Engineering Library (BCEL) v1</title>
+    <title>Byte Code Engineering Library (BCEL)</title>
   </properties>
 
   <body>
 
   <section name="Abstract">
   <p>
-    Extensions  and improvements of the  programming language Java and its
-    related  execution environment (Java   Virtual Machine,  JVM)  are the
-    subject  of a large number  of research  projects and proposals. There
-    are  projects, for  instance, to add   parameterized types to Java, to
-    implement ``Aspect-Oriented Programming'', to perform sophisticated
-    static analysis, and to improve the run-time performance.
+    Extensions and improvements of the programming language Java and
+    its related execution environment (Java Virtual Machine, JVM) are
+    the subject of a large number of research projects and
+    proposals. There are projects, for instance, to add parameterized
+    types to Java, to implement <a
+    href="http://aspectj.org/">Aspect-Oriented Programming</a>, to
+    perform sophisticated static analysis, and to improve the run-time
+    performance.
   </p>
 
   <p>
-    Since  Java classes  are  compiled into  portable  binary class  files
-    (called <em>byte code</em>), it is   the   most  convenient   and
-    platform-independent  way  to  implement  these  improvements  not  by
-    writing a  new compiler or changing  the JVM, but  by transforming the
-    byte  code.   These  transformations  can either  be  performed  after
-    compile-time,  or at load-time.   Many programmers  are doing  this by
-    implementing their own specialized byte code manipulation tools, which
-    are, however, restricted in the range of their re-usability.
+    Since Java classes are compiled into portable binary class files
+    (called <em>byte code</em>), it is the most convenient and
+    platform-independent way to implement these improvements not by
+    writing a new compiler or changing the JVM, but by transforming
+    the byte code. These transformations can either be performed
+    after compile-time, or at load-time. Many programmers are doing
+    this by implementing their own specialized byte code manipulation
+    tools, which are, however, restricted in the range of their
+    re-usability.
   </p>
 
   <p>
-    To deal with the necessary class file transformations, we introduce an
-    API that helps developers   to  conveniently   implement   their
-    transformations.
+    To deal with the necessary class file transformations, we
+    introduce an API that helps developers to conveniently implement
+    their transformations.
   </p>
   </section>
 
-  <section name="Introduction">
+  <section name="1 Introduction">
   <p>
-    The  Java language  [] has  become very  popular  and many
-    research projects  deal with further  improvements of the  language or
-    its run-time behavior.  The possibility  to extend a language with new
-    concepts  is surely  a  desirable feature,  but implementation  issues
-    should be hidden from the user.  Fortunately, the concepts of the Java Virtual Machine 
-    permit  the user-transparent  implementation of  such  extensions with
+    The <a href="http://java.sun.com/">Java</a> language has become
+    very popular and many research projects deal with further
+    improvements of the language or its run-time behavior. The
+    possibility to extend a language with new concepts is surely a
+    desirable feature, but the implementation issues should be hidden from
+    the user. Fortunately, the concepts of the Java Virtual Machine
+    permit the user-transparent implementation of such extensions with
     relatively little effort.
   </p>
 
   <p>
-    Because the target language of  Java is an interpreted language with a
-    small  and  easy-to-understand  set  of instructions  (the  <em>byte
-    code</em>), developers  can implement  and test their  concepts in  a very
-    elegant way.   One can  write a plug-in  replacement for  the system's
-    class loader which is  responsible for dynamically loading class files
-    at  run-time  and  passing the  byte  code  to  the Virtual Machine (see  section
-    ).  Class loaders may  thus be used to intercept
-    the  loading process and  transform classes  before they  get actually
-    executed  by the  JVM  [].  While  the original  class
-    files always remain unaltered, the behavior of the class loader may be
-    reconfigured for every execution or instrumented dynamically.
+    Because the target language of Java is an interpreted language
+    with a small and easy-to-understand set of instructions (the
+    <em>byte code</em>), developers can implement and test their
+    concepts in a very elegant way. One can write a plug-in
+    replacement for the system's <em>class loader</em> which is
+    responsible for dynamically loading class files at run-time and
+    passing the byte code to the Virtual Machine (see section ).
+    Class loaders may thus be used to intercept the loading process
+    and transform classes before they get actually executed by the
+    JVM. While the original class files always remain unaltered, the
+    behavior of the class loader may be reconfigured for every
+    execution or instrumented dynamically.
   </p>
   
   <p>
-    The <font face="helvetica">BCEL </font>API (Byte Code Engineering Library), formerly known as
-    JavaClass, is a toolkit for the static analysis and dynamic creation
-    or transformation of Java class files.  It enables developers to
-    implement the desired features on a high level of abstraction without
-    handling all the internal details of the Java class file format and
-    thus re-inventing the wheel every time.  <font face="helvetica">BCEL </font>is written entirely in
-    Java and freely available under the terms of the Apache Software
-    License.
+    The <font face="helvetica,arial">BCEL</font> API (Byte Code
+    Engineering Library), formerly known as JavaClass, is a toolkit
+    for the static analysis and dynamic creation or transformation of
+    Java class files. It enables developers to implement the desired
+    features on a high level of abstraction without handling all the
+    internal details of the Java class file format and thus
+    re-inventing the wheel every time. <font face="helvetica,arial">BCEL
+    </font> is written entirely in Java and freely available under the
+    terms of the <a href="license.html">Apache Software License</a>.
   </p>
 
   <p>
-    This paper is structured as follows:  We give a  brief description of
-    the Java Virtual Machine and the class  file format in section .  Section
-    introduces  the <font face="helvetica">BCEL </font>API.   Section 
-    describes  some typical  application areas  and example  projects. The
-    appendix contains  code examples that are  to long to  be presented in
-    the  main  part  of this  paper.  All  examples  are included  in  the
-    down-loadable distribution.
+    This manual is structured as follows: We give a brief description
+    of the Java Virtual Machine and the class file format in <a
+    href="#2 The Java Virtual Machine">section 2</a>. <a href="#3 The
+    BCEL API">Section 3</a> introduces the <font
+    face="helvetica,arial">BCEL</font> API. <a href="#4 Application
+    areas">Section 4</a> describes some typical application areas and
+    example projects. The appendix contains code examples that are to
+    long to be presented in the main part of this paper. All examples
+    are included in the down-loadable distribution.
   </p>
 
   </section>
 
-  <section name="Related work">
+  <section name="2 The Java Virtual Machine">
   <p>
-    There are  a number  of proposals and  class libraries that  have some
-    similarities with  BCEL: The JOIE [] toolkit can
-    be used to instrument class loaders with dynamic behavior.  Similarly,
-    ``Binary  Component Adaptation''  [] allows  components  to be
-    adapted and  evolved on-the-fly.  Han  Lee's ``Byte-code Instrumenting
-    Tool'' [] allows the user  to insert calls to analysis methods
-    anywhere in the  byte code.  The Jasmin language  [] can be
-    used  to   hand-write  or  generate   pseudo-assembler  code.   D-Java
-    [] and JCF [] are class viewing tools.
+    Readers already familiar with the Java Virtual Machine and the
+    Java class file format may want to skip this section and proceed
+    with <a href="#3 The BCEL API">section 3</a>.
   </p>
 
   <p>
-    In contrast to these projects, <font face="helvetica">BCEL </font>is intended 
-    to be a general purpose
-    tool  for ``byte  code engineering''.   It gives  full control  to the
-    developer on a high level of  abstraction and is not restricted to any
-    particular application area.
-  </p>
-  </section>
-
-  <section name="The Java Virtual Machine">
-  <p>
-    Readers already familiar with the Java Virtual Machine and the Java class file format
-    may want to skip this section and proceed with section .
+    Programs written in the Java language are compiled into a portable
+    binary format called <em>byte code</em>. Every class is
+    represented by a single class file containing class related data
+    and byte code instructions. These files are loaded dynamically
+    into an interpreter (<a
+    href="http://java.sun.com/docs/books/vmspec/index.html">Java
+    Virtual Machine</a>, aka. JVM) and executed.
   </p>
 
   <p>
-    Programs written  in the  Java language are  compiled into  a portable
-    binary format called <em>byte  code</em>.  Every class is represented by
-    a  single class  file  containing  class related  data  and byte  code
-    instructions. These  files are loaded dynamically  into an interpreter
-    (Java Virtual Machine, JVM) and executed.
-  </p>
-
-  <p>
-    Figure    illustrates  the  procedure  of  compiling  and
-    executing a Java class:  The source file (<tt>HelloWorld.java</tt>) is
-    compiled into a Java class file (<tt>HelloWorld.class</tt>), loaded by
-    the  byte  code  interpreter  and  executed.  In  order  to  implement
-    additional  features, researchers  may want  to transform  class files
-    (drawn  with  bold lines)  before  they  get  actually executed.  This
-    application area is one of the main issues of this article.
+    <a href="#Figure 1">Figure 1</a> illustrates the procedure of
+    compiling and executing a Java class: The source file
+    (<tt>HelloWorld.java</tt>) is compiled into a Java class file
+    (<tt>HelloWorld.class</tt>), loaded by the byte code interpreter
+    and executed. In order to implement additional features,
+    researchers may want to transform class files (drawn with bold
+    lines) before they get actually executed. This application area
+    is one of the main issues of this article.
   </p>
   
-  <p>
-  <a href="images/jvm.gif">Figure</a>
+  <p align="center">
+  <img src="images/jvm.gif"/>
   <br/>
-  Figure 1: Compilation and execution of Java classes
+  <a name="Figure 1">Figure 1: Compilation and execution of Java classes</a>
   </p>
     
   <p>
-    Note that the  use of the general term  ``Java'' implies two meanings:
-    on the one hand, Java as a programming language is meant, on the other
-    hand, the Java  Virtual Machine, which is not  necessarily targeted by
-    the Java language  exclusively, but may be used  by other languages as
-    well (e.g.   Eiffel [], or Ada []).   We assume the
-    reader to  be familiar with  the Java language  and to have  a general
-    understanding of the Virtual Machine.
+    Note that the use of the general term "Java" implies in fact two
+    meanings: on the one hand, Java as a programming language, on the
+    other hand, the Java Virtual Machine, which is not necessarily
+    targeted by the Java language exclusively, but may be used by <a
+    href="http://grunge.cs.tu-berlin.de/~tolk/vmlanguages.html">other
+    languages</a> as well. We assume the reader to be familiar with
+    the Java language and to have a general understanding of the
+    Virtual Machine.
   </p>
 
   </section>
 
   <section name="2.1 Java class file format">
   <p>
-    Giving a  full overview of  the design issues  of the Java  class file
-    format and the  associated byte code instructions is  beyond the scope
-    of this paper.   We will just give a  brief introduction covering the
-    details  that  are  necessary  for  understanding  the  rest  of  this
-    paper. The format of class files and the byte code instruction set are
-    described  in more  detail  in the  ``Java Virtual Machine Specification''  []
-    ,and  in [].   Especially,  we  will  not  deal  with  the  security
-    constraints that the Java Virtual Machine has to check at run-time, i.e. the byte code
-    verifier.
+    Giving a full overview of the design issues of the Java class file
+    format and the associated byte code instructions is beyond the
+    scope of this paper. We will just give a brief introduction
+    covering the details that are necessary for understanding the rest
+    of this paper. The format of class files and the byte code
+    instruction set are described in more detail in the <a
+    href="http://java.sun.com/docs/books/vmspec/index.html">Java
+    Virtual Machine Specification</a>. Especially, we will not deal
+    with the security constraints that the Java Virtual Machine has to
+    check at run-time, i.e. the byte code verifier.
   </p>
 
   <p>
-    Figure  shows a  simplified example of the contents
-    of a  Java class file:  It starts with  a header containing  a ``magic
-    number'' (<tt>0xCAFEBABE</tt>) and the version number, followed by the
-    <em>constant pool</em>, which can be roughly thought of as the text segment of an
-    executable, the  <em>access rights</em>  of the class  encoded by  a bit
-    mask, a list of interfaces  implemented by the class, lists containing
-    the  fields and  methods of  the  class, and  finally the  <em>class
-    attributes</em>, e.g.  the  <tt>SourceFile</tt> attribute telling the name
-    of  the source  file.  Attributes  are  a way  of putting  additional,
-    e.g. user-defined,  information into class file  data structures.  For
-    example, a  custom class  loader may evaluate  such attribute  data in
-    order to perform its  transformations.  The JVM specification declares
-    that unknown, i.e.  user-defined attributes must be ignored by any Virtual Machine 
-    implementation.
+    <a href="#Figure 2">Figure 2</a> shows a simplified example of the
+    contents of a Java class file: It starts with a header containing
+    a "magic number" (<tt>0xCAFEBABE</tt>) and the version number,
+    followed by the <em>constant pool</em>, which can be roughly
+    thought of as the text segment of an executable, the <em>access
+    rights</em> of the class encoded by a bit mask, a list of
+    interfaces implemented by the class, lists containing the fields
+    and methods of the class, and finally the <em>class
+    attributes</em>, e.g.,  the <tt>SourceFile</tt> attribute telling
+    the name of the source file. Attributes are a way of putting
+    additional, user-defined information into class file data
+    structures. For example, a custom class loader may evaluate such
+    attribute data in order to perform its transformations. The JVM
+    specification declares that unknown, i.e., user-defined attributes
+    must be ignored by any Virtual Machine implementation.
   </p>
 
-  <p>
-  <a href="images/classfile.gif">Figure</a>
+  <p align="center">
+  <img src="images/classfile.gif"/>
   <br/>
-  Figure 2: Java class file format
+  <a name="Figure 2">Figure 2: Java class file format</a>
   </p>    
 
   <p>
-    Because  all of  the  information needed  to  dynamically resolve  the
-    symbolic  references to  classes, fields  and methods  at  run-time is
-    coded  with string  constants, the  constant pool contains  in fact  the largest
-    portion of an average class file, approximately 60% [].
-    The byte code instructions themselves just make up 12%.
+    Because all of the information needed to dynamically resolve the
+    symbolic references to classes, fields and methods at run-time is
+    coded with string constants, the constant pool contains in fact
+    the largest portion of an average class file, approximately
+    60%. In fact, this makes the constant pool an easy target for code
+    manipulation issues. The byte code instructions themselves just
+    make up 12%.
   </p>
   
   <p>
-    The right upper box shows a  ``zoomed'' excerpt of the constant pool, while the
-    rounded box below depicts  some instructions that are contained within
-    a  method  of the  example  class.  These  instructions represent  the
-    straightforward translation of the well-known statement:
+    The right upper box shows a "zoomed" excerpt of the constant pool,
+    while the rounded box below depicts some instructions that are
+    contained within a method of the example class. These
+    instructions represent the straightforward translation of the
+    well-known statement:
   </p>
-  
-  <source>
-  System.out.println("Hello, world");
-  </source>
 
-  <p>
-    The first instruction loads the  contents of the field <tt>out</tt> of
-    class  <tt>java.lang.System</tt> onto  the operand  stack. This  is an
-    instance of  the class <tt>java.io.PrintStream</tt>.  The <tt>ldc</tt>
-    (``Load constant'') pushes a reference  to the string "Hello world" on
-    the  stack.    The  next  instruction  invokes   the  instance  method
-    <tt>println</tt>  which  takes  both  values as  parameters  (Instance
-    methods always  implicitly take an  instance reference as  their first
-    argument).
-  </p>
-  
-  <p>
-    Instructions,  other  data  structures   within  the  class  file  and
-    constants  themselves  may  refer  to  constants  in  the  constant pool.  Such
-    references are implemented via fixed indexes encoded directly into the
-    instructions.   This  is illustrated  for  some  items  of the  figure
-    emphasized    with   a    surrounding   box.
-  </p>
-  
-  <p>
-    For  example,  the  <tt>invokevirtual</tt>  instruction  refers  to  a
-    <tt>MethodRef</tt> constant  that contains information  about the name
-    of the  called method, the  signature (i.e.  the encoded  argument and
-    return types),  and to  which class the  method belongs.  In  fact, as
-    emphasized by the boxed  value, the <tt>MethodRef</tt> constant itself
-    just refers to other entries holding the real data, e.g.  it refers to
-    a <tt>ConstantClass</tt> entry containing  a symbolic reference to the
-    class <tt>java.io.PrintStream</tt>.   To keep the  class file compact,
-    such  constants  are   typically  shared  by  different  instructions.
-    Similarly, a field is represented by a <tt>Fieldref</tt> constant that
-    includes information about the name, the type and the containing class
-    of the field.
+  <p align="center">
+    <source>System.out.println("Hello, world");</source>
   </p>
 
   <p>
-    The constant pool basically holds the following types  of constants: References
-    to methods, fields and  classes, strings, integers, floats, longs, and
-    doubles.
+    The first instruction loads the contents of the field <tt>out</tt>
+    of class <tt>java.lang.System</tt> onto the operand stack. This is
+    an instance of the class <tt>java.io.PrintStream</tt>. The
+    <tt>ldc</tt> ("Load constant") pushes a reference to the string
+    "Hello world" on the stack. The next instruction invokes the
+    instance method <tt>println</tt> which takes both values as
+    parameters (Instance methods always implicitly take an instance
+    reference as their first argument).
+  </p>
+  
+  <p>
+    Instructions, other data structures within the class file and
+    constants themselves may refer to constants in the constant pool.
+    Such references are implemented via fixed indexes encoded directly
+    into the instructions. This is illustrated for some items of the
+    figure emphasized with a surrounding box.
+  </p>
+  
+  <p>
+    For example, the <tt>invokevirtual</tt> instruction refers to a
+    <tt>MethodRef</tt> constant that contains information about the
+    name of the called method, the signature (i.e., the encoded
+    argument and return types), and to which class the method belongs.
+    In fact, as emphasized by the boxed value, the <tt>MethodRef</tt>
+    constant itself just refers to other entries holding the real
+    data, e.g., it refers to a <tt>ConstantClass</tt> entry containing
+    a symbolic reference to the class <tt>java.io.PrintStream</tt>.
+    To keep the class file compact, such constants are typically
+    shared by different instructions and other constant pool
+    entries. Similarly, a field is represented by a <tt>Fieldref</tt>
+    constant that includes information about the name, the type and
+    the containing class of the field.
+  </p>
+
+  <p>
+    The constant pool basically holds the following types of
+    constants: References to methods, fields and classes, strings,
+    integers, floats, longs, and doubles.
   </p>
   
   </section>
   
   <section name="2.2 Byte code instruction set">
   <p>
-    The JVM  is a  stack-oriented interpreter that  creates a  local stack
-    frame of fixed size for every method invocation. The size of the local
-    stack has to  be computed by the compiler.  Values  may also be stored
-    intermediately in a frame area containing <em>local variables</em> which
-    can  be used  like  a set  of  registers.  These  local variables  are
-    numbered from 0  to 65535, i.e.  you have a maximum  of 65536 of local
-    variables.   The  stack  frames   of  caller  and  callee  method  are
-    overlapping, i.e.  the caller  pushes arguments onto the operand stack
-    and the called method receives them in local variables.
+    The JVM is a stack-oriented interpreter that creates a local stack
+    frame of fixed size for every method invocation. The size of the
+    local stack has to be computed by the compiler. Values may also be
+    stored intermediately in a frame area containing <em>local
+    variables</em> which can be used like a set of registers. These
+    local variables are numbered from 0 to 65535, i.e., you have a
+    maximum of 65536 of local variables per method. The stack frames
+    of caller and callee method are overlapping, i.e., the caller
+    pushes arguments onto the operand stack and the called method
+    receives them in local variables.
   </p>
   
   <p>
-    The byte code instruction  set currently consists of 212 instructions,
-    44  opcodes  are  marked  as  reserved  and may  be  used  for  future
-    extensions   or   intermediate   optimizations  within   the   Virtual
-    Machine. The instruction set can be roughly grouped as follows:
+    The byte code instruction set currently consists of 212
+    instructions, 44 opcodes are marked as reserved and may be used
+    for future extensions or intermediate optimizations within the
+    Virtual Machine. The instruction set can be roughly grouped as
+    follows:
   </p>
   
   <p>
-    <b>Stack operations:</b>
-     Constants can be pushed onto the stack either
-    by loading them from the constant pool with the <tt>ldc</tt> instruction or with
-    special ``short-cut''  instructions where the operand  is encoded into
-    the  instructions, e.g.   <tt>iconst_0</tt> or  <tt>bipush</tt> (push
-    byte value).
+    <b>Stack operations:</b> Constants can be pushed onto the stack
+     either by loading them from the constant pool with the
+     <tt>ldc</tt> instruction or with special "short-cut"
+     instructions where the operand is encoded into the instructions,
+     e.g.,  <tt>iconst_0</tt> or <tt>bipush</tt> (push byte value).
   </p>
   
   <p>
-    <b>Arithmetic  operations:</b>
-       The  instruction  set   of  the  Java Virtual Machine 
-    distinguishes  its  operand  types  using  different  instructions  to
-    operate on  values of  specific type.  Arithmetic  operations starting
-    with  <tt>i</tt>, for  example,  denote  an  integer  operation.  E.g.,
-    <tt>iadd</tt> that adds two integers and pushes the result back on the
-    stack.     The    Java    types    <tt>boolean</tt>,    <tt>byte</tt>,
-    <tt>short</tt>, and <tt>char</tt> are handled as integers by the JVM.
+    <b>Arithmetic operations:</b> The instruction set of the Java
+       Virtual Machine distinguishes its operand types using different
+       instructions to operate on values of specific type. Arithmetic
+       operations starting with <tt>i</tt>, for example, denote an
+       integer operation. E.g., <tt>iadd</tt> that adds two integers
+       and pushes the result back on the stack. The Java types
+       <tt>boolean</tt>, <tt>byte</tt>, <tt>short</tt>, and
+       <tt>char</tt> are handled as integers by the JVM.
   </p>
     
   <p>
-    <b>Control flow:</b>
-     There  are branch instructions like <tt>goto</tt>
-    and   <tt>if_icmpeq</tt>,    which   compares   two    integers   for
-    equality.  There  is  also   a  <tt>jsr</tt>  (jump  sub-routine)  and
-    <tt>ret</tt> pair of instructions that  is  used to implement the
-    <tt>finally</tt> clause of  <tt>try-catch</tt> blocks.  Exceptions may
-    be thrown with the <tt>athrow</tt> instruction.
-    Branch  targets  are coded  as  offsets  from  the current  byte  code
-    position, i.e. with an integer number.
+    <b>Control flow:</b> There are branch instructions like
+     <tt>goto</tt>, and <tt>if_icmpeq</tt>, which compares two integers
+     for equality. There is also a <tt>jsr</tt> (jump sub-routine)
+     and <tt>ret</tt> pair of instructions that is used to implement
+     the <tt>finally</tt> clause of <tt>try-catch</tt> blocks.
+     Exceptions may be thrown with the <tt>athrow</tt> instruction.
+     Branch targets are coded as offsets from the current byte code
+     position, i.e., with an integer number.
   </p>
   
   <p>
-    <b>Load   and   store operations</b>
-        for   local   variables   like
-    <tt>iload</tt> and  <tt>istore</tt>.  There are also  array operations
-    like <tt>iastore</tt> which stores an integer value into an array.
+    <b>Load and store operations</b> for local variables like
+      <tt>iload</tt> and <tt>istore</tt>.  There are also array
+      operations like <tt>iastore</tt> which stores an integer value
+      into an array.
   </p>
   
   <p>
-    <b>Field access:</b>
-     The  value of an instance field  may be retrieved
-    with <tt>getfield</tt> and written with <tt>putfield</tt>.  For static
-    fields,   there    are   <tt>getstatic</tt>   and   <tt>putstatic</tt>
-    counterparts.
+    <b>Field access:</b> The value of an instance field may be
+     retrieved with <tt>getfield</tt> and written with
+     <tt>putfield</tt>. For static fields, there are
+     <tt>getstatic</tt> and <tt>putstatic</tt> counterparts.
   </p>
   
   <p>
-    <b>Method  invocation:</b>
-     Methods  may  either be  called via  static
-    references with <tt>invokestatic</tt> or be bound virtually with the
-    <tt>invokevirtual</tt>  instruction. Super  class methods  and private
-    methods are invoked with <tt>invokespecial</tt>.
+    <b>Method invocation:</b> Static Methods may either be called via
+     <tt>invokestatic</tt> or be bound virtually with the
+     <tt>invokevirtual</tt> instruction. Super class methods and
+     private methods are invoked with <tt>invokespecial</tt>. A
+     special case are interface methods which are invoked with
+     <tt>invokeinterface</tt>.
   </p>
     
   <p>
-    <b>Object  allocation:</b>
-      Class  instances  are allocated  with  the
-    <tt>new</tt>  instruction, arrays  of basic  type  like <tt>int[]</tt>
-    with <tt>newarray</tt>, arrays  of references like <tt>String[][]</tt>
-    with <tt>anewarray</tt> or <tt>multianewarray</tt>.
+    <b>Object allocation:</b> Class instances are allocated with the
+      <tt>new</tt> instruction, arrays of basic type like
+      <tt>int[]</tt> with <tt>newarray</tt>, arrays of references like
+      <tt>String[][]</tt> with <tt>anewarray</tt> or
+      <tt>multianewarray</tt>.
   </p>
   
   <p>
-    <b>Conversion and type checking:</b>
-      For stack operands of basic type
-    there  exist casting  operations  like <tt>f2i</tt>  which converts  a
-    float  value into  an integer.   The validity  of a  type cast  may be
-    checked with  <tt>checkcast</tt> and the  <tt>instanceof</tt> operator
-    can be directly mapped to the equally named instruction.
+    <b>Conversion and type checking:</b> For stack operands of basic
+      type there exist casting operations like <tt>f2i</tt> which
+      converts a float value into an integer. The validity of a type
+      cast may be checked with <tt>checkcast</tt> and the
+      <tt>instanceof</tt> operator can be directly mapped to the
+      equally named instruction.
   </p>
 
   <p>
-    Most  instructions  have a  fixed  length,  but  there are  also  some
-    variable-length instructions: In particular, the <tt>lookupswitch</tt>
-    and  <tt>tableswitch</tt> instructions,  which are  used  to implement
-    <tt>switch()</tt>  statements.   Since  the  number  of  <tt>case</tt>
-    clauses  may vary,  these instructions  contain a  variable  number of
-    statements.
+    Most instructions have a fixed length, but there are also some
+    variable-length instructions: In particular, the
+    <tt>lookupswitch</tt> and <tt>tableswitch</tt> instructions, which
+    are used to implement <tt>switch()</tt> statements.  Since the
+    number of <tt>case</tt> clauses may vary, these instructions
+    contain a variable number of statements.
   </p>
 
   <p>
@@ -419,7 +416,7 @@
     Classes  and  arrays  are   internally  represented  by  strings  like
     <tt>"java/lang/String"</tt>,  basic types  like  <tt>float</tt> by  an
     integer number. Within signatures they are represented by single
-    characters, e.g., <tt>&#207;"</tt>, for integer.
+    characters, e.g., <tt>&#207;</tt>, for integer.
   </p>
 
   </section>

@@ -33,8 +33,7 @@
     code optimization</a>
     </li>
 
-    <li><a HREF="http://www.cs.uoregon.edu/research/perpetual/dasada/Software/Gretel/">
-    Gretel</a> - Residual Test Coverage Tool
+    <li><a HREF="http://www.cs.uoregon.edu/research/perpetual/dasada/Software/Gretel/">Gretel</a> - Residual Test Coverage Tool
     </li>
 
     <li><a HREF="http://www.inf.fu-berlin.de/~bokowski/pmgjava/index.html">
@@ -67,6 +66,11 @@
     <li><a
     HREF="http://www.cs.uni-essen.de/dawis/research/aop/sally/"
     >Sally: Simple Aspect Language</a>
+    </li>
+
+    <li><a
+    HREF="http://aspectj.org/"
+    >AspectJ: Aspect-oriented Java</a>
     </li>
 
     <li><a
