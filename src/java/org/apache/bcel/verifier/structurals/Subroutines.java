@@ -356,7 +356,6 @@ public class Subroutines{
 
 		// Calculate "real" subroutines.
 		HashSet sub_leaders = new HashSet(); // Elements: InstructionHandle
-		InstructionHandle ih = all[0];
 		for (int i=0; i<all.length; i++){
 			Instruction inst = all[i].getInstruction();
 			if (inst instanceof JsrInstruction){
