@@ -175,7 +175,7 @@ public abstract class ReferenceType extends Type {
 	/* TC and SC are the same primitive type (§2.4.1).
 	 */
 	Type sc = ((ArrayType) this).getElementType();
-	Type tc = ((ArrayType) this).getElementType();
+	Type tc = ((ArrayType) T).getElementType();
 
 	if (sc instanceof BasicType && tc instanceof BasicType && sc.equals(tc))
 	  return true;
