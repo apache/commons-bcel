@@ -1,4 +1,3 @@
-import org.apache.bcel.classfile.Visitor;
 import org.apache.bcel.classfile.*;
 import org.apache.bcel.generic.*;
 import java.io.*;
@@ -79,6 +78,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
   }
 
   public void visitDeprecated(Deprecated attribute) { printEndMethod(attribute); }
+
   public void visitSynthetic(Synthetic attribute) {
     if(_method != null)
       printEndMethod(attribute);
