@@ -131,8 +131,12 @@ public class ClassLoader extends java.lang.ClassLoader {
 	 */
 	if(class_name.indexOf("$$BCEL$$") >= 0)
 	  clazz = createClass(class_name);
-	else // Fourth try: Load classes via repository
-	  clazz = modifyClass(Repository.lookupClass(class_name));
+	else { // Fourth try: Load classes via repository
+	  if((clazz = Repository.lookupClass(class_name)) != null)
+	    clazz = modifyClass(clazz);
+	  else
+	    throw new ClassNotFoundException(class_name);
+	}
 
 	if(clazz != null) {
 	  byte[] bytes  = clazz.getBytes();
