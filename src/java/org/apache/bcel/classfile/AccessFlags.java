@@ -130,4 +130,19 @@ public abstract class AccessFlags implements java.io.Serializable {
   public final boolean isStrictfp() {
     return (access_flags & Constants.ACC_STRICT) != 0;
   }
+
+  public final void isSynthetic(boolean flag) { setFlag(Constants.ACC_SYNTHETIC, flag); }
+  public final boolean isSynthetic() {
+    return (access_flags & Constants.ACC_SYNTHETIC) != 0;
+  }
+
+  public final void isAnnotation(boolean flag) { setFlag(Constants.ACC_ANNOTATION, flag); }
+  public final boolean isAnnotation() {
+    return (access_flags & Constants.ACC_ANNOTATION) != 0;
+  }
+
+  public final void isEnum(boolean flag) { setFlag(Constants.ACC_ENUM, flag); }
+  public final boolean isEnum() {
+    return (access_flags & Constants.ACC_ENUM) != 0;
+  }
 }

@@ -42,15 +42,20 @@ public interface Constants {
   public final static short ACC_INTERFACE    = 0x0200;
   public final static short ACC_ABSTRACT     = 0x0400;
   public final static short ACC_STRICT       = 0x0800;
+  
+  public final static short ACC_SYNTHETIC    = 0x1000;
+  public final static short ACC_ANNOTATION   = 0x2000;
+  public final static short ACC_ENUM         = 0x4000;
 
   // Applies to classes compiled by new compilers only
   public final static short ACC_SUPER        = 0x0020;
 
-  public final static short MAX_ACC_FLAG     = ACC_STRICT;
+  public final static short MAX_ACC_FLAG     = ACC_ENUM;
 
   public final static String[] ACCESS_NAMES = {
     "public", "private", "protected", "static", "final", "synchronized",
-    "volatile", "transient", "native", "interface", "abstract", "strictfp"
+    "volatile", "transient", "native", "interface", "abstract", "strictfp",
+    "synthetic", "annotation", "enum"
   };
 
   /** Tags in constant pool to denote type of constant.
