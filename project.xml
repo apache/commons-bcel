@@ -21,13 +21,12 @@
   </description>
 
   <url>http://jakarta.apache.org/bcel/</url>
-  <cvsWebUrl>http://cvs.apache.org/viewcvs/jakarta-bcel/</cvsWebUrl>
   <siteAddress>jakarta.apache.org</siteAddress>
   <siteDirectory>/www/jakarta.apache.org/bcel/</siteDirectory>
 
   <repository>
-    <connection>scm:cvs:pserver:anoncvs@cvs.apache.org:/home/cvspublic:jakarta-bcel</connection>
-    <url>http://cvs.apache.org/viewcvs/jakarta-bcel/</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/bcel/trunk</connection>
+    <url>http://svn.apache.org/viewcvs.cgi/jakarta/bcel/</url>
   </repository>
 
   <mailingLists>
