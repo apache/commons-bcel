@@ -60,13 +60,13 @@ import java.util.HashMap;
 import java.io.*;
 
 /** 
- * Repository maintains informations about class interdependencies, e.g.
+ * The repository maintains informations about class interdependencies, e.g.,
  * whether a class is a sub-class of another. JavaClass objects are put
  * into a cache which can be purged with clearCache().
  *
  * All JavaClass objects used as arguments must have been obtained via
  * the repository or been added with addClass() manually. This is
- * because we have to check for object identity (==).
+ * because we have to check for real object identity (==).
  *
  * @version $Id$
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A
@@ -78,7 +78,8 @@ public abstract class Repository {
 
   static { clearCache(); }
 
-  /** @return class object for given fully qualified class name, or null
+  /** Lookup class somewhere found in your CLASSPATH.
+   * @return class object for given fully qualified class name, or null
    * if the class could not be found or parsed correctly
    */
   public static JavaClass lookupClass(String class_name) {
@@ -106,7 +107,8 @@ public abstract class Repository {
   }
 
   /**
-   * Try to find class source via getResourceAsStream()
+   * Try to find class source via getResourceAsStream().
+   * @see Class
    * @return JavaClass object for given runtime class
    */
   public static JavaClass lookupClass(Class clazz) {
