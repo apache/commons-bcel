@@ -118,7 +118,6 @@ final class AttributeHTML implements org.apache.bcel.Constants {
     switch(tag) {
     case ATTR_CODE:
       Code        c          = (Code)attribute;
-      Attribute[] attributes = c.getAttributes();
 
       // Some directly printable values
       file.print("<UL><LI>Maximum stack size = " + c.getMaxStack() + 

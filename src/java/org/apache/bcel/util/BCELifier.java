@@ -72,7 +72,6 @@ import java.io.*;
 public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
   private JavaClass         _clazz;
   private PrintWriter       _out;
-  private DescendingVisitor _visitor;
   private ConstantPoolGen   _cp;
 
   /** @param clazz Java class to "decompile"

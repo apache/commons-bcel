@@ -105,7 +105,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
   {
     short        opcode = (short)bytes.readUnsignedByte();
     StringBuffer buf;
-    String       name, sig, signature;
+    String       name, signature;
     int          default_offset=0, low, high;
     int          index, class_index, vindex, constant;
     int[]        jump_table;
