@@ -104,6 +104,8 @@ public class PUTFIELD extends FieldInstruction implements ExceptionThrower{
    */
   public void accept(Visitor v) {
     v.visitExceptionThrower(this);
+    v.visitStackConsumer(this);
+    v.visitPopInstruction(this);
     v.visitTypedInstruction(this);
     v.visitLoadClass(this);
     v.visitCPInstruction(this);
