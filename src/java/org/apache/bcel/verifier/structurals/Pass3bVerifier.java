@@ -56,7 +56,6 @@ package org.apache.bcel.verifier.structurals;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 import org.apache.bcel.Constants;
