@@ -29,5 +29,8 @@
       <item name="License" href="/license.html"/>
       <item name="Projects" href="/projects.html"/>
     </menu>
+    <menu name="Translated (Web)">
+      <item name="Japanese"   href="http://www.terra-intl.com/jakarta/bcel/"/>
+    </menu>
 </body>
 </project>
