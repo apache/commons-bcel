@@ -142,8 +142,11 @@ public class listclass {
         if(name.startsWith((String) exclude_name.elementAt(idx)))
           return;
 
-      if((java_class = Repository.lookupClass(name)) == null)
+      if(name.endsWith(".class")) {
         java_class = new ClassParser(name).parse(); // May throw IOException
+      } else {
+	java_class = Repository.lookupClass(name);
+      }
 
       if(nocontents)
         System.out.println(java_class.getClassName());
