@@ -105,7 +105,7 @@ public final class ArrayType extends ReferenceType {
 
   /** @return a hash code value for the object.
    */
-  public int hashcode() { return basic_type.hashCode() ^ dimensions; }
+  public int hashCode() { return basic_type.hashCode() ^ dimensions; }
 
   /** @return true if both type objects refer to the same array type.
    */

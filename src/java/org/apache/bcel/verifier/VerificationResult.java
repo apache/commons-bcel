@@ -75,6 +75,10 @@ public class VerificationResult{
 		return detailMessage;
 	}
 
+	/** @return a hash code value for the object.
+     */
+	public int hashCode() { return numeric ^ detailMessage.hashCode(); }
+
 	/**
 	 * Returns if two VerificationResult instances are equal.
 	 */ 

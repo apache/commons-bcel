@@ -88,6 +88,10 @@ public class LocalVariables{
 		locals[i] = type;
 	}
 
+	/** @return a hash code value for the object.
+     */
+	public int hashCode() { return locals.length; }
+
 	/*
 	 * Fulfills the general contract of Object.equals().
 	 */

@@ -46,6 +46,10 @@ public class ReturnaddressType extends Type {
   	this.returnTarget = returnTarget;
   }
 	
+  /** @return a hash code value for the object.
+   */
+  public int hashCode() { return returnTarget.hashCode(); }
+
   /**
    * Returns if the two Returnaddresses refer to the same target.
    */

@@ -47,6 +47,10 @@ public class UninitializedObjectType extends ReferenceType implements Constants{
 		return initialized;
 	}
 
+	/** @return a hash code value for the object.
+     */
+	public int hashCode() { return initialized.hashCode(); }
+
 	/**
 	 * Returns true on equality of this and o.
 	 * Equality means the ObjectType instances of "initialized"

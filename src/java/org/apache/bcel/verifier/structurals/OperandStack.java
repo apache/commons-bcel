@@ -70,6 +70,10 @@ public class OperandStack{
 		stack = new ArrayList();
 	}
 
+	/** @return a hash code value for the object.
+     */
+	public int hashCode() { return stack.hashCode(); }
+
 	/**
 	 * Returns true if and only if this OperandStack
 	 * equals another, meaning equal lengths and equal

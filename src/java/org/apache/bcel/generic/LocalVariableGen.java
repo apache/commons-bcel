@@ -139,6 +139,10 @@ public class LocalVariableGen
     return (start == ih) || (end == ih);
   }
 
+  /** @return a hash code value for the object.
+   */
+  public int hashCode() { return index ^ start.hashCode() ^ end.hashCode(); }
+
   /**
    * We consider to local variables to be equal, if the use the same index and
    * are valid in the same range.

@@ -91,6 +91,10 @@ public class Frame{
 		return stack;
 	}
 
+	/** @return a hash code value for the object.
+     */
+	public int hashCode() { return stack.hashCode() ^ locals.hashCode(); }
+
 	/**
 	 *
 	 */
