@@ -61,6 +61,9 @@ Available targets:
     <javac srcdir="${src.dir}" destdir="${build.dest}" classpath="${class.path}" debug="true"/>
   </target>
 
+  <!-- Just an alias -->
+  <target name="build" depends="compile"/>
+
   <!-- Jar the library -->
   <target name="jar" depends="compile">
     <jar jarfile="${build.dir}/${name}.jar" 

@@ -100,11 +100,11 @@ public interface Constants {
   // Applies to classes compiled by new compilers only
   public final static short ACC_SUPER        = 0x0020;
 
-  public final static short MAX_ACC_FLAG     = ACC_ABSTRACT;
+  public final static short MAX_ACC_FLAG     = ACC_STRICT;
 
   public final static String[] ACCESS_NAMES = {
     "public", "private", "protected", "static", "final", "synchronized",
-    "volatile", "transient", "native", "interface", "abstract"
+    "volatile", "transient", "native", "interface", "abstract", "strictfp"
   };
 
   /** Tags in constant pool to denote type of constant.

@@ -78,7 +78,8 @@ public abstract class Repository {
 
   static { clearCache(); }
 
-  /** @return class object for given fully qualified class name.
+  /** @return class object for given fully qualified class name, or null
+   * if the class could not be found or parsed correctly
    */
   public static JavaClass lookupClass(String class_name) {
     if(class_name == null || class_name.equals(""))
@@ -93,7 +94,10 @@ public abstract class Repository {
 	InputStream is = class_path.getInputStream(class_name);
 	clazz = new ClassParser(is, class_name).parse();
 	class_name = clazz.getClassName();
-      } catch(IOException e) { return null; }
+      } catch(IOException e) {
+	// Don't throw exception since there may be other ways to load
+	return null;
+      }
 
       classes.put(class_name, clazz);
     }
