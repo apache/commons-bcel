@@ -13,6 +13,7 @@
     <menu name="Documentation">
       <item name="Manual" href="/manual.html"/>
       <item name="FAQ" href="/faq.html"/>
+      <item name="API" href="/api/index.html"/>
     </menu>
 
     <menu name="Download">
