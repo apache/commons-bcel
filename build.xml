@@ -84,7 +84,7 @@ Available targets:
   </target>
 
   <!-- Creates the API documentation -->
-  <target name="apidoc" depends="init">
+  <target name="apidocs" depends="init">
     <mkdir dir="${apidocs.dir}"/>
     <javadoc packagenames="${packages}"
              sourcepath="${src.dir}"
@@ -231,6 +231,104 @@ Available targets:
         <include name="**/*.jpg"/>
       </fileset>
     </copy>
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- D I S T R I B U T I O N S                                          -->
+  <!-- ================================================================== -->
+
+  <target 
+    name="dist"
+    depends="jar,apidocs,xdocs">
+
+    <property name="distDir" value="${build.dir}/${final.name}"/>
+
+    <!-- B I N A R Y  D I S T R I B U T I O N -->
+
+    <echo>
+      +-------------------------------------------------------+
+      | C R E A T I N G  B I N A R Y  D I S T R I B U T I O N |
+      +-------------------------------------------------------+
+    </echo>
+    
+    <mkdir dir="${distDir}"/>
+
+    <!-- Copy README and LICENSE -->
+    <copy todir="${distDir}" file="README"/>
+    <copy todir="${distDir}" file="LICENSE"/>
+
+    <!-- Copy Jars -->
+    <copy todir="${distDir}">
+      <fileset dir="${build.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </copy>
+
+    <!-- Copy documentation -->
+    <copy todir="${distDir}/docs">
+      <fileset dir="${docs.dest}">
+        <include name="**"/>
+      </fileset>
+    </copy>
+
+    <!-- Create a tar.gz file -->
+    <tar longfile="gnu" tarfile="${final.name}.tar">
+      <tarfileset dir="${build.dir}">
+        <include name="${final.name}/**"/>
+      </tarfileset>
+    </tar>
+    
+    <gzip zipfile="${final.name}.tar.gz" src="${final.name}.tar"/>
+    <delete file="${final.name}.tar"/>
+    
+    <!-- Create a zip file -->
+    <zip zipfile="${final.name}.zip">
+      <zipfileset dir="${build.dir}">
+        <include name="${final.name}/**"/>
+      </zipfileset>
+    </zip>
+
+    <!-- S O U R C E  D I S T R I B U T I O N -->
+
+    <echo>
+      +-------------------------------------------------------+
+      | C R E A T I N G  S O U R C E  D I S T R I B U T I O N |
+      +-------------------------------------------------------+
+    </echo>
+
+    <delete>
+      <fileset dir="${distDir}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </delete>
+    
+    <copy todir="${distDir}" file="default.properties"/>
+    <copy todir="${distDir}" file="build.xml"/>
+
+    <!-- Copy Source -->
+    <copy todir="${distDir}/src">
+      <fileset dir="${src.dir}">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+
+    <!-- Create a tar.gz file -->
+    <tar longfile="gnu" tarfile="${final.name}-src.tar">
+      <tarfileset dir="${build.dir}">
+        <include name="${final.name}/**"/>
+      </tarfileset>
+    </tar>
+    
+    <gzip zipfile="${final.name}-src.tar.gz" src="${final.name}-src.tar"/>
+    <delete file="${final.name}-src.tar"/>
+    
+    <!-- Create a zip file -->
+    <zip zipfile="${final.name}-src.zip">
+      <zipfileset dir="${build.dir}">
+        <include name="${final.name}/**"/>
+      </zipfileset>
+    </zip>
+
   </target>
 
 </project>
