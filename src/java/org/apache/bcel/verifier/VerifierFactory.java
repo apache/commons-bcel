@@ -66,6 +66,7 @@ import java.util.Vector;
  *
  * @version $Id$
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @see org.apache.bcel.verifier.Verifier
  */
 public class VerifierFactory{
 
