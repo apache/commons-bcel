@@ -15,6 +15,10 @@ public interface Constants {
   public final static short MINOR_1_2 = 0;
   public final static short MAJOR_1_3 = 47;
   public final static short MINOR_1_3 = 0;
+  public final static short MAJOR_1_4 = 48;
+  public final static short MINOR_1_4 = 0;
+  public final static short MAJOR_1_5 = 49;
+  public final static short MINOR_1_5 = 0;
   public final static short MAJOR     = MAJOR_1_1; // Defaults
   public final static short MINOR     = MINOR_1_1;
 
