@@ -1,10 +1,14 @@
 <?xml version="1.0"?>
 <project>
 
+  <pomVersion>3</pomVersion>
   <name>jakarta-bcel</name>
   <id>bcel</id>
   <currentVersion>5.1-dev</currentVersion>
-  <organization>Apache Software Foundation</organization>
+  <organization>
+    <name>Apache Software Foundation</name>
+    <url>http://www.apache.org</url>
+  </organization>
   <inceptionYear>2002</inceptionYear>
   <package>org.apache.bcel</package>
 
@@ -18,6 +22,11 @@
   <cvsWebUrl>http://cvs.apache.org/viewcvs/jakarta-bcel/</cvsWebUrl>
   <siteAddress>jakarta.apache.org</siteAddress>
   <siteDirectory>/www/jakarta.apache.org/bcel/</siteDirectory>
+
+  <repository>
+    <connection>scm:cvs:pserver:anoncvs@cvs.apache.org:/home/cvspublic:jakarta-bcel</connection>
+    <url>http://cvs.apache.org/viewcvs/jakarta-bcel/</url>
+  </repository>
 
   <mailingLists>
     <mailingList>
@@ -54,34 +63,21 @@
 
   <dependencies>
     <dependency>
-      <name>jakarta-regexp</name>
-      <type>required</type>
+      <id>regexp</id>
       <version>1.2</version>
-      <jar>jakarta-regexp-1.2.jar</jar>
     </dependency>
   </dependencies>
 
   <build>
 
-    <sourceDirectories>
-      <sourceDirectory>src/java</sourceDirectory>
-    </sourceDirectories>
-
-    <testSourceDirectories>
-      <testSourceDirectory>src/java</testSourceDirectory>
-    </testSourceDirectories>
-
-    <aspectSourceDirectories>
-    </aspectSourceDirectories>
+    <sourceDirectory>src/java</sourceDirectory>
+    <aspectSourceDirectory/>
+    <testSourceDirectory>src/java</testSourceDirectory>
 
     <!-- Unit test classes -->
-    <unitTestClassEntries>
-      <unitTestClassEntry>exclude = **/*.class</unitTestClassEntry>
-    </unitTestClassEntries>
-
-    <!-- Runtime unit test classes -->
-    <runtimeTestClassEntries>
-    </runtimeTestClassEntries>
+    <unitTestPatterns>
+      <unitTestPattern>exclude = **/*.class</unitTestPattern>
+    </unitTestPatterns>
 
     <!-- J A R  R E S O U R C E S -->
     <!-- Resources that are packaged up inside the JAR file -->
