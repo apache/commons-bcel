@@ -24,7 +24,8 @@
       <br/>
       <b>A: </b> Yes, this is covered by the <a
       href="license.html">Apache License</a>, if you add a note about the original
-      author and where to find the sources, i.e., this URL.
+      author and where to find the sources, i.e., 
+      <a href="http://jakarta.apace.org/bcel/">http://jakarta.apace.org/bcel/</a>
     </p>
 
     <p>
@@ -43,7 +44,7 @@
       The solution is to split the branch into in intermediate hops,
       which the XSLTC obviously doesn't take care off.
       (In fact you could replace gotos with the goto_w instruction,
-      but this would help in the other cases).
+      but this wouldn't help in the other cases).
     </p>
 
     <p>
