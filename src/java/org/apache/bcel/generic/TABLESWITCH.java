@@ -77,8 +77,8 @@ public class TABLESWITCH extends Select {
    * @param target default branch
    */
   public TABLESWITCH(int[] match, InstructionHandle[] targets,
-		     InstructionHandle target) {
-    super(org.apache.bcel.Constants.TABLESWITCH, match, targets, target);
+		     InstructionHandle defaultTarget) {
+    super(org.apache.bcel.Constants.TABLESWITCH, match, targets, defaultTarget);
     
     length = (short)(13 + match_length * 4); /* Alignment remainder assumed
 					      * 0 here, until dump time */

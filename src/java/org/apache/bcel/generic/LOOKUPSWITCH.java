@@ -71,8 +71,8 @@ public class LOOKUPSWITCH extends Select {
   LOOKUPSWITCH() {}
 
   public LOOKUPSWITCH(int[] match, InstructionHandle[] targets,
-		      InstructionHandle target) {
-    super(org.apache.bcel.Constants.LOOKUPSWITCH, match, targets, target);
+		      InstructionHandle defaultTarget) {
+    super(org.apache.bcel.Constants.LOOKUPSWITCH, match, targets, defaultTarget);
     
     length = (short)(9 + match_length * 8); /* alignment remainder assumed
 					     * 0 here, until dump time. */

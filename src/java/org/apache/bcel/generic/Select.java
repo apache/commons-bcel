@@ -58,6 +58,8 @@ import org.apache.bcel.util.ByteSequence;
 
 /** 
  * Select - Abstract super class for LOOKUPSWITCH and TABLESWITCH instructions.
+ * 
+ * <p>We use our super's <code>target</code> property as the default target.
  *
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
@@ -90,8 +92,8 @@ public abstract class Select extends BranchInstruction
    * @param target default instruction target
    */
   Select(short opcode, int[] match, InstructionHandle[] targets,
-	 InstructionHandle target) {
-    super(opcode, target);
+	 InstructionHandle defaultTarget) {
+    super(opcode, defaultTarget);
 
     this.targets = targets;
     for(int i=0; i < targets.length; i++)

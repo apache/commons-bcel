@@ -670,6 +670,8 @@ public class InstructionList implements Serializable {
     // Step 3: append after target
 
     if(target == null) { // append to start of list
+      if (this.start != null)
+        this.start.prev = end; 
       end.next = this.start;
       this.start = start;
     } else {

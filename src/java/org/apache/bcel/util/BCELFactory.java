@@ -277,7 +277,7 @@ class BCELFactory extends EmptyVisitor {
 
       args.append(" }");
       
-      _out.print("    Select " + name + " = new " +
+      _out.print("Select " + name + " = new " +
 		 bi.getName().toUpperCase() + "(" + args +
 		 ", new InstructionHandle[] { ");
 	
@@ -288,7 +288,7 @@ class BCELFactory extends EmptyVisitor {
 	  _out.print(", ");
       } 
 
-      _out.println(");");
+      _out.println(" }, null);");
     } else {
       int    t_pos  = bh.getTarget().getPosition();
       String target;
