@@ -473,6 +473,6 @@ throw new AssertionViolatedException("DID YOU REALLY WANT TO ASK FOR RET'S SUCCS
 	 * if it is not part of this ControlFlowGraph.
 	 */
 	public boolean isDead(InstructionHandle i){
-		return instructionContexts.containsKey(i);
+        return subroutines.subroutineOf(i) == null;
 	}	 
 }
