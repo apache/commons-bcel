@@ -55,7 +55,7 @@ package org.apache.bcel.classfile;
  */
 
 import  org.apache.bcel.Constants;
-import  org.apache.bcel.Repository;
+// import  org.apache.bcel.Repository;
 import  org.apache.bcel.util.Repository;
 import  org.apache.bcel.util.SyntheticRepository;
 import  org.apache.bcel.util.ClassVector;
