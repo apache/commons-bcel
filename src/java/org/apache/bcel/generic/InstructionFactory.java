@@ -534,8 +534,9 @@ public class InstructionFactory implements InstructionConstants {
   }
 
   /** Create new array of given size and type.
+   * @return an instruction that creates the corresponding array at runtime, i.e. is an AllocationInstruction
    */
-  public AllocationInstruction createNewArray(Type t, short dim) {
+  public Instruction createNewArray(Type t, short dim) {
     if(dim == 1) {
       if(t instanceof ObjectType)
 	return new ANEWARRAY(cp.addClass((ObjectType)t));
