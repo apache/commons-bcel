@@ -121,6 +121,10 @@ public class ClassLoaderRepository
 	try {
 	    InputStream is = 
 		loader.getResourceAsStream( classFile + ".class" );
+	    
+	    if(is == null) {
+		throw new ClassNotFoundException(className + " not found.");
+	    }
 
 	    ClassParser parser = new ClassParser( is, className );
 	    RC = parser.parse();
