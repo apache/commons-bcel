@@ -82,30 +82,32 @@ class BCELFactory extends EmptyVisitor {
   private HashMap branch_map = new HashMap(); // Map<Instruction, InstructionHandle>
 
   public void start() {
-    for(InstructionHandle ih = _mg.getInstructionList().getStart();
-	ih != null; ih = ih.getNext()) {
-      Instruction i = ih.getInstruction();
+    if(!_mg.isAbstract() && !_mg.isNative()) {
+      for(InstructionHandle ih = _mg.getInstructionList().getStart();
+	  ih != null; ih = ih.getNext()) {
+	Instruction i = ih.getInstruction();
 
-      if(i instanceof BranchInstruction) {
-	branch_map.put(i, ih); // memorize container
-      }
-
-      if(ih.hasTargeters()) {
 	if(i instanceof BranchInstruction) {
-	  _out.println("    InstructionHandle ih_" + ih.getPosition() + ";");
-	} else {
-	  _out.print("    InstructionHandle ih_" + ih.getPosition() + " = ");
+	  branch_map.put(i, ih); // memorize container
 	}
-      } else {
-	_out.print("    ");
+
+	if(ih.hasTargeters()) {
+	  if(i instanceof BranchInstruction) {
+	    _out.println("    InstructionHandle ih_" + ih.getPosition() + ";");
+	  } else {
+	    _out.print("    InstructionHandle ih_" + ih.getPosition() + " = ");
+	  }
+	} else {
+	  _out.print("    ");
+	}
+
+	if(!visitInstruction(i))
+	  i.accept(this);
       }
 
-      if(!visitInstruction(i))
-	i.accept(this);
+      updateBranchTargets();
+      updateExceptionHandlers();
     }
-
-    updateBranchTargets();
-    updateExceptionHandlers();
   }
 
   private boolean visitInstruction(Instruction i) {
@@ -127,8 +129,8 @@ class BCELFactory extends EmptyVisitor {
     Type   type   = i.getType(_cp);
 
     if(opcode == Constants.IINC) {
-    _out.println("il.append(new IINC(" + i.getIndex() + ", " +
-		 ((IINC)i).getIncrement() + "));");
+      _out.println("il.append(new IINC(" + i.getIndex() + ", " +
+		   ((IINC)i).getIncrement() + "));");
     } else {
       String kind   = (opcode < Constants.ISTORE)? "Load" : "Store";
       _out.println("il.append(_factory.create" + kind + "(" +
@@ -176,10 +178,16 @@ class BCELFactory extends EmptyVisitor {
   }
 
   public void visitAllocationInstruction(AllocationInstruction i) {
-    CPInstruction in     = (CPInstruction)i;
-    Type          type   = in.getType(_cp);
-    short         opcode = in.getOpcode();
-    int           dim    = 1;
+    Type type;
+
+    if(i instanceof CPInstruction) {
+      type = ((CPInstruction)i).getType(_cp);
+    } else {
+      type = ((NEWARRAY)i).getType();
+    }
+
+    short opcode = ((Instruction)i).getOpcode();
+    int   dim    = 1;
 
     switch(opcode) {
     case Constants.NEW:
@@ -192,8 +200,8 @@ class BCELFactory extends EmptyVisitor {
 
     case Constants.ANEWARRAY:
     case Constants.NEWARRAY:
-      _out.println("il.append(_factory.createNewArray(\"" +
-		   BCELifier.printType(type) + ", " + dim + "));");
+      _out.println("il.append(_factory.createNewArray(" +
+		   BCELifier.printType(type) + ", (short) " + dim + "));");
       break;
 
     default:

@@ -96,6 +96,10 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     String package_name = clazz.getPackageName();
     String inter        = Utility.printArray(clazz.getInterfaceNames(),
 					     false, true);
+    if(!"".equals(package_name)) {
+      class_name = class_name.substring(package_name.length() + 1);
+      _out.println("package " + package_name + ";\n");
+     }
 
     _out.println("import org.apache.bcel.generic.*;");
     _out.println("import org.apache.bcel.classfile.*;");
