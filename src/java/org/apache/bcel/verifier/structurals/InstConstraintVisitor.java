@@ -2541,6 +2541,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 			else{
 				constraintViolated(o, "The stack top type '"+value+"' is not of a reference type as expected.");
 			}
+			// TODO: This can possibly only be checked using Staerk-et-al's "set-of-object types", not
+			// using "wider cast object types" created during verification.
+			// Comment it out if you encounter problems. See also the analogon at visitPUTFIELD.
 			if (!(rvalue.isAssignmentCompatibleWith(shouldbe))){
 				constraintViolated(o, "The stack top type '"+value+"' is not assignment compatible with '"+shouldbe+"'.");
 			}
