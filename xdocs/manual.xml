@@ -611,9 +611,9 @@
      specification</a> and described in section <a
      href="#2 The Java Virtual Machine">2</a> are mapped to classes.
 
-     <a href="#Figure 3">Figure 3</a> shows an UML
-     diagram of the hierarchy of classes of the <font
-     face="helvetica,arial">BCEL </font>API. Figure TODO in the appendix also
+     <a href="#Figure 3">Figure 3</a> shows an UML diagram of the
+     hierarchy of classes of the <font face="helvetica,arial">BCEL
+     </font>API. <a href="#Figure 8">Figure 8</a> in the appendix also
      shows a detailed diagram of the <tt>ConstantPool</tt> components.
   </p>
   
@@ -1641,6 +1641,16 @@ public class Peephole {
   }
 }
  </source>
+ </section>
+ <section name="Constant pool UML diagram">
+
+  <p align="center">
+    <a name="Figure 8">
+    <img src="images/constantpool.gif"/>
+    <br/>
+    Figure 8: UML diagram for constant pool classes
+    </a>
+  </p> 
  </section>
 </body>
 </document>
