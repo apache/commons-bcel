@@ -63,6 +63,13 @@
       <tt>util</tt> package, namely <tt>ClassLoader</tt> and
        <tt>JavaWrapper</tt>. Take a look at the <tt> ProxyCreator</tt> example.
     </p>
+
+    <p>
+      <b>Q:</b> I get a verification error, what can I do?
+      <br/>
+      <b>A:</b> Use the JustIce verifier that comes together with BCEL
+      to get more detailed information.
+    </p>
     
     </section>
 <!--
