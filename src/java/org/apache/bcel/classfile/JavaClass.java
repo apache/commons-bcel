@@ -64,8 +64,13 @@ import  java.util.StringTokenizer;
  * fields, methods and commands contained in a Java .class file.
  * See <a href="ftp://java.sun.com/docs/specs/">JVM 
  * specification</a> for details.
- *
+
+ * The intent of this class is to represent a parsed or otherwise existing
+ * class file.  Those interested in programatically generating classes
+ * should see the <a href="../generic/ClassGen.html">ClassGen</a> class.
+
  * @version $Id$
+ * @see org.apache.bcel.generic.ClassGen
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public class JavaClass extends AccessFlags implements Cloneable, Node {
