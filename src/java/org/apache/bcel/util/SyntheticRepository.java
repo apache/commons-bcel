@@ -132,8 +132,15 @@ public class SyntheticRepository implements Repository {
   }
 
   /**
-   * Load a JavaClass object for the given class name using
-   * the CLASSPATH environment variable.
+   * Find a JavaClass object by name.
+   * If it is already in this Repository, the Repository version
+   * is returned.  Otherwise, the Repository's classpath is searched for
+   * the class (and it is added to the Repository if found).
+   *
+   * @param className the name of the class
+   * @return the JavaClass object
+   * @throws ClassNotFoundException if the class is not in the
+   *   Repository, and could not be found on the classpath
    */
   public JavaClass loadClass(String className) throws ClassNotFoundException {
     if (className == null || className.equals("")) {
@@ -141,6 +148,11 @@ public class SyntheticRepository implements Repository {
     }
 
     className = className.replace('/', '.'); // Just in case, canonical form
+
+    JavaClass clazz = findClass(className);
+    if (clazz != null) {
+      return clazz;
+    }
 
     try {
       return loadClass(_path.getInputStream(className), className);
@@ -151,12 +163,26 @@ public class SyntheticRepository implements Repository {
   }
 
   /**
-   * Try to find class source via getResourceAsStream().
+   * Find the JavaClass object for a runtime Class object.
+   * If a class with the same name is already in this Repository,
+   * the Repository version is returned.  Otherwise, getResourceAsStream()
+   * is called on the Class object to find the class's representation.
+   * If the representation is found, it is added to the Repository.
+   *
    * @see Class
+   * @param clazz the runtime Class object
    * @return JavaClass object for given runtime class
+   * @throws ClassNotFoundException if the class is not in the
+   *   Repository, and its representation could not be found
    */
   public JavaClass loadClass(Class clazz) throws ClassNotFoundException {
     String className = clazz.getName();
+
+    JavaClass repositoryClass = findClass(className);
+    if (repositoryClass != null) {
+      return repositoryClass;
+    }
+
     String name = className;
     int i = name.lastIndexOf('.');
 
@@ -169,16 +195,11 @@ public class SyntheticRepository implements Repository {
 
   private JavaClass loadClass(InputStream is, String className)
     throws ClassNotFoundException {
-    JavaClass clazz = findClass(className);
-
-    if (clazz != null) {
-      return clazz;
-    }
 
     try {
       if (is != null) {
         ClassParser parser = new ClassParser(is, className);
-        clazz = parser.parse();
+        JavaClass clazz = parser.parse();
 
         storeClass(clazz);
 
