@@ -14,7 +14,10 @@ import org.apache.bcel.Constants;
  *     try {
  *       System.out.print("Please enter your name> ");
  *       name = in.readLine();
- *     } catch(IOException e) { return; }
+ *     } catch(IOException e) { 
+ *       System.out.println(e);
+ *	 return; 
+ *     }
  * 
  *     System.out.println("Hello, " + name);
  *   }
@@ -100,9 +103,17 @@ public class HelloWorldBuilder {
     InstructionHandle try_end = il.append(g);
 
     /* } catch() { ... }
-     * Add exception handler: simply return from method
+     * Add exception handler: print exception and return from method
      */
-    InstructionHandle handler = il.append(InstructionConstants.RETURN);
+    InstructionHandle handler =
+      il.append(factory.createFieldAccess("java.lang.System", "out", p_stream,
+					  Constants.GETSTATIC));
+    // Little trick in order not to save exception object temporarily
+    il.append(InstructionConstants.SWAP);
+
+    il.append(factory.createInvoke("java.io.PrintStream", "println", Type.VOID, 
+	   new Type[] { Type.OBJECT }, Constants.INVOKEVIRTUAL));
+    il.append(InstructionConstants.RETURN);
     mg.addExceptionHandler(try_start, try_end, handler,
 			   new ObjectType("java.io.IOException"));
 
