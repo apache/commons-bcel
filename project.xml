@@ -61,6 +61,13 @@
       <organization>Zenplex</organization>
     </developer>
 
+    <developer>
+      <name>Enver Haase</name>
+      <id>ehaase</id>
+      <email>enver@convergence.de</email>
+      <organization>convergence</organization>
+    </developer>
+
   </developers>
 
   <dependencies>
