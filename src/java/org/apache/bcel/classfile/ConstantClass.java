@@ -87,7 +87,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
   public final int getNameIndex() { return name_index; }    
 
   /**
-   * @param name_index.
+   * @param name_index the name index in the constant pool of this Constant Class
    */
   public final void setNameIndex(int name_index) {
     this.name_index = name_index;

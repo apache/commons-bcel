@@ -101,7 +101,7 @@ public final class PMGClass extends Attribute {
   public final int getPMGClassIndex() { return pmg_class_index; }    
 
   /**
-   * @param PMGClass_index.
+   * @param pmg_class_index
    */
   public final void setPMGClassIndex(int pmg_class_index) {
     this.pmg_class_index = pmg_class_index;
@@ -113,7 +113,7 @@ public final class PMGClass extends Attribute {
   public final int getPMGIndex() { return pmg_index; }    
 
   /**
-   * @param PMGClass_index.
+   * @param pmg_index
    */
   public final void setPMGIndex(int pmg_index) {
     this.pmg_index = pmg_index;

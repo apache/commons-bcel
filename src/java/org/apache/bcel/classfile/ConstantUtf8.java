@@ -94,7 +94,7 @@ public final class ConstantUtf8 extends Constant {
   public final String getBytes() { return bytes; }    
 
   /**
-   * @param bytes.
+   * @param bytes the raw bytes of this Utf-8
    */
   public final void setBytes(String bytes) {
     this.bytes = bytes;

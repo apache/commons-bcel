@@ -167,28 +167,28 @@ public final class LocalVariable
   }
 
   /**
-   * @param length.
+   * @param length the length of this local variable
    */
   public final void setLength(int length) {
     this.length = length;
   }
 
   /**
-   * @param name_index.
+   * @param name_index the index into the constant pool for the name of this variable
    */
   public final void setNameIndex(int name_index) {
     this.name_index = name_index;
   }    
 
   /**
-   * @param signature_index.
+   * @param signature_index the index into the constant pool for the signature of this variable
    */
   public final void setSignatureIndex(int signature_index) {
     this.signature_index = signature_index;
   }    
 
   /**
-   * @param index.
+   * @param index the index in the local variable table of this variable
    */
   public final void setIndex(int index) { this.index = index; }
 

@@ -124,7 +124,7 @@ public final class CodeException
   public final int getStartPC() { return start_pc; }
 
   /**
-   * @param catch_type.
+   * @param catch_type the type of exception that is caught
    */
   public final void setCatchType(int catch_type) {
     this.catch_type = catch_type;

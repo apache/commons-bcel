@@ -96,7 +96,7 @@ public final class Signature extends Attribute {
   public final int getSignatureIndex() { return signature_index; }    
 
   /**
-   * @param signature_index.
+   * @param signature_index the index info the constant pool of this signature
    */
   public final void setSignatureIndex(int signature_index) {
     this.signature_index = signature_index;

@@ -108,7 +108,7 @@ public final class InnerClasses extends Attribute {
   public final InnerClass[] getInnerClasses() { return inner_classes; }    
 
   /**
-   * @param inner_classes.
+   * @param inner_classes the array of inner classes
    */
   public final void setInnerClasses(InnerClass[] inner_classes) {
     this.inner_classes = inner_classes;

@@ -96,14 +96,14 @@ public final class LineNumber implements Cloneable, Node, Serializable {
   public final int getStartPC() { return start_pc; }    
 
   /**
-   * @param line_number.
+   * @param line_number the source line number
    */
   public final void setLineNumber(int line_number) {
     this.line_number = line_number;
   }    
 
   /**
-   * @param start_pc.
+   * @param start_pc the pc for this line number
    */
   public final void setStartPC(int start_pc) {
     this.start_pc = start_pc;

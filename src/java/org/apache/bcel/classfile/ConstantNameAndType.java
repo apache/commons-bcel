@@ -48,7 +48,7 @@ public final class ConstantNameAndType extends Constant {
    */
   ConstantNameAndType(DataInputStream file) throws IOException
   {    
-    this((int)file.readUnsignedShort(), (int)file.readUnsignedShort());
+    this(file.readUnsignedShort(), file.readUnsignedShort());
   }
 
   /**
@@ -110,14 +110,14 @@ public final class ConstantNameAndType extends Constant {
   }
 
   /**
-   * @param name_index.
+   * @param name_index the name index of this constant
    */
   public final void setNameIndex(int name_index) {
     this.name_index = name_index;
   }
 
   /**
-   * @param signature_index.
+   * @param signature_index the signature index in the constant pool of this type
    */
   public final void setSignatureIndex(int signature_index) {
     this.signature_index = signature_index;

@@ -82,7 +82,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
    */  
   public final float getBytes() { return bytes; }    
   /**
-   * @param bytes.
+   * @param bytes the raw bytes that represent this float
    */
   public final void setBytes(float bytes) {
     this.bytes = bytes;

@@ -240,7 +240,7 @@ public final class Code extends Attribute {
   }
 
   /**
-   * @param attributes.
+   * @param attributes the attributes to set for this Code
    */
   public final void setAttributes(Attribute[] attributes) {
     this.attributes  = attributes;
@@ -316,10 +316,12 @@ public final class Code extends Attribute {
 
   /**
    * @return deep copy of this attribute
+   * 
+   * @param constant_pool the constant pool to duplicate
    */
   public Attribute copy(ConstantPool constant_pool) {
     Code c = (Code)clone();
-    c.code          = (byte[])code.clone();
+    c.code          = code.clone();
     c.constant_pool = constant_pool;
   
     c.exception_table = new CodeException[exception_table_length];

@@ -52,7 +52,7 @@ public final class ConstantValue extends Attribute {
   ConstantValue(int name_index, int length, DataInputStream file,
 		ConstantPool constant_pool) throws IOException
   {
-    this(name_index, length, (int)file.readUnsignedShort(), constant_pool);
+    this(name_index, length, file.readUnsignedShort(), constant_pool);
   }    
 
   /**
@@ -96,7 +96,7 @@ public final class ConstantValue extends Attribute {
   public final int getConstantValueIndex() { return constantvalue_index; }    
 
   /**
-   * @param constantvalue_index.
+   * @param constantvalue_index the index info the constant pool of this constant value
    */
   public final void setConstantValueIndex(int constantvalue_index) {
     this.constantvalue_index = constantvalue_index;

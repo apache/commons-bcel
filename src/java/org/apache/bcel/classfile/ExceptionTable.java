@@ -126,7 +126,7 @@ public final class ExceptionTable extends Attribute {
   }
 
   /**
-   * @param exception_index_table.
+   * @param exception_index_table the list of exception indexes
    * Also redefines number_of_exceptions according to table length.
    */
   public final void setExceptionIndexTable(int[] exception_index_table) {
@@ -158,7 +158,7 @@ public final class ExceptionTable extends Attribute {
    */
   public Attribute copy(ConstantPool constant_pool) {
     ExceptionTable c = (ExceptionTable)clone();
-    c.exception_index_table = (int[])exception_index_table.clone();
+    c.exception_index_table = exception_index_table.clone();
     c.constant_pool = constant_pool;
     return c;
   }

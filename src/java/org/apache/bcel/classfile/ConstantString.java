@@ -45,7 +45,7 @@ public final class ConstantString extends Constant implements ConstantObject {
    */
   ConstantString(DataInputStream file) throws IOException
   {    
-    this((int)file.readUnsignedShort());
+    this(file.readUnsignedShort());
   }    
   /**
    * @param string_index Index of Constant_Utf8 in constant pool
@@ -80,8 +80,9 @@ public final class ConstantString extends Constant implements ConstantObject {
    * @return Index in constant pool of the string (ConstantUtf8).
    */  
   public final int getStringIndex() { return string_index; }    
+  
   /**
-   * @param string_index.
+   * @param string_index the index into the constant of the string value
    */
   public final void setStringIndex(int string_index) {
     this.string_index = string_index;

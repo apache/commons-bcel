@@ -81,7 +81,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
    */  
   public final long getBytes() { return bytes; }    
   /**
-   * @param bytes.
+   * @param bytes thr raw bytes that represent this long
    */
   public final void setBytes(long bytes) {
     this.bytes = bytes;

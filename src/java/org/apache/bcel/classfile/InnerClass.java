@@ -109,25 +109,25 @@ public final class InnerClass implements Cloneable, Node {
    */  
   public final int getOuterClassIndex() { return outer_class_index; }    
   /**
-   * @param inner_access_flags.
+   * @param inner_access_flags access flags for this inner class
    */
   public final void setInnerAccessFlags(int inner_access_flags) {
     this.inner_access_flags = inner_access_flags;
   }    
   /**
-   * @param inner_class_index.
+   * @param inner_class_index index into the constant pool for this class
    */
   public final void setInnerClassIndex(int inner_class_index) {
     this.inner_class_index = inner_class_index;
   }    
   /**
-   * @param inner_name_index.
+   * @param inner_name_index index into the constant pool for this class's name
    */
   public final void setInnerNameIndex(int inner_name_index) {
     this.inner_name_index = inner_name_index;
   }    
   /**
-   * @param outer_class_index.
+   * @param outer_class_index index into the constant pool for the owning class
    */
   public final void setOuterClassIndex(int outer_class_index) {
     this.outer_class_index = outer_class_index;

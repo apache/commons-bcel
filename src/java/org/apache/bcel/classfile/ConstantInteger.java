@@ -87,7 +87,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
   public final int getBytes() { return bytes; }
 
   /**
-   * @param bytes.
+   * @param bytes the raw bytes that represent this integer
    */
   public final void setBytes(int bytes) {
     this.bytes = bytes;

@@ -104,7 +104,7 @@ public final class Deprecated extends Attribute {
   public final byte[] getBytes() { return bytes; }    
 
   /**
-   * @param bytes.
+   * @param bytes the raw bytes that represents this byte array
    */
   public final void setBytes(byte[] bytes) {
     this.bytes = bytes;
@@ -124,7 +124,7 @@ public final class Deprecated extends Attribute {
     Deprecated c = (Deprecated)clone();
 
     if(bytes != null)
-      c.bytes = (byte[])bytes.clone();
+      c.bytes = bytes.clone();
 
     c.constant_pool = constant_pool;
     return c;

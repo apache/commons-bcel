@@ -168,7 +168,7 @@ public final class Unknown extends Attribute {
     Unknown c = (Unknown)clone();
 
     if(bytes != null)
-      c.bytes = (byte[])bytes.clone();
+      c.bytes = bytes.clone();
 
     c.constant_pool = constant_pool;
     return c;

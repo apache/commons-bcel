@@ -1245,7 +1245,7 @@ public abstract class Utility {
   private static final char  ESCAPE_CHAR = '$';
 
   static {
-    int j = 0, k = 0;
+    int j = 0;
     for(int i='A'; i <= 'Z'; i++) {
       CHAR_MAP[j] = i;
       MAP_CHAR[i] = j;

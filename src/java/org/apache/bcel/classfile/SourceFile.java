@@ -105,7 +105,7 @@ public final class SourceFile extends Attribute {
   public final int getSourceFileIndex() { return sourcefile_index; }    
 
   /**
-   * @param sourcefile_index.
+   * @param sourcefile_index
    */
   public final void setSourceFileIndex(int sourcefile_index) {
     this.sourcefile_index = sourcefile_index;

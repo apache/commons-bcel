@@ -106,7 +106,7 @@ public final class Synthetic extends Attribute {
   public final byte[] getBytes() { return bytes; }    
 
   /**
-   * @param bytes.
+   * @param bytes
    */
   public final void setBytes(byte[] bytes) {
     this.bytes = bytes;
@@ -131,7 +131,7 @@ public final class Synthetic extends Attribute {
     Synthetic c = (Synthetic)clone();
 
     if(bytes != null)
-      c.bytes = (byte[])bytes.clone();
+      c.bytes = bytes.clone();
 
     c.constant_pool = constant_pool;
     return c;
