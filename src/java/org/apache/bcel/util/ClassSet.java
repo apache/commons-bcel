@@ -16,8 +16,10 @@
  */ 
 package org.apache.bcel.util;
 
-import java.util.HashMap;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.bcel.classfile.JavaClass;
 
 /** 
@@ -30,7 +32,7 @@ import org.apache.bcel.classfile.JavaClass;
  * @see ClassStack
 */
 public class ClassSet implements java.io.Serializable {
-  private HashMap _map = new HashMap();
+  private Map _map = new HashMap();
 
   public boolean add(JavaClass clazz) {
     boolean result = false;

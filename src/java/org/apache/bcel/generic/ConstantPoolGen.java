@@ -17,9 +17,24 @@
 package org.apache.bcel.generic;
 
 
-import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.*;
 import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantCP;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFieldref;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.ConstantUtf8;
 
 /** 
  * This class is used to build up a constant pool. The user adds
@@ -139,7 +154,7 @@ public class ConstantPoolGen implements java.io.Serializable {
     }
   }
 
-  private HashMap string_table = new HashMap();
+  private Map string_table = new HashMap();
 
   /** 
    * Look for ConstantString in ConstantPool containing String `str'.
@@ -178,7 +193,7 @@ public class ConstantPoolGen implements java.io.Serializable {
     return ret;
   }
 
-  private HashMap class_table = new HashMap();
+  private Map class_table = new HashMap();
 
   /**
    * Look for ConstantClass in ConstantPool named `str'.
@@ -320,7 +335,7 @@ public class ConstantPoolGen implements java.io.Serializable {
     return ret;
   }
 
-  private HashMap utf8_table = new HashMap();
+  private Map utf8_table = new HashMap();
 
   /** 
    * Look for ConstantUtf8 in ConstantPool.
@@ -438,7 +453,7 @@ public class ConstantPoolGen implements java.io.Serializable {
     return ret;
   }
 
-  private HashMap n_a_t_table = new HashMap();
+  private Map n_a_t_table = new HashMap();
 
   /** 
    * Look for ConstantNameAndType in ConstantPool.
@@ -478,7 +493,7 @@ public class ConstantPoolGen implements java.io.Serializable {
     return ret;
   }
 
-  private HashMap cp_table = new HashMap();
+  private Map cp_table = new HashMap();
 
   /** 
    * Look for ConstantMethodref in ConstantPool.

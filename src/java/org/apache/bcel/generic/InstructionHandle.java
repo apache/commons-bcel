@@ -17,10 +17,13 @@
 package org.apache.bcel.generic;
 
 
-import org.apache.bcel.classfile.Utility;
-import java.util.HashSet;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Instances of this class give users a handle to the instructions contained in
@@ -44,8 +47,8 @@ public class InstructionHandle implements java.io.Serializable {
   InstructionHandle next, prev;  // Will be set from the outside
   Instruction       instruction;
   protected int     i_position = -1; // byte code offset of instruction
-  private HashSet   targeters;
-  private HashMap   attributes;
+  private Set       targeters;
+  private Map       attributes;
 
   public final InstructionHandle getNext()        { return next; }
   public final InstructionHandle getPrev()        { return prev; }

@@ -53,7 +53,7 @@ public class InstructionFinder {
   private static final int OFFSET     = 32767; // char + OFFSET is outside of LATIN-1
   private static final int NO_OPCODES = 256;   // Potential number, some are not used
 
-  private static final HashMap map = new HashMap(); // Map<String,Pattern>
+  private static final Map map = new HashMap(); // Map<String,Pattern>
 
   private InstructionList     il;
   private String              il_string;    // instruction list as string

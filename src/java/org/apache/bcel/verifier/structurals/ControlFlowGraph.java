@@ -18,8 +18,8 @@ package org.apache.bcel.verifier.structurals;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
 import org.apache.bcel.generic.ATHROW;
 import org.apache.bcel.generic.BranchInstruction;
@@ -65,12 +65,12 @@ public class ControlFlowGraph{
 		/**
 		 * The 'incoming' execution Frames.
 		 */
-		private HashMap inFrames;	// key: the last-executed JSR
+		private Map inFrames;	// key: the last-executed JSR
 
 		/**
 		 * The 'outgoing' execution Frames.
 		 */
-		private HashMap outFrames; // key: the last-executed JSR 
+		private Map outFrames; // key: the last-executed JSR 
 
 		/**
 		 * The 'execution predecessors' - a list of type InstructionContext 

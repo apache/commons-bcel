@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
@@ -49,10 +50,10 @@ import org.apache.bcel.classfile.JavaClass;
 public class SyntheticRepository implements Repository {
   private static final String DEFAULT_PATH = ClassPath.getClassPath();
 
-  private static HashMap _instances = new HashMap(); // CLASSPATH X REPOSITORY
+  private static Map _instances = new HashMap(); // CLASSPATH X REPOSITORY
 
   private ClassPath _path = null;
-  private HashMap _loadedClasses = new HashMap(); // CLASSNAME X JAVACLASS
+  private Map _loadedClasses = new HashMap(); // CLASSNAME X JAVACLASS
 
   private SyntheticRepository(ClassPath path) {
     _path = path;

@@ -26,7 +26,7 @@ class BCELFactory extends EmptyVisitor {
     _out = out;
   }
 
-  private HashMap branch_map = new HashMap(); // Map<Instruction, InstructionHandle>
+  private Map branch_map = new HashMap(); // Map<Instruction, InstructionHandle>
 
   public void start() {
     if(!_mg.isAbstract() && !_mg.isNative()) {

@@ -17,9 +17,13 @@
 package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.bcel.generic.*;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Set;
+
+import org.apache.bcel.generic.CodeExceptionGen;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.MethodGen;
 
 /**
  * This class allows easy access to ExceptionHandler objects.
@@ -43,8 +47,8 @@ public class ExceptionHandlers{
 		for (int i=0; i<cegs.length; i++){
 			ExceptionHandler eh = new ExceptionHandler(cegs[i].getCatchType(), cegs[i].getHandlerPC());
 			for (InstructionHandle ih=cegs[i].getStartPC(); ih != cegs[i].getEndPC().getNext(); ih=ih.getNext()){
-				HashSet hs;
-				hs = (HashSet) exceptionhandlers.get(ih);
+				Set hs;
+				hs = (Set) exceptionhandlers.get(ih);
 				if (hs == null){
 					hs = new HashSet();
 					exceptionhandlers.put(ih, hs);
@@ -59,7 +63,7 @@ public class ExceptionHandlers{
 	 * handlers that protect the instruction ih.
 	 */
 	public ExceptionHandler[] getExceptionHandlers(InstructionHandle ih){
-		HashSet hs = (HashSet) exceptionhandlers.get(ih);
+		Set hs = (Set) exceptionhandlers.get(ih);
 		if (hs == null) return new ExceptionHandler[0];
 		else{
 			ExceptionHandler[] ret = new ExceptionHandler[hs.size()];

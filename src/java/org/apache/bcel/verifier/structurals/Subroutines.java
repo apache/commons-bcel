@@ -17,14 +17,30 @@
 package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.bcel.generic.*;
-import org.apache.bcel.verifier.exc.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Set;
+
+import org.apache.bcel.generic.ASTORE;
+import org.apache.bcel.generic.ATHROW;
+import org.apache.bcel.generic.BranchInstruction;
+import org.apache.bcel.generic.CodeExceptionGen;
+import org.apache.bcel.generic.GotoInstruction;
+import org.apache.bcel.generic.IndexedInstruction;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.JsrInstruction;
+import org.apache.bcel.generic.LocalVariableInstruction;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.RET;
+import org.apache.bcel.generic.ReturnInstruction;
+import org.apache.bcel.generic.Select;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 	/**
 	 * Instances of this class contain information about the subroutines
@@ -71,7 +87,7 @@ public class Subroutines{
 		private int localVariable = UNSET;
 
 		/** The instructions that belong to this subroutine. */
-		private HashSet instructions = new HashSet(); // Elements: InstructionHandle
+		private Set instructions = new HashSet(); // Elements: InstructionHandle
 		
 		/*
 		 * Refer to the Subroutine interface for documentation.
@@ -84,7 +100,7 @@ public class Subroutines{
 		 * The JSR or JSR_W instructions that define this
 		 * subroutine by targeting it.
 		 */
-		private HashSet theJSRs = new HashSet();
+		private Set theJSRs = new HashSet();
 		
 		/**
 		 * The RET instruction that leaves this subroutine.
@@ -212,7 +228,7 @@ public class Subroutines{
 
 		/* Satisfies Subroutine.getRecursivelyAccessedLocalsIndices(). */
 		public int[] getRecursivelyAccessedLocalsIndices(){
-			HashSet s = new HashSet();
+			Set s = new HashSet();
 			int[] lvs = getAccessedLocalsIndices();
 			for (int j=0; j<lvs.length; j++){
 				s.add(new Integer(lvs[j]));
@@ -232,7 +248,7 @@ public class Subroutines{
 		 * A recursive helper method for getRecursivelyAccessedLocalsIndices().
 		 * @see #getRecursivelyAccessedLocalsIndices()
 		 */
-		private void _getRecursivelyAccessedLocalsIndicesHelper(HashSet s, Subroutine[] subs){
+		private void _getRecursivelyAccessedLocalsIndicesHelper(Set s, Subroutine[] subs){
 			for (int i=0; i<subs.length; i++){
 				int[] lvs = subs[i].getAccessedLocalsIndices();
 				for (int j=0; j<lvs.length; j++){
@@ -249,7 +265,7 @@ public class Subroutines{
 		 */
 		public int[] getAccessedLocalsIndices(){
 			//TODO: Implement caching.
-			HashSet acc = new HashSet();
+			Set acc = new HashSet();
 			if (theRET == null && this != TOPLEVEL){
 				throw new AssertionViolatedException("This subroutine object must be built up completely before calculating accessed locals.");
 			}
@@ -289,7 +305,7 @@ public class Subroutines{
 		 * Satisfies Subroutine.subSubs().
 		 */
 		public Subroutine[] subSubs(){
-			HashSet h = new HashSet();
+			Set h = new HashSet();
 
 			Iterator i = instructions.iterator();
 			while (i.hasNext()){
@@ -355,7 +371,7 @@ public class Subroutines{
 		TOPLEVEL = new SubroutineImpl();
 
 		// Calculate "real" subroutines.
-		HashSet sub_leaders = new HashSet(); // Elements: InstructionHandle
+		Set sub_leaders = new HashSet(); // Elements: InstructionHandle
 		for (int i=0; i<all.length; i++){
 			Instruction inst = all[i].getInstruction();
 			if (inst instanceof JsrInstruction){
@@ -391,7 +407,7 @@ public class Subroutines{
 		
 		// Now do a BFS from every subroutine leader to find all the
 		// instructions that belong to a subroutine.
-		HashSet instructions_assigned = new HashSet(); // we don't want to assign an instruction to two or more Subroutine objects.
+		Set instructions_assigned = new HashSet(); // we don't want to assign an instruction to two or more Subroutine objects.
 		
 		Hashtable colors = new Hashtable(); //Graph colouring. Key: InstructionHandle, Value: java.awt.Color .
 		
@@ -485,7 +501,7 @@ public class Subroutines{
 	 *
 	 * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
 	 */
-	private void noRecursiveCalls(Subroutine sub, HashSet set){
+	private void noRecursiveCalls(Subroutine sub, Set set){
 		Subroutine[] subs = sub.subSubs();
 
 		for (int i=0; i<subs.length; i++){

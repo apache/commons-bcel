@@ -19,6 +19,7 @@ package org.apache.bcel.verifier;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -36,7 +37,7 @@ public class VerifierFactory{
 	/**
 	 * The HashMap that holds the data about the already-constructed Verifier instances.
 	 */
-	private static HashMap hashMap = new HashMap();
+	private static Map hashMap = new HashMap();
 
 	/**
 	 * The VerifierFactoryObserver instances that observe the VerifierFactory.

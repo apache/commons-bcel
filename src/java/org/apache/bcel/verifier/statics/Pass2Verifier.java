@@ -17,18 +17,59 @@
 package org.apache.bcel.verifier.statics;
 
 
-import org.apache.bcel.Constants;
-import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.classfile.DescendingVisitor; // Use _this_ one!
-import org.apache.bcel.classfile.EmptyVisitor; // Use _this_ one!
-import org.apache.bcel.classfile.Visitor; // Use _this_ one!
-import org.apache.bcel.classfile.Deprecated; // Use _this_ one!
-import org.apache.bcel.generic.*;
-import org.apache.bcel.verifier.*;
-import org.apache.bcel.verifier.exc.*;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.bcel.Constants;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.CodeException;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFieldref;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.Deprecated;
+import org.apache.bcel.classfile.DescendingVisitor;
+import org.apache.bcel.classfile.EmptyVisitor;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.InnerClass;
+import org.apache.bcel.classfile.InnerClasses;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.LineNumber;
+import org.apache.bcel.classfile.LineNumberTable;
+import org.apache.bcel.classfile.LocalVariable;
+import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Node;
+import org.apache.bcel.classfile.SourceFile;
+import org.apache.bcel.classfile.Synthetic;
+import org.apache.bcel.classfile.Unknown;
+import org.apache.bcel.classfile.Visitor;
+import org.apache.bcel.generic.ArrayType;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.PassVerifier;
+import org.apache.bcel.verifier.VerificationResult;
+import org.apache.bcel.verifier.Verifier;
+import org.apache.bcel.verifier.VerifierFactory;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.ClassConstraintException;
+import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
 
 /**
  * This PassVerifier verifies a class file according to
@@ -147,7 +188,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 */
 	private void every_class_has_an_accessible_superclass(){
 	    try {
-		HashSet hs = new HashSet(); // save class names to detect circular inheritance
+		Set hs = new HashSet(); // save class names to detect circular inheritance
 		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 		int supidx = -1;
 
@@ -197,7 +238,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 */
 	private void final_methods_are_not_overridden(){
 	    try {
-		HashMap hashmap = new HashMap();
+		Map hashmap = new HashMap();
 		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 		
 		int supidx = -1;
@@ -287,9 +328,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		private final int cplen; // == cp.getLength() -- to save computing power.
 		private DescendingVisitor carrier;
 
-		private HashSet field_names = new HashSet();
-		private HashSet field_names_and_desc = new HashSet();
-		private HashSet method_names_and_desc = new HashSet();
+		private Set field_names = new HashSet();
+		private Set field_names_and_desc = new HashSet();
+		private Set method_names_and_desc = new HashSet();
 
 		private CPESSC_Visitor(JavaClass _jc){
 			jc = _jc;

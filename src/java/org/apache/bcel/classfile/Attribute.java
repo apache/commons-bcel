@@ -16,9 +16,14 @@
  */
 package org.apache.bcel.classfile;
 
-import org.apache.bcel.Constants;
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.bcel.Constants;
 
 /**
  * Abstract super class for <em>Attribute</em> objects. Currently the
@@ -77,7 +82,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
     file.writeInt(length);
   }
 
-  private static HashMap readers = new HashMap();
+  private static Map readers = new HashMap();
 
   /** Add an Attribute reader capable of parsing (user-defined) attributes
    * named "name". You should not add readers for the standard attributes

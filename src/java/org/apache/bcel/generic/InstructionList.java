@@ -17,13 +17,18 @@
 package org.apache.bcel.generic;
 
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.util.ByteSequence;
-import java.io.*;
-import java.util.Iterator;
-import java.util.HashMap;
-import java.util.ArrayList;
 
 /** 
  * This class is a container for a list of <a
@@ -1037,7 +1042,7 @@ public class InstructionList implements Serializable {
    * @return complete, i.e., deep copy of this list
    */
   public InstructionList copy() {
-    HashMap         map = new HashMap();
+    Map         map = new HashMap();
     InstructionList il  = new InstructionList();
 
     /* Pass 1: Make copies of all instructions, append them to the new list

@@ -20,6 +20,7 @@ package org.apache.bcel.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
@@ -39,7 +40,7 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class ClassLoaderRepository implements Repository {
   private java.lang.ClassLoader loader;
-  private HashMap loadedClasses = new HashMap(); // CLASSNAME X JAVACLASS
+  private Map loadedClasses = new HashMap(); // CLASSNAME X JAVACLASS
 
   public ClassLoaderRepository(java.lang.ClassLoader loader) {
     this.loader = loader;

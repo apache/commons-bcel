@@ -20,6 +20,7 @@ package org.apache.bcel.verifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.verifier.statics.Pass1Verifier;
@@ -54,9 +55,9 @@ public class Verifier{
 	/** A Pass2Verifier for this Verifier instance. */
 	private Pass2Verifier p2v;
 	/** The Pass3aVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
-	private HashMap p3avs = new HashMap();
+	private Map p3avs = new HashMap();
 	/** The Pass3bVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
-	private HashMap p3bvs = new HashMap();
+	private Map p3bvs = new HashMap();
 
 	/** Returns the VerificationResult for the given pass. */
 	public VerificationResult doPass1(){

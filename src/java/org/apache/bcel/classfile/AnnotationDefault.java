@@ -19,8 +19,6 @@ package org.apache.bcel.classfile;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import  org.apache.bcel.Constants;
-
 /**
  * represents the default value of a annotation for a method info
  * 
