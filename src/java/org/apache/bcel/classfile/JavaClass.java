@@ -59,6 +59,7 @@ import  org.apache.bcel.Repository;
 import  org.apache.bcel.util.SyntheticRepository;
 import  org.apache.bcel.util.ClassVector;
 import  org.apache.bcel.util.ClassQueue;
+import  org.apache.bcel.generic.Type;
 
 import  java.io.*;
 import  java.util.StringTokenizer;
@@ -396,7 +397,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   public int[] getInterfaceIndices()     { return interfaces; }    
 
   /**
-   * @return Major number of compiler version.
+   * @return Major number of class file version.
    */
   public int  getMajor()           { return major; }    
 
@@ -406,7 +407,25 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   public Method[] getMethods()       { return methods; }    
 
   /**
-   * @return Minor number of compiler version.
+   * @return A org.apache.bcel.classfile.Method corresponding to
+   * java.lang.reflect.Method if any
+   */
+  public Method getMethod(java.lang.reflect.Method m) {
+    for(int i = 0; i < methods.length; i++) {
+      Method method = methods[i];
+
+      if(m.getName().equals(method.getName()) &&
+	 (m.getModifiers() == method.getModifiers()) &&
+	 Type.getSignature(m).equals(method.getSignature())) {
+	return method;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * @return Minor number of class file version.
    */
   public int  getMinor()           { return minor; }    
 
