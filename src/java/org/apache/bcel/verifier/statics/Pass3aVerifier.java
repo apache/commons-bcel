@@ -290,7 +290,7 @@ public final class Pass3aVerifier extends PassVerifier{
 		// The last byte of the last instruction in the code array must be the byte at index
 		// code_length-1 : See the do_verify() comments. We actually don't iterate through the
 		// byte array, but use an InstructionList so we cannot check for this. But BCEL does
-		// things right, so it's implicitely okay.
+		// things right, so it's implicitly okay.
 		
 		// TODO: Check how BCEL handles (and will handle) instructions like IMPDEP1, IMPDEP2,
 		//       BREAKPOINT... that BCEL knows about but which are illegal anyway.
@@ -482,6 +482,36 @@ public final class Pass3aVerifier extends PassVerifier{
 			Constant c = cpg.getConstant(o.getIndex());
 			if (! (c instanceof ConstantFieldref)){
 				constraintViolated(o, "Indexing a constant that's not a CONSTANT_Fieldref but a '"+c+"'.");
+			}
+			
+			String field_name = o.getFieldName(cpg);
+ 
+			JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
+			Field[] fields = jc.getFields();
+			Field f = null;
+			for (int i=0; i<fields.length; i++){
+				if (fields[i].getName().equals(field_name)){
+					f = fields[i];
+					break;
+				}
+			}
+			if (f == null){
+				/* TODO: also look up if the field is inherited! */
+				constraintViolated(o, "Referenced field '"+field_name+"' does not exist in class '"+jc.getClassName()+"'.");
+			}
+			else{
+				/* TODO: Check if assignment compatibility is sufficient.
+				   What does Sun do? */
+				Type f_type = Type.getType(f.getSignature());
+				Type o_type = o.getType(cpg);
+				
+				/* TODO: Is there a way to make BCEL tell us if a field
+				has a void method's signature, i.e. "()I" instead of "I"? */
+				
+				if (! f_type.equals(o_type)){
+					constraintViolated(o, "Referenced field '"+field_name+"' has type '"+f_type+"' instead of '"+o_type+"' as expected.");
+				}
+				/* TODO: Check for access modifiers here. */
 			}
 		}	
 
