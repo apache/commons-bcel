@@ -98,18 +98,21 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 					     false, true);
     if(!"".equals(package_name)) {
       class_name = class_name.substring(package_name.length() + 1);
-      _out.println("package " + package_name + ";\n");
-     }
+      _out.println("package " + package_name + ";");
+      _out.println();
+    }
 
     _out.println("import org.apache.bcel.generic.*;");
     _out.println("import org.apache.bcel.classfile.*;");
     _out.println("import org.apache.bcel.*;");
-    _out.println("import java.io.*;\n");
+    _out.println("import java.io.*;");
+    _out.println();
 
     _out.println("public class " + class_name + "Creator implements Constants {");
     _out.println("  private InstructionFactory _factory;");
     _out.println("  private ConstantPoolGen    _cp;");
-    _out.println("  private ClassGen           _cg;\n");
+    _out.println("  private ClassGen           _cg;");
+    _out.println();
 
     _out.println("  public " + class_name  + "Creator() {");
     _out.println("    _cg = new ClassGen(\"" +
@@ -118,11 +121,13 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 		 "\", \"" + super_name + "\", " +
 		 "\"" + clazz.getSourceFileName() + "\", " +
 		 printFlags(clazz.getAccessFlags(), true) + ", " +
-		 "new String[] { " + inter + " });\n");
-
+		 "new String[] { " + inter + " });");
+    _out.println();
+    
     _out.println("    _cp = _cg.getConstantPool();");
     _out.println("    _factory = new InstructionFactory(_cg, _cp);");
-    _out.println("  }\n");
+    _out.println("  }");
+    _out.println();
 
     printCreate();
 
@@ -136,7 +141,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 	fields[i].accept(this);
       }
 
-      _out.println("  }\n");   
+      _out.println("  }");
+      _out.println();
     }
 
     Method[] methods = clazz.getMethods();
@@ -145,7 +151,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
       _out.println("  private void createMethod_" + i + "() {");   
 
       methods[i].accept(this);
-      _out.println("  }\n");   
+      _out.println("  }");
+      _out.println();
     }
 
     printMain();
@@ -167,7 +174,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 
     _out.println("    _cg.getJavaClass().dump(out);");   
   
-    _out.println("  }\n");     
+    _out.println("  }");     
+    _out.println();
   }
 
   private void printMain() {
@@ -182,7 +190,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
   }
 
   public void visitField(Field field) {
-    _out.println("\n    field = new FieldGen(" +
+    _out.println();
+    _out.println("    field = new FieldGen(" +
 		 printFlags(field.getAccessFlags()) +
 		 ", " + printType(field.getSignature()) + ", \"" +
 		 field.getName() + "\", _cp);");
@@ -211,8 +220,9 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 		 "new String[] { " +
 		 Utility.printArray(mg.getArgumentNames(), false, true) +
 		 " }, \"" + method.getName() + "\", \"" +
-		 _clazz.getClassName() + "\", il, _cp);\n");
-    
+		 _clazz.getClassName() + "\", il, _cp);");
+    _out.println();
+
     BCELFactory factory = new BCELFactory(mg, _out);
     factory.start();
 
