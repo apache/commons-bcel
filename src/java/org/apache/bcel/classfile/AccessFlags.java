@@ -76,15 +76,27 @@ public abstract class AccessFlags {
   }
 
   /** 
-   * @return Access flags of the object.
+   * @return Access flags of the object aka. "modifiers".
    */ 
   public final int getAccessFlags() { return access_flags; }
 
-  /**
+  /** 
+   * @return Access flags of the object aka. "modifiers".
+   */ 
+  public final int getModifiers() { return access_flags; }
+
+  /** Set access flags aka "modifiers".
    * @param access_flags Access flags of the object. 
    */
   public final void setAccessFlags(int access_flags) {
     this.access_flags = access_flags;
+  }
+
+  /** Set access flags aka "modifiers".
+   * @param access_flags Access flags of the object. 
+   */
+  public final void setModifiers(int access_flags) {
+    setAccessFlags(access_flags);
   }
 
   private final void setFlag(int flag, boolean set) {
