@@ -55,8 +55,7 @@ package org.apache.bcel.classfile;
  */
 
 import  org.apache.bcel.Constants;
-// import  org.apache.bcel.Repository;
-import  org.apache.bcel.util.Repository;
+import  org.apache.bcel.Repository;
 import  org.apache.bcel.util.SyntheticRepository;
 import  org.apache.bcel.util.ClassVector;
 import  org.apache.bcel.util.ClassQueue;
@@ -102,13 +101,13 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   static boolean debug = false; // Debugging on/off
   static char    sep   = '/';   // directory separator
 
-    /**
-     * In cases where we go ahead and create something,
-     * use the default SyntheticRepository, because we
-     * don't know any better.
-     */
-    private org.apache.bcel.util.Repository repository = 
-	SyntheticRepository.getInstance();
+  /**
+   * In cases where we go ahead and create something,
+   * use the default SyntheticRepository, because we
+   * don't know any better.
+   */
+  private org.apache.bcel.util.Repository repository = 
+    SyntheticRepository.getInstance();
 
   /**
    * Constructor gets all contents as arguments.
@@ -170,7 +169,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
 	break;
       }
     }
-	
+
     /* According to the specification the following entries must be of type
      * `ConstantClass' but we check that anyway via the 
      * `ConstPool.getConstant' method.
@@ -289,11 +288,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
 
     try {
       dump(ds);
-      ds.close();
     } catch(IOException e) {
       e.printStackTrace();
     } finally {
-     try { ds.close(); } catch(IOException e2) { e2.printStackTrace(); }
+      try { ds.close(); } catch(IOException e2) { e2.printStackTrace(); }
     }
 
     return s.toByteArray();
@@ -393,9 +391,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   public String[] getInterfaceNames()  { return interface_names; }    
 
   /**
-   * @return Implemented interfaces.
+   * @return Indices in constant pool of implemented interfaces.
    */
-  public int[] getInterfaces()     { return interfaces; }    
+  public int[] getInterfaceIndices()     { return interfaces; }    
 
   /**
    * @return Major number of compiler version.
@@ -440,7 +438,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
     if(sep != null)
       try {
 	JavaClass.sep = sep.charAt(0);
-    } catch(StringIndexOutOfBoundsException e) {} // Never reached
+      } catch(StringIndexOutOfBoundsException e) {} // Never reached
   }
 
   /**
@@ -635,10 +633,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
     return c;
   }
 
-  public final boolean instanceOf(JavaClass super_class) {
-    return org.apache.bcel.Repository.instanceOf(this, super_class);
-  }
-
   public final boolean isSuper() {
     return (access_flags & Constants.ACC_SUPER) != 0;
   }
@@ -653,70 +647,151 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
     return source;
   }
 
-    // Added on 4/16/2002 to deprecate the old Repository class. -- DDP
+  /********************* New repository functionality *********************/
 
-    /**
-     * Gets the ClassRepository which holds its definition.
-     */
-    public org.apache.bcel.util.Repository getRepository() {
-	return repository;
+  /**
+   * Gets the ClassRepository which holds its definition. By default
+   * this is the same as SyntheticRepository.getInstance();
+   */
+  public org.apache.bcel.util.Repository getRepository() {
+    return repository;
+  }
+
+  /**
+   * Sets the ClassRepository which loaded the JavaClass.
+   * Should be called immediately after parsing is done.
+   */
+  public void setRepository(org.apache.bcel.util.Repository repository) {
+    this.repository = repository;
+  }
+
+  /** Equivalent to runtime "instanceof" operator.
+   *
+   * @return true if this JavaClass is derived from teh super class
+   */
+  public final boolean instanceOf(JavaClass super_class) {
+    if(this.equals(super_class))
+      return true;
+
+    JavaClass[] super_classes = getSuperClasses();
+
+    for(int i=0; i < super_classes.length; i++) {
+      if(super_classes[i].equals(super_class)) {
+	return true;
+      }
     }
 
-    /**
-     * Sets the ClassRepository which loaded the JavaClass.
-     * Should be called immediately after parsing is done.
-     */
-    public void setRepository( org.apache.bcel.util.Repository repository ) {
-	this.repository = repository;
+    if(super_class.isInterface()) {
+      return implementationOf(super_class);
     }
 
-    /**
-     * Get the Superclass for this JavaClass object.
-     */
-    public JavaClass getSuperclass() {
-	try {
-	    return repository.loadClass( getSuperclassName() );
-	} catch (ClassNotFoundException cnfe) {
-	    System.err.println("WARNING:  Could not find Superclass.");
-	    cnfe.printStackTrace();
-	    return null;
+    return false;
+  }
+
+  /**
+   * @return true, if clazz is an implementation of interface inter
+   */
+  public boolean implementationOf(JavaClass inter) {
+    if(!inter.isInterface()) {
+      throw new IllegalArgumentException(inter.getClassName() + " is no interface");
+    }
+
+    if(this.equals(inter)) {
+      return true;
+    }
+
+    JavaClass[] super_interfaces = getAllInterfaces();
+
+    for(int i=0; i < super_interfaces.length; i++) {
+      if(super_interfaces[i].equals(inter)) {
+	return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * @return the superclass for this JavaClass object, or null if this
+   * is java.lang.Object
+   */
+  public JavaClass getSuperClass() {
+    if("java.lang.Object".equals(getSuperclassName())) {
+      return null;
+    }
+
+    try {
+      return repository.loadClass(getSuperclassName());
+    } catch(ClassNotFoundException e) {
+      System.err.println(e);
+      return null;
+    }
+  }
+
+  /**
+   * @return list of super classes of this class in ascending order, i.e.,
+   * java.lang.Object is always the last element
+   */
+  public JavaClass[] getSuperClasses() {
+    JavaClass   clazz = this;
+    ClassVector vec   = new ClassVector();
+
+    for(clazz = clazz.getSuperClass(); clazz != null;
+	clazz = clazz.getSuperClass())
+    {
+      vec.addElement(clazz);
+    }
+
+    return vec.toArray();
+  }
+
+  /**
+   * Get interfaces directly implemented by this JavaClass.
+   */
+  public JavaClass[] getInterfaces() {
+    String[]    interfaces = getInterfaceNames();
+    JavaClass[] classes    = new JavaClass[interfaces.length];
+
+    try {
+      for(int i = 0; i < interfaces.length; i++) {
+	classes[i] = repository.loadClass(interfaces[i]);
+      }
+    } catch(ClassNotFoundException e) {
+      System.err.println(e);
+      return null;
+    }
+
+    return classes;
+  }
+
+  /**
+   * Get all interfaces implemented by this JavaClass (transitively).
+   */
+  public JavaClass[] getAllInterfaces() {
+    ClassQueue  queue = new ClassQueue();
+    ClassVector vec   = new ClassVector();
+    
+    queue.enqueue(this);
+    
+    while(!queue.empty()) {
+      JavaClass clazz = queue.dequeue();
+      
+      JavaClass   souper     = clazz.getSuperClass();
+      JavaClass[] interfaces = clazz.getInterfaces();
+      
+      if(clazz.isInterface()) {
+	vec.addElement(clazz);
+      } else {
+	if(souper != null) {
+	  queue.enqueue(souper);
 	}
+      }
+      
+      for(int i = 0; i < interfaces.length; i++) {
+	queue.enqueue(interfaces[i]);
+      }
     }
-
-    /**
-     * Get all interfaces implemented by the JavaClass object.
-     */
-    public JavaClass [] getAllInterfaces() {
-	try {
-	    ClassQueue queue = new ClassQueue();
-	    ClassVector vec = new ClassVector();
 	    
-	    queue.enqueue( this );
-	    
-	    while (!queue.empty()) {
-		JavaClass clazz = queue.dequeue();
-
-		JavaClass souper    = clazz.getSuperclass();
-		String interfaces[] = clazz.getInterfaceNames();
-		
-		if (clazz.isInterface()) {
-		    vec.addElement( clazz );
-		} else {
-		    if (souper != null) {
-			queue.enqueue( souper );
-		    }
-		}
-		
-		for (int i = 0; i < interfaces.length; i++) {
-		    queue.enqueue( repository.loadClass( interfaces[i] ));
-		}
-	    }
-	    
-	    return vec.toArray();
-	} catch (ClassNotFoundException cnfe) {
-	    System.err.println("WARNING: Class not found.");
-	    cnfe.printStackTrace();
-	    return null;
-	}
-    }
+    return vec.toArray();
+  }
 }
