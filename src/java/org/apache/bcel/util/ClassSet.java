@@ -53,31 +53,44 @@ package org.apache.bcel.util;
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
  */
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Collection;
 import org.apache.bcel.classfile.JavaClass;
 
 /** 
- * Utility class implementing a (typesafe) queue of JavaClass
- * objects.
+ * Utility class implementing a (typesafe) set of JavaClass objects.
+ * Since JavaClass has no equals() method, the name of the class is
+ * used for comparison.
  *
  * @version $Id$
  * @author <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A> 
- * @see ClassVector
+ * @see Stack
 */
-public class ClassQueue implements java.io.Serializable {
-  protected LinkedList vec  = new LinkedList();
+public class ClassSet implements java.io.Serializable {
+  private HashMap _map = new HashMap();
 
-  public void enqueue(JavaClass clazz) { vec.add(clazz); }
+  public boolean add(JavaClass clazz) {
+    boolean result = false;
 
-  public JavaClass dequeue()                {
-    JavaClass clazz = (JavaClass)vec.get(0);
-    vec.remove(0);
-    return clazz;
+    if(!_map.containsKey(clazz.getClassName())) {
+      result = true;
+      _map.put(clazz.getClassName(), clazz);
+    }
+
+    return result;
   }
 
-  public boolean empty() { return vec.size() == 0; }
+  public void      remove(JavaClass clazz) { _map.remove(clazz.getClassName()); }
+  public boolean   empty()                 { return _map.isEmpty(); }
 
-  public String toString() {
-    return vec.toString();
+  public JavaClass[] toArray() {
+    Collection values = _map.values();
+    JavaClass[] classes = new JavaClass[values.size()];
+    values.toArray(classes);
+    return classes;
+  }
+
+  public String[] getClassNames() {
+    return (String[])_map.keySet().toArray(new String[_map.keySet().size()]);
   }
 }  
