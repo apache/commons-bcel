@@ -77,7 +77,7 @@ public final class Field extends FieldOrMethod {
    * @param file Input stream
    */
   Field(DataInputStream file, ConstantPool constant_pool)
-       throws IOException, ClassFormatError
+       throws IOException, ClassFormatException
   {
     super(file, constant_pool);
   }

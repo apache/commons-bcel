@@ -177,7 +177,7 @@ public abstract class Type {
       int index = signature.indexOf(';'); // Look for closing `;'
 
       if(index < 0)
-	throw new ClassFormatError("Invalid signature: " + signature);
+	throw new ClassFormatException("Invalid signature: " + signature);
 	
       consumed_chars = index + 1; // "Lblabla;" `L' and `;' are removed
 
@@ -197,7 +197,7 @@ public abstract class Type {
       int index = signature.lastIndexOf(')') + 1;
       return getType(signature.substring(index));
     } catch(StringIndexOutOfBoundsException e) { // Should never occur
-      throw new ClassFormatError("Invalid method signature: " + signature);
+      throw new ClassFormatException("Invalid method signature: " + signature);
     }
   }
 
@@ -213,7 +213,7 @@ public abstract class Type {
 
     try { // Read all declarations between for `(' and `)'
       if(signature.charAt(0) != '(')
-	throw new ClassFormatError("Invalid method signature: " + signature);
+	throw new ClassFormatException("Invalid method signature: " + signature);
 
       index = 1; // current string position
 
@@ -222,7 +222,7 @@ public abstract class Type {
 	index += consumed_chars; // update position
       }
     } catch(StringIndexOutOfBoundsException e) { // Should never occur
-      throw new ClassFormatError("Invalid method signature: " + signature);
+      throw new ClassFormatException("Invalid method signature: " + signature);
     }
 	
     types = new Type[vec.size()];

@@ -142,8 +142,7 @@ public final class ConstantValue extends Attribute {
   /**
    * @return String representation of constant value.
    */ 
-  public final String toString() throws InternalError
-  {
+  public final String toString() {
     Constant c = constant_pool.getConstant(constantvalue_index);
 	
     String   buf;
@@ -160,7 +159,9 @@ public final class ConstantValue extends Attribute {
       c   = constant_pool.getConstant(i, Constants.CONSTANT_Utf8);
       buf = "\"" + Utility.convertString(((ConstantUtf8)c).getBytes()) + "\"";
       break;
-    default: throw new InternalError("Type of ConstValue invalid: " + c);
+
+    default:
+      throw new IllegalStateException("Type of ConstValue invalid: " + c);
     }
 
     return buf;

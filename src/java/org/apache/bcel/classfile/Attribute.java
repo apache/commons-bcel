@@ -146,12 +146,11 @@ public abstract class Attribute implements Cloneable, Node {
    * @param  constant_pool Array of constants
    * @return Attribute
    * @throws  IOException
-   * @throws  ClassFormatError
-   * @throws InternalError
+   * @throws  ClassFormatException
    */
   public static final Attribute readAttribute(DataInputStream file,
 						 ConstantPool constant_pool)
-    throws IOException, ClassFormatError, InternalError
+    throws IOException, ClassFormatException
   {
     ConstantUtf8 c;
     String       name;
@@ -223,7 +222,7 @@ public abstract class Attribute implements Cloneable, Node {
       return new StackMap(name_index, length, file, constant_pool);
 
     default: // Never reached
-      throw new InternalError("Ooops! default case reached.");
+      throw new IllegalStateException("Ooops! default case reached.");
     }
   }    
 

@@ -1,6 +1,5 @@
 import java.io.*;
 import org.apache.bcel.classfile.*;
-import org.apache.bcel.Constants;
 
 /**
  * Patch all Utf8 constants in the given class file <em>file</em>.class

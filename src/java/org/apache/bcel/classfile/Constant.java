@@ -124,7 +124,7 @@ public abstract class Constant implements Cloneable, Node {
    * @return Constant object
    */
   static final Constant readConstant(DataInputStream file)
-    throws IOException, ClassFormatError
+    throws IOException, ClassFormatException
   {
     byte b = file.readByte(); // Read tag byte
 
@@ -142,7 +142,7 @@ public abstract class Constant implements Cloneable, Node {
     case Constants.CONSTANT_NameAndType:        return new ConstantNameAndType(file);
     case Constants.CONSTANT_Utf8:               return new ConstantUtf8(file);
     default:                          
-      throw new ClassFormatError("Invalid byte tag in constant pool: " + b);
+      throw new ClassFormatException("Invalid byte tag in constant pool: " + b);
     }
   }    
 }

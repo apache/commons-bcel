@@ -88,9 +88,9 @@ public class ConstantPool implements Cloneable, Node {
    *
    * @param file Input stream
    * @throws IOException
-   * @throws ClassFormatError
+   * @throws ClassFormatException
    */
-  ConstantPool(DataInputStream file) throws IOException, ClassFormatError
+  ConstantPool(DataInputStream file) throws IOException, ClassFormatException
   {
     byte tag;
 
@@ -134,7 +134,7 @@ public class ConstantPool implements Cloneable, Node {
    * @return String representation
    */
   public String constantToString(Constant c)
-       throws ClassFormatError  
+       throws ClassFormatException  
   {
     String   str;
     int      i;
@@ -210,7 +210,7 @@ public class ConstantPool implements Cloneable, Node {
    * @return String representation
    */
   public String constantToString(int index, byte tag) 
-       throws ClassFormatError
+       throws ClassFormatException
   {
     Constant c = getConstant(index, tag);
     return constantToString(c);
@@ -240,7 +240,7 @@ public class ConstantPool implements Cloneable, Node {
    */
   public Constant getConstant(int index) {
     if (index >= constant_pool.length || index < 0)
-      throw new ClassFormatError("Invalid constant pool reference: " +
+      throw new ClassFormatException("Invalid constant pool reference: " +
 				 index + ". Constant pool size is: " +
 				 constant_pool.length);
     return constant_pool[index];
@@ -254,22 +254,22 @@ public class ConstantPool implements Cloneable, Node {
    * @param  tag Tag of expected constant, i.e., its type
    * @return Constant value
    * @see    Constant
-   * @throws  ClassFormatError
+   * @throws  ClassFormatException
    */
   public Constant getConstant(int index, byte tag)
-       throws ClassFormatError
+       throws ClassFormatException
   {
     Constant c;
 
     c = getConstant(index);
 
     if(c == null)
-      throw new ClassFormatError("Constant pool at index " + index + " is null.");
+      throw new ClassFormatException("Constant pool at index " + index + " is null.");
 
     if(c.getTag() == tag)
       return c;
     else
-      throw new ClassFormatError("Expected class `" + Constants.CONSTANT_NAMES[tag] + 
+      throw new ClassFormatException("Expected class `" + Constants.CONSTANT_NAMES[tag] + 
 				 "' at index " + index + " and got " + c);
   }
 
@@ -289,10 +289,10 @@ public class ConstantPool implements Cloneable, Node {
    * @return Contents of string reference
    * @see    ConstantClass
    * @see    ConstantString
-   * @throws  ClassFormatError
+   * @throws  ClassFormatException
    */
   public String getConstantString(int index, byte tag) 
-       throws ClassFormatError
+       throws ClassFormatException
   {
     Constant c;
     int    i;

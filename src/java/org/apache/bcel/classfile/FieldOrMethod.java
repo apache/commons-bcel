@@ -84,10 +84,10 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
    * Construct object from file stream.
    * @param file Input stream
    * @throws IOException
-   * @throws ClassFormatError
+   * @throws ClassFormatException
    */
   protected FieldOrMethod(DataInputStream file, ConstantPool constant_pool)
-    throws IOException, ClassFormatError
+    throws IOException, ClassFormatException
   {
     this(file.readUnsignedShort(), file.readUnsignedShort(),
 	 file.readUnsignedShort(), null, constant_pool);
