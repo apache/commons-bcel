@@ -272,4 +272,17 @@ public abstract class Type {
       return new ObjectType(cl.getName());
     }
   }
+
+  public static String getSignature(java.lang.reflect.Method meth) {
+    StringBuffer sb = new StringBuffer("(");
+    Class[] params = meth.getParameterTypes(); // avoid clone
+
+    for(int j = 0; j < params.length; j++) {
+      sb.append(getType(params[j]).getSignature());
+    }
+
+    sb.append(")");
+    sb.append(getType(meth.getReturnType()).getSignature());
+    return sb.toString();
+  }
 }
