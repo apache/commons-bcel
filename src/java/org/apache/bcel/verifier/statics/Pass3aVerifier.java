@@ -505,8 +505,15 @@ public final class Pass3aVerifier extends PassVerifier{
 			Field f = null;
 			for (int i=0; i<fields.length; i++){
 				if (fields[i].getName().equals(field_name)){
-					f = fields[i];
-					break;
+				  Type f_type = Type.getType(fields[i].getSignature());
+				  Type o_type = o.getType(cpg);
+					/* TODO: Check if assignment compatibility is sufficient.
+				   * What does Sun do?
+				   */
+				  if (f_type.equals(o_type)){
+						f = fields[i];
+						break;
+					}
 				}
 			}
 			if (f == null){
@@ -518,13 +525,13 @@ public final class Pass3aVerifier extends PassVerifier{
 				   What does Sun do? */
 				Type f_type = Type.getType(f.getSignature());
 				Type o_type = o.getType(cpg);
+								
+				// Argh. Sun's implementation allows us to have multiple fields of
+				// the same name but wirth a different signature.
+				//if (! f_type.equals(o_type)){
+				//	constraintViolated(o, "Referenced field '"+field_name+"' has type '"+f_type+"' instead of '"+o_type+"' as expected.");
+				//}
 				
-				/* TODO: Is there a way to make BCEL tell us if a field
-				has a void method's signature, i.e. "()I" instead of "I"? */
-				
-				if (! f_type.equals(o_type)){
-					constraintViolated(o, "Referenced field '"+field_name+"' has type '"+f_type+"' instead of '"+o_type+"' as expected.");
-				}
 				/* TODO: Check for access modifiers here. */
 			}
 		    } catch (ClassNotFoundException e) {
