@@ -90,7 +90,12 @@ public class ReturnaddressType extends Type {
     if(!(rat instanceof ReturnaddressType))
       return false;
 
-    return ((ReturnaddressType)rat).returnTarget.equals(this.returnTarget);
+		ReturnaddressType that = (ReturnaddressType)rat;
+		
+		if(this.returnTarget == null || that.returnTarget == null)
+			return that.returnTarget == this.returnTarget;
+		
+    return that.returnTarget.equals(this.returnTarget);
   }	
 
   /**
