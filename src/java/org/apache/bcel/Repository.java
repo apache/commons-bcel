@@ -58,7 +58,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.*;
 import java.io.*;
 
-/** 
+/**
  * The repository maintains informations about class interdependencies, e.g.,
  * whether a class is a sub-class of another. Delegates actual class loading
  * to SyntheticRepository.
@@ -130,9 +130,11 @@ public abstract class Repository {
     _repository.removeClass(clazz);
   }
 
+  /*
   private static final JavaClass getSuperClass(JavaClass clazz) {
     return clazz.getSuperClass();
   }
+  */
 
   /**
    * @return list of super classes of clazz in ascending order, i.e.,
@@ -183,7 +185,7 @@ public abstract class Repository {
   public static boolean instanceOf(String clazz, String super_class) {
     return instanceOf(lookupClass(clazz), lookupClass(super_class));
   }
-    
+
   /**
    * @return true, if clazz is an instance of super_class
    */

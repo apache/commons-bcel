@@ -96,9 +96,6 @@ public class VerificationResult{
 	/** The detailed message. */
 	private String detailMessage;
 
-	/** This class is not no-args instantiable. */
-	private VerificationResult(){}
-
 	/** The usual constructor. */
 	public VerificationResult(int status, String message){
 		numeric = status;

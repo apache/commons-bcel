@@ -59,7 +59,6 @@ import org.apache.bcel.Repository;
 import org.apache.bcel.verifier.*;
 import org.apache.bcel.verifier.exc.*;
 import org.apache.bcel.verifier.exc.Utility;
-import java.util.ArrayList;
 
 /**
  * This PassVerifier verifies a class file according to pass 1 as

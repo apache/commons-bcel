@@ -62,9 +62,7 @@ package org.apache.bcel.verifier.exc;
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public class LoadingException extends VerifierConstraintViolatedException{
-	/** The specified error message. */
-	private String detailMessage;
-   
+
 	/**
 	 * Constructs a new LoadingException with null as its error message string.
 	 */
@@ -77,6 +75,5 @@ public class LoadingException extends VerifierConstraintViolatedException{
 	 */
 	public LoadingException(String message){
 		super (message);
-		detailMessage = message;
 	}
 }

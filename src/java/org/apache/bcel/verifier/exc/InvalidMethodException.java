@@ -61,8 +61,6 @@ package org.apache.bcel.verifier.exc;
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public class InvalidMethodException extends RuntimeException{
-	/** Must not be no-args requested so there's always some error message. */
-	private InvalidMethodException(){}
 	
 	/** Constructs an InvalidMethodException with the specified detail message. */
 	public InvalidMethodException(String message){

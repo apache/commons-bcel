@@ -56,10 +56,8 @@ package org.apache.bcel.util;
 
 import java.util.Hashtable;
 import java.io.*;
-import java.util.zip.*;
 import org.apache.bcel.*;
 import org.apache.bcel.classfile.*;
-import org.apache.bcel.generic.*;
 
 /**
  * <p>Drop in replacement for the standard class loader of the JVM. You can use it

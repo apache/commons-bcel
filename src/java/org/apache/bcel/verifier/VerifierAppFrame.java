@@ -291,10 +291,12 @@ public class VerifierAppFrame extends JFrame {
           pass2TextPane.setBackground(Color.green);
 
           JavaClass jc = Repository.lookupClass(current_class);
+          /*
           boolean all3aok = true;
           boolean all3bok = true;
           String all3amsg = "";
           String all3bmsg = "";
+          */
 
           String[] methodnames = new String[jc.getMethods().length];
           for (int i=0; i<jc.getMethods().length; i++){

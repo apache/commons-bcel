@@ -59,8 +59,6 @@ import org.apache.bcel.generic.*;
 import org.apache.bcel.classfile.*;
 import org.apache.bcel.verifier.*;
 import org.apache.bcel.verifier.exc.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * This PassVerifier verifies a class file according to

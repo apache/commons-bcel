@@ -54,7 +54,6 @@ package org.apache.bcel.verifier.statics;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.Constants;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.exc.*;
 
@@ -71,12 +70,6 @@ public class LocalVariablesInfo{
 	/** The information about the local variables is stored here. */
 	private LocalVariableInfo[] localVariableInfos;
 
-	/**
-	 * The ints in the list represent code offsets where either instructions must start
-	 * or the offset is the length of the code array. This will be verified in Pass 3a.
-	 */
-	private IntList instruction_offsets = new IntList();
-	
 	/** The constructor. */
 	LocalVariablesInfo(int max_locals){
 		localVariableInfos = new LocalVariableInfo[max_locals];

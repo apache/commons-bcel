@@ -63,9 +63,6 @@ package org.apache.bcel.verifier.exc;
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */
 public class ClassConstraintException extends VerificationException{
-	/** The specified error message. */
-	private String detailMessage;
-
 	/**
 	 * Constructs a new ClassConstraintException with null as its error message string.
 	 */
@@ -78,6 +75,5 @@ public class ClassConstraintException extends VerificationException{
 	 */
 	public ClassConstraintException(String message){
 		super (message);
-		detailMessage = message;
 	}
 }

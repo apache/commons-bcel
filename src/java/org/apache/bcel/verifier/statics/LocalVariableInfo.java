@@ -54,7 +54,6 @@ package org.apache.bcel.verifier.statics;
  * <http://www.apache.org/>.
  */
 
-import org.apache.bcel.Constants;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.exc.*;
 import java.util.Hashtable;
