@@ -182,8 +182,7 @@ public final class Pass1Verifier extends PassVerifier{
 		catch(LoadingException e){
 			return new VerificationResult(VerificationResult.VERIFIED_REJECTED, e.getMessage());
 		}
-		catch(ClassFormatError e){
-			// BCEL sometimes is a little harsh describing exceptual situations.
+		catch(ClassFormatException e){
 			return new VerificationResult(VerificationResult.VERIFIED_REJECTED, e.getMessage());
 		}
 		catch(RuntimeException e){

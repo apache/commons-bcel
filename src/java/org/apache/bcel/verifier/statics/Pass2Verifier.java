@@ -525,8 +525,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			try{
 				Type.getType(sig);  /* Don't need the return value */
 			}
-			catch (ClassFormatError cfe){ // sometimes BCEL is a little harsh describing exceptional situations.
-				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.");
+			catch (ClassFormatException cfe){
+                throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.");
 			}
 
 			String nameanddesc = (name+sig);
@@ -574,9 +574,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				t  = Type.getReturnType(sig);
 				ts = Type.getArgumentTypes(sig);
 			}
-			catch (ClassFormatError cfe){
-				// Well, BCEL sometimes is a little harsh describing exceptional situations.
-				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by Method '"+tostring(obj)+"'.");
+			catch (ClassFormatException cfe){
+                throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by Method '"+tostring(obj)+"'.");
 			}
 
 			// Check if referenced objects exist.
@@ -948,7 +947,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 						try{
 							t = Type.getType(localsig);
 						}
-						catch (ClassFormatError cfe){ // sometimes BCEL is a little harsh describing exceptional situations.
+						catch (ClassFormatException cfe){
 							throw new ClassConstraintException("Illegal descriptor (==signature) '"+localsig+"' used by LocalVariable '"+tostring(localvariables[i])+"' referenced by '"+tostring(lvt)+"'.");
 						}
 						int localindex = localvariables[i].getIndex();
@@ -1159,8 +1158,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			try{
 				Type.getType(sig); /* Don't need the return value */
 			}
-			catch (ClassFormatError cfe){
-				// Well, BCEL sometimes is a little harsh describing exceptional situations.
+			catch (ClassFormatException cfe){
 				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.");
 			}
 		}
@@ -1191,8 +1189,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 					throw new ClassConstraintException("Instance initialization method must have VOID return type.");
 				}
 			}
-			catch (ClassFormatError cfe){
-				// Well, BCEL sometimes is a little harsh describing exceptional situations.
+			catch (ClassFormatException cfe){
 				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.");
 			}
 		}
@@ -1223,8 +1220,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 					addMessage("Class or interface initialization method '"+STATIC_INITIALIZER_NAME+"' usually has VOID return type instead of '"+t+"'. Note this is really not a requirement of The Java Virtual Machine Specification, Second Edition.");
 				}
 			}
-			catch (ClassFormatError cfe){
-				// Well, BCEL sometimes is a little harsh describing exceptional situations.
+			catch (ClassFormatException cfe){
 				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.");
 			}
 
