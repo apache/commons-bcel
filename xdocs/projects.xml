@@ -74,6 +74,11 @@
     </li>
 
     <li><a
+    HREF="http://aopclsuite.sourceforge.net/"
+    >AOP ClassLoader Suite</a>
+    </li>
+
+    <li><a
     HREF="http://www.cs.kuleuven.ac.be/~tim/MOS/brakes.html"
     >Brakes: Thread serialization</a>
     </li>
