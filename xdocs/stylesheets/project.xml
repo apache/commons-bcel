@@ -7,6 +7,7 @@
   <body>
     <menu name="BCEL">
       <item name="Overview" href="/index.html"/>
+      <item name="Manual" href="/manual.html"/>
     </menu>
   </body>
 </project>
