@@ -192,6 +192,16 @@ public abstract class Select extends BranchInstruction
     return false;
   }
 
+  protected Object clone() throws CloneNotSupportedException {
+    Select copy = (Select) super.clone();
+
+    copy.match   = (int[]) match.clone();
+    copy.indices = (int[]) indices.clone();
+    copy.targets = (InstructionHandle[]) targets.clone();
+
+    return copy;
+  }
+
   /**
    * Inform targets that they're not targeted anymore.
    */
