@@ -82,7 +82,6 @@ public final class Deprecated extends Attribute {
    * @param length Content length in bytes
    * @param bytes Attribute contents
    * @param constant_pool Array of constants
-   * @param sourcefile_index Index in constant pool to CONSTANT_Utf8
    */
   public Deprecated(int name_index, int length, byte[] bytes,
 		    ConstantPool constant_pool)

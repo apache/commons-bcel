@@ -59,8 +59,9 @@ import  java.io.*;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a reference
- * to the source file of this class.
- * It is instantiated from the <em>Attribute.readAttribute()</em> method.
+ * to the source file of this class.  At most one SourceFile attribute
+ * should appear per classfile.  The intention of this class is that it is
+ * instantiated from the <em>Attribute.readAttribute()</em> method.
  *
  * @version $Id$
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
@@ -93,10 +94,17 @@ public final class SourceFile extends Attribute {
   }
 
   /**
-   * @param name_index Index in constant pool to CONSTANT_Utf8
-   * @param length Content length in bytes
-   * @param constant_pool Array of constants
-   * @param sourcefile_index Index in constant pool to CONSTANT_Utf8
+   * @param name_index Index in constant pool to CONSTANT_Utf8, which
+   * should represent the string "SourceFile".
+   * @param length Content length in bytes, the value should be 2.
+   * @param constant_pool The constant pool that this attribute is
+   * associated with.
+   * @param sourcefile_index Index in constant pool to CONSTANT_Utf8.  This
+   * string will be interpreted as the name of the file from which this
+   * class was compiled.  It will not be interpreted as indicating the name
+   * of the directory contqining the file or an absolute path; this
+   * information has to be supplied the consumer of this attribute - in
+   * many cases, the JVM.
    */
   public SourceFile(int name_index, int length, int sourcefile_index,
 		    ConstantPool constant_pool)

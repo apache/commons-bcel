@@ -60,10 +60,18 @@ import java.util.*;
 
 /**
  * This class represents a reference to an unknown (i.e.,
- * application-specific) attribute of a class.  It is instantiated
- * from the <em>Attribute.readAttribute()</em> method.
+ * application-specific) attribute of a class.  It is instantiated from the
+ * <em>Attribute.readAttribute()</em> method.  Applications that need to
+ * read in application-specific attributes should create an <a
+ * href="./AttributeReader.html">AttributeReader</a> implementation and
+ * attach it via <a
+ * href="./Attribute.html#addAttributeReader(java.lang.String,
+ * org.apache.bcel.classfile.AttributeReader)">Attribute.addAttributeReader</a>.
+
  *
  * @version $Id$
+ * @see org.apache.bcel.classfile.Attribute
+ * @see org.apache.bcel.classfile.AttributeReader
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public final class Unknown extends Attribute {
