@@ -89,6 +89,12 @@ public abstract class Instruction implements Cloneable, Serializable {
     out.writeByte(opcode); // Common for all instructions
   }
 
+  /** @return name of instruction, i.e., opcode name
+   */
+  public String getName() {
+    return Constants.OPCODE_NAMES[opcode];
+  }
+
   /**
    * Long output format:
    *
@@ -100,9 +106,9 @@ public abstract class Instruction implements Cloneable, Serializable {
    */
   public String toString(boolean verbose) {
     if(verbose)
-      return Constants.OPCODE_NAMES[opcode] + "[" + opcode + "](" + length + ")";
+      return getName() + "[" + opcode + "](" + length + ")";
     else
-      return Constants.OPCODE_NAMES[opcode];
+      return getName();
   }
 
   /**
@@ -180,18 +186,20 @@ public abstract class Instruction implements Cloneable, Serializable {
      * and initialize it by hand.
      */
     Class clazz;
+
     try {
       clazz = Class.forName(className(opcode));
-    }
-    catch (ClassNotFoundException cnfe){
+    } catch (ClassNotFoundException cnfe){
       // If a class by that name does not exist, the opcode is illegal.
       // Note that IMPDEP1, IMPDEP2, BREAKPOINT are also illegal in a sense.
       throw new ClassGenException("Illegal opcode detected.");
     }
+
     try {
       obj = (Instruction)clazz.newInstance();
 
-      if(wide && !((obj instanceof LocalVariableInstruction) || (obj instanceof IINC) ||
+      if(wide && !((obj instanceof LocalVariableInstruction) ||
+		   (obj instanceof IINC) ||
 		   (obj instanceof RET)))
 	throw new Exception("Illegal opcode after wide: " + opcode);
 

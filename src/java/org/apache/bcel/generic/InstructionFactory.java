@@ -577,7 +577,7 @@ public class InstructionFactory implements InstructionConstants {
   }
 
   /** Create branch instruction by given opcode, except LOOKUPSWITCH and TABLESWITCH.
-   * For those you should use the SWITCH compeund instruction.
+   * For those you should use the SWITCH compound instruction.
    */
   public static BranchInstruction createBranchInstruction(short opcode, InstructionHandle target) {
     switch(opcode) {

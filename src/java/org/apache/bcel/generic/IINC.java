@@ -72,6 +72,10 @@ public class IINC extends LocalVariableInstruction {
    */
   IINC() {}
 
+  /**
+   * @param n index of local variable
+   * @param c increment factor
+   */
   public IINC(int n, int c) {
     super(); // Default behaviour of LocalVariableInstruction causes error
 
