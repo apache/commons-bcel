@@ -201,12 +201,12 @@ public class ConstantPoolGen {
     if((ret = lookupString(str)) != -1)
       return ret; // Already in CP
 
+    int utf8 = addUtf8(str);
+
     adjustSize();
 
-    ConstantUtf8   u8 = new ConstantUtf8(str);
-    ConstantString s  = new ConstantString(index);
+    ConstantString s  = new ConstantString(utf8);
        
-    constants[index++] = u8;
     ret = index;
     constants[index++] = s;
 
