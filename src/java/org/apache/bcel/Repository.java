@@ -101,6 +101,35 @@ public abstract class Repository {
     return clazz;
   }
 
+  /**
+   * Try to find class source via getResourceAsStream()
+   * @return JavaClass object for given runtime class
+   */
+  public static JavaClass lookupClass(Class clazz) {
+    String class_name = clazz.getName();
+
+    JavaClass j_class = (JavaClass)classes.get(class_name);
+
+    if(j_class == null) {
+      String name = class_name;
+      int    i    = name.lastIndexOf('.');
+
+      if(i > 0)
+	name = name.substring(i + 1);
+
+      try {
+	InputStream is = clazz.getResourceAsStream(name + ".class");
+	j_class = new ClassParser(is, class_name).parse();
+      } catch(IOException e) {
+	throw new RuntimeException(e.getMessage());
+      }
+
+      classes.put(class_name, j_class);
+    }
+
+    return j_class;
+  }
+
   /** @return class file object for given Java class.
    */
   public static ClassPath.ClassFile lookupClassFile(String class_name) {
