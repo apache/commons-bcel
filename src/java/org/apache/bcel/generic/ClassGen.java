@@ -56,6 +56,8 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.*;
+import org.apache.bcel.util.BCELComparator;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -65,22 +67,36 @@ import java.util.Iterator;
  *
  * @see JavaClass
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ClassGen extends AccessFlags implements Cloneable {
   /* Corresponds to the fields found in a JavaClass object.
    */
-  private String   class_name, super_class_name, file_name;
-  private int      class_name_index = -1, superclass_name_index = -1;
-  private int      major = Constants.MAJOR_1_1, minor = Constants.MINOR_1_1;
+  private String class_name, super_class_name, file_name;
+  private int class_name_index = -1, superclass_name_index = -1;
+  private int major = Constants.MAJOR_1_1, minor = Constants.MINOR_1_1;
 
   private ConstantPoolGen cp; // Template for building up constant pool
 
   // ArrayLists instead of arrays to gather fields, methods, etc.
-  private ArrayList   field_vec     = new ArrayList();
-  private ArrayList   method_vec    = new ArrayList();
-  private ArrayList   attribute_vec = new ArrayList();
-  private ArrayList   interface_vec = new ArrayList();
+  private ArrayList field_vec = new ArrayList();
+  private ArrayList method_vec = new ArrayList();
+  private ArrayList attribute_vec = new ArrayList();
+  private ArrayList interface_vec = new ArrayList();
+
+  private static BCELComparator _cmp = new BCELComparator() {
+    public boolean equals(Object o1, Object o2) {
+      ClassGen THIS = (ClassGen)o1;
+      ClassGen THAT = (ClassGen)o2;
+
+      return THIS.getClassName().equals(THAT.getClassName());
+    }
+
+    public int hashCode(Object o) {
+      ClassGen THIS = (ClassGen)o;
+      return THIS.getClassName().hashCode();
+    }
+  };
 
   /** Convenience constructor to set up some important values initially.
    *
@@ -91,25 +107,34 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * @param interfaces implemented interfaces
    * @param cp constant pool to use
    */
-  public ClassGen(String class_name, String super_class_name, String file_name,
-		  int access_flags, String[] interfaces, ConstantPoolGen cp) {
-    this.class_name       = class_name;
+  public ClassGen(
+    String class_name,
+    String super_class_name,
+    String file_name,
+    int access_flags,
+    String[] interfaces,
+    ConstantPoolGen cp) {
+    this.class_name = class_name;
     this.super_class_name = super_class_name;
-    this.file_name        = file_name;
-    this.access_flags     = access_flags;
-    this.cp               = cp;
+    this.file_name = file_name;
+    this.access_flags = access_flags;
+    this.cp = cp;
 
     // Put everything needed by default into the constant pool and the vectors
-    if(file_name != null)
-      addAttribute(new SourceFile(cp.addUtf8("SourceFile"), 2,
-				  cp.addUtf8(file_name), cp.getConstantPool()));
+    if (file_name != null)
+      addAttribute(
+        new SourceFile(
+          cp.addUtf8("SourceFile"),
+          2,
+          cp.addUtf8(file_name),
+          cp.getConstantPool()));
 
-    class_name_index      = cp.addClass(class_name);
+    class_name_index = cp.addClass(class_name);
     superclass_name_index = cp.addClass(super_class_name);
 
-    if(interfaces != null)
-      for(int i=0; i < interfaces.length; i++)
-	addInterface(interfaces[i]);
+    if (interfaces != null)
+      for (int i = 0; i < interfaces.length; i++)
+        addInterface(interfaces[i]);
   }
 
   /** Convenience constructor to set up some important values initially.
@@ -120,10 +145,19 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * @param access_flags access qualifiers
    * @param interfaces implemented interfaces
    */
-  public ClassGen(String class_name, String super_class_name, String file_name,
-		  int access_flags, String[] interfaces) {
-    this(class_name, super_class_name, file_name, access_flags, interfaces,
-	 new ConstantPoolGen());
+  public ClassGen(
+    String class_name,
+    String super_class_name,
+    String file_name,
+    int access_flags,
+    String[] interfaces) {
+    this(
+      class_name,
+      super_class_name,
+      file_name,
+      access_flags,
+      interfaces,
+      new ConstantPoolGen());
   }
 
   /**
@@ -131,31 +165,31 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * @param clazz JavaClass object (e.g. read from file)
    */
   public ClassGen(JavaClass clazz) {
-    class_name_index      = clazz.getClassNameIndex();
+    class_name_index = clazz.getClassNameIndex();
     superclass_name_index = clazz.getSuperclassNameIndex();
-    class_name            = clazz.getClassName();
-    super_class_name      = clazz.getSuperclassName();
-    file_name             = clazz.getSourceFileName();
-    access_flags          = clazz.getAccessFlags();
-    cp                    = new ConstantPoolGen(clazz.getConstantPool());
-    major                 = clazz.getMajor();
-    minor                 = clazz.getMinor();
+    class_name = clazz.getClassName();
+    super_class_name = clazz.getSuperclassName();
+    file_name = clazz.getSourceFileName();
+    access_flags = clazz.getAccessFlags();
+    cp = new ConstantPoolGen(clazz.getConstantPool());
+    major = clazz.getMajor();
+    minor = clazz.getMinor();
 
     Attribute[] attributes = clazz.getAttributes();
-    Method[]    methods    = clazz.getMethods();
-    Field[]     fields     = clazz.getFields();
-    String[]    interfaces = clazz.getInterfaceNames();
-    
-    for(int i=0; i < interfaces.length; i++)
+    Method[] methods = clazz.getMethods();
+    Field[] fields = clazz.getFields();
+    String[] interfaces = clazz.getInterfaceNames();
+
+    for (int i = 0; i < interfaces.length; i++)
       addInterface(interfaces[i]);
 
-    for(int i=0; i < attributes.length; i++)
+    for (int i = 0; i < attributes.length; i++)
       addAttribute(attributes[i]);
 
-    for(int i=0; i < methods.length; i++)
+    for (int i = 0; i < methods.length; i++)
       addMethod(methods[i]);
 
-    for(int i=0; i < fields.length; i++)
+    for (int i = 0; i < fields.length; i++)
       addField(fields[i]);
   }
 
@@ -163,17 +197,26 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * @return the (finally) built up Java class object.
    */
   public JavaClass getJavaClass() {
-    int[]        interfaces = getInterfaces();
-    Field[]      fields     = getFields();
-    Method[]     methods    = getMethods();
-    Attribute[]  attributes = getAttributes();
+    int[] interfaces = getInterfaces();
+    Field[] fields = getFields();
+    Method[] methods = getMethods();
+    Attribute[] attributes = getAttributes();
 
     // Must be last since the above calls may still add something to it
-    ConstantPool cp         = this.cp.getFinalConstantPool();
-    
-    return new JavaClass(class_name_index, superclass_name_index,
-			 file_name, major, minor, access_flags,
-			 cp, interfaces, fields, methods, attributes);
+    ConstantPool cp = this.cp.getFinalConstantPool();
+
+    return new JavaClass(
+      class_name_index,
+      superclass_name_index,
+      file_name,
+      major,
+      minor,
+      access_flags,
+      cp,
+      interfaces,
+      fields,
+      methods,
+      attributes);
   }
 
   /**
@@ -195,38 +238,46 @@ public class ClassGen extends AccessFlags implements Cloneable {
   /**
    * @return major version number of class file
    */
-  public int  getMajor()      { return major; }
+  public int getMajor() {
+    return major;
+  }
 
   /** Set major version number of class file, default value is 45 (JDK 1.1)
    * @param major major version number
    */
   public void setMajor(int major) {
     this.major = major;
-  }    
+  }
 
   /** Set minor version number of class file, default value is 3 (JDK 1.1)
    * @param minor minor version number
    */
   public void setMinor(int minor) {
     this.minor = minor;
-  }    
+  }
 
   /**
    * @return minor version number of class file
    */
-  public int  getMinor()      { return minor; }
+  public int getMinor() {
+    return minor;
+  }
 
   /**
    * Add an attribute to this class.
    * @param a attribute to add
    */
-  public void addAttribute(Attribute a)    { attribute_vec.add(a); }
+  public void addAttribute(Attribute a) {
+    attribute_vec.add(a);
+  }
 
   /**
    * Add a method to this class.
    * @param m method to add
    */
-  public void addMethod(Method m)          { method_vec.add(m); }
+  public void addMethod(Method m) {
+    method_vec.add(m);
+  }
 
   /**
    * Convenience method.
@@ -237,12 +288,20 @@ public class ClassGen extends AccessFlags implements Cloneable {
   public void addEmptyConstructor(int access_flags) {
     InstructionList il = new InstructionList();
     il.append(InstructionConstants.THIS); // Push `this'
-    il.append(new INVOKESPECIAL(cp.addMethodref(super_class_name,
-						"<init>", "()V")));
+    il.append(
+      new INVOKESPECIAL(cp.addMethodref(super_class_name, "<init>", "()V")));
     il.append(InstructionConstants.RETURN);
 
-    MethodGen mg = new MethodGen(access_flags, Type.VOID, Type.NO_ARGS, null,
-		       "<init>", class_name, il, cp);
+    MethodGen mg =
+      new MethodGen(
+        access_flags,
+        Type.VOID,
+        Type.NO_ARGS,
+        null,
+        "<init>",
+        class_name,
+        il,
+        cp);
     mg.setMaxStack(1);
     addMethod(mg.getMethod());
   }
@@ -251,17 +310,21 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * Add a field to this class.
    * @param f field to add
    */
-  public void addField(Field f)            { field_vec.add(f); }
+  public void addField(Field f) {
+    field_vec.add(f);
+  }
 
-  public boolean containsField(Field f)    { return field_vec.contains(f); }
-  
+  public boolean containsField(Field f) {
+    return field_vec.contains(f);
+  }
+
   /** @return field object with given name, or null
    */
   public Field containsField(String name) {
-    for(Iterator e=field_vec.iterator(); e.hasNext(); ) {
+    for (Iterator e = field_vec.iterator(); e.hasNext();) {
       Field f = (Field)e.next();
-      if(f.getName().equals(name))
-	return f;
+      if (f.getName().equals(name))
+        return f;
     }
 
     return null;
@@ -270,10 +333,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
   /** @return method object with given name and signature, or null
    */
   public Method containsMethod(String name, String signature) {
-    for(Iterator e=method_vec.iterator(); e.hasNext();) {
+    for (Iterator e = method_vec.iterator(); e.hasNext();) {
       Method m = (Method)e.next();
-      if(m.getName().equals(name) && m.getSignature().equals(signature))
-	return m;
+      if (m.getName().equals(name) && m.getSignature().equals(signature))
+        return m;
     }
 
     return null;
@@ -283,24 +346,28 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * Remove an attribute from this class.
    * @param a attribute to remove
    */
-  public void removeAttribute(Attribute a) { attribute_vec.remove(a); }
+  public void removeAttribute(Attribute a) {
+    attribute_vec.remove(a);
+  }
 
   /**
    * Remove a method from this class.
    * @param m method to remove
    */
-  public void removeMethod(Method m)       { method_vec.remove(m); }
+  public void removeMethod(Method m) {
+    method_vec.remove(m);
+  }
 
   /** Replace given method with new one. If the old one does not exist
    * add the new_ method to the class anyway.
    */
   public void replaceMethod(Method old, Method new_) {
-    if(new_ == null)
+    if (new_ == null)
       throw new ClassGenException("Replacement method must not be null");
 
     int i = method_vec.indexOf(old);
 
-    if(i < 0)
+    if (i < 0)
       method_vec.add(new_);
     else
       method_vec.set(i, new_);
@@ -310,12 +377,12 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * add the new_ field to the class anyway.
    */
   public void replaceField(Field old, Field new_) {
-    if(new_ == null)
+    if (new_ == null)
       throw new ClassGenException("Replacement method must not be null");
 
     int i = field_vec.indexOf(old);
 
-    if(i < 0)
+    if (i < 0)
       field_vec.add(new_);
     else
       field_vec.set(i, new_);
@@ -325,11 +392,19 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * Remove a field to this class.
    * @param f field to remove
    */
-  public void removeField(Field f)         { field_vec.remove(f); }
+  public void removeField(Field f) {
+    field_vec.remove(f);
+  }
 
-  public String getClassName()      { return class_name; }
-  public String getSuperclassName() { return super_class_name; }
-  public String getFileName()       { return file_name; }
+  public String getClassName() {
+    return class_name;
+  }
+  public String getSuperclassName() {
+    return super_class_name;
+  }
+  public String getFileName() {
+    return file_name;
+  }
 
   public void setClassName(String name) {
     class_name = name.replace('/', '.');
@@ -349,7 +424,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
   public void setMethods(Method[] methods) {
     method_vec.clear();
-    for(int m=0; m<methods.length; m++)
+    for (int m = 0; m < methods.length; m++)
       addMethod(methods[m]);
   }
 
@@ -362,7 +437,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   public String[] getInterfaceNames() {
-    int      size = interface_vec.size();
+    int size = interface_vec.size();
     String[] interfaces = new String[size];
 
     interface_vec.toArray(interfaces);
@@ -370,10 +445,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   public int[] getInterfaces() {
-    int   size = interface_vec.size();
+    int size = interface_vec.size();
     int[] interfaces = new int[size];
 
-    for(int i=0; i < size; i++)
+    for (int i = 0; i < size; i++)
       interfaces[i] = cp.addClass((String)interface_vec.get(i));
 
     return interfaces;
@@ -391,33 +466,45 @@ public class ClassGen extends AccessFlags implements Cloneable {
     return attributes;
   }
 
-  public ConstantPoolGen getConstantPool() { return cp; }
+  public ConstantPoolGen getConstantPool() {
+    return cp;
+  }
   public void setConstantPool(ConstantPoolGen constant_pool) {
     cp = constant_pool;
-  }    
+  }
 
   public void setClassNameIndex(int class_name_index) {
     this.class_name_index = class_name_index;
-    class_name = cp.getConstantPool().
-      getConstantString(class_name_index, Constants.CONSTANT_Class).replace('/', '.');
+    class_name =
+      cp
+        .getConstantPool()
+        .getConstantString(class_name_index, Constants.CONSTANT_Class)
+        .replace('/', '.');
   }
 
   public void setSuperclassNameIndex(int superclass_name_index) {
     this.superclass_name_index = superclass_name_index;
-    super_class_name = cp.getConstantPool().
-      getConstantString(superclass_name_index, Constants.CONSTANT_Class).replace('/', '.');
+    super_class_name =
+      cp
+        .getConstantPool()
+        .getConstantString(superclass_name_index, Constants.CONSTANT_Class)
+        .replace('/', '.');
   }
 
-  public int getSuperclassNameIndex() { return superclass_name_index; }    
+  public int getSuperclassNameIndex() {
+    return superclass_name_index;
+  }
 
-  public int getClassNameIndex()   { return class_name_index; }
+  public int getClassNameIndex() {
+    return class_name_index;
+  }
 
   private ArrayList observers;
 
   /** Add observer for this object.
    */
   public void addObserver(ClassObserver o) {
-    if(observers == null)
+    if (observers == null)
       observers = new ArrayList();
 
     observers.add(o);
@@ -426,7 +513,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
   /** Remove observer for this object.
    */
   public void removeObserver(ClassObserver o) {
-    if(observers != null)
+    if (observers != null)
       observers.remove(o);
   }
 
@@ -435,17 +522,54 @@ public class ClassGen extends AccessFlags implements Cloneable {
    * called by the user after he has finished editing the object.
    */
   public void update() {
-    if(observers != null)
-      for(Iterator e = observers.iterator(); e.hasNext(); )
-	((ClassObserver)e.next()).notify(this);
+    if (observers != null) {
+      for (Iterator e = observers.iterator(); e.hasNext();) {
+        ((ClassObserver)e.next()).notify(this);
+      }
+    }
   }
 
   public Object clone() {
     try {
       return super.clone();
-    } catch(CloneNotSupportedException e) {
+    } catch (CloneNotSupportedException e) {
       System.err.println(e);
       return null;
     }
   }
+  
+	/**
+	 * @return Comparison strategy object
+	 */
+	public static BCELComparator getComparator() {
+		return _cmp;
+	}
+
+	/**
+	 * @param comparator Comparison strategy object
+	 */
+	public static void setComparator(BCELComparator comparator) {
+		_cmp = comparator;
+	}
+
+	/**
+	 * Return value as defined by given BCELComparator strategy.
+	 * By default two ClassGen objects are said to be equal when
+	 * their class names are equal.
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object obj) {
+		return _cmp.equals(this, obj);
+	}
+
+	/**
+	 * Return value as defined by given BCELComparator strategy.
+	 * By default return the hashcode of the class name.
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	public int hashCode() {
+		return _cmp.hashCode(this);
+	}
 }

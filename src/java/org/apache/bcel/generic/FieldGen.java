@@ -56,6 +56,8 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.*;
+import org.apache.bcel.util.BCELComparator;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -65,11 +67,26 @@ import java.util.Iterator;
  * course be compatible with to the declared type).
  *
  * @version $Id$
- * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see Field
  */
 public class FieldGen extends FieldGenOrMethodGen {
   private Object value = null;
+
+	private static BCELComparator _cmp = new BCELComparator() {
+		public boolean equals(Object o1, Object o2) {
+			FieldGen THIS = (FieldGen)o1;
+			FieldGen THAT = (FieldGen)o2;
+
+			return THIS.getName().equals(THAT.getName())
+				&& THIS.getSignature().equals(THAT.getSignature());
+		}
+
+		public int hashCode(Object o) {
+			FieldGen THIS = (FieldGen)o;
+			return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
+		}
+	};
 
   /**
    * Declare a field. If it is static (isStatic() == true) and has a
@@ -307,4 +324,40 @@ public class FieldGen extends FieldGenOrMethodGen {
     fg.setConstantPool(cp);
     return fg;
   }
+
+	/**
+	 * @return Comparison strategy object
+	 */
+	public static BCELComparator getComparator() {
+		return _cmp;
+	}
+
+	/**
+	 * @param comparator Comparison strategy object
+	 */
+	public static void setComparator(BCELComparator comparator) {
+		_cmp = comparator;
+	}
+
+	/**
+	 * Return value as defined by given BCELComparator strategy.
+	 * By default two FieldGen objects are said to be equal when
+	 * their names and signatures are equal.
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object obj) {
+		return _cmp.equals(this, obj);
+	}
+
+	/**
+	 * Return value as defined by given BCELComparator strategy.
+	 * By default return the hashcode of the field's name XOR signature.
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	public int hashCode() {
+		return _cmp.hashCode(this);
+	}
 }
+
