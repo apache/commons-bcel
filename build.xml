@@ -249,8 +249,9 @@ Available targets:
     <mkdir dir="${distDir}"/>
 
     <!-- Copy README and LICENSE -->
-    <copy todir="${distDir}" file="README"/>
-    <copy todir="${distDir}" file="LICENSE"/>
+    <copy todir="${distDir}" file="README.JustIce"/>
+    <copy todir="${distDir}" file="TODO.JustIce"/>
+    <copy todir="${distDir}" file="LICENSE.txt"/>
 
     <!-- Copy Jars -->
     <copy todir="${distDir}">

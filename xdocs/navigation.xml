@@ -6,17 +6,13 @@
   <body>
     <menu name="BCEL">
       <item name="Front Page" href="/index.html"/>
-      <item name="News &amp; Status" href="/news.html"/>
+      <item name="News and Status" href="/news.html"/>
+      <item name="Distributions" href="http://jakarta.apache.org/builds/jakarta-bcel/release/"/>
     </menu>
 
     <menu name="Documentation">
       <item name="Manual" href="/manual.html"/>
       <item name="FAQ" href="/faq.html"/>
-    </menu>
-
-    <menu name="Distribution">
-      <item name="Source Code" href="http://jakarta.apache.org/site/sourceindex.cgi"/>
-      <item name="Binary Code" href="http://jakarta.apache.org/site/binindex.cgi"/>
     </menu>
 
     <menu name="Get Involved">
