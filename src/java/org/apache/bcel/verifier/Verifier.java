@@ -245,7 +245,7 @@ public class Verifier{
 
 			args[k] = args[k].replace('/', '.');
 
-			System.out.println("Now verifiying: "+args[k]+"\n");
+			System.out.println("Now verifying: "+args[k]+"\n");
 
 			Verifier v = VerifierFactory.getVerifier(args[k]);
 			VerificationResult vr;
