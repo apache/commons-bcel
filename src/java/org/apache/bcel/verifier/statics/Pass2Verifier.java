@@ -246,8 +246,13 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				String name_and_sig = (methods[i].getName()+methods[i].getSignature());
 
 				if (hashmap.containsKey(name_and_sig)){
-					if (methods[i].isFinal()){
-						throw new ClassConstraintException("Method '"+name_and_sig+"' in class '"+hashmap.get(name_and_sig)+"' overrides the final (not-overridable) definition in class '"+jc.getClassName()+"'.");
+					if ( methods[i].isFinal() ){
+					  if (!(methods[i].isPrivate())) {
+						  throw new ClassConstraintException("Method '"+name_and_sig+"' in class '"+hashmap.get(name_and_sig)+"' overrides the final (not-overridable) definition in class '"+jc.getClassName()+"'.");
+					  }
+					  else{
+						  addMessage("Method '"+name_and_sig+"' in class '"+hashmap.get(name_and_sig)+"' overrides the final (not-overridable) definition in class '"+jc.getClassName()+"'. This is okay, as the original definition was private; however this constraint leverage was introduced by JLS 8.4.6 (not vmspec2) and the behaviour of the Sun verifiers.");
+					  }
 					}
 					else{
 						if (!methods[i].isStatic()){ // static methods don't inherit
