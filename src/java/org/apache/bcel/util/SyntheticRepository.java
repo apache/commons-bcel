@@ -19,6 +19,7 @@ package org.apache.bcel.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.SoftReference;
 import java.util.HashMap;
 
 import org.apache.bcel.classfile.ClassParser;
@@ -76,7 +77,7 @@ public class SyntheticRepository implements Repository {
    * Store a new JavaClass instance into this Repository.
    */
   public void storeClass(JavaClass clazz) {
-    _loadedClasses.put(clazz.getClassName(), clazz);
+    _loadedClasses.put(clazz.getClassName(), new SoftReference(clazz));
     clazz.setRepository(this);
   }
 
@@ -91,7 +92,10 @@ public class SyntheticRepository implements Repository {
    * Find an already defined (cached) JavaClass object by name.
    */
   public JavaClass findClass(String className) {
-    return (JavaClass)_loadedClasses.get(className);
+    SoftReference ref = (SoftReference)_loadedClasses.get(className);
+    if (ref == null)
+      return null;
+    return (JavaClass)ref.get();
   }
 
   /**
