@@ -55,6 +55,7 @@ package org.apache.bcel.verifier.statics;
  */
 
 import org.apache.bcel.classfile.*;
+import org.apache.bcel.verifier.exc.*;
 
 /**
  * BCEL's Node classes (those from the classfile API that <B>accept()</B> Visitor
@@ -74,18 +75,27 @@ import org.apache.bcel.classfile.*;
 public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor implements Visitor{
 	/** The string representation, created by a visitXXX() method, output by toString(). */
 	private String tostring;
+  /** The node we ask for its string representation. Not really needed; only for debug output. */
+  private Node n;
 	/**
 	 * Creates a new StringRepresentation object which is the representation of n.
 	 *
 	 * @see #toString()
 	 */
 	public StringRepresentation(Node n){
-		n.accept(this);
+		this.n = n;
+		n.accept(this); // assign a string representation to field 'tostring' if we know n's class.
 	}
 	/**
 	 * Returns the String representation.
 	 */
 	public String toString(){
+    // The run-time check below is needed because we don't want to omit inheritance
+    // of "EmptyVisitor" and provide a thousand empty methods.
+    // However, in terms of performance this would be a better idea.
+    // If some new "Node" is defined in BCEL (such as some concrete "Attribute"), we
+    // want to know that this class has also to be adapted.
+    if (tostring == null) throw new AssertionViolatedException("Please adapt '"+getClass()+"' to deal with objects of class '"+n.getClass()+"'.");
 		return tostring;
 	}
 	/**

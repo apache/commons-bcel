@@ -78,6 +78,7 @@ import java.util.HashMap;
  * @see     InnerClasses
  * @see     Synthetic
  * @see     Deprecated
+ * @see     Signature
 */
 public abstract class Attribute implements Cloneable, Node {
   protected int          name_index; // Points to attribute name in constant pool
