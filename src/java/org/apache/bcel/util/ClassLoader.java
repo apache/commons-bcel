@@ -104,6 +104,7 @@ public class ClassLoader extends java.lang.ClassLoader {
   /** @param deferTo delegate class loader to use for ignored packages
    */
   public ClassLoader(java.lang.ClassLoader deferTo) {
+    this();
     this.deferTo = deferTo;
     this.repository = new ClassLoaderRepository(deferTo);
   }
