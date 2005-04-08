@@ -258,7 +258,15 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
         dir.mkdirs();
     }
 
-    dump(new DataOutputStream(new FileOutputStream(file)));
+    DataOutputStream dos = null;
+    try {
+    	dos = new DataOutputStream(new FileOutputStream(file));
+    	dump(dos);
+    }
+    finally {
+    	if (dos != null)
+    		dos.close();
+    }
   }
 
   /** 
@@ -338,8 +346,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
         attributes[i].dump(file);
     } else
       file.writeShort(0);
-
-    file.close();
+    file.flush();
   }
 
   /**
