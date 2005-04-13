@@ -74,7 +74,7 @@ public final class ClassParser {
    *
    * @param file_name file name
    */
-  public ClassParser(String file_name)
+  public ClassParser(String file_name) throws IOException 
   {    
     is_zip = false;
     this.file_name = file_name;
