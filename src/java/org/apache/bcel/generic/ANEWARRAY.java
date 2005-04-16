@@ -26,7 +26,7 @@ import org.apache.bcel.ExceptionConstants;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ANEWARRAY extends CPInstruction
-  implements LoadClass, AllocationInstruction, ExceptionThrower, StackProducer {
+  implements LoadClass, AllocationInstruction, ExceptionThrower, StackConsumer, StackProducer {
   /**
    * Empty constructor needed for the Class.newInstance() statement in
    * Instruction.readInstruction(). Not to be used otherwise.
