@@ -16,9 +16,10 @@
  */ 
 package org.apache.bcel.generic;
 
-import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.*;
 import java.util.StringTokenizer;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantPool;
 
 /**
  * Super class for the INVOKExxx family of instructions.

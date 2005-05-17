@@ -22,7 +22,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;

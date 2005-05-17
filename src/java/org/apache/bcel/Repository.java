@@ -17,9 +17,10 @@
 package org.apache.bcel;
 
 
+import java.io.IOException;
 import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.util.*;
-import java.io.*;
+import org.apache.bcel.util.ClassPath;
+import org.apache.bcel.util.SyntheticRepository;
 
 /**
  * The repository maintains informations about class interdependencies, e.g.,

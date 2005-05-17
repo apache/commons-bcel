@@ -17,10 +17,15 @@
 package org.apache.bcel.util;
 
 
+import java.io.ByteArrayInputStream;
 import java.util.Hashtable;
-import java.io.*;
-import org.apache.bcel.*;
-import org.apache.bcel.classfile.*;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * <p>Drop in replacement for the standard class loader of the JVM. You can use it

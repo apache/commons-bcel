@@ -20,7 +20,6 @@ package org.apache.bcel.verifier.structurals;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Set;
-
 import org.apache.bcel.generic.CodeExceptionGen;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.MethodGen;

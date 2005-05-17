@@ -17,7 +17,8 @@
 package org.apache.bcel.verifier.exc;
 
 
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 /**
  * A utility class providing convenience methods concerning Throwable instances.

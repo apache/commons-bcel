@@ -16,11 +16,20 @@
  */ 
 package org.apache.bcel.util;
 
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.generic.*;
-import org.apache.bcel.Repository;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import org.apache.bcel.Constants;
-import java.io.*;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.ArrayType;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.Type;
 
 /** 
  * This class takes a given JavaClass object and converts it to a

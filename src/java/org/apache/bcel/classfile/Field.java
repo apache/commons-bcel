@@ -16,11 +16,11 @@
  */ 
 package org.apache.bcel.classfile;
 
+import java.io.DataInputStream;
+import java.io.IOException;
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.BCELComparator;
-
-import java.io.*;
 
 /**
  * This class represents the field info structure, i.e., the representation 

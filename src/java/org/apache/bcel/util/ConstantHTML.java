@@ -18,8 +18,19 @@
 package org.apache.bcel.util;
 
 
-import org.apache.bcel.classfile.*;
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantFieldref;
+import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Convert constant pool into HTML file.

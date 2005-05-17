@@ -1,9 +1,8 @@
 package org.apache.bcel.generic;
-import org.apache.bcel.Constants;
-
-
-import org.apache.bcel.classfile.*;
 import java.util.ArrayList;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.AccessFlags;
+import org.apache.bcel.classfile.Attribute;
 
 /**
  * Super class for FieldGen and MethodGen objects, since they have

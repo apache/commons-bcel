@@ -20,7 +20,6 @@ package org.apache.bcel.verifier.structurals;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
-
 import org.apache.bcel.generic.ATHROW;
 import org.apache.bcel.generic.BranchInstruction;
 import org.apache.bcel.generic.GotoInstruction;

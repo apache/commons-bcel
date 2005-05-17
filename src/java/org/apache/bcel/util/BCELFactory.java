@@ -1,10 +1,40 @@
 package org.apache.bcel.util;
 
-import org.apache.bcel.generic.*;
-import org.apache.bcel.classfile.Utility;
-import org.apache.bcel.Constants;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.AllocationInstruction;
+import org.apache.bcel.generic.ArrayInstruction;
+import org.apache.bcel.generic.BranchHandle;
+import org.apache.bcel.generic.BranchInstruction;
+import org.apache.bcel.generic.CHECKCAST;
+import org.apache.bcel.generic.CPInstruction;
+import org.apache.bcel.generic.CodeExceptionGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.ConstantPushInstruction;
+import org.apache.bcel.generic.EmptyVisitor;
+import org.apache.bcel.generic.FieldInstruction;
+import org.apache.bcel.generic.IINC;
+import org.apache.bcel.generic.INSTANCEOF;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InvokeInstruction;
+import org.apache.bcel.generic.LDC;
+import org.apache.bcel.generic.LDC2_W;
+import org.apache.bcel.generic.LocalVariableInstruction;
+import org.apache.bcel.generic.MULTIANEWARRAY;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.NEWARRAY;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.RET;
+import org.apache.bcel.generic.ReturnInstruction;
+import org.apache.bcel.generic.Select;
+import org.apache.bcel.generic.Type;
 
 
 /**

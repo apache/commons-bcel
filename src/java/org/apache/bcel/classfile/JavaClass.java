@@ -17,15 +17,19 @@
 package org.apache.bcel.classfile;
 
 
-import org.apache.bcel.Constants;
-import org.apache.bcel.util.BCELComparator;
-import org.apache.bcel.util.SyntheticRepository;
-import org.apache.bcel.util.ClassVector;
-import org.apache.bcel.util.ClassQueue;
-import org.apache.bcel.generic.Type;
-
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.StringTokenizer;
+import org.apache.bcel.Constants;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.util.BCELComparator;
+import org.apache.bcel.util.ClassQueue;
+import org.apache.bcel.util.ClassVector;
+import org.apache.bcel.util.SyntheticRepository;
 
 /**
  * Represents a Java class, i.e., the data structures, constant pool,

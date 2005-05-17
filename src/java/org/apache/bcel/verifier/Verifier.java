@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.verifier.statics.Pass1Verifier;
 import org.apache.bcel.verifier.statics.Pass2Verifier;

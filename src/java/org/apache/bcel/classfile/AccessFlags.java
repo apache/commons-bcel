@@ -16,7 +16,7 @@
  */
 package org.apache.bcel.classfile;
 
-import  org.apache.bcel.Constants;
+import org.apache.bcel.Constants;
 
 /**
  * Super class for all objects that have modifiers like private, final, ...

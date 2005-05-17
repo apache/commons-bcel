@@ -16,7 +16,10 @@
  */ 
 package org.apache.bcel.generic;
 
-import org.apache.bcel.classfile.*;
+import org.apache.bcel.classfile.ConstantCP;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantUtf8;
 
 /**
  * Super class for InvokeInstruction and FieldInstruction, since they have

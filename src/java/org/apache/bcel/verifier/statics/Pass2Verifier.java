@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.Attribute;

@@ -16,7 +16,8 @@
  */ 
 package org.apache.bcel.util;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 
 /**
  * Utility class that implements a sequence of bytes which can be read

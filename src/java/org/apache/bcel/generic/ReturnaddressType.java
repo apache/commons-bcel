@@ -17,7 +17,6 @@
 package org.apache.bcel.generic;
 
 import org.apache.bcel.Constants;
-import org.apache.bcel.generic.InstructionHandle;
 
 /** 
  * Returnaddress, the type JSR or JSR_W instructions push upon the stack.

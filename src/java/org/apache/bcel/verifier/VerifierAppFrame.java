@@ -24,7 +24,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -38,7 +37,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
-
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 

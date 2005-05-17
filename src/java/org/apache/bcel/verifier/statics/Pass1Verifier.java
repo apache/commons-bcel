@@ -17,10 +17,13 @@
 package org.apache.bcel.verifier.statics;
 
 
-import org.apache.bcel.classfile.*;
 import org.apache.bcel.Repository;
-import org.apache.bcel.verifier.*;
-import org.apache.bcel.verifier.exc.*;
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.verifier.PassVerifier;
+import org.apache.bcel.verifier.VerificationResult;
+import org.apache.bcel.verifier.Verifier;
+import org.apache.bcel.verifier.exc.LoadingException;
 import org.apache.bcel.verifier.exc.Utility;
 
 /**

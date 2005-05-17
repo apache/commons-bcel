@@ -17,8 +17,16 @@
 package org.apache.bcel.util;
 
 
-import org.apache.bcel.classfile.*;
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Convert methods and fields into HTML file.

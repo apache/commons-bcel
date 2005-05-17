@@ -16,8 +16,10 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.*;
-import  org.apache.bcel.Constants;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import org.apache.bcel.Constants;
 
 /** 
  * Abstract super class for Fieldref and Methodref constants.

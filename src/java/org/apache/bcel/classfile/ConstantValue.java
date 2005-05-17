@@ -17,8 +17,10 @@
 package org.apache.bcel.classfile;
 
 
-import  org.apache.bcel.Constants;
-import  java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import org.apache.bcel.Constants;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a constant 

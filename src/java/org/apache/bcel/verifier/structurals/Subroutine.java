@@ -17,7 +17,7 @@
 package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.bcel.generic.*;
+import org.apache.bcel.generic.InstructionHandle;
 
 /**
  * This interface defines properties of JVM bytecode subroutines.

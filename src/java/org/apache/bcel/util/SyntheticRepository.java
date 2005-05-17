@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 

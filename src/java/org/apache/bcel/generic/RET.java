@@ -16,7 +16,8 @@
  */ 
 package org.apache.bcel.generic;
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import org.apache.bcel.util.ByteSequence;
 
 /** 
@@ -59,10 +60,12 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
   }
 
   private final void setWide() {
-    if(wide = index > org.apache.bcel.Constants.MAX_BYTE)
+    wide = index > org.apache.bcel.Constants.MAX_BYTE;
+    if(wide) {
       length = 4; // Including the wide byte  
-    else
+    } else {
       length = 2;
+    }
   }
 
   /**

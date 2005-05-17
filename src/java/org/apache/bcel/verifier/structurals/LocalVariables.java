@@ -17,9 +17,10 @@
 package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.bcel.generic.Type;
 import org.apache.bcel.generic.ReferenceType;
-import org.apache.bcel.verifier.exc.*;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
  * This class implements an array of local variables used for symbolic JVM

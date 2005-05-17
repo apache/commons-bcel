@@ -18,7 +18,6 @@ package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.util.ByteSequence;
 

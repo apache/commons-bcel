@@ -17,9 +17,13 @@
 package org.apache.bcel.classfile;
 
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import org.apache.bcel.Constants;
-import java.io.*;
-import java.util.*;
 
 /**
  * This class represents a reference to an unknown (i.e.,

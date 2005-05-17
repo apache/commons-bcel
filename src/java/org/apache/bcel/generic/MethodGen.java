@@ -17,11 +17,22 @@
 package org.apache.bcel.generic;
 
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Stack;
 import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.*;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.CodeException;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.LineNumber;
+import org.apache.bcel.classfile.LineNumberTable;
+import org.apache.bcel.classfile.LocalVariable;
+import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
-
-import java.util.*;
 
 /** 
  * Template class for building up a method. This is done by defining exception

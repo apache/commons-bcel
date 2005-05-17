@@ -17,7 +17,8 @@
 package org.apache.bcel.util;
 
 
-import java.lang.reflect.*;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 /**
  * Java interpreter replacement, i.e., wrapper that uses its own ClassLoader

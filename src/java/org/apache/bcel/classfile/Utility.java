@@ -17,11 +17,22 @@
 package org.apache.bcel.classfile;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.CharArrayReader;
+import java.io.CharArrayWriter;
+import java.io.FilterReader;
+import java.io.FilterWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 import org.apache.bcel.Constants;
 import org.apache.bcel.util.ByteSequence;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.zip.*;
 
 /**
  * Utility functions that do not really belong to any class in particular.

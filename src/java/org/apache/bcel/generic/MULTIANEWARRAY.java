@@ -16,10 +16,11 @@
  */ 
 package org.apache.bcel.generic;
 
-import java.io.*;
-import org.apache.bcel.util.ByteSequence;
-import org.apache.bcel.classfile.ConstantPool;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import org.apache.bcel.ExceptionConstants;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.util.ByteSequence;
 
 /** 
  * MULTIANEWARRAY - Create new mutidimensional array of references

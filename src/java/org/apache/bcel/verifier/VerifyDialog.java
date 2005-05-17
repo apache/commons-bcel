@@ -18,7 +18,6 @@ package org.apache.bcel.verifier;
 
 
 import java.awt.Color;
-
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 

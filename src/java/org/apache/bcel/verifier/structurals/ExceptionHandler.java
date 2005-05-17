@@ -17,7 +17,8 @@
 package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.bcel.generic.*;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.ObjectType;
 
 /**
  * This class represents an exception handler; that is, an ObjectType

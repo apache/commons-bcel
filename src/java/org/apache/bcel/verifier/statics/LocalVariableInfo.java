@@ -17,9 +17,9 @@
 package org.apache.bcel.verifier.statics;
 
 
-import org.apache.bcel.generic.Type;
-import org.apache.bcel.verifier.exc.*;
 import java.util.Hashtable;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
 
 /**
  * A utility class holding the information about

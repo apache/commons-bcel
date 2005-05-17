@@ -19,7 +19,6 @@ package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantPool;

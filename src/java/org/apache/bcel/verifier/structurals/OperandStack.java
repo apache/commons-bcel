@@ -17,9 +17,12 @@
 package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.bcel.generic.*;
-import org.apache.bcel.verifier.exc.*;
-import java.util.*;
+import java.util.ArrayList;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.ReferenceType;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
  * This class implements a stack used for symbolic JVM stack simulation.

@@ -16,7 +16,8 @@
  */ 
 package org.apache.bcel.generic;
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 /** 
  * JSR - Jump to subroutine

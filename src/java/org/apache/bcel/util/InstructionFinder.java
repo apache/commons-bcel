@@ -17,10 +17,17 @@
 package org.apache.bcel.util;
 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import org.apache.bcel.Constants;
-import org.apache.bcel.generic.*;
-import org.apache.regexp.*;
+import org.apache.bcel.generic.ClassGenException;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.regexp.RE;
+import org.apache.regexp.RESyntaxException;
 
 /** 
  * InstructionFinder is a tool to search for given instructions patterns,

@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassParser;

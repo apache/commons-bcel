@@ -19,9 +19,7 @@ package org.apache.bcel.verifier;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import javax.swing.UIManager;
-
 import org.apache.bcel.generic.Type;
 
 

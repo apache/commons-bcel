@@ -17,12 +17,17 @@
 package org.apache.bcel.generic;
 
 
-import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.util.BCELComparator;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.AccessFlags;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.SourceFile;
+import org.apache.bcel.util.BCELComparator;
 
 /** 
  * Template class for building up a java class. May be initialized with an

@@ -16,7 +16,8 @@
  */ 
 package org.apache.bcel.generic;
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import org.apache.bcel.util.ByteSequence;
 
 /**
@@ -69,18 +70,18 @@ public class IINC extends LocalVariableInstruction {
   }
 
   private final void setWide() {
-    if(wide = ((n > org.apache.bcel.Constants.MAX_BYTE) ||
-	       (Math.abs(c) > Byte.MAX_VALUE)))
+    wide = (n > org.apache.bcel.Constants.MAX_BYTE) || (Math.abs(c) > Byte.MAX_VALUE);
+    if(wide) {
       length = 6; // wide byte included  
-    else
+    } else {
       length = 3;
+    }
   }
 
   /**
    * Read needed data (e.g. index) from file.
    */
-  protected void initFromFile(ByteSequence bytes, boolean wide) throws IOException
-  {
+  protected void initFromFile(ByteSequence bytes, boolean wide) throws IOException {
     this.wide = wide;
 
     if(wide) {

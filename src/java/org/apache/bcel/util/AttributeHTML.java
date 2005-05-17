@@ -17,8 +17,24 @@
 package org.apache.bcel.util;
 
 
-import org.apache.bcel.classfile.*;
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.CodeException;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.InnerClass;
+import org.apache.bcel.classfile.InnerClasses;
+import org.apache.bcel.classfile.LineNumber;
+import org.apache.bcel.classfile.LineNumberTable;
+import org.apache.bcel.classfile.LocalVariable;
+import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.SourceFile;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Convert found attributes into HTML file.

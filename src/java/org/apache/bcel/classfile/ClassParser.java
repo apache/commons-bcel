@@ -16,9 +16,14 @@
  */
 package org.apache.bcel.classfile;
 
-import  org.apache.bcel.Constants;
-import  java.io.*;
-import  java.util.zip.*;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import org.apache.bcel.Constants;
 
 /**
  * Wrapper class that parses a given Java .class file. The method <A

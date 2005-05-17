@@ -17,9 +17,10 @@
 package org.apache.bcel.generic;
 
 
-import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.*;
 import java.util.ArrayList;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.Utility;
 
 /** 
  * Abstract super class for all possible java types, namely basic types

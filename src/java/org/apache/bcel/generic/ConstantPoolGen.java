@@ -19,7 +19,6 @@ package org.apache.bcel.generic;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantCP;
