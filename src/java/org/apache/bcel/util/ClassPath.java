@@ -17,9 +17,18 @@
 package org.apache.bcel.util;
 
 
-import java.util.*;
-import java.util.zip.*;
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * Responsible for loading (class) files from the CLASSPATH. Inspired by
@@ -157,7 +166,7 @@ public class ClassPath implements Serializable {
    * @return input stream for class
    */
   public InputStream getInputStream(String name) throws IOException {
-    return getInputStream(name, ".class");
+    return getInputStream(name.replace('.','/'), ".class");
   }
     
   /**
