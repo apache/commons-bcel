@@ -649,7 +649,9 @@ public class InstructionList implements Serializable {
       end.next    = next;
 
       if(next != null)
-	next.prev = end;
+	    next.prev = end;
+      else
+    	this.end = end;
     }
   }
 
