@@ -25,7 +25,6 @@ import org.apache.bcel.classfile.JavaClass;
  *
  * @version $Id$
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
- * @see ClassVector
 */
 public class ClassQueue implements java.io.Serializable {
   protected LinkedList vec  = new LinkedList();

@@ -23,12 +23,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.BCELComparator;
 import org.apache.bcel.util.ClassQueue;
-import org.apache.bcel.util.ClassVector;
 import org.apache.bcel.util.SyntheticRepository;
 
 /**
@@ -798,15 +802,15 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
    */
   public JavaClass[] getSuperClasses() throws ClassNotFoundException {
     JavaClass clazz = this;
-    ClassVector vec = new ClassVector();
+    List allSuperClasses = new ArrayList();
 
     for (clazz = clazz.getSuperClass();
       clazz != null;
       clazz = clazz.getSuperClass()) {
-      vec.addElement(clazz);
+    	allSuperClasses.add(clazz);
     }
 
-    return vec.toArray();
+    return (JavaClass[])allSuperClasses.toArray(new JavaClass[allSuperClasses.size()]);
   }
 
   /**
@@ -828,7 +832,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
    */
   public JavaClass[] getAllInterfaces() throws ClassNotFoundException {
     ClassQueue queue = new ClassQueue();
-    ClassVector vec = new ClassVector();
+    Set allInterfaces = new TreeSet();
 
     queue.enqueue(this);
 
@@ -839,7 +843,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
       JavaClass[] interfaces = clazz.getInterfaces();
 
       if (clazz.isInterface()) {
-        vec.addElement(clazz);
+    	  allInterfaces.add(clazz);
       } else {
         if (souper != null) {
           queue.enqueue(souper);
@@ -851,7 +855,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
       }
     }
 
-    return vec.toArray();
+    return (JavaClass[])allInterfaces.toArray(new JavaClass[allInterfaces.size()]);
   }
   
   /**

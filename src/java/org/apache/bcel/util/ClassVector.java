@@ -25,7 +25,8 @@ import org.apache.bcel.classfile.JavaClass;
  *
  * @version $Id$
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
- * @see ClassQueue
+ * 
+ * @deprecated as of 5.1.1 - 7/17/2005
 */
 public class ClassVector implements java.io.Serializable {
   protected ArrayList vec = new ArrayList();
