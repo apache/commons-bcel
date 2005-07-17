@@ -430,7 +430,7 @@
   <section name="2.6 Code example">
   <p>
     The following example program prompts for a number and prints the
-    faculty of it. The <tt>readLine()</tt> method reading from the
+    factorial of it. The <tt>readLine()</tt> method reading from the
     standard input may raise an <tt>IOException</tt> and if a
     misspelled number is passed to <tt>parseInt()</tt> it throws a
     <tt>NumberFormatException</tt>. Thus, the critical area of code
@@ -440,7 +440,7 @@
   <source>  
     import java.io.*;
 
-    public class Faculty {
+    public class Factorial {
       private static BufferedReader in = new BufferedReader(new
                                 InputStreamReader(System.in));
 
@@ -460,7 +460,7 @@
 
       public static void main(String[] argv) {
         int n = readInt();
-        System.out.println("Faculty of " + n + " is " + fac(n));
+        System.out.println("Factorial of " + n + " is " + fac(n));
       }
     }
   </source>
@@ -479,7 +479,7 @@
     9:  iload_0
     10: iconst_1
     11: isub
-    12: invokestatic    Faculty.fac (I)I (12)
+    12: invokestatic    Factorial.fac (I)I (12)
     15: imul
     16: ireturn
 
@@ -513,7 +513,7 @@
     4:  getstatic     java.lang.System.out Ljava/io/PrintStream;
     7:  ldc           "Please enter a number&gt; "
     9:  invokevirtual java.io.PrintStream.print (Ljava/lang/String;)V
-    12: getstatic     Faculty.in Ljava/io/BufferedReader;
+    12: getstatic     Factorial.in Ljava/io/BufferedReader;
     15: invokevirtual java.io.BufferedReader.readLine ()Ljava/lang/String;
     18: invokestatic  java.lang.Integer.parseInt (Ljava/lang/String;)I
     21: istore_0
@@ -981,7 +981,7 @@
   <p>
     Using instruction lists gives us a generic view upon the code: In
     <a href="#Figure 5">Figure 5</a> we again present the code chunk
-    of the <tt>readInt()</tt> method of the faculty example in section
+    of the <tt>readInt()</tt> method of the factorial example in section
     <a href="#2.6 Code example">2.6</a>: The local variables
     <tt>n</tt> and <tt>e1</tt> both hold two references to
     instructions, defining their scope.  There are two <tt>goto</tt>s

@@ -77,7 +77,7 @@ Available targets:
 
   <!-- Compile the examples -->
   <target name="examples" depends="compile">
-    <javac srcdir="${examples.dir}" destdir="${build.dest}" classpath="${class.path}" />
+    <javac srcdir="${examples.dir}" destdir="${build.dest}" classpath="${class.path}" debug="true" />
   </target>
 
   <!-- Creates the API documentation -->
@@ -139,7 +139,7 @@ Available targets:
 	<arg value="max.mini"/>
     </java>
 
-    <echo message="Faculty"/>
+    <echo message="Factorial"/>
     <java classname="fac" classpath="${mini.dir}" />
     <echo message="Fibonacci"/>
     <java classname="fib" classpath="${mini.dir}" />
