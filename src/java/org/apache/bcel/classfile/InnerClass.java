@@ -20,6 +20,8 @@ package org.apache.bcel.classfile;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
+
 import org.apache.bcel.Constants;
 
 /** 
@@ -31,7 +33,7 @@ import org.apache.bcel.Constants;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see InnerClasses
  */
-public final class InnerClass implements Cloneable, Node {
+public final class InnerClass implements Cloneable, Node, Serializable {
   private int inner_class_index;
   private int outer_class_index;
   private int inner_name_index;
