@@ -134,7 +134,7 @@ Available targets:
 	<arg value="max.mini"/>
     </java>
 
-    <echo message="Faculty"/>
+    <echo message="Factorial"/>
     <java classname="fac" classpath="${mini.dir}" />
     <echo message="Fibonacci"/>
     <java classname="fib" classpath="${mini.dir}" />
