@@ -125,7 +125,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
     byte         tag = Constants.ATTR_UNKNOWN; // Unknown attribute
 
     // Get class name from constant pool via `name_index' indirection
-    name_index = (int)file.readUnsignedShort();
+    name_index = file.readUnsignedShort();
     c          = (ConstantUtf8)constant_pool.getConstant(name_index, 
 							 Constants.CONSTANT_Utf8);
     name       = c.getBytes();
@@ -147,9 +147,8 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
       AttributeReader r = (AttributeReader)readers.get(name);
 
       if(r != null)
-	return r.createAttribute(name_index, length, file, constant_pool);
-      else
-	return new Unknown(name_index, length, file, constant_pool);
+    	  return r.createAttribute(name_index, length, file, constant_pool);
+	  return new Unknown(name_index, length, file, constant_pool);
 
     case Constants.ATTR_CONSTANT_VALUE:
       return new ConstantValue(name_index, length, file, constant_pool);
@@ -213,7 +212,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
   public final int   getLength()    { return length; }    
 
   /**
-   * @param Attribute length in bytes.
+   * @param length length in bytes.
    */
   public final void setLength(int length) {
     this.length = length;
@@ -272,7 +271,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
   /**
    * @return deep copy of this attribute
    */
-  public abstract Attribute copy(ConstantPool constant_pool);
+  public abstract Attribute copy(ConstantPool _constant_pool);
 
   /**
    * @return attribute name.
