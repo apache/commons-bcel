@@ -319,9 +319,9 @@ public final class Code extends Attribute {
   /**
    * @return deep copy of this attribute
    * 
-   * @param constant_pool the constant pool to duplicate
+   * @param _constant_pool the constant pool to duplicate
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  public Attribute copy(ConstantPool _constant_pool) {
     Code c = (Code) clone();
 
     if (code != null) {
@@ -329,7 +329,7 @@ public final class Code extends Attribute {
         System.arraycopy(code, 0, c.code, 0, code.length);
     }
 
-    c.constant_pool = constant_pool;
+    c.constant_pool = _constant_pool;
   
     c.exception_table = new CodeException[exception_table_length];
     for(int i=0; i < exception_table_length; i++)
@@ -337,7 +337,7 @@ public final class Code extends Attribute {
 
     c.attributes = new Attribute[attributes_count];
     for(int i=0; i < attributes_count; i++)
-      c.attributes[i] = attributes[i].copy(constant_pool);
+      c.attributes[i] = attributes[i].copy(_constant_pool);
 
     return c;
   }

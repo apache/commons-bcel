@@ -174,14 +174,14 @@ public class LocalVariableTable extends Attribute {
   /**
    * @return deep copy of this attribute
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  public Attribute copy(ConstantPool _constant_pool) {
     LocalVariableTable c = (LocalVariableTable)clone();
 
     c.local_variable_table = new LocalVariable[local_variable_table_length];
     for(int i=0; i < local_variable_table_length; i++)
       c.local_variable_table[i] = local_variable_table[i].copy();
 
-    c.constant_pool = constant_pool;
+    c.constant_pool = _constant_pool;
     return c;
   }
 

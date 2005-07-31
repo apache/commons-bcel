@@ -194,7 +194,7 @@ public abstract class FieldOrMethod extends AccessFlags
   /**
    * @return deep copy of this field
    */
-  protected FieldOrMethod copy_(ConstantPool constant_pool) {
+  protected FieldOrMethod copy_(ConstantPool _constant_pool) {
     FieldOrMethod c = null;
 
     try {
@@ -202,11 +202,11 @@ public abstract class FieldOrMethod extends AccessFlags
     } catch (CloneNotSupportedException e) {
     }
 
-    c.constant_pool = constant_pool;
+    c.constant_pool = _constant_pool;
     c.attributes = new Attribute[attributes_count];
 
     for (int i = 0; i < attributes_count; i++)
-      c.attributes[i] = attributes[i].copy(constant_pool);
+      c.attributes[i] = attributes[i].copy(_constant_pool);
 
     return c;
   }

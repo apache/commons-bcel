@@ -122,7 +122,7 @@ public final class Deprecated extends Attribute {
   /**
    * @return deep copy of this attribute
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  public Attribute copy(ConstantPool _constant_pool) {
     Deprecated c = (Deprecated)clone();
 
     if (bytes != null) {
@@ -130,7 +130,7 @@ public final class Deprecated extends Attribute {
         System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
     }
 
-    c.constant_pool = constant_pool;
+    c.constant_pool = _constant_pool;
     return c;
   }
 }

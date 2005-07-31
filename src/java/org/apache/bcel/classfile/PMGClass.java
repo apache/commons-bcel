@@ -149,7 +149,7 @@ public final class PMGClass extends Attribute {
   /**
    * @return deep copy of this attribute
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  public Attribute copy(ConstantPool _constant_pool) {
     return (PMGClass)clone();
   }
 }

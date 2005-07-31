@@ -132,7 +132,7 @@ public final class SourceFile extends Attribute {
   /**
    * @return deep copy of this attribute
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  public Attribute copy(ConstantPool _constant_pool) {
     return (SourceFile)clone();
   }
 }

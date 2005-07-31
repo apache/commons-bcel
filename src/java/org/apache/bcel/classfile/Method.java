@@ -128,10 +128,10 @@ public final class Method extends FieldOrMethod {
   public final LocalVariableTable getLocalVariableTable() {
     Code code = getCode();
 
-    if (code != null)
-      return code.getLocalVariableTable();
-    else
-      return null;
+    if (code == null)
+    	return null;
+    
+    return code.getLocalVariableTable();
   }
 
   /** @return LineNumberTable of code attribute if any, i.e. the call is forwarded
@@ -140,10 +140,10 @@ public final class Method extends FieldOrMethod {
   public final LineNumberTable getLineNumberTable() {
     Code code = getCode();
 
-    if (code != null)
-      return code.getLineNumberTable();
-    else
+    if (code == null)
       return null;
+    
+    return code.getLineNumberTable();
   }
 
   /**
@@ -201,8 +201,8 @@ public final class Method extends FieldOrMethod {
   /**
    * @return deep copy of this method
    */
-  public final Method copy(ConstantPool constant_pool) {
-    return (Method)copy_(constant_pool);
+  public final Method copy(ConstantPool _constant_pool) {
+    return (Method)copy_(_constant_pool);
   }
 
   /**

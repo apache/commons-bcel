@@ -485,14 +485,6 @@ public abstract class Utility {
     return compactClassName(str, "java.lang.", chopit);
   }    
 
-  private static final boolean is_digit(char ch) {
-    return (ch >= '0') && (ch <= '9');
-  }    
-  
-  private static final boolean is_space(char ch) {
-    return (ch == ' ') || (ch == '\t') || (ch == '\r') || (ch == '\n');
-  }    
-
   /**
    * @return `flag' with bit `i' set to 1
    */
@@ -586,9 +578,7 @@ public abstract class Utility {
       throw new ClassFormatException("Invalid method signature: " + signature);
     }
 	
-    types = new String[vec.size()];
-    vec.toArray(types);
-    return types;
+    return (String[])vec.toArray(new String[vec.size()]);
   }      
   /**
    * @param  signature    Method signature
@@ -845,7 +835,7 @@ public abstract class Utility {
 
       case '[' : { // Array declaration
 	int          n;
-	StringBuffer buf, brackets;
+	StringBuffer brackets;
 	String       type;
 	char         ch;
 	int          consumed_chars; // Shadows global var
@@ -1099,8 +1089,8 @@ public abstract class Utility {
 
     if(left_justify)
       return str + new String(buf);    
-    else
-      return new String(buf) + str;
+
+    return new String(buf) + str;
   }
 
   static final boolean equals(byte[] a, byte[] b) {
@@ -1251,8 +1241,8 @@ public abstract class Utility {
 
   // A-Z, g-z, _, $
   private static final int   FREE_CHARS  = 48;
-  private static       int[] CHAR_MAP    = new int[FREE_CHARS];
-  private static       int[] MAP_CHAR    = new int[256]; // Reverse map
+          static       int[] CHAR_MAP    = new int[FREE_CHARS];
+          static       int[] MAP_CHAR    = new int[256]; // Reverse map
   private static final char  ESCAPE_CHAR = '$';
 
   static {
@@ -1288,28 +1278,25 @@ public abstract class Utility {
     public int read() throws IOException {
       int b = in.read();
 
-      if(b != ESCAPE_CHAR) {
-	return b;
-      } else {
-	int i = in.read();
-
-	if(i < 0)
-	  return -1;
-
-	if(((i >= '0') && (i <= '9')) || ((i >= 'a') && (i <= 'f'))) { // Normal escape
-	  int j = in.read();
-
-	  if(j < 0)
+      if(b != ESCAPE_CHAR)
+    	  return b;
+      
+      int i = in.read();
+	  if(i < 0)
 	    return -1;
 
-	  char[] tmp = { (char)i, (char)j };
-	  int    s   = Integer.parseInt(new String(tmp), 16);
+	  if(((i >= '0') && (i <= '9')) || ((i >= 'a') && (i <= 'f'))) { // Normal escape
+	    int j = in.read();
 
-	  return s;
-	} else { // Special escape
+	    if(j < 0)
+	      return -1;
+
+	    char[] tmp = { (char)i, (char)j };
+	    int s   = Integer.parseInt(new String(tmp), 16);
+
+	    return s;
+	  }
 	  return MAP_CHAR[i];
-	}
-      }
     }
 
     public int read(char[] cbuf, int off, int len) throws IOException {

@@ -171,7 +171,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     Attribute[] attributes = getAttributes();
 
     // Must be last since the above calls may still add something to it
-    ConstantPool cp = this.cp.getFinalConstantPool();
+    ConstantPool _cp = this.cp.getFinalConstantPool();
 
     return new JavaClass(
       class_name_index,
@@ -180,7 +180,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
       major,
       minor,
       access_flags,
-      cp,
+      _cp,
       interfaces,
       fields,
       methods,
@@ -385,9 +385,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   public Method[] getMethods() {
-    Method[] methods = new Method[method_vec.size()];
-    method_vec.toArray(methods);
-    return methods;
+    return (Method[])method_vec.toArray(new Method[method_vec.size()]);
   }
 
   public void setMethods(Method[] methods) {
@@ -423,15 +421,11 @@ public class ClassGen extends AccessFlags implements Cloneable {
   }
 
   public Field[] getFields() {
-    Field[] fields = new Field[field_vec.size()];
-    field_vec.toArray(fields);
-    return fields;
+    return (Field[])field_vec.toArray(new Field[field_vec.size()]);
   }
 
   public Attribute[] getAttributes() {
-    Attribute[] attributes = new Attribute[attribute_vec.size()];
-    attribute_vec.toArray(attributes);
-    return attributes;
+    return (Attribute[])attribute_vec.toArray(new Attribute[attribute_vec.size()]);
   }
 
   public ConstantPoolGen getConstantPool() {

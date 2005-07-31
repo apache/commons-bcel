@@ -129,10 +129,6 @@ public final class Signature extends Attribute {
     return ch == 'T' || ch == 'L';
   }
 
-  private static boolean identPart(int ch) {
-    return ch == '/' || ch == ';';
-  }
-
   private static final void matchIdent(MyByteArrayInputStream in, StringBuffer buf) {
     int ch;
 
@@ -256,7 +252,7 @@ public final class Signature extends Attribute {
   /**
    * @return deep copy of this attribute
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  public Attribute copy(ConstantPool _constant_pool) {
     return (Signature)clone();
   }
 }

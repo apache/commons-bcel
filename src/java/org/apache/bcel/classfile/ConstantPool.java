@@ -230,11 +230,11 @@ public class ConstantPool implements Cloneable, Node, Serializable {
     if(c == null)
       throw new ClassFormatException("Constant pool at index " + index + " is null.");
 
-    if(c.getTag() == tag)
-      return c;
-    else
+    if(c.getTag() != tag)
       throw new ClassFormatException("Expected class `" + Constants.CONSTANT_NAMES[tag] + 
 				 "' at index " + index + " and got " + c);
+    
+    return c;
   }
 
   /**

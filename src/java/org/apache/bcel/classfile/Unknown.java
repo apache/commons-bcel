@@ -140,7 +140,7 @@ public final class Unknown extends Attribute {
   public final String getName() { return name; }    
 
   /**
-   * @param bytes.
+   * @param bytes the bytes to set
    */
   public final void setBytes(byte[] bytes) {
     this.bytes = bytes;
@@ -168,7 +168,7 @@ public final class Unknown extends Attribute {
   /**
    * @return deep copy of this attribute
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  public Attribute copy(ConstantPool _constant_pool) {
     Unknown c = (Unknown)clone();
 
     if (bytes != null) {
@@ -176,7 +176,7 @@ public final class Unknown extends Attribute {
         System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
     }
 
-    c.constant_pool = constant_pool;
+    c.constant_pool = _constant_pool;
     return c;
   }
 }

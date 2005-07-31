@@ -83,11 +83,9 @@ public abstract class Repository {
 			try {
 					ClassPath path = _repository.getClassPath();
 
-					if(path != null) {
-							return path.getClassFile(class_name);
-					}	else {
+					if(path == null)
 						return null;
-					}
+					return path.getClassFile(class_name);
 							
 			} catch(IOException e) { return null; }
 	}

@@ -71,23 +71,23 @@ public class DescendingVisitor implements Visitor {
    */
   public void visit() { clazz.accept(this); }
 
-  public void visitJavaClass(JavaClass clazz) {
-    stack.push(clazz);
-    clazz.accept(visitor);
+  public void visitJavaClass(JavaClass _clazz) {
+    stack.push(_clazz);
+    _clazz.accept(visitor);
 
-    Field[] fields = clazz.getFields();
+    Field[] fields = _clazz.getFields();
     for(int i=0; i < fields.length; i++)
       fields[i].accept(this);
 
-    Method[] methods = clazz.getMethods();
+    Method[] methods = _clazz.getMethods();
     for(int i=0; i < methods.length; i++)
       methods[i].accept(this);
 
-    Attribute[] attributes = clazz.getAttributes();
+    Attribute[] attributes = _clazz.getAttributes();
     for(int i=0; i < attributes.length; i++)
       attributes[i].accept(this);
 
-    clazz.getConstantPool().accept(this);
+    _clazz.getConstantPool().accept(this);
     stack.pop();
   }
 

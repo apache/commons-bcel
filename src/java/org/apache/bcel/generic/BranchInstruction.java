@@ -66,19 +66,19 @@ public abstract class BranchInstruction extends Instruction implements Instructi
   }
 
   /**
-   * @param target branch target
+   * @param _target branch target
    * @return the offset to  `target' relative to this instruction
    */
-  protected int getTargetOffset(InstructionHandle target) {
-    if(target == null)
+  protected int getTargetOffset(InstructionHandle _target) {
+    if(_target == null)
       throw new ClassGenException("Target of " + super.toString(true) + 
 				  " is invalid null handle");
 
-    int t = target.getPosition();
+    int t = _target.getPosition();
 
     if(t < 0)
       throw new ClassGenException("Invalid branch target position offset for " +
-				  super.toString(true) + ":" + t + ":" + target);
+				  super.toString(true) + ":" + t + ":" + _target);
 
     return t - position;
   }

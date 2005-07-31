@@ -57,12 +57,12 @@ public final class BasicType extends Type {
 
   /** @return a hash code value for the object.
    */
-  public int hashCode() { return (int)type; }
+  public int hashCode() { return type; }
 
   /** @return true if both type objects refer to the same type
    */
-  public boolean equals(Object type) {
-    return (type instanceof BasicType)?
-      ((BasicType)type).type == this.type : false;
+  public boolean equals(Object _type) {
+    return (_type instanceof BasicType)?
+      ((BasicType)_type).type == this.type : false;
   }
 }

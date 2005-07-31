@@ -44,14 +44,13 @@ public final class BranchHandle extends InstructionHandle {
   static final BranchHandle getBranchHandle(BranchInstruction i) {
     if(bh_list == null)
       return new BranchHandle(i);
-    else {
-      BranchHandle bh = bh_list;
-      bh_list = (BranchHandle)bh.next;
+    
+    BranchHandle bh = bh_list;
+    bh_list = (BranchHandle)bh.next;
 
-      bh.setInstruction(i);
+    bh.setInstruction(i);
 
-      return bh;
-    }
+    return bh;
   }
   
   /** Handle adds itself to the list of resuable handles.

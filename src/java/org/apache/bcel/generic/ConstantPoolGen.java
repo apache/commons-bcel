@@ -462,8 +462,8 @@ public class ConstantPoolGen implements java.io.Serializable {
    * @return index on success, -1 otherwise
    */
   public int lookupNameAndType(String name, String signature) {
-    Index index = (Index)n_a_t_table.get(name + NAT_DELIM + signature);
-    return (index != null)? index.index : -1;
+    Index _index = (Index)n_a_t_table.get(name + NAT_DELIM + signature);
+    return (_index != null)? _index.index : -1;
   }
 
   /**

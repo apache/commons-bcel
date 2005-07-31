@@ -190,14 +190,14 @@ public final class LineNumberTable extends Attribute {
   /**
    * @return deep copy of this attribute
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  public Attribute copy(ConstantPool _constant_pool) {
     LineNumberTable c = (LineNumberTable)clone();
 
     c.line_number_table = new LineNumber[line_number_table_length];
     for(int i=0; i < line_number_table_length; i++)
       c.line_number_table[i] = line_number_table[i].copy();
 
-    c.constant_pool = constant_pool;
+    c.constant_pool = _constant_pool;
     return c;
   }
 

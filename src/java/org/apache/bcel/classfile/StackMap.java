@@ -124,14 +124,14 @@ public final class StackMap extends Attribute implements Node {
   /**
    * @return deep copy of this attribute
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  public Attribute copy(ConstantPool _constant_pool) {
     StackMap c = (StackMap)clone();
 
     c.map = new StackMapEntry[map_length];
     for(int i=0; i < map_length; i++)
       c.map[i] = map[i].copy();
 
-    c.constant_pool = constant_pool;
+    c.constant_pool = _constant_pool;
     return c;
   }
 

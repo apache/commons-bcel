@@ -95,8 +95,8 @@ public final class ArrayType extends ReferenceType {
   public Type getElementType() {
     if(dimensions == 1)
       return basic_type;
-    else
-      return new ArrayType(basic_type, dimensions - 1);
+
+    return new ArrayType(basic_type, dimensions - 1);
   }
 
   /** @return number of dimensions of array
@@ -109,11 +109,12 @@ public final class ArrayType extends ReferenceType {
 
   /** @return true if both type objects refer to the same array type.
    */
-  public boolean equals(Object type) {
-    if(type instanceof ArrayType) {
-      ArrayType array = (ArrayType)type;
+  public boolean equals(Object _type) {
+    if(_type instanceof ArrayType) {
+      ArrayType array = (ArrayType)_type;
       return (array.dimensions == dimensions) && array.basic_type.equals(basic_type);
-    } else
-      return false;
+    }
+    
+    return false;
   }
 }

@@ -280,11 +280,11 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
   /** 
    * Dump class to a file named file_name.
    *
-   * @param file_name Output file name
+   * @param _file_name Output file name
    * @exception IOException
    */
-  public void dump(String file_name) throws IOException {
-    dump(new File(file_name));
+  public void dump(String _file_name) throws IOException {
+    dump(new File(_file_name));
   }
 
   /**
@@ -484,17 +484,14 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
 
   static {
     // Debugging ... on/off
-    String debug = System.getProperty("JavaClass.debug");
-
-    if (debug != null)
-      JavaClass.debug = new Boolean(debug).booleanValue();
+    debug = Boolean.getBoolean("JavaClass.debug");
 
     // Get path separator either / or \ usually
-    String sep = System.getProperty("file.separator");
+    String _sep = System.getProperty("file.separator");
 
-    if (sep != null)
+    if (_sep != null)
       try {
-        JavaClass.sep = sep.charAt(0);
+        JavaClass.sep = _sep.charAt(0);
       } catch (StringIndexOutOfBoundsException e) {
       } // Never reached
   }
@@ -817,11 +814,11 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
    * Get interfaces directly implemented by this JavaClass.
    */
   public JavaClass[] getInterfaces() throws ClassNotFoundException {
-    String[] interfaces = getInterfaceNames();
-    JavaClass[] classes = new JavaClass[interfaces.length];
+    String[] _interfaces = getInterfaceNames();
+    JavaClass[] classes = new JavaClass[_interfaces.length];
 
-    for (int i = 0; i < interfaces.length; i++) {
-      classes[i] = repository.loadClass(interfaces[i]);
+    for (int i = 0; i < _interfaces.length; i++) {
+      classes[i] = repository.loadClass(_interfaces[i]);
     }
 
     return classes;
@@ -840,7 +837,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
       JavaClass clazz = queue.dequeue();
 
       JavaClass souper = clazz.getSuperClass();
-      JavaClass[] interfaces = clazz.getInterfaces();
+      JavaClass[] _interfaces = clazz.getInterfaces();
 
       if (clazz.isInterface()) {
     	  allInterfaces.add(clazz);
@@ -850,8 +847,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
         }
       }
 
-      for (int i = 0; i < interfaces.length; i++) {
-        queue.enqueue(interfaces[i]);
+      for (int i = 0; i < _interfaces.length; i++) {
+        queue.enqueue(_interfaces[i]);
       }
     }
 
