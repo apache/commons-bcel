@@ -200,6 +200,9 @@ public final class Pass3aVerifier extends PassVerifier{
 			catch(StaticCodeConstraintException scce){
 				vr = new VerificationResult(VerificationResult.VERIFIED_REJECTED, scce.getMessage());
 			}
+			catch(ClassCastException cce){
+				vr = new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Class Cast Exception: " + cce.getMessage());
+			}
 			return vr;
 		}
 		else{ //did not pass Pass 2.
