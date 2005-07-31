@@ -562,8 +562,25 @@ public final class Pass3aVerifier extends PassVerifier{
 				}
 			}
 			if (f == null){
-				/* TODO: also look up if the field is inherited! */
-				constraintViolated(o, "Referenced field '"+field_name+"' does not exist in class '"+jc.getClassName()+"'.");
+				JavaClass[] superclasses = jc.getSuperClasses();
+				outer: 
+				for (int j=0; j<superclasses.length; j++){
+					fields = superclasses[j].getFields();
+					for (int i=0; i<fields.length; i++){
+						if (fields[i].getName().equals(field_name)){
+							Type f_type = Type.getType(fields[i].getSignature());
+							Type o_type = o.getType(cpg);
+							if (f_type.equals(o_type)){
+								f = fields[i];
+								if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0)
+									f = null;
+								break outer;
+							}
+						}
+					}
+				}
+				if (f == null)
+					constraintViolated(o, "Referenced field '"+field_name+"' does not exist in class '"+jc.getClassName()+"'.");
 			}
 			else{
 				/* TODO: Check if assignment compatibility is sufficient.

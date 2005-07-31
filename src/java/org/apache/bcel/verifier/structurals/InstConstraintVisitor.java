@@ -1173,8 +1173,27 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 					}
 			}
 		}
+
 		if (f == null){
-			throw new AssertionViolatedException("Field not found?!?");
+			JavaClass[] superclasses = jc.getSuperClasses();
+			outer: 
+			for (int j=0; j<superclasses.length; j++){
+				fields = superclasses[j].getFields();
+				for (int i=0; i<fields.length; i++){
+					if (fields[i].getName().equals(field_name)){
+						Type f_type = Type.getType(fields[i].getSignature());
+						Type o_type = o.getType(cpg);
+						if (f_type.equals(o_type)){
+							f = fields[i];
+							if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0)
+								f = null;
+							break outer;
+						}
+					}
+				}
+			}
+			if (f == null)
+				throw new AssertionViolatedException("Field '"+field_name+"' not found?!?");
 		}
 
 		if (f.isProtected()){
