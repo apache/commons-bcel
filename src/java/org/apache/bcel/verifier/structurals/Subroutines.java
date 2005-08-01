@@ -75,7 +75,7 @@ public class Subroutines{
 		 * field. This is used for the "top-level" Subroutine;
 		 * i.e. no subroutine.
 		 */
-		private final int UNSET = -1;
+		private static final int UNSET = -1;
 
 		/**
 		 * The Local Variable slot where the first
