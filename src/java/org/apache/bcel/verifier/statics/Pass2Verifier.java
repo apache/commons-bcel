@@ -1346,7 +1346,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * JustIce cannot repair this; please note that existing verifiers at this
 	 * time even fail to detect missing InnerClasses attributes in pass 2.
 	 */
-	private class InnerClassDetector extends EmptyVisitor{
+	private static class InnerClassDetector extends EmptyVisitor{
 		private boolean hasInnerClass = false;
 		private JavaClass jc;
 		private ConstantPool cp;
