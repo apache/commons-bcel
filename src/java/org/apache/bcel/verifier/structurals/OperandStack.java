@@ -185,11 +185,19 @@ public class OperandStack{
 	 * Returns a String representation of this OperandStack instance.
 	 */
 	public String toString(){
-		String s = "Slots used: "+slotsUsed()+" MaxStack: "+maxStack+".\n";
+		StringBuffer sb = new StringBuffer();
+		sb.append("Slots used: ");
+		sb.append(slotsUsed());
+		sb.append(" MaxStack: ");
+		sb.append(maxStack);
+		sb.append(".\n");
 		for (int i=0; i<size(); i++){
-			s+=peek(i)+" (Size: "+peek(i).getSize()+")\n";
+			sb.append(peek(i));
+			sb.append(" (Size: ");
+			sb.append(String.valueOf(peek(i).getSize()));
+			sb.append(")\n");
 		}
-		return s;
+		return sb.toString();
 	}
 
 	/**

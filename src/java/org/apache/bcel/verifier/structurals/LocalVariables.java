@@ -181,11 +181,14 @@ public class LocalVariables{
 	 * Returns a String representation of this object.
 	 */
 	public String toString(){
-		String s = new String();
+		StringBuffer sb = new StringBuffer();
 		for (int i=0; i<locals.length; i++){
-			s += Integer.toString(i)+": "+locals[i]+"\n";
+			sb.append(Integer.toString(i));
+			sb.append(": ");
+			sb.append(locals[i]);
+			sb.append("\n");
 		}
-		return s;
+		return sb.toString();
 	}
 
 	/**
