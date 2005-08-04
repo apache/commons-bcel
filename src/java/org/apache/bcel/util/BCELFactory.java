@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.AllocationInstruction;
 import org.apache.bcel.generic.ArrayInstruction;
+import org.apache.bcel.generic.ArrayType;
 import org.apache.bcel.generic.BranchHandle;
 import org.apache.bcel.generic.BranchInstruction;
 import org.apache.bcel.generic.CHECKCAST;
@@ -177,8 +179,10 @@ class BCELFactory extends EmptyVisitor {
 
     case Constants.ANEWARRAY:
     case Constants.NEWARRAY:
+      if (type instanceof ArrayType)
+    	  type = ((ArrayType)type).getBasicType();
       _out.println("il.append(_factory.createNewArray(" +
-		   BCELifier.printType(type) + ", (short) " + dim + "));");
+    		  BCELifier.printType(type) + ", (short) " + dim + "));");
       break;
 
     default:
