@@ -220,17 +220,22 @@ public class ClassPath implements Serializable {
    * @return byte array for file on class path
    */
   public byte[] getBytes(String name, String suffix) throws IOException {
-    InputStream is = getInputStream(name, suffix);
+	DataInputStream dis = null;
+	try {
+      InputStream is = getInputStream(name, suffix);
     
-    if(is == null)
-      throw new IOException("Couldn't find: " + name + suffix);
+      if(is == null)
+        throw new IOException("Couldn't find: " + name + suffix);
 
-    DataInputStream dis   = new DataInputStream(is);
-    byte[]          bytes = new byte[is.available()];
-    dis.readFully(bytes);
-    dis.close(); is.close();
+      dis   = new DataInputStream(is);
+      byte[]          bytes = new byte[is.available()];
+      dis.readFully(bytes);
 
-    return bytes;
+      return bytes;
+	} finally {
+      if (dis != null)
+		dis.close();
+	}
   }
 
   /**
