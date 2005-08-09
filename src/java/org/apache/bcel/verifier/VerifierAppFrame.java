@@ -331,11 +331,11 @@ public class VerifierAppFrame extends JFrame {
         JavaClass jc = null;
 	try {
           jc = Repository.lookupClass(v.getClassName());
+          all3amsg += "Method '"+jc.getMethods()[i]+"': "+vr.getMessage().replace('\n',' ')+"\n\n";
         } catch (ClassNotFoundException ex) {
           // FIXME: handle the error
           ex.printStackTrace();
         }
-        all3amsg += "Method '"+jc.getMethods()[i]+"': "+vr.getMessage().replace('\n',' ')+"\n\n";
       }
     }
     pass3aTextPane.setText(all3amsg);
@@ -363,11 +363,11 @@ public class VerifierAppFrame extends JFrame {
         JavaClass jc = null;
 	try {
           jc = Repository.lookupClass(v.getClassName());
+          all3bmsg += "Method '"+jc.getMethods()[i]+"': "+vr.getMessage().replace('\n',' ')+"\n\n";
         } catch (ClassNotFoundException ex) {
           // FIXME: handle the error
           ex.printStackTrace();
         }
-        all3bmsg += "Method '"+jc.getMethods()[i]+"': "+vr.getMessage().replace('\n',' ')+"\n\n";
       }
     }
     pass3bTextPane.setText(all3bmsg);
