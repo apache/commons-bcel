@@ -670,24 +670,24 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
 
     try {
       c = (JavaClass)clone();
+
+      c.constant_pool = constant_pool.copy();
+      c.interfaces = (int[])interfaces.clone();
+      c.interface_names = (String[])interface_names.clone();
+
+      c.fields = new Field[fields.length];
+      for (int i = 0; i < fields.length; i++)
+        c.fields[i] = fields[i].copy(c.constant_pool);
+
+      c.methods = new Method[methods.length];
+      for (int i = 0; i < methods.length; i++)
+        c.methods[i] = methods[i].copy(c.constant_pool);
+
+      c.attributes = new Attribute[attributes.length];
+      for (int i = 0; i < attributes.length; i++)
+        c.attributes[i] = attributes[i].copy(c.constant_pool);
     } catch (CloneNotSupportedException e) {
     }
-
-    c.constant_pool = constant_pool.copy();
-    c.interfaces = (int[])interfaces.clone();
-    c.interface_names = (String[])interface_names.clone();
-
-    c.fields = new Field[fields.length];
-    for (int i = 0; i < fields.length; i++)
-      c.fields[i] = fields[i].copy(c.constant_pool);
-
-    c.methods = new Method[methods.length];
-    for (int i = 0; i < methods.length; i++)
-      c.methods[i] = methods[i].copy(c.constant_pool);
-
-    c.attributes = new Attribute[attributes.length];
-    for (int i = 0; i < attributes.length; i++)
-      c.attributes[i] = attributes[i].copy(c.constant_pool);
 
     return c;
   }
