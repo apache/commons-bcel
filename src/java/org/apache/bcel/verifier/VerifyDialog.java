@@ -504,17 +504,18 @@ public void pass4Button_ActionPerformed(java.awt.event.ActionEvent actionEvent) 
 		JavaClass jc = null;
 		try {
 			jc = Repository.lookupClass(class_name);
+			
+			int nr = jc.getMethods().length;
+			for (int i=0; i<nr; i++) {
+				vr = v.doPass3b(i);
+				if (vr.getStatus() != VerificationResult.VERIFIED_OK){
+					color = Color.red;
+					break;
+				}
+			}
 		} catch (ClassNotFoundException ex) {
 			// FIXME: report the error
 			ex.printStackTrace();
-		}
-		int nr = jc.getMethods().length;
-		for (int i=0; i<nr; i++) {
-			vr = v.doPass3b(i);
-			if (vr.getStatus() != VerificationResult.VERIFIED_OK){
-				color = Color.red;
-				break;
-			}
 		}
 	}
 	else{
