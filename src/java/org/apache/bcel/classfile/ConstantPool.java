@@ -323,14 +323,14 @@ public class ConstantPool implements Cloneable, Node, Serializable {
 
     try {
       c = (ConstantPool)clone();
+      c.constant_pool = new Constant[constant_pool_count];
+
+      for(int i=1; i < constant_pool_count; i++) {
+        if(constant_pool[i] != null)
+        	c.constant_pool[i] = constant_pool[i].copy();
+      }
     } catch(CloneNotSupportedException e) {}
 
-    c.constant_pool = new Constant[constant_pool_count];
-
-    for(int i=1; i < constant_pool_count; i++) {
-      if(constant_pool[i] != null)
-	c.constant_pool[i] = constant_pool[i].copy();
-    }
 
     return c;
   }
