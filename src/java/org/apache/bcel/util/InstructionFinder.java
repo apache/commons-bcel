@@ -20,7 +20,9 @@ package org.apache.bcel.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ClassGenException;
 import org.apache.bcel.generic.Instruction;
@@ -200,7 +202,7 @@ public class InstructionFinder {
 				  " not found in instruction list.");
     try {
       RE regex = new RE(search);
-      ArrayList matches = new ArrayList();
+      List matches = new ArrayList();
 
       while(start < il_string.length() && regex.match(il_string, start)) {
 	int startExpr = regex.getParenStart(0); 

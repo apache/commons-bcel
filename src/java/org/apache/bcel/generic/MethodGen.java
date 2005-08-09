@@ -20,7 +20,9 @@ package org.apache.bcel.generic;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.Code;
@@ -59,11 +61,11 @@ public class MethodGen extends FieldGenOrMethodGen {
   private InstructionList il;
   private boolean strip_attributes;
 
-  private ArrayList variable_vec = new ArrayList();
-  private ArrayList line_number_vec = new ArrayList();
-  private ArrayList exception_vec = new ArrayList();
-  private ArrayList throws_vec = new ArrayList();
-  private ArrayList code_attrs_vec = new ArrayList();
+  private List variable_vec = new ArrayList();
+  private List line_number_vec = new ArrayList();
+  private List exception_vec = new ArrayList();
+  private List throws_vec = new ArrayList();
+  private List code_attrs_vec = new ArrayList();
 
   private static BCELComparator _cmp = new BCELComparator() {
     public boolean equals(Object o1, Object o2) {
@@ -1014,7 +1016,7 @@ m.getName(),
     return maxStackDepth;
   }
 
-  private ArrayList observers;
+  private List observers;
 
   /** Add observer for this object.
    */

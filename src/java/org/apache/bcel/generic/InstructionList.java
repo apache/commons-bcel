@@ -24,7 +24,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.util.ByteSequence;
@@ -702,7 +704,7 @@ public class InstructionList implements Serializable {
     first.prev = null; // Completely separated from rest of list
     last.next  = null;
 
-    ArrayList target_vec = new ArrayList();
+    List target_vec = new ArrayList();
 
     for(InstructionHandle ih=first; ih != null; ih = ih.next)
       ih.getInstruction().dispose(); // e.g. BranchInstructions release their targets
@@ -963,7 +965,7 @@ public class InstructionList implements Serializable {
    */
   public Instruction[] getInstructions() {
     ByteSequence  bytes        = new ByteSequence(getByteCode());
-    ArrayList     instructions = new ArrayList();
+    List instructions = new ArrayList();
 
     try {
       while(bytes.available() > 0) {
@@ -971,9 +973,7 @@ public class InstructionList implements Serializable {
       }
     } catch(IOException e) { throw new ClassGenException(e.toString()); }
 
-    Instruction[] result = new Instruction[instructions.size()];
-    instructions.toArray(result);
-    return result;
+    return (Instruction[])instructions.toArray(new Instruction[instructions.size()]);
   }
 
   public String toString() {
@@ -1227,7 +1227,7 @@ public class InstructionList implements Serializable {
     }
   }
 
-  private ArrayList observers;
+  private List observers;
 
   /** Add observer for this object.
    */

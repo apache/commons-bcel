@@ -18,6 +18,7 @@ package org.apache.bcel.verifier.statics;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A small utility class representing a set of basic int values.
@@ -27,7 +28,7 @@ import java.util.ArrayList;
  */
 public class IntList{
 	/** The int are stored as Integer objects here. */
-	private ArrayList theList;
+	private List theList;
 	/** This constructor creates an empty list. */
 	IntList(){
 		theList = new ArrayList();

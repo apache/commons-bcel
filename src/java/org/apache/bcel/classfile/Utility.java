@@ -29,8 +29,10 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.util.ByteSequence;
 
@@ -559,9 +561,8 @@ public abstract class Utility {
 							    boolean chopit)
     throws ClassFormatException
   {
-    ArrayList vec = new ArrayList();
+    List vec = new ArrayList();
     int       index;
-    String[]  types;
 
     try { // Read all declarations between for `(' and `)'
       if(signature.charAt(0) != '(')

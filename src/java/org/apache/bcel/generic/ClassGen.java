@@ -19,6 +19,8 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.AccessFlags;
 import org.apache.bcel.classfile.Attribute;
@@ -47,10 +49,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
   private ConstantPoolGen cp; // Template for building up constant pool
 
   // ArrayLists instead of arrays to gather fields, methods, etc.
-  private ArrayList field_vec = new ArrayList();
-  private ArrayList method_vec = new ArrayList();
-  private ArrayList attribute_vec = new ArrayList();
-  private ArrayList interface_vec = new ArrayList();
+  private List field_vec = new ArrayList();
+  private List method_vec = new ArrayList();
+  private List attribute_vec = new ArrayList();
+  private List interface_vec = new ArrayList();
 
   private static BCELComparator _cmp = new BCELComparator() {
     public boolean equals(Object o1, Object o2) {

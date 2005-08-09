@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.bcel.Constants;
@@ -235,7 +236,7 @@ class BCELFactory extends EmptyVisitor {
   }
 
   // Memorize BranchInstructions that need an update
-  private ArrayList branches = new ArrayList();
+  private List branches = new ArrayList();
 
   public void visitBranchInstruction(BranchInstruction bi) {
     BranchHandle bh   = (BranchHandle)branch_map.get(bi);

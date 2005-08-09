@@ -19,6 +19,8 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.Constant;
@@ -226,7 +228,7 @@ public class FieldGen extends FieldGenOrMethodGen {
 
   public String  getSignature()  { return type.getSignature(); }
 
-  private ArrayList observers;
+  private List observers;
 
   /** Add observer for this object.
    */

@@ -18,6 +18,8 @@ package org.apache.bcel.generic;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.Utility;
@@ -189,7 +191,7 @@ public abstract class Type implements java.io.Serializable {
    * @return array of argument types
    */
   public static Type[] getArgumentTypes(String signature) {
-    ArrayList vec = new ArrayList();
+    List vec = new ArrayList();
     int       index;
     Type[]     types;
 

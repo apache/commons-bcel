@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -49,7 +50,7 @@ public class ClassPath implements Serializable {
   public ClassPath(String class_path) {
     this.class_path = class_path;
 
-    ArrayList vec = new ArrayList();
+    List vec = new ArrayList();
 
     for(StringTokenizer tok=new StringTokenizer(class_path,
 						System.getProperty("path.separator"));
@@ -103,7 +104,7 @@ public class ClassPath implements Serializable {
     return false;
   }
 
-  private static final void getPathComponents(String path, ArrayList list) {
+  private static final void getPathComponents(String path, List list) {
     if(path != null) {
       StringTokenizer tok = new StringTokenizer(path, File.pathSeparator);
 
@@ -127,12 +128,12 @@ public class ClassPath implements Serializable {
     String boot_path  = System.getProperty("sun.boot.class.path");
     String ext_path   = System.getProperty("java.ext.dirs");
 
-    ArrayList list = new ArrayList();
+    List list = new ArrayList();
 
     getPathComponents(class_path, list);
     getPathComponents(boot_path, list);
 
-    ArrayList dirs = new ArrayList();
+    List dirs = new ArrayList();
     getPathComponents(ext_path, dirs);
 
     for(Iterator e = dirs.iterator(); e.hasNext(); ) {
