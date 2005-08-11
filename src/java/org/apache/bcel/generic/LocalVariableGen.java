@@ -58,6 +58,12 @@ public class LocalVariableGen
     this.name  = name;
     this.type  = type;
     this.index  = index;
+    // setStart and setEnd add 'this' to a HashSet, causing the hash to compute.
+    // The hash uses start and end, so set them before calling setStart/setEnd.
+    // Otherwise, the remove will fail because the hash is different than the add.
+    // Icky, but should be ok. See Bug: 36110  -- dbrosius
+    this.start = start;
+    this.end = end;
     setStart(start);
     setEnd(end);
   }
