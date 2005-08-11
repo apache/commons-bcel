@@ -142,11 +142,8 @@ public class LocalVariableGen
   /** @return a hash code value for the object.
    */
   public int hashCode() { 
-    int hc = index;
-    if (start != null)
-      hc ^= start.hashCode();
-    if (end != null) 
-      hc ^= end.hashCode();
+	//If the user changes the name or type, problems with the targeter hashmap will occur
+    int hc = index ^ name.hashCode() ^ type.hashCode();
     return hc;
   }
 
