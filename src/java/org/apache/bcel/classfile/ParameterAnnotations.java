@@ -42,7 +42,7 @@ public abstract class ParameterAnnotations extends Attribute {
     {
 	    this(parameter_annotation_type, name_index, length, (ParameterAnnotationEntry[]) null, constant_pool);   
 	    
-	    num_parameters = (file.readUnsignedShort());
+	    num_parameters = (file.readUnsignedByte());
 	    parameter_annotation_table = new ParameterAnnotationEntry[num_parameters];
 
 	    for(int i=0; i < num_parameters; i++)
