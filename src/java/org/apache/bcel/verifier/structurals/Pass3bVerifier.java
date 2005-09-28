@@ -20,8 +20,10 @@ package org.apache.bcel.verifier.structurals;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
@@ -72,8 +74,8 @@ public final class Pass3bVerifier extends PassVerifier{
 	 * we have about its symbolic execution predecessors.
 	 */
 	private static final class InstructionContextQueue{
-		private Vector ics = new Vector(); // Type: InstructionContext
-		private Vector ecs = new Vector(); // Type: ArrayList (of InstructionContext)
+		private List ics = new Vector(); // Type: InstructionContext
+		private List ecs = new Vector(); // Type: ArrayList (of InstructionContext)
 		public void add(InstructionContext ic, ArrayList executionChain){
 			ics.add(ic);
 			ecs.add(executionChain);

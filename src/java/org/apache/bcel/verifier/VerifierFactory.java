@@ -19,6 +19,7 @@ package org.apache.bcel.verifier;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -42,7 +43,7 @@ public class VerifierFactory{
 	/**
 	 * The VerifierFactoryObserver instances that observe the VerifierFactory.
 	 */
-	private static Vector observers = new Vector();
+	private static List observers = new Vector();
 
 	/**
 	 * The VerifierFactory is not instantiable.
@@ -93,13 +94,13 @@ public class VerifierFactory{
 	 * Adds the VerifierFactoryObserver o to the list of observers.
 	 */
 	public static void attach(VerifierFactoryObserver o){
-		observers.addElement(o);
+		observers.add(o);
 	}
 	
 	/**
 	 * Removes the VerifierFactoryObserver o from the list of observers.
 	 */
 	public static void detach(VerifierFactoryObserver o){
-			observers.removeElement(o);
+			observers.remove(o);
 	}
 }
