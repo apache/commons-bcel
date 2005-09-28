@@ -19,11 +19,11 @@ package org.apache.bcel.verifier.structurals;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
+
 import org.apache.bcel.generic.ASTORE;
 import org.apache.bcel.generic.ATHROW;
 import org.apache.bcel.generic.BranchInstruction;
@@ -466,9 +466,9 @@ public class Subroutines{
 		for (int i=0; i<handlers.length; i++){
 			InstructionHandle _protected = handlers[i].getStartPC();
 			while (_protected != handlers[i].getEndPC().getNext()){// Note the inclusive/inclusive notation of "generic API" exception handlers!
-				Enumeration subs = subroutines.elements();
-				while (subs.hasMoreElements()){
-					Subroutine sub = (Subroutine) subs.nextElement();
+				Iterator subs = subroutines.values().iterator();
+				while (subs.hasNext()){
+					Subroutine sub = (Subroutine) subs.next();
 					if (sub != subroutines.get(all[0])){	// We don't want to forbid top-level exception handlers.
 						if (sub.contains(_protected)){
 							throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+"' is protected by an exception handler, '"+handlers[i]+"'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
