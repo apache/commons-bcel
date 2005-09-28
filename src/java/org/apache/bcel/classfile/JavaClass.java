@@ -657,7 +657,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
     StringBuffer buf = new StringBuffer();
 
     while (tok.hasMoreTokens())
-      buf.append("\t" + tok.nextToken() + "\n");
+      buf.append("\t").append(tok.nextToken()).append("\n");
 
     return buf.toString();
   }
