@@ -195,19 +195,19 @@ public abstract class FieldOrMethod extends AccessFlags
    * @return deep copy of this field
    */
   protected FieldOrMethod copy_(ConstantPool _constant_pool) {
-    FieldOrMethod c = null;
 
     try {
-      c = (FieldOrMethod)clone();
+      FieldOrMethod c = (FieldOrMethod)clone();
+      c.constant_pool = _constant_pool;
+      c.attributes = new Attribute[attributes_count];
+
+      for (int i = 0; i < attributes_count; i++)
+        c.attributes[i] = attributes[i].copy(_constant_pool);
+
+      return c;
     } catch (CloneNotSupportedException e) {
+      return null;
     }
 
-    c.constant_pool = _constant_pool;
-    c.attributes = new Attribute[attributes_count];
-
-    for (int i = 0; i < attributes_count; i++)
-      c.attributes[i] = attributes[i].copy(_constant_pool);
-
-    return c;
   }
 }
