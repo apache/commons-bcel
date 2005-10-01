@@ -247,7 +247,9 @@ m.getName(),
 
             for (int k = 0; k < ln.length; k++) {
               LineNumber l = ln[k];
-              addLineNumber(il.findHandle(l.getStartPC()), l.getLineNumber());
+              InstructionHandle ih = il.findHandle(l.getStartPC());
+              if (ih != null)
+                addLineNumber(ih, l.getLineNumber());
             }
           } else if (a instanceof LocalVariableTable) {
             LocalVariable[] lv =
