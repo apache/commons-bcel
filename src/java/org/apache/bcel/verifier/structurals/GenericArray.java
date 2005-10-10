@@ -26,4 +26,8 @@ package org.apache.bcel.verifier.structurals;
  * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
  */ 
 public class GenericArray extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable{
+	
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }
