@@ -126,7 +126,6 @@ public class InstructionFactory
   private static class MethodObject {
     Type[]   arg_types;
     Type     result_type;
-    String[] arg_names;
     String   class_name;
     String   name;
     int      access;
