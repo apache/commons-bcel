@@ -602,14 +602,14 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
     access = access.equals("") ? "" : (access + " ");
 
     StringBuffer buf =
-      new StringBuffer(
-        access
-          + Utility.classOrInterface(access_flags)
-          + " "
-          + class_name
-          + " extends "
-          + Utility.compactClassName(superclass_name, false)
-          + '\n');
+      new StringBuffer(128);
+    buf.append(access)
+          .append(Utility.classOrInterface(access_flags))
+          .append(" ")
+          .append(class_name)
+          .append(" extends ")
+          .append(Utility.compactClassName(superclass_name, false))
+          .append('\n');
     int size = interfaces.length;
 
     if (size > 0) {
@@ -624,12 +624,12 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
       buf.append('\n');
     }
 
-    buf.append("filename\t\t" + file_name + '\n');
-    buf.append("compiled from\t\t" + source_file_name + '\n');
-    buf.append("compiler version\t" + major + "." + minor + '\n');
-    buf.append("access flags\t\t" + access_flags + '\n');
-    buf.append("constant pool\t\t" + constant_pool.getLength() + " entries\n");
-    buf.append("ACC_SUPER flag\t\t" + isSuper() + "\n");
+    buf.append("filename\t\t").append(file_name).append('\n');
+    buf.append("compiled from\t\t").append(source_file_name).append('\n');
+    buf.append("compiler version\t").append(major).append(".").append(minor).append('\n');
+    buf.append("access flags\t\t").append(access_flags).append('\n');
+    buf.append("constant pool\t\t").append(constant_pool.getLength()).append(" entries\n");
+    buf.append("ACC_SUPER flag\t\t").append(isSuper()).append("\n");
 
     if (attributes.length > 0) {
       buf.append("\nAttribute(s):\n");
@@ -638,15 +638,15 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
     }
 
     if (fields.length > 0) {
-      buf.append("\n" + fields.length + " fields:\n");
+      buf.append("\n").append(fields.length).append(" fields:\n");
       for (int i = 0; i < fields.length; i++)
-        buf.append("\t" + fields[i] + '\n');
+        buf.append("\t").append(fields[i]).append('\n');
     }
 
     if (methods.length > 0) {
-      buf.append("\n" + methods.length + " methods:\n");
+      buf.append("\n").append(methods.length).append(" methods:\n");
       for (int i = 0; i < methods.length; i++)
-        buf.append("\t" + methods[i] + '\n');
+        buf.append("\t").append(methods[i]).append('\n');
     }
 
     return buf.toString();

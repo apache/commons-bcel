@@ -226,7 +226,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 	    else if ((pow == Constants.ACC_TRANSIENT) && (reason == FLAG_FOR_METHOD))
 	      buf.append("ACC_VARARGS | ");
 	    else
-	      buf.append("ACC_" + Constants.ACCESS_NAMES[i].toUpperCase() + " | ");
+	      buf.append("ACC_").append(Constants.ACCESS_NAMES[i].toUpperCase()).append(" | ");
       }
 
       pow <<= 1;

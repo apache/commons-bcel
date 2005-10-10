@@ -988,7 +988,7 @@ public class InstructionList implements Serializable {
     StringBuffer buf = new StringBuffer();
 
     for(InstructionHandle ih=start; ih != null; ih = ih.next) {
-      buf.append(ih.toString(verbose) + "\n");
+      buf.append(ih.toString(verbose)).append("\n");
     }
 
     return buf.toString();

@@ -287,23 +287,24 @@ public final class Code extends Attribute {
   public final String toString(boolean verbose) {
     StringBuffer buf;
 
-    buf = new StringBuffer("Code(max_stack = " + max_stack +
-			   ", max_locals = " + max_locals +
-			   ", code_length = " + code_length + ")\n" +
-			   Utility.codeToString(code, constant_pool, 0, -1, verbose));
+    buf = new StringBuffer(100);
+    buf.append("Code(max_stack = ").append(max_stack)
+			   .append(", max_locals = ").append(max_locals)
+			   .append(", code_length = ").append(code_length).append(")\n")
+			   .append(Utility.codeToString(code, constant_pool, 0, -1, verbose));
 
     if(exception_table_length > 0) {
-      buf.append("\nException handler(s) = \n" + "From\tTo\tHandler\tType\n");
+      buf.append("\nException handler(s) = \n").append("From\tTo\tHandler\tType\n");
 
       for(int i=0; i < exception_table_length; i++)
-	buf.append(exception_table[i].toString(constant_pool, verbose) + "\n");
+        buf.append(exception_table[i].toString(constant_pool, verbose)).append("\n");
     }
 
     if(attributes_count > 0) {
       buf.append("\nAttribute(s) = \n");
 
       for(int i=0; i < attributes_count; i++)
-	buf.append(attributes[i].toString() + "\n");
+        buf.append(attributes[i].toString()).append("\n");
     }
 
     return buf.toString();    

@@ -310,7 +310,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
     StringBuffer buf = new StringBuffer();
 
     for(int i=1; i < constant_pool_count; i++)
-      buf.append(i + ")" + constant_pool[i] + "\n");
+      buf.append(i).append(")").append(constant_pool[i]).append("\n");
 
     return buf.toString();
   }

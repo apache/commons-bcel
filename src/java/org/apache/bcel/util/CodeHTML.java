@@ -87,7 +87,8 @@ final class CodeHTML implements org.apache.bcel.Constants {
     int[]        jump_table;
     int          no_pad_bytes=0, offset;
 
-    buf = new StringBuffer("<TT>" + OPCODE_NAMES[opcode] + "</TT></TD><TD>");
+    buf = new StringBuffer(256);
+    buf.append("<TT>").append(OPCODE_NAMES[opcode]).append("</TT></TD><TD>");
 
     /* Special case: Skip (0-3) padding bytes, i.e., the
      * following bytes are 4-byte-aligned
@@ -118,16 +119,16 @@ final class CodeHTML implements org.apache.bcel.Constants {
       for(int i=0; i < jump_table.length; i++) {
 	jump_table[i] = offset + bytes.readInt();
 
-	buf.append("<TH>" + (low + i) + "</TH>");
+	buf.append("<TH>").append(low + i).append("</TH>");
       }
       buf.append("<TH>default</TH></TR>\n<TR>");
 
       // Print target and default indices in second row
       for(int i=0; i < jump_table.length; i++)
-	buf.append("<TD><A HREF=\"#code" + method_number + "@" +
-		   jump_table[i] + "\">" + jump_table[i] + "</A></TD>");
-      buf.append("<TD><A HREF=\"#code" + method_number + "@" +
-		 default_offset + "\">" + default_offset + "</A></TD></TR>\n</TABLE>\n");
+	buf.append("<TD><A HREF=\"#code").append(method_number).append("@")
+		   .append(jump_table[i]).append("\">").append(jump_table[i]).append("</A></TD>");
+      buf.append("<TD><A HREF=\"#code").append(method_number).append("@")
+		 .append(default_offset).append("\">").append(default_offset).append("</A></TD></TR>\n</TABLE>\n");
 
       break;
 
@@ -146,16 +147,16 @@ final class CodeHTML implements org.apache.bcel.Constants {
 	int match = bytes.readInt();
 
 	jump_table[i] = offset + bytes.readInt();
-	buf.append("<TH>" + match + "</TH>");
+	buf.append("<TH>").append(match).append("</TH>");
       }
       buf.append("<TH>default</TH></TR>\n<TR>");
 
       // Print target and default indices in second row
       for(int i=0; i < npairs; i++)
-	buf.append("<TD><A HREF=\"#code" + method_number + "@" +
-		   jump_table[i] + "\">" + jump_table[i] + "</A></TD>");
-      buf.append("<TD><A HREF=\"#code" + method_number + "@" +
-		 default_offset + "\">" + default_offset + "</A></TD></TR>\n</TABLE>\n");
+	buf.append("<TD><A HREF=\"#code").append(method_number).append("@")
+		   .append(jump_table[i]).append("\">").append(jump_table[i]).append("</A></TD>");
+      buf.append("<TD><A HREF=\"#code").append(method_number).append("@")
+		 .append(default_offset).append("\">").append(default_offset).append("</A></TD></TR>\n</TABLE>\n");
       break;
 
       /* Two address bytes + offset from start of byte stream form the
@@ -169,15 +170,16 @@ final class CodeHTML implements org.apache.bcel.Constants {
 	  
       index = (int)(bytes.getIndex() + bytes.readShort() - 1);
 	  
-      buf.append("<A HREF=\"#code" + method_number + "@" + index + "\">" + index + "</A>");
+      buf.append("<A HREF=\"#code").append(method_number).append("@").append(index).append("\">")
+      		.append(index).append("</A>");
       break;
 	  
       /* Same for 32-bit wide jumps
        */
     case GOTO_W: case JSR_W:
       int windex = bytes.getIndex() + bytes.readInt() - 1;
-      buf.append("<A HREF=\"#code" + method_number + "@" + windex + "\">" +
-		 windex + "</A>");
+      buf.append("<A HREF=\"#code").append(method_number).append("@").append(windex).append("\">")
+		 .append(windex).append("</A>");
       break;
 
       /* Index byte references local variable (register)
@@ -192,7 +194,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
       else
 	vindex = bytes.readUnsignedByte();
 
-      buf.append("%" + vindex);
+      buf.append("%").append(vindex);
       break;
 
       /*
@@ -208,7 +210,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
       /* Array of basic type.
        */
     case NEWARRAY:
-      buf.append("<FONT COLOR=\"#00FF00\">" + TYPE_NAMES[bytes.readByte()] + "</FONT>");
+      buf.append("<FONT COLOR=\"#00FF00\">").append(TYPE_NAMES[bytes.readByte()]).append("</FONT>");
       break;
 
       /* Access object/class fields.
@@ -225,11 +227,11 @@ final class CodeHTML implements org.apache.bcel.Constants {
       String field_name = constant_pool.constantToString(index, CONSTANT_NameAndType);
 
       if(name.equals(class_name)) { // Local field
-	buf.append("<A HREF=\"" + class_name + "_methods.html#field" + field_name +
-		   "\" TARGET=Methods>" + field_name + "</A>\n");
+	buf.append("<A HREF=\"").append(class_name).append("_methods.html#field").append(field_name)
+		   .append("\" TARGET=Methods>").append(field_name).append("</A>\n");
       }
       else
-	buf.append(constant_html.referenceConstant(class_index) + "." + field_name);
+	buf.append(constant_html.referenceConstant(class_index)).append(".").append(field_name);
 	  		
       break;
 	  
@@ -275,8 +277,8 @@ final class CodeHTML implements org.apache.bcel.Constants {
       String[] args = Utility.methodSignatureArgumentTypes(signature, false);
       String   type = Utility.methodSignatureReturnType(signature, false);
 
-      buf.append(name + ".<A HREF=\"" + class_name + "_cp.html#cp" + m_index + 
-		 "\" TARGET=ConstantPool>" + str + "</A>" + "(");
+      buf.append(name).append(".<A HREF=\"").append(class_name).append("_cp.html#cp").append(m_index) 
+		 .append("\" TARGET=ConstantPool>").append(str).append("</A>").append("(");
 
       // List arguments
       for(int i=0; i < args.length; i++) {
@@ -286,7 +288,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
 	  buf.append(", ");
       }
       // Attach return type
-      buf.append("):" + Class2HTML.referenceType(type));
+      buf.append("):").append(Class2HTML.referenceType(type));
 
       break;
 		
@@ -295,22 +297,22 @@ final class CodeHTML implements org.apache.bcel.Constants {
     case LDC_W: case LDC2_W:
       index = bytes.readShort();
 
-      buf.append("<A HREF=\"" + class_name + "_cp.html#cp" + index + 
-		 "\" TARGET=\"ConstantPool\">" +
-		 Class2HTML.toHTML(constant_pool.constantToString(index, 
+      buf.append("<A HREF=\"").append(class_name).append("_cp.html#cp").append(index) 
+		 .append("\" TARGET=\"ConstantPool\">")
+		 .append(Class2HTML.toHTML(constant_pool.constantToString(index, 
 								  constant_pool.
-								  getConstant(index).getTag()))+
-		 "</a>");
+								  getConstant(index).getTag())))
+		 .append("</a>");
       break;
 
     case LDC:
       index = bytes.readUnsignedByte();
-      buf.append("<A HREF=\"" + class_name + "_cp.html#cp" + index + 
-		 "\" TARGET=\"ConstantPool\">" +
-		 Class2HTML.toHTML(constant_pool.constantToString(index, 
+      buf.append("<A HREF=\"").append(class_name).append("_cp.html#cp").append(index) 
+		 .append("\" TARGET=\"ConstantPool\">")
+		 .append(Class2HTML.toHTML(constant_pool.constantToString(index, 
 								  constant_pool.
-								  getConstant(index).getTag()))+
-		 "</a>");
+								  getConstant(index).getTag())))
+		 .append("</a>");
       break;
 	
       /* Array of references.
@@ -326,7 +328,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
     case MULTIANEWARRAY:
       index = bytes.readShort();
       int dimensions = bytes.readByte();
-      buf.append(constant_html.referenceConstant(index) + ":" + dimensions + "-dimensional");
+      buf.append(constant_html.referenceConstant(index)).append(":").append(dimensions).append("-dimensional");
       break;
 
       /* Increment local variable.
@@ -341,7 +343,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
 	vindex   = bytes.readUnsignedByte();
 	constant = bytes.readByte();
       }
-      buf.append("%" + vindex + " " + constant);
+      buf.append("%").append(vindex).append(" ").append(constant);
       break;
 
     default:

@@ -185,14 +185,14 @@ public final class Method extends FieldOrMethod {
       Attribute a = attributes[i];
 
       if (!((a instanceof Code) || (a instanceof ExceptionTable)))
-        buf.append(" [" + a.toString() + "]");
+        buf.append(" [").append(a.toString()).append("]");
     }
 
     ExceptionTable e = getExceptionTable();
     if (e != null) {
       String str = e.toString();
       if (!str.equals(""))
-        buf.append("\n\t\tthrows " + str);
+        buf.append("\n\t\tthrows ").append(str);
     }
 
     return buf.toString();

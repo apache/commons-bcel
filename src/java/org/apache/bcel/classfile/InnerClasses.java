@@ -124,7 +124,7 @@ public final class InnerClasses extends Attribute {
     StringBuffer buf = new StringBuffer();
 
     for(int i=0; i < number_of_classes; i++)
-      buf.append(inner_classes[i].toString(constant_pool) + "\n");
+      buf.append(inner_classes[i].toString(constant_pool)).append("\n");
 
     return buf.toString();
   }

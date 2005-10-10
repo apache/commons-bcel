@@ -115,17 +115,18 @@ public final class Field extends FieldOrMethod {
     signature = Utility.signatureToString(getSignature());
     name = getName();
 
-    StringBuffer buf = new StringBuffer(access + signature + " " + name);
+    StringBuffer buf = new StringBuffer(64);
+    buf.append(access).append(signature).append(" ").append(name);
     ConstantValue cv = getConstantValue();
 
     if (cv != null)
-      buf.append(" = " + cv);
+      buf.append(" = ").append(cv);
 
     for (int i = 0; i < attributes_count; i++) {
       Attribute a = attributes[i];
 
       if (!(a instanceof ConstantValue))
-        buf.append(" [" + a.toString() + "]");
+        buf.append(" [").append(a.toString()).append("]");
     }
 
     return buf.toString();

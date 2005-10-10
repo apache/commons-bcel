@@ -1068,7 +1068,7 @@ m.getName(),
 
     if (throws_vec.size() > 0) {
       for (Iterator e = throws_vec.iterator(); e.hasNext();)
-        buf.append("\n\t\tthrows " + e.next());
+        buf.append("\n\t\tthrows ").append(e.next());
     }
 
     return buf.toString();

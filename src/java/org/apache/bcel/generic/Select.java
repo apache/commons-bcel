@@ -139,7 +139,7 @@ public abstract class Select extends BranchInstruction
 	if(targets[i] != null)
 	  s = targets[i].getInstruction().toString();
 	
-	buf.append("(" + match[i] + ", " + s + " = {" + indices[i] + "})");
+	buf.append("(").append(match[i]).append(", ").append(s).append(" = {").append(indices[i]).append("})");
       }
     }
     else

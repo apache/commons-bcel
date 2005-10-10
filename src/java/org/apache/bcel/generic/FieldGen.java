@@ -277,11 +277,12 @@ public class FieldGen extends FieldGenOrMethodGen {
     signature = type.toString();
     name      = getName();
 
-    StringBuffer buf = new StringBuffer(access + signature + " " + name);
+    StringBuffer buf = new StringBuffer(32);
+    buf.append(access).append(signature).append(" ").append(name);
     String value = getInitValue();
 
     if(value != null)
-      buf.append(" = " + value);
+      buf.append(" = ").append(value);
 
     return buf.toString();
   }

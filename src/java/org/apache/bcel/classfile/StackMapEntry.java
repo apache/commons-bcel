@@ -94,15 +94,16 @@ public final class StackMapEntry implements Cloneable {
    * @return String representation.
    */ 
   public final String toString() {
-    StringBuffer buf = new StringBuffer("(offset=" + byte_code_offset);
+    StringBuffer buf = new StringBuffer(64);
+    buf.append("(offset=").append(byte_code_offset);
 
     if(number_of_locals > 0) {
       buf.append(", locals={");
 
       for(int i=0; i < number_of_locals; i++) {
-	buf.append(types_of_locals[i]);
-	if(i < number_of_locals - 1)
-	  buf.append(", ");
+	    buf.append(types_of_locals[i]);
+	    if(i < number_of_locals - 1)
+	      buf.append(", ");
       }
 
       buf.append("}");
@@ -112,9 +113,9 @@ public final class StackMapEntry implements Cloneable {
       buf.append(", stack items={");
 
       for(int i=0; i < number_of_stack_items; i++) {
-	buf.append(types_of_stack_items[i]);
-	if(i < number_of_stack_items - 1)
-	  buf.append(", ");
+	    buf.append(types_of_stack_items[i]);
+	    if(i < number_of_stack_items - 1)
+	      buf.append(", ");
       }
 
       buf.append("}");

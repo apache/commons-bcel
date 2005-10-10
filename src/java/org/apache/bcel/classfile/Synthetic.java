@@ -121,7 +121,7 @@ public final class Synthetic extends Attribute {
     StringBuffer buf = new StringBuffer("Synthetic");
 
     if(length > 0)
-      buf.append(" " + Utility.toHexString(bytes));
+      buf.append(" ").append(Utility.toHexString(bytes));
 
     return buf.toString();
   }
