@@ -198,7 +198,7 @@ public class listclass {
       if(c != null && c.getTag() == Constants.CONSTANT_Class) {
         ConstantUtf8 c1 = (ConstantUtf8) pool.getConstant(((ConstantClass)c).getNameIndex());
         buf.setLength(0);
-        buf.append(new String(c1.getBytes()));
+        buf.append(c1.getBytes());
         for(int n = 0; n < buf.length(); n++) {
           if(buf.charAt(n) == '/')
             buf.setCharAt(n, '.');
