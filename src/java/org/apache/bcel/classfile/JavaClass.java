@@ -47,7 +47,7 @@ import org.apache.bcel.util.SyntheticRepository;
  * @see org.apache.bcel.generic.ClassGen
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class JavaClass extends AccessFlags implements Cloneable, Node {
+public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable {
   private String file_name;
   private String package_name;
   private String source_file_name = "<Unknown>";
@@ -878,6 +878,14 @@ public class JavaClass extends AccessFlags implements Cloneable, Node {
    */
   public boolean equals(Object obj) {
     return _cmp.equals(this, obj);
+  }
+  
+  /**
+   * Return the natural ordering of two JavaClasses.
+   * This ordering is based on the class name
+   */
+  public int compareTo(Object obj) {
+	  return getClassName().compareTo(((JavaClass)obj).getClassName());
   }
 
   /**
