@@ -16,8 +16,6 @@
  */ 
 package org.apache.bcel.verifier.structurals;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -341,6 +339,11 @@ public class Subroutines{
 
 	}// end Inner Class SubrouteImpl
 
+	//Node coloring constants
+	private static final Integer WHITE = new Integer(0);
+	private static final Integer GRAY = new Integer(1);
+	private static final Integer BLACK = new Integer(2);
+	
 	/**
 	 * The Hashtable containing the subroutines found.
 	 * Key: InstructionHandle of the leader of the subroutine.
@@ -408,7 +411,7 @@ public class Subroutines{
 		// instructions that belong to a subroutine.
 		Set instructions_assigned = new HashSet(); // we don't want to assign an instruction to two or more Subroutine objects.
 		
-		Hashtable colors = new Hashtable(); //Graph colouring. Key: InstructionHandle, Value: java.awt.Color .
+		Hashtable colors = new Hashtable(); //Graph colouring. Key: InstructionHandle, Value: Integer .
 		
 		iter = sub_leaders.iterator();
 		while (iter.hasNext()){
@@ -416,9 +419,9 @@ public class Subroutines{
 			InstructionHandle actual = (InstructionHandle) (iter.next());
 			// Init colors
 			for (int i=0; i<all.length; i++){
-				colors.put(all[i], Color.white);
+				colors.put(all[i], WHITE);
 			}
-			colors.put(actual, Color.gray);
+			colors.put(actual, GRAY);
 			// Init Queue
 			ArrayList Q = new ArrayList();
 			Q.add(actual); // add(Obj) adds to the end, remove(0) removes from the start.
@@ -426,7 +429,7 @@ public class Subroutines{
 			/* BFS ALGORITHM MODIFICATION: Start out with multiple "root" nodes, as exception handlers are starting points of top-level code, too. [why top-level? TODO: Refer to the special JustIce notion of subroutines.]*/
 			if (actual == all[0]){
 				for (int j=0; j<handlers.length; j++){
-					colors.put(handlers[j].getHandlerPC(), Color.gray);
+					colors.put(handlers[j].getHandlerPC(), GRAY);
 					Q.add(handlers[j].getHandlerPC());
 				}
 			}
@@ -437,16 +440,16 @@ public class Subroutines{
 				InstructionHandle u = (InstructionHandle) Q.remove(0);
 				InstructionHandle[] successors = getSuccessors(u);
 				for (int i=0; i<successors.length; i++){
-					if (((Color) colors.get(successors[i])) == Color.white){
-						colors.put(successors[i], Color.gray);
+					if (((Integer) colors.get(successors[i])) == WHITE){
+						colors.put(successors[i], GRAY);
 						Q.add(successors[i]);
 					}
 				}
-				colors.put(u, Color.black);
+				colors.put(u, BLACK);
 			}
 			// BFS ended above.
 			for (int i=0; i<all.length; i++){
-				if (colors.get(all[i]) == Color.black){
+				if (colors.get(all[i]) == BLACK){
 					((SubroutineImpl) (actual==all[0]?getTopLevel():getSubroutine(actual))).addInstruction(all[i]);
 					if (instructions_assigned.contains(all[i])){
 						throw new StructuralCodeConstraintException("Instruction '"+all[i]+"' is part of more than one subroutine (or of the top level and a subroutine).");
