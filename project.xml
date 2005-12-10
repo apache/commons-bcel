@@ -4,7 +4,7 @@
   <pomVersion>3</pomVersion>
   <name>jakarta-bcel</name>
   <id>bcel</id>
-  <currentVersion>5.1</currentVersion>
+  <currentVersion>5.2rc1</currentVersion>
   <organization>
     <name>Apache Software Foundation</name>
     <url>http://www.apache.org</url>
