@@ -4,7 +4,7 @@
 
   <properties>
     <title>BCEL Contributors</title>
-    <author email="jvanzyl@zenplex.com">Jason van Zyl</author>
+    <author email="jvanzyl at zenplex.com">Jason van Zyl</author>
   </properties>
 
   <body>
@@ -14,28 +14,32 @@
   <p>
     <table>
       <tr>
+        <td>Dave Brosius</td>
+        <td>dbrosius at qis.net</td>
+      </tr>
+      <tr>
         <td>Markus Dahm</td>
-        <td><a href="mailto:m.dahm@gmx.de">m.dahm@gmx.de</a></td>
+        <td>m.dahm at gmx.de</td>
       </tr>
       <tr>
         <td>Conor MacNeill</td>
-        <td><a href="mailto:conor@cortexbusiness.com.au">conor@cortexbusiness.com.au</a></td>
+        <td>conor at cortexbusiness.com.au</td>
       </tr>
       <tr>
         <td>Costin Manolache</td>
-        <td><a href="mailto:cmanolache@yahoo.com">cmanolache@yahoo.com</a></td>
+        <td>cmanolache at yahoo.com</td>
       </tr>
       <tr>
         <td>Jason van Zyl</td>
-        <td><a href="mailto:jvanzyl@zenplex.com">jvanzyl@zenplex.com</a></td>
+        <td>jvanzyl at zenplex.com</td>
       </tr>
       <tr>
         <td>David Dixon-Peugh</td>
-        <td><a href="mailto:dixonpeugh@yahoo.com">dixonpeugh@yahoo.com</a></td>
+        <td>dixonpeugh at yahoo.com</td>
       </tr>
       <tr>
         <td>Enver Haase</td>
-        <td><a href="mailto:enver@convergence.de">enver@convergence.de</a></td>
+        <td>enver at convergence.de</td>
       </tr>
     </table>
   </p>
@@ -46,7 +50,7 @@
     <table>
       <tr>
         <td>Patrick Beard</td>
-        <td><a href="mailto:beard@netscape.com">beard@netscape.com</a></td>
+        <td>beard at netscape.com</td>
       </tr>
     </table>
   </p>
