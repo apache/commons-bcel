@@ -1,3 +1,0 @@
-Created-By: Jakarta BCEL 5.1
-Manifest-Version: 1.0
-Main-Class: listclass

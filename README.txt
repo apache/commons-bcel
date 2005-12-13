@@ -1,4 +1,5 @@
 
+
 --------------------------------
 RUNNING A CONSOLE-BASED VERIFIER
 --------------------------------
@@ -38,3 +39,16 @@ CONTACT THE AUTHOR
 
 If you do something useful with JustIce, I'd like to hear about it!
 Enver Haase <ehaase@inf.fu-berlin.de>
+$Id$
+
+------------------------------------------------------------------------------
+If you spot a bug in the BCEL or its accompanying verifier "JustIce" please
+check with the BCEL mailing list
+
+ http://jakarta.apache.org/site/mail2.html#BCEL
+
+and / or enter the issue into the BCEL bug database
+
+ http://issues.apache.org/bugzilla/enter_bug.cgi?product=BCEL
+------------------------------------------------------------------------------
+
