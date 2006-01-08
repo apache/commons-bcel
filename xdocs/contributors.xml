@@ -1,16 +1,13 @@
 <?xml version="1.0"?>
 
 <document>
-
   <properties>
     <title>BCEL Contributors</title>
-    <author email="jvanzyl at zenplex.com">Jason van Zyl</author>
   </properties>
 
   <body>
 
   <section name="Developers">
-
   <p>
     <table>
       <tr>
@@ -20,6 +17,25 @@
       <tr>
         <td>Markus Dahm</td>
         <td>m.dahm at gmx.de</td>
+      </tr>
+      <tr>
+        <td>Torsten Curdt</td>
+        <td>tcurdt at apache.org</td>
+      </tr>
+    </table>
+  </p>
+  </section>
+
+  <section name="Past Contributors">
+  <p>
+    <table>
+      <tr>
+        <td>David Dixon-Peugh</td>
+        <td>dixonpeugh at yahoo.com</td>
+      </tr>
+      <tr>
+        <td>Patrick Beard</td>
+        <td>beard at netscape.com</td>
       </tr>
       <tr>
         <td>Conor MacNeill</td>
@@ -34,28 +50,12 @@
         <td>jvanzyl at zenplex.com</td>
       </tr>
       <tr>
-        <td>David Dixon-Peugh</td>
-        <td>dixonpeugh at yahoo.com</td>
-      </tr>
-      <tr>
         <td>Enver Haase</td>
         <td>enver at convergence.de</td>
       </tr>
     </table>
   </p>
   </section>
-
-  <section name="Past Contributors">
-  <p>
-    <table>
-      <tr>
-        <td>Patrick Beard</td>
-        <td>beard at netscape.com</td>
-      </tr>
-    </table>
-  </p>
-  </section>
-
 
 </body>
 </document>

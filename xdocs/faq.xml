@@ -4,8 +4,7 @@
 
   <properties>
     <title>BCEL FAQ</title>
-    <author email="jvanzyl@zenplex.com">Jason van Zyl</author>
-  </properties>
+  </properties> 
 
   <body>
 
@@ -39,12 +38,10 @@
 
     <p>
       <b>Q: </b> (Typically for users of Xalan (XSLTC)) I'm getting
-
-    <pre>
-    ClassGenException: Branch target offset too large for short
-    </pre>
-
-     when compiling large files.
+      <pre>
+      ClassGenException: Branch target offset too large for short
+      </pre>
+      when compiling large files.
       <br/>
 
       <b>A: </b> The answer lies in internal limitations of the JVM,

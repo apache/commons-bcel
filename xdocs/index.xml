@@ -2,11 +2,6 @@
 
 <document>
 
-  <properties>
-    <title></title>
-    <author email="jvanzyl@zenplex.com">Jason van Zyl</author>
-  </properties>
-
   <body>
   
   <section name="BCEL">
@@ -29,15 +24,17 @@
   </p>
   
   <p>
-    BCEL is already being used successfully in several projects such
-    as compilers, optimizers, obsfuscators, code generators
-    and analysis tools.
+    BCEL contains a byte code verifier named JustIce, which usually
+    gives you much better information about what's wrong with your
+    code than the standard JVM message.
   </p>
 
   <p>
-    It contains a byte code verifier named JustIce, which usually
-    gives you much better information about what's wrong with your
-    code than the standard JVM message.
+    BCEL is already being used successfully in several projects such
+    as compilers, optimizers, obsfuscators, code generators
+    and analysis tools. Unfortunately there hasn't been much development
+    going on over the past few years. Feel free to help out or you
+    might want to have a look into the ASM project at objectweb.
   </p>
 
   </section>

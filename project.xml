@@ -21,13 +21,23 @@
     Bytecode Engineering Library
   </description>
 
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>/LICENSE.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <gumpRepositoryId>jakarta</gumpRepositoryId>
   <url>http://jakarta.apache.org/bcel/</url>
-  <siteAddress>jakarta.apache.org</siteAddress>
+  <issueTrackingUrl>http://issues.apache.org/bugzilla/</issueTrackingUrl>
+  <siteAddress>minotaur.apache.org</siteAddress>
   <siteDirectory>/www/jakarta.apache.org/bcel/</siteDirectory>
 
   <repository>
     <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/bcel/trunk</connection>
-    <url>http://svn.apache.org/viewcvs.cgi/jakarta/bcel/</url>
+    <url>http://svn.apache.org/repos/asf/jakarta/bcel/trunk</url>
   </repository>
 
   <mailingLists>
@@ -50,44 +60,58 @@
     <developer>
       <name>Markus Dahm</name>
       <id>mdahm</id>
-      <email>m.dahm@gmx.de</email>
+      <email>m.dahm at gmx.de</email>
       <organization>it-frameworksolutions</organization>
     </developer>
 
     <developer>
       <name>Jason van Zyl</name>
       <id>jvanzyl</id>
-      <email>jason@zenplex.com</email>
+      <email>jason at zenplex.com</email>
       <organization>Zenplex</organization>
     </developer>
 
     <developer>
       <name>Enver Haase</name>
       <id>ehaase</id>
-      <email>enver@convergence.de</email>
+      <email>enver at convergence.de</email>
       <organization>convergence</organization>
     </developer>
 
     <developer>
       <name>Dave Brosius</name>
       <id>dbrosius</id>
-      <email>dbrosius@qis.net</email>
-      <organization></organization>
+      <email>dbrosius at qis.net</email>
+    </developer>
+
+    <developer>
+      <name>Torsten Curdt</name>
+      <id>tcurdt</id>
+      <email>tcurdt at apache.org</email>
     </developer>
 
   </developers>
 
   <dependencies>
+
     <dependency>
       <id>regexp</id>
       <version>1.2</version>
     </dependency>
+
+    <!-- only for reports -->
+    <dependency>
+      <groupId>maven-plugins</groupId>
+      <artifactId>maven-cobertura-plugin</artifactId>
+      <version>1.1</version>
+      <type>plugin</type>
+    </dependency>
+
   </dependencies>
 
   <build>
 
     <sourceDirectory>src/java</sourceDirectory>
-    <aspectSourceDirectory/>
     <testSourceDirectory>src/java</testSourceDirectory>
 
     <!-- Unit test classes -->
@@ -95,33 +119,23 @@
       <unitTestPattern>exclude = **/*.class</unitTestPattern>
     </unitTestPatterns>
 
-    <!-- J A R  R E S O U R C E S -->
-    <!-- Resources that are packaged up inside the JAR file -->
-
-    <jarResources>
-    </jarResources>
-
-    <jars>
-    </jars>
   </build>
 
   <reports>
-     <!-- <report>maven-changelog-plugin</report> -->
-     <!-- <report>maven-changes-plugin</report> -->
-     <report>maven-checkstyle-plugin</report>
-     <report>maven-pmd-plugin</report>
-     <!-- <report>maven-findbugs-plugin</report> -->
-     <report>maven-clover-plugin</report>
-     <!-- <report>maven-developer-activity-plugin</report> -->
-     <!-- <report>maven-file-activity-plugin</report> -->
-     <report>maven-javadoc-plugin</report>
-     <!-- <report>maven-jellydoc-plugin</report> -->
-     <report>maven-junit-report-plugin</report>
-     <report>maven-jxr-plugin</report>
      <report>maven-license-plugin</report>
-     <!-- <report>maven-linkcheck-plugin</report> -->
-     <!-- <report>maven-statcvs-plugin</report> -->
+     <report>maven-changelog-plugin</report>
+     <report>maven-changes-plugin</report>
+     <report>maven-developer-activity-plugin</report>
+     <report>maven-javadoc-plugin</report>
+     <report>maven-junit-report-plugin</report>
+     <report>maven-cobertura-plugin</report>
+     <report>maven-jxr-plugin</report>
+     <report>maven-pmd-plugin</report>
      <report>maven-tasklist-plugin</report> 
+     <!-- <report>maven-linkcheck-plugin</report> -->
+     <!-- <report>maven-findbugs-plugin</report> -->
+     <!-- <report>maven-jellydoc-plugin</report> -->
+     <!-- <report>maven-statcvs-plugin</report> -->
   </reports>
 
 </project>

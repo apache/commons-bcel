@@ -166,18 +166,13 @@
 
   <H2>Related Projects</H2>
   <ul>
+    <li><a href="http://asm.objectweb.com">ASM</a></li>
     <li><a href="http://www.cs.duke.edu/ari/joie/">JOIE: The Java Object Instrumentation Environment</a></li>
-
     <li><a href="http://www.cat.nyu.edu/meyer/jasmin/">Jasmin Assembler</a></li>
-
     <li><a href="http://www.cs.colorado.edu/~hanlee/BIT/index.html">BIT: Bytecode Instrumenting Tool</a></li>
     <li><a href="http://www.alphaworks.ibm.com/tech/cfparse">CFParse</a></li>
-
     <li><a href="http://www.alphaworks.ibm.com/tech/jikesbt">JikesBT</a></li>
-
-    <li><a href="http://sourceware.cygnus.com/kawa/api/gnu/bytecode/package-summary.html">gnu.bytecode
-    package</a></li>
-
+    <li><a href="http://sourceware.cygnus.com/kawa/api/gnu/bytecode/package-summary.html">gnu.bytecode package</a></li>
     <li><a href="http://www.digital.com/java/download/jtrek/index.html">JTrek</a></li>
   </ul>
 
