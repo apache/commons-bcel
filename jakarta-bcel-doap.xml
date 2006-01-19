@@ -1,24 +1,33 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://usefulinc.com/ns/doap#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:asfext="http://projects.apache.org/ns/asfext#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:doap="http://usefulinc.com/ns/doap#" xml:lang="en">
-  <Project rdf:about="http://httpd.apache.org/modules/mod_mbox/">
-    <name>Apache jakarta-bcel</name>
+  <Project rdf:about="http://jakarta.apache.org/bcel/">
+    <name>Apache Jakarta BCEL</name>
     <homepage rdf:resource="http://jakarta.apache.org/bcel/"/>
     <programming-language>Java</programming-language>
-    <category rdf:resource="http://projects.apache.org/category/??"/>
+
+    <!-- Look at http://projects.apache.org/categories.html -->
+    <category rdf:resource="http://projects.apache.org/category/library"/>
     <license rdf:resource="http://usefulinc.com/doap/licenses/asl20"/>
-    <bug-database rdf:resource="??"/>
-    <download-page rdf:resource="??"/>
-    <asfext:pmc rdf:resource="??"/>
+    <bug-database rdf:resource="http://issues.apache.org/bugzilla/buglist.cgi?query_format=advanced&short_desc_type=allwordssubstr&short_desc=&product=BCEL&long_desc_type=substring&long_desc=&bug_file_loc_type=allwordssubstr&bug_file_loc=&keywords_type=allwords&keywords=&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&emailassigned_to1=1&emailtype1=substring&email1=&emailassigned_to2=1&emailreporter2=1&emailcc2=1&emailtype2=substring&email2=&bugidtype=include&bug_id=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&cmdtype=doit&order=Reuse+same+sort+as+last+time&field0-0-0=noop&type0-0-0=noop&value0-0-0="/>
+    <download-page rdf:resource="http://jakarta.apache.org/site/downloads/downloads_bcel.cgi/"/>
+    <asfext:pmc rdf:resource="Jakarta"/>
     <shortdesc xml:lang="en">Bytecode Engineering Library</shortdesc>
     <description xml:lang="en">
-    Bytecode Engineering Library
-  </description>
+      The Byte Code Engineering Library is intended to give users a convenient possibility to analyze, create, and manipulate (binary) Java class files (those ending with .class). Classes are represented by objects which contain all the symbolic information of the given class: methods, fields and byte code instructions, in particular.
+    </description>
     <repository>
       <SVNRepository>
         <browse rdf:resource="http://svn.apache.org/viewcvs.cgi/jakarta/bcel/"/>
         <location rdf:resource="http://svn.apache.org/repos/asf/jakarta/bcel"/>
       </SVNRepository>
     </repository>
-    <mailing-list rdf:resource="??"/>
+    <release>
+      <revision>
+        <name>bcel</name>
+        <created>2003-09-06</created>
+        <version>5.1</version>
+      </revision>
+    </release>
+    <mailing-list rdf:resource="http://jakarta.apache.org/site/mail2.html#BCEL"/>
   </Project>
 </rdf:RDF>
