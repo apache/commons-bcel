@@ -22,7 +22,7 @@ package org.apache.bcel.verifier.exc;
  * the class file is malformed; so it is not conforming to the "Pass 1" verification
  * process as described in the Java Virtual Machine specification, 2nd. edition.
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class LoadingException extends VerifierConstraintViolatedException{
 

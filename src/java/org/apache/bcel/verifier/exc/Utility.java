@@ -23,7 +23,7 @@ import java.io.StringWriter;
 /**
  * A utility class providing convenience methods concerning Throwable instances.
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  * @see java.lang.Throwable
  */
 public final class Utility{

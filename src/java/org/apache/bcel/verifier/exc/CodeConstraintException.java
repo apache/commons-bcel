@@ -22,7 +22,7 @@ package org.apache.bcel.verifier.exc;
  * "JustIce" involves verification that is usually delayed to pass 4.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public abstract class CodeConstraintException extends VerificationException{
 	/**

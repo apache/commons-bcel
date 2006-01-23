@@ -30,7 +30,7 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  * Elements of this stack are org.apache.bcel.generic.Type objects.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class OperandStack{
 

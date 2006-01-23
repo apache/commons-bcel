@@ -78,7 +78,7 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
  * method's documentation.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  * @see #do_verify()
  */
 public final class Pass2Verifier extends PassVerifier implements Constants{

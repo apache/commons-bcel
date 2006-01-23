@@ -50,7 +50,7 @@ import org.apache.bcel.generic.*;
  * is given the type Type.UNKNOWN.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  * @see #visitDSTORE(DSTORE o)
  * @see InstConstraintVisitor
  */

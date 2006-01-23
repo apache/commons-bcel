@@ -27,7 +27,7 @@ package org.apache.bcel.verifier.exc;
  * The data flow analysis of pass 3 is called pass 3b in JustIce.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class StructuralCodeConstraintException extends CodeConstraintException{
 	/**

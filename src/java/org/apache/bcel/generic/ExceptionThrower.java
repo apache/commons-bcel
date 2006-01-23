@@ -35,7 +35,7 @@ package org.apache.bcel.generic;
  * and "Error" objects.
  *
  * @version $Id$
- * @author  <A HREF="http://www.inf.fu-berlin.de/~ehaase">Enver Haase</A>
+ * @author  Enver Haase
  */
 public interface ExceptionThrower {
   public java.lang.Class[] getExceptions();

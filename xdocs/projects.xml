@@ -72,10 +72,6 @@
     <li><a HREF="http://www.cs.uoregon.edu/research/perpetual/dasada/Software/Gretel/">Gretel</a> - Residual Test Coverage Tool
     </li>
 
-    <li><a HREF="http://www.inf.fu-berlin.de/~bokowski/pmgjava/index.html">
-    Poor Man's Genericity</a>
-    </li>
-
     <li><a HREF="http://Theory.Stanford.EDU/~vganesh/project.html">Mobile
     Code Security Through Java Byte-Code Modification</a>
     </li>
@@ -105,7 +101,7 @@
     </li>
 
     <li><a
-    HREF="http://aspectj.org/"
+    HREF="http://eclipse.org/aspectj/"
     >AspectJ: Aspect-oriented Java</a>
     </li>
 
@@ -148,11 +144,6 @@
       <a HREF="http://hup.sourceforge.net/">Heap Usage Profiling</a>
     </li>
 
-    <li><a href="http://www.cse.unsw.edu.au/~peteg/src/prolog/prolog.html">Prolog</a>
-    </li>
-
-    <li><a href="http://www.cs.fit.edu/~jheat/">JHEAT</a></li>
-
     <li><a HREF="http://importscrubber.sourceforge.net/">Import Scrubber</a>
     </li>
 
@@ -166,14 +157,10 @@
 
   <H2>Related Projects</H2>
   <ul>
-    <li><a href="http://asm.objectweb.com">ASM</a></li>
+    <li><a href="http://asm.objectweb.org">ASM</a></li>
     <li><a href="http://www.cs.duke.edu/ari/joie/">JOIE: The Java Object Instrumentation Environment</a></li>
-    <li><a href="http://www.cat.nyu.edu/meyer/jasmin/">Jasmin Assembler</a></li>
-    <li><a href="http://www.cs.colorado.edu/~hanlee/BIT/index.html">BIT: Bytecode Instrumenting Tool</a></li>
     <li><a href="http://www.alphaworks.ibm.com/tech/cfparse">CFParse</a></li>
     <li><a href="http://www.alphaworks.ibm.com/tech/jikesbt">JikesBT</a></li>
-    <li><a href="http://sourceware.cygnus.com/kawa/api/gnu/bytecode/package-summary.html">gnu.bytecode package</a></li>
-    <li><a href="http://www.digital.com/java/download/jtrek/index.html">JTrek</a></li>
   </ul>
 
 </section>

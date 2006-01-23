@@ -25,7 +25,7 @@ import org.apache.bcel.Constants;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a reference
- * to a <href="http://wwwipd.ira.uka.de/~pizza/gj/">GJ</a> attribute.
+ * to a GJ attribute.
  *
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>

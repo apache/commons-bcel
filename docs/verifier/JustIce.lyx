@@ -134,7 +134,7 @@ Gubener Straﬂe 18
 \newline 
 D-10243 Berlin
 \newline 
-http://www.inf.fu-berlin.de/~ehaase
+
 \layout Standard
 
 
@@ -10355,7 +10355,7 @@ import de.fub.bytecode.*;
 \newline 
 11\SpecialChar ~
 \SpecialChar ~
-* @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+* @author Enver Haase
 \newline 
 12\SpecialChar ~
 \SpecialChar ~
@@ -14104,7 +14104,7 @@ Robert Tolksdorf: Programming Languages for the Java Virtual Machine.
 \newline 
 
 \emph on 
-http://grunge.cs.tu-berlin.de/~tolk/vmlanguages.html
+http://www.robert-tolksdorf.de/vmlanguages.html
 \layout Bibliography
 \bibitem [PMG-WWW]{PMG-WWW}
 
@@ -14114,7 +14114,7 @@ PMG.
 \newline 
 
 \emph on 
-http://www.inf.fu-berlin.de/~bokowski/pmgjava/index.html
+
 \layout Bibliography
 \bibitem [Qian]{Qian}
 

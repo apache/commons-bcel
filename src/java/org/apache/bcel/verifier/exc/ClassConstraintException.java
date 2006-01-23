@@ -23,7 +23,7 @@ package org.apache.bcel.verifier.exc;
  * in the Java Virtual Machine specification, 2nd edition.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class ClassConstraintException extends VerificationException{
 	/**

@@ -30,7 +30,7 @@ import java.util.Vector;
  * class name) there is exactly one Verifier.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  * @see org.apache.bcel.verifier.Verifier
  */
 public class VerifierFactory{

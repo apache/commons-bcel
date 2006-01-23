@@ -99,25 +99,28 @@
       <version>1.2</version>
     </dependency>
 
-    <!-- only for reports -->
+    <!--
     <dependency>
       <groupId>maven-plugins</groupId>
       <artifactId>maven-cobertura-plugin</artifactId>
       <version>1.1</version>
       <type>plugin</type>
     </dependency>
+    -->
 
   </dependencies>
 
   <build>
 
     <sourceDirectory>src/java</sourceDirectory>
+
+    <!--
     <testSourceDirectory>src/java</testSourceDirectory>
 
-    <!-- Unit test classes -->
     <unitTestPatterns>
       <unitTestPattern>exclude = **/*.class</unitTestPattern>
     </unitTestPatterns>
+    -->
 
   </build>
 
@@ -127,12 +130,12 @@
      <report>maven-changes-plugin</report>
      <report>maven-developer-activity-plugin</report>
      <report>maven-javadoc-plugin</report>
-     <report>maven-junit-report-plugin</report>
-     <report>maven-cobertura-plugin</report>
+     <!-- <report>maven-junit-report-plugin</report> -->
+     <!-- <report>maven-cobertura-plugin</report> -->
      <report>maven-jxr-plugin</report>
      <report>maven-pmd-plugin</report>
-     <report>maven-tasklist-plugin</report> 
-     <!-- <report>maven-linkcheck-plugin</report> -->
+     <!-- <report>maven-tasklist-plugin</report> -->
+     <report>maven-linkcheck-plugin</report>
      <!-- <report>maven-findbugs-plugin</report> -->
      <!-- <report>maven-jellydoc-plugin</report> -->
      <!-- <report>maven-statcvs-plugin</report> -->

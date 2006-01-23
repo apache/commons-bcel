@@ -23,7 +23,7 @@ package org.apache.bcel.verifier.structurals;
  * a local variable array and an operand stack.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
  
 public class Frame{

@@ -28,7 +28,7 @@ package org.apache.bcel.verifier.exc;
  * Second Edition.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class StaticCodeInstructionConstraintException extends StaticCodeConstraintException{
 	public StaticCodeInstructionConstraintException(String message){

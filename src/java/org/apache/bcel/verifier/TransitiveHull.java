@@ -27,7 +27,7 @@ import org.apache.bcel.classfile.JavaClass;
  * more notably, memory.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class TransitiveHull implements VerifierFactoryObserver{
 

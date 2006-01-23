@@ -25,7 +25,7 @@ package org.apache.bcel.verifier;
  * and JustIce.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public abstract class NativeVerifier{
 

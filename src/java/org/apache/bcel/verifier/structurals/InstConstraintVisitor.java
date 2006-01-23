@@ -46,7 +46,7 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  * MONITOREXIT) is not modeled in JustIce.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  * @see org.apache.bcel.verifier.exc.StructuralCodeConstraintException
  * @see org.apache.bcel.verifier.exc.LinkingConstraintException
  */

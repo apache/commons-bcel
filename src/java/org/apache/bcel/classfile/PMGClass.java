@@ -24,8 +24,7 @@ import org.apache.bcel.Constants;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a reference
- * to a <a href="http://www.inf.fu-berlin.de/~bokowski/pmgjava/index.html">PMG</a>
- * attribute.
+ * to a PMG attribute.
  *
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>

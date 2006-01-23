@@ -26,7 +26,7 @@ import org.apache.bcel.generic.ObjectType;
  * the handler starts off (represented by an InstructionContext).
  * 
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class ExceptionHandler{
 	/** The type of the exception to catch. NULL means ANY. */

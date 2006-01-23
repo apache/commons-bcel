@@ -31,7 +31,7 @@ import org.apache.bcel.classfile.JavaClass;
  * [This class was created using VisualAge for Java,
  * but it does not work under VAJ itself (Version 3.02 JDK 1.2)]
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  * @see #main(String[])
  * @see #VerifyDialog(String)
  */

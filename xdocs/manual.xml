@@ -14,7 +14,7 @@
     the subject of a large number of research projects and
     proposals. There are projects, for instance, to add parameterized
     types to Java, to implement <a
-    href="http://aspectj.org/">Aspect-Oriented Programming</a>, to
+    href="http://www.eclipse.org/aspectj/">Aspect-Oriented Programming</a>, to
     perform sophisticated static analysis, and to improve the run-time
     performance.
   </p>
@@ -131,7 +131,7 @@
     meanings: on the one hand, Java as a programming language, on the
     other hand, the Java Virtual Machine, which is not necessarily
     targeted by the Java language exclusively, but may be used by <a
-    href="http://grunge.cs.tu-berlin.de/~tolk/vmlanguages.html">other
+    href="http://www.robert-tolksdorf.de/vmlanguages.html">other
     languages</a> as well. We assume the reader to be familiar with
     the Java language and to have a general understanding of the
     Virtual Machine.
@@ -1224,7 +1224,7 @@
     classes by inserting calls to profiling methods into the
     code. Further examples are extending Java with Eiffel-like
     assertions, automated delegation, or with the concepts of <a
-    href="http://aspectj.org">Aspect-Oriented Programming</a>.<br/> A
+    href="http://www.eclipse.org/aspectj/">Aspect-Oriented Programming</a>.<br/> A
     list of projects using <font face="helvetica,arial">BCEL</font> can
     be found <a href="projects.html">here</a>.
   </p>
@@ -1276,17 +1276,15 @@
     original byte code. In fact, class loaders may even create classes
     <em>ad hoc</em> without loading a file at all.<br/> <font
     face="helvetica,arial">BCEL</font> has already builtin support for
-    dynamically creating classes, an example is the <a
-    href="../examples/ProxyCreator.java">ProxyCreator</a> class.
+    dynamically creating classes, an example is the ProxyCreator class.
   </p>
   
   </section>
   
   <section name="4.1.1 Example: Poor Man's Genericity">
   <p>
-    The <a href="http://www.inf.fu-berlin.de/~bokowski/pmgjava/">"Poor
-    Man's Genericity"</a> project that extends Java with parameterized
-    classes, for example, uses <font
+    The former "Poor Man's Genericity" project that extended Java with
+    parameterized classes, for example, used <font
     face="helvetica,arial">BCEL</font> in two places to generate
     instances of parameterized classes: During compile-time (with the
     standard <tt>javac</tt> with some slightly changed classes) and at

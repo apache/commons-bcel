@@ -42,7 +42,7 @@ import java.util.List;
  * pass you must use a new instance of a given PassVerifier.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  * @see org.apache.bcel.verifier.Verifier
  * @see #verify()
  */

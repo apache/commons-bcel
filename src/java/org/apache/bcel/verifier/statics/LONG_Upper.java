@@ -23,7 +23,7 @@ import org.apache.bcel.generic.Type;
 /**
  * This class represents the upper half of a LONG variable.
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public final class LONG_Upper extends Type{
 

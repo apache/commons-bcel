@@ -23,7 +23,7 @@ import org.apache.bcel.Constants;
  *
  * see vmspec2 §3.3.3
  * @version $Id$
- * @author  <A HREF="http://www.inf.fu-berlin.de/~ehaase">Enver Haase</A>
+ * @author Enver Haase
  */
 public class ReturnaddressType extends Type {
 

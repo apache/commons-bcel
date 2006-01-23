@@ -25,7 +25,7 @@ import org.apache.bcel.generic.InstructionHandle;
  * consistent fashion, too.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public interface Subroutine{
 	/**

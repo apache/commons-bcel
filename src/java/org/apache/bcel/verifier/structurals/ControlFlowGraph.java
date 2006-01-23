@@ -37,7 +37,7 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  * This class represents a control flow graph of a method.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class ControlFlowGraph{
 

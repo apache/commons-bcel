@@ -28,7 +28,7 @@ import org.apache.bcel.generic.MethodGen;
  * This class allows easy access to ExceptionHandler objects.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class ExceptionHandlers{
 	/**

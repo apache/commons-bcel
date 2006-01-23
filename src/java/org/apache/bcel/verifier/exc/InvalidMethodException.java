@@ -21,7 +21,7 @@ package org.apache.bcel.verifier.exc;
  * when the verification of a method is requested that does not exist.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class InvalidMethodException extends RuntimeException{
 	

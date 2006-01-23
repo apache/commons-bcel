@@ -22,7 +22,7 @@ package org.apache.bcel.verifier.exc;
  * this is due to an INTERNAL ERROR of BCEL's class file verifier &quot;JustIce&quot;.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public final class AssertionViolatedException extends RuntimeException{
 	/** The error message. */

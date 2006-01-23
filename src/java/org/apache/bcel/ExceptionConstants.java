@@ -21,7 +21,7 @@ package org.apache.bcel;
  * Exception constants.
  *
  * @version $Id$
- * @author  <A HREF="http://www.inf.fu-berlin.de/~ehaase">E. Haase</A>
+ * @author  E. Haase
  */
 public interface ExceptionConstants {
   /** The mother of all exceptions

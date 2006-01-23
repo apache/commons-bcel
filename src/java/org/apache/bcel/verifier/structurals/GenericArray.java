@@ -23,7 +23,7 @@ package org.apache.bcel.verifier.structurals;
  * and java.io.Serializable and they extend java.lang.Object.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */ 
 public class GenericArray extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable{
 	

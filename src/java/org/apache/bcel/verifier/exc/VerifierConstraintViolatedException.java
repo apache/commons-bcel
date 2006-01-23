@@ -26,7 +26,7 @@ package org.apache.bcel.verifier.exc;
  * throw.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public abstract class VerifierConstraintViolatedException extends RuntimeException{
 	// /** The name of the offending class that did not pass the verifier. */

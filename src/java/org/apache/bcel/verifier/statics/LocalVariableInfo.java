@@ -28,7 +28,7 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
  * often changes in course of byte code offsets.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class LocalVariableInfo{
 

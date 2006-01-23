@@ -65,7 +65,7 @@ import org.apache.bcel.verifier.exc.AssertionViolatedException;
  * handling in future versions of JustIce.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor implements Visitor {
     /** The string representation, created by a visitXXX() method, output by toString(). */

@@ -27,7 +27,7 @@ import org.apache.bcel.generic.ReferenceType;
  * more details.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class UninitializedObjectType extends ReferenceType implements Constants{
 

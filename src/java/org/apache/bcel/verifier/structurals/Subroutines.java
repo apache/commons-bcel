@@ -60,7 +60,7 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 	 * TODO: refer to the paper.
 	 *
 	 * @version $Id$
-	 * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+	 * @author Enver Haase
 	 * @see #getTopLevel()
 	 */
 public class Subroutines{

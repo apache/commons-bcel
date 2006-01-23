@@ -22,7 +22,7 @@ package org.apache.bcel.verifier;
  * instances are created.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  *
  * @see VerifierFactory#getVerifier(String)
  * @see VerifierFactory#getVerifiers()

@@ -51,7 +51,7 @@ import org.apache.bcel.verifier.exc.VerifierConstraintViolatedException;
  * documentation. 
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  * @see #do_verify()
  */
 

@@ -31,7 +31,7 @@ package org.apache.bcel.verifier.exc;
  * <B>TODO: At this time, this class is not used in JustIce.</B>
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public class LinkingConstraintException extends StructuralCodeConstraintException{
 }

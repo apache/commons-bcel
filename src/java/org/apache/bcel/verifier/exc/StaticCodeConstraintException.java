@@ -25,7 +25,7 @@ package org.apache.bcel.verifier.exc;
  * is called pass 3a in JustIce.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public abstract class StaticCodeConstraintException extends CodeConstraintException{
 	public StaticCodeConstraintException(String message){

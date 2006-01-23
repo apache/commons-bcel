@@ -27,7 +27,7 @@ package org.apache.bcel.verifier.exc;
  * defined to be the verification happening in passes 2 and 3.
  *
  * @version $Id$
- * @author <A HREF="http://www.inf.fu-berlin.de/~ehaase"/>Enver Haase</A>
+ * @author Enver Haase
  */
 public abstract class VerificationException extends VerifierConstraintViolatedException{
 	/**
