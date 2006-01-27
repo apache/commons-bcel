@@ -114,6 +114,16 @@
 
     <sourceDirectory>src/java</sourceDirectory>
 
+    <resources>
+      <resource>
+        <directory>${basedir}</directory>
+          <includes>
+            <include>NOTICE.txt</include>
+          </includes>
+          <targetPath>META-INF</targetPath>
+      </resource>
+    </resources>
+
     <!--
     <testSourceDirectory>src/java</testSourceDirectory>
 
@@ -135,7 +145,7 @@
      <report>maven-jxr-plugin</report>
      <report>maven-pmd-plugin</report>
      <!-- <report>maven-tasklist-plugin</report> -->
-     <report>maven-linkcheck-plugin</report>
+     <!-- <report>maven-linkcheck-plugin</report> -->
      <!-- <report>maven-findbugs-plugin</report> -->
      <!-- <report>maven-jellydoc-plugin</report> -->
      <!-- <report>maven-statcvs-plugin</report> -->
