@@ -19,6 +19,7 @@ package org.apache.bcel.classfile;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
@@ -122,17 +123,19 @@ public final class LineNumberTable extends Attribute {
   public final String toString() {
     StringBuffer buf  = new StringBuffer();
     StringBuffer line = new StringBuffer();
+    String newLine = System.getProperty("line.separator", "\n");
 
     for(int i=0; i < line_number_table_length; i++) {
       line.append(line_number_table[i].toString());
 
-      if(i < line_number_table_length - 1)
-	line.append(", ");
+      if(i < line_number_table_length - 1) {
+	    line.append(", ");
+      }
 
       if(line.length() > 72) {
-	line.append('\n');
-	buf.append(line);
-	line.setLength(0);
+	    line.append(newLine);
+	    buf.append(line.toString());
+	    line.setLength(0);
       }
     }
 
