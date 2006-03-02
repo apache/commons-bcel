@@ -85,7 +85,7 @@ public abstract class Annotations extends Attribute {
 	  }
 
 	  /**
-	   * @returns the annotation entry table
+	   * @return the annotation entry table
 	   */
 	  public final AnnotationEntry[] getAnnotationTable()
 	  {
@@ -100,7 +100,7 @@ public abstract class Annotations extends Attribute {
 	  }
 	  
 	  /**
-	   * @returns the number of annotation entries in this annotation
+	   * @return the number of annotation entries in this annotation
 	   */
 	  public final int getNumAnnotations() { return annotation_table_length; }
 }
