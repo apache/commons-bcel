@@ -19,6 +19,7 @@ package org.apache.bcel.verifier.statics;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.apache.bcel.Constants;
@@ -725,7 +726,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			checkIndex(obj, obj.getSourceFileIndex(), CONST_Utf8);
 
 			String sourcefilename = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); //==obj.getSourceFileName() ?
-			String sourcefilenamelc = sourcefilename.toLowerCase();
+			String sourcefilenamelc = sourcefilename.toLowerCase(Locale.ENGLISH);
 
 			if (	(sourcefilename.indexOf('/') != -1) ||
 						(sourcefilename.indexOf('\\') != -1) ||

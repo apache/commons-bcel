@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -140,7 +141,7 @@ public class ClassPath implements Serializable {
       File     ext_dir    = new File((String)e.next());
       String[] extensions = ext_dir.list(new FilenameFilter() {
 	public boolean accept(File dir, String name) {
-	  name = name.toLowerCase();
+	  name = name.toLowerCase(Locale.ENGLISH);
 	  return name.endsWith(".zip") || name.endsWith(".jar");
 	}
       });

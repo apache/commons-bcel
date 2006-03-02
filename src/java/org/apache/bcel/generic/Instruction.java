@@ -20,6 +20,7 @@ package org.apache.bcel.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Locale;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.ByteSequence;
@@ -178,7 +179,7 @@ public abstract class Instruction implements Cloneable, Serializable {
   }
 
   private static final String className(short opcode) {
-    String name = Constants.OPCODE_NAMES[opcode].toUpperCase();
+    String name = Constants.OPCODE_NAMES[opcode].toUpperCase(Locale.ENGLISH);
 
     /* ICONST_0, etc. will be shortened to ICONST, etc., since ICONST_0 and the like
      * are not implemented (directly).

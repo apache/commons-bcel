@@ -226,7 +226,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 	    else if ((pow == Constants.ACC_TRANSIENT) && (reason == FLAG_FOR_METHOD))
 	      buf.append("ACC_VARARGS | ");
 	    else
-	      buf.append("ACC_").append(Constants.ACCESS_NAMES[i].toUpperCase()).append(" | ");
+	      buf.append("ACC_").append(Constants.ACCESS_NAMES[i].toUpperCase(Locale.ENGLISH)).append(" | ");
       }
 
       pow <<= 1;
@@ -261,7 +261,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     byte t    = type.getType();
 
     if(t <= Constants.T_VOID) {
-      return "Type." + Constants.TYPE_NAMES[t].toUpperCase();
+      return "Type." + Constants.TYPE_NAMES[t].toUpperCase(Locale.ENGLISH);
     } else if(type.toString().equals("java.lang.String")) {
       return "Type.STRING";
     } else if(type.toString().equals("java.lang.Object")) {

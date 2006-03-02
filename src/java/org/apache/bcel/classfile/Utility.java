@@ -30,6 +30,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -1014,7 +1015,7 @@ public abstract class Utility {
   /** Map opcode names to opcode numbers. E.g., return Constants.ALOAD for "aload"
    */
   public static short searchOpcode(String name) {
-    name = name.toLowerCase();
+    name = name.toLowerCase(Locale.ENGLISH);
 
     for(short i=0; i < Constants.OPCODE_NAMES.length; i++)
       if(Constants.OPCODE_NAMES[i].equals(name))

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.bcel.Constants;
@@ -97,7 +98,7 @@ class BCELFactory extends EmptyVisitor {
        !(i instanceof ConstantPushInstruction) &&
        !(i instanceof ReturnInstruction)) { // Handled below
       _out.println("il.append(InstructionConstants." +
-		   i.getName().toUpperCase() + ");");
+		   i.getName().toUpperCase(Locale.ENGLISH) + ");");
       return true;
     }
 
@@ -138,7 +139,7 @@ class BCELFactory extends EmptyVisitor {
     _out.println("il.append(_factory.createFieldAccess(\"" +
 		 class_name + "\", \"" + field_name + "\", " +
 		 BCELifier.printType(type) + ", " +
-		 "Constants." + Constants.OPCODE_NAMES[opcode].toUpperCase() +
+		 "Constants." + Constants.OPCODE_NAMES[opcode].toUpperCase(Locale.ENGLISH) +
 		 "));");
   }
 
@@ -153,7 +154,7 @@ class BCELFactory extends EmptyVisitor {
 		 class_name + "\", \"" + method_name + "\", " +
 		 BCELifier.printType(type) + ", " +
 		 BCELifier.printArgumentTypes(arg_types) + ", " +
-		 "Constants." + Constants.OPCODE_NAMES[opcode].toUpperCase() +
+		 "Constants." + Constants.OPCODE_NAMES[opcode].toUpperCase(Locale.ENGLISH) +
 		 "));");
   }
 
@@ -260,7 +261,7 @@ class BCELFactory extends EmptyVisitor {
       args.append(" }");
       
       _out.print("Select " + name + " = new " +
-		 bi.getName().toUpperCase() + "(" + args +
+		 bi.getName().toUpperCase(Locale.ENGLISH) + "(" + args +
 		 ", new InstructionHandle[] { ");
 	
       for(int i=0; i < matchs.length; i++) {
@@ -284,7 +285,7 @@ class BCELFactory extends EmptyVisitor {
 
       _out.println("    BranchInstruction " + name +
 		   " = _factory.createBranchInstruction(" +
-		   "Constants." + bi.getName().toUpperCase() + ", " +
+		   "Constants." + bi.getName().toUpperCase(Locale.ENGLISH) + ", " +
 		   target + ");");
     }  
 
