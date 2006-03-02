@@ -76,7 +76,7 @@ public abstract class AnnotationDefault extends Attribute {
 	  }
 
 	  /**
-	   * @returns the default value
+	   * @return the default value
 	   */
 	  public final ElementValue getDefaultValue()
 	  {
