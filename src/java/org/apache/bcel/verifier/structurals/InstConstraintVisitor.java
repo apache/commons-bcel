@@ -371,9 +371,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 			if ( (!(stacktop instanceof ReferenceType)) && (!(stacktop instanceof ReturnaddressType)) ){
 				constraintViolated(o, "Stack top type and STOREing Instruction type mismatch: Stack top: '"+stack().peek()+"'; Instruction expects a ReferenceType or a ReturnadressType.");
 			}
-			if (stacktop instanceof ReferenceType){
-				referenceTypeIsInitialized(o, (ReferenceType) stacktop);
-			}
+			//if (stacktop instanceof ReferenceType){
+			//	referenceTypeIsInitialized(o, (ReferenceType) stacktop);
+			//}
 		}
 	}
 
@@ -437,7 +437,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 			if (! (((ArrayType) arrayref).getElementType() instanceof ReferenceType)){
 				constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a ReferenceType but to an array of "+((ArrayType) arrayref).getElementType()+".");
 			}	
-			referenceTypeIsInitialized(o, (ReferenceType) (((ArrayType) arrayref).getElementType()));
+			//referenceTypeIsInitialized(o, (ReferenceType) (((ArrayType) arrayref).getElementType()));
 		}
 	}
 
@@ -454,7 +454,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if (!(value instanceof ReferenceType)){
 			constraintViolated(o, "The 'value' is not of a ReferenceType but of type "+value+".");
 		}else{
-			referenceTypeIsInitialized(o, (ReferenceType) value);
+			//referenceTypeIsInitialized(o, (ReferenceType) value);
 		}
 		// Don't bother further with "referenceTypeIsInitialized()", there are no arrays
 		// of an uninitialized object type. 
@@ -531,9 +531,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if (! ( (stack().peek() instanceof ReferenceType) || (stack().peek() instanceof ReturnaddressType) ) ){
 			constraintViolated(o, "The 'objectref' is not of a ReferenceType or of ReturnaddressType but of "+stack().peek()+".");
 		}
-		if (stack().peek() instanceof ReferenceType){
-			referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
-		}
+		//if (stack().peek() instanceof ReferenceType){
+		//	referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
+		//}
 	}
 
 	/**
@@ -644,9 +644,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if (!(objectref instanceof ReferenceType)){
 			constraintViolated(o, "The 'objectref' is not of a ReferenceType but of type "+objectref+".");
 		}
-		else{
-			referenceTypeIsInitialized(o, (ReferenceType) objectref);
-		}
+		//else{
+		//	referenceTypeIsInitialized(o, (ReferenceType) objectref);
+		//}
 		// The unsigned indexbyte1 and indexbyte2 are used to construct an index into the runtime constant pool of the
 		// current class (§3.6), where the value of the index is (indexbyte1 << 8) | indexbyte2. The runtime constant
 		// pool item at the index must be a symbolic reference to a class, array, or interface type.
@@ -1393,12 +1393,12 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if (!(stack().peek() instanceof ReferenceType)){
 			constraintViolated(o, "The value at the stack top is not of a ReferenceType, but of type '"+stack().peek()+"'.");
 		}
-		referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
+		//referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
 	
 		if (!(stack().peek(1) instanceof ReferenceType)){
 			constraintViolated(o, "The value at the stack next-to-top is not of a ReferenceType, but of type '"+stack().peek(1)+"'.");
 		}
-		referenceTypeIsInitialized(o, (ReferenceType) (stack().peek(1)) );
+		//referenceTypeIsInitialized(o, (ReferenceType) (stack().peek(1)) );
 		
 	}
 
@@ -1408,11 +1408,11 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	public void visitIF_ACMPNE(IF_ACMPNE o){
 		if (!(stack().peek() instanceof ReferenceType)){
 			constraintViolated(o, "The value at the stack top is not of a ReferenceType, but of type '"+stack().peek()+"'.");
-			referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
+			//referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
 		}
 		if (!(stack().peek(1) instanceof ReferenceType)){
 			constraintViolated(o, "The value at the stack next-to-top is not of a ReferenceType, but of type '"+stack().peek(1)+"'.");
-			referenceTypeIsInitialized(o, (ReferenceType) (stack().peek(1)) );
+			//referenceTypeIsInitialized(o, (ReferenceType) (stack().peek(1)) );
 		}
 	}
 
@@ -1625,9 +1625,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if (!(objectref instanceof ReferenceType)){
 			constraintViolated(o, "The 'objectref' is not of a ReferenceType but of type "+objectref+".");
 		}
-		else{
-			referenceTypeIsInitialized(o, (ReferenceType) objectref);
-		}
+		//else{
+		//	referenceTypeIsInitialized(o, (ReferenceType) objectref);
+		//}
 		// The unsigned indexbyte1 and indexbyte2 are used to construct an index into the runtime constant pool of the
 		// current class (§3.6), where the value of the index is (indexbyte1 << 8) | indexbyte2. The runtime constant
 		// pool item at the index must be a symbolic reference to a class, array, or interface type.
@@ -1678,13 +1678,14 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 			}
 			if (! fromStack.equals(fromDesc)){
 				if (fromStack instanceof ReferenceType && fromDesc instanceof ReferenceType){
-					//ReferenceType rFromStack = (ReferenceType) fromStack;
+					ReferenceType rFromStack = (ReferenceType) fromStack;
 					//ReferenceType rFromDesc = (ReferenceType) fromDesc;
 					// TODO: This can only be checked when using Staerk-et-al's "set of object types"
 					// instead of a "wider cast object type" created during verification.
 					//if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
 					//	constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
 					//}
+                    referenceTypeIsInitialized(o, rFromStack);
 				}
 				else{
 					constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack.");
@@ -1770,6 +1771,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 					if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
 						constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
 					}
+                    referenceTypeIsInitialized(o, rFromStack);
 				}
 				else{
 					constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack.");
@@ -1855,6 +1857,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 					if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
 						constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
 					}
+                    referenceTypeIsInitialized(o, rFromStack);
 				}
 				else{
 					constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack.");
@@ -1906,6 +1909,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 					if ( ! rFromStack.isAssignmentCompatibleWith(rFromDesc) ){
 						constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack (which is not assignment compatible).");
 					}
+                    referenceTypeIsInitialized(o, rFromStack);
 				}
 				else{
 					constraintViolated(o, "Expecting a '"+fromDesc+"' but found a '"+fromStack+"' on the stack.");
@@ -2368,7 +2372,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if (! ((stack().peek()) instanceof ReferenceType)){
 			constraintViolated(o, "The stack top should be of a ReferenceType, but is '"+stack().peek()+"'.");
 		}
-		referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
+		//referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
 	}
 
 	/**
@@ -2378,7 +2382,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		if (! ((stack().peek()) instanceof ReferenceType)){
 			constraintViolated(o, "The stack top should be of a ReferenceType, but is '"+stack().peek()+"'.");
 		}
-		referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
+		//referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
 	}
 
 	/**
