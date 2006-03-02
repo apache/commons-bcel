@@ -1128,7 +1128,7 @@
     ...
     try {
       il.delete(match[1], match[5]);
-    } catch(TargetLostException e) { ... }
+    } catch(TargetLostException ex) { ... }
   }
   </source>
 
