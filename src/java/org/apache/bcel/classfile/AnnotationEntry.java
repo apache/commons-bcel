@@ -73,7 +73,7 @@ public class AnnotationEntry implements Node, Constants
 	  }
 	  
 	  /**
-	   * @returns the number of element value pairs in this annotation entry
+	   * @return the number of element value pairs in this annotation entry
 	   */
 	  public final int getNumElementValuePairs() { return num_element_value_pairs; }
 	  
