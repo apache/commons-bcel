@@ -18,6 +18,7 @@ package org.apache.bcel.util;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Locale;
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
