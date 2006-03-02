@@ -49,7 +49,7 @@ public final class ConstantValue extends Attribute {
    * @param length Content length in bytes
    * @param file Input stream
    * @param constant_pool Array of constants
-   * @throw IOException
+   * @throws IOException
    */
   ConstantValue(int name_index, int length, DataInputStream file,
 		ConstantPool constant_pool) throws IOException
