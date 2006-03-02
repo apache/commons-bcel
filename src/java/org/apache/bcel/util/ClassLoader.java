@@ -60,7 +60,6 @@ public class ClassLoader extends java.lang.ClassLoader {
   private String[] ignored_packages;
 
   private Repository repository = SyntheticRepository.getInstance();
-  private java.lang.ClassLoader deferTo = ClassLoader.getSystemClassLoader();
 
   /** Ignored packages are by default ( "java.", "sun.",
    * "javax."), i.e. loaded by system class loader
@@ -72,8 +71,8 @@ public class ClassLoader extends java.lang.ClassLoader {
   /** @param deferTo delegate class loader to use for ignored packages
    */
   public ClassLoader(java.lang.ClassLoader deferTo) {
-    this();
-    this.deferTo = deferTo;
+    super(deferTo);
+    this.ignored_packages = DEFAULT_IGNORED_PACKAGES;
     this.repository = new ClassLoaderRepository(deferTo);
   }
 
@@ -90,7 +89,6 @@ public class ClassLoader extends java.lang.ClassLoader {
    */
   public ClassLoader(java.lang.ClassLoader deferTo, String [] ignored_packages) {
     this(ignored_packages);
-    this.deferTo = deferTo;
     this.repository = new ClassLoaderRepository(deferTo);
   }
   
@@ -107,7 +105,7 @@ public class ClassLoader extends java.lang.ClassLoader {
        */
       for(int i=0; i < ignored_packages.length; i++) {
 	if(class_name.startsWith(ignored_packages[i])) {
-	  cl = deferTo.loadClass(class_name);
+	  cl = getParent().loadClass(class_name);
 	  break;
 	}
       }
