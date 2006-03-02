@@ -127,7 +127,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     if (interfaces == null) // Allowed for backward compatibility
       interfaces = new int[0];
     if (attributes == null)
-      this.attributes = new Attribute[0];
+      attributes = new Attribute[0];
     if (fields == null)
       fields = new Field[0];
     if (methods == null)
@@ -261,9 +261,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     if (parent != null) {
       File dir = new File(parent);
-
-      if (dir != null)
-        dir.mkdirs();
+      dir.mkdirs();
     }
 
     DataOutputStream dos = null;
