@@ -59,7 +59,7 @@ public class ParameterAnnotationEntry implements Node, Constants
 	  }	  
 	  
 	  /**
-	   * @returns the number of annotation entries in this parameter annotation
+	   * @return the number of annotation entries in this parameter annotation
 	   */
 	  public final int getNumAnnotations() { return annotation_table_length; }
 	  
