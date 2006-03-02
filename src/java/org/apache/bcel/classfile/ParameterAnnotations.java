@@ -85,7 +85,7 @@ public abstract class ParameterAnnotations extends Attribute {
 	  }
 
 	  /**
-	   * @returns the parameter annotation entry table
+	   * @return the parameter annotation entry table
 	   */
 	  public final ParameterAnnotationEntry[] getParameterAnnotationTable()
 	  {
@@ -100,7 +100,7 @@ public abstract class ParameterAnnotations extends Attribute {
 	  }
 	  
 	  /**
-	   * @returns the number of parameter annotation entries in this parameter annotation
+	   * @return the number of parameter annotation entries in this parameter annotation
 	   */
 	  public final int getNumParameterAnnotation() { return num_parameters; }
 }
