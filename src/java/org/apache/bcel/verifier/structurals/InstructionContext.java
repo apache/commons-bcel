@@ -73,6 +73,8 @@ public interface InstructionContext{
 	 */
 	boolean execute(Frame inFrame, ArrayList executionPredecessors, InstConstraintVisitor icv, ExecutionVisitor ev);
 
+	Frame getInFrame();
+
 	/**
 	 * This method returns the outgoing execution frame situation;
 	 * therefore <B>it has to be calculated by execute(Frame, ArrayList)

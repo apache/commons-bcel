@@ -124,6 +124,19 @@ public class ControlFlowGraph{
 			return org.getClone();
 		}
 
+    public Frame getInFrame() {
+		  Frame org;
+			
+			InstructionContext jsr = lastExecutionJSR();
+			
+			org = (Frame) inFrames.get(jsr);
+
+			if (org == null){
+			    throw new AssertionViolatedException("inFrame not set! This:\n"+this+"\nInFrames: '"+inFrames+"'.");
+      }
+      return org.getClone();
+    }
+
 		/**
 		 * "Merges in" (vmspec2, page 146) the "incoming" frame situation;
 		 * executes the instructions symbolically
