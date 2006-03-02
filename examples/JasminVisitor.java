@@ -55,7 +55,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
   public void visitField(Field field) {
     out.print(".field " + Utility.accessToString(field.getAccessFlags()) +
-		" " + field.getName() + " " + field.getSignature());
+		" \"" +field.getName() + "\"" + field.getSignature());
     if(field.getAttributes().length == 0)
       out.print("\n");
   }
