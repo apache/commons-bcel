@@ -159,7 +159,9 @@ public class InstructionHandle implements java.io.Serializable {
    * Denote this handle isn't referenced anymore by t.
    */
   public void removeTargeter(InstructionTargeter t) {
-    targeters.remove(t);
+    if(targeters != null) {
+      targeters.remove(t);
+    }
   }
   
   /**
@@ -236,6 +238,9 @@ public class InstructionHandle implements java.io.Serializable {
   /** @return all attributes associated with this handle
    */
   public Collection getAttributes() {
+    if(attributes == null) {
+        attributes = new HashMap(3);
+    }
     return attributes.values();
   }
   
