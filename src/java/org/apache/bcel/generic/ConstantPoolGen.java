@@ -132,7 +132,9 @@ public class ConstantPoolGen implements java.io.Serializable {
 	else if(c instanceof ConstantFieldref)
 	  delim = FIELDREF_DELIM;
 
-	cp_table.put(class_name + delim + method_name + delim + signature, new Index(i));
+    String key = class_name + delim + method_name + delim + signature;
+    if (!cp_table.containsKey(key))
+	cp_table.put(key, new Index(i));
       }
     }
   }
