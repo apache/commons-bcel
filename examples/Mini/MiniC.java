@@ -1,8 +1,11 @@
 package Mini;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.Vector;
-import java.io.*;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.generic.*;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
 
 public class MiniC implements org.apache.bcel.Constants {
   private static Vector errors   = null;

@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.AllocationInstruction;

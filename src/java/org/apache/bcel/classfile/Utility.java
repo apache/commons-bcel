@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.util.ByteSequence;
 

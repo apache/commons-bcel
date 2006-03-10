@@ -1,7 +1,16 @@
-import java.io.*;
-import java.util.*;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.*;
+import java.io.IOException;
+import java.util.Hashtable;
+import java.util.Vector;
+import org.apache.bcel.Constants;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
 
 /**
  * Read class file(s) and display its contents. The command line usage is:

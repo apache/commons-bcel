@@ -18,7 +18,6 @@ package org.apache.bcel.util;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.bcel.classfile.JavaClass;
 
 /** 

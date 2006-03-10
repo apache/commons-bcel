@@ -19,7 +19,6 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.Utility;

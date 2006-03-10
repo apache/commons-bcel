@@ -1,9 +1,13 @@
-import java.io.*;
-
 import java.util.Iterator;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.generic.*;
 import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.InstructionTargeter;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.TargetLostException;
 import org.apache.bcel.util.InstructionFinder;
 
 /**

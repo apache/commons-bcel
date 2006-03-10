@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.BCELComparator;

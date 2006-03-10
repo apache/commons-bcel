@@ -1,11 +1,19 @@
-import java.io.*;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.generic.*;
-import org.apache.bcel.util.ByteSequence;
-import org.apache.bcel.*;
-import java.awt.event.*;
-import java.util.Vector;
-import java.util.zip.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.ALOAD;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.GETSTATIC;
+import org.apache.bcel.generic.INVOKEVIRTUAL;
+import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionFactory;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.PUSH;
+import org.apache.bcel.generic.Type;
 
 /**
  * Dynamically creates and uses a proxy for <tt>java.awt.event.ActionListener</tt>

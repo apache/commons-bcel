@@ -24,7 +24,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ClassGenException;
 import org.apache.bcel.generic.Instruction;

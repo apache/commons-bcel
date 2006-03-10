@@ -1,7 +1,11 @@
-import java.io.*;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.*;
-import org.apache.bcel.generic.*;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.FieldGen;
+import org.apache.bcel.generic.MethodGen;
 
 /**
  * Test BCEL if an input file is identical to the outfile generated

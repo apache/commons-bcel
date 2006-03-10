@@ -1,9 +1,19 @@
-import java.util.*;
-import java.util.jar.*;
-import java.util.zip.*;
-import java.io.*;
-import org.apache.bcel.classfile.*;
-import org.apache.bcel.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.TreeMap;
+import java.util.jar.JarOutputStream;
+import java.util.zip.ZipEntry;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.ClassPath;
 
 /**
@@ -38,7 +48,7 @@ public class Package {
    * We use a "default ClassPath object which uses the environments 
    * CLASSPATH
    */
-  ClassPath classPath = new ClassPath();
+  ClassPath classPath = ClassPath.SYSTEM_CLASS_PATH;
 
   /**
    * A map for all Classes, the ones we're going to package.
