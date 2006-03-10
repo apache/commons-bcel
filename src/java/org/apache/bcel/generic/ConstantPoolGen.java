@@ -87,22 +87,30 @@ public class ConstantPoolGen implements java.io.Serializable {
 	ConstantString s  = (ConstantString)c;
 	ConstantUtf8   u8 = (ConstantUtf8)constants[s.getStringIndex()];
 
-	string_table.put(u8.getBytes(), new Index(i));
+    String key = u8.getBytes();
+    if (!string_table.containsKey(key))
+	string_table.put(key, new Index(i));
       } else if(c instanceof ConstantClass) {
 	ConstantClass s  = (ConstantClass)c;
 	ConstantUtf8  u8 = (ConstantUtf8)constants[s.getNameIndex()];
 
-	class_table.put(u8.getBytes(), new Index(i));
+    String key = u8.getBytes();
+    if (!class_table.containsKey(key))
+	class_table.put(key, new Index(i));
       } else if(c instanceof ConstantNameAndType) {
 	ConstantNameAndType n    = (ConstantNameAndType)c;
 	ConstantUtf8        u8   = (ConstantUtf8)constants[n.getNameIndex()];
 	ConstantUtf8        u8_2 = (ConstantUtf8)constants[n.getSignatureIndex()];
 
-	n_a_t_table.put(u8.getBytes() + NAT_DELIM + u8_2.getBytes(), new Index(i));
+    String key = u8.getBytes() + NAT_DELIM + u8_2.getBytes();
+    if (!n_a_t_table.containsKey(key))
+	n_a_t_table.put(key, new Index(i));
        } else if(c instanceof ConstantUtf8) {
          ConstantUtf8 u = (ConstantUtf8)c;
          
-         utf8_table.put(u.getBytes(), new Index(i));
+         String key = u.getBytes();
+         if (!utf8_table.containsKey(key))
+         utf8_table.put(key, new Index(i));
       } else if(c instanceof ConstantCP) {
 	ConstantCP          m     = (ConstantCP)c;
 	ConstantClass       clazz = (ConstantClass)constants[m.getClassIndex()];
@@ -187,6 +195,7 @@ public class ConstantPoolGen implements java.io.Serializable {
     ret = index;
     constants[index++] = s;
 
+    if (!string_table.containsKey(str))
     string_table.put(str, new Index(ret));
 
     return ret;
@@ -218,6 +227,7 @@ public class ConstantPoolGen implements java.io.Serializable {
     ret = index;
     constants[index++] = c;
 
+    if (!class_table.containsKey(clazz))
     class_table.put(clazz, new Index(ret));
 
     return ret;
@@ -365,6 +375,7 @@ public class ConstantPoolGen implements java.io.Serializable {
     ret = index;
     constants[index++] = new ConstantUtf8(n);
 
+    if (!utf8_table.containsKey(n))
     utf8_table.put(n, new Index(ret));
 
     return ret;
@@ -488,7 +499,9 @@ public class ConstantPoolGen implements java.io.Serializable {
     ret = index;
     constants[index++] = new ConstantNameAndType(name_index, signature_index);
 
-    n_a_t_table.put(name + NAT_DELIM + signature, new Index(ret));
+    String key = name + NAT_DELIM + signature;
+    if (!n_a_t_table.containsKey(key))
+    n_a_t_table.put(key, new Index(ret));
     return ret;
   }
 
@@ -535,8 +548,10 @@ public class ConstantPoolGen implements java.io.Serializable {
     ret = index;
     constants[index++] = new ConstantMethodref(class_index, name_and_type_index);
 
-    cp_table.put(class_name + METHODREF_DELIM + method_name +
-		 METHODREF_DELIM + signature, new Index(ret));
+    String key = class_name + METHODREF_DELIM + method_name + METHODREF_DELIM + signature;
+    
+    if (!cp_table.containsKey(key))
+    cp_table.put(key, new Index(ret));
 
     return ret;
   }
@@ -587,8 +602,9 @@ public class ConstantPoolGen implements java.io.Serializable {
     ret = index;
     constants[index++] = new ConstantInterfaceMethodref(class_index, name_and_type_index);
 
-    cp_table.put(class_name + IMETHODREF_DELIM + method_name +
-		 IMETHODREF_DELIM + signature, new Index(ret));
+    String key = class_name + IMETHODREF_DELIM + method_name + IMETHODREF_DELIM + signature;
+    if (!cp_table.containsKey(key))
+    cp_table.put(key, new Index(ret));
 
     return ret;
   }
@@ -635,7 +651,9 @@ public class ConstantPoolGen implements java.io.Serializable {
     ret = index;
     constants[index++] = new ConstantFieldref(class_index, name_and_type_index);
 
-    cp_table.put(class_name + FIELDREF_DELIM + field_name + FIELDREF_DELIM + signature, new Index(ret));
+    String key = class_name + FIELDREF_DELIM + field_name + FIELDREF_DELIM + signature;
+    if (!cp_table.containsKey(key))
+    cp_table.put(key, new Index(ret));
 
     return ret;
   }
