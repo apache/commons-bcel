@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /** 
  * IFNONNULL - Branch if reference is not null
@@ -26,35 +25,40 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IFNONNULL extends IfInstruction {
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  IFNONNULL() {}
 
-  public IFNONNULL(InstructionHandle target) {
-    super(org.apache.bcel.Constants.IFNONNULL, target);
-  }
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    IFNONNULL() {
+    }
 
-  /**
-   * @return negation of instruction
-   */
-  public IfInstruction negate() {
-    return new IFNULL(target);
-  }
 
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    v.visitStackConsumer(this);
-    v.visitBranchInstruction(this);
-    v.visitIfInstruction(this);
-    v.visitIFNONNULL(this);
-  }
+    public IFNONNULL(InstructionHandle target) {
+        super(org.apache.bcel.Constants.IFNONNULL, target);
+    }
+
+
+    /**
+     * @return negation of instruction
+     */
+    public IfInstruction negate() {
+        return new IFNULL(target);
+    }
+
+
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        v.visitStackConsumer(this);
+        v.visitBranchInstruction(this);
+        v.visitIfInstruction(this);
+        v.visitIFNONNULL(this);
+    }
 }

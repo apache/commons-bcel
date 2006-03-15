@@ -106,8 +106,9 @@ public class ProxyCreator {
       System.out.println("Done. Now calling actionPerformed()");
       
       a.actionPerformed(new ActionEvent(a, ActionEvent.ACTION_PERFORMED, "hello"));
-    } else
-      System.err.println("Call me with java org.apache.bcel.util.JavaWrapper ProxyCreator");
+    } else {
+        System.err.println("Call me with java org.apache.bcel.util.JavaWrapper ProxyCreator");
+    }
   }
 
 }

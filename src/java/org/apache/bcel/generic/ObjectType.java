@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
 
 import org.apache.bcel.Constants;
@@ -27,116 +27,129 @@ import org.apache.bcel.classfile.JavaClass;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ObjectType extends ReferenceType {
-  private String class_name; // Class name of type
 
-  /**
-   * @param class_name fully qualified class name, e.g. java.lang.String
-   */ 
-  public ObjectType(String class_name) {
-    super(Constants.T_REFERENCE, "L" + class_name.replace('.', '/') + ";");
-    this.class_name = class_name.replace('/', '.');
-  }
+    private String class_name; // Class name of type
 
-  /** @return name of referenced class
-   */
-  public String getClassName() { return class_name; }
 
-  /** @return a hash code value for the object.
-   */
-  public int hashCode()  { return class_name.hashCode(); }
-
-  /** @return true if both type objects refer to the same class.
-   */
-  public boolean equals(Object type) {
-    return (type instanceof ObjectType)?
-      ((ObjectType)type).class_name.equals(class_name) : false;
-  }
-
-  /**
-   * If "this" doesn't reference a class, it references an interface
-   * or a non-existant entity.
-   * @deprecated this method returns an inaccurate result
-   *   if the class or interface referenced cannot
-   *   be found: use referencesClassExact() instead
-   */
-  public boolean referencesClass() {
-    try {
-      JavaClass jc = Repository.lookupClass(class_name);
-      return jc.isClass();
-    } catch (ClassNotFoundException e) {
-      return false;
+    /**
+     * @param class_name fully qualified class name, e.g. java.lang.String
+     */
+    public ObjectType(String class_name) {
+        super(Constants.T_REFERENCE, "L" + class_name.replace('.', '/') + ";");
+        this.class_name = class_name.replace('/', '.');
     }
-  }
-  
-  /**
-   * If "this" doesn't reference an interface, it references a class
-   * or a non-existant entity.
-   * @deprecated this method returns an inaccurate result
-   *   if the class or interface referenced cannot
-   *   be found: use referencesInterfaceExact() instead
-   */
-  public boolean referencesInterface(){
-    try {
-      JavaClass jc = Repository.lookupClass(class_name);
-      return !jc.isClass();
-    } catch (ClassNotFoundException e) {
-      return false;
+
+
+    /** @return name of referenced class
+     */
+    public String getClassName() {
+        return class_name;
     }
-  }
 
-  /**
-   * Return true if this type references a class,
-   * false if it references an interface.
-   * @return true if the type references a class, false if
-   *   it references an interface
-   * @throws ClassNotFoundException if the class or interface
-   *   referenced by this type can't be found
-   */
-  public boolean referencesClassExact() throws ClassNotFoundException {
-    JavaClass jc = Repository.lookupClass(class_name);
-    return jc.isClass();
-  }
 
-  /**
-   * Return true if this type references an interface,
-   * false if it references a class.
-   * @return true if the type references an interface, false if
-   *   it references a class
-   * @throws ClassNotFoundException if the class or interface
-   *   referenced by this type can't be found
-   */
-  public boolean referencesInterfaceExact() throws ClassNotFoundException {
-    JavaClass jc = Repository.lookupClass(class_name);
-    return !jc.isClass();
-  }
-
-  /**
-   * Return true if this type is a subclass of given ObjectType.
-   * @throws ClassNotFoundException if any of this class's superclasses
-   *  can't be found
-   */
-  public boolean subclassOf(ObjectType superclass)
-    throws ClassNotFoundException {
-
-    if (this.referencesInterface() || superclass.referencesInterface())
-      return false;
-
-    return Repository.instanceOf(this.class_name, superclass.class_name);
-  }
-
-  /**
-   * Java Virtual Machine Specification edition 2, § 5.4.4 Access Control
-   * @throws ClassNotFoundException if the class referenced by this type
-   *   can't be found
-   */
-  public boolean accessibleTo(ObjectType accessor) throws ClassNotFoundException {
-    JavaClass jc = Repository.lookupClass(class_name);
-
-    if(jc.isPublic()) {
-      return true;
-    } else {
-      JavaClass acc = Repository.lookupClass(accessor.class_name);
-      return acc.getPackageName().equals(jc.getPackageName());
+    /** @return a hash code value for the object.
+     */
+    public int hashCode() {
+        return class_name.hashCode();
     }
-  }
+
+
+    /** @return true if both type objects refer to the same class.
+     */
+    public boolean equals( Object type ) {
+        return (type instanceof ObjectType)
+                ? ((ObjectType) type).class_name.equals(class_name)
+                : false;
+    }
+
+
+    /**
+     * If "this" doesn't reference a class, it references an interface
+     * or a non-existant entity.
+     * @deprecated this method returns an inaccurate result
+     *   if the class or interface referenced cannot
+     *   be found: use referencesClassExact() instead
+     */
+    public boolean referencesClass() {
+        try {
+            JavaClass jc = Repository.lookupClass(class_name);
+            return jc.isClass();
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+
+    /**
+     * If "this" doesn't reference an interface, it references a class
+     * or a non-existant entity.
+     * @deprecated this method returns an inaccurate result
+     *   if the class or interface referenced cannot
+     *   be found: use referencesInterfaceExact() instead
+     */
+    public boolean referencesInterface() {
+        try {
+            JavaClass jc = Repository.lookupClass(class_name);
+            return !jc.isClass();
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+
+    /**
+     * Return true if this type references a class,
+     * false if it references an interface.
+     * @return true if the type references a class, false if
+     *   it references an interface
+     * @throws ClassNotFoundException if the class or interface
+     *   referenced by this type can't be found
+     */
+    public boolean referencesClassExact() throws ClassNotFoundException {
+        JavaClass jc = Repository.lookupClass(class_name);
+        return jc.isClass();
+    }
+
+
+    /**
+     * Return true if this type references an interface,
+     * false if it references a class.
+     * @return true if the type references an interface, false if
+     *   it references a class
+     * @throws ClassNotFoundException if the class or interface
+     *   referenced by this type can't be found
+     */
+    public boolean referencesInterfaceExact() throws ClassNotFoundException {
+        JavaClass jc = Repository.lookupClass(class_name);
+        return !jc.isClass();
+    }
+
+
+    /**
+     * Return true if this type is a subclass of given ObjectType.
+     * @throws ClassNotFoundException if any of this class's superclasses
+     *  can't be found
+     */
+    public boolean subclassOf( ObjectType superclass ) throws ClassNotFoundException {
+        if (this.referencesInterface() || superclass.referencesInterface()) {
+            return false;
+        }
+        return Repository.instanceOf(this.class_name, superclass.class_name);
+    }
+
+
+    /**
+     * Java Virtual Machine Specification edition 2, § 5.4.4 Access Control
+     * @throws ClassNotFoundException if the class referenced by this type
+     *   can't be found
+     */
+    public boolean accessibleTo( ObjectType accessor ) throws ClassNotFoundException {
+        JavaClass jc = Repository.lookupClass(class_name);
+        if (jc.isPublic()) {
+            return true;
+        } else {
+            JavaClass acc = Repository.lookupClass(accessor.class_name);
+            return acc.getPackageName().equals(jc.getPackageName());
+        }
+    }
 }

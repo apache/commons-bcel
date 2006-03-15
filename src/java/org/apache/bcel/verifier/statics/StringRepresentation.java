@@ -92,7 +92,9 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 // However, in terms of performance this would be a better idea.
 // If some new "Node" is defined in BCEL (such as some concrete "Attribute"), we
 // want to know that this class has also to be adapted.
-        if (tostring == null) throw new AssertionViolatedException("Please adapt '" + getClass() + "' to deal with objects of class '" + n.getClass() + "'.");
+        if (tostring == null) {
+            throw new AssertionViolatedException("Please adapt '" + getClass() + "' to deal with objects of class '" + n.getClass() + "'.");
+        }
         return tostring;
     }
 

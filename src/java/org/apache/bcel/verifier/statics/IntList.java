@@ -42,7 +42,9 @@ public class IntList{
 		Integer[] ints = new Integer[theList.size()];
 		theList.toArray(ints);
 		for (int j=0; j<ints.length; j++){
-			if (i == ints[j].intValue()) return true;
+			if (i == ints[j].intValue()) {
+                return true;
+            }
 		}
 		return false;
 	}

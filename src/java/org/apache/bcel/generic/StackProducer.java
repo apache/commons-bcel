@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denote an instruction that may produce a value on top of the stack
@@ -25,8 +24,8 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface StackProducer {
-  /** @return how many words are produced on stack
-   */
-  public int produceStack(ConstantPoolGen cpg);
-}
 
+    /** @return how many words are produced on stack
+     */
+    public int produceStack( ConstantPoolGen cpg );
+}

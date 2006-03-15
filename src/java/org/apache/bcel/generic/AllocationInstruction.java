@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denote family of instructions that allocates space in the heap.
@@ -23,5 +22,5 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public interface AllocationInstruction {}
-
+public interface AllocationInstruction {
+}

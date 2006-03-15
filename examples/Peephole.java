@@ -31,8 +31,9 @@ public class Peephole {
 					     clazz.getClassName(), cp);
 	  Method    stripped = removeNOPs(mg);
 	  
-	  if(stripped != null)     // Any NOPs stripped?
-	    methods[i] = stripped; // Overwrite with stripped method
+	  if(stripped != null) {
+        methods[i] = stripped; // Overwrite with stripped method
+    }
 	}
       }
 
@@ -57,8 +58,9 @@ public class Peephole {
       
       /* Some nasty Java compilers may add NOP at end of method.
        */
-      if((next = last.getNext()) == null)
-	break;
+      if((next = last.getNext()) == null) {
+        break;
+    }
 
       count += match.length;
 
@@ -72,8 +74,9 @@ public class Peephole {
 	for(int i=0; i < targets.length; i++) {
 	  InstructionTargeter[] targeters = targets[i].getTargeters();
 	  
-	  for(int j=0; j < targeters.length; j++)
-	    targeters[j].updateTarget(targets[i], next);
+	  for(int j=0; j < targeters.length; j++) {
+        targeters[j].updateTarget(targets[i], next);
+    }
 	}
       }
     }

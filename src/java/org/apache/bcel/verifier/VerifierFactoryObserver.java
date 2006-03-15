@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.verifier;
-
 
 /**
  * VerifierFactoryObserver instances are notified when new Verifier
@@ -29,11 +28,12 @@ package org.apache.bcel.verifier;
  * @see VerifierFactory#attach(VerifierFactoryObserver)
  * @see VerifierFactory#detach(VerifierFactoryObserver)
  */
-public interface VerifierFactoryObserver{
-	/**
-	 * VerifierFactoryObserver instances are notified invoking this method.
-	 * The String argument is the fully qualified class name of a class a
-	 * new Verifier instance created by the VerifierFactory operates on.
-	 */
-	public void update(String s);
+public interface VerifierFactoryObserver {
+
+    /**
+     * VerifierFactoryObserver instances are notified invoking this method.
+     * The String argument is the fully qualified class name of a class a
+     * new Verifier instance created by the VerifierFactory operates on.
+     */
+    public void update( String s );
 }

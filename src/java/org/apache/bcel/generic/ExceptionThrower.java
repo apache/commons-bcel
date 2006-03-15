@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denote an instruction that may throw a run-time or a linking
@@ -38,5 +37,6 @@ package org.apache.bcel.generic;
  * @author  Enver Haase
  */
 public interface ExceptionThrower {
-  public java.lang.Class[] getExceptions();
+
+    public java.lang.Class[] getExceptions();
 }

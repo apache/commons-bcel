@@ -74,21 +74,21 @@ public class listclass {
      */
     for(int i=0; i < argv.length; i++) {
       if(argv[i].charAt(0) == '-') {  // command line switch
-        if(argv[i].equals("-constants"))
-          constants=true;
-        else if(argv[i].equals("-code"))
-          code=true;
-        else if(argv[i].equals("-brief"))
-          verbose=false;
-        else if(argv[i].equals("-dependencies"))
-          classdep=true;
-        else if(argv[i].equals("-nocontents"))
-          nocontents=true;
-        else if(argv[i].equals("-recurse"))
-          recurse=true;
-        else if(argv[i].equals("-exclude"))
-          exclude=true;
-        else if(argv[i].equals("-help")) {
+        if(argv[i].equals("-constants")) {
+            constants=true;
+        } else if(argv[i].equals("-code")) {
+            code=true;
+        } else if(argv[i].equals("-brief")) {
+            verbose=false;
+        } else if(argv[i].equals("-dependencies")) {
+            classdep=true;
+        } else if(argv[i].equals("-nocontents")) {
+            nocontents=true;
+        } else if(argv[i].equals("-recurse")) {
+            recurse=true;
+        } else if(argv[i].equals("-exclude")) {
+            exclude=true;
+        } else if(argv[i].equals("-help")) {
           System.out.println( "Usage: java listclass [-constants] [-code] [-brief] " +
 			      "[-dependencies] [-nocontents] [-recurse] class... " +
 			      "[-exclude <list>]\n" +
@@ -101,19 +101,21 @@ public class listclass {
                               "-exclude <list>  Do not list classes beginning with " +
 			      "strings in <list>" );
           System.exit( 0 );
-	} else
-          System.err.println("Unknown switch " + argv[i] + " ignored.");
+	} else {
+            System.err.println("Unknown switch " + argv[i] + " ignored.");
+        }
       } else { // add file name to list
-        if(exclude)
-          exclude_name.addElement(argv[i]);
-        else
-          file_name.addElement(argv[i]);
+        if(exclude) {
+            exclude_name.addElement(argv[i]);
+        } else {
+            file_name.addElement(argv[i]);
+        }
       }
     }
 
-    if(file_name.size() == 0)
-      System.err.println("list: No input files specified");
-    else {
+    if(file_name.size() == 0) {
+        System.err.println("list: No input files specified");
+    } else {
       listclass listClass = new listclass(code, constants, verbose, classdep,
 					  nocontents, recurse, exclude_name);
 
@@ -144,12 +146,15 @@ public class listclass {
     try {
       JavaClass java_class;
 
-      if((listedClasses.get(name) != null) || name.startsWith("["))
+      if((listedClasses.get(name) != null) || name.startsWith("[")) {
         return;
+    }
 
-      for(int idx = 0; idx < exclude_name.size(); idx++)
-        if(name.startsWith((String) exclude_name.elementAt(idx)))
-          return;
+      for(int idx = 0; idx < exclude_name.size(); idx++) {
+        if(name.startsWith((String) exclude_name.elementAt(idx))) {
+            return;
+        }
+    }
 
       if(name.endsWith(".class")) {
         java_class = new ClassParser(name).parse(); // May throw IOException
@@ -157,27 +162,32 @@ public class listclass {
 	java_class = Repository.lookupClass(name);
       }
 
-      if(nocontents)
+      if(nocontents) {
         System.out.println(java_class.getClassName());
-      else
+    } else {
         System.out.println(java_class);             // Dump the contents
+    }
 
-      if(constants) // Dump the constant pool ?
-	System.out.println(java_class.getConstantPool());
+      if(constants) {
+        System.out.println(java_class.getConstantPool());
+    }
 
-      if(code) // Dump the method code ?
+      if(code) {
         printCode(java_class.getMethods(), verbose);
+    }
 
-      if(classdep)
+      if(classdep) {
         printClassDependencies(java_class.getConstantPool());
+    }
 
       listedClasses.put(name, name);
 
       if(recurse) {
         String[] dependencies = getClassDependencies(java_class.getConstantPool());
 
-        for(int idx = 0; idx < dependencies.length; idx++)
-          list(dependencies[idx]);
+        for(int idx = 0; idx < dependencies.length; idx++) {
+            list(dependencies[idx]);
+        }
       }
     } catch(IOException e) {
       System.out.println("Error loading class " + name + " (" + e.getMessage() + ")");
@@ -193,8 +203,9 @@ public class listclass {
   public static void printClassDependencies(ConstantPool pool) {
     String[] names = getClassDependencies(pool);
     System.out.println("Dependencies:");
-    for(int idx = 0; idx < names.length; idx++)
-      System.out.println("\t" + names[idx]);
+    for(int idx = 0; idx < names.length; idx++) {
+        System.out.println("\t" + names[idx]);
+    }
   }
 
   public static String[] getClassDependencies(ConstantPool pool) {
@@ -209,8 +220,9 @@ public class listclass {
         buf.setLength(0);
         buf.append(c1.getBytes());
         for(int n = 0; n < buf.length(); n++) {
-          if(buf.charAt(n) == '/')
+          if(buf.charAt(n) == '/') {
             buf.setCharAt(n, '.');
+        }
 	}
 
         tempArray[size++] = buf.toString();
@@ -230,8 +242,9 @@ public class listclass {
       System.out.println(methods[i]);
       
       Code code = methods[i].getCode();
-      if(code != null)
-	System.out.println(code.toString(verbose));
+      if(code != null) {
+        System.out.println(code.toString(verbose));
+    }
     }
   }
 }

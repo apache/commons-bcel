@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * LDIV - Divide longs
@@ -25,30 +24,34 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class LDIV extends ArithmeticInstruction implements ExceptionThrower  {
-  public LDIV() {
-    super(org.apache.bcel.Constants.LDIV);
-  }
+public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
 
-  public Class[] getExceptions() {
-    return new Class[] { org.apache.bcel.ExceptionConstants.ARITHMETIC_EXCEPTION };
-  }
+    public LDIV() {
+        super(org.apache.bcel.Constants.LDIV);
+    }
 
 
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    v.visitExceptionThrower(this);
-    v.visitTypedInstruction(this);
-    v.visitStackProducer(this);
-    v.visitStackConsumer(this);
-    v.visitArithmeticInstruction(this);
-    v.visitLDIV(this);
-  }
+    public Class[] getExceptions() {
+        return new Class[] {
+            org.apache.bcel.ExceptionConstants.ARITHMETIC_EXCEPTION
+        };
+    }
+
+
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        v.visitExceptionThrower(this);
+        v.visitTypedInstruction(this);
+        v.visitStackProducer(this);
+        v.visitStackConsumer(this);
+        v.visitArithmeticInstruction(this);
+        v.visitLDIV(this);
+    }
 }

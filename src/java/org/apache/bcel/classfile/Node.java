@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.classfile;
-
 
 /**
  * Denote class to have an accept method();
@@ -24,5 +23,6 @@ package org.apache.bcel.classfile;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface Node {
-  public void accept(Visitor obj);    
+
+    public void accept( Visitor obj );
 }

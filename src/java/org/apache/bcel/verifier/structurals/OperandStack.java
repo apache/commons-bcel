@@ -83,7 +83,9 @@ public class OperandStack{
 	 * objects on the stacks.
 	 */
 	public boolean equals(Object o){
-		if (!(o instanceof OperandStack)) return false;
+		if (!(o instanceof OperandStack)) {
+            return false;
+        }
 		OperandStack s = (OperandStack) o;
 		return this.stack.equals(s.stack);
 	}
@@ -148,7 +150,9 @@ public class OperandStack{
 	 * Pushes a Type object onto the stack.
 	 */
 	public void push(Type type){
-		if (type == null) throw new AssertionViolatedException("Cannot push NULL onto OperandStack.");
+		if (type == null) {
+            throw new AssertionViolatedException("Cannot push NULL onto OperandStack.");
+        }
 		if (type == Type.BOOLEAN || type == Type.CHAR || type == Type.BYTE || type == Type.SHORT){
 			throw new AssertionViolatedException("The OperandStack does not know about '"+type+"'; use Type.INT instead.");
 		}
@@ -207,8 +211,9 @@ public class OperandStack{
 	 */
 	public void merge(OperandStack s){
 	    try {
-		if ( (slotsUsed() != s.slotsUsed()) || (size() != s.size()) )
-			throw new StructuralCodeConstraintException("Cannot merge stacks of different size:\nOperandStack A:\n"+this+"\nOperandStack B:\n"+s);
+		if ( (slotsUsed() != s.slotsUsed()) || (size() != s.size()) ) {
+            throw new StructuralCodeConstraintException("Cannot merge stacks of different size:\nOperandStack A:\n"+this+"\nOperandStack B:\n"+s);
+        }
 		
 		for (int i=0; i<size(); i++){
 			// If the object _was_ initialized and we're supposed to merge

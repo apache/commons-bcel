@@ -63,8 +63,9 @@ public class ExceptionHandlers{
 	 */
 	public ExceptionHandler[] getExceptionHandlers(InstructionHandle ih){
 		Set hs = (Set) exceptionhandlers.get(ih);
-		if (hs == null) return new ExceptionHandler[0];
-		else{
+		if (hs == null) {
+            return new ExceptionHandler[0];
+        } else{
 			ExceptionHandler[] ret = new ExceptionHandler[hs.size()];
 			return (ExceptionHandler[]) (hs.toArray(ret));
 		}

@@ -89,17 +89,19 @@ public final class ASCII_CharStream
               bufpos = maxNextCharInd = 0;
               available = tokenBegin;
            }
-           else if (tokenBegin < 0)
-              bufpos = maxNextCharInd = 0;
-           else
-              ExpandBuff(false);
+           else if (tokenBegin < 0) {
+            bufpos = maxNextCharInd = 0;
+        } else {
+            ExpandBuff(false);
         }
-        else if (available > tokenBegin)
-           available = bufsize;
-        else if ((tokenBegin - available) < 2048)
-           ExpandBuff(true);
-        else
-           available = tokenBegin;
+        }
+        else if (available > tokenBegin) {
+            available = bufsize;
+        } else if ((tokenBegin - available) < 2048) {
+            ExpandBuff(true);
+        } else {
+            available = tokenBegin;
+        }
      }
 
      int i;
@@ -109,16 +111,17 @@ public final class ASCII_CharStream
         {
            inputStream.close();
            throw new java.io.IOException();
+        } else {
+            maxNextCharInd += i;
         }
-        else
-           maxNextCharInd += i;
         return;
      }
      catch(java.io.IOException e) {
         --bufpos;
         backup(0);
-        if (tokenBegin == -1)
-           tokenBegin = bufpos;
+        if (tokenBegin == -1) {
+            tokenBegin = bufpos;
+        }
         throw e;
      }
   }
@@ -147,9 +150,9 @@ public final class ASCII_CharStream
         if (c == '\n')
         {
            prevCharIsLF = true;
+        } else {
+            line += (column = 1);
         }
-        else
-           line += (column = 1);
      }
 
      switch (c)
@@ -180,8 +183,9 @@ public final class ASCII_CharStream
         return (char)((char)0xff & buffer[(bufpos == bufsize - 1) ? (bufpos = 0) : ++bufpos]);
      }
 
-     if (++bufpos >= maxNextCharInd)
+     if (++bufpos >= maxNextCharInd) {
         FillBuff();
+    }
 
      char c = (char)((char)0xff & buffer[bufpos]);
 
@@ -226,17 +230,19 @@ public final class ASCII_CharStream
   static public final void backup(int amount) {
 
     inBuf += amount;
-    if ((bufpos -= amount) < 0)
-       bufpos += bufsize;
+    if ((bufpos -= amount) < 0) {
+        bufpos += bufsize;
+    }
   }
 
   public ASCII_CharStream(java.io.Reader dstream, int startline,
   int startcolumn, int buffersize)
   {
-    if (inputStream != null)
-       throw new Error("\n   ERROR: Second call to the constructor of a static ASCII_CharStream.  You must\n" +
-       "       either use ReInit() or set the JavaCC option STATIC to false\n" +
-       "       during the generation of this class.");
+    if (inputStream != null) {
+        throw new Error("\n   ERROR: Second call to the constructor of a static ASCII_CharStream.  You must\n" +
+           "       either use ReInit() or set the JavaCC option STATIC to false\n" +
+           "       during the generation of this class.");
+    }
     inputStream = dstream;
     line = startline;
     column = startcolumn - 1;
@@ -300,20 +306,21 @@ public final class ASCII_CharStream
   }
   static public final String GetImage()
   {
-     if (bufpos >= tokenBegin)
+     if (bufpos >= tokenBegin) {
         return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
-     else
+    } else {
         return new String(buffer, tokenBegin, bufsize - tokenBegin) +
                               new String(buffer, 0, bufpos + 1);
+    }
   }
 
   static public final char[] GetSuffix(int len)
   {
      char[] ret = new char[len];
 
-     if ((bufpos + 1) >= len)
+     if ((bufpos + 1) >= len) {
         System.arraycopy(buffer, bufpos - len + 1, ret, 0, len);
-     else
+    } else
      {
         System.arraycopy(buffer, bufsize - (len - bufpos - 1), ret, 0,
                                                           len - bufpos - 1);
@@ -367,10 +374,11 @@ public final class ASCII_CharStream
 
         while (i++ < len)
         {
-           if (bufline[j = start % bufsize] != bufline[++start % bufsize])
-              bufline[j] = newLine++;
-           else
-              bufline[j] = newLine;
+           if (bufline[j = start % bufsize] != bufline[++start % bufsize]) {
+            bufline[j] = newLine++;
+        } else {
+            bufline[j] = newLine;
+        }
         }
      }
 

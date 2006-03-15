@@ -55,9 +55,9 @@ public class Environment implements Cloneable {
 
     elements++; // Count
 
-    if(v == null) // Not yet initialized
-      table[hash] = v = new Vector(SLOTS);
-    else {
+    if(v == null) {
+        table[hash] = v = new Vector(SLOTS);
+    } else {
       try {
 	int index = lookup(v, key);
 
@@ -82,14 +82,16 @@ public class Environment implements Cloneable {
     hash = hashCode(key);
     v    = table[hash];
 
-    if(v == null)
-      return null;
+    if(v == null) {
+        return null;
+    }
 
     try {
       int index = lookup(v, key);
 
-      if(index >= 0)
-	entry = (EnvEntry)v.elementAt(index);
+      if(index >= 0) {
+        entry = (EnvEntry)v.elementAt(index);
+    }
     } catch(ArrayIndexOutOfBoundsException e) {}
 
     return entry;
@@ -105,8 +107,9 @@ public class Environment implements Cloneable {
     hash = hashCode(key);
     v    = table[hash];
 
-    if(v == null)
-      return;
+    if(v == null) {
+        return;
+    }
 
     try {
       int index = lookup(v, key);
@@ -126,8 +129,9 @@ public class Environment implements Cloneable {
     for(int i=0; i < len; i++) {
       EnvEntry entry = (EnvEntry)v.elementAt(i);
 
-      if(entry.getHashKey().equals(key)) // Found index
-	return i;
+      if(entry.getHashKey().equals(key)) {
+        return i;
+    }
     }
 
     return -1;
@@ -157,9 +161,11 @@ public class Environment implements Cloneable {
   public String toString() {
     StringBuffer buf = new StringBuffer();
 
-    for(int i=0; i < size; i++)
-      if(table[i] != null)
-	buf.append(table[i] + "\n");
+    for(int i=0; i < size; i++) {
+        if(table[i] != null) {
+            buf.append(table[i] + "\n");
+        }
+    }
 
     return buf.toString();
   }
@@ -173,8 +179,9 @@ public class Environment implements Cloneable {
       if((v = table[i]) != null) {
 	int len = v.size();
 	try {
-	  for(int j=0; j < len; j++)
-	    entries[k++] = (EnvEntry)v.elementAt(j);
+	  for(int j=0; j < len; j++) {
+        entries[k++] = (EnvEntry)v.elementAt(j);
+    }
 	} catch(ArrayIndexOutOfBoundsException e) {}  
       }
     }

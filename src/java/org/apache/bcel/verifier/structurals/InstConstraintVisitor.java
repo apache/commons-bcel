@@ -146,8 +146,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 * @throws org.apache.bcel.verifier.exc.StructuralCodeConstraintException if the above constraint is not satisfied.
 	 */
 	private void indexOfInt(Instruction o, Type index){
-		if (! index.equals(Type.INT))
-				constraintViolated(o, "The 'index' is not of type int but of type "+index+".");
+		if (! index.equals(Type.INT)) {
+            constraintViolated(o, "The 'index' is not of type int but of type "+index+".");
+        }
 	}
 
 	/**
@@ -164,8 +165,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 
 	/** Assures value is of type INT. */
 	private void valueOfInt(Instruction o, Type value){
-		if (! value.equals(Type.INT))
-				constraintViolated(o, "The 'value' is not of type int but of type "+value+".");
+		if (! value.equals(Type.INT)) {
+            constraintViolated(o, "The 'value' is not of type int but of type "+value+".");
+        }
 	}
 
 	/**
@@ -174,8 +176,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 * @throws org.apache.bcel.verifier.exc.StructuralCodeConstraintException if the above constraint is violated.
  	 */
 	private boolean arrayrefOfArrayType(Instruction o, Type arrayref){
-		if (! ((arrayref instanceof ArrayType) || arrayref.equals(Type.NULL)) )
-				constraintViolated(o, "The 'arrayref' does not refer to an array but is of type "+arrayref+".");
+		if (! ((arrayref instanceof ArrayType) || arrayref.equals(Type.NULL)) ) {
+            constraintViolated(o, "The 'arrayref' does not refer to an array but is of type "+arrayref+".");
+        }
 		return (arrayref instanceof ArrayType);
 	}
 
@@ -492,10 +495,11 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	 * Ensures the specific preconditions of the said instruction.
 	 */
 	public void visitANEWARRAY(ANEWARRAY o){
-		if (!stack().peek().equals(Type.INT))
-			constraintViolated(o, "The 'count' at the stack top is not of type '"+Type.INT+"' but of type '"+stack().peek()+"'.");
+		if (!stack().peek().equals(Type.INT)) {
+            constraintViolated(o, "The 'count' at the stack top is not of type '"+Type.INT+"' but of type '"+stack().peek()+"'.");
 		// The runtime constant pool item at that index must be a symbolic reference to a class,
 		// array, or interface type. See Pass 3a.
+        }
 	}
 	
 	/**
@@ -548,7 +552,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		}
 		
 		// NULL is a subclass of every class, so to speak.
-		if (stack().peek().equals(Type.NULL)) return;
+		if (stack().peek().equals(Type.NULL)) {
+            return;
+        }
 				
 		ObjectType exc = (ObjectType) (stack().peek());
 		ObjectType throwable = (ObjectType) (Type.getType("Ljava/lang/Throwable;"));
@@ -588,8 +594,9 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 		valueOfInt(o, value);
 		if (arrayrefOfArrayType(o, arrayref)){
 			if (! ( (((ArrayType) arrayref).getElementType().equals(Type.BOOLEAN)) ||
-			        (((ArrayType) arrayref).getElementType().equals(Type.BYTE)) ) )
-					constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a Type.BYTE or Type.BOOLEAN but to an array of '"+((ArrayType) arrayref).getElementType()+"'.");
+			        (((ArrayType) arrayref).getElementType().equals(Type.BYTE)) ) ) {
+                constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a Type.BYTE or Type.BOOLEAN but to an array of '"+((ArrayType) arrayref).getElementType()+"'.");
+            }
 		}
 	}
 
@@ -1185,15 +1192,17 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 						Type o_type = o.getType(cpg);
 						if (f_type.equals(o_type)){
 							f = fields[i];
-							if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0)
-								f = null;
+							if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0) {
+                                f = null;
+                            }
 							break outer;
 						}
 					}
 				}
 			}
-			if (f == null)
-				throw new AssertionViolatedException("Field '"+field_name+"' not found?!?");
+			if (f == null) {
+                throw new AssertionViolatedException("Field '"+field_name+"' not found?!?");
+            }
 		}
 
 		if (f.isProtected()){

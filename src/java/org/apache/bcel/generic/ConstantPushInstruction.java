@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denotes a push instruction that produces a literal on the stack
@@ -28,6 +27,6 @@ package org.apache.bcel.generic;
  * @see SIPUSH
  */
 public interface ConstantPushInstruction extends PushInstruction, TypedInstruction {
-  public Number getValue();
-}
 
+    public Number getValue();
+}

@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /** 
  * DUP_X2 - Duplicate top operand stack word and put three down
@@ -25,21 +24,22 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class DUP_X2 extends StackInstruction {
-  public DUP_X2() {
-    super(org.apache.bcel.Constants.DUP_X2);
-  }
+
+    public DUP_X2() {
+        super(org.apache.bcel.Constants.DUP_X2);
+    }
 
 
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    v.visitStackInstruction(this);
-    v.visitDUP_X2(this);
-  }
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        v.visitStackInstruction(this);
+        v.visitDUP_X2(this);
+    }
 }

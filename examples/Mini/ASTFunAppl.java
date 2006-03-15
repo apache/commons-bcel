@@ -66,31 +66,33 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
 
     this.env = env;
 
-    if(entry == null) // Applying unknown function
-      MiniC.addError(name.getLine(), name.getColumn(),
-		     "Applying unknown function " + fname + ".");
-    else {
-      if(!(entry instanceof Function))
-	MiniC.addError(name.getLine(), name.getColumn(),
-		       "Applying non-function " + fname + ".");
-      else {
+    if(entry == null) {
+        MiniC.addError(name.getLine(), name.getColumn(),
+        	     "Applying unknown function " + fname + ".");
+    } else {
+      if(!(entry instanceof Function)) {
+        MiniC.addError(name.getLine(), name.getColumn(),
+        	       "Applying non-function " + fname + ".");
+    } else {
 	int      len = (exprs != null)? exprs.length : 0;
 	Function fun = (Function)entry;
 
-	if(len != fun.getNoArgs())
-	  MiniC.addError(name.getLine(), name.getColumn(),
-			 "Function " + fname + " expects " + fun.getNoArgs() +
-			 " arguments, you supplied " + len + ".");
-	else { // Adjust references
+	if(len != fun.getNoArgs()) {
+        MiniC.addError(name.getLine(), name.getColumn(),
+        		 "Function " + fname + " expects " + fun.getNoArgs() +
+        		 " arguments, you supplied " + len + ".");
+    } else { // Adjust references
 	  function = fun;
 	  name     = fun.getName();
 	}
       }
     }
 
-    if(exprs != null) // Argument list may be empty
-      for(int i=0; i < exprs.length; i++)
-	exprs[i] = exprs[i].traverse(env);
+    if(exprs != null) {
+        for(int i=0; i < exprs.length; i++) {
+            exprs[i] = exprs[i].traverse(env);
+        }
+    }
 
     return this;
   }
@@ -116,20 +118,22 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
 	int expect = args[i].getType();     // May be T_UNKNOWN
 	int t_e    = exprs[i].eval(expect); // May be T_UNKNOWN
 
-	if((expect != T_UNKNOWN) && (t_e != expect))
-	  MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
-			 "Argument " + (i + 1) + " in application of " + fname +
-			 " is not of type " + TYPE_NAMES[expect] + " but " +
-			 TYPE_NAMES[t_e]);
-	else
-	  args[i].setType(t_e); // Update, may be identical
+	if((expect != T_UNKNOWN) && (t_e != expect)) {
+        MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
+        		 "Argument " + (i + 1) + " in application of " + fname +
+        		 " is not of type " + TYPE_NAMES[expect] + " but " +
+        		 TYPE_NAMES[t_e]);
+    } else {
+        args[i].setType(t_e); // Update, may be identical
+    }
 
 	is_simple = is_simple && exprs[i].isSimple(); // Check condition
       }
     }
 
-    if(t == T_UNKNOWN)           // Function type yet unknown
-      fun.setType(t = expected); // May be still T_UNKNOWN
+    if(t == T_UNKNOWN) {
+        fun.setType(t = expected); // May be still T_UNKNOWN
+    }
 
     return type = t;
   }
@@ -142,16 +146,17 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
     Function   f     = function;
     ASTIdent[] args  = f.getArgs();
 
-    if(fname.equals("READ"))
-      ASTFunDecl.push(buf, "_readInt()");
-    else if(fname.equals("WRITE")) {
+    if(fname.equals("READ")) {
+        ASTFunDecl.push(buf, "_readInt()");
+    } else if(fname.equals("WRITE")) {
       exprs[0].code(buf);
       ASTFunDecl.push(buf, "_writeInt(" + ASTFunDecl.pop() + ")");
     }
     else { // Normal function
       if(exprs != null) { // Output in reverse odrder
-	for(int i = exprs.length - 1; i >= 0; i--)
-	  exprs[i].code(buf);
+	for(int i = exprs.length - 1; i >= 0; i--) {
+        exprs[i].code(buf);
+    }
       }
 
       StringBuffer call = new StringBuffer(fname + "(");
@@ -160,8 +165,9 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
       if(exprs != null) {
 	for(int i=0; i < exprs.length; i++) {
 	  call.append(ASTFunDecl.pop());
-	  if(i < exprs.length - 1)
-	    call.append(", ");
+	  if(i < exprs.length - 1) {
+        call.append(", ");
+    }
 	}	
       }
       call.append(")");
@@ -180,11 +186,11 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
     ASTIdent[] args  = f.getArgs();
     String     class_name = method.getClassName();
 
-    if(fname.equals("READ"))
-      il.append(new INVOKESTATIC(cp.addMethodref(class_name,
-						 "_readInt",
-						 "()I")));
-    else if(fname.equals("WRITE")) {
+    if(fname.equals("READ")) {
+        il.append(new INVOKESTATIC(cp.addMethodref(class_name,
+        					 "_readInt",
+        					 "()I")));
+    } else if(fname.equals("WRITE")) {
       exprs[0].byte_code(il, method, cp);
       ASTFunDecl.pop();
       il.append(new INVOKESTATIC(cp.addMethodref(class_name,

@@ -25,39 +25,44 @@ public class MiniC implements org.apache.bcel.Constants {
        */
       for(int i=0; i < argv.length; i++) {
 	if(argv[i].charAt(0) == '-') {  // command line switch
-	  if(argv[i].equals("-java"))
-	    byte_code=false;
-	  else if(argv[i].equals("-bytecode"))
-	    byte_code=true;
-	  else
-	    throw new Exception("Unknown option: " + argv[i]);
+	  if(argv[i].equals("-java")) {
+        byte_code=false;
+    } else if(argv[i].equals("-bytecode")) {
+        byte_code=true;
+    } else {
+        throw new Exception("Unknown option: " + argv[i]);
+    }
 	}
 	else { // add file name to list
 	  file_name[files++] = argv[i];
 	}
       }
 	
-      if(files == 0)
-	System.err.println("Nothing to compile.");
+      if(files == 0) {
+        System.err.println("Nothing to compile.");
+    }
 
       for(int j=0; j < files; j++) {
 	errors   = new Vector();
 	warnings = new Vector();
 	pass     = 0;
 
-	if(j == 0)
-	  parser = new MiniParser(new java.io.FileInputStream(file_name[0]));
-	else
-	  parser.ReInit(new java.io.FileInputStream(file_name[j]));
+	if(j == 0) {
+        parser = new MiniParser(new java.io.FileInputStream(file_name[0]));
+    } else {
+        parser.ReInit(new java.io.FileInputStream(file_name[j]));
+    }
 
 	int index = file_name[j].lastIndexOf('.');
-	if(index > 0)
-	  base_name = file_name[j].substring(0, index);
-	else
-	  base_name = file_name[j];
+	if(index > 0) {
+        base_name = file_name[j].substring(0, index);
+    } else {
+        base_name = file_name[j];
+    }
 
-	if((index = base_name.lastIndexOf(File.separatorChar)) > 0)
-	  base_name = base_name.substring(index + 1);
+	if((index = base_name.lastIndexOf(File.separatorChar)) > 0) {
+        base_name = base_name.substring(index + 1);
+    }
 
 	file   = file_name[j];
 
@@ -80,11 +85,13 @@ public class MiniC implements org.apache.bcel.Constants {
 	  program.eval(pass=3);
 	}
 
-        for(int i=0; i < errors.size(); i++)
-	  System.out.println(errors.elementAt(i));
+        for(int i=0; i < errors.size(); i++) {
+            System.out.println(errors.elementAt(i));
+        }
 
-        for(int i=0; i < warnings.size(); i++)
- 	  System.out.println(warnings.elementAt(i));
+        for(int i=0; i < warnings.size(); i++) {
+            System.out.println(warnings.elementAt(i));
+        }
 
 	if(errors.size() == 0) {
 	  if(byte_code) {
@@ -118,18 +125,20 @@ public class MiniC implements org.apache.bcel.Constants {
 	  }
 	}
 
-	if((errors.size() > 0) || (warnings.size() > 0))
-	  System.out.println(errors.size() + " errors and " + warnings.size() +
-			     " warnings.");
+	if((errors.size() > 0) || (warnings.size() > 0)) {
+        System.out.println(errors.size() + " errors and " + warnings.size() +
+        		     " warnings.");
+    }
       }
     } catch(Exception e) { e.printStackTrace(); }
   }
 
 
   final static void addError(int line, int column, String err) {
-    if(pass != 2)
-      errors.addElement(file + ":" + fillup(line, 3) + "," + fillup(column, 2) +
-	  	        ": " + err);
+    if(pass != 2) {
+        errors.addElement(file + ":" + fillup(line, 3) + "," + fillup(column, 2) +
+          	        ": " + err);
+    }
   }
 
   final static void addWarning(int line, int column, String err) {
@@ -144,13 +153,14 @@ public class MiniC implements org.apache.bcel.Constants {
     if(diff > 0) {
       char[] chs = new char[diff];
       
-      for(int i=0; i < diff; i++)
-	chs[i] = ' ';
+      for(int i=0; i < diff; i++) {
+        chs[i] = ' ';
+    }
 
       return new String(chs) + str;
+    } else {
+        return str;
     }
-    else
-      return str;
   }
 
   final static void addWarning(String err) { warnings.addElement(err); }

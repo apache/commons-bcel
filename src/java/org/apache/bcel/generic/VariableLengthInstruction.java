@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denotes an instruction to be a variable length instruction, such as
@@ -29,5 +28,5 @@ package org.apache.bcel.generic;
  * @see LOOKUPSWITCH
  * @see TABLESWITCH
  */
-public interface VariableLengthInstruction {}
-
+public interface VariableLengthInstruction {
+}

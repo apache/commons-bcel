@@ -53,13 +53,14 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   public ASTExpr traverse(Environment env) {
     EnvEntry entry = env.get(name);
 
-    if(entry == null)
-      MiniC.addError(line, column, "Undeclared identifier " + name);
-    else if(entry instanceof Function)
-      MiniC.addError(line, column,
-		     "Function " + name + " used as an identifier.");
-    else
-      reference = (Variable)entry;
+    if(entry == null) {
+        MiniC.addError(line, column, "Undeclared identifier " + name);
+    } else if(entry instanceof Function) {
+        MiniC.addError(line, column,
+        	     "Function " + name + " used as an identifier.");
+    } else {
+        reference = (Variable)entry;
+    }
 
     return this; // Nothing to reduce/traverse further here
   }
@@ -73,18 +74,18 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
 
     is_simple = true; // (Very) simple expression, always true
 
-    if((t == T_UNKNOWN) && (expected == T_UNKNOWN))
-      type = T_UNKNOWN;
-    else if((t == T_UNKNOWN) && (expected != T_UNKNOWN)) {
+    if((t == T_UNKNOWN) && (expected == T_UNKNOWN)) {
+        type = T_UNKNOWN;
+    } else if((t == T_UNKNOWN) && (expected != T_UNKNOWN)) {
       ident.setType(expected);
       type = expected;
     }
     else if((t != T_UNKNOWN) && (expected == T_UNKNOWN)) {
       ident.setType(t);
       type = t;
+    } else {
+        type = t; // Caller has to check for an error, i.e. t != expected
     }
-    else // (t != T_UNKNOWN) && (expected != T_UNKNOWN) 
-      type = t; // Caller has to check for an error, i.e. t != expected
 
     return type;
   }
@@ -93,23 +94,24 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
    * Fourth pass, produce Java code.
    */
   public void code(StringBuffer buf) {
-    if(name.equals("TRUE"))
-      ASTFunDecl.push(buf, "1");
-    else if(name.equals("FALSE"))
-      ASTFunDecl.push(buf, "0");
-    else
-      ASTFunDecl.push(buf, name);
+    if(name.equals("TRUE")) {
+        ASTFunDecl.push(buf, "1");
+    } else if(name.equals("FALSE")) {
+        ASTFunDecl.push(buf, "0");
+    } else {
+        ASTFunDecl.push(buf, name);
+    }
   }
 
   /**
    * Fifth pass, produce Java byte code.
    */
   public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
-    if(name.equals("TRUE"))
-      il.append(new PUSH(cp, 1));
-    else if(name.equals("FALSE"))
-      il.append(new PUSH(cp, 0));
-    else {
+    if(name.equals("TRUE")) {
+        il.append(new PUSH(cp, 1));
+    } else if(name.equals("FALSE")) {
+        il.append(new PUSH(cp, 0));
+    } else {
       LocalVariableGen local_var = reference.getLocalVariable();
       il.append(new ILOAD(local_var.getIndex()));
     }

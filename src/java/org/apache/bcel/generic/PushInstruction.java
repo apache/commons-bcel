@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denotes an unparameterized instruction to produce a value on top of the stack,
@@ -33,4 +32,3 @@ package org.apache.bcel.generic;
  */
 public interface PushInstruction extends StackProducer {
 }
-

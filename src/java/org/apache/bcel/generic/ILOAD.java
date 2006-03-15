@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /** 
  * ILOAD - Load int from local variable onto stack
@@ -25,31 +24,34 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ILOAD extends LoadInstruction {
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  ILOAD() {
-    super(org.apache.bcel.Constants.ILOAD, org.apache.bcel.Constants.ILOAD_0);
-  }
 
-  /** Load int from local variable
-   * @param n index of local variable
-   */
-  public ILOAD(int n) {
-    super(org.apache.bcel.Constants.ILOAD, org.apache.bcel.Constants.ILOAD_0, n);
-  }
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    ILOAD() {
+        super(org.apache.bcel.Constants.ILOAD, org.apache.bcel.Constants.ILOAD_0);
+    }
 
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    super.accept(v);
-    v.visitILOAD(this);
-  }
+
+    /** Load int from local variable
+     * @param n index of local variable
+     */
+    public ILOAD(int n) {
+        super(org.apache.bcel.Constants.ILOAD, org.apache.bcel.Constants.ILOAD_0, n);
+    }
+
+
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        super.accept(v);
+        v.visitILOAD(this);
+    }
 }

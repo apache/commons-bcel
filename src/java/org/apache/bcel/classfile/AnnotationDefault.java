@@ -27,59 +27,61 @@ import java.io.IOException;
  */
 public abstract class AnnotationDefault extends Attribute {
 
-	ElementValue default_value;
+    ElementValue default_value;
 
-	/**
-	 * @param annotation_type the subclass type of the annotation
-	 * @param name_index Index pointing to the name <em>Code</em>
-	 * @param length Content length in bytes
-	 * @param file Input stream
-	 * @param constant_pool Array of constants
-	 */
-	AnnotationDefault(byte annotation_type, int name_index, int length, DataInputStream file,
-       ConstantPool constant_pool) throws IOException
-    {
-	    this(annotation_type, name_index, length, (ElementValue) null, constant_pool);   
-	    default_value = new ElementValue(file, constant_pool);
-	}
-	
-	/**
-	 * @param annotation_type the subclass type of the annotation
-	 * @param name_index Index pointing to the name <em>Code</em>
-	 * @param length Content length in bytes
-	 * @param defaultValue the annotation's default value
-	 * @param constant_pool Array of constants
-	 */
-	 public AnnotationDefault(byte annotation_type, int name_index, int length, ElementValue defaultValue, ConstantPool constant_pool)
-	 {
-	    super(annotation_type, name_index, length, constant_pool);
-	    setDefaultValue(defaultValue);
-	 }
-	 	  
-	  /**
-	   * Called by objects that are traversing the nodes of the tree implicitely
-	   * defined by the contents of a Java class. I.e., the hierarchy of methods,
-	   * fields, attributes, etc. spawns a tree of objects.
-	   *
-	   * @param v Visitor object
-	   */
-	  public void accept(Visitor v) {
-//	    v.visitAnnotationDefault(this);
-	  }
-	  
-	  /**
-	   * @param defaultValue the default value of this methodinfo's annotation
-	   */
-	  public final void setDefaultValue(ElementValue defaultValue)
-	  {
-	    default_value = defaultValue;
-	  }
 
-	  /**
-	   * @return the default value
-	   */
-	  public final ElementValue getDefaultValue()
-	  {
-	    return default_value;
-	  }
+    /**
+     * @param annotation_type the subclass type of the annotation
+     * @param name_index Index pointing to the name <em>Code</em>
+     * @param length Content length in bytes
+     * @param file Input stream
+     * @param constant_pool Array of constants
+     */
+    AnnotationDefault(byte annotation_type, int name_index, int length, DataInputStream file,
+            ConstantPool constant_pool) throws IOException {
+        this(annotation_type, name_index, length, (ElementValue) null, constant_pool);
+        default_value = new ElementValue(file, constant_pool);
+    }
+
+
+    /**
+     * @param annotation_type the subclass type of the annotation
+     * @param name_index Index pointing to the name <em>Code</em>
+     * @param length Content length in bytes
+     * @param defaultValue the annotation's default value
+     * @param constant_pool Array of constants
+     */
+    public AnnotationDefault(byte annotation_type, int name_index, int length,
+            ElementValue defaultValue, ConstantPool constant_pool) {
+        super(annotation_type, name_index, length, constant_pool);
+        setDefaultValue(defaultValue);
+    }
+
+
+    /**
+     * Called by objects that are traversing the nodes of the tree implicitely
+     * defined by the contents of a Java class. I.e., the hierarchy of methods,
+     * fields, attributes, etc. spawns a tree of objects.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        //	    v.visitAnnotationDefault(this);
+    }
+
+
+    /**
+     * @param defaultValue the default value of this methodinfo's annotation
+     */
+    public final void setDefaultValue( ElementValue defaultValue ) {
+        default_value = defaultValue;
+    }
+
+
+    /**
+     * @return the default value
+     */
+    public final ElementValue getDefaultValue() {
+        return default_value;
+    }
 }

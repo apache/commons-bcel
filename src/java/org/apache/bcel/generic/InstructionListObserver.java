@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Implement this interface if you're interested in changes to an InstructionList object
@@ -25,6 +24,6 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface InstructionListObserver {
-  public void notify(InstructionList list);
-}
 
+    public void notify( InstructionList list );
+}

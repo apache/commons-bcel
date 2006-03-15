@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.util;
-
 
 import org.apache.bcel.classfile.JavaClass;
 
@@ -30,44 +29,45 @@ import org.apache.bcel.classfile.JavaClass;
  * @author David Dixon-Peugh
  */
 public interface Repository extends java.io.Serializable {
-  /**
-   * Store the provided class under "clazz.getClassName()" 
-   */
-  public void storeClass(JavaClass clazz);
 
-  /**
-   * Remove class from repository
-   */
-  public void removeClass(JavaClass clazz);
-    
-  /**
-   * Find the class with the name provided, if the class
-   * isn't there, return NULL.
-   */
-  public JavaClass findClass(String className);
+    /**
+     * Store the provided class under "clazz.getClassName()" 
+     */
+    public void storeClass( JavaClass clazz );
 
-  /**
-   * Find the class with the name provided, if the class
-   * isn't there, make an attempt to load it.
-   */
-  public JavaClass loadClass(String className)
-    throws java.lang.ClassNotFoundException;
 
-  /**
-   * Find the JavaClass instance for the given run-time class object
-   */
-  public JavaClass loadClass(Class clazz) 
-    throws java.lang.ClassNotFoundException;
+    /**
+     * Remove class from repository
+     */
+    public void removeClass( JavaClass clazz );
 
-  /** Clear all entries from cache.
-   */
-  public void clear();
-  
-	/** Get the ClassPath associated with this Repository
-	 */
-	public ClassPath getClassPath();
 
+    /**
+     * Find the class with the name provided, if the class
+     * isn't there, return NULL.
+     */
+    public JavaClass findClass( String className );
+
+
+    /**
+     * Find the class with the name provided, if the class
+     * isn't there, make an attempt to load it.
+     */
+    public JavaClass loadClass( String className ) throws java.lang.ClassNotFoundException;
+
+
+    /**
+     * Find the JavaClass instance for the given run-time class object
+     */
+    public JavaClass loadClass( Class clazz ) throws java.lang.ClassNotFoundException;
+
+
+    /** Clear all entries from cache.
+     */
+    public void clear();
+
+
+    /** Get the ClassPath associated with this Repository
+     */
+    public ClassPath getClassPath();
 }
-
-
-

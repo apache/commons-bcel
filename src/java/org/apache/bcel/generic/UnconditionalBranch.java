@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denotes an instruction to perform an unconditional branch, i.e., GOTO, JSR.
@@ -26,5 +25,5 @@ package org.apache.bcel.generic;
  * @see GOTO
  * @see JSR
  */
-public interface UnconditionalBranch {}
-
+public interface UnconditionalBranch {
+}

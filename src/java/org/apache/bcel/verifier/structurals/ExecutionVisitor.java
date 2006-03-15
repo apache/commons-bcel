@@ -167,10 +167,11 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 	public void visitATHROW(ATHROW o){
 		Type t = stack().pop();
 		stack().clear();
-		if (t.equals(Type.NULL))
-			stack().push(Type.getType("Ljava/lang/NullPointerException;"));
-		else
-			stack().push(t);
+		if (t.equals(Type.NULL)) {
+            stack().push(Type.getType("Ljava/lang/NullPointerException;"));
+        } else {
+            stack().push(t);
+        }
 	}
 
 	/** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
@@ -505,8 +506,9 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 		if (	t.equals(Type.BOOLEAN)	||
 					t.equals(Type.CHAR)			||
 					t.equals(Type.BYTE) 		||
-					t.equals(Type.SHORT)		)
-			t = Type.INT;
+					t.equals(Type.SHORT)		) {
+            t = Type.INT;
+        }
 		stack().push(t);
 	}
 	/** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
@@ -515,8 +517,9 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 		if (	t.equals(Type.BOOLEAN)	||
 					t.equals(Type.CHAR)			||
 					t.equals(Type.BYTE) 		||
-					t.equals(Type.SHORT)		)
-			t = Type.INT;
+					t.equals(Type.SHORT)		) {
+            t = Type.INT;
+        }
 		stack().push(t);
 	}
 	/** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
@@ -702,8 +705,9 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 			if (	t.equals(Type.BOOLEAN)	||
 						t.equals(Type.CHAR)			||
 						t.equals(Type.BYTE) 		||
-						t.equals(Type.SHORT)		)
-				t = Type.INT;
+						t.equals(Type.SHORT)		) {
+                t = Type.INT;
+            }
 			stack().push(t);
 		}
 	}
@@ -730,8 +734,9 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 			if (	t.equals(Type.BOOLEAN)	||
 						t.equals(Type.CHAR)			||
 						t.equals(Type.BYTE) 		||
-						t.equals(Type.SHORT)		)
-				t = Type.INT;
+						t.equals(Type.SHORT)		) {
+                t = Type.INT;
+            }
 			stack().push(t);
 		}
 	}
@@ -749,8 +754,9 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 			if (	t.equals(Type.BOOLEAN)	||
 						t.equals(Type.CHAR)			||
 						t.equals(Type.BYTE) 		||
-						t.equals(Type.SHORT)		)
-				t = Type.INT;
+						t.equals(Type.SHORT)		) {
+                t = Type.INT;
+            }
 			stack().push(t);
 		}
 	}
@@ -769,8 +775,9 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 			if (	t.equals(Type.BOOLEAN)	||
 						t.equals(Type.CHAR)			||
 						t.equals(Type.BYTE) 		||
-						t.equals(Type.SHORT)		)
-				t = Type.INT;
+						t.equals(Type.SHORT)		) {
+                t = Type.INT;
+            }
 			stack().push(t);
 		}
 	}

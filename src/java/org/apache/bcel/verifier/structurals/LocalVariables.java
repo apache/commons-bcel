@@ -97,9 +97,13 @@ public class LocalVariables{
 	 * Fulfills the general contract of Object.equals().
 	 */
 	public boolean equals(Object o){
-		if (!(o instanceof LocalVariables)) return false;
+		if (!(o instanceof LocalVariables)) {
+            return false;
+        }
 		LocalVariables lv = (LocalVariables) o;
-		if (this.locals.length != lv.locals.length) return false;
+		if (this.locals.length != lv.locals.length) {
+            return false;
+        }
 		for (int i=0; i<this.locals.length; i++){
 			if (!this.locals[i].equals(lv.locals[i])){
 				//System.out.println(this.locals[i]+" is not "+lv.locals[i]);

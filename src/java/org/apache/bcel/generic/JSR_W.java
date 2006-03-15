@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
@@ -27,48 +27,53 @@ import org.apache.bcel.util.ByteSequence;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class JSR_W extends JsrInstruction {
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  JSR_W() {}
 
-  public JSR_W(InstructionHandle target) {
-    super(org.apache.bcel.Constants.JSR_W, target);
-    length = 5;
-  }
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    JSR_W() {
+    }
 
-  /**
-   * Dump instruction as byte code to stream out.
-   * @param out Output stream
-   */
-  public void dump(DataOutputStream out) throws IOException {
-    index = getTargetOffset();
-    out.writeByte(opcode);
-    out.writeInt(index);
-  }
 
-  /**
-   * Read needed data (e.g. index) from file.
-   */
-  protected void initFromFile(ByteSequence bytes, boolean wide) throws IOException
-  {
-    index = bytes.readInt();
-    length = 5;
-  }
+    public JSR_W(InstructionHandle target) {
+        super(org.apache.bcel.Constants.JSR_W, target);
+        length = 5;
+    }
 
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    v.visitStackProducer(this);
-    v.visitBranchInstruction(this);
-    v.visitJsrInstruction(this);
-    v.visitJSR_W(this);
-  }
+
+    /**
+     * Dump instruction as byte code to stream out.
+     * @param out Output stream
+     */
+    public void dump( DataOutputStream out ) throws IOException {
+        index = getTargetOffset();
+        out.writeByte(opcode);
+        out.writeInt(index);
+    }
+
+
+    /**
+     * Read needed data (e.g. index) from file.
+     */
+    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+        index = bytes.readInt();
+        length = 5;
+    }
+
+
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        v.visitStackProducer(this);
+        v.visitBranchInstruction(this);
+        v.visitJsrInstruction(this);
+        v.visitJSR_W(this);
+    }
 }

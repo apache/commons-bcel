@@ -278,7 +278,9 @@ public class Subroutines{
 						// the constant pool.
 						if (ih.getInstruction() instanceof LocalVariableInstruction){
 							int s = ((LocalVariableInstruction) ih.getInstruction()).getType(null).getSize();
-							if (s==2) acc.add(new Integer(idx+1));
+							if (s==2) {
+                                acc.add(new Integer(idx+1));
+                            }
 						}
 					}
 					catch(RuntimeException re){
@@ -557,7 +559,9 @@ public class Subroutines{
 		Iterator i = subroutines.values().iterator();
 		while (i.hasNext()){
 			Subroutine s = (Subroutine) i.next();
-			if (s.contains(any)) return s;
+			if (s.contains(any)) {
+                return s;
+            }
 		}
 System.err.println("DEBUG: Please verify '"+any+"' lies in dead code.");
 		return null;

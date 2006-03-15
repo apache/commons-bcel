@@ -82,7 +82,9 @@ public class ControlFlowGraph{
 		 * Creation of one per InstructionHandle suffices. Don't create more.
 		 */
 		public InstructionContextImpl(InstructionHandle inst){
-			if (inst == null) throw new AssertionViolatedException("Cannot instantiate InstructionContextImpl from NULL.");
+			if (inst == null) {
+                throw new AssertionViolatedException("Cannot instantiate InstructionContextImpl from NULL.");
+            }
 		
 			instruction = inst;
 			inFrames = new java.util.HashMap();
@@ -292,10 +294,14 @@ public class ControlFlowGraph{
 			for (int i=size-1; i>=0; i--){
 				InstructionContextImpl current = (InstructionContextImpl) (executionPredecessors.get(i));
 				Instruction currentlast = current.getInstruction().getInstruction();
-				if (currentlast instanceof RET) retcount++;
+				if (currentlast instanceof RET) {
+                    retcount++;
+                }
 				if (currentlast instanceof JsrInstruction){
 					retcount--;
-					if (retcount == -1) return current;
+					if (retcount == -1) {
+                        return current;
+                    }
 				}
 			}
 			return null;

@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Super class for stack operations like DUP and POP.
@@ -24,23 +23,26 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class StackInstruction extends Instruction {
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  StackInstruction() {}
 
-  /**
-   * @param opcode instruction opcode
-   */
-  protected StackInstruction(short opcode) {
-    super(opcode, (short)1);
-  }
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    StackInstruction() {
+    }
 
-  /** @return Type.UNKNOWN
-   */
-  public Type getType(ConstantPoolGen cp) {
-    return Type.UNKNOWN;
-  }  
+
+    /**
+     * @param opcode instruction opcode
+     */
+    protected StackInstruction(short opcode) {
+        super(opcode, (short) 1);
+    }
+
+
+    /** @return Type.UNKNOWN
+     */
+    public Type getType( ConstantPoolGen cp ) {
+        return Type.UNKNOWN;
+    }
 }
-

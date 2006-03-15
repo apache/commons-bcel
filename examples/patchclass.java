@@ -25,8 +25,9 @@ public class patchclass {
     }
 
     try {
-      for(int i=2; i < argv.length; i++)
-	file_name[files++] = argv[i];
+      for(int i=2; i < argv.length; i++) {
+        file_name[files++] = argv[i];
+    }
 	
       for(int i=0; i < files; i++) {
 	parser     = new ClassParser(file_name[i]);

@@ -39,11 +39,12 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
     if_expr = (ASTExpr)children[0];
     then_expr = (ASTExpr)children[1];
 
-    if(children.length == 3) // has else branch
-      else_expr = (ASTExpr)children[2];
-    else
-      MiniC.addError(if_expr.getLine(), if_expr.getColumn(),
-		     "IF expression has no ELSE branch");
+    if(children.length == 3) {
+        else_expr = (ASTExpr)children[2];
+    } else {
+        MiniC.addError(if_expr.getLine(), if_expr.getColumn(),
+        	     "IF expression has no ELSE branch");
+    }
 
     children=null; // Throw away
   }
@@ -57,8 +58,9 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
     if_expr   = if_expr.traverse(env);
     then_expr = then_expr.traverse(env);
 
-    if(else_expr != null)
-      else_expr = else_expr.traverse(env);
+    if(else_expr != null) {
+        else_expr = else_expr.traverse(env);
+    }
 
     return this;
   }
@@ -72,26 +74,28 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   public int eval(int expected) {
     int then_type, else_type, if_type;
 
-    if((if_type=if_expr.eval(T_BOOLEAN)) != T_BOOLEAN)
-      MiniC.addError(if_expr.getLine(), if_expr.getColumn(),
-		     "IF expression is not of type boolean, but " + 
-		     TYPE_NAMES[if_type] + ".");
+    if((if_type=if_expr.eval(T_BOOLEAN)) != T_BOOLEAN) {
+        MiniC.addError(if_expr.getLine(), if_expr.getColumn(),
+        	     "IF expression is not of type boolean, but " + 
+        	     TYPE_NAMES[if_type] + ".");
+    }
 
     then_type=then_expr.eval(expected);
 
-    if((expected != T_UNKNOWN) && (then_type != expected))
-      MiniC.addError(then_expr.getLine(), then_expr.getColumn(),
-		     "THEN expression is not of expected type " +
-		     TYPE_NAMES[expected] + " but " + TYPE_NAMES[then_type] + ".");
+    if((expected != T_UNKNOWN) && (then_type != expected)) {
+        MiniC.addError(then_expr.getLine(), then_expr.getColumn(),
+        	     "THEN expression is not of expected type " +
+        	     TYPE_NAMES[expected] + " but " + TYPE_NAMES[then_type] + ".");
+    }
 
     if(else_expr != null) {
       else_type = else_expr.eval(expected);
 
-      if((expected != T_UNKNOWN) && (else_type != expected))
-	MiniC.addError(else_expr.getLine(), else_expr.getColumn(),
-		       "ELSE expression is not of expected type " +
-		       TYPE_NAMES[expected] + " but " + TYPE_NAMES[else_type] + ".");
-      else if(then_type == T_UNKNOWN) {
+      if((expected != T_UNKNOWN) && (else_type != expected)) {
+        MiniC.addError(else_expr.getLine(), else_expr.getColumn(),
+        	       "ELSE expression is not of expected type " +
+        	       TYPE_NAMES[expected] + " but " + TYPE_NAMES[else_type] + ".");
+    } else if(then_type == T_UNKNOWN) {
 	then_type = else_type;
 	then_expr.setType(else_type);
       }
@@ -101,10 +105,11 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
       else_expr = then_expr;
     }
 
-    if(then_type != else_type)
-      MiniC.addError(line, column,
-		     "Type mismatch in THEN-ELSE: " +
-		     TYPE_NAMES[then_type] + " vs. " + TYPE_NAMES[else_type] + ".");
+    if(then_type != else_type) {
+        MiniC.addError(line, column,
+        	     "Type mismatch in THEN-ELSE: " +
+        	     TYPE_NAMES[then_type] + " vs. " + TYPE_NAMES[else_type] + ".");
+    }
 
     type = then_type;
 
@@ -155,7 +160,8 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
 
     if_expr.dump(prefix + " ");
     then_expr.dump(prefix + " ");
-    if(else_expr != null)
-      else_expr.dump(prefix + " ");
+    if(else_expr != null) {
+        else_expr.dump(prefix + " ");
+    }
   }
 }

@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.util;
 
 import java.util.Stack;
@@ -25,12 +25,28 @@ import org.apache.bcel.classfile.JavaClass;
  * @version $Id$
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  * @see Stack
-*/
+ */
 public class ClassStack implements java.io.Serializable {
-  private Stack stack = new Stack();
 
-  public void      push(JavaClass clazz) { stack.push(clazz); }
-  public JavaClass pop()                 { return (JavaClass)stack.pop(); }
-  public JavaClass top()                 { return (JavaClass)stack.peek(); }
-  public boolean   empty()               { return stack.empty(); }
-}  
+    private Stack stack = new Stack();
+
+
+    public void push( JavaClass clazz ) {
+        stack.push(clazz);
+    }
+
+
+    public JavaClass pop() {
+        return (JavaClass) stack.pop();
+    }
+
+
+    public JavaClass top() {
+        return (JavaClass) stack.peek();
+    }
+
+
+    public boolean empty() {
+        return stack.empty();
+    }
+}

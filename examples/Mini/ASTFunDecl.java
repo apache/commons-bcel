@@ -73,8 +73,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     body = (ASTExpr)children[children.length - 1];
 
     argv = new ASTIdent[children.length - 2]; // May be 0-size array
-    for(int i = 1; i < children.length - 1; i++)
-      argv[i - 1] = (ASTIdent)children[i];
+    for(int i = 1; i < children.length - 1; i++) {
+        argv[i - 1] = (ASTIdent)children[i];
+    }
 
     children=null; // Throw away old reference
   }
@@ -89,11 +90,12 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     for(int i=0; i < argv.length; i++) {
       EnvEntry entry = env.get(argv[i].getName());
 
-      if(entry != null)
-	MiniC.addError(argv[i].getLine(), argv[i].getColumn(),
-		       "Redeclaration of " + entry + ".");
-      else 
-	env.put(new Variable(argv[i]));
+      if(entry != null) {
+        MiniC.addError(argv[i].getLine(), argv[i].getColumn(),
+        	       "Redeclaration of " + entry + ".");
+    } else {
+        env.put(new Variable(argv[i]));
+    }
     }
 
     /* Update entry of this function, i.e. set argument references.
@@ -117,17 +119,19 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     int expected = name.getType(); // Maybe other function has already called us
     type = body.eval(expected);    // And updated the env
 
-    if((expected != T_UNKNOWN) && (type != expected))
-      MiniC.addError(line, column,
-		     "Function f ist not of type " + TYPE_NAMES[expected] + 
-		     " as previously assumed, but " + TYPE_NAMES[type]);
+    if((expected != T_UNKNOWN) && (type != expected)) {
+        MiniC.addError(line, column,
+        	     "Function f ist not of type " + TYPE_NAMES[expected] + 
+        	     " as previously assumed, but " + TYPE_NAMES[type]);
+    }
 
     name.setType(type);
 
     is_simple = body.isSimple();
 
-    if(pass == 2 && type == T_UNKNOWN)
-      is_recursive = true;
+    if(pass == 2 && type == T_UNKNOWN) {
+        is_recursive = true;
+    }
 
     return type;
   }
@@ -155,8 +159,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
       for(int i = 0; i < argv.length; i++) {
 	out.print("int " + argv[i].getName());
 	
-	if(i < argv.length - 1)
-	  out.print(", ");
+	if(i < argv.length - 1) {
+        out.print(", ");
+    }
       }
       
       out.println(")\n    throws IOException\n  {");
@@ -170,15 +175,17 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
       expr = buf.toString();
 
-      if(main)
-	out.println("    try {");
+      if(main) {
+        out.println("    try {");
+    }
 
       out.println(expr);
 
-      if(main)
-	out.println("    } catch(Exception e) { System.err.println(e); }\n  }\n");
-      else
-	out.println("\n    return " + pop() + ";\n  }\n");
+      if(main) {
+        out.println("    } catch(Exception e) { System.err.println(e); }\n  }\n");
+    } else {
+        out.println("\n    return " + pop() + ";\n  }\n");
+    }
     }
 
     reset();
@@ -255,9 +262,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 	end_handler = il.append(InstructionConstants.RETURN);
 	method.addExceptionHandler(start, end, handler, e_type);
 	exc.setStart(handler); exc.setEnd(end_handler);
-      }
-      else
-	il.append(InstructionConstants.IRETURN); // Reuse object to save memory
+      } else {
+        il.append(InstructionConstants.IRETURN); // Reuse object to save memory
+    }
 
       method.removeNOPs(); // First optimization pass, provided by MethodGen
       optimizeIFs(il);     // Second optimization pass, application-specific
@@ -297,8 +304,6 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
     for(Iterator it = f.search(pat, my_constraint); it.hasNext();) {
       InstructionHandle[] match = (InstructionHandle[])it.next();
-      int len = match.length;
-
       // Everything ok, update code
       BranchInstruction ifeq    = (BranchInstruction)(match[4].getInstruction());
       BranchHandle      if_icmp = (BranchHandle)match[0];
@@ -315,9 +320,11 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 	for(int i=0; i < targets.length; i++) {
 	  InstructionTargeter[] targeters = targets[i].getTargeters();
 
-	  for(int j=0; j < targeters.length; j++)
-	    if((targets[i] != match[4]) || (targeters[j] != match[2]))
-	      System.err.println("Ooops: " + e);
+	  for(int j=0; j < targeters.length; j++) {
+        if((targets[i] != match[4]) || (targeters[j] != match[2])) {
+            System.err.println("Ooops: " + e);
+        }
+    }
 	}
       }
     }
@@ -332,8 +339,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
     for(int i = 0; i < argv.length; i++) {
       buf.append(argv[i].getName());
-      if(i < argv.length - 1)
-	buf.append(", ");
+      if(i < argv.length - 1) {
+        buf.append(", ");
+    }
     }
 
     buf.append(")");
@@ -362,8 +370,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   public void dump(String prefix) {
     System.out.println(toString(prefix));
 
-    for(int i = 0; i < argv.length; i++)
-      argv[i].dump(prefix + " ");
+    for(int i = 0; i < argv.length; i++) {
+        argv[i].dump(prefix + " ");
+    }
 
     body.dump(prefix + " ");
   }
@@ -380,8 +389,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     for(int i=0; i < max_size; i++) {
       buf.append("_s" + i);
 
-      if(i < max_size - 1)
-	buf.append(", ");
+      if(i < max_size - 1) {
+        buf.append(", ");
+    }
     }
 
     buf.append(";\n");
@@ -394,8 +404,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   static final void push(int s) {
     size += s;
 
-    if(size > max_size)
-      max_size = size;
+    if(size > max_size) {
+        max_size = size;
+    }
   }
   static final void push() { push(1); }
 

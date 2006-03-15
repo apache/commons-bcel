@@ -45,9 +45,15 @@ public final class AssertionViolatedException extends RuntimeException{
 	    method, the error message of this object can no longer be null.
 	*/
 	public void extendMessage(String pre, String post){
-		if (pre  == null) pre="";
-		if (detailMessage == null) detailMessage="";
-		if (post == null) post="";
+		if (pre  == null) {
+            pre="";
+        }
+		if (detailMessage == null) {
+            detailMessage="";
+        }
+		if (post == null) {
+            post="";
+        }
 		detailMessage = pre+detailMessage+post;
 	}
 	/**

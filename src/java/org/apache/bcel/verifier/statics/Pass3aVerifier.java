@@ -361,8 +361,9 @@ public final class Pass3aVerifier extends PassVerifier{
 		if (! ((last instanceof ReturnInstruction)	||
 					(last instanceof RET)    							||
 					(last instanceof GotoInstruction)			||
-					(last instanceof ATHROW) )) // JSR / JSR_W would possibly RETurn and then fall off the code!
-			throw new StaticCodeInstructionConstraintException("Execution must not fall off the bottom of the code array. This constraint is enforced statically as some existing verifiers do - so it may be a false alarm if the last instruction is not reachable.");
+					(last instanceof ATHROW) )) {
+            throw new StaticCodeInstructionConstraintException("Execution must not fall off the bottom of the code array. This constraint is enforced statically as some existing verifiers do - so it may be a false alarm if the last instruction is not reachable.");
+        }
 	}
 
 	/**
@@ -421,7 +422,9 @@ public final class Pass3aVerifier extends PassVerifier{
 	/** A small utility method returning if a given int i is in the given int[] ints. */
 	private static boolean contains(int[] ints, int i){
 		for (int j=0; j<ints.length; j++){
-			if (ints[j]==i) return true;
+			if (ints[j]==i) {
+                return true;
+            }
 		}
 		return false;
 	}
@@ -572,15 +575,17 @@ public final class Pass3aVerifier extends PassVerifier{
 							Type o_type = o.getType(cpg);
 							if (f_type.equals(o_type)){
 								f = fields[i];
-								if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0)
-									f = null;
+								if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0) {
+                                    f = null;
+                                }
 								break outer;
 							}
 						}
 					}
 				}
-				if (f == null)
-					constraintViolated(o, "Referenced field '"+field_name+"' does not exist in class '"+jc.getClassName()+"'.");
+				if (f == null) {
+                    constraintViolated(o, "Referenced field '"+field_name+"' does not exist in class '"+jc.getClassName()+"'.");
+                }
 			}
 			else{
 				/* TODO: Check if assignment compatibility is sufficient.
@@ -1109,7 +1114,9 @@ public final class Pass3aVerifier extends PassVerifier{
 									break;
 								}
 							}
-							if (meth != null) break;
+							if (meth != null) {
+                                break;
+                            }
 						}
 						if (meth == null){
 							constraintViolated(o, "ACC_SUPER special lookup procedure not successful: method '"+o.getMethodName(cpg)+"' with proper signature not declared in superclass hierarchy.");

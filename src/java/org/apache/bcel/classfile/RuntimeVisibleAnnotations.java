@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.classfile;
 
 import java.io.DataInputStream;
@@ -27,27 +27,25 @@ import org.apache.bcel.Constants;
  * @version $Id: RuntimeVisibleAnnotations
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  */
-public class RuntimeVisibleAnnotations extends Annotations
-{
-	/**
-	 * @param name_index Index pointing to the name <em>Code</em>
-	 * @param length Content length in bytes
-	 * @param file Input stream
-	 * @param constant_pool Array of constants
-	 */
-	RuntimeVisibleAnnotations(int name_index, int length, DataInputStream file,
-       ConstantPool constant_pool) throws IOException
-    {
-	    super(Constants.ATTR_RUNTIMEVISIBLE_ANNOTATIONS, name_index, length, file, constant_pool);    
-	}
+public class RuntimeVisibleAnnotations extends Annotations {
 
-	/**
-	 * @return deep copy of this attribute
-	 */
-	public Attribute copy(ConstantPool constant_pool) {
-	    Annotations c = (Annotations)clone();
-	  
-	    return c;
-	}	 
+    /**
+     * @param name_index Index pointing to the name <em>Code</em>
+     * @param length Content length in bytes
+     * @param file Input stream
+     * @param constant_pool Array of constants
+     */
+    RuntimeVisibleAnnotations(int name_index, int length, DataInputStream file,
+            ConstantPool constant_pool) throws IOException {
+        super(Constants.ATTR_RUNTIMEVISIBLE_ANNOTATIONS, name_index, length, file, constant_pool);
+    }
 
+
+    /**
+     * @return deep copy of this attribute
+     */
+    public Attribute copy( ConstantPool constant_pool ) {
+        Annotations c = (Annotations) clone();
+        return c;
+    }
 }

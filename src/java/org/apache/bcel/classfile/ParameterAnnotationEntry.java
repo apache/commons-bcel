@@ -20,53 +20,56 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
-
 /**
  * represents one parameter annotation in the parameter annotation table
  * 
  * @version $Id: ParameterAnnotationEntry
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  */
-public class ParameterAnnotationEntry implements Node, Constants
-{
-	private int annotation_table_length;
-	private AnnotationEntry[] annotation_table;
-	
-	/**
-	 * Construct object from file stream.
-	 * @param file Input stream
-	 * @throws IOException
-	 */
-	ParameterAnnotationEntry(DataInputStream file, ConstantPool constant_pool)
-	       throws IOException
-	{
-		annotation_table_length = (file.readUnsignedShort());
+public class ParameterAnnotationEntry implements Node, Constants {
 
-		annotation_table = new AnnotationEntry[annotation_table_length];
-	    for(int i=0; i < annotation_table_length; i++)
-	    	annotation_table[i] = new AnnotationEntry(file, constant_pool);
-	}
-	
-	  /**
-	   * Called by objects that are traversing the nodes of the tree implicitely
-	   * defined by the contents of a Java class. I.e., the hierarchy of methods,
-	   * fields, attributes, etc. spawns a tree of objects.
-	   *
-	   * @param v Visitor object
-	   */
-	  public void accept(Visitor v) {
-//	    v.visitParameterAnnotationEntry(this);
-	  }	  
-	  
-	  /**
-	   * @return the number of annotation entries in this parameter annotation
-	   */
-	  public final int getNumAnnotations() { return annotation_table_length; }
-	  
-	  /**
-	   * returns the array of annotation entries in this annotation
-	   */
-	  public AnnotationEntry[] getAnnotationEntries() {
-	  	return annotation_table;
-	  }
+    private int annotation_table_length;
+    private AnnotationEntry[] annotation_table;
+
+
+    /**
+     * Construct object from file stream.
+     * @param file Input stream
+     * @throws IOException
+     */
+    ParameterAnnotationEntry(DataInputStream file, ConstantPool constant_pool) throws IOException {
+        annotation_table_length = (file.readUnsignedShort());
+        annotation_table = new AnnotationEntry[annotation_table_length];
+        for (int i = 0; i < annotation_table_length; i++) {
+            annotation_table[i] = new AnnotationEntry(file, constant_pool);
+        }
+    }
+
+
+    /**
+     * Called by objects that are traversing the nodes of the tree implicitely
+     * defined by the contents of a Java class. I.e., the hierarchy of methods,
+     * fields, attributes, etc. spawns a tree of objects.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        //	    v.visitParameterAnnotationEntry(this);
+    }
+
+
+    /**
+     * @return the number of annotation entries in this parameter annotation
+     */
+    public final int getNumAnnotations() {
+        return annotation_table_length;
+    }
+
+
+    /**
+     * returns the array of annotation entries in this annotation
+     */
+    public AnnotationEntry[] getAnnotationEntries() {
+        return annotation_table;
+    }
 }

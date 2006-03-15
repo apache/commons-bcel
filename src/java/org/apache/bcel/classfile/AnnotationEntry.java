@@ -20,65 +20,70 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
-
 /**
  * represents one annotation in the annotation table
  * 
  * @version $Id: AnnotationEntry
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  */
-public class AnnotationEntry implements Node, Constants
-{
-	private int type_index;
-	private int num_element_value_pairs;
-	private ElementValuePair[] element_value_pairs;
-	private ConstantPool constant_pool;
-	
-	/**
-	 * Construct object from file stream.
-	 * @param file Input stream
-	 * @throws IOException
-	 */
-	AnnotationEntry(DataInputStream file, ConstantPool constant_pool)
-	       throws IOException
-	{
-		type_index = (file.readUnsignedShort());
-		num_element_value_pairs = (file.readUnsignedShort());
+public class AnnotationEntry implements Node, Constants {
 
-		element_value_pairs = new ElementValuePair[num_element_value_pairs];
-	    for(int i=0; i < num_element_value_pairs; i++)
-	    	element_value_pairs[i] = new ElementValuePair(file, constant_pool);
-	    this.constant_pool = constant_pool;
-	}
-	
-	  /**
-	   * Called by objects that are traversing the nodes of the tree implicitely
-	   * defined by the contents of a Java class. I.e., the hierarchy of methods,
-	   * fields, attributes, etc. spawns a tree of objects.
-	   *
-	   * @param v Visitor object
-	   */
-	  public void accept(Visitor v) {
-//	    v.visitAnnotationEntry(this);
-	  }
-	  
-	  /**
-	   * @return the annotation type name
-	   */   
-	  public String getAnnotationType() {
-	      ConstantUtf8  c;
+    private int type_index;
+    private int num_element_value_pairs;
+    private ElementValuePair[] element_value_pairs;
+    private ConstantPool constant_pool;
 
-	      c = (ConstantUtf8)constant_pool.getConstant(type_index, CONSTANT_Utf8);
-	      return c.getBytes();  	
-	  }
-	  
-	  /**
-	   * @return the number of element value pairs in this annotation entry
-	   */
-	  public final int getNumElementValuePairs() { return num_element_value_pairs; }
-	  
-	  /**
-	   * @return the element value pairs in this annotation entry
-	   */
-	  public ElementValuePair[] getElementValuePairs() { return element_value_pairs; }
+
+    /**
+     * Construct object from file stream.
+     * @param file Input stream
+     * @throws IOException
+     */
+    AnnotationEntry(DataInputStream file, ConstantPool constant_pool) throws IOException {
+        type_index = (file.readUnsignedShort());
+        num_element_value_pairs = (file.readUnsignedShort());
+        element_value_pairs = new ElementValuePair[num_element_value_pairs];
+        for (int i = 0; i < num_element_value_pairs; i++) {
+            element_value_pairs[i] = new ElementValuePair(file, constant_pool);
+        }
+        this.constant_pool = constant_pool;
+    }
+
+
+    /**
+     * Called by objects that are traversing the nodes of the tree implicitely
+     * defined by the contents of a Java class. I.e., the hierarchy of methods,
+     * fields, attributes, etc. spawns a tree of objects.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        //	    v.visitAnnotationEntry(this);
+    }
+
+
+    /**
+     * @return the annotation type name
+     */
+    public String getAnnotationType() {
+        ConstantUtf8 c;
+        c = (ConstantUtf8) constant_pool.getConstant(type_index, CONSTANT_Utf8);
+        return c.getBytes();
+    }
+
+
+    /**
+     * @return the number of element value pairs in this annotation entry
+     */
+    public final int getNumElementValuePairs() {
+        return num_element_value_pairs;
+    }
+
+
+    /**
+     * @return the element value pairs in this annotation entry
+     */
+    public ElementValuePair[] getElementValuePairs() {
+        return element_value_pairs;
+    }
 }

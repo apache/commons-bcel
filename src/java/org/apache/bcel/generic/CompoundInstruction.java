@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Wrapper class for `compound' operations, virtual instructions that
@@ -34,6 +33,6 @@ package org.apache.bcel.generic;
  * @see SWITCH
  */
 public interface CompoundInstruction {
-  public InstructionList getInstructionList();
-}
 
+    public InstructionList getInstructionList();
+}

@@ -37,16 +37,18 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
     for(int i=0; i < no_args; i++) {
       buf.append(args[i].getName());
 
-      if(i < no_args - 1)
-	buf.append(", ");
+      if(i < no_args - 1) {
+        buf.append(", ");
+    }
     }
 
     String prefix = "Function " + fun_name + "(" + buf.toString() + ")";
 
-    if(!reserved) 
-      return prefix + " declared at line " + line + ", column " + column; 
-    else
-      return prefix + " <predefined function>";
+    if(!reserved) {
+        return prefix + " declared at line " + line + ", column " + column;
+    } else {
+        return prefix + " <predefined function>";
+    }
   }
 
   public int        getNoArgs()       { return no_args; }

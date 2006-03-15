@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.util;
 
 import java.util.LinkedList;
@@ -25,19 +25,28 @@ import org.apache.bcel.classfile.JavaClass;
  *
  * @version $Id$
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
-*/
+ */
 public class ClassQueue implements java.io.Serializable {
-  protected LinkedList vec  = new LinkedList();
 
-  public void enqueue(JavaClass clazz) { vec.addLast(clazz); }
+    protected LinkedList vec = new LinkedList();
 
-  public JavaClass dequeue()                {
-    return (JavaClass)vec.removeFirst();
-  }
 
-  public boolean empty() { return vec.isEmpty(); }
+    public void enqueue( JavaClass clazz ) {
+        vec.addLast(clazz);
+    }
 
-  public String toString() {
-    return vec.toString();
-  }
-}  
+
+    public JavaClass dequeue() {
+        return (JavaClass) vec.removeFirst();
+    }
+
+
+    public boolean empty() {
+        return vec.isEmpty();
+    }
+
+
+    public String toString() {
+        return vec.toString();
+    }
+}

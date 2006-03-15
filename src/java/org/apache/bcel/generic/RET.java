@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
@@ -29,99 +29,111 @@ import org.apache.bcel.util.ByteSequence;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class RET extends Instruction implements IndexedInstruction, TypedInstruction {
-  private boolean wide;
-  private int     index; // index to local variable containg the return address
 
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  RET() {}
+    private boolean wide;
+    private int index; // index to local variable containg the return address
 
-  public RET(int index) {
-    super(org.apache.bcel.Constants.RET, (short)2);
-    setIndex(index);   // May set wide as side effect
-  }
 
-  /**
-   * Dump instruction as byte code to stream out.
-   * @param out Output stream
-   */
-  public void dump(DataOutputStream out) throws IOException {
-    if(wide)
-      out.writeByte(org.apache.bcel.Constants.WIDE);
-
-    out.writeByte(opcode);
-
-    if(wide)
-      out.writeShort(index);
-    else
-      out.writeByte(index);
-  }
-
-  private final void setWide() {
-    wide = index > org.apache.bcel.Constants.MAX_BYTE;
-    if(wide) {
-      length = 4; // Including the wide byte  
-    } else {
-      length = 2;
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    RET() {
     }
-  }
 
-  /**
-   * Read needed data (e.g. index) from file.
-   */
-  protected void initFromFile(ByteSequence bytes, boolean wide) throws IOException
-  {
-    this.wide = wide;
 
-    if(wide) {
-      index  = bytes.readUnsignedShort();
-      length = 4;
-    } else {
-      index = bytes.readUnsignedByte();
-      length = 2;
+    public RET(int index) {
+        super(org.apache.bcel.Constants.RET, (short) 2);
+        setIndex(index); // May set wide as side effect
     }
-  }
 
-  /**
-   * @return index of local variable containg the return address
-   */
-  public final int getIndex() { return index; }
 
-  /**
-   * Set index of local variable containg the return address
-   */
-  public final void setIndex(int n) { 
-    if(n < 0)
-      throw new ClassGenException("Negative index value: " + n);
+    /**
+     * Dump instruction as byte code to stream out.
+     * @param out Output stream
+     */
+    public void dump( DataOutputStream out ) throws IOException {
+        if (wide) {
+            out.writeByte(org.apache.bcel.Constants.WIDE);
+        }
+        out.writeByte(opcode);
+        if (wide) {
+            out.writeShort(index);
+        } else {
+            out.writeByte(index);
+        }
+    }
 
-    index = n;
-    setWide();
-  }
 
-  /**
-   * @return mnemonic for instruction
-   */
-  public String toString(boolean verbose) {
-    return super.toString(verbose) + " " + index;
-  }  
+    private final void setWide() {
+        wide = index > org.apache.bcel.Constants.MAX_BYTE;
+        if (wide) {
+            length = 4; // Including the wide byte  
+        } else {
+            length = 2;
+        }
+    }
 
-  /** @return return address type
-   */
-  public Type getType(ConstantPoolGen cp) {
-      return ReturnaddressType.NO_TARGET;
-  }
 
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    v.visitRET(this);
-  }
+    /**
+     * Read needed data (e.g. index) from file.
+     */
+    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+        this.wide = wide;
+        if (wide) {
+            index = bytes.readUnsignedShort();
+            length = 4;
+        } else {
+            index = bytes.readUnsignedByte();
+            length = 2;
+        }
+    }
+
+
+    /**
+     * @return index of local variable containg the return address
+     */
+    public final int getIndex() {
+        return index;
+    }
+
+
+    /**
+     * Set index of local variable containg the return address
+     */
+    public final void setIndex( int n ) {
+        if (n < 0) {
+            throw new ClassGenException("Negative index value: " + n);
+        }
+        index = n;
+        setWide();
+    }
+
+
+    /**
+     * @return mnemonic for instruction
+     */
+    public String toString( boolean verbose ) {
+        return super.toString(verbose) + " " + index;
+    }
+
+
+    /** @return return address type
+     */
+    public Type getType( ConstantPoolGen cp ) {
+        return ReturnaddressType.NO_TARGET;
+    }
+
+
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        v.visitRET(this);
+    }
 }

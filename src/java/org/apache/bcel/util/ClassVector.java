@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.util;
 
 import java.util.ArrayList;
@@ -28,17 +28,30 @@ import org.apache.bcel.classfile.JavaClass;
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  * 
  * @deprecated as of 5.1.1 - 7/17/2005
-*/
+ */
 public class ClassVector implements java.io.Serializable {
-  protected List vec = new ArrayList();
-  
-  public void      addElement(JavaClass clazz) { vec.add(clazz); }
-  public JavaClass elementAt(int index)        { return (JavaClass)vec.get(index); }
-  public void      removeElementAt(int index)  { vec.remove(index); }
 
-  public JavaClass[] toArray() {
-    JavaClass[] classes = new JavaClass[vec.size()];
-    vec.toArray(classes);
-    return classes;
-  }
+    protected List vec = new ArrayList();
+
+
+    public void addElement( JavaClass clazz ) {
+        vec.add(clazz);
+    }
+
+
+    public JavaClass elementAt( int index ) {
+        return (JavaClass) vec.get(index);
+    }
+
+
+    public void removeElementAt( int index ) {
+        vec.remove(index);
+    }
+
+
+    public JavaClass[] toArray() {
+        JavaClass[] classes = new JavaClass[vec.size()];
+        vec.toArray(classes);
+        return classes;
+    }
 }

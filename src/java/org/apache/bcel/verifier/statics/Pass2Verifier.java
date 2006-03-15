@@ -114,7 +114,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * You should not add own information. Leave that to JustIce.
 	 */
 	public LocalVariablesInfo getLocalVariablesInfo(int method_nr){
-		if (this.verify() != VerificationResult.VR_OK) return null; // It's cached, don't worry.
+		if (this.verify() != VerificationResult.VR_OK) {
+            return null; // It's cached, don't worry.
+        }
 		if (method_nr < 0 || method_nr >= localVariablesInfos.length){
 			throw new AssertionViolatedException("Method number out of range.");
 		}
@@ -163,9 +165,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				vr = new VerificationResult(VerificationResult.VERIFIED_REJECTED, cce.getMessage());
 			}
 			return vr;
-		}
-		else
-			return VerificationResult.VR_NOTYET;
+		} else {
+            return VerificationResult.VR_NOTYET;
+        }
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
@@ -386,13 +388,17 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				}
 
 				if (atts[i] instanceof SourceFile){
-					if (foundSourceFile == false) foundSourceFile = true;
-					else throw new ClassConstraintException("A ClassFile structure (like '"+tostring(obj)+"') may have no more than one SourceFile attribute."); //vmspec2 4.7.7
+					if (foundSourceFile == false) {
+                        foundSourceFile = true;
+                    } else {
+                        throw new ClassConstraintException("A ClassFile structure (like '"+tostring(obj)+"') may have no more than one SourceFile attribute."); //vmspec2 4.7.7
+                    }
 				}
 
 				if (atts[i] instanceof InnerClasses){
-					if (foundInnerClasses == false) foundInnerClasses = true;
-					else{
+					if (foundInnerClasses == false) {
+                        foundInnerClasses = true;
+                    } else{
 						if (hasInnerClass){
 							throw new ClassConstraintException("A Classfile structure (like '"+tostring(obj)+"') must have exactly one InnerClasses attribute if at least one Inner Class is referenced (which is the case). More than one InnerClasses attribute was found.");
 						}
@@ -493,9 +499,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 			if (jc.isClass()){
 				int maxone=0;
-				if (obj.isPrivate()) maxone++;
-				if (obj.isProtected()) maxone++;
-				if (obj.isPublic()) maxone++;
+				if (obj.isPrivate()) {
+                    maxone++;
+                }
+				if (obj.isProtected()) {
+                    maxone++;
+                }
+				if (obj.isPublic()) {
+                    maxone++;
+                }
 				if (maxone > 1){
 					throw new ClassConstraintException("Field '"+tostring(obj)+"' must only have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
 				}
@@ -590,7 +602,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 			// Check if referenced objects exist.
 			Type act = t;
-			if (act instanceof ArrayType) act = ((ArrayType) act).getBasicType();
+			if (act instanceof ArrayType) {
+                act = ((ArrayType) act).getBasicType();
+            }
 			if (act instanceof ObjectType){
 				Verifier v = VerifierFactory.getVerifier( ((ObjectType) act).getClassName() );
 				VerificationResult vr = v.doPass1();
@@ -601,7 +615,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 			for (int i=0; i<ts.length; i++){
 				act = ts[i];
-				if (act instanceof ArrayType) act = ((ArrayType) act).getBasicType();
+				if (act instanceof ArrayType) {
+                    act = ((ArrayType) act).getBasicType();
+                }
 				if (act instanceof ObjectType){
 					Verifier v = VerifierFactory.getVerifier( ((ObjectType) act).getClassName() );
 					VerificationResult vr = v.doPass1();
@@ -618,20 +634,38 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 			if (jc.isClass()){
 				int maxone=0;
-				if (obj.isPrivate()) maxone++;
-				if (obj.isProtected()) maxone++;
-				if (obj.isPublic()) maxone++;
+				if (obj.isPrivate()) {
+                    maxone++;
+                }
+				if (obj.isProtected()) {
+                    maxone++;
+                }
+				if (obj.isPublic()) {
+                    maxone++;
+                }
 				if (maxone > 1){
 					throw new ClassConstraintException("Method '"+tostring(obj)+"' must only have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
 				}
 
 				if (obj.isAbstract()){
-					if (obj.isFinal()) throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_FINAL modifier set.");
-					if (obj.isNative()) throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_NATIVE modifier set.");
-					if (obj.isPrivate()) throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_PRIVATE modifier set.");
-					if (obj.isStatic()) throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_STATIC modifier set.");
-					if (obj.isStrictfp()) throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_STRICT modifier set.");
-					if (obj.isSynchronized()) throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_SYNCHRONIZED modifier set.");
+					if (obj.isFinal()) {
+                        throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_FINAL modifier set.");
+                    }
+					if (obj.isNative()) {
+                        throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_NATIVE modifier set.");
+                    }
+					if (obj.isPrivate()) {
+                        throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_PRIVATE modifier set.");
+                    }
+					if (obj.isStatic()) {
+                        throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_STATIC modifier set.");
+                    }
+					if (obj.isStrictfp()) {
+                        throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_STRICT modifier set.");
+                    }
+					if (obj.isSynchronized()) {
+                        throw new ClassConstraintException("Abstract method '"+tostring(obj)+"' must not have the ACC_SYNCHRONIZED modifier set.");
+                    }
 				}
 			}
 			else{ // isInterface!
@@ -703,7 +737,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				if ((atts[i] instanceof Code) && (obj.isNative() || obj.isAbstract())){
 					throw new ClassConstraintException("Native or abstract methods like '"+tostring(obj)+"' must not have a Code attribute like '"+tostring(atts[i])+"'."); //vmspec2 page120, 4.7.3
 				}
-				if (atts[i] instanceof Code) num_code_atts++;
+				if (atts[i] instanceof Code) {
+                    num_code_atts++;
+                }
 			}
 			if ( !obj.isNative() && !obj.isAbstract() && num_code_atts != 1){
 				throw new ClassConstraintException("Non-native, non-abstract methods like '"+tostring(obj)+"' must have exactly one Code attribute (found: "+num_code_atts+").");
@@ -880,7 +916,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 						JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
 						JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
 						while (e != o){
-							if (e == t) break; // It's a subclass of Throwable, OKAY, leave.
+							if (e == t) {
+                                break; // It's a subclass of Throwable, OKAY, leave.
+                            }
 
 							v = VerifierFactory.getVerifier(e.getSuperclassName());
 							vr = v.doPass1();
@@ -891,7 +929,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 								e = Repository.lookupClass(e.getSuperclassName());
 							}
 						}
-						if (e != t) throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(exc_table[i])+"' that references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
+						if (e != t) {
+                            throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(exc_table[i])+"' that references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
+                        }
 					}
 				}
 			}
@@ -1019,7 +1059,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 					JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
 					JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
 					while (e != o){
-						if (e == t) break; // It's a subclass of Throwable, OKAY, leave.
+						if (e == t) {
+                            break; // It's a subclass of Throwable, OKAY, leave.
+                        }
 
 						v = VerifierFactory.getVerifier(e.getSuperclassName());
 						vr = v.doPass1();
@@ -1030,7 +1072,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 							e = Repository.lookupClass(e.getSuperclassName());
 						}
 					}
-					if (e != t) throw new ClassConstraintException("Exceptions attribute '"+tostring(obj)+"' references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
+					if (e != t) {
+                        throw new ClassConstraintException("Exceptions attribute '"+tostring(obj)+"' references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
+                    }
 				}
 			}
 
@@ -1258,7 +1302,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * for the class/interface initialization method may be allowed.
 	 */
 	private static boolean validMethodName(String name, boolean allowStaticInit){
-		if (validJavaLangMethodName(name)) return true;
+		if (validJavaLangMethodName(name)) {
+            return true;
+        }
 		
 		if (allowStaticInit){
 			return (name.equals(CONSTRUCTOR_NAME) || name.equals(STATIC_INITIALIZER_NAME));
@@ -1284,10 +1330,14 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * Conforming to: The Java Virtual Machine Specification, Second Edition, §2.7, §2.7.1, §2.2.
 	 */
 	private static boolean validJavaLangMethodName(String name){
-		if (!Character.isJavaIdentifierStart(name.charAt(0))) return false;
+		if (!Character.isJavaIdentifierStart(name.charAt(0))) {
+            return false;
+        }
 		
 		for (int i=1; i<name.length(); i++){
-			if (!Character.isJavaIdentifierPart(name.charAt(i))) return false;
+			if (!Character.isJavaIdentifierPart(name.charAt(i))) {
+                return false;
+            }
 		}
 		return true;
 	}
@@ -1299,7 +1349,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 */
 	private static boolean validInterfaceMethodName(String name){
 		// I guess we should assume special names forbidden here.
-		if (name.startsWith("<")) return false;
+		if (name.startsWith("<")) {
+            return false;
+        }
 		return validJavaLangMethodName(name);
 	}
 
@@ -1308,13 +1360,19 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * represents a valid Java identifier (so-called simple name).
 	 */
 	private static boolean validJavaIdentifier(String name){
-    if  (name.length() == 0) return false; // must not be empty, reported by <francis.andre@easynet.fr>, thanks!
+    if  (name.length() == 0) {
+        return false; // must not be empty, reported by <francis.andre@easynet.fr>, thanks!
+    }
 
 		// vmspec2 2.7, vmspec2 2.2
-		if (!Character.isJavaIdentifierStart(name.charAt(0))) return false;
+		if (!Character.isJavaIdentifierStart(name.charAt(0))) {
+            return false;
+        }
 		
 		for (int i=1; i<name.length(); i++){
-			if (!Character.isJavaIdentifierPart(name.charAt(i))) return false;
+			if (!Character.isJavaIdentifierPart(name.charAt(i))) {
+                return false;
+            }
 		}
 		return true;
 	}

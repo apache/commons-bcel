@@ -64,7 +64,11 @@ public class LocalVariablesInfo{
 		}
 
 		localVariableInfos[slot].add(name, startpc, length, t);
-		if (t == Type.LONG) localVariableInfos[slot+1].add(name, startpc, length, LONG_Upper.theInstance());
-		if (t == Type.DOUBLE) localVariableInfos[slot+1].add(name, startpc, length, DOUBLE_Upper.theInstance());
+		if (t == Type.LONG) {
+            localVariableInfos[slot+1].add(name, startpc, length, LONG_Upper.theInstance());
+        }
+		if (t == Type.DOUBLE) {
+            localVariableInfos[slot+1].add(name, startpc, length, DOUBLE_Upper.theInstance());
+        }
 	}
 }

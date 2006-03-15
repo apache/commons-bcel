@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Thrown by InstructionList.remove() when one or multiple disposed instruction
@@ -49,15 +48,20 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class TargetLostException extends Exception {
-  private InstructionHandle[] targets;
 
-  TargetLostException(InstructionHandle[] t, String mesg) {
-    super(mesg);
-    targets = t;
-  }
+    private InstructionHandle[] targets;
 
-  /**
-   * @return list of instructions still being targeted.
-   */
-  public InstructionHandle[] getTargets() { return targets; }
+
+    TargetLostException(InstructionHandle[] t, String mesg) {
+        super(mesg);
+        targets = t;
+    }
+
+
+    /**
+     * @return list of instructions still being targeted.
+     */
+    public InstructionHandle[] getTargets() {
+        return targets;
+    }
 }

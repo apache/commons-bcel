@@ -59,7 +59,9 @@ public class UninitializedObjectType extends ReferenceType implements Constants{
 	 *
 	 */
 	public boolean equals(Object o){
-		if (! (o instanceof UninitializedObjectType)) return false;
+		if (! (o instanceof UninitializedObjectType)) {
+            return false;
+        }
 		return initialized.equals(((UninitializedObjectType)o).initialized);
 	}
 }

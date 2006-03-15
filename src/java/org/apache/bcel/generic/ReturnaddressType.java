@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
 
 import org.apache.bcel.Constants;
@@ -27,51 +27,56 @@ import org.apache.bcel.Constants;
  */
 public class ReturnaddressType extends Type {
 
-  public static final ReturnaddressType NO_TARGET = new ReturnaddressType();
-  private InstructionHandle returnTarget;
- 
-  /**
-   * A Returnaddress [that doesn't know where to return to].
-   */
-  private ReturnaddressType(){
-    super(Constants.T_ADDRESS, "<return address>");
-  }
- 	
-  /**
-   * Creates a ReturnaddressType object with a target.
-   */
-  public ReturnaddressType(InstructionHandle returnTarget) {
-    super(Constants.T_ADDRESS, "<return address targeting "+returnTarget+">");
-  	this.returnTarget = returnTarget;
-  }
-	
-  /** @return a hash code value for the object.
-   */
-  public int hashCode() { 
-    if (returnTarget == null)
-      return 0;
-  	return returnTarget.hashCode(); 
-  }
+    public static final ReturnaddressType NO_TARGET = new ReturnaddressType();
+    private InstructionHandle returnTarget;
 
-  /**
-   * Returns if the two Returnaddresses refer to the same target.
-   */
-  public boolean equals(Object rat){
-    if(!(rat instanceof ReturnaddressType))
-      return false;
 
-		ReturnaddressType that = (ReturnaddressType)rat;
-		
-		if(this.returnTarget == null || that.returnTarget == null)
-			return that.returnTarget == this.returnTarget;
-		
-    return that.returnTarget.equals(this.returnTarget);
-  }	
+    /**
+     * A Returnaddress [that doesn't know where to return to].
+     */
+    private ReturnaddressType() {
+        super(Constants.T_ADDRESS, "<return address>");
+    }
 
-  /**
-   * @return the target of this ReturnaddressType
-   */
-  public InstructionHandle getTarget(){
-    return returnTarget;
-  }
+
+    /**
+     * Creates a ReturnaddressType object with a target.
+     */
+    public ReturnaddressType(InstructionHandle returnTarget) {
+        super(Constants.T_ADDRESS, "<return address targeting " + returnTarget + ">");
+        this.returnTarget = returnTarget;
+    }
+
+
+    /** @return a hash code value for the object.
+     */
+    public int hashCode() {
+        if (returnTarget == null) {
+            return 0;
+        }
+        return returnTarget.hashCode();
+    }
+
+
+    /**
+     * Returns if the two Returnaddresses refer to the same target.
+     */
+    public boolean equals( Object rat ) {
+        if (!(rat instanceof ReturnaddressType)) {
+            return false;
+        }
+        ReturnaddressType that = (ReturnaddressType) rat;
+        if (this.returnTarget == null || that.returnTarget == null) {
+            return that.returnTarget == this.returnTarget;
+        }
+        return that.returnTarget.equals(this.returnTarget);
+    }
+
+
+    /**
+     * @return the target of this ReturnaddressType
+     */
+    public InstructionHandle getTarget() {
+        return returnTarget;
+    }
 }

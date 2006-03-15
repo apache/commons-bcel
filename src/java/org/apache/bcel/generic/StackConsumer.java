@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denote an instruction that may consume a value from the stack.
@@ -24,8 +23,8 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface StackConsumer {
-  /** @return how many words are consumed from stack
-   */
-  public int consumeStack(ConstantPoolGen cpg);
-}
 
+    /** @return how many words are consumed from stack
+     */
+    public int consumeStack( ConstantPoolGen cpg );
+}

@@ -19,28 +19,26 @@ package org.apache.bcel.classfile;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-
 /**
  * an annotation's element value pair
  * 
  * @version $Id: ElementValuePair
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  */
-public class ElementValuePair
-{
-	private int element_name_index;
-	private ElementValue value;
+public class ElementValuePair {
 
-	/**
-	 * Construct object from file stream.
-	 * @param file Input stream
-	 * @param constant_pool the constant pool
-	 * @throws IOException
-	 */
-	ElementValuePair(DataInputStream file, ConstantPool constant_pool)
-	       throws IOException
-	{
-		element_name_index = (file.readUnsignedShort());
-		value = new ElementValue(file, constant_pool);
-	}
+    private int element_name_index;
+    private ElementValue value;
+
+
+    /**
+     * Construct object from file stream.
+     * @param file Input stream
+     * @param constant_pool the constant pool
+     * @throws IOException
+     */
+    ElementValuePair(DataInputStream file, ConstantPool constant_pool) throws IOException {
+        element_name_index = (file.readUnsignedShort());
+        value = new ElementValue(file, constant_pool);
+    }
 }

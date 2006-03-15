@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.util;
 
 import java.util.Collection;
@@ -29,32 +29,41 @@ import org.apache.bcel.classfile.JavaClass;
  * @version $Id$
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  * @see ClassStack
-*/
+ */
 public class ClassSet implements java.io.Serializable {
-  private Map _map = new HashMap();
 
-  public boolean add(JavaClass clazz) {
-    boolean result = false;
+    private Map _map = new HashMap();
 
-    if(!_map.containsKey(clazz.getClassName())) {
-      result = true;
-      _map.put(clazz.getClassName(), clazz);
+
+    public boolean add( JavaClass clazz ) {
+        boolean result = false;
+        if (!_map.containsKey(clazz.getClassName())) {
+            result = true;
+            _map.put(clazz.getClassName(), clazz);
+        }
+        return result;
     }
 
-    return result;
-  }
 
-  public void      remove(JavaClass clazz) { _map.remove(clazz.getClassName()); }
-  public boolean   empty()                 { return _map.isEmpty(); }
+    public void remove( JavaClass clazz ) {
+        _map.remove(clazz.getClassName());
+    }
 
-  public JavaClass[] toArray() {
-    Collection values = _map.values();
-    JavaClass[] classes = new JavaClass[values.size()];
-    values.toArray(classes);
-    return classes;
-  }
 
-  public String[] getClassNames() {
-    return (String[])_map.keySet().toArray(new String[_map.keySet().size()]);
-  }
-}  
+    public boolean empty() {
+        return _map.isEmpty();
+    }
+
+
+    public JavaClass[] toArray() {
+        Collection values = _map.values();
+        JavaClass[] classes = new JavaClass[values.size()];
+        values.toArray(classes);
+        return classes;
+    }
+
+
+    public String[] getClassNames() {
+        return (String[]) _map.keySet().toArray(new String[_map.keySet().size()]);
+    }
+}

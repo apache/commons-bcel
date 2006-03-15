@@ -106,11 +106,12 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 	fname = name.getName();
 	fun   = env.get(fname); // Lookup in env
 	
-	if(fun != null)
-	  MiniC.addError(f.getLine(), f.getColumn(),
-			 "Redeclaration of " + fun + ".");
-	else
-	  env.put(new Function(name, null)); // `args' will be set by FunDecl.traverse()
+	if(fun != null) {
+        MiniC.addError(f.getLine(), f.getColumn(),
+        		 "Redeclaration of " + fun + ".");
+    } else {
+        env.put(new Function(name, null)); // `args' will be set by FunDecl.traverse()
+    }
 
 	
       }
@@ -121,15 +122,17 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 	
 	// Look for `main' routine
 	fname = fun_decls[i].getName().getName();
-	if(fname.equals("main"))
-	  main = (Function)env.get(fname);
+	if(fname.equals("main")) {
+        main = (Function)env.get(fname);
+    }
       }
       
-      if(main == null)
-	 MiniC.addError(0, 0, "You didn't declare a `main' function.");
-      else if(main.getNoArgs() != 0)
-	 MiniC.addError(main.getLine(), main.getColumn(), 
-			"Main function has too many arguments declared.");
+      if(main == null) {
+        MiniC.addError(0, 0, "You didn't declare a `main' function.");
+    } else if(main.getNoArgs() != 0) {
+        MiniC.addError(main.getLine(), main.getColumn(), 
+        		"Main function has too many arguments declared.");
+    }
     }
 
     return this;
@@ -147,10 +150,11 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
       if(pass == 3) { // Final check for unresolved types
 	ASTIdent name = fun_decls[i].getName();
 
-	if(name.getType() == T_UNKNOWN)
-	  MiniC.addError(name.getColumn(), name.getLine(),
-			 "Type of function " + name.getName() +
-			 " can not be determined (infinite recursion?).");
+	if(name.getType() == T_UNKNOWN) {
+        MiniC.addError(name.getColumn(), name.getLine(),
+        		 "Type of function " + name.getName() +
+        		 " can not be determined (infinite recursion?).");
+    }
       }
     }
   }
@@ -174,8 +178,9 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     out.println("  private static final int _writeInt(int n) {\n" +
 		"    System.out.println(\"Result: \" + n);\n    return 0;\n  }\n");
 
-    for(int i=0; i < fun_decls.length; i++)
-      fun_decls[i].code(out);
+    for(int i=0; i < fun_decls.length; i++) {
+        fun_decls[i].code(out);
+    }
 
     out.println("}");
   }
@@ -192,9 +197,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 				 null, cp.getConstantPool()));
 
     MethodGen       method;
-    Method          m;
     InstructionList il = new InstructionList();
-    byte[]          byte_code;
     String          class_name = class_gen.getClassName();
 
     /* Often used constant pool entries
@@ -303,14 +306,16 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     method.setMaxStack(5);
     class_gen.addMethod(method.getMethod());
 
-    for(int i=0; i < fun_decls.length; i++)
-      fun_decls[i].byte_code(class_gen, cp);
+    for(int i=0; i < fun_decls.length; i++) {
+        fun_decls[i].byte_code(class_gen, cp);
+    }
   }
 
   public void dump(String prefix) {
     System.out.println(toString(prefix));
 
-    for(int i = 0; i < fun_decls.length; ++i)
-      fun_decls[i].dump(prefix + " ");
+    for(int i = 0; i < fun_decls.length; ++i) {
+        fun_decls[i].dump(prefix + " ");
+    }
   }
 }

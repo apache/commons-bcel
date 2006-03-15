@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
 
 import java.io.IOException;
@@ -28,25 +28,27 @@ import org.apache.bcel.util.ByteSequence;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class LDC_W extends LDC {
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  LDC_W() {}
 
-  public LDC_W(int index) {
-    super(index);
-  }
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    LDC_W() {
+    }
 
-  /**
-   * Read needed data (i.e., index) from file.
-   */
-  protected void initFromFile(ByteSequence bytes, boolean wide)
-       throws IOException
-  {
-    setIndex(bytes.readUnsignedShort());
-    // Override just in case it has been changed
-    opcode = org.apache.bcel.Constants.LDC_W;
-    length = 3;
-  }
+
+    public LDC_W(int index) {
+        super(index);
+    }
+
+
+    /**
+     * Read needed data (i.e., index) from file.
+     */
+    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+        setIndex(bytes.readUnsignedShort());
+        // Override just in case it has been changed
+        opcode = org.apache.bcel.Constants.LDC_W;
+        length = 3;
+    }
 }

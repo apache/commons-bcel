@@ -19,8 +19,9 @@ public final class maxstack {
 	String    class_name = argv[i];
 	JavaClass java_class = Repository.lookupClass(class_name);
 
-	if(java_class == null) // Look for .class file?
-	  java_class = new ClassParser(class_name).parse();
+	if(java_class == null) {
+        java_class = new ClassParser(class_name).parse();
+    }
 
 	ConstantPoolGen cp      = new ConstantPoolGen(java_class.getConstantPool());
    	Method[]        methods = java_class.getMethods();
@@ -42,17 +43,19 @@ public final class maxstack {
 	    
 	    System.out.println(m);
 	    
-	    if(computed_stack == compiled_stack)
-	      System.out.println("Stack ok(" + computed_stack + ")");
-	    else
-	      System.out.println("\nCompiled stack size " + compiled_stack +
-			       " computed size " + computed_stack);
+	    if(computed_stack == compiled_stack) {
+            System.out.println("Stack ok(" + computed_stack + ")");
+        } else {
+            System.out.println("\nCompiled stack size " + compiled_stack +
+            	       " computed size " + computed_stack);
+        }
 	    
-	    if(computed_locals == compiled_locals)
-	      System.out.println("Locals ok(" + computed_locals + ")");
-	    else
-	      System.out.println("\nCompiled locals " + compiled_locals +
-				 " computed size " + computed_locals);
+	    if(computed_locals == compiled_locals) {
+            System.out.println("Locals ok(" + computed_locals + ")");
+        } else {
+            System.out.println("\nCompiled locals " + compiled_locals +
+            		 " computed size " + computed_locals);
+        }
 	  }
 	}
       }

@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.verifier;
-
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,74 +32,79 @@ import java.util.Vector;
  * @author Enver Haase
  * @see org.apache.bcel.verifier.Verifier
  */
-public class VerifierFactory{
+public class VerifierFactory {
 
-	/**
-	 * The HashMap that holds the data about the already-constructed Verifier instances.
-	 */
-	private static Map hashMap = new HashMap();
+    /**
+     * The HashMap that holds the data about the already-constructed Verifier instances.
+     */
+    private static Map hashMap = new HashMap();
+    /**
+     * The VerifierFactoryObserver instances that observe the VerifierFactory.
+     */
+    private static List observers = new Vector();
 
-	/**
-	 * The VerifierFactoryObserver instances that observe the VerifierFactory.
-	 */
-	private static List observers = new Vector();
 
-	/**
-	 * The VerifierFactory is not instantiable.
-	 */
-	private VerifierFactory(){}
-	
-	/**
-	 * Returns the (only) verifier responsible for the class with the given name.
-	 * Possibly a new Verifier object is transparently created.
-	 * @return the (only) verifier responsible for the class with the given name.
-	 */
-	public static Verifier getVerifier(String fully_qualified_classname){
-		Verifier v = (Verifier) (hashMap.get(fully_qualified_classname));
-		if (v==null){
-			v = new Verifier(fully_qualified_classname);
-			hashMap.put(fully_qualified_classname, v);
-			notify(fully_qualified_classname);
-		}
-		
-		return v;
-	}
+    /**
+     * The VerifierFactory is not instantiable.
+     */
+    private VerifierFactory() {
+    }
 
-	/**
-	 * Notifies the observers of a newly generated Verifier.
-	 */
-	private static void notify(String fully_qualified_classname){
-		// notify the observers
-		Iterator i = observers.iterator();
-		while (i.hasNext()){
-			VerifierFactoryObserver vfo = (VerifierFactoryObserver) i.next();
-			vfo.update(fully_qualified_classname);
-		}
-	}
 
-	/**
-	 * Returns all Verifier instances created so far.
-	 * This is useful when a Verifier recursively lets
-	 * the VerifierFactory create other Verifier instances
-	 * and if you want to verify the transitive hull of
-	 * referenced class files.
-	 */
-	public static Verifier[] getVerifiers(){
-		Verifier[] vs = new Verifier[hashMap.values().size()];
-		return (Verifier[]) (hashMap.values().toArray(vs));	// Because vs is big enough, vs is used to store the values into and returned!
-	}
+    /**
+     * Returns the (only) verifier responsible for the class with the given name.
+     * Possibly a new Verifier object is transparently created.
+     * @return the (only) verifier responsible for the class with the given name.
+     */
+    public static Verifier getVerifier( String fully_qualified_classname ) {
+        Verifier v = (Verifier) (hashMap.get(fully_qualified_classname));
+        if (v == null) {
+            v = new Verifier(fully_qualified_classname);
+            hashMap.put(fully_qualified_classname, v);
+            notify(fully_qualified_classname);
+        }
+        return v;
+    }
 
-	/**
-	 * Adds the VerifierFactoryObserver o to the list of observers.
-	 */
-	public static void attach(VerifierFactoryObserver o){
-		observers.add(o);
-	}
-	
-	/**
-	 * Removes the VerifierFactoryObserver o from the list of observers.
-	 */
-	public static void detach(VerifierFactoryObserver o){
-			observers.remove(o);
-	}
+
+    /**
+     * Notifies the observers of a newly generated Verifier.
+     */
+    private static void notify( String fully_qualified_classname ) {
+        // notify the observers
+        Iterator i = observers.iterator();
+        while (i.hasNext()) {
+            VerifierFactoryObserver vfo = (VerifierFactoryObserver) i.next();
+            vfo.update(fully_qualified_classname);
+        }
+    }
+
+
+    /**
+     * Returns all Verifier instances created so far.
+     * This is useful when a Verifier recursively lets
+     * the VerifierFactory create other Verifier instances
+     * and if you want to verify the transitive hull of
+     * referenced class files.
+     */
+    public static Verifier[] getVerifiers() {
+        Verifier[] vs = new Verifier[hashMap.values().size()];
+        return (Verifier[]) (hashMap.values().toArray(vs)); // Because vs is big enough, vs is used to store the values into and returned!
+    }
+
+
+    /**
+     * Adds the VerifierFactoryObserver o to the list of observers.
+     */
+    public static void attach( VerifierFactoryObserver o ) {
+        observers.add(o);
+    }
+
+
+    /**
+     * Removes the VerifierFactoryObserver o from the list of observers.
+     */
+    public static void detach( VerifierFactoryObserver o ) {
+        observers.remove(o);
+    }
 }

@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /** 
  * Thrown on internal errors. Extends RuntimeException so it hasn't to be declared
@@ -25,7 +24,13 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ClassGenException extends RuntimeException {
-  public ClassGenException() { super(); }
-  public ClassGenException(String s) { super(s); }
-}
 
+    public ClassGenException() {
+        super();
+    }
+
+
+    public ClassGenException(String s) {
+        super(s);
+    }
+}

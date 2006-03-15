@@ -29,9 +29,10 @@ public class ASTFactor extends ASTExpr {
    * and may be safely replaced with it.
    */
   public ASTExpr traverse(Environment env) {
-    if(kind == -1) // Drop it
-      return exprs[0].traverse(env);
-    else           // Or convert it to Expr node & copy children
-      return new ASTExpr(exprs, kind, line, column).traverse(env);
+    if(kind == -1) {
+        return exprs[0].traverse(env);
+    } else {
+        return new ASTExpr(exprs, kind, line, column).traverse(env);
+    }
   }
 }

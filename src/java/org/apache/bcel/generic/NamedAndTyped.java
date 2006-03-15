@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denote entity that has both name and type. This is true for local variables,
@@ -25,10 +24,15 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface NamedAndTyped {
-  public String getName();
-  public Type   getType();
-  public void   setName(String name);
-  public void   setType(Type type);
 
+    public String getName();
+
+
+    public Type getType();
+
+
+    public void setName( String name );
+
+
+    public void setType( Type type );
 }
-

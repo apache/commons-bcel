@@ -83,10 +83,11 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   public String toString() {
     String op="";
     int    len = (children != null)? children.length : 0;
-    if(unop != -1)
-      op = tokenImage[unop];
-    else if(kind != -1)
-      op = tokenImage[kind];
+    if(unop != -1) {
+        op = tokenImage[unop];
+    } else if(kind != -1) {
+        op = tokenImage[kind];
+    }
 
     return jjtNodeName[id] + "(" + op + ")[" + len + "]<" +
       TYPE_NAMES[type] + "> @" + line + ", " + column;
@@ -114,11 +115,12 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   public ASTExpr traverse(Environment env) {
     this.env = env;
 
-    if((kind == -1) && (unop == -1))  // Redundant node (built thru op precedence) ?
-      return exprs[0].traverse(env);  // --> Replaced by successor
-    else {
-      for(int i=0; i < exprs.length; i++)  // Traverse children
-	exprs[i] = exprs[i].traverse(env); // References may change
+    if((kind == -1) && (unop == -1)) {
+        return exprs[0].traverse(env);  // --> Replaced by successor
+    } else {
+      for(int i=0; i < exprs.length; i++) {
+        exprs[i] = exprs[i].traverse(env); // References may change
+    }
     
       return this;
     }
@@ -136,19 +138,20 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
     // Determine expected node type depending on used operator.
     if(unop != -1) {
-      if(unop == MINUS)
-	child_type = type = T_INT;  // - 
-      else
-	child_type = type = T_BOOLEAN; // !
+      if(unop == MINUS) {
+        child_type = type = T_INT;  // - 
+    } else {
+        child_type = type = T_BOOLEAN; // !
+    }
     }
     else {
       // Compute expected type
       if((kind == PLUS) || (kind == MINUS) || (kind == MULT) ||
-	 (kind == MOD)  || (kind == DIV))
-	child_type = type = T_INT;
-      else if((kind == AND) || (kind == OR))
-	child_type = type = T_BOOLEAN;
-      else { // LEQ, GT, etc.
+	 (kind == MOD)  || (kind == DIV)) {
+        child_type = type = T_INT;
+    } else if((kind == AND) || (kind == OR)) {
+        child_type = type = T_BOOLEAN;
+    } else { // LEQ, GT, etc.
 	child_type = T_INT;
 	type       = T_BOOLEAN;
       }
@@ -158,10 +161,11 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     for(int i=0; i < exprs.length; i++) {
       t = exprs[i].eval(child_type); 
 
-      if(t != child_type)
-	MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
-		       "Expression has not expected type " + TYPE_NAMES[child_type] +
-		       " but " + TYPE_NAMES[t] + ".");
+      if(t != child_type) {
+        MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
+        	       "Expression has not expected type " + TYPE_NAMES[child_type] +
+        	       " but " + TYPE_NAMES[t] + ".");
+    }
 
       is_simple = is_simple && exprs[i].isSimple();
     }
@@ -184,10 +188,11 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     if(unop != -1) {
       exprs[0].code(buf);
       String top = ASTFunDecl.pop();
-      if(unop == MINUS)
-	ASTFunDecl.push(buf, "-" + top);
-      else
-	ASTFunDecl.push(buf, "(" + top + " == 1)? 0 : 1)");
+      if(unop == MINUS) {
+        ASTFunDecl.push(buf, "-" + top);
+    } else {
+        ASTFunDecl.push(buf, "(" + top + " == 1)? 0 : 1)");
+    }
     }
     else {
       exprs[0].code(buf);
@@ -231,9 +236,9 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     exprs[0].byte_code(il, method, cp);
 
     if(unop != -1) { // Apply unary operand
-      if(unop == MINUS)
-	il.append(InstructionConstants.INEG);
-      else { // == NOT
+      if(unop == MINUS) {
+        il.append(InstructionConstants.INEG);
+    } else { // == NOT
 	il.append(new PUSH(cp, 1)); ASTFunDecl.push(); // Push TRUE
 	il.append(InstructionConstants.IXOR); ASTFunDecl.pop();
       }
@@ -296,8 +301,10 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   public void dump(String prefix) {
     System.out.println(toString(prefix));
 
-    if(exprs != null) // Children may have no subchildren
-      for(int i=0; i < exprs.length; ++i)
-	exprs[i].dump(prefix + " ");
+    if(exprs != null) {
+        for(int i=0; i < exprs.length; ++i) {
+            exprs[i].dump(prefix + " ");
+        }
+    }
   }
 }

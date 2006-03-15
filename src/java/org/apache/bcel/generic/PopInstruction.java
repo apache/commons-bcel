@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denotes an unparameterized instruction to pop a value on top from the stack,
@@ -28,4 +27,3 @@ package org.apache.bcel.generic;
  */
 public interface PopInstruction extends StackConsumer {
 }
-

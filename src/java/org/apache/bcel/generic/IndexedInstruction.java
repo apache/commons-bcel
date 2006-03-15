@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denote entity that refers to an index, e.g. local variable instructions,
@@ -25,7 +24,9 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface IndexedInstruction {
-  public int getIndex();
-  public void setIndex(int index);
-}
 
+    public int getIndex();
+
+
+    public void setIndex( int index );
+}

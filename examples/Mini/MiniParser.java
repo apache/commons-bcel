@@ -38,12 +38,18 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
             jjtree.popNode();
           }
           if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
+            {if (true) {
+                throw (ParseException)jjte000;
+            }}
           }
           if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
+            {if (true) {
+                throw (RuntimeException)jjte000;
+            }}
           }
-          {if (true) throw (Error)jjte000;}
+          {if (true) {
+            throw (Error)jjte000;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -59,8 +65,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
   ASTFunDecl jjtn000 = new ASTFunDecl(JJTFUNDECL);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
-  jjtreeOpenNodeScope(jjtn000);String   s;
-  Token    t;
+  jjtreeOpenNodeScope(jjtn000);Token    t;
     try {
       t = jj_consume_token(9);
                      jjtn000.setPosition(t.beginLine, t.beginColumn);
@@ -102,12 +107,18 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
             jjtree.popNode();
           }
           if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
+            {if (true) {
+                throw (ParseException)jjte000;
+            }}
           }
           if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
+            {if (true) {
+                throw (RuntimeException)jjte000;
+            }}
           }
-          {if (true) throw (Error)jjte000;}
+          {if (true) {
+            throw (Error)jjte000;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -171,12 +182,18 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
             jjtree.popNode();
           }
           if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
+            {if (true) {
+                throw (ParseException)jjte000;
+            }}
           }
           if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
+            {if (true) {
+                throw (RuntimeException)jjte000;
+            }}
           }
-          {if (true) throw (Error)jjte000;}
+          {if (true) {
+            throw (Error)jjte000;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -220,12 +237,18 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
             jjtree.popNode();
           }
           if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
+            {if (true) {
+                throw (ParseException)jjte000;
+            }}
           }
           if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
+            {if (true) {
+                throw (RuntimeException)jjte000;
+            }}
           }
-          {if (true) throw (Error)jjte000;}
+          {if (true) {
+            throw (Error)jjte000;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -271,12 +294,18 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
             jjtree.popNode();
           }
           if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
+            {if (true) {
+                throw (ParseException)jjte000;
+            }}
           }
           if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
+            {if (true) {
+                throw (RuntimeException)jjte000;
+            }}
           }
-          {if (true) throw (Error)jjte000;}
+          {if (true) {
+            throw (Error)jjte000;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -330,7 +359,9 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
           jjtree.closeNodeScope(jjtn000, true);
           jjtc000 = false;
           jjtreeCloseNodeScope(jjtn000);
-          {if (true) return t;}
+          {if (true) {
+            return t;
+        }}
     } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -339,12 +370,18 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
             jjtree.popNode();
           }
           if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
+            {if (true) {
+                throw (ParseException)jjte000;
+            }}
           }
           if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
+            {if (true) {
+                throw (RuntimeException)jjte000;
+            }}
           }
-          {if (true) throw (Error)jjte000;}
+          {if (true) {
+            throw (Error)jjte000;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -387,12 +424,18 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
             jjtree.popNode();
           }
           if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
+            {if (true) {
+                throw (ParseException)jjte000;
+            }}
           }
           if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
+            {if (true) {
+                throw (RuntimeException)jjte000;
+            }}
           }
-          {if (true) throw (Error)jjte000;}
+          {if (true) {
+            throw (Error)jjte000;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -436,12 +479,18 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
             jjtree.popNode();
           }
           if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
+            {if (true) {
+                throw (ParseException)jjte000;
+            }}
           }
           if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
+            {if (true) {
+                throw (RuntimeException)jjte000;
+            }}
           }
-          {if (true) throw (Error)jjte000;}
+          {if (true) {
+            throw (Error)jjte000;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -483,8 +532,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
   ASTInteger jjtn000 = new ASTInteger(JJTINTEGER);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
-  jjtreeOpenNodeScope(jjtn000);int num;
-  Token t;
+  jjtreeOpenNodeScope(jjtn000);Token t;
     try {
       t = jj_consume_token(INTEGER);
           jjtree.closeNodeScope(jjtn000, true);
@@ -492,7 +540,9 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
           jjtreeCloseNodeScope(jjtn000);
           jjtn000.setValue(Integer.parseInt(t.image));
           jjtn000.setPosition(t.beginLine, t.beginColumn);
-          {if (true) return t;}
+          {if (true) {
+            return t;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -507,8 +557,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
   ASTIdent jjtn000 = new ASTIdent(JJTIDENT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
-  jjtreeOpenNodeScope(jjtn000);String name;
-  Token t;
+  jjtreeOpenNodeScope(jjtn000);Token t;
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case TRUE:
@@ -536,7 +585,9 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
           jjtreeCloseNodeScope(jjtn000);
           jjtn000.setName(t.image);
           jjtn000.setPosition(t.beginLine, t.beginColumn);
-          {if (true) return t;}
+          {if (true) {
+            return t;
+        }}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -563,7 +614,9 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
       jj_consume_token(-1);
       throw new ParseException();
     }
-    {if (true) return t.kind;}
+    {if (true) {
+        return t.kind;
+    }}
     throw new Error("Missing return statement in function");
   }
 
@@ -587,7 +640,9 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
       jj_consume_token(-1);
       throw new ParseException();
     }
-    {if (true) return t.kind;}
+    {if (true) {
+        return t.kind;
+    }}
     throw new Error("Missing return statement in function");
   }
 
@@ -617,7 +672,9 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
       jj_consume_token(-1);
       throw new ParseException();
     }
-    {if (true) return t.kind;}
+    {if (true) {
+        return t.kind;
+    }}
     throw new Error("Missing return statement in function");
   }
 
@@ -635,7 +692,9 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
       jj_consume_token(-1);
       throw new ParseException();
     }
-    {if (true) return t.kind;}
+    {if (true) {
+        return t.kind;
+    }}
     throw new Error("Missing return statement in function");
   }
 
@@ -647,20 +706,32 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
   }
 
   static final private boolean jj_3R_8() {
-    if (jj_scan_token(FALSE)) return true;
-    if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
+    if (jj_scan_token(FALSE)) {
+        return true;
+    }
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
     return false;
   }
 
   static final private boolean jj_3R_11() {
-    if (jj_scan_token(IDENT)) return true;
-    if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
+    if (jj_scan_token(IDENT)) {
+        return true;
+    }
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
     return false;
   }
 
   static final private boolean jj_3R_7() {
-    if (jj_scan_token(TRUE)) return true;
-    if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
+    if (jj_scan_token(TRUE)) {
+        return true;
+    }
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
     return false;
   }
 
@@ -675,38 +746,70 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     jj_scanpos = xsp;
     if (jj_3R_10()) {
     jj_scanpos = xsp;
-    if (jj_3R_11()) return true;
-    if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
-    } else if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
-    } else if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
-    } else if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
-    } else if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
+    if (jj_3R_11()) {
+        return true;
+    }
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
+    } else if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
+    } else if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
+    } else if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
+    } else if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
     return false;
   }
 
   static final private boolean jj_3_1() {
-    if (jj_3R_5()) return true;
-    if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
+    if (jj_3R_5()) {
+        return true;
+    }
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
     return false;
   }
 
   static final private boolean jj_3R_5() {
-    if (jj_3R_6()) return true;
-    if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
+    if (jj_3R_6()) {
+        return true;
+    }
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
+    if (jj_scan_token(LPAREN)) {
+        return true;
+    }
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
     return false;
   }
 
   static final private boolean jj_3R_10() {
-    if (jj_scan_token(WRITE)) return true;
-    if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
+    if (jj_scan_token(WRITE)) {
+        return true;
+    }
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
     return false;
   }
 
   static final private boolean jj_3R_9() {
-    if (jj_scan_token(READ)) return true;
-    if (jj_la == 0 && jj_scanpos == jj_lastpos) return false;
+    if (jj_scan_token(READ)) {
+        return true;
+    }
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+        return false;
+    }
     return false;
   }
 
@@ -740,8 +843,12 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+    for (int i = 0; i < 17; i++) {
+        jj_la1[i] = -1;
+    }
+    for (int i = 0; i < jj_2_rtns.length; i++) {
+        jj_2_rtns[i] = new JJCalls();
+    }
   }
 
   static public void ReInit(java.io.InputStream stream) {
@@ -751,8 +858,12 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+    for (int i = 0; i < 17; i++) {
+        jj_la1[i] = -1;
+    }
+    for (int i = 0; i < jj_2_rtns.length; i++) {
+        jj_2_rtns[i] = new JJCalls();
+    }
   }
 
   public MiniParser(java.io.Reader stream) {
@@ -768,8 +879,12 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+    for (int i = 0; i < 17; i++) {
+        jj_la1[i] = -1;
+    }
+    for (int i = 0; i < jj_2_rtns.length; i++) {
+        jj_2_rtns[i] = new JJCalls();
+    }
   }
 
   static public void ReInit(java.io.Reader stream) {
@@ -779,8 +894,12 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+    for (int i = 0; i < 17; i++) {
+        jj_la1[i] = -1;
+    }
+    for (int i = 0; i < jj_2_rtns.length; i++) {
+        jj_2_rtns[i] = new JJCalls();
+    }
   }
 
   public MiniParser(MiniParserTokenManager tm) {
@@ -795,8 +914,12 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+    for (int i = 0; i < 17; i++) {
+        jj_la1[i] = -1;
+    }
+    for (int i = 0; i < jj_2_rtns.length; i++) {
+        jj_2_rtns[i] = new JJCalls();
+    }
   }
 
   public void ReInit(MiniParserTokenManager tm) {
@@ -805,14 +928,21 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
-    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
+    for (int i = 0; i < 17; i++) {
+        jj_la1[i] = -1;
+    }
+    for (int i = 0; i < jj_2_rtns.length; i++) {
+        jj_2_rtns[i] = new JJCalls();
+    }
   }
 
   static final private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
-    if ((oldToken = token).next != null) token = token.next;
-    else token = token.next = token_source.getNextToken();
+    if ((oldToken = token).next != null) {
+        token = token.next;
+    } else {
+        token = token.next = token_source.getNextToken();
+    }
     jj_ntk = -1;
     if (token.kind == kind) {
       jj_gen++;
@@ -821,7 +951,9 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         for (int i = 0; i < jj_2_rtns.length; i++) {
           JJCalls c = jj_2_rtns[i];
           while (c != null) {
-            if (c.gen < jj_gen) c.first = null;
+            if (c.gen < jj_gen) {
+                c.first = null;
+            }
             c = c.next;
           }
         }
@@ -847,14 +979,19 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     if (jj_rescan) {
       int i = 0; Token tok = token;
       while (tok != null && tok != jj_scanpos) { i++; tok = tok.next; }
-      if (tok != null) jj_add_error_token(kind, i);
+      if (tok != null) {
+        jj_add_error_token(kind, i);
+    }
     }
     return (jj_scanpos.kind != kind);
   }
 
   static final public Token getNextToken() {
-    if (token.next != null) token = token.next;
-    else token = token.next = token_source.getNextToken();
+    if (token.next != null) {
+        token = token.next;
+    } else {
+        token = token.next = token_source.getNextToken();
+    }
     jj_ntk = -1;
     jj_gen++;
     return token;
@@ -863,17 +1000,21 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
   static final public Token getToken(int index) {
     Token t = lookingAhead ? jj_scanpos : token;
     for (int i = 0; i < index; i++) {
-      if (t.next != null) t = t.next;
-      else t = t.next = token_source.getNextToken();
+      if (t.next != null) {
+        t = t.next;
+    } else {
+        t = t.next = token_source.getNextToken();
+    }
     }
     return t;
   }
 
   static final private int jj_ntk() {
-    if ((jj_nt=token.next) == null)
-      return (jj_ntk = (token.next=token_source.getNextToken()).kind);
-    else
-      return (jj_ntk = jj_nt.kind);
+    if ((jj_nt=token.next) == null) {
+        return (jj_ntk = (token.next=token_source.getNextToken()).kind);
+    } else {
+        return (jj_ntk = jj_nt.kind);
+    }
   }
 
   static private java.util.Vector jj_expentries = new java.util.Vector();
@@ -883,7 +1024,9 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
   static private int jj_endpos;
 
   static private void jj_add_error_token(int kind, int pos) {
-    if (pos >= 100) return;
+    if (pos >= 100) {
+        return;
+    }
     if (pos == jj_endpos + 1) {
       jj_lasttokens[jj_endpos++] = kind;
     } else if (jj_endpos != 0) {
@@ -902,11 +1045,17 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
               break;
             }
           }
-          if (exists) break;
+          if (exists) {
+            break;
+        }
         }
       }
-      if (!exists) jj_expentries.addElement(jj_expentry);
-      if (pos != 0) jj_lasttokens[(jj_endpos = pos) - 1] = kind;
+      if (!exists) {
+        jj_expentries.addElement(jj_expentry);
+    }
+      if (pos != 0) {
+        jj_lasttokens[(jj_endpos = pos) - 1] = kind;
+    }
     }
   }
 

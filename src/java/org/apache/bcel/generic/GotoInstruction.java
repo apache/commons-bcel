@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /** 
  * Super class for GOTO
@@ -23,16 +22,17 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public abstract class GotoInstruction extends BranchInstruction
-  implements UnconditionalBranch
-{
-  GotoInstruction(short opcode, InstructionHandle target) {
-    super(opcode, target);
-  }
+public abstract class GotoInstruction extends BranchInstruction implements UnconditionalBranch {
 
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  GotoInstruction(){}
+    GotoInstruction(short opcode, InstructionHandle target) {
+        super(opcode, target);
+    }
+
+
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    GotoInstruction() {
+    }
 }

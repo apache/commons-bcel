@@ -49,8 +49,9 @@ public final class helloify implements Constants {
 	   */
           Method[] methods = java_class.getMethods();
 
-	  for(int j=0; j < methods.length; j++) // Directly use array
-	    methods[j] = helloifyMethod(methods[j]);
+	  for(int j=0; j < methods.length; j++) {
+        methods[j] = helloifyMethod(methods[j]);
+    }
 
 	  /* Finally dump it back to a file.
 	   */
@@ -82,8 +83,9 @@ public final class helloify implements Constants {
     String name  = m.getName();
     
     // Sanity check
-    if(m.isNative() || m.isAbstract() || (code == null))
-      return m;
+    if(m.isNative() || m.isAbstract() || (code == null)) {
+        return m;
+    }
     
     /* Create instruction list to be inserted at method start.
      */
@@ -106,13 +108,15 @@ public final class helloify implements Constants {
 	  break;
 	}
       }
-    } else
-      il.insert(ihs[0], patch);
+    } else {
+        il.insert(ihs[0], patch);
+    }
 
     /* Stack size must be at least 2, since the println method takes 2 argument.
      */
-    if(code.getMaxStack() < 2)
-      mg.setMaxStack(2);
+    if(code.getMaxStack() < 2) {
+        mg.setMaxStack(2);
+    }
 
     m = mg.getMethod();
 

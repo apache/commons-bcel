@@ -62,8 +62,9 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
     this.env = env;
     
     // Traverse RHS exprs first, so no references to LHS vars are allowed
-    for(int i=0; i < exprs.length; i++)
-      exprs[i] = exprs[i].traverse((Environment)env.clone());
+    for(int i=0; i < exprs.length; i++) {
+        exprs[i] = exprs[i].traverse((Environment)env.clone());
+    }
     
     // Put argument names into hash table aka. environment
     for(int i=0; i < idents.length; i++) {
@@ -71,11 +72,12 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
       String   name  = id.getName();
       EnvEntry entry = env.get(name);
 
-      if(entry != null)
-	MiniC.addError(id.getLine(), id.getColumn(),
-		       "Redeclaration of " + entry + ".");
-      else
-	env.put(new Variable(id));
+      if(entry != null) {
+        MiniC.addError(id.getLine(), id.getColumn(),
+        	       "Redeclaration of " + entry + ".");
+    } else {
+        env.put(new Variable(id));
+    }
     }
 
     body = body.traverse(env);
@@ -147,8 +149,9 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
 
     body.byte_code(il, method, cp);
     InstructionHandle end = il.getEnd();
-    for(int i=0; i < size; i++)
-      l[i].setEnd(end);
+    for(int i=0; i < size; i++) {
+        l[i].setEnd(end);
+    }
   }
 
   public void dump(String prefix) {

@@ -16,7 +16,6 @@
  */
 package org.apache.bcel.classfile;
 
-
 /**
  * Unknown (non-standard) attributes may be read via user-defined factory
  * objects that can be registered with the Attribute.addAttributeReader
@@ -27,7 +26,8 @@ package org.apache.bcel.classfile;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface AttributeReader {
-  /**
+
+    /**
      When this attribute reader is added via the static method
      Attribute.addAttributeReader, an attribute name is associated with it.
      As the class file parser parses attributes, it will call various
@@ -52,9 +52,7 @@ public interface AttributeReader {
      returned which will cause the parsing of the class file to fail.
 
      @see Attribute#addAttributeReader( String, AttributeReader )
-  */
-  public Attribute createAttribute(int name_index, 
-				   int length,
-				   java.io.DataInputStream file,
-				   ConstantPool constant_pool);
+     */
+    public Attribute createAttribute( int name_index, int length, java.io.DataInputStream file,
+            ConstantPool constant_pool );
 }

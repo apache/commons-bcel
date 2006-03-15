@@ -99,7 +99,9 @@ public class Frame{
 	 *
 	 */
 	public boolean equals(Object o){
-		if (!(o instanceof Frame)) return false; // implies "null" is non-equal.
+		if (!(o instanceof Frame)) {
+            return false; // implies "null" is non-equal.
+        }
 		Frame f = (Frame) o;
 		return this.stack.equals(f.stack) && this.locals.equals(f.locals);
 	}

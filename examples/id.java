@@ -27,8 +27,9 @@ public class id {
   public static void main(String[] argv) throws Exception { 
     JavaClass clazz = null;
 
-    if((clazz = Repository.lookupClass(argv[0])) == null)
-      clazz = new ClassParser(argv[0]).parse(); // May throw IOException
+    if((clazz = Repository.lookupClass(argv[0])) == null) {
+        clazz = new ClassParser(argv[0]).parse(); // May throw IOException
+    }
 
     ClassGen cg = new ClassGen(clazz);
 

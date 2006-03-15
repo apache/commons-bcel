@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /** 
  * LDC2_W - Push long or double from constant pool
@@ -25,55 +24,59 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class LDC2_W extends CPInstruction
-  implements PushInstruction, TypedInstruction {
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  LDC2_W() {}
+public class LDC2_W extends CPInstruction implements PushInstruction, TypedInstruction {
 
-  public LDC2_W(int index) {
-    super(org.apache.bcel.Constants.LDC2_W, index);
-  }
-
-  public Type getType(ConstantPoolGen cpg) {
-    switch(cpg.getConstantPool().getConstant(index).getTag()) {
-    case org.apache.bcel.Constants.CONSTANT_Long:   return Type.LONG;
-    case org.apache.bcel.Constants.CONSTANT_Double: return Type.DOUBLE;
-    default: // Never reached
-      throw new RuntimeException("Unknown constant type " + opcode);
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    LDC2_W() {
     }
-  }
 
-  public Number getValue(ConstantPoolGen cpg) {
-    org.apache.bcel.classfile.Constant c = cpg.getConstantPool().getConstant(index);
 
-    switch(c.getTag()) {
-    case org.apache.bcel.Constants.CONSTANT_Long:
-	return new Long(((org.apache.bcel.classfile.ConstantLong)c).getBytes());
+    public LDC2_W(int index) {
+        super(org.apache.bcel.Constants.LDC2_W, index);
+    }
 
-    case org.apache.bcel.Constants.CONSTANT_Double:
-	return new Double(((org.apache.bcel.classfile.ConstantDouble)c).getBytes());
 
-    default: // Never reached
-      throw new RuntimeException("Unknown or invalid constant type at " + index);
-      }
-  }
+    public Type getType( ConstantPoolGen cpg ) {
+        switch (cpg.getConstantPool().getConstant(index).getTag()) {
+            case org.apache.bcel.Constants.CONSTANT_Long:
+                return Type.LONG;
+            case org.apache.bcel.Constants.CONSTANT_Double:
+                return Type.DOUBLE;
+            default: // Never reached
+                throw new RuntimeException("Unknown constant type " + opcode);
+        }
+    }
 
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    v.visitStackProducer(this);
-    v.visitPushInstruction(this);
-    v.visitTypedInstruction(this);
-    v.visitCPInstruction(this);
-    v.visitLDC2_W(this);
-  }
+
+    public Number getValue( ConstantPoolGen cpg ) {
+        org.apache.bcel.classfile.Constant c = cpg.getConstantPool().getConstant(index);
+        switch (c.getTag()) {
+            case org.apache.bcel.Constants.CONSTANT_Long:
+                return new Long(((org.apache.bcel.classfile.ConstantLong) c).getBytes());
+            case org.apache.bcel.Constants.CONSTANT_Double:
+                return new Double(((org.apache.bcel.classfile.ConstantDouble) c).getBytes());
+            default: // Never reached
+                throw new RuntimeException("Unknown or invalid constant type at " + index);
+        }
+    }
+
+
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        v.visitStackProducer(this);
+        v.visitPushInstruction(this);
+        v.visitTypedInstruction(this);
+        v.visitCPInstruction(this);
+        v.visitLDC2_W(this);
+    }
 }

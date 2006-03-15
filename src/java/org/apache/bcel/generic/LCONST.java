@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /** 
  * LCONST - Push 0 or 1, other values cause an exception
@@ -25,50 +24,57 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class LCONST extends Instruction
-  implements ConstantPushInstruction, TypedInstruction {
-  private long value;
+public class LCONST extends Instruction implements ConstantPushInstruction, TypedInstruction {
 
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  LCONST() {}
+    private long value;
 
-  public LCONST(long l) {
-    super(org.apache.bcel.Constants.LCONST_0, (short)1);
 
-    if(l == 0)
-      opcode = org.apache.bcel.Constants.LCONST_0;
-    else if(l == 1)
-      opcode = org.apache.bcel.Constants.LCONST_1;
-    else
-      throw new ClassGenException("LCONST can be used only for 0 and 1: " + l);
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    LCONST() {
+    }
 
-    value = l;
-  }
 
-  public Number getValue() { return new Long(value); }
+    public LCONST(long l) {
+        super(org.apache.bcel.Constants.LCONST_0, (short) 1);
+        if (l == 0) {
+            opcode = org.apache.bcel.Constants.LCONST_0;
+        } else if (l == 1) {
+            opcode = org.apache.bcel.Constants.LCONST_1;
+        } else {
+            throw new ClassGenException("LCONST can be used only for 0 and 1: " + l);
+        }
+        value = l;
+    }
 
-  /** @return Type.LONG
-   */
-  public Type getType(ConstantPoolGen cp) {
-    return Type.LONG;
-  }
 
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    v.visitPushInstruction(this);
-    v.visitStackProducer(this);
-    v.visitTypedInstruction(this);
-    v.visitConstantPushInstruction(this);
-    v.visitLCONST(this);
-  }
+    public Number getValue() {
+        return new Long(value);
+    }
+
+
+    /** @return Type.LONG
+     */
+    public Type getType( ConstantPoolGen cp ) {
+        return Type.LONG;
+    }
+
+
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        v.visitPushInstruction(this);
+        v.visitStackProducer(this);
+        v.visitTypedInstruction(this);
+        v.visitConstantPushInstruction(this);
+        v.visitLCONST(this);
+    }
 }

@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /** 
  * IF_ICMPLT - Branch if int comparison succeeds
@@ -26,36 +25,40 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IF_ICMPLT extends IfInstruction {
-  /**
-   * Empty constructor needed for the Class.newInstance() statement in
-   * Instruction.readInstruction(). Not to be used otherwise.
-   */
-  IF_ICMPLT() {}
 
-  public IF_ICMPLT(InstructionHandle target) {
-    super(org.apache.bcel.Constants.IF_ICMPLT, target);
-  }
-
-  /**
-   * @return negation of instruction
-   */
-  public IfInstruction negate() {
-    return new IF_ICMPGE(target);
-  }
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    IF_ICMPLT() {
+    }
 
 
-  /**
-   * Call corresponding visitor method(s). The order is:
-   * Call visitor methods of implemented interfaces first, then
-   * call methods according to the class hierarchy in descending order,
-   * i.e., the most specific visitXXX() call comes last.
-   *
-   * @param v Visitor object
-   */
-  public void accept(Visitor v) {
-    v.visitStackConsumer(this);
-    v.visitBranchInstruction(this);
-    v.visitIfInstruction(this);
-    v.visitIF_ICMPLT(this);
-  }
+    public IF_ICMPLT(InstructionHandle target) {
+        super(org.apache.bcel.Constants.IF_ICMPLT, target);
+    }
+
+
+    /**
+     * @return negation of instruction
+     */
+    public IfInstruction negate() {
+        return new IF_ICMPGE(target);
+    }
+
+
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    public void accept( Visitor v ) {
+        v.visitStackConsumer(this);
+        v.visitBranchInstruction(this);
+        v.visitIfInstruction(this);
+        v.visitIF_ICMPLT(this);
+    }
 }

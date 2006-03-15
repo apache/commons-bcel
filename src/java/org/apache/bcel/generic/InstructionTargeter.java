@@ -13,9 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  *
- */ 
+ */
 package org.apache.bcel.generic;
-
 
 /**
  * Denote that a class targets InstructionHandles within an InstructionList. Namely
@@ -28,6 +27,9 @@ package org.apache.bcel.generic;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface InstructionTargeter {
-  public boolean containsTarget(InstructionHandle ih);
-  public void updateTarget(InstructionHandle old_ih, InstructionHandle new_ih);
+
+    public boolean containsTarget( InstructionHandle ih );
+
+
+    public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih );
 }
