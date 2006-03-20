@@ -24,6 +24,7 @@ import java.io.IOException;
  * 
  * @version $Id: ElementValuePair
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
+ * @since 5.2
  */
 public class ElementValuePair {
 

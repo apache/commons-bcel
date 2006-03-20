@@ -5,6 +5,7 @@ package org.apache.bcel.util;
  * 
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
+ * @since 5.2
  */
 public interface BCELComparator {
 

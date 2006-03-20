@@ -24,6 +24,7 @@ import java.io.IOException;
  * 
  * @version $Id: AnnotationDefault 1 2005-02-13 03:15:08Z dbrosius $
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
+ * @since 5.2
  */
 public abstract class AnnotationDefault extends Attribute {
 
