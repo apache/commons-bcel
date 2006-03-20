@@ -1,0 +1,39 @@
+BCEL 5.2 RELESE NOTES
+=====================
+
+
+INTRODUCTION:
+
+
+Compatibility with 5.1
+----------------------
+Binary compatible - No
+
+Source compatible - No
+
+Semantic compatible - No
+
+
+Deprecations from 5.1
+---------------------
+
+
+Bug fixes from 5.1
+------------------
+
+
+Enhancements from 5.1
+---------------------
+
+
+Feedback
+--------
+Open source works best when you give feedback:
+http://jakarta.apache.org/bcel
+
+Please direct all bug reports to Bugzilla
+http://issues.apache.org/bugzilla/buglist.cgi?product=BCEL
+
+Or subscribe to the bcel-user mailing list
+
+The BCEL Team
