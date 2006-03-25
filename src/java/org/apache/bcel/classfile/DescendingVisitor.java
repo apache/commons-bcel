@@ -100,24 +100,6 @@ public class DescendingVisitor implements Visitor {
     }
 
 
-    public void visitAnnotation( Annotations annotation ) {
-        stack.push(annotation);
-        annotation.accept(visitor);
-        AnnotationEntry[] entries = annotation.getAnnotationEntries();
-        for (int i = 0; i < entries.length; i++) {
-            entries[i].accept(this);
-        }
-        stack.pop();
-    }
-
-
-    public void visitAnnotationEntry( AnnotationEntry annotationEntry ) {
-        stack.push(annotationEntry);
-        annotationEntry.accept(visitor);
-        stack.pop();
-    }
-
-
     public void visitField( Field field ) {
         stack.push(field);
         field.accept(visitor);
