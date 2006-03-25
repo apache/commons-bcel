@@ -1,29 +1,87 @@
-BCEL 5.2 RELESE NOTES
+BCEL 5.2 RELEASE NOTES
 =====================
-
-
-INTRODUCTION:
 
 
 Compatibility with 5.1
 ----------------------
-Binary compatible - No
+Binary compatible - Yes
 
-Source compatible - No
+Source compatible - Yes
 
-Semantic compatible - No
+Semantic compatible - Yes
 
 
 Deprecations from 5.1
 ---------------------
 
+public final org.apache.bcel.classfile.LocalVariable getLocalVariable(int)
+public java.lang.String getClassName(org.apache.bcel.generic.ConstantPoolGen)
+public org.apache.bcel.generic.ObjectType getClassType(org.apache.bcel.generic.ConstantPoolGen) 
+public boolean referencesClass()
+public boolean referencesInterface() 
+public org.apache.bcel.util.ClassVector implements java.io.Serializable
+
 
 Bug fixes from 5.1
 ------------------
 
+32664	Examples with enum breaks Gump (JDK1.5)
+32901	Truncated "class" string in returned class name
+32980	Simple Javadoc cleanup
+33018	Fix hashCode methods
+34318	JavaClass.dump(OutputStream/DataOutputStream) shouldnt ca...
+34449	InnerClass doesn't implement Serializable
+35991	Unable to generate method that returns an array of integers
+36110	A bug in LocalVariableGen
+37648	JasminVisitor is outdated
+37666	BCEL depends on AWT
+38377	BCEL cannot be used as java.system.class.loader
+38834	nullpointer exception in InstructionHandle
+12568	Typo in javadocs
+18031	ConstantPoolGen.lookupClass(String) finds LAST entry rath...
+18323	Size of LDC_W's operand can be incorrect
+18731	InstructionList.copy() fails with Select instruction.
+19014	annoying print statement in org.apache.bcel.classfile.Sig...
+19068	JavaClass.getAllInterfaces() can throw NullPointerExcepti...
+19122	Repository ignores classes that have been added to it
+19352	ANEWARRAY does not implement StackConsumer
+19476	Repository.instanceOf() can throw NullPointerException
+19784	StackMapType.printIndex fails if index is -1
+24274	ReturnaddressType.equals() fails with NullPointerException
+24315	Verification failure when nested finally blocks
+24350	PUTFIELD error msg wrong
+24766	Suggestion to solve the Problem with generic.Instruction ...
+26049	Incorrect verification of class files
+26087	OutOfRange exception in Pass2Verifier.validJavaIdentifier
+26179	Code attribute set for native (and abstract?) methods.
+26532	InstructionList.move is broken when target == il.getEnd()
+26533	bad iinc behavior with large local variable index
+27855	StructuralVerifier can't find protected fields of ...
+28329	BCEL does not compile with JDK 1.5.0-beta-b32c
+29275	Corrupted instruction list created on valid class file
+29903	LDC_W emits output with only one parameter byte
+31604	Build problems against jdk1.5
+31630	ClassPath.getClassPath() does not handle multiple java.ex...
+27646	Public modifier for OperandStack.size()
+17753	Version information missing from MANIFEST.MF file.
+33822	Wrong word in manual: use 'factorial', not 'faculty'
+32205	A security issue with public mutable static fields in BECL
+33513	Unnecessary string object allocation in ConstantPoolGen
+34418	ClassCastException on justice
+38787	XSLT transforms broken in Turkish Locale.
+35405	Branch target offset too large for short
+33235	"Illegal Opcode Detected" exception thrown in "new Method...
+35610	Source downloads are broken
+38424	LineNumberTable toString method uses jdk 1.4 StringBuffer...
 
 Enhancements from 5.1
 ---------------------
+
+32077	LocalVariableTable.getLocalVariable isn't good en...
+20465	Verifer does not report the signature of methods not found
+27854	Allow to get the InFrame of the ControlFlowGraph
+33302	Add support for new Jdk5.0 access flags
+32945	Wrap JavaClass repository class (map values) with...
 
 
 Feedback
