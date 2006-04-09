@@ -63,6 +63,26 @@ public abstract class Type implements java.io.Serializable {
 
 
     /**
+     * @return hashcode of Type
+     */
+    public int hashCode() {
+    	return type ^ signature.hashCode();
+    }
+    
+    
+    /**
+     * @return whether the Types are equal
+     */
+    public boolean equals(Object o) {
+  		if (o instanceof Type) {
+  			Type t = (Type)o;
+  			return (type == t.type) && signature.equals(t.signature);
+  		}
+  		return false;
+    }
+    
+    
+    /**
      * @return signature for given type.
      */
     public String getSignature() {
