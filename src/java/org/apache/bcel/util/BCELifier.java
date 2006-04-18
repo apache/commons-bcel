@@ -192,7 +192,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
             return "0";
         }
         StringBuffer buf = new StringBuffer();
-        for (int i = 0, pow = 1; i <= Constants.MAX_ACC_FLAG; i++) {
+        for (int i = 0, pow = 1; pow <= Constants.MAX_ACC_FLAG; i++) {
             if ((flags & pow) != 0) {
                 if ((pow == Constants.ACC_SYNCHRONIZED) && (reason == FLAG_FOR_CLASS)) {
                     buf.append("ACC_SUPER | ");
