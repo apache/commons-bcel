@@ -31,10 +31,12 @@
 
   <gumpRepositoryId>jakarta</gumpRepositoryId>
   <url>http://jakarta.apache.org/bcel/</url>
-  <issueTrackingUrl>http://issues.apache.org/bugzilla/</issueTrackingUrl>
+  <issueTrackingUrl>http://issues.apache.org/bugzilla</issueTrackingUrl>
   <siteAddress>minotaur.apache.org</siteAddress>
+  <siteDirectory>/home/tcurdt/public_html/bcel/rc2/site</siteDirectory>
+<!--
   <siteDirectory>/www/jakarta.apache.org/bcel/</siteDirectory>
-
+-->
   <repository>
     <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/bcel/trunk</connection>
     <url>http://svn.apache.org/repos/asf/jakarta/bcel/trunk</url>
