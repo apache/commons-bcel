@@ -1,0 +1,185 @@
+<document>
+	<body>
+		<release version="5.2" date="4. June 2006" description="overdue bugfix release">
+			<action type="update" dev="tcurdt">
+				Deprecated: public final org.apache.bcel.classfile.LocalVariable getLocalVariable(int)
+			</action>
+			<action type="update" dev="tcurdt">
+				Deprecated: public java.lang.String getClassName(org.apache.bcel.generic.ConstantPoolGen)
+			</action>
+			<action type="update" dev="tcurdt">
+				Deprecated: public org.apache.bcel.generic.ObjectType getClassType(org.apache.bcel.generic.ConstantPoolGen)
+			</action>
+			<action type="update" dev="tcurdt">
+				Deprecated: public boolean referencesClass()
+			</action>
+			<action type="update" dev="tcurdt">
+	            Deprecated: public boolean referencesInterface()
+			</action>
+			<action type="update" dev="tcurdt">
+				Deprecated: public org.apache.bcel.util.ClassVector implements java.io.Serializable
+			</action>
+
+
+			<action type="fix" issue="32664" dev="tcurdt">
+				Examples with enum breaks Gump (JDK1.5)
+			</action>
+			<action type="fix" issue="32901" dev="tcurdt">
+				Truncated "class" string in returned class name
+			</action>
+			<action type="fix" issue="32980" dev="tcurdt">
+				Simple Javadoc cleanup
+			</action>
+			<action type="fix" issue="34449" dev="tcurdt">
+				InnerClass doesn't implement Serializable
+			</action>
+			<action type="fix" issue="35991" dev="tcurdt">
+				Unable to generate method that returns an array of integers
+			</action>
+			<action type="fix" issue="36110" dev="tcurdt">
+				A bug in LocalVariableGen
+			</action>
+			<action type="fix" issue="37648" dev="tcurdt">
+				JasminVisitor is outdated
+			</action>
+			<action type="fix" issue="37666" dev="tcurdt">
+				BCEL depends on AWT
+			</action>
+			<action type="fix" issue="38377" dev="tcurdt">
+				BCEL cannot be used as java.system.class.loader
+			</action>
+			<action type="fix" issue="38834" dev="tcurdt">
+				nullpointer exception in InstructionHandle
+			</action>
+			<action type="fix" issue="12568" dev="tcurdt">
+				Typo in javadocs
+			</action>
+			<action type="fix" issue="18031" dev="tcurdt">
+				ConstantPoolGen.lookupClass(String) finds LAST entry rath...
+			</action>
+			<action type="fix" issue="18323" dev="tcurdt">
+				Size of LDC_W's operand can be incorrect
+			</action>
+			<action type="fix" issue="18731" dev="tcurdt">
+				InstructionList.copy() fails with Select instruction.
+			</action>
+			<action type="fix" issue="19014" dev="tcurdt">
+				annoying print statement in org.apache.bcel.classfile.Sig...
+			</action>
+			<action type="fix" issue="19068" dev="tcurdt">
+				JavaClass.getAllInterfaces() can throw NullPointerExcepti...
+			</action>
+			<action type="fix" issue="19122" dev="tcurdt">
+				Repository ignores classes that have been added to it
+			</action>
+			<action type="fix" issue="19352" dev="tcurdt">
+				ANEWARRAY does not implement StackConsumer
+			</action>
+			<action type="fix" issue="19476" dev="tcurdt">
+				Repository.instanceOf() can throw NullPointerException
+			</action>
+			<action type="fix" issue="19784" dev="tcurdt">
+				StackMapType.printIndex fails if index is -1
+			</action>
+			<action type="fix" issue="24274" dev="tcurdt">
+				ReturnaddressType.equals() fails with NullPointerException
+			</action>
+			<action type="fix" issue="24315" dev="tcurdt">
+				Verification failure when nested finally blocks
+			</action>
+			<action type="fix" issue="24350" dev="tcurdt">
+				PUTFIELD error msg wrong
+			</action>
+			<action type="fix" issue="24766" dev="tcurdt">
+				Suggestion to solve the Problem with generic.Instruction ...
+			</action>
+			<action type="fix" issue="26049" dev="tcurdt">
+				Incorrect verification of class files
+			</action>
+			<action type="fix" issue="26087" dev="tcurdt">
+				OutOfRange exception in Pass2Verifier.validJavaIdentifier
+			</action>
+			<action type="fix" issue="26179" dev="tcurdt">
+				Code attribute set for native (and abstract?) methods.
+			</action>
+			<action type="fix" issue="26532" dev="tcurdt">
+				InstructionList.move is broken when target == il.getEnd()
+			</action>
+			<action type="fix" issue="26533" dev="tcurdt">
+				bad iinc behavior with large local variable index
+			</action>
+			<action type="fix" issue="27855" dev="tcurdt">
+				StructuralVerifier can't find protected fields of ...
+			</action>
+			<action type="fix" issue="28329" dev="tcurdt">
+				BCEL does not compile with JDK 1.5.0-beta-b32c
+			</action>
+			<action type="fix" issue="29275" dev="tcurdt">
+				Corrupted instruction list created on valid class file
+			</action>
+			<action type="fix" issue="29903" dev="tcurdt">
+				LDC_W emits output with only one parameter byte
+			</action>
+			<action type="fix" issue="31604" dev="tcurdt">
+				Build problems against jdk1.5
+			</action>
+			<action type="fix" issue="31630" dev="tcurdt">
+				ClassPath.getClassPath() does not handle multiple java.ex...
+			</action>
+			<action type="fix" issue="27646" dev="tcurdt">
+				Public modifier for OperandStack.size()
+			</action>
+			<action type="fix" issue="17753" dev="tcurdt">
+				Version information missing from MANIFEST.MF file.
+			</action>
+			<action type="fix" issue="33822" dev="tcurdt">
+				Wrong word in manual: use 'factorial', not 'faculty'
+			</action>
+			<action type="fix" issue="32205" dev="tcurdt">
+				A security issue with public mutable static fields in BECL
+			</action>
+			<action type="fix" issue="33513" dev="tcurdt">
+				Unnecessary string object allocation in ConstantPoolGen
+			</action>
+			<action type="fix" issue="34418" dev="tcurdt">
+				ClassCastException on justice
+			</action>
+			<action type="fix" issue="38787" dev="tcurdt">
+				XSLT transforms broken in Turkish Locale.
+			</action>
+			<action type="fix" issue="35405" dev="tcurdt">
+				Branch target offset too large for short
+			</action>
+			<action type="fix" issue="33235" dev="tcurdt">
+				"Illegal Opcode Detected" exception thrown in "new Method...
+			</action>
+			<action type="fix" issue="35610" dev="tcurdt">
+				Source downloads are broken
+			</action>
+			<action type="fix" issue="38424" dev="tcurdt">
+				LineNumberTable toString method uses jdk 1.4 StringBuffer...
+			</action>
+
+
+			<action type="add" issue="32077" dev="tcurdt">
+				LocalVariableTable.getLocalVariable isn't good en...
+			</action>
+			<action type="add" issue="20465" dev="tcurdt">
+				Verifer does not report the signature of methods not found
+			</action>
+			<action type="add" issue="27854" dev="tcurdt">
+				Allow to get the InFrame of the ControlFlowGraph
+			</action>
+			<action type="add" issue="33302" dev="tcurdt">
+				Add support for new Jdk5.0 access flags
+			</action>
+			<action type="add" issue="32945" dev="tcurdt">
+				Wrap JavaClass repository class (map values) with...
+			</action>
+
+
+		</release>
+
+		<release version="5.1" date="25. April 2003" description="first release on jakarta"/>
+	</body>
+</document>
