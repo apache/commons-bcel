@@ -33,7 +33,7 @@
     BCEL is already being used successfully in several projects such
     as compilers, optimizers, obsfuscators, code generators
     and analysis tools. Unfortunately there hasn't been much development
-    going on over the past few years. Feel free to help out or you
+    going on over the past few years. Feel free <a href="mail-lists.html">to help out</a> or you
     might want to have a look into the ASM project at objectweb.
   </p>
 
