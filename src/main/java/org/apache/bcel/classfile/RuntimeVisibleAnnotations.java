@@ -38,7 +38,7 @@ public class RuntimeVisibleAnnotations extends Annotations {
      */
     RuntimeVisibleAnnotations(int name_index, int length, DataInputStream file,
             ConstantPool constant_pool) throws IOException {
-        super(Constants.ATTR_RUNTIMEVISIBLE_ANNOTATIONS, name_index, length, file, constant_pool);
+        super(Constants.ATTR_RUNTIME_VISIBLE_ANNOTATIONS, name_index, length, file, constant_pool);
     }
 
 

@@ -35,6 +35,8 @@ public interface Constants {
   public final static short MINOR_1_4 = 0;
   public final static short MAJOR_1_5 = 49;
   public final static short MINOR_1_5 = 0;
+  public final static short MAJOR_1_6 = 50;
+  public final static short MINOR_1_6 = 0;
   public final static short MAJOR     = MAJOR_1_1; // Defaults
   public final static short MINOR     = MINOR_1_1;
 
@@ -55,6 +57,7 @@ public interface Constants {
 
   public final static short ACC_FINAL        = 0x0010;
   public final static short ACC_SYNCHRONIZED = 0x0020;
+  public final static short ACC_SYPER        = 0x0020;
   public final static short ACC_VOLATILE     = 0x0040;
   public final static short ACC_BRIDGE       = 0x0040;
   public final static short ACC_TRANSIENT    = 0x0080;
@@ -729,14 +732,17 @@ public interface Constants {
   public static final byte ATTR_PMG                           			= 9;
   public static final byte ATTR_SIGNATURE                     			= 10;
   public static final byte ATTR_STACK_MAP                     			= 11;
-  public static final byte ATTR_RUNTIMEVISIBLE_ANNOTATIONS    			= 12;
-  public static final byte ATTR_RUNTIMEINVISIBLE_ANNOTATIONS  			= 13;
-  public static final byte ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS 	= 14;
-  public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS 	= 15;
+  public static final byte ATTR_RUNTIME_VISIBLE_ANNOTATIONS    			= 12;
+  public static final byte ATTR_RUNTIMEIN_VISIBLE_ANNOTATIONS  			= 13;
+  public static final byte ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS 	= 14;
+  public static final byte ATTR_RUNTIMEIN_VISIBLE_PARAMETER_ANNOTATIONS = 15;
   public static final byte ATTR_ANNOTATION_DEFAULT                      = 16;
+  public static final byte ATTR_LOCAL_VARIABLE_TYPE_TABLE               = 17;
+  public static final byte ATTR_ENCLOSING_METHOD                      	= 18;
 
-  public static final short KNOWN_ATTRIBUTES = 12;//should be 17
+  public static final short KNOWN_ATTRIBUTES = 19;
 
+  // TOFO: FIXXXXX
   public static final String[] ATTRIBUTE_NAMES = {
     "SourceFile", "ConstantValue", "Code", "Exceptions",
     "LineNumberTable", "LocalVariableTable",
@@ -744,7 +750,7 @@ public interface Constants {
     "PMGClass", "Signature", "StackMap", 
     "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
     "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations",
-    "AnnotationDefault"
+    "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod"
   };
 
   /** Constants used in the StackMap attribute.

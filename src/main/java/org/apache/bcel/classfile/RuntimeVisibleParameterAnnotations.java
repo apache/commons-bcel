@@ -38,7 +38,7 @@ public class RuntimeVisibleParameterAnnotations extends ParameterAnnotations {
      */
     RuntimeVisibleParameterAnnotations(int name_index, int length, DataInputStream file,
             ConstantPool constant_pool) throws IOException {
-        super(Constants.ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS, name_index, length, file,
+        super(Constants.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS, name_index, length, file,
                 constant_pool);
     }
 
