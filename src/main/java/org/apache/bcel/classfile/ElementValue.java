@@ -17,67 +17,128 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * an ElementValuePair's element value. This class will be broken out into
- * different subclasses. This is a temporary implementation.
- * 
  * @version $Id: ElementValue
- * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
+ * @author <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  * @since 5.2
  */
-public class ElementValue {
+public abstract class ElementValue
+{
+	protected int type;
 
-    private byte tag;
-    private int const_value_index;
-    private int type_name_index;
-    private int const_name_index;
-    private int class_info_index;
-    private AnnotationEntry annotation;
-    private int num_values;
-    private ElementValue[] values;
+	protected ConstantPool cpool;
 
+	public String toString()
+	{
+		return stringifyValue();
+	}
 
-    /**
-     * Construct object from file stream.
-     * @param file Input stream
-     * @param constant_pool the constant pool
-     * @throws IOException
-     */
-    ElementValue(DataInputStream file, ConstantPool constant_pool) throws IOException {
-        tag = (file.readByte());
-        switch (tag) {
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'F':
-            case 'I':
-            case 'J':
-            case 'S':
-            case 'Z':
-            case 's':
-                const_value_index = (file.readUnsignedShort());
-                break;
-            case 'e':
-                type_name_index = (file.readUnsignedShort());
-                const_name_index = (file.readUnsignedShort());
-                break;
-            case 'c':
-                class_info_index = (file.readUnsignedShort());
-                break;
-            case '@':
-                annotation = new AnnotationEntry(file, constant_pool);
-                break;
-            case '[':
-                num_values = (file.readUnsignedShort());
-                values = new ElementValue[num_values];
-                for (int i = 0; i < num_values; i++) {
-                    values[i] = new ElementValue(file, constant_pool);
-                }
-                break;
-            default:
-                throw new IOException("Invalid ElementValue tag: " + tag);
-        }
-    }
+	protected ElementValue(int type, ConstantPool cpool)
+	{
+		this.type = type;
+		this.cpool = cpool;
+	}
+
+	public int getElementValueType()
+	{
+		return type;
+	}
+
+	public abstract String stringifyValue();
+
+	public abstract void dump(DataOutputStream dos) throws IOException;
+
+	public static final int STRING = 's';
+
+	public static final int ENUM_CONSTANT = 'e';
+
+	public static final int CLASS = 'c';
+
+	public static final int ANNOTATION = '@';
+
+	public static final int ARRAY = '[';
+
+	public static final int PRIMITIVE_INT = 'I';
+
+	public static final int PRIMITIVE_BYTE = 'B';
+
+	public static final int PRIMITIVE_CHAR = 'C';
+
+	public static final int PRIMITIVE_DOUBLE = 'D';
+
+	public static final int PRIMITIVE_FLOAT = 'F';
+
+	public static final int PRIMITIVE_LONG = 'J';
+
+	public static final int PRIMITIVE_SHORT = 'S';
+
+	public static final int PRIMITIVE_BOOLEAN = 'Z';
+
+	public static ElementValue readElementValue(DataInputStream dis,
+			ConstantPool cpool) throws IOException
+	{
+		byte type = dis.readByte();
+		switch (type)
+		{
+		case 'B': // byte
+			return new SimpleElementValue(PRIMITIVE_BYTE, dis
+					.readUnsignedShort(), cpool);
+		case 'C': // char
+			return new SimpleElementValue(PRIMITIVE_CHAR, dis
+					.readUnsignedShort(), cpool);
+		case 'D': // double
+			return new SimpleElementValue(PRIMITIVE_DOUBLE, dis
+					.readUnsignedShort(), cpool);
+		case 'F': // float
+			return new SimpleElementValue(PRIMITIVE_FLOAT, dis
+					.readUnsignedShort(), cpool);
+		case 'I': // int
+			return new SimpleElementValue(PRIMITIVE_INT, dis
+					.readUnsignedShort(), cpool);
+		case 'J': // long
+			return new SimpleElementValue(PRIMITIVE_LONG, dis
+					.readUnsignedShort(), cpool);
+		case 'S': // short
+			return new SimpleElementValue(PRIMITIVE_SHORT, dis
+					.readUnsignedShort(), cpool);
+		case 'Z': // boolean
+			return new SimpleElementValue(PRIMITIVE_BOOLEAN, dis
+					.readUnsignedShort(), cpool);
+		case 's': // String
+			return new SimpleElementValue(STRING, dis.readUnsignedShort(),
+					cpool);
+		case 'e': // Enum constant
+			return new EnumElementValue(ENUM_CONSTANT, dis.readUnsignedShort(),
+					dis.readUnsignedShort(), cpool);
+		case 'c': // Class
+			return new ClassElementValue(CLASS, dis.readUnsignedShort(), cpool);
+		case '@': // Annotation
+			return new AnnotationElementValue(ANNOTATION, new AnnotationEntry(
+					dis, cpool), cpool);
+		case '[': // Array
+			int numArrayVals = dis.readUnsignedShort();
+			List arrayVals = new ArrayList();
+			ElementValue[] evalues = new ElementValue[numArrayVals];
+			for (int j = 0; j < numArrayVals; j++)
+			{
+				evalues[j] = ElementValue.readElementValue(dis, cpool);
+			}
+			return new ArrayElementValue(ARRAY, evalues, cpool);
+		default:
+			throw new RuntimeException(
+					"Unexpected element value kind in annotation: " + type);
+		}
+	}
+
+	public String toShortString()
+	{
+		StringBuffer result = new StringBuffer();
+		result.append(stringifyValue());
+		return result.toString();
+	}
 }

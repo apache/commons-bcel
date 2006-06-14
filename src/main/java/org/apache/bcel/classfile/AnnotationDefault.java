@@ -49,7 +49,7 @@ public class AnnotationDefault extends Attribute
 	{
 		this(name_index, length, (ElementValue) null,
 				constant_pool);
-		default_value = new ElementValue(file, constant_pool);
+		default_value = ElementValue.readElementValue(file, constant_pool);
 	}
 
 	/**

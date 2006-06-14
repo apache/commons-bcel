@@ -17,6 +17,7 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
@@ -87,4 +88,10 @@ public class AnnotationEntry implements Node, Constants {
     public ElementValuePair[] getElementValuePairs() {
         return element_value_pairs;
     }
+
+
+	public void dump(DataOutputStream dos)
+	{
+		// TODO Auto-generated method stub
+	}
 }

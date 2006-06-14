@@ -1,11 +1,10 @@
 package org.apache.bcel;
 
-import junit.framework.TestCase;
 import org.apache.bcel.classfile.DescendingVisitor;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.visitors.CounterVisitor;
 
-public abstract class AbstractCounterVisitorTestCase extends TestCase
+public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
 {
 	protected abstract JavaClass getTestClass() throws ClassNotFoundException;
 

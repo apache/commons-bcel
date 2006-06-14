@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.ConstantUtf8;
 
 /**
  * Abstract super class for <em>Attribute</em> objects. Currently the
@@ -143,7 +144,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 		// Length of data in bytes
 		length = file.readInt();
 		// Compare strings to find known attribute
-		System.out.println(name);
+		// System.out.println(name);
 		for (byte i = 0; i < Constants.KNOWN_ATTRIBUTES; i++)
 		{
 			if (name.equals(Constants.ATTRIBUTE_NAMES[i]))
@@ -211,6 +212,16 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 		default: // Never reached
 			throw new IllegalStateException("Ooops! default case reached.");
 		}
+	}
+
+	/**
+	 * @return Name of attribute
+	 */
+	public String getName()
+	{
+		ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index,
+				Constants.CONSTANT_Utf8);
+		return c.getBytes();
 	}
 
 	/**

@@ -40,6 +40,6 @@ public class ElementValuePair {
      */
     ElementValuePair(DataInputStream file, ConstantPool constant_pool) throws IOException {
         element_name_index = (file.readUnsignedShort());
-        value = new ElementValue(file, constant_pool);
+        value = ElementValue.readElementValue(file, constant_pool);
     }
 }
