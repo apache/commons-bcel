@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>bcel</groupId>
+	<artifactId>bcel</artifactId>
+	<packaging>jar</packaging>
+	<version>5.3-SNAPSHOT</version>
+	<name>Jakarta BCEL</name>
+	<description>Bytecode Engineering Library</description>
+
+	<url>http://jakarta.apache.org/bcel</url>
+	<inceptionYear>2004</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<organization>
+		<name>The Apache Software Foundation</name>
+		<url>http://www.apache.org/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>Markus Dahm</name>
+			<id>mdahm</id>
+			<email>m.dahm at gmx.de</email>
+			<organization>it-frameworksolutions</organization>
+		</developer>
+
+		<developer>
+			<name>Jason van Zyl</name>
+			<id>jvanzyl</id>
+			<email>jason at zenplex.com</email>
+			<organization>Zenplex</organization>
+		</developer>
+
+		<developer>
+			<name>Enver Haase</name>
+			<id>ehaase</id>
+			<email>enver at convergence.de</email>
+			<organization>convergence</organization>
+		</developer>
+
+		<developer>
+			<name>Dave Brosius</name>
+			<id>dbrosius</id>
+			<email>dbrosius at mebigfatguy.com</email>
+		</developer>
+
+		<developer>
+			<name>Torsten Curdt</name>
+			<id>tcurdt</id>
+			<email>tcurdt at apache.org</email>
+			<organization>ASF</organization>
+			<organizationUrl>http://www.apache.org/</organizationUrl>
+			<timezone>+10</timezone>
+		</developer>
+	</developers>
+
+	<mailingLists>
+		<mailingList>
+			<name>BCEL User List</name>
+			<subscribe>
+				bcel-user-subscribe@jakarta.apache.org
+			</subscribe>
+			<unsubscribe>
+				bcel-user-unsubscribe@jakarta.apache.org
+			</unsubscribe>
+			<archive>
+				http://www.mail-archive.com/bcel-user@jakarta.apache.org/
+			</archive>
+		</mailingList>
+		<mailingList>
+			<name>BCEL Developer List</name>
+			<subscribe>bcel-dev-subscribe@jakarta.apache.org</subscribe>
+			<unsubscribe>
+				bcel-dev-unsubscribe@jakarta.apache.org
+			</unsubscribe>
+			<archive>
+				http://www.mail-archive.com/bcel-dev@jakarta.apache.org/
+			</archive>
+		</mailingList>
+	</mailingLists>
+
+	<issueManagement>
+		<system>bugzilla</system>
+		<url>https://issues.apache.org/bugzilla</url>
+	</issueManagement>
+
+	<scm>
+		<connection>
+			scm:svn:http://svn.apache.org/repos/asf/jakarta/bcel/trunk
+		</connection>
+		<developerConnection>
+			scm:svn:http://svn.apache.org/repos/asf/jakarta/bcel/trunk
+		</developerConnection>
+		<url>http://svn.apache.org/repos/asf/jakarta/bcel/trunk</url>
+	</scm>
+
+	<repositories>
+		<repository>
+			<id>apache-snapshots</id>
+			<name>Apache Maven2 Repository</name>
+			<url>http://cvs.apache.org/maven-snapshot-repository</url>
+		</repository>
+		<repository>
+			<id>codehaus-snapshot</id>
+			<name>Maven snapshot Repository</name>
+			<url>http://snapshots.maven.codehaus.org/maven2</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>apache-maven-snapshot</id>
+			<name>repository</name>
+			<url>
+				scpexe://people.apache.org/www/cvs.apache.org/maven-snapshot-repository
+			</url>
+		</repository>
+		<snapshotRepository>
+			<id>apache-maven-snapshot</id>
+			<name>repository</name>
+			<url>
+				scpexe://people.apache.org/www/cvs.apache.org/maven-snapshot-repository
+			</url>
+		</snapshotRepository>
+		<site>
+			<id>website</id>
+			<url>
+				scpexe://people.apache.org/www/jakarta.apache.org/commons/sandbox/jci
+			</url>
+		</site>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<debug>true</debug>
+					<source>1.4</source>
+					<target>1.4</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/*TestCase.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/Abstract*</exclude>
+					</excludes>
+					<testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>jakarta-regexp</groupId>
+			<artifactId>jakarta-regexp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+	</dependencies>
+</project>
