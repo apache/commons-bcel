@@ -23,6 +23,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -185,6 +187,33 @@ public class ClassPath implements Serializable {
         return getClassFile(name, suffix).getInputStream();
     }
 
+    /**
+     * @param name fully qualified resource name, e.g. java/lang/String.class
+     * @return InputStream supplying the resource, or null if no resource with that name.
+     */
+    public InputStream getResourceAsStream(String name) {
+        for (int i = 0; i < paths.length; i++) {
+            InputStream is;
+            if ((is = paths[i].getResourceAsStream(name)) != null) {
+                return is;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * @param name fully qualified resource name, e.g. java/lang/String.class
+     * @return URL supplying the resource, or null if no resource with that name.
+     */
+    public URL getResource(String name) {
+        for (int i = 0; i < paths.length; i++) {
+            URL url;
+            if ((url = paths[i].getResource(name)) != null) {
+                return url;
+            }
+        }
+        return null;
+    }
 
     /**
      * @param name fully qualified file name, e.g. java/lang/String
@@ -270,6 +299,8 @@ public class ClassPath implements Serializable {
     private static abstract class PathEntry implements Serializable {
 
         abstract ClassFile getClassFile( String name, String suffix ) throws IOException;
+        abstract URL getResource(String name);
+        abstract InputStream getResourceAsStream(String name);
     }
 
     /** Contains information about file/ZIP entry of the Java class.
@@ -311,6 +342,25 @@ public class ClassPath implements Serializable {
             dir = d;
         }
 
+        URL getResource(String name) {
+            // Resource specification uses '/' whatever the platform
+            final File file = new File(dir + File.separatorChar + name.replace('/', File.separatorChar));
+            try {
+                return file.exists() ? file.toURL() : null;
+            } catch (MalformedURLException e) {
+               return null;
+            }
+        }
+        
+        InputStream getResourceAsStream(String name) {
+            // Resource specification uses '/' whatever the platform
+            final File file = new File(dir + File.separatorChar + name.replace('/', File.separatorChar));
+            try {
+               return file.exists() ? new FileInputStream(file) : null;
+            } catch (IOException e) {
+               return null;
+            }
+        }
 
         ClassFile getClassFile( String name, String suffix ) throws IOException {
             final File file = new File(dir + File.separatorChar
@@ -362,10 +412,31 @@ public class ClassPath implements Serializable {
             zip = z;
         }
 
-
+        URL getResource(String name) {
+            final ZipEntry entry = zip.getEntry(name);
+            try {
+                return (entry != null) ? new URL("jar:file:" + zip.getName() + "!/" + name) : null;
+            } catch (MalformedURLException e) {
+                return null;
+           }
+        }
+        
+        InputStream getResourceAsStream(String name) {
+            final ZipEntry entry = zip.getEntry(name);
+            try {
+                return (entry != null) ? zip.getInputStream(entry) : null;
+            } catch (IOException e) {
+                return null;
+            }
+        }
+        	
         ClassFile getClassFile( String name, String suffix ) throws IOException {
             final ZipEntry entry = zip.getEntry(name.replace('.', '/') + suffix);
-            return (entry != null) ? new ClassFile() {
+            
+            if (entry == null)
+            	return null;
+            
+            return new ClassFile() {
 
                 public InputStream getInputStream() throws IOException {
                     return zip.getInputStream(entry);
@@ -390,7 +461,7 @@ public class ClassPath implements Serializable {
                 public String getBase() {
                     return zip.getName();
                 }
-            } : null;
+            };
         }
     }
 }
