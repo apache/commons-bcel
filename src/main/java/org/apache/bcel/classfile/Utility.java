@@ -20,6 +20,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.CharArrayReader;
 import java.io.CharArrayWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FilterReader;
 import java.io.FilterWriter;
 import java.io.IOException;
@@ -33,6 +35,8 @@ import java.util.Locale;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import org.apache.bcel.Constants;
+import org.apache.bcel.generic.AnnotationEntryGen;
+import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.util.ByteSequence;
 
 /**
@@ -1338,5 +1342,74 @@ public abstract class Utility {
             }
         }
         return buf.toString();
+    }
+
+
+    /**
+     * Converts a list of AnnotationGen objects into a set of attributes 
+     * that can be attached to the class file.
+     *
+     * @param cp The constant pool gen where we can create the necessary name refs
+     * @param vec A list of AnnotationGen objects
+     */
+    public static Attribute[] getAnnotationAttributes(ConstantPoolGen cp,List vec) {
+    	
+    	if (vec.size()==0) return null;
+    	
+    	try {
+    		int countVisible   = 0;
+    		int countInvisible = 0;
+    	
+    		//  put the annotations in the right output stream
+    		for (int i=0; i<vec.size(); i++) {
+    			AnnotationEntryGen a = (AnnotationEntryGen)vec.get(i);
+    			if (a.isRuntimeVisible()) countVisible++;
+    			else			   countInvisible++;
+    		}
+    	
+    		ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
+    		ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
+    		DataOutputStream rvaDos = new DataOutputStream(rvaBytes);
+    		DataOutputStream riaDos = new DataOutputStream(riaBytes);
+    	
+    		rvaDos.writeShort(countVisible);
+    		riaDos.writeShort(countInvisible);
+
+    		// put the annotations in the right output stream
+    		for (int i=0; i<vec.size(); i++) {
+    			AnnotationEntryGen a = (AnnotationEntryGen)vec.get(i);
+    			if (a.isRuntimeVisible()) a.dump(rvaDos);
+    			else			   a.dump(riaDos);
+    		}
+
+      rvaDos.close();
+      riaDos.close();
+      
+      byte[] rvaData = rvaBytes.toByteArray();
+      byte[] riaData = riaBytes.toByteArray();
+      
+      int rvaIndex = -1;
+      int riaIndex = -1;
+      
+      if (rvaData.length>2) rvaIndex = cp.addUtf8("RuntimeVisibleAnnotations");
+      if (riaData.length>2) riaIndex = cp.addUtf8("RuntimeInvisibleAnnotations");
+
+    	List newAttributes = new ArrayList();
+    	if (rvaData.length>2) {
+    		
+    		newAttributes.add(
+    		  new RuntimeVisibleAnnotations(rvaIndex,rvaData.length,new DataInputStream(new ByteArrayInputStream(rvaData)),cp.getConstantPool()));
+    	}
+    	if (riaData.length>2) {
+    		newAttributes.add(
+    		  new RuntimeInvisibleAnnotations(riaIndex,riaData.length,new DataInputStream(new ByteArrayInputStream(riaData)),cp.getConstantPool()));
+    	}
+
+    	return (Attribute[])newAttributes.toArray(new Attribute[]{});
+    	} catch (IOException e) {
+    		System.err.println("IOException whilst processing annotations");
+  		e.printStackTrace();
+  	}
+    	return null;
     }
 }

@@ -8,15 +8,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.Utility;
-import org.apache.bcel.generic.AnnotationGen;
+import org.apache.bcel.generic.AnnotationEntryGen;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
-import org.apache.bcel.generic.ElementNameValuePairGen;
 import org.apache.bcel.generic.ElementValueGen;
+import org.apache.bcel.generic.ElementValuePairGen;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.SimpleElementValueGen;
 
@@ -40,7 +41,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
 		SimpleElementValueGen evg = new SimpleElementValueGen(
 				ElementValueGen.PRIMITIVE_INT, cp, 4);
 		// Give it a name, call it 'id'
-		ElementNameValuePairGen nvGen = new ElementNameValuePairGen("id", evg,
+		ElementValuePairGen nvGen = new ElementValuePairGen("id", evg,
 				cp);
 		// Check it looks right
 		assertTrue(
@@ -51,7 +52,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
 		elements.add(nvGen);
 		// Build an annotation of type 'SimpleAnnotation' with 'id=4' as the
 		// only value :)
-		AnnotationGen a = new AnnotationGen(t, elements, true, cp);
+		AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
 		// Check we can save and load it ok
 		checkSerialize(a, cp);
 	}
@@ -65,7 +66,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
 		SimpleElementValueGen evg = new SimpleElementValueGen(
 				ElementValueGen.PRIMITIVE_INT, cp, 4);
 		// Give it a name, call it 'id'
-		ElementNameValuePairGen nvGen = new ElementNameValuePairGen("id", evg,
+		ElementValuePairGen nvGen = new ElementValuePairGen("id", evg,
 				cp);
 		// Check it looks right
 		assertTrue(
@@ -76,7 +77,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
 		elements.add(nvGen);
 		// Build a RV annotation of type 'SimpleAnnotation' with 'id=4' as the
 		// only value :)
-		AnnotationGen a = new AnnotationGen(t, elements, true, cp);
+		AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
 		Vector v = new Vector();
 		v.add(a);
 		Attribute[] attributes = Utility.getAnnotationAttributes(cp, v);
@@ -86,14 +87,14 @@ public class AnnotationGenTestCase extends AbstractTestCase
 			Attribute attribute = attributes[i];
 			if (attribute instanceof RuntimeVisibleAnnotations)
 			{
-				assertTrue(((RuntimeAnnotations) attribute).areVisible());
+				assertTrue(((Annotations) attribute).isRuntimeVisible());
 				foundRV = true;
 			}
 		}
 		assertTrue("Should have seen a RuntimeVisibleAnnotation", foundRV);
 		// Build a RIV annotation of type 'SimpleAnnotation' with 'id=4' as the
 		// only value :)
-		AnnotationGen a2 = new AnnotationGen(t, elements, false, cp);
+		AnnotationEntryGen a2 = new AnnotationEntryGen(t, elements, false, cp);
 		Vector v2 = new Vector();
 		v2.add(a2);
 		Attribute[] attributes2 = Utility.getAnnotationAttributes(cp, v2);
@@ -103,14 +104,14 @@ public class AnnotationGenTestCase extends AbstractTestCase
 			Attribute attribute = attributes2[i];
 			if (attribute instanceof RuntimeInvisibleAnnotations)
 			{
-				assertFalse(((RuntimeAnnotations) attribute).areVisible());
+				assertFalse(((Annotations) attribute).isRuntimeVisible());
 				foundRIV = true;
 			}
 		}
 		assertTrue("Should have seen a RuntimeInvisibleAnnotation", foundRIV);
 	}
 
-	private void checkSerialize(AnnotationGen a, ConstantPoolGen cpg)
+	private void checkSerialize(AnnotationEntryGen a, ConstantPoolGen cpg)
 	{
 		try
 		{
@@ -124,7 +125,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
 			byte[] bs = baos.toByteArray();
 			ByteArrayInputStream bais = new ByteArrayInputStream(bs);
 			DataInputStream dis = new DataInputStream(bais);
-			AnnotationGen annAfter = AnnotationGen.read(dis, cpg, a
+			AnnotationEntryGen annAfter = AnnotationEntryGen.read(dis, cpg, a
 					.isRuntimeVisible());
 			dis.close();
 			String afterName = annAfter.getTypeName();
@@ -142,9 +143,9 @@ public class AnnotationGenTestCase extends AbstractTestCase
 			}
 			for (int i = 0; i < a.getValues().size(); i++)
 			{
-				ElementNameValuePairGen beforeElement = (ElementNameValuePairGen) a
+				ElementValuePairGen beforeElement = (ElementValuePairGen) a
 						.getValues().get(i);
-				ElementNameValuePairGen afterElement = (ElementNameValuePairGen) annAfter
+				ElementValuePairGen afterElement = (ElementValuePairGen) annAfter
 						.getValues().get(i);
 				if (!beforeElement.getNameString().equals(
 						afterElement.getNameString()))

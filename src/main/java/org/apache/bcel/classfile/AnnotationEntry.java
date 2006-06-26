@@ -19,6 +19,8 @@ package org.apache.bcel.classfile;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.bcel.Constants;
 
 /**
@@ -32,8 +34,9 @@ public class AnnotationEntry implements Node, Constants {
 
     private int type_index;
     private int num_element_value_pairs;
-    private ElementValuePair[] element_value_pairs;
+    private List element_value_pairs;
     private ConstantPool constant_pool;
+    private boolean isRuntimeVisible;
 
 
     /**
@@ -41,14 +44,22 @@ public class AnnotationEntry implements Node, Constants {
      * @param file Input stream
      * @throws IOException
      */
-    AnnotationEntry(DataInputStream file, ConstantPool constant_pool) throws IOException {
-        type_index = (file.readUnsignedShort());
-        num_element_value_pairs = (file.readUnsignedShort());
-        element_value_pairs = new ElementValuePair[num_element_value_pairs];
-        for (int i = 0; i < num_element_value_pairs; i++) {
-            element_value_pairs[i] = new ElementValuePair(file, constant_pool);
-        }
+    public AnnotationEntry(int type_index, ConstantPool constant_pool, boolean isRuntimeVisible) {
+        this.type_index = type_index;
+        
         this.constant_pool = constant_pool;
+        this.isRuntimeVisible = isRuntimeVisible;
+    }
+    
+    public static AnnotationEntry read(DataInputStream file, ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException 
+    {
+    	AnnotationEntry annotationEntry = new AnnotationEntry(file.readUnsignedShort(), constant_pool, isRuntimeVisible);
+    	annotationEntry.num_element_value_pairs = (file.readUnsignedShort());
+    	annotationEntry.element_value_pairs = new ArrayList();
+        for (int i = 0; i < annotationEntry.num_element_value_pairs; i++) {
+        	annotationEntry.element_value_pairs.add(new ElementValuePair(file.readUnsignedShort(), ElementValue.readElementValue(file, constant_pool), constant_pool));
+        }
+        return annotationEntry;
     }
 
 
@@ -72,6 +83,14 @@ public class AnnotationEntry implements Node, Constants {
         c = (ConstantUtf8) constant_pool.getConstant(type_index, CONSTANT_Utf8);
         return c.getBytes();
     }
+    
+    /**
+     * @return the annotation type index
+     */
+    public int getAnnotationTypeIndex()
+    {
+    	return type_index;
+    }
 
 
     /**
@@ -86,12 +105,24 @@ public class AnnotationEntry implements Node, Constants {
      * @return the element value pairs in this annotation entry
      */
     public ElementValuePair[] getElementValuePairs() {
-        return element_value_pairs;
+    	// TOFO return List
+        return (ElementValuePair[]) element_value_pairs.toArray();
     }
 
 
 	public void dump(DataOutputStream dos)
 	{
 		// TODO Auto-generated method stub
+	}
+
+
+	public boolean isRuntimeVisible()
+	{
+		return isRuntimeVisible;
+	}
+
+	public void addElementNameValuePair(ElementValuePair elementNameValuePair)
+	{
+		element_value_pairs.add(elementNameValuePair);
 	}
 }

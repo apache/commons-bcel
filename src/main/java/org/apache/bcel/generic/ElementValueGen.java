@@ -98,8 +98,8 @@ public abstract class ElementValueGen
 		case 'e': // Enum constant
 			return new EnumElementValueGen(dis.readUnsignedShort(), dis
 					.readUnsignedShort(), cpGen);
-		case 'c': // Class
-			return new ClassElementValueGen(dis.readUnsignedShort(), cpGen);
+			// case 'c': // Class
+			// return new ClassElementValueGen(dis.readUnsignedShort(), cpGen);
 			//
 			// case '@': // Annotation
 			// return new
@@ -147,15 +147,15 @@ public abstract class ElementValueGen
 		case 'e': // Enum constant
 			return new EnumElementValueGen((EnumElementValue) value, cpool,
 					copyPoolEntries);
-		case '@': // Annotation
-			return new AnnotationElementValueGen(
-					(AnnotationElementValue) value, cpool, copyPoolEntries);
-		case '[': // Array
-			return new ArrayElementValueGen((ArrayElementValue) value, cpool,
-					copyPoolEntries);
-		case 'c': // Class
-			return new ClassElementValueGen((ClassElementValue) value, cpool,
-					copyPoolEntries);
+			// case '@': // Annotation
+			// return new AnnotationElementValueGen(
+			// (AnnotationElementValue) value, cpool, copyPoolEntries);
+			// case '[': // Array
+			// return new ArrayElementValueGen((ArrayElementValue) value, cpool,
+			// copyPoolEntries);
+			// case 'c': // Class
+			// return new ClassElementValueGen((ClassElementValue) value, cpool,
+			//					copyPoolEntries);
 		default:
 			throw new RuntimeException("Not implemented yet! ("
 					+ value.getElementValueType() + ")");

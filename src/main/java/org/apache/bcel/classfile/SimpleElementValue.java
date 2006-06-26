@@ -24,7 +24,7 @@ public class SimpleElementValue extends ElementValue
 {
 	private int index;
 
-	protected SimpleElementValue(int type, int index, ConstantPool cpool)
+	public SimpleElementValue(int type, int index, ConstantPool cpool)
 	{
 		super(type, cpool);
 		this.index = index;
