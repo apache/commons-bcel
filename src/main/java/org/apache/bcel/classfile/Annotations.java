@@ -87,12 +87,14 @@ public abstract class Annotations extends Attribute {
     }
 
 
+    // TODO: update method names
     /**
      * @return the annotation entry table
      */
+    /*
     public final AnnotationEntry[] getAnnotationTable() {
         return annotation_table;
-    }
+    }*/
 
 
     /**

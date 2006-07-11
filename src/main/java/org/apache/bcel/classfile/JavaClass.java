@@ -61,12 +61,21 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     private Field[] fields; // Fields, i.e., variables of class
     private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
+    private AnnotationEntry[] annotations;   // annotations defined on the class
     private byte source = HEAP; // Generated in memory
+    private boolean isGeneric = false;
+    private boolean isAnonymous = false;
+    private boolean isNested = false;
+    private boolean computedNestedTypeStatus = false;
     public static final byte HEAP = 1;
     public static final byte FILE = 2;
     public static final byte ZIP = 3;
     static boolean debug = false; // Debugging on/off
     static char sep = '/'; // directory separator
+    
+    //  Annotations are collected from certain attributes, don't do it more than necessary!
+    private boolean annotationsOutOfDate = true;
+    
     private static BCELComparator _cmp = new BCELComparator() {
 
         public boolean equals( Object o1, Object o2 ) {
@@ -134,6 +143,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         this.fields = fields;
         this.methods = methods;
         this.attributes = attributes;
+        annotationsOutOfDate = true;
         this.source = source;
         // Get source file name if available
         for (int i = 0; i < attributes.length; i++) {
@@ -325,8 +335,25 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public Attribute[] getAttributes() {
         return attributes;
     }
-
-
+    
+    public AnnotationEntry[] getAnnotationEntries() {
+      	if (annotationsOutOfDate) { 
+      		// Find attributes that contain annotation data
+      		Attribute[] attrs = getAttributes();
+      		List accumulatedAnnotations = new ArrayList();
+      		for (int i = 0; i < attrs.length; i++) {
+    			Attribute attribute = attrs[i];
+    			if (attribute instanceof Annotations) {				
+    				Annotations runtimeAnnotations = (Annotations)attribute;
+    				for(int j = 0; j < runtimeAnnotations.getAnnotationEntries().length; j++)
+    					accumulatedAnnotations.add(runtimeAnnotations.getAnnotationEntries()[j]);
+    			}
+    		}
+      		annotations = (AnnotationEntry[])accumulatedAnnotations.toArray(new AnnotationEntry[]{});
+      		annotationsOutOfDate = false;
+      	}
+      	return annotations;
+      }
     /**
      * @return Class name.
      */
@@ -615,6 +642,12 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                 buf.append(indent(attributes[i]));
             }
         }
+        AnnotationEntry[] annotations = getAnnotationEntries();
+        if (annotations!=null && annotations.length>0) {
+        	buf.append("\nAnnotation(s):\n");
+        	for (int i=0; i<annotations.length; i++) 
+        		buf.append(indent(annotations[i]));
+        }
         if (fields.length > 0) {
             buf.append("\n").append(fields.length).append(" fields:\n");
             for (int i = 0; i < fields.length; i++) {
@@ -676,6 +709,41 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     public final boolean isClass() {
         return (access_flags & Constants.ACC_INTERFACE) == 0;
+    }
+    
+    public final boolean isAnonymous() {
+  	  computeNestedTypeStatus();
+  	  return this.isAnonymous;
+    }
+    
+    public final boolean isNested() {
+  	  computeNestedTypeStatus();
+  	  return this.isNested;
+    }
+    
+    private final void computeNestedTypeStatus() {
+  	  if (computedNestedTypeStatus) return;
+  	  for (int i = 0; i < this.attributes.length; i++) {
+  			if (this.attributes[i] instanceof InnerClasses) {
+  				InnerClass[] innerClasses = ((InnerClasses) this.attributes[i]).getInnerClasses();
+  				for (int j = 0; j < innerClasses.length; j++) {
+  					boolean innerClassAttributeRefersToMe = false;
+  					String inner_class_name = constant_pool.getConstantString(innerClasses[j].getInnerClassIndex(),
+  						       Constants.CONSTANT_Class);
+  					inner_class_name = Utility.compactClassName(inner_class_name);
+  					if (inner_class_name.equals(getClassName())) {
+  						innerClassAttributeRefersToMe = true;
+  					}
+  					if (innerClassAttributeRefersToMe) {
+  						this.isNested = true;
+  						if (innerClasses[j].getInnerNameIndex() == 0) {
+  							this.isAnonymous = true;
+  						}
+  					}
+  				}
+  			}
+  	  }
+  	  this.computedNestedTypeStatus = true;
     }
 
 

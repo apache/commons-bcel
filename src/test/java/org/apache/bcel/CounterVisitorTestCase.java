@@ -6,7 +6,7 @@ public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase
 {
 	protected JavaClass getTestClass() throws ClassNotFoundException
 	{
-		return getTestClass("org.apache.bcel.data.MarkedType$1");
+		return getTestClass("org.apache.bcel.data.MarkedType");
 	}
 
 	public void testAnnotationsCount()

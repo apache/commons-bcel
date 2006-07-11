@@ -35,6 +35,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     protected Type type;
     protected ConstantPoolGen cp;
     private List attribute_vec = new ArrayList();
+    protected ArrayList       annotation_vec= new ArrayList();
 
 
     protected FieldGenOrMethodGen() {
@@ -87,6 +88,11 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     public void addAttribute( Attribute a ) {
         attribute_vec.add(a);
     }
+    
+    public void addAnnotationEntry(AnnotationEntryGen ag)
+	{
+		annotation_vec.add(ag);
+	}
 
 
     /**
@@ -95,6 +101,11 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     public void removeAttribute( Attribute a ) {
         attribute_vec.remove(a);
     }
+    
+    public void removeAnnotationEntry(AnnotationEntryGen ag)
+	{
+		annotation_vec.remove(ag);
+	}
 
 
     /**
@@ -103,6 +114,11 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     public void removeAttributes() {
         attribute_vec.clear();
     }
+    
+    public void removeAnnotationEntries()
+	{
+		annotation_vec.clear();
+	}
 
 
     /**
@@ -113,6 +129,12 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         attribute_vec.toArray(attributes);
         return attributes;
     }
+    
+    public AnnotationEntryGen[] getAnnotationEntries() {
+    	AnnotationEntryGen[] annotations = new AnnotationEntryGen[annotation_vec.size()];
+      	annotation_vec.toArray(annotations);
+      	return annotations;
+      }
 
 
     /** @return signature of method/field.

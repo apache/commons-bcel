@@ -3,9 +3,10 @@ package org.apache.bcel.generic;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import org.apache.bcel.classfile.AnnotationElementValue;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.ArrayElementValue;
-import org.apache.bcel.classfile.ClassElementValue;
 import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.EnumElementValue;
 import org.apache.bcel.classfile.SimpleElementValue;
@@ -98,21 +99,22 @@ public abstract class ElementValueGen
 		case 'e': // Enum constant
 			return new EnumElementValueGen(dis.readUnsignedShort(), dis
 					.readUnsignedShort(), cpGen);
-			// case 'c': // Class
-			// return new ClassElementValueGen(dis.readUnsignedShort(), cpGen);
-			//
-			// case '@': // Annotation
-			// return new
-			// AnnotationElementValueGen(ANNOTATION,Annotation.read(dis,cpGen),cpGen);
-			//		  	
-			// case '[': // Array
-			// int numArrayVals = dis.readUnsignedShort();
-			// List arrayVals = new ArrayList();
-			// ElementValue[] evalues = new ElementValue[numArrayVals];
-			// for (int j=0;j<numArrayVals;j++) {
-			// evalues[j] = ElementValue.readElementValue(dis,cpGen);
-			// }
-			// return new ArrayElementValue(ARRAY,evalues,cpGen);
+		case 'c': // Class
+			return new ClassElementValueGen(dis.readUnsignedShort(), cpGen);
+		case '@': // Annotation
+			// TODO: isRuntimeVisible ??????????
+			// FIXME
+			return new AnnotationElementValueGen(ANNOTATION, new AnnotationEntryGen(AnnotationEntry.read(
+					dis, cpGen.getConstantPool(), true), cpGen, false), cpGen);
+		case '[': // Array
+			int numArrayVals = dis.readUnsignedShort();
+			List arrayVals = new ArrayList();
+			ElementValue[] evalues = new ElementValue[numArrayVals];
+			for (int j = 0; j < numArrayVals; j++)
+			{
+				evalues[j] = ElementValue.readElementValue(dis, cpGen.getConstantPool());
+			}
+			return new ArrayElementValueGen(ARRAY, evalues, cpGen);
 		default:
 			throw new RuntimeException(
 					"Unexpected element value kind in annotation: " + type);
@@ -155,7 +157,7 @@ public abstract class ElementValueGen
 			// copyPoolEntries);
 			// case 'c': // Class
 			// return new ClassElementValueGen((ClassElementValue) value, cpool,
-			//					copyPoolEntries);
+			// copyPoolEntries);
 		default:
 			throw new RuntimeException("Not implemented yet! ("
 					+ value.getElementValueType() + ")");

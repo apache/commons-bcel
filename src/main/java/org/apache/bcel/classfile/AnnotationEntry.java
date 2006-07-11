@@ -106,7 +106,7 @@ public class AnnotationEntry implements Node, Constants {
      */
     public ElementValuePair[] getElementValuePairs() {
     	// TOFO return List
-        return (ElementValuePair[]) element_value_pairs.toArray();
+        return (ElementValuePair[]) element_value_pairs.toArray(new ElementValuePair[element_value_pairs.size()]);
     }
 
 
@@ -124,5 +124,23 @@ public class AnnotationEntry implements Node, Constants {
 	public void addElementNameValuePair(ElementValuePair elementNameValuePair)
 	{
 		element_value_pairs.add(elementNameValuePair);
+	}
+
+	public String toShortString()
+	{
+		StringBuffer result = new StringBuffer();
+		result.append("@");
+		result.append(getAnnotationType());
+		if (getElementValuePairs().length > 0)
+		{
+			result.append("(");
+			for (int i = 0; i < getElementValuePairs().length; i++)
+			{
+				ElementValuePair element = getElementValuePairs()[i];
+				result.append(element.toShortString());
+			}
+			result.append(")");
+		}
+		return result.toString();
 	}
 }

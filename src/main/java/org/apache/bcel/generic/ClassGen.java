@@ -21,12 +21,16 @@ import java.util.Iterator;
 import java.util.List;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.AccessFlags;
+import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
+import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.SourceFile;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
 
 /** 
@@ -50,6 +54,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private List method_vec = new ArrayList();
     private List attribute_vec = new ArrayList();
     private List interface_vec = new ArrayList();
+    private List annotation_vec = new ArrayList();
+	private boolean unpackedAnnotations = false; 
+	
     private static BCELComparator _cmp = new BCELComparator() {
 
         public boolean equals( Object o1, Object o2 ) {
@@ -127,6 +134,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
         major = clazz.getMajor();
         minor = clazz.getMinor();
         Attribute[] attributes = clazz.getAttributes();
+        // J5TODO: Could make unpacking lazy, done on first reference
+        AnnotationEntryGen[] annotations = unpackAnnotations(attributes);
         Method[] methods = clazz.getMethods();
         Field[] fields = clazz.getFields();
         String[] interfaces = clazz.getInterfaceNames();
@@ -136,6 +145,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
         for (int i = 0; i < attributes.length; i++) {
             addAttribute(attributes[i]);
         }
+        for(int i=0; i < annotations.length; i++) {
+            addAnnotationEntry(annotations[i]);
+        }
         for (int i = 0; i < methods.length; i++) {
             addMethod(methods[i]);
         }
@@ -143,6 +155,43 @@ public class ClassGen extends AccessFlags implements Cloneable {
             addField(fields[i]);
         }
     }
+    
+    /**
+	 * Look for attributes representing annotations and unpack them.
+	 */
+	private AnnotationEntryGen[] unpackAnnotations(Attribute[] attrs)
+	{
+		List /* AnnotationGen */annotationGenObjs = new ArrayList();
+		for (int i = 0; i < attrs.length; i++)
+		{
+			Attribute attr = attrs[i];
+			if (attr instanceof RuntimeVisibleAnnotations)
+			{
+				RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
+				AnnotationEntry[] annos = rva.getAnnotationEntries();
+				for (int j = 0; i < annos.length; i++)
+				{
+					AnnotationEntry a = annos[i];
+					annotationGenObjs.add(new AnnotationEntryGen(a,
+							getConstantPool(), false));
+				}
+			}
+			else
+				if (attr instanceof RuntimeInvisibleAnnotations)
+				{
+					RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
+					AnnotationEntry[] annos = ria.getAnnotationEntries();
+					for (int j = 0; i < annos.length; i++)
+					{
+						AnnotationEntry a = annos[i];
+						annotationGenObjs.add(new AnnotationEntryGen(a,
+								getConstantPool(), false));
+					}
+				}
+		}
+		return (AnnotationEntryGen[]) annotationGenObjs
+				.toArray(new AnnotationEntryGen[] {});
+	}
 
 
     /**
@@ -152,7 +201,16 @@ public class ClassGen extends AccessFlags implements Cloneable {
         int[] interfaces = getInterfaces();
         Field[] fields = getFields();
         Method[] methods = getMethods();
-        Attribute[] attributes = getAttributes();
+        Attribute[] attributes = null;
+        if (annotation_vec.size()==0) {
+        	attributes = getAttributes();
+        } else {
+        	// TODO: Sometime later, trash any attributes called 'RuntimeVisibleAnnotations' or 'RuntimeInvisibleAnnotations'
+            Attribute[] annAttributes  = Utility.getAnnotationAttributes(cp,annotation_vec);
+            attributes = new Attribute[attribute_vec.size()+annAttributes.length];
+            attribute_vec.toArray(attributes);
+            System.arraycopy(annAttributes,0,attributes,attribute_vec.size(),annAttributes.length);       
+        }
         // Must be last since the above calls may still add something to it
         ConstantPool _cp = this.cp.getFinalConstantPool();
         return new JavaClass(class_name_index, superclass_name_index, file_name, major, minor,
@@ -216,6 +274,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     public void addAttribute( Attribute a ) {
         attribute_vec.add(a);
+    }
+    
+    public void addAnnotationEntry(AnnotationEntryGen a) { 
+    	annotation_vec.add(a); 
     }
 
 
@@ -420,6 +482,11 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     public Attribute[] getAttributes() {
         return (Attribute[]) attribute_vec.toArray(new Attribute[attribute_vec.size()]);
+    }
+    
+    //  J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?
+    public AnnotationEntryGen[] getAnnotationEntries() {
+    	return (AnnotationEntryGen[]) annotation_vec.toArray(new AnnotationEntryGen[annotation_vec.size()]);
     }
 
 

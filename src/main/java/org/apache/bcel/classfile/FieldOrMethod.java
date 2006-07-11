@@ -19,7 +19,11 @@ package org.apache.bcel.classfile;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.Signature;
 
 /** 
  * Abstract super class for fields and methods.
@@ -33,8 +37,15 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     protected int signature_index; // Points to encoded signature
     protected int attributes_count; // No. of attributes
     protected Attribute[] attributes; // Collection of attributes
+    protected AnnotationEntry[] annotationEntries; // annotations defined on the field or method 
     protected ConstantPool constant_pool;
 
+    private String signatureAttributeString = null;
+    private boolean searchedForSignatureAttribute = false;
+    
+
+    // Annotations are collected from certain attributes, don't do it more than necessary!
+    private boolean annotationsOutOfDate = true;
 
     FieldOrMethod() {
     }
@@ -191,16 +202,87 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @return deep copy of this field
      */
     protected FieldOrMethod copy_( ConstantPool _constant_pool ) {
+    	FieldOrMethod c = null;
+
         try {
-            FieldOrMethod c = (FieldOrMethod) clone();
-            c.constant_pool = _constant_pool;
-            c.attributes = new Attribute[attributes_count];
-            for (int i = 0; i < attributes_count; i++) {
-                c.attributes[i] = attributes[i].copy(_constant_pool);
-            }
-            return c;
-        } catch (CloneNotSupportedException e) {
-            return null;
-        }
+          c = (FieldOrMethod)clone();
+        } catch(CloneNotSupportedException e) {}
+
+        c.constant_pool    = constant_pool;
+        c.attributes       = new Attribute[attributes_count];
+
+        for(int i=0; i < attributes_count; i++)
+          c.attributes[i] = attributes[i].copy(constant_pool);
+
+        return c;
     }
+    
+    /**
+	 * Ensure we have unpacked any attributes that contain annotations.
+	 * We don't remove these annotation attributes from the attributes list, they
+	 * remain there.
+	 */
+	private void ensureAnnotationsUpToDate()
+	{
+		if (annotationsOutOfDate)
+		{
+			// Find attributes that contain annotation data
+			Attribute[] attrs = getAttributes();
+			List accumulatedAnnotations = new ArrayList();
+			for (int i = 0; i < attrs.length; i++)
+			{
+				Attribute attribute = attrs[i];
+				if (attribute instanceof Annotations)
+				{
+					Annotations annotations = (Annotations) attribute;
+					for (int j = 0; i < annotations.getAnnotationEntries().length; i++)
+						accumulatedAnnotations.add(annotations
+								.getAnnotationEntries()[j]);
+				}
+			}
+			annotationEntries = (AnnotationEntry[]) accumulatedAnnotations
+					.toArray(new AnnotationEntry[] {});
+			annotationsOutOfDate = false;
+		}
+	}
+
+	public AnnotationEntry[] getAnnotationEntries()
+	{
+		ensureAnnotationsUpToDate();
+		return annotationEntries;
+	}
+
+	public void addAnnotationEntry(AnnotationEntry a)
+	{
+		ensureAnnotationsUpToDate();
+		int len = annotationEntries.length;
+		AnnotationEntry[] newAnnotations = new AnnotationEntry[len + 1];
+		System.arraycopy(annotationEntries, 0, newAnnotations, 0, len);
+		newAnnotations[len] = a;
+		annotationEntries = newAnnotations;
+	}
+
+	/**
+	 * Hunts for a signature attribute on the member and returns its contents.  So where the 'regular' signature
+	 * may be (Ljava/util/Vector;)V the signature attribute may in fact say 'Ljava/lang/Vector<Ljava/lang/String>;'
+	 * Coded for performance - searches for the attribute only when requested - only searches for it once.
+	 */
+	public final String getGenericSignature()
+	{
+		if (!searchedForSignatureAttribute)
+		{
+			boolean found = false;
+			for (int i = 0; !found && i < attributes_count; i++)
+			{
+				if (attributes[i] instanceof Signature)
+				{
+					signatureAttributeString = ((Signature) attributes[i])
+							.getSignature();
+					found = true;
+				}
+			}
+			searchedForSignatureAttribute = true;
+		}
+		return signatureAttributeString;
+	}
 }
