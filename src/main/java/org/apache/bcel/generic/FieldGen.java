@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantObject;
@@ -88,6 +90,13 @@ public class FieldGen extends FieldGenOrMethodGen {
         for (int i = 0; i < attrs.length; i++) {
             if (attrs[i] instanceof ConstantValue) {
                 setValue(((ConstantValue) attrs[i]).getConstantValueIndex());
+            } else if (attrs[i] instanceof Annotations) {
+            	Annotations runtimeAnnotations = (Annotations)attrs[i];
+        		AnnotationEntry[] annotationEntries = runtimeAnnotations.getAnnotationEntries();
+        		for (int j = 0; j < annotationEntries.length; j++) {
+        			AnnotationEntry element = annotationEntries[j];
+        			addAnnotationEntry(new AnnotationEntryGen(element,cp,false));
+        		}
             } else {
                 addAttribute(attrs[i]);
             }
@@ -211,9 +220,19 @@ public class FieldGen extends FieldGenOrMethodGen {
             addAttribute(new ConstantValue(cp.addUtf8("ConstantValue"), 2, index, cp
                     .getConstantPool()));
         }
+        addAnnotationsAsAttribute(cp);
         return new Field(access_flags, name_index, signature_index, getAttributes(), cp
                 .getConstantPool());
     }
+    
+    private void addAnnotationsAsAttribute(ConstantPoolGen cp) {
+      	Attribute[] attrs = Utility.getAnnotationAttributes(cp,annotation_vec);
+      	if (attrs!=null) {
+          for (int i = 0; i < attrs.length; i++) {
+    		  addAttribute(attrs[i]);
+    	  }
+      	}
+      }
 
 
     private int addConstant() {

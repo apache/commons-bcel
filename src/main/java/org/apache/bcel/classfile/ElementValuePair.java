@@ -16,6 +16,8 @@
  */
 package org.apache.bcel.classfile;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import org.apache.bcel.Constants;
 
 /**
@@ -64,5 +66,10 @@ public class ElementValuePair
 		result.append(getNameString()).append("=").append(
 				getValue().toShortString());
 		return result.toString();
+	}
+	
+	protected void dump(DataOutputStream dos) throws IOException {
+		dos.writeShort(elementNameIndex); // u2 name of the element
+		elementValue.dump(dos);
 	}
 }

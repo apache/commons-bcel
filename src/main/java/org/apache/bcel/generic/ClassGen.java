@@ -22,6 +22,7 @@ import java.util.List;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.AccessFlags;
 import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.Field;
@@ -169,9 +170,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
 			{
 				RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
 				AnnotationEntry[] annos = rva.getAnnotationEntries();
-				for (int j = 0; i < annos.length; i++)
+				for (int j = 0; j < annos.length; j++)
 				{
-					AnnotationEntry a = annos[i];
+					AnnotationEntry a = annos[j];
 					annotationGenObjs.add(new AnnotationEntryGen(a,
 							getConstantPool(), false));
 				}
@@ -181,9 +182,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
 				{
 					RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
 					AnnotationEntry[] annos = ria.getAnnotationEntries();
-					for (int j = 0; i < annos.length; i++)
+					for (int j = 0; j < annos.length; j++)
 					{
-						AnnotationEntry a = annos[i];
+						AnnotationEntry a = annos[j];
 						annotationGenObjs.add(new AnnotationEntryGen(a,
 								getConstantPool(), false));
 					}

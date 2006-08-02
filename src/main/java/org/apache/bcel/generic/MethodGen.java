@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
@@ -31,6 +33,9 @@ import org.apache.bcel.classfile.LineNumberTable;
 import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.ParameterAnnotationEntry;
+import org.apache.bcel.classfile.ParameterAnnotations;
+import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
 
@@ -64,6 +69,11 @@ public class MethodGen extends FieldGenOrMethodGen {
     private List exception_vec = new ArrayList();
     private List throws_vec = new ArrayList();
     private List code_attrs_vec = new ArrayList();
+    
+    private List[] param_annotations; // Array of lists containing AnnotationGen objects
+    private boolean hasParameterAnnotations = false;
+    private boolean haveUnpackedParameterAnnotations = false;
+    
     private static BCELComparator _cmp = new BCELComparator() {
 
         public boolean equals( Object o1, Object o2 ) {
@@ -236,6 +246,13 @@ public class MethodGen extends FieldGenOrMethodGen {
                 for (int j = 0; j < names.length; j++) {
                     addException(names[j]);
                 }
+            } else if (a instanceof Annotations) {
+    			Annotations runtimeAnnotations = (Annotations) a;
+    			AnnotationEntry[] aes = runtimeAnnotations.getAnnotationEntries();
+    			for (int k = 0; k < aes.length; k++) {
+    				AnnotationEntry element = aes[k];
+    				addAnnotationEntry(new AnnotationEntryGen(element, cp, false));
+    			}
             } else {
                 addAttribute(a);
             }
@@ -596,6 +613,25 @@ public class MethodGen extends FieldGenOrMethodGen {
         code_attrs_vec.toArray(attributes);
         return attributes;
     }
+    
+    public void addAnnotationsAsAttribute(ConstantPoolGen cp) {
+      	Attribute[] attrs = Utility.getAnnotationAttributes(cp,annotation_vec);
+      	if (attrs!=null) {
+          for (int i = 0; i < attrs.length; i++) {
+    		  addAttribute(attrs[i]);
+    	  }
+      	}
+      }
+      
+      public void addParameterAnnotationsAsAttribute(ConstantPoolGen cp) {
+      	if (!hasParameterAnnotations) return;
+      	Attribute[] attrs = Utility.getParameterAnnotationAttributes(cp,param_annotations);
+      	if (attrs!=null) {
+          for (int i = 0; i < attrs.length; i++) {
+    		  addAttribute(attrs[i]);
+    	  }
+      	}
+      }
 
 
     /**
@@ -649,6 +685,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                     max_stack, max_locals, byte_code, c_exc, code_attrs, cp.getConstantPool());
             addAttribute(code);
         }
+        addAnnotationsAsAttribute(cp);
+        addParameterAnnotationsAsAttribute(cp);
         ExceptionTable et = null;
         if (throws_vec.size() > 0) {
             addAttribute(et = getExceptionTable(cp));
@@ -1044,11 +1082,111 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
         return mg;
     }
+    
+    //J5TODO: Should param_annotations be an array of arrays? Rather than an array of lists, this
+    // is more likely to suggest to the caller it is readonly (which a List does not). 
+    /**
+     * Return a list of AnnotationGen objects representing parameter annotations
+     */
+    public List getAnnotationsOnParameter(int i) {
+    	ensureExistingParameterAnnotationsUnpacked();
+    	if (!hasParameterAnnotations || i>arg_types.length) return null;
+    	return param_annotations[i];
+    }
+    
+    /**
+	 * Goes through the attributes on the method and identifies any that are
+	 * RuntimeParameterAnnotations, extracting their contents and storing them
+	 * as parameter annotations. There are two kinds of parameter annotation -
+	 * visible and invisible. Once they have been unpacked, these attributes are
+	 * deleted. (The annotations will be rebuilt as attributes when someone
+	 * builds a Method object out of this MethodGen object).
+	 */
+	private void ensureExistingParameterAnnotationsUnpacked()
+	{
+		if (haveUnpackedParameterAnnotations)
+			return;
+		// Find attributes that contain parameter annotation data
+		Attribute[] attrs = getAttributes();
+		ParameterAnnotations paramAnnVisAttr = null;
+		ParameterAnnotations paramAnnInvisAttr = null;
+		List accumulatedAnnotations = new ArrayList();
+		for (int i = 0; i < attrs.length; i++)
+		{
+			Attribute attribute = attrs[i];
+			if (attribute instanceof ParameterAnnotations)
+			{
+				// Initialize param_annotations
+				if (!hasParameterAnnotations)
+				{
+					param_annotations = new List[arg_types.length];
+					for (int j = 0; j < arg_types.length; j++)
+						param_annotations[j] = new ArrayList();
+				}
+				hasParameterAnnotations = true;
+				ParameterAnnotations rpa = (ParameterAnnotations) attribute;
+				if (rpa instanceof RuntimeVisibleParameterAnnotations)
+					paramAnnVisAttr = rpa;
+				else
+					paramAnnInvisAttr = rpa;
+				for (int j = 0; j < arg_types.length; j++)
+				{
+					// This returns Annotation[] ...
+					ParameterAnnotationEntry immutableArray = rpa
+							.getParameterAnnotationEntries()[j];
+					// ... which needs transforming into an AnnotationGen[] ...
+					List mutable = makeMutableVersion(immutableArray.getAnnotationEntries());
+					// ... then add these to any we already know about
+					param_annotations[j].addAll(mutable);
+				}
+			}
+		}
+		if (paramAnnVisAttr != null)
+			removeAttribute(paramAnnVisAttr);
+		if (paramAnnInvisAttr != null)
+			removeAttribute(paramAnnInvisAttr);
+		haveUnpackedParameterAnnotations = true;
+	}
+
+	private List /* AnnotationGen */makeMutableVersion(AnnotationEntry[] mutableArray)
+	{
+		List result = new ArrayList();
+		for (int i = 0; i < mutableArray.length; i++)
+		{
+			result.add(new AnnotationEntryGen(mutableArray[i], getConstantPool(),
+					false));
+		}
+		return result;
+	}
+
+	public void addParameterAnnotation(int parameterIndex,
+			AnnotationEntryGen annotation)
+	{
+		ensureExistingParameterAnnotationsUnpacked();
+		if (!hasParameterAnnotations)
+		{
+			param_annotations = new List[arg_types.length];
+			hasParameterAnnotations = true;
+		}
+		List existingAnnotations = param_annotations[parameterIndex];
+		if (existingAnnotations != null)
+		{
+			existingAnnotations.add(annotation);
+		}
+		else
+		{
+			List l = new ArrayList();
+			l.add(annotation);
+			param_annotations[parameterIndex] = l;
+		}
+	}          
+
+
 
 
     /**
-     * @return Comparison strategy object
-     */
+	 * @return Comparison strategy object
+	 */
     public static BCELComparator getComparator() {
         return _cmp;
     }

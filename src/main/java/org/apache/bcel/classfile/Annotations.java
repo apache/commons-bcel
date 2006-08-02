@@ -17,6 +17,7 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -116,4 +117,11 @@ public abstract class Annotations extends Attribute {
     {
     	return isRuntimeVisible;
     }
+    
+    protected void writeAnnotations(DataOutputStream dos) throws IOException
+	{
+		dos.writeShort(annotation_table_length);
+		for (int i = 0; i < annotation_table_length; i++)
+			annotation_table[i].dump(dos);
+	}
 }

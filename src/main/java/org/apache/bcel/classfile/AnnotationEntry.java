@@ -110,9 +110,14 @@ public class AnnotationEntry implements Node, Constants {
     }
 
 
-	public void dump(DataOutputStream dos)
+	public void dump(DataOutputStream dos) throws IOException
 	{
-		// TODO Auto-generated method stub
+		dos.writeShort(type_index);	// u2 index of type name in cpool
+		dos.writeShort(element_value_pairs.size()); // u2 element_value pair count
+		for (int i = 0 ; i<element_value_pairs.size();i++) {
+			ElementValuePair envp = (ElementValuePair) element_value_pairs.get(i);
+			envp.dump(dos);
+		}
 	}
 
 

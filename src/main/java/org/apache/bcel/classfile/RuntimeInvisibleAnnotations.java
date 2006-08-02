@@ -17,36 +17,50 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
 /**
- * represents an annotation that is represented in the class file
- * but is not provided to the JVM.
+ * represents an annotation that is represented in the class file but is not
+ * provided to the JVM.
  * 
  * @version $Id: RuntimeInvisibleAnnotations
- * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
+ * @author <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  * @since 5.2
  */
-public class RuntimeInvisibleAnnotations extends Annotations {
+public class RuntimeInvisibleAnnotations extends Annotations
+{
+	/**
+	 * @param name_index
+	 *            Index pointing to the name <em>Code</em>
+	 * @param length
+	 *            Content length in bytes
+	 * @param file
+	 *            Input stream
+	 * @param constant_pool
+	 *            Array of constants
+	 */
+	RuntimeInvisibleAnnotations(int name_index, int length,
+			DataInputStream file, ConstantPool constant_pool)
+			throws IOException
+	{
+		super(Constants.ATTR_RUNTIMEIN_VISIBLE_ANNOTATIONS, name_index, length,
+				file, constant_pool, false);
+	}
 
-    /**
-     * @param name_index Index pointing to the name <em>Code</em>
-     * @param length Content length in bytes
-     * @param file Input stream
-     * @param constant_pool Array of constants
-     */
-    RuntimeInvisibleAnnotations(int name_index, int length, DataInputStream file,
-            ConstantPool constant_pool) throws IOException {
-        super(Constants.ATTR_RUNTIMEIN_VISIBLE_ANNOTATIONS, name_index, length, file, constant_pool, false);
-    }
+	/**
+	 * @return deep copy of this attribute
+	 */
+	public Attribute copy(ConstantPool constant_pool)
+	{
+		Annotations c = (Annotations) clone();
+		return c;
+	}
 
-
-    /**
-     * @return deep copy of this attribute
-     */
-    public Attribute copy( ConstantPool constant_pool ) {
-        Annotations c = (Annotations) clone();
-        return c;
-    }
+	public final void dump(DataOutputStream dos) throws IOException
+	{
+		super.dump(dos);
+		writeAnnotations(dos);
+	}
 }

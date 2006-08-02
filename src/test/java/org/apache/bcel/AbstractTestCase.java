@@ -1,6 +1,7 @@
 package org.apache.bcel;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import junit.framework.TestCase;
@@ -66,8 +67,7 @@ public class AbstractTestCase extends TestCase
 	public SyntheticRepository createRepos(String cpentry)
 	{
 		ClassPath cp = new ClassPath("target" + File.separator + "testdata"
-				+ File.separator + cpentry + File.pathSeparator
-				+ System.getProperty("java.class.path"));
+				+ File.separator + cpentry + File.separator);
 		return SyntheticRepository.getInstance(cp);
 	}
 
@@ -129,14 +129,17 @@ public class AbstractTestCase extends TestCase
 		result.append("]");
 		return result.toString();
 	}
-	
-	protected String dumpAnnotationEntries(AnnotationEntryGen[] as) {
+
+	protected String dumpAnnotationEntries(AnnotationEntryGen[] as)
+	{
 		StringBuffer result = new StringBuffer();
 		result.append("[");
-		for (int i = 0; i < as.length; i++) {
+		for (int i = 0; i < as.length; i++)
+		{
 			AnnotationEntryGen annotation = as[i];
 			result.append(annotation.toShortString());
-			if (i+1<as.length) result.append(",");
+			if (i + 1 < as.length)
+				result.append(",");
 		}
 		result.append("]");
 		return result.toString();
@@ -147,8 +150,7 @@ public class AbstractTestCase extends TestCase
 	{
 		SimpleElementValueGen evg = new SimpleElementValueGen(
 				ElementValueGen.STRING, cp, aFruit);
-		ElementValuePairGen nvGen = new ElementValuePairGen("fruit",
-				evg, cp);
+		ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
 		ObjectType t = new ObjectType("SimpleStringAnnotation");
 		List elements = new ArrayList();
 		elements.add(nvGen);
