@@ -5,8 +5,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.bcel.classfile.AnnotationElementValue;
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.ArrayElementValue;
+import org.apache.bcel.classfile.ClassElementValue;
 import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.EnumElementValue;
 import org.apache.bcel.classfile.SimpleElementValue;
@@ -104,15 +106,17 @@ public abstract class ElementValueGen
 		case '@': // Annotation
 			// TODO: isRuntimeVisible ??????????
 			// FIXME
-			return new AnnotationElementValueGen(ANNOTATION, new AnnotationEntryGen(AnnotationEntry.read(
-					dis, cpGen.getConstantPool(), true), cpGen, false), cpGen);
+			return new AnnotationElementValueGen(ANNOTATION,
+					new AnnotationEntryGen(AnnotationEntry.read(dis, cpGen
+							.getConstantPool(), true), cpGen, false), cpGen);
 		case '[': // Array
 			int numArrayVals = dis.readUnsignedShort();
 			List arrayVals = new ArrayList();
 			ElementValue[] evalues = new ElementValue[numArrayVals];
 			for (int j = 0; j < numArrayVals; j++)
 			{
-				evalues[j] = ElementValue.readElementValue(dis, cpGen.getConstantPool());
+				evalues[j] = ElementValue.readElementValue(dis, cpGen
+						.getConstantPool());
 			}
 			return new ArrayElementValueGen(ARRAY, evalues, cpGen);
 		default:
@@ -149,15 +153,15 @@ public abstract class ElementValueGen
 		case 'e': // Enum constant
 			return new EnumElementValueGen((EnumElementValue) value, cpool,
 					copyPoolEntries);
-			// case '@': // Annotation
-			// return new AnnotationElementValueGen(
-			// (AnnotationElementValue) value, cpool, copyPoolEntries);
-			// case '[': // Array
-			// return new ArrayElementValueGen((ArrayElementValue) value, cpool,
-			// copyPoolEntries);
-			// case 'c': // Class
-			// return new ClassElementValueGen((ClassElementValue) value, cpool,
-			// copyPoolEntries);
+		case '@': // Annotation
+			return new AnnotationElementValueGen(
+					(AnnotationElementValue) value, cpool, copyPoolEntries);
+		case '[': // Array
+			return new ArrayElementValueGen((ArrayElementValue) value, cpool,
+					copyPoolEntries);
+		case 'c': // Class
+			return new ClassElementValueGen((ClassElementValue) value, cpool,
+					copyPoolEntries);
 		default:
 			throw new RuntimeException("Not implemented yet! ("
 					+ value.getElementValueType() + ")");

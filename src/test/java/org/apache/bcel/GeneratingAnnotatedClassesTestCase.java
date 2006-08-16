@@ -251,10 +251,10 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 						+ innerValue,
 				innerValue instanceof AnnotationElementValueGen);
 		AnnotationElementValueGen innerAnnotationValue = (AnnotationElementValueGen) innerValue;
-		assertTrue("Should be called LSimpleAnnotation; but is called: "
+		assertTrue("Should be called Lorg/apache/bcel/data/SimpleAnnotation; but is called: "
 				+ innerAnnotationValue.getAnnotation().getTypeName(),
 				innerAnnotationValue.getAnnotation().getTypeSignature().equals(
-						"LSimpleAnnotation;"));
+						"Lorg/apache/bcel/data/SimpleAnnotation;"));
 	}
 
 	/**
