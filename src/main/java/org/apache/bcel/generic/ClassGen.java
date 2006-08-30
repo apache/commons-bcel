@@ -190,7 +190,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 				}
 		}
 		return (AnnotationEntryGen[]) annotationGenObjs
-				.toArray(new AnnotationEntryGen[] {});
+				.toArray(new AnnotationEntryGen[annotationGenObjs.size()]);
 	}
 
 
