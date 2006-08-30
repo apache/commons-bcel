@@ -328,6 +328,7 @@ public abstract class Utility {
             case Constants.NEW:
             case Constants.CHECKCAST:
                 buf.append("\t");
+                /* FALL THRU */
             case Constants.INSTANCEOF:
                 index = bytes.readUnsignedShort();
                 buf.append("\t<").append(
