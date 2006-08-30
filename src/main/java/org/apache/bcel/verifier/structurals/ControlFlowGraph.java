@@ -390,8 +390,8 @@ public class ControlFlowGraph{
 
 	} // End Inner InstructionContextImpl Class.
 
-	/** The MethodGen object we're working on. */
-	private final MethodGen method_gen;
+	///** The MethodGen object we're working on. */
+	//private final MethodGen method_gen;
 
 	/** The Subroutines object for the method whose control flow is represented by this ControlFlowGraph. */
 	private final Subroutines subroutines;
@@ -414,7 +414,7 @@ public class ControlFlowGraph{
 			instructionContexts.put(instructionhandles[i], new InstructionContextImpl(instructionhandles[i]));
 		}
 		
-		this.method_gen = method_gen;
+		//this.method_gen = method_gen;
 	}
 
 	/**
