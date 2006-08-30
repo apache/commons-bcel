@@ -348,7 +348,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     					accumulatedAnnotations.add(runtimeAnnotations.getAnnotationEntries()[j]);
     			}
     		}
-      		annotations = (AnnotationEntry[])accumulatedAnnotations.toArray(new AnnotationEntry[]{});
+      		annotations = (AnnotationEntry[])accumulatedAnnotations.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
       		annotationsOutOfDate = false;
       	}
       	return annotations;
