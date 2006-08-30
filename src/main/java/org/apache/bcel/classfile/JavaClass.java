@@ -63,7 +63,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     private Attribute[] attributes; // attributes defined in the class
     private AnnotationEntry[] annotations;   // annotations defined on the class
     private byte source = HEAP; // Generated in memory
-    private boolean isGeneric = false;
     private boolean isAnonymous = false;
     private boolean isNested = false;
     private boolean computedNestedTypeStatus = false;
