@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.util.ByteSequence;
@@ -991,7 +993,9 @@ public class InstructionList implements Serializable {
             private InstructionHandle ih = start;
 
 
-            public Object next() {
+            public Object next() throws NoSuchElementException {
+            	if (ih == null)
+            		throw new NoSuchElementException();
                 InstructionHandle i = ih;
                 ih = ih.next;
                 return i;
