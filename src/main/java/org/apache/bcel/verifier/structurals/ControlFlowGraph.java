@@ -18,8 +18,9 @@ package org.apache.bcel.verifier.structurals;
 
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
+
 import org.apache.bcel.generic.ATHROW;
 import org.apache.bcel.generic.BranchInstruction;
 import org.apache.bcel.generic.GotoInstruction;
@@ -400,7 +401,7 @@ public class ControlFlowGraph{
 	private final ExceptionHandlers exceptionhandlers;
 
 	/** All InstructionContext instances of this ControlFlowGraph. */
-	private Hashtable instructionContexts = new Hashtable(); //keys: InstructionHandle, values: InstructionContextImpl
+	private Map instructionContexts = new HashMap(); //keys: InstructionHandle, values: InstructionContextImpl
 
 	/** 
 	 * A Control Flow Graph.

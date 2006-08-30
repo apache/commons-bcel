@@ -17,9 +17,11 @@
 package org.apache.bcel.verifier.structurals;
 
 
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
+import java.util.Map;
 import java.util.Set;
+
 import org.apache.bcel.generic.CodeExceptionGen;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.MethodGen;
@@ -35,13 +37,13 @@ public class ExceptionHandlers{
 	 * The ExceptionHandler instances.
 	 * Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
 	 */
-	private Hashtable exceptionhandlers;
+	private Map exceptionhandlers;
 	 
 	/**
 	 * Constructor. Creates a new ExceptionHandlers instance.
 	 */
 	public ExceptionHandlers(MethodGen mg){
-		exceptionhandlers = new Hashtable();
+		exceptionhandlers = new HashMap();
 		CodeExceptionGen[] cegs = mg.getExceptionHandlers();
 		for (int i=0; i<cegs.length; i++){
 			ExceptionHandler eh = new ExceptionHandler(cegs[i].getCatchType(), cegs[i].getHandlerPC());

@@ -19,7 +19,6 @@ package org.apache.bcel.verifier.structurals;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -349,11 +348,11 @@ public class Subroutines{
 	private static final Integer BLACK = new Integer(2);
 	
 	/**
-	 * The Hashtable containing the subroutines found.
+	 * The map containing the subroutines found.
 	 * Key: InstructionHandle of the leader of the subroutine.
 	 * Elements: SubroutineImpl objects.
 	 */
-	private Hashtable subroutines = new Hashtable();
+	private Map subroutines = new HashMap();
 
 	/**
 	 * This is referring to a special subroutine, namely the
