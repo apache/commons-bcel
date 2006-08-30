@@ -56,7 +56,6 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private List attribute_vec = new ArrayList();
     private List interface_vec = new ArrayList();
     private List annotation_vec = new ArrayList();
-	private boolean unpackedAnnotations = false; 
 	
     private static BCELComparator _cmp = new BCELComparator() {
 
