@@ -1110,7 +1110,6 @@ public class MethodGen extends FieldGenOrMethodGen {
 		Attribute[] attrs = getAttributes();
 		ParameterAnnotations paramAnnVisAttr = null;
 		ParameterAnnotations paramAnnInvisAttr = null;
-		List accumulatedAnnotations = new ArrayList();
 		for (int i = 0; i < attrs.length; i++)
 		{
 			Attribute attribute = attrs[i];

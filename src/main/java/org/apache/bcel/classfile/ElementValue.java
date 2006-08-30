@@ -123,7 +123,6 @@ public abstract class ElementValue
 					dis, cpool, false), cpool);
 		case '[': // Array
 			int numArrayVals = dis.readUnsignedShort();
-			List arrayVals = new ArrayList();
 			ElementValue[] evalues = new ElementValue[numArrayVals];
 			for (int j = 0; j < numArrayVals; j++)
 			{
