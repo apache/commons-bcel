@@ -17,10 +17,13 @@
 package org.apache.bcel.verifier.structurals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
+
 import org.apache.bcel.generic.ASTORE;
 import org.apache.bcel.generic.ATHROW;
 import org.apache.bcel.generic.BranchInstruction;
@@ -412,7 +415,7 @@ public class Subroutines{
 		// instructions that belong to a subroutine.
 		Set instructions_assigned = new HashSet(); // we don't want to assign an instruction to two or more Subroutine objects.
 		
-		Hashtable colors = new Hashtable(); //Graph colouring. Key: InstructionHandle, Value: Integer .
+		Map colors = new HashMap(); //Graph colouring. Key: InstructionHandle, Value: Integer .
 		
 		iter = sub_leaders.iterator();
 		while (iter.hasNext()){
