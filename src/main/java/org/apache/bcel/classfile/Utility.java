@@ -1406,7 +1406,7 @@ public abstract class Utility {
     		  new RuntimeInvisibleAnnotations(riaIndex,riaData.length,new DataInputStream(new ByteArrayInputStream(riaData)),cp.getConstantPool()));
     	}
 
-    	return (Attribute[])newAttributes.toArray(new Attribute[]{});
+    	return (Attribute[])newAttributes.toArray(new Attribute[newAttributes.size()]);
     	} catch (IOException e) {
     		System.err.println("IOException whilst processing annotations");
   		e.printStackTrace();
@@ -1510,7 +1510,7 @@ public abstract class Utility {
 						.add(new RuntimeInvisibleParameterAnnotations(riaIndex,
 								riaData.length, new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
 			}
-			return (Attribute[]) newAttributes.toArray(new Attribute[] {});
+			return (Attribute[]) newAttributes.toArray(new Attribute[newAttributes.size()]);
 		}
 		catch (IOException e)
 		{
