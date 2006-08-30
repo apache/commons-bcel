@@ -165,7 +165,7 @@ public class SimpleElementValue extends ElementValue
 		case PRIMITIVE_CHAR:
 			ConstantInteger ch = (ConstantInteger) cpool.getConstant(
 					getIndex(), Constants.CONSTANT_Integer);
-			return new Character((char) ch.getBytes()).toString();
+			return String.valueOf((char)ch.getBytes());
 		case PRIMITIVE_BOOLEAN:
 			ConstantInteger bo = (ConstantInteger) cpool.getConstant(
 					getIndex(), Constants.CONSTANT_Integer);
