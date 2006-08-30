@@ -30,6 +30,10 @@ import org.apache.bcel.Constants;
  */
 public class InstructionFactory implements InstructionConstants, java.io.Serializable {
 
+	private static final String[] short_names = {
+            "C", "F", "D", "B", "S", "I", "L"
+    };
+
     protected ClassGen cg;
     protected ConstantPoolGen cp;
 
@@ -548,9 +552,6 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
                     && (src == Constants.T_CHAR || src == Constants.T_BYTE || src == Constants.T_SHORT)) {
                 src = Constants.T_INT;
             }
-            String[] short_names = {
-                    "C", "F", "D", "B", "S", "I", "L"
-            };
             String name = "org.apache.bcel.generic." + short_names[src - Constants.T_CHAR] + "2"
                     + short_names[dest - Constants.T_CHAR];
             Instruction i = null;
