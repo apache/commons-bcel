@@ -352,6 +352,8 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
                 return FMUL;
             case '/':
                 return FDIV;
+            case '%':
+            	return FREM;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -368,6 +370,8 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
                 return DMUL;
             case '/':
                 return DDIV;
+            case '%':
+            	return DREM;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
