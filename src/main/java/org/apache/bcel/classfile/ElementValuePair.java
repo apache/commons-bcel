@@ -25,7 +25,7 @@ import org.apache.bcel.Constants;
  * 
  * @version $Id: ElementValuePair
  * @author <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
- * @since 5.2
+ * @since 5.3
  */
 public class ElementValuePair
 {

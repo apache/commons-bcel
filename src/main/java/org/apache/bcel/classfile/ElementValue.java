@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @version $Id: ElementValue
  * @author <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
- * @since 5.2
+ * @since 5.3
  */
 public abstract class ElementValue
 {
