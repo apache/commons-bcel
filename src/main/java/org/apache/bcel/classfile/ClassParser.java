@@ -206,7 +206,7 @@ public final class ClassParser {
         }
         if (((access_flags & Constants.ACC_ABSTRACT) != 0)
                 && ((access_flags & Constants.ACC_FINAL) != 0)) {
-            throw new ClassFormatException("Class can't be both final and abstract");
+            throw new ClassFormatException("Class " + file_name + " can't be both final and abstract");
         }
         class_name_index = file.readUnsignedShort();
         superclass_name_index = file.readUnsignedShort();
