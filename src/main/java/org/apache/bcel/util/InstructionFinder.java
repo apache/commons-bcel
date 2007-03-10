@@ -38,8 +38,8 @@ import org.apache.bcel.generic.InstructionList;
  * equivalents.
  * 
  * <p>
- * This class internally uses the <a href="http://jakarta.apache.org/regexp/">
- * Regexp</a> package to search for regular expressions.
+ * This class internally uses the java.util.regex
+ * package to search for regular expressions.
  * 
  * A typical application would look like this:
  * 

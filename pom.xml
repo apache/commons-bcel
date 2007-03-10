@@ -62,7 +62,7 @@
 			<email>tcurdt at apache.org</email>
 			<organization>ASF</organization>
 			<organizationUrl>http://www.apache.org/</organizationUrl>
-			<timezone>+10</timezone>
+			<timezone>+1</timezone>
 		</developer>
 	</developers>
 
@@ -170,14 +170,10 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>jakarta-regexp</groupId>
-			<artifactId>jakarta-regexp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>3.8.2</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
