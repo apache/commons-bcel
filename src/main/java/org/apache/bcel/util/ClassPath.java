@@ -26,10 +26,12 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
+import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -213,6 +215,22 @@ public class ClassPath implements Serializable {
             }
         }
         return null;
+    }
+
+    /**
+     * @param name fully qualified resource name, e.g. java/lang/String.class
+     * @return An Enumeration of URLs supplying the resource, or an
+     * empty Enumeration if no resource with that name.
+     */
+    public Enumeration getResources(String name) {
+        Vector results = new Vector();
+        for (int i = 0; i < paths.length; i++) {
+            URL url;
+            if ((url = paths[i].getResource(name)) != null) {
+                results.add(url);
+            }
+        }
+        return results.elements();
     }
 
     /**
