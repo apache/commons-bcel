@@ -162,7 +162,9 @@ public final class ClassParser {
         } finally {
             // Read everything of interest, so close the file
             if (fileOwned) {
-                file.close();
+                if (file != null) {
+                    file.close();
+                }
                 if (zip != null) {
                     zip.close();
                 }
