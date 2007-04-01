@@ -17,6 +17,7 @@
 package org.apache.bcel.verifier.statics;
 
 
+import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.ConstantClass;
@@ -42,6 +43,7 @@ import org.apache.bcel.classfile.LineNumber;
 import org.apache.bcel.classfile.LineNumberTable;
 import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.Signature;
@@ -127,6 +129,20 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = "<CODE>"; // We don't need real code outputs.
     }
 
+    public void visitAnnotation(Annotations obj)
+    {
+        //this is invoked whenever an annotation is found
+        //when verifier is passed over a class
+        tostring = toString(obj);
+    }
+    
+    public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
+    {
+        //this is invoked whenever a local variable type is found
+        //when verifier is passed over a class
+        tostring = toString(obj);
+    }
+    
     public void visitCodeException(CodeException obj) {
         tostring = toString(obj);
     }
