@@ -32,6 +32,7 @@ import org.apache.bcel.classfile.LineNumber;
 import org.apache.bcel.classfile.LineNumberTable;
 import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
@@ -222,6 +223,23 @@ public class MethodGen extends FieldGenOrMethodGen {
                         }
                     } else if (a instanceof LocalVariableTable) {
                         LocalVariable[] lv = ((LocalVariableTable) a).getLocalVariableTable();
+                        removeLocalVariables();
+                        for (int k = 0; k < lv.length; k++) {
+                            LocalVariable l = lv[k];
+                            InstructionHandle start = il.findHandle(l.getStartPC());
+                            InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
+                            // Repair malformed handles
+                            if (null == start) {
+                                start = il.getStart();
+                            }
+                            if (null == end) {
+                                end = il.getEnd();
+                            }
+                            addLocalVariable(l.getName(), Type.getType(l.getSignature()), l
+                                    .getIndex(), start, end);
+                        }
+                    } else if (a instanceof LocalVariableTypeTable) {
+                        LocalVariable[] lv = ((LocalVariableTypeTable) a).getLocalVariableTypeTable();
                         removeLocalVariables();
                         for (int k = 0; k < lv.length; k++) {
                             LocalVariable l = lv[k];
@@ -1062,6 +1080,13 @@ public class MethodGen extends FieldGenOrMethodGen {
         signature = Utility.methodSignatureToString(signature, name, access, true,
                 getLocalVariableTable(cp));
         StringBuffer buf = new StringBuffer(signature);
+        for (int i = 0; i < getAttributes().length; i++) {
+            Attribute a = getAttributes()[i];
+            if (!((a instanceof Code) || (a instanceof ExceptionTable))) {
+                buf.append(" [").append(a.toString()).append("]");
+            }
+        }
+        
         if (throws_vec.size() > 0) {
             for (Iterator e = throws_vec.iterator(); e.hasNext();) {
                 buf.append("\n\t\tthrows ").append(e.next());
