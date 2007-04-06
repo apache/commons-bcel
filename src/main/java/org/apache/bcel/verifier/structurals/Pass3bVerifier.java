@@ -23,13 +23,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.GETFIELD;
 import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InvokeInstruction;
 import org.apache.bcel.generic.JsrInstruction;
+import org.apache.bcel.generic.LoadInstruction;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.RET;
@@ -40,6 +44,7 @@ import org.apache.bcel.verifier.PassVerifier;
 import org.apache.bcel.verifier.VerificationResult;
 import org.apache.bcel.verifier.Verifier;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 import org.apache.bcel.verifier.exc.VerifierConstraintViolatedException;
 
 /**
@@ -126,7 +131,7 @@ public final class Pass3bVerifier extends PassVerifier{
    * The proof of termination is about the existence of a
    * fix point of frame merging.
 	 */
-	private void circulationPump(ControlFlowGraph cfg, InstructionContext start, Frame vanillaFrame, InstConstraintVisitor icv, ExecutionVisitor ev){
+	private void circulationPump(MethodGen m,ControlFlowGraph cfg, InstructionContext start, Frame vanillaFrame, InstConstraintVisitor icv, ExecutionVisitor ev){
 		final Random random = new Random();
 		InstructionContextQueue icq = new InstructionContextQueue();
 		
@@ -246,6 +251,44 @@ public final class Pass3bVerifier extends PassVerifier{
 						this.addMessage("Warning: ReturnInstruction '"+ic+"' may leave method with an uninitialized object on the operand stack '"+os+"'.");
 					}
 				}
+                //see JVM $4.8.2
+                //TODO implement all based on stack 
+                Type returnedType = null;
+                if( ih.getPrev().getInstruction() instanceof InvokeInstruction )
+                {
+                    returnedType = ((InvokeInstruction)ih.getPrev().getInstruction()).getType(m.getConstantPool());
+                }
+                if( ih.getPrev().getInstruction() instanceof LoadInstruction )
+                {
+                    int index = ((LoadInstruction)ih.getPrev().getInstruction()).getIndex();
+                    returnedType = lvs.get(index);
+                }
+                if( ih.getPrev().getInstruction() instanceof GETFIELD )
+                {
+                    returnedType = ((GETFIELD)ih.getPrev().getInstruction()).getType(m.getConstantPool());
+                }
+                if( returnedType != null )
+                {
+                    if( returnedType instanceof ObjectType )
+                    {
+                        try
+                        {
+                            if( !((ObjectType)returnedType).isAssignmentCompatibleWith(m.getReturnType()) )
+                            {
+                                throw new StructuralCodeConstraintException("Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
+                            }
+                        }
+                        catch (ClassNotFoundException e)
+                        {
+                            //dont know what do do now, so raise RuntimeException
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    else if( !returnedType.equals(m.getReturnType()) )
+                    {
+                        throw new StructuralCodeConstraintException("Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
+                    }
+                }
 			}
 		}while ((ih = ih.getNext()) != null);
 		
@@ -321,7 +364,7 @@ public final class Pass3bVerifier extends PassVerifier{
 						f.getLocals().set(twoslotoffset + j + (mg.isStatic()?0:1), Type.UNKNOWN);
 					}
 				}
-				circulationPump(cfg, cfg.contextOf(mg.getInstructionList().getStart()), f, icv, ev);
+				circulationPump(mg,cfg, cfg.contextOf(mg.getInstructionList().getStart()), f, icv, ev);
 			}
 		}
 		catch (VerifierConstraintViolatedException ce){

@@ -565,7 +565,7 @@ public class Subroutines{
                 return s;
             }
 		}
-System.err.println("DEBUG: Please verify '"+any+"' lies in dead code.");
+System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead code.");
 		return null;
 		//throw new AssertionViolatedException("No subroutine for InstructionHandle found (DEAD CODE?).");
 	}
