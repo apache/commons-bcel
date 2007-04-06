@@ -1014,7 +1014,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 					}// for all local variables localvariables[i] in the LocalVariableTable attribute atts[a] END
 
 					num_of_lvt_attribs++;
-					if (num_of_lvt_attribs > obj.getMaxLocals()){
+					if (!m.isStatic() && num_of_lvt_attribs > obj.getMaxLocals()){
 						throw new ClassConstraintException("Number of LocalVariableTable attributes of Code attribute '"+tostring(obj)+"' (method '"+tostring(m)+"') exceeds number of local variable slots '"+obj.getMaxLocals()+"' ('There may be no more than one LocalVariableTable attribute per local variable in the Code attribute.').");
 					}
 				}// if atts[a] instanceof LocalVariableTable END
