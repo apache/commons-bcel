@@ -5,6 +5,7 @@ import java.util.Iterator;
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.util.InstructionFinder;
 import org.apache.bcel.util.InstructionFinder.CodeConstraint;
@@ -33,13 +34,13 @@ public class InstructionFinderTestCase extends AbstractTestCase
 		InstructionFinder finder = new InstructionFinder(il);
 		Iterator it = finder.search(".*", il.getStart(), null);
 		
-		int cnt = 0;
-		while (it.hasNext())
+		InstructionHandle[] ihs = (InstructionHandle[])it.next();
+		int size = 0;
+		for (InstructionHandle ih : ihs)
 		{
-			it.next();
-			cnt++;
+			size += ih.getInstruction().getLength();
 		}
+		assertEquals(bytes.length, size);
 		
-		assertEquals(1, cnt);
 	}
 }
