@@ -17,6 +17,7 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
@@ -105,4 +106,10 @@ public class AnnotationDefault extends Attribute
 	{
 		throw new RuntimeException("Not implemented yet!");
 	}
+
+    public final void dump(DataOutputStream dos) throws IOException
+    {
+      super.dump(dos);
+      default_value.dump(dos);
+    }
 }
