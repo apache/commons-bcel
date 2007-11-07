@@ -677,8 +677,9 @@ public class InstructionList implements Serializable {
     private void remove( InstructionHandle prev, InstructionHandle next )
             throws TargetLostException {
         InstructionHandle first, last; // First and last deleted instruction
-        if ((prev == null) && (next == null)) { // singleton list
-            first = last = start;
+        if ((prev == null) && (next == null)) {
+            first = start;
+            last = end;
             start = end = null;
         } else {
             if (prev == null) { // At start of list
