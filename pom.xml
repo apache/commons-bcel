@@ -30,27 +30,6 @@
 
 	<developers>
 		<developer>
-			<name>Markus Dahm</name>
-			<id>mdahm</id>
-			<email>m.dahm at gmx.de</email>
-			<organization>it-frameworksolutions</organization>
-		</developer>
-
-		<developer>
-			<name>Jason van Zyl</name>
-			<id>jvanzyl</id>
-			<email>jason at zenplex.com</email>
-			<organization>Zenplex</organization>
-		</developer>
-
-		<developer>
-			<name>Enver Haase</name>
-			<id>ehaase</id>
-			<email>enver at convergence.de</email>
-			<organization>convergence</organization>
-		</developer>
-
-		<developer>
 			<name>Dave Brosius</name>
 			<id>dbrosius</id>
 			<email>dbrosius at mebigfatguy.com</email>
@@ -64,7 +43,49 @@
 			<organizationUrl>http://www.apache.org/</organizationUrl>
 			<timezone>+1</timezone>
 		</developer>
+
+		<developer>
+			<name>Markus Dahm</name>
+			<id>mdahm</id>
+			<email>m.dahm at gmx.de</email>
+			<organization>it-frameworksolutions</organization>
+		</developer>
+
+		<developer>
+			<name>Jason van Zyl</name>
+			<email>jason at zenplex.com</email>
+		</developer>
+
 	</developers>
+
+    <contributors>
+
+		<contributor>
+			<name>Enver Haase</name>
+			<email>enver at convergence.de</email>
+		</contributor>
+
+		<contributor>
+			<name>David Dixon-Peugh</name>
+			<email>dixonpeugh at yahoo.com</email>
+		</contributor>
+
+		<contributor>
+			<name>Patrick Beard</name>
+			<email>beard at netscape.com</email>
+		</contributor>
+
+		<contributor>
+			<name>Conor MacNeill</name>
+			<email>conor at cortexbusiness.com.au</email>
+		</contributor>
+
+		<contributor>
+			<name>Costin Manolache</name>
+			<email>cmanolache at yahoo.com</email>
+		</contributor>
+
+    </contributors>
 
 	<mailingLists>
 		<mailingList>
@@ -152,6 +173,19 @@
 					<source>1.4</source>
 					<target>1.4</target>
 				</configuration>
+                <executions>
+                    <execution>
+                        <id>compile-tests</id>
+                        <phase>process-test-sources</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <source>1.5</source>
+                            <target>1.5</target>
+                        </configuration>
+                    </execution>
+                </executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -162,11 +196,57 @@
 					<excludes>
 						<exclude>**/Abstract*</exclude>
 					</excludes>
-					<testFailureIgnore>true</testFailureIgnore>
+					<testFailureIgnore>false</testFailureIgnore>
+                    <skip>false</skip>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>project-team</report>
+                            <report>dependencies</report>
+                            <report>license</report>
+                            <report>scm</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jxr-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>taglist-maven-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <tags>
+                        <tag>TODO</tag>
+                        <tag>@todo</tag>
+                        <tag>FIXME</tag>
+                        <tag>@deprecated</tag>
+                    </tags>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 	<dependencies>
 		<dependency>
@@ -176,4 +256,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 </project>

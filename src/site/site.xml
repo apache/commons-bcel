@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Jakarat BCEL">
+  <!--
+  <skin>
+    <groupId>org.vafer</groupId>
+    <artifactId>maven-skin</artifactId>
+    <version>1.1</version>
+  </skin>
+  -->
+
+  <!--
+  <bannerLeft>
+    <name>BCEL</name>
+    <src>http://jakarta.apache.org/bcel/images/bcel-logo.png</src>
+    <href>http://jakarta.apache.org/bcel</href>
+  </bannerLeft>
+  <bannerRight>
+    <src>http://maven.apache.org/images/maven-small.gif</src>
+  </bannerRight>
+  -->
+
+  <publishDate format="dd MMM yyyy" />
+
+  <body>
+    <links>
+      <item name="Apache" href="http://www.apache.org/" />
+      <item name="Jakarta" href="http://jakarta.apache.org/"/>
+    </links>
+
+    <menu name="BCEL">
+      <item name="News" href="news.html"/>
+      <item name="Download" href="http://jakarta.apache.org/site/downloads/downloads_bcel.cgi"/>
+      <item name="Manual" href="manual.html"/>
+      <item name="FAQ" href="faq.html"/>
+      <item name="Used by" href="projects.html"/>
+    </menu>
+
+    <menu ref="reports"/>
+
+  </body>
+</project>
