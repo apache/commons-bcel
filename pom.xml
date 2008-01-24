@@ -137,7 +137,7 @@
 		<site>
 			<id>website</id>
 			<url>
-				scpexe://people.apache.org/www/jakarta.apache.org/commons/sandbox/jci
+				scpexe://people.apache.org/www/jakarta.apache.org/bcel
 			</url>
 		</site>
 	</distributionManagement>
@@ -149,8 +149,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<debug>true</debug>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.4</source>
+					<target>1.4</target>
 				</configuration>
 			</plugin>
 			<plugin>

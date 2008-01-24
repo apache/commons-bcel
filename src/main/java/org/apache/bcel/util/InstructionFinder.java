@@ -65,7 +65,6 @@ import org.apache.bcel.generic.InstructionList;
  * @see Instruction
  * @see InstructionList
  */
-@SuppressWarnings("unchecked")
 public class InstructionFinder {
 
     private static final int OFFSET = 32767; // char + OFFSET is
