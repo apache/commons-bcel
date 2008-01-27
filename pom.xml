@@ -130,16 +130,16 @@
 	<distributionManagement>
         <repository>
             <id>releases</id>
-            <url>scpexe://people.apache.org/~tcurdt/releases/bcel</url>
+            <url>scpexe://people.apache.org/home/tcurdt/public_html/releases/bcel</url>
         </repository>
         <snapshotRepository>
             <id>snaphots</id>
-            <url>scpexe://people.apache.org/~tcurdt/shapshots/bcel</url>
+            <url>scpexe://people.apache.org/home/tcurdt/public_html/shapshots/bcel</url>
         </snapshotRepository>
 		<site>
 			<id>website</id>
 			<!-- <url>scpexe://people.apache.org/www/jakarta.apache.org/bcel</url> -->
-			<url>scpexe://people.apache.org/~tcurdt/websites/bcel</url>
+			<url>scpexe://people.apache.org/home/tcurdt/public_html/websites/bcel</url>
 		</site>
 	</distributionManagement>
 
