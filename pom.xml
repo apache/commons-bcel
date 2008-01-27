@@ -127,39 +127,19 @@
 		<url>http://svn.apache.org/repos/asf/jakarta/bcel/trunk</url>
 	</scm>
 
-	<repositories>
-		<repository>
-			<id>apache-snapshots</id>
-			<name>Apache Maven2 Repository</name>
-			<url>http://cvs.apache.org/maven-snapshot-repository</url>
-		</repository>
-		<repository>
-			<id>codehaus-snapshot</id>
-			<name>Maven snapshot Repository</name>
-			<url>http://snapshots.maven.codehaus.org/maven2</url>
-		</repository>
-	</repositories>
-
 	<distributionManagement>
-		<repository>
-			<id>apache-maven-snapshot</id>
-			<name>repository</name>
-			<url>
-				scpexe://people.apache.org/www/cvs.apache.org/maven-snapshot-repository
-			</url>
-		</repository>
-		<snapshotRepository>
-			<id>apache-maven-snapshot</id>
-			<name>repository</name>
-			<url>
-				scpexe://people.apache.org/www/cvs.apache.org/maven-snapshot-repository
-			</url>
-		</snapshotRepository>
+        <repository>
+            <id>releases</id>
+            <url>scpexe://people.apache.org/~tcurdt/releases/bcel</url>
+        </repository>
+        <snapshotRepository>
+            <id>snaphots</id>
+            <url>scpexe://people.apache.org/~tcurdt/shapshots/bcel</url>
+        </snapshotRepository>
 		<site>
 			<id>website</id>
-			<url>
-				scpexe://people.apache.org/www/jakarta.apache.org/bcel
-			</url>
+			<!-- <url>scpexe://people.apache.org/www/jakarta.apache.org/bcel</url> -->
+			<url>scpexe://people.apache.org/~tcurdt/websites/bcel</url>
 		</site>
 	</distributionManagement>
 
