@@ -307,4 +307,63 @@ public abstract class Type implements java.io.Serializable {
         sb.append(getType(meth.getReturnType()).getSignature());
         return sb.toString();
     }
+    
+    private static int size(int coded) {
+    	return coded & 3;
+    }
+    
+    private static int consumed(int coded) {
+    	return coded >> 2;
+    }
+    
+    private static int encode(int size, int consumed) {
+    	return consumed << 2 | size;
+    }
+    
+    static int getArgumentTypesSize( String signature ) {
+        int res = 0;
+        int index;
+        Type[] types;
+        try { // Read all declarations between for `(' and `)'
+            if (signature.charAt(0) != '(') {
+                throw new ClassFormatException("Invalid method signature: " + signature);
+            }
+            index = 1; // current string position
+            while (signature.charAt(index) != ')') {
+                int coded = getTypeSize(signature.substring(index));
+                res += size(coded);
+                index += consumed(coded);
+            }
+        } catch (StringIndexOutOfBoundsException e) { // Should never occur
+            throw new ClassFormatException("Invalid method signature: " + signature);
+        }
+        return res;
+    }
+    
+    static final int getTypeSize( String signature ) throws StringIndexOutOfBoundsException {
+        byte type = Utility.typeOfSignature(signature);
+        if (type <= Constants.T_VOID) {
+            return encode(BasicType.getType(type).getSize(), 1);
+        } else if (type == Constants.T_ARRAY) {
+            int dim = 0;
+            do { // Count dimensions
+                dim++;
+            } while (signature.charAt(dim) == '[');
+            // Recurse, but just once, if the signature is ok
+            int consumed = consumed(getTypeSize(signature.substring(dim)));
+            return encode(1, dim + consumed);
+        } else { // type == T_REFERENCE
+            int index = signature.indexOf(';'); // Look for closing `;'
+            if (index < 0) {
+                throw new ClassFormatException("Invalid signature: " + signature);
+            }
+            return encode(1, index + 1);
+        }
+    }
+
+
+	static int getReturnTypeSize(String signature) {
+		int index = signature.lastIndexOf(')') + 1;
+        return getTypeSize(signature.substring(index));
+	}
 }

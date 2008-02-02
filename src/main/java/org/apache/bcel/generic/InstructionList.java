@@ -140,8 +140,15 @@ public class InstructionList implements Serializable {
      * @return target position's instruction handle if available
      */
     public InstructionHandle findHandle( int pos ) {
-        InstructionHandle[] ihs = getInstructionHandles();
-        return findHandle(ihs, byte_positions, length, pos);
+    	int[] positions = byte_positions;
+        InstructionHandle ih = start;
+        for (int i = 0; i < length; i++) { 
+            if(positions[i] == pos) {
+                return ih;
+            }
+            ih = ih.next;
+        }
+        return null;
     }
 
 

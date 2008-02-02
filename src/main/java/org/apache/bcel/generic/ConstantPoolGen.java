@@ -50,8 +50,8 @@ import org.apache.bcel.classfile.ConstantUtf8;
  */
 public class ConstantPoolGen implements java.io.Serializable {
 
-    protected int size = 1024; // Inital size, sufficient in most cases
-    protected Constant[] constants = new Constant[size];
+    protected int size; 
+    protected Constant[] constants;
     protected int index = 1; // First entry (0) used by JVM
     private static final String METHODREF_DELIM = ":";
     private static final String IMETHODREF_DELIM = "#";
@@ -75,14 +75,17 @@ public class ConstantPoolGen implements java.io.Serializable {
      * @param cs array of given constants, new ones will be appended
      */
     public ConstantPoolGen(Constant[] cs) {
-        if (cs.length > size) {
-            size = cs.length;
-            constants = new Constant[size];
-        }
+    	StringBuffer sb = new StringBuffer(256);
+        
+        size = Math.max(256, cs.length + 64);
+        constants = new Constant[size];
+        
         System.arraycopy(cs, 0, constants, 0, cs.length);
         if (cs.length > 0) {
             index = cs.length;
         }
+    	
+    	
         for (int i = 1; i < index; i++) {
             Constant c = constants[i];
             if (c instanceof ConstantString) {
@@ -103,7 +106,13 @@ public class ConstantPoolGen implements java.io.Serializable {
                 ConstantNameAndType n = (ConstantNameAndType) c;
                 ConstantUtf8 u8 = (ConstantUtf8) constants[n.getNameIndex()];
                 ConstantUtf8 u8_2 = (ConstantUtf8) constants[n.getSignatureIndex()];
-                String key = u8.getBytes() + NAT_DELIM + u8_2.getBytes();
+                
+                sb.append(u8.getBytes());
+                sb.append(NAT_DELIM);
+                sb.append(u8_2.getBytes());
+                String key = sb.toString();
+                sb.delete(0, sb.length());
+                
                 if (!n_a_t_table.containsKey(key)) {
                     n_a_t_table.put(key, new Index(i));
                 }
@@ -129,7 +138,15 @@ public class ConstantPoolGen implements java.io.Serializable {
                 } else if (c instanceof ConstantFieldref) {
                     delim = FIELDREF_DELIM;
                 }
-                String key = class_name + delim + method_name + delim + signature;
+                
+                sb.append(class_name);
+                sb.append(delim);
+                sb.append(method_name);
+                sb.append(delim);
+                sb.append(signature);
+                String key = sb.toString();
+                sb.delete(0, sb.length());
+                
                 if (!cp_table.containsKey(key)) {
                     cp_table.put(key, new Index(i));
                 }
@@ -150,6 +167,8 @@ public class ConstantPoolGen implements java.io.Serializable {
      * Create empty constant pool.
      */
     public ConstantPoolGen() {
+    	size = 256;
+        constants = new Constant[size];
     }
 
 

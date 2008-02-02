@@ -54,7 +54,7 @@ public abstract class FieldInstruction extends FieldOrMethod implements TypedIns
     /** @return size of field (1 or 2)
      */
     protected int getFieldSize( ConstantPoolGen cpg ) {
-        return getType(cpg).getSize();
+    	return Type.getTypeSize(getSignature(cpg));
     }
 
 

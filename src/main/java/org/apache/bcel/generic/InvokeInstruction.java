@@ -63,18 +63,15 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      * @return Number of words consumed from stack by this instruction
      */
     public int consumeStack( ConstantPoolGen cpg ) {
-        String signature = getSignature(cpg);
-        Type[] args = Type.getArgumentTypes(signature);
         int sum;
         if (opcode == Constants.INVOKESTATIC) {
             sum = 0;
         } else {
             sum = 1; // this reference
         }
-        int n = args.length;
-        for (int i = 0; i < n; i++) {
-            sum += args[i].getSize();
-        }
+        
+        String signature = getSignature(cpg);
+        sum += Type.getArgumentTypesSize(signature);
         return sum;
     }
 
@@ -85,7 +82,8 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      * @return Number of words produced onto stack by this instruction
      */
     public int produceStack( ConstantPoolGen cpg ) {
-        return getReturnType(cpg).getSize();
+    	String signature = getSignature(cpg);
+    	return Type.getReturnTypeSize(signature);
     }
 
 
