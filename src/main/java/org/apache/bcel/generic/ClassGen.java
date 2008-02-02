@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.AccessFlags;
 import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.Field;
@@ -143,7 +144,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
             addInterface(interfaces[i]);
         }
         for (int i = 0; i < attributes.length; i++) {
-            addAttribute(attributes[i]);
+        	if (!(attributes[i] instanceof Annotations)) {
+        		addAttribute(attributes[i]);
+        	}
         }
         for(int i=0; i < annotations.length; i++) {
             addAnnotationEntry(annotations[i]);
