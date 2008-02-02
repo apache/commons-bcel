@@ -55,7 +55,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   private int         line, column; 
   private boolean     is_simple;  // true, if simple expression like `12 + f(a)'
   private boolean     is_recursive; // Not used yet, TODO
-  private int         max_depth; // max. expression tree depth
+//  private int         max_depth; // max. expression tree depth
   private Environment env;
 
   // Generated methods

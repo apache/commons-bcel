@@ -837,7 +837,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
   static private Token jj_scanpos, jj_lastpos;
   static private int jj_la;
   static public boolean lookingAhead = false;
-  static private boolean jj_semLA;
+//  static private boolean jj_semLA;
   static private int jj_gen;
   static final private int[] jj_la1 = new int[17];
   static final private int[] jj_la1_0 = {0x200,0x0,0x1800000,0x1c000000,0x11c04400,0x1000,0x1800000,0x0,0x11c04400,0xe2000000,0x3f0000,0x1800000,0x1800000,0x1c000000,0xe2000000,0x3f0000,0x10400000,};

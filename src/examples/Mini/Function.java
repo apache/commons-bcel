@@ -26,7 +26,7 @@ package Mini;
 public class Function implements org.apache.bcel.Constants, EnvEntry {
   private ASTIdent   name;         // Reference to the original declaration
   private ASTIdent[] args;         // Reference to argument identifiers
-  private ASTExpr    body;         // Reference to function expression body
+//  private ASTExpr    body;         // Reference to function expression body
   private boolean    reserved;     // Is a key word?
   private int        line, column; // Short for name.getToken()
   private String     fun_name;     // Short for name.getName()

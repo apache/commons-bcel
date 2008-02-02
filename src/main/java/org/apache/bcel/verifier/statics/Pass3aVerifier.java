@@ -590,8 +590,10 @@ public final class Pass3aVerifier extends PassVerifier{
 			else{
 				/* TODO: Check if assignment compatibility is sufficient.
 				   What does Sun do? */
-				Type f_type = Type.getType(f.getSignature());
-				Type o_type = o.getType(cpg);
+                Type.getType(f.getSignature());
+                o.getType(cpg);
+//				Type f_type = Type.getType(f.getSignature());
+//				Type o_type = o.getType(cpg);
 								
 				// Argh. Sun's implementation allows us to have multiple fields of
 				// the same name but with a different signature.

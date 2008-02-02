@@ -42,17 +42,17 @@ static private final void jjCheckNAddTwoStates(int state1, int state2)
    jjCheckNAdd(state1);
    jjCheckNAdd(state2);
 }
-static private final void jjCheckNAddStates(int start, int end)
-{
-   do {
-      jjCheckNAdd(jjnextStates[start]);
-   } while (start++ != end);
-}
-static private final void jjCheckNAddStates(int start)
-{
-   jjCheckNAdd(jjnextStates[start]);
-   jjCheckNAdd(jjnextStates[start + 1]);
-}
+//static private final void jjCheckNAddStates(int start, int end)
+//{
+//   do {
+//      jjCheckNAdd(jjnextStates[start]);
+//   } while (start++ != end);
+//}
+//static private final void jjCheckNAddStates(int start)
+//{
+//   jjCheckNAdd(jjnextStates[start]);
+//   jjCheckNAdd(jjnextStates[start + 1]);
+//}
 static private final int jjMoveNfa_1(int startState, int curPos)
 {
    int startsAt = 0;

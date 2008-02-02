@@ -85,8 +85,8 @@ public class Class2HTML implements Constants {
          */
         AttributeHTML attribute_html = new AttributeHTML(dir, class_name, constant_pool,
                 constant_html);
-        MethodHTML method_html = new MethodHTML(dir, class_name, methods, java_class.getFields(),
-                constant_html, attribute_html);
+//        MethodHTML method_html = new MethodHTML(dir, class_name, methods, java_class.getFields(),
+//                constant_html, attribute_html);
         // Write main file (with frames, yuk)
         writeMainHTML(attribute_html);
         new CodeHTML(dir, class_name, methods, constant_pool, constant_html);

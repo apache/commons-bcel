@@ -43,7 +43,7 @@ import org.apache.bcel.classfile.Utility;
 final class CodeHTML implements org.apache.bcel.Constants {
 
     private String class_name; // name of current class
-    private Method[] methods; // Methods to print
+//    private Method[] methods; // Methods to print
     private PrintWriter file; // file to write to
     private BitSet goto_set;
     private ConstantPool constant_pool;
@@ -54,7 +54,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
     CodeHTML(String dir, String class_name, Method[] methods, ConstantPool constant_pool,
             ConstantHTML constant_html) throws IOException {
         this.class_name = class_name;
-        this.methods = methods;
+//        this.methods = methods;
         this.constant_pool = constant_pool;
         this.constant_html = constant_html;
         file = new PrintWriter(new FileOutputStream(dir + class_name + "_code.html"));
@@ -252,8 +252,10 @@ final class CodeHTML implements org.apache.bcel.Constants {
                 int m_index = bytes.readShort();
                 String str;
                 if (opcode == INVOKEINTERFACE) { // Special treatment needed
-                    int nargs = bytes.readUnsignedByte(); // Redundant
-                    int reserved = bytes.readUnsignedByte(); // Reserved
+                    bytes.readUnsignedByte(); // Redundant
+                    bytes.readUnsignedByte(); // Reserved
+//                    int nargs = bytes.readUnsignedByte(); // Redundant
+//                    int reserved = bytes.readUnsignedByte(); // Reserved
                     ConstantInterfaceMethodref c = (ConstantInterfaceMethodref) constant_pool
                             .getConstant(m_index, CONSTANT_InterfaceMethodref);
                     class_index = c.getClassIndex();
@@ -426,7 +428,8 @@ final class CodeHTML implements org.apache.bcel.Constants {
                         default_offset += offset;
                         goto_set.set(default_offset);
                         for (int j = 0; j < npairs; j++) {
-                            int match = bytes.readInt();
+//                            int match = bytes.readInt();
+                            bytes.readInt();
                             index = offset + bytes.readInt();
                             goto_set.set(index);
                         }

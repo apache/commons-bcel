@@ -19,8 +19,8 @@
 
 package Mini;
 import java.io.PrintWriter;
+
 import org.apache.bcel.classfile.Field;
-import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ALOAD;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;

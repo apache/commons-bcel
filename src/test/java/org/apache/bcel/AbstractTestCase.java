@@ -1,10 +1,11 @@
 package org.apache.bcel;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import junit.framework.TestCase;
+
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.JavaClass;
@@ -18,7 +19,7 @@ import org.apache.bcel.generic.SimpleElementValueGen;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
 
-public class AbstractTestCase extends TestCase
+public abstract class AbstractTestCase extends TestCase
 {
 	private boolean verbose = false;
 

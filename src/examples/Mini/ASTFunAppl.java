@@ -159,8 +159,8 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
    */
   public void code(StringBuffer buf) {
     String     fname = name.getName();
-    Function   f     = function;
-    ASTIdent[] args  = f.getArgs();
+//    Function   f     = function;
+//    ASTIdent[] args  = f.getArgs();
 
     if(fname.equals("READ")) {
         ASTFunDecl.push(buf, "_readInt()");
@@ -197,9 +197,9 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
    */
   public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
     String     fname = name.getName();
-    Function   f     = function;
+//    Function   f     = function;
     //ASTIdent   fun   = f.getName();
-    ASTIdent[] args  = f.getArgs();
+//    ASTIdent[] args  = f.getArgs();
     String     class_name = method.getClassName();
 
     if(fname.equals("READ")) {
