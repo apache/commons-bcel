@@ -23,7 +23,7 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackProducer {
+public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackProducer, StackConsumer {
 
     /** Get length of array
      */
