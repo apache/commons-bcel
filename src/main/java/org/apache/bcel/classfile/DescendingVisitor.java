@@ -242,6 +242,25 @@ public class DescendingVisitor implements Visitor
 		stack.pop();
 	}
 
+	public void visitStackMapTable(StackMapTable table)
+	{
+		stack.push(table);
+		table.accept(visitor);
+		StackMapTableEntry[] vars = table.getStackMapTable();
+		for (int i = 0; i < vars.length; i++)
+		{
+			vars[i].accept(this);
+		}
+		stack.pop();
+	}
+
+	public void visitStackMapTableEntry(StackMapTableEntry var)
+	{
+		stack.push(var);
+		var.accept(visitor);
+		stack.pop();
+	}
+
 	public void visitLocalVariable(LocalVariable var)
 	{
 		stack.push(var);

@@ -173,6 +173,14 @@ public class EmptyVisitor implements Visitor
 	{
 	}
 
+	public void visitStackMapTable(StackMapTable obj)
+	{
+	}
+
+	public void visitStackMapTableEntry(StackMapTableEntry obj)
+	{
+	}
+
 	public void visitEnclosingMethod(EnclosingMethod obj)
 	{
 	}

@@ -739,8 +739,9 @@ public interface Constants {
   public static final byte ATTR_ANNOTATION_DEFAULT                      = 16;
   public static final byte ATTR_LOCAL_VARIABLE_TYPE_TABLE               = 17;
   public static final byte ATTR_ENCLOSING_METHOD                      	= 18;
+  public static final byte ATTR_STACK_MAP_TABLE                         = 19;
 
-  public static final short KNOWN_ATTRIBUTES = 19;
+  public static final short KNOWN_ATTRIBUTES = 20;
 
   // TOFO: FIXXXXX
   public static final String[] ATTRIBUTE_NAMES = {
@@ -750,7 +751,7 @@ public interface Constants {
     "PMGClass", "Signature", "StackMap", 
     "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
     "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations",
-    "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod"
+    "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod", "StackMapTable"
   };
 
   /** Constants used in the StackMap attribute.
@@ -769,4 +770,25 @@ public interface Constants {
     "Bogus", "Integer", "Float", "Double", "Long",
     "Null", "InitObject", "Object", "NewObject" 
   };
+  
+  /** Constants used to identify StackMapEntry types.
+   * 
+   * For those types which can specify a range, the 
+   * constant names the lowest value.
+   */
+  public static final int SAME_FRAME = 0; 
+  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME = 64; 
+  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED = 247; 
+  public static final int CHOP_FRAME = 248; 
+  public static final int SAME_FRAME_EXTENDED = 251; 
+  public static final int APPEND_FRAME = 252; 
+  public static final int FULL_FRAME = 255; 
+  
+  /** Constants that define the maximum value of 
+   * those constants which store ranges. */
+  
+  public static final int SAME_FRAME_MAX = 63;
+  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_MAX = 127;
+  public static final int CHOP_FRAME_MAX = 250;
+  public static final int APPEND_FRAME_MAX = 254;
 }

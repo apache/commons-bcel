@@ -90,6 +90,10 @@ public interface Visitor
 
 	public void visitStackMapEntry(StackMapEntry obj);
 
+	public void visitStackMapTable(StackMapTable obj);
+
+	public void visitStackMapTableEntry(StackMapTableEntry obj);
+
 	public void visitAnnotation(Annotations obj);
 
 	public void visitParameterAnnotation(ParameterAnnotations obj);

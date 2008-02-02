@@ -36,6 +36,8 @@ import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
 import org.apache.bcel.classfile.StackMapEntry;
+import org.apache.bcel.classfile.StackMapTable;
+import org.apache.bcel.classfile.StackMapTableEntry;
 import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.classfile.Visitor;
@@ -117,6 +119,11 @@ public class CounterVisitor implements Visitor
 	public int annotationDefaultCount = 0;
 
 	public int annotationCount = 0;
+
+	public int stackMapTableCount = 0;
+
+	public int stackMapTableEntryCount = 0;
+	
 
 	public void visitAnnotation(Annotations obj)
 	{
@@ -306,5 +313,13 @@ public class CounterVisitor implements Visitor
 	public void visitUnknown(Unknown obj)
 	{
 		unknownCount++;
+	}
+
+	public void visitStackMapTable(StackMapTable obj) {
+		stackMapTableCount++;
+	}
+
+	public void visitStackMapTableEntry(StackMapTableEntry obj) {
+		stackMapTableEntryCount++;
 	}
 }
