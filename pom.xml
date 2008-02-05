@@ -1,158 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>bcel</groupId>
-	<artifactId>bcel</artifactId>
-	<packaging>jar</packaging>
-	<version>5.3-SNAPSHOT</version>
-	<name>Jakarta BCEL</name>
-	<description>Bytecode Engineering Library</description>
+    <groupId>org.apache.bcel</groupId>
+    <artifactId>bcel</artifactId>
+    <packaging>jar</packaging>
+    <version>5.3-SNAPSHOT</version>
+    <name>Jakarta BCEL</name>
+    <description>Bytecode Engineering Library</description>
 
-	<url>http://jakarta.apache.org/bcel</url>
-	<inceptionYear>2004</inceptionYear>
+    <url>http://jakarta.apache.org/bcel</url>
+    <inceptionYear>2004</inceptionYear>
 
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-	<organization>
-		<name>The Apache Software Foundation</name>
-		<url>http://www.apache.org/</url>
-	</organization>
+    <organization>
+        <name>The Apache Software Foundation</name>
+        <url>http://www.apache.org/</url>
+    </organization>
 
-	<developers>
-		<developer>
-			<name>Dave Brosius</name>
-			<id>dbrosius</id>
-			<email>dbrosius at mebigfatguy.com</email>
-		</developer>
+    <developers>
+        <developer>
+            <name>Dave Brosius</name>
+            <id>dbrosius</id>
+            <email>dbrosius at mebigfatguy.com</email>
+        </developer>
 
-		<developer>
-			<name>Torsten Curdt</name>
-			<id>tcurdt</id>
-			<email>tcurdt at apache.org</email>
-			<organization>ASF</organization>
-			<organizationUrl>http://www.apache.org/</organizationUrl>
-			<timezone>+1</timezone>
-		</developer>
+        <developer>
+            <name>Torsten Curdt</name>
+            <id>tcurdt</id>
+            <email>tcurdt at apache.org</email>
+            <organization>ASF</organization>
+            <organizationUrl>http://www.apache.org/</organizationUrl>
+            <timezone>+1</timezone>
+        </developer>
 
-		<developer>
-			<name>Markus Dahm</name>
-			<id>mdahm</id>
-			<email>m.dahm at gmx.de</email>
-			<organization>it-frameworksolutions</organization>
-		</developer>
+        <developer>
+            <name>Markus Dahm</name>
+            <id>mdahm</id>
+            <email>m.dahm at gmx.de</email>
+            <organization>it-frameworksolutions</organization>
+        </developer>
 
-		<developer>
-			<name>Jason van Zyl</name>
-			<email>jason at zenplex.com</email>
-		</developer>
+        <developer>
+            <name>Jason van Zyl</name>
+            <email>jason at zenplex.com</email>
+        </developer>
 
-	</developers>
+    </developers>
 
     <contributors>
 
-		<contributor>
-			<name>Enver Haase</name>
-			<email>enver at convergence.de</email>
-		</contributor>
+        <contributor>
+            <name>Enver Haase</name>
+            <email>enver at convergence.de</email>
+        </contributor>
 
-		<contributor>
-			<name>David Dixon-Peugh</name>
-			<email>dixonpeugh at yahoo.com</email>
-		</contributor>
+        <contributor>
+            <name>David Dixon-Peugh</name>
+            <email>dixonpeugh at yahoo.com</email>
+        </contributor>
 
-		<contributor>
-			<name>Patrick Beard</name>
-			<email>beard at netscape.com</email>
-		</contributor>
+        <contributor>
+            <name>Patrick Beard</name>
+            <email>beard at netscape.com</email>
+        </contributor>
 
-		<contributor>
-			<name>Conor MacNeill</name>
-			<email>conor at cortexbusiness.com.au</email>
-		</contributor>
+        <contributor>
+            <name>Conor MacNeill</name>
+            <email>conor at cortexbusiness.com.au</email>
+        </contributor>
 
-		<contributor>
-			<name>Costin Manolache</name>
-			<email>cmanolache at yahoo.com</email>
-		</contributor>
+        <contributor>
+            <name>Costin Manolache</name>
+            <email>cmanolache at yahoo.com</email>
+        </contributor>
 
     </contributors>
 
-	<mailingLists>
-		<mailingList>
-			<name>BCEL User List</name>
-			<subscribe>
-				bcel-user-subscribe@jakarta.apache.org
-			</subscribe>
-			<unsubscribe>
-				bcel-user-unsubscribe@jakarta.apache.org
-			</unsubscribe>
-			<archive>
-				http://www.mail-archive.com/bcel-user@jakarta.apache.org/
-			</archive>
-		</mailingList>
-		<mailingList>
-			<name>BCEL Developer List</name>
-			<subscribe>bcel-dev-subscribe@jakarta.apache.org</subscribe>
-			<unsubscribe>
-				bcel-dev-unsubscribe@jakarta.apache.org
-			</unsubscribe>
-			<archive>
-				http://www.mail-archive.com/bcel-dev@jakarta.apache.org/
-			</archive>
-		</mailingList>
-	</mailingLists>
+    <mailingLists>
+        <mailingList>
+            <name>BCEL User List</name>
+            <subscribe>
+                bcel-user-subscribe@jakarta.apache.org
+            </subscribe>
+            <unsubscribe>
+                bcel-user-unsubscribe@jakarta.apache.org
+            </unsubscribe>
+            <archive>
+                http://www.mail-archive.com/bcel-user@jakarta.apache.org/
+            </archive>
+        </mailingList>
+        <mailingList>
+            <name>BCEL Developer List</name>
+            <subscribe>bcel-dev-subscribe@jakarta.apache.org</subscribe>
+            <unsubscribe>
+                bcel-dev-unsubscribe@jakarta.apache.org
+            </unsubscribe>
+            <archive>
+                http://www.mail-archive.com/bcel-dev@jakarta.apache.org/
+            </archive>
+        </mailingList>
+    </mailingLists>
 
-	<issueManagement>
-		<system>bugzilla</system>
-		<url>https://issues.apache.org/bugzilla</url>
-	</issueManagement>
+    <issueManagement>
+        <system>bugzilla</system>
+        <url>https://issues.apache.org/bugzilla</url>
+    </issueManagement>
 
-	<scm>
-		<connection>
-			scm:svn:http://svn.apache.org/repos/asf/jakarta/bcel/trunk
-		</connection>
-		<developerConnection>
-			scm:svn:http://svn.apache.org/repos/asf/jakarta/bcel/trunk
-		</developerConnection>
-		<url>http://svn.apache.org/repos/asf/jakarta/bcel/trunk</url>
-	</scm>
+    <scm>
+        <connection>
+            scm:svn:http://svn.apache.org/repos/asf/jakarta/bcel/trunk
+        </connection>
+        <developerConnection>
+            scm:svn:http://svn.apache.org/repos/asf/jakarta/bcel/trunk
+        </developerConnection>
+        <url>http://svn.apache.org/repos/asf/jakarta/bcel/trunk</url>
+    </scm>
 
-	<distributionManagement>
+    <distributionManagement>
         <repository>
             <id>releases</id>
-            <url>scpexe://people.apache.org/home/tcurdt/public_html/releases/bcel</url>
+            <url>scpexe://people.apache.org/home/${USER}/public_html/releases/bcel</url>
         </repository>
         <snapshotRepository>
             <id>snaphots</id>
-            <url>scpexe://people.apache.org/home/tcurdt/public_html/shapshots/bcel</url>
+            <url>scpexe://people.apache.org/home/${USER}/public_html/shapshots/bcel</url>
         </snapshotRepository>
-		<site>
-			<id>website</id>
-			<!-- <url>scpexe://people.apache.org/www/jakarta.apache.org/bcel</url> -->
-			<url>scpexe://people.apache.org/home/tcurdt/public_html/websites/bcel</url>
-		</site>
-	</distributionManagement>
+        <site>
+            <id>website</id>
+            <!-- <url>scpexe://people.apache.org/www/jakarta.apache.org/bcel</url> -->
+            <url>scpexe://people.apache.org/home/${USER}/public_html/websites/bcel</url>
+        </site>
+    </distributionManagement>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<debug>true</debug>
-					<source>1.4</source>
-					<target>1.4</target>
-				</configuration>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <debug>true</debug>
+                    <source>1.4</source>
+                    <target>1.4</target>
+                </configuration>
                 <executions>
                     <execution>
                         <id>compile-tests</id>
@@ -166,31 +166,34 @@
                         </configuration>
                     </execution>
                 </executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<includes>
-						<include>**/*TestCase.java</include>
-					</includes>
-					<excludes>
-						<exclude>**/Abstract*</exclude>
-					</excludes>
-					<testFailureIgnore>false</testFailureIgnore>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestFile>META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*TestCase.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/Abstract*</exclude>
+                    </excludes>
+                    <testFailureIgnore>false</testFailureIgnore>
                     <skip>false</skip>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <reporting>
         <plugins>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-pmd-plugin</artifactId>
-            </plugin>
             <plugin>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <reportSets>
@@ -203,6 +206,13 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+            </plugin>
+            <!--
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-report-plugin</artifactId>
@@ -225,16 +235,50 @@
                     </tags>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>1.1.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changes-plugin</artifactId>
+                <version>2.0-beta-3</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>changes-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jardiff-maven-plugin</artifactId>
+                <configuration>
+                  <diffs>
+                    <diff>
+                      <version>5.2</version>
+                    </diff>
+                    <diff>
+                      <groupId>bcel</groupId>
+                      <version>5.1</version>
+                    </diff>
+                  </diffs>
+                </configuration>
+            </plugin>
+            -->
+
         </plugins>
     </reporting>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.2</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
