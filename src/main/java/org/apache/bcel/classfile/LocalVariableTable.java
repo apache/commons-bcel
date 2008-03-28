@@ -145,7 +145,7 @@ public class LocalVariableTable extends Attribute {
             if (local_variable_table[i].getIndex() == index) {
                 int start_pc = local_variable_table[i].getStartPC();
                 int end_pc = start_pc + local_variable_table[i].getLength();
-                if ((pc >= start_pc) && (pc < end_pc)) {
+                if ((pc >= start_pc) && (pc <= end_pc)) {
                     return local_variable_table[i];
                 }
             }
