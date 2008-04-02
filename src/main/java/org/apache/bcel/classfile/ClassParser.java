@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
 import org.apache.bcel.Constants;
 
 /**
@@ -162,12 +163,16 @@ public final class ClassParser {
         } finally {
             // Read everything of interest, so close the file
             if (fileOwned) {
-                if (file != null) {
-                    file.close();
-                }
-                if (zip != null) {
-                    zip.close();
-                }
+            	try {
+	                if (file != null) {
+	                    file.close();
+	                }
+	                if (zip != null) {
+	                    zip.close();
+	                }
+            	} catch (IOException ioe) {
+            		//ignore close exceptions
+            	}
             }
         }
         // Return the information we have gathered in a new object
