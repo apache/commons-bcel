@@ -199,7 +199,7 @@ class BCELFactory extends EmptyVisitor {
     private void createConstant( Object value ) {
         String embed = value.toString();
         if (value instanceof String) {
-            embed = '"' + Utility.convertString(value.toString()) + '"';
+            embed = '"' + Utility.convertString(embed) + '"';
         } else if (value instanceof Character) {
             embed = "(char)0x" + Integer.toHexString(((Character) value).charValue());
         }
