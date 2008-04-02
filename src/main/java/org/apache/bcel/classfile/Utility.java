@@ -705,7 +705,7 @@ public abstract class Utility {
 
 
     /**
-     * Replace all occurences of <em>old</em> in <em>str</em> with <em>new</em>.
+     * Replace all occurrences of <em>old</em> in <em>str</em> with <em>new</em>.
      *
      * @param str String to permute
      * @param old String to be replaced
@@ -714,9 +714,9 @@ public abstract class Utility {
      */
     public static final String replace( String str, String old, String new_ ) {
         int index, old_index;
-        StringBuffer buf = new StringBuffer();
         try {
             if ((index = str.indexOf(old)) != -1) { // `old' found in str
+                StringBuffer buf = new StringBuffer();
                 old_index = 0; // String start offset
                 // While we have something to replace
                 while ((index = str.indexOf(old, old_index)) != -1) {
