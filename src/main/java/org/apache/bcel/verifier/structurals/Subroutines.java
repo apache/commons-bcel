@@ -592,7 +592,6 @@ System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead c
 	private static InstructionHandle[] getSuccessors(InstructionHandle instruction){
 		final InstructionHandle[] empty = new InstructionHandle[0];
 		final InstructionHandle[] single = new InstructionHandle[1];
-		final InstructionHandle[] pair = new InstructionHandle[2];
 		
 		Instruction inst = instruction.getInstruction();
 		
@@ -633,6 +632,7 @@ System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead c
 				return ret;
 			}
 			else{
+				final InstructionHandle[] pair = new InstructionHandle[2];
 				pair[0] = instruction.getNext();
 				pair[1] = ((BranchInstruction) inst).getTarget();
 				return pair;
