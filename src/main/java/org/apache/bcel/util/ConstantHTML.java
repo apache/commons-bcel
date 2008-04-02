@@ -112,7 +112,6 @@ final class ConstantHTML implements org.apache.bcel.Constants {
                 // Partially compacted class name, i.e., / -> .
                 String method_class = constant_pool.constantToString(class_index, CONSTANT_Class);
                 String short_method_class = Utility.compactClassName(method_class); // I.e., remove java.lang.
-                short_method_class = Utility.compactClassName(method_class); // I.e., remove java.lang.
                 short_method_class = Utility.compactClassName(short_method_class, class_package
                         + ".", true); // Remove class package prefix
                 // Get method signature
