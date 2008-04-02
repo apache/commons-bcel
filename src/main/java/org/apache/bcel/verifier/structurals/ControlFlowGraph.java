@@ -323,7 +323,6 @@ public class ControlFlowGraph{
 		private InstructionHandle[] _getSuccessors(){
 			final InstructionHandle[] empty = new InstructionHandle[0];
 			final InstructionHandle[] single = new InstructionHandle[1];
-			final InstructionHandle[] pair = new InstructionHandle[2];
 		
 			Instruction inst = getInstruction().getInstruction();
 		
@@ -378,6 +377,7 @@ public class ControlFlowGraph{
 					return ret;
 				}
 				else{
+					final InstructionHandle[] pair = new InstructionHandle[2];
 					pair[0] = getInstruction().getNext();
 					pair[1] = ((BranchInstruction) inst).getTarget();
 					return pair;
