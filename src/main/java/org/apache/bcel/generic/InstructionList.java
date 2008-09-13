@@ -185,7 +185,7 @@ public class InstructionList implements Serializable {
                 count++;
             }
         } catch (IOException e) {
-            throw new ClassGenException(e.toString());
+            throw new ClassGenException(e.toString(), e);
         }
         byte_positions = new int[count]; // Trim to proper size
         System.arraycopy(pos, 0, byte_positions, 0, count);
@@ -968,7 +968,7 @@ public class InstructionList implements Serializable {
                 instructions.add(Instruction.readInstruction(bytes));
             }
         } catch (IOException e) {
-            throw new ClassGenException(e.toString());
+            throw new ClassGenException(e.toString(), e);
         }
         return (Instruction[]) instructions.toArray(new Instruction[instructions.size()]);
     }

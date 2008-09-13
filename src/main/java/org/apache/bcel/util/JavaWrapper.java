@@ -48,7 +48,7 @@ public class JavaWrapper {
         try {
             return (java.lang.ClassLoader) Class.forName(s).newInstance();
         } catch (Exception e) {
-            throw new RuntimeException(e.toString());
+            throw new RuntimeException(e.toString(), e);
         }
     }
 

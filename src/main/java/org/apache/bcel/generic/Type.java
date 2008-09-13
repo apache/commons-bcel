@@ -207,7 +207,7 @@ public abstract class Type implements java.io.Serializable {
             int index = signature.lastIndexOf(')') + 1;
             return getType(signature.substring(index));
         } catch (StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid method signature: " + signature);
+            throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
     }
 
@@ -232,7 +232,7 @@ public abstract class Type implements java.io.Serializable {
                 index += unwrap(consumed_chars); // update position
             }
         } catch (StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid method signature: " + signature);
+            throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
         types = new Type[vec.size()];
         vec.toArray(types);
@@ -335,7 +335,7 @@ public abstract class Type implements java.io.Serializable {
                 index += consumed(coded);
             }
         } catch (StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid method signature: " + signature);
+            throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
         return res;
     }

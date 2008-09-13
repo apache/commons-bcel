@@ -562,7 +562,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
             try {
                 i = (Instruction) java.lang.Class.forName(name).newInstance();
             } catch (Exception e) {
-                throw new RuntimeException("Could not find instruction: " + name);
+                throw new RuntimeException("Could not find instruction: " + name, e);
             }
             return i;
         } else if ((src_type instanceof ReferenceType) && (dest_type instanceof ReferenceType)) {

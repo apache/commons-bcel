@@ -162,7 +162,7 @@ public abstract class Utility {
         } catch (IOException e) {
             System.out.println(buf.toString());
             e.printStackTrace();
-            throw new ClassFormatException("Byte code error: " + e);
+            throw new ClassFormatException("Byte code error: " + e, e);
         }
         return buf.toString();
     }
@@ -568,7 +568,7 @@ public abstract class Utility {
                 index += unwrap(consumed_chars); // update position
             }
         } catch (StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid method signature: " + signature);
+            throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
         return (String[]) vec.toArray(new String[vec.size()]);
     }
@@ -600,7 +600,7 @@ public abstract class Utility {
             index = signature.lastIndexOf(')') + 1;
             type = signatureToString(signature.substring(index), chopit);
         } catch (StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid method signature: " + signature);
+            throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
         return type;
     }
@@ -687,7 +687,7 @@ public abstract class Utility {
             // Read return type after `)'
             type = signatureToString(signature.substring(index), chopit);
         } catch (StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid method signature: " + signature);
+            throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
         if (buf.length() > 1) {
             buf.setLength(buf.length() - 2);
@@ -834,7 +834,7 @@ public abstract class Utility {
                     throw new ClassFormatException("Invalid signature: `" + signature + "'");
             }
         } catch (StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid signature: " + e + ":" + signature);
+            throw new ClassFormatException("Invalid signature: " + signature, e);
         }
     }
 
@@ -943,7 +943,7 @@ public abstract class Utility {
             index = signature.lastIndexOf(')') + 1;
             return typeOfSignature(signature.substring(index));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new ClassFormatException("Invalid method signature: " + signature);
+            throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
     }
 
@@ -984,7 +984,7 @@ public abstract class Utility {
                     throw new ClassFormatException("Invalid method signature: " + signature);
             }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new ClassFormatException("Invalid method signature: " + signature);
+            throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
     }
 

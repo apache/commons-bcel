@@ -95,7 +95,7 @@ public class ClassLoaderRepository implements Repository {
             storeClass(RC);
             return RC;
         } catch (IOException e) {
-            throw new ClassNotFoundException(e.toString());
+            throw new ClassNotFoundException(className + " not found: " + e.toString(), e);
         }
     }
 
