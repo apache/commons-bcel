@@ -44,7 +44,6 @@ public class AnnotationEntry implements Node, Constants, Serializable {
     /**
      * Construct object from file stream.
      * @param file Input stream
-     * @throws IOException
      */
     public AnnotationEntry(int type_index, ConstantPool constant_pool, boolean isRuntimeVisible) {
         this.type_index = type_index;
