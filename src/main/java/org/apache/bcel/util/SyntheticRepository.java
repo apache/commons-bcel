@@ -145,17 +145,29 @@ public class SyntheticRepository implements Repository {
      *   Repository, and its representation could not be found
      */
     public JavaClass loadClass( Class clazz ) throws ClassNotFoundException {
-        String className = clazz.getName();
-        JavaClass repositoryClass = findClass(className);
-        if (repositoryClass != null) {
-            return repositoryClass;
-        }
-        String name = className;
-        int i = name.lastIndexOf('.');
-        if (i > 0) {
-            name = name.substring(i + 1);
-        }
-        return loadClass(clazz.getResourceAsStream(name + ".class"), className);
+    	InputStream clsStream = null;
+    	try{
+	        String className = clazz.getName();
+	        JavaClass repositoryClass = findClass(className);
+	        if (repositoryClass != null) {
+	            return repositoryClass;
+	        }
+	        String name = className;
+	        int i = name.lastIndexOf('.');
+	        if (i > 0) {
+	            name = name.substring(i + 1);
+	        }
+	        clsStream = clazz.getResourceAsStream(name + ".class");
+	        return loadClass(clsStream, className);
+    	} finally {
+    		try{
+	    		if (clsStream != null){
+	    			clsStream.close();
+	    		}
+    		} catch(IOException ioe){
+    			//don't care
+    		}
+    	}
     }
 
 
