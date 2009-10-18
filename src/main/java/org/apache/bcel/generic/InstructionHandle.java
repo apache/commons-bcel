@@ -212,7 +212,7 @@ public class InstructionHandle implements java.io.Serializable {
      */
     public InstructionTargeter[] getTargeters() {
         if (!hasTargeters()) {
-            return null;
+            return new InstructionTargeter[0];
         }
         InstructionTargeter[] t = new InstructionTargeter[targeters.size()];
         targeters.toArray(t);
