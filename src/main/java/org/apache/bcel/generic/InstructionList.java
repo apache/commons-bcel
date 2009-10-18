@@ -951,7 +951,7 @@ public class InstructionList implements Serializable {
             }
         } catch (IOException e) {
             System.err.println(e);
-            return null;
+            return new byte[0];
         }
         return b.toByteArray();
     }
