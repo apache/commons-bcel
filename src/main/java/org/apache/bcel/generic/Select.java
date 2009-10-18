@@ -66,7 +66,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
         }
         this.match = match;
         if ((match_length = match.length) != targets.length) {
-            throw new ClassGenException("Match and target array have not the same length");
+            throw new ClassGenException("Match and target array have not the same length: Match length: " + match.length + " Target length: " + targets.length);
         }
         indices = new int[match_length];
     }

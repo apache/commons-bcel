@@ -212,7 +212,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 		case Constants.ATTR_STACK_MAP_TABLE:
 			return new StackMapTable(name_index, length, file, constant_pool);
 		default: // Never reached
-			throw new IllegalStateException("Ooops! default case reached.");
+			throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);
 		}
 	}
 

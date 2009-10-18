@@ -62,7 +62,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
         out.writeByte(opcode);
         index = getTargetOffset();
         if (Math.abs(index) >= 32767) {
-            throw new ClassGenException("Branch target offset too large for short");
+            throw new ClassGenException("Branch target offset too large for short: " + index);
         }
         out.writeShort(index); // May be negative, i.e., point backwards
     }

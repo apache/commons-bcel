@@ -444,7 +444,7 @@ public abstract class Instruction implements Cloneable, Serializable {
 				obj = new IMPDEP2();
 				break;
 			default:
-				throw new ClassGenException("Illegal opcode detected.");
+				throw new ClassGenException("Illegal opcode detected: " + opcode);
 
 		}
         

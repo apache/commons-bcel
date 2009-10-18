@@ -25,7 +25,7 @@ import org.apache.bcel.Constants;
 /**
  * This class represents a stack map entry recording the types of
  * local variables and the the of stack items at a given byte code offset.
- * See CLDC specification •À?5.3.1.2
+ * See CLDC specification ï¿½ï¿½?5.3.1.2
  *
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
@@ -88,7 +88,7 @@ public final class StackMapTableEntry implements Cloneable {
         	}
         } else {
         	/* Can't happen */
-        	throw new ClassFormatException ("Illegal Tag");
+        	throw new ClassFormatException ("Invalid frame type found while parsing stack map table: " + frame_type);
         }
     }
 
@@ -140,7 +140,7 @@ public final class StackMapTableEntry implements Cloneable {
             }
         } else {
         	/* Can't happen */
-        	throw new ClassFormatException ("Illegal Tag");
+        	throw new ClassFormatException ("Invalid Stack map table tag: " + frame_type);
         }
     }
 

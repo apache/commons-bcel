@@ -27,7 +27,7 @@ public class ArrayElementValue extends ElementValue
 		super(type, cpool);
 		if (type != ARRAY)
 			throw new RuntimeException(
-					"Only element values of type array can be built with this ctor");
+					"Only element values of type array can be built with this ctor - type specified: " + type);
 		this.evalues = datums;
 	}
 

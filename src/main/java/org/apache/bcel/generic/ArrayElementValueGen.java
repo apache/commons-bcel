@@ -26,7 +26,7 @@ public class ArrayElementValueGen extends ElementValueGen
 		super(type, cpool);
 		if (type != ARRAY)
 			throw new RuntimeException(
-					"Only element values of type array can be built with this ctor");
+					"Only element values of type array can be built with this ctor - type specified: " + type);
 		this.evalues = new ArrayList();
 		for (int i = 0; i < datums.length; i++)
 		{

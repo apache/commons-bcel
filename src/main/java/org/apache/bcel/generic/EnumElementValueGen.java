@@ -24,7 +24,7 @@ public class EnumElementValueGen extends ElementValueGen
 		super(ElementValueGen.ENUM_CONSTANT, cpool);
 		if (type != ENUM_CONSTANT)
 			throw new RuntimeException(
-					"Only element values of type enum can be built with this ctor");
+					"Only element values of type enum can be built with this ctor - type specified: " + type);
 		this.typeIdx = typeIdx;
 		this.valueIdx = valueIdx;
 	}
