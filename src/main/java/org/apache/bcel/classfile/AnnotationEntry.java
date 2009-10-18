@@ -19,18 +19,20 @@ package org.apache.bcel.classfile;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.bcel.Constants;
 
 /**
  * represents one annotation in the annotation table
  * 
  * @version $Id: AnnotationEntry
- * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
+ * @author  <A HREF="mailto:dbrosius@mebigfatguy.com">D. Brosius</A>
  * @since 5.3
  */
-public class AnnotationEntry implements Node, Constants {
+public class AnnotationEntry implements Node, Constants, Serializable {
 
     private int type_index;
     private int num_element_value_pairs;
