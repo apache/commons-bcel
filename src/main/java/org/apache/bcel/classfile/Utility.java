@@ -1356,7 +1356,7 @@ public abstract class Utility {
      */
     public static Attribute[] getAnnotationAttributes(ConstantPoolGen cp,List vec) {
     	
-    	if (vec.isEmpty()) return null;
+    	if (vec.isEmpty()) return new Attribute[0];
     	
     	try {
     		int countVisible   = 0;
