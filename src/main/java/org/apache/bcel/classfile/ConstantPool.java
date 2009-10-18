@@ -117,16 +117,16 @@ public class ConstantPool implements Cloneable, Node, Serializable {
                 str = ((ConstantUtf8) c).getBytes();
                 break;
             case Constants.CONSTANT_Double:
-                str = "" + ((ConstantDouble) c).getBytes();
+                str = String.valueOf(((ConstantDouble) c).getBytes());
                 break;
             case Constants.CONSTANT_Float:
-                str = "" + ((ConstantFloat) c).getBytes();
+                str = String.valueOf(((ConstantFloat) c).getBytes());
                 break;
             case Constants.CONSTANT_Long:
-                str = "" + ((ConstantLong) c).getBytes();
+                str = String.valueOf(((ConstantLong) c).getBytes());
                 break;
             case Constants.CONSTANT_Integer:
-                str = "" + ((ConstantInteger) c).getBytes();
+                str = String.valueOf(((ConstantInteger) c).getBytes());
                 break;
             case Constants.CONSTANT_NameAndType:
                 str = (constantToString(((ConstantNameAndType) c).getNameIndex(),

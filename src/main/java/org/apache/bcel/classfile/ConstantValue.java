@@ -122,16 +122,16 @@ public final class ConstantValue extends Attribute {
         // Print constant to string depending on its type
         switch (c.getTag()) {
             case Constants.CONSTANT_Long:
-                buf = "" + ((ConstantLong) c).getBytes();
+                buf = String.valueOf(((ConstantLong) c).getBytes());
                 break;
             case Constants.CONSTANT_Float:
-                buf = "" + ((ConstantFloat) c).getBytes();
+                buf = String.valueOf(((ConstantFloat) c).getBytes());
                 break;
             case Constants.CONSTANT_Double:
-                buf = "" + ((ConstantDouble) c).getBytes();
+                buf = String.valueOf(((ConstantDouble) c).getBytes());
                 break;
             case Constants.CONSTANT_Integer:
-                buf = "" + ((ConstantInteger) c).getBytes();
+                buf = String.valueOf(((ConstantInteger) c).getBytes());
                 break;
             case Constants.CONSTANT_String:
                 i = ((ConstantString) c).getStringIndex();
