@@ -626,7 +626,7 @@ public abstract class Utility {
 
 
     /**
-     * A return­type signature represents the return value from a method.
+     * A returnï¿½type signature represents the return value from a method.
      * It is a series of bytes in the following grammar:
      *
      * <return_signature> ::= <field_type> | V
@@ -1356,7 +1356,7 @@ public abstract class Utility {
      */
     public static Attribute[] getAnnotationAttributes(ConstantPoolGen cp,List vec) {
     	
-    	if (vec.size()==0) return null;
+    	if (vec.isEmpty()) return null;
     	
     	try {
     		int countVisible   = 0;

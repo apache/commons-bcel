@@ -106,7 +106,7 @@ public class LocalVariableTypeTable extends Attribute {
    * @return String representation.
    */ 
   public final String toString() {
-    StringBuffer buf = new StringBuffer("");
+    StringBuffer buf = new StringBuffer();
 
     for(int i=0; i < local_variable_type_table_length; i++) {
       buf.append(local_variable_type_table[i].toString());

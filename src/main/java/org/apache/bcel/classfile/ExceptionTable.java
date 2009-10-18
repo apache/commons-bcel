@@ -150,7 +150,7 @@ public final class ExceptionTable extends Attribute {
      * @return String representation, i.e., a list of thrown exceptions.
      */
     public final String toString() {
-        StringBuffer buf = new StringBuffer("");
+        StringBuffer buf = new StringBuffer();
         String str;
         for (int i = 0; i < number_of_exceptions; i++) {
             str = constant_pool.getConstantString(exception_index_table[i],
