@@ -1,5 +1,5 @@
 /*
- * Copyright  2000-2004 The Apache Software Foundation
+ * Copyright  2000-2009 The Apache Software Foundation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); 
  *  you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import org.apache.bcel.Constants;
 /** 
  * Returnaddress, the type JSR or JSR_W instructions push upon the stack.
  *
- * see vmspec2 §3.3.3
+ * see vmspec2 ï¿½3.3.3
  * @version $Id$
  * @author Enver Haase
  */

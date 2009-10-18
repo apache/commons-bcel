@@ -1,5 +1,5 @@
 /*
- * Copyright  2000-2004 The Apache Software Foundation
+ * Copyright  2000-2009 The Apache Software Foundation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); 
  *  you may not use this file except in compliance with the License.
@@ -107,7 +107,7 @@ public class Class2HTML implements Constants {
              */
             for (int i = 0; i < argv.length; i++) {
                 if (argv[i].charAt(0) == '-') { // command line switch
-                    if (argv[i].equals("-d")) { // Specify target directory, default `.´
+                    if (argv[i].equals("-d")) { // Specify target directory, default `.ï¿½
                         dir = argv[++i];
                         if (!dir.endsWith("" + sep)) {
                             dir = dir + sep;

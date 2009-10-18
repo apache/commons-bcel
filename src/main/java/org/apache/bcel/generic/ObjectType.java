@@ -1,5 +1,5 @@
 /*
- * Copyright  2000-2004 The Apache Software Foundation
+ * Copyright  2000-2009 The Apache Software Foundation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); 
  *  you may not use this file except in compliance with the License.
@@ -139,7 +139,7 @@ public class ObjectType extends ReferenceType {
 
 
     /**
-     * Java Virtual Machine Specification edition 2, § 5.4.4 Access Control
+     * Java Virtual Machine Specification edition 2, ï¿½ 5.4.4 Access Control
      * @throws ClassNotFoundException if the class referenced by this type
      *   can't be found
      */
