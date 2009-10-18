@@ -16,9 +16,10 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import org.apache.bcel.Constants;
 
 /** 
@@ -51,7 +52,7 @@ public final class ConstantNameAndType extends Constant {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantNameAndType(DataInputStream file) throws IOException {
+    ConstantNameAndType(DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort());
     }
 

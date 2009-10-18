@@ -16,9 +16,10 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import org.apache.bcel.Constants;
 
 /** 
@@ -52,7 +53,7 @@ public abstract class ConstantCP extends Constant {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantCP(byte tag, DataInputStream file) throws IOException {
+    ConstantCP(byte tag, DataInput file) throws IOException {
         this(tag, file.readUnsignedShort(), file.readUnsignedShort());
     }
 

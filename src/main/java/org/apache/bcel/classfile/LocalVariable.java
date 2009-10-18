@@ -16,10 +16,11 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+
 import org.apache.bcel.Constants;
 
 /**
@@ -57,7 +58,7 @@ public final class LocalVariable implements Constants, Cloneable, Node, Serializ
      * @param file Input stream
      * @throws IOException
      */
-    LocalVariable(DataInputStream file, ConstantPool constant_pool) throws IOException {
+    LocalVariable(DataInput file, ConstantPool constant_pool) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file
                 .readUnsignedShort(), file.readUnsignedShort(), constant_pool);
     }

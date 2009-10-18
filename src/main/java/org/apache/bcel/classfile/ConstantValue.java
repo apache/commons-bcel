@@ -16,9 +16,10 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import org.apache.bcel.Constants;
 
 /**
@@ -52,7 +53,7 @@ public final class ConstantValue extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    ConstantValue(int name_index, int length, DataInputStream file, ConstantPool constant_pool)
+    ConstantValue(int name_index, int length, DataInput file, ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, file.readUnsignedShort(), constant_pool);
     }

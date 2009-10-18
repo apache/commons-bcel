@@ -16,9 +16,10 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import org.apache.bcel.Constants;
 
 /** 
@@ -58,7 +59,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantLong(DataInputStream file) throws IOException {
+    ConstantLong(DataInput file) throws IOException {
         this(file.readLong());
     }
 

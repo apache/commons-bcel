@@ -12,7 +12,7 @@
  * ******************************************************************/
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -39,7 +39,7 @@ public class EnclosingMethod extends Attribute {
 	private int methodIndex;
 
 	// Ctors - and code to read an attribute in.
-	public EnclosingMethod(int nameIndex, int len, DataInputStream dis, ConstantPool cpool) throws IOException {
+	public EnclosingMethod(int nameIndex, int len, DataInput dis, ConstantPool cpool) throws IOException {
 		this(nameIndex, len, dis.readUnsignedShort(), dis.readUnsignedShort(), cpool);
 	}
 

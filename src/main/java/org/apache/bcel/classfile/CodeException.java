@@ -16,10 +16,11 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+
 import org.apache.bcel.Constants;
 
 /**
@@ -57,7 +58,7 @@ public final class CodeException implements Cloneable, Constants, Node, Serializ
      * @param file Input stream
      * @throws IOException
      */
-    CodeException(DataInputStream file) throws IOException {
+    CodeException(DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file
                 .readUnsignedShort());
     }

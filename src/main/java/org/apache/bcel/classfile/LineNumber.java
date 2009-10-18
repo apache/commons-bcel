@@ -16,7 +16,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -49,7 +49,7 @@ public final class LineNumber implements Cloneable, Node, Serializable {
      * @param file Input stream
      * @throws IOException
      */
-    LineNumber(DataInputStream file) throws IOException {
+    LineNumber(DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort());
     }
 

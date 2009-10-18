@@ -16,9 +16,10 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import org.apache.bcel.Constants;
 
 /** 
@@ -49,7 +50,7 @@ public final class ConstantUtf8 extends Constant {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantUtf8(DataInputStream file) throws IOException {
+    ConstantUtf8(DataInput file) throws IOException {
         super(Constants.CONSTANT_Utf8);
         bytes = file.readUTF();
     }

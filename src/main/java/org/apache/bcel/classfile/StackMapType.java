@@ -16,9 +16,10 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import org.apache.bcel.Constants;
 
 /**
@@ -43,7 +44,7 @@ public final class StackMapType implements Cloneable {
      * @param file Input stream
      * @throws IOException
      */
-    StackMapType(DataInputStream file, ConstantPool constant_pool) throws IOException {
+    StackMapType(DataInput file, ConstantPool constant_pool) throws IOException {
         this(file.readByte(), -1, constant_pool);
         if (hasIndex()) {
             setIndex(file.readShort());
