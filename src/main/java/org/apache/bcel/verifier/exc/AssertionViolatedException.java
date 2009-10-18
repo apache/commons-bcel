@@ -39,6 +39,13 @@ public final class AssertionViolatedException extends RuntimeException{
 		super(message = "INTERNAL ERROR: "+message); // Thanks to Java, the constructor call here must be first.
 		detailMessage=message;
 	}
+	/**
+	 * Constructs a new AssertionViolationException with the specified error message and initial cause
+	 */
+	public AssertionViolatedException(String message, Throwable initCause) {
+		super(message = "INTERNAL ERROR: "+message, initCause);
+		detailMessage=message;
+	}	
 	/** Extends the error message with a string before ("pre") and after ("post") the
 	    'old' error message. All of these three strings are allowed to be null, and null
 	    is always replaced by the empty string (""). In particular, after invoking this

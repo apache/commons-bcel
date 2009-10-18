@@ -42,4 +42,11 @@ public abstract class VerificationException extends VerifierConstraintViolatedEx
 	VerificationException(String message){
 		super(message);
 	}
+	
+	/**
+	 * Constructs a new VerificationException with the specified error message and exception
+	 */
+	VerificationException(String message, Throwable initCause){
+		super(message, initCause);
+	}
 }

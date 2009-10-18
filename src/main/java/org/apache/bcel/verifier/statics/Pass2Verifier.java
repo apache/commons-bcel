@@ -171,7 +171,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString());
+		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 	    }
 	}
 
@@ -223,7 +223,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString());
+		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 	    }
 	}
 
@@ -278,7 +278,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString());
+		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 	    }
 
 	}
@@ -299,7 +299,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString());
+		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 	    }
 	}
 
@@ -548,7 +548,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				Type.getType(sig);  /* Don't need the return value */
 			}
 			catch (ClassFormatException cfe){
-                throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.");
+                throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.", cfe);
 			}
 
 			String nameanddesc = (name+sig);
@@ -597,7 +597,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				ts = Type.getArgumentTypes(sig);
 			}
 			catch (ClassFormatException cfe){
-                throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by Method '"+tostring(obj)+"'.");
+                throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by Method '"+tostring(obj)+"'.", cfe);
 			}
 
 			// Check if referenced objects exist.
@@ -998,7 +998,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 							t = Type.getType(localsig);
 						}
 						catch (ClassFormatException cfe){
-							throw new ClassConstraintException("Illegal descriptor (==signature) '"+localsig+"' used by LocalVariable '"+tostring(localvariables[i])+"' referenced by '"+tostring(lvt)+"'.");
+							throw new ClassConstraintException("Illegal descriptor (==signature) '"+localsig+"' used by LocalVariable '"+tostring(localvariables[i])+"' referenced by '"+tostring(lvt)+"'.", cfe);
 						}
 						int localindex = localvariables[i].getIndex();
 						if ( ( (t==Type.LONG || t==Type.DOUBLE)? localindex+1:localindex) >= code.getMaxLocals()){
@@ -1009,7 +1009,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 							localVariablesInfos[method_number].add(localindex, localname, localvariables[i].getStartPC(), localvariables[i].getLength(), t);
 						}
 						catch(LocalVariableInfoInconsistentException lviie){
-							throw new ClassConstraintException("Conflicting information in LocalVariableTable '"+tostring(lvt)+"' found in Code attribute '"+tostring(obj)+"' (method '"+tostring(m)+"'). "+lviie.getMessage());
+							throw new ClassConstraintException("Conflicting information in LocalVariableTable '"+tostring(lvt)+"' found in Code attribute '"+tostring(obj)+"' (method '"+tostring(m)+"'). "+lviie.getMessage(), lviie);
 						}
 					}// for all local variables localvariables[i] in the LocalVariableTable attribute atts[a] END
 
@@ -1022,7 +1022,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 		    } catch (ClassNotFoundException e) {
 			// FIXME: this might not be the best way to handle missing classes.
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 
 		}// visitCode(Code) END
@@ -1080,7 +1080,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 		    } catch (ClassNotFoundException e) {
 			// FIXME: this might not be the best way to handle missing classes.
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 		}
 		// SYNTHETIC: see above
@@ -1170,7 +1170,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString());
+		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 	    }
 	}
 
@@ -1213,7 +1213,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				Type.getType(sig); /* Don't need the return value */
 			}
 			catch (ClassFormatException cfe){
-				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.");
+				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.", cfe);
 			}
 		}
 
@@ -1244,7 +1244,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				}
 			}
 			catch (ClassFormatException cfe){
-				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.");
+				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.", cfe);
 			}
 		}
 
@@ -1275,7 +1275,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				}
 			}
 			catch (ClassFormatException cfe){
-				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.");
+				throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.", cfe);
 			}
 
 		}
@@ -1327,7 +1327,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * This method returns true if and only if the supplied String
 	 * represents a valid Java programming language method name stored as a simple
 	 * (non-qualified) name.
-	 * Conforming to: The Java Virtual Machine Specification, Second Edition, §2.7, §2.7.1, §2.2.
+	 * Conforming to: The Java Virtual Machine Specification, Second Edition, ï¿½2.7, ï¿½2.7.1, ï¿½2.2.
 	 */
 	private static boolean validJavaLangMethodName(String name){
 		if (!Character.isJavaIdentifierStart(name.charAt(0))) {

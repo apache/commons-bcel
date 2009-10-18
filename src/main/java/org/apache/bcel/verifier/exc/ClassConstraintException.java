@@ -39,4 +39,11 @@ public class ClassConstraintException extends VerificationException{
 	public ClassConstraintException(String message){
 		super (message);
 	}
+	
+	/**
+	 * Constructs a new ClassConstraintException with the specified error message and cause
+	 */
+	public ClassConstraintException(String message, Throwable initCause){
+		super(message, initCause);
+	}
 }

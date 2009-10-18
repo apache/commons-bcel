@@ -210,7 +210,7 @@ public final class Pass3aVerifier extends PassVerifier{
 		}
 	    } catch (ClassNotFoundException e) {
 		// FIXME: maybe not the best way to handle this
-		throw new AssertionViolatedException("Missing class: " + e.toString());
+		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 	    }
 	}
 
@@ -415,7 +415,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: maybe not the best way to handle this
-		throw new AssertionViolatedException("Missing class: " + e.toString());
+		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 	    }
 	}
 	
@@ -456,7 +456,7 @@ public final class Pass3aVerifier extends PassVerifier{
 			return Repository.lookupClass(myOwner.getClassName()).getMethods()[method_no].getCode().getMaxLocals();
 		    } catch (ClassNotFoundException e) {
 			// FIXME: maybe not the best way to handle this
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 		}
 
@@ -532,7 +532,7 @@ public final class Pass3aVerifier extends PassVerifier{
 				indexValid(o, o.getIndex()+1);
 			}
 			catch(StaticCodeInstructionOperandConstraintException e){
-				throw new AssertionViolatedException("OOPS: Does not BCEL handle that? LDC2_W operand has a problem.");
+				throw new AssertionViolatedException("OOPS: Does not BCEL handle that? LDC2_W operand has a problem.", e);
 			}
 		}
 
@@ -605,7 +605,7 @@ public final class Pass3aVerifier extends PassVerifier{
 			}
 		    } catch (ClassNotFoundException e) {
 			// FIXME: maybe not the best way to handle this
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 		}	
 
@@ -998,7 +998,7 @@ public final class Pass3aVerifier extends PassVerifier{
 			}
 		    } catch (ClassNotFoundException e) {
 			// FIXME: maybe not the best way to handle this
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 		}
 
@@ -1024,7 +1024,7 @@ public final class Pass3aVerifier extends PassVerifier{
 			}
 		    } catch (ClassNotFoundException e) {
 			// FIXME: maybe not the best way to handle this
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 		}
 
@@ -1065,7 +1065,7 @@ public final class Pass3aVerifier extends PassVerifier{
 			}
 		    } catch (ClassNotFoundException e) {
 			// FIXME: maybe not the best way to handle this
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 		}
 
@@ -1129,7 +1129,7 @@ public final class Pass3aVerifier extends PassVerifier{
 			
 		    } catch (ClassNotFoundException e) {
 			// FIXME: maybe not the best way to handle this
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 			
 		}
@@ -1161,7 +1161,7 @@ public final class Pass3aVerifier extends PassVerifier{
 		
 		    } catch (ClassNotFoundException e) {
 			// FIXME: maybe not the best way to handle this
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 		}
 
@@ -1194,7 +1194,7 @@ public final class Pass3aVerifier extends PassVerifier{
 					
 		    } catch (ClassNotFoundException e) {
 			// FIXME: maybe not the best way to handle this
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		    }
 		}
 

@@ -316,7 +316,7 @@ public final class Pass3bVerifier extends PassVerifier{
 			jc = Repository.lookupClass(myOwner.getClassName());
 		} catch (ClassNotFoundException e) {
 			// FIXME: maybe not the best way to handle this
-			throw new AssertionViolatedException("Missing class: " + e.toString());
+			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
 		}
 
 		ConstantPoolGen constantPoolGen = new ConstantPoolGen(jc.getConstantPool());
@@ -378,7 +378,7 @@ public final class Pass3bVerifier extends PassVerifier{
 			PrintWriter pw = new PrintWriter(sw);
 			re.printStackTrace(pw);
 
-			throw new AssertionViolatedException("Some RuntimeException occured while verify()ing class '"+jc.getClassName()+"', method '"+methods[method_no]+"'. Original RuntimeException's stack trace:\n---\n"+sw+"---\n");
+			throw new AssertionViolatedException("Some RuntimeException occured while verify()ing class '"+jc.getClassName()+"', method '"+methods[method_no]+"'. Original RuntimeException's stack trace:\n---\n"+sw+"---\n", re);
 		}
 		return VerificationResult.VR_OK;
 	}

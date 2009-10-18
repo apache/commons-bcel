@@ -47,6 +47,13 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
 		super(message); // Not that important
 		detailMessage = message;
 	}
+	/**
+	 * Constructs a new VerifierConstraintViolationException with the specified error message and cause
+	 */
+	VerifierConstraintViolatedException(String message, Throwable initCause){
+		super(message, initCause);
+		detailMessage = message;
+	}
 
 
 	/** Extends the error message with a string before ("pre") and after ("post") the
