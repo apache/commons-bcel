@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.AllocationInstruction;
@@ -202,6 +203,10 @@ class BCELFactory extends EmptyVisitor {
             embed = '"' + Utility.convertString(embed) + '"';
         } else if (value instanceof Character) {
             embed = "(char)0x" + Integer.toHexString(((Character) value).charValue());
+        } else if (value instanceof Float) {
+            embed += "f";
+        } else if (value instanceof Long) {
+            embed += "L";
         }
         _out.println("il.append(new PUSH(_cp, " + embed + "));");
     }
