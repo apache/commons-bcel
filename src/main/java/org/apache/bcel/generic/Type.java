@@ -18,6 +18,7 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.Utility;
@@ -308,15 +309,15 @@ public abstract class Type implements java.io.Serializable {
         return sb.toString();
     }
     
-    private static int size(int coded) {
+    static int size(int coded) {
     	return coded & 3;
     }
     
-    private static int consumed(int coded) {
+    static int consumed(int coded) {
     	return coded >> 2;
     }
     
-    private static int encode(int size, int consumed) {
+    static int encode(int size, int consumed) {
     	return consumed << 2 | size;
     }
     
