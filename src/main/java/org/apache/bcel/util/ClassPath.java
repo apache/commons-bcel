@@ -47,7 +47,12 @@ public class ClassPath implements Serializable {
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath();
     private PathEntry[] paths;
     private String class_path;
+    private ClassPath parent;
 
+    public ClassPath(ClassPath parent, String class_path) {
+        this(class_path);
+        this.parent = parent;
+    }
 
     /**
      * Search for classes in given path.
@@ -90,18 +95,24 @@ public class ClassPath implements Serializable {
     /** @return used class path string
      */
     public String toString() {
+        if (parent != null) {
+            return parent.toString() + File.pathSeparator + class_path;
+        }
         return class_path;
     }
 
-
     public int hashCode() {
+        if (parent != null) {
+            return class_path.hashCode() + parent.hashCode();            
+        }
         return class_path.hashCode();
     }
 
 
     public boolean equals( Object o ) {
         if (o instanceof ClassPath) {
-            return class_path.equals(((ClassPath) o).class_path);
+            ClassPath cp = (ClassPath)o;
+            return class_path.toString().equals(cp.toString());
         }
         return false;
     }
@@ -240,13 +251,36 @@ public class ClassPath implements Serializable {
      */
     public ClassFile getClassFile( String name, String suffix ) throws IOException {
         for (int i = 0; i < paths.length; i++) {
-            ClassFile cf;
-            if ((cf = paths[i].getClassFile(name, suffix)) != null) {
+            ClassFile cf = null;
+
+            if(parent != null) {
+                cf = parent.getClassFileInternal(name, suffix);
+            }
+            
+            if(cf == null) {
+                cf = getClassFileInternal(name,suffix);
+            }
+            
+            if(cf != null) {
                 return cf;
             }
         }
+
         throw new IOException("Couldn't find: " + name + suffix);
     }
+
+    private ClassFile getClassFileInternal(String name, String suffix) throws IOException {
+
+      for(int i=0; i < paths.length; i++) {
+          ClassFile cf = paths[i].getClassFile(name, suffix);
+          
+          if(cf != null) {
+              return cf;
+          }
+      }
+
+      return null;
+   }
 
 
     /**
