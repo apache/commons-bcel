@@ -56,6 +56,8 @@ public class ClassPath implements Serializable {
 
     /**
      * Search for classes in given path.
+     * 
+     * @param class_path
      */
     public ClassPath(String class_path) {
         this.class_path = class_path;
@@ -112,7 +114,7 @@ public class ClassPath implements Serializable {
     public boolean equals( Object o ) {
         if (o instanceof ClassPath) {
             ClassPath cp = (ClassPath)o;
-            return class_path.toString().equals(cp.toString());
+            return class_path.equals(cp.toString());
         }
         return false;
     }
