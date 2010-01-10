@@ -61,8 +61,9 @@ public class JSR extends JsrInstruction implements VariableLengthInstruction {
         position += offset; // Position may be shifted by preceding expansions
         if (Math.abs(i) >= (32767 - max_offset)) { // to large for short (estimate)
             opcode = org.apache.bcel.Constants.JSR_W;
+            short old_length = length;
             length = 5;
-            return 2; // 5 - 3
+            return length - old_length;
         }
         return 0;
     }
