@@ -17,6 +17,7 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -110,5 +111,16 @@ public abstract class ParameterAnnotations extends Attribute {
      */
     public final int getNumParameterAnnotation() {
         return num_parameters;
+    }
+    
+    public void dump(DataOutputStream dos) throws IOException
+    {
+        super.dump(dos);
+        dos.writeByte(parameter_annotation_table.length);
+
+        for (int i = 0; i < parameter_annotation_table.length; i++) {
+            parameter_annotation_table[i].dump(dos);
+        }
+
     }
 }

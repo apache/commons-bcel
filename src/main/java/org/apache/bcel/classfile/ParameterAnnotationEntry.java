@@ -17,6 +17,7 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
@@ -74,4 +75,12 @@ public class ParameterAnnotationEntry implements Node, Constants {
     public AnnotationEntry[] getAnnotationEntries() {
         return annotation_table;
     }
+    
+    public void dump(DataOutputStream dos) throws IOException {
+        dos.writeShort(annotation_table_length);
+        for(int i = 0; i < annotation_table_length; i++) {
+            annotation_table[i].dump(dos);
+        }
+    }
 }
+    
