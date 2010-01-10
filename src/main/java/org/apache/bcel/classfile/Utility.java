@@ -971,6 +971,7 @@ public abstract class Utility {
                 case 'J':
                     return Constants.T_LONG;
                 case 'L':
+                case 'T':
                     return Constants.T_REFERENCE;
                 case '[':
                     return Constants.T_ARRAY;
