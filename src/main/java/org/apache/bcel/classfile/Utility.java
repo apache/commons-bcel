@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.AnnotationEntryGen;
 import org.apache.bcel.generic.ConstantPoolGen;
@@ -123,6 +124,8 @@ public abstract class Utility {
 
 
     /**
+     * @param access_flags the class flags
+     * 
      * @return "class" or "interface", depending on the ACC_INTERFACE flag
      */
     public static final String classOrInterface( int access_flags ) {
@@ -182,6 +185,8 @@ public abstract class Utility {
      * @param  constant_pool Array of constants
      * @param  verbose be verbose, e.g. print constant pool index
      * @return String representation of byte code
+     * 
+     * @throws IOException if a failure from reading from the bytes argument occurs
      */
     public static final String codeToString( ByteSequence bytes, ConstantPool constant_pool,
             boolean verbose ) throws IOException {
@@ -516,6 +521,8 @@ public abstract class Utility {
      * @param  ret Return type of method
      * @param  argv Types of method arguments
      * @return Byte code representation of method signature
+     * 
+     * @throws ClassFormatException if the signature is for Void
      */
     public final static String methodTypeToSignature( String ret, String[] argv )
             throws ClassFormatException {
@@ -649,6 +656,8 @@ public abstract class Utility {
      * @param  signature    Method signature
      * @param  name         Method name
      * @param  access       Method access rights
+     * @param chopit
+     * @param vars
      * @return Java type declaration
      * @throws  ClassFormatException  
      */
@@ -715,7 +724,7 @@ public abstract class Utility {
     public static final String replace( String str, String old, String new_ ) {
         int index, old_index;
         try {
-            if ((index = str.indexOf(old)) != -1) { // `old' found in str
+            if (str.indexOf(old) != -1) { // `old' found in str
                 StringBuffer buf = new StringBuffer();
                 old_index = 0; // String start offset
                 // While we have something to replace
@@ -933,6 +942,8 @@ public abstract class Utility {
      * @param  signature in format described above
      * @return type of method signature
      * @see    Constants
+     * 
+     * @throws ClassFormatException if signature is not a method signature
      */
     public static final byte typeOfMethodSignature( String signature ) throws ClassFormatException {
         int index;
@@ -954,6 +965,8 @@ public abstract class Utility {
      * @param  signature in format described above
      * @return type of signature
      * @see    Constants
+     * 
+     * @throws ClassFormatException if signature isn't a known type
      */
     public static final byte typeOfSignature( String signature ) throws ClassFormatException {
         try {
@@ -1012,9 +1025,11 @@ public abstract class Utility {
     }
 
 
-    /** Convert bytes into hexidecimal string
+    /** Convert bytes into hexadecimal string
      *
-     * @return bytes as hexidecimal string, e.g. 00 FA 12 ...
+     * @param bytes an array of bytes to convert to hexadecimal
+     * 
+     * @return bytes as hexadecimal string, e.g. 00 FA 12 ...
      */
     public static final String toHexString( byte[] bytes ) {
         StringBuffer buf = new StringBuffer();
@@ -1130,7 +1145,10 @@ public abstract class Utility {
     }
 
 
-    /** @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _)
+    /** 
+     * @param ch the character to test if it's part of an identifier
+     * 
+     * @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _)
      */
     public static boolean isJavaIdentifierPart( char ch ) {
         return ((ch >= 'a') && (ch <= 'z')) || ((ch >= 'A') && (ch <= 'Z'))
@@ -1153,6 +1171,8 @@ public abstract class Utility {
      *
      * @param bytes the byte array to convert
      * @param compress use gzip to minimize string
+     * 
+     * @throws IOException if there's a gzip exception
      */
     public static String encode( byte[] bytes, boolean compress ) throws IOException {
         if (compress) {
@@ -1177,6 +1197,8 @@ public abstract class Utility {
      *
      * @param s the string to convert
      * @param uncompress use gzip to uncompress the stream of bytes
+     * 
+     * @throws IOException if there's a gzip exception
      */
     public static byte[] decode( String s, boolean uncompress ) throws IOException {
         char[] chars = s.toCharArray();
