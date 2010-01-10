@@ -138,7 +138,6 @@
         </snapshotRepository>
         <site>
             <id>website</id>
-            <!-- <url>scpexe://people.apache.org/www/jakarta.apache.org/bcel</url> -->
             <url>scpexe://people.apache.org/home/${USER}/public_html/websites/bcel</url>
         </site>
     </distributionManagement>
@@ -207,64 +206,36 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-            <!--
+
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-pmd-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jxr-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>taglist-maven-plugin</artifactId>
-                <version>2.0</version>
-                <configuration>
-                    <tags>
-                        <tag>TODO</tag>
-                        <tag>@todo</tag>
-                        <tag>FIXME</tag>
-                        <tag>@deprecated</tag>
-                    </tags>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>1.1.1</version>
+                <version>2.6.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <version>2.0-beta-3</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>changes-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.4.3</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+            <!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jardiff-maven-plugin</artifactId>
                 <configuration>
-                  <diffs>
-                    <diff>
+                  <artifacts>
+                    <artifact>
                       <version>5.2</version>
-                    </diff>
-                    <diff>
+                    </artifact>
+                    <artifact>
                       <groupId>bcel</groupId>
                       <version>5.1</version>
-                    </diff>
-                  </diffs>
+                    </artifact>
+                  </artifacts>
                 </configuration>
             </plugin>
             -->
