@@ -80,10 +80,8 @@ public class TABLESWITCH extends Select {
         match = new int[match_length];
         indices = new int[match_length];
         targets = new InstructionHandle[match_length];
-        for (int i = low; i <= high; i++) {
-            match[i - low] = i;
-        }
         for (int i = 0; i < match_length; i++) {
+            match[i] = low + i;
             indices[i] = bytes.readInt();
         }
     }
