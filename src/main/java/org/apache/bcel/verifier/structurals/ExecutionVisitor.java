@@ -19,6 +19,7 @@ package org.apache.bcel.verifier.structurals;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
@@ -904,6 +905,9 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 		if (c instanceof ConstantString){
 			stack().push(Type.STRING);
 		}
+		if (c instanceof ConstantClass){
+			stack().push(Type.CLASS);
+		}
 	}
 	/** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
 	public void visitLDC_W(LDC_W o){
@@ -916,6 +920,9 @@ public class ExecutionVisitor extends EmptyVisitor implements Visitor{
 		}
 		if (c instanceof ConstantString){
 			stack().push(Type.STRING);
+		}
+		if (c instanceof ConstantClass){
+			stack().push(Type.CLASS);
 		}
 	}
 	/** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
