@@ -98,7 +98,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 						+ as[1].getAnnotationType(), as[1].getAnnotationType()
 						.equals("LSimpleAnnotation;"));
 		ElementValuePair[] vals = as[0].getElementValuePairs();
-		ElementValuePair nvp = (ElementValuePair) vals[0];
+		ElementValuePair nvp = vals[0];
 		assertTrue(
 				"Name of element in SimpleAnnotation should be 'id' but it is "
 						+ nvp.getNameString(), nvp.getNameString().equals("id"));
@@ -237,7 +237,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 		assertTrue("That annotation should only have one value but has "
 				+ a.getValues().size(), a.getValues().size() == 1);
 		ElementValuePairGen nvp = (ElementValuePairGen) a.getValues().get(0);
-		ElementValueGen value = (ElementValueGen) nvp.getValue();
+		ElementValueGen value = nvp.getValue();
 		assertTrue("Value should be ArrayElementValueGen but is " + value,
 				value instanceof ArrayElementValueGen);
 		ArrayElementValueGen arrayValue = (ArrayElementValueGen) value;
@@ -269,9 +269,9 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 		AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
 		assertTrue("Expected one annotation but found " + annotations.length,
 				annotations.length == 1);
-		List l = annotations[0].getValues();
+		List<?> l = annotations[0].getValues();
 		boolean found = false;
-		for (Iterator iter = l.iterator(); iter.hasNext();)
+		for (Iterator<?> iter = l.iterator(); iter.hasNext();)
 		{
 			ElementValuePairGen element = (ElementValuePairGen) iter.next();
 			if (element.getNameString().equals("dval"))
@@ -564,7 +564,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 				ElementValueGen.PRIMITIVE_INT, cp, 4);
 		ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
 		ObjectType t = new ObjectType("SimpleAnnotation");
-		List elements = new ArrayList();
+		List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
 		elements.add(nvGen);
 		AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
 		return a;
@@ -577,7 +577,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 				ElementValueGen.STRING, cp, aFruit);
 		ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
 		ObjectType t = new ObjectType("SimpleStringAnnotation");
-		List elements = new ArrayList();
+		List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
 		elements.add(nvGen);
 		return new AnnotationEntryGen(t, elements, true, cp);
 	}
@@ -589,7 +589,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 		ArrayElementValueGen array = new ArrayElementValueGen(cp);
 		array.addElement(new AnnotationElementValueGen(a, cp));
 		ElementValuePairGen nvp = new ElementValuePairGen("value", array, cp);
-		List elements = new ArrayList();
+		List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
 		elements.add(nvp);
 		return new AnnotationEntryGen(new ObjectType("CombinedAnnotation"),
 				elements, true, cp);
@@ -601,7 +601,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 				ElementValueGen.PRIMITIVE_INT, cp, 4);
 		ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
 		ObjectType t = new ObjectType("SimpleAnnotation");
-		List elements = new ArrayList();
+		List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
 		elements.add(nvGen);
 		AnnotationEntryGen a = new AnnotationEntryGen(t, elements, false, cp);
 		return a;
