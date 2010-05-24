@@ -182,6 +182,13 @@ public class SyntheticRepository implements Repository {
         } catch (IOException e) {
             throw new ClassNotFoundException("Exception while looking for class " + className
                     + ": " + e.toString(), e);
+        } finally {
+            if (is != null){
+                try {
+                    is.close();
+                } catch (IOException e) {
+                }
+            }
         }
         throw new ClassNotFoundException("SyntheticRepository could not load " + className);
     }
