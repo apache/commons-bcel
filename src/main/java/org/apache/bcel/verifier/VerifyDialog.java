@@ -81,8 +81,8 @@ public class VerifyDialog extends javax.swing.JDialog {
             if (e.getSource() == VerifyDialog.this.getFlushButton()) {
                 connEtoC4(e);
             }
-        };
-    };
+        }
+    }
 
     /** Machine-generated. */
     private javax.swing.JButton ivjFlushButton = null;
@@ -476,7 +476,7 @@ public class VerifyDialog extends javax.swing.JDialog {
                         if (classes_to_verify == 0) {
                             System.exit(0);
                         }
-                    };
+                    }
                 });
                 aVerifyDialog.setVisible(true);
             } catch (Throwable exception) {

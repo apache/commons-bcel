@@ -182,7 +182,7 @@ class BCELFactory extends EmptyVisitor {
                 break;
             case Constants.MULTIANEWARRAY:
                 dim = ((MULTIANEWARRAY) i).getDimensions();
-                /* FALL THRU */
+                //$FALL-THROUGH$
             case Constants.ANEWARRAY:
             case Constants.NEWARRAY:
                 if (type instanceof ArrayType) {

@@ -203,12 +203,12 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 	private void _visitStackAccessor(Instruction o){
 		int consume = o.consumeStack(cpg); // Stack values are always consumed first; then produced.
 		if (consume > stack().slotsUsed()){
-			constraintViolated((Instruction) o, "Cannot consume "+consume+" stack slots: only "+stack().slotsUsed()+" slot(s) left on stack!\nStack:\n"+stack());
+			constraintViolated(o, "Cannot consume "+consume+" stack slots: only "+stack().slotsUsed()+" slot(s) left on stack!\nStack:\n"+stack());
 		}
 
-		int produce = o.produceStack(cpg) - ((Instruction) o).consumeStack(cpg); // Stack values are always consumed first; then produced.
+		int produce = o.produceStack(cpg) - o.consumeStack(cpg); // Stack values are always consumed first; then produced.
 		if ( produce + stack().slotsUsed() > stack().maxStack() ){
-			constraintViolated((Instruction) o, "Cannot produce "+produce+" stack slots: only "+(stack().maxStack()-stack().slotsUsed())+" free stack slot(s) left.\nStack:\n"+stack());
+			constraintViolated(o, "Cannot produce "+produce+" stack slots: only "+(stack().maxStack()-stack().slotsUsed())+" free stack slot(s) left.\nStack:\n"+stack());
 		}
 	}
 
@@ -282,7 +282,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 				Verifier v = VerifierFactory.getVerifier( name );
 				VerificationResult vr = v.doPass2();
 				if (vr.getStatus() != VerificationResult.VERIFIED_OK){
-					constraintViolated((Instruction) o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
+					constraintViolated(o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
 				}
 			}
 	 }

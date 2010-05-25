@@ -164,7 +164,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
             case IF_ICMPLT:
             case IF_ICMPNE:
             case JSR:
-                index = (int) (bytes.getIndex() + bytes.readShort() - 1);
+                index = (bytes.getIndex() + bytes.readShort() - 1);
                 buf.append("<A HREF=\"#code").append(method_number).append("@").append(index)
                         .append("\">").append(index).append("</A>");
                 break;
@@ -387,7 +387,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
                             .getLocalVariableTable();
                     for (int j = 0; j < vars.length; j++) {
                         int start = vars[j].getStartPC();
-                        int end = (int) (start + vars[j].getLength());
+                        int end = (start + vars[j].getLength());
                         goto_set.set(start);
                         goto_set.set(end);
                     }

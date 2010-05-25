@@ -52,7 +52,7 @@ public class AnnotationEntryGen
 		int l = in.length;
 		for (int i = 0; i < l; i++)
 		{
-			ElementValuePair nvp = (ElementValuePair) in[i];
+			ElementValuePair nvp = in[i];
 			out.add(new ElementValuePairGen(nvp, cpool, copyPoolEntries));
 		}
 		return out;

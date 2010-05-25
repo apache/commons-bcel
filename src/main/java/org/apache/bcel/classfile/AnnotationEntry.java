@@ -63,11 +63,6 @@ public class AnnotationEntry implements Node, Constants, Serializable {
         return annotationEntry;
     }
 
-    /**
-     * Construct object from file stream.
-     * 
-     * @param file Input stream
-     */
     public AnnotationEntry(int type_index, ConstantPool constant_pool, boolean isRuntimeVisible) {
         this.type_index = type_index;
         this.constant_pool = constant_pool;
