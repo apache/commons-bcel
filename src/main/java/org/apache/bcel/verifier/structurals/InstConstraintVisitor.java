@@ -465,7 +465,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bc
 			if (! (((ArrayType) arrayref).getElementType() instanceof ReferenceType)){
 				constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a ReferenceType but to an array of "+((ArrayType) arrayref).getElementType()+".");
 			}
-			if (! ((ReferenceType)value).isAssignmentCompatibleWith((ReferenceType) ((ArrayType) arrayref).getElementType())){
+			if (! ((ReferenceType)value).isAssignmentCompatibleWith(((ArrayType) arrayref).getElementType())){
 				constraintViolated(o, "The type of 'value' ('"+value+"') is not assignment compatible to the components of the array 'arrayref' refers to. ('"+((ArrayType) arrayref).getElementType()+"')");
 			}
 		}
