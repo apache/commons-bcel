@@ -366,6 +366,6 @@ public abstract class Type implements java.io.Serializable {
 
 	static int getReturnTypeSize(String signature) {
 		int index = signature.lastIndexOf(')') + 1;
-        return getTypeSize(signature.substring(index));
+		return Type.size(getTypeSize(signature.substring(index)));
 	}
 }
