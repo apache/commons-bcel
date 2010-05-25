@@ -154,7 +154,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
         return createInvoke(m.class_name, m.name, m.result_type, m.arg_types, kind);
     }
 
-    private static MethodObject[] append_mos = {
+    private static final MethodObject[] append_mos = {
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.STRING
             }, Constants.ACC_PUBLIC),

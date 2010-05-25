@@ -49,7 +49,7 @@ import org.apache.bcel.classfile.JavaClass;
 public class SyntheticRepository implements Repository {
 
     //private static final String DEFAULT_PATH = ClassPath.getClassPath();
-    private static Map _instances = new HashMap(); // CLASSPATH X REPOSITORY
+    private static final Map _instances = new HashMap(); // CLASSPATH X REPOSITORY
     private ClassPath _path = null;
     private Map _loadedClasses = new HashMap(); // CLASSNAME X JAVACLASS
 

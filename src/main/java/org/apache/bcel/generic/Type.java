@@ -144,7 +144,7 @@ public abstract class Type implements java.io.Serializable {
         return buf.toString();
     }
 
-    private static ThreadLocal consumed_chars = new ThreadLocal() {
+    private static final ThreadLocal consumed_chars = new ThreadLocal() {
 
         protected Object initialValue() {
             return new Integer(0);

@@ -53,7 +53,7 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  */
 public class InstConstraintVisitor extends EmptyVisitor implements org.apache.bcel.generic.Visitor{
 
-	private static ObjectType GENERIC_ARRAY = new ObjectType("org.apache.bcel.verifier.structurals.GenericArray");
+	private static final ObjectType GENERIC_ARRAY = new ObjectType("org.apache.bcel.verifier.structurals.GenericArray");
 
 	/**
 	 * The constructor. Constructs a new instance of this class.

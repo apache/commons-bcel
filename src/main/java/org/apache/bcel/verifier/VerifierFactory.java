@@ -38,11 +38,11 @@ public class VerifierFactory {
     /**
      * The HashMap that holds the data about the already-constructed Verifier instances.
      */
-    private static Map hashMap = new HashMap();
+    private static final Map hashMap = new HashMap();
     /**
      * The VerifierFactoryObserver instances that observe the VerifierFactory.
      */
-    private static List observers = new Vector();
+    private static final List observers = new Vector();
 
 
     /**
