@@ -114,7 +114,6 @@ public class LocalVariableTable extends Attribute {
 
 
     /** 
-     * @return first matching variable using index
      * 
      * @param index the variable slot
      * 
@@ -134,7 +133,6 @@ public class LocalVariableTable extends Attribute {
 
 
     /** 
-     * @return matching variable using index when variable is used at supplied pc
      * 
      * @param index the variable slot
      * @param pc the current pc that this variable is alive
