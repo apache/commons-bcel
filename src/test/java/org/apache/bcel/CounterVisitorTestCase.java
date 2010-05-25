@@ -22,7 +22,8 @@ import org.apache.bcel.classfile.JavaClass;
 
 public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase
 {
-	protected JavaClass getTestClass() throws ClassNotFoundException
+	@Override
+    protected JavaClass getTestClass() throws ClassNotFoundException
 	{
 		return getTestClass("org.apache.bcel.data.MarkedType");
 	}

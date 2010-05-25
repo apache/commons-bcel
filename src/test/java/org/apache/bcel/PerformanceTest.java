@@ -19,11 +19,9 @@
 package org.apache.bcel;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
-import java.util.Locale;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -76,7 +74,7 @@ public final class PerformanceTest extends TestCase {
 		String javaHome = System.getProperty("java.home");
 
         JarFile jar = new JarFile(javaHome + "/lib/dt.jar");
-		Enumeration en = jar.entries();
+		Enumeration<?> en = jar.entries();
 		int i = 0;
 
 		while (en.hasMoreElements()) {

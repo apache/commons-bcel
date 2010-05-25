@@ -28,7 +28,8 @@ public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
 
 	private CounterVisitor visitor = null;
 
-	public void setUp() throws ClassNotFoundException
+	@Override
+    public void setUp() throws ClassNotFoundException
 	{
 		visitor = new CounterVisitor();
 		new DescendingVisitor(getTestClass(), getVisitor()).visit();

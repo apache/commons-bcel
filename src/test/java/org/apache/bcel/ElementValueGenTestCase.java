@@ -104,10 +104,10 @@ public class ElementValueGenTestCase extends AbstractTestCase
 		ClassGen cg = createClassGen("HelloWorld");
 		ConstantPoolGen cp = cg.getConstantPool();
 		SimpleElementValueGen evg = new SimpleElementValueGen(
-				ElementValueGen.PRIMITIVE_CHAR, cp, (char) 't');
+				ElementValueGen.PRIMITIVE_CHAR, cp, 't');
 		// Creation of an element like that should leave a new entry in the
 		// cpool
-		int idx = cp.lookupInteger((char) 't');
+		int idx = cp.lookupInteger('t');
 		assertTrue("Should have the same index in the constantpool but "
 				+ evg.getIndex() + "!=" + idx, evg.getIndex() == idx);
 		checkSerialize(evg, cp);

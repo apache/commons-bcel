@@ -93,7 +93,7 @@ public abstract class AbstractTestCase extends TestCase
 	protected Attribute[] findAttribute(String name, JavaClass clazz)
 	{
 		Attribute[] all = clazz.getAttributes();
-		List chosenAttrsList = new ArrayList();
+		List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
 		for (int i = 0; i < all.length; i++)
 		{
 			if (verbose)
@@ -101,12 +101,12 @@ public abstract class AbstractTestCase extends TestCase
 			if (all[i].getName().equals(name))
 				chosenAttrsList.add(all[i]);
 		}
-		return (Attribute[]) chosenAttrsList.toArray(new Attribute[] {});
+		return chosenAttrsList.toArray(new Attribute[] {});
 	}
 
 	protected Attribute findAttribute(String name, Attribute[] all)
 	{
-		List chosenAttrsList = new ArrayList();
+		List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
 		for (int i = 0; i < all.length; i++)
 		{
 			if (verbose)
@@ -116,7 +116,7 @@ public abstract class AbstractTestCase extends TestCase
 		}
 		assertTrue("Should be one match: " + chosenAttrsList.size(),
 				chosenAttrsList.size() == 1);
-		return (Attribute) chosenAttrsList.get(0);
+		return chosenAttrsList.get(0);
 	}
 
 	protected String dumpAttributes(Attribute[] as)
@@ -171,7 +171,7 @@ public abstract class AbstractTestCase extends TestCase
 				ElementValueGen.STRING, cp, aFruit);
 		ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
 		ObjectType t = new ObjectType("SimpleStringAnnotation");
-		List elements = new ArrayList();
+		List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
 		elements.add(nvGen);
 		return new AnnotationEntryGen(t, elements, visibility, cp);
 	}

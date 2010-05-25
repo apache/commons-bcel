@@ -20,7 +20,6 @@ package org.apache.bcel;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -56,7 +55,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
 		File tfile = createTestdataFile("AnnotatedFields.class");
 		clazz.dump(tfile);
 		SyntheticRepository repos2 = createRepos(".");
-		JavaClass clazz2 = repos2.loadClass("AnnotatedFields");
+		repos2.loadClass("AnnotatedFields");
 		checkAnnotatedField(clazz, "i", "Lorg/apache/bcel/data/SimpleAnnotation;", "id", "1");
 		checkAnnotatedField(clazz, "s", "Lorg/apache/bcel/data/SimpleAnnotation;", "id", "2");
 		assertTrue(tfile.delete());
@@ -67,7 +66,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
 	 * reload it and everything is correct.
 	 */
 	public void testFieldAnnotationModification()
-			throws ClassNotFoundException, IOException
+			throws ClassNotFoundException
 	{
 		boolean dbg = false;
 		JavaClass clazz = getTestClass("org.apache.bcel.data.AnnotatedFields");
@@ -132,7 +131,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
 				.equals(name));
 		assertTrue("Expected AnnotationEntry to have one element but it had "
 				+ a.getElementValuePairs().length, a.getElementValuePairs().length == 1);
-		ElementValuePair envp = (ElementValuePair) a.getElementValuePairs()[0];
+		ElementValuePair envp = a.getElementValuePairs()[0];
 		assertTrue("Expected element name " + elementname + " but was "
 				+ envp.getNameString(), elementname
 				.equals(envp.getNameString()));

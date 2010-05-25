@@ -66,7 +66,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
 				"Should include string 'id=4' but says: " + nvGen.toString(),
 				nvGen.toString().indexOf("id=4") != -1);
 		ObjectType t = new ObjectType("SimpleAnnotation");
-		List elements = new ArrayList();
+		List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
 		elements.add(nvGen);
 		// Build an annotation of type 'SimpleAnnotation' with 'id=4' as the
 		// only value :)
@@ -91,12 +91,12 @@ public class AnnotationGenTestCase extends AbstractTestCase
 				"Should include string 'id=4' but says: " + nvGen.toString(),
 				nvGen.toString().indexOf("id=4") != -1);
 		ObjectType t = new ObjectType("SimpleAnnotation");
-		List elements = new ArrayList();
+		List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
 		elements.add(nvGen);
 		// Build a RV annotation of type 'SimpleAnnotation' with 'id=4' as the
 		// only value :)
 		AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
-		Vector v = new Vector();
+		Vector<AnnotationEntryGen> v = new Vector<AnnotationEntryGen>();
 		v.add(a);
 		Attribute[] attributes = Utility.getAnnotationAttributes(cp, v);
 		boolean foundRV = false;
@@ -113,7 +113,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
 		// Build a RIV annotation of type 'SimpleAnnotation' with 'id=4' as the
 		// only value :)
 		AnnotationEntryGen a2 = new AnnotationEntryGen(t, elements, false, cp);
-		Vector v2 = new Vector();
+		Vector<AnnotationEntryGen> v2 = new Vector<AnnotationEntryGen>();
 		v2.add(a2);
 		Attribute[] attributes2 = Utility.getAnnotationAttributes(cp, v2);
 		boolean foundRIV = false;

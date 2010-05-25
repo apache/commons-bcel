@@ -42,7 +42,8 @@ public class NanoTimer {
 	/**
 	 * May ony be called after stop has been called as many times as start.
 	 */
-	public String toString() {
+	@Override
+    public String toString() {
 		return ((double) (time) / 1000000000) + " s";
 	}
 
