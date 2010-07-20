@@ -119,7 +119,19 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
         }
     }
 
-
+    /**
+     * 
+     * @param cp
+     * @param value
+     */
+    public PUSH(ConstantPoolGen cp, ObjectType value) {
+        if (value == null) {
+            instruction = ACONST_NULL;
+        } else {
+            instruction = new LDC(cp.addClass(value));
+        }
+    }
+    
     /**
      * @param cp Constant pool
      * @param value to be pushed 
@@ -173,7 +185,8 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     /**
      * @return mnemonic for instruction
      */
-    public String toString() {
+    @Override
+	public String toString() {
         return instruction.toString() + " (PUSH)";
     }
 }

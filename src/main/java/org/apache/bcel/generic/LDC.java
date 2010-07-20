@@ -19,6 +19,7 @@ package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import org.apache.bcel.util.ByteSequence;
 
 /** 
@@ -62,7 +63,8 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
-    public void dump( DataOutputStream out ) throws IOException {
+    @Override
+	public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
         if (length == 2) {
             out.writeByte(index);
@@ -75,7 +77,8 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     /**
      * Set the index to constant pool and adjust size.
      */
-    public final void setIndex( int index ) {
+    @Override
+	public final void setIndex( int index ) {
         super.setIndex(index);
         setSize();
     }
@@ -84,7 +87,8 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     /**
      * Read needed data (e.g. index) from file.
      */
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    @Override
+	protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         length = 2;
         index = bytes.readUnsignedByte();
     }
@@ -102,14 +106,17 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
             case org.apache.bcel.Constants.CONSTANT_Integer:
                 return new Integer(((org.apache.bcel.classfile.ConstantInteger) c).getBytes());
             case org.apache.bcel.Constants.CONSTANT_Class:
-                return c;
+            	int nameIndex = ((org.apache.bcel.classfile.ConstantClass) c).getNameIndex();
+            	c = cpg.getConstantPool().getConstant(nameIndex);
+            	return new ObjectType(((org.apache.bcel.classfile.ConstantUtf8) c).getBytes());
             default: // Never reached
                 throw new RuntimeException("Unknown or invalid constant type at " + index);
         }
     }
 
 
-    public Type getType( ConstantPoolGen cpg ) {
+    @Override
+	public Type getType( ConstantPoolGen cpg ) {
         switch (cpg.getConstantPool().getConstant(index).getTag()) {
             case org.apache.bcel.Constants.CONSTANT_String:
                 return Type.STRING;
@@ -138,7 +145,8 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      *
      * @param v Visitor object
      */
-    public void accept( Visitor v ) {
+    @Override
+	public void accept( Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);
         v.visitExceptionThrower(this);
