@@ -63,8 +63,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
-    @Override
-	public void dump( DataOutputStream out ) throws IOException {
+    public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
         if (length == 2) {
             out.writeByte(index);
@@ -77,8 +76,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     /**
      * Set the index to constant pool and adjust size.
      */
-    @Override
-	public final void setIndex( int index ) {
+    public final void setIndex( int index ) {
         super.setIndex(index);
         setSize();
     }
@@ -87,8 +85,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     /**
      * Read needed data (e.g. index) from file.
      */
-    @Override
-	protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         length = 2;
         index = bytes.readUnsignedByte();
     }
@@ -115,8 +112,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     }
 
 
-    @Override
-	public Type getType( ConstantPoolGen cpg ) {
+    public Type getType( ConstantPoolGen cpg ) {
         switch (cpg.getConstantPool().getConstant(index).getTag()) {
             case org.apache.bcel.Constants.CONSTANT_String:
                 return Type.STRING;
@@ -145,8 +141,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      *
      * @param v Visitor object
      */
-    @Override
-	public void accept( Visitor v ) {
+    public void accept( Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);
         v.visitExceptionThrower(this);
