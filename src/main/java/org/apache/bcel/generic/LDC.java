@@ -30,8 +30,7 @@ import org.apache.bcel.util.ByteSequence;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class LDC extends CPInstruction implements PushInstruction, ExceptionThrower,
-        TypedInstruction {
+public class LDC extends CPInstruction implements PushInstruction, ExceptionThrower {
 
     /**
      * Empty constructor needed for the Class.newInstance() statement in

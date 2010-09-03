@@ -29,7 +29,7 @@ import org.apache.bcel.classfile.ConstantPool;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class InvokeInstruction extends FieldOrMethod implements ExceptionThrower,
-        TypedInstruction, StackConsumer, StackProducer {
+        StackConsumer, StackProducer {
 
     /**
      * Empty constructor needed for the Class.newInstance() statement in

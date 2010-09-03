@@ -25,7 +25,7 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class FCONST extends Instruction implements ConstantPushInstruction, TypedInstruction {
+public class FCONST extends Instruction implements ConstantPushInstruction {
 
     private float value;
 

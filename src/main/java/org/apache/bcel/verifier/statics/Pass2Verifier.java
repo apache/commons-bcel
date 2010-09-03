@@ -311,7 +311,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
    *
    * @see #constant_pool_entries_satisfy_static_constraints()
 	 */
-	private class CPESSC_Visitor extends org.apache.bcel.classfile.EmptyVisitor implements Visitor{
+	private class CPESSC_Visitor extends org.apache.bcel.classfile.EmptyVisitor{
 		private Class CONST_Class;
 		/*
         private Class CONST_Fieldref;
@@ -1184,7 +1184,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
    * @see #constant_pool_entries_satisfy_static_constraints()
 	 * @see org.apache.bcel.classfile.ConstantCP
 	 */
-	private class FAMRAV_Visitor extends EmptyVisitor implements Visitor{
+	private class FAMRAV_Visitor extends EmptyVisitor{
 		private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work.
 		private FAMRAV_Visitor(JavaClass _jc){
 			cp = _jc.getConstantPool();

@@ -25,7 +25,7 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class LDC2_W extends CPInstruction implements PushInstruction, TypedInstruction {
+public class LDC2_W extends CPInstruction implements PushInstruction {
 
     /**
      * Empty constructor needed for the Class.newInstance() statement in

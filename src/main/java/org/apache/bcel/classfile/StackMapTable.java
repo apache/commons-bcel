@@ -37,7 +37,7 @@ import org.apache.bcel.Constants;
  * @see     StackMapEntry
  * @see     StackMapType
  */
-public final class StackMapTable extends Attribute implements Node {
+public final class StackMapTable extends Attribute {
 
     private int map_length;
     private StackMapTableEntry[] map; // Table of stack map entries

@@ -56,7 +56,7 @@ import org.apache.bcel.generic.*;
  * @see #visitDSTORE(DSTORE o)
  * @see InstConstraintVisitor
  */
-public class ExecutionVisitor extends EmptyVisitor implements Visitor{
+public class ExecutionVisitor extends EmptyVisitor{
 
 	/**
 	 * The executionframe we're operating on.

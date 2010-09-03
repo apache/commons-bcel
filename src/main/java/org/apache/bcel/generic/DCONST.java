@@ -25,7 +25,7 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class DCONST extends Instruction implements ConstantPushInstruction, TypedInstruction {
+public class DCONST extends Instruction implements ConstantPushInstruction {
 
     private double value;
 

@@ -25,7 +25,7 @@ import org.apache.bcel.classfile.ConstantPool;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public abstract class FieldInstruction extends FieldOrMethod implements TypedInstruction {
+public abstract class FieldInstruction extends FieldOrMethod {
 
     /**
      * Empty constructor needed for the Class.newInstance() statement in
