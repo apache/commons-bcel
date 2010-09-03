@@ -1669,7 +1669,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 			Verifier v = VerifierFactory.getVerifier( name );
 			VerificationResult vr = v.doPass2();
 			if (vr.getStatus() != VerificationResult.VERIFIED_OK){
-				constraintViolated((Instruction) o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
+				constraintViolated(o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
 			}
 		}
 
@@ -1755,7 +1755,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 			Verifier v = VerifierFactory.getVerifier( name );
 			VerificationResult vr = v.doPass2();
 			if (vr.getStatus() != VerificationResult.VERIFIED_OK){
-				constraintViolated((Instruction) o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
+				constraintViolated(o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
 			}
 		}
 
@@ -1842,7 +1842,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 			Verifier v = VerifierFactory.getVerifier( name );
 			VerificationResult vr = v.doPass2();
 			if (vr.getStatus() != VerificationResult.VERIFIED_OK){
-				constraintViolated((Instruction) o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
+				constraintViolated(o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
 			}
 		}
 
@@ -1893,7 +1893,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 			Verifier v = VerifierFactory.getVerifier( name );
 			VerificationResult vr = v.doPass2();
 			if (vr.getStatus() != VerificationResult.VERIFIED_OK){
-				constraintViolated((Instruction) o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
+				constraintViolated(o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
 			}
 		}
 
