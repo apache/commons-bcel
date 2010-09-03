@@ -139,15 +139,13 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
         Type result_type;
         String class_name;
         String name;
-        int access;
 
 
-        MethodObject(String c, String n, Type r, Type[] a, int acc) {
+        MethodObject(String c, String n, Type r, Type[] a) {
             class_name = c;
             name = n;
             result_type = r;
             arg_types = a;
-            access = acc;
         }
     }
 
@@ -159,38 +157,38 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     private static final MethodObject[] append_mos = {
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.STRING
-            }, Constants.ACC_PUBLIC),
+            }),
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.OBJECT
-            }, Constants.ACC_PUBLIC),
+            }),
             null,
             null, // indices 2, 3
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.BOOLEAN
-            }, Constants.ACC_PUBLIC),
+            }),
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.CHAR
-            }, Constants.ACC_PUBLIC),
+            }),
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.FLOAT
-            }, Constants.ACC_PUBLIC),
+            }),
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.DOUBLE
-            }, Constants.ACC_PUBLIC),
+            }),
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.INT
-            }, Constants.ACC_PUBLIC),
+            }),
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, // No append(byte)
                     new Type[] {
                         Type.INT
-                    }, Constants.ACC_PUBLIC),
+                    }),
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, // No append(short)
                     new Type[] {
                         Type.INT
-                    }, Constants.ACC_PUBLIC),
+                    }),
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.LONG
-            }, Constants.ACC_PUBLIC)
+            })
     };
 
 
