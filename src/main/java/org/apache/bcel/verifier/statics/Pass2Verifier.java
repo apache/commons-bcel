@@ -60,7 +60,6 @@ import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
-import org.apache.bcel.classfile.Visitor;
 import org.apache.bcel.generic.ArrayType;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.Type;

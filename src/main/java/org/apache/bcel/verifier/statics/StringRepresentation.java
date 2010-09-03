@@ -52,7 +52,6 @@ import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
 import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
-import org.apache.bcel.classfile.Visitor;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 
 /**
