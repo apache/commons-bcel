@@ -132,18 +132,8 @@ public final class Signature extends Attribute {
         }
 
 
-        final int mark() {
-            return pos;
-        }
-
-
         final String getData() {
             return new String(buf);
-        }
-
-
-        final void reset( int p ) {
-            pos = p;
         }
 
 

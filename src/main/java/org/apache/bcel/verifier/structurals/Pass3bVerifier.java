@@ -88,9 +88,6 @@ public final class Pass3bVerifier extends PassVerifier{
 		public boolean isEmpty(){
 			return ics.isEmpty();
 		}
-		public void remove(){
-			this.remove(0);
-		}
 		public void remove(int i){
 			ics.remove(i);
 			ecs.remove(i);
