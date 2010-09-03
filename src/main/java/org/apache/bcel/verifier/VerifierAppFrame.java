@@ -23,6 +23,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -148,7 +149,7 @@ public class VerifierAppFrame extends JFrame {
         messagesTextPane.setEditable(false);
         newFileMenuItem.setText("New...");
         newFileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(78,
-                java.awt.event.KeyEvent.CTRL_MASK, true));
+                InputEvent.CTRL_MASK, true));
         newFileMenuItem.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed( ActionEvent e ) {
