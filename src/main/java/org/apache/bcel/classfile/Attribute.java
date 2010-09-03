@@ -50,7 +50,9 @@ import org.apache.bcel.classfile.ConstantUtf8;
  */
 public abstract class Attribute implements Cloneable, Node, Serializable
 {
-	protected int name_index; // Points to attribute name in constant pool
+	private static final long serialVersionUID = -1707826820310002955L;
+
+    protected int name_index; // Points to attribute name in constant pool
 
 	protected int length; // Content length of attribute field
 

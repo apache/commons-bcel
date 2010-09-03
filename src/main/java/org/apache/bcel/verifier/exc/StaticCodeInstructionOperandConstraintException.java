@@ -32,7 +32,9 @@ package org.apache.bcel.verifier.exc;
  * @author Enver Haase
  */
 public class StaticCodeInstructionOperandConstraintException extends StaticCodeConstraintException{
-	public StaticCodeInstructionOperandConstraintException(String message){
+	private static final long serialVersionUID = 4780787099381933487L;
+
+    public StaticCodeInstructionOperandConstraintException(String message){
 		super(message);
 	}
 }

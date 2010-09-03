@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class IRETURN extends ReturnInstruction {
 
+    private static final long serialVersionUID = 4067606299818510584L;
+
+
     /** Return int from method
      */
     public IRETURN() {

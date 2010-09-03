@@ -30,6 +30,7 @@ import org.apache.bcel.classfile.LineNumber;
  */
 public class LineNumberGen implements InstructionTargeter, Cloneable, java.io.Serializable {
 
+    private static final long serialVersionUID = 4939965573936108738L;
     private InstructionHandle ih;
     private int src_line;
 

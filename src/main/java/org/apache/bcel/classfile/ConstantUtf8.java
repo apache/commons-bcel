@@ -34,6 +34,7 @@ import org.apache.bcel.Constants;
  */
 public final class ConstantUtf8 extends Constant {
 
+    private static final long serialVersionUID = -8709101585611518985L;
     private String bytes;
 
 

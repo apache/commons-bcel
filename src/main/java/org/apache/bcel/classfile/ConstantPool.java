@@ -38,6 +38,7 @@ import org.apache.bcel.Constants;
  */
 public class ConstantPool implements Cloneable, Node, Serializable {
 
+    private static final long serialVersionUID = -9093478476423540196L;
     private int constant_pool_count;
     private Constant[] constant_pool;
 

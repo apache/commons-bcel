@@ -31,6 +31,9 @@ import org.apache.bcel.Constants;
  */
 public class RuntimeInvisibleParameterAnnotations extends ParameterAnnotations {
 
+    private static final long serialVersionUID = 270153155050617200L;
+
+
     /**
      * @param name_index Index pointing to the name <em>Code</em>
      * @param length Content length in bytes

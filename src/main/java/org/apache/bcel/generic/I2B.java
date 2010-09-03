@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class I2B extends ConversionInstruction {
 
+    private static final long serialVersionUID = -260969101469366410L;
+
+
     /** Convert int to byte
      */
     public I2B() {

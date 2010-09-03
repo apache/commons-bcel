@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class DRETURN extends ReturnInstruction {
 
+    private static final long serialVersionUID = 7442064109402271402L;
+
+
     /** Return double from method
      */
     public DRETURN() {

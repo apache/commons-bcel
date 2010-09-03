@@ -28,6 +28,9 @@ import java.io.IOException;
  */
 public class JSR extends JsrInstruction implements VariableLengthInstruction {
 
+    private static final long serialVersionUID = 7425681395340093184L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

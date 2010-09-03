@@ -35,6 +35,7 @@ import org.apache.bcel.util.ByteSequence;
 public abstract class Select extends BranchInstruction implements VariableLengthInstruction,
         StackProducer {
 
+    private static final long serialVersionUID = 2806771744559217250L;
     protected int[] match; // matches, i.e., case 1: ...
     protected int[] indices; // target offsets
     protected InstructionHandle[] targets; // target objects in instruction list

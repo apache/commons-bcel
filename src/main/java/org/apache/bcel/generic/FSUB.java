@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class FSUB extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = 8403880233375858501L;
+
+
     /** Substract floats
      */
     public FSUB() {

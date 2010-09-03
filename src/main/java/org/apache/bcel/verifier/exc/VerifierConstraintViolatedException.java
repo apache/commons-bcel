@@ -33,7 +33,8 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
 	// /** The name of the offending class that did not pass the verifier. */
 	// String name_of_offending_class;
 
-	/** The specified error message. */
+	private static final long serialVersionUID = 2946136970490179465L;
+    /** The specified error message. */
 	private String detailMessage;
 	/**
 	 * Constructs a new VerifierConstraintViolatedException with null as its error message string.

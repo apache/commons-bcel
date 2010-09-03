@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class LCMP extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
+    private static final long serialVersionUID = 2981727810276161294L;
+
+
     public LCMP() {
         super(org.apache.bcel.Constants.LCMP, (short) 1);
     }

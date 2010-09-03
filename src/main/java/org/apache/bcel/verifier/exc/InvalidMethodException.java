@@ -26,7 +26,9 @@ package org.apache.bcel.verifier.exc;
  */
 public class InvalidMethodException extends RuntimeException{
 	
-	/** Constructs an InvalidMethodException with the specified detail message. */
+	private static final long serialVersionUID = -7060302743724808051L;
+
+    /** Constructs an InvalidMethodException with the specified detail message. */
 	public InvalidMethodException(String message){
 		super(message);
 	}

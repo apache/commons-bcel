@@ -44,6 +44,7 @@ import org.apache.bcel.classfile.Utility;
  */
 public class InstructionHandle implements java.io.Serializable {
 
+    private static final long serialVersionUID = -3585254135692924106L;
     InstructionHandle next, prev; // Will be set from the outside
     Instruction instruction;
     protected int i_position = -1; // byte code offset of instruction

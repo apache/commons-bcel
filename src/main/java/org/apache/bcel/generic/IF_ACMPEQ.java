@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class IF_ACMPEQ extends IfInstruction {
 
+    private static final long serialVersionUID = -4528733406576671849L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

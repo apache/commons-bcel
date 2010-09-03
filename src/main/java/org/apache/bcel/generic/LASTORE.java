@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class LASTORE extends ArrayInstruction implements StackConsumer {
 
+    private static final long serialVersionUID = -6758326777570451990L;
+
+
     /** Store long into array
      */
     public LASTORE() {

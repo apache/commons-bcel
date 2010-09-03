@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class IADD extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = 8749750216946526117L;
+
+
     /** Add ints
      */
     public IADD() {

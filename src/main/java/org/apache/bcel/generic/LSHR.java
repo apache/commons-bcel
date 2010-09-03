@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class LSHR extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = -6376870568784516963L;
+
+
     public LSHR() {
         super(org.apache.bcel.Constants.LSHR);
     }

@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class LAND extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = 2429077463161192057L;
+
+
     public LAND() {
         super(org.apache.bcel.Constants.LAND);
     }

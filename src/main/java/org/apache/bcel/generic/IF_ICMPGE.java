@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class IF_ICMPGE extends IfInstruction {
 
+    private static final long serialVersionUID = -1887574519712008723L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

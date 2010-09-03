@@ -30,6 +30,9 @@ import org.apache.bcel.ExceptionConstants;
  */
 public class INVOKESTATIC extends InvokeInstruction {
 
+    private static final long serialVersionUID = -2160020248508943620L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

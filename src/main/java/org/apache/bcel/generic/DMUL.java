@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class DMUL extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = 7491480641611951432L;
+
+
     /** Multiply doubles
      */
     public DMUL() {

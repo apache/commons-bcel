@@ -36,6 +36,7 @@ import org.apache.bcel.Constants;
  */
 public final class ExceptionTable extends Attribute {
 
+    private static final long serialVersionUID = 2045358830660883220L;
     private int number_of_exceptions; // Table of indices into
     private int[] exception_index_table; // constant pool
 

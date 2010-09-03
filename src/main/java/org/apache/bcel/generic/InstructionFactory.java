@@ -31,7 +31,9 @@ import org.apache.bcel.Constants;
  */
 public class InstructionFactory implements InstructionConstants, java.io.Serializable {
 
-	private static final String[] short_names = {
+	private static final long serialVersionUID = -1210011499635580258L;
+
+    private static final String[] short_names = {
             "C", "F", "D", "B", "S", "I", "L"
     };
 

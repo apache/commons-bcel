@@ -33,6 +33,7 @@ import org.apache.bcel.util.ByteSequence;
  */
 public final class INVOKEINTERFACE extends InvokeInstruction {
 
+    private static final long serialVersionUID = 8198753714085379482L;
     private int nargs; // Number of arguments on stack (number of stack slots), called "count" in vmspec2
 
 

@@ -27,6 +27,7 @@ package org.apache.bcel.generic;
  */
 public class ICONST extends Instruction implements ConstantPushInstruction {
 
+    private static final long serialVersionUID = -174595933747784635L;
     private int value;
 
 

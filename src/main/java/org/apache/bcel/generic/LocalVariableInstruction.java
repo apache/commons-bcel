@@ -31,6 +31,7 @@ import org.apache.bcel.util.ByteSequence;
 public abstract class LocalVariableInstruction extends Instruction implements TypedInstruction,
         IndexedInstruction {
 
+    private static final long serialVersionUID = 8322269736316122743L;
     protected int n = -1; // index of referenced variable
     private short c_tag = -1; // compact version, such as ILOAD_0
     private short canon_tag = -1; // canonical tag such as ILOAD

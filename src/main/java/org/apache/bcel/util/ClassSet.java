@@ -33,6 +33,7 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class ClassSet implements java.io.Serializable {
 
+    private static final long serialVersionUID = -7476907380350035254L;
     private Map _map = new HashMap();
 
 

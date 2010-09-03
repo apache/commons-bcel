@@ -26,7 +26,8 @@ package org.apache.bcel.verifier.exc;
  * @author Enver Haase
  */
 public final class AssertionViolatedException extends RuntimeException{
-	/** The error message. */
+	private static final long serialVersionUID = -129822266349567409L;
+    /** The error message. */
 	private String detailMessage;
 	/** Constructs a new AssertionViolatedException with null as its error message string. */
 	public AssertionViolatedException(){

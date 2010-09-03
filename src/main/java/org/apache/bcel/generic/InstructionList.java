@@ -53,6 +53,7 @@ import org.apache.bcel.util.ByteSequence;
  */
 public class InstructionList implements Serializable {
 
+    private static final long serialVersionUID = 2651389055345707857L;
     private InstructionHandle start = null, end = null;
     private int length = 0; // number of elements in list
     private int[] byte_positions; // byte code offsets corresponding to instructions

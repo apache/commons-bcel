@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class DDIV extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = -2241740228269641540L;
+
+
     /** Divide doubles
      */
     public DDIV() {

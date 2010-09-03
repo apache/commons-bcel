@@ -36,6 +36,7 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class VerifyDialog extends javax.swing.JDialog {
 
+    private static final long serialVersionUID = -6374807677043142313L;
     /** Machine-generated. */
     private javax.swing.JPanel ivjJDialogContentPane = null;
     /** Machine-generated. */

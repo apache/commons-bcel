@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class DNEG extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = -8860107731099493429L;
+
+
     public DNEG() {
         super(org.apache.bcel.Constants.DNEG);
     }

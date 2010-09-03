@@ -28,6 +28,7 @@ import org.apache.bcel.Constants;
  */
 public class ReturnaddressType extends Type {
 
+    private static final long serialVersionUID = 3782621476731023927L;
     public static final ReturnaddressType NO_TARGET = new ReturnaddressType();
     private InstructionHandle returnTarget;
 

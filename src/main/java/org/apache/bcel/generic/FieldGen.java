@@ -43,6 +43,7 @@ import org.apache.bcel.util.BCELComparator;
  */
 public class FieldGen extends FieldGenOrMethodGen {
 
+    private static final long serialVersionUID = -6050448955000008261L;
     private Object value = null;
     private static BCELComparator _cmp = new BCELComparator() {
 

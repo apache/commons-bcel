@@ -34,6 +34,7 @@ import org.apache.bcel.Constants;
  */
 public abstract class ConstantCP extends Constant {
 
+    private static final long serialVersionUID = -6275762995206209402L;
     /** References to the constants containing the class and the field signature
      */
     protected int class_index, name_and_type_index;

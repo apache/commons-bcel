@@ -27,7 +27,9 @@ package org.apache.bcel.verifier.exc;
  * @author Enver Haase
  */
 public class ClassConstraintException extends VerificationException{
-	/**
+	private static final long serialVersionUID = -4745598983569128296L;
+
+    /**
 	 * Constructs a new ClassConstraintException with null as its error message string.
 	 */
 	public ClassConstraintException(){

@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class SASTORE extends ArrayInstruction implements StackConsumer {
 
+    private static final long serialVersionUID = -5187452948601765872L;
+
+
     public SASTORE() {
         super(org.apache.bcel.Constants.SASTORE);
     }

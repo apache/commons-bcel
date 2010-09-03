@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public abstract class StoreInstruction extends LocalVariableInstruction implements PopInstruction {
 
+    private static final long serialVersionUID = -774241740383612113L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

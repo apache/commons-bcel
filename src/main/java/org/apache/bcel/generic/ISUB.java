@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class ISUB extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = 1878271684888856459L;
+
+
     /** Substract ints
      */
     public ISUB() {

@@ -43,6 +43,7 @@ import org.apache.bcel.Constants;
  */
 public final class Unknown extends Attribute {
 
+    private static final long serialVersionUID = -4099655108069755015L;
     private byte[] bytes;
     private String name;
     private static final Map unknown_attributes = new HashMap();

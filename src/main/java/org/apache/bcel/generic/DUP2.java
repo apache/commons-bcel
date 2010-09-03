@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class DUP2 extends StackInstruction implements PushInstruction {
 
+    private static final long serialVersionUID = -7098411152822612791L;
+
+
     public DUP2() {
         super(org.apache.bcel.Constants.DUP2);
     }

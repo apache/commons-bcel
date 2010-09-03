@@ -37,6 +37,7 @@ import org.apache.bcel.Constants;
  */
 public final class Synthetic extends Attribute {
 
+    private static final long serialVersionUID = -123334426995458366L;
     private byte[] bytes;
 
 

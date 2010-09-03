@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class DSUB extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = -5398969227995149466L;
+
+
     /** Substract doubles
      */
     public DSUB() {

@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class D2L extends ConversionInstruction {
 
+    private static final long serialVersionUID = -1985923584192796706L;
+
+
     /** Convert double to long
      */
     public D2L() {

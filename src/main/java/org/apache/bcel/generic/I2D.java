@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class I2D extends ConversionInstruction {
 
+    private static final long serialVersionUID = 4267924152721121331L;
+
+
     /** Convert int to double
      */
     public I2D() {

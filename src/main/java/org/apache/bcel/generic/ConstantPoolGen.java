@@ -51,6 +51,7 @@ import org.apache.bcel.classfile.ConstantUtf8;
  */
 public class ConstantPoolGen implements java.io.Serializable {
 
+    private static final long serialVersionUID = 6664071417323174824L;
     protected int size; 
     protected Constant[] constants;
     protected int index = 1; // First entry (0) used by JVM
@@ -61,6 +62,7 @@ public class ConstantPoolGen implements java.io.Serializable {
 
     private static class Index implements java.io.Serializable {
 
+        private static final long serialVersionUID = -9187078620578535161L;
         int index;
 
 

@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class BALOAD extends ArrayInstruction implements StackProducer {
 
+    private static final long serialVersionUID = -849061295095748102L;
+
+
     /** Load byte or boolean from array
      */
     public BALOAD() {

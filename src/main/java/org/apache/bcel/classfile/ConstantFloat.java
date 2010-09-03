@@ -34,6 +34,7 @@ import org.apache.bcel.Constants;
  */
 public final class ConstantFloat extends Constant implements ConstantObject {
 
+    private static final long serialVersionUID = -2316732495687628398L;
     private float bytes;
 
 

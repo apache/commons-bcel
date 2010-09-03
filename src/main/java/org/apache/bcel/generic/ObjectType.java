@@ -29,6 +29,7 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class ObjectType extends ReferenceType {
 
+    private static final long serialVersionUID = -2819379966444533294L;
     private String class_name; // Class name of type
 
 

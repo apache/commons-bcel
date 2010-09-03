@@ -35,6 +35,7 @@ import org.apache.bcel.Constants;
  */
 public final class InnerClass implements Cloneable, Node, Serializable {
 
+    private static final long serialVersionUID = -7200195918166127614L;
     private int inner_class_index;
     private int outer_class_index;
     private int inner_name_index;

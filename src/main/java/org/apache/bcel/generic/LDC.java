@@ -32,6 +32,9 @@ import org.apache.bcel.util.ByteSequence;
  */
 public class LDC extends CPInstruction implements PushInstruction, ExceptionThrower {
 
+    private static final long serialVersionUID = -972820476154330719L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

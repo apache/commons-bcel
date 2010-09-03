@@ -31,6 +31,7 @@ import org.apache.bcel.util.ByteSequence;
  */
 public class RET extends Instruction implements IndexedInstruction, TypedInstruction {
 
+    private static final long serialVersionUID = -3751746568458761719L;
     private boolean wide;
     private int index; // index to local variable containg the return address
 

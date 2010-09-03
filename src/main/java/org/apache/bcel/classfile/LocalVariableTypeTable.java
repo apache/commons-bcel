@@ -47,7 +47,8 @@ import  java.io.*;
 //  }
 // J5TODO: Needs some testing !
 public class LocalVariableTypeTable extends Attribute {
-  private int             local_variable_type_table_length; // Table of local
+  private static final long serialVersionUID = -1082157891095177114L;
+private int             local_variable_type_table_length; // Table of local
   private LocalVariable[] local_variable_type_table;        // variables
 
   public LocalVariableTypeTable(LocalVariableTypeTable c) {

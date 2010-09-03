@@ -33,6 +33,7 @@ import org.apache.bcel.Constants;
  */
 public final class Deprecated extends Attribute {
 
+    private static final long serialVersionUID = -2242528405240201000L;
     private byte[] bytes;
 
 

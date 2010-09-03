@@ -35,6 +35,7 @@ import org.apache.bcel.Constants;
  */
 public final class ConstantNameAndType extends Constant {
 
+    private static final long serialVersionUID = -7913354727264034451L;
     private int name_index; // Name of field/method
     private int signature_index; // and its signature.
 

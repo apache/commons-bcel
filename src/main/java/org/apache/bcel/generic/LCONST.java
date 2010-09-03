@@ -27,6 +27,7 @@ package org.apache.bcel.generic;
  */
 public class LCONST extends Instruction implements ConstantPushInstruction {
 
+    private static final long serialVersionUID = 909025807621177822L;
     private long value;
 
 

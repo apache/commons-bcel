@@ -31,7 +31,9 @@ package org.apache.bcel.verifier.exc;
  * @author Enver Haase
  */
 public abstract class VerificationException extends VerifierConstraintViolatedException{
-	/**
+	private static final long serialVersionUID = 8012776320318623652L;
+
+    /**
 	 * Constructs a new VerificationException with null as its error message string.
 	 */
 	VerificationException(){

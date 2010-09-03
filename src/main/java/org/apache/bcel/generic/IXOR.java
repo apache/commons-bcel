@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class IXOR extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = -6524415552072672532L;
+
+
     public IXOR() {
         super(org.apache.bcel.Constants.IXOR);
     }

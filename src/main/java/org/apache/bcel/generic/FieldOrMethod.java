@@ -31,6 +31,9 @@ import org.apache.bcel.classfile.ConstantUtf8;
  */
 public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
 
+    private static final long serialVersionUID = 2036985877748835708L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

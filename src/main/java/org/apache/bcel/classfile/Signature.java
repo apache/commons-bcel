@@ -34,6 +34,7 @@ import org.apache.bcel.Constants;
  */
 public final class Signature extends Attribute {
 
+    private static final long serialVersionUID = 5808807822688827177L;
     private int signature_index;
 
 

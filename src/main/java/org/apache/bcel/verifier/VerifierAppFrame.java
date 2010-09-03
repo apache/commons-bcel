@@ -50,6 +50,7 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class VerifierAppFrame extends JFrame {
 
+    private static final long serialVersionUID = -542458133073307640L;
     JPanel contentPane;
     JSplitPane jSplitPane1 = new JSplitPane();
     JPanel jPanel1 = new JPanel();

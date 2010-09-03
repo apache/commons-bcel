@@ -34,6 +34,7 @@ import org.apache.bcel.Constants;
  */
 public final class LocalVariable implements Constants, Cloneable, Node, Serializable {
 
+    private static final long serialVersionUID = -51081099265972179L;
     private int start_pc; // Range in which the variable is valid
     private int length;
     private int name_index; // Index in constant pool of variable name

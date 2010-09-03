@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class AALOAD extends ArrayInstruction implements StackProducer {
 
+    private static final long serialVersionUID = -8606835203239531080L;
+
+
     /** Load reference from array
      */
     public AALOAD() {

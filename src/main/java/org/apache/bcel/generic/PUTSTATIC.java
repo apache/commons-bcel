@@ -31,6 +31,9 @@ import org.apache.bcel.ExceptionConstants;
  */
 public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, PopInstruction {
 
+    private static final long serialVersionUID = -1992788532422473584L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

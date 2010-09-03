@@ -29,6 +29,9 @@ import org.apache.bcel.ExceptionConstants;
 public class NEW extends CPInstruction implements LoadClass, AllocationInstruction,
         ExceptionThrower, StackProducer {
 
+    private static final long serialVersionUID = 5773167897857305796L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

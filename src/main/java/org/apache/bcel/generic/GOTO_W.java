@@ -29,6 +29,9 @@ import org.apache.bcel.util.ByteSequence;
  */
 public class GOTO_W extends GotoInstruction {
 
+    private static final long serialVersionUID = -344799540124265957L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

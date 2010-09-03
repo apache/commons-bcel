@@ -43,6 +43,7 @@ import org.apache.bcel.Constants;
  */
 public final class Code extends Attribute {
 
+    private static final long serialVersionUID = -432884354459701506L;
     private int max_stack; // Maximum size of stack used by this method
     private int max_locals; // Number of local variables
     private int code_length; // Length of code in bytes

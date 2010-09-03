@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class IREM extends ArithmeticInstruction implements ExceptionThrower {
 
+    private static final long serialVersionUID = 834504719616513910L;
+
+
     /** Remainder of ints
      */
     public IREM() {

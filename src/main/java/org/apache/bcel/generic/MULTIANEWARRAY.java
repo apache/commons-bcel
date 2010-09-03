@@ -33,6 +33,7 @@ import org.apache.bcel.util.ByteSequence;
 public class MULTIANEWARRAY extends CPInstruction implements LoadClass, AllocationInstruction,
         ExceptionThrower {
 
+    private static final long serialVersionUID = -7439639244808941662L;
     private short dimensions;
 
 

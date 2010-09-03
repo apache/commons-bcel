@@ -45,6 +45,7 @@ import java.util.zip.ZipFile;
  */
 public class ClassPath implements Serializable {
 
+    private static final long serialVersionUID = 2099441438483340671L;
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath();
     private PathEntry[] paths;
     private String class_path;
@@ -353,6 +354,7 @@ public class ClassPath implements Serializable {
 
     private static abstract class PathEntry implements Serializable {
 
+        private static final long serialVersionUID = 6828494485207666122L;
         abstract ClassFile getClassFile( String name, String suffix ) throws IOException;
         abstract URL getResource(String name);
         abstract InputStream getResourceAsStream(String name);
@@ -390,6 +392,7 @@ public class ClassPath implements Serializable {
 
     private static class Dir extends PathEntry {
 
+        private static final long serialVersionUID = 4374062802142373088L;
         private String dir;
 
 
@@ -460,6 +463,7 @@ public class ClassPath implements Serializable {
 
     private static class Zip extends PathEntry {
 
+        private static final long serialVersionUID = -2210747632897905532L;
         private ZipFile zip;
 
 

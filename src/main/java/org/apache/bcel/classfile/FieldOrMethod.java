@@ -34,6 +34,7 @@ import org.apache.bcel.classfile.Signature;
  */
 public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
 
+    private static final long serialVersionUID = -1833306330869469714L;
     protected int name_index; // Points to field name in constant pool 
     protected int signature_index; // Points to encoded signature
     protected int attributes_count; // No. of attributes

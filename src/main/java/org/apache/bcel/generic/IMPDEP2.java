@@ -25,6 +25,9 @@ package org.apache.bcel.generic;
  */
 public class IMPDEP2 extends Instruction {
 
+    private static final long serialVersionUID = 4097564761941607538L;
+
+
     public IMPDEP2() {
         super(org.apache.bcel.Constants.IMPDEP2, (short) 1);
     }

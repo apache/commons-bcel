@@ -29,6 +29,7 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class ClassStack implements java.io.Serializable {
 
+    private static final long serialVersionUID = 6126079269396985982L;
     private Stack stack = new Stack();
 
 

@@ -27,6 +27,7 @@ import org.apache.bcel.Constants;
  */
 public final class ArrayType extends ReferenceType {
 
+    private static final long serialVersionUID = 7587687059797903734L;
     private int dimensions;
     private Type basic_type;
 

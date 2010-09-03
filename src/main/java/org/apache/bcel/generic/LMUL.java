@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class LMUL extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = 3538398481425889023L;
+
+
     public LMUL() {
         super(org.apache.bcel.Constants.LMUL);
     }

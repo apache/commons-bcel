@@ -46,6 +46,7 @@ import org.apache.bcel.util.BCELComparator;
  */
 public class ClassGen extends AccessFlags implements Cloneable {
 
+    private static final long serialVersionUID = 6880879387392827211L;
     /* Corresponds to the fields found in a JavaClass object.
      */
     private String class_name, super_class_name, file_name;

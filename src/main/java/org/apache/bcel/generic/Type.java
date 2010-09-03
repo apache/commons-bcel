@@ -33,6 +33,7 @@ import org.apache.bcel.classfile.Utility;
  */
 public abstract class Type implements java.io.Serializable {
 
+    private static final long serialVersionUID = -1985077286871826895L;
     protected byte type;
     protected String signature; // signature for the type
     /** Predefined constants
@@ -53,8 +54,12 @@ public abstract class Type implements java.io.Serializable {
     public static final ObjectType THROWABLE = new ObjectType("java.lang.Throwable");
     public static final Type[] NO_ARGS = new Type[0];
     public static final ReferenceType NULL = new ReferenceType() {
+
+        private static final long serialVersionUID = 4526765862386946282L;
     };
     public static final Type UNKNOWN = new Type(Constants.T_UNKNOWN, "<unknown object>") {
+
+        private static final long serialVersionUID = 1321113605813486066L;
     };
 
 

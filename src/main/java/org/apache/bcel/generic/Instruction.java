@@ -32,6 +32,7 @@ import org.apache.bcel.util.ByteSequence;
  */
 public abstract class Instruction implements Cloneable, Serializable {
 
+    private static final long serialVersionUID = -2518741982574515847L;
     protected short length = 1; // Length of instruction in bytes 
     protected short opcode = -1; // Opcode number
     private static InstructionComparator cmp = InstructionComparator.DEFAULT;

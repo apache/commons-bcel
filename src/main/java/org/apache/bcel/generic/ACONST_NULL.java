@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class ACONST_NULL extends Instruction implements PushInstruction, TypedInstruction {
 
+    private static final long serialVersionUID = -4127036801984829715L;
+
+
     /** 
      * Push null reference
      */

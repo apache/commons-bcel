@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class LOR extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = 7862213176431021916L;
+
+
     public LOR() {
         super(org.apache.bcel.Constants.LOR);
     }

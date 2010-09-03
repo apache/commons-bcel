@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class I2F extends ConversionInstruction {
 
+    private static final long serialVersionUID = -816875455957376859L;
+
+
     /** Convert int to float
      */
     public I2F() {

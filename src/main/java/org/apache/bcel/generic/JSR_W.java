@@ -29,6 +29,9 @@ import org.apache.bcel.util.ByteSequence;
  */
 public class JSR_W extends JsrInstruction {
 
+    private static final long serialVersionUID = -7352049131416924650L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

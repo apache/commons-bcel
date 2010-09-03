@@ -34,6 +34,7 @@ import org.apache.bcel.util.BCELComparator;
  */
 public abstract class Constant implements Cloneable, Node, Serializable {
 
+    private static final long serialVersionUID = 5739037344085356353L;
     private static BCELComparator _cmp = new BCELComparator() {
 
         public boolean equals( Object o1, Object o2 ) {

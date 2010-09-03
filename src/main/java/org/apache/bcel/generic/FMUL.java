@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
  */
 public class FMUL extends ArithmeticInstruction {
 
+    private static final long serialVersionUID = -1981818566663824251L;
+
+
     /** Multiply floats
      */
     public FMUL() {

@@ -28,7 +28,9 @@ package org.apache.bcel.verifier.structurals;
  */ 
 public class GenericArray extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable{
 	
-	protected Object clone() throws CloneNotSupportedException {
+	private static final long serialVersionUID = 1991183963515237894L;
+
+    protected Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
 }

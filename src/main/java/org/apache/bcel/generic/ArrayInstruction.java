@@ -26,6 +26,9 @@ package org.apache.bcel.generic;
 public abstract class ArrayInstruction extends Instruction implements ExceptionThrower,
         TypedInstruction {
 
+    private static final long serialVersionUID = 1355074014869910296L;
+
+
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

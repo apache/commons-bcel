@@ -25,6 +25,9 @@ package org.apache.bcel.generic;
  */
 public class BREAKPOINT extends Instruction {
 
+    private static final long serialVersionUID = -4186956277760244254L;
+
+
     public BREAKPOINT() {
         super(org.apache.bcel.Constants.BREAKPOINT, (short) 1);
     }
