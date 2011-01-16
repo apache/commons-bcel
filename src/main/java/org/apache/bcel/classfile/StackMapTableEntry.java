@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.apache.bcel.Constants;
 
@@ -33,9 +34,11 @@ import org.apache.bcel.Constants;
  * @see     StackMap
  * @see     StackMapType
  */
-public final class StackMapTableEntry implements Cloneable {
+public final class StackMapTableEntry implements Cloneable, Serializable {
 
-	private int frame_type;
+	private static final long serialVersionUID = 1L;
+
+    private int frame_type;
     private int byte_code_offset_delta;
     private int number_of_locals;
     private StackMapType[] types_of_locals;
