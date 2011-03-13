@@ -527,6 +527,7 @@ public abstract class Instruction implements Cloneable, Serializable {
      * equality of instructions.
      *
      * @return currently used comparator for equals()
+     * @deprecated use the built in comparator, or wrap this class in another object that implements these methods
      */
     public static InstructionComparator getComparator() {
         return cmp;
@@ -534,6 +535,7 @@ public abstract class Instruction implements Cloneable, Serializable {
 
 
     /** Set comparator to be used for equals().
+      * @deprecated use the built in comparator, or wrap this class in another object that implements these methods
      */
     public static void setComparator( InstructionComparator c ) {
         cmp = c;
