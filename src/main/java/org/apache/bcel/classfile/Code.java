@@ -268,6 +268,7 @@ public final class Code extends Attribute {
     public final void setCode( byte[] code ) {
         this.code = code;
         code_length = (code == null) ? 0 : code.length;
+        length = calculateLength(); // Adjust length
     }
 
 
@@ -277,6 +278,7 @@ public final class Code extends Attribute {
     public final void setExceptionTable( CodeException[] exception_table ) {
         this.exception_table = exception_table;
         exception_table_length = (exception_table == null) ? 0 : exception_table.length;
+        length = calculateLength(); // Adjust length
     }
 
 
