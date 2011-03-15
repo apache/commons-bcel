@@ -101,7 +101,7 @@ public class TABLESWITCH extends Select {
      */
     public void accept( Visitor v ) {
         v.visitVariableLengthInstruction(this);
-        v.visitStackProducer(this);
+        v.visitStackConsumer(this);
         v.visitBranchInstruction(this);
         v.visitSelect(this);
         v.visitTABLESWITCH(this);
