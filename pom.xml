@@ -172,7 +172,8 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>compile-tests</id>
+                        <!-- need default-cli so compiler:testCompile picks up the settings -->
+                        <id>default-cli</id>
                         <phase>process-test-sources</phase>
                         <goals>
                             <goal>testCompile</goal>
