@@ -35,11 +35,6 @@ import org.apache.bcel.classfile.JavaClass;
  * It is designed to be used as a singleton, however it
  * can also be used with custom classpaths.
  *
- /**
- * Abstract definition of a class repository. Instances may be used
- * to load classes from different sources and may be used in the
- * Repository.setRepository method.
- *
  * @see org.apache.bcel.Repository
  *
  * @version $Id$
