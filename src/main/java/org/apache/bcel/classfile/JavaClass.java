@@ -470,6 +470,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
 
     /**
+     * returns the super class name of this class. In the case that this class is
+     * java.lang.Object, it will return itself (java.lang.Object). This is probably incorrect
+     * but isn't fixed at this time to not break existing clients.
+     *
      * @return Superclass name.
      */
     public String getSuperclassName() {
