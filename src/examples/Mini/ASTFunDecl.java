@@ -109,7 +109,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
       if(entry != null) {
         MiniC.addError(argv[i].getLine(), argv[i].getColumn(),
-        	       "Redeclaration of " + entry + ".");
+                       "Redeclaration of " + entry + ".");
     } else {
         env.put(new Variable(argv[i]));
     }
@@ -138,8 +138,8 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
     if((expected != T_UNKNOWN) && (type != expected)) {
         MiniC.addError(line, column,
-        	     "Function f ist not of type " + TYPE_NAMES[expected] + 
-        	     " as previously assumed, but " + TYPE_NAMES[type]);
+                     "Function f ist not of type " + TYPE_NAMES[expected] + 
+                     " as previously assumed, but " + TYPE_NAMES[type]);
     }
 
     name.setType(type);
@@ -171,12 +171,12 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     }
     else {
       out.print("  public static final " + "int" + // type_names[type] +
-		" " + fname + "(");
+                " " + fname + "(");
       
       for(int i = 0; i < argv.length; i++) {
-	out.print("int " + argv[i].getName());
-	
-	if(i < argv.length - 1) {
+        out.print("int " + argv[i].getName());
+        
+        if(i < argv.length - 1) {
         out.print(", ");
     }
       }
@@ -223,8 +223,8 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
     if(fname.equals("main")) {
       method = new MethodGen(ACC_STATIC | ACC_PUBLIC,
-			     Type.VOID, args, arg_names,
-			     "main", class_name, il, cp);
+                             Type.VOID, args, arg_names,
+                             "main", class_name, il, cp);
 
       main = true;
     } else if(fname.equals("READ") || fname.equals("WRITE")) { // Do nothing
@@ -236,18 +236,18 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
       args      = new Type[size];
 
       for(int i = 0; i < size; i++) {
-	args[i] = Type.INT;
-	arg_names[i] =  argv[i].getName();
+        args[i] = Type.INT;
+        arg_names[i] =  argv[i].getName();
       }
 
       method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL,
-			     Type.INT, args, arg_names,
-			     fname, class_name, il, cp);
+                             Type.INT, args, arg_names,
+                             fname, class_name, il, cp);
 
       LocalVariableGen[] lv = method.getLocalVariables();
       for(int i = 0; i < size; i++) {
-	Variable entry = (Variable)env.get(arg_names[i]);
-	entry.setLocalVariable(lv[i]);
+        Variable entry = (Variable)env.get(arg_names[i]);
+        entry.setLocalVariable(lv[i]);
       }
 
       method.addException("java.io.IOException");
@@ -257,28 +257,28 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
       body.byte_code(il, method, cp);
 
       if(main) {
-	ObjectType e_type = new ObjectType("java.lang.Exception");
-	InstructionHandle start = il.getStart(), end, handler, end_handler;
-	LocalVariableGen exc = method.addLocalVariable("$e",
-						       e_type,
-						       null, null);
-	int slot = exc.getIndex();
+        ObjectType e_type = new ObjectType("java.lang.Exception");
+        InstructionHandle start = il.getStart(), end, handler, end_handler;
+        LocalVariableGen exc = method.addLocalVariable("$e",
+                                                       e_type,
+                                                       null, null);
+        int slot = exc.getIndex();
 
-	il.append(InstructionConstants.POP); pop(); // Remove last element on stack
-	end = il.append(InstructionConstants.RETURN); // Use instruction constants, if possible
+        il.append(InstructionConstants.POP); pop(); // Remove last element on stack
+        end = il.append(InstructionConstants.RETURN); // Use instruction constants, if possible
 
-	// catch
-	handler = il.append(new ASTORE(slot)); // save exception object
-	il.append(new GETSTATIC(cp.addFieldref("java.lang.System", "err",
-					       "Ljava/io/PrintStream;")));
-	il.append(new ALOAD(slot)); push(2);
-	il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream",
-						"println",
-						"(Ljava/lang/Object;)V")));
-	pop(2);
-	end_handler = il.append(InstructionConstants.RETURN);
-	method.addExceptionHandler(start, end, handler, e_type);
-	exc.setStart(handler); exc.setEnd(end_handler);
+        // catch
+        handler = il.append(new ASTORE(slot)); // save exception object
+        il.append(new GETSTATIC(cp.addFieldref("java.lang.System", "err",
+                                               "Ljava/io/PrintStream;")));
+        il.append(new ALOAD(slot)); push(2);
+        il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream",
+                                                "println",
+                                                "(Ljava/lang/Object;)V")));
+        pop(2);
+        end_handler = il.append(InstructionConstants.RETURN);
+        method.addExceptionHandler(start, end, handler, e_type);
+        exc.setStart(handler); exc.setEnd(end_handler);
       } else {
         il.append(InstructionConstants.IRETURN); // Reuse object to save memory
     }
@@ -297,9 +297,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   private static final InstructionFinder.CodeConstraint my_constraint =
     new InstructionFinder.CodeConstraint() {
       public boolean checkCode(InstructionHandle[] match) {
-	BranchInstruction if_icmp = (BranchInstruction)match[0].getInstruction();
-	GOTO              goto_   = (GOTO)match[2].getInstruction();
-	return (if_icmp.getTarget() == match[3]) && (goto_.getTarget() == match[4]);
+        BranchInstruction if_icmp = (BranchInstruction)match[0].getInstruction();
+        GOTO              goto_   = (GOTO)match[2].getInstruction();
+        return (if_icmp.getTarget() == match[3]) && (goto_.getTarget() == match[4]);
       }
     };
 
@@ -328,21 +328,21 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
       if_icmp.setTarget(ifeq.getTarget());
 
       try {
-	il.delete(match[1], match[4]);
+        il.delete(match[1], match[4]);
       } catch(TargetLostException e) {
-	InstructionHandle[] targets = e.getTargets();
+        InstructionHandle[] targets = e.getTargets();
 
-	System.err.println(targets[0]);
+        System.err.println(targets[0]);
 
-	for(int i=0; i < targets.length; i++) {
-	  InstructionTargeter[] targeters = targets[i].getTargeters();
+        for(int i=0; i < targets.length; i++) {
+          InstructionTargeter[] targeters = targets[i].getTargeters();
 
-	  for(int j=0; j < targeters.length; j++) {
+          for(int j=0; j < targeters.length; j++) {
         if((targets[i] != match[4]) || (targeters[j] != match[2])) {
             System.err.println("Ooops: " + e);
         }
     }
-	}
+        }
       }
     }
   }

@@ -118,28 +118,28 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     if(fun_decls != null) {
       // Put function names into hash table aka. environment
       for(int i=0; i < fun_decls.length; i++) {
-	f     = fun_decls[i];
-	name  = f.getName();
-	fname = name.getName();
-	fun   = env.get(fname); // Lookup in env
-	
-	if(fun != null) {
+        f     = fun_decls[i];
+        name  = f.getName();
+        fname = name.getName();
+        fun   = env.get(fname); // Lookup in env
+        
+        if(fun != null) {
         MiniC.addError(f.getLine(), f.getColumn(),
-        		 "Redeclaration of " + fun + ".");
+                         "Redeclaration of " + fun + ".");
     } else {
         env.put(new Function(name, null)); // `args' will be set by FunDecl.traverse()
     }
 
-	
+        
       }
 
       // Go for it
       for(int i=0; i < fun_decls.length; i++) {
-	fun_decls[i] = fun_decls[i].traverse((Environment)env.clone());
-	
-	// Look for `main' routine
-	fname = fun_decls[i].getName().getName();
-	if(fname.equals("main")) {
+        fun_decls[i] = fun_decls[i].traverse((Environment)env.clone());
+        
+        // Look for `main' routine
+        fname = fun_decls[i].getName().getName();
+        if(fname.equals("main")) {
         main = (Function)env.get(fname);
     }
       }
@@ -148,7 +148,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
         MiniC.addError(0, 0, "You didn't declare a `main' function.");
     } else if(main.getNoArgs() != 0) {
         MiniC.addError(main.getLine(), main.getColumn(), 
-        		"Main function has too many arguments declared.");
+                        "Main function has too many arguments declared.");
     }
     }
 
@@ -165,12 +165,12 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
       fun_decls[i].eval(pass);
 
       if(pass == 3) { // Final check for unresolved types
-	ASTIdent name = fun_decls[i].getName();
+        ASTIdent name = fun_decls[i].getName();
 
-	if(name.getType() == T_UNKNOWN) {
+        if(name.getType() == T_UNKNOWN) {
         MiniC.addError(name.getColumn(), name.getLine(),
-        		 "Type of function " + name.getName() +
-        		 " can not be determined (infinite recursion?).");
+                         "Type of function " + name.getName() +
+                         " can not be determined (infinite recursion?).");
     }
       }
     }
@@ -186,14 +186,14 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
     out.println("public final class " + name + " {");
     out.println("  private static BufferedReader _in = new BufferedReader" + 
-		"(new InputStreamReader(System.in));\n");
+                "(new InputStreamReader(System.in));\n");
 
     out.println("  private static final int _readInt() throws IOException {\n" +
-		"    System.out.print(\"Please enter a number> \");\n" + 
-		"    return Integer.parseInt(_in.readLine());\n  }\n");
+                "    System.out.print(\"Please enter a number> \");\n" + 
+                "    return Integer.parseInt(_in.readLine());\n  }\n");
 
     out.println("  private static final int _writeInt(int n) {\n" +
-		"    System.out.println(\"Result: \" + n);\n    return 0;\n  }\n");
+                "    System.out.println(\"Result: \" + n);\n    return 0;\n  }\n");
 
     for(int i=0; i < fun_decls.length; i++) {
         fun_decls[i].code(out);
@@ -209,9 +209,9 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     /* private static BufferedReader _in;
      */
     class_gen.addField(new Field(ACC_PRIVATE | ACC_STATIC,
-				 cp.addUtf8("_in"),
-				 cp.addUtf8("Ljava/io/BufferedReader;"),
-				 null, cp.getConstantPool()));
+                                 cp.addUtf8("_in"),
+                                 cp.addUtf8("Ljava/io/BufferedReader;"),
+                                 null, cp.getConstantPool()));
 
     MethodGen       method;
     InstructionList il = new InstructionList();
@@ -222,27 +222,27 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     int             _in = cp.addFieldref(class_name, "_in", "Ljava/io/BufferedReader;");
 
     int             out = cp.addFieldref("java.lang.System", "out",
-					 "Ljava/io/PrintStream;");
+                                         "Ljava/io/PrintStream;");
 
     il.append(new GETSTATIC(out));
     il.append(new PUSH(cp, "Please enter a number> "));
     il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream",
-						"print",
-						"(Ljava/lang/String;)V")));
+                                                "print",
+                                                "(Ljava/lang/String;)V")));
     il.append(new GETSTATIC(_in));
     il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.BufferedReader",
-						"readLine",
-						"()Ljava/lang/String;")));
+                                                "readLine",
+                                                "()Ljava/lang/String;")));
     il.append(new INVOKESTATIC(cp.addMethodref("java.lang.Integer",
-						"parseInt",
-						"(Ljava/lang/String;)I")));
+                                                "parseInt",
+                                                "(Ljava/lang/String;)I")));
     il.append(InstructionConstants.IRETURN);
 
     /* private static final int _readInt() throws IOException
      */
     method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL,
-			   Type.INT, Type.NO_ARGS, null,
-			   "_readInt", class_name, il, cp);
+                           Type.INT, Type.NO_ARGS, null,
+                           "_readInt", class_name, il, cp);
 
     method.addException("java.io.IOException");
 
@@ -259,27 +259,27 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     il.append(InstructionConstants.DUP);
     il.append(new PUSH(cp, "Result: "));
     il.append(new INVOKESPECIAL(cp.addMethodref("java.lang.StringBuffer",
-						"<init>",
-						"(Ljava/lang/String;)V")));
+                                                "<init>",
+                                                "(Ljava/lang/String;)V")));
 
     il.append(new ILOAD(0));
     il.append(new INVOKEVIRTUAL(cp.addMethodref("java.lang.StringBuffer",
-						"append",
-						"(I)Ljava/lang/StringBuffer;")));
+                                                "append",
+                                                "(I)Ljava/lang/StringBuffer;")));
 
     il.append(new INVOKEVIRTUAL(cp.addMethodref("java.lang.StringBuffer",
-						"toString",
-						"()Ljava/lang/String;")));
+                                                "toString",
+                                                "()Ljava/lang/String;")));
     
     il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream",
-						"println",
-						"(Ljava/lang/String;)V")));
+                                                "println",
+                                                "(Ljava/lang/String;)V")));
     il.append(new PUSH(cp, 0));
     il.append(InstructionConstants.IRETURN); // Reuse objects, if possible
 
     method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL,
-			   Type.INT, args, argv,
-			   "_writeInt", class_name, il, cp);
+                           Type.INT, args, argv,
+                           "_writeInt", class_name, il, cp);
 
     method.setMaxStack(4);
     class_gen.addMethod(method.getMethod());
@@ -291,11 +291,11 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     il = new InstructionList();
     il.append(new ALOAD(0)); // Push `this'
     il.append(new INVOKESPECIAL(cp.addMethodref("java.lang.Object",
-						"<init>", "()V")));
+                                                "<init>", "()V")));
     il.append(new RETURN());
 
     method = new MethodGen(ACC_PUBLIC, Type.VOID, Type.NO_ARGS, null,
-			   "<init>", class_name, il, cp);
+                           "<init>", class_name, il, cp);
     
     method.setMaxStack(1);
     class_gen.addMethod(method.getMethod());
@@ -309,16 +309,16 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     il.append(new NEW(cp.addClass("java.io.InputStreamReader")));
     il.append(InstructionConstants.DUP);
     il.append(new GETSTATIC(cp.addFieldref("java.lang.System", "in",
-					   "Ljava/io/InputStream;")));
+                                           "Ljava/io/InputStream;")));
     il.append(new INVOKESPECIAL(cp.addMethodref("java.io.InputStreamReader",
-						"<init>", "(Ljava/io/InputStream;)V")));
+                                                "<init>", "(Ljava/io/InputStream;)V")));
     il.append(new INVOKESPECIAL(cp.addMethodref("java.io.BufferedReader",
-						"<init>", "(Ljava/io/Reader;)V")));
+                                                "<init>", "(Ljava/io/Reader;)V")));
     il.append(new PUTSTATIC(_in));
     il.append(InstructionConstants.RETURN); // Reuse instruction constants
 
     method = new MethodGen(ACC_STATIC, Type.VOID, Type.NO_ARGS, null,
-			   "<clinit>", class_name, il, cp);
+                           "<clinit>", class_name, il, cp);
 
     method.setMaxStack(5);
     class_gen.addMethod(method.getMethod());

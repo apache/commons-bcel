@@ -76,12 +76,12 @@ public class Environment implements Cloneable {
         table[hash] = v = new Vector(SLOTS);
     } else {
       try {
-	int index = lookup(v, key);
+        int index = lookup(v, key);
 
-	if(index >= 0) {
-	  v.setElementAt(obj, index); // Overwrite
-	  return;
-	}
+        if(index >= 0) {
+          v.setElementAt(obj, index); // Overwrite
+          return;
+        }
       } catch(ArrayIndexOutOfBoundsException e) {}
     }
 
@@ -132,8 +132,8 @@ public class Environment implements Cloneable {
       int index = lookup(v, key);
 
       if(index >= 0) {
-	elements--; // Count
-	v.removeElementAt(index);
+        elements--; // Count
+        v.removeElementAt(index);
       }
     } catch(ArrayIndexOutOfBoundsException e) {}
   }
@@ -159,16 +159,16 @@ public class Environment implements Cloneable {
 
     for(int i=0; i < size; i++) {
       if(table[i] != null) {
-	copy[i] = (Vector)table[i].clone(); // Copies references
+        copy[i] = (Vector)table[i].clone(); // Copies references
 
-	/*
-	int len = table[i].size();
+        /*
+        int len = table[i].size();
 
-	copy[i] = new Vector(len);
-	try {
-	  for(int j=0; j < len; j++)
-	    copy[i].addElement(table[i].elementAt(j));
-	} catch(ArrayIndexOutOfBoundsException e) {}*/
+        copy[i] = new Vector(len);
+        try {
+          for(int j=0; j < len; j++)
+            copy[i].addElement(table[i].elementAt(j));
+        } catch(ArrayIndexOutOfBoundsException e) {}*/
       }
     }
 
@@ -194,12 +194,12 @@ public class Environment implements Cloneable {
 
     for(int i=0; i < size; i++) {
       if((v = table[i]) != null) {
-	int len = v.size();
-	try {
-	  for(int j=0; j < len; j++) {
+        int len = v.size();
+        try {
+          for(int j=0; j < len; j++) {
         entries[k++] = (EnvEntry)v.elementAt(j);
     }
-	} catch(ArrayIndexOutOfBoundsException e) {}  
+        } catch(ArrayIndexOutOfBoundsException e) {}  
       }
     }
 

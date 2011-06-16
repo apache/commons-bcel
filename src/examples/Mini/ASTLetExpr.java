@@ -58,7 +58,7 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
    */
   public void closeNode() {
     int i, len_2 = children.length / 2; /* length must be a multiple of 
-					 * two (ident = expr) + 1 (body expr) */
+                                         * two (ident = expr) + 1 (body expr) */
     idents = new ASTIdent[len_2];
     exprs  = new ASTExpr[len_2];
 
@@ -91,7 +91,7 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
 
       if(entry != null) {
         MiniC.addError(id.getLine(), id.getColumn(),
-        	       "Redeclaration of " + entry + ".");
+                       "Redeclaration of " + entry + ".");
     } else {
         env.put(new Variable(id));
     }
@@ -135,7 +135,7 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
       exprs[i].code(buf);
 
       buf.append("    " + TYPE_NAMES[t] + " " + ident + " = " +
-		 ASTFunDecl.pop() + ";\n");
+                 ASTFunDecl.pop() + ";\n");
     }
 
     body.code(buf);

@@ -164,13 +164,13 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     else {
       // Compute expected type
       if((kind == PLUS) || (kind == MINUS) || (kind == MULT) ||
-	 (kind == MOD)  || (kind == DIV)) {
+       (kind == MOD)  || (kind == DIV)) {
         child_type = type = T_INT;
     } else if((kind == AND) || (kind == OR)) {
         child_type = type = T_BOOLEAN;
     } else { // LEQ, GT, etc.
-	child_type = T_INT;
-	type       = T_BOOLEAN;
+        child_type = T_INT;
+        type       = T_BOOLEAN;
       }
     }
 
@@ -180,8 +180,8 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
       if(t != child_type) {
         MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
-        	       "Expression has not expected type " + TYPE_NAMES[child_type] +
-        	       " but " + TYPE_NAMES[t] + ".");
+                       "Expression has not expected type " + TYPE_NAMES[child_type] +
+                       " but " + TYPE_NAMES[t] + ".");
     }
 
       is_simple = is_simple && exprs[i].isSimple();
@@ -223,23 +223,23 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
       case MULT:  ASTFunDecl.push(buf, _body_int + " * " + _body_int2); break;
       case DIV:   ASTFunDecl.push(buf, _body_int + " / " + _body_int2); break;
 
-      case AND:   ASTFunDecl.push(buf, toInt(toBool(_body_int) + " && " +
-					     toBool(_body_int2))); break;
+      case AND:   ASTFunDecl.push(buf, toInt(toBool(_body_int) + " && " + 
+              toBool(_body_int2))); break;
       case OR:    ASTFunDecl.push(buf, toInt(toBool(_body_int) + " || " +
-					     toBool(_body_int2))); break;
+              toBool(_body_int2))); break;
 
       case EQ:    ASTFunDecl.push(buf, toInt(_body_int + " == " + _body_int2));
-	break;
+        break;
       case LEQ:   ASTFunDecl.push(buf, toInt(_body_int + " <= " + _body_int2));
-	break;
+        break;
       case GEQ:   ASTFunDecl.push(buf, toInt(_body_int + " >= " + _body_int2));
-	break;
+        break;
       case NEQ:   ASTFunDecl.push(buf, toInt(_body_int + " != " + _body_int2));
-	break;
+        break;
       case LT:    ASTFunDecl.push(buf, toInt(_body_int + " < " + _body_int2));
-	break;
+        break;
       case GT:    ASTFunDecl.push(buf, toInt(_body_int + " > " + _body_int2));
-	break;
+        break;
 
       default: System.err.println("Ooops");
       }
@@ -256,8 +256,8 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
       if(unop == MINUS) {
         il.append(InstructionConstants.INEG);
     } else { // == NOT
-	il.append(new PUSH(cp, 1)); ASTFunDecl.push(); // Push TRUE
-	il.append(InstructionConstants.IXOR); ASTFunDecl.pop();
+        il.append(new PUSH(cp, 1)); ASTFunDecl.push(); // Push TRUE
+        il.append(InstructionConstants.IXOR); ASTFunDecl.pop();
       }
     }
     else { // Apply binary operand
@@ -273,7 +273,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
       case AND:   il.append(InstructionConstants.IAND); ASTFunDecl.pop();  break;
       case OR:    il.append(InstructionConstants.IOR);  ASTFunDecl.pop();  break;
 
-	/* Use negated operands */
+        /* Use negated operands */
       case EQ:    bh = il.append(new IF_ICMPNE(null)); ASTFunDecl.pop(2); break;
       case LEQ:   bh = il.append(new IF_ICMPGT(null)); ASTFunDecl.pop(2); break;
       case GEQ:   bh = il.append(new IF_ICMPLT(null)); ASTFunDecl.pop(2); break;
@@ -285,14 +285,14 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
       switch(kind) {
       case EQ: case LEQ: case GEQ: case NEQ: case LT: case GT:
-	BranchHandle g;
+        BranchHandle g;
 
-	il.append(new PUSH(cp, 1));
-	g = il.append(new GOTO(null));
-	bh.setTarget(il.append(new PUSH(cp, 0)));
-	g.setTarget(il.append(InstructionConstants.NOP)); // May be optimized away later
-	ASTFunDecl.push();
-	break;
+        il.append(new PUSH(cp, 1));
+        g = il.append(new GOTO(null));
+        bh.setTarget(il.append(new PUSH(cp, 0)));
+        g.setTarget(il.append(InstructionConstants.NOP)); // May be optimized away later
+        ASTFunDecl.push();
+        break;
 
       default: break;
       }

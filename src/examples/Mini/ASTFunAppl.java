@@ -85,23 +85,23 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
 
     if(entry == null) {
         MiniC.addError(name.getLine(), name.getColumn(),
-        	     "Applying unknown function " + fname + ".");
+                 "Applying unknown function " + fname + ".");
     } else {
       if(!(entry instanceof Function)) {
         MiniC.addError(name.getLine(), name.getColumn(),
-        	       "Applying non-function " + fname + ".");
+                 "Applying non-function " + fname + ".");
     } else {
-	int      len = (exprs != null)? exprs.length : 0;
-	Function fun = (Function)entry;
+        int      len = (exprs != null)? exprs.length : 0;
+        Function fun = (Function)entry;
 
-	if(len != fun.getNoArgs()) {
+        if(len != fun.getNoArgs()) {
         MiniC.addError(name.getLine(), name.getColumn(),
-        		 "Function " + fname + " expects " + fun.getNoArgs() +
-        		 " arguments, you supplied " + len + ".");
+                   "Function " + fname + " expects " + fun.getNoArgs() +
+                   " arguments, you supplied " + len + ".");
     } else { // Adjust references
-	  function = fun;
-	  name     = fun.getName();
-	}
+          function = fun;
+          name     = fun.getName();
+        }
       }
     }
 
@@ -132,19 +132,19 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
     // Check arguments
     if(exprs != null) {
       for(int i=0; i < exprs.length; i++) { // length match checked in previous pass
-	int expect = args[i].getType();     // May be T_UNKNOWN
-	int t_e    = exprs[i].eval(expect); // May be T_UNKNOWN
+        int expect = args[i].getType();     // May be T_UNKNOWN
+        int t_e    = exprs[i].eval(expect); // May be T_UNKNOWN
 
-	if((expect != T_UNKNOWN) && (t_e != expect)) {
+        if((expect != T_UNKNOWN) && (t_e != expect)) {
         MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
-        		 "Argument " + (i + 1) + " in application of " + fname +
-        		 " is not of type " + TYPE_NAMES[expect] + " but " +
-        		 TYPE_NAMES[t_e]);
+                 "Argument " + (i + 1) + " in application of " + fname +
+                 " is not of type " + TYPE_NAMES[expect] + " but " +
+                 TYPE_NAMES[t_e]);
     } else {
         args[i].setType(t_e); // Update, may be identical
     }
 
-	is_simple = is_simple && exprs[i].isSimple(); // Check condition
+        is_simple = is_simple && exprs[i].isSimple(); // Check condition
       }
     }
 
@@ -171,7 +171,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
     }
     else { // Normal function
       if(exprs != null) { // Output in reverse odrder
-	for(int i = exprs.length - 1; i >= 0; i--) {
+        for(int i = exprs.length - 1; i >= 0; i--) {
         exprs[i].code(buf);
     }
       }
@@ -180,12 +180,12 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
       // Function call
 
       if(exprs != null) {
-	for(int i=0; i < exprs.length; i++) {
-	  call.append(ASTFunDecl.pop());
-	  if(i < exprs.length - 1) {
+        for(int i=0; i < exprs.length; i++) {
+          call.append(ASTFunDecl.pop());
+          if(i < exprs.length - 1) {
         call.append(", ");
     }
-	}	
+        }
       }
       call.append(")");
 
@@ -205,37 +205,37 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
 
     if(fname.equals("READ")) {
         il.append(new INVOKESTATIC(cp.addMethodref(class_name,
-        					 "_readInt",
-        					 "()I")));
+                                                 "_readInt",
+                                                 "()I")));
     } else if(fname.equals("WRITE")) {
       exprs[0].byte_code(il, method, cp);
       ASTFunDecl.pop();
       il.append(new INVOKESTATIC(cp.addMethodref(class_name,
-						 "_writeInt",
-						 "(I)I")));
+                                                 "_writeInt",
+                                                 "(I)I")));
     }
     else { // Normal function
       int size    = exprs.length;
       Type[] argv = null;
 
       if(exprs != null) {
-	argv = new Type[size];
+        argv = new Type[size];
 
-	for(int i=0; i < size; i++) {
-	  argv[i] = Type.INT;
-	  exprs[i].byte_code(il, method, cp);
-	}
+        for(int i=0; i < size; i++) {
+          argv[i] = Type.INT;
+          exprs[i].byte_code(il, method, cp);
+        }
 
-	//ASTFunDecl.push(size);
+        //ASTFunDecl.push(size);
       }
 
       ASTFunDecl.pop(size);
 
       // Function call
       il.append(new INVOKESTATIC(cp.addMethodref(class_name,
-						 fname,
-						 Type.getMethodSignature(Type.INT,
-									 argv))));
+                                                 fname,
+                                                 Type.getMethodSignature(Type.INT,
+                                                                         argv))));
     }
 
     ASTFunDecl.push();

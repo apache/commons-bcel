@@ -74,7 +74,7 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
         MiniC.addError(line, column, "Undeclared identifier " + name);
     } else if(entry instanceof Function) {
         MiniC.addError(line, column,
-        	     "Function " + name + " used as an identifier.");
+                     "Function " + name + " used as an identifier.");
     } else {
         reference = (Variable)entry;
     }
