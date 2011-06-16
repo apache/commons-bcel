@@ -24,19 +24,19 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ComplexAnnotation
 {
-	int ival();
+    int ival();
 
-	byte bval();
+    byte bval();
 
-	char cval();
+    char cval();
 
-	long jval();
+    long jval();
 
-	double dval();
+    double dval();
 
-	boolean zval();
+    boolean zval();
 
-	short sval();
+    short sval();
 
-	float fval();
+    float fval();
 }
