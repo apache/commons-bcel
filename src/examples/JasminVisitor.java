@@ -84,8 +84,8 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     out.println(".source " + clazz.getSourceFileName());
     out.println("." + Utility.classOrInterface(clazz.getAccessFlags()) + " " +
-		Utility.accessToString(clazz.getAccessFlags(), true) +
-		" " + clazz.getClassName().replace('.', '/'));
+        Utility.accessToString(clazz.getAccessFlags(), true) +
+        " " + clazz.getClassName().replace('.', '/'));
     out.println(".super " + clazz.getSuperclassName().replace('.', '/'));
 
     String[] interfaces = clazz.getInterfaceNames();
@@ -99,7 +99,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
   public void visitField(Field field) {
     out.print(".field " + Utility.accessToString(field.getAccessFlags()) +
-		" \"" +field.getName() + "\"" + field.getSignature());
+        " \"" +field.getName() + "\"" + field.getSignature());
     if(field.getAttributes().length == 0) {
         out.print("\n");
     }
@@ -136,7 +136,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     this._method = method; // Remember for use in subsequent visitXXX calls
 
     out.println("\n.method " + Utility.accessToString(_method.getAccessFlags()) +
-		" " + _method.getName() + _method.getSignature());
+        " " + _method.getName() + _method.getSignature());
 
     Attribute[] attributes = _method.getAttributes();
     if((attributes == null) || (attributes.length == 0)) {
@@ -172,18 +172,18 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     for(int i=0; i < ihs.length; i++) {
       if(ihs[i] instanceof BranchHandle) {
-	BranchInstruction bi = (BranchInstruction)ihs[i].getInstruction();
-	
-	if(bi instanceof Select) { // Special cases LOOKUPSWITCH and TABLESWITCH
-	  InstructionHandle[] targets = ((Select)bi).getTargets();
-	  
-	  for(int j=0; j < targets.length; j++) {
+    BranchInstruction bi = (BranchInstruction)ihs[i].getInstruction();
+    
+    if(bi instanceof Select) { // Special cases LOOKUPSWITCH and TABLESWITCH
+      InstructionHandle[] targets = ((Select)bi).getTargets();
+      
+      for(int j=0; j < targets.length; j++) {
         put(targets[j], "Label" + label_counter++ + ":");
     }
-	}
+    }
 
-	InstructionHandle ih = bi.getTarget();
-	put(ih, "Label" + label_counter++ + ":");
+    InstructionHandle ih = bi.getTarget();
+    put(ih, "Label" + label_counter++ + ":");
       }
     }
 
@@ -192,7 +192,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
       InstructionHandle ih = lvs[i].getStart();
       put(ih, "Label" + label_counter++ + ":");
       ih = lvs[i].getEnd();
-      put(ih, "Label" + label_counter++ + ":");	
+      put(ih, "Label" + label_counter++ + ":");    
     }
     
     CodeExceptionGen[] ehs = mg.getExceptionHandlers();
@@ -200,11 +200,11 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
       CodeExceptionGen  c  = ehs[i];
       InstructionHandle ih = c.getStartPC();
 
-      put(ih, "Label" + label_counter++ + ":");	
+      put(ih, "Label" + label_counter++ + ":");    
       ih = c.getEndPC();
-      put(ih, "Label" + label_counter++ + ":");	
+      put(ih, "Label" + label_counter++ + ":");    
       ih = c.getHandlerPC();
-      put(ih, "Label" + label_counter++ + ":");	
+      put(ih, "Label" + label_counter++ + ":");    
     }
 
     LineNumberGen[] lns = mg.getLineNumbers();
@@ -218,9 +218,9 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     for(int i=0; i < lvs.length; i++) {
       LocalVariableGen l = lvs[i];
       out.println(".var " + l.getIndex() + " is " + l.getName() + " " +
-		  l.getType().getSignature() + 
-		  " from " + get(l.getStart()) + 
-		  " to " + get(l.getEnd()));
+          l.getType().getSignature() + 
+          " from " + get(l.getStart()) + 
+          " to " + get(l.getEnd()));
     }
 
     out.print("\n");
@@ -235,34 +235,34 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
       if(inst instanceof BranchInstruction) {
-	if(inst instanceof Select) { // Special cases LOOKUPSWITCH and TABLESWITCH
-	  Select              s       = (Select)inst;
-	  int[]               matchs  = s.getMatchs();
-	  InstructionHandle[] targets = s.getTargets();
-	  
-	  if(s instanceof TABLESWITCH) {
-	    out.println("\ttableswitch " + matchs[0] + " " +
-			matchs[matchs.length - 1]);
-	    
-	    for(int j=0; j < targets.length; j++) {
+    if(inst instanceof Select) { // Special cases LOOKUPSWITCH and TABLESWITCH
+      Select              s       = (Select)inst;
+      int[]               matchs  = s.getMatchs();
+      InstructionHandle[] targets = s.getTargets();
+      
+      if(s instanceof TABLESWITCH) {
+        out.println("\ttableswitch " + matchs[0] + " " +
+            matchs[matchs.length - 1]);
+        
+        for(int j=0; j < targets.length; j++) {
             out.println("\t\t" + get(targets[j]));
         }
 
-	  } else { // LOOKUPSWITCH
-	    out.println("\tlookupswitch ");
+      } else { // LOOKUPSWITCH
+        out.println("\tlookupswitch ");
 
-	    for(int j=0; j < targets.length; j++) {
+        for(int j=0; j < targets.length; j++) {
             out.println("\t\t" + matchs[j] + " : " + get(targets[j]));
         }
-	  }
+      }
 
-	  out.println("\t\tdefault: " + get(s.getTarget())); // Applies for both
-	} else {
-	  BranchInstruction bi  = (BranchInstruction)inst;
-	  ih  = bi.getTarget();
-	  str = get(ih);
-	  out.println("\t" + Constants.OPCODE_NAMES[bi.getOpcode()] + " " + str);
-	}
+      out.println("\t\tdefault: " + get(s.getTarget())); // Applies for both
+    } else {
+      BranchInstruction bi  = (BranchInstruction)inst;
+      ih  = bi.getTarget();
+      str = get(ih);
+      out.println("\t" + Constants.OPCODE_NAMES[bi.getOpcode()] + " " + str);
+    }
       } else {
         out.println("\t" + inst.toString(cp.getConstantPool()));
     }
@@ -274,11 +274,11 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
       CodeExceptionGen c = ehs[i];
       ObjectType caught = c.getCatchType();
       String class_name = (caught == null)?  // catch any exception, used when compiling finally
-	"all" : caught.getClassName().replace('.', '/');
+    "all" : caught.getClassName().replace('.', '/');
 
       out.println(".catch " + class_name + " from " +
-		  get(c.getStartPC()) + " to " + get(c.getEndPC()) +
-		  " using " + get(c.getHandlerPC()));
+          get(c.getStartPC()) + " to " + get(c.getEndPC()) +
+          " using " + get(c.getHandlerPC()));
     }
 
     printEndMethod(code);
@@ -301,7 +301,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
       map.put(ih, str + "\n" + line); // append
     }
-  }	
+  }    
 
   public static void main(String[] argv) { 
     JavaClass   java_class;
@@ -310,27 +310,27 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
       if(argv.length == 0) {
         System.err.println("disassemble: No input files specified");
     } else {
-	for(int i=0; i < argv.length; i++) {
-	  if((java_class = Repository.lookupClass(argv[i])) == null) {
+    for(int i=0; i < argv.length; i++) {
+      if((java_class = Repository.lookupClass(argv[i])) == null) {
         java_class = new ClassParser(argv[i]).parse();
     }
 
           String class_name = java_class.getClassName();
           int    index      = class_name.lastIndexOf('.');
-	  String path       = class_name.substring(0, index + 1).replace('.', File.separatorChar);
-	  class_name = class_name.substring(index + 1);
+      String path       = class_name.substring(0, index + 1).replace('.', File.separatorChar);
+      class_name = class_name.substring(index + 1);
 
-	  if(!path.equals("")) {
-	    File f = new File(path);
-	    f.mkdirs();
-	  }
+      if(!path.equals("")) {
+        File f = new File(path);
+        f.mkdirs();
+      }
 
-	  String name = path + class_name + ".j";
-	  FileOutputStream out = new FileOutputStream(name);
-	  new JasminVisitor(java_class, out).disassemble();
-	  System.out.println("File dumped to: " + name);
-	}
-      }	  
+      String name = path + class_name + ".j";
+      FileOutputStream out = new FileOutputStream(name);
+      new JasminVisitor(java_class, out).disassemble();
+      System.out.println("File dumped to: " + name);
+    }
+      }
     } catch(Exception e) {
       e.printStackTrace();
     }

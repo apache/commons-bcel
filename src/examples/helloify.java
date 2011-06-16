@@ -49,32 +49,32 @@ public final class helloify implements Constants {
   public static void main(String[] argv) { 
     try {
       for(int i=0; i < argv.length; i++) {
-	if(argv[i].endsWith(".class")) {
+    if(argv[i].endsWith(".class")) {
           JavaClass       java_class = new ClassParser(argv[i]).parse();
-	  ConstantPool    constants  = java_class.getConstantPool();
+      ConstantPool    constants  = java_class.getConstantPool();
           String          file_name  = argv[i].substring(0, argv[i].length() - 6) +
-	    "_hello.class";
-	  cp = new ConstantPoolGen(constants);
+        "_hello.class";
+      cp = new ConstantPoolGen(constants);
 
-	  helloifyClassName(java_class);
+      helloifyClassName(java_class);
 
-	  out     = cp.addFieldref("java.lang.System", "out",
-				   "Ljava/io/PrintStream;");
-	  println = cp.addMethodref("java.io.PrintStream", "println",
-				    "(Ljava/lang/String;)V");
-	  /* Patch all methods.
-	   */
+      out     = cp.addFieldref("java.lang.System", "out",
+                   "Ljava/io/PrintStream;");
+      println = cp.addMethodref("java.io.PrintStream", "println",
+                    "(Ljava/lang/String;)V");
+      /* Patch all methods.
+       */
           Method[] methods = java_class.getMethods();
 
-	  for(int j=0; j < methods.length; j++) {
+      for(int j=0; j < methods.length; j++) {
         methods[j] = helloifyMethod(methods[j]);
     }
 
-	  /* Finally dump it back to a file.
-	   */
-	  java_class.setConstantPool(cp.getFinalConstantPool());
-	  java_class.dump(file_name);
-	}
+      /* Finally dump it back to a file.
+       */
+      java_class.setConstantPool(cp.getFinalConstantPool());
+      java_class.dump(file_name);
+    }
       }
     } catch(Exception e) {
       e.printStackTrace();
@@ -107,8 +107,8 @@ public final class helloify implements Constants {
     /* Create instruction list to be inserted at method start.
      */
     String mesg = "Hello from " + Utility.methodSignatureToString(m.getSignature(),
-								  name, 
-								  Utility.accessToString(flags));
+                                  name, 
+                                  Utility.accessToString(flags));
     InstructionList patch  = new InstructionList();
     patch.append(new GETSTATIC(out));
     patch.append(new PUSH(cp, mesg));
@@ -120,10 +120,10 @@ public final class helloify implements Constants {
 
     if(name.equals("<init>")) { // First let the super or other constructor be called
       for(int j=1; j < ihs.length; j++) {
-	if(ihs[j].getInstruction() instanceof INVOKESPECIAL) {
-	  il.append(ihs[j], patch); // Should check: method name == "<init>"
-	  break;
-	}
+    if(ihs[j].getInstruction() instanceof INVOKESPECIAL) {
+      il.append(ihs[j], patch); // Should check: method name == "<init>"
+      break;
+    }
       }
     } else {
         il.insert(ihs[0], patch);

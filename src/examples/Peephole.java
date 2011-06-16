@@ -43,15 +43,15 @@ public class Peephole {
       ConstantPoolGen cp      = new ConstantPoolGen(clazz.getConstantPool());
 
       for(int i=0; i < methods.length; i++) {
-	if(!(methods[i].isAbstract() || methods[i].isNative())) {
-	  MethodGen mg       = new MethodGen(methods[i],
-					     clazz.getClassName(), cp);
-	  Method    stripped = removeNOPs(mg);
-	  
-	  if(stripped != null) {
+    if(!(methods[i].isAbstract() || methods[i].isNative())) {
+      MethodGen mg       = new MethodGen(methods[i],
+                         clazz.getClassName(), cp);
+      Method    stripped = removeNOPs(mg);
+      
+      if(stripped != null) {
         methods[i] = stripped; // Overwrite with stripped method
     }
-	}
+    }
       }
 
       /* Dump the class to <class name>_.class
@@ -85,16 +85,16 @@ public class Peephole {
        * (non-nop) instruction.
        */
       try {
-	il.delete(first, last);
+    il.delete(first, last);
       } catch(TargetLostException e2) {
-	InstructionHandle[] targets = e2.getTargets();
-	for(int i=0; i < targets.length; i++) {
-	  InstructionTargeter[] targeters = targets[i].getTargeters();
-	  
-	  for(int j=0; j < targeters.length; j++) {
+    InstructionHandle[] targets = e2.getTargets();
+    for(int i=0; i < targets.length; i++) {
+      InstructionTargeter[] targeters = targets[i].getTargeters();
+      
+      for(int j=0; j < targeters.length; j++) {
         targeters[j].updateTarget(targets[i], next);
     }
-	}
+    }
       }
     }
 
@@ -102,7 +102,7 @@ public class Peephole {
     
     if(count > 0) {
       System.out.println("Removed " + count + " NOP instructions from method " +
-			 mg.getName());
+             mg.getName());
       m = mg.getMethod();
     }
 

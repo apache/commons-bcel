@@ -107,8 +107,8 @@ public class listclass {
             exclude=true;
         } else if(argv[i].equals("-help")) {
           System.out.println( "Usage: java listclass [-constants] [-code] [-brief] " +
-			      "[-dependencies] [-nocontents] [-recurse] class... " +
-			      "[-exclude <list>]\n" +
+                  "[-dependencies] [-nocontents] [-recurse] class... " +
+                  "[-exclude <list>]\n" +
                               "-constants       Print constants table (constant pool)\n" +
                               "-code            Dump byte code of methods\n" +
                               "-brief           Brief listing\n" +
@@ -116,9 +116,9 @@ public class listclass {
                               "-nocontents      Do not print field/method information\n" +
                               "-recurse         Recurse into dependent classes\n" +
                               "-exclude <list>  Do not list classes beginning with " +
-			      "strings in <list>" );
+                  "strings in <list>" );
           System.exit( 0 );
-	} else {
+    } else {
             System.err.println("Unknown switch " + argv[i] + " ignored.");
         }
       } else { // add file name to list
@@ -134,7 +134,7 @@ public class listclass {
         System.err.println("list: No input files specified");
     } else {
       listclass listClass = new listclass(code, constants, verbose, classdep,
-					  nocontents, recurse, exclude_name);
+                      nocontents, recurse, exclude_name);
 
       for(int i=0; i < file_name.size(); i++) {
         name = (String) file_name.elementAt(i);
@@ -145,7 +145,7 @@ public class listclass {
   }
 
   public listclass(boolean code, boolean constants, boolean verbose, boolean classdep,
-		   boolean nocontents, boolean recurse, Vector exclude_name)
+           boolean nocontents, boolean recurse, Vector exclude_name)
   {
     this.code = code;
     this.constants = constants;
@@ -176,7 +176,7 @@ public class listclass {
       if(name.endsWith(".class")) {
         java_class = new ClassParser(name).parse(); // May throw IOException
       } else {
-	java_class = Repository.lookupClass(name);
+    java_class = Repository.lookupClass(name);
       }
 
       if(nocontents) {
@@ -240,7 +240,7 @@ public class listclass {
           if(buf.charAt(n) == '/') {
             buf.setCharAt(n, '.');
         }
-	}
+    }
 
         tempArray[size++] = buf.toString();
       }

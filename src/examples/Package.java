@@ -123,21 +123,21 @@ public class Package {
     JavaClass clazz ;
     // sort the options
     for(int i = 0 ; i < args.length ; i++ ){
-      if( args[i].startsWith("-e")  )	{
-	showNotFound = true;
-	continue;
+      if( args[i].startsWith("-e")  )    {
+    showNotFound = true;
+    continue;
       }
-      if( args[i].startsWith("-s")  )	{
-	printClasses = true ;
-	continue;
+      if( args[i].startsWith("-s")  )    {
+    printClasses = true ;
+    continue;
       }
-      if( args[i].startsWith("-l")  )	{
-	log = true ;
-	continue;
+      if( args[i].startsWith("-l")  )    {
+    log = true ;
+    continue;
       }
       String clName = args[i];
       if(clName.endsWith(".class")) {
-	clName = clName.substring(0,clName.length()-6);
+    clName = clName.substring(0,clName.length()-6);
       }
       clName = clName.replace('.','/'); 
       clazz = new ClassParser(classPath.getInputStream(clName),clName).parse();
@@ -156,14 +156,14 @@ public class Package {
       String name = (String)dependents.firstKey();
       String from = (String) dependents.remove(name);
       if(allClasses.get(name) == null){
-	try{
-	  InputStream is = classPath.getInputStream(name);
-	  clazz = new ClassParser(is, name).parse();
-	  addDependents(clazz);
-	}catch( IOException e){
-	  //System.err.println("Error, class not found " + name );
-	  notFound.put(name,from);
-	}
+    try{
+      InputStream is = classPath.getInputStream(name);
+      clazz = new ClassParser(is, name).parse();
+      addDependents(clazz);
+    }catch( IOException e){
+      //System.err.println("Error, class not found " + name );
+      notFound.put(name,from);
+    }
       }
     }
     if(printClasses) { // if wanted show all classes
@@ -186,16 +186,16 @@ public class Package {
     }
     jarFile.close();
     System.err.println("The jar file contains " + allClasses.size() 
-		       +" classes and contains " +written+ " bytes");
+               +" classes and contains " +written+ " bytes");
     if( !notFound.isEmpty() ){
       System.err.println( notFound.size() +" classes could not be found");
       if(showNotFound){ // if wanted show the actual classes that we not found
-	while(!notFound.isEmpty()){
-	  String name = (String)notFound.firstKey();
-	  System.err.println( name+ " (" + notFound.remove(name)+")");
-	}
+    while(!notFound.isEmpty()){
+      String name = (String)notFound.firstKey();
+      System.err.println( name+ " (" + notFound.remove(name)+")");
+    }
       }else{
-	System.err.println("Use '-e' option to view classes that were not found");
+    System.err.println("Use '-e' option to view classes that were not found");
       }
     }
   }
@@ -225,9 +225,9 @@ public class Package {
       Constant cons =  pool.getConstant(i);
       //System.out.println("("+i+") " + cons );
       if( cons!=null && cons.getTag() == Constants.CONSTANT_Class ){
-	int idx = ((ConstantClass)pool.getConstant(i)).getNameIndex();
-	String clas = ((ConstantUtf8)pool.getConstant(idx)).getBytes();
-	addClassString(clas,name);
+    int idx = ((ConstantClass)pool.getConstant(i)).getNameIndex();
+    String clas = ((ConstantUtf8)pool.getConstant(idx)).getBytes();
+    addClassString(clas,name);
       }
     }
   }
@@ -243,19 +243,19 @@ public class Package {
     // must check if it's an arrary (start with "[")
     if(clas.startsWith("[")) {
       if(clas.length() == 2 ) {
-	// it's an array of built in type, ignore
-	return;
+    // it's an array of built in type, ignore
+    return;
       }
       if( 'L' == clas.charAt(1) ){
-	// it's an array of objects, the class name is between [L and ;
-	// like    [Ljava/lang/Object;
-	addClassString(clas.substring(2,clas.length()-1),from);
-	return;
+    // it's an array of objects, the class name is between [L and ;
+    // like    [Ljava/lang/Object;
+    addClassString(clas.substring(2,clas.length()-1),from);
+    return;
       }
       if( '[' == clas.charAt(1) ){
-	// it's an array of arrays, call recursive
-	addClassString(clas.substring(1),from);
-	return ;
+    // it's an array of arrays, call recursive
+    addClassString(clas.substring(1),from);
+    return ;
       }
       throw new IOException("Can't recognize class name =" + clas);
     }

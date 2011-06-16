@@ -75,7 +75,7 @@ public class ProxyCreator {
     if(loader.getClass().toString().equals("class org.apache.bcel.util.ClassLoader")) {
       // Real class name will be set by the class loader
       ClassGen cg = new ClassGen("foo", "java.lang.Object", "", Constants.ACC_PUBLIC,
-				 new String[] {"java.awt.event.ActionListener"});
+                 new String[] {"java.awt.event.ActionListener"});
      
       // That's important, otherwise newInstance() won't work
       cg.addEmptyConstructor(Constants.ACC_PUBLIC);
@@ -85,13 +85,13 @@ public class ProxyCreator {
       InstructionFactory factory = new InstructionFactory(cg);
 
       int out     = cp.addFieldref("java.lang.System", "out",
-				   "Ljava/io/PrintStream;");
+                   "Ljava/io/PrintStream;");
       int println = cp.addMethodref("java.io.PrintStream", "println",
-				  "(Ljava/lang/Object;)V");
+                  "(Ljava/lang/Object;)V");
       MethodGen mg = new MethodGen(Constants.ACC_PUBLIC, Type.VOID,
-				   new Type[] {
-				     new ObjectType("java.awt.event.ActionEvent")
-				   }, null, "actionPerformed", "foo", il, cp);
+                   new Type[] {
+                     new ObjectType("java.awt.event.ActionEvent")
+                   }, null, "actionPerformed", "foo", il, cp);
 
       // System.out.println("actionPerformed:" + event);
       il.append(new GETSTATIC(out));
@@ -99,7 +99,7 @@ public class ProxyCreator {
       il.append(InstructionConstants.DUP);
       il.append(new PUSH(cp, "actionPerformed:"));
       il.append(factory.createInvoke("java.lang.StringBuffer", "<init>", Type.VOID,
-				     new Type[] {Type.STRING}, Constants.INVOKESPECIAL));
+                     new Type[] {Type.STRING}, Constants.INVOKESPECIAL));
 
       il.append(new ALOAD(1));
       il.append(factory.createAppend(Type.OBJECT));
