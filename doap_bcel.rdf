@@ -42,6 +42,13 @@
     <release>
       <revision>
         <name>bcel</name>
+        <created>2007-06-14</created>
+        <version>5.2</version>
+      </revision>
+    </release>
+    <release>
+      <revision>
+        <name>bcel</name>
         <created>2003-09-06</created>
         <version>5.1</version>
       </revision>
