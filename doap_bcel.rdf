@@ -35,8 +35,8 @@
     </description>
     <repository>
       <SVNRepository>
-        <browse rdf:resource="http://svn.apache.org/viewcvs.cgi/jakarta/bcel/"/>
-        <location rdf:resource="http://svn.apache.org/repos/asf/commons/bcel"/>
+        <browse rdf:resource="http://svn.apache.org/viewcvs.cgi/commons/proper/bcel/"/>
+        <location rdf:resource="http://svn.apache.org/repos/asf/commons/proper/bcel"/>
       </SVNRepository>
     </repository>
     <release>
