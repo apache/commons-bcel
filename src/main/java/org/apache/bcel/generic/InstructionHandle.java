@@ -49,7 +49,7 @@ public class InstructionHandle implements java.io.Serializable {
     Instruction instruction;
     protected int i_position = -1; // byte code offset of instruction
     private Set<InstructionTargeter> targeters;
-    private Map attributes;
+    private Map<Object, Object> attributes;
 
 
     public final InstructionHandle getNext() {
@@ -197,7 +197,7 @@ public class InstructionHandle implements java.io.Serializable {
      */
     public void addTargeter( InstructionTargeter t ) {
         if (targeters == null) {
-            targeters = new HashSet();
+            targeters = new HashSet<InstructionTargeter>();
         }
         //if(!targeters.contains(t))
         targeters.add(t);
@@ -243,7 +243,7 @@ public class InstructionHandle implements java.io.Serializable {
      */
     public void addAttribute( Object key, Object attr ) {
         if (attributes == null) {
-            attributes = new HashMap(3);
+            attributes = new HashMap<Object, Object>(3);
         }
         attributes.put(key, attr);
     }
@@ -274,9 +274,9 @@ public class InstructionHandle implements java.io.Serializable {
 
     /** @return all attributes associated with this handle
      */
-    public Collection getAttributes() {
+    public Collection<Object> getAttributes() {
         if (attributes == null) {
-            attributes = new HashMap(3);
+            attributes = new HashMap<Object, Object>(3);
         }
         return attributes.values();
     }
