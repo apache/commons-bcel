@@ -51,7 +51,7 @@ public class ICONST extends Instruction implements ConstantPushInstruction {
 
 
     public Number getValue() {
-        return new Integer(value);
+        return Integer.valueOf(value);
     }
 
 

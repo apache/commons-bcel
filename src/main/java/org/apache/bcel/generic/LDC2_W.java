@@ -59,7 +59,7 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
         org.apache.bcel.classfile.Constant c = cpg.getConstantPool().getConstant(index);
         switch (c.getTag()) {
             case org.apache.bcel.Constants.CONSTANT_Long:
-                return new Long(((org.apache.bcel.classfile.ConstantLong) c).getBytes());
+                return Long.valueOf(((org.apache.bcel.classfile.ConstantLong) c).getBytes());
             case org.apache.bcel.Constants.CONSTANT_Double:
                 return new Double(((org.apache.bcel.classfile.ConstantDouble) c).getBytes());
             default: // Never reached

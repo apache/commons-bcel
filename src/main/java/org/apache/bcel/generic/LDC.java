@@ -103,7 +103,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
             case org.apache.bcel.Constants.CONSTANT_Float:
                 return new Float(((org.apache.bcel.classfile.ConstantFloat) c).getBytes());
             case org.apache.bcel.Constants.CONSTANT_Integer:
-                return new Integer(((org.apache.bcel.classfile.ConstantInteger) c).getBytes());
+                return Integer.valueOf(((org.apache.bcel.classfile.ConstantInteger) c).getBytes());
             case org.apache.bcel.Constants.CONSTANT_Class:
             	int nameIndex = ((org.apache.bcel.classfile.ConstantClass) c).getNameIndex();
             	c = cpg.getConstantPool().getConstant(nameIndex);

@@ -152,7 +152,7 @@ public abstract class Type implements java.io.Serializable {
     private static final ThreadLocal<Integer> consumed_chars = new ThreadLocal<Integer>() {
 
         protected Integer initialValue() {
-            return new Integer(0);
+            return Integer.valueOf(0);
         }
     };//int consumed_chars=0; // Remember position in string, see getArgumentTypes
 
@@ -163,7 +163,7 @@ public abstract class Type implements java.io.Serializable {
 
 
     private static void wrap( ThreadLocal<Integer> tl, int value ) {
-        tl.set(new Integer(value));
+        tl.set(Integer.valueOf(value));
     }
 
 

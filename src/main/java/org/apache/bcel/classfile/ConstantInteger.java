@@ -117,6 +117,6 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     /** @return Integer object
      */
     public Object getConstantValue( ConstantPool cp ) {
-        return new Integer(bytes);
+        return Integer.valueOf(bytes);
     }
 }

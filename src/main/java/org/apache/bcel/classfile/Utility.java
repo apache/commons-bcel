@@ -56,7 +56,7 @@ public abstract class Utility {
 
 
     private static void wrap( ThreadLocal<Integer> tl, int value ) {
-        tl.set(new Integer(value));
+        tl.set(Integer.valueOf(value));
     }
 
     private static ThreadLocal<Integer> consumed_chars = new ThreadLocal<Integer>() {

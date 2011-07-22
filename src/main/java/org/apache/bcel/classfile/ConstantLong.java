@@ -117,6 +117,6 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /** @return Long object
      */
     public Object getConstantValue( ConstantPool cp ) {
-        return new Long(bytes);
+        return Long.valueOf(bytes);
     }
 }

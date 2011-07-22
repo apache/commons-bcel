@@ -136,7 +136,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     public void setInitValue( int i ) {
         checkType(Type.INT);
         if (i != 0) {
-            value = new Integer(i);
+            value = Integer.valueOf(i);
         }
     }
 
@@ -144,7 +144,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     public void setInitValue( short s ) {
         checkType(Type.SHORT);
         if (s != 0) {
-            value = new Integer(s);
+            value = Integer.valueOf(s);
         }
     }
 
@@ -152,7 +152,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     public void setInitValue( char c ) {
         checkType(Type.CHAR);
         if (c != 0) {
-            value = new Integer(c);
+            value = Integer.valueOf(c);
         }
     }
 
@@ -160,7 +160,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     public void setInitValue( byte b ) {
         checkType(Type.BYTE);
         if (b != 0) {
-            value = new Integer(b);
+            value = Integer.valueOf(b);
         }
     }
 
@@ -168,7 +168,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     public void setInitValue( boolean b ) {
         checkType(Type.BOOLEAN);
         if (b) {
-            value = new Integer(1);
+            value = Integer.valueOf(1);
         }
     }
 

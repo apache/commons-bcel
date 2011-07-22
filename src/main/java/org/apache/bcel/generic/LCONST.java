@@ -53,7 +53,7 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
 
 
     public Number getValue() {
-        return new Long(value);
+        return Long.valueOf(value);
     }
 
 

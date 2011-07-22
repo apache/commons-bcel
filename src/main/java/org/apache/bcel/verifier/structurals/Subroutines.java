@@ -252,7 +252,7 @@ public class Subroutines{
 			for (int i=0; i<subs.length; i++){
 				int[] lvs = subs[i].getAccessedLocalsIndices();
 				for (int j=0; j<lvs.length; j++){
-					s.add(new Integer(lvs[j]));
+					s.add(Integer.valueOf(lvs[j]));
 				}
 				if(subs[i].subSubs().length != 0){
 					_getRecursivelyAccessedLocalsIndicesHelper(s, subs[i].subSubs());
@@ -276,7 +276,7 @@ public class Subroutines{
     				// RET is not a LocalVariableInstruction in the current version of BCEL.
     				if (ih.getInstruction() instanceof LocalVariableInstruction || ih.getInstruction() instanceof RET){
     					int idx = ((IndexedInstruction) (ih.getInstruction())).getIndex();
-    					acc.add(new Integer(idx));
+    					acc.add(Integer.valueOf(idx));
     					// LONG? DOUBLE?.
     					try{
     						// LocalVariableInstruction instances are typed without the need to look into
@@ -284,7 +284,7 @@ public class Subroutines{
     						if (ih.getInstruction() instanceof LocalVariableInstruction){
     							int s = ((LocalVariableInstruction) ih.getInstruction()).getType(null).getSize();
     							if (s==2) {
-                                    acc.add(new Integer(idx+1));
+                                    acc.add(Integer.valueOf(idx+1));
                                 }
     						}
     					}
@@ -349,9 +349,9 @@ public class Subroutines{
 	}// end Inner Class SubrouteImpl
 
 	//Node coloring constants
-	private static final Integer WHITE = new Integer(0);
-	private static final Integer GRAY = new Integer(1);
-	private static final Integer BLACK = new Integer(2);
+	private static final Integer WHITE = Integer.valueOf(0);
+	private static final Integer GRAY = Integer.valueOf(1);
+	private static final Integer BLACK = Integer.valueOf(2);
 	
 	/**
 	 * The map containing the subroutines found.
@@ -518,7 +518,7 @@ public class Subroutines{
 		for (int i=0; i<subs.length; i++){
 			int index = ((RET) (subs[i].getLeavingRET().getInstruction())).getIndex();
 			
-			if (!set.add(new Integer(index))){
+			if (!set.add(Integer.valueOf(index))){
 				// Don't use toString() here because of possibly infinite recursive subSubs() calls then.
 				SubroutineImpl si = (SubroutineImpl) subs[i];
 				throw new StructuralCodeConstraintException("Subroutine with local variable '"+si.localVariable+"', JSRs '"+si.theJSRs+"', RET '"+si.theRET+"' is called by a subroutine which uses the same local variable index as itself; maybe even a recursive call? JustIce's clean definition of a subroutine forbids both.");
@@ -526,7 +526,7 @@ public class Subroutines{
 
 			noRecursiveCalls(subs[i], set);
 			
-			set.remove(new Integer(index));
+			set.remove(Integer.valueOf(index));
 		}
 	} 
 	
