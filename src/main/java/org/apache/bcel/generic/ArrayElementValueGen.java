@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.bcel.classfile.ArrayElementValue;
 import org.apache.bcel.classfile.ElementValue;
 
@@ -29,12 +30,12 @@ public class ArrayElementValueGen extends ElementValueGen
 {
 	// J5TODO: Should we make this an array or a list? A list would be easier to
 	// modify ...
-	private List /* ElementValueGen */evalues;
+	private List<ElementValueGen> evalues;
 
 	public ArrayElementValueGen(ConstantPoolGen cp)
 	{
 		super(ARRAY, cp);
-		evalues = new ArrayList();
+		evalues = new ArrayList<ElementValueGen>();
 	}
 
 	public ArrayElementValueGen(int type, ElementValue[] datums,
@@ -44,10 +45,10 @@ public class ArrayElementValueGen extends ElementValueGen
 		if (type != ARRAY)
 			throw new RuntimeException(
 					"Only element values of type array can be built with this ctor - type specified: " + type);
-		this.evalues = new ArrayList();
+		this.evalues = new ArrayList<ElementValueGen>();
 		for (int i = 0; i < datums.length; i++)
 		{
-			evalues.add(datums[i]);
+			evalues.add(ElementValueGen.copy(datums[i], cpool, true));
 		}
 	}
 
@@ -58,9 +59,9 @@ public class ArrayElementValueGen extends ElementValueGen
 	{
 		ElementValue[] immutableData = new ElementValue[evalues.size()];
 		int i = 0;
-		for (Iterator iter = evalues.iterator(); iter.hasNext();)
+		for (Iterator<ElementValueGen> iter = evalues.iterator(); iter.hasNext();)
 		{
-			ElementValueGen element = (ElementValueGen) iter.next();
+			ElementValueGen element = iter.next();
 			immutableData[i++] = element.getElementValue();
 		}
 		return new ArrayElementValue(type, immutableData, cpGen
@@ -75,7 +76,7 @@ public class ArrayElementValueGen extends ElementValueGen
 			boolean copyPoolEntries)
 	{
 		super(ARRAY, cpool);
-		evalues = new ArrayList();
+		evalues = new ArrayList<ElementValueGen>();
 		ElementValue[] in = value.getElementValuesArray();
 		for (int i = 0; i < in.length; i++)
 		{
@@ -87,9 +88,9 @@ public class ArrayElementValueGen extends ElementValueGen
 	{
 		dos.writeByte(type); // u1 type of value (ARRAY == '[')
 		dos.writeShort(evalues.size());
-		for (Iterator iter = evalues.iterator(); iter.hasNext();)
+		for (Iterator<ElementValueGen> iter = evalues.iterator(); iter.hasNext();)
 		{
-			ElementValueGen element = (ElementValueGen) iter.next();
+			ElementValueGen element = iter.next();
 			element.dump(dos);
 		}
 	}
@@ -98,9 +99,9 @@ public class ArrayElementValueGen extends ElementValueGen
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
-		for (Iterator iter = evalues.iterator(); iter.hasNext();)
+		for (Iterator<ElementValueGen> iter = evalues.iterator(); iter.hasNext();)
 		{
-			ElementValueGen element = (ElementValueGen) iter.next();
+			ElementValueGen element = iter.next();
 			sb.append(element.stringifyValue());
 			if (iter.hasNext())
 				sb.append(",");
@@ -109,7 +110,7 @@ public class ArrayElementValueGen extends ElementValueGen
 		return sb.toString();
 	}
 
-	public List getElementValues()
+	public List<ElementValueGen> getElementValues()
 	{
 		return evalues;
 	}
