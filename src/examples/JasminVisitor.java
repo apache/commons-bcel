@@ -153,7 +153,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     printEndMethod(e);
   }
 
-  private Hashtable map;
+  private Hashtable<InstructionHandle, String> map;
 
   public void visitCode(Code code) {
     int label_counter = 0;
@@ -168,7 +168,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     /* Pass 1: Give all referenced instruction handles a symbolic name, i.e. a
      * label.
      */
-    map = new Hashtable();
+    map = new Hashtable<InstructionHandle, String>();
 
     for(int i=0; i < ihs.length; i++) {
       if(ihs[i] instanceof BranchHandle) {
@@ -228,7 +228,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     for(int i=0; i < ihs.length; i++) {
       InstructionHandle ih   = ihs[i];
       Instruction       inst = ih.getInstruction();
-      String            str  = (String)map.get(ih);
+      String            str  = map.get(ih);
       
       if(str != null) {
         out.println(str);
@@ -285,12 +285,12 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
   }
  
   private final String get(InstructionHandle ih) {
-    String str = new StringTokenizer((String)map.get(ih), "\n").nextToken();
+    String str = new StringTokenizer(map.get(ih), "\n").nextToken();
     return str.substring(0, str.length() - 1);
   }
 
   private final void put(InstructionHandle ih, String line) {
-    String str = (String)map.get(ih);
+    String str = map.get(ih);
 
     if(str == null) {
         map.put(ih, line);

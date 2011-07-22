@@ -130,7 +130,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     }
 
 
-    public Class[] getExceptions() {
+    public Class<?>[] getExceptions() {
         return org.apache.bcel.ExceptionConstants.EXCS_STRING_RESOLUTION;
     }
 

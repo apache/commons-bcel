@@ -190,7 +190,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 */
 	private void every_class_has_an_accessible_superclass(){
 	    try {
-		Set hs = new HashSet(); // save class names to detect circular inheritance
+		Set<String> hs = new HashSet<String>(); // save class names to detect circular inheritance
 		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 		int supidx = -1;
 
@@ -240,7 +240,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 */
 	private void final_methods_are_not_overridden(){
 	    try {
-		Map hashmap = new HashMap();
+		Map<String, String> hashmap = new HashMap<String, String>();
 		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 		
 		int supidx = -1;
@@ -311,28 +311,28 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
    * @see #constant_pool_entries_satisfy_static_constraints()
 	 */
 	private class CPESSC_Visitor extends org.apache.bcel.classfile.EmptyVisitor{
-		private Class CONST_Class;
+		private Class<?> CONST_Class;
 		/*
-        private Class CONST_Fieldref;
-		private Class CONST_Methodref;
-		private Class CONST_InterfaceMethodref;
+        private Class<?> CONST_Fieldref;
+		private Class<?> CONST_Methodref;
+		private Class<?> CONST_InterfaceMethodref;
         */
-		private Class CONST_String;
-		private Class CONST_Integer;
-		private Class CONST_Float;
-		private Class CONST_Long;
-		private Class CONST_Double;
-		private Class CONST_NameAndType;
-		private Class CONST_Utf8;
+		private Class<?> CONST_String;
+		private Class<?> CONST_Integer;
+		private Class<?> CONST_Float;
+		private Class<?> CONST_Long;
+		private Class<?> CONST_Double;
+		private Class<?> CONST_NameAndType;
+		private Class<?> CONST_Utf8;
 
 		private final JavaClass jc;
 		private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work and computing power.
 		private final int cplen; // == cp.getLength() -- to save computing power.
 		private DescendingVisitor carrier;
 
-		private Set field_names = new HashSet();
-		private Set field_names_and_desc = new HashSet();
-		private Set method_names_and_desc = new HashSet();
+		private Set<String> field_names = new HashSet<String>();
+		private Set<String> field_names_and_desc = new HashSet<String>();
+		private Set<String> method_names_and_desc = new HashSet<String>();
 
 		private CPESSC_Visitor(JavaClass _jc){
 			jc = _jc;
@@ -357,7 +357,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			carrier.visit();
 		}
 
-		private void checkIndex(Node referrer, int index, Class shouldbe){
+		private void checkIndex(Node referrer, int index, Class<?> shouldbe){
 			if ((index < 0) || (index >= cplen)){
 				throw new ClassConstraintException("Invalid index '"+index+"' used by '"+tostring(referrer)+"'.");
 			}

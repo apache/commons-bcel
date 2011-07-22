@@ -33,7 +33,7 @@ import org.apache.bcel.classfile.JavaClass;
 public class ClassVector implements java.io.Serializable {
 
     private static final long serialVersionUID = 5600397075672780806L;
-    protected List vec = new ArrayList();
+    protected List<JavaClass> vec = new ArrayList<JavaClass>();
 
 
     public void addElement( JavaClass clazz ) {
@@ -42,7 +42,7 @@ public class ClassVector implements java.io.Serializable {
 
 
     public JavaClass elementAt( int index ) {
-        return (JavaClass) vec.get(index);
+        return vec.get(index);
     }
 
 

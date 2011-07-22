@@ -50,19 +50,19 @@ import org.apache.bcel.util.ByteSequence;
  */
 public abstract class Utility {
 
-    private static int unwrap( ThreadLocal tl ) {
-        return ((Integer) tl.get()).intValue();
+    private static int unwrap( ThreadLocal<Integer> tl ) {
+        return tl.get().intValue();
     }
 
 
-    private static void wrap( ThreadLocal tl, int value ) {
+    private static void wrap( ThreadLocal<Integer> tl, int value ) {
         tl.set(new Integer(value));
     }
 
-    private static ThreadLocal consumed_chars = new ThreadLocal() {
+    private static ThreadLocal<Integer> consumed_chars = new ThreadLocal<Integer>() {
 
-        protected Object initialValue() {
-            return new Integer(0);
+        protected Integer initialValue() {
+            return Integer.valueOf(0);
         }
     };/* How many chars have been consumed
      * during parsing in signatureToString().
@@ -563,7 +563,7 @@ public abstract class Utility {
      */
     public static final String[] methodSignatureArgumentTypes( String signature, boolean chopit )
             throws ClassFormatException {
-        List vec = new ArrayList();
+        List<String> vec = new ArrayList<String>();
         int index;
         try { // Read all declarations between for `(' and `)'
             if (signature.charAt(0) != '(') {
@@ -578,7 +578,7 @@ public abstract class Utility {
         } catch (StringIndexOutOfBoundsException e) { // Should never occur
             throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
-        return (String[]) vec.toArray(new String[vec.size()]);
+        return vec.toArray(new String[vec.size()]);
     }
 
 
@@ -1378,7 +1378,7 @@ public abstract class Utility {
      * @param cp The constant pool gen where we can create the necessary name refs
      * @param vec A list of AnnotationGen objects
      */
-    public static Attribute[] getAnnotationAttributes(ConstantPoolGen cp,List vec) {
+    public static Attribute[] getAnnotationAttributes(ConstantPoolGen cp,List<AnnotationEntryGen> vec) {
     	
     	if (vec.isEmpty()) return new Attribute[0];
     	
@@ -1388,7 +1388,7 @@ public abstract class Utility {
     	
     		//  put the annotations in the right output stream
     		for (int i=0; i<vec.size(); i++) {
-    			AnnotationEntryGen a = (AnnotationEntryGen)vec.get(i);
+    			AnnotationEntryGen a = vec.get(i);
     			if (a.isRuntimeVisible()) countVisible++;
     			else			   countInvisible++;
     		}
@@ -1403,7 +1403,7 @@ public abstract class Utility {
 
     		// put the annotations in the right output stream
     		for (int i=0; i<vec.size(); i++) {
-    			AnnotationEntryGen a = (AnnotationEntryGen)vec.get(i);
+    			AnnotationEntryGen a = vec.get(i);
     			if (a.isRuntimeVisible()) a.dump(rvaDos);
     			else			   a.dump(riaDos);
     		}
@@ -1420,7 +1420,7 @@ public abstract class Utility {
       if (rvaData.length>2) rvaIndex = cp.addUtf8("RuntimeVisibleAnnotations");
       if (riaData.length>2) riaIndex = cp.addUtf8("RuntimeInvisibleAnnotations");
 
-    	List newAttributes = new ArrayList();
+    	List<Attribute> newAttributes = new ArrayList<Attribute>();
     	if (rvaData.length>2) {
     		
     		newAttributes.add(
@@ -1431,7 +1431,7 @@ public abstract class Utility {
     		  new RuntimeInvisibleAnnotations(riaIndex,riaData.length,new DataInputStream(new ByteArrayInputStream(riaData)),cp.getConstantPool()));
     	}
 
-    	return (Attribute[])newAttributes.toArray(new Attribute[newAttributes.size()]);
+    	return newAttributes.toArray(new Attribute[newAttributes.size()]);
     	} catch (IOException e) {
     		System.err.println("IOException whilst processing annotations");
   		e.printStackTrace();
@@ -1447,7 +1447,7 @@ public abstract class Utility {
 	 */
 	public static Attribute[] getParameterAnnotationAttributes(
 			ConstantPoolGen cp,
-			List[] /*Array of lists, array size depends on #params */vec)
+			List<AnnotationEntryGen>[] /*Array of lists, array size depends on #params */vec)
 	{
 		int visCount[] = new int[vec.length];
 		int totalVisCount = 0;
@@ -1457,12 +1457,12 @@ public abstract class Utility {
 		{
 			for (int i = 0; i < vec.length; i++)
 			{
-				List l = vec[i];
+				List<AnnotationEntryGen> l = vec[i];
 				if (l != null)
 				{
-					for (Iterator iter = l.iterator(); iter.hasNext();)
+					for (Iterator<AnnotationEntryGen> iter = l.iterator(); iter.hasNext();)
 					{
-						AnnotationEntryGen element = (AnnotationEntryGen) iter.next();
+						AnnotationEntryGen element = iter.next();
 						if (element.isRuntimeVisible())
 						{
 							visCount[i]++;
@@ -1485,10 +1485,10 @@ public abstract class Utility {
 				rvaDos.writeShort(visCount[i]);
 				if (visCount[i] > 0)
 				{
-					List l = vec[i];
-					for (Iterator iter = l.iterator(); iter.hasNext();)
+					List<AnnotationEntryGen> l = vec[i];
+					for (Iterator<AnnotationEntryGen> iter = l.iterator(); iter.hasNext();)
 					{
-						AnnotationEntryGen element = (AnnotationEntryGen) iter.next();
+						AnnotationEntryGen element = iter.next();
 						if (element.isRuntimeVisible())
 							element.dump(rvaDos);
 					}
@@ -1504,10 +1504,10 @@ public abstract class Utility {
 				riaDos.writeShort(invisCount[i]);
 				if (invisCount[i] > 0)
 				{
-					List l = vec[i];
-					for (Iterator iter = l.iterator(); iter.hasNext();)
+					List<AnnotationEntryGen> l = vec[i];
+					for (Iterator<AnnotationEntryGen> iter = l.iterator(); iter.hasNext();)
 					{
-						AnnotationEntryGen element = (AnnotationEntryGen) iter.next();
+						AnnotationEntryGen element = iter.next();
 						if (!element.isRuntimeVisible())
 							element.dump(riaDos);
 					}
@@ -1522,7 +1522,7 @@ public abstract class Utility {
 				rvaIndex = cp.addUtf8("RuntimeVisibleParameterAnnotations");
 			if (totalInvisCount > 0)
 				riaIndex = cp.addUtf8("RuntimeInvisibleParameterAnnotations");
-			List newAttributes = new ArrayList();
+			List<Attribute> newAttributes = new ArrayList<Attribute>();
 			if (totalVisCount > 0)
 			{
 				newAttributes
@@ -1535,7 +1535,7 @@ public abstract class Utility {
 						.add(new RuntimeInvisibleParameterAnnotations(riaIndex,
 								riaData.length, new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
 			}
-			return (Attribute[]) newAttributes.toArray(new Attribute[newAttributes.size()]);
+			return newAttributes.toArray(new Attribute[newAttributes.size()]);
 		}
 		catch (IOException e)
 		{

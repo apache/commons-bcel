@@ -63,7 +63,7 @@ public class ClassPath implements Serializable {
      */
     public ClassPath(String class_path) {
         this.class_path = class_path;
-        List vec = new ArrayList();
+        List<PathEntry> vec = new ArrayList<PathEntry>();
         for (StringTokenizer tok = new StringTokenizer(class_path, System
                 .getProperty("path.separator")); tok.hasMoreTokens();) {
             String path = tok.nextToken();
@@ -122,7 +122,7 @@ public class ClassPath implements Serializable {
     }
 
 
-    private static final void getPathComponents( String path, List list ) {
+    private static final void getPathComponents( String path, List<String> list ) {
         if (path != null) {
             StringTokenizer tok = new StringTokenizer(path, File.pathSeparator);
             while (tok.hasMoreTokens()) {
@@ -145,13 +145,13 @@ public class ClassPath implements Serializable {
         String class_path = System.getProperty("java.class.path");
         String boot_path = System.getProperty("sun.boot.class.path");
         String ext_path = System.getProperty("java.ext.dirs");
-        List list = new ArrayList();
+        List<String> list = new ArrayList<String>();
         getPathComponents(class_path, list);
         getPathComponents(boot_path, list);
-        List dirs = new ArrayList();
+        List<String> dirs = new ArrayList<String>();
         getPathComponents(ext_path, dirs);
-        for (Iterator e = dirs.iterator(); e.hasNext();) {
-            File ext_dir = new File((String) e.next());
+        for (Iterator<String> e = dirs.iterator(); e.hasNext();) {
+            File ext_dir = new File(e.next());
             String[] extensions = ext_dir.list(new FilenameFilter() {
 
                 public boolean accept( File dir, String name ) {
@@ -166,8 +166,8 @@ public class ClassPath implements Serializable {
             }
         }
         StringBuffer buf = new StringBuffer();
-        for (Iterator e = list.iterator(); e.hasNext();) {
-            buf.append((String) e.next());
+        for (Iterator<String> e = list.iterator(); e.hasNext();) {
+            buf.append(e.next());
             if (e.hasNext()) {
                 buf.append(File.pathSeparatorChar);
             }
@@ -237,8 +237,8 @@ public class ClassPath implements Serializable {
      * @return An Enumeration of URLs supplying the resource, or an
      * empty Enumeration if no resource with that name.
      */
-    public Enumeration getResources(String name) {
-        Vector results = new Vector();
+    public Enumeration<URL> getResources(String name) {
+        Vector<URL> results = new Vector<URL>();
         for (int i = 0; i < paths.length; i++) {
             URL url;
             if ((url = paths[i].getResource(name)) != null) {

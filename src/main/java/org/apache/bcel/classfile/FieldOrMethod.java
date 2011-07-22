@@ -230,7 +230,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 		{
 			// Find attributes that contain annotation data
 			Attribute[] attrs = getAttributes();
-			List accumulatedAnnotations = new ArrayList();
+			List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>();
 			for (int i = 0; i < attrs.length; i++)
 			{
 				Attribute attribute = attrs[i];
@@ -244,7 +244,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 					}
 				}
 			}
-			annotationEntries = (AnnotationEntry[]) accumulatedAnnotations
+			annotationEntries = accumulatedAnnotations
 					.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
 			annotationsOutOfDate = false;
 		}

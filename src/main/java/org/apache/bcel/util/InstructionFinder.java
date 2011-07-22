@@ -73,7 +73,7 @@ public class InstructionFinder {
     // LATIN-1
     private static final int NO_OPCODES = 256; // Potential number,
     // some are not used
-    private static final Map map = new HashMap(); // Map<String,Pattern>
+    private static final Map<String, String> map = new HashMap<String, String>();
     private InstructionList il;
     private String il_string; // instruction list
     // as string
@@ -116,7 +116,7 @@ public class InstructionFinder {
      * @return encoded string for a pattern such as "BranchInstruction".
      */
     private static final String mapName( String pattern ) {
-        String result = (String) map.get(pattern);
+        String result = map.get(pattern);
         if (result != null) {
             return result;
         }
@@ -210,7 +210,7 @@ public class InstructionFinder {
      * @return iterator of matches where e.nextElement() returns an array of
      *         instruction handles describing the matched area
      */
-    public final Iterator search( String pattern, InstructionHandle from, CodeConstraint constraint ) {
+    public final Iterator<InstructionHandle[]> search( String pattern, InstructionHandle from, CodeConstraint constraint ) {
         String search = compilePattern(pattern);
         int start = -1;
         for (int i = 0; i < handles.length; i++) {
@@ -224,7 +224,7 @@ public class InstructionFinder {
                     + " not found in instruction list.");
         }
         Pattern regex = Pattern.compile(search);
-        List matches = new ArrayList();
+        List<InstructionHandle[]> matches = new ArrayList<InstructionHandle[]>();
         Matcher matcher = regex.matcher(il_string);
         while (start < il_string.length() && matcher.find(start)) {
             int startExpr = matcher.start();
@@ -248,7 +248,7 @@ public class InstructionFinder {
      * @return iterator of matches where e.nextElement() returns an array of
      *         instruction handles describing the matched area
      */
-    public final Iterator search( String pattern ) {
+    public final Iterator<InstructionHandle[]> search( String pattern ) {
         return search(pattern, il.getStart(), null);
     }
 
@@ -263,7 +263,7 @@ public class InstructionFinder {
      * @return iterator of matches where e.nextElement() returns an array of
      *         instruction handles describing the matched area
      */
-    public final Iterator search( String pattern, InstructionHandle from ) {
+    public final Iterator<InstructionHandle[]> search( String pattern, InstructionHandle from ) {
         return search(pattern, from, null);
     }
 
@@ -278,7 +278,7 @@ public class InstructionFinder {
      *          constraints to be checked on matching code
      * @return instruction handle or `null' if the match failed
      */
-    public final Iterator search( String pattern, CodeConstraint constraint ) {
+    public final Iterator<InstructionHandle[]> search( String pattern, CodeConstraint constraint ) {
         return search(pattern, il.getStart(), constraint);
     }
 
@@ -363,9 +363,9 @@ public class InstructionFinder {
 		map.put("fstore", precompile(Constants.FSTORE_0, Constants.FSTORE_3, Constants.FSTORE));
 		map.put("astore", precompile(Constants.ASTORE_0, Constants.ASTORE_3, Constants.ASTORE));
 		// Compile strings
-		for (Iterator i = map.keySet().iterator(); i.hasNext();) {
-			String key = (String) i.next();
-			String value = (String) map.get(key);
+		for (Iterator<String> i = map.keySet().iterator(); i.hasNext();) {
+			String key = i.next();
+			String value = map.get(key);
 			char ch = value.charAt(1); // Omit already precompiled patterns
 			if (ch < OFFSET) {
 				map.put(key, compilePattern(value)); // precompile all

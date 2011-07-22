@@ -54,11 +54,11 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private int major = Constants.MAJOR_1_1, minor = Constants.MINOR_1_1;
     private ConstantPoolGen cp; // Template for building up constant pool
     // ArrayLists instead of arrays to gather fields, methods, etc.
-    private List field_vec = new ArrayList();
-    private List method_vec = new ArrayList();
-    private List attribute_vec = new ArrayList();
-    private List interface_vec = new ArrayList();
-    private List annotation_vec = new ArrayList();
+    private List<Field> field_vec = new ArrayList<Field>();
+    private List<Method> method_vec = new ArrayList<Method>();
+    private List<Attribute> attribute_vec = new ArrayList<Attribute>();
+    private List<String> interface_vec = new ArrayList<String>();
+    private List<AnnotationEntryGen> annotation_vec = new ArrayList<AnnotationEntryGen>();
 	
     private static BCELComparator _cmp = new BCELComparator() {
 
@@ -166,7 +166,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 	 */
 	private AnnotationEntryGen[] unpackAnnotations(Attribute[] attrs)
 	{
-		List /* AnnotationGen */annotationGenObjs = new ArrayList();
+		List<AnnotationEntryGen> annotationGenObjs = new ArrayList<AnnotationEntryGen>();
 		for (int i = 0; i < attrs.length; i++)
 		{
 			Attribute attr = attrs[i];
@@ -194,8 +194,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 					}
 				}
 		}
-		return (AnnotationEntryGen[]) annotationGenObjs
-				.toArray(new AnnotationEntryGen[annotationGenObjs.size()]);
+		return annotationGenObjs.toArray(new AnnotationEntryGen[annotationGenObjs.size()]);
 	}
 
 
@@ -330,8 +329,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /** @return field object with given name, or null
      */
     public Field containsField( String name ) {
-        for (Iterator e = field_vec.iterator(); e.hasNext();) {
-            Field f = (Field) e.next();
+        for (Iterator<Field> e = field_vec.iterator(); e.hasNext();) {
+            Field f = e.next();
             if (f.getName().equals(name)) {
                 return f;
             }
@@ -343,8 +342,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /** @return method object with given name and signature, or null
      */
     public Method containsMethod( String name, String signature ) {
-        for (Iterator e = method_vec.iterator(); e.hasNext();) {
-            Method m = (Method) e.next();
+        for (Iterator<Method> e = method_vec.iterator(); e.hasNext();) {
+            Method m = e.next();
             if (m.getName().equals(name) && m.getSignature().equals(signature)) {
                 return m;
             }
@@ -440,7 +439,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
 
     public Method[] getMethods() {
-        return (Method[]) method_vec.toArray(new Method[method_vec.size()]);
+        return method_vec.toArray(new Method[method_vec.size()]);
     }
 
 
@@ -458,7 +457,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
 
     public Method getMethodAt( int pos ) {
-        return (Method) method_vec.get(pos);
+        return method_vec.get(pos);
     }
 
 
@@ -474,24 +473,24 @@ public class ClassGen extends AccessFlags implements Cloneable {
         int size = interface_vec.size();
         int[] interfaces = new int[size];
         for (int i = 0; i < size; i++) {
-            interfaces[i] = cp.addClass((String) interface_vec.get(i));
+            interfaces[i] = cp.addClass(interface_vec.get(i));
         }
         return interfaces;
     }
 
 
     public Field[] getFields() {
-        return (Field[]) field_vec.toArray(new Field[field_vec.size()]);
+        return field_vec.toArray(new Field[field_vec.size()]);
     }
 
 
     public Attribute[] getAttributes() {
-        return (Attribute[]) attribute_vec.toArray(new Attribute[attribute_vec.size()]);
+        return attribute_vec.toArray(new Attribute[attribute_vec.size()]);
     }
     
     //  J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?
     public AnnotationEntryGen[] getAnnotationEntries() {
-    	return (AnnotationEntryGen[]) annotation_vec.toArray(new AnnotationEntryGen[annotation_vec.size()]);
+    	return annotation_vec.toArray(new AnnotationEntryGen[annotation_vec.size()]);
     }
 
 
@@ -528,14 +527,14 @@ public class ClassGen extends AccessFlags implements Cloneable {
         return class_name_index;
     }
 
-    private ArrayList observers;
+    private List<ClassObserver> observers;
 
 
     /** Add observer for this object.
      */
     public void addObserver( ClassObserver o ) {
         if (observers == null) {
-            observers = new ArrayList();
+            observers = new ArrayList<ClassObserver>();
         }
         observers.add(o);
     }
@@ -556,8 +555,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     public void update() {
         if (observers != null) {
-            for (Iterator e = observers.iterator(); e.hasNext();) {
-                ((ClassObserver) e.next()).notify(this);
+            for (Iterator<ClassObserver> e = observers.iterator(); e.hasNext();) {
+                e.next().notify(this);
             }
         }
     }

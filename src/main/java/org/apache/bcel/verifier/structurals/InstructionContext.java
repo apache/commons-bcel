@@ -19,6 +19,8 @@ package org.apache.bcel.verifier.structurals;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.bcel.generic.InstructionHandle;
 
 /**
@@ -72,7 +74,7 @@ public interface InstructionContext{
 	 * @return true -  if and only if the "outgoing" frame situation
 	 * changed from the one before execute()ing.
 	 */
-	boolean execute(Frame inFrame, ArrayList executionPredecessors, InstConstraintVisitor icv, ExecutionVisitor ev);
+	boolean execute(Frame inFrame, ArrayList<InstructionContext> executionPredecessors, InstConstraintVisitor icv, ExecutionVisitor ev);
 
 	Frame getInFrame();
 
@@ -83,7 +85,7 @@ public interface InstructionContext{
 	 *
 	 * @see #execute(Frame, ArrayList, InstConstraintVisitor, ExecutionVisitor)
 	 */
-	Frame getOutFrame(ArrayList executionPredecessors);
+	Frame getOutFrame(List<InstructionContext> executionPredecessors);
 	
 	/**
 	 * Returns the InstructionHandle this InstructionContext is wrapped around.

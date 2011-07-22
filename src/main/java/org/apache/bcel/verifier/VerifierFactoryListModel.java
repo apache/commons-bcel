@@ -17,7 +17,13 @@
  */
 package org.apache.bcel.verifier;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
 /**
  * This class implements an adapter; it implements both a Swing ListModel and
@@ -29,8 +35,8 @@ import javax.swing.event.ListDataEvent;
 public class VerifierFactoryListModel implements org.apache.bcel.verifier.VerifierFactoryObserver,
         javax.swing.ListModel {
 
-    private java.util.ArrayList listeners = new java.util.ArrayList();
-    private java.util.TreeSet cache = new java.util.TreeSet();
+    private List<ListDataListener> listeners = new ArrayList<ListDataListener>();
+    private Set<String> cache = new TreeSet<String>();
 
 
     public VerifierFactoryListModel() {
@@ -50,12 +56,12 @@ public class VerifierFactoryListModel implements org.apache.bcel.verifier.Verifi
         for (int i = 0; i < size; i++) {
             ListDataEvent e = new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0,
                     num_of_verifiers - 1);
-            ((javax.swing.event.ListDataListener) (listeners.get(i))).contentsChanged(e);
+            listeners.get(i).contentsChanged(e);
         }
     }
 
 
-    public synchronized void addListDataListener( javax.swing.event.ListDataListener l ) {
+    public synchronized void addListDataListener( ListDataListener l ) {
         listeners.add(l);
     }
 

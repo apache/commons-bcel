@@ -46,16 +46,16 @@ public final class Unknown extends Attribute {
     private static final long serialVersionUID = -4099655108069755015L;
     private byte[] bytes;
     private String name;
-    private static final Map unknown_attributes = new HashMap();
+    private static final Map<String, Unknown> unknown_attributes = new HashMap<String, Unknown>();
 
 
     /** @return array of unknown attributes, but just one for each kind.
      */
     static Unknown[] getUnknownAttributes() {
         Unknown[] unknowns = new Unknown[unknown_attributes.size()];
-        Iterator entries = unknown_attributes.values().iterator();
+        Iterator<Unknown> entries = unknown_attributes.values().iterator();
         for (int i = 0; entries.hasNext(); i++) {
-            unknowns[i] = (Unknown) entries.next();
+            unknowns[i] = entries.next();
         }
         unknown_attributes.clear();
         return unknowns;

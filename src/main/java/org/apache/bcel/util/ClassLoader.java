@@ -56,7 +56,7 @@ public class ClassLoader extends java.lang.ClassLoader {
     public static final String[] DEFAULT_IGNORED_PACKAGES = {
             "java.", "javax.", "sun."
     };
-    private Hashtable classes = new Hashtable(); // Hashtable is synchronized thus thread-safe
+    private Hashtable<String, Class<?>> classes = new Hashtable<String, Class<?>>(); // Hashtable is synchronized thus thread-safe
     private String[] ignored_packages;
     private Repository repository = SyntheticRepository.getInstance();
 
@@ -96,11 +96,11 @@ public class ClassLoader extends java.lang.ClassLoader {
     }
 
 
-    protected Class loadClass( String class_name, boolean resolve ) throws ClassNotFoundException {
-        Class cl = null;
+    protected Class<?> loadClass( String class_name, boolean resolve ) throws ClassNotFoundException {
+        Class<?> cl = null;
         /* First try: lookup hash table.
          */
-        if ((cl = (Class) classes.get(class_name)) == null) {
+        if ((cl = classes.get(class_name)) == null) {
             /* Second try: Load system class using system class loader. You better
              * don't mess around with them.
              */

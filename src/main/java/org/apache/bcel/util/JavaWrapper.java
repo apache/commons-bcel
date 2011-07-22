@@ -70,7 +70,7 @@ public class JavaWrapper {
      * @param argv the arguments just as you would pass them directly
      */
     public void runMain( String class_name, String[] argv ) throws ClassNotFoundException {
-        Class cl = loader.loadClass(class_name);
+        Class<?> cl = loader.loadClass(class_name);
         Method method = null;
         try {
             method = cl.getMethod("main", new Class[] {
@@ -79,7 +79,7 @@ public class JavaWrapper {
             /* Method main is sane ?
              */
             int m = method.getModifiers();
-            Class r = method.getReturnType();
+            Class<?> r = method.getReturnType();
             if (!(Modifier.isPublic(m) && Modifier.isStatic(m)) || Modifier.isAbstract(m)
                     || (r != Void.TYPE)) {
                 throw new NoSuchMethodException();

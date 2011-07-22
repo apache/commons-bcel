@@ -45,9 +45,9 @@ public class SyntheticRepository implements Repository {
 
     private static final long serialVersionUID = 2923440730410019444L;
     //private static final String DEFAULT_PATH = ClassPath.getClassPath();
-    private static final Map _instances = new HashMap(); // CLASSPATH X REPOSITORY
+    private static final Map<ClassPath, SyntheticRepository> _instances = new HashMap<ClassPath, SyntheticRepository>(); // CLASSPATH X REPOSITORY
     private ClassPath _path = null;
-    private Map _loadedClasses = new HashMap(); // CLASSNAME X JAVACLASS
+    private Map<String, SoftReference<JavaClass>> _loadedClasses = new HashMap<String, SoftReference<JavaClass>>(); // CLASSNAME X JAVACLASS
 
 
     private SyntheticRepository(ClassPath path) {
@@ -61,7 +61,7 @@ public class SyntheticRepository implements Repository {
 
 
     public static SyntheticRepository getInstance( ClassPath classPath ) {
-        SyntheticRepository rep = (SyntheticRepository) _instances.get(classPath);
+        SyntheticRepository rep = _instances.get(classPath);
         if (rep == null) {
             rep = new SyntheticRepository(classPath);
             _instances.put(classPath, rep);
@@ -74,7 +74,7 @@ public class SyntheticRepository implements Repository {
      * Store a new JavaClass instance into this Repository.
      */
     public void storeClass( JavaClass clazz ) {
-        _loadedClasses.put(clazz.getClassName(), new SoftReference(clazz));
+        _loadedClasses.put(clazz.getClassName(), new SoftReference<JavaClass>(clazz));
         clazz.setRepository(this);
     }
 
@@ -91,11 +91,11 @@ public class SyntheticRepository implements Repository {
      * Find an already defined (cached) JavaClass object by name.
      */
     public JavaClass findClass( String className ) {
-        SoftReference ref = (SoftReference) _loadedClasses.get(className);
+        SoftReference<JavaClass> ref = _loadedClasses.get(className);
         if (ref == null) {
             return null;
         }
-        return (JavaClass) ref.get();
+        return ref.get();
     }
 
 
@@ -141,7 +141,7 @@ public class SyntheticRepository implements Repository {
      * @throws ClassNotFoundException if the class is not in the
      *   Repository, and its representation could not be found
      */
-    public JavaClass loadClass( Class clazz ) throws ClassNotFoundException {
+    public JavaClass loadClass( Class<?> clazz ) throws ClassNotFoundException {
     	InputStream clsStream = null;
     	try{
 	        String className = clazz.getName();

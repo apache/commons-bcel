@@ -34,7 +34,7 @@ public class LREM extends ArithmeticInstruction implements ExceptionThrower {
     }
 
 
-    public Class[] getExceptions() {
+    public Class<?>[] getExceptions() {
         return new Class[] {
             org.apache.bcel.ExceptionConstants.ARITHMETIC_EXCEPTION
         };

@@ -78,7 +78,7 @@ class BCELFactory extends EmptyVisitor {
         _out = out;
     }
 
-    private final Map branch_map = new HashMap(); // Map<Instruction, InstructionHandle>
+    private final Map<Instruction, InstructionHandle> branch_map = new HashMap<Instruction, InstructionHandle>();
 
 
     public void start() {
@@ -250,7 +250,7 @@ class BCELFactory extends EmptyVisitor {
     }
 
     // Memorize BranchInstructions that need an update
-    private final List branches = new ArrayList();
+    private final List<BranchInstruction> branches = new ArrayList<BranchInstruction>();
 
 
     public void visitBranchInstruction( BranchInstruction bi ) {
@@ -305,8 +305,8 @@ class BCELFactory extends EmptyVisitor {
 
 
     private void updateBranchTargets() {
-        for (Iterator i = branches.iterator(); i.hasNext();) {
-            BranchInstruction bi = (BranchInstruction) i.next();
+        for (Iterator<BranchInstruction> i = branches.iterator(); i.hasNext();) {
+            BranchInstruction bi = i.next();
             BranchHandle bh = (BranchHandle) branch_map.get(bi);
             int pos = bh.getPosition();
             String name = bi.getName() + "_" + pos;

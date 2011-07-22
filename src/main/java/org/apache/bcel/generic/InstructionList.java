@@ -708,7 +708,7 @@ public class InstructionList implements Serializable {
         }
         first.prev = null; // Completely separated from rest of list
         last.next = null;
-        List target_vec = new ArrayList();
+        List<InstructionHandle> target_vec = new ArrayList<InstructionHandle>();
         for (InstructionHandle ih = first; ih != null; ih = ih.next) {
             ih.getInstruction().dispose(); // e.g. BranchInstructions release their targets
         }
@@ -964,7 +964,7 @@ public class InstructionList implements Serializable {
      */
     public Instruction[] getInstructions() {
         ByteSequence bytes = new ByteSequence(getByteCode());
-        List instructions = new ArrayList();
+        List<Instruction> instructions = new ArrayList<Instruction>();
         try {
             while (bytes.available() > 0) {
                 instructions.add(Instruction.readInstruction(bytes));
@@ -972,7 +972,7 @@ public class InstructionList implements Serializable {
         } catch (IOException e) {
             throw new ClassGenException(e.toString(), e);
         }
-        return (Instruction[]) instructions.toArray(new Instruction[instructions.size()]);
+        return instructions.toArray(new Instruction[instructions.size()]);
     }
 
 
@@ -997,13 +997,13 @@ public class InstructionList implements Serializable {
     /**
      * @return Enumeration that lists all instructions (handles)
      */
-    public Iterator iterator() {
-        return new Iterator() {
+    public Iterator<InstructionHandle> iterator() {
+        return new Iterator<InstructionHandle>() {
 
             private InstructionHandle ih = start;
 
 
-            public Object next() throws NoSuchElementException {
+            public InstructionHandle next() throws NoSuchElementException {
             	if (ih == null)
             		throw new NoSuchElementException();
                 InstructionHandle i = ih;
@@ -1054,7 +1054,7 @@ public class InstructionList implements Serializable {
      * @return complete, i.e., deep copy of this list
      */
     public InstructionList copy() {
-        Map map = new HashMap();
+        Map<InstructionHandle, InstructionHandle> map = new HashMap<InstructionHandle, InstructionHandle>();
         InstructionList il = new InstructionList();
         /* Pass 1: Make copies of all instructions, append them to the new list
          * and associate old instruction references with the new ones, i.e.,
@@ -1081,12 +1081,12 @@ public class InstructionList implements Serializable {
                 BranchInstruction bc = (BranchInstruction) c;
                 InstructionHandle itarget = bi.getTarget(); // old target
                 // New target is in hash map
-                bc.setTarget((InstructionHandle) map.get(itarget));
+                bc.setTarget(map.get(itarget));
                 if (bi instanceof Select) { // Either LOOKUPSWITCH or TABLESWITCH
                     InstructionHandle[] itargets = ((Select) bi).getTargets();
                     InstructionHandle[] ctargets = ((Select) bc).getTargets();
                     for (int j = 0; j < itargets.length; j++) { // Update all targets
-                        ctargets[j] = (InstructionHandle) map.get(itargets[j]);
+                        ctargets[j] = map.get(itargets[j]);
                     }
                 }
             }
@@ -1243,14 +1243,14 @@ public class InstructionList implements Serializable {
         }
     }
 
-    private List observers;
+    private List<InstructionListObserver> observers;
 
 
     /** Add observer for this object.
      */
     public void addObserver( InstructionListObserver o ) {
         if (observers == null) {
-            observers = new ArrayList();
+            observers = new ArrayList<InstructionListObserver>();
         }
         observers.add(o);
     }
@@ -1271,8 +1271,8 @@ public class InstructionList implements Serializable {
      */
     public void update() {
         if (observers != null) {
-            for (Iterator e = observers.iterator(); e.hasNext();) {
-                ((InstructionListObserver) e.next()).notify(this);
+            for (Iterator<InstructionListObserver> e = observers.iterator(); e.hasNext();) {
+                e.next().notify(this);
             }
         }
     }

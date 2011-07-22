@@ -261,14 +261,14 @@ public class FieldGen extends FieldGenOrMethodGen {
         return type.getSignature();
     }
 
-    private List observers;
+    private List<FieldObserver> observers;
 
 
     /** Add observer for this object.
      */
     public void addObserver( FieldObserver o ) {
         if (observers == null) {
-            observers = new ArrayList();
+            observers = new ArrayList<FieldObserver>();
         }
         observers.add(o);
     }
@@ -289,8 +289,8 @@ public class FieldGen extends FieldGenOrMethodGen {
      */
     public void update() {
         if (observers != null) {
-            for (Iterator e = observers.iterator(); e.hasNext();) {
-                ((FieldObserver) e.next()).notify(this);
+            for (Iterator<FieldObserver> e = observers.iterator(); e.hasNext();) {
+                e.next().notify(this);
             }
         }
     }

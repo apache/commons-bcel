@@ -41,7 +41,7 @@ public class ClassLoaderRepository implements Repository {
 
     private static final long serialVersionUID = -1052781833503868187L;
     private java.lang.ClassLoader loader;
-    private Map loadedClasses = new HashMap(); // CLASSNAME X JAVACLASS
+    private Map<String, JavaClass> loadedClasses = new HashMap<String, JavaClass>(); // CLASSNAME X JAVACLASS
 
 
     public ClassLoaderRepository(java.lang.ClassLoader loader) {
@@ -71,7 +71,7 @@ public class ClassLoaderRepository implements Repository {
      */
     public JavaClass findClass( String className ) {
         if (loadedClasses.containsKey(className)) {
-            return (JavaClass) loadedClasses.get(className);
+            return loadedClasses.get(className);
         } else {
             return null;
         }
@@ -102,7 +102,7 @@ public class ClassLoaderRepository implements Repository {
     }
 
 
-    public JavaClass loadClass( Class clazz ) throws ClassNotFoundException {
+    public JavaClass loadClass( Class<?> clazz ) throws ClassNotFoundException {
         return loadClass(clazz.getName());
     }
 

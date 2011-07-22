@@ -319,8 +319,8 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     InstructionFinder f   = new InstructionFinder(il);
     String      pat = "IF_ICMP ICONST_1 GOTO ICONST_0 IFEQ Instruction";
 
-    for(Iterator it = f.search(pat, my_constraint); it.hasNext();) {
-      InstructionHandle[] match = (InstructionHandle[])it.next();
+    for(Iterator<InstructionHandle[]> it = f.search(pat, my_constraint); it.hasNext();) {
+      InstructionHandle[] match = it.next();
       // Everything ok, update code
       BranchInstruction ifeq    = (BranchInstruction)(match[4].getInstruction());
       BranchHandle      if_icmp = (BranchHandle)match[0];

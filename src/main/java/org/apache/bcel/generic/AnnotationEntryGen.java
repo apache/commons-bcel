@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.ElementValuePair;
@@ -32,7 +33,7 @@ public class AnnotationEntryGen
 {
 	private int typeIndex;
 
-	private List /* ElementNameValuePairGen */evs;
+	private List<ElementValuePairGen> evs;
 
 	private ConstantPoolGen cpool;
 
@@ -62,10 +63,10 @@ public class AnnotationEntryGen
 		evs = copyValues(a.getElementValuePairs(), cpool, copyPoolEntries);
 	}
 
-	private List copyValues(ElementValuePair[] in, ConstantPoolGen cpool,
+	private List<ElementValuePairGen> copyValues(ElementValuePair[] in, ConstantPoolGen cpool,
 			boolean copyPoolEntries)
 	{
-		List out = new ArrayList();
+		List<ElementValuePairGen> out = new ArrayList<ElementValuePairGen>();
 		int l = in.length;
 		for (int i = 0; i < l; i++)
 		{
@@ -87,17 +88,16 @@ public class AnnotationEntryGen
 	{
 		AnnotationEntry a = new AnnotationEntry(typeIndex, cpool.getConstantPool(),
 				isRuntimeVisible);
-		for (Iterator iter = evs.iterator(); iter.hasNext();)
+		for (Iterator<ElementValuePairGen> iter = evs.iterator(); iter.hasNext();)
 		{
-			ElementValuePairGen element = (ElementValuePairGen) iter
-					.next();
+			ElementValuePairGen element = iter.next();
 			a.addElementNameValuePair(element.getElementNameValuePair());
 		}
 		return a;
 	}
 
 	public AnnotationEntryGen(ObjectType type,
-			List /* ElementNameValuePairGen */elements, boolean vis,
+			List<ElementValuePairGen> elements, boolean vis,
 			ConstantPoolGen cpool)
 	{
 		this.cpool = cpool;
@@ -128,7 +128,7 @@ public class AnnotationEntryGen
 		dos.writeShort(evs.size()); // u2 element_value pair count
 		for (int i = 0; i < evs.size(); i++)
 		{
-			ElementValuePairGen envp = (ElementValuePairGen) evs.get(i);
+			ElementValuePairGen envp = evs.get(i);
 			envp.dump(dos);
 		}
 	}
@@ -136,7 +136,7 @@ public class AnnotationEntryGen
 	public void addElementNameValuePair(ElementValuePairGen evp)
 	{
 		if (evs == null)
-			evs = new ArrayList();
+			evs = new ArrayList<ElementValuePairGen>();
 		evs.add(evp);
 	}
 
@@ -162,7 +162,7 @@ public class AnnotationEntryGen
 	/**
 	 * Returns list of ElementNameValuePair objects
 	 */
-	public List getValues()
+	public List<ElementValuePairGen> getValues()
 	{
 		return evs;
 	}

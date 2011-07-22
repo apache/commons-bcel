@@ -49,7 +49,7 @@ import java.util.List;
 public abstract class PassVerifier {
 
     /** The (warning) messages. */
-    private List messages = new ArrayList(); //Type of elements: String
+    private List<String> messages = new ArrayList<String>();
     /** The VerificationResult cache. */
     private VerificationResult verificationResult = null;
 
@@ -101,6 +101,6 @@ public abstract class PassVerifier {
      */
     public String[] getMessages() {
         verify(); // create messages if not already done (cached!)
-        return (String[]) messages.toArray(new String[messages.size()]);
+        return messages.toArray(new String[messages.size()]);
     }
 }

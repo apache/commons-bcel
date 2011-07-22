@@ -98,7 +98,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     }
 
 
-    public Class[] getExceptions() {
+    public Class<?>[] getExceptions() {
         return new Class[] {
             org.apache.bcel.ExceptionConstants.NEGATIVE_ARRAY_SIZE_EXCEPTION
         };

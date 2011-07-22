@@ -100,8 +100,8 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     }
 
 
-    public Class[] getExceptions() {
-        Class[] cs = new Class[4 + ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length];
+    public Class<?>[] getExceptions() {
+        Class<?>[] cs = new Class[4 + ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length];
         System.arraycopy(ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION, 0, cs, 0,
                 ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length);
         cs[ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length + 3] = ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR;

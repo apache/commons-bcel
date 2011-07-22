@@ -110,8 +110,8 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     }
 
 
-    public Class[] getExceptions() {
-        Class[] cs = new Class[2 + ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION.length];
+    public Class<?>[] getExceptions() {
+        Class<?>[] cs = new Class[2 + ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION.length];
         System.arraycopy(ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION, 0, cs, 0,
                 ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION.length);
         cs[ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION.length + 1] = ExceptionConstants.NEGATIVE_ARRAY_SIZE_EXCEPTION;

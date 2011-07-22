@@ -60,7 +60,7 @@ public interface Repository extends java.io.Serializable {
     /**
      * Find the JavaClass instance for the given run-time class object
      */
-    public JavaClass loadClass( Class clazz ) throws java.lang.ClassNotFoundException;
+    public JavaClass loadClass( Class<?> clazz ) throws java.lang.ClassNotFoundException;
 
 
     /** Clear all entries from cache.

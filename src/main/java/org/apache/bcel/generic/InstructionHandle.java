@@ -48,7 +48,7 @@ public class InstructionHandle implements java.io.Serializable {
     InstructionHandle next, prev; // Will be set from the outside
     Instruction instruction;
     protected int i_position = -1; // byte code offset of instruction
-    private Set targeters;
+    private Set<InstructionTargeter> targeters;
     private Map attributes;
 
 

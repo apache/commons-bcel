@@ -38,11 +38,11 @@ public class VerifierFactory {
     /**
      * The HashMap that holds the data about the already-constructed Verifier instances.
      */
-    private static final Map hashMap = new HashMap();
+    private static final Map<String, Verifier> hashMap = new HashMap<String, Verifier>();
     /**
      * The VerifierFactoryObserver instances that observe the VerifierFactory.
      */
-    private static final List observers = new Vector();
+    private static final List<VerifierFactoryObserver> observers = new Vector<VerifierFactoryObserver>();
 
 
     /**
@@ -58,7 +58,7 @@ public class VerifierFactory {
      * @return the (only) verifier responsible for the class with the given name.
      */
     public static Verifier getVerifier( String fully_qualified_classname ) {
-        Verifier v = (Verifier) (hashMap.get(fully_qualified_classname));
+        Verifier v = hashMap.get(fully_qualified_classname);
         if (v == null) {
             v = new Verifier(fully_qualified_classname);
             hashMap.put(fully_qualified_classname, v);
@@ -73,9 +73,9 @@ public class VerifierFactory {
      */
     private static void notify( String fully_qualified_classname ) {
         // notify the observers
-        Iterator i = observers.iterator();
+        Iterator<VerifierFactoryObserver> i = observers.iterator();
         while (i.hasNext()) {
-            VerifierFactoryObserver vfo = (VerifierFactoryObserver) i.next();
+            VerifierFactoryObserver vfo = i.next();
             vfo.update(fully_qualified_classname);
         }
     }
@@ -90,7 +90,7 @@ public class VerifierFactory {
      */
     public static Verifier[] getVerifiers() {
         Verifier[] vs = new Verifier[hashMap.values().size()];
-        return (Verifier[]) (hashMap.values().toArray(vs)); // Because vs is big enough, vs is used to store the values into and returned!
+        return hashMap.values().toArray(vs); // Because vs is big enough, vs is used to store the values into and returned!
     }
 
 

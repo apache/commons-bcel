@@ -55,7 +55,7 @@ public class ProxyCreator {
    */
   public static Object createProxy(String pack, String class_name) {
     try {
-      Class cl = Class.forName(pack + "$$BCEL$$" + class_name);
+      Class<?> cl = Class.forName(pack + "$$BCEL$$" + class_name);
       return cl.newInstance();
     } catch(Exception e) {
       e.printStackTrace();

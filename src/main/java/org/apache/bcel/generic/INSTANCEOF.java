@@ -43,7 +43,7 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
     }
 
 
-    public Class[] getExceptions() {
+    public Class<?>[] getExceptions() {
         return org.apache.bcel.ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION;
     }
 

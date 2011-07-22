@@ -39,7 +39,7 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
 
     /** @return exceptions this instruction may cause
      */
-    public Class[] getExceptions() {
+    public Class<?>[] getExceptions() {
         return new Class[] {
             org.apache.bcel.ExceptionConstants.THROWABLE
         };

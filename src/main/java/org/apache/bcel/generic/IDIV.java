@@ -38,7 +38,7 @@ public class IDIV extends ArithmeticInstruction implements ExceptionThrower {
 
     /** @return exceptions this instruction may cause
      */
-    public Class[] getExceptions() {
+    public Class<?>[] getExceptions() {
         return new Class[] {
             org.apache.bcel.ExceptionConstants.ARITHMETIC_EXCEPTION
         };

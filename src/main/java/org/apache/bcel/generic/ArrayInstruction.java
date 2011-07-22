@@ -45,7 +45,7 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
     }
 
 
-    public Class[] getExceptions() {
+    public Class<?>[] getExceptions() {
         return org.apache.bcel.ExceptionConstants.EXCS_ARRAY_EXCEPTION;
     }
 

@@ -20,6 +20,7 @@ package org.apache.bcel.verifier.structurals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.bcel.generic.ATHROW;
@@ -66,18 +67,18 @@ public class ControlFlowGraph{
 		/**
 		 * The 'incoming' execution Frames.
 		 */
-		private Map inFrames;	// key: the last-executed JSR
+		private Map<InstructionContext, Frame> inFrames;	// key: the last-executed JSR
 
 		/**
 		 * The 'outgoing' execution Frames.
 		 */
-		private Map outFrames; // key: the last-executed JSR 
+		private Map<InstructionContext, Frame> outFrames; // key: the last-executed JSR 
 
 		/**
 		 * The 'execution predecessors' - a list of type InstructionContext 
 		 * of those instances that have been execute()d before in that order.
 		 */
-		private ArrayList executionPredecessors = null; // Type: InstructionContext
+		private List<InstructionContext> executionPredecessors = null; // Type: InstructionContext
 	
 		/**
 		 * Creates an InstructionHandleImpl object from an InstructionHandle.
@@ -89,8 +90,8 @@ public class ControlFlowGraph{
             }
 		
 			instruction = inst;
-			inFrames = new java.util.HashMap();
-			outFrames = new java.util.HashMap();
+			inFrames = new HashMap<InstructionContext, Frame>();
+			outFrames = new HashMap<InstructionContext, Frame>();
 		}
 
 		/* Satisfies InstructionContext.getTag(). */
@@ -113,14 +114,14 @@ public class ControlFlowGraph{
 		/**
 		 * Returns a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
 		 */	
-		public Frame getOutFrame(ArrayList execChain){
+		public Frame getOutFrame(List<InstructionContext> execChain){
 			executionPredecessors = execChain;
 
 			Frame org;
 
 			InstructionContext jsr = lastExecutionJSR();
 
-			org = (Frame) outFrames.get(jsr);
+			org = outFrames.get(jsr);
 
 			if (org == null){
 				throw new AssertionViolatedException("outFrame not set! This:\n"+this+"\nExecutionChain: "+getExecutionChain()+"\nOutFrames: '"+outFrames+"'.");
@@ -133,7 +134,7 @@ public class ControlFlowGraph{
 			
 			InstructionContext jsr = lastExecutionJSR();
 			
-			org = (Frame) inFrames.get(jsr);
+			org = inFrames.get(jsr);
 
 			if (org == null){
 			    throw new AssertionViolatedException("inFrame not set! This:\n"+this+"\nInFrames: '"+inFrames+"'.");
@@ -156,9 +157,9 @@ public class ControlFlowGraph{
 		 * @return true - if and only if the "outgoing" frame situation
 		 * changed from the one before execute()ing.
 		 */
-		public boolean execute(Frame inFrame, ArrayList execPreds, InstConstraintVisitor icv, ExecutionVisitor ev){
+		public boolean execute(Frame inFrame, ArrayList<InstructionContext> execPreds, InstConstraintVisitor icv, ExecutionVisitor ev){
 
-			executionPredecessors = (ArrayList) execPreds.clone();
+			executionPredecessors = (List<InstructionContext>) execPreds.clone();
 
 			//sanity check
 			if ( (lastExecutionJSR() == null) && (subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel() ) ){
@@ -168,7 +169,7 @@ public class ControlFlowGraph{
 				throw new AssertionViolatedException("Huh?! Am I '"+this+"' part of a subroutine or not?");
 			}
 
-			Frame inF = (Frame) inFrames.get(lastExecutionJSR());
+			Frame inF = inFrames.get(lastExecutionJSR());
 			if (inF == null){// no incoming frame was set, so set it.
 				inFrames.put(lastExecutionJSR(), inFrame);
 				inF = inFrame;
@@ -230,7 +231,7 @@ public class ControlFlowGraph{
 		 */
 		private boolean mergeInFrames(Frame inFrame){
 			// TODO: Can be performance-improved.
-			Frame inF = (Frame) inFrames.get(lastExecutionJSR());
+			Frame inF = inFrames.get(lastExecutionJSR());
 			OperandStack oldstack = inF.getStack().getClone();
 			LocalVariables oldlocals = inF.getLocals().getClone();
 			try{
@@ -402,7 +403,7 @@ public class ControlFlowGraph{
 	private final ExceptionHandlers exceptionhandlers;
 
 	/** All InstructionContext instances of this ControlFlowGraph. */
-	private Map instructionContexts = new HashMap(); //keys: InstructionHandle, values: InstructionContextImpl
+	private Map<InstructionHandle, InstructionContext> instructionContexts = new HashMap<InstructionHandle, InstructionContext>(); //keys: InstructionHandle, values: InstructionContextImpl
 
 	/** 
 	 * A Control Flow Graph.
@@ -423,7 +424,7 @@ public class ControlFlowGraph{
 	 * Returns the InstructionContext of a given instruction.
 	 */
 	public InstructionContext contextOf(InstructionHandle inst){
-		InstructionContext ic = (InstructionContext) instructionContexts.get(inst);
+		InstructionContext ic = instructionContexts.get(inst);
 		if (ic == null){
 			throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known!");
 		}
@@ -449,7 +450,7 @@ public class ControlFlowGraph{
 	 */
 	public InstructionContext[] getInstructionContexts(){
 		InstructionContext[] ret = new InstructionContext[instructionContexts.values().size()];
-		return (InstructionContext[]) instructionContexts.values().toArray(ret);
+		return instructionContexts.values().toArray(ret);
 	}
 
 	/**

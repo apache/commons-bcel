@@ -149,20 +149,20 @@ public abstract class Type implements java.io.Serializable {
         return buf.toString();
     }
 
-    private static final ThreadLocal consumed_chars = new ThreadLocal() {
+    private static final ThreadLocal<Integer> consumed_chars = new ThreadLocal<Integer>() {
 
-        protected Object initialValue() {
+        protected Integer initialValue() {
             return new Integer(0);
         }
     };//int consumed_chars=0; // Remember position in string, see getArgumentTypes
 
 
-    private static int unwrap( ThreadLocal tl ) {
-        return ((Integer) tl.get()).intValue();
+    private static int unwrap( ThreadLocal<Integer> tl ) {
+        return tl.get().intValue();
     }
 
 
-    private static void wrap( ThreadLocal tl, int value ) {
+    private static void wrap( ThreadLocal<Integer> tl, int value ) {
         tl.set(new Integer(value));
     }
 
@@ -225,7 +225,7 @@ public abstract class Type implements java.io.Serializable {
      * @return array of argument types
      */
     public static Type[] getArgumentTypes( String signature ) {
-        List vec = new ArrayList();
+        List<Type> vec = new ArrayList<Type>();
         int index;
         Type[] types;
         try { // Read all declarations between for `(' and `)'
@@ -251,7 +251,7 @@ public abstract class Type implements java.io.Serializable {
      * @param cl Java class
      * @return corresponding Type object
      */
-    public static Type getType( java.lang.Class cl ) {
+    public static Type getType( java.lang.Class<?> cl ) {
         if (cl == null) {
             throw new IllegalArgumentException("Class must not be null");
         }
@@ -295,7 +295,7 @@ public abstract class Type implements java.io.Serializable {
      * @param classes an array of runtime class objects
      * @return array of corresponding Type objects
      */
-    public static Type[] getTypes( java.lang.Class[] classes ) {
+    public static Type[] getTypes( java.lang.Class<?>[] classes ) {
         Type[] ret = new Type[classes.length];
         for (int i = 0; i < ret.length; i++) {
             ret[i] = getType(classes[i]);
@@ -306,7 +306,7 @@ public abstract class Type implements java.io.Serializable {
 
     public static String getSignature( java.lang.reflect.Method meth ) {
         StringBuffer sb = new StringBuffer("(");
-        Class[] params = meth.getParameterTypes(); // avoid clone
+        Class<?>[] params = meth.getParameterTypes(); // avoid clone
         for (int j = 0; j < params.length; j++) {
             sb.append(getType(params[j]).getSignature());
         }

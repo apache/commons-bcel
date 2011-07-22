@@ -29,14 +29,14 @@ import java.util.List;
  */
 public class IntList{
 	/** The int are stored as Integer objects here. */
-	private List theList;
+	private List<Integer> theList;
 	/** This constructor creates an empty list. */
 	IntList(){
-		theList = new ArrayList();
+		theList = new ArrayList<Integer>();
 	}
 	/** Adds an element to the list. */
 	void add(int i){
-		theList.add(new Integer(i));
+		theList.add(Integer.valueOf(i));
 	}
 	/** Checks if the specified int is already in the list. */
 	boolean contains(int i){

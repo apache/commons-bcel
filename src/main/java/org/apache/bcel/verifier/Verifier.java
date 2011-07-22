@@ -20,7 +20,9 @@ package org.apache.bcel.verifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.verifier.statics.Pass1Verifier;
 import org.apache.bcel.verifier.statics.Pass2Verifier;
@@ -54,9 +56,9 @@ public class Verifier {
     /** A Pass2Verifier for this Verifier instance. */
     private Pass2Verifier p2v;
     /** The Pass3aVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
-    private Map p3avs = new HashMap();
+    private Map<String, Pass3aVerifier> p3avs = new HashMap<String, Pass3aVerifier>();
     /** The Pass3bVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
-    private Map p3bvs = new HashMap();
+    private Map<String, Pass3bVerifier> p3bvs = new HashMap<String, Pass3bVerifier>();
 
 
     /** Returns the VerificationResult for the given pass. */
@@ -81,7 +83,7 @@ public class Verifier {
     public VerificationResult doPass3a( int method_no ) {
         String key = Integer.toString(method_no);
         Pass3aVerifier p3av;
-        p3av = (Pass3aVerifier) (p3avs.get(key));
+        p3av = p3avs.get(key);
         if (p3avs.get(key) == null) {
             p3av = new Pass3aVerifier(this, method_no);
             p3avs.put(key, p3av);
@@ -94,7 +96,7 @@ public class Verifier {
     public VerificationResult doPass3b( int method_no ) {
         String key = Integer.toString(method_no);
         Pass3bVerifier p3bv;
-        p3bv = (Pass3bVerifier) (p3bvs.get(key));
+        p3bv = p3bvs.get(key);
         if (p3bvs.get(key) == null) {
             p3bv = new Pass3bVerifier(this, method_no);
             p3bvs.put(key, p3bv);
@@ -145,7 +147,7 @@ public class Verifier {
      * A prefix shows from which verifying pass a message originates.
      */
     public String[] getMessages() throws ClassNotFoundException {
-        ArrayList messages = new ArrayList();
+        List<String> messages = new ArrayList<String>();
         if (p1v != null) {
             String[] p1m = p1v.getMessages();
             for (int i = 0; i < p1m.length; i++) {
@@ -158,9 +160,9 @@ public class Verifier {
                 messages.add("Pass 2: " + p2m[i]);
             }
         }
-        Iterator p3as = p3avs.values().iterator();
+        Iterator<Pass3aVerifier> p3as = p3avs.values().iterator();
         while (p3as.hasNext()) {
-            Pass3aVerifier pv = (Pass3aVerifier) p3as.next();
+            Pass3aVerifier pv = p3as.next();
             String[] p3am = pv.getMessages();
             int meth = pv.getMethodNo();
             for (int i = 0; i < p3am.length; i++) {
@@ -169,9 +171,9 @@ public class Verifier {
                         + "'): " + p3am[i]);
             }
         }
-        Iterator p3bs = p3bvs.values().iterator();
+        Iterator<Pass3bVerifier> p3bs = p3bvs.values().iterator();
         while (p3bs.hasNext()) {
-            Pass3bVerifier pv = (Pass3bVerifier) p3bs.next();
+            Pass3bVerifier pv = p3bs.next();
             String[] p3bm = pv.getMessages();
             int meth = pv.getMethodNo();
             for (int i = 0; i < p3bm.length; i++) {
@@ -182,7 +184,7 @@ public class Verifier {
         }
         String[] ret = new String[messages.size()];
         for (int i = 0; i < messages.size(); i++) {
-            ret[i] = (String) messages.get(i);
+            ret[i] = messages.get(i);
         }
         return ret;
     }

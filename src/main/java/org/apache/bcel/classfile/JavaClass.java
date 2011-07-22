@@ -46,7 +46,7 @@ import org.apache.bcel.util.SyntheticRepository;
  * @see org.apache.bcel.generic.ClassGen
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable {
+public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
 
     private static final long serialVersionUID = 2179314813560563755L;
     private String file_name;
@@ -341,7 +341,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
       	if (annotationsOutOfDate) { 
       		// Find attributes that contain annotation data
       		Attribute[] attrs = getAttributes();
-      		List accumulatedAnnotations = new ArrayList();
+      		List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>();
       		for (int i = 0; i < attrs.length; i++) {
     			Attribute attribute = attrs[i];
     			if (attribute instanceof Annotations) {				
@@ -350,7 +350,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     					accumulatedAnnotations.add(runtimeAnnotations.getAnnotationEntries()[j]);
     			}
     		}
-      		annotations = (AnnotationEntry[])accumulatedAnnotations.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
+      		annotations = accumulatedAnnotations.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
       		annotationsOutOfDate = false;
       	}
       	return annotations;
@@ -687,8 +687,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         try {
             c = (JavaClass) clone();
             c.constant_pool = constant_pool.copy();
-            c.interfaces = (int[]) interfaces.clone();
-            c.interface_names = (String[]) interface_names.clone();
+            c.interfaces = interfaces.clone();
+            c.interface_names = interface_names.clone();
             c.fields = new Field[fields.length];
             for (int i = 0; i < fields.length; i++) {
                 c.fields[i] = fields[i].copy(c.constant_pool);
@@ -843,11 +843,11 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      */
     public JavaClass[] getSuperClasses() throws ClassNotFoundException {
         JavaClass clazz = this;
-        List allSuperClasses = new ArrayList();
+        List<JavaClass> allSuperClasses = new ArrayList<JavaClass>();
         for (clazz = clazz.getSuperClass(); clazz != null; clazz = clazz.getSuperClass()) {
             allSuperClasses.add(clazz);
         }
-        return (JavaClass[]) allSuperClasses.toArray(new JavaClass[allSuperClasses.size()]);
+        return allSuperClasses.toArray(new JavaClass[allSuperClasses.size()]);
     }
 
 
@@ -869,7 +869,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      */
     public JavaClass[] getAllInterfaces() throws ClassNotFoundException {
         ClassQueue queue = new ClassQueue();
-        Set allInterfaces = new TreeSet();
+        Set<JavaClass> allInterfaces = new TreeSet<JavaClass>();
         queue.enqueue(this);
         while (!queue.empty()) {
             JavaClass clazz = queue.dequeue();
@@ -886,7 +886,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                 queue.enqueue(_interfaces[i]);
             }
         }
-        return (JavaClass[]) allInterfaces.toArray(new JavaClass[allInterfaces.size()]);
+        return allInterfaces.toArray(new JavaClass[allInterfaces.size()]);
     }
 
 
@@ -922,8 +922,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Return the natural ordering of two JavaClasses.
      * This ordering is based on the class name
      */
-    public int compareTo( Object obj ) {
-        return getClassName().compareTo(((JavaClass) obj).getClassName());
+    public int compareTo( JavaClass obj ) {
+        return getClassName().compareTo(obj.getClassName());
     }
 
 

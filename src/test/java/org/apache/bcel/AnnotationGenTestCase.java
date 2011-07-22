@@ -134,7 +134,6 @@ public class AnnotationGenTestCase extends AbstractTestCase
 		try
 		{
 			String beforeName = a.getTypeName();
-			List beforeValues = a.getValues();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			DataOutputStream dos = new DataOutputStream(baos);
 			a.dump(dos);
@@ -147,7 +146,6 @@ public class AnnotationGenTestCase extends AbstractTestCase
 					.isRuntimeVisible());
 			dis.close();
 			String afterName = annAfter.getTypeName();
-			List afterValues = annAfter.getValues();
 			if (!beforeName.equals(afterName))
 			{
 				fail("Deserialization failed: before type='" + beforeName
@@ -161,10 +159,8 @@ public class AnnotationGenTestCase extends AbstractTestCase
 			}
 			for (int i = 0; i < a.getValues().size(); i++)
 			{
-				ElementValuePairGen beforeElement = (ElementValuePairGen) a
-						.getValues().get(i);
-				ElementValuePairGen afterElement = (ElementValuePairGen) annAfter
-						.getValues().get(i);
+				ElementValuePairGen beforeElement = a.getValues().get(i);
+				ElementValuePairGen afterElement = annAfter.getValues().get(i);
 				if (!beforeElement.getNameString().equals(
 						afterElement.getNameString()))
 				{

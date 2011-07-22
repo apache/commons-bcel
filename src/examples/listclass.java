@@ -18,6 +18,7 @@
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Vector;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
@@ -77,12 +78,12 @@ import org.apache.bcel.classfile.Method;
  */
 public class listclass {
   boolean   code, constants, verbose, classdep, nocontents, recurse;
-  Hashtable listedClasses;
-  Vector    exclude_name;
+  Hashtable<String, String> listedClasses;
+  Vector<String>    exclude_name;
 
   public static void main(String[] argv) {
-    Vector  file_name    = new Vector();
-    Vector  exclude_name = new Vector();
+    Vector<String>  file_name    = new Vector<String>();
+    Vector<String>  exclude_name = new Vector<String>();
     boolean code         = false, constants=false, verbose=true, classdep=false,
             nocontents=false, recurse=false, exclude=false;
     String  name         = null;
@@ -137,7 +138,7 @@ public class listclass {
                       nocontents, recurse, exclude_name);
 
       for(int i=0; i < file_name.size(); i++) {
-        name = (String) file_name.elementAt(i);
+        name = file_name.elementAt(i);
 
         listClass.list(name);
       }
@@ -145,7 +146,7 @@ public class listclass {
   }
 
   public listclass(boolean code, boolean constants, boolean verbose, boolean classdep,
-           boolean nocontents, boolean recurse, Vector exclude_name)
+           boolean nocontents, boolean recurse, Vector<String> exclude_name)
   {
     this.code = code;
     this.constants = constants;
@@ -153,7 +154,7 @@ public class listclass {
     this.classdep = classdep;
     this.nocontents = nocontents;
     this.recurse = recurse;
-    this.listedClasses = new Hashtable();
+    this.listedClasses = new Hashtable<String, String>();
     this.exclude_name = exclude_name;
   }
 
@@ -168,7 +169,7 @@ public class listclass {
     }
 
       for(int idx = 0; idx < exclude_name.size(); idx++) {
-        if(name.startsWith((String) exclude_name.elementAt(idx))) {
+        if(name.startsWith(exclude_name.elementAt(idx))) {
             return;
         }
     }

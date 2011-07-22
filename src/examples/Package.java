@@ -21,9 +21,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Constant;
@@ -72,18 +75,18 @@ public class Package {
    * Store class name against the JavaClass. From the JavaClass
    * we get the bytes to create the jar.
    */
-  TreeMap allClasses = new TreeMap();
+  Map<String, JavaClass> allClasses = new TreeMap<String, JavaClass>();
   /**
    * We start at the root classes, put them in here, then go through 
    * this list, putting dependent classes in here and from there
    * into allClasses. Store class names against class names of their dependents
    */
-  TreeMap dependents = new TreeMap();
+  TreeMap<String, String> dependents = new TreeMap<String, String>();
   /** 
    * Collect all classes that could not be found in the classpath.
    * Store class names against class names of their dependents
    */
-  TreeMap notFound = new TreeMap();
+  TreeMap<String, String> notFound = new TreeMap<String, String>();
   /**
    * See wheather we print the classes that were not found (default = false)
    */
@@ -153,8 +156,8 @@ public class Package {
     // starting processing: Grab from the dependents list an add back to it
     // and the allClasses list. see addDependents
     while(!dependents.isEmpty() ){
-      String name = (String)dependents.firstKey();
-      String from = (String) dependents.remove(name);
+      String name = dependents.firstKey();
+      String from = dependents.remove(name);
       if(allClasses.get(name) == null){
     try{
       InputStream is = classPath.getInputStream(name);
@@ -172,11 +175,11 @@ public class Package {
     // create the jar
     JarOutputStream jarFile = new JarOutputStream(new FileOutputStream(defaultJar));
     jarFile.setLevel(5); // use compression
-    Iterator keys = allClasses.keySet().iterator();
+    Iterator<String> keys = allClasses.keySet().iterator();
     int written = 0 ;
     while(keys.hasNext()){ // add entries for every class
-      String name = (String)keys.next();
-      JavaClass claz = (JavaClass) allClasses.get(name);
+      String name = keys.next();
+      JavaClass claz = allClasses.get(name);
       ZipEntry zipEntry = new ZipEntry(name+".class");
       byte[] bytes = claz.getBytes() ;
       int length = bytes.length ;
@@ -191,7 +194,7 @@ public class Package {
       System.err.println( notFound.size() +" classes could not be found");
       if(showNotFound){ // if wanted show the actual classes that we not found
     while(!notFound.isEmpty()){
-      String name = (String)notFound.firstKey();
+      String name = notFound.firstKey();
       System.err.println( name+ " (" + notFound.remove(name)+")");
     }
       }else{
@@ -205,10 +208,10 @@ public class Package {
    * overview. Enabled by -s option 
    */
   void printAllClasses(){
-    ArrayList names = new ArrayList(allClasses.keySet());
+    List<String> names = new ArrayList<String>(allClasses.keySet());
     Collections.sort(names);
     for( int i = 0 ; i < names.size() ; i ++ ){
-      String cl = (String)names.get(i);
+      String cl = names.get(i);
       System.err.println(cl);
     }
   }

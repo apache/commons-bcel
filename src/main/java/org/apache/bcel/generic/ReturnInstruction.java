@@ -68,7 +68,7 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     }
 
 
-    public Class[] getExceptions() {
+    public Class<?>[] getExceptions() {
         return new Class[] {
             ExceptionConstants.ILLEGAL_MONITOR_STATE
         };

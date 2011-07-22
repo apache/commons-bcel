@@ -71,7 +71,7 @@ public abstract class Repository {
      * @throws ClassNotFoundException if the class could not be found or
      * parsed correctly
      */
-    public static JavaClass lookupClass( Class clazz ) throws ClassNotFoundException {
+    public static JavaClass lookupClass( Class<?> clazz ) throws ClassNotFoundException {
         return _repository.loadClass(clazz);
     }
 

@@ -41,7 +41,7 @@ public class AnnotationEntry implements Node, Constants, Serializable {
     private final ConstantPool constant_pool;
     private final boolean isRuntimeVisible;
 
-    private List element_value_pairs;
+    private List<ElementValuePair> element_value_pairs;
 
     /**
      * Factory method to create an AnnotionEntry from a DataInputStream
@@ -56,7 +56,7 @@ public class AnnotationEntry implements Node, Constants, Serializable {
 
         final AnnotationEntry annotationEntry = new AnnotationEntry(file.readUnsignedShort(), constant_pool, isRuntimeVisible);
         final int num_element_value_pairs = (file.readUnsignedShort());
-        annotationEntry.element_value_pairs = new ArrayList();
+        annotationEntry.element_value_pairs = new ArrayList<ElementValuePair>();
         for (int i = 0; i < num_element_value_pairs; i++) {
             annotationEntry.element_value_pairs.add(new ElementValuePair(file.readUnsignedShort(), ElementValue.readElementValue(file, constant_pool),
                     constant_pool));
@@ -119,7 +119,7 @@ public class AnnotationEntry implements Node, Constants, Serializable {
      */
     public ElementValuePair[] getElementValuePairs() {
         // TODO return List
-        return (ElementValuePair[]) element_value_pairs.toArray(new ElementValuePair[element_value_pairs.size()]);
+        return element_value_pairs.toArray(new ElementValuePair[element_value_pairs.size()]);
     }
 
     public void dump(DataOutputStream dos) throws IOException {
@@ -127,7 +127,7 @@ public class AnnotationEntry implements Node, Constants, Serializable {
         dos.writeShort(element_value_pairs.size()); // u2 element_value pair
         // count
         for (int i = 0; i < element_value_pairs.size(); i++) {
-            final ElementValuePair envp = (ElementValuePair) element_value_pairs.get(i);
+            final ElementValuePair envp = element_value_pairs.get(i);
             envp.dump(dos);
         }
     }
