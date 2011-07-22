@@ -32,7 +32,7 @@
     <groupId>org.apache.bcel</groupId>
     <artifactId>bcel</artifactId>
     <packaging>jar</packaging>
-    <version>5.3-SNAPSHOT</version>
+    <version>6.0-SNAPSHOT</version>
     <name>Jakarta BCEL</name>
     <description>Bytecode Engineering Library</description>
 
@@ -115,23 +115,23 @@
         <mailingList>
             <name>BCEL User List</name>
             <subscribe>
-                bcel-user-subscribe@jakarta.apache.org
+                user-subscribe@commons.apache.org
             </subscribe>
             <unsubscribe>
-                bcel-user-unsubscribe@jakarta.apache.org
+                user-unsubscribe@commons.apache.org
             </unsubscribe>
             <archive>
-                http://www.mail-archive.com/bcel-user@jakarta.apache.org/
+                http://mail-archives.apache.org/mod_mbox/commons-user/
             </archive>
         </mailingList>
         <mailingList>
             <name>BCEL Developer List</name>
-            <subscribe>bcel-dev-subscribe@jakarta.apache.org</subscribe>
+            <subscribe>dev-subscribe@commons.apache.org</subscribe>
             <unsubscribe>
-                bcel-dev-unsubscribe@jakarta.apache.org
+                dev-unsubscribe@commons.apache.org
             </unsubscribe>
             <archive>
-                http://www.mail-archive.com/bcel-dev@jakarta.apache.org/
+                http://mail-archives.apache.org/mod_mbox/commons-dev/
             </archive>
         </mailingList>
     </mailingLists>
@@ -173,8 +173,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <debug>true</debug>
-                    <source>1.4</source>
-                    <target>1.4</target>
+                    <source>1.5</source>
+                    <target>1.5</target>
                 </configuration>
                 <executions>
                     <execution>
