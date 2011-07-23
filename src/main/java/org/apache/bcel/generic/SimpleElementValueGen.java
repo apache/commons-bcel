@@ -225,7 +225,7 @@ public class SimpleElementValueGen extends ElementValueGen
 			ConstantInteger bo = (ConstantInteger) cpGen.getConstant(idx);
 			if (bo.getBytes() == 0)
 				return "false";
-			if (bo.getBytes() != 0)
+			else
 				return "true";
 		case STRING:
 			ConstantUtf8 cu8 = (ConstantUtf8) cpGen.getConstant(idx);
