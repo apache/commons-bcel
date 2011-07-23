@@ -253,7 +253,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 		AnnotationEntryGen a = annotations[0];
 		assertTrue("That annotation should only have one value but has "
 				+ a.getValues().size(), a.getValues().size() == 1);
-		ElementValuePairGen nvp = (ElementValuePairGen) a.getValues().get(0);
+		ElementValuePairGen nvp = a.getValues().get(0);
 		ElementValueGen value = nvp.getValue();
 		assertTrue("Value should be ArrayElementValueGen but is " + value,
 				value instanceof ArrayElementValueGen);
@@ -261,8 +261,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 		assertTrue("Array value should be size one but is "
 				+ arrayValue.getElementValuesSize(), arrayValue
 				.getElementValuesSize() == 1);
-		ElementValueGen innerValue = (ElementValueGen) arrayValue
-				.getElementValues().get(0);
+		ElementValueGen innerValue = arrayValue.getElementValues().get(0);
 		assertTrue(
 				"Value in the array should be AnnotationElementValueGen but is "
 						+ innerValue,
