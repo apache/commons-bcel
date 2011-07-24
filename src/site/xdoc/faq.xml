@@ -49,9 +49,9 @@
       <b>Q: </b> Can I use BCEL in a commercial product?
       <br/>
       <b>A: </b> Yes, this is covered by the <a
-      href="license.html">Apache License</a>, if you add a note about the original
+      href="http://www.apache.org/licenses/">Apache License</a>, if you add a note about the original
       author and where to find the sources, i.e., 
-      <a href="http://jakarta.apache.org/bcel/">http://jakarta.apace.org/bcel/</a>
+      <a href="http://commons.apache.org/bcel/">http://commons.apache.org/bcel/</a>
     </p>
 
     <p>
