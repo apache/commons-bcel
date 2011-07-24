@@ -24,9 +24,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache</groupId>
-        <artifactId>apache</artifactId>
-        <version>9</version>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-parent</artifactId>
+        <version>21</version>
     </parent>
 
     <groupId>org.apache.bcel</groupId>
@@ -36,8 +36,24 @@
     <name>Commons BCEL</name>
     <description>Bytecode Engineering Library</description>
 
-    <url>http://jakarta.apache.org/bcel</url>
+    <url>http://commons.apache.org/bcel</url>
     <inceptionYear>2004</inceptionYear>
+
+    <properties>
+      <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <maven.compile.source>1.5</maven.compile.source>
+      <maven.compile.target>1.5</maven.compile.target>
+      <commons.componentid>bcel</commons.componentid>
+      <commons.release.version>6.0</commons.release.version>
+      <commons.release.desc>(Java 5.0+)</commons.release.desc>
+      <!-- Configuration properties for the OSGi maven-bundle-plugin -->
+      <commons.osgi.symbolicName>org.apache.${commons.componentid}</commons.osgi.symbolicName>
+      <commons.osgi.export>org.apache.bcel.*;version=${project.version};-noimport:=true</commons.osgi.export>
+      <commons.osgi.import>*</commons.osgi.import>
+      <commons.osgi.dynamicImport />
+      <commons.osgi.private />
+    </properties> 
 
     <licenses>
         <license>
@@ -151,54 +167,18 @@
         <url>http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</url>
     </scm>
 
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <url>scpexe://people.apache.org/home/${USER}/public_html/releases/bcel</url>
-        </repository>
-        <snapshotRepository>
-            <id>snaphots</id>
-            <url>scpexe://people.apache.org/home/${USER}/public_html/shapshots/bcel</url>
-        </snapshotRepository>
-        <site>
-            <id>website</id>
-            <url>scpexe://people.apache.org/home/${USER}/public_html/websites/bcel</url>
-        </site>
-    </distributionManagement>
-
     <build>
-        <plugins>
+          <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <debug>true</debug>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-                <executions>
-                    <execution>
-                        <!-- need default-cli so compiler:testCompile picks up the settings -->
-                        <id>default-cli</id>
-                        <phase>process-test-sources</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <configuration>
-                            <source>1.5</source>
-                            <target>1.5</target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifestFile>META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
-                </configuration>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-jar-plugin</artifactId>
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>test-jar</goal>
+                  </goals>
+                </execution>
+              </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -209,8 +189,6 @@
                     <excludes>
                         <exclude>**/Abstract*</exclude>
                     </excludes>
-                    <testFailureIgnore>false</testFailureIgnore>
-                    <skip>false</skip>
                 </configuration>
             </plugin>
         </plugins>
@@ -218,35 +196,6 @@
 
     <reporting>
         <plugins>
-            <plugin>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>project-team</report>
-                            <report>dependencies</report>
-                            <report>license</report>
-                            <report>scm</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.6.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.4.3</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>2.1</version>
-            </plugin>
             <!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
