@@ -172,7 +172,7 @@
     </li>
   </ul>
 
-  <H2>Related Projects</H2>
+  <h2>Related Projects</h2>
   <ul>
     <li><a href="http://asm.objectweb.org">ASM</a></li>
     <li><a href="http://www.cs.duke.edu/ari/joie/">JOIE: The Java Object Instrumentation Environment</a></li>
