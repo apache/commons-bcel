@@ -157,7 +157,6 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
   /** 
    * Second pass, determine type of each node, if possible.
-   * @return type of expression
    */
   public void eval(int pass) {
 

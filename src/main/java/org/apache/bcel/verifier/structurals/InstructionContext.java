@@ -70,7 +70,7 @@ public interface InstructionContext{
 	 *
 	 * @see ControlFlowGraph
 	 * @see ExecutionVisitor
-	 * @see #getOutFrame(ArrayList)
+	 * @see #getOutFrame(List)
 	 * @return true -  if and only if the "outgoing" frame situation
 	 * changed from the one before execute()ing.
 	 */
