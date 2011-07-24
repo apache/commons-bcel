@@ -55,6 +55,15 @@
       <commons.osgi.private />
     </properties> 
 
+    <!-- Could this be added to Commons Parent? -->
+    <distributionManagement>
+      <site>
+        <id>apache.website</id>
+        <name>Apache Website</name>
+        <url>scp://people.apache.org/www/commons.apache.org/${commons.componentid}/</url>
+      </site>
+    </distributionManagement>
+
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
