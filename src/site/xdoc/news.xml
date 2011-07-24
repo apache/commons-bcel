@@ -27,6 +27,11 @@
 
   <section name="News and Status">
 
+  <h3>July 2011 - BCEL Moves to Apache Commons</h3>
+  <p>
+    The BCEL project has moved from Apache Jakarta to Apache Commons.
+  </p>
+
   <h3>1 February 2006 - BCEL 5.2 released!</h3>
   <p>
     The Byte Code Engineering Library version 5.2 has been released
