@@ -2186,12 +2186,13 @@ public class InstConstraintVisitor extends EmptyVisitor{
 	public void visitLDC(LDC o){
 		// visitCPInstruction is called first.
 		
-		Constant c = cpg.getConstant(o.getIndex());
-		if 	(!	(	( c instanceof ConstantInteger) ||
-							( c instanceof ConstantFloat	)	||
-							( c instanceof ConstantString )	)	){
-			constraintViolated(o, "Referenced constant should be a CONSTANT_Integer, a CONSTANT_Float or a CONSTANT_String, but is '"+c+"'.");
-		}
+	    Constant c = cpg.getConstant(o.getIndex());
+	    if 	(!	(	( c instanceof ConstantInteger) ||
+					( c instanceof ConstantFloat	)	||
+					( c instanceof ConstantString	)	||
+					( c instanceof ConstantClass	) )	){
+	        constraintViolated(o, "Referenced constant should be a CONSTANT_Integer, a CONSTANT_Float, a CONSTANT_String or a CONSTANT_Class, but is '"+c+"'.");
+	    }
 	}
 
 	/**
@@ -2201,11 +2202,12 @@ public class InstConstraintVisitor extends EmptyVisitor{
 		// visitCPInstruction is called first.
 		
 		Constant c = cpg.getConstant(o.getIndex());
-		if 	(!	(	( c instanceof ConstantInteger) ||
-							( c instanceof ConstantFloat	)	||
-							( c instanceof ConstantString )	)	){
-			constraintViolated(o, "Referenced constant should be a CONSTANT_Integer, a CONSTANT_Float or a CONSTANT_String, but is '"+c+"'.");
-		}
+	    if 	(!	(	( c instanceof ConstantInteger) ||
+					( c instanceof ConstantFloat	)	||
+					( c instanceof ConstantString	)	||
+					( c instanceof ConstantClass	) )	){
+	        constraintViolated(o, "Referenced constant should be a CONSTANT_Integer, a CONSTANT_Float, a CONSTANT_String or a CONSTANT_Class, but is '"+c+"'.");
+	    }
 	}
 
 	/**
