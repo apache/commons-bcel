@@ -20,7 +20,6 @@ package org.apache.bcel.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.bcel.classfile.ArrayElementValue;
@@ -59,9 +58,7 @@ public class ArrayElementValueGen extends ElementValueGen
 	{
 		ElementValue[] immutableData = new ElementValue[evalues.size()];
 		int i = 0;
-		for (Iterator<ElementValueGen> iter = evalues.iterator(); iter.hasNext();)
-		{
-			ElementValueGen element = iter.next();
+		for (ElementValueGen element : evalues) {
 			immutableData[i++] = element.getElementValue();
 		}
 		return new ArrayElementValue(type, immutableData, cpGen
@@ -88,9 +85,7 @@ public class ArrayElementValueGen extends ElementValueGen
 	{
 		dos.writeByte(type); // u1 type of value (ARRAY == '[')
 		dos.writeShort(evalues.size());
-		for (Iterator<ElementValueGen> iter = evalues.iterator(); iter.hasNext();)
-		{
-			ElementValueGen element = iter.next();
+		for (ElementValueGen element : evalues) {
 			element.dump(dos);
 		}
 	}
@@ -99,12 +94,11 @@ public class ArrayElementValueGen extends ElementValueGen
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
-		for (Iterator<ElementValueGen> iter = evalues.iterator(); iter.hasNext();)
-		{
-			ElementValueGen element = iter.next();
+		String comma = "";
+		for (ElementValueGen element : evalues) {
+		    sb.append(comma);
+		    comma = ",";
 			sb.append(element.stringifyValue());
-			if (iter.hasNext())
-				sb.append(",");
 		}
 		sb.append("]");
 		return sb.toString();

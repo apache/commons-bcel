@@ -363,8 +363,7 @@ public class InstructionFinder {
 		map.put("fstore", precompile(Constants.FSTORE_0, Constants.FSTORE_3, Constants.FSTORE));
 		map.put("astore", precompile(Constants.ASTORE_0, Constants.ASTORE_3, Constants.ASTORE));
 		// Compile strings
-		for (Iterator<String> i = map.keySet().iterator(); i.hasNext();) {
-			String key = i.next();
+		for (String key : map.keySet()) {
 			String value = map.get(key);
 			char ch = value.charAt(1); // Omit already precompiled patterns
 			if (ch < OFFSET) {

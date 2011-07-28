@@ -18,7 +18,6 @@
 package org.apache.bcel.generic;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -289,8 +288,8 @@ public class FieldGen extends FieldGenOrMethodGen {
      */
     public void update() {
         if (observers != null) {
-            for (Iterator<FieldObserver> e = observers.iterator(); e.hasNext();) {
-                e.next().notify(this);
+            for (FieldObserver observer : observers ) {
+                observer.notify(this);
             }
         }
     }

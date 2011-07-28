@@ -21,7 +21,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import org.apache.bcel.Constants;
 
@@ -53,10 +52,7 @@ public final class Unknown extends Attribute {
      */
     static Unknown[] getUnknownAttributes() {
         Unknown[] unknowns = new Unknown[unknown_attributes.size()];
-        Iterator<Unknown> entries = unknown_attributes.values().iterator();
-        for (int i = 0; entries.hasNext(); i++) {
-            unknowns[i] = entries.next();
-        }
+        unknown_attributes.values().toArray(unknowns);
         unknown_attributes.clear();
         return unknowns;
     }

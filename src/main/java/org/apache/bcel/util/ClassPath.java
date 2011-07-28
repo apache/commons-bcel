@@ -28,7 +28,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
@@ -150,8 +149,8 @@ public class ClassPath implements Serializable {
         getPathComponents(boot_path, list);
         List<String> dirs = new ArrayList<String>();
         getPathComponents(ext_path, dirs);
-        for (Iterator<String> e = dirs.iterator(); e.hasNext();) {
-            File ext_dir = new File(e.next());
+        for (String d : dirs) {
+            File ext_dir = new File(d);
             String[] extensions = ext_dir.list(new FilenameFilter() {
 
                 public boolean accept( File dir, String name ) {
@@ -166,11 +165,11 @@ public class ClassPath implements Serializable {
             }
         }
         StringBuffer buf = new StringBuffer();
-        for (Iterator<String> e = list.iterator(); e.hasNext();) {
-            buf.append(e.next());
-            if (e.hasNext()) {
-                buf.append(File.pathSeparatorChar);
-            }
+        String separator = "";
+        for (String path : list) {
+            buf.append(separator);
+            separator = File.pathSeparator;
+            buf.append(path);
         }
         return buf.toString().intern();
     }

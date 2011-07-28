@@ -18,7 +18,6 @@
 package org.apache.bcel.verifier;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -73,9 +72,7 @@ public class VerifierFactory {
      */
     private static void notify( String fully_qualified_classname ) {
         // notify the observers
-        Iterator<VerifierFactoryObserver> i = observers.iterator();
-        while (i.hasNext()) {
-            VerifierFactoryObserver vfo = i.next();
+        for (VerifierFactoryObserver vfo : observers) {
             vfo.update(fully_qualified_classname);
         }
     }

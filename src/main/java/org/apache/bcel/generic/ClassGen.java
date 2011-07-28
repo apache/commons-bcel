@@ -18,7 +18,6 @@
 package org.apache.bcel.generic;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.bcel.Constants;
@@ -329,8 +328,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /** @return field object with given name, or null
      */
     public Field containsField( String name ) {
-        for (Iterator<Field> e = field_vec.iterator(); e.hasNext();) {
-            Field f = e.next();
+        for (Field f : field_vec) {
             if (f.getName().equals(name)) {
                 return f;
             }
@@ -342,8 +340,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /** @return method object with given name and signature, or null
      */
     public Method containsMethod( String name, String signature ) {
-        for (Iterator<Method> e = method_vec.iterator(); e.hasNext();) {
-            Method m = e.next();
+        for (Method m : method_vec) {
             if (m.getName().equals(name) && m.getSignature().equals(signature)) {
                 return m;
             }
@@ -555,8 +552,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     public void update() {
         if (observers != null) {
-            for (Iterator<ClassObserver> e = observers.iterator(); e.hasNext();) {
-                e.next().notify(this);
+            for (ClassObserver observer : observers) {
+                observer.notify(this);
             }
         }
     }

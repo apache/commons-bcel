@@ -19,7 +19,6 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 import org.apache.bcel.Constants;
@@ -1061,8 +1060,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public void update() {
         if (observers != null) {
-            for (Iterator<MethodObserver> e = observers.iterator(); e.hasNext();) {
-                e.next().notify(this);
+            for (MethodObserver observer : observers) {
+                observer.notify(this);
             }
         }
     }
@@ -1088,8 +1087,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
         
         if (throws_vec.size() > 0) {
-            for (Iterator<String> e = throws_vec.iterator(); e.hasNext();) {
-                buf.append("\n\t\tthrows ").append(e.next());
+            for (String throwsDescriptor : throws_vec) {
+                buf.append("\n\t\tthrows ").append(throwsDescriptor);
             }
         }
         return buf.toString();

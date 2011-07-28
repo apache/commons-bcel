@@ -19,7 +19,6 @@ package org.apache.bcel.verifier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -160,9 +159,7 @@ public class Verifier {
                 messages.add("Pass 2: " + p2m[i]);
             }
         }
-        Iterator<Pass3aVerifier> p3as = p3avs.values().iterator();
-        while (p3as.hasNext()) {
-            Pass3aVerifier pv = p3as.next();
+        for (Pass3aVerifier pv : p3avs.values()) {
             String[] p3am = pv.getMessages();
             int meth = pv.getMethodNo();
             for (int i = 0; i < p3am.length; i++) {
@@ -171,9 +168,7 @@ public class Verifier {
                         + "'): " + p3am[i]);
             }
         }
-        Iterator<Pass3bVerifier> p3bs = p3bvs.values().iterator();
-        while (p3bs.hasNext()) {
-            Pass3bVerifier pv = p3bs.next();
+        for (Pass3bVerifier pv : p3bvs.values()) {
             String[] p3bm = pv.getMessages();
             int meth = pv.getMethodNo();
             for (int i = 0; i < p3bm.length; i++) {

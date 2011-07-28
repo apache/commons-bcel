@@ -20,7 +20,6 @@ package org.apache.bcel.util;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -305,8 +304,7 @@ class BCELFactory extends EmptyVisitor {
 
 
     private void updateBranchTargets() {
-        for (Iterator<BranchInstruction> i = branches.iterator(); i.hasNext();) {
-            BranchInstruction bi = i.next();
+        for (BranchInstruction bi : branches) {
             BranchHandle bh = (BranchHandle) branch_map.get(bi);
             int pos = bh.getPosition();
             String name = bi.getName() + "_" + pos;

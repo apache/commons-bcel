@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -175,10 +174,8 @@ public class Package {
     // create the jar
     JarOutputStream jarFile = new JarOutputStream(new FileOutputStream(defaultJar));
     jarFile.setLevel(5); // use compression
-    Iterator<String> keys = allClasses.keySet().iterator();
-    int written = 0 ;
-    while(keys.hasNext()){ // add entries for every class
-      String name = keys.next();
+    int written = 0;
+    for (String name : allClasses.keySet()) { // add entries for every class
       JavaClass claz = allClasses.get(name);
       ZipEntry zipEntry = new ZipEntry(name+".class");
       byte[] bytes = claz.getBytes() ;

@@ -20,7 +20,6 @@ package org.apache.bcel.verifier.structurals;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -142,10 +141,8 @@ public class Subroutines{
 			if (localVariable == UNSET){
 				throw new AssertionViolatedException("setLeavingRET() called for top-level 'subroutine' or forgot to set local variable first.");
 			}
-			Iterator<InstructionHandle> iter = instructions.iterator();
 			InstructionHandle ret = null;
-			while(iter.hasNext()){
-				InstructionHandle actual = iter.next();
+			for (InstructionHandle actual : instructions) {
 				if (actual.getInstruction() instanceof RET){
 					if (ret != null){
 						throw new StructuralCodeConstraintException("Subroutine with more then one RET detected: '"+ret+"' and '"+actual+"'.");
@@ -235,11 +232,10 @@ public class Subroutines{
 			}
 			_getRecursivelyAccessedLocalsIndicesHelper(s, this.subSubs());
 			int[] ret = new int[s.size()];
-			Iterator<Integer> i = s.iterator();
 			int j=-1;
-			while (i.hasNext()){
+			for (Integer index : s) {
 				j++;
-				ret[j] = i.next().intValue();
+				ret[j] = index.intValue();
 			}
 			return ret;
 		}
@@ -270,9 +266,7 @@ public class Subroutines{
 				throw new AssertionViolatedException("This subroutine object must be built up completely before calculating accessed locals.");
 			}
 			{
-    			Iterator<InstructionHandle> i = instructions.iterator();
-    			while (i.hasNext()){
-    				InstructionHandle ih = i.next();
+    			for (InstructionHandle ih : instructions) {
     				// RET is not a LocalVariableInstruction in the current version of BCEL.
     				if (ih.getInstruction() instanceof LocalVariableInstruction || ih.getInstruction() instanceof RET){
     					int idx = ((IndexedInstruction) (ih.getInstruction())).getIndex();
@@ -297,11 +291,10 @@ public class Subroutines{
 			
 			{
     			int[] ret = new int[acc.size()];
-    			Iterator<Integer> i = acc.iterator();
     			int j=-1;
-    			while (i.hasNext()){
+    			for (Integer accessedLocal : acc) {
     				j++;
-    				ret[j] = i.next().intValue();
+    				ret[j] = accessedLocal.intValue();
     			}
     			return ret;
 			}
@@ -313,9 +306,8 @@ public class Subroutines{
 		public Subroutine[] subSubs(){
 			Set<Subroutine> h = new HashSet<Subroutine>();
 
-			Iterator<InstructionHandle> i = instructions.iterator();
-			while (i.hasNext()){
-				Instruction inst = i.next().getInstruction();
+			for (InstructionHandle ih : instructions) {
+				Instruction inst = ih.getInstruction();
 				if (inst instanceof JsrInstruction){
 					InstructionHandle targ = ((JsrInstruction) inst).getTarget();
 					h.add(getSubroutine(targ));
@@ -391,10 +383,8 @@ public class Subroutines{
 		}
  
 		// Build up the database.
-		Iterator<InstructionHandle> iter = sub_leaders.iterator();
-		while (iter.hasNext()){
+		for (InstructionHandle astore : sub_leaders) {
 			SubroutineImpl sr = new SubroutineImpl();
-			InstructionHandle astore = iter.next();
 			sr.setLocalVariable( ((ASTORE) (astore.getInstruction())).getIndex() );
 			subroutines.put(astore, sr);
 		}
@@ -422,10 +412,8 @@ public class Subroutines{
 		
 		Map<InstructionHandle, Integer> colors = new HashMap<InstructionHandle, Integer>(); //Graph colouring. Key: InstructionHandle, Value: Integer .
 		
-		iter = sub_leaders.iterator();
-		while (iter.hasNext()){
+		for (InstructionHandle actual : sub_leaders) {
 			// Do some BFS with "actual" as the root of the graph.
-			InstructionHandle actual = iter.next();
 			// Init colors
 			for (int i=0; i<all.length; i++){
 				colors.put(all[i], WHITE);
@@ -478,9 +466,7 @@ public class Subroutines{
 		for (int i=0; i<handlers.length; i++){
 			InstructionHandle _protected = handlers[i].getStartPC();
 			while (_protected != handlers[i].getEndPC().getNext()){// Note the inclusive/inclusive notation of "generic API" exception handlers!
-				Iterator<Subroutine> subs = subroutines.values().iterator();
-				while (subs.hasNext()){
-					Subroutine sub = subs.next();
+				for (Subroutine sub : subroutines.values()) {
 					if (sub != subroutines.get(all[0])){	// We don't want to forbid top-level exception handlers.
 						if (sub.contains(_protected)){
 							throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+"' is protected by an exception handler, '"+handlers[i]+"'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
@@ -564,9 +550,7 @@ public class Subroutines{
 	 * @see #getTopLevel()
 	 */
 	public Subroutine subroutineOf(InstructionHandle any){
-		Iterator<Subroutine> i = subroutines.values().iterator();
-		while (i.hasNext()){
-			Subroutine s = i.next();
+	    for (Subroutine s : subroutines.values()) {
 			if (s.contains(any)) {
                 return s;
             }

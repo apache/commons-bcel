@@ -21,7 +21,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -88,9 +87,7 @@ public class AnnotationEntryGen
 	{
 		AnnotationEntry a = new AnnotationEntry(typeIndex, cpool.getConstantPool(),
 				isRuntimeVisible);
-		for (Iterator<ElementValuePairGen> iter = evs.iterator(); iter.hasNext();)
-		{
-			ElementValuePairGen element = iter.next();
+		for (ElementValuePairGen element : evs) {
 			a.addElementNameValuePair(element.getElementNameValuePair());
 		}
 		return a;

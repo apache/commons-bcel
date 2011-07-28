@@ -995,7 +995,7 @@ public class InstructionList implements Serializable {
 
 
     /**
-     * @return Enumeration that lists all instructions (handles)
+     * @return iterator that lists all instructions (handles)
      */
     public Iterator<InstructionHandle> iterator() {
         return new Iterator<InstructionHandle>() {
@@ -1271,8 +1271,8 @@ public class InstructionList implements Serializable {
      */
     public void update() {
         if (observers != null) {
-            for (Iterator<InstructionListObserver> e = observers.iterator(); e.hasNext();) {
-                e.next().notify(this);
+            for (InstructionListObserver observer : observers) {
+                observer.notify(this);
             }
         }
     }
