@@ -252,19 +252,26 @@ public final class Pass3bVerifier extends PassVerifier{
                 //see JVM $4.8.2
                 //TODO implement all based on stack 
                 Type returnedType = null;
-                if( ih.getPrev().getInstruction() instanceof InvokeInstruction )
-                {
-                    returnedType = ((InvokeInstruction)ih.getPrev().getInstruction()).getType(m.getConstantPool());
-                }
-                if( ih.getPrev().getInstruction() instanceof LoadInstruction )
-                {
-                    int index = ((LoadInstruction)ih.getPrev().getInstruction()).getIndex();
-                    returnedType = lvs.get(index);
-                }
-                if( ih.getPrev().getInstruction() instanceof GETFIELD )
-                {
-                    returnedType = ((GETFIELD)ih.getPrev().getInstruction()).getType(m.getConstantPool());
-                }
+        		InstructionHandle ihPrev = null;
+        		ihPrev = ih.getPrev();
+
+            	if (ihPrev != null)
+            	{
+            		if( ihPrev.getInstruction() instanceof InvokeInstruction )
+            		{
+            			returnedType = ((InvokeInstruction)ihPrev.getInstruction()).getType(m.getConstantPool());
+            		}
+            		if( ihPrev.getInstruction() instanceof LoadInstruction )
+            		{
+            			int index = ((LoadInstruction)ihPrev.getInstruction()).getIndex();
+            			returnedType = lvs.get(index);
+            		}
+            		if( ihPrev.getInstruction() instanceof GETFIELD )
+            		{
+            			returnedType = ((GETFIELD)ihPrev.getInstruction()).getType(m.getConstantPool());
+            		}
+            	}
+            	
                 if( returnedType != null )
                 {
                     if( returnedType instanceof ObjectType )
