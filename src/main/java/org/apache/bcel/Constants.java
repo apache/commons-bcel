@@ -75,8 +75,8 @@ public interface Constants {
    *  */
   public final static short MINOR_1_5 = 0;
 
-  /** Major version number of class files for Java 1.5.
-   *  @see #MINOR_1_5
+  /** Major version number of class files for Java 1.6.
+   *  @see #MINOR_1_6
    *  */
   public final static short MAJOR_1_6 = 50;
 
@@ -84,6 +84,16 @@ public interface Constants {
    *  @see #MAJOR_1_6
    *  */
   public final static short MINOR_1_6 = 0;
+  
+  /** Major version number of class files for Java 1.7.
+   *  @see #MINOR_1_7
+   *  */
+  public final static short MAJOR_1_7 = 51;
+
+  /** Minor version number of class files for Java 1.7.
+   *  @see #MAJOR_1_7
+   *  */
+  public final static short MINOR_1_7 = 0;
 
   /** Default major version number.  Class file is for Java 1.1.
    *  @see #MAJOR_1_1
