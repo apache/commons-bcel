@@ -168,7 +168,7 @@ public class ClassPath implements Serializable {
                 }
             }
         }
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         String separator = "";
         for (String path : list) {
             buf.append(separator);

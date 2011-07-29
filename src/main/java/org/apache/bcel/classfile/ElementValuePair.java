@@ -63,7 +63,7 @@ public class ElementValuePair
 
 	public String toShortString()
 	{
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		result.append(getNameString()).append("=").append(
 				getValue().toShortString());
 		return result.toString();

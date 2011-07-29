@@ -621,7 +621,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public String toString() {
         String access = Utility.accessToString(access_flags, true);
         access = access.equals("") ? "" : (access + " ");
-        StringBuffer buf = new StringBuffer(128);
+        StringBuilder buf = new StringBuilder(128);
         buf.append(access).append(Utility.classOrInterface(access_flags)).append(" ").append(
                 class_name).append(" extends ").append(
                 Utility.compactClassName(superclass_name, false)).append('\n');
@@ -672,7 +672,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     private static final String indent( Object obj ) {
         StringTokenizer tok = new StringTokenizer(obj.toString(), "\n");
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         while (tok.hasMoreTokens()) {
             buf.append("\t").append(tok.nextToken()).append("\n");
         }

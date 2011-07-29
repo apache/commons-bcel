@@ -77,13 +77,13 @@ final class CodeHTML implements org.apache.bcel.Constants {
      */
     private final String codeToHTML( ByteSequence bytes, int method_number ) throws IOException {
         short opcode = (short) bytes.readUnsignedByte();
-        StringBuffer buf;
+        StringBuilder buf;
         String name, signature;
         int default_offset = 0, low, high;
         int index, class_index, vindex, constant;
         int[] jump_table;
         int no_pad_bytes = 0, offset;
-        buf = new StringBuffer(256);
+        buf = new StringBuilder(256);
         buf.append("<TT>").append(OPCODE_NAMES[opcode]).append("</TT></TD><TD>");
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned

@@ -195,7 +195,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         if (flags == 0) {
             return "0";
         }
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0, pow = 1; pow <= Constants.MAX_ACC_FLAG; i++) {
             if ((flags & pow) != 0) {
                 if ((pow == Constants.ACC_SYNCHRONIZED) && (reason == FLAG_FOR_CLASS)) {
@@ -221,7 +221,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         if (arg_types.length == 0) {
             return "Type.NO_ARGS";
         }
-        StringBuffer args = new StringBuffer();
+        StringBuilder args = new StringBuilder();
         for (int i = 0; i < arg_types.length; i++) {
             args.append(printType(arg_types[i]));
             if (i < arg_types.length - 1) {

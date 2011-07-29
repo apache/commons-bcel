@@ -712,7 +712,7 @@ public class InstructionList implements Serializable {
         for (InstructionHandle ih = first; ih != null; ih = ih.next) {
             ih.getInstruction().dispose(); // e.g. BranchInstructions release their targets
         }
-        StringBuffer buf = new StringBuffer("{ ");
+        StringBuilder buf = new StringBuilder("{ ");
         for (InstructionHandle ih = first; ih != null; ih = next) {
             next = ih.next;
             length--;
@@ -987,7 +987,7 @@ public class InstructionList implements Serializable {
      * @return String containing all instructions in this list.
      */
     public String toString( boolean verbose ) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (InstructionHandle ih = start; ih != null; ih = ih.next) {
             buf.append(ih.toString(verbose)).append("\n");
         }

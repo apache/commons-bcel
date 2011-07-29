@@ -304,8 +304,7 @@ public final class Code extends Attribute {
      * @return String representation of code chunk.
      */
     public final String toString( boolean verbose ) {
-        StringBuffer buf;
-        buf = new StringBuffer(100);
+        StringBuilder buf = new StringBuilder(100);
         buf.append("Code(max_stack = ").append(max_stack).append(", max_locals = ").append(
                 max_locals).append(", code_length = ").append(code_length).append(")\n").append(
                 Utility.codeToString(code, constant_pool, 0, -1, verbose));

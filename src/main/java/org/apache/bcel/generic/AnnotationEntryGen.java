@@ -167,7 +167,7 @@ public class AnnotationEntryGen
 	@Override
     public String toString()
 	{
-		StringBuffer s = new StringBuffer();
+	    StringBuilder s = new StringBuilder(32);
 		s.append("AnnotationGen:[" + getTypeName() + " #" + evs.size() + " {");
 		for (int i = 0; i < evs.size(); i++)
 		{
@@ -181,7 +181,7 @@ public class AnnotationEntryGen
 
 	public String toShortString()
 	{
-		StringBuffer s = new StringBuffer();
+	    StringBuilder s = new StringBuilder();
 		s.append("@" + getTypeName() + "(");
 		for (int i = 0; i < evs.size(); i++)
 		{

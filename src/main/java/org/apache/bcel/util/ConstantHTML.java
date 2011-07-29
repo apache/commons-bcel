@@ -125,7 +125,7 @@ final class ConstantHTML implements org.apache.bcel.Constants {
                 // Get return type string
                 String type = Utility.methodSignatureReturnType(signature, false);
                 String ret_type = Class2HTML.referenceType(type);
-                StringBuffer buf = new StringBuffer("(");
+                StringBuilder buf = new StringBuilder("(");
                 for (int i = 0; i < args.length; i++) {
                     buf.append(Class2HTML.referenceType(args[i]));
                     if (i < args.length - 1) {

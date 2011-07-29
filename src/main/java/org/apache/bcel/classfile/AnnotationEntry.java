@@ -137,7 +137,7 @@ public class AnnotationEntry implements Node, Constants, Serializable {
     }
 
     public String toShortString() {
-        final StringBuffer result = new StringBuffer();
+        final StringBuilder result = new StringBuilder();
         result.append("@");
         result.append(getAnnotationType());
         if (getElementValuePairs().length > 0) {

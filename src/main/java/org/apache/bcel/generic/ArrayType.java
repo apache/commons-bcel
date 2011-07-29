@@ -75,7 +75,7 @@ public final class ArrayType extends ReferenceType {
                 basic_type = type;
                 break;
         }
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0; i < this.dimensions; i++) {
             buf.append('[');
         }

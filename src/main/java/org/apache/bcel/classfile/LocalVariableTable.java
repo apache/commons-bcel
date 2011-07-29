@@ -126,6 +126,7 @@ public class LocalVariableTable extends Attribute {
      *             same slot, use getLocalVariable(int index, int pc) instead.
      */
     @Deprecated
+    @Deprecated
     public final LocalVariable getLocalVariable( int index ) {
         for (int i = 0; i < local_variable_table_length; i++) {
             if (local_variable_table[i].getIndex() == index) {
@@ -170,7 +171,7 @@ public class LocalVariableTable extends Attribute {
      */
     @Override
     public final String toString() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0; i < local_variable_table_length; i++) {
             buf.append(local_variable_table[i].toString());
             if (i < local_variable_table_length - 1) {

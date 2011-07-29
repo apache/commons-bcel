@@ -141,12 +141,12 @@ public class InstructionFinder {
     private static final String compilePattern( String pattern ) {
         //Bug: 38787 - Instructions are assumed to be english, to avoid odd Locale issues
         String lower = pattern.toLowerCase(Locale.ENGLISH);
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         int size = pattern.length();
         for (int i = 0; i < size; i++) {
             char ch = lower.charAt(i);
             if (Character.isLetterOrDigit(ch)) {
-                StringBuffer name = new StringBuffer();
+                StringBuilder name = new StringBuilder();
                 while ((Character.isLetterOrDigit(ch) || ch == '_') && i < size) {
                     name.append(ch);
                     if (++i < size) {
@@ -372,7 +372,7 @@ public class InstructionFinder {
 			}
 		}
 		// Add instruction alias to match anything
-		StringBuffer buf = new StringBuffer("(");
+		StringBuilder buf = new StringBuilder("(");
 		for (short i = 0; i < NO_OPCODES; i++) {
 			if (Constants.NO_OF_OPERANDS[i] != Constants.UNDEFINED) { // Not
 																		// an
@@ -390,7 +390,7 @@ public class InstructionFinder {
 
 
     private static String precompile( short from, short to, short extra ) {
-        StringBuffer buf = new StringBuffer("(");
+        StringBuilder buf = new StringBuilder("(");
         for (short i = from; i <= to; i++) {
             buf.append(makeChar(i));
             buf.append('|');

@@ -95,7 +95,7 @@ public class ArrayElementValueGen extends ElementValueGen
 	@Override
     public String stringifyValue()
 	{
-		StringBuffer sb = new StringBuffer();
+	    StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		String comma = "";
 		for (ElementValueGen element : evalues) {

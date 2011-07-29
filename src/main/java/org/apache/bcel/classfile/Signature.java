@@ -181,7 +181,7 @@ public final class Signature extends Attribute {
             }
             return;
         }
-        StringBuffer buf2 = new StringBuffer();
+        StringBuilder buf2 = new StringBuilder();
         ch = in.read();
         do {
             buf2.append((char) ch);

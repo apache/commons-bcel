@@ -78,7 +78,7 @@ public class ConstantPoolGen implements java.io.Serializable {
      * @param cs array of given constants, new ones will be appended
      */
     public ConstantPoolGen(Constant[] cs) {
-    	StringBuffer sb = new StringBuffer(256);
+        StringBuilder sb = new StringBuilder(256);
         
         size = Math.max(256, cs.length + 64);
         constants = new Constant[size];
@@ -718,7 +718,7 @@ public class ConstantPoolGen implements java.io.Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 1; i < index; i++) {
             buf.append(i).append(")").append(constants[i]).append("\n");
         }

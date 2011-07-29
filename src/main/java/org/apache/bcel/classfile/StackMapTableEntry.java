@@ -156,7 +156,7 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
      */
     @Override
     public final String toString() {
-        StringBuffer buf = new StringBuffer(64);
+        StringBuilder buf = new StringBuilder(64);
         buf.append("(");
         if (frame_type >= Constants.SAME_FRAME && frame_type <= Constants.SAME_FRAME_MAX) {
         	buf.append("SAME");

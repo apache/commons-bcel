@@ -179,7 +179,7 @@ public class Class2HTML implements Constants {
 
 
     static String toHTML( String str ) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         try { // Filter any characters HTML doesn't like such as < and > in particular
             for (int i = 0; i < str.length(); i++) {
                 char ch;

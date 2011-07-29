@@ -112,7 +112,7 @@ public final void dump(DataOutputStream file) throws IOException
    */ 
   @Override
 public final String toString() {
-    StringBuffer buf = new StringBuffer("");
+      StringBuilder buf = new StringBuilder();
 
     for(int i=0; i < local_variable_type_table_length; i++) {
       buf.append(local_variable_type_table[i].toString());

@@ -318,7 +318,7 @@ public class FieldGen extends FieldGenOrMethodGen {
         access = access.equals("") ? "" : (access + " ");
         signature = type.toString();
         name = getName();
-        StringBuffer buf = new StringBuffer(32);
+        StringBuilder buf = new StringBuilder(32);
         buf.append(access).append(signature).append(" ").append(name);
         String value = getInitValue();
         if (value != null) {

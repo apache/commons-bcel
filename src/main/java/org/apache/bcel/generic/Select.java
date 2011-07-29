@@ -133,7 +133,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      */
     @Override
     public String toString( boolean verbose ) {
-        StringBuffer buf = new StringBuffer(super.toString(verbose));
+        StringBuilder buf = new StringBuilder(super.toString(verbose));
         if (verbose) {
             for (int i = 0; i < match_length; i++) {
                 String s = "null";

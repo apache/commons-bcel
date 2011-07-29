@@ -104,7 +104,7 @@ public abstract class Utility {
      * @return String representation of flags
      */
     public static final String accessToString( int access_flags, boolean for_class ) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         int p = 0;
         for (int i = 0; p < Constants.MAX_ACC_FLAG; i++) { // Loop through known flags
             p = pow2(i);
@@ -150,7 +150,7 @@ public abstract class Utility {
      */
     public static final String codeToString( byte[] code, ConstantPool constant_pool, int index,
             int length, boolean verbose ) {
-        StringBuffer buf = new StringBuffer(code.length * 20); // Should be sufficient
+        StringBuilder buf = new StringBuilder(code.length * 20); // Should be sufficient
         ByteSequence stream = new ByteSequence(code);
         try {
             for (int i = 0; i < index; i++) {
@@ -196,7 +196,7 @@ public abstract class Utility {
         int index, vindex, constant;
         int[] match, jump_table;
         int no_pad_bytes = 0, offset;
-        StringBuffer buf = new StringBuffer(Constants.OPCODE_NAMES[opcode]);
+        StringBuilder buf = new StringBuilder(Constants.OPCODE_NAMES[opcode]);
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned
          */
@@ -527,7 +527,7 @@ public abstract class Utility {
      */
     public final static String methodTypeToSignature( String ret, String[] argv )
             throws ClassFormatException {
-        StringBuffer buf = new StringBuffer("(");
+        StringBuilder buf = new StringBuilder("(");
         String str;
         if (argv != null) {
             for (int i = 0; i < argv.length; i++) {
@@ -664,7 +664,7 @@ public abstract class Utility {
      */
     public static final String methodSignatureToString( String signature, String name,
             String access, boolean chopit, LocalVariableTable vars ) throws ClassFormatException {
-        StringBuffer buf = new StringBuffer("(");
+        StringBuilder buf = new StringBuilder("(");
         String type;
         int index;
         int var_index = (access.indexOf("static") >= 0) ? 0 : 1;
@@ -821,10 +821,10 @@ public abstract class Utility {
                     return "boolean";
                 case '[': { // Array declaration
                     int n;
-                    StringBuffer brackets;
+                    StringBuilder brackets;
                     String type;
                     int consumed_chars; // Shadows global var
-                    brackets = new StringBuffer(); // Accumulate []'s
+                    brackets = new StringBuilder(); // Accumulate []'s
                     // Count opening brackets and look for optional size argument
                     for (n = 0; signature.charAt(n) == '['; n++) {
                         brackets.append("[]");
@@ -856,7 +856,7 @@ public abstract class Utility {
      * @return byte code signature
      */
     public static String getSignature( String type ) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         char[] chars = type.toCharArray();
         boolean char_found = false, delim = false;
         int index = -1;
@@ -1033,7 +1033,7 @@ public abstract class Utility {
      * @return bytes as hexadecimal string, e.g. 00 FA 12 ...
      */
     public static final String toHexString( byte[] bytes ) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
             short b = byteToShort(bytes[i]);
             String hex = Integer.toString(b, 0x10);
@@ -1124,7 +1124,7 @@ public abstract class Utility {
         if (obj == null) {
             return null;
         }
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         if (braces) {
             buf.append('{');
         }
@@ -1349,7 +1349,7 @@ public abstract class Utility {
      */
     public static final String convertString( String label ) {
         char[] ch = label.toCharArray();
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0; i < ch.length; i++) {
             switch (ch[i]) {
                 case '\n':

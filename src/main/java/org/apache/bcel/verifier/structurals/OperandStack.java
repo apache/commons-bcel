@@ -194,7 +194,7 @@ public class OperandStack{
 	 */
 	@Override
     public String toString(){
-		StringBuffer sb = new StringBuffer();
+	    StringBuilder sb = new StringBuilder();
 		sb.append("Slots used: ");
 		sb.append(slotsUsed());
 		sb.append(" MaxStack: ");
