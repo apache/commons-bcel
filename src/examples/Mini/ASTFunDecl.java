@@ -85,6 +85,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
    * Overrides SimpleNode.closeNode()
    * Cast children to appropiate type.
    */
+  @Override
   public void closeNode() {
     name = (ASTIdent)children[0];
     body = (ASTExpr)children[children.length - 1];
@@ -350,6 +351,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   /**
    * Overrides SimpleNode.toString()
    */
+  @Override
   public String toString() {
     StringBuffer buf = new StringBuffer();
     buf.append(jjtNodeName[id] + " " + name + "(");
@@ -384,6 +386,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   /**
    * Overrides SimpleNode.dump()
    */
+  @Override
   public void dump(String prefix) {
     System.out.println(toString(prefix));
 

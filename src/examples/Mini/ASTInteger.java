@@ -50,6 +50,7 @@ public class ASTInteger extends ASTExpr {
   /**
    * @return identifier and line/column number of appearance
    */
+  @Override
   public String toString() {
     return super.toString() + " = " + value;
   }
@@ -57,6 +58,7 @@ public class ASTInteger extends ASTExpr {
   /**
    * Overrides ASTExpr.traverse()
    */
+  @Override
   public ASTExpr traverse(Environment env) {
     this.env = env;
     return this; // Nothing to reduce/traverse here
@@ -67,6 +69,7 @@ public class ASTInteger extends ASTExpr {
    * Overrides AstExpr.eval()
    * @return type of expression
    */
+  @Override
   public int eval(int expected) {
     is_simple = true; // (Very) simple expression, always true
 
@@ -76,6 +79,7 @@ public class ASTInteger extends ASTExpr {
   /**
    * Fourth pass, produce Java code.
    */
+  @Override
   public void code(StringBuffer buf) {
     ASTFunDecl.push(buf, "" + value);
   }
@@ -83,6 +87,7 @@ public class ASTInteger extends ASTExpr {
   /**
    * Fifth pass, produce Java byte code.
    */
+  @Override
   public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
     il.append(new PUSH(cp, value)); ASTFunDecl.push();
   }

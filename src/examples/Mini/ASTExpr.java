@@ -97,6 +97,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   /**
    * @return name of node, its kind and the number of children.
    */
+  @Override
   public String toString() {
     String op="";
     int    len = (children != null)? children.length : 0;
@@ -116,6 +117,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
    * Called by the parser when the construction of this node is finished.
    * Casts children Node[] to precise ASTExpr[] type.
    */
+  @Override
   public void closeNode() {
     if(children != null) {
       exprs = new ASTExpr[children.length];
@@ -315,6 +317,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     this.column = column;
   }
 
+  @Override
   public void dump(String prefix) {
     System.out.println(toString(prefix));
 

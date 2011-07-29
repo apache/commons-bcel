@@ -91,6 +91,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
    * Overrides SimpleNode.closeNode().
    * Cast children to appropiate type.
    */
+  @Override
   public void closeNode() {
     if(children != null) { // Non-empty program ?
       fun_decls = new ASTFunDecl[children.length];
@@ -327,6 +328,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     }
   }
 
+  @Override
   public void dump(String prefix) {
     System.out.println(toString(prefix));
 

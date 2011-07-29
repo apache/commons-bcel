@@ -45,6 +45,7 @@ public class ASTTerm extends ASTExpr {
    * Drop this node, if kind == -1, because then it has just one child node
    * and may be safely replaced with it.
    */
+  @Override
   public ASTExpr traverse(Environment env) {
     if(kind == -1) {
         return exprs[0].traverse(env);

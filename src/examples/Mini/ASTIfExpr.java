@@ -52,6 +52,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
    * Overrides ASTExpr.closeNode()
    * Cast children nodes Node[] to appropiate type ASTExpr[]
    */
+  @Override
   public void closeNode() {
     if_expr = (ASTExpr)children[0];
     then_expr = (ASTExpr)children[1];
@@ -69,6 +70,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   /**
    * Overrides ASTExpr.traverse()
    */
+  @Override
   public ASTExpr traverse(Environment env) { 
     this.env = env;
 
@@ -88,6 +90,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
    * @return type of expression
    * @param expected type
    */
+  @Override
   public int eval(int expected) {
     int then_type, else_type, if_type;
 
@@ -138,6 +141,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   /**
    * Fourth pass, produce Java code.
    */
+  @Override
   public void code(StringBuffer buf) {
     if_expr.code(buf);
 
@@ -153,6 +157,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   /**
    * Fifth pass, produce Java byte code.
    */
+  @Override
   public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
     if_expr.byte_code(il, method, cp);
 
@@ -172,6 +177,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
     g.setTarget(il.append(InstructionConstants.NOP)); // May be optimized away later
   }
 
+  @Override
   public void dump(String prefix) {
     System.out.println(toString(prefix));
 

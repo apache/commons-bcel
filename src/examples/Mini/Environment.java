@@ -154,6 +154,7 @@ public class Environment implements Cloneable {
     return -1;
   }
 
+  @Override
   public Object clone() { 
     Vector[] copy = new Vector[size];
 
@@ -175,6 +176,7 @@ public class Environment implements Cloneable {
     return new Environment(copy);
   }
 
+  @Override
   public String toString() {
     StringBuffer buf = new StringBuffer();
 

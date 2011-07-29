@@ -77,6 +77,7 @@ public abstract class SimpleNode implements Node {
      toString(String), otherwise overriding toString() is probably all
      you need to do. */
 
+  @Override
   public String toString() { return MiniParserTreeConstants.jjtNodeName[id]; }
   public String toString(String prefix) { return prefix + toString(); }
 

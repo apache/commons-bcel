@@ -48,6 +48,7 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
     setArgs(args);
   }
   
+  @Override
   public String toString() {
     StringBuffer buf = new StringBuffer();
 

@@ -56,6 +56,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
     this.exprs    = exprs;
   }
 
+  @Override
   public String toString() {
     return jjtNodeName[id] + " " + name.getName();
   }
@@ -63,6 +64,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
   /**
    * Overrides ASTExpr.closeNode()
    */
+  @Override
   public void closeNode() {
     name = (ASTIdent)children[0];
 
@@ -77,6 +79,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
   /**
    * Overrides ASTExpr.traverse()
    */
+  @Override
   public ASTExpr traverse(Environment env) {
     String   fname = name.getName();
     EnvEntry entry = env.get(fname);
@@ -120,6 +123,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
    * @return type of expression
    * @param expected type
    */
+  @Override
   public int eval(int expected) {
     String     fname = name.getName();
     Function   f     = function;
@@ -158,6 +162,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
   /**
    * Fourth pass, produce Java code.
    */
+  @Override
   public void code(StringBuffer buf) {
     String     fname = name.getName();
 //    Function   f     = function;
@@ -196,6 +201,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
   /**
    * Fifth pass, produce Java byte code.
    */
+  @Override
   public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
     String     fname = name.getName();
 //    Function   f     = function;

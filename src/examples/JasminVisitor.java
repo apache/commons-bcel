@@ -77,6 +77,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     out.close();
   }
 
+  @Override
   public void visitJavaClass(JavaClass clazz) {
     out.println(";; Produced by JasminVisitor (BCEL)");
     out.println(";; http://jakarta.apache.org/bcel/");
@@ -97,6 +98,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     out.print("\n");
   }
 
+  @Override
   public void visitField(Field field) {
     out.print(".field " + Utility.accessToString(field.getAccessFlags()) +
         " \"" +field.getName() + "\"" + field.getSignature());
@@ -105,6 +107,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     }
   }
 
+  @Override
   public void visitConstantValue(ConstantValue cv) {
     out.println(" = " + cv);
   }
@@ -124,14 +127,17 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     }
   }
 
+  @Override
   public void visitDeprecated(Deprecated attribute) { printEndMethod(attribute); }
 
+  @Override
   public void visitSynthetic(Synthetic attribute) {
     if(_method != null) {
         printEndMethod(attribute);
     }
   }
 
+  @Override
   public void visitMethod(Method method) {
     this._method = method; // Remember for use in subsequent visitXXX calls
 
@@ -144,6 +150,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     }
   }
 
+  @Override
   public void visitExceptionTable(ExceptionTable e) {
     String[] names = e.getExceptionNames();
     for(int i=0; i < names.length; i++) {
@@ -155,6 +162,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
   private Hashtable<InstructionHandle, String> map;
 
+  @Override
   public void visitCode(Code code) {
     int label_counter = 0;
 

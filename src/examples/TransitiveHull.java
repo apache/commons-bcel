@@ -106,6 +106,7 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
         }
     }
 
+    @Override
     public void visitConstantClass(ConstantClass cc) {
         String class_name = (String) cc.getConstantValue(_cp);
         add(class_name);
@@ -145,14 +146,17 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
         }
     }
 
+    @Override
     public void visitConstantMethodref(ConstantMethodref cmr) {
         visitRef(cmr, true);
     }
 
+    @Override
     public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref cimr) {
         visitRef(cimr, true);
     }
 
+    @Override
     public void visitConstantFieldref(ConstantFieldref cfr) {
         visitRef(cfr, false);
     }

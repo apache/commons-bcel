@@ -60,6 +60,7 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   /**
    * @return identifier and line/column number of appearance
    */
+  @Override
   public String toString() {
     return super.toString() + " = " + name;
   }
@@ -67,6 +68,7 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   /**
    * Overrides ASTExpr.traverse()
    */
+  @Override
   public ASTExpr traverse(Environment env) {
     EnvEntry entry = env.get(name);
 
@@ -85,6 +87,7 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   /**
    * Overrides AstExpr.eval()
    */
+  @Override
   public int eval(int expected) {
     ASTIdent ident = reference.getName();
     int      t     = ident.getType();
@@ -110,6 +113,7 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   /**
    * Fourth pass, produce Java code.
    */
+  @Override
   public void code(StringBuffer buf) {
     if(name.equals("TRUE")) {
         ASTFunDecl.push(buf, "1");
@@ -123,6 +127,7 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   /**
    * Fifth pass, produce Java byte code.
    */
+  @Override
   public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
     if(name.equals("TRUE")) {
         il.append(new PUSH(cp, 1));

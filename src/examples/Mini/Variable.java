@@ -45,6 +45,7 @@ public class Variable implements EnvEntry {
     column   = name.getColumn();
   }
 
+  @Override
   public String toString() {
     if(!reserved) {
         return var_name + " declared at line " + line + ", column " + column;
