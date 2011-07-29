@@ -1024,7 +1024,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static private java.util.Vector jj_expentries = new java.util.Vector();
+  static private java.util.Vector<int[]> jj_expentries = new java.util.Vector<int[]>();
   static private int[] jj_expentry;
   static private int jj_kind = -1;
   static private int[] jj_lasttokens = new int[100];
@@ -1042,8 +1042,8 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         jj_expentry[i] = jj_lasttokens[i];
       }
       boolean exists = false;
-      for (java.util.Enumeration e = jj_expentries.elements(); e.hasMoreElements();) {
-        int[] oldentry = (int[])(e.nextElement());
+      for (java.util.Enumeration<int[]> e = jj_expentries.elements(); e.hasMoreElements();) {
+        int[] oldentry = (e.nextElement());
         if (oldentry.length == jj_expentry.length) {
           exists = true;
           for (int i = 0; i < jj_expentry.length; i++) {
@@ -1100,7 +1100,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     jj_add_error_token(0, 0);
     int[][] exptokseq = new int[jj_expentries.size()][];
     for (int i = 0; i < jj_expentries.size(); i++) {
-      exptokseq[i] = (int[])jj_expentries.elementAt(i);
+      exptokseq[i] = jj_expentries.elementAt(i);
     }
     return new ParseException(token, exptokseq, tokenImage);
   }
