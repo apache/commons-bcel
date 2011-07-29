@@ -67,7 +67,7 @@ public class MiniC implements org.apache.bcel.Constants {
         if(j == 0) {
         parser = new MiniParser(new java.io.FileInputStream(file_name[0]));
     } else {
-        parser.ReInit(new java.io.FileInputStream(file_name[j]));
+        MiniParser.ReInit(new java.io.FileInputStream(file_name[j]));
     }
 
         int index = file_name[j].lastIndexOf('.');
@@ -84,8 +84,8 @@ public class MiniC implements org.apache.bcel.Constants {
         file   = file_name[j];
 
         System.out.println("Parsing ...");
-        parser.Program();
-        ASTProgram program = (ASTProgram)parser.jjtree.rootNode();
+        MiniParser.Program();
+        ASTProgram program = (ASTProgram)MiniParser.jjtree.rootNode();
 
         System.out.println("Pass 1: Optimizing parse tree ...");
         pass    = 1;

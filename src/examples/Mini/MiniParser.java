@@ -869,8 +869,8 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
   }
 
   static public void ReInit(java.io.InputStream stream) {
-    jj_input_stream.ReInit(stream, 1, 1);
-    token_source.ReInit(jj_input_stream);
+    ASCII_CharStream.ReInit(stream, 1, 1);
+    MiniParserTokenManager.ReInit(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jjtree.reset();
@@ -905,8 +905,8 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
   }
 
   static public void ReInit(java.io.Reader stream) {
-    jj_input_stream.ReInit(stream, 1, 1);
-    token_source.ReInit(jj_input_stream);
+    ASCII_CharStream.ReInit(stream, 1, 1);
+    MiniParserTokenManager.ReInit(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jjtree.reset();
@@ -958,7 +958,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     if ((oldToken = token).next != null) {
         token = token.next;
     } else {
-        token = token.next = token_source.getNextToken();
+        token = token.next = MiniParserTokenManager.getNextToken();
     }
     jj_ntk = -1;
     if (token.kind == kind) {
@@ -986,7 +986,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     if (jj_scanpos == jj_lastpos) {
       jj_la--;
       if (jj_scanpos.next == null) {
-        jj_lastpos = jj_scanpos = jj_scanpos.next = token_source.getNextToken();
+        jj_lastpos = jj_scanpos = jj_scanpos.next = MiniParserTokenManager.getNextToken();
       } else {
         jj_lastpos = jj_scanpos = jj_scanpos.next;
       }
@@ -1007,7 +1007,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     if (token.next != null) {
         token = token.next;
     } else {
-        token = token.next = token_source.getNextToken();
+        token = token.next = MiniParserTokenManager.getNextToken();
     }
     jj_ntk = -1;
     jj_gen++;
@@ -1020,7 +1020,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
       if (t.next != null) {
         t = t.next;
     } else {
-        t = t.next = token_source.getNextToken();
+        t = t.next = MiniParserTokenManager.getNextToken();
     }
     }
     return t;
@@ -1028,7 +1028,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
 
   static final private int jj_ntk() {
     if ((jj_nt=token.next) == null) {
-        return (jj_ntk = (token.next=token_source.getNextToken()).kind);
+        return (jj_ntk = (token.next=MiniParserTokenManager.getNextToken()).kind);
     } else {
         return (jj_ntk = jj_nt.kind);
     }
