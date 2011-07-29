@@ -25,8 +25,8 @@ import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 
 public class MiniC implements org.apache.bcel.Constants {
-  private static Vector errors   = null;
-  private static Vector warnings = null;
+  private static Vector<String> errors   = null;
+  private static Vector<String> warnings = null;
   private static String file     = null;
   private static int   pass      = 0;
         
@@ -60,8 +60,8 @@ public class MiniC implements org.apache.bcel.Constants {
     }
 
       for(int j=0; j < files; j++) {
-        errors   = new Vector();
-        warnings = new Vector();
+        errors   = new Vector<String>();
+        warnings = new Vector<String>();
         pass     = 0;
 
         if(j == 0) {
