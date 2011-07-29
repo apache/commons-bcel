@@ -61,7 +61,8 @@ public class OperandStack{
 	 * on a new stack. However, the Type objects on the stack are
 	 * shared.
 	 */
-	protected Object clone(){
+	@Override
+    protected Object clone(){
 		OperandStack newstack = new OperandStack(this.maxStack);
 		newstack.stack = (ArrayList<Type>) this.stack.clone();
 		return newstack;
@@ -76,14 +77,16 @@ public class OperandStack{
 
 	/** @return a hash code value for the object.
      */
-	public int hashCode() { return stack.hashCode(); }
+	@Override
+    public int hashCode() { return stack.hashCode(); }
 
 	/**
 	 * Returns true if and only if this OperandStack
 	 * equals another, meaning equal lengths and equal
 	 * objects on the stacks.
 	 */
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (!(o instanceof OperandStack)) {
             return false;
         }
@@ -189,7 +192,8 @@ public class OperandStack{
 	/**
 	 * Returns a String representation of this OperandStack instance.
 	 */
-	public String toString(){
+	@Override
+    public String toString(){
 		StringBuffer sb = new StringBuffer();
 		sb.append("Slots used: ");
 		sb.append(slotsUsed());

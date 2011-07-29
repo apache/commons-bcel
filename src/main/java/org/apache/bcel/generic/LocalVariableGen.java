@@ -174,6 +174,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
     /** @return a hash code value for the object.
      */
+    @Override
     public int hashCode() {
         //If the user changes the name or type, problems with the targeter hashmap will occur
         int hc = index ^ name.hashCode() ^ type.hashCode();
@@ -185,6 +186,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * We consider to local variables to be equal, if the use the same index and
      * are valid in the same range.
      */
+    @Override
     public boolean equals( Object o ) {
         if (!(o instanceof LocalVariableGen)) {
             return false;
@@ -194,11 +196,13 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
+    @Override
     public String toString() {
         return "LocalVariableGen(" + name + ", " + type + ", " + start + ", " + end + ")";
     }
 
 
+    @Override
     public Object clone() {
         try {
             return super.clone();

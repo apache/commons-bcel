@@ -87,6 +87,7 @@ public final class LineNumberTable extends Attribute {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitLineNumberTable(this);
     }
@@ -98,6 +99,7 @@ public final class LineNumberTable extends Attribute {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(line_number_table_length);
@@ -127,6 +129,7 @@ public final class LineNumberTable extends Attribute {
     /**
      * @return String representation.
      */
+    @Override
     public final String toString() {
         StringBuffer buf = new StringBuffer();
         StringBuffer line = new StringBuffer();
@@ -193,6 +196,7 @@ public final class LineNumberTable extends Attribute {
     /**
      * @return deep copy of this attribute
      */
+    @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         LineNumberTable c = (LineNumberTable) clone();
         c.line_number_table = new LineNumber[line_number_table_length];

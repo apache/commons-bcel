@@ -43,6 +43,7 @@ public class LADD extends ArithmeticInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitTypedInstruction(this);
         v.visitStackProducer(this);

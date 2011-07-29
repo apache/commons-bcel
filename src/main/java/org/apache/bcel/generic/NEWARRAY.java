@@ -59,6 +59,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
         out.writeByte(type);
@@ -84,6 +85,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     /**
      * @return mnemonic for instruction
      */
+    @Override
     public String toString( boolean verbose ) {
         return super.toString(verbose) + " " + org.apache.bcel.Constants.TYPE_NAMES[type];
     }
@@ -92,6 +94,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     /**
      * Read needed data (e.g. index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         type = bytes.readByte();
         length = 2;
@@ -113,6 +116,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitAllocationInstruction(this);
         v.visitExceptionThrower(this);

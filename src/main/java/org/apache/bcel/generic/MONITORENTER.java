@@ -49,6 +49,7 @@ public class MONITORENTER extends Instruction implements ExceptionThrower, Stack
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitStackConsumer(this);

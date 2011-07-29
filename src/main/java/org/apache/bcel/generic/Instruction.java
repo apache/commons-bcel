@@ -89,6 +89,7 @@ public abstract class Instruction implements Cloneable, Serializable {
     /**
      * @return mnemonic for instruction in verbose format
      */
+    @Override
     public String toString() {
         return toString(true);
     }
@@ -529,6 +530,7 @@ public abstract class Instruction implements Cloneable, Serializable {
      * @return currently used comparator for equals()
      * @deprecated use the built in comparator, or wrap this class in another object that implements these methods
      */
+    @Deprecated
     public static InstructionComparator getComparator() {
         return cmp;
     }
@@ -537,6 +539,7 @@ public abstract class Instruction implements Cloneable, Serializable {
     /** Set comparator to be used for equals().
       * @deprecated use the built in comparator, or wrap this class in another object that implements these methods
      */
+    @Deprecated
     public static void setComparator( InstructionComparator c ) {
         cmp = c;
     }
@@ -545,6 +548,7 @@ public abstract class Instruction implements Cloneable, Serializable {
     /** Check for equality, delegated to comparator
      * @return true if that is an Instruction and has the same opcode
      */
+    @Override
     public boolean equals( Object that ) {
         return (that instanceof Instruction) ? cmp.equals(this, (Instruction) that) : false;
     }

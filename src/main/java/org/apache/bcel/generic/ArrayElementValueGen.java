@@ -54,7 +54,8 @@ public class ArrayElementValueGen extends ElementValueGen
 	/**
 	 * Return immutable variant of this ArrayElementValueGen
 	 */
-	public ElementValue getElementValue()
+	@Override
+    public ElementValue getElementValue()
 	{
 		ElementValue[] immutableData = new ElementValue[evalues.size()];
 		int i = 0;
@@ -81,7 +82,8 @@ public class ArrayElementValueGen extends ElementValueGen
 		}
 	}
 
-	public void dump(DataOutputStream dos) throws IOException
+	@Override
+    public void dump(DataOutputStream dos) throws IOException
 	{
 		dos.writeByte(type); // u1 type of value (ARRAY == '[')
 		dos.writeShort(evalues.size());
@@ -90,7 +92,8 @@ public class ArrayElementValueGen extends ElementValueGen
 		}
 	}
 
-	public String stringifyValue()
+	@Override
+    public String stringifyValue()
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");

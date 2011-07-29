@@ -113,6 +113,7 @@ public final class Field extends FieldOrMethod {
      *
      * @return String representation of field, including the signature.
      */
+    @Override
     public final String toString() {
         String name, signature, access; // Short cuts to constant pool
         // Get names from constant pool
@@ -175,6 +176,7 @@ public final class Field extends FieldOrMethod {
      * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
+    @Override
     public boolean equals( Object obj ) {
         return _cmp.equals(this, obj);
     }
@@ -186,6 +188,7 @@ public final class Field extends FieldOrMethod {
      * 
      * @see java.lang.Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return _cmp.hashCode(this);
     }

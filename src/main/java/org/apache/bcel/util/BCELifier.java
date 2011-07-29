@@ -71,6 +71,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
 
+    @Override
     public void visitJavaClass( JavaClass clazz ) {
         String class_name = clazz.getClassName();
         String super_name = clazz.getSuperclassName();
@@ -150,6 +151,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
 
+    @Override
     public void visitField( Field field ) {
         _out.println();
         _out.println("    field = new FieldGen(" + printFlags(field.getAccessFlags()) + ", "
@@ -163,6 +165,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
 
+    @Override
     public void visitMethod( Method method ) {
         MethodGen mg = new MethodGen(method, _clazz.getClassName(), _cp);
         Type result_type = mg.getReturnType();

@@ -89,6 +89,7 @@ public final class ExceptionTable extends Attribute {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitExceptionTable(this);
     }
@@ -100,6 +101,7 @@ public final class ExceptionTable extends Attribute {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(number_of_exceptions);
@@ -151,6 +153,7 @@ public final class ExceptionTable extends Attribute {
     /**
      * @return String representation, i.e., a list of thrown exceptions.
      */
+    @Override
     public final String toString() {
         StringBuffer buf = new StringBuffer();
         String str;
@@ -169,6 +172,7 @@ public final class ExceptionTable extends Attribute {
     /**
      * @return deep copy of this attribute
      */
+    @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         ExceptionTable c = (ExceptionTable) clone();
         if (exception_index_table != null) {

@@ -129,13 +129,15 @@ public class SimpleElementValue extends ElementValue
 		return (short) s.getBytes();
 	}
 
-	public String toString()
+	@Override
+    public String toString()
 	{
 		return stringifyValue();
 	}
 
 	// Whatever kind of value it is, return it as a string
-	public String stringifyValue()
+	@Override
+    public String stringifyValue()
 	{
 		switch (type)
 		{
@@ -185,7 +187,8 @@ public class SimpleElementValue extends ElementValue
 		}
 	}
 
-	public void dump(DataOutputStream dos) throws IOException
+	@Override
+    public void dump(DataOutputStream dos) throws IOException
 	{
 		dos.writeByte(type); // u1 kind of value
 		switch (type)

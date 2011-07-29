@@ -79,6 +79,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      *    the getReferenceType() method, which correctly distinguishes
      *    between class types and array types.
      */
+    @Deprecated
     public String getClassName( ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
         ConstantCP cmr = (ConstantCP) cp.getConstant(index);
@@ -97,6 +98,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      *    the ObjectType returned will be invalid.  Use
      *    getReferenceType() instead.
      */
+    @Deprecated
     public ObjectType getClassType( ConstantPoolGen cpg ) {
         return new ObjectType(getClassName(cpg));
     }

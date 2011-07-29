@@ -75,6 +75,7 @@ public abstract class ParameterAnnotations extends Attribute {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         //	    v.visitParameterAnnotation(this);
     }
@@ -115,6 +116,7 @@ public abstract class ParameterAnnotations extends Attribute {
         return num_parameters;
     }
     
+    @Override
     public void dump(DataOutputStream dos) throws IOException
     {
         super.dump(dos);

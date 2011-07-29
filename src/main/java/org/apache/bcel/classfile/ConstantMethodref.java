@@ -67,6 +67,7 @@ public final class ConstantMethodref extends ConstantCP {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitConstantMethodref(this);
     }

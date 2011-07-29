@@ -79,6 +79,7 @@ public class VerificationResult {
 
     /** @return a hash code value for the object.
      */
+    @Override
     public int hashCode() {
         return numeric ^ detailMessage.hashCode();
     }
@@ -87,6 +88,7 @@ public class VerificationResult {
     /**
      * Returns if two VerificationResult instances are equal.
      */
+    @Override
     public boolean equals( Object o ) {
         if (!(o instanceof VerificationResult)) {
             return false;
@@ -99,6 +101,7 @@ public class VerificationResult {
     /**
      * Returns a String representation of the VerificationResult.
      */
+    @Override
     public String toString() {
         String ret = "";
         if (numeric == VERIFIED_NOTYET) {

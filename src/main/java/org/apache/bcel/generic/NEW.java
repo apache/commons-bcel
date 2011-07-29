@@ -68,6 +68,7 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitLoadClass(this);
         v.visitAllocationInstruction(this);

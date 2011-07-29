@@ -48,6 +48,7 @@ public class GETFIELD extends FieldInstruction implements ExceptionThrower, Stac
     }
 
 
+    @Override
     public int produceStack( ConstantPoolGen cpg ) {
         return getFieldSize(cpg);
     }
@@ -71,6 +72,7 @@ public class GETFIELD extends FieldInstruction implements ExceptionThrower, Stac
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitStackConsumer(this);

@@ -65,6 +65,7 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitLoadClass(this);
         v.visitExceptionThrower(this);

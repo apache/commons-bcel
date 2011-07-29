@@ -78,6 +78,7 @@ public class AnnotationDefault extends Attribute
          * @param v
          *            Visitor object
          */
+        @Override
         public void accept(Visitor v)
         {
                 // v.visitAnnotationDefault(this);
@@ -100,11 +101,13 @@ public class AnnotationDefault extends Attribute
                 return default_value;
         }
 
+        @Override
         public Attribute copy(ConstantPool _constant_pool)
         {
                 throw new RuntimeException("Not implemented yet!");
         }
 
+    @Override
     public final void dump(DataOutputStream dos) throws IOException
     {
       super.dump(dos);

@@ -64,6 +64,7 @@ public class INVOKESTATIC extends InvokeInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);

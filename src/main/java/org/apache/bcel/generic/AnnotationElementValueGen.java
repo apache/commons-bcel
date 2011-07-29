@@ -50,13 +50,15 @@ public class AnnotationElementValueGen extends ElementValueGen
 		a = new AnnotationEntryGen(value.getAnnotationEntry(), cpool, copyPoolEntries);
 	}
 
-	public void dump(DataOutputStream dos) throws IOException
+	@Override
+    public void dump(DataOutputStream dos) throws IOException
 	{
 		dos.writeByte(type); // u1 type of value (ANNOTATION == '@')
 		a.dump(dos);
 	}
 
-	public String stringifyValue()
+	@Override
+    public String stringifyValue()
 	{
 		throw new RuntimeException("Not implemented yet");
 	}
@@ -64,7 +66,8 @@ public class AnnotationElementValueGen extends ElementValueGen
 	/**
 	 * Return immutable variant of this AnnotationElementValueGen
 	 */
-	public ElementValue getElementValue()
+	@Override
+    public ElementValue getElementValue()
 	{
 		return new AnnotationElementValue(this.type, a.getAnnotation(), cpGen
 				.getConstantPool());

@@ -72,6 +72,7 @@ public abstract class Type implements java.io.Serializable {
     /**
      * @return hashcode of Type
      */
+    @Override
     public int hashCode() {
     	return type ^ signature.hashCode();
     }
@@ -80,6 +81,7 @@ public abstract class Type implements java.io.Serializable {
     /**
      * @return whether the Types are equal
      */
+    @Override
     public boolean equals(Object o) {
   		if (o instanceof Type) {
   			Type t = (Type)o;
@@ -124,6 +126,7 @@ public abstract class Type implements java.io.Serializable {
     /**
      * @return Type string, e.g. `int[]'
      */
+    @Override
     public String toString() {
         return ((this.equals(Type.NULL) || (type >= Constants.T_UNKNOWN))) ? signature : Utility
                 .signatureToString(signature, false);
@@ -151,6 +154,7 @@ public abstract class Type implements java.io.Serializable {
 
     private static final ThreadLocal<Integer> consumed_chars = new ThreadLocal<Integer>() {
 
+        @Override
         protected Integer initialValue() {
             return Integer.valueOf(0);
         }

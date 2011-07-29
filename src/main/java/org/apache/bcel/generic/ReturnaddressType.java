@@ -52,6 +52,7 @@ public class ReturnaddressType extends Type {
 
     /** @return a hash code value for the object.
      */
+    @Override
     public int hashCode() {
         if (returnTarget == null) {
             return 0;
@@ -63,6 +64,7 @@ public class ReturnaddressType extends Type {
     /**
      * Returns if the two Returnaddresses refer to the same target.
      */
+    @Override
     public boolean equals( Object rat ) {
         if (!(rat instanceof ReturnaddressType)) {
             return false;

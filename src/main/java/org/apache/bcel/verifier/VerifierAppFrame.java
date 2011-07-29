@@ -221,6 +221,7 @@ public class VerifierAppFrame extends JFrame {
 
 
     /** Overridden to stop the application on a closing window. */
+    @Override
     protected void processWindowEvent( WindowEvent e ) {
         super.processWindowEvent(e);
         if (e.getID() == WindowEvent.WINDOW_CLOSING) {

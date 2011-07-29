@@ -46,6 +46,7 @@ public class IF_ACMPNE extends IfInstruction {
     /**
      * @return negation of instruction
      */
+    @Override
     public IfInstruction negate() {
         return new IF_ACMPEQ(target);
     }
@@ -59,6 +60,7 @@ public class IF_ACMPNE extends IfInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);

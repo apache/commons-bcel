@@ -60,6 +60,7 @@ public abstract class Utility {
 
     private static ThreadLocal<Integer> consumed_chars = new ThreadLocal<Integer>() {
 
+        @Override
         protected Integer initialValue() {
             return Integer.valueOf(0);
         }
@@ -1261,6 +1262,7 @@ public abstract class Utility {
         }
 
 
+        @Override
         public int read() throws IOException {
             int b = in.read();
             if (b != ESCAPE_CHAR) {
@@ -1285,6 +1287,7 @@ public abstract class Utility {
         }
 
 
+        @Override
         public int read( char[] cbuf, int off, int len ) throws IOException {
             for (int i = 0; i < len; i++) {
                 cbuf[off + i] = (char) read();
@@ -1303,6 +1306,7 @@ public abstract class Utility {
         }
 
 
+        @Override
         public void write( int b ) throws IOException {
             if (isJavaIdentifierPart((char) b) && (b != ESCAPE_CHAR)) {
                 out.write(b);
@@ -1325,6 +1329,7 @@ public abstract class Utility {
         }
 
 
+        @Override
         public void write( char[] cbuf, int off, int len ) throws IOException {
             for (int i = 0; i < len; i++) {
                 write(cbuf[off + i]);
@@ -1332,6 +1337,7 @@ public abstract class Utility {
         }
 
 
+        @Override
         public void write( String str, int off, int len ) throws IOException {
             write(str.toCharArray(), off, len);
         }

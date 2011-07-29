@@ -472,6 +472,7 @@ public class VerifyDialog extends javax.swing.JDialog {
                 aVerifyDialog.setModal(true);
                 aVerifyDialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
+                    @Override
                     public void windowClosing( java.awt.event.WindowEvent e ) {
                         classes_to_verify--;
                         if (classes_to_verify == 0) {

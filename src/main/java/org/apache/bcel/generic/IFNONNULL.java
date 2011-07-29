@@ -46,6 +46,7 @@ public class IFNONNULL extends IfInstruction {
     /**
      * @return negation of instruction
      */
+    @Override
     public IfInstruction negate() {
         return new IFNULL(target);
     }
@@ -59,6 +60,7 @@ public class IFNONNULL extends IfInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);

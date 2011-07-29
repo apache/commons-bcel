@@ -856,6 +856,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
 
+    @Override
     public String getSignature() {
         return Type.getMethodSignature(type, arg_types);
     }
@@ -1073,6 +1074,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      *
      * @return String representation of the method.
      */
+    @Override
     public final String toString() {
         String access = Utility.accessToString(access_flags);
         String signature = Type.getMethodSignature(type, arg_types);
@@ -1230,6 +1232,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
+    @Override
     public boolean equals( Object obj ) {
         return _cmp.equals(this, obj);
     }
@@ -1241,6 +1244,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * 
      * @see java.lang.Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return _cmp.hashCode(this);
     }

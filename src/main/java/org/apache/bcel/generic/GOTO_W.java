@@ -50,6 +50,7 @@ public class GOTO_W extends GotoInstruction {
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         index = getTargetOffset();
         out.writeByte(opcode);
@@ -60,6 +61,7 @@ public class GOTO_W extends GotoInstruction {
     /**
      * Read needed data (e.g. index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         index = bytes.readInt();
         length = 5;
@@ -74,6 +76,7 @@ public class GOTO_W extends GotoInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitUnconditionalBranch(this);
         v.visitBranchInstruction(this);

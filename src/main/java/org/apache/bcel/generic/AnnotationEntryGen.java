@@ -164,7 +164,8 @@ public class AnnotationEntryGen
 		return evs;
 	}
 
-	public String toString()
+	@Override
+    public String toString()
 	{
 		StringBuffer s = new StringBuffer();
 		s.append("AnnotationGen:[" + getTypeName() + " #" + evs.size() + " {");

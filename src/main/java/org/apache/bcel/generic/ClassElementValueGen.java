@@ -49,7 +49,8 @@ public class ClassElementValueGen extends ElementValueGen
 	/**
 	 * Return immutable variant of this ClassElementValueGen
 	 */
-	public ElementValue getElementValue()
+	@Override
+    public ElementValue getElementValue()
 	{
 		return new ClassElementValue(type, idx, cpGen.getConstantPool());
 	}
@@ -84,12 +85,14 @@ public class ClassElementValueGen extends ElementValueGen
 		// return utf8.getBytes();
 	}
 
-	public String stringifyValue()
+	@Override
+    public String stringifyValue()
 	{
 		return getClassString();
 	}
 
-	public void dump(DataOutputStream dos) throws IOException
+	@Override
+    public void dump(DataOutputStream dos) throws IOException
 	{
 		dos.writeByte(type); // u1 kind of value
 		dos.writeShort(idx);

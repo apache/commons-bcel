@@ -54,6 +54,7 @@ public class ISTORE extends StoreInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         super.accept(v);
         v.visitISTORE(this);

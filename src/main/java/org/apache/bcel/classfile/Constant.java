@@ -90,6 +90,7 @@ public abstract class Constant implements Cloneable, Node, Serializable {
     /**
      * @return String representation.
      */
+    @Override
     public String toString() {
         return Constants.CONSTANT_NAMES[tag] + "[" + tag + "]";
     }
@@ -107,6 +108,7 @@ public abstract class Constant implements Cloneable, Node, Serializable {
     }
 
 
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -173,6 +175,7 @@ public abstract class Constant implements Cloneable, Node, Serializable {
      * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
+    @Override
     public boolean equals( Object obj ) {
         return _cmp.equals(this, obj);
     }
@@ -184,6 +187,7 @@ public abstract class Constant implements Cloneable, Node, Serializable {
      * 
      * @see java.lang.Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return _cmp.hashCode(this);
     }

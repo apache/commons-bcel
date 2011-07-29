@@ -43,6 +43,7 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
     }
 
 
+    @Override
     public Type getType( ConstantPoolGen cpg ) {
         switch (cpg.getConstantPool().getConstant(index).getTag()) {
             case org.apache.bcel.Constants.CONSTANT_Long:
@@ -76,6 +77,7 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);

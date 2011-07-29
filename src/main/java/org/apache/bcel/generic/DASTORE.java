@@ -44,6 +44,7 @@ public class DASTORE extends ArrayInstruction implements StackConsumer {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitStackConsumer(this);
         v.visitExceptionThrower(this);

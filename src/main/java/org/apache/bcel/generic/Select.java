@@ -87,6 +87,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param max_offset the maximum offset that may be caused by these instructions
      * @return additional offset caused by possible change of this instruction's length
      */
+    @Override
     protected int updatePosition( int offset, int max_offset ) {
         position += offset; // Additional offset caused by preceding SWITCHs, GOTOs, etc.
         short old_length = length;
@@ -102,6 +103,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
         for (int i = 0; i < padding; i++) {
@@ -115,6 +117,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     /**
      * Read needed data (e.g. index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         padding = (4 - (bytes.getIndex() % 4)) % 4; // Compute number of pad bytes
         for (int i = 0; i < padding; i++) {
@@ -128,6 +131,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     /**
      * @return mnemonic for instruction
      */
+    @Override
     public String toString( boolean verbose ) {
         StringBuffer buf = new StringBuffer(super.toString(verbose));
         if (verbose) {
@@ -159,6 +163,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param old_ih old target
      * @param new_ih new target
      */
+    @Override
     public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
         boolean targeted = false;
         if (target == old_ih) {
@@ -180,6 +185,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     /**
      * @return true, if ih is target of this instruction
      */
+    @Override
     public boolean containsTarget( InstructionHandle ih ) {
         if (target == ih) {
             return true;
@@ -193,6 +199,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
 
+    @Override
     protected Object clone() throws CloneNotSupportedException {
         Select copy = (Select) super.clone();
         copy.match = match.clone();
@@ -205,6 +212,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     /**
      * Inform targets that they're not targeted anymore.
      */
+    @Override
     void dispose() {
         super.dispose();
         for (int i = 0; i < targets.length; i++) {

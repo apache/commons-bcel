@@ -59,6 +59,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
         out.writeShort(index);
@@ -79,6 +80,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     /**
      * Read needed data (i.e., index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
         length = 5;
@@ -90,11 +92,13 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     /**
      * @return mnemonic for instruction with symbolic references resolved
      */
+    @Override
     public String toString( ConstantPool cp ) {
         return super.toString(cp) + " " + nargs;
     }
 
 
+    @Override
     public int consumeStack( ConstantPoolGen cpg ) { // nargs is given in byte-code
         return nargs; // nargs includes this reference
     }
@@ -120,6 +124,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);

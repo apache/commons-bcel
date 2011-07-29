@@ -170,11 +170,13 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable, j
     }
 
 
+    @Override
     public String toString() {
         return "CodeExceptionGen(" + start_pc + ", " + end_pc + ", " + handler_pc + ")";
     }
 
 
+    @Override
     public Object clone() {
         try {
             return super.clone();

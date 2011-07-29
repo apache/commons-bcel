@@ -79,6 +79,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         if (wide()) {
             out.writeByte(Constants.WIDE);
@@ -103,6 +104,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * @param verbose long/short format switch
      * @return mnemonic for instruction
      */
+    @Override
     public String toString( boolean verbose ) {
         if (((opcode >= Constants.ILOAD_0) && (opcode <= Constants.ALOAD_3))
                 || ((opcode >= Constants.ISTORE_0) && (opcode <= Constants.ASTORE_3))) {
@@ -117,6 +119,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * Read needed data (e.g. index) from file.
      * PRE: (ILOAD <= tag <= ALOAD_3) || (ISTORE <= tag <= ASTORE_3)
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         if (wide) {
             n = bytes.readUnsignedShort();

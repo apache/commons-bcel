@@ -88,6 +88,7 @@ public final class SourceFile extends Attribute {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitSourceFile(this);
     }
@@ -99,6 +100,7 @@ public final class SourceFile extends Attribute {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(sourcefile_index);
@@ -134,6 +136,7 @@ public final class SourceFile extends Attribute {
     /**
      * @return String representation
      */
+    @Override
     public final String toString() {
         return "SourceFile(" + getSourceFileName() + ")";
     }
@@ -142,6 +145,7 @@ public final class SourceFile extends Attribute {
     /**
      * @return deep copy of this attribute
      */
+    @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         return (SourceFile) clone();
     }

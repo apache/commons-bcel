@@ -51,6 +51,7 @@ public class ObjectType extends ReferenceType {
 
     /** @return a hash code value for the object.
      */
+    @Override
     public int hashCode() {
         return class_name.hashCode();
     }
@@ -58,6 +59,7 @@ public class ObjectType extends ReferenceType {
 
     /** @return true if both type objects refer to the same class.
      */
+    @Override
     public boolean equals( Object type ) {
         return (type instanceof ObjectType)
                 ? ((ObjectType) type).class_name.equals(class_name)
@@ -72,6 +74,7 @@ public class ObjectType extends ReferenceType {
      *   if the class or interface referenced cannot
      *   be found: use referencesClassExact() instead
      */
+    @Deprecated
     public boolean referencesClass() {
         try {
             JavaClass jc = Repository.lookupClass(class_name);
@@ -89,6 +92,7 @@ public class ObjectType extends ReferenceType {
      *   if the class or interface referenced cannot
      *   be found: use referencesInterfaceExact() instead
      */
+    @Deprecated
     public boolean referencesInterface() {
         try {
             JavaClass jc = Repository.lookupClass(class_name);

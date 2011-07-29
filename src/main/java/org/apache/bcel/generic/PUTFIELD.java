@@ -47,6 +47,7 @@ public class PUTFIELD extends FieldInstruction implements PopInstruction, Except
     }
 
 
+    @Override
     public int consumeStack( ConstantPoolGen cpg ) {
         return getFieldSize(cpg) + 1;
     }
@@ -70,6 +71,7 @@ public class PUTFIELD extends FieldInstruction implements PopInstruction, Except
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitStackConsumer(this);

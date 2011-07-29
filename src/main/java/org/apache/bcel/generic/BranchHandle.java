@@ -58,6 +58,7 @@ public final class BranchHandle extends InstructionHandle {
 
     /** Handle adds itself to the list of resuable handles.
      */
+    @Override
     protected void addHandle() {
         next = bh_list;
         bh_list = this;
@@ -68,16 +69,19 @@ public final class BranchHandle extends InstructionHandle {
      * Through this overriding all access to the private i_position field should
      * be prevented.
      */
+    @Override
     public int getPosition() {
         return bi.position;
     }
 
 
+    @Override
     void setPosition( int pos ) {
         i_position = bi.position = pos;
     }
 
 
+    @Override
     protected int updatePosition( int offset, int max_offset ) {
         int x = bi.updatePosition(offset, max_offset);
         i_position = bi.position;
@@ -112,6 +116,7 @@ public final class BranchHandle extends InstructionHandle {
     /** 
      * Set new contents. Old instruction is disposed and may not be used anymore.
      */
+    @Override
     public void setInstruction( Instruction i ) {
         super.setInstruction(i);
         if (!(i instanceof BranchInstruction)) {

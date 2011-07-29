@@ -30,6 +30,7 @@ public class GenericArray extends java.lang.Object implements java.lang.Cloneabl
 	
 	private static final long serialVersionUID = 1991183963515237894L;
 
+    @Override
     protected Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}

@@ -70,6 +70,7 @@ public abstract class Annotations extends Attribute {
      * 
      * @param v Visitor object
      */
+    @Override
     public void accept(Visitor v) {
         v.visitAnnotation(this);
     }

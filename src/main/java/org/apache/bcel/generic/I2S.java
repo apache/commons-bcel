@@ -42,6 +42,7 @@ public class I2S extends ConversionInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitTypedInstruction(this);
         v.visitStackProducer(this);

@@ -49,7 +49,8 @@ public class LocalVariables{
 	 * operates on a new local variable array.
 	 * However, the Type objects in the array are shared.
 	 */
-	protected Object clone(){
+	@Override
+    protected Object clone(){
 		LocalVariables lvs = new LocalVariables(locals.length);
 		for (int i=0; i<locals.length; i++){
 			lvs.locals[i] = this.locals[i];
@@ -92,12 +93,14 @@ public class LocalVariables{
 
 	/** @return a hash code value for the object.
      */
-	public int hashCode() { return locals.length; }
+	@Override
+    public int hashCode() { return locals.length; }
 
 	/*
 	 * Fulfills the general contract of Object.equals().
 	 */
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (!(o instanceof LocalVariables)) {
             return false;
         }
@@ -185,7 +188,8 @@ public class LocalVariables{
 	/**
 	 * Returns a String representation of this object.
 	 */
-	public String toString(){
+	@Override
+    public String toString(){
 		StringBuffer sb = new StringBuffer();
 		for (int i=0; i<locals.length; i++){
 			sb.append(Integer.toString(i));

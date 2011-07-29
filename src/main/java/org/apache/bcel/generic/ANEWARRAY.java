@@ -62,6 +62,7 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitLoadClass(this);
         v.visitAllocationInstruction(this);

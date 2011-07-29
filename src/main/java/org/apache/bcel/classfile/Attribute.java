@@ -297,7 +297,8 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 	 * 
 	 * @return shallow copy of this attribute
 	 */
-	public Object clone()
+	@Override
+    public Object clone()
 	{
 		Object o = null;
 		try
@@ -319,7 +320,8 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 	/**
 	 * @return attribute name.
 	 */
-	public String toString()
+	@Override
+    public String toString()
 	{
 		return Constants.ATTRIBUTE_NAMES[tag];
 	}

@@ -50,6 +50,7 @@ public class LCMP extends Instruction implements TypedInstruction, StackProducer
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitTypedInstruction(this);
         v.visitStackProducer(this);

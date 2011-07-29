@@ -77,6 +77,7 @@ public final class ConstantUtf8 extends Constant {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitConstantUtf8(this);
     }
@@ -88,6 +89,7 @@ public final class ConstantUtf8 extends Constant {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         file.writeByte(tag);
         file.writeUTF(bytes);
@@ -113,6 +115,7 @@ public final class ConstantUtf8 extends Constant {
     /**
      * @return String representation
      */
+    @Override
     public final String toString() {
         return super.toString() + "(\"" + Utility.replace(bytes, "\n", "\\n") + "\")";
     }

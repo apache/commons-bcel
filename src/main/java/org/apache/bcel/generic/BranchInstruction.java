@@ -60,6 +60,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
         index = getTargetOffset();
@@ -123,6 +124,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @param verbose long/short format switch
      * @return mnemonic for instruction
      */
+    @Override
     public String toString( boolean verbose ) {
         String s = super.toString(verbose);
         String t = "null";
@@ -154,6 +156,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @param wide wide prefix?
      * @see InstructionList
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         length = 3;
         index = bytes.readShort();
@@ -224,6 +227,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Inform target that it's not targeted anymore.
      */
+    @Override
     void dispose() {
         setTarget(null);
         index = -1;

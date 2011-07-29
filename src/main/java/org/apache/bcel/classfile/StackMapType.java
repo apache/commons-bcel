@@ -132,6 +132,7 @@ public final class StackMapType implements Cloneable, Serializable {
     /**
      * @return String representation
      */
+    @Override
     public final String toString() {
         return "(type=" + Constants.ITEM_NAMES[type] + printIndex() + ")";
     }

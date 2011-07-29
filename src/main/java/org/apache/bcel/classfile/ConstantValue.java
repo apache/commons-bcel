@@ -81,6 +81,7 @@ public final class ConstantValue extends Attribute {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitConstantValue(this);
     }
@@ -92,6 +93,7 @@ public final class ConstantValue extends Attribute {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(constantvalue_index);
@@ -117,6 +119,7 @@ public final class ConstantValue extends Attribute {
     /**
      * @return String representation of constant value.
      */
+    @Override
     public final String toString() {
         Constant c = constant_pool.getConstant(constantvalue_index);
         String buf;
@@ -150,6 +153,7 @@ public final class ConstantValue extends Attribute {
     /**
      * @return deep copy of this attribute
      */
+    @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         ConstantValue c = (ConstantValue) clone();
         c.constant_pool = _constant_pool;

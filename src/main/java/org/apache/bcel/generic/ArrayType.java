@@ -112,6 +112,7 @@ public final class ArrayType extends ReferenceType {
 
     /** @return a hash code value for the object.
      */
+    @Override
     public int hashCode() {
         return basic_type.hashCode() ^ dimensions;
     }
@@ -119,6 +120,7 @@ public final class ArrayType extends ReferenceType {
 
     /** @return true if both type objects refer to the same array type.
      */
+    @Override
     public boolean equals( Object _type ) {
         if (_type instanceof ArrayType) {
             ArrayType array = (ArrayType) _type;

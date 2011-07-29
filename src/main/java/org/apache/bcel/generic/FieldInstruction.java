@@ -49,6 +49,7 @@ public abstract class FieldInstruction extends FieldOrMethod {
     /**
      * @return mnemonic for instruction with symbolic references resolved
      */
+    @Override
     public String toString( ConstantPool cp ) {
         return org.apache.bcel.Constants.OPCODE_NAMES[opcode] + " "
                 + cp.constantToString(index, org.apache.bcel.Constants.CONSTANT_Fieldref);
@@ -64,6 +65,7 @@ public abstract class FieldInstruction extends FieldOrMethod {
 
     /** @return return type of referenced field
      */
+    @Override
     public Type getType( ConstantPoolGen cpg ) {
         return getFieldType(cpg);
     }

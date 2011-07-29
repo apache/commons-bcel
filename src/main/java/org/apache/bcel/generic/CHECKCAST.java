@@ -76,6 +76,7 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitLoadClass(this);
         v.visitExceptionThrower(this);

@@ -48,6 +48,7 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         index = getTargetOffset();
         if (opcode == org.apache.bcel.Constants.GOTO) {
@@ -63,6 +64,7 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
     /** Called in pass 2 of InstructionList.setPositions() in order to update
      * the branch target, that may shift due to variable length instructions.
      */
+    @Override
     protected int updatePosition( int offset, int max_offset ) {
         int i = getTargetOffset(); // Depending on old position value
         position += offset; // Position may be shifted by preceding expansions
@@ -84,6 +86,7 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitVariableLengthInstruction(this);
         v.visitUnconditionalBranch(this);

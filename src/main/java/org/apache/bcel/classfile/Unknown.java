@@ -109,6 +109,7 @@ public final class Unknown extends Attribute {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitUnknown(this);
     }
@@ -120,6 +121,7 @@ public final class Unknown extends Attribute {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
         if (length > 0) {
@@ -139,6 +141,7 @@ public final class Unknown extends Attribute {
     /**
      * @return name of attribute.
      */
+    @Override
     public final String getName() {
         return name;
     }
@@ -155,6 +158,7 @@ public final class Unknown extends Attribute {
     /**
      * @return String representation.
      */
+    @Override
     public final String toString() {
         if (length == 0 || bytes == null) {
             return "(Unknown attribute " + name + ")";
@@ -174,6 +178,7 @@ public final class Unknown extends Attribute {
     /**
      * @return deep copy of this attribute
      */
+    @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         Unknown c = (Unknown) clone();
         if (bytes != null) {

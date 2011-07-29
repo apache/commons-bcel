@@ -278,6 +278,7 @@ public abstract class ReferenceType extends Type {
      * @throws ClassNotFoundException on failure to find superclasses of this
      *  type, or the type passed as a parameter
      */
+    @Deprecated
     public ReferenceType firstCommonSuperclass( ReferenceType t ) throws ClassNotFoundException {
         if (this.equals(Type.NULL)) {
             return t;

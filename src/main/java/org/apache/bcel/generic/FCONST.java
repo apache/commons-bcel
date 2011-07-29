@@ -74,6 +74,7 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitPushInstruction(this);
         v.visitStackProducer(this);

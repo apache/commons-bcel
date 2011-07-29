@@ -72,6 +72,7 @@ public final class BasicType extends Type {
 
     /** @return a hash code value for the object.
      */
+    @Override
     public int hashCode() {
         return type;
     }
@@ -79,6 +80,7 @@ public final class BasicType extends Type {
 
     /** @return true if both type objects refer to the same type
      */
+    @Override
     public boolean equals( Object _type ) {
         return (_type instanceof BasicType) ? ((BasicType) _type).type == this.type : false;
     }

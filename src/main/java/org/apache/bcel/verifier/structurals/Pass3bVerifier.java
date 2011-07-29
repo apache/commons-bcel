@@ -309,7 +309,8 @@ public final class Pass3bVerifier extends PassVerifier{
  	 * @see org.apache.bcel.verifier.statics.LocalVariablesInfo
  	 * @see org.apache.bcel.verifier.statics.Pass2Verifier#getLocalVariablesInfo(int)
  	 */
-	public VerificationResult do_verify(){
+	@Override
+    public VerificationResult do_verify(){
 		if (! myOwner.doPass3a(method_no).equals(VerificationResult.VR_OK)){
 			return VerificationResult.VR_NOTYET;
 		}

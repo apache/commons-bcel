@@ -46,6 +46,7 @@ public class IFEQ extends IfInstruction {
     /**
      * @return negation of instruction, e.g. IFEQ.negate() == IFNE
      */
+    @Override
     public IfInstruction negate() {
         return new IFNE(target);
     }
@@ -59,6 +60,7 @@ public class IFEQ extends IfInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);

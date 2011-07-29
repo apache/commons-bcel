@@ -54,6 +54,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     /**
      * Dump instruction as byte code to stream out.
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         super.dump(out);
         out.writeByte(b);
@@ -63,6 +64,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     /**
      * @return mnemonic for instruction
      */
+    @Override
     public String toString( boolean verbose ) {
         return super.toString(verbose) + " " + b;
     }
@@ -71,6 +73,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     /**
      * Read needed data (e.g. index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         length = 2;
         b = bytes.readByte();
@@ -97,6 +100,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitPushInstruction(this);
         v.visitStackProducer(this);

@@ -167,7 +167,8 @@ public class SimpleElementValueGen extends ElementValueGen
 	/**
 	 * Return immutable variant
 	 */
-	public ElementValue getElementValue()
+	@Override
+    public ElementValue getElementValue()
 	{
 		return new SimpleElementValue(type, idx, cpGen.getConstantPool());
 	}
@@ -196,7 +197,8 @@ public class SimpleElementValueGen extends ElementValueGen
 	}
 
 	// Whatever kind of value it is, return it as a string
-	public String stringifyValue()
+	@Override
+    public String stringifyValue()
 	{
 		switch (type)
 		{
@@ -237,7 +239,8 @@ public class SimpleElementValueGen extends ElementValueGen
 		}
 	}
 
-	public void dump(DataOutputStream dos) throws IOException
+	@Override
+    public void dump(DataOutputStream dos) throws IOException
 	{
 		dos.writeByte(type); // u1 kind of value
 		switch (type)

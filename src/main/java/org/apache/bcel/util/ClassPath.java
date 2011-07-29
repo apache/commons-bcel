@@ -90,6 +90,7 @@ public class ClassPath implements Serializable {
      * Search for classes in CLASSPATH.
      * @deprecated Use SYSTEM_CLASS_PATH constant
      */
+    @Deprecated
     public ClassPath() {
         this(getClassPath());
     }
@@ -97,6 +98,7 @@ public class ClassPath implements Serializable {
 
     /** @return used class path string
      */
+    @Override
     public String toString() {
         if (parent != null) {
             return parent.toString() + File.pathSeparator + class_path;
@@ -104,6 +106,7 @@ public class ClassPath implements Serializable {
         return class_path;
     }
 
+    @Override
     public int hashCode() {
         if (parent != null) {
             return class_path.hashCode() + parent.hashCode();            
@@ -112,6 +115,7 @@ public class ClassPath implements Serializable {
     }
 
 
+    @Override
     public boolean equals( Object o ) {
         if (o instanceof ClassPath) {
             ClassPath cp = (ClassPath)o;
@@ -399,6 +403,7 @@ public class ClassPath implements Serializable {
             dir = d;
         }
 
+        @Override
         URL getResource(String name) {
             // Resource specification uses '/' whatever the platform
             final File file = new File(dir + File.separatorChar + name.replace('/', File.separatorChar));
@@ -409,6 +414,7 @@ public class ClassPath implements Serializable {
             }
         }
         
+        @Override
         InputStream getResourceAsStream(String name) {
             // Resource specification uses '/' whatever the platform
             final File file = new File(dir + File.separatorChar + name.replace('/', File.separatorChar));
@@ -419,6 +425,7 @@ public class ClassPath implements Serializable {
             }
         }
 
+        @Override
         ClassFile getClassFile( String name, String suffix ) throws IOException {
             final File file = new File(dir + File.separatorChar
                     + name.replace('.', File.separatorChar) + suffix);
@@ -455,6 +462,7 @@ public class ClassPath implements Serializable {
         }
 
 
+        @Override
         public String toString() {
             return dir;
         }
@@ -470,6 +478,7 @@ public class ClassPath implements Serializable {
             zip = z;
         }
 
+        @Override
         URL getResource(String name) {
             final ZipEntry entry = zip.getEntry(name);
             try {
@@ -479,6 +488,7 @@ public class ClassPath implements Serializable {
            }
         }
         
+        @Override
         InputStream getResourceAsStream(String name) {
             final ZipEntry entry = zip.getEntry(name);
             try {
@@ -488,6 +498,7 @@ public class ClassPath implements Serializable {
             }
         }
         	
+        @Override
         ClassFile getClassFile( String name, String suffix ) throws IOException {
             final ZipEntry entry = zip.getEntry(name.replace('.', '/') + suffix);
             

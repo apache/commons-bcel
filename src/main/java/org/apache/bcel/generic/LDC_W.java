@@ -49,6 +49,7 @@ public class LDC_W extends LDC {
     /**
      * Read needed data (i.e., index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         setIndex(bytes.readUnsignedShort());
         // Override just in case it has been changed

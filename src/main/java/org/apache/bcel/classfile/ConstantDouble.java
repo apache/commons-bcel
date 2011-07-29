@@ -73,6 +73,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitConstantDouble(this);
     }
@@ -84,6 +85,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         file.writeByte(tag);
         file.writeDouble(bytes);
@@ -109,6 +111,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /**
      * @return String representation.
      */
+    @Override
     public final String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
     }

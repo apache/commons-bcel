@@ -231,6 +231,7 @@ public class InstructionHandle implements java.io.Serializable {
 
     /** @return a string representation of the contained instruction. 
      */
+    @Override
     public String toString() {
         return toString(true);
     }

@@ -86,6 +86,7 @@ public class LocalVariableTable extends Attribute {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitLocalVariableTable(this);
     }
@@ -97,6 +98,7 @@ public class LocalVariableTable extends Attribute {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(local_variable_table_length);
@@ -123,6 +125,7 @@ public class LocalVariableTable extends Attribute {
      * @deprecated since 5.2 because multiple variables can share the
      *             same slot, use getLocalVariable(int index, int pc) instead.
      */
+    @Deprecated
     public final LocalVariable getLocalVariable( int index ) {
         for (int i = 0; i < local_variable_table_length; i++) {
             if (local_variable_table[i].getIndex() == index) {
@@ -165,6 +168,7 @@ public class LocalVariableTable extends Attribute {
     /**
      * @return String representation.
      */
+    @Override
     public final String toString() {
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < local_variable_table_length; i++) {
@@ -180,6 +184,7 @@ public class LocalVariableTable extends Attribute {
     /**
      * @return deep copy of this attribute
      */
+    @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         LocalVariableTable c = (LocalVariableTable) clone();
         c.local_variable_table = new LocalVariable[local_variable_table_length];

@@ -95,7 +95,7 @@ public class ClassLoader extends java.lang.ClassLoader {
         this.repository = new ClassLoaderRepository(deferTo);
     }
 
-
+    @Override
     protected Class<?> loadClass( String class_name, boolean resolve ) throws ClassNotFoundException {
         Class<?> cl = null;
         /* First try: lookup hash table.

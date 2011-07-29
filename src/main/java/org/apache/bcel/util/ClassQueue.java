@@ -48,6 +48,7 @@ public class ClassQueue implements java.io.Serializable {
     }
 
 
+    @Override
     public String toString() {
         return vec.toString();
     }

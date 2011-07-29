@@ -84,6 +84,7 @@ public final class Deprecated extends Attribute {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitDeprecated(this);
     }
@@ -95,6 +96,7 @@ public final class Deprecated extends Attribute {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
         if (length > 0) {
@@ -122,6 +124,7 @@ public final class Deprecated extends Attribute {
     /**
      * @return attribute name
      */
+    @Override
     public final String toString() {
         return Constants.ATTRIBUTE_NAMES[Constants.ATTR_DEPRECATED];
     }
@@ -130,6 +133,7 @@ public final class Deprecated extends Attribute {
     /**
      * @return deep copy of this attribute
      */
+    @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         Deprecated c = (Deprecated) clone();
         if (bytes != null) {

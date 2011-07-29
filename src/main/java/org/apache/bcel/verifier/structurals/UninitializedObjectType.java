@@ -52,7 +52,8 @@ public class UninitializedObjectType extends ReferenceType implements Constants{
 
 	/** @return a hash code value for the object.
      */
-	public int hashCode() { return initialized.hashCode(); }
+	@Override
+    public int hashCode() { return initialized.hashCode(); }
 
 	/**
 	 * Returns true on equality of this and o.
@@ -60,7 +61,8 @@ public class UninitializedObjectType extends ReferenceType implements Constants{
 	 * equal one another in this and the o instance.
 	 *
 	 */
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (! (o instanceof UninitializedObjectType)) {
             return false;
         }

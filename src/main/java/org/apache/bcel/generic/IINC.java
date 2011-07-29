@@ -59,6 +59,7 @@ public class IINC extends LocalVariableInstruction {
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         if (wide) {
             out.writeByte(org.apache.bcel.Constants.WIDE);
@@ -87,6 +88,7 @@ public class IINC extends LocalVariableInstruction {
     /**
      * Read needed data (e.g. index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         this.wide = wide;
         if (wide) {
@@ -104,6 +106,7 @@ public class IINC extends LocalVariableInstruction {
     /**
      * @return mnemonic for instruction
      */
+    @Override
     public String toString( boolean verbose ) {
         return super.toString(verbose) + " " + c;
     }
@@ -112,6 +115,7 @@ public class IINC extends LocalVariableInstruction {
     /**
      * Set index of local variable.
      */
+    @Override
     public final void setIndex( int n ) {
         if (n < 0) {
             throw new ClassGenException("Negative index value: " + n);
@@ -140,6 +144,7 @@ public class IINC extends LocalVariableInstruction {
 
     /** @return int type
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         return Type.INT;
     }
@@ -153,6 +158,7 @@ public class IINC extends LocalVariableInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitLocalVariableInstruction(this);
         v.visitIINC(this);

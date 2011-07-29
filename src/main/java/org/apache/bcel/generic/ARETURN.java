@@ -45,6 +45,7 @@ public class ARETURN extends ReturnInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);

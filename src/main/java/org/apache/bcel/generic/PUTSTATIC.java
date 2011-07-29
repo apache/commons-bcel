@@ -47,6 +47,7 @@ public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, Pop
     }
 
 
+    @Override
     public int consumeStack( ConstantPoolGen cpg ) {
         return getFieldSize(cpg);
     }
@@ -69,6 +70,7 @@ public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, Pop
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitStackConsumer(this);

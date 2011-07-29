@@ -43,6 +43,7 @@ public class POP extends StackInstruction implements PopInstruction {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitStackConsumer(this);
         v.visitPopInstruction(this);

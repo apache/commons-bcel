@@ -145,7 +145,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 *
 	 * @see org.apache.bcel.verifier.statics.Pass3aVerifier
 	 */
-	public VerificationResult do_verify(){
+	@Override
+    public VerificationResult do_verify(){
 	    try {
 		VerificationResult vr1 = myOwner.doPass1();
 		if (vr1.equals(VerificationResult.VR_OK)){
@@ -370,7 +371,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		///////////////////////////////////////
 		// ClassFile structure (vmspec2 4.1) //
 		///////////////////////////////////////
-		public void visitJavaClass(JavaClass obj){
+		@Override
+        public void visitJavaClass(JavaClass obj){
 			Attribute[] atts = obj.getAttributes();
 			boolean foundSourceFile = false;
 			boolean foundInnerClasses = false;
@@ -420,65 +422,75 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		/////////////////////////////
 		// CONSTANTS (vmspec2 4.4) //
 		/////////////////////////////
-		public void visitConstantClass(ConstantClass obj){
+		@Override
+        public void visitConstantClass(ConstantClass obj){
 			if (obj.getTag() != Constants.CONSTANT_Class){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
 			checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
 		}
-		public void visitConstantFieldref(ConstantFieldref obj){
+		@Override
+        public void visitConstantFieldref(ConstantFieldref obj){
 			if (obj.getTag() != Constants.CONSTANT_Fieldref){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
 			checkIndex(obj, obj.getClassIndex(), CONST_Class);
 			checkIndex(obj, obj.getNameAndTypeIndex(), CONST_NameAndType);
 		}
-		public void visitConstantMethodref(ConstantMethodref obj){
+		@Override
+        public void visitConstantMethodref(ConstantMethodref obj){
 			if (obj.getTag() != Constants.CONSTANT_Methodref){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
 			checkIndex(obj, obj.getClassIndex(), CONST_Class);
 			checkIndex(obj, obj.getNameAndTypeIndex(), CONST_NameAndType);
 		}
-		public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj){
+		@Override
+        public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj){
 			if (obj.getTag() != Constants.CONSTANT_InterfaceMethodref){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
 			checkIndex(obj, obj.getClassIndex(), CONST_Class);
 			checkIndex(obj, obj.getNameAndTypeIndex(), CONST_NameAndType);
 		}
-		public void visitConstantString(ConstantString obj){
+		@Override
+        public void visitConstantString(ConstantString obj){
 			if (obj.getTag() != Constants.CONSTANT_String){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
 			checkIndex(obj, obj.getStringIndex(), CONST_Utf8);
 		}
-		public void visitConstantInteger(ConstantInteger obj){
+		@Override
+        public void visitConstantInteger(ConstantInteger obj){
 			if (obj.getTag() != Constants.CONSTANT_Integer){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
 			// no indices to check
 		}
-		public void visitConstantFloat(ConstantFloat obj){
+		@Override
+        public void visitConstantFloat(ConstantFloat obj){
 			if (obj.getTag() != Constants.CONSTANT_Float){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
 			//no indices to check
 		}
-		public void visitConstantLong(ConstantLong obj){
+		@Override
+        public void visitConstantLong(ConstantLong obj){
 			if (obj.getTag() != Constants.CONSTANT_Long){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
 			//no indices to check
 		}
-		public void visitConstantDouble(ConstantDouble obj){
+		@Override
+        public void visitConstantDouble(ConstantDouble obj){
 			if (obj.getTag() != Constants.CONSTANT_Double){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
 			//no indices to check
 		}
-		public void visitConstantNameAndType(ConstantNameAndType obj){
+		@Override
+        public void visitConstantNameAndType(ConstantNameAndType obj){
 			if (obj.getTag() != Constants.CONSTANT_NameAndType){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
@@ -486,7 +498,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			//checkIndex(obj, obj.getDescriptorIndex(), CONST_Utf8); //inconsistently named in BCEL, see below.
 			checkIndex(obj, obj.getSignatureIndex(), CONST_Utf8);
 		}
-		public void visitConstantUtf8(ConstantUtf8 obj){
+		@Override
+        public void visitConstantUtf8(ConstantUtf8 obj){
 			if (obj.getTag() != Constants.CONSTANT_Utf8){
 				throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
 			}
@@ -495,7 +508,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		//////////////////////////
 		// FIELDS (vmspec2 4.5) //
 		//////////////////////////
-		public void visitField(Field obj){
+		@Override
+        public void visitField(Field obj){
 
 			if (jc.isClass()){
 				int maxone=0;
@@ -576,7 +590,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		///////////////////////////
 		// METHODS (vmspec2 4.6) //
 		///////////////////////////
-		public void visitMethod(Method obj){
+		@Override
+        public void visitMethod(Method obj){
 
 			checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
@@ -748,7 +763,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		///////////////////////////////////////////////////////
 		// ClassFile-structure-ATTRIBUTES (vmspec2 4.1, 4.7) //
 		///////////////////////////////////////////////////////
-		public void visitSourceFile(SourceFile obj){//vmspec2 4.7.7
+		@Override
+        public void visitSourceFile(SourceFile obj){//vmspec2 4.7.7
 
 			// zero or one SourceFile attr per ClassFile: see visitJavaClass()
 
@@ -771,7 +787,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				addMessage("SourceFile attribute '"+tostring(obj)+"' has a funny name: remember not to confuse certain parsers working on javap's output. Also, this name ('"+sourcefilename+"') is considered an unqualified (simple) file name only.");
 			}
 		}
-		public void visitDeprecated(Deprecated obj){//vmspec2 4.7.10
+		@Override
+        public void visitDeprecated(Deprecated obj){//vmspec2 4.7.10
 			checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
 			String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
@@ -779,14 +796,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				throw new ClassConstraintException("The Deprecated attribute '"+tostring(obj)+"' is not correctly named 'Deprecated' but '"+name+"'.");
 			}
 		}
-		public void visitSynthetic(Synthetic obj){//vmspec2 4.7.6
+		@Override
+        public void visitSynthetic(Synthetic obj){//vmspec2 4.7.6
 			checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 			String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
 			if (! name.equals("Synthetic")){
 				throw new ClassConstraintException("The Synthetic attribute '"+tostring(obj)+"' is not correctly named 'Synthetic' but '"+name+"'.");
 			}
 		}
-		public void visitInnerClasses(InnerClasses obj){//vmspec2 4.7.5
+		@Override
+        public void visitInnerClasses(InnerClasses obj){//vmspec2 4.7.5
 
 			// exactly one InnerClasses attr per ClassFile if some inner class is refernced: see visitJavaClass()
 
@@ -821,7 +840,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		////////////////////////////////////////////////////////
 		// field_info-structure-ATTRIBUTES (vmspec2 4.5, 4.7) //
 		////////////////////////////////////////////////////////
-		public void visitConstantValue(ConstantValue obj){//vmspec2 4.7.2
+		@Override
+        public void visitConstantValue(ConstantValue obj){//vmspec2 4.7.2
 			// Despite its name, this really is an Attribute,
 			// not a constant!
 			checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
@@ -867,7 +887,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		/////////////////////////////////////////////////////////
 		// method_info-structure-ATTRIBUTES (vmspec2 4.6, 4.7) //
 		/////////////////////////////////////////////////////////
-		public void visitCode(Code obj){//vmspec2 4.7.3
+		@Override
+        public void visitCode(Code obj){//vmspec2 4.7.3
 		    try {
 			// No code attribute allowed for native or abstract methods: see visitMethod(Method).
 			// Code array constraints are checked in Pass3 (3a and 3b).
@@ -1027,7 +1048,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 		}// visitCode(Code) END
 
-		public void visitExceptionTable(ExceptionTable obj){//vmspec2 4.7.4
+		@Override
+        public void visitExceptionTable(ExceptionTable obj){//vmspec2 4.7.4
 		    try {
 			// incorrectly named, it's the Exceptions attribute (vmspec2 4.7.4)
 			checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
@@ -1088,7 +1110,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		//////////////////////////////////////////////////////////////
 		// code_attribute-structure-ATTRIBUTES (vmspec2 4.7.3, 4.7) //
 		//////////////////////////////////////////////////////////////
-		public void visitLineNumberTable(LineNumberTable obj){//vmspec2 4.7.8
+		@Override
+        public void visitLineNumberTable(LineNumberTable obj){//vmspec2 4.7.8
 			checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
 			String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
@@ -1101,14 +1124,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			// ...validity check...
 
 		}
-		public void visitLocalVariableTable(LocalVariableTable obj){//vmspec2 4.7.9
+		@Override
+        public void visitLocalVariableTable(LocalVariableTable obj){//vmspec2 4.7.9
 			//In JustIce,this check is partially delayed to Pass 3a.
 			//The other part can be found in the visitCode(Code) method.
 		}
 		////////////////////////////////////////////////////
 		// MISC-structure-ATTRIBUTES (vmspec2 4.7.1, 4.7) //
 		////////////////////////////////////////////////////
-		public void visitUnknown(Unknown obj){//vmspec2 4.7.1
+		@Override
+        public void visitUnknown(Unknown obj){//vmspec2 4.7.1
 			// Represents an unknown attribute.
 			checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
@@ -1118,29 +1143,34 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		//////////
 		// BCEL //
 		//////////
-		public void visitLocalVariable(LocalVariable obj){
+		@Override
+        public void visitLocalVariable(LocalVariable obj){
 			// This does not represent an Attribute but is only
 			// related to internal BCEL data representation.
 
 			// see visitLocalVariableTable(LocalVariableTable)
 		}
-		public void visitCodeException(CodeException obj){
+		@Override
+        public void visitCodeException(CodeException obj){
 			// Code constraints are checked in Pass3 (3a and 3b).
 			// This does not represent an Attribute but is only
 			// related to internal BCEL data representation.
 
 			// see visitCode(Code)
 		}
-		public void visitConstantPool(ConstantPool obj){
+		@Override
+        public void visitConstantPool(ConstantPool obj){
 			// No need to. We're piggybacked by the DescendingVisitor.
 			// This does not represent an Attribute but is only
 			// related to internal BCEL data representation.
 		}
-		public void visitInnerClass(InnerClass obj){
+		@Override
+        public void visitInnerClass(InnerClass obj){
 			// This does not represent an Attribute but is only
 			// related to internal BCEL data representation.
 		}
-		public void visitLineNumber(LineNumber obj){
+		@Override
+        public void visitLineNumber(LineNumber obj){
 			// This does not represent an Attribute but is only
 			// related to internal BCEL data representation.
 
@@ -1189,7 +1219,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			cp = _jc.getConstantPool();
 		}
 		
-		public void visitConstantFieldref(ConstantFieldref obj){
+		@Override
+        public void visitConstantFieldref(ConstantFieldref obj){
 			if (obj.getTag() != Constants.CONSTANT_Fieldref){
 				throw new ClassConstraintException("ConstantFieldref '"+tostring(obj)+"' has wrong tag!");
 			}
@@ -1217,7 +1248,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			}
 		}
 
-		public void visitConstantMethodref(ConstantMethodref obj){
+		@Override
+        public void visitConstantMethodref(ConstantMethodref obj){
 			if (obj.getTag() != Constants.CONSTANT_Methodref){
 				throw new ClassConstraintException("ConstantMethodref '"+tostring(obj)+"' has wrong tag!");
 			}
@@ -1248,7 +1280,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			}
 		}
 
-		public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj){
+		@Override
+        public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj){
 			if (obj.getTag() != Constants.CONSTANT_InterfaceMethodref){
 				throw new ClassConstraintException("ConstantInterfaceMethodref '"+tostring(obj)+"' has wrong tag!");
 			}
@@ -1424,7 +1457,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			return hasInnerClass;
 		}
 		/** This method casually visits ConstantClass references. */
-		public void visitConstantClass(ConstantClass obj){
+		@Override
+        public void visitConstantClass(ConstantClass obj){
 			Constant c = cp.getConstant(obj.getNameIndex());
 			if (c instanceof ConstantUtf8){ //Ignore the case where it's not a ConstantUtf8 here, we'll find out later.
 				String classname = ((ConstantUtf8) c).getBytes();

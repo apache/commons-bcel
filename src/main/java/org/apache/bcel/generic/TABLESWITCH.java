@@ -59,6 +59,7 @@ public class TABLESWITCH extends Select {
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         super.dump(out);
         int low = (match_length > 0) ? match[0] : 0;
@@ -74,6 +75,7 @@ public class TABLESWITCH extends Select {
     /**
      * Read needed data (e.g. index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
         int low = bytes.readInt();
@@ -99,6 +101,7 @@ public class TABLESWITCH extends Select {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitVariableLengthInstruction(this);
         v.visitStackConsumer(this);

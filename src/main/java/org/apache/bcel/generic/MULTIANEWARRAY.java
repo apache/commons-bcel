@@ -59,6 +59,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
         out.writeShort(index);
@@ -69,6 +70,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     /**
      * Read needed data (i.e., no. dimension) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
         dimensions = bytes.readByte();
@@ -87,6 +89,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     /**
      * @return mnemonic for instruction
      */
+    @Override
     public String toString( boolean verbose ) {
         return super.toString(verbose) + " " + index + " " + dimensions;
     }
@@ -95,6 +98,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     /**
      * @return mnemonic for instruction with symbolic references resolved
      */
+    @Override
     public String toString( ConstantPool cp ) {
         return super.toString(cp) + " " + dimensions;
     }
@@ -105,6 +109,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      * constant pool entry they reference.
      * @return Number of words consumed from stack by this instruction
      */
+    @Override
     public int consumeStack( ConstantPoolGen cpg ) {
         return dimensions;
     }
@@ -137,6 +142,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitLoadClass(this);
         v.visitAllocationInstruction(this);

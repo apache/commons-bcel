@@ -63,6 +63,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
         out.writeShort(index);
@@ -78,6 +79,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * @param verbose long/short format switch
      * @return mnemonic for instruction
      */
+    @Override
     public String toString( boolean verbose ) {
         return super.toString(verbose) + " " + index;
     }
@@ -86,6 +88,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     /**
      * @return mnemonic for instruction with symbolic references resolved
      */
+    @Override
     public String toString( ConstantPool cp ) {
         Constant c = cp.getConstant(index);
         String str = cp.constantToString(c);
@@ -101,6 +104,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * @param bytes input stream
      * @param wide wide prefix?
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         setIndex(bytes.readUnsignedShort());
         length = 3;

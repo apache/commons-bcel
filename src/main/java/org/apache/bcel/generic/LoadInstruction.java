@@ -57,6 +57,7 @@ public abstract class LoadInstruction extends LocalVariableInstruction implement
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);

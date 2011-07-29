@@ -144,6 +144,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     public abstract String getSignature();
 
 
+    @Override
     public Object clone() {
         try {
             return super.clone();

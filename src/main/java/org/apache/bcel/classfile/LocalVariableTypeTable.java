@@ -74,11 +74,13 @@ private int             local_variable_type_table_length; // Table of local
       local_variable_type_table[i] = new LocalVariable(dis, cpool);
   }
 
-  public void accept(Visitor v) {
+  @Override
+public void accept(Visitor v) {
     v.visitLocalVariableTypeTable(this);
   }
 
-  public final void dump(DataOutputStream file) throws IOException
+  @Override
+public final void dump(DataOutputStream file) throws IOException
   {
     super.dump(file);
     file.writeShort(local_variable_type_table_length);
@@ -108,7 +110,8 @@ private int             local_variable_type_table_length; // Table of local
   /**
    * @return String representation.
    */ 
-  public final String toString() {
+  @Override
+public final String toString() {
     StringBuffer buf = new StringBuffer("");
 
     for(int i=0; i < local_variable_type_table_length; i++) {
@@ -123,7 +126,8 @@ private int             local_variable_type_table_length; // Table of local
   /**
    * @return deep copy of this attribute
    */
-  public Attribute copy(ConstantPool constant_pool) {
+  @Override
+public Attribute copy(ConstantPool constant_pool) {
     LocalVariableTypeTable c = (LocalVariableTypeTable)clone();
 
     c.local_variable_type_table = new LocalVariable[local_variable_type_table_length];

@@ -53,6 +53,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * @return mnemonic for instruction with symbolic references resolved
      */
+    @Override
     public String toString( ConstantPool cp ) {
         Constant c = cp.getConstant(index);
         StringTokenizer tok = new StringTokenizer(cp.constantToString(c));
@@ -66,6 +67,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      * constant pool entry they reference.
      * @return Number of words consumed from stack by this instruction
      */
+    @Override
     public int consumeStack( ConstantPoolGen cpg ) {
         int sum;
         if (opcode == Constants.INVOKESTATIC) {
@@ -85,6 +87,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      * constant pool entry they reference.
      * @return Number of words produced onto stack by this instruction
      */
+    @Override
     public int produceStack( ConstantPoolGen cpg ) {
     	String signature = getSignature(cpg);
     	return Type.getReturnTypeSize(signature);
@@ -93,6 +96,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
 
     /** @return return type of referenced method.
      */
+    @Override
     public Type getType( ConstantPoolGen cpg ) {
         return getReturnType(cpg);
     }

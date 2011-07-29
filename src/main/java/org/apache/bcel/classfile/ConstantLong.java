@@ -73,6 +73,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitConstantLong(this);
     }
@@ -84,6 +85,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         file.writeByte(tag);
         file.writeLong(bytes);
@@ -109,6 +111,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /**
      * @return String representation.
      */
+    @Override
     public final String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
     }

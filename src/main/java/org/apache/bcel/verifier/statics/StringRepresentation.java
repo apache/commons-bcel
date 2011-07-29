@@ -88,6 +88,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     /**
      * Returns the String representation.
      */
+    @Override
     public String toString() {
 // The run-time check below is needed because we don't want to omit inheritance
 // of "EmptyVisitor" and provide a thousand empty methods.
@@ -124,11 +125,13 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     // We don't of course need to call some default implementation:
     // e.g. we could also simply output "Code" instead of a possibly
     // lengthy Code attribute's toString().
+    @Override
     public void visitCode(Code obj) {
         //tostring = toString(obj);
         tostring = "<CODE>"; // We don't need real code outputs.
     }
 
+    @Override
     public void visitAnnotation(Annotations obj)
     {
         //this is invoked whenever an annotation is found
@@ -136,6 +139,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
     
+    @Override
     public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
     {
         //this is invoked whenever a local variable type is found
@@ -143,122 +147,152 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
     
+    @Override
     public void visitCodeException(CodeException obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantClass(ConstantClass obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantDouble(ConstantDouble obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantFieldref(ConstantFieldref obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantFloat(ConstantFloat obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantInteger(ConstantInteger obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantLong(ConstantLong obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantMethodref(ConstantMethodref obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantNameAndType(ConstantNameAndType obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantPool(ConstantPool obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantString(ConstantString obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantUtf8(ConstantUtf8 obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitConstantValue(ConstantValue obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitDeprecated(Deprecated obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitExceptionTable(ExceptionTable obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitField(Field obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitInnerClass(InnerClass obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitInnerClasses(InnerClasses obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitJavaClass(JavaClass obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitLineNumber(LineNumber obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitLineNumberTable(LineNumberTable obj) {
         tostring = "<LineNumberTable: " + toString(obj) + ">";
     }
 
+    @Override
     public void visitLocalVariable(LocalVariable obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitLocalVariableTable(LocalVariableTable obj) {
         tostring = "<LocalVariableTable: " + toString(obj) + ">";
     }
 
+    @Override
     public void visitMethod(Method obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitSignature(Signature obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitSourceFile(SourceFile obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitStackMap(StackMap obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitSynthetic(Synthetic obj) {
         tostring = toString(obj);
     }
 
+    @Override
     public void visitUnknown(Unknown obj) {
         tostring = toString(obj);
     }

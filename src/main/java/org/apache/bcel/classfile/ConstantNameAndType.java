@@ -77,6 +77,7 @@ public final class ConstantNameAndType extends Constant {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitConstantNameAndType(this);
     }
@@ -88,6 +89,7 @@ public final class ConstantNameAndType extends Constant {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         file.writeByte(tag);
         file.writeShort(name_index);
@@ -144,6 +146,7 @@ public final class ConstantNameAndType extends Constant {
     /**
      * @return String representation
      */
+    @Override
     public final String toString() {
         return super.toString() + "(name_index = " + name_index + ", signature_index = "
                 + signature_index + ")";

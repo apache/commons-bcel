@@ -256,6 +256,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
+    @Override
     public String getSignature() {
         return type.getSignature();
     }
@@ -310,6 +311,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      *
      * @return String representation of field
      */
+    @Override
     public final String toString() {
         String name, signature, access; // Short cuts to constant pool
         access = Utility.accessToString(access_flags);
@@ -358,6 +360,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
+    @Override
     public boolean equals( Object obj ) {
         return _cmp.equals(this, obj);
     }
@@ -369,6 +372,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * 
      * @see java.lang.Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return _cmp.hashCode(this);
     }

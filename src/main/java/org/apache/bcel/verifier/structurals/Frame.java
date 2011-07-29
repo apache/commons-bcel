@@ -66,7 +66,8 @@ public class Frame{
 	/**
 	 *
 	 */
-	protected Object clone(){
+	@Override
+    protected Object clone(){
 		Frame f = new Frame(locals.getClone(), stack.getClone());
 		return f;
 	}
@@ -94,12 +95,14 @@ public class Frame{
 
 	/** @return a hash code value for the object.
      */
-	public int hashCode() { return stack.hashCode() ^ locals.hashCode(); }
+	@Override
+    public int hashCode() { return stack.hashCode() ^ locals.hashCode(); }
 
 	/**
 	 *
 	 */
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (!(o instanceof Frame)) {
             return false; // implies "null" is non-equal.
         }
@@ -110,7 +113,8 @@ public class Frame{
 	/**
 	 * Returns a String representation of the Frame instance.
 	 */
-	public String toString(){
+	@Override
+    public String toString(){
 		String s="Local Variables:\n";
 		s += locals;
 		s += "OperandStack:\n";

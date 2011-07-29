@@ -54,6 +54,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         if (wide) {
             out.writeByte(org.apache.bcel.Constants.WIDE);
@@ -80,6 +81,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     /**
      * Read needed data (e.g. index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         this.wide = wide;
         if (wide) {
@@ -115,6 +117,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     /**
      * @return mnemonic for instruction
      */
+    @Override
     public String toString( boolean verbose ) {
         return super.toString(verbose) + " " + index;
     }
@@ -135,6 +138,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitRET(this);
     }

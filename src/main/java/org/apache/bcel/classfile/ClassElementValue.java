@@ -46,14 +46,16 @@ public class ClassElementValue extends ElementValue
 		return c.getBytes();
 	}
 
-	public String stringifyValue()
+	@Override
+    public String stringifyValue()
 	{
 		ConstantUtf8 cu8 = (ConstantUtf8) cpool.getConstant(idx,
 				Constants.CONSTANT_Utf8);
 		return cu8.getBytes();
 	}
 
-	public void dump(DataOutputStream dos) throws IOException
+	@Override
+    public void dump(DataOutputStream dos) throws IOException
 	{
 		dos.writeByte(type); // u1 kind of value
 		dos.writeShort(idx);

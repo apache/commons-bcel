@@ -77,6 +77,7 @@ public abstract class ConstantCP extends Constant {
      * @param file Output file stream
      * @throws IOException
      */
+    @Override
     public final void dump( DataOutputStream file ) throws IOException {
         file.writeByte(tag);
         file.writeShort(class_index);
@@ -127,6 +128,7 @@ public abstract class ConstantCP extends Constant {
     /**
      * @return String representation.
      */
+    @Override
     public final String toString() {
         return super.toString() + "(class_index = " + class_index + ", name_and_type_index = "
                 + name_and_type_index + ")";

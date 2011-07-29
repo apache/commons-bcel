@@ -30,6 +30,7 @@ import org.apache.bcel.classfile.JavaClass;
  * 
  * @deprecated as of 5.1.1 - 7/17/2005
  */
+@Deprecated
 public class ClassVector implements java.io.Serializable {
 
     private static final long serialVersionUID = 5600397075672780806L;

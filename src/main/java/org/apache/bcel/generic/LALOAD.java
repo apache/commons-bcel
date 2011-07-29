@@ -44,6 +44,7 @@ public class LALOAD extends ArrayInstruction implements StackProducer {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitStackProducer(this);
         v.visitExceptionThrower(this);

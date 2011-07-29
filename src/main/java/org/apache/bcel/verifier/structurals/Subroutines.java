@@ -113,7 +113,8 @@ public class Subroutines{
 		 * stack overflow errors due to recursive subSubs() calls.
 		 * Don't use this, then.
 		 */
-		public String toString(){
+		@Override
+        public String toString(){
 			String ret = "Subroutine: Local variable is '"+localVariable+"', JSRs are '"+theJSRs+"', RET is '"+theRET+"', Instructions: '"+instructions.toString()+"'.";
 			
 			ret += " Accessed local variable slots: '";
@@ -637,7 +638,8 @@ System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead c
 	/**
 	 * Returns a String representation of this object; merely for debugging puposes.
 	 */
-	public String toString(){
+	@Override
+    public String toString(){
 		return "---\n"+subroutines.toString()+"\n---\n";
 	}
 }

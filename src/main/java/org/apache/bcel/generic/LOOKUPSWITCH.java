@@ -53,6 +53,7 @@ public class LOOKUPSWITCH extends Select {
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
+    @Override
     public void dump( DataOutputStream out ) throws IOException {
         super.dump(out);
         out.writeInt(match_length); // npairs
@@ -66,6 +67,7 @@ public class LOOKUPSWITCH extends Select {
     /**
      * Read needed data (e.g. index) from file.
      */
+    @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide); // reads padding
         match_length = bytes.readInt();
@@ -89,6 +91,7 @@ public class LOOKUPSWITCH extends Select {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitVariableLengthInstruction(this);
         v.visitStackConsumer(this);

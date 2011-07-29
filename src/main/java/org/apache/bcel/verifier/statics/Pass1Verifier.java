@@ -131,7 +131,8 @@ public final class Pass1Verifier extends PassVerifier{
 	 *
 	 * @see org.apache.bcel.Repository
 	 */
-	public VerificationResult do_verify(){
+	@Override
+    public VerificationResult do_verify(){
 		JavaClass jc;
 		try{
 			jc = getJavaClass();	//loads in the class file if not already done.
@@ -178,7 +179,8 @@ public final class Pass1Verifier extends PassVerifier{
 	 * method is currently useless and therefore marked as
 	 * <B>TODO</B>.
 	 */
-	public String[] getMessages(){
+	@Override
+    public String[] getMessages(){
 		// This method is only here to override the javadoc-comment.
 		return super.getMessages();
 	}

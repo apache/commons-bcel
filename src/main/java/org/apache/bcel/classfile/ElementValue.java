@@ -32,7 +32,8 @@ public abstract class ElementValue
 
 	protected ConstantPool cpool;
 
-	public String toString()
+	@Override
+    public String toString()
 	{
 		return stringifyValue();
 	}

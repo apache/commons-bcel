@@ -559,6 +559,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -592,6 +593,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
+    @Override
     public boolean equals( Object obj ) {
         return _cmp.equals(this, obj);
     }
@@ -603,6 +605,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      * 
      * @see java.lang.Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return _cmp.hashCode(this);
     }

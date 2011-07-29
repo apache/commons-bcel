@@ -49,7 +49,8 @@ public class EnumElementValueGen extends ElementValueGen
 	/**
 	 * Return immutable variant of this EnumElementValue
 	 */
-	public ElementValue getElementValue()
+	@Override
+    public ElementValue getElementValue()
 	{
 		System.err.println("Duplicating value: " + getEnumTypeString() + ":"
 				+ getEnumValueString());
@@ -82,14 +83,16 @@ public class EnumElementValueGen extends ElementValueGen
 		}
 	}
 
-	public void dump(DataOutputStream dos) throws IOException
+	@Override
+    public void dump(DataOutputStream dos) throws IOException
 	{
 		dos.writeByte(type); // u1 type of value (ENUM_CONSTANT == 'e')
 		dos.writeShort(typeIdx); // u2
 		dos.writeShort(valueIdx); // u2
 	}
 
-	public String stringifyValue()
+	@Override
+    public String stringifyValue()
 	{
 		ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(
 				valueIdx);
