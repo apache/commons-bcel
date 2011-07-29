@@ -137,8 +137,6 @@ public abstract class ElementValue
 
 	public String toShortString()
 	{
-		StringBuffer result = new StringBuffer();
-		result.append(stringifyValue());
-		return result.toString();
+		return stringifyValue();
 	}
 }
