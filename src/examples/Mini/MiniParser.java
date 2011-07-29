@@ -38,7 +38,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case 9:
-          ;
           break;
         default:
           jj_la1[0] = jj_gen;
@@ -99,7 +98,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case COMMA:
-            ;
             break;
           default:
             jj_la1[1] = jj_gen;
@@ -111,7 +109,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         break;
       default:
         jj_la1[2] = jj_gen;
-        ;
       }
       jj_consume_token(RPAREN);
       jj_consume_token(ASSIGN);
@@ -177,7 +174,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
           break;
         default:
           jj_la1[3] = jj_gen;
-          ;
         }
         break;
       case NOT:
@@ -243,7 +239,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         break;
       default:
         jj_la1[5] = jj_gen;
-        ;
       }
       jj_consume_token(13);
     } catch (Throwable jjte000) {
@@ -294,7 +289,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         case READ:
         case WRITE:
         case IDENT:
-          ;
           break;
         default:
           jj_la1[6] = jj_gen;
@@ -358,7 +352,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case COMMA:
-            ;
             break;
           default:
             jj_la1[7] = jj_gen;
@@ -370,7 +363,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         break;
       default:
         jj_la1[8] = jj_gen;
-        ;
       }
       jj_consume_token(RPAREN);
           jjtree.closeNodeScope(jjtn000, true);
@@ -427,7 +419,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         break;
       default:
         jj_la1[9] = jj_gen;
-        ;
       }
           jjtree.closeNodeScope(jjtn000, true);
           jjtc000 = false;
@@ -482,7 +473,6 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         break;
       default:
         jj_la1[10] = jj_gen;
-        ;
       }
           jjtree.closeNodeScope(jjtn000, true);
           jjtc000 = false;
