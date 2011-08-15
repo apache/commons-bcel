@@ -29,5 +29,5 @@ public interface ConstantObject {
 
     /** @return object representing the constant, e.g., Long for ConstantLong
      */
-    public abstract Object getConstantValue( ConstantPool cp );
+    Object getConstantValue( ConstantPool cp );
 }

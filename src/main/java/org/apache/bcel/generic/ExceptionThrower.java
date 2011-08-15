@@ -39,5 +39,5 @@ package org.apache.bcel.generic;
  */
 public interface ExceptionThrower {
 
-    public java.lang.Class<?>[] getExceptions();
+    java.lang.Class<?>[] getExceptions();
 }

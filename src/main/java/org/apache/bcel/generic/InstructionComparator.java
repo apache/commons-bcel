@@ -66,5 +66,5 @@ public interface InstructionComparator {
     };
 
 
-    public boolean equals( Instruction i1, Instruction i2 );
+    boolean equals( Instruction i1, Instruction i2 );
 }

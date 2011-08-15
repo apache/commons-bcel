@@ -27,83 +27,83 @@ package org.apache.bcel.classfile;
  */
 public interface Visitor
 {
-	public void visitCode(Code obj);
+	void visitCode(Code obj);
 
-	public void visitCodeException(CodeException obj);
+	void visitCodeException(CodeException obj);
 
-	public void visitConstantClass(ConstantClass obj);
+	void visitConstantClass(ConstantClass obj);
 
-	public void visitConstantDouble(ConstantDouble obj);
+	void visitConstantDouble(ConstantDouble obj);
 
-	public void visitConstantFieldref(ConstantFieldref obj);
+	void visitConstantFieldref(ConstantFieldref obj);
 
-	public void visitConstantFloat(ConstantFloat obj);
+	void visitConstantFloat(ConstantFloat obj);
 
-	public void visitConstantInteger(ConstantInteger obj);
+	void visitConstantInteger(ConstantInteger obj);
 
-	public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj);
+	void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj);
 
-	public void visitConstantLong(ConstantLong obj);
+	void visitConstantLong(ConstantLong obj);
 
-	public void visitConstantMethodref(ConstantMethodref obj);
+	void visitConstantMethodref(ConstantMethodref obj);
 
-	public void visitConstantNameAndType(ConstantNameAndType obj);
+	void visitConstantNameAndType(ConstantNameAndType obj);
 
-	public void visitConstantPool(ConstantPool obj);
+	void visitConstantPool(ConstantPool obj);
 
-	public void visitConstantString(ConstantString obj);
+	void visitConstantString(ConstantString obj);
 
-	public void visitConstantUtf8(ConstantUtf8 obj);
+	void visitConstantUtf8(ConstantUtf8 obj);
 
-	public void visitConstantValue(ConstantValue obj);
+	void visitConstantValue(ConstantValue obj);
 
-	public void visitDeprecated(Deprecated obj);
+	void visitDeprecated(Deprecated obj);
 
-	public void visitExceptionTable(ExceptionTable obj);
+	void visitExceptionTable(ExceptionTable obj);
 
-	public void visitField(Field obj);
+	void visitField(Field obj);
 
-	public void visitInnerClass(InnerClass obj);
+	void visitInnerClass(InnerClass obj);
 
-	public void visitInnerClasses(InnerClasses obj);
+	void visitInnerClasses(InnerClasses obj);
 
-	public void visitJavaClass(JavaClass obj);
+	void visitJavaClass(JavaClass obj);
 
-	public void visitLineNumber(LineNumber obj);
+	void visitLineNumber(LineNumber obj);
 
-	public void visitLineNumberTable(LineNumberTable obj);
+	void visitLineNumberTable(LineNumberTable obj);
 
-	public void visitLocalVariable(LocalVariable obj);
+	void visitLocalVariable(LocalVariable obj);
 
-	public void visitLocalVariableTable(LocalVariableTable obj);
+	void visitLocalVariableTable(LocalVariableTable obj);
 
-	public void visitMethod(Method obj);
+	void visitMethod(Method obj);
 
-	public void visitSignature(Signature obj);
+	void visitSignature(Signature obj);
 
-	public void visitSourceFile(SourceFile obj);
+	void visitSourceFile(SourceFile obj);
 
-	public void visitSynthetic(Synthetic obj);
+	void visitSynthetic(Synthetic obj);
 
-	public void visitUnknown(Unknown obj);
+	void visitUnknown(Unknown obj);
 
-	public void visitStackMap(StackMap obj);
+	void visitStackMap(StackMap obj);
 
-	public void visitStackMapEntry(StackMapEntry obj);
+	void visitStackMapEntry(StackMapEntry obj);
 
-	public void visitStackMapTable(StackMapTable obj);
+	void visitStackMapTable(StackMapTable obj);
 
-	public void visitStackMapTableEntry(StackMapTableEntry obj);
+	void visitStackMapTableEntry(StackMapTableEntry obj);
 
-	public void visitAnnotation(Annotations obj);
+	void visitAnnotation(Annotations obj);
 
-	public void visitParameterAnnotation(ParameterAnnotations obj);
+	void visitParameterAnnotation(ParameterAnnotations obj);
 
-	public void visitAnnotationEntry(AnnotationEntry obj);
+	void visitAnnotationEntry(AnnotationEntry obj);
 
-	public void visitAnnotationDefault(AnnotationDefault obj);
+	void visitAnnotationDefault(AnnotationDefault obj);
 
-	public void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
+	void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
 
-	public void visitEnclosingMethod(EnclosingMethod obj);
+	void visitEnclosingMethod(EnclosingMethod obj);
 }

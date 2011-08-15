@@ -26,5 +26,5 @@ package org.apache.bcel.generic;
  */
 public interface TypedInstruction {
 
-    public Type getType( ConstantPoolGen cpg );
+    Type getType( ConstantPoolGen cpg );
 }

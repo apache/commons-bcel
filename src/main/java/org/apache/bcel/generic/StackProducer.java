@@ -28,5 +28,5 @@ public interface StackProducer {
 
     /** @return how many words are produced on stack
      */
-    public int produceStack( ConstantPoolGen cpg );
+    int produceStack( ConstantPoolGen cpg );
 }

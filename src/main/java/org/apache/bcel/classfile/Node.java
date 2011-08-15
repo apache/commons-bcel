@@ -25,5 +25,5 @@ package org.apache.bcel.classfile;
  */
 public interface Node {
 
-    public void accept( Visitor obj );
+    void accept( Visitor obj );
 }

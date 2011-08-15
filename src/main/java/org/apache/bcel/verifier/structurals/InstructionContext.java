@@ -41,7 +41,7 @@ public interface InstructionContext{
 	 * 
 	 * @see #setTag(int tag)
 	 */
-	public int getTag();
+	int getTag();
 
 	/**
 	 * The getTag and setTag methods may be used for
@@ -51,7 +51,7 @@ public interface InstructionContext{
 	 * 
 	 * @see #getTag()
 	 */
-	public void setTag(int tag);
+	void setTag(int tag);
 
 	/**
 	 * This method symbolically executes the Instruction

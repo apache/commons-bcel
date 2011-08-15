@@ -26,5 +26,5 @@ package org.apache.bcel.generic;
  */
 public interface ClassObserver {
 
-    public void notify( ClassGen clazz );
+    void notify( ClassGen clazz );
 }

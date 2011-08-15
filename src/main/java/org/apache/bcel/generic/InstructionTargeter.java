@@ -29,8 +29,8 @@ package org.apache.bcel.generic;
  */
 public interface InstructionTargeter {
 
-    public boolean containsTarget( InstructionHandle ih );
+    boolean containsTarget( InstructionHandle ih );
 
 
-    public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih );
+    void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih );
 }

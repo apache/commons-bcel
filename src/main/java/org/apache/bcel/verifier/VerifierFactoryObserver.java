@@ -36,5 +36,5 @@ public interface VerifierFactoryObserver {
      * The String argument is the fully qualified class name of a class a
      * new Verifier instance created by the VerifierFactory operates on.
      */
-    public void update( String s );
+    void update( String s );
 }

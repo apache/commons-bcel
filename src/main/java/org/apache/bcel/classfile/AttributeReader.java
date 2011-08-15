@@ -54,6 +54,6 @@ public interface AttributeReader {
 
      @see Attribute#addAttributeReader( String, AttributeReader )
      */
-    public Attribute createAttribute( int name_index, int length, java.io.DataInputStream file,
+    Attribute createAttribute( int name_index, int length, java.io.DataInputStream file,
             ConstantPool constant_pool );
 }

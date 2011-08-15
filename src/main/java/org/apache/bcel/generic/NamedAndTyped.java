@@ -26,14 +26,14 @@ package org.apache.bcel.generic;
  */
 public interface NamedAndTyped {
 
-    public String getName();
+    String getName();
 
 
-    public Type getType();
+    Type getType();
 
 
-    public void setName( String name );
+    void setName( String name );
 
 
-    public void setType( Type type );
+    void setType( Type type );
 }

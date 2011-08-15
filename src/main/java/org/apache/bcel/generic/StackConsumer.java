@@ -27,5 +27,5 @@ public interface StackConsumer {
 
     /** @return how many words are consumed from stack
      */
-    public int consumeStack( ConstantPoolGen cpg );
+    int consumeStack( ConstantPoolGen cpg );
 }
