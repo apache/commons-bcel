@@ -143,9 +143,10 @@ public abstract class Type implements java.io.Serializable {
      */
     public static String getMethodSignature( Type return_type, Type[] arg_types ) {
         StringBuilder buf = new StringBuilder("(");
-        int length = (arg_types == null) ? 0 : arg_types.length;
-        for (int i = 0; i < length; i++) {
-            buf.append(arg_types[i].getSignature());
+        if (arg_types != null) {
+            for (Type arg_type : arg_types) {
+                buf.append(arg_type.getSignature());
+            }
         }
         buf.append(')');
         buf.append(return_type.getSignature());
