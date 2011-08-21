@@ -26,7 +26,7 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-interface Visitor {
+public interface Visitor {
 
     void visitStackInstruction( StackInstruction obj );
 
