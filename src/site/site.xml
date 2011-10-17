@@ -32,7 +32,7 @@
     <menu name="BCEL">
       <item name="About" href="index.html"/>
       <item name="News" href="news.html"/>
-      <item name="Download" href="http://jakarta.apache.org/site/downloads/downloads_bcel.cgi"/>
+      <item name="Download" href="http://commons.apache.org/bcel/download_bcel.cgi"/>
       <item name="Manual" href="manual.html"/>
       <item name="FAQ" href="faq.html"/>
       <item name="Used by" href="projects.html"/>
