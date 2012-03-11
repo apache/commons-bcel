@@ -55,7 +55,7 @@
       <commons.osgi.private />
     </properties> 
 
-    <!-- Could this be added to Commons Parent? -->
+    <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
     <distributionManagement>
       <site>
         <id>apache.website</id>
