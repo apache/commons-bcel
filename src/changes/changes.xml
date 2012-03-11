@@ -65,6 +65,9 @@ The <action> type attribute can be add,update,fix,remove.
         <release version="5.3" date="TBA" description="
 TBA
         ">
+            <action issue="Bugzilla 51014" dev="sebb" type="fix">
+            Examples not present in source or binary downloads
+            </action>
             <action issue="Bugzilla 52433" dev="sebb" type="fix">
             Why using unstable sort at MethodGen.getLocalVariables() ?
             </action>
