@@ -18,6 +18,8 @@
 package org.apache.bcel.generic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Stack;
@@ -349,37 +351,6 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
 
-    /**
-     * Sort local variables by index
-     */
-    private static final void sort( LocalVariableGen[] vars, int l, int r ) {
-        int i = l, j = r;
-        int m = vars[(l + r) / 2].getIndex();
-        LocalVariableGen h;
-        do {
-            while (vars[i].getIndex() < m) {
-                i++;
-            }
-            while (m < vars[j].getIndex()) {
-                j--;
-            }
-            if (i <= j) {
-                h = vars[i];
-                vars[i] = vars[j];
-                vars[j] = h; // Swap elements
-                i++;
-                j--;
-            }
-        } while (i <= j);
-        if (l < j) {
-            sort(vars, l, j);
-        }
-        if (i < r) {
-            sort(vars, i, r);
-        }
-    }
-
-
     /*
      * If the range of the variable has not been set yet, it will be set to be valid from
      * the start to the end of the instruction list.
@@ -399,7 +370,11 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
         }
         if (size > 1) {
-            sort(lg, 0, size - 1);
+            Arrays.sort(lg, new Comparator<LocalVariableGen>() {
+                public int compare(LocalVariableGen o1, LocalVariableGen o2) {
+                    return o1.getIndex() - o2.getIndex();
+                }
+            });
         }
         return lg;
     }
