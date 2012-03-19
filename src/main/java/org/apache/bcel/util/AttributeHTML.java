@@ -74,13 +74,12 @@ final class AttributeHTML implements org.apache.bcel.Constants {
     }
 
 
-    final void writeAttribute( Attribute attribute, String anchor ) throws IOException {
+    final void writeAttribute( Attribute attribute, String anchor ) {
         writeAttribute(attribute, anchor, 0);
     }
 
 
-    final void writeAttribute( Attribute attribute, String anchor, int method_number )
-            throws IOException {
+    final void writeAttribute( Attribute attribute, String anchor, int method_number ) {
         byte tag = attribute.getTag();
         int index;
         if (tag == ATTR_UNKNOWN) {
