@@ -100,7 +100,7 @@ final class MethodHTML implements org.apache.bcel.Constants {
     }
 
 
-    private final void writeMethod( Method method, int method_number ) throws IOException {
+    private final void writeMethod( Method method, int method_number ) {
         // Get raw signature
         String signature = method.getSignature();
         // Get array of strings containing the argument types 
