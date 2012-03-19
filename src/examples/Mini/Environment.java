@@ -37,7 +37,7 @@ public class Environment implements Cloneable {
   private static final int SLOTS = 3;   // Number of slots of each field
   
   private int       size;               // The table is an array of
-  private Vector[]  table;              // Vectors
+  private Vector<EnvEntry>[]  table;              // Vectors
   private int       elements=0;
 
   public Environment(int size) {
@@ -45,7 +45,7 @@ public class Environment implements Cloneable {
     table     = new Vector[size];
   }
 
-  private Environment(Vector[] table) {
+  private Environment(Vector<EnvEntry>[] table) {
     size       = table.length;
     this.table = table;
   }
@@ -64,7 +64,7 @@ public class Environment implements Cloneable {
    */
   public void put(EnvEntry obj) {
     int    hash;
-    Vector v;
+    Vector<EnvEntry> v;
     String key = obj.getHashKey();
 
     hash = hashCode(key);
@@ -73,7 +73,7 @@ public class Environment implements Cloneable {
     elements++; // Count
 
     if(v == null) {
-        table[hash] = v = new Vector(SLOTS);
+        table[hash] = v = new Vector<EnvEntry>(SLOTS);
     } else {
       try {
         int index = lookup(v, key);
@@ -93,7 +93,7 @@ public class Environment implements Cloneable {
    */
   public EnvEntry get(String key) {
     int       hash;
-    Vector    v;
+    Vector<EnvEntry>    v;
     EnvEntry entry = null;
 
     hash = hashCode(key);
@@ -107,7 +107,7 @@ public class Environment implements Cloneable {
       int index = lookup(v, key);
 
       if(index >= 0) {
-        entry = (EnvEntry)v.elementAt(index);
+        entry = v.elementAt(index);
     }
     } catch(ArrayIndexOutOfBoundsException e) {}
 
@@ -119,7 +119,7 @@ public class Environment implements Cloneable {
    */
   public void delete(String key) {
     int       hash;
-    Vector    v;
+    Vector<EnvEntry>    v;
 
     hash = hashCode(key);
     v    = table[hash];
@@ -138,13 +138,13 @@ public class Environment implements Cloneable {
     } catch(ArrayIndexOutOfBoundsException e) {}
   }
 
-  private static final int lookup(Vector v, String key) 
+  private static final int lookup(Vector<EnvEntry> v, String key) 
        throws ArrayIndexOutOfBoundsException
   {
     int len = v.size();
 
     for(int i=0; i < len; i++) {
-      EnvEntry entry = (EnvEntry)v.elementAt(i);
+      EnvEntry entry = v.elementAt(i);
 
       if(entry.getHashKey().equals(key)) {
         return i;
@@ -156,7 +156,7 @@ public class Environment implements Cloneable {
 
   @Override
   public Object clone() { 
-    Vector[] copy = new Vector[size];
+    Vector<EnvEntry>[] copy = new Vector[size];
 
     for(int i=0; i < size; i++) {
       if(table[i] != null) {
@@ -192,14 +192,14 @@ public class Environment implements Cloneable {
   public EnvEntry[] getEntries() {
     EnvEntry[] entries = new EnvEntry[elements];
     int        k       = 0;
-    Vector     v;
+    Vector<EnvEntry>     v;
 
     for(int i=0; i < size; i++) {
       if((v = table[i]) != null) {
         int len = v.size();
         try {
           for(int j=0; j < len; j++) {
-        entries[k++] = (EnvEntry)v.elementAt(j);
+        entries[k++] = v.elementAt(j);
     }
         } catch(ArrayIndexOutOfBoundsException e) {}  
       }
