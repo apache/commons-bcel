@@ -153,11 +153,13 @@ public final class Pass3bVerifier extends PassVerifier{
 				icq.remove(0);
 			}
 			
-			ArrayList<InstructionContext> oldchain = (ArrayList<InstructionContext>) (ec.clone());
-			ArrayList<InstructionContext> newchain = (ArrayList<InstructionContext>) (ec.clone());
+			@SuppressWarnings("unchecked") // ec is of type ArrayList<InstructionContext>
+            ArrayList<InstructionContext> oldchain = (ArrayList<InstructionContext>) (ec.clone());
+			@SuppressWarnings("unchecked") // ec is of type ArrayList<InstructionContext>
+            ArrayList<InstructionContext> newchain = (ArrayList<InstructionContext>) (ec.clone());
 			newchain.add(u);
 
-			if ((u.getInstruction().getInstruction()) instanceof RET){
+            if ((u.getInstruction().getInstruction()) instanceof RET){
 //System.err.println(u);
 				// We can only follow _one_ successor, the one after the
 				// JSR that was recently executed.
@@ -195,7 +197,9 @@ public final class Pass3bVerifier extends PassVerifier{
 				}
 				
 				if (theSuccessor.execute(u.getOutFrame(oldchain), newchain, icv, ev)){
-					icq.add(theSuccessor, (ArrayList<InstructionContext>) newchain.clone());
+		            @SuppressWarnings("unchecked") // newchain is already of type ArrayList<InstructionContext>
+                    ArrayList<InstructionContext> newchainClone = (ArrayList<InstructionContext>) newchain.clone();
+					icq.add(theSuccessor, newchainClone);
 				}
 			}
 			else{// "not a ret"
@@ -205,7 +209,9 @@ public final class Pass3bVerifier extends PassVerifier{
 				for (int s=0; s<succs.length; s++){
 					InstructionContext v = succs[s];
 					if (v.execute(u.getOutFrame(oldchain), newchain, icv, ev)){
-						icq.add(v, (ArrayList<InstructionContext>) newchain.clone());
+	                    @SuppressWarnings("unchecked") // newchain is already of type ArrayList<InstructionContext>
+	                    ArrayList<InstructionContext> newchainClone = (ArrayList<InstructionContext>) newchain.clone();
+						icq.add(v, newchainClone);
 					}
 				}
 			}// end "not a ret"
