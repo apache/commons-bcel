@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 
 package org.apache.bcel.data;
@@ -21,4 +21,14 @@ package org.apache.bcel.data;
 @CombinedAnnotation( { @SimpleAnnotation(id = 4) })
 public class AnnotatedWithCombinedAnnotation
 {
+    public AnnotatedWithCombinedAnnotation(int param1, @SimpleAnnotation(id=42) int param2) {
+    }
+
+    @CombinedAnnotation( {})
+    public void methodWithArrayOfZeroAnnotations() {
+    }
+
+    @CombinedAnnotation( { @SimpleAnnotation(id=1, fruit="apples"), @SimpleAnnotation(id= 2, fruit="oranges")})
+    public void methodWithArrayOfTwoAnnotations() {
+    }
 }

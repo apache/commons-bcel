@@ -50,6 +50,8 @@ public final class Method extends FieldOrMethod {
         }
     };
 
+    // annotations defined on the parameters of a method
+    private ParameterAnnotationEntry[] parameterAnnotationEntries;
 
     /**
      * Empty constructor, all attributes have to be defined via `setXXX'
@@ -255,5 +257,15 @@ public final class Method extends FieldOrMethod {
     @Override
     public int hashCode() {
         return _cmp.hashCode(this);
+    }
+
+    /**
+     * @return Annotations on the parameters of a method
+     */
+    public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
+        if (parameterAnnotationEntries == null) {
+            parameterAnnotationEntries = ParameterAnnotationEntry.createParameterAnnotationEntries(getAttributes());
+        }
+        return parameterAnnotationEntries;
     }
 }

@@ -20,11 +20,15 @@ package org.apache.bcel.classfile;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.bcel.Constants;
 
 /**
  * represents one parameter annotation in the parameter annotation table
- * 
+ *
  * @version $Id: ParameterAnnotationEntry
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  * @since 5.3
@@ -44,7 +48,7 @@ public class ParameterAnnotationEntry implements Node, Constants {
         annotation_table_length = (file.readUnsignedShort());
         annotation_table = new AnnotationEntry[annotation_table_length];
         for (int i = 0; i < annotation_table_length; i++) {
-//        	 TODO isRuntimeVisible
+            // TODO isRuntimeVisible
             annotation_table[i] = AnnotationEntry.read(file, constant_pool, false);
         }
     }
@@ -58,7 +62,7 @@ public class ParameterAnnotationEntry implements Node, Constants {
      * @param v Visitor object
      */
     public void accept( Visitor v ) {
-        //	    v.visitParameterAnnotationEntry(this);
+        // v.visitParameterAnnotationEntry(this);
     }
 
 
@@ -76,12 +80,24 @@ public class ParameterAnnotationEntry implements Node, Constants {
     public AnnotationEntry[] getAnnotationEntries() {
         return annotation_table;
     }
-    
+
     public void dump(DataOutputStream dos) throws IOException {
         dos.writeShort(annotation_table_length);
         for(int i = 0; i < annotation_table_length; i++) {
             annotation_table[i].dump(dos);
         }
     }
+
+  public static ParameterAnnotationEntry[] createParameterAnnotationEntries(Attribute[] attrs) {
+      // Find attributes that contain parameter annotation data
+      List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<ParameterAnnotationEntry>(attrs.length);
+      for (Attribute attribute : attrs) {
+          if (attribute instanceof ParameterAnnotations) {
+              ParameterAnnotations runtimeAnnotations = (ParameterAnnotations)attribute;
+              Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getParameterAnnotationEntries());
+          }
+      }
+      return accumulatedAnnotations.toArray(new ParameterAnnotationEntry[accumulatedAnnotations.size()]);
+  }
 }
-    
+
