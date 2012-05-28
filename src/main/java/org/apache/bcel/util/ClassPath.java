@@ -408,7 +408,7 @@ public class ClassPath implements Serializable {
             // Resource specification uses '/' whatever the platform
             final File file = new File(dir + File.separatorChar + name.replace('/', File.separatorChar));
             try {
-                return file.exists() ? file.toURL() : null;
+                return file.exists() ? file.toURI().toURL() : null;
             } catch (MalformedURLException e) {
                return null;
             }
