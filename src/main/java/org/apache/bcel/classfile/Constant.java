@@ -146,6 +146,12 @@ public abstract class Constant implements Cloneable, Node, Serializable {
                 return new ConstantNameAndType(file);
             case Constants.CONSTANT_Utf8:
                 return new ConstantUtf8(file);
+            case Constants.CONSTANT_MethodHandle:
+                return new ConstantMethodHandle(file);
+            case Constants.CONSTANT_MethodType:
+                return new ConstantMethodType(file);
+            case Constants.CONSTANT_InvokeDynamic:
+                return new ConstantInvokeDynamic(file);
             default:
                 throw new ClassFormatException("Invalid byte tag in constant pool: " + b);
         }
