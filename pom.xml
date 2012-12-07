@@ -53,6 +53,8 @@
       <commons.osgi.import>*</commons.osgi.import>
       <commons.osgi.dynamicImport />
       <commons.osgi.private />
+      <commons.jira.id>BCEL</commons.jira.id>
+      <commons.jira.pid>12314220</commons.jira.pid>
     </properties> 
 
     <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
@@ -162,8 +164,8 @@
     </mailingLists>
 
     <issueManagement>
-        <system>bugzilla</system>
-        <url>https://issues.apache.org/bugzilla</url>
+        <system>jira</system>
+        <url>http://issues.apache.org/jira/browse/BCEL</url>
     </issueManagement>
 
     <scm>
