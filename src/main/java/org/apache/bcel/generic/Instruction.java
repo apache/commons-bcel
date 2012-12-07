@@ -132,6 +132,7 @@ public abstract class Instruction implements Cloneable, Serializable {
      *
      * @param bytes byte sequence to read from
      * @param wide "wide" instruction flag
+     * @throws IOException may be thrown if the implementation needs to read data from the file
      */
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
     }
