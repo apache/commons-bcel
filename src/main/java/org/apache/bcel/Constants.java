@@ -12,7 +12,7 @@
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
- *  limitations under the License. 
+ *  limitations under the License.
  *
  */
 package org.apache.bcel;
@@ -84,7 +84,7 @@ public interface Constants {
    *  @see #MAJOR_1_6
    *  */
   public final static short MINOR_1_6 = 0;
-  
+
   /** Major version number of class files for Java 1.7.
    *  @see #MINOR_1_7
    *  */
@@ -94,6 +94,16 @@ public interface Constants {
    *  @see #MAJOR_1_7
    *  */
   public final static short MINOR_1_7 = 0;
+
+  /** Major version number of class files for Java 1.8.
+   *  @see #MINOR_1_8
+   *  */
+  public final static short MAJOR_1_8 = 52;
+
+  /** Minor version number of class files for Java 1.8.
+   *  @see #MAJOR_1_8
+   *  */
+  public final static short MINOR_1_8 = 0;
 
   /** Default major version number.  Class file is for Java 1.1.
    *  @see #MAJOR_1_1
@@ -174,7 +184,7 @@ public interface Constants {
    *  @see #ACC_PUBLIC
    */
   public final static short ACC_NATIVE       = 0x0100;
-  
+
   /** One of the access flags for fields, methods, or classes.
    *  @see #ACC_PUBLIC
    */
@@ -189,7 +199,7 @@ public interface Constants {
    *  @see #ACC_PUBLIC
    */
   public final static short ACC_STRICT       = 0x0800;
-  
+
   /** One of the access flags for fields, methods, or classes.
    *  @see #ACC_PUBLIC
    */
@@ -1249,7 +1259,7 @@ public interface Constants {
 
   /**
    * Names of opcodes.  Indexed by opcode.  OPCODE_NAMES[ALOAD] = "aload".
-   */ 
+   */
   public static final String[] OPCODE_NAMES = {
     "nop", "aconst_null", "iconst_m1", "iconst_0", "iconst_1",
     "iconst_2", "iconst_3", "iconst_4", "iconst_5", "lconst_0",
@@ -1303,7 +1313,7 @@ public interface Constants {
    * Number of words consumed on operand stack by instructions.
    * Indexed by opcode.  CONSUME_STACK[FALOAD] = number of words
    * consumed from the stack by a faload instruction.
-   */ 
+   */
   public static final int[] CONSUME_STACK = {
     0/*nop*/, 0/*aconst_null*/, 0/*iconst_m1*/, 0/*iconst_0*/, 0/*iconst_1*/,
     0/*iconst_2*/, 0/*iconst_3*/, 0/*iconst_4*/, 0/*iconst_5*/, 0/*lconst_0*/,
@@ -1327,7 +1337,7 @@ public interface Constants {
     1/*fneg*/, 2/*dneg*/, 2/*ishl*/, 3/*lshl*/, 2/*ishr*/, 3/*lshr*/, 2/*iushr*/, 3/*lushr*/,
     2/*iand*/, 4/*land*/, 2/*ior*/, 4/*lor*/, 2/*ixor*/, 4/*lxor*/, 0/*iinc*/,
     1/*i2l*/, 1/*i2f*/, 1/*i2d*/, 2/*l2i*/, 2/*l2f*/, 2/*l2d*/, 1/*f2i*/, 1/*f2l*/,
-    1/*f2d*/, 2/*d2i*/, 2/*d2l*/, 2/*d2f*/, 1/*i2b*/, 1/*i2c*/, 1/*i2s*/, 
+    1/*f2d*/, 2/*d2i*/, 2/*d2l*/, 2/*d2f*/, 1/*i2b*/, 1/*i2c*/, 1/*i2s*/,
     4/*lcmp*/, 2/*fcmpl*/, 2/*fcmpg*/, 4/*dcmpl*/, 4/*dcmpg*/, 1/*ifeq*/, 1/*ifne*/,
     1/*iflt*/, 1/*ifge*/, 1/*ifgt*/, 1/*ifle*/, 2/*if_icmpeq*/, 2/*if_icmpne*/, 2/*if_icmplt*/,
     2 /*if_icmpge*/, 2/*if_icmpgt*/, 2/*if_icmple*/, 2/*if_acmpeq*/, 2/*if_acmpne*/,
@@ -1359,7 +1369,7 @@ public interface Constants {
    * Number of words produced onto operand stack by instructions.
    * Indexed by opcode.  CONSUME_STACK[DALOAD] = number of words
    * consumed from the stack by a daload instruction.
-   */ 
+   */
   public static final int[] PRODUCE_STACK = {
     0/*nop*/, 1/*aconst_null*/, 1/*iconst_m1*/, 1/*iconst_0*/, 1/*iconst_1*/,
     1/*iconst_2*/, 1/*iconst_3*/, 1/*iconst_4*/, 1/*iconst_5*/, 2/*lconst_0*/,
@@ -1442,7 +1452,7 @@ public interface Constants {
     "SourceFile", "ConstantValue", "Code", "Exceptions",
     "LineNumberTable", "LocalVariableTable",
     "InnerClasses", "Synthetic", "Deprecated",
-    "PMGClass", "Signature", "StackMap", 
+    "PMGClass", "Signature", "StackMap",
     "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
     "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations",
     "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod", "StackMapTable"
@@ -1462,25 +1472,25 @@ public interface Constants {
 
   public static final String[] ITEM_NAMES = {
     "Bogus", "Integer", "Float", "Double", "Long",
-    "Null", "InitObject", "Object", "NewObject" 
+    "Null", "InitObject", "Object", "NewObject"
   };
-  
+
   /** Constants used to identify StackMapEntry types.
-   * 
-   * For those types which can specify a range, the 
+   *
+   * For those types which can specify a range, the
    * constant names the lowest value.
    */
-  public static final int SAME_FRAME = 0; 
-  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME = 64; 
-  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED = 247; 
-  public static final int CHOP_FRAME = 248; 
-  public static final int SAME_FRAME_EXTENDED = 251; 
-  public static final int APPEND_FRAME = 252; 
-  public static final int FULL_FRAME = 255; 
-  
-  /** Constants that define the maximum value of 
+  public static final int SAME_FRAME = 0;
+  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME = 64;
+  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED = 247;
+  public static final int CHOP_FRAME = 248;
+  public static final int SAME_FRAME_EXTENDED = 251;
+  public static final int APPEND_FRAME = 252;
+  public static final int FULL_FRAME = 255;
+
+  /** Constants that define the maximum value of
    * those constants which store ranges. */
-  
+
   public static final int SAME_FRAME_MAX = 63;
   public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_MAX = 127;
   public static final int CHOP_FRAME_MAX = 250;
