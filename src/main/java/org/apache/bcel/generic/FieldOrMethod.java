@@ -100,7 +100,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      */
     @Deprecated
     public ObjectType getClassType( ConstantPoolGen cpg ) {
-        return new ObjectType(getClassName(cpg));
+        return ObjectType.getInstance(getClassName(cpg));
     }
 
 
@@ -121,7 +121,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
             return (ArrayType) Type.getType(className);
         } else {
             className = className.replace('/', '.');
-            return new ObjectType(className);
+            return ObjectType.getInstance(className);
         }
     }
 

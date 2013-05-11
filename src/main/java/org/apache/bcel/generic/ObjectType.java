@@ -17,6 +17,10 @@
  */
 package org.apache.bcel.generic;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
@@ -30,8 +34,27 @@ import org.apache.bcel.classfile.JavaClass;
 public class ObjectType extends ReferenceType {
 
     private static final long serialVersionUID = -2819379966444533294L;
-    private String class_name; // Class name of type
+    private final String class_name; // Class name of type
+    private static final int MAX_CACHE_ENTRIES = 200;
+    private static final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
+    private static HashMap<String, ObjectType> cache;
 
+    public synchronized static ObjectType getInstance(String class_name) {
+        if (cache == null)
+            cache = new LinkedHashMap<String, ObjectType>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
+
+
+            protected boolean removeEldestEntry(Map.Entry eldest) {
+               return size() > MAX_CACHE_ENTRIES;
+            }
+
+        };
+        ObjectType result = cache.get(class_name);
+        if (result != null) return result;
+        result = new ObjectType(class_name);
+        cache.put(class_name, result);
+        return result;
+    }
 
     /**
      * @param class_name fully qualified class name, e.g. java.lang.String

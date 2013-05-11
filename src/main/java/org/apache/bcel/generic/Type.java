@@ -34,7 +34,7 @@ import org.apache.bcel.classfile.Utility;
 public abstract class Type implements java.io.Serializable {
 
     private static final long serialVersionUID = -1985077286871826895L;
-    protected byte type;
+    protected final byte type;
     protected String signature; // signature for the type
     /** Predefined constants
      */
@@ -47,11 +47,11 @@ public abstract class Type implements java.io.Serializable {
     public static final BasicType DOUBLE = new BasicType(Constants.T_DOUBLE);
     public static final BasicType FLOAT = new BasicType(Constants.T_FLOAT);
     public static final BasicType CHAR = new BasicType(Constants.T_CHAR);
-    public static final ObjectType OBJECT = new ObjectType("java.lang.Object");
-    public static final ObjectType CLASS = new ObjectType("java.lang.Class");
-    public static final ObjectType STRING = new ObjectType("java.lang.String");
-    public static final ObjectType STRINGBUFFER = new ObjectType("java.lang.StringBuffer");
-    public static final ObjectType THROWABLE = new ObjectType("java.lang.Throwable");
+    public static final ObjectType OBJECT = ObjectType.getInstance("java.lang.Object");
+    public static final ObjectType CLASS = ObjectType.getInstance("java.lang.Class");
+    public static final ObjectType STRING = ObjectType.getInstance("java.lang.String");
+    public static final ObjectType STRINGBUFFER = ObjectType.getInstance("java.lang.StringBuffer");
+    public static final ObjectType THROWABLE = ObjectType.getInstance("java.lang.Throwable");
     public static final Type[] NO_ARGS = new Type[0];
     public static final ReferenceType NULL = new ReferenceType() {
 
@@ -202,7 +202,7 @@ public abstract class Type implements java.io.Serializable {
             }
             //corrected concurrent private static field acess
             wrap(consumed_chars, index + 1); // "Lblabla;" `L' and `;' are removed
-            return new ObjectType(signature.substring(1, index).replace('/', '.'));
+            return ObjectType.getInstance(signature.substring(1, index).replace('/', '.'));
         }
     }
 
@@ -290,7 +290,7 @@ public abstract class Type implements java.io.Serializable {
                 throw new IllegalStateException("Ooops, what primitive type is " + cl);
             }
         } else { // "Real" class
-            return new ObjectType(cl.getName());
+            return ObjectType.getInstance(cl.getName());
         }
     }
 

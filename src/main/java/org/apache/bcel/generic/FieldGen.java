@@ -117,7 +117,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * by the JVM automatically.
      */
     public void setInitValue( String str ) {
-        checkType(new ObjectType("java.lang.String"));
+        checkType(  ObjectType.getInstance("java.lang.String"));
         if (str != null) {
             value = str;
         }

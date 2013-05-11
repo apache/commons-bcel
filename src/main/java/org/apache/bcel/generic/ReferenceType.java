@@ -166,7 +166,7 @@ public abstract class ReferenceType extends Type {
             // 'java.io.Serializable'"
             if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
                 for (int ii = 0; ii < Constants.INTERFACES_IMPLEMENTED_BY_ARRAYS.length; ii++) {
-                    if (T.equals(new ObjectType(Constants.INTERFACES_IMPLEMENTED_BY_ARRAYS[ii]))) {
+                    if (T.equals(ObjectType.getInstance(Constants.INTERFACES_IMPLEMENTED_BY_ARRAYS[ii]))) {
                         return true;
                     }
                 }
@@ -252,7 +252,7 @@ public abstract class ReferenceType extends Type {
         for (int i = 0; i < t_sups.length; i++) {
             for (int j = 0; j < this_sups.length; j++) {
                 if (this_sups[j].equals(t_sups[i])) {
-                    return new ObjectType(this_sups[j].getClassName());
+                    return ObjectType.getInstance(this_sups[j].getClassName());
                 }
             }
         }
@@ -325,7 +325,7 @@ public abstract class ReferenceType extends Type {
         for (int i = 0; i < t_sups.length; i++) {
             for (int j = 0; j < this_sups.length; j++) {
                 if (this_sups[j].equals(t_sups[i])) {
-                    return new ObjectType(this_sups[j].getClassName());
+                    return ObjectType.getInstance(this_sups[j].getClassName());
                 }
             }
         }

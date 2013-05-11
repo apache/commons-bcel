@@ -136,7 +136,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             /* Add local variables, namely the implicit `this' and the arguments
              */
             if (!isStatic() && (class_name != null)) { // Instance method -> `this' is local var 0
-                addLocalVariable("this", new ObjectType(class_name), start, end);
+                addLocalVariable("this",  ObjectType.getInstance(class_name), start, end);
             }
         }
         if (arg_types != null) {
@@ -197,7 +197,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                         if (type > 0) {
                             String cen = m.getConstantPool().getConstantString(type,
                                     Constants.CONSTANT_Class);
-                            c_type = new ObjectType(cen);
+                            c_type =  ObjectType.getInstance(cen);
                         }
                         int end_pc = ce.getEndPC();
                         int length = m.getCode().getCode().length;

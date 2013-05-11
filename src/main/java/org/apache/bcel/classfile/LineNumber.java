@@ -34,8 +34,8 @@ import java.io.Serializable;
 public final class LineNumber implements Cloneable, Node, Serializable {
 
     private static final long serialVersionUID = 169537400672820016L;
-    private int start_pc; // Program Counter (PC) corresponds to line
-    private int line_number; // number in source file
+    private short start_pc; // Program Counter (PC) corresponds to line
+    private short line_number; // number in source file
 
 
     /**
@@ -61,8 +61,8 @@ public final class LineNumber implements Cloneable, Node, Serializable {
      * @param line_number line number in source file
      */
     public LineNumber(int start_pc, int line_number) {
-        this.start_pc = start_pc;
-        this.line_number = line_number;
+        this.start_pc = (short) start_pc;
+        this.line_number = (short)line_number;
     }
 
 
@@ -94,7 +94,7 @@ public final class LineNumber implements Cloneable, Node, Serializable {
      * @return Corresponding source line
      */
     public final int getLineNumber() {
-        return line_number;
+        return 0xffff & line_number;
     }
 
 
@@ -102,7 +102,7 @@ public final class LineNumber implements Cloneable, Node, Serializable {
      * @return PC in code
      */
     public final int getStartPC() {
-        return start_pc;
+        return  0xffff & start_pc;
     }
 
 
@@ -110,7 +110,7 @@ public final class LineNumber implements Cloneable, Node, Serializable {
      * @param line_number the source line number
      */
     public final void setLineNumber( int line_number ) {
-        this.line_number = line_number;
+        this.line_number = (short) line_number;
     }
 
 
@@ -118,7 +118,7 @@ public final class LineNumber implements Cloneable, Node, Serializable {
      * @param start_pc the pc for this line number
      */
     public final void setStartPC( int start_pc ) {
-        this.start_pc = start_pc;
+        this.start_pc = (short) start_pc;
     }
 
 

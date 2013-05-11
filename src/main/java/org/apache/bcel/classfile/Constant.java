@@ -145,7 +145,7 @@ public abstract class Constant implements Cloneable, Node, Serializable {
             case Constants.CONSTANT_NameAndType:
                 return new ConstantNameAndType(file);
             case Constants.CONSTANT_Utf8:
-                return new ConstantUtf8(file);
+                return ConstantUtf8.getInstance(file);
             case Constants.CONSTANT_MethodHandle:
                 return new ConstantMethodHandle(file);
             case Constants.CONSTANT_MethodType:

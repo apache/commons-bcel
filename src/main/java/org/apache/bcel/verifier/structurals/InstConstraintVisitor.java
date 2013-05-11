@@ -53,7 +53,7 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  */
 public class InstConstraintVisitor extends EmptyVisitor{
 
-	private static final ObjectType GENERIC_ARRAY = new ObjectType("org.apache.bcel.verifier.structurals.GenericArray");
+	private static final ObjectType GENERIC_ARRAY = ObjectType.getInstance("org.apache.bcel.verifier.structurals.GenericArray");
 
 	/**
 	 * The constructor. Constructs a new instance of this class.
@@ -1276,7 +1276,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
 		if (f.isProtected()){
 			ObjectType classtype = o.getClassType(cpg);
-			ObjectType curr = new ObjectType(mg.getClassName());
+			ObjectType curr = ObjectType.getInstance(mg.getClassName());
 
 			if (	classtype.equals(curr) ||
 						curr.subclassOf(classtype)	){
@@ -2689,7 +2689,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 		
 		if (f.isProtected()){
 			ObjectType classtype = o.getClassType(cpg);
-			ObjectType curr = new ObjectType(mg.getClassName());
+			ObjectType curr = ObjectType.getInstance(mg.getClassName());
 
 			if (	classtype.equals(curr) ||
 						curr.subclassOf(classtype)	){

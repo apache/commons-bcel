@@ -622,7 +622,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
 
 
     public NEW createNew( String s ) {
-        return createNew(new ObjectType(s));
+        return createNew(ObjectType.getInstance(s));
     }
 
 

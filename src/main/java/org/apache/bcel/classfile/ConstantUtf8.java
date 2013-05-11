@@ -18,8 +18,12 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.bcel.Constants;
 
@@ -35,8 +39,59 @@ import org.apache.bcel.Constants;
 public final class ConstantUtf8 extends Constant {
 
     private static final long serialVersionUID = -8709101585611518985L;
-    private String bytes;
+    private final String bytes;
 
+    private static final int MAX_CACHE_ENTRIES = 20000;
+    private static final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
+    private static HashMap<String, ConstantUtf8> cache;
+    private static int considered = 0;
+    private static int hits = 0;
+    private static int skipped = 0;
+    private static int created = 0;
+    final static boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
+    final static boolean BCEL_DONT_CACHE = Boolean.getBoolean("bcel.dontCache");
+
+    static {
+        if (BCEL_STATISTICS)
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+                public void run() {
+                    System.err.println("Cache hit " + hits + "/" + considered +", "
+                            + skipped + " skipped");
+                    System.err.println("Total of " + created + " ConstantUtf8 objects created");
+                }
+            });
+    }
+
+    public static synchronized ConstantUtf8 getCachedInstance(String s) {
+        if (BCEL_DONT_CACHE || s.length() > 200) {
+            skipped++;
+            return  new ConstantUtf8(s);
+        }
+        considered++;
+        if (cache == null)  {
+            cache = new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
+                protected boolean removeEldestEntry(Map.Entry eldest) {
+                     return size() > MAX_CACHE_ENTRIES;
+                }
+            };
+        }
+        ConstantUtf8 result = cache.get(s);
+        if (result != null) {
+                hits++;
+                return result;
+            }
+        result = new ConstantUtf8(s);
+        cache.put(s, result);
+        return result;
+    }
+
+    public static ConstantUtf8 getInstance(String s) {
+        return getCachedInstance(s);
+    }
+
+    public static ConstantUtf8 getInstance (DataInputStream file)  throws IOException {
+        return getInstance(file.readUTF());
+    }
 
     /**
      * Initialize from another object.
@@ -55,6 +110,7 @@ public final class ConstantUtf8 extends Constant {
     ConstantUtf8(DataInput file) throws IOException {
         super(Constants.CONSTANT_Utf8);
         bytes = file.readUTF();
+        created++;
     }
 
 
@@ -67,6 +123,7 @@ public final class ConstantUtf8 extends Constant {
             throw new IllegalArgumentException("bytes must not be null!");
         }
         this.bytes = bytes;
+        created++;
     }
 
 
@@ -106,9 +163,10 @@ public final class ConstantUtf8 extends Constant {
 
     /**
      * @param bytes the raw bytes of this Utf-8
+     * @deprecated
      */
     public final void setBytes( String bytes ) {
-        this.bytes = bytes;
+        throw new UnsupportedOperationException();
     }
 
 

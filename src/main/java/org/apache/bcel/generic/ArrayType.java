@@ -48,7 +48,7 @@ public final class ArrayType extends ReferenceType {
      * @param class_name complete name of class (java.lang.String, e.g.)
      */
     public ArrayType(String class_name, int dimensions) {
-        this(new ObjectType(class_name), dimensions);
+        this(ObjectType.getInstance(class_name), dimensions);
     }
 
 
