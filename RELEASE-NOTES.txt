@@ -27,6 +27,7 @@ Enhancements from 5.2
 ---------------------
 
 32945	Wrap JavaClass repository class (map values) with...
+BCEL-163 - Incorporate patch file from Findbugs
 
 
 Feedback
