@@ -413,6 +413,7 @@ public class Subroutines{
 		
 		Map<InstructionHandle, Integer> colors = new HashMap<InstructionHandle, Integer>(); //Graph colouring. Key: InstructionHandle, Value: Integer .
 		
+        List<InstructionHandle> Q = new ArrayList<InstructionHandle>();		
 		for (InstructionHandle actual : sub_leaders) {
 			// Do some BFS with "actual" as the root of the graph.
 			// Init colors
@@ -421,7 +422,8 @@ public class Subroutines{
 			}
 			colors.put(actual, GRAY);
 			// Init Queue
-			List<InstructionHandle> Q = new ArrayList<InstructionHandle>();
+
+			Q.clear();
 			Q.add(actual); // add(Obj) adds to the end, remove(0) removes from the start.
 			
 			/* BFS ALGORITHM MODIFICATION: Start out with multiple "root" nodes, as exception handlers are starting points of top-level code, too. [why top-level? TODO: Refer to the special JustIce notion of subroutines.]*/
