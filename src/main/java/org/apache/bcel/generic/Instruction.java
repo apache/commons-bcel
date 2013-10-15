@@ -553,4 +553,12 @@ public abstract class Instruction implements Cloneable, Serializable {
     public boolean equals( Object that ) {
         return (that instanceof Instruction) ? cmp.equals(this, (Instruction) that) : false;
     }
+    
+    /** calculate the hashCode of this object
+     * @return the hashCode
+     */
+    @Override
+    public int hashCode() {
+        return opcode;
+    }
 }
