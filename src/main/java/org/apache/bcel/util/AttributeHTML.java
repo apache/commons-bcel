@@ -203,7 +203,7 @@ final class AttributeHTML implements org.apache.bcel.Constants {
                 file.print("</UL>\n");
                 break;
             default: // Such as Unknown attribute or Deprecated
-                file.print("<P>" + attribute.toString());
+                file.print("<P>" + attribute);
         }
         file.println("</TD></TR>");
         file.flush();

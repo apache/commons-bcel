@@ -115,7 +115,7 @@ public class Subroutines{
 		 */
 		@Override
         public String toString(){
-			String ret = "Subroutine: Local variable is '"+localVariable+"', JSRs are '"+theJSRs+"', RET is '"+theRET+"', Instructions: '"+instructions.toString()+"'.";
+			String ret = "Subroutine: Local variable is '"+localVariable+"', JSRs are '"+theJSRs+"', RET is '"+theRET+"', Instructions: '"+instructions+"'.";
 			
 			ret += " Accessed local variable slots: '";
 			int[] alv = getAccessedLocalsIndices();
@@ -640,6 +640,6 @@ System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead c
 	 */
 	@Override
     public String toString(){
-		return "---\n"+subroutines.toString()+"\n---\n";
+		return "---\n"+subroutines+"\n---\n";
 	}
 }

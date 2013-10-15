@@ -172,7 +172,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
+		throw new AssertionViolatedException("Missing class: " + e, e);
 	    }
 	}
 
@@ -224,7 +224,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
+		throw new AssertionViolatedException("Missing class: " + e, e);
 	    }
 	}
 
@@ -279,7 +279,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
+		throw new AssertionViolatedException("Missing class: " + e, e);
 	    }
 
 	}
@@ -296,11 +296,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		// we only have to verify if the indices of the constants point
 		// to constants of the appropriate type and such.
 		JavaClass jc = Repository.lookupClass(myOwner.getClassName());
-		new CPESSC_Visitor(jc); // constructor implicitely traverses jc
+		new CPESSC_Visitor(jc); // constructor implicitly traverses jc
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
+		throw new AssertionViolatedException("Missing class: " + e, e);
 	    }
 	}
 
@@ -1043,7 +1043,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 		    } catch (ClassNotFoundException e) {
 			// FIXME: this might not be the best way to handle missing classes.
-			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
+			throw new AssertionViolatedException("Missing class: " + e, e);
 		    }
 
 		}// visitCode(Code) END
@@ -1102,7 +1102,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 		    } catch (ClassNotFoundException e) {
 			// FIXME: this might not be the best way to handle missing classes.
-			throw new AssertionViolatedException("Missing class: " + e.toString(), e);
+			throw new AssertionViolatedException("Missing class: " + e, e);
 		    }
 		}
 		// SYNTHETIC: see above
@@ -1200,7 +1200,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 	    } catch (ClassNotFoundException e) {
 		// FIXME: this might not be the best way to handle missing classes.
-		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
+		throw new AssertionViolatedException("Missing class: " + e, e);
 	    }
 	}
 

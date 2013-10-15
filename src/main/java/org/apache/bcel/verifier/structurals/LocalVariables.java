@@ -181,7 +181,7 @@ public class LocalVariables{
 		}
 	    } catch (ClassNotFoundException e) {
 		// FIXME: maybe not the best way to handle this
-		throw new AssertionViolatedException("Missing class: " + e.toString(), e);
+		throw new AssertionViolatedException("Missing class: " + e, e);
 	    }
 	}
 

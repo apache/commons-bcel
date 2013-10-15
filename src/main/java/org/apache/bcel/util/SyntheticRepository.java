@@ -123,7 +123,7 @@ public class SyntheticRepository implements Repository {
             return loadClass(_path.getInputStream(className), className);
         } catch (IOException e) {
             throw new ClassNotFoundException("Exception while looking for class " + className
-                    + ": " + e.toString(), e);
+                    + ": " + e, e);
         }
     }
 
@@ -178,7 +178,7 @@ public class SyntheticRepository implements Repository {
             }
         } catch (IOException e) {
             throw new ClassNotFoundException("Exception while looking for class " + className
-                    + ": " + e.toString(), e);
+                    + ": " + e, e);
         } finally {
             if (is != null){
                 try {
