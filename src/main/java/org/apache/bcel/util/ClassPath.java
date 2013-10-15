@@ -46,6 +46,15 @@ public class ClassPath implements Serializable {
 
     private static final long serialVersionUID = 2099441438483340671L;
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath();
+    
+    private static final FilenameFilter ARCHIVE_FILTER = new FilenameFilter() {
+
+        public boolean accept( File dir, String name ) {
+            name = name.toLowerCase(Locale.ENGLISH);
+            return name.endsWith(".zip") || name.endsWith(".jar");
+        }
+    };
+    
     private PathEntry[] paths;
     private String class_path;
     private ClassPath parent;
@@ -155,13 +164,7 @@ public class ClassPath implements Serializable {
         getPathComponents(ext_path, dirs);
         for (String d : dirs) {
             File ext_dir = new File(d);
-            String[] extensions = ext_dir.list(new FilenameFilter() {
-
-                public boolean accept( File dir, String name ) {
-                    name = name.toLowerCase(Locale.ENGLISH);
-                    return name.endsWith(".zip") || name.endsWith(".jar");
-                }
-            });
+            String[] extensions = ext_dir.list(ARCHIVE_FILTER);
             if (extensions != null) {
                 for (int i = 0; i < extensions.length; i++) {
                     list.add(ext_dir.getPath() + File.separatorChar + extensions[i]);
