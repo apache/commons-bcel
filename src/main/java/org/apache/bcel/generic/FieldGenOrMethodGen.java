@@ -19,6 +19,7 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.AccessFlags;
 import org.apache.bcel.classfile.Attribute;
@@ -145,12 +146,11 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
 
 
     @Override
-    public Object clone() {
+    public FieldGenOrMethodGen clone() {
         try {
-            return super.clone();
+            return (FieldGenOrMethodGen) super.clone();
         } catch (CloneNotSupportedException e) {
-            System.err.println(e);
-            return null;
+            throw new Error("Clone Not Supported"); // never happens
         }
     }
 }

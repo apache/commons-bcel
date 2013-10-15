@@ -21,6 +21,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.util.BCELComparator;
 
@@ -109,8 +110,12 @@ public abstract class Constant implements Cloneable, Node, Serializable {
 
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Constant clone() {
+        try {
+            return (Constant) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new Error("Clone Not Supported"); // never happens
+        }
     }
 
 

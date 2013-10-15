@@ -560,12 +560,11 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
 
     @Override
-    public Object clone() {
+    public ClassGen clone() {
         try {
-            return super.clone();
+            return (ClassGen) super.clone();
         } catch (CloneNotSupportedException e) {
-            System.err.println(e);
-            return null;
+            throw new Error("Clone Not Supported"); // never happens
         }
     }
 

@@ -177,12 +177,11 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable, j
 
 
     @Override
-    public Object clone() {
+    public CodeExceptionGen clone() {
         try {
-            return super.clone();
+            return (CodeExceptionGen) super.clone();
         } catch (CloneNotSupportedException e) {
-            System.err.println(e);
-            return null;
+            throw new Error("Clone Not Supported"); // never happens
         }
     }
 }
