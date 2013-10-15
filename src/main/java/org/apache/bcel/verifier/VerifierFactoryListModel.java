@@ -33,7 +33,7 @@ import javax.swing.event.ListDataListener;
  * @author Enver Haase
  */
 public class VerifierFactoryListModel implements org.apache.bcel.verifier.VerifierFactoryObserver,
-        javax.swing.ListModel<String> {
+        javax.swing.ListModel {
 
     private List<ListDataListener> listeners = new ArrayList<ListDataListener>();
     private Set<String> cache = new TreeSet<String>();
