@@ -365,7 +365,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
      * Find all target addresses in code, so that they can be marked
      * with &lt;A NAME = ...&gt;. Target addresses are kept in an BitSet object.
      */
-    private final void findGotos( ByteSequence bytes, Method method, Code code ) throws IOException {
+    private final void findGotos( ByteSequence bytes, Code code ) throws IOException {
         int index;
         goto_set = new BitSet(bytes.available());
         int opcode;
@@ -535,7 +535,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
             // Print the byte code
             ByteSequence stream = new ByteSequence(code);
             stream.mark(stream.available());
-            findGotos(stream, method, c);
+            findGotos(stream, c);
             stream.reset();
             file.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Byte<BR>offset</TH>"
                     + "<TH ALIGN=LEFT>Instruction</TH><TH ALIGN=LEFT>Argument</TH>");
