@@ -70,7 +70,7 @@ public final class ConstantUtf8 extends Constant {
         considered++;
         if (cache == null)  {
             cache = new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
-                protected boolean removeEldestEntry(Map.Entry eldest) {
+                protected boolean removeEldestEntry(Map.Entry<String, ConstantUtf8> eldest) {
                      return size() > MAX_CACHE_ENTRIES;
                 }
             };

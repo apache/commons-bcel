@@ -58,7 +58,7 @@ public class VerifierAppFrame extends JFrame {
     JPanel jPanel2 = new JPanel();
     JSplitPane jSplitPane2 = new JSplitPane();
     JPanel jPanel3 = new JPanel();
-    JList classNamesJList = new JList();
+    JList<String> classNamesJList = new JList<String>();
     GridLayout gridLayout1 = new GridLayout();
     JPanel messagesPanel = new JPanel();
     GridLayout gridLayout2 = new GridLayout();
@@ -83,8 +83,8 @@ public class VerifierAppFrame extends JFrame {
     JScrollPane jScrollPane5 = new JScrollPane();
     JScrollPane jScrollPane6 = new JScrollPane();
     JScrollPane jScrollPane7 = new JScrollPane();
-    JList pass3aJList = new JList();
-    JList pass3bJList = new JList();
+    JList<String> pass3aJList = new JList<String>();
+    JList<String> pass3bJList = new JList<String>();
     JTextPane pass3aTextPane = new JTextPane();
     JTextPane pass3bTextPane = new JTextPane();
     JMenu jMenu2 = new JMenu();
@@ -257,10 +257,10 @@ public class VerifierAppFrame extends JFrame {
             pass2TextPane.setText("");
             pass2TextPane.setBackground(Color.yellow);
             pass3aTextPane.setText("");
-            pass3aJList.setListData(new Object[0]);
+            pass3aJList.setListData(new String[0]);
             pass3aTextPane.setBackground(Color.yellow);
             pass3bTextPane.setText("");
-            pass3bJList.setListData(new Object[0]);
+            pass3bJList.setListData(new String[0]);
             pass3bTextPane.setBackground(Color.yellow);
         } else { // Must be VERIFIED_OK, Pass 1 does not know VERIFIED_NOTYET
             pass1TextPane.setBackground(Color.green);
@@ -271,10 +271,10 @@ public class VerifierAppFrame extends JFrame {
                 pass2TextPane.setBackground(Color.red);
                 pass3aTextPane.setText("");
                 pass3aTextPane.setBackground(Color.yellow);
-                pass3aJList.setListData(new Object[0]);
+                pass3aJList.setListData(new String[0]);
                 pass3bTextPane.setText("");
                 pass3bTextPane.setBackground(Color.yellow);
-                pass3bJList.setListData(new Object[0]);
+                pass3bJList.setListData(new String[0]);
             } else { // must be Verified_OK, because Pass1 was OK (cannot be Verified_NOTYET).
                 pass2TextPane.setText(vr.getMessage());
                 pass2TextPane.setBackground(Color.green);
