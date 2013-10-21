@@ -33,8 +33,8 @@
     <artifactId>bcel</artifactId>
     <packaging>jar</packaging>
     <version>6.0-SNAPSHOT</version>
-    <name>Commons BCEL</name>
-    <description>Bytecode Engineering Library</description>
+    <name>Apache Commons BCEL</name>
+    <description>Apache Commons Bytecode Engineering Library</description>
 
     <url>http://commons.apache.org/proper/commons-bcel</url>
     <inceptionYear>2004</inceptionYear>
