@@ -26,7 +26,7 @@
     <parent>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-parent</artifactId>
-        <version>26</version>
+        <version>32</version>
     </parent>
 
     <groupId>org.apache.bcel</groupId>
@@ -42,8 +42,8 @@
     <properties>
       <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-      <maven.compile.source>1.5</maven.compile.source>
-      <maven.compile.target>1.5</maven.compile.target>
+      <maven.compiler.source>1.5</maven.compiler.source>
+      <maven.compiler.target>1.5</maven.compiler.target>
       <commons.componentid>bcel</commons.componentid>
       <commons.release.version>6.0</commons.release.version>
       <commons.release.desc>(Java 5.0+)</commons.release.desc>
