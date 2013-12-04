@@ -86,7 +86,8 @@ public class ClassPath implements Serializable {
                         }
                     }
                 } catch (IOException e) {
-                    System.err.println("CLASSPATH component " + file + ": " + e);
+                    if (path.endsWith(".zip") || path.endsWith(".jar"))
+                        System.err.println("CLASSPATH component " + file + ": " + e);
                 }
             }
         }

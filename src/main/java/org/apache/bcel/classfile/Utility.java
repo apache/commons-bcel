@@ -347,8 +347,11 @@ public abstract class Utility {
             case Constants.INVOKESTATIC:
             case Constants.INVOKEVIRTUAL:
                 index = bytes.readUnsignedShort();
+                Constant c = constant_pool.getConstant(index);
+                if (c.getTag() != Constants.CONSTANT_Methodref && c.getTag() != Constants.CONSTANT_InterfaceMethodref)
+                	    throw new ClassFormatException("Expected class `CONSTANT_Methodref' or 'CONSTANT_InterfaceMethodref' at index " + index + " and got " +c);
                 buf.append("\t").append(
-                        constant_pool.constantToString(index, Constants.CONSTANT_Methodref))
+                        constant_pool.constantToString(c))
                         .append((verbose ? " (" + index + ")" : ""));
                 break;
             case Constants.INVOKEINTERFACE:
@@ -359,6 +362,16 @@ public abstract class Utility {
                                 .constantToString(index, Constants.CONSTANT_InterfaceMethodref))
                         .append(verbose ? " (" + index + ")\t" : "").append(nargs).append("\t")
                         .append(bytes.readUnsignedByte()); // Last byte is a reserved space
+                break;
+            case Constants.INVOKEDYNAMIC:
+                index = bytes.readUnsignedShort();
+                int ignored = bytes.readUnsignedShort(); 
+                ConstantInvokeDynamic id = (ConstantInvokeDynamic) constant_pool.getConstant(index, Constants.CONSTANT_InvokeDynamic);
+                buf.append("\t").append("<dyn>.").append(
+                        constant_pool
+                                .constantToString(id.getNameAndTypeIndex(), Constants.CONSTANT_NameAndType));
+                if (verbose)
+                        buf.append(" (" + index + "/" + id.getNameAndTypeIndex() +")");
                 break;
             /* Operands are references to items in constant pool
              */

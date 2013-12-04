@@ -23,7 +23,7 @@ package org.apache.bcel.generic;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public abstract class EmptyVisitor implements Visitor {
+public abstract class EmptyVisitor implements VisitorSupportsInvokeDynamic {
 
     public void visitStackInstruction( StackInstruction obj ) {
     }
@@ -743,4 +743,8 @@ public abstract class EmptyVisitor implements Visitor {
 
     public void visitBREAKPOINT( BREAKPOINT obj ) {
     }
+
+
+	public void visitINVOKEDYNAMIC(INVOKEDYNAMIC obj) {
+	}
 }

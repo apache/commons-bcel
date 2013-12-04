@@ -20,6 +20,7 @@ package org.apache.bcel.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.ByteSequence;
@@ -406,6 +407,9 @@ public abstract class Instruction implements Cloneable, Serializable {
 				break;
 			case Constants.INVOKEINTERFACE:
 				obj = new INVOKEINTERFACE();
+				break;
+			case Constants.INVOKEDYNAMIC:
+				obj = new INVOKEDYNAMIC();
 				break;
 			case Constants.NEW:
 				obj = new NEW();

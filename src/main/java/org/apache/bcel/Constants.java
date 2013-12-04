@@ -281,8 +281,8 @@ public interface Constants {
     "CONSTANT_Float", "CONSTANT_Long", "CONSTANT_Double",
     "CONSTANT_Class", "CONSTANT_String", "CONSTANT_Fieldref",
     "CONSTANT_Methodref", "CONSTANT_InterfaceMethodref",
-    "CONSTANT_NameAndType", "CONSTANT_MethodHandle",
-    "CONSTANT_MethodType", "CONSTANT_InvokeDynamic" };
+    "CONSTANT_NameAndType", "", "", "CONSTANT_MethodHandle",
+    "CONSTANT_MethodType", "", "CONSTANT_InvokeDynamic" };
 
   /** The name of the static initializer, also called &quot;class
    *  initialization method&quot; or &quot;interface initialization
@@ -1170,7 +1170,7 @@ public interface Constants {
     0/*dreturn*/, 0/*areturn*/, 0/*return*/,
     2/*getstatic*/, 2/*putstatic*/, 2/*getfield*/,
     2/*putfield*/, 2/*invokevirtual*/, 2/*invokespecial*/, 2/*invokestatic*/,
-    4/*invokeinterface*/, UNDEFINED, 2/*new*/,
+    4/*invokeinterface*/, 5/*invokedynamic*/, 2/*new*/,
     1/*newarray*/, 2/*anewarray*/,
     0/*arraylength*/, 0/*athrow*/, 2/*checkcast*/,
     2/*instanceof*/, 0/*monitorenter*/,
@@ -1243,7 +1243,7 @@ public interface Constants {
     {T_SHORT}/*putstatic*/, {T_SHORT}/*getfield*/,
     {T_SHORT}/*putfield*/, {T_SHORT}/*invokevirtual*/,
     {T_SHORT}/*invokespecial*/, {T_SHORT}/*invokestatic*/,
-    {T_SHORT, T_BYTE, T_BYTE}/*invokeinterface*/, {},
+    {T_SHORT, T_BYTE, T_BYTE}/*invokeinterface*/, {T_SHORT, T_BYTE, T_BYTE}/*invokedynamic*/,
     {T_SHORT}/*new*/, {T_BYTE}/*newarray*/,
     {T_SHORT}/*anewarray*/, {}/*arraylength*/, {}/*athrow*/,
     {T_SHORT}/*checkcast*/, {T_SHORT}/*instanceof*/,
@@ -1290,7 +1290,7 @@ public interface Constants {
     "tableswitch", "lookupswitch", "ireturn", "lreturn", "freturn",
     "dreturn", "areturn", "return", "getstatic", "putstatic", "getfield",
     "putfield", "invokevirtual", "invokespecial", "invokestatic",
-    "invokeinterface", ILLEGAL_OPCODE, "new", "newarray", "anewarray",
+    "invokeinterface", "invokedynamic", "new", "newarray", "anewarray",
     "arraylength", "athrow", "checkcast", "instanceof", "monitorenter",
     "monitorexit", "wide", "multianewarray", "ifnull", "ifnonnull",
     "goto_w", "jsr_w", "breakpoint", ILLEGAL_OPCODE, ILLEGAL_OPCODE,
@@ -1346,7 +1346,7 @@ public interface Constants {
     UNPREDICTABLE/*putstatic*/, 1/*getfield*/, UNPREDICTABLE/*putfield*/,
     UNPREDICTABLE/*invokevirtual*/, UNPREDICTABLE/*invokespecial*/,
     UNPREDICTABLE/*invokestatic*/,
-    UNPREDICTABLE/*invokeinterface*/, UNDEFINED, 0/*new*/, 1/*newarray*/, 1/*anewarray*/,
+    UNPREDICTABLE/*invokeinterface*/, UNPREDICTABLE/*invokedynamic*/, 0/*new*/, 1/*newarray*/, 1/*anewarray*/,
     1/*arraylength*/, 1/*athrow*/, 1/*checkcast*/, 1/*instanceof*/, 1/*monitorenter*/,
     1/*monitorexit*/, 0/*wide*/, UNPREDICTABLE/*multianewarray*/, 1/*ifnull*/, 1/*ifnonnull*/,
     0/*goto_w*/, 0/*jsr_w*/, 0/*breakpoint*/, UNDEFINED, UNDEFINED,
@@ -1402,7 +1402,7 @@ public interface Constants {
     0/*dreturn*/, 0/*areturn*/, 0/*return*/, UNPREDICTABLE/*getstatic*/, 0/*putstatic*/,
     UNPREDICTABLE/*getfield*/, 0/*putfield*/, UNPREDICTABLE/*invokevirtual*/,
     UNPREDICTABLE/*invokespecial*/, UNPREDICTABLE/*invokestatic*/,
-    UNPREDICTABLE/*invokeinterface*/, UNDEFINED, 1/*new*/, 1/*newarray*/, 1/*anewarray*/,
+    UNPREDICTABLE/*invokeinterface*/, UNPREDICTABLE/*invokedynamic*/, 1/*new*/, 1/*newarray*/, 1/*anewarray*/,
     1/*arraylength*/, 1/*athrow*/, 1/*checkcast*/, 1/*instanceof*/, 0/*monitorenter*/,
     0/*monitorexit*/, 0/*wide*/, 1/*multianewarray*/, 0/*ifnull*/, 0/*ifnonnull*/,
     0/*goto_w*/, 1/*jsr_w*/, 0/*breakpoint*/, UNDEFINED, UNDEFINED,
