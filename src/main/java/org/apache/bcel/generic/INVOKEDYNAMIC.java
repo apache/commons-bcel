@@ -38,7 +38,7 @@ import org.apache.bcel.util.ByteSequence;
  * @version $Id: InvokeInstruction.java 1152072 2011-07-29 01:54:05Z dbrosius $
  * @author  Bill Pugh
  */
-public class INVOKEDYNAMIC extends FieldOrMethod implements ExceptionThrower,
+public class INVOKEDYNAMIC extends NameSignatureInstruction implements ExceptionThrower,
         StackConsumer, StackProducer {
 
     private static final long serialVersionUID = 1L;
@@ -71,28 +71,22 @@ public class INVOKEDYNAMIC extends FieldOrMethod implements ExceptionThrower,
                 + tok.nextToken();
     }
 
-    public ConstantNameAndType getNameAndType( ConstantPoolGen cpg ) {
+    /** 
+     * Get the ConstantInvokeDynamic associated with this instruction
+     */
+    
+  	public ConstantInvokeDynamic getInvokeDynamic( ConstantPoolGen cpg ) {
+          ConstantPool cp = cpg.getConstantPool();
+          return (ConstantInvokeDynamic) cp.getConstant(index);
+       }
+      
+    @Override
+	public ConstantNameAndType getNameAndType( ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
-        ConstantInvokeDynamic id = (ConstantInvokeDynamic) cp.getConstant(index);
+        ConstantInvokeDynamic id = getInvokeDynamic(cpg);
         return (ConstantNameAndType) cp.getConstant(id.getNameAndTypeIndex());
      }
     
-    /** @return signature of referenced method/field.
-     */
-    public String getSignature( ConstantPoolGen cpg ) {
-    	    ConstantPool cp = cpg.getConstantPool();
-        ConstantNameAndType cnat = getNameAndType(cpg);
-        return ((ConstantUtf8) cp.getConstant(cnat.getSignatureIndex())).getBytes();
-    }
-
-    /** @return name of referenced method/field.
-     */
-    public String getName( ConstantPoolGen cpg ) {
-         ConstantPool cp = cpg.getConstantPool();
-         ConstantNameAndType cnat = getNameAndType(cpg);
-         return ((ConstantUtf8) cp.getConstant(cnat.getNameIndex())).getBytes();
-    }
-
     /**
      * Also works for instructions whose stack effect depends on the
      * constant pool entry they reference.
@@ -105,7 +99,6 @@ public class INVOKEDYNAMIC extends FieldOrMethod implements ExceptionThrower,
         return  Type.getArgumentTypesSize(signature);
     }
 
-
     /**
      * Also works for instructions whose stack effect depends on the
      * constant pool entry they reference.
@@ -113,8 +106,8 @@ public class INVOKEDYNAMIC extends FieldOrMethod implements ExceptionThrower,
      */
     @Override
     public int produceStack( ConstantPoolGen cpg ) {
-    	String signature = getSignature(cpg);
-    	return Type.getReturnTypeSize(signature);
+        String signature = getSignature(cpg);
+        return Type.getReturnTypeSize(signature);
     }
 
 
@@ -182,10 +175,10 @@ public class INVOKEDYNAMIC extends FieldOrMethod implements ExceptionThrower,
         v.visitTypedInstruction(this);
         v.visitStackConsumer(this);
         v.visitStackProducer(this);
-        v.visitLoadClass(this);
         v.visitCPInstruction(this);
-        v.visitFieldOrMethod(this);
-        if (v instanceof VisitorSupportsInvokeDynamic) 
+        if (v instanceof VisitorSupportsInvokeDynamic) {
+            ((VisitorSupportsInvokeDynamic)v).visitNameSignatureInstruction(this);
             ((VisitorSupportsInvokeDynamic)v).visitINVOKEDYNAMIC(this);
+        }
     }
 }

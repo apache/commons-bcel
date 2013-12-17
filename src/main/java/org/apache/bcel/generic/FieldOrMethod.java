@@ -18,9 +18,7 @@
 package org.apache.bcel.generic;
 
 import org.apache.bcel.classfile.ConstantCP;
-import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
-import org.apache.bcel.classfile.ConstantUtf8;
 
 /**
  * Super class for InvokeInstruction and FieldInstruction, since they have
@@ -29,7 +27,7 @@ import org.apache.bcel.classfile.ConstantUtf8;
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
+public abstract class FieldOrMethod extends NameSignatureInstruction implements LoadClass {
 
     private static final long serialVersionUID = 2036985877748835708L;
 
@@ -47,26 +45,6 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      */
     protected FieldOrMethod(short opcode, int index) {
         super(opcode, index);
-    }
-
-
-    /** @return signature of referenced method/field.
-     */
-    public String getSignature( ConstantPoolGen cpg ) {
-        ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(index);
-        ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
-        return ((ConstantUtf8) cp.getConstant(cnat.getSignatureIndex())).getBytes();
-    }
-
-
-    /** @return name of referenced method/field.
-     */
-    public String getName( ConstantPoolGen cpg ) {
-        ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(index);
-        ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
-        return ((ConstantUtf8) cp.getConstant(cnat.getNameIndex())).getBytes();
     }
 
 

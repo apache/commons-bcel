@@ -19,6 +19,7 @@ package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.ExceptionConstants;
 import org.apache.bcel.classfile.ConstantPool;
@@ -132,6 +133,8 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
         v.visitStackProducer(this);
         v.visitLoadClass(this);
         v.visitCPInstruction(this);
+        if (v instanceof VisitorSupportsInvokeDynamic) 
+            ((VisitorSupportsInvokeDynamic)v).visitNameSignatureInstruction(this);
         v.visitFieldOrMethod(this);
         v.visitInvokeInstruction(this);
         v.visitINVOKEINTERFACE(this);

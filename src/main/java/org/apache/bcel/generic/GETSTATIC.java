@@ -78,6 +78,8 @@ public class GETSTATIC extends FieldInstruction implements PushInstruction, Exce
         v.visitTypedInstruction(this);
         v.visitLoadClass(this);
         v.visitCPInstruction(this);
+        if (v instanceof VisitorSupportsInvokeDynamic) 
+            ((VisitorSupportsInvokeDynamic)v).visitNameSignatureInstruction(this);
         v.visitFieldOrMethod(this);
         v.visitFieldInstruction(this);
         v.visitGETSTATIC(this);
