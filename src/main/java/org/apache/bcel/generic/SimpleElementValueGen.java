@@ -91,10 +91,11 @@ public class SimpleElementValueGen extends ElementValueGen
 	public SimpleElementValueGen(int type, ConstantPoolGen cpGen, boolean value)
 	{
 		super(type, cpGen);
-		if (value)
-			idx = cpGen.addInteger(1);
-		else
-			idx = cpGen.addInteger(0);
+		if (value) {
+            idx = cpGen.addInteger(1);
+        } else {
+            idx = cpGen.addInteger(0);
+        }
 	}
 
 	public SimpleElementValueGen(int type, ConstantPoolGen cpGen, String value)
@@ -180,18 +181,20 @@ public class SimpleElementValueGen extends ElementValueGen
 
 	public String getValueString()
 	{
-		if (type != STRING)
-			throw new RuntimeException(
+		if (type != STRING) {
+            throw new RuntimeException(
 					"Dont call getValueString() on a non STRING ElementValue");
+        }
 		ConstantUtf8 c = (ConstantUtf8) cpGen.getConstant(idx);
 		return c.getBytes();
 	}
 
 	public int getValueInt()
 	{
-		if (type != PRIMITIVE_INT)
-			throw new RuntimeException(
+		if (type != PRIMITIVE_INT) {
+            throw new RuntimeException(
 					"Dont call getValueString() on a non STRING ElementValue");
+        }
 		ConstantInteger c = (ConstantInteger) cpGen.getConstant(idx);
 		return c.getBytes();
 	}
@@ -225,10 +228,11 @@ public class SimpleElementValueGen extends ElementValueGen
 			return Integer.toString(ch.getBytes());
 		case PRIMITIVE_BOOLEAN:
 			ConstantInteger bo = (ConstantInteger) cpGen.getConstant(idx);
-			if (bo.getBytes() == 0)
-				return "false";
-			else
-				return "true";
+			if (bo.getBytes() == 0) {
+                return "false";
+            } else {
+                return "true";
+            }
 		case STRING:
 			ConstantUtf8 cu8 = (ConstantUtf8) cpGen.getConstant(idx);
 			return cu8.getBytes();

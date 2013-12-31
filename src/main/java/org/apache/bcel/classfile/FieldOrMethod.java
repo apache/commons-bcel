@@ -213,8 +213,9 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         c.constant_pool    = constant_pool;
         c.attributes       = new Attribute[attributes_count];
 
-        for(int i=0; i < attributes_count; i++)
-          c.attributes[i] = attributes[i].copy(constant_pool);
+        for(int i=0; i < attributes_count; i++) {
+            c.attributes[i] = attributes[i].copy(constant_pool);
+        }
 
         return c;
     }

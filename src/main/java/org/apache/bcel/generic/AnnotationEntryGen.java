@@ -132,8 +132,9 @@ public class AnnotationEntryGen
 
 	public void addElementNameValuePair(ElementValuePairGen evp)
 	{
-		if (evs == null)
-			evs = new ArrayList<ElementValuePairGen>();
+		if (evs == null) {
+            evs = new ArrayList<ElementValuePairGen>();
+        }
 		evs.add(evp);
 	}
 
@@ -172,8 +173,9 @@ public class AnnotationEntryGen
 		for (int i = 0; i < evs.size(); i++)
 		{
 			s.append(evs.get(i));
-			if (i + 1 < evs.size())
-				s.append(",");
+			if (i + 1 < evs.size()) {
+                s.append(",");
+            }
 		}
 		s.append("}]");
 		return s.toString();
@@ -186,8 +188,9 @@ public class AnnotationEntryGen
 		for (int i = 0; i < evs.size(); i++)
 		{
 			s.append(evs.get(i));
-			if (i + 1 < evs.size())
-				s.append(",");
+			if (i + 1 < evs.size()) {
+                s.append(",");
+            }
 		}
 		s.append(")");
 		return s.toString();

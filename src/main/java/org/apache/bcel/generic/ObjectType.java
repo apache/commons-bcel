@@ -40,7 +40,7 @@ public class ObjectType extends ReferenceType {
     private static HashMap<String, ObjectType> cache;
 
     public synchronized static ObjectType getInstance(String class_name) {
-        if (cache == null)
+        if (cache == null) {
             cache = new LinkedHashMap<String, ObjectType>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
 
 
@@ -49,8 +49,11 @@ public class ObjectType extends ReferenceType {
             }
 
         };
+        }
         ObjectType result = cache.get(class_name);
-        if (result != null) return result;
+        if (result != null) {
+            return result;
+        }
         result = new ObjectType(class_name);
         cache.put(class_name, result);
         return result;

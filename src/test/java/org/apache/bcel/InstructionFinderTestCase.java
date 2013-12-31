@@ -42,8 +42,9 @@ public class InstructionFinderTestCase extends AbstractTestCase
 			}
 		}
 		
-		if (searchM == null)
-			throw new Exception("search method not found");
+		if (searchM == null) {
+            throw new Exception("search method not found");
+        }
 		
 		byte[] bytes = searchM.getCode().getCode();
 		InstructionList il = new InstructionList(bytes);

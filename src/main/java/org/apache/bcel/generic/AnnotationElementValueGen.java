@@ -37,9 +37,10 @@ public class AnnotationElementValueGen extends ElementValueGen
 			ConstantPoolGen cpool)
 	{
 		super(type, cpool);
-		if (type != ANNOTATION)
-			throw new RuntimeException(
+		if (type != ANNOTATION) {
+            throw new RuntimeException(
 					"Only element values of type annotation can be built with this ctor - type specified: " + type);
+        }
 		this.a = annotation;
 	}
 

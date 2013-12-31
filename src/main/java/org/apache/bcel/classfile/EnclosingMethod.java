@@ -81,7 +81,9 @@ public class EnclosingMethod extends Attribute {
 	}
 	
 	public final ConstantNameAndType getEnclosingMethod() {
-		if (methodIndex == 0) return null;
+		if (methodIndex == 0) {
+            return null;
+        }
 		ConstantNameAndType nat = 
 			(ConstantNameAndType)constant_pool.getConstant(methodIndex,Constants.CONSTANT_NameAndType);
 		return nat;

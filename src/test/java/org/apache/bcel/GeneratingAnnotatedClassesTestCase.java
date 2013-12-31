@@ -367,8 +367,9 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
             if (element.getNameString().equals("dval"))
             {
                 if (((SimpleElementValueGen) element.getValue())
-                        .stringifyValue().equals("33.4"))
+                        .stringifyValue().equals("33.4")) {
                     found = true;
+                }
             }
         }
         assertTrue("Did not find double annotation value with value 33.4",

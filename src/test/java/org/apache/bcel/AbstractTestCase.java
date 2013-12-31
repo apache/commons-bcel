@@ -93,10 +93,12 @@ public abstract class AbstractTestCase extends TestCase
 		Attribute[] all = clazz.getAttributes();
 		List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
 		for (Attribute element : all) {
-			if (verbose)
-				System.err.println("Attribute: " + element.getName());
-			if (element.getName().equals(name))
-				chosenAttrsList.add(element);
+			if (verbose) {
+                System.err.println("Attribute: " + element.getName());
+            }
+			if (element.getName().equals(name)) {
+                chosenAttrsList.add(element);
+            }
 		}
 		return chosenAttrsList.toArray(new Attribute[] {});
 	}
@@ -105,10 +107,12 @@ public abstract class AbstractTestCase extends TestCase
 	{
 		List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
 		for (Attribute element : all) {
-			if (verbose)
-				System.err.println("Attribute: " + element.getName());
-			if (element.getName().equals(name))
-				chosenAttrsList.add(element);
+			if (verbose) {
+                System.err.println("Attribute: " + element.getName());
+            }
+			if (element.getName().equals(name)) {
+                chosenAttrsList.add(element);
+            }
 		}
 		assertTrue("Should be one match: " + chosenAttrsList.size(),
 				chosenAttrsList.size() == 1);
@@ -123,8 +127,9 @@ public abstract class AbstractTestCase extends TestCase
 		{
 			Attribute attr = as[i];
 			result.append(attr.toString());
-			if (i + 1 < as.length)
-				result.append(",");
+			if (i + 1 < as.length) {
+                result.append(",");
+            }
 		}
 		result.append("]");
 		return result.toString();
@@ -138,8 +143,9 @@ public abstract class AbstractTestCase extends TestCase
 		{
 			AnnotationEntry annotation = as[i];
 			result.append(annotation.toShortString());
-			if (i + 1 < as.length)
-				result.append(",");
+			if (i + 1 < as.length) {
+                result.append(",");
+            }
 		}
 		result.append("]");
 		return result.toString();
@@ -153,8 +159,9 @@ public abstract class AbstractTestCase extends TestCase
 		{
 			AnnotationEntryGen annotation = as[i];
 			result.append(annotation.toShortString());
-			if (i + 1 < as.length)
-				result.append(",");
+			if (i + 1 < as.length) {
+                result.append(",");
+            }
 		}
 		result.append("]");
 		return result.toString();

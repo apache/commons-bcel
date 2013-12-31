@@ -612,7 +612,9 @@ public class MethodGen extends FieldGenOrMethodGen {
       }
       
       public void addParameterAnnotationsAsAttribute(ConstantPoolGen cp) {
-      	if (!hasParameterAnnotations) return;
+      	if (!hasParameterAnnotations) {
+            return;
+        }
       	Attribute[] attrs = Utility.getParameterAnnotationAttributes(cp,param_annotations);
       	if (attrs!=null) {
           for (Attribute attr : attrs) {
@@ -1086,7 +1088,9 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public List<AnnotationEntryGen> getAnnotationsOnParameter(int i) {
     	ensureExistingParameterAnnotationsUnpacked();
-    	if (!hasParameterAnnotations || i>arg_types.length) return null;
+    	if (!hasParameterAnnotations || i>arg_types.length) {
+            return null;
+        }
     	return param_annotations[i];
     }
     
@@ -1100,8 +1104,9 @@ public class MethodGen extends FieldGenOrMethodGen {
 	 */
 	private void ensureExistingParameterAnnotationsUnpacked()
 	{
-		if (haveUnpackedParameterAnnotations)
-			return;
+		if (haveUnpackedParameterAnnotations) {
+            return;
+        }
 		// Find attributes that contain parameter annotation data
 		Attribute[] attrs = getAttributes();
 		ParameterAnnotations paramAnnVisAttr = null;
@@ -1113,15 +1118,17 @@ public class MethodGen extends FieldGenOrMethodGen {
 				if (!hasParameterAnnotations)
 				{
 					param_annotations = new List[arg_types.length];
-					for (int j = 0; j < arg_types.length; j++)
-						param_annotations[j] = new ArrayList<AnnotationEntryGen>();
+					for (int j = 0; j < arg_types.length; j++) {
+                        param_annotations[j] = new ArrayList<AnnotationEntryGen>();
+                    }
 				}
 				hasParameterAnnotations = true;
 				ParameterAnnotations rpa = (ParameterAnnotations) attribute;
-				if (rpa instanceof RuntimeVisibleParameterAnnotations)
-					paramAnnVisAttr = rpa;
-				else
-					paramAnnInvisAttr = rpa;
+				if (rpa instanceof RuntimeVisibleParameterAnnotations) {
+                    paramAnnVisAttr = rpa;
+                } else {
+                    paramAnnInvisAttr = rpa;
+                }
 				for (int j = 0; j < arg_types.length; j++)
 				{
 					// This returns Annotation[] ...
@@ -1134,10 +1141,12 @@ public class MethodGen extends FieldGenOrMethodGen {
 				}
 			}
 		}
-		if (paramAnnVisAttr != null)
-			removeAttribute(paramAnnVisAttr);
-		if (paramAnnInvisAttr != null)
-			removeAttribute(paramAnnInvisAttr);
+		if (paramAnnVisAttr != null) {
+            removeAttribute(paramAnnVisAttr);
+        }
+		if (paramAnnInvisAttr != null) {
+            removeAttribute(paramAnnInvisAttr);
+        }
 		haveUnpackedParameterAnnotations = true;
 	}
 

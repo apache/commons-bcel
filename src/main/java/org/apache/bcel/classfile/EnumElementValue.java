@@ -32,9 +32,10 @@ public class EnumElementValue extends ElementValue
 			ConstantPool cpool)
 	{
 		super(type, cpool);
-		if (type != ENUM_CONSTANT)
-			throw new RuntimeException(
+		if (type != ENUM_CONSTANT) {
+            throw new RuntimeException(
 					"Only element values of type enum can be built with this ctor - type specified: " + type);
+        }
 		this.typeIdx = typeIdx;
 		this.valueIdx = valueIdx;
 	}

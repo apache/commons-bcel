@@ -1005,8 +1005,9 @@ public class InstructionList implements Serializable {
 
 
             public InstructionHandle next() throws NoSuchElementException {
-            	if (ih == null)
-            		throw new NoSuchElementException();
+            	if (ih == null) {
+                    throw new NoSuchElementException();
+                }
                 InstructionHandle i = ih;
                 ih = ih.next;
                 return i;

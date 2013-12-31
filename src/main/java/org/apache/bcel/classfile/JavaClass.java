@@ -345,8 +345,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
       		for (Attribute attribute : attrs) {
     			if (attribute instanceof Annotations) {				
     				Annotations runtimeAnnotations = (Annotations)attribute;
-    				for(int j = 0; j < runtimeAnnotations.getAnnotationEntries().length; j++)
-    					accumulatedAnnotations.add(runtimeAnnotations.getAnnotationEntries()[j]);
+    				for(int j = 0; j < runtimeAnnotations.getAnnotationEntries().length; j++) {
+                        accumulatedAnnotations.add(runtimeAnnotations.getAnnotationEntries()[j]);
+                    }
     			}
     		}
       		annotations = accumulatedAnnotations.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
@@ -649,8 +650,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         AnnotationEntry[] annotations = getAnnotationEntries();
         if (annotations!=null && annotations.length>0) {
         	buf.append("\nAnnotation(s):\n");
-        	for (AnnotationEntry annotation : annotations)
+        	for (AnnotationEntry annotation : annotations) {
                 buf.append(indent(annotation));
+            }
         }
         if (fields.length > 0) {
             buf.append("\n").append(fields.length).append(" fields:\n");
@@ -726,7 +728,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
     
     private final void computeNestedTypeStatus() {
-  	  if (computedNestedTypeStatus) return;
+  	  if (computedNestedTypeStatus) {
+        return;
+    }
   	  for (Attribute attribute : this.attributes) {
   			if (attribute instanceof InnerClasses) {
   				InnerClass[] innerClasses = ((InnerClasses) attribute).getInnerClasses();

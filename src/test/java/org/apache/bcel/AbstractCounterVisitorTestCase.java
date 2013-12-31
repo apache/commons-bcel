@@ -37,8 +37,9 @@ public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
 
 	public CounterVisitor getVisitor()
 	{
-		if (visitor == null)
-			visitor = new CounterVisitor();
+		if (visitor == null) {
+            visitor = new CounterVisitor();
+        }
 		return visitor;
 	}
 

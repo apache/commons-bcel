@@ -70,8 +70,9 @@ private int             local_variable_type_table_length; // Table of local
     local_variable_type_table_length = (dis.readUnsignedShort());
     local_variable_type_table = new LocalVariable[local_variable_type_table_length];
 
-    for(int i=0; i < local_variable_type_table_length; i++)
-      local_variable_type_table[i] = new LocalVariable(dis, cpool);
+    for(int i=0; i < local_variable_type_table_length; i++) {
+        local_variable_type_table[i] = new LocalVariable(dis, cpool);
+    }
   }
 
   @Override
@@ -84,8 +85,9 @@ public final void dump(DataOutputStream file) throws IOException
   {
     super.dump(file);
     file.writeShort(local_variable_type_table_length);
-    for(int i=0; i < local_variable_type_table_length; i++)
-      local_variable_type_table[i].dump(file);
+    for(int i=0; i < local_variable_type_table_length; i++) {
+        local_variable_type_table[i].dump(file);
+    }
   }
 
   public final LocalVariable[] getLocalVariableTypeTable() {
@@ -93,9 +95,11 @@ public final void dump(DataOutputStream file) throws IOException
   }    
 
   public final LocalVariable getLocalVariable(int index) {
-    for(int i=0; i < local_variable_type_table_length; i++)
-      if(local_variable_type_table[i].getIndex() == index)
-	return local_variable_type_table[i];
+    for(int i=0; i < local_variable_type_table_length; i++) {
+        if(local_variable_type_table[i].getIndex() == index) {
+            return local_variable_type_table[i];
+        }
+    }
 
     return null;
   }
@@ -117,7 +121,9 @@ public final String toString() {
     for(int i=0; i < local_variable_type_table_length; i++) {
       buf.append(local_variable_type_table[i].toString());
 
-      if(i < local_variable_type_table_length - 1) buf.append('\n');
+      if(i < local_variable_type_table_length - 1) {
+        buf.append('\n');
+    }
     }
 
     return buf.toString();
@@ -131,8 +137,9 @@ public Attribute copy(ConstantPool constant_pool) {
     LocalVariableTypeTable c = (LocalVariableTypeTable)clone();
 
     c.local_variable_type_table = new LocalVariable[local_variable_type_table_length];
-    for(int i=0; i < local_variable_type_table_length; i++)
-      c.local_variable_type_table[i] = local_variable_type_table[i].copy();
+    for(int i=0; i < local_variable_type_table_length; i++) {
+        c.local_variable_type_table[i] = local_variable_type_table[i].copy();
+    }
 
     c.constant_pool = constant_pool;
     return c;

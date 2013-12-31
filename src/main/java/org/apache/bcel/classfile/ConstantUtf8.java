@@ -52,7 +52,7 @@ public final class ConstantUtf8 extends Constant {
     final static boolean BCEL_DONT_CACHE = Boolean.getBoolean("bcel.dontCache");
 
     static {
-        if (BCEL_STATISTICS)
+        if (BCEL_STATISTICS) {
             Runtime.getRuntime().addShutdownHook(new Thread() {
                 public void run() {
                     System.err.println("Cache hit " + hits + "/" + considered +", "
@@ -60,6 +60,7 @@ public final class ConstantUtf8 extends Constant {
                     System.err.println("Total of " + created + " ConstantUtf8 objects created");
                 }
             });
+        }
     }
 
     public static synchronized ConstantUtf8 getCachedInstance(String s) {

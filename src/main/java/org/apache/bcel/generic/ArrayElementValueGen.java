@@ -41,9 +41,10 @@ public class ArrayElementValueGen extends ElementValueGen
 			ConstantPoolGen cpool)
 	{
 		super(type, cpool);
-		if (type != ARRAY)
-			throw new RuntimeException(
+		if (type != ARRAY) {
+            throw new RuntimeException(
 					"Only element values of type array can be built with this ctor - type specified: " + type);
+        }
 		this.evalues = new ArrayList<ElementValueGen>();
 		for (ElementValue datum : datums) {
 			evalues.add(ElementValueGen.copy(datum, cpool, true));

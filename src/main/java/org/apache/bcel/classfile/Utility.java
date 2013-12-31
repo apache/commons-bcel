@@ -348,8 +348,9 @@ public abstract class Utility {
             case Constants.INVOKEVIRTUAL:
                 index = bytes.readUnsignedShort();
                 Constant c = constant_pool.getConstant(index);
-                if (c.getTag() != Constants.CONSTANT_Methodref && c.getTag() != Constants.CONSTANT_InterfaceMethodref)
-                	    throw new ClassFormatException("Expected class `CONSTANT_Methodref' or 'CONSTANT_InterfaceMethodref' at index " + index + " and got " +c);
+                if (c.getTag() != Constants.CONSTANT_Methodref && c.getTag() != Constants.CONSTANT_InterfaceMethodref) {
+                    throw new ClassFormatException("Expected class `CONSTANT_Methodref' or 'CONSTANT_InterfaceMethodref' at index " + index + " and got " +c);
+                }
                 buf.append("\t").append(
                         constant_pool.constantToString(c))
                         .append((verbose ? " (" + index + ")" : ""));
@@ -370,8 +371,9 @@ public abstract class Utility {
                 buf.append("\t").append("<dyn>.").append(
                         constant_pool
                                 .constantToString(id.getNameAndTypeIndex(), Constants.CONSTANT_NameAndType));
-                if (verbose)
-                        buf.append(" (" + index + "/" + id.getNameAndTypeIndex() +")");
+                if (verbose) {
+                    buf.append(" (" + index + "/" + id.getNameAndTypeIndex() +")");
+                }
                 break;
             /* Operands are references to items in constant pool
              */
@@ -1398,7 +1400,9 @@ public abstract class Utility {
      */
     public static Attribute[] getAnnotationAttributes(ConstantPoolGen cp,List<AnnotationEntryGen> vec) {
     	
-    	if (vec.isEmpty()) return new Attribute[0];
+    	if (vec.isEmpty()) {
+            return new Attribute[0];
+        }
     	
     	try {
     		int countVisible   = 0;
@@ -1406,10 +1410,11 @@ public abstract class Utility {
     	
     		//  put the annotations in the right output stream
     		for (AnnotationEntryGen a : vec) {
-    			if (a.isRuntimeVisible()) 
-    			    countVisible++;
-    			else			   
-    			    countInvisible++;
+    			if (a.isRuntimeVisible()) {
+                    countVisible++;
+                } else {
+                    countInvisible++;
+                }
     		}
     	
     		ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
@@ -1422,10 +1427,11 @@ public abstract class Utility {
 
     		// put the annotations in the right output stream
     		for (AnnotationEntryGen a : vec) {
-    			if (a.isRuntimeVisible()) 
-    			    a.dump(rvaDos);
-    			else			   
-    			    a.dump(riaDos);
+    			if (a.isRuntimeVisible()) {
+                    a.dump(rvaDos);
+                } else {
+                    a.dump(riaDos);
+                }
     		}
 
       rvaDos.close();
@@ -1437,8 +1443,12 @@ public abstract class Utility {
       int rvaIndex = -1;
       int riaIndex = -1;
       
-      if (rvaData.length>2) rvaIndex = cp.addUtf8("RuntimeVisibleAnnotations");
-      if (riaData.length>2) riaIndex = cp.addUtf8("RuntimeInvisibleAnnotations");
+      if (rvaData.length>2) {
+        rvaIndex = cp.addUtf8("RuntimeVisibleAnnotations");
+    }
+      if (riaData.length>2) {
+        riaIndex = cp.addUtf8("RuntimeInvisibleAnnotations");
+    }
 
     	List<Attribute> newAttributes = new ArrayList<Attribute>();
     	if (rvaData.length>2) {
@@ -1496,8 +1506,9 @@ public abstract class Utility {
 				rvaDos.writeShort(visCount[i]);
 				if (visCount[i] > 0) {
 					for (AnnotationEntryGen element : vec[i]) {
-						if (element.isRuntimeVisible())
-							element.dump(rvaDos);
+						if (element.isRuntimeVisible()) {
+                            element.dump(rvaDos);
+                        }
 					}
 				}
 			}
@@ -1510,8 +1521,9 @@ public abstract class Utility {
 				riaDos.writeShort(invisCount[i]);
 				if (invisCount[i] > 0) {
 					for (AnnotationEntryGen element : vec[i]) {
-						if (!element.isRuntimeVisible())
-							element.dump(riaDos);
+						if (!element.isRuntimeVisible()) {
+                            element.dump(riaDos);
+                        }
 					}
 				}
 			}
@@ -1520,10 +1532,12 @@ public abstract class Utility {
 			byte[] riaData = riaBytes.toByteArray();
 			int rvaIndex = -1;
 			int riaIndex = -1;
-			if (totalVisCount > 0)
-				rvaIndex = cp.addUtf8("RuntimeVisibleParameterAnnotations");
-			if (totalInvisCount > 0)
-				riaIndex = cp.addUtf8("RuntimeInvisibleParameterAnnotations");
+			if (totalVisCount > 0) {
+                rvaIndex = cp.addUtf8("RuntimeVisibleParameterAnnotations");
+            }
+			if (totalInvisCount > 0) {
+                riaIndex = cp.addUtf8("RuntimeInvisibleParameterAnnotations");
+            }
 			List<Attribute> newAttributes = new ArrayList<Attribute>();
 			if (totalVisCount > 0) {
 				newAttributes

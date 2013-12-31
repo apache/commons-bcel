@@ -86,8 +86,9 @@ public class ClassPath implements Serializable {
                         }
                     }
                 } catch (IOException e) {
-                    if (path.endsWith(".zip") || path.endsWith(".jar"))
+                    if (path.endsWith(".zip") || path.endsWith(".jar")) {
                         System.err.println("CLASSPATH component " + file + ": " + e);
+                    }
                 }
             }
         }
@@ -506,8 +507,9 @@ public class ClassPath implements Serializable {
         ClassFile getClassFile( String name, String suffix ) throws IOException {
             final ZipEntry entry = zip.getEntry(name.replace('.', '/') + suffix);
             
-            if (entry == null)
-            	return null;
+            if (entry == null) {
+                return null;
+            }
             
             return new ClassFile() {
 

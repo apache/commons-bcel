@@ -72,8 +72,9 @@ public class INVOKESTATIC extends InvokeInstruction {
         v.visitStackProducer(this);
         v.visitLoadClass(this);
         v.visitCPInstruction(this);
-        if (v instanceof VisitorSupportsInvokeDynamic) 
+        if (v instanceof VisitorSupportsInvokeDynamic) {
             ((VisitorSupportsInvokeDynamic)v).visitNameSignatureInstruction(this);
+        }
         v.visitFieldOrMethod(this);
         v.visitInvokeInstruction(this);
         v.visitINVOKESTATIC(this);
