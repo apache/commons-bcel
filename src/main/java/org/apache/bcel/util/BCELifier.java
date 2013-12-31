@@ -108,8 +108,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         if (fields.length > 0) {
             _out.println("  private void createFields() {");
             _out.println("    FieldGen field;");
-            for (int i = 0; i < fields.length; i++) {
-                fields[i].accept(this);
+            for (Field field : fields) {
+                field.accept(this);
             }
             _out.println("  }");
             _out.println();

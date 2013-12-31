@@ -76,8 +76,8 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
         int index;
         int nargs = 0;
         String signature = Type.getMethodSignature(ret_type, arg_types);
-        for (int i = 0; i < arg_types.length; i++) {
-            nargs += arg_types[i].getSize();
+        for (Type arg_type : arg_types) {
+            nargs += arg_type.getSize();
         }
         if (kind == Constants.INVOKEINTERFACE) {
             index = cp.addInterfaceMethodref(class_name, name, signature);

@@ -111,9 +111,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
 			String AnnotationEntryElementValue)
 	{
 		Field[] fields = clazz.getFields();
-		for (int i = 0; i < fields.length; i++)
-		{
-			Field f = fields[i];
+		for (Field f : fields) {
 			AnnotationEntry[] fieldAnnotationEntrys = f.getAnnotationEntries();
 			if (f.getName().equals(fieldname))
 			{

@@ -63,8 +63,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     Select(short opcode, int[] match, InstructionHandle[] targets, InstructionHandle defaultTarget) {
         super(opcode, defaultTarget);
         this.targets = targets;
-        for (int i = 0; i < targets.length; i++) {
-            notifyTarget(null, targets[i], this);
+        for (InstructionHandle target2 : targets) {
+            notifyTarget(null, target2, this);
         }
         this.match = match;
         if ((match_length = match.length) != targets.length) {
@@ -190,8 +190,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
         if (target == ih) {
             return true;
         }
-        for (int i = 0; i < targets.length; i++) {
-            if (targets[i] == ih) {
+        for (InstructionHandle target2 : targets) {
+            if (target2 == ih) {
                 return true;
             }
         }
@@ -215,8 +215,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     @Override
     void dispose() {
         super.dispose();
-        for (int i = 0; i < targets.length; i++) {
-            targets[i].removeTargeter(this);
+        for (InstructionHandle target2 : targets) {
+            target2.removeTargeter(this);
         }
     }
 

@@ -52,8 +52,8 @@ final class MethodHTML implements org.apache.bcel.Constants {
         file.println("<HTML><BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
         file.println("<TR><TH ALIGN=LEFT>Access&nbsp;flags</TH><TH ALIGN=LEFT>Type</TH>"
                 + "<TH ALIGN=LEFT>Field&nbsp;name</TH></TR>");
-        for (int i = 0; i < fields.length; i++) {
-            writeField(fields[i]);
+        for (Field field : fields) {
+            writeField(field);
         }
         file.println("</TABLE>");
         file.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Access&nbsp;flags</TH>"

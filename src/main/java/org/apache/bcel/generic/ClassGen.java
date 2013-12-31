@@ -99,8 +99,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
         class_name_index = cp.addClass(class_name);
         superclass_name_index = cp.addClass(super_class_name);
         if (interfaces != null) {
-            for (int i = 0; i < interfaces.length; i++) {
-                addInterface(interfaces[i]);
+            for (String interface1 : interfaces) {
+                addInterface(interface1);
             }
         }
     }
@@ -141,22 +141,22 @@ public class ClassGen extends AccessFlags implements Cloneable {
         Method[] methods = clazz.getMethods();
         Field[] fields = clazz.getFields();
         String[] interfaces = clazz.getInterfaceNames();
-        for (int i = 0; i < interfaces.length; i++) {
-            addInterface(interfaces[i]);
+        for (String interface1 : interfaces) {
+            addInterface(interface1);
         }
         for (int i = 0; i < attributes.length; i++) {
         	if (!(attributes[i] instanceof Annotations)) {
         		addAttribute(attributes[i]);
         	}
         }
-        for(int i=0; i < annotations.length; i++) {
-            addAnnotationEntry(annotations[i]);
+        for (AnnotationEntryGen annotation : annotations) {
+            addAnnotationEntry(annotation);
         }
-        for (int i = 0; i < methods.length; i++) {
-            addMethod(methods[i]);
+        for (Method method : methods) {
+            addMethod(method);
         }
-        for (int i = 0; i < fields.length; i++) {
-            addField(fields[i]);
+        for (Field field : fields) {
+            addField(field);
         }
     }
     
@@ -166,16 +166,12 @@ public class ClassGen extends AccessFlags implements Cloneable {
 	private AnnotationEntryGen[] unpackAnnotations(Attribute[] attrs)
 	{
 		List<AnnotationEntryGen> annotationGenObjs = new ArrayList<AnnotationEntryGen>();
-		for (int i = 0; i < attrs.length; i++)
-		{
-			Attribute attr = attrs[i];
+		for (Attribute attr : attrs) {
 			if (attr instanceof RuntimeVisibleAnnotations)
 			{
 				RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
 				AnnotationEntry[] annos = rva.getAnnotationEntries();
-				for (int j = 0; j < annos.length; j++)
-				{
-					AnnotationEntry a = annos[j];
+				for (AnnotationEntry a : annos) {
 					annotationGenObjs.add(new AnnotationEntryGen(a,
 							getConstantPool(), false));
 				}
@@ -185,9 +181,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 				{
 					RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
 					AnnotationEntry[] annos = ria.getAnnotationEntries();
-					for (int j = 0; j < annos.length; j++)
-					{
-						AnnotationEntry a = annos[j];
+					for (AnnotationEntry a : annos) {
 						annotationGenObjs.add(new AnnotationEntryGen(a,
 								getConstantPool(), false));
 					}
@@ -442,8 +436,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     public void setMethods( Method[] methods ) {
         method_vec.clear();
-        for (int m = 0; m < methods.length; m++) {
-            addMethod(methods[m]);
+        for (Method method : methods) {
+            addMethod(method);
         }
     }
 

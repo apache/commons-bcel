@@ -119,15 +119,15 @@ public class Subroutines{
 			
 			ret += " Accessed local variable slots: '";
 			int[] alv = getAccessedLocalsIndices();
-			for (int i=0; i<alv.length; i++){
-				ret += alv[i]+" ";
+			for (int element : alv) {
+				ret += element+" ";
 			}
 			ret+="'.";
 
 			ret += " Recursively (via subsub...routines) accessed local variable slots: '";
 			alv = getRecursivelyAccessedLocalsIndices();
-			for (int i=0; i<alv.length; i++){
-				ret += alv[i]+" ";
+			for (int element : alv) {
+				ret += element+" ";
 			}
 			ret+="'.";
 
@@ -228,8 +228,8 @@ public class Subroutines{
 		public int[] getRecursivelyAccessedLocalsIndices(){
 			Set<Integer> s = new HashSet<Integer>();
 			int[] lvs = getAccessedLocalsIndices();
-			for (int j=0; j<lvs.length; j++){
-				s.add(Integer.valueOf(lvs[j]));
+			for (int lv : lvs) {
+				s.add(Integer.valueOf(lv));
 			}
 			_getRecursivelyAccessedLocalsIndicesHelper(s, this.subSubs());
 			int[] ret = new int[s.size()];
@@ -246,13 +246,13 @@ public class Subroutines{
 		 * @see #getRecursivelyAccessedLocalsIndices()
 		 */
 		private void _getRecursivelyAccessedLocalsIndicesHelper(Set<Integer> s, Subroutine[] subs){
-			for (int i=0; i<subs.length; i++){
-				int[] lvs = subs[i].getAccessedLocalsIndices();
-				for (int j=0; j<lvs.length; j++){
-					s.add(Integer.valueOf(lvs[j]));
+			for (Subroutine sub : subs) {
+				int[] lvs = sub.getAccessedLocalsIndices();
+				for (int lv : lvs) {
+					s.add(Integer.valueOf(lv));
 				}
-				if(subs[i].subSubs().length != 0){
-					_getRecursivelyAccessedLocalsIndicesHelper(s, subs[i].subSubs());
+				if(sub.subSubs().length != 0){
+					_getRecursivelyAccessedLocalsIndicesHelper(s, sub.subSubs());
 				}
 			}
 		}
@@ -376,8 +376,8 @@ public class Subroutines{
 
 		// Calculate "real" subroutines.
 		Set<InstructionHandle> sub_leaders = new HashSet<InstructionHandle>(); // Elements: InstructionHandle
-		for (int i=0; i<all.length; i++){
-			Instruction inst = all[i].getInstruction();
+		for (InstructionHandle element : all) {
+			Instruction inst = element.getInstruction();
 			if (inst instanceof JsrInstruction){
 				sub_leaders.add(((JsrInstruction) inst).getTarget());
 			}
@@ -399,11 +399,11 @@ public class Subroutines{
 		// since "Jsr 0" is disallowed in Pass 3a.
 		// Instructions shared by a subroutine and the toplevel are
 		// disallowed and checked below, after the BFS.
-		for (int i=0; i<all.length; i++){
-			Instruction inst = all[i].getInstruction();
+		for (InstructionHandle element : all) {
+			Instruction inst = element.getInstruction();
 			if (inst instanceof JsrInstruction){
 				InstructionHandle leader = ((JsrInstruction) inst).getTarget();
-				((SubroutineImpl) getSubroutine(leader)).addEnteringJsrInstruction(all[i]);
+				((SubroutineImpl) getSubroutine(leader)).addEnteringJsrInstruction(element);
 			}
 		}
 		
@@ -417,8 +417,8 @@ public class Subroutines{
 		for (InstructionHandle actual : sub_leaders) {
 			// Do some BFS with "actual" as the root of the graph.
 			// Init colors
-			for (int i=0; i<all.length; i++){
-				colors.put(all[i], WHITE);
+			for (InstructionHandle element : all) {
+				colors.put(element, WHITE);
 			}
 			colors.put(actual, GRAY);
 			// Init Queue
@@ -428,9 +428,9 @@ public class Subroutines{
 			
 			/* BFS ALGORITHM MODIFICATION: Start out with multiple "root" nodes, as exception handlers are starting points of top-level code, too. [why top-level? TODO: Refer to the special JustIce notion of subroutines.]*/
 			if (actual == all[0]){
-				for (int j=0; j<handlers.length; j++){
-					colors.put(handlers[j].getHandlerPC(), GRAY);
-					Q.add(handlers[j].getHandlerPC());
+				for (CodeExceptionGen handler : handlers) {
+					colors.put(handler.getHandlerPC(), GRAY);
+					Q.add(handler.getHandlerPC());
 				}
 			}
 			/* CONTINUE NORMAL BFS ALGORITHM */
@@ -439,23 +439,23 @@ public class Subroutines{
 			while (Q.size() != 0){
 				InstructionHandle u = Q.remove(0);
 				InstructionHandle[] successors = getSuccessors(u);
-				for (int i=0; i<successors.length; i++){
-					if (colors.get(successors[i]) == WHITE){
-						colors.put(successors[i], GRAY);
-						Q.add(successors[i]);
+				for (InstructionHandle successor : successors) {
+					if (colors.get(successor) == WHITE){
+						colors.put(successor, GRAY);
+						Q.add(successor);
 					}
 				}
 				colors.put(u, BLACK);
 			}
 			// BFS ended above.
-			for (int i=0; i<all.length; i++){
-				if (colors.get(all[i]) == BLACK){
-					((SubroutineImpl) (actual==all[0]?getTopLevel():getSubroutine(actual))).addInstruction(all[i]);
-					if (instructions_assigned.contains(all[i])){
-						throw new StructuralCodeConstraintException("Instruction '"+all[i]+"' is part of more than one subroutine (or of the top level and a subroutine).");
+			for (InstructionHandle element : all) {
+				if (colors.get(element) == BLACK){
+					((SubroutineImpl) (actual==all[0]?getTopLevel():getSubroutine(actual))).addInstruction(element);
+					if (instructions_assigned.contains(element)){
+						throw new StructuralCodeConstraintException("Instruction '"+element+"' is part of more than one subroutine (or of the top level and a subroutine).");
 					}
 					else{
-						instructions_assigned.add(all[i]);
+						instructions_assigned.add(element);
 					}
 				}
 			}
@@ -466,13 +466,13 @@ public class Subroutines{
 		
 		// Now make sure no instruction of a Subroutine is protected by exception handling code
 		// as is mandated by JustIces notion of subroutines.
-		for (int i=0; i<handlers.length; i++){
-			InstructionHandle _protected = handlers[i].getStartPC();
-			while (_protected != handlers[i].getEndPC().getNext()){// Note the inclusive/inclusive notation of "generic API" exception handlers!
+		for (CodeExceptionGen handler : handlers) {
+			InstructionHandle _protected = handler.getStartPC();
+			while (_protected != handler.getEndPC().getNext()){// Note the inclusive/inclusive notation of "generic API" exception handlers!
 				for (Subroutine sub : subroutines.values()) {
 					if (sub != subroutines.get(all[0])){	// We don't want to forbid top-level exception handlers.
 						if (sub.contains(_protected)){
-							throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+"' is protected by an exception handler, '"+handlers[i]+"'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
+							throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+"' is protected by an exception handler, '"+handler+"'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
 						}
 					}
 				}
@@ -504,16 +504,16 @@ public class Subroutines{
 	private void noRecursiveCalls(Subroutine sub, Set<Integer> set){
 		Subroutine[] subs = sub.subSubs();
 
-		for (int i=0; i<subs.length; i++){
-			int index = ((RET) (subs[i].getLeavingRET().getInstruction())).getIndex();
+		for (Subroutine sub2 : subs) {
+			int index = ((RET) (sub2.getLeavingRET().getInstruction())).getIndex();
 			
 			if (!set.add(Integer.valueOf(index))){
 				// Don't use toString() here because of possibly infinite recursive subSubs() calls then.
-				SubroutineImpl si = (SubroutineImpl) subs[i];
+				SubroutineImpl si = (SubroutineImpl) sub2;
 				throw new StructuralCodeConstraintException("Subroutine with local variable '"+si.localVariable+"', JSRs '"+si.theJSRs+"', RET '"+si.theRET+"' is called by a subroutine which uses the same local variable index as itself; maybe even a recursive call? JustIce's clean definition of a subroutine forbids both.");
 			}
 
-			noRecursiveCalls(subs[i], set);
+			noRecursiveCalls(sub2, set);
 			
 			set.remove(Integer.valueOf(index));
 		}

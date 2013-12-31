@@ -112,10 +112,10 @@ final class CodeHTML implements org.apache.bcel.Constants {
                 }
                 buf.append("<TH>default</TH></TR>\n<TR>");
                 // Print target and default indices in second row
-                for (int i = 0; i < jump_table.length; i++) {
-                    buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(
-                            jump_table[i]).append("\">").append(jump_table[i]).append("</A></TD>");
-                }
+            for (int element : jump_table) {
+                buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(
+                        element).append("\">").append(element).append("</A></TD>");
+            }
                 buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(
                         default_offset).append("\">").append(default_offset).append(
                         "</A></TD></TR>\n</TABLE>\n");
@@ -382,13 +382,13 @@ final class CodeHTML implements org.apache.bcel.Constants {
             }
             // Look for local variables and their range
             Attribute[] attributes = code.getAttributes();
-            for (int i = 0; i < attributes.length; i++) {
-                if (attributes[i].getTag() == ATTR_LOCAL_VARIABLE_TABLE) {
-                    LocalVariable[] vars = ((LocalVariableTable) attributes[i])
+            for (Attribute attribute : attributes) {
+                if (attribute.getTag() == ATTR_LOCAL_VARIABLE_TABLE) {
+                    LocalVariable[] vars = ((LocalVariableTable) attribute)
                             .getLocalVariableTable();
-                    for (int j = 0; j < vars.length; j++) {
-                        int start = vars[j].getStartPC();
-                        int end = (start + vars[j].getLength());
+                    for (LocalVariable var : vars) {
+                        int start = var.getStartPC();
+                        int end = (start + var.getLength());
                         goto_set.set(start);
                         goto_set.set(end);
                     }

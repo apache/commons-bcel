@@ -122,8 +122,8 @@ public abstract class ParameterAnnotations extends Attribute {
         super.dump(dos);
         dos.writeByte(parameter_annotation_table.length);
 
-        for (int i = 0; i < parameter_annotation_table.length; i++) {
-            parameter_annotation_table[i].dump(dos);
+        for (ParameterAnnotationEntry element : parameter_annotation_table) {
+            element.dump(dos);
         }
 
     }

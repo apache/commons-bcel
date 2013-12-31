@@ -93,9 +93,7 @@ public final class PerformanceTest extends TestCase {
 				cgenTime.stop();
 
 				Method[] methods = cg.getMethods();
-				for (int j = 0; j < methods.length; j++) {
-					Method m = methods[j];
-
+				for (Method m : methods) {
 					mgenTime.start();
 					MethodGen mg = new MethodGen(m, cg.getClassName(), cg.getConstantPool());
 					InstructionList il = mg.getInstructionList();

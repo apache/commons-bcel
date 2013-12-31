@@ -312,8 +312,8 @@ public abstract class Type implements java.io.Serializable {
     public static String getSignature( java.lang.reflect.Method meth ) {
         StringBuilder sb = new StringBuilder("(");
         Class<?>[] params = meth.getParameterTypes(); // avoid clone
-        for (int j = 0; j < params.length; j++) {
-            sb.append(getType(params[j]).getSignature());
+        for (Class<?> param : params) {
+            sb.append(getType(param).getSignature());
         }
         sb.append(")");
         sb.append(getType(meth.getReturnType()).getSignature());

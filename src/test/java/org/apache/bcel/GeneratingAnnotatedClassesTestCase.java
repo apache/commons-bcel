@@ -19,7 +19,6 @@ package org.apache.bcel;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -363,9 +362,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 annotations.length == 1);
         List<?> l = annotations[0].getValues();
         boolean found = false;
-        for (Iterator<?> iter = l.iterator(); iter.hasNext();)
-        {
-            ElementValuePairGen element = (ElementValuePairGen) iter.next();
+        for (Object name : l) {
+            ElementValuePairGen element = (ElementValuePairGen) name;
             if (element.getNameString().equals("dval"))
             {
                 if (((SimpleElementValueGen) element.getValue())

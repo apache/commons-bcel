@@ -149,32 +149,32 @@ public class Verifier {
         List<String> messages = new ArrayList<String>();
         if (p1v != null) {
             String[] p1m = p1v.getMessages();
-            for (int i = 0; i < p1m.length; i++) {
-                messages.add("Pass 1: " + p1m[i]);
+            for (String element : p1m) {
+                messages.add("Pass 1: " + element);
             }
         }
         if (p2v != null) {
             String[] p2m = p2v.getMessages();
-            for (int i = 0; i < p2m.length; i++) {
-                messages.add("Pass 2: " + p2m[i]);
+            for (String element : p2m) {
+                messages.add("Pass 2: " + element);
             }
         }
         for (Pass3aVerifier pv : p3avs.values()) {
             String[] p3am = pv.getMessages();
             int meth = pv.getMethodNo();
-            for (int i = 0; i < p3am.length; i++) {
+            for (String element : p3am) {
                 messages.add("Pass 3a, method " + meth + " ('"
                         + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth]
-                        + "'): " + p3am[i]);
+                        + "'): " + element);
             }
         }
         for (Pass3bVerifier pv : p3bvs.values()) {
             String[] p3bm = pv.getMessages();
             int meth = pv.getMethodNo();
-            for (int i = 0; i < p3bm.length; i++) {
+            for (String element : p3bm) {
                 messages.add("Pass 3b, method " + meth + " ('"
                         + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth]
-                        + "'): " + p3bm[i]);
+                        + "'): " + element);
             }
         }
         String[] ret = new String[messages.size()];
@@ -230,8 +230,8 @@ public class Verifier {
                 if (warnings.length == 0) {
                     System.out.println("<none>");
                 }
-                for (int j = 0; j < warnings.length; j++) {
-                    System.out.println(warnings[j]);
+                for (String warning : warnings) {
+                    System.out.println(warning);
                 }
                 System.out.println("\n");
                 // avoid swapping.

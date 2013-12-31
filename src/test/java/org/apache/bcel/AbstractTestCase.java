@@ -55,9 +55,7 @@ public abstract class AbstractTestCase extends TestCase
 	protected Method getMethod(JavaClass cl, String methodname)
 	{
 		Method[] methods = cl.getMethods();
-		for (int i = 0; i < methods.length; i++)
-		{
-			Method m = methods[i];
+		for (Method m : methods) {
 			if (m.getName().equals(methodname))
 			{
 				return m;
@@ -94,12 +92,11 @@ public abstract class AbstractTestCase extends TestCase
 	{
 		Attribute[] all = clazz.getAttributes();
 		List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
-		for (int i = 0; i < all.length; i++)
-		{
+		for (Attribute element : all) {
 			if (verbose)
-				System.err.println("Attribute: " + all[i].getName());
-			if (all[i].getName().equals(name))
-				chosenAttrsList.add(all[i]);
+				System.err.println("Attribute: " + element.getName());
+			if (element.getName().equals(name))
+				chosenAttrsList.add(element);
 		}
 		return chosenAttrsList.toArray(new Attribute[] {});
 	}
@@ -107,12 +104,11 @@ public abstract class AbstractTestCase extends TestCase
 	protected Attribute findAttribute(String name, Attribute[] all)
 	{
 		List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
-		for (int i = 0; i < all.length; i++)
-		{
+		for (Attribute element : all) {
 			if (verbose)
-				System.err.println("Attribute: " + all[i].getName());
-			if (all[i].getName().equals(name))
-				chosenAttrsList.add(all[i]);
+				System.err.println("Attribute: " + element.getName());
+			if (element.getName().equals(name))
+				chosenAttrsList.add(element);
 		}
 		assertTrue("Should be one match: " + chosenAttrsList.size(),
 				chosenAttrsList.size() == 1);

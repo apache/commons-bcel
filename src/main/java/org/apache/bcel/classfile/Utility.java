@@ -543,10 +543,10 @@ public abstract class Utility {
         StringBuilder buf = new StringBuilder("(");
         String str;
         if (argv != null) {
-            for (int i = 0; i < argv.length; i++) {
-                str = getSignature(argv[i]);
+            for (String element : argv) {
+                str = getSignature(element);
                 if (str.endsWith("V")) {
-                    throw new ClassFormatException("Invalid type: " + argv[i]);
+                    throw new ClassFormatException("Invalid type: " + element);
                 }
                 buf.append(str);
             }
@@ -924,8 +924,8 @@ public abstract class Utility {
         char[] chars = brackets.toCharArray();
         int count = 0;
         boolean open = false;
-        for (int i = 0; i < chars.length; i++) {
-            switch (chars[i]) {
+        for (char c : chars) {
+            switch (c) {
                 case '[':
                     if (open) {
                         throw new RuntimeException("Illegally nested brackets:" + brackets);
@@ -1199,8 +1199,8 @@ public abstract class Utility {
         }
         CharArrayWriter caw = new CharArrayWriter();
         JavaWriter jw = new JavaWriter(caw);
-        for (int i = 0; i < bytes.length; i++) {
-            int in = bytes[i] & 0x000000ff; // Normalize to unsigned
+        for (byte b : bytes) {
+            int in = b & 0x000000ff; // Normalize to unsigned
             jw.write(in);
         }
         return caw.toString();
@@ -1363,8 +1363,8 @@ public abstract class Utility {
     public static final String convertString( String label ) {
         char[] ch = label.toCharArray();
         StringBuilder buf = new StringBuilder();
-        for (int i = 0; i < ch.length; i++) {
-            switch (ch[i]) {
+        for (char element : ch) {
+            switch (element) {
                 case '\n':
                     buf.append("\\n");
                     break;
@@ -1381,7 +1381,7 @@ public abstract class Utility {
                     buf.append("\\\\");
                     break;
                 default:
-                    buf.append(ch[i]);
+                    buf.append(element);
                     break;
             }
         }

@@ -17,6 +17,7 @@
 package org.apache.bcel.verifier;
 
 import java.awt.Color;
+
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 
@@ -465,10 +466,10 @@ public class VerifyDialog extends javax.swing.JDialog {
      */
     public static void main( java.lang.String[] args ) {
         classes_to_verify = args.length;
-        for (int i = 0; i < args.length; i++) {
+        for (String arg : args) {
             try {
                 VerifyDialog aVerifyDialog;
-                aVerifyDialog = new VerifyDialog(args[i]);
+                aVerifyDialog = new VerifyDialog(arg);
                 aVerifyDialog.setModal(true);
                 aVerifyDialog.addWindowListener(new java.awt.event.WindowAdapter() {
 

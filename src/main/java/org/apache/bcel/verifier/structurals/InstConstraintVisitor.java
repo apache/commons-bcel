@@ -1236,15 +1236,15 @@ public class InstConstraintVisitor extends EmptyVisitor{
 		JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
 		Field[] fields = jc.getFields();
 		Field f = null;
-		for (int i=0; i<fields.length; i++){
-			if (fields[i].getName().equals(field_name)){
-				  Type f_type = Type.getType(fields[i].getSignature());
+		for (Field field : fields) {
+			if (field.getName().equals(field_name)){
+				  Type f_type = Type.getType(field.getSignature());
 				  Type o_type = o.getType(cpg);
 					/* TODO: Check if assignment compatibility is sufficient.
 				   * What does Sun do?
 				   */
 				  if (f_type.equals(o_type)){
-						f = fields[i];
+						f = field;
 						break;
 					}
 			}
@@ -2639,15 +2639,15 @@ public class InstConstraintVisitor extends EmptyVisitor{
 		JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
 		Field[] fields = jc.getFields();
 		Field f = null;
-		for (int i=0; i<fields.length; i++){
-			if (fields[i].getName().equals(field_name)){
-				  Type f_type = Type.getType(fields[i].getSignature());
+		for (Field field : fields) {
+			if (field.getName().equals(field_name)){
+				  Type f_type = Type.getType(field.getSignature());
 				  Type o_type = o.getType(cpg);
 					/* TODO: Check if assignment compatibility is sufficient.
 				   * What does Sun do?
 				   */
 				  if (f_type.equals(o_type)){
-						f = fields[i];
+						f = field;
 						break;
 					}
 			}
@@ -2729,15 +2729,15 @@ public class InstConstraintVisitor extends EmptyVisitor{
 		JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
 		Field[] fields = jc.getFields();
 		Field f = null;
-		for (int i=0; i<fields.length; i++){
-			if (fields[i].getName().equals(field_name)){
-					Type f_type = Type.getType(fields[i].getSignature());
+		for (Field field : fields) {
+			if (field.getName().equals(field_name)){
+					Type f_type = Type.getType(field.getSignature());
 				  Type o_type = o.getType(cpg);
 					/* TODO: Check if assignment compatibility is sufficient.
 				   * What does Sun do?
 				   */
 				  if (f_type.equals(o_type)){
-						f = fields[i];
+						f = field;
 						break;
 					}
 			}

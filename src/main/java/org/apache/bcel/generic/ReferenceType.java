@@ -165,8 +165,8 @@ public abstract class ReferenceType extends Type {
             // on one of them "interfaces implemented by arrays" is exchanged with "'Cloneable' or
             // 'java.io.Serializable'"
             if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
-                for (int ii = 0; ii < Constants.INTERFACES_IMPLEMENTED_BY_ARRAYS.length; ii++) {
-                    if (T.equals(ObjectType.getInstance(Constants.INTERFACES_IMPLEMENTED_BY_ARRAYS[ii]))) {
+                for (String element : Constants.INTERFACES_IMPLEMENTED_BY_ARRAYS) {
+                    if (T.equals(ObjectType.getInstance(element))) {
                         return true;
                     }
                 }
@@ -249,10 +249,10 @@ public abstract class ReferenceType extends Type {
         System.arraycopy(other_sups, 0, t_sups, 1, other_sups.length);
         this_sups[0] = Repository.lookupClass(thiz.getClassName());
         t_sups[0] = Repository.lookupClass(other.getClassName());
-        for (int i = 0; i < t_sups.length; i++) {
-            for (int j = 0; j < this_sups.length; j++) {
-                if (this_sups[j].equals(t_sups[i])) {
-                    return ObjectType.getInstance(this_sups[j].getClassName());
+        for (JavaClass t_sup : t_sups) {
+            for (JavaClass this_sup : this_sups) {
+                if (this_sup.equals(t_sup)) {
+                    return ObjectType.getInstance(this_sup.getClassName());
                 }
             }
         }
@@ -322,10 +322,10 @@ public abstract class ReferenceType extends Type {
         System.arraycopy(other_sups, 0, t_sups, 1, other_sups.length);
         this_sups[0] = Repository.lookupClass(thiz.getClassName());
         t_sups[0] = Repository.lookupClass(other.getClassName());
-        for (int i = 0; i < t_sups.length; i++) {
-            for (int j = 0; j < this_sups.length; j++) {
-                if (this_sups[j].equals(t_sups[i])) {
-                    return ObjectType.getInstance(this_sups[j].getClassName());
+        for (JavaClass t_sup : t_sups) {
+            for (JavaClass this_sup : this_sups) {
+                if (this_sup.equals(t_sup)) {
+                    return ObjectType.getInstance(this_sup.getClassName());
                 }
             }
         }

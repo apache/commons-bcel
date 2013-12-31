@@ -42,8 +42,8 @@ public class IntList{
 	boolean contains(int i){
 		Integer[] ints = new Integer[theList.size()];
 		theList.toArray(ints);
-		for (int j=0; j<ints.length; j++){
-			if (i == ints[j].intValue()) {
+		for (Integer k : ints) {
+			if (i == k.intValue()) {
                 return true;
             }
 		}

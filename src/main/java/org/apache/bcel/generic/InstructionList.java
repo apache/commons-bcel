@@ -872,8 +872,8 @@ public class InstructionList implements Serializable {
                     }
                     if (i instanceof Select) {
                         InstructionHandle[] targets = ((Select) i).getTargets();
-                        for (int j = 0; j < targets.length; j++) {
-                            inst = targets[j].instruction;
+                        for (InstructionHandle target : targets) {
+                            inst = target.instruction;
                             if (!contains(inst)) {
                                 throw new ClassGenException("Branch target of "
                                         + Constants.OPCODE_NAMES[i.opcode] + ":" + inst
@@ -1208,14 +1208,14 @@ public class InstructionList implements Serializable {
      */
     public void redirectLocalVariables( LocalVariableGen[] lg, InstructionHandle old_target,
             InstructionHandle new_target ) {
-        for (int i = 0; i < lg.length; i++) {
-            InstructionHandle start = lg[i].getStart();
-            InstructionHandle end = lg[i].getEnd();
+        for (LocalVariableGen element : lg) {
+            InstructionHandle start = element.getStart();
+            InstructionHandle end = element.getEnd();
             if (start == old_target) {
-                lg[i].setStart(new_target);
+                element.setStart(new_target);
             }
             if (end == old_target) {
-                lg[i].setEnd(new_target);
+                element.setEnd(new_target);
             }
         }
     }
@@ -1231,15 +1231,15 @@ public class InstructionList implements Serializable {
      */
     public void redirectExceptionHandlers( CodeExceptionGen[] exceptions,
             InstructionHandle old_target, InstructionHandle new_target ) {
-        for (int i = 0; i < exceptions.length; i++) {
-            if (exceptions[i].getStartPC() == old_target) {
-                exceptions[i].setStartPC(new_target);
+        for (CodeExceptionGen exception : exceptions) {
+            if (exception.getStartPC() == old_target) {
+                exception.setStartPC(new_target);
             }
-            if (exceptions[i].getEndPC() == old_target) {
-                exceptions[i].setEndPC(new_target);
+            if (exception.getEndPC() == old_target) {
+                exception.setEndPC(new_target);
             }
-            if (exceptions[i].getHandlerPC() == old_target) {
-                exceptions[i].setHandlerPC(new_target);
+            if (exception.getHandlerPC() == old_target) {
+                exception.setHandlerPC(new_target);
             }
         }
     }

@@ -414,8 +414,8 @@ public class ControlFlowGraph{
 		exceptionhandlers = new ExceptionHandlers(method_gen);
 
 		InstructionHandle[] instructionhandles = method_gen.getInstructionList().getInstructionHandles();
-		for (int i=0; i<instructionhandles.length; i++){
-			instructionContexts.put(instructionhandles[i], new InstructionContextImpl(instructionhandles[i]));
+		for (InstructionHandle instructionhandle : instructionhandles) {
+			instructionContexts.put(instructionhandle, new InstructionContextImpl(instructionhandle));
 		}
 		
 		//this.method_gen = method_gen;

@@ -19,6 +19,7 @@ package org.apache.bcel.util;
 
 import java.io.ByteArrayInputStream;
 import java.util.Hashtable;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.ConstantClass;
@@ -104,8 +105,8 @@ public class ClassLoader extends java.lang.ClassLoader {
             /* Second try: Load system class using system class loader. You better
              * don't mess around with them.
              */
-            for (int i = 0; i < ignored_packages.length; i++) {
-                if (class_name.startsWith(ignored_packages[i])) {
+            for (String ignored_package : ignored_packages) {
+                if (class_name.startsWith(ignored_package)) {
                     cl = getParent().loadClass(class_name);
                     break;
                 }

@@ -45,9 +45,8 @@ public class ArrayElementValueGen extends ElementValueGen
 			throw new RuntimeException(
 					"Only element values of type array can be built with this ctor - type specified: " + type);
 		this.evalues = new ArrayList<ElementValueGen>();
-		for (int i = 0; i < datums.length; i++)
-		{
-			evalues.add(ElementValueGen.copy(datums[i], cpool, true));
+		for (ElementValue datum : datums) {
+			evalues.add(ElementValueGen.copy(datum, cpool, true));
 		}
 	}
 
@@ -76,9 +75,8 @@ public class ArrayElementValueGen extends ElementValueGen
 		super(ARRAY, cpool);
 		evalues = new ArrayList<ElementValueGen>();
 		ElementValue[] in = value.getElementValuesArray();
-		for (int i = 0; i < in.length; i++)
-		{
-			evalues.add(ElementValueGen.copy(in[i], cpool, copyPoolEntries));
+		for (ElementValue element : in) {
+			evalues.add(ElementValueGen.copy(element, cpool, copyPoolEntries));
 		}
 	}
 

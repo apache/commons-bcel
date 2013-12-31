@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Stack;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Annotations;
@@ -182,16 +183,15 @@ public class MethodGen extends FieldGenOrMethodGen {
                         ? new InstructionList(m.getCode().getCode())
                         : null, cp);
         Attribute[] attributes = m.getAttributes();
-        for (int i = 0; i < attributes.length; i++) {
-            Attribute a = attributes[i];
+        for (Attribute attribute : attributes) {
+            Attribute a = attribute;
             if (a instanceof Code) {
                 Code c = (Code) a;
                 setMaxStack(c.getMaxStack());
                 setMaxLocals(c.getMaxLocals());
                 CodeException[] ces = c.getExceptionTable();
                 if (ces != null) {
-                    for (int j = 0; j < ces.length; j++) {
-                        CodeException ce = ces[j];
+                    for (CodeException ce : ces) {
                         int type = ce.getCatchType();
                         ObjectType c_type = null;
                         if (type > 0) {
@@ -213,12 +213,11 @@ public class MethodGen extends FieldGenOrMethodGen {
                     }
                 }
                 Attribute[] c_attributes = c.getAttributes();
-                for (int j = 0; j < c_attributes.length; j++) {
-                    a = c_attributes[j];
+                for (Attribute c_attribute : c_attributes) {
+                    a = c_attribute;
                     if (a instanceof LineNumberTable) {
                         LineNumber[] ln = ((LineNumberTable) a).getLineNumberTable();
-                        for (int k = 0; k < ln.length; k++) {
-                            LineNumber l = ln[k];
+                        for (LineNumber l : ln) {
                             InstructionHandle ih = il.findHandle(l.getStartPC());
                             if (ih != null) {
                                 addLineNumber(ih, l.getLineNumber());
@@ -227,8 +226,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                     } else if (a instanceof LocalVariableTable) {
                         LocalVariable[] lv = ((LocalVariableTable) a).getLocalVariableTable();
                         removeLocalVariables();
-                        for (int k = 0; k < lv.length; k++) {
-                            LocalVariable l = lv[k];
+                        for (LocalVariable l : lv) {
                             InstructionHandle start = il.findHandle(l.getStartPC());
                             InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
                             // Repair malformed handles
@@ -244,8 +242,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                     } else if (a instanceof LocalVariableTypeTable) {
                         LocalVariable[] lv = ((LocalVariableTypeTable) a).getLocalVariableTypeTable();
                         removeLocalVariables();
-                        for (int k = 0; k < lv.length; k++) {
-                            LocalVariable l = lv[k];
+                        for (LocalVariable l : lv) {
                             InstructionHandle start = il.findHandle(l.getStartPC());
                             InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
                             // Repair malformed handles
@@ -264,14 +261,13 @@ public class MethodGen extends FieldGenOrMethodGen {
                 }
             } else if (a instanceof ExceptionTable) {
                 String[] names = ((ExceptionTable) a).getExceptionNames();
-                for (int j = 0; j < names.length; j++) {
-                    addException(names[j]);
+                for (String name2 : names) {
+                    addException(name2);
                 }
             } else if (a instanceof Annotations) {
     			Annotations runtimeAnnotations = (Annotations) a;
     			AnnotationEntry[] aes = runtimeAnnotations.getAnnotationEntries();
-    			for (int k = 0; k < aes.length; k++) {
-    				AnnotationEntry element = aes[k];
+    			for (AnnotationEntry element : aes) {
     				addAnnotationEntry(new AnnotationEntryGen(element, cp, false));
     			}
             } else {
@@ -610,8 +606,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     
     public void addAnnotationsAsAttribute(ConstantPoolGen cp) {
       	Attribute[] attrs = Utility.getAnnotationAttributes(cp,annotation_vec);
-        for (int i = 0; i < attrs.length; i++) {
-    		addAttribute(attrs[i]);
+        for (Attribute attr : attrs) {
+    		addAttribute(attr);
     	}
       }
       
@@ -619,8 +615,8 @@ public class MethodGen extends FieldGenOrMethodGen {
       	if (!hasParameterAnnotations) return;
       	Attribute[] attrs = Utility.getParameterAnnotationAttributes(cp,param_annotations);
       	if (attrs!=null) {
-          for (int i = 0; i < attrs.length; i++) {
-    		  addAttribute(attrs[i]);
+          for (Attribute attr : attrs) {
+    		  addAttribute(attr);
     	  }
       	}
       }
@@ -656,8 +652,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         /* Each attribute causes 6 additional header bytes
          */
         int attrs_len = 0;
-        for (int i = 0; i < code_attrs.length; i++) {
-            attrs_len += (code_attrs[i].getLength() + 6);
+        for (Attribute code_attr : code_attrs) {
+            attrs_len += (code_attr.getLength() + 6);
         }
         CodeException[] c_exc = getCodeExceptions();
         int exc_len = c_exc.length * 8; // Every entry takes 8 bytes
@@ -665,8 +661,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         if ((il != null) && !isAbstract() && !isNative()) {
             // Remove any stale code attribute
             Attribute[] attributes = getAttributes();
-            for (int i = 0; i < attributes.length; i++) {
-                Attribute a = attributes[i];
+            for (Attribute a : attributes) {
                 if (a instanceof Code) {
                     removeAttribute(a);
                 }
@@ -720,10 +715,10 @@ public class MethodGen extends FieldGenOrMethodGen {
                         il.delete(ih);
                     } catch (TargetLostException e) {
                         InstructionHandle[] targets = e.getTargets();
-                        for (int i = 0; i < targets.length; i++) {
-                            InstructionTargeter[] targeters = targets[i].getTargeters();
-                            for (int j = 0; j < targeters.length; j++) {
-                                targeters[j].updateTarget(targets[i], next);
+                        for (InstructionHandle target : targets) {
+                            InstructionTargeter[] targeters = target.getTargeters();
+                            for (InstructionTargeter targeter : targeters) {
+                                targeter.updateTarget(target, next);
                             }
                         }
                     }
@@ -856,8 +851,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (il != null) {
             int max = isStatic() ? 0 : 1;
             if (arg_types != null) {
-                for (int i = 0; i < arg_types.length; i++) {
-                    max += arg_types[i].getSize();
+                for (Type arg_type : arg_types) {
+                    max += arg_type.getSize();
                 }
             }
             for (InstructionHandle ih = il.getStart(); ih != null; ih = ih.getNext()) {
@@ -945,8 +940,8 @@ public class MethodGen extends FieldGenOrMethodGen {
          * explicitly. in each case, the stack will have depth 1,
          * containing the exception object.
          */
-        for (int i = 0; i < et.length; i++) {
-            InstructionHandle handler_pc = et[i].getHandlerPC();
+        for (CodeExceptionGen element : et) {
+            InstructionHandle handler_pc = element.getHandlerPC();
             if (handler_pc != null) {
                 branchTargets.push(handler_pc, 1);
             }
@@ -968,8 +963,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                     // explore all of the select's targets. the default target is handled below.
                     Select select = (Select) branch;
                     InstructionHandle[] targets = select.getTargets();
-                    for (int i = 0; i < targets.length; i++) {
-                        branchTargets.push(targets[i], stackDepth);
+                    for (InstructionHandle target : targets) {
+                        branchTargets.push(target, stackDepth);
                     }
                     // nothing to fall through to.
                     ih = null;
@@ -1111,9 +1106,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 		Attribute[] attrs = getAttributes();
 		ParameterAnnotations paramAnnVisAttr = null;
 		ParameterAnnotations paramAnnInvisAttr = null;
-		for (int i = 0; i < attrs.length; i++)
-		{
-			Attribute attribute = attrs[i];
+		for (Attribute attribute : attrs) {
 			if (attribute instanceof ParameterAnnotations)
 			{
 				// Initialize param_annotations
@@ -1151,9 +1144,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 	private List<AnnotationEntryGen> makeMutableVersion(AnnotationEntry[] mutableArray)
 	{
 		List<AnnotationEntryGen> result = new ArrayList<AnnotationEntryGen>();
-		for (int i = 0; i < mutableArray.length; i++)
-		{
-			result.add(new AnnotationEntryGen(mutableArray[i], getConstantPool(),
+		for (AnnotationEntry element : mutableArray) {
+			result.add(new AnnotationEntryGen(element, getConstantPool(),
 					false));
 		}
 		return result;

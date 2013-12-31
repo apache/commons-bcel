@@ -147,9 +147,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         annotationsOutOfDate = true;
         this.source = source;
         // Get source file name if available
-        for (int i = 0; i < attributes.length; i++) {
-            if (attributes[i] instanceof SourceFile) {
-                source_file_name = ((SourceFile) attributes[i]).getSourceFileName();
+        for (Attribute attribute : attributes) {
+            if (attribute instanceof SourceFile) {
+                source_file_name = ((SourceFile) attribute).getSourceFileName();
                 break;
             }
         }
@@ -307,21 +307,21 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         file.writeShort(class_name_index);
         file.writeShort(superclass_name_index);
         file.writeShort(interfaces.length);
-        for (int i = 0; i < interfaces.length; i++) {
-            file.writeShort(interfaces[i]);
+        for (int interface1 : interfaces) {
+            file.writeShort(interface1);
         }
         file.writeShort(fields.length);
-        for (int i = 0; i < fields.length; i++) {
-            fields[i].dump(file);
+        for (Field field : fields) {
+            field.dump(file);
         }
         file.writeShort(methods.length);
-        for (int i = 0; i < methods.length; i++) {
-            methods[i].dump(file);
+        for (Method method : methods) {
+            method.dump(file);
         }
         if (attributes != null) {
             file.writeShort(attributes.length);
-            for (int i = 0; i < attributes.length; i++) {
-                attributes[i].dump(file);
+            for (Attribute attribute : attributes) {
+                attribute.dump(file);
             }
         } else {
             file.writeShort(0);
@@ -342,8 +342,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
       		// Find attributes that contain annotation data
       		Attribute[] attrs = getAttributes();
       		List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>();
-      		for (int i = 0; i < attrs.length; i++) {
-    			Attribute attribute = attrs[i];
+      		for (Attribute attribute : attrs) {
     			if (attribute instanceof Annotations) {				
     				Annotations runtimeAnnotations = (Annotations)attribute;
     				for(int j = 0; j < runtimeAnnotations.getAnnotationEntries().length; j++)
@@ -442,8 +441,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * java.lang.reflect.Method if any
      */
     public Method getMethod( java.lang.reflect.Method m ) {
-        for (int i = 0; i < methods.length; i++) {
-            Method method = methods[i];
+        for (Method method : methods) {
             if (m.getName().equals(method.getName()) && (m.getModifiers() == method.getModifiers())
                     && Type.getSignature(m).equals(method.getSignature())) {
                 return method;
@@ -644,26 +642,26 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         buf.append("ACC_SUPER flag\t\t").append(isSuper()).append("\n");
         if (attributes.length > 0) {
             buf.append("\nAttribute(s):\n");
-            for (int i = 0; i < attributes.length; i++) {
-                buf.append(indent(attributes[i]));
+            for (Attribute attribute : attributes) {
+                buf.append(indent(attribute));
             }
         }
         AnnotationEntry[] annotations = getAnnotationEntries();
         if (annotations!=null && annotations.length>0) {
         	buf.append("\nAnnotation(s):\n");
-        	for (int i=0; i<annotations.length; i++) 
-        		buf.append(indent(annotations[i]));
+        	for (AnnotationEntry annotation : annotations)
+                buf.append(indent(annotation));
         }
         if (fields.length > 0) {
             buf.append("\n").append(fields.length).append(" fields:\n");
-            for (int i = 0; i < fields.length; i++) {
-                buf.append("\t").append(fields[i]).append('\n');
+            for (Field field : fields) {
+                buf.append("\t").append(field).append('\n');
             }
         }
         if (methods.length > 0) {
             buf.append("\n").append(methods.length).append(" methods:\n");
-            for (int i = 0; i < methods.length; i++) {
-                buf.append("\t").append(methods[i]).append('\n');
+            for (Method method : methods) {
+                buf.append("\t").append(method).append('\n');
             }
         }
         return buf.toString();
@@ -729,12 +727,12 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     
     private final void computeNestedTypeStatus() {
   	  if (computedNestedTypeStatus) return;
-  	  for (int i = 0; i < this.attributes.length; i++) {
-  			if (this.attributes[i] instanceof InnerClasses) {
-  				InnerClass[] innerClasses = ((InnerClasses) this.attributes[i]).getInnerClasses();
-  				for (int j = 0; j < innerClasses.length; j++) {
+  	  for (Attribute attribute : this.attributes) {
+  			if (attribute instanceof InnerClasses) {
+  				InnerClass[] innerClasses = ((InnerClasses) attribute).getInnerClasses();
+  				for (InnerClass innerClasse : innerClasses) {
   					boolean innerClassAttributeRefersToMe = false;
-  					String inner_class_name = constant_pool.getConstantString(innerClasses[j].getInnerClassIndex(),
+  					String inner_class_name = constant_pool.getConstantString(innerClasse.getInnerClassIndex(),
   						       Constants.CONSTANT_Class);
   					inner_class_name = Utility.compactClassName(inner_class_name);
   					if (inner_class_name.equals(getClassName())) {
@@ -742,7 +740,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
   					}
   					if (innerClassAttributeRefersToMe) {
   						this.isNested = true;
-  						if (innerClasses[j].getInnerNameIndex() == 0) {
+  						if (innerClasse.getInnerNameIndex() == 0) {
   							this.isAnonymous = true;
   						}
   					}
@@ -790,8 +788,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             return true;
         }
         JavaClass[] super_classes = getSuperClasses();
-        for (int i = 0; i < super_classes.length; i++) {
-            if (super_classes[i].equals(super_class)) {
+        for (JavaClass super_classe : super_classes) {
+            if (super_classe.equals(super_class)) {
                 return true;
             }
         }
@@ -815,8 +813,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             return true;
         }
         JavaClass[] super_interfaces = getAllInterfaces();
-        for (int i = 0; i < super_interfaces.length; i++) {
-            if (super_interfaces[i].equals(inter)) {
+        for (JavaClass super_interface : super_interfaces) {
+            if (super_interface.equals(inter)) {
                 return true;
             }
         }
@@ -883,8 +881,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                     queue.enqueue(souper);
                 }
             }
-            for (int i = 0; i < _interfaces.length; i++) {
-                queue.enqueue(_interfaces[i]);
+            for (JavaClass _interface : _interfaces) {
+                queue.enqueue(_interface);
             }
         }
         return allInterfaces.toArray(new JavaClass[allInterfaces.size()]);

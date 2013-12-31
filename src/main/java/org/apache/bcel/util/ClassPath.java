@@ -167,8 +167,8 @@ public class ClassPath implements Serializable {
             File ext_dir = new File(d);
             String[] extensions = ext_dir.list(ARCHIVE_FILTER);
             if (extensions != null) {
-                for (int i = 0; i < extensions.length; i++) {
-                    list.add(ext_dir.getPath() + File.separatorChar + extensions[i]);
+                for (String extension : extensions) {
+                    list.add(ext_dir.getPath() + File.separatorChar + extension);
                 }
             }
         }
@@ -216,9 +216,9 @@ public class ClassPath implements Serializable {
      * @return InputStream supplying the resource, or null if no resource with that name.
      */
     public InputStream getResourceAsStream(String name) {
-        for (int i = 0; i < paths.length; i++) {
+        for (PathEntry path : paths) {
             InputStream is;
-            if ((is = paths[i].getResourceAsStream(name)) != null) {
+            if ((is = path.getResourceAsStream(name)) != null) {
                 return is;
             }
         }
@@ -230,9 +230,9 @@ public class ClassPath implements Serializable {
      * @return URL supplying the resource, or null if no resource with that name.
      */
     public URL getResource(String name) {
-        for (int i = 0; i < paths.length; i++) {
+        for (PathEntry path : paths) {
             URL url;
-            if ((url = paths[i].getResource(name)) != null) {
+            if ((url = path.getResource(name)) != null) {
                 return url;
             }
         }
@@ -246,9 +246,9 @@ public class ClassPath implements Serializable {
      */
     public Enumeration<URL> getResources(String name) {
         Vector<URL> results = new Vector<URL>();
-        for (int i = 0; i < paths.length; i++) {
+        for (PathEntry path : paths) {
             URL url;
-            if ((url = paths[i].getResource(name)) != null) {
+            if ((url = path.getResource(name)) != null) {
                 results.add(url);
             }
         }
@@ -261,7 +261,7 @@ public class ClassPath implements Serializable {
      * @return class file for the java class
      */
     public ClassFile getClassFile( String name, String suffix ) throws IOException {
-        for (int i = 0; i < paths.length; i++) {
+        for (PathEntry path : paths) {
             ClassFile cf = null;
 
             if(parent != null) {
@@ -282,8 +282,8 @@ public class ClassPath implements Serializable {
 
     private ClassFile getClassFileInternal(String name, String suffix) throws IOException {
 
-      for(int i=0; i < paths.length; i++) {
-          ClassFile cf = paths[i].getClassFile(name, suffix);
+      for (PathEntry path : paths) {
+          ClassFile cf = path.getClassFile(name, suffix);
           
           if(cf != null) {
               return cf;

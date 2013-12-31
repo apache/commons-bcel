@@ -88,18 +88,17 @@ public class FieldGen extends FieldGenOrMethodGen {
     public FieldGen(Field field, ConstantPoolGen cp) {
         this(field.getAccessFlags(), Type.getType(field.getSignature()), field.getName(), cp);
         Attribute[] attrs = field.getAttributes();
-        for (int i = 0; i < attrs.length; i++) {
-            if (attrs[i] instanceof ConstantValue) {
-                setValue(((ConstantValue) attrs[i]).getConstantValueIndex());
-            } else if (attrs[i] instanceof Annotations) {
-            	Annotations runtimeAnnotations = (Annotations)attrs[i];
+        for (Attribute attr : attrs) {
+            if (attr instanceof ConstantValue) {
+                setValue(((ConstantValue) attr).getConstantValueIndex());
+            } else if (attr instanceof Annotations) {
+            	Annotations runtimeAnnotations = (Annotations)attr;
         		AnnotationEntry[] annotationEntries = runtimeAnnotations.getAnnotationEntries();
-        		for (int j = 0; j < annotationEntries.length; j++) {
-        			AnnotationEntry element = annotationEntries[j];
+        		for (AnnotationEntry element : annotationEntries) {
         			addAnnotationEntry(new AnnotationEntryGen(element,cp,false));
         		}
             } else {
-                addAttribute(attrs[i]);
+                addAttribute(attr);
             }
         }
     }
@@ -228,8 +227,8 @@ public class FieldGen extends FieldGenOrMethodGen {
     
     private void addAnnotationsAsAttribute(ConstantPoolGen cp) {
       	Attribute[] attrs = Utility.getAnnotationAttributes(cp,annotation_vec);
-        for (int i = 0; i < attrs.length; i++) {
-    		addAttribute(attrs[i]);
+        for (Attribute attr : attrs) {
+    		addAttribute(attr);
     	}
       }
 

@@ -628,8 +628,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 				}
 			}
 
-			for (int i=0; i<ts.length; i++){
-				act = ts[i];
+			for (Type element : ts) {
+				act = element;
 				if (act instanceof ArrayType) {
                     act = ((ArrayType) act).getBasicType();
                 }
@@ -818,20 +818,20 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 			InnerClass[] ics = obj.getInnerClasses();
 
-			for (int i=0; i<ics.length; i++){
-				checkIndex(obj, ics[i].getInnerClassIndex(), CONST_Class);
-				int outer_idx = ics[i].getOuterClassIndex();
+			for (InnerClass ic : ics) {
+				checkIndex(obj, ic.getInnerClassIndex(), CONST_Class);
+				int outer_idx = ic.getOuterClassIndex();
 				if (outer_idx != 0){
 					checkIndex(obj, outer_idx, CONST_Class);
 				}
-				int innername_idx = ics[i].getInnerNameIndex();
+				int innername_idx = ic.getInnerNameIndex();
 				if (innername_idx != 0){
 					checkIndex(obj, innername_idx, CONST_Utf8);
 				}
-				int acc = ics[i].getInnerAccessFlags();
+				int acc = ic.getInnerAccessFlags();
 				acc = acc & (~ (ACC_PUBLIC | ACC_PRIVATE | ACC_PROTECTED | ACC_STATIC | ACC_FINAL | ACC_INTERFACE | ACC_ABSTRACT));
 				if (acc != 0){
-					addMessage("Unknown access flag for inner class '"+tostring(ics[i])+"' set (InnerClasses attribute '"+tostring(obj)+"').");
+					addMessage("Unknown access flag for inner class '"+tostring(ic)+"' set (InnerClasses attribute '"+tostring(obj)+"').");
 				}
 			}
 			// Semantical consistency is not yet checked by Sun, see vmspec2 4.7.5.
@@ -916,8 +916,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 			//In JustIce, the check for correct offsets into the code array is delayed to Pass 3a.
 			CodeException[] exc_table = obj.getExceptionTable();
-			for (int i=0; i<exc_table.length; i++){
-				int exc_index = exc_table[i].getCatchType();
+			for (CodeException element : exc_table) {
+				int exc_index = element.getCatchType();
 				if (exc_index != 0){ // if 0, it catches all Throwables
 					checkIndex(obj, exc_index, CONST_Class);
 					ConstantClass cc = (ConstantClass) (cp.getConstant(exc_index));
@@ -928,7 +928,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 					VerificationResult vr = v.doPass1();
 
 					if (vr != VerificationResult.VR_OK){
-						throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(exc_table[i])+"' that references '"+cname+"' as an Exception but it does not pass verification pass 1: "+vr);
+						throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(element)+"' that references '"+cname+"' as an Exception but it does not pass verification pass 1: "+vr);
 					}
 					else{
 						// We cannot safely trust any other "instanceof" mechanism. We need to transitively verify
@@ -944,14 +944,14 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 							v = VerifierFactory.getVerifier(e.getSuperclassName());
 							vr = v.doPass1();
 							if (vr != VerificationResult.VR_OK){
-								throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(exc_table[i])+"' that references '"+cname+"' as an Exception but '"+e.getSuperclassName()+"' in the ancestor hierachy does not pass verification pass 1: "+vr);
+								throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(element)+"' that references '"+cname+"' as an Exception but '"+e.getSuperclassName()+"' in the ancestor hierachy does not pass verification pass 1: "+vr);
 							}
 							else{
 								e = Repository.lookupClass(e.getSuperclassName());
 							}
 						}
 						if (e != t) {
-                            throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(exc_table[i])+"' that references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
+                            throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(element)+"' that references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
                         }
 					}
 				}
@@ -1005,29 +1005,29 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 					//In JustIce, the check for correct offsets into the code array is delayed to Pass 3a.
 					LocalVariable[] localvariables = lvt.getLocalVariableTable();
 
-					for (int i=0; i<localvariables.length; i++){
-						checkIndex(lvt, localvariables[i].getNameIndex(), CONST_Utf8);
-						String localname = ((ConstantUtf8) cp.getConstant(localvariables[i].getNameIndex())).getBytes();
+					for (LocalVariable localvariable : localvariables) {
+						checkIndex(lvt, localvariable.getNameIndex(), CONST_Utf8);
+						String localname = ((ConstantUtf8) cp.getConstant(localvariable.getNameIndex())).getBytes();
 						if (!validJavaIdentifier(localname)){
 							throw new ClassConstraintException("LocalVariableTable '"+tostring(lvt)+"' references a local variable by the name '"+localname+"' which is not a legal Java simple name.");
 						}
 
-						checkIndex(lvt, localvariables[i].getSignatureIndex(), CONST_Utf8);
-						String localsig  = ((ConstantUtf8) (cp.getConstant(localvariables[i].getSignatureIndex()))).getBytes(); // Local signature(=descriptor)
+						checkIndex(lvt, localvariable.getSignatureIndex(), CONST_Utf8);
+						String localsig  = ((ConstantUtf8) (cp.getConstant(localvariable.getSignatureIndex()))).getBytes(); // Local signature(=descriptor)
 						Type t;
 						try{
 							t = Type.getType(localsig);
 						}
 						catch (ClassFormatException cfe){
-							throw new ClassConstraintException("Illegal descriptor (==signature) '"+localsig+"' used by LocalVariable '"+tostring(localvariables[i])+"' referenced by '"+tostring(lvt)+"'.", cfe);
+							throw new ClassConstraintException("Illegal descriptor (==signature) '"+localsig+"' used by LocalVariable '"+tostring(localvariable)+"' referenced by '"+tostring(lvt)+"'.", cfe);
 						}
-						int localindex = localvariables[i].getIndex();
+						int localindex = localvariable.getIndex();
 						if ( ( (t==Type.LONG || t==Type.DOUBLE)? localindex+1:localindex) >= code.getMaxLocals()){
-							throw new ClassConstraintException("LocalVariableTable attribute '"+tostring(lvt)+"' references a LocalVariable '"+tostring(localvariables[i])+"' with an index that exceeds the surrounding Code attribute's max_locals value of '"+code.getMaxLocals()+"'.");
+							throw new ClassConstraintException("LocalVariableTable attribute '"+tostring(lvt)+"' references a LocalVariable '"+tostring(localvariable)+"' with an index that exceeds the surrounding Code attribute's max_locals value of '"+code.getMaxLocals()+"'.");
 						}
 
 						try{
-							localVariablesInfos[method_number].add(localindex, localname, localvariables[i].getStartPC(), localvariables[i].getLength(), t);
+							localVariablesInfos[method_number].add(localindex, localname, localvariable.getStartPC(), localvariable.getLength(), t);
 						}
 						catch(LocalVariableInfoInconsistentException lviie){
 							throw new ClassConstraintException("Conflicting information in LocalVariableTable '"+tostring(lvt)+"' found in Code attribute '"+tostring(obj)+"' (method '"+tostring(m)+"'). "+lviie.getMessage(), lviie);
@@ -1061,10 +1061,10 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 			int[] exc_indices = obj.getExceptionIndexTable();
 
-			for (int i=0; i<exc_indices.length; i++){
-				checkIndex(obj, exc_indices[i], CONST_Class);
+			for (int exc_indice : exc_indices) {
+				checkIndex(obj, exc_indice, CONST_Class);
 
-				ConstantClass cc = (ConstantClass) (cp.getConstant(exc_indices[i]));
+				ConstantClass cc = (ConstantClass) (cp.getConstant(exc_indice));
 				checkIndex(cc, cc.getNameIndex(), CONST_Utf8); // cannot be sure this ConstantClass has already been visited (checked)!
 				String cname = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes().replace('/','.'); //convert internal notation on-the-fly to external notation
 

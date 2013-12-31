@@ -100,9 +100,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
 		v.add(a);
 		Attribute[] attributes = Utility.getAnnotationAttributes(cp, v);
 		boolean foundRV = false;
-		for (int i = 0; i < attributes.length; i++)
-		{
-			Attribute attribute = attributes[i];
+		for (Attribute attribute : attributes) {
 			if (attribute instanceof RuntimeVisibleAnnotations)
 			{
 				assertTrue(((Annotations) attribute).isRuntimeVisible());
@@ -117,9 +115,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
 		v2.add(a2);
 		Attribute[] attributes2 = Utility.getAnnotationAttributes(cp, v2);
 		boolean foundRIV = false;
-		for (int i = 0; i < attributes2.length; i++)
-		{
-			Attribute attribute = attributes2[i];
+		for (Attribute attribute : attributes2) {
 			if (attribute instanceof RuntimeInvisibleAnnotations)
 			{
 				assertFalse(((Annotations) attribute).isRuntimeVisible());
