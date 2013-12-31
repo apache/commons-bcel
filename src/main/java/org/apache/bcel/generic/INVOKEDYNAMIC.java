@@ -23,11 +23,9 @@ import java.util.StringTokenizer;
 import org.apache.bcel.Constants;
 import org.apache.bcel.ExceptionConstants;
 import org.apache.bcel.classfile.Constant;
-import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantInvokeDynamic;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
-import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.util.ByteSequence;
 
 /**
