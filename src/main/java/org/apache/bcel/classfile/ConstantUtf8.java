@@ -54,6 +54,7 @@ public final class ConstantUtf8 extends Constant {
     static {
         if (BCEL_STATISTICS) {
             Runtime.getRuntime().addShutdownHook(new Thread() {
+                @Override
                 public void run() {
                     System.err.println("Cache hit " + hits + "/" + considered +", "
                             + skipped + " skipped");
@@ -71,6 +72,7 @@ public final class ConstantUtf8 extends Constant {
         considered++;
         if (cache == null)  {
             cache = new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
+                @Override
                 protected boolean removeEldestEntry(Map.Entry<String, ConstantUtf8> eldest) {
                      return size() > MAX_CACHE_ENTRIES;
                 }

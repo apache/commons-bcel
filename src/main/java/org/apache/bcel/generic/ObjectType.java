@@ -44,6 +44,7 @@ public class ObjectType extends ReferenceType {
             cache = new LinkedHashMap<String, ObjectType>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
 
 
+            @Override
             protected boolean removeEldestEntry(Map.Entry<String, ObjectType> eldest) {
                return size() > MAX_CACHE_ENTRIES;
             }
