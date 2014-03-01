@@ -47,6 +47,7 @@
       <commons.componentid>bcel</commons.componentid>
       <commons.release.version>6.0</commons.release.version>
       <commons.release.desc>(Java 5.0+)</commons.release.desc>
+      <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
       <!-- Configuration properties for the OSGi maven-bundle-plugin -->
       <commons.osgi.symbolicName>org.apache.${commons.componentid}</commons.osgi.symbolicName>
       <commons.osgi.export>org.apache.bcel.*;version=${project.version};-noimport:=true</commons.osgi.export>
