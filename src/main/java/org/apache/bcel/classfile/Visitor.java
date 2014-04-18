@@ -106,4 +106,6 @@ public interface Visitor
 	void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
 
 	void visitEnclosingMethod(EnclosingMethod obj);
+
+    void visitBootstrapMethods(BootstrapMethods obj);
 }

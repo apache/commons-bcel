@@ -1444,8 +1444,9 @@ public interface Constants {
   public static final byte ATTR_LOCAL_VARIABLE_TYPE_TABLE               = 17;
   public static final byte ATTR_ENCLOSING_METHOD                      	= 18;
   public static final byte ATTR_STACK_MAP_TABLE                         = 19;
+  public static final byte ATTR_BOOTSTRAP_METHODS                       = 20;
 
-  public static final short KNOWN_ATTRIBUTES = 20;
+  public static final short KNOWN_ATTRIBUTES = 21;
 
   // TOFO: FIXXXXX
   public static final String[] ATTRIBUTE_NAMES = {
@@ -1455,7 +1456,8 @@ public interface Constants {
     "PMGClass", "Signature", "StackMap",
     "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
     "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations",
-    "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod", "StackMapTable"
+    "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod", "StackMapTable",
+    "BootstrapMethods"
   };
 
   /** Constants used in the StackMap attribute.

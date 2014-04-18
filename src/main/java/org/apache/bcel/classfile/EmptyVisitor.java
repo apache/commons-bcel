@@ -189,4 +189,8 @@ public class EmptyVisitor implements Visitor
 	public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
 	{
 	}
+
+    public void visitBootstrapMethods(BootstrapMethods obj)
+    {
+    }
 }

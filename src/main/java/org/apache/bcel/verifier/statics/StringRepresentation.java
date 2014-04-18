@@ -19,6 +19,7 @@ package org.apache.bcel.verifier.statics;
 
 
 import org.apache.bcel.classfile.Annotations;
+import org.apache.bcel.classfile.BootstrapMethods;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.ConstantClass;
@@ -294,6 +295,11 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitUnknown(Unknown obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
+    public void visitBootstrapMethods(BootstrapMethods obj) {
         tostring = toString(obj);
     }
 }

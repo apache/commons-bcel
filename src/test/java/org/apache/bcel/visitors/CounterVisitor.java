@@ -21,6 +21,7 @@ package org.apache.bcel.visitors;
 import org.apache.bcel.classfile.AnnotationDefault;
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Annotations;
+import org.apache.bcel.classfile.BootstrapMethods;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.ConstantClass;
@@ -141,6 +142,8 @@ public class CounterVisitor implements Visitor
 	public int stackMapTableCount = 0;
 
 	public int stackMapTableEntryCount = 0;
+
+	public int bootstrapMethodsCount = 0;
 	
 
 	public void visitAnnotation(Annotations obj)
@@ -333,11 +336,18 @@ public class CounterVisitor implements Visitor
 		unknownCount++;
 	}
 
-	public void visitStackMapTable(StackMapTable obj) {
+	public void visitStackMapTable(StackMapTable obj)
+    {
 		stackMapTableCount++;
 	}
 
-	public void visitStackMapTableEntry(StackMapTableEntry obj) {
+	public void visitStackMapTableEntry(StackMapTableEntry obj)
+    {
 		stackMapTableEntryCount++;
 	}
+
+    public void visitBootstrapMethods(BootstrapMethods obj)
+    {
+        bootstrapMethodsCount++;
+    }
 }

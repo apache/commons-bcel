@@ -214,6 +214,8 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 			return new EnclosingMethod(name_index, length, file, constant_pool);
 		case Constants.ATTR_STACK_MAP_TABLE:
 			return new StackMapTable(name_index, length, file, constant_pool);
+		case Constants.ATTR_BOOTSTRAP_METHODS:
+			return new BootstrapMethods(name_index, length, file, constant_pool);
 		default: // Never reached
 			throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);
 		}
