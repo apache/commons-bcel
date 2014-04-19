@@ -195,13 +195,13 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 		case Constants.ATTR_RUNTIME_VISIBLE_ANNOTATIONS:
 			return new RuntimeVisibleAnnotations(name_index, length, file,
 					constant_pool);
-		case Constants.ATTR_RUNTIMEIN_VISIBLE_ANNOTATIONS:
+		case Constants.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS:
 			return new RuntimeInvisibleAnnotations(name_index, length, file,
 					constant_pool);
 		case Constants.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS:
 			return new RuntimeVisibleParameterAnnotations(name_index, length,
 					file, constant_pool);
-		case Constants.ATTR_RUNTIMEIN_VISIBLE_PARAMETER_ANNOTATIONS:
+		case Constants.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS:
 			return new RuntimeInvisibleParameterAnnotations(name_index, length,
 					file, constant_pool);
 		case Constants.ATTR_ANNOTATION_DEFAULT:

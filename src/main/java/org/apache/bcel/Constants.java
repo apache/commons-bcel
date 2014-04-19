@@ -1437,9 +1437,9 @@ public interface Constants {
   public static final byte ATTR_SIGNATURE                     			= 10;
   public static final byte ATTR_STACK_MAP                     			= 11;
   public static final byte ATTR_RUNTIME_VISIBLE_ANNOTATIONS    			= 12;
-  public static final byte ATTR_RUNTIMEIN_VISIBLE_ANNOTATIONS  			= 13;
+  public static final byte ATTR_RUNTIME_INVISIBLE_ANNOTATIONS           = 13;
   public static final byte ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS 	= 14;
-  public static final byte ATTR_RUNTIMEIN_VISIBLE_PARAMETER_ANNOTATIONS = 15;
+  public static final byte ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS = 15;
   public static final byte ATTR_ANNOTATION_DEFAULT                      = 16;
   public static final byte ATTR_LOCAL_VARIABLE_TYPE_TABLE               = 17;
   public static final byte ATTR_ENCLOSING_METHOD                      	= 18;

@@ -42,7 +42,7 @@ public class RuntimeInvisibleParameterAnnotations extends ParameterAnnotations {
      */
     RuntimeInvisibleParameterAnnotations(int name_index, int length, DataInputStream file,
             ConstantPool constant_pool) throws IOException {
-        super(Constants.ATTR_RUNTIMEIN_VISIBLE_PARAMETER_ANNOTATIONS, name_index, length, file,
+        super(Constants.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS, name_index, length, file,
                 constant_pool);
     }
 
