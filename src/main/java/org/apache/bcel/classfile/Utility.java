@@ -86,7 +86,7 @@ public abstract class Utility {
      * @param  access_flags Access flags
      * @return String representation of flags
      */
-    public static final String accessToString( int access_flags ) {
+    public static String accessToString( int access_flags ) {
         return accessToString(access_flags, false);
     }
 
@@ -103,7 +103,7 @@ public abstract class Utility {
      * @param  for_class access flags are for class qualifiers ?
      * @return String representation of flags
      */
-    public static final String accessToString( int access_flags, boolean for_class ) {
+    public static String accessToString( int access_flags, boolean for_class ) {
         StringBuilder buf = new StringBuilder();
         int p = 0;
         for (int i = 0; p < Constants.MAX_ACC_FLAG; i++) { // Loop through known flags
@@ -129,7 +129,7 @@ public abstract class Utility {
      * 
      * @return "class" or "interface", depending on the ACC_INTERFACE flag
      */
-    public static final String classOrInterface( int access_flags ) {
+    public static String classOrInterface( int access_flags ) {
         return ((access_flags & Constants.ACC_INTERFACE) != 0) ? "interface" : "class";
     }
 
@@ -148,7 +148,7 @@ public abstract class Utility {
      * @param  verbose be verbose, e.g. print constant pool index
      * @return String representation of byte codes
      */
-    public static final String codeToString( byte[] code, ConstantPool constant_pool, int index,
+    public static String codeToString( byte[] code, ConstantPool constant_pool, int index,
             int length, boolean verbose ) {
         StringBuilder buf = new StringBuilder(code.length * 20); // Should be sufficient
         ByteSequence stream = new ByteSequence(code);
@@ -172,8 +172,7 @@ public abstract class Utility {
     }
 
 
-    public static final String codeToString( byte[] code, ConstantPool constant_pool, int index,
-            int length ) {
+    public static String codeToString( byte[] code, ConstantPool constant_pool, int index, int length ) {
         return codeToString(code, constant_pool, index, length, true);
     }
 
@@ -189,7 +188,7 @@ public abstract class Utility {
      * 
      * @throws IOException if a failure from reading from the bytes argument occurs
      */
-    public static final String codeToString( ByteSequence bytes, ConstantPool constant_pool,
+    public static String codeToString( ByteSequence bytes, ConstantPool constant_pool,
             boolean verbose ) throws IOException {
         short opcode = (short) bytes.readUnsignedByte();
         int default_offset = 0, low, high, npairs;
@@ -448,7 +447,7 @@ public abstract class Utility {
     }
 
 
-    public static final String codeToString( ByteSequence bytes, ConstantPool constant_pool )
+    public static String codeToString( ByteSequence bytes, ConstantPool constant_pool )
             throws IOException {
         return codeToString(bytes, constant_pool, true);
     }
@@ -461,7 +460,7 @@ public abstract class Utility {
      * @param str The long class name
      * @return Compacted class name
      */
-    public static final String compactClassName( String str ) {
+    public static String compactClassName( String str ) {
         return compactClassName(str, true);
     }
 
@@ -477,7 +476,7 @@ public abstract class Utility {
      * @param chopit Flag that determines whether chopping is executed or not
      * @return Compacted class name
      */
-    public static final String compactClassName( String str, String prefix, boolean chopit ) {
+    public static String compactClassName( String str, String prefix, boolean chopit ) {
         int len = prefix.length();
         str = str.replace('/', '.'); // Is `/' on all systems, even DOS
         if (chopit) {
@@ -500,7 +499,7 @@ public abstract class Utility {
      * @param chopit Flag that determines whether chopping is executed or not
      * @return Compacted class name
      */
-    public static final String compactClassName( String str, boolean chopit ) {
+    public static String compactClassName( String str, boolean chopit ) {
         return compactClassName(str, "java.lang.", chopit);
     }
 
@@ -508,7 +507,7 @@ public abstract class Utility {
     /**
      * @return `flag' with bit `i' set to 1
      */
-    public static final int setBit( int flag, int i ) {
+    public static int setBit( int flag, int i ) {
         return flag | pow2(i);
     }
 
@@ -516,7 +515,7 @@ public abstract class Utility {
     /**
      * @return `flag' with bit `i' set to 0
      */
-    public static final int clearBit( int flag, int i ) {
+    public static int clearBit( int flag, int i ) {
         int bit = pow2(i);
         return (flag & bit) == 0 ? flag : flag ^ bit;
     }
@@ -525,7 +524,7 @@ public abstract class Utility {
     /**
      * @return true, if bit `i' in `flag' is set
      */
-    public static final boolean isSet( int flag, int i ) {
+    public static boolean isSet( int flag, int i ) {
         return (flag & pow2(i)) != 0;
     }
 
@@ -540,7 +539,7 @@ public abstract class Utility {
      * 
      * @throws ClassFormatException if the signature is for Void
      */
-    public final static String methodTypeToSignature( String ret, String[] argv )
+    public static String methodTypeToSignature( String ret, String[] argv )
             throws ClassFormatException {
         StringBuilder buf = new StringBuilder("(");
         String str;
@@ -564,7 +563,7 @@ public abstract class Utility {
      * @return Array of argument types
      * @throws  ClassFormatException  
      */
-    public static final String[] methodSignatureArgumentTypes( String signature )
+    public static String[] methodSignatureArgumentTypes( String signature )
             throws ClassFormatException {
         return methodSignatureArgumentTypes(signature, true);
     }
@@ -576,7 +575,7 @@ public abstract class Utility {
      * @return Array of argument types
      * @throws  ClassFormatException  
      */
-    public static final String[] methodSignatureArgumentTypes( String signature, boolean chopit )
+    public static String[] methodSignatureArgumentTypes( String signature, boolean chopit ) 
             throws ClassFormatException {
         List<String> vec = new ArrayList<String>();
         int index;
@@ -602,8 +601,7 @@ public abstract class Utility {
      * @return return type of method
      * @throws  ClassFormatException  
      */
-    public static final String methodSignatureReturnType( String signature )
-            throws ClassFormatException {
+    public static String methodSignatureReturnType( String signature ) throws ClassFormatException {
         return methodSignatureReturnType(signature, true);
     }
 
@@ -614,8 +612,7 @@ public abstract class Utility {
      * @return return type of method
      * @throws  ClassFormatException  
      */
-    public static final String methodSignatureReturnType( String signature, boolean chopit )
-            throws ClassFormatException {
+    public static String methodSignatureReturnType( String signature, boolean chopit ) throws ClassFormatException {
         int index;
         String type;
         try {
@@ -637,13 +634,12 @@ public abstract class Utility {
      * @param access flags of method
      * @return Human readable signature
      */
-    public static final String methodSignatureToString( String signature, String name, String access ) {
+    public static String methodSignatureToString( String signature, String name, String access ) {
         return methodSignatureToString(signature, name, access, true);
     }
 
 
-    public static final String methodSignatureToString( String signature, String name,
-            String access, boolean chopit ) {
+    public static String methodSignatureToString( String signature, String name, String access, boolean chopit ) {
         return methodSignatureToString(signature, name, access, chopit, null);
     }
 
@@ -677,7 +673,7 @@ public abstract class Utility {
      * @return Java type declaration
      * @throws  ClassFormatException  
      */
-    public static final String methodSignatureToString( String signature, String name,
+    public static String methodSignatureToString( String signature, String name,
             String access, boolean chopit, LocalVariableTable vars ) throws ClassFormatException {
         StringBuilder buf = new StringBuilder("(");
         String type;
@@ -737,7 +733,7 @@ public abstract class Utility {
      * @param new_ Replacement string
      * @return new String object
      */
-    public static final String replace( String str, String old, String new_ ) {
+    public static String replace( String str, String old, String new_ ) {
         int index, old_index;
         try {
             if (str.indexOf(old) != -1) { // `old' found in str
@@ -765,7 +761,7 @@ public abstract class Utility {
      * @param signature to convert
      * @return Human readable signature
      */
-    public static final String signatureToString( String signature ) {
+    public static String signatureToString( String signature ) {
         return signatureToString(signature, true);
     }
 
@@ -804,7 +800,7 @@ public abstract class Utility {
      * @return Java type declaration
      * @throws ClassFormatException
      */
-    public static final String signatureToString( String signature, boolean chopit ) {
+    public static String signatureToString( String signature, boolean chopit ) {
         //corrected concurrent private static field acess
         wrap(consumed_chars, 1); // This is the default, read just one char like `B'
         try {
@@ -961,7 +957,7 @@ public abstract class Utility {
      * 
      * @throws ClassFormatException if signature is not a method signature
      */
-    public static final byte typeOfMethodSignature( String signature ) throws ClassFormatException {
+    public static byte typeOfMethodSignature( String signature ) throws ClassFormatException {
         int index;
         try {
             if (signature.charAt(0) != '(') {
@@ -984,7 +980,7 @@ public abstract class Utility {
      * 
      * @throws ClassFormatException if signature isn't a known type
      */
-    public static final byte typeOfSignature( String signature ) throws ClassFormatException {
+    public static byte typeOfSignature( String signature ) throws ClassFormatException {
         try {
             switch (signature.charAt(0)) {
                 case 'B':
@@ -1047,7 +1043,7 @@ public abstract class Utility {
      * 
      * @return bytes as hexadecimal string, e.g. 00 FA 12 ...
      */
-    public static final String toHexString( byte[] bytes ) {
+    public static String toHexString( byte[] bytes ) {
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
             short b = byteToShort(bytes[i]);
@@ -1074,7 +1070,7 @@ public abstract class Utility {
      * @param fill fill character
      * @return formatted int
      */
-    public static final String format( int i, int length, boolean left_justify, char fill ) {
+    public static String format( int i, int length, boolean left_justify, char fill ) {
         return fillup(Integer.toString(i), length, left_justify, fill);
     }
 
@@ -1088,7 +1084,7 @@ public abstract class Utility {
      * @param fill fill character
      * @return formatted string
      */
-    public static final String fillup( String str, int length, boolean left_justify, char fill ) {
+    public static String fillup( String str, int length, boolean left_justify, char fill ) {
         int len = length - str.length();
         char[] buf = new char[(len < 0) ? 0 : len];
         for (int j = 0; j < buf.length; j++) {
@@ -1101,7 +1097,7 @@ public abstract class Utility {
     }
 
 
-    static final boolean equals( byte[] a, byte[] b ) {
+    static boolean equals( byte[] a, byte[] b ) {
         int size;
         if ((size = a.length) != b.length) {
             return false;
@@ -1115,27 +1111,27 @@ public abstract class Utility {
     }
 
 
-    public static final void printArray( PrintStream out, Object[] obj ) {
+    public static void printArray( PrintStream out, Object[] obj ) {
         out.println(printArray(obj, true));
     }
 
 
-    public static final void printArray( PrintWriter out, Object[] obj ) {
+    public static void printArray( PrintWriter out, Object[] obj ) {
         out.println(printArray(obj, true));
     }
 
 
-    public static final String printArray( Object[] obj ) {
+    public static String printArray( Object[] obj ) {
         return printArray(obj, true);
     }
 
 
-    public static final String printArray( Object[] obj, boolean braces ) {
+    public static String printArray( Object[] obj, boolean braces ) {
         return printArray(obj, braces, false);
     }
 
 
-    public static final String printArray( Object[] obj, boolean braces, boolean quote ) {
+    public static String printArray( Object[] obj, boolean braces, boolean quote ) {
         if (obj == null) {
             return null;
         }
@@ -1362,7 +1358,7 @@ public abstract class Utility {
     /**
      * Escape all occurences of newline chars '\n', quotes \", etc.
      */
-    public static final String convertString( String label ) {
+    public static String convertString( String label ) {
         char[] ch = label.toCharArray();
         StringBuilder buf = new StringBuilder();
         for (char element : ch) {

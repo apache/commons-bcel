@@ -130,7 +130,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 	 *      constants @return Attribute @throws IOException @throws
 	 *      ClassFormatException
 	 */
-	public static final Attribute readAttribute(DataInputStream file,
+	public static Attribute readAttribute(DataInputStream file,
 			ConstantPool constant_pool) throws IOException,
 			ClassFormatException
 	{

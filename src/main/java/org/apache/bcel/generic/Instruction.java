@@ -146,7 +146,7 @@ public abstract class Instruction implements Cloneable, Serializable {
      * @param bytes input stream bytes
      * @return instruction object being read
      */
-    public static final Instruction readInstruction( ByteSequence bytes ) throws IOException {
+    public static Instruction readInstruction( ByteSequence bytes ) throws IOException {
         boolean wide = false;
         short opcode = (short) bytes.readUnsignedByte();
         Instruction obj = null;

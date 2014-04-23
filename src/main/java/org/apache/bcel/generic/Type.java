@@ -177,7 +177,7 @@ public abstract class Type implements java.io.Serializable {
      * @param signature signature string such as Ljava/lang/String;
      * @return type object
      */
-    public static final Type getType( String signature ) throws StringIndexOutOfBoundsException {
+    public static Type getType( String signature ) throws StringIndexOutOfBoundsException {
         byte type = Utility.typeOfSignature(signature);
         if (type <= Constants.T_VOID) {
             //corrected concurrent private static field acess
@@ -351,7 +351,7 @@ public abstract class Type implements java.io.Serializable {
         return res;
     }
     
-    static final int getTypeSize( String signature ) throws StringIndexOutOfBoundsException {
+    static int getTypeSize( String signature ) throws StringIndexOutOfBoundsException {
         byte type = Utility.typeOfSignature(signature);
         if (type <= Constants.T_VOID) {
             return encode(BasicType.getType(type).getSize(), 1);

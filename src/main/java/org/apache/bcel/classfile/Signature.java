@@ -240,12 +240,12 @@ public final class Signature extends Attribute {
     }
 
 
-    public static final boolean isFormalParameterList( String s ) {
+    public static boolean isFormalParameterList( String s ) {
         return s.startsWith("<") && (s.indexOf(':') > 0);
     }
 
 
-    public static final boolean isActualParameterList( String s ) {
+    public static boolean isActualParameterList( String s ) {
         return s.startsWith("L") && s.endsWith(">;");
     }
 
