@@ -461,11 +461,11 @@
       private static BufferedReader in = new BufferedReader(new
                                 InputStreamReader(System.in));
 
-      public static final int fac(int n) {
+      public static int fac(int n) {
         return (n == 0)? 1 : n * fac(n - 1);
       }
 
-      public static final int readInt() {
+      public static int readInt() {
         int n = 4711;
         try {
         System.out.print("Please enter a number&gt; ");

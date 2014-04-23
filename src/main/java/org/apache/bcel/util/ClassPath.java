@@ -155,7 +155,7 @@ public class ClassPath implements Serializable {
      *
      * @return class path as used by default by BCEL
      */
-    public static final String getClassPath() {
+    public static String getClassPath() {
         String class_path = System.getProperty("java.class.path");
         String boot_path = System.getProperty("sun.boot.class.path");
         String ext_path = System.getProperty("java.ext.dirs");

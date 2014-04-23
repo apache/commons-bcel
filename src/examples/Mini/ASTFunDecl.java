@@ -401,7 +401,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
    */
   static int size, max_size;
 
-  static final void reset() { size = max_size = 0; }
+  static void reset() { size = max_size = 0; }
 
   private static String getVarDecls() {
     StringBuffer buf = new StringBuffer("    int ");
@@ -420,24 +420,24 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
   /** Used by byte_code()
    */
-  static final void pop(int s) { size -= s; }
-  static final void push(int s) {
+  static void pop(int s) { size -= s; }
+  static void push(int s) {
     size += s;
 
     if(size > max_size) {
         max_size = size;
     }
   }
-  static final void push() { push(1); }
+  static void push() { push(1); }
 
   /** Used byte code()
    */
-  static final void push(StringBuffer buf, String str) {
+  static void push(StringBuffer buf, String str) {
     buf.append("    _s" + size + " = " + str + ";\n");
     push(1);
   }
 
-  static final String pop() {
+  static String pop() {
     return "_s" + (--size);
   }
 }

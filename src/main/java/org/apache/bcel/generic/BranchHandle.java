@@ -45,7 +45,7 @@ public final class BranchHandle extends InstructionHandle {
     private static BranchHandle bh_list = null; // List of reusable handles
 
 
-    static final BranchHandle getBranchHandle( BranchInstruction i ) {
+    static BranchHandle getBranchHandle( BranchInstruction i ) {
         if (bh_list == null) {
             return new BranchHandle(i);
         }

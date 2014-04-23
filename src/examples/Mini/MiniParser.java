@@ -27,7 +27,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
 /* A program consists of a number of function declarations with a
  * distinguished function `main' that starts the program.
  */
-  static final public void Program() throws ParseException {
+  static public void Program() throws ParseException {
                   /*@bgen(jjtree) Program */
   ASTProgram jjtn000 = new ASTProgram(JJTPROGRAM);
   boolean jjtc000 = true;
@@ -76,7 +76,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
 
 /* "FUN" Ident() "(" NameList() ")" = Expr()
  */
-  static final public void FunDecl() throws ParseException {
+  static public void FunDecl() throws ParseException {
  /*@bgen(jjtree) FunDecl */
   ASTFunDecl jjtn000 = new ASTFunDecl(JJTFUNDECL);
   boolean jjtc000 = true;
@@ -141,7 +141,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static final public void Expr() throws ParseException {
+  static public void Expr() throws ParseException {
  /*@bgen(jjtree) Expr */
   ASTExpr jjtn000 = new ASTExpr(JJTEXPR);
   boolean jjtc000 = true;
@@ -220,7 +220,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
  * else's to the innermost if statement. The LOOKAHEAD specification
  * is to tell JavaCC that we know what we are doing.
  */
-  static final public void IfExpr() throws ParseException {
+  static public void IfExpr() throws ParseException {
  /*@bgen(jjtree) IfExpr */
   ASTIfExpr jjtn000 = new ASTIfExpr(JJTIFEXPR);
   boolean jjtc000 = true;
@@ -269,7 +269,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static final public void LetExpr() throws ParseException {
+  static public void LetExpr() throws ParseException {
  /*@bgen(jjtree) LetExpr */
   ASTLetExpr jjtn000 = new ASTLetExpr(JJTLETEXPR);
   boolean jjtc000 = true;
@@ -325,7 +325,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static final public Token FunAppl() throws ParseException {
+  static public Token FunAppl() throws ParseException {
  /*@bgen(jjtree) FunAppl */
   ASTFunAppl jjtn000 = new ASTFunAppl(JJTFUNAPPL);
   boolean jjtc000 = true;
@@ -400,7 +400,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     throw new Error("Missing return statement in function");
   }
 
-  static final public void Term() throws ParseException {
+  static public void Term() throws ParseException {
  /*@bgen(jjtree) Term */
   ASTTerm jjtn000 = new ASTTerm(JJTTERM);
   boolean jjtc000 = true;
@@ -452,7 +452,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static final public void Factor() throws ParseException {
+  static public void Factor() throws ParseException {
  /*@bgen(jjtree) Factor */
   ASTFactor jjtn000 = new ASTFactor(JJTFACTOR);
   boolean jjtc000 = true;
@@ -506,7 +506,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static final public void Element() throws ParseException {
+  static public void Element() throws ParseException {
     if (jj_2_1(2)) {
       expr_token = FunAppl();
     } else {
@@ -534,7 +534,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static final public Token Integer() throws ParseException {
+  static public Token Integer() throws ParseException {
  /*@bgen(jjtree) Integer */
   ASTInteger jjtn000 = new ASTInteger(JJTINTEGER);
   boolean jjtc000 = true;
@@ -559,7 +559,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     throw new Error("Missing return statement in function");
   }
 
-  static final public Token Ident() throws ParseException {
+  static public Token Ident() throws ParseException {
  /*@bgen(jjtree) Ident */
   ASTIdent jjtn000 = new ASTIdent(JJTIDENT);
   boolean jjtc000 = true;
@@ -604,7 +604,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     throw new Error("Missing return statement in function");
   }
 
-  static final public int AddOp() throws ParseException {
+  static public int AddOp() throws ParseException {
   Token t=null;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case PLUS:
@@ -627,7 +627,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     throw new Error("Missing return statement in function");
   }
 
-  static final public int MultOp() throws ParseException {
+  static public int MultOp() throws ParseException {
   Token t=null;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case MULT:
@@ -653,7 +653,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     throw new Error("Missing return statement in function");
   }
 
-  static final public int CmpOp() throws ParseException {
+  static public int CmpOp() throws ParseException {
   Token t=null;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case EQ:
@@ -705,14 +705,14 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     throw new Error("Missing return statement in function");
   }
 
-  static final private boolean jj_2_1(int xla) {
+  static private boolean jj_2_1(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     boolean retval = !jj_3_1();
     jj_save(0, xla);
     return retval;
   }
 
-  static final private boolean jj_3R_8() {
+  static private boolean jj_3R_8() {
     if (jj_scan_token(FALSE)) {
         return true;
     }
@@ -722,7 +722,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return false;
   }
 
-  static final private boolean jj_3R_11() {
+  static private boolean jj_3R_11() {
     if (jj_scan_token(IDENT)) {
         return true;
     }
@@ -732,7 +732,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return false;
   }
 
-  static final private boolean jj_3R_7() {
+  static private boolean jj_3R_7() {
     if (jj_scan_token(TRUE)) {
         return true;
     }
@@ -742,7 +742,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return false;
   }
 
-  static final private boolean jj_3R_6() {
+  static private boolean jj_3R_6() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_7()) {
@@ -774,7 +774,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return false;
   }
 
-  static final private boolean jj_3_1() {
+  static private boolean jj_3_1() {
     if (jj_3R_5()) {
         return true;
     }
@@ -784,7 +784,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return false;
   }
 
-  static final private boolean jj_3R_5() {
+  static private boolean jj_3R_5() {
     if (jj_3R_6()) {
         return true;
     }
@@ -800,7 +800,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return false;
   }
 
-  static final private boolean jj_3R_10() {
+  static private boolean jj_3R_10() {
     if (jj_scan_token(WRITE)) {
         return true;
     }
@@ -810,7 +810,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return false;
   }
 
-  static final private boolean jj_3R_9() {
+  static private boolean jj_3R_9() {
     if (jj_scan_token(READ)) {
         return true;
     }
@@ -943,7 +943,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static final private Token jj_consume_token(int kind) throws ParseException {
+  static private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
     if ((oldToken = token).next != null) {
         token = token.next;
@@ -972,7 +972,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     throw generateParseException();
   }
 
-  static final private boolean jj_scan_token(int kind) {
+  static private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {
       jj_la--;
       if (jj_scanpos.next == null) {
@@ -993,7 +993,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return (jj_scanpos.kind != kind);
   }
 
-  static final public Token getNextToken() {
+  static public Token getNextToken() {
     if (token.next != null) {
         token = token.next;
     } else {
@@ -1004,7 +1004,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return token;
   }
 
-  static final public Token getToken(int index) {
+  static public Token getToken(int index) {
     Token t = lookingAhead ? jj_scanpos : token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) {
@@ -1016,7 +1016,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return t;
   }
 
-  static final private int jj_ntk() {
+  static private int jj_ntk() {
     if ((jj_nt=token.next) == null) {
         return (jj_ntk = (token.next=MiniParserTokenManager.getNextToken()).kind);
     } else {
@@ -1066,7 +1066,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static final public ParseException generateParseException() {
+  static public ParseException generateParseException() {
     jj_expentries.removeAllElements();
     boolean[] la1tokens = new boolean[43];
     for (int i = 0; i < 43; i++) {
@@ -1105,13 +1105,13 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     return new ParseException(token, exptokseq, tokenImage);
   }
 
-  static final public void enable_tracing() {
+  static public void enable_tracing() {
   }
 
-  static final public void disable_tracing() {
+  static public void disable_tracing() {
   }
 
-  static final private void jj_rescan_token() {
+  static private void jj_rescan_token() {
     jj_rescan = true;
     for (int i = 0; i < 1; i++) {
       JJCalls p = jj_2_rtns[i];
@@ -1128,7 +1128,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     jj_rescan = false;
   }
 
-  static final private void jj_save(int index, int xla) {
+  static private void jj_save(int index, int xla) {
     JJCalls p = jj_2_rtns[index];
     while (p.gen > jj_gen) {
       if (p.next == null) { p = p.next = new JJCalls(); break; }

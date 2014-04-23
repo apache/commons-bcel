@@ -106,7 +106,7 @@ public class InstructionHandle implements java.io.Serializable {
 
     /** Factory method.
      */
-    static final InstructionHandle getInstructionHandle( Instruction i ) {
+    static InstructionHandle getInstructionHandle( Instruction i ) {
         if (ih_list == null) {
             return new InstructionHandle(i);
         } else {

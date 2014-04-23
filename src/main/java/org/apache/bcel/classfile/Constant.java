@@ -125,7 +125,7 @@ public abstract class Constant implements Cloneable, Node, Serializable {
      * @param file Input stream
      * @return Constant object
      */
-    static final Constant readConstant( DataInputStream file ) throws IOException,
+    static Constant readConstant( DataInputStream file ) throws IOException,
             ClassFormatException {
         byte b = file.readByte(); // Read tag byte
         switch (b) {

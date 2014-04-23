@@ -158,7 +158,7 @@ public class Class2HTML implements Constants {
     }
 
 
-    static final String referenceType( String type ) {
+    static String referenceType( String type ) {
         String short_type = Utility.compactClassName(type);
         short_type = Utility.compactClassName(short_type, class_package + ".", true);
         int index = type.indexOf('['); // Type is an array?

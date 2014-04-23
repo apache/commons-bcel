@@ -651,7 +651,7 @@ static int jjround;
 static int jjmatchedPos;
 static int jjmatchedKind;
 
-public static final Token getNextToken() 
+public static Token getNextToken() 
 {
   Token specialToken = null;
   Token matchedToken;
@@ -770,7 +770,7 @@ public static final Token getNextToken()
   }
 }
 
-static final void SkipLexicalActions(Token matchedToken)
+static void SkipLexicalActions(Token matchedToken)
 {
    switch(jjmatchedKind)
    {

@@ -218,7 +218,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /* Print debug information depending on `JavaClass.debug'
      */
-    static final void Debug( String str ) {
+    static void Debug( String str ) {
         if (debug) {
             System.out.println(str);
         }

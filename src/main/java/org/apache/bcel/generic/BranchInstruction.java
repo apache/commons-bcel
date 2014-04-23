@@ -192,7 +192,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Used by BranchInstruction, LocalVariableGen, CodeExceptionGen
      */
-    static final void notifyTarget( InstructionHandle old_ih, InstructionHandle new_ih,
+    static void notifyTarget( InstructionHandle old_ih, InstructionHandle new_ih,
             InstructionTargeter t ) {
         if (old_ih != null) {
             old_ih.removeTargeter(t);
