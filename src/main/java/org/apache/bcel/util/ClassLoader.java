@@ -115,7 +115,7 @@ public class ClassLoader extends java.lang.ClassLoader {
                 JavaClass clazz = null;
                 /* Third try: Special request?
                  */
-                if (class_name.indexOf("$$BCEL$$") >= 0) {
+                if (class_name.contains("$$BCEL$$")) {
                     clazz = createClass(class_name);
                 } else { // Fourth try: Load classes via repository
                     if ((clazz = repository.loadClass(class_name)) != null) {

@@ -678,7 +678,7 @@ public abstract class Utility {
         StringBuilder buf = new StringBuilder("(");
         String type;
         int index;
-        int var_index = (access.indexOf("static") >= 0) ? 0 : 1;
+        int var_index = access.contains("static") ? 0 : 1;
         try { // Read all declarations between for `(' and `)'
             if (signature.charAt(0) != '(') {
                 throw new ClassFormatException("Invalid method signature: " + signature);
@@ -736,7 +736,7 @@ public abstract class Utility {
     public static String replace( String str, String old, String new_ ) {
         int index, old_index;
         try {
-            if (str.indexOf(old) != -1) { // `old' found in str
+            if (str.contains(old)) { // `old' found in str
                 StringBuilder buf = new StringBuilder();
                 old_index = 0; // String start offset
                 // While we have something to replace

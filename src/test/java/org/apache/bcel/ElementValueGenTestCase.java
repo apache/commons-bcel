@@ -205,8 +205,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
 		ObjectType classType = new ObjectType("java.lang.Integer");
 		ClassElementValueGen evg = new ClassElementValueGen(classType, cp);
 		assertTrue("Unexpected value for contained class: '"
-				+ evg.getClassString() + "'", evg.getClassString().indexOf(
-				"Integer") != -1);
+				+ evg.getClassString() + "'", evg.getClassString().contains("Integer"));
 		checkSerialize(evg, cp);
 	}
 
