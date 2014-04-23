@@ -144,10 +144,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
         for (String interface1 : interfaces) {
             addInterface(interface1);
         }
-        for (int i = 0; i < attributes.length; i++) {
-        	if (!(attributes[i] instanceof Annotations)) {
-        		addAttribute(attributes[i]);
-        	}
+        for (Attribute attribute : attributes) {
+            if (!(attribute instanceof Annotations)) {
+                addAttribute(attribute);
+            }
         }
         for (AnnotationEntryGen annotation : annotations) {
             addAnnotationEntry(annotation);

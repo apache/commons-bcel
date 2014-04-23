@@ -249,30 +249,27 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			supidx = jc.getSuperclassNameIndex();
 
 			Method[] methods = jc.getMethods();
-			for (int i=0; i<methods.length; i++){
-				String name_and_sig = (methods[i].getName()+methods[i].getSignature());
+            for (Method method : methods) {
+                String name_and_sig = (method.getName() + method.getSignature());
 
-				if (hashmap.containsKey(name_and_sig)){
-					if ( methods[i].isFinal() ){
-					  if (!(methods[i].isPrivate())) {
-						  throw new ClassConstraintException("Method '"+name_and_sig+"' in class '"+hashmap.get(name_and_sig)+"' overrides the final (not-overridable) definition in class '"+jc.getClassName()+"'.");
-					  }
-					  else{
-						  addMessage("Method '"+name_and_sig+"' in class '"+hashmap.get(name_and_sig)+"' overrides the final (not-overridable) definition in class '"+jc.getClassName()+"'. This is okay, as the original definition was private; however this constraint leverage was introduced by JLS 8.4.6 (not vmspec2) and the behaviour of the Sun verifiers.");
-					  }
-					}
-					else{
-						if (!methods[i].isStatic()){ // static methods don't inherit
-							hashmap.put(name_and_sig, jc.getClassName());
-						}
-					}
-				}
-				else{
-					if (!methods[i].isStatic()){ // static methods don't inherit
-						hashmap.put(name_and_sig, jc.getClassName());
-					}
-				}
-			}
+                if (hashmap.containsKey(name_and_sig)) {
+                    if (method.isFinal()) {
+                        if (!(method.isPrivate())) {
+                            throw new ClassConstraintException("Method '" + name_and_sig + "' in class '" + hashmap.get(name_and_sig) + "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + "'.");
+                        } else {
+                            addMessage("Method '" + name_and_sig + "' in class '" + hashmap.get(name_and_sig) + "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + "'. This is okay, as the original definition was private; however this constraint leverage was introduced by JLS 8.4.6 (not vmspec2) and the behaviour of the Sun verifiers.");
+                        }
+                    } else {
+                        if (!method.isStatic()) { // static methods don't inherit
+                            hashmap.put(name_and_sig, jc.getClassName());
+                        }
+                    }
+                } else {
+                    if (!method.isStatic()) { // static methods don't inherit
+                        hashmap.put(name_and_sig, jc.getClassName());
+                    }
+                }
+            }
 		
 			jc = Repository.lookupClass(jc.getSuperclassName());	// Well, for OBJECT this returns OBJECT so it works (could return anything but must not throw an Exception).
 		}
@@ -381,36 +378,36 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			// This is a costly check; existing verifiers don't do it!
 			boolean hasInnerClass = new InnerClassDetector(jc).innerClassReferenced();
 
-			for (int i=0; i<atts.length; i++){
-				if ((! (atts[i] instanceof SourceFile)) &&
-				    (! (atts[i] instanceof Deprecated))     &&
-				    (! (atts[i] instanceof InnerClasses)) &&
-				    (! (atts[i] instanceof Synthetic))){
-					addMessage("Attribute '"+tostring(atts[i])+"' as an attribute of the ClassFile structure '"+tostring(obj)+"' is unknown and will therefore be ignored.");
-				}
+            for (Attribute att : atts) {
+                if ((!(att instanceof SourceFile)) &&
+                        (!(att instanceof Deprecated)) &&
+                        (!(att instanceof InnerClasses)) &&
+                        (!(att instanceof Synthetic))) {
+                    addMessage("Attribute '" + tostring(att) + "' as an attribute of the ClassFile structure '" + tostring(obj) + "' is unknown and will therefore be ignored.");
+                }
 
-				if (atts[i] instanceof SourceFile){
-					if (foundSourceFile == false) {
+                if (att instanceof SourceFile) {
+                    if (foundSourceFile == false) {
                         foundSourceFile = true;
                     } else {
-                        throw new ClassConstraintException("A ClassFile structure (like '"+tostring(obj)+"') may have no more than one SourceFile attribute."); //vmspec2 4.7.7
+                        throw new ClassConstraintException("A ClassFile structure (like '" + tostring(obj) + "') may have no more than one SourceFile attribute."); //vmspec2 4.7.7
                     }
-				}
+                }
 
-				if (atts[i] instanceof InnerClasses){
-					if (foundInnerClasses == false) {
+                if (att instanceof InnerClasses) {
+                    if (foundInnerClasses == false) {
                         foundInnerClasses = true;
-                    } else{
-						if (hasInnerClass){
-							throw new ClassConstraintException("A Classfile structure (like '"+tostring(obj)+"') must have exactly one InnerClasses attribute if at least one Inner Class is referenced (which is the case). More than one InnerClasses attribute was found.");
-						}
-					}
-					if (!hasInnerClass){
-						addMessage("No referenced Inner Class found, but InnerClasses attribute '"+tostring(atts[i])+"' found. Strongly suggest removal of that attribute.");
-					}
-				}
+                    } else {
+                        if (hasInnerClass) {
+                            throw new ClassConstraintException("A Classfile structure (like '" + tostring(obj) + "') must have exactly one InnerClasses attribute if at least one Inner Class is referenced (which is the case). More than one InnerClasses attribute was found.");
+                        }
+                    }
+                    if (!hasInnerClass) {
+                        addMessage("No referenced Inner Class found, but InnerClasses attribute '" + tostring(att) + "' found. Strongly suggest removal of that attribute.");
+                    }
+                }
 
-			}
+            }
 			if (hasInnerClass && !foundInnerClasses){
 				//throw new ClassConstraintException("A Classfile structure (like '"+tostring(obj)+"') must have exactly one InnerClasses attribute if at least one Inner Class is referenced (which is the case). No InnerClasses attribute was found.");
 				//vmspec2, page 125 says it would be a constraint: but existing verifiers
@@ -576,16 +573,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			field_names.add(name);
 
 			Attribute[] atts = obj.getAttributes();
-			for (int i=0; i<atts.length; i++){
-				if ((! (atts[i] instanceof ConstantValue)) &&
-				    (! (atts[i] instanceof Synthetic))     &&
-				    (! (atts[i] instanceof Deprecated))){
-					addMessage("Attribute '"+tostring(atts[i])+"' as an attribute of Field '"+tostring(obj)+"' is unknown and will therefore be ignored.");
-				}
-				if  (! (atts[i] instanceof ConstantValue)){
-					addMessage("Attribute '"+tostring(atts[i])+"' as an attribute of Field '"+tostring(obj)+"' is not a ConstantValue and is therefore only of use for debuggers and such.");
-				}
-			}
+            for (Attribute att : atts) {
+                if ((!(att instanceof ConstantValue)) &&
+                        (!(att instanceof Synthetic)) &&
+                        (!(att instanceof Deprecated))) {
+                    addMessage("Attribute '" + tostring(att) + "' as an attribute of Field '" + tostring(obj) + "' is unknown and will therefore be ignored.");
+                }
+                if (!(att instanceof ConstantValue)) {
+                    addMessage("Attribute '" + tostring(att) + "' as an attribute of Field '" + tostring(obj) + "' is not a ConstantValue and is therefore only of use for debuggers and such.");
+                }
+            }
 		}
 		///////////////////////////
 		// METHODS (vmspec2 4.6) //
@@ -738,24 +735,24 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
 			Attribute[] atts = obj.getAttributes();
 			int num_code_atts = 0;
-			for (int i=0; i<atts.length; i++){
-				if ((! (atts[i] instanceof Code)) &&
-				    (! (atts[i] instanceof ExceptionTable))     &&
-				    (! (atts[i] instanceof Synthetic)) &&
-				    (! (atts[i] instanceof Deprecated))){
-					addMessage("Attribute '"+tostring(atts[i])+"' as an attribute of Method '"+tostring(obj)+"' is unknown and will therefore be ignored.");
-				}
-				if ((! (atts[i] instanceof Code)) &&
-						(! (atts[i] instanceof ExceptionTable))){
-					addMessage("Attribute '"+tostring(atts[i])+"' as an attribute of Method '"+tostring(obj)+"' is neither Code nor Exceptions and is therefore only of use for debuggers and such.");
-				}
-				if ((atts[i] instanceof Code) && (obj.isNative() || obj.isAbstract())){
-					throw new ClassConstraintException("Native or abstract methods like '"+tostring(obj)+"' must not have a Code attribute like '"+tostring(atts[i])+"'."); //vmspec2 page120, 4.7.3
-				}
-				if (atts[i] instanceof Code) {
+            for (Attribute att : atts) {
+                if ((!(att instanceof Code)) &&
+                        (!(att instanceof ExceptionTable)) &&
+                        (!(att instanceof Synthetic)) &&
+                        (!(att instanceof Deprecated))) {
+                    addMessage("Attribute '" + tostring(att) + "' as an attribute of Method '" + tostring(obj) + "' is unknown and will therefore be ignored.");
+                }
+                if ((!(att instanceof Code)) &&
+                        (!(att instanceof ExceptionTable))) {
+                    addMessage("Attribute '" + tostring(att) + "' as an attribute of Method '" + tostring(obj) + "' is neither Code nor Exceptions and is therefore only of use for debuggers and such.");
+                }
+                if ((att instanceof Code) && (obj.isNative() || obj.isAbstract())) {
+                    throw new ClassConstraintException("Native or abstract methods like '" + tostring(obj) + "' must not have a Code attribute like '" + tostring(att) + "'."); //vmspec2 page120, 4.7.3
+                }
+                if (att instanceof Code) {
                     num_code_atts++;
                 }
-			}
+            }
 			if ( !obj.isNative() && !obj.isAbstract() && num_code_atts != 1){
 				throw new ClassConstraintException("Non-native, non-abstract methods like '"+tostring(obj)+"' must have exactly one Code attribute (found: "+num_code_atts+").");
 			}

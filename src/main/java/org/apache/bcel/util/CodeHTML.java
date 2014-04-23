@@ -375,10 +375,10 @@ final class CodeHTML implements org.apache.bcel.Constants {
         if (code != null) {
             CodeException[] ce = code.getExceptionTable();
             int len = ce.length;
-            for (int i = 0; i < len; i++) {
-                goto_set.set(ce[i].getStartPC());
-                goto_set.set(ce[i].getEndPC());
-                goto_set.set(ce[i].getHandlerPC());
+            for (CodeException cex : ce) {
+                goto_set.set(cex.getStartPC());
+                goto_set.set(cex.getEndPC());
+                goto_set.set(cex.getHandlerPC());
             }
             // Look for local variables and their range
             Attribute[] attributes = code.getAttributes();

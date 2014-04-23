@@ -142,8 +142,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
         if (arg_types != null) {
             int size = arg_types.length;
-            for (int i = 0; i < size; i++) {
-                if (Type.VOID == arg_types[i]) {
+            for (Type arg_type : arg_types) {
+                if (Type.VOID == arg_type) {
                     throw new ClassGenException("'void' is an illegal argument type for a method");
                 }
             }

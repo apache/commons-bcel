@@ -108,8 +108,8 @@ final class AttributeHTML implements org.apache.bcel.Constants {
                 int len = ce.length;
                 if (len > 0) {
                     file.print("<P><B>Exceptions handled</B><UL>");
-                    for (int i = 0; i < len; i++) {
-                        int catch_type = ce[i].getCatchType(); // Index in constant pool
+                    for (CodeException cex : ce) {
+                        int catch_type = cex.getCatchType(); // Index in constant pool
                         file.print("<LI>");
                         if (catch_type != 0) {
                             file.print(constant_html.referenceConstant(catch_type)); // Create Link to _cp.html
@@ -117,9 +117,9 @@ final class AttributeHTML implements org.apache.bcel.Constants {
                             file.print("Any Exception");
                         }
                         file.print("<BR>(Ranging from lines "
-                                + codeLink(ce[i].getStartPC(), method_number) + " to "
-                                + codeLink(ce[i].getEndPC(), method_number) + ", handled at line "
-                                + codeLink(ce[i].getHandlerPC(), method_number) + ")</LI>");
+                                + codeLink(cex.getStartPC(), method_number) + " to "
+                                + codeLink(cex.getEndPC(), method_number) + ", handled at line "
+                                + codeLink(cex.getHandlerPC(), method_number) + ")</LI>");
                     }
                     file.print("</UL>");
                 }

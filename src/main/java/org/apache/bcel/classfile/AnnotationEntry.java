@@ -126,8 +126,7 @@ public class AnnotationEntry implements Node, Constants, Serializable {
         dos.writeShort(type_index); // u2 index of type name in cpool
         dos.writeShort(element_value_pairs.size()); // u2 element_value pair
         // count
-        for (int i = 0; i < element_value_pairs.size(); i++) {
-            final ElementValuePair envp = element_value_pairs.get(i);
+        for (final ElementValuePair envp : element_value_pairs) {
             envp.dump(dos);
         }
     }

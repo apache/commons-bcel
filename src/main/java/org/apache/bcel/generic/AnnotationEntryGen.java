@@ -67,11 +67,10 @@ public class AnnotationEntryGen
 	{
 		List<ElementValuePairGen> out = new ArrayList<ElementValuePairGen>();
 		int l = in.length;
-		for (int i = 0; i < l; i++)
-		{
-			ElementValuePair nvp = in[i];
-			out.add(new ElementValuePairGen(nvp, cpool, copyPoolEntries));
-		}
+        for (ElementValuePair nvp : in)
+        {
+            out.add(new ElementValuePairGen(nvp, cpool, copyPoolEntries));
+        }
 		return out;
 	}
 
@@ -123,11 +122,10 @@ public class AnnotationEntryGen
 	{
 		dos.writeShort(typeIndex); // u2 index of type name in cpool
 		dos.writeShort(evs.size()); // u2 element_value pair count
-		for (int i = 0; i < evs.size(); i++)
-		{
-			ElementValuePairGen envp = evs.get(i);
-			envp.dump(dos);
-		}
+        for (ElementValuePairGen envp : evs)
+        {
+            envp.dump(dos);
+        }
 	}
 
 	public void addElementNameValuePair(ElementValuePairGen evp)

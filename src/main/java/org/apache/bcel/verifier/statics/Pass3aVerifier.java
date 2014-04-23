@@ -237,22 +237,22 @@ public final class Pass3aVerifier extends PassVerifier{
 		if (lnt != null){
 			LineNumber[] lineNumbers = lnt.getLineNumberTable();
 			IntList offsets = new IntList();
-			lineNumber_loop: for (int i=0; i < lineNumbers.length; i++){ // may appear in any order.
-				for (int j=0; j < instructionPositions.length; j++){
-					// TODO: Make this a binary search! The instructionPositions array is naturally ordered!
-					int offset = lineNumbers[i].getStartPC();
-					if (instructionPositions[j] == offset){
-						if (offsets.contains(offset)){
-							addMessage("LineNumberTable attribute '"+code.getLineNumberTable()+"' refers to the same code offset ('"+offset+"') more than once which is violating the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
-						}
-						else{
-							offsets.add(offset);
-						}
-						continue lineNumber_loop;
-					}
-				}
-				throw new ClassConstraintException("Code attribute '"+code+"' has a LineNumberTable attribute '"+code.getLineNumberTable()+"' referring to a code offset ('"+lineNumbers[i].getStartPC()+"') that does not exist.");
-			}
+			lineNumber_loop:
+            for (LineNumber lineNumber : lineNumbers) { // may appear in any order.
+                for (int instructionPosition : instructionPositions) {
+                    // TODO: Make this a binary search! The instructionPositions array is naturally ordered!
+                    int offset = lineNumber.getStartPC();
+                    if (instructionPosition == offset) {
+                        if (offsets.contains(offset)) {
+                            addMessage("LineNumberTable attribute '" + code.getLineNumberTable() + "' refers to the same code offset ('" + offset + "') more than once which is violating the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
+                        } else {
+                            offsets.add(offset);
+                        }
+                        continue lineNumber_loop;
+                    }
+                }
+                throw new ClassConstraintException("Code attribute '" + code + "' has a LineNumberTable attribute '" + code.getLineNumberTable() + "' referring to a code offset ('" + lineNumber.getStartPC() + "') that does not exist.");
+            }
 		}
 
 		///////////////////////////
@@ -572,23 +572,23 @@ public final class Pass3aVerifier extends PassVerifier{
 			}
 			if (f == null){
 				JavaClass[] superclasses = jc.getSuperClasses();
-				outer: 
-				for (int j=0; j<superclasses.length; j++){
-					fields = superclasses[j].getFields();
-					for (int i=0; i<fields.length; i++){
-						if (fields[i].getName().equals(field_name)){
-							Type f_type = Type.getType(fields[i].getSignature());
-							Type o_type = o.getType(cpg);
-							if (f_type.equals(o_type)){
-								f = fields[i];
-								if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0) {
+				outer:
+                for (JavaClass superclass : superclasses) {
+                    fields = superclass.getFields();
+                    for (Field field : fields) {
+                        if (field.getName().equals(field_name)) {
+                            Type f_type = Type.getType(field.getSignature());
+                            Type o_type = o.getType(cpg);
+                            if (f_type.equals(o_type)) {
+                                f = field;
+                                if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0) {
                                     f = null;
                                 }
-								break outer;
-							}
-						}
-					}
-				}
+                                break outer;
+                            }
+                        }
+                    }
+                }
 				if (f == null) {
                     constraintViolated(o, "Referenced field '"+field_name+"' does not exist in class '"+jc.getClassName()+"'.");
                 }

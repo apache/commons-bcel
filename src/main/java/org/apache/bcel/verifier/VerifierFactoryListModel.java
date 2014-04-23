@@ -50,13 +50,12 @@ public class VerifierFactoryListModel implements org.apache.bcel.verifier.Verifi
         Verifier[] verifiers = VerifierFactory.getVerifiers();
         int num_of_verifiers = verifiers.length;
         cache.clear();
-        for (int i = 0; i < num_of_verifiers; i++) {
-            cache.add(verifiers[i].getClassName());
+        for (Verifier verifier : verifiers) {
+            cache.add(verifier.getClassName());
         }
-        for (int i = 0; i < size; i++) {
-            ListDataEvent e = new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0,
-                    num_of_verifiers - 1);
-            listeners.get(i).contentsChanged(e);
+        for (ListDataListener listener : listeners) {
+            ListDataEvent e = new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0, num_of_verifiers - 1);
+            listener.contentsChanged(e);
         }
     }
 
