@@ -689,7 +689,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 						throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must have the ACC_PUBLIC modifier set but hasn't!");
 					}
 					if (!obj.isAbstract()){
-						throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must have the ACC_STATIC modifier set but hasn't!");
+						throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must have the ACC_ABSTRACT modifier set but hasn't!");
 					}
 					if (	obj.isPrivate() ||
 								obj.isProtected() ||
