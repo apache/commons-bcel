@@ -682,22 +682,35 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			}
 			else{ // isInterface!
 				if (!name.equals(STATIC_INITIALIZER_NAME)){//vmspec2, p.116, 2nd paragraph
-					if (!obj.isPublic()){
-						throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must have the ACC_PUBLIC modifier set but hasn't!");
-					}
-					if (!obj.isAbstract()){
-						throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must have the ACC_ABSTRACT modifier set but hasn't!");
-					}
-					if (	obj.isPrivate() ||
-								obj.isProtected() ||
-								obj.isStatic() ||
-								obj.isFinal() ||
-								obj.isSynchronized() ||
-								obj.isNative() ||
-								obj.isStrictfp() ){
-						throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must not have any of the ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL, ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT modifiers set.");
-					}
-				}
+                    if (jc.getMajor() >= MAJOR_1_8) {
+                        if (!(obj.isPublic() ^ obj.isPrivate())) {
+                            throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
+                        }
+                        if (obj.isProtected()
+                                || obj.isFinal()
+                                || obj.isSynchronized()
+                                || obj.isNative()) {
+                            throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must not have any of the ACC_PROTECTED, ACC_FINAL, ACC_SYNCHRONIZED, or ACC_NATIVE modifiers set.");
+                        }
+
+                    } else {
+                        if (!obj.isPublic()){
+                            throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must have the ACC_PUBLIC modifier set but hasn't!");
+                        }
+                        if (!obj.isAbstract()){
+                            throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must have the ACC_ABSTRACT modifier set but hasn't!");
+                        }
+                        if (obj.isPrivate()
+                                || obj.isProtected()
+                                || obj.isStatic()
+                                || obj.isFinal()
+                                || obj.isSynchronized()
+                                || obj.isNative()
+                                || obj.isStrictfp() ) {
+                            throw new ClassConstraintException("Interface method '"+tostring(obj)+"' must not have any of the ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL, ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT modifiers set.");
+                        }
+                    }
+                }
 			}
 
 			// A specific instance initialization method... (vmspec2,Page 116).
