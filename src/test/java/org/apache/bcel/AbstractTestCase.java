@@ -121,7 +121,7 @@ public abstract class AbstractTestCase extends TestCase
 
 	protected String dumpAttributes(Attribute[] as)
 	{
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		result.append("AttributeArray:[");
 		for (int i = 0; i < as.length; i++)
 		{
@@ -137,7 +137,7 @@ public abstract class AbstractTestCase extends TestCase
 
 	protected String dumpAnnotationEntries(AnnotationEntry[] as)
 	{
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		result.append("[");
 		for (int i = 0; i < as.length; i++)
 		{
@@ -153,7 +153,7 @@ public abstract class AbstractTestCase extends TestCase
 
 	protected String dumpAnnotationEntries(AnnotationEntryGen[] as)
 	{
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		result.append("[");
 		for (int i = 0; i < as.length; i++)
 		{

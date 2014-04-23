@@ -741,7 +741,7 @@ public abstract class Utility {
         int index, old_index;
         try {
             if (str.indexOf(old) != -1) { // `old' found in str
-                StringBuffer buf = new StringBuffer();
+                StringBuilder buf = new StringBuilder();
                 old_index = 0; // String start offset
                 // While we have something to replace
                 while ((index = str.indexOf(old, old_index)) != -1) {

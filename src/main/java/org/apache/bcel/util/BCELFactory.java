@@ -271,7 +271,7 @@ class BCELFactory extends EmptyVisitor {
         if (bi instanceof Select) {
             Select s = (Select) bi;
             branches.add(bi);
-            StringBuffer args = new StringBuffer("new int[] { ");
+            StringBuilder args = new StringBuilder("new int[] { ");
             int[] matchs = s.getMatchs();
             for (int i = 0; i < matchs.length; i++) {
                 args.append(matchs[i]);
