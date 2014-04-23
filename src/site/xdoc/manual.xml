@@ -611,7 +611,7 @@
     <li> Various code examples and utilities like a class file viewer,
     a tool to convert class files into HTML, and a converter from
     class files to the <a
-    href="http://mrl.nyu.edu/~meyer/jasmin/">Jasmin</a> assembly
+    href="http://jasmin.sourceforge.net">Jasmin</a> assembly
     language.</li>
     </ol>
   </p>
@@ -741,7 +741,7 @@
     visitor objects to traverse and analyze the contents of a class
     file. Included in the distribution is a class
     <tt>JasminVisitor</tt> that converts class files into the <a
-    href="http://mrl.nyu.edu/~meyer/jasmin/">Jasmin</a>
+    href="http://jasmin.sourceforge.net">Jasmin</a>
     assembler language.
   </p>
 

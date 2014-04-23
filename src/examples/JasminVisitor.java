@@ -50,8 +50,8 @@ import org.apache.bcel.generic.Select;
 import org.apache.bcel.generic.TABLESWITCH;
 
 /**
- * Disassemble Java class object into the <A HREF="http://www.cat.nyu.edu/meyer/jasmin">
- * JASMIN</A> format.
+ * Disassemble Java class object into the <a href="http://jasmin.sourceforge.net">
+ * Jasmin</a> format.
  *
  * @version $Id$
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
