@@ -119,7 +119,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
    * for every of the method's attributes if it's the last one and print ".end method"
    * then.
    */
-  private final void printEndMethod(Attribute attr) {
+  private void printEndMethod(Attribute attr) {
     Attribute[] attributes = _method.getAttributes();
 
     if(attr == attributes[attributes.length - 1]) {
@@ -292,12 +292,12 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     printEndMethod(code);
   }
  
-  private final String get(InstructionHandle ih) {
+  private String get(InstructionHandle ih) {
     String str = new StringTokenizer(map.get(ih), "\n").nextToken();
     return str.substring(0, str.length() - 1);
   }
 
-  private final void put(InstructionHandle ih, String line) {
+  private void put(InstructionHandle ih, String line) {
     String str = map.get(ih);
 
     if(str == null) {

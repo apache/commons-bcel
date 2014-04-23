@@ -75,7 +75,7 @@ public class IINC extends LocalVariableInstruction {
     }
 
 
-    private final void setWide() {
+    private void setWide() {
         wide = (n > org.apache.bcel.Constants.MAX_BYTE) || (Math.abs(c) > Byte.MAX_VALUE);
         if (wide) {
             length = 6; // wide byte included  

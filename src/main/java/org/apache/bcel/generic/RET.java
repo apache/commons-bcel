@@ -68,7 +68,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     }
 
 
-    private final void setWide() {
+    private void setWide() {
         wide = index > org.apache.bcel.Constants.MAX_BYTE;
         if (wide) {
             length = 4; // Including the wide byte  

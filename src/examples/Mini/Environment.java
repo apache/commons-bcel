@@ -54,7 +54,7 @@ public class Environment implements Cloneable {
     this(SIZE);
   }
 
-  private final int hashCode(String key) {
+  private int hashCode(String key) {
     return Math.abs(key.hashCode()) % size;
   }
 

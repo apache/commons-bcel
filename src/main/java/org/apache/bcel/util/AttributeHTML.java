@@ -62,7 +62,7 @@ final class AttributeHTML implements org.apache.bcel.Constants {
     }
 
 
-    private final String codeLink( int link, int method_number ) {
+    private String codeLink( int link, int method_number ) {
         return "<A HREF=\"" + class_name + "_code.html#code" + method_number + "@" + link
                 + "\" TARGET=Code>" + link + "</A>";
     }

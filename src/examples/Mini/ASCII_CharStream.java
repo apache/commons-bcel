@@ -45,7 +45,7 @@ public final class ASCII_CharStream
   static private int maxNextCharInd = 0;
   static private int inBuf = 0;
 
-  static private final void ExpandBuff(boolean wrapAround)
+  static private void ExpandBuff(boolean wrapAround)
   {
      char[] newbuffer = new char[bufsize + 2048];
      int newbufline[] = new int[bufsize + 2048];
@@ -95,7 +95,7 @@ public final class ASCII_CharStream
      tokenBegin = 0;
   }
 
-  static private final void FillBuff() throws java.io.IOException
+  static private void FillBuff() throws java.io.IOException
   {
      if (maxNextCharInd == available)
      {
@@ -152,7 +152,7 @@ public final class ASCII_CharStream
      return c;
   }
 
-  static private final void UpdateLineColumn(char c)
+  static private void UpdateLineColumn(char c)
   {
      column++;
 

@@ -917,14 +917,14 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
 
 
-        private final BranchTarget visit( InstructionHandle target, int stackDepth ) {
+        private BranchTarget visit( InstructionHandle target, int stackDepth ) {
             BranchTarget bt = new BranchTarget(target, stackDepth);
             visitedTargets.put(target, bt);
             return bt;
         }
 
 
-        private final boolean visited( InstructionHandle target ) {
+        private boolean visited( InstructionHandle target ) {
             return (visitedTargets.get(target) != null);
         }
     }

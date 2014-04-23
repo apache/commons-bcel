@@ -222,7 +222,7 @@ final class ConstantHTML implements org.apache.bcel.Constants {
     }
 
 
-    private final int getMethodNumber( String str ) {
+    private int getMethodNumber( String str ) {
         for (int i = 0; i < methods.length; i++) {
             String cmp = methods[i].getName() + methods[i].getSignature();
             if (cmp.equals(str)) {

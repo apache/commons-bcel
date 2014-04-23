@@ -76,7 +76,7 @@ public abstract class AccessFlags implements java.io.Serializable {
     }
 
 
-    private final void setFlag( int flag, boolean set ) {
+    private void setFlag( int flag, boolean set ) {
         if ((access_flags & flag) != 0) { // Flag is set already
             if (!set) {
                 access_flags ^= flag;

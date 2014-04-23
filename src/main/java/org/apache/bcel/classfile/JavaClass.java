@@ -727,7 +727,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
   	  return this.isNested;
     }
     
-    private final void computeNestedTypeStatus() {
+    private void computeNestedTypeStatus() {
   	  if (computedNestedTypeStatus) {
         return;
     }

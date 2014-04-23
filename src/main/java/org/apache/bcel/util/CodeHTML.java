@@ -75,7 +75,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
      * @param  stream data input stream
      * @return String representation of byte code
      */
-    private final String codeToHTML( ByteSequence bytes, int method_number ) throws IOException {
+    private String codeToHTML( ByteSequence bytes, int method_number ) throws IOException {
         short opcode = (short) bytes.readUnsignedByte();
         StringBuilder buf;
         String name, signature;
@@ -365,7 +365,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
      * Find all target addresses in code, so that they can be marked
      * with &lt;A NAME = ...&gt;. Target addresses are kept in an BitSet object.
      */
-    private final void findGotos( ByteSequence bytes, Code code ) throws IOException {
+    private void findGotos( ByteSequence bytes, Code code ) throws IOException {
         int index;
         goto_set = new BitSet(bytes.available());
         int opcode;
