@@ -136,7 +136,7 @@ public class ClassPath implements Serializable {
     }
 
 
-    private static final void getPathComponents( String path, List<String> list ) {
+    private static void getPathComponents( String path, List<String> list ) {
         if (path != null) {
             StringTokenizer tok = new StringTokenizer(path, File.pathSeparator);
             while (tok.hasMoreTokens()) {

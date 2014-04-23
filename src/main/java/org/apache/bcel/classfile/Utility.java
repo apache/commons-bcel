@@ -724,7 +724,7 @@ public abstract class Utility {
 
 
     // Guess what this does
-    private static final int pow2( int n ) {
+    private static int pow2( int n ) {
         return 1 << n;
     }
 
@@ -1036,7 +1036,7 @@ public abstract class Utility {
      * Convert (signed) byte to (unsigned) short value, i.e., all negative
      * values become positive.
      */
-    private static final short byteToShort( byte b ) {
+    private static short byteToShort( byte b ) {
         return (b < 0) ? (short) (256 + b) : (short) b;
     }
 

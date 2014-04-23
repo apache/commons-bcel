@@ -670,7 +670,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
 
-    private static final String indent( Object obj ) {
+    private static String indent( Object obj ) {
         StringTokenizer tok = new StringTokenizer(obj.toString(), "\n");
         StringBuilder buf = new StringBuilder();
         while (tok.hasMoreTokens()) {

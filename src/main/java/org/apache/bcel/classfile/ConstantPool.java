@@ -150,7 +150,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
     }
 
 
-    private static final String escape( String str ) {
+    private static String escape( String str ) {
         int len = str.length();
         StringBuilder buf = new StringBuilder(len + 5);
         char[] ch = str.toCharArray();

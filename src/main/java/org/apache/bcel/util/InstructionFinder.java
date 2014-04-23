@@ -115,7 +115,7 @@ public class InstructionFinder {
      *          instruction pattern in lower case
      * @return encoded string for a pattern such as "BranchInstruction".
      */
-    private static final String mapName( String pattern ) {
+    private static String mapName( String pattern ) {
         String result = map.get(pattern);
         if (result != null) {
             return result;
@@ -138,7 +138,7 @@ public class InstructionFinder {
      *          The pattern to compile
      * @return translated regular expression string
      */
-    private static final String compilePattern( String pattern ) {
+    private static String compilePattern( String pattern ) {
         //Bug: 38787 - Instructions are assumed to be english, to avoid odd Locale issues
         String lower = pattern.toLowerCase(Locale.ENGLISH);
         StringBuilder buf = new StringBuilder();
@@ -286,7 +286,7 @@ public class InstructionFinder {
     /**
      * Convert opcode number to char.
      */
-    private static final char makeChar( short opcode ) {
+    private static char makeChar( short opcode ) {
         return (char) (opcode + OFFSET);
     }
 

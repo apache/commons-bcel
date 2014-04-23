@@ -138,7 +138,7 @@ public class Environment implements Cloneable {
     } catch(ArrayIndexOutOfBoundsException e) {}
   }
 
-  private static final int lookup(Vector<EnvEntry> v, String key) 
+  private static int lookup(Vector<EnvEntry> v, String key) 
        throws ArrayIndexOutOfBoundsException
   {
     int len = v.size();

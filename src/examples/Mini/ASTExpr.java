@@ -192,11 +192,11 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     return type;
   }
 
-  private static final String toBool(String i) {
+  private static String toBool(String i) {
     return "(" + i + " != 0)";
   }
 
-  private static final String toInt(String i) {
+  private static String toInt(String i) {
     return "((" + i + ")? 1 : 0)";
   }
 

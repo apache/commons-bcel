@@ -1607,7 +1607,7 @@ public class Peephole {
     } catch(Exception e) { e.printStackTrace(); }
   }
 
-  private static final Method removeNOPs(MethodGen mg) {
+  private static Method removeNOPs(MethodGen mg) {
     InstructionList   il    = mg.getInstructionList();
     InstructionFinder f     = new InstructionFinder(il);
     String            pat   = "NOP+"; // Find at least one NOP

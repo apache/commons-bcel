@@ -316,7 +316,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
    *
    * where the IF_ICMP__ now branches to the target of the previous IFEQ instruction.
    */
-  private static final void optimizeIFs(InstructionList il) {
+  private static void optimizeIFs(InstructionList il) {
     InstructionFinder f   = new InstructionFinder(il);
     String      pat = "IF_ICMP ICONST_1 GOTO ICONST_0 IFEQ Instruction";
 
@@ -403,7 +403,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
   static final void reset() { size = max_size = 0; }
 
-  private static final String getVarDecls() {
+  private static String getVarDecls() {
     StringBuffer buf = new StringBuffer("    int ");
 
     for(int i=0; i < max_size; i++) {

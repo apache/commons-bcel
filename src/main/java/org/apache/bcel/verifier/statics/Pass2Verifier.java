@@ -1316,7 +1316,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * This method returns true if and only if the supplied String
 	 * represents a valid Java class name.
 	 */
-	private static final boolean validClassName(String name){
+	private static boolean validClassName(String name){
         /*
          * TODO: implement.
 		 * Are there any restrictions?

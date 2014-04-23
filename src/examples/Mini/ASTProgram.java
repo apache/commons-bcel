@@ -188,11 +188,11 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     out.println("  private static BufferedReader _in = new BufferedReader" + 
                 "(new InputStreamReader(System.in));\n");
 
-    out.println("  private static final int _readInt() throws IOException {\n" +
+    out.println("  private static int _readInt() throws IOException {\n" +
                 "    System.out.print(\"Please enter a number> \");\n" + 
                 "    return Integer.parseInt(_in.readLine());\n  }\n");
 
-    out.println("  private static final int _writeInt(int n) {\n" +
+    out.println("  private static int _writeInt(int n) {\n" +
                 "    System.out.println(\"Result: \" + n);\n    return 0;\n  }\n");
 
     for(int i=0; i < fun_decls.length; i++) {
@@ -238,7 +238,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
                                                 "(Ljava/lang/String;)I")));
     il.append(InstructionConstants.IRETURN);
 
-    /* private static final int _readInt() throws IOException
+    /* private static int _readInt() throws IOException
      */
     method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL,
                            Type.INT, Type.NO_ARGS, null,
@@ -249,7 +249,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     method.setMaxStack(2);
     class_gen.addMethod(method.getMethod());
 
-    /* private static final int _writeInt(int i) throws IOException
+    /* private static int _writeInt(int i) throws IOException
      */
     Type[]   args = { Type.INT };
     String[] argv = { "i" } ;

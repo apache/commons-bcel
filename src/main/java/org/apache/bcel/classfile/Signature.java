@@ -153,7 +153,7 @@ public final class Signature extends Attribute {
     }
 
 
-    private static final void matchIdent( MyByteArrayInputStream in, StringBuffer buf ) {
+    private static void matchIdent( MyByteArrayInputStream in, StringBuffer buf ) {
         int ch;
         if ((ch = in.read()) == -1) {
             throw new RuntimeException("Illegal signature: " + in.getData()
@@ -196,7 +196,7 @@ public final class Signature extends Attribute {
     }
 
 
-    private static final void matchGJIdent( MyByteArrayInputStream in, StringBuffer buf ) {
+    private static void matchGJIdent( MyByteArrayInputStream in, StringBuffer buf ) {
         int ch;
         matchIdent(in, buf);
         ch = in.read();

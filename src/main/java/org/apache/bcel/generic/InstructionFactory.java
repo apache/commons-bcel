@@ -192,7 +192,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     };
 
 
-    private static final boolean isString( Type type ) {
+    private static boolean isString( Type type ) {
         return ((type instanceof ObjectType) && ((ObjectType) type).getClassName().equals(
                 "java.lang.String"));
     }
@@ -283,7 +283,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     }
 
 
-    private static final ArithmeticInstruction createBinaryIntOp( char first, String op ) {
+    private static ArithmeticInstruction createBinaryIntOp( char first, String op ) {
         switch (first) {
             case '-':
                 return ISUB;
@@ -313,7 +313,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     }
 
 
-    private static final ArithmeticInstruction createBinaryLongOp( char first, String op ) {
+    private static ArithmeticInstruction createBinaryLongOp( char first, String op ) {
         switch (first) {
             case '-':
                 return LSUB;
@@ -343,7 +343,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     }
 
 
-    private static final ArithmeticInstruction createBinaryFloatOp( char op ) {
+    private static ArithmeticInstruction createBinaryFloatOp( char op ) {
         switch (op) {
             case '-':
                 return FSUB;
@@ -361,7 +361,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     }
 
 
-    private static final ArithmeticInstruction createBinaryDoubleOp( char op ) {
+    private static ArithmeticInstruction createBinaryDoubleOp( char op ) {
         switch (op) {
             case '-':
                 return DSUB;
