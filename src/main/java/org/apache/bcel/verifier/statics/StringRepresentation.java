@@ -51,6 +51,7 @@ import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
+import org.apache.bcel.classfile.StackMapTable;
 import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
@@ -285,6 +286,11 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitStackMap(StackMap obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
+    public void visitStackMapTable(StackMapTable obj) {
         tostring = toString(obj);
     }
 
