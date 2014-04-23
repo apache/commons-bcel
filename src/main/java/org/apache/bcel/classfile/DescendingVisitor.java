@@ -437,4 +437,11 @@ public class DescendingVisitor implements Visitor
         obj.accept(visitor);
         stack.pop();
     }
+
+    public void visitMethodParameters(MethodParameters obj)
+    {
+        stack.push(obj);
+        obj.accept(visitor);
+        stack.pop();
+    }
 }

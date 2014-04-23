@@ -193,4 +193,8 @@ public class EmptyVisitor implements Visitor
     public void visitBootstrapMethods(BootstrapMethods obj)
     {
     }
+
+    public void visitMethodParameters(MethodParameters obj)
+    {
+    }
 }

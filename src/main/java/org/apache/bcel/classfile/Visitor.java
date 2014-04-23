@@ -108,4 +108,6 @@ public interface Visitor
 	void visitEnclosingMethod(EnclosingMethod obj);
 
     void visitBootstrapMethods(BootstrapMethods obj);
+    
+    void visitMethodParameters(MethodParameters obj);
 }

@@ -215,6 +215,11 @@ public interface Constants {
    */
   public final static short ACC_ENUM         = 0x4000;
 
+  /** One of the access flags for fields, methods, or classes.
+   *  @see #ACC_PUBLIC
+   */
+  public final static short ACC_MANDATED     = (short) 0x8000;
+
   // Applies to classes compiled by new compilers only
   /** One of the access flags for fields, methods, or classes.
    *  @see #ACC_PUBLIC
@@ -1445,8 +1450,9 @@ public interface Constants {
   public static final byte ATTR_ENCLOSING_METHOD                      	= 18;
   public static final byte ATTR_STACK_MAP_TABLE                         = 19;
   public static final byte ATTR_BOOTSTRAP_METHODS                       = 20;
+  public static final byte ATTR_METHOD_PARAMETERS                       = 21;
 
-  public static final short KNOWN_ATTRIBUTES = 21;
+  public static final short KNOWN_ATTRIBUTES = 22;
 
   // TOFO: FIXXXXX
   public static final String[] ATTRIBUTE_NAMES = {
@@ -1457,7 +1463,7 @@ public interface Constants {
     "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
     "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations",
     "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod", "StackMapTable",
-    "BootstrapMethods"
+    "BootstrapMethods", "MethodParameters"
   };
 
   /** Constants used in the StackMap attribute.

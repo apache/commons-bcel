@@ -47,6 +47,7 @@ import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.MethodParameters;
 import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
@@ -306,6 +307,11 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitBootstrapMethods(BootstrapMethods obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
+    public void visitMethodParameters(MethodParameters obj) {
         tostring = toString(obj);
     }
 }

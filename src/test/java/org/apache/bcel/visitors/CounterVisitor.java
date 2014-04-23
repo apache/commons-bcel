@@ -50,6 +50,7 @@ import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.MethodParameters;
 import org.apache.bcel.classfile.ParameterAnnotations;
 import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
@@ -144,6 +145,8 @@ public class CounterVisitor implements Visitor
 	public int stackMapTableEntryCount = 0;
 
 	public int bootstrapMethodsCount = 0;
+
+    public int methodParametersCount = 0;
 	
 
 	public void visitAnnotation(Annotations obj)
@@ -349,5 +352,10 @@ public class CounterVisitor implements Visitor
     public void visitBootstrapMethods(BootstrapMethods obj)
     {
         bootstrapMethodsCount++;
+    }
+
+    public void visitMethodParameters(MethodParameters obj)
+    {
+        methodParametersCount++;
     }
 }
