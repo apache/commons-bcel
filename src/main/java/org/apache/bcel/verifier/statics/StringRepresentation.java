@@ -36,6 +36,7 @@ import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.ConstantValue;
 import org.apache.bcel.classfile.Deprecated;
+import org.apache.bcel.classfile.EnclosingMethod;
 import org.apache.bcel.classfile.ExceptionTable;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.InnerClass;
@@ -302,6 +303,11 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitUnknown(Unknown obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
+    public void visitEnclosingMethod(EnclosingMethod obj) {
         tostring = toString(obj);
     }
 
