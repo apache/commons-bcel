@@ -42,15 +42,22 @@
     <release>
       <revision>
         <name>bcel</name>
-        <created>2007-06-14</created>
+        <created>2006-06-07</created>
         <version>5.2</version>
       </revision>
     </release>
     <release>
       <revision>
         <name>bcel</name>
-        <created>2003-09-06</created>
+        <created>2003-04-25</created>
         <version>5.1</version>
+      </revision>
+    </release>
+    <release>
+      <revision>
+        <name>bcel</name>
+        <created>2001-12-15</created>
+        <version>5.0</version>
       </revision>
     </release>
     <mailing-list rdf:resource="http://commons.apache.org/bcel/mail-lists.html"/>
