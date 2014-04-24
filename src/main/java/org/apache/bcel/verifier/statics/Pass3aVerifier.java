@@ -1005,7 +1005,7 @@ public final class Pass3aVerifier extends PassVerifier{
 				}
 			}
 			if (f == null){
-				throw new AssertionViolatedException("Field not found?!?");
+                throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
 			}
 
 			if (f.isFinal()){
@@ -1045,7 +1045,7 @@ public final class Pass3aVerifier extends PassVerifier{
 				}
 			}
 			if (f == null){
-				throw new AssertionViolatedException("Field not found?!?");
+                throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
 			}
 
 			if (! (f.isStatic())){
