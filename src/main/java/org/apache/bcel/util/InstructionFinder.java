@@ -139,7 +139,7 @@ public class InstructionFinder {
      * @return translated regular expression string
      */
     private static String compilePattern( String pattern ) {
-        //Bug: 38787 - Instructions are assumed to be english, to avoid odd Locale issues
+        //Bug: BCEL-77 - Instructions are assumed to be english, to avoid odd Locale issues
         String lower = pattern.toLowerCase(Locale.ENGLISH);
         StringBuilder buf = new StringBuilder();
         int size = pattern.length();

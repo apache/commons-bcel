@@ -33,4 +33,4 @@ Contact
 
  or enter the issue into the BCEL bug database
 
-  http://issues.apache.org/bugzilla/enter_bug.cgi?product=BCEL
+  https://issues.apache.org/jira/browse/BCEL

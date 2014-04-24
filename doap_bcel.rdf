@@ -26,7 +26,7 @@
     <!-- Look at http://projects.apache.org/categories.html -->
     <category rdf:resource="http://projects.apache.org/category/library"/>
     <license rdf:resource="http://usefulinc.com/doap/licenses/asl20"/>
-    <bug-database rdf:resource="http://issues.apache.org/bugzilla/buglist.cgi?product=BCEL"/>
+    <bug-database rdf:resource="https://issues.apache.org/jira/browse/BCEL"/>
     <download-page rdf:resource="http://commons.apache.org/bcel/download_bcel.cgi"/>
     <asfext:pmc rdf:resource="http://commons.apache.org/"/>
     <shortdesc xml:lang="en">Bytecode Engineering Library</shortdesc>
