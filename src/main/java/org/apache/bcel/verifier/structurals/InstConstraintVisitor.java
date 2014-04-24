@@ -1270,7 +1270,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
                 }
             }
 			if (f == null) {
-                throw new AssertionViolatedException("Field '"+field_name+"' not found?!?");
+                throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
             }
 		}
 
@@ -2653,8 +2653,8 @@ public class InstConstraintVisitor extends EmptyVisitor{
 			}
 		}
 		if (f == null){
-			throw new AssertionViolatedException("Field not found?!?");
-		}
+            throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
+        }
 
 		Type value = stack().peek();
 		Type t = Type.getType(f.getSignature());
@@ -2743,7 +2743,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 			}
 		}
 		if (f == null){
-			throw new AssertionViolatedException("Field not found?!?");
+            throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
 		}
 		Type value = stack().peek();
 		Type t = Type.getType(f.getSignature());
