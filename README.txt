@@ -29,7 +29,7 @@ Contact
  If you spot a bug in the BCEL or its accompanying verifier "JustIce" please
  check with the BCEL mailing list
 
-   http://jakarta.apache.org/bcel
+   http://commons.apache.org/bcel
 
  or enter the issue into the BCEL bug database
 

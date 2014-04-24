@@ -33,7 +33,7 @@ BCEL-163 - Incorporate patch file from Findbugs
 Feedback
 --------
 Open source works best when you give feedback:
-http://jakarta.apache.org/bcel
+http://commons.apache.org/bcel
 
 Please direct all bug reports to Bugzilla
 http://issues.apache.org/bugzilla/buglist.cgi?product=BCEL
