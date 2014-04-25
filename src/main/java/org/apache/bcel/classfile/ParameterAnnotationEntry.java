@@ -31,7 +31,7 @@ import org.apache.bcel.Constants;
  *
  * @version $Id: ParameterAnnotationEntry
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
- * @since 5.3
+ * @since 6.0
  */
 public class ParameterAnnotationEntry implements Node, Constants {
 

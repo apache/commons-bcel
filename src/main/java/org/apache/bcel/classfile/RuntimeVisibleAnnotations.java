@@ -28,7 +28,7 @@ import org.apache.bcel.Constants;
  * 
  * @version $Id: RuntimeVisibleAnnotations
  * @author <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
- * @since 5.3
+ * @since 6.0
  */
 public class RuntimeVisibleAnnotations extends Annotations
 {

@@ -26,7 +26,7 @@ import java.io.IOException;
  * 
  * @version $Id: ParameterAnnotations
  * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
- * @since 5.3
+ * @since 6.0
  */
 public abstract class ParameterAnnotations extends Attribute {
 

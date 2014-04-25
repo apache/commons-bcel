@@ -31,7 +31,7 @@ import org.apache.bcel.Constants;
  * 
  * @version $Id: AnnotationEntry
  * @author <A HREF="mailto:dbrosius@mebigfatguy.com">D. Brosius</A>
- * @since 5.3
+ * @since 6.0
  */
 public class AnnotationEntry implements Node, Constants, Serializable {
 
