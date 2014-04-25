@@ -1452,6 +1452,15 @@ public interface Constants {
   public static final byte ATTR_BOOTSTRAP_METHODS                       = 20;
   public static final byte ATTR_METHOD_PARAMETERS                       = 21;
 
+  /** @deprecated Use {@link #ATTR_RUNTIME_VISIBLE_ANNOTATIONS} instead */
+  public static final byte ATTR_RUNTIMEVISIBLE_ANNOTATIONS              = ATTR_RUNTIME_VISIBLE_ANNOTATIONS;
+  /** @deprecated Use {@link #ATTR_RUNTIME_INVISIBLE_ANNOTATIONS} instead */
+  public static final byte ATTR_RUNTIMEINVISIBLE_ANNOTATIONS            = ATTR_RUNTIME_INVISIBLE_ANNOTATIONS;
+  /** @deprecated Use {@link #ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS} instead */
+  public static final byte ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS    = ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS;
+  /** @deprecated Use {@link #ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS} instead */
+  public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS;
+
   public static final short KNOWN_ATTRIBUTES = 22;
 
   // TOFO: FIXXXXX
