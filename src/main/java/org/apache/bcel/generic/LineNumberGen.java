@@ -85,9 +85,9 @@ public class LineNumberGen implements InstructionTargeter, Cloneable, java.io.Se
 
 
     @Override
-    public LineNumberGen clone() {
+    public Object clone() {
         try {
-            return (LineNumberGen) super.clone();
+            return super.clone();
         } catch (CloneNotSupportedException e) {
             throw new Error("Clone Not Supported"); // never happens
         }

@@ -203,9 +203,9 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
 
     @Override
-    public LocalVariableGen clone() {
+    public Object clone() {
         try {
-            return (LocalVariableGen) super.clone();
+            return super.clone();
         } catch (CloneNotSupportedException e) {
             throw new Error("Clone Not Supported"); // never happens
         }
