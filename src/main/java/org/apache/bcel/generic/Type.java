@@ -34,7 +34,7 @@ import org.apache.bcel.classfile.Utility;
 public abstract class Type implements java.io.Serializable {
 
     private static final long serialVersionUID = -1985077286871826895L;
-    protected final byte type;
+    protected byte type;
     protected String signature; // signature for the type
     /** Predefined constants
      */

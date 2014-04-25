@@ -114,7 +114,7 @@ public class ControlFlowGraph{
 		/**
 		 * Returns a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
 		 */	
-		public Frame getOutFrame(List<InstructionContext> execChain){
+		public Frame getOutFrame(ArrayList<InstructionContext> execChain){
 			executionPredecessors = execChain;
 
 			Frame org;

@@ -75,7 +75,7 @@ public class VerifierFactoryListModel implements org.apache.bcel.verifier.Verifi
     }
 
 
-    public synchronized String getElementAt( int index ) {
+    public synchronized Object getElementAt( int index ) {
         return (cache.toArray(new String[cache.size()]))[index];
     }
 }

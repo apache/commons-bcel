@@ -85,7 +85,7 @@ public interface InstructionContext{
 	 *
 	 * @see #execute(Frame, ArrayList, InstConstraintVisitor, ExecutionVisitor)
 	 */
-	Frame getOutFrame(List<InstructionContext> executionPredecessors);
+	Frame getOutFrame(ArrayList<InstructionContext> executionPredecessors);
 	
 	/**
 	 * Returns the InstructionHandle this InstructionContext is wrapped around.
