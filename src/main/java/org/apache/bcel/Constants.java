@@ -158,11 +158,6 @@ public interface Constants {
   /** One of the access flags for fields, methods, or classes.
    *  @see #ACC_PUBLIC
    */
-  public final static short ACC_SYPER        = 0x0020;
-
-  /** One of the access flags for fields, methods, or classes.
-   *  @see #ACC_PUBLIC
-   */
   public final static short ACC_VOLATILE     = 0x0040;
 
   /** One of the access flags for fields, methods, or classes.
