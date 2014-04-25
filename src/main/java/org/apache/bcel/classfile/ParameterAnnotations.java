@@ -77,7 +77,7 @@ public abstract class ParameterAnnotations extends Attribute {
      */
     @Override
     public void accept( Visitor v ) {
-        //	    v.visitParameterAnnotation(this);
+        v.visitParameterAnnotation(this);
     }
 
 

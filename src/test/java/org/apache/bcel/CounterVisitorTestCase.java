@@ -40,7 +40,7 @@ public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase
 
 	public void testAnnotationEntryCount()
 	{
-		assertEquals("annotationEntryCount", 0, getVisitor().annotationEntryCount);
+		assertEquals("annotationEntryCount", 2, getVisitor().annotationEntryCount);
 	}
 
 	public void testCodeCount()

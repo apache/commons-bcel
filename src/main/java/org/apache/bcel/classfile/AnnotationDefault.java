@@ -81,7 +81,7 @@ public class AnnotationDefault extends Attribute
         @Override
         public void accept(Visitor v)
         {
-                // v.visitAnnotationDefault(this);
+                v.visitAnnotationDefault(this);
         }
 
         /**
