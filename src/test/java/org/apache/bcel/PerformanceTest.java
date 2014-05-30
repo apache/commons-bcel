@@ -115,6 +115,7 @@ public final class PerformanceTest extends TestCase {
 			}
 		}
 
+		jar.close();
 		total.stop();
 		System.out.println("ClassParser.parse: " + parseTime);
 		System.out.println("ClassGen.init: " + cgenTime);
