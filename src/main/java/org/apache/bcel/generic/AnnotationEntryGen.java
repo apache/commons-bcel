@@ -66,7 +66,6 @@ public class AnnotationEntryGen
             boolean copyPoolEntries)
     {
         List<ElementValuePairGen> out = new ArrayList<ElementValuePairGen>();
-        int l = in.length;
         for (ElementValuePair nvp : in)
         {
             out.add(new ElementValuePairGen(nvp, cpool, copyPoolEntries));

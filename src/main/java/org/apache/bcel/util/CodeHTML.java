@@ -374,7 +374,6 @@ final class CodeHTML implements org.apache.bcel.Constants {
          */
         if (code != null) {
             CodeException[] ce = code.getExceptionTable();
-            int len = ce.length;
             for (CodeException cex : ce) {
                 goto_set.set(cex.getStartPC());
                 goto_set.set(cex.getEndPC());
@@ -397,7 +396,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
             }
         }
         // Get target addresses from GOTO, JSR, TABLESWITCH, etc.
-        for (int i = 0; bytes.available() > 0; i++) {
+        for (; bytes.available() > 0;) {
             opcode = bytes.readUnsignedByte();
             //System.out.println(OPCODE_NAMES[opcode]);
             switch (opcode) {
@@ -539,7 +538,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
             stream.reset();
             file.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Byte<BR>offset</TH>"
                     + "<TH ALIGN=LEFT>Instruction</TH><TH ALIGN=LEFT>Argument</TH>");
-            for (int i = 0; stream.available() > 0; i++) {
+            for (; stream.available() > 0;) {
                 int offset = stream.getIndex();
                 String str = codeToHTML(stream, method_number);
                 String anchor = "";

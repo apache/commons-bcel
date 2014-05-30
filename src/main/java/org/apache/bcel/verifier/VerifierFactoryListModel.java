@@ -46,7 +46,6 @@ public class VerifierFactoryListModel implements org.apache.bcel.verifier.Verifi
 
 
     public synchronized void update( String s ) {
-        int size = listeners.size();
         Verifier[] verifiers = VerifierFactory.getVerifiers();
         int num_of_verifiers = verifiers.length;
         cache.clear();
