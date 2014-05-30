@@ -106,8 +106,6 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         AnnotationEntry[] as = jc.getAnnotationEntries();
         assertTrue("Should be two AnnotationEntries but found " + as.length,
                 as.length == 2);
-        AnnotationEntry one = as[0];
-        AnnotationEntry two = as[1];
         // TODO L??;
         assertTrue(
                 "Name of annotation 1 should be LSimpleAnnotation; but it is "
