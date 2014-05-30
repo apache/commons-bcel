@@ -24,58 +24,58 @@ import org.apache.bcel.classfile.ElementValue;
 
 public class AnnotationElementValueGen extends ElementValueGen
 {
-	// For annotation element values, this is the annotation
-	private AnnotationEntryGen a;
+    // For annotation element values, this is the annotation
+    private AnnotationEntryGen a;
 
-	public AnnotationElementValueGen(AnnotationEntryGen a, ConstantPoolGen cpool)
-	{
-		super(ANNOTATION, cpool);
-		this.a = a;
-	}
+    public AnnotationElementValueGen(AnnotationEntryGen a, ConstantPoolGen cpool)
+    {
+        super(ANNOTATION, cpool);
+        this.a = a;
+    }
 
-	public AnnotationElementValueGen(int type, AnnotationEntryGen annotation,
-			ConstantPoolGen cpool)
-	{
-		super(type, cpool);
-		if (type != ANNOTATION) {
+    public AnnotationElementValueGen(int type, AnnotationEntryGen annotation,
+            ConstantPoolGen cpool)
+    {
+        super(type, cpool);
+        if (type != ANNOTATION) {
             throw new RuntimeException(
-					"Only element values of type annotation can be built with this ctor - type specified: " + type);
+                    "Only element values of type annotation can be built with this ctor - type specified: " + type);
         }
-		this.a = annotation;
-	}
+        this.a = annotation;
+    }
 
-	public AnnotationElementValueGen(AnnotationElementValue value,
-			ConstantPoolGen cpool, boolean copyPoolEntries)
-	{
-		super(ANNOTATION, cpool);
-		a = new AnnotationEntryGen(value.getAnnotationEntry(), cpool, copyPoolEntries);
-	}
+    public AnnotationElementValueGen(AnnotationElementValue value,
+            ConstantPoolGen cpool, boolean copyPoolEntries)
+    {
+        super(ANNOTATION, cpool);
+        a = new AnnotationEntryGen(value.getAnnotationEntry(), cpool, copyPoolEntries);
+    }
 
-	@Override
+    @Override
     public void dump(DataOutputStream dos) throws IOException
-	{
-		dos.writeByte(type); // u1 type of value (ANNOTATION == '@')
-		a.dump(dos);
-	}
+    {
+        dos.writeByte(type); // u1 type of value (ANNOTATION == '@')
+        a.dump(dos);
+    }
 
-	@Override
+    @Override
     public String stringifyValue()
-	{
-		throw new RuntimeException("Not implemented yet");
-	}
+    {
+        throw new RuntimeException("Not implemented yet");
+    }
 
-	/**
-	 * Return immutable variant of this AnnotationElementValueGen
-	 */
-	@Override
+    /**
+     * Return immutable variant of this AnnotationElementValueGen
+     */
+    @Override
     public ElementValue getElementValue()
-	{
-		return new AnnotationElementValue(this.type, a.getAnnotation(), cpGen
-				.getConstantPool());
-	}
+    {
+        return new AnnotationElementValue(this.type, a.getAnnotation(), cpGen
+                .getConstantPool());
+    }
 
-	public AnnotationEntryGen getAnnotation()
-	{
-		return a;
-	}
+    public AnnotationEntryGen getAnnotation()
+    {
+        return a;
+    }
 }

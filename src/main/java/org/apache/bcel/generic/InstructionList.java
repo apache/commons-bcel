@@ -142,7 +142,7 @@ public class InstructionList implements Serializable {
      * @return target position's instruction handle if available
      */
     public InstructionHandle findHandle( int pos ) {
-    	int[] positions = byte_positions;
+        int[] positions = byte_positions;
         InstructionHandle ih = start;
         for (int i = 0; i < length; i++) { 
             if(positions[i] == pos) {
@@ -1005,7 +1005,7 @@ public class InstructionList implements Serializable {
 
 
             public InstructionHandle next() throws NoSuchElementException {
-            	if (ih == null) {
+                if (ih == null) {
                     throw new NoSuchElementException();
                 }
                 InstructionHandle i = ih;

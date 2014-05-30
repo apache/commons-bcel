@@ -74,23 +74,23 @@ public abstract class Type implements java.io.Serializable {
      */
     @Override
     public int hashCode() {
-    	return type ^ signature.hashCode();
+        return type ^ signature.hashCode();
     }
-    
-    
+
+
     /**
      * @return whether the Types are equal
      */
     @Override
     public boolean equals(Object o) {
-  		if (o instanceof Type) {
-  			Type t = (Type)o;
-  			return (type == t.type) && signature.equals(t.signature);
-  		}
-  		return false;
+          if (o instanceof Type) {
+              Type t = (Type)o;
+              return (type == t.type) && signature.equals(t.signature);
+          }
+          return false;
     }
-    
-    
+
+
     /**
      * @return signature for given type.
      */
@@ -319,19 +319,19 @@ public abstract class Type implements java.io.Serializable {
         sb.append(getType(meth.getReturnType()).getSignature());
         return sb.toString();
     }
-    
+
     static int size(int coded) {
-    	return coded & 3;
+        return coded & 3;
     }
-    
+
     static int consumed(int coded) {
-    	return coded >> 2;
+        return coded >> 2;
     }
-    
+
     static int encode(int size, int consumed) {
-    	return consumed << 2 | size;
+        return consumed << 2 | size;
     }
-    
+
     static int getArgumentTypesSize( String signature ) {
         int res = 0;
         int index;
@@ -350,7 +350,7 @@ public abstract class Type implements java.io.Serializable {
         }
         return res;
     }
-    
+
     static int getTypeSize( String signature ) throws StringIndexOutOfBoundsException {
         byte type = Utility.typeOfSignature(signature);
         if (type <= Constants.T_VOID) {
@@ -373,8 +373,8 @@ public abstract class Type implements java.io.Serializable {
     }
 
 
-	static int getReturnTypeSize(String signature) {
-		int index = signature.lastIndexOf(')') + 1;
-		return Type.size(getTypeSize(signature.substring(index)));
-	}
+    static int getReturnTypeSize(String signature) {
+        int index = signature.lastIndexOf(')') + 1;
+        return Type.size(getTypeSize(signature.substring(index)));
+    }
 }

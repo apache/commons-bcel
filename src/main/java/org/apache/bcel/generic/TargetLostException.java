@@ -30,14 +30,14 @@ package org.apache.bcel.generic;
  * <PRE>
  *     ...
  *     try {
- *	il.delete(start_ih, end_ih);
+ *    il.delete(start_ih, end_ih);
  *     } catch(TargetLostException e) {
  *       InstructionHandle[] targets = e.getTargets();
- *	 for(int i=0; i < targets.length; i++) {
- *	   InstructionTargeter[] targeters = targets[i].getTargeters();
+ *     for(int i=0; i < targets.length; i++) {
+ *       InstructionTargeter[] targeters = targets[i].getTargeters();
  *     
- *	   for(int j=0; j < targeters.length; j++)
- *	     targeters[j].updateTarget(targets[i], new_target);
+ *       for(int j=0; j < targeters.length; j++)
+ *         targeters[j].updateTarget(targets[i], new_target);
  *       }
  *     }
  * </PRE>

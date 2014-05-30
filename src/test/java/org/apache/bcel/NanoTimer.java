@@ -20,32 +20,32 @@ package org.apache.bcel;
 
 public class NanoTimer {
 
-	private long time = 0;
+    private long time = 0;
 
-	public NanoTimer start() {
-		time -= System.nanoTime();
-		return this;
-	}
+    public NanoTimer start() {
+        time -= System.nanoTime();
+        return this;
+    }
 
-	public void stop() {
-		time += System.nanoTime();
-	}
+    public void stop() {
+        time += System.nanoTime();
+    }
 
-	public void subtract(NanoTimer o) {
-		time -= o.time;
-	}
+    public void subtract(NanoTimer o) {
+        time -= o.time;
+    }
 
-	public void reset() {
-		time = 0;
-	}
+    public void reset() {
+        time = 0;
+    }
 
-	/**
-	 * May ony be called after stop has been called as many times as start.
-	 */
-	@Override
+    /**
+     * May ony be called after stop has been called as many times as start.
+     */
+    @Override
     public String toString() {
-		return ((double) (time) / 1000000000) + " s";
-	}
+        return ((double) (time) / 1000000000) + " s";
+    }
 
 
 

@@ -28,17 +28,17 @@ import org.apache.bcel.generic.Type;
  */
 public final class DOUBLE_Upper extends Type{
 
-	private static final long serialVersionUID = -3046888862357818539L;
+    private static final long serialVersionUID = -3046888862357818539L;
     /** The one and only instance of this class. */
-	private static final DOUBLE_Upper singleInstance = new DOUBLE_Upper();
+    private static final DOUBLE_Upper singleInstance = new DOUBLE_Upper();
 
-	/** The constructor; this class must not be instantiated from the outside. */
-	private DOUBLE_Upper(){
-		super(Constants.T_UNKNOWN, "Long_Upper");
-	}
+    /** The constructor; this class must not be instantiated from the outside. */
+    private DOUBLE_Upper(){
+        super(Constants.T_UNKNOWN, "Long_Upper");
+    }
 
-	/** Use this method to get the single instance of this class. */
-	public static DOUBLE_Upper theInstance(){
-		return singleInstance;
-	}
+    /** Use this method to get the single instance of this class. */
+    public static DOUBLE_Upper theInstance(){
+        return singleInstance;
+    }
 }

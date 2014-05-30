@@ -73,10 +73,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public static final byte ZIP = 3;
     static boolean debug = false; // Debugging on/off
     static char sep = '/'; // directory separator
-    
+
     //  Annotations are collected from certain attributes, don't do it more than necessary!
     private boolean annotationsOutOfDate = true;
-    
+
     private static BCELComparator _cmp = new BCELComparator() {
 
         public boolean equals( Object o1, Object o2 ) {
@@ -336,24 +336,24 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public Attribute[] getAttributes() {
         return attributes;
     }
-    
+
     public AnnotationEntry[] getAnnotationEntries() {
-      	if (annotationsOutOfDate) { 
-      		// Find attributes that contain annotation data
-      		Attribute[] attrs = getAttributes();
-      		List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>();
-      		for (Attribute attribute : attrs) {
-    			if (attribute instanceof Annotations) {				
-    				Annotations runtimeAnnotations = (Annotations)attribute;
-    				for(int j = 0; j < runtimeAnnotations.getAnnotationEntries().length; j++) {
+          if (annotationsOutOfDate) { 
+              // Find attributes that contain annotation data
+              Attribute[] attrs = getAttributes();
+              List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>();
+              for (Attribute attribute : attrs) {
+                if (attribute instanceof Annotations) {                
+                    Annotations runtimeAnnotations = (Annotations)attribute;
+                    for(int j = 0; j < runtimeAnnotations.getAnnotationEntries().length; j++) {
                         accumulatedAnnotations.add(runtimeAnnotations.getAnnotationEntries()[j]);
                     }
-    			}
-    		}
-      		annotations = accumulatedAnnotations.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
-      		annotationsOutOfDate = false;
-      	}
-      	return annotations;
+                }
+            }
+              annotations = accumulatedAnnotations.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
+              annotationsOutOfDate = false;
+          }
+          return annotations;
       }
     /**
      * @return Class name.
@@ -649,8 +649,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         }
         AnnotationEntry[] annotations = getAnnotationEntries();
         if (annotations!=null && annotations.length>0) {
-        	buf.append("\nAnnotation(s):\n");
-        	for (AnnotationEntry annotation : annotations) {
+            buf.append("\nAnnotation(s):\n");
+            for (AnnotationEntry annotation : annotations) {
                 buf.append(indent(annotation));
             }
         }
@@ -716,42 +716,42 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public final boolean isClass() {
         return (access_flags & Constants.ACC_INTERFACE) == 0;
     }
-    
+
     public final boolean isAnonymous() {
-  	  computeNestedTypeStatus();
-  	  return this.isAnonymous;
+        computeNestedTypeStatus();
+        return this.isAnonymous;
     }
-    
+
     public final boolean isNested() {
-  	  computeNestedTypeStatus();
-  	  return this.isNested;
+        computeNestedTypeStatus();
+        return this.isNested;
     }
-    
+
     private void computeNestedTypeStatus() {
-  	  if (computedNestedTypeStatus) {
+        if (computedNestedTypeStatus) {
         return;
     }
-  	  for (Attribute attribute : this.attributes) {
-  			if (attribute instanceof InnerClasses) {
-  				InnerClass[] innerClasses = ((InnerClasses) attribute).getInnerClasses();
-  				for (InnerClass innerClasse : innerClasses) {
-  					boolean innerClassAttributeRefersToMe = false;
-  					String inner_class_name = constant_pool.getConstantString(innerClasse.getInnerClassIndex(),
-  						       Constants.CONSTANT_Class);
-  					inner_class_name = Utility.compactClassName(inner_class_name);
-  					if (inner_class_name.equals(getClassName())) {
-  						innerClassAttributeRefersToMe = true;
-  					}
-  					if (innerClassAttributeRefersToMe) {
-  						this.isNested = true;
-  						if (innerClasse.getInnerNameIndex() == 0) {
-  							this.isAnonymous = true;
-  						}
-  					}
-  				}
-  			}
-  	  }
-  	  this.computedNestedTypeStatus = true;
+        for (Attribute attribute : this.attributes) {
+              if (attribute instanceof InnerClasses) {
+                  InnerClass[] innerClasses = ((InnerClasses) attribute).getInnerClasses();
+                  for (InnerClass innerClasse : innerClasses) {
+                      boolean innerClassAttributeRefersToMe = false;
+                      String inner_class_name = constant_pool.getConstantString(innerClasse.getInnerClassIndex(),
+                                 Constants.CONSTANT_Class);
+                      inner_class_name = Utility.compactClassName(inner_class_name);
+                      if (inner_class_name.equals(getClassName())) {
+                          innerClassAttributeRefersToMe = true;
+                      }
+                      if (innerClassAttributeRefersToMe) {
+                          this.isNested = true;
+                          if (innerClasse.getInnerNameIndex() == 0) {
+                              this.isAnonymous = true;
+                          }
+                      }
+                  }
+              }
+        }
+        this.computedNestedTypeStatus = true;
     }
 
 

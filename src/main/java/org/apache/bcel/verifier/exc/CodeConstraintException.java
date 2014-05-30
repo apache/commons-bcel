@@ -26,17 +26,17 @@ package org.apache.bcel.verifier.exc;
  * @author Enver Haase
  */
 public abstract class CodeConstraintException extends VerificationException{
-	private static final long serialVersionUID = -7265388214714996640L;
+    private static final long serialVersionUID = -7265388214714996640L;
     /**
-	 * Constructs a new CodeConstraintException with null as its error message string.
-	 */
-	CodeConstraintException(){
-		super();
-	}
-	/**
-	 * Constructs a new CodeConstraintException with the specified error message.
-	 */
-	CodeConstraintException(String message){
-		super(message);
-	}	
+     * Constructs a new CodeConstraintException with null as its error message string.
+     */
+    CodeConstraintException(){
+        super();
+    }
+    /**
+     * Constructs a new CodeConstraintException with the specified error message.
+     */
+    CodeConstraintException(String message){
+        super(message);
+    }    
 }

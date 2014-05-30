@@ -64,290 +64,290 @@ import org.apache.bcel.classfile.Visitor;
 
 public class CounterVisitor implements Visitor
 {
-	public int unknownCount = 0;
+    public int unknownCount = 0;
 
-	public int syntheticCount = 0;
+    public int syntheticCount = 0;
 
-	public int stackMapEntryCount = 0;
+    public int stackMapEntryCount = 0;
 
-	public int stackMapCount = 0;
+    public int stackMapCount = 0;
 
-	public int sourceFileCount = 0;
+    public int sourceFileCount = 0;
 
-	public int signatureAnnotationCount = 0;
+    public int signatureAnnotationCount = 0;
 
-	public int parameterAnnotationCount = 0;
+    public int parameterAnnotationCount = 0;
 
-	public int methodCount = 0;
+    public int methodCount = 0;
 
-	public int localVariableTypeTableCount = 0;
+    public int localVariableTypeTableCount = 0;
 
-	public int localVariableTableCount = 0;
+    public int localVariableTableCount = 0;
 
-	public int localVariableCount = 0;
+    public int localVariableCount = 0;
 
-	public int lineNumberTableCount = 0;
+    public int lineNumberTableCount = 0;
 
-	public int lineNumberCount = 0;
+    public int lineNumberCount = 0;
 
-	public int javaClassCount = 0;
+    public int javaClassCount = 0;
 
-	public int innerClassesCount = 0;
+    public int innerClassesCount = 0;
 
-	public int innerClassCount = 0;
+    public int innerClassCount = 0;
 
-	public int fieldCount = 0;
+    public int fieldCount = 0;
 
-	public int exceptionTableCount = 0;
+    public int exceptionTableCount = 0;
 
-	public int enclosingMethodCount = 0;
+    public int enclosingMethodCount = 0;
 
-	public int deprecatedCount = 0;
+    public int deprecatedCount = 0;
 
-	public int constantValueCount = 0;
+    public int constantValueCount = 0;
 
-	public int constantUtf8Count = 0;
+    public int constantUtf8Count = 0;
 
-	public int constantStringCount = 0;
+    public int constantStringCount = 0;
 
-	public int constantNameAndTypeCount = 0;
+    public int constantNameAndTypeCount = 0;
 
-	public int constantPoolCount = 0;
+    public int constantPoolCount = 0;
 
-	public int constantMethodrefCount = 0;
+    public int constantMethodrefCount = 0;
 
-	public int constantLongCount = 0;
+    public int constantLongCount = 0;
 
-	public int constantIntegerCount = 0;
+    public int constantIntegerCount = 0;
 
-	public int constantInterfaceMethodrefCount = 0;
+    public int constantInterfaceMethodrefCount = 0;
 
-	public int constantFloatCount = 0;
+    public int constantFloatCount = 0;
 
-	public int constantFieldrefCount = 0;
+    public int constantFieldrefCount = 0;
 
-	public int constantClassCount = 0;
+    public int constantClassCount = 0;
 
-	public int constantDoubleCount = 0;
+    public int constantDoubleCount = 0;
 
-	public int codeExceptionCount = 0;
+    public int codeExceptionCount = 0;
 
-	public int codeCount = 0;
+    public int codeCount = 0;
 
-	public int annotationEntryCount = 0;
+    public int annotationEntryCount = 0;
 
-	public int annotationDefaultCount = 0;
+    public int annotationDefaultCount = 0;
 
-	public int annotationCount = 0;
+    public int annotationCount = 0;
 
-	public int stackMapTableCount = 0;
+    public int stackMapTableCount = 0;
 
-	public int stackMapTableEntryCount = 0;
+    public int stackMapTableEntryCount = 0;
 
-	public int bootstrapMethodsCount = 0;
+    public int bootstrapMethodsCount = 0;
 
     public int methodParametersCount = 0;
-	
 
-	public void visitAnnotation(Annotations obj)
-	{
-		annotationCount++;
-	}
 
-	public void visitAnnotationDefault(AnnotationDefault obj)
-	{
-		annotationDefaultCount++;
-	}
-
-	public void visitAnnotationEntry(AnnotationEntry obj)
-	{
-		annotationEntryCount++;
-	}
-
-	public void visitCode(Code obj)
-	{
-		codeCount++;
-	}
-
-	public void visitCodeException(CodeException obj)
-	{
-		codeExceptionCount++;
-	}
-
-	public void visitConstantClass(ConstantClass obj)
-	{
-		constantClassCount++;
-	}
-
-	public void visitConstantDouble(ConstantDouble obj)
-	{
-		constantDoubleCount++;
-	}
-
-	public void visitConstantFieldref(ConstantFieldref obj)
-	{
-		constantFieldrefCount++;
-	}
-
-	public void visitConstantFloat(ConstantFloat obj)
-	{
-		constantFloatCount++;
-	}
-
-	public void visitConstantInteger(ConstantInteger obj)
-	{
-		constantIntegerCount++;
-	}
-
-	public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj)
-	{
-		constantInterfaceMethodrefCount++;
-	}
-
-	public void visitConstantLong(ConstantLong obj)
-	{
-		constantLongCount++;
-	}
-
-	public void visitConstantMethodref(ConstantMethodref obj)
-	{
-		constantMethodrefCount++;
-	}
-
-	public void visitConstantNameAndType(ConstantNameAndType obj)
-	{
-		constantNameAndTypeCount++;
-	}
-
-	public void visitConstantPool(ConstantPool obj)
-	{
-		constantPoolCount++;
-	}
-
-	public void visitConstantString(ConstantString obj)
-	{
-		constantStringCount++;
-	}
-
-	public void visitConstantUtf8(ConstantUtf8 obj)
-	{
-		constantUtf8Count++;
-	}
-
-	public void visitConstantValue(ConstantValue obj)
-	{
-		constantValueCount++;
-	}
-
-	public void visitDeprecated(Deprecated obj)
-	{
-		deprecatedCount++;
-	}
-
-	public void visitEnclosingMethod(EnclosingMethod obj)
-	{
-		enclosingMethodCount++;
-	}
-
-	public void visitExceptionTable(ExceptionTable obj)
-	{
-		exceptionTableCount++;
-	}
-
-	public void visitField(Field obj)
-	{
-		fieldCount++;
-	}
-
-	public void visitInnerClass(InnerClass obj)
-	{
-		innerClassCount++;
-	}
-
-	public void visitInnerClasses(InnerClasses obj)
-	{
-		innerClassesCount++;
-	}
-
-	public void visitJavaClass(JavaClass obj)
-	{
-		javaClassCount++;
-	}
-
-	public void visitLineNumber(LineNumber obj)
-	{
-		lineNumberCount++;
-	}
-
-	public void visitLineNumberTable(LineNumberTable obj)
-	{
-		lineNumberTableCount++;
-	}
-
-	public void visitLocalVariable(LocalVariable obj)
-	{
-		localVariableCount++;
-	}
-
-	public void visitLocalVariableTable(LocalVariableTable obj)
-	{
-		localVariableTableCount++;
-	}
-
-	public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
-	{
-		localVariableTypeTableCount++;
-	}
-
-	public void visitMethod(Method obj)
-	{
-		methodCount++;
-	}
-
-	public void visitParameterAnnotation(ParameterAnnotations obj)
-	{
-		parameterAnnotationCount++;
-	}
-
-	public void visitSignature(Signature obj)
-	{
-		signatureAnnotationCount++;
-	}
-
-	public void visitSourceFile(SourceFile obj)
-	{
-		sourceFileCount++;
-	}
-
-	public void visitStackMap(StackMap obj)
-	{
-		stackMapCount++;
-	}
-
-	public void visitStackMapEntry(StackMapEntry obj)
-	{
-		stackMapEntryCount++;
-	}
-
-	public void visitSynthetic(Synthetic obj)
-	{
-		syntheticCount++;
-	}
-
-	public void visitUnknown(Unknown obj)
-	{
-		unknownCount++;
-	}
-
-	public void visitStackMapTable(StackMapTable obj)
+    public void visitAnnotation(Annotations obj)
     {
-		stackMapTableCount++;
-	}
+        annotationCount++;
+    }
 
-	public void visitStackMapTableEntry(StackMapTableEntry obj)
+    public void visitAnnotationDefault(AnnotationDefault obj)
     {
-		stackMapTableEntryCount++;
-	}
+        annotationDefaultCount++;
+    }
+
+    public void visitAnnotationEntry(AnnotationEntry obj)
+    {
+        annotationEntryCount++;
+    }
+
+    public void visitCode(Code obj)
+    {
+        codeCount++;
+    }
+
+    public void visitCodeException(CodeException obj)
+    {
+        codeExceptionCount++;
+    }
+
+    public void visitConstantClass(ConstantClass obj)
+    {
+        constantClassCount++;
+    }
+
+    public void visitConstantDouble(ConstantDouble obj)
+    {
+        constantDoubleCount++;
+    }
+
+    public void visitConstantFieldref(ConstantFieldref obj)
+    {
+        constantFieldrefCount++;
+    }
+
+    public void visitConstantFloat(ConstantFloat obj)
+    {
+        constantFloatCount++;
+    }
+
+    public void visitConstantInteger(ConstantInteger obj)
+    {
+        constantIntegerCount++;
+    }
+
+    public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj)
+    {
+        constantInterfaceMethodrefCount++;
+    }
+
+    public void visitConstantLong(ConstantLong obj)
+    {
+        constantLongCount++;
+    }
+
+    public void visitConstantMethodref(ConstantMethodref obj)
+    {
+        constantMethodrefCount++;
+    }
+
+    public void visitConstantNameAndType(ConstantNameAndType obj)
+    {
+        constantNameAndTypeCount++;
+    }
+
+    public void visitConstantPool(ConstantPool obj)
+    {
+        constantPoolCount++;
+    }
+
+    public void visitConstantString(ConstantString obj)
+    {
+        constantStringCount++;
+    }
+
+    public void visitConstantUtf8(ConstantUtf8 obj)
+    {
+        constantUtf8Count++;
+    }
+
+    public void visitConstantValue(ConstantValue obj)
+    {
+        constantValueCount++;
+    }
+
+    public void visitDeprecated(Deprecated obj)
+    {
+        deprecatedCount++;
+    }
+
+    public void visitEnclosingMethod(EnclosingMethod obj)
+    {
+        enclosingMethodCount++;
+    }
+
+    public void visitExceptionTable(ExceptionTable obj)
+    {
+        exceptionTableCount++;
+    }
+
+    public void visitField(Field obj)
+    {
+        fieldCount++;
+    }
+
+    public void visitInnerClass(InnerClass obj)
+    {
+        innerClassCount++;
+    }
+
+    public void visitInnerClasses(InnerClasses obj)
+    {
+        innerClassesCount++;
+    }
+
+    public void visitJavaClass(JavaClass obj)
+    {
+        javaClassCount++;
+    }
+
+    public void visitLineNumber(LineNumber obj)
+    {
+        lineNumberCount++;
+    }
+
+    public void visitLineNumberTable(LineNumberTable obj)
+    {
+        lineNumberTableCount++;
+    }
+
+    public void visitLocalVariable(LocalVariable obj)
+    {
+        localVariableCount++;
+    }
+
+    public void visitLocalVariableTable(LocalVariableTable obj)
+    {
+        localVariableTableCount++;
+    }
+
+    public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
+    {
+        localVariableTypeTableCount++;
+    }
+
+    public void visitMethod(Method obj)
+    {
+        methodCount++;
+    }
+
+    public void visitParameterAnnotation(ParameterAnnotations obj)
+    {
+        parameterAnnotationCount++;
+    }
+
+    public void visitSignature(Signature obj)
+    {
+        signatureAnnotationCount++;
+    }
+
+    public void visitSourceFile(SourceFile obj)
+    {
+        sourceFileCount++;
+    }
+
+    public void visitStackMap(StackMap obj)
+    {
+        stackMapCount++;
+    }
+
+    public void visitStackMapEntry(StackMapEntry obj)
+    {
+        stackMapEntryCount++;
+    }
+
+    public void visitSynthetic(Synthetic obj)
+    {
+        syntheticCount++;
+    }
+
+    public void visitUnknown(Unknown obj)
+    {
+        unknownCount++;
+    }
+
+    public void visitStackMapTable(StackMapTable obj)
+    {
+        stackMapTableCount++;
+    }
+
+    public void visitStackMapTableEntry(StackMapTableEntry obj)
+    {
+        stackMapTableEntryCount++;
+    }
 
     public void visitBootstrapMethods(BootstrapMethods obj)
     {

@@ -34,44 +34,44 @@ import org.apache.bcel.generic.MethodGen;
  * @author Enver Haase
  */
 public class ExceptionHandlers{
-	/**
-	 * The ExceptionHandler instances.
-	 * Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
-	 */
-	private Map<InstructionHandle, Set<ExceptionHandler>> exceptionhandlers;
-	 
-	/**
-	 * Constructor. Creates a new ExceptionHandlers instance.
-	 */
-	public ExceptionHandlers(MethodGen mg){
-		exceptionhandlers = new HashMap<InstructionHandle, Set<ExceptionHandler>>();
-		CodeExceptionGen[] cegs = mg.getExceptionHandlers();
-		for (CodeExceptionGen ceg : cegs) {
-			ExceptionHandler eh = new ExceptionHandler(ceg.getCatchType(), ceg.getHandlerPC());
-			for (InstructionHandle ih=ceg.getStartPC(); ih != ceg.getEndPC().getNext(); ih=ih.getNext()){
-				Set<ExceptionHandler> hs;
-				hs = exceptionhandlers.get(ih);
-				if (hs == null){
-					hs = new HashSet<ExceptionHandler>();
-					exceptionhandlers.put(ih, hs);
-				}
-				hs.add(eh);
-			}
-		}
-	}
-	
-	/**
-	 * Returns all the ExceptionHandler instances representing exception
-	 * handlers that protect the instruction ih.
-	 */
-	public ExceptionHandler[] getExceptionHandlers(InstructionHandle ih){
-		Set<ExceptionHandler> hs = exceptionhandlers.get(ih);
-		if (hs == null) {
+    /**
+     * The ExceptionHandler instances.
+     * Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
+     */
+    private Map<InstructionHandle, Set<ExceptionHandler>> exceptionhandlers;
+
+    /**
+     * Constructor. Creates a new ExceptionHandlers instance.
+     */
+    public ExceptionHandlers(MethodGen mg){
+        exceptionhandlers = new HashMap<InstructionHandle, Set<ExceptionHandler>>();
+        CodeExceptionGen[] cegs = mg.getExceptionHandlers();
+        for (CodeExceptionGen ceg : cegs) {
+            ExceptionHandler eh = new ExceptionHandler(ceg.getCatchType(), ceg.getHandlerPC());
+            for (InstructionHandle ih=ceg.getStartPC(); ih != ceg.getEndPC().getNext(); ih=ih.getNext()){
+                Set<ExceptionHandler> hs;
+                hs = exceptionhandlers.get(ih);
+                if (hs == null){
+                    hs = new HashSet<ExceptionHandler>();
+                    exceptionhandlers.put(ih, hs);
+                }
+                hs.add(eh);
+            }
+        }
+    }
+
+    /**
+     * Returns all the ExceptionHandler instances representing exception
+     * handlers that protect the instruction ih.
+     */
+    public ExceptionHandler[] getExceptionHandlers(InstructionHandle ih){
+        Set<ExceptionHandler> hs = exceptionhandlers.get(ih);
+        if (hs == null) {
             return new ExceptionHandler[0];
         } else{
-			ExceptionHandler[] ret = new ExceptionHandler[hs.size()];
-			return hs.toArray(ret);
-		}
-	}
+            ExceptionHandler[] ret = new ExceptionHandler[hs.size()];
+            return hs.toArray(ret);
+        }
+    }
 
 }

@@ -39,143 +39,143 @@ import org.apache.bcel.util.SyntheticRepository;
 
 public abstract class AbstractTestCase extends TestCase
 {
-	private boolean verbose = false;
+    private boolean verbose = false;
 
-	protected File createTestdataFile(String name)
-	{
-		return new File("target" + File.separator + "testdata" + File.separator
-				+ name);
-	}
+    protected File createTestdataFile(String name)
+    {
+        return new File("target" + File.separator + "testdata" + File.separator
+                + name);
+    }
 
-	protected JavaClass getTestClass(String name) throws ClassNotFoundException
-	{
-		return SyntheticRepository.getInstance().loadClass(name);
-	}
+    protected JavaClass getTestClass(String name) throws ClassNotFoundException
+    {
+        return SyntheticRepository.getInstance().loadClass(name);
+    }
 
-	protected Method getMethod(JavaClass cl, String methodname)
-	{
-		Method[] methods = cl.getMethods();
-		for (Method m : methods) {
-			if (m.getName().equals(methodname))
-			{
-				return m;
-			}
-		}
-		return null;
-	}
+    protected Method getMethod(JavaClass cl, String methodname)
+    {
+        Method[] methods = cl.getMethods();
+        for (Method m : methods) {
+            if (m.getName().equals(methodname))
+            {
+                return m;
+            }
+        }
+        return null;
+    }
 
-	protected boolean wipe(String name)
-	{
-		return new File("target" + File.separator + "testdata" + File.separator
-				+ name).delete();
-	}
+    protected boolean wipe(String name)
+    {
+        return new File("target" + File.separator + "testdata" + File.separator
+                + name).delete();
+    }
 
-	protected boolean wipe(String dir, String name)
-	{
-		boolean b = wipe(dir + File.separator + name);
-		String[] files = new File(dir).list();
-		if (files == null || files.length == 0)
-		{
-			new File(dir).delete(); // Why does this not succeed? stupid thing
-		}
-		return b;
-	}
+    protected boolean wipe(String dir, String name)
+    {
+        boolean b = wipe(dir + File.separator + name);
+        String[] files = new File(dir).list();
+        if (files == null || files.length == 0)
+        {
+            new File(dir).delete(); // Why does this not succeed? stupid thing
+        }
+        return b;
+    }
 
-	public SyntheticRepository createRepos(String cpentry)
-	{
-		ClassPath cp = new ClassPath("target" + File.separator + "testdata"
-				+ File.separator + cpentry + File.separator);
-		return SyntheticRepository.getInstance(cp);
-	}
+    public SyntheticRepository createRepos(String cpentry)
+    {
+        ClassPath cp = new ClassPath("target" + File.separator + "testdata"
+                + File.separator + cpentry + File.separator);
+        return SyntheticRepository.getInstance(cp);
+    }
 
-	protected Attribute[] findAttribute(String name, JavaClass clazz)
-	{
-		Attribute[] all = clazz.getAttributes();
-		List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
-		for (Attribute element : all) {
-			if (verbose) {
+    protected Attribute[] findAttribute(String name, JavaClass clazz)
+    {
+        Attribute[] all = clazz.getAttributes();
+        List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
+        for (Attribute element : all) {
+            if (verbose) {
                 System.err.println("Attribute: " + element.getName());
             }
-			if (element.getName().equals(name)) {
+            if (element.getName().equals(name)) {
                 chosenAttrsList.add(element);
             }
-		}
-		return chosenAttrsList.toArray(new Attribute[] {});
-	}
+        }
+        return chosenAttrsList.toArray(new Attribute[] {});
+    }
 
-	protected Attribute findAttribute(String name, Attribute[] all)
-	{
-		List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
-		for (Attribute element : all) {
-			if (verbose) {
+    protected Attribute findAttribute(String name, Attribute[] all)
+    {
+        List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
+        for (Attribute element : all) {
+            if (verbose) {
                 System.err.println("Attribute: " + element.getName());
             }
-			if (element.getName().equals(name)) {
+            if (element.getName().equals(name)) {
                 chosenAttrsList.add(element);
             }
-		}
-		assertTrue("Should be one match: " + chosenAttrsList.size(),
-				chosenAttrsList.size() == 1);
-		return chosenAttrsList.get(0);
-	}
+        }
+        assertTrue("Should be one match: " + chosenAttrsList.size(),
+                chosenAttrsList.size() == 1);
+        return chosenAttrsList.get(0);
+    }
 
-	protected String dumpAttributes(Attribute[] as)
-	{
-		StringBuilder result = new StringBuilder();
-		result.append("AttributeArray:[");
-		for (int i = 0; i < as.length; i++)
-		{
-			Attribute attr = as[i];
-			result.append(attr.toString());
-			if (i + 1 < as.length) {
+    protected String dumpAttributes(Attribute[] as)
+    {
+        StringBuilder result = new StringBuilder();
+        result.append("AttributeArray:[");
+        for (int i = 0; i < as.length; i++)
+        {
+            Attribute attr = as[i];
+            result.append(attr.toString());
+            if (i + 1 < as.length) {
                 result.append(",");
             }
-		}
-		result.append("]");
-		return result.toString();
-	}
+        }
+        result.append("]");
+        return result.toString();
+    }
 
-	protected String dumpAnnotationEntries(AnnotationEntry[] as)
-	{
-		StringBuilder result = new StringBuilder();
-		result.append("[");
-		for (int i = 0; i < as.length; i++)
-		{
-			AnnotationEntry annotation = as[i];
-			result.append(annotation.toShortString());
-			if (i + 1 < as.length) {
+    protected String dumpAnnotationEntries(AnnotationEntry[] as)
+    {
+        StringBuilder result = new StringBuilder();
+        result.append("[");
+        for (int i = 0; i < as.length; i++)
+        {
+            AnnotationEntry annotation = as[i];
+            result.append(annotation.toShortString());
+            if (i + 1 < as.length) {
                 result.append(",");
             }
-		}
-		result.append("]");
-		return result.toString();
-	}
+        }
+        result.append("]");
+        return result.toString();
+    }
 
-	protected String dumpAnnotationEntries(AnnotationEntryGen[] as)
-	{
-		StringBuilder result = new StringBuilder();
-		result.append("[");
-		for (int i = 0; i < as.length; i++)
-		{
-			AnnotationEntryGen annotation = as[i];
-			result.append(annotation.toShortString());
-			if (i + 1 < as.length) {
+    protected String dumpAnnotationEntries(AnnotationEntryGen[] as)
+    {
+        StringBuilder result = new StringBuilder();
+        result.append("[");
+        for (int i = 0; i < as.length; i++)
+        {
+            AnnotationEntryGen annotation = as[i];
+            result.append(annotation.toShortString());
+            if (i + 1 < as.length) {
                 result.append(",");
             }
-		}
-		result.append("]");
-		return result.toString();
-	}
+        }
+        result.append("]");
+        return result.toString();
+    }
 
-	public AnnotationEntryGen createFruitAnnotationEntry(ConstantPoolGen cp,
-			String aFruit, boolean visibility)
-	{
-		SimpleElementValueGen evg = new SimpleElementValueGen(
-				ElementValueGen.STRING, cp, aFruit);
-		ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
-		ObjectType t = new ObjectType("SimpleStringAnnotation");
-		List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
-		elements.add(nvGen);
-		return new AnnotationEntryGen(t, elements, visibility, cp);
-	}
+    public AnnotationEntryGen createFruitAnnotationEntry(ConstantPoolGen cp,
+            String aFruit, boolean visibility)
+    {
+        SimpleElementValueGen evg = new SimpleElementValueGen(
+                ElementValueGen.STRING, cp, aFruit);
+        ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
+        ObjectType t = new ObjectType("SimpleStringAnnotation");
+        List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
+        elements.add(nvGen);
+        return new AnnotationEntryGen(t, elements, visibility, cp);
+    }
 }

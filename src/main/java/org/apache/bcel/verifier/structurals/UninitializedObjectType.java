@@ -32,40 +32,40 @@ import org.apache.bcel.generic.ReferenceType;
  */
 public class UninitializedObjectType extends ReferenceType implements Constants{
 
-	private static final long serialVersionUID = -1228341777713117641L;
+    private static final long serialVersionUID = -1228341777713117641L;
     /** The "initialized" version. */
-	private ObjectType initialized;
-	
-	/** Creates a new instance. */
-	public UninitializedObjectType(ObjectType t){
-		super(T_UNKNOWN, "<UNINITIALIZED OBJECT OF TYPE '"+t.getClassName()+"'>");
-		initialized = t;
-	}
+    private ObjectType initialized;
 
-	/**
-	 * Returns the ObjectType of the same class as the one of the uninitialized object
-	 * represented by this UninitializedObjectType instance.
-	 */
-	public ObjectType getInitialized(){
-		return initialized;
-	}
+    /** Creates a new instance. */
+    public UninitializedObjectType(ObjectType t){
+        super(T_UNKNOWN, "<UNINITIALIZED OBJECT OF TYPE '"+t.getClassName()+"'>");
+        initialized = t;
+    }
 
-	/** @return a hash code value for the object.
+    /**
+     * Returns the ObjectType of the same class as the one of the uninitialized object
+     * represented by this UninitializedObjectType instance.
      */
-	@Override
+    public ObjectType getInitialized(){
+        return initialized;
+    }
+
+    /** @return a hash code value for the object.
+     */
+    @Override
     public int hashCode() { return initialized.hashCode(); }
 
-	/**
-	 * Returns true on equality of this and o.
-	 * Equality means the ObjectType instances of "initialized"
-	 * equal one another in this and the o instance.
-	 *
-	 */
-	@Override
+    /**
+     * Returns true on equality of this and o.
+     * Equality means the ObjectType instances of "initialized"
+     * equal one another in this and the o instance.
+     *
+     */
+    @Override
     public boolean equals(Object o){
-		if (! (o instanceof UninitializedObjectType)) {
+        if (! (o instanceof UninitializedObjectType)) {
             return false;
         }
-		return initialized.equals(((UninitializedObjectType)o).initialized);
-	}
+        return initialized.equals(((UninitializedObjectType)o).initialized);
+    }
 }

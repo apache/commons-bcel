@@ -44,7 +44,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
     private String signatureAttributeString = null;
     private boolean searchedForSignatureAttribute = false;
-    
+
 
     // Annotations are collected from certain attributes, don't do it more than necessary!
     private boolean annotationsOutOfDate = true;
@@ -204,7 +204,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @return deep copy of this field
      */
     protected FieldOrMethod copy_( ConstantPool _constant_pool ) {
-    	FieldOrMethod c = null;
+        FieldOrMethod c = null;
 
         try {
           c = (FieldOrMethod)clone();
@@ -219,73 +219,73 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
         return c;
     }
-    
+
     /**
-	 * Ensure we have unpacked any attributes that contain annotations.
-	 * We don't remove these annotation attributes from the attributes list, they
-	 * remain there.
-	 */
-	private void ensureAnnotationsUpToDate()
-	{
-		if (annotationsOutOfDate)
-		{
-			// Find attributes that contain annotation data
-			Attribute[] attrs = getAttributes();
-			List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>();
-			for (Attribute attribute : attrs) {
-				if (attribute instanceof Annotations)
-				{
-					Annotations annotations = (Annotations) attribute;
-					for (int j = 0; j < annotations.getAnnotationEntries().length; j++)
-					{
-						accumulatedAnnotations.add(annotations
-								.getAnnotationEntries()[j]);
-					}
-				}
-			}
-			annotationEntries = accumulatedAnnotations
-					.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
-			annotationsOutOfDate = false;
-		}
-	}
+     * Ensure we have unpacked any attributes that contain annotations.
+     * We don't remove these annotation attributes from the attributes list, they
+     * remain there.
+     */
+    private void ensureAnnotationsUpToDate()
+    {
+        if (annotationsOutOfDate)
+        {
+            // Find attributes that contain annotation data
+            Attribute[] attrs = getAttributes();
+            List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>();
+            for (Attribute attribute : attrs) {
+                if (attribute instanceof Annotations)
+                {
+                    Annotations annotations = (Annotations) attribute;
+                    for (int j = 0; j < annotations.getAnnotationEntries().length; j++)
+                    {
+                        accumulatedAnnotations.add(annotations
+                                .getAnnotationEntries()[j]);
+                    }
+                }
+            }
+            annotationEntries = accumulatedAnnotations
+                    .toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
+            annotationsOutOfDate = false;
+        }
+    }
 
-	public AnnotationEntry[] getAnnotationEntries()
-	{
-		ensureAnnotationsUpToDate();
-		return annotationEntries;
-	}
+    public AnnotationEntry[] getAnnotationEntries()
+    {
+        ensureAnnotationsUpToDate();
+        return annotationEntries;
+    }
 
-	public void addAnnotationEntry(AnnotationEntry a)
-	{
-		ensureAnnotationsUpToDate();
-		int len = annotationEntries.length;
-		AnnotationEntry[] newAnnotations = new AnnotationEntry[len + 1];
-		System.arraycopy(annotationEntries, 0, newAnnotations, 0, len);
-		newAnnotations[len] = a;
-		annotationEntries = newAnnotations;
-	}
+    public void addAnnotationEntry(AnnotationEntry a)
+    {
+        ensureAnnotationsUpToDate();
+        int len = annotationEntries.length;
+        AnnotationEntry[] newAnnotations = new AnnotationEntry[len + 1];
+        System.arraycopy(annotationEntries, 0, newAnnotations, 0, len);
+        newAnnotations[len] = a;
+        annotationEntries = newAnnotations;
+    }
 
-	/**
-	 * Hunts for a signature attribute on the member and returns its contents.  So where the 'regular' signature
-	 * may be (Ljava/util/Vector;)V the signature attribute may in fact say 'Ljava/lang/Vector<Ljava/lang/String>;'
-	 * Coded for performance - searches for the attribute only when requested - only searches for it once.
-	 */
-	public final String getGenericSignature()
-	{
-		if (!searchedForSignatureAttribute)
-		{
-			boolean found = false;
-			for (int i = 0; !found && i < attributes_count; i++)
-			{
-				if (attributes[i] instanceof Signature)
-				{
-					signatureAttributeString = ((Signature) attributes[i])
-							.getSignature();
-					found = true;
-				}
-			}
-			searchedForSignatureAttribute = true;
-		}
-		return signatureAttributeString;
-	}
+    /**
+     * Hunts for a signature attribute on the member and returns its contents.  So where the 'regular' signature
+     * may be (Ljava/util/Vector;)V the signature attribute may in fact say 'Ljava/lang/Vector<Ljava/lang/String>;'
+     * Coded for performance - searches for the attribute only when requested - only searches for it once.
+     */
+    public final String getGenericSignature()
+    {
+        if (!searchedForSignatureAttribute)
+        {
+            boolean found = false;
+            for (int i = 0; !found && i < attributes_count; i++)
+            {
+                if (attributes[i] instanceof Signature)
+                {
+                    signatureAttributeString = ((Signature) attributes[i])
+                            .getSignature();
+                    found = true;
+                }
+            }
+            searchedForSignatureAttribute = true;
+        }
+        return signatureAttributeString;
+    }
 }

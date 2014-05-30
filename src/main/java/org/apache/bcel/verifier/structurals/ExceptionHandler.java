@@ -30,29 +30,29 @@ import org.apache.bcel.generic.ObjectType;
  * @author Enver Haase
  */
 public class ExceptionHandler{
-	/** The type of the exception to catch. NULL means ANY. */
-	private ObjectType catchtype;
-	
-	/** The InstructionHandle where the handling begins. */
-	private InstructionHandle handlerpc;
+    /** The type of the exception to catch. NULL means ANY. */
+    private ObjectType catchtype;
 
-	/** Leave instance creation to JustIce. */
-	ExceptionHandler(ObjectType catch_type, InstructionHandle handler_pc){
-		catchtype = catch_type;
-		handlerpc = handler_pc;
-	}
+    /** The InstructionHandle where the handling begins. */
+    private InstructionHandle handlerpc;
 
-	/**
-	 * Returns the type of the exception that's handled. <B>'null' means 'ANY'.</B>
-	 */
-	public ObjectType getExceptionType(){
-		return catchtype;
-	}
+    /** Leave instance creation to JustIce. */
+    ExceptionHandler(ObjectType catch_type, InstructionHandle handler_pc){
+        catchtype = catch_type;
+        handlerpc = handler_pc;
+    }
 
-	/**
-	 * Returns the InstructionHandle where the handler starts off.
-	 */
-	public InstructionHandle getHandlerStart(){
-		return handlerpc;
-	}
+    /**
+     * Returns the type of the exception that's handled. <B>'null' means 'ANY'.</B>
+     */
+    public ObjectType getExceptionType(){
+        return catchtype;
+    }
+
+    /**
+     * Returns the InstructionHandle where the handler starts off.
+     */
+    public InstructionHandle getHandlerStart(){
+        return handlerpc;
+    }
 }

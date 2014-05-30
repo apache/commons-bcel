@@ -27,19 +27,19 @@ package org.apache.bcel.verifier.exc;
  */
 public class LoadingException extends VerifierConstraintViolatedException{
 
-	private static final long serialVersionUID = -7911901533049018823L;
+    private static final long serialVersionUID = -7911901533049018823L;
 
     /**
-	 * Constructs a new LoadingException with null as its error message string.
-	 */
-	public LoadingException(){
-		super();
-	}
-                   
-	/**
-	 * Constructs a new LoadingException with the specified error message.
-	 */
-	public LoadingException(String message){
-		super (message);
-	}
+     * Constructs a new LoadingException with null as its error message string.
+     */
+    public LoadingException(){
+        super();
+    }
+
+    /**
+     * Constructs a new LoadingException with the specified error message.
+     */
+    public LoadingException(String message){
+        super (message);
+    }
 }

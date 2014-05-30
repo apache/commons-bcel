@@ -27,97 +27,97 @@ import org.apache.bcel.classfile.ElementValue;
 
 public class ArrayElementValueGen extends ElementValueGen
 {
-	// J5TODO: Should we make this an array or a list? A list would be easier to
-	// modify ...
-	private List<ElementValueGen> evalues;
+    // J5TODO: Should we make this an array or a list? A list would be easier to
+    // modify ...
+    private List<ElementValueGen> evalues;
 
-	public ArrayElementValueGen(ConstantPoolGen cp)
-	{
-		super(ARRAY, cp);
-		evalues = new ArrayList<ElementValueGen>();
-	}
+    public ArrayElementValueGen(ConstantPoolGen cp)
+    {
+        super(ARRAY, cp);
+        evalues = new ArrayList<ElementValueGen>();
+    }
 
-	public ArrayElementValueGen(int type, ElementValue[] datums,
-			ConstantPoolGen cpool)
-	{
-		super(type, cpool);
-		if (type != ARRAY) {
+    public ArrayElementValueGen(int type, ElementValue[] datums,
+            ConstantPoolGen cpool)
+    {
+        super(type, cpool);
+        if (type != ARRAY) {
             throw new RuntimeException(
-					"Only element values of type array can be built with this ctor - type specified: " + type);
+                    "Only element values of type array can be built with this ctor - type specified: " + type);
         }
-		this.evalues = new ArrayList<ElementValueGen>();
-		for (ElementValue datum : datums) {
-			evalues.add(ElementValueGen.copy(datum, cpool, true));
-		}
-	}
+        this.evalues = new ArrayList<ElementValueGen>();
+        for (ElementValue datum : datums) {
+            evalues.add(ElementValueGen.copy(datum, cpool, true));
+        }
+    }
 
-	/**
-	 * Return immutable variant of this ArrayElementValueGen
-	 */
-	@Override
+    /**
+     * Return immutable variant of this ArrayElementValueGen
+     */
+    @Override
     public ElementValue getElementValue()
-	{
-		ElementValue[] immutableData = new ElementValue[evalues.size()];
-		int i = 0;
-		for (ElementValueGen element : evalues) {
-			immutableData[i++] = element.getElementValue();
-		}
-		return new ArrayElementValue(type, immutableData, cpGen
-				.getConstantPool());
-	}
+    {
+        ElementValue[] immutableData = new ElementValue[evalues.size()];
+        int i = 0;
+        for (ElementValueGen element : evalues) {
+            immutableData[i++] = element.getElementValue();
+        }
+        return new ArrayElementValue(type, immutableData, cpGen
+                .getConstantPool());
+    }
 
-	/**
-	 * @param value
-	 * @param cpool
-	 */
-	public ArrayElementValueGen(ArrayElementValue value, ConstantPoolGen cpool,
-			boolean copyPoolEntries)
-	{
-		super(ARRAY, cpool);
-		evalues = new ArrayList<ElementValueGen>();
-		ElementValue[] in = value.getElementValuesArray();
-		for (ElementValue element : in) {
-			evalues.add(ElementValueGen.copy(element, cpool, copyPoolEntries));
-		}
-	}
+    /**
+     * @param value
+     * @param cpool
+     */
+    public ArrayElementValueGen(ArrayElementValue value, ConstantPoolGen cpool,
+            boolean copyPoolEntries)
+    {
+        super(ARRAY, cpool);
+        evalues = new ArrayList<ElementValueGen>();
+        ElementValue[] in = value.getElementValuesArray();
+        for (ElementValue element : in) {
+            evalues.add(ElementValueGen.copy(element, cpool, copyPoolEntries));
+        }
+    }
 
-	@Override
+    @Override
     public void dump(DataOutputStream dos) throws IOException
-	{
-		dos.writeByte(type); // u1 type of value (ARRAY == '[')
-		dos.writeShort(evalues.size());
-		for (ElementValueGen element : evalues) {
-			element.dump(dos);
-		}
-	}
+    {
+        dos.writeByte(type); // u1 type of value (ARRAY == '[')
+        dos.writeShort(evalues.size());
+        for (ElementValueGen element : evalues) {
+            element.dump(dos);
+        }
+    }
 
-	@Override
+    @Override
     public String stringifyValue()
-	{
-	    StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		String comma = "";
-		for (ElementValueGen element : evalues) {
-		    sb.append(comma);
-		    comma = ",";
-			sb.append(element.stringifyValue());
-		}
-		sb.append("]");
-		return sb.toString();
-	}
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        String comma = "";
+        for (ElementValueGen element : evalues) {
+            sb.append(comma);
+            comma = ",";
+            sb.append(element.stringifyValue());
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 
-	public List<ElementValueGen> getElementValues()
-	{
-		return evalues;
-	}
+    public List<ElementValueGen> getElementValues()
+    {
+        return evalues;
+    }
 
-	public int getElementValuesSize()
-	{
-		return evalues.size();
-	}
+    public int getElementValuesSize()
+    {
+        return evalues.size();
+    }
 
-	public void addElement(ElementValueGen gen)
-	{
-		evalues.add(gen);
-	}
+    public void addElement(ElementValueGen gen)
+    {
+        evalues.add(gen);
+    }
 }

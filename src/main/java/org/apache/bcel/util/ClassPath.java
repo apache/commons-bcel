@@ -46,7 +46,7 @@ public class ClassPath implements Serializable {
 
     private static final long serialVersionUID = 2099441438483340671L;
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath();
-    
+
     private static final FilenameFilter ARCHIVE_FILTER = new FilenameFilter() {
 
         public boolean accept( File dir, String name ) {
@@ -54,7 +54,7 @@ public class ClassPath implements Serializable {
             return name.endsWith(".zip") || name.endsWith(".jar");
         }
     };
-    
+
     private PathEntry[] paths;
     private String class_path;
     private ClassPath parent;
@@ -225,7 +225,7 @@ public class ClassPath implements Serializable {
         }
         return null;
     }
-    
+
     /**
      * @param name fully qualified resource name, e.g. java/lang/String.class
      * @return URL supplying the resource, or null if no resource with that name.
@@ -268,11 +268,11 @@ public class ClassPath implements Serializable {
             if(parent != null) {
                 cf = parent.getClassFileInternal(name, suffix);
             }
-            
+
             if(cf == null) {
                 cf = getClassFileInternal(name,suffix);
             }
-            
+
             if(cf != null) {
                 return cf;
             }
@@ -285,7 +285,7 @@ public class ClassPath implements Serializable {
 
       for (PathEntry path : paths) {
           ClassFile cf = path.getClassFile(name, suffix);
-          
+
           if(cf != null) {
               return cf;
           }
@@ -418,7 +418,7 @@ public class ClassPath implements Serializable {
                return null;
             }
         }
-        
+
         @Override
         InputStream getResourceAsStream(String name) {
             // Resource specification uses '/' whatever the platform
@@ -492,7 +492,7 @@ public class ClassPath implements Serializable {
                 return null;
            }
         }
-        
+
         @Override
         InputStream getResourceAsStream(String name) {
             final ZipEntry entry = zip.getEntry(name);
@@ -502,15 +502,15 @@ public class ClassPath implements Serializable {
                 return null;
             }
         }
-        	
+
         @Override
         ClassFile getClassFile( String name, String suffix ) throws IOException {
             final ZipEntry entry = zip.getEntry(name.replace('.', '/') + suffix);
-            
+
             if (entry == null) {
                 return null;
             }
-            
+
             return new ClassFile() {
 
                 public InputStream getInputStream() throws IOException {

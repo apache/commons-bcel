@@ -92,11 +92,11 @@ public class FieldGen extends FieldGenOrMethodGen {
             if (attr instanceof ConstantValue) {
                 setValue(((ConstantValue) attr).getConstantValueIndex());
             } else if (attr instanceof Annotations) {
-            	Annotations runtimeAnnotations = (Annotations)attr;
-        		AnnotationEntry[] annotationEntries = runtimeAnnotations.getAnnotationEntries();
-        		for (AnnotationEntry element : annotationEntries) {
-        			addAnnotationEntry(new AnnotationEntryGen(element,cp,false));
-        		}
+                Annotations runtimeAnnotations = (Annotations)attr;
+                AnnotationEntry[] annotationEntries = runtimeAnnotations.getAnnotationEntries();
+                for (AnnotationEntry element : annotationEntries) {
+                    addAnnotationEntry(new AnnotationEntryGen(element,cp,false));
+                }
             } else {
                 addAttribute(attr);
             }
@@ -224,12 +224,12 @@ public class FieldGen extends FieldGenOrMethodGen {
         return new Field(access_flags, name_index, signature_index, getAttributes(), cp
                 .getConstantPool());
     }
-    
+
     private void addAnnotationsAsAttribute(ConstantPoolGen cp) {
-      	Attribute[] attrs = Utility.getAnnotationAttributes(cp,annotation_vec);
+          Attribute[] attrs = Utility.getAnnotationAttributes(cp,annotation_vec);
         for (Attribute attr : attrs) {
-    		addAttribute(attr);
-    	}
+            addAttribute(attr);
+        }
       }
 
 

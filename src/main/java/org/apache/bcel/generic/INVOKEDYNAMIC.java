@@ -72,19 +72,19 @@ public class INVOKEDYNAMIC extends NameSignatureInstruction implements Exception
     /** 
      * Get the ConstantInvokeDynamic associated with this instruction
      */
-    
-  	public ConstantInvokeDynamic getInvokeDynamic( ConstantPoolGen cpg ) {
+
+      public ConstantInvokeDynamic getInvokeDynamic( ConstantPoolGen cpg ) {
           ConstantPool cp = cpg.getConstantPool();
           return (ConstantInvokeDynamic) cp.getConstant(index);
        }
-      
+
     @Override
-	public ConstantNameAndType getNameAndType( ConstantPoolGen cpg ) {
+    public ConstantNameAndType getNameAndType( ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
         ConstantInvokeDynamic id = getInvokeDynamic(cpg);
         return (ConstantNameAndType) cp.getConstant(id.getNameAndTypeIndex());
      }
-    
+
     /**
      * Also works for instructions whose stack effect depends on the
      * constant pool entry they reference.
@@ -136,7 +136,7 @@ public class INVOKEDYNAMIC extends NameSignatureInstruction implements Exception
     public Type[] getArgumentTypes( ConstantPoolGen cpg ) {
         return Type.getArgumentTypes(getSignature(cpg));
     }
-    
+
     /**
      * Read needed data (i.e., index) from file.
      */

@@ -27,72 +27,72 @@ import org.apache.bcel.Constants;
  * anonymous classes and ... there can be only one.
  */
 public class EnclosingMethod extends Attribute {
-	
-	private static final long serialVersionUID = 9136852385761725494L;
+
+    private static final long serialVersionUID = 9136852385761725494L;
 
     // Pointer to the CONSTANT_Class_info structure representing the 
-	// innermost class that encloses the declaration of the current class.
-	private int classIndex;
-	
-	// If the current class is not immediately enclosed by a method or 
-	// constructor, then the value of the method_index item must be zero.  
-	// Otherwise, the value of the  method_index item must point to a 
-	// CONSTANT_NameAndType_info structure representing the name and the 
-	// type of a method in the class referenced by the class we point 
-	// to in the class_index.  *It is the compiler responsibility* to 
-	// ensure that the method identified by this index is the closest 
-	// lexically enclosing method that includes the local/anonymous class.
-	private int methodIndex;
+    // innermost class that encloses the declaration of the current class.
+    private int classIndex;
 
-	// Ctors - and code to read an attribute in.
-	public EnclosingMethod(int nameIndex, int len, DataInputStream dis, ConstantPool cpool) throws IOException {
-		this(nameIndex, len, dis.readUnsignedShort(), dis.readUnsignedShort(), cpool);
-	}
+    // If the current class is not immediately enclosed by a method or 
+    // constructor, then the value of the method_index item must be zero.  
+    // Otherwise, the value of the  method_index item must point to a 
+    // CONSTANT_NameAndType_info structure representing the name and the 
+    // type of a method in the class referenced by the class we point 
+    // to in the class_index.  *It is the compiler responsibility* to 
+    // ensure that the method identified by this index is the closest 
+    // lexically enclosing method that includes the local/anonymous class.
+    private int methodIndex;
 
-	private EnclosingMethod(int nameIndex, int len, int classIdx,int methodIdx, ConstantPool cpool) {
-	    super(Constants.ATTR_ENCLOSING_METHOD, nameIndex, len, cpool);
-	    classIndex  = classIdx;
-	    methodIndex = methodIdx;
-	}
+    // Ctors - and code to read an attribute in.
+    public EnclosingMethod(int nameIndex, int len, DataInputStream dis, ConstantPool cpool) throws IOException {
+        this(nameIndex, len, dis.readUnsignedShort(), dis.readUnsignedShort(), cpool);
+    }
 
-	@Override
+    private EnclosingMethod(int nameIndex, int len, int classIdx,int methodIdx, ConstantPool cpool) {
+        super(Constants.ATTR_ENCLOSING_METHOD, nameIndex, len, cpool);
+        classIndex  = classIdx;
+        methodIndex = methodIdx;
+    }
+
+    @Override
     public void accept(Visitor v) {
-	  v.visitEnclosingMethod(this);
-	}
+      v.visitEnclosingMethod(this);
+    }
 
-	@Override
+    @Override
     public Attribute copy(ConstantPool constant_pool) {
-		throw new RuntimeException("Not implemented yet!");
-		// is this next line sufficient?
-		// return (EnclosingMethod)clone();
-	}
-	
-	// Accessors
-	public final int getEnclosingClassIndex() { return classIndex; }  
-	public final int getEnclosingMethodIndex(){ return methodIndex;}
-	
-	public final void setEnclosingClassIndex(int idx) {classIndex = idx;}
-	public final void setEnclosingMethodIndex(int idx){methodIndex= idx;}
+        throw new RuntimeException("Not implemented yet!");
+        // is this next line sufficient?
+        // return (EnclosingMethod)clone();
+    }
 
-	public final ConstantClass getEnclosingClass() {
-		ConstantClass c = 
-			(ConstantClass)constant_pool.getConstant(classIndex,Constants.CONSTANT_Class);
-		return c;
-	}
-	
-	public final ConstantNameAndType getEnclosingMethod() {
-		if (methodIndex == 0) {
+    // Accessors
+    public final int getEnclosingClassIndex() { return classIndex; }  
+    public final int getEnclosingMethodIndex(){ return methodIndex;}
+
+    public final void setEnclosingClassIndex(int idx) {classIndex = idx;}
+    public final void setEnclosingMethodIndex(int idx){methodIndex= idx;}
+
+    public final ConstantClass getEnclosingClass() {
+        ConstantClass c = 
+            (ConstantClass)constant_pool.getConstant(classIndex,Constants.CONSTANT_Class);
+        return c;
+    }
+
+    public final ConstantNameAndType getEnclosingMethod() {
+        if (methodIndex == 0) {
             return null;
         }
-		ConstantNameAndType nat = 
-			(ConstantNameAndType)constant_pool.getConstant(methodIndex,Constants.CONSTANT_NameAndType);
-		return nat;
-	}
+        ConstantNameAndType nat = 
+            (ConstantNameAndType)constant_pool.getConstant(methodIndex,Constants.CONSTANT_NameAndType);
+        return nat;
+    }
 
     @Override
     public final void dump(DataOutputStream file) throws IOException {
-	    super.dump(file);
-	    file.writeShort(classIndex);
-	    file.writeShort(methodIndex);
+        super.dump(file);
+        file.writeShort(classIndex);
+        file.writeShort(methodIndex);
     }    
 }

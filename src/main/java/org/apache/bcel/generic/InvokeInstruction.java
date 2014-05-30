@@ -75,7 +75,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
         } else {
             sum = 1; // this reference
         }
-        
+
         String signature = getSignature(cpg);
         sum += Type.getArgumentTypesSize(signature);
         return sum;
@@ -89,8 +89,8 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      */
     @Override
     public int produceStack( ConstantPoolGen cpg ) {
-    	String signature = getSignature(cpg);
-    	return Type.getReturnTypeSize(signature);
+        String signature = getSignature(cpg);
+        return Type.getReturnTypeSize(signature);
     }
 
 

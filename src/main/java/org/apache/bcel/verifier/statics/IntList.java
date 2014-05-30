@@ -28,25 +28,25 @@ import java.util.List;
  * @author Enver Haase
  */
 public class IntList{
-	/** The int are stored as Integer objects here. */
-	private List<Integer> theList;
-	/** This constructor creates an empty list. */
-	IntList(){
-		theList = new ArrayList<Integer>();
-	}
-	/** Adds an element to the list. */
-	void add(int i){
-		theList.add(Integer.valueOf(i));
-	}
-	/** Checks if the specified int is already in the list. */
-	boolean contains(int i){
-		Integer[] ints = new Integer[theList.size()];
-		theList.toArray(ints);
-		for (Integer k : ints) {
-			if (i == k.intValue()) {
+    /** The int are stored as Integer objects here. */
+    private List<Integer> theList;
+    /** This constructor creates an empty list. */
+    IntList(){
+        theList = new ArrayList<Integer>();
+    }
+    /** Adds an element to the list. */
+    void add(int i){
+        theList.add(Integer.valueOf(i));
+    }
+    /** Checks if the specified int is already in the list. */
+    boolean contains(int i){
+        Integer[] ints = new Integer[theList.size()];
+        theList.toArray(ints);
+        for (Integer k : ints) {
+            if (i == k.intValue()) {
                 return true;
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 }

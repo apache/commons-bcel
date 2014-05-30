@@ -23,201 +23,201 @@ import org.apache.bcel.Constants;
 
 public class SimpleElementValue extends ElementValue
 {
-	private int index;
+    private int index;
 
-	public SimpleElementValue(int type, int index, ConstantPool cpool)
-	{
-		super(type, cpool);
-		this.index = index;
-	}
+    public SimpleElementValue(int type, int index, ConstantPool cpool)
+    {
+        super(type, cpool);
+        this.index = index;
+    }
 
-	/**
-	 * @return Value entry index in the cpool
-	 */
-	public int getIndex()
-	{
-		return index;
-	}
+    /**
+     * @return Value entry index in the cpool
+     */
+    public int getIndex()
+    {
+        return index;
+    }
 
-	public void setIndex(int index)
-	{
-		this.index = index;
-	}
+    public void setIndex(int index)
+    {
+        this.index = index;
+    }
 
-	public String getValueString()
-	{
-		if (type != STRING) {
+    public String getValueString()
+    {
+        if (type != STRING) {
             throw new RuntimeException(
-					"Dont call getValueString() on a non STRING ElementValue");
+                    "Dont call getValueString() on a non STRING ElementValue");
         }
-		ConstantUtf8 c = (ConstantUtf8) cpool.getConstant(getIndex(),
-				Constants.CONSTANT_Utf8);
-		return c.getBytes();
-	}
+        ConstantUtf8 c = (ConstantUtf8) cpool.getConstant(getIndex(),
+                Constants.CONSTANT_Utf8);
+        return c.getBytes();
+    }
 
-	public int getValueInt()
-	{
-		if (type != PRIMITIVE_INT) {
+    public int getValueInt()
+    {
+        if (type != PRIMITIVE_INT) {
             throw new RuntimeException(
-					"Dont call getValueString() on a non STRING ElementValue");
+                    "Dont call getValueString() on a non STRING ElementValue");
         }
-		ConstantInteger c = (ConstantInteger) cpool.getConstant(getIndex(),
-				Constants.CONSTANT_Integer);
-		return c.getBytes();
-	}
+        ConstantInteger c = (ConstantInteger) cpool.getConstant(getIndex(),
+                Constants.CONSTANT_Integer);
+        return c.getBytes();
+    }
 
-	public byte getValueByte()
-	{
-		if (type != PRIMITIVE_BYTE) {
+    public byte getValueByte()
+    {
+        if (type != PRIMITIVE_BYTE) {
             throw new RuntimeException(
-					"Dont call getValueByte() on a non BYTE ElementValue");
+                    "Dont call getValueByte() on a non BYTE ElementValue");
         }
-		ConstantInteger c = (ConstantInteger) cpool.getConstant(getIndex(),
-				Constants.CONSTANT_Integer);
-		return (byte) c.getBytes();
-	}
+        ConstantInteger c = (ConstantInteger) cpool.getConstant(getIndex(),
+                Constants.CONSTANT_Integer);
+        return (byte) c.getBytes();
+    }
 
-	public char getValueChar()
-	{
-		if (type != PRIMITIVE_CHAR) {
+    public char getValueChar()
+    {
+        if (type != PRIMITIVE_CHAR) {
             throw new RuntimeException(
-					"Dont call getValueChar() on a non CHAR ElementValue");
+                    "Dont call getValueChar() on a non CHAR ElementValue");
         }
-		ConstantInteger c = (ConstantInteger) cpool.getConstant(getIndex(),
-				Constants.CONSTANT_Integer);
-		return (char) c.getBytes();
-	}
+        ConstantInteger c = (ConstantInteger) cpool.getConstant(getIndex(),
+                Constants.CONSTANT_Integer);
+        return (char) c.getBytes();
+    }
 
-	public long getValueLong()
-	{
-		if (type != PRIMITIVE_LONG) {
+    public long getValueLong()
+    {
+        if (type != PRIMITIVE_LONG) {
             throw new RuntimeException(
-					"Dont call getValueLong() on a non LONG ElementValue");
+                    "Dont call getValueLong() on a non LONG ElementValue");
         }
-		ConstantLong j = (ConstantLong) cpool.getConstant(getIndex());
-		return j.getBytes();
-	}
+        ConstantLong j = (ConstantLong) cpool.getConstant(getIndex());
+        return j.getBytes();
+    }
 
-	public float getValueFloat()
-	{
-		if (type != PRIMITIVE_FLOAT) {
+    public float getValueFloat()
+    {
+        if (type != PRIMITIVE_FLOAT) {
             throw new RuntimeException(
-					"Dont call getValueFloat() on a non FLOAT ElementValue");
+                    "Dont call getValueFloat() on a non FLOAT ElementValue");
         }
-		ConstantFloat f = (ConstantFloat) cpool.getConstant(getIndex());
-		return f.getBytes();
-	}
+        ConstantFloat f = (ConstantFloat) cpool.getConstant(getIndex());
+        return f.getBytes();
+    }
 
-	public double getValueDouble()
-	{
-		if (type != PRIMITIVE_DOUBLE) {
+    public double getValueDouble()
+    {
+        if (type != PRIMITIVE_DOUBLE) {
             throw new RuntimeException(
-					"Dont call getValueDouble() on a non DOUBLE ElementValue");
+                    "Dont call getValueDouble() on a non DOUBLE ElementValue");
         }
-		ConstantDouble d = (ConstantDouble) cpool.getConstant(getIndex());
-		return d.getBytes();
-	}
+        ConstantDouble d = (ConstantDouble) cpool.getConstant(getIndex());
+        return d.getBytes();
+    }
 
-	public boolean getValueBoolean()
-	{
-		if (type != PRIMITIVE_BOOLEAN) {
+    public boolean getValueBoolean()
+    {
+        if (type != PRIMITIVE_BOOLEAN) {
             throw new RuntimeException(
-					"Dont call getValueBoolean() on a non BOOLEAN ElementValue");
+                    "Dont call getValueBoolean() on a non BOOLEAN ElementValue");
         }
-		ConstantInteger bo = (ConstantInteger) cpool.getConstant(getIndex());
-		return (bo.getBytes() != 0);
-	}
+        ConstantInteger bo = (ConstantInteger) cpool.getConstant(getIndex());
+        return (bo.getBytes() != 0);
+    }
 
-	public short getValueShort()
-	{
-		if (type != PRIMITIVE_SHORT) {
+    public short getValueShort()
+    {
+        if (type != PRIMITIVE_SHORT) {
             throw new RuntimeException(
-					"Dont call getValueShort() on a non SHORT ElementValue");
+                    "Dont call getValueShort() on a non SHORT ElementValue");
         }
-		ConstantInteger s = (ConstantInteger) cpool.getConstant(getIndex());
-		return (short) s.getBytes();
-	}
+        ConstantInteger s = (ConstantInteger) cpool.getConstant(getIndex());
+        return (short) s.getBytes();
+    }
 
-	@Override
+    @Override
     public String toString()
-	{
-		return stringifyValue();
-	}
+    {
+        return stringifyValue();
+    }
 
-	// Whatever kind of value it is, return it as a string
-	@Override
+    // Whatever kind of value it is, return it as a string
+    @Override
     public String stringifyValue()
-	{
-		switch (type)
-		{
-		case PRIMITIVE_INT:
-			ConstantInteger c = (ConstantInteger) cpool.getConstant(getIndex(),
-					Constants.CONSTANT_Integer);
-			return Integer.toString(c.getBytes());
-		case PRIMITIVE_LONG:
-			ConstantLong j = (ConstantLong) cpool.getConstant(getIndex(),
-					Constants.CONSTANT_Long);
-			return Long.toString(j.getBytes());
-		case PRIMITIVE_DOUBLE:
-			ConstantDouble d = (ConstantDouble) cpool.getConstant(getIndex(),
-					Constants.CONSTANT_Double);
-			return Double.toString(d.getBytes());
-		case PRIMITIVE_FLOAT:
-			ConstantFloat f = (ConstantFloat) cpool.getConstant(getIndex(),
-					Constants.CONSTANT_Float);
-			return Float.toString(f.getBytes());
-		case PRIMITIVE_SHORT:
-			ConstantInteger s = (ConstantInteger) cpool.getConstant(getIndex(),
-					Constants.CONSTANT_Integer);
-			return Integer.toString(s.getBytes());
-		case PRIMITIVE_BYTE:
-			ConstantInteger b = (ConstantInteger) cpool.getConstant(getIndex(),
-					Constants.CONSTANT_Integer);
-			return Integer.toString(b.getBytes());
-		case PRIMITIVE_CHAR:
-			ConstantInteger ch = (ConstantInteger) cpool.getConstant(
-					getIndex(), Constants.CONSTANT_Integer);
-			return String.valueOf((char)ch.getBytes());
-		case PRIMITIVE_BOOLEAN:
-			ConstantInteger bo = (ConstantInteger) cpool.getConstant(
-					getIndex(), Constants.CONSTANT_Integer);
-			if (bo.getBytes() == 0) {
+    {
+        switch (type)
+        {
+        case PRIMITIVE_INT:
+            ConstantInteger c = (ConstantInteger) cpool.getConstant(getIndex(),
+                    Constants.CONSTANT_Integer);
+            return Integer.toString(c.getBytes());
+        case PRIMITIVE_LONG:
+            ConstantLong j = (ConstantLong) cpool.getConstant(getIndex(),
+                    Constants.CONSTANT_Long);
+            return Long.toString(j.getBytes());
+        case PRIMITIVE_DOUBLE:
+            ConstantDouble d = (ConstantDouble) cpool.getConstant(getIndex(),
+                    Constants.CONSTANT_Double);
+            return Double.toString(d.getBytes());
+        case PRIMITIVE_FLOAT:
+            ConstantFloat f = (ConstantFloat) cpool.getConstant(getIndex(),
+                    Constants.CONSTANT_Float);
+            return Float.toString(f.getBytes());
+        case PRIMITIVE_SHORT:
+            ConstantInteger s = (ConstantInteger) cpool.getConstant(getIndex(),
+                    Constants.CONSTANT_Integer);
+            return Integer.toString(s.getBytes());
+        case PRIMITIVE_BYTE:
+            ConstantInteger b = (ConstantInteger) cpool.getConstant(getIndex(),
+                    Constants.CONSTANT_Integer);
+            return Integer.toString(b.getBytes());
+        case PRIMITIVE_CHAR:
+            ConstantInteger ch = (ConstantInteger) cpool.getConstant(
+                    getIndex(), Constants.CONSTANT_Integer);
+            return String.valueOf((char)ch.getBytes());
+        case PRIMITIVE_BOOLEAN:
+            ConstantInteger bo = (ConstantInteger) cpool.getConstant(
+                    getIndex(), Constants.CONSTANT_Integer);
+            if (bo.getBytes() == 0) {
                 return "false";
             } else {
                 return "true";
             }
-		case STRING:
-			ConstantUtf8 cu8 = (ConstantUtf8) cpool.getConstant(getIndex(),
-					Constants.CONSTANT_Utf8);
-			return cu8.getBytes();
-		default:
-			throw new RuntimeException(
-					"SimpleElementValue class does not know how to stringify type "
-							+ type);
-		}
-	}
+        case STRING:
+            ConstantUtf8 cu8 = (ConstantUtf8) cpool.getConstant(getIndex(),
+                    Constants.CONSTANT_Utf8);
+            return cu8.getBytes();
+        default:
+            throw new RuntimeException(
+                    "SimpleElementValue class does not know how to stringify type "
+                            + type);
+        }
+    }
 
-	@Override
+    @Override
     public void dump(DataOutputStream dos) throws IOException
-	{
-		dos.writeByte(type); // u1 kind of value
-		switch (type)
-		{
-		case PRIMITIVE_INT:
-		case PRIMITIVE_BYTE:
-		case PRIMITIVE_CHAR:
-		case PRIMITIVE_FLOAT:
-		case PRIMITIVE_LONG:
-		case PRIMITIVE_BOOLEAN:
-		case PRIMITIVE_SHORT:
-		case PRIMITIVE_DOUBLE:
-		case STRING:
-			dos.writeShort(getIndex());
-			break;
-		default:
-			throw new RuntimeException(
-					"SimpleElementValue doesnt know how to write out type "
-							+ type);
-		}
-	}
+    {
+        dos.writeByte(type); // u1 kind of value
+        switch (type)
+        {
+        case PRIMITIVE_INT:
+        case PRIMITIVE_BYTE:
+        case PRIMITIVE_CHAR:
+        case PRIMITIVE_FLOAT:
+        case PRIMITIVE_LONG:
+        case PRIMITIVE_BOOLEAN:
+        case PRIMITIVE_SHORT:
+        case PRIMITIVE_DOUBLE:
+        case STRING:
+            dos.writeShort(getIndex());
+            break;
+        default:
+            throw new RuntimeException(
+                    "SimpleElementValue doesnt know how to write out type "
+                            + type);
+        }
+    }
 }

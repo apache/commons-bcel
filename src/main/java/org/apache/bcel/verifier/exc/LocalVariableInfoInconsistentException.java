@@ -29,19 +29,19 @@ package org.apache.bcel.verifier.exc;
  * @author Enver Haase
  */
 public class LocalVariableInfoInconsistentException extends ClassConstraintException{
-	private static final long serialVersionUID = -2833180480144304190L;
+    private static final long serialVersionUID = -2833180480144304190L;
 
     /**
-	 * Constructs a new LocalVariableInfoInconsistentException with null as its error message string.
-	 */
-	public LocalVariableInfoInconsistentException(){
-		super();
-	}
-	
-	/**
-	 * Constructs a new LocalVariableInfoInconsistentException with the specified error message.
-	 */
-	public LocalVariableInfoInconsistentException(String message){
-		super (message);
-	}
+     * Constructs a new LocalVariableInfoInconsistentException with null as its error message string.
+     */
+    public LocalVariableInfoInconsistentException(){
+        super();
+    }
+
+    /**
+     * Constructs a new LocalVariableInfoInconsistentException with the specified error message.
+     */
+    public LocalVariableInfoInconsistentException(String message){
+        super (message);
+    }
 }

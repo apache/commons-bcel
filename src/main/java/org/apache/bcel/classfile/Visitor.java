@@ -27,87 +27,87 @@ package org.apache.bcel.classfile;
  */
 public interface Visitor
 {
-	void visitCode(Code obj);
+    void visitCode(Code obj);
 
-	void visitCodeException(CodeException obj);
+    void visitCodeException(CodeException obj);
 
-	void visitConstantClass(ConstantClass obj);
+    void visitConstantClass(ConstantClass obj);
 
-	void visitConstantDouble(ConstantDouble obj);
+    void visitConstantDouble(ConstantDouble obj);
 
-	void visitConstantFieldref(ConstantFieldref obj);
+    void visitConstantFieldref(ConstantFieldref obj);
 
-	void visitConstantFloat(ConstantFloat obj);
+    void visitConstantFloat(ConstantFloat obj);
 
-	void visitConstantInteger(ConstantInteger obj);
+    void visitConstantInteger(ConstantInteger obj);
 
-	void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj);
+    void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj);
 
-	void visitConstantLong(ConstantLong obj);
+    void visitConstantLong(ConstantLong obj);
 
-	void visitConstantMethodref(ConstantMethodref obj);
+    void visitConstantMethodref(ConstantMethodref obj);
 
-	void visitConstantNameAndType(ConstantNameAndType obj);
+    void visitConstantNameAndType(ConstantNameAndType obj);
 
-	void visitConstantPool(ConstantPool obj);
+    void visitConstantPool(ConstantPool obj);
 
-	void visitConstantString(ConstantString obj);
+    void visitConstantString(ConstantString obj);
 
-	void visitConstantUtf8(ConstantUtf8 obj);
+    void visitConstantUtf8(ConstantUtf8 obj);
 
-	void visitConstantValue(ConstantValue obj);
+    void visitConstantValue(ConstantValue obj);
 
-	void visitDeprecated(Deprecated obj);
+    void visitDeprecated(Deprecated obj);
 
-	void visitExceptionTable(ExceptionTable obj);
+    void visitExceptionTable(ExceptionTable obj);
 
-	void visitField(Field obj);
+    void visitField(Field obj);
 
-	void visitInnerClass(InnerClass obj);
+    void visitInnerClass(InnerClass obj);
 
-	void visitInnerClasses(InnerClasses obj);
+    void visitInnerClasses(InnerClasses obj);
 
-	void visitJavaClass(JavaClass obj);
+    void visitJavaClass(JavaClass obj);
 
-	void visitLineNumber(LineNumber obj);
+    void visitLineNumber(LineNumber obj);
 
-	void visitLineNumberTable(LineNumberTable obj);
+    void visitLineNumberTable(LineNumberTable obj);
 
-	void visitLocalVariable(LocalVariable obj);
+    void visitLocalVariable(LocalVariable obj);
 
-	void visitLocalVariableTable(LocalVariableTable obj);
+    void visitLocalVariableTable(LocalVariableTable obj);
 
-	void visitMethod(Method obj);
+    void visitMethod(Method obj);
 
-	void visitSignature(Signature obj);
+    void visitSignature(Signature obj);
 
-	void visitSourceFile(SourceFile obj);
+    void visitSourceFile(SourceFile obj);
 
-	void visitSynthetic(Synthetic obj);
+    void visitSynthetic(Synthetic obj);
 
-	void visitUnknown(Unknown obj);
+    void visitUnknown(Unknown obj);
 
-	void visitStackMap(StackMap obj);
+    void visitStackMap(StackMap obj);
 
-	void visitStackMapEntry(StackMapEntry obj);
+    void visitStackMapEntry(StackMapEntry obj);
 
-	void visitStackMapTable(StackMapTable obj);
+    void visitStackMapTable(StackMapTable obj);
 
-	void visitStackMapTableEntry(StackMapTableEntry obj);
+    void visitStackMapTableEntry(StackMapTableEntry obj);
 
-	void visitAnnotation(Annotations obj);
+    void visitAnnotation(Annotations obj);
 
-	void visitParameterAnnotation(ParameterAnnotations obj);
+    void visitParameterAnnotation(ParameterAnnotations obj);
 
-	void visitAnnotationEntry(AnnotationEntry obj);
+    void visitAnnotationEntry(AnnotationEntry obj);
 
-	void visitAnnotationDefault(AnnotationDefault obj);
+    void visitAnnotationDefault(AnnotationDefault obj);
 
-	void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
+    void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
 
-	void visitEnclosingMethod(EnclosingMethod obj);
+    void visitEnclosingMethod(EnclosingMethod obj);
 
     void visitBootstrapMethods(BootstrapMethods obj);
-    
+
     void visitMethodParameters(MethodParameters obj);
 }

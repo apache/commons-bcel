@@ -72,7 +72,7 @@ public class MethodParameter implements Serializable, Cloneable {
         } else {
             return ((ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8)).getBytes();
         }
-   	}
+       }
 
     public int getAccessFlags() {
         return access_flags;

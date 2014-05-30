@@ -164,7 +164,7 @@ public class Class2HTML implements Constants {
         int index = type.indexOf('['); // Type is an array?
         String base_type = type;
         if (index > -1) {
-            base_type = type.substring(0, index); // Tack of the `['  		
+            base_type = type.substring(0, index); // Tack of the `['
         }
         // test for basic type
         if (base_type.equals("int") || base_type.equals("short") || base_type.equals("boolean")

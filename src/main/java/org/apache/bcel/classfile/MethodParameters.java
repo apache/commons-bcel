@@ -78,9 +78,9 @@ public class MethodParameters extends Attribute {
      * @throws IOException
      */
     @Override
-   	public void dump(DataOutputStream file) throws IOException {
-   		super.dump(file);
-   		file.writeByte(parameters.length);
+       public void dump(DataOutputStream file) throws IOException {
+           super.dump(file);
+           file.writeByte(parameters.length);
         for (MethodParameter parameter : parameters) {
             parameter.dump(file);
         }

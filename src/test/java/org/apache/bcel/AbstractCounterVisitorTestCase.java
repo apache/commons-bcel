@@ -24,27 +24,27 @@ import org.apache.bcel.visitors.CounterVisitor;
 
 public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
 {
-	protected abstract JavaClass getTestClass() throws ClassNotFoundException;
+    protected abstract JavaClass getTestClass() throws ClassNotFoundException;
 
-	private CounterVisitor visitor = null;
+    private CounterVisitor visitor = null;
 
-	@Override
+    @Override
     public void setUp() throws ClassNotFoundException
-	{
-		visitor = new CounterVisitor();
-		new DescendingVisitor(getTestClass(), getVisitor()).visit();
-	}
+    {
+        visitor = new CounterVisitor();
+        new DescendingVisitor(getTestClass(), getVisitor()).visit();
+    }
 
-	public CounterVisitor getVisitor()
-	{
-		if (visitor == null) {
+    public CounterVisitor getVisitor()
+    {
+        if (visitor == null) {
             visitor = new CounterVisitor();
         }
-		return visitor;
-	}
+        return visitor;
+    }
 
-	public void setVisitor(CounterVisitor visitor)
-	{
-		this.visitor = visitor;
-	}
+    public void setVisitor(CounterVisitor visitor)
+    {
+        this.visitor = visitor;
+    }
 }

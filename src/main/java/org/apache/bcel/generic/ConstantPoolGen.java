@@ -79,16 +79,16 @@ public class ConstantPoolGen implements java.io.Serializable {
      */
     public ConstantPoolGen(Constant[] cs) {
         StringBuilder sb = new StringBuilder(256);
-        
+
         size = Math.max(256, cs.length + 64);
         constants = new Constant[size];
-        
+
         System.arraycopy(cs, 0, constants, 0, cs.length);
         if (cs.length > 0) {
             index = cs.length;
         }
-    	
-    	
+
+
         for (int i = 1; i < index; i++) {
             Constant c = constants[i];
             if (c instanceof ConstantString) {
@@ -109,13 +109,13 @@ public class ConstantPoolGen implements java.io.Serializable {
                 ConstantNameAndType n = (ConstantNameAndType) c;
                 ConstantUtf8 u8 = (ConstantUtf8) constants[n.getNameIndex()];
                 ConstantUtf8 u8_2 = (ConstantUtf8) constants[n.getSignatureIndex()];
-                
+
                 sb.append(u8.getBytes());
                 sb.append(NAT_DELIM);
                 sb.append(u8_2.getBytes());
                 String key = sb.toString();
                 sb.delete(0, sb.length());
-                
+
                 if (!n_a_t_table.containsKey(key)) {
                     n_a_t_table.put(key, new Index(i));
                 }
@@ -141,7 +141,7 @@ public class ConstantPoolGen implements java.io.Serializable {
                 } else if (c instanceof ConstantFieldref) {
                     delim = FIELDREF_DELIM;
                 }
-                
+
                 sb.append(class_name);
                 sb.append(delim);
                 sb.append(method_name);
@@ -149,7 +149,7 @@ public class ConstantPoolGen implements java.io.Serializable {
                 sb.append(signature);
                 String key = sb.toString();
                 sb.delete(0, sb.length());
-                
+
                 if (!cp_table.containsKey(key)) {
                     cp_table.put(key, new Index(i));
                 }
@@ -170,7 +170,7 @@ public class ConstantPoolGen implements java.io.Serializable {
      * Create empty constant pool.
      */
     public ConstantPoolGen() {
-    	size = 256;
+        size = 256;
         constants = new Constant[size];
     }
 

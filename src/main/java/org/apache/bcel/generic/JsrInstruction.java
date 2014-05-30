@@ -77,7 +77,7 @@ public abstract class JsrInstruction extends BranchInstruction implements Uncond
                 throw new RuntimeException("physicalSuccessor() called on a shared JsrInstruction.");
             }
         }
-        // Return the physical successor		
+        // Return the physical successor        
         return toThis.getNext();
     }
 }

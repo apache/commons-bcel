@@ -745,8 +745,8 @@ public abstract class EmptyVisitor implements VisitorSupportsInvokeDynamic {
     }
 
     public void visitNameSignatureInstruction(NameSignatureInstruction obj) {
-	}
-    
-	public void visitINVOKEDYNAMIC(INVOKEDYNAMIC obj) {
-	}
+    }
+
+    public void visitINVOKEDYNAMIC(INVOKEDYNAMIC obj) {
+    }
 }

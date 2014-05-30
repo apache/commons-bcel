@@ -59,7 +59,7 @@ public abstract class FieldInstruction extends FieldOrMethod {
     /** @return size of field (1 or 2)
      */
     protected int getFieldSize( ConstantPoolGen cpg ) {
-    	return Type.size(Type.getTypeSize(getSignature(cpg)));
+        return Type.size(Type.getTypeSize(getSignature(cpg)));
     }
 
 

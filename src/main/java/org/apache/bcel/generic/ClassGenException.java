@@ -36,8 +36,8 @@ public class ClassGenException extends RuntimeException {
     public ClassGenException(String s) {
         super(s);
     }
-    
+
     public ClassGenException(String s, Throwable initCause) {
-    	super(s, initCause);
+        super(s, initCause);
     }
 }

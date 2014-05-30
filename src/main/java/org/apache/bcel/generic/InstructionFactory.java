@@ -31,7 +31,7 @@ import org.apache.bcel.Constants;
  */
 public class InstructionFactory implements InstructionConstants, java.io.Serializable {
 
-	private static final long serialVersionUID = -1210011499635580258L;
+    private static final long serialVersionUID = -1210011499635580258L;
 
     private static final String[] short_names = {
             "C", "F", "D", "B", "S", "I", "L"
@@ -354,7 +354,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
             case '/':
                 return FDIV;
             case '%':
-            	return FREM;
+                return FREM;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -372,7 +372,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
             case '/':
                 return DDIV;
             case '%':
-            	return DREM;
+                return DREM;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }

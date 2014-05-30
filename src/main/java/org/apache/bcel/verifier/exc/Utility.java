@@ -28,14 +28,14 @@ import java.io.StringWriter;
  * @see java.lang.Throwable
  */
 public final class Utility{
-	/** This class is not instantiable. */
-	private Utility(){}
+    /** This class is not instantiable. */
+    private Utility(){}
 
-	/** This method returns the stack trace of a Throwable instance as a String. */
-	public static String getStackTrace(Throwable t){
-		StringWriter sw = new StringWriter();
-		PrintWriter pw = new PrintWriter(sw);
-		t.printStackTrace(pw);
-		return sw.toString();
-	}
+    /** This method returns the stack trace of a Throwable instance as a String. */
+    public static String getStackTrace(Throwable t){
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        t.printStackTrace(pw);
+        return sw.toString();
+    }
 }
