@@ -36,7 +36,7 @@
       <item name="Manual" href="manual.html"/>
       <item name="FAQ" href="faq.html"/>
       <item name="Used by" href="projects.html"/>
-      <item name="Javadoc 5.2"   href="javadocs/api-5.2/index.html"/>
+      <item name="Javadoc 6.0" href="javadocs/api-release/index.html"/>
     </menu>
 
   </body>
