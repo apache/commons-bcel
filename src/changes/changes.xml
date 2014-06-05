@@ -40,37 +40,212 @@ The <action> type attribute can be add,update,fix,remove.
 -->
 
 <document>
-    <properties>
-        <title>Changes</title>
-        <author email="dev@commons.apache.org">Apache Commons devlopers</author>
-    </properties>
+  <properties>
+    <title>Changes</title>
+    <author email="dev@commons.apache.org">Apache Commons devlopers</author>
+  </properties>
 
-    <!-- NOTE: 
-    The description below is specially formatted so as to improve the layout of the generated release notes:
-    The parsing process removes all line feeds, replacing them with a single space.
-    The Velocity template in resources/templates has been enhanced to replace pairs of adjacent spaces
-    with a new-line in the release notes. (These spaces are ignored when displaying HTML).
-    If the output is not quite correct, check for invisible trailing spaces!
-    
-    N.B. The release notes template groups actions by type, and only extracts data for the current release.
-    The changes report outputs actions in the order they appear in this file.
-    
-    To regenerate the release notes:
-    mvn changes:announcement-generate -Prelease-notes [-Dchanges.version=nnn]
+  <!-- NOTE: 
+  The description below is specially formatted so as to improve the layout of the generated release notes:
+  The parsing process removes all line feeds, replacing them with a single space.
+  The Velocity template in resources/templates has been enhanced to replace pairs of adjacent spaces
+  with a new-line in the release notes. (These spaces are ignored when displaying HTML).
+  If the output is not quite correct, check for invisible trailing spaces!
+  
+  N.B. The release notes template groups actions by type, and only extracts data for the current release.
+  The changes report outputs actions in the order they appear in this file.
+  
+  To regenerate the release notes:
+  mvn changes:announcement-generate -Prelease-notes [-Dchanges.version=nnn]
 
-    Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
-     -->
+  Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
+   -->
 
-    <body>
-        <release version="5.3" date="TBA" description="
-TBA
-        ">
-            <action issue="BCEL-153" dev="sebb" type="fix">
-            Examples not present in source or binary downloads
-            </action>
-            <action issue="BCEL-160" dev="sebb" type="fix">
-            Why using unstable sort at MethodGen.getLocalVariables() ?
-            </action>
-        </release>
-    </body>
+  <body>
+    <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-76" type="update">
+        Add parent type processing for ClassPath class.
+      </action>
+      <action issue="BCEL-83" type="update">
+        Add support for getResource and getResourceAsStream to ClassPath
+      </action>
+      <action issue="BCEL-92" type="update">
+        Properly parse StackMapTable attributes in Java 6 classfiles
+      </action>
+      <action issue="BCEL-104" type="update">
+        Javadoc overhaul
+      </action>
+      <action issue="BCEL-119" type="update">
+        BCEL is unnecessarily slow
+      </action>
+      <action issue="BCEL-157" type="update">
+        Add support for INVOKEDYNAMIC and MethodHandles
+      </action>
+      <action issue="BCEL-160" type="update" dev="sebb">
+        Why using unstable sort at MethodGen.getLocalVariables() ?
+      </action>
+      <action issue="BCEL-163" type="update">
+        Incorporate patch file from Findbugs
+      </action>
+      <action issue="BCEL-175" type="update">
+        Implement the MethodParameters attribute
+      </action>
+      <action issue="BCEL-28" type="fix">
+        Mistake in "Peephole optimizer" example at http://commons.apache.org/bcel/manual.html
+      </action>
+      <action issue="BCEL-74" type="fix">
+        BCEL cannot be used as java.system.class.loader
+      </action>
+      <action issue="BCEL-77" type="fix">
+        XSLT transforms broken in Turkish Locale.
+      </action>
+      <action issue="BCEL-79" type="fix">
+        java.lang.ClassFormatError: LVTT entry for 'local' in class file org/shiftone/jrat/test/dummy/CrashTestDummy does not match any LVT entry
+      </action>
+      <action issue="BCEL-81" type="fix">
+        ClassParser.parse() throws NullPointerException if class does not exist and ClassParser(String) constructor is used
+      </action>
+      <action issue="BCEL-85" type="fix">
+        ArrayOutOfBoundsException in InstructionFinder
+      </action>
+      <action issue="BCEL-87" type="fix">
+        Website: Incorrect URL for source; version 5.2 is not in the bug page
+      </action>
+      <action issue="BCEL-88" type="fix">
+        bcelified method doesn't pass verification
+      </action>
+      <action issue="BCEL-89" type="fix">
+        return type not verified by JustIce
+      </action>
+      <action issue="BCEL-94" type="fix">
+        @since tag incorrect for Annotation classes in BCEL trunk
+      </action>
+      <action issue="BCEL-95" type="fix">
+        InstructionFactory missing % operator for Float, Double
+      </action>
+      <action issue="BCEL-96" type="fix">
+        Fields in Annotations and AnnotationEntry are inaccessible to subclasses
+      </action>
+      <action issue="BCEL-97" type="fix">
+        Add support for getResources to ClassPath
+      </action>
+      <action issue="BCEL-98" type="fix">
+        Two source files in repository are empty
+      </action>
+      <action issue="BCEL-99" type="fix">
+        Maven POM file calls in apache regex but code does not use it
+      </action>
+      <action issue="BCEL-100" type="fix">
+        ClassParser throws unintelligible Exception
+      </action>
+      <action issue="BCEL-101" type="fix">
+        verifier raises an AssertionViolatedException when done against Java 5 files with generics/annotations
+      </action>
+      <action issue="BCEL-102" type="fix">
+        Verifier fails in pass 2 with "Number of LocalVariableTable attributes of Code attribute" on static methods.
+      </action>
+      <action issue="BCEL-107" type="fix">
+        ParameterAnnotationEntries are read not dumped
+      </action>
+      <action issue="BCEL-108" type="fix">
+        RuntimeVisible Annotations duplicated
+      </action>
+      <action issue="BCEL-112" type="fix">
+        ARRAYLENGTH incorrectly not StackConsumer
+      </action>
+      <action issue="BCEL-114" type="fix">
+        Error in method search() defined in org.apache.bcel.util.InstructionFinder
+      </action>
+      <action issue="BCEL-115" type="fix">
+        Deleting all instructions of a list shows wrong behaviour
+      </action>
+      <action issue="BCEL-120" type="fix">
+        Make BCEL JAR OSGi compatible
+      </action>
+      <action issue="BCEL-122" type="fix">
+        ArrayIndexOutOfBoundsException thrown from TABLESWITCH.initFromFile
+      </action>
+      <action issue="BCEL-124" type="fix">
+        tableswitch/lookupswitch invalid alignment of 4-byte operands
+      </action>
+      <action issue="BCEL-125" type="fix">
+        Incorrect size calculation in InstructionFinder
+      </action>
+      <action issue="BCEL-130" type="fix">
+        Class files containing "ParameterAnnotations" are dumped incorrectly
+      </action>
+      <action issue="BCEL-131" type="fix">
+        Class files containing "StackMapTable" attributes (on method code) are dumped incorrectly
+      </action>
+      <action issue="BCEL-132" type="fix">
+        org.apache.bcel.classfile.ClassParser: NullPointerException caused by fileopen failed
+      </action>
+      <action issue="BCEL-133" type="fix">
+        org.apache.bcel.classfile.ClassParser: NullPointerException caused by invalid filename
+      </action>
+      <action issue="BCEL-134" type="fix">
+        ExecutionVisitor doesn't support Class constant type for LDC and LDC_W
+      </action>
+      <action issue="BCEL-135" type="fix">
+        BCELifier issue: BCELFactory fails to handle float and long constants
+      </action>
+      <action issue="BCEL-137" type="fix">
+        "Invalid method signature: TT;" when using MethodGen for a method having a generic parameter
+      </action>
+      <action issue="BCEL-138" type="fix">
+        FieldInstruction.getFieldSize() doesn't decode Type.getTypeSize() output
+      </action>
+      <action issue="BCEL-140" type="fix">
+        org.apache.bcel.generic.Instruction.equals(Object) does not follow Object.equals(Object) rules
+      </action>
+      <action issue="BCEL-141" type="fix">
+        Select instructions should implement StackConsumer instead of StackProducer
+      </action>
+      <action issue="BCEL-143" type="fix">
+        Fix CPL License issues with EnclosingMethod.java and LocalVariableTypeTable.java
+      </action>
+      <action issue="BCEL-145" type="fix">
+        Type.getReturnTypeSize() doesn't decode Type.getTypeSize() output
+      </action>
+      <action issue="BCEL-146" type="fix">
+        SyntheticRepository.loadClass() fails to close the inputStream
+      </action>
+      <action issue="BCEL-148" type="fix">
+        BCELifier produces incorrect code for methods containing loads of class literals from constant pool
+      </action>
+      <action issue="BCEL-151" type="fix">
+        Code attribute size not updated
+      </action>
+      <action issue="BCEL-152" type="fix">
+        Incorrect link for Jasmin assembler language
+      </action>
+      <action issue="BCEL-153" type="fix" dev="sebb">
+        Examples not present in source or binary downloads
+      </action>
+      <action issue="BCEL-154" type="fix">
+        ClassParser.parse() generates NPE if it cannot open the file
+      </action>
+      <action issue="BCEL-155" type="fix">
+        InstConstraintVisitor does not handle class constants
+      </action>
+      <action issue="BCEL-156" type="fix">
+        Pass3bVerifier crashes on empty methods
+      </action>
+      <action issue="BCEL-159" type="fix">
+        LocalVariableGen.getLocalVariable() computes incorrect length
+      </action>
+      <action issue="BCEL-164" type="fix">
+        Method does not have a method to access parameter annotations
+      </action>
+      <action issue="BCEL-167" type="fix">
+        ClassPath.getResource does not correctly perform URL escaping
+      </action>
+      <action issue="BCEL-173" type="fix">
+        ClassParser fails to parse JDK classes in Java 8: ClassFormatException: Invalid byte tag in constant pool
+      </action>
+      <action issue="BCEL-174" type="fix">
+        Verification of interfaces with default methods fails with Java 8
+      </action>
+    </release>
+  </body>
 </document>
