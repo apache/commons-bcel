@@ -72,6 +72,8 @@ public final class ConstantUtf8 extends Constant {
         considered++;
         if (cache == null)  {
             cache = new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
+                private static final long serialVersionUID = -8506975356158971766L;
+
                 @Override
                 protected boolean removeEldestEntry(Map.Entry<String, ConstantUtf8> eldest) {
                      return size() > MAX_CACHE_ENTRIES;
