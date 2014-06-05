@@ -133,9 +133,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
         v.visitStackProducer(this);
         v.visitLoadClass(this);
         v.visitCPInstruction(this);
-        if (v instanceof VisitorSupportsInvokeDynamic) {
-            ((VisitorSupportsInvokeDynamic)v).visitNameSignatureInstruction(this);
-        }
+        v.visitNameSignatureInstruction(this);
         v.visitFieldOrMethod(this);
         v.visitInvokeInstruction(this);
         v.visitINVOKEINTERFACE(this);

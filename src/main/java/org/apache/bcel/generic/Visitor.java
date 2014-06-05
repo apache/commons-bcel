@@ -566,4 +566,10 @@ public interface Visitor {
 
 
     void visitBREAKPOINT( BREAKPOINT obj );
+
+
+    void visitNameSignatureInstruction( NameSignatureInstruction obj );
+
+
+    void visitINVOKEDYNAMIC( INVOKEDYNAMIC obj );
 }

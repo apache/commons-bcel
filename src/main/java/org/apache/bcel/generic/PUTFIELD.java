@@ -79,9 +79,7 @@ public class PUTFIELD extends FieldInstruction implements PopInstruction, Except
         v.visitTypedInstruction(this);
         v.visitLoadClass(this);
         v.visitCPInstruction(this);
-        if (v instanceof VisitorSupportsInvokeDynamic) {
-            ((VisitorSupportsInvokeDynamic)v).visitNameSignatureInstruction(this);
-        }
+        v.visitNameSignatureInstruction(this);
         v.visitFieldOrMethod(this);
         v.visitFieldInstruction(this);
         v.visitPUTFIELD(this);

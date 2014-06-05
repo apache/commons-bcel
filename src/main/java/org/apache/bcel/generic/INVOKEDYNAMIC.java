@@ -174,9 +174,7 @@ public class INVOKEDYNAMIC extends NameSignatureInstruction implements Exception
         v.visitStackConsumer(this);
         v.visitStackProducer(this);
         v.visitCPInstruction(this);
-        if (v instanceof VisitorSupportsInvokeDynamic) {
-            ((VisitorSupportsInvokeDynamic)v).visitNameSignatureInstruction(this);
-            ((VisitorSupportsInvokeDynamic)v).visitINVOKEDYNAMIC(this);
-        }
+        v.visitNameSignatureInstruction(this);
+        v.visitINVOKEDYNAMIC(this);
     }
 }
