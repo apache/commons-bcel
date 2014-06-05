@@ -168,6 +168,7 @@ public final class ConstantUtf8 extends Constant {
      * @param bytes the raw bytes of this Utf-8
      * @deprecated
      */
+    @java.lang.Deprecated
     public final void setBytes( String bytes ) {
         throw new UnsupportedOperationException();
     }
