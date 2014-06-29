@@ -376,12 +376,10 @@ public class ControlFlowGraph{
                     System.arraycopy(matchTargets, 0, ret, 1, matchTargets.length);
                     return ret;
                 }
-                else{
-                    final InstructionHandle[] pair = new InstructionHandle[2];
-                    pair[0] = getInstruction().getNext();
-                    pair[1] = ((BranchInstruction) inst).getTarget();
-                    return pair;
-                }
+                final InstructionHandle[] pair = new InstructionHandle[2];
+                pair[0] = getInstruction().getNext();
+                pair[1] = ((BranchInstruction) inst).getTarget();
+                return pair;
             }
 
             // default case: Fall through.        
