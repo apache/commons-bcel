@@ -616,12 +616,10 @@ System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead c
                 System.arraycopy(matchTargets, 0, ret, 1, matchTargets.length);
                 return ret;
             }
-            else{
-                final InstructionHandle[] pair = new InstructionHandle[2];
-                pair[0] = instruction.getNext();
-                pair[1] = ((BranchInstruction) inst).getTarget();
-                return pair;
-            }
+            final InstructionHandle[] pair = new InstructionHandle[2];
+            pair[0] = instruction.getNext();
+            pair[1] = ((BranchInstruction) inst).getTarget();
+            return pair;
         }
 
         // default case: Fall through.        
