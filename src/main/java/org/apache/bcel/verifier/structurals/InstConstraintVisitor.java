@@ -416,18 +416,16 @@ public class InstConstraintVisitor extends EmptyVisitor{
             if (stack().peek() == Type.NULL){
                 return;
             }
-            else{
-                if (! (stack().peek() instanceof ReferenceType)){
-                    constraintViolated(o, "Reference type expected on top of stack, but is: '"+stack().peek()+"'.");
-                }
-                referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()));
-                //ReferenceType objectref = (ReferenceType) (stack().peek());
-                // TODO: This can only be checked if using Staerk-et-al's "set of object types" instead of a
-                // "wider cast object type" created during verification.
-                //if (! (objectref.isAssignmentCompatibleWith(mg.getType())) ){
-                //    constraintViolated(o, "Type on stack top which should be returned is a '"+stack().peek()+"' which is not assignment compatible with the return type of this method, '"+mg.getType()+"'.");
-                //}
+            if (! (stack().peek() instanceof ReferenceType)){
+                constraintViolated(o, "Reference type expected on top of stack, but is: '"+stack().peek()+"'.");
             }
+            referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()));
+            //ReferenceType objectref = (ReferenceType) (stack().peek());
+            // TODO: This can only be checked if using Staerk-et-al's "set of object types" instead of a
+            // "wider cast object type" created during verification.
+            //if (! (objectref.isAssignmentCompatibleWith(mg.getType())) ){
+            //    constraintViolated(o, "Type on stack top which should be returned is a '"+stack().peek()+"' which is not assignment compatible with the return type of this method, '"+mg.getType()+"'.");
+            //}
         }
         else{
             if (! ( method_type.equals( stack().peek() ))){
@@ -933,10 +931,9 @@ public class InstConstraintVisitor extends EmptyVisitor{
         if (stack().peek(1).getSize() == 2){
             return; // Form 2, okay.
         }
-        else{   //stack().peek(1).getSize == 1.
-            if (stack().peek(2).getSize() != 1){
-                constraintViolated(o, "If stack top's size is 1 and stack next-to-top's size is 1, stack next-to-next-to-top's size must also be 1, but is: '"+stack().peek(2)+"' of size '"+stack().peek(2).getSize()+"'.");
-            }
+        //stack().peek(1).getSize == 1.
+        if (stack().peek(2).getSize() != 1){
+            constraintViolated(o, "If stack top's size is 1 and stack next-to-top's size is 1, stack next-to-next-to-top's size must also be 1, but is: '"+stack().peek(2)+"' of size '"+stack().peek(2).getSize()+"'.");
         }
     }
 
@@ -948,10 +945,9 @@ public class InstConstraintVisitor extends EmptyVisitor{
         if (stack().peek().getSize() == 2){
             return; // Form 2, okay.
         }
-        else{ //stack().peek().getSize() == 1.
-            if (stack().peek(1).getSize() != 1){
-                constraintViolated(o, "If stack top's size is 1, then stack next-to-top's size must also be 1. But it is '"+stack().peek(1)+"' of size '"+stack().peek(1).getSize()+"'.");
-            }
+        //stack().peek().getSize() == 1.
+        if (stack().peek(1).getSize() != 1){
+            constraintViolated(o, "If stack top's size is 1, then stack next-to-top's size must also be 1. But it is '"+stack().peek(1)+"' of size '"+stack().peek(1).getSize()+"'.");
         }
     }
 
@@ -988,13 +984,12 @@ public class InstConstraintVisitor extends EmptyVisitor{
              if (stack().peek(1).getSize() == 2){
                 return; // Form 4
             }
-            else{// stack top size is 2, next-to-top's size is 1
-                if ( stack().peek(2).getSize() != 1 ){
-                    constraintViolated(o, "If stack top's size is 2 and stack-next-to-top's size is 1, then stack next-to-next-to-top's size must also be 1. But it is '"+stack().peek(2)+"' of size '"+stack().peek(2).getSize()+"'.");
-                }
-                else{
-                    return; // Form 2
-                }
+            // stack top size is 2, next-to-top's size is 1
+            if ( stack().peek(2).getSize() != 1 ){
+                constraintViolated(o, "If stack top's size is 2 and stack-next-to-top's size is 1, then stack next-to-next-to-top's size must also be 1. But it is '"+stack().peek(2)+"' of size '"+stack().peek(2).getSize()+"'.");
+            }
+            else{
+                return; // Form 2
             }
         }
         else{// stack top is of size 1
@@ -1002,10 +997,8 @@ public class InstConstraintVisitor extends EmptyVisitor{
                 if ( stack().peek(2).getSize() == 2 ){
                     return; // Form 3
                 }
-                else{
-                    if ( stack().peek(3).getSize() == 1){
-                        return; // Form 1
-                    }
+                if ( stack().peek(3).getSize() == 1){
+                    return; // Form 1
                 }
             }
         }
