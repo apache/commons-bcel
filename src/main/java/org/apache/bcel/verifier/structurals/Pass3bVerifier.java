@@ -180,9 +180,7 @@ public final class Pass3bVerifier extends PassVerifier{
                             lastJSR = oldchain.get(ss);
                             break;
                         }
-                        else{
-                            skip_jsr--;
-                        }
+                        skip_jsr--;
                     }
                     if ((oldchain.get(ss)).getInstruction().getInstruction() instanceof RET){
                         skip_jsr++;
