@@ -448,9 +448,7 @@ public class Subroutines{
                     if (instructions_assigned.contains(element)){
                         throw new StructuralCodeConstraintException("Instruction '"+element+"' is part of more than one subroutine (or of the top level and a subroutine).");
                     }
-                    else{
-                        instructions_assigned.add(element);
-                    }
+                    instructions_assigned.add(element);
                 }
             }
             if (actual != all[0]){// If we don't deal with the top-level 'subroutine'
