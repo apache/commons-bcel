@@ -230,16 +230,15 @@ public class ControlFlowGraph{
          * Does the actual merging (vmspec2, page 146).
          * Returns true IFF this.inFrame was changed in course of merging with inFrame.
          */
-        private boolean mergeInFrames(Frame inFrame){
+        private boolean mergeInFrames(Frame inFrame) {
             // TODO: Can be performance-improved.
             Frame inF = inFrames.get(lastExecutionJSR());
             OperandStack oldstack = inF.getStack().getClone();
             LocalVariables oldlocals = inF.getLocals().getClone();
-            try{
+            try {
                 inF.getStack().merge(inFrame.getStack());
                 inF.getLocals().merge(inFrame.getLocals());
-            }
-            catch (StructuralCodeConstraintException sce){
+            } catch (StructuralCodeConstraintException sce) {
                 extendMessageWithFlow(sce);
                 throw sce;
             }
