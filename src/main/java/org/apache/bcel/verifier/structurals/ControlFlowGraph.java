@@ -243,11 +243,9 @@ public class ControlFlowGraph{
                 extendMessageWithFlow(sce);
                 throw sce;
             }
-            if (    oldstack.equals(inF.getStack()) &&
-                        oldlocals.equals(inF.getLocals()) ){
+            if (oldstack.equals(inF.getStack()) && oldlocals.equals(inF.getLocals())) {
                 return false;
-            }
-            else{
+            } else {
                 return true;
             }
         }
