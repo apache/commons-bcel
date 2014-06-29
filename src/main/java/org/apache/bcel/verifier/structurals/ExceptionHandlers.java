@@ -65,11 +65,11 @@ public class ExceptionHandlers{
      * handlers that protect the instruction ih.
      */
     public ExceptionHandler[] getExceptionHandlers(InstructionHandle ih){
-        Set<ExceptionHandler> hs = exceptionhandlers.get(ih);
-        if (hs == null) {
+        Set<ExceptionHandler> hsSet = exceptionhandlers.get(ih);
+        if (hsSet == null) {
             return new ExceptionHandler[0];
         } else{
-            return hs.toArray(new ExceptionHandler[hs.size()]);
+            return hsSet.toArray(new ExceptionHandler[hsSet.size()]);
         }
     }
 
