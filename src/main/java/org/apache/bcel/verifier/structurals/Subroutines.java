@@ -148,9 +148,7 @@ public class Subroutines{
                     if (ret != null){
                         throw new StructuralCodeConstraintException("Subroutine with more then one RET detected: '"+ret+"' and '"+actual+"'.");
                     }
-                    else{
-                        ret = actual;
-                    }
+                    ret = actual;
                 }
             }
             if (ret == null){
