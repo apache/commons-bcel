@@ -207,9 +207,8 @@ public final class Pass3aVerifier extends PassVerifier{
             }
             return vr;
         }
-        else{ //did not pass Pass 2.
-            return VerificationResult.VR_NOTYET;
-        }
+        //did not pass Pass 2.
+        return VerificationResult.VR_NOTYET;
         } catch (ClassNotFoundException e) {
         // FIXME: maybe not the best way to handle this
         throw new AssertionViolatedException("Missing class: " + e, e);
