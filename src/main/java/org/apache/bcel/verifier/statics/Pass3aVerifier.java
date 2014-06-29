@@ -261,20 +261,23 @@ public final class Pass3aVerifier extends PassVerifier{
            than only one. This is a bug in BCEL. */
         Attribute[] atts = code.getAttributes();
         for (Attribute att : atts) {
-            if (att instanceof LocalVariableTable){
+            if (att instanceof LocalVariableTable) {
                 LocalVariableTable lvt = (LocalVariableTable) att;
-                if (lvt != null){
-                    LocalVariable[] localVariables = lvt.getLocalVariableTable();
-                    for (LocalVariable localVariable : localVariables) {
-                        int startpc = localVariable.getStartPC();
-                        int length  = localVariable.getLength();
+                LocalVariable[] localVariables = lvt.getLocalVariableTable();
+                for (LocalVariable localVariable : localVariables) {
+                    int startpc = localVariable.getStartPC();
+                    int length = localVariable.getLength();
 
-                        if (!contains(instructionPositions, startpc)){
-                            throw new ClassConstraintException("Code attribute '"+code+"' has a LocalVariableTable attribute '"+code.getLocalVariableTable()+"' referring to a code offset ('"+startpc+"') that does not exist.");
-                        }
-                        if ( (!contains(instructionPositions, startpc+length)) && (startpc+length != codeLength) ){
-                            throw new ClassConstraintException("Code attribute '"+code+"' has a LocalVariableTable attribute '"+code.getLocalVariableTable()+"' referring to a code offset start_pc+length ('"+(startpc+length)+"') that does not exist.");
-                        }
+                    if (!contains(instructionPositions, startpc)) {
+                        throw new ClassConstraintException("Code attribute '" + code
+                                + "' has a LocalVariableTable attribute '" + code.getLocalVariableTable()
+                                + "' referring to a code offset ('" + startpc + "') that does not exist.");
+                    }
+                    if ((!contains(instructionPositions, startpc + length)) && (startpc + length != codeLength)) {
+                        throw new ClassConstraintException("Code attribute '" + code
+                                + "' has a LocalVariableTable attribute '" + code.getLocalVariableTable()
+                                + "' referring to a code offset start_pc+length ('" + (startpc + length)
+                                + "') that does not exist.");
                     }
                 }
             }
