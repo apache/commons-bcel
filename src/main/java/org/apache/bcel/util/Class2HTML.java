@@ -172,9 +172,8 @@ public class Class2HTML implements Constants {
                 || base_type.equals("long") || base_type.equals("double")
                 || base_type.equals("float")) {
             return "<FONT COLOR=\"#00FF00\">" + type + "</FONT>";
-        } else {
-            return "<A HREF=\"" + base_type + ".html\" TARGET=_top>" + short_type + "</A>";
         }
+        return "<A HREF=\"" + base_type + ".html\" TARGET=_top>" + short_type + "</A>";
     }
 
 
