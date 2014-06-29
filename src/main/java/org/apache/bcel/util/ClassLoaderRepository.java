@@ -70,11 +70,7 @@ public class ClassLoaderRepository implements Repository {
      * Find an already defined JavaClass.
      */
     public JavaClass findClass( String className ) {
-        if (loadedClasses.containsKey(className)) {
-            return loadedClasses.get(className);
-        } else {
-            return null;
-        }
+        return loadedClasses.containsKey(className) ? loadedClasses.get(className) : null;
     }
 
 
