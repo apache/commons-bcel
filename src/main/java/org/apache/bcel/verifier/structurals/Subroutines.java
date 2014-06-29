@@ -328,9 +328,7 @@ public class Subroutines{
             if (localVariable != UNSET){
                 throw new AssertionViolatedException("localVariable set twice.");
             }
-            else{
-                localVariable = i;
-            }
+            localVariable = i;
         }
 
         /**
