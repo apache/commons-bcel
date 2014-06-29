@@ -68,9 +68,8 @@ public class ExceptionHandlers{
         Set<ExceptionHandler> hsSet = exceptionhandlers.get(ih);
         if (hsSet == null) {
             return new ExceptionHandler[0];
-        } else{
-            return hsSet.toArray(new ExceptionHandler[hsSet.size()]);
         }
+        return hsSet.toArray(new ExceptionHandler[hsSet.size()]);
     }
 
 }
