@@ -30,22 +30,22 @@ import java.io.DataInputStream;
  */
 public final class ByteSequence extends DataInputStream {
 
-    private ByteArrayStream byte_stream;
+    private ByteArrayStream byteStream;
 
 
     public ByteSequence(byte[] bytes) {
         super(new ByteArrayStream(bytes));
-        byte_stream = (ByteArrayStream) in;
+        byteStream = (ByteArrayStream) in;
     }
 
 
     public final int getIndex() {
-        return byte_stream.getPosition();
+        return byteStream.getPosition();
     }
 
 
     final void unreadByte() {
-        byte_stream.unreadByte();
+        byteStream.unreadByte();
     }
 
     private static final class ByteArrayStream extends ByteArrayInputStream {
