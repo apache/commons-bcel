@@ -55,10 +55,7 @@ public class DescendingVisitor implements Visitor
         {
             return null;
         }
-        else
-        {
-            return stack.elementAt(size - (level + 2)); // size - 1 == current
-        }
+        return stack.elementAt(size - (level + 2)); // size - 1 == current
     }
 
     /**
