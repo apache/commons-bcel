@@ -181,13 +181,11 @@ public class Subroutines{
             if (localVariable == UNSET){
                 throw new AssertionViolatedException("Set the localVariable first!");
             }
-            else{
-                // Something is wrong when an ASTORE is targeted that does not operate on the same local variable than the rest of the
-                // JsrInstruction-targets and the RET.
-                // (We don't know out leader here so we cannot check if we're really targeted!)
-                if (localVariable != ((ASTORE) (((JsrInstruction) jsrInst.getInstruction()).getTarget().getInstruction())).getIndex()){
-                    throw new AssertionViolatedException("Setting a wrong JsrInstruction.");
-                }
+            // Something is wrong when an ASTORE is targeted that does not operate on the same local variable than the rest of the
+            // JsrInstruction-targets and the RET.
+            // (We don't know out leader here so we cannot check if we're really targeted!)
+            if (localVariable != ((ASTORE) (((JsrInstruction) jsrInst.getInstruction()).getTarget().getInstruction())).getIndex()){
+                throw new AssertionViolatedException("Setting a wrong JsrInstruction.");
             }
             theJSRs.add(jsrInst);
         }
