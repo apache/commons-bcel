@@ -183,9 +183,8 @@ public class SimpleElementValue extends ElementValue
                     getIndex(), Constants.CONSTANT_Integer);
             if (bo.getBytes() == 0) {
                 return "false";
-            } else {
-                return "true";
             }
+            return "true";
         case STRING:
             ConstantUtf8 cu8 = (ConstantUtf8) cpool.getConstant(getIndex(),
                     Constants.CONSTANT_Utf8);
