@@ -54,11 +54,10 @@ public final class ByteSequence extends DataInputStream {
             super(bytes);
         }
 
-
         final int getPosition() {
+            // pos is protected in ByteArrayInputStream
             return pos;
-        } // is protected in ByteArrayInputStream
-
+        }
 
         final void unreadByte() {
             if (pos > 0) {
