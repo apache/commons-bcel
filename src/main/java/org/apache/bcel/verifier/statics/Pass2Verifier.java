@@ -166,9 +166,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                 vr = new VerificationResult(VerificationResult.VERIFIED_REJECTED, cce.getMessage());
             }
             return vr;
-        } else {
-            return VerificationResult.VR_NOTYET;
         }
+        return VerificationResult.VR_NOTYET;
 
         } catch (ClassNotFoundException e) {
         // FIXME: this might not be the best way to handle missing classes.
@@ -256,9 +255,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                     if (method.isFinal()) {
                         if (!(method.isPrivate())) {
                             throw new ClassConstraintException("Method '" + name_and_sig + "' in class '" + hashmap.get(name_and_sig) + "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + "'.");
-                        } else {
-                            addMessage("Method '" + name_and_sig + "' in class '" + hashmap.get(name_and_sig) + "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + "'. This is okay, as the original definition was private; however this constraint leverage was introduced by JLS 8.4.6 (not vmspec2) and the behaviour of the Sun verifiers.");
                         }
+                        addMessage("Method '" + name_and_sig + "' in class '" + hashmap.get(name_and_sig) + "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + "'. This is okay, as the original definition was private; however this constraint leverage was introduced by JLS 8.4.6 (not vmspec2) and the behaviour of the Sun verifiers.");
                     } else {
                         if (!method.isStatic()) { // static methods don't inherit
                             hashmap.put(name_and_sig, jc.getClassName());
@@ -915,10 +913,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                 addMessage("Code attribute '"+tostring(obj)+"' is not declared in a method_info structure but in '"+carrier.predecessor()+"'. Ignored.");
                 return;
             }
-            else{
-                m = (Method) carrier.predecessor();    // we can assume this method was visited before;
-                                                                                        // i.e. the data consistency was verified.
-            }
+            m = (Method) carrier.predecessor();    // we can assume this method was visited before;
+                                                                                    // i.e. the data consistency was verified.
 
             if (obj.getCode().length == 0){
                 throw new ClassConstraintException("Code array of Code attribute '"+tostring(obj)+"' (method '"+m+"') must not be empty.");
@@ -940,29 +936,25 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                     if (vr != VerificationResult.VR_OK){
                         throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(element)+"' that references '"+cname+"' as an Exception but it does not pass verification pass 1: "+vr);
                     }
-                    else{
-                        // We cannot safely trust any other "instanceof" mechanism. We need to transitively verify
-                        // the ancestor hierarchy.
-                        JavaClass e = Repository.lookupClass(cname);
-                        JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
-                        JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
-                        while (e != o){
-                            if (e == t) {
-                                break; // It's a subclass of Throwable, OKAY, leave.
-                            }
+                    // We cannot safely trust any other "instanceof" mechanism. We need to transitively verify
+                    // the ancestor hierarchy.
+                    JavaClass e = Repository.lookupClass(cname);
+                    JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
+                    JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
+                    while (e != o){
+                        if (e == t) {
+                            break; // It's a subclass of Throwable, OKAY, leave.
+                        }
 
-                            v = VerifierFactory.getVerifier(e.getSuperclassName());
-                            vr = v.doPass1();
-                            if (vr != VerificationResult.VR_OK){
-                                throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(element)+"' that references '"+cname+"' as an Exception but '"+e.getSuperclassName()+"' in the ancestor hierachy does not pass verification pass 1: "+vr);
-                            }
-                            else{
-                                e = Repository.lookupClass(e.getSuperclassName());
-                            }
+                        v = VerifierFactory.getVerifier(e.getSuperclassName());
+                        vr = v.doPass1();
+                        if (vr != VerificationResult.VR_OK){
+                            throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(element)+"' that references '"+cname+"' as an Exception but '"+e.getSuperclassName()+"' in the ancestor hierachy does not pass verification pass 1: "+vr);
                         }
-                        if (e != t) {
-                            throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(element)+"' that references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
-                        }
+                        e = Repository.lookupClass(e.getSuperclassName());
+                    }
+                    if (e != t) {
+                        throw new ClassConstraintException("Code attribute '"+tostring(obj)+"' (method '"+m+"') has an exception_table entry '"+tostring(element)+"' that references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
                     }
                 }
             }
