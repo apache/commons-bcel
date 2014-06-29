@@ -69,8 +69,7 @@ public class ExceptionHandlers{
         if (hs == null) {
             return new ExceptionHandler[0];
         } else{
-            ExceptionHandler[] ret = new ExceptionHandler[hs.size()];
-            return hs.toArray(ret);
+            return hs.toArray(new ExceptionHandler[hs.size()]);
         }
     }
 
