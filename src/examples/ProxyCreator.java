@@ -33,7 +33,7 @@ import org.apache.bcel.generic.PUSH;
 import org.apache.bcel.generic.Type;
 
 /**
- * Dynamically creates and uses a proxy for <tt>java.awt.event.ActionListener</tt>
+ * Dynamically creates and uses a proxy for {@code java.awt.event.ActionListener}
  * via the classloader mechanism if called with
  * <pre>java org.apache.bcel.util.JavaWrapper ProxyCreator</pre>
  *
@@ -42,7 +42,7 @@ import org.apache.bcel.generic.Type;
  * ugly class name, so for many cases it will be more sufficient to
  * put some clever creation code into the class loader.<br> This is
  * comparable to the mechanism provided via
- * <tt>java.lang.reflect.Proxy</tt>, but much more flexible.
+ * {@code java.lang.reflect.Proxy}, but much more flexible.
  *
  * @version $Id$
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>

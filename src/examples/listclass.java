@@ -36,27 +36,27 @@ import org.apache.bcel.classfile.Method;
  * <pre>java listclass [-constants] [-code] [-brief] [-dependencies] [-nocontents] [-recurse] class... [-exclude <list>]</pre>
  * where
  * <ul>
- * <li><tt>-code</tt> List byte code of methods</li>
- * <li><tt>-brief</tt> List byte codes briefly</li>
- * <li><tt>-constants</tt> Print constants table (constant pool)</li>
- * <li><tt>-recurse</tt>  Usually intended to be used along with
- * <tt>-dependencies</tt>  When this flag is set, listclass will also print information
+ * <li>{@code -code} List byte code of methods</li>
+ * <li>{@code -brief} List byte codes briefly</li>
+ * <li>{@code -constants} Print constants table (constant pool)</li>
+ * <li>{@code -recurse}  Usually intended to be used along with
+ * {@code -dependencies}  When this flag is set, listclass will also print information
  * about all classes which the target class depends on.</li>
  * 
- * <li><tt>-dependencies</tt>  Setting this flag makes listclass print a list of all
+ * <li>{@code -dependencies}  Setting this flag makes listclass print a list of all
  * classes which the target class depends on.  Generated from getting all
  * CONSTANT_Class constants from the constant pool.</li>
  * 
- * <li><tt>-exclude</tt>  All non-flag arguments after this flag are added to an
+ * <li>{@code -exclude}  All non-flag arguments after this flag are added to an
  * 'exclusion list'.  Target classes are compared with the members of the
  * exclusion list.  Any target class whose fully qualified name begins with a
  * name in the exclusion list will not be analyzed/listed.  This is meant
- * primarily when using both <tt>-recurse</tt> to exclude java, javax, and sun classes,
- * and is recommended as otherwise the output from <tt>-recurse</tt> gets quite long and
- * most of it is not interesting.  Note that <tt>-exclude</tt> prevents listing of
+ * primarily when using both {@code -recurse} to exclude java, javax, and sun classes,
+ * and is recommended as otherwise the output from {@code -recurse} gets quite long and
+ * most of it is not interesting.  Note that {@code -exclude} prevents listing of
  * classes, it does not prevent class names from being printed in the
- * <tt>-dependencies</tt> list.</li>
- * <li><tt>-nocontents</tt> Do not print JavaClass.toString() for the class. I added
+ * {@code -dependencies} list.</li>
+ * <li>{@code -nocontents} Do not print JavaClass.toString() for the class. I added
  * this because sometimes I'm only interested in dependency information.</li>
  * </ul>
  * <p>Here's a couple examples of how I typically use listclass:<br>
