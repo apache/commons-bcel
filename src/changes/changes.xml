@@ -246,6 +246,10 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-174" type="fix">
         Verification of interfaces with default methods fails with Java 8
       </action>
+      <action issue="BCEL-177" type="fix" dev="markt">
+        When reading the number of parameters in a MethodParameters structure
+        only read a single byte as per the JVM specification.
+      </action>
     </release>
   </body>
 </document>

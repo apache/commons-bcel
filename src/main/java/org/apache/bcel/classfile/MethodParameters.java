@@ -12,7 +12,7 @@
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
- *  limitations under the License. 
+ *  limitations under the License.
  */
 
 package org.apache.bcel.classfile;
@@ -25,7 +25,7 @@ import org.apache.bcel.Constants;
 
 /**
  * This class represents a MethodParameters attribute.
- * 
+ *
  * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.24">The class File Format : The MethodParameters Attribute</a>
  * @since 6.0
  */
@@ -39,7 +39,7 @@ public class MethodParameters extends Attribute {
         super(Constants.ATTR_METHOD_PARAMETERS, name_index, length, constant_pool);
         System.out.println("new MethodParameters");
 
-        int parameters_count = file.readUnsignedShort();
+        int parameters_count = file.readUnsignedByte();
         parameters = new MethodParameter[parameters_count];
         for (int i = 0; i < parameters_count; i++) {
             parameters[i] = new MethodParameter(file);
