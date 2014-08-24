@@ -648,18 +648,24 @@ public abstract class Utility {
      * A returntype signature represents the return value from a method.
      * It is a series of bytes in the following grammar:
      *
-     * <return_signature> ::= <field_type> | V
+     * <pre>
+     * &lt;return_signature&gt; ::= &lt;field_type&gt; | V
+     * </pre>
      *
      * The character V indicates that the method returns no value. Otherwise, the
      * signature indicates the type of the return value.
      * An argument signature represents an argument passed to a method:
      *
-     * <argument_signature> ::= <field_type>
+     * <pre>
+     * &lt;argument_signature&gt; ::= &lt;field_type&gt;
+     * </pre>
      *
      * A method signature represents the arguments that the method expects, and
      * the value that it returns.
-     * <method_signature> ::= (<arguments_signature>) <return_signature>
-     * <arguments_signature>::= <argument_signature>*
+     * <pre>
+     * &lt;method_signature&gt; ::= (&lt;arguments_signature&gt;) &lt;return_signature&gt;
+     * &lt;arguments_signature&gt;::= &lt;argument_signature&gt;*
+     * </pre>
      *
      * This method converts such a string into a Java type declaration like
      * `void main(String[])' and throws a `ClassFormatException' when the parsed 
@@ -772,11 +778,11 @@ public abstract class Utility {
      * following grammar:
      *
      * <PRE>
-     * <field_signature> ::= <field_type>
-     * <field_type>      ::= <base_type>|<object_type>|<array_type>
-     * <base_type>       ::= B|C|D|F|I|J|S|Z
-     * <object_type>     ::= L<fullclassname>;
-     * <array_type>      ::= [<field_type>
+     * &lt;field_signature&gt; ::= &lt;field_type&gt;
+     * &lt;field_type&gt;      ::= &lt;base_type&gt;|&lt;object_type&gt;|&lt;array_type&gt;
+     * &lt;base_type&gt;       ::= B|C|D|F|I|J|S|Z
+     * &lt;object_type&gt;     ::= L&lt;fullclassname&gt;;
+     * &lt;array_type&gt;      ::= [&lt;field_type&gt;
      *
      * The meaning of the base types is as follows:
      * B byte signed byte
@@ -785,10 +791,10 @@ public abstract class Utility {
      * F float single precision IEEE float
      * I int integer
      * J long long integer
-     * L<fullclassname>; ... an object of the given class
+     * L&lt;fullclassname&gt;; ... an object of the given class
      * S short signed short
      * Z boolean true or false
-     * [<field sig> ... array
+     * [&lt;field sig&gt; ... array
      * </PRE>
      *
      * This method converts this string into a Java type declaration such as
@@ -1168,16 +1174,18 @@ public abstract class Utility {
     }
 
 
-    /** Encode byte array it into Java identifier string, i.e., a string
+    /**
+     * Encode byte array it into Java identifier string, i.e., a string
      * that only contains the following characters: (a, ... z, A, ... Z,
      * 0, ... 9, _, $).  The encoding algorithm itself is not too
      * clever: if the current byte's ASCII value already is a valid Java
      * identifier part, leave it as it is. Otherwise it writes the
-     * escape character($) followed by <p><ul><li> the ASCII value as a
-     * hexadecimal string, if the value is not in the range
-     * 200..247</li> <li>a Java identifier char not used in a lowercase
-     * hexadecimal string, if the value is in the range
-     * 200..247</li><ul></p>
+     * escape character($) followed by:
+     * 
+     * <ul>
+     *   <li> the ASCII value as a hexadecimal string, if the value is not in the range 200..247</li>
+     *   <li>a Java identifier char not used in a lowercase hexadecimal string, if the value is in the range 200..247</li>
+     * </ul>
      *
      * <p>This operation inflates the original byte array by roughly 40-50%</p>
      *
@@ -1206,7 +1214,8 @@ public abstract class Utility {
     }
 
 
-    /** Decode a string back to a byte array.
+    /**
+     * Decode a string back to a byte array.
      *
      * @param s the string to convert
      * @param uncompress use gzip to uncompress the stream of bytes
@@ -1264,7 +1273,8 @@ public abstract class Utility {
         MAP_CHAR['_'] = j;
     }
 
-    /** Decode characters into bytes.
+    /**
+     * Decode characters into bytes.
      * Used by <a href="Utility.html#decode(java.lang.String, boolean)">decode()</a>
      */
     private static class JavaReader extends FilterReader {
@@ -1308,7 +1318,8 @@ public abstract class Utility {
         }
     }
 
-    /** Encode bytes into valid java identifier characters.
+    /**
+     * Encode bytes into valid java identifier characters.
      * Used by <a href="Utility.html#encode(byte[], boolean)">encode()</a>
      */
     private static class JavaWriter extends FilterWriter {

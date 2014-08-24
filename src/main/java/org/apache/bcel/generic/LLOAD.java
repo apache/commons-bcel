@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /** 
  * LLOAD - Load long from local variable
- *<PRE>Stack ... -&GT; ..., result.word1, result.word2</PRE>
+ *<PRE>Stack ... -&gt; ..., result.word1, result.word2</PRE>
  *
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>

@@ -18,7 +18,7 @@
 package org.apache.bcel.generic;
 
 /** 
- * FCMPL - Compare floats: value1 < value2
+ * FCMPL - Compare floats: value1 &lt; value2
  * <PRE>Stack: ..., value1, value2 -&gt; ..., result</PRE>
  *
  * @version $Id$

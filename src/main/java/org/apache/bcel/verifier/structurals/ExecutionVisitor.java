@@ -31,7 +31,8 @@ import org.apache.bcel.generic.*;
 /**
  * This Visitor class may be used for a type-based Java Virtual Machine
  * simulation.
- * It does not check for correct types on the OperandStack or in the
+ * 
+ * <p>It does not check for correct types on the OperandStack or in the
  * LocalVariables; nor does it check their sizes are sufficiently big.
  * Thus, to use this Visitor for bytecode verifying, you have to make sure
  * externally that the type constraints of the Java Virtual Machine instructions
@@ -40,16 +41,17 @@ import org.apache.bcel.generic.*;
  * visitIADD(IADD o), then there are two stack slots popped and one
  * stack slot containing a Type.INT is pushed (where you could also
  * pop only one slot if you know there are two Type.INT on top of the
- * stack). Monitor-specific behaviour is not simulated.
+ * stack). Monitor-specific behaviour is not simulated.</p>
  * 
- * </P><B>Conventions:</B>
+ * <b>Conventions:</b>
  *
- * Type.VOID will never be pushed onto the stack. Type.DOUBLE and Type.LONG
+ * <p>Type.VOID will never be pushed onto the stack. Type.DOUBLE and Type.LONG
  * that would normally take up two stack slots (like Double_HIGH and
  * Double_LOW) are represented by a simple single Type.DOUBLE or Type.LONG
- * object on the stack here.
- * If a two-slot type is stored into a local variable, the next variable
- * is given the type Type.UNKNOWN.
+ * object on the stack here.</p>
+ * 
+ * <p>If a two-slot type is stored into a local variable, the next variable
+ * is given the type Type.UNKNOWN.</p>
  *
  * @version $Id$
  * @author Enver Haase

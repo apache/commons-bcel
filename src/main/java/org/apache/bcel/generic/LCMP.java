@@ -19,8 +19,8 @@ package org.apache.bcel.generic;
 
 /**
  * LCMP - Compare longs:
- * <PRE>Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt;</PRE>
- *        ..., result <= -1, 0, 1>
+ * <PRE>Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt; ..., result &lt;= -1, 0, 1&gt;</PRE>
+ *        
  *
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>

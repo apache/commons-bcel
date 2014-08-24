@@ -1123,8 +1123,7 @@ public class InstructionList implements Serializable {
     /**
      * Delete contents of list. Provides besser memory utilization,
      * because the system then may reuse the instruction handles. This
-     * method is typically called right after
-     * <href="MethodGen.html#getMethod()">MethodGen.getMethod()</a>.
+     * method is typically called right after {@link MethodGen#getMethod()}.
      */
     public void dispose() {
         // Traverse in reverse order, because ih.next is overwritten
