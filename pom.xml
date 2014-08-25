@@ -141,25 +141,15 @@
   <mailingLists>
     <mailingList>
       <name>BCEL User List</name>
-      <subscribe>
-                user-subscribe@commons.apache.org
-            </subscribe>
-      <unsubscribe>
-                user-unsubscribe@commons.apache.org
-            </unsubscribe>
-      <archive>
-                http://mail-archives.apache.org/mod_mbox/commons-user/
-            </archive>
+      <subscribe>user-subscribe@commons.apache.org</subscribe>
+      <unsubscribe>user-unsubscribe@commons.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/commons-user/</archive>
     </mailingList>
     <mailingList>
       <name>BCEL Developer List</name>
       <subscribe>dev-subscribe@commons.apache.org</subscribe>
-      <unsubscribe>
-                dev-unsubscribe@commons.apache.org
-            </unsubscribe>
-      <archive>
-                http://mail-archives.apache.org/mod_mbox/commons-dev/
-            </archive>
+      <unsubscribe>dev-unsubscribe@commons.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/commons-dev/</archive>
     </mailingList>
   </mailingLists>
 
@@ -169,12 +159,8 @@
   </issueManagement>
 
   <scm>
-    <connection>
-            scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk
-        </connection>
-    <developerConnection>
-            scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk
-        </developerConnection>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</connection>
+    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</developerConnection>
     <url>http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</url>
   </scm>
 

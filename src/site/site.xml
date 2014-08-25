@@ -19,13 +19,13 @@
 -->
 <project name="Apache Commons BCEL&amp;trade;">
 
-    <bannerRight>
-        <name>Commons BCEL</name>
-        <src>/images/logo.gif</src>
-        <href>/index.html</href>
-    </bannerRight>
+  <bannerRight>
+    <name>Commons BCEL</name>
+    <src>/images/logo.gif</src>
+    <href>/index.html</href>
+  </bannerRight>
 
-  <publishDate format="dd MMM yyyy" />
+  <publishDate format="dd MMM yyyy"/>
 
   <body>
 
