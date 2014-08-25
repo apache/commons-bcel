@@ -267,7 +267,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
     /**
      * Hunts for a signature attribute on the member and returns its contents.  So where the 'regular' signature
-     * may be (Ljava/util/Vector;)V the signature attribute may in fact say 'Ljava/lang/Vector<Ljava/lang/String>;'
+     * may be (Ljava/util/Vector;)V the signature attribute may in fact say 'Ljava/lang/Vector&lt;Ljava/lang/String&gt;;'
      * Coded for performance - searches for the attribute only when requested - only searches for it once.
      */
     public final String getGenericSignature()

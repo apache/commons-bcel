@@ -382,7 +382,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     /**
      * Create binary operation for simple basic types, such as int and float.
      *
-     * @param op operation, such as "+", "*", "<<", etc.
+     * @param op operation, such as "+", "*", "&lt;&lt;", etc.
      */
     public static ArithmeticInstruction createBinaryOperation( String op, Type type ) {
         char first = op.toCharArray()[0];

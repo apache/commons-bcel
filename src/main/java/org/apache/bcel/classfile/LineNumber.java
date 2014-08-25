@@ -34,12 +34,17 @@ import java.io.Serializable;
 public final class LineNumber implements Cloneable, Node, Serializable {
 
     private static final long serialVersionUID = 169537400672820016L;
-    private short start_pc; // Program Counter (PC) corresponds to line
-    private short line_number; // number in source file
-
+    
+    /** Program Counter (PC) corresponds to line */
+    private short start_pc;
+    
+    /** number in source file */
+    private short line_number;
 
     /**
      * Initialize from another object.
+     * 
+     * @param c the object to copy
      */
     public LineNumber(LineNumber c) {
         this(c.getStartPC(), c.getLineNumber());
@@ -48,8 +53,8 @@ public final class LineNumber implements Cloneable, Node, Serializable {
 
     /**
      * Construct object from file stream.
+     * 
      * @param file Input stream
-     * @throws IOException
      */
     LineNumber(DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort());
@@ -82,7 +87,6 @@ public final class LineNumber implements Cloneable, Node, Serializable {
      * Dump line number/pc pair to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
      */
     public final void dump( DataOutputStream file ) throws IOException {
         file.writeShort(start_pc);

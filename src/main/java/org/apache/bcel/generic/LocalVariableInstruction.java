@@ -117,7 +117,9 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
     /**
      * Read needed data (e.g. index) from file.
-     * PRE: (ILOAD <= tag <= ALOAD_3) || (ISTORE <= tag <= ASTORE_3)
+     * <pre>
+     * (ILOAD &lt;= tag &lt;= ALOAD_3) || (ISTORE &lt;= tag &lt;= ASTORE_3)
+     * </pre>
      */
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {

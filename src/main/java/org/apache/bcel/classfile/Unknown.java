@@ -27,12 +27,10 @@ import org.apache.bcel.Constants;
 /**
  * This class represents a reference to an unknown (i.e.,
  * application-specific) attribute of a class.  It is instantiated from the
- * <em>Attribute.readAttribute()</em> method.  Applications that need to
- * read in application-specific attributes should create an <a
- * href="./AttributeReader.html">AttributeReader</a> implementation and
- * attach it via <a
- * href="./Attribute.html#addAttributeReader(java.lang.String,
- * org.apache.bcel.classfile.AttributeReader)">Attribute.addAttributeReader</a>.
+ * {@link Attribute#readAttribute(java.io.DataInputStream, ConstantPool)} method.
+ * Applications that need to read in application-specific attributes should create an
+ * {@link AttributeReader} implementation and attach it via
+ * {@link Attribute#addAttributeReader(String, AttributeReader)}.
 
  *
  * @version $Id$

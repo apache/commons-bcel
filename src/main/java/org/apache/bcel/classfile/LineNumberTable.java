@@ -97,7 +97,6 @@ public final class LineNumberTable extends Attribute {
      * Dump line number table attribute to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
      */
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
