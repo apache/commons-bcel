@@ -45,8 +45,8 @@ import org.apache.bcel.Constants;
 public final class ClassParser {
 
     private DataInputStream file;
-    private boolean fileOwned;
-    private String file_name;
+    private final boolean fileOwned;
+    private final String file_name;
     private String zip_file;
     private int class_name_index, superclass_name_index;
     private int major, minor; // Compiler version
