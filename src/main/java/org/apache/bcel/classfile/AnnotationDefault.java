@@ -32,7 +32,8 @@ import org.apache.bcel.Constants;
 public class AnnotationDefault extends Attribute
 {
         private static final long serialVersionUID = -4017327188724019487L;
-    ElementValue default_value;
+
+        private ElementValue default_value;
 
         /**
          * @param name_index
