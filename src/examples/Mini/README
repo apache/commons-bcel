@@ -1,28 +1,28 @@
-			Mini-Mini tutorial
-			------------------
+            Mini-Mini tutorial
+            ------------------
 
 Mini is a very simple (semi-functional) language that I wrote to test
 the generic package of BCEL.
 
-	http://commons.apache.org/bcel/
+    http://commons.apache.org/bcel/
 
 Mini uses the JavaCC parser generator which comes precompiled from
 
-	http://www.webgain.com/products/java_cc/
+    http://www.webgain.com/products/java_cc/
 
 After  setting the  CLASSPATH to  the  directory  just above the  Mini
 directory, e.g.
 
-	% cd Mini
-	% setenv CLASSPATH $CLASSPATH:.:..
+    % cd Mini
+    % setenv CLASSPATH $CLASSPATH:.:..
 
 try the following:
 
-	% java Mini.MiniC max.mini
+    % java Mini.MiniC max.mini
 
 This produces a Java class file (max.class) which you can execute with
 
-	% java max
+    % java max
 
 Enter a number (4, eg.)  and you will be asked to enter 4 numbers. The
 program will then tell you the biggest of them.
@@ -30,7 +30,7 @@ program will then tell you the biggest of them.
 Alternatively you can  produce a  Java  file (max.java) which  will be
 translated automatically to a .class file.
 
-	% java Mini.MiniC -java max.mini
+    % java Mini.MiniC -java max.mini
 
 There are three    examples programs  (max.mini,  fac.mini,  fib.mini)
 provided  which  demonstrate the language  syntax  and should be quite
@@ -46,9 +46,9 @@ MiniC.java at line 85 and follow the recursive byte_code() calls.
 It's also useful to use  the listclass program provided with BCEL
 to examine the generated class. For example
 
-	% java listclass max.class
+    % java listclass max.class
 
 
 Send bug reports and suggestions to
 
-	m.dahm@gmx.de (Markus Dahm)
+    m.dahm@gmx.de (Markus Dahm)
