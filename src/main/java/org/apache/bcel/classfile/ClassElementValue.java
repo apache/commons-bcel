@@ -26,7 +26,7 @@ public class ClassElementValue extends ElementValue
     // For primitive types and string type, this points to the value entry in
     // the cpool
     // For 'class' this points to the class entry in the cpool
-    private int idx;
+    private final int idx;
 
     public ClassElementValue(int type, int idx, ConstantPool cpool)
     {
