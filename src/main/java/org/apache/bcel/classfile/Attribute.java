@@ -52,13 +52,13 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 {
     private static final long serialVersionUID = -1707826820310002955L;
 
-    protected int name_index; // Points to attribute name in constant pool
+    protected int name_index; // Points to attribute name in constant pool TODO make private (has getter & setter)
 
-    protected int length; // Content length of attribute field
+    protected int length; // Content length of attribute field TODO make private (has getter & setter)
 
-    protected byte tag; // Tag to distiguish subclasses
+    protected byte tag; // Tag to distinguish subclasses TODO make private & final; supposed to be immutable
 
-    protected ConstantPool constant_pool;
+    protected ConstantPool constant_pool; // TODO make private (has getter & setter)
 
     protected Attribute(byte tag, int name_index, int length,
             ConstantPool constant_pool)

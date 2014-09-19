@@ -29,7 +29,7 @@ import org.apache.bcel.Constants;
 public abstract class AccessFlags implements java.io.Serializable {
 
     private static final long serialVersionUID = 2845404654039163061L;
-    protected int access_flags;
+    protected int access_flags; // TODO make private (has getter & setter)
 
 
     public AccessFlags() {
