@@ -29,7 +29,7 @@ limitations under the License.
   <module name="NewlineAtEndOfFile" />
 
   <!-- Verify that EVERY source file has the appropriate license -->
-  <module name="Header">
+  <module name="RegexpHeader">
     <property name="headerFile" value="${checkstyle.header.file}" />
   </module>
 
