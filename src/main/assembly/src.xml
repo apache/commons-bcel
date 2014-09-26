@@ -26,6 +26,7 @@
       <includes>
         <include>checkstyle.xml</include>
         <include>LICENSE.txt</include>
+        <include>LICENSE-header.txt</include>
         <include>NOTICE.txt</include>
         <include>pmd.xml</include>
         <include>pom.xml</include>
