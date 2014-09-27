@@ -49,7 +49,7 @@ import java.util.List;
 public abstract class PassVerifier {
 
     /** The (warning) messages. */
-    private List<String> messages = new ArrayList<String>();
+    private final List<String> messages = new ArrayList<String>();
     /** The VerificationResult cache. */
     private VerificationResult verificationResult = null;
 

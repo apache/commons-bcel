@@ -62,17 +62,17 @@ public class ControlFlowGraph{
         /**
          * The InstructionHandle this InstructionContext is wrapped around.
          */
-        private InstructionHandle instruction;
+        private final InstructionHandle instruction;
 
         /**
          * The 'incoming' execution Frames.
          */
-        private Map<InstructionContext, Frame> inFrames;    // key: the last-executed JSR
+        private final Map<InstructionContext, Frame> inFrames;    // key: the last-executed JSR
 
         /**
          * The 'outgoing' execution Frames.
          */
-        private Map<InstructionContext, Frame> outFrames; // key: the last-executed JSR 
+        private final Map<InstructionContext, Frame> outFrames; // key: the last-executed JSR 
 
         /**
          * The 'execution predecessors' - a list of type InstructionContext 
@@ -395,7 +395,7 @@ public class ControlFlowGraph{
     private final ExceptionHandlers exceptionhandlers;
 
     /** All InstructionContext instances of this ControlFlowGraph. */
-    private Map<InstructionHandle, InstructionContext> instructionContexts = new HashMap<InstructionHandle, InstructionContext>(); //keys: InstructionHandle, values: InstructionContextImpl
+    private final Map<InstructionHandle, InstructionContext> instructionContexts = new HashMap<InstructionHandle, InstructionContext>(); //keys: InstructionHandle, values: InstructionContextImpl
 
     /** 
      * A Control Flow Graph.

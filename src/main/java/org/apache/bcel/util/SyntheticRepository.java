@@ -47,7 +47,7 @@ public class SyntheticRepository implements Repository {
     //private static final String DEFAULT_PATH = ClassPath.getClassPath();
     private static final Map<ClassPath, SyntheticRepository> _instances = new HashMap<ClassPath, SyntheticRepository>(); // CLASSPATH X REPOSITORY
     private ClassPath _path = null;
-    private Map<String, SoftReference<JavaClass>> _loadedClasses = new HashMap<String, SoftReference<JavaClass>>(); // CLASSNAME X JAVACLASS
+    private final Map<String, SoftReference<JavaClass>> _loadedClasses = new HashMap<String, SoftReference<JavaClass>>(); // CLASSNAME X JAVACLASS
 
 
     private SyntheticRepository(ClassPath path) {

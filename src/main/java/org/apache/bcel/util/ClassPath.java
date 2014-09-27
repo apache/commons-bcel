@@ -55,8 +55,8 @@ public class ClassPath implements Serializable {
         }
     };
 
-    private PathEntry[] paths;
-    private String class_path;
+    private final PathEntry[] paths;
+    private final String class_path;
     private ClassPath parent;
 
     public ClassPath(ClassPath parent, String class_path) {
@@ -401,7 +401,7 @@ public class ClassPath implements Serializable {
     private static class Dir extends PathEntry {
 
         private static final long serialVersionUID = 4374062802142373088L;
-        private String dir;
+        private final String dir;
 
 
         Dir(String d) {
@@ -476,7 +476,7 @@ public class ClassPath implements Serializable {
     private static class Zip extends PathEntry {
 
         private static final long serialVersionUID = -2210747632897905532L;
-        private ZipFile zip;
+        private final ZipFile zip;
 
 
         Zip(ZipFile z) {

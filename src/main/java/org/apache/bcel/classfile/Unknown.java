@@ -42,7 +42,7 @@ public final class Unknown extends Attribute {
 
     private static final long serialVersionUID = -4099655108069755015L;
     private byte[] bytes;
-    private String name;
+    private final String name;
     private static final Map<String, Unknown> unknown_attributes = new HashMap<String, Unknown>();
 
 

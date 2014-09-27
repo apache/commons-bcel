@@ -43,12 +43,12 @@ import org.apache.bcel.classfile.Utility;
  */
 final class CodeHTML implements org.apache.bcel.Constants {
 
-    private String class_name; // name of current class
+    private final String class_name; // name of current class
 //    private Method[] methods; // Methods to print
-    private PrintWriter file; // file to write to
+    private final PrintWriter file; // file to write to
     private BitSet goto_set;
-    private ConstantPool constant_pool;
-    private ConstantHTML constant_html;
+    private final ConstantPool constant_pool;
+    private final ConstantHTML constant_html;
     private static boolean wide = false;
 
 

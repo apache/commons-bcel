@@ -30,11 +30,11 @@ import org.apache.bcel.Constants;
  */
 public class ElementValuePair
 {
-    private ElementValue elementValue;
+    private final ElementValue elementValue;
 
-    private ConstantPool constantPool;
+    private final ConstantPool constantPool;
 
-    private int elementNameIndex;
+    private final int elementNameIndex;
 
     public ElementValuePair(int elementNameIndex, ElementValue elementValue,
             ConstantPool constantPool)

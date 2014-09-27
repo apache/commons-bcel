@@ -30,7 +30,7 @@ import java.io.DataInputStream;
  */
 public final class ByteSequence extends DataInputStream {
 
-    private ByteArrayStream byteStream;
+    private final ByteArrayStream byteStream;
 
 
     public ByteSequence(byte[] bytes) {

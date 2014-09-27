@@ -37,10 +37,10 @@ import org.apache.bcel.classfile.Utility;
  */
 final class MethodHTML implements org.apache.bcel.Constants {
 
-    private String class_name; // name of current class
-    private PrintWriter file; // file to write to
-    private ConstantHTML constant_html;
-    private AttributeHTML attribute_html;
+    private final String class_name; // name of current class
+    private final PrintWriter file; // file to write to
+    private final ConstantHTML constant_html;
+    private final AttributeHTML attribute_html;
 
 
     MethodHTML(String dir, String class_name, Method[] methods, Field[] fields,

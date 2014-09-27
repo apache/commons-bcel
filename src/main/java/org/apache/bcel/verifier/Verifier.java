@@ -55,9 +55,9 @@ public class Verifier {
     /** A Pass2Verifier for this Verifier instance. */
     private Pass2Verifier p2v;
     /** The Pass3aVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
-    private Map<String, Pass3aVerifier> p3avs = new HashMap<String, Pass3aVerifier>();
+    private final Map<String, Pass3aVerifier> p3avs = new HashMap<String, Pass3aVerifier>();
     /** The Pass3bVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
-    private Map<String, Pass3bVerifier> p3bvs = new HashMap<String, Pass3bVerifier>();
+    private final Map<String, Pass3bVerifier> p3bvs = new HashMap<String, Pass3bVerifier>();
 
 
     /** Returns the VerificationResult for the given pass. */

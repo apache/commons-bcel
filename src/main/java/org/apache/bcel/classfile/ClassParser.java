@@ -56,7 +56,7 @@ public final class ClassParser {
     private Field[] fields; // class fields, i.e., its variables
     private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
-    private boolean is_zip; // Loaded from zip file
+    private final boolean is_zip; // Loaded from zip file
     private static final int BUFSIZE = 8192;
 
 

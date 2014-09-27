@@ -40,13 +40,13 @@ import org.apache.bcel.classfile.Utility;
  */
 final class ConstantHTML implements org.apache.bcel.Constants {
 
-    private String class_name; // name of current class
-    private String class_package; // name of package
-    private ConstantPool constant_pool; // reference to constant pool
-    private PrintWriter file; // file to write to
-    private String[] constant_ref; // String to return for cp[i]
-    private Constant[] constants; // The constants in the cp
-    private Method[] methods;
+    private final String class_name; // name of current class
+    private final String class_package; // name of package
+    private final ConstantPool constant_pool; // reference to constant pool
+    private final PrintWriter file; // file to write to
+    private final String[] constant_ref; // String to return for cp[i]
+    private final Constant[] constants; // The constants in the cp
+    private final Method[] methods;
 
 
     ConstantHTML(String dir, String class_name, String class_package, Method[] methods,

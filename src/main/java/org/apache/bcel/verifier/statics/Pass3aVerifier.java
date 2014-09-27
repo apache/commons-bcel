@@ -112,14 +112,14 @@ import org.apache.bcel.verifier.exc.StaticCodeInstructionOperandConstraintExcept
 public final class Pass3aVerifier extends PassVerifier{
 
     /** The Verifier that created this. */
-    private Verifier myOwner;
+    private final Verifier myOwner;
 
     /** 
      * The method number to verify.
      * This is the index in the array returned
      * by JavaClass.getMethods().
      */
-    private int method_no;
+    private final int method_no;
 
     /** The one and only InstructionList object used by an instance of this class. It's here for performance reasons by do_verify() and its callees. */    
     InstructionList instructionList;
@@ -444,7 +444,7 @@ public final class Pass3aVerifier extends PassVerifier{
      */
     private class InstOperandConstraintVisitor extends org.apache.bcel.generic.EmptyVisitor{
         /** The ConstantPoolGen instance this Visitor operates on. */
-        private ConstantPoolGen cpg;
+        private final ConstantPoolGen cpg;
 
         /** The only Constructor. */
         InstOperandConstraintVisitor(ConstantPoolGen cpg){

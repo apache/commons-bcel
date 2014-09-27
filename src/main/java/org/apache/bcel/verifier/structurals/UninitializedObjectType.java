@@ -34,7 +34,7 @@ public class UninitializedObjectType extends ReferenceType implements Constants{
 
     private static final long serialVersionUID = -1228341777713117641L;
     /** The "initialized" version. */
-    private ObjectType initialized;
+    private final ObjectType initialized;
 
     /** Creates a new instance. */
     public UninitializedObjectType(ObjectType t){

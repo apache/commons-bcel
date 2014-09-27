@@ -29,11 +29,11 @@ import java.util.Stack;
  */
 public class DescendingVisitor implements Visitor
 {
-    private JavaClass clazz;
+    private final JavaClass clazz;
 
-    private Visitor visitor;
+    private final Visitor visitor;
 
-    private Stack<Object> stack = new Stack<Object>();
+    private final Stack<Object> stack = new Stack<Object>();
 
     /**
      * @return container of current entitity, i.e., predecessor during traversal

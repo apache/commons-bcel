@@ -24,9 +24,9 @@ import org.apache.bcel.Constants;
 public class EnumElementValue extends ElementValue
 {
     // For enum types, these two indices point to the type and value
-    private int typeIdx;
+    private final int typeIdx;
 
-    private int valueIdx;
+    private final int valueIdx;
 
     public EnumElementValue(int type, int typeIdx, int valueIdx,
             ConstantPool cpool)

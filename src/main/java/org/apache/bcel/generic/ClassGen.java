@@ -48,16 +48,17 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private static final long serialVersionUID = 6880879387392827211L;
     /* Corresponds to the fields found in a JavaClass object.
      */
-    private String class_name, super_class_name, file_name;
+    private String class_name, super_class_name;
+    private final String file_name;
     private int class_name_index = -1, superclass_name_index = -1;
     private int major = Constants.MAJOR_1_1, minor = Constants.MINOR_1_1;
     private ConstantPoolGen cp; // Template for building up constant pool
     // ArrayLists instead of arrays to gather fields, methods, etc.
-    private List<Field> field_vec = new ArrayList<Field>();
-    private List<Method> method_vec = new ArrayList<Method>();
-    private List<Attribute> attribute_vec = new ArrayList<Attribute>();
-    private List<String> interface_vec = new ArrayList<String>();
-    private List<AnnotationEntryGen> annotation_vec = new ArrayList<AnnotationEntryGen>();
+    private final List<Field> field_vec = new ArrayList<Field>();
+    private final List<Method> method_vec = new ArrayList<Method>();
+    private final List<Attribute> attribute_vec = new ArrayList<Attribute>();
+    private final List<String> interface_vec = new ArrayList<String>();
+    private final List<AnnotationEntryGen> annotation_vec = new ArrayList<AnnotationEntryGen>();
 
     private static BCELComparator _cmp = new BCELComparator() {
 

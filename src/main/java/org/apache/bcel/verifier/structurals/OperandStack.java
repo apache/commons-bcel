@@ -39,7 +39,7 @@ public class OperandStack{
     private ArrayList<Type> stack = new ArrayList<Type>();
 
     /** The maximum number of stack slots this OperandStack instance may hold. */
-    private int maxStack;
+    private final int maxStack;
 
     /**
      * Creates an empty stack with a maximum of maxStack slots.

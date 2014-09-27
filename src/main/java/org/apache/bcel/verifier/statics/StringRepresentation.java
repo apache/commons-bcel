@@ -77,7 +77,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     /** The string representation, created by a visitXXX() method, output by toString(). */
     private String tostring;
     /** The node we ask for its string representation. Not really needed; only for debug output. */
-    private Node n;
+    private final Node n;
 
     /**
      * Creates a new StringRepresentation object which is the representation of n.

@@ -93,7 +93,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
     private LocalVariablesInfo[] localVariablesInfos;
 
     /** The Verifier that created this. */
-    private Verifier myOwner;
+    private final Verifier myOwner;
 
     /**
      * Should only be instantiated by a Verifier.
@@ -307,28 +307,28 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
    * @see #constant_pool_entries_satisfy_static_constraints()
      */
     private class CPESSC_Visitor extends org.apache.bcel.classfile.EmptyVisitor{
-        private Class<?> CONST_Class;
+        private final Class<?> CONST_Class;
         /*
         private Class<?> CONST_Fieldref;
         private Class<?> CONST_Methodref;
         private Class<?> CONST_InterfaceMethodref;
         */
-        private Class<?> CONST_String;
-        private Class<?> CONST_Integer;
-        private Class<?> CONST_Float;
-        private Class<?> CONST_Long;
-        private Class<?> CONST_Double;
-        private Class<?> CONST_NameAndType;
-        private Class<?> CONST_Utf8;
+        private final Class<?> CONST_String;
+        private final Class<?> CONST_Integer;
+        private final Class<?> CONST_Float;
+        private final Class<?> CONST_Long;
+        private final Class<?> CONST_Double;
+        private final Class<?> CONST_NameAndType;
+        private final Class<?> CONST_Utf8;
 
         private final JavaClass jc;
         private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work and computing power.
         private final int cplen; // == cp.getLength() -- to save computing power.
-        private DescendingVisitor carrier;
+        private final DescendingVisitor carrier;
 
-        private Set<String> field_names = new HashSet<String>();
-        private Set<String> field_names_and_desc = new HashSet<String>();
-        private Set<String> method_names_and_desc = new HashSet<String>();
+        private final Set<String> field_names = new HashSet<String>();
+        private final Set<String> field_names_and_desc = new HashSet<String>();
+        private final Set<String> method_names_and_desc = new HashSet<String>();
 
         private CPESSC_Visitor(JavaClass _jc){
             jc = _jc;
@@ -1442,8 +1442,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
      */
     private static class InnerClassDetector extends EmptyVisitor{
         private boolean hasInnerClass = false;
-        private JavaClass jc;
-        private ConstantPool cp;
+        private final JavaClass jc;
+        private final ConstantPool cp;
 
         /** Constructs an InnerClassDetector working on the JavaClass _jc. */
         public InnerClassDetector(JavaClass _jc){

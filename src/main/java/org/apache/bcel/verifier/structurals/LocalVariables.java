@@ -32,7 +32,7 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  */
 public class LocalVariables{
     /** The Type[] containing the local variable slots. */
-    private Type[] locals;
+    private final Type[] locals;
 
     /**
      * Creates a new LocalVariables object.

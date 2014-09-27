@@ -40,12 +40,12 @@ public class Frame{
     /**
      *
      */
-    private LocalVariables locals;
+    private final LocalVariables locals;
 
     /**
      *
      */
-    private OperandStack stack;
+    private final OperandStack stack;
 
     /**
      *

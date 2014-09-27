@@ -69,11 +69,11 @@ public class MethodGen extends FieldGenOrMethodGen {
     private int max_stack;
     private InstructionList il;
     private boolean strip_attributes;
-    private List<LocalVariableGen> variable_vec = new ArrayList<LocalVariableGen>();
-    private List<LineNumberGen> line_number_vec = new ArrayList<LineNumberGen>();
-    private List<CodeExceptionGen> exception_vec = new ArrayList<CodeExceptionGen>();
-    private List<String> throws_vec = new ArrayList<String>();
-    private List<Attribute> code_attrs_vec = new ArrayList<Attribute>();
+    private final List<LocalVariableGen> variable_vec = new ArrayList<LocalVariableGen>();
+    private final List<LineNumberGen> line_number_vec = new ArrayList<LineNumberGen>();
+    private final List<CodeExceptionGen> exception_vec = new ArrayList<CodeExceptionGen>();
+    private final List<String> throws_vec = new ArrayList<String>();
+    private final List<Attribute> code_attrs_vec = new ArrayList<Attribute>();
 
     private List<AnnotationEntryGen>[] param_annotations; // Array of lists containing AnnotationGen objects
     private boolean hasParameterAnnotations = false;

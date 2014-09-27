@@ -47,7 +47,7 @@ public final class Pass1Verifier extends PassVerifier{
     /**
      * The Verifier that created this.
      */
-    private Verifier myOwner;
+    private final Verifier myOwner;
 
     /** Used to load in and return the myOwner-matching JavaClass object when needed. Avoids loading in a class file when it's not really needed! */
     private JavaClass getJavaClass(){

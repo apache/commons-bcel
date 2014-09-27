@@ -79,8 +79,8 @@ public final class Pass3bVerifier extends PassVerifier{
      * we have about its symbolic execution predecessors.
      */
     private static final class InstructionContextQueue{
-        private List<InstructionContext> ics = new Vector<InstructionContext>();
-        private List<ArrayList<InstructionContext>> ecs = new Vector<ArrayList<InstructionContext>>();
+        private final List<InstructionContext> ics = new Vector<InstructionContext>();
+        private final List<ArrayList<InstructionContext>> ecs = new Vector<ArrayList<InstructionContext>>();
         public void add(InstructionContext ic, ArrayList<InstructionContext> executionChain){
             ics.add(ic);
             ecs.add(executionChain);
@@ -107,10 +107,10 @@ public final class Pass3bVerifier extends PassVerifier{
     private static final boolean DEBUG = true;
 
     /** The Verifier that created this. */
-    private Verifier myOwner;
+    private final Verifier myOwner;
 
     /** The method number to verify. */
-    private int method_no;
+    private final int method_no;
 
     /**
      * This class should only be instantiated by a Verifier.

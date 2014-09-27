@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class IntList{
     /** The int are stored as Integer objects here. */
-    private List<Integer> theList;
+    private final List<Integer> theList;
     /** This constructor creates an empty list. */
     IntList(){
         theList = new ArrayList<Integer>();

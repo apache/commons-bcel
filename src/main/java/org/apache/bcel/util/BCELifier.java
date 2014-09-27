@@ -48,9 +48,9 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     private static final int FLAG_FOR_UNKNOWN = -1;
     private static final int FLAG_FOR_CLASS = 0;
     private static final int FLAG_FOR_METHOD = 1;
-    private JavaClass _clazz;
-    private PrintWriter _out;
-    private ConstantPoolGen _cp;
+    private final JavaClass _clazz;
+    private final PrintWriter _out;
+    private final ConstantPoolGen _cp;
 
 
     /** @param clazz Java class to "decompile"

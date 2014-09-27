@@ -34,9 +34,9 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
 public class LocalVariableInfo{
 
     /** The types database. KEY: String representing the offset integer. */
-    private Hashtable<String, Type> types = new Hashtable<String, Type>();
+    private final Hashtable<String, Type> types = new Hashtable<String, Type>();
     /** The names database. KEY: String representing the offset integer. */
-    private Hashtable<String, String> names = new Hashtable<String, String>();
+    private final Hashtable<String, String> names = new Hashtable<String, String>();
 
     /**
      * Adds a name of a local variable and a certain slot to our 'names'

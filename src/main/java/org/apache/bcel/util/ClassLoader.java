@@ -57,8 +57,8 @@ public class ClassLoader extends java.lang.ClassLoader {
     public static final String[] DEFAULT_IGNORED_PACKAGES = {
             "java.", "javax.", "sun."
     };
-    private Hashtable<String, Class<?>> classes = new Hashtable<String, Class<?>>(); // Hashtable is synchronized thus thread-safe
-    private String[] ignored_packages;
+    private final Hashtable<String, Class<?>> classes = new Hashtable<String, Class<?>>(); // Hashtable is synchronized thus thread-safe
+    private final String[] ignored_packages;
     private Repository repository = SyntheticRepository.getInstance();
 
 

@@ -35,8 +35,8 @@ import org.apache.bcel.Constants;
  */
 public class ParameterAnnotationEntry implements Node, Constants {
 
-    private int annotation_table_length;
-    private AnnotationEntry[] annotation_table;
+    private final int annotation_table_length;
+    private final AnnotationEntry[] annotation_table;
 
 
     /**

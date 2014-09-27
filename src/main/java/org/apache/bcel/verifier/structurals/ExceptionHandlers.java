@@ -38,7 +38,7 @@ public class ExceptionHandlers{
      * The ExceptionHandler instances.
      * Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
      */
-    private Map<InstructionHandle, Set<ExceptionHandler>> exceptionhandlers;
+    private final Map<InstructionHandle, Set<ExceptionHandler>> exceptionhandlers;
 
     /**
      * Constructor. Creates a new ExceptionHandlers instance.

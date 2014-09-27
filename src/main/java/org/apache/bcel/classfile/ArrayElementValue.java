@@ -23,7 +23,7 @@ import java.io.IOException;
 public class ArrayElementValue extends ElementValue
 {
     // For array types, this is the array
-    private ElementValue[] evalues;
+    private final ElementValue[] evalues;
 
     @Override
     public String toString()

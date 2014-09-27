@@ -45,11 +45,11 @@ import org.apache.bcel.classfile.Utility;
  */
 final class AttributeHTML implements org.apache.bcel.Constants {
 
-    private String class_name; // name of current class
-    private PrintWriter file; // file to write to
+    private final String class_name; // name of current class
+    private final PrintWriter file; // file to write to
     private int attr_count = 0;
-    private ConstantHTML constant_html;
-    private ConstantPool constant_pool;
+    private final ConstantHTML constant_html;
+    private final ConstantPool constant_pool;
 
 
     AttributeHTML(String dir, String class_name, ConstantPool constant_pool,

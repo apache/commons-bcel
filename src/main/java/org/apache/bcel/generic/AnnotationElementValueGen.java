@@ -25,7 +25,7 @@ import org.apache.bcel.classfile.ElementValue;
 public class AnnotationElementValueGen extends ElementValueGen
 {
     // For annotation element values, this is the annotation
-    private AnnotationEntryGen a;
+    private final AnnotationEntryGen a;
 
     public AnnotationElementValueGen(AnnotationEntryGen a, ConstantPoolGen cpool)
     {

@@ -53,8 +53,8 @@ import org.apache.bcel.classfile.Utility;
  */
 public class Class2HTML implements Constants {
 
-    private JavaClass java_class; // current class object
-    private String dir;
+    private final JavaClass java_class; // current class object
+    private final String dir;
     private static String class_package; // name of package, unclean to make it static, but ...
     private static String class_name; // name of current class, dito
     private static ConstantPool constant_pool;

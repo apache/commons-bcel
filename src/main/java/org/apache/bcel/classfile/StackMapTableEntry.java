@@ -38,7 +38,7 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int frame_type;
+    private final int frame_type;
     private int byte_code_offset_delta;
     private int number_of_locals;
     private StackMapType[] types_of_locals;

@@ -86,7 +86,7 @@ public class Subroutines{
         private int localVariable = UNSET;
 
         /** The instructions that belong to this subroutine. */
-        private Set<InstructionHandle> instructions = new HashSet<InstructionHandle>(); // Elements: InstructionHandle
+        private final Set<InstructionHandle> instructions = new HashSet<InstructionHandle>(); // Elements: InstructionHandle
 
         /*
          * Refer to the Subroutine interface for documentation.
@@ -99,7 +99,7 @@ public class Subroutines{
          * The JSR or JSR_W instructions that define this
          * subroutine by targeting it.
          */
-        private Set<InstructionHandle> theJSRs = new HashSet<InstructionHandle>();
+        private final Set<InstructionHandle> theJSRs = new HashSet<InstructionHandle>();
 
         /**
          * The RET instruction that leaves this subroutine.
@@ -345,7 +345,7 @@ public class Subroutines{
      * Key: InstructionHandle of the leader of the subroutine.
      * Elements: SubroutineImpl objects.
      */
-    private Map<InstructionHandle, Subroutine> subroutines = new HashMap<InstructionHandle, Subroutine>();
+    private final Map<InstructionHandle, Subroutine> subroutines = new HashMap<InstructionHandle, Subroutine>();
 
     /**
      * This is referring to a special subroutine, namely the

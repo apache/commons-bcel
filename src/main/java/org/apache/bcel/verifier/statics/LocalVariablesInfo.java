@@ -33,7 +33,7 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
 public class LocalVariablesInfo{
 
     /** The information about the local variables is stored here. */
-    private LocalVariableInfo[] localVariableInfos;
+    private final LocalVariableInfo[] localVariableInfos;
 
     /** The constructor. */
     LocalVariablesInfo(int max_locals){

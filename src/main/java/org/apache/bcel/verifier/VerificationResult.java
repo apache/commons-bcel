@@ -57,10 +57,10 @@ public class VerificationResult {
     public static final VerificationResult VR_OK = new VerificationResult(VERIFIED_OK, VERIFIED_OK_MSG);
 
     /** The numeric status. */
-    private int numeric;
+    private final int numeric;
 
     /** The detailed message. */
-    private String detailMessage;
+    private final String detailMessage;
 
 
     /** The usual constructor. */

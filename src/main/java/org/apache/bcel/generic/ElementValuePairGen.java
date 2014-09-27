@@ -27,9 +27,9 @@ public class ElementValuePairGen
 {
     private int nameIdx;
 
-    private ElementValueGen value;
+    private final ElementValueGen value;
 
-    private ConstantPoolGen cpool;
+    private final ConstantPoolGen cpool;
 
     public ElementValuePairGen(ElementValuePair nvp, ConstantPoolGen cpool,
             boolean copyPoolEntries)

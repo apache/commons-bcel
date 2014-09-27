@@ -34,7 +34,7 @@ public class AnnotationEntryGen
 
     private List<ElementValuePairGen> evs;
 
-    private ConstantPoolGen cpool;
+    private final ConstantPoolGen cpool;
 
     private boolean isRuntimeVisible = false;
 

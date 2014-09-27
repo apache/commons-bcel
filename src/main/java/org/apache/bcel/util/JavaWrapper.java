@@ -38,7 +38,7 @@ import java.lang.reflect.Modifier;
  */
 public class JavaWrapper {
 
-    private java.lang.ClassLoader loader;
+    private final java.lang.ClassLoader loader;
 
 
     private static java.lang.ClassLoader getClassLoader() {
