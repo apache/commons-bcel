@@ -19,8 +19,6 @@ package org.apache.bcel.verifier.structurals;
 
 
 import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.bcel.generic.InstructionHandle;
 
 /**
