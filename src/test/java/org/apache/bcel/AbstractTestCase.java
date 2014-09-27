@@ -39,7 +39,7 @@ import org.apache.bcel.util.SyntheticRepository;
 
 public abstract class AbstractTestCase extends TestCase
 {
-    private boolean verbose = false;
+    private final boolean verbose = false;
 
     protected File createTestdataFile(String name)
     {
