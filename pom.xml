@@ -107,6 +107,17 @@
       <email>jason at zenplex.com</email>
     </developer>
 
+    <developer>
+      <id>ggregory</id>
+      <name>Gary Gregory</name>
+      <email>ggregory@apache.org</email>
+      <organization>Rocket Software</organization>
+      <roles>
+        <role>PMC Member</role>
+      </roles>
+      <timezone>America/New_York</timezone>
+    </developer>
+
   </developers>
 
   <contributors>
