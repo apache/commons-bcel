@@ -63,6 +63,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-181" type="fix" dev="ggregory">
+        org.apache.bcel.util.ClassLoaderRepository.loadClass(String) leaks input streams.
+      </action>
       <action issue="BCEL-76" type="update">
         Add parent type processing for ClassPath class.
       </action>

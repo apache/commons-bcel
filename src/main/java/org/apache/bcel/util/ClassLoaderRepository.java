@@ -88,10 +88,14 @@ public class ClassLoaderRepository implements Repository {
             if (is == null) {
                 throw new ClassNotFoundException(className + " not found.");
             }
-            ClassParser parser = new ClassParser(is, className);
-            RC = parser.parse();
-            storeClass(RC);
-            return RC;
+            try {
+                ClassParser parser = new ClassParser(is, className);
+                RC = parser.parse();
+                storeClass(RC);
+                return RC;
+            } finally {
+                is.close();
+            }
         } catch (IOException e) {
             throw new ClassNotFoundException(className + " not found: " + e, e);
         }
