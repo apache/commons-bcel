@@ -63,18 +63,18 @@ public final class ClassParser {
     /**
      * Parse class from the given stream.
      *
-     * @param file Input stream
+     * @param inputStream Input stream
      * @param file_name File name
      */
-    public ClassParser(InputStream file, String file_name) {
+    public ClassParser(InputStream inputStream, String file_name) {
         this.file_name = file_name;
         fileOwned = false;
-        String clazz = file.getClass().getName(); // Not a very clean solution ...
+        String clazz = inputStream.getClass().getName(); // Not a very clean solution ...
         is_zip = clazz.startsWith("java.util.zip.") || clazz.startsWith("java.util.jar.");
-        if (file instanceof DataInputStream) {
-            this.file = (DataInputStream) file;
+        if (inputStream instanceof DataInputStream) {
+            this.file = (DataInputStream) inputStream;
         } else {
-            this.file = new DataInputStream(new BufferedInputStream(file, BUFSIZE));
+            this.file = new DataInputStream(new BufferedInputStream(inputStream, BUFSIZE));
         }
     }
 
