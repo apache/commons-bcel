@@ -44,7 +44,7 @@ import org.apache.bcel.Constants;
  */
 public final class ClassParser {
 
-    private DataInputStream file;
+    private DataInputStream dataInputStream;
     private final boolean fileOwned;
     private final String file_name;
     private String zip_file;
@@ -72,9 +72,9 @@ public final class ClassParser {
         String clazz = inputStream.getClass().getName(); // Not a very clean solution ...
         is_zip = clazz.startsWith("java.util.zip.") || clazz.startsWith("java.util.jar.");
         if (inputStream instanceof DataInputStream) {
-            this.file = (DataInputStream) inputStream;
+            this.dataInputStream = (DataInputStream) inputStream;
         } else {
-            this.file = new DataInputStream(new BufferedInputStream(inputStream, BUFSIZE));
+            this.dataInputStream = new DataInputStream(new BufferedInputStream(inputStream, BUFSIZE));
         }
     }
 
@@ -126,10 +126,10 @@ public final class ClassParser {
                         throw new IOException("File " + file_name + " not found");
                     }
 
-                    file = new DataInputStream(new BufferedInputStream(zip.getInputStream(entry),
+                    dataInputStream = new DataInputStream(new BufferedInputStream(zip.getInputStream(entry),
                             BUFSIZE));
                 } else {
-                    file = new DataInputStream(new BufferedInputStream(new FileInputStream(
+                    dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(
                             file_name), BUFSIZE));
                 }
             }
@@ -170,8 +170,8 @@ public final class ClassParser {
             // Read everything of interest, so close the file
             if (fileOwned) {
                 try {
-                    if (file != null) {
-                        file.close();
+                    if (dataInputStream != null) {
+                        dataInputStream.close();
                     }
                     if (zip != null) {
                         zip.close();
@@ -196,10 +196,10 @@ public final class ClassParser {
      */
     private void readAttributes() throws IOException, ClassFormatException {
         int attributes_count;
-        attributes_count = file.readUnsignedShort();
+        attributes_count = dataInputStream.readUnsignedShort();
         attributes = new Attribute[attributes_count];
         for (int i = 0; i < attributes_count; i++) {
-            attributes[i] = Attribute.readAttribute(file, constant_pool);
+            attributes[i] = Attribute.readAttribute(dataInputStream, constant_pool);
         }
     }
 
@@ -210,7 +210,7 @@ public final class ClassParser {
      * @throws  ClassFormatException
      */
     private void readClassInfo() throws IOException, ClassFormatException {
-        access_flags = file.readUnsignedShort();
+        access_flags = dataInputStream.readUnsignedShort();
         /* Interfaces are implicitely abstract, the flag should be set
          * according to the JVM specification.
          */
@@ -221,8 +221,8 @@ public final class ClassParser {
                 && ((access_flags & Constants.ACC_FINAL) != 0)) {
             throw new ClassFormatException("Class " + file_name + " can't be both final and abstract");
         }
-        class_name_index = file.readUnsignedShort();
-        superclass_name_index = file.readUnsignedShort();
+        class_name_index = dataInputStream.readUnsignedShort();
+        superclass_name_index = dataInputStream.readUnsignedShort();
     }
 
 
@@ -232,7 +232,7 @@ public final class ClassParser {
      * @throws  ClassFormatException
      */
     private void readConstantPool() throws IOException, ClassFormatException {
-        constant_pool = new ConstantPool(file);
+        constant_pool = new ConstantPool(dataInputStream);
     }
 
 
@@ -243,10 +243,10 @@ public final class ClassParser {
      */
     private void readFields() throws IOException, ClassFormatException {
         int fields_count;
-        fields_count = file.readUnsignedShort();
+        fields_count = dataInputStream.readUnsignedShort();
         fields = new Field[fields_count];
         for (int i = 0; i < fields_count; i++) {
-            fields[i] = new Field(file, constant_pool);
+            fields[i] = new Field(dataInputStream, constant_pool);
         }
     }
 
@@ -260,7 +260,7 @@ public final class ClassParser {
      */
     private void readID() throws IOException, ClassFormatException {
         int magic = 0xCAFEBABE;
-        if (file.readInt() != magic) {
+        if (dataInputStream.readInt() != magic) {
             throw new ClassFormatException(file_name + " is not a Java .class file");
         }
     }
@@ -273,10 +273,10 @@ public final class ClassParser {
      */
     private void readInterfaces() throws IOException, ClassFormatException {
         int interfaces_count;
-        interfaces_count = file.readUnsignedShort();
+        interfaces_count = dataInputStream.readUnsignedShort();
         interfaces = new int[interfaces_count];
         for (int i = 0; i < interfaces_count; i++) {
-            interfaces[i] = file.readUnsignedShort();
+            interfaces[i] = dataInputStream.readUnsignedShort();
         }
     }
 
@@ -288,10 +288,10 @@ public final class ClassParser {
      */
     private void readMethods() throws IOException, ClassFormatException {
         int methods_count;
-        methods_count = file.readUnsignedShort();
+        methods_count = dataInputStream.readUnsignedShort();
         methods = new Method[methods_count];
         for (int i = 0; i < methods_count; i++) {
-            methods[i] = new Method(file, constant_pool);
+            methods[i] = new Method(dataInputStream, constant_pool);
         }
     }
 
@@ -302,7 +302,7 @@ public final class ClassParser {
      * @throws  ClassFormatException
      */
     private void readVersion() throws IOException, ClassFormatException {
-        minor = file.readUnsignedShort();
-        major = file.readUnsignedShort();
+        minor = dataInputStream.readUnsignedShort();
+        major = dataInputStream.readUnsignedShort();
     }
 }
