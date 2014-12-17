@@ -95,6 +95,8 @@ Bug fixes from 5.2
 [BCEL-173] ClassParser fails to parse JDK classes in Java 8: ClassFormatException: Invalid byte tag in constant pool
 [BCEL-174] Verification of interfaces with default methods fails with Java 8
 [BCEL-177] MethodParameters should read 1 byte not two for parameter count
+[BCEL-181] ClassLoaderRepository.loadClass(String) leaks input streams
+
 
 Feedback
 --------
