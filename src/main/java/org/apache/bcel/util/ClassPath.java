@@ -72,8 +72,7 @@ public class ClassPath implements Serializable {
     public ClassPath(String class_path) {
         this.class_path = class_path;
         List<PathEntry> vec = new ArrayList<PathEntry>();
-        for (StringTokenizer tok = new StringTokenizer(class_path, System
-                .getProperty("path.separator")); tok.hasMoreTokens();) {
+        for (StringTokenizer tok = new StringTokenizer(class_path, File.pathSeparator); tok.hasMoreTokens();) {
             String path = tok.nextToken();
             if (!path.equals("")) {
                 File file = new File(path);

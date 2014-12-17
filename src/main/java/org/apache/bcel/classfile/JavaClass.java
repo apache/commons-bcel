@@ -491,13 +491,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         // Debugging ... on/off
         debug = Boolean.getBoolean("JavaClass.debug");
         // Get path separator either / or \ usually
-        String _sep = System.getProperty("file.separator");
-        if (_sep != null) {
-            try {
-                JavaClass.sep = _sep.charAt(0);
-            } catch (StringIndexOutOfBoundsException e) {
-            } // Never reached
-        }
+        sep = File.separatorChar;
     }
 
 
