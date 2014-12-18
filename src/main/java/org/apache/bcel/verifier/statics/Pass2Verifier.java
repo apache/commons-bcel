@@ -724,16 +724,6 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                 }
             }
 
-            // Class and interface initialization methods...
-            if (name.equals(STATIC_INITIALIZER_NAME)){
-                if ((obj.getAccessFlags() & (~ACC_STRICT)) > 0){
-                    addMessage("Class or interface initialization method '"+tostring(obj)+"' has superfluous access modifier(s) set: everything but ACC_STRICT is ignored.");
-                }
-                if (obj.isAbstract()){
-                    throw new ClassConstraintException("Class or interface initialization method '"+tostring(obj)+"' must not be abstract. This contradicts the Java Language Specification, Second Edition (which omits this constraint) but is common practice of existing verifiers.");
-                }
-            }
-
             if ((obj.getAccessFlags() & ~(ACC_PUBLIC|ACC_PRIVATE|ACC_PROTECTED|ACC_STATIC|ACC_FINAL|ACC_SYNCHRONIZED|ACC_NATIVE|ACC_ABSTRACT|ACC_STRICT)) > 0){
                 addMessage("Method '"+tostring(obj)+"' has access flag(s) other than ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL, ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT set (ignored).");
             }
