@@ -73,7 +73,7 @@ public final class PerformanceTest extends TestCase {
 
         String javaHome = System.getProperty("java.home");
 
-        JarFile jar = new JarFile(javaHome + "/lib/dt.jar");
+        JarFile jar = new JarFile(javaHome + "/lib/rt.jar");
         Enumeration<?> en = jar.entries();
         int i = 0;
 
