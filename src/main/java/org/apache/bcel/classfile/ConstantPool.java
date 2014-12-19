@@ -143,6 +143,18 @@ public class ConstantPool implements Cloneable, Node, Serializable {
                         + "." + constantToString(((ConstantCP) c).getNameAndTypeIndex(),
                         Constants.CONSTANT_NameAndType));
                 break;
+            case Constants.CONSTANT_MethodHandle:
+                ConstantMethodHandle cmh = (ConstantMethodHandle) c;
+                str = Constants.REF_NAMES[cmh.getReferenceKind()] + " " + constantToString(constant_pool[cmh.getReferenceIndex()]);
+                break;            
+            case Constants.CONSTANT_MethodType:
+                ConstantMethodType cmt = (ConstantMethodType) c;
+                str = constantToString(cmt.getDescriptorIndex(), Constants.CONSTANT_Utf8);
+                break;
+            case Constants.CONSTANT_InvokeDynamic:
+                ConstantInvokeDynamic cid = ((ConstantInvokeDynamic) c);
+                str = cid.getBootstrapMethodAttrIndex() + ": " + constantToString(cid.getNameAndTypeIndex(), Constants.CONSTANT_NameAndType);
+                break;
             default: // Never reached
                 throw new RuntimeException("Unknown constant type " + tag);
         }

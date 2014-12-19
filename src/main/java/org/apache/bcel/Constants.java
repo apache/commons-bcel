@@ -1511,4 +1511,23 @@ public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = ATTR_RUN
   public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_MAX = 127;
   public static final int CHOP_FRAME_MAX = 250;
   public static final int APPEND_FRAME_MAX = 254;
+
+
+  // Constants defining the behavior of the Method Handles (JVMS §5.4.3.5)
+  
+  public static final byte REF_getField         = 1;
+  public static final byte REF_getStatic        = 2;
+  public static final byte REF_putField         = 3;
+  public static final byte REF_putStatic        = 4;
+  public static final byte REF_invokeVirtual    = 5;
+  public static final byte REF_invokeStatic     = 6;
+  public static final byte REF_invokeSpecial    = 7;
+  public static final byte REF_newInvokeSpecial = 8;
+  public static final byte REF_invokeInterface  = 9;
+  
+  public static final String[] REF_NAMES = {
+          "getfield", "getstatic", "putfield", 
+          "putstatic", "invokevirtual", "invokestatic", 
+          "invokespecial", "new dup invokespecial", "invokeinterface"
+  };
 }
