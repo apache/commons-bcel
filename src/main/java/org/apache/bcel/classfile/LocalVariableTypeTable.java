@@ -14,10 +14,14 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 package org.apache.bcel.classfile;
 
-import  org.apache.bcel.Constants;
-import  java.io.*;
+import java.io.DataInput;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import org.apache.bcel.Constants;
 
 // The new table is used when generic types are about...
 
@@ -47,103 +51,101 @@ import  java.io.*;
 //  }
 // J5TODO: Needs some testing !
 public class LocalVariableTypeTable extends Attribute {
-  private static final long serialVersionUID = -1082157891095177114L;
-private int             local_variable_type_table_length; // Table of local
-  private LocalVariable[] local_variable_type_table;        // variables
 
-  public LocalVariableTypeTable(LocalVariableTypeTable c) {
-    this(c.getNameIndex(), c.getLength(), c.getLocalVariableTypeTable(),
-     c.getConstantPool());
-  }
+    private static final long serialVersionUID = -1082157891095177114L;
 
-  public LocalVariableTypeTable(int name_index, int length,
-                LocalVariable[] local_variable_table,
-                ConstantPool    constant_pool)
-  {
-    super(Constants.ATTR_LOCAL_VARIABLE_TYPE_TABLE, name_index, length, constant_pool);
-    setLocalVariableTable(local_variable_table);
-  }    
+    private int local_variable_type_table_length; // Table of local
+    private LocalVariable[] local_variable_type_table;        // variables
 
-  LocalVariableTypeTable(int nameIdx, int len, DataInput input,ConstantPool cpool) throws IOException {
-    this(nameIdx, len, (LocalVariable[])null, cpool);
-
-    local_variable_type_table_length = (input.readUnsignedShort());
-    local_variable_type_table = new LocalVariable[local_variable_type_table_length];
-
-    for(int i=0; i < local_variable_type_table_length; i++) {
-        local_variable_type_table[i] = new LocalVariable(input, cpool);
+    public LocalVariableTypeTable(LocalVariableTypeTable c) {
+        this(c.getNameIndex(), c.getLength(), c.getLocalVariableTypeTable(), c.getConstantPool());
     }
-  }
 
-  @Override
-public void accept(Visitor v) {
-    v.visitLocalVariableTypeTable(this);
-  }
-
-  @Override
-public final void dump(DataOutputStream file) throws IOException
-  {
-    super.dump(file);
-    file.writeShort(local_variable_type_table_length);
-    for(int i=0; i < local_variable_type_table_length; i++) {
-        local_variable_type_table[i].dump(file);
+    public LocalVariableTypeTable(int name_index, int length, LocalVariable[] local_variable_table, ConstantPool constant_pool) {
+        super(Constants.ATTR_LOCAL_VARIABLE_TYPE_TABLE, name_index, length, constant_pool);
+        setLocalVariableTable(local_variable_table);
     }
-  }
 
-  public final LocalVariable[] getLocalVariableTypeTable() {
-    return local_variable_type_table;
-  }    
+    LocalVariableTypeTable(int nameIdx, int len, DataInput input, ConstantPool cpool) throws IOException {
+        this(nameIdx, len, (LocalVariable[]) null, cpool);
 
-  public final LocalVariable getLocalVariable(int index) {
-    for(int i=0; i < local_variable_type_table_length; i++) {
-        if(local_variable_type_table[i].getIndex() == index) {
-            return local_variable_type_table[i];
+        local_variable_type_table_length = (input.readUnsignedShort());
+        local_variable_type_table = new LocalVariable[local_variable_type_table_length];
+
+        for (int i = 0; i < local_variable_type_table_length; i++) {
+            local_variable_type_table[i] = new LocalVariable(input, cpool);
         }
     }
 
-    return null;
-  }
-
-  public final void setLocalVariableTable(LocalVariable[] local_variable_table)
-  {
-    this.local_variable_type_table = local_variable_table;
-    local_variable_type_table_length = (local_variable_table == null)? 0 :
-      local_variable_table.length;
-  }
-
-  /**
-   * @return String representation.
-   */ 
-  @Override
-public final String toString() {
-      StringBuilder buf = new StringBuilder();
-
-    for(int i=0; i < local_variable_type_table_length; i++) {
-      buf.append(local_variable_type_table[i].toString());
-
-      if(i < local_variable_type_table_length - 1) {
-        buf.append('\n');
-    }
+    @Override
+    public void accept(Visitor v) {
+        v.visitLocalVariableTypeTable(this);
     }
 
-    return buf.toString();
-  }
-
-  /**
-   * @return deep copy of this attribute
-   */
-  @Override
-public Attribute copy(ConstantPool constant_pool) {
-    LocalVariableTypeTable c = (LocalVariableTypeTable)clone();
-
-    c.local_variable_type_table = new LocalVariable[local_variable_type_table_length];
-    for(int i=0; i < local_variable_type_table_length; i++) {
-        c.local_variable_type_table[i] = local_variable_type_table[i].copy();
+    @Override
+    public final void dump(DataOutputStream file) throws IOException {
+        super.dump(file);
+        file.writeShort(local_variable_type_table_length);
+        for (int i = 0; i < local_variable_type_table_length; i++) {
+            local_variable_type_table[i].dump(file);
+        }
     }
 
-    c.constant_pool = constant_pool;
-    return c;
-  }
+    public final LocalVariable[] getLocalVariableTypeTable() {
+        return local_variable_type_table;
+    }
 
-  public final int getTableLength() { return local_variable_type_table_length; }
+    public final LocalVariable getLocalVariable(int index) {
+        for (int i = 0; i < local_variable_type_table_length; i++) {
+            if (local_variable_type_table[i].getIndex() == index) {
+                return local_variable_type_table[i];
+            }
+        }
+
+        return null;
+    }
+
+    public final void setLocalVariableTable(LocalVariable[] local_variable_table) {
+        this.local_variable_type_table = local_variable_table;
+        local_variable_type_table_length = (local_variable_table == null) ? 0 :
+                local_variable_table.length;
+    }
+
+    /**
+     * @return String representation.
+     */
+    @Override
+    public final String toString() {
+        StringBuilder buf = new StringBuilder();
+
+        for (int i = 0; i < local_variable_type_table_length; i++) {
+            buf.append(local_variable_type_table[i].toString());
+
+            if (i < local_variable_type_table_length - 1) {
+                buf.append('\n');
+            }
+        }
+
+        return buf.toString();
+    }
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy(ConstantPool constant_pool) {
+        LocalVariableTypeTable c = (LocalVariableTypeTable) clone();
+
+        c.local_variable_type_table = new LocalVariable[local_variable_type_table_length];
+        for (int i = 0; i < local_variable_type_table_length; i++) {
+            c.local_variable_type_table[i] = local_variable_type_table[i].copy();
+        }
+
+        c.constant_pool = constant_pool;
+        return c;
+    }
+
+    public final int getTableLength() {
+        return local_variable_type_table_length;
+    }
 }
