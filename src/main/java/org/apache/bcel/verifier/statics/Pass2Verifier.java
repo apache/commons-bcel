@@ -302,9 +302,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
     /**
      * A Visitor class that ensures the constant pool satisfies the static
      * constraints.
-   * The visitXXX() methods throw ClassConstraintException instances otherwise.
-   *
-   * @see #constant_pool_entries_satisfy_static_constraints()
+     * The visitXXX() methods throw ClassConstraintException instances otherwise.
+     *
+     * @see #constant_pool_entries_satisfy_static_constraints()
      */
     private class CPESSC_Visitor extends org.apache.bcel.classfile.EmptyVisitor{
         private final Class<?> CONST_Class;
@@ -1176,7 +1176,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
      * this method does not verify the existence of referenced entities
      * (such as classes) but only the formal correctness (such as well-formed
      * signatures).
-   * The visitXXX() methods throw ClassConstraintException instances otherwise.
+     * The visitXXX() methods throw ClassConstraintException instances otherwise.
      * <B>Precondition: index-style cross referencing in the constant
      * pool must be valid. Simply invoke constant_pool_entries_satisfy_static_constraints()
      * before.</B>
@@ -1199,10 +1199,10 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
     /**
      * A Visitor class that ensures the ConstantCP-subclassed entries
      * of the constant pool are valid.
-   * <B>Precondition: index-style cross referencing in the constant
-   * pool must be valid.</B>
+     * <B>Precondition: index-style cross referencing in the constant
+     * pool must be valid.</B>
      *
-   * @see #constant_pool_entries_satisfy_static_constraints()
+     * @see #constant_pool_entries_satisfy_static_constraints()
      * @see org.apache.bcel.classfile.ConstantCP
      */
     private class FAMRAV_Visitor extends EmptyVisitor{
