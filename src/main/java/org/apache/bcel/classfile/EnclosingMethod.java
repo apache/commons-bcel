@@ -25,6 +25,8 @@ import org.apache.bcel.Constants;
 /**
  * This attribute exists for local or 
  * anonymous classes and ... there can be only one.
+ * 
+ * @since 6.0
  */
 public class EnclosingMethod extends Attribute {
 
