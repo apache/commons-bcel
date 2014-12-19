@@ -17,7 +17,7 @@
 
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -40,13 +40,13 @@ public class BootstrapMethods extends Attribute {
         this.bootstrap_methods = bootstrap_methods;
     }
 
-    BootstrapMethods(int name_index, int length, DataInputStream file, ConstantPool constant_pool) throws IOException {
+    BootstrapMethods(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
         this(name_index, length, (BootstrapMethod[]) null, constant_pool);
 
-        int num_bootstrap_methods = file.readUnsignedShort();
+        int num_bootstrap_methods = input.readUnsignedShort();
         bootstrap_methods = new BootstrapMethod[num_bootstrap_methods];
         for (int i = 0; i < num_bootstrap_methods; i++) {
-            bootstrap_methods[i] = new BootstrapMethod(file);
+            bootstrap_methods[i] = new BootstrapMethod(input);
         }
     }
 

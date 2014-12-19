@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -45,20 +45,21 @@ public final class StackMapEntry implements Cloneable, Serializable {
 
 
     /**
-     * Construct object from file stream.
-     * @param file Input stream
+     * Construct object from input stream.
+     * 
+     * @param input Input stream
      * @throws IOException
      */
-    StackMapEntry(DataInputStream file, ConstantPool constant_pool) throws IOException {
-        this(file.readShort(), file.readShort(), null, -1, null, constant_pool);
+    StackMapEntry(DataInput input, ConstantPool constant_pool) throws IOException {
+        this(input.readShort(), input.readShort(), null, -1, null, constant_pool);
         types_of_locals = new StackMapType[number_of_locals];
         for (int i = 0; i < number_of_locals; i++) {
-            types_of_locals[i] = new StackMapType(file, constant_pool);
+            types_of_locals[i] = new StackMapType(input, constant_pool);
         }
-        number_of_stack_items = file.readShort();
+        number_of_stack_items = input.readShort();
         types_of_stack_items = new StackMapType[number_of_stack_items];
         for (int i = 0; i < number_of_stack_items; i++) {
-            types_of_stack_items[i] = new StackMapType(file, constant_pool);
+            types_of_stack_items[i] = new StackMapType(input, constant_pool);
         }
     }
 

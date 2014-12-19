@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
@@ -64,20 +64,20 @@ public final class ExceptionTable extends Attribute {
 
 
     /**
-     * Construct object from file stream.
+     * Construct object from input stream.
      * @param name_index Index in constant pool
      * @param length Content length in bytes
-     * @param file Input stream
+     * @param input Input stream
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    ExceptionTable(int name_index, int length, DataInputStream file, ConstantPool constant_pool)
+    ExceptionTable(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (int[]) null, constant_pool);
-        number_of_exceptions = file.readUnsignedShort();
+        number_of_exceptions = input.readUnsignedShort();
         exception_index_table = new int[number_of_exceptions];
         for (int i = 0; i < number_of_exceptions; i++) {
-            exception_index_table[i] = file.readUnsignedShort();
+            exception_index_table[i] = input.readUnsignedShort();
         }
     }
 

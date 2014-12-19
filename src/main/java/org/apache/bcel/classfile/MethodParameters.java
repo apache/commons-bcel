@@ -17,7 +17,7 @@
 
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -35,14 +35,14 @@ public class MethodParameters extends Attribute {
 
     private MethodParameter[] parameters = new MethodParameter[0];
 
-    MethodParameters(int name_index, int length, DataInputStream file, ConstantPool constant_pool) throws IOException {
+    MethodParameters(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
         super(Constants.ATTR_METHOD_PARAMETERS, name_index, length, constant_pool);
         System.out.println("new MethodParameters");
 
-        int parameters_count = file.readUnsignedByte();
+        int parameters_count = input.readUnsignedByte();
         parameters = new MethodParameter[parameters_count];
         for (int i = 0; i < parameters_count; i++) {
-            parameters[i] = new MethodParameter(file);
+            parameters[i] = new MethodParameter(input);
         }
     }
 

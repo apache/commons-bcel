@@ -17,7 +17,7 @@
 
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -42,20 +42,20 @@ public class BootstrapMethod implements Serializable, Cloneable {
     }
 
     /**
-     * Construct object from file stream.
+     * Construct object from input stream.
      * 
-     * @param file Input stream
+     * @param input Input stream
      * @throws IOException
      * @throws ClassFormatException
      */
-    BootstrapMethod(DataInputStream file) throws IOException, ClassFormatException {
-        bootstrap_method_ref = file.readUnsignedShort();
+    BootstrapMethod(DataInput input) throws IOException, ClassFormatException {
+        bootstrap_method_ref = input.readUnsignedShort();
 
-        int num_bootstrap_methods = file.readUnsignedShort();
+        int num_bootstrap_methods = input.readUnsignedShort();
 
         bootstrap_arguments = new int[num_bootstrap_methods];
         for (int i = 0; i < num_bootstrap_methods; i++) {
-            bootstrap_arguments[i] = file.readUnsignedShort();
+            bootstrap_arguments[i] = input.readUnsignedShort();
         }
     }
 

@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -46,19 +46,19 @@ public class AnnotationEntry implements Node, Constants, Serializable {
     /**
      * Factory method to create an AnnotionEntry from a DataInputStream
      * 
-     * @param file
+     * @param input
      * @param constant_pool
      * @param isRuntimeVisible
      * @return the entry
      * @throws IOException
      */
-    public static AnnotationEntry read(DataInputStream file, ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException {
+    public static AnnotationEntry read(DataInput input, ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException {
 
-        final AnnotationEntry annotationEntry = new AnnotationEntry(file.readUnsignedShort(), constant_pool, isRuntimeVisible);
-        final int num_element_value_pairs = (file.readUnsignedShort());
+        final AnnotationEntry annotationEntry = new AnnotationEntry(input.readUnsignedShort(), constant_pool, isRuntimeVisible);
+        final int num_element_value_pairs = (input.readUnsignedShort());
         annotationEntry.element_value_pairs = new ArrayList<ElementValuePair>();
         for (int i = 0; i < num_element_value_pairs; i++) {
-            annotationEntry.element_value_pairs.add(new ElementValuePair(file.readUnsignedShort(), ElementValue.readElementValue(file, constant_pool),
+            annotationEntry.element_value_pairs.add(new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constant_pool),
                     constant_pool));
         }
         return annotationEntry;

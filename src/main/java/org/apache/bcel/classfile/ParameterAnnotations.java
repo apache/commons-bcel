@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -39,17 +39,17 @@ public abstract class ParameterAnnotations extends Attribute {
      * @param parameter_annotation_type the subclass type of the parameter annotation
      * @param name_index Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
-     * @param file Input stream
+     * @param input Input stream
      * @param constant_pool Array of constants
      */
     ParameterAnnotations(byte parameter_annotation_type, int name_index, int length,
-            DataInputStream file, ConstantPool constant_pool) throws IOException {
+            DataInput input, ConstantPool constant_pool) throws IOException {
         this(parameter_annotation_type, name_index, length, (ParameterAnnotationEntry[]) null,
                 constant_pool);
-        num_parameters = (file.readUnsignedByte());
+        num_parameters = (input.readUnsignedByte());
         parameter_annotation_table = new ParameterAnnotationEntry[num_parameters];
         for (int i = 0; i < num_parameters; i++) {
-            parameter_annotation_table[i] = new ParameterAnnotationEntry(file, constant_pool);
+            parameter_annotation_table[i] = new ParameterAnnotationEntry(input, constant_pool);
         }
     }
 

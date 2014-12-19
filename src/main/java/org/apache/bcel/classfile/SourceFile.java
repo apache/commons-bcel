@@ -49,16 +49,16 @@ public final class SourceFile extends Attribute {
 
 
     /**
-     * Construct object from file stream.
+     * Construct object from input stream.
      * @param name_index Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
-     * @param file Input stream
+     * @param input Input stream
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    SourceFile(int name_index, int length, DataInput file, ConstantPool constant_pool)
+    SourceFile(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
-        this(name_index, length, file.readUnsignedShort(), constant_pool);
+        this(name_index, length, input.readUnsignedShort(), constant_pool);
     }
 
 

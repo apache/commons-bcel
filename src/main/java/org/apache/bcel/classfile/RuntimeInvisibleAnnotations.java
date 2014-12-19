@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
@@ -39,17 +39,15 @@ public class RuntimeInvisibleAnnotations extends Annotations
      *            Index pointing to the name <em>Code</em>
      * @param length
      *            Content length in bytes
-     * @param file
+     * @param input
      *            Input stream
      * @param constant_pool
      *            Array of constants
      */
-    RuntimeInvisibleAnnotations(int name_index, int length,
-            DataInputStream file, ConstantPool constant_pool)
+    RuntimeInvisibleAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException
     {
-        super(Constants.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS, name_index, length,
-                file, constant_pool, false);
+        super(Constants.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS, name_index, length, input, constant_pool, false);
     }
 
     /**

@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -52,21 +52,21 @@ public class ConstantPool implements Cloneable, Node, Serializable {
 
 
     /**
-     * Read constants from given file stream.
+     * Read constants from given input stream.
      *
-     * @param file Input stream
+     * @param input Input stream
      * @throws IOException
      * @throws ClassFormatException
      */
-    ConstantPool(DataInputStream file) throws IOException, ClassFormatException {
+    ConstantPool(DataInput input) throws IOException, ClassFormatException {
         byte tag;
-        constant_pool_count = file.readUnsignedShort();
+        constant_pool_count = input.readUnsignedShort();
         constant_pool = new Constant[constant_pool_count];
         /* constant_pool[0] is unused by the compiler and may be used freely
          * by the implementation.
          */
         for (int i = 1; i < constant_pool_count; i++) {
-            constant_pool[i] = Constant.readConstant(file);
+            constant_pool[i] = Constant.readConstant(input);
             /* Quote from the JVM specification:
              * "All eight byte constants take up two spots in the constant pool.
              * If this is the n'th byte in the constant pool, then the next item

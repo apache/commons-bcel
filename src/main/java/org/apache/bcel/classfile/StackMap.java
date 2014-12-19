@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
@@ -57,20 +57,20 @@ public final class StackMap extends Attribute {
 
 
     /**
-     * Construct object from file stream.
+     * Construct object from input stream.
+     * 
      * @param name_index Index of name
      * @param length Content length in bytes
-     * @param file Input stream
+     * @param input Input stream
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    StackMap(int name_index, int length, DataInputStream file, ConstantPool constant_pool)
-            throws IOException {
+    StackMap(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
         this(name_index, length, (StackMapEntry[]) null, constant_pool);
-        map_length = file.readUnsignedShort();
+        map_length = input.readUnsignedShort();
         map = new StackMapEntry[map_length];
         for (int i = 0; i < map_length; i++) {
-            map[i] = new StackMapEntry(file, constant_pool);
+            map[i] = new StackMapEntry(input, constant_pool);
         }
     }
 

@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
@@ -40,18 +40,18 @@ public class AnnotationDefault extends Attribute
          *            Index pointing to the name <em>Code</em>
          * @param length
          *            Content length in bytes
-         * @param file
+         * @param input
          *            Input stream
          * @param constant_pool
          *            Array of constants
          */
         public AnnotationDefault(int name_index, int length,
-                        DataInputStream file, ConstantPool constant_pool)
+                        DataInput input, ConstantPool constant_pool)
                         throws IOException
         {
                 this(name_index, length, (ElementValue) null,
                                 constant_pool);
-                default_value = ElementValue.readElementValue(file, constant_pool);
+                default_value = ElementValue.readElementValue(input, constant_pool);
         }
 
         /**

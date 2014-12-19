@@ -17,6 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
+import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -120,43 +121,43 @@ public abstract class Constant implements Cloneable, Node, Serializable {
 
 
     /**
-     * Read one constant from the given file, the type depends on a tag byte.
+     * Read one constant from the given input, the type depends on a tag byte.
      *
-     * @param file Input stream
+     * @param input Input stream
      * @return Constant object
      */
-    static Constant readConstant( DataInputStream file ) throws IOException,
+    static Constant readConstant( DataInput input ) throws IOException,
             ClassFormatException {
-        byte b = file.readByte(); // Read tag byte
+        byte b = input.readByte(); // Read tag byte
         switch (b) {
             case Constants.CONSTANT_Class:
-                return new ConstantClass(file);
+                return new ConstantClass(input);
             case Constants.CONSTANT_Fieldref:
-                return new ConstantFieldref(file);
+                return new ConstantFieldref(input);
             case Constants.CONSTANT_Methodref:
-                return new ConstantMethodref(file);
+                return new ConstantMethodref(input);
             case Constants.CONSTANT_InterfaceMethodref:
-                return new ConstantInterfaceMethodref(file);
+                return new ConstantInterfaceMethodref(input);
             case Constants.CONSTANT_String:
-                return new ConstantString(file);
+                return new ConstantString(input);
             case Constants.CONSTANT_Integer:
-                return new ConstantInteger(file);
+                return new ConstantInteger(input);
             case Constants.CONSTANT_Float:
-                return new ConstantFloat(file);
+                return new ConstantFloat(input);
             case Constants.CONSTANT_Long:
-                return new ConstantLong(file);
+                return new ConstantLong(input);
             case Constants.CONSTANT_Double:
-                return new ConstantDouble(file);
+                return new ConstantDouble(input);
             case Constants.CONSTANT_NameAndType:
-                return new ConstantNameAndType(file);
+                return new ConstantNameAndType(input);
             case Constants.CONSTANT_Utf8:
-                return ConstantUtf8.getInstance(file);
+                return ConstantUtf8.getInstance(input);
             case Constants.CONSTANT_MethodHandle:
-                return new ConstantMethodHandle(file);
+                return new ConstantMethodHandle(input);
             case Constants.CONSTANT_MethodType:
-                return new ConstantMethodType(file);
+                return new ConstantMethodType(input);
             case Constants.CONSTANT_InvokeDynamic:
-                return new ConstantInvokeDynamic(file);
+                return new ConstantInvokeDynamic(input);
             default:
                 throw new ClassFormatException("Invalid byte tag in constant pool: " + b);
         }

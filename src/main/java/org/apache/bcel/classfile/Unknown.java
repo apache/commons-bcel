@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -83,19 +83,20 @@ public final class Unknown extends Attribute {
 
 
     /**
-     * Construct object from file stream.
+     * Construct object from input stream.
+     * 
      * @param name_index Index in constant pool
      * @param length Content length in bytes
-     * @param file Input stream
+     * @param input Input stream
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    Unknown(int name_index, int length, DataInputStream file, ConstantPool constant_pool)
+    Unknown(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (byte[]) null, constant_pool);
         if (length > 0) {
             bytes = new byte[length];
-            file.readFully(bytes);
+            input.readFully(bytes);
         }
     }
 

@@ -18,7 +18,6 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -94,8 +93,8 @@ public final class ConstantUtf8 extends Constant {
         return getCachedInstance(s);
     }
 
-    public static ConstantUtf8 getInstance (DataInputStream file)  throws IOException {
-        return getInstance(file.readUTF());
+    public static ConstantUtf8 getInstance (DataInput input)  throws IOException {
+        return getInstance(input.readUTF());
     }
 
     /**

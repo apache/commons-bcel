@@ -48,16 +48,16 @@ public final class ConstantValue extends Attribute {
 
 
     /**
-     * Construct object from file stream.
+     * Construct object from input stream.
      * @param name_index Name index in constant pool
      * @param length Content length in bytes
-     * @param file Input stream
+     * @param input Input stream
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    ConstantValue(int name_index, int length, DataInput file, ConstantPool constant_pool)
+    ConstantValue(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
-        this(name_index, length, file.readUnsignedShort(), constant_pool);
+        this(name_index, length, input.readUnsignedShort(), constant_pool);
     }
 
 

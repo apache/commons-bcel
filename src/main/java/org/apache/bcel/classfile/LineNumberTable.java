@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
@@ -62,20 +62,20 @@ public final class LineNumberTable extends Attribute {
 
 
     /**
-     * Construct object from file stream.
+     * Construct object from input stream.
      * @param name_index Index of name
      * @param length Content length in bytes
-     * @param file Input stream
+     * @param input Input stream
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    LineNumberTable(int name_index, int length, DataInputStream file, ConstantPool constant_pool)
+    LineNumberTable(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (LineNumber[]) null, constant_pool);
-        line_number_table_length = (file.readUnsignedShort());
+        line_number_table_length = (input.readUnsignedShort());
         line_number_table = new LineNumber[line_number_table_length];
         for (int i = 0; i < line_number_table_length; i++) {
-            line_number_table[i] = new LineNumber(file);
+            line_number_table[i] = new LineNumber(input);
         }
     }
 

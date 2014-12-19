@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
@@ -37,12 +37,12 @@ public class RuntimeInvisibleParameterAnnotations extends ParameterAnnotations {
     /**
      * @param name_index Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
-     * @param file Input stream
+     * @param input Input stream
      * @param constant_pool Array of constants
      */
-    RuntimeInvisibleParameterAnnotations(int name_index, int length, DataInputStream file,
+    RuntimeInvisibleParameterAnnotations(int name_index, int length, DataInput input,
             ConstantPool constant_pool) throws IOException {
-        super(Constants.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS, name_index, length, file,
+        super(Constants.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS, name_index, length, input,
                 constant_pool);
     }
 

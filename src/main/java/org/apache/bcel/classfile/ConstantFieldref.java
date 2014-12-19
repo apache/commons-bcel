@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
@@ -41,13 +41,13 @@ public final class ConstantFieldref extends ConstantCP {
 
 
     /**
-     * Initialize instance from file data.
+     * Initialize instance from input data.
      *
-     * @param file input stream
+     * @param input input stream
      * @throws IOException
      */
-    ConstantFieldref(DataInputStream file) throws IOException {
-        super(Constants.CONSTANT_Fieldref, file);
+    ConstantFieldref(DataInput input) throws IOException {
+        super(Constants.CONSTANT_Fieldref, input);
     }
 
 

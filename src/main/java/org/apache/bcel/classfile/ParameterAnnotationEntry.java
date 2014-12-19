@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,16 +40,17 @@ public class ParameterAnnotationEntry implements Node, Constants {
 
 
     /**
-     * Construct object from file stream.
-     * @param file Input stream
+     * Construct object from input stream.
+     * 
+     * @param input Input stream
      * @throws IOException
      */
-    ParameterAnnotationEntry(DataInputStream file, ConstantPool constant_pool) throws IOException {
-        annotation_table_length = (file.readUnsignedShort());
+    ParameterAnnotationEntry(DataInput input, ConstantPool constant_pool) throws IOException {
+        annotation_table_length = (input.readUnsignedShort());
         annotation_table = new AnnotationEntry[annotation_table_length];
         for (int i = 0; i < annotation_table_length; i++) {
             // TODO isRuntimeVisible
-            annotation_table[i] = AnnotationEntry.read(file, constant_pool, false);
+            annotation_table[i] = AnnotationEntry.read(input, constant_pool, false);
         }
     }
 

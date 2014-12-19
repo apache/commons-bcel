@@ -51,13 +51,13 @@ public final class Signature extends Attribute {
      * Construct object from file stream.
      * @param name_index Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
-     * @param file Input stream
+     * @param input Input stream
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    Signature(int name_index, int length, DataInput file, ConstantPool constant_pool)
+    Signature(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
-        this(name_index, length, file.readUnsignedShort(), constant_pool);
+        this(name_index, length, input.readUnsignedShort(), constant_pool);
     }
 
 

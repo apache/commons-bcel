@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -79,54 +79,54 @@ public abstract class ElementValue
 
     public static final int PRIMITIVE_BOOLEAN = 'Z';
 
-    public static ElementValue readElementValue(DataInputStream dis,
+    public static ElementValue readElementValue(DataInput input,
             ConstantPool cpool) throws IOException
     {
-        byte type = dis.readByte();
+        byte type = input.readByte();
         switch (type)
         {
         case 'B': // byte
-            return new SimpleElementValue(PRIMITIVE_BYTE, dis
+            return new SimpleElementValue(PRIMITIVE_BYTE, input
                     .readUnsignedShort(), cpool);
         case 'C': // char
-            return new SimpleElementValue(PRIMITIVE_CHAR, dis
+            return new SimpleElementValue(PRIMITIVE_CHAR, input
                     .readUnsignedShort(), cpool);
         case 'D': // double
-            return new SimpleElementValue(PRIMITIVE_DOUBLE, dis
+            return new SimpleElementValue(PRIMITIVE_DOUBLE, input
                     .readUnsignedShort(), cpool);
         case 'F': // float
-            return new SimpleElementValue(PRIMITIVE_FLOAT, dis
+            return new SimpleElementValue(PRIMITIVE_FLOAT, input
                     .readUnsignedShort(), cpool);
         case 'I': // int
-            return new SimpleElementValue(PRIMITIVE_INT, dis
+            return new SimpleElementValue(PRIMITIVE_INT, input
                     .readUnsignedShort(), cpool);
         case 'J': // long
-            return new SimpleElementValue(PRIMITIVE_LONG, dis
+            return new SimpleElementValue(PRIMITIVE_LONG, input
                     .readUnsignedShort(), cpool);
         case 'S': // short
-            return new SimpleElementValue(PRIMITIVE_SHORT, dis
+            return new SimpleElementValue(PRIMITIVE_SHORT, input
                     .readUnsignedShort(), cpool);
         case 'Z': // boolean
-            return new SimpleElementValue(PRIMITIVE_BOOLEAN, dis
+            return new SimpleElementValue(PRIMITIVE_BOOLEAN, input
                     .readUnsignedShort(), cpool);
         case 's': // String
-            return new SimpleElementValue(STRING, dis.readUnsignedShort(),
+            return new SimpleElementValue(STRING, input.readUnsignedShort(),
                     cpool);
         case 'e': // Enum constant
-            return new EnumElementValue(ENUM_CONSTANT, dis.readUnsignedShort(),
-                    dis.readUnsignedShort(), cpool);
+            return new EnumElementValue(ENUM_CONSTANT, input.readUnsignedShort(),
+                    input.readUnsignedShort(), cpool);
         case 'c': // Class
-            return new ClassElementValue(CLASS, dis.readUnsignedShort(), cpool);
+            return new ClassElementValue(CLASS, input.readUnsignedShort(), cpool);
         case '@': // Annotation
             // TODO isRuntimeVisible
             return new AnnotationElementValue(ANNOTATION, AnnotationEntry.read(
-                    dis, cpool, false), cpool);
+                    input, cpool, false), cpool);
         case '[': // Array
-            int numArrayVals = dis.readUnsignedShort();
+            int numArrayVals = input.readUnsignedShort();
             ElementValue[] evalues = new ElementValue[numArrayVals];
             for (int j = 0; j < numArrayVals; j++)
             {
-                evalues[j] = ElementValue.readElementValue(dis, cpool);
+                evalues[j] = ElementValue.readElementValue(input, cpool);
             }
             return new ArrayElementValue(ARRAY, evalues, cpool);
         default:

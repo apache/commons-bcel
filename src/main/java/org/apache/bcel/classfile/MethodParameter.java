@@ -17,7 +17,7 @@
 
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -44,15 +44,15 @@ public class MethodParameter implements Serializable, Cloneable {
     }
 
     /**
-     * Construct object from file stream.
+     * Construct object from input stream.
      * 
-     * @param file Input stream
+     * @param input Input stream
      * @throws java.io.IOException
      * @throws ClassFormatException
      */
-    MethodParameter(DataInputStream file) throws IOException {
-        name_index = file.readUnsignedShort();
-        access_flags = file.readUnsignedShort();
+    MethodParameter(DataInput input) throws IOException {
+        name_index = input.readUnsignedShort();
+        access_flags = input.readUnsignedShort();
     }
 
     public int getNameIndex() {

@@ -64,14 +64,14 @@ private int             local_variable_type_table_length; // Table of local
     setLocalVariableTable(local_variable_table);
   }    
 
-  LocalVariableTypeTable(int nameIdx, int len, DataInputStream dis,ConstantPool cpool) throws IOException {
+  LocalVariableTypeTable(int nameIdx, int len, DataInput input,ConstantPool cpool) throws IOException {
     this(nameIdx, len, (LocalVariable[])null, cpool);
 
-    local_variable_type_table_length = (dis.readUnsignedShort());
+    local_variable_type_table_length = (input.readUnsignedShort());
     local_variable_type_table = new LocalVariable[local_variable_type_table_length];
 
     for(int i=0; i < local_variable_type_table_length; i++) {
-        local_variable_type_table[i] = new LocalVariable(dis, cpool);
+        local_variable_type_table[i] = new LocalVariable(input, cpool);
     }
   }
 
