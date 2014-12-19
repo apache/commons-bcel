@@ -44,8 +44,7 @@ public class RuntimeVisibleAnnotations extends Annotations
      * @param constant_pool
      *            Array of constants
      */
-    public RuntimeVisibleAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool)
-            throws IOException
+    RuntimeVisibleAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException
     {
         super(Constants.ATTR_RUNTIME_VISIBLE_ANNOTATIONS, name_index, length, input, constant_pool, true);
     }
@@ -56,8 +55,7 @@ public class RuntimeVisibleAnnotations extends Annotations
     @Override
     public Attribute copy(ConstantPool constant_pool)
     {
-        Annotations c = (Annotations) clone();
-        return c;
+        return (Annotations) clone();
     }
 
     @Override

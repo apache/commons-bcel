@@ -45,7 +45,7 @@ public class EnclosingMethod extends Attribute {
     private int methodIndex;
 
     // Ctors - and code to read an attribute in.
-    public EnclosingMethod(int nameIndex, int len, DataInput input, ConstantPool cpool) throws IOException {
+    EnclosingMethod(int nameIndex, int len, DataInput input, ConstantPool cpool) throws IOException {
         this(nameIndex, len, input.readUnsignedShort(), input.readUnsignedShort(), cpool);
     }
 

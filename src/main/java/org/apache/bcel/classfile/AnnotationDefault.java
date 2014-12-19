@@ -45,9 +45,7 @@ public class AnnotationDefault extends Attribute
          * @param constant_pool
          *            Array of constants
          */
-        public AnnotationDefault(int name_index, int length,
-                        DataInput input, ConstantPool constant_pool)
-                        throws IOException
+        AnnotationDefault(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException
         {
                 this(name_index, length, (ElementValue) null,
                                 constant_pool);

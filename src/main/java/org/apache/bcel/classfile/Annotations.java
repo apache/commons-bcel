@@ -42,7 +42,7 @@ public abstract class Annotations extends Attribute {
      * @param input Input stream
      * @param constant_pool Array of constants
      */
-    public Annotations(byte annotation_type, int name_index, int length, DataInput input, ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException {
+    Annotations(byte annotation_type, int name_index, int length, DataInput input, ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException {
         this(annotation_type, name_index, length, (AnnotationEntry[]) null, constant_pool, isRuntimeVisible);
         final int annotation_table_length = (input.readUnsignedShort());
         annotation_table = new AnnotationEntry[annotation_table_length];
