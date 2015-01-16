@@ -47,8 +47,8 @@ public final class ConstantUtf8 extends Constant {
     private static int hits = 0;
     private static int skipped = 0;
     private static int created = 0;
-    final static boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
-    final static boolean BCEL_DONT_CACHE = Boolean.getBoolean("bcel.dontCache");
+    static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
+    static final boolean BCEL_DONT_CACHE = Boolean.getBoolean("bcel.dontCache");
 
     static {
         if (BCEL_STATISTICS) {
