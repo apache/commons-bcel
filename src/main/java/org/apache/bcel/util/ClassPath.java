@@ -261,7 +261,7 @@ public class ClassPath implements Serializable {
      * @return class file for the java class
      */
     public ClassFile getClassFile( String name, String suffix ) throws IOException {
-        for (PathEntry path : paths) {
+        for (PathEntry path : paths) { // TODO why is path not used??
             ClassFile cf = null;
 
             if(parent != null) {
