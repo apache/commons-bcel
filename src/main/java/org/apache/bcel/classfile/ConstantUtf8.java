@@ -90,7 +90,7 @@ public final class ConstantUtf8 extends Constant {
     }
 
     public static ConstantUtf8 getInstance(String s) {
-        return getCachedInstance(s);
+        return new ConstantUtf8(s);
     }
 
     public static ConstantUtf8 getInstance (DataInput input)  throws IOException {
