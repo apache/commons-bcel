@@ -72,7 +72,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public static final byte FILE = 2;
     public static final byte ZIP = 3;
     static boolean debug = false; // Debugging on/off
-    static char sep = '/'; // directory separator
+    final static char sep = File.separatorChar; // directory separator
 
     //  Annotations are collected from certain attributes, don't do it more than necessary!
     private boolean annotationsOutOfDate = true;
@@ -490,8 +490,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     static {
         // Debugging ... on/off
         debug = Boolean.getBoolean("JavaClass.debug");
-        // Get path separator either / or \ usually
-        sep = File.separatorChar;
     }
 
 
