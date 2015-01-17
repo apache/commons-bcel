@@ -46,7 +46,7 @@ public final class ConstantUtf8 extends Constant {
     private static volatile int created = 0;
 
     // Set the size to 0 or below to skip caching entirely
-    private static final int MAX_CACHED_SIZE = Integer.getInteger("bcel.maxcached.size");
+    private static final int MAX_CACHED_SIZE = Integer.getInteger("bcel.maxcached.size", 200).intValue();
     private static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
 
 
