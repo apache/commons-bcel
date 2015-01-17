@@ -40,53 +40,71 @@ public final class ConstantUtf8 extends Constant {
     private static final long serialVersionUID = -8709101585611518985L;
     private final String bytes;
 
-    private static final int MAX_CACHE_ENTRIES = 20000;
-    private static final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
-    private static HashMap<String, ConstantUtf8> cache;
-    private static int considered = 0;
-    private static int hits = 0;
-    private static int skipped = 0;
-    private static int created = 0;
-    static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
-    static final boolean BCEL_DONT_CACHE = Boolean.getBoolean("bcel.dontCache");
+    private static volatile int considered = 0;
+    private static volatile int hits = 0;
+    private static volatile int skipped = 0;
+    private static volatile int created = 0;
+
+    // Set the size to 0 or below to skip caching entirely
+    private static final int MAX_CACHED_SIZE = Integer.getInteger("bcel.maxcached.size");
+    private static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
+
+
+    private static class CACHE_HOLDER {
+
+        private static final int MAX_CACHE_ENTRIES = 20000;
+        private static final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
+
+        private static final HashMap<String, ConstantUtf8> CACHE = 
+                new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
+            private static final long serialVersionUID = -8506975356158971766L;
+
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<String, ConstantUtf8> eldest) {
+                 return size() > MAX_CACHE_ENTRIES;
+            }
+        };
+
+    }
+
+    // for accesss by test code
+    static void printStats() {
+        System.err.println("Cache hit " + hits + "/" + considered +", " + skipped + " skipped");
+        System.err.println("Total of " + created + " ConstantUtf8 objects created");
+    }
+    
+    // for accesss by test code
+    static void clearStats() {
+        hits = considered = skipped = created = 0;
+    }
 
     static {
         if (BCEL_STATISTICS) {
             Runtime.getRuntime().addShutdownHook(new Thread() {
                 @Override
                 public void run() {
-                    System.err.println("Cache hit " + hits + "/" + considered +", "
-                            + skipped + " skipped");
-                    System.err.println("Total of " + created + " ConstantUtf8 objects created");
+                    printStats();
                 }
             });
         }
     }
 
-    public static synchronized ConstantUtf8 getCachedInstance(String s) {
-        if (BCEL_DONT_CACHE || s.length() > 200) {
+    public static ConstantUtf8 getCachedInstance(String s) {
+        if (s.length() > MAX_CACHED_SIZE) {
             skipped++;
             return  new ConstantUtf8(s);
         }
         considered++;
-        if (cache == null)  {
-            cache = new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
-                private static final long serialVersionUID = -8506975356158971766L;
-
-                @Override
-                protected boolean removeEldestEntry(Map.Entry<String, ConstantUtf8> eldest) {
-                     return size() > MAX_CACHE_ENTRIES;
+        synchronized (ConstantUtf8.class) { // might be better with a specific lock object
+            ConstantUtf8 result = CACHE_HOLDER.CACHE.get(s);
+            if (result != null) {
+                    hits++;
+                    return result;
                 }
-            };
+            result = new ConstantUtf8(s);
+            CACHE_HOLDER.CACHE.put(s, result);
+            return result;
         }
-        ConstantUtf8 result = cache.get(s);
-        if (result != null) {
-                hits++;
-                return result;
-            }
-        result = new ConstantUtf8(s);
-        cache.put(s, result);
-        return result;
     }
 
     public static ConstantUtf8 getInstance(String s) {
