@@ -1447,6 +1447,8 @@ public interface Constants {
   public static final byte ATTR_BOOTSTRAP_METHODS                       = 20;
   public static final byte ATTR_METHOD_PARAMETERS                       = 21;
 
+  public static final short KNOWN_ATTRIBUTES = 22; // count of attributes
+
   /** @deprecated Use {@link #ATTR_RUNTIME_VISIBLE_ANNOTATIONS} instead */
   @Deprecated
 public static final byte ATTR_RUNTIMEVISIBLE_ANNOTATIONS              = ATTR_RUNTIME_VISIBLE_ANNOTATIONS;
@@ -1460,9 +1462,7 @@ public static final byte ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS    = ATTR_RUN
   @Deprecated
 public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS;
 
-  public static final short KNOWN_ATTRIBUTES = 22;
-
-  // TOFO: FIXXXXX
+  // TODO: mutable public array!!
   public static final String[] ATTRIBUTE_NAMES = {
     "SourceFile", "ConstantValue", "Code", "Exceptions",
     "LineNumberTable", "LocalVariableTable",
@@ -1513,7 +1513,7 @@ public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = ATTR_RUN
   public static final int APPEND_FRAME_MAX = 254;
 
 
-  // Constants defining the behavior of the Method Handles (JVMS §5.4.3.5)
+  // Constants defining the behavior of the Method Handles (JVMS ï¿½5.4.3.5)
   
   public static final byte REF_getField         = 1;
   public static final byte REF_getStatic        = 2;
