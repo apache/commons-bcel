@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -84,7 +84,7 @@ public abstract class ElementValueGen
 
     public static final int PRIMITIVE_BOOLEAN = 'Z';
 
-    public static ElementValueGen readElementValue(DataInputStream dis,
+    public static ElementValueGen readElementValue(DataInput dis,
             ConstantPoolGen cpGen) throws IOException
     {
         int type = dis.readUnsignedByte();

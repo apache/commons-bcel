@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -53,8 +53,8 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
      * @param file Input stream
      * @throws IOException
      */
-    StackMapTableEntry(DataInputStream file, ConstantPool constant_pool) throws IOException {
-        this(file.read(), -1, -1, null, -1, null, constant_pool);
+    StackMapTableEntry(DataInput file, ConstantPool constant_pool) throws IOException {
+        this(file.readByte() & 0xFF, -1, -1, null, -1, null, constant_pool);
 
         if (frame_type >= Constants.SAME_FRAME && frame_type <= Constants.SAME_FRAME_MAX) {
             byte_code_offset_delta = frame_type - Constants.SAME_FRAME;

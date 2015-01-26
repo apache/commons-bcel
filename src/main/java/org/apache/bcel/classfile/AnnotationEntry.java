@@ -44,7 +44,7 @@ public class AnnotationEntry implements Node, Constants, Serializable {
     private List<ElementValuePair> element_value_pairs;
 
     /**
-     * Factory method to create an AnnotionEntry from a DataInputStream
+     * Factory method to create an AnnotionEntry from a DataInput
      * 
      * @param input
      * @param constant_pool

@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -103,7 +103,7 @@ public class AnnotationEntryGen
         isRuntimeVisible = vis;
     }
 
-    public static AnnotationEntryGen read(DataInputStream dis,
+    public static AnnotationEntryGen read(DataInput dis,
             ConstantPoolGen cpool, boolean b) throws IOException
     {
         AnnotationEntryGen a = new AnnotationEntryGen(cpool);
