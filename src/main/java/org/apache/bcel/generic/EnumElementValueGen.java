@@ -23,6 +23,9 @@ import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.EnumElementValue;
 
+/**
+ * @since 6.0
+ */
 public class EnumElementValueGen extends ElementValueGen
 {
     // For enum types, these two indices point to the type and value

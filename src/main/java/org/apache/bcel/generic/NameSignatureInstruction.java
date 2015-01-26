@@ -28,6 +28,7 @@ import org.apache.bcel.classfile.ConstantUtf8;
  *
  * @version $Id: FieldOrMethod.java 1481383 2013-05-11 17:34:32Z dbrosius $
  * @author  <A HREF="mailto:bill.pugh@gmail.com">Bill Pugh</A>
+ * @since 6.0
  */
 public abstract class NameSignatureInstruction extends CPInstruction {
 

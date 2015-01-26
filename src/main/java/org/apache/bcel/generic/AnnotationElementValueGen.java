@@ -22,6 +22,9 @@ import java.io.IOException;
 import org.apache.bcel.classfile.AnnotationElementValue;
 import org.apache.bcel.classfile.ElementValue;
 
+/**
+ * @since 6.0
+ */
 public class AnnotationElementValueGen extends ElementValueGen
 {
     // For annotation element values, this is the annotation

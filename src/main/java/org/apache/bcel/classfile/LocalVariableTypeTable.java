@@ -50,6 +50,10 @@ import org.apache.bcel.Constants;
 //    } local_variable_type_table[local_variable_type_table_length];
 //  }
 // J5TODO: Needs some testing !
+
+/**
+ * since 6.0
+ */
 public class LocalVariableTypeTable extends Attribute {
 
     private static final long serialVersionUID = -1082157891095177114L;

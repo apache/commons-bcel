@@ -27,6 +27,9 @@ import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.SimpleElementValue;
 
+/**
+ * @since 6.0
+ */
 public class SimpleElementValueGen extends ElementValueGen
 {
     // For primitive types and string type, this points to the value entry in

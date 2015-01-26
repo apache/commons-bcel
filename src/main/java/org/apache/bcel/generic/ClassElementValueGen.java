@@ -26,6 +26,9 @@ import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.ElementValueGen;
 
+/**
+ * @since 6.0
+ */
 public class ClassElementValueGen extends ElementValueGen
 {
     // For primitive types and string type, this points to the value entry in

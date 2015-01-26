@@ -29,6 +29,7 @@ import org.apache.bcel.Constants;
  * and represents a reference to a invoke dynamic.
  * 
  * @see     Constant
+ * @since 6.0
  */
 public final class ConstantInvokeDynamic extends Constant {
 

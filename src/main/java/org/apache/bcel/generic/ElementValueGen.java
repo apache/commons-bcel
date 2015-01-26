@@ -29,6 +29,9 @@ import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.EnumElementValue;
 import org.apache.bcel.classfile.SimpleElementValue;
 
+/**
+ * @since 6.0
+ */
 public abstract class ElementValueGen
 {
     protected int type;

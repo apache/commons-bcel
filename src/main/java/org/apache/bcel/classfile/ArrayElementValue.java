@@ -20,6 +20,9 @@ package org.apache.bcel.classfile;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+/**
+ * @since 6.0
+ */
 public class ArrayElementValue extends ElementValue
 {
     // For array types, this is the array

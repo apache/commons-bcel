@@ -29,6 +29,7 @@ import org.apache.bcel.Constants;
  * and represents a reference to a method type.
  * 
  * @see     Constant
+ * @since 6.0
  */
 public final class ConstantMethodType extends Constant {
 

@@ -21,6 +21,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
+/**
+ * @since 6.0
+ */
 public class EnumElementValue extends ElementValue
 {
     // For enum types, these two indices point to the type and value

@@ -21,6 +21,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 
+/**
+ * @since 6.0
+ */
 public class ClassElementValue extends ElementValue
 {
     // For primitive types and string type, this points to the value entry in

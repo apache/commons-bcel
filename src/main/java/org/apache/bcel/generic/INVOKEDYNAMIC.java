@@ -35,6 +35,7 @@ import org.apache.bcel.util.ByteSequence;
  *
  * @version $Id: InvokeInstruction.java 1152072 2011-07-29 01:54:05Z dbrosius $
  * @author  Bill Pugh
+ * @since 6.0
  */
 public class INVOKEDYNAMIC extends NameSignatureInstruction implements ExceptionThrower,
         StackConsumer, StackProducer {

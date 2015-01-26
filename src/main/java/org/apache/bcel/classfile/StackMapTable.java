@@ -36,6 +36,7 @@ import org.apache.bcel.Constants;
  * @see     Code
  * @see     StackMapEntry
  * @see     StackMapType
+ * @since 6.0
  */
 public final class StackMapTable extends Attribute {
 

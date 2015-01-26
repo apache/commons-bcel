@@ -23,6 +23,9 @@ import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.ElementValuePair;
 
+/**
+ * @since 6.0
+ */
 public class ElementValuePairGen
 {
     private int nameIdx;

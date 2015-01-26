@@ -33,6 +33,7 @@ import org.apache.bcel.Constants;
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     StackMap
  * @see     StackMapType
+ * @since 6.0
  */
 public final class StackMapTableEntry implements Cloneable, Serializable {
 

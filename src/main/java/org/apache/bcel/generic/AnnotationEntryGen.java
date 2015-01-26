@@ -27,7 +27,9 @@ import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.ElementValuePair;
 
-
+/**
+ * @since 6.0
+ */
 public class AnnotationEntryGen
 {
     private int typeIndex;
