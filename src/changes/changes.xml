@@ -63,6 +63,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-194" type="fix" due-to="Mark Roberts">
+        Removed the 'index' variable from the LocalVariableGen's hash code.
+      </action>
       <action issue="BCEL-186" type="fix" dev="sebb">
         Performance degradation with the UTF8 cache
         getInstance no longer uses cache

@@ -172,13 +172,11 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
-    /** @return a hash code value for the object.
-     */
     @Override
     public int hashCode() {
-        //If the user changes the name or type, problems with the targeter hashmap will occur
-        int hc = index ^ name.hashCode() ^ type.hashCode();
-        return hc;
+        // If the user changes the name or type, problems with the targeter hashmap will occur.
+        // Note: index cannot be part of hash as it may be changed by the user.
+        return name.hashCode() ^ type.hashCode();
     }
 
 
