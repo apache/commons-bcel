@@ -24,7 +24,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.ConstantUtf8;
 
 /**
  * Abstract super class for <em>Attribute</em> objects. Currently the
@@ -60,8 +59,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 
     protected ConstantPool constant_pool; // TODO make private (has getter & setter)
 
-    protected Attribute(byte tag, int name_index, int length,
-            ConstantPool constant_pool)
+    protected Attribute(byte tag, int name_index, int length, ConstantPool constant_pool)
     {
         this.tag = tag;
         this.name_index = name_index;
@@ -99,10 +97,8 @@ public abstract class Attribute implements Cloneable, Node, Serializable
      * named "name". You should not add readers for the standard attributes such
      * as "LineNumberTable", because those are handled internally.
      * 
-     * @param name
-     *            the name of the attribute as stored in the class file
-     * @param r
-     *            the reader object
+     * @param name the name of the attribute as stored in the class file
+     * @param r    the reader object
      */
     public static void addAttributeReader(String name, AttributeReader r)
     {
@@ -112,8 +108,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
     /**
      * Remove attribute reader
      * 
-     * @param name
-     *            the name of the attribute as stored in the class file
+     * @param name the name of the attribute as stored in the class file
      */
     public static void removeAttributeReader(String name)
     {
@@ -134,24 +129,19 @@ public abstract class Attribute implements Cloneable, Node, Serializable
      * @throws IOException
      * @throws ClassFormatException
      */
-    public static Attribute readAttribute(DataInputStream file,
-            ConstantPool constant_pool) throws IOException,
-            ClassFormatException
+    public static Attribute readAttribute(DataInputStream file, ConstantPool constant_pool)
+            throws IOException, ClassFormatException
     {
-        ConstantUtf8 c;
-        String name;
-        int name_index;
-        int length;
         byte tag = Constants.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via `name_index' indirection
-        name_index = file.readUnsignedShort();
-        c = (ConstantUtf8) constant_pool.getConstant(name_index,
-                Constants.CONSTANT_Utf8);
-        name = c.getBytes();
+        int name_index = file.readUnsignedShort();
+        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8);
+        String name = c.getBytes();
+        
         // Length of data in bytes
-        length = file.readInt();
+        int length = file.readInt();
+        
         // Compare strings to find known attribute
-        // System.out.println(name);
         for (byte i = 0; i < Constants.KNOWN_ATTRIBUTES; i++)
         {
             if (name.equals(Constants.ATTRIBUTE_NAMES[i]))
@@ -160,70 +150,64 @@ public abstract class Attribute implements Cloneable, Node, Serializable
                 break;
             }
         }
+
         // Call proper constructor, depending on `tag'
         switch (tag)
         {
-        case Constants.ATTR_UNKNOWN:
-            AttributeReader r = readers.get(name);
-            if (r != null)
-            {
-                return r.createAttribute(name_index, length, file,
-                        constant_pool);
-            }
-            return new Unknown(name_index, length, file, constant_pool);
-        case Constants.ATTR_CONSTANT_VALUE:
-            return new ConstantValue(name_index, length, file, constant_pool);
-        case Constants.ATTR_SOURCE_FILE:
-            return new SourceFile(name_index, length, file, constant_pool);
-        case Constants.ATTR_CODE:
-            return new Code(name_index, length, file, constant_pool);
-        case Constants.ATTR_EXCEPTIONS:
-            return new ExceptionTable(name_index, length, file, constant_pool);
-        case Constants.ATTR_LINE_NUMBER_TABLE:
-            return new LineNumberTable(name_index, length, file, constant_pool);
-        case Constants.ATTR_LOCAL_VARIABLE_TABLE:
-            return new LocalVariableTable(name_index, length, file,
-                    constant_pool);
-        case Constants.ATTR_INNER_CLASSES:
-            return new InnerClasses(name_index, length, file, constant_pool);
-        case Constants.ATTR_SYNTHETIC:
-            return new Synthetic(name_index, length, file, constant_pool);
-        case Constants.ATTR_DEPRECATED:
-            return new Deprecated(name_index, length, file, constant_pool);
-        case Constants.ATTR_PMG:
-            return new PMGClass(name_index, length, file, constant_pool);
-        case Constants.ATTR_SIGNATURE:
-            return new Signature(name_index, length, file, constant_pool);
-        case Constants.ATTR_STACK_MAP:
-            return new StackMap(name_index, length, file, constant_pool);
-        case Constants.ATTR_RUNTIME_VISIBLE_ANNOTATIONS:
-            return new RuntimeVisibleAnnotations(name_index, length, file,
-                    constant_pool);
-        case Constants.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS:
-            return new RuntimeInvisibleAnnotations(name_index, length, file,
-                    constant_pool);
-        case Constants.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS:
-            return new RuntimeVisibleParameterAnnotations(name_index, length,
-                    file, constant_pool);
-        case Constants.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS:
-            return new RuntimeInvisibleParameterAnnotations(name_index, length,
-                    file, constant_pool);
-        case Constants.ATTR_ANNOTATION_DEFAULT:
-            return new AnnotationDefault(name_index, length, file,
-                    constant_pool);
-        case Constants.ATTR_LOCAL_VARIABLE_TYPE_TABLE:
-            return new LocalVariableTypeTable(name_index, length, file,
-                    constant_pool);
-        case Constants.ATTR_ENCLOSING_METHOD:
-            return new EnclosingMethod(name_index, length, file, constant_pool);
-        case Constants.ATTR_STACK_MAP_TABLE:
-            return new StackMapTable(name_index, length, file, constant_pool);
-        case Constants.ATTR_BOOTSTRAP_METHODS:
-            return new BootstrapMethods(name_index, length, file, constant_pool);
-        case Constants.ATTR_METHOD_PARAMETERS:
+            case Constants.ATTR_UNKNOWN:
+                AttributeReader r = readers.get(name);
+                if (r != null)
+                {
+                    return r.createAttribute(name_index, length, file, constant_pool);
+                }
+                return new Unknown(name_index, length, file, constant_pool);
+            case Constants.ATTR_CONSTANT_VALUE:
+                return new ConstantValue(name_index, length, file, constant_pool);
+            case Constants.ATTR_SOURCE_FILE:
+                return new SourceFile(name_index, length, file, constant_pool);
+            case Constants.ATTR_CODE:
+                return new Code(name_index, length, file, constant_pool);
+            case Constants.ATTR_EXCEPTIONS:
+                return new ExceptionTable(name_index, length, file, constant_pool);
+            case Constants.ATTR_LINE_NUMBER_TABLE:
+                return new LineNumberTable(name_index, length, file, constant_pool);
+            case Constants.ATTR_LOCAL_VARIABLE_TABLE:
+                return new LocalVariableTable(name_index, length, file, constant_pool);
+            case Constants.ATTR_INNER_CLASSES:
+                return new InnerClasses(name_index, length, file, constant_pool);
+            case Constants.ATTR_SYNTHETIC:
+                return new Synthetic(name_index, length, file, constant_pool);
+            case Constants.ATTR_DEPRECATED:
+                return new Deprecated(name_index, length, file, constant_pool);
+            case Constants.ATTR_PMG:
+                return new PMGClass(name_index, length, file, constant_pool);
+            case Constants.ATTR_SIGNATURE:
+                return new Signature(name_index, length, file, constant_pool);
+            case Constants.ATTR_STACK_MAP:
+                return new StackMap(name_index, length, file, constant_pool);
+            case Constants.ATTR_RUNTIME_VISIBLE_ANNOTATIONS:
+                return new RuntimeVisibleAnnotations(name_index, length, file, constant_pool);
+            case Constants.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS:
+                return new RuntimeInvisibleAnnotations(name_index, length, file, constant_pool);
+            case Constants.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS:
+                return new RuntimeVisibleParameterAnnotations(name_index, length, file, constant_pool);
+            case Constants.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS:
+                return new RuntimeInvisibleParameterAnnotations(name_index, length, file, constant_pool);
+            case Constants.ATTR_ANNOTATION_DEFAULT:
+                return new AnnotationDefault(name_index, length, file, constant_pool);
+            case Constants.ATTR_LOCAL_VARIABLE_TYPE_TABLE:
+                return new LocalVariableTypeTable(name_index, length, file, constant_pool);
+            case Constants.ATTR_ENCLOSING_METHOD:
+                return new EnclosingMethod(name_index, length, file, constant_pool);
+            case Constants.ATTR_STACK_MAP_TABLE:
+                return new StackMapTable(name_index, length, file, constant_pool);
+            case Constants.ATTR_BOOTSTRAP_METHODS:
+                return new BootstrapMethods(name_index, length, file, constant_pool);
+            case Constants.ATTR_METHOD_PARAMETERS:
                 return new MethodParameters(name_index, length, file, constant_pool);
-        default: // Never reached
-            throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);
+            default:
+                // Never reached
+                throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);
         }
     }
 
@@ -232,8 +216,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
      */
     public String getName()
     {
-        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index,
-                Constants.CONSTANT_Utf8);
+        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8);
         return c.getBytes();
     }
 
@@ -246,8 +229,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
     }
 
     /**
-     * @param length
-     *            length in bytes.
+     * @param length length in bytes.
      */
     public final void setLength(int length)
     {
@@ -255,8 +237,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
     }
 
     /**
-     * @param name_index
-     *            of attribute.
+     * @param name_index of attribute.
      */
     public final void setNameIndex(int name_index)
     {
@@ -272,8 +253,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
     }
 
     /**
-     * @return Tag of attribute, i.e., its type. Value may not be altered, thus
-     *         there is no setTag() method.
+     * @return Tag of attribute, i.e., its type. Value may not be altered, thus there is no setTag() method.
      */
     public final byte getTag()
     {
@@ -290,8 +270,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
     }
 
     /**
-     * @param constant_pool
-     *            Constant pool to be used for this object.
+     * @param constant_pool Constant pool to be used for this object.
      * @see ConstantPool
      */
     public final void setConstantPool(ConstantPool constant_pool)
