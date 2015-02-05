@@ -127,4 +127,13 @@ public abstract class ParameterAnnotations extends Attribute {
         }
 
     }
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( ConstantPool constant_pool ) {
+        ParameterAnnotations c = (ParameterAnnotations) clone();
+        return c;
+    }
 }
