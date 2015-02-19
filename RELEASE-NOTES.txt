@@ -97,6 +97,7 @@ Bug fixes from 5.2
 [BCEL-177] MethodParameters should read 1 byte not two for parameter count
 [BCEL-181] ClassLoaderRepository.loadClass(String) leaks input streams
 [BCEL-194] LocalVariableGen hashCode() function is incorrrect
+[BCEL-197] Add support for TypeVariables to Utility.signatureToString()
 
 
 Feedback

@@ -823,14 +823,71 @@ public abstract class Utility {
                     return "int";
                 case 'J':
                     return "long";
-                case 'L': { // Full class name
+                case 'T': { // TypeVariableSignature
                     int index = signature.indexOf(';'); // Look for closing `;'
                     if (index < 0) {
                         throw new ClassFormatException("Invalid signature: " + signature);
                     }
                     //corrected concurrent private static field acess
-                    wrap(consumed_chars, index + 1); // "Lblabla;" `L' and `;' are removed
+                    wrap(consumed_chars, index + 1); // "Tblabla;" `T' and `;' are removed
                     return compactClassName(signature.substring(1, index), chopit);
+                }
+                case 'L': { // Full class name
+                    int index = signature.indexOf(';'); // Look for closing `;'
+                    if (index < 0) {
+                        throw new ClassFormatException("Invalid signature: " + signature);
+                    }
+                    // check to see if there are any TypeArguments
+                    int bracketIndex = signature.substring(0, index).indexOf('<');
+                    if (bracketIndex < 0) {
+                        // just a class identifier
+                        wrap(consumed_chars, index + 1); // "Lblabla;" `L' and `;' are removed
+                        return compactClassName(signature.substring(1, index), chopit);
+                    }
+
+                    // we have TypeArguments; build up partial result
+                    // as we recurse for each TypeArgument
+                    String type = compactClassName(signature.substring(1, bracketIndex), chopit) + "<";
+                    int consumed_chars = bracketIndex + 1; // Shadows global var
+
+                    // check for wildcards
+                    if (signature.charAt(consumed_chars) == '+') {
+                        type = type + "? extends ";
+                        consumed_chars = ++consumed_chars;
+                    } else if (signature.charAt(consumed_chars) == '-') {
+                        type = type + "? super ";
+                        consumed_chars = ++consumed_chars;
+                    } else if (signature.charAt(consumed_chars) == '*') {
+                        // must be at end of signature
+                        if (signature.charAt(consumed_chars + 1) != '>') {
+                            throw new ClassFormatException("Invalid signature: " + signature);
+                        }
+                        if (signature.charAt(consumed_chars + 2) != ';') {
+                            throw new ClassFormatException("Invalid signature: " + signature);
+                        }
+                        wrap(Utility.consumed_chars, consumed_chars + 3); // remove final "*>;"
+                        return type + "?>...";
+                    }
+
+                    // get the first TypeArgument
+                    type = type + signatureToString(signature.substring(consumed_chars), chopit);
+                    // update our consumed count by the number of characters the for type argument
+                    consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
+                    wrap(Utility.consumed_chars, consumed_chars);
+
+                    // are there more TypeArguments?
+                    while (signature.charAt(consumed_chars) != '>') {
+                        type = type + ", " + signatureToString(signature.substring(consumed_chars), chopit);
+                        // update our consumed count by the number of characters the for type argument
+                        consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
+                        wrap(Utility.consumed_chars, consumed_chars);
+                    }
+
+                    if (signature.charAt(consumed_chars + 1) != ';') {
+                        throw new ClassFormatException("Invalid signature: " + signature);
+                    }
+                    wrap(Utility.consumed_chars, consumed_chars + 2); // remove final ">;"
+                    return type + ">";
                 }
                 case 'S':
                     return "short";

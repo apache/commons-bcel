@@ -63,6 +63,10 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-197" type="fix" due-to="Mark Roberts">
+        Utility.signatureToString() no longer throws a ClassFormatException on TypeVariables
+        found in generic signatures.
+      </action>
       <action issue="BCEL-194" type="fix" due-to="Mark Roberts">
         Removed the 'index' variable from the LocalVariableGen's hash code.
       </action>
