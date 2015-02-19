@@ -35,7 +35,7 @@ import org.apache.bcel.Constants;
  * the caller.
  *
  * The structure and the names comply, except for a few conveniences,
- * exactly with the <A href="ftp://java.sun.com/docs/specs/vmspec.ps">
+ * exactly with the <A href="http://docs.oracle.com/javase/specs/">
  * JVM specification 1.0</a>. See this paper for
  * further details about the structure of a bytecode file.
  *

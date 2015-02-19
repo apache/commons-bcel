@@ -122,7 +122,7 @@
     represented by a single class file containing class related data
     and byte code instructions. These files are loaded dynamically
     into an interpreter (<a
-    href="http://java.sun.com/docs/books/vmspec/index.html">Java
+    href="http://docs.oracle.com/javase/specs/">Java
     Virtual Machine</a>, aka. JVM) and executed.
   </p>
 
@@ -165,7 +165,7 @@
     covering the details that are necessary for understanding the rest
     of this paper. The format of class files and the byte code
     instruction set are described in more detail in the <a
-    href="http://java.sun.com/docs/books/vmspec/index.html">Java
+    href="http://docs.oracle.com/javase/specs/">Java
     Virtual Machine Specification</a>. Especially, we will not deal
     with the security constraints that the Java Virtual Machine has to
     check at run-time, i.e. the byte code verifier.
@@ -365,7 +365,7 @@
   <p>
     We will not list all byte code instructions here, since these are
     explained in detail in the <a
-    href="http://java.sun.com/docs/books/vmspec/index.html">JVM
+    href="http://docs.oracle.com/javase/specs/">JVM
     specification</a>. The opcode names are mostly self-explaining,
     so understanding the following code examples should be fairly
     intuitive.
@@ -624,7 +624,7 @@
      <tt>org.apache.bcel.classfile</tt> and closely represents class
      files. All of the binary components and data structures declared
      in the <a
-     href="http://java.sun.com/docs/books/vmspec/index.html">JVM
+     href="http://docs.oracle.com/javase/specs/">JVM
      specification</a> and described in section <a
      href="#2 The Java Virtual Machine">2</a> are mapped to classes.
 
