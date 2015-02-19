@@ -458,27 +458,29 @@
     import java.io.*;
 
     public class Factorial {
-      private static BufferedReader in = new BufferedReader(new
-                                InputStreamReader(System.in));
+        private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-      public static int fac(int n) {
-        return (n == 0)? 1 : n * fac(n - 1);
-      }
+        public static int fac(int n) {
+            return (n == 0) ? 1 : n * fac(n - 1);
+        }
 
-      public static int readInt() {
-        int n = 4711;
-        try {
-        System.out.print("Please enter a number&gt; ");
-        n = Integer.parseInt(in.readLine());
-        } catch(IOException e1) { System.err.println(e1); }
-        catch(NumberFormatException e2) { System.err.println(e2); }
-        return n;
-      }
+        public static int readInt() {
+            int n = 4711;
+            try {
+                System.out.print("Please enter a number&gt; ");
+                n = Integer.parseInt(in.readLine());
+            } catch (IOException e1) {
+                System.err.println(e1);
+            } catch (NumberFormatException e2) {
+                System.err.println(e2);
+            }
+            return n;
+        }
 
-      public static void main(String[] argv) {
-        int n = readInt();
-        System.out.println("Factorial of " + n + " is " + fac(n));
-      }
+        public static void main(String[] argv) {
+            int n = readInt();
+            System.out.println("Factorial of " + n + " is " + fac(n));
+        }
     }
   </source>
 
@@ -701,8 +703,8 @@
   </p>
 
   <source>
-  if(Repository.instanceOf(clazz, super_class) {
-    ...
+  if (Repository.instanceOf(clazz, super_class)) {
+      ...
   }</source>
 
   </section>
@@ -722,13 +724,13 @@
   printCode(clazz.getMethods());
   ...
   public static void printCode(Method[] methods) {
-    for(int i=0; i &lt; methods.length; i++) {
-      System.out.println(methods[i]);
+      for (int i = 0; i &lt; methods.length; i++) {
+          System.out.println(methods[i]);
 
-      Code code = methods[i].getCode();
-      if(code != null) // Non-abstract method
-        System.out.println(code);
-    }
+          Code code = methods[i].getCode();
+          if (code != null) // Non-abstract method
+              System.out.println(code);
+      }
   }
   </source>
 
@@ -784,8 +786,8 @@
   </p>
 
   <source>
-  Type   return_type = Type.VOID;
-  Type[] arg_types   = new Type[] { new ArrayType(Type.STRING, 1) };
+  Type return_type = Type.VOID;
+  Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
   </source>
 
   <p>
@@ -934,8 +936,7 @@
   </p>
 
   <source>
-  InstructionHandle start = il.insert(insertion_point,
-                                      InstructionConstants.NOP);
+  InstructionHandle start = il.insert(insertion_point, InstructionConstants.NOP);
   ...
   mg.addExceptionHandler(start, end, handler, "java.io.IOException");
   </source>
@@ -955,14 +956,15 @@
 
   <source>
   try {
-    il.delete(first, last);
-  } catch(TargetLostException e) {
-    InstructionHandle[] targets = e.getTargets();
-    for(int i=0; i &lt; targets.length; i++) {
-      InstructionTargeter[] targeters = targets[i].getTargeters();
-      for(int j=0; j &lt; targeters.length; j++)
-         targeters[j].updateTarget(targets[i], new_target);
-    }
+      il.delete(first, last);
+  } catch (TargetLostException e) {
+      InstructionHandle[] targets = e.getTargets();
+      for (int i = 0; i &lt; targets.length; i++) {
+          InstructionTargeter[] targeters = targets[i].getTargeters();
+          for (int j = 0; j &lt; targeters.length; j++) {
+             targeters[j].updateTarget(targets[i], new_target);
+          }
+      }
   }
   </source>
 
@@ -1128,25 +1130,27 @@
 
   <source>
   CodeConstraint constraint = new CodeConstraint() {
-    public boolean checkCode(InstructionHandle[] match) {
-      IfInstruction if1 = (IfInstruction)match[0].getInstruction();
-      GOTO          g   = (GOTO)match[2].getInstruction();
-      return (if1.getTarget() == match[3]) &amp;&amp;
-             (g.getTarget() == match[4]);
-    }  
+      public boolean checkCode(InstructionHandle[] match) {
+          IfInstruction if1 = (IfInstruction) match[0].getInstruction();
+          GOTO g = (GOTO) match[2].getInstruction();
+          return (if1.getTarget() == match[3]) &amp;&amp;
+                 (g.getTarget() == match[4]);
+      }  
   };
 
-  InstructionFinder f    = new InstructionFinder(il);
-  String            pat = "IfInstruction ICONST_0 GOTO ICONST_1 NOP(IFEQ|IFNE)";
+  InstructionFinder f = new InstructionFinder(il);
+  String pat = "IfInstruction ICONST_0 GOTO ICONST_1 NOP(IFEQ|IFNE)";
 
-  for(Iterator e = f.search(pat, constraint); e.hasNext(); ) {
-    InstructionHandle[] match = (InstructionHandle[])e.next();;
-    ...
-    match[0].setTarget(match[5].getTarget()); // Update target
-    ...
-    try {
-      il.delete(match[1], match[5]);
-    } catch(TargetLostException ex) { ... }
+  for (Iterator e = f.search(pat, constraint); e.hasNext(); ) {
+      InstructionHandle[] match = (InstructionHandle[]) e.next();;
+      ...
+      match[0].setTarget(match[5].getTarget()); // Update target
+      ...
+      try {
+          il.delete(match[1], match[5]);
+      } catch (TargetLostException ex) {
+          ...
+      }
   }
   </source>
 
@@ -1166,8 +1170,8 @@
   </p>
 
   <source>
-  if((a == null) || (i &lt; 2))
-    System.out.println("Ooops");
+  if ((a == null) || (i &lt; 2))
+      System.out.println("Ooops");
   </source>
 
   <p>
@@ -1359,17 +1363,19 @@
   import java.io.*;
 
   public class HelloWorld {
-    public static void main(String[] argv) {
-      BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-      String name = null;
-
-      try {
-        System.out.print("Please enter your name&gt; ");
-        name = in.readLine();
-      } catch(IOException e) { return; }
-
-      System.out.println("Hello, " + name);
-    }
+      public static void main(String[] argv) {
+          BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+          String name = null;
+    
+          try {
+              System.out.print("Please enter your name&gt; ");
+              name = in.readLine();
+          } catch (IOException e) {
+              return;
+          }
+    
+          System.out.println("Hello, " + name);
+      }
   }
   </source>
 
@@ -1394,8 +1400,7 @@
 
   <source>
   ClassGen cg = new ClassGen("HelloWorld", "java.lang.Object",
-                             "&lt;generated&gt;", ACC_PUBLIC | ACC_SUPER,
-                             null);
+                             "&lt;generated&gt;", ACC_PUBLIC | ACC_SUPER, null);
   ConstantPoolGen cp = cg.getConstantPool(); // cg creates constant pool
   InstructionList il = new InstructionList();
   </source>
@@ -1437,8 +1442,7 @@ symbolic type signature encoded with <tt>Type</tt> objects.
   il.append(InstructionConstants.DUP); // Use predefined constant
   il.append(factory.createNew("java.io.InputStreamReader"));
   il.append(InstructionConstants.DUP);
-  il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
-                                      Constants.GETSTATIC));
+  il.append(factory.createFieldAccess("java.lang.System", "in", i_stream, Constants.GETSTATIC));
   il.append(factory.createInvoke("java.io.InputStreamReader", "&lt;init&gt;",
                                  Type.VOID, new Type[] { i_stream },
                                  Constants.INVOKESPECIAL));
@@ -1470,8 +1474,7 @@ symbolic type signature encoded with <tt>Type</tt> objects.
 
   <source>
   InstructionHandle try_start =
-    il.append(factory.createFieldAccess("java.lang.System", "out", p_stream,
-                                        Constants.GETSTATIC));
+    il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Constants.GETSTATIC));
 
   il.append(new PUSH(cp, "Please enter your name&gt; "));
   il.append(factory.createInvoke("java.io.PrintStream", "print", Type.VOID, 
@@ -1509,8 +1512,7 @@ symbolic type signature encoded with <tt>Type</tt> objects.
 
   <source>
   InstructionHandle ih =
-    il.append(factory.createFieldAccess("java.lang.System", "out", p_stream,
-                                        Constants.GETSTATIC));
+      il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Constants.GETSTATIC));
   g.setTarget(ih);
   </source>
 
@@ -1559,8 +1561,10 @@ symbolic type signature encoded with <tt>Type</tt> objects.
 
   <source>
   try {
-    cg.getJavaClass().dump("HelloWorld.class");
-  } catch(java.io.IOException e) { System.err.println(e); }
+      cg.getJavaClass().dump("HelloWorld.class");
+  } catch (IOException e) {
+      System.err.println(e);
+  }
   </source>
 
  </section>
@@ -1581,78 +1585,78 @@ import org.apache.bcel.Repository;
 import org.apache.bcel.util.InstructionFinder;
 
 public class Peephole {
-  public static void main(String[] argv) {
-    try {
-      /* Load the class from CLASSPATH.
-       */
-      JavaClass       clazz   = Repository.lookupClass(argv[0]);
-      Method[]        methods = clazz.getMethods();
-      ConstantPoolGen cp      = new ConstantPoolGen(clazz.getConstantPool());
 
-      for(int i=0; i &lt; methods.length; i++) {
-        if(!(methods[i].isAbstract() || methods[i].isNative())) {
-          MethodGen mg       = new MethodGen(methods[i],
-                               clazz.getClassName(), cp);
-          Method    stripped = removeNOPs(mg);
-      
-          if(stripped != null)     // Any NOPs stripped?
-            methods[i] = stripped; // Overwrite with stripped method
+    public static void main(String[] argv) {
+        try {
+            // Load the class from CLASSPATH.
+            JavaClass clazz  = Repository.lookupClass(argv[0]);
+            Method[] methods = clazz.getMethods();
+            ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
+
+            for (int i = 0; i &lt; methods.length; i++) {
+                if (!(methods[i].isAbstract() || methods[i].isNative())) {
+                    MethodGen mg = new MethodGen(methods[i], clazz.getClassName(), cp);
+                    Method stripped = removeNOPs(mg);
+          
+                    if (stripped != null)      // Any NOPs stripped?
+                        methods[i] = stripped; // Overwrite with stripped method
+                }
+            }
+
+            // Dump the class to "class name"_.class
+            clazz.setConstantPool(cp.getFinalConstantPool());
+            clazz.dump(clazz.getClassName() + "_.class");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-      }
-
-      /* Dump the class to "class name"_.class
-       */
-      clazz.setConstantPool(cp.getFinalConstantPool());
-      clazz.dump(clazz.getClassName() + "_.class");
-    } catch(Exception e) { e.printStackTrace(); }
-  }
-
-  private static Method removeNOPs(MethodGen mg) {
-    InstructionList   il    = mg.getInstructionList();
-    InstructionFinder f     = new InstructionFinder(il);
-    String            pat   = "NOP+"; // Find at least one NOP
-    InstructionHandle next  = null;
-    int               count = 0;
-
-    for(Iterator iter = f.search(pat); iter.hasNext(); ) {
-      InstructionHandle[] match = (InstructionHandle[])iter.next();
-      InstructionHandle   first = match[0];
-      InstructionHandle   last  = match[match.length - 1];
-      
-      /* Some nasty Java compilers may add NOP at end of method.
-       */
-      if((next = last.getNext()) == null)
-    break;
-
-      count += match.length;
-
-      /* Delete NOPs and redirect any references to them to the following
-       * (non-nop) instruction.
-       */
-      try {
-    il.delete(first, last);
-      } catch(TargetLostException e) {
-    InstructionHandle[] targets = e.getTargets();
-    for(int i=0; i &lt; targets.length; i++) {
-      InstructionTargeter[] targeters = targets[i].getTargeters();
-      
-      for(int j=0; j &lt; targeters.length; j++)
-        targeters[j].updateTarget(targets[i], next);
-    }
-      }
     }
 
-    Method m = null;
-    
-    if(count &gt; 0) {
-      System.out.println("Removed " + count + " NOP instructions from method " +
-             mg.getName());
-      m = mg.getMethod();
-    }
+    private static Method removeNOPs(MethodGen mg) {
+        InstructionList il = mg.getInstructionList();
+        InstructionFinder f = new InstructionFinder(il);
+        String pat = "NOP+"; // Find at least one NOP
+        InstructionHandle next = null;
+        int count = 0;
 
-    il.dispose(); // Reuse instruction handles
-    return m;
-  }
+        for (Iterator iter = f.search(pat); iter.hasNext();) {
+            InstructionHandle[] match = (InstructionHandle[]) iter.next();
+            InstructionHandle first = match[0];
+            InstructionHandle last  = match[match.length - 1];
+            
+            // Some nasty Java compilers may add NOP at end of method.
+            if ((next = last.getNext()) == null) {
+                break;
+            }
+
+            count += match.length;
+
+            /**
+             * Delete NOPs and redirect any references to them to the following (non-nop) instruction.
+             */
+            try {
+                il.delete(first, last);
+            } catch (TargetLostException e) {
+                InstructionHandle[] targets = e.getTargets();
+                for (int i = 0; i &lt; targets.length; i++) {
+                    InstructionTargeter[] targeters = targets[i].getTargeters();
+                    
+                    for (int j = 0; j &lt; targeters.length; j++) {
+                        targeters[j].updateTarget(targets[i], next);
+                    }
+                }
+            }
+        }
+
+        Method m = null;
+        
+        if (count &gt; 0) {
+            System.out.println("Removed " + count + " NOP instructions from method " + mg.getName());
+            m = mg.getMethod();
+        }
+
+        il.dispose(); // Reuse instruction handles
+        return m;
+    }
 }
  </source>
  </section>
