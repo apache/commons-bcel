@@ -163,6 +163,13 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         }
     }
 
+    /**
+     * Clear the references from and to this variable when it's removed.
+     */
+    void dispose() {
+        setStart(null);
+        setEnd(null);
+    }
 
     /**
      * @return true, if ih is target of this variable

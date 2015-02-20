@@ -335,6 +335,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * with an explicit index argument.
      */
     public void removeLocalVariable( LocalVariableGen l ) {
+        l.dispose();
         variable_vec.remove(l);
     }
 
@@ -343,6 +344,9 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove all local variables.
      */
     public void removeLocalVariables() {
+        for (LocalVariableGen lv : variable_vec) {
+            lv.dispose();
+        }
         variable_vec.clear();
     }
 

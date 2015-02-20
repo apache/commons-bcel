@@ -98,6 +98,7 @@ Bug fixes from 5.2
 [BCEL-181] ClassLoaderRepository.loadClass(String) leaks input streams
 [BCEL-194] LocalVariableGen hashCode() function is incorrrect
 [BCEL-197] Add support for TypeVariables to Utility.signatureToString()
+[BCEL-207] MethodGen.removeLocalVariable(s) doesn't remove the associated Targetters
 
 
 Feedback
