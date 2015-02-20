@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.bcel.Constants;
@@ -148,5 +149,17 @@ public class AnnotationEntry implements Node, Constants, Serializable {
             result.append(")");
         }
         return result.toString();
+    }
+
+    public static AnnotationEntry[] createAnnotationEntries(Attribute[] attrs) {
+        // Find attributes that contain annotation data
+        List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>(attrs.length);
+        for (Attribute attribute : attrs) {
+            if (attribute instanceof Annotations) {
+                Annotations runtimeAnnotations = (Annotations) attribute;
+                Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getAnnotationEntries());
+            }
+        }
+        return accumulatedAnnotations.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
     }
 }

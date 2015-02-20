@@ -21,8 +21,6 @@ import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.Signature;
@@ -45,10 +43,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
     private String signatureAttributeString = null;
     private boolean searchedForSignatureAttribute = false;
-
-
-    // Annotations are collected from certain attributes, don't do it more than necessary!
-    private boolean annotationsOutOfDate = true;
 
     FieldOrMethod() {
     }
@@ -233,48 +227,14 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     }
 
     /**
-     * Ensure we have unpacked any attributes that contain annotations.
-     * We don't remove these annotation attributes from the attributes list, they
-     * remain there.
+     * @return Annotations on the field or method
      */
-    private void ensureAnnotationsUpToDate()
-    {
-        if (annotationsOutOfDate)
-        {
-            // Find attributes that contain annotation data
-            Attribute[] attrs = getAttributes();
-            List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>();
-            for (Attribute attribute : attrs) {
-                if (attribute instanceof Annotations)
-                {
-                    Annotations annotations = (Annotations) attribute;
-                    for (int j = 0; j < annotations.getAnnotationEntries().length; j++)
-                    {
-                        accumulatedAnnotations.add(annotations
-                                .getAnnotationEntries()[j]);
-                    }
-                }
-            }
-            annotationEntries = accumulatedAnnotations
-                    .toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
-            annotationsOutOfDate = false;
+    public AnnotationEntry[] getAnnotationEntries() {
+        if (annotationEntries == null) {
+            annotationEntries = AnnotationEntry.createAnnotationEntries(getAttributes());
         }
-    }
-
-    public AnnotationEntry[] getAnnotationEntries()
-    {
-        ensureAnnotationsUpToDate();
+        
         return annotationEntries;
-    }
-
-    public void addAnnotationEntry(AnnotationEntry a)
-    {
-        ensureAnnotationsUpToDate();
-        int len = annotationEntries.length;
-        AnnotationEntry[] newAnnotations = new AnnotationEntry[len + 1];
-        System.arraycopy(annotationEntries, 0, newAnnotations, 0, len);
-        newAnnotations[len] = a;
-        annotationEntries = newAnnotations;
     }
 
     /**

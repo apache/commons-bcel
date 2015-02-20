@@ -73,10 +73,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public static final byte ZIP = 3;
     static boolean debug = false; // Debugging on/off
     final static char sep = File.separatorChar; // directory separator
-
-    //  Annotations are collected from certain attributes, don't do it more than necessary!
-    private boolean annotationsOutOfDate = true;
-
+    
     private static BCELComparator _cmp = new BCELComparator() {
 
         public boolean equals( Object o1, Object o2 ) {
@@ -144,7 +141,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         this.fields = fields;
         this.methods = methods;
         this.attributes = attributes;
-        annotationsOutOfDate = true;
         this.source = source;
         // Get source file name if available
         for (Attribute attribute : attributes) {
@@ -337,24 +333,17 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         return attributes;
     }
 
+    /**
+     * @return Annotations on the class
+     */
     public AnnotationEntry[] getAnnotationEntries() {
-          if (annotationsOutOfDate) { 
-              // Find attributes that contain annotation data
-              Attribute[] attrs = getAttributes();
-              List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>();
-              for (Attribute attribute : attrs) {
-                if (attribute instanceof Annotations) {                
-                    Annotations runtimeAnnotations = (Annotations)attribute;
-                    for(int j = 0; j < runtimeAnnotations.getAnnotationEntries().length; j++) {
-                        accumulatedAnnotations.add(runtimeAnnotations.getAnnotationEntries()[j]);
-                    }
-                }
-            }
-              annotations = accumulatedAnnotations.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
-              annotationsOutOfDate = false;
-          }
-          return annotations;
-      }
+        if (annotations == null) {
+            annotations = AnnotationEntry.createAnnotationEntries(getAttributes());
+        }
+        
+        return annotations;
+    }
+
     /**
      * @return Class name.
      */
