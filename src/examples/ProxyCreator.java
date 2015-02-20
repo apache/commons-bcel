@@ -15,8 +15,10 @@
  *  limitations under the License.
  *
  */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.ALOAD;
@@ -44,88 +46,91 @@ import org.apache.bcel.generic.Type;
  * comparable to the mechanism provided via
  * {@code java.lang.reflect.Proxy}, but much more flexible.
  *
- * @version $Id$
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
+ * @version $Id$
  * @see org.apache.bcel.util.JavaWrapper
  * @see org.apache.bcel.util.ClassLoader
  * @see Utility
  */
 public class ProxyCreator {
-  /** Load class and create instance
-   */
-  public static Object createProxy(String pack, String class_name) {
-    try {
-      Class<?> cl = Class.forName(pack + "$$BCEL$$" + class_name);
-      return cl.newInstance();
-    } catch(Exception e) {
-      e.printStackTrace();
+
+    /**
+     * Load class and create instance
+     */
+    public static Object createProxy(String pack, String class_name) {
+        try {
+            Class<?> cl = Class.forName(pack + "$$BCEL$$" + class_name);
+            return cl.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
-    return null;
-  }
+    /**
+     * Create JavaClass object for a simple proxy for an java.awt.event.ActionListener
+     * that just prints the passed arguments, load and use it via the class loader
+     * mechanism.
+     */
+    public static void main(String[] argv) throws Exception {
+        ClassLoader loader = ProxyCreator.class.getClassLoader();
 
-  /** Create JavaClass object for a simple proxy for an java.awt.event.ActionListener
-   * that just prints the passed arguments, load and use it via the class loader
-   * mechanism.
-   */
-  public static void main(String[] argv) throws Exception {
-    ClassLoader loader = ProxyCreator.class.getClassLoader();
+        // instanceof won't work here ...
+        if (loader.getClass().toString().equals("class org.apache.bcel.util.ClassLoader")) {
+            // Real class name will be set by the class loader
+            ClassGen cg = new ClassGen("foo", "java.lang.Object", "", Constants.ACC_PUBLIC,
+                    new String[]{"java.awt.event.ActionListener"});
 
-    // instanceof won't work here ...
-    if(loader.getClass().toString().equals("class org.apache.bcel.util.ClassLoader")) {
-      // Real class name will be set by the class loader
-      ClassGen cg = new ClassGen("foo", "java.lang.Object", "", Constants.ACC_PUBLIC,
-                 new String[] {"java.awt.event.ActionListener"});
-     
-      // That's important, otherwise newInstance() won't work
-      cg.addEmptyConstructor(Constants.ACC_PUBLIC);
+            // That's important, otherwise newInstance() won't work
+            cg.addEmptyConstructor(Constants.ACC_PUBLIC);
 
-      InstructionList    il      = new InstructionList();
-      ConstantPoolGen    cp      = cg.getConstantPool();
-      InstructionFactory factory = new InstructionFactory(cg);
+            InstructionList il = new InstructionList();
+            ConstantPoolGen cp = cg.getConstantPool();
+            InstructionFactory factory = new InstructionFactory(cg);
 
-      int out     = cp.addFieldref("java.lang.System", "out",
-                   "Ljava/io/PrintStream;");
-      int println = cp.addMethodref("java.io.PrintStream", "println",
-                  "(Ljava/lang/Object;)V");
-      MethodGen mg = new MethodGen(Constants.ACC_PUBLIC, Type.VOID,
-                   new Type[] {
-                     new ObjectType("java.awt.event.ActionEvent")
-                   }, null, "actionPerformed", "foo", il, cp);
+            int out = cp.addFieldref("java.lang.System", "out",
+                    "Ljava/io/PrintStream;");
+            int println = cp.addMethodref("java.io.PrintStream", "println",
+                    "(Ljava/lang/Object;)V");
+            MethodGen mg = new MethodGen(Constants.ACC_PUBLIC, Type.VOID,
+                    new Type[]{
+                            new ObjectType("java.awt.event.ActionEvent")
+                    }, null, "actionPerformed", "foo", il, cp);
 
-      // System.out.println("actionPerformed:" + event);
-      il.append(new GETSTATIC(out));
-      il.append(factory.createNew("java.lang.StringBuffer"));
-      il.append(InstructionConstants.DUP);
-      il.append(new PUSH(cp, "actionPerformed:"));
-      il.append(factory.createInvoke("java.lang.StringBuffer", "<init>", Type.VOID,
-                     new Type[] {Type.STRING}, Constants.INVOKESPECIAL));
+            // System.out.println("actionPerformed:" + event);
+            il.append(new GETSTATIC(out));
+            il.append(factory.createNew("java.lang.StringBuffer"));
+            il.append(InstructionConstants.DUP);
+            il.append(new PUSH(cp, "actionPerformed:"));
+            il.append(factory.createInvoke("java.lang.StringBuffer", "<init>", Type.VOID,
+                    new Type[]{Type.STRING}, Constants.INVOKESPECIAL));
 
-      il.append(new ALOAD(1));
-      il.append(factory.createAppend(Type.OBJECT));
-      il.append(new INVOKEVIRTUAL(println));
-      il.append(InstructionConstants.RETURN);
+            il.append(new ALOAD(1));
+            il.append(factory.createAppend(Type.OBJECT));
+            il.append(new INVOKEVIRTUAL(println));
+            il.append(InstructionConstants.RETURN);
 
-      mg.stripAttributes(true);
-      mg.setMaxStack();
-      mg.setMaxLocals();
-      cg.addMethod(mg.getMethod());
+            mg.stripAttributes(true);
+            mg.setMaxStack();
+            mg.setMaxLocals();
+            cg.addMethod(mg.getMethod());
 
-      byte[] bytes = cg.getJavaClass().getBytes();
+            byte[] bytes = cg.getJavaClass().getBytes();
 
-      System.out.println("Uncompressed class: " + bytes.length);
+            System.out.println("Uncompressed class: " + bytes.length);
 
-      String s = Utility.encode(bytes, true);
-      System.out.println("Encoded class: " + s.length());
+            String s = Utility.encode(bytes, true);
+            System.out.println("Encoded class: " + s.length());
 
-      System.out.print("Creating proxy ... ");
-      ActionListener a = (ActionListener)createProxy("foo.bar.", s);
-      System.out.println("Done. Now calling actionPerformed()");
-      
-      a.actionPerformed(new ActionEvent(a, ActionEvent.ACTION_PERFORMED, "hello"));
-    } else {
-        System.err.println("Call me with java org.apache.bcel.util.JavaWrapper ProxyCreator");
+            System.out.print("Creating proxy ... ");
+            ActionListener a = (ActionListener) createProxy("foo.bar.", s);
+            System.out.println("Done. Now calling actionPerformed()");
+
+            a.actionPerformed(new ActionEvent(a, ActionEvent.ACTION_PERFORMED, "hello"));
+        } else {
+            System.err.println("Call me with java org.apache.bcel.util.JavaWrapper ProxyCreator");
+        }
     }
-  }
 
 }

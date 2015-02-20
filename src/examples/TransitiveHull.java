@@ -15,8 +15,10 @@
  *  limitations under the License.
  *
  */
+
 import java.util.Arrays;
 import java.util.regex.Pattern;
+
 import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
@@ -46,41 +48,42 @@ import org.apache.bcel.util.ClassSet;
  * <p>
  * You'll need Apache's regular expression library supplied together with BCEL
  * to use this class.
- * 
- * @version $Id$
+ *
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
+ * @version $Id$
  */
 public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
-    private ClassQueue                        _queue;
-    private ClassSet                            _set;
-    private ConstantPool                    _cp;
-    private String[]                            _ignored    = IGNORED;
 
-    public static final String[]    IGNORED        = { "java[.].*", "javax[.].*", "sun[.].*", "sunw[.].*",
-            "com[.]sun[.].*", "org[.]omg[.].*", "org[.]w3c[.].*", "org[.]xml[.].*", "net[.]jini[.].*" };
+    private ClassQueue queue;
+    private ClassSet set;
+    private ConstantPool cp;
+    private String[] ignored = IGNORED;
+
+    public static final String[] IGNORED = {"java[.].*", "javax[.].*", "sun[.].*", "sunw[.].*",
+            "com[.]sun[.].*", "org[.]omg[.].*", "org[.]w3c[.].*", "org[.]xml[.].*", "net[.]jini[.].*"};
 
     public TransitiveHull(JavaClass clazz) {
-        _queue = new ClassQueue();
-        _queue.enqueue(clazz);
-        _set = new ClassSet();
-        _set.add(clazz);
+        queue = new ClassQueue();
+        queue.enqueue(clazz);
+        set = new ClassSet();
+        set.add(clazz);
     }
 
     public JavaClass[] getClasses() {
-        return _set.toArray();
+        return set.toArray();
     }
 
     public String[] getClassNames() {
-        return _set.getClassNames();
+        return set.getClassNames();
     }
 
     /**
      * Start traversal using DescendingVisitor pattern.
      */
     public void start() {
-        while (!_queue.empty()) {
-            JavaClass clazz = _queue.dequeue();
-            _cp = clazz.getConstantPool();
+        while (!queue.empty()) {
+            JavaClass clazz = queue.dequeue();
+            cp = clazz.getConstantPool();
 
             new org.apache.bcel.classfile.DescendingVisitor(clazz, this).visit();
         }
@@ -89,8 +92,8 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
     private void add(String class_name) {
         class_name = class_name.replace('/', '.');
 
-        for (int i = 0; i < _ignored.length; i++) {
-            if (Pattern.matches(_ignored[i], class_name)) {
+        for (String anIgnored : ignored) {
+            if (Pattern.matches(anIgnored, class_name)) {
                 return;
             }
         }
@@ -98,8 +101,8 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
         try {
             JavaClass clazz = Repository.lookupClass(class_name);
 
-            if (_set.add(clazz)) {
-                _queue.enqueue(clazz);
+            if (set.add(clazz)) {
+                queue.enqueue(clazz);
             }
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("Missing class: " + e.toString());
@@ -108,7 +111,7 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
 
     @Override
     public void visitConstantClass(ConstantClass cc) {
-        String class_name = (String) cc.getConstantValue(_cp);
+        String class_name = (String) cc.getConstantValue(cp);
         add(class_name);
     }
 
@@ -123,23 +126,21 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     private void visitRef(ConstantCP ccp, boolean method) {
-        String class_name = ccp.getClass(_cp);
+        String class_name = ccp.getClass(cp);
         add(class_name);
 
-        ConstantNameAndType cnat = (ConstantNameAndType) _cp.getConstant(ccp.getNameAndTypeIndex(),
+        ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(ccp.getNameAndTypeIndex(),
                 Constants.CONSTANT_NameAndType);
 
-        String signature = cnat.getSignature(_cp);
+        String signature = cnat.getSignature(cp);
 
         if (method) {
             Type type = Type.getReturnType(signature);
 
             checkType(type);
 
-            Type[] types = Type.getArgumentTypes(signature);
-
-            for (int i = 0; i < types.length; i++) {
-                checkType(types[i]);
+            for (Type type1 : Type.getArgumentTypes(signature)) {
+                checkType(type1);
             }
         } else {
             checkType(Type.getType(signature));
@@ -162,17 +163,16 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     public String[] getIgnored() {
-        return _ignored;
+        return ignored;
     }
 
     /**
-     * Set the value of _ignored.
-     * 
-     * @param v
-     *          Value to assign to _ignored.
+     * Set the value of ignored.
+     *
+     * @param v Value to assign to ignored.
      */
     public void setIgnored(String[] v) {
-        _ignored = v;
+        ignored = v;
     }
 
     public static void main(String[] argv) {
