@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.IOException;
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.Type;
@@ -76,7 +76,7 @@ public final class Method extends FieldOrMethod {
      * @throws IOException
      * @throws ClassFormatException
      */
-    Method(DataInputStream file, ConstantPool constant_pool) throws IOException,
+    Method(DataInput file, ConstantPool constant_pool) throws IOException,
             ClassFormatException {
         super(file, constant_pool);
     }

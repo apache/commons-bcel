@@ -25,6 +25,8 @@ package org.apache.bcel.classfile;
  * @see Attribute
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
+ * 
+ * @deprecated Use UnknownAttributeReader instead 
  */
 public interface AttributeReader {
 
@@ -54,6 +56,5 @@ public interface AttributeReader {
 
      @see Attribute#addAttributeReader( String, AttributeReader )
      */
-    Attribute createAttribute( int name_index, int length, java.io.DataInputStream file,
-            ConstantPool constant_pool );
+    Attribute createAttribute( int name_index, int length, java.io.DataInputStream file, ConstantPool constant_pool );
 }

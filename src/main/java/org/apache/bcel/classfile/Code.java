@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-import java.io.DataInputStream;
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
@@ -70,7 +70,7 @@ public final class Code extends Attribute {
      * @param file Input stream
      * @param constant_pool Array of constants
      */
-    Code(int name_index, int length, DataInputStream file, ConstantPool constant_pool)
+    Code(int name_index, int length, DataInput file, ConstantPool constant_pool)
             throws IOException {
         // Initialize with some default values which will be overwritten later
         this(name_index, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null,

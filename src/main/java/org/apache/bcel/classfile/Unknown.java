@@ -29,13 +29,13 @@ import org.apache.bcel.Constants;
  * application-specific) attribute of a class.  It is instantiated from the
  * {@link Attribute#readAttribute(java.io.DataInput, ConstantPool)} method.
  * Applications that need to read in application-specific attributes should create an
- * {@link AttributeReader} implementation and attach it via
- * {@link Attribute#addAttributeReader(String, AttributeReader)}.
+ * {@link UnknownAttributeReader} implementation and attach it via
+ * {@link Attribute#addAttributeReader(String, UnknownAttributeReader)}.
 
  *
  * @version $Id$
  * @see org.apache.bcel.classfile.Attribute
- * @see org.apache.bcel.classfile.AttributeReader
+ * @see org.apache.bcel.classfile.UnknownAttributeReader
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class Unknown extends Attribute {

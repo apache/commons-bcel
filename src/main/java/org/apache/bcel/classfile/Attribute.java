@@ -17,6 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
+import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -90,7 +91,21 @@ public abstract class Attribute implements Cloneable, Node, Serializable
         file.writeInt(length);
     }
 
-    private static final Map<String, AttributeReader> readers = new HashMap<String, AttributeReader>();
+    private static final Map<String, Object> readers = new HashMap<String, Object>();
+
+    /**
+     * Add an Attribute reader capable of parsing (user-defined) attributes
+     * named "name". You should not add readers for the standard attributes such
+     * as "LineNumberTable", because those are handled internally.
+     * 
+     * @param name the name of the attribute as stored in the class file
+     * @param r    the reader object
+     * @deprecated Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead
+     */
+    public static void addAttributeReader(String name, AttributeReader r)
+    {
+        readers.put(name, r);
+    }
 
     /**
      * Add an Attribute reader capable of parsing (user-defined) attributes
@@ -100,7 +115,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
      * @param name the name of the attribute as stored in the class file
      * @param r    the reader object
      */
-    public static void addAttributeReader(String name, AttributeReader r)
+    public static void addAttributeReader(String name, UnknownAttributeReader r)
     {
         readers.put(name, r);
     }
@@ -132,6 +147,26 @@ public abstract class Attribute implements Cloneable, Node, Serializable
     public static Attribute readAttribute(DataInputStream file, ConstantPool constant_pool)
             throws IOException, ClassFormatException
     {
+        return readAttribute((DataInput) file, constant_pool);
+    }
+
+    /**
+     * Class method reads one attribute from the input data stream. This method
+     * must not be accessible from the outside. It is called by the Field and
+     * Method constructor methods.
+     * 
+     * @see Field
+     * @see Method
+     * 
+     * @param file Input stream
+     * @param constant_pool Array of constants
+     * @return Attribute
+     * @throws IOException
+     * @throws ClassFormatException
+     */
+    public static Attribute readAttribute(DataInput file, ConstantPool constant_pool)
+            throws IOException, ClassFormatException
+    {
         byte tag = Constants.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via `name_index' indirection
         int name_index = file.readUnsignedShort();
@@ -155,10 +190,14 @@ public abstract class Attribute implements Cloneable, Node, Serializable
         switch (tag)
         {
             case Constants.ATTR_UNKNOWN:
-                AttributeReader r = readers.get(name);
-                if (r != null)
+                Object r = readers.get(name);
+                if (r instanceof UnknownAttributeReader)
                 {
-                    return r.createAttribute(name_index, length, file, constant_pool);
+                    return ((UnknownAttributeReader) r).createAttribute(name_index, length, file, constant_pool);
+                }
+                else if (r instanceof  AttributeReader && file instanceof DataInputStream)
+                {
+                    return ((AttributeReader) r).createAttribute(name_index, length, (DataInputStream) file, constant_pool);
                 }
                 return new Unknown(name_index, length, file, constant_pool);
             case Constants.ATTR_CONSTANT_VALUE:
