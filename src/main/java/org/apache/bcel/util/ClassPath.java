@@ -261,20 +261,18 @@ public class ClassPath implements Serializable {
      * @return class file for the java class
      */
     public ClassFile getClassFile( String name, String suffix ) throws IOException {
-        for (PathEntry path : paths) { // TODO why is path not used??
-            ClassFile cf = null;
+        ClassFile cf = null;
 
-            if(parent != null) {
-                cf = parent.getClassFileInternal(name, suffix);
-            }
+        if (parent != null) {
+            cf = parent.getClassFileInternal(name, suffix);
+        }
 
-            if(cf == null) {
-                cf = getClassFileInternal(name,suffix);
-            }
+        if (cf == null) {
+            cf = getClassFileInternal(name, suffix);
+        }
 
-            if(cf != null) {
-                return cf;
-            }
+        if (cf != null) {
+            return cf;
         }
 
         throw new IOException("Couldn't find: " + name + suffix);
