@@ -1121,7 +1121,7 @@ public class InstructionList implements Serializable {
 
 
     /**
-     * Delete contents of list. Provides besser memory utilization,
+     * Delete contents of list. Provides better memory utilization,
      * because the system then may reuse the instruction handles. This
      * method is typically called right after {@link MethodGen#getMethod()}.
      */
