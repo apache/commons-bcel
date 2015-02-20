@@ -18,8 +18,8 @@
 package org.apache.bcel.generic;
 
 /**
- * Thrown by InstructionList.remove() when one or multiple disposed instruction
- * are still being referenced by a InstructionTargeter object. I.e. the
+ * Thrown by InstructionList.remove() when one or multiple disposed instructions
+ * are still being referenced by an InstructionTargeter object. I.e. the
  * InstructionTargeter has to be notified that (one of) the InstructionHandle it
  * is referencing is being removed from the InstructionList and thus not valid anymore.
  *
@@ -30,15 +30,13 @@ package org.apache.bcel.generic;
  * <PRE>
  *     ...
  *     try {
- *    il.delete(start_ih, end_ih);
+ *         il.delete(start_ih, end_ih);
  *     } catch(TargetLostException e) {
- *       InstructionHandle[] targets = e.getTargets();
- *     for(int i=0; i &lt; targets.length; i++) {
- *       InstructionTargeter[] targeters = targets[i].getTargeters();
- *     
- *       for(int j=0; j &lt; targeters.length; j++)
- *         targeters[j].updateTarget(targets[i], new_target);
- *       }
+ *         for (InstructionHandle target : e.getTargets()) {
+ *             for (InstructionTargeter targeter : target.getTargeters()) {
+ *                 targeter.updateTarget(target, new_target);
+ *             }
+ *         }
  *     }
  * </PRE>
  *

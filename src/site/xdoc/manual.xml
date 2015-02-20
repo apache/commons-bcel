@@ -958,11 +958,9 @@
   try {
       il.delete(first, last);
   } catch (TargetLostException e) {
-      InstructionHandle[] targets = e.getTargets();
-      for (int i = 0; i &lt; targets.length; i++) {
-          InstructionTargeter[] targeters = targets[i].getTargeters();
-          for (int j = 0; j &lt; targeters.length; j++) {
-             targeters[j].updateTarget(targets[i], new_target);
+      for (InstructionHandle target : e.getTargets()) {
+          for (InstructionTargeter targeter : target.getTargeters()) {
+             targeter.updateTarget(target, new_target);
           }
       }
   }
@@ -1636,12 +1634,9 @@ public class Peephole {
             try {
                 il.delete(first, last);
             } catch (TargetLostException e) {
-                InstructionHandle[] targets = e.getTargets();
-                for (int i = 0; i &lt; targets.length; i++) {
-                    InstructionTargeter[] targeters = targets[i].getTargeters();
-                    
-                    for (int j = 0; j &lt; targeters.length; j++) {
-                        targeters[j].updateTarget(targets[i], next);
+                for (InstructionHandle target : e.getTargets()) {
+                    for (InstructionTargeter targeter = target.getTargeters()) {
+                        targeter.updateTarget(target, next);
                     }
                 }
             }

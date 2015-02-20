@@ -716,10 +716,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                     try {
                         il.delete(ih);
                     } catch (TargetLostException e) {
-                        InstructionHandle[] targets = e.getTargets();
-                        for (InstructionHandle target : targets) {
-                            InstructionTargeter[] targeters = target.getTargeters();
-                            for (InstructionTargeter targeter : targeters) {
+                        for (InstructionHandle target : e.getTargets()) {
+                            for (InstructionTargeter targeter : target.getTargeters()) {
                                 targeter.updateTarget(target, next);
                             }
                         }
