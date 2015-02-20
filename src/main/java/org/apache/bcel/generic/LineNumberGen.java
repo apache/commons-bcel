@@ -79,6 +79,9 @@ public class LineNumberGen implements InstructionTargeter, Cloneable, java.io.Se
 
 
     public void setInstruction( InstructionHandle ih ) {
+        if (ih == null) {
+            throw new NullPointerException("InstructionHandle may not be null");
+        }
         BranchInstruction.notifyTarget(this.ih, ih, this);
         this.ih = ih;
     }
