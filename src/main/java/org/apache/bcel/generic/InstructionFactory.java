@@ -304,9 +304,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
             case '<':
                 return ISHL;
             case '>':
-                return op.equals(">>>")
-                        ? (ArithmeticInstruction) IUSHR
-                        : (ArithmeticInstruction) ISHR;
+                return op.equals(">>>") ? IUSHR : ISHR;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -334,9 +332,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
             case '<':
                 return LSHL;
             case '>':
-                return op.equals(">>>")
-                        ? (ArithmeticInstruction) LUSHR
-                        : (ArithmeticInstruction) LSHR;
+                return op.equals(">>>") ? LUSHR : LSHR;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -408,7 +404,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createPop( int size ) {
-        return (size == 2) ? (StackInstruction) POP2 : (StackInstruction) POP;
+        return (size == 2) ? POP2 : POP;
     }
 
 
@@ -416,7 +412,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup( int size ) {
-        return (size == 2) ? (StackInstruction) DUP2 : (StackInstruction) DUP;
+        return (size == 2) ? DUP2 : DUP;
     }
 
 
@@ -424,7 +420,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup_2( int size ) {
-        return (size == 2) ? (StackInstruction) DUP2_X2 : (StackInstruction) DUP_X2;
+        return (size == 2) ? DUP2_X2 : DUP_X2;
     }
 
 
@@ -432,7 +428,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup_1( int size ) {
-        return (size == 2) ? (StackInstruction) DUP2_X1 : (StackInstruction) DUP_X1;
+        return (size == 2) ? DUP2_X1 : DUP_X1;
     }
 
 
@@ -636,7 +632,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
             } else if (t instanceof ArrayType) {
                 return new ANEWARRAY(cp.addArrayClass((ArrayType) t));
             } else {
-                return new NEWARRAY(((BasicType) t).getType());
+                return new NEWARRAY(t.getType());
             }
         } else {
             ArrayType at;
