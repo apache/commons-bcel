@@ -16,13 +16,16 @@ Compatibility with 5.2
 
 Binary compatible - Yes
 
-Source compatible - Yes, except for org.apache.bcel.classfile.Visitor (see below)
+Source compatible - Yes, except:
+ - The org.apache.bcel.classfile.Visitor interface has been enhanced with
+   additional methods. If you implemented it directly instead of extending
+   the EmptyVisitor class you'll have to implement the new methods.
 
-Semantic compatible - Yes
-
-The org.apache.bcel.classfile.Visitor interface has been enhanced with
-additional methods. If you implemented it directly instead of extending
-the EmptyVisitor class you'll have to implement the new methods.
+Semantic compatible - Yes, except:
+ - BCEL handles new attributes such as code annotations that could only
+   be processed by implementing a custom AttributeReader in the previous
+   versions. Code relying on this behavior will have to be adjusted since
+   the AttributeReader will no longer be called in these cases.
 
 
 Enhancements from 5.2
