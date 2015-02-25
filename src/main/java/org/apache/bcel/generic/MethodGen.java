@@ -609,7 +609,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     public void addAnnotationsAsAttribute(ConstantPoolGen cp) {
-          Attribute[] attrs = Utility.getAnnotationAttributes(cp,annotation_vec);
+          Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp,annotation_vec);
         for (Attribute attr : attrs) {
             addAttribute(attr);
         }
@@ -619,7 +619,7 @@ public class MethodGen extends FieldGenOrMethodGen {
           if (!hasParameterAnnotations) {
             return;
         }
-          Attribute[] attrs = Utility.getParameterAnnotationAttributes(cp,param_annotations);
+          Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp,param_annotations);
           if (attrs!=null) {
           for (Attribute attr : attrs) {
               addAttribute(attr);

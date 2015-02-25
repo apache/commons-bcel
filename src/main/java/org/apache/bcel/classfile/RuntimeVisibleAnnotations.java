@@ -44,7 +44,7 @@ public class RuntimeVisibleAnnotations extends Annotations
      * @param constant_pool
      *            Array of constants
      */
-    RuntimeVisibleAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException
+    public RuntimeVisibleAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException
     {
         super(Constants.ATTR_RUNTIME_VISIBLE_ANNOTATIONS, name_index, length, input, constant_pool, true);
     }

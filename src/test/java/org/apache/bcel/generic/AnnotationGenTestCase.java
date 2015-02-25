@@ -13,10 +13,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
  */
 
-package org.apache.bcel;
+package org.apache.bcel.generic;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,18 +25,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+
+import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
-import org.apache.bcel.classfile.Utility;
-import org.apache.bcel.generic.AnnotationEntryGen;
-import org.apache.bcel.generic.ClassGen;
-import org.apache.bcel.generic.ConstantPoolGen;
-import org.apache.bcel.generic.ElementValueGen;
-import org.apache.bcel.generic.ElementValuePairGen;
-import org.apache.bcel.generic.ObjectType;
-import org.apache.bcel.generic.SimpleElementValueGen;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {
@@ -98,7 +92,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
         Vector<AnnotationEntryGen> v = new Vector<AnnotationEntryGen>();
         v.add(a);
-        Attribute[] attributes = Utility.getAnnotationAttributes(cp, v);
+        Attribute[] attributes = AnnotationEntryGen.getAnnotationAttributes(cp, v);
         boolean foundRV = false;
         for (Attribute attribute : attributes) {
             if (attribute instanceof RuntimeVisibleAnnotations)
@@ -113,7 +107,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         AnnotationEntryGen a2 = new AnnotationEntryGen(t, elements, false, cp);
         Vector<AnnotationEntryGen> v2 = new Vector<AnnotationEntryGen>();
         v2.add(a2);
-        Attribute[] attributes2 = Utility.getAnnotationAttributes(cp, v2);
+        Attribute[] attributes2 = AnnotationEntryGen.getAnnotationAttributes(cp, v2);
         boolean foundRIV = false;
         for (Attribute attribute : attributes2) {
             if (attribute instanceof RuntimeInvisibleAnnotations)

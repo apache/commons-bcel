@@ -39,7 +39,7 @@ public class RuntimeVisibleParameterAnnotations extends ParameterAnnotations {
      * @param input Input stream
      * @param constant_pool Array of constants
      */
-    RuntimeVisibleParameterAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    public RuntimeVisibleParameterAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
         super(Constants.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS, name_index, length, input, constant_pool);
     }

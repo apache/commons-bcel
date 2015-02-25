@@ -39,7 +39,7 @@ public class RuntimeInvisibleParameterAnnotations extends ParameterAnnotations {
      * @param input Input stream
      * @param constant_pool Array of constants
      */
-    RuntimeInvisibleParameterAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    public RuntimeInvisibleParameterAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
         super(Constants.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS, name_index, length, input, constant_pool);
     }

@@ -44,7 +44,7 @@ public class RuntimeInvisibleAnnotations extends Annotations
      * @param constant_pool
      *            Array of constants
      */
-    RuntimeInvisibleAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    public RuntimeInvisibleAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException
     {
         super(Constants.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS, name_index, length, input, constant_pool, false);

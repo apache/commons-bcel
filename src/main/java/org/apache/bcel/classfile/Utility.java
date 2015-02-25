@@ -13,16 +13,14 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
+
 package org.apache.bcel.classfile;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.CharArrayReader;
 import java.io.CharArrayWriter;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.FilterReader;
 import java.io.FilterWriter;
 import java.io.IOException;
@@ -37,8 +35,6 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import org.apache.bcel.Constants;
-import org.apache.bcel.generic.AnnotationEntryGen;
-import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.util.ByteSequence;
 
 /**
@@ -1455,172 +1451,4 @@ public abstract class Utility {
         return buf.toString();
     }
 
-
-    /**
-     * Converts a list of AnnotationGen objects into a set of attributes 
-     * that can be attached to the class file.
-     *
-     * @param cp The constant pool gen where we can create the necessary name refs
-     * @param vec A list of AnnotationGen objects
-     */
-    public static Attribute[] getAnnotationAttributes(ConstantPoolGen cp,List<AnnotationEntryGen> vec) {
-
-        if (vec.isEmpty()) {
-            return new Attribute[0];
-        }
-
-        try {
-            int countVisible   = 0;
-            int countInvisible = 0;
-
-            //  put the annotations in the right output stream
-            for (AnnotationEntryGen a : vec) {
-                if (a.isRuntimeVisible()) {
-                    countVisible++;
-                } else {
-                    countInvisible++;
-                }
-            }
-
-            ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
-            ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
-            DataOutputStream rvaDos = new DataOutputStream(rvaBytes);
-            DataOutputStream riaDos = new DataOutputStream(riaBytes);
-
-            rvaDos.writeShort(countVisible);
-            riaDos.writeShort(countInvisible);
-
-            // put the annotations in the right output stream
-            for (AnnotationEntryGen a : vec) {
-                if (a.isRuntimeVisible()) {
-                    a.dump(rvaDos);
-                } else {
-                    a.dump(riaDos);
-                }
-            }
-
-      rvaDos.close();
-      riaDos.close();
-
-      byte[] rvaData = rvaBytes.toByteArray();
-      byte[] riaData = riaBytes.toByteArray();
-
-      int rvaIndex = -1;
-      int riaIndex = -1;
-
-      if (rvaData.length>2) {
-        rvaIndex = cp.addUtf8("RuntimeVisibleAnnotations");
-    }
-      if (riaData.length>2) {
-        riaIndex = cp.addUtf8("RuntimeInvisibleAnnotations");
-    }
-
-        List<Attribute> newAttributes = new ArrayList<Attribute>();
-        if (rvaData.length>2) {
-
-            newAttributes.add(
-              new RuntimeVisibleAnnotations(rvaIndex,rvaData.length,new DataInputStream(new ByteArrayInputStream(rvaData)),cp.getConstantPool()));
-        }
-        if (riaData.length>2) {
-            newAttributes.add(
-              new RuntimeInvisibleAnnotations(riaIndex,riaData.length,new DataInputStream(new ByteArrayInputStream(riaData)),cp.getConstantPool()));
-        }
-
-        return newAttributes.toArray(new Attribute[newAttributes.size()]);
-        } catch (IOException e) {
-            System.err.println("IOException whilst processing annotations");
-          e.printStackTrace();
-      }
-        return null;
-    }
-
-
-    /**
-     * Annotations against a class are stored in one of four attribute kinds:
-     * - RuntimeVisibleParameterAnnotations
-     * - RuntimeInvisibleParameterAnnotations
-     */
-    public static Attribute[] getParameterAnnotationAttributes(
-            ConstantPoolGen cp,
-            List<AnnotationEntryGen>[] /*Array of lists, array size depends on #params */vec)
-    {
-        int visCount[] = new int[vec.length];
-        int totalVisCount = 0;
-        int invisCount[] = new int[vec.length];
-        int totalInvisCount = 0;
-        try {
-            for (int i = 0; i < vec.length; i++) {
-                if (vec[i] != null) {
-                    for (AnnotationEntryGen element : vec[i]) {
-                        if (element.isRuntimeVisible()) {
-                            visCount[i]++;
-                            totalVisCount++;
-                        }
-                        else {
-                            invisCount[i]++;
-                            totalInvisCount++;
-                        }
-                    }
-                }
-            }
-            // Lets do the visible ones
-            ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
-            DataOutputStream rvaDos = new DataOutputStream(rvaBytes);
-            rvaDos.writeByte(vec.length); // First goes number of parameters
-            for (int i = 0; i < vec.length; i++) {
-                rvaDos.writeShort(visCount[i]);
-                if (visCount[i] > 0) {
-                    for (AnnotationEntryGen element : vec[i]) {
-                        if (element.isRuntimeVisible()) {
-                            element.dump(rvaDos);
-                        }
-                    }
-                }
-            }
-            rvaDos.close();
-            // Lets do the invisible ones
-            ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
-            DataOutputStream riaDos = new DataOutputStream(riaBytes);
-            riaDos.writeByte(vec.length); // First goes number of parameters
-            for (int i = 0; i < vec.length; i++) {
-                riaDos.writeShort(invisCount[i]);
-                if (invisCount[i] > 0) {
-                    for (AnnotationEntryGen element : vec[i]) {
-                        if (!element.isRuntimeVisible()) {
-                            element.dump(riaDos);
-                        }
-                    }
-                }
-            }
-            riaDos.close();
-            byte[] rvaData = rvaBytes.toByteArray();
-            byte[] riaData = riaBytes.toByteArray();
-            int rvaIndex = -1;
-            int riaIndex = -1;
-            if (totalVisCount > 0) {
-                rvaIndex = cp.addUtf8("RuntimeVisibleParameterAnnotations");
-            }
-            if (totalInvisCount > 0) {
-                riaIndex = cp.addUtf8("RuntimeInvisibleParameterAnnotations");
-            }
-            List<Attribute> newAttributes = new ArrayList<Attribute>();
-            if (totalVisCount > 0) {
-                newAttributes
-                        .add(new RuntimeVisibleParameterAnnotations(rvaIndex,
-                                rvaData.length, new DataInputStream(new ByteArrayInputStream(rvaData)), cp.getConstantPool()));
-            }
-            if (totalInvisCount > 0) {
-                newAttributes
-                        .add(new RuntimeInvisibleParameterAnnotations(riaIndex,
-                                riaData.length, new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
-            }
-            return newAttributes.toArray(new Attribute[newAttributes.size()]);
-        }
-        catch (IOException e) {
-            System.err
-                    .println("IOException whilst processing parameter annotations");
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
