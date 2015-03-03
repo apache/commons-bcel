@@ -233,7 +233,7 @@ public final class Code extends Attribute {
         return 2 /*max_stack*/+ 2 /*max_locals*/+ 4 /*code length*/
                 + code.length /*byte-code*/
                 + 2 /*exception-table length*/
-                + 8 * exception_table.length /* exception table */
+                + 8 * (exception_table == null ? 0 : exception_table.length) /* exception table */
                 + 2 /* attributes count */;
     }
 
@@ -244,8 +244,10 @@ public final class Code extends Attribute {
      */
     private int calculateLength() {
         int len = 0;
-        for (Attribute attribute : attributes) {
-            len += attribute.length + 6 /*attribute header size*/;
+        if (attributes != null) {
+            for (Attribute attribute : attributes) {
+                len += attribute.length + 6 /*attribute header size*/;
+            }
         }
         return len + getInternalLength();
     }
@@ -255,7 +257,7 @@ public final class Code extends Attribute {
      * @param attributes the attributes to set for this Code
      */
     public final void setAttributes( Attribute[] attributes ) {
-        this.attributes = attributes;
+        this.attributes = attributes != null ? attributes : new Attribute[0];
         length = calculateLength(); // Adjust length
     }
 
@@ -264,7 +266,7 @@ public final class Code extends Attribute {
      * @param code byte code
      */
     public final void setCode( byte[] code ) {
-        this.code = code;
+        this.code = code != null ? code : new byte[0];
         length = calculateLength(); // Adjust length
     }
 
@@ -273,7 +275,7 @@ public final class Code extends Attribute {
      * @param exception_table exception table
      */
     public final void setExceptionTable( CodeException[] exception_table ) {
-        this.exception_table = exception_table;
+        this.exception_table = exception_table != null ? exception_table : new CodeException[0];
         length = calculateLength(); // Adjust length
     }
 
