@@ -98,9 +98,9 @@ public final class Field extends FieldOrMethod {
      * @return constant value associated with this field (may be null)
      */
     public final ConstantValue getConstantValue() {
-        for (int i = 0; i < attributes_count; i++) {
-            if (attributes[i].getTag() == Constants.ATTR_CONSTANT_VALUE) {
-                return (ConstantValue) attributes[i];
+        for (Attribute attribute : attributes) {
+            if (attribute.getTag() == Constants.ATTR_CONSTANT_VALUE) {
+                return (ConstantValue) attribute;
             }
         }
         return null;
@@ -127,10 +127,9 @@ public final class Field extends FieldOrMethod {
         if (cv != null) {
             buf.append(" = ").append(cv);
         }
-        for (int i = 0; i < attributes_count; i++) {
-            Attribute a = attributes[i];
-            if (!(a instanceof ConstantValue)) {
-                buf.append(" [").append(a.toString()).append("]");
+        for (Attribute attribute : attributes) {
+            if (!(attribute instanceof ConstantValue)) {
+                buf.append(" [").append(attribute.toString()).append("]");
             }
         }
         return buf.toString();

@@ -39,7 +39,6 @@ import org.apache.bcel.Constants;
 public class ConstantPool implements Cloneable, Node, Serializable {
 
     private static final long serialVersionUID = -9093478476423540196L;
-    private int constant_pool_count;
     private Constant[] constant_pool;
 
 
@@ -60,7 +59,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
      */
     ConstantPool(DataInput input) throws IOException, ClassFormatException {
         byte tag;
-        constant_pool_count = input.readUnsignedShort();
+        int constant_pool_count = input.readUnsignedShort();
         constant_pool = new Constant[constant_pool_count];
         /* constant_pool[0] is unused by the compiler and may be used freely
          * by the implementation.
@@ -212,8 +211,8 @@ public class ConstantPool implements Cloneable, Node, Serializable {
      * @throws IOException
      */
     public void dump( DataOutputStream file ) throws IOException {
-        file.writeShort(constant_pool_count);
-        for (int i = 1; i < constant_pool_count; i++) {
+        file.writeShort(constant_pool.length);
+        for (int i = 1; i < constant_pool.length; i++) {
             if (constant_pool[i] != null) {
                 constant_pool[i].dump(file);
             }
@@ -314,7 +313,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
      * @return Length of constant pool.
      */
     public int getLength() {
-        return constant_pool_count;
+        return constant_pool == null ? 0 : constant_pool.length;
     }
 
 
@@ -331,7 +330,6 @@ public class ConstantPool implements Cloneable, Node, Serializable {
      */
     public void setConstantPool( Constant[] constant_pool ) {
         this.constant_pool = constant_pool;
-        constant_pool_count = (constant_pool == null) ? 0 : constant_pool.length;
     }
 
 
@@ -341,7 +339,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();
-        for (int i = 1; i < constant_pool_count; i++) {
+        for (int i = 1; i < constant_pool.length; i++) {
             buf.append(i).append(")").append(constant_pool[i]).append("\n");
         }
         return buf.toString();
@@ -355,8 +353,8 @@ public class ConstantPool implements Cloneable, Node, Serializable {
         ConstantPool c = null;
         try {
             c = (ConstantPool) clone();
-            c.constant_pool = new Constant[constant_pool_count];
-            for (int i = 1; i < constant_pool_count; i++) {
+            c.constant_pool = new Constant[constant_pool.length];
+            for (int i = 1; i < constant_pool.length; i++) {
                 if (constant_pool[i] != null) {
                     c.constant_pool[i] = constant_pool[i].copy();
                 }

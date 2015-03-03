@@ -31,9 +31,9 @@ import java.io.IOException;
 public abstract class ParameterAnnotations extends Attribute {
 
     private static final long serialVersionUID = 5234607357644462705L;
-    private int num_parameters;
-    private ParameterAnnotationEntry[] parameter_annotation_table; // Table of parameter annotations
-
+    
+    /** Table of parameter annotations */
+    private ParameterAnnotationEntry[] parameter_annotation_table;
 
     /**
      * @param parameter_annotation_type the subclass type of the parameter annotation
@@ -46,7 +46,7 @@ public abstract class ParameterAnnotations extends Attribute {
             DataInput input, ConstantPool constant_pool) throws IOException {
         this(parameter_annotation_type, name_index, length, (ParameterAnnotationEntry[]) null,
                 constant_pool);
-        num_parameters = (input.readUnsignedByte());
+        int num_parameters = (input.readUnsignedByte());
         parameter_annotation_table = new ParameterAnnotationEntry[num_parameters];
         for (int i = 0; i < num_parameters; i++) {
             parameter_annotation_table[i] = new ParameterAnnotationEntry(input, constant_pool);
@@ -84,12 +84,8 @@ public abstract class ParameterAnnotations extends Attribute {
     /**
      * @param parameter_annotation_table the entries to set in this parameter annotation
      */
-    public final void setParameterAnnotationTable(
-            ParameterAnnotationEntry[] parameter_annotation_table ) {
+    public final void setParameterAnnotationTable(ParameterAnnotationEntry[] parameter_annotation_table ) {
         this.parameter_annotation_table = parameter_annotation_table;
-        num_parameters = (parameter_annotation_table == null)
-                ? 0
-                : parameter_annotation_table.length;
     }
 
 
@@ -106,14 +102,6 @@ public abstract class ParameterAnnotations extends Attribute {
      */
     public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
         return parameter_annotation_table;
-    }
-
-
-    /**
-     * @return the number of parameter annotation entries in this parameter annotation
-     */
-    public final int getNumParameterAnnotation() {
-        return num_parameters;
     }
 
     @Override

@@ -40,7 +40,6 @@ import org.apache.bcel.Constants;
 public final class StackMap extends Attribute {
 
     private static final long serialVersionUID = -6238662431726968495L;
-    private int map_length;
     private StackMapEntry[] map; // Table of stack map entries
 
 
@@ -67,7 +66,7 @@ public final class StackMap extends Attribute {
      */
     StackMap(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
         this(name_index, length, (StackMapEntry[]) null, constant_pool);
-        map_length = input.readUnsignedShort();
+        int map_length = input.readUnsignedShort();
         map = new StackMapEntry[map_length];
         for (int i = 0; i < map_length; i++) {
             map[i] = new StackMapEntry(input, constant_pool);
@@ -84,9 +83,9 @@ public final class StackMap extends Attribute {
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
-        file.writeShort(map_length);
-        for (int i = 0; i < map_length; i++) {
-            map[i].dump(file);
+        file.writeShort(map.length);
+        for (StackMapEntry entry : map) {
+            entry.dump(file);
         }
     }
 
@@ -104,7 +103,6 @@ public final class StackMap extends Attribute {
      */
     public final void setStackMap( StackMapEntry[] map ) {
         this.map = map;
-        map_length = (map == null) ? 0 : map.length;
     }
 
 
@@ -114,9 +112,9 @@ public final class StackMap extends Attribute {
     @Override
     public final String toString() {
         StringBuilder buf = new StringBuilder("StackMap(");
-        for (int i = 0; i < map_length; i++) {
+        for (int i = 0; i < map.length; i++) {
             buf.append(map[i].toString());
-            if (i < map_length - 1) {
+            if (i < map.length - 1) {
                 buf.append(", ");
             }
         }
@@ -131,8 +129,8 @@ public final class StackMap extends Attribute {
     @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         StackMap c = (StackMap) clone();
-        c.map = new StackMapEntry[map_length];
-        for (int i = 0; i < map_length; i++) {
+        c.map = new StackMapEntry[map.length];
+        for (int i = 0; i < map.length; i++) {
             c.map[i] = map[i].copy();
         }
         c.constant_pool = _constant_pool;
@@ -154,6 +152,6 @@ public final class StackMap extends Attribute {
 
 
     public final int getMapLength() {
-        return map_length;
+        return map == null ? 0 : map.length;
     }
 }

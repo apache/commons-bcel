@@ -22,8 +22,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.Attribute;
-import org.apache.bcel.classfile.Signature;
 
 /** 
  * Abstract super class for fields and methods.
@@ -36,7 +34,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     private static final long serialVersionUID = -1833306330869469714L;
     protected int name_index; // Points to field name in constant pool 
     protected int signature_index; // Points to encoded signature
-    protected int attributes_count; // No. of attributes
     protected Attribute[] attributes; // Collection of attributes
     protected AnnotationEntry[] annotationEntries; // annotations defined on the field or method 
     protected ConstantPool constant_pool;
@@ -79,7 +76,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     protected FieldOrMethod(DataInput file, ConstantPool constant_pool) throws IOException, ClassFormatException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null,
                 constant_pool);
-        attributes_count = file.readUnsignedShort();
+        int attributes_count = file.readUnsignedShort();
         attributes = new Attribute[attributes_count];
         for (int i = 0; i < attributes_count; i++) {
             attributes[i] = Attribute.readAttribute(file, constant_pool);
@@ -114,9 +111,9 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         file.writeShort(access_flags);
         file.writeShort(name_index);
         file.writeShort(signature_index);
-        file.writeShort(attributes_count);
-        for (int i = 0; i < attributes_count; i++) {
-            attributes[i].dump(file);
+        file.writeShort(attributes.length);
+        for (Attribute attribute : attributes) {
+            attribute.dump(file);
         }
     }
 
@@ -134,7 +131,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     public final void setAttributes( Attribute[] attributes ) {
         this.attributes = attributes;
-        attributes_count = (attributes == null) ? 0 : attributes.length;
     }
 
 
@@ -217,9 +213,9 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         } catch(CloneNotSupportedException e) {}
 
         c.constant_pool    = constant_pool;
-        c.attributes       = new Attribute[attributes_count];
+        c.attributes       = new Attribute[attributes.length];
 
-        for(int i=0; i < attributes_count; i++) {
+        for (int i = 0; i < attributes.length; i++) {
             c.attributes[i] = attributes[i].copy(constant_pool);
         }
 
@@ -247,7 +243,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         if (!searchedForSignatureAttribute)
         {
             boolean found = false;
-            for (int i = 0; !found && i < attributes_count; i++)
+            for (int i = 0; !found && i < attributes.length; i++)
             {
                 if (attributes[i] instanceof Signature)
                 {

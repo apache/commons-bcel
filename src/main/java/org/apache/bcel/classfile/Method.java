@@ -111,9 +111,9 @@ public final class Method extends FieldOrMethod {
      * @return Code attribute of method, if any
      */
     public final Code getCode() {
-        for (int i = 0; i < attributes_count; i++) {
-            if (attributes[i] instanceof Code) {
-                return (Code) attributes[i];
+        for (Attribute attribute : attributes) {
+            if (attribute instanceof Code) {
+                return (Code) attribute;
             }
         }
         return null;
@@ -125,9 +125,9 @@ public final class Method extends FieldOrMethod {
      * exceptions the method may throw not exception handlers!
      */
     public final ExceptionTable getExceptionTable() {
-        for (int i = 0; i < attributes_count; i++) {
-            if (attributes[i] instanceof ExceptionTable) {
-                return (ExceptionTable) attributes[i];
+        for (Attribute attribute : attributes) {
+            if (attribute instanceof ExceptionTable) {
+                return (ExceptionTable) attribute;
             }
         }
         return null;
@@ -178,10 +178,9 @@ public final class Method extends FieldOrMethod {
         signature = Utility.methodSignatureToString(signature, name, access, true,
                 getLocalVariableTable());
         buf = new StringBuilder(signature);
-        for (int i = 0; i < attributes_count; i++) {
-            Attribute a = attributes[i];
-            if (!((a instanceof Code) || (a instanceof ExceptionTable))) {
-                buf.append(" [").append(a.toString()).append("]");
+        for (Attribute attribute : attributes) {
+            if (!((attribute instanceof Code) || (attribute instanceof ExceptionTable))) {
+                buf.append(" [").append(attribute.toString()).append("]");
             }
         }
         ExceptionTable e = getExceptionTable();

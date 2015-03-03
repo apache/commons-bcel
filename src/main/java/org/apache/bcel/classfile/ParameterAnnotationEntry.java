@@ -35,7 +35,6 @@ import org.apache.bcel.Constants;
  */
 public class ParameterAnnotationEntry implements Node, Constants {
 
-    private final int annotation_table_length;
     private final AnnotationEntry[] annotation_table;
 
 
@@ -46,7 +45,7 @@ public class ParameterAnnotationEntry implements Node, Constants {
      * @throws IOException
      */
     ParameterAnnotationEntry(DataInput input, ConstantPool constant_pool) throws IOException {
-        annotation_table_length = (input.readUnsignedShort());
+        int annotation_table_length = (input.readUnsignedShort());
         annotation_table = new AnnotationEntry[annotation_table_length];
         for (int i = 0; i < annotation_table_length; i++) {
             // TODO isRuntimeVisible
@@ -66,15 +65,6 @@ public class ParameterAnnotationEntry implements Node, Constants {
         // v.visitParameterAnnotationEntry(this);
     }
 
-
-    /**
-     * @return the number of annotation entries in this parameter annotation
-     */
-    public final int getNumAnnotations() {
-        return annotation_table_length;
-    }
-
-
     /**
      * returns the array of annotation entries in this annotation
      */
@@ -83,9 +73,9 @@ public class ParameterAnnotationEntry implements Node, Constants {
     }
 
     public void dump(DataOutputStream dos) throws IOException {
-        dos.writeShort(annotation_table_length);
-        for(int i = 0; i < annotation_table_length; i++) {
-            annotation_table[i].dump(dos);
+        dos.writeShort(annotation_table.length);
+        for (AnnotationEntry entry : annotation_table) {
+            entry.dump(dos);
         }
     }
 

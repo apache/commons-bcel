@@ -195,8 +195,7 @@ public final class ClassParser {
      * @throws  ClassFormatException
      */
     private void readAttributes() throws IOException, ClassFormatException {
-        int attributes_count;
-        attributes_count = dataInputStream.readUnsignedShort();
+        int attributes_count = dataInputStream.readUnsignedShort();
         attributes = new Attribute[attributes_count];
         for (int i = 0; i < attributes_count; i++) {
             attributes[i] = Attribute.readAttribute(dataInputStream, constant_pool);
@@ -242,8 +241,7 @@ public final class ClassParser {
      * @throws  ClassFormatException
      */
     private void readFields() throws IOException, ClassFormatException {
-        int fields_count;
-        fields_count = dataInputStream.readUnsignedShort();
+        int fields_count = dataInputStream.readUnsignedShort();
         fields = new Field[fields_count];
         for (int i = 0; i < fields_count; i++) {
             fields[i] = new Field(dataInputStream, constant_pool);
@@ -272,8 +270,7 @@ public final class ClassParser {
      * @throws  ClassFormatException
      */
     private void readInterfaces() throws IOException, ClassFormatException {
-        int interfaces_count;
-        interfaces_count = dataInputStream.readUnsignedShort();
+        int interfaces_count = dataInputStream.readUnsignedShort();
         interfaces = new int[interfaces_count];
         for (int i = 0; i < interfaces_count; i++) {
             interfaces[i] = dataInputStream.readUnsignedShort();
@@ -287,8 +284,7 @@ public final class ClassParser {
      * @throws  ClassFormatException
      */
     private void readMethods() throws IOException, ClassFormatException {
-        int methods_count;
-        methods_count = dataInputStream.readUnsignedShort();
+        int methods_count = dataInputStream.readUnsignedShort();
         methods = new Method[methods_count];
         for (int i = 0; i < methods_count; i++) {
             methods[i] = new Method(dataInputStream, constant_pool);

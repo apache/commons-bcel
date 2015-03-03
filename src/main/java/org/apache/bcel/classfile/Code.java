@@ -46,11 +46,8 @@ public final class Code extends Attribute {
     private static final long serialVersionUID = -432884354459701506L;
     private int max_stack; // Maximum size of stack used by this method
     private int max_locals; // Number of local variables
-    private int code_length; // Length of code in bytes
     private byte[] code; // Actual byte code
-    private int exception_table_length;
     private CodeException[] exception_table; // Table of handled exceptions
-    private int attributes_count; // Attributes of code: LineNumber
     private Attribute[] attributes; // or LocalVariable
 
 
@@ -75,13 +72,13 @@ public final class Code extends Attribute {
         // Initialize with some default values which will be overwritten later
         this(name_index, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null,
                 (CodeException[]) null, (Attribute[]) null, constant_pool);
-        code_length = file.readInt();
+        int code_length = file.readInt();
         code = new byte[code_length]; // Read byte code
         file.readFully(code);
         /* Read exception table that contains all regions where an exception
          * handler is active, i.e., a try { ... } catch() block.
          */
-        exception_table_length = file.readUnsignedShort();
+        int exception_table_length = file.readUnsignedShort();
         exception_table = new CodeException[exception_table_length];
         for (int i = 0; i < exception_table_length; i++) {
             exception_table[i] = new CodeException(file);
@@ -89,7 +86,7 @@ public final class Code extends Attribute {
         /* Read all attributes, currently `LineNumberTable' and
          * `LocalVariableTable'
          */
-        attributes_count = file.readUnsignedShort();
+        int attributes_count = file.readUnsignedShort();
         attributes = new Attribute[attributes_count];
         for (int i = 0; i < attributes_count; i++) {
             attributes[i] = Attribute.readAttribute(file, constant_pool);
@@ -147,15 +144,15 @@ public final class Code extends Attribute {
         super.dump(file);
         file.writeShort(max_stack);
         file.writeShort(max_locals);
-        file.writeInt(code_length);
-        file.write(code, 0, code_length);
-        file.writeShort(exception_table_length);
-        for (int i = 0; i < exception_table_length; i++) {
-            exception_table[i].dump(file);
+        file.writeInt(code.length);
+        file.write(code, 0, code.length);
+        file.writeShort(exception_table.length);
+        for (CodeException exception : exception_table) {
+            exception.dump(file);
         }
-        file.writeShort(attributes_count);
-        for (int i = 0; i < attributes_count; i++) {
-            attributes[i].dump(file);
+        file.writeShort(attributes.length);
+        for (Attribute attribute : attributes) {
+            attribute.dump(file);
         }
     }
 
@@ -173,9 +170,9 @@ public final class Code extends Attribute {
      * @return LineNumberTable of Code, if it has one
      */
     public LineNumberTable getLineNumberTable() {
-        for (int i = 0; i < attributes_count; i++) {
-            if (attributes[i] instanceof LineNumberTable) {
-                return (LineNumberTable) attributes[i];
+        for (Attribute attribute : attributes) {
+            if (attribute instanceof LineNumberTable) {
+                return (LineNumberTable) attribute;
             }
         }
         return null;
@@ -186,9 +183,9 @@ public final class Code extends Attribute {
      * @return LocalVariableTable of Code, if it has one
      */
     public LocalVariableTable getLocalVariableTable() {
-        for (int i = 0; i < attributes_count; i++) {
-            if (attributes[i] instanceof LocalVariableTable) {
-                return (LocalVariableTable) attributes[i];
+        for (Attribute attribute : attributes) {
+            if (attribute instanceof LocalVariableTable) {
+                return (LocalVariableTable) attribute;
             }
         }
         return null;
@@ -234,9 +231,9 @@ public final class Code extends Attribute {
      */
     private int getInternalLength() {
         return 2 /*max_stack*/+ 2 /*max_locals*/+ 4 /*code length*/
-                + code_length /*byte-code*/
+                + code.length /*byte-code*/
                 + 2 /*exception-table length*/
-                + 8 * exception_table_length /* exception table */
+                + 8 * exception_table.length /* exception table */
                 + 2 /* attributes count */;
     }
 
@@ -247,8 +244,8 @@ public final class Code extends Attribute {
      */
     private int calculateLength() {
         int len = 0;
-        for (int i = 0; i < attributes_count; i++) {
-            len += attributes[i].length + 6 /*attribute header size*/;
+        for (Attribute attribute : attributes) {
+            len += attribute.length + 6 /*attribute header size*/;
         }
         return len + getInternalLength();
     }
@@ -259,7 +256,6 @@ public final class Code extends Attribute {
      */
     public final void setAttributes( Attribute[] attributes ) {
         this.attributes = attributes;
-        attributes_count = (attributes == null) ? 0 : attributes.length;
         length = calculateLength(); // Adjust length
     }
 
@@ -269,7 +265,6 @@ public final class Code extends Attribute {
      */
     public final void setCode( byte[] code ) {
         this.code = code;
-        code_length = (code == null) ? 0 : code.length;
         length = calculateLength(); // Adjust length
     }
 
@@ -279,7 +274,6 @@ public final class Code extends Attribute {
      */
     public final void setExceptionTable( CodeException[] exception_table ) {
         this.exception_table = exception_table;
-        exception_table_length = (exception_table == null) ? 0 : exception_table.length;
         length = calculateLength(); // Adjust length
     }
 
@@ -306,18 +300,18 @@ public final class Code extends Attribute {
     public final String toString( boolean verbose ) {
         StringBuilder buf = new StringBuilder(100);
         buf.append("Code(max_stack = ").append(max_stack).append(", max_locals = ").append(
-                max_locals).append(", code_length = ").append(code_length).append(")\n").append(
+                max_locals).append(", code_length = ").append(code.length).append(")\n").append(
                 Utility.codeToString(code, constant_pool, 0, -1, verbose));
-        if (exception_table_length > 0) {
+        if (exception_table.length > 0) {
             buf.append("\nException handler(s) = \n").append("From\tTo\tHandler\tType\n");
-            for (int i = 0; i < exception_table_length; i++) {
-                buf.append(exception_table[i].toString(constant_pool, verbose)).append("\n");
+            for (CodeException exception : exception_table) {
+                buf.append(exception.toString(constant_pool, verbose)).append("\n");
             }
         }
-        if (attributes_count > 0) {
+        if (attributes.length > 0) {
             buf.append("\nAttribute(s) = \n");
-            for (int i = 0; i < attributes_count; i++) {
-                buf.append(attributes[i].toString()).append("\n");
+            for (Attribute attribute : attributes) {
+                buf.append(attribute.toString()).append("\n");
             }
         }
         return buf.toString();
@@ -346,12 +340,12 @@ public final class Code extends Attribute {
             System.arraycopy(code, 0, c.code, 0, code.length);
         }
         c.constant_pool = _constant_pool;
-        c.exception_table = new CodeException[exception_table_length];
-        for (int i = 0; i < exception_table_length; i++) {
+        c.exception_table = new CodeException[exception_table.length];
+        for (int i = 0; i < exception_table.length; i++) {
             c.exception_table[i] = exception_table[i].copy();
         }
-        c.attributes = new Attribute[attributes_count];
-        for (int i = 0; i < attributes_count; i++) {
+        c.attributes = new Attribute[attributes.length];
+        for (int i = 0; i < attributes.length; i++) {
             c.attributes[i] = attributes[i].copy(_constant_pool);
         }
         return c;

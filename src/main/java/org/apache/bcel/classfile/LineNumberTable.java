@@ -35,7 +35,7 @@ import org.apache.bcel.Constants;
 public final class LineNumberTable extends Attribute {
 
     private static final long serialVersionUID = -6967221519632128904L;
-    private int line_number_table_length;
+
     private LineNumber[] line_number_table; // Table of line/numbers pairs
 
 
@@ -72,7 +72,7 @@ public final class LineNumberTable extends Attribute {
     LineNumberTable(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (LineNumber[]) null, constant_pool);
-        line_number_table_length = (input.readUnsignedShort());
+        int line_number_table_length = (input.readUnsignedShort());
         line_number_table = new LineNumber[line_number_table_length];
         for (int i = 0; i < line_number_table_length; i++) {
             line_number_table[i] = new LineNumber(input);
@@ -101,9 +101,9 @@ public final class LineNumberTable extends Attribute {
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
-        file.writeShort(line_number_table_length);
-        for (int i = 0; i < line_number_table_length; i++) {
-            line_number_table[i].dump(file);
+        file.writeShort(line_number_table.length);
+        for (LineNumber lineNumber : line_number_table) {
+            lineNumber.dump(file);
         }
     }
 
@@ -121,7 +121,6 @@ public final class LineNumberTable extends Attribute {
      */
     public final void setLineNumberTable( LineNumber[] line_number_table ) {
         this.line_number_table = line_number_table;
-        line_number_table_length = (line_number_table == null) ? 0 : line_number_table.length;
     }
 
 
@@ -133,9 +132,9 @@ public final class LineNumberTable extends Attribute {
         StringBuilder buf = new StringBuilder();
         StringBuilder line = new StringBuilder();
         String newLine = System.getProperty("line.separator", "\n");
-        for (int i = 0; i < line_number_table_length; i++) {
+        for (int i = 0; i < line_number_table.length; i++) {
             line.append(line_number_table[i].toString());
-            if (i < line_number_table_length - 1) {
+            if (i < line_number_table.length - 1) {
                 line.append(", ");
             }
             if (line.length() > 72) {
@@ -156,7 +155,7 @@ public final class LineNumberTable extends Attribute {
      * @return corresponding line in source code
      */
     public int getSourceLine( int pos ) {
-        int l = 0, r = line_number_table_length - 1;
+        int l = 0, r = line_number_table.length - 1;
         if (r < 0) {
             return -1;
         }
@@ -198,8 +197,8 @@ public final class LineNumberTable extends Attribute {
     @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         LineNumberTable c = (LineNumberTable) clone();
-        c.line_number_table = new LineNumber[line_number_table_length];
-        for (int i = 0; i < line_number_table_length; i++) {
+        c.line_number_table = new LineNumber[line_number_table.length];
+        for (int i = 0; i < line_number_table.length; i++) {
             c.line_number_table[i] = line_number_table[i].copy();
         }
         c.constant_pool = _constant_pool;
@@ -208,6 +207,6 @@ public final class LineNumberTable extends Attribute {
 
 
     public final int getTableLength() {
-        return line_number_table_length;
+        return line_number_table == null ? 0 : line_number_table.length;
     }
 }
