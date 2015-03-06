@@ -13,8 +13,8 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
+
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
@@ -41,31 +41,28 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
 
     private final int frame_type;
     private int byte_code_offset_delta;
-    private int number_of_locals;
     private StackMapType[] types_of_locals;
-    private int number_of_stack_items;
     private StackMapType[] types_of_stack_items;
     private ConstantPool constant_pool;
 
 
     /**
      * Construct object from file stream.
+     * * 
      * @param file Input stream
      * @throws IOException
      */
     StackMapTableEntry(DataInput file, ConstantPool constant_pool) throws IOException {
-        this(file.readByte() & 0xFF, -1, -1, null, -1, null, constant_pool);
+        this(file.readByte() & 0xFF, -1, null, null, constant_pool);
 
         if (frame_type >= Constants.SAME_FRAME && frame_type <= Constants.SAME_FRAME_MAX) {
             byte_code_offset_delta = frame_type - Constants.SAME_FRAME;
         } else if (frame_type >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME && frame_type <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             byte_code_offset_delta = frame_type - Constants.SAME_LOCALS_1_STACK_ITEM_FRAME;
-            number_of_stack_items = 1;
             types_of_stack_items = new StackMapType[1];
             types_of_stack_items[0] = new StackMapType(file, constant_pool);
         } else if (frame_type == Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             byte_code_offset_delta = file.readShort();
-            number_of_stack_items = 1;
             types_of_stack_items = new StackMapType[1];
             types_of_stack_items[0] = new StackMapType(file, constant_pool);
         } else if (frame_type >= Constants.CHOP_FRAME && frame_type <= Constants.CHOP_FRAME_MAX) {
@@ -74,19 +71,19 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
             byte_code_offset_delta = file.readShort();
         } else if (frame_type >= Constants.APPEND_FRAME && frame_type <= Constants.APPEND_FRAME_MAX) {
             byte_code_offset_delta = file.readShort();
-            number_of_locals = frame_type - 251;
+            int number_of_locals = frame_type - 251;
             types_of_locals = new StackMapType[number_of_locals];
             for (int i = 0; i < number_of_locals; i++) {
                 types_of_locals[i] = new StackMapType(file, constant_pool);
             }            
         } else if (frame_type == Constants.FULL_FRAME) {        
             byte_code_offset_delta = file.readShort();
-            number_of_locals = file.readShort();
+            int number_of_locals = file.readShort();
             types_of_locals = new StackMapType[number_of_locals];
             for (int i = 0; i < number_of_locals; i++) {
                 types_of_locals[i] = new StackMapType(file, constant_pool);
             }
-            number_of_stack_items = file.readShort();
+            int number_of_stack_items = file.readShort();
             types_of_stack_items = new StackMapType[number_of_stack_items];
             for (int i = 0; i < number_of_stack_items; i++) {
                 types_of_stack_items[i] = new StackMapType(file, constant_pool);
@@ -98,15 +95,13 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
     }
 
 
-    public StackMapTableEntry(int tag, int byte_code_offset_delta, int number_of_locals,
-            StackMapType[] types_of_locals, int number_of_stack_items,
+    public StackMapTableEntry(int tag, int byte_code_offset_delta,
+            StackMapType[] types_of_locals,
             StackMapType[] types_of_stack_items, ConstantPool constant_pool) {
         this.frame_type = tag;
         this.byte_code_offset_delta = byte_code_offset_delta;
-        this.number_of_locals = number_of_locals;
-        this.types_of_locals = types_of_locals;
-        this.number_of_stack_items = number_of_stack_items;
-        this.types_of_stack_items = types_of_stack_items;
+        setTypesOfLocals(types_of_locals);
+        setTypesOfStackItems(types_of_stack_items);
         this.constant_pool = constant_pool;
     }
 
@@ -132,18 +127,18 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
             file.writeShort(byte_code_offset_delta);
         } else if (frame_type >= Constants.APPEND_FRAME && frame_type <= Constants.APPEND_FRAME_MAX) {
             file.writeShort(byte_code_offset_delta);
-            for (int i = 0; i < number_of_locals; i++) {
-                types_of_locals[i].dump(file);
+            for (StackMapType type : types_of_locals) {
+                type.dump(file);
             }            
         } else if (frame_type == Constants.FULL_FRAME) {        
             file.writeShort(byte_code_offset_delta);
-            file.writeShort(number_of_locals);
-            for (int i = 0; i < number_of_locals; i++) {
-                types_of_locals[i].dump(file);
+            file.writeShort(types_of_locals.length);
+            for (StackMapType type : types_of_locals) {
+                type.dump(file);
             }
-            file.writeShort(number_of_stack_items);
-            for (int i = 0; i < number_of_stack_items; i++) {
-                types_of_stack_items[i].dump(file);
+            file.writeShort(types_of_stack_items.length);
+            for (StackMapType type : types_of_stack_items) {
+                type.dump(file);
             }
         } else {
             /* Can't happen */
@@ -177,21 +172,21 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
             buf.append("UNKNOWN");
         }
         buf.append(", offset delta=").append(byte_code_offset_delta);
-        if (number_of_locals > 0) {
+        if (types_of_locals.length > 0) {
             buf.append(", locals={");
-            for (int i = 0; i < number_of_locals; i++) {
+            for (int i = 0; i < types_of_locals.length; i++) {
                 buf.append(types_of_locals[i]);
-                if (i < number_of_locals - 1) {
+                if (i < types_of_locals.length - 1) {
                     buf.append(", ");
                 }
             }
             buf.append("}");
         }
-        if (number_of_stack_items > 0) {
+        if (types_of_stack_items.length > 0) {
             buf.append(", stack items={");
-            for (int i = 0; i < number_of_stack_items; i++) {
+            for (int i = 0; i < types_of_stack_items.length; i++) {
                 buf.append(types_of_stack_items[i]);
-                if (i < number_of_stack_items - 1) {
+                if (i < types_of_stack_items.length - 1) {
                     buf.append(", ");
                 }
             }
@@ -211,19 +206,14 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
         return byte_code_offset_delta;
     }
 
-
-    public void setNumberOfLocals( int n ) {
-        number_of_locals = n;
-    }
-
-
+    
     public int getNumberOfLocals() {
-        return number_of_locals;
+        return types_of_locals.length;
     }
 
 
-    public void setTypesOfLocals( StackMapType[] t ) {
-        types_of_locals = t;
+    public void setTypesOfLocals( StackMapType[] types ) {
+        types_of_locals = types != null ? types : new StackMapType[0];
     }
 
 
@@ -232,18 +222,13 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
     }
 
 
-    public void setNumberOfStackItems( int n ) {
-        number_of_stack_items = n;
-    }
-
-
     public int getNumberOfStackItems() {
-        return number_of_stack_items;
+        return types_of_stack_items.length;
     }
 
 
-    public void setTypesOfStackItems( StackMapType[] t ) {
-        types_of_stack_items = t;
+    public void setTypesOfStackItems( StackMapType[] types ) {
+        types_of_stack_items = types != null ? types : new StackMapType[0];
     }
 
 

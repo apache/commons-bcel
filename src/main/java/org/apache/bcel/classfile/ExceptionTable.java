@@ -13,8 +13,8 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
+
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
@@ -37,7 +37,7 @@ import org.apache.bcel.Constants;
 public final class ExceptionTable extends Attribute {
 
     private static final long serialVersionUID = 2045358830660883220L;
-    private int number_of_exceptions; // Table of indices into
+
     private int[] exception_index_table; // constant pool
 
 
@@ -71,10 +71,9 @@ public final class ExceptionTable extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    ExceptionTable(int name_index, int length, DataInput input, ConstantPool constant_pool)
-            throws IOException {
+    ExceptionTable(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
         this(name_index, length, (int[]) null, constant_pool);
-        number_of_exceptions = input.readUnsignedShort();
+        int number_of_exceptions = input.readUnsignedShort();
         exception_index_table = new int[number_of_exceptions];
         for (int i = 0; i < number_of_exceptions; i++) {
             exception_index_table[i] = input.readUnsignedShort();
@@ -104,9 +103,9 @@ public final class ExceptionTable extends Attribute {
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
-        file.writeShort(number_of_exceptions);
-        for (int i = 0; i < number_of_exceptions; i++) {
-            file.writeShort(exception_index_table[i]);
+        file.writeShort(exception_index_table.length);
+        for (int index : exception_index_table) {
+            file.writeShort(index);
         }
     }
 
@@ -123,7 +122,7 @@ public final class ExceptionTable extends Attribute {
      * @return Length of exception table.
      */
     public final int getNumberOfExceptions() {
-        return number_of_exceptions;
+        return exception_index_table == null ? 0 : exception_index_table.length;
     }
 
 
@@ -131,9 +130,9 @@ public final class ExceptionTable extends Attribute {
      * @return class names of thrown exceptions
      */
     public final String[] getExceptionNames() {
-        String[] names = new String[number_of_exceptions];
-        for (int i = 0; i < number_of_exceptions; i++) {
-            names[i] = constant_pool.getConstantString(exception_index_table[i],
+        String[] names = new String[exception_index_table.length];
+        for (int i = 0; i < exception_index_table.length; i++) {
+            names[i] = constant_pool.getConstantString(exception_index_table[i], 
                     Constants.CONSTANT_Class).replace('/', '.');
         }
         return names;
@@ -145,8 +144,7 @@ public final class ExceptionTable extends Attribute {
      * Also redefines number_of_exceptions according to table length.
      */
     public final void setExceptionIndexTable( int[] exception_index_table ) {
-        this.exception_index_table = exception_index_table;
-        number_of_exceptions = (exception_index_table == null) ? 0 : exception_index_table.length;
+        this.exception_index_table = exception_index_table != null ? exception_index_table : new int[0];
     }
 
 
@@ -157,11 +155,10 @@ public final class ExceptionTable extends Attribute {
     public final String toString() {
         StringBuilder buf = new StringBuilder();
         String str;
-        for (int i = 0; i < number_of_exceptions; i++) {
-            str = constant_pool.getConstantString(exception_index_table[i],
-                    Constants.CONSTANT_Class);
+        for (int i = 0; i < exception_index_table.length; i++) {
+            str = constant_pool.getConstantString(exception_index_table[i], Constants.CONSTANT_Class);
             buf.append(Utility.compactClassName(str, false));
-            if (i < number_of_exceptions - 1) {
+            if (i < exception_index_table.length - 1) {
                 buf.append(", ");
             }
         }

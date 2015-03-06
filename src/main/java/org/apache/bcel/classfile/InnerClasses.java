@@ -36,7 +36,6 @@ public final class InnerClasses extends Attribute {
 
     private static final long serialVersionUID = 4570147726361753700L;
     private InnerClass[] inner_classes;
-    private int number_of_classes;
 
 
     /**
@@ -73,7 +72,7 @@ public final class InnerClasses extends Attribute {
     InnerClasses(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (InnerClass[]) null, constant_pool);
-        number_of_classes = input.readUnsignedShort();
+        int number_of_classes = input.readUnsignedShort();
         inner_classes = new InnerClass[number_of_classes];
         for (int i = 0; i < number_of_classes; i++) {
             inner_classes[i] = new InnerClass(input);
@@ -103,9 +102,9 @@ public final class InnerClasses extends Attribute {
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
-        file.writeShort(number_of_classes);
-        for (int i = 0; i < number_of_classes; i++) {
-            inner_classes[i].dump(file);
+        file.writeShort(inner_classes.length);
+        for (InnerClass inner_class : inner_classes) {
+            inner_class.dump(file);
         }
     }
 
@@ -122,8 +121,7 @@ public final class InnerClasses extends Attribute {
      * @param inner_classes the array of inner classes
      */
     public final void setInnerClasses( InnerClass[] inner_classes ) {
-        this.inner_classes = inner_classes;
-        number_of_classes = (inner_classes == null) ? 0 : inner_classes.length;
+        this.inner_classes = inner_classes != null ? inner_classes : new InnerClass[0];
     }
 
 
@@ -133,8 +131,8 @@ public final class InnerClasses extends Attribute {
     @Override
     public final String toString() {
         StringBuilder buf = new StringBuilder();
-        for (int i = 0; i < number_of_classes; i++) {
-            buf.append(inner_classes[i].toString(constant_pool)).append("\n");
+        for (InnerClass inner_class : inner_classes) {
+            buf.append(inner_class.toString(constant_pool)).append("\n");
         }
         return buf.toString();
     }
@@ -146,8 +144,8 @@ public final class InnerClasses extends Attribute {
     @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         InnerClasses c = (InnerClasses) clone();
-        c.inner_classes = new InnerClass[number_of_classes];
-        for (int i = 0; i < number_of_classes; i++) {
+        c.inner_classes = new InnerClass[inner_classes.length];
+        for (int i = 0; i < inner_classes.length; i++) {
             c.inner_classes[i] = inner_classes[i].copy();
         }
         c.constant_pool = _constant_pool;
