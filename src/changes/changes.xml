@@ -81,6 +81,9 @@ The <action> type attribute can be add,update,fix,remove.
         The verifier should not check for run time compatibility of objects
         assigned to arrays.
       </action>
+      <action issue="BCEL-188" type="fix" dev="markt" due-to="Jérôme Leroux">
+        Correct verification of the return value of a method.
+      </action>
       <action issue="BCEL-186" type="fix" dev="sebb">
         Performance degradation with the UTF8 cache
         getInstance no longer uses cache

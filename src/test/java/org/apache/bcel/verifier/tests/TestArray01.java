@@ -13,19 +13,45 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
+package org.apache.bcel.verifier.tests;
 
-package org.apache.bcel.verifier;
+import java.io.Serializable;
 
-public class VerifierReturnTestCase extends AbstractVerifierTestCase {
+public class TestArray01{
 
-    public void testInvalidReturn() {
-        assertVerifyRejected("TestReturn01", "Verification of a void method that returns an object must fail.");
-        assertVerifyRejected("TestReturn03", "Verification of an int method that returns null must fail.");
+    public static Object test1(){
+        String[] a = new String[4];
+        a[0] = "";
+        a.equals(null);
+        test2(a);
+        test3(a);
+        test4(a);
+        return a;
     }
 
-    public void testValidReturn() {
-        assertVerifyOK("TestReturn02", "Verification of a method that returns a newly created object must pass.");
-        assertVerifyOK("TestArray01", "Verification of a method that returns an array must pass.");
+    @SuppressWarnings("unused")
+    public static void test2(Object o){
+    }
+
+    @SuppressWarnings("unused")
+    public static void test3(Serializable o){
+    }
+
+    @SuppressWarnings("unused")
+    public static void test4(Cloneable o){
+    }
+
+    public static Serializable test5(){
+        return new Object[1];
+    }
+
+    public static Cloneable test6(){
+        return new Object[1];
+    }
+
+    public static Object foo(String s){
+        return s;
     }
 }

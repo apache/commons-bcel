@@ -57,7 +57,7 @@ public abstract class ReferenceType extends Type {
      */
     public boolean isCastableTo( Type t ) throws ClassNotFoundException {
         if (this.equals(Type.NULL)) {
-            return true; // If this is ever changed in isAssignmentCompatible()
+            return t instanceof ReferenceType; // If this is ever changed in isAssignmentCompatible()
         }
         return isAssignmentCompatibleWith(t);
         /* Yes, it's true: It's the same definition.

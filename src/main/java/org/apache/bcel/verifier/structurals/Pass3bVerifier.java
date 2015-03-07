@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.structurals;
 
 
@@ -30,14 +30,12 @@ import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ConstantPoolGen;
-import org.apache.bcel.generic.GETFIELD;
 import org.apache.bcel.generic.InstructionHandle;
-import org.apache.bcel.generic.InvokeInstruction;
 import org.apache.bcel.generic.JsrInstruction;
-import org.apache.bcel.generic.LoadInstruction;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.RET;
+import org.apache.bcel.generic.ReferenceType;
 import org.apache.bcel.generic.ReturnInstruction;
 import org.apache.bcel.generic.ReturnaddressType;
 import org.apache.bcel.generic.Type;
@@ -53,7 +51,7 @@ import org.apache.bcel.verifier.exc.VerifierConstraintViolatedException;
  * so-called structural verification as described in The Java Virtual Machine
  * Specification, 2nd edition.
  * More detailed information is to be found at the do_verify() method's
- * documentation. 
+ * documentation.
  *
  * @version $Id$
  * @author Enver Haase
@@ -253,54 +251,40 @@ public final class Pass3bVerifier extends PassVerifier{
                     }
                 }
                 //see JVM $4.8.2
-                //TODO implement all based on stack 
                 Type returnedType = null;
-                InstructionHandle ihPrev = null;
-                ihPrev = ih.getPrev();
-
-                if (ihPrev != null)
-                {
-                    if( ihPrev.getInstruction() instanceof InvokeInstruction )
-                    {
-                        returnedType = ((InvokeInstruction)ihPrev.getInstruction()).getType(m.getConstantPool());
-                    }
-                    if( ihPrev.getInstruction() instanceof LoadInstruction )
-                    {
-                        int index = ((LoadInstruction)ihPrev.getInstruction()).getIndex();
-                        returnedType = lvs.get(index);
-                    }
-                    if( ihPrev.getInstruction() instanceof GETFIELD )
-                    {
-                        returnedType = ((GETFIELD)ihPrev.getInstruction()).getType(m.getConstantPool());
-                    }
+                OperandStack inStack = ic.getInFrame().getStack();
+                if (inStack.size() >= 1) {
+                    returnedType = inStack.peek();
+                } else {
+                    returnedType = Type.VOID;
                 }
 
-                if( returnedType != null )
-                {
-                    if( returnedType instanceof ObjectType )
-                    {
-                        try
-                        {
-                            if( !((ObjectType)returnedType).isAssignmentCompatibleWith(m.getReturnType()) )
-                            {
-                                throw new StructuralCodeConstraintException("Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
+                if (returnedType != null) {
+                    if (returnedType instanceof ReferenceType) {
+                        try {
+                            if (!((ReferenceType) returnedType).isCastableTo(m.getReturnType())) {
+                                invalidReturnTypeError(returnedType, m);
                             }
-                        }
-                        catch (ClassNotFoundException e)
-                        {
-                            //dont know what do do now, so raise RuntimeException
+                        } catch (ClassNotFoundException e) {
+                            // Don't know what do do now, so raise RuntimeException
                             throw new RuntimeException(e);
                         }
-                    }
-                    else if( !returnedType.equals(m.getReturnType()) )
-                    {
-                        throw new StructuralCodeConstraintException("Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
+                    } else if (!returnedType.equals(m.getReturnType().normalizeForStackOrLocal())) {
+                        invalidReturnTypeError(returnedType, m);
                     }
                 }
             }
-        }while ((ih = ih.getNext()) != null);
+        } while ((ih = ih.getNext()) != null);
 
      }
+
+    /**
+     * Throws an exception indicating the returned type is not compatible with the return type of the given method
+     * @throws StructuralCodeConstraintException always
+     */
+    public void invalidReturnTypeError(Type returnedType, MethodGen m){
+        throw new StructuralCodeConstraintException("Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
+    }
 
     /**
      * Pass 3b implements the data flow analysis as described in the Java Virtual

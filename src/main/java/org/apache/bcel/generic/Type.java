@@ -23,8 +23,10 @@ import java.util.List;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.verifier.structurals.LocalVariables;
+import org.apache.bcel.verifier.structurals.OperandStack;
 
-/** 
+/**
  * Abstract super class for all possible java types, namely basic types
  * such as int, object types like String and array types, e.g. int[]
  *
@@ -106,6 +108,19 @@ public abstract class Type implements java.io.Serializable {
         return type;
     }
 
+    /**
+     * boolean, short and char variable are considered as int in the stack or local variable area.
+     * Returns {@link Type#INT} for {@link Type#BOOLEAN}, {@link Type#SHORT} or {@link Type#CHAR}, otherwise
+     * returns the given type.
+     * @see OperandStack#push(Type)
+     * @see LocalVariables#set(int, Type)
+     */
+    public Type normalizeForStackOrLocal(){
+        if (this == Type.BOOLEAN || this == Type.BYTE || this == Type.SHORT || this == Type.CHAR){
+            return Type.INT;
+        }
+        return this;
+    }
 
     /**
      * @return stack size of this type (2 for long and double, 0 for void, 1 otherwise)
