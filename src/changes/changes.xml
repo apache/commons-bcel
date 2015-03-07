@@ -63,6 +63,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-184" type="fix" due-to="Jérôme Leroux">
+        The verifier now checks if methods with a void return type attempt to return an object.
+      </action>
       <action issue="BCEL-207" type="fix" due-to="Mark Roberts">
         MethodGen.removeLocalVariable now properly unreference the removed variable
         from the targetters of the instruction handlers delimiting the scope of the variable.

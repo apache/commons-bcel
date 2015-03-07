@@ -99,10 +99,10 @@ Bug fixes from 5.2
 [BCEL-174] Verification of interfaces with default methods fails with Java 8
 [BCEL-177] MethodParameters should read 1 byte not two for parameter count
 [BCEL-181] ClassLoaderRepository.loadClass(String) leaks input streams
+[BCEL-184] JustIce verifier does not check correctly the returned value of a method
 [BCEL-194] LocalVariableGen hashCode() function is incorrrect
 [BCEL-197] Add support for TypeVariables to Utility.signatureToString()
 [BCEL-207] MethodGen.removeLocalVariable(s) doesn't remove the associated Targetters
-
 
 Feedback
 --------

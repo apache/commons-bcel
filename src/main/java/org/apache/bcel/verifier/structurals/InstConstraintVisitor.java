@@ -413,6 +413,9 @@ public class InstConstraintVisitor extends EmptyVisitor{
             }
         }
         if (o instanceof ARETURN){
+            if (method_type == Type.VOID){
+                constraintViolated(o, "ARETURN instruction in void method.");
+            }
             if (stack().peek() == Type.NULL){
                 return;
             }
