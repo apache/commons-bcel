@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.structurals;
 
 
@@ -71,14 +71,14 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
     /**
      * The ConstantPoolGen we're working on.
-     * 
+     *
      * @see #setConstantPoolGen(ConstantPoolGen cpg)
      */
     private ConstantPoolGen cpg = null;
 
     /**
      * The MethodGen we're working on.
-     * 
+     *
      * @see #setMethodGen(MethodGen mg)
      */
     private MethodGen mg = null;
@@ -129,7 +129,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
     /**
      * Sets the ConstantPoolGen instance needed for constraint
      * checking prior to execution.
-     */    
+     */
     public void setConstantPoolGen(ConstantPoolGen cpg){
         this.cpg = cpg;
     }
@@ -276,7 +276,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
          // visitLoadClass(o) has been called before: Every FieldOrMethod
          // implements LoadClass.
          // visitCPInstruction(o) has been called before.
-        // A FieldInstruction may be: GETFIELD, GETSTATIC, PUTFIELD, PUTSTATIC 
+        // A FieldInstruction may be: GETFIELD, GETSTATIC, PUTFIELD, PUTSTATIC
             Constant c = cpg.getConstant(o.getIndex());
             if (!(c instanceof ConstantFieldref)){
                 constraintViolated(o, "Index '"+o.getIndex()+"' should refer to a CONSTANT_Fieldref_info structure, but refers to '"+c+"'.");
@@ -453,7 +453,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         if (arrayrefOfArrayType(o, arrayref)){
             if (! (((ArrayType) arrayref).getElementType() instanceof ReferenceType)){
                 constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a ReferenceType but to an array of "+((ArrayType) arrayref).getElementType()+".");
-            }    
+            }
             //referenceTypeIsInitialized(o, (ReferenceType) (((ArrayType) arrayref).getElementType()));
         }
     }
@@ -463,7 +463,6 @@ public class InstConstraintVisitor extends EmptyVisitor{
      */
     @Override
     public void visitAASTORE(AASTORE o){
-        try {
         Type arrayref = stack().peek(2);
         Type index    = stack().peek(1);
         Type value    = stack().peek(0);
@@ -475,18 +474,12 @@ public class InstConstraintVisitor extends EmptyVisitor{
             //referenceTypeIsInitialized(o, (ReferenceType) value);
         }
         // Don't bother further with "referenceTypeIsInitialized()", there are no arrays
-        // of an uninitialized object type. 
+        // of an uninitialized object type.
         if (arrayrefOfArrayType(o, arrayref)){
             if (! (((ArrayType) arrayref).getElementType() instanceof ReferenceType)){
                 constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a ReferenceType but to an array of "+((ArrayType) arrayref).getElementType()+".");
             }
-            if (! ((ReferenceType)value).isAssignmentCompatibleWith(((ArrayType) arrayref).getElementType())){
-                constraintViolated(o, "The type of 'value' ('"+value+"') is not assignment compatible to the components of the array 'arrayref' refers to. ('"+((ArrayType) arrayref).getElementType()+"')");
-            }
-        }
-        } catch (ClassNotFoundException e) {
-        // FIXME: maybe not the best way to handle this
-        throw new AssertionViolatedException("Missing class: " + e, e);
+            // No check for array element assignment compatibility. This is done at runtime.
         }
     }
 
@@ -743,7 +736,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek());
         if (stack().peek(1) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(1) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-top must be of type double[] but is '"+stack().peek(1)+"'.");
         }
@@ -764,7 +757,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek(1));
         if (stack().peek(2) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(2) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-next-to-top must be of type double[] but is '"+stack().peek(2)+"'.");
         }
@@ -1059,7 +1052,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek());
         if (stack().peek(1) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(1) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-top must be of type float[] but is '"+stack().peek(1)+"'.");
         }
@@ -1080,7 +1073,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek(1));
         if (stack().peek(2) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(2) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-next-to-top must be of type float[] but is '"+stack().peek(2)+"'.");
         }
@@ -1291,7 +1284,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
                     //      "Wider" object types don't allow us to check for things like that below.
                     //constraintViolated(o, "The referenced field has the ACC_PROTECTED modifier, and it's a member of the current class or a superclass of the current class. However, the referenced object type '"+stack().peek()+"' is not the current class or a subclass of the current class.");
                 }
-            } 
+            }
         }
 
         // TODO: Could go into Pass 3a.
@@ -1410,7 +1403,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek());
         if (stack().peek(1) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(1) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-top must be of type int[] but is '"+stack().peek(1)+"'.");
         }
@@ -1444,7 +1437,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek(1));
         if (stack().peek(2) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(2) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-next-to-top must be of type int[] but is '"+stack().peek(2)+"'.");
         }
@@ -1653,7 +1646,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         if (!(stack().peek() instanceof ReferenceType)){
             constraintViolated(o, "The value at the stack top is not of a ReferenceType, but of type '"+stack().peek()+"'.");
         }
-        referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );    
+        referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
     }
 
     /**
@@ -1664,7 +1657,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         if (!(stack().peek() instanceof ReferenceType)){
             constraintViolated(o, "The value at the stack top is not of a ReferenceType, but of type '"+stack().peek()+"'.");
         }
-        referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );    
+        referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
     }
 
     /**
@@ -1829,7 +1822,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         //       instead of "wider cast object types" generated during verification.
         //if ( ! Repository.implementationOf(objref_classname, theInterface) ){
         //    constraintViolated(o, "The 'objref' item '"+objref+"' does not implement '"+theInterface+"' as expected.");
-        //}    
+        //}
 
         int counted_count = 1; // 1 for the objectref
         for (int i=0; i<nargs; i++){
@@ -1912,7 +1905,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
                 }
             }
 
-            objref_classname = ((ObjectType) objref).getClassName();        
+            objref_classname = ((ObjectType) objref).getClassName();
         }
         else{
             if (!(objref instanceof UninitializedObjectType)){
@@ -1925,7 +1918,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         String theClass = o.getClassName(cpg);
         if ( ! Repository.instanceOf(objref_classname, theClass) ){
             constraintViolated(o, "The 'objref' item '"+objref+"' does not implement '"+theClass+"' as expected.");
-        }    
+        }
 
         } catch (ClassNotFoundException e) {
         // FIXME: maybe not the best way to handle this
@@ -2056,7 +2049,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
         if ( ! Repository.instanceOf(objref_classname, theClass) ){
             constraintViolated(o, "The 'objref' item '"+objref+"' does not implement '"+theClass+"' as expected.");
-        }    
+        }
         } catch (ClassNotFoundException e) {
         // FIXME: maybe not the best way to handle this
         throw new AssertionViolatedException("Missing class: " + e, e);
@@ -2241,7 +2234,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek());
         if (stack().peek(1) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(1) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-top must be of type long[] but is '"+stack().peek(1)+"'.");
         }
@@ -2275,7 +2268,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek(1));
         if (stack().peek(2) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(2) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-next-to-top must be of type long[] but is '"+stack().peek(2)+"'.");
         }
@@ -2577,7 +2570,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         //e.g.: Don't instantiate interfaces
         if (! obj.referencesClass()){
             constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '"+obj+"'.");
-        }        
+        }
     }
 
     /**
@@ -2701,7 +2694,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
                             objreftype.subclassOf(curr) ) ){
                     constraintViolated(o, "The referenced field has the ACC_PROTECTED modifier, and it's a member of the current class or a superclass of the current class. However, the referenced object type '"+stack().peek()+"' is not the current class or a subclass of the current class.");
                 }
-            } 
+            }
         }
 
         // TODO: Could go into Pass 3a.
@@ -2815,7 +2808,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek());
         if (stack().peek(1) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(1) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-top must be of type short[] but is '"+stack().peek(1)+"'.");
         }
@@ -2836,7 +2829,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         indexOfInt(o, stack().peek(1));
         if (stack().peek(2) == Type.NULL){
             return;
-        } 
+        }
         if (! (stack().peek(2) instanceof ArrayType)){
             constraintViolated(o, "Stack next-to-next-to-top must be of type short[] but is '"+stack().peek(2)+"'.");
         }

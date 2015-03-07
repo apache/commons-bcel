@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
    Licensed to the Apache Software Foundation (ASF) under one or more
@@ -76,6 +76,10 @@ The <action> type attribute can be add,update,fix,remove.
       </action>
       <action issue="BCEL-194" type="fix" due-to="Mark Roberts">
         Removed the 'index' variable from the LocalVariableGen's hash code.
+      </action>
+      <action issue="BCEL-193" type="fix" dev="markt" due-to="Jérôme Leroux">
+        The verifier should not check for run time compatibility of objects
+        assigned to arrays.
       </action>
       <action issue="BCEL-186" type="fix" dev="sebb">
         Performance degradation with the UTF8 cache
