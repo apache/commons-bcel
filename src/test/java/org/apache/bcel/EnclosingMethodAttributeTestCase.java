@@ -13,13 +13,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 
 package org.apache.bcel;
 
 import java.io.File;
 import java.io.IOException;
+
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.EnclosingMethod;
@@ -91,6 +92,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
         clazz.dump(tfile);
         // Read in the new version and check it is OK
         SyntheticRepository repos2 = createRepos(".");
+        @SuppressWarnings("unused")
         JavaClass clazz2 = repos2.loadClass("AttributeTestClassEM02$1");
         EnclosingMethod em = (EnclosingMethod) encMethodAttrs[0];
         String enclosingClassName = em.getEnclosingClass().getBytes(pool);
