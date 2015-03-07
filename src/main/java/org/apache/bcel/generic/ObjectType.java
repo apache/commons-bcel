@@ -17,7 +17,6 @@
  */
 package org.apache.bcel.generic;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -37,7 +36,7 @@ public class ObjectType extends ReferenceType {
     private final String class_name; // Class name of type
     private static final int MAX_CACHE_ENTRIES = 200;
     private static final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
-    private static HashMap<String, ObjectType> cache;
+    private static Map<String, ObjectType> cache;
 
     public synchronized static ObjectType getInstance(String class_name) {
         if (cache == null) {
