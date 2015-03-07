@@ -24,7 +24,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.Constants;
@@ -90,7 +89,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         // Build a RV annotation of type 'SimpleAnnotation' with 'id=4' as the
         // only value :)
         AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
-        Vector<AnnotationEntryGen> v = new Vector<AnnotationEntryGen>();
+        List<AnnotationEntryGen> v = new ArrayList<AnnotationEntryGen>();
         v.add(a);
         Attribute[] attributes = AnnotationEntryGen.getAnnotationAttributes(cp, v);
         boolean foundRV = false;
@@ -105,7 +104,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         // Build a RIV annotation of type 'SimpleAnnotation' with 'id=4' as the
         // only value :)
         AnnotationEntryGen a2 = new AnnotationEntryGen(t, elements, false, cp);
-        Vector<AnnotationEntryGen> v2 = new Vector<AnnotationEntryGen>();
+        List<AnnotationEntryGen> v2 = new ArrayList<AnnotationEntryGen>();
         v2.add(a2);
         Attribute[] attributes2 = AnnotationEntryGen.getAnnotationAttributes(cp, v2);
         boolean foundRIV = false;
