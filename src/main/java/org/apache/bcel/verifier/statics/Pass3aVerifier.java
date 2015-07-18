@@ -1079,18 +1079,9 @@ public final class Pass3aVerifier extends PassVerifier{
             // too. So are the allowed method names.
             String classname = o.getClassName(cpg);
             JavaClass jc = Repository.lookupClass(classname);
-            Method[] ms = jc.getMethods();
-            Method m = null;
-            for (Method element : ms) {
-                if ( (element.getName().equals(o.getMethodName(cpg))) &&
-                     (Type.getReturnType(element.getSignature()).equals(o.getReturnType(cpg))) &&
-                     (objarrayequals(Type.getArgumentTypes(element.getSignature()), o.getArgumentTypes(cpg))) ){
-                    m = element;
-                    break;
-                }
-            }
+            Method m = getMethodRecursive(jc, o);
             if (m == null){
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'. The native verifier does allow the method to be declared in some superinterface, which the Java Virtual Machine Specification, Second Edition does not.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'.");
             }
             if (jc.isClass()){
                 constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is a class, but not an interface as expected.");
@@ -1099,6 +1090,59 @@ public final class Pass3aVerifier extends PassVerifier{
             // FIXME: maybe not the best way to handle this
             throw new AssertionViolatedException("Missing class: " + e, e);
             }
+        }
+
+        /**
+         * Looks for the method referenced by the given invoke instruction in the given class or its super classes and super interfaces.
+         * @param jc the class that defines the referenced method
+         * @param invoke the instruction that references the method
+         * @return the referenced method or null if not found.
+         */
+        private Method getMethodRecursive(JavaClass jc, InvokeInstruction invoke) throws ClassNotFoundException{
+            Method m;
+            //look in the given class
+            m = getMethod(jc, invoke);
+            if(m != null){
+                //method found in given class
+                return m;
+            }
+            //method not found, look in super classes
+            for(JavaClass superclass : jc.getSuperClasses()){
+                m = getMethod(superclass, invoke);
+                if(m != null){
+                    //method found in super class
+                    return m;
+                }
+            }
+            //method not found, look in super interfaces
+            for(JavaClass superclass : jc.getInterfaces()){
+                m = getMethod(superclass, invoke);
+                if(m != null){
+                    //method found in super interface
+                    return m;
+                }
+            }
+            //method not found in the hierarchy
+            return null;
+        }
+        /**
+         * Looks for the method referenced by the given invoke instruction in the given class.
+         * @param jc the class that defines the referenced method
+         * @param invoke the instruction that references the method
+         * @return the referenced method or null if not found.
+         */
+        private Method getMethod(JavaClass jc, InvokeInstruction invoke){
+            Method[] ms = jc.getMethods();
+            Method m = null;
+            for (Method element : ms) {
+                if ( (element.getName().equals(invoke.getMethodName(cpg))) &&
+                     (Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(cpg))) &&
+                     (objarrayequals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(cpg))) ){
+                    return element;
+                }
+            }
+            
+            return null;
         }
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
@@ -1111,18 +1155,9 @@ public final class Pass3aVerifier extends PassVerifier{
             // too. So are the allowed method names.
             String classname = o.getClassName(cpg);
             JavaClass jc = Repository.lookupClass(classname);
-            Method[] ms = jc.getMethods();
-            Method m = null;
-            for (Method element : ms) {
-                if ( (element.getName().equals(o.getMethodName(cpg))) &&
-                     (Type.getReturnType(element.getSignature()).equals(o.getReturnType(cpg))) &&
-                     (objarrayequals(Type.getArgumentTypes(element.getSignature()), o.getArgumentTypes(cpg))) ){
-                    m = element;
-                    break;
-                }
-            }
+            Method m = getMethodRecursive(jc, o);
             if (m == null){
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'. The native verifier does allow the method to be declared in some superclass or implemented interface, which the Java Virtual Machine Specification, Second Edition does not.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'.");
             }
 
             JavaClass current = Repository.lookupClass(myOwner.getClassName());
@@ -1177,18 +1212,9 @@ public final class Pass3aVerifier extends PassVerifier{
             // too. So are the allowed method names.
             String classname = o.getClassName(cpg);
             JavaClass jc = Repository.lookupClass(classname);
-            Method[] ms = jc.getMethods();
-            Method m = null;
-            for (Method element : ms) {
-                if ( (element.getName().equals(o.getMethodName(cpg))) &&
-                     (Type.getReturnType(element.getSignature()).equals(o.getReturnType(cpg))) &&
-                     (objarrayequals(Type.getArgumentTypes(element.getSignature()), o.getArgumentTypes(cpg))) ){
-                    m = element;
-                    break;
-                }
-            }
+            Method m = getMethodRecursive(jc, o);
             if (m == null){
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg) +"' not found in class '"+jc.getClassName()+"'. The native verifier possibly allows the method to be declared in some superclass or implemented interface, which the Java Virtual Machine Specification, Second Edition does not.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg) +"' not found in class '"+jc.getClassName()+"'.");
             } else if (! (m.isStatic())){ // implies it's not abstract, verified in pass 2.
                 constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' has ACC_STATIC unset.");
             }
@@ -1210,18 +1236,9 @@ public final class Pass3aVerifier extends PassVerifier{
             // too. So are the allowed method names.
             String classname = o.getClassName(cpg);
             JavaClass jc = Repository.lookupClass(classname);
-            Method[] ms = jc.getMethods();
-            Method m = null;
-            for (Method element : ms) {
-                if ( (element.getName().equals(o.getMethodName(cpg))) &&
-                     (Type.getReturnType(element.getSignature()).equals(o.getReturnType(cpg))) &&
-                     (objarrayequals(Type.getArgumentTypes(element.getSignature()), o.getArgumentTypes(cpg))) ){
-                    m = element;
-                    break;
-                }
-            }
+            Method m = getMethodRecursive(jc, o);
             if (m == null){
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'. The native verifier does allow the method to be declared in some superclass or implemented interface, which the Java Virtual Machine Specification, Second Edition does not.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'.");
             }
             if (! (jc.isClass())){
                 constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is an interface, but not a class as expected.");

@@ -18,10 +18,10 @@
 
 package org.apache.bcel.verifier;
 
-import junit.framework.TestCase;
-
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
+
+import junit.framework.TestCase;
 
 public abstract class AbstractVerifierTestCase extends TestCase {
 

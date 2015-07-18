@@ -41,8 +41,8 @@
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.5</maven.compiler.source>
+    <maven.compiler.target>1.5</maven.compiler.target>
     <commons.componentid>bcel</commons.componentid>
     <commons.release.version>6.0</commons.release.version>
     <commons.release.desc>(Java 5.0+)</commons.release.desc>
