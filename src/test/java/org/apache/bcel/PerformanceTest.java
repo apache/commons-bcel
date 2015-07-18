@@ -19,13 +19,13 @@
 package org.apache.bcel;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
-import junit.framework.TestCase;
 
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
@@ -33,6 +33,9 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
+import org.junit.Assert;
+
+import junit.framework.TestCase;
 
 public final class PerformanceTest extends TestCase {
 
@@ -61,7 +64,7 @@ public final class PerformanceTest extends TestCase {
         }
     }
 
-    private static void test(int fraction) throws IOException {
+    private static void test(File lib) throws IOException {
         NanoTimer total = new NanoTimer();
         NanoTimer parseTime = new NanoTimer();
         NanoTimer cgenTime = new NanoTimer();
@@ -69,17 +72,15 @@ public final class PerformanceTest extends TestCase {
         NanoTimer mserTime = new NanoTimer();
         NanoTimer serTime = new NanoTimer();
 
+        System.out.println("parsing " + lib);
+
         total.start();
-
-        String javaHome = System.getProperty("java.home");
-
-        JarFile jar = new JarFile(javaHome + "/lib/rt.jar");
+        JarFile jar = new JarFile(lib);
         Enumeration<?> en = jar.entries();
-        int i = 0;
 
         while (en.hasMoreElements()) {
             JarEntry e = (JarEntry) en.nextElement();
-            if (e.getName().endsWith(".class") && i++ % fraction == 0) {
+            if (e.getName().endsWith(".class")) {
                 InputStream in = jar.getInputStream(e);
                 byte[] bytes = read(in);
 
@@ -127,9 +128,20 @@ public final class PerformanceTest extends TestCase {
     }
 
     public void testPerformance() throws IOException {
-        test(1);
-        test(1);
-        test(1);        
+        File javaLib = new File(System.getProperty("java.home") + "/lib");
+        javaLib.listFiles(new FileFilter() {
+
+            public boolean accept(File file) {
+                if(file.getName().endsWith(".jar")) {
+                    try {
+                        test(file);
+                    } catch (IOException e) {
+                        Assert.fail(e.getMessage());
+                    }
+                }
+                return false;
+            }
+        });
     }
 
 }

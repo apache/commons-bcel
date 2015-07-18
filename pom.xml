@@ -41,8 +41,8 @@
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.source>1.5</maven.compiler.source>
-    <maven.compiler.target>1.5</maven.compiler.target>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
     <commons.componentid>bcel</commons.componentid>
     <commons.release.version>6.0</commons.release.version>
     <commons.release.desc>(Java 5.0+)</commons.release.desc>
@@ -202,6 +202,7 @@
         <configuration>
           <includes>
             <include>**/*TestCase.java</include>
+            <include>**/PerformanceTest.java</include>
           </includes>
           <excludes>
             <exclude>**/Abstract*</exclude>
@@ -350,6 +351,25 @@
       </properties>
     </profile>
 
+    <!-- Profile to build and run PerformanceTest. Use 'mvn test -Pjdk-rt' -->
+	<profile>
+	      <id>jdk-rt</id>
+	            <build>
+        <plugins>
+                <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>**/PerformanceTest.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+
+        </plugins>
+      </build>
+	      
+	</profile>
+	
     <!-- Profile to build and run the benchmarks. Use 'mvn test -Pbenchmark', and add '-Dbenchmark=foo' to run only the foo benchmark -->
     <profile>
       <id>benchmark</id>
