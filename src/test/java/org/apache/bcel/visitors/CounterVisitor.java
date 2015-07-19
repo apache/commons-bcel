@@ -30,6 +30,7 @@ import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
 import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantInvokeDynamic;
 import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
@@ -357,5 +358,9 @@ public class CounterVisitor implements Visitor
     public void visitMethodParameters(MethodParameters obj)
     {
         methodParametersCount++;
+    }
+
+    public void visitConstantInvokeDynamic(ConstantInvokeDynamic obj)
+    {
     }
 }

@@ -340,14 +340,18 @@ public abstract class Utility {
              */
             case Constants.INVOKESPECIAL:
             case Constants.INVOKESTATIC:
-            case Constants.INVOKEVIRTUAL:
                 index = bytes.readUnsignedShort();
                 Constant c = constant_pool.getConstant(index);
-                if (c.getTag() != Constants.CONSTANT_Methodref && c.getTag() != Constants.CONSTANT_InterfaceMethodref) {
-                    throw new ClassFormatException("Expected class `CONSTANT_Methodref' or 'CONSTANT_InterfaceMethodref' at index " + index + " and got " +c);
-                }
+                // With Java8 operand may be either a CONSTANT_Methodref
+                // or a CONSTANT_InterfaceMethodref.   (markro)
                 buf.append("\t").append(
-                        constant_pool.constantToString(c))
+                        constant_pool.constantToString(index, c.getTag()))
+                        .append((verbose ? " (" + index + ")" : ""));
+                break;
+            case Constants.INVOKEVIRTUAL:
+                index = bytes.readUnsignedShort();
+                buf.append("\t").append(
+                        constant_pool.constantToString(index, Constants.CONSTANT_Methodref))
                         .append((verbose ? " (" + index + ")" : ""));
                 break;
             case Constants.INVOKEINTERFACE:
@@ -361,14 +365,12 @@ public abstract class Utility {
                 break;
             case Constants.INVOKEDYNAMIC:
                 index = bytes.readUnsignedShort();
-                int ignored = bytes.readUnsignedShort(); 
-                ConstantInvokeDynamic id = (ConstantInvokeDynamic) constant_pool.getConstant(index, Constants.CONSTANT_InvokeDynamic);
-                buf.append("\t").append("<dyn>.").append(
+                buf.append("\t").append(
                         constant_pool
-                                .constantToString(id.getNameAndTypeIndex(), Constants.CONSTANT_NameAndType));
-                if (verbose) {
-                    buf.append(" (" + index + "/" + id.getNameAndTypeIndex() +")");
-                }
+                                .constantToString(index, Constants.CONSTANT_InvokeDynamic))
+                        .append(verbose ? " (" + index + ")\t" : "")
+                        .append(bytes.readUnsignedByte())  // Thrid byte is a reserved space
+                        .append(bytes.readUnsignedByte()); // Last byte is a reserved space
                 break;
             /* Operands are references to items in constant pool
              */
@@ -829,7 +831,18 @@ public abstract class Utility {
                     return compactClassName(signature.substring(1, index), chopit);
                 }
                 case 'L': { // Full class name
-                    int index = signature.indexOf(';'); // Look for closing `;'
+                    // should this be a while loop? can there be more than
+                    // one generic clause?  (markro)
+                    int fromIndex = signature.indexOf('<'); // generic type?
+                    if (fromIndex < 0) {
+                        fromIndex = 0;
+                    } else {
+                        fromIndex = signature.indexOf('>', fromIndex);
+                        if (fromIndex < 0) {
+                            throw new ClassFormatException("Invalid signature: " + signature);
+                        }
+                    }
+                    int index = signature.indexOf(';', fromIndex); // Look for closing `;'
                     if (index < 0) {
                         throw new ClassFormatException("Invalid signature: " + signature);
                     }

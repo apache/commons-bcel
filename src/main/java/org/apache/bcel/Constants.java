@@ -1170,7 +1170,7 @@ public interface Constants {
     0/*dreturn*/, 0/*areturn*/, 0/*return*/,
     2/*getstatic*/, 2/*putstatic*/, 2/*getfield*/,
     2/*putfield*/, 2/*invokevirtual*/, 2/*invokespecial*/, 2/*invokestatic*/,
-    4/*invokeinterface*/, 5/*invokedynamic*/, 2/*new*/,
+    4/*invokeinterface*/, 4/*invokedynamic*/, 2/*new*/,
     1/*newarray*/, 2/*anewarray*/,
     0/*arraylength*/, 0/*athrow*/, 2/*checkcast*/,
     2/*instanceof*/, 0/*monitorenter*/,
@@ -1525,9 +1525,9 @@ public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = ATTR_RUN
   public static final byte REF_newInvokeSpecial = 8;
   public static final byte REF_invokeInterface  = 9;
   
-  public static final String[] REF_NAMES = {
-          "getfield", "getstatic", "putfield", 
-          "putstatic", "invokevirtual", "invokestatic", 
-          "invokespecial", "new dup invokespecial", "invokeinterface"
-  };
+  /** The names of the referencd_kinds of a CONSTANT_MethodHandle_info. */
+  public static final String[] METHODHANDLE_NAMES = {
+      "", "getField", "getStatic", "putField", "putStatic", "invokeVirtual",
+      "invokeStatic", "invokeSpecial", "newInvokeSpecial", "invokeInterface" };
+
 }

@@ -43,6 +43,8 @@ public interface Visitor
 
     void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj);
 
+    void visitConstantInvokeDynamic(ConstantInvokeDynamic obj);
+
     void visitConstantLong(ConstantLong obj);
 
     void visitConstantMethodref(ConstantMethodref obj);

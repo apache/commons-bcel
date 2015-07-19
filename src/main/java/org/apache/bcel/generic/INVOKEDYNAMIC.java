@@ -17,14 +17,11 @@
  */
 package org.apache.bcel.generic;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.ExceptionConstants;
-import org.apache.bcel.classfile.Constant;
-import org.apache.bcel.classfile.ConstantInvokeDynamic;
-import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.ByteSequence;
 
@@ -34,11 +31,9 @@ import org.apache.bcel.util.ByteSequence;
  * mechanism entirely.
  *
  * @version $Id: InvokeInstruction.java 1152072 2011-07-29 01:54:05Z dbrosius $
- * @author  Bill Pugh
  * @since 6.0
  */
-public class INVOKEDYNAMIC extends NameSignatureInstruction implements ExceptionThrower,
-        StackConsumer, StackProducer {
+public class INVOKEDYNAMIC extends InvokeInstruction {
 
     private static final long serialVersionUID = 1L;
 
@@ -51,92 +46,23 @@ public class INVOKEDYNAMIC extends NameSignatureInstruction implements Exception
     }
 
 
-    /**
-     * @param index to constant pool
-     */
-    public INVOKEDYNAMIC(short opcode, int index) {
-        super(opcode, index);
+    public INVOKEDYNAMIC(int index) {
+        super(Constants.INVOKEDYNAMIC, index);
     }
 
 
     /**
-     * @return mnemonic for instruction with symbolic references resolved
+     * Dump instruction as byte code to stream out.
+     * @param out Output stream
      */
     @Override
-    public String toString( ConstantPool cp ) {
-        Constant c = cp.getConstant(index);
-        StringTokenizer tok = new StringTokenizer(cp.constantToString(c));
-        return Constants.OPCODE_NAMES[opcode] + " " + tok.nextToken().replace('.', '/')
-                + tok.nextToken();
-    }
-
-    /** 
-     * Get the ConstantInvokeDynamic associated with this instruction
-     */
-
-      public ConstantInvokeDynamic getInvokeDynamic( ConstantPoolGen cpg ) {
-          ConstantPool cp = cpg.getConstantPool();
-          return (ConstantInvokeDynamic) cp.getConstant(index);
+    public void dump( DataOutputStream out ) throws IOException {
+        out.writeByte(opcode);
+        out.writeShort(index);
+        out.writeByte(0);
+        out.writeByte(0);
        }
 
-    @Override
-    public ConstantNameAndType getNameAndType( ConstantPoolGen cpg ) {
-        ConstantPool cp = cpg.getConstantPool();
-        ConstantInvokeDynamic id = getInvokeDynamic(cpg);
-        return (ConstantNameAndType) cp.getConstant(id.getNameAndTypeIndex());
-     }
-
-    /**
-     * Also works for instructions whose stack effect depends on the
-     * constant pool entry they reference.
-     * @return Number of words consumed from stack by this instruction
-     */
-    @Override
-    public int consumeStack( ConstantPoolGen cpg ) {
-
-        String signature = getSignature(cpg);
-        return  Type.getArgumentTypesSize(signature);
-    }
-
-    /**
-     * Also works for instructions whose stack effect depends on the
-     * constant pool entry they reference.
-     * @return Number of words produced onto stack by this instruction
-     */
-    @Override
-    public int produceStack( ConstantPoolGen cpg ) {
-        String signature = getSignature(cpg);
-        return Type.getReturnTypeSize(signature);
-    }
-
-
-    /** @return return type of referenced method.
-     */
-    @Override
-    public Type getType( ConstantPoolGen cpg ) {
-        return getReturnType(cpg);
-    }
-
-
-    /** @return name of referenced method.
-     */
-    public String getMethodName( ConstantPoolGen cpg ) {
-        return getName(cpg);
-    }
-
-
-    /** @return return type of referenced method.
-     */
-    public Type getReturnType( ConstantPoolGen cpg ) {
-        return Type.getReturnType(getSignature(cpg));
-    }
-
-
-    /** @return argument types of referenced method.
-     */
-    public Type[] getArgumentTypes( ConstantPoolGen cpg ) {
-        return Type.getArgumentTypes(getSignature(cpg));
-    }
 
     /**
      * Read needed data (i.e., index) from file.
@@ -145,8 +71,19 @@ public class INVOKEDYNAMIC extends NameSignatureInstruction implements Exception
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
         length = 5;
-        bytes.readUnsignedShort();
+        bytes.readByte(); // Skip 0 byte
+        bytes.readByte(); // Skip 0 byte
     }
+
+
+    /**
+     * @return mnemonic for instruction with symbolic references resolved
+     */
+    @Override
+    public String toString( ConstantPool cp ) {
+        return super.toString(cp);
+    }
+
 
     public Class<?>[] getExceptions() {
         Class<?>[] cs = new Class[4 + ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length];
@@ -174,8 +111,10 @@ public class INVOKEDYNAMIC extends NameSignatureInstruction implements Exception
         v.visitTypedInstruction(this);
         v.visitStackConsumer(this);
         v.visitStackProducer(this);
+        v.visitLoadClass(this);
         v.visitCPInstruction(this);
-        v.visitNameSignatureInstruction(this);
+        v.visitFieldOrMethod(this);
+        v.visitInvokeInstruction(this);
         v.visitINVOKEDYNAMIC(this);
     }
 }

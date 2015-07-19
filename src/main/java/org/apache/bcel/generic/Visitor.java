@@ -448,6 +448,9 @@ public interface Visitor {
     void visitINVOKEVIRTUAL( INVOKEVIRTUAL obj );
 
 
+    void visitINVOKEDYNAMIC( INVOKEDYNAMIC obj );
+
+
     void visitFASTORE( FASTORE obj );
 
 
@@ -566,10 +569,4 @@ public interface Visitor {
 
 
     void visitBREAKPOINT( BREAKPOINT obj );
-
-
-    void visitNameSignatureInstruction( NameSignatureInstruction obj );
-
-
-    void visitINVOKEDYNAMIC( INVOKEDYNAMIC obj );
 }

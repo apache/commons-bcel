@@ -78,6 +78,10 @@ public class EmptyVisitor implements Visitor
     {
     }
 
+    public void visitConstantInvokeDynamic(ConstantInvokeDynamic obj)
+    {
+    }
+
     public void visitConstantLong(ConstantLong obj)
     {
     }
@@ -123,6 +127,10 @@ public class EmptyVisitor implements Visitor
     }
 
     public void visitInnerClasses(InnerClasses obj)
+    {
+    }
+
+    public void visitBootstrapMethods(BootstrapMethods obj)
     {
     }
 
@@ -187,10 +195,6 @@ public class EmptyVisitor implements Visitor
     }
 
     public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
-    {
-    }
-
-    public void visitBootstrapMethods(BootstrapMethods obj)
     {
     }
 

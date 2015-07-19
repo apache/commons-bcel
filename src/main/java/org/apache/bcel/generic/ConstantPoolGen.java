@@ -28,6 +28,7 @@ import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
 import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantInvokeDynamic;
 import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
@@ -127,14 +128,25 @@ public class ConstantPoolGen implements java.io.Serializable {
                 }
             } else if (c instanceof ConstantCP) {
                 ConstantCP m = (ConstantCP) c;
+                String class_name;
+                ConstantUtf8 u8;
+
+                if (c instanceof ConstantInvokeDynamic) {
+                    class_name = Integer.toString(m.getBootstrapMethodAttrIndex());
+                    // since name can't begin with digit, can  use
+                    // METHODREF_DELIM with out fear of duplicates.
+                } else {
                 ConstantClass clazz = (ConstantClass) constants[m.getClassIndex()];
+                    u8 = (ConstantUtf8) constants[clazz.getNameIndex()];
+                    class_name = u8.getBytes().replace('/', '.');
+                }
+
                 ConstantNameAndType n = (ConstantNameAndType) constants[m.getNameAndTypeIndex()];
-                ConstantUtf8 u8 = (ConstantUtf8) constants[clazz.getNameIndex()];
-                String class_name = u8.getBytes().replace('/', '.');
                 u8 = (ConstantUtf8) constants[n.getNameIndex()];
                 String method_name = u8.getBytes();
                 u8 = (ConstantUtf8) constants[n.getSignatureIndex()];
                 String signature = u8.getBytes();
+
                 String delim = METHODREF_DELIM;
                 if (c instanceof ConstantInterfaceMethodref) {
                     delim = IMETHODREF_DELIM;

@@ -1746,6 +1746,14 @@ public class InstConstraintVisitor extends EmptyVisitor{
      * Ensures the specific preconditions of the said instruction.
      */
     @Override
+    public void visitINVOKEDYNAMIC(INVOKEDYNAMIC o){
+        throw new RuntimeException("INVOKEDYNAMIC instruction is not supported at this time");
+    }
+
+    /**
+     * Ensures the specific preconditions of the said instruction.
+     */
+    @Override
     public void visitINVOKEINTERFACE(INVOKEINTERFACE o){
         // Method is not native, otherwise pass 3 would not happen.
 

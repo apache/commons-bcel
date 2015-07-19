@@ -132,7 +132,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
             case Constants.CONSTANT_NameAndType:
                 str = (constantToString(((ConstantNameAndType) c).getNameIndex(),
                         Constants.CONSTANT_Utf8)
-                        + " " + constantToString(((ConstantNameAndType) c).getSignatureIndex(),
+                        + ":" + constantToString(((ConstantNameAndType) c).getSignatureIndex(),
                         Constants.CONSTANT_Utf8));
                 break;
             case Constants.CONSTANT_InterfaceMethodref:
@@ -143,8 +143,12 @@ public class ConstantPool implements Cloneable, Node, Serializable {
                         Constants.CONSTANT_NameAndType));
                 break;
             case Constants.CONSTANT_MethodHandle:
+                // Note that the ReferenceIndex may point to a Fieldref, Methodref or
+                // InterfaceMethodref - so we need to peek ahead to get the actual type.
                 ConstantMethodHandle cmh = (ConstantMethodHandle) c;
-                str = Constants.REF_NAMES[cmh.getReferenceKind()] + " " + constantToString(constant_pool[cmh.getReferenceIndex()]);
+                str = Constants.METHODHANDLE_NAMES[cmh.getReferenceKind()]
+                        + " " + constantToString(cmh.getReferenceIndex(),
+                        getConstant(cmh.getReferenceIndex()).getTag());
                 break;            
             case Constants.CONSTANT_MethodType:
                 ConstantMethodType cmt = (ConstantMethodType) c;
@@ -152,7 +156,9 @@ public class ConstantPool implements Cloneable, Node, Serializable {
                 break;
             case Constants.CONSTANT_InvokeDynamic:
                 ConstantInvokeDynamic cid = ((ConstantInvokeDynamic) c);
-                str = cid.getBootstrapMethodAttrIndex() + ": " + constantToString(cid.getNameAndTypeIndex(), Constants.CONSTANT_NameAndType);
+                str = cid.getBootstrapMethodAttrIndex()
+                        + ":" + constantToString(cid.getNameAndTypeIndex(),
+                        Constants.CONSTANT_NameAndType);
                 break;
             default: // Never reached
                 throw new RuntimeException("Unknown constant type " + tag);

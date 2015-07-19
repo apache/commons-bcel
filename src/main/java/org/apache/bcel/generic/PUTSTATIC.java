@@ -78,7 +78,6 @@ public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, Pop
         v.visitTypedInstruction(this);
         v.visitLoadClass(this);
         v.visitCPInstruction(this);
-        v.visitNameSignatureInstruction(this);
         v.visitFieldOrMethod(this);
         v.visitFieldInstruction(this);
         v.visitPUTSTATIC(this);

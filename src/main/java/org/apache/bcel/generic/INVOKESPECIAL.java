@@ -75,7 +75,6 @@ public class INVOKESPECIAL extends InvokeInstruction {
         v.visitStackProducer(this);
         v.visitLoadClass(this);
         v.visitCPInstruction(this);
-        v.visitNameSignatureInstruction(this);
         v.visitFieldOrMethod(this);
         v.visitInvokeInstruction(this);
         v.visitINVOKESPECIAL(this);

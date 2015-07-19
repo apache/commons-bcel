@@ -24,20 +24,25 @@ import java.io.IOException;
 import org.apache.bcel.Constants;
 
 /** 
- * Abstract super class for Fieldref and Methodref constants.
+ * Abstract super class for Fieldref, Methodref, InterfaceMethodref and
+ *                          InvokeDynamic constants.
  *
  * @version $Id$
  * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     ConstantFieldref
  * @see     ConstantMethodref
  * @see     ConstantInterfaceMethodref
+ * @see     ConstantInvokeDynamic
  */
 public abstract class ConstantCP extends Constant {
 
     private static final long serialVersionUID = -6275762995206209402L;
     /** References to the constants containing the class and the field signature
      */
+    // Note that this field is used to store the
+    // bootstrap_method_attr_index of a ConstantInvokeDynamic.
     protected int class_index; // TODO make private (has getter & setter)
+    // This field has the same meaning for all subclasses.
     protected int name_and_type_index; // TODO make private (has getter & setter)
 
 
@@ -87,7 +92,7 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
-     * @return Reference (index) to class this field or method belongs to.
+     * @return Reference (index) to class this constant refers to.
      */
     public final int getClassIndex() {
         return class_index;
@@ -95,10 +100,13 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
-     * @return Reference (index) to signature of the field.
+     * @return Reference (index) to bootstrap method this constant refers to.
+     *
+     * Note that this method is a functional duplicate of getClassIndex
+     * for use by ConstantInvokeDynamic.
      */
-    public final int getNameAndTypeIndex() {
-        return name_and_type_index;
+    public final int getBootstrapMethodAttrIndex() {
+        return class_index;  // AKA bootstrap_method_attr_index
     }
 
 
@@ -111,10 +119,21 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
-     * @return Class this field belongs to.
+     * @param bootstrap_method_attr_index points to a BootstrapMethod. 
+     *
+     * Note that this method is a functional duplicate of setClassIndex
+     * for use by ConstantInvokeDynamic.
      */
-    public String getClass( ConstantPool cp ) {
-        return cp.constantToString(class_index, Constants.CONSTANT_Class);
+    public final void setBootstrapMethodAttrIndex(int bootstrap_method_attr_index) {
+        this.class_index = bootstrap_method_attr_index;
+    }
+
+
+    /**
+     * @return Reference (index) to signature of the field.
+     */
+    public final int getNameAndTypeIndex() {
+        return name_and_type_index;
     }
 
 
@@ -127,10 +146,20 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
+     * @return Class this field belongs to.
+     */
+    public String getClass( ConstantPool cp ) {
+        return cp.constantToString(class_index, Constants.CONSTANT_Class);
+    }
+
+
+    /**
      * @return String representation.
+     *
+     * not final as ConstantInvokeDynamic needs to modify
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return super.toString() + "(class_index = " + class_index + ", name_and_type_index = "
                 + name_and_type_index + ")";
     }

@@ -75,7 +75,6 @@ public class INVOKEVIRTUAL extends InvokeInstruction {
         v.visitLoadClass(this);
         v.visitCPInstruction(this);
         v.visitFieldOrMethod(this);
-        v.visitNameSignatureInstruction(this);
         v.visitInvokeInstruction(this);
         v.visitINVOKEVIRTUAL(this);
     }

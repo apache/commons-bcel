@@ -26,6 +26,7 @@ import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantInvokeDynamic;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
@@ -250,6 +251,7 @@ final class CodeHTML implements org.apache.bcel.Constants {
             case INVOKESTATIC:
             case INVOKEVIRTUAL:
             case INVOKEINTERFACE:
+            case INVOKEDYNAMIC:
                 int m_index = bytes.readShort();
                 String str;
                 if (opcode == INVOKEINTERFACE) { // Special treatment needed
@@ -260,16 +262,25 @@ final class CodeHTML implements org.apache.bcel.Constants {
                     ConstantInterfaceMethodref c = (ConstantInterfaceMethodref) constant_pool
                             .getConstant(m_index, CONSTANT_InterfaceMethodref);
                     class_index = c.getClassIndex();
-                    str = constant_pool.constantToString(c);
                     index = c.getNameAndTypeIndex();
+                    name = Class2HTML.referenceClass(class_index);
+                } else if (opcode == INVOKEDYNAMIC) { // Special treatment needed
+                    bytes.readUnsignedByte(); // Reserved
+                    bytes.readUnsignedByte(); // Reserved
+                    ConstantInvokeDynamic c = (ConstantInvokeDynamic) constant_pool
+                            .getConstant(m_index, CONSTANT_InvokeDynamic);
+                    index = c.getNameAndTypeIndex();
+                    name = "#" + c.getBootstrapMethodAttrIndex();
                 } else {
+                    // UNDONE: Java8 now allows INVOKESPECIAL and INVOKESTATIC to
+                    // reference EITHER a Methodref OR an InterfaceMethodref.
+                    // Not sure if that affects this code or not.  (markro)
                     ConstantMethodref c = (ConstantMethodref) constant_pool.getConstant(m_index,
                             CONSTANT_Methodref);
                     class_index = c.getClassIndex();
-                    str = constant_pool.constantToString(c);
                     index = c.getNameAndTypeIndex();
-                }
                 name = Class2HTML.referenceClass(class_index);
+                }
                 str = Class2HTML.toHTML(constant_pool.constantToString(constant_pool.getConstant(
                         index, CONSTANT_NameAndType)));
                 // Get signature, i.e., types

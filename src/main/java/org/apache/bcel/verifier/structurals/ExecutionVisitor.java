@@ -788,6 +788,27 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
+    public void visitINVOKEDYNAMIC(INVOKEDYNAMIC o){
+        for (int i=0; i<o.getArgumentTypes(cpg).length; i++){
+            stack().pop();
+        }
+        // We are sure the invoked method will xRETURN eventually
+        // We simulate xRETURNs functionality here because we
+        // don't really "jump into" and simulate the invoked
+        // method.
+        if (o.getReturnType(cpg) != Type.VOID){
+            Type t = o.getReturnType(cpg);
+            if (    t.equals(Type.BOOLEAN)    ||
+                        t.equals(Type.CHAR)            ||
+                        t.equals(Type.BYTE)         ||
+                        t.equals(Type.SHORT)        ) {
+                t = Type.INT;
+            }
+            stack().push(t);
+        }
+    }
+    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
+    @Override
     public void visitINVOKEINTERFACE(INVOKEINTERFACE o){
         stack().pop();    //objectref
         for (int i=0; i<o.getArgumentTypes(cpg).length; i++){

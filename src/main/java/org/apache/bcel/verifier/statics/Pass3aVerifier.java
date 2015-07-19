@@ -62,6 +62,7 @@ import org.apache.bcel.generic.ILOAD;
 import org.apache.bcel.generic.IMPDEP1;
 import org.apache.bcel.generic.IMPDEP2;
 import org.apache.bcel.generic.INSTANCEOF;
+import org.apache.bcel.generic.INVOKEDYNAMIC;
 import org.apache.bcel.generic.INVOKEINTERFACE;
 import org.apache.bcel.generic.INVOKESPECIAL;
 import org.apache.bcel.generic.INVOKESTATIC;
@@ -1068,6 +1069,12 @@ public final class Pass3aVerifier extends PassVerifier{
         //public void visitGETFIELD(GETFIELD o){
             // for performance reasons done in Pass 3b
         //}
+
+        /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
+        @Override
+        public void visitINVOKEDYNAMIC(INVOKEDYNAMIC o){
+            throw new RuntimeException("INVOKEDYNAMIC instruction is not supported at this time");
+        }
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override

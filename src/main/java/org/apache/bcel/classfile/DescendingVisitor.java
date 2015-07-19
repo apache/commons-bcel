@@ -312,6 +312,14 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    public void visitConstantInvokeDynamic(
+            ConstantInvokeDynamic constant)
+    {
+        stack.push(constant);
+        constant.accept(visitor);
+        stack.pop();
+    }
+
     public void visitConstantLong(ConstantLong constant)
     {
         stack.push(constant);
@@ -362,6 +370,18 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(inner);
         inner.accept(visitor);
+        stack.pop();
+    }
+
+    public void visitBootstrapMethods(BootstrapMethods bm)
+    {
+        stack.push(bm);
+        bm.accept(visitor);
+        // BootstrapMethod[] bms = bm.getBootstrapMethods();
+        // for (int i = 0; i < bms.length; i++)
+        // {
+        //     bms[i].accept(this);
+        // }
         stack.pop();
     }
 
@@ -422,13 +442,6 @@ public class DescendingVisitor implements Visitor
     }
 
     public void visitParameterAnnotation(ParameterAnnotations obj)
-    {
-        stack.push(obj);
-        obj.accept(visitor);
-        stack.pop();
-    }
-
-    public void visitBootstrapMethods(BootstrapMethods obj)
     {
         stack.push(obj);
         obj.accept(visitor);

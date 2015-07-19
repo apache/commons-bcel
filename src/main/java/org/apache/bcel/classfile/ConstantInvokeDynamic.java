@@ -18,7 +18,6 @@
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Constants;
@@ -31,18 +30,15 @@ import org.apache.bcel.Constants;
  * @see     Constant
  * @since 6.0
  */
-public final class ConstantInvokeDynamic extends Constant {
+public final class ConstantInvokeDynamic extends ConstantCP {
 
     private static final long serialVersionUID = 4310367359017396174L;
-    private int bootstrap_method_attr_index;
-    private int name_and_type_index;
-
 
     /**
      * Initialize from another object.
      */
     public ConstantInvokeDynamic(ConstantInvokeDynamic c) {
-        this(c.getBootstrapMethodAttrIndex(), c.getNameAndTypeIndex());
+        super(Constants.CONSTANT_InvokeDynamic, c.getBootstrapMethodAttrIndex(), c.getNameAndTypeIndex());
     }
 
 
@@ -53,15 +49,12 @@ public final class ConstantInvokeDynamic extends Constant {
      * @throws IOException
      */
     ConstantInvokeDynamic(DataInput file) throws IOException {
-        this(file.readUnsignedShort(), file.readUnsignedShort());
+        super(Constants.CONSTANT_InvokeDynamic, file);
     }
 
 
-    public ConstantInvokeDynamic(int bootstrap_method_attr_index,
-            int name_and_type_index) {
-        super(Constants.CONSTANT_InvokeDynamic);
-        this.bootstrap_method_attr_index = bootstrap_method_attr_index;
-        this.name_and_type_index = name_and_type_index;
+    public ConstantInvokeDynamic(int bootstrap_method_attr_index, int name_and_type_index) {
+        super(Constants.CONSTANT_InvokeDynamic, bootstrap_method_attr_index, name_and_type_index);
     }
 
 
@@ -74,41 +67,7 @@ public final class ConstantInvokeDynamic extends Constant {
      */
     @Override
     public void accept( Visitor v ) {
-        // TODO Add .visitMethodType to Visitor interface
-    }
-
-
-    /**
-     * Dump name and signature index to file stream in binary format.
-     *
-     * @param file Output file stream
-     * @throws IOException
-     */
-    @Override
-    public final void dump( DataOutputStream file ) throws IOException {
-        file.writeByte(tag);
-        file.writeShort(bootstrap_method_attr_index);
-        file.writeShort(name_and_type_index);
-    }
-
-
-    public int getBootstrapMethodAttrIndex() {
-        return bootstrap_method_attr_index;
-    }
-
-
-    public void setBootstrapMethodAttrIndex(int bootstrap_method_attr_index) {
-        this.bootstrap_method_attr_index = bootstrap_method_attr_index;
-    }
-
-
-    public int getNameAndTypeIndex() {
-        return name_and_type_index;
-    }
-
-
-    public void setNameAndTypeIndex(int name_and_type_index) {
-        this.name_and_type_index = name_and_type_index;
+        v.visitConstantInvokeDynamic(this);
     }
 
 
@@ -117,8 +76,7 @@ public final class ConstantInvokeDynamic extends Constant {
      */
     @Override
     public final String toString() {
-        return super.toString() + "(bootstrap_method_attr_index = " +
-                bootstrap_method_attr_index + ", name_and_type_index = " +
-                name_and_type_index + ")";
+        // UNDONE: need to string replace "class_index" with "bootstrap_method_attr_index"
+        return super.toString();
     }
 }

@@ -63,6 +63,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-209" type="fix" due-to="Mark Roberts">
+        Bug fixes and improvements to InvokeDynamic and BootStrapMethods implementation
+      </action>
       <action issue="BCEL-187" type="fix" due-to="Jérôme Leroux">
         Verification error when an invoke references a method defined in superclass
       </action>
