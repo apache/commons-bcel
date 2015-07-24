@@ -57,7 +57,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
      * @throws IOException
      * @throws ClassFormatException
      */
-    ConstantPool(DataInput input) throws IOException, ClassFormatException {
+    public ConstantPool(DataInput input) throws IOException, ClassFormatException {
         byte tag;
         int constant_pool_count = input.readUnsignedShort();
         constant_pool = new Constant[constant_pool_count];
