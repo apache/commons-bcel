@@ -17,10 +17,17 @@
 
 package org.apache.bcel.verifier;
 
+import java.io.IOException;
+
+import org.apache.bcel.verifier.tests.TestReturn01Creator;
+import org.apache.bcel.verifier.tests.TestReturn03Creator;
+
 public class VerifierReturnTestCase extends AbstractVerifierTestCase {
 
-    public void testInvalidReturn() {
+    public void testInvalidReturn() throws IOException {
+        new TestReturn01Creator().create();
         assertVerifyRejected("TestReturn01", "Verification of a void method that returns an object must fail.");
+        new TestReturn03Creator().create();
         assertVerifyRejected("TestReturn03", "Verification of an int method that returns null must fail.");
     }
 

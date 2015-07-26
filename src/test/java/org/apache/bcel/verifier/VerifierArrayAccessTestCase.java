@@ -18,16 +18,24 @@
 
 package org.apache.bcel.verifier;
 
+import java.io.IOException;
+
+import org.apache.bcel.verifier.tests.TestArrayAccess02Creator;
+import org.apache.bcel.verifier.tests.TestArrayAccess03Creator;
+import org.apache.bcel.verifier.tests.TestArrayAccess04Creator;
 
 public class VerifierArrayAccessTestCase extends AbstractVerifierTestCase {
     
-    public void testInvalidArrayAccess() {
+    public void testInvalidArrayAccess() throws IOException {
+        new TestArrayAccess03Creator().create();
         assertVerifyRejected("TestArrayAccess03", "Verification of an arraystore instruction on an object must fail.");
+        new TestArrayAccess04Creator().create();
         assertVerifyRejected("TestArrayAccess04", "Verification of an arraystore instruction of an int on an array of references must fail.");
     }
-    
-    public void testValidArrayAccess() {
+
+    public void testValidArrayAccess() throws IOException {
         assertVerifyOK("TestArrayAccess01", "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");
+        new TestArrayAccess02Creator().create();
         assertVerifyOK("TestArrayAccess02", "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");
     }
     
