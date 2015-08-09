@@ -14,10 +14,16 @@ and 8. It requires Java 5 or higher to run.
 Compatibility with 5.2
 ----------------------
 
-Binary compatible - Yes
+Binary compatible - No
 
-Source compatible - Yes, except:
- - The org.apache.bcel.classfile.Visitor interface has been enhanced with
+Source compatible - Yes, sort of;
+ - Maven coordinates update:
+    org.apache.bcel:bcel:5.2 -> org.apache.commons:commons-bcel6:6.0
+
+ - Rename package imports: 
+    org.apache.bcel -> org.apache.commons.bcel6
+
+ - The org.apache.commons.bcel6.classfile.Visitor interface has been enhanced with
    additional methods. If you implemented it directly instead of extending
    the EmptyVisitor class you'll have to implement the new methods.
 
