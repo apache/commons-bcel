@@ -63,6 +63,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-222" type="update">
+        Major release of BCEL requires updating package name and maven coordinates.
+      </action>
       <action issue="BCEL-219" type="update" due-to="Maxim Degtyarev">
         Make org.apache.bcel.classfile.ConstantPool.ConstantPool(DataInput) public.
       </action>
