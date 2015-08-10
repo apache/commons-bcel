@@ -24,7 +24,7 @@ package Mini;
  * @version $Id$
  * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
-public class Function implements org.apache.bcel.Constants, EnvEntry {
+public class Function implements org.apache.commons.bcel6.Constants, EnvEntry {
   private ASTIdent   name;         // Reference to the original declaration
   private ASTIdent[] args;         // Reference to argument identifiers
 //  private ASTExpr    body;         // Reference to function expression body
