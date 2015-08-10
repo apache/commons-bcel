@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.util.BCELComparator;
 public final class Field extends FieldOrMethod {
 
     private static final long serialVersionUID = -4604082205545049134L;
-    private static BCELComparator _cmp = new BCELComparator() {
+    private static BCELComparator _cmp = new BCELComparator() { // TODO could be final (setter unused)
 
         public boolean equals( Object o1, Object o2 ) {
             Field THIS = (Field) o1;
@@ -99,7 +99,7 @@ public final class Field extends FieldOrMethod {
      * @return constant value associated with this field (may be null)
      */
     public final ConstantValue getConstantValue() {
-        for (Attribute attribute : attributes) {
+        for (Attribute attribute : super.getAttributes()) {
             if (attribute.getTag() == Constants.ATTR_CONSTANT_VALUE) {
                 return (ConstantValue) attribute;
             }
@@ -128,7 +128,7 @@ public final class Field extends FieldOrMethod {
         if (cv != null) {
             buf.append(" = ").append(cv);
         }
-        for (Attribute attribute : attributes) {
+        for (Attribute attribute : super.getAttributes()) {
             if (!(attribute instanceof ConstantValue)) {
                 buf.append(" [").append(attribute.toString()).append("]");
             }
@@ -164,7 +164,7 @@ public final class Field extends FieldOrMethod {
     /**
      * @param comparator Comparison strategy object
      */
-    public static void setComparator( BCELComparator comparator ) {
+    public static void setComparator( BCELComparator comparator ) { // TODO unused
         _cmp = comparator;
     }
 

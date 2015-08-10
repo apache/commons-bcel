@@ -112,7 +112,7 @@ public final class Method extends FieldOrMethod {
      * @return Code attribute of method, if any
      */
     public final Code getCode() {
-        for (Attribute attribute : attributes) {
+        for (Attribute attribute : super.getAttributes()) {
             if (attribute instanceof Code) {
                 return (Code) attribute;
             }
@@ -126,7 +126,7 @@ public final class Method extends FieldOrMethod {
      * exceptions the method may throw not exception handlers!
      */
     public final ExceptionTable getExceptionTable() {
-        for (Attribute attribute : attributes) {
+        for (Attribute attribute : super.getAttributes()) {
             if (attribute instanceof ExceptionTable) {
                 return (ExceptionTable) attribute;
             }
@@ -172,14 +172,14 @@ public final class Method extends FieldOrMethod {
         StringBuilder buf;
         access = Utility.accessToString(super.getAccessFlags());
         // Get name and signature from constant pool
-        c = (ConstantUtf8) constant_pool.getConstant(signature_index, Constants.CONSTANT_Utf8);
+        c = (ConstantUtf8) super.getConstantPool().getConstant(super.getSignatureIndex(), Constants.CONSTANT_Utf8);
         signature = c.getBytes();
-        c = (ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8);
+        c = (ConstantUtf8) super.getConstantPool().getConstant(super.getNameIndex(), Constants.CONSTANT_Utf8);
         name = c.getBytes();
         signature = Utility.methodSignatureToString(signature, name, access, true,
                 getLocalVariableTable());
         buf = new StringBuilder(signature);
-        for (Attribute attribute : attributes) {
+        for (Attribute attribute : super.getAttributes()) {
             if (!((attribute instanceof Code) || (attribute instanceof ExceptionTable))) {
                 buf.append(" [").append(attribute.toString()).append("]");
             }
