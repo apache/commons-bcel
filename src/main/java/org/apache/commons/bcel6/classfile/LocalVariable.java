@@ -183,7 +183,7 @@ public final class LocalVariable implements Constants, Cloneable, Node, Serializ
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( ConstantPool constant_pool ) {
+    public final void setConstantPool( ConstantPool constant_pool ) { // TODO unused
         this.constant_pool = constant_pool;
     }
 
@@ -191,7 +191,7 @@ public final class LocalVariable implements Constants, Cloneable, Node, Serializ
     /**
      * @param length the length of this local variable
      */
-    public final void setLength( int length ) {
+    public final void setLength( int length ) { // TODO unused
         this.length = length;
     }
 
@@ -199,7 +199,7 @@ public final class LocalVariable implements Constants, Cloneable, Node, Serializ
     /**
      * @param name_index the index into the constant pool for the name of this variable
      */
-    public final void setNameIndex( int name_index ) {
+    public final void setNameIndex( int name_index ) { // TODO unused
         this.name_index = name_index;
     }
 
@@ -207,7 +207,7 @@ public final class LocalVariable implements Constants, Cloneable, Node, Serializ
     /**
      * @param signature_index the index into the constant pool for the signature of this variable
      */
-    public final void setSignatureIndex( int signature_index ) {
+    public final void setSignatureIndex( int signature_index ) { // TODO unused
         this.signature_index = signature_index;
     }
 
@@ -215,7 +215,7 @@ public final class LocalVariable implements Constants, Cloneable, Node, Serializ
     /**
      * @param index the index in the local variable table of this variable
      */
-    public final void setIndex( int index ) {
+    public final void setIndex( int index ) { // TODO unused
         this.index = index;
     }
 
@@ -223,7 +223,7 @@ public final class LocalVariable implements Constants, Cloneable, Node, Serializ
     /**
      * @param start_pc Specify range where the local variable is valid.
      */
-    public final void setStartPC( int start_pc ) {
+    public final void setStartPC( int start_pc ) { // TODO unused
         this.start_pc = start_pc;
     }
 
