@@ -45,8 +45,8 @@ import org.apache.commons.bcel6.Constants;
 public final class Code extends Attribute {
 
     private static final long serialVersionUID = -432884354459701506L;
-    private int max_stack; // Maximum size of stack used by this method
-    private int max_locals; // Number of local variables
+    private int max_stack; // Maximum size of stack used by this method  // TODO this could be made final (setter is not used)
+    private int max_locals; // Number of local variables  // TODO this could be made final (setter is not used)
     private byte[] code; // Actual byte code
     private CodeException[] exception_table; // Table of handled exceptions
     private Attribute[] attributes; // or LocalVariable
@@ -115,9 +115,10 @@ public final class Code extends Attribute {
         super(Constants.ATTR_CODE, name_index, length, constant_pool);
         this.max_stack = max_stack;
         this.max_locals = max_locals;
-        setCode(code);
-        setExceptionTable(exception_table);
-        setAttributes(attributes); // Overwrites length!
+        this.code = code != null ? code : new byte[0];
+        this.exception_table = exception_table != null ? exception_table : new CodeException[0];
+        this.attributes = attributes != null ? attributes : new Attribute[0];
+        super.setLength(calculateLength()); // Adjust length
     }
 
 
