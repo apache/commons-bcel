@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.classfile.Method;
 import org.apache.commons.bcel6.classfile.RuntimeInvisibleAnnotations;
 import org.apache.commons.bcel6.classfile.RuntimeVisibleAnnotations;
 import org.apache.commons.bcel6.classfile.SourceFile;
-import org.apache.commons.bcel6.classfile.Utility;
 import org.apache.commons.bcel6.util.BCELComparator;
 
 /** 
