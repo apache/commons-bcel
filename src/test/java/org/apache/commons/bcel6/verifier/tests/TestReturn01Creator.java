@@ -52,9 +52,9 @@ public class TestReturn01Creator extends TestCreator implements Constants {
     InstructionList il = new InstructionList();
     MethodGen method = new MethodGen(ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>", "org.apache.commons.bcel6.verifier.tests.TestReturn01", il, _cp);
 
-    InstructionHandle ih_0 = il.append(_factory.createLoad(Type.OBJECT, 0));
+    InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
     il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Constants.INVOKESPECIAL));
-    InstructionHandle ih_4 = il.append(_factory.createReturn(Type.VOID));
+    InstructionHandle ih_4 = il.append(InstructionFactory.createReturn(Type.VOID));
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());
@@ -69,7 +69,7 @@ public class TestReturn01Creator extends TestCreator implements Constants {
     il.append(InstructionConstants.DUP);
     il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Constants.INVOKESPECIAL));
     il.append(InstructionConstants.NOP);
-    InstructionHandle ih_8 = il.append(_factory.createReturn(Type.OBJECT));
+    InstructionHandle ih_8 = il.append(InstructionFactory.createReturn(Type.OBJECT));
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());
