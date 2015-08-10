@@ -33,7 +33,7 @@ public abstract class ParameterAnnotations extends Attribute {
     private static final long serialVersionUID = 5234607357644462705L;
     
     /** Table of parameter annotations */
-    private ParameterAnnotationEntry[] parameter_annotation_table;
+    private ParameterAnnotationEntry[] parameter_annotation_table; // TODO could be final (setter unused)
 
     /**
      * @param parameter_annotation_type the subclass type of the parameter annotation
@@ -64,7 +64,7 @@ public abstract class ParameterAnnotations extends Attribute {
     public ParameterAnnotations(byte parameter_annotation_type, int name_index, int length,
             ParameterAnnotationEntry[] parameter_annotation_table, ConstantPool constant_pool) {
         super(parameter_annotation_type, name_index, length, constant_pool);
-        setParameterAnnotationTable(parameter_annotation_table);
+        this.parameter_annotation_table = parameter_annotation_table;
     }
 
 
@@ -84,7 +84,7 @@ public abstract class ParameterAnnotations extends Attribute {
     /**
      * @param parameter_annotation_table the entries to set in this parameter annotation
      */
-    public final void setParameterAnnotationTable(ParameterAnnotationEntry[] parameter_annotation_table ) {
+    public final void setParameterAnnotationTable(ParameterAnnotationEntry[] parameter_annotation_table ) { // TODO unused
         this.parameter_annotation_table = parameter_annotation_table;
     }
 

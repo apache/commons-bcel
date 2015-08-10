@@ -66,7 +66,7 @@ public class LocalVariableTypeTable extends Attribute {
 
     public LocalVariableTypeTable(int name_index, int length, LocalVariable[] local_variable_table, ConstantPool constant_pool) {
         super(Constants.ATTR_LOCAL_VARIABLE_TYPE_TABLE, name_index, length, constant_pool);
-        setLocalVariableTable(local_variable_table);
+        this.local_variable_type_table = local_variable_table;
     }
 
     LocalVariableTypeTable(int nameIdx, int len, DataInput input, ConstantPool cpool) throws IOException {
@@ -108,7 +108,7 @@ public class LocalVariableTypeTable extends Attribute {
         return null;
     }
 
-    public final void setLocalVariableTable(LocalVariable[] local_variable_table) {
+    public final void setLocalVariableTable(LocalVariable[] local_variable_table) { // TODO unused
         this.local_variable_type_table = local_variable_table;
     }
 

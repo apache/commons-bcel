@@ -56,7 +56,7 @@ public class LocalVariableTable extends Attribute {
     public LocalVariableTable(int name_index, int length, LocalVariable[] local_variable_table,
             ConstantPool constant_pool) {
         super(Constants.ATTR_LOCAL_VARIABLE_TABLE, name_index, length, constant_pool);
-        setLocalVariableTable(local_variable_table);
+        this.local_variable_table = local_variable_table;
     }
 
 
@@ -157,7 +157,7 @@ public class LocalVariableTable extends Attribute {
     }
 
 
-    public final void setLocalVariableTable( LocalVariable[] local_variable_table ) {
+    public final void setLocalVariableTable( LocalVariable[] local_variable_table ) { // TODO unused
         this.local_variable_table = local_variable_table;
     }
 

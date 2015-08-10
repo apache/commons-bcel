@@ -37,7 +37,7 @@ public final class LineNumberTable extends Attribute {
 
     private static final long serialVersionUID = -6967221519632128904L;
 
-    private LineNumber[] line_number_table; // Table of line/numbers pairs
+    private LineNumber[] line_number_table; // Table of line/numbers pairs // TODO could be final (unused setter; copy() would need adjusting)
 
 
     /*
@@ -58,7 +58,7 @@ public final class LineNumberTable extends Attribute {
     public LineNumberTable(int name_index, int length, LineNumber[] line_number_table,
             ConstantPool constant_pool) {
         super(Constants.ATTR_LINE_NUMBER_TABLE, name_index, length, constant_pool);
-        setLineNumberTable(line_number_table);
+        this.line_number_table = line_number_table;
     }
 
 
@@ -120,7 +120,7 @@ public final class LineNumberTable extends Attribute {
     /**
      * @param line_number_table the line number entries for this table
      */
-    public final void setLineNumberTable( LineNumber[] line_number_table ) {
+    public final void setLineNumberTable( LineNumber[] line_number_table ) { // TODO unused
         this.line_number_table = line_number_table;
     }
 
@@ -197,6 +197,8 @@ public final class LineNumberTable extends Attribute {
      */
     @Override
     public Attribute copy( ConstantPool _constant_pool ) {
+        // TODO could use the lower level constructor and thereby allow 
+        // line_number_table to be made final
         LineNumberTable c = (LineNumberTable) clone();
         c.line_number_table = new LineNumber[line_number_table.length];
         for (int i = 0; i < line_number_table.length; i++) {

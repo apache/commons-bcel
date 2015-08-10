@@ -41,7 +41,7 @@ import org.apache.commons.bcel6.Constants;
 public final class StackMap extends Attribute {
 
     private static final long serialVersionUID = -6238662431726968495L;
-    private StackMapEntry[] map; // Table of stack map entries
+    private StackMapEntry[] map; // Table of stack map entries // TODO could be final (setter unused)
 
 
     /*
@@ -52,7 +52,7 @@ public final class StackMap extends Attribute {
      */
     public StackMap(int name_index, int length, StackMapEntry[] map, ConstantPool constant_pool) {
         super(Constants.ATTR_STACK_MAP, name_index, length, constant_pool);
-        setStackMap(map);
+        this.map = map;
     }
 
 
@@ -102,7 +102,7 @@ public final class StackMap extends Attribute {
     /**
      * @param map Array of stack map entries
      */
-    public final void setStackMap( StackMapEntry[] map ) {
+    public final void setStackMap( StackMapEntry[] map ) { // TODO unused
         this.map = map;
     }
 
