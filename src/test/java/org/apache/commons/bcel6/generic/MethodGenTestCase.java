@@ -37,7 +37,7 @@ public class MethodGenTestCase extends TestCase {
         }
     }
 
-    private MethodGen getMethod(Class cls, String name) throws ClassNotFoundException {
+    private MethodGen getMethod(Class<?> cls, String name) throws ClassNotFoundException {
         JavaClass jc = Repository.lookupClass(cls);
         ConstantPoolGen cp = new ConstantPoolGen(jc.getConstantPool());
         for (Method method : jc.getMethods()) {
