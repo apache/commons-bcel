@@ -39,7 +39,7 @@ public final class ExceptionTable extends Attribute {
 
     private static final long serialVersionUID = 2045358830660883220L;
 
-    private int[] exception_index_table; // constant pool
+    private int[] exception_index_table; // constant pool // TODO could be final (setter unused)
 
 
     /**
@@ -60,7 +60,7 @@ public final class ExceptionTable extends Attribute {
     public ExceptionTable(int name_index, int length, int[] exception_index_table,
             ConstantPool constant_pool) {
         super(Constants.ATTR_EXCEPTIONS, name_index, length, constant_pool);
-        setExceptionIndexTable(exception_index_table);
+        this.exception_index_table = exception_index_table != null ? exception_index_table : new int[0];
     }
 
 
@@ -144,7 +144,7 @@ public final class ExceptionTable extends Attribute {
      * @param exception_index_table the list of exception indexes
      * Also redefines number_of_exceptions according to table length.
      */
-    public final void setExceptionIndexTable( int[] exception_index_table ) {
+    public final void setExceptionIndexTable( int[] exception_index_table ) { // TODO unused
         this.exception_index_table = exception_index_table != null ? exception_index_table : new int[0];
     }
 
