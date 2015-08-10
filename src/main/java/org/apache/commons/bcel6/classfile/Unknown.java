@@ -124,8 +124,8 @@ public final class Unknown extends Attribute {
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
-        if (length > 0) {
-            file.write(bytes, 0, length);
+        if (super.getLength() > 0) {
+            file.write(bytes, 0, super.getLength());
         }
     }
 
@@ -160,11 +160,11 @@ public final class Unknown extends Attribute {
      */
     @Override
     public final String toString() {
-        if (length == 0 || bytes == null) {
+        if (super.getLength() == 0 || bytes == null) {
             return "(Unknown attribute " + name + ")";
         }
         String hex;
-        if (length > 10) {
+        if (super.getLength() > 10) {
             byte[] tmp = new byte[10];
             System.arraycopy(bytes, 0, tmp, 0, 10);
             hex = Utility.toHexString(tmp) + "... (truncated)";
@@ -185,7 +185,7 @@ public final class Unknown extends Attribute {
             c.bytes = new byte[bytes.length];
             System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
         }
-        c.constant_pool = _constant_pool;
+        c.setConstantPool(_constant_pool);
         return c;
     }
 }

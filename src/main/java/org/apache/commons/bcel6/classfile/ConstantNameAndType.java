@@ -91,7 +91,7 @@ public final class ConstantNameAndType extends Constant {
      */
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
-        file.writeByte(tag);
+        file.writeByte(super.getTag());
         file.writeShort(name_index);
         file.writeShort(signature_index);
     }

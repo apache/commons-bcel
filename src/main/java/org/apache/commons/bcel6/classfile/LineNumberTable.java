@@ -202,7 +202,7 @@ public final class LineNumberTable extends Attribute {
         for (int i = 0; i < line_number_table.length; i++) {
             c.line_number_table[i] = line_number_table[i].copy();
         }
-        c.constant_pool = _constant_pool;
+        c.setConstantPool(_constant_pool);
         return c;
     }
 

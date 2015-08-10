@@ -133,7 +133,7 @@ public final class InnerClasses extends Attribute {
     public final String toString() {
         StringBuilder buf = new StringBuilder();
         for (InnerClass inner_class : inner_classes) {
-            buf.append(inner_class.toString(constant_pool)).append("\n");
+            buf.append(inner_class.toString(super.getConstantPool())).append("\n");
         }
         return buf.toString();
     }
@@ -149,7 +149,7 @@ public final class InnerClasses extends Attribute {
         for (int i = 0; i < inner_classes.length; i++) {
             c.inner_classes[i] = inner_classes[i].copy();
         }
-        c.constant_pool = _constant_pool;
+        c.setConstantPool(_constant_pool);
         return c;
     }
 }

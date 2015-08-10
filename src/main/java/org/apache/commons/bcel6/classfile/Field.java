@@ -118,7 +118,7 @@ public final class Field extends FieldOrMethod {
     public final String toString() {
         String name, signature, access; // Short cuts to constant pool
         // Get names from constant pool
-        access = Utility.accessToString(access_flags);
+        access = Utility.accessToString(super.getAccessFlags());
         access = access.equals("") ? "" : (access + " ");
         signature = Utility.signatureToString(getSignature());
         name = getName();

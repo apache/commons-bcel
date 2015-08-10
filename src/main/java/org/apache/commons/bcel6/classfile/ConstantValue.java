@@ -121,7 +121,7 @@ public final class ConstantValue extends Attribute {
      */
     @Override
     public final String toString() {
-        Constant c = constant_pool.getConstant(constantvalue_index);
+        Constant c = super.getConstantPool().getConstant(constantvalue_index);
         String buf;
         int i;
         // Print constant to string depending on its type
@@ -140,7 +140,7 @@ public final class ConstantValue extends Attribute {
                 break;
             case Constants.CONSTANT_String:
                 i = ((ConstantString) c).getStringIndex();
-                c = constant_pool.getConstant(i, Constants.CONSTANT_Utf8);
+                c = super.getConstantPool().getConstant(i, Constants.CONSTANT_Utf8);
                 buf = "\"" + Utility.convertString(((ConstantUtf8) c).getBytes()) + "\"";
                 break;
             default:
@@ -156,7 +156,7 @@ public final class ConstantValue extends Attribute {
     @Override
     public Attribute copy( ConstantPool _constant_pool ) {
         ConstantValue c = (ConstantValue) clone();
-        c.constant_pool = _constant_pool;
+        c.setConstantPool(_constant_pool);
         return c;
     }
 }

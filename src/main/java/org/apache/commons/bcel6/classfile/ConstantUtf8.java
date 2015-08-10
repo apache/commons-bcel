@@ -170,7 +170,7 @@ public final class ConstantUtf8 extends Constant {
      */
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
-        file.writeByte(tag);
+        file.writeByte(super.getTag());
         file.writeUTF(bytes);
     }
 

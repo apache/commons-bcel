@@ -134,7 +134,7 @@ public final class StackMap extends Attribute {
         for (int i = 0; i < map.length; i++) {
             c.map[i] = map[i].copy();
         }
-        c.constant_pool = _constant_pool;
+        c.setConstantPool(_constant_pool);
         return c;
     }
 

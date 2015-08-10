@@ -87,7 +87,7 @@ public final class ConstantString extends Constant implements ConstantObject {
      */
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
-        file.writeByte(tag);
+        file.writeByte(super.getTag());
         file.writeShort(string_index);
     }
 

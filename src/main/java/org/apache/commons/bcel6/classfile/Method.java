@@ -170,7 +170,7 @@ public final class Method extends FieldOrMethod {
         ConstantUtf8 c;
         String name, signature, access; // Short cuts to constant pool
         StringBuilder buf;
-        access = Utility.accessToString(access_flags);
+        access = Utility.accessToString(super.getAccessFlags());
         // Get name and signature from constant pool
         c = (ConstantUtf8) constant_pool.getConstant(signature_index, Constants.CONSTANT_Utf8);
         signature = c.getBytes();

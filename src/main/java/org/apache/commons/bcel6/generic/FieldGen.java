@@ -222,7 +222,7 @@ public class FieldGen extends FieldGenOrMethodGen {
                     .getConstantPool()));
         }
         addAnnotationsAsAttribute(cp);
-        return new Field(access_flags, name_index, signature_index, getAttributes(), cp
+        return new Field(super.getAccessFlags(), name_index, signature_index, getAttributes(), cp
                 .getConstantPool());
     }
 
@@ -314,7 +314,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     @Override
     public final String toString() {
         String name, signature, access; // Short cuts to constant pool
-        access = Utility.accessToString(access_flags);
+        access = Utility.accessToString(super.getAccessFlags());
         access = access.equals("") ? "" : (access + " ");
         signature = type.toString();
         name = getName();

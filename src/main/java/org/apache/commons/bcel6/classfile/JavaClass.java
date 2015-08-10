@@ -136,7 +136,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         this.file_name = file_name;
         this.major = major;
         this.minor = minor;
-        this.access_flags = access_flags;
+        super.setAccessFlags(access_flags);
         this.constant_pool = constant_pool;
         this.interfaces = interfaces;
         this.fields = fields;
@@ -300,7 +300,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         file.writeShort(minor);
         file.writeShort(major);
         constant_pool.dump(file);
-        file.writeShort(access_flags);
+        file.writeShort(super.getAccessFlags());
         file.writeShort(class_name_index);
         file.writeShort(superclass_name_index);
         file.writeShort(interfaces.length);
@@ -600,10 +600,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      */
     @Override
     public String toString() {
-        String access = Utility.accessToString(access_flags, true);
+        String access = Utility.accessToString(super.getAccessFlags(), true);
         access = access.equals("") ? "" : (access + " ");
         StringBuilder buf = new StringBuilder(128);
-        buf.append(access).append(Utility.classOrInterface(access_flags)).append(" ").append(
+        buf.append(access).append(Utility.classOrInterface(super.getAccessFlags())).append(" ").append(
                 class_name).append(" extends ").append(
                 Utility.compactClassName(superclass_name, false)).append('\n');
         int size = interfaces.length;
@@ -620,7 +620,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         buf.append("filename\t\t").append(file_name).append('\n');
         buf.append("compiled from\t\t").append(source_file_name).append('\n');
         buf.append("compiler version\t").append(major).append(".").append(minor).append('\n');
-        buf.append("access flags\t\t").append(access_flags).append('\n');
+        buf.append("access flags\t\t").append(super.getAccessFlags()).append('\n');
         buf.append("constant pool\t\t").append(constant_pool.getLength()).append(" entries\n");
         buf.append("ACC_SUPER flag\t\t").append(isSuper()).append("\n");
         if (attributes.length > 0) {
@@ -691,12 +691,12 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
 
     public final boolean isSuper() {
-        return (access_flags & Constants.ACC_SUPER) != 0;
+        return (super.getAccessFlags() & Constants.ACC_SUPER) != 0;
     }
 
 
     public final boolean isClass() {
-        return (access_flags & Constants.ACC_INTERFACE) == 0;
+        return (super.getAccessFlags() & Constants.ACC_INTERFACE) == 0;
     }
 
     public final boolean isAnonymous() {

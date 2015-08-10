@@ -139,7 +139,7 @@ public final class PMGClass extends Attribute {
      * @return PMG name.
      */
     public final String getPMGName() {
-        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(pmg_index,
+        ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmg_index,
                 Constants.CONSTANT_Utf8);
         return c.getBytes();
     }
@@ -149,7 +149,7 @@ public final class PMGClass extends Attribute {
      * @return PMG class name.
      */
     public final String getPMGClassName() {
-        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(pmg_class_index,
+        ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmg_class_index,
                 Constants.CONSTANT_Utf8);
         return c.getBytes();
     }

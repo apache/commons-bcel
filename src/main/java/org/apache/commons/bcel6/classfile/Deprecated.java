@@ -101,8 +101,8 @@ public final class Deprecated extends Attribute {
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
         super.dump(file);
-        if (length > 0) {
-            file.write(bytes, 0, length);
+        if (super.getLength() > 0) {
+            file.write(bytes, 0, super.getLength());
         }
     }
 
@@ -142,7 +142,7 @@ public final class Deprecated extends Attribute {
             c.bytes = new byte[bytes.length];
             System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
         }
-        c.constant_pool = _constant_pool;
+        c.setConstantPool(_constant_pool);
         return c;
     }
 }

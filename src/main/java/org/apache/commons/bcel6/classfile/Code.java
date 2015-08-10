@@ -96,7 +96,7 @@ public final class Code extends Attribute {
          * is incorrect, because it didn't take the internal attributes
          * into account yet! Very subtle bug, fixed in 3.1.1.
          */
-        this.length = length;
+        super.setLength(length);
     }
 
 
@@ -247,7 +247,7 @@ public final class Code extends Attribute {
         int len = 0;
         if (attributes != null) {
             for (Attribute attribute : attributes) {
-                len += attribute.length + 6 /*attribute header size*/;
+                len += attribute.getLength() + 6 /*attribute header size*/;
             }
         }
         return len + getInternalLength();
@@ -259,7 +259,7 @@ public final class Code extends Attribute {
      */
     public final void setAttributes( Attribute[] attributes ) {
         this.attributes = attributes != null ? attributes : new Attribute[0];
-        length = calculateLength(); // Adjust length
+        super.setLength(calculateLength()); // Adjust length
     }
 
 
@@ -268,7 +268,7 @@ public final class Code extends Attribute {
      */
     public final void setCode( byte[] code ) {
         this.code = code != null ? code : new byte[0];
-        length = calculateLength(); // Adjust length
+        super.setLength(calculateLength()); // Adjust length
     }
 
 
@@ -277,7 +277,7 @@ public final class Code extends Attribute {
      */
     public final void setExceptionTable( CodeException[] exception_table ) {
         this.exception_table = exception_table != null ? exception_table : new CodeException[0];
-        length = calculateLength(); // Adjust length
+        super.setLength(calculateLength()); // Adjust length
     }
 
 
@@ -304,11 +304,11 @@ public final class Code extends Attribute {
         StringBuilder buf = new StringBuilder(100);
         buf.append("Code(max_stack = ").append(max_stack).append(", max_locals = ").append(
                 max_locals).append(", code_length = ").append(code.length).append(")\n").append(
-                Utility.codeToString(code, constant_pool, 0, -1, verbose));
+                Utility.codeToString(code, super.getConstantPool(), 0, -1, verbose));
         if (exception_table.length > 0) {
             buf.append("\nException handler(s) = \n").append("From\tTo\tHandler\tType\n");
             for (CodeException exception : exception_table) {
-                buf.append(exception.toString(constant_pool, verbose)).append("\n");
+                buf.append(exception.toString(super.getConstantPool(), verbose)).append("\n");
             }
         }
         if (attributes.length > 0) {
@@ -342,7 +342,7 @@ public final class Code extends Attribute {
             c.code = new byte[code.length];
             System.arraycopy(code, 0, c.code, 0, code.length);
         }
-        c.constant_pool = _constant_pool;
+        c.setConstantPool(_constant_pool);
         c.exception_table = new CodeException[exception_table.length];
         for (int i = 0; i < exception_table.length; i++) {
             c.exception_table[i] = exception_table[i].copy();

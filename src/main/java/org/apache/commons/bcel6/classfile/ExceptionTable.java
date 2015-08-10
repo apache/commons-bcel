@@ -133,7 +133,7 @@ public final class ExceptionTable extends Attribute {
     public final String[] getExceptionNames() {
         String[] names = new String[exception_index_table.length];
         for (int i = 0; i < exception_index_table.length; i++) {
-            names[i] = constant_pool.getConstantString(exception_index_table[i], 
+            names[i] = super.getConstantPool().getConstantString(exception_index_table[i], 
                     Constants.CONSTANT_Class).replace('/', '.');
         }
         return names;
@@ -157,7 +157,7 @@ public final class ExceptionTable extends Attribute {
         StringBuilder buf = new StringBuilder();
         String str;
         for (int i = 0; i < exception_index_table.length; i++) {
-            str = constant_pool.getConstantString(exception_index_table[i], Constants.CONSTANT_Class);
+            str = super.getConstantPool().getConstantString(exception_index_table[i], Constants.CONSTANT_Class);
             buf.append(Utility.compactClassName(str, false));
             if (i < exception_index_table.length - 1) {
                 buf.append(", ");
@@ -178,7 +178,7 @@ public final class ExceptionTable extends Attribute {
             System.arraycopy(exception_index_table, 0, c.exception_index_table, 0,
                     exception_index_table.length);
         }
-        c.constant_pool = _constant_pool;
+        c.setConstantPool(_constant_pool);
         return c;
     }
 }

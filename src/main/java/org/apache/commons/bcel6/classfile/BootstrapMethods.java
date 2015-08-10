@@ -107,7 +107,7 @@ public class BootstrapMethods extends Attribute {
         for (int i = 0; i < bootstrap_methods.length; i++) {
             c.bootstrap_methods[i] = bootstrap_methods[i].copy();
         }
-        c.constant_pool = _constant_pool;
+        c.setConstantPool(_constant_pool);
         return c;
     }
 
@@ -138,7 +138,7 @@ public class BootstrapMethods extends Attribute {
         buf.append("):\n");
         for (int i = 0; i < bootstrap_methods.length; i++) {
             buf.append("  ").append(i).append(": ");
-            buf.append(bootstrap_methods[i].toString(constant_pool)).append("\n");
+            buf.append(bootstrap_methods[i].toString(super.getConstantPool())).append("\n");
         }
         return buf.toString();
     }

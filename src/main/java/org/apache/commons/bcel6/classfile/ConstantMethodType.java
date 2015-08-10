@@ -83,7 +83,7 @@ public final class ConstantMethodType extends Constant {
      */
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
-        file.writeByte(tag);
+        file.writeByte(super.getTag());
         file.writeShort(descriptor_index);
     }
 

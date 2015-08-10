@@ -88,7 +88,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      */
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
-        file.writeByte(tag);
+        file.writeByte(super.getTag());
         file.writeFloat(bytes);
     }
 

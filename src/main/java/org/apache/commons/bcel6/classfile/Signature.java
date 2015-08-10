@@ -120,7 +120,7 @@ public final class Signature extends Attribute {
      * @return GJ signature.
      */
     public final String getSignature() {
-        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(signature_index,
+        ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(signature_index,
                 Constants.CONSTANT_Utf8);
         return c.getBytes();
     }

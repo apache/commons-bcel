@@ -94,7 +94,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     protected FieldOrMethod(int access_flags, int name_index, int signature_index,
             Attribute[] attributes, ConstantPool constant_pool) {
-        this.access_flags = access_flags;
+        super.setAccessFlags(access_flags);
         this.name_index = name_index;
         this.signature_index = signature_index;
         this.constant_pool = constant_pool;
@@ -109,7 +109,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @throws IOException
      */
     public final void dump( DataOutputStream file ) throws IOException {
-        file.writeShort(access_flags);
+        file.writeShort(super.getAccessFlags());
         file.writeShort(name_index);
         file.writeShort(signature_index);
         file.writeShort(attributes.length);

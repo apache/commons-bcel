@@ -85,7 +85,7 @@ public abstract class ConstantCP extends Constant {
      */
     @Override
     public final void dump( DataOutputStream file ) throws IOException {
-        file.writeByte(tag);
+        file.writeByte(super.getTag());
         file.writeShort(class_index);
         file.writeShort(name_and_type_index);
     }

@@ -685,7 +685,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             addAttribute(et = getExceptionTable(cp));
             // Add `Exceptions' if there are "throws" clauses
         }
-        Method m = new Method(access_flags, name_index, signature_index, getAttributes(), cp
+        Method m = new Method(super.getAccessFlags(), name_index, signature_index, getAttributes(), cp
                 .getConstantPool());
         // Undo effects of adding attributes
         if (lvt != null) {
@@ -1050,7 +1050,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     @Override
     public final String toString() {
-        String access = Utility.accessToString(access_flags);
+        String access = Utility.accessToString(super.getAccessFlags());
         String signature = Type.getMethodSignature(type, arg_types);
         signature = Utility.methodSignatureToString(signature, name, access, true,
                 getLocalVariableTable(cp));
