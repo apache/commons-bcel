@@ -17,8 +17,7 @@
   * specific language governing permissions and limitations
   * under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -31,7 +30,7 @@
   <groupId>org.apache.commons</groupId>
   <artifactId>commons-bcel6</artifactId>
   <packaging>jar</packaging>
-  <version>6.0-SNAPSHOT</version>
+  <version>6.0</version>
   <name>Apache Commons BCEL</name>
   <description>Apache Commons Bytecode Engineering Library</description>
 
@@ -171,9 +170,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</connection>
-    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</developerConnection>
-    <url>http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0_RC4</connection>
+    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0_RC4</developerConnection>
+    <url>http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0_RC4</url>
   </scm>
 
   <build>
@@ -437,7 +436,7 @@
                   <executable>java</executable>
                   <arguments>
                     <argument>-classpath</argument>
-                    <classpath/>
+                    <classpath />
                     <argument>org.openjdk.jmh.Main</argument>
                     <argument>-rf</argument>
                     <argument>json</argument>
