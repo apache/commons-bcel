@@ -35,10 +35,10 @@ public class MethodParameter implements Serializable, Cloneable {
     private static final long serialVersionUID = 6014494029439440326L;
 
     /** Index of the CONSTANT_Utf8_info structure in the constant_pool table representing the name of the parameter */
-    private int name_index;
+    private int name_index; // TODO could be final (setter unused)
 
     /** The access flags */
-    private int access_flags;
+    private int access_flags; // TODO could be final (setter unused)
 
     public MethodParameter() {
     }
@@ -59,7 +59,7 @@ public class MethodParameter implements Serializable, Cloneable {
         return name_index;
     }
 
-    public void setNameIndex(int name_index) {
+    public void setNameIndex(int name_index) { // TODO unused
         this.name_index = name_index;
     }
 
@@ -77,7 +77,7 @@ public class MethodParameter implements Serializable, Cloneable {
         return access_flags;
     }
 
-    public void setAccessFlags(int access_flags) {
+    public void setAccessFlags(int access_flags) { // TODO unused
         this.access_flags = access_flags;
     }
 
