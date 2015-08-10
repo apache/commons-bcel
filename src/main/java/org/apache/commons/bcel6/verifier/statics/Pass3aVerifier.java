@@ -1140,7 +1140,6 @@ public final class Pass3aVerifier extends PassVerifier{
          */
         private Method getMethod(JavaClass jc, InvokeInstruction invoke){
             Method[] ms = jc.getMethods();
-            Method m = null;
             for (Method element : ms) {
                 if ( (element.getName().equals(invoke.getMethodName(cpg))) &&
                      (Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(cpg))) &&
