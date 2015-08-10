@@ -159,7 +159,9 @@ public class ControlFlowGraph{
          */
         public boolean execute(Frame inFrame, ArrayList<InstructionContext> execPreds, InstConstraintVisitor icv, ExecutionVisitor ev){
 
-            executionPredecessors = (List<InstructionContext>) execPreds.clone();
+            @SuppressWarnings("unchecked") // OK because execPreds is compatible type
+            final List<InstructionContext> clone = (List<InstructionContext>) execPreds.clone();
+            executionPredecessors = clone;
 
             //sanity check
             if ( (lastExecutionJSR() == null) && (subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel() ) ){
