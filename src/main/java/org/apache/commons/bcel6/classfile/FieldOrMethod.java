@@ -94,7 +94,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     protected FieldOrMethod(int access_flags, int name_index, int signature_index,
             Attribute[] attributes, ConstantPool constant_pool) {
-        super.setAccessFlags(access_flags);
+        super(access_flags);
         this.name_index = name_index;
         this.signature_index = signature_index;
         this.constant_pool = constant_pool;

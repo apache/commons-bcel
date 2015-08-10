@@ -45,6 +45,10 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
 
+    public FieldGenOrMethodGen(int access_flags) {
+        super(access_flags);
+    }
+
     public void setType( Type type ) {
         if (type.getType() == Constants.T_ADDRESS) {
             throw new IllegalArgumentException("Type can not be " + type);

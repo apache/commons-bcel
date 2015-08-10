@@ -86,10 +86,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     public ClassGen(String class_name, String super_class_name, String file_name, int access_flags,
             String[] interfaces, ConstantPoolGen cp) {
+        super(access_flags);
         this.class_name = class_name;
         this.super_class_name = super_class_name;
         this.file_name = file_name;
-        super.setAccessFlags(access_flags);
         this.cp = cp;
         // Put everything needed by default into the constant pool and the vectors
         if (file_name != null) {
@@ -126,12 +126,12 @@ public class ClassGen extends AccessFlags implements Cloneable {
      * @param clazz JavaClass object (e.g. read from file)
      */
     public ClassGen(JavaClass clazz) {
+        super(clazz.getAccessFlags());
         class_name_index = clazz.getClassNameIndex();
         superclass_name_index = clazz.getSuperclassNameIndex();
         class_name = clazz.getClassName();
         super_class_name = clazz.getSuperclassName();
         file_name = clazz.getSourceFileName();
-        super.setAccessFlags(clazz.getAccessFlags());
         cp = new ConstantPoolGen(clazz.getConstantPool());
         major = clazz.getMajor();
         minor = clazz.getMinor();

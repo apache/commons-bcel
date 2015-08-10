@@ -120,7 +120,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public MethodGen(int access_flags, Type return_type, Type[] arg_types, String[] arg_names,
             String method_name, String class_name, InstructionList il, ConstantPoolGen cp) {
-        setAccessFlags(access_flags);
+        super(access_flags);
         setType(return_type);
         setArgumentTypes(arg_types);
         setArgumentNames(arg_names);

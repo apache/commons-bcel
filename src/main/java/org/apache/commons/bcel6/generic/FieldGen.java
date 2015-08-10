@@ -73,7 +73,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * @param cp constant pool
      */
     public FieldGen(int access_flags, Type type, String name, ConstantPoolGen cp) {
-        setAccessFlags(access_flags);
+        super(access_flags);
         setType(type);
         setName(name);
         setConstantPool(cp);
