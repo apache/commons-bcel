@@ -51,9 +51,9 @@ public final class StackMapType implements Cloneable, Serializable {
     StackMapType(DataInput file, ConstantPool constant_pool) throws IOException {
         this(file.readByte(), -1, constant_pool);
         if (hasIndex()) {
-            setIndex(file.readShort());
+            this.index = (int) file.readShort();
         }
-        setConstantPool(constant_pool);
+        this.constant_pool = constant_pool;
     }
 
 
@@ -62,13 +62,16 @@ public final class StackMapType implements Cloneable, Serializable {
      * @param index index to constant pool, or byte code offset
      */
     public StackMapType(byte type, int index, ConstantPool constant_pool) {
-        setType(type);
-        setIndex(index);
-        setConstantPool(constant_pool);
+        if ((type < Constants.ITEM_Bogus) || (type > Constants.ITEM_NewObject)) {
+            throw new RuntimeException("Illegal type for StackMapType: " + type);
+        }
+        this.type = type;
+        this.index = index;
+        this.constant_pool = constant_pool;
     }
 
 
-    public void setType( byte t ) {
+    public void setType( byte t ) { // TODO unused
         if ((t < Constants.ITEM_Bogus) || (t > Constants.ITEM_NewObject)) {
             throw new RuntimeException("Illegal type for StackMapType: " + t);
         }
@@ -81,7 +84,7 @@ public final class StackMapType implements Cloneable, Serializable {
     }
 
 
-    public void setIndex( int t ) {
+    public void setIndex( int t ) { // TODO unused
         index = t;
     }
 
@@ -161,7 +164,7 @@ public final class StackMapType implements Cloneable, Serializable {
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( ConstantPool constant_pool ) {
+    public final void setConstantPool( ConstantPool constant_pool ) { // TODO unused
         this.constant_pool = constant_pool;
     }
 }
