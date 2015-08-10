@@ -34,7 +34,7 @@ public class AnnotationDefault extends Attribute {
     
     private static final long serialVersionUID = -4017327188724019487L;
 
-    private ElementValue default_value;
+    private ElementValue default_value; // TODO could this be made final?
 
     /**
      * @param name_index    Index pointing to the name <em>Code</em>
@@ -55,7 +55,7 @@ public class AnnotationDefault extends Attribute {
      */
     public AnnotationDefault(int name_index, int length, ElementValue defaultValue, ConstantPool constant_pool) {
         super(Constants.ATTR_ANNOTATION_DEFAULT, name_index, length, constant_pool);
-        setDefaultValue(defaultValue);
+        this.default_value = defaultValue;
     }
 
     /**
