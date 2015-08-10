@@ -150,7 +150,7 @@ public final class Unknown extends Attribute {
     /**
      * @param bytes the bytes to set
      */
-    public final void setBytes( byte[] bytes ) {
+    public final void setBytes( byte[] bytes ) { // TODO unused
         this.bytes = bytes;
     }
 

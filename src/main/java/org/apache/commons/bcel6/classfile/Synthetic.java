@@ -124,7 +124,7 @@ public final class Synthetic extends Attribute {
     /**
      * @param bytes
      */
-    public final void setBytes( byte[] bytes ) {
+    public final void setBytes( byte[] bytes ) { // TODO unused
         this.bytes = bytes;
     }
 
