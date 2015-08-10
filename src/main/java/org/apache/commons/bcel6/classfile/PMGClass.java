@@ -34,12 +34,12 @@ import org.apache.commons.bcel6.Constants;
 public final class PMGClass extends Attribute {
 
     private static final long serialVersionUID = -7075964153234211509L;
-    private int pmg_class_index, pmg_index;
+    private int pmg_class_index, pmg_index; // TODO could be final (setter unused)
 
 
     /**
      * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
+     * references (shallow copy). Use copy() for a physical copy.
      */
     public PMGClass(PMGClass c) {
         this(c.getNameIndex(), c.getLength(), c.getPMGIndex(), c.getPMGClassIndex(), c
@@ -114,7 +114,7 @@ public final class PMGClass extends Attribute {
     /**
      * @param pmg_class_index
      */
-    public final void setPMGClassIndex( int pmg_class_index ) {
+    public final void setPMGClassIndex( int pmg_class_index ) { // TODO unused
         this.pmg_class_index = pmg_class_index;
     }
 
@@ -130,7 +130,7 @@ public final class PMGClass extends Attribute {
     /**
      * @param pmg_index
      */
-    public final void setPMGIndex( int pmg_index ) {
+    public final void setPMGIndex( int pmg_index ) { // TODO unused
         this.pmg_index = pmg_index;
     }
 

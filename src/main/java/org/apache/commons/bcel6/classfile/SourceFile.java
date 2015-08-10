@@ -36,7 +36,7 @@ import org.apache.commons.bcel6.Constants;
 public final class SourceFile extends Attribute {
 
     private static final long serialVersionUID = -804226255663222912L;
-    private int sourcefile_index;
+    private int sourcefile_index; // TODO could be final (setter unused)
 
 
     /**
@@ -118,7 +118,7 @@ public final class SourceFile extends Attribute {
     /**
      * @param sourcefile_index
      */
-    public final void setSourceFileIndex( int sourcefile_index ) {
+    public final void setSourceFileIndex( int sourcefile_index ) { // TODO unused
         this.sourcefile_index = sourcefile_index;
     }
 

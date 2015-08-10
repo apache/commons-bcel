@@ -27,7 +27,7 @@ import org.apache.commons.bcel6.Constants;
  */
 public class SimpleElementValue extends ElementValue
 {
-    private int index;
+    private int index; // TODO could be final (setter unused)
 
     public SimpleElementValue(int type, int index, ConstantPool cpool)
     {
@@ -43,7 +43,7 @@ public class SimpleElementValue extends ElementValue
         return index;
     }
 
-    public void setIndex(int index)
+    public void setIndex(int index) // TODO unused
     {
         this.index = index;
     }
