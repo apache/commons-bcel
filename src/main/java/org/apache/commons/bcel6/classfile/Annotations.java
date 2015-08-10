@@ -32,7 +32,7 @@ public abstract class Annotations extends Attribute {
 
     private static final long serialVersionUID = 1L;
 
-    private AnnotationEntry[] annotation_table;
+    private AnnotationEntry[] annotation_table; // TODO could this be final?
     private final boolean isRuntimeVisible;
 
     /**
@@ -60,7 +60,7 @@ public abstract class Annotations extends Attribute {
      */
     public Annotations(byte annotation_type, int name_index, int length, AnnotationEntry[] annotation_table, ConstantPool constant_pool, boolean isRuntimeVisible) {
         super(annotation_type, name_index, length, constant_pool);
-        setAnnotationTable(annotation_table);
+        this.annotation_table = annotation_table;
         this.isRuntimeVisible = isRuntimeVisible;
     }
 
