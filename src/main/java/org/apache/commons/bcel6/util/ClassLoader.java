@@ -54,6 +54,7 @@ import org.apache.commons.bcel6.classfile.Utility;
  */
 public class ClassLoader extends java.lang.ClassLoader {
 
+    private static final String BCEL_TOKEN = "$$BCEL$$";
     public static final String[] DEFAULT_IGNORED_PACKAGES = {
             "java.", "javax.", "sun."
     };
@@ -115,7 +116,7 @@ public class ClassLoader extends java.lang.ClassLoader {
                 JavaClass clazz = null;
                 /* Third try: Special request?
                  */
-                if (class_name.contains("$$BCEL$$")) {
+                if (class_name.contains(BCEL_TOKEN)) {
                     clazz = createClass(class_name);
                 } else { // Fourth try: Load classes via repository
                     if ((clazz = repository.loadClass(class_name)) != null) {
@@ -163,8 +164,8 @@ public class ClassLoader extends java.lang.ClassLoader {
      * @param class_name compressed byte code with "$$BCEL$$" in it
      */
     protected JavaClass createClass( String class_name ) {
-        int index = class_name.indexOf("$$BCEL$$");
-        String real_name = class_name.substring(index + 8);
+        int index = class_name.indexOf(BCEL_TOKEN);
+        String real_name = class_name.substring(index + BCEL_TOKEN.length());
         JavaClass clazz = null;
         try {
             byte[] bytes = Utility.decode(real_name, true);
