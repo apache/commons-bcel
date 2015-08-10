@@ -36,10 +36,10 @@ public final class StackMapEntry implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int byte_code_offset;
-    private StackMapType[] types_of_locals;
-    private StackMapType[] types_of_stack_items;
-    private ConstantPool constant_pool;
+    private int byte_code_offset; // TODO could be final (setter unused)
+    private StackMapType[] types_of_locals; // TODO could be final (setter unused)
+    private StackMapType[] types_of_stack_items; // TODO could be final (setter unused)
+    private ConstantPool constant_pool; // TODO could be final (setter unused)
 
 
     /**
@@ -70,8 +70,8 @@ public final class StackMapEntry implements Cloneable, Serializable {
             StackMapType[] types_of_locals, int number_of_stack_items,
             StackMapType[] types_of_stack_items, ConstantPool constant_pool) {
         this.byte_code_offset = byte_code_offset;
-        setTypesOfLocals(types_of_locals);
-        setTypesOfStackItems(types_of_stack_items);
+        this.types_of_locals = types_of_locals != null ? types_of_locals : new StackMapType[0];
+        this.types_of_stack_items = types_of_stack_items != null ? types_of_stack_items : new StackMapType[0];
         this.constant_pool = constant_pool;
     }
 
@@ -127,7 +127,7 @@ public final class StackMapEntry implements Cloneable, Serializable {
     }
 
 
-    public void setByteCodeOffset( int b ) {
+    public void setByteCodeOffset( int b ) { // TODO unused
         byte_code_offset = b;
     }
 
@@ -138,7 +138,7 @@ public final class StackMapEntry implements Cloneable, Serializable {
 
 
     @java.lang.Deprecated
-    public void setNumberOfLocals( int n ) {
+    public void setNumberOfLocals( int n ) { // TODO unused
     }
 
 
@@ -147,7 +147,7 @@ public final class StackMapEntry implements Cloneable, Serializable {
     }
 
 
-    public void setTypesOfLocals( StackMapType[] types ) {
+    public void setTypesOfLocals( StackMapType[] types ) { // TODO unused
         types_of_locals = types != null ? types : new StackMapType[0];
     }
 
@@ -158,7 +158,7 @@ public final class StackMapEntry implements Cloneable, Serializable {
 
 
     @java.lang.Deprecated
-    public void setNumberOfStackItems( int n ) {
+    public void setNumberOfStackItems( int n ) { // TODO unused
     }
 
 
@@ -212,7 +212,7 @@ public final class StackMapEntry implements Cloneable, Serializable {
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( ConstantPool constant_pool ) {
+    public final void setConstantPool( ConstantPool constant_pool ) { // TODO unused
         this.constant_pool = constant_pool;
     }
 }
