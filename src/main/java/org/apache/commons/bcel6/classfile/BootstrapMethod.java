@@ -37,12 +37,12 @@ public class BootstrapMethod implements Serializable, Cloneable {
     private static final long serialVersionUID = -4517534834047695344L;
 
     /** Index of the CONSTANT_MethodHandle_info structure in the constant_pool table */
-    private int bootstrap_method_ref;
+    private int bootstrap_method_ref; // TODO this could be made final (setter is not used)
 
-    private int num_bootstrap_arguments;
+    private final int num_bootstrap_arguments;
 
     /** Array of references to the constant_pool table */
-    private int[] bootstrap_arguments;
+    private int[] bootstrap_arguments; // TODO this could be made final (setter is not used)
 
 
     /**
