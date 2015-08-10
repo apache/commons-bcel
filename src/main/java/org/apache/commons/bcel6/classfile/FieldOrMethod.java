@@ -33,6 +33,7 @@ import org.apache.commons.bcel6.Constants;
 public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
 
     private static final long serialVersionUID = -1833306330869469714L;
+    // TODO should be made private
     protected int name_index; // Points to field name in constant pool 
     protected int signature_index; // Points to encoded signature
     protected Attribute[] attributes; // Collection of attributes
@@ -162,7 +163,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * @param name_index Index in constant pool of object's name.
      */
-    public final void setNameIndex( int name_index ) {
+    public final void setNameIndex( int name_index ) { // TODO unused
         this.name_index = name_index;
     }
 
@@ -178,7 +179,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * @param signature_index Index in constant pool of field signature.
      */
-    public final void setSignatureIndex( int signature_index ) {
+    public final void setSignatureIndex( int signature_index ) { // TODO unused
         this.signature_index = signature_index;
     }
 

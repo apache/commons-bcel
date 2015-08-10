@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.Constants;
 public final class ConstantMethodType extends Constant {
 
     private static final long serialVersionUID = 6750768220616618881L;
-    private int descriptor_index;
+    private int descriptor_index; // TODO could be final (setter unused)
 
 
     /**
@@ -93,7 +93,7 @@ public final class ConstantMethodType extends Constant {
     }
 
 
-    public void setDescriptorIndex(int descriptor_index) {
+    public void setDescriptorIndex(int descriptor_index) { // TODO unused
         this.descriptor_index = descriptor_index;
     }
 

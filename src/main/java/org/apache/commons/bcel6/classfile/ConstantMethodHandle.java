@@ -34,8 +34,8 @@ import org.apache.commons.bcel6.Constants;
 public final class ConstantMethodHandle extends Constant {
 
     private static final long serialVersionUID = -7875124116920198044L;
-    private int reference_kind;
-    private int reference_index;
+    private int reference_kind; // TODO could be final (setter unused)
+    private int reference_index; // TODO could be final (setter unused)
 
 
     /**
@@ -96,7 +96,7 @@ public final class ConstantMethodHandle extends Constant {
     }
 
 
-    public void setReferenceKind(int reference_kind) {
+    public void setReferenceKind(int reference_kind) { // TODO unused
         this.reference_kind = reference_kind;
     }
 
@@ -106,7 +106,7 @@ public final class ConstantMethodHandle extends Constant {
     }
 
 
-    public void setReferenceIndex(int reference_index) {
+    public void setReferenceIndex(int reference_index) { // TODO unused
         this.reference_index = reference_index;
     }
 

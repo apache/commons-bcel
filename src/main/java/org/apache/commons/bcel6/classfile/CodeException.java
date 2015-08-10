@@ -36,12 +36,12 @@ import org.apache.commons.bcel6.Constants;
 public final class CodeException implements Cloneable, Constants, Node, Serializable {
 
     private static final long serialVersionUID = 2972500041254967221L;
-    private int start_pc; // Range in the code the exception handler is
-    private int end_pc; // active. start_pc is inclusive, end_pc exclusive
-    private int handler_pc; /* Starting address of exception handler, i.e.,
+    private int start_pc; // Range in the code the exception handler is TODO could be final (setter unused)
+    private int end_pc; // active. start_pc is inclusive, end_pc exclusive TODO could be final (setter unused)
+    private int handler_pc; /* Starting address of exception handler, i.e., TODO could be final (setter unused)
      * an offset from start of code.
      */
-    private int catch_type; /* If this is zero the handler catches any
+    private int catch_type; /* If this is zero the handler catches any TODO could be final (setter unused)
      * exception, otherwise it points to the
      * exception class which is to be caught.
      */
@@ -146,7 +146,7 @@ public final class CodeException implements Cloneable, Constants, Node, Serializ
     /**
      * @param catch_type the type of exception that is caught
      */
-    public final void setCatchType( int catch_type ) {
+    public final void setCatchType( int catch_type ) { // TODO unused
         this.catch_type = catch_type;
     }
 
@@ -154,7 +154,7 @@ public final class CodeException implements Cloneable, Constants, Node, Serializ
     /**
      * @param end_pc end of handled block
      */
-    public final void setEndPC( int end_pc ) {
+    public final void setEndPC( int end_pc ) { // TODO unused
         this.end_pc = end_pc;
     }
 
@@ -162,7 +162,7 @@ public final class CodeException implements Cloneable, Constants, Node, Serializ
     /**
      * @param handler_pc where the actual code is
      */
-    public final void setHandlerPC( int handler_pc ) {
+    public final void setHandlerPC( int handler_pc ) { // TODO unused
         this.handler_pc = handler_pc;
     }
 
@@ -170,7 +170,7 @@ public final class CodeException implements Cloneable, Constants, Node, Serializ
     /**
      * @param start_pc start of handled block
      */
-    public final void setStartPC( int start_pc ) {
+    public final void setStartPC( int start_pc ) { // TODO unused
         this.start_pc = start_pc;
     }
 

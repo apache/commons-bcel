@@ -41,9 +41,9 @@ public abstract class ConstantCP extends Constant {
      */
     // Note that this field is used to store the
     // bootstrap_method_attr_index of a ConstantInvokeDynamic.
-    protected int class_index; // TODO make private (has getter & setter)
+    protected int class_index; // TODO make private (has getter & setter) could be final (setter unused)
     // This field has the same meaning for all subclasses.
-    protected int name_and_type_index; // TODO make private (has getter & setter)
+    protected int name_and_type_index; // TODO make private (has getter & setter) could be final (setter unused)
 
 
     /**
@@ -113,7 +113,7 @@ public abstract class ConstantCP extends Constant {
     /**
      * @param class_index points to Constant_class 
      */
-    public final void setClassIndex( int class_index ) {
+    public final void setClassIndex( int class_index ) { // TODO unused
         this.class_index = class_index;
     }
 
@@ -124,7 +124,7 @@ public abstract class ConstantCP extends Constant {
      * Note that this method is a functional duplicate of setClassIndex
      * for use by ConstantInvokeDynamic.
      */
-    public final void setBootstrapMethodAttrIndex(int bootstrap_method_attr_index) {
+    public final void setBootstrapMethodAttrIndex(int bootstrap_method_attr_index) { // TODO unused
         this.class_index = bootstrap_method_attr_index;
     }
 
