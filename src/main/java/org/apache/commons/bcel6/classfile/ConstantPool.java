@@ -47,7 +47,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
      * @param constant_pool Array of constants
      */
     public ConstantPool(Constant[] constant_pool) {
-        setConstantPool(constant_pool);
+        this.constant_pool = constant_pool;
     }
 
 
@@ -335,7 +335,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
     /**
      * @param constant_pool
      */
-    public void setConstantPool( Constant[] constant_pool ) {
+    public void setConstantPool( Constant[] constant_pool ) { // TODO unused
         this.constant_pool = constant_pool;
     }
 
