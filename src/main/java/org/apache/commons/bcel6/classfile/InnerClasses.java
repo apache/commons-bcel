@@ -36,7 +36,7 @@ import org.apache.commons.bcel6.Constants;
 public final class InnerClasses extends Attribute {
 
     private static final long serialVersionUID = 4570147726361753700L;
-    private InnerClass[] inner_classes;
+    private InnerClass[] inner_classes; // TODO could be final (setter unused; would need to recode the copy method)
 
 
     /**
@@ -57,7 +57,7 @@ public final class InnerClasses extends Attribute {
     public InnerClasses(int name_index, int length, InnerClass[] inner_classes,
             ConstantPool constant_pool) {
         super(Constants.ATTR_INNER_CLASSES, name_index, length, constant_pool);
-        setInnerClasses(inner_classes);
+        this.inner_classes = inner_classes != null ? inner_classes : new InnerClass[0];
     }
 
 
@@ -121,7 +121,7 @@ public final class InnerClasses extends Attribute {
     /**
      * @param inner_classes the array of inner classes
      */
-    public final void setInnerClasses( InnerClass[] inner_classes ) {
+    public final void setInnerClasses( InnerClass[] inner_classes ) { // TODO unused
         this.inner_classes = inner_classes != null ? inner_classes : new InnerClass[0];
     }
 
@@ -144,6 +144,7 @@ public final class InnerClasses extends Attribute {
      */
     @Override
     public Attribute copy( ConstantPool _constant_pool ) {
+        // TODO this could be recoded to use a lower level constructor after creating a copy of the inner classes
         InnerClasses c = (InnerClasses) clone();
         c.inner_classes = new InnerClass[inner_classes.length];
         for (int i = 0; i < inner_classes.length; i++) {
