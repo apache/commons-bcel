@@ -1119,7 +1119,9 @@ public class MethodGen extends FieldGenOrMethodGen {
                 // Initialize param_annotations
                 if (!hasParameterAnnotations)
                 {
-                    param_annotations = new List[arg_types.length];
+                    @SuppressWarnings("unchecked") // OK
+                    final List<AnnotationEntryGen>[] parmList = new List[arg_types.length];
+                    param_annotations = parmList;
                     for (int j = 0; j < arg_types.length; j++) {
                         param_annotations[j] = new ArrayList<AnnotationEntryGen>();
                     }
@@ -1168,7 +1170,9 @@ public class MethodGen extends FieldGenOrMethodGen {
         ensureExistingParameterAnnotationsUnpacked();
         if (!hasParameterAnnotations)
         {
-            param_annotations = new List[arg_types.length];
+            @SuppressWarnings("unchecked") // OK
+            final List<AnnotationEntryGen>[] parmList = new List[arg_types.length];
+            param_annotations = parmList;
             hasParameterAnnotations = true;
         }
         List<AnnotationEntryGen> existingAnnotations = param_annotations[parameterIndex];
