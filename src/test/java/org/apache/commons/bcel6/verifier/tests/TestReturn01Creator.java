@@ -29,6 +29,7 @@ import org.apache.commons.bcel6.generic.InstructionHandle;
 import org.apache.commons.bcel6.generic.InstructionList;
 import org.apache.commons.bcel6.generic.MethodGen;
 import org.apache.commons.bcel6.generic.Type;
+import org.junit.Assert;
 
 public class TestReturn01Creator extends TestCreator implements Constants {
   private InstructionFactory _factory;
@@ -53,8 +54,10 @@ public class TestReturn01Creator extends TestCreator implements Constants {
     MethodGen method = new MethodGen(ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>", "org.apache.commons.bcel6.verifier.tests.TestReturn01", il, _cp);
 
     InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
+    Assert.assertNotNull(ih_0); // TODO why is this not used
     il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Constants.INVOKESPECIAL));
     InstructionHandle ih_4 = il.append(InstructionFactory.createReturn(Type.VOID));
+    Assert.assertNotNull(ih_4); // TODO why is this not used
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());
@@ -66,10 +69,12 @@ public class TestReturn01Creator extends TestCreator implements Constants {
     MethodGen method = new MethodGen(ACC_PUBLIC | ACC_STATIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "foo", "org.apache.commons.bcel6.verifier.tests.TestReturn01", il, _cp);
 
     InstructionHandle ih_0 = il.append(_factory.createNew("java.lang.Object"));
+    Assert.assertNotNull(ih_0); // TODO why is this not used
     il.append(InstructionConstants.DUP);
     il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Constants.INVOKESPECIAL));
     il.append(InstructionConstants.NOP);
     InstructionHandle ih_8 = il.append(InstructionFactory.createReturn(Type.OBJECT));
+    Assert.assertNotNull(ih_8); // TODO why is this not used
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());
