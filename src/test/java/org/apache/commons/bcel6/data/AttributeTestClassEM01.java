@@ -22,6 +22,7 @@ public class AttributeTestClassEM01
 {
     public static void main(String[] argv)
     {
+        @SuppressWarnings("unused")
         class S
         {
             public void sayhello()

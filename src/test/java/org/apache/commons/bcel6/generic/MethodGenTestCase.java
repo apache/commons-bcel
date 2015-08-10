@@ -33,6 +33,7 @@ public class MethodGenTestCase extends TestCase {
 
     public static class Foo {
         public void bar() {
+            @SuppressWarnings("unused")
             int a = 1;
         }
     }
