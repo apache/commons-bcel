@@ -40,10 +40,10 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
     private static final long serialVersionUID = 1L;
 
     private final int frame_type;
-    private int byte_code_offset_delta;
-    private StackMapType[] types_of_locals;
-    private StackMapType[] types_of_stack_items;
-    private ConstantPool constant_pool;
+    private int byte_code_offset_delta; // TODO could be final (setter unused)
+    private StackMapType[] types_of_locals; // TODO could be final (setter unused)
+    private StackMapType[] types_of_stack_items; // TODO could be final (setter unused)
+    private ConstantPool constant_pool; // TODO could be final (setter unused)
 
 
     /**
@@ -100,8 +100,8 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
             StackMapType[] types_of_stack_items, ConstantPool constant_pool) {
         this.frame_type = tag;
         this.byte_code_offset_delta = byte_code_offset_delta;
-        setTypesOfLocals(types_of_locals);
-        setTypesOfStackItems(types_of_stack_items);
+        this.types_of_locals = types_of_locals != null ? types_of_locals : new StackMapType[0];
+        this.types_of_stack_items = types_of_stack_items != null ? types_of_stack_items : new StackMapType[0];
         this.constant_pool = constant_pool;
     }
 
@@ -197,7 +197,7 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
     }
 
 
-    public void setByteCodeOffsetDelta( int b ) {
+    public void setByteCodeOffsetDelta( int b ) { // TODO unused
         byte_code_offset_delta = b;
     }
 
@@ -212,7 +212,7 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
     }
 
 
-    public void setTypesOfLocals( StackMapType[] types ) {
+    public void setTypesOfLocals( StackMapType[] types ) { // TODO unused
         types_of_locals = types != null ? types : new StackMapType[0];
     }
 
@@ -227,7 +227,7 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
     }
 
 
-    public void setTypesOfStackItems( StackMapType[] types ) {
+    public void setTypesOfStackItems( StackMapType[] types ) { // TODO unused
         types_of_stack_items = types != null ? types : new StackMapType[0];
     }
 
