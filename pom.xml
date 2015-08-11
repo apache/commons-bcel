@@ -30,7 +30,7 @@
   <groupId>org.apache.commons</groupId>
   <artifactId>commons-bcel6</artifactId>
   <packaging>jar</packaging>
-  <version>6.1-SNAPSHOT</version>
+  <version>6.0-SNAPSHOT</version>
   <name>Apache Commons BCEL</name>
   <description>Apache Commons Bytecode Engineering Library</description>
 
@@ -170,9 +170,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0_RC4</connection>
-    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0_RC4</developerConnection>
-    <url>http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0_RC4</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</connection>
+    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</developerConnection>
+    <url>http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</url>
   </scm>
 
   <build>
