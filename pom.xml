@@ -259,7 +259,6 @@
         <configuration>
           <configLocation>${basedir}/checkstyle.xml</configLocation>
           <enableRulesSummary>false</enableRulesSummary>
-          <headerFile>${basedir}/LICENSE-header.txt</headerFile>
         </configuration>
         <!-- We need to specify reportSets because 2.9.1 creates two reports -->
         <reportSets>
