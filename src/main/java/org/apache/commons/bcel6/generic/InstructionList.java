@@ -718,7 +718,7 @@ public class InstructionList implements Serializable {
             length--;
             if (ih.hasTargeters()) { // Still got targeters?
                 target_vec.add(ih);
-                buf.append(ih.toString(true) + " ");
+                buf.append(ih.toString(true)).append(" ");
                 ih.next = ih.prev = null;
             } else {
                 ih.dispose();

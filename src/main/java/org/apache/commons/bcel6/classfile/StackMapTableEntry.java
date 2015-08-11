@@ -161,11 +161,11 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
         } else if (frame_type == Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             buf.append("SAME_LOCALS_1_STACK_EXTENDED");
         } else if (frame_type >= Constants.CHOP_FRAME && frame_type <= Constants.CHOP_FRAME_MAX) {
-            buf.append("CHOP "+(251-frame_type));
+            buf.append("CHOP ").append(String.valueOf(251-frame_type));
         } else if (frame_type == Constants.SAME_FRAME_EXTENDED) {
             buf.append("SAME_EXTENDED");
         } else if (frame_type >= Constants.APPEND_FRAME && frame_type <= Constants.APPEND_FRAME_MAX) {
-            buf.append("APPEND "+(frame_type-251));
+            buf.append("APPEND ").append(String.valueOf(frame_type-251));
         } else if (frame_type == Constants.FULL_FRAME) {        
             buf.append("FULL");
         } else {
