@@ -36,7 +36,7 @@ public final class LineNumberTable extends Attribute {
 
     private static final long serialVersionUID = -6967221519632128904L;
 
-    private LineNumber[] line_number_table; // Table of line/numbers pairs // TODO could be final (unused setter; copy() would need adjusting)
+    private LineNumber[] line_number_table; // Table of line/numbers pairs // TODO could be final (copy() would need adjusting)
 
 
     /*
@@ -113,14 +113,6 @@ public final class LineNumberTable extends Attribute {
      */
     public final LineNumber[] getLineNumberTable() {
         return line_number_table;
-    }
-
-
-    /**
-     * @param line_number_table the line number entries for this table
-     */
-    public final void setLineNumberTable( LineNumber[] line_number_table ) { // TODO unused
-        this.line_number_table = line_number_table;
     }
 
 

@@ -332,14 +332,6 @@ public class ConstantPool implements Cloneable, Node, Serializable {
 
 
     /**
-     * @param constant_pool
-     */
-    public void setConstantPool( Constant[] constant_pool ) { // TODO unused
-        this.constant_pool = constant_pool;
-    }
-
-
-    /**
      * @return String representation.
      */
     @Override

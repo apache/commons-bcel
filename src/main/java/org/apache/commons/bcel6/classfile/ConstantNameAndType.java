@@ -35,8 +35,8 @@ import org.apache.commons.bcel6.Constants;
 public final class ConstantNameAndType extends Constant {
 
     private static final long serialVersionUID = -7913354727264034451L;
-    private int name_index; // Name of field/method // TODO could be final (setter unused)
-    private int signature_index; // and its signature. // TODO could be final (setter unused)
+    private final int name_index; // Name of field/method
+    private final int signature_index; // and its signature.
 
 
     /**
@@ -123,22 +123,6 @@ public final class ConstantNameAndType extends Constant {
      */
     public final String getSignature( ConstantPool cp ) {
         return cp.constantToString(getSignatureIndex(), Constants.CONSTANT_Utf8);
-    }
-
-
-    /**
-     * @param name_index the name index of this constant
-     */
-    public final void setNameIndex( int name_index ) { // TODO unused
-        this.name_index = name_index;
-    }
-
-
-    /**
-     * @param signature_index the signature index in the constant pool of this type
-     */
-    public final void setSignatureIndex( int signature_index ) { // TODO unused
-        this.signature_index = signature_index;
     }
 
 

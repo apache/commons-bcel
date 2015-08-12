@@ -41,7 +41,7 @@ import org.apache.commons.bcel6.Constants;
 public final class Unknown extends Attribute {
 
     private static final long serialVersionUID = -4099655108069755015L;
-    private byte[] bytes;
+    private byte[] bytes; // TODO could be final if copy() were adjusted
     private final String name;
     private static final Map<String, Unknown> unknown_attributes = new HashMap<String, Unknown>();
 
@@ -143,14 +143,6 @@ public final class Unknown extends Attribute {
     @Override
     public final String getName() {
         return name;
-    }
-
-
-    /**
-     * @param bytes the bytes to set
-     */
-    public final void setBytes( byte[] bytes ) { // TODO unused
-        this.bytes = bytes;
     }
 
 

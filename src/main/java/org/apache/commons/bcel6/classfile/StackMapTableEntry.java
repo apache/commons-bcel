@@ -39,10 +39,10 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
     private static final long serialVersionUID = 1L;
 
     private final int frame_type;
-    private int byte_code_offset_delta; // TODO could be final (setter unused)
-    private StackMapType[] types_of_locals; // TODO could be final (setter unused)
-    private StackMapType[] types_of_stack_items; // TODO could be final (setter unused)
-    private ConstantPool constant_pool; // TODO could be final (setter unused)
+    private int byte_code_offset_delta; // TODO could be final if ctor were rewritten
+    private StackMapType[] types_of_locals; // TODO could be final if ctor were rewritten
+    private StackMapType[] types_of_stack_items; // TODO could be final if ctor were rewritten
+    private final ConstantPool constant_pool; // TODO could be final if ctor were rewritten
 
 
     /**
@@ -196,11 +196,6 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
     }
 
 
-    public void setByteCodeOffsetDelta( int b ) { // TODO unused
-        byte_code_offset_delta = b;
-    }
-
-
     public int getByteCodeOffsetDelta() {
         return byte_code_offset_delta;
     }
@@ -211,11 +206,6 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
     }
 
 
-    public void setTypesOfLocals( StackMapType[] types ) { // TODO unused
-        types_of_locals = types != null ? types : new StackMapType[0];
-    }
-
-
     public StackMapType[] getTypesOfLocals() {
         return types_of_locals;
     }
@@ -223,11 +213,6 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
 
     public int getNumberOfStackItems() {
         return types_of_stack_items.length;
-    }
-
-
-    public void setTypesOfStackItems( StackMapType[] types ) { // TODO unused
-        types_of_stack_items = types != null ? types : new StackMapType[0];
     }
 
 
@@ -267,11 +252,4 @@ public final class StackMapTableEntry implements Cloneable, Serializable {
         return constant_pool;
     }
 
-
-    /**
-     * @param constant_pool Constant pool to be used for this object.
-     */
-    public final void setConstantPool( ConstantPool constant_pool ) {
-        this.constant_pool = constant_pool;
-    }
 }

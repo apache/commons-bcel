@@ -35,10 +35,10 @@ public final class LineNumber implements Cloneable, Node, Serializable {
     private static final long serialVersionUID = 169537400672820016L;
     
     /** Program Counter (PC) corresponds to line */
-    private short start_pc; // TODO could be final (setter unused)
+    private final short start_pc;
     
     /** number in source file */
-    private short line_number; // TODO could be final (setter unused)
+    private final short line_number;
 
     /**
      * Initialize from another object.
@@ -106,22 +106,6 @@ public final class LineNumber implements Cloneable, Node, Serializable {
      */
     public final int getStartPC() {
         return  0xffff & start_pc;
-    }
-
-
-    /**
-     * @param line_number the source line number
-     */
-    public final void setLineNumber( int line_number ) { // TODO unused
-        this.line_number = (short) line_number;
-    }
-
-
-    /**
-     * @param start_pc the pc for this line number
-     */
-    public final void setStartPC( int start_pc ) { // TODO unused
-        this.start_pc = (short) start_pc;
     }
 
 

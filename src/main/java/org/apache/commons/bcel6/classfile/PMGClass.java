@@ -33,7 +33,7 @@ import org.apache.commons.bcel6.Constants;
 public final class PMGClass extends Attribute {
 
     private static final long serialVersionUID = -7075964153234211509L;
-    private int pmg_class_index, pmg_index; // TODO could be final (setter unused)
+    private final int pmg_class_index, pmg_index;
 
 
     /**
@@ -111,26 +111,10 @@ public final class PMGClass extends Attribute {
 
 
     /**
-     * @param pmg_class_index
-     */
-    public final void setPMGClassIndex( int pmg_class_index ) { // TODO unused
-        this.pmg_class_index = pmg_class_index;
-    }
-
-
-    /**
      * @return Index in constant pool of source file name.
      */
     public final int getPMGIndex() {
         return pmg_index;
-    }
-
-
-    /**
-     * @param pmg_index
-     */
-    public final void setPMGIndex( int pmg_index ) { // TODO unused
-        this.pmg_index = pmg_index;
     }
 
 

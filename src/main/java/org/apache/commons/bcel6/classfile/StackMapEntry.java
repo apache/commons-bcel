@@ -35,10 +35,10 @@ public final class StackMapEntry implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int byte_code_offset; // TODO could be final (setter unused)
-    private StackMapType[] types_of_locals; // TODO could be final (setter unused)
-    private StackMapType[] types_of_stack_items; // TODO could be final (setter unused)
-    private ConstantPool constant_pool; // TODO could be final (setter unused)
+    private final int byte_code_offset;
+    private final StackMapType[] types_of_locals;
+    private final StackMapType[] types_of_stack_items;
+    private final ConstantPool constant_pool;
 
 
     /**
@@ -126,11 +126,6 @@ public final class StackMapEntry implements Cloneable, Serializable {
     }
 
 
-    public void setByteCodeOffset( int b ) { // TODO unused
-        byte_code_offset = b;
-    }
-
-
     public int getByteCodeOffset() {
         return byte_code_offset;
     }
@@ -141,11 +136,6 @@ public final class StackMapEntry implements Cloneable, Serializable {
     }
 
 
-    public void setTypesOfLocals( StackMapType[] types ) { // TODO unused
-        types_of_locals = types != null ? types : new StackMapType[0];
-    }
-
-
     public StackMapType[] getTypesOfLocals() {
         return types_of_locals;
     }
@@ -153,11 +143,6 @@ public final class StackMapEntry implements Cloneable, Serializable {
 
     public int getNumberOfStackItems() {
         return types_of_stack_items == null ? 0 : types_of_stack_items.length;
-    }
-
-
-    public void setTypesOfStackItems( StackMapType[] types ) {
-        types_of_stack_items = types != null ? types : new StackMapType[0];
     }
 
 
@@ -197,11 +182,4 @@ public final class StackMapEntry implements Cloneable, Serializable {
         return constant_pool;
     }
 
-
-    /**
-     * @param constant_pool Constant pool to be used for this object.
-     */
-    public final void setConstantPool( ConstantPool constant_pool ) { // TODO unused
-        this.constant_pool = constant_pool;
-    }
 }

@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.Constants;
 public final class ConstantString extends Constant implements ConstantObject {
 
     private static final long serialVersionUID = 6603144389219397225L;
-    private int string_index; // Identical to ConstantClass except for this name // TODO could be final (setter unused)
+    private final int string_index; // Identical to ConstantClass except for this name
 
 
     /**
@@ -96,14 +96,6 @@ public final class ConstantString extends Constant implements ConstantObject {
      */
     public final int getStringIndex() {
         return string_index;
-    }
-
-
-    /**
-     * @param string_index the index into the constant of the string value
-     */
-    public final void setStringIndex( int string_index ) { // TODO unused
-        this.string_index = string_index;
     }
 
 

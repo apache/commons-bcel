@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.Constants;
 public class LocalVariableTable extends Attribute {
 
     private static final long serialVersionUID = 6780929007774637689L;
-    private LocalVariable[] local_variable_table; // variables
+    private LocalVariable[] local_variable_table; // variables TODO could be final if copy() were recoded
 
 
     /**
@@ -153,11 +153,6 @@ public class LocalVariableTable extends Attribute {
             }
         }
         return null;
-    }
-
-
-    public final void setLocalVariableTable( LocalVariable[] local_variable_table ) { // TODO unused
-        this.local_variable_table = local_variable_table;
     }
 
 

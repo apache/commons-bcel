@@ -32,8 +32,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
     private static final long serialVersionUID = -1833306330869469714L;
 
-    private int name_index; // Points to field name in constant pool 
-    private int signature_index; // Points to encoded signature
+    private final int name_index; // Points to field name in constant pool 
+    private final int signature_index; // Points to encoded signature
     private Attribute[] attributes; // Collection of attributes
     private AnnotationEntry[] annotationEntries; // annotations defined on the field or method 
     private ConstantPool constant_pool;
@@ -41,7 +41,9 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     private String signatureAttributeString = null;
     private boolean searchedForSignatureAttribute = false;
 
-    FieldOrMethod() {
+    FieldOrMethod() { // TODO is this ctor needed?
+        this.name_index = 0;
+        this.signature_index = 0;
     }
 
 
@@ -147,26 +149,10 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
 
     /**
-     * @param name_index Index in constant pool of object's name.
-     */
-    public final void setNameIndex( int name_index ) { // TODO unused
-        this.name_index = name_index;
-    }
-
-
-    /**
      * @return Index in constant pool of field signature.
      */
     public final int getSignatureIndex() {
         return signature_index;
-    }
-
-
-    /**
-     * @param signature_index Index in constant pool of field signature.
-     */
-    public final void setSignatureIndex( int signature_index ) { // TODO unused
-        this.signature_index = signature_index;
     }
 
 
