@@ -62,7 +62,6 @@ import org.apache.commons.bcel6.generic.Type;
  *
  * @see BCELifier
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 class BCELFactory extends EmptyVisitor {
 

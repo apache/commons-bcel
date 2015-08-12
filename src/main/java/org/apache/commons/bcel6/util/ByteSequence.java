@@ -26,7 +26,6 @@ import java.io.DataInputStream;
  * Java byte code stream to gain some more readability.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class ByteSequence extends DataInputStream {
 

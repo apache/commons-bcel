@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.generic;
  * Super class for JSR - Jump to subroutine
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class JsrInstruction extends BranchInstruction implements UnconditionalBranch,
         TypedInstruction, StackProducer {

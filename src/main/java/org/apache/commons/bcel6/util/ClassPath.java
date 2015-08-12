@@ -40,7 +40,6 @@ import java.util.zip.ZipFile;
  * sun.tools.ClassPath.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ClassPath implements Serializable {
 

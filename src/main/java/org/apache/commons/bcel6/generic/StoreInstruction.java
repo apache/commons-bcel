@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * e.g. ISTORE.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class StoreInstruction extends LocalVariableInstruction implements PopInstruction {
 

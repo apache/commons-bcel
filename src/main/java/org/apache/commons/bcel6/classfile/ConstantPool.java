@@ -35,7 +35,6 @@ import org.apache.commons.bcel6.Constants;
  * @version $Id$
  * @see     Constant
  * @see     org.apache.commons.bcel6.generic.ConstantPoolGen
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ConstantPool implements Cloneable, Node, Serializable {
 

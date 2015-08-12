@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.Constants;
  * contains pairs of PCs and line numbers.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Code
  * @see LineNumber
  */

@@ -22,7 +22,6 @@ package Mini;
  * in the ASTIdent fields.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class Function implements org.apache.commons.bcel6.Constants, EnvEntry {
   private ASTIdent   name;         // Reference to the original declaration

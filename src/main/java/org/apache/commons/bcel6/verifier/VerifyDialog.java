@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * [This class was created using VisualAge for Java,
  * but it does not work under VAJ itself (Version 3.02 JDK 1.2)]
  * @version $Id$
- * @author Enver Haase
  * @see #main(String[])
  * @see #VerifyDialog(String)
  */

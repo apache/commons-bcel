@@ -47,7 +47,6 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
  * MONITOREXIT) is not modeled in JustIce.
  *
  * @version $Id$
- * @author Enver Haase
  * @see org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException
  * @see org.apache.commons.bcel6.verifier.exc.LinkingConstraintException
  */

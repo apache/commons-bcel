@@ -24,7 +24,6 @@ package org.apache.commons.bcel6.classfile;
 
  * @see Attribute
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * 
  * @deprecated Use UnknownAttributeReader instead 
  */

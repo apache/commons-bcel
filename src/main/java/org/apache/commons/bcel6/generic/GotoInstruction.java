@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.generic;
  * Super class for GOTO
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class GotoInstruction extends BranchInstruction implements UnconditionalBranch {
 

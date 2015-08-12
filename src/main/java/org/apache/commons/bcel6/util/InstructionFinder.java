@@ -62,7 +62,6 @@ import org.apache.commons.bcel6.generic.InstructionList;
  * </pre>
  * 
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see Instruction
  * @see InstructionList
  */

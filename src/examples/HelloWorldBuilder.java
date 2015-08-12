@@ -58,7 +58,6 @@ import org.apache.commons.bcel6.generic.Type;
  * }
  * </PRE>
  *
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
  */
 public class HelloWorldBuilder {

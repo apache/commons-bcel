@@ -31,7 +31,6 @@ import org.apache.commons.bcel6.util.BCELComparator;
  * the JVM specification.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class Constant implements Cloneable, Node, Serializable {
 

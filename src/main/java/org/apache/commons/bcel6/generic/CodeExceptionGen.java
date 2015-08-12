@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.classfile.CodeException;
  * getCodeException(), i.e., there is no difference semantically.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     MethodGen
  * @see     CodeException
  * @see     InstructionHandle

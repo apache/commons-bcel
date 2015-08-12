@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * <PRE>Stack: ..., value.word1, value.word2 -&gt; &lt;empty&gt;</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class LRETURN extends ReturnInstruction {
 

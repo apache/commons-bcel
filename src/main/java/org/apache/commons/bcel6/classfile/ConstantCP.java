@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.Constants;
  *                          InvokeDynamic constants.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     ConstantFieldref
  * @see     ConstantMethodref
  * @see     ConstantInterfaceMethodref

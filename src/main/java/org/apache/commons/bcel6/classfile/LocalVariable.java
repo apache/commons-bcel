@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.Constants;
  * scope, name, signature and index on the method's frame.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     LocalVariableTable
  */
 public final class LocalVariable implements Constants, Cloneable, Node, Serializable {

@@ -55,7 +55,6 @@ import org.apache.commons.bcel6.generic.TABLESWITCH;
  * Disassemble Java class object into the <a href="http://jasmin.sourceforge.net">
  * Jasmin</a> format.
  *
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
  */
 public class JasminVisitor extends org.apache.commons.bcel6.classfile.EmptyVisitor {

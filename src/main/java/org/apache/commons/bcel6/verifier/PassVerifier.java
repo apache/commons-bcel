@@ -42,7 +42,6 @@ import java.util.List;
  * pass you must use a new instance of a given PassVerifier.
  *
  * @version $Id$
- * @author Enver Haase
  * @see org.apache.commons.bcel6.verifier.Verifier
  * @see #verify()
  */

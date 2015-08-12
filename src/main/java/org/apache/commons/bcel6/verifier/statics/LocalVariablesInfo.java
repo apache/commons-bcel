@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.verifier.exc.LocalVariableInfoInconsistentExcept
  * a given method.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class LocalVariablesInfo{
 

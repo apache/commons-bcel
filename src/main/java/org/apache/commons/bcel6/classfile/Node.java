@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.classfile;
  * Denote class to have an accept method();
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface Node {
 

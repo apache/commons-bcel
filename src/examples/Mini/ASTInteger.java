@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.generic.PUSH;
 /**
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ASTInteger extends ASTExpr {
   private int value;

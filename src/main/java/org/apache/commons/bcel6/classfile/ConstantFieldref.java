@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.Constants;
  * This class represents a constant pool reference to a field.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class ConstantFieldref extends ConstantCP {
 

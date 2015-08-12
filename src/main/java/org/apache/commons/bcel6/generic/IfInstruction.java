@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.generic;
  * Super class for the IFxxx family of instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class IfInstruction extends BranchInstruction implements StackConsumer {
 

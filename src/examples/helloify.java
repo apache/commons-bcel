@@ -38,7 +38,6 @@ import org.apache.commons.bcel6.generic.PUSH;
  * Read class file(s) and patch all of its methods, so that they print
  * "hello" and their name and signature before doing anything else.
  *
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
  */
 public final class helloify implements Constants {

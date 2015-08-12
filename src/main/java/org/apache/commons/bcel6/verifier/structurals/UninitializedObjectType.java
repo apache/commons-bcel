@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.generic.ReferenceType;
  * more details.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class UninitializedObjectType extends ReferenceType implements Constants{
 

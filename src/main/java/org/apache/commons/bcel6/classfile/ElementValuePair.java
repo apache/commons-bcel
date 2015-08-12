@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.Constants;
  * an annotation's element value pair
  * 
  * @version $Id: ElementValuePair
- * @author <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  * @since 6.0
  */
 public class ElementValuePair

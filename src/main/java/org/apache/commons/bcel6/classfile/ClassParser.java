@@ -40,7 +40,6 @@ import org.apache.commons.bcel6.Constants;
  * further details about the structure of a bytecode file.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  */
 public final class ClassParser {
 

@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.generic.Type;
  * A graphical user interface application demonstrating JustIce.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class GraphicalVerifier {
 

@@ -107,7 +107,6 @@ import org.apache.commons.bcel6.verifier.exc.StaticCodeInstructionOperandConstra
  * method's documentation. 
  *
  * @version $Id$
- * @author Enver Haase
  * @see #do_verify()
  */
 public final class Pass3aVerifier extends PassVerifier{

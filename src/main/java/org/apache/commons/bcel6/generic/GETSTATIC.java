@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  * <PRE>Stack: ..., -&gt; ..., value.word1, value.word2</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class GETSTATIC extends FieldInstruction implements PushInstruction, ExceptionThrower {
 

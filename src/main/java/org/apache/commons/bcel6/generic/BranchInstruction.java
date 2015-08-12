@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  *
  * @see InstructionList
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class BranchInstruction extends Instruction implements InstructionTargeter {
 

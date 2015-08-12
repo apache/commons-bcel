@@ -24,7 +24,6 @@ import org.apache.commons.bcel6.Constants;
  * LDC or xCONST_n instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class PUSH implements CompoundInstruction, VariableLengthInstruction,
         InstructionConstants {

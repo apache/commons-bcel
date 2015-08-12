@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.verifier;
  * instances are created.
  *
  * @version $Id$
- * @author Enver Haase
  *
  * @see VerifierFactory#getVerifier(String)
  * @see VerifierFactory#getVerifiers()

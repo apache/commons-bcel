@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * type must be one of T_INT, T_SHORT, ...
  * 
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class NEWARRAY extends Instruction implements AllocationInstruction, ExceptionThrower,
         StackProducer {

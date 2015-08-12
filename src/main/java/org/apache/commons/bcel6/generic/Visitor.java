@@ -24,7 +24,6 @@ package org.apache.commons.bcel6.generic;
  * method.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface Visitor {
 

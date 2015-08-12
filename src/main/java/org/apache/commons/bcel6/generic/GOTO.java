@@ -24,7 +24,6 @@ import java.io.IOException;
  * GOTO - Branch always (to relative offset, not absolute address)
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class GOTO extends GotoInstruction implements VariableLengthInstruction {
 

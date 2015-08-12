@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.classfile;
  * such as ConstantLong, ConstantString, etc..
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Constant
  */
 public interface ConstantObject {

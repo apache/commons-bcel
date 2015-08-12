@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.Constants;
  * used in the StackMap entries.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     StackMapEntry
  * @see     StackMap
  * @see     Constants

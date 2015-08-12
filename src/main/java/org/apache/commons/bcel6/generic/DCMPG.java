@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * <PRE>Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt; ..., result</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class DCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 

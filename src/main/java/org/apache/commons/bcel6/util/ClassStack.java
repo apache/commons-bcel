@@ -25,7 +25,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * Utility class implementing a (typesafe) stack of JavaClass objects.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  * @see Stack
  */
 public class ClassStack implements java.io.Serializable {

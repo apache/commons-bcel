@@ -44,7 +44,6 @@ package org.apache.commons.bcel6.generic;
  * @see InstructionList
  * @see InstructionTargeter
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class TargetLostException extends Exception {
 

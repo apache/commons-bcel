@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * GOTO_W - Branch always (to relative offset, not absolute address)
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class GOTO_W extends GotoInstruction {
 

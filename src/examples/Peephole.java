@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.util.InstructionFinder;
 /**
  * Remove NOPs from given class
  *
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
  */
 public class Peephole {

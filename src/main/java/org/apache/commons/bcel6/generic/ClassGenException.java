@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * in the throws clause every time.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ClassGenException extends RuntimeException {
 

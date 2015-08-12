@@ -24,7 +24,6 @@ import java.io.IOException;
  * JSR - Jump to subroutine
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class JSR extends JsrInstruction implements VariableLengthInstruction {
 

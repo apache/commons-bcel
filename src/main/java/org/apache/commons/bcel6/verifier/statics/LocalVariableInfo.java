@@ -30,7 +30,6 @@ import org.apache.commons.bcel6.verifier.exc.LocalVariableInfoInconsistentExcept
  * often changes in course of byte code offsets.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class LocalVariableInfo{
 

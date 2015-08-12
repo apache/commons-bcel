@@ -54,7 +54,6 @@ import org.apache.commons.bcel6.generic.*;
  * is given the type Type.UNKNOWN.</p>
  *
  * @version $Id$
- * @author Enver Haase
  * @see #visitDSTORE(DSTORE o)
  * @see InstConstraintVisitor
  */

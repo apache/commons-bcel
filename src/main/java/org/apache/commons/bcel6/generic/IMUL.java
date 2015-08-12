@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * <PRE>Stack: ..., value1, value2 -&gt; result</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IMUL extends ArithmeticInstruction {
 

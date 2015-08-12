@@ -24,7 +24,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  * <PRE>Stack: ..., objectref -&gt; ..., objectref</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThrower, StackProducer,
         StackConsumer {

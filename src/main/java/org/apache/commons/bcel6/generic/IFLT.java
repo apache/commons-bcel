@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.generic;
  * <PRE>Stack: ..., value -&gt; ...</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IFLT extends IfInstruction {
 

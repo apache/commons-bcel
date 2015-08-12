@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.generic;
  * Denote family of instructions that allocates space in the heap.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface AllocationInstruction {
 }

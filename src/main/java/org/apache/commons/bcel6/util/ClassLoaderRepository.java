@@ -35,8 +35,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * @see org.apache.commons.bcel6.Repository
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
- * @author David Dixon-Peugh
  */
 public class ClassLoaderRepository implements Repository {
 

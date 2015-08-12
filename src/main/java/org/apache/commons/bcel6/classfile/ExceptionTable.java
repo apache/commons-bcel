@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.Constants;
  * with the other classes).
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Code
  */
 public final class ExceptionTable extends Attribute {

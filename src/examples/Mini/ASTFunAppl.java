@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.generic.Type;
 /**
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
   org.apache.commons.bcel6.Constants {

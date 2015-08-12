@@ -28,7 +28,6 @@ package org.apache.commons.bcel6.verifier.exc;
  * defined to be the verification happening in passes 2 and 3.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public abstract class VerificationException extends VerifierConstraintViolatedException{
     private static final long serialVersionUID = 8012776320318623652L;

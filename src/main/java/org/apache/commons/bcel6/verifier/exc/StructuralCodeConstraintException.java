@@ -28,7 +28,6 @@ package org.apache.commons.bcel6.verifier.exc;
  * The data flow analysis of pass 3 is called pass 3b in JustIce.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class StructuralCodeConstraintException extends CodeConstraintException{
     private static final long serialVersionUID = 5406842000007181420L;

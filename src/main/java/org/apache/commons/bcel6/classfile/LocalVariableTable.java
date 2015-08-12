@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.Constants;
  * method. This attribute is contained in the <em>Code</em> attribute.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Code
  * @see LocalVariable
  */

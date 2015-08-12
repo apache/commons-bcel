@@ -28,7 +28,6 @@ package org.apache.commons.bcel6.generic;
  *
  * @see Instruction
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface InstructionComparator {
 

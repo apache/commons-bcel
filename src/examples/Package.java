@@ -42,7 +42,6 @@ import org.apache.commons.bcel6.util.ClassPath;
  *
  * Use BCEL to extract class names and read/write classes
  *
- * @author First Hop Ltd / Torsten Rueger
  */
 public class Package {
 

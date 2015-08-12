@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * Abstract super class for all Java byte codes.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class Instruction implements Cloneable, Serializable {
 

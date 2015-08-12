@@ -41,7 +41,6 @@ import org.apache.commons.bcel6.classfile.Utility;
  * Convert found attributes into HTML file.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * 
  */
 final class AttributeHTML implements org.apache.commons.bcel6.Constants {

@@ -34,7 +34,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * @see INVOKEVIRTUAL
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class CPInstruction extends Instruction implements TypedInstruction,
         IndexedInstruction {

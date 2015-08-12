@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * RET, CPInstruction, etc.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface IndexedInstruction {
 

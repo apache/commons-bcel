@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
  * Elements of this stack are org.apache.commons.bcel6.generic.Type objects.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class OperandStack{
 

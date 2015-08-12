@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.generic;
  * <PRE>Stack: ..., word2, word1 -&gt; ...</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class POP2 extends StackInstruction implements PopInstruction {
 

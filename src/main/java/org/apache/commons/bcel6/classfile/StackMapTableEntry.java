@@ -30,7 +30,6 @@ import org.apache.commons.bcel6.Constants;
  * See CLDC specification ��?5.3.1.2
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     StackMap
  * @see     StackMapType
  * @since 6.0

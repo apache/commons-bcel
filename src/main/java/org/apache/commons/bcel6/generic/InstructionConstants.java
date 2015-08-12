@@ -34,7 +34,6 @@ import org.apache.commons.bcel6.Constants;
  * it's possible to write il.append(Instruction.ICONST_0);
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface InstructionConstants {
 

@@ -26,7 +26,6 @@ package org.apache.commons.bcel6.generic;
  * @see LocalVariableGen
  * @see CodeExceptionGen
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface InstructionTargeter {
 

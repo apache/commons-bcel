@@ -40,7 +40,6 @@ import org.apache.commons.bcel6.util.BCELComparator;
  *
  * @see JavaClass
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ClassGen extends AccessFlags implements Cloneable {
 

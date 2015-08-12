@@ -47,7 +47,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * the GraphicalVerfifier.
  *
  * @version $Id$
- * @author Enver Haase
  * @see GraphicalVerifier
  */
 public class VerifierAppFrame extends JFrame {

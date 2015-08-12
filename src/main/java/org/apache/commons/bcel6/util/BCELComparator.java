@@ -20,7 +20,6 @@ package org.apache.commons.bcel6.util;
 /**
  * Used for BCEL comparison strategy
  * 
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
  * @since 5.2
  */

@@ -30,7 +30,6 @@ import javax.swing.event.ListDataListener;
  * a VerifierFactoryObserver.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class VerifierFactoryListModel implements org.apache.commons.bcel6.verifier.VerifierFactoryObserver,
         javax.swing.ListModel {

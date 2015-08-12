@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.generic;
  * Denotes an instruction to perform an unconditional branch, i.e., GOTO, JSR.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
 
  * @see GOTO
  * @see JSR

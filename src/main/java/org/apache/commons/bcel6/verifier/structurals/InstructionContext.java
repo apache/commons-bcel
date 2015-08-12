@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.generic.InstructionHandle;
  * such.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public interface InstructionContext{
 

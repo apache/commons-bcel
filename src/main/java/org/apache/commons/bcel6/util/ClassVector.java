@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * objects. Contains the most important methods of a Vector.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  * 
  * @deprecated as of 5.1.1 - 7/17/2005
  */

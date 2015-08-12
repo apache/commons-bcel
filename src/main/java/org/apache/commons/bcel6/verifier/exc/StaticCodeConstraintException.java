@@ -26,7 +26,6 @@ package org.apache.commons.bcel6.verifier.exc;
  * is called pass 3a in JustIce.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public abstract class StaticCodeConstraintException extends CodeConstraintException{
     private static final long serialVersionUID = 3858523065007725128L;

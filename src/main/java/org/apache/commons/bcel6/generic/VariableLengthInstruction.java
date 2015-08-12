@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * GOTO, JSR, LOOKUPSWITCH and TABLESWITCH.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
 
  * @see GOTO
  * @see JSR

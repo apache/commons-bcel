@@ -50,7 +50,6 @@ import org.apache.commons.bcel6.classfile.Utility;
  * the Code frame.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  */
 public class Class2HTML implements Constants {
 

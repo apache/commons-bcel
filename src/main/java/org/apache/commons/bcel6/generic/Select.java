@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * <p>We use our super's <code>target</code> property as the default target.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see LOOKUPSWITCH
  * @see TABLESWITCH
  * @see InstructionList

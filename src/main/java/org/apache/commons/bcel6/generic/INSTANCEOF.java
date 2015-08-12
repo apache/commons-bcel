@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * <PRE>Stack: ..., objectref -&gt; ..., result</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThrower,
         StackProducer, StackConsumer {

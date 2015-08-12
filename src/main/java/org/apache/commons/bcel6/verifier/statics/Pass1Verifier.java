@@ -34,7 +34,6 @@ import org.apache.commons.bcel6.verifier.exc.Utility;
  * documentation.
  *
  * @version $Id$
- * @author Enver Haase
  * @see #do_verify()
  */
 public final class Pass1Verifier extends PassVerifier{

@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * (this excludes DUP_X1, e.g.)
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface StackProducer {
 

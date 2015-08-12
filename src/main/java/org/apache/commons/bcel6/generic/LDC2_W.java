@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.generic;
  * <PRE>Stack: ... -&gt; ..., item.word1, item.word2</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class LDC2_W extends CPInstruction implements PushInstruction {
 

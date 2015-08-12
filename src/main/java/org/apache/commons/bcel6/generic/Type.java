@@ -31,7 +31,6 @@ import org.apache.commons.bcel6.verifier.structurals.OperandStack;
  * such as int, object types like String and array types, e.g. int[]
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class Type implements java.io.Serializable {
 

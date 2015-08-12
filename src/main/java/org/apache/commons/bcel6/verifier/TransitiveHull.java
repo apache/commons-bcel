@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * more notably, memory.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class TransitiveHull implements VerifierFactoryObserver {
 

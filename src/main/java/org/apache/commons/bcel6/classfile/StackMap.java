@@ -33,7 +33,6 @@ import org.apache.commons.bcel6.Constants;
  * �5.3.1.2
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Code
  * @see     StackMapEntry
  * @see     StackMapType

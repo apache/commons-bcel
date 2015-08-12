@@ -75,7 +75,6 @@ import org.apache.commons.bcel6.classfile.Method;
  * dependents.  Do not analyze classes beginning with "java.", "javax.", or "sun."
  * </p>
  *
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>,
  *         <a href="mailto:twheeler@objectspace.com">Thomas Wheeler</A>
  * @version $Id$
  */

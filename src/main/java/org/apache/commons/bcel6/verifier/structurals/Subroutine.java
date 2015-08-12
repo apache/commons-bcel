@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.generic.InstructionHandle;
  * consistent fashion, too.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public interface Subroutine{
     /**

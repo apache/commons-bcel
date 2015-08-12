@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  * <PRE>Stack: ..., objectref -&gt; ..., value.word1, value.word2</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class GETFIELD extends FieldInstruction implements ExceptionThrower, StackConsumer,
         StackProducer {

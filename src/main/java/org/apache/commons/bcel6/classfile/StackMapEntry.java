@@ -28,7 +28,6 @@ import java.io.Serializable;
  * See CLDC specification �5.3.1.2
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     StackMap
  * @see     StackMapType
  */

@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * <PRE>Stack: ... -&gt; ..., null</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ACONST_NULL extends Instruction implements PushInstruction, TypedInstruction {
 

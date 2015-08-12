@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.classfile.LocalVariable;
  * pool as parameters.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     LocalVariable
  * @see     MethodGen
  */

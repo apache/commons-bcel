@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * such as ISTORE, POP, PUTSTATIC.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see ISTORE
  * @see POP
  */

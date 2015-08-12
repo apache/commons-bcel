@@ -25,7 +25,6 @@ import java.io.IOException;
  * base class for annotations
  * 
  * @version $Id: Annotations
- * @author <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  * @since 6.0
  */
 public abstract class Annotations extends Attribute {

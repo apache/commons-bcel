@@ -80,7 +80,6 @@ import org.apache.commons.bcel6.verifier.exc.LocalVariableInfoInconsistentExcept
  * method's documentation.
  *
  * @version $Id$
- * @author Enver Haase
  * @see #do_verify()
  */
 public final class Pass2Verifier extends PassVerifier implements Constants{

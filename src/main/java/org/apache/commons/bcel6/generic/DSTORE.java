@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * <pre>Stack: ..., value.word1, value.word2 -&gt; ... </PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class DSTORE extends StoreInstruction {
 

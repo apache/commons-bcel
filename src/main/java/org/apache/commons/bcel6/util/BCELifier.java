@@ -42,7 +42,6 @@ import org.apache.commons.bcel6.generic.Type;
  * but tries to mimic hand-written code as close as possible.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  */
 public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
 

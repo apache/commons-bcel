@@ -24,7 +24,6 @@ package org.apache.commons.bcel6.verifier.exc;
  * in the Java Virtual Machine specification, 2nd edition.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class ClassConstraintException extends VerificationException{
     private static final long serialVersionUID = -4745598983569128296L;

@@ -24,7 +24,6 @@ import org.apache.commons.bcel6.classfile.LineNumber;
  * a line number corresponding to the source code line.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     LineNumber
  * @see     MethodGen
  */

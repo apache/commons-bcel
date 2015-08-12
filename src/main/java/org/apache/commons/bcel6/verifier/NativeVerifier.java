@@ -25,7 +25,6 @@ package org.apache.commons.bcel6.verifier;
  * and JustIce.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public abstract class NativeVerifier {
 

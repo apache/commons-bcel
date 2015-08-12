@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.verifier.exc;
  * this is due to an INTERNAL ERROR of BCEL's class file verifier &quot;JustIce&quot;.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public final class AssertionViolatedException extends RuntimeException{
     private static final long serialVersionUID = -129822266349567409L;

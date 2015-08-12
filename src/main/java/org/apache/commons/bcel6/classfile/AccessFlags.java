@@ -24,7 +24,6 @@ import org.apache.commons.bcel6.Constants;
  * I.e. classes, fields, and methods.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class AccessFlags implements java.io.Serializable {
 

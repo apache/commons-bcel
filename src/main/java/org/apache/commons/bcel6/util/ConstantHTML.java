@@ -36,7 +36,6 @@ import org.apache.commons.bcel6.classfile.Utility;
  * Convert constant pool into HTML file.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * 
  */
 final class ConstantHTML implements org.apache.commons.bcel6.Constants {

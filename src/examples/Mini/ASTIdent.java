@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.generic.PUSH;
 /**
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ASTIdent extends ASTExpr implements org.apache.commons.bcel6.Constants {
   private String   name;

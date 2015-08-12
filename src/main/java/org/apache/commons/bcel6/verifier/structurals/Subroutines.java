@@ -62,7 +62,6 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
      * TODO: refer to the paper.
      *
      * @version $Id$
-     * @author Enver Haase
      * @see #getTopLevel()
      */
 public class Subroutines{

@@ -24,7 +24,6 @@ package org.apache.commons.bcel6.verifier.structurals;
  * a local variable array and an operand stack.
  *
  * @version $Id$
- * @author Enver Haase
  */
 
 public class Frame{

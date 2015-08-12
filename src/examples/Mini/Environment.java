@@ -30,7 +30,6 @@ import java.util.Vector;
  * the maximum number of storable items is `SLOTS' * `SIZE'.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class Environment implements Cloneable {
   private static final int SIZE  = 127; // Prime number large enough for most cases

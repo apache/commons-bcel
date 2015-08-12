@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  *
  * Usage: patch <oldstring> <newstring> files
  *
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
  */
 public class patchclass {

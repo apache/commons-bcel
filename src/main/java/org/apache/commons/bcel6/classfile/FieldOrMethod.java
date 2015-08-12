@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.Constants;
  * Abstract super class for fields and methods.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
 

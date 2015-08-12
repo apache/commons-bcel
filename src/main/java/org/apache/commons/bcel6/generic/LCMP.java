@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.generic;
  *        
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class LCMP extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 

@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.verifier;
  * after verifying.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class VerificationResult {
 

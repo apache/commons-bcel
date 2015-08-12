@@ -38,7 +38,6 @@ import org.apache.commons.bcel6.classfile.Utility;
  * InstructionList.elements().
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see Instruction
  * @see BranchHandle
  * @see InstructionList 

@@ -24,7 +24,6 @@ import org.apache.commons.bcel6.Constants;
  *
  * see vmspec2 �3.3.3
  * @version $Id$
- * @author Enver Haase
  */
 public class ReturnaddressType extends Type {
 

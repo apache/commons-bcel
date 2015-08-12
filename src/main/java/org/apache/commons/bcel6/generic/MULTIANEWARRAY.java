@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * <PRE>Stack: ..., count1, [count2, ...] -&gt; ..., arrayref</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class MULTIANEWARRAY extends CPInstruction implements LoadClass, AllocationInstruction,
         ExceptionThrower {

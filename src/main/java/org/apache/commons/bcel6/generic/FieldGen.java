@@ -38,7 +38,6 @@ import org.apache.commons.bcel6.util.BCELComparator;
  * course be compatible with to the declared type).
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see Field
  */
 public class FieldGen extends FieldGenOrMethodGen {

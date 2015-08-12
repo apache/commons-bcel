@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.Constants;
  * and represents a reference to a (external) class.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Constant
  */
 public final class ConstantClass extends Constant implements ConstantObject {

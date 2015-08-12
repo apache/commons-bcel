@@ -36,7 +36,6 @@ import org.apache.commons.bcel6.Constants;
  * contains information about the local variables.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Attribute
  * @see     CodeException
  * @see     LineNumberTable

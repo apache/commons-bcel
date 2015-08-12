@@ -21,7 +21,6 @@ package org.apache.commons.bcel6;
  * Constants for the project, mostly defined in the JVM specification.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface Constants {
 

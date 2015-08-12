@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
  * simulation.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class LocalVariables{
     /** The Type[] containing the local variable slots. */

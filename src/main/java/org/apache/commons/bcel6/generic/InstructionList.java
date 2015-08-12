@@ -46,7 +46,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * href="#getByteCode()">getByteCode</a>.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Instruction
  * @see     InstructionHandle
  * @see BranchHandle

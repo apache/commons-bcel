@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.generic;
  * IMPDEP2 - Implementation dependent
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IMPDEP2 extends Instruction {
 

@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * <PRE>Stack: ... -&gt; ..., value</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class SIPUSH extends Instruction implements ConstantPushInstruction {
 

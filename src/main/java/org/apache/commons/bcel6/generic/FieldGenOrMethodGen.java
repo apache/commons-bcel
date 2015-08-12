@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.classfile.Attribute;
  * some methods in common!
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAndTyped, Cloneable {
 

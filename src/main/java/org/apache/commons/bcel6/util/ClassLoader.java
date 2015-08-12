@@ -48,7 +48,6 @@ import org.apache.commons.bcel6.classfile.Utility;
  * "javax."</p>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see JavaWrapper
  * @see ClassPath
  */

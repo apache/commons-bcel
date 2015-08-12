@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.classfile;
  * by calling the `accept' method which all classes have.
  * 
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface Visitor
 {

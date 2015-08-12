@@ -24,7 +24,6 @@ package org.apache.commons.bcel6.verifier.structurals;
  * and java.io.Serializable and they extend java.lang.Object.
  *
  * @version $Id$
- * @author Enver Haase
  */ 
 public class GenericArray extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable{
 

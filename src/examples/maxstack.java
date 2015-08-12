@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.generic.MethodGen;
  * Read class file(s) and examine all of its methods, determining the
  * maximum stack depth used by analyzing control flow.
  *
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
  */
 public final class maxstack {

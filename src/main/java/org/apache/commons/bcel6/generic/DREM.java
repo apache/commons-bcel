@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.generic;
  *        ..., result.word1, result.word2
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class DREM extends ArithmeticInstruction {
 

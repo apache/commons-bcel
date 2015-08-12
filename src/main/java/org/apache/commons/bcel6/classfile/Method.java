@@ -30,7 +30,6 @@ import org.apache.commons.bcel6.util.BCELComparator;
  * A method has access flags, a name, a signature and a number of attributes.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class Method extends FieldOrMethod {
 

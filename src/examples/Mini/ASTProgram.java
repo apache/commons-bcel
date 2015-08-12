@@ -43,7 +43,6 @@ import org.apache.commons.bcel6.generic.Type;
  * Root node of everything, direct children are nodes of type FunDecl
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ASTProgram extends SimpleNode
 implements MiniParserConstants, MiniParserTreeConstants, org.apache.commons.bcel6.Constants {

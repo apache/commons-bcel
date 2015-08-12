@@ -27,7 +27,6 @@ package org.apache.commons.bcel6.verifier.exc;
  * throw.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public abstract class VerifierConstraintViolatedException extends RuntimeException{
     // /** The name of the offending class that did not pass the verifier. */

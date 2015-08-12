@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.generic.ObjectType;
  * the handler starts off (represented by an InstructionContext).
  * 
  * @version $Id$
- * @author Enver Haase
  */
 public class ExceptionHandler{
     /** The type of the exception to catch. NULL means ANY. */

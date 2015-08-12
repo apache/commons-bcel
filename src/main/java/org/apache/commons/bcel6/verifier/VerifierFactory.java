@@ -29,7 +29,6 @@ import java.util.Vector;
  * class name) there is exactly one Verifier.
  *
  * @version $Id$
- * @author Enver Haase
  * @see org.apache.commons.bcel6.verifier.Verifier
  */
 public class VerifierFactory {

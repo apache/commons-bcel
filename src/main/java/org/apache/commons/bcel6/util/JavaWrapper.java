@@ -33,7 +33,6 @@ import java.lang.reflect.Modifier;
  * <pre>java org.apache.commons.bcel6.util.JavaWrapper -Dbcel.classloader=foo.MyLoader &lt;real.class.name&gt; [arguments]</pre>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see ClassLoader
  */
 public class JavaWrapper {

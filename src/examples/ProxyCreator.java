@@ -46,7 +46,6 @@ import org.apache.commons.bcel6.generic.Type;
  * comparable to the mechanism provided via
  * {@code java.lang.reflect.Proxy}, but much more flexible.
  *
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
  * @see org.apache.commons.bcel6.util.JavaWrapper
  * @see org.apache.commons.bcel6.util.ClassLoader

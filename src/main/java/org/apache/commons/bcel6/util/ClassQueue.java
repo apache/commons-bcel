@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * objects.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  */
 public class ClassQueue implements java.io.Serializable {
 

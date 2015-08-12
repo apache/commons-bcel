@@ -30,7 +30,6 @@ import org.apache.commons.bcel6.Constants;
  * represents one parameter annotation in the parameter annotation table
  *
  * @version $Id: ParameterAnnotationEntry
- * @author  <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  * @since 6.0
  */
 public class ParameterAnnotationEntry implements Node, Constants {

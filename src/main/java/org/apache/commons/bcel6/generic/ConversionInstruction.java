@@ -23,7 +23,6 @@ import org.apache.commons.bcel6.Constants;
  * Super class for the x2y family of instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class ConversionInstruction extends Instruction implements TypedInstruction,
         StackProducer, StackConsumer {

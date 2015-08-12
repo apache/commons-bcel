@@ -31,7 +31,6 @@ import org.apache.commons.bcel6.generic.Type;
 /**
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ASTLetExpr extends ASTExpr implements org.apache.commons.bcel6.Constants {
   private ASTIdent[]  idents;

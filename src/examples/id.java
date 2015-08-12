@@ -38,7 +38,6 @@ import org.apache.commons.bcel6.generic.MethodGen;
  * % diff foo bar | more
  * <pre>
  *
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @version $Id$
  */
 public class id {

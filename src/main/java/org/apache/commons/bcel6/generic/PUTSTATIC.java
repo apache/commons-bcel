@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  * <PRE>Stack: ..., value.word1, value.word2 -&gt; ...</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, PopInstruction {
 

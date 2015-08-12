@@ -30,7 +30,6 @@ import org.apache.commons.bcel6.Constants;
  * particular exception handler is active.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Code
  */
 public final class CodeException implements Cloneable, Constants, Node, Serializable {

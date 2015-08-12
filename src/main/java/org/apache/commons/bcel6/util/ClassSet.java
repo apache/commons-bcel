@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * used for comparison.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A> 
  * @see ClassStack
  */
 public class ClassSet implements java.io.Serializable {

@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.generic;
  * variable, e.g. ILOAD.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class LoadInstruction extends LocalVariableInstruction implements PushInstruction {
 

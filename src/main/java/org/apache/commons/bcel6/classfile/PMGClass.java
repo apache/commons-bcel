@@ -28,7 +28,6 @@ import org.apache.commons.bcel6.Constants;
  * to a PMG attribute.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Attribute
  */
 public final class PMGClass extends Attribute {

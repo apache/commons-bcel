@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * JSR_W - Jump to subroutine
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class JSR_W extends JsrInstruction {
 

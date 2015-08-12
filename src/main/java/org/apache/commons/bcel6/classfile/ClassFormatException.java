@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.classfile;
  * class file.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ClassFormatException extends RuntimeException {
 

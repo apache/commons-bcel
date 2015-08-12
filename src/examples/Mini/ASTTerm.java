@@ -23,7 +23,6 @@ package Mini;
 /**
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ASTTerm extends ASTExpr {
   // Generated methods

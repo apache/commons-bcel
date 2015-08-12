@@ -28,7 +28,6 @@ import java.io.Serializable;
  * is used for debugging purposes.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     LineNumberTable
  */
 public final class LineNumber implements Cloneable, Node, Serializable {

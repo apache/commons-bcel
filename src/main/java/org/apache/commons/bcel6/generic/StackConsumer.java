@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.generic;
  * Denote an instruction that may consume a value from the stack.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public interface StackConsumer {
 

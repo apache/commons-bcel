@@ -54,8 +54,6 @@ import org.apache.commons.bcel6.util.BCELComparator;
  * The resulting method object can be obtained via the `getMethod()' method.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
- * @author  <A HREF="http://www.vmeng.com/beard">Patrick C. Beard</A> [setMaxStack()]
  * @see     InstructionList
  * @see     Method
  */

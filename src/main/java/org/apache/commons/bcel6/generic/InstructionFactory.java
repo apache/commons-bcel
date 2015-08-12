@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.Constants;
  * add your own create methods.
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see Constants
  */
 public class InstructionFactory implements InstructionConstants, java.io.Serializable {

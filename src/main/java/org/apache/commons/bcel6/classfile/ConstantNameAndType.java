@@ -30,7 +30,6 @@ import org.apache.commons.bcel6.Constants;
  * of a field or method.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Constant
  */
 public final class ConstantNameAndType extends Constant {

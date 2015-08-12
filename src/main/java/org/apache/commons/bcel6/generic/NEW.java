@@ -24,7 +24,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  * <PRE>Stack: ... -&gt; ..., objectref</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class NEW extends CPInstruction implements LoadClass, AllocationInstruction,
         ExceptionThrower, StackProducer {

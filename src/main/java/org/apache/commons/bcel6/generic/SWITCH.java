@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.generic;
  * sorted with no gaps between the numbers.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class SWITCH implements CompoundInstruction {
 

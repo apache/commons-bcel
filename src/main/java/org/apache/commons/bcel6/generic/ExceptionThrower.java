@@ -35,7 +35,6 @@ package org.apache.commons.bcel6.generic;
  * and "Error" objects.
  *
  * @version $Id$
- * @author  Enver Haase
  */
 public interface ExceptionThrower {
 

@@ -25,7 +25,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * Super class for object and array types.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class ReferenceType extends Type {
 

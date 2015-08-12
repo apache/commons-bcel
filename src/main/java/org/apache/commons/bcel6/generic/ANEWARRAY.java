@@ -24,7 +24,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  * <PRE>Stack: ..., count -&gt; ..., arrayref</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationInstruction,
         ExceptionThrower, StackConsumer, StackProducer {

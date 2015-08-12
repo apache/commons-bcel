@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * IINC - Increment local variable by constant
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IINC extends LocalVariableInstruction {
 

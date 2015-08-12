@@ -37,7 +37,6 @@ import org.apache.commons.bcel6.Constants;
  * @version $Id$
  * @see org.apache.commons.bcel6.classfile.Attribute
  * @see org.apache.commons.bcel6.classfile.UnknownAttributeReader
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class Unknown extends Attribute {
 

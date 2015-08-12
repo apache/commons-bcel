@@ -25,7 +25,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * Denotes reference such as java.lang.String.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ObjectType extends ReferenceType {
 

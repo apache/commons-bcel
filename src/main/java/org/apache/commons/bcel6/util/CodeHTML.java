@@ -40,7 +40,6 @@ import org.apache.commons.bcel6.classfile.Utility;
  * Convert code into HTML file.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * 
  */
 final class CodeHTML implements org.apache.commons.bcel6.Constants {

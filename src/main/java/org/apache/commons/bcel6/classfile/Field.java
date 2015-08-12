@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.util.BCELComparator;
  * for a variable in the class. See JVM specification for details.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class Field extends FieldOrMethod {
 

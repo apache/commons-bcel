@@ -30,7 +30,6 @@ import org.apache.commons.bcel6.Constants;
  * of the inner class.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see InnerClasses
  */
 public final class InnerClass implements Cloneable, Node, Serializable {

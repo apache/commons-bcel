@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.Constants;
 /**
  * Represents the default value of a annotation for a method info
  *
- * @author <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  * @version $Id: AnnotationDefault 1 2005-02-13 03:15:08Z dbrosius $
  * @since 6.0
  */

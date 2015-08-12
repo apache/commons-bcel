@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.generic;
  * Supplies empty method bodies to be overridden by subclasses.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class EmptyVisitor implements Visitor {
 

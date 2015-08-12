@@ -33,7 +33,6 @@ import org.apache.commons.bcel6.classfile.Utility;
  * Convert methods and fields into HTML file.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * 
  */
 final class MethodHTML implements org.apache.commons.bcel6.Constants {

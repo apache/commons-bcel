@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.generic;
  * <PRE>Stack: ..., value1, value2 -&gt; ...</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class IF_ACMPNE extends IfInstruction {
 

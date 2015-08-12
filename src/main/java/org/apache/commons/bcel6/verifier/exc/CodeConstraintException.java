@@ -23,7 +23,6 @@ package org.apache.commons.bcel6.verifier.exc;
  * "JustIce" involves verification that is usually delayed to pass 4.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public abstract class CodeConstraintException extends VerificationException{
     private static final long serialVersionUID = -7265388214714996640L;

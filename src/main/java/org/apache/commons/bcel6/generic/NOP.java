@@ -21,7 +21,6 @@ package org.apache.commons.bcel6.generic;
  * NOP - Do nothing
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class NOP extends Instruction {
 

@@ -23,7 +23,6 @@ import java.io.IOException;
 
 /**
  * @version $Id: ElementValue
- * @author <A HREF="mailto:dbrosius@qis.net">D. Brosius</A>
  * @since 6.0
  */
 public abstract class ElementValue

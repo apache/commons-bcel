@@ -21,7 +21,6 @@ package org.apache.commons.bcel6;
  * Exception constants.
  *
  * @version $Id$
- * @author  E. Haase
  */
 public interface ExceptionConstants {
 

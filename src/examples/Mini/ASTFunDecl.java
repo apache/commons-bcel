@@ -46,7 +46,6 @@ import org.apache.commons.bcel6.util.InstructionFinder;
 /**
  *
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class ASTFunDecl extends SimpleNode
 implements MiniParserTreeConstants, org.apache.commons.bcel6.Constants {

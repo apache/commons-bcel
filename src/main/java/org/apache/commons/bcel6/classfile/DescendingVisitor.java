@@ -25,7 +25,6 @@ import java.util.Stack;
  * traversal strategy, other classes can make use of it.
  * 
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class DescendingVisitor implements Visitor
 {

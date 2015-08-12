@@ -26,7 +26,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  * <PRE>Stack: ..., [arg1, [arg2 ...]] -&gt; ...</PRE>
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class INVOKESTATIC extends InvokeInstruction {
 

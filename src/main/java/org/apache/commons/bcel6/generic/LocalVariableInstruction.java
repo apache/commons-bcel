@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * Abstract super class for instructions dealing with local variables.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class LocalVariableInstruction extends Instruction implements TypedInstruction,
         IndexedInstruction {

@@ -23,7 +23,6 @@ import org.apache.commons.bcel6.Constants;
  * Super class for the family of arithmetic instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class ArithmeticInstruction extends Instruction implements TypedInstruction,
         StackProducer, StackConsumer {

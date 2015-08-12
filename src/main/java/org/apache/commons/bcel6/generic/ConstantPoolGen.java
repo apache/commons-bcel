@@ -48,7 +48,6 @@ import org.apache.commons.bcel6.classfile.ConstantUtf8;
  * JVM and that Double and Long constants need two slots.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see Constant
  */
 public class ConstantPoolGen implements java.io.Serializable {

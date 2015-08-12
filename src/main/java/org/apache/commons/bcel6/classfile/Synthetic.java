@@ -33,7 +33,6 @@ import org.apache.commons.bcel6.Constants;
  * <em>Attribute.readAttribute()</em> method.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Attribute
  */
 public final class Synthetic extends Attribute {

@@ -45,7 +45,6 @@ import org.apache.commons.bcel6.util.SyntheticRepository;
 
  * @version $Id$
  * @see org.apache.commons.bcel6.generic.ClassGen
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
 

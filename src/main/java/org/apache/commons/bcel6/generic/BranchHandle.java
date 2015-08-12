@@ -27,7 +27,6 @@ package org.apache.commons.bcel6.generic;
  * @see Instruction
  * @see InstructionList
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public final class BranchHandle extends InstructionHandle {
 

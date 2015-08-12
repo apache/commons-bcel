@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.Constants;
  * and represents a reference to a Double object.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see     Constant
  */
 public final class ConstantDouble extends Constant implements ConstantObject {

@@ -36,7 +36,6 @@ import org.apache.commons.bcel6.Constants;
  * attribute stands for non-standard-attributes.
  * 
  * @version $Id$
- * @author <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  * @see ConstantValue
  * @see SourceFile
  * @see Code

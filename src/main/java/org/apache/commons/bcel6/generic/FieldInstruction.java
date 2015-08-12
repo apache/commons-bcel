@@ -23,7 +23,6 @@ import org.apache.commons.bcel6.classfile.ConstantPool;
  * Super class for the GET/PUTxxx family of instructions.
  *
  * @version $Id$
- * @author  <A HREF="mailto:m.dahm@gmx.de">M. Dahm</A>
  */
 public abstract class FieldInstruction extends FieldOrMethod {
 

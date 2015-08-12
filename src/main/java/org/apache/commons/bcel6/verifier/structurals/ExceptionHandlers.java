@@ -31,7 +31,6 @@ import org.apache.commons.bcel6.generic.MethodGen;
  * This class allows easy access to ExceptionHandler objects.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class ExceptionHandlers{
     /**

@@ -29,7 +29,6 @@ package org.apache.commons.bcel6.verifier.exc;
  * Second Edition.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class StaticCodeInstructionOperandConstraintException extends StaticCodeConstraintException{
     private static final long serialVersionUID = 4780787099381933487L;

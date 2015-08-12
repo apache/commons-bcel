@@ -22,7 +22,6 @@ package org.apache.commons.bcel6.verifier.exc;
  * when the verification of a method is requested that does not exist.
  *
  * @version $Id$
- * @author Enver Haase
  */
 public class InvalidMethodException extends RuntimeException{
 
