@@ -226,8 +226,8 @@ public abstract class ReferenceType extends Type {
             return Type.OBJECT;
             // TODO: Is there a proof of OBJECT being the direct ancestor of every ArrayType?
         }
-        if (((this instanceof ObjectType) && ((ObjectType) this).referencesInterface())
-                || ((t instanceof ObjectType) && ((ObjectType) t).referencesInterface())) {
+        if (((this instanceof ObjectType) && ((ObjectType) this).referencesInterfaceExact())
+                || ((t instanceof ObjectType) && ((ObjectType) t).referencesInterfaceExact())) {
             return Type.OBJECT;
             // TODO: The above line is correct comparing to the vmspec2. But one could
             // make class file verification a bit stronger here by using the notion of

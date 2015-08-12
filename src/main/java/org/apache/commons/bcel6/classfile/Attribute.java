@@ -195,10 +195,6 @@ public abstract class Attribute implements Cloneable, Node, Serializable
                 {
                     return ((UnknownAttributeReader) r).createAttribute(name_index, length, file, constant_pool);
                 }
-                else if (r instanceof  AttributeReader && file instanceof DataInputStream)
-                {
-                    return ((AttributeReader) r).createAttribute(name_index, length, (DataInputStream) file, constant_pool);
-                }
                 return new Unknown(name_index, length, file, constant_pool);
             case Constants.ATTR_CONSTANT_VALUE:
                 return new ConstantValue(name_index, length, file, constant_pool);
