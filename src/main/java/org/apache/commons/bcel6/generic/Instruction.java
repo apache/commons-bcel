@@ -114,7 +114,7 @@ public abstract class Instruction implements Cloneable, Serializable {
     public Instruction copy() {
         Instruction i = null;
         // "Constant" instruction, no need to duplicate
-        if (InstructionConstants.INSTRUCTIONS[this.getOpcode()] != null) {
+        if (InstructionConstants.getInstruction(this.getOpcode()) != null) {
             i = this;
         } else {
             try {
@@ -153,8 +153,9 @@ public abstract class Instruction implements Cloneable, Serializable {
             wide = true;
             opcode = (short) bytes.readUnsignedByte();
         }
-        if (InstructionConstants.INSTRUCTIONS[opcode] != null) {
-            return InstructionConstants.INSTRUCTIONS[opcode]; // Used predefined immutable object, if available
+        final Instruction instruction = InstructionConstants.getInstruction(opcode);
+        if (instruction != null) {
+            return instruction; // Used predefined immutable object, if available
         }
 
         switch (opcode) {

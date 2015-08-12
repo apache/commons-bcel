@@ -165,7 +165,7 @@ public class InstructionConstants {
     /** Get object via its opcode, for immutable instructions like
      * branch instructions entries are set to null.
      */
-    public static final Instruction[] INSTRUCTIONS = new Instruction[256];
+    private static final Instruction[] INSTRUCTIONS = new Instruction[256];
 
     static {
             INSTRUCTIONS[Constants.NOP] = NOP;
@@ -275,5 +275,14 @@ public class InstructionConstants {
             INSTRUCTIONS[Constants.ATHROW] = ATHROW;
             INSTRUCTIONS[Constants.MONITORENTER] = MONITORENTER;
             INSTRUCTIONS[Constants.MONITOREXIT] = MONITOREXIT;
+    }
+
+    /**
+     * Gets the Instruction.
+     * @param index the index, e.g. {@link Constants#RETURN}
+     * @return the entry from the private INSTRUCTIONS table
+     */
+    public static Instruction getInstruction(int index) {
+        return INSTRUCTIONS[index];
     }
 }

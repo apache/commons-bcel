@@ -108,7 +108,7 @@ class BCELFactory extends EmptyVisitor {
 
     private boolean visitInstruction( Instruction i ) {
         short opcode = i.getOpcode();
-        if ((InstructionConstants.INSTRUCTIONS[opcode] != null)
+        if ((InstructionConstants.getInstruction(opcode) != null)
                 && !(i instanceof ConstantPushInstruction) && !(i instanceof ReturnInstruction)) { // Handled below
             _out.println("il.append(InstructionConstants."
                     + i.getName().toUpperCase(Locale.ENGLISH) + ");");
