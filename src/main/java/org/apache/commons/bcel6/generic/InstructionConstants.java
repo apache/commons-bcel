@@ -35,7 +35,7 @@ import org.apache.commons.bcel6.Constants;
  *
  * @version $Id$
  */
-public interface InstructionConstants {
+public class InstructionConstants {
 
     /** Predefined instruction objects
      */

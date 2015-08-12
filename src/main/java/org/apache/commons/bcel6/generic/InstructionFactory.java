@@ -28,7 +28,7 @@ import org.apache.commons.bcel6.Constants;
  * @version $Id$
  * @see Constants
  */
-public class InstructionFactory implements InstructionConstants, java.io.Serializable {
+public class InstructionFactory implements java.io.Serializable {
 
     private static final long serialVersionUID = -1210011499635580258L;
 
@@ -287,21 +287,21 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
         switch (type.getType()) {
             case Constants.T_ARRAY:
             case Constants.T_OBJECT:
-                return ARETURN;
+                return InstructionConstants.ARETURN;
             case Constants.T_INT:
             case Constants.T_SHORT:
             case Constants.T_BOOLEAN:
             case Constants.T_CHAR:
             case Constants.T_BYTE:
-                return IRETURN;
+                return InstructionConstants.IRETURN;
             case Constants.T_FLOAT:
-                return FRETURN;
+                return InstructionConstants.FRETURN;
             case Constants.T_DOUBLE:
-                return DRETURN;
+                return InstructionConstants.DRETURN;
             case Constants.T_LONG:
-                return LRETURN;
+                return InstructionConstants.LRETURN;
             case Constants.T_VOID:
-                return RETURN;
+                return InstructionConstants.RETURN;
             default:
                 throw new RuntimeException("Invalid type: " + type);
         }
@@ -311,25 +311,25 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     private static ArithmeticInstruction createBinaryIntOp( char first, String op ) {
         switch (first) {
             case '-':
-                return ISUB;
+                return InstructionConstants.ISUB;
             case '+':
-                return IADD;
+                return InstructionConstants.IADD;
             case '%':
-                return IREM;
+                return InstructionConstants.IREM;
             case '*':
-                return IMUL;
+                return InstructionConstants.IMUL;
             case '/':
-                return IDIV;
+                return InstructionConstants.IDIV;
             case '&':
-                return IAND;
+                return InstructionConstants.IAND;
             case '|':
-                return IOR;
+                return InstructionConstants.IOR;
             case '^':
-                return IXOR;
+                return InstructionConstants.IXOR;
             case '<':
-                return ISHL;
+                return InstructionConstants.ISHL;
             case '>':
-                return op.equals(">>>") ? IUSHR : ISHR;
+                return op.equals(">>>") ? InstructionConstants.IUSHR : InstructionConstants.ISHR;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -339,25 +339,25 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     private static ArithmeticInstruction createBinaryLongOp( char first, String op ) {
         switch (first) {
             case '-':
-                return LSUB;
+                return InstructionConstants.LSUB;
             case '+':
-                return LADD;
+                return InstructionConstants.LADD;
             case '%':
-                return LREM;
+                return InstructionConstants.LREM;
             case '*':
-                return LMUL;
+                return InstructionConstants.LMUL;
             case '/':
-                return LDIV;
+                return InstructionConstants.LDIV;
             case '&':
-                return LAND;
+                return InstructionConstants.LAND;
             case '|':
-                return LOR;
+                return InstructionConstants.LOR;
             case '^':
-                return LXOR;
+                return InstructionConstants.LXOR;
             case '<':
-                return LSHL;
+                return InstructionConstants.LSHL;
             case '>':
-                return op.equals(">>>") ? LUSHR : LSHR;
+                return op.equals(">>>") ? InstructionConstants.LUSHR : InstructionConstants.LSHR;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -367,15 +367,15 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     private static ArithmeticInstruction createBinaryFloatOp( char op ) {
         switch (op) {
             case '-':
-                return FSUB;
+                return InstructionConstants.FSUB;
             case '+':
-                return FADD;
+                return InstructionConstants.FADD;
             case '*':
-                return FMUL;
+                return InstructionConstants.FMUL;
             case '/':
-                return FDIV;
+                return InstructionConstants.FDIV;
             case '%':
-                return FREM;
+                return InstructionConstants.FREM;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -385,15 +385,15 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
     private static ArithmeticInstruction createBinaryDoubleOp( char op ) {
         switch (op) {
             case '-':
-                return DSUB;
+                return InstructionConstants.DSUB;
             case '+':
-                return DADD;
+                return InstructionConstants.DADD;
             case '*':
-                return DMUL;
+                return InstructionConstants.DMUL;
             case '/':
-                return DDIV;
+                return InstructionConstants.DDIV;
             case '%':
-                return DREM;
+                return InstructionConstants.DREM;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -429,7 +429,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createPop( int size ) {
-        return (size == 2) ? POP2 : POP;
+        return (size == 2) ? InstructionConstants.POP2 : InstructionConstants.POP;
     }
 
 
@@ -437,7 +437,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup( int size ) {
-        return (size == 2) ? DUP2 : DUP;
+        return (size == 2) ? InstructionConstants.DUP2 : InstructionConstants.DUP;
     }
 
 
@@ -445,7 +445,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup_2( int size ) {
-        return (size == 2) ? DUP2_X2 : DUP_X2;
+        return (size == 2) ? InstructionConstants.DUP2_X2 : InstructionConstants.DUP_X2;
     }
 
 
@@ -453,7 +453,7 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup_1( int size ) {
-        return (size == 2) ? DUP2_X1 : DUP_X1;
+        return (size == 2) ? InstructionConstants.DUP2_X1 : InstructionConstants.DUP_X1;
     }
 
 
@@ -516,22 +516,22 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
         switch (type.getType()) {
             case Constants.T_BOOLEAN:
             case Constants.T_BYTE:
-                return BALOAD;
+                return InstructionConstants.BALOAD;
             case Constants.T_CHAR:
-                return CALOAD;
+                return InstructionConstants.CALOAD;
             case Constants.T_SHORT:
-                return SALOAD;
+                return InstructionConstants.SALOAD;
             case Constants.T_INT:
-                return IALOAD;
+                return InstructionConstants.IALOAD;
             case Constants.T_FLOAT:
-                return FALOAD;
+                return InstructionConstants.FALOAD;
             case Constants.T_DOUBLE:
-                return DALOAD;
+                return InstructionConstants.DALOAD;
             case Constants.T_LONG:
-                return LALOAD;
+                return InstructionConstants.LALOAD;
             case Constants.T_ARRAY:
             case Constants.T_OBJECT:
-                return AALOAD;
+                return InstructionConstants.AALOAD;
             default:
                 throw new RuntimeException("Invalid type " + type);
         }
@@ -545,22 +545,22 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
         switch (type.getType()) {
             case Constants.T_BOOLEAN:
             case Constants.T_BYTE:
-                return BASTORE;
+                return InstructionConstants.BASTORE;
             case Constants.T_CHAR:
-                return CASTORE;
+                return InstructionConstants.CASTORE;
             case Constants.T_SHORT:
-                return SASTORE;
+                return InstructionConstants.SASTORE;
             case Constants.T_INT:
-                return IASTORE;
+                return InstructionConstants.IASTORE;
             case Constants.T_FLOAT:
-                return FASTORE;
+                return InstructionConstants.FASTORE;
             case Constants.T_DOUBLE:
-                return DASTORE;
+                return InstructionConstants.DASTORE;
             case Constants.T_LONG:
-                return LASTORE;
+                return InstructionConstants.LASTORE;
             case Constants.T_ARRAY:
             case Constants.T_OBJECT:
-                return AASTORE;
+                return InstructionConstants.AASTORE;
             default:
                 throw new RuntimeException("Invalid type " + type);
         }
@@ -677,21 +677,21 @@ public class InstructionFactory implements InstructionConstants, java.io.Seriali
         switch (type.getType()) {
             case Constants.T_ARRAY:
             case Constants.T_OBJECT:
-                return ACONST_NULL;
+                return InstructionConstants.ACONST_NULL;
             case Constants.T_INT:
             case Constants.T_SHORT:
             case Constants.T_BOOLEAN:
             case Constants.T_CHAR:
             case Constants.T_BYTE:
-                return ICONST_0;
+                return InstructionConstants.ICONST_0;
             case Constants.T_FLOAT:
-                return FCONST_0;
+                return InstructionConstants.FCONST_0;
             case Constants.T_DOUBLE:
-                return DCONST_0;
+                return InstructionConstants.DCONST_0;
             case Constants.T_LONG:
-                return LCONST_0;
+                return InstructionConstants.LCONST_0;
             case Constants.T_VOID:
-                return NOP;
+                return InstructionConstants.NOP;
             default:
                 throw new RuntimeException("Invalid type: " + type);
         }
