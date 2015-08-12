@@ -22,7 +22,7 @@ package org.apache.commons.bcel6;
  *
  * @version $Id$
  */
-public interface ExceptionConstants {
+public class ExceptionConstants {
 
     /** The mother of all exceptions
      */
@@ -48,7 +48,7 @@ public interface ExceptionConstants {
     public static final Class<UnsatisfiedLinkError> UNSATISFIED_LINK_ERROR = UnsatisfiedLinkError.class;
     public static final Class<VerifyError> VERIFY_ERROR = VerifyError.class;
     /* UnsupportedClassVersionError is new in JDK 1.2 */
-    //public static final Class UnsupportedClassVersionError = UnsupportedClassVersionError.class;
+//    public static final Class UnsupportedClassVersionError = UnsupportedClassVersionError.class;
     /** Run-Time Exceptions 
      */
     public static final Class<NullPointerException> NULL_POINTER_EXCEPTION = NullPointerException.class;
