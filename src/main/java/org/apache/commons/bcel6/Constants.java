@@ -1448,19 +1448,6 @@ public interface Constants {
 
   public static final short KNOWN_ATTRIBUTES = 22; // count of attributes
 
-  /** @deprecated Use {@link #ATTR_RUNTIME_VISIBLE_ANNOTATIONS} instead */
-  @Deprecated
-public static final byte ATTR_RUNTIMEVISIBLE_ANNOTATIONS              = ATTR_RUNTIME_VISIBLE_ANNOTATIONS;
-  /** @deprecated Use {@link #ATTR_RUNTIME_INVISIBLE_ANNOTATIONS} instead */
-  @Deprecated
-public static final byte ATTR_RUNTIMEINVISIBLE_ANNOTATIONS            = ATTR_RUNTIME_INVISIBLE_ANNOTATIONS;
-  /** @deprecated Use {@link #ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS} instead */
-  @Deprecated
-public static final byte ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS    = ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS;
-  /** @deprecated Use {@link #ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS} instead */
-  @Deprecated
-public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS;
-
   // TODO: mutable public array!!
   public static final String[] ATTRIBUTE_NAMES = {
     "SourceFile", "ConstantValue", "Code", "Exceptions",
