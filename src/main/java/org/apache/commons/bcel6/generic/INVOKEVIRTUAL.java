@@ -46,14 +46,11 @@ public class INVOKEVIRTUAL extends InvokeInstruction {
 
 
     public Class<?>[] getExceptions() {
-        Class<?>[] cs = new Class[4 + ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION.length];
-        System.arraycopy(ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION, 0, cs, 0,
-                ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION.length);
-        cs[ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION.length + 3] = ExceptionConstants.UNSATISFIED_LINK_ERROR;
-        cs[ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION.length + 2] = ExceptionConstants.ABSTRACT_METHOD_ERROR;
-        cs[ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION.length + 1] = ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR;
-        cs[ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION.length] = ExceptionConstants.NULL_POINTER_EXCEPTION;
-        return cs;
+        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConstants.NULL_POINTER_EXCEPTION,
+            ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR,
+            ExceptionConstants.ABSTRACT_METHOD_ERROR,
+            ExceptionConstants.UNSATISFIED_LINK_ERROR);
     }
 
 

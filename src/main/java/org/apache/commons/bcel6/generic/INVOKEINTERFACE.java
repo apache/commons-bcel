@@ -105,14 +105,11 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
 
 
     public Class<?>[] getExceptions() {
-        Class<?>[] cs = new Class[4 + ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length];
-        System.arraycopy(ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION, 0, cs, 0,
-                ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length);
-        cs[ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length + 3] = ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR;
-        cs[ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length + 2] = ExceptionConstants.ILLEGAL_ACCESS_ERROR;
-        cs[ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length + 1] = ExceptionConstants.ABSTRACT_METHOD_ERROR;
-        cs[ExceptionConstants.EXCS_INTERFACE_METHOD_RESOLUTION.length] = ExceptionConstants.UNSATISFIED_LINK_ERROR;
-        return cs;
+        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_INTERFACE_METHOD_RESOLUTION,
+            ExceptionConstants.UNSATISFIED_LINK_ERROR,
+            ExceptionConstants.ABSTRACT_METHOD_ERROR,
+            ExceptionConstants.ILLEGAL_ACCESS_ERROR,
+            ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 
 

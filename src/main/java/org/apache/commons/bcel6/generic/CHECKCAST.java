@@ -50,11 +50,8 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
     /** @return exceptions this instruction may cause
      */
     public Class<?>[] getExceptions() {
-        Class<?>[] cs = new Class[1 + ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION.length];
-        System.arraycopy(ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION, 0, cs, 0,
-                ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION.length);
-        cs[ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION.length] = ExceptionConstants.CLASS_CAST_EXCEPTION;
-        return cs;
+        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+            ExceptionConstants.CLASS_CAST_EXCEPTION);
     }
 
 

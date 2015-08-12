@@ -17,6 +17,8 @@
  */
 package org.apache.commons.bcel6.generic;
 
+import org.apache.commons.bcel6.ExceptionConstants;
+
 /** 
  * INSTANCEOF - Determine if object is of given type
  * <PRE>Stack: ..., objectref -&gt; ..., result</PRE>
@@ -43,7 +45,7 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
 
 
     public Class<?>[] getExceptions() {
-        return org.apache.commons.bcel6.ExceptionConstants.EXCS_CLASS_AND_INTERFACE_RESOLUTION;
+        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION);
     }
 
 

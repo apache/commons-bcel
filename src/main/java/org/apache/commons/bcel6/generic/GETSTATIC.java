@@ -53,11 +53,8 @@ public class GETSTATIC extends FieldInstruction implements PushInstruction, Exce
 
 
     public Class<?>[] getExceptions() {
-        Class<?>[] cs = new Class[1 + ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION.length];
-        System.arraycopy(ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION, 0, cs, 0,
-                ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION.length);
-        cs[ExceptionConstants.EXCS_FIELD_AND_METHOD_RESOLUTION.length] = ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR;
-        return cs;
+        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 
 
