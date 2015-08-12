@@ -147,6 +147,15 @@
       <email>cmanolache at yahoo.com</email>
     </contributor>
 
+    <contributor>
+      <name>Bill Pugh</name>
+      <email>bill.pugh at gmail.com</email>
+    </contributor>
+
+    <contributor>
+      <name>First Hop Ltd / Torsten Rueger</name>
+    </contributor>
+
   </contributors>
 
   <mailingLists>
@@ -170,9 +179,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/bcel/trunk</developerConnection>
-    <url>http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0_RC4</connection>
+    <developerConnection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0_RC4</developerConnection>
+    <url>http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0_RC4</url>
   </scm>
 
   <build>
@@ -259,6 +268,7 @@
         <configuration>
           <configLocation>${basedir}/checkstyle.xml</configLocation>
           <enableRulesSummary>false</enableRulesSummary>
+          <headerFile>${basedir}/LICENSE-header.txt</headerFile>
         </configuration>
         <!-- We need to specify reportSets because 2.9.1 creates two reports -->
         <reportSets>
