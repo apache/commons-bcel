@@ -31,12 +31,12 @@ import org.apache.commons.bcel6.Constants;
 public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
 
     private static final long serialVersionUID = -1833306330869469714L;
-    // TODO should be made private
-    protected int name_index; // Points to field name in constant pool 
-    protected int signature_index; // Points to encoded signature
-    protected Attribute[] attributes; // Collection of attributes
-    protected AnnotationEntry[] annotationEntries; // annotations defined on the field or method 
-    protected ConstantPool constant_pool;
+
+    private int name_index; // Points to field name in constant pool 
+    private int signature_index; // Points to encoded signature
+    private Attribute[] attributes; // Collection of attributes
+    private AnnotationEntry[] annotationEntries; // annotations defined on the field or method 
+    private ConstantPool constant_pool;
 
     private String signatureAttributeString = null;
     private boolean searchedForSignatureAttribute = false;

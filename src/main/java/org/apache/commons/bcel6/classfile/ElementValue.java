@@ -27,9 +27,9 @@ import java.io.IOException;
  */
 public abstract class ElementValue
 {
-    protected int type; // TODO should be final
+    protected final int type;
 
-    protected ConstantPool cpool; // TODO should be final
+    protected final ConstantPool cpool;
 
     @Override
     public String toString()
