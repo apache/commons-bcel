@@ -63,9 +63,8 @@ public abstract class NativeVerifier {
         } catch (ClassNotFoundException cnfe) {
             System.out.println("NativeVerifier: FILE NOT FOUND: '" + args[0] + "'.");
             System.exit(1);
-        } catch (Throwable t) {
-            System.out.println("NativeVerifier: Unspecified verification error on'" + args[0]
-                    + "'.");
+        } catch (Throwable t) { // OK to catch Throwable here as we call exit.
+            System.out.println("NativeVerifier: Unspecified verification error on '" + args[0] + "'.");
             System.exit(1);
         }
         System.out.println("NativeVerifier: Class file '" + args[0] + "' seems to be okay.");

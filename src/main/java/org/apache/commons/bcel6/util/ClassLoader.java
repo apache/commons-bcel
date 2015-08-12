@@ -18,6 +18,7 @@
 package org.apache.commons.bcel6.util;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Hashtable;
 
 import org.apache.commons.bcel6.Constants;
@@ -170,7 +171,7 @@ public class ClassLoader extends java.lang.ClassLoader {
             byte[] bytes = Utility.decode(real_name, true);
             ClassParser parser = new ClassParser(new ByteArrayInputStream(bytes), "foo");
             clazz = parser.parse();
-        } catch (Throwable e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }

@@ -422,6 +422,13 @@ public class VerifyDialog extends javax.swing.JDialog {
         /* Uncomment the following lines to print uncaught exceptions to stdout */
         System.out.println("--------- UNCAUGHT EXCEPTION ---------");
         exception.printStackTrace(System.out);
+        // manually added code
+        if (exception instanceof ThreadDeath) {
+            throw (ThreadDeath) exception;
+        }
+        if (exception instanceof VirtualMachineError) {
+            throw (VirtualMachineError) exception;
+        }
     }
 
 
