@@ -62,7 +62,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     @Override
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
-        out.writeShort(index);
+        out.writeShort(super.getIndex());
         out.writeByte(nargs);
         out.writeByte(0);
     }

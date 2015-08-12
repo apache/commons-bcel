@@ -62,7 +62,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     @Override
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
-        out.writeShort(index);
+        out.writeShort(super.getIndex());
         out.writeByte(dimensions);
     }
 
@@ -91,7 +91,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      */
     @Override
     public String toString( boolean verbose ) {
-        return super.toString(verbose) + " " + index + " " + dimensions;
+        return super.toString(verbose) + " " + super.getIndex() + " " + dimensions;
     }
 
 

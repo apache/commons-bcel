@@ -56,7 +56,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      */
     public String getSignature( ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(index);
+        ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
         return ((ConstantUtf8) cp.getConstant(cnat.getSignatureIndex())).getBytes();
     }
@@ -66,7 +66,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      */
     public String getName( ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(index);
+        ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
         return ((ConstantUtf8) cp.getConstant(cnat.getNameIndex())).getBytes();
     }
@@ -84,7 +84,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
 //  @Deprecated
     public String getClassName( ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(index);
+        ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         String className = cp.getConstantString(cmr.getClassIndex(),
                 org.apache.commons.bcel6.Constants.CONSTANT_Class);
         if (className.startsWith("[")) {
@@ -105,7 +105,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      */
     public ReferenceType getReferenceType( ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(index);
+        ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         String className = cp.getConstantString(cmr.getClassIndex(),
                 org.apache.commons.bcel6.Constants.CONSTANT_Class);
         if (className.startsWith("[")) {

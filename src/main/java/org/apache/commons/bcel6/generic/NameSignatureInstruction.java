@@ -43,7 +43,7 @@ public abstract class NameSignatureInstruction extends CPInstruction {
 
     public ConstantNameAndType getNameAndType(ConstantPoolGen cpg) {
         ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(index);
+        ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         return  (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
     }
     /** @return signature of referenced method/field.

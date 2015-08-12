@@ -58,7 +58,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     @Override
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
-        out.writeShort(index);
+        out.writeShort(super.getIndex());
         out.writeByte(0);
         out.writeByte(0);
        }

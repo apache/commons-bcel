@@ -51,7 +51,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
 
     // Adjust to proper size
     protected final void setSize() {
-        if (index <= org.apache.commons.bcel6.Constants.MAX_BYTE) { // Fits in one byte?
+        if (super.getIndex() <= org.apache.commons.bcel6.Constants.MAX_BYTE) { // Fits in one byte?
             opcode = org.apache.commons.bcel6.Constants.LDC;
             length = 2;
         } else {
@@ -69,9 +69,9 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     public void dump( DataOutputStream out ) throws IOException {
         out.writeByte(opcode);
         if (length == 2) {
-            out.writeByte(index);
+            out.writeByte(super.getIndex());
         } else {
-            out.writeShort(index);
+            out.writeShort(super.getIndex());
         }
     }
 
@@ -92,12 +92,12 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         length = 2;
-        index = bytes.readUnsignedByte();
+        super.setIndex(bytes.readUnsignedByte());
     }
 
 
     public Object getValue( ConstantPoolGen cpg ) {
-        org.apache.commons.bcel6.classfile.Constant c = cpg.getConstantPool().getConstant(index);
+        org.apache.commons.bcel6.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
         switch (c.getTag()) {
             case org.apache.commons.bcel6.Constants.CONSTANT_String:
                 int i = ((org.apache.commons.bcel6.classfile.ConstantString) c).getStringIndex();
@@ -112,14 +112,14 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
                 c = cpg.getConstantPool().getConstant(nameIndex);
                 return new ObjectType(((org.apache.commons.bcel6.classfile.ConstantUtf8) c).getBytes());
             default: // Never reached
-                throw new RuntimeException("Unknown or invalid constant type at " + index);
+                throw new RuntimeException("Unknown or invalid constant type at " + super.getIndex());
         }
     }
 
 
     @Override
     public Type getType( ConstantPoolGen cpg ) {
-        switch (cpg.getConstantPool().getConstant(index).getTag()) {
+        switch (cpg.getConstantPool().getConstant(super.getIndex()).getTag()) {
             case org.apache.commons.bcel6.Constants.CONSTANT_String:
                 return Type.STRING;
             case org.apache.commons.bcel6.Constants.CONSTANT_Float:
@@ -129,7 +129,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
             case org.apache.commons.bcel6.Constants.CONSTANT_Class:
                 return Type.CLASS;
             default: // Never reached
-                throw new RuntimeException("Unknown or invalid constant type at " + index);
+                throw new RuntimeException("Unknown or invalid constant type at " + super.getIndex());
         }
     }
 

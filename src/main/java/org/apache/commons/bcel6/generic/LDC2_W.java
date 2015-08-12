@@ -44,7 +44,7 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
 
     @Override
     public Type getType( ConstantPoolGen cpg ) {
-        switch (cpg.getConstantPool().getConstant(index).getTag()) {
+        switch (cpg.getConstantPool().getConstant(super.getIndex()).getTag()) {
             case org.apache.commons.bcel6.Constants.CONSTANT_Long:
                 return Type.LONG;
             case org.apache.commons.bcel6.Constants.CONSTANT_Double:
@@ -56,14 +56,14 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
 
 
     public Number getValue( ConstantPoolGen cpg ) {
-        org.apache.commons.bcel6.classfile.Constant c = cpg.getConstantPool().getConstant(index);
+        org.apache.commons.bcel6.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
         switch (c.getTag()) {
             case org.apache.commons.bcel6.Constants.CONSTANT_Long:
                 return Long.valueOf(((org.apache.commons.bcel6.classfile.ConstantLong) c).getBytes());
             case org.apache.commons.bcel6.Constants.CONSTANT_Double:
                 return new Double(((org.apache.commons.bcel6.classfile.ConstantDouble) c).getBytes());
             default: // Never reached
-                throw new RuntimeException("Unknown or invalid constant type at " + index);
+                throw new RuntimeException("Unknown or invalid constant type at " + super.getIndex());
         }
     }
 

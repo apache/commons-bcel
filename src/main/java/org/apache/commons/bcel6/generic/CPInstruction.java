@@ -39,7 +39,8 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
         IndexedInstruction {
 
     private static final long serialVersionUID = 2968547649792233082L;
-    protected int index; // index to constant pool
+
+    private int index; // index to constant pool
 
 
     /**
