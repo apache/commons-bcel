@@ -18,7 +18,6 @@
 package org.apache.commons.bcel6.classfile;
 
 import java.io.DataInput;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
