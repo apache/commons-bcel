@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-232" type="fix">Make mutable fields private</action>
       <action issue="BCEL-233" type="fix">The access_flags field in AccessFlags class should be final</action>
       <action issue="BCEL-234" type="fix">Code must not swallow Throwable</action>
       <action issue="BCEL-222" type="update">
