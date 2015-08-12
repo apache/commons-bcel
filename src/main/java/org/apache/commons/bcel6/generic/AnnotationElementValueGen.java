@@ -58,7 +58,7 @@ public class AnnotationElementValueGen extends ElementValueGen
     @Override
     public void dump(DataOutputStream dos) throws IOException
     {
-        dos.writeByte(type); // u1 type of value (ANNOTATION == '@')
+        dos.writeByte(super.getElementValueType()); // u1 type of value (ANNOTATION == '@')
         a.dump(dos);
     }
 
@@ -74,7 +74,7 @@ public class AnnotationElementValueGen extends ElementValueGen
     @Override
     public ElementValue getElementValue()
     {
-        return new AnnotationElementValue(this.type, a.getAnnotation(), cpGen
+        return new AnnotationElementValue(super.getElementValueType(), a.getAnnotation(), getConstantPoolgen()
                 .getConstantPool());
     }
 

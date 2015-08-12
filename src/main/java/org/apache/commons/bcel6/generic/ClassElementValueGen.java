@@ -56,7 +56,7 @@ public class ClassElementValueGen extends ElementValueGen
     @Override
     public ElementValue getElementValue()
     {
-        return new ClassElementValue(type, idx, cpGen.getConstantPool());
+        return new ClassElementValue(super.getElementValueType(), idx, getConstantPoolgen().getConstantPool());
     }
 
     public ClassElementValueGen(ClassElementValue value, ConstantPoolGen cpool,
@@ -81,7 +81,7 @@ public class ClassElementValueGen extends ElementValueGen
 
     public String getClassString()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(idx);
+        ConstantUtf8 cu8 = (ConstantUtf8) getConstantPoolgen().getConstant(idx);
         return cu8.getBytes();
         // ConstantClass c = (ConstantClass)getConstantPool().getConstant(idx);
         // ConstantUtf8 utf8 =
@@ -98,7 +98,7 @@ public class ClassElementValueGen extends ElementValueGen
     @Override
     public void dump(DataOutputStream dos) throws IOException
     {
-        dos.writeByte(type); // u1 kind of value
+        dos.writeByte(super.getElementValueType()); // u1 kind of value
         dos.writeShort(idx);
     }
 }

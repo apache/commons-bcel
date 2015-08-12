@@ -65,7 +65,7 @@ public class ArrayElementValueGen extends ElementValueGen
         for (ElementValueGen element : evalues) {
             immutableData[i++] = element.getElementValue();
         }
-        return new ArrayElementValue(type, immutableData, cpGen
+        return new ArrayElementValue(super.getElementValueType(), immutableData, getConstantPoolgen()
                 .getConstantPool());
     }
 
@@ -87,7 +87,7 @@ public class ArrayElementValueGen extends ElementValueGen
     @Override
     public void dump(DataOutputStream dos) throws IOException
     {
-        dos.writeByte(type); // u1 type of value (ARRAY == '[')
+        dos.writeByte(super.getElementValueType()); // u1 type of value (ARRAY == '[')
         dos.writeShort(evalues.size());
         for (ElementValueGen element : evalues) {
             element.dump(dos);

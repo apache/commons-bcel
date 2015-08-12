@@ -164,7 +164,7 @@ public class SimpleElementValueGen extends ElementValueGen
             default:
                 throw new RuntimeException(
                         "SimpleElementValueGen class does not know how "
-                                + "to copy this type " + type);
+                                + "to copy this type " + super.getElementValueType());
             }
         }
     }
@@ -175,7 +175,7 @@ public class SimpleElementValueGen extends ElementValueGen
     @Override
     public ElementValue getElementValue()
     {
-        return new SimpleElementValue(type, idx, cpGen.getConstantPool());
+        return new SimpleElementValue(super.getElementValueType(), idx, getConstantPoolgen().getConstantPool());
     }
 
     public int getIndex()
@@ -185,21 +185,21 @@ public class SimpleElementValueGen extends ElementValueGen
 
     public String getValueString()
     {
-        if (type != STRING) {
+        if (super.getElementValueType() != STRING) {
             throw new RuntimeException(
                     "Dont call getValueString() on a non STRING ElementValue");
         }
-        ConstantUtf8 c = (ConstantUtf8) cpGen.getConstant(idx);
+        ConstantUtf8 c = (ConstantUtf8) getConstantPoolgen().getConstant(idx);
         return c.getBytes();
     }
 
     public int getValueInt()
     {
-        if (type != PRIMITIVE_INT) {
+        if (super.getElementValueType() != PRIMITIVE_INT) {
             throw new RuntimeException(
                     "Dont call getValueString() on a non STRING ElementValue");
         }
-        ConstantInteger c = (ConstantInteger) cpGen.getConstant(idx);
+        ConstantInteger c = (ConstantInteger) getConstantPoolgen().getConstant(idx);
         return c.getBytes();
     }
 
@@ -207,51 +207,51 @@ public class SimpleElementValueGen extends ElementValueGen
     @Override
     public String stringifyValue()
     {
-        switch (type)
+        switch (super.getElementValueType())
         {
         case PRIMITIVE_INT:
-            ConstantInteger c = (ConstantInteger) cpGen.getConstant(idx);
+            ConstantInteger c = (ConstantInteger) getConstantPoolgen().getConstant(idx);
             return Integer.toString(c.getBytes());
         case PRIMITIVE_LONG:
-            ConstantLong j = (ConstantLong) cpGen.getConstant(idx);
+            ConstantLong j = (ConstantLong) getConstantPoolgen().getConstant(idx);
             return Long.toString(j.getBytes());
         case PRIMITIVE_DOUBLE:
-            ConstantDouble d = (ConstantDouble) cpGen.getConstant(idx);
+            ConstantDouble d = (ConstantDouble) getConstantPoolgen().getConstant(idx);
             return Double.toString(d.getBytes());
         case PRIMITIVE_FLOAT:
-            ConstantFloat f = (ConstantFloat) cpGen.getConstant(idx);
+            ConstantFloat f = (ConstantFloat) getConstantPoolgen().getConstant(idx);
             return Float.toString(f.getBytes());
         case PRIMITIVE_SHORT:
-            ConstantInteger s = (ConstantInteger) cpGen.getConstant(idx);
+            ConstantInteger s = (ConstantInteger) getConstantPoolgen().getConstant(idx);
             return Integer.toString(s.getBytes());
         case PRIMITIVE_BYTE:
-            ConstantInteger b = (ConstantInteger) cpGen.getConstant(idx);
+            ConstantInteger b = (ConstantInteger) getConstantPoolgen().getConstant(idx);
             return Integer.toString(b.getBytes());
         case PRIMITIVE_CHAR:
-            ConstantInteger ch = (ConstantInteger) cpGen.getConstant(idx);
+            ConstantInteger ch = (ConstantInteger) getConstantPoolgen().getConstant(idx);
             return Integer.toString(ch.getBytes());
         case PRIMITIVE_BOOLEAN:
-            ConstantInteger bo = (ConstantInteger) cpGen.getConstant(idx);
+            ConstantInteger bo = (ConstantInteger) getConstantPoolgen().getConstant(idx);
             if (bo.getBytes() == 0) {
                 return "false";
             } else {
                 return "true";
             }
         case STRING:
-            ConstantUtf8 cu8 = (ConstantUtf8) cpGen.getConstant(idx);
+            ConstantUtf8 cu8 = (ConstantUtf8) getConstantPoolgen().getConstant(idx);
             return cu8.getBytes();
         default:
             throw new RuntimeException(
                     "SimpleElementValueGen class does not know how to stringify type "
-                            + type);
+                            + super.getElementValueType());
         }
     }
 
     @Override
     public void dump(DataOutputStream dos) throws IOException
     {
-        dos.writeByte(type); // u1 kind of value
-        switch (type)
+        dos.writeByte(super.getElementValueType()); // u1 kind of value
+        switch (super.getElementValueType())
         {
         case PRIMITIVE_INT:
         case PRIMITIVE_BYTE:
@@ -267,7 +267,7 @@ public class SimpleElementValueGen extends ElementValueGen
         default:
             throw new RuntimeException(
                     "SimpleElementValueGen doesnt know how to write out type "
-                            + type);
+                            + super.getElementValueType());
         }
     }
 }
