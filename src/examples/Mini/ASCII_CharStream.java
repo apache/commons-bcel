@@ -210,26 +210,6 @@ public final class ASCII_CharStream
      return (c);
   }
 
-  /**
-   * @deprecated 
-   * @see #getEndColumn
-   */
-
-  @Deprecated
-  static public final int getColumn() {
-     return bufcolumn[bufpos];
-  }
-
-  /**
-   * @deprecated 
-   * @see #getEndLine
-   */
-
-  @Deprecated
-  static public final int getLine() {
-     return bufline[bufpos];
-  }
-
   static public final int getEndColumn() {
      return bufcolumn[bufpos];
   }
