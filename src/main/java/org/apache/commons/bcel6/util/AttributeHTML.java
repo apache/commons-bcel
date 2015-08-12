@@ -141,11 +141,11 @@ final class AttributeHTML implements org.apache.commons.bcel6.Constants {
                 // List thrown exceptions
                 int[] indices = ((ExceptionTable) attribute).getExceptionIndexTable();
                 file.print("<UL>");
-            for (int indice : indices) {
-                file.print("<LI><A HREF=\"" + class_name + "_cp.html#cp" + indice
-                        + "\" TARGET=\"ConstantPool\">Exception class index(" + indice
-                        + ")</A>\n");
-            }
+                for (int indice : indices) {
+                    file.print("<LI><A HREF=\"" + class_name + "_cp.html#cp" + indice
+                            + "\" TARGET=\"ConstantPool\">Exception class index(" + indice
+                            + ")</A>\n");
+                }
                 file.print("</UL>\n");
                 break;
             case ATTR_LINE_NUMBER_TABLE:
@@ -164,42 +164,42 @@ final class AttributeHTML implements org.apache.commons.bcel6.Constants {
                 LocalVariable[] vars = ((LocalVariableTable) attribute).getLocalVariableTable();
                 // List name, range and type
                 file.print("<UL>");
-            for (LocalVariable var : vars) {
-                index = var.getSignatureIndex();
-                String signature = ((ConstantUtf8) constant_pool.getConstant(index,
-                        CONSTANT_Utf8)).getBytes();
-                signature = Utility.signatureToString(signature, false);
-                int start = var.getStartPC();
-                int end = (start + var.getLength());
-                file.println("<LI>" + Class2HTML.referenceType(signature) + "&nbsp;<B>"
-                        + var.getName() + "</B> in slot %" + var.getIndex()
-                        + "<BR>Valid from lines " + "<A HREF=\"" + class_name
-                        + "_code.html#code" + method_number + "@" + start + "\" TARGET=Code>"
-                        + start + "</A> to " + "<A HREF=\"" + class_name + "_code.html#code"
-                        + method_number + "@" + end + "\" TARGET=Code>" + end + "</A></LI>");
-            }
+                for (LocalVariable var : vars) {
+                    index = var.getSignatureIndex();
+                    String signature = ((ConstantUtf8) constant_pool.getConstant(index,
+                            CONSTANT_Utf8)).getBytes();
+                    signature = Utility.signatureToString(signature, false);
+                    int start = var.getStartPC();
+                    int end = (start + var.getLength());
+                    file.println("<LI>" + Class2HTML.referenceType(signature) + "&nbsp;<B>"
+                            + var.getName() + "</B> in slot %" + var.getIndex()
+                            + "<BR>Valid from lines " + "<A HREF=\"" + class_name
+                            + "_code.html#code" + method_number + "@" + start + "\" TARGET=Code>"
+                            + start + "</A> to " + "<A HREF=\"" + class_name + "_code.html#code"
+                            + method_number + "@" + end + "\" TARGET=Code>" + end + "</A></LI>");
+                }
                 file.print("</UL>\n");
                 break;
             case ATTR_INNER_CLASSES:
                 InnerClass[] classes = ((InnerClasses) attribute).getInnerClasses();
                 // List inner classes
                 file.print("<UL>");
-            for (InnerClass classe : classes) {
-                String name, access;
-                index = classe.getInnerNameIndex();
-                if (index > 0) {
-                    name = ((ConstantUtf8) constant_pool.getConstant(index, CONSTANT_Utf8))
-                            .getBytes();
-                } else {
-                    name = "&lt;anonymous&gt;";
+                for (InnerClass classe : classes) {
+                    String name, access;
+                    index = classe.getInnerNameIndex();
+                    if (index > 0) {
+                        name = ((ConstantUtf8) constant_pool.getConstant(index, CONSTANT_Utf8))
+                                .getBytes();
+                    } else {
+                        name = "&lt;anonymous&gt;";
+                    }
+                    access = Utility.accessToString(classe.getInnerAccessFlags());
+                    file.print("<LI><FONT COLOR=\"#FF0000\">" + access + "</FONT> "
+                            + constant_html.referenceConstant(classe.getInnerClassIndex())
+                            + " in&nbsp;class "
+                            + constant_html.referenceConstant(classe.getOuterClassIndex())
+                            + " named " + name + "</LI>\n");
                 }
-                access = Utility.accessToString(classe.getInnerAccessFlags());
-                file.print("<LI><FONT COLOR=\"#FF0000\">" + access + "</FONT> "
-                        + constant_html.referenceConstant(classe.getInnerClassIndex())
-                        + " in&nbsp;class "
-                        + constant_html.referenceConstant(classe.getOuterClassIndex())
-                        + " named " + name + "</LI>\n");
-            }
                 file.print("</UL>\n");
                 break;
             default: // Such as Unknown attribute or Deprecated
