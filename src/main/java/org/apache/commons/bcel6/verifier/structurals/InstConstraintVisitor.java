@@ -2584,8 +2584,12 @@ public class InstConstraintVisitor extends EmptyVisitor{
         ObjectType obj = (ObjectType) t;
 
         //e.g.: Don't instantiate interfaces
-        if (! obj.referencesClass()){
-            constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '"+obj+"'.");
+        try {
+            if (! obj.referencesClassExact()){
+                constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '"+obj+"'.");
+            }
+        } catch (ClassNotFoundException e) {
+            constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '"+obj+"'." + " which threw " + e);
         }
     }
 
