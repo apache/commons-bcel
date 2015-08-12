@@ -1208,6 +1208,15 @@ public class InstConstraintVisitor extends EmptyVisitor{
         }
     }
 
+    private ObjectType getObjectType(FieldInstruction o) {
+        ReferenceType rt = o.getReferenceType(cpg);
+        if(rt instanceof ObjectType) {
+            return (ObjectType)rt;
+        }
+        constraintViolated(o, "expecting ObjectType but got "+rt);
+        return null;
+    }
+
     /**
      * Ensures the specific preconditions of the said instruction.
      */
@@ -1221,7 +1230,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
         String field_name = o.getFieldName(cpg);
 
-        JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
+        JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
         Field[] fields = jc.getFields();
         Field f = null;
         for (Field field : fields) {
@@ -1263,7 +1272,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         }
 
         if (f.isProtected()){
-            ObjectType classtype = o.getClassType(cpg);
+            ObjectType classtype = getObjectType(o);
             ObjectType curr = ObjectType.getInstance(mg.getClassName());
 
             if (    classtype.equals(curr) ||
@@ -2632,7 +2641,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
         String field_name = o.getFieldName(cpg);
 
-        JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
+        JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
         Field[] fields = jc.getFields();
         Field f = null;
         for (Field field : fields) {
@@ -2684,7 +2693,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         }
 
         if (f.isProtected()){
-            ObjectType classtype = o.getClassType(cpg);
+            ObjectType classtype = getObjectType(o);
             ObjectType curr = ObjectType.getInstance(mg.getClassName());
 
             if (    classtype.equals(curr) ||
@@ -2722,7 +2731,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
     public void visitPUTSTATIC(PUTSTATIC o){
         try {
         String field_name = o.getFieldName(cpg);
-        JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
+        JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
         Field[] fields = jc.getFields();
         Field f = null;
         for (Field field : fields) {

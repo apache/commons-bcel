@@ -85,6 +85,7 @@ import org.apache.commons.bcel6.generic.NEWARRAY;
 import org.apache.commons.bcel6.generic.ObjectType;
 import org.apache.commons.bcel6.generic.PUTSTATIC;
 import org.apache.commons.bcel6.generic.RET;
+import org.apache.commons.bcel6.generic.ReferenceType;
 import org.apache.commons.bcel6.generic.ReturnInstruction;
 import org.apache.commons.bcel6.generic.TABLESWITCH;
 import org.apache.commons.bcel6.generic.Type;
@@ -543,6 +544,15 @@ public final class Pass3aVerifier extends PassVerifier{
             }
         }
 
+        private ObjectType getObjectType(FieldInstruction o) {
+            ReferenceType rt = o.getReferenceType(cpg);
+            if(rt instanceof ObjectType) {
+                return (ObjectType)rt;
+            }
+            constraintViolated(o, "expecting ObjectType but got "+rt);
+            return null;
+        }
+
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
          //getfield, putfield, getstatic, putstatic
          @Override
@@ -555,8 +565,8 @@ public final class Pass3aVerifier extends PassVerifier{
             }
 
             String field_name = o.getFieldName(cpg);
-
-            JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
+                    
+            JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             Field[] fields = jc.getFields();
             Field f = null;
             for (Field field : fields) {
@@ -997,7 +1007,7 @@ public final class Pass3aVerifier extends PassVerifier{
         public void visitPUTSTATIC(PUTSTATIC o){
             try {
             String field_name = o.getFieldName(cpg);
-            JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
+            JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             Field[] fields = jc.getFields();
             Field f = null;
             for (Field field : fields) {
@@ -1011,8 +1021,9 @@ public final class Pass3aVerifier extends PassVerifier{
             }
 
             if (f.isFinal()){
-                if (!(myOwner.getClassName().equals(o.getClassType(cpg).getClassName()))){
-                    constraintViolated(o, "Referenced field '"+f+"' is final and must therefore be declared in the current class '"+myOwner.getClassName()+"' which is not the case: it is declared in '"+o.getClassType(cpg).getClassName()+"'.");
+                if (!(myOwner.getClassName().equals(getObjectType(o).getClassName()))){
+                    constraintViolated(o, "Referenced field '"+f+"' is final and must therefore be declared in the current class '"+myOwner.getClassName()
+                    +"' which is not the case: it is declared in '"+o.getReferenceType(cpg)+"'.");
                 }
             }
 
@@ -1037,7 +1048,7 @@ public final class Pass3aVerifier extends PassVerifier{
         public void visitGETSTATIC(GETSTATIC o){
             try {
             String field_name = o.getFieldName(cpg);
-            JavaClass jc = Repository.lookupClass(o.getClassType(cpg).getClassName());
+            JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             Field[] fields = jc.getFields();
             Field f = null;
             for (Field field : fields) {

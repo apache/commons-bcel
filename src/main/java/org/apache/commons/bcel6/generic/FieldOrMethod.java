@@ -95,17 +95,6 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
     }
 
 
-    /** @return type of the referenced class/interface
-     * @deprecated If the instruction references an array class,
-     *    the ObjectType returned will be invalid.  Use
-     *    getReferenceType() instead.
-     */
-    @Deprecated
-    public ObjectType getClassType( ConstantPoolGen cpg ) {
-        return ObjectType.getInstance(getClassName(cpg));
-    }
-
-
     /**
      * Return the reference type representing the class, interface,
      * or array class referenced by the instruction.
@@ -131,6 +120,6 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
     /** @return type of the referenced class/interface
      */
     public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
-        return getClassType(cpg);
+        return (ObjectType)getReferenceType(cpg);
     }
 }
