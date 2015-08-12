@@ -44,7 +44,7 @@ import java.util.zip.ZipFile;
 public class ClassPath implements Serializable {
 
     private static final long serialVersionUID = 2099441438483340671L;
-    public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath();
+    public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath(getClassPath());
 
     private static final FilenameFilter ARCHIVE_FILTER = new FilenameFilter() {
 
@@ -93,17 +93,6 @@ public class ClassPath implements Serializable {
         paths = new PathEntry[vec.size()];
         vec.toArray(paths);
     }
-
-
-    /**
-     * Search for classes in CLASSPATH.
-     * @deprecated Use SYSTEM_CLASS_PATH constant
-     */
-    @Deprecated
-    public ClassPath() {
-        this(getClassPath());
-    }
-
 
     /** @return used class path string
      */

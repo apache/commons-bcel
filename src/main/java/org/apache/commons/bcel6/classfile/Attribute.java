@@ -100,20 +100,6 @@ public abstract class Attribute implements Cloneable, Node, Serializable
      * 
      * @param name the name of the attribute as stored in the class file
      * @param r    the reader object
-     * @deprecated Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead
-     */
-    public static void addAttributeReader(String name, AttributeReader r)
-    {
-        readers.put(name, r);
-    }
-
-    /**
-     * Add an Attribute reader capable of parsing (user-defined) attributes
-     * named "name". You should not add readers for the standard attributes such
-     * as "LineNumberTable", because those are handled internally.
-     * 
-     * @param name the name of the attribute as stored in the class file
-     * @param r    the reader object
      */
     public static void addAttributeReader(String name, UnknownAttributeReader r)
     {

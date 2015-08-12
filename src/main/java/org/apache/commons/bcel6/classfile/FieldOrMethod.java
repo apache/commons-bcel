@@ -61,18 +61,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @param file Input stream
      * @throws IOException
      * @throws ClassFormatException
-     * @deprecated Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
-     */
-    protected FieldOrMethod(DataInputStream file, ConstantPool constant_pool) throws IOException,
-            ClassFormatException {
-        this((DataInput) file, constant_pool);
-    }
-
-    /**
-     * Construct object from file stream.
-     * @param file Input stream
-     * @throws IOException
-     * @throws ClassFormatException
      */
     protected FieldOrMethod(DataInput file, ConstantPool constant_pool) throws IOException, ClassFormatException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null,

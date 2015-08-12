@@ -136,11 +136,6 @@ public final class StackMapEntry implements Cloneable, Serializable {
     }
 
 
-    @java.lang.Deprecated
-    public void setNumberOfLocals( int n ) { // TODO unused
-    }
-
-
     public int getNumberOfLocals() {
         return types_of_locals == null ? 0 : types_of_locals.length;
     }
@@ -153,11 +148,6 @@ public final class StackMapEntry implements Cloneable, Serializable {
 
     public StackMapType[] getTypesOfLocals() {
         return types_of_locals;
-    }
-
-
-    @java.lang.Deprecated
-    public void setNumberOfStackItems( int n ) { // TODO unused
     }
 
 
