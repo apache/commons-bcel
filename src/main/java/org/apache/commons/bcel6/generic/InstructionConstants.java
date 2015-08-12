@@ -166,14 +166,8 @@ public class InstructionConstants {
      * branch instructions entries are set to null.
      */
     public static final Instruction[] INSTRUCTIONS = new Instruction[256];
-    /** Interfaces may have no static initializers, so we simulate this
-     * with an inner class.
-     */
-    static final Clinit bla = new Clinit();
 
-    static class Clinit {
-
-        Clinit() {
+    static {
             INSTRUCTIONS[Constants.NOP] = NOP;
             INSTRUCTIONS[Constants.ACONST_NULL] = ACONST_NULL;
             INSTRUCTIONS[Constants.ICONST_M1] = ICONST_M1;
@@ -281,6 +275,5 @@ public class InstructionConstants {
             INSTRUCTIONS[Constants.ATHROW] = ATHROW;
             INSTRUCTIONS[Constants.MONITORENTER] = MONITORENTER;
             INSTRUCTIONS[Constants.MONITOREXIT] = MONITOREXIT;
-        }
     }
 }
