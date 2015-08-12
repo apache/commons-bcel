@@ -35,8 +35,8 @@ import org.apache.commons.bcel6.verifier.structurals.OperandStack;
 public abstract class Type implements java.io.Serializable {
 
     private static final long serialVersionUID = -1985077286871826895L;
-    protected byte type;
-    protected String signature; // signature for the type
+    private final byte type;
+    private String signature; // signature for the type
     /** Predefined constants
      */
     public static final BasicType VOID = new BasicType(Constants.T_VOID);
@@ -390,5 +390,13 @@ public abstract class Type implements java.io.Serializable {
     static int getReturnTypeSize(String signature) {
         int index = signature.lastIndexOf(')') + 1;
         return Type.size(getTypeSize(signature.substring(index)));
+    }
+
+
+    /**
+     * @param signature the signature to set
+     */
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }

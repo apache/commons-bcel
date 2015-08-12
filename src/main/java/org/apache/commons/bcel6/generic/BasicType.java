@@ -73,7 +73,7 @@ public final class BasicType extends Type {
      */
     @Override
     public int hashCode() {
-        return type;
+        return super.getType();
     }
 
 
@@ -81,6 +81,6 @@ public final class BasicType extends Type {
      */
     @Override
     public boolean equals( Object _type ) {
-        return (_type instanceof BasicType) ? ((BasicType) _type).type == this.type : false;
+        return (_type instanceof BasicType) ? ((BasicType) _type).getType() == this.getType() : false;
     }
 }
