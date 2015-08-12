@@ -37,12 +37,12 @@ public class BootstrapMethod implements Serializable, Cloneable {
     private static final long serialVersionUID = -4517534834047695344L;
 
     /** Index of the CONSTANT_MethodHandle_info structure in the constant_pool table */
-    private int bootstrap_method_ref; // TODO this could be made final (setter is not used)
+    private final int bootstrap_method_ref;
 
     private final int num_bootstrap_arguments;
 
     /** Array of references to the constant_pool table */
-    private int[] bootstrap_arguments; // TODO this could be made final (setter is not used)
+    private final int[] bootstrap_arguments;
 
 
     /**
@@ -59,9 +59,9 @@ public class BootstrapMethod implements Serializable, Cloneable {
      * @throws IOException
      */
     BootstrapMethod(DataInput input) throws IOException {
-        this(input.readUnsignedShort(), input.readUnsignedShort(), (int[]) null);
-
-        bootstrap_arguments = new int[num_bootstrap_arguments];
+        this.bootstrap_method_ref = input.readUnsignedShort();
+        this.num_bootstrap_arguments = input.readUnsignedShort();
+        this.bootstrap_arguments = new int[num_bootstrap_arguments];
         for (int i = 0; i < num_bootstrap_arguments; i++) {
             bootstrap_arguments[i] = input.readUnsignedShort();
         }
@@ -87,13 +87,6 @@ public class BootstrapMethod implements Serializable, Cloneable {
     }
 
     /**
-     * @param bootstrap_method_ref int index into constant_pool of CONSTANT_MethodHandle
-     */
-    public void setBootstrapMethodRef(int bootstrap_method_ref) {
-        this.bootstrap_method_ref = bootstrap_method_ref;
-    }
-
-    /**
      * @return int[] of bootstrap_method indices into constant_pool of CONSTANT_<type>_info
      */
     public int[] getBootstrapArguments() {
@@ -105,13 +98,6 @@ public class BootstrapMethod implements Serializable, Cloneable {
      */
     public int getNumBootstrapArguments() {
         return num_bootstrap_arguments;
-    }
-
-    /**
-     * @param bootstrap_arguments int[] indices into constant_pool of CONSTANT_<type>_info
-     */
-    public void setBootstrapArguments(int[] bootstrap_arguments) {
-        this.bootstrap_arguments = bootstrap_arguments;
     }
 
     /**

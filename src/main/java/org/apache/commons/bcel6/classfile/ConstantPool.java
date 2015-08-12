@@ -39,7 +39,7 @@ import org.apache.commons.bcel6.Constants;
 public class ConstantPool implements Cloneable, Node, Serializable {
 
     private static final long serialVersionUID = -9093478476423540196L;
-    private Constant[] constant_pool; // TODO this could be final; the setConstantPool method is not called externally
+    private Constant[] constant_pool; // TODO this could be final if the copy() method were rewritten
 
 
     /**
@@ -320,14 +320,6 @@ public class ConstantPool implements Cloneable, Node, Serializable {
      */
     public int getLength() {
         return constant_pool == null ? 0 : constant_pool.length;
-    }
-
-
-    /**
-     * @param constant Constant to set
-     */
-    public void setConstant( int index, Constant constant ) {
-        constant_pool[index] = constant;
     }
 
 
