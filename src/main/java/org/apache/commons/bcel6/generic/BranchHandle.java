@@ -70,20 +70,20 @@ public final class BranchHandle extends InstructionHandle {
      */
     @Override
     public int getPosition() {
-        return bi.position;
+        return bi.getPosition();
     }
 
 
     @Override
     void setPosition( int pos ) {
-        i_position = bi.position = pos;
+        i_position = bi.setGetPosition(pos);
     }
 
 
     @Override
     protected int updatePosition( int offset, int max_offset ) {
         int x = bi.updatePosition(offset, max_offset);
-        i_position = bi.position;
+        i_position = bi.getPosition();
         return x;
     }
 

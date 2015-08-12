@@ -60,7 +60,7 @@ public abstract class JsrInstruction extends BranchInstruction implements Uncond
      * will be executed when RETurned from a subroutine.
      */
     public InstructionHandle physicalSuccessor() {
-        InstructionHandle ih = this.target;
+        InstructionHandle ih = super.getTarget();
         // Rewind!
         while (ih.getPrev() != null) {
             ih = ih.getPrev();

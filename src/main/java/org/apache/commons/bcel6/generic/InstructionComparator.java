@@ -47,7 +47,7 @@ public interface InstructionComparator {
                         return true;
                     }
                 } else if (i1 instanceof BranchInstruction) {
-                    return ((BranchInstruction) i1).target == ((BranchInstruction) i2).target;
+                    return ((BranchInstruction) i1).getTarget() == ((BranchInstruction) i2).getTarget();
                 } else if (i1 instanceof ConstantPushInstruction) {
                     return ((ConstantPushInstruction) i1).getValue().equals(
                             ((ConstantPushInstruction) i2).getValue());

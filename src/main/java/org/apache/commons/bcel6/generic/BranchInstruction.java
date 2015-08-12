@@ -33,9 +33,9 @@ import org.apache.commons.bcel6.util.ByteSequence;
 public abstract class BranchInstruction extends Instruction implements InstructionTargeter {
 
     private static final long serialVersionUID = 3225905281842405051L;
-    protected int index; // Branch target relative to this instruction
-    protected InstructionHandle target; // Target object in instruction list
-    protected int position; // Byte code offset
+    private int index; // Branch target relative to this instruction
+    private InstructionHandle target; // Target object in instruction list
+    private int position; // Byte code offset
 
 
     /**
@@ -233,4 +233,31 @@ public abstract class BranchInstruction extends Instruction implements Instructi
         index = -1;
         position = -1;
     }
+
+
+    /**
+     * @return the position
+     */
+    public int getPosition() {
+        return position;
+    }
+
+
+    /**
+     * @param position the position to set
+     * @return the new position
+     */
+    public int setGetPosition(int position) {
+        this.position = position;
+        return position;
+    }
+
+
+    /**
+     * @param index the index to set
+     */
+    protected void setIndex(int index) {
+        this.index = index;
+    }
+
 }

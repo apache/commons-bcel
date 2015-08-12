@@ -52,9 +52,9 @@ public class JSR_W extends JsrInstruction {
      */
     @Override
     public void dump( DataOutputStream out ) throws IOException {
-        index = getTargetOffset();
+        super.setIndex(getTargetOffset());
         out.writeByte(opcode);
-        out.writeInt(index);
+        out.writeInt(super.getIndex());
     }
 
 
@@ -63,7 +63,7 @@ public class JSR_W extends JsrInstruction {
      */
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
-        index = bytes.readInt();
+        super.setIndex(bytes.readInt());
         length = 5;
     }
 

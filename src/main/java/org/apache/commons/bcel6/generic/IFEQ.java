@@ -47,7 +47,7 @@ public class IFEQ extends IfInstruction {
      */
     @Override
     public IfInstruction negate() {
-        return new IFNE(target);
+        return new IFNE(super.getTarget());
     }
 
 

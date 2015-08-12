@@ -47,7 +47,7 @@ public class IF_ICMPLE extends IfInstruction {
      */
     @Override
     public IfInstruction negate() {
-        return new IF_ICMPGT(target);
+        return new IF_ICMPGT(super.getTarget());
     }
 
 

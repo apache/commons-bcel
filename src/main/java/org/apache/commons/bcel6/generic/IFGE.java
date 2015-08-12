@@ -47,7 +47,7 @@ public class IFGE extends IfInstruction {
      */
     @Override
     public IfInstruction negate() {
-        return new IFLT(target);
+        return new IFLT(super.getTarget());
     }
 
 

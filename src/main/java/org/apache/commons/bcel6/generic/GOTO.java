@@ -49,13 +49,13 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
      */
     @Override
     public void dump( DataOutputStream out ) throws IOException {
-        index = getTargetOffset();
+        super.setIndex(getTargetOffset());
         if (opcode == org.apache.commons.bcel6.Constants.GOTO) {
             super.dump(out);
         } else { // GOTO_W
-            index = getTargetOffset();
+            super.setIndex(getTargetOffset());
             out.writeByte(opcode);
-            out.writeInt(index);
+            out.writeInt(super.getIndex());
         }
     }
 
@@ -66,7 +66,7 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
     @Override
     protected int updatePosition( int offset, int max_offset ) {
         int i = getTargetOffset(); // Depending on old position value
-        position += offset; // Position may be shifted by preceding expansions
+        setGetPosition(getPosition() + offset); // Position may be shifted by preceding expansions
         if (Math.abs(i) >= (32767 - max_offset)) { // to large for short (estimate)
             opcode = org.apache.commons.bcel6.Constants.GOTO_W;
             short old_length = length;

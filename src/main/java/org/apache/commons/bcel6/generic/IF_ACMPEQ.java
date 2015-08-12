@@ -47,7 +47,7 @@ public class IF_ACMPEQ extends IfInstruction {
      */
     @Override
     public IfInstruction negate() {
-        return new IF_ACMPNE(target);
+        return new IF_ACMPNE(super.getTarget());
     }
 
 

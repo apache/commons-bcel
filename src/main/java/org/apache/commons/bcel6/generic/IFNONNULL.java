@@ -47,7 +47,7 @@ public class IFNONNULL extends IfInstruction {
      */
     @Override
     public IfInstruction negate() {
-        return new IFNULL(target);
+        return new IFNULL(super.getTarget());
     }
 
 

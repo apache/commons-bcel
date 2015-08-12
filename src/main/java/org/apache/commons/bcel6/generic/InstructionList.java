@@ -196,7 +196,7 @@ public class InstructionList implements Serializable {
         for (int i = 0; i < count; i++) {
             if (ihs[i] instanceof BranchHandle) {
                 BranchInstruction bi = (BranchInstruction) ihs[i].instruction;
-                int target = bi.position + bi.getIndex(); /* Byte code position:
+                int target = bi.getPosition() + bi.getIndex(); /* Byte code position:
                  * relative -> absolute. */
                 // Search for target position
                 InstructionHandle ih = findHandle(ihs, pos, count, target);
@@ -209,7 +209,7 @@ public class InstructionList implements Serializable {
                     Select s = (Select) bi;
                     int[] indices = s.getIndices();
                     for (int j = 0; j < indices.length; j++) {
-                        target = bi.position + indices[j];
+                        target = bi.getPosition() + indices[j];
                         ih = findHandle(ihs, pos, count, target);
                         if (ih == null) {
                             throw new ClassGenException("Couldn't find target for switch: " + bi);

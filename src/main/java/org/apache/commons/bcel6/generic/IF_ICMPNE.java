@@ -47,7 +47,7 @@ public class IF_ICMPNE extends IfInstruction {
      */
     @Override
     public IfInstruction negate() {
-        return new IF_ICMPEQ(target);
+        return new IF_ICMPEQ(super.getTarget());
     }
 
 

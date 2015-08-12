@@ -89,11 +89,11 @@ public abstract class Select extends BranchInstruction implements VariableLength
      */
     @Override
     protected int updatePosition( int offset, int max_offset ) {
-        position += offset; // Additional offset caused by preceding SWITCHs, GOTOs, etc.
+        setGetPosition(getPosition() + offset); // Additional offset caused by preceding SWITCHs, GOTOs, etc.
         short old_length = length;
         /* Alignment on 4-byte-boundary, + 1, because of tag byte.
          */
-        padding = (4 - ((position + 1) % 4)) % 4;
+        padding = (4 - ((getPosition() + 1) % 4)) % 4;
         length = (short) (fixed_length + padding); // Update length
         return length - old_length;
     }
@@ -109,8 +109,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
         for (int i = 0; i < padding; i++) {
             out.writeByte(0);
         }
-        index = getTargetOffset(); // Write default target offset
-        out.writeInt(index);
+        super.setIndex(getTargetOffset()); // Write default target offset
+        out.writeInt(super.getIndex());
     }
 
 
@@ -124,7 +124,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
             bytes.readByte();
         }
         // Default branch target common for both cases (TABLESWITCH, LOOKUPSWITCH)
-        index = bytes.readInt();
+        super.setIndex(bytes.readInt());
     }
 
 
@@ -166,7 +166,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     @Override
     public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
         boolean targeted = false;
-        if (target == old_ih) {
+        if (super.getTarget() == old_ih) {
             targeted = true;
             setTarget(new_ih);
         }
@@ -187,7 +187,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      */
     @Override
     public boolean containsTarget( InstructionHandle ih ) {
-        if (target == ih) {
+        if (super.getTarget() == ih) {
             return true;
         }
         for (InstructionHandle target2 : targets) {
