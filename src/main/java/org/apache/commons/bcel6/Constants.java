@@ -22,7 +22,7 @@ package org.apache.commons.bcel6;
  *
  * @version $Id$
  */
-public interface Constants {
+public class Constants {
 
   /** Major version number of class files for Java 1.1.
    *  @see #MINOR_1_1

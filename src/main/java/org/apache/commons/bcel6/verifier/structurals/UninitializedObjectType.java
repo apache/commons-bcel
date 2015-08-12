@@ -29,7 +29,7 @@ import org.apache.commons.bcel6.generic.ReferenceType;
  *
  * @version $Id$
  */
-public class UninitializedObjectType extends ReferenceType implements Constants{
+public class UninitializedObjectType extends ReferenceType{
 
     private static final long serialVersionUID = -1228341777713117641L;
     /** The "initialized" version. */
@@ -37,7 +37,7 @@ public class UninitializedObjectType extends ReferenceType implements Constants{
 
     /** Creates a new instance. */
     public UninitializedObjectType(ObjectType t){
-        super(T_UNKNOWN, "<UNINITIALIZED OBJECT OF TYPE '"+t.getClassName()+"'>");
+        super(Constants.T_UNKNOWN, "<UNINITIALIZED OBJECT OF TYPE '"+t.getClassName()+"'>");
         initialized = t;
     }
 

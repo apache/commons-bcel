@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.BitSet;
 
+import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.classfile.Attribute;
 import org.apache.commons.bcel6.classfile.Code;
 import org.apache.commons.bcel6.classfile.CodeException;
@@ -42,7 +43,7 @@ import org.apache.commons.bcel6.classfile.Utility;
  * @version $Id$
  * 
  */
-final class CodeHTML implements org.apache.commons.bcel6.Constants {
+final class CodeHTML {
 
     private final String class_name; // name of current class
 //    private Method[] methods; // Methods to print
@@ -85,11 +86,11 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
         int[] jump_table;
         int no_pad_bytes = 0, offset;
         buf = new StringBuilder(256);
-        buf.append("<TT>").append(OPCODE_NAMES[opcode]).append("</TT></TD><TD>");
+        buf.append("<TT>").append(Constants.OPCODE_NAMES[opcode]).append("</TT></TD><TD>");
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned
          */
-        if ((opcode == TABLESWITCH) || (opcode == LOOKUPSWITCH)) {
+        if ((opcode == Constants.TABLESWITCH) || (opcode == Constants.LOOKUPSWITCH)) {
             int remainder = bytes.getIndex() % 4;
             no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
             for (int i = 0; i < no_pad_bytes; i++) {
@@ -99,7 +100,7 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
             default_offset = bytes.readInt();
         }
         switch (opcode) {
-            case TABLESWITCH:
+            case Constants.TABLESWITCH:
                 low = bytes.readInt();
                 high = bytes.readInt();
                 offset = bytes.getIndex() - 12 - no_pad_bytes - 1;
@@ -123,7 +124,7 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                 break;
             /* Lookup switch has variable length arguments.
              */
-            case LOOKUPSWITCH:
+            case Constants.LOOKUPSWITCH:
                 int npairs = bytes.readInt();
                 offset = bytes.getIndex() - 8 - no_pad_bytes - 1;
                 jump_table = new int[npairs];
@@ -148,49 +149,49 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
             /* Two address bytes + offset from start of byte stream form the
              * jump target.
              */
-            case GOTO:
-            case IFEQ:
-            case IFGE:
-            case IFGT:
-            case IFLE:
-            case IFLT:
-            case IFNE:
-            case IFNONNULL:
-            case IFNULL:
-            case IF_ACMPEQ:
-            case IF_ACMPNE:
-            case IF_ICMPEQ:
-            case IF_ICMPGE:
-            case IF_ICMPGT:
-            case IF_ICMPLE:
-            case IF_ICMPLT:
-            case IF_ICMPNE:
-            case JSR:
+            case Constants.GOTO:
+            case Constants.IFEQ:
+            case Constants.IFGE:
+            case Constants.IFGT:
+            case Constants.IFLE:
+            case Constants.IFLT:
+            case Constants.IFNE:
+            case Constants.IFNONNULL:
+            case Constants.IFNULL:
+            case Constants.IF_ACMPEQ:
+            case Constants.IF_ACMPNE:
+            case Constants.IF_ICMPEQ:
+            case Constants.IF_ICMPGE:
+            case Constants.IF_ICMPGT:
+            case Constants.IF_ICMPLE:
+            case Constants.IF_ICMPLT:
+            case Constants.IF_ICMPNE:
+            case Constants.JSR:
                 index = (bytes.getIndex() + bytes.readShort() - 1);
                 buf.append("<A HREF=\"#code").append(method_number).append("@").append(index)
                         .append("\">").append(index).append("</A>");
                 break;
             /* Same for 32-bit wide jumps
              */
-            case GOTO_W:
-            case JSR_W:
+            case Constants.GOTO_W:
+            case Constants.JSR_W:
                 int windex = bytes.getIndex() + bytes.readInt() - 1;
                 buf.append("<A HREF=\"#code").append(method_number).append("@").append(windex)
                         .append("\">").append(windex).append("</A>");
                 break;
             /* Index byte references local variable (register)
              */
-            case ALOAD:
-            case ASTORE:
-            case DLOAD:
-            case DSTORE:
-            case FLOAD:
-            case FSTORE:
-            case ILOAD:
-            case ISTORE:
-            case LLOAD:
-            case LSTORE:
-            case RET:
+            case Constants.ALOAD:
+            case Constants.ASTORE:
+            case Constants.DLOAD:
+            case Constants.DSTORE:
+            case Constants.FLOAD:
+            case Constants.FSTORE:
+            case Constants.ILOAD:
+            case Constants.ISTORE:
+            case Constants.LLOAD:
+            case Constants.LSTORE:
+            case Constants.RET:
                 if (wide) {
                     vindex = bytes.readShort();
                     wide = false; // Clear flag
@@ -204,30 +205,30 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
              * following instruction. Relies on that the method is called again with
              * the following opcode.
              */
-            case WIDE:
+            case Constants.WIDE:
                 wide = true;
                 buf.append("(wide)");
                 break;
             /* Array of basic type.
              */
-            case NEWARRAY:
-                buf.append("<FONT COLOR=\"#00FF00\">").append(TYPE_NAMES[bytes.readByte()]).append(
+            case Constants.NEWARRAY:
+                buf.append("<FONT COLOR=\"#00FF00\">").append(Constants.TYPE_NAMES[bytes.readByte()]).append(
                         "</FONT>");
                 break;
             /* Access object/class fields.
              */
-            case GETFIELD:
-            case GETSTATIC:
-            case PUTFIELD:
-            case PUTSTATIC:
+            case Constants.GETFIELD:
+            case Constants.GETSTATIC:
+            case Constants.PUTFIELD:
+            case Constants.PUTSTATIC:
                 index = bytes.readShort();
                 ConstantFieldref c1 = (ConstantFieldref) constant_pool.getConstant(index,
-                        CONSTANT_Fieldref);
+                        Constants.CONSTANT_Fieldref);
                 class_index = c1.getClassIndex();
-                name = constant_pool.getConstantString(class_index, CONSTANT_Class);
+                name = constant_pool.getConstantString(class_index, Constants.CONSTANT_Class);
                 name = Utility.compactClassName(name, false);
                 index = c1.getNameAndTypeIndex();
-                String field_name = constant_pool.constantToString(index, CONSTANT_NameAndType);
+                String field_name = constant_pool.constantToString(index, Constants.CONSTANT_NameAndType);
                 if (name.equals(class_name)) { // Local field
                     buf.append("<A HREF=\"").append(class_name).append("_methods.html#field")
                             .append(field_name).append("\" TARGET=Methods>").append(field_name)
@@ -239,36 +240,36 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                 break;
             /* Operands are references to classes in constant pool
              */
-            case CHECKCAST:
-            case INSTANCEOF:
-            case NEW:
+            case Constants.CHECKCAST:
+            case Constants.INSTANCEOF:
+            case Constants.NEW:
                 index = bytes.readShort();
                 buf.append(constant_html.referenceConstant(index));
                 break;
             /* Operands are references to methods in constant pool
              */
-            case INVOKESPECIAL:
-            case INVOKESTATIC:
-            case INVOKEVIRTUAL:
-            case INVOKEINTERFACE:
-            case INVOKEDYNAMIC:
+            case Constants.INVOKESPECIAL:
+            case Constants.INVOKESTATIC:
+            case Constants.INVOKEVIRTUAL:
+            case Constants.INVOKEINTERFACE:
+            case Constants.INVOKEDYNAMIC:
                 int m_index = bytes.readShort();
                 String str;
-                if (opcode == INVOKEINTERFACE) { // Special treatment needed
+                if (opcode == Constants.INVOKEINTERFACE) { // Special treatment needed
                     bytes.readUnsignedByte(); // Redundant
                     bytes.readUnsignedByte(); // Reserved
 //                    int nargs = bytes.readUnsignedByte(); // Redundant
 //                    int reserved = bytes.readUnsignedByte(); // Reserved
                     ConstantInterfaceMethodref c = (ConstantInterfaceMethodref) constant_pool
-                            .getConstant(m_index, CONSTANT_InterfaceMethodref);
+                            .getConstant(m_index, Constants.CONSTANT_InterfaceMethodref);
                     class_index = c.getClassIndex();
                     index = c.getNameAndTypeIndex();
                     name = Class2HTML.referenceClass(class_index);
-                } else if (opcode == INVOKEDYNAMIC) { // Special treatment needed
+                } else if (opcode == Constants.INVOKEDYNAMIC) { // Special treatment needed
                     bytes.readUnsignedByte(); // Reserved
                     bytes.readUnsignedByte(); // Reserved
                     ConstantInvokeDynamic c = (ConstantInvokeDynamic) constant_pool
-                            .getConstant(m_index, CONSTANT_InvokeDynamic);
+                            .getConstant(m_index, Constants.CONSTANT_InvokeDynamic);
                     index = c.getNameAndTypeIndex();
                     name = "#" + c.getBootstrapMethodAttrIndex();
                 } else {
@@ -276,17 +277,17 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                     // reference EITHER a Methodref OR an InterfaceMethodref.
                     // Not sure if that affects this code or not.  (markro)
                     ConstantMethodref c = (ConstantMethodref) constant_pool.getConstant(m_index,
-                            CONSTANT_Methodref);
+                            Constants.CONSTANT_Methodref);
                     class_index = c.getClassIndex();
                     index = c.getNameAndTypeIndex();
                 name = Class2HTML.referenceClass(class_index);
                 }
                 str = Class2HTML.toHTML(constant_pool.constantToString(constant_pool.getConstant(
-                        index, CONSTANT_NameAndType)));
+                        index, Constants.CONSTANT_NameAndType)));
                 // Get signature, i.e., types
                 ConstantNameAndType c2 = (ConstantNameAndType) constant_pool.getConstant(index,
-                        CONSTANT_NameAndType);
-                signature = constant_pool.constantToString(c2.getSignatureIndex(), CONSTANT_Utf8);
+                        Constants.CONSTANT_NameAndType);
+                signature = constant_pool.constantToString(c2.getSignatureIndex(), Constants.CONSTANT_Utf8);
                 String[] args = Utility.methodSignatureArgumentTypes(signature, false);
                 String type = Utility.methodSignatureReturnType(signature, false);
                 buf.append(name).append(".<A HREF=\"").append(class_name).append("_cp.html#cp")
@@ -304,15 +305,15 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                 break;
             /* Operands are references to items in constant pool
              */
-            case LDC_W:
-            case LDC2_W:
+            case Constants.LDC_W:
+            case Constants.LDC2_W:
                 index = bytes.readShort();
                 buf.append("<A HREF=\"").append(class_name).append("_cp.html#cp").append(index)
                         .append("\" TARGET=\"ConstantPool\">").append(
                                 Class2HTML.toHTML(constant_pool.constantToString(index,
                                         constant_pool.getConstant(index).getTag()))).append("</a>");
                 break;
-            case LDC:
+            case Constants.LDC:
                 index = bytes.readUnsignedByte();
                 buf.append("<A HREF=\"").append(class_name).append("_cp.html#cp").append(index)
                         .append("\" TARGET=\"ConstantPool\">").append(
@@ -321,13 +322,13 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                 break;
             /* Array of references.
              */
-            case ANEWARRAY:
+            case Constants.ANEWARRAY:
                 index = bytes.readShort();
                 buf.append(constant_html.referenceConstant(index));
                 break;
             /* Multidimensional array of references.
              */
-            case MULTIANEWARRAY:
+            case Constants.MULTIANEWARRAY:
                 index = bytes.readShort();
                 int dimensions = bytes.readByte();
                 buf.append(constant_html.referenceConstant(index)).append(":").append(dimensions)
@@ -335,7 +336,7 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                 break;
             /* Increment local variable.
              */
-            case IINC:
+            case Constants.IINC:
                 if (wide) {
                     vindex = bytes.readShort();
                     constant = bytes.readShort();
@@ -347,16 +348,16 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                 buf.append("%").append(vindex).append(" ").append(constant);
                 break;
             default:
-                if (NO_OF_OPERANDS[opcode] > 0) {
-                    for (int i = 0; i < TYPE_OF_OPERANDS[opcode].length; i++) {
-                        switch (TYPE_OF_OPERANDS[opcode][i]) {
-                            case T_BYTE:
+                if (Constants.NO_OF_OPERANDS[opcode] > 0) {
+                    for (int i = 0; i < Constants.TYPE_OF_OPERANDS[opcode].length; i++) {
+                        switch (Constants.TYPE_OF_OPERANDS[opcode][i]) {
+                            case Constants.T_BYTE:
                                 buf.append(bytes.readUnsignedByte());
                                 break;
-                            case T_SHORT: // Either branch or index
+                            case Constants.T_SHORT: // Either branch or index
                                 buf.append(bytes.readShort());
                                 break;
-                            case T_INT:
+                            case Constants.T_INT:
                                 buf.append(bytes.readInt());
                                 break;
                             default: // Never reached
@@ -393,7 +394,7 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
             // Look for local variables and their range
             Attribute[] attributes = code.getAttributes();
             for (Attribute attribute : attributes) {
-                if (attribute.getTag() == ATTR_LOCAL_VARIABLE_TABLE) {
+                if (attribute.getTag() == Constants.ATTR_LOCAL_VARIABLE_TABLE) {
                     LocalVariable[] vars = ((LocalVariableTable) attribute)
                             .getLocalVariableTable();
                     for (LocalVariable var : vars) {
@@ -411,8 +412,8 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
             opcode = bytes.readUnsignedByte();
             //System.out.println(OPCODE_NAMES[opcode]);
             switch (opcode) {
-                case TABLESWITCH:
-                case LOOKUPSWITCH:
+                case Constants.TABLESWITCH:
+                case Constants.LOOKUPSWITCH:
                     //bytes.readByte(); // Skip already read byte
                     int remainder = bytes.getIndex() % 4;
                     int no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
@@ -423,7 +424,7 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                     }
                     // Both cases have a field default_offset in common
                     default_offset = bytes.readInt();
-                    if (opcode == TABLESWITCH) {
+                    if (opcode == Constants.TABLESWITCH) {
                         int low = bytes.readInt();
                         int high = bytes.readInt();
                         offset = bytes.getIndex() - 12 - no_pad_bytes - 1;
@@ -446,30 +447,30 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                         }
                     }
                     break;
-                case GOTO:
-                case IFEQ:
-                case IFGE:
-                case IFGT:
-                case IFLE:
-                case IFLT:
-                case IFNE:
-                case IFNONNULL:
-                case IFNULL:
-                case IF_ACMPEQ:
-                case IF_ACMPNE:
-                case IF_ICMPEQ:
-                case IF_ICMPGE:
-                case IF_ICMPGT:
-                case IF_ICMPLE:
-                case IF_ICMPLT:
-                case IF_ICMPNE:
-                case JSR:
+                case Constants.GOTO:
+                case Constants.IFEQ:
+                case Constants.IFGE:
+                case Constants.IFGT:
+                case Constants.IFLE:
+                case Constants.IFLT:
+                case Constants.IFNE:
+                case Constants.IFNONNULL:
+                case Constants.IFNULL:
+                case Constants.IF_ACMPEQ:
+                case Constants.IF_ACMPNE:
+                case Constants.IF_ICMPEQ:
+                case Constants.IF_ICMPGE:
+                case Constants.IF_ICMPGT:
+                case Constants.IF_ICMPLE:
+                case Constants.IF_ICMPLT:
+                case Constants.IF_ICMPNE:
+                case Constants.JSR:
                     //bytes.readByte(); // Skip already read byte
                     index = bytes.getIndex() + bytes.readShort() - 1;
                     goto_set.set(index);
                     break;
-                case GOTO_W:
-                case JSR_W:
+                case Constants.GOTO_W:
+                case Constants.JSR_W:
                     //bytes.readByte(); // Skip already read byte
                     index = bytes.getIndex() + bytes.readInt() - 1;
                     goto_set.set(index);
@@ -517,14 +518,14 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
             file.print("<H4>Attributes</H4><UL>\n");
             for (int i = 0; i < attributes.length; i++) {
                 byte tag = attributes[i].getTag();
-                if (tag != ATTR_UNKNOWN) {
+                if (tag != Constants.ATTR_UNKNOWN) {
                     file.print("<LI><A HREF=\"" + class_name + "_attributes.html#method"
                             + method_number + "@" + i + "\" TARGET=Attributes>"
-                            + ATTRIBUTE_NAMES[tag] + "</A></LI>\n");
+                            + Constants.ATTRIBUTE_NAMES[tag] + "</A></LI>\n");
                 } else {
                     file.print("<LI>" + attributes[i] + "</LI>");
                 }
-                if (tag == ATTR_CODE) {
+                if (tag == Constants.ATTR_CODE) {
                     c = (Code) attributes[i];
                     Attribute[] attributes2 = c.getAttributes();
                     code = c.getCode();
@@ -533,7 +534,7 @@ final class CodeHTML implements org.apache.commons.bcel6.Constants {
                         tag = attributes2[j].getTag();
                         file.print("<LI><A HREF=\"" + class_name + "_attributes.html#" + "method"
                                 + method_number + "@" + i + "@" + j + "\" TARGET=Attributes>"
-                                + ATTRIBUTE_NAMES[tag] + "</A></LI>\n");
+                                + Constants.ATTRIBUTE_NAMES[tag] + "</A></LI>\n");
                     }
                     file.print("</UL>");
                 }

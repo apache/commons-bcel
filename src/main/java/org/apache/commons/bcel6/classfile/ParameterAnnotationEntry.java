@@ -24,15 +24,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.bcel6.Constants;
-
 /**
  * represents one parameter annotation in the parameter annotation table
  *
  * @version $Id: ParameterAnnotationEntry
  * @since 6.0
  */
-public class ParameterAnnotationEntry implements Node, Constants {
+public class ParameterAnnotationEntry implements Node {
 
     private final AnnotationEntry[] annotation_table;
 

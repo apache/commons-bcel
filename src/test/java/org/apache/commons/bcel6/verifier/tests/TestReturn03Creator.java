@@ -31,13 +31,13 @@ import org.apache.commons.bcel6.generic.MethodGen;
 import org.apache.commons.bcel6.generic.Type;
 import org.junit.Assert;
 
-public class TestReturn03Creator extends TestCreator implements Constants {
+public class TestReturn03Creator extends TestCreator {
   private InstructionFactory _factory;
   private ConstantPoolGen    _cp;
   private ClassGen           _cg;
 
   public TestReturn03Creator() {
-    _cg = new ClassGen("org.apache.commons.bcel6.verifier.tests.TestReturn03", "java.lang.Object", "TestReturn03.java", ACC_PUBLIC | ACC_SUPER, new String[] {  });
+    _cg = new ClassGen("org.apache.commons.bcel6.verifier.tests.TestReturn03", "java.lang.Object", "TestReturn03.java", Constants.ACC_PUBLIC | Constants.ACC_SUPER, new String[] {  });
 
     _cp = _cg.getConstantPool();
     _factory = new InstructionFactory(_cg, _cp);
@@ -51,7 +51,7 @@ public class TestReturn03Creator extends TestCreator implements Constants {
 
   private void createMethod_0() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>", "org.apache.commons.bcel6.verifier.tests.TestReturn03", il, _cp);
+    MethodGen method = new MethodGen(Constants.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>", "org.apache.commons.bcel6.verifier.tests.TestReturn03", il, _cp);
 
     InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
     Assert.assertNotNull(ih_0); // TODO why is this not used
@@ -66,7 +66,7 @@ public class TestReturn03Creator extends TestCreator implements Constants {
 
   private void createMethod_1() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(ACC_PUBLIC | ACC_STATIC, Type.INT, Type.NO_ARGS, new String[] {  }, "test3", "org.apache.commons.bcel6.verifier.tests.TestReturn03", il, _cp);
+    MethodGen method = new MethodGen(Constants.ACC_PUBLIC | Constants.ACC_STATIC, Type.INT, Type.NO_ARGS, new String[] {  }, "test3", "org.apache.commons.bcel6.verifier.tests.TestReturn03", il, _cp);
 
     InstructionHandle ih_0 = il.append(InstructionConstants.ACONST_NULL);
     Assert.assertNotNull(ih_0); // TODO why is this not used

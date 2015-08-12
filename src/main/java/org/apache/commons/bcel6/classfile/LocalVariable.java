@@ -31,7 +31,7 @@ import org.apache.commons.bcel6.Constants;
  * @version $Id$
  * @see     LocalVariableTable
  */
-public final class LocalVariable implements Constants, Cloneable, Node, Serializable {
+public final class LocalVariable implements Cloneable, Node, Serializable {
 
     private static final long serialVersionUID = -51081099265972179L;
     private final int start_pc; // Range in which the variable is valid
@@ -132,7 +132,7 @@ public final class LocalVariable implements Constants, Cloneable, Node, Serializ
      */
     public final String getName() {
         ConstantUtf8 c;
-        c = (ConstantUtf8) constant_pool.getConstant(name_index, CONSTANT_Utf8);
+        c = (ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8);
         return c.getBytes();
     }
 
@@ -150,7 +150,7 @@ public final class LocalVariable implements Constants, Cloneable, Node, Serializ
      */
     public final String getSignature() {
         ConstantUtf8 c;
-        c = (ConstantUtf8) constant_pool.getConstant(signature_index, CONSTANT_Utf8);
+        c = (ConstantUtf8) constant_pool.getConstant(signature_index, Constants.CONSTANT_Utf8);
         return c.getBytes();
     }
 

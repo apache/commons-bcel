@@ -33,7 +33,7 @@ import org.apache.commons.bcel6.Constants;
  * @version $Id: AnnotationEntry
  * @since 6.0
  */
-public class AnnotationEntry implements Node, Constants, Serializable {
+public class AnnotationEntry implements Node, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class AnnotationEntry implements Node, Constants, Serializable {
 
     private List<ElementValuePair> element_value_pairs;
 
-    /**
+    /*
      * Factory method to create an AnnotionEntry from a DataInput
      * 
      * @param input
@@ -96,7 +96,7 @@ public class AnnotationEntry implements Node, Constants, Serializable {
      * @return the annotation type name
      */
     public String getAnnotationType() {
-        final ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(type_index, CONSTANT_Utf8);
+        final ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(type_index, Constants.CONSTANT_Utf8);
         return c.getBytes();
     }
 

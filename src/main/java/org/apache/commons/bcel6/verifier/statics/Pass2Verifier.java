@@ -19,6 +19,7 @@ package org.apache.commons.bcel6.verifier.statics;
 
 
 import java.util.HashMap;
+
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
@@ -82,7 +83,7 @@ import org.apache.commons.bcel6.verifier.exc.LocalVariableInfoInconsistentExcept
  * @version $Id$
  * @see #do_verify()
  */
-public final class Pass2Verifier extends PassVerifier implements Constants{
+public final class Pass2Verifier extends PassVerifier {
 
     /**
      * The LocalVariableInfo instances used by Pass3bVerifier.
@@ -537,7 +538,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                 }
             }
 
-            if ((obj.getAccessFlags() & ~(ACC_PUBLIC|ACC_PRIVATE|ACC_PROTECTED|ACC_STATIC|ACC_FINAL|ACC_VOLATILE|ACC_TRANSIENT)) > 0){
+            if ((obj.getAccessFlags() & ~(Constants.ACC_PUBLIC|Constants.ACC_PRIVATE|Constants.ACC_PROTECTED|Constants.ACC_STATIC|Constants.ACC_FINAL|Constants.ACC_VOLATILE|Constants.ACC_TRANSIENT)) > 0){
                 addMessage("Field '"+tostring(obj)+"' has access flag(s) other than ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL, ACC_VOLATILE, ACC_TRANSIENT set (ignored).");
             }
 
@@ -638,7 +639,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
             }
 
             // Nearly forgot this! Funny return values are allowed, but a non-empty arguments list makes a different method out of it!
-            if (name.equals(STATIC_INITIALIZER_NAME) && (ts.length != 0)){
+            if (name.equals(Constants.STATIC_INITIALIZER_NAME) && (ts.length != 0)){
                 throw new ClassConstraintException("Method '"+tostring(obj)+"' has illegal name '"+name+"'. It's name resembles the class or interface initialization method which it isn't because of its arguments (==descriptor).");
             }
 
@@ -679,7 +680,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                 }
 
                 // A specific instance initialization method... (vmspec2,Page 116).
-                if (name.equals(CONSTRUCTOR_NAME)) {
+                if (name.equals(Constants.CONSTRUCTOR_NAME)) {
                     //..may have at most one of ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC set: is checked above.
                     //..may also have ACC_STRICT set, but none of the other flags in table 4.5 (vmspec2, page 115)
                     if (obj.isStatic() ||
@@ -692,8 +693,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                 }
             }
             else{ // isInterface!
-                if (!name.equals(STATIC_INITIALIZER_NAME)){//vmspec2, p.116, 2nd paragraph
-                    if (jc.getMajor() >= MAJOR_1_8) {
+                if (!name.equals(Constants.STATIC_INITIALIZER_NAME)){//vmspec2, p.116, 2nd paragraph
+                    if (jc.getMajor() >= Constants.MAJOR_1_8) {
                         if (!(obj.isPublic() ^ obj.isPrivate())) {
                             throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
                         }
@@ -724,7 +725,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                 }
             }
 
-            if ((obj.getAccessFlags() & ~(ACC_PUBLIC|ACC_PRIVATE|ACC_PROTECTED|ACC_STATIC|ACC_FINAL|ACC_SYNCHRONIZED|ACC_NATIVE|ACC_ABSTRACT|ACC_STRICT)) > 0){
+            if ((obj.getAccessFlags() & ~(Constants.ACC_PUBLIC|Constants.ACC_PRIVATE|Constants.ACC_PROTECTED|Constants.ACC_STATIC|Constants.ACC_FINAL|Constants.ACC_SYNCHRONIZED|Constants.ACC_NATIVE|Constants.ACC_ABSTRACT|Constants.ACC_STRICT)) > 0){
                 addMessage("Method '"+tostring(obj)+"' has access flag(s) other than ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL, ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT set (ignored).");
             }
 
@@ -827,7 +828,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
                     checkIndex(obj, innername_idx, CONST_Utf8);
                 }
                 int acc = ic.getInnerAccessFlags();
-                acc = acc & (~ (ACC_PUBLIC | ACC_PRIVATE | ACC_PROTECTED | ACC_STATIC | ACC_FINAL | ACC_INTERFACE | ACC_ABSTRACT));
+                acc = acc & (~ (Constants.ACC_PUBLIC | Constants.ACC_PRIVATE | Constants.ACC_PROTECTED | Constants.ACC_STATIC | Constants.ACC_FINAL | Constants.ACC_INTERFACE | Constants.ACC_ABSTRACT));
                 if (acc != 0){
                     addMessage("Unknown access flag for inner class '"+tostring(ic)+"' set (InnerClasses attribute '"+tostring(obj)+"').");
                 }
@@ -1263,7 +1264,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
             try{
                 Type   t  = Type.getReturnType(sig);
-                if ( name.equals(CONSTRUCTOR_NAME) && (t != Type.VOID) ){
+                if ( name.equals(Constants.CONSTRUCTOR_NAME) && (t != Type.VOID) ){
                     throw new ClassConstraintException("Instance initialization method must have VOID return type.");
                 }
             }
@@ -1295,8 +1296,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 
             try{
                 Type   t  = Type.getReturnType(sig);
-                if ( name.equals(STATIC_INITIALIZER_NAME) && (t != Type.VOID) ){
-                    addMessage("Class or interface initialization method '"+STATIC_INITIALIZER_NAME+"' usually has VOID return type instead of '"+t+"'. Note this is really not a requirement of The Java Virtual Machine Specification, Second Edition.");
+                if ( name.equals(Constants.STATIC_INITIALIZER_NAME) && (t != Type.VOID) ){
+                    addMessage("Class or interface initialization method '"+Constants.STATIC_INITIALIZER_NAME+"' usually has VOID return type instead of '"+t+"'. Note this is really not a requirement of The Java Virtual Machine Specification, Second Edition.");
                 }
             }
             catch (ClassFormatException cfe){
@@ -1332,10 +1333,10 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
         }
 
         if (allowStaticInit){
-            return (name.equals(CONSTRUCTOR_NAME) || name.equals(STATIC_INITIALIZER_NAME));
+            return (name.equals(Constants.CONSTRUCTOR_NAME) || name.equals(Constants.STATIC_INITIALIZER_NAME));
         }
         else{
-            return name.equals(CONSTRUCTOR_NAME);
+            return name.equals(Constants.CONSTRUCTOR_NAME);
         }
     }
 

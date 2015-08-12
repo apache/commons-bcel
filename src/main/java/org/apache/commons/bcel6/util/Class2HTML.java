@@ -51,7 +51,7 @@ import org.apache.commons.bcel6.classfile.Utility;
  *
  * @version $Id$
  */
-public class Class2HTML implements Constants {
+public class Class2HTML {
 
     private final JavaClass java_class; // current class object
     private final String dir;
@@ -150,7 +150,7 @@ public class Class2HTML implements Constants {
      * i.e., an index to a string.
      */
     static String referenceClass( int index ) {
-        String str = constant_pool.getConstantString(index, CONSTANT_Class);
+        String str = constant_pool.getConstantString(index, Constants.CONSTANT_Class);
         str = Utility.compactClassName(str);
         str = Utility.compactClassName(str, class_package + ".", true);
         return "<A HREF=\"" + class_name + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + str

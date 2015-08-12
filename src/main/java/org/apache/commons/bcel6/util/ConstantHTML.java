@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.classfile.Constant;
 import org.apache.commons.bcel6.classfile.ConstantClass;
 import org.apache.commons.bcel6.classfile.ConstantFieldref;
@@ -38,7 +39,7 @@ import org.apache.commons.bcel6.classfile.Utility;
  * @version $Id$
  * 
  */
-final class ConstantHTML implements org.apache.commons.bcel6.Constants {
+final class ConstantHTML {
 
     private final String class_name; // name of current class
     private final String class_package; // name of package
@@ -87,39 +88,39 @@ final class ConstantHTML implements org.apache.commons.bcel6.Constants {
         int class_index, name_index;
         String ref;
         // The header is always the same
-        file.println("<H4> <A NAME=cp" + index + ">" + index + "</A> " + CONSTANT_NAMES[tag]
+        file.println("<H4> <A NAME=cp" + index + ">" + index + "</A> " + Constants.CONSTANT_NAMES[tag]
                 + "</H4>");
         /* For every constant type get the needed parameters and print them appropiately 
          */
         switch (tag) {
-            case CONSTANT_InterfaceMethodref:
-            case CONSTANT_Methodref:
+            case Constants.CONSTANT_InterfaceMethodref:
+            case Constants.CONSTANT_Methodref:
                 // Get class_index and name_and_type_index, depending on type
-                if (tag == CONSTANT_Methodref) {
+                if (tag == Constants.CONSTANT_Methodref) {
                     ConstantMethodref c = (ConstantMethodref) constant_pool.getConstant(index,
-                            CONSTANT_Methodref);
+                            Constants.CONSTANT_Methodref);
                     class_index = c.getClassIndex();
                     name_index = c.getNameAndTypeIndex();
                 } else {
                     ConstantInterfaceMethodref c1 = (ConstantInterfaceMethodref) constant_pool
-                            .getConstant(index, CONSTANT_InterfaceMethodref);
+                            .getConstant(index, Constants.CONSTANT_InterfaceMethodref);
                     class_index = c1.getClassIndex();
                     name_index = c1.getNameAndTypeIndex();
                 }
                 // Get method name and its class
                 String method_name = constant_pool.constantToString(name_index,
-                        CONSTANT_NameAndType);
+                        Constants.CONSTANT_NameAndType);
                 String html_method_name = Class2HTML.toHTML(method_name);
                 // Partially compacted class name, i.e., / -> .
-                String method_class = constant_pool.constantToString(class_index, CONSTANT_Class);
+                String method_class = constant_pool.constantToString(class_index, Constants.CONSTANT_Class);
                 String short_method_class = Utility.compactClassName(method_class); // I.e., remove java.lang.
                 short_method_class = Utility.compactClassName(short_method_class, class_package
                         + ".", true); // Remove class package prefix
                 // Get method signature
                 ConstantNameAndType c2 = (ConstantNameAndType) constant_pool.getConstant(
-                        name_index, CONSTANT_NameAndType);
+                        name_index, Constants.CONSTANT_NameAndType);
                 String signature = constant_pool.constantToString(c2.getSignatureIndex(),
-                        CONSTANT_Utf8);
+                        Constants.CONSTANT_Utf8);
                 // Get array of strings containing the argument types
                 String[] args = Utility.methodSignatureArgumentTypes(signature, false);
                 // Get return type string
@@ -151,19 +152,19 @@ final class ConstantHTML implements org.apache.commons.bcel6.Constants {
                         + "\">Class index(" + class_index + ")</A>\n" + "<LI><A HREF=\"#cp"
                         + name_index + "\">NameAndType index(" + name_index + ")</A></UL>");
                 break;
-            case CONSTANT_Fieldref:
+            case Constants.CONSTANT_Fieldref:
                 // Get class_index and name_and_type_index
                 ConstantFieldref c3 = (ConstantFieldref) constant_pool.getConstant(index,
-                        CONSTANT_Fieldref);
+                        Constants.CONSTANT_Fieldref);
                 class_index = c3.getClassIndex();
                 name_index = c3.getNameAndTypeIndex();
                 // Get method name and its class (compacted)
-                String field_class = constant_pool.constantToString(class_index, CONSTANT_Class);
+                String field_class = constant_pool.constantToString(class_index, Constants.CONSTANT_Class);
                 String short_field_class = Utility.compactClassName(field_class); // I.e., remove java.lang.
                 short_field_class = Utility.compactClassName(short_field_class,
                         class_package + ".", true); // Remove class package prefix
                 String field_name = constant_pool
-                        .constantToString(name_index, CONSTANT_NameAndType);
+                        .constantToString(name_index, Constants.CONSTANT_NameAndType);
                 if (field_class.equals(class_name)) {
                     ref = "<A HREF=\"" + field_class + "_methods.html#field" + field_name
                             + "\" TARGET=Methods>" + field_name + "</A>";
@@ -180,8 +181,8 @@ final class ConstantHTML implements org.apache.commons.bcel6.Constants {
                         + "<LI><A HREF=\"#cp" + name_index + "\">NameAndType(" + name_index
                         + ")</A></UL>");
                 break;
-            case CONSTANT_Class:
-                ConstantClass c4 = (ConstantClass) constant_pool.getConstant(index, CONSTANT_Class);
+            case Constants.CONSTANT_Class:
+                ConstantClass c4 = (ConstantClass) constant_pool.getConstant(index, Constants.CONSTANT_Class);
                 name_index = c4.getNameIndex();
                 String class_name2 = constant_pool.constantToString(index, tag); // / -> .
                 String short_class_name = Utility.compactClassName(class_name2); // I.e., remove java.lang.
@@ -194,17 +195,17 @@ final class ConstantHTML implements org.apache.commons.bcel6.Constants {
                 file.println("<P><TT>" + ref + "</TT><UL>" + "<LI><A HREF=\"#cp" + name_index
                         + "\">Name index(" + name_index + ")</A></UL>\n");
                 break;
-            case CONSTANT_String:
+            case Constants.CONSTANT_String:
                 ConstantString c5 = (ConstantString) constant_pool.getConstant(index,
-                        CONSTANT_String);
+                        Constants.CONSTANT_String);
                 name_index = c5.getStringIndex();
                 String str = Class2HTML.toHTML(constant_pool.constantToString(index, tag));
                 file.println("<P><TT>" + str + "</TT><UL>" + "<LI><A HREF=\"#cp" + name_index
                         + "\">Name index(" + name_index + ")</A></UL>\n");
                 break;
-            case CONSTANT_NameAndType:
+            case Constants.CONSTANT_NameAndType:
                 ConstantNameAndType c6 = (ConstantNameAndType) constant_pool.getConstant(index,
-                        CONSTANT_NameAndType);
+                        Constants.CONSTANT_NameAndType);
                 name_index = c6.getNameIndex();
                 int signature_index = c6.getSignatureIndex();
                 file.println("<P><TT>"

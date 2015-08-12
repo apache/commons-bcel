@@ -32,7 +32,7 @@ import org.apache.commons.bcel6.Constants;
  * @version $Id$
  * @see     Code
  */
-public final class CodeException implements Cloneable, Constants, Node, Serializable {
+public final class CodeException implements Cloneable, Node, Serializable {
 
     private static final long serialVersionUID = 2972500041254967221L;
     private final int start_pc; // Range in the code the exception handler is
@@ -160,7 +160,7 @@ public final class CodeException implements Cloneable, Constants, Node, Serializ
         if (catch_type == 0) {
             str = "<Any exception>(0)";
         } else {
-            str = Utility.compactClassName(cp.getConstantString(catch_type, CONSTANT_Class), false)
+            str = Utility.compactClassName(cp.getConstantString(catch_type, Constants.CONSTANT_Class), false)
                     + (verbose ? "(" + catch_type + ")" : "");
         }
         return start_pc + "\t" + end_pc + "\t" + handler_pc + "\t" + str;

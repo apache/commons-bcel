@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.classfile.Attribute;
 import org.apache.commons.bcel6.classfile.Code;
 import org.apache.commons.bcel6.classfile.CodeException;
@@ -43,7 +44,7 @@ import org.apache.commons.bcel6.classfile.Utility;
  * @version $Id$
  * 
  */
-final class AttributeHTML implements org.apache.commons.bcel6.Constants {
+final class AttributeHTML {
 
     private final String class_name; // name of current class
     private final PrintWriter file; // file to write to
@@ -82,7 +83,7 @@ final class AttributeHTML implements org.apache.commons.bcel6.Constants {
     final void writeAttribute( Attribute attribute, String anchor, int method_number ) {
         byte tag = attribute.getTag();
         int index;
-        if (tag == ATTR_UNKNOWN) {
+        if (tag == Constants.ATTR_UNKNOWN) {
             return;
         }
         attr_count++; // Increment number of attributes found so far
@@ -91,12 +92,12 @@ final class AttributeHTML implements org.apache.commons.bcel6.Constants {
         } else {
             file.print("<TR BGCOLOR=\"#A0A0A0\"><TD>");
         }
-        file.println("<H4><A NAME=\"" + anchor + "\">" + attr_count + " " + ATTRIBUTE_NAMES[tag]
+        file.println("<H4><A NAME=\"" + anchor + "\">" + attr_count + " " + Constants.ATTRIBUTE_NAMES[tag]
                 + "</A></H4>");
         /* Handle different attributes
          */
         switch (tag) {
-            case ATTR_CODE:
+            case Constants.ATTR_CODE:
                 Code c = (Code) attribute;
                 // Some directly printable values
                 file.print("<UL><LI>Maximum stack size = " + c.getMaxStack()
@@ -124,20 +125,20 @@ final class AttributeHTML implements org.apache.commons.bcel6.Constants {
                     file.print("</UL>");
                 }
                 break;
-            case ATTR_CONSTANT_VALUE:
+            case Constants.ATTR_CONSTANT_VALUE:
                 index = ((ConstantValue) attribute).getConstantValueIndex();
                 // Reference _cp.html
                 file.print("<UL><LI><A HREF=\"" + class_name + "_cp.html#cp" + index
                         + "\" TARGET=\"ConstantPool\">Constant value index(" + index
                         + ")</A></UL>\n");
                 break;
-            case ATTR_SOURCE_FILE:
+            case Constants.ATTR_SOURCE_FILE:
                 index = ((SourceFile) attribute).getSourceFileIndex();
                 // Reference _cp.html
                 file.print("<UL><LI><A HREF=\"" + class_name + "_cp.html#cp" + index
                         + "\" TARGET=\"ConstantPool\">Source file index(" + index + ")</A></UL>\n");
                 break;
-            case ATTR_EXCEPTIONS:
+            case Constants.ATTR_EXCEPTIONS:
                 // List thrown exceptions
                 int[] indices = ((ExceptionTable) attribute).getExceptionIndexTable();
                 file.print("<UL>");
@@ -148,7 +149,7 @@ final class AttributeHTML implements org.apache.commons.bcel6.Constants {
                 }
                 file.print("</UL>\n");
                 break;
-            case ATTR_LINE_NUMBER_TABLE:
+            case Constants.ATTR_LINE_NUMBER_TABLE:
                 LineNumber[] line_numbers = ((LineNumberTable) attribute).getLineNumberTable();
                 // List line number pairs
                 file.print("<P>");
@@ -160,14 +161,14 @@ final class AttributeHTML implements org.apache.commons.bcel6.Constants {
                     }
                 }
                 break;
-            case ATTR_LOCAL_VARIABLE_TABLE:
+            case Constants.ATTR_LOCAL_VARIABLE_TABLE:
                 LocalVariable[] vars = ((LocalVariableTable) attribute).getLocalVariableTable();
                 // List name, range and type
                 file.print("<UL>");
                 for (LocalVariable var : vars) {
                     index = var.getSignatureIndex();
                     String signature = ((ConstantUtf8) constant_pool.getConstant(index,
-                            CONSTANT_Utf8)).getBytes();
+                            Constants.CONSTANT_Utf8)).getBytes();
                     signature = Utility.signatureToString(signature, false);
                     int start = var.getStartPC();
                     int end = (start + var.getLength());
@@ -180,7 +181,7 @@ final class AttributeHTML implements org.apache.commons.bcel6.Constants {
                 }
                 file.print("</UL>\n");
                 break;
-            case ATTR_INNER_CLASSES:
+            case Constants.ATTR_INNER_CLASSES:
                 InnerClass[] classes = ((InnerClasses) attribute).getInnerClasses();
                 // List inner classes
                 file.print("<UL>");
@@ -188,7 +189,7 @@ final class AttributeHTML implements org.apache.commons.bcel6.Constants {
                     String name, access;
                     index = classe.getInnerNameIndex();
                     if (index > 0) {
-                        name = ((ConstantUtf8) constant_pool.getConstant(index, CONSTANT_Utf8))
+                        name = ((ConstantUtf8) constant_pool.getConstant(index, Constants.CONSTANT_Utf8))
                                 .getBytes();
                     } else {
                         name = "&lt;anonymous&gt;";
