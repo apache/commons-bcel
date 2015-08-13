@@ -92,23 +92,53 @@ public interface Visitor
 
     void visitStackMapEntry(StackMapEntry obj);
 
+    /**
+     * @since 6.0
+     */
     void visitStackMapTable(StackMapTable obj);
 
+    /**
+     * @since 6.0
+     */
     void visitStackMapTableEntry(StackMapTableEntry obj);
 
+    /**
+     * @since 6.0
+     */
     void visitAnnotation(Annotations obj);
 
+    /**
+     * @since 6.0
+     */
     void visitParameterAnnotation(ParameterAnnotations obj);
 
+    /**
+     * @since 6.0
+     */
     void visitAnnotationEntry(AnnotationEntry obj);
 
+    /**
+     * @since 6.0
+     */
     void visitAnnotationDefault(AnnotationDefault obj);
 
+    /**
+     * @since 6.0
+     */
     void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
 
+    /**
+     * @since 6.0
+     */
     void visitEnclosingMethod(EnclosingMethod obj);
 
+    /**
+     * @since 6.0
+     */
     void visitBootstrapMethods(BootstrapMethods obj);
 
+    /**
+     * @since 6.0
+     */
     void visitMethodParameters(MethodParameters obj);
 }

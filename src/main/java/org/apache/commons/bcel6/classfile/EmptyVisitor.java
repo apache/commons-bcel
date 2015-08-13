@@ -30,18 +30,30 @@ public class EmptyVisitor implements Visitor
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitAnnotation(Annotations obj)
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitParameterAnnotation(ParameterAnnotations obj)
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitAnnotationEntry(AnnotationEntry obj)
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitAnnotationDefault(AnnotationDefault obj)
     {
     }
@@ -130,6 +142,9 @@ public class EmptyVisitor implements Visitor
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitBootstrapMethods(BootstrapMethods obj)
     {
     }
@@ -182,22 +197,37 @@ public class EmptyVisitor implements Visitor
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitStackMapTable(StackMapTable obj)
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitStackMapTableEntry(StackMapTableEntry obj)
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitEnclosingMethod(EnclosingMethod obj)
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
     {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitMethodParameters(MethodParameters obj)
     {
     }

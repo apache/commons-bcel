@@ -447,6 +447,9 @@ public interface Visitor {
     void visitINVOKEVIRTUAL( INVOKEVIRTUAL obj );
 
 
+    /**
+     * @since 6.0
+     */
     void visitINVOKEDYNAMIC( INVOKEDYNAMIC obj );
 
 

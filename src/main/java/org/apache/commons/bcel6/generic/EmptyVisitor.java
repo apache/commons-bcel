@@ -743,6 +743,9 @@ public abstract class EmptyVisitor implements Visitor {
     public void visitBREAKPOINT( BREAKPOINT obj ) {
     }
 
+    /**
+     * @since 6.0
+     */
     public void visitINVOKEDYNAMIC(INVOKEDYNAMIC obj) {
     }
 }
