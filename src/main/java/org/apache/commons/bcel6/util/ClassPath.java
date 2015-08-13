@@ -234,7 +234,7 @@ public class ClassPath implements Serializable {
      * empty Enumeration if no resource with that name.
      */
     public Enumeration<URL> getResources(String name) {
-        Vector<URL> results = new Vector<URL>();
+        Vector<URL> results = new Vector<>();
         for (PathEntry path : paths) {
             URL url;
             if ((url = path.getResource(name)) != null) {

@@ -74,7 +74,7 @@ public class OperandStack{
      * Clears the stack.
      */
     public void clear(){
-        stack = new ArrayList<Type>();
+        stack = new ArrayList<>();
     }
 
     /** @return a hash code value for the object.

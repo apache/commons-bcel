@@ -40,7 +40,7 @@ public class VerifierFactory {
     /**
      * The VerifierFactoryObserver instances that observe the VerifierFactory.
      */
-    private static final List<VerifierFactoryObserver> observers = new Vector<VerifierFactoryObserver>();
+    private static final List<VerifierFactoryObserver> observers = new Vector<>();
 
 
     /**

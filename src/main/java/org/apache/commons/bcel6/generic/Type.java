@@ -244,7 +244,7 @@ public abstract class Type implements java.io.Serializable {
      * @return array of argument types
      */
     public static Type[] getArgumentTypes( String signature ) {
-        List<Type> vec = new ArrayList<Type>();
+        List<Type> vec = new ArrayList<>();
         int index;
         Type[] types;
         try { // Read all declarations between for `(' and `)'
