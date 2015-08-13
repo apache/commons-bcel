@@ -110,10 +110,9 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
                 org.apache.commons.bcel6.Constants.CONSTANT_Class);
         if (className.startsWith("[")) {
             return (ArrayType) Type.getType(className);
-        } else {
-            className = className.replace('/', '.');
-            return ObjectType.getInstance(className);
         }
+        className = className.replace('/', '.');
+        return ObjectType.getInstance(className);
     }
 
 
