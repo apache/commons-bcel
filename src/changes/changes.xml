@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-110" type="fix">Problem with JAXB if the bcel classloader is used</action>
       <action issue="BCEL-201" type="update">modify several toString methods to make output similar to "javap"</action>
       <action issue="BCEL-205" type="update">add javadoc comments to LineNumber.java and LineNumberTable.java</action>
       <action issue="BCEL-208" type="fix">Need to check for an empty InstructionList</action>
