@@ -52,12 +52,14 @@ import org.apache.commons.bcel6.classfile.Utility;
  * @see JavaWrapper
  * @see ClassPath
  */
-public class ClassLoader extends java.lang.ClassLoader {
+public class ClassLoader extends java.lang.ClassLoader { // TODO rename this class to reduce confusion with parent
 
     private static final String BCEL_TOKEN = "$$BCEL$$";
-    public static final String[] DEFAULT_IGNORED_PACKAGES = {
+
+    private static final String[] DEFAULT_IGNORED_PACKAGES = {
             "java.", "javax.", "sun."
     };
+
     private final Hashtable<String, Class<?>> classes = new Hashtable<String, Class<?>>(); // Hashtable is synchronized thus thread-safe
     private final String[] ignored_packages;
     private Repository repository = SyntheticRepository.getInstance();
