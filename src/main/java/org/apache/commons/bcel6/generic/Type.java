@@ -393,10 +393,12 @@ public abstract class Type implements java.io.Serializable {
     }
 
 
-    /**
-     * @param signature the signature to set
+    /*
+     * Currently only used by the ArrayType constructor.
+     * The signature has a complicated dependency on other parameter
+     * so it's tricky to do it in a call to the super ctor.
      */
-    public void setSignature(String signature) {
+    void setSignature(String signature) {
         this.signature = signature;
     }
 }
