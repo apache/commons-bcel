@@ -243,7 +243,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /** Set major version number of class file, default value is 45 (JDK 1.1)
      * @param major major version number
      */
-    public void setMajor( int major ) {
+    public void setMajor( int major ) { // TODO could be package-protected - only called by test code
         this.major = major;
     }
 
@@ -251,10 +251,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /** Set minor version number of class file, default value is 3 (JDK 1.1)
      * @param minor minor version number
      */
-    public void setMinor( int minor ) {
+    public void setMinor( int minor ) {  // TODO could be package-protected - only called by test code
         this.minor = minor;
     }
-
 
     /**
      * @return minor version number of class file
@@ -416,13 +415,13 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public void setClassName( String name ) {
+    public void setClassName( String name ) { // TODO unused
         class_name = name.replace('/', '.');
         class_name_index = cp.addClass(name);
     }
 
 
-    public void setSuperclassName( String name ) {
+    public void setSuperclassName( String name ) { // TODO unused
         super_class_name = name.replace('/', '.');
         superclass_name_index = cp.addClass(name);
     }
@@ -433,7 +432,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public void setMethods( Method[] methods ) {
+    public void setMethods( Method[] methods ) { // TODO unused
         method_vec.clear();
         for (Method method : methods) {
             addMethod(method);
@@ -441,7 +440,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public void setMethodAt( Method method, int pos ) {
+    public void setMethodAt( Method method, int pos ) { // TODO unused
         method_vec.set(pos, method);
     }
 
@@ -489,19 +488,19 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public void setConstantPool( ConstantPoolGen constant_pool ) {
+    public void setConstantPool( ConstantPoolGen constant_pool ) { // TODO unused
         cp = constant_pool;
     }
 
 
-    public void setClassNameIndex( int class_name_index ) {
+    public void setClassNameIndex( int class_name_index ) { // TODO unused
         this.class_name_index = class_name_index;
         class_name = cp.getConstantPool().getConstantString(class_name_index,
                 Constants.CONSTANT_Class).replace('/', '.');
     }
 
 
-    public void setSuperclassNameIndex( int superclass_name_index ) {
+    public void setSuperclassNameIndex( int superclass_name_index ) { // TODO unused
         this.superclass_name_index = superclass_name_index;
         super_class_name = cp.getConstantPool().getConstantString(superclass_name_index,
                 Constants.CONSTANT_Class).replace('/', '.');
