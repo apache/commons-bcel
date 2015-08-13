@@ -91,7 +91,7 @@ public final class BranchHandle extends InstructionHandle {
     /**
      * Pass new target to instruction.
      */
-    public void setTarget( InstructionHandle ih ) {
+    public void setTarget( InstructionHandle ih ) { // TODO unused
         bi.setTarget(ih);
     }
 
@@ -116,7 +116,7 @@ public final class BranchHandle extends InstructionHandle {
      * Set new contents. Old instruction is disposed and may not be used anymore.
      */
     @Override
-    public void setInstruction( Instruction i ) {
+    public void setInstruction( Instruction i ) { // TODO could be package-protected?
         super.setInstruction(i);
         if (!(i instanceof BranchInstruction)) {
             throw new ClassGenException("Assigning " + i

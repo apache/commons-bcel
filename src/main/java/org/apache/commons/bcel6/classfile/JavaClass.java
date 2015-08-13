@@ -645,7 +645,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Sets the ClassRepository which loaded the JavaClass.
      * Should be called immediately after parsing is done.
      */
-    public void setRepository( org.apache.commons.bcel6.util.Repository repository ) {
+    public void setRepository( org.apache.commons.bcel6.util.Repository repository ) { // TODO make protected?
         this.repository = repository;
     }
 

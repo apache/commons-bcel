@@ -71,7 +71,7 @@ public class InstructionHandle implements java.io.Serializable {
      * Replace current instruction contained in this handle.
      * Old instruction is disposed using Instruction.dispose().
      */
-    public void setInstruction( Instruction i ) { // Overridden in BranchHandle
+    public void setInstruction( Instruction i ) { // Overridden in BranchHandle TODO could be package-protected?
         if (i == null) {
             throw new ClassGenException("Assigning null to handle");
         }
