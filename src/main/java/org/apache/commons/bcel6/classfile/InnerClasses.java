@@ -123,6 +123,9 @@ public final class InnerClasses extends Attribute {
     @Override
     public final String toString() {
         StringBuilder buf = new StringBuilder();
+        buf.append("InnerClasses(");
+        buf.append(inner_classes.length);
+        buf.append("):\n");
         for (InnerClass inner_class : inner_classes) {
             buf.append(inner_class.toString(super.getConstantPool())).append("\n");
         }

@@ -135,13 +135,18 @@ public abstract class BranchInstruction extends Instruction implements Instructi
                 } else if (target.getInstruction() == null) {
                     t = "<null instruction!!!?>";
                 } else {
-                    t = target.getInstruction().toString(false); // Avoid circles
+                    // I'm more interested in the address of the target then
+                    // the instruction located there.
+                    //t = target.getInstruction().toString(false); // Avoid circles
+                    t = "" + target.getPosition();
                 }
             }
         } else {
             if (target != null) {
-                index = getTargetOffset();
-                t = "" + (index + position);
+                index = target.getPosition();
+                // index = getTargetOffset();  crashes if positions haven't been set
+                // t = "" + (index + position);
+                t = "" + index;
             }
         }
         return s + " -> " + t;

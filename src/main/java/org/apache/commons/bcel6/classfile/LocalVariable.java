@@ -179,14 +179,23 @@ public final class LocalVariable implements Cloneable, Node, Serializable {
     }
 
 
+    /*
+     * Helper method shared with LocalVariableTypeTable
+     */
+    final String toStringShared( boolean typeTable ) {
+        String name = getName(), signature = Utility.signatureToString(getSignature(), false);
+        String label = "LocalVariable" + (typeTable ? "Types" : "" );
+        return label + "(start_pc = " + start_pc + ", length = " + length + ", index = "
+                + index + ":" + signature + " " + name + ")";
+    }
+
+
     /**
      * @return string representation.
      */
     @Override
     public final String toString() {
-        String name = getName(), signature = Utility.signatureToString(getSignature());
-        return "LocalVariable(start_pc = " + start_pc + ", length = " + length + ", index = "
-                + index + ":" + signature + " " + name + ")";
+        return toStringShared(false);
     }
 
 

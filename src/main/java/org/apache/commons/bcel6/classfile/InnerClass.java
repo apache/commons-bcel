@@ -155,20 +155,19 @@ public final class InnerClass implements Cloneable, Node, Serializable {
         if (outer_class_index != 0) {
             outer_class_name = constant_pool.getConstantString(outer_class_index,
                     Constants.CONSTANT_Class);
-            outer_class_name = Utility.compactClassName(outer_class_name);
+            outer_class_name = " of class " + Utility.compactClassName(outer_class_name);
         } else {
-            outer_class_name = "<not a member>";
+            outer_class_name = "";
         }
         if (inner_name_index != 0) {
             inner_name = ((ConstantUtf8) constant_pool.getConstant(inner_name_index,
                     Constants.CONSTANT_Utf8)).getBytes();
         } else {
-            inner_name = "<anonymous>";
+            inner_name = "(anonymous)";
         }
         access = Utility.accessToString(inner_access_flags, true);
         access = access.equals("") ? "" : (access + " ");
-        return "InnerClass:" + access + inner_class_name + "(\"" + outer_class_name + "\", \""
-                + inner_name + "\")";
+        return "  " + access + inner_name + "=class " + inner_class_name + outer_class_name;
     }
 
 

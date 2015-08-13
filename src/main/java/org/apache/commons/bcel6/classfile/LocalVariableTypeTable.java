@@ -116,7 +116,7 @@ public class LocalVariableTypeTable extends Attribute {
         StringBuilder buf = new StringBuilder();
 
         for (int i = 0; i < local_variable_type_table.length; i++) {
-            buf.append(local_variable_type_table[i].toString());
+            buf.append(local_variable_type_table[i].toStringShared(true));
 
             if (i < local_variable_type_table.length - 1) {
                 buf.append('\n');

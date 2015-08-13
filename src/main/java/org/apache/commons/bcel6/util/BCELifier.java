@@ -191,7 +191,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     }
 
 
-    static String printFlags( int flags, int reason ) {
+    public static String printFlags( int flags, int reason ) {
         if (flags == 0) {
             return "0";
         }
@@ -205,9 +205,10 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
                 } else if ((pow == Constants.ACC_TRANSIENT) && (reason == FLAG_FOR_METHOD)) {
                     buf.append("ACC_VARARGS | ");
                 } else {
-                    buf.append("ACC_")
-                            .append(Constants.ACCESS_NAMES[i].toUpperCase(Locale.ENGLISH)).append(
-                                    " | ");
+                    if (i < Constants.ACCESS_NAMES.length)
+                        buf.append("ACC_").append(Constants.ACCESS_NAMES[i].toUpperCase(Locale.ENGLISH)).append( " | ");
+                    else
+                        buf.append(String.format ("ACC_BIT %x | ", pow));
                 }
             }
             pow <<= 1;
