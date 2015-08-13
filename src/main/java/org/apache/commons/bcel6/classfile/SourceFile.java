@@ -129,7 +129,7 @@ public final class SourceFile extends Attribute {
      */
     @Override
     public final String toString() {
-        return "SourceFile(" + getSourceFileName() + ")";
+        return "SourceFile: " + getSourceFileName();
     }
 
 

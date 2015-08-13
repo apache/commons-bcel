@@ -129,7 +129,7 @@ public final class LineNumberTable extends Attribute {
             if (i < line_number_table.length - 1) {
                 line.append(", ");
             }
-            if (line.length() > 72) {
+            if ((line.length() > 72) && (i < line_number_table.length - 1)) {
                 line.append(newLine);
                 buf.append(line.toString());
                 line.setLength(0);

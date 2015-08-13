@@ -146,6 +146,7 @@ public final class ExceptionTable extends Attribute {
     public final String toString() {
         StringBuilder buf = new StringBuilder();
         String str;
+        buf.append("Exceptions: ");
         for (int i = 0; i < exception_index_table.length; i++) {
             str = super.getConstantPool().getConstantString(exception_index_table[i], Constants.CONSTANT_Class);
             buf.append(Utility.compactClassName(str, false));
