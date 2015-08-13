@@ -78,10 +78,14 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * @param cp constant pool
      */
     public LocalVariable getLocalVariable( ConstantPoolGen cp ) {
-        int start_pc = start.getPosition();
-        int length = end.getPosition() - start_pc;
-        if (end.getNext() == null) {
-            length += end.getInstruction().getLength();
+        int start_pc = 0;
+        int length = 0;
+        if ((start != null) && (end != null)) {
+            start_pc = start.getPosition();
+            length = end.getPosition() - start_pc;
+            if (end.getNext() == null) {
+                length += end.getInstruction().getLength();
+            }
         }
         int name_index = cp.addUtf8(name);
         int signature_index = cp.addUtf8(type.getSignature());
