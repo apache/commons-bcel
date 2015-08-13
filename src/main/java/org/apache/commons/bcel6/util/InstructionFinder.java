@@ -353,10 +353,12 @@ public class InstructionFinder {
         map.put("lconst", new String(new char[] { '(', makeChar(Constants.LCONST_0), '|', makeChar(Constants.LCONST_1), ')' }));
         map.put("dconst", new String(new char[] { '(', makeChar(Constants.DCONST_0), '|', makeChar(Constants.DCONST_1), ')' }));
         map.put("fconst", new String(new char[] { '(', makeChar(Constants.FCONST_0), '|', makeChar(Constants.FCONST_1), ')' }));
+        map.put("lload", precompile(Constants.LLOAD_0, Constants.LLOAD_3, Constants.LLOAD));
         map.put("iload", precompile(Constants.ILOAD_0, Constants.ILOAD_3, Constants.ILOAD));
         map.put("dload", precompile(Constants.DLOAD_0, Constants.DLOAD_3, Constants.DLOAD));
         map.put("fload", precompile(Constants.FLOAD_0, Constants.FLOAD_3, Constants.FLOAD));
         map.put("aload", precompile(Constants.ALOAD_0, Constants.ALOAD_3, Constants.ALOAD));
+        map.put("lstore", precompile(Constants.LSTORE_0, Constants.LSTORE_3, Constants.LSTORE));
         map.put("istore", precompile(Constants.ISTORE_0, Constants.ISTORE_3, Constants.ISTORE));
         map.put("dstore", precompile(Constants.DSTORE_0, Constants.DSTORE_3, Constants.DSTORE));
         map.put("fstore", precompile(Constants.FSTORE_0, Constants.FSTORE_3, Constants.FSTORE));
