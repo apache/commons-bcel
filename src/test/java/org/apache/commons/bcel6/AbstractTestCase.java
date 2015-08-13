@@ -39,7 +39,7 @@ import junit.framework.TestCase;
 
 public abstract class AbstractTestCase extends TestCase
 {
-    private final boolean verbose = false;
+    private static final boolean verbose = false;
 
     protected File createTestdataFile(String name)
     {
