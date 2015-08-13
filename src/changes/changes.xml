@@ -63,8 +63,8 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
-      <action issue="BCEL-231" type="fix">Remove deprecated methods and classes</action>
-      <action issue="BCEL-110" type="fix">Problem with JAXB if the bcel classloader is used</action>
+      <action issue="BCEL-231" type="remove">Remove deprecated methods and classes</action>
+      <action issue="BCEL-110" type="remove">Problem with JAXB if the bcel classloader is used</action>
       <action issue="BCEL-201" type="update">modify several toString methods to make output similar to "javap"</action>
       <action issue="BCEL-205" type="update">add javadoc comments to LineNumber.java and LineNumberTable.java</action>
       <action issue="BCEL-208" type="fix">Need to check for an empty InstructionList</action>
@@ -72,7 +72,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-217" type="fix">long type instructions are not searched by InstructionFinder using regular expression</action>
       <action issue="BCEL-244" type="update" dev="ggregory">Update Java requirement from 5 to 7</action>
       <action issue="BCEL-239" type="fix">Interfaces should not be used to define constants</action>
-      <action issue="BCEL-235" type="fix">Remove unused setters</action>
+      <action issue="BCEL-235" type="remove">Remove unused setters</action>
       <action issue="BCEL-232" type="fix">Make mutable fields private</action>
       <action issue="BCEL-233" type="fix">The access_flags field in AccessFlags class should be final</action>
       <action issue="BCEL-234" type="fix">Code must not swallow Throwable</action>
