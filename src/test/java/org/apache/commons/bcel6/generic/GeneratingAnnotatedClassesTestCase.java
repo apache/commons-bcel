@@ -15,12 +15,13 @@
  * limitations under the License.
  *
  */
-package org.apache.commons.bcel6;
+package org.apache.commons.bcel6.generic;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.bcel6.AbstractTestCase;
 import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.classfile.AnnotationEntry;
 import org.apache.commons.bcel6.classfile.ArrayElementValue;
