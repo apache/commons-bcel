@@ -691,7 +691,7 @@ public abstract class Utility {
                 String param_type = signatureToString(signature.substring(index), chopit);
                 buf.append(param_type);
                 if (vars != null) {
-                    LocalVariable l = vars.getLocalVariable(var_index);
+                    LocalVariable l = vars.getLocalVariable(var_index, 0);
                     if (l != null) {
                         buf.append(" ").append(l.getName());
                     }
