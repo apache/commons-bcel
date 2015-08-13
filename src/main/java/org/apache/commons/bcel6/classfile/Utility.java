@@ -861,10 +861,10 @@ public abstract class Utility {
                     // check for wildcards
                     if (signature.charAt(consumed_chars) == '+') {
                         type = type + "? extends ";
-                        consumed_chars = ++consumed_chars;
+                        consumed_chars++;
                     } else if (signature.charAt(consumed_chars) == '-') {
                         type = type + "? super ";
-                        consumed_chars = ++consumed_chars;
+                        consumed_chars++;
                     } else if (signature.charAt(consumed_chars) == '*') {
                         // must be at end of signature
                         if (signature.charAt(consumed_chars + 1) != '>') {
