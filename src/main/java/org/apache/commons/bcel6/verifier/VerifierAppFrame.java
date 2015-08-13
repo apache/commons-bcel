@@ -70,7 +70,7 @@ public class VerifierAppFrame extends JFrame {
     GridLayout gridLayout4 = new GridLayout();
     JScrollPane jScrollPane4 = new JScrollPane();
     CardLayout cardLayout1 = new CardLayout();
-    private final String JUSTICE_VERSION = "JustIce by Enver Haase";
+    private static final String JUSTICE_VERSION = "JustIce by Enver Haase";
     private String current_class;
     GridLayout gridLayout3 = new GridLayout();
     JTextPane pass1TextPane = new JTextPane();
