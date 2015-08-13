@@ -109,12 +109,11 @@ public class InstructionHandle implements java.io.Serializable {
     static InstructionHandle getInstructionHandle( Instruction i ) {
         if (ih_list == null) {
             return new InstructionHandle(i);
-        } else {
-            InstructionHandle ih = ih_list;
-            ih_list = ih.next;
-            ih.setInstruction(i);
-            return ih;
         }
+        InstructionHandle ih = ih_list;
+        ih_list = ih.next;
+        ih.setInstruction(i);
+        return ih;
     }
 
 

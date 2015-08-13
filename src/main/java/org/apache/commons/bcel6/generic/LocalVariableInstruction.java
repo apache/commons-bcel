@@ -109,9 +109,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
         if (((opcode >= Constants.ILOAD_0) && (opcode <= Constants.ALOAD_3))
                 || ((opcode >= Constants.ISTORE_0) && (opcode <= Constants.ASTORE_3))) {
             return super.toString(verbose);
-        } else {
-            return super.toString(verbose) + " " + n;
         }
+        return super.toString(verbose) + " " + n;
     }
 
 

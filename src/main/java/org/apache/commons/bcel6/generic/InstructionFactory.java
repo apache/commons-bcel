@@ -590,9 +590,8 @@ public class InstructionFactory implements java.io.Serializable {
         } else if ((src_type instanceof ReferenceType) && (dest_type instanceof ReferenceType)) {
             if (dest_type instanceof ArrayType) {
                 return new CHECKCAST(cp.addArrayClass((ArrayType) dest_type));
-            } else {
-                return new CHECKCAST(cp.addClass(((ObjectType) dest_type).getClassName()));
             }
+            return new CHECKCAST(cp.addClass(((ObjectType) dest_type).getClassName()));
         } else {
             throw new RuntimeException("Can not cast " + src_type + " to " + dest_type);
         }
@@ -622,18 +621,16 @@ public class InstructionFactory implements java.io.Serializable {
     public CHECKCAST createCheckCast( ReferenceType t ) {
         if (t instanceof ArrayType) {
             return new CHECKCAST(cp.addArrayClass((ArrayType) t));
-        } else {
-            return new CHECKCAST(cp.addClass((ObjectType) t));
         }
+        return new CHECKCAST(cp.addClass((ObjectType) t));
     }
 
 
     public INSTANCEOF createInstanceOf( ReferenceType t ) {
         if (t instanceof ArrayType) {
             return new INSTANCEOF(cp.addArrayClass((ArrayType) t));
-        } else {
-            return new INSTANCEOF(cp.addClass((ObjectType) t));
         }
+        return new INSTANCEOF(cp.addClass((ObjectType) t));
     }
 
 
@@ -659,15 +656,14 @@ public class InstructionFactory implements java.io.Serializable {
             } else {
                 return new NEWARRAY(t.getType());
             }
-        } else {
-            ArrayType at;
-            if (t instanceof ArrayType) {
-                at = (ArrayType) t;
-            } else {
-                at = new ArrayType(t, dim);
-            }
-            return new MULTIANEWARRAY(cp.addArrayClass(at), dim);
         }
+        ArrayType at;
+        if (t instanceof ArrayType) {
+            at = (ArrayType) t;
+        } else {
+            at = new ArrayType(t, dim);
+        }
+        return new MULTIANEWARRAY(cp.addArrayClass(at), dim);
     }
 
 

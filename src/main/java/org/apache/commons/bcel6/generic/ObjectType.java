@@ -119,9 +119,8 @@ public class ObjectType extends ReferenceType {
         JavaClass jc = Repository.lookupClass(class_name);
         if (jc.isPublic()) {
             return true;
-        } else {
-            JavaClass acc = Repository.lookupClass(accessor.class_name);
-            return acc.getPackageName().equals(jc.getPackageName());
         }
+        JavaClass acc = Repository.lookupClass(accessor.class_name);
+        return acc.getPackageName().equals(jc.getPackageName());
     }
 }

@@ -305,10 +305,9 @@ public class MethodGen extends FieldGenOrMethodGen {
                 variable_vec.add(l);
             }
             return l;
-        } else {
-            throw new IllegalArgumentException("Can not use " + type
-                    + " as type for local variable");
         }
+        throw new IllegalArgumentException("Can not use " + type
+                + " as type for local variable");
     }
 
 

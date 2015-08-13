@@ -62,9 +62,8 @@ public class LineNumberGen implements InstructionTargeter, Cloneable, java.io.Se
     public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
         if (old_ih != ih) {
             throw new ClassGenException("Not targeting " + old_ih + ", but " + ih + "}");
-        } else {
-            setInstruction(new_ih);
         }
+        setInstruction(new_ih);
     }
 
 

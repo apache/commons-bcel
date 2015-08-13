@@ -289,9 +289,8 @@ public class InstructionList implements Serializable {
             length = il.length;
             il.clear();
             return start;
-        } else {
-            return append(end, il); // was end.instruction
         }
+        return append(end, il); // was end.instruction
     }
 
 
@@ -456,9 +455,8 @@ public class InstructionList implements Serializable {
         if (isEmpty()) {
             append(il); // Code is identical for this case
             return start;
-        } else {
-            return insert(start, il);
         }
+        return insert(start, il);
     }
 
 

@@ -1067,29 +1067,25 @@ public final class Pass2Verifier extends PassVerifier {
                 if (vr != VerificationResult.VR_OK){
                     throw new ClassConstraintException("Exceptions attribute '"+tostring(obj)+"' references '"+cname+"' as an Exception but it does not pass verification pass 1: "+vr);
                 }
-                else{
-                    // We cannot safely trust any other "instanceof" mechanism. We need to transitively verify
-                    // the ancestor hierarchy.
-                    JavaClass e = Repository.lookupClass(cname);
-                    JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
-                    JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
-                    while (e != o){
-                        if (e == t) {
-                            break; // It's a subclass of Throwable, OKAY, leave.
-                        }
+                // We cannot safely trust any other "instanceof" mechanism. We need to transitively verify
+                // the ancestor hierarchy.
+                JavaClass e = Repository.lookupClass(cname);
+                JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
+                JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
+                while (e != o){
+                    if (e == t) {
+                        break; // It's a subclass of Throwable, OKAY, leave.
+                    }
 
-                        v = VerifierFactory.getVerifier(e.getSuperclassName());
-                        vr = v.doPass1();
-                        if (vr != VerificationResult.VR_OK){
-                            throw new ClassConstraintException("Exceptions attribute '"+tostring(obj)+"' references '"+cname+"' as an Exception but '"+e.getSuperclassName()+"' in the ancestor hierachy does not pass verification pass 1: "+vr);
-                        }
-                        else{
-                            e = Repository.lookupClass(e.getSuperclassName());
-                        }
+                    v = VerifierFactory.getVerifier(e.getSuperclassName());
+                    vr = v.doPass1();
+                    if (vr != VerificationResult.VR_OK){
+                        throw new ClassConstraintException("Exceptions attribute '"+tostring(obj)+"' references '"+cname+"' as an Exception but '"+e.getSuperclassName()+"' in the ancestor hierachy does not pass verification pass 1: "+vr);
                     }
-                    if (e != t) {
-                        throw new ClassConstraintException("Exceptions attribute '"+tostring(obj)+"' references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
-                    }
+                    e = Repository.lookupClass(e.getSuperclassName());
+                }
+                if (e != t) {
+                    throw new ClassConstraintException("Exceptions attribute '"+tostring(obj)+"' references '"+cname+"' as an Exception but it is not a subclass of '"+t.getClassName()+"'.");
                 }
             }
 
@@ -1335,9 +1331,7 @@ public final class Pass2Verifier extends PassVerifier {
         if (allowStaticInit){
             return (name.equals(Constants.CONSTRUCTOR_NAME) || name.equals(Constants.STATIC_INITIALIZER_NAME));
         }
-        else{
-            return name.equals(Constants.CONSTRUCTOR_NAME);
-        }
+        return name.equals(Constants.CONSTRUCTOR_NAME);
     }
 
     /**

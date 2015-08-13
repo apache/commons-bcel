@@ -300,9 +300,8 @@ public class FieldGen extends FieldGenOrMethodGen {
     public String getInitValue() {
         if (value != null) {
             return value.toString();
-        } else {
-            return null;
         }
+        return null;
     }
 
 
