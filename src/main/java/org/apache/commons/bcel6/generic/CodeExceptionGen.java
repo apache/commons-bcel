@@ -79,7 +79,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable, j
     /* Set start of handler 
      * @param start_pc Start of handled region (inclusive)
      */
-    public void setStartPC( InstructionHandle start_pc ) {
+    public void setStartPC( InstructionHandle start_pc ) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.start_pc, start_pc, this);
         this.start_pc = start_pc;
     }
@@ -88,7 +88,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable, j
     /* Set end of handler 
      * @param end_pc End of handled region (inclusive)
      */
-    public void setEndPC( InstructionHandle end_pc ) {
+    public void setEndPC( InstructionHandle end_pc ) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.end_pc, end_pc, this);
         this.end_pc = end_pc;
     }
@@ -97,7 +97,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable, j
     /* Set handler code
      * @param handler_pc Start of handler
      */
-    public void setHandlerPC( InstructionHandle handler_pc ) {
+    public void setHandlerPC( InstructionHandle handler_pc ) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.handler_pc, handler_pc, this);
         this.handler_pc = handler_pc;
     }
@@ -137,7 +137,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable, j
 
 
     /** Sets the type of the Exception to catch. Set 'null' for ANY. */
-    public void setCatchType( ObjectType catch_type ) {
+    public void setCatchType( ObjectType catch_type ) { // TODO unused
         this.catch_type = catch_type;
     }
 

@@ -151,7 +151,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     /**
      * Set the local variable index
      */
-    public void setIndex( int n ) {
+    public void setIndex( int n ) { // TODO could be package-protected?
         if ((n < 0) || (n > Constants.MAX_SHORT)) {
             throw new ClassGenException("Illegal value: " + n);
         }

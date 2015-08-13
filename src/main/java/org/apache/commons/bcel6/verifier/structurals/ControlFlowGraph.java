@@ -99,7 +99,7 @@ public class ControlFlowGraph{
         }
 
         /* Satisfies InstructionContext.setTag(int). */
-        public void setTag(int tag){
+        public void setTag(int tag){ // part of InstructionContext interface
             TAG = tag;
         }
 

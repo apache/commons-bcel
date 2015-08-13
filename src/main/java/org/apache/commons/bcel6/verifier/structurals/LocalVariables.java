@@ -83,7 +83,7 @@ public class LocalVariables{
     /**
      * Sets a new Type for the given local variable slot.
      */
-    public void set(int i, Type type){
+    public void set(int i, Type type){ // TODO could be package-protected?
         if (type == Type.BYTE || type == Type.SHORT || type == Type.BOOLEAN || type == Type.CHAR){
             throw new AssertionViolatedException("LocalVariables do not know about '"+type+"'. Use Type.INT instead.");
         }

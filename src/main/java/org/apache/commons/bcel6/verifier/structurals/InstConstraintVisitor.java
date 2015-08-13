@@ -120,7 +120,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
      * @see #setConstantPoolGen(ConstantPoolGen cpg)
      * @see #setMethodGen(MethodGen mg)
      */
-    public void setFrame(Frame f){
+    public void setFrame(Frame f){ // TODO could be package-protected?
         this.frame = f;
         //if (singleInstance.mg == null || singleInstance.cpg == null) throw new AssertionViolatedException("Forgot to set important values first.");
     }
@@ -129,7 +129,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
      * Sets the ConstantPoolGen instance needed for constraint
      * checking prior to execution.
      */
-    public void setConstantPoolGen(ConstantPoolGen cpg){
+    public void setConstantPoolGen(ConstantPoolGen cpg){ // TODO could be package-protected?
         this.cpg = cpg;
     }
 

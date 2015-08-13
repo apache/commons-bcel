@@ -124,7 +124,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * Set the index to constant pool.
      * @param index in  constant pool.
      */
-    public void setIndex( int index ) {
+    public void setIndex( int index ) { // TODO could be package-protected?
         if (index < 0) {
             throw new ClassGenException("Negative index value: " + index);
         }
