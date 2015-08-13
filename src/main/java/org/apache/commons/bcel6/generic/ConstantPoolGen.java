@@ -198,7 +198,7 @@ public class ConstantPoolGen implements java.io.Serializable {
         }
     }
 
-    private final Map<String, Index> string_table = new HashMap<String, Index>();
+    private final Map<String, Index> string_table = new HashMap<>();
 
 
     /** 
@@ -235,7 +235,7 @@ public class ConstantPoolGen implements java.io.Serializable {
         return ret;
     }
 
-    private final Map<String, Index> class_table = new HashMap<String, Index>();
+    private final Map<String, Index> class_table = new HashMap<>();
 
 
     /**
@@ -374,7 +374,7 @@ public class ConstantPoolGen implements java.io.Serializable {
         return ret;
     }
 
-    private final Map<String, Index> utf8_table = new HashMap<String, Index>();
+    private final Map<String, Index> utf8_table = new HashMap<>();
 
 
     /** 
@@ -486,7 +486,7 @@ public class ConstantPoolGen implements java.io.Serializable {
         return ret;
     }
 
-    private final Map<String, Index> n_a_t_table = new HashMap<String, Index>();
+    private final Map<String, Index> n_a_t_table = new HashMap<>();
 
 
     /** 
@@ -528,7 +528,7 @@ public class ConstantPoolGen implements java.io.Serializable {
         return ret;
     }
 
-    private final Map<String, Index> cp_table = new HashMap<String, Index>();
+    private final Map<String, Index> cp_table = new HashMap<>();
 
 
     /** 

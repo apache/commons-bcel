@@ -655,7 +655,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 ElementValueGen.PRIMITIVE_INT, cp, 4);
         ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
         ObjectType t = new ObjectType("SimpleAnnotation");
-        List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
+        List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
         AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
         return a;
@@ -668,7 +668,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 ElementValueGen.STRING, cp, aFruit);
         ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
         ObjectType t = new ObjectType("SimpleStringAnnotation");
-        List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
+        List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
         return new AnnotationEntryGen(t, elements, true, cp);
     }
@@ -680,7 +680,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         ArrayElementValueGen array = new ArrayElementValueGen(cp);
         array.addElement(new AnnotationElementValueGen(a, cp));
         ElementValuePairGen nvp = new ElementValuePairGen("value", array, cp);
-        List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
+        List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvp);
         return new AnnotationEntryGen(new ObjectType("CombinedAnnotation"),
                 elements, true, cp);
@@ -692,7 +692,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 ElementValueGen.PRIMITIVE_INT, cp, 4);
         ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
         ObjectType t = new ObjectType("SimpleAnnotation");
-        List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
+        List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
         AnnotationEntryGen a = new AnnotationEntryGen(t, elements, false, cp);
         return a;

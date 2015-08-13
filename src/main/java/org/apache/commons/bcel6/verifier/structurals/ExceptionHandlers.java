@@ -43,7 +43,7 @@ public class ExceptionHandlers{
      * Constructor. Creates a new ExceptionHandlers instance.
      */
     public ExceptionHandlers(MethodGen mg){
-        exceptionhandlers = new HashMap<InstructionHandle, Set<ExceptionHandler>>();
+        exceptionhandlers = new HashMap<>();
         CodeExceptionGen[] cegs = mg.getExceptionHandlers();
         for (CodeExceptionGen ceg : cegs) {
             ExceptionHandler eh = new ExceptionHandler(ceg.getCatchType(), ceg.getHandlerPC());
@@ -51,7 +51,7 @@ public class ExceptionHandlers{
                 Set<ExceptionHandler> hs;
                 hs = exceptionhandlers.get(ih);
                 if (hs == null){
-                    hs = new HashSet<ExceptionHandler>();
+                    hs = new HashSet<>();
                     exceptionhandlers.put(ih, hs);
                 }
                 hs.add(eh);

@@ -197,7 +197,7 @@ public class InstructionHandle implements java.io.Serializable {
      */
     public void addTargeter( InstructionTargeter t ) {
         if (targeters == null) {
-            targeters = new HashSet<InstructionTargeter>();
+            targeters = new HashSet<>();
         }
         //if(!targeters.contains(t))
         targeters.add(t);
@@ -244,7 +244,7 @@ public class InstructionHandle implements java.io.Serializable {
      */
     public void addAttribute( Object key, Object attr ) {
         if (attributes == null) {
-            attributes = new HashMap<Object, Object>(3);
+            attributes = new HashMap<>(3);
         }
         attributes.put(key, attr);
     }
@@ -277,7 +277,7 @@ public class InstructionHandle implements java.io.Serializable {
      */
     public Collection<Object> getAttributes() {
         if (attributes == null) {
-            attributes = new HashMap<Object, Object>(3);
+            attributes = new HashMap<>(3);
         }
         return attributes.values();
     }

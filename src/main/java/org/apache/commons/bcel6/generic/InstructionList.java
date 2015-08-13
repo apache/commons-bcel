@@ -707,7 +707,7 @@ public class InstructionList implements Serializable {
         }
         first.prev = null; // Completely separated from rest of list
         last.next = null;
-        List<InstructionHandle> target_vec = new ArrayList<InstructionHandle>();
+        List<InstructionHandle> target_vec = new ArrayList<>();
         for (InstructionHandle ih = first; ih != null; ih = ih.next) {
             ih.getInstruction().dispose(); // e.g. BranchInstructions release their targets
         }
@@ -963,7 +963,7 @@ public class InstructionList implements Serializable {
      */
     public Instruction[] getInstructions() {
         ByteSequence bytes = new ByteSequence(getByteCode());
-        List<Instruction> instructions = new ArrayList<Instruction>();
+        List<Instruction> instructions = new ArrayList<>();
         try {
             while (bytes.available() > 0) {
                 instructions.add(Instruction.readInstruction(bytes));
@@ -1058,7 +1058,7 @@ public class InstructionList implements Serializable {
      * @return complete, i.e., deep copy of this list
      */
     public InstructionList copy() {
-        Map<InstructionHandle, InstructionHandle> map = new HashMap<InstructionHandle, InstructionHandle>();
+        Map<InstructionHandle, InstructionHandle> map = new HashMap<>();
         InstructionList il = new InstructionList();
         /* Pass 1: Make copies of all instructions, append them to the new list
          * and associate old instruction references with the new ones, i.e.,
@@ -1253,7 +1253,7 @@ public class InstructionList implements Serializable {
      */
     public void addObserver( InstructionListObserver o ) {
         if (observers == null) {
-            observers = new ArrayList<InstructionListObserver>();
+            observers = new ArrayList<>();
         }
         observers.add(o);
     }

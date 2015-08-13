@@ -44,9 +44,9 @@ public class SyntheticRepository implements Repository {
 
     private static final long serialVersionUID = 2923440730410019444L;
     //private static final String DEFAULT_PATH = ClassPath.getClassPath();
-    private static final Map<ClassPath, SyntheticRepository> _instances = new HashMap<ClassPath, SyntheticRepository>(); // CLASSPATH X REPOSITORY
+    private static final Map<ClassPath, SyntheticRepository> _instances = new HashMap<>(); // CLASSPATH X REPOSITORY
     private ClassPath _path = null;
-    private final Map<String, SoftReference<JavaClass>> _loadedClasses = new HashMap<String, SoftReference<JavaClass>>(); // CLASSNAME X JAVACLASS
+    private final Map<String, SoftReference<JavaClass>> _loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
 
     private SyntheticRepository(ClassPath path) {
@@ -74,7 +74,7 @@ public class SyntheticRepository implements Repository {
      */
     @Override
     public void storeClass( JavaClass clazz ) {
-        _loadedClasses.put(clazz.getClassName(), new SoftReference<JavaClass>(clazz));
+        _loadedClasses.put(clazz.getClassName(), new SoftReference<>(clazz));
         clazz.setRepository(this);
     }
 

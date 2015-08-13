@@ -32,7 +32,7 @@ public class DescendingVisitor implements Visitor
 
     private final Visitor visitor;
 
-    private final Stack<Object> stack = new Stack<Object>();
+    private final Stack<Object> stack = new Stack<>();
 
     /**
      * @return container of current entitity, i.e., predecessor during traversal

@@ -89,8 +89,8 @@ public class ControlFlowGraph{
             }
 
             instruction = inst;
-            inFrames = new HashMap<InstructionContext, Frame>();
-            outFrames = new HashMap<InstructionContext, Frame>();
+            inFrames = new HashMap<>();
+            outFrames = new HashMap<>();
         }
 
         /* Satisfies InstructionContext.getTag(). */
@@ -404,7 +404,7 @@ public class ControlFlowGraph{
     private final ExceptionHandlers exceptionhandlers;
 
     /** All InstructionContext instances of this ControlFlowGraph. */
-    private final Map<InstructionHandle, InstructionContext> instructionContexts = new HashMap<InstructionHandle, InstructionContext>(); //keys: InstructionHandle, values: InstructionContextImpl
+    private final Map<InstructionHandle, InstructionContext> instructionContexts = new HashMap<>(); //keys: InstructionHandle, values: InstructionContextImpl
 
     /** 
      * A Control Flow Graph.

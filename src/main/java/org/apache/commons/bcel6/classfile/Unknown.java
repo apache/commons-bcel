@@ -43,7 +43,7 @@ public final class Unknown extends Attribute {
     private static final long serialVersionUID = -4099655108069755015L;
     private byte[] bytes; // TODO could be final if copy() were adjusted
     private final String name;
-    private static final Map<String, Unknown> unknown_attributes = new HashMap<String, Unknown>();
+    private static final Map<String, Unknown> unknown_attributes = new HashMap<>();
 
 
     /** @return array of unknown attributes, but just one for each kind.

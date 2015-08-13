@@ -54,9 +54,9 @@ public class Verifier {
     /** A Pass2Verifier for this Verifier instance. */
     private Pass2Verifier p2v;
     /** The Pass3aVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
-    private final Map<String, Pass3aVerifier> p3avs = new HashMap<String, Pass3aVerifier>();
+    private final Map<String, Pass3aVerifier> p3avs = new HashMap<>();
     /** The Pass3bVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
-    private final Map<String, Pass3bVerifier> p3bvs = new HashMap<String, Pass3bVerifier>();
+    private final Map<String, Pass3bVerifier> p3bvs = new HashMap<>();
 
 
     /** Returns the VerificationResult for the given pass. */
@@ -145,7 +145,7 @@ public class Verifier {
      * A prefix shows from which verifying pass a message originates.
      */
     public String[] getMessages() throws ClassNotFoundException {
-        List<String> messages = new ArrayList<String>();
+        List<String> messages = new ArrayList<>();
         if (p1v != null) {
             String[] p1m = p1v.getMessages();
             for (String element : p1m) {

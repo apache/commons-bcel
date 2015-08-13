@@ -79,7 +79,7 @@ public class ParameterAnnotationEntry implements Node {
 
   public static ParameterAnnotationEntry[] createParameterAnnotationEntries(Attribute[] attrs) {
       // Find attributes that contain parameter annotation data
-      List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<ParameterAnnotationEntry>(attrs.length);
+      List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
       for (Attribute attribute : attrs) {
           if (attribute instanceof ParameterAnnotations) {
               ParameterAnnotations runtimeAnnotations = (ParameterAnnotations)attribute;

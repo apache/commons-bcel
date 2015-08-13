@@ -52,11 +52,11 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private int major = Constants.MAJOR_1_1, minor = Constants.MINOR_1_1;
     private ConstantPoolGen cp; // Template for building up constant pool
     // ArrayLists instead of arrays to gather fields, methods, etc.
-    private final List<Field> field_vec = new ArrayList<Field>();
-    private final List<Method> method_vec = new ArrayList<Method>();
-    private final List<Attribute> attribute_vec = new ArrayList<Attribute>();
-    private final List<String> interface_vec = new ArrayList<String>();
-    private final List<AnnotationEntryGen> annotation_vec = new ArrayList<AnnotationEntryGen>();
+    private final List<Field> field_vec = new ArrayList<>();
+    private final List<Method> method_vec = new ArrayList<>();
+    private final List<Attribute> attribute_vec = new ArrayList<>();
+    private final List<String> interface_vec = new ArrayList<>();
+    private final List<AnnotationEntryGen> annotation_vec = new ArrayList<>();
 
     private static BCELComparator _cmp = new BCELComparator() {
 
@@ -166,7 +166,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     private AnnotationEntryGen[] unpackAnnotations(Attribute[] attrs)
     {
-        List<AnnotationEntryGen> annotationGenObjs = new ArrayList<AnnotationEntryGen>();
+        List<AnnotationEntryGen> annotationGenObjs = new ArrayList<>();
         for (Attribute attr : attrs) {
             if (attr instanceof RuntimeVisibleAnnotations)
             {
@@ -525,7 +525,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     public void addObserver( ClassObserver o ) {
         if (observers == null) {
-            observers = new ArrayList<ClassObserver>();
+            observers = new ArrayList<>();
         }
         observers.add(o);
     }

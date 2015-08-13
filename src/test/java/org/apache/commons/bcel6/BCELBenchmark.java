@@ -58,7 +58,7 @@ public class BCELBenchmark {
     }
 
     private Iterable<JarEntry> getClasses(JarFile jar) {
-        return new IteratorIterable<JarEntry>(new FilterIterator<JarEntry>(new EnumerationIterator<JarEntry>(jar.entries()), new Predicate<JarEntry>() {
+        return new IteratorIterable<>(new FilterIterator<>(new EnumerationIterator<>(jar.entries()), new Predicate<JarEntry>() {
             @Override
             public boolean evaluate(JarEntry entry) {
                 return entry.getName().endsWith(".class");

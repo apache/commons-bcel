@@ -91,7 +91,7 @@ public abstract class AbstractTestCase extends TestCase
     protected Attribute[] findAttribute(String name, JavaClass clazz)
     {
         Attribute[] all = clazz.getAttributes();
-        List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
+        List<Attribute> chosenAttrsList = new ArrayList<>();
         for (Attribute element : all) {
             if (verbose) {
                 System.err.println("Attribute: " + element.getName());
@@ -105,7 +105,7 @@ public abstract class AbstractTestCase extends TestCase
 
     protected Attribute findAttribute(String name, Attribute[] all)
     {
-        List<Attribute> chosenAttrsList = new ArrayList<Attribute>();
+        List<Attribute> chosenAttrsList = new ArrayList<>();
         for (Attribute element : all) {
             if (verbose) {
                 System.err.println("Attribute: " + element.getName());
@@ -174,7 +174,7 @@ public abstract class AbstractTestCase extends TestCase
                 ElementValueGen.STRING, cp, aFruit);
         ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
         ObjectType t = new ObjectType("SimpleStringAnnotation");
-        List<ElementValuePairGen> elements = new ArrayList<ElementValuePairGen>();
+        List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
         return new AnnotationEntryGen(t, elements, visibility, cp);
     }

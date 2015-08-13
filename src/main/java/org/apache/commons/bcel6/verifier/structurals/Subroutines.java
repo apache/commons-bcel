@@ -85,7 +85,7 @@ public class Subroutines{
         private int localVariable = UNSET;
 
         /** The instructions that belong to this subroutine. */
-        private final Set<InstructionHandle> instructions = new HashSet<InstructionHandle>(); // Elements: InstructionHandle
+        private final Set<InstructionHandle> instructions = new HashSet<>(); // Elements: InstructionHandle
 
         /*
          * Refer to the Subroutine interface for documentation.
@@ -99,7 +99,7 @@ public class Subroutines{
          * The JSR or JSR_W instructions that define this
          * subroutine by targeting it.
          */
-        private final Set<InstructionHandle> theJSRs = new HashSet<InstructionHandle>();
+        private final Set<InstructionHandle> theJSRs = new HashSet<>();
 
         /**
          * The RET instruction that leaves this subroutine.
@@ -226,7 +226,7 @@ public class Subroutines{
         /* Satisfies Subroutine.getRecursivelyAccessedLocalsIndices(). */
         @Override
         public int[] getRecursivelyAccessedLocalsIndices(){
-            Set<Integer> s = new HashSet<Integer>();
+            Set<Integer> s = new HashSet<>();
             int[] lvs = getAccessedLocalsIndices();
             for (int lv : lvs) {
                 s.add(Integer.valueOf(lv));
@@ -263,7 +263,7 @@ public class Subroutines{
         @Override
         public int[] getAccessedLocalsIndices(){
             //TODO: Implement caching.
-            Set<Integer> acc = new HashSet<Integer>();
+            Set<Integer> acc = new HashSet<>();
             if (theRET == null && this != TOPLEVEL){
                 throw new AssertionViolatedException("This subroutine object must be built up completely before calculating accessed locals.");
             }
@@ -307,7 +307,7 @@ public class Subroutines{
          */
         @Override
         public Subroutine[] subSubs(){
-            Set<Subroutine> h = new HashSet<Subroutine>();
+            Set<Subroutine> h = new HashSet<>();
 
             for (InstructionHandle ih : instructions) {
                 Instruction inst = ih.getInstruction();
@@ -351,7 +351,7 @@ public class Subroutines{
      * Key: InstructionHandle of the leader of the subroutine.
      * Elements: SubroutineImpl objects.
      */
-    private final Map<InstructionHandle, Subroutine> subroutines = new HashMap<InstructionHandle, Subroutine>();
+    private final Map<InstructionHandle, Subroutine> subroutines = new HashMap<>();
 
     /**
      * This is referring to a special subroutine, namely the
@@ -375,7 +375,7 @@ public class Subroutines{
         TOPLEVEL = new SubroutineImpl();
 
         // Calculate "real" subroutines.
-        Set<InstructionHandle> sub_leaders = new HashSet<InstructionHandle>(); // Elements: InstructionHandle
+        Set<InstructionHandle> sub_leaders = new HashSet<>(); // Elements: InstructionHandle
         for (InstructionHandle element : all) {
             Instruction inst = element.getInstruction();
             if (inst instanceof JsrInstruction){
@@ -409,11 +409,11 @@ public class Subroutines{
 
         // Now do a BFS from every subroutine leader to find all the
         // instructions that belong to a subroutine.
-        Set<InstructionHandle> instructions_assigned = new HashSet<InstructionHandle>(); // we don't want to assign an instruction to two or more Subroutine objects.
+        Set<InstructionHandle> instructions_assigned = new HashSet<>(); // we don't want to assign an instruction to two or more Subroutine objects.
 
-        Map<InstructionHandle, Integer> colors = new HashMap<InstructionHandle, Integer>(); //Graph colouring. Key: InstructionHandle, Value: Integer .
+        Map<InstructionHandle, Integer> colors = new HashMap<>(); //Graph colouring. Key: InstructionHandle, Value: Integer .
 
-        List<InstructionHandle> Q = new ArrayList<InstructionHandle>();        
+        List<InstructionHandle> Q = new ArrayList<>();        
         for (InstructionHandle actual : sub_leaders) {
             // Do some BFS with "actual" as the root of the graph.
             // Init colors

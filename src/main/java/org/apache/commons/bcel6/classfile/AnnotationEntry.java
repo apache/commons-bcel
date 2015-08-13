@@ -56,7 +56,7 @@ public class AnnotationEntry implements Node, Serializable {
 
         final AnnotationEntry annotationEntry = new AnnotationEntry(input.readUnsignedShort(), constant_pool, isRuntimeVisible);
         final int num_element_value_pairs = (input.readUnsignedShort());
-        annotationEntry.element_value_pairs = new ArrayList<ElementValuePair>();
+        annotationEntry.element_value_pairs = new ArrayList<>();
         for (int i = 0; i < num_element_value_pairs; i++) {
             annotationEntry.element_value_pairs.add(new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constant_pool),
                     constant_pool));
@@ -153,7 +153,7 @@ public class AnnotationEntry implements Node, Serializable {
 
     public static AnnotationEntry[] createAnnotationEntries(Attribute[] attrs) {
         // Find attributes that contain annotation data
-        List<AnnotationEntry> accumulatedAnnotations = new ArrayList<AnnotationEntry>(attrs.length);
+        List<AnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
         for (Attribute attribute : attrs) {
             if (attribute instanceof Annotations) {
                 Annotations runtimeAnnotations = (Annotations) attribute;

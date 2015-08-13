@@ -574,7 +574,7 @@ public abstract class Utility {
      */
     public static String[] methodSignatureArgumentTypes( String signature, boolean chopit ) 
             throws ClassFormatException {
-        List<String> vec = new ArrayList<String>();
+        List<String> vec = new ArrayList<>();
         int index;
         try { // Read all declarations between for `(' and `)'
             if (signature.charAt(0) != '(') {

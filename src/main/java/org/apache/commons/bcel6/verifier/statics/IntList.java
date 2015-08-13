@@ -31,7 +31,7 @@ public class IntList{
     private final List<Integer> theList;
     /** This constructor creates an empty list. */
     IntList(){
-        theList = new ArrayList<Integer>();
+        theList = new ArrayList<>();
     }
     /** Adds an element to the list. */
     void add(int i){

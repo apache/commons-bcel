@@ -36,7 +36,7 @@ public class VerifierFactory {
     /**
      * The HashMap that holds the data about the already-constructed Verifier instances.
      */
-    private static final Map<String, Verifier> hashMap = new HashMap<String, Verifier>();
+    private static final Map<String, Verifier> hashMap = new HashMap<>();
     /**
      * The VerifierFactoryObserver instances that observe the VerifierFactory.
      */

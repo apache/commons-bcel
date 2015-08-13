@@ -71,7 +71,7 @@ public class ClassPath implements Serializable {
      */
     public ClassPath(String class_path) {
         this.class_path = class_path;
-        List<PathEntry> vec = new ArrayList<PathEntry>();
+        List<PathEntry> vec = new ArrayList<>();
         for (StringTokenizer tok = new StringTokenizer(class_path, File.pathSeparator); tok.hasMoreTokens();) {
             String path = tok.nextToken();
             if (!path.equals("")) {
@@ -147,10 +147,10 @@ public class ClassPath implements Serializable {
         String class_path = System.getProperty("java.class.path");
         String boot_path = System.getProperty("sun.boot.class.path");
         String ext_path = System.getProperty("java.ext.dirs");
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         getPathComponents(class_path, list);
         getPathComponents(boot_path, list);
-        List<String> dirs = new ArrayList<String>();
+        List<String> dirs = new ArrayList<>();
         getPathComponents(ext_path, dirs);
         for (String d : dirs) {
             File ext_dir = new File(d);

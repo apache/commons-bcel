@@ -191,7 +191,7 @@ public final class Pass2Verifier extends PassVerifier {
      */
     private void every_class_has_an_accessible_superclass(){
         try {
-        Set<String> hs = new HashSet<String>(); // save class names to detect circular inheritance
+        Set<String> hs = new HashSet<>(); // save class names to detect circular inheritance
         JavaClass jc = Repository.lookupClass(myOwner.getClassName());
         int supidx = -1;
 
@@ -241,7 +241,7 @@ public final class Pass2Verifier extends PassVerifier {
      */
     private void final_methods_are_not_overridden(){
         try {
-        Map<String, String> hashmap = new HashMap<String, String>();
+        Map<String, String> hashmap = new HashMap<>();
         JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 
         int supidx = -1;
@@ -327,9 +327,9 @@ public final class Pass2Verifier extends PassVerifier {
         private final int cplen; // == cp.getLength() -- to save computing power.
         private final DescendingVisitor carrier;
 
-        private final Set<String> field_names = new HashSet<String>();
-        private final Set<String> field_names_and_desc = new HashSet<String>();
-        private final Set<String> method_names_and_desc = new HashSet<String>();
+        private final Set<String> field_names = new HashSet<>();
+        private final Set<String> field_names_and_desc = new HashSet<>();
+        private final Set<String> method_names_and_desc = new HashSet<>();
 
         private CPESSC_Visitor(JavaClass _jc){
             jc = _jc;
