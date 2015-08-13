@@ -76,6 +76,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     
     private static final BCELComparator _cmp = new BCELComparator() { // TODO could be final (setter unused)
 
+        @Override
         public boolean equals( Object o1, Object o2 ) {
             JavaClass THIS = (JavaClass) o1;
             JavaClass THAT = (JavaClass) o2;
@@ -83,6 +84,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         }
 
 
+        @Override
         public int hashCode( Object o ) {
             JavaClass THIS = (JavaClass) o;
             return THIS.getClassName().hashCode();
@@ -207,6 +209,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitJavaClass(this);
     }
@@ -787,6 +790,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Return the natural ordering of two JavaClasses.
      * This ordering is based on the class name
      */
+    @Override
     public int compareTo( JavaClass obj ) {
         return getClassName().compareTo(obj.getClassName());
     }

@@ -67,6 +67,7 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     }
 
 
+    @Override
     public Class<?>[] getExceptions() {
         return new Class[] {
             ExceptionConstants.ILLEGAL_MONITOR_STATE
@@ -76,6 +77,7 @@ public abstract class ReturnInstruction extends Instruction implements Exception
 
     /** @return type associated with the instruction
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         return getType();
     }

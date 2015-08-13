@@ -119,6 +119,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
 
     /** @return type of the referenced class/interface
      */
+    @Override
     public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
         return (ObjectType)getReferenceType(cpg);
     }

@@ -46,6 +46,7 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
     }
 
 
+    @Override
     public Class<?>[] getExceptions() {
         return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_ARRAY_EXCEPTION);
     }
@@ -53,6 +54,7 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
 
     /** @return type associated with the instruction
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         switch (opcode) {
             case org.apache.commons.bcel6.Constants.IALOAD:

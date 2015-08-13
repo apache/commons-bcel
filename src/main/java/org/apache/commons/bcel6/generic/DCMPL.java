@@ -33,6 +33,7 @@ public class DCMPL extends Instruction implements TypedInstruction, StackProduce
 
     /** @return Type.DOUBLE
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         return Type.DOUBLE;
     }

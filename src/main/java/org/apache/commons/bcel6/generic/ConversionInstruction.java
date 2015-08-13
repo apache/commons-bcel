@@ -48,6 +48,7 @@ public abstract class ConversionInstruction extends Instruction implements Typed
 
     /** @return type associated with the instruction
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         switch (opcode) {
             case Constants.D2I:

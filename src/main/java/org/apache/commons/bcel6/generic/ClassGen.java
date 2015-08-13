@@ -60,6 +60,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     private static BCELComparator _cmp = new BCELComparator() {
 
+        @Override
         public boolean equals( Object o1, Object o2 ) {
             ClassGen THIS = (ClassGen) o1;
             ClassGen THAT = (ClassGen) o2;
@@ -67,6 +68,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
         }
 
 
+        @Override
         public int hashCode( Object o ) {
             ClassGen THIS = (ClassGen) o;
             return THIS.getClassName().hashCode();

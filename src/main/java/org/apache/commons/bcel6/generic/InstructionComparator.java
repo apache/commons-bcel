@@ -33,6 +33,7 @@ public interface InstructionComparator {
 
     public static final InstructionComparator DEFAULT = new InstructionComparator() {
 
+        @Override
         public boolean equals( Instruction i1, Instruction i2 ) {
             if (i1.opcode == i2.opcode) {
                 if (i1 instanceof Select) {

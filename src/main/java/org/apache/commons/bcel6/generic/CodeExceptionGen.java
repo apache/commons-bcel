@@ -107,6 +107,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable, j
      * @param old_ih old target, either start or end
      * @param new_ih new target
      */
+    @Override
     public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
         boolean targeted = false;
         if (start_pc == old_ih) {
@@ -131,6 +132,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable, j
     /**
      * @return true, if ih is target of this handler
      */
+    @Override
     public boolean containsTarget( InstructionHandle ih ) {
         return (start_pc == ih) || (end_pc == ih) || (handler_pc == ih);
     }

@@ -104,6 +104,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     }
 
 
+    @Override
     public Class<?>[] getExceptions() {
         return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_INTERFACE_METHOD_RESOLUTION,
             ExceptionConstants.UNSATISFIED_LINK_ERROR,

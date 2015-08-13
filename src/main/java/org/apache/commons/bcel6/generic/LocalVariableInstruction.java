@@ -143,6 +143,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     /**
      * @return local variable index  referred by this instruction.
      */
+    @Override
     public final int getIndex() {
         return n;
     }
@@ -151,6 +152,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     /**
      * Set the local variable index
      */
+    @Override
     public void setIndex( int n ) { // TODO could be package-protected?
         if ((n < 0) || (n > Constants.MAX_SHORT)) {
             throw new ClassGenException("Illegal value: " + n);
@@ -185,6 +187,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * ASTORE may even work on a ReturnaddressType .
      * @return type associated with the instruction
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         switch (canon_tag) {
             case Constants.ILOAD:

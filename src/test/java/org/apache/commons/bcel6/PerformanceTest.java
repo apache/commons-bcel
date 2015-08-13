@@ -131,6 +131,7 @@ public final class PerformanceTest extends TestCase {
         File javaLib = new File(System.getProperty("java.home") + "/lib");
         javaLib.listFiles(new FileFilter() {
 
+            @Override
             public boolean accept(File file) {
                 if(file.getName().endsWith(".jar")) {
                     try {

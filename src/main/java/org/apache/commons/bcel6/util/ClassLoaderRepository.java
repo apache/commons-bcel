@@ -51,6 +51,7 @@ public class ClassLoaderRepository implements Repository {
     /**
      * Store a new JavaClass into this Repository.
      */
+    @Override
     public void storeClass( JavaClass clazz ) {
         loadedClasses.put(clazz.getClassName(), clazz);
         clazz.setRepository(this);
@@ -60,6 +61,7 @@ public class ClassLoaderRepository implements Repository {
     /**
      * Remove class from repository
      */
+    @Override
     public void removeClass( JavaClass clazz ) {
         loadedClasses.remove(clazz.getClassName());
     }
@@ -68,6 +70,7 @@ public class ClassLoaderRepository implements Repository {
     /**
      * Find an already defined JavaClass.
      */
+    @Override
     public JavaClass findClass( String className ) {
         return loadedClasses.containsKey(className) ? loadedClasses.get(className) : null;
     }
@@ -76,6 +79,7 @@ public class ClassLoaderRepository implements Repository {
     /**
      * Lookup a JavaClass object from the Class Name provided.
      */
+    @Override
     public JavaClass loadClass( String className ) throws ClassNotFoundException {
         String classFile = className.replace('.', '/');
         JavaClass RC = findClass(className);
@@ -101,6 +105,7 @@ public class ClassLoaderRepository implements Repository {
     }
 
 
+    @Override
     public JavaClass loadClass( Class<?> clazz ) throws ClassNotFoundException {
         return loadClass(clazz.getName());
     }
@@ -108,6 +113,7 @@ public class ClassLoaderRepository implements Repository {
 
     /** Clear all entries from cache.
      */
+    @Override
     public void clear() {
         loadedClasses.clear();
     }
@@ -116,6 +122,7 @@ public class ClassLoaderRepository implements Repository {
     /*
      * @return null
      */
+    @Override
     public ClassPath getClassPath() {
         return null;
     }

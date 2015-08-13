@@ -46,6 +46,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     private Object value = null;
     private static BCELComparator _cmp = new BCELComparator() {
 
+        @Override
         public boolean equals( Object o1, Object o2 ) {
             FieldGen THIS = (FieldGen) o1;
             FieldGen THAT = (FieldGen) o2;
@@ -54,6 +55,7 @@ public class FieldGen extends FieldGenOrMethodGen {
         }
 
 
+        @Override
         public int hashCode( Object o ) {
             FieldGen THIS = (FieldGen) o;
             return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();

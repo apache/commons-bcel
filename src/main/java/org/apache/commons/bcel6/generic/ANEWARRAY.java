@@ -44,6 +44,7 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
     }
 
 
+    @Override
     public Class<?>[] getExceptions() {
         return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
             ExceptionConstants.NEGATIVE_ARRAY_SIZE_EXCEPTION);
@@ -70,6 +71,7 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
     }
 
 
+    @Override
     public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
         Type t = getType(cpg);
         if (t instanceof ArrayType) {

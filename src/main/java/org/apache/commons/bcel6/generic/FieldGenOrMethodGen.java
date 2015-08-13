@@ -48,6 +48,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         super(access_flags);
     }
 
+    @Override
     public void setType( Type type ) { // TODO could be package-protected?
         if (type.getType() == Constants.T_ADDRESS) {
             throw new IllegalArgumentException("Type can not be " + type);
@@ -56,6 +57,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
 
+    @Override
     public Type getType() {
         return type;
     }
@@ -63,11 +65,13 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
 
     /** @return name of method/field.
      */
+    @Override
     public String getName() {
         return name;
     }
 
 
+    @Override
     public void setName( String name ) { // TODO could be package-protected?
         this.name = name;
     }

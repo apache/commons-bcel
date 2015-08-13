@@ -70,6 +70,7 @@ public class VerifyDialog extends javax.swing.JDialog {
     /** Machine-generated. */
     class IvjEventHandler implements java.awt.event.ActionListener {
 
+        @Override
         public void actionPerformed( java.awt.event.ActionEvent e ) {
             if (e.getSource() == VerifyDialog.this.getPass1Button()) {
                 connEtoC1(e);

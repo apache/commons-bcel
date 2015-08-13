@@ -142,6 +142,7 @@ public final class SWITCH implements CompoundInstruction {
     }
 
 
+    @Override
     public final InstructionList getInstructionList() {
         return new InstructionList(instruction);
     }

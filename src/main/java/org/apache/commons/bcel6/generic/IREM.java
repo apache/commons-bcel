@@ -37,6 +37,7 @@ public class IREM extends ArithmeticInstruction implements ExceptionThrower {
 
     /** @return exceptions this instruction may cause
      */
+    @Override
     public Class<?>[] getExceptions() {
         return new Class[] {
             org.apache.commons.bcel6.ExceptionConstants.ARITHMETIC_EXCEPTION

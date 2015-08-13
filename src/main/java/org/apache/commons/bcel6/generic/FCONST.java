@@ -53,6 +53,7 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
     }
 
 
+    @Override
     public Number getValue() {
         return new Float(value);
     }
@@ -60,6 +61,7 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
 
     /** @return Type.FLOAT
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         return Type.FLOAT;
     }

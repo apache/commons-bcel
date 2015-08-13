@@ -49,12 +49,14 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
 
     /** @return exceptions this instruction may cause
      */
+    @Override
     public Class<?>[] getExceptions() {
         return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
             ExceptionConstants.CLASS_CAST_EXCEPTION);
     }
 
 
+    @Override
     public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
         Type t = getType(cpg);
         if (t instanceof ArrayType) {

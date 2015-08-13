@@ -104,21 +104,25 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
+    @Override
     public void setName( String name ) { // TODO unused
         this.name = name;
     }
 
 
+    @Override
     public String getName() {
         return name;
     }
 
 
+    @Override
     public void setType( Type type ) { // TODO unused
         this.type = type;
     }
 
 
+    @Override
     public Type getType() {
         return type;
     }
@@ -150,6 +154,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * @param old_ih old target, either start or end
      * @param new_ih new target
      */
+    @Override
     public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
         boolean targeted = false;
         if (start == old_ih) {
@@ -177,6 +182,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * @return true, if ih is target of this variable
      */
+    @Override
     public boolean containsTarget( InstructionHandle ih ) {
         return (start == ih) || (end == ih);
     }

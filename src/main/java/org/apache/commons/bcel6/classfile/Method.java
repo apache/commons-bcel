@@ -36,6 +36,7 @@ public final class Method extends FieldOrMethod {
     private static final long serialVersionUID = -2013983967283787941L;
     private static BCELComparator _cmp = new BCELComparator() {
 
+        @Override
         public boolean equals( Object o1, Object o2 ) {
             Method THIS = (Method) o1;
             Method THAT = (Method) o2;
@@ -44,6 +45,7 @@ public final class Method extends FieldOrMethod {
         }
 
 
+        @Override
         public int hashCode( Object o ) {
             Method THIS = (Method) o;
             return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
@@ -102,6 +104,7 @@ public final class Method extends FieldOrMethod {
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitMethod(this);
     }

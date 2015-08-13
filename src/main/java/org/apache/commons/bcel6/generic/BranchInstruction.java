@@ -212,6 +212,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @param old_ih old target
      * @param new_ih new target
      */
+    @Override
     public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
         if (target == old_ih) {
             setTarget(new_ih);
@@ -224,6 +225,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * @return true, if ih is target of this instruction
      */
+    @Override
     public boolean containsTarget( InstructionHandle ih ) {
         return (target == ih);
     }

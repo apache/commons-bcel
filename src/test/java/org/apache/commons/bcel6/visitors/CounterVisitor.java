@@ -150,216 +150,259 @@ public class CounterVisitor implements Visitor
     public int methodParametersCount = 0;
 
 
+    @Override
     public void visitAnnotation(Annotations obj)
     {
         annotationCount++;
     }
 
+    @Override
     public void visitAnnotationDefault(AnnotationDefault obj)
     {
         annotationDefaultCount++;
     }
 
+    @Override
     public void visitAnnotationEntry(AnnotationEntry obj)
     {
         annotationEntryCount++;
     }
 
+    @Override
     public void visitCode(Code obj)
     {
         codeCount++;
     }
 
+    @Override
     public void visitCodeException(CodeException obj)
     {
         codeExceptionCount++;
     }
 
+    @Override
     public void visitConstantClass(ConstantClass obj)
     {
         constantClassCount++;
     }
 
+    @Override
     public void visitConstantDouble(ConstantDouble obj)
     {
         constantDoubleCount++;
     }
 
+    @Override
     public void visitConstantFieldref(ConstantFieldref obj)
     {
         constantFieldrefCount++;
     }
 
+    @Override
     public void visitConstantFloat(ConstantFloat obj)
     {
         constantFloatCount++;
     }
 
+    @Override
     public void visitConstantInteger(ConstantInteger obj)
     {
         constantIntegerCount++;
     }
 
+    @Override
     public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj)
     {
         constantInterfaceMethodrefCount++;
     }
 
+    @Override
     public void visitConstantLong(ConstantLong obj)
     {
         constantLongCount++;
     }
 
+    @Override
     public void visitConstantMethodref(ConstantMethodref obj)
     {
         constantMethodrefCount++;
     }
 
+    @Override
     public void visitConstantNameAndType(ConstantNameAndType obj)
     {
         constantNameAndTypeCount++;
     }
 
+    @Override
     public void visitConstantPool(ConstantPool obj)
     {
         constantPoolCount++;
     }
 
+    @Override
     public void visitConstantString(ConstantString obj)
     {
         constantStringCount++;
     }
 
+    @Override
     public void visitConstantUtf8(ConstantUtf8 obj)
     {
         constantUtf8Count++;
     }
 
+    @Override
     public void visitConstantValue(ConstantValue obj)
     {
         constantValueCount++;
     }
 
+    @Override
     public void visitDeprecated(Deprecated obj)
     {
         deprecatedCount++;
     }
 
+    @Override
     public void visitEnclosingMethod(EnclosingMethod obj)
     {
         enclosingMethodCount++;
     }
 
+    @Override
     public void visitExceptionTable(ExceptionTable obj)
     {
         exceptionTableCount++;
     }
 
+    @Override
     public void visitField(Field obj)
     {
         fieldCount++;
     }
 
+    @Override
     public void visitInnerClass(InnerClass obj)
     {
         innerClassCount++;
     }
 
+    @Override
     public void visitInnerClasses(InnerClasses obj)
     {
         innerClassesCount++;
     }
 
+    @Override
     public void visitJavaClass(JavaClass obj)
     {
         javaClassCount++;
     }
 
+    @Override
     public void visitLineNumber(LineNumber obj)
     {
         lineNumberCount++;
     }
 
+    @Override
     public void visitLineNumberTable(LineNumberTable obj)
     {
         lineNumberTableCount++;
     }
 
+    @Override
     public void visitLocalVariable(LocalVariable obj)
     {
         localVariableCount++;
     }
 
+    @Override
     public void visitLocalVariableTable(LocalVariableTable obj)
     {
         localVariableTableCount++;
     }
 
+    @Override
     public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
     {
         localVariableTypeTableCount++;
     }
 
+    @Override
     public void visitMethod(Method obj)
     {
         methodCount++;
     }
 
+    @Override
     public void visitParameterAnnotation(ParameterAnnotations obj)
     {
         parameterAnnotationCount++;
     }
 
+    @Override
     public void visitSignature(Signature obj)
     {
         signatureAnnotationCount++;
     }
 
+    @Override
     public void visitSourceFile(SourceFile obj)
     {
         sourceFileCount++;
     }
 
+    @Override
     public void visitStackMap(StackMap obj)
     {
         stackMapCount++;
     }
 
+    @Override
     public void visitStackMapEntry(StackMapEntry obj)
     {
         stackMapEntryCount++;
     }
 
+    @Override
     public void visitSynthetic(Synthetic obj)
     {
         syntheticCount++;
     }
 
+    @Override
     public void visitUnknown(Unknown obj)
     {
         unknownCount++;
     }
 
+    @Override
     public void visitStackMapTable(StackMapTable obj)
     {
         stackMapTableCount++;
     }
 
+    @Override
     public void visitStackMapTableEntry(StackMapTableEntry obj)
     {
         stackMapTableEntryCount++;
     }
 
+    @Override
     public void visitBootstrapMethods(BootstrapMethods obj)
     {
         bootstrapMethodsCount++;
     }
 
+    @Override
     public void visitMethodParameters(MethodParameters obj)
     {
         methodParametersCount++;
     }
 
+    @Override
     public void visitConstantInvokeDynamic(ConstantInvokeDynamic obj)
     {
     }

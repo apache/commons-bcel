@@ -45,6 +45,7 @@ public class INVOKESTATIC extends InvokeInstruction {
     }
 
 
+    @Override
     public Class<?>[] getExceptions() {
         return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
             ExceptionConstants.UNSATISFIED_LINK_ERROR,

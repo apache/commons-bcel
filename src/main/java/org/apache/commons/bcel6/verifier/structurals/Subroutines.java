@@ -90,6 +90,7 @@ public class Subroutines{
         /*
          * Refer to the Subroutine interface for documentation.
          */
+        @Override
         public boolean contains(InstructionHandle inst){
             return instructions.contains(inst);
         }
@@ -162,6 +163,7 @@ public class Subroutines{
         /*
          * Refer to the Subroutine interface for documentation.
          */
+        @Override
         public InstructionHandle[] getEnteringJsrInstructions(){
             if (this == TOPLEVEL) {
                 throw new AssertionViolatedException("getLeavingRET() called on top level pseudo-subroutine.");
@@ -192,6 +194,7 @@ public class Subroutines{
         /*
          * Refer to the Subroutine interface for documentation.
          */
+        @Override
         public InstructionHandle getLeavingRET(){
             if (this == TOPLEVEL) {
                 throw new AssertionViolatedException("getLeavingRET() called on top level pseudo-subroutine.");
@@ -202,6 +205,7 @@ public class Subroutines{
         /*
          * Refer to the Subroutine interface for documentation.
          */
+        @Override
         public InstructionHandle[] getInstructions(){
             InstructionHandle[] ret = new InstructionHandle[instructions.size()];
             return instructions.toArray(ret);
@@ -220,6 +224,7 @@ public class Subroutines{
         }
 
         /* Satisfies Subroutine.getRecursivelyAccessedLocalsIndices(). */
+        @Override
         public int[] getRecursivelyAccessedLocalsIndices(){
             Set<Integer> s = new HashSet<Integer>();
             int[] lvs = getAccessedLocalsIndices();
@@ -255,6 +260,7 @@ public class Subroutines{
         /*
          * Satisfies Subroutine.getAccessedLocalIndices().
          */
+        @Override
         public int[] getAccessedLocalsIndices(){
             //TODO: Implement caching.
             Set<Integer> acc = new HashSet<Integer>();
@@ -299,6 +305,7 @@ public class Subroutines{
         /*
          * Satisfies Subroutine.subSubs().
          */
+        @Override
         public Subroutine[] subSubs(){
             Set<Subroutine> h = new HashSet<Subroutine>();
 

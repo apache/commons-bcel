@@ -46,6 +46,7 @@ public class INVOKESPECIAL extends InvokeInstruction {
     }
 
 
+    @Override
     public Class<?>[] getExceptions() {
         return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
             ExceptionConstants.NULL_POINTER_EXCEPTION, 

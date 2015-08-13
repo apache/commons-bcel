@@ -34,6 +34,7 @@ public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
     }
 
 
+    @Override
     public Class<?>[] getExceptions() {
         return new Class[] {
             org.apache.commons.bcel6.ExceptionConstants.ARITHMETIC_EXCEPTION

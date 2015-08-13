@@ -43,6 +43,7 @@ public abstract class JsrInstruction extends BranchInstruction implements Uncond
 
     /** @return return address type
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         return new ReturnaddressType(physicalSuccessor());
     }

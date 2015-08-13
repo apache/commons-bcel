@@ -52,6 +52,7 @@ public class PUTFIELD extends FieldInstruction implements PopInstruction, Except
     }
 
 
+    @Override
     public Class<?>[] getExceptions() {
         return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
             ExceptionConstants.NULL_POINTER_EXCEPTION,

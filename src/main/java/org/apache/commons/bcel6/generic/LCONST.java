@@ -51,6 +51,7 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
     }
 
 
+    @Override
     public Number getValue() {
         return Long.valueOf(value);
     }
@@ -58,6 +59,7 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
 
     /** @return Type.LONG
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         return Type.LONG;
     }

@@ -48,6 +48,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable, java.io.Se
     /**
      * @return true, if ih is target of this line number
      */
+    @Override
     public boolean containsTarget( InstructionHandle ih ) {
         return this.ih == ih;
     }
@@ -57,6 +58,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable, java.io.Se
      * @param old_ih old target
      * @param new_ih new target
      */
+    @Override
     public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
         if (old_ih != ih) {
             throw new ClassGenException("Not targeting " + old_ih + ", but " + ih + "}");

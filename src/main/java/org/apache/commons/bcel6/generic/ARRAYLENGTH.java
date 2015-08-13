@@ -37,6 +37,7 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
 
     /** @return exceptions this instruction may cause
      */
+    @Override
     public Class<?>[] getExceptions() {
         return new Class[] {
             org.apache.commons.bcel6.ExceptionConstants.NULL_POINTER_EXCEPTION

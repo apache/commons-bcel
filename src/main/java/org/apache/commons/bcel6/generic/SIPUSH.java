@@ -78,6 +78,7 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
 
+    @Override
     public Number getValue() {
         return Integer.valueOf(b);
     }
@@ -85,6 +86,7 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
 
     /** @return Type.SHORT
      */
+    @Override
     public Type getType( ConstantPoolGen cp ) {
         return Type.SHORT;
     }
