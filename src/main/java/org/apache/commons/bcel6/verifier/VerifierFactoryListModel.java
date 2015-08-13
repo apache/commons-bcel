@@ -32,7 +32,7 @@ import javax.swing.event.ListDataListener;
  * @version $Id$
  */
 public class VerifierFactoryListModel implements org.apache.commons.bcel6.verifier.VerifierFactoryObserver,
-        javax.swing.ListModel {  // TODO Java7 makes ListModel generic
+        javax.swing.ListModel<String> {
 
     private final List<ListDataListener> listeners = new ArrayList<ListDataListener>();
     private final Set<String> cache = new TreeSet<String>();
@@ -73,7 +73,7 @@ public class VerifierFactoryListModel implements org.apache.commons.bcel6.verifi
     }
 
 
-    public synchronized Object getElementAt( int index ) {
+    public synchronized String getElementAt( int index ) {
         return (cache.toArray(new String[cache.size()]))[index];
     }
 }
