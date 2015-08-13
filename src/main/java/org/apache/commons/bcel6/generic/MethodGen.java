@@ -707,7 +707,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Remove all NOPs from the instruction list (if possible) and update every
-     * object refering to them, i.e., branch instructions, local variables and
+     * object referring to them, i.e., branch instructions, local variables and
      * exception handlers.
      */
     public void removeNOPs() {
