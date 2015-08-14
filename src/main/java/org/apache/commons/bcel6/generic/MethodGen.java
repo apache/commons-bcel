@@ -35,7 +35,6 @@ import org.apache.commons.bcel6.classfile.LineNumber;
 import org.apache.commons.bcel6.classfile.LineNumberTable;
 import org.apache.commons.bcel6.classfile.LocalVariable;
 import org.apache.commons.bcel6.classfile.LocalVariableTable;
-import org.apache.commons.bcel6.classfile.LocalVariableTypeTable;
 import org.apache.commons.bcel6.classfile.Method;
 import org.apache.commons.bcel6.classfile.ParameterAnnotationEntry;
 import org.apache.commons.bcel6.classfile.ParameterAnnotations;
@@ -225,22 +224,6 @@ public class MethodGen extends FieldGenOrMethodGen {
                         }
                     } else if (a instanceof LocalVariableTable) {
                         LocalVariable[] lv = ((LocalVariableTable) a).getLocalVariableTable();
-                        removeLocalVariables();
-                        for (LocalVariable l : lv) {
-                            InstructionHandle start = il.findHandle(l.getStartPC());
-                            InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
-                            // Repair malformed handles
-                            if (null == start) {
-                                start = il.getStart();
-                            }
-                            if (null == end) {
-                                end = il.getEnd();
-                            }
-                            addLocalVariable(l.getName(), Type.getType(l.getSignature()), l
-                                    .getIndex(), start, end);
-                        }
-                    } else if (a instanceof LocalVariableTypeTable) {
-                        LocalVariable[] lv = ((LocalVariableTypeTable) a).getLocalVariableTypeTable();
                         removeLocalVariables();
                         for (LocalVariable l : lv) {
                             InstructionHandle start = il.findHandle(l.getStartPC());

@@ -18,9 +18,17 @@
 
 package org.apache.commons.bcel6.data;
 
+import java.util.ArrayList;
+
 public class PLSETestClass
 {
     public void meth1(int arg1)
+    {
+        @SuppressWarnings("unused")
+        int local1 = arg1;
+    }
+
+    public void meth2(int arg1, ArrayList<String> arg2, int arg3)
     {
         @SuppressWarnings("unused")
         int local1 = arg1;

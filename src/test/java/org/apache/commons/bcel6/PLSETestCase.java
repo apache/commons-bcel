@@ -19,6 +19,7 @@
 package org.apache.commons.bcel6;
 
 import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.commons.bcel6.classfile.LocalVariableTable;
 import org.apache.commons.bcel6.classfile.Method;
 import org.apache.commons.bcel6.generic.ClassGen;
 import org.apache.commons.bcel6.generic.ConstantPoolGen;
@@ -42,5 +43,23 @@ public class PLSETestCase extends AbstractTestCase
         mg.addLocalVariable("local2", Type.INT, null, null);
         // currently, this will cause null pointer exception
         mg.getLocalVariableTable(pool);
+    }
+
+    /**
+     * BCEL-79: 
+     */
+    public void testB79() throws ClassNotFoundException
+    {
+        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.PLSETestClass");
+        ClassGen gen = new ClassGen(clazz);
+        ConstantPoolGen pool = gen.getConstantPool();
+        Method m = gen.getMethodAt(2);
+        LocalVariableTable lvt = m.getLocalVariableTable();
+        //System.out.println(lvt);
+        //System.out.println(lvt.getTableLength());
+        MethodGen mg = new MethodGen(m, gen.getClassName(), pool);
+        LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
+        //System.out.println(new_lvt);
+        assertEquals("number of locals", lvt.getTableLength(), new_lvt.getTableLength());
     }
 }
