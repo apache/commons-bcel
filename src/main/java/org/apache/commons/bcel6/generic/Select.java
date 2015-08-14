@@ -36,12 +36,12 @@ public abstract class Select extends BranchInstruction implements VariableLength
         StackConsumer, StackProducer {
 
     private static final long serialVersionUID = 2806771744559217250L;
-    protected int[] match; // matches, i.e., case 1: ...
-    protected int[] indices; // target offsets
-    protected InstructionHandle[] targets; // target objects in instruction list
-    protected int fixed_length; // fixed length defined by subclasses
-    protected int match_length; // number of cases
-    protected int padding = 0; // number of pad bytes for alignment
+    protected int[] match; // matches, i.e., case 1: ... TODO could be package-protected?
+    protected int[] indices; // target offsets TODO could be package-protected?
+    protected InstructionHandle[] targets; // target objects in instruction list TODO could be package-protected?
+    protected int fixed_length; // fixed length defined by subclasses TODO could be package-protected?
+    protected int match_length; // number of cases TODO could be package-protected?
+    protected int padding = 0; // number of pad bytes for alignment TODO could be package-protected?
 
 
     /**
