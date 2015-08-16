@@ -14,7 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- */package org.apache.commons.bcel6.verifier.tests;
+ */
+
+package org.apache.commons.bcel6.verifier.tests;
 
 import java.io.IOException;
 import java.io.OutputStream;
