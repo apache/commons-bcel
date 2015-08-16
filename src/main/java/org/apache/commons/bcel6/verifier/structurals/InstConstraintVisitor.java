@@ -47,7 +47,7 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
  * MONITOREXIT) is not modeled in JustIce.
  *
  * @version $Id$
- * @see org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException
+ * @see StructuralCodeConstraintException
  * @see org.apache.commons.bcel6.verifier.exc.LinkingConstraintException
  */
 public class InstConstraintVisitor extends EmptyVisitor{
@@ -104,7 +104,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
    * This method is called by the visitXXX() to notify the acceptor of this InstConstraintVisitor
    * that a constraint violation has occured. This is done by throwing an instance of a
    * StructuralCodeConstraintException.
-   * @throws org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException always.
+   * @throws StructuralCodeConstraintException always.
    */
     private void constraintViolated(Instruction violator, String description){
         String fq_classname = violator.getClass().getName();
