@@ -29,7 +29,7 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
 /**
  * This class implements a stack used for symbolic JVM stack simulation.
  * [It's used an an operand stack substitute.]
- * Elements of this stack are org.apache.commons.bcel6.generic.Type objects.
+ * Elements of this stack are {@link Type} objects.
  *
  * @version $Id$
  */

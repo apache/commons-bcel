@@ -29,7 +29,7 @@ import org.apache.commons.bcel6.util.SyntheticRepository;
  * to SyntheticRepository with current class path by default.
  *
  * @see org.apache.commons.bcel6.util.Repository
- * @see org.apache.commons.bcel6.util.SyntheticRepository
+ * @see SyntheticRepository
  *
  * @version $Id$
  */

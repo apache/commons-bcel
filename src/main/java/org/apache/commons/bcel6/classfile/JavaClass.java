@@ -430,7 +430,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
 
     /**
-     * @return A org.apache.commons.bcel6.classfile.Method corresponding to
+     * @return A {@link Method} corresponding to
      * java.lang.reflect.Method if any
      */
     public Method getMethod( java.lang.reflect.Method m ) {

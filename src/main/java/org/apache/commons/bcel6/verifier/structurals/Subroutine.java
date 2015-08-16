@@ -40,7 +40,7 @@ public interface Subroutine{
      * Note that JustIce has a pretty rigid notion of a subroutine.
      * <B>Must not be invoked on the 'top-level subroutine'.</B>
      *
-     * @see org.apache.commons.bcel6.verifier.structurals.Subroutines
+     * @see Subroutines
      */
     InstructionHandle getLeavingRET();
 

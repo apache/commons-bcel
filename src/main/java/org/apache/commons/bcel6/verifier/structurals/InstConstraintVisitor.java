@@ -142,7 +142,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
     /**
      * Assures index is of type INT.
-     * @throws org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException if the above constraint is not satisfied.
+     * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
      */
     private void indexOfInt(Instruction o, Type index){
         if (! index.equals(Type.INT)) {
@@ -154,7 +154,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
      * Assures the ReferenceType r is initialized (or Type.NULL).
      * Formally, this means (!(r instanceof UninitializedObjectType)), because
      * there are no uninitialized array types.
-     * @throws org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException if the above constraint is not satisfied.
+     * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
      */
     private void referenceTypeIsInitialized(Instruction o, ReferenceType r){
         if (r instanceof UninitializedObjectType){
@@ -172,7 +172,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
     /**
      * Assures arrayref is of ArrayType or NULL;
      * returns true if and only if arrayref is non-NULL.
-     * @throws org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException if the above constraint is violated.
+     * @throws StructuralCodeConstraintException if the above constraint is violated.
       */
     private boolean arrayrefOfArrayType(Instruction o, Type arrayref){
         if (! ((arrayref instanceof ArrayType) || arrayref.equals(Type.NULL)) ) {

@@ -144,7 +144,7 @@ public final class Pass2Verifier extends PassVerifier {
      * the "Code" array of methods in a few cases. Please
      * see the pass 3a documentation, too.
      *
-     * @see org.apache.commons.bcel6.verifier.statics.Pass3aVerifier
+     * @see Pass3aVerifier
      */
     @Override
     public VerificationResult do_verify(){
@@ -336,19 +336,19 @@ public final class Pass2Verifier extends PassVerifier {
             cp = _jc.getConstantPool();
             cplen = cp.getLength();
 
-            CONST_Class = org.apache.commons.bcel6.classfile.ConstantClass.class;
+            CONST_Class = ConstantClass.class;
             /*
-            CONST_Fieldref = org.apache.commons.bcel6.classfile.ConstantFieldref.class;
-            CONST_Methodref = org.apache.commons.bcel6.classfile.ConstantMethodref.class;
-            CONST_InterfaceMethodref = org.apache.commons.bcel6.classfile.ConstantInterfaceMethodref.class;
+            CONST_Fieldref = ConstantFieldref.class;
+            CONST_Methodref = ConstantMethodref.class;
+            CONST_InterfaceMethodref = ConstantInterfaceMethodref.class;
             */
-            CONST_String = org.apache.commons.bcel6.classfile.ConstantString.class;
-            CONST_Integer = org.apache.commons.bcel6.classfile.ConstantInteger.class;
-            CONST_Float = org.apache.commons.bcel6.classfile.ConstantFloat.class;
-            CONST_Long = org.apache.commons.bcel6.classfile.ConstantLong.class;
-            CONST_Double = org.apache.commons.bcel6.classfile.ConstantDouble.class;
-            CONST_NameAndType = org.apache.commons.bcel6.classfile.ConstantNameAndType.class;
-            CONST_Utf8 = org.apache.commons.bcel6.classfile.ConstantUtf8.class;
+            CONST_String = ConstantString.class;
+            CONST_Integer = ConstantInteger.class;
+            CONST_Float = ConstantFloat.class;
+            CONST_Long = ConstantLong.class;
+            CONST_Double = ConstantDouble.class;
+            CONST_NameAndType = ConstantNameAndType.class;
+            CONST_Utf8 = ConstantUtf8.class;
 
             carrier = new DescendingVisitor(_jc, this);
             carrier.visit();
