@@ -75,7 +75,7 @@ public class ProxyCreator {
         ClassLoader loader = ProxyCreator.class.getClassLoader();
 
         // instanceof won't work here ...
-        if (loader.getClass().toString().equals("class org.apache.commons.bcel6.util.ClassLoader")) {
+        if (loader.getClass().toString().equals("class org.apache.commons.bcel6.util.ClassLoader")) { // TODO this is broken; cannot ever be true
             // Real class name will be set by the class loader
             ClassGen cg = new ClassGen("foo", "java.lang.Object", "", Constants.ACC_PUBLIC,
                     new String[]{"java.awt.event.ActionListener"});
