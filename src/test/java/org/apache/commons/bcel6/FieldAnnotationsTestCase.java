@@ -39,8 +39,8 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     {
         JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
         // TODO L...;?
-        checkAnnotatedField(clazz, "i", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "1");
-        checkAnnotatedField(clazz, "s", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "2");
+        checkAnnotatedField(clazz, "i", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "1");
+        checkAnnotatedField(clazz, "s", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "2");
     }
 
     /**
@@ -50,15 +50,15 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             IOException
     {
         JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
-        checkAnnotatedField(clazz, "i", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "1");
-        checkAnnotatedField(clazz, "s", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "2");
+        checkAnnotatedField(clazz, "i", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "1");
+        checkAnnotatedField(clazz, "s", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "2");
         // Write it out
         File tfile = createTestdataFile("AnnotatedFields.class");
         clazz.dump(tfile);
         SyntheticRepository repos2 = createRepos(".");
         repos2.loadClass("AnnotatedFields");
-        checkAnnotatedField(clazz, "i", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "1");
-        checkAnnotatedField(clazz, "s", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "2");
+        checkAnnotatedField(clazz, "i", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "1");
+        checkAnnotatedField(clazz, "s", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "2");
         assertTrue(tfile.delete());
     }
 

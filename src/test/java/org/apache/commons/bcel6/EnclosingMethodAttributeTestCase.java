@@ -46,9 +46,9 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
         String enclosingClassName = em.getEnclosingClass().getBytes(pool);
         String enclosingMethodName = em.getEnclosingMethod().getName(pool);
         assertTrue(
-                "Expected class name to be 'org/apache/commons/bcel6/data/AttributeTestClassEM01' but was "
+                "Expected class name to be '"+PACKAGE_BASE_SIG+"/data/AttributeTestClassEM01' but was "
                         + enclosingClassName, enclosingClassName
-                        .equals("org/apache/commons/bcel6/data/AttributeTestClassEM01"));
+                        .equals(PACKAGE_BASE_SIG+"/data/AttributeTestClassEM01"));
         assertTrue("Expected method name to be 'main' but was "
                 + enclosingMethodName, enclosingMethodName.equals("main"));
     }
@@ -72,9 +72,9 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
                         + em.getEnclosingMethodIndex(), em
                         .getEnclosingMethodIndex() == 0);
         assertTrue(
-                "Expected class name to be 'org/apache/commons/bcel6/data/AttributeTestClassEM02' but was "
+                "Expected class name to be '"+PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02' but was "
                         + enclosingClassName, enclosingClassName
-                        .equals("org/apache/commons/bcel6/data/AttributeTestClassEM02"));
+                        .equals(PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02"));
     }
 
     /**
@@ -102,9 +102,9 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
                         + em.getEnclosingMethodIndex(), em
                         .getEnclosingMethodIndex() == 0);
         assertTrue(
-                "Expected class name to be 'org/apache/commons/bcel6/data/AttributeTestClassEM02' but was "
+                "Expected class name to be '"+PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02' but was "
                         + enclosingClassName, enclosingClassName
-                        .equals("org/apache/commons/bcel6/data/AttributeTestClassEM02"));
+                        .equals(PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02"));
         tfile.deleteOnExit();
     }
 }

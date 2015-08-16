@@ -43,6 +43,9 @@ public abstract class AbstractTestCase extends TestCase
 
     protected static final String PACKAGE_BASE_NAME = AbstractTestCase.class.getPackage().getName();
 
+    // package base name in signature format, i.e. with '/' separators instead of '.'
+    protected static final String PACKAGE_BASE_SIG = PACKAGE_BASE_NAME.replace('.', '/');
+
     protected File createTestdataFile(String name)
     {
         return new File("target" + File.separator + "testdata" + File.separator
