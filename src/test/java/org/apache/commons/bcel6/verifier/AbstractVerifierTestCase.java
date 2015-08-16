@@ -28,7 +28,7 @@ import junit.framework.TestCase;
 
 public abstract class AbstractVerifierTestCase extends TestCase {
 
-    public static final String TEST_PACKAGE = "org.apache.commons.bcel6.verifier.tests.";
+    public static final String TEST_PACKAGE = AbstractVerifierTestCase.class.getPackage().getName() + ".tests.";
 
     /**
      * Asserts that the verification of the given class is OK. If it isn't it throws an AssertionFailedError with the given message.
