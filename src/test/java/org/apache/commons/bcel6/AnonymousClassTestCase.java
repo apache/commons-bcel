@@ -24,7 +24,7 @@ public class AnonymousClassTestCase extends AbstractTestCase
 {
     public void testRegularClassIsNotAnonymous() throws ClassNotFoundException
     {
-        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.AnonymousClassTest");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest");
         assertFalse("regular outer classes are not anonymous", clazz
                 .isAnonymous());
         assertFalse("regular outer classes are not nested", clazz.isNested());

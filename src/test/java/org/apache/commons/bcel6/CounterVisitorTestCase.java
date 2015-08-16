@@ -25,7 +25,7 @@ public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase
     @Override
     protected JavaClass getTestClass() throws ClassNotFoundException
     {
-        return getTestClass("org.apache.commons.bcel6.data.MarkedType");
+        return getTestClass(PACKAGE_BASE_NAME+".data.MarkedType");
     }
 
     public void testAnnotationsCount()
