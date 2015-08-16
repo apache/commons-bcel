@@ -48,7 +48,6 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
  *
  * @version $Id$
  * @see StructuralCodeConstraintException
- * @see org.apache.commons.bcel6.verifier.exc.LinkingConstraintException
  */
 public class InstConstraintVisitor extends EmptyVisitor{
 
