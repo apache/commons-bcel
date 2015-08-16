@@ -24,8 +24,7 @@ import java.io.IOException;
 import org.apache.commons.bcel6.Constants;
 
 /** 
- * This class is derived from the abstract 
- * <A HREF="org.apache.commons.bcel6.classfile.Constant.html">Constant</A> class 
+ * This class is derived from the abstract {@link Constant}
  * and represents a reference to a (external) class.
  *
  * @version $Id$
