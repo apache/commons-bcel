@@ -25,6 +25,9 @@ import java.net.URISyntaxException;
  */
 public abstract class TestCreator {
 
+    // Common package base name for generated test classes
+    protected static final String TEST_PACKAGE = TestCreator.class.getPackage().getName();
+
     public void create() throws IOException {
         File classFile = new File(getPackageFolder(), getClassName());
         FileOutputStream out = new FileOutputStream(classFile);

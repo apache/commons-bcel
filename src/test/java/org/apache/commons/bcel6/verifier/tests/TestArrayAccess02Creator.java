@@ -39,7 +39,7 @@ public class TestArrayAccess02Creator extends TestCreator {
   private ClassGen           _cg;
 
   public TestArrayAccess02Creator() {
-    _cg = new ClassGen("org.apache.commons.bcel6.verifier.tests.TestArrayAccess02", "java.lang.Object", "TestArrayAccess02.java", Constants.ACC_PUBLIC | Constants.ACC_SUPER, new String[] {  });
+    _cg = new ClassGen(TEST_PACKAGE+".TestArrayAccess02", "java.lang.Object", "TestArrayAccess02.java", Constants.ACC_PUBLIC | Constants.ACC_SUPER, new String[] {  });
 
     _cp = _cg.getConstantPool();
     _factory = new InstructionFactory(_cg, _cp);
@@ -54,7 +54,7 @@ public void create(OutputStream out) throws IOException {
 
   private void createMethod_0() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(Constants.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>", "org.apache.commons.bcel6.verifier.tests.TestArrayAccess02", il, _cp);
+    MethodGen method = new MethodGen(Constants.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>", TEST_PACKAGE+".TestArrayAccess02", il, _cp);
 
     InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
     Assert.assertNotNull(ih_0); // TODO why is this not used
@@ -69,11 +69,11 @@ public void create(OutputStream out) throws IOException {
 
   private void createMethod_1() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(Constants.ACC_PUBLIC | Constants.ACC_STATIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "test", "org.apache.commons.bcel6.verifier.tests.TestArrayAccess02", il, _cp);
+    MethodGen method = new MethodGen(Constants.ACC_PUBLIC | Constants.ACC_STATIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "test", TEST_PACKAGE+".TestArrayAccess02", il, _cp);
 
     InstructionHandle ih_0 = il.append(new PUSH(_cp, 1));
     Assert.assertNotNull(ih_0); // TODO why is this not used
-    il.append(_factory.createNewArray(new ObjectType("org.apache.commons.bcel6.verifier.tests.TestArrayAccess02"), (short) 1));
+    il.append(_factory.createNewArray(new ObjectType(TEST_PACKAGE+".TestArrayAccess02"), (short) 1));
     il.append(InstructionFactory.createStore(Type.OBJECT, 0));
     InstructionHandle ih_5 = il.append(new PUSH(_cp, 1));
     Assert.assertNotNull(ih_5); // TODO why is this not used
@@ -82,9 +82,9 @@ public void create(OutputStream out) throws IOException {
     InstructionHandle ih_10 = il.append(InstructionFactory.createLoad(Type.OBJECT, 1));
     Assert.assertNotNull(ih_10); // TODO why is this not used
     il.append(new PUSH(_cp, 0));
-    il.append(_factory.createNew("org.apache.commons.bcel6.verifier.tests.TestArrayAccess02"));
+    il.append(_factory.createNew(TEST_PACKAGE+".TestArrayAccess02"));
     il.append(InstructionConstants.DUP);
-    il.append(_factory.createInvoke("org.apache.commons.bcel6.verifier.tests.TestArrayAccess02", "<init>", Type.VOID, Type.NO_ARGS, Constants.INVOKESPECIAL));
+    il.append(_factory.createInvoke(TEST_PACKAGE+".TestArrayAccess02", "<init>", Type.VOID, Type.NO_ARGS, Constants.INVOKESPECIAL));
     il.append(InstructionConstants.AASTORE);
     InstructionHandle ih_20 = il.append(InstructionFactory.createReturn(Type.VOID));
     Assert.assertNotNull(ih_20); // TODO why is this not used

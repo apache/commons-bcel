@@ -37,7 +37,7 @@ public class TestReturn01Creator extends TestCreator {
   private ClassGen           _cg;
 
   public TestReturn01Creator() {
-    _cg = new ClassGen("org.apache.commons.bcel6.verifier.tests.TestReturn01", "java.lang.Object", "TestReturn01.java", Constants.ACC_PUBLIC | Constants.ACC_SUPER, new String[] {  });
+    _cg = new ClassGen(TEST_PACKAGE+".TestReturn01", "java.lang.Object", "TestReturn01.java", Constants.ACC_PUBLIC | Constants.ACC_SUPER, new String[] {  });
 
     _cp = _cg.getConstantPool();
     _factory = new InstructionFactory(_cg, _cp);
@@ -52,7 +52,7 @@ public void create(OutputStream out) throws IOException {
 
   private void createMethod_0() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(Constants.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>", "org.apache.commons.bcel6.verifier.tests.TestReturn01", il, _cp);
+    MethodGen method = new MethodGen(Constants.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>", TEST_PACKAGE+".TestReturn01", il, _cp);
 
     InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
     Assert.assertNotNull(ih_0); // TODO why is this not used
@@ -67,7 +67,7 @@ public void create(OutputStream out) throws IOException {
 
   private void createMethod_1() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(Constants.ACC_PUBLIC | Constants.ACC_STATIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "foo", "org.apache.commons.bcel6.verifier.tests.TestReturn01", il, _cp);
+    MethodGen method = new MethodGen(Constants.ACC_PUBLIC | Constants.ACC_STATIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "foo", TEST_PACKAGE+".TestReturn01", il, _cp);
 
     InstructionHandle ih_0 = il.append(_factory.createNew("java.lang.Object"));
     Assert.assertNotNull(ih_0); // TODO why is this not used
