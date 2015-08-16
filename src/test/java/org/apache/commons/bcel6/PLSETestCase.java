@@ -34,7 +34,7 @@ public class PLSETestCase extends AbstractTestCase
      */
     public void testB208() throws ClassNotFoundException
     {
-        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.PLSETestClass");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.PLSETestClass");
         ClassGen gen = new ClassGen(clazz);
         ConstantPoolGen pool = gen.getConstantPool();
         Method m = gen.getMethodAt(1);
@@ -50,7 +50,7 @@ public class PLSETestCase extends AbstractTestCase
      */
     public void testB79() throws ClassNotFoundException
     {
-        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.PLSETestClass");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.PLSETestClass");
         ClassGen gen = new ClassGen(clazz);
         ConstantPoolGen pool = gen.getConstantPool();
         Method m = gen.getMethodAt(2);

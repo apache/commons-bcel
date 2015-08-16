@@ -37,7 +37,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
      */
     public void testFieldAnnotationEntrys() throws ClassNotFoundException
     {
-        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.AnnotatedFields");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
         // TODO L...;?
         checkAnnotatedField(clazz, "i", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "1");
         checkAnnotatedField(clazz, "s", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "2");
@@ -49,7 +49,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     public void testFieldAnnotationEntrysReadWrite() throws ClassNotFoundException,
             IOException
     {
-        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.AnnotatedFields");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
         checkAnnotatedField(clazz, "i", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "1");
         checkAnnotatedField(clazz, "s", "Lorg/apache/commons/bcel6/data/SimpleAnnotation;", "id", "2");
         // Write it out
@@ -70,7 +70,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             throws ClassNotFoundException
     {
         boolean dbg = false;
-        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.AnnotatedFields");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
         ClassGen clg = new ClassGen(clazz);
         Field f = clg.getFields()[0];
         if (dbg) {

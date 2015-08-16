@@ -41,6 +41,8 @@ public abstract class AbstractTestCase extends TestCase
 {
     private static final boolean verbose = false;
 
+    protected static final String PACKAGE_BASE_NAME = AbstractTestCase.class.getPackage().getName();
+
     protected File createTestdataFile(String name)
     {
         return new File("target" + File.separator + "testdata" + File.separator

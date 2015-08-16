@@ -217,7 +217,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     public void testTransformClassToClassGen_SimpleTypes()
             throws ClassNotFoundException
     {
-        JavaClass jc = getTestClass("org.apache.commons.bcel6.data.SimpleAnnotatedClass");
+        JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");
         ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
@@ -232,7 +232,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     public void testTransformClassToClassGen_EnumType()
             throws ClassNotFoundException
     {
-        JavaClass jc = getTestClass("org.apache.commons.bcel6.data.AnnotatedWithEnumClass");
+        JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedWithEnumClass");
         ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
@@ -247,7 +247,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     public void testTransformClassToClassGen_ArrayAndAnnotationTypes()
             throws ClassNotFoundException
     {
-        JavaClass jc = getTestClass("org.apache.commons.bcel6.data.AnnotatedWithCombinedAnnotation");
+        JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedWithCombinedAnnotation");
         ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
@@ -354,7 +354,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     public void testTransformComplexClassToClassGen()
             throws ClassNotFoundException
     {
-        JavaClass jc = getTestClass("org.apache.commons.bcel6.data.ComplexAnnotatedClass");
+        JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.ComplexAnnotatedClass");
         ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
@@ -382,7 +382,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      */
     public void testModifyingClasses1() throws ClassNotFoundException
     {
-        JavaClass jc = getTestClass("org.apache.commons.bcel6.data.SimpleAnnotatedClass");
+        JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");
         ClassGen cgen = new ClassGen(jc);
         ConstantPoolGen cp = cgen.getConstantPool();
         cgen.addAnnotationEntry(createFruitAnnotation(cp, "Pineapple"));
@@ -399,7 +399,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      */
     public void testModifyingClasses2() throws ClassNotFoundException
     {
-        JavaClass jc = getTestClass("org.apache.commons.bcel6.data.SimpleAnnotatedClass");
+        JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");
         ClassGen cgen = new ClassGen(jc);
         ConstantPoolGen cp = cgen.getConstantPool();
         cgen.addAnnotationEntry(createCombinedAnnotation(cp));

@@ -37,7 +37,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
     public void testCheckMethodLevelNamedInnerClass()
             throws ClassNotFoundException
     {
-        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.AttributeTestClassEM01$1S");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AttributeTestClassEM01$1S");
         ConstantPool pool = clazz.getConstantPool();
         Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
         assertTrue("Expected 1 EnclosingMethod attribute but found "
@@ -60,7 +60,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
     public void testCheckClassLevelNamedInnerClass()
             throws ClassNotFoundException
     {
-        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.AttributeTestClassEM02$1");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AttributeTestClassEM02$1");
         ConstantPool pool = clazz.getConstantPool();
         Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
         assertTrue("Expected 1 EnclosingMethod attribute but found "
@@ -83,7 +83,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
     public void testAttributeSerializtion() throws ClassNotFoundException,
             IOException
     {
-        JavaClass clazz = getTestClass("org.apache.commons.bcel6.data.AttributeTestClassEM02$1");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AttributeTestClassEM02$1");
         ConstantPool pool = clazz.getConstantPool();
         Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
         assertTrue("Expected 1 EnclosingMethod attribute but found "
