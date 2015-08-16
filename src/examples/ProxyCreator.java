@@ -48,7 +48,6 @@ import org.apache.commons.bcel6.generic.Type;
  *
  * @version $Id$
  * @see org.apache.commons.bcel6.util.JavaWrapper
- * @see org.apache.commons.bcel6.util.ClassLoader
  * @see Utility
  */
 public class ProxyCreator {
