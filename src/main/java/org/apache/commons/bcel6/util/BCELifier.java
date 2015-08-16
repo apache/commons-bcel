@@ -48,6 +48,8 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     private static final int FLAG_FOR_UNKNOWN = -1;
     private static final int FLAG_FOR_CLASS = 0;
     private static final int FLAG_FOR_METHOD = 1;
+    // The base package name for imports; assumes Constants is at the top level
+    private static final String BASE_PACKAGE = Constants.class.getPackage().getName();
     private final JavaClass _clazz;
     private final PrintWriter _out;
     private final ConstantPoolGen _cp;
@@ -82,9 +84,9 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
             _out.println("package " + package_name + ";");
             _out.println();
         }
-        _out.println("import org.apache.commons.bcel6.generic.*;");
-        _out.println("import org.apache.commons.bcel6.classfile.*;");
-        _out.println("import org.apache.commons.bcel6.*;");
+        _out.println("import " + BASE_PACKAGE + ".generic.*;");
+        _out.println("import " + BASE_PACKAGE + ".classfile.*;");
+        _out.println("import " + BASE_PACKAGE + ".*;");
         _out.println("import java.io.*;");
         _out.println();
         _out.println("public class " + class_name + "Creator implements Constants {");
