@@ -125,7 +125,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( long l ) { // TODO unused
+    public void setInitValue( long l ) {
         checkType(Type.LONG);
         if (l != 0L) {
             value = new Long(l);
@@ -133,7 +133,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( int i ) { // TODO unused
+    public void setInitValue( int i ) {
         checkType(Type.INT);
         if (i != 0) {
             value = Integer.valueOf(i);
@@ -141,7 +141,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( short s ) { // TODO unused
+    public void setInitValue( short s ) {
         checkType(Type.SHORT);
         if (s != 0) {
             value = Integer.valueOf(s);
@@ -149,7 +149,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( char c ) { // TODO unused
+    public void setInitValue( char c ) {
         checkType(Type.CHAR);
         if (c != 0) {
             value = Integer.valueOf(c);
@@ -157,7 +157,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( byte b ) { // TODO unused
+    public void setInitValue( byte b ) {
         checkType(Type.BYTE);
         if (b != 0) {
             value = Integer.valueOf(b);
@@ -165,7 +165,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( boolean b ) { // TODO unused
+    public void setInitValue( boolean b ) {
         checkType(Type.BOOLEAN);
         if (b) {
             value = Integer.valueOf(1);
@@ -173,7 +173,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( float f ) { // TODO unused
+    public void setInitValue( float f ) {
         checkType(Type.FLOAT);
         if (f != 0.0) {
             value = new Float(f);
@@ -181,7 +181,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( double d ) { // TODO unused
+    public void setInitValue( double d ) {
         checkType(Type.DOUBLE);
         if (d != 0.0) {
             value = new Double(d);
@@ -191,7 +191,7 @@ public class FieldGen extends FieldGenOrMethodGen {
 
     /** Remove any initial value.
      */
-    public void cancelInitValue() { // TODO unused
+    public void cancelInitValue() {
         value = null;
     }
 

@@ -74,7 +74,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     static boolean debug = false; // Debugging on/off
     final static char sep = File.separatorChar; // directory separator
     
-    private static final BCELComparator _cmp = new BCELComparator() { // TODO could be final (setter unused)
+    private static final BCELComparator _cmp = new BCELComparator() {
 
         @Override
         public boolean equals( Object o1, Object o2 ) {

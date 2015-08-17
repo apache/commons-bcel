@@ -91,7 +91,7 @@ public final class BranchHandle extends InstructionHandle {
     /**
      * Pass new target to instruction.
      */
-    public void setTarget( InstructionHandle ih ) { // TODO unused
+    public void setTarget( InstructionHandle ih ) {
         bi.setTarget(ih);
     }
 

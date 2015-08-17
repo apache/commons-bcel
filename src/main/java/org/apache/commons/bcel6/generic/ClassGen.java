@@ -417,13 +417,13 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public void setClassName( String name ) { // TODO unused
+    public void setClassName( String name ) {
         class_name = name.replace('/', '.');
         class_name_index = cp.addClass(name);
     }
 
 
-    public void setSuperclassName( String name ) { // TODO unused
+    public void setSuperclassName( String name ) {
         super_class_name = name.replace('/', '.');
         superclass_name_index = cp.addClass(name);
     }
@@ -434,7 +434,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public void setMethods( Method[] methods ) { // TODO unused
+    public void setMethods( Method[] methods ) {
         method_vec.clear();
         for (Method method : methods) {
             addMethod(method);
@@ -442,7 +442,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public void setMethodAt( Method method, int pos ) { // TODO unused
+    public void setMethodAt( Method method, int pos ) {
         method_vec.set(pos, method);
     }
 
@@ -490,19 +490,19 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public void setConstantPool( ConstantPoolGen constant_pool ) { // TODO unused
+    public void setConstantPool( ConstantPoolGen constant_pool ) {
         cp = constant_pool;
     }
 
 
-    public void setClassNameIndex( int class_name_index ) { // TODO unused
+    public void setClassNameIndex( int class_name_index ) {
         this.class_name_index = class_name_index;
         class_name = cp.getConstantPool().getConstantString(class_name_index,
                 Constants.CONSTANT_Class).replace('/', '.');
     }
 
 
-    public void setSuperclassNameIndex( int superclass_name_index ) { // TODO unused
+    public void setSuperclassNameIndex( int superclass_name_index ) {
         this.superclass_name_index = superclass_name_index;
         super_class_name = cp.getConstantPool().getConstantString(superclass_name_index,
                 Constants.CONSTANT_Class).replace('/', '.');

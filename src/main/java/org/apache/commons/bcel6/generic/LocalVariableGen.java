@@ -94,7 +94,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
-    public void setIndex( int index ) { // TODO unused
+    public void setIndex( int index ) {
         this.index = index;
     }
 
@@ -105,7 +105,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
 
     @Override
-    public void setName( String name ) { // TODO unused
+    public void setName( String name ) {
         this.name = name;
     }
 
@@ -117,7 +117,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
 
     @Override
-    public void setType( Type type ) { // TODO unused
+    public void setType( Type type ) {
         this.type = type;
     }
 
