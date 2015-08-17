@@ -220,6 +220,11 @@
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
+          <!-- These need to be specified because CP includes a descriptor -->
+          <descriptors>
+            <descriptor>src/assembly/bin.xml</descriptor>
+            <descriptor>src/assembly/src.xml</descriptor>
+          </descriptors>
           <tarLongFileMode>gnu</tarLongFileMode>
         </configuration>
       </plugin>
