@@ -312,9 +312,9 @@ public final class Code extends Attribute {
             }
         }
         if (attributes.length > 0) {
-            buf.append("\nAttribute(s) = \n");
+            buf.append("\nAttribute(s) = ");
             for (Attribute attribute : attributes) {
-                buf.append(attribute.toString()).append("\n");
+                buf.append("\n").append(attribute.toString());
             }
         }
         return buf.toString();
