@@ -36,5 +36,8 @@
         <fileSet>
             <directory>src</directory>
         </fileSet>
+        <fileSet>
+            <directory>docs</directory>
+        </fileSet>
     </fileSets>
 </assembly>
