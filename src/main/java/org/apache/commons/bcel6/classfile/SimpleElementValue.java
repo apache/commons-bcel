@@ -27,7 +27,7 @@ import org.apache.commons.bcel6.Constants;
  */
 public class SimpleElementValue extends ElementValue
 {
-    private final int index;
+    private int index;
 
     public SimpleElementValue(int type, int index, ConstantPool cpool)
     {
@@ -41,6 +41,11 @@ public class SimpleElementValue extends ElementValue
     public int getIndex()
     {
         return index;
+    }
+
+    public void setIndex(int index)
+    {
+        this.index = index;
     }
 
     public String getValueString()

@@ -31,7 +31,7 @@ public abstract class Annotations extends Attribute {
 
     private static final long serialVersionUID = 1L;
 
-    private final AnnotationEntry[] annotation_table;
+    private AnnotationEntry[] annotation_table;
     private final boolean isRuntimeVisible;
 
     /**
@@ -42,16 +42,12 @@ public abstract class Annotations extends Attribute {
      * @param constant_pool Array of constants
      */
     Annotations(byte annotation_type, int name_index, int length, DataInput input, ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException {
-        this(annotation_type, name_index, length, makeAnnotationTable(input, constant_pool, isRuntimeVisible), constant_pool, isRuntimeVisible);
-    }
-
-    static AnnotationEntry[] makeAnnotationTable(DataInput input, ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException {
+        this(annotation_type, name_index, length, (AnnotationEntry[]) null, constant_pool, isRuntimeVisible);
         final int annotation_table_length = (input.readUnsignedShort());
-        AnnotationEntry[] at = new AnnotationEntry[annotation_table_length];
+        annotation_table = new AnnotationEntry[annotation_table_length];
         for (int i = 0; i < annotation_table_length; i++) {
-            at[i] = AnnotationEntry.read(input, constant_pool, isRuntimeVisible);
+            annotation_table[i] = AnnotationEntry.read(input, constant_pool, isRuntimeVisible);
         }
-        return at;
     }
 
     /**
@@ -76,6 +72,13 @@ public abstract class Annotations extends Attribute {
     @Override
     public void accept(Visitor v) {
         v.visitAnnotation(this);
+    }
+
+    /**
+     * @param annotation_table the entries to set in this annotation
+     */
+    public final void setAnnotationTable(AnnotationEntry[] annotation_table) {
+        this.annotation_table = annotation_table;
     }
 
     /**

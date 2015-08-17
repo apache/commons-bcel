@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.Constants;
 public final class Deprecated extends Attribute {
 
     private static final long serialVersionUID = -2242528405240201000L;
-    private byte[] bytes; // TODO could be final if copy() were rewritten
+    private byte[] bytes;
 
 
     /**
@@ -111,6 +111,14 @@ public final class Deprecated extends Attribute {
      */
     public final byte[] getBytes() {
         return bytes;
+    }
+
+
+    /**
+     * @param bytes the raw bytes that represents this byte array
+     */
+    public final void setBytes( byte[] bytes ) {
+        this.bytes = bytes;
     }
 
 

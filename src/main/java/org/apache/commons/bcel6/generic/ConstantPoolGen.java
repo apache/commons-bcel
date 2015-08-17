@@ -54,7 +54,7 @@ public class ConstantPoolGen implements java.io.Serializable {
 
     private static final long serialVersionUID = 6664071417323174824L;
     private int size; 
-    private Constant[] constants;
+    protected Constant[] constants;
     private int index = 1; // First entry (0) used by JVM
     private static final String METHODREF_DELIM = ":";
     private static final String IMETHODREF_DELIM = "#";
@@ -685,6 +685,17 @@ public class ConstantPoolGen implements java.io.Serializable {
      */
     public Constant getConstant( int i ) {
         return constants[i];
+    }
+
+
+    /**
+     * Use with care!
+     *
+     * @param i index in constant pool
+     * @param c new constant pool entry at index i
+     */
+    public void setConstant( int i, Constant c ) {
+        constants[i] = c;
     }
 
 

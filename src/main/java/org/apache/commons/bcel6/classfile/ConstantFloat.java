@@ -33,7 +33,7 @@ import org.apache.commons.bcel6.Constants;
 public final class ConstantFloat extends Constant implements ConstantObject {
 
     private static final long serialVersionUID = -2316732495687628398L;
-    private final float bytes;
+    private float bytes;
 
 
     /** 
@@ -96,6 +96,14 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      */
     public final float getBytes() {
         return bytes;
+    }
+
+
+    /**
+     * @param bytes the raw bytes that represent this float
+     */
+    public final void setBytes( float bytes ) {
+        this.bytes = bytes;
     }
 
 

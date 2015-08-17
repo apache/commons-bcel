@@ -52,7 +52,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 {
     private static final long serialVersionUID = -1707826820310002955L;
 
-    private final int name_index; // Points to attribute name in constant pool
+    private int name_index; // Points to attribute name in constant pool
 
     private int length; // Content length of attribute field
 
@@ -256,6 +256,14 @@ public abstract class Attribute implements Cloneable, Node, Serializable
     public final void setLength(int length)
     {
         this.length = length;
+    }
+
+    /**
+     * @param name_index of attribute.
+     */
+    public final void setNameIndex(int name_index)
+    {
+        this.name_index = name_index;
     }
 
     /**

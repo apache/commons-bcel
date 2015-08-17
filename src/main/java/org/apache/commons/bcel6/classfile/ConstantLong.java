@@ -33,7 +33,7 @@ import org.apache.commons.bcel6.Constants;
 public final class ConstantLong extends Constant implements ConstantObject {
 
     private static final long serialVersionUID = 8495971186433816161L;
-    private final long bytes;
+    private long bytes;
 
 
     /** 
@@ -95,6 +95,14 @@ public final class ConstantLong extends Constant implements ConstantObject {
      */
     public final long getBytes() {
         return bytes;
+    }
+
+
+    /**
+     * @param bytes the raw bytes that represent this long
+     */
+    public final void setBytes( long bytes ) {
+        this.bytes = bytes;
     }
 
 

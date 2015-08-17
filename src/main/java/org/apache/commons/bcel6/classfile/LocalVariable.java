@@ -34,11 +34,11 @@ import org.apache.commons.bcel6.Constants;
 public final class LocalVariable implements Cloneable, Node, Serializable {
 
     private static final long serialVersionUID = -51081099265972179L;
-    private final int start_pc; // Range in which the variable is valid
-    private final int length;
-    private final int name_index; // Index in constant pool of variable name
-    private final int signature_index; // Index of variable signature
-    private final int index; /* Variable is `index'th local variable on
+    private int start_pc; // Range in which the variable is valid
+    private int length;
+    private int name_index; // Index in constant pool of variable name
+    private int signature_index; // Index of variable signature
+    private int index; /* Variable is `index'th local variable on
      * this method's frame.
      */
     private ConstantPool constant_pool;
@@ -188,6 +188,54 @@ public final class LocalVariable implements Cloneable, Node, Serializable {
         String label = "LocalVariable" + (typeTable ? "Types" : "" );
         return label + "(start_pc = " + start_pc + ", length = " + length + ", index = "
                 + index + ":" + signature + " " + name + ")";
+    }
+
+
+    /**
+     * @param constant_pool Constant pool to be used for this object.
+     */
+    public final void setConstantPool( ConstantPool constant_pool ) {
+        this.constant_pool = constant_pool;
+    }
+
+
+    /**
+     * @param length the length of this local variable
+     */
+    public final void setLength( int length ) {
+        this.length = length;
+    }
+
+
+    /**
+     * @param name_index the index into the constant pool for the name of this variable
+     */
+    public final void setNameIndex( int name_index ) { // TODO unused
+        this.name_index = name_index;
+    }
+
+
+    /**
+     * @param signature_index the index into the constant pool for the signature of this variable
+     */
+    public final void setSignatureIndex( int signature_index ) { // TODO unused
+        this.signature_index = signature_index;
+    }
+
+
+    /**
+     * @param index the index in the local variable table of this variable
+     */
+    public final void setIndex( int index ) { // TODO unused
+        this.index = index;
+    }
+
+
+    /**
+     * @param start_pc Specify range where the local variable is valid.
+     */
+    public final void setStartPC( int start_pc ) { // TODO unused
+        this.start_pc = start_pc;
     }
 
 

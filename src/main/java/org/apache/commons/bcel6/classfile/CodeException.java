@@ -35,12 +35,12 @@ import org.apache.commons.bcel6.Constants;
 public final class CodeException implements Cloneable, Node, Serializable {
 
     private static final long serialVersionUID = 2972500041254967221L;
-    private final int start_pc; // Range in the code the exception handler is
-    private final int end_pc; // active. start_pc is inclusive, end_pc exclusive
-    private final int handler_pc; /* Starting address of exception handler, i.e.,
+    private int start_pc; // Range in the code the exception handler is
+    private int end_pc; // active. start_pc is inclusive, end_pc exclusive
+    private int handler_pc; /* Starting address of exception handler, i.e.,
      * an offset from start of code.
      */
-    private final int catch_type; /* If this is zero the handler catches any
+    private int catch_type; /* If this is zero the handler catches any
      * exception, otherwise it points to the
      * exception class which is to be caught.
      */
@@ -140,6 +140,38 @@ public final class CodeException implements Cloneable, Node, Serializable {
      */
     public final int getStartPC() {
         return start_pc;
+    }
+
+
+    /**
+     * @param catch_type the type of exception that is caught
+     */
+    public final void setCatchType( int catch_type ) {
+        this.catch_type = catch_type;
+    }
+
+
+    /**
+     * @param end_pc end of handled block
+     */
+    public final void setEndPC( int end_pc ) {
+        this.end_pc = end_pc;
+    }
+
+
+    /**
+     * @param handler_pc where the actual code is
+     */
+    public final void setHandlerPC( int handler_pc ) { // TODO unused
+        this.handler_pc = handler_pc;
+    }
+
+
+    /**
+     * @param start_pc start of handled block
+     */
+    public final void setStartPC( int start_pc ) { // TODO unused
+        this.start_pc = start_pc;
     }
 
 

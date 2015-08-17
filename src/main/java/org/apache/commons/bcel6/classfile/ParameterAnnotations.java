@@ -32,7 +32,7 @@ public abstract class ParameterAnnotations extends Attribute {
     private static final long serialVersionUID = 5234607357644462705L;
     
     /** Table of parameter annotations */
-    private ParameterAnnotationEntry[] parameter_annotation_table; // TODO could be final would need to recode ctor and copy method
+    private ParameterAnnotationEntry[] parameter_annotation_table;
 
     /**
      * @param parameter_annotation_type the subclass type of the parameter annotation
@@ -77,6 +77,14 @@ public abstract class ParameterAnnotations extends Attribute {
     @Override
     public void accept( Visitor v ) {
         v.visitParameterAnnotation(this);
+    }
+
+
+    /**
+     * @param parameter_annotation_table the entries to set in this parameter annotation
+     */
+    public final void setParameterAnnotationTable(ParameterAnnotationEntry[] parameter_annotation_table ) {
+        this.parameter_annotation_table = parameter_annotation_table;
     }
 
 

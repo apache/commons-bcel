@@ -34,7 +34,7 @@ public class EnclosingMethod extends Attribute {
 
     // Pointer to the CONSTANT_Class_info structure representing the 
     // innermost class that encloses the declaration of the current class.
-    private final int classIndex;
+    private int classIndex;
 
     // If the current class is not immediately enclosed by a method or 
     // constructor, then the value of the method_index item must be zero.  
@@ -44,7 +44,7 @@ public class EnclosingMethod extends Attribute {
     // to in the class_index.  *It is the compiler responsibility* to 
     // ensure that the method identified by this index is the closest 
     // lexically enclosing method that includes the local/anonymous class.
-    private final int methodIndex;
+    private int methodIndex;
 
     // Ctors - and code to read an attribute in.
     EnclosingMethod(int nameIndex, int len, DataInput input, ConstantPool cpool) throws IOException {
@@ -72,6 +72,9 @@ public class EnclosingMethod extends Attribute {
     // Accessors
     public final int getEnclosingClassIndex() { return classIndex; }  
     public final int getEnclosingMethodIndex(){ return methodIndex;}
+
+    public final void setEnclosingClassIndex(int idx) {classIndex = idx;}
+    public final void setEnclosingMethodIndex(int idx){methodIndex= idx;}
 
     public final ConstantClass getEnclosingClass() {
         ConstantClass c = 

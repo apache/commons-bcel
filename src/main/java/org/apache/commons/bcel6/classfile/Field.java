@@ -33,7 +33,7 @@ import org.apache.commons.bcel6.util.BCELComparator;
 public final class Field extends FieldOrMethod {
 
     private static final long serialVersionUID = -4604082205545049134L;
-    private static final BCELComparator _cmp = new BCELComparator() {
+    private static BCELComparator _cmp = new BCELComparator() {
 
         @Override
         public boolean equals( Object o1, Object o2 ) {
@@ -160,6 +160,14 @@ public final class Field extends FieldOrMethod {
      */
     public static BCELComparator getComparator() {
         return _cmp;
+    }
+
+
+    /**
+     * @param comparator Comparison strategy object
+     */
+    public static void setComparator( BCELComparator comparator ) {
+        _cmp = comparator;
     }
 
 

@@ -35,7 +35,7 @@ import org.apache.commons.bcel6.Constants;
 public final class InnerClasses extends Attribute {
 
     private static final long serialVersionUID = 4570147726361753700L;
-    private InnerClass[] inner_classes; // TODO could be final (would need to recode the copy method)
+    private InnerClass[] inner_classes;
 
 
     /**
@@ -114,6 +114,14 @@ public final class InnerClasses extends Attribute {
      */
     public final InnerClass[] getInnerClasses() {
         return inner_classes;
+    }
+
+
+    /**
+     * @param inner_classes the array of inner classes
+     */
+    public final void setInnerClasses( InnerClass[] inner_classes ) {
+        this.inner_classes = inner_classes != null ? inner_classes : new InnerClass[0];
     }
 
 

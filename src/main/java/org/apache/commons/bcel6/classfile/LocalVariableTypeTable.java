@@ -108,6 +108,10 @@ public class LocalVariableTypeTable extends Attribute {
         return null;
     }
 
+    public final void setLocalVariableTable(LocalVariable[] local_variable_table) {
+        this.local_variable_type_table = local_variable_table;
+    }
+
     /**
      * @return String representation.
      */

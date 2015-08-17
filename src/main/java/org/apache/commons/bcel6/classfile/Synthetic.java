@@ -38,7 +38,7 @@ import org.apache.commons.bcel6.Constants;
 public final class Synthetic extends Attribute {
 
     private static final long serialVersionUID = -123334426995458366L;
-    private byte[] bytes; // TODO could be final if copy() and ctor were recoded
+    private byte[] bytes;
 
 
     /**
@@ -117,6 +117,14 @@ public final class Synthetic extends Attribute {
      */
     public final byte[] getBytes() {
         return bytes;
+    }
+
+
+    /**
+     * @param bytes
+     */
+    public final void setBytes( byte[] bytes ) {
+        this.bytes = bytes;
     }
 
 

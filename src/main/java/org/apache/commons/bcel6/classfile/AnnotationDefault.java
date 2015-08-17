@@ -33,7 +33,7 @@ public class AnnotationDefault extends Attribute {
     
     private static final long serialVersionUID = -4017327188724019487L;
 
-    private final ElementValue default_value; // TODO could this be made final?
+    private ElementValue default_value;
 
     /**
      * @param name_index    Index pointing to the name <em>Code</em>
@@ -42,7 +42,8 @@ public class AnnotationDefault extends Attribute {
      * @param constant_pool Array of constants
      */
     AnnotationDefault(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
-        this(name_index, length, ElementValue.readElementValue(input, constant_pool), constant_pool);
+        this(name_index, length, (ElementValue) null, constant_pool);
+        default_value = ElementValue.readElementValue(input, constant_pool);
     }
 
     /**
@@ -66,6 +67,13 @@ public class AnnotationDefault extends Attribute {
     @Override
     public void accept(Visitor v) {
         v.visitAnnotationDefault(this);
+    }
+
+    /**
+     * @param defaultValue the default value of this methodinfo's annotation
+     */
+    public final void setDefaultValue(ElementValue defaultValue) {
+        default_value = defaultValue;
     }
 
     /**

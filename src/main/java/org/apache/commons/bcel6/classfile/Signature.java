@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.Constants;
 public final class Signature extends Attribute {
 
     private static final long serialVersionUID = 5808807822688827177L;
-    private final int signature_index;
+    private int signature_index;
 
 
     /**
@@ -104,6 +104,14 @@ public final class Signature extends Attribute {
      */
     public final int getSignatureIndex() {
         return signature_index;
+    }
+
+
+    /**
+     * @param signature_index the index info the constant pool of this signature
+     */
+    public final void setSignatureIndex( int signature_index ) {
+        this.signature_index = signature_index;
     }
 
 

@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.Constants;
 public final class ConstantValue extends Attribute {
 
     private static final long serialVersionUID = -5668999920978520157L;
-    private final int constantvalue_index;
+    private int constantvalue_index;
 
 
     /**
@@ -104,6 +104,14 @@ public final class ConstantValue extends Attribute {
      */
     public final int getConstantValueIndex() {
         return constantvalue_index;
+    }
+
+
+    /**
+     * @param constantvalue_index the index info the constant pool of this constant value
+     */
+    public final void setConstantValueIndex( int constantvalue_index ) {
+        this.constantvalue_index = constantvalue_index;
     }
 
 
