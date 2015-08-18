@@ -204,7 +204,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
             attributes = getAttributes();
         } else {
             // TODO: Sometime later, trash any attributes called 'RuntimeVisibleAnnotations' or 'RuntimeInvisibleAnnotations'
-            Attribute[] annAttributes  = AnnotationEntryGen.getAnnotationAttributes(cp,annotation_vec);
+            Attribute[] annAttributes  = AnnotationEntryGen.getAnnotationAttributes(cp, getAnnotationEntries());
             attributes = new Attribute[attribute_vec.size()+annAttributes.length];
             attribute_vec.toArray(attributes);
             System.arraycopy(annAttributes,0,attributes,attribute_vec.size(),annAttributes.length);       

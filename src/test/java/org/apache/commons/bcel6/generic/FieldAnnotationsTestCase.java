@@ -16,18 +16,16 @@
  * 
  */
 
-package org.apache.commons.bcel6;
+package org.apache.commons.bcel6.generic;
 
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.bcel6.AbstractTestCase;
 import org.apache.commons.bcel6.classfile.AnnotationEntry;
 import org.apache.commons.bcel6.classfile.ElementValuePair;
 import org.apache.commons.bcel6.classfile.Field;
 import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.generic.AnnotationEntryGen;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.FieldGen;
 import org.apache.commons.bcel6.util.SyntheticRepository;
 
 public class FieldAnnotationsTestCase extends AbstractTestCase

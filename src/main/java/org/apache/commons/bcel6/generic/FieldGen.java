@@ -228,7 +228,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
     private void addAnnotationsAsAttribute(ConstantPoolGen cp) {
-          Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp,annotation_vec);
+          Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
         for (Attribute attr : attrs) {
             addAttribute(attr);
         }

@@ -194,10 +194,10 @@ public class AnnotationEntryGen {
      * that can be attached to the class file.
      *
      * @param cp  The constant pool gen where we can create the necessary name refs
-     * @param vec A list of AnnotationGen objects
+     * @param annotationEntryGens An array of AnnotationGen objects
      */
-    static Attribute[] getAnnotationAttributes(ConstantPoolGen cp, List<AnnotationEntryGen> vec) {
-        if (vec.isEmpty()) {
+    static Attribute[] getAnnotationAttributes(ConstantPoolGen cp, AnnotationEntryGen[] annotationEntryGens) {
+        if (annotationEntryGens.length == 0) {
             return new Attribute[0];
         }
 
@@ -206,7 +206,7 @@ public class AnnotationEntryGen {
             int countInvisible = 0;
 
             //  put the annotations in the right output stream
-            for (AnnotationEntryGen a : vec) {
+            for (AnnotationEntryGen a : annotationEntryGens) {
                 if (a.isRuntimeVisible()) {
                     countVisible++;
                 } else {
@@ -223,7 +223,7 @@ public class AnnotationEntryGen {
             riaDos.writeShort(countInvisible);
 
             // put the annotations in the right output stream
-            for (AnnotationEntryGen a : vec) {
+            for (AnnotationEntryGen a : annotationEntryGens) {
                 if (a.isRuntimeVisible()) {
                     a.dump(rvaDos);
                 } else {
