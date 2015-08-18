@@ -79,7 +79,7 @@ public final class ArrayType extends ReferenceType {
             buf.append('[');
         }
         buf.append(basic_type.getSignature());
-        setSignature(buf.toString());
+        super.setSignature(buf.toString());
     }
 
 

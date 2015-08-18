@@ -72,7 +72,6 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-217" type="fix">long type instructions are not searched by InstructionFinder using regular expression</action>
       <action issue="BCEL-244" type="update" dev="ggregory">Update Java requirement from 5 to 7</action>
       <action issue="BCEL-239" type="fix">Interfaces should not be used to define constants</action>
-      <action issue="BCEL-232" type="fix">Make mutable fields private</action>
       <action issue="BCEL-234" type="fix">Code must not swallow Throwable</action>
       <action issue="BCEL-222" type="update">
         Major release of BCEL requires updating package name and maven coordinates.

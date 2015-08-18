@@ -35,8 +35,8 @@ import org.apache.commons.bcel6.verifier.structurals.OperandStack;
 public abstract class Type implements java.io.Serializable {
 
     private static final long serialVersionUID = -1985077286871826895L;
-    private final byte type;
-    private String signature; // signature for the type
+    protected byte type; // TODO should be final (and private)
+    protected String signature; // signature for the type TODO should be private
     /** Predefined constants
      */
     public static final BasicType VOID = new BasicType(Constants.T_VOID);

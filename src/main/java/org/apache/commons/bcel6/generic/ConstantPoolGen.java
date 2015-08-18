@@ -53,9 +53,9 @@ import org.apache.commons.bcel6.classfile.ConstantUtf8;
 public class ConstantPoolGen implements java.io.Serializable {
 
     private static final long serialVersionUID = 6664071417323174824L;
-    private int size; 
+    protected int size; 
     protected Constant[] constants;
-    private int index = 1; // First entry (0) used by JVM
+    protected int index = 1; // First entry (0) used by JVM
     private static final String METHODREF_DELIM = ":";
     private static final String IMETHODREF_DELIM = "#";
     private static final String FIELDREF_DELIM = "&";

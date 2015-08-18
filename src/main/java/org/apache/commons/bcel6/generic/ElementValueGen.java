@@ -34,9 +34,9 @@ import org.apache.commons.bcel6.classfile.SimpleElementValue;
  */
 public abstract class ElementValueGen
 {
-    private final int type;
+    protected int type;
 
-    private final ConstantPoolGen cpGen;
+    protected ConstantPoolGen cpGen;
 
     protected ElementValueGen(int type, ConstantPoolGen cpGen)
     {
@@ -143,7 +143,7 @@ public abstract class ElementValueGen
         }
     }
 
-    protected ConstantPoolGen getConstantPoolgen()
+    protected ConstantPoolGen getConstantPool()
     {
         return cpGen;
     }

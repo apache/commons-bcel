@@ -59,7 +59,7 @@ public abstract class Constant implements Cloneable, Node, Serializable {
      * need the tag as an index to select the corresponding class name from the 
      * `CONSTANT_NAMES' array.
      */
-    private final byte tag;
+    protected byte tag; // TODO should be private & final
 
 
     Constant(byte tag) {
