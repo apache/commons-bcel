@@ -52,7 +52,7 @@ import org.apache.commons.bcel6.Constants;
 // J5TODO: Needs some testing !
 
 /**
- * since 6.0
+ * @since 6.0
  */
 public class LocalVariableTypeTable extends Attribute {
 

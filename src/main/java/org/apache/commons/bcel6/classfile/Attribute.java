@@ -150,6 +150,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
      * @return Attribute
      * @throws IOException
      * @throws ClassFormatException
+     * @since 6.0
      */
     public static Attribute readAttribute(DataInput file, ConstantPool constant_pool)
             throws IOException, ClassFormatException
@@ -235,6 +236,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable
 
     /**
      * @return Name of attribute
+     * @since 6.0
      */
     public String getName()
     {

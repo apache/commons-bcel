@@ -42,6 +42,7 @@ import org.apache.commons.bcel6.util.ByteSequence;
  *
  * @version $Id$
  */
+// @since 6.0 methods are no longer final
 public abstract class Utility {
 
     private static int unwrap( ThreadLocal<Integer> tl ) {

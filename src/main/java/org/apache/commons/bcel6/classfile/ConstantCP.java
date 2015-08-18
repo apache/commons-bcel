@@ -103,6 +103,7 @@ public abstract class ConstantCP extends Constant {
      *
      * Note that this method is a functional duplicate of getClassIndex
      * for use by ConstantInvokeDynamic.
+     * @since 6.0
      */
     public final int getBootstrapMethodAttrIndex() {
         return class_index;  // AKA bootstrap_method_attr_index
@@ -122,6 +123,7 @@ public abstract class ConstantCP extends Constant {
      *
      * Note that this method is a functional duplicate of setClassIndex
      * for use by ConstantInvokeDynamic.
+     * @since 6.0
      */
     public final void setBootstrapMethodAttrIndex(int bootstrap_method_attr_index) {
         this.class_index = bootstrap_method_attr_index;

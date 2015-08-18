@@ -33,7 +33,8 @@ import org.apache.commons.bcel6.Constants;
  * @see     StackMap
  * @see     Constants
  */
-public final class StackMapType implements Cloneable, Serializable {
+public final class StackMapType implements Cloneable
+    ,Serializable /* since 6.0 */ {
 
     private static final long serialVersionUID = 1L;
 

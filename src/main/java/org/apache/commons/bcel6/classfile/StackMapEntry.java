@@ -31,7 +31,9 @@ import java.io.Serializable;
  * @see     StackMap
  * @see     StackMapType
  */
-public final class StackMapEntry implements Cloneable, Serializable {
+public final class StackMapEntry implements Cloneable
+    ,Serializable /* since 6.0 */ 
+{
 
     private static final long serialVersionUID = 1L;
 

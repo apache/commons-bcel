@@ -37,7 +37,11 @@ public class ClassFormatException extends RuntimeException {
         super(s);
     }
 
-    public ClassFormatException(String s, Throwable initCause) {
-        super(s, initCause);
+    /**
+     * {@inheritDoc}
+     * @since 6.0
+     */
+    public ClassFormatException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

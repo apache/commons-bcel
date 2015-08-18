@@ -263,6 +263,7 @@ public final class Method extends FieldOrMethod {
 
     /**
      * @return Annotations on the parameters of a method
+     * @since 6.0
      */
     public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
         if (parameterAnnotationEntries == null) {

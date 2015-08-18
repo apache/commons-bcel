@@ -239,11 +239,13 @@ public final class Signature extends Attribute {
     }
 
 
+    // @since 6.0 is no longer final
     public static boolean isFormalParameterList( String s ) {
         return s.startsWith("<") && (s.indexOf(':') > 0);
     }
 
 
+    // @since 6.0 is no longer final
     public static boolean isActualParameterList( String s ) {
         return s.startsWith("L") && s.endsWith(">;");
     }

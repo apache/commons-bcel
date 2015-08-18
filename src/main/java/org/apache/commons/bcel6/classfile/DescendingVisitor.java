@@ -106,6 +106,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitAnnotation(Annotations annotation)
     {
@@ -118,6 +121,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitAnnotationEntry(AnnotationEntry annotationEntry)
     {
@@ -242,6 +248,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitStackMapTable(StackMapTable table)
     {
@@ -254,6 +263,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitStackMapTableEntry(StackMapTableEntry var)
     {
@@ -335,6 +347,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitConstantInvokeDynamic(
             ConstantInvokeDynamic constant)
@@ -404,6 +419,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitBootstrapMethods(BootstrapMethods bm)
     {
@@ -457,6 +475,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitAnnotationDefault(AnnotationDefault obj)
     {
@@ -465,6 +486,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitEnclosingMethod(EnclosingMethod obj)
     {
@@ -473,6 +497,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
     {
@@ -481,6 +508,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitParameterAnnotation(ParameterAnnotations obj)
     {
@@ -489,6 +519,9 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitMethodParameters(MethodParameters obj)
     {
