@@ -192,7 +192,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     }
 
 
-    public static String printFlags( int flags, int reason ) {
+    static String printFlags( int flags, int reason ) {
         if (flags == 0) {
             return "0";
         }
