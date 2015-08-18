@@ -43,6 +43,7 @@ public final class BasicType extends Type {
     }
 
 
+    // @since 6.0 no longer final
     public static BasicType getType( byte type ) {
         switch (type) {
             case Constants.T_VOID:

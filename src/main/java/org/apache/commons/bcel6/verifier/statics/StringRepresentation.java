@@ -134,6 +134,9 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
         tostring = "<CODE>"; // We don't need real code outputs.
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitAnnotation(Annotations obj)
     {
@@ -142,6 +145,9 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
         tostring = toString(obj);
     }
     
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
     {
@@ -290,6 +296,9 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
         tostring = toString(obj);
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitStackMapTable(StackMapTable obj) {
         tostring = toString(obj);
@@ -305,16 +314,25 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
         tostring = toString(obj);
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitEnclosingMethod(EnclosingMethod obj) {
         tostring = toString(obj);
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitBootstrapMethods(BootstrapMethods obj) {
         tostring = toString(obj);
     }
 
+    /**
+     * @since 6.0
+     */
     @Override
     public void visitMethodParameters(MethodParameters obj) {
         tostring = toString(obj);

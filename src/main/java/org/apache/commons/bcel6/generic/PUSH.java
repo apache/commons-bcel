@@ -121,6 +121,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * 
      * @param cp
      * @param value
+     * @since 6.0
      */
     public PUSH(ConstantPoolGen cp, ObjectType value) {
         if (value == null) {

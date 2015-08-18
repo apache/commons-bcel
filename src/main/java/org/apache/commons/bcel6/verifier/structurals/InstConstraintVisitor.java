@@ -1751,6 +1751,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
     /**
      * Ensures the specific preconditions of the said instruction.
+     * @since 6.0
      */
     @Override
     public void visitINVOKEDYNAMIC(INVOKEDYNAMIC o){

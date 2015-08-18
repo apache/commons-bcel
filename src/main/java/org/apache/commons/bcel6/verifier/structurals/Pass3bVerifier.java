@@ -280,6 +280,7 @@ public final class Pass3bVerifier extends PassVerifier{
     /**
      * Throws an exception indicating the returned type is not compatible with the return type of the given method
      * @throws StructuralCodeConstraintException always
+     * @since 6.0
      */
     public void invalidReturnTypeError(Type returnedType, MethodGen m){
         throw new StructuralCodeConstraintException("Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());

@@ -31,6 +31,9 @@ public class ObjectType extends ReferenceType {
     private static final long serialVersionUID = -2819379966444533294L;
     private final String class_name; // Class name of type
 
+    /**
+     * @since 6.0
+     */
     public static ObjectType getInstance(String class_name) {
         return new ObjectType(class_name);
     }

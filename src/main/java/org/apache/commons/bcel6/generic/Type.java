@@ -113,6 +113,7 @@ public abstract class Type implements java.io.Serializable {
      * returns the given type.
      * @see OperandStack#push(Type)
      * @see LocalVariables#set(int, Type)
+     * @since 6.0
      */
     public Type normalizeForStackOrLocal(){
         if (this == Type.BOOLEAN || this == Type.BYTE || this == Type.SHORT || this == Type.CHAR){
@@ -191,6 +192,7 @@ public abstract class Type implements java.io.Serializable {
      * @param signature signature string such as Ljava/lang/String;
      * @return type object
      */
+    // @since 6.0 no longer final
     public static Type getType( String signature ) throws StringIndexOutOfBoundsException {
         byte type = Utility.typeOfSignature(signature);
         if (type <= Constants.T_VOID) {

@@ -44,6 +44,7 @@ public class ClassConstraintException extends VerificationException{
 
     /**
      * Constructs a new ClassConstraintException with the specified error message and cause
+     * @since 6.0
      */
     public ClassConstraintException(String message, Throwable initCause){
         super(message, initCause);

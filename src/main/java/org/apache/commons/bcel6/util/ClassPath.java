@@ -143,6 +143,7 @@ public class ClassPath implements Serializable {
      *
      * @return class path as used by default by BCEL
      */
+    // @since 6.0 no longer final
     public static String getClassPath() {
         String class_path = System.getProperty("java.class.path");
         String boot_path = System.getProperty("sun.boot.class.path");
@@ -203,6 +204,7 @@ public class ClassPath implements Serializable {
     /**
      * @param name fully qualified resource name, e.g. java/lang/String.class
      * @return InputStream supplying the resource, or null if no resource with that name.
+     * @since 6.0
      */
     public InputStream getResourceAsStream(String name) {
         for (PathEntry path : paths) {
@@ -217,6 +219,7 @@ public class ClassPath implements Serializable {
     /**
      * @param name fully qualified resource name, e.g. java/lang/String.class
      * @return URL supplying the resource, or null if no resource with that name.
+     * @since 6.0
      */
     public URL getResource(String name) {
         for (PathEntry path : paths) {
@@ -232,6 +235,7 @@ public class ClassPath implements Serializable {
      * @param name fully qualified resource name, e.g. java/lang/String.class
      * @return An Enumeration of URLs supplying the resource, or an
      * empty Enumeration if no resource with that name.
+     * @since 6.0
      */
     public Enumeration<URL> getResources(String name) {
         Vector<URL> results = new Vector<>();

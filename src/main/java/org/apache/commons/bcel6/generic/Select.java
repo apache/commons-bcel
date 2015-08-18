@@ -33,7 +33,7 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * @see InstructionList
  */
 public abstract class Select extends BranchInstruction implements VariableLengthInstruction,
-        StackConsumer, StackProducer {
+        StackConsumer /* @since 6.0 */, StackProducer {
 
     private static final long serialVersionUID = 2806771744559217250L;
     protected int[] match; // matches, i.e., case 1: ... TODO could be package-protected?
