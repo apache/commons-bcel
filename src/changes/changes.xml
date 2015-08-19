@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-198" type="update">better support for clone/copy methods</action>
       <action issue="BCEL-242" type="remove">Remove Serializable</action>
       <action issue="BCEL-231" type="remove">Remove deprecated methods and classes</action>
       <action issue="BCEL-110" type="remove">Problem with JAXB if the bcel classloader is used; remove the broken ClassLoader class</action>

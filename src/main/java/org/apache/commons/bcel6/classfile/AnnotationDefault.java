@@ -85,7 +85,7 @@ public class AnnotationDefault extends Attribute {
 
     @Override
     public Attribute copy(ConstantPool _constant_pool) {
-        throw new RuntimeException("Not implemented yet!");
+        return (AnnotationDefault) clone();
     }
 
     @Override

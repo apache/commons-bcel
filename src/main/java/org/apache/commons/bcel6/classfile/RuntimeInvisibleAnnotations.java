@@ -56,8 +56,7 @@ public class RuntimeInvisibleAnnotations extends Annotations
     @Override
     public Attribute copy(ConstantPool constant_pool)
     {
-        Annotations c = (Annotations) clone();
-        return c;
+        return (Annotations) clone();
     }
 
     @Override

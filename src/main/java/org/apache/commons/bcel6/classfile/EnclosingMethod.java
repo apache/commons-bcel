@@ -64,9 +64,7 @@ public class EnclosingMethod extends Attribute {
 
     @Override
     public Attribute copy(ConstantPool constant_pool) {
-        throw new RuntimeException("Not implemented yet!");
-        // is this next line sufficient?
-        // return (EnclosingMethod)clone();
+        return (EnclosingMethod) clone();
     }
 
     // Accessors
