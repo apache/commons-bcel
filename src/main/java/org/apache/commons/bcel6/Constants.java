@@ -798,28 +798,28 @@ public class Constants {
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ifle">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short IFLE             = 158;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmpeq">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short IF_ICMPEQ        = 159;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmpne">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short IF_ICMPNE        = 160;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmplt">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short IF_ICMPLT        = 161;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmpge">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short IF_ICMPGE        = 162;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmpgt">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short IF_ICMPGT        = 163;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmple">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short IF_ICMPLE        = 164;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_acmpeq">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_acmp_cond">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short IF_ACMPEQ        = 165;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_acmpne">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_acmp_cond">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short IF_ACMPNE        = 166;
   /** Java VM opcode.
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.goto">Opcode definitions in The Java Virtual Machine Specification</a> */
