@@ -20,7 +20,6 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 
 import org.apache.commons.bcel6.Constants;
 
@@ -31,9 +30,8 @@ import org.apache.commons.bcel6.Constants;
  * @version $Id$
  * @see     LocalVariableTable
  */
-public final class LocalVariable implements Cloneable, Node, Serializable {
+public final class LocalVariable implements Cloneable, Node {
 
-    private static final long serialVersionUID = -51081099265972179L;
     private int start_pc; // Range in which the variable is valid
     private int length;
     private int name_index; // Index in constant pool of variable name

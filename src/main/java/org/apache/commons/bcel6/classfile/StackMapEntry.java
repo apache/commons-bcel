@@ -20,7 +20,6 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 
 /**
  * This class represents a stack map entry recording the types of
@@ -32,10 +31,7 @@ import java.io.Serializable;
  * @see     StackMapType
  */
 public final class StackMapEntry implements Cloneable
-    ,Serializable /* since 6.0 */ 
 {
-
-    private static final long serialVersionUID = 1L;
 
     private int byte_code_offset;
     private StackMapType[] types_of_locals;

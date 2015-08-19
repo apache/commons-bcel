@@ -31,9 +31,8 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  * @version $Id$
  * @see ClassStack
  */
-public class ClassSet implements java.io.Serializable {
+public class ClassSet {
 
-    private static final long serialVersionUID = -7476907380350035254L;
     private final Map<String, JavaClass> _map = new HashMap<>();
 
 

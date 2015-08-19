@@ -20,7 +20,6 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 
 /**
  * This class represents a (PC offset, line number) pair, i.e., a line number in
@@ -30,10 +29,8 @@ import java.io.Serializable;
  * @version $Id$
  * @see     LineNumberTable
  */
-public final class LineNumber implements Cloneable, Node, Serializable {
+public final class LineNumber implements Cloneable, Node {
 
-    private static final long serialVersionUID = 169537400672820016L;
-    
     /** Program Counter (PC) corresponds to line */
     private short start_pc;
     

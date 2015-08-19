@@ -28,10 +28,9 @@ import org.apache.commons.bcel6.Constants;
  * @version $Id$
  * @see Constants
  */
-public class InstructionFactory implements java.io.Serializable {
+public class InstructionFactory {
 
-    private static final long serialVersionUID = -1210011499635580258L;
-
+    // N.N. These must agree with the order of Constants.T_CHAR through T_LONG
     private static final String[] short_names = {
             "C", "F", "D", "B", "S", "I", "L"
     };

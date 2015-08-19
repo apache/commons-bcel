@@ -20,7 +20,6 @@ package org.apache.commons.bcel6.generic;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -50,9 +49,8 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * @see     InstructionHandle
  * @see BranchHandle
  */
-public class InstructionList implements Serializable {
+public class InstructionList {
 
-    private static final long serialVersionUID = 2651389055345707857L;
     private InstructionHandle start = null, end = null;
     private int length = 0; // number of elements in list
     private int[] byte_positions; // byte code offsets corresponding to instructions

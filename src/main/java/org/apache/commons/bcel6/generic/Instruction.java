@@ -19,7 +19,6 @@ package org.apache.commons.bcel6.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 
 import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.classfile.ConstantPool;
@@ -30,9 +29,8 @@ import org.apache.commons.bcel6.util.ByteSequence;
  *
  * @version $Id$
  */
-public abstract class Instruction implements Cloneable, Serializable {
+public abstract class Instruction implements Cloneable {
 
-    private static final long serialVersionUID = -2518741982574515847L;
     protected short length = 1; // Length of instruction in bytes 
     protected short opcode = -1; // Opcode number
     private static InstructionComparator cmp = InstructionComparator.DEFAULT;

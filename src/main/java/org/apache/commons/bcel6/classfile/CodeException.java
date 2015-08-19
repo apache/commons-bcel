@@ -20,7 +20,6 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 
 import org.apache.commons.bcel6.Constants;
 
@@ -32,9 +31,8 @@ import org.apache.commons.bcel6.Constants;
  * @version $Id$
  * @see     Code
  */
-public final class CodeException implements Cloneable, Node, Serializable {
+public final class CodeException implements Cloneable, Node {
 
-    private static final long serialVersionUID = 2972500041254967221L;
     private int start_pc; // Range in the code the exception handler is
     private int end_pc; // active. start_pc is inclusive, end_pc exclusive
     private int handler_pc; /* Starting address of exception handler, i.e.,

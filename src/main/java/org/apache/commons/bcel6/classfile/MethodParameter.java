@@ -20,7 +20,6 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 
 import org.apache.commons.bcel6.Constants;
 
@@ -30,9 +29,7 @@ import org.apache.commons.bcel6.Constants;
  * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.24">The class File Format : The MethodParameters Attribute</a>
  * @since 6.0
  */
-public class MethodParameter implements Serializable, Cloneable {
-
-    private static final long serialVersionUID = 6014494029439440326L;
+public class MethodParameter implements Cloneable {
 
     /** Index of the CONSTANT_Utf8_info structure in the constant_pool table representing the name of the parameter */
     private int name_index;

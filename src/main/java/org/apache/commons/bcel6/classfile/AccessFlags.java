@@ -25,9 +25,8 @@ import org.apache.commons.bcel6.Constants;
  *
  * @version $Id$
  */
-public abstract class AccessFlags implements java.io.Serializable {
+public abstract class AccessFlags {
 
-    private static final long serialVersionUID = 2845404654039163061L;
     protected int access_flags;
 
 

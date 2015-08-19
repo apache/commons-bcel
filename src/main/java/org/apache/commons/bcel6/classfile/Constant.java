@@ -20,7 +20,6 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 
 import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.util.BCELComparator;
@@ -32,9 +31,8 @@ import org.apache.commons.bcel6.util.BCELComparator;
  *
  * @version $Id$
  */
-public abstract class Constant implements Cloneable, Node, Serializable {
+public abstract class Constant implements Cloneable, Node {
 
-    private static final long serialVersionUID = 5739037344085356353L;
     private static BCELComparator _cmp = new BCELComparator() {
 
         @Override
