@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class FNEG extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = 2963444954300367744L;
-
-
     public FNEG() {
         super(org.apache.commons.bcel6.Constants.FNEG);
     }

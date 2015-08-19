@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class FADD extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = 5654582990564566355L;
-
-
     /** Add floats
      */
     public FADD() {

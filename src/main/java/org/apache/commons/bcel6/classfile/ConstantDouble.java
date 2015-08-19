@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class ConstantDouble extends Constant implements ConstantObject {
 
-    private static final long serialVersionUID = -7394764537394782136L;
     private double bytes;
 
 

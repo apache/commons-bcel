@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  */
 public abstract class BranchInstruction extends Instruction implements InstructionTargeter {
 
-    private static final long serialVersionUID = 3225905281842405051L;
     protected int index; // Branch target relative to this instruction
     protected InstructionHandle target; // Target object in instruction list
     protected int position; // Byte code offset

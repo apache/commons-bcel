@@ -31,7 +31,6 @@ import org.apache.commons.bcel6.generic.ReferenceType;
  */
 public class UninitializedObjectType extends ReferenceType{
 
-    private static final long serialVersionUID = -1228341777713117641L;
     /** The "initialized" version. */
     private final ObjectType initialized;
 

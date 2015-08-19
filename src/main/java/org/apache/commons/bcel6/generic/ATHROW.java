@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class ATHROW extends Instruction implements UnconditionalBranch, ExceptionThrower {
 
-    private static final long serialVersionUID = -5072509566909688739L;
-
-
     /** 
      *  Throw exception
      */

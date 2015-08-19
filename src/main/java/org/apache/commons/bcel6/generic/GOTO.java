@@ -27,9 +27,6 @@ import java.io.IOException;
  */
 public class GOTO extends GotoInstruction implements VariableLengthInstruction {
 
-    private static final long serialVersionUID = 6106731367505145625L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

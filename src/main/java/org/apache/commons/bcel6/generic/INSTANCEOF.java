@@ -28,9 +28,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
 public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThrower,
         StackProducer, StackConsumer {
 
-    private static final long serialVersionUID = -1068668479062613915L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public abstract class LoadInstruction extends LocalVariableInstruction implements PushInstruction {
 
-    private static final long serialVersionUID = 3661924741022212247L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

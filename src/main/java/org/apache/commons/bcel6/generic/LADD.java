@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class LADD extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = 2093272772688460551L;
-
-
     public LADD() {
         super(org.apache.commons.bcel6.Constants.LADD);
     }

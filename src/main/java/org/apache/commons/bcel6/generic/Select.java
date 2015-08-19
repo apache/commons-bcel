@@ -35,7 +35,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
 public abstract class Select extends BranchInstruction implements VariableLengthInstruction,
         StackConsumer /* @since 6.0 */, StackProducer {
 
-    private static final long serialVersionUID = 2806771744559217250L;
     protected int[] match; // matches, i.e., case 1: ... TODO could be package-protected?
     protected int[] indices; // target offsets TODO could be package-protected?
     protected InstructionHandle[] targets; // target objects in instruction list TODO could be package-protected?

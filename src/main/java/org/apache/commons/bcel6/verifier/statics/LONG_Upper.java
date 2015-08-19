@@ -27,7 +27,6 @@ import org.apache.commons.bcel6.generic.Type;
  */
 public final class LONG_Upper extends Type{
 
-    private static final long serialVersionUID = 3650377550491597107L;
     /** The one and only instance of this class. */
     private static final LONG_Upper singleInstance = new LONG_Upper();
 

@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class DUP2_X1 extends StackInstruction {
 
-    private static final long serialVersionUID = 4940667268525283202L;
-
-
     public DUP2_X1() {
         super(org.apache.commons.bcel6.Constants.DUP2_X1);
     }

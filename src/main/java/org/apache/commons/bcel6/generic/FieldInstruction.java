@@ -26,9 +26,6 @@ import org.apache.commons.bcel6.classfile.ConstantPool;
  */
 public abstract class FieldInstruction extends FieldOrMethod {
 
-    private static final long serialVersionUID = -7870956226459765817L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

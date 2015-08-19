@@ -24,9 +24,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class NOP extends Instruction {
 
-    private static final long serialVersionUID = -244116825309415153L;
-
-
     public NOP() {
         super(org.apache.commons.bcel6.Constants.NOP, (short) 1);
     }

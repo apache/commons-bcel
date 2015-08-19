@@ -30,9 +30,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  */
 public class GETSTATIC extends FieldInstruction implements PushInstruction, ExceptionThrower {
 
-    private static final long serialVersionUID = -477185594622953478L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

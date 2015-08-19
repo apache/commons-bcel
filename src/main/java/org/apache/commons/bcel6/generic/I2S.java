@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class I2S extends ConversionInstruction {
 
-    private static final long serialVersionUID = -2414292630144687091L;
-
-
     public I2S() {
         super(org.apache.commons.bcel6.Constants.I2S);
     }

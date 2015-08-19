@@ -25,8 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class DCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
-    private static final long serialVersionUID = 1929664840821745262L;
-
     public DCMPG() {
         super(org.apache.commons.bcel6.Constants.DCMPG, (short) 1);
     }

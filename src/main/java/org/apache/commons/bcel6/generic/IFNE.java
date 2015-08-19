@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class IFNE extends IfInstruction {
 
-    private static final long serialVersionUID = -5417647524534847152L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

@@ -30,7 +30,6 @@ package org.apache.commons.bcel6.generic;
  */
 public final class BranchHandle extends InstructionHandle {
 
-    private static final long serialVersionUID = -2520878285698255956L;
     private BranchInstruction bi; // An alias in fact, but saves lots of casts
 
 

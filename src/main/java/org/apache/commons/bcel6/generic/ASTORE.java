@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class ASTORE extends StoreInstruction {
 
-    private static final long serialVersionUID = 3598929416636143200L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

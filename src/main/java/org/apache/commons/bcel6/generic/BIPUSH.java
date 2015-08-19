@@ -31,7 +31,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  */
 public class BIPUSH extends Instruction implements ConstantPushInstruction {
 
-    private static final long serialVersionUID = -6859389515217572656L;
     private byte b;
 
 

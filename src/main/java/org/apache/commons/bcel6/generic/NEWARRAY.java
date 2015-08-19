@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
 public class NEWARRAY extends Instruction implements AllocationInstruction, ExceptionThrower,
         StackProducer {
 
-    private static final long serialVersionUID = 7048445841018649405L;
     private byte type;
 
 

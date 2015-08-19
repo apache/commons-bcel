@@ -48,7 +48,6 @@ import org.apache.commons.bcel6.util.SyntheticRepository;
  */
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
 
-    private static final long serialVersionUID = 2179314813560563755L;
     private String file_name;
     private String package_name;
     private String source_file_name = "<Unknown>";

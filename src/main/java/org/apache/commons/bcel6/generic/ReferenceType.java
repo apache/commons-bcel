@@ -28,9 +28,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  */
 public abstract class ReferenceType extends Type {
 
-    private static final long serialVersionUID = -1434716548829506031L;
-
-
     protected ReferenceType(byte t, String s) {
         super(t, s);
     }

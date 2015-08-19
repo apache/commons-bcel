@@ -26,9 +26,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class BasicType extends Type {
 
-    private static final long serialVersionUID = -6546010740455512176L;
-
-
     /**
      * Constructor for basic types such as int, long, `void'
      *

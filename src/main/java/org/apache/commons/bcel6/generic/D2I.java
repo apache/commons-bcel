@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class D2I extends ConversionInstruction {
 
-    private static final long serialVersionUID = -1226710355146064416L;
-
-
     /** Convert double to int
      */
     public D2I() {

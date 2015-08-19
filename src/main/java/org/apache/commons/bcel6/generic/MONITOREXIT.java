@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class MONITOREXIT extends Instruction implements ExceptionThrower, StackConsumer {
 
-    private static final long serialVersionUID = -1499496577099659601L;
-
-
     public MONITOREXIT() {
         super(org.apache.commons.bcel6.Constants.MONITOREXIT, (short) 1);
     }

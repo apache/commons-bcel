@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class ConstantMethodHandle extends Constant {
 
-    private static final long serialVersionUID = -7875124116920198044L;
     private int reference_kind;
     private int reference_index;
 

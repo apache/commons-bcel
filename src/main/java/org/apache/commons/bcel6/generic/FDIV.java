@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class FDIV extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = -8536341322669578097L;
-
-
     /** Divide floats
      */
     public FDIV() {

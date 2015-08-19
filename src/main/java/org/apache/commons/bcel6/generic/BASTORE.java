@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class BASTORE extends ArrayInstruction implements StackConsumer {
 
-    private static final long serialVersionUID = 1127770065463906050L;
-
-
     /** Store byte or boolean into array
      */
     public BASTORE() {

@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class PMGClass extends Attribute {
 
-    private static final long serialVersionUID = -7075964153234211509L;
     private int pmg_class_index, pmg_index;
 
 

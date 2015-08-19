@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class SWAP extends StackInstruction implements StackConsumer, StackProducer {
 
-    private static final long serialVersionUID = 1965736870393433312L;
-
-
     public SWAP() {
         super(org.apache.commons.bcel6.Constants.SWAP);
     }

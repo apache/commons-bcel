@@ -30,9 +30,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  */
 public class LOOKUPSWITCH extends Select {
 
-    private static final long serialVersionUID = -8263209830709467636L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

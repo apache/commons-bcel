@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class L2I extends ConversionInstruction {
 
-    private static final long serialVersionUID = -3263285222028195535L;
-
-
     public L2I() {
         super(org.apache.commons.bcel6.Constants.L2I);
     }

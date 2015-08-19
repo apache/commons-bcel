@@ -34,8 +34,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class LineNumberTable extends Attribute {
 
-    private static final long serialVersionUID = -6967221519632128904L;
-
     private LineNumber[] line_number_table; // Table of line/numbers pairs
 
 

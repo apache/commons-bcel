@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class I2L extends ConversionInstruction {
 
-    private static final long serialVersionUID = 8923707875178789326L;
-
-
     /** Convert int to long
      */
     public I2L() {

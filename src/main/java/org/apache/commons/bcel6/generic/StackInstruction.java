@@ -24,9 +24,6 @@ package org.apache.commons.bcel6.generic;
  */
 public abstract class StackInstruction extends Instruction {
 
-    private static final long serialVersionUID = -8542057001831958935L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

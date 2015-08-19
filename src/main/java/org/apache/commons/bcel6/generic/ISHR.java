@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class ISHR extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = 7401114050910307281L;
-
-
     public ISHR() {
         super(org.apache.commons.bcel6.Constants.ISHR);
     }

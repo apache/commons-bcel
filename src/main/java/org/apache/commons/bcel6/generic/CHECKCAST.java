@@ -28,9 +28,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
 public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThrower, StackProducer,
         StackConsumer {
 
-    private static final long serialVersionUID = 1227128733786393518L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.classfile.Attribute;
  */
 public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAndTyped, Cloneable {
 
-    private static final long serialVersionUID = -2549303846821589647L;
     protected String name;
     protected Type type;
     protected ConstantPoolGen cp;

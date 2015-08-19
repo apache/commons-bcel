@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class LDC2_W extends CPInstruction implements PushInstruction {
 
-    private static final long serialVersionUID = 7403326732924539892L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

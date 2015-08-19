@@ -28,9 +28,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
 public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationInstruction,
         ExceptionThrower, StackConsumer, StackProducer {
 
-    private static final long serialVersionUID = -3720173810934984310L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

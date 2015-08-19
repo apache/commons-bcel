@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
 public abstract class JsrInstruction extends BranchInstruction implements UnconditionalBranch,
         TypedInstruction, StackProducer {
 
-    private static final long serialVersionUID = -6438850002848773481L;
-
-
     JsrInstruction(short opcode, InstructionHandle target) {
         super(opcode, target);
     }

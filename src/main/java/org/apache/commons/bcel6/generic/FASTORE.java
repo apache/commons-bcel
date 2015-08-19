@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class FASTORE extends ArrayInstruction implements StackConsumer {
 
-    private static final long serialVersionUID = -1583134120388207470L;
-
-
     /** Store float into array
      */
     public FASTORE() {

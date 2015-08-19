@@ -32,7 +32,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class ConstantInteger extends Constant implements ConstantObject {
 
-    private static final long serialVersionUID = -7040676276945754375L;
     private int bytes;
 
 

@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class FCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
-    private static final long serialVersionUID = -715944337480121908L;
-
-
     public FCMPG() {
         super(org.apache.commons.bcel6.Constants.FCMPG, (short) 1);
     }

@@ -42,7 +42,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  */
 public class SyntheticRepository implements Repository {
 
-    private static final long serialVersionUID = 2923440730410019444L;
     //private static final String DEFAULT_PATH = ClassPath.getClassPath();
     private static final Map<ClassPath, SyntheticRepository> _instances = new HashMap<>(); // CLASSPATH X REPOSITORY
     private ClassPath _path = null;

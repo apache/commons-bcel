@@ -29,9 +29,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class ConstantFieldref extends ConstantCP {
 
-    private static final long serialVersionUID = -3993784840787819802L;
-
-
     /**
      * Initialize from another object.
      */

@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class CASTORE extends ArrayInstruction implements StackConsumer {
 
-    private static final long serialVersionUID = -4021755905444053495L;
-
-
     /** Store char into array
      */
     public CASTORE() {

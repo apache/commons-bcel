@@ -34,7 +34,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class InnerClasses extends Attribute {
 
-    private static final long serialVersionUID = 4570147726361753700L;
     private InnerClass[] inner_classes;
 
 

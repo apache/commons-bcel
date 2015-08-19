@@ -33,7 +33,6 @@ import org.apache.commons.bcel6.util.BCELComparator;
  */
 public final class Method extends FieldOrMethod {
 
-    private static final long serialVersionUID = -2013983967283787941L;
     private static BCELComparator _cmp = new BCELComparator() {
 
         @Override

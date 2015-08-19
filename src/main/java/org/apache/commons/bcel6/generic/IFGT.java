@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class IFGT extends IfInstruction {
 
-    private static final long serialVersionUID = -6271055211127179697L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

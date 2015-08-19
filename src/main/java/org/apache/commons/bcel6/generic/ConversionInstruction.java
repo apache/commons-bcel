@@ -27,9 +27,6 @@ import org.apache.commons.bcel6.Constants;
 public abstract class ConversionInstruction extends Instruction implements TypedInstruction,
         StackProducer, StackConsumer {
 
-    private static final long serialVersionUID = -4283015897133699172L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

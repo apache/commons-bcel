@@ -30,9 +30,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  */
 public class PUTFIELD extends FieldInstruction implements PopInstruction, ExceptionThrower {
 
-    private static final long serialVersionUID = -3931392044558815011L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

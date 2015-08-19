@@ -28,9 +28,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
 public abstract class ReturnInstruction extends Instruction implements ExceptionThrower,
         TypedInstruction, StackConsumer {
 
-    private static final long serialVersionUID = -1248578537710620153L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

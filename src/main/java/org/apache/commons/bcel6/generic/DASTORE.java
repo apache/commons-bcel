@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class DASTORE extends ArrayInstruction implements StackConsumer {
 
-    private static final long serialVersionUID = 5236493427411303394L;
-
-
     /** Store double into array
      */
     public DASTORE() {

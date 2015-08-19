@@ -54,12 +54,8 @@ public abstract class Type {
     public static final ObjectType THROWABLE = ObjectType.getInstance("java.lang.Throwable");
     public static final Type[] NO_ARGS = new Type[0];
     public static final ReferenceType NULL = new ReferenceType() {
-
-        private static final long serialVersionUID = 4526765862386946282L;
     };
     public static final Type UNKNOWN = new Type(Constants.T_UNKNOWN, "<unknown object>") {
-
-        private static final long serialVersionUID = 1321113605813486066L;
     };
 
 

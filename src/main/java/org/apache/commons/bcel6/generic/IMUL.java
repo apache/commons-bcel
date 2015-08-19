@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class IMUL extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = -7475024981820292461L;
-
-
     /** Multiply ints
      */
     public IMUL() {

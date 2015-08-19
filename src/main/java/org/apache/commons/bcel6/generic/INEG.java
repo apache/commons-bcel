@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class INEG extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = 6175987548738672934L;
-
-
     public INEG() {
         super(org.apache.commons.bcel6.Constants.INEG);
     }

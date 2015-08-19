@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class SALOAD extends ArrayInstruction implements StackProducer {
 
-    private static final long serialVersionUID = 7178769326864697416L;
-
-
     public SALOAD() {
         super(org.apache.commons.bcel6.Constants.SALOAD);
     }

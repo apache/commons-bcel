@@ -29,9 +29,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
  */
 public class INVOKEVIRTUAL extends InvokeInstruction {
 
-    private static final long serialVersionUID = -7355623307528443725L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

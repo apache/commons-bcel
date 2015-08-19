@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class IFLT extends IfInstruction {
 
-    private static final long serialVersionUID = 2489268758129304231L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

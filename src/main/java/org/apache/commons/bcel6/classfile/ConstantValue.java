@@ -33,7 +33,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class ConstantValue extends Attribute {
 
-    private static final long serialVersionUID = -5668999920978520157L;
     private int constantvalue_index;
 
 

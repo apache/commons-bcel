@@ -31,9 +31,6 @@ import org.apache.commons.bcel6.classfile.ConstantPool;
 public abstract class InvokeInstruction extends FieldOrMethod implements ExceptionThrower,
         StackConsumer, StackProducer {
 
-    private static final long serialVersionUID = 6089031137856650442L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

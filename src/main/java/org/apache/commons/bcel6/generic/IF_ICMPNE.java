@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class IF_ICMPNE extends IfInstruction {
 
-    private static final long serialVersionUID = -3908465635973274661L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

@@ -31,8 +31,6 @@ import org.apache.commons.bcel6.classfile.ConstantUtf8;
  */
 public abstract class NameSignatureInstruction extends CPInstruction {
 
-    private static final long serialVersionUID = 1L;
-
     public NameSignatureInstruction() {
         super();
     }

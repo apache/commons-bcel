@@ -30,9 +30,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  */
 public class LDC_W extends LDC {
 
-    private static final long serialVersionUID = -8040188785844554411L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

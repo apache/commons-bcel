@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class IDIV extends ArithmeticInstruction implements ExceptionThrower {
 
-    private static final long serialVersionUID = -7104037931993634172L;
-
-
     /** Divide ints
      */
     public IDIV() {

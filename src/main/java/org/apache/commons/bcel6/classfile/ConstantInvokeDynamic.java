@@ -31,8 +31,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class ConstantInvokeDynamic extends ConstantCP {
 
-    private static final long serialVersionUID = 4310367359017396174L;
-
     /**
      * Initialize from another object.
      */

@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class LSUB extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = -8379864362938353932L;
-
-
     public LSUB() {
         super(org.apache.commons.bcel6.Constants.LSUB);
     }

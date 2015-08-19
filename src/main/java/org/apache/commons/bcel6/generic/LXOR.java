@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class LXOR extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = -3031187042785170579L;
-
-
     public LXOR() {
         super(org.apache.commons.bcel6.Constants.LXOR);
     }

@@ -31,9 +31,6 @@ import org.apache.commons.bcel6.ExceptionConstants;
 public class GETFIELD extends FieldInstruction implements ExceptionThrower, StackConsumer,
         StackProducer {
 
-    private static final long serialVersionUID = -6510928743515082496L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

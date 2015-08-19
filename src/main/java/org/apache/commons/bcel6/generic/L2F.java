@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class L2F extends ConversionInstruction {
 
-    private static final long serialVersionUID = -7181529985408901328L;
-
-
     public L2F() {
         super(org.apache.commons.bcel6.Constants.L2F);
     }

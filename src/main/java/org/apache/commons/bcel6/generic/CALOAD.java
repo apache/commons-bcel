@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class CALOAD extends ArrayInstruction implements StackProducer {
 
-    private static final long serialVersionUID = -2085721349377637959L;
-
-
     /** Load char from array
      */
     public CALOAD() {

@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackProducer, StackConsumer /* since 6.0 */ {
 
-    private static final long serialVersionUID = 3038891629544391578L;
-
-
     /** Get length of array
      */
     public ARRAYLENGTH() {

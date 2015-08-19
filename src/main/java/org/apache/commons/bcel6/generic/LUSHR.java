@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class LUSHR extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = 9184663422046843885L;
-
-
     public LUSHR() {
         super(org.apache.commons.bcel6.Constants.LUSHR);
     }

@@ -38,7 +38,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  */
 public class ClassLoaderRepository implements Repository {
 
-    private static final long serialVersionUID = -1052781833503868187L;
     private final java.lang.ClassLoader loader;
     private final Map<String, JavaClass> loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 

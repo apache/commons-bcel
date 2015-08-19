@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
  */
 public class IINC extends LocalVariableInstruction {
 
-    private static final long serialVersionUID = -8938364416647466869L;
     private boolean wide;
     private int c;
 

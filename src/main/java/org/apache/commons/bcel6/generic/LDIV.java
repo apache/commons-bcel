@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
 
-    private static final long serialVersionUID = 8188185695825749727L;
-
-
     public LDIV() {
         super(org.apache.commons.bcel6.Constants.LDIV);
     }

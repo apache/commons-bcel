@@ -30,8 +30,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public class EnclosingMethod extends Attribute {
 
-    private static final long serialVersionUID = 9136852385761725494L;
-
     // Pointer to the CONSTANT_Class_info structure representing the 
     // innermost class that encloses the declaration of the current class.
     private int classIndex;

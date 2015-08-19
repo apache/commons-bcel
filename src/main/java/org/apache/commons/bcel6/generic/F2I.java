@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class F2I extends ConversionInstruction {
 
-    private static final long serialVersionUID = 6142843856130131105L;
-
-
     /** Convert float to int
      */
     public F2I() {

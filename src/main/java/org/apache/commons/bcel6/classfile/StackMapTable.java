@@ -40,7 +40,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class StackMapTable extends Attribute {
 
-    private static final long serialVersionUID = -5802191977296683162L;
     private StackMapTableEntry[] map; // Table of stack map entries
 
 

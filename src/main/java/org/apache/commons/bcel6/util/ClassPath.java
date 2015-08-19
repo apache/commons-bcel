@@ -387,7 +387,6 @@ public class ClassPath {
 
     private static class Dir extends PathEntry {
 
-        private static final long serialVersionUID = 4374062802142373088L;
         private final String dir;
 
 
@@ -467,7 +466,6 @@ public class ClassPath {
 
     private static class Zip extends PathEntry {
 
-        private static final long serialVersionUID = -2210747632897905532L;
         private final ZipFile zip;
 
 

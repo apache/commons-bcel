@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class IFNULL extends IfInstruction {
 
-    private static final long serialVersionUID = 608514554995424349L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

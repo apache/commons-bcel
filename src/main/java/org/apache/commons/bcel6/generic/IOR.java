@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class IOR extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = -6128609553204409153L;
-
-
     public IOR() {
         super(org.apache.commons.bcel6.Constants.IOR);
     }

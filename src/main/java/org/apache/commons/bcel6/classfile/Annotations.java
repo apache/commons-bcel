@@ -29,8 +29,6 @@ import java.io.IOException;
  */
 public abstract class Annotations extends Attribute {
 
-    private static final long serialVersionUID = 1L;
-
     private AnnotationEntry[] annotation_table;
     private final boolean isRuntimeVisible;
 

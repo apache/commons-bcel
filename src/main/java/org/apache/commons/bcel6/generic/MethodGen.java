@@ -58,7 +58,6 @@ import org.apache.commons.bcel6.util.BCELComparator;
  */
 public class MethodGen extends FieldGenOrMethodGen {
 
-    private static final long serialVersionUID = -3924667713338957720L;
     private String class_name;
     private Type[] arg_types;
     private String[] arg_names;

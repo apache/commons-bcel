@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class FALOAD extends ArrayInstruction implements StackProducer {
 
-    private static final long serialVersionUID = 3369925718821219472L;
-
-
     /** Load float from array
      */
     public FALOAD() {

@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class FRETURN extends ReturnInstruction {
 
-    private static final long serialVersionUID = -3630453809574277966L;
-
-
     /** Return float from method
      */
     public FRETURN() {

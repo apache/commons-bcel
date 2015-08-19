@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class POP extends StackInstruction implements PopInstruction {
 
-    private static final long serialVersionUID = -7366757965427670388L;
-
-
     public POP() {
         super(org.apache.commons.bcel6.Constants.POP);
     }

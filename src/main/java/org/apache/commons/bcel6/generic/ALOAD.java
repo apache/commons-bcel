@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class ALOAD extends LoadInstruction {
 
-    private static final long serialVersionUID = 6993893925210913542L;
-
-
     /**
      * Empty constructor needed for the Class.newInstance() statement in
      * Instruction.readInstruction(). Not to be used otherwise.

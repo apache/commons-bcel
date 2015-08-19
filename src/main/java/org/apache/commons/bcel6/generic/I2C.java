@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class I2C extends ConversionInstruction {
 
-    private static final long serialVersionUID = 7396507741159927455L;
-
-
     /** Convert int to char
      */
     public I2C() {

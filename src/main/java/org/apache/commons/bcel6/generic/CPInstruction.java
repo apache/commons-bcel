@@ -38,8 +38,6 @@ import org.apache.commons.bcel6.util.ByteSequence;
 public abstract class CPInstruction extends Instruction implements TypedInstruction,
         IndexedInstruction {
 
-    private static final long serialVersionUID = 2968547649792233082L;
-
     protected int index; // index to constant pool
 
 

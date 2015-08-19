@@ -35,7 +35,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public abstract class ConstantCP extends Constant {
 
-    private static final long serialVersionUID = -6275762995206209402L;
     /** References to the constants containing the class and the field signature
      */
     // Note that this field is used to store the

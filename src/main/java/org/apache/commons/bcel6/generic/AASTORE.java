@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class AASTORE extends ArrayInstruction implements StackConsumer {
 
-    private static final long serialVersionUID = -6440799431970565816L;
-
-
     /** Store into reference array
      */
     public AASTORE() {

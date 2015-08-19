@@ -33,7 +33,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public class LocalVariableTable extends Attribute {
 
-    private static final long serialVersionUID = 6780929007774637689L;
     private LocalVariable[] local_variable_table; // variables
 
 

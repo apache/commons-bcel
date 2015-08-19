@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class LRETURN extends ReturnInstruction {
 
-    private static final long serialVersionUID = 6173148526583167918L;
-
-
     public LRETURN() {
         super(org.apache.commons.bcel6.Constants.LRETURN);
     }

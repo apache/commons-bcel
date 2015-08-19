@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class ARETURN extends ReturnInstruction {
 
-    private static final long serialVersionUID = -3497286197421151311L;
-
-
     /** 
      * Return reference from method
      */

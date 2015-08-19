@@ -29,9 +29,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class ConstantMethodref extends ConstantCP {
 
-    private static final long serialVersionUID = -864296320352750967L;
-
-
     /**
      * Initialize from another object.
      */

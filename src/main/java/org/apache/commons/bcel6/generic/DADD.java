@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class DADD extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = 241485501977646418L;
-
-
     /** Add doubles
      */
     public DADD() {

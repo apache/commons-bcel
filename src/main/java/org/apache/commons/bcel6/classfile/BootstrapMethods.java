@@ -31,8 +31,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public class BootstrapMethods extends Attribute {
 
-    private static final long serialVersionUID = -2169230245012340809L;
-
     private BootstrapMethod[] bootstrap_methods;  // TODO this could be made final (setter is not used)
 
     /**

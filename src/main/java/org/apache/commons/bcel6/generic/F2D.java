@@ -25,9 +25,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class F2D extends ConversionInstruction {
 
-    private static final long serialVersionUID = -4668119344425861047L;
-
-
     /** Convert float to double
      */
     public F2D() {

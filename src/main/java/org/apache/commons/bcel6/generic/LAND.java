@@ -26,9 +26,6 @@ package org.apache.commons.bcel6.generic;
  */
 public class LAND extends ArithmeticInstruction {
 
-    private static final long serialVersionUID = 2429077463161192057L;
-
-
     public LAND() {
         super(org.apache.commons.bcel6.Constants.LAND);
     }

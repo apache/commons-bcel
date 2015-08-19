@@ -31,8 +31,6 @@ import org.apache.commons.bcel6.Constants;
  */
 public class MethodParameters extends Attribute {
 
-    private static final long serialVersionUID = 2500272580422360140L;
-
     private MethodParameter[] parameters = new MethodParameter[0];
 
     MethodParameters(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
