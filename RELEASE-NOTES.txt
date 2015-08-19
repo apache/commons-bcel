@@ -8,7 +8,9 @@ represented by objects containing all the symbolic information of the given
 class: methods, fields and byte code instructions.
 
 BCEL 6.0 is a major release supporting the new features introduced in Java 6, 7
-and 8. It requires Java 5 or higher to run.
+and 8. 
+
+It requires Java 7 or higher to run.
 
 
 Compatibility with 5.2
@@ -42,12 +44,12 @@ Fixed Bugs:
 o Bug fixes and improvements to InvokeDynamic and BootStrapMethods implementation.
         Issue: BCEL-209. Thanks to Mark Roberts. 
 o Verification error when an invoke references a method defined in superclass.
-        Issue: BCEL-187. Thanks to J閞鬽e Leroux. 
+        Issue: BCEL-187. Thanks to J茅r么me Leroux. 
 o Remove ObjectType cache.  Issue: BCEL-218. Thanks to chas. 
 o The verifier now checks if methods with a void return type attempt to return an
-        object.  Issue: BCEL-184. Thanks to J閞鬽e Leroux. 
+        object.  Issue: BCEL-184. Thanks to J茅r么me Leroux. 
 o The verifier now checks if methods with a void return type attempt to return an
-        object.  Issue: BCEL-184. Thanks to J閞鬽e Leroux. 
+        object.  Issue: BCEL-184. Thanks to J茅r么me Leroux. 
 o MethodGen.removeLocalVariable now properly unreference the removed variable
         from the targetters of the instruction handlers delimiting the scope of 
         the variable.  Issue: BCEL-207. Thanks to Mark Roberts. 
@@ -56,9 +58,9 @@ o Utility.signatureToString() no longer throws a ClassFormatException on TypeVar
 o Removed the 'index' variable from the LocalVariableGen's hash code. 
         Issue: BCEL-194. Thanks to Mark Roberts. 
 o The verifier should not check for run time compatibility of objects assigned to 
-        arrays.  Issue: BCEL-193. Thanks to J閞鬽e Leroux. 
+        arrays.  Issue: BCEL-193. Thanks to J茅r么me Leroux. 
 o Correct verification of the return value of a method.  Issue: BCEL-188. Thanks 
-        to J閞鬽e Leroux. 
+        to J茅r么me Leroux. 
 o Performance degradation with the UTF8 cache. getInstance no longer uses cache  
         Issue: BCEL-186. 
 o org.apache.bcel.util.ClassLoaderRepository.loadClass(String) leaks input streams.
