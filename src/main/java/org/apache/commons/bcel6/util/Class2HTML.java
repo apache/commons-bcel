@@ -179,28 +179,25 @@ public class Class2HTML {
 
     static String toHTML( String str ) {
         StringBuilder buf = new StringBuilder();
-        try { // Filter any characters HTML doesn't like such as < and > in particular
-            for (int i = 0; i < str.length(); i++) {
-                char ch;
-                switch (ch = str.charAt(i)) {
-                    case '<':
-                        buf.append("&lt;");
-                        break;
-                    case '>':
-                        buf.append("&gt;");
-                        break;
-                    case '\n':
-                        buf.append("\\n");
-                        break;
-                    case '\r':
-                        buf.append("\\r");
-                        break;
-                    default:
-                        buf.append(ch);
-                }
+        for (int i = 0; i < str.length(); i++) {
+            char ch;
+            switch (ch = str.charAt(i)) {
+                case '<':
+                    buf.append("&lt;");
+                    break;
+                case '>':
+                    buf.append("&gt;");
+                    break;
+                case '\n':
+                    buf.append("\\n");
+                    break;
+                case '\r':
+                    buf.append("\\r");
+                    break;
+                default:
+                    buf.append(ch);
             }
-        } catch (StringIndexOutOfBoundsException e) {
-        } // Never occurs
+        }
         return buf.toString();
     }
 

@@ -26,7 +26,9 @@ import org.apache.commons.bcel6.classfile.ConstantFloat;
 import org.apache.commons.bcel6.classfile.ConstantInteger;
 import org.apache.commons.bcel6.classfile.ConstantLong;
 import org.apache.commons.bcel6.classfile.ConstantString;
+// CHECKSTYLE:OFF (there are lots of references!)
 import org.apache.commons.bcel6.generic.*;
+//CHECKSTYLE:ON
 
 /**
  * This Visitor class may be used for a type-based Java Virtual Machine

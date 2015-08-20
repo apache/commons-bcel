@@ -79,7 +79,7 @@ limitations under the License.
     <module name="TypeName"/>
      -->
     <!-- Checks for imports                              -->
-    <!-- See http://checkstyle.sf.net/config_import.html -->
+    <!-- See http://checkstyle.sf.net/config_imports.html -->
     <module name="AvoidStarImport"/>
     <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
     <module name="RedundantImport"/>
@@ -154,8 +154,8 @@ limitations under the License.
 
     <!-- Checks for class design                         -->
     <!-- See http://checkstyle.sf.net/config_design.html -->
-    <module name="FinalClass"/>
-    <module name="HideUtilityClassConstructor"/>
+    <!--module name="FinalClass"/-->
+    <!--module name="HideUtilityClassConstructor"/-->
     <module name="InterfaceIsType"/>
     <module name="VisibilityModifier">
         <property name="protectedAllowed" value="true"/>
@@ -168,7 +168,12 @@ limitations under the License.
     <!--module name="TodoComment"/-->
     <module name="UpperEll"/>
     
+    <!-- Required for SuppressionCommentFilter below -->
+    <module name="FileContentsHolder"/>
+
   </module>
+
+  <module name="SuppressionCommentFilter"/>
 
 </module>
 

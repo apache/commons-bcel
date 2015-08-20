@@ -30,7 +30,9 @@ import org.apache.commons.bcel6.classfile.ConstantLong;
 import org.apache.commons.bcel6.classfile.ConstantString;
 import org.apache.commons.bcel6.classfile.Field;
 import org.apache.commons.bcel6.classfile.JavaClass;
+//CHECKSTYLE:OFF (there are lots of references!)
 import org.apache.commons.bcel6.generic.*;
+//CHECKSTYLE:ON
 import org.apache.commons.bcel6.verifier.VerificationResult;
 import org.apache.commons.bcel6.verifier.Verifier;
 import org.apache.commons.bcel6.verifier.VerifierFactory;
