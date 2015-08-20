@@ -70,8 +70,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public static final byte HEAP = 1;
     public static final byte FILE = 2;
     public static final byte ZIP = 3;
-    static boolean debug = false; // Debugging on/off
-    final static char sep = File.separatorChar; // directory separator
+    private static final boolean debug = Boolean.getBoolean("JavaClass.debug");; // Debugging on/off
     
     private static BCELComparator _cmp = new BCELComparator() {
 
@@ -478,12 +477,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public int getSuperclassNameIndex() {
         return superclass_name_index;
     }
-
-    static {
-        // Debugging ... on/off
-        debug = Boolean.getBoolean("JavaClass.debug");
-    }
-
 
     /**
      * @param attributes .
