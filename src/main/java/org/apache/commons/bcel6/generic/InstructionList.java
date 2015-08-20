@@ -51,7 +51,8 @@ import org.apache.commons.bcel6.util.ByteSequence;
  */
 public class InstructionList {
 
-    private InstructionHandle start = null, end = null;
+    private InstructionHandle start = null;
+    private InstructionHandle end = null;
     private int length = 0; // number of elements in list
     private int[] byte_positions; // byte code offsets corresponding to instructions
 
@@ -112,7 +113,8 @@ public class InstructionList {
      */
     public static InstructionHandle findHandle( InstructionHandle[] ihs, int[] pos, int count,
             int target ) {
-        int l = 0, r = count - 1;
+        int l = 0;
+        int r = count - 1;
         /* Do a binary search since the pos array is orderd.
          */
         do {
@@ -235,7 +237,8 @@ public class InstructionList {
         if (il.isEmpty()) {
             return ih;
         }
-        InstructionHandle next = ih.next, ret = il.start;
+        InstructionHandle next = ih.next;
+        InstructionHandle ret = il.start;
         ih.next = il.start;
         il.start.prev = ih;
         il.end.next = next;
@@ -428,7 +431,8 @@ public class InstructionList {
         if (il.isEmpty()) {
             return ih;
         }
-        InstructionHandle prev = ih.prev, ret = il.start;
+        InstructionHandle prev = ih.prev;
+        InstructionHandle ret = il.start;
         ih.prev = il.end;
         il.end.next = ih;
         il.start.prev = prev;
@@ -626,7 +630,8 @@ public class InstructionList {
             }
         }
         // Step 2: Temporarily remove the given instructions from the list
-        InstructionHandle prev = start.prev, next = end.next;
+        InstructionHandle prev = start.prev;
+        InstructionHandle next = end.next;
         if (prev != null) {
             prev.next = next;
         } else {
@@ -680,7 +685,8 @@ public class InstructionList {
      */
     private void remove( InstructionHandle prev, InstructionHandle next )
             throws TargetLostException {
-        InstructionHandle first, last; // First and last deleted instruction
+        InstructionHandle first;
+        InstructionHandle last; // First and last deleted instruction
         if ((prev == null) && (next == null)) {
             first = start;
             last = end;
@@ -776,7 +782,8 @@ public class InstructionList {
      * @param to   where to end deleting (inclusive)
      */
     public void delete( Instruction from, Instruction to ) throws TargetLostException {
-        InstructionHandle from_ih, to_ih;
+        InstructionHandle from_ih;
+        InstructionHandle to_ih;
         if ((from_ih = findInstruction1(from)) == null) {
             throw new ClassGenException("Instruction " + from + " is not contained in this list.");
         }
@@ -850,8 +857,10 @@ public class InstructionList {
      * to this list
      */
     public void setPositions( boolean check ) { // called by code in other packages
-        int max_additional_bytes = 0, additional_bytes = 0;
-        int index = 0, count = 0;
+        int max_additional_bytes = 0;
+        int additional_bytes = 0;
+        int index = 0;
+        int count = 0;
         int[] pos = new int[length];
         /* Pass 0: Sanity checks
          */
