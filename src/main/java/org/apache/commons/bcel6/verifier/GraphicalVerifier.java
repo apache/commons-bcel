@@ -30,7 +30,7 @@ import org.apache.commons.bcel6.generic.Type;
  */
 public class GraphicalVerifier {
 
-    boolean packFrame = false;
+    private boolean packFrame = false;
 
 
     /** Constructor. */
@@ -55,9 +55,9 @@ public class GraphicalVerifier {
         frame.setLocation((screenSize.width - frameSize.width) / 2,
                 (screenSize.height - frameSize.height) / 2);
         frame.setVisible(true);
-        frame.classNamesJList.setModel(new VerifierFactoryListModel());
+        frame.getClassNamesJList().setModel(new VerifierFactoryListModel());
         VerifierFactory.getVerifier(Type.OBJECT.getClassName()); // Fill list with java.lang.Object
-        frame.classNamesJList.setSelectedIndex(0); // default, will verify java.lang.Object
+        frame.getClassNamesJList().setSelectedIndex(0); // default, will verify java.lang.Object
     }
 
 

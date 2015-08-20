@@ -52,44 +52,45 @@ import org.apache.commons.bcel6.classfile.JavaClass;
 public class VerifierAppFrame extends JFrame {
 
     private static final long serialVersionUID = -542458133073307640L;
-    JPanel contentPane;
-    JSplitPane jSplitPane1 = new JSplitPane();
-    JPanel jPanel1 = new JPanel();
-    JPanel jPanel2 = new JPanel();
-    JSplitPane jSplitPane2 = new JSplitPane();
-    JPanel jPanel3 = new JPanel();
-    JList<String> classNamesJList = new JList<>();
-    GridLayout gridLayout1 = new GridLayout();
-    JPanel messagesPanel = new JPanel();
-    GridLayout gridLayout2 = new GridLayout();
-    JMenuBar jMenuBar1 = new JMenuBar();
-    JMenu jMenu1 = new JMenu();
-    JScrollPane jScrollPane1 = new JScrollPane();
-    JScrollPane messagesScrollPane = new JScrollPane();
-    JScrollPane jScrollPane3 = new JScrollPane();
-    GridLayout gridLayout4 = new GridLayout();
-    JScrollPane jScrollPane4 = new JScrollPane();
-    CardLayout cardLayout1 = new CardLayout();
     private static final String JUSTICE_VERSION = "JustIce by Enver Haase";
+
+    private JPanel contentPane;
+    private JSplitPane jSplitPane1 = new JSplitPane();
+    private JPanel jPanel1 = new JPanel();
+    private JPanel jPanel2 = new JPanel();
+    private JSplitPane jSplitPane2 = new JSplitPane();
+    private JPanel jPanel3 = new JPanel();
+    private JList<String> classNamesJList = new JList<>();
+    private GridLayout gridLayout1 = new GridLayout();
+    private JPanel messagesPanel = new JPanel();
+    private GridLayout gridLayout2 = new GridLayout();
+    private JMenuBar jMenuBar1 = new JMenuBar();
+    private JMenu jMenu1 = new JMenu();
+    private JScrollPane jScrollPane1 = new JScrollPane();
+    private JScrollPane messagesScrollPane = new JScrollPane();
+    private JScrollPane jScrollPane3 = new JScrollPane();
+    private GridLayout gridLayout4 = new GridLayout();
+    private JScrollPane jScrollPane4 = new JScrollPane();
+    private CardLayout cardLayout1 = new CardLayout();
     private String current_class;
-    GridLayout gridLayout3 = new GridLayout();
-    JTextPane pass1TextPane = new JTextPane();
-    JTextPane pass2TextPane = new JTextPane();
-    JTextPane messagesTextPane = new JTextPane();
-    JMenuItem newFileMenuItem = new JMenuItem();
-    JSplitPane jSplitPane3 = new JSplitPane();
-    JSplitPane jSplitPane4 = new JSplitPane();
-    JScrollPane jScrollPane2 = new JScrollPane();
-    JScrollPane jScrollPane5 = new JScrollPane();
-    JScrollPane jScrollPane6 = new JScrollPane();
-    JScrollPane jScrollPane7 = new JScrollPane();
-    JList<String> pass3aJList = new JList<>();
-    JList<String> pass3bJList = new JList<>();
-    JTextPane pass3aTextPane = new JTextPane();
-    JTextPane pass3bTextPane = new JTextPane();
-    JMenu jMenu2 = new JMenu();
-    JMenuItem whatisMenuItem = new JMenuItem();
-    JMenuItem aboutMenuItem = new JMenuItem();
+    private GridLayout gridLayout3 = new GridLayout();
+    private JTextPane pass1TextPane = new JTextPane();
+    private JTextPane pass2TextPane = new JTextPane();
+    private JTextPane messagesTextPane = new JTextPane();
+    private JMenuItem newFileMenuItem = new JMenuItem();
+    private JSplitPane jSplitPane3 = new JSplitPane();
+    private JSplitPane jSplitPane4 = new JSplitPane();
+    private JScrollPane jScrollPane2 = new JScrollPane();
+    private JScrollPane jScrollPane5 = new JScrollPane();
+    private JScrollPane jScrollPane6 = new JScrollPane();
+    private JScrollPane jScrollPane7 = new JScrollPane();
+    private JList<String> pass3aJList = new JList<>();
+    private JList<String> pass3bJList = new JList<>();
+    private JTextPane pass3aTextPane = new JTextPane();
+    private JTextPane pass3bTextPane = new JTextPane();
+    private JMenu jMenu2 = new JMenu();
+    private JMenuItem whatisMenuItem = new JMenuItem();
+    private JMenuItem aboutMenuItem = new JMenuItem();
 
 
     /** Constructor. */
@@ -403,4 +404,14 @@ public class VerifierAppFrame extends JFrame {
                         "The upper four boxes to the right reflect verification passes according to The Java Virtual Machine Specification.\nThese are (in that order): Pass one, Pass two, Pass three (before data flow analysis), Pass three (data flow analysis).\nThe bottom box to the right shows (warning) messages; warnings do not cause a class to be rejected.",
                         JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
     }
+
+
+    /**
+     * @return the classNamesJList
+     */
+    JList<String> getClassNamesJList() {
+        return classNamesJList;
+    }
+
+
 }
