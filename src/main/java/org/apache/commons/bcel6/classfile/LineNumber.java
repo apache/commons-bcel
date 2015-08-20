@@ -141,6 +141,7 @@ public final class LineNumber implements Cloneable, Node {
         try {
             return (LineNumber) clone();
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return null;
     }

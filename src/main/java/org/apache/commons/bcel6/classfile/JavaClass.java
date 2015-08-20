@@ -680,6 +680,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                 c.attributes[i] = attributes[i].copy(c.constant_pool);
             }
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return c;
     }

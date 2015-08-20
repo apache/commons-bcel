@@ -198,7 +198,9 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
         try {
           c = (FieldOrMethod)clone();
-        } catch(CloneNotSupportedException e) {}
+        } catch(CloneNotSupportedException e) {
+            // ignored, but will cause NPE ...
+        }
 
         c.constant_pool    = constant_pool;
         c.attributes       = new Attribute[attributes.length];

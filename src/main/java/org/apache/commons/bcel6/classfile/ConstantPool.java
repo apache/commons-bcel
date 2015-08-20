@@ -365,6 +365,7 @@ public class ConstantPool implements Cloneable, Node {
                 }
             }
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return c;
     }

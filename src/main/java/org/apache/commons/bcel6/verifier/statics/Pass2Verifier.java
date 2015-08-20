@@ -307,7 +307,7 @@ public final class Pass2Verifier extends PassVerifier {
      *
      * @see #constant_pool_entries_satisfy_static_constraints()
      */
-    private class CPESSC_Visitor extends org.apache.commons.bcel6.classfile.EmptyVisitor{
+    private final class CPESSC_Visitor extends org.apache.commons.bcel6.classfile.EmptyVisitor{
         private final Class<?> CONST_Class;
         /*
         private Class<?> CONST_Fieldref;
@@ -386,7 +386,7 @@ public final class Pass2Verifier extends PassVerifier {
                 }
 
                 if (att instanceof SourceFile) {
-                    if (foundSourceFile == false) {
+                    if (!foundSourceFile) {
                         foundSourceFile = true;
                     } else {
                         throw new ClassConstraintException("A ClassFile structure (like '" + tostring(obj) + "') may have no more than one SourceFile attribute."); //vmspec2 4.7.7
@@ -394,7 +394,7 @@ public final class Pass2Verifier extends PassVerifier {
                 }
 
                 if (att instanceof InnerClasses) {
-                    if (foundInnerClasses == false) {
+                    if (!foundInnerClasses) {
                         foundInnerClasses = true;
                     } else {
                         if (hasInnerClass) {
@@ -1202,7 +1202,7 @@ public final class Pass2Verifier extends PassVerifier {
      * @see #constant_pool_entries_satisfy_static_constraints()
      * @see org.apache.commons.bcel6.classfile.ConstantCP
      */
-    private class FAMRAV_Visitor extends EmptyVisitor{
+    private final class FAMRAV_Visitor extends EmptyVisitor{
         private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work.
         private FAMRAV_Visitor(JavaClass _jc){
             cp = _jc.getConstantPool();

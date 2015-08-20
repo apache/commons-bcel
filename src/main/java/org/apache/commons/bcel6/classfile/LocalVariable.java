@@ -253,6 +253,7 @@ public final class LocalVariable implements Cloneable, Node {
         try {
             return (LocalVariable) clone();
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return null;
     }

@@ -108,6 +108,7 @@ public class MethodParameter implements Cloneable {
         try {
             return (MethodParameter) clone();
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return null;
     }

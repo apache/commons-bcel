@@ -104,6 +104,7 @@ public abstract class Constant implements Cloneable, Node {
         try {
             return (Constant) super.clone();
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return null;
     }

@@ -162,6 +162,7 @@ public class BootstrapMethod implements Cloneable {
         try {
             return (BootstrapMethod) clone();
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return null;
     }

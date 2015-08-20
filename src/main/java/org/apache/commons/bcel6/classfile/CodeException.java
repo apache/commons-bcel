@@ -210,6 +210,7 @@ public final class CodeException implements Cloneable, Node {
         try {
             return (CodeException) clone();
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return null;
     }

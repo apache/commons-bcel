@@ -144,6 +144,7 @@ public final class StackMapType implements Cloneable {
         try {
             return (StackMapType) clone();
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return null;
     }

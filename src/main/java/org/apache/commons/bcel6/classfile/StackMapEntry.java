@@ -171,6 +171,7 @@ public final class StackMapEntry implements Cloneable
         try {
             return (StackMapEntry) clone();
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return null;
     }

@@ -240,6 +240,7 @@ public final class StackMapTableEntry implements Cloneable {
         try {
             return (StackMapTableEntry) clone();
         } catch (CloneNotSupportedException e) {
+            // TODO should this throw?
         }
         return null;
     }
