@@ -22,7 +22,7 @@ package org.apache.commons.bcel6;
  *
  * @version $Id$
  */
-public class ExceptionConstants {
+public final class ExceptionConstants {
 
     /** The mother of all exceptions
      */
@@ -52,7 +52,8 @@ public class ExceptionConstants {
     /** Run-Time Exceptions 
      */
     public static final Class<NullPointerException> NULL_POINTER_EXCEPTION = NullPointerException.class;
-    public static final Class<ArrayIndexOutOfBoundsException> ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION = ArrayIndexOutOfBoundsException.class;
+    public static final Class<ArrayIndexOutOfBoundsException> ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION
+                                                            = ArrayIndexOutOfBoundsException.class;
     public static final Class<ArithmeticException> ARITHMETIC_EXCEPTION = ArithmeticException.class;
     public static final Class<NegativeArraySizeException> NEGATIVE_ARRAY_SIZE_EXCEPTION = NegativeArraySizeException.class;
     public static final Class<ClassCastException> CLASS_CAST_EXCEPTION = ClassCastException.class;
@@ -88,10 +89,12 @@ public class ExceptionConstants {
         EXCS_ARRAY_EXCEPTION,
     };
 
+    private ExceptionConstants() { } // not instantiable
+
     // helper method to merge exception class arrays
     private static Class<?>[] mergeExceptions(Class<?>[] input, Class<?> ... extraClasses) {
         int extraLen = extraClasses == null ? 0 : extraClasses.length;
-        Class<?> excs[] = new Class<?>[input.length + extraLen];
+        Class<?>[] excs = new Class<?>[input.length + extraLen];
         System.arraycopy(input, 0, excs, 0, input.length);
         if (extraLen > 0) {
             System.arraycopy(extraClasses, 0, excs, input.length, extraLen);            
@@ -121,4 +124,5 @@ public class ExceptionConstants {
             throw new AssertionError("Cannot happen; unexpected enum value: " + type);
         }
     }
+
 }

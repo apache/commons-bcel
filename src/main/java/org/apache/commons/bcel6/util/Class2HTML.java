@@ -95,7 +95,7 @@ public class Class2HTML {
     }
 
 
-    public static void main( String argv[] ) {
+    public static void main( String[] argv ) {
         String[] file_name = new String[argv.length];
         int files = 0;
         ClassParser parser = null;

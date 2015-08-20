@@ -23,8 +23,6 @@ import java.util.List;
 import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.classfile.ClassFormatException;
 import org.apache.commons.bcel6.classfile.Utility;
-import org.apache.commons.bcel6.verifier.structurals.LocalVariables;
-import org.apache.commons.bcel6.verifier.structurals.OperandStack;
 
 /**
  * Abstract super class for all possible java types, namely basic types

@@ -348,7 +348,7 @@ public class ClassPath {
         return getClassFile(name, suffix).getPath();
     }
 
-    private static abstract class PathEntry {
+    private abstract static class PathEntry {
 
         abstract ClassFile getClassFile( String name, String suffix ) throws IOException;
         abstract URL getResource(String name);

@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.generic.ClassGenException;
-import org.apache.commons.bcel6.generic.Instruction;
 import org.apache.commons.bcel6.generic.InstructionHandle;
 import org.apache.commons.bcel6.generic.InstructionList;
 

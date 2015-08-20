@@ -274,9 +274,9 @@ public class AnnotationEntryGen {
     static Attribute[] getParameterAnnotationAttributes(
             ConstantPoolGen cp,
             List<AnnotationEntryGen>[] /*Array of lists, array size depends on #params */vec) {
-        int visCount[] = new int[vec.length];
+        int[] visCount = new int[vec.length];
         int totalVisCount = 0;
-        int invisCount[] = new int[vec.length];
+        int[] invisCount = new int[vec.length];
         int totalInvisCount = 0;
         try {
             for (int i = 0; i < vec.length; i++) {
