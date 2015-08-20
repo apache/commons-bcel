@@ -110,7 +110,7 @@ public final class StackMapType implements Cloneable {
     /** @return true, if type is either ITEM_Object or ITEM_NewObject
      */
     public final boolean hasIndex() {
-        return ((type == Constants.ITEM_Object) || (type == Constants.ITEM_NewObject));
+        return type == Constants.ITEM_Object || type == Constants.ITEM_NewObject;
     }
 
 

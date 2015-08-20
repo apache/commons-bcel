@@ -43,7 +43,7 @@ public abstract class ParameterAnnotations extends Attribute {
             DataInput input, ConstantPool constant_pool) throws IOException {
         this(parameter_annotation_type, name_index, length, (ParameterAnnotationEntry[]) null,
                 constant_pool);
-        int num_parameters = (input.readUnsignedByte());
+        int num_parameters = input.readUnsignedByte();
         parameter_annotation_table = new ParameterAnnotationEntry[num_parameters];
         for (int i = 0; i < num_parameters; i++) {
             parameter_annotation_table[i] = new ParameterAnnotationEntry(input, constant_pool);

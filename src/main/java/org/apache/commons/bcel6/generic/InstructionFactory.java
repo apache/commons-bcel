@@ -221,8 +221,8 @@ public class InstructionFactory {
 
 
     private static boolean isString( Type type ) {
-        return ((type instanceof ObjectType) && ((ObjectType) type).getClassName().equals(
-                "java.lang.String"));
+        return (type instanceof ObjectType) && 
+              ((ObjectType) type).getClassName().equals("java.lang.String");
     }
 
 

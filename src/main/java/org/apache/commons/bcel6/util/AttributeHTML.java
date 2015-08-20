@@ -171,7 +171,7 @@ final class AttributeHTML {
                             Constants.CONSTANT_Utf8)).getBytes();
                     signature = Utility.signatureToString(signature, false);
                     int start = var.getStartPC();
-                    int end = (start + var.getLength());
+                    int end = start + var.getLength();
                     file.println("<LI>" + Class2HTML.referenceType(signature) + "&nbsp;<B>"
                             + var.getName() + "</B> in slot %" + var.getIndex()
                             + "<BR>Valid from lines " + "<A HREF=\"" + class_name

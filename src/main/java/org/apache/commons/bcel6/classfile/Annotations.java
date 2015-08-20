@@ -42,7 +42,7 @@ public abstract class Annotations extends Attribute {
     Annotations(byte annotation_type, int name_index, int length, DataInput input,
             ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException {
         this(annotation_type, name_index, length, (AnnotationEntry[]) null, constant_pool, isRuntimeVisible);
-        final int annotation_table_length = (input.readUnsignedShort());
+        final int annotation_table_length = input.readUnsignedShort();
         annotation_table = new AnnotationEntry[annotation_table_length];
         for (int i = 0; i < annotation_table_length; i++) {
             annotation_table[i] = AnnotationEntry.read(input, constant_pool, isRuntimeVisible);

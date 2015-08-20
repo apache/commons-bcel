@@ -42,7 +42,7 @@ public class ParameterAnnotationEntry implements Node {
      * @throws IOException
      */
     ParameterAnnotationEntry(DataInput input, ConstantPool constant_pool) throws IOException {
-        int annotation_table_length = (input.readUnsignedShort());
+        int annotation_table_length = input.readUnsignedShort();
         annotation_table = new AnnotationEntry[annotation_table_length];
         for (int i = 0; i < annotation_table_length; i++) {
             // TODO isRuntimeVisible

@@ -129,7 +129,7 @@ public class SimpleElementValue extends ElementValue
                     "Dont call getValueBoolean() on a non BOOLEAN ElementValue");
         }
         ConstantInteger bo = (ConstantInteger) cpool.getConstant(getIndex());
-        return (bo.getBytes() != 0);
+        return bo.getBytes() != 0;
     }
 
     public short getValueShort()

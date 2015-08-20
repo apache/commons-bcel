@@ -232,7 +232,7 @@ public final class Pass3bVerifier extends PassVerifier{
                     //icq.add(v, (ArrayList) newchain.clone());
                 if (v.execute(new Frame(u.getOutFrame(oldchain).getLocals(),
                         new OperandStack (u.getOutFrame(oldchain).getStack().maxStack(),
-                        (exc_hd.getExceptionType()==null? Type.THROWABLE : exc_hd.getExceptionType())) ),
+                        exc_hd.getExceptionType()==null? Type.THROWABLE : exc_hd.getExceptionType())),
                         new ArrayList<InstructionContext>(), icv, ev)){
                     icq.add(v, new ArrayList<InstructionContext>());
                 }

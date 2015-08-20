@@ -222,7 +222,7 @@ public class InstructionFinder {
         while (start < il_string.length() && matcher.find(start)) {
             int startExpr = matcher.start();
             int endExpr = matcher.end();
-            int lenExpr = (endExpr - startExpr);
+            int lenExpr = endExpr - startExpr;
             InstructionHandle[] match = getMatch(startExpr, lenExpr);
             if ((constraint == null) || constraint.checkCode(match)) {
                 matches.add(match);

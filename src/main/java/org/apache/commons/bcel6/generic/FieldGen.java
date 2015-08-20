@@ -249,7 +249,7 @@ public class FieldGen extends FieldGenOrMethodGen {
             case Constants.T_LONG:
                 return cp.addLong(((Long) value).longValue());
             case Constants.T_REFERENCE:
-                return cp.addString(((String) value));
+                return cp.addString((String) value);
             default:
                 throw new RuntimeException("Oops: Unhandled : " + type.getType());
         }

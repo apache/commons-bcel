@@ -44,7 +44,7 @@ public class NanoTimer {
      */
     @Override
     public String toString() {
-        return ((double) (time) / 1000000000) + " s";
+        return ((double) time / 1000000000) + " s";
     }
 
 

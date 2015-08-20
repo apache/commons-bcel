@@ -76,8 +76,11 @@ limitations under the License.
     <module name="PackageName"/>
     <module name="ParameterName"/>
     <module name="StaticVariableName"/>
-    <module name="TypeName"/>
      -->
+    <module name="TypeName">
+        <!-- Allow underscore in class names -->
+        <property name="format" value="^[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$"/>
+    </module>
     <!-- Checks for imports                              -->
     <!-- See http://checkstyle.sf.net/config_imports.html -->
     <module name="AvoidStarImport"/>
@@ -130,7 +133,7 @@ limitations under the License.
     <module name="CovariantEquals"/>
     <module name="EqualsHashCode"/>
     <module name="IllegalInstantiation"/>
-    <!--module name="InnerAssignment"/-->
+    <!--module name="InnerAssignment"/--><!-- Inner assignments are OK -->
     <!-- module name="MagicNumber">
         <property name="ignoreNumbers" value="-1,0,1,2,3"/>
     </module-->
@@ -146,7 +149,7 @@ limitations under the License.
         <property name="reliefPattern" value="\$FALL-THROUGH\$"/><!-- to agree with Eclipse -->
     </module>
     <module name="MultipleVariableDeclarations"/>
-    <!--module name="UnnecessaryParentheses"/-->
+    <module name="UnnecessaryParentheses"/>
 
     <!-- Checks for class design                         -->
     <!-- See http://checkstyle.sf.net/config_design.html -->

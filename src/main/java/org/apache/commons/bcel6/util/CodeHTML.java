@@ -173,7 +173,7 @@ final class CodeHTML {
             case Constants.IF_ICMPLT:
             case Constants.IF_ICMPNE:
             case Constants.JSR:
-                index = (bytes.getIndex() + bytes.readShort() - 1);
+                index = bytes.getIndex() + bytes.readShort() - 1;
                 buf.append("<A HREF=\"#code").append(method_number).append("@").append(index)
                         .append("\">").append(index).append("</A>");
                 break;
@@ -405,7 +405,7 @@ final class CodeHTML {
                             .getLocalVariableTable();
                     for (LocalVariable var : vars) {
                         int start = var.getStartPC();
-                        int end = (start + var.getLength());
+                        int end = start + var.getLength();
                         goto_set.set(start);
                         goto_set.set(end);
                     }

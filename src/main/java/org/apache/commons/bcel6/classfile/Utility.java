@@ -283,7 +283,7 @@ public abstract class Utility {
              */
             case Constants.GOTO_W:
             case Constants.JSR_W:
-                buf.append("\t\t#").append(((bytes.getIndex() - 1) + bytes.readInt()));
+                buf.append("\t\t#").append((bytes.getIndex() - 1) + bytes.readInt());
                 break;
             /* Index byte references local variable (register)
              */
@@ -329,7 +329,7 @@ public abstract class Utility {
                 index = bytes.readUnsignedShort();
                 buf.append("\t\t").append(
                         constant_pool.constantToString(index, Constants.CONSTANT_Fieldref)).append(
-                        (verbose ? " (" + index + ")" : ""));
+                        verbose ? " (" + index + ")" : "");
                 break;
             /* Operands are references to classes in constant pool
              */
@@ -341,7 +341,7 @@ public abstract class Utility {
                 index = bytes.readUnsignedShort();
                 buf.append("\t<").append(
                         constant_pool.constantToString(index, Constants.CONSTANT_Class))
-                        .append(">").append((verbose ? " (" + index + ")" : ""));
+                        .append(">").append(verbose ? " (" + index + ")" : "");
                 break;
             /* Operands are references to methods in constant pool
              */
@@ -353,13 +353,13 @@ public abstract class Utility {
                 // or a CONSTANT_InterfaceMethodref.   (markro)
                 buf.append("\t").append(
                         constant_pool.constantToString(index, c.getTag()))
-                        .append((verbose ? " (" + index + ")" : ""));
+                        .append(verbose ? " (" + index + ")" : "");
                 break;
             case Constants.INVOKEVIRTUAL:
                 index = bytes.readUnsignedShort();
                 buf.append("\t").append(
                         constant_pool.constantToString(index, Constants.CONSTANT_Methodref))
-                        .append((verbose ? " (" + index + ")" : ""));
+                        .append(verbose ? " (" + index + ")" : "");
                 break;
             case Constants.INVOKEINTERFACE:
                 index = bytes.readUnsignedShort();
@@ -386,13 +386,13 @@ public abstract class Utility {
                 index = bytes.readUnsignedShort();
                 buf.append("\t\t").append(
                         constant_pool.constantToString(index, constant_pool.getConstant(index)
-                                .getTag())).append((verbose ? " (" + index + ")" : ""));
+                                .getTag())).append(verbose ? " (" + index + ")" : "");
                 break;
             case Constants.LDC:
                 index = bytes.readUnsignedByte();
                 buf.append("\t\t").append(
                         constant_pool.constantToString(index, constant_pool.getConstant(index)
-                                .getTag())).append((verbose ? " (" + index + ")" : ""));
+                                .getTag())).append(verbose ? " (" + index + ")" : "");
                 break;
             /* Array of references.
              */
@@ -401,7 +401,7 @@ public abstract class Utility {
                 buf.append("\t\t<").append(
                         compactClassName(constant_pool.getConstantString(index,
                                 Constants.CONSTANT_Class), false)).append(">").append(
-                        (verbose ? " (" + index + ")" : ""));
+                        verbose ? " (" + index + ")" : "");
                 break;
             /* Multidimensional array of references.
              */
@@ -411,7 +411,7 @@ public abstract class Utility {
                 buf.append("\t<").append(
                         compactClassName(constant_pool.getConstantString(index,
                                 Constants.CONSTANT_Class), false)).append(">\t").append(dimensions)
-                        .append((verbose ? " (" + index + ")" : ""));
+                        .append(verbose ? " (" + index + ")" : "");
             }
                 break;
             /* Increment local variable.
@@ -1222,8 +1222,7 @@ public abstract class Utility {
         }
         for (int i = 0; i < obj.length; i++) {
             if (obj[i] != null) {
-                buf.append((quote ? "\"" : "")).append(obj[i].toString()).append(
-                        (quote ? "\"" : ""));
+                buf.append(quote ? "\"" : "").append(obj[i].toString()).append(quote ? "\"" : "");
             } else {
                 buf.append("null");
             }

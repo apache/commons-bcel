@@ -43,14 +43,14 @@ public class LocalVariableInfo{
      * (Hashtable) database.
      */
     private void setName(int offset, String name){
-        names.put( ((Integer.toString(offset))), name);
+        names.put(Integer.toString(offset), name);
     }
     /**
      * Adds a type of a local variable and a certain slot to our 'types'
      * (Hashtable) database.
      */
     private void setType(int offset, Type t){
-        types.put( ((Integer.toString(offset))), t);
+        types.put(Integer.toString(offset), t);
     }
 
     /**
@@ -73,7 +73,7 @@ public class LocalVariableInfo{
      * variable slot at the given bytecode offset.
      */
     public String getName(int offset){
-        return (names.get(Integer.toString(offset)));
+        return names.get(Integer.toString(offset));
     }
     /**
      * Adds some information about this local variable (slot).

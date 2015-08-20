@@ -252,7 +252,7 @@ public final class Pass2Verifier extends PassVerifier {
 
             Method[] methods = jc.getMethods();
             for (Method method : methods) {
-                String nameAndSig = (method.getName() + method.getSignature());
+                String nameAndSig = method.getName() + method.getSignature();
 
                 if (hashmap.containsKey(nameAndSig)) {
                     if (method.isFinal()) {
@@ -587,7 +587,7 @@ public final class Pass2Verifier extends PassVerifier {
                 throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.", cfe);
             }
 
-            String nameanddesc = (name+sig);
+            String nameanddesc = name+sig;
             if (field_names_and_desc.contains(nameanddesc)){
                 throw new ClassConstraintException("No two fields (like '"+tostring(obj)+
                     "') are allowed have same names and descriptors!");
@@ -783,7 +783,7 @@ public final class Pass2Verifier extends PassVerifier {
                         " ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT set (ignored).");
             }
 
-            String nameanddesc = (name+sig);
+            String nameanddesc = name+sig;
             if (method_names_and_desc.contains(nameanddesc)){
                 throw new ClassConstraintException(
                     "No two methods (like '"+tostring(obj)+"') are allowed have same names and desciptors!");
@@ -1435,7 +1435,7 @@ public final class Pass2Verifier extends PassVerifier {
         }
 
         if (allowStaticInit){
-            return (name.equals(Constants.CONSTRUCTOR_NAME) || name.equals(Constants.STATIC_INITIALIZER_NAME));
+            return name.equals(Constants.CONSTRUCTOR_NAME) || name.equals(Constants.STATIC_INITIALIZER_NAME);
         }
         return name.equals(Constants.CONSTRUCTOR_NAME);
     }

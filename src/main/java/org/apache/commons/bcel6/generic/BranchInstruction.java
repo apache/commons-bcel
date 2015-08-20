@@ -226,7 +226,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      */
     @Override
     public boolean containsTarget( InstructionHandle ih ) {
-        return (target == ih);
+        return target == ih;
     }
 
 

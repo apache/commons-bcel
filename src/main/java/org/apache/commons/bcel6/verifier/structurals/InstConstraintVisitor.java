@@ -182,7 +182,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         if (! ((arrayref instanceof ArrayType) || arrayref.equals(Type.NULL)) ) {
             constraintViolated(o, "The 'arrayref' does not refer to an array but is of type "+arrayref+".");
         }
-        return (arrayref instanceof ArrayType);
+        return arrayref instanceof ArrayType;
     }
 
     /***************************************************************/
@@ -386,7 +386,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
             constraintViolated(o, "Cannot STORE: Stack to read from is empty.");
         }
 
-        if ( (!(o instanceof ASTORE)) ){
+        if ( !(o instanceof ASTORE) ){
             if (! (stack().peek() == o.getType(cpg)) ){// the other xSTORE types are singletons in BCEL.
                 constraintViolated(o, "Stack top type and STOREing Instruction type mismatch: Stack top: '"+stack().peek()+
                     "'; Instruction type: '"+o.getType(cpg)+"'.");

@@ -70,7 +70,7 @@ public final class LineNumberTable extends Attribute {
     LineNumberTable(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (LineNumber[]) null, constant_pool);
-        int line_number_table_length = (input.readUnsignedShort());
+        int line_number_table_length = input.readUnsignedShort();
         line_number_table = new LineNumber[line_number_table_length];
         for (int i = 0; i < line_number_table_length; i++) {
             line_number_table[i] = new LineNumber(input);

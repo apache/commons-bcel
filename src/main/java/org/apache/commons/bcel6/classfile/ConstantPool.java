@@ -129,17 +129,17 @@ public class ConstantPool implements Cloneable, Node {
                 str = String.valueOf(((ConstantInteger) c).getBytes());
                 break;
             case Constants.CONSTANT_NameAndType:
-                str = (constantToString(((ConstantNameAndType) c).getNameIndex(),
+                str = constantToString(((ConstantNameAndType) c).getNameIndex(),
                         Constants.CONSTANT_Utf8)
                         + ":" + constantToString(((ConstantNameAndType) c).getSignatureIndex(),
-                        Constants.CONSTANT_Utf8));
+                        Constants.CONSTANT_Utf8);
                 break;
             case Constants.CONSTANT_InterfaceMethodref:
             case Constants.CONSTANT_Methodref:
             case Constants.CONSTANT_Fieldref:
-                str = (constantToString(((ConstantCP) c).getClassIndex(), Constants.CONSTANT_Class)
+                str = constantToString(((ConstantCP) c).getClassIndex(), Constants.CONSTANT_Class)
                         + "." + constantToString(((ConstantCP) c).getNameAndTypeIndex(),
-                        Constants.CONSTANT_NameAndType));
+                        Constants.CONSTANT_NameAndType);
                 break;
             case Constants.CONSTANT_MethodHandle:
                 // Note that the ReferenceIndex may point to a Fieldref, Methodref or
@@ -154,7 +154,7 @@ public class ConstantPool implements Cloneable, Node {
                 str = constantToString(cmt.getDescriptorIndex(), Constants.CONSTANT_Utf8);
                 break;
             case Constants.CONSTANT_InvokeDynamic:
-                ConstantInvokeDynamic cid = ((ConstantInvokeDynamic) c);
+                ConstantInvokeDynamic cid = (ConstantInvokeDynamic) c;
                 str = cid.getBootstrapMethodAttrIndex()
                         + ":" + constantToString(cid.getNameAndTypeIndex(),
                         Constants.CONSTANT_NameAndType);
