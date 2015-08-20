@@ -23,9 +23,6 @@ import java.io.IOException;
 import org.apache.commons.bcel6.classfile.ClassElementValue;
 import org.apache.commons.bcel6.classfile.ConstantUtf8;
 import org.apache.commons.bcel6.classfile.ElementValue;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.ElementValueGen;
-import org.apache.commons.bcel6.generic.ObjectType;
 
 /**
  * @since 6.0
