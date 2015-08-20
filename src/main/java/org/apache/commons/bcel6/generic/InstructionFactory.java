@@ -24,9 +24,13 @@ import org.apache.commons.bcel6.Constants;
  * versions of instructions. Its main purpose is to be used as the
  * byte code generating backend of a compiler. You can subclass it to
  * add your own create methods.
+ * <p>
+ * Note: The static createXXX methods return singleton instances
+ * from the {@link InstructionConstants} class.
  *
  * @version $Id$
  * @see Constants
+ * @see InstructionConstants
  */
 public class InstructionFactory {
 
