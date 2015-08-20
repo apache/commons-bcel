@@ -78,7 +78,7 @@ public abstract class AbstractVerifierTestCase extends TestCase {
             return false;
         }
 
-        for (int i = nbMethods; --i >= 0; ) {
+        for (int i = nbMethods; --i >= 0;) {
             result = verifier.doPass3a(i);
             if (result.getStatus() != VerificationResult.VERIFIED_OK) {
                 return false;
