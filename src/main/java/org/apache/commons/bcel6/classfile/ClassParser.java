@@ -47,8 +47,10 @@ public final class ClassParser {
     private final boolean fileOwned;
     private final String file_name;
     private String zip_file;
-    private int class_name_index, superclass_name_index;
-    private int major, minor; // Compiler version
+    private int class_name_index;
+    private int superclass_name_index;
+    private int major; // Compiler version
+    private int minor; // Compiler version
     private int access_flags; // Access rights of parsed class
     private int[] interfaces; // Names of implemented interfaces
     private ConstantPool constant_pool; // collection of constants

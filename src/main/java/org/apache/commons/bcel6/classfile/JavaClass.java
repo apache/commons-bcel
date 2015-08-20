@@ -55,7 +55,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     private int superclass_name_index;
     private String class_name;
     private String superclass_name;
-    private int major, minor; // Compiler version
+    private int major;
+    private int minor; // Compiler version
     private ConstantPool constant_pool; // Constant pool
     private int[] interfaces; // implemented interfaces
     private String[] interface_names;

@@ -32,7 +32,8 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class PMGClass extends Attribute {
 
-    private int pmg_class_index, pmg_index;
+    private int pmg_class_index;
+    private int pmg_index;
 
 
     /**

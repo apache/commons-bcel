@@ -154,7 +154,8 @@ public final class LineNumberTable extends Attribute {
      * @return corresponding line in source code
      */
     public int getSourceLine( int pos ) {
-        int l = 0, r = line_number_table.length - 1;
+        int l = 0;
+        int r = line_number_table.length - 1;
         if (r < 0) {
             return -1;
         }
