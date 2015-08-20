@@ -318,46 +318,46 @@ public class Constants {
   public static final short ACONST_NULL      = 1;
 
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_m1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ICONST_M1        = 2;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ICONST_0         = 3;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ICONST_1         = 4;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ICONST_2         = 5;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ICONST_3         = 6;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_4">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ICONST_4         = 7;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_5">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ICONST_5         = 8;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lconst_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lconst_l">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LCONST_0         = 9;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lconst_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lconst_l">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LCONST_1         = 10;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fconst_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fconst_f">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FCONST_0         = 11;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fconst_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fconst_f">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FCONST_1         = 12;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fconst_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fconst_f">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FCONST_2         = 13;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dconst_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dconst_d">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DCONST_0         = 14;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dconst_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dconst_d">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DCONST_1         = 15;
   /** Java VM opcode.
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.bipush">Opcode definitions in The Java Virtual Machine Specification</a> */
@@ -390,64 +390,64 @@ public class Constants {
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ALOAD            = 25;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_n"">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ILOAD_0          = 26;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ILOAD_1          = 27;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ILOAD_2          = 28;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ILOAD_3          = 29;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LLOAD_0          = 30;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LLOAD_1          = 31;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LLOAD_2          = 32;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LLOAD_3          = 33;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FLOAD_0          = 34;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FLOAD_1          = 35;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FLOAD_2          = 36;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FLOAD_3          = 37;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DLOAD_0          = 38;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DLOAD_1          = 39;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DLOAD_2          = 40;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DLOAD_3          = 41;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ALOAD_0          = 42;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ALOAD_1          = 43;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ALOAD_2          = 44;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ALOAD_3          = 45;
   /** Java VM opcode.
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iaload">Opcode definitions in The Java Virtual Machine Specification</a> */
@@ -489,64 +489,64 @@ public class Constants {
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ASTORE           = 58;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ISTORE_0         = 59;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ISTORE_1         = 60;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ISTORE_2         = 61;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ISTORE_3         = 62;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LSTORE_0         = 63;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LSTORE_1         = 64;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LSTORE_2         = 65;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short LSTORE_3         = 66;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FSTORE_0         = 67;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FSTORE_1         = 68;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FSTORE_2         = 69;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short FSTORE_3         = 70;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DSTORE_0         = 71;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DSTORE_1         = 72;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DSTORE_2         = 73;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short DSTORE_3         = 74;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_0">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ASTORE_0         = 75;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_1">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ASTORE_1         = 76;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_2">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ASTORE_2         = 77;
   /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_3">Opcode definitions in The Java Virtual Machine Specification</a> */
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_n">Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short ASTORE_3         = 78;
   /** Java VM opcode.
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iastore">Opcode definitions in The Java Virtual Machine Specification</a> */
