@@ -52,6 +52,7 @@ import org.apache.commons.bcel6.classfile.ConstantUtf8;
  */
 public class ConstantPoolGen {
 
+    private static final int DEFAULT_BUFFER_SIZE = 256;
     protected int size; 
     protected Constant[] constants;
     protected int index = 1; // First entry (0) used by JVM
@@ -77,9 +78,9 @@ public class ConstantPoolGen {
      * @param cs array of given constants, new ones will be appended
      */
     public ConstantPoolGen(Constant[] cs) {
-        StringBuilder sb = new StringBuilder(256);
+        StringBuilder sb = new StringBuilder(DEFAULT_BUFFER_SIZE);
 
-        size = Math.max(256, cs.length + 64);
+        size = Math.max(DEFAULT_BUFFER_SIZE, cs.length + 64);
         constants = new Constant[size];
 
         System.arraycopy(cs, 0, constants, 0, cs.length);
@@ -180,7 +181,7 @@ public class ConstantPoolGen {
      * Create empty constant pool.
      */
     public ConstantPoolGen() {
-        size = 256;
+        size = DEFAULT_BUFFER_SIZE;
         constants = new Constant[size];
     }
 
