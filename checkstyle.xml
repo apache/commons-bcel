@@ -28,11 +28,6 @@ limitations under the License.
   <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
   <module name="NewlineAtEndOfFile" />
 
-  <!-- Verify that EVERY source file has the appropriate license -->
-  <module name="RegexpHeader">
-    <property name="headerFile" value="${checkstyle.header.file}" />
-  </module>
-
   <!-- Checks for Tab characters -->
   <!-- See http://checkstyle.sourceforge.net/config_whitespace.html#FileTabCharacter -->
   <module name="FileTabCharacter">
@@ -59,22 +54,30 @@ limitations under the License.
 
   <module name="TreeWalker">
     <property name="cacheFile" value="target/cachefile" />
+    <!-- 
     <module name="LineLength">
-      <property name="max" value="120"/>
+      <property name="max" value="135"/>
     </module>
-    
+     -->
+ 
     <!-- Checks for Naming Conventions.                  -->
     <!-- See http://checkstyle.sf.net/config_naming.html -->
-    <module name="ConstantName"/>
+    <!-- allow CONSTANT_Long etc -->
+    <!-- 
+    <module name="ConstantName">
+      <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Za-z0-9]+)*$"/>
+    </module>
     <module name="LocalFinalVariableName"/>
     <module name="LocalVariableName"/>
-    <module name="MemberName"/>
+    <module name="MemberName">
+      <property name="format" value="^[a-z][a-zA-Z0-9_]*(_[a-zA-Z0-9]+)*$"/>
+    </module>
     <module name="MethodName"/>
     <module name="PackageName"/>
     <module name="ParameterName"/>
     <module name="StaticVariableName"/>
     <module name="TypeName"/>
-    
+     -->
     <!-- Checks for imports                              -->
     <!-- See http://checkstyle.sf.net/config_import.html -->
     <module name="AvoidStarImport"/>
@@ -85,24 +88,31 @@ limitations under the License.
     <!-- Checks for whitespace                               -->
     <!-- See http://checkstyle.sf.net/config_whitespace.html -->
     <module name="EmptyForIteratorPad"/>
+    <!-- Too many to fix at present
     <module name="NoWhitespaceAfter"/>
     <module name="NoWhitespaceBefore"/>
     <module name="OperatorWrap">
       <property name="option" value="nl" />
     </module>
+    -->
+    <!-- Too many to fix at present
     <module name="ParenPad"/>
     <module name="WhitespaceAfter"/>
     <module name="WhitespaceAround"/>
+    -->
     
     <!-- Modifier Checks                                    -->
     <!-- See http://checkstyle.sf.net/config_modifiers.html -->
     <module name="ModifierOrder"/>
-    <module name="RedundantModifier"/>
+    
+    <!--module name="RedundantModifier"/-->
     
     <!-- Checks for blocks. You know, those {}'s         -->
     <!-- See http://checkstyle.sf.net/config_blocks.html -->
-    <module name="AvoidNestedBlocks"/>
-    <module name="EmptyBlock"/>
+    <!--module name="AvoidNestedBlocks"/-->
+    <module name="EmptyBlock">
+      <property name="option" value="text"/>
+    </module>
     <!--
     <module name="LeftCurly">
         <property name="option" value="nl"/>
@@ -121,10 +131,10 @@ limitations under the License.
     <module name="DoubleCheckedLocking"/>
     <module name="EqualsHashCode"/>
     <module name="IllegalInstantiation"/>
-    <module name="InnerAssignment"/>
-    <module name="MagicNumber">
+    <!--module name="InnerAssignment"/-->
+    <!-- module name="MagicNumber">
         <property name="ignoreNumbers" value="-1,0,1,2,3"/>
-    </module>
+    </module-->
     <module name="RedundantThrows">
         <property name="allowUnchecked" value="true"/>
     </module>
@@ -133,12 +143,14 @@ limitations under the License.
     <module name="StringLiteralEquality"/>
     <module name="SuperClone"/>
     <module name="SuperFinalize"/>
-    <module name="DeclarationOrder"/>
-    <module name="ExplicitInitialization"/>
+    <!--module name="DeclarationOrder"/-->
+    <!--module name="ExplicitInitialization"/-->
     <module name="DefaultComesLast"/>
-    <module name="FallThrough"/>
-    <module name="MultipleVariableDeclarations"/>
-    <module name="UnnecessaryParentheses"/>
+    <module name="FallThrough">
+        <property name="reliefPattern" value="\$FALL-THROUGH\$"/><!-- to agree with Eclipse -->
+    </module>
+    <!--module name="MultipleVariableDeclarations"/-->
+    <!--module name="UnnecessaryParentheses"/-->
 
     <!-- Checks for class design                         -->
     <!-- See http://checkstyle.sf.net/config_design.html -->
@@ -147,12 +159,13 @@ limitations under the License.
     <module name="InterfaceIsType"/>
     <module name="VisibilityModifier">
         <property name="protectedAllowed" value="true"/>
+        <property name="packageAllowed" value="true"/>
     </module>
     
     <!-- Miscellaneous other checks.                   -->
     <!-- See http://checkstyle.sf.net/config_misc.html -->
     <module name="ArrayTypeStyle"/>
-    <module name="TodoComment"/>
+    <!--module name="TodoComment"/-->
     <module name="UpperEll"/>
     
   </module>
