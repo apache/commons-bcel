@@ -55,6 +55,7 @@
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
     <findbugs.plugin.version>2.5.5</findbugs.plugin.version>
+    <checkstyle.plugin.version>2.16</checkstyle.plugin.version>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
@@ -240,12 +241,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <!-- Use 2.9.1 instead of 2.10; 2.10 seems to scan the 'target'
-          dir and wants license headers in .properties to be the header for
-          Java files. -->
-        <version>2.9.1</version>
+        <version>${checkstyle.plugin.version}</version>
         <configuration>
           <configLocation>${basedir}/checkstyle.xml</configLocation>
+          <!-- Needed to define config_loc -->
+          <propertiesLocation>${basedir}/checkstyle_maven.properties</propertiesLocation>
           <enableRulesSummary>false</enableRulesSummary>
         </configuration>
       </plugin>
@@ -274,12 +274,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <!-- Use 2.9.1 instead of 2.10; 2.10 seems to scan the 'target'
-          dir and wants license headers in .properties to be the header for
-          Java files. -->
-        <version>2.9.1</version>
+        <version>${checkstyle.plugin.version}</version>
         <configuration>
           <configLocation>${basedir}/checkstyle.xml</configLocation>
+          <!-- Needed to define config_loc -->
+          <propertiesLocation>${basedir}/checkstyle_maven.properties</propertiesLocation>
           <enableRulesSummary>false</enableRulesSummary>
         </configuration>
         <!-- We need to specify reportSets because 2.9.1 creates two reports -->
