@@ -232,46 +232,60 @@ public class Constants {
     "synthetic", "annotation", "enum"
   };
 
-  /** Marks a constant pool entry as type UTF-8.  */
+  /** Marks a constant pool entry as type UTF-8.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_Utf8               = 1;
 
-  /** Marks a constant pool entry as type Integer.  */
+  /** Marks a constant pool entry as type Integer.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_Integer            = 3;
 
-  /** Marks a constant pool entry as type Float.  */
+  /** Marks a constant pool entry as type Float.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_Float              = 4;
 
-  /** Marks a constant pool entry as type Long.  */
+  /** Marks a constant pool entry as type Long.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_Long               = 5;
 
-  /** Marks a constant pool entry as type Double.  */
+  /** Marks a constant pool entry as type Double.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_Double             = 6;
 
-  /** Marks a constant pool entry as a Class.  */
+  /** Marks a constant pool entry as a Class
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_Class              = 7;
 
-  /** Marks a constant pool entry as a Field Reference.  */
+  /** Marks a constant pool entry as a Field Reference.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_Fieldref           = 9;
 
-  /** Marks a constant pool entry as type String.  */
+  /** Marks a constant pool entry as type String
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_String             = 8;
 
-  /** Marks a constant pool entry as a Method Reference.  */
+  /** Marks a constant pool entry as a Method Reference.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_Methodref          = 10;
 
-  /** Marks a constant pool entry as an Interface Method Reference.  */
+  /** Marks a constant pool entry as an Interface Method Reference.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_InterfaceMethodref = 11;
 
-  /** Marks a constant pool entry as a name and type.  */
+  /** Marks a constant pool entry as a name and type.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public final static byte CONSTANT_NameAndType        = 12;
 
-  /** Marks a constant pool entry as a Method Handle.  */
+  /** Marks a constant pool entry as a Method Handle.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public static final byte CONSTANT_MethodHandle       = 15;
 
-  /** Marks a constant pool entry as a Method Type.    */
+  /** Marks a constant pool entry as a Method Type.
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public static final byte CONSTANT_MethodType         = 16;
 
-  /** Marks a constant pool entry as an Invoke Dynamic */
+  /** Marks a constant pool entry as an Invoke Dynamic
+   * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">The Constant Pool in The Java Virtual Machine Specification</a> */
   public static final byte CONSTANT_InvokeDynamic      = 18;
 
   /** The names of the types of entries in a constant pool. */
@@ -1062,21 +1076,29 @@ public class Constants {
   /** Mnemonic for an illegal type. */
   public static final String ILLEGAL_TYPE   = "<illegal type>";
 
-  /** Boolean data type. */
+  /** Boolean data type.
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P">Static Constraints in the Java Virtual Machine Specification</a> */
   public static final byte T_BOOLEAN = 4;
-  /** Char data type. */
+  /** Char data type.
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P">Static Constraints in the Java Virtual Machine Specification</a> */
   public static final byte T_CHAR    = 5;
-  /** Float data type. */
+  /** Float data type.
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P">Static Constraints in the Java Virtual Machine Specification</a> */
   public static final byte T_FLOAT   = 6;
-  /** Double data type. */
+  /** Double data type.
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P">Static Constraints in the Java Virtual Machine Specification</a> */
   public static final byte T_DOUBLE  = 7;
-  /** Byte data type. */
+  /** Byte data type.
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P">Static Constraints in the Java Virtual Machine Specification</a> */
   public static final byte T_BYTE    = 8;
-  /** Short data type. */
+  /** Short data type.
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P">Static Constraints in the Java Virtual Machine Specification</a> */
   public static final byte T_SHORT   = 9;
-  /** Int data type. */
+  /** Int data type.
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P">Static Constraints in the Java Virtual Machine Specification</a> */
   public static final byte T_INT     = 10;
-  /** Long data type. */
+  /** Long data type.
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P">Static Constraints in the Java Virtual Machine Specification</a> */
   public static final byte T_LONG    = 11;
 
   /** Void data type (non-standard). */
