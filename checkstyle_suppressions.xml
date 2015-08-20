@@ -22,4 +22,6 @@ limitations under the License.
 <!-- SEE: http://checkstyle.sourceforge.net/config.html#Examples -->
 <suppressions>
     <suppress checks="LineLength" files="InstructionFinder.java"/>
+    <suppress checks="MagicNumber" files="VerifierAppFrame.java"/>
+    <suppress checks="MagicNumber" files="VerifyDialog.java"/>
 </suppressions>
