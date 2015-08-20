@@ -745,7 +745,8 @@ public abstract class Utility {
      * @return new String object
      */
     public static String replace( String str, String old, String new_ ) {
-        int index, old_index;
+        int index;
+        int old_index;
         try {
             if (str.contains(old)) { // `old' found in str
                 StringBuilder buf = new StringBuilder();
@@ -948,7 +949,8 @@ public abstract class Utility {
     public static String getSignature( String type ) {
         StringBuilder buf = new StringBuilder();
         char[] chars = type.toCharArray();
-        boolean char_found = false, delim = false;
+        boolean char_found = false;
+        boolean delim = false;
         int index = -1;
         loop: for (int i = 0; i < chars.length; i++) {
             switch (chars[i]) {

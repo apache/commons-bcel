@@ -186,7 +186,8 @@ final class AttributeHTML {
                 // List inner classes
                 file.print("<UL>");
                 for (InnerClass classe : classes) {
-                    String name, access;
+                    String name;
+                    String access;
                     index = classe.getInnerNameIndex();
                     if (index > 0) {
                         name = ((ConstantUtf8) constant_pool.getConstant(index, Constants.CONSTANT_Utf8))

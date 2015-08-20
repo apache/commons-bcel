@@ -159,7 +159,8 @@ public final class LineNumberTable extends Attribute {
         if (r < 0) {
             return -1;
         }
-        int min_index = -1, min = -1;
+        int min_index = -1;
+        int min = -1;
         /* Do a binary search since the array is ordered.
          */
         do {

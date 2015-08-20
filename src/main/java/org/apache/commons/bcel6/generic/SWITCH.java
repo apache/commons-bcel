@@ -99,8 +99,10 @@ public final class SWITCH implements CompoundInstruction {
      * Sort match and targets array with QuickSort.
      */
     private void sort( int l, int r ) {
-        int i = l, j = r;
-        int h, m = match[(l + r) / 2];
+        int i = l;
+        int j = r;
+        int h;
+        int m = match[(l + r) / 2];
         InstructionHandle h2;
         do {
             while (match[i] < m) {

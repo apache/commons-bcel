@@ -423,8 +423,8 @@ final class CodeHTML {
                     //bytes.readByte(); // Skip already read byte
                     int remainder = bytes.getIndex() % 4;
                     int no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
-                    int default_offset,
-                    offset;
+                    int default_offset;
+                    int offset;
                     for (int j = 0; j < no_pad_bytes; j++) {
                         bytes.readByte();
                     }

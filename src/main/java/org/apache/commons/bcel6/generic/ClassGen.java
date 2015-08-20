@@ -45,10 +45,13 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /* Corresponds to the fields found in a JavaClass object.
      */
-    private String class_name, super_class_name;
+    private String class_name;
+    private String super_class_name;
     private final String file_name;
-    private int class_name_index = -1, superclass_name_index = -1;
-    private int major = Constants.MAJOR_1_1, minor = Constants.MINOR_1_1;
+    private int class_name_index = -1;
+    private int superclass_name_index = -1;
+    private int major = Constants.MAJOR_1_1;
+    private int minor = Constants.MINOR_1_1;
     private ConstantPoolGen cp; // Template for building up constant pool
     // ArrayLists instead of arrays to gather fields, methods, etc.
     private final List<Field> field_vec = new ArrayList<>();

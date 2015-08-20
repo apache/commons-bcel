@@ -35,7 +35,8 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     private int index;
     private String name;
     private Type type;
-    private InstructionHandle start, end;
+    private InstructionHandle start;
+    private InstructionHandle end;
 
 
     /**

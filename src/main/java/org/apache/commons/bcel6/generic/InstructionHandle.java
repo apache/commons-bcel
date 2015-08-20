@@ -44,7 +44,8 @@ import org.apache.commons.bcel6.classfile.Utility;
  */
 public class InstructionHandle {
 
-    InstructionHandle next, prev; // Will be set from the outside
+    InstructionHandle next;
+    InstructionHandle prev; // Will be set from the outside
     Instruction instruction;
     protected int i_position = -1; // byte code offset of instruction
     private Set<InstructionTargeter> targeters;

@@ -510,7 +510,8 @@ public class ConstantPoolGen {
      */
     public int addNameAndType( String name, String signature ) {
         int ret;
-        int name_index, signature_index;
+        int name_index;
+        int signature_index;
         if ((ret = lookupNameAndType(name, signature)) != -1) {
             return ret; // Already in CP
         }
@@ -559,7 +560,9 @@ public class ConstantPoolGen {
      * @return index of entry
      */
     public int addMethodref( String class_name, String method_name, String signature ) {
-        int ret, class_index, name_and_type_index;
+        int ret;
+        int class_index;
+        int name_and_type_index;
         if ((ret = lookupMethodref(class_name, method_name, signature)) != -1) {
             return ret; // Already in CP
         }
@@ -612,7 +615,9 @@ public class ConstantPoolGen {
      * @return index of entry
      */
     public int addInterfaceMethodref( String class_name, String method_name, String signature ) {
-        int ret, class_index, name_and_type_index;
+        int ret;
+        int class_index;
+        int name_and_type_index;
         if ((ret = lookupInterfaceMethodref(class_name, method_name, signature)) != -1) {
             return ret; // Already in CP
         }
@@ -660,7 +665,8 @@ public class ConstantPoolGen {
      */
     public int addFieldref( String class_name, String field_name, String signature ) {
         int ret;
-        int class_index, name_and_type_index;
+        int class_index;
+        int name_and_type_index;
         if ((ret = lookupFieldref(class_name, field_name, signature)) != -1) {
             return ret; // Already in CP
         }

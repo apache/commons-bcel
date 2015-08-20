@@ -929,7 +929,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                 branchTargets.push(handler_pc, 1);
             }
         }
-        int stackDepth = 0, maxStackDepth = 0;
+        int stackDepth = 0;
+        int maxStackDepth = 0;
         InstructionHandle ih = il.getStart();
         while (ih != null) {
             Instruction instruction = ih.getInstruction();
