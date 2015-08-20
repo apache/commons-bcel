@@ -22,10 +22,6 @@ import java.util.Arrays;
 import org.apache.commons.bcel6.Repository;
 import org.apache.commons.bcel6.classfile.JavaClass;
 import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.LocalVariableGen;
-import org.apache.commons.bcel6.generic.MethodGen;
 
 import junit.framework.TestCase;
 

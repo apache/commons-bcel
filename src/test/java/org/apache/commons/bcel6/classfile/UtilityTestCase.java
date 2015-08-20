@@ -17,8 +17,6 @@
 
 package org.apache.commons.bcel6.classfile;
 
-import org.apache.commons.bcel6.classfile.Utility;
-
 import junit.framework.TestCase;
 
 public class UtilityTestCase extends TestCase {

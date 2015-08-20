@@ -20,10 +20,6 @@ package org.apache.commons.bcel6.verifier;
 
 import java.util.Collection;
 
-import org.apache.commons.bcel6.verifier.VerificationResult;
-import org.apache.commons.bcel6.verifier.Verifier;
-import org.apache.commons.bcel6.verifier.VerifierFactory;
-
 import junit.framework.TestCase;
 
 public class VerifierTestCase extends TestCase {

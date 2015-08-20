@@ -31,13 +31,6 @@ import org.apache.commons.bcel6.classfile.Annotations;
 import org.apache.commons.bcel6.classfile.Attribute;
 import org.apache.commons.bcel6.classfile.RuntimeInvisibleAnnotations;
 import org.apache.commons.bcel6.classfile.RuntimeVisibleAnnotations;
-import org.apache.commons.bcel6.generic.AnnotationEntryGen;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.ElementValueGen;
-import org.apache.commons.bcel6.generic.ElementValuePairGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.SimpleElementValueGen;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {

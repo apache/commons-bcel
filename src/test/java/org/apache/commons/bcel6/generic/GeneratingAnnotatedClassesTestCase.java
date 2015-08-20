@@ -31,27 +31,6 @@ import org.apache.commons.bcel6.classfile.JavaClass;
 import org.apache.commons.bcel6.classfile.Method;
 import org.apache.commons.bcel6.classfile.ParameterAnnotationEntry;
 import org.apache.commons.bcel6.classfile.SimpleElementValue;
-import org.apache.commons.bcel6.generic.ALOAD;
-import org.apache.commons.bcel6.generic.ASTORE;
-import org.apache.commons.bcel6.generic.AnnotationElementValueGen;
-import org.apache.commons.bcel6.generic.AnnotationEntryGen;
-import org.apache.commons.bcel6.generic.ArrayElementValueGen;
-import org.apache.commons.bcel6.generic.ArrayType;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.ElementValueGen;
-import org.apache.commons.bcel6.generic.ElementValuePairGen;
-import org.apache.commons.bcel6.generic.GOTO;
-import org.apache.commons.bcel6.generic.InstructionConstants;
-import org.apache.commons.bcel6.generic.InstructionFactory;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.LocalVariableGen;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.PUSH;
-import org.apache.commons.bcel6.generic.SimpleElementValueGen;
-import org.apache.commons.bcel6.generic.Type;
 import org.apache.commons.bcel6.util.SyntheticRepository;
 
 /**

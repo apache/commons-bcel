@@ -19,7 +19,6 @@ package org.apache.commons.bcel6;
 
 import java.util.Iterator;
 
-import org.apache.commons.bcel6.AbstractTestCase;
 import org.apache.commons.bcel6.classfile.JavaClass;
 import org.apache.commons.bcel6.classfile.Method;
 import org.apache.commons.bcel6.generic.InstructionHandle;
