@@ -49,7 +49,7 @@ public class LocalVariables{
      * However, the Type objects in the array are shared.
      */
     @Override
-    protected Object clone(){
+    public Object clone(){
         LocalVariables lvs = new LocalVariables(locals.length);
         for (int i=0; i<locals.length; i++){
             lvs.locals[i] = this.locals[i];

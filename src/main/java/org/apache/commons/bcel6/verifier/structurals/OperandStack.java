@@ -62,7 +62,7 @@ public class OperandStack{
      * shared.
      */
     @Override
-    protected Object clone(){
+    public Object clone(){
         OperandStack newstack = new OperandStack(this.maxStack);
         @SuppressWarnings("unchecked") // OK because this.stack is the same type
         final ArrayList<Type> clone = (ArrayList<Type>) this.stack.clone();
