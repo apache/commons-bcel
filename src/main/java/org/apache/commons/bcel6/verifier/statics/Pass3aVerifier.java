@@ -122,9 +122,15 @@ public final class Pass3aVerifier extends PassVerifier{
      */
     private final int method_no;
 
-    /** The one and only InstructionList object used by an instance of this class. It's here for performance reasons by do_verify() and its callees. */    
+    /**
+     * The one and only InstructionList object used by an instance of this class.
+     * It's here for performance reasons by do_verify() and its callees.
+     */    
     InstructionList instructionList;
-    /** The one and only Code object used by an instance of this class. It's here for performance reasons by do_verify() and its callees. */    
+    /**
+     * The one and only Code object used by an instance of this class.
+     *  It's here for performance reasons by do_verify() and its callees.
+     */    
     Code code;
 
     /** Should only be instantiated by a Verifier. */
@@ -182,7 +188,8 @@ public final class Pass3aVerifier extends PassVerifier{
                 instructionList = new InstructionList(method.getCode().getCode());
             }
             catch(RuntimeException re){
-                return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Bad bytecode in the code array of the Code attribute of method '"+method+"'.");
+                return new VerificationResult(VerificationResult.VERIFIED_REJECTED,
+                    "Bad bytecode in the code array of the Code attribute of method '"+method+"'.");
             }
 
             instructionList.setPositions(true);
@@ -244,14 +251,18 @@ public final class Pass3aVerifier extends PassVerifier{
                     int offset = lineNumber.getStartPC();
                     if (instructionPosition == offset) {
                         if (offsets.contains(offset)) {
-                            addMessage("LineNumberTable attribute '" + code.getLineNumberTable() + "' refers to the same code offset ('" + offset + "') more than once which is violating the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
+                            addMessage("LineNumberTable attribute '" + code.getLineNumberTable() +
+                                "' refers to the same code offset ('" + offset + "') more than once" +
+                                " which is violating the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
                         } else {
                             offsets.add(offset);
                         }
                         continue lineNumber_loop;
                     }
                 }
-                throw new ClassConstraintException("Code attribute '" + code + "' has a LineNumberTable attribute '" + code.getLineNumberTable() + "' referring to a code offset ('" + lineNumber.getStartPC() + "') that does not exist.");
+                throw new ClassConstraintException("Code attribute '" + code + "' has a LineNumberTable attribute '" +
+                    code.getLineNumberTable() +
+                    "' referring to a code offset ('" + lineNumber.getStartPC() + "') that does not exist.");
             }
         }
 
@@ -296,16 +307,21 @@ public final class Pass3aVerifier extends PassVerifier{
             int endpc = element.getEndPC();
             int handlerpc = element.getHandlerPC();
             if (startpc >= endpc){
-                throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+"' that has its start_pc ('"+startpc+"') not smaller than its end_pc ('"+endpc+"').");
+                throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+
+                    "' that has its start_pc ('"+startpc+"') not smaller than its end_pc ('"+endpc+"').");
             }
             if (!contains(instructionPositions, startpc)){
-                throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+"' that has a non-existant bytecode offset as its start_pc ('"+startpc+"').");
+                throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+
+                    "' that has a non-existant bytecode offset as its start_pc ('"+startpc+"').");
             }
             if ( (!contains(instructionPositions, endpc)) && (endpc != codeLength)){
-                throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+"' that has a non-existant bytecode offset as its end_pc ('"+startpc+"') [that is also not equal to code_length ('"+codeLength+"')].");
+                throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+
+                    "' that has a non-existant bytecode offset as its end_pc ('"+startpc+
+                    "') [that is also not equal to code_length ('"+codeLength+"')].");
             }
             if (!contains(instructionPositions, handlerpc)){
-                throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+"' that has a non-existant bytecode offset as its handler_pc ('"+handlerpc+"').");
+                throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+
+                    "' that has a non-existant bytecode offset as its handler_pc ('"+handlerpc+"').");
             }
         }
     }
@@ -325,7 +341,8 @@ public final class Pass3aVerifier extends PassVerifier{
         // interpreting them as code[]). So this must not be checked again here.
 
         if (! (code.getCode().length < 65536)){// contradicts vmspec2 page 152 ("Limitations"), but is on page 134.
-            throw new StaticCodeInstructionConstraintException("Code array in code attribute '"+code+"' too big: must be smaller than 65536 bytes.");
+            throw new StaticCodeInstructionConstraintException(
+                "Code array in code attribute '"+code+"' too big: must be smaller than 65536 bytes.");
         }
 
         // First opcode at offset 0: okay, that's clear. Nothing to do.
@@ -347,13 +364,16 @@ public final class Pass3aVerifier extends PassVerifier{
         while (ih != null){
             Instruction i = ih.getInstruction();
             if (i instanceof IMPDEP1){
-                throw new StaticCodeInstructionConstraintException("IMPDEP1 must not be in the code, it is an illegal instruction for _internal_ JVM use!");
+                throw new StaticCodeInstructionConstraintException(
+                    "IMPDEP1 must not be in the code, it is an illegal instruction for _internal_ JVM use!");
             }
             if (i instanceof IMPDEP2){
-                throw new StaticCodeInstructionConstraintException("IMPDEP2 must not be in the code, it is an illegal instruction for _internal_ JVM use!");
+                throw new StaticCodeInstructionConstraintException(
+                    "IMPDEP2 must not be in the code, it is an illegal instruction for _internal_ JVM use!");
             }
             if (i instanceof BREAKPOINT){
-                throw new StaticCodeInstructionConstraintException("BREAKPOINT must not be in the code, it is an illegal instruction for _internal_ JVM use!");
+                throw new StaticCodeInstructionConstraintException(
+                    "BREAKPOINT must not be in the code, it is an illegal instruction for _internal_ JVM use!");
             }
             ih = ih.getNext();
         }
@@ -367,7 +387,10 @@ public final class Pass3aVerifier extends PassVerifier{
                     (last instanceof RET)                                ||
                     (last instanceof GotoInstruction)            ||
                     (last instanceof ATHROW) )) {
-            throw new StaticCodeInstructionConstraintException("Execution must not fall off the bottom of the code array. This constraint is enforced statically as some existing verifiers do - so it may be a false alarm if the last instruction is not reachable.");
+            throw new StaticCodeInstructionConstraintException(
+                "Execution must not fall off the bottom of the code array."+
+                " This constraint is enforced statically as some existing verifiers do"+
+                        " - so it may be a false alarm if the last instruction is not reachable.");
         }
     }
 
@@ -405,10 +428,14 @@ public final class Pass3aVerifier extends PassVerifier{
             if (i instanceof JsrInstruction){
                 InstructionHandle target = ((JsrInstruction) i).getTarget();
                 if (target == instructionList.getStart()){
-                    throw new StaticCodeInstructionOperandConstraintException("Due to JustIce's clear definition of subroutines, no JSR or JSR_W may have a top-level instruction (such as the very first instruction, which is targeted by instruction '"+ih+"' as its target.");
+                    throw new StaticCodeInstructionOperandConstraintException(
+                        "Due to JustIce's clear definition of subroutines, no JSR or JSR_W may have a top-level instruction"+
+                        " (such as the very first instruction, which is targeted by instruction '"+ih+"' as its target.");
                 }
                 if (!(target.getInstruction() instanceof ASTORE)){
-                    throw new StaticCodeInstructionOperandConstraintException("Due to JustIce's clear definition of subroutines, no JSR or JSR_W may target anything else than an ASTORE instruction. Instruction '"+ih+"' targets '"+target+"'.");
+                    throw new StaticCodeInstructionOperandConstraintException(
+                        "Due to JustIce's clear definition of subroutines, no JSR or JSR_W may target anything else"+
+                        " than an ASTORE instruction. Instruction '"+ih+"' targets '"+target+"'.");
                 }
             }
 
@@ -496,7 +523,8 @@ public final class Pass3aVerifier extends PassVerifier{
                 Verifier v = VerifierFactory.getVerifier(t.getClassName());
                 VerificationResult vr = v.doPass1();
                 if (vr.getStatus() != VerificationResult.VERIFIED_OK){
-                    constraintViolated((Instruction) o, "Class '"+o.getLoadClassType(cpg).getClassName()+"' is referenced, but cannot be loaded: '"+vr+"'.");
+                    constraintViolated((Instruction) o,
+                        "Class '"+o.getLoadClassType(cpg).getClassName()+"' is referenced, but cannot be loaded: '"+vr+"'.");
                 }
             }
         }
@@ -521,7 +549,8 @@ public final class Pass3aVerifier extends PassVerifier{
               if (! ( (c instanceof ConstantInteger)    ||
                       (c instanceof ConstantFloat)         ||
                 (c instanceof ConstantString) ) ){
-            constraintViolated(o, "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float or CONSTANT_String, but is '"+c+"'.");
+            constraintViolated(o,
+                "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float or CONSTANT_String, but is '"+c+"'.");
               }
             }
         }
@@ -616,7 +645,8 @@ public final class Pass3aVerifier extends PassVerifier{
                 // Argh. Sun's implementation allows us to have multiple fields of
                 // the same name but with a different signature.
                 //if (! f_type.equals(o_type)){
-                //    constraintViolated(o, "Referenced field '"+field_name+"' has type '"+f_type+"' instead of '"+o_type+"' as expected.");
+                //    constraintViolated(o,
+                //        "Referenced field '"+field_name+"' has type '"+f_type+"' instead of '"+o_type+"' as expected.");
                 //}
 
                 /* TODO: Check for access modifiers here. */
@@ -646,7 +676,9 @@ public final class Pass3aVerifier extends PassVerifier{
                         constraintViolated(o, "Only INVOKESPECIAL is allowed to invoke instance initialization methods.");
                     }
                     if ( (! (cutf8.getBytes().equals(Constants.CONSTRUCTOR_NAME)) ) && (cutf8.getBytes().startsWith("<")) ){
-                        constraintViolated(o, "No method with a name beginning with '<' other than the instance initialization methods may be called by the method invocation instructions.");
+                        constraintViolated(o,
+                            "No method with a name beginning with '<' other than the instance initialization methods"+
+                            " may be called by the method invocation instructions.");
                     }
                 }
             }
@@ -661,7 +693,8 @@ public final class Pass3aVerifier extends PassVerifier{
                 // By now, BCEL hides those two operands because they're superfluous.
 
                 // Invoked method must not be <init> or <clinit>
-                ConstantNameAndType cnat = (ConstantNameAndType) (cpg.getConstant(((ConstantInterfaceMethodref)c).getNameAndTypeIndex()));
+                ConstantNameAndType cnat =
+                        (ConstantNameAndType) (cpg.getConstant(((ConstantInterfaceMethodref)c).getNameAndTypeIndex()));
                 String name = ((ConstantUtf8) (cpg.getConstant(cnat.getNameIndex()))).getBytes();
                 if (name.equals(Constants.CONSTRUCTOR_NAME)){
                     constraintViolated(o, "Method to invoke must not be '"+Constants.CONSTRUCTOR_NAME+"'.");
@@ -695,7 +728,8 @@ public final class Pass3aVerifier extends PassVerifier{
                     Verifier v = VerifierFactory.getVerifier(((ObjectType) t).getClassName());
                     VerificationResult vr = v.doPass2();
                     if (vr.getStatus() != VerificationResult.VERIFIED_OK){
-                        constraintViolated(o, "Argument type class/interface could not be verified successfully: '"+vr.getMessage()+"'.");
+                        constraintViolated(o,
+                            "Argument type class/interface could not be verified successfully: '"+vr.getMessage()+"'.");
                     }
                 }
             }
@@ -756,11 +790,14 @@ public final class Pass3aVerifier extends PassVerifier{
             if (t instanceof ArrayType){
                 int dimensions = ((ArrayType) t).getDimensions();
                 if (dimensions < dimensions2create){
-                    constraintViolated(o, "Not allowed to create array with more dimensions ('+dimensions2create+') than the one referenced by the CONSTANT_Class '"+t+"'.");
+                    constraintViolated(o,
+                        "Not allowed to create array with more dimensions ('"+dimensions2create+
+                        "') than the one referenced by the CONSTANT_Class '"+t+"'.");
                 }
             }
             else{
-                constraintViolated(o, "Expecting a CONSTANT_Class referencing an array type. [Constraint not found in The Java Virtual Machine Specification, Second Edition, 4.8.1]");
+                constraintViolated(o, "Expecting a CONSTANT_Class referencing an array type."+
+                    " [Constraint not found in The Java Virtual Machine Specification, Second Edition, 4.8.1]");
             }
         }
 
@@ -922,7 +959,8 @@ public final class Pass3aVerifier extends PassVerifier{
         public void visitLLOAD(LLOAD o){
             int idx = o.getIndex();
             if (idx < 0){
-                constraintViolated(o, "Index '"+idx+"' must be non-negative. [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
+                constraintViolated(o, "Index '"+idx+"' must be non-negative."+
+                    " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             }
             else{
                 int maxminus2 =  max_locals()-2;
@@ -937,7 +975,8 @@ public final class Pass3aVerifier extends PassVerifier{
         public void visitDLOAD(DLOAD o){
             int idx = o.getIndex();
             if (idx < 0){
-                constraintViolated(o, "Index '"+idx+"' must be non-negative. [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
+                constraintViolated(o, "Index '"+idx+"' must be non-negative."+
+                    " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             }
             else{
                 int maxminus2 =  max_locals()-2;
@@ -952,7 +991,8 @@ public final class Pass3aVerifier extends PassVerifier{
         public void visitLSTORE(LSTORE o){
             int idx = o.getIndex();
             if (idx < 0){
-                constraintViolated(o, "Index '"+idx+"' must be non-negative. [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
+                constraintViolated(o, "Index '"+idx+"' must be non-negative."+
+                    " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             }
             else{
                 int maxminus2 =  max_locals()-2;
@@ -967,7 +1007,8 @@ public final class Pass3aVerifier extends PassVerifier{
         public void visitDSTORE(DSTORE o){
             int idx = o.getIndex();
             if (idx < 0){
-                constraintViolated(o, "Index '"+idx+"' must be non-negative. [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
+                constraintViolated(o, "Index '"+idx+"' must be non-negative."+
+                    " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             }
             else{
                 int maxminus2 =  max_locals()-2;
@@ -1022,8 +1063,9 @@ public final class Pass3aVerifier extends PassVerifier{
 
             if (f.isFinal()){
                 if (!(myOwner.getClassName().equals(getObjectType(o).getClassName()))){
-                    constraintViolated(o, "Referenced field '"+f+"' is final and must therefore be declared in the current class '"+myOwner.getClassName()
-                    +"' which is not the case: it is declared in '"+o.getReferenceType(cpg)+"'.");
+                    constraintViolated(o,
+                        "Referenced field '"+f+"' is final and must therefore be declared in the current class '"+
+                            myOwner.getClassName()+"' which is not the case: it is declared in '"+o.getReferenceType(cpg)+"'.");
                 }
             }
 
@@ -1098,7 +1140,8 @@ public final class Pass3aVerifier extends PassVerifier{
             JavaClass jc = Repository.lookupClass(classname);
             Method m = getMethodRecursive(jc, o);
             if (m == null){
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+
+                    "' not found in class '"+jc.getClassName()+"'.");
             }
             if (jc.isClass()){
                 constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is a class, but not an interface as expected.");
@@ -1110,7 +1153,8 @@ public final class Pass3aVerifier extends PassVerifier{
         }
 
         /**
-         * Looks for the method referenced by the given invoke instruction in the given class or its super classes and super interfaces.
+         * Looks for the method referenced by the given invoke instruction in the given class
+         * or its super classes and super interfaces.
          * @param jc the class that defines the referenced method
          * @param invoke the instruction that references the method
          * @return the referenced method or null if not found.
@@ -1173,7 +1217,8 @@ public final class Pass3aVerifier extends PassVerifier{
             JavaClass jc = Repository.lookupClass(classname);
             Method m = getMethodRecursive(jc, o);
             if (m == null){
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)
+                    +"' not found in class '"+jc.getClassName()+"'.");
             }
 
             JavaClass current = Repository.lookupClass(myOwner.getClassName());
@@ -1205,7 +1250,8 @@ public final class Pass3aVerifier extends PassVerifier{
                             }
                         }
                         if (meth == null){
-                            constraintViolated(o, "ACC_SUPER special lookup procedure not successful: method '"+o.getMethodName(cpg)+"' with proper signature not declared in superclass hierarchy.");
+                            constraintViolated(o, "ACC_SUPER special lookup procedure not successful: method '"+
+                                o.getMethodName(cpg)+"' with proper signature not declared in superclass hierarchy.");
                         }                        
                     }
                 }
@@ -1230,7 +1276,8 @@ public final class Pass3aVerifier extends PassVerifier{
             JavaClass jc = Repository.lookupClass(classname);
             Method m = getMethodRecursive(jc, o);
             if (m == null){
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg) +"' not found in class '"+jc.getClassName()+"'.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+
+                    o.getSignature(cpg) +"' not found in class '"+jc.getClassName()+"'.");
             } else if (! (m.isStatic())){ // implies it's not abstract, verified in pass 2.
                 constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' has ACC_STATIC unset.");
             }
@@ -1254,7 +1301,8 @@ public final class Pass3aVerifier extends PassVerifier{
             JavaClass jc = Repository.lookupClass(classname);
             Method m = getMethodRecursive(jc, o);
             if (m == null){
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+
+                    o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'.");
             }
             if (! (jc.isClass())){
                 constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is an interface, but not a class as expected.");

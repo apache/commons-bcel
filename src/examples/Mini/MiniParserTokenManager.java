@@ -593,7 +593,9 @@ static protected char curChar;
 public MiniParserTokenManager(ASCII_CharStream stream)
 {
    if (input_stream != null) {
-    throw new TokenMgrError("ERROR: Second call to constructor of static lexer. You must use ReInit() to initialize the static variables.", TokenMgrError.STATIC_LEXER_ERROR);
+    throw new TokenMgrError(
+        "ERROR: Second call to constructor of static lexer. You must use ReInit() to initialize the static variables.",
+        TokenMgrError.STATIC_LEXER_ERROR);
 }
    input_stream = stream;
 }
@@ -625,7 +627,8 @@ static public void ReInit(ASCII_CharStream stream, int lexState)
 static public void SwitchTo(int lexState)
 {
    if (lexState >= 2 || lexState < 0) {
-    throw new TokenMgrError("Error: Ignoring invalid lexical state : " + lexState + ". State unchanged.", TokenMgrError.INVALID_LEXICAL_STATE);
+    throw new TokenMgrError("Error: Ignoring invalid lexical state : " + lexState + ". State unchanged.",
+        TokenMgrError.INVALID_LEXICAL_STATE);
 } else {
     curLexState = lexState;
 }

@@ -36,7 +36,7 @@ limitations under the License.
 
   <!-- Checks for white space at the end of the line -->
   <!-- See http://checkstyle.sourceforge.net/config_regexp.html -->
-  <!--
+  <!-- 706
   <module name="RegexpSingleline">
     <property name="format" value="\s+$" />
     <property name="message" value="Line has trailing spaces." />
@@ -55,10 +55,10 @@ limitations under the License.
   <module name="TreeWalker">
     <property name="cacheFile" value="target/cachefile" />
     <!-- 
+     -->
     <module name="LineLength">
       <property name="max" value="135"/>
     </module>
-     -->
  
     <!-- Checks for Naming Conventions.                  -->
     <!-- See http://checkstyle.sf.net/config_naming.html -->
@@ -174,6 +174,10 @@ limitations under the License.
   </module>
 
   <module name="SuppressionCommentFilter"/>
+
+  <module name="SuppressionFilter">
+    <property name="file" value="checkstyle_suppressions.xml"/>
+  </module>
 
 </module>
 

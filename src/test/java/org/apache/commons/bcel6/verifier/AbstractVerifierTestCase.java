@@ -42,7 +42,8 @@ public abstract class AbstractVerifierTestCase extends TestCase {
     }
 
     /**
-     * Asserts that the verification of the given class is rejected. If it isn't it throws an AssertionFailedError with the given message.
+     * Asserts that the verification of the given class is rejected.
+     * If it isn't it throws an AssertionFailedError with the given message.
      *
      * @param classname simple classname of the class to verify
      * @param message   message displayed if assertion fails

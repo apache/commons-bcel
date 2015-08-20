@@ -30,13 +30,16 @@ public class VerifierArrayAccessTestCase extends AbstractVerifierTestCase {
         new TestArrayAccess03Creator().create();
         assertVerifyRejected("TestArrayAccess03", "Verification of an arraystore instruction on an object must fail.");
         new TestArrayAccess04Creator().create();
-        assertVerifyRejected("TestArrayAccess04", "Verification of an arraystore instruction of an int on an array of references must fail.");
+        assertVerifyRejected("TestArrayAccess04",
+                "Verification of an arraystore instruction of an int on an array of references must fail.");
     }
 
     public void testValidArrayAccess() throws IOException {
-        assertVerifyOK("TestArrayAccess01", "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");
+        assertVerifyOK("TestArrayAccess01",
+                "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");
         new TestArrayAccess02Creator().create();
-        assertVerifyOK("TestArrayAccess02", "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");
+        assertVerifyOK("TestArrayAccess02", 
+                "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");
     }
     
 }

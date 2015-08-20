@@ -126,12 +126,14 @@ public final class Pass3bVerifier extends PassVerifier{
    * The proof of termination is about the existence of a
    * fix point of frame merging.
      */
-    private void circulationPump(MethodGen m,ControlFlowGraph cfg, InstructionContext start, Frame vanillaFrame, InstConstraintVisitor icv, ExecutionVisitor ev){
+    private void circulationPump(MethodGen m,ControlFlowGraph cfg, InstructionContext start,
+            Frame vanillaFrame, InstConstraintVisitor icv, ExecutionVisitor ev){
         final Random random = new Random();
         InstructionContextQueue icq = new InstructionContextQueue();
 
-        start.execute(vanillaFrame, new ArrayList<InstructionContext>(), icv, ev);    // new ArrayList() <=>    no Instruction was executed before
-                                                                                                    //                                    => Top-Level routine (no jsr call before)
+        start.execute(vanillaFrame, new ArrayList<InstructionContext>(), icv, ev);
+        // new ArrayList() <=>    no Instruction was executed before
+        //                                    => Top-Level routine (no jsr call before)
         icq.add(start, new ArrayList<InstructionContext>());
 
         // LOOP!
@@ -188,7 +190,8 @@ public final class Pass3bVerifier extends PassVerifier{
                 }
                 JsrInstruction jsr = (JsrInstruction) (lastJSR.getInstruction().getInstruction());
                 if ( theSuccessor != (cfg.contextOf(jsr.physicalSuccessor())) ){
-                    throw new AssertionViolatedException("RET '"+u.getInstruction()+"' info inconsistent: jump back to '"+theSuccessor+"' or '"+cfg.contextOf(jsr.physicalSuccessor())+"'?");
+                    throw new AssertionViolatedException("RET '"+u.getInstruction()+"' info inconsistent: jump back to '"+
+                        theSuccessor+"' or '"+cfg.contextOf(jsr.physicalSuccessor())+"'?");
                 }
 
                 if (theSuccessor.execute(u.getOutFrame(oldchain), newchain, icv, ev)){
@@ -223,9 +226,14 @@ public final class Pass3bVerifier extends PassVerifier{
                 // mean we're in a subroutine if we go to the exception handler.
                 // We should address this problem later; by now we simply "cut" the chain
                 // by using an empty chain for the exception handlers.
-                //if (v.execute(new Frame(u.getOutFrame(oldchain).getLocals(), new OperandStack (u.getOutFrame().getStack().maxStack(), (exc_hds[s].getExceptionType()==null? Type.THROWABLE : exc_hds[s].getExceptionType())) ), newchain), icv, ev){
+                //if (v.execute(new Frame(u.getOutFrame(oldchain).getLocals(),
+                // new OperandStack (u.getOutFrame().getStack().maxStack(),
+                // (exc_hds[s].getExceptionType()==null? Type.THROWABLE : exc_hds[s].getExceptionType())) ), newchain), icv, ev){
                     //icq.add(v, (ArrayList) newchain.clone());
-                if (v.execute(new Frame(u.getOutFrame(oldchain).getLocals(), new OperandStack (u.getOutFrame(oldchain).getStack().maxStack(), (exc_hd.getExceptionType()==null? Type.THROWABLE : exc_hd.getExceptionType())) ), new ArrayList<InstructionContext>(), icv, ev)){
+                if (v.execute(new Frame(u.getOutFrame(oldchain).getLocals(),
+                        new OperandStack (u.getOutFrame(oldchain).getStack().maxStack(),
+                        (exc_hd.getExceptionType()==null? Type.THROWABLE : exc_hd.getExceptionType())) ),
+                        new ArrayList<InstructionContext>(), icv, ev)){
                     icq.add(v, new ArrayList<InstructionContext>());
                 }
             }
@@ -236,17 +244,21 @@ public final class Pass3bVerifier extends PassVerifier{
         do{
             if ((ih.getInstruction() instanceof ReturnInstruction) && (!(cfg.isDead(ih)))) {
                 InstructionContext ic = cfg.contextOf(ih);
-                Frame f = ic.getOutFrame(new ArrayList<InstructionContext>()); // TODO: This is buggy, we check only the top-level return instructions this way. Maybe some maniac returns from a method when in a subroutine?
+                // TODO: This is buggy, we check only the top-level return instructions this way.
+                // Maybe some maniac returns from a method when in a subroutine?
+                Frame f = ic.getOutFrame(new ArrayList<InstructionContext>());
                 LocalVariables lvs = f.getLocals();
                 for (int i=0; i<lvs.maxLocals(); i++){
                     if (lvs.get(i) instanceof UninitializedObjectType){
-                        this.addMessage("Warning: ReturnInstruction '"+ic+"' may leave method with an uninitialized object in the local variables array '"+lvs+"'.");
+                        this.addMessage("Warning: ReturnInstruction '"+ic+
+                            "' may leave method with an uninitialized object in the local variables array '"+lvs+"'.");
                     }
                 }
                 OperandStack os = f.getStack();
                 for (int i=0; i<os.size(); i++){
                     if (os.peek(i) instanceof UninitializedObjectType){
-                        this.addMessage("Warning: ReturnInstruction '"+ic+"' may leave method with an uninitialized object on the operand stack '"+os+"'.");
+                        this.addMessage("Warning: ReturnInstruction '"+ic+
+                            "' may leave method with an uninitialized object on the operand stack '"+os+"'.");
                     }
                 }
                 //see JVM $4.8.2
@@ -283,7 +295,8 @@ public final class Pass3bVerifier extends PassVerifier{
      * @since 6.0
      */
     public void invalidReturnTypeError(Type returnedType, MethodGen m){
-        throw new StructuralCodeConstraintException("Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
+        throw new StructuralCodeConstraintException(
+            "Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
     }
 
     /**
@@ -348,7 +361,8 @@ public final class Pass3bVerifier extends PassVerifier{
                 Type[] argtypes = mg.getArgumentTypes();
                 int twoslotoffset = 0;
                 for (int j=0; j<argtypes.length; j++){
-                    if (argtypes[j] == Type.SHORT || argtypes[j] == Type.BYTE || argtypes[j] == Type.CHAR || argtypes[j] == Type.BOOLEAN){
+                    if (argtypes[j] == Type.SHORT || argtypes[j] == Type.BYTE ||
+                        argtypes[j] == Type.CHAR || argtypes[j] == Type.BOOLEAN){
                         argtypes[j] = Type.INT;
                     }
                     f.getLocals().set(twoslotoffset + j + (mg.isStatic()?0:1), argtypes[j]);
@@ -371,7 +385,8 @@ public final class Pass3bVerifier extends PassVerifier{
             PrintWriter pw = new PrintWriter(sw);
             re.printStackTrace(pw);
 
-            throw new AssertionViolatedException("Some RuntimeException occured while verify()ing class '"+jc.getClassName()+"', method '"+methods[method_no]+"'. Original RuntimeException's stack trace:\n---\n"+sw+"---\n", re);
+            throw new AssertionViolatedException("Some RuntimeException occured while verify()ing class '"+jc.getClassName()+
+                "', method '"+methods[method_no]+"'. Original RuntimeException's stack trace:\n---\n"+sw+"---\n", re);
         }
         return VerificationResult.VR_OK;
     }

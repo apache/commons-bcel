@@ -115,7 +115,8 @@ public class Subroutines{
          */
         @Override
         public String toString(){
-            String ret = "Subroutine: Local variable is '"+localVariable+"', JSRs are '"+theJSRs+"', RET is '"+theRET+"', Instructions: '"+instructions+"'.";
+            String ret = "Subroutine: Local variable is '"+localVariable+
+                        "', JSRs are '"+theJSRs+"', RET is '"+theRET+"', Instructions: '"+instructions+"'.";
 
             ret += " Accessed local variable slots: '";
             int[] alv = getAccessedLocalsIndices();
@@ -140,13 +141,15 @@ public class Subroutines{
          */
         void setLeavingRET(){
             if (localVariable == UNSET){
-                throw new AssertionViolatedException("setLeavingRET() called for top-level 'subroutine' or forgot to set local variable first.");
+                throw new AssertionViolatedException(
+                    "setLeavingRET() called for top-level 'subroutine' or forgot to set local variable first.");
             }
             InstructionHandle ret = null;
             for (InstructionHandle actual : instructions) {
                 if (actual.getInstruction() instanceof RET){
                     if (ret != null){
-                        throw new StructuralCodeConstraintException("Subroutine with more then one RET detected: '"+ret+"' and '"+actual+"'.");
+                        throw new StructuralCodeConstraintException(
+                            "Subroutine with more then one RET detected: '"+ret+"' and '"+actual+"'.");
                     }
                     ret = actual;
                 }
@@ -155,7 +158,8 @@ public class Subroutines{
                 throw new StructuralCodeConstraintException("Subroutine without a RET detected.");
             }
             if (((RET) ret.getInstruction()).getIndex() != localVariable){
-                throw new StructuralCodeConstraintException("Subroutine uses '"+ret+"' which does not match the correct local variable '"+localVariable+"'.");
+                throw new StructuralCodeConstraintException(
+                    "Subroutine uses '"+ret+"' which does not match the correct local variable '"+localVariable+"'.");
             }
             theRET = ret;
         }
@@ -265,7 +269,8 @@ public class Subroutines{
             //TODO: Implement caching.
             Set<Integer> acc = new HashSet<>();
             if (theRET == null && this != getTopLevel()){
-                throw new AssertionViolatedException("This subroutine object must be built up completely before calculating accessed locals.");
+                throw new AssertionViolatedException(
+                    "This subroutine object must be built up completely before calculating accessed locals.");
             }
             {
                 for (InstructionHandle ih : instructions) {
@@ -411,7 +416,8 @@ public class Subroutines{
 
         // Now do a BFS from every subroutine leader to find all the
         // instructions that belong to a subroutine.
-        Set<InstructionHandle> instructions_assigned = new HashSet<>(); // we don't want to assign an instruction to two or more Subroutine objects.
+        // we don't want to assign an instruction to two or more Subroutine objects.
+        Set<InstructionHandle> instructions_assigned = new HashSet<>();
 
         Map<InstructionHandle, Integer> colors = new HashMap<>(); //Graph colouring. Key: InstructionHandle, Value: Integer .
 
@@ -428,7 +434,12 @@ public class Subroutines{
             Q.clear();
             Q.add(actual); // add(Obj) adds to the end, remove(0) removes from the start.
 
-            /* BFS ALGORITHM MODIFICATION: Start out with multiple "root" nodes, as exception handlers are starting points of top-level code, too. [why top-level? TODO: Refer to the special JustIce notion of subroutines.]*/
+            /*
+             * BFS ALGORITHM MODIFICATION:
+             * Start out with multiple "root" nodes, as exception handlers are starting points of top-level code, too.
+             * [why top-level?
+             * TODO: Refer to the special JustIce notion of subroutines.]
+             */
             if (actual == all[0]){
                 for (CodeExceptionGen handler : handlers) {
                     colors.put(handler.getHandlerPC(), GRAY);
@@ -454,7 +465,8 @@ public class Subroutines{
                 if (colors.get(element) == BLACK){
                     ((SubroutineImpl) (actual==all[0]?getTopLevel():getSubroutine(actual))).addInstruction(element);
                     if (instructions_assigned.contains(element)){
-                        throw new StructuralCodeConstraintException("Instruction '"+element+"' is part of more than one subroutine (or of the top level and a subroutine).");
+                        throw new StructuralCodeConstraintException("Instruction '"+element+
+                            "' is part of more than one subroutine (or of the top level and a subroutine).");
                     }
                     instructions_assigned.add(element);
                 }
@@ -468,11 +480,14 @@ public class Subroutines{
         // as is mandated by JustIces notion of subroutines.
         for (CodeExceptionGen handler : handlers) {
             InstructionHandle _protected = handler.getStartPC();
-            while (_protected != handler.getEndPC().getNext()){// Note the inclusive/inclusive notation of "generic API" exception handlers!
+            while (_protected != handler.getEndPC().getNext()){
+                // Note the inclusive/inclusive notation of "generic API" exception handlers!
                 for (Subroutine sub : subroutines.values()) {
                     if (sub != subroutines.get(all[0])){    // We don't want to forbid top-level exception handlers.
                         if (sub.contains(_protected)){
-                            throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+"' is protected by an exception handler, '"+handler+"'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
+                            throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+
+                                "' is protected by an exception handler, '"+handler+
+                                "'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
                         }
                     }
                 }
@@ -510,7 +525,10 @@ public class Subroutines{
             if (!set.add(Integer.valueOf(index))){
                 // Don't use toString() here because of possibly infinite recursive subSubs() calls then.
                 SubroutineImpl si = (SubroutineImpl) sub2;
-                throw new StructuralCodeConstraintException("Subroutine with local variable '"+si.localVariable+"', JSRs '"+si.theJSRs+"', RET '"+si.theRET+"' is called by a subroutine which uses the same local variable index as itself; maybe even a recursive call? JustIce's clean definition of a subroutine forbids both.");
+                throw new StructuralCodeConstraintException("Subroutine with local variable '"+si.localVariable+"', JSRs '"+
+                si.theJSRs+"', RET '"+si.theRET+
+                "' is called by a subroutine which uses the same local variable index as itself; maybe even a recursive call?"+
+                " JustIce's clean definition of a subroutine forbids both.");
             }
 
             noRecursiveCalls(sub2, set);
@@ -531,7 +549,8 @@ public class Subroutines{
         Subroutine ret = subroutines.get(leader);
 
         if (ret == null){
-            throw new AssertionViolatedException("Subroutine requested for an InstructionHandle that is not a leader of a subroutine.");
+            throw new AssertionViolatedException(
+                "Subroutine requested for an InstructionHandle that is not a leader of a subroutine.");
         }
 
         if (ret == TOPLEVEL){

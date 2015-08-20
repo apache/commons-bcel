@@ -72,7 +72,8 @@ public interface InstructionContext{
      * @return true -  if and only if the "outgoing" frame situation
      * changed from the one before execute()ing.
      */
-    boolean execute(Frame inFrame, ArrayList<InstructionContext> executionPredecessors, InstConstraintVisitor icv, ExecutionVisitor ev);
+    boolean execute(Frame inFrame, ArrayList<InstructionContext> executionPredecessors,
+            InstConstraintVisitor icv, ExecutionVisitor ev);
 
     Frame getInFrame();
 

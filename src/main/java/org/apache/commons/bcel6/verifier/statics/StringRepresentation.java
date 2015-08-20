@@ -99,7 +99,8 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
 // If some new "Node" is defined in BCEL (such as some concrete "Attribute"), we
 // want to know that this class has also to be adapted.
         if (tostring == null) {
-            throw new AssertionViolatedException("Please adapt '" + getClass() + "' to deal with objects of class '" + n.getClass() + "'.");
+            throw new AssertionViolatedException(
+                "Please adapt '" + getClass() + "' to deal with objects of class '" + n.getClass() + "'.");
         }
         return tostring;
     }
@@ -114,7 +115,10 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
         try {
             ret = obj.toString();
         }
-        catch (RuntimeException e) { // including ClassFormatException, trying to convert the "signature" of a ReturnaddressType LocalVariable (shouldn't occur, but people do crazy things)
+        
+        catch (RuntimeException e) {
+            // including ClassFormatException, trying to convert the "signature" of a ReturnaddressType LocalVariable
+            // (shouldn't occur, but people do crazy things)
             String s = obj.getClass().getName();
             s = s.substring(s.lastIndexOf(".") + 1);
             ret = "<<" + s + ">>";

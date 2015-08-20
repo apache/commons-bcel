@@ -250,11 +250,13 @@ public class AnnotationEntryGen {
             List<Attribute> newAttributes = new ArrayList<>();
             if (rvaData.length > 2) {
                 newAttributes.add(
-                        new RuntimeVisibleAnnotations(rvaIndex, rvaData.length, new DataInputStream(new ByteArrayInputStream(rvaData)), cp.getConstantPool()));
+                        new RuntimeVisibleAnnotations(rvaIndex, rvaData.length,
+                            new DataInputStream(new ByteArrayInputStream(rvaData)), cp.getConstantPool()));
             }
             if (riaData.length > 2) {
                 newAttributes.add(
-                        new RuntimeInvisibleAnnotations(riaIndex, riaData.length, new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
+                        new RuntimeInvisibleAnnotations(riaIndex, riaData.length,
+                            new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
             }
 
             return newAttributes.toArray(new Attribute[newAttributes.size()]);

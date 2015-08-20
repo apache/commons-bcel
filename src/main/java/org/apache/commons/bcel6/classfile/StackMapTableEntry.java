@@ -53,7 +53,8 @@ public final class StackMapTableEntry implements Cloneable {
 
         if (frame_type >= Constants.SAME_FRAME && frame_type <= Constants.SAME_FRAME_MAX) {
             byte_code_offset = frame_type - Constants.SAME_FRAME;
-        } else if (frame_type >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME && frame_type <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
+        } else if (frame_type >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME && 
+                   frame_type <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             byte_code_offset = frame_type - Constants.SAME_LOCALS_1_STACK_ITEM_FRAME;
             types_of_stack_items = new StackMapType[1];
             types_of_stack_items[0] = new StackMapType(input, constant_pool);
@@ -112,7 +113,8 @@ public final class StackMapTableEntry implements Cloneable {
         file.write(frame_type);
         if (frame_type >= Constants.SAME_FRAME && frame_type <= Constants.SAME_FRAME_MAX) {
             // nothing to be done
-        } else if (frame_type >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME && frame_type <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
+        } else if (frame_type >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME &&
+                   frame_type <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             types_of_stack_items[0].dump(file);
         } else if (frame_type == Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             file.writeShort(byte_code_offset);
@@ -152,7 +154,8 @@ public final class StackMapTableEntry implements Cloneable {
         buf.append("(");
         if (frame_type >= Constants.SAME_FRAME && frame_type <= Constants.SAME_FRAME_MAX) {
             buf.append("SAME");
-        } else if (frame_type >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME && frame_type <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
+        } else if (frame_type >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME &&
+                  frame_type <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             buf.append("SAME_LOCALS_1_STACK");
         } else if (frame_type == Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             buf.append("SAME_LOCALS_1_STACK_EXTENDED");

@@ -39,7 +39,8 @@ public class TestArrayAccess03Creator extends TestCreator {
   private final ClassGen           _cg;
 
   public TestArrayAccess03Creator() {
-    _cg = new ClassGen(TEST_PACKAGE+".TestArrayAccess03", "java.lang.Object", "TestArrayAccess03.java", Constants.ACC_PUBLIC | Constants.ACC_SUPER, new String[] {  });
+    _cg = new ClassGen(TEST_PACKAGE+".TestArrayAccess03", "java.lang.Object", "TestArrayAccess03.java",
+            Constants.ACC_PUBLIC | Constants.ACC_SUPER, new String[] {  });
 
     _cp = _cg.getConstantPool();
     _factory = new InstructionFactory(_cg, _cp);
@@ -54,7 +55,8 @@ public void create(OutputStream out) throws IOException {
 
   private void createMethod_0() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(Constants.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>", TEST_PACKAGE+".TestArrayAccess03", il, _cp);
+    MethodGen method = new MethodGen(Constants.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>",
+            TEST_PACKAGE+".TestArrayAccess03", il, _cp);
 
     InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
     Assert.assertNotNull(ih_0); // TODO why is this not used
@@ -69,7 +71,8 @@ public void create(OutputStream out) throws IOException {
 
   private void createMethod_1() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(Constants.ACC_PUBLIC | Constants.ACC_STATIC, Type.VOID, new Type[] { Type.OBJECT }, new String[] { "arg0" }, "test", TEST_PACKAGE+".TestArrayAccess03", il, _cp);
+    MethodGen method = new MethodGen(Constants.ACC_PUBLIC | Constants.ACC_STATIC, Type.VOID, new Type[] { Type.OBJECT },
+            new String[] { "arg0" }, "test", TEST_PACKAGE+".TestArrayAccess03", il, _cp);
 
     InstructionHandle ih_0 = il.append(new PUSH(_cp, 1));
     Assert.assertNotNull(ih_0); // TODO why is this not used

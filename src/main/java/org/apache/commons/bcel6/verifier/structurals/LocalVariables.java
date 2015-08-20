@@ -142,11 +142,14 @@ public class LocalVariables{
         // We won't accept an unitialized object if we know it was initialized;
         // compare vmspec2, 4.9.4, last paragraph.
         if ( (!(locals[i] instanceof UninitializedObjectType)) && (lv.locals[i] instanceof UninitializedObjectType) ){
-            throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object in the local variables detected.");
+            throw new StructuralCodeConstraintException(
+                "Backwards branch with an uninitialized object in the local variables detected.");
         }
         // Even harder, what about _different_ uninitialized object types?!
-        if ( (!(locals[i].equals(lv.locals[i]))) && (locals[i] instanceof UninitializedObjectType) && (lv.locals[i] instanceof UninitializedObjectType) ){
-            throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object in the local variables detected.");
+        if ( (!(locals[i].equals(lv.locals[i]))) && (locals[i] instanceof UninitializedObjectType) &&
+                (lv.locals[i] instanceof UninitializedObjectType) ){
+            throw new StructuralCodeConstraintException(
+                "Backwards branch with an uninitialized object in the local variables detected.");
         }
         // If we just didn't know that it was initialized, we have now learned.
         if (locals[i] instanceof UninitializedObjectType){
@@ -163,14 +166,16 @@ public class LocalVariables{
                 }
                 else{
                     // We should have checked this in Pass2!
-                    throw new AssertionViolatedException("Could not load all the super classes of '"+locals[i]+"' and '"+lv.locals[i]+"'.");
+                    throw new AssertionViolatedException(
+                        "Could not load all the super classes of '"+locals[i]+"' and '"+lv.locals[i]+"'.");
                 }
             }
         }
         else{
             if (! (locals[i].equals(lv.locals[i])) ){
 /*TODO
-                if ((locals[i] instanceof org.apache.commons.bcel6.generic.ReturnaddressType) && (lv.locals[i] instanceof org.apache.commons.bcel6.generic.ReturnaddressType)){
+                if ((locals[i] instanceof org.apache.commons.bcel6.generic.ReturnaddressType) &&
+                    (lv.locals[i] instanceof org.apache.commons.bcel6.generic.ReturnaddressType)){
                     //System.err.println("merging "+locals[i]+" and "+lv.locals[i]);
                     throw new AssertionViolatedException("Merging different ReturnAddresses: '"+locals[i]+"' and '"+lv.locals[i]+"'.");
                 }

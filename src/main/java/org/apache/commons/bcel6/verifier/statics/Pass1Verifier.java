@@ -48,7 +48,10 @@ public final class Pass1Verifier extends PassVerifier{
      */
     private final Verifier myOwner;
 
-    /** Used to load in and return the myOwner-matching JavaClass object when needed. Avoids loading in a class file when it's not really needed! */
+    /** 
+     * Used to load in and return the myOwner-matching JavaClass object when needed.
+     * Avoids loading in a class file when it's not really needed!
+     */
     private JavaClass getJavaClass(){
         if (jc == null){
             try {
@@ -99,9 +102,14 @@ public final class Pass1Verifier extends PassVerifier{
      *   <LI> there are exactly interfaces_count many entries in the interfaces array of the class file.
      *   <LI> there are exactly fields_count many entries in the fields array of the class file.
      *   <LI> there are exactly methods_count many entries in the methods array of the class file.
-     *   <LI> there are exactly attributes_count many entries in the attributes array of the class file, fields, methods, and code attribute.
-     *   <LI> there should be exactly attribute_length many bytes in each attribute. Inconsistency between attribute_length and the actually size of the attribute content should be uncovered. For example, in an Exceptions attribute, the actual number of exceptions as required by the number_of_exceptions field might yeild an attribute size that doesn't match the attribute_length. Such an anomaly should be detected.
-     *   <LI> all attributes should have proper length. In particular, under certain context (e.g. while parsing method_info), recognizable attributes (e.g. "Code" attribute) should have correct format (e.g. attribute_length is 2).
+     *   <LI> there are exactly attributes_count many entries in the attributes array of the class file,
+     *        fields, methods, and code attribute.
+     *   <LI> there should be exactly attribute_length many bytes in each attribute.
+     *        Inconsistency between attribute_length and the actually size of the attribute content should be uncovered.
+     *        For example, in an Exceptions attribute, the actual number of exceptions as required by the number_of_exceptions field
+     *        might yeild an attribute size that doesn't match the attribute_length. Such an anomaly should be detected.
+     *   <LI> all attributes should have proper length. In particular, under certain context (e.g. while parsing method_info),
+     *        recognizable attributes (e.g. "Code" attribute) should have correct format (e.g. attribute_length is 2).
      *  </UL>
      *  <LI> Also, certain constant values are checked for validity:
      *  <UL>
@@ -109,9 +117,12 @@ public final class Pass1Verifier extends PassVerifier{
      *   <LI> The major and minor version numbers are valid.
      *   <LI> All the constant pool type tags are recognizable.
      *   <LI> All undocumented access flags are masked off before use. Strictly speaking, this is not really a check.
-     *   <LI> The field this_class should point to a string that represents a legal non-array class name, and this name should be the same as the class file being loaded.
+     *   <LI> The field this_class should point to a string that represents a legal non-array class name,
+     *        and this name should be the same as the class file being loaded.
      *   <LI> the field super_class should point to a string that represents a legal non-array class name.
-     *   <LI> Because some of the above checks require cross referencing the constant pool entries, guards are set up to make sure that the referenced entries are of the right type and the indices are within the legal range (0 &lt; index &lt; constant_pool_count).
+     *   <LI> Because some of the above checks require cross referencing the constant pool entries,
+     *        guards are set up to make sure that the referenced entries are of the right type and the indices
+     *        are within the legal range (0 &lt; index &lt; constant_pool_count).
      *  </UL>
      *  <LI> Extra checks done in pass 1:
      *  <UL>
@@ -120,13 +131,14 @@ public final class Pass1Verifier extends PassVerifier{
      *   <LI> the name and signature of fields and methods are verified to be of legal format.
      *  </UL>
      * </UL>
-     * (From the Paper <A HREF=http://www.cs.sfu.ca/people/GradStudents/pwfong/personal/JVM/pass1/>The Mysterious Pass One, first draft, September 2, 1997</A>.)
+     * (From the Paper <A HREF="http://www.cs.sfu.ca/people/GradStudents/pwfong/personal/JVM/pass1/">
+     * The Mysterious Pass One, first draft, September 2, 1997</A>.)
      * 
      * <P>However, most of this is done by parsing a class file or generating a class file into BCEL's internal data structure.
      * <B>Therefore, all that is really done here is look up the class file from BCEL's repository.</B>
      * This is also motivated by the fact that some omitted things
-     * (like the check for extra bytes at the end of the class file) are handy when actually using BCEL to repair a class file (otherwise you would not be
-     * able to load it into BCEL).</P>
+     * (like the check for extra bytes at the end of the class file) are handy when actually using BCEL to repair a class file
+     * (otherwise you would not be able to load it into BCEL).</P>
      *
      * @see org.apache.commons.bcel6.Repository
      */
@@ -141,7 +153,8 @@ public final class Pass1Verifier extends PassVerifier{
                 if (! myOwner.getClassName().equals(jc.getClassName())){
                     // This should maybe caught by BCEL: In case of renamed .class files we get wrong
                     // JavaClass objects here.
-                    throw new LoadingException("Wrong name: the internal name of the .class file '"+jc.getClassName()+"' does not match the file's name '"+myOwner.getClassName()+"'.");
+                    throw new LoadingException("Wrong name: the internal name of the .class file '"+jc.getClassName()+
+                        "' does not match the file's name '"+myOwner.getClassName()+"'.");
                 }
             }
 
@@ -155,7 +168,8 @@ public final class Pass1Verifier extends PassVerifier{
         catch(RuntimeException e){
             // BCEL does not catch every possible RuntimeException; e.g. if
             // a constant pool index is referenced that does not exist.
-            return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Parsing via BCEL did not succeed. "+e.getClass().getName()+" occured:\n"+Utility.getStackTrace(e));
+            return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Parsing via BCEL did not succeed. "+
+                e.getClass().getName()+" occured:\n"+Utility.getStackTrace(e));
         }
 
         if (jc != null){
