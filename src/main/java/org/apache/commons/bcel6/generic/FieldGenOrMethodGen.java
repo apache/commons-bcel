@@ -37,7 +37,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     protected ConstantPoolGen cp;
     private final List<Attribute> attribute_vec = new ArrayList<>();
     // @since 6.0
-    private List<AnnotationEntryGen>       annotation_vec= new ArrayList<>();
+    private final List<AnnotationEntryGen>       annotation_vec= new ArrayList<>();
 
 
     protected FieldGenOrMethodGen() {

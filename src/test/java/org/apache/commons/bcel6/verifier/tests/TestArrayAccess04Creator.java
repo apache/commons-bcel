@@ -34,9 +34,9 @@ import org.apache.commons.bcel6.generic.Type;
 import org.junit.Assert;
 
 public class TestArrayAccess04Creator extends TestCreator {
-  private InstructionFactory _factory;
-  private ConstantPoolGen    _cp;
-  private ClassGen           _cg;
+  private final InstructionFactory _factory;
+  private final ConstantPoolGen    _cp;
+  private final ClassGen           _cg;
 
   public TestArrayAccess04Creator() {
     _cg = new ClassGen(TEST_PACKAGE+".TestArrayAccess04", "java.lang.Object", "TestArrayAccess04.java", Constants.ACC_PUBLIC | Constants.ACC_SUPER, new String[] {  });
