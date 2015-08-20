@@ -190,8 +190,9 @@ public class ClassPath {
     public InputStream getInputStream( String name, String suffix ) throws IOException {
         InputStream is = null;
         try {
-            is = getClass().getClassLoader().getResourceAsStream(name + suffix);
+            is = getClass().getClassLoader().getResourceAsStream(name + suffix); // may return null
         } catch (Exception e) {
+            // ignored
         }
         if (is != null) {
             return is;
