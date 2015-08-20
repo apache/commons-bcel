@@ -67,15 +67,11 @@ import org.apache.commons.bcel6.generic.InstructionList;
  */
 public class InstructionFinder {
 
-    private static final int OFFSET = 32767; // char + OFFSET is
-    // outside of
-    // LATIN-1
-    private static final int NO_OPCODES = 256; // Potential number,
-    // some are not used
+    private static final int OFFSET = 32767; // char + OFFSET is outside of LATIN-1
+    private static final int NO_OPCODES = 256; // Potential number, some are not used
     private static final Map<String, String> map = new HashMap<>();
     private final InstructionList il;
-    private String il_string; // instruction list
-    // as string
+    private String il_string; // instruction list as string
     private InstructionHandle[] handles; // map instruction
 
 
@@ -96,8 +92,7 @@ public class InstructionFinder {
      */
     public final void reread() {
         int size = il.getLength();
-        char[] buf = new char[size]; // Create a string with length equal to il
-        // length
+        char[] buf = new char[size]; // Create a string with length equal to il length
         handles = il.getInstructionHandles();
         // Map opcodes to characters
         for (int i = 0; i < size; i++) {
@@ -368,17 +363,13 @@ public class InstructionFinder {
             String value = map.get(key);
             char ch = value.charAt(1); // Omit already precompiled patterns
             if (ch < OFFSET) {
-                map.put(key, compilePattern(value)); // precompile all
-                                                        // patterns
+                map.put(key, compilePattern(value)); // precompile all patterns
             }
         }
         // Add instruction alias to match anything
         StringBuilder buf = new StringBuilder("(");
         for (short i = 0; i < NO_OPCODES; i++) {
-            if (Constants.NO_OF_OPERANDS[i] != Constants.UNDEFINED) { // Not
-                                                                        // an
-                // invalid
-                // opcode
+            if (Constants.NO_OF_OPERANDS[i] != Constants.UNDEFINED) { // Not an invalid opcode
                 buf.append(makeChar(i));
                 if (i < NO_OPCODES - 1) {
                     buf.append('|');
