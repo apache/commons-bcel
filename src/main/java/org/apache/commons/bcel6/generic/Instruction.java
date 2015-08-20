@@ -543,4 +543,24 @@ public abstract class Instruction implements Cloneable {
     public int hashCode() {
         return opcode;
     }
+
+    /**
+     * Check if the value can fit in a byte (signed)
+     * @param value the value to check
+     * @return true if the value is in range
+     * @since 6.0
+     */
+    public static boolean isValidByte(int value) {
+        return value >= Byte.MIN_VALUE && value <= Byte.MAX_VALUE;
+    }
+
+    /**
+     * Check if the value can fit in a short (signed)
+     * @param value the value to check
+     * @return true if the value is in range
+     * @since 6.0
+     */
+    public static boolean isValidShort(int value) {
+        return value >= Short.MIN_VALUE && value <= Short.MAX_VALUE;
+    }
 }
