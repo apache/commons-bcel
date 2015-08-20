@@ -79,13 +79,19 @@ final class CodeHTML {
      */
     private String codeToHTML( ByteSequence bytes, int method_number ) throws IOException {
         short opcode = (short) bytes.readUnsignedByte();
-        StringBuilder buf;
-        String name, signature;
-        int default_offset = 0, low, high;
-        int index, class_index, vindex, constant;
+        String name;
+        String signature;
+        int default_offset = 0;
+        int low;
+        int high;
+        int index;
+        int class_index;
+        int vindex;
+        int constant;
         int[] jump_table;
-        int no_pad_bytes = 0, offset;
-        buf = new StringBuilder(256);
+        int no_pad_bytes = 0;
+        int offset;
+        StringBuilder buf = new StringBuilder(256);
         buf.append("<TT>").append(Constants.OPCODE_NAMES[opcode]).append("</TT></TD><TD>");
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned

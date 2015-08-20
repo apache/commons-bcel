@@ -187,10 +187,17 @@ public abstract class Utility {
     public static String codeToString( ByteSequence bytes, ConstantPool constant_pool,
             boolean verbose ) throws IOException {
         short opcode = (short) bytes.readUnsignedByte();
-        int default_offset = 0, low, high, npairs;
-        int index, vindex, constant;
-        int[] match, jump_table;
-        int no_pad_bytes = 0, offset;
+        int default_offset = 0;
+        int low;
+        int high;
+        int npairs;
+        int index;
+        int vindex;
+        int constant;
+        int[] match;
+        int[] jump_table;
+        int no_pad_bytes = 0;
+        int offset;
         StringBuilder buf = new StringBuilder(Constants.OPCODE_NAMES[opcode]);
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned

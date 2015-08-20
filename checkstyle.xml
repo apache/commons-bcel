@@ -149,7 +149,7 @@ limitations under the License.
     <module name="FallThrough">
         <property name="reliefPattern" value="\$FALL-THROUGH\$"/><!-- to agree with Eclipse -->
     </module>
-    <!--module name="MultipleVariableDeclarations"/-->
+    <module name="MultipleVariableDeclarations"/>
     <!--module name="UnnecessaryParentheses"/-->
 
     <!-- Checks for class design                         -->
