@@ -423,12 +423,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     public LineNumberTable getLineNumberTable( ConstantPoolGen cp ) {
         int size = line_number_vec.size();
         LineNumber[] ln = new LineNumber[size];
-        try {
-            for (int i = 0; i < size; i++) {
-                ln[i] = line_number_vec.get(i).getLineNumber();
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-        } // Never occurs
+        for (int i = 0; i < size; i++) {
+            ln[i] = line_number_vec.get(i).getLineNumber();
+        }
         return new LineNumberTable(cp.addUtf8("LineNumberTable"), 2 + ln.length * 4, ln, cp
                 .getConstantPool());
     }
@@ -488,12 +485,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     private CodeException[] getCodeExceptions() {
         int size = exception_vec.size();
         CodeException[] c_exc = new CodeException[size];
-        try {
-            for (int i = 0; i < size; i++) {
-                CodeExceptionGen c =  exception_vec.get(i);
-                c_exc[i] = c.getCodeException(cp);
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        for (int i = 0; i < size; i++) {
+            CodeExceptionGen c =  exception_vec.get(i);
+            c_exc[i] = c.getCodeException(cp);
         }
         return c_exc;
     }
@@ -541,11 +535,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     private ExceptionTable getExceptionTable( ConstantPoolGen cp ) {
         int size = throws_vec.size();
         int[] ex = new int[size];
-        try {
-            for (int i = 0; i < size; i++) {
-                ex[i] = cp.addClass(throws_vec.get(i));
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        for (int i = 0; i < size; i++) {
+            ex[i] = cp.addClass(throws_vec.get(i));
         }
         return new ExceptionTable(cp.addUtf8("Exceptions"), 2 + 2 * size, ex, cp.getConstantPool());
     }
