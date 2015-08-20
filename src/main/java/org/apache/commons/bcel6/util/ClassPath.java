@@ -188,15 +188,11 @@ public class ClassPath {
      * @return input stream for file on class path
      */
     public InputStream getInputStream( String name, String suffix ) throws IOException {
-        InputStream is = null;
         try {
-            is = getClass().getClassLoader().getResourceAsStream(name + suffix);
+            return getClass().getClassLoader().getResourceAsStream(name + suffix);
         } catch (Exception e) {
+            return getClassFile(name, suffix).getInputStream();
         }
-        if (is != null) {
-            return is;
-        }
-        return getClassFile(name, suffix).getInputStream();
     }
 
     /**
