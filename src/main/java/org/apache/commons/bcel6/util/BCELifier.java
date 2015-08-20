@@ -206,10 +206,11 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
                 } else if ((pow == Constants.ACC_TRANSIENT) && (reason == FLAG_FOR_METHOD)) {
                     buf.append("ACC_VARARGS | ");
                 } else {
-                    if (i < Constants.ACCESS_NAMES.length)
+                    if (i < Constants.ACCESS_NAMES.length) {
                         buf.append("ACC_").append(Constants.ACCESS_NAMES[i].toUpperCase(Locale.ENGLISH)).append( " | ");
-                    else
+                    } else {
                         buf.append(String.format ("ACC_BIT %x | ", pow));
+                    }
                 }
             }
             pow <<= 1;
