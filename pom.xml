@@ -307,6 +307,9 @@
         <artifactId>findbugs-maven-plugin</artifactId>
         <version>${findbugs.plugin.version}</version>
         <configuration>
+          <threshold>Normal</threshold>
+          <effort>Default</effort>
+          <excludeFilterFile>${basedir}/findbugs-exclude-filter.xml</excludeFilterFile>
           <fork>true</fork>
           <jvmArgs>-Duser.language=en</jvmArgs>
         </configuration>
