@@ -23,8 +23,8 @@ limitations under the License.
 <suppressions>
      <!-- Maven generated code -->
     <suppress checks="LineLength"  files="InstructionFinder.java"/>
-    <suppress checks="MagicNumber" files="VerifierAppFrame.java"/>
-    <suppress checks="MagicNumber" files="VerifyDialog.java"/>
+    <suppress checks="MagicNumber" files="VerifierAppFrame.java"/> <!-- Swing files use lots of numbers -->
+    <suppress checks="MagicNumber" files="VerifyDialog.java"/> <!-- Swing files use lots of numbers -->
     <suppress checks="MagicNumber" files="src[/\\]test[/\\]"/>
     <suppress checks=".*"          files="[/\\]target[/\\]"/>
 </suppressions>
