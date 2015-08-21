@@ -23,6 +23,14 @@
 -->
 <FindBugsFilter>
 
+<!-- N.B. Using wild-card class names so exclusions work regardless of the top-level package -->
+
+  <!-- Waiting on BCEL-252 -->
+  <Match>
+    <Class name="~.*\.util\.Class2HTML" />
+    <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD" />
+  </Match>
+
   <!-- Class is not supposed to be an Exception itself -->
   <Match>
     <Class name="~.*\.classfile\.CodeException" />
