@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-202" type="fix">StackMapTableEntry.copy() needs to be deep; Improved support for StackMaps</action>
       <action issue="BCEL-251" type="fix">Pass3aVerifier visitANEWARRAY() does not allow 255 array dimensions</action>
       <action issue="BCEL-211" type="update">Some additional clone methods should be public.</action>
       <action issue="BCEL-249" type="fix">Check for max Short seems wrong</action>

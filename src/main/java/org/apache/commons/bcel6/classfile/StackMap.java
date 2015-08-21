@@ -102,6 +102,11 @@ public final class StackMap extends Attribute {
      */
     public final void setStackMap( StackMapEntry[] map ) {
         this.map = map;
+        int len = 2; // TODO - what is this?
+        for (int i = 0; i < map.length; i++) {
+            len += map[i].getMapEntrySize();
+        }
+        setLength(len);
     }
 
 
