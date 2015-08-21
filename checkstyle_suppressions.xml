@@ -21,7 +21,10 @@ limitations under the License.
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 <!-- SEE: http://checkstyle.sourceforge.net/config.html#Examples -->
 <suppressions>
-    <suppress checks="LineLength" files="InstructionFinder.java"/>
+     <!-- Maven generated code -->
+    <suppress checks="LineLength"  files="InstructionFinder.java"/>
     <suppress checks="MagicNumber" files="VerifierAppFrame.java"/>
     <suppress checks="MagicNumber" files="VerifyDialog.java"/>
+    <suppress checks="MagicNumber" files="src[/\\]test[/\\]"/>
+    <suppress checks=".*"          files="[/\\]target[/\\]"/>
 </suppressions>
