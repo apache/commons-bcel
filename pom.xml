@@ -245,7 +245,7 @@
         <configuration>
           <configLocation>${basedir}/checkstyle.xml</configLocation>
           <!-- Needed to define config_loc -->
-          <propertiesLocation>${basedir}/checkstyle_maven.properties</propertiesLocation>
+          <propertyExpansion>config_loc=${basedir}</propertyExpansion>
           <enableRulesSummary>false</enableRulesSummary>
         </configuration>
       </plugin>
@@ -278,7 +278,7 @@
         <configuration>
           <configLocation>${basedir}/checkstyle.xml</configLocation>
           <!-- Needed to define config_loc -->
-          <propertiesLocation>${basedir}/checkstyle_maven.properties</propertiesLocation>
+          <propertyExpansion>config_loc=${basedir}</propertyExpansion>
           <enableRulesSummary>false</enableRulesSummary>
         </configuration>
         <!-- We need to specify reportSets because 2.9.1 creates two reports -->
