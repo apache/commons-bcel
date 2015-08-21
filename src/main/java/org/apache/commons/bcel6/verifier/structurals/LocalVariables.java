@@ -29,7 +29,7 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
  *
  * @version $Id$
  */
-public class LocalVariables{
+public class LocalVariables implements Cloneable {
     /** The Type[] containing the local variable slots. */
     private final Type[] locals;
 

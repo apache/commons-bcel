@@ -33,7 +33,7 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
  *
  * @version $Id$
  */
-public class OperandStack{
+public class OperandStack implements Cloneable {
 
     /** We hold the stack information here. */
     private ArrayList<Type> stack = new ArrayList<>();
