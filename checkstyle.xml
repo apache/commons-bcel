@@ -81,6 +81,7 @@ limitations under the License.
         <!-- Allow underscore in class names -->
         <property name="format" value="^[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$"/>
     </module>
+
     <!-- Checks for imports                              -->
     <!-- See http://checkstyle.sf.net/config_imports.html -->
     <module name="AvoidStarImport"/>
@@ -177,6 +178,15 @@ limitations under the License.
   <module name="SuppressionFilter">
     <!-- config_loc is used by Eclipse plugin -->
     <property name="file" value="${config_loc}/checkstyle_suppressions.xml"/>
+  </module>
+
+  <!-- 
+      Allow comment to suppress checkstyle for a single line
+      e.g. // CHECKSTYLE IGNORE MagicNumber
+   -->
+  <module name="SuppressWithNearbyCommentFilter">
+    <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+)"/>
+    <property name="checkFormat" value="$1"/>
   </module>
 
 </module>
