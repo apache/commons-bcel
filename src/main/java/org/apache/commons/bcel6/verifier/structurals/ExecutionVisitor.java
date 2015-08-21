@@ -838,7 +838,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     public void visitINVOKESPECIAL(INVOKESPECIAL o){
         if (o.getMethodName(cpg).equals(Constants.CONSTRUCTOR_NAME)){
             UninitializedObjectType t = (UninitializedObjectType) stack().peek(o.getArgumentTypes(cpg).length);
-            if (t == Frame.get_this()){
+            if (t == Frame.getThis()){
                 Frame._this = null;
             }
             stack().initializeObject(t);
