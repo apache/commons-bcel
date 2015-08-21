@@ -145,7 +145,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         i = mg.getAnnotationEntries().length;
         assertTrue("The main 'MethodGen' should have one annotation but has "
                 + i, i == 1);
-        assertTrue(wipe("temp1" + File.separator + "HelloWorld.class"));
+
+        assertTrue(wipe("temp1", "HelloWorld.class"));
     }
 
     /**
