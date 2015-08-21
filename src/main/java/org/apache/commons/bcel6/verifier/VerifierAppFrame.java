@@ -331,7 +331,7 @@ public class VerifierAppFrame extends JFrame {
             return;
         }
         Verifier v = VerifierFactory.getVerifier(current_class);
-        String all3amsg = "";
+        StringBuilder all3amsg = new StringBuilder();
         boolean all3aok = true;
         boolean rejected = false;
         for (int i = 0; i < pass3aJList.getModel().getSize(); i++) {
@@ -344,15 +344,15 @@ public class VerifierAppFrame extends JFrame {
                 JavaClass jc = null;
                 try {
                     jc = Repository.lookupClass(v.getClassName());
-                    all3amsg += "Method '" + jc.getMethods()[i] + "': "
-                            + vr.getMessage().replace('\n', ' ') + "\n\n";
+                    all3amsg.append("Method '").append(jc.getMethods()[i]).append("': ")
+                            .append(vr.getMessage().replace('\n', ' ') ).append("\n\n");
                 } catch (ClassNotFoundException ex) {
                     // FIXME: handle the error
                     ex.printStackTrace();
                 }
             }
         }
-        pass3aTextPane.setText(all3amsg);
+        pass3aTextPane.setText(all3amsg.toString());
         pass3aTextPane.setBackground(all3aok ? Color.green : (rejected ? Color.red : Color.yellow));
     }
 
