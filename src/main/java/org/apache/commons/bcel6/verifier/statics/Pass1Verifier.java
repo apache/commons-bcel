@@ -82,7 +82,7 @@ public final class Pass1Verifier extends PassVerifier{
      * The answer is that only pass one is performed on a class file as
      * long as its resolution is not requested; whereas pass two and
      * pass three are performed during the resolution process.
-     * Only four constraints to be checked are explicitely stated by
+     * Only four constraints to be checked are explicitly stated by
      * The Java Virtual Machine Specification, 2nd edition:
      * <UL>
      *  <LI>The first four bytes must contain the right magic number (0xCAFEBABE).
@@ -141,6 +141,7 @@ public final class Pass1Verifier extends PassVerifier{
      * (otherwise you would not be able to load it into BCEL).</P>
      *
      * @see org.apache.commons.bcel6.Repository
+     * @see org.apache.commons.bcel6.Constants#JVM_CLASSFILE_MAGIC
      */
     @Override
     public VerificationResult do_verify(){

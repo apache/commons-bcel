@@ -297,7 +297,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @exception IOException
      */
     public void dump( DataOutputStream file ) throws IOException {
-        file.writeInt(0xcafebabe);
+        file.writeInt(Constants.JVM_CLASSFILE_MAGIC);
         file.writeShort(minor);
         file.writeShort(major);
         constant_pool.dump(file);

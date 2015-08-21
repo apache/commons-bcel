@@ -24,6 +24,14 @@ package org.apache.commons.bcel6;
  */
 public final class Constants {
 
+  /**
+   * Java class file format Magic number (0xCAFEBABE)
+   *
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.1-200-A">
+   * The ClassFile Structure in The Java Virtual Machine Specification</a>
+   */
+  public static final int JVM_CLASSFILE_MAGIC = 0xCAFEBABE;
+
   /** Major version number of class files for Java 1.1.
    *  @see #MINOR_1_1
    *  */
