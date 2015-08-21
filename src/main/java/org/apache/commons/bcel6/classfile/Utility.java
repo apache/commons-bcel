@@ -1122,13 +1122,13 @@ public abstract class Utility {
      *
      * @param bytes an array of bytes to convert to hexadecimal
      * 
-     * @return bytes as hexadecimal string, e.g. 00 FA 12 ...
+     * @return bytes as hexadecimal string, e.g. 00 fa 12 ...
      */
     public static String toHexString( byte[] bytes ) {
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
             short b = byteToShort(bytes[i]);
-            String hex = Integer.toString(b, 0x10);
+            String hex = Integer.toHexString(b);
             if (b < 0x10) {
                 buf.append('0');
             }
