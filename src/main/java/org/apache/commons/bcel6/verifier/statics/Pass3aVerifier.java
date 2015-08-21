@@ -340,9 +340,9 @@ public final class Pass3aVerifier extends PassVerifier{
         // array in vmspec2), together with pass 1 (reading code_length bytes and
         // interpreting them as code[]). So this must not be checked again here.
 
-        if (! (code.getCode().length < 65536)){// contradicts vmspec2 page 152 ("Limitations"), but is on page 134.
+        if (code.getCode().length >= Constants.MAX_CODE_SIZE){// length must be LESS than the max
             throw new StaticCodeInstructionConstraintException(
-                "Code array in code attribute '"+code+"' too big: must be smaller than 65536 bytes.");
+                "Code array in code attribute '"+code+"' too big: must be smaller than "+Constants.MAX_CODE_SIZE+"65536 bytes.");
         }
 
         // First opcode at offset 0: okay, that's clear. Nothing to do.
