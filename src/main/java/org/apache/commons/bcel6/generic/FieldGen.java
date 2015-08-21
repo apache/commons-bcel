@@ -127,7 +127,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     public void setInitValue( long l ) {
         checkType(Type.LONG);
         if (l != 0L) {
-            value = new Long(l);
+            value = Long.valueOf(l);
         }
     }
 
