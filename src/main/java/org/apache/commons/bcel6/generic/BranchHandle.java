@@ -30,12 +30,8 @@ package org.apache.commons.bcel6.generic;
  */
 public final class BranchHandle extends InstructionHandle {
 
-    private BranchInstruction bi; // An alias in fact, but saves lots of casts
-
-
     private BranchHandle(BranchInstruction i) {
         super(i);
-        bi = i;
     }
 
     /** Factory methods.
@@ -62,6 +58,11 @@ public final class BranchHandle extends InstructionHandle {
         bh_list = this;
     }
 
+    // get the instruction as a BranchInstruction
+    // (do the cast once)
+    private BranchInstruction getBI() {
+        return (BranchInstruction) super.getInstruction();
+    }
 
     /* Override InstructionHandle methods: delegate to branch instruction.
      * Through this overriding all access to the private i_position field should
@@ -69,20 +70,20 @@ public final class BranchHandle extends InstructionHandle {
      */
     @Override
     public int getPosition() {
-        return bi.getPosition();
+        return getBI().getPosition();
     }
 
 
     @Override
     void setPosition( int pos ) {
-        i_position = bi.setGetPosition(pos);
+        i_position = getBI().setGetPosition(pos);
     }
 
 
     @Override
     protected int updatePosition( int offset, int max_offset ) {
-        int x = bi.updatePosition(offset, max_offset);
-        i_position = bi.getPosition();
+        int x = getBI().updatePosition(offset, max_offset);
+        i_position = getBI().getPosition();
         return x;
     }
 
@@ -91,7 +92,7 @@ public final class BranchHandle extends InstructionHandle {
      * Pass new target to instruction.
      */
     public void setTarget( InstructionHandle ih ) {
-        bi.setTarget(ih);
+        getBI().setTarget(ih);
     }
 
 
@@ -99,7 +100,7 @@ public final class BranchHandle extends InstructionHandle {
      * Update target of instruction.
      */
     public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
-        bi.updateTarget(old_ih, new_ih);
+        getBI().updateTarget(old_ih, new_ih);
     }
 
 
@@ -107,7 +108,7 @@ public final class BranchHandle extends InstructionHandle {
      * @return target of instruction.
      */
     public InstructionHandle getTarget() {
-        return bi.getTarget();
+        return getBI().getTarget();
     }
 
 
@@ -121,6 +122,5 @@ public final class BranchHandle extends InstructionHandle {
             throw new ClassGenException("Assigning " + i
                     + " to branch handle which is not a branch instruction");
         }
-        bi = (BranchInstruction) i;
     }
 }
