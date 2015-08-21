@@ -41,29 +41,29 @@ import org.apache.commons.bcel6.generic.Select;
 import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
 import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
 
-    /**
-     * Instances of this class contain information about the subroutines
-     * found in a code array of a method.
-     * This implementation considers the top-level (the instructions
-     * reachable without a JSR or JSR_W starting off from the first
-     * instruction in a code array of a method) being a special subroutine;
-     * see getTopLevel() for that.
-     * Please note that the definition of subroutines in the Java Virtual
-     * Machine Specification, Second Edition is somewhat incomplete.
-     * Therefore, JustIce uses an own, more rigid notion.
-     * Basically, a subroutine is a piece of code that starts at the target
-     * of a JSR of JSR_W instruction and ends at a corresponding RET
-     * instruction. Note also that the control flow of a subroutine
-     * may be complex and non-linear; and that subroutines may be nested.
-     * JustIce also mandates subroutines not to be protected by exception
-     * handling code (for the sake of control flow predictability).
-     * To understand JustIce's notion of subroutines, please read
-   *
-     * TODO: refer to the paper.
-     *
-     * @version $Id$
-     * @see #getTopLevel()
-     */
+/**
+ * Instances of this class contain information about the subroutines
+ * found in a code array of a method.
+ * This implementation considers the top-level (the instructions
+ * reachable without a JSR or JSR_W starting off from the first
+ * instruction in a code array of a method) being a special subroutine;
+ * see getTopLevel() for that.
+ * Please note that the definition of subroutines in the Java Virtual
+ * Machine Specification, Second Edition is somewhat incomplete.
+ * Therefore, JustIce uses an own, more rigid notion.
+ * Basically, a subroutine is a piece of code that starts at the target
+ * of a JSR of JSR_W instruction and ends at a corresponding RET
+ * instruction. Note also that the control flow of a subroutine
+ * may be complex and non-linear; and that subroutines may be nested.
+ * JustIce also mandates subroutines not to be protected by exception
+ * handling code (for the sake of control flow predictability).
+ * To understand JustIce's notion of subroutines, please read
+ *
+ * TODO: refer to the paper.
+ *
+ * @version $Id$
+ * @see #getTopLevel()
+ */
 public class Subroutines{
     /**
      * This inner class implements the Subroutine interface.
