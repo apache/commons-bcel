@@ -1020,6 +1020,7 @@ public abstract class Utility {
                     break;
                 default:
                     // Don't care
+                    break;
             }
         }
         if (open) {
