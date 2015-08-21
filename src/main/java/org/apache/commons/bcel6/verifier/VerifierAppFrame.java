@@ -305,12 +305,12 @@ public class VerifierAppFrame extends JFrame {
         }
         String[] msgs = v.getMessages();
         messagesTextPane.setBackground(msgs.length == 0 ? Color.green : Color.yellow);
-        String allmsgs = "";
+        StringBuilder allmsgs = new StringBuilder();
         for (int i = 0; i < msgs.length; i++) {
             msgs[i] = msgs[i].replace('\n', ' ');
-            allmsgs += msgs[i] + "\n\n";
+            allmsgs.append(msgs[i]).append("\n\n");
         }
-        messagesTextPane.setText(allmsgs);
+        messagesTextPane.setText(allmsgs.toString());
         setTitle(current_class + " - " + JUSTICE_VERSION);
     }
 
@@ -362,7 +362,7 @@ public class VerifierAppFrame extends JFrame {
             return;
         }
         Verifier v = VerifierFactory.getVerifier(current_class);
-        String all3bmsg = "";
+        StringBuilder all3bmsg = new StringBuilder();
         boolean all3bok = true;
         boolean rejected = false;
         for (int i = 0; i < pass3bJList.getModel().getSize(); i++) {
@@ -375,15 +375,15 @@ public class VerifierAppFrame extends JFrame {
                 JavaClass jc = null;
                 try {
                     jc = Repository.lookupClass(v.getClassName());
-                    all3bmsg += "Method '" + jc.getMethods()[i] + "': "
-                            + vr.getMessage().replace('\n', ' ') + "\n\n";
+                    all3bmsg.append("Method '").append(jc.getMethods()[i]).append("': ")
+                            .append(vr.getMessage().replace('\n', ' ')).append("\n\n");
                 } catch (ClassNotFoundException ex) {
                     // FIXME: handle the error
                     ex.printStackTrace();
                 }
             }
         }
-        pass3bTextPane.setText(all3bmsg);
+        pass3bTextPane.setText(all3bmsg.toString());
         pass3bTextPane.setBackground(all3bok ? Color.green : (rejected ? Color.red : Color.yellow));
     }
 
