@@ -91,7 +91,7 @@ final class CodeHTML {
         int[] jump_table;
         int no_pad_bytes = 0;
         int offset;
-        StringBuilder buf = new StringBuilder(256);
+        StringBuilder buf = new StringBuilder(256); // CHECKSTYLE IGNORE MagicNumber
         buf.append("<TT>").append(Constants.OPCODE_NAMES[opcode]).append("</TT></TD><TD>");
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned

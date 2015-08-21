@@ -146,7 +146,7 @@ public abstract class Utility {
      */
     public static String codeToString( byte[] code, ConstantPool constant_pool, int index,
             int length, boolean verbose ) {
-        StringBuilder buf = new StringBuilder(code.length * 20); // Should be sufficient
+        StringBuilder buf = new StringBuilder(code.length * 20); // Should be sufficient // CHECKSTYLE IGNORE MagicNumber
         ByteSequence stream = new ByteSequence(code);
         try {
             for (int i = 0; i < index; i++) {

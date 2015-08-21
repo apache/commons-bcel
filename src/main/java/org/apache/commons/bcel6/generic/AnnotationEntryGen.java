@@ -155,7 +155,7 @@ public class AnnotationEntryGen {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder(32);
+        StringBuilder s = new StringBuilder(32); // CHECKSTYLE IGNORE MagicNumber
         s.append("AnnotationGen:[").append(getTypeName()).append(" #").append(evs.size()).append(" {");
         for (int i = 0; i < evs.size(); i++) {
             s.append(evs.get(i));

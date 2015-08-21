@@ -34,6 +34,7 @@ import org.apache.commons.bcel6.Constants;
  */
 public final class LineNumberTable extends Attribute {
 
+    private static final int MAX_LINE_LENGTH = 72;
     private LineNumber[] line_number_table; // Table of line/numbers pairs
 
 
@@ -136,7 +137,7 @@ public final class LineNumberTable extends Attribute {
             if (i < line_number_table.length - 1) {
                 line.append(", ");
             }
-            if ((line.length() > 72) && (i < line_number_table.length - 1)) {
+            if ((line.length() > MAX_LINE_LENGTH) && (i < line_number_table.length - 1)) {
                 line.append(newLine);
                 buf.append(line.toString());
                 line.setLength(0);

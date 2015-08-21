@@ -300,7 +300,7 @@ public final class Code extends Attribute {
      * @return String representation of code chunk.
      */
     public final String toString( boolean verbose ) {
-        StringBuilder buf = new StringBuilder(100);
+        StringBuilder buf = new StringBuilder(100); // CHECKSTYLE IGNORE MagicNumber
         buf.append("Code(max_stack = ").append(max_stack).append(", max_locals = ").append(
                 max_locals).append(", code_length = ").append(code.length).append(")\n").append(
                 Utility.codeToString(code, super.getConstantPool(), 0, -1, verbose));
