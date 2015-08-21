@@ -350,7 +350,7 @@ public final class Pass3bVerifier extends PassVerifier{
                 Frame f = new Frame(mg.getMaxLocals(),mg.getMaxStack());
                 if ( !mg.isStatic() ){
                     if (mg.getName().equals(Constants.CONSTRUCTOR_NAME)){
-                        Frame._this = new UninitializedObjectType(ObjectType.getInstance(jc.getClassName()));
+                        Frame.set_this(new UninitializedObjectType(ObjectType.getInstance(jc.getClassName())));
                         f.getLocals().set(0, Frame._this);
                     }
                     else{
