@@ -95,7 +95,7 @@ public class Class2HTML {
     }
 
 
-    public static void main( String[] argv ) {
+    public static void main( String[] argv ) throws IOException {
         String[] file_name = new String[argv.length];
         int files = 0;
         ClassParser parser = null;
@@ -103,44 +103,39 @@ public class Class2HTML {
         String zip_file = null;
         char sep = File.separatorChar;
         String dir = "." + sep; // Where to store HTML files
-        try {
-            /* Parse command line arguments.
-             */
-            for (int i = 0; i < argv.length; i++) {
-                if (argv[i].charAt(0) == '-') { // command line switch
-                    if (argv[i].equals("-d")) { // Specify target directory, default `.�
-                        dir = argv[++i];
-                        if (!dir.endsWith("" + sep)) {
-                            dir = dir + sep;
-                        }
-                        new File(dir).mkdirs(); // Create target directory if necessary
-                    } else if (argv[i].equals("-zip")) {
-                        zip_file = argv[++i];
-                    } else {
-                        System.out.println("Unknown option " + argv[i]);
+        /* Parse command line arguments.
+         */
+        for (int i = 0; i < argv.length; i++) {
+            if (argv[i].charAt(0) == '-') { // command line switch
+                if (argv[i].equals("-d")) { // Specify target directory, default `.�
+                    dir = argv[++i];
+                    if (!dir.endsWith("" + sep)) {
+                        dir = dir + sep;
                     }
+                    new File(dir).mkdirs(); // Create target directory if necessary
+                } else if (argv[i].equals("-zip")) {
+                    zip_file = argv[++i];
                 } else {
-                    file_name[files++] = argv[i];
+                    System.out.println("Unknown option " + argv[i]);
                 }
+            } else {
+                file_name[files++] = argv[i];
             }
-            if (files == 0) {
-                System.err.println("Class2HTML: No input files specified.");
-            } else { // Loop through files ...
-                for (int i = 0; i < files; i++) {
-                    System.out.print("Processing " + file_name[i] + "...");
-                    if (zip_file == null) {
-                        parser = new ClassParser(file_name[i]); // Create parser object from file
-                    } else {
-                        parser = new ClassParser(zip_file, file_name[i]); // Create parser object from zip file
-                    }
-                    java_class = parser.parse();
-                    new Class2HTML(java_class, dir);
-                    System.out.println("Done.");
+        }
+        if (files == 0) {
+            System.err.println("Class2HTML: No input files specified.");
+        } else { // Loop through files ...
+            for (int i = 0; i < files; i++) {
+                System.out.print("Processing " + file_name[i] + "...");
+                if (zip_file == null) {
+                    parser = new ClassParser(file_name[i]); // Create parser object from file
+                } else {
+                    parser = new ClassParser(zip_file, file_name[i]); // Create parser object from zip file
                 }
+                java_class = parser.parse();
+                new Class2HTML(java_class, dir);
+                System.out.println("Done.");
             }
-        } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace(System.out);
         }
     }
 
