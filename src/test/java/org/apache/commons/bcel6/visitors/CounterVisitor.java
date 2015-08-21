@@ -144,9 +144,6 @@ public class CounterVisitor implements Visitor
     public int stackMapTableCount = 0;
 
     /** @since 6.0 */
-    public int stackMapTableEntryCount = 0;
-
-    /** @since 6.0 */
     public int bootstrapMethodsCount = 0;
 
     /** @since 6.0 */
