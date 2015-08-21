@@ -231,7 +231,8 @@ public final class StackMapEntry implements Cloneable
     int getMapEntrySize() {
         if (frame_type >= Constants.SAME_FRAME && frame_type <= Constants.SAME_FRAME_MAX) {
             return 1;
-        } else if (frame_type >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME && frame_type <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
+        } else if (frame_type >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME && 
+                   frame_type <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             return 1 + (types_of_stack_items[0].hasIndex() ? 3 : 1);
         } else if (frame_type == Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             return 3 + (types_of_stack_items[0].hasIndex() ? 3 : 1);
@@ -242,16 +243,16 @@ public final class StackMapEntry implements Cloneable
         } else if (frame_type >= Constants.APPEND_FRAME && frame_type <= Constants.APPEND_FRAME_MAX) {
             int len = 3;
             for (int i = 0; i < types_of_locals.length; i++) {
-                len += (types_of_locals[i].hasIndex() ? 3 : 1);
+                len += types_of_locals[i].hasIndex() ? 3 : 1;
             }            
             return len;
         } else if (frame_type == Constants.FULL_FRAME) {        
             int len = 7;
             for (int i = 0; i < types_of_locals.length; i++) {
-                len += (types_of_locals[i].hasIndex() ? 3 : 1);
+                len += types_of_locals[i].hasIndex() ? 3 : 1;
             }
             for (int i = 0; i < types_of_stack_items.length; i++) {
-                len += (types_of_stack_items[i].hasIndex() ? 3 : 1);
+                len += types_of_stack_items[i].hasIndex() ? 3 : 1;
             }
             return len;
         } else {
@@ -263,13 +264,14 @@ public final class StackMapEntry implements Cloneable
     public void setFrameType( int f ) {
         if (f >= Constants.SAME_FRAME && f <= Constants.SAME_FRAME_MAX) {
             byte_code_offset = f - Constants.SAME_FRAME;
-        } else if (f >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME && f <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
+        } else if (f >= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME && 
+                   f <= Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             byte_code_offset = f - Constants.SAME_LOCALS_1_STACK_ITEM_FRAME;
-        } else if (f == Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
-        } else if (f >= Constants.CHOP_FRAME && f <= Constants.CHOP_FRAME_MAX) {
-        } else if (f == Constants.SAME_FRAME_EXTENDED) {
-        } else if (f >= Constants.APPEND_FRAME && f <= Constants.APPEND_FRAME_MAX) {
-        } else if (f == Constants.FULL_FRAME) {        
+        } else if (f == Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) { // CHECKSTYLE IGNORE EmptyBlock
+        } else if (f >= Constants.CHOP_FRAME && f <= Constants.CHOP_FRAME_MAX) { // CHECKSTYLE IGNORE EmptyBlock
+        } else if (f == Constants.SAME_FRAME_EXTENDED) { // CHECKSTYLE IGNORE EmptyBlock
+        } else if (f >= Constants.APPEND_FRAME && f <= Constants.APPEND_FRAME_MAX) { // CHECKSTYLE IGNORE EmptyBlock
+        } else if (f == Constants.FULL_FRAME) { // CHECKSTYLE IGNORE EmptyBlock
         } else {
             throw new RuntimeException("Invalid StackMap frame_type");
         }
@@ -284,7 +286,7 @@ public final class StackMapEntry implements Cloneable
 
     public void setByteCodeOffset( int new_offset ) {
         if (new_offset < 0 || new_offset > 32767) {
-            throw new RuntimeException("Invalid StackMap offset");
+            throw new RuntimeException("Invalid StackMap offset: " + new_offset);
         }
 
         if (frame_type >= Constants.SAME_FRAME &&
@@ -301,15 +303,15 @@ public final class StackMapEntry implements Cloneable
             } else {
                 frame_type = Constants.SAME_LOCALS_1_STACK_ITEM_FRAME + new_offset;
             }
-        } else if (frame_type == Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
+        } else if (frame_type == Constants.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) { // CHECKSTYLE IGNORE EmptyBlock
         } else if (frame_type >= Constants.CHOP_FRAME &&
-                   frame_type <= Constants.CHOP_FRAME_MAX) {
-        } else if (frame_type == Constants.SAME_FRAME_EXTENDED) {
+                   frame_type <= Constants.CHOP_FRAME_MAX) { // CHECKSTYLE IGNORE EmptyBlock
+        } else if (frame_type == Constants.SAME_FRAME_EXTENDED) { // CHECKSTYLE IGNORE EmptyBlock
         } else if (frame_type >= Constants.APPEND_FRAME &&
-                   frame_type <= Constants.APPEND_FRAME_MAX) {
-        } else if (frame_type == Constants.FULL_FRAME) {
+                   frame_type <= Constants.APPEND_FRAME_MAX) { // CHECKSTYLE IGNORE EmptyBlock
+        } else if (frame_type == Constants.FULL_FRAME) { // CHECKSTYLE IGNORE EmptyBlock
         } else {
-            throw new RuntimeException("Invalid StackMap frame_type");
+            throw new RuntimeException("Invalid StackMap frame_type: " + frame_type);
         }
         byte_code_offset = new_offset;
     }
