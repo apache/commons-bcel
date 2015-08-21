@@ -57,8 +57,6 @@ import org.apache.commons.bcel6.classfile.Signature;
 import org.apache.commons.bcel6.classfile.SourceFile;
 import org.apache.commons.bcel6.classfile.StackMap;
 import org.apache.commons.bcel6.classfile.StackMapEntry;
-import org.apache.commons.bcel6.classfile.StackMapTable;
-import org.apache.commons.bcel6.classfile.StackMapTableEntry;
 import org.apache.commons.bcel6.classfile.Synthetic;
 import org.apache.commons.bcel6.classfile.Unknown;
 import org.apache.commons.bcel6.classfile.Visitor;
@@ -385,20 +383,6 @@ public class CounterVisitor implements Visitor
     public void visitUnknown(Unknown obj)
     {
         unknownCount++;
-    }
-
-    /** @since 6.0 */
-    @Override
-    public void visitStackMapTable(StackMapTable obj)
-    {
-        stackMapTableCount++;
-    }
-
-    /** @since 6.0 */
-    @Override
-    public void visitStackMapTableEntry(StackMapTableEntry obj)
-    {
-        stackMapTableEntryCount++;
     }
 
     /** @since 6.0 */

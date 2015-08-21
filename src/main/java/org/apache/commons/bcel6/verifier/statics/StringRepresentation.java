@@ -53,7 +53,6 @@ import org.apache.commons.bcel6.classfile.Node;
 import org.apache.commons.bcel6.classfile.Signature;
 import org.apache.commons.bcel6.classfile.SourceFile;
 import org.apache.commons.bcel6.classfile.StackMap;
-import org.apache.commons.bcel6.classfile.StackMapTable;
 import org.apache.commons.bcel6.classfile.Synthetic;
 import org.apache.commons.bcel6.classfile.Unknown;
 import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
@@ -297,14 +296,6 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
 
     @Override
     public void visitStackMap(StackMap obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitStackMapTable(StackMapTable obj) {
         tostring = toString(obj);
     }
 

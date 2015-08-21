@@ -220,7 +220,7 @@ public abstract class Attribute implements Cloneable, Node {
             case Constants.ATTR_ENCLOSING_METHOD:
                 return new EnclosingMethod(name_index, length, file, constant_pool);
             case Constants.ATTR_STACK_MAP_TABLE:
-                return new StackMapTable(name_index, length, file, constant_pool);
+                return new StackMap(name_index, length, file, constant_pool);
             case Constants.ATTR_BOOTSTRAP_METHODS:
                 return new BootstrapMethods(name_index, length, file, constant_pool);
             case Constants.ATTR_METHOD_PARAMETERS:

@@ -250,7 +250,6 @@ public class DescendingVisitor implements Visitor
 
     /**
      * @since 6.0
-     */
     @Override
     public void visitStackMapTable(StackMapTable table)
     {
@@ -262,10 +261,10 @@ public class DescendingVisitor implements Visitor
         }
         stack.pop();
     }
+     */
 
     /**
      * @since 6.0
-     */
     @Override
     public void visitStackMapTableEntry(StackMapTableEntry var)
     {
@@ -273,6 +272,7 @@ public class DescendingVisitor implements Visitor
         var.accept(visitor);
         stack.pop();
     }
+     */
 
     @Override
     public void visitLocalVariable(LocalVariable var)

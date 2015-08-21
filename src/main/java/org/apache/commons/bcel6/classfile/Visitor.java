@@ -95,16 +95,6 @@ public interface Visitor
     /**
      * @since 6.0
      */
-    void visitStackMapTable(StackMapTable obj);
-
-    /**
-     * @since 6.0
-     */
-    void visitStackMapTableEntry(StackMapTableEntry obj);
-
-    /**
-     * @since 6.0
-     */
     void visitAnnotation(Annotations obj);
 
     /**
