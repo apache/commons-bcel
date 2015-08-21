@@ -812,8 +812,10 @@ public final class Pass3aVerifier extends PassVerifier{
             Type t = o.getType(cpg);
             if (t instanceof ArrayType){
                 int dimensions = ((ArrayType) t).getDimensions();
-                if (dimensions >= 255){
-                    constraintViolated(o, "Not allowed to create an array with more than 255 dimensions.");
+                if (dimensions > Constants.MAX_ARRAY_DIMENSIONS){
+                    constraintViolated(o,
+                        "Not allowed to create an array with more than "+ Constants.MAX_ARRAY_DIMENSIONS + " dimensions;"+
+                        " actual: " + dimensions);
                 }
             }
         }

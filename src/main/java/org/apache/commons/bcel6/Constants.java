@@ -362,6 +362,15 @@ public final class Constants {
    */
   public static final int MAX_CODE_SIZE      = 65536; //bytes
 
+  /**
+   * The maximum number of dimensions in an array ({@value}).
+   * One of the limitations of the Java Virtual Machine.
+   *
+   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3.2-150">
+   * Field Descriptors in The Java Virtual Machine Specification</a>
+   */
+  public static final int MAX_ARRAY_DIMENSIONS = 255;
+
   /** Java VM opcode.
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.nop">
    * Opcode definitions in The Java Virtual Machine Specification</a> */
