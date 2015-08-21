@@ -86,7 +86,7 @@ public class Class2HTML {
          */
         AttributeHTML attribute_html = new AttributeHTML(dir, class_name, constant_pool,
                 constant_html);
-        MethodHTML method_html = new MethodHTML(dir, class_name, methods, java_class.getFields(),
+        new MethodHTML(dir, class_name, methods, java_class.getFields(),
                 constant_html, attribute_html);
         // Write main file (with frames, yuk)
         writeMainHTML(attribute_html);
@@ -107,12 +107,20 @@ public class Class2HTML {
          */
         for (int i = 0; i < argv.length; i++) {
             if (argv[i].charAt(0) == '-') { // command line switch
-                if (argv[i].equals("-d")) { // Specify target directory, default `.�
+                if (argv[i].equals("-d")) { // Specify target directory, default '.'
                     dir = argv[++i];
                     if (!dir.endsWith("" + sep)) {
                         dir = dir + sep;
                     }
-                    new File(dir).mkdirs(); // Create target directory if necessary
+                    final File store = new File(dir);
+                    if (!store.isDirectory()) {
+                        boolean created = store.mkdirs(); // Create target directory if necessary
+                        if (!created) {
+                            if (!store.isDirectory()) {
+                                System.out.println("Tried to create the directory " + dir + " but failed");
+                            }
+                        }
+                    }
                 } else if (argv[i].equals("-zip")) {
                     zip_file = argv[++i];
                 } else {
