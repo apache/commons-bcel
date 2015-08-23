@@ -350,9 +350,11 @@ public class Subroutines{
     }// end Inner Class SubrouteImpl
 
     //Node coloring constants
-    private static final Integer WHITE = Integer.valueOf(0);
-    private static final Integer GRAY = Integer.valueOf(1);
-    private static final Integer BLACK = Integer.valueOf(2);
+    private enum ColourConstants{
+        WHITE,
+        GRAY,
+        BLACK
+    }
 
     /**
      * The map containing the subroutines found.
@@ -422,16 +424,17 @@ public class Subroutines{
         // we don't want to assign an instruction to two or more Subroutine objects.
         Set<InstructionHandle> instructions_assigned = new HashSet<>();
 
-        Map<InstructionHandle, Integer> colors = new HashMap<>(); //Graph colouring. Key: InstructionHandle, Value: Integer .
+        //Graph colouring. Key: InstructionHandle, Value: ColourConstants enum .
+        Map<InstructionHandle, ColourConstants> colors = new HashMap<>();
 
         List<InstructionHandle> Q = new ArrayList<>();        
         for (InstructionHandle actual : sub_leaders) {
             // Do some BFS with "actual" as the root of the graph.
             // Init colors
             for (InstructionHandle element : all) {
-                colors.put(element, WHITE);
+                colors.put(element, ColourConstants.WHITE);
             }
-            colors.put(actual, GRAY);
+            colors.put(actual, ColourConstants.GRAY);
             // Init Queue
 
             Q.clear();
@@ -445,7 +448,7 @@ public class Subroutines{
              */
             if (actual == all[0]){
                 for (CodeExceptionGen handler : handlers) {
-                    colors.put(handler.getHandlerPC(), GRAY);
+                    colors.put(handler.getHandlerPC(), ColourConstants.GRAY);
                     Q.add(handler.getHandlerPC());
                 }
             }
@@ -456,16 +459,16 @@ public class Subroutines{
                 InstructionHandle u = Q.remove(0);
                 InstructionHandle[] successors = getSuccessors(u);
                 for (InstructionHandle successor : successors) {
-                    if (colors.get(successor) == WHITE){
-                        colors.put(successor, GRAY);
+                    if (colors.get(successor) == ColourConstants.WHITE){
+                        colors.put(successor, ColourConstants.GRAY);
                         Q.add(successor);
                     }
                 }
-                colors.put(u, BLACK);
+                colors.put(u, ColourConstants.BLACK);
             }
             // BFS ended above.
             for (InstructionHandle element : all) {
-                if (colors.get(element) == BLACK){
+                if (colors.get(element) == ColourConstants.BLACK){
                     ((SubroutineImpl) (actual==all[0]?getTopLevel():getSubroutine(actual))).addInstruction(element);
                     if (instructions_assigned.contains(element)){
                         throw new StructuralCodeConstraintException("Instruction '"+element+
