@@ -68,7 +68,7 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
     @Override
     protected int updatePosition( int offset, int max_offset ) {
         int i = getTargetOffset(); // Depending on old position value
-        setGetPosition(getPosition() + offset); // Position may be shifted by preceding expansions
+        setPosition(getPosition() + offset); // Position may be shifted by preceding expansions
         if (Math.abs(i) >= (Short.MAX_VALUE - max_offset)) { // to large for short (estimate)
             opcode = org.apache.commons.bcel6.Constants.GOTO_W;
             short old_length = length;

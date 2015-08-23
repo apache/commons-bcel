@@ -89,7 +89,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      */
     @Override
     protected int updatePosition( int offset, int max_offset ) {
-        setGetPosition(getPosition() + offset); // Additional offset caused by preceding SWITCHs, GOTOs, etc.
+        setPosition(getPosition() + offset); // Additional offset caused by preceding SWITCHs, GOTOs, etc.
         short old_length = length;
         /* Alignment on 4-byte-boundary, + 1, because of tag byte.
          */
