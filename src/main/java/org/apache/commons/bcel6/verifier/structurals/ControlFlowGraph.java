@@ -409,10 +409,21 @@ public class ControlFlowGraph{
     private final Map<InstructionHandle, InstructionContext> instructionContexts = new HashMap<>();
 
     /** 
-     * A Control Flow Graph.
+     * A Control Flow Graph; with additional JustIce checks
+     * @param  method_gen the method generator instance
      */
     public ControlFlowGraph(MethodGen method_gen){
-        subroutines = new Subroutines(method_gen);
+        this(method_gen, true);
+    }
+
+    /** 
+     * A Control Flow Graph.
+     * @param  method_gen the method generator instance
+     * @param enableJustIceCheck if true, additional JustIce checks are performed
+     * @since 6.0
+     */
+    public ControlFlowGraph(MethodGen method_gen, boolean enableJustIceCheck){
+        subroutines = new Subroutines(method_gen, enableJustIceCheck);
         exceptionhandlers = new ExceptionHandlers(method_gen);
 
         InstructionHandle[] instructionhandles = method_gen.getInstructionList().getInstructionHandles();

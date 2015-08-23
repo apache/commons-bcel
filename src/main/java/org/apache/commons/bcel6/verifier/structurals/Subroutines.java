@@ -377,9 +377,20 @@ public class Subroutines{
      * Constructor.
      * @param mg A MethodGen object representing method to
      * create the Subroutine objects of.
+     * Assumes that JustIce strict checks are needed.
      */
     public Subroutines(MethodGen mg){
+        this(mg, true);
+    }
 
+    /**
+     * Constructor.
+     * @param mg A MethodGen object representing method to
+     * create the Subroutine objects of.
+     * @param enableJustIceCheck whether to enable additional JustIce checks
+     * @since 6.0
+     */
+    public Subroutines(MethodGen mg, boolean enableJustIceCheck){
         InstructionHandle[] all = mg.getInstructionList().getInstructionHandles();
         CodeExceptionGen[] handlers = mg.getExceptionHandlers();
 
@@ -482,22 +493,24 @@ public class Subroutines{
             }
         }
 
-        // Now make sure no instruction of a Subroutine is protected by exception handling code
-        // as is mandated by JustIces notion of subroutines.
-        for (CodeExceptionGen handler : handlers) {
-            InstructionHandle _protected = handler.getStartPC();
-            while (_protected != handler.getEndPC().getNext()){
-                // Note the inclusive/inclusive notation of "generic API" exception handlers!
-                for (Subroutine sub : subroutines.values()) {
-                    if (sub != subroutines.get(all[0])){    // We don't want to forbid top-level exception handlers.
-                        if (sub.contains(_protected)){
-                            throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+
-                                "' is protected by an exception handler, '"+handler+
-                                "'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
+        if (enableJustIceCheck) {
+            // Now make sure no instruction of a Subroutine is protected by exception handling code
+            // as is mandated by JustIces notion of subroutines.
+            for (CodeExceptionGen handler : handlers) {
+                InstructionHandle _protected = handler.getStartPC();
+                while (_protected != handler.getEndPC().getNext()){
+                    // Note the inclusive/inclusive notation of "generic API" exception handlers!
+                    for (Subroutine sub : subroutines.values()) {
+                        if (sub != subroutines.get(all[0])){    // We don't want to forbid top-level exception handlers.
+                            if (sub.contains(_protected)){
+                                throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+
+                                    "' is protected by an exception handler, '"+handler+
+                                    "'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
+                            }
                         }
                     }
+                    _protected = _protected.getNext();
                 }
-                _protected = _protected.getNext();
             }
         }
 
