@@ -21,10 +21,12 @@ limitations under the License.
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 <!-- SEE: http://checkstyle.sourceforge.net/config.html#Examples -->
 <suppressions>
-     <!-- Maven generated code -->
-    <suppress checks="LineLength"  files="InstructionFinder.java"/>
+    <suppress checks="LineLength"  files="InstructionFinder.java"/> <!-- TODO later -->
+
     <suppress checks="MagicNumber" files="VerifierAppFrame.java"/> <!-- Swing files use lots of numbers -->
     <suppress checks="MagicNumber" files="VerifyDialog.java"/> <!-- Swing files use lots of numbers -->
-    <suppress checks="MagicNumber" files="src[/\\]test[/\\]"/>
+    <suppress checks="MagicNumber" files="src[/\\]test[/\\]"/> <!-- test files need numbers -->
+
+     <!-- Maven generated code -->
     <suppress checks=".*"          files="[/\\]target[/\\]"/>
 </suppressions>
