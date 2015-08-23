@@ -306,7 +306,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @return shallow copy of this attribute
      */
     @Override
-    public Object clone()
+    public Attribute clone()
     {
         Attribute attr = null;
         try
