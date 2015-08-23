@@ -409,7 +409,7 @@ public class InstructionFactory {
      * @param op operation, such as "+", "*", "&lt;&lt;", etc.
      */
     public static ArithmeticInstruction createBinaryOperation( String op, Type type ) {
-        char first = op.toCharArray()[0];
+        char first = op.charAt(0);
         switch (type.getType()) {
             case Constants.T_BYTE:
             case Constants.T_SHORT:
