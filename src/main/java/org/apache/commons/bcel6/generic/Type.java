@@ -45,11 +45,11 @@ public abstract class Type {
     public static final BasicType DOUBLE = new BasicType(Constants.T_DOUBLE);
     public static final BasicType FLOAT = new BasicType(Constants.T_FLOAT);
     public static final BasicType CHAR = new BasicType(Constants.T_CHAR);
-    public static final ObjectType OBJECT = ObjectType.getInstance("java.lang.Object");
-    public static final ObjectType CLASS = ObjectType.getInstance("java.lang.Class");
-    public static final ObjectType STRING = ObjectType.getInstance("java.lang.String");
-    public static final ObjectType STRINGBUFFER = ObjectType.getInstance("java.lang.StringBuffer");
-    public static final ObjectType THROWABLE = ObjectType.getInstance("java.lang.Throwable");
+    public static final ObjectType OBJECT = new ObjectType("java.lang.Object");
+    public static final ObjectType CLASS = new ObjectType("java.lang.Class");
+    public static final ObjectType STRING = new ObjectType("java.lang.String");
+    public static final ObjectType STRINGBUFFER = new ObjectType("java.lang.StringBuffer");
+    public static final ObjectType THROWABLE = new ObjectType("java.lang.Throwable");
     public static final Type[] NO_ARGS = new Type[0];
     public static final ReferenceType NULL = new ReferenceType() {
     };
