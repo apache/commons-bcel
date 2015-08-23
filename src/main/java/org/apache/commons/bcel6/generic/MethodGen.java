@@ -1035,8 +1035,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         signature = Utility.methodSignatureToString(signature, name, access, true,
                 getLocalVariableTable(cp));
         StringBuilder buf = new StringBuilder(signature);
-        for (int i = 0; i < getAttributes().length; i++) {
-            Attribute a = getAttributes()[i];
+        for (Attribute a : getAttributes()) {
             if (!((a instanceof Code) || (a instanceof ExceptionTable))) {
                 buf.append(" [").append(a).append("]");
             }
