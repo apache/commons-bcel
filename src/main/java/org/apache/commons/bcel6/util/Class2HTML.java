@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.classfile.Attribute;
@@ -45,8 +47,8 @@ import org.apache.commons.bcel6.classfile.Utility;
  * <LI>  "package"."class"_methods.html contains references to all methods and fields of the class
  * </OL>
  *
- * All subfiles reference each other appropiately, e.g. clicking on a
- * method in the Method's frame will jump to the appropiate method in
+ * All subfiles reference each other appropriately, e.g. clicking on a
+ * method in the Method's frame will jump to the appropriate method in
  * the Code frame.
  *
  * @version $Id$
@@ -58,7 +60,19 @@ public class Class2HTML {
     private static String class_package; // name of package, unclean to make it static, but ...
     private static String class_name; // name of current class, dito
     private static ConstantPool constant_pool;
-
+    private static final Set<String> basic_types = new HashSet<>();
+    
+    static {
+        basic_types.add("int");
+        basic_types.add("short");
+        basic_types.add("boolean");
+        basic_types.add("void");
+        basic_types.add("char");
+        basic_types.add("byte");
+        basic_types.add("long");
+        basic_types.add("double");
+        basic_types.add("float");
+    }
 
     /**
      * Write contents of the given JavaClass into HTML files.
@@ -170,10 +184,7 @@ public class Class2HTML {
             base_type = type.substring(0, index); // Tack of the `['
         }
         // test for basic type
-        if (base_type.equals("int") || base_type.equals("short") || base_type.equals("boolean")
-                || base_type.equals("void") || base_type.equals("char") || base_type.equals("byte")
-                || base_type.equals("long") || base_type.equals("double")
-                || base_type.equals("float")) {
+        if (basic_types.contains(base_type)) {
             return "<FONT COLOR=\"#00FF00\">" + type + "</FONT>";
         }
         return "<A HREF=\"" + base_type + ".html\" TARGET=_top>" + short_type + "</A>";
