@@ -187,6 +187,6 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      */
     @Override
     public String toString() {
-        return instruction.toString() + " (PUSH)";
+        return instruction + " (PUSH)";
     }
 }

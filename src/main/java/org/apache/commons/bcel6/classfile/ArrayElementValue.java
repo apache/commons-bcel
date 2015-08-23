@@ -35,7 +35,7 @@ public class ArrayElementValue extends ElementValue
         sb.append("{");
         for (int i = 0; i < evalues.length; i++)
         {
-            sb.append(evalues[i].toString());
+            sb.append(evalues[i]);
             if ((i + 1) < evalues.length) {
                 sb.append(",");
             }

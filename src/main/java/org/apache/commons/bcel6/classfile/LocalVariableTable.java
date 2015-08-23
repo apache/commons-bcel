@@ -147,7 +147,7 @@ public class LocalVariableTable extends Attribute {
     public final String toString() {
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < local_variable_table.length; i++) {
-            buf.append(local_variable_table[i].toString());
+            buf.append(local_variable_table[i]);
             if (i < local_variable_table.length - 1) {
                 buf.append('\n');
             }

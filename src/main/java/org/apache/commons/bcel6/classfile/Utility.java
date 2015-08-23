@@ -1223,7 +1223,7 @@ public abstract class Utility {
         }
         for (int i = 0; i < obj.length; i++) {
             if (obj[i] != null) {
-                buf.append(quote ? "\"" : "").append(obj[i].toString()).append(quote ? "\"" : "");
+                buf.append(quote ? "\"" : "").append(obj[i]).append(quote ? "\"" : "");
             } else {
                 buf.append("null");
             }

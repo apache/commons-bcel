@@ -98,7 +98,7 @@ public class ClassPath {
     @Override
     public String toString() {
         if (parent != null) {
-            return parent.toString() + File.pathSeparator + class_path;
+            return parent + File.pathSeparator + class_path;
         }
         return class_path;
     }

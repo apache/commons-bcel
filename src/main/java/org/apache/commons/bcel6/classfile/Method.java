@@ -179,7 +179,7 @@ public final class Method extends FieldOrMethod {
         StringBuilder buf = new StringBuilder(signature);
         for (Attribute attribute : super.getAttributes()) {
             if (!((attribute instanceof Code) || (attribute instanceof ExceptionTable))) {
-                buf.append(" [").append(attribute.toString()).append("]");
+                buf.append(" [").append(attribute).append("]");
             }
         }
         ExceptionTable e = getExceptionTable();

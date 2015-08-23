@@ -1038,7 +1038,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         for (int i = 0; i < getAttributes().length; i++) {
             Attribute a = getAttributes()[i];
             if (!((a instanceof Code) || (a instanceof ExceptionTable))) {
-                buf.append(" [").append(a.toString()).append("]");
+                buf.append(" [").append(a).append("]");
             }
         }
 
