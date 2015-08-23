@@ -42,7 +42,16 @@
     <Class name="~.*\.verifier\.TransitiveHull" />
     <Bug pattern="DM_GC" />
   </Match>
-  
+
+  <!-- clone() creates a new instance so does not need to call super.clone() -->
+  <Match>
+    <Bug pattern="CN_IDIOM_NO_SUPER_CALL"/>
+    <Method name="clone"/>
+    <Or>
+      <Class name="~.*\.verifier\.structurals\.LocalVariables"/>
+      <Class name="~.*\.verifier\.structurals\.OperandStack"/>
+    </Or>
+  </Match>
 
   <!-- Reason: TODO, perhaps? -->
   <Match>
