@@ -177,7 +177,7 @@ limitations under the License.
 
   <module name="SuppressionFilter">
     <!-- config_loc is used by Eclipse plugin -->
-    <property name="file" value="${config_loc}/checkstyle_suppressions.xml"/>
+    <property name="file" value="${config_loc}/checkstyle-suppressions.xml"/>
   </module>
 
   <!-- 
