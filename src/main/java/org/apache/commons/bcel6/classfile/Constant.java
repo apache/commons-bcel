@@ -125,8 +125,9 @@ public abstract class Constant implements Cloneable, Node {
      *
      * @param input Input stream
      * @return Constant object
+     * @since 6.0 made public
      */
-    static Constant readConstant( DataInput input ) throws IOException,
+    public static Constant readConstant( DataInput input ) throws IOException,
             ClassFormatException {
         byte b = input.readByte(); // Read tag byte
         switch (b) {

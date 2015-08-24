@@ -45,15 +45,20 @@ import org.apache.commons.bcel6.generic.Type;
  */
 public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
 
-    private static final int FLAG_FOR_UNKNOWN = -1;
-    private static final int FLAG_FOR_CLASS = 0;
-    private static final int FLAG_FOR_METHOD = 1;
+    /**
+     * Enum corresponding to flag source.
+     */
+    public enum FLAGS {
+        UNKNOWN,
+        CLASS,
+        METHOD,
+    };
+
     // The base package name for imports; assumes Constants is at the top level
     private static final String BASE_PACKAGE = Constants.class.getPackage().getName();
     private final JavaClass _clazz;
     private final PrintWriter _out;
     private final ConstantPoolGen _cp;
-
 
     /** @param clazz Java class to "decompile"
      * @param out where to output Java program
@@ -98,7 +103,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
         _out.println("    _cg = new ClassGen(\""
                 + (("".equals(package_name)) ? class_name : package_name + "." + class_name)
                 + "\", \"" + super_name + "\", " + "\"" + clazz.getSourceFileName() + "\", "
-                + printFlags(clazz.getAccessFlags(), FLAG_FOR_CLASS) + ", "
+                + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", "
                 + "new String[] { " + inter + " });");
         _out.println();
         _out.println("    _cp = _cg.getConstantPool();");
@@ -172,7 +177,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
         MethodGen mg = new MethodGen(method, _clazz.getClassName(), _cp);
         _out.println("    InstructionList il = new InstructionList();");
         _out.println("    MethodGen method = new MethodGen("
-                + printFlags(method.getAccessFlags(), FLAG_FOR_METHOD) + ", "
+                + printFlags(method.getAccessFlags(), FLAGS.METHOD) + ", "
                 + printType(mg.getReturnType()) + ", "
                 + printArgumentTypes(mg.getArgumentTypes()) + ", "
                 + "new String[] { " + Utility.printArray(mg.getArgumentNames(), false, true)
@@ -188,22 +193,28 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
 
 
     static String printFlags( int flags ) {
-        return printFlags(flags, FLAG_FOR_UNKNOWN);
+        return printFlags(flags, FLAGS.UNKNOWN);
     }
 
-
-    static String printFlags( int flags, int reason ) {
+    /**
+     * Return a string with the flag settings
+     * @param flags the flags field to interpret
+     * @param location the item type
+     * @return the formatted string
+     * @since 6.0 made public
+     */
+    public static String printFlags( int flags, FLAGS location ) {
         if (flags == 0) {
             return "0";
         }
         StringBuilder buf = new StringBuilder();
         for (int i = 0, pow = 1; pow <= Constants.MAX_ACC_FLAG; i++) {
             if ((flags & pow) != 0) {
-                if ((pow == Constants.ACC_SYNCHRONIZED) && (reason == FLAG_FOR_CLASS)) {
+                if ((pow == Constants.ACC_SYNCHRONIZED) && (location == FLAGS.CLASS)) {
                     buf.append("ACC_SUPER | ");
-                } else if ((pow == Constants.ACC_VOLATILE) && (reason == FLAG_FOR_METHOD)) {
+                } else if ((pow == Constants.ACC_VOLATILE) && (location == FLAGS.METHOD)) {
                     buf.append("ACC_BRIDGE | ");
-                } else if ((pow == Constants.ACC_TRANSIENT) && (reason == FLAG_FOR_METHOD)) {
+                } else if ((pow == Constants.ACC_TRANSIENT) && (location == FLAGS.METHOD)) {
                     buf.append("ACC_VARARGS | ");
                 } else {
                     if (i < Constants.ACCESS_NAMES.length) {
