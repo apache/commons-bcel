@@ -147,7 +147,7 @@ public class InstructionList {
             if(positions[i] == pos) {
                 return ih;
             }
-            ih = ih.next;
+            ih = ih.getNext();
         }
         return null;
     }
@@ -195,7 +195,7 @@ public class InstructionList {
          */
         for (int i = 0; i < count; i++) {
             if (ihs[i] instanceof BranchHandle) {
-                BranchInstruction bi = (BranchInstruction) ihs[i].instruction;
+                BranchInstruction bi = (BranchInstruction) ihs[i].getInstruction();
                 int target = bi.getPosition() + bi.getIndex(); /* Byte code position:
                  * relative -> absolute. */
                 // Search for target position
@@ -237,13 +237,13 @@ public class InstructionList {
         if (il.isEmpty()) {
             return ih;
         }
-        InstructionHandle next = ih.next;
+        InstructionHandle next = ih.getNext();
         InstructionHandle ret = il.start;
-        ih.next = il.start;
-        il.start.prev = ih;
-        il.end.next = next;
+        ih.setNext(il.start);
+        il.start.setPrev(ih);
+        il.end.setNext(next);
         if (next != null) {
-            next.prev = il.end;
+            next.setPrev(il.end);
         } else {
             end = il.end; // Update end ...
         }
@@ -303,11 +303,11 @@ public class InstructionList {
     private void append( InstructionHandle ih ) {
         if (isEmpty()) {
             start = end = ih;
-            ih.next = ih.prev = null;
+            ih.setNext(ih.setPrev(null));
         } else {
-            end.next = ih;
-            ih.prev = end;
-            ih.next = null;
+            end.setNext(ih);
+            ih.setPrev(end);
+            ih.setNext(null);
             end = ih;
         }
         length++; // Update length
@@ -431,13 +431,13 @@ public class InstructionList {
         if (il.isEmpty()) {
             return ih;
         }
-        InstructionHandle prev = ih.prev;
+        InstructionHandle prev = ih.getPrev();
         InstructionHandle ret = il.start;
-        ih.prev = il.end;
-        il.end.next = ih;
-        il.start.prev = prev;
+        ih.setPrev(il.end);
+        il.end.setNext(ih);
+        il.start.setPrev(prev);
         if (prev != null) {
-            prev.next = il.start;
+            prev.setNext(il.start);
         } else {
             start = il.start; // Update start ...
         }
@@ -470,11 +470,11 @@ public class InstructionList {
     private void insert( InstructionHandle ih ) {
         if (isEmpty()) {
             start = end = ih;
-            ih.next = ih.prev = null;
+            ih.setNext(ih.setPrev(null));
         } else {
-            start.prev = ih;
-            ih.next = start;
-            ih.prev = null;
+            start.setPrev(ih);
+            ih.setNext(start);
+            ih.setPrev(null);
             start = ih;
         }
         length++;
@@ -621,7 +621,7 @@ public class InstructionList {
             throw new ClassGenException("Invalid range: From " + start + " to " + end
                     + " contains target " + target);
         }
-        for (InstructionHandle ih = start; ih != end.next; ih = ih.next) {
+        for (InstructionHandle ih = start; ih != end.getNext(); ih = ih.getNext()) {
             if (ih == null) {
                 throw new ClassGenException("Invalid range: From " + start + " to " + end);
             } else if (ih == target) {
@@ -630,33 +630,33 @@ public class InstructionList {
             }
         }
         // Step 2: Temporarily remove the given instructions from the list
-        InstructionHandle prev = start.prev;
-        InstructionHandle next = end.next;
+        InstructionHandle prev = start.getPrev();
+        InstructionHandle next = end.getNext();
         if (prev != null) {
-            prev.next = next;
+            prev.setNext(next);
         } else {
             this.start = next;
         }
         if (next != null) {
-            next.prev = prev;
+            next.setPrev(prev);
         } else {
             this.end = prev;
         }
-        start.prev = end.next = null;
+        start.setPrev(end.setNext(null));
         // Step 3: append after target
         if (target == null) { // append to start of list
             if (this.start != null) {
-                this.start.prev = end;
+                this.start.setPrev(end);
             }
-            end.next = this.start;
+            end.setNext(this.start);
             this.start = start;
         } else {
-            next = target.next;
-            target.next = start;
-            start.prev = target;
-            end.next = next;
+            next = target.getNext();
+            target.setNext(start);
+            start.setPrev(target);
+            end.setNext(next);
             if (next != null) {
-                next.prev = end;
+                next.setPrev(end);
             } else {
                 this.end = end;
             }
@@ -696,31 +696,31 @@ public class InstructionList {
                 first = start;
                 start = next;
             } else {
-                first = prev.next;
-                prev.next = next;
+                first = prev.getNext();
+                prev.setNext(next);
             }
             if (next == null) { // At end of list
                 last = end;
                 end = prev;
             } else {
-                last = next.prev;
-                next.prev = prev;
+                last = next.getPrev();
+                next.setPrev(prev);
             }
         }
-        first.prev = null; // Completely separated from rest of list
-        last.next = null;
+        first.setPrev(null); // Completely separated from rest of list
+        last.setNext(null);
         List<InstructionHandle> target_vec = new ArrayList<>();
-        for (InstructionHandle ih = first; ih != null; ih = ih.next) {
+        for (InstructionHandle ih = first; ih != null; ih = ih.getNext()) {
             ih.getInstruction().dispose(); // e.g. BranchInstructions release their targets
         }
         StringBuilder buf = new StringBuilder("{ ");
         for (InstructionHandle ih = first; ih != null; ih = next) {
-            next = ih.next;
+            next = ih.getNext();
             length--;
             if (ih.hasTargeters()) { // Still got targeters?
                 target_vec.add(ih);
                 buf.append(ih.toString(true)).append(" ");
-                ih.next = ih.prev = null;
+                ih.setNext(ih.setPrev(null));
             } else {
                 ih.dispose();
             }
@@ -741,7 +741,7 @@ public class InstructionList {
      * @param ih instruction (handle) to remove 
      */
     public void delete( InstructionHandle ih ) throws TargetLostException {
-        remove(ih.prev, ih.next);
+        remove(ih.getPrev(), ih.getNext());
     }
 
 
@@ -769,7 +769,7 @@ public class InstructionList {
      * @param to   where to end deleting (inclusive)
      */
     public void delete( InstructionHandle from, InstructionHandle to ) throws TargetLostException {
-        remove(from.prev, to.next);
+        remove(from.getPrev(), to.getNext());
     }
 
 
@@ -801,8 +801,8 @@ public class InstructionList {
      * @return instruction found on success, null otherwise
      */
     private InstructionHandle findInstruction1( Instruction i ) {
-        for (InstructionHandle ih = start; ih != null; ih = ih.next) {
-            if (ih.instruction == i) {
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+            if (ih.getInstruction() == i) {
                 return ih;
             }
         }
@@ -817,8 +817,8 @@ public class InstructionList {
      * @return instruction found on success, null otherwise
      */
     private InstructionHandle findInstruction2( Instruction i ) {
-        for (InstructionHandle ih = end; ih != null; ih = ih.prev) {
-            if (ih.instruction == i) {
+        for (InstructionHandle ih = end; ih != null; ih = ih.getPrev()) {
+            if (ih.getInstruction() == i) {
                 return ih;
             }
         }
@@ -830,7 +830,7 @@ public class InstructionList {
         if (i == null) {
             return false;
         }
-        for (InstructionHandle ih = start; ih != null; ih = ih.next) {
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
             if (ih == i) {
                 return true;
             }
@@ -865,29 +865,29 @@ public class InstructionList {
         /* Pass 0: Sanity checks
          */
         if (check) {
-            for (InstructionHandle ih = start; ih != null; ih = ih.next) {
-                Instruction i = ih.instruction;
+            for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+                Instruction i = ih.getInstruction();
                 if (i instanceof BranchInstruction) { // target instruction within list?
-                    Instruction inst = ((BranchInstruction) i).getTarget().instruction;
+                    Instruction inst = ((BranchInstruction) i).getTarget().getInstruction();
                     if (!contains(inst)) {
                         throw new ClassGenException("Branch target of "
-                                + Constants.OPCODE_NAMES[i.opcode] + ":" + inst
+                                + Constants.OPCODE_NAMES[i.getOpcode()] + ":" + inst
                                 + " not in instruction list");
                     }
                     if (i instanceof Select) {
                         InstructionHandle[] targets = ((Select) i).getTargets();
                         for (InstructionHandle target : targets) {
-                            inst = target.instruction;
+                            inst = target.getInstruction();
                             if (!contains(inst)) {
                                 throw new ClassGenException("Branch target of "
-                                        + Constants.OPCODE_NAMES[i.opcode] + ":" + inst
+                                        + Constants.OPCODE_NAMES[i.getOpcode()] + ":" + inst
                                         + " not in instruction list");
                             }
                         }
                     }
                     if (!(ih instanceof BranchHandle)) {
                         throw new ClassGenException("Branch instruction "
-                                + Constants.OPCODE_NAMES[i.opcode] + ":" + inst
+                                + Constants.OPCODE_NAMES[i.getOpcode()] + ":" + inst
                                 + " not contained in BranchHandle.");
                     }
                 }
@@ -896,8 +896,8 @@ public class InstructionList {
         /* Pass 1: Set position numbers and sum up the maximum number of bytes an
          * instruction may be shifted.
          */
-        for (InstructionHandle ih = start; ih != null; ih = ih.next) {
-            Instruction i = ih.instruction;
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+            Instruction i = ih.getInstruction();
             ih.setPosition(index);
             pos[count++] = index;
             /* Get an estimate about how many additional bytes may be added, because
@@ -921,15 +921,15 @@ public class InstructionList {
          * the target offset (short or int) and ensure that branch targets are
          * within this list.
          */
-        for (InstructionHandle ih = start; ih != null; ih = ih.next) {
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
             additional_bytes += ih.updatePosition(additional_bytes, max_additional_bytes);
         }
         /* Pass 3: Update position numbers (which may have changed due to the
          * preceding expansions), like pass 1.
          */
         index = count = 0;
-        for (InstructionHandle ih = start; ih != null; ih = ih.next) {
-            Instruction i = ih.instruction;
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+            Instruction i = ih.getInstruction();
             ih.setPosition(index);
             pos[count++] = index;
             index += i.getLength();
@@ -951,8 +951,8 @@ public class InstructionList {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(b);
         try {
-            for (InstructionHandle ih = start; ih != null; ih = ih.next) {
-                Instruction i = ih.instruction;
+            for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+                Instruction i = ih.getInstruction();
                 i.dump(out); // Traverse list
             }
         } catch (IOException e) {
@@ -992,7 +992,7 @@ public class InstructionList {
      */
     public String toString( boolean verbose ) {
         StringBuilder buf = new StringBuilder();
-        for (InstructionHandle ih = start; ih != null; ih = ih.next) {
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
             buf.append(ih.toString(verbose)).append("\n");
         }
         return buf.toString();
@@ -1014,7 +1014,7 @@ public class InstructionList {
                     throw new NoSuchElementException();
                 }
                 InstructionHandle i = ih;
-                ih = ih.next;
+                ih = ih.getNext();
                 return i;
             }
 
@@ -1041,7 +1041,7 @@ public class InstructionList {
         InstructionHandle ih = start;
         for (int i = 0; i < length; i++) {
             ihs[i] = ih;
-            ih = ih.next;
+            ih = ih.getNext();
         }
         return ihs;
     }
@@ -1069,8 +1069,8 @@ public class InstructionList {
          * and associate old instruction references with the new ones, i.e.,
          * a 1:1 mapping.
          */
-        for (InstructionHandle ih = start; ih != null; ih = ih.next) {
-            Instruction i = ih.instruction;
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+            Instruction i = ih.getInstruction();
             Instruction c = i.copy(); // Use clone for shallow copy
             if (c instanceof BranchInstruction) {
                 map.put(ih, il.append((BranchInstruction) c));
@@ -1083,8 +1083,8 @@ public class InstructionList {
         InstructionHandle ih = start;
         InstructionHandle ch = il.start;
         while (ih != null) {
-            Instruction i = ih.instruction;
-            Instruction c = ch.instruction;
+            Instruction i = ih.getInstruction();
+            Instruction c = ch.getInstruction();
             if (i instanceof BranchInstruction) {
                 BranchInstruction bi = (BranchInstruction) i;
                 BranchInstruction bc = (BranchInstruction) c;
@@ -1099,8 +1099,8 @@ public class InstructionList {
                     }
                 }
             }
-            ih = ih.next;
-            ch = ch.next;
+            ih = ih.getNext();
+            ch = ch.getNext();
         }
         return il;
     }
@@ -1110,8 +1110,8 @@ public class InstructionList {
      *  constant pool
      */
     public void replaceConstantPool( ConstantPoolGen old_cp, ConstantPoolGen new_cp ) {
-        for (InstructionHandle ih = start; ih != null; ih = ih.next) {
-            Instruction i = ih.instruction;
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+            Instruction i = ih.getInstruction();
             if (i instanceof CPInstruction) {
                 CPInstruction ci = (CPInstruction) i;
                 Constant c = old_cp.getConstant(ci.getIndex());
@@ -1134,7 +1134,7 @@ public class InstructionList {
      */
     public void dispose() {
         // Traverse in reverse order, because ih.next is overwritten
-        for (InstructionHandle ih = end; ih != null; ih = ih.prev) {
+        for (InstructionHandle ih = end; ih != null; ih = ih.getPrev()) {
             /* Causes BranchInstructions to release target and targeters, because it
              * calls dispose() on the contained instruction.
              */
@@ -1184,7 +1184,7 @@ public class InstructionList {
      * @param new_target the new target instruction handle
      */
     public void redirectBranches( InstructionHandle old_target, InstructionHandle new_target ) {
-        for (InstructionHandle ih = start; ih != null; ih = ih.next) {
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
             Instruction i = ih.getInstruction();
             if (i instanceof BranchInstruction) {
                 BranchInstruction b = (BranchInstruction) i;
