@@ -871,7 +871,7 @@ public class InstructionList {
                     Instruction inst = ((BranchInstruction) i).getTarget().getInstruction();
                     if (!contains(inst)) {
                         throw new ClassGenException("Branch target of "
-                                + Constants.OPCODE_NAMES[i.getOpcode()] + ":" + inst
+                                + Constants.getOpcodeName(i.getOpcode()) + ":" + inst
                                 + " not in instruction list");
                     }
                     if (i instanceof Select) {
@@ -880,14 +880,14 @@ public class InstructionList {
                             inst = target.getInstruction();
                             if (!contains(inst)) {
                                 throw new ClassGenException("Branch target of "
-                                        + Constants.OPCODE_NAMES[i.getOpcode()] + ":" + inst
+                                        + Constants.getOpcodeName(i.getOpcode()) + ":" + inst
                                         + " not in instruction list");
                             }
                         }
                     }
                     if (!(ih instanceof BranchHandle)) {
                         throw new ClassGenException("Branch instruction "
-                                + Constants.OPCODE_NAMES[i.getOpcode()] + ":" + inst
+                                + Constants.getOpcodeName(i.getOpcode()) + ":" + inst
                                 + " not contained in BranchHandle.");
                     }
                 }

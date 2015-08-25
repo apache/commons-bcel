@@ -1595,7 +1595,9 @@ public final class Constants {
 
   /**
    * Names of opcodes.  Indexed by opcode.  OPCODE_NAMES[ALOAD] = "aload".
+   * @deprecated Do not use; will be made private . Use getOpcodeName(int) instead
    */
+  @Deprecated
   public static final String[] OPCODE_NAMES = {
     "nop", "aconst_null", "iconst_m1", "iconst_0", "iconst_1",
     "iconst_2", "iconst_3", "iconst_4", "iconst_5", "lconst_0",
@@ -1644,6 +1646,19 @@ public final class Constants {
     ILLEGAL_OPCODE, ILLEGAL_OPCODE, ILLEGAL_OPCODE, ILLEGAL_OPCODE,
     ILLEGAL_OPCODE, "impdep1", "impdep2"
   };
+
+  /**
+   * @since 6.0
+   */
+  public static final int OPCODE_NAMES_LENGTH = OPCODE_NAMES.length;
+
+
+  /**
+   * @since 6.0
+   */
+  public static String getOpcodeName(int index) {
+      return OPCODE_NAMES[index]; 
+  }
 
   /**
    * Number of words consumed on operand stack by instructions.

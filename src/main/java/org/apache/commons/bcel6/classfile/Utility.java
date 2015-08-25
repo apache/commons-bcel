@@ -198,7 +198,7 @@ public abstract class Utility {
         int[] jump_table;
         int no_pad_bytes = 0;
         int offset;
-        StringBuilder buf = new StringBuilder(Constants.OPCODE_NAMES[opcode]);
+        StringBuilder buf = new StringBuilder(Constants.getOpcodeName(opcode));
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned
          */
@@ -209,7 +209,7 @@ public abstract class Utility {
                 byte b;
                 if ((b = bytes.readByte()) != 0) {
                     System.err.println("Warning: Padding byte != 0 in "
-                            + Constants.OPCODE_NAMES[opcode] + ":" + b);
+                            + Constants.getOpcodeName(opcode) + ":" + b);
                 }
             }
             // Both cases have a field default_offset in common
@@ -1101,8 +1101,8 @@ public abstract class Utility {
      */
     public static short searchOpcode( String name ) {
         name = name.toLowerCase(Locale.ENGLISH);
-        for (short i = 0; i < Constants.OPCODE_NAMES.length; i++) {
-            if (Constants.OPCODE_NAMES[i].equals(name)) {
+        for (short i = 0; i < Constants.OPCODE_NAMES_LENGTH; i++) {
+            if (Constants.getOpcodeName(i).equals(name)) {
                 return i;
             }
         }

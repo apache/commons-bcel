@@ -98,7 +98,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
         if (c instanceof ConstantClass) {
             str = str.replace('.', '/');
         }
-        return org.apache.commons.bcel6.Constants.OPCODE_NAMES[super.getOpcode()] + " " + str;
+        return org.apache.commons.bcel6.Constants.getOpcodeName(super.getOpcode()) + " " + str;
     }
 
 

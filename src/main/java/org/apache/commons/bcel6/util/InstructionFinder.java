@@ -114,7 +114,7 @@ public class InstructionFinder {
             return result;
         }
         for (short i = 0; i < NO_OPCODES; i++) {
-            if (pattern.equals(Constants.OPCODE_NAMES[i])) {
+            if (pattern.equals(Constants.getOpcodeName(i))) {
                 return "" + makeChar(i);
             }
         }
@@ -407,7 +407,7 @@ public class InstructionFinder {
 //            char ch = pattern.charAt(i);
 //            if (ch >= OFFSET) {
 //                if (make_string) {
-//                    buf.append(Constants.OPCODE_NAMES[ch - OFFSET]);
+//                    buf.append(Constants.getOpcodeName(ch - OFFSET));
 //                } else {
 //                    buf.append((ch - OFFSET));
 //                }

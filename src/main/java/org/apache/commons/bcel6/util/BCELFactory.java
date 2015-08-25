@@ -151,7 +151,7 @@ class BCELFactory extends EmptyVisitor {
         Type type = i.getFieldType(_cp);
         _out.println("il.append(_factory.createFieldAccess(\"" + class_name + "\", \"" + field_name
                 + "\", " + BCELifier.printType(type) + ", " + "Constants."
-                + Constants.OPCODE_NAMES[opcode].toUpperCase(Locale.ENGLISH) + "));");
+                + Constants.getOpcodeName(opcode).toUpperCase(Locale.ENGLISH) + "));");
     }
 
 
@@ -165,7 +165,7 @@ class BCELFactory extends EmptyVisitor {
         _out.println("il.append(_factory.createInvoke(\"" + class_name + "\", \"" + method_name
                 + "\", " + BCELifier.printType(type) + ", "
                 + BCELifier.printArgumentTypes(arg_types) + ", " + "Constants."
-                + Constants.OPCODE_NAMES[opcode].toUpperCase(Locale.ENGLISH) + "));");
+                + Constants.getOpcodeName(opcode).toUpperCase(Locale.ENGLISH) + "));");
     }
 
 

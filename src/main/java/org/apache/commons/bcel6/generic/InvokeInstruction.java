@@ -54,7 +54,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     public String toString( ConstantPool cp ) {
         Constant c = cp.getConstant(super.getIndex());
         StringTokenizer tok = new StringTokenizer(cp.constantToString(c));
-        return Constants.OPCODE_NAMES[super.getOpcode()] + " " + tok.nextToken().replace('.', '/')
+        return Constants.getOpcodeName(super.getOpcode()) + " " + tok.nextToken().replace('.', '/')
                 + tok.nextToken();
     }
 

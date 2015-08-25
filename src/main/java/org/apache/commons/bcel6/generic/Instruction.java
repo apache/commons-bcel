@@ -72,7 +72,7 @@ public abstract class Instruction implements Cloneable {
     /** @return name of instruction, i.e., opcode name
      */
     public String getName() {
-        return Constants.OPCODE_NAMES[opcode];
+        return Constants.getOpcodeName(opcode);
     }
 
 
