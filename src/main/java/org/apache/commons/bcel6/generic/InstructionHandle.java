@@ -44,10 +44,9 @@ import org.apache.commons.bcel6.classfile.Utility;
  */
 public class InstructionHandle {
 
-    // TODO make private
-    InstructionHandle next;
-    InstructionHandle prev;
-    Instruction instruction;
+    private InstructionHandle next;
+    private InstructionHandle prev;
+    private Instruction instruction;
 
     /**
      * @deprecated will be made private; do not access directly, use getter/setter
