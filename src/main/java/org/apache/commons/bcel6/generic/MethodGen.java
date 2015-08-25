@@ -487,7 +487,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         CodeException[] c_exc = new CodeException[size];
         for (int i = 0; i < size; i++) {
             CodeExceptionGen c =  exception_vec.get(i);
-            c_exc[i] = c.getCodeException(cp);
+            c_exc[i] = c.getCodeException(super.getConstantPool());
         }
         return c_exc;
     }
@@ -615,8 +615,9 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public Method getMethod() {
         String signature = getSignature();
-        int name_index = cp.addUtf8(name);
-        int signature_index = cp.addUtf8(signature);
+        final ConstantPoolGen _cp = super.getConstantPool();
+        int name_index = _cp.addUtf8(super.getName());
+        int signature_index = _cp.addUtf8(signature);
         /* Also updates positions of instructions, i.e., their indices
          */
         byte[] byte_code = null;
@@ -628,10 +629,10 @@ public class MethodGen extends FieldGenOrMethodGen {
         /* Create LocalVariableTable and LineNumberTable attributes (for debuggers, e.g.)
          */
         if ((variable_vec.size() > 0) && !strip_attributes) {
-            addCodeAttribute(lvt = getLocalVariableTable(cp));
+            addCodeAttribute(lvt = getLocalVariableTable(_cp));
         }
         if ((line_number_vec.size() > 0) && !strip_attributes) {
-            addCodeAttribute(lnt = getLineNumberTable(cp));
+            addCodeAttribute(lnt = getLineNumberTable(_cp));
         }
         Attribute[] code_attrs = getCodeAttributes();
         /* Each attribute causes 6 additional header bytes
@@ -651,20 +652,20 @@ public class MethodGen extends FieldGenOrMethodGen {
                     removeAttribute(a);
                 }
             }
-            code = new Code(cp.addUtf8("Code"), 8 + byte_code.length + // prologue byte code
+            code = new Code(_cp.addUtf8("Code"), 8 + byte_code.length + // prologue byte code
                     2 + exc_len + // exceptions
                     2 + attrs_len, // attributes
-                    max_stack, max_locals, byte_code, c_exc, code_attrs, cp.getConstantPool());
+                    max_stack, max_locals, byte_code, c_exc, code_attrs, _cp.getConstantPool());
             addAttribute(code);
         }
-        addAnnotationsAsAttribute(cp);
-        addParameterAnnotationsAsAttribute(cp);
+        addAnnotationsAsAttribute(_cp);
+        addParameterAnnotationsAsAttribute(_cp);
         ExceptionTable et = null;
         if (throws_vec.size() > 0) {
-            addAttribute(et = getExceptionTable(cp));
+            addAttribute(et = getExceptionTable(_cp));
             // Add `Exceptions' if there are "throws" clauses
         }
-        Method m = new Method(super.getAccessFlags(), name_index, signature_index, getAttributes(), cp
+        Method m = new Method(super.getAccessFlags(), name_index, signature_index, getAttributes(), _cp
                 .getConstantPool());
         // Undo effects of adding attributes
         if (lvt != null) {
@@ -694,7 +695,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             /* Check branch instructions.
              */
             for (InstructionHandle ih = il.getStart(); ih != null; ih = next) {
-                next = ih.next;
+                next = ih.getNext();
                 if ((next != null) && (ih.getInstruction() instanceof NOP)) {
                     try {
                         il.delete(ih);
@@ -811,7 +812,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     @Override
     public String getSignature() {
-        return Type.getMethodSignature(type, arg_types);
+        return Type.getMethodSignature(super.getType(), arg_types);
     }
 
 
@@ -820,7 +821,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public void setMaxStack() { // TODO could be package-protected? (some tests would need repackaging)
         if (il != null) {
-            max_stack = getMaxStack(cp, il, getExceptionHandlers());
+            max_stack = getMaxStack(super.getConstantPool(), il, getExceptionHandlers());
         } else {
             max_stack = 0;
         }
@@ -843,7 +844,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                 if ((ins instanceof LocalVariableInstruction) || (ins instanceof RET)
                         || (ins instanceof IINC)) {
                     int index = ((IndexedInstruction) ins).getIndex()
-                            + ((TypedInstruction) ins).getType(cp).getSize();
+                            + ((TypedInstruction) ins).getType(super.getConstantPool()).getSize();
                     if (index > max) {
                         max = index;
                     }
@@ -1031,9 +1032,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     @Override
     public final String toString() {
         String access = Utility.accessToString(super.getAccessFlags());
-        String signature = Type.getMethodSignature(type, arg_types);
-        signature = Utility.methodSignatureToString(signature, name, access, true,
-                getLocalVariableTable(cp));
+        String signature = Type.getMethodSignature(super.getType(), arg_types);
+        signature = Utility.methodSignatureToString(signature, super.getName(), access, true,
+                getLocalVariableTable(super.getConstantPool()));
         StringBuilder buf = new StringBuilder(signature);
         for (Attribute a : getAttributes()) {
             if (!((a instanceof Code) || (a instanceof ExceptionTable))) {
@@ -1054,10 +1055,10 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public MethodGen copy( String class_name, ConstantPoolGen cp ) {
         Method m = ((MethodGen) clone()).getMethod();
-        MethodGen mg = new MethodGen(m, class_name, this.cp);
-        if (this.cp != cp) {
+        MethodGen mg = new MethodGen(m, class_name, super.getConstantPool());
+        if (super.getConstantPool() != cp) {
             mg.setConstantPool(cp);
-            mg.getInstructionList().replaceConstantPool(this.cp, cp);
+            mg.getInstructionList().replaceConstantPool(super.getConstantPool(), cp);
         }
         return mg;
     }
