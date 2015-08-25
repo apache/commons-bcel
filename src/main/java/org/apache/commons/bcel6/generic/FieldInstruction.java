@@ -47,7 +47,7 @@ public abstract class FieldInstruction extends FieldOrMethod {
      */
     @Override
     public String toString( ConstantPool cp ) {
-        return org.apache.commons.bcel6.Constants.OPCODE_NAMES[opcode] + " "
+        return org.apache.commons.bcel6.Constants.OPCODE_NAMES[super.getOpcode()] + " "
                 + cp.constantToString(super.getIndex(), org.apache.commons.bcel6.Constants.CONSTANT_Fieldref);
     }
 
