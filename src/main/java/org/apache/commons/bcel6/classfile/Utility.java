@@ -1326,8 +1326,8 @@ public abstract class Utility {
 
     // A-Z, g-z, _, $
     private static final int FREE_CHARS = 48;
-    static int[] CHAR_MAP = new int[FREE_CHARS];
-    static int[] MAP_CHAR = new int[256]; // Reverse map
+    private static int[] CHAR_MAP = new int[FREE_CHARS];
+    private static int[] MAP_CHAR = new int[256]; // Reverse map
     private static final char ESCAPE_CHAR = '$';
     static {
         int j = 0;
