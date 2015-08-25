@@ -35,11 +35,40 @@ import org.apache.commons.bcel6.util.ByteSequence;
 public abstract class Select extends BranchInstruction implements VariableLengthInstruction,
         StackConsumer /* @since 6.0 */, StackProducer {
 
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int[] match; // matches, i.e., case 1: ... TODO could be package-protected?
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int[] indices; // target offsets TODO could be package-protected?
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected InstructionHandle[] targets; // target objects in instruction list TODO could be package-protected?
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int fixed_length; // fixed length defined by subclasses TODO could be package-protected?
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int match_length; // number of cases TODO could be package-protected?
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int padding = 0; // number of pad bytes for alignment TODO could be package-protected?
 
 
@@ -242,5 +271,120 @@ public abstract class Select extends BranchInstruction implements VariableLength
      */
     public InstructionHandle[] getTargets() {
         return targets;
+    }
+
+    /**
+     * @return match entry
+     * @since 6.0
+     */
+    final int getMatch(int index) {
+        return match[index];
+    }
+
+
+    /**
+     * @return index entry from indices
+     * @since 6.0
+     */
+    final int getIndices(int index) {
+        return indices[index];
+    }
+
+    /**
+     * @return target entry
+     * @since 6.0
+     */
+    final InstructionHandle getTarget(int index) {
+        return targets[index];
+    }
+
+
+    /**
+     * @return the fixed_length
+     * @since 6.0
+     */
+    final int getFixed_length() {
+        return fixed_length;
+    }
+
+
+    /**
+     * @param fixed_length the fixed_length to set
+     * @since 6.0
+     */
+    final void setFixed_length(int fixed_length) {
+        this.fixed_length = fixed_length;
+    }
+
+
+    /**
+     * @return the match_length
+     * @since 6.0
+     */
+    final int getMatch_length() {
+        return match_length;
+    }
+
+
+    /**
+     * @param match_length the match_length to set
+     * @since 6.0
+     */
+    final int setMatch_length(int match_length) {
+        this.match_length = match_length;
+        return match_length;
+    }
+    
+    /**
+     * 
+     * @param index
+     * @param value
+     * @since 6.0
+     */
+    final void setMatch(int index, int value) {
+        match[index] = value;
+    }
+    
+    /**
+     * 
+     * @param array
+     * @since 6.0
+     */
+    final void setIndices(int[] array) {
+        indices = array;
+    }
+    
+    /**
+     * 
+     * @param array
+     * @since 6.0
+     */
+    final void setMatches(int[] array) {
+        match = array;
+    }
+    
+    /**
+     * 
+     * @param array
+     * @since 6.0
+     */
+    final void setTargets(InstructionHandle[] array) {
+        targets = array;
+    }
+    
+    /**
+     * 
+     * @return
+     * @since 6.0
+     */
+    final int getPadding() {
+        return padding;
+    }
+
+
+    /** @since 6.0 */
+    final int setIndices(int i, int value) {
+        indices[i] = value;
+        return value;  // Allow use in nested calls
     }
 }

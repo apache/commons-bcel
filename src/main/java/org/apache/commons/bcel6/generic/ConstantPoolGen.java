@@ -53,9 +53,25 @@ import org.apache.commons.bcel6.classfile.ConstantUtf8;
 public class ConstantPoolGen {
 
     private static final int DEFAULT_BUFFER_SIZE = 256;
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int size; 
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected Constant[] constants;
+
+    /**
+     * @deprecated will be made private; do not access directly, use getSize()
+     */
+    @Deprecated
     protected int index = 1; // First entry (0) used by JVM
+
     private static final String METHODREF_DELIM = ":";
     private static final String IMETHODREF_DELIM = "#";
     private static final String FIELDREF_DELIM = "&";

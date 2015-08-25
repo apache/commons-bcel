@@ -44,10 +44,17 @@ import org.apache.commons.bcel6.classfile.Utility;
  */
 public class InstructionHandle {
 
+    // TODO make private
     InstructionHandle next;
-    InstructionHandle prev; // Will be set from the outside
+    InstructionHandle prev;
     Instruction instruction;
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int i_position = -1; // byte code offset of instruction
+
     private Set<InstructionTargeter> targeters;
     private Map<Object, Object> attributes;
 
@@ -288,5 +295,25 @@ public class InstructionHandle {
      */
     public void accept( Visitor v ) {
         instruction.accept(v);
+    }
+
+
+    /**
+     * @param next the next to set
+     * @ since 6.0
+     */
+    final InstructionHandle setNext(InstructionHandle next) {
+        this.next = next;
+        return next;
+    }
+
+
+    /**
+     * @param prev the prev to set
+     * @ since 6.0
+     */
+    final InstructionHandle setPrev(InstructionHandle prev) {
+        this.prev = prev;
+        return prev;
     }
 }

@@ -32,8 +32,22 @@ import org.apache.commons.bcel6.util.ByteSequence;
  */
 public abstract class BranchInstruction extends Instruction implements InstructionTargeter {
 
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int index; // Branch target relative to this instruction
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected InstructionHandle target; // Target object in instruction list
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int position; // Byte code offset
 
 

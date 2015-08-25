@@ -31,7 +31,12 @@ import org.apache.commons.bcel6.util.ByteSequence;
 public abstract class LocalVariableInstruction extends Instruction implements TypedInstruction,
         IndexedInstruction {
 
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @Deprecated
     protected int n = -1; // index of referenced variable
+
     private short c_tag = -1; // compact version, such as ILOAD_0
     private short canon_tag = -1; // canonical tag such as ILOAD
 
@@ -139,7 +144,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
 
     /**
-     * @return local variable index  referred by this instruction.
+     * @return local variable index (n) referred by this instruction.
      */
     @Override
     public final int getIndex() {
