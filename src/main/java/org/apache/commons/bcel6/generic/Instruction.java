@@ -148,9 +148,12 @@ public abstract class Instruction implements Cloneable {
     /**
      * Read an instruction from (byte code) input stream and return the
      * appropiate object.
-     *
+     * <p>
+     * If the Instruction is defined in {@link InstructionConstants}, then the
+     * singleton instance is returned.
      * @param bytes input stream bytes
      * @return instruction object being read
+     * @see InstructionConstants#getInstruction(int)
      */
     // @since 6.0 no longer final
     public static Instruction readInstruction( ByteSequence bytes ) throws IOException {

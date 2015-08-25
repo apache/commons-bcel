@@ -39,6 +39,10 @@ public class InstructionConstants {
 
     /** Predefined instruction objects
      */
+    /*
+     * NOTE these are not currently immutable, because Instruction
+     * has mutable protected fields opcode and length.
+     */
     public static final Instruction NOP = new NOP();
     public static final Instruction ACONST_NULL = new ACONST_NULL();
     public static final Instruction ICONST_M1 = new ICONST(-1);
