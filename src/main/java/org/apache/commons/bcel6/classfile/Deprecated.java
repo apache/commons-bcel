@@ -126,7 +126,7 @@ public final class Deprecated extends Attribute {
      */
     @Override
     public final String toString() {
-        return Constants.ATTRIBUTE_NAMES[Constants.ATTR_DEPRECATED];
+        return Constants.getAttributeName(Constants.ATTR_DEPRECATED);
     }
 
 

@@ -113,7 +113,7 @@ public abstract class Utility {
                 if (for_class && ((p == Constants.ACC_SUPER) || (p == Constants.ACC_INTERFACE))) {
                     continue;
                 }
-                buf.append(Constants.ACCESS_NAMES[i]).append(" ");
+                buf.append(Constants.getAccessName(i)).append(" ");
             }
         }
         return buf.toString().trim();
@@ -318,7 +318,7 @@ public abstract class Utility {
             /* Array of basic type.
              */
             case Constants.NEWARRAY:
-                buf.append("\t\t<").append(Constants.TYPE_NAMES[bytes.readByte()]).append(">");
+                buf.append("\t\t<").append(Constants.getTypeName(bytes.readByte())).append(">");
                 break;
             /* Access object/class fields.
              */
@@ -428,7 +428,7 @@ public abstract class Utility {
                 buf.append("\t\t%").append(vindex).append("\t").append(constant);
                 break;
             default:
-                if (Constants.NO_OF_OPERANDS[opcode] > 0) {
+                if (Constants.getNoOfOperands(opcode) > 0) {
                     for (int i = 0; i < Constants.getOperandTypeCount(opcode); i++) {
                         buf.append("\t\t");
                         switch (Constants.getOperandType(opcode, i)) {
@@ -987,9 +987,9 @@ public abstract class Utility {
         }
         boolean found = false;
         for (int i = Constants.T_BOOLEAN; (i <= Constants.T_VOID) && !found; i++) {
-            if (Constants.TYPE_NAMES[i].equals(type)) {
+            if (Constants.getTypeName(i).equals(type)) {
                 found = true;
-                buf.append(Constants.SHORT_TYPE_NAMES[i]);
+                buf.append(Constants.getShortTypeName(i));
             }
         }
         if (!found) {

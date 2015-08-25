@@ -480,7 +480,7 @@ public abstract class Instruction implements Cloneable {
      * or Constants.UNPREDICTABLE, if this can not be computed statically
      */
     public int consumeStack( ConstantPoolGen cpg ) {
-        return Constants.CONSUME_STACK[opcode];
+        return Constants.getConsumeStack(opcode);
     }
 
 
@@ -492,7 +492,7 @@ public abstract class Instruction implements Cloneable {
      * or Constants.UNPREDICTABLE, if this can not be computed statically
      */
     public int produceStack( ConstantPoolGen cpg ) {
-        return Constants.PRODUCE_STACK[opcode];
+        return Constants.getProduceStack(opcode);
     }
 
 

@@ -33,7 +33,7 @@ public final class BasicType extends Type {
      * @see Constants
      */
     BasicType(byte type) {
-        super(type, Constants.SHORT_TYPE_NAMES[type]);
+        super(type, Constants.getShortTypeName(type));
         if ((type < Constants.T_BOOLEAN) || (type > Constants.T_VOID)) {
             throw new ClassGenException("Invalid type: " + type);
         }

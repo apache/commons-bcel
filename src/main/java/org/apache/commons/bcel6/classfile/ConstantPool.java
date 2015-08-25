@@ -258,7 +258,7 @@ public class ConstantPool implements Cloneable, Node {
             throw new ClassFormatException("Constant pool at index " + index + " is null.");
         }
         if (c.getTag() != tag) {
-            throw new ClassFormatException("Expected class `" + Constants.CONSTANT_NAMES[tag]
+            throw new ClassFormatException("Expected class `" + Constants.getConstantName(tag)
                     + "' at index " + index + " and got " + c);
         }
         return c;

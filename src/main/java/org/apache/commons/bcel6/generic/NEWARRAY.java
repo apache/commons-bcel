@@ -86,7 +86,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      */
     @Override
     public String toString( boolean verbose ) {
-        return super.toString(verbose) + " " + org.apache.commons.bcel6.Constants.TYPE_NAMES[type];
+        return super.toString(verbose) + " " + org.apache.commons.bcel6.Constants.getTypeName(type);
     }
 
 

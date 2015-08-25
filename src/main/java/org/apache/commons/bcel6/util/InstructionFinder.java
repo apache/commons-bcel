@@ -369,7 +369,7 @@ public class InstructionFinder {
         // Add instruction alias to match anything
         StringBuilder buf = new StringBuilder("(");
         for (short i = 0; i < NO_OPCODES; i++) {
-            if (Constants.NO_OF_OPERANDS[i] != Constants.UNDEFINED) { // Not an invalid opcode
+            if (Constants.getNoOfOperands(i) != Constants.UNDEFINED) { // Not an invalid opcode
                 buf.append(makeChar(i));
                 if (i < NO_OPCODES - 1) {
                     buf.append('|');

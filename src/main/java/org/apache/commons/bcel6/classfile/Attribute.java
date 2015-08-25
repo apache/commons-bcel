@@ -180,7 +180,7 @@ public abstract class Attribute implements Cloneable, Node {
         // Compare strings to find known attribute
         for (byte i = 0; i < Constants.KNOWN_ATTRIBUTES; i++)
         {
-            if (name.equals(Constants.ATTRIBUTE_NAMES[i]))
+            if (name.equals(Constants.getAttributeName(i)))
             {
                 tag = i; // found!
                 break;
@@ -347,6 +347,6 @@ public abstract class Attribute implements Cloneable, Node {
     @Override
     public String toString()
     {
-        return Constants.ATTRIBUTE_NAMES[tag];
+        return Constants.getAttributeName(tag);
     }
 }

@@ -133,7 +133,7 @@ public final class StackMapType implements Cloneable {
      */
     @Override
     public final String toString() {
-        return "(type=" + Constants.ITEM_NAMES[type] + printIndex() + ")";
+        return "(type=" + Constants.getItemName(type) + printIndex() + ")";
     }
 
 

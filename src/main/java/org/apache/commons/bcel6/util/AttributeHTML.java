@@ -92,7 +92,7 @@ final class AttributeHTML {
         } else {
             file.print("<TR BGCOLOR=\"#A0A0A0\"><TD>");
         }
-        file.println("<H4><A NAME=\"" + anchor + "\">" + attr_count + " " + Constants.ATTRIBUTE_NAMES[tag]
+        file.println("<H4><A NAME=\"" + anchor + "\">" + attr_count + " " + Constants.getAttributeName(tag)
                 + "</A></H4>");
         /* Handle different attributes
          */

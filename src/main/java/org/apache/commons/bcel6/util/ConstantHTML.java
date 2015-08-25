@@ -89,7 +89,7 @@ final class ConstantHTML {
         int name_index;
         String ref;
         // The header is always the same
-        file.println("<H4> <A NAME=cp" + index + ">" + index + "</A> " + Constants.CONSTANT_NAMES[tag]
+        file.println("<H4> <A NAME=cp" + index + ">" + index + "</A> " + Constants.getConstantName(tag)
                 + "</H4>");
         /* For every constant type get the needed parameters and print them appropiately 
          */

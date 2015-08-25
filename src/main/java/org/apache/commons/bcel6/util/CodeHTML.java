@@ -218,7 +218,7 @@ final class CodeHTML {
             /* Array of basic type.
              */
             case Constants.NEWARRAY:
-                buf.append("<FONT COLOR=\"#00FF00\">").append(Constants.TYPE_NAMES[bytes.readByte()]).append(
+                buf.append("<FONT COLOR=\"#00FF00\">").append(Constants.getTypeName(bytes.readByte())).append(
                         "</FONT>");
                 break;
             /* Access object/class fields.
@@ -354,7 +354,7 @@ final class CodeHTML {
                 buf.append("%").append(vindex).append(" ").append(constant);
                 break;
             default:
-                if (Constants.NO_OF_OPERANDS[opcode] > 0) {
+                if (Constants.getNoOfOperands(opcode) > 0) {
                     for (int i = 0; i < Constants.getOperandTypeCount(opcode); i++) {
                         switch (Constants.getOperandType(opcode, i)) {
                             case Constants.T_BYTE:
@@ -527,7 +527,7 @@ final class CodeHTML {
                 if (tag != Constants.ATTR_UNKNOWN) {
                     file.print("<LI><A HREF=\"" + class_name + "_attributes.html#method"
                             + method_number + "@" + i + "\" TARGET=Attributes>"
-                            + Constants.ATTRIBUTE_NAMES[tag] + "</A></LI>\n");
+                            + Constants.getAttributeName(tag) + "</A></LI>\n");
                 } else {
                     file.print("<LI>" + attributes[i] + "</LI>");
                 }
@@ -540,7 +540,7 @@ final class CodeHTML {
                         tag = attributes2[j].getTag();
                         file.print("<LI><A HREF=\"" + class_name + "_attributes.html#" + "method"
                                 + method_number + "@" + i + "@" + j + "\" TARGET=Attributes>"
-                                + Constants.ATTRIBUTE_NAMES[tag] + "</A></LI>\n");
+                                + Constants.getAttributeName(tag) + "</A></LI>\n");
                     }
                     file.print("</UL>");
                 }
