@@ -50,7 +50,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
             throw new ClassGenException("Invalid dimensions value: " + dimensions);
         }
         this.dimensions = dimensions;
-        length = 4;
+        super.setLength(4);
     }
 
 
@@ -60,7 +60,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      */
     @Override
     public void dump( DataOutputStream out ) throws IOException {
-        out.writeByte(opcode);
+        out.writeByte(super.getOpcode());
         out.writeShort(super.getIndex());
         out.writeByte(dimensions);
     }
@@ -73,7 +73,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
         dimensions = bytes.readByte();
-        length = 4;
+        super.setLength(4);
     }
 
 

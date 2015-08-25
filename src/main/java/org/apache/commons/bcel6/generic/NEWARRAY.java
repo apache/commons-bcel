@@ -60,7 +60,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      */
     @Override
     public void dump( DataOutputStream out ) throws IOException {
-        out.writeByte(opcode);
+        out.writeByte(super.getOpcode());
         out.writeByte(type);
     }
 
@@ -96,7 +96,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         type = bytes.readByte();
-        length = 2;
+        super.setLength(2);
     }
 
 
