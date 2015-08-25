@@ -1528,7 +1528,10 @@ public final class Constants {
    * How the byte code operands are to be interpreted for each opcode.
    * Indexed by opcode.  TYPE_OF_OPERANDS[ILOAD] = an array of shorts
    * describing the data types for the instruction.
+   * @deprecated Do not use; will be made private.
+   * Use getOperandType(int, int) instead
    */
+  @Deprecated
   public static final short[][] TYPE_OF_OPERANDS = {
     {}/*nop*/, {}/*aconst_null*/, {}/*iconst_m1*/, {}/*iconst_0*/,
     {}/*iconst_1*/, {}/*iconst_2*/, {}/*iconst_3*/, {}/*iconst_4*/,
@@ -1592,6 +1595,20 @@ public final class Constants {
     {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
     {}/*impdep1*/, {}/*impdep2*/
   };
+
+  /**
+   * @since 6.0
+   */
+  public static short getOperandType(int opcode, int index) {
+      return TYPE_OF_OPERANDS[opcode][index];
+  }
+
+  /**
+   * @since 6.0
+   */
+  public static long getOperandTypeCount(int opcode) {
+      return TYPE_OF_OPERANDS[opcode].length;
+  }
 
   /**
    * Names of opcodes.  Indexed by opcode.  OPCODE_NAMES[ALOAD] = "aload".
@@ -1863,10 +1880,24 @@ public final class Constants {
   public static final byte REF_newInvokeSpecial = 8;
   public static final byte REF_invokeInterface  = 9;
   
-  /** The names of the referencd_kinds of a CONSTANT_MethodHandle_info. */
+  /**
+   * The names of the reference_kinds of a CONSTANT_MethodHandle_info.
+   * @deprecated Do not use; will be made private . Use getMethodHandleName(int) instead
+   */
+  @Deprecated
   public static final String[] METHODHANDLE_NAMES = {
       "", "getField", "getStatic", "putField", "putStatic", "invokeVirtual",
       "invokeStatic", "invokeSpecial", "newInvokeSpecial", "invokeInterface" };
+
+  /**
+   * 
+   * @param index
+   * @return
+   * @since 6.0
+   */
+  public static String getMethodHandleName(int index) {
+      return METHODHANDLE_NAMES[index];
+  }
 
   private Constants() { } // not instantiable
 

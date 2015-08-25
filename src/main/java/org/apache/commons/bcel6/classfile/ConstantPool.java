@@ -145,7 +145,7 @@ public class ConstantPool implements Cloneable, Node {
                 // Note that the ReferenceIndex may point to a Fieldref, Methodref or
                 // InterfaceMethodref - so we need to peek ahead to get the actual type.
                 ConstantMethodHandle cmh = (ConstantMethodHandle) c;
-                str = Constants.METHODHANDLE_NAMES[cmh.getReferenceKind()]
+                str = Constants.getMethodHandleName(cmh.getReferenceKind())
                         + " " + constantToString(cmh.getReferenceIndex(),
                         getConstant(cmh.getReferenceIndex()).getTag());
                 break;            

@@ -429,9 +429,9 @@ public abstract class Utility {
                 break;
             default:
                 if (Constants.NO_OF_OPERANDS[opcode] > 0) {
-                    for (int i = 0; i < Constants.TYPE_OF_OPERANDS[opcode].length; i++) {
+                    for (int i = 0; i < Constants.getOperandTypeCount(opcode); i++) {
                         buf.append("\t\t");
-                        switch (Constants.TYPE_OF_OPERANDS[opcode][i]) {
+                        switch (Constants.getOperandType(opcode, i)) {
                             case Constants.T_BYTE:
                                 buf.append(bytes.readByte());
                                 break;

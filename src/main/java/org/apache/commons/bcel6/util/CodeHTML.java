@@ -355,8 +355,8 @@ final class CodeHTML {
                 break;
             default:
                 if (Constants.NO_OF_OPERANDS[opcode] > 0) {
-                    for (int i = 0; i < Constants.TYPE_OF_OPERANDS[opcode].length; i++) {
-                        switch (Constants.TYPE_OF_OPERANDS[opcode][i]) {
+                    for (int i = 0; i < Constants.getOperandTypeCount(opcode); i++) {
+                        switch (Constants.getOperandType(opcode, i)) {
                             case Constants.T_BYTE:
                                 buf.append(bytes.readUnsignedByte());
                                 break;
@@ -368,7 +368,7 @@ final class CodeHTML {
                                 break;
                             default: // Never reached
                                 throw new IllegalStateException(
-                                    "Unreachable default case reached! "+Constants.TYPE_OF_OPERANDS[opcode][i]);
+                                    "Unreachable default case reached! "+Constants.getOperandType(opcode, i));
                         }
                         buf.append("&nbsp;");
                     }
