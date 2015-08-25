@@ -17,6 +17,7 @@
  */
 package org.apache.commons.bcel6.util;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Locale;
@@ -275,12 +276,23 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     /** Default main method
      */
     public static void main( String[] argv ) throws Exception {
+        if (argv.length != 1) {
+            System.out.println("Usage: BCELifier classname");
+            System.out.println("\tThe class must exist on the classpath");
+            return;
+        }
+        JavaClass java_class = getJavaClass(argv[0]);
+        BCELifier bcelifier = new BCELifier(java_class, System.out);
+        bcelifier.start();
+    }
+
+
+    // Needs to be accessible from unit test code
+    static JavaClass getJavaClass(String name) throws ClassNotFoundException, IOException {
         JavaClass java_class;
-        String name = argv[0];
         if ((java_class = Repository.lookupClass(name)) == null) {
             java_class = new ClassParser(name).parse(); // May throw IOException
         }
-        BCELifier bcelifier = new BCELifier(java_class, System.out);
-        bcelifier.start();
+        return java_class;
     }
 }
