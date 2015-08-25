@@ -172,10 +172,10 @@ public class InstructionFactory {
 
     private static class MethodObject {
 
-        Type[] arg_types;
-        Type result_type;
-        String class_name;
-        String name;
+        final Type[] arg_types;
+        final Type result_type;
+        final String class_name;
+        final String name;
 
 
         MethodObject(String c, String n, Type r, Type[] a) {
