@@ -157,8 +157,10 @@ limitations under the License.
     <!--module name="FinalClass"/-->
     <!--module name="HideUtilityClassConstructor"/-->
     <module name="InterfaceIsType"/>
+
     <module name="VisibilityModifier">
-        <property name="protectedAllowed" value="true"/>
+        <property name="ignoreAnnotationCanonicalNames" value="java.lang.Deprecated"/>
+        <property name="protectedAllowed" value="false"/>
         <property name="packageAllowed" value="true"/>
     </module>
     
