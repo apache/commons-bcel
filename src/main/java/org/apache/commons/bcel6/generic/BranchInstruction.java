@@ -28,9 +28,9 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * LOOKUPSWITCH and TABLESWITCH.
  *
  * @see InstructionList
- * @version $Id$
+ * @version $Id: BranchInstruction.java 1697260 2015-08-23 21:10:54Z sebb $
  */
-public abstract class BranchInstruction extends Instruction implements InstructionTargeter {
+public abstract class BranchInstruction extends Instruction {
 
     protected int index; // Branch target relative to this instruction
     protected InstructionHandle target; // Target object in instruction list
@@ -51,7 +51,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      */
     protected BranchInstruction(short opcode, InstructionHandle target) {
         super(opcode, (short) 3);
-        setTarget(target);
+        this.target = target;
     }
 
 
@@ -162,6 +162,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      */
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+        position = bytes.getIndex()-1;
         length = 3;
         index = bytes.readShort();
     }
@@ -184,68 +185,10 @@ public abstract class BranchInstruction extends Instruction implements Instructi
 
 
     /**
-     * Set branch target
-     * @param target branch target
-     */
-    public void setTarget( InstructionHandle target ) {
-        notifyTarget(this.target, target, this);
-        this.target = target;
-    }
-
-
-    /**
-     * Used by BranchInstruction, LocalVariableGen, CodeExceptionGen
-     */
-    static void notifyTarget( InstructionHandle old_ih, InstructionHandle new_ih,
-            InstructionTargeter t ) {
-        if (old_ih != null) {
-            old_ih.removeTargeter(t);
-        }
-        if (new_ih != null) {
-            new_ih.addTargeter(t);
-        }
-    }
-
-
-    /**
-     * @param old_ih old target
-     * @param new_ih new target
-     */
-    @Override
-    public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
-        if (target == old_ih) {
-            setTarget(new_ih);
-        } else {
-            throw new ClassGenException("Not targeting " + old_ih + ", but " + target);
-        }
-    }
-
-
-    /**
-     * @return true, if ih is target of this instruction
-     */
-    @Override
-    public boolean containsTarget( InstructionHandle ih ) {
-        return target == ih;
-    }
-
-
-    /**
-     * Inform target that it's not targeted anymore.
-     */
-    @Override
-    void dispose() {
-        setTarget(null);
-        index = -1;
-        position = -1;
-    }
-
-
-    /**
      * @return the position
      * @since 6.0
      */
-    protected int getPosition() {
+    public int getPosition() {
         return position;
     }
 
@@ -268,4 +211,33 @@ public abstract class BranchInstruction extends Instruction implements Instructi
         this.index = index;
     }
 
+
+    /**
+     * Release the associated targets
+     * @param instructionHandle The InstructionHandle which currently holds this Instruction
+     */
+    void releaseTargets(InstructionHandle instructionHandle) {
+        target.removeTargeter(instructionHandle);
+    }
+
+
+    /**
+     * Convert absolute index offset into InstructionHandles.
+     */
+    void convertOffsetToInstructionHandle(InstructionListParser ilp) {
+        // Search for target position and set target
+        target = ilp.findHandle(position + index);
+        if(target==null) {
+            throw new ClassGenException("Couldn't find target for: " + this);
+        }
+    }
+
+
+    /**
+     * Set the target for this instruction.  Should only be used by InstructionHandle.
+     * @param target
+     */
+    final void setTarget(InstructionHandle target) {
+        this.target = target;
+    }
 }

@@ -39,7 +39,7 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
 /**
  * This class represents a control flow graph of a method.
  *
- * @version $Id$
+ * @version $Id: ControlFlowGraph.java 1697224 2015-08-23 16:52:06Z sebb $
  */
 public class ControlFlowGraph{
 
@@ -377,10 +377,13 @@ public class ControlFlowGraph{
                 if (inst instanceof Select){
                     // BCEL's getTargets() returns only the non-default targets,
                     // thanks to Eli Tilevich for reporting.
-                    InstructionHandle[] matchTargets = ((Select) inst).getTargets();
-                    InstructionHandle[] ret = new InstructionHandle[matchTargets.length+1];
-                    ret[0] = ((Select) inst).getTarget();
-                    System.arraycopy(matchTargets, 0, ret, 1, matchTargets.length);
+                    Select select = (Select)inst;
+                    int matchCount = select.getMatchCount();
+                    InstructionHandle[] ret = new InstructionHandle[matchCount+1];
+                    for (int m= 0; m<matchCount; ++m) {
+                        ret[m+1] = select.getMatchTarget(m);
+                    }
+                    ret[0] = select.getTarget();
                     return ret;
                 }
                 final InstructionHandle[] pair = new InstructionHandle[2];

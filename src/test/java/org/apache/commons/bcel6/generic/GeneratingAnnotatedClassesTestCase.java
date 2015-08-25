@@ -476,7 +476,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // .
         InstructionHandle ih = il.append(factory.createFieldAccess(
                 "java.lang.System", "out", p_stream, Constants.GETSTATIC));
-        g.setTarget(ih);
+        try_end.setBranchTarget(ih);
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.
         il.append(factory.createNew(Type.STRINGBUFFER));
@@ -503,7 +503,6 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         mg.setMaxStack();
         mg.setMaxLocals();
         cg.addMethod(mg.getMethod());
-        il.dispose(); // Allow instruction handles to be reused
         cg.addEmptyConstructor(Constants.ACC_PUBLIC);
     }
 
@@ -570,7 +569,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // .
         InstructionHandle ih = il.append(factory.createFieldAccess(
                 "java.lang.System", "out", p_stream, Constants.GETSTATIC));
-        g.setTarget(ih);
+        try_end.setBranchTarget(ih);
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.
         il.append(factory.createNew(Type.STRINGBUFFER));
@@ -597,7 +596,6 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         mg.setMaxStack();
         mg.setMaxLocals();
         cg.addMethod(mg.getMethod());
-        il.dispose(); // Allow instruction handles to be reused
         cg.addEmptyConstructor(Constants.ACC_PUBLIC);
     }
 

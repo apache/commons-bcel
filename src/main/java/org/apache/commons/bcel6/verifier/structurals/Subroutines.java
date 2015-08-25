@@ -61,7 +61,7 @@ import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
  *
  * TODO: refer to the paper.
  *
- * @version $Id$
+ * @version $Id: Subroutines.java 1697224 2015-08-23 16:52:06Z sebb $
  * @see #getTopLevel()
  */
 public class Subroutines{
@@ -656,10 +656,14 @@ System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead c
             if (inst instanceof Select){
                 // BCEL's getTargets() returns only the non-default targets,
                 // thanks to Eli Tilevich for reporting.
-                InstructionHandle[] matchTargets = ((Select) inst).getTargets();
-                InstructionHandle[] ret = new InstructionHandle[matchTargets.length+1];
-                ret[0] = ((Select) inst).getTarget();
-                System.arraycopy(matchTargets, 0, ret, 1, matchTargets.length);
+                // TODO: suspiciously similar to ControlFlowGraph
+                Select select = (Select)inst;
+                int matchCount = select.getMatchCount();
+                InstructionHandle[] ret = new InstructionHandle[matchCount+1];
+                for (int m= 0; m<matchCount; ++m) {
+                    ret[m+1] = select.getMatchTarget(m);
+                }
+                ret[0] = select.getTarget();
                 return ret;
             }
             final InstructionHandle[] pair = new InstructionHandle[2];

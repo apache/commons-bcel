@@ -28,7 +28,7 @@ import org.apache.commons.bcel6.classfile.CodeException;
  * The end of the region is automatically mapped to be exclusive when calling
  * getCodeException(), i.e., there is no difference semantically.
  *
- * @version $Id$
+ * @version $Id: CodeExceptionGen.java 1697267 2015-08-23 22:19:04Z dbrosius $
  * @see     MethodGen
  * @see     CodeException
  * @see     InstructionHandle
@@ -79,7 +79,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
      * @param start_pc Start of handled region (inclusive)
      */
     public void setStartPC( InstructionHandle start_pc ) { // TODO could be package-protected?
-        BranchInstruction.notifyTarget(this.start_pc, start_pc, this);
+        InstructionHandle.notifyTarget(this.start_pc, start_pc, this);
         this.start_pc = start_pc;
     }
 
@@ -88,7 +88,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
      * @param end_pc End of handled region (inclusive)
      */
     public void setEndPC( InstructionHandle end_pc ) { // TODO could be package-protected?
-        BranchInstruction.notifyTarget(this.end_pc, end_pc, this);
+        InstructionHandle.notifyTarget(this.end_pc, end_pc, this);
         this.end_pc = end_pc;
     }
 
@@ -97,7 +97,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
      * @param handler_pc Start of handler
      */
     public void setHandlerPC( InstructionHandle handler_pc ) { // TODO could be package-protected?
-        BranchInstruction.notifyTarget(this.handler_pc, handler_pc, this);
+        InstructionHandle.notifyTarget(this.handler_pc, handler_pc, this);
         this.handler_pc = handler_pc;
     }
 

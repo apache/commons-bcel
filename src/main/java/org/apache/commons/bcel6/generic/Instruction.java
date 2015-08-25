@@ -27,13 +27,12 @@ import org.apache.commons.bcel6.util.ByteSequence;
 /** 
  * Abstract super class for all Java byte codes.
  *
- * @version $Id$
+ * @version $Id: Instruction.java 1696777 2015-08-20 12:19:42Z sebb $
  */
 public abstract class Instruction implements Cloneable {
 
     protected short length = 1; // Length of instruction in bytes 
     protected short opcode = -1; // Opcode number
-    private static InstructionComparator cmp = InstructionComparator.DEFAULT;
 
 
     /**
@@ -137,7 +136,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * Read an instruction from (byte code) input stream and return the
-     * appropiate object.
+     * appropriate object.
      *
      * @param bytes input stream bytes
      * @return instruction object being read
@@ -510,12 +509,6 @@ public abstract class Instruction implements Cloneable {
     }
 
 
-    /** Some instructions may be reused, so don't do anything by default.
-     */
-    void dispose() {
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -526,23 +519,6 @@ public abstract class Instruction implements Cloneable {
      */
     public abstract void accept( Visitor v );
 
-
-    /** Check for equality, delegated to comparator
-     * @return true if that is an Instruction and has the same opcode
-     */
-    @Override
-    public boolean equals( Object that ) {
-        return (that instanceof Instruction) ? cmp.equals(this, (Instruction) that) : false;
-    }
-
-    /** calculate the hashCode of this object
-     * @return the hashCode
-     * @since 6.0
-     */
-    @Override
-    public int hashCode() {
-        return opcode;
-    }
 
     /**
      * Check if the value can fit in a byte (signed)

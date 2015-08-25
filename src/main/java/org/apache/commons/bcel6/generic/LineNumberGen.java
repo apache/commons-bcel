@@ -23,7 +23,7 @@ import org.apache.commons.bcel6.classfile.LineNumber;
  * This class represents a line number within a method, i.e., give an instruction
  * a line number corresponding to the source code line.
  *
- * @version $Id$
+ * @version $Id: LineNumberGen.java 1697267 2015-08-23 22:19:04Z dbrosius $
  * @see     LineNumber
  * @see     MethodGen
  */
@@ -81,7 +81,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
         if (ih == null) {
             throw new NullPointerException("InstructionHandle may not be null");
         }
-        BranchInstruction.notifyTarget(this.ih, ih, this);
+        InstructionHandle.notifyTarget(this.ih, ih, this);
         this.ih = ih;
     }
 

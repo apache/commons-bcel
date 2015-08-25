@@ -17,8 +17,6 @@
 
 package org.apache.commons.bcel6.generic;
 
-import java.util.Arrays;
-
 import org.apache.commons.bcel6.Repository;
 import org.apache.commons.bcel6.classfile.JavaClass;
 import org.apache.commons.bcel6.classfile.Method;
@@ -56,14 +54,14 @@ public class MethodGenTestCase extends TestCase {
         InstructionHandle end = lv.getEnd();
         assertNotNull("scope start", start);
         assertNotNull("scope end", end);
-        assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertTrue("scope end not targeted by the local variable", Arrays.asList(end.getTargeters()).contains(lv));
+        assertTrue("scope start not targeted by the local variable", start.getTargeters().contains(lv));
+        assertTrue("scope end not targeted by the local variable", end.getTargeters().contains(lv));
 
         // now let's remove the local variable
         mg.removeLocalVariable(lv);
 
-        assertFalse("scope start still targeted by the removed variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
+        assertFalse("scope start still targeted by the removed variable", start.getTargeters().contains(lv));
+        assertFalse("scope end still targeted by the removed variable", end.getTargeters().contains(lv));
         assertNull("scope start", lv.getStart());
         assertNull("scope end", lv.getEnd());
     }
@@ -77,14 +75,14 @@ public class MethodGenTestCase extends TestCase {
         InstructionHandle end = lv.getEnd();
         assertNotNull("scope start", start);
         assertNotNull("scope end", end);
-        assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertTrue("scope end not targeted by the local variable", Arrays.asList(end.getTargeters()).contains(lv));
+        assertTrue("scope start not targeted by the local variable", start.getTargeters().contains(lv));
+        assertTrue("scope end not targeted by the local variable", end.getTargeters().contains(lv));
 
         // now let's remove the local variables
         mg.removeLocalVariables();
 
-        assertFalse("scope start still targeted by the removed variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
+        assertFalse("scope start still targeted by the removed variable", start.getTargeters().contains(lv));
+        assertFalse("scope end still targeted by the removed variable", end.getTargeters().contains(lv));
         assertNull("scope start", lv.getStart());
         assertNull("scope end", lv.getEnd());
     }

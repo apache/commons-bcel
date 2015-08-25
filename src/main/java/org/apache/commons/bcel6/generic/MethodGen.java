@@ -52,7 +52,7 @@ import org.apache.commons.bcel6.util.BCELComparator;
  * use the `removeNOPs' method to get rid off them.
  * The resulting method object can be obtained via the `getMethod()' method.
  *
- * @version $Id$
+ * @version $Id: MethodGen.java 1697273 2015-08-23 22:45:15Z dbrosius $
  * @see     InstructionList
  * @see     Method
  */
@@ -701,7 +701,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                     } catch (TargetLostException e) {
                         for (InstructionHandle target : e.getTargets()) {
                             for (InstructionTargeter targeter : target.getTargeters()) {
-                                targeter.updateTarget(target, next);
+                                targeter.updateTarget(ih, next);
                             }
                         }
                     }
@@ -946,9 +946,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                 if (instruction instanceof Select) {
                     // explore all of the select's targets. the default target is handled below.
                     Select select = (Select) branch;
-                    InstructionHandle[] targets = select.getTargets();
-                    for (InstructionHandle target : targets) {
-                        branchTargets.push(target, stackDepth);
+                    for (int matchCount = select.getMatchCount(), m= 0; m<matchCount; ++m) {
+                        branchTargets.push(select.getMatchTarget(m), stackDepth);
                     }
                     // nothing to fall through to.
                     ih = null;
