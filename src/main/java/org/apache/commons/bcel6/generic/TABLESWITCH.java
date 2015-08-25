@@ -46,9 +46,10 @@ public class TABLESWITCH extends Select {
      */
     public TABLESWITCH(int[] match, InstructionHandle[] targets, InstructionHandle defaultTarget) {
         super(org.apache.commons.bcel6.Constants.TABLESWITCH, match, targets, defaultTarget);
-        length = (short) (13 + match_length * 4); /* Alignment remainder assumed
-         * 0 here, until dump time */
-        fixed_length = length;
+        /* Alignment remainder assumed 0 here, until dump time */
+        final short _length = (short) (13 + getMatch_length() * 4);
+        super.setLength(_length);
+        setFixed_length(_length);
     }
 
 
@@ -59,12 +60,13 @@ public class TABLESWITCH extends Select {
     @Override
     public void dump( DataOutputStream out ) throws IOException {
         super.dump(out);
-        int low = (match_length > 0) ? match[0] : 0;
+        final int _match_length = getMatch_length();
+        int low = (_match_length > 0) ? super.getMatch(0) : 0;
         out.writeInt(low);
-        int high = (match_length > 0) ? match[match_length - 1] : 0;
+        int high = (_match_length > 0) ? super.getMatch(_match_length - 1) : 0;
         out.writeInt(high);
-        for (int i = 0; i < match_length; i++) {
-            out.writeInt(indices[i] = getTargetOffset(targets[i]));
+        for (int i = 0; i < _match_length; i++) {
+            out.writeInt(setIndices(i, getTargetOffset(super.getTarget(i))));
         }
     }
 
@@ -77,15 +79,17 @@ public class TABLESWITCH extends Select {
         super.initFromFile(bytes, wide);
         int low = bytes.readInt();
         int high = bytes.readInt();
-        match_length = high - low + 1;
-        fixed_length = (short) (13 + match_length * 4);
-        length = (short) (fixed_length + padding);
-        match = new int[match_length];
-        indices = new int[match_length];
-        targets = new InstructionHandle[match_length];
-        for (int i = 0; i < match_length; i++) {
-            match[i] = low + i;
-            indices[i] = bytes.readInt();
+        final int _match_length = high - low + 1;
+        setMatch_length(_match_length);
+        final short _fixed_length = (short) (13 + _match_length * 4);
+        setFixed_length(_fixed_length);
+        super.setLength((short) (_fixed_length + super.getPadding()));
+        super.setMatches(new int[_match_length]);
+        super.setIndices(new int[_match_length]);
+        super.setTargets(new InstructionHandle[_match_length]);
+        for (int i = 0; i < _match_length; i++) {
+            super.setMatch(i, low + i);
+            super.setIndices(i, bytes.readInt());
         }
     }
 
