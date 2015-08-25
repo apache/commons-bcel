@@ -161,7 +161,7 @@ public abstract class ReferenceType extends Type {
             // on one of them "interfaces implemented by arrays" is exchanged with "'Cloneable' or
             // 'java.io.Serializable'"
             if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
-                for (String element : Constants.INTERFACES_IMPLEMENTED_BY_ARRAYS) {
+                for (String element : Constants.getInterfacesImplementedByArrays()) {
                     if (T.equals(ObjectType.getInstance(element))) {
                         return true;
                     }

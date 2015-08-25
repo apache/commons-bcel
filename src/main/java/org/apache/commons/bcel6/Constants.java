@@ -17,6 +17,9 @@
  */
 package org.apache.commons.bcel6;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Constants for the project, mostly defined in the JVM specification.
  *
@@ -380,9 +383,10 @@ public final class Constants {
    * @return
    * @since 6.0
    */
-  public static String getConstasntName(int index) {
-      return INTERFACES_IMPLEMENTED_BY_ARRAYS[index];
+  public static Iterable<String> getInterfacesImplementedByArrays() {
+      return Collections.unmodifiableList(Arrays.asList(INTERFACES_IMPLEMENTED_BY_ARRAYS));
   }
+
 
   /**
    * Maximum Constant Pool entries.
