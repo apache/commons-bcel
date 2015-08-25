@@ -92,11 +92,11 @@ public class IINC extends LocalVariableInstruction {
         this.wide = wide;
         if (wide) {
             super.setLength(6);
-            super.setIndex(bytes.readUnsignedShort());
+            super.setIndexOnly(bytes.readUnsignedShort());
             c = bytes.readShort();
         } else {
             super.setLength(3);
-            super.setIndex(bytes.readUnsignedByte());
+            super.setIndexOnly(bytes.readUnsignedByte());
             c = bytes.readByte();
         }
     }
@@ -119,7 +119,7 @@ public class IINC extends LocalVariableInstruction {
         if (n < 0) {
             throw new ClassGenException("Negative index value: " + n);
         }
-        super.setIndex(n);
+        super.setIndexOnly(n);
         setWide();
     }
 
