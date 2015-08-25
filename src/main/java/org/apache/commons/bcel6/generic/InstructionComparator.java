@@ -35,7 +35,7 @@ public interface InstructionComparator {
 
         @Override
         public boolean equals( Instruction i1, Instruction i2 ) {
-            if (i1.opcode == i2.opcode) {
+            if (i1.getOpcode() == i2.getOpcode()) {
                 if (i1 instanceof Select) {
                     InstructionHandle[] t1 = ((Select) i1).getTargets();
                     InstructionHandle[] t2 = ((Select) i2).getTargets();
@@ -48,7 +48,7 @@ public interface InstructionComparator {
                         return true;
                     }
                 } else if (i1 instanceof BranchInstruction) {
-                    return ((BranchInstruction) i1).target == ((BranchInstruction) i2).target;
+                    return ((BranchInstruction) i1).getTarget() == ((BranchInstruction) i2).getTarget();
                 } else if (i1 instanceof ConstantPushInstruction) {
                     return ((ConstantPushInstruction) i1).getValue().equals(
                             ((ConstantPushInstruction) i2).getValue());

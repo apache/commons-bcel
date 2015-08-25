@@ -47,8 +47,8 @@ public class IINC extends LocalVariableInstruction {
      */
     public IINC(int n, int c) {
         super(); // Default behaviour of LocalVariableInstruction causes error
-        this.opcode = org.apache.commons.bcel6.Constants.IINC;
-        this.length = (short) 3;
+        super.setOpcode(org.apache.commons.bcel6.Constants.IINC);
+        super.setLength((short) 3);
         setIndex(n); // May set wide as side effect
         setIncrement(c);
     }
@@ -63,23 +63,23 @@ public class IINC extends LocalVariableInstruction {
         if (wide) {
             out.writeByte(org.apache.commons.bcel6.Constants.WIDE);
         }
-        out.writeByte(opcode);
+        out.writeByte(super.getOpcode());
         if (wide) {
-            out.writeShort(n);
+            out.writeShort(super.getIndex());
             out.writeShort(c);
         } else {
-            out.writeByte(n);
+            out.writeByte(super.getIndex());
             out.writeByte(c);
         }
     }
 
 
     private void setWide() {
-        wide = (n > org.apache.commons.bcel6.Constants.MAX_BYTE) || (Math.abs(c) > Byte.MAX_VALUE);
+        wide = (super.getIndex() > org.apache.commons.bcel6.Constants.MAX_BYTE) || (Math.abs(c) > Byte.MAX_VALUE);
         if (wide) {
-            length = 6; // wide byte included  
+            super.setLength(6); // wide byte included  
         } else {
-            length = 3;
+            super.setLength(3);
         }
     }
 
@@ -91,12 +91,12 @@ public class IINC extends LocalVariableInstruction {
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         this.wide = wide;
         if (wide) {
-            length = 6;
-            n = bytes.readUnsignedShort();
+            super.setLength(6);
+            super.setIndex(bytes.readUnsignedShort());
             c = bytes.readShort();
         } else {
-            length = 3;
-            n = bytes.readUnsignedByte();
+            super.setLength(3);
+            super.setIndex(bytes.readUnsignedByte());
             c = bytes.readByte();
         }
     }
@@ -119,7 +119,7 @@ public class IINC extends LocalVariableInstruction {
         if (n < 0) {
             throw new ClassGenException("Negative index value: " + n);
         }
-        this.n = n;
+        super.setIndex(n);
         setWide();
     }
 

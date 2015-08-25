@@ -39,7 +39,7 @@ public class GOTO_W extends GotoInstruction {
 
     public GOTO_W(InstructionHandle target) {
         super(org.apache.commons.bcel6.Constants.GOTO_W, target);
-        length = 5;
+        super.setLength(5);
     }
 
 
@@ -50,7 +50,7 @@ public class GOTO_W extends GotoInstruction {
     @Override
     public void dump( DataOutputStream out ) throws IOException {
         super.setIndex(getTargetOffset());
-        out.writeByte(opcode);
+        out.writeByte(super.getOpcode());
         out.writeInt(super.getIndex());
     }
 
@@ -61,7 +61,7 @@ public class GOTO_W extends GotoInstruction {
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.setIndex(bytes.readInt());
-        length = 5;
+        super.setLength(5);
     }
 
 
