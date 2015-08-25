@@ -47,7 +47,7 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
             case org.apache.commons.bcel6.Constants.CONSTANT_Double:
                 return Type.DOUBLE;
             default: // Never reached
-                throw new RuntimeException("Unknown constant type " + opcode);
+                throw new RuntimeException("Unknown constant type " + super.getOpcode());
         }
     }
 

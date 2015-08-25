@@ -50,10 +50,10 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     protected final void setSize() {
         if (super.getIndex() <= org.apache.commons.bcel6.Constants.MAX_BYTE) { // Fits in one byte?
             super.setOpcode(org.apache.commons.bcel6.Constants.LDC);
-            length = 2;
+            super.setLength(2);
         } else {
             super.setOpcode(org.apache.commons.bcel6.Constants.LDC_W);
-            length = 3;
+            super.setLength(3);
         }
     }
 
@@ -64,8 +64,8 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      */
     @Override
     public void dump( DataOutputStream out ) throws IOException {
-        out.writeByte(opcode);
-        if (length == 2) {
+        out.writeByte(super.getOpcode());
+        if (super.getLength() == 2) { // TODO useless check?
             out.writeByte(super.getIndex());
         } else {
             out.writeShort(super.getIndex());
@@ -88,7 +88,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      */
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
-        length = 2;
+        super.setLength(2);
         super.setIndex(bytes.readUnsignedByte());
     }
 

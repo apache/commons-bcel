@@ -54,7 +54,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      */
     @Override
     public void dump( DataOutputStream out ) throws IOException {
-        out.writeByte(opcode);
+        out.writeByte(super.getOpcode());
         out.writeShort(super.getIndex());
         out.writeByte(0);
         out.writeByte(0);
@@ -67,7 +67,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
-        length = 5;
+        super.setLength(5);
         bytes.readByte(); // Skip 0 byte
         bytes.readByte(); // Skip 0 byte
     }

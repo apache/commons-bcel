@@ -54,7 +54,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     public String toString( ConstantPool cp ) {
         Constant c = cp.getConstant(super.getIndex());
         StringTokenizer tok = new StringTokenizer(cp.constantToString(c));
-        return Constants.OPCODE_NAMES[opcode] + " " + tok.nextToken().replace('.', '/')
+        return Constants.OPCODE_NAMES[super.getOpcode()] + " " + tok.nextToken().replace('.', '/')
                 + tok.nextToken();
     }
 
@@ -67,7 +67,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     @Override
     public int consumeStack( ConstantPoolGen cpg ) {
         int sum;
-        if ((opcode == Constants.INVOKESTATIC) || (opcode == Constants.INVOKEDYNAMIC)) {
+        if ((super.getOpcode() == Constants.INVOKESTATIC) || (super.getOpcode() == Constants.INVOKEDYNAMIC)) {
             sum = 0;
         } else {
             sum = 1; // this reference

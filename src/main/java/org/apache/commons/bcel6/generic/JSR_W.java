@@ -39,7 +39,7 @@ public class JSR_W extends JsrInstruction {
 
     public JSR_W(InstructionHandle target) {
         super(org.apache.commons.bcel6.Constants.JSR_W, target);
-        length = 5;
+        super.setLength(5);
     }
 
 
@@ -50,7 +50,7 @@ public class JSR_W extends JsrInstruction {
     @Override
     public void dump( DataOutputStream out ) throws IOException {
         super.setIndex(getTargetOffset());
-        out.writeByte(opcode);
+        out.writeByte(super.getOpcode());
         out.writeInt(super.getIndex());
     }
 
@@ -61,7 +61,7 @@ public class JSR_W extends JsrInstruction {
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.setIndex(bytes.readInt());
-        length = 5;
+        super.setLength(5);
     }
 
 

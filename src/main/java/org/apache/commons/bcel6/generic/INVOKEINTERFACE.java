@@ -46,7 +46,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
 
     public INVOKEINTERFACE(int index, int nargs) {
         super(Constants.INVOKEINTERFACE, index);
-        length = 5;
+        super.setLength(5);
         if (nargs < 1) {
             throw new ClassGenException("Number of arguments must be > 0 " + nargs);
         }
@@ -60,7 +60,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
      */
     @Override
     public void dump( DataOutputStream out ) throws IOException {
-        out.writeByte(opcode);
+        out.writeByte(super.getOpcode());
         out.writeShort(super.getIndex());
         out.writeByte(nargs);
         out.writeByte(0);
@@ -82,7 +82,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
-        length = 5;
+        super.setLength(5);
         nargs = bytes.readUnsignedByte();
         bytes.readByte(); // Skip 0 byte
     }
