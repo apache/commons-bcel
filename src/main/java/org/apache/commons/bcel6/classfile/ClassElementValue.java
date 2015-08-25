@@ -45,7 +45,7 @@ public class ClassElementValue extends ElementValue
 
     public String getClassString()
     {
-        ConstantUtf8 c = (ConstantUtf8) cpool.getConstant(idx,
+        ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(idx,
                 Constants.CONSTANT_Utf8);
         return c.getBytes();
     }
@@ -53,7 +53,7 @@ public class ClassElementValue extends ElementValue
     @Override
     public String stringifyValue()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) cpool.getConstant(idx,
+        ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(idx,
                 Constants.CONSTANT_Utf8);
         return cu8.getBytes();
     }
@@ -61,7 +61,7 @@ public class ClassElementValue extends ElementValue
     @Override
     public void dump(DataOutputStream dos) throws IOException
     {
-        dos.writeByte(type); // u1 kind of value
+        dos.writeByte(super.getType()); // u1 kind of value
         dos.writeShort(idx);
     }
 }

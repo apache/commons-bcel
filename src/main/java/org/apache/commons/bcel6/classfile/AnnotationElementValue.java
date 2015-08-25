@@ -42,7 +42,7 @@ public class AnnotationElementValue extends ElementValue
         @Override
         public void dump(DataOutputStream dos) throws IOException
         {
-                dos.writeByte(type); // u1 type of value (ANNOTATION == '@')
+                dos.writeByte(super.getType()); // u1 type of value (ANNOTATION == '@')
                 annotationEntry.dump(dos);
         }
 

@@ -47,7 +47,7 @@ public class EnumElementValue extends ElementValue
     @Override
     public void dump(DataOutputStream dos) throws IOException
     {
-        dos.writeByte(type); // u1 type of value (ENUM_CONSTANT == 'e')
+        dos.writeByte(super.getType()); // u1 type of value (ENUM_CONSTANT == 'e')
         dos.writeShort(typeIdx); // u2
         dos.writeShort(valueIdx); // u2
     }
@@ -55,21 +55,21 @@ public class EnumElementValue extends ElementValue
     @Override
     public String stringifyValue()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) cpool.getConstant(valueIdx,
+        ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
                 Constants.CONSTANT_Utf8);
         return cu8.getBytes();
     }
 
     public String getEnumTypeString()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) cpool.getConstant(typeIdx,
+        ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(typeIdx,
                 Constants.CONSTANT_Utf8);
         return cu8.getBytes();// Utility.signatureToString(cu8.getBytes());
     }
 
     public String getEnumValueString()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) cpool.getConstant(valueIdx,
+        ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
                 Constants.CONSTANT_Utf8);
         return cu8.getBytes();
     }

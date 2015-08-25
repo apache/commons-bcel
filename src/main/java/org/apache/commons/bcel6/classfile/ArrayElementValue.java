@@ -57,7 +57,7 @@ public class ArrayElementValue extends ElementValue
     @Override
     public void dump(DataOutputStream dos) throws IOException
     {
-        dos.writeByte(type); // u1 type of value (ARRAY == '[')
+        dos.writeByte(super.getType()); // u1 type of value (ARRAY == '[')
         dos.writeShort(evalues.length);
         for (ElementValue evalue : evalues) {
             evalue.dump(dos);
