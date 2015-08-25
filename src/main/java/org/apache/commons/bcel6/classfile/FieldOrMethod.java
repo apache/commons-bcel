@@ -30,12 +30,31 @@ import org.apache.commons.bcel6.Constants;
  */
 public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
 
-    // TODO should be made private
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @java.lang.Deprecated
     protected int name_index; // Points to field name in constant pool 
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @java.lang.Deprecated
     protected int signature_index; // Points to encoded signature
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @java.lang.Deprecated
     protected Attribute[] attributes; // Collection of attributes
+
     // @since 6.0
     private AnnotationEntry[] annotationEntries; // annotations defined on the field or method 
+
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @java.lang.Deprecated
     protected ConstantPool constant_pool;
 
     private String signatureAttributeString = null;

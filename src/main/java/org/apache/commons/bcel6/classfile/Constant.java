@@ -57,6 +57,10 @@ public abstract class Constant implements Cloneable, Node {
      * need the tag as an index to select the corresponding class name from the 
      * `CONSTANT_NAMES' array.
      */
+    /**
+     * @deprecated will be made private; do not access directly, use getter/setter
+     */
+    @java.lang.Deprecated
     protected byte tag; // TODO should be private & final
 
 

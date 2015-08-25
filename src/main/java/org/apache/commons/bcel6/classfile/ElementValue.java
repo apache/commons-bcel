@@ -27,8 +27,16 @@ import java.io.IOException;
  */
 public abstract class ElementValue
 {
+    /**
+     * @deprecated will be made private and final; do not access directly, use getter
+     */
+    @java.lang.Deprecated
     protected int type; // TODO should be final
 
+    /**
+     * @deprecated will be made private and final; do not access directly, use getter
+     */
+    @java.lang.Deprecated
     protected ConstantPool cpool; // TODO should be final
 
     @Override
@@ -104,6 +112,16 @@ public abstract class ElementValue
             default:
                 throw new RuntimeException("Unexpected element value kind in annotation: " + type);
         }
+    }
+
+    /** @since 6.0 */
+    final ConstantPool getConstantPool() {
+        return cpool;
+    }
+
+    /** @since 6.0 */
+    final int getType() {
+        return type;
     }
 
     public String toShortString()
