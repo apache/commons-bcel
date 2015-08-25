@@ -88,8 +88,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
         if (wide()) {
             out.writeByte(Constants.WIDE);
         }
-        out.writeByte(opcode);
-        if (length > 1) { // Otherwise ILOAD_n, instruction, e.g.
+        out.writeByte(super.getOpcode());
+        if (super.getLength() > 1) { // Otherwise ILOAD_n, instruction, e.g.
             if (wide()) {
                 out.writeShort(n);
             } else {
@@ -110,8 +110,9 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      */
     @Override
     public String toString( boolean verbose ) {
-        if (((opcode >= Constants.ILOAD_0) && (opcode <= Constants.ALOAD_3))
-                || ((opcode >= Constants.ISTORE_0) && (opcode <= Constants.ASTORE_3))) {
+        final short _opcode = super.getOpcode();
+        if (((_opcode >= Constants.ILOAD_0) && (_opcode <= Constants.ALOAD_3))
+         || ((_opcode >= Constants.ISTORE_0) && (_opcode <= Constants.ASTORE_3))) {
             return super.toString(verbose);
         }
         return super.toString(verbose) + " " + n;
@@ -128,17 +129,20 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         if (wide) {
             n = bytes.readUnsignedShort();
-            length = 4;
-        } else if (((opcode >= Constants.ILOAD) && (opcode <= Constants.ALOAD))
-                || ((opcode >= Constants.ISTORE) && (opcode <= Constants.ASTORE))) {
-            n = bytes.readUnsignedByte();
-            length = 2;
-        } else if (opcode <= Constants.ALOAD_3) { // compact load instruction such as ILOAD_2
-            n = (opcode - Constants.ILOAD_0) % 4;
-            length = 1;
-        } else { // Assert ISTORE_0 <= tag <= ASTORE_3
-            n = (opcode - Constants.ISTORE_0) % 4;
-            length = 1;
+            super.setLength(4);
+        } else {
+            final short _opcode = super.getOpcode();
+            if (((_opcode >= Constants.ILOAD) && (_opcode <= Constants.ALOAD))
+             || ((_opcode >= Constants.ISTORE) && (_opcode <= Constants.ASTORE))) {
+                n = bytes.readUnsignedByte();
+                super.setLength(2);
+            } else if (_opcode <= Constants.ALOAD_3) { // compact load instruction such as ILOAD_2
+                n = (_opcode - Constants.ILOAD_0) % 4;
+                super.setLength(1);
+            } else { // Assert ISTORE_0 <= tag <= ASTORE_3
+                n = (_opcode - Constants.ISTORE_0) % 4;
+                super.setLength(1);
+            }
         }
     }
 
@@ -166,14 +170,14 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
         this.n = n;
         // Cannot be < 0 as this is checked above
         if (n <= 3) { // Use more compact instruction xLOAD_n
-            opcode = (short) (c_tag + n);
-            length = 1;
+            super.setOpcode((short) (c_tag + n));
+            super.setLength(1);
         } else {
-            opcode = canon_tag;
+            super.setOpcode(canon_tag);
             if (wide()) {
-                length = 4;
+                super.setLength(4);
             } else {
-                length = 2;
+                super.setLength(2);
             }
         }
     }

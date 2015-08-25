@@ -119,12 +119,12 @@ public abstract class Select extends BranchInstruction implements VariableLength
     @Override
     protected int updatePosition( int offset, int max_offset ) {
         setPosition(getPosition() + offset); // Additional offset caused by preceding SWITCHs, GOTOs, etc.
-        short old_length = length;
+        short old_length = (short) super.getLength();
         /* Alignment on 4-byte-boundary, + 1, because of tag byte.
          */
         padding = (4 - ((getPosition() + 1) % 4)) % 4;
-        length = (short) (fixed_length + padding); // Update length
-        return length - old_length;
+        super.setLength((short) (fixed_length + padding)); // Update length
+        return super.getLength() - old_length;
     }
 
 
@@ -134,7 +134,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      */
     @Override
     public void dump( DataOutputStream out ) throws IOException {
-        out.writeByte(opcode);
+        out.writeByte(super.getOpcode());
         for (int i = 0; i < padding; i++) {
             out.writeByte(0);
         }
