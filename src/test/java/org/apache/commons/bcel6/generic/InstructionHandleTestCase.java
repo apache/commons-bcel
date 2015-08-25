@@ -5,34 +5,35 @@ import org.junit.Test;
 
 public class InstructionHandleTestCase {
 
-    // Test that setInstruction only allows Instructions that are not BranchInstructions
-
-    @Test(expected=ClassGenException.class)
+    @Test(expected=NullPointerException.class)
     public void testsetInstructionNull() {
-        InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        InstructionList il = new InstructionList();
+        InstructionHandle ih = il.append(new NOP());// have to start with a valid non BI
         Assert.assertNotNull(ih);
         ih.setInstruction(null);
-        Assert.assertNotNull(ih);
     }
 
     @Test
     public void testsetInstructionI() {
-        InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        InstructionList il = new InstructionList();
+        InstructionHandle ih = il.append(new NOP());// have to start with a valid non BI
         Assert.assertNotNull(ih);
         ih.setInstruction(new NOP());        
-        Assert.assertNotNull(ih);
+        Assert.assertNotNull(ih.getInstruction());
     }
 
-    @Test(expected=ClassGenException.class)
+    @Test
     public void testsetInstructionnotI() {
-        InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        InstructionList il = new InstructionList();
+        InstructionHandle ih = il.append(new NOP());// have to start with a valid non BI
         Assert.assertNotNull(ih);
         ih.setInstruction(new GOTO(null));        
-        Assert.assertNotNull(ih);
+        Assert.assertNotNull(ih.getInstruction());
     }
 
-    @Test(expected=ClassGenException.class)
+    @Test(expected=NullPointerException.class)
     public void testGetIHnull() {
-        InstructionHandle.getInstructionHandle(null); 
+        InstructionList il = new InstructionList();
+        il.append((Instruction)null); 
     }
 }

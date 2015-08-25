@@ -18,6 +18,7 @@
 package org.apache.commons.bcel6.generic;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -37,19 +38,32 @@ import org.apache.commons.bcel6.classfile.Utility;
  * can traverse the list via an Enumeration returned by
  * InstructionList.elements().
  *
- * @version $Id$
+ * @version $Id: InstructionHandle.java 1696863 2015-08-20 21:47:14Z sebb $
  * @see Instruction
  * @see BranchHandle
  * @see InstructionList 
  */
-public class InstructionHandle {
+public class InstructionHandle implements InstructionTargeter {
 
+    InstructionList list; // this InstructionList this handle is part of.
     InstructionHandle next;
     InstructionHandle prev; // Will be set from the outside
-    Instruction instruction;
+    Instruction instruction;    // the associated instruction
     protected int i_position = -1; // byte code offset of instruction
-    private Set<InstructionTargeter> targeters;
+    private Set<InstructionTargeter> targeters;   // The set of items that target the associated instruction.
+
     private Map<Object, Object> attributes;
+
+
+    /** Factory method.
+     */
+    InstructionHandle(InstructionList list, Instruction instruction  ) {
+        if(instruction==null) {
+            throw new NullPointerException("instruction may not be null");
+        }
+        this.list = list;
+        this.instruction = instruction;
+    }
 
 
     public final InstructionHandle getNext() {
@@ -69,19 +83,23 @@ public class InstructionHandle {
 
     /**
      * Replace current instruction contained in this handle.
-     * Old instruction is disposed using Instruction.dispose().
      */
-    public void setInstruction( Instruction i ) { // Overridden in BranchHandle TODO could be package-protected?
+    public final void setInstruction( Instruction i ) {
         if (i == null) {
-            throw new ClassGenException("Assigning null to handle");
+            throw new NullPointerException("May not assign null to handle");
         }
-        if ((this.getClass() != BranchHandle.class) && (i instanceof BranchInstruction)) {
-            throw new ClassGenException("Assigning branch instruction " + i + " to plain handle");
-        }
-        if (instruction != null) {
-            instruction.dispose();
-        }
+        releaseTargets();
         instruction = i;
+    }
+
+
+    /**
+     * Remove this InstructionHandle from the targeter set of the index instruction's target.
+     */
+    void releaseTargets() {
+        if (instruction instanceof BranchInstruction) {
+            ((BranchInstruction)instruction).releaseTargets(this);
+        }
     }
 
 
@@ -97,25 +115,6 @@ public class InstructionHandle {
     }
 
 
-    /*private*/protected InstructionHandle(Instruction i) {
-        setInstruction(i);
-    }
-
-    private static InstructionHandle ih_list = null; // List of reusable handles
-
-
-    /** Factory method.
-     */
-    static InstructionHandle getInstructionHandle( Instruction i ) {
-        if (ih_list == null) {
-            return new InstructionHandle(i);
-        }
-        InstructionHandle ih = ih_list;
-        ih_list = ih.next;
-        ih.setInstruction(i);
-        return ih;
-    }
-
 
     /**
      * Called by InstructionList.setPositions when setting the position for every
@@ -128,6 +127,9 @@ public class InstructionHandle {
      * @return additional offset caused by possible change of this instruction's length
      */
     protected int updatePosition( int offset, int max_offset ) {
+        if(instruction instanceof BranchInstruction) {
+            return ((BranchInstruction)instruction).updatePosition(offset, max_offset);
+        }
         i_position += offset;
         return 0;
     }
@@ -147,36 +149,8 @@ public class InstructionHandle {
      */
     void setPosition( int pos ) {
         i_position = pos;
-    }
-
-
-    /** Overridden in BranchHandle
-     */
-    protected void addHandle() {
-        next = ih_list;
-        ih_list = this;
-    }
-
-
-    /**
-     * Delete contents, i.e., remove user access and make handle reusable.
-     */
-    void dispose() {
-        next = prev = null;
-        instruction.dispose();
-        instruction = null;
-        i_position = -1;
-        attributes = null;
-        removeAllTargeters();
-        addHandle();
-    }
-
-
-    /** Remove all targeters, if any.
-     */
-    public void removeAllTargeters() {
-        if (targeters != null) {
-            targeters.clear();
+        if(instruction instanceof BranchInstruction) {
+            ((BranchInstruction)instruction).setPosition(pos);
         }
     }
 
@@ -198,7 +172,6 @@ public class InstructionHandle {
         if (targeters == null) {
             targeters = new HashSet<>();
         }
-        //if(!targeters.contains(t))
         targeters.add(t);
     }
 
@@ -209,15 +182,16 @@ public class InstructionHandle {
 
 
     /**
-     * @return null, if there are no targeters
+     * Get the set of InstructionHandle that have an associated instruction 
+     * targeting the instruction associated with this InstructionHandle.
+     * 
+     * @return An unmodifiable set of InstructionHandle.
      */
-    public InstructionTargeter[] getTargeters() {
+    public Set<InstructionTargeter> getTargeters() {
         if (!hasTargeters()) {
-            return new InstructionTargeter[0];
+            return Collections.emptySet();
         }
-        InstructionTargeter[] t = new InstructionTargeter[targeters.size()];
-        targeters.toArray(t);
-        return t;
+        return Collections.unmodifiableSet(targeters);
     }
 
 
@@ -289,4 +263,125 @@ public class InstructionHandle {
     public void accept( Visitor v ) {
         instruction.accept(v);
     }
+
+
+    /**
+     * Set target of branch instruction associated with this handle.
+     *  
+     * @param target The target for the instruction
+     */
+    void setBranchTarget( InstructionHandle target ) {
+        if(target==null) {
+            throw new NullPointerException("target should not be null");
+        }
+
+        if(instruction instanceof BranchInstruction) {
+            BranchInstruction bi = (BranchInstruction)instruction;
+            InstructionHandle oldTarget = bi.getTarget();
+            if(oldTarget!=null) {
+                oldTarget.removeTargeter(this);
+            }
+
+            bi.setTarget(target);
+            target.addTargeter(this);
+        }
+        else {
+            throw new IllegalStateException(instruction + " is not a branch instruction");
+        }
+    }
+
+
+    /**
+     * Set target of select instruction associated with this handle.
+     * @param matchIdx The case index.
+     * @param target The target for the instruction
+     */
+    void setSelectTarget(int matchIdx, InstructionHandle target ) {
+        if(target==null) {
+            throw new NullPointerException("target should not be null");
+        }
+
+        if(instruction instanceof Select) {
+            Select s = (Select)instruction;
+            InstructionHandle oldTarget = s.getMatchTarget(matchIdx);
+            if(oldTarget!=null) {
+                oldTarget.removeTargeter(this);
+            }
+            s.setMatchTarget(matchIdx, target);
+            target.addTargeter(this);
+        }
+        else {
+            throw new IllegalStateException(instruction + " is not a select instruction");
+        }
+    }
+
+
+
+    @Override
+    public boolean containsTarget(InstructionHandle ih) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+
+    @Override
+    public void updateTarget(InstructionHandle old_ih, InstructionHandle new_ih) throws ClassGenException {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+    /**
+     * Update targeter collections in old and new handle.
+     * 
+     * @param oldHandle The InstructionHandle which is no longer the target.
+     * @param newHandle The InstructionHandle which is now the target.
+     * @param targeter The targeter which is changing.
+     */
+    static void notifyTarget(InstructionHandle oldHandle, InstructionHandle newHandle, InstructionTargeter targeter) {
+        if(oldHandle!=null) {
+            oldHandle.removeTargeter(targeter);
+        }
+        if(newHandle!=null) {
+            newHandle.addTargeter(targeter);
+        }
+    }
+
+
+    /**
+     * Invoked by BranchInstructions to remove associated InstructionHandle as targeter for this handle
+     * @param branchInstruction
+     */
+    void removeTargeter(BranchInstruction branchInstruction) {
+        InstructionHandle ih = findAssociatedInstructionHandle(branchInstruction);
+        if(ih!=null) {
+            removeTargeter(ih);
+        }
+    }
+
+
+    /**
+     * Invoked by BranchInstructions to add associated InstructionHandle as targeter for this handle
+     * @param branchInstruction
+     */
+    void addTargeter(BranchInstruction branchInstruction) {
+        InstructionHandle ih = findAssociatedInstructionHandle(branchInstruction);
+        if(ih!=null) {
+            addTargeter(ih);
+        }
+    }
+
+
+    /**
+     * Find the first InstructionHandle that holds a specific instruction instance.
+     * Singleton instances may occur multiple times in instruction list.  This is ok, since the index 
+     * instruction which are adding/removing targeters should not be added to instruction list twice.
+     * 
+     * @param instruction The instance to find.
+     * @return The first instruction handle, or null if not found
+     */
+    private InstructionHandle findAssociatedInstructionHandle(Instruction instruction) {
+        return list.findAssociatedInstructionHandle(instruction);
+    }
+
 }

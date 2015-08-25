@@ -29,7 +29,6 @@ import org.apache.commons.bcel6.classfile.Utility;
 import org.apache.commons.bcel6.generic.AllocationInstruction;
 import org.apache.commons.bcel6.generic.ArrayInstruction;
 import org.apache.commons.bcel6.generic.ArrayType;
-import org.apache.commons.bcel6.generic.BranchHandle;
 import org.apache.commons.bcel6.generic.BranchInstruction;
 import org.apache.commons.bcel6.generic.CHECKCAST;
 import org.apache.commons.bcel6.generic.CPInstruction;
@@ -61,7 +60,7 @@ import org.apache.commons.bcel6.generic.Type;
  * A helper class for BCELifier.
  *
  * @see BCELifier
- * @version $Id$
+ * @version $Id: BCELFactory.java 1695790 2015-08-13 22:16:16Z ggregory $
  */
 class BCELFactory extends EmptyVisitor {
 
@@ -76,7 +75,7 @@ class BCELFactory extends EmptyVisitor {
         _out = out;
     }
 
-    private final Map<Instruction, InstructionHandle> branch_map = new HashMap<>();
+    private final Map<BranchInstruction, InstructionHandle> branch_map = new HashMap<>();
 
 
     public void start() {
@@ -85,7 +84,7 @@ class BCELFactory extends EmptyVisitor {
                     .getNext()) {
                 Instruction i = ih.getInstruction();
                 if (i instanceof BranchInstruction) {
-                    branch_map.put(i, ih); // memorize container
+                    branch_map.put((BranchInstruction)i, ih); // memorize container
                 }
                 if (ih.hasTargeters()) {
                     if (i instanceof BranchInstruction) {
@@ -264,7 +263,7 @@ class BCELFactory extends EmptyVisitor {
 
     @Override
     public void visitBranchInstruction( BranchInstruction bi ) {
-        BranchHandle bh = (BranchHandle) branch_map.get(bi);
+        InstructionHandle bh = branch_map.get(bi);
         int pos = bh.getPosition();
         String name = bi.getName() + "_" + pos;
         if (bi instanceof Select) {
@@ -280,16 +279,9 @@ class BCELFactory extends EmptyVisitor {
             }
             args.append(" }");
             _out.print("Select " + name + " = new " + bi.getName().toUpperCase(Locale.ENGLISH)
-                    + "(" + args + ", new InstructionHandle[] { ");
-            for (int i = 0; i < matchs.length; i++) {
-                _out.print("null");
-                if (i < matchs.length - 1) {
-                    _out.print(", ");
-                }
-            }
-            _out.println(" }, null);");
+                    + "(" + args + ", new InstructionHandle[" + matchs.length + "], null);");
         } else {
-            int t_pos = bh.getTarget().getPosition();
+            int t_pos = bi.getPosition();
             String target;
             if (pos > t_pos) {
                 target = "ih_" + t_pos;
@@ -317,16 +309,17 @@ class BCELFactory extends EmptyVisitor {
 
     private void updateBranchTargets() {
         for (BranchInstruction bi : branches) {
-            BranchHandle bh = (BranchHandle) branch_map.get(bi);
+            InstructionHandle bh = branch_map.get(bi);
             int pos = bh.getPosition();
             String name = bi.getName() + "_" + pos;
-            int t_pos = bh.getTarget().getPosition();
+            int t_pos = bh.getPosition();
             _out.println("    " + name + ".setTarget(ih_" + t_pos + ");");
             if (bi instanceof Select) {
-                InstructionHandle[] ihs = ((Select) bi).getTargets();
-                for (int j = 0; j < ihs.length; j++) {
-                    t_pos = ihs[j].getPosition();
-                    _out.println("    " + name + ".setTarget(" + j + ", ih_" + t_pos + ");");
+                Select s = (Select) bi;
+                for (int matchCount = s.getMatchCount(), m= 0; m<matchCount; ++m) {
+                    InstructionHandle ih = s.getMatchTarget(m);
+                    t_pos = ih.getPosition();
+                    _out.println("    " + name + ".setTarget(" + m + ", ih_" + t_pos + ");");
                 }
             }
         }

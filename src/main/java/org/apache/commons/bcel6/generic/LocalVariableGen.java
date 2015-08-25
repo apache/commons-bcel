@@ -26,7 +26,7 @@ import org.apache.commons.bcel6.classfile.LocalVariable;
  * with getLocalVariable which needs the instruction list and the constant
  * pool as parameters.
  *
- * @version $Id$
+ * @version $Id: LocalVariableGen.java 1697267 2015-08-23 22:19:04Z dbrosius $
  * @see     LocalVariable
  * @see     MethodGen
  */
@@ -138,13 +138,13 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
 
     public void setStart( InstructionHandle start ) { // TODO could be package-protected?
-        BranchInstruction.notifyTarget(this.start, start, this);
+        InstructionHandle.notifyTarget(this.start, start, this);
         this.start = start;
     }
 
 
     public void setEnd( InstructionHandle end ) { // TODO could be package-protected?
-        BranchInstruction.notifyTarget(this.end, end, this);
+        InstructionHandle.notifyTarget(this.end, end, this);
         this.end = end;
     }
 

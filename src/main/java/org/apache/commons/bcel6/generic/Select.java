@@ -27,7 +27,7 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * 
  * <p>We use our super's <code>target</code> property as the default target.
  *
- * @version $Id$
+ * @version $Id: Select.java 1697260 2015-08-23 21:10:54Z sebb $
  * @see LOOKUPSWITCH
  * @see TABLESWITCH
  * @see InstructionList
@@ -37,6 +37,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
 
     protected int[] match; // matches, i.e., case 1: ... TODO could be package-protected?
     protected int[] indices; // target offsets TODO could be package-protected?
+    // TODO: make an inner class that holds match, index, target
     protected InstructionHandle[] targets; // target objects in instruction list TODO could be package-protected?
     protected int fixed_length; // fixed length defined by subclasses TODO could be package-protected?
     protected int match_length; // number of cases TODO could be package-protected?
@@ -59,12 +60,10 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param targets instruction targets
      * @param defaultTarget default instruction target
      */
+    // TODO: change to opcode, Case...
     Select(short opcode, int[] match, InstructionHandle[] targets, InstructionHandle defaultTarget) {
         super(opcode, defaultTarget);
         this.targets = targets;
-        for (InstructionHandle target2 : targets) {
-            notifyTarget(null, target2, this);
-        }
         this.match = match;
         if ((match_length = match.length) != targets.length) {
             throw new ClassGenException("Match and target array have not the same length: Match length: " +
@@ -150,55 +149,6 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
 
-    /**
-     * Set branch target for `i'th case
-     */
-    public void setTarget( int i, InstructionHandle target ) { // TODO could be package-protected?
-        notifyTarget(targets[i], target, this);
-        targets[i] = target;
-    }
-
-
-    /**
-     * @param old_ih old target
-     * @param new_ih new target
-     */
-    @Override
-    public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
-        boolean targeted = false;
-        if (super.getTarget() == old_ih) {
-            targeted = true;
-            setTarget(new_ih);
-        }
-        for (int i = 0; i < targets.length; i++) {
-            if (targets[i] == old_ih) {
-                targeted = true;
-                setTarget(i, new_ih);
-            }
-        }
-        if (!targeted) {
-            throw new ClassGenException("Not targeting " + old_ih);
-        }
-    }
-
-
-    /**
-     * @return true, if ih is target of this instruction
-     */
-    @Override
-    public boolean containsTarget( InstructionHandle ih ) {
-        if (super.getTarget() == ih) {
-            return true;
-        }
-        for (InstructionHandle target2 : targets) {
-            if (target2 == ih) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     @Override
     protected Object clone() throws CloneNotSupportedException {
         Select copy = (Select) super.clone();
@@ -206,18 +156,6 @@ public abstract class Select extends BranchInstruction implements VariableLength
         copy.indices = indices.clone();
         copy.targets = targets.clone();
         return copy;
-    }
-
-
-    /**
-     * Inform targets that they're not targeted anymore.
-     */
-    @Override
-    void dispose() {
-        super.dispose();
-        for (InstructionHandle target2 : targets) {
-            target2.removeTargeter(this);
-        }
     }
 
 
@@ -238,9 +176,58 @@ public abstract class Select extends BranchInstruction implements VariableLength
 
 
     /**
-     * @return array of match targets
+     * Get the target for a case.
+     * @param matchIdx The case index.
+     * @return The InstructionHandle.
      */
-    public InstructionHandle[] getTargets() {
-        return targets;
+    public InstructionHandle getMatchTarget(int matchIdx) {
+        return targets[matchIdx];
+    }
+
+
+    /**
+     * Release the associated targets
+     * @param instructionHandle The InstructionHandle which currently holds this Instruction
+     */
+    void releaseTargets(InstructionHandle instructionHandle) {
+        super.releaseTargets(instructionHandle);
+        for(InstructionHandle target : targets) {
+            target.removeTargeter(instructionHandle);
+        }
+    }
+
+
+    /**
+     * Convert absolute index offset into InstructionHandles.
+     */
+    void convertOffsetToInstructionHandle(InstructionListParser ilp) {
+        super.convertOffsetToInstructionHandle(ilp);
+        // Search for target position and set target
+        for (int i = 0; i < targets.length; ++i) {
+            InstructionHandle target = ilp.findHandle(position + indices[i]);
+            if (target == null) {
+                throw new ClassGenException("Couldn't find target for " + this + " index: " + i);
+            }
+            targets[i] = target;
+        }
+    }
+
+
+    /**
+     * Set the target for this instruction.  Should only be used by InstructionHandle.
+     * @param matchIdx The case index.
+     * @param target The target for the case.
+     */
+    final void setMatchTarget(int matchIdx, InstructionHandle target) {
+        targets[matchIdx] = target;
+    }
+
+
+    /**
+     * Get the number of MatchOffset pairs.
+     * @return The number of MatchOffset pairs.
+     */
+    public int getMatchCount() {
+        return match_length;
     }
 }

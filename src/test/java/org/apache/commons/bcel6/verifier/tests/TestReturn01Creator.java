@@ -64,7 +64,6 @@ public void create(OutputStream out) throws IOException {
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());
-    il.dispose();
   }
 
   private void createMethod_1() {
@@ -82,6 +81,5 @@ public void create(OutputStream out) throws IOException {
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());
-    il.dispose();
   }
 }
