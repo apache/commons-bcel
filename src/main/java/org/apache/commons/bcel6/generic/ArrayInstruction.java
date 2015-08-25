@@ -53,7 +53,8 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
      */
     @Override
     public Type getType( ConstantPoolGen cp ) {
-        switch (opcode) {
+        final short _opcode = super.getOpcode();
+        switch (_opcode) {
             case org.apache.commons.bcel6.Constants.IALOAD:
             case org.apache.commons.bcel6.Constants.IASTORE:
                 return Type.INT;
@@ -79,7 +80,7 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
             case org.apache.commons.bcel6.Constants.AASTORE:
                 return Type.OBJECT;
             default:
-                throw new ClassGenException("Oops: unknown case in switch" + opcode);
+                throw new ClassGenException("Oops: unknown case in switch" + _opcode);
         }
     }
 }

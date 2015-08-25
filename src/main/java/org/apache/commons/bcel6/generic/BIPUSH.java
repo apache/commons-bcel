@@ -74,7 +74,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
      */
     @Override
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
-        length = 2;
+        super.setLength(2);
         b = bytes.readByte();
     }
 
