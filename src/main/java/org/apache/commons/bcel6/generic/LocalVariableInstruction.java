@@ -153,7 +153,10 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
 
     /**
-     * Set the local variable index
+     * Set the local variable index.
+     * also updates opcode and length
+     * TODO Why?
+     * @see #setIndexOnly(int)
      */
     @Override
     public void setIndex( int n ) { // TODO could be package-protected?
@@ -212,5 +215,14 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
             default:
                 throw new ClassGenException("Oops: unknown case in switch" + canon_tag);
         }
+    }
+
+    /**
+     * Sets the index of the referenced variable (n) only
+     * @since 6.0
+     * @see #setIndex(int)
+     */
+    final void setIndexOnly(int n) {
+        this.n = n;
     }
 }
