@@ -17,6 +17,9 @@
  */
 package org.apache.commons.bcel6.generic;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.ExceptionConstants;
 
@@ -44,6 +47,16 @@ public class INVOKEVIRTUAL extends InvokeInstruction {
         super(Constants.INVOKEVIRTUAL, index);
     }
 
+
+    /**
+     * Dump instruction as byte code to stream out.
+     * @param out Output stream
+     */
+    @Override
+    public void dump( DataOutputStream out ) throws IOException {
+        out.writeByte(super.getOpcode());
+        out.writeShort(super.getIndex());
+    }
 
     @Override
     public Class<?>[] getExceptions() {
