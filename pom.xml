@@ -209,19 +209,21 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-        <systemProperties>
-          <property>
-             <!-- Suppress the stats, but keep the test as it exercises the code -->
-             <name>PerformanceTest.report</name>
-             <value>false</value>
-          </property>
-        </systemProperties>
+          <systemProperties>
+            <property>
+               <!-- Suppress the stats, but keep the test as it exercises the code -->
+               <name>PerformanceTest.report</name>
+               <value>false</value>
+            </property>
+          </systemProperties>
           <includes>
             <include>**/*TestCase.java</include>
             <include>**/PerformanceTest.java</include>
           </includes>
           <excludes>
             <exclude>**/Abstract*</exclude>
+            <!-- Takes rather a long time (especially rt.jar) ; only needs to be done occasionally -->
+            <exclude>**/JDKClassDumpTestCase.java</exclude>
           </excludes>
         </configuration>
       </plugin>
