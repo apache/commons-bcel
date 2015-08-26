@@ -46,7 +46,7 @@ public class BootstrapMethod implements Cloneable {
      * Initialize from another object.
      */
     public BootstrapMethod(BootstrapMethod c) {
-        this(c.getBootstrapMethodRef(), c.getNumBootstrapArguments(), c.getBootstrapArguments());
+        this(c.getBootstrapMethodRef(), c.getBootstrapArguments());
     }
 
     /**
@@ -56,22 +56,24 @@ public class BootstrapMethod implements Cloneable {
      * @throws IOException
      */
     BootstrapMethod(DataInput input) throws IOException {
-        this(input.readUnsignedShort(), input.readUnsignedShort(), (int[]) null);
+        this(input.readUnsignedShort(), input.readUnsignedShort());
 
         for (int i = 0; i < bootstrap_arguments.length; i++) {
             bootstrap_arguments[i] = input.readUnsignedShort();
         }
     }
 
+    // helper method
+    private BootstrapMethod(int bootstrap_method_ref, int num_bootstrap_arguments) {
+        this(bootstrap_method_ref, new int[num_bootstrap_arguments]);
+    }
 
     /**
      * @param bootstrap_method_ref int index into constant_pool of CONSTANT_MethodHandle
-     * @param num_bootstrap_arguments int count of number of boostrap arguments
      * @param bootstrap_arguments int[] indices into constant_pool of CONSTANT_<type>_info
      */
-    public BootstrapMethod(int bootstrap_method_ref, int num_bootstrap_arguments, int[] bootstrap_arguments) {
+    public BootstrapMethod(int bootstrap_method_ref, int[] bootstrap_arguments) {
         this.bootstrap_method_ref = bootstrap_method_ref;
-        this.bootstrap_arguments = new int[num_bootstrap_arguments];
         this.bootstrap_arguments = bootstrap_arguments;
     }
 
