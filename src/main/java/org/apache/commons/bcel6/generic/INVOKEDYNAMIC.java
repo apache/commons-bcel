@@ -31,6 +31,9 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * mechanism entirely.
  *
  * @version $Id: InvokeInstruction.java 1152072 2011-07-29 01:54:05Z dbrosius $
+ * @see
+ * <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokedynamic">
+ * The invokedynamic instruction in The Java Virtual Machine Specification</a>
  * @since 6.0
  */
 public class INVOKEDYNAMIC extends InvokeInstruction {
