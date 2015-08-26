@@ -49,7 +49,7 @@ import org.apache.commons.bcel6.util.ByteSequence;
  * @see     InstructionHandle
  * @see BranchHandle
  */
-public class InstructionList {
+public class InstructionList implements Iterable<InstructionHandle> {
 
     private InstructionHandle start = null;
     private InstructionHandle end = null;
