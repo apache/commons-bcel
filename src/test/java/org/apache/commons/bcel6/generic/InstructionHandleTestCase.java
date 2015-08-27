@@ -35,4 +35,12 @@ public class InstructionHandleTestCase {
     public void testGetIHnull() {
         InstructionHandle.getInstructionHandle(null); 
     }
+
+    @Test
+    public void testBCEL195() {
+        InstructionList il = new InstructionList();
+        InstructionHandle ih = il.append(InstructionConstants.NOP);
+        new TABLESWITCH(new int[0], new InstructionHandle[0], ih);
+        new TABLESWITCH(new int[0], new InstructionHandle[0], ih);
+    }
 }
