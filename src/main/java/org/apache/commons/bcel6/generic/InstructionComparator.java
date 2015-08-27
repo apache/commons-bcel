@@ -35,13 +35,10 @@ public interface InstructionComparator {
 
         @Override
         public boolean equals( Instruction i1, Instruction i2 ) {
-            if (i1 == i2) {
-                return true; // shortcut for identical objects
-            }
             if (i1.getOpcode() == i2.getOpcode()) {
                 if (i1 instanceof BranchInstruction) {
-                 // Different BIs are never equal to make targeters work correctly (BCEL-195)
-                    return false; // identity checked above
+                 // BIs are never equal to make targeters work correctly (BCEL-195)
+                    return false;
                 } else if (i1 instanceof ConstantPushInstruction) {
                     return ((ConstantPushInstruction) i1).getValue().equals(
                             ((ConstantPushInstruction) i2).getValue());
