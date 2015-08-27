@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-261" type="fix">Select constructor allows partially constructed instance to escape. Re-ordered code to delay the escape.</action>
       <action issue="BCEL-259" type="fix">Minor doc error in BranchInstruction.java</action>
       <action issue="BCEL-260" type="fix">ClassDumper example duplicates field attribute types</action>
       <action issue="BCEL-258" type="fix">No tests to check the output of dump methods</action>
