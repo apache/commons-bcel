@@ -208,7 +208,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
 
 
     /**
-     * Used by BranchInstruction, LocalVariableGen, CodeExceptionGen
+     * Used by BranchInstruction, LocalVariableGen, CodeExceptionGen, LineNumberGen
      */
     static void notifyTarget( InstructionHandle old_ih, InstructionHandle new_ih,
             InstructionTargeter t ) {
