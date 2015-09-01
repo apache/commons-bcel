@@ -241,7 +241,7 @@ public class VerifierAppFrame extends JFrame {
         if (e.getValueIsAdjusting()) {
             return;
         }
-        current_class = classNamesJList.getSelectedValue().toString();
+        current_class = classNamesJList.getSelectedValue();
         try {
             verify();
         } catch (ClassNotFoundException ex) {
