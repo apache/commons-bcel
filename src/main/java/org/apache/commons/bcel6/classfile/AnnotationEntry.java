@@ -148,6 +148,10 @@ public class AnnotationEntry implements Node {
         }
         return result.toString();
     }
+    
+    public String toString() {
+        return toShortString();
+    }
 
     public static AnnotationEntry[] createAnnotationEntries(Attribute[] attrs) {
         // Find attributes that contain annotation data
