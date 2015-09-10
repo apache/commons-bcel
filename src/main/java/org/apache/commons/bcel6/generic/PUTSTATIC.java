@@ -18,7 +18,7 @@
 package org.apache.commons.bcel6.generic;
 
 import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
  * PUTSTATIC - Put static field in class
@@ -51,8 +51,8 @@ public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, Pop
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 
 

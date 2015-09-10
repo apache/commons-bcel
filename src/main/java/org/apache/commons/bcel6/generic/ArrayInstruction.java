@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 
 /**
  * Super class for instructions dealing with array access such as IALOAD.
@@ -45,7 +45,7 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_ARRAY_EXCEPTION);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_ARRAY_EXCEPTION);
     }
 
 

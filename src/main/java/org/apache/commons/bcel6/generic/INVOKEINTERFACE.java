@@ -21,7 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 import org.apache.commons.bcel6.classfile.ConstantPool;
 import org.apache.commons.bcel6.util.ByteSequence;
 
@@ -108,11 +108,11 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_INTERFACE_METHOD_RESOLUTION,
-            ExceptionConstants.UNSATISFIED_LINK_ERROR,
-            ExceptionConstants.ABSTRACT_METHOD_ERROR,
-            ExceptionConstants.ILLEGAL_ACCESS_ERROR,
-            ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_INTERFACE_METHOD_RESOLUTION,
+            ExceptionConst.UNSATISFIED_LINK_ERROR,
+            ExceptionConst.ABSTRACT_METHOD_ERROR,
+            ExceptionConst.ILLEGAL_ACCESS_ERROR,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 
 

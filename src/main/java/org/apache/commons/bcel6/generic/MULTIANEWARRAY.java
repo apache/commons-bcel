@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 import org.apache.commons.bcel6.classfile.ConstantPool;
 import org.apache.commons.bcel6.util.ByteSequence;
 
@@ -116,9 +116,9 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
-            ExceptionConstants.ILLEGAL_ACCESS_ERROR,
-            ExceptionConstants.NEGATIVE_ARRAY_SIZE_EXCEPTION);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+            ExceptionConst.ILLEGAL_ACCESS_ERROR,
+            ExceptionConst.NEGATIVE_ARRAY_SIZE_EXCEPTION);
     }
 
 

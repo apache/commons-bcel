@@ -18,7 +18,7 @@
 package org.apache.commons.bcel6.generic;
 
 import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
  * GETFIELD - Fetch field from object
@@ -52,9 +52,9 @@ public class GETFIELD extends FieldInstruction implements ExceptionThrower, Stac
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConstants.NULL_POINTER_EXCEPTION,
-            ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConst.NULL_POINTER_EXCEPTION,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 
 

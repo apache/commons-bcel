@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 import org.apache.commons.bcel6.util.ByteSequence;
 
 /** 
@@ -133,7 +133,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_STRING_RESOLUTION);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_STRING_RESOLUTION);
     }
 
 

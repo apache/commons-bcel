@@ -21,7 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
  * INVOKESPECIAL - Invoke instance method; special handling for superclass, private
@@ -61,11 +61,11 @@ public class INVOKESPECIAL extends InvokeInstruction {
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConstants.NULL_POINTER_EXCEPTION, 
-            ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR,
-            ExceptionConstants.ABSTRACT_METHOD_ERROR,
-            ExceptionConstants.UNSATISFIED_LINK_ERROR);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConst.NULL_POINTER_EXCEPTION, 
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR,
+            ExceptionConst.ABSTRACT_METHOD_ERROR,
+            ExceptionConst.UNSATISFIED_LINK_ERROR);
     }
 
 

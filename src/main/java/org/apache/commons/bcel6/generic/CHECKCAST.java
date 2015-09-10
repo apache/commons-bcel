@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
  * CHECKCAST - Check whether object is of given type
@@ -48,8 +48,8 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
      */
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
-            ExceptionConstants.CLASS_CAST_EXCEPTION);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+            ExceptionConst.CLASS_CAST_EXCEPTION);
     }
 
 

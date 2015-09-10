@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
  * ANEWARRAY -  Create new array of references
@@ -43,8 +43,8 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
-            ExceptionConstants.NEGATIVE_ARRAY_SIZE_EXCEPTION);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+            ExceptionConst.NEGATIVE_ARRAY_SIZE_EXCEPTION);
     }
 
 

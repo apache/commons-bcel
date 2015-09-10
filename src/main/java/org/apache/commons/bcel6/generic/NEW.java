@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
  * NEW - Create new object
@@ -43,9 +43,9 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
-            ExceptionConstants.ILLEGAL_ACCESS_ERROR,
-            ExceptionConstants.INSTANTIATION_ERROR);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+            ExceptionConst.ILLEGAL_ACCESS_ERROR,
+            ExceptionConst.INSTANTIATION_ERROR);
     }
 
 

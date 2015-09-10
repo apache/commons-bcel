@@ -21,7 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
  * INVOKESTATIC - Invoke a class (static) method
@@ -60,9 +60,9 @@ public class INVOKESTATIC extends InvokeInstruction {
 
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConstants.createExceptions(ExceptionConstants.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConstants.UNSATISFIED_LINK_ERROR,
-            ExceptionConstants.INCOMPATIBLE_CLASS_CHANGE_ERROR);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConst.UNSATISFIED_LINK_ERROR,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 
 
