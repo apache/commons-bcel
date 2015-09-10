@@ -49,7 +49,7 @@ public class LocalVariables implements Cloneable {
      * However, the Type objects in the array are shared.
      */
     @Override
-    public LocalVariables clone(){
+    public Object clone(){
         LocalVariables lvs = new LocalVariables(locals.length);
         for (int i=0; i<locals.length; i++){
             lvs.locals[i] = this.locals[i];
@@ -69,7 +69,7 @@ public class LocalVariables implements Cloneable {
      * This is equivalent to ((LocalVariables) this.clone()).
      */
     public LocalVariables getClone(){
-        return this.clone();
+        return (LocalVariables) this.clone();
     }
 
     /**

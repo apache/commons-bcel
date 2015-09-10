@@ -53,7 +53,7 @@ public class RuntimeVisibleAnnotations extends Annotations
     @Override
     public Attribute copy(ConstantPool constant_pool)
     {
-        return clone();
+        return (Attribute) clone();
     }
 
     @Override

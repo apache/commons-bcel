@@ -118,6 +118,6 @@ public abstract class ParameterAnnotations extends Attribute {
      */
     @Override
     public Attribute copy( ConstantPool constant_pool ) {
-        return clone();
+        return (Attribute) clone();
     }
 }

@@ -181,9 +181,9 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
 
 
     @Override
-    public FieldGenOrMethodGen clone() {
+    public Object clone() {
         try {
-            return (FieldGenOrMethodGen) super.clone();
+            return super.clone();
         } catch (CloneNotSupportedException e) {
             throw new Error("Clone Not Supported"); // never happens
         }

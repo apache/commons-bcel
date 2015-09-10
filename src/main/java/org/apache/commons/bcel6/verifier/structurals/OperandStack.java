@@ -62,16 +62,12 @@ public class OperandStack implements Cloneable {
      * shared.
      */
     @Override
-    public OperandStack clone(){
-        try {
-            OperandStack newstack = (OperandStack) super.clone();
-            @SuppressWarnings("unchecked") // OK because this.stack is the same type
-            final ArrayList<Type> clone = (ArrayList<Type>) this.stack.clone();
-            newstack.stack = clone;
-            return newstack;
-        } catch (CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
-        }
+    public Object clone(){
+        OperandStack newstack = new OperandStack(this.maxStack);
+        @SuppressWarnings("unchecked") // OK because this.stack is the same type
+        final ArrayList<Type> clone = (ArrayList<Type>) this.stack.clone();
+        newstack.stack = clone;
+        return newstack;
     }
 
     /**
@@ -106,7 +102,7 @@ public class OperandStack implements Cloneable {
      * @see #clone()
      */
     public OperandStack getClone(){
-        return this.clone();
+        return (OperandStack) this.clone();
     }
 
     /**

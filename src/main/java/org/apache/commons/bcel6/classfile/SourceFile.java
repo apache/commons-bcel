@@ -145,6 +145,6 @@ public final class SourceFile extends Attribute {
      */
     @Override
     public Attribute copy( ConstantPool _constant_pool ) {
-        return clone();
+        return (Attribute) clone();
     }
 }

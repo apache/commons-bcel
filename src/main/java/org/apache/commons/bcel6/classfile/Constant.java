@@ -115,9 +115,9 @@ public abstract class Constant implements Cloneable, Node {
 
 
     @Override
-    public Constant clone() {
+    public Object clone() {
         try {
-            return (Constant) super.clone();
+            return super.clone();
         } catch (CloneNotSupportedException e) {
             throw new Error("Clone Not Supported"); // never happens
         }
