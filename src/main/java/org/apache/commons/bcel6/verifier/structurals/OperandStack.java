@@ -106,7 +106,7 @@ public class OperandStack implements Cloneable {
      * @see #clone()
      */
     public OperandStack getClone(){
-        return (OperandStack) this.clone();
+        return this.clone();
     }
 
     /**

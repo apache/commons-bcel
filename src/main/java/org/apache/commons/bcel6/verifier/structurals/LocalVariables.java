@@ -69,7 +69,7 @@ public class LocalVariables implements Cloneable {
      * This is equivalent to ((LocalVariables) this.clone()).
      */
     public LocalVariables getClone(){
-        return (LocalVariables) this.clone();
+        return this.clone();
     }
 
     /**

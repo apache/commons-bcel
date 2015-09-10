@@ -62,7 +62,7 @@ public class EnclosingMethod extends Attribute {
 
     @Override
     public Attribute copy(ConstantPool constant_pool) {
-        return (EnclosingMethod) clone();
+        return clone();
     }
 
     // Accessors

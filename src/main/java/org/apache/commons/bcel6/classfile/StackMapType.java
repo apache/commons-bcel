@@ -47,7 +47,7 @@ public final class StackMapType implements Cloneable {
     StackMapType(DataInput file, ConstantPool constant_pool) throws IOException {
         this(file.readByte(), -1, constant_pool);
         if (hasIndex()) {
-            this.index = (int) file.readShort();
+            this.index = file.readShort();
         }
         this.constant_pool = constant_pool;
     }

@@ -168,6 +168,6 @@ public final class PMGClass extends Attribute {
      */
     @Override
     public Attribute copy( ConstantPool _constant_pool ) {
-        return (Attribute) clone();
+        return clone();
     }
 }

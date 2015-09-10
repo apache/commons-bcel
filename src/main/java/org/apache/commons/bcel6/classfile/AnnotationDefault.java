@@ -83,7 +83,7 @@ public class AnnotationDefault extends Attribute {
 
     @Override
     public Attribute copy(ConstantPool _constant_pool) {
-        return (AnnotationDefault) clone();
+        return clone();
     }
 
     @Override
