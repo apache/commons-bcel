@@ -158,7 +158,7 @@ limitations under the License.
     <!-- See http://checkstyle.sf.net/config_design.html -->
     <!--module name="FinalClass"/-->
     <!--module name="HideUtilityClassConstructor"/-->
-    <module name="InterfaceIsType"/>
+    <!--module name="InterfaceIsType"/-->
 
     <module name="VisibilityModifier">
         <property name="ignoreAnnotationCanonicalNames" value="java.lang.Deprecated"/>
