@@ -878,8 +878,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     static final class BranchStack {
 
-        private Stack<BranchTarget> branchTargets = new Stack<>();
-        private Hashtable<InstructionHandle, BranchTarget> visitedTargets = new Hashtable<>();
+        private final Stack<BranchTarget> branchTargets = new Stack<>();
+        private final Hashtable<InstructionHandle, BranchTarget> visitedTargets = new Hashtable<>();
 
 
         public void push( InstructionHandle target, int stackDepth ) {

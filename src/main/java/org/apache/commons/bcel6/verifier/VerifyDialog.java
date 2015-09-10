@@ -53,7 +53,7 @@ public class VerifyDialog extends javax.swing.JDialog {
     /** Machine-generated. */
     private javax.swing.JButton ivjPass3Button = null;
     /** Machine-generated. */
-    private IvjEventHandler ivjEventHandler = new IvjEventHandler();
+    private final IvjEventHandler ivjEventHandler = new IvjEventHandler();
     /**
      * The class to verify. Default set to 'java.lang.Object'
      * in case this class is instantiated via one of the many
