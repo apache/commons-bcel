@@ -111,10 +111,18 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
     }
 
 
-    /** @return type of the referenced class/interface
+    /** 
+     * Get the ObjectType of the method return or field.
+     * 
+     * @return type of the referenced class/interface
+     * @throws ClassGenException when the field is (or method returns) an array, 
      */
     @Override
     public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
-        return (ObjectType)getReferenceType(cpg);
+        ReferenceType rt = getReferenceType(cpg);
+        if(rt instanceof ObjectType) {
+            return (ObjectType)rt;
+        }
+        throw new ClassGenException(rt.getSignature() + " does not represent an ObjectType");
     }
 }
