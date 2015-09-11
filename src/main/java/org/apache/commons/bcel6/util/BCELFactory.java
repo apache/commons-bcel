@@ -65,6 +65,7 @@ import org.apache.commons.bcel6.generic.Type;
  */
 class BCELFactory extends EmptyVisitor {
 
+    private static final String CONSTANT_PREFIX = Const.class.getSimpleName()+".";
     private final MethodGen _mg;
     private final PrintWriter _out;
     private final ConstantPoolGen _cp;
@@ -150,7 +151,7 @@ class BCELFactory extends EmptyVisitor {
         String field_name = i.getFieldName(_cp);
         Type type = i.getFieldType(_cp);
         _out.println("il.append(_factory.createFieldAccess(\"" + class_name + "\", \"" + field_name
-                + "\", " + BCELifier.printType(type) + ", " + "Constants."
+                + "\", " + BCELifier.printType(type) + ", " + CONSTANT_PREFIX
                 + Const.getOpcodeName(opcode).toUpperCase(Locale.ENGLISH) + "));");
     }
 
@@ -164,7 +165,7 @@ class BCELFactory extends EmptyVisitor {
         Type[] arg_types = i.getArgumentTypes(_cp);
         _out.println("il.append(_factory.createInvoke(\"" + class_name + "\", \"" + method_name
                 + "\", " + BCELifier.printType(type) + ", "
-                + BCELifier.printArgumentTypes(arg_types) + ", " + "Constants."
+                + BCELifier.printArgumentTypes(arg_types) + ", " + CONSTANT_PREFIX
                 + Const.getOpcodeName(opcode).toUpperCase(Locale.ENGLISH) + "));");
     }
 
@@ -298,7 +299,7 @@ class BCELFactory extends EmptyVisitor {
                 target = "null";
             }
             _out.println("    BranchInstruction " + name + " = _factory.createBranchInstruction("
-                    + "Constants." + bi.getName().toUpperCase(Locale.ENGLISH) + ", " + target
+                    + CONSTANT_PREFIX + bi.getName().toUpperCase(Locale.ENGLISH) + ", " + target
                     + ");");
         }
         if (bh.hasTargeters()) {

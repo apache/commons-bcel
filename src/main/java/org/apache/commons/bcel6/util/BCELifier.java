@@ -55,8 +55,11 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
         METHOD,
     };
 
-    // The base package name for imports; assumes Constants is at the top level
+    // The base package name for imports; assumes Const is at the top level
+    // N.B we use the class so renames will be detected by the compiler/IDE
     private static final String BASE_PACKAGE = Const.class.getPackage().getName();
+    private static final String CONSTANT_PREFIX = Const.class.getSimpleName()+".";
+
     private final JavaClass _clazz;
     private final PrintWriter _out;
     private final ConstantPoolGen _cp;
@@ -95,7 +98,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
         _out.println("import " + BASE_PACKAGE + ".*;");
         _out.println("import java.io.*;");
         _out.println();
-        _out.println("public class " + class_name + "Creator implements Constants {");
+        _out.println("public class " + class_name + "Creator {");
         _out.println("  private InstructionFactory _factory;");
         _out.println("  private ConstantPoolGen    _cp;");
         _out.println("  private ClassGen           _cg;");
@@ -212,16 +215,16 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
         for (int i = 0, pow = 1; pow <= Const.MAX_ACC_FLAG; i++) {
             if ((flags & pow) != 0) {
                 if ((pow == Const.ACC_SYNCHRONIZED) && (location == FLAGS.CLASS)) {
-                    buf.append("ACC_SUPER | ");
+                    buf.append(CONSTANT_PREFIX+"ACC_SUPER | ");
                 } else if ((pow == Const.ACC_VOLATILE) && (location == FLAGS.METHOD)) {
-                    buf.append("ACC_BRIDGE | ");
+                    buf.append(CONSTANT_PREFIX+"ACC_BRIDGE | ");
                 } else if ((pow == Const.ACC_TRANSIENT) && (location == FLAGS.METHOD)) {
-                    buf.append("ACC_VARARGS | ");
+                    buf.append(CONSTANT_PREFIX+"ACC_VARARGS | ");
                 } else {
                     if (i < Const.ACCESS_NAMES_LENGTH) {
-                        buf.append("ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
+                        buf.append(CONSTANT_PREFIX+"ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
                     } else {
-                        buf.append(String.format ("ACC_BIT %x | ", pow));
+                        buf.append(String.format (CONSTANT_PREFIX+"ACC_BIT %x | ", pow));
                     }
                 }
             }
