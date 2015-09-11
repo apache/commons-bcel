@@ -76,35 +76,6 @@ public interface Constants {
    *  */
   public static final short MINOR_1_5 = 0;
 
-  /** Major version number of class files for Java 1.6.
-   *  @see #MINOR_1_6
-   *  */
-  public static final short MAJOR_1_6 = 50;
-
-  /** Minor version number of class files for Java 1.6.
-   *  @see #MAJOR_1_6
-   *  */
-  public static final short MINOR_1_6 = 0;
-
-  /** Major version number of class files for Java 1.7.
-   *  @see #MINOR_1_7
-   *  */
-  public static final short MAJOR_1_7 = 51;
-
-  /** Minor version number of class files for Java 1.7.
-   *  @see #MAJOR_1_7
-   *  */
-  public static final short MINOR_1_7 = 0;
-
-  /** Major version number of class files for Java 1.8.
-   *  @see #MINOR_1_8
-   *  */
-  public static final short MAJOR_1_8 = 52;
-
-  /** Minor version number of class files for Java 1.8.
-   *  @see #MAJOR_1_8
-   *  */
-  public static final short MINOR_1_8 = 0;
 
   /** Default major version number.  Class file is for Java 1.1.
    *  @see #MAJOR_1_1
@@ -214,11 +185,6 @@ public interface Constants {
    */
   public static final short ACC_ENUM         = 0x4000;
 
-  /** One of the access flags for fields, methods, or classes.
-   *  @see #ACC_PUBLIC
-   */
-  public static final short ACC_MANDATED     = (short) 0x8000;
-
   // Applies to classes compiled by new compilers only
   /** One of the access flags for fields, methods, or classes.
    *  @see #ACC_PUBLIC
@@ -270,23 +236,13 @@ public interface Constants {
   /** Marks a constant pool entry as a name and type.  */
   public static final byte CONSTANT_NameAndType        = 12;
 
-  /** Marks a constant pool entry as a Method Handle.  */
-  public static final byte CONSTANT_MethodHandle       = 15;
-
-  /** Marks a constant pool entry as a Method Type.    */
-  public static final byte CONSTANT_MethodType         = 16;
-
-  /** Marks a constant pool entry as an Invoke Dynamic */
-  public static final byte CONSTANT_InvokeDynamic      = 18;
-
   /** The names of the types of entries in a constant pool. */
   public static final String[] CONSTANT_NAMES = {
     "", "CONSTANT_Utf8", "", "CONSTANT_Integer",
     "CONSTANT_Float", "CONSTANT_Long", "CONSTANT_Double",
     "CONSTANT_Class", "CONSTANT_String", "CONSTANT_Fieldref",
     "CONSTANT_Methodref", "CONSTANT_InterfaceMethodref",
-    "CONSTANT_NameAndType", "", "", "CONSTANT_MethodHandle",
-    "CONSTANT_MethodType", "", "CONSTANT_InvokeDynamic" };
+    "CONSTANT_NameAndType" };
 
   /** The name of the static initializer, also called &quot;class
    *  initialization method&quot; or &quot;interface initialization
@@ -1081,10 +1037,6 @@ public interface Constants {
   /** Java VM opcode.
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5">
    * Opcode definitions in The Java Virtual Machine Specification</a> */
-  public static final short INVOKEDYNAMIC    = 186;
-  /** Java VM opcode.
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5">
-   * Opcode definitions in The Java Virtual Machine Specification</a> */
   public static final short NEW              = 187;
   /** Java VM opcode.
    * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5">
@@ -1435,7 +1387,7 @@ public interface Constants {
     0/*dreturn*/, 0/*areturn*/, 0/*return*/,
     2/*getstatic*/, 2/*putstatic*/, 2/*getfield*/,
     2/*putfield*/, 2/*invokevirtual*/, 2/*invokespecial*/, 2/*invokestatic*/,
-    4/*invokeinterface*/, 4/*invokedynamic*/, 2/*new*/,
+    4/*invokeinterface*/, UNDEFINED, 2/*new*/,
     1/*newarray*/, 2/*anewarray*/,
     0/*arraylength*/, 0/*athrow*/, 2/*checkcast*/,
     2/*instanceof*/, 0/*monitorenter*/,
@@ -1508,7 +1460,7 @@ public interface Constants {
     {T_SHORT}/*putstatic*/, {T_SHORT}/*getfield*/,
     {T_SHORT}/*putfield*/, {T_SHORT}/*invokevirtual*/,
     {T_SHORT}/*invokespecial*/, {T_SHORT}/*invokestatic*/,
-    {T_SHORT, T_BYTE, T_BYTE}/*invokeinterface*/, {T_SHORT, T_BYTE, T_BYTE}/*invokedynamic*/,
+    {T_SHORT, T_BYTE, T_BYTE}/*invokeinterface*/, {},
     {T_SHORT}/*new*/, {T_BYTE}/*newarray*/,
     {T_SHORT}/*anewarray*/, {}/*arraylength*/, {}/*athrow*/,
     {T_SHORT}/*checkcast*/, {T_SHORT}/*instanceof*/,
@@ -1555,7 +1507,7 @@ public interface Constants {
     "tableswitch", "lookupswitch", "ireturn", "lreturn", "freturn",
     "dreturn", "areturn", "return", "getstatic", "putstatic", "getfield",
     "putfield", "invokevirtual", "invokespecial", "invokestatic",
-    "invokeinterface", "invokedynamic", "new", "newarray", "anewarray",
+    "invokeinterface", ILLEGAL_OPCODE, "new", "newarray", "anewarray",
     "arraylength", "athrow", "checkcast", "instanceof", "monitorenter",
     "monitorexit", "wide", "multianewarray", "ifnull", "ifnonnull",
     "goto_w", "jsr_w", "breakpoint", ILLEGAL_OPCODE, ILLEGAL_OPCODE,
@@ -1611,7 +1563,7 @@ public interface Constants {
     UNPREDICTABLE/*putstatic*/, 1/*getfield*/, UNPREDICTABLE/*putfield*/,
     UNPREDICTABLE/*invokevirtual*/, UNPREDICTABLE/*invokespecial*/,
     UNPREDICTABLE/*invokestatic*/,
-    UNPREDICTABLE/*invokeinterface*/, UNPREDICTABLE/*invokedynamic*/, 0/*new*/, 1/*newarray*/, 1/*anewarray*/,
+    UNPREDICTABLE/*invokeinterface*/, UNDEFINED, 0/*new*/, 1/*newarray*/, 1/*anewarray*/,
     1/*arraylength*/, 1/*athrow*/, 1/*checkcast*/, 1/*instanceof*/, 1/*monitorenter*/,
     1/*monitorexit*/, 0/*wide*/, UNPREDICTABLE/*multianewarray*/, 1/*ifnull*/, 1/*ifnonnull*/,
     0/*goto_w*/, 0/*jsr_w*/, 0/*breakpoint*/, UNDEFINED, UNDEFINED,
@@ -1667,7 +1619,7 @@ public interface Constants {
     0/*dreturn*/, 0/*areturn*/, 0/*return*/, UNPREDICTABLE/*getstatic*/, 0/*putstatic*/,
     UNPREDICTABLE/*getfield*/, 0/*putfield*/, UNPREDICTABLE/*invokevirtual*/,
     UNPREDICTABLE/*invokespecial*/, UNPREDICTABLE/*invokestatic*/,
-    UNPREDICTABLE/*invokeinterface*/, UNPREDICTABLE/*invokedynamic*/, 1/*new*/, 1/*newarray*/, 1/*anewarray*/,
+    UNPREDICTABLE/*invokeinterface*/, UNDEFINED, 1/*new*/, 1/*newarray*/, 1/*anewarray*/,
     1/*arraylength*/, 1/*athrow*/, 1/*checkcast*/, 1/*instanceof*/, 0/*monitorenter*/,
     0/*monitorexit*/, 0/*wide*/, 1/*multianewarray*/, 0/*ifnull*/, 0/*ifnonnull*/,
     0/*goto_w*/, 1/*jsr_w*/, 0/*breakpoint*/, UNDEFINED, UNDEFINED,
@@ -1701,31 +1653,14 @@ public interface Constants {
   public static final byte ATTR_PMG                                     = 9;
   public static final byte ATTR_SIGNATURE                               = 10;
   public static final byte ATTR_STACK_MAP                               = 11;
-  public static final byte ATTR_RUNTIME_VISIBLE_ANNOTATIONS             = 12;
-  public static final byte ATTR_RUNTIME_INVISIBLE_ANNOTATIONS           = 13;
-  public static final byte ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS   = 14;
-  public static final byte ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS = 15;
+  public static final byte ATTR_RUNTIMEVISIBLE_ANNOTATIONS              = 12;
+  public static final byte ATTR_RUNTIMEINVISIBLE_ANNOTATIONS            = 13;
+  public static final byte ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS    = 14;
+  public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = 15;
   public static final byte ATTR_ANNOTATION_DEFAULT                      = 16;
-  public static final byte ATTR_LOCAL_VARIABLE_TYPE_TABLE               = 17;
-  public static final byte ATTR_ENCLOSING_METHOD                        = 18;
-  public static final byte ATTR_STACK_MAP_TABLE                         = 19;
-  public static final byte ATTR_BOOTSTRAP_METHODS                       = 20;
-  public static final byte ATTR_METHOD_PARAMETERS                       = 21;
 
-  public static final short KNOWN_ATTRIBUTES = 22; // count of attributes
+  public static final short KNOWN_ATTRIBUTES = 12;//should be 17
 
-  /** @deprecated Use {@link #ATTR_RUNTIME_VISIBLE_ANNOTATIONS} instead */
-  @Deprecated
-public static final byte ATTR_RUNTIMEVISIBLE_ANNOTATIONS              = ATTR_RUNTIME_VISIBLE_ANNOTATIONS;
-  /** @deprecated Use {@link #ATTR_RUNTIME_INVISIBLE_ANNOTATIONS} instead */
-  @Deprecated
-public static final byte ATTR_RUNTIMEINVISIBLE_ANNOTATIONS            = ATTR_RUNTIME_INVISIBLE_ANNOTATIONS;
-  /** @deprecated Use {@link #ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS} instead */
-  @Deprecated
-public static final byte ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS    = ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS;
-  /** @deprecated Use {@link #ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS} instead */
-  @Deprecated
-public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS;
 
   // TODO: mutable public array!!
   public static final String[] ATTRIBUTE_NAMES = {
@@ -1735,8 +1670,7 @@ public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = ATTR_RUN
     "PMGClass", "Signature", "StackMap",
     "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
     "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations",
-    "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod", "StackMapTable",
-    "BootstrapMethods", "MethodParameters"
+    "AnnotationDefault"
   };
 
   /** Constants used in the StackMap attribute.
@@ -1755,44 +1689,5 @@ public static final byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS  = ATTR_RUN
     "Bogus", "Integer", "Float", "Double", "Long",
     "Null", "InitObject", "Object", "NewObject"
   };
-
-  /** Constants used to identify StackMapEntry types.
-   *
-   * For those types which can specify a range, the
-   * constant names the lowest value.
-   */
-  public static final int SAME_FRAME = 0;
-  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME = 64;
-  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED = 247;
-  public static final int CHOP_FRAME = 248;
-  public static final int SAME_FRAME_EXTENDED = 251;
-  public static final int APPEND_FRAME = 252;
-  public static final int FULL_FRAME = 255;
-
-  /** Constants that define the maximum value of
-   * those constants which store ranges. */
-
-  public static final int SAME_FRAME_MAX = 63;
-  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_MAX = 127;
-  public static final int CHOP_FRAME_MAX = 250;
-  public static final int APPEND_FRAME_MAX = 254;
-
-
-  // Constants defining the behavior of the Method Handles (JVMS �5.4.3.5)
-  
-  public static final byte REF_getField         = 1;
-  public static final byte REF_getStatic        = 2;
-  public static final byte REF_putField         = 3;
-  public static final byte REF_putStatic        = 4;
-  public static final byte REF_invokeVirtual    = 5;
-  public static final byte REF_invokeStatic     = 6;
-  public static final byte REF_invokeSpecial    = 7;
-  public static final byte REF_newInvokeSpecial = 8;
-  public static final byte REF_invokeInterface  = 9;
-  
-  /** The names of the referencd_kinds of a CONSTANT_MethodHandle_info. */
-  public static final String[] METHODHANDLE_NAMES = {
-      "", "getField", "getStatic", "putField", "putStatic", "invokeVirtual",
-      "invokeStatic", "invokeSpecial", "newInvokeSpecial", "invokeInterface" };
-
+ 
 }
