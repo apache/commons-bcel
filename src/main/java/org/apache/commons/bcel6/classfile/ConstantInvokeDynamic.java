@@ -69,13 +69,22 @@ public final class ConstantInvokeDynamic extends ConstantCP {
         v.visitConstantInvokeDynamic(this);
     }
 
+    /**
+     * @return Reference (index) to bootstrap method this constant refers to.
+     *
+     * Note that this method is a functional duplicate of getClassIndex
+     * for use by ConstantInvokeDynamic.
+     * @since 6.0
+     */
+    public final int getBootstrapMethodAttrIndex() {
+        return super.getClassIndex();  // AKA bootstrap_method_attr_index
+    }
 
     /**
      * @return String representation
      */
     @Override
     public final String toString() {
-        // UNDONE: need to string replace "class_index" with "bootstrap_method_attr_index"
-        return super.toString();
+        return super.toString().replace("class_index", "bootstrap_method_attr_index");
     }
 }

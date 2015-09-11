@@ -107,34 +107,10 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
-     * @return Reference (index) to bootstrap method this constant refers to.
-     *
-     * Note that this method is a functional duplicate of getClassIndex
-     * for use by ConstantInvokeDynamic.
-     * @since 6.0
-     */
-    public final int getBootstrapMethodAttrIndex() {
-        return class_index;  // AKA bootstrap_method_attr_index
-    }
-
-
-    /**
      * @param class_index points to Constant_class 
      */
     public final void setClassIndex( int class_index ) {
         this.class_index = class_index;
-    }
-
-
-    /**
-     * @param bootstrap_method_attr_index points to a BootstrapMethod. 
-     *
-     * Note that this method is a functional duplicate of setClassIndex
-     * for use by ConstantInvokeDynamic.
-     * @since 6.0
-     */
-    public final void setBootstrapMethodAttrIndex(int bootstrap_method_attr_index) {
-        this.class_index = bootstrap_method_attr_index;
     }
 
 
