@@ -147,7 +147,7 @@ public class ConstantPoolGen {
                 ConstantUtf8 u8;
 
                 if (c instanceof ConstantInvokeDynamic) {
-                    class_name = Integer.toString(m.getBootstrapMethodAttrIndex());
+                    class_name = Integer.toString(((ConstantInvokeDynamic) m).getBootstrapMethodAttrIndex());
                     // since name can't begin with digit, can  use
                     // METHODREF_DELIM with out fear of duplicates.
                 } else {
