@@ -158,7 +158,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     public final void setAttributes( Attribute[] attributes ) {
         this.attributes = attributes;
-        this.attributes_count = attributes.length; // init deprecated field
+        this.attributes_count = attributes != null ? attributes.length : 0; // init deprecated field
     }
 
 
