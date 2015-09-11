@@ -22,6 +22,8 @@ import java.io.IOException;
 
 import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.ExceptionConst;
+import org.apache.commons.bcel6.classfile.ConstantInvokeDynamic;
+import org.apache.commons.bcel6.classfile.ConstantNameAndType;
 import org.apache.commons.bcel6.classfile.ConstantPool;
 import org.apache.commons.bcel6.util.ByteSequence;
 
@@ -114,5 +116,14 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
         v.visitFieldOrMethod(this);
         v.visitInvokeInstruction(this);
         v.visitINVOKEDYNAMIC(this);
+    }
+
+    /**
+     * Override the parent method because our classname is held elsewhere.
+     */
+    public String getClassName( ConstantPoolGen cpg ) {
+        ConstantPool cp = cpg.getConstantPool();
+        ConstantInvokeDynamic cid = (ConstantInvokeDynamic) cp.getConstant(super.getIndex(), Const.CONSTANT_InvokeDynamic);
+        return ((ConstantNameAndType) cp.getConstant(cid.getNameAndTypeIndex())).getName(cp);
     }
 }
