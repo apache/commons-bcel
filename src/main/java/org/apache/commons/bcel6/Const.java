@@ -24,6 +24,7 @@ import java.util.Collections;
  * Constants for the project, mostly defined in the JVM specification.
  *
  * @version $Id$
+ * @since 6.0 (intended to replace the Constant interface)
  */
 public final class Const {
 
@@ -1489,7 +1490,8 @@ public final class Const {
   };
 
   /**
-   * 
+   * The primitive type names corresponding to the T_XX constants,
+   * e.g., TYPE_NAMES[T_INT] = "int"
    * @param index
    * @return
    * @since 6.0
@@ -1501,13 +1503,24 @@ public final class Const {
   /** The primitive class names corresponding to the T_XX constants,
    * e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
    */
-  private static final String[] CLASS_TYPE_NAMES = { // TODO currently unused - are they needed?
+  private static final String[] CLASS_TYPE_NAMES = {
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
     "java.lang.Boolean", "java.lang.Character", "java.lang.Float",
     "java.lang.Double", "java.lang.Byte", "java.lang.Short",
     "java.lang.Integer", "java.lang.Long", "java.lang.Void",
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE,  ILLEGAL_TYPE
   };
+
+  /**
+   * The primitive class names corresponding to the T_XX constants,
+   * e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
+   * @param index
+   * @return
+   * @since 6.0
+   */
+  public static String getClassTypeName(int index) {
+      return CLASS_TYPE_NAMES[index];
+  }
 
   /** The signature characters corresponding to primitive types,
    * e.g., SHORT_TYPE_NAMES[T_INT] = "I"
