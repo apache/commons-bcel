@@ -17,6 +17,8 @@
  */
 package org.apache.commons.bcel6.generic;
 
+import org.apache.commons.bcel6.ExceptionConst;
+
 /** 
  * ARRAYLENGTH -  Get length of array
  * <PRE>Stack: ..., arrayref -&gt; ..., length</PRE>
@@ -37,7 +39,7 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
     @Override
     public Class<?>[] getExceptions() {
         return new Class[] {
-            org.apache.commons.bcel6.ExceptionConstants.NULL_POINTER_EXCEPTION
+            ExceptionConst.NULL_POINTER_EXCEPTION
         };
     }
 

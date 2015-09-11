@@ -18,7 +18,7 @@
 package org.apache.commons.bcel6.generic;
 
 import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.ExceptionConstants;
+import org.apache.commons.bcel6.ExceptionConst;
 
 /**
  * Super class for the xRETURN family of instructions.
@@ -68,7 +68,7 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     @Override
     public Class<?>[] getExceptions() {
         return new Class[] {
-            ExceptionConstants.ILLEGAL_MONITOR_STATE
+            ExceptionConst.ILLEGAL_MONITOR_STATE
         };
     }
 

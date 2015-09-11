@@ -17,6 +17,8 @@
  */
 package org.apache.commons.bcel6.generic;
 
+import org.apache.commons.bcel6.ExceptionConst;
+
 /**
  * LDIV - Divide longs
  * <PRE>Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt;</PRE>
@@ -34,7 +36,7 @@ public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
     @Override
     public Class<?>[] getExceptions() {
         return new Class[] {
-            org.apache.commons.bcel6.ExceptionConstants.ARITHMETIC_EXCEPTION
+            ExceptionConst.ARITHMETIC_EXCEPTION
         };
     }
 

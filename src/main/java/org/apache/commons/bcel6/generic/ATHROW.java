@@ -17,6 +17,8 @@
  */
 package org.apache.commons.bcel6.generic;
 
+import org.apache.commons.bcel6.ExceptionConst;
+
 /** 
  * ATHROW -  Throw exception
  * <PRE>Stack: ..., objectref -&gt; objectref</PRE>
@@ -38,7 +40,7 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
     @Override
     public Class<?>[] getExceptions() {
         return new Class[] {
-            org.apache.commons.bcel6.ExceptionConstants.THROWABLE
+            ExceptionConst.THROWABLE
         };
     }
 

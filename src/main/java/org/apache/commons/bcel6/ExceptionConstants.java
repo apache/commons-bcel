@@ -21,7 +21,9 @@ package org.apache.commons.bcel6;
  * Exception constants.
  *
  * @version $Id$
+ * @deprecated DO NOT USE - use ExceptionConst instead
  */
+@Deprecated
 public interface ExceptionConstants {
 
     /** The mother of all exceptions

@@ -20,6 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.commons.bcel6.ExceptionConst;
 import org.apache.commons.bcel6.util.ByteSequence;
 
 /** 
@@ -103,7 +104,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     @Override
     public Class<?>[] getExceptions() {
         return new Class[] {
-            org.apache.commons.bcel6.ExceptionConstants.NEGATIVE_ARRAY_SIZE_EXCEPTION
+            ExceptionConst.NEGATIVE_ARRAY_SIZE_EXCEPTION
         };
     }
 
