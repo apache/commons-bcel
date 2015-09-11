@@ -23,7 +23,7 @@ import java.io.OutputStream;
 import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.generic.ClassGen;
 import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.InstructionConstants;
+import org.apache.commons.bcel6.generic.InstructionConst;
 import org.apache.commons.bcel6.generic.InstructionFactory;
 import org.apache.commons.bcel6.generic.InstructionHandle;
 import org.apache.commons.bcel6.generic.InstructionList;
@@ -72,7 +72,7 @@ public void create(OutputStream out) throws IOException {
     MethodGen method = new MethodGen(Constants.ACC_PUBLIC | Constants.ACC_STATIC, Type.INT, Type.NO_ARGS,
             new String[] {  }, "test3", TEST_PACKAGE+".TestReturn03", il, _cp);
 
-    InstructionHandle ih_0 = il.append(InstructionConstants.ACONST_NULL);
+    InstructionHandle ih_0 = il.append(InstructionConst.ACONST_NULL);
     Assert.assertNotNull(ih_0); // TODO why is this not used
     il.append(InstructionFactory.createReturn(Type.OBJECT));
     method.setMaxStack();

@@ -297,9 +297,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     public void addEmptyConstructor( int access_flags ) {
         InstructionList il = new InstructionList();
-        il.append(InstructionConstants.THIS); // Push `this'
+        il.append(InstructionConst.THIS); // Push `this'
         il.append(new INVOKESPECIAL(cp.addMethodref(super_class_name, "<init>", "()V")));
-        il.append(InstructionConstants.RETURN);
+        il.append(InstructionConst.RETURN);
         MethodGen mg = new MethodGen(access_flags, Type.VOID, Type.NO_ARGS, null, "<init>",
                 class_name, il, cp);
         mg.setMaxStack(1);

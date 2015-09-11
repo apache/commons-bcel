@@ -38,7 +38,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      */
     public PUSH(ConstantPoolGen cp, int value) {
         if ((value >= -1) && (value <= 5)) {
-            instruction = InstructionConstants.getInstruction(Constants.ICONST_0 + value);
+            instruction = InstructionConst.getInstruction(Constants.ICONST_0 + value);
         } else if (Instruction.isValidByte(value)) {
             instruction = new BIPUSH((byte) value);
         } else if (Instruction.isValidShort(value)) {
@@ -54,7 +54,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param value to be pushed 
      */
     public PUSH(ConstantPoolGen cp, boolean value) {
-        instruction = InstructionConstants.getInstruction(Constants.ICONST_0 + (value ? 1 : 0));
+        instruction = InstructionConst.getInstruction(Constants.ICONST_0 + (value ? 1 : 0));
     }
 
 
@@ -64,11 +64,11 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      */
     public PUSH(ConstantPoolGen cp, float value) {
         if (value == 0.0) {
-            instruction = InstructionConstants.FCONST_0;
+            instruction = InstructionConst.FCONST_0;
         } else if (value == 1.0) {
-            instruction = InstructionConstants.FCONST_1;
+            instruction = InstructionConst.FCONST_1;
         } else if (value == 2.0) {
-            instruction = InstructionConstants.FCONST_2;
+            instruction = InstructionConst.FCONST_2;
         } else {
             instruction = new LDC(cp.addFloat(value));
         }
@@ -81,9 +81,9 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      */
     public PUSH(ConstantPoolGen cp, long value) {
         if (value == 0) {
-            instruction = InstructionConstants.LCONST_0;
+            instruction = InstructionConst.LCONST_0;
         } else if (value == 1) {
-            instruction = InstructionConstants.LCONST_1;
+            instruction = InstructionConst.LCONST_1;
         } else {
             instruction = new LDC2_W(cp.addLong(value));
         }
@@ -96,9 +96,9 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      */
     public PUSH(ConstantPoolGen cp, double value) {
         if (value == 0.0) {
-            instruction = InstructionConstants.DCONST_0;
+            instruction = InstructionConst.DCONST_0;
         } else if (value == 1.0) {
-            instruction = InstructionConstants.DCONST_1;
+            instruction = InstructionConst.DCONST_1;
         } else {
             instruction = new LDC2_W(cp.addDouble(value));
         }
@@ -111,7 +111,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      */
     public PUSH(ConstantPoolGen cp, String value) {
         if (value == null) {
-            instruction = InstructionConstants.ACONST_NULL;
+            instruction = InstructionConst.ACONST_NULL;
         } else {
             instruction = new LDC(cp.addString(value));
         }
@@ -125,7 +125,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      */
     public PUSH(ConstantPoolGen cp, ObjectType value) {
         if (value == null) {
-            instruction = InstructionConstants.ACONST_NULL;
+            instruction = InstructionConst.ACONST_NULL;
         } else {
             instruction = new LDC(cp.addClass(value));
         }

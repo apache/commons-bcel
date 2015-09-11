@@ -121,7 +121,7 @@ public abstract class Instruction implements Cloneable {
     public Instruction copy() {
         Instruction i = null;
         // "Constant" instruction, no need to duplicate
-        if (InstructionConstants.getInstruction(this.getOpcode()) != null) {
+        if (InstructionConst.getInstruction(this.getOpcode()) != null) {
             i = this;
         } else {
             try {
@@ -149,11 +149,11 @@ public abstract class Instruction implements Cloneable {
      * Read an instruction from (byte code) input stream and return the
      * appropiate object.
      * <p>
-     * If the Instruction is defined in {@link InstructionConstants}, then the
+     * If the Instruction is defined in {@link InstructionConst}, then the
      * singleton instance is returned.
      * @param bytes input stream bytes
      * @return instruction object being read
-     * @see InstructionConstants#getInstruction(int)
+     * @see InstructionConst#getInstruction(int)
      */
     // @since 6.0 no longer final
     public static Instruction readInstruction( ByteSequence bytes ) throws IOException {
@@ -164,7 +164,7 @@ public abstract class Instruction implements Cloneable {
             wide = true;
             opcode = (short) bytes.readUnsignedByte();
         }
-        final Instruction instruction = InstructionConstants.getInstruction(opcode);
+        final Instruction instruction = InstructionConst.getInstruction(opcode);
         if (instruction != null) {
             return instruction; // Used predefined immutable object, if available
         }

@@ -39,7 +39,7 @@ public class InstructionHandleTestCase {
     @Test
     public void testBCEL195() {
         InstructionList il = new InstructionList();
-        InstructionHandle ih = il.append(InstructionConstants.NOP);
+        InstructionHandle ih = il.append(InstructionConst.NOP);
         new TABLESWITCH(new int[0], new InstructionHandle[0], ih);
         new TABLESWITCH(new int[0], new InstructionHandle[0], ih);
     }

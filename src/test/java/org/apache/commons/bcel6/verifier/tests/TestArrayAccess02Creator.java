@@ -23,7 +23,7 @@ import java.io.OutputStream;
 import org.apache.commons.bcel6.Constants;
 import org.apache.commons.bcel6.generic.ClassGen;
 import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.InstructionConstants;
+import org.apache.commons.bcel6.generic.InstructionConst;
 import org.apache.commons.bcel6.generic.InstructionFactory;
 import org.apache.commons.bcel6.generic.InstructionHandle;
 import org.apache.commons.bcel6.generic.InstructionList;
@@ -86,9 +86,9 @@ public void create(OutputStream out) throws IOException {
     Assert.assertNotNull(ih_10); // TODO why is this not used
     il.append(new PUSH(_cp, 0));
     il.append(_factory.createNew(TEST_PACKAGE+".TestArrayAccess02"));
-    il.append(InstructionConstants.DUP);
+    il.append(InstructionConst.DUP);
     il.append(_factory.createInvoke(TEST_PACKAGE+".TestArrayAccess02", "<init>", Type.VOID, Type.NO_ARGS, Constants.INVOKESPECIAL));
-    il.append(InstructionConstants.AASTORE);
+    il.append(InstructionConst.AASTORE);
     InstructionHandle ih_20 = il.append(InstructionFactory.createReturn(Type.VOID));
     Assert.assertNotNull(ih_20); // TODO why is this not used
     method.setMaxStack();

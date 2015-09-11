@@ -26,11 +26,11 @@ import org.apache.commons.bcel6.Constants;
  * add your own create methods.
  * <p>
  * Note: The static createXXX methods return singleton instances
- * from the {@link InstructionConstants} class.
+ * from the {@link InstructionConst} class.
  *
  * @version $Id$
  * @see Constants
- * @see InstructionConstants
+ * @see InstructionConst
  */
 public class InstructionFactory {
 
@@ -299,21 +299,21 @@ public class InstructionFactory {
         switch (type.getType()) {
             case Constants.T_ARRAY:
             case Constants.T_OBJECT:
-                return InstructionConstants.ARETURN;
+                return InstructionConst.ARETURN;
             case Constants.T_INT:
             case Constants.T_SHORT:
             case Constants.T_BOOLEAN:
             case Constants.T_CHAR:
             case Constants.T_BYTE:
-                return InstructionConstants.IRETURN;
+                return InstructionConst.IRETURN;
             case Constants.T_FLOAT:
-                return InstructionConstants.FRETURN;
+                return InstructionConst.FRETURN;
             case Constants.T_DOUBLE:
-                return InstructionConstants.DRETURN;
+                return InstructionConst.DRETURN;
             case Constants.T_LONG:
-                return InstructionConstants.LRETURN;
+                return InstructionConst.LRETURN;
             case Constants.T_VOID:
-                return InstructionConstants.RETURN;
+                return InstructionConst.RETURN;
             default:
                 throw new RuntimeException("Invalid type: " + type);
         }
@@ -323,25 +323,25 @@ public class InstructionFactory {
     private static ArithmeticInstruction createBinaryIntOp( char first, String op ) {
         switch (first) {
             case '-':
-                return InstructionConstants.ISUB;
+                return InstructionConst.ISUB;
             case '+':
-                return InstructionConstants.IADD;
+                return InstructionConst.IADD;
             case '%':
-                return InstructionConstants.IREM;
+                return InstructionConst.IREM;
             case '*':
-                return InstructionConstants.IMUL;
+                return InstructionConst.IMUL;
             case '/':
-                return InstructionConstants.IDIV;
+                return InstructionConst.IDIV;
             case '&':
-                return InstructionConstants.IAND;
+                return InstructionConst.IAND;
             case '|':
-                return InstructionConstants.IOR;
+                return InstructionConst.IOR;
             case '^':
-                return InstructionConstants.IXOR;
+                return InstructionConst.IXOR;
             case '<':
-                return InstructionConstants.ISHL;
+                return InstructionConst.ISHL;
             case '>':
-                return op.equals(">>>") ? InstructionConstants.IUSHR : InstructionConstants.ISHR;
+                return op.equals(">>>") ? InstructionConst.IUSHR : InstructionConst.ISHR;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -351,25 +351,25 @@ public class InstructionFactory {
     private static ArithmeticInstruction createBinaryLongOp( char first, String op ) {
         switch (first) {
             case '-':
-                return InstructionConstants.LSUB;
+                return InstructionConst.LSUB;
             case '+':
-                return InstructionConstants.LADD;
+                return InstructionConst.LADD;
             case '%':
-                return InstructionConstants.LREM;
+                return InstructionConst.LREM;
             case '*':
-                return InstructionConstants.LMUL;
+                return InstructionConst.LMUL;
             case '/':
-                return InstructionConstants.LDIV;
+                return InstructionConst.LDIV;
             case '&':
-                return InstructionConstants.LAND;
+                return InstructionConst.LAND;
             case '|':
-                return InstructionConstants.LOR;
+                return InstructionConst.LOR;
             case '^':
-                return InstructionConstants.LXOR;
+                return InstructionConst.LXOR;
             case '<':
-                return InstructionConstants.LSHL;
+                return InstructionConst.LSHL;
             case '>':
-                return op.equals(">>>") ? InstructionConstants.LUSHR : InstructionConstants.LSHR;
+                return op.equals(">>>") ? InstructionConst.LUSHR : InstructionConst.LSHR;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -379,15 +379,15 @@ public class InstructionFactory {
     private static ArithmeticInstruction createBinaryFloatOp( char op ) {
         switch (op) {
             case '-':
-                return InstructionConstants.FSUB;
+                return InstructionConst.FSUB;
             case '+':
-                return InstructionConstants.FADD;
+                return InstructionConst.FADD;
             case '*':
-                return InstructionConstants.FMUL;
+                return InstructionConst.FMUL;
             case '/':
-                return InstructionConstants.FDIV;
+                return InstructionConst.FDIV;
             case '%':
-                return InstructionConstants.FREM;
+                return InstructionConst.FREM;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -397,15 +397,15 @@ public class InstructionFactory {
     private static ArithmeticInstruction createBinaryDoubleOp( char op ) {
         switch (op) {
             case '-':
-                return InstructionConstants.DSUB;
+                return InstructionConst.DSUB;
             case '+':
-                return InstructionConstants.DADD;
+                return InstructionConst.DADD;
             case '*':
-                return InstructionConstants.DMUL;
+                return InstructionConst.DMUL;
             case '/':
-                return InstructionConstants.DDIV;
+                return InstructionConst.DDIV;
             case '%':
-                return InstructionConstants.DREM;
+                return InstructionConst.DREM;
             default:
                 throw new RuntimeException("Invalid operand " + op);
         }
@@ -441,7 +441,7 @@ public class InstructionFactory {
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createPop( int size ) {
-        return (size == 2) ? InstructionConstants.POP2 : InstructionConstants.POP;
+        return (size == 2) ? InstructionConst.POP2 : InstructionConst.POP;
     }
 
 
@@ -449,7 +449,7 @@ public class InstructionFactory {
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup( int size ) {
-        return (size == 2) ? InstructionConstants.DUP2 : InstructionConstants.DUP;
+        return (size == 2) ? InstructionConst.DUP2 : InstructionConst.DUP;
     }
 
 
@@ -457,7 +457,7 @@ public class InstructionFactory {
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup_2( int size ) {
-        return (size == 2) ? InstructionConstants.DUP2_X2 : InstructionConstants.DUP_X2;
+        return (size == 2) ? InstructionConst.DUP2_X2 : InstructionConst.DUP_X2;
     }
 
 
@@ -465,7 +465,7 @@ public class InstructionFactory {
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup_1( int size ) {
-        return (size == 2) ? InstructionConstants.DUP2_X1 : InstructionConstants.DUP_X1;
+        return (size == 2) ? InstructionConst.DUP2_X1 : InstructionConst.DUP_X1;
     }
 
 
@@ -528,22 +528,22 @@ public class InstructionFactory {
         switch (type.getType()) {
             case Constants.T_BOOLEAN:
             case Constants.T_BYTE:
-                return InstructionConstants.BALOAD;
+                return InstructionConst.BALOAD;
             case Constants.T_CHAR:
-                return InstructionConstants.CALOAD;
+                return InstructionConst.CALOAD;
             case Constants.T_SHORT:
-                return InstructionConstants.SALOAD;
+                return InstructionConst.SALOAD;
             case Constants.T_INT:
-                return InstructionConstants.IALOAD;
+                return InstructionConst.IALOAD;
             case Constants.T_FLOAT:
-                return InstructionConstants.FALOAD;
+                return InstructionConst.FALOAD;
             case Constants.T_DOUBLE:
-                return InstructionConstants.DALOAD;
+                return InstructionConst.DALOAD;
             case Constants.T_LONG:
-                return InstructionConstants.LALOAD;
+                return InstructionConst.LALOAD;
             case Constants.T_ARRAY:
             case Constants.T_OBJECT:
-                return InstructionConstants.AALOAD;
+                return InstructionConst.AALOAD;
             default:
                 throw new RuntimeException("Invalid type " + type);
         }
@@ -557,22 +557,22 @@ public class InstructionFactory {
         switch (type.getType()) {
             case Constants.T_BOOLEAN:
             case Constants.T_BYTE:
-                return InstructionConstants.BASTORE;
+                return InstructionConst.BASTORE;
             case Constants.T_CHAR:
-                return InstructionConstants.CASTORE;
+                return InstructionConst.CASTORE;
             case Constants.T_SHORT:
-                return InstructionConstants.SASTORE;
+                return InstructionConst.SASTORE;
             case Constants.T_INT:
-                return InstructionConstants.IASTORE;
+                return InstructionConst.IASTORE;
             case Constants.T_FLOAT:
-                return InstructionConstants.FASTORE;
+                return InstructionConst.FASTORE;
             case Constants.T_DOUBLE:
-                return InstructionConstants.DASTORE;
+                return InstructionConst.DASTORE;
             case Constants.T_LONG:
-                return InstructionConstants.LASTORE;
+                return InstructionConst.LASTORE;
             case Constants.T_ARRAY:
             case Constants.T_OBJECT:
-                return InstructionConstants.AASTORE;
+                return InstructionConst.AASTORE;
             default:
                 throw new RuntimeException("Invalid type " + type);
         }
@@ -685,21 +685,21 @@ public class InstructionFactory {
         switch (type.getType()) {
             case Constants.T_ARRAY:
             case Constants.T_OBJECT:
-                return InstructionConstants.ACONST_NULL;
+                return InstructionConst.ACONST_NULL;
             case Constants.T_INT:
             case Constants.T_SHORT:
             case Constants.T_BOOLEAN:
             case Constants.T_CHAR:
             case Constants.T_BYTE:
-                return InstructionConstants.ICONST_0;
+                return InstructionConst.ICONST_0;
             case Constants.T_FLOAT:
-                return InstructionConstants.FCONST_0;
+                return InstructionConst.FCONST_0;
             case Constants.T_DOUBLE:
-                return InstructionConstants.DCONST_0;
+                return InstructionConst.DCONST_0;
             case Constants.T_LONG:
-                return InstructionConstants.LCONST_0;
+                return InstructionConst.LCONST_0;
             case Constants.T_VOID:
-                return InstructionConstants.NOP;
+                return InstructionConst.NOP;
             default:
                 throw new RuntimeException("Invalid type: " + type);
         }

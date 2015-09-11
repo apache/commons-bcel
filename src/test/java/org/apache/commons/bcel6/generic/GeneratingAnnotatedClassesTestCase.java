@@ -427,9 +427,9 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // to the BufferedReader object stays on top of the stack and is stored
         // in the newly allocated in variable.
         il.append(factory.createNew("java.io.BufferedReader"));
-        il.append(InstructionConstants.DUP); // Use predefined constant
+        il.append(InstructionConst.DUP); // Use predefined constant
         il.append(factory.createNew("java.io.InputStreamReader"));
-        il.append(InstructionConstants.DUP);
+        il.append(InstructionConst.DUP);
         il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
                 Constants.GETSTATIC));
         il.append(factory.createInvoke("java.io.InputStreamReader", "<init>",
@@ -444,7 +444,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // Create local variable name and initialize it to null
         lg = mg.addLocalVariable("name", Type.STRING, null, null);
         int name = lg.getIndex();
-        il.append(InstructionConstants.ACONST_NULL);
+        il.append(InstructionConst.ACONST_NULL);
         lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
         // Create try-catch block: We remember the start of the block, read a
         // line from the standard input and store it into the variable name .
@@ -469,7 +469,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         int var_ex_slot = var_ex.getIndex();
         InstructionHandle handler = il.append(new ASTORE(var_ex_slot));
         var_ex.setStart(handler);
-        var_ex.setEnd(il.append(InstructionConstants.RETURN));
+        var_ex.setEnd(il.append(InstructionConst.RETURN));
         mg.addExceptionHandler(try_start, try_end, handler, new ObjectType(
                 "java.io.IOException"));
         // "Normal" code continues, now we can set the branch target of the GOTO
@@ -480,7 +480,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.
         il.append(factory.createNew(Type.STRINGBUFFER));
-        il.append(InstructionConstants.DUP);
+        il.append(InstructionConst.DUP);
         il.append(new PUSH(cp, "Hello, "));
         il
                 .append(factory.createInvoke("java.lang.StringBuffer",
@@ -496,7 +496,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 .append(factory.createInvoke("java.io.PrintStream", "println",
                         Type.VOID, new Type[] { Type.STRING },
                         Constants.INVOKEVIRTUAL));
-        il.append(InstructionConstants.RETURN);
+        il.append(InstructionConst.RETURN);
         // Finalization: Finally, we have to set the stack size, which normally
         // would have to be computed on the fly and add a default constructor
         // method to the class, which is empty in this case.
@@ -521,9 +521,9 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // to the BufferedReader object stays on top of the stack and is stored
         // in the newly allocated in variable.
         il.append(factory.createNew("java.io.BufferedReader"));
-        il.append(InstructionConstants.DUP); // Use predefined constant
+        il.append(InstructionConst.DUP); // Use predefined constant
         il.append(factory.createNew("java.io.InputStreamReader"));
-        il.append(InstructionConstants.DUP);
+        il.append(InstructionConst.DUP);
         il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
                 Constants.GETSTATIC));
         il.append(factory.createInvoke("java.io.InputStreamReader", "<init>",
@@ -538,7 +538,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // Create local variable name and initialize it to null
         lg = mg.addLocalVariable("name", Type.STRING, null, null);
         int name = lg.getIndex();
-        il.append(InstructionConstants.ACONST_NULL);
+        il.append(InstructionConst.ACONST_NULL);
         lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
         // Create try-catch block: We remember the start of the block, read a
         // line from the standard input and store it into the variable name .
@@ -563,7 +563,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         int var_ex_slot = var_ex.getIndex();
         InstructionHandle handler = il.append(new ASTORE(var_ex_slot));
         var_ex.setStart(handler);
-        var_ex.setEnd(il.append(InstructionConstants.RETURN));
+        var_ex.setEnd(il.append(InstructionConst.RETURN));
         mg.addExceptionHandler(try_start, try_end, handler, new ObjectType(
                 "java.io.IOException"));
         // "Normal" code continues, now we can set the branch target of the GOTO
@@ -574,7 +574,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.
         il.append(factory.createNew(Type.STRINGBUFFER));
-        il.append(InstructionConstants.DUP);
+        il.append(InstructionConst.DUP);
         il.append(new PUSH(cp, "Hello, "));
         il
                 .append(factory.createInvoke("java.lang.StringBuffer",
@@ -590,7 +590,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 .append(factory.createInvoke("java.io.PrintStream", "println",
                         Type.VOID, new Type[] { Type.STRING },
                         Constants.INVOKEVIRTUAL));
-        il.append(InstructionConstants.RETURN);
+        il.append(InstructionConst.RETURN);
         // Finalization: Finally, we have to set the stack size, which normally
         // would have to be computed on the fly and add a default constructor
         // method to the class, which is empty in this case.

@@ -41,7 +41,7 @@ import org.apache.commons.bcel6.generic.FieldInstruction;
 import org.apache.commons.bcel6.generic.IINC;
 import org.apache.commons.bcel6.generic.INSTANCEOF;
 import org.apache.commons.bcel6.generic.Instruction;
-import org.apache.commons.bcel6.generic.InstructionConstants;
+import org.apache.commons.bcel6.generic.InstructionConst;
 import org.apache.commons.bcel6.generic.InstructionHandle;
 import org.apache.commons.bcel6.generic.InvokeInstruction;
 import org.apache.commons.bcel6.generic.LDC;
@@ -108,9 +108,9 @@ class BCELFactory extends EmptyVisitor {
 
     private boolean visitInstruction( Instruction i ) {
         short opcode = i.getOpcode();
-        if ((InstructionConstants.getInstruction(opcode) != null)
+        if ((InstructionConst.getInstruction(opcode) != null)
                 && !(i instanceof ConstantPushInstruction) && !(i instanceof ReturnInstruction)) { // Handled below
-            _out.println("il.append(InstructionConstants."
+            _out.println("il.append(InstructionConst."
                     + i.getName().toUpperCase(Locale.ENGLISH) + ");");
             return true;
         }
