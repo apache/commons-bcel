@@ -104,8 +104,10 @@ public class InstructionFactory {
                 return new INVOKESTATIC(index);
             case Const.INVOKEINTERFACE:
                 return new INVOKEINTERFACE(index, nargs + 1);
+            case Const.INVOKEDYNAMIC:
+                return new INVOKEDYNAMIC(index);
             default:
-                throw new RuntimeException("Oops: Unknown invoke kind:" + kind);
+                throw new RuntimeException("Oops: Unknown invoke kind: " + kind);
         }
     }
 
