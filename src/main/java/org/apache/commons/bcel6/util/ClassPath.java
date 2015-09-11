@@ -93,6 +93,15 @@ public class ClassPath {
         vec.toArray(paths);
     }
 
+    /**
+     * Search for classes in CLASSPATH.
+     * @deprecated Use SYSTEM_CLASS_PATH constant
+     */
+    @Deprecated
+    public ClassPath() {
+        this(getClassPath());
+    }
+
     /** @return used class path string
      */
     @Override

@@ -72,6 +72,42 @@ public class ObjectType extends ReferenceType {
 
 
     /**
+     * If "this" doesn't reference a class, it references an interface
+     * or a non-existant entity.
+     * @deprecated (since 6.0) this method returns an inaccurate result
+     *   if the class or interface referenced cannot
+     *   be found: use referencesClassExact() instead
+     */
+    @Deprecated
+    public boolean referencesClass() {
+        try {
+            JavaClass jc = Repository.lookupClass(class_name);
+            return jc.isClass();
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+
+    /**
+     * If "this" doesn't reference an interface, it references a class
+     * or a non-existant entity.
+     * @deprecated (since 6.0) this method returns an inaccurate result
+     *   if the class or interface referenced cannot
+     *   be found: use referencesInterfaceExact() instead
+     */
+    @Deprecated
+    public boolean referencesInterface() {
+        try {
+            JavaClass jc = Repository.lookupClass(class_name);
+            return !jc.isClass();
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+
+    /**
      * Return true if this type references a class,
      * false if it references an interface.
      * @return true if the type references a class, false if

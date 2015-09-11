@@ -34,7 +34,7 @@ public class GraphicalVerifier {
 
 
     /** Constructor. */
-    private GraphicalVerifier() {
+    public GraphicalVerifier() {
         VerifierAppFrame frame = new VerifierAppFrame();
         //Frames �berpr�fen, die voreingestellte Gr��e haben
         //Frames packen, die nutzbare bevorzugte Gr��eninformationen enthalten, z.B. aus ihrem Layout

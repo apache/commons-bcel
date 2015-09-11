@@ -549,6 +549,27 @@ public abstract class Instruction implements Cloneable {
     public abstract void accept( Visitor v );
 
 
+    /** Get Comparator object used in the equals() method to determine
+     * equality of instructions.
+     *
+     * @return currently used comparator for equals()
+     * @deprecated use the built in comparator, or wrap this class in another object that implements these methods
+     */
+    @Deprecated
+    public static InstructionComparator getComparator() {
+        return cmp;
+    }
+
+
+    /** Set comparator to be used for equals().
+      * @deprecated use the built in comparator, or wrap this class in another object that implements these methods
+     */
+    @Deprecated
+    public static void setComparator( InstructionComparator c ) {
+        cmp = c;
+    }
+
+
     /** Check for equality, delegated to comparator
      * @return true if that is an Instruction and has the same opcode
      */

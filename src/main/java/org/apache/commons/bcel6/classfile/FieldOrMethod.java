@@ -18,6 +18,7 @@
 package org.apache.commons.bcel6.classfile;
 
 import java.io.DataInput;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -47,6 +48,12 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     @java.lang.Deprecated
     protected Attribute[] attributes; // Collection of attributes
+
+    /**
+     * @deprecated (since 6.0) will be removed (not needed)
+     */
+    @java.lang.Deprecated
+    protected int attributes_count; // No. of attributes
 
     // @since 6.0
     private AnnotationEntry[] annotationEntries; // annotations defined on the field or method 
@@ -79,6 +86,18 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @param file Input stream
      * @throws IOException
      * @throws ClassFormatException
+     * @deprecated Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
+     */
+    protected FieldOrMethod(DataInputStream file, ConstantPool constant_pool) throws IOException,
+            ClassFormatException {
+        this((DataInput) file, constant_pool);
+    }
+
+    /**
+     * Construct object from file stream.
+     * @param file Input stream
+     * @throws IOException
+     * @throws ClassFormatException
      */
     protected FieldOrMethod(DataInput file, ConstantPool constant_pool) throws IOException, ClassFormatException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null,
@@ -88,6 +107,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         for (int i = 0; i < attributes_count; i++) {
             attributes[i] = Attribute.readAttribute(file, constant_pool);
         }
+        this.attributes_count = attributes_count; // init deprecated field
     }
 
 
@@ -138,6 +158,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     public final void setAttributes( Attribute[] attributes ) {
         this.attributes = attributes;
+        this.attributes_count = attributes.length; // init deprecated field
     }
 
 
@@ -223,6 +244,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
         c.constant_pool    = constant_pool;
         c.attributes       = new Attribute[attributes.length];
+        c.attributes_count = attributes_count; // init deprecated field
 
         for (int i = 0; i < attributes.length; i++) {
             c.attributes[i] = attributes[i].copy(constant_pool);
