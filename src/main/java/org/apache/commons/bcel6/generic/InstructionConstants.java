@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.Const;
  * it's possible to write il.append(Instruction.ICONST_0);
  *
  * @version $Id$
- * @deprecated Do not use. Use InstructionConst instead.
+ * @deprecated (since 6.0) Do not use. Use InstructionConst instead.
  */
 @Deprecated
 public interface InstructionConstants {

@@ -55,19 +55,19 @@ public class ConstantPoolGen {
     private static final int DEFAULT_BUFFER_SIZE = 256;
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int size; 
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected Constant[] constants;
 
     /**
-     * @deprecated will be made private; do not access directly, use getSize()
+     * @deprecated (since 6.0) will be made private; do not access directly, use getSize()
      */
     @Deprecated
     protected int index = 1; // First entry (0) used by JVM

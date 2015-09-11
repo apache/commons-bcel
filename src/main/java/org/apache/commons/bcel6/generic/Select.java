@@ -36,37 +36,37 @@ public abstract class Select extends BranchInstruction implements VariableLength
         StackConsumer /* @since 6.0 */, StackProducer {
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int[] match; // matches, i.e., case 1: ... TODO could be package-protected?
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int[] indices; // target offsets TODO could be package-protected?
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected InstructionHandle[] targets; // target objects in instruction list TODO could be package-protected?
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int fixed_length; // fixed length defined by subclasses TODO could be package-protected?
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int match_length; // number of cases TODO could be package-protected?
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int padding = 0; // number of pad bytes for alignment TODO could be package-protected?

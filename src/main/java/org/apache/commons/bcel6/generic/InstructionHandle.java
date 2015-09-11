@@ -49,7 +49,7 @@ public class InstructionHandle {
     private Instruction instruction;
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int i_position = -1; // byte code offset of instruction

@@ -33,19 +33,19 @@ import org.apache.commons.bcel6.classfile.Attribute;
 public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAndTyped, Cloneable {
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected String name;
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected Type type;
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected ConstantPoolGen cp;

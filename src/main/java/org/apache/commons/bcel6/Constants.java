@@ -21,7 +21,7 @@ package org.apache.commons.bcel6;
  * Constants for the project, mostly defined in the JVM specification.
  *
  * @version $Id$
- * @deprecated DO NOT USE - use Const instead
+ * @deprecated (since 6.0) DO NOT USE - use Const instead
  */
 @Deprecated
 public interface Constants {

@@ -21,7 +21,7 @@ package org.apache.commons.bcel6;
  * Exception constants.
  *
  * @version $Id$
- * @deprecated DO NOT USE - use ExceptionConst instead
+ * @deprecated (since 6.0) DO NOT USE - use ExceptionConst instead
  */
 @Deprecated
 public interface ExceptionConstants {

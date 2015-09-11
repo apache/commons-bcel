@@ -33,13 +33,13 @@ import org.apache.commons.bcel6.classfile.Utility;
 public abstract class Type {
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected byte type; // TODO should be final (and private)
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected String signature; // signature for the type TODO should be private

@@ -32,13 +32,13 @@ import org.apache.commons.bcel6.util.ByteSequence;
 public abstract class Instruction implements Cloneable {
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected short length = 1; // Length of instruction in bytes 
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected short opcode = -1; // Opcode number

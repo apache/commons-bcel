@@ -28,7 +28,7 @@ import org.apache.commons.bcel6.Const;
 public abstract class AccessFlags {
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @java.lang.Deprecated
     protected int access_flags; // TODO not used externally at present

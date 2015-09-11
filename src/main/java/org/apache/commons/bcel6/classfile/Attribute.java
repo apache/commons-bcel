@@ -50,25 +50,25 @@ import org.apache.commons.bcel6.Const;
 public abstract class Attribute implements Cloneable, Node {
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @java.lang.Deprecated
     protected int name_index; // Points to attribute name in constant pool TODO make private (has getter & setter)
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @java.lang.Deprecated
     protected int length; // Content length of attribute field TODO make private (has getter & setter)
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @java.lang.Deprecated
     protected byte tag; // Tag to distinguish subclasses TODO make private & final; supposed to be immutable
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @java.lang.Deprecated
     protected ConstantPool constant_pool; // TODO make private (has getter & setter)

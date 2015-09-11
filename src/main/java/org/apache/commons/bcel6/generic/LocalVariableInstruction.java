@@ -32,7 +32,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
         IndexedInstruction {
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int n = -1; // index of referenced variable

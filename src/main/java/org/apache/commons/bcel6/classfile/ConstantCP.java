@@ -40,14 +40,14 @@ public abstract class ConstantCP extends Constant {
     // Note that this field is used to store the
     // bootstrap_method_attr_index of a ConstantInvokeDynamic.
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @java.lang.Deprecated
     protected int class_index; // TODO make private (has getter & setter)
     // This field has the same meaning for all subclasses.
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @java.lang.Deprecated
     protected int name_and_type_index; // TODO make private (has getter & setter)

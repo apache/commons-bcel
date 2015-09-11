@@ -39,7 +39,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
         IndexedInstruction {
 
     /**
-     * @deprecated will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int index; // index to constant pool
