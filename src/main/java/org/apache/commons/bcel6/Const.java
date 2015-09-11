@@ -241,11 +241,8 @@ public final class Const {
 
   /**
    * The names of the access flags.
-   * @deprecated Do not use as will be made private.
-   * Use getAccessName instead
    */
-  @Deprecated
-  public static final String[] ACCESS_NAMES = {
+  private static final String[] ACCESS_NAMES = {
     "public", "private", "protected", "static", "final", "synchronized",
     "volatile", "transient", "native", "interface", "abstract", "strictfp",
     "synthetic", "annotation", "enum"
@@ -342,11 +339,9 @@ public final class Const {
 
   /**
    * The names of the types of entries in a constant pool.
-   * @deprecated Do not use as will be made private.
    * Use getConstantName instead
    */
-  @Deprecated
-  public static final String[] CONSTANT_NAMES = {
+  private static final String[] CONSTANT_NAMES = {
     "", "CONSTANT_Utf8", "", "CONSTANT_Integer",
     "CONSTANT_Float", "CONSTANT_Long", "CONSTANT_Double",
     "CONSTANT_Class", "CONSTANT_String", "CONSTANT_Fieldref",
@@ -377,11 +372,8 @@ public final class Const {
 
   /**
    * The names of the interfaces implemented by arrays
-   * @deprecated Do not use as will be made private.
-   * Use TBA instead
    */
-  @Deprecated
-  public static final String[] INTERFACES_IMPLEMENTED_BY_ARRAYS = {"java.lang.Cloneable", "java.io.Serializable"};
+  private static final String[] INTERFACES_IMPLEMENTED_BY_ARRAYS = {"java.lang.Cloneable", "java.io.Serializable"};
 
   /**
    * 
@@ -1489,11 +1481,8 @@ public final class Const {
 
   /** The primitive type names corresponding to the T_XX constants,
    * e.g., TYPE_NAMES[T_INT] = "int"
-   * @deprecated Do not use as will be made private.
-   * Use getTypeName instead
    */
-  @Deprecated
-  public static final String[] TYPE_NAMES = {
+  private static final String[] TYPE_NAMES = {
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
     "boolean", "char", "float", "double", "byte", "short", "int", "long",
     "void", "array", "object", "unknown", "address"
@@ -1511,11 +1500,8 @@ public final class Const {
 
   /** The primitive class names corresponding to the T_XX constants,
    * e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
-   * @deprecated Do not use as will be made private.
-   * Use TBA instead
    */
-  @Deprecated
-  public static final String[] CLASS_TYPE_NAMES = {
+  private static final String[] CLASS_TYPE_NAMES = { // TODO currently unused - are they needed?
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
     "java.lang.Boolean", "java.lang.Character", "java.lang.Float",
     "java.lang.Double", "java.lang.Byte", "java.lang.Short",
@@ -1525,11 +1511,8 @@ public final class Const {
 
   /** The signature characters corresponding to primitive types,
    * e.g., SHORT_TYPE_NAMES[T_INT] = "I"
-   * @deprecated Do not use as will be made private.
-   * Use TBA instead
    */
-  @Deprecated
-  public static final String[] SHORT_TYPE_NAMES = {
+  private static final String[] SHORT_TYPE_NAMES = {
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE, ILLEGAL_TYPE,
     "Z", "C", "F", "D", "B", "S", "I", "J",
     "V", ILLEGAL_TYPE, ILLEGAL_TYPE, ILLEGAL_TYPE
@@ -1550,11 +1533,8 @@ public final class Const {
    * Number of byte code operands for each opcode, i.e., number of bytes after the tag byte
    * itself.  Indexed by opcode, so NO_OF_OPERANDS[BIPUSH] = the number of operands for a bipush
    * instruction.
-   * @deprecated Do not use as will be made private.
-   * Use TBA instead
    */
-  @Deprecated
-  public static final short[] NO_OF_OPERANDS = {
+  private static final short[] NO_OF_OPERANDS = {
     0/*nop*/, 0/*aconst_null*/, 0/*iconst_m1*/, 0/*iconst_0*/,
     0/*iconst_1*/, 0/*iconst_2*/, 0/*iconst_3*/, 0/*iconst_4*/,
     0/*iconst_5*/, 0/*lconst_0*/, 0/*lconst_1*/, 0/*fconst_0*/,
@@ -1629,11 +1609,8 @@ public final class Const {
    * How the byte code operands are to be interpreted for each opcode.
    * Indexed by opcode.  TYPE_OF_OPERANDS[ILOAD] = an array of shorts
    * describing the data types for the instruction.
-   * @deprecated Do not use; will be made private.
-   * Use getOperandType(int, int) instead
    */
-  @Deprecated
-  public static final short[][] TYPE_OF_OPERANDS = {
+  private static final short[][] TYPE_OF_OPERANDS = {
     {}/*nop*/, {}/*aconst_null*/, {}/*iconst_m1*/, {}/*iconst_0*/,
     {}/*iconst_1*/, {}/*iconst_2*/, {}/*iconst_3*/, {}/*iconst_4*/,
     {}/*iconst_5*/, {}/*lconst_0*/, {}/*lconst_1*/, {}/*fconst_0*/,
@@ -1713,10 +1690,8 @@ public final class Const {
 
   /**
    * Names of opcodes.  Indexed by opcode.  OPCODE_NAMES[ALOAD] = "aload".
-   * @deprecated Do not use; will be made private . Use getOpcodeName(int) instead
    */
-  @Deprecated
-  public static final String[] OPCODE_NAMES = {
+  private static final String[] OPCODE_NAMES = {
     "nop", "aconst_null", "iconst_m1", "iconst_0", "iconst_1",
     "iconst_2", "iconst_3", "iconst_4", "iconst_5", "lconst_0",
     "lconst_1", "fconst_0", "fconst_1", "fconst_2", "dconst_0",
@@ -1782,11 +1757,8 @@ public final class Const {
    * Number of words consumed on operand stack by instructions.
    * Indexed by opcode.  CONSUME_STACK[FALOAD] = number of words
    * consumed from the stack by a faload instruction.
-   * @deprecated Do not use as will be made private.
-   * Use TBA instead
    */
-  @Deprecated
-  public static final int[] CONSUME_STACK = {
+  private static final int[] CONSUME_STACK = {
     0/*nop*/, 0/*aconst_null*/, 0/*iconst_m1*/, 0/*iconst_0*/, 0/*iconst_1*/,
     0/*iconst_2*/, 0/*iconst_3*/, 0/*iconst_4*/, 0/*iconst_5*/, 0/*lconst_0*/,
     0/*lconst_1*/, 0/*fconst_0*/, 0/*fconst_1*/, 0/*fconst_2*/, 0/*dconst_0*/,
@@ -1852,11 +1824,8 @@ public final class Const {
    * Number of words produced onto operand stack by instructions.
    * Indexed by opcode.  CONSUME_STACK[DALOAD] = number of words
    * consumed from the stack by a daload instruction.
-   * @deprecated Do not use as will be made private.
-   * Use TBA instead
    */
-  @Deprecated
-  public static final int[] PRODUCE_STACK = {
+  private static final int[] PRODUCE_STACK = {
     0/*nop*/, 1/*aconst_null*/, 1/*iconst_m1*/, 1/*iconst_0*/, 1/*iconst_1*/,
     1/*iconst_2*/, 1/*iconst_3*/, 1/*iconst_4*/, 1/*iconst_5*/, 2/*lconst_0*/,
     2/*lconst_1*/, 1/*fconst_0*/, 1/*fconst_1*/, 1/*fconst_2*/, 2/*dconst_0*/,
@@ -1945,13 +1914,7 @@ public final class Const {
 
   public static final short KNOWN_ATTRIBUTES = 22; // count of attributes
 
-  /**
-   * 
-   * @deprecated Do not use as will be made private.
-   * Use getAttributeName instead
-   */
-  @Deprecated
-  public static final String[] ATTRIBUTE_NAMES = {
+  private static final String[] ATTRIBUTE_NAMES = {
     "SourceFile", "ConstantValue", "Code", "Exceptions",
     "LineNumberTable", "LocalVariableTable",
     "InnerClasses", "Synthetic", "Deprecated",
@@ -1984,12 +1947,7 @@ public final class Const {
   public static final byte ITEM_Object     = 7;
   public static final byte ITEM_NewObject  = 8;
 
-  /**
-   * @deprecated Do not use as will be made private.
-   * Use TBA instead
-   */
-  @Deprecated
-  public static final String[] ITEM_NAMES = {
+  private static final String[] ITEM_NAMES = {
     "Bogus", "Integer", "Float", "Double", "Long",
     "Null", "InitObject", "Object", "NewObject"
   };
@@ -2040,10 +1998,8 @@ public final class Const {
   
   /**
    * The names of the reference_kinds of a CONSTANT_MethodHandle_info.
-   * @deprecated Do not use; will be made private . Use getMethodHandleName(int) instead
    */
-  @Deprecated
-  public static final String[] METHODHANDLE_NAMES = {
+  private static final String[] METHODHANDLE_NAMES = {
       "", "getField", "getStatic", "putField", "putStatic", "invokeVirtual",
       "invokeStatic", "invokeSpecial", "newInvokeSpecial", "invokeInterface" };
 
