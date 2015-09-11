@@ -24,7 +24,7 @@ import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.Attribute;
 import org.apache.commons.bcel6.classfile.ClassParser;
 import org.apache.commons.bcel6.classfile.ConstantPool;
@@ -167,7 +167,7 @@ public class Class2HTML {
      * i.e., an index to a string.
      */
     static String referenceClass( int index ) {
-        String str = constant_pool.getConstantString(index, Constants.CONSTANT_Class);
+        String str = constant_pool.getConstantString(index, Const.CONSTANT_Class);
         str = Utility.compactClassName(str);
         str = Utility.compactClassName(str, class_package + ".", true);
         return "<A HREF=\"" + class_name + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + str

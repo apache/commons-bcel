@@ -28,7 +28,7 @@ public class LALOAD extends ArrayInstruction implements StackProducer {
     /** Load long from array
      */
     public LALOAD() {
-        super(org.apache.commons.bcel6.Constants.LALOAD);
+        super(org.apache.commons.bcel6.Const.LALOAD);
     }
 
 

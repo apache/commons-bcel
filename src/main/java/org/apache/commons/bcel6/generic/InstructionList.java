@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.Constant;
 import org.apache.commons.bcel6.util.ByteSequence;
 
@@ -871,7 +871,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
                     Instruction inst = ((BranchInstruction) i).getTarget().getInstruction();
                     if (!contains(inst)) {
                         throw new ClassGenException("Branch target of "
-                                + Constants.getOpcodeName(i.getOpcode()) + ":" + inst
+                                + Const.getOpcodeName(i.getOpcode()) + ":" + inst
                                 + " not in instruction list");
                     }
                     if (i instanceof Select) {
@@ -880,14 +880,14 @@ public class InstructionList implements Iterable<InstructionHandle> {
                             inst = target.getInstruction();
                             if (!contains(inst)) {
                                 throw new ClassGenException("Branch target of "
-                                        + Constants.getOpcodeName(i.getOpcode()) + ":" + inst
+                                        + Const.getOpcodeName(i.getOpcode()) + ":" + inst
                                         + " not in instruction list");
                             }
                         }
                     }
                     if (!(ih instanceof BranchHandle)) {
                         throw new ClassGenException("Branch instruction "
-                                + Constants.getOpcodeName(i.getOpcode()) + ":" + inst
+                                + Const.getOpcodeName(i.getOpcode()) + ":" + inst
                                 + " not contained in BranchHandle.");
                     }
                 }
@@ -906,12 +906,12 @@ public class InstructionList implements Iterable<InstructionHandle> {
              * LOOKUPSWITCH).
              */
             switch (i.getOpcode()) {
-                case Constants.JSR:
-                case Constants.GOTO:
+                case Const.JSR:
+                case Const.GOTO:
                     max_additional_bytes += 2;
                     break;
-                case Constants.TABLESWITCH:
-                case Constants.LOOKUPSWITCH:
+                case Const.TABLESWITCH:
+                case Const.LOOKUPSWITCH:
                     max_additional_bytes += 3;
                     break;
             }

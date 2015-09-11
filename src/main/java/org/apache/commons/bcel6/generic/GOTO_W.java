@@ -38,7 +38,7 @@ public class GOTO_W extends GotoInstruction {
 
 
     public GOTO_W(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.GOTO_W, target);
+        super(org.apache.commons.bcel6.Const.GOTO_W, target);
         super.setLength(5);
     }
 

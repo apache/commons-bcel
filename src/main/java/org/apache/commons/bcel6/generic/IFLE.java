@@ -35,7 +35,7 @@ public class IFLE extends IfInstruction {
 
 
     public IFLE(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IFLE, target);
+        super(org.apache.commons.bcel6.Const.IFLE, target);
     }
 
 

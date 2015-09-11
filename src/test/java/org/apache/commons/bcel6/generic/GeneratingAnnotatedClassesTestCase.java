@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.bcel6.AbstractTestCase;
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.AnnotationEntry;
 import org.apache.commons.bcel6.classfile.ArrayElementValue;
 import org.apache.commons.bcel6.classfile.ElementValue;
@@ -431,12 +431,12 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         il.append(factory.createNew("java.io.InputStreamReader"));
         il.append(InstructionConst.DUP);
         il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
-                Constants.GETSTATIC));
+                Const.GETSTATIC));
         il.append(factory.createInvoke("java.io.InputStreamReader", "<init>",
-                Type.VOID, new Type[] { i_stream }, Constants.INVOKESPECIAL));
+                Type.VOID, new Type[] { i_stream }, Const.INVOKESPECIAL));
         il.append(factory.createInvoke("java.io.BufferedReader", "<init>",
                 Type.VOID, new Type[] { new ObjectType("java.io.Reader") },
-                Constants.INVOKESPECIAL));
+                Const.INVOKESPECIAL));
         LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType(
                 "java.io.BufferedReader"), null, null);
         int in = lg.getIndex();
@@ -475,7 +475,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // "Normal" code continues, now we can set the branch target of the GOTO
         // .
         InstructionHandle ih = il.append(factory.createFieldAccess(
-                "java.lang.System", "out", p_stream, Constants.GETSTATIC));
+                "java.lang.System", "out", p_stream, Const.GETSTATIC));
         g.setTarget(ih);
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.
@@ -485,17 +485,17 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         il
                 .append(factory.createInvoke("java.lang.StringBuffer",
                         "<init>", Type.VOID, new Type[] { Type.STRING },
-                        Constants.INVOKESPECIAL));
+                        Const.INVOKESPECIAL));
         il.append(new ALOAD(name));
         il.append(factory.createInvoke("java.lang.StringBuffer", "append",
                 Type.STRINGBUFFER, new Type[] { Type.STRING },
-                Constants.INVOKEVIRTUAL));
+                Const.INVOKEVIRTUAL));
         il.append(factory.createInvoke("java.lang.StringBuffer", "toString",
-                Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
+                Type.STRING, Type.NO_ARGS, Const.INVOKEVIRTUAL));
         il
                 .append(factory.createInvoke("java.io.PrintStream", "println",
                         Type.VOID, new Type[] { Type.STRING },
-                        Constants.INVOKEVIRTUAL));
+                        Const.INVOKEVIRTUAL));
         il.append(InstructionConst.RETURN);
         // Finalization: Finally, we have to set the stack size, which normally
         // would have to be computed on the fly and add a default constructor
@@ -504,7 +504,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         mg.setMaxLocals();
         cg.addMethod(mg.getMethod());
         il.dispose(); // Allow instruction handles to be reused
-        cg.addEmptyConstructor(Constants.ACC_PUBLIC);
+        cg.addEmptyConstructor(Const.ACC_PUBLIC);
     }
 
     private void buildClassContents(ClassGen cg, ConstantPoolGen cp,
@@ -525,12 +525,12 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         il.append(factory.createNew("java.io.InputStreamReader"));
         il.append(InstructionConst.DUP);
         il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
-                Constants.GETSTATIC));
+                Const.GETSTATIC));
         il.append(factory.createInvoke("java.io.InputStreamReader", "<init>",
-                Type.VOID, new Type[] { i_stream }, Constants.INVOKESPECIAL));
+                Type.VOID, new Type[] { i_stream }, Const.INVOKESPECIAL));
         il.append(factory.createInvoke("java.io.BufferedReader", "<init>",
                 Type.VOID, new Type[] { new ObjectType("java.io.Reader") },
-                Constants.INVOKESPECIAL));
+                Const.INVOKESPECIAL));
         LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType(
                 "java.io.BufferedReader"), null, null);
         int in = lg.getIndex();
@@ -569,7 +569,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // "Normal" code continues, now we can set the branch target of the GOTO
         // .
         InstructionHandle ih = il.append(factory.createFieldAccess(
-                "java.lang.System", "out", p_stream, Constants.GETSTATIC));
+                "java.lang.System", "out", p_stream, Const.GETSTATIC));
         g.setTarget(ih);
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.
@@ -579,17 +579,17 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         il
                 .append(factory.createInvoke("java.lang.StringBuffer",
                         "<init>", Type.VOID, new Type[] { Type.STRING },
-                        Constants.INVOKESPECIAL));
+                        Const.INVOKESPECIAL));
         il.append(new ALOAD(name));
         il.append(factory.createInvoke("java.lang.StringBuffer", "append",
                 Type.STRINGBUFFER, new Type[] { Type.STRING },
-                Constants.INVOKEVIRTUAL));
+                Const.INVOKEVIRTUAL));
         il.append(factory.createInvoke("java.lang.StringBuffer", "toString",
-                Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
+                Type.STRING, Type.NO_ARGS, Const.INVOKEVIRTUAL));
         il
                 .append(factory.createInvoke("java.io.PrintStream", "println",
                         Type.VOID, new Type[] { Type.STRING },
-                        Constants.INVOKEVIRTUAL));
+                        Const.INVOKEVIRTUAL));
         il.append(InstructionConst.RETURN);
         // Finalization: Finally, we have to set the stack size, which normally
         // would have to be computed on the fly and add a default constructor
@@ -598,7 +598,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         mg.setMaxLocals();
         cg.addMethod(mg.getMethod());
         il.dispose(); // Allow instruction handles to be reused
-        cg.addEmptyConstructor(Constants.ACC_PUBLIC);
+        cg.addEmptyConstructor(Const.ACC_PUBLIC);
     }
 
     private JavaClass getClassFrom(String where, String clazzname)
@@ -613,13 +613,13 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     private ClassGen createClassGen(String classname)
     {
         return new ClassGen(classname, "java.lang.Object", "<generated>",
-                Constants.ACC_PUBLIC | Constants.ACC_SUPER, null);
+                Const.ACC_PUBLIC | Const.ACC_SUPER, null);
     }
 
     private MethodGen createMethodGen(String methodname, InstructionList il,
             ConstantPoolGen cp)
     {
-        return new MethodGen(Constants.ACC_STATIC | Constants.ACC_PUBLIC, // access
+        return new MethodGen(Const.ACC_STATIC | Const.ACC_PUBLIC, // access
                 // flags
                 Type.VOID, // return type
                 new Type[] { new ArrayType(Type.STRING, 1) }, // argument

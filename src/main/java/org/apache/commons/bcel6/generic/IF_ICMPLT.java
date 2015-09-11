@@ -35,7 +35,7 @@ public class IF_ICMPLT extends IfInstruction {
 
 
     public IF_ICMPLT(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IF_ICMPLT, target);
+        super(org.apache.commons.bcel6.Const.IF_ICMPLT, target);
     }
 
 

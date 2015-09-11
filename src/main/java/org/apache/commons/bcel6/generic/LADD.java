@@ -27,7 +27,7 @@ package org.apache.commons.bcel6.generic;
 public class LADD extends ArithmeticInstruction {
 
     public LADD() {
-        super(org.apache.commons.bcel6.Constants.LADD);
+        super(org.apache.commons.bcel6.Const.LADD);
     }
 
 

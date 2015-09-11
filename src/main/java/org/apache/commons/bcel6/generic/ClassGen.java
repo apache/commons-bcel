@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.AccessFlags;
 import org.apache.commons.bcel6.classfile.AnnotationEntry;
 import org.apache.commons.bcel6.classfile.Annotations;
@@ -50,8 +50,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private final String file_name;
     private int class_name_index = -1;
     private int superclass_name_index = -1;
-    private int major = Constants.MAJOR_1_1;
-    private int minor = Constants.MINOR_1_1;
+    private int major = Const.MAJOR_1_1;
+    private int minor = Const.MINOR_1_1;
     private ConstantPoolGen cp; // Template for building up constant pool
     // ArrayLists instead of arrays to gather fields, methods, etc.
     private final List<Field> field_vec = new ArrayList<>();
@@ -500,14 +500,14 @@ public class ClassGen extends AccessFlags implements Cloneable {
     public void setClassNameIndex( int class_name_index ) {
         this.class_name_index = class_name_index;
         class_name = cp.getConstantPool().getConstantString(class_name_index,
-                Constants.CONSTANT_Class).replace('/', '.');
+                Const.CONSTANT_Class).replace('/', '.');
     }
 
 
     public void setSuperclassNameIndex( int superclass_name_index ) {
         this.superclass_name_index = superclass_name_index;
         super_class_name = cp.getConstantPool().getConstantString(superclass_name_index,
-                Constants.CONSTANT_Class).replace('/', '.');
+                Const.CONSTANT_Class).replace('/', '.');
     }
 
 

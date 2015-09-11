@@ -22,7 +22,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a reference
@@ -66,7 +66,7 @@ public final class Signature extends Attribute {
      * @param constant_pool Array of constants
      */
     public Signature(int name_index, int length, int signature_index, ConstantPool constant_pool) {
-        super(Constants.ATTR_SIGNATURE, name_index, length, constant_pool);
+        super(Const.ATTR_SIGNATURE, name_index, length, constant_pool);
         this.signature_index = signature_index;
     }
 
@@ -119,7 +119,7 @@ public final class Signature extends Attribute {
      */
     public final String getSignature() {
         ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(signature_index,
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 

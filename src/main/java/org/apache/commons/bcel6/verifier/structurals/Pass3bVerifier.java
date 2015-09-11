@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.Repository;
 import org.apache.commons.bcel6.classfile.JavaClass;
 import org.apache.commons.bcel6.classfile.Method;
@@ -349,7 +349,7 @@ public final class Pass3bVerifier extends PassVerifier{
                 // Build the initial frame situation for this method.
                 Frame f = new Frame(mg.getMaxLocals(),mg.getMaxStack());
                 if ( !mg.isStatic() ){
-                    if (mg.getName().equals(Constants.CONSTRUCTOR_NAME)){
+                    if (mg.getName().equals(Const.CONSTRUCTOR_NAME)){
                         Frame.setThis(new UninitializedObjectType(ObjectType.getInstance(jc.getClassName())));
                         f.getLocals().set(0, Frame.getThis());
                     }

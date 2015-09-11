@@ -18,7 +18,7 @@
 package org.apache.commons.bcel6.verifier.statics;
 
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.Repository;
 import org.apache.commons.bcel6.classfile.Attribute;
 import org.apache.commons.bcel6.classfile.Code;
@@ -340,9 +340,9 @@ public final class Pass3aVerifier extends PassVerifier{
         // array in vmspec2), together with pass 1 (reading code_length bytes and
         // interpreting them as code[]). So this must not be checked again here.
 
-        if (code.getCode().length >= Constants.MAX_CODE_SIZE){// length must be LESS than the max
+        if (code.getCode().length >= Const.MAX_CODE_SIZE){// length must be LESS than the max
             throw new StaticCodeInstructionConstraintException(
-                "Code array in code attribute '"+code+"' too big: must be smaller than "+Constants.MAX_CODE_SIZE+"65536 bytes.");
+                "Code array in code attribute '"+code+"' too big: must be smaller than "+Const.MAX_CODE_SIZE+"65536 bytes.");
         }
 
         // First opcode at offset 0: okay, that's clear. Nothing to do.
@@ -622,7 +622,7 @@ public final class Pass3aVerifier extends PassVerifier{
                             Type o_type = o.getType(cpg);
                             if (f_type.equals(o_type)) {
                                 f = field;
-                                if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0) {
+                                if ((f.getAccessFlags() & (Const.ACC_PUBLIC | Const.ACC_PROTECTED)) == 0) {
                                     f = null;
                                 }
                                 break outer;
@@ -672,10 +672,10 @@ public final class Pass3aVerifier extends PassVerifier{
                     // Constants are okay due to pass2.
                     ConstantNameAndType cnat = (ConstantNameAndType) (cpg.getConstant(((ConstantMethodref) c).getNameAndTypeIndex()));
                     ConstantUtf8 cutf8 = (ConstantUtf8) (cpg.getConstant(cnat.getNameIndex()));
-                    if (cutf8.getBytes().equals(Constants.CONSTRUCTOR_NAME) && (!(o instanceof INVOKESPECIAL)) ){
+                    if (cutf8.getBytes().equals(Const.CONSTRUCTOR_NAME) && (!(o instanceof INVOKESPECIAL)) ){
                         constraintViolated(o, "Only INVOKESPECIAL is allowed to invoke instance initialization methods.");
                     }
-                    if ( (! (cutf8.getBytes().equals(Constants.CONSTRUCTOR_NAME)) ) && (cutf8.getBytes().startsWith("<")) ){
+                    if ( (! (cutf8.getBytes().equals(Const.CONSTRUCTOR_NAME)) ) && (cutf8.getBytes().startsWith("<")) ){
                         constraintViolated(o,
                             "No method with a name beginning with '<' other than the instance initialization methods"+
                             " may be called by the method invocation instructions.");
@@ -696,11 +696,11 @@ public final class Pass3aVerifier extends PassVerifier{
                 ConstantNameAndType cnat =
                         (ConstantNameAndType) (cpg.getConstant(((ConstantInterfaceMethodref)c).getNameAndTypeIndex()));
                 String name = ((ConstantUtf8) (cpg.getConstant(cnat.getNameIndex()))).getBytes();
-                if (name.equals(Constants.CONSTRUCTOR_NAME)){
-                    constraintViolated(o, "Method to invoke must not be '"+Constants.CONSTRUCTOR_NAME+"'.");
+                if (name.equals(Const.CONSTRUCTOR_NAME)){
+                    constraintViolated(o, "Method to invoke must not be '"+Const.CONSTRUCTOR_NAME+"'.");
                 }
-                if (name.equals(Constants.STATIC_INITIALIZER_NAME)){
-                    constraintViolated(o, "Method to invoke must not be '"+Constants.STATIC_INITIALIZER_NAME+"'.");
+                if (name.equals(Const.STATIC_INITIALIZER_NAME)){
+                    constraintViolated(o, "Method to invoke must not be '"+Const.STATIC_INITIALIZER_NAME+"'.");
                 }
             }
 
@@ -812,9 +812,9 @@ public final class Pass3aVerifier extends PassVerifier{
             Type t = o.getType(cpg);
             if (t instanceof ArrayType){
                 int dimensions = ((ArrayType) t).getDimensions();
-                if (dimensions > Constants.MAX_ARRAY_DIMENSIONS){
+                if (dimensions > Const.MAX_ARRAY_DIMENSIONS){
                     constraintViolated(o,
-                        "Not allowed to create an array with more than "+ Constants.MAX_ARRAY_DIMENSIONS + " dimensions;"+
+                        "Not allowed to create an array with more than "+ Const.MAX_ARRAY_DIMENSIONS + " dimensions;"+
                         " actual: " + dimensions);
                 }
             }
@@ -824,14 +824,14 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitNEWARRAY(NEWARRAY o){
             byte t = o.getTypecode();
-            if (!    (    (t == Constants.T_BOOLEAN)    ||
-                            (t == Constants.T_CHAR)            ||
-                            (t == Constants.T_FLOAT)        ||
-                            (t == Constants.T_DOUBLE)        ||
-                            (t == Constants.T_BYTE)            ||
-                            (t == Constants.T_SHORT)        ||
-                            (t == Constants.T_INT)            ||
-                            (t == Constants.T_LONG)    )    ){
+            if (!    (    (t == Const.T_BOOLEAN)    ||
+                            (t == Const.T_CHAR)            ||
+                            (t == Const.T_FLOAT)        ||
+                            (t == Const.T_DOUBLE)        ||
+                            (t == Const.T_BYTE)            ||
+                            (t == Const.T_SHORT)        ||
+                            (t == Const.T_INT)            ||
+                            (t == Const.T_LONG)    )    ){
                 constraintViolated(o, "Illegal type code '+t+' for 'atype' operand.");
             }
         }
@@ -1078,8 +1078,8 @@ public final class Pass3aVerifier extends PassVerifier{
             String meth_name = Repository.lookupClass(myOwner.getClassName()).getMethods()[method_no].getName();
 
             // If it's an interface, it can be set only in <clinit>.
-            if ((!(jc.isClass())) && (!(meth_name.equals(Constants.STATIC_INITIALIZER_NAME)))){
-                constraintViolated(o, "Interface field '"+f+"' must be set in a '"+Constants.STATIC_INITIALIZER_NAME+"' method.");
+            if ((!(jc.isClass())) && (!(meth_name.equals(Const.STATIC_INITIALIZER_NAME)))){
+                constraintViolated(o, "Interface field '"+f+"' must be set in a '"+Const.STATIC_INITIALIZER_NAME+"' method.");
             }
             } catch (ClassNotFoundException e) {
             // FIXME: maybe not the best way to handle this
@@ -1228,7 +1228,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
                 if ((Repository.instanceOf( current, jc )) && (!current.equals(jc))){
 
-                    if (! (o.getMethodName(cpg).equals(Constants.CONSTRUCTOR_NAME) )){
+                    if (! (o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME) )){
                         // Special lookup procedure for ACC_SUPER classes.
 
                         int supidx = -1;

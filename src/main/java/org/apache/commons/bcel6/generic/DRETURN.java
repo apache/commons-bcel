@@ -28,7 +28,7 @@ public class DRETURN extends ReturnInstruction {
     /** Return double from method
      */
     public DRETURN() {
-        super(org.apache.commons.bcel6.Constants.DRETURN);
+        super(org.apache.commons.bcel6.Const.DRETURN);
     }
 
 

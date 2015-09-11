@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * Wrapper class for push operations, which are implemented either as BIPUSH,
@@ -38,7 +38,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      */
     public PUSH(ConstantPoolGen cp, int value) {
         if ((value >= -1) && (value <= 5)) {
-            instruction = InstructionConst.getInstruction(Constants.ICONST_0 + value);
+            instruction = InstructionConst.getInstruction(Const.ICONST_0 + value);
         } else if (Instruction.isValidByte(value)) {
             instruction = new BIPUSH((byte) value);
         } else if (Instruction.isValidShort(value)) {
@@ -54,7 +54,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param value to be pushed 
      */
     public PUSH(ConstantPoolGen cp, boolean value) {
-        instruction = InstructionConst.getInstruction(Constants.ICONST_0 + (value ? 1 : 0));
+        instruction = InstructionConst.getInstruction(Const.ICONST_0 + (value ? 1 : 0));
     }
 
 

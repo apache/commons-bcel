@@ -29,7 +29,7 @@ public class DSUB extends ArithmeticInstruction {
     /** Substract doubles
      */
     public DSUB() {
-        super(org.apache.commons.bcel6.Constants.DSUB);
+        super(org.apache.commons.bcel6.Const.DSUB);
     }
 
 

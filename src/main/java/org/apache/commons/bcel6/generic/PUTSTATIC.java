@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
@@ -39,7 +39,7 @@ public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, Pop
 
 
     public PUTSTATIC(int index) {
-        super(Constants.PUTSTATIC, index);
+        super(Const.PUTSTATIC, index);
     }
 
 

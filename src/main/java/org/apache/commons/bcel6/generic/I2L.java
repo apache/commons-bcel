@@ -28,7 +28,7 @@ public class I2L extends ConversionInstruction {
     /** Convert int to long
      */
     public I2L() {
-        super(org.apache.commons.bcel6.Constants.I2L);
+        super(org.apache.commons.bcel6.Const.I2L);
     }
 
 

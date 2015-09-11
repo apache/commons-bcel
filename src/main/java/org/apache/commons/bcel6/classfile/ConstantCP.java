@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * Abstract super class for Fieldref, Methodref, InterfaceMethodref and
@@ -158,7 +158,7 @@ public abstract class ConstantCP extends Constant {
      * @return Class this field belongs to.
      */
     public String getClass( ConstantPool cp ) {
-        return cp.constantToString(class_index, Constants.CONSTANT_Class);
+        return cp.constantToString(class_index, Const.CONSTANT_Class);
     }
 
 

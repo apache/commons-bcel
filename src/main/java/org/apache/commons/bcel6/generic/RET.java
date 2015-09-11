@@ -44,7 +44,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
 
 
     public RET(int index) {
-        super(org.apache.commons.bcel6.Constants.RET, (short) 2);
+        super(org.apache.commons.bcel6.Const.RET, (short) 2);
         setIndex(index); // May set wide as side effect
     }
 
@@ -56,7 +56,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     @Override
     public void dump( DataOutputStream out ) throws IOException {
         if (wide) {
-            out.writeByte(org.apache.commons.bcel6.Constants.WIDE);
+            out.writeByte(org.apache.commons.bcel6.Const.WIDE);
         }
         out.writeByte(super.getOpcode());
         if (wide) {
@@ -68,7 +68,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
 
 
     private void setWide() {
-        wide = index > org.apache.commons.bcel6.Constants.MAX_BYTE;
+        wide = index > org.apache.commons.bcel6.Const.MAX_BYTE;
         if (wide) {
             super.setLength(4); // Including the wide byte  
         } else {

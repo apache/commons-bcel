@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class represents an entry in the exception table of the <em>Code</em>
@@ -191,7 +191,7 @@ public final class CodeException implements Cloneable, Node {
         if (catch_type == 0) {
             str = "<Any exception>(0)";
         } else {
-            str = Utility.compactClassName(cp.getConstantString(catch_type, Constants.CONSTANT_Class), false)
+            str = Utility.compactClassName(cp.getConstantString(catch_type, Const.CONSTANT_Class), false)
                     + (verbose ? "(" + catch_type + ")" : "");
         }
         return start_pc + "\t" + end_pc + "\t" + handler_pc + "\t" + str;

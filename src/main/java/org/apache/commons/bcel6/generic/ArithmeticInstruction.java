@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * Super class for the family of arithmetic instructions.
@@ -49,45 +49,45 @@ public abstract class ArithmeticInstruction extends Instruction implements Typed
     public Type getType( ConstantPoolGen cp ) {
         final short _opcode = super.getOpcode();
         switch (_opcode) {
-            case Constants.DADD:
-            case Constants.DDIV:
-            case Constants.DMUL:
-            case Constants.DNEG:
-            case Constants.DREM:
-            case Constants.DSUB:
+            case Const.DADD:
+            case Const.DDIV:
+            case Const.DMUL:
+            case Const.DNEG:
+            case Const.DREM:
+            case Const.DSUB:
                 return Type.DOUBLE;
-            case Constants.FADD:
-            case Constants.FDIV:
-            case Constants.FMUL:
-            case Constants.FNEG:
-            case Constants.FREM:
-            case Constants.FSUB:
+            case Const.FADD:
+            case Const.FDIV:
+            case Const.FMUL:
+            case Const.FNEG:
+            case Const.FREM:
+            case Const.FSUB:
                 return Type.FLOAT;
-            case Constants.IADD:
-            case Constants.IAND:
-            case Constants.IDIV:
-            case Constants.IMUL:
-            case Constants.INEG:
-            case Constants.IOR:
-            case Constants.IREM:
-            case Constants.ISHL:
-            case Constants.ISHR:
-            case Constants.ISUB:
-            case Constants.IUSHR:
-            case Constants.IXOR:
+            case Const.IADD:
+            case Const.IAND:
+            case Const.IDIV:
+            case Const.IMUL:
+            case Const.INEG:
+            case Const.IOR:
+            case Const.IREM:
+            case Const.ISHL:
+            case Const.ISHR:
+            case Const.ISUB:
+            case Const.IUSHR:
+            case Const.IXOR:
                 return Type.INT;
-            case Constants.LADD:
-            case Constants.LAND:
-            case Constants.LDIV:
-            case Constants.LMUL:
-            case Constants.LNEG:
-            case Constants.LOR:
-            case Constants.LREM:
-            case Constants.LSHL:
-            case Constants.LSHR:
-            case Constants.LSUB:
-            case Constants.LUSHR:
-            case Constants.LXOR:
+            case Const.LADD:
+            case Const.LAND:
+            case Const.LDIV:
+            case Const.LMUL:
+            case Const.LNEG:
+            case Const.LOR:
+            case Const.LREM:
+            case Const.LSHL:
+            case Const.LSHR:
+            case Const.LSUB:
+            case Const.LUSHR:
+            case Const.LXOR:
                 return Type.LONG;
             default: // Never reached
                 throw new ClassGenException("Unknown type " + _opcode);

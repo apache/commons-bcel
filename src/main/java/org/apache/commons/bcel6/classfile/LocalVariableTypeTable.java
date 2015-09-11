@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 // The new table is used when generic types are about...
 
@@ -63,7 +63,7 @@ public class LocalVariableTypeTable extends Attribute {
     }
 
     public LocalVariableTypeTable(int name_index, int length, LocalVariable[] local_variable_table, ConstantPool constant_pool) {
-        super(Constants.ATTR_LOCAL_VARIABLE_TYPE_TABLE, name_index, length, constant_pool);
+        super(Const.ATTR_LOCAL_VARIABLE_TYPE_TABLE, name_index, length, constant_pool);
         this.local_variable_type_table = local_variable_table;
     }
 

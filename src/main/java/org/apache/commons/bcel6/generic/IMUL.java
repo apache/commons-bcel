@@ -28,7 +28,7 @@ public class IMUL extends ArithmeticInstruction {
     /** Multiply ints
      */
     public IMUL() {
-        super(org.apache.commons.bcel6.Constants.IMUL);
+        super(org.apache.commons.bcel6.Const.IMUL);
     }
 
 

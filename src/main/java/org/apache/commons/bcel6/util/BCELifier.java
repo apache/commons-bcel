@@ -22,7 +22,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Locale;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.Repository;
 import org.apache.commons.bcel6.classfile.ClassParser;
 import org.apache.commons.bcel6.classfile.ConstantValue;
@@ -56,7 +56,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     };
 
     // The base package name for imports; assumes Constants is at the top level
-    private static final String BASE_PACKAGE = Constants.class.getPackage().getName();
+    private static final String BASE_PACKAGE = Const.class.getPackage().getName();
     private final JavaClass _clazz;
     private final PrintWriter _out;
     private final ConstantPoolGen _cp;
@@ -209,17 +209,17 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
             return "0";
         }
         StringBuilder buf = new StringBuilder();
-        for (int i = 0, pow = 1; pow <= Constants.MAX_ACC_FLAG; i++) {
+        for (int i = 0, pow = 1; pow <= Const.MAX_ACC_FLAG; i++) {
             if ((flags & pow) != 0) {
-                if ((pow == Constants.ACC_SYNCHRONIZED) && (location == FLAGS.CLASS)) {
+                if ((pow == Const.ACC_SYNCHRONIZED) && (location == FLAGS.CLASS)) {
                     buf.append("ACC_SUPER | ");
-                } else if ((pow == Constants.ACC_VOLATILE) && (location == FLAGS.METHOD)) {
+                } else if ((pow == Const.ACC_VOLATILE) && (location == FLAGS.METHOD)) {
                     buf.append("ACC_BRIDGE | ");
-                } else if ((pow == Constants.ACC_TRANSIENT) && (location == FLAGS.METHOD)) {
+                } else if ((pow == Const.ACC_TRANSIENT) && (location == FLAGS.METHOD)) {
                     buf.append("ACC_VARARGS | ");
                 } else {
-                    if (i < Constants.ACCESS_NAMES_LENGTH) {
-                        buf.append("ACC_").append(Constants.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
+                    if (i < Const.ACCESS_NAMES_LENGTH) {
+                        buf.append("ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
                     } else {
                         buf.append(String.format ("ACC_BIT %x | ", pow));
                     }
@@ -255,8 +255,8 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     static String printType( String signature ) {
         Type type = Type.getType(signature);
         byte t = type.getType();
-        if (t <= Constants.T_VOID) {
-            return "Type." + Constants.getTypeName(t).toUpperCase(Locale.ENGLISH);
+        if (t <= Const.T_VOID) {
+            return "Type." + Const.getTypeName(t).toUpperCase(Locale.ENGLISH);
         } else if (type.toString().equals("java.lang.String")) {
             return "Type.STRING";
         } else if (type.toString().equals("java.lang.Object")) {

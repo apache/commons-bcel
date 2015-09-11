@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.util.ByteSequence;
 
 /**
@@ -42,7 +42,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
 
     private boolean wide() {
-        return n > Constants.MAX_BYTE;
+        return n > Const.MAX_BYTE;
     }
 
 
@@ -86,7 +86,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     @Override
     public void dump( DataOutputStream out ) throws IOException {
         if (wide()) {
-            out.writeByte(Constants.WIDE);
+            out.writeByte(Const.WIDE);
         }
         out.writeByte(super.getOpcode());
         if (super.getLength() > 1) { // Otherwise ILOAD_n, instruction, e.g.
@@ -111,8 +111,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     @Override
     public String toString( boolean verbose ) {
         final short _opcode = super.getOpcode();
-        if (((_opcode >= Constants.ILOAD_0) && (_opcode <= Constants.ALOAD_3))
-         || ((_opcode >= Constants.ISTORE_0) && (_opcode <= Constants.ASTORE_3))) {
+        if (((_opcode >= Const.ILOAD_0) && (_opcode <= Const.ALOAD_3))
+         || ((_opcode >= Const.ISTORE_0) && (_opcode <= Const.ASTORE_3))) {
             return super.toString(verbose);
         }
         return super.toString(verbose) + " " + n;
@@ -132,15 +132,15 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
             super.setLength(4);
         } else {
             final short _opcode = super.getOpcode();
-            if (((_opcode >= Constants.ILOAD) && (_opcode <= Constants.ALOAD))
-             || ((_opcode >= Constants.ISTORE) && (_opcode <= Constants.ASTORE))) {
+            if (((_opcode >= Const.ILOAD) && (_opcode <= Const.ALOAD))
+             || ((_opcode >= Const.ISTORE) && (_opcode <= Const.ASTORE))) {
                 n = bytes.readUnsignedByte();
                 super.setLength(2);
-            } else if (_opcode <= Constants.ALOAD_3) { // compact load instruction such as ILOAD_2
-                n = (_opcode - Constants.ILOAD_0) % 4;
+            } else if (_opcode <= Const.ALOAD_3) { // compact load instruction such as ILOAD_2
+                n = (_opcode - Const.ILOAD_0) % 4;
                 super.setLength(1);
             } else { // Assert ISTORE_0 <= tag <= ASTORE_3
-                n = (_opcode - Constants.ISTORE_0) % 4;
+                n = (_opcode - Const.ISTORE_0) % 4;
                 super.setLength(1);
             }
         }
@@ -164,7 +164,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      */
     @Override
     public void setIndex( int n ) { // TODO could be package-protected?
-        if ((n < 0) || (n > Constants.MAX_SHORT)) {
+        if ((n < 0) || (n > Const.MAX_SHORT)) {
             throw new ClassGenException("Illegal value: " + n);
         }
         this.n = n;
@@ -201,20 +201,20 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     @Override
     public Type getType( ConstantPoolGen cp ) {
         switch (canon_tag) {
-            case Constants.ILOAD:
-            case Constants.ISTORE:
+            case Const.ILOAD:
+            case Const.ISTORE:
                 return Type.INT;
-            case Constants.LLOAD:
-            case Constants.LSTORE:
+            case Const.LLOAD:
+            case Const.LSTORE:
                 return Type.LONG;
-            case Constants.DLOAD:
-            case Constants.DSTORE:
+            case Const.DLOAD:
+            case Const.DSTORE:
                 return Type.DOUBLE;
-            case Constants.FLOAD:
-            case Constants.FSTORE:
+            case Const.FLOAD:
+            case Const.FSTORE:
                 return Type.FLOAT;
-            case Constants.ALOAD:
-            case Constants.ASTORE:
+            case Const.ALOAD:
+            case Const.ASTORE:
                 return Type.OBJECT;
             default:
                 throw new ClassGenException("Oops: unknown case in switch" + canon_tag);

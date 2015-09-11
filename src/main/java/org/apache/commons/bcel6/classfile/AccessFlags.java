@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.classfile;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * Super class for all objects that have modifiers like private, final, ...
@@ -92,151 +92,151 @@ public abstract class AccessFlags {
 
 
     public final void isPublic( boolean flag ) {
-        setFlag(Constants.ACC_PUBLIC, flag);
+        setFlag(Const.ACC_PUBLIC, flag);
     }
 
 
     public final boolean isPublic() {
-        return (access_flags & Constants.ACC_PUBLIC) != 0;
+        return (access_flags & Const.ACC_PUBLIC) != 0;
     }
 
 
     public final void isPrivate( boolean flag ) {
-        setFlag(Constants.ACC_PRIVATE, flag);
+        setFlag(Const.ACC_PRIVATE, flag);
     }
 
 
     public final boolean isPrivate() {
-        return (access_flags & Constants.ACC_PRIVATE) != 0;
+        return (access_flags & Const.ACC_PRIVATE) != 0;
     }
 
 
     public final void isProtected( boolean flag ) {
-        setFlag(Constants.ACC_PROTECTED, flag);
+        setFlag(Const.ACC_PROTECTED, flag);
     }
 
 
     public final boolean isProtected() {
-        return (access_flags & Constants.ACC_PROTECTED) != 0;
+        return (access_flags & Const.ACC_PROTECTED) != 0;
     }
 
 
     public final void isStatic( boolean flag ) {
-        setFlag(Constants.ACC_STATIC, flag);
+        setFlag(Const.ACC_STATIC, flag);
     }
 
 
     public final boolean isStatic() {
-        return (access_flags & Constants.ACC_STATIC) != 0;
+        return (access_flags & Const.ACC_STATIC) != 0;
     }
 
 
     public final void isFinal( boolean flag ) {
-        setFlag(Constants.ACC_FINAL, flag);
+        setFlag(Const.ACC_FINAL, flag);
     }
 
 
     public final boolean isFinal() {
-        return (access_flags & Constants.ACC_FINAL) != 0;
+        return (access_flags & Const.ACC_FINAL) != 0;
     }
 
 
     public final void isSynchronized( boolean flag ) {
-        setFlag(Constants.ACC_SYNCHRONIZED, flag);
+        setFlag(Const.ACC_SYNCHRONIZED, flag);
     }
 
 
     public final boolean isSynchronized() {
-        return (access_flags & Constants.ACC_SYNCHRONIZED) != 0;
+        return (access_flags & Const.ACC_SYNCHRONIZED) != 0;
     }
 
 
     public final void isVolatile( boolean flag ) {
-        setFlag(Constants.ACC_VOLATILE, flag);
+        setFlag(Const.ACC_VOLATILE, flag);
     }
 
 
     public final boolean isVolatile() {
-        return (access_flags & Constants.ACC_VOLATILE) != 0;
+        return (access_flags & Const.ACC_VOLATILE) != 0;
     }
 
 
     public final void isTransient( boolean flag ) {
-        setFlag(Constants.ACC_TRANSIENT, flag);
+        setFlag(Const.ACC_TRANSIENT, flag);
     }
 
 
     public final boolean isTransient() {
-        return (access_flags & Constants.ACC_TRANSIENT) != 0;
+        return (access_flags & Const.ACC_TRANSIENT) != 0;
     }
 
 
     public final void isNative( boolean flag ) {
-        setFlag(Constants.ACC_NATIVE, flag);
+        setFlag(Const.ACC_NATIVE, flag);
     }
 
 
     public final boolean isNative() {
-        return (access_flags & Constants.ACC_NATIVE) != 0;
+        return (access_flags & Const.ACC_NATIVE) != 0;
     }
 
 
     public final void isInterface( boolean flag ) {
-        setFlag(Constants.ACC_INTERFACE, flag);
+        setFlag(Const.ACC_INTERFACE, flag);
     }
 
 
     public final boolean isInterface() {
-        return (access_flags & Constants.ACC_INTERFACE) != 0;
+        return (access_flags & Const.ACC_INTERFACE) != 0;
     }
 
 
     public final void isAbstract( boolean flag ) {
-        setFlag(Constants.ACC_ABSTRACT, flag);
+        setFlag(Const.ACC_ABSTRACT, flag);
     }
 
 
     public final boolean isAbstract() {
-        return (access_flags & Constants.ACC_ABSTRACT) != 0;
+        return (access_flags & Const.ACC_ABSTRACT) != 0;
     }
 
 
     public final void isStrictfp( boolean flag ) {
-        setFlag(Constants.ACC_STRICT, flag);
+        setFlag(Const.ACC_STRICT, flag);
     }
 
 
     public final boolean isStrictfp() {
-        return (access_flags & Constants.ACC_STRICT) != 0;
+        return (access_flags & Const.ACC_STRICT) != 0;
     }
 
 
     public final void isSynthetic( boolean flag ) {
-        setFlag(Constants.ACC_SYNTHETIC, flag);
+        setFlag(Const.ACC_SYNTHETIC, flag);
     }
 
 
     public final boolean isSynthetic() {
-        return (access_flags & Constants.ACC_SYNTHETIC) != 0;
+        return (access_flags & Const.ACC_SYNTHETIC) != 0;
     }
 
 
     public final void isAnnotation( boolean flag ) {
-        setFlag(Constants.ACC_ANNOTATION, flag);
+        setFlag(Const.ACC_ANNOTATION, flag);
     }
 
 
     public final boolean isAnnotation() {
-        return (access_flags & Constants.ACC_ANNOTATION) != 0;
+        return (access_flags & Const.ACC_ANNOTATION) != 0;
     }
 
 
     public final void isEnum( boolean flag ) {
-        setFlag(Constants.ACC_ENUM, flag);
+        setFlag(Const.ACC_ENUM, flag);
     }
 
 
     public final boolean isEnum() {
-        return (access_flags & Constants.ACC_ENUM) != 0;
+        return (access_flags & Const.ACC_ENUM) != 0;
     }
 }

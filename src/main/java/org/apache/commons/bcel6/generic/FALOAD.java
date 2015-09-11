@@ -28,7 +28,7 @@ public class FALOAD extends ArrayInstruction implements StackProducer {
     /** Load float from array
      */
     public FALOAD() {
-        super(org.apache.commons.bcel6.Constants.FALOAD);
+        super(org.apache.commons.bcel6.Const.FALOAD);
     }
 
 

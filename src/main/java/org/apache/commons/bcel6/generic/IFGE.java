@@ -35,7 +35,7 @@ public class IFGE extends IfInstruction {
 
 
     public IFGE(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IFGE, target);
+        super(org.apache.commons.bcel6.Const.IFGE, target);
     }
 
 

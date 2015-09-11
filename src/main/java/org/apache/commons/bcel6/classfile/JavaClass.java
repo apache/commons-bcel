@@ -29,7 +29,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.generic.Type;
 import org.apache.commons.bcel6.util.BCELComparator;
 import org.apache.commons.bcel6.util.ClassQueue;
@@ -154,7 +154,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
          * `ConstantClass' but we check that anyway via the 
          * `ConstPool.getConstant' method.
          */
-        class_name = constant_pool.getConstantString(class_name_index, Constants.CONSTANT_Class);
+        class_name = constant_pool.getConstantString(class_name_index, Const.CONSTANT_Class);
         class_name = Utility.compactClassName(class_name, false);
         int index = class_name.lastIndexOf('.');
         if (index < 0) {
@@ -165,14 +165,14 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         if (superclass_name_index > 0) {
             // May be zero -> class is java.lang.Object
             superclass_name = constant_pool.getConstantString(superclass_name_index,
-                    Constants.CONSTANT_Class);
+                    Const.CONSTANT_Class);
             superclass_name = Utility.compactClassName(superclass_name, false);
         } else {
             superclass_name = "java.lang.Object";
         }
         interface_names = new String[interfaces.length];
         for (int i = 0; i < interfaces.length; i++) {
-            String str = constant_pool.getConstantString(interfaces[i], Constants.CONSTANT_Class);
+            String str = constant_pool.getConstantString(interfaces[i], Const.CONSTANT_Class);
             interface_names[i] = Utility.compactClassName(str, false);
         }
     }
@@ -301,7 +301,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @exception IOException
      */
     public void dump( DataOutputStream file ) throws IOException {
-        file.writeInt(Constants.JVM_CLASSFILE_MAGIC);
+        file.writeInt(Const.JVM_CLASSFILE_MAGIC);
         file.writeShort(minor);
         file.writeShort(major);
         constant_pool.dump(file);
@@ -692,12 +692,12 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
 
     public final boolean isSuper() {
-        return (super.getAccessFlags() & Constants.ACC_SUPER) != 0;
+        return (super.getAccessFlags() & Const.ACC_SUPER) != 0;
     }
 
 
     public final boolean isClass() {
-        return (super.getAccessFlags() & Constants.ACC_INTERFACE) == 0;
+        return (super.getAccessFlags() & Const.ACC_INTERFACE) == 0;
     }
 
     /**
@@ -726,7 +726,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                   for (InnerClass innerClasse : innerClasses) {
                       boolean innerClassAttributeRefersToMe = false;
                       String inner_class_name = constant_pool.getConstantString(innerClasse.getInnerClassIndex(),
-                                 Constants.CONSTANT_Class);
+                                 Const.CONSTANT_Class);
                       inner_class_name = Utility.compactClassName(inner_class_name);
                       if (inner_class_name.equals(getClassName())) {
                           innerClassAttributeRefersToMe = true;

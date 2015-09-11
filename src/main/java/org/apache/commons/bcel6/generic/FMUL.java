@@ -28,7 +28,7 @@ public class FMUL extends ArithmeticInstruction {
     /** Multiply floats
      */
     public FMUL() {
-        super(org.apache.commons.bcel6.Constants.FMUL);
+        super(org.apache.commons.bcel6.Const.FMUL);
     }
 
 

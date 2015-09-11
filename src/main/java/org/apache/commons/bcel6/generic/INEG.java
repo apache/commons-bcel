@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class INEG extends ArithmeticInstruction {
 
     public INEG() {
-        super(org.apache.commons.bcel6.Constants.INEG);
+        super(org.apache.commons.bcel6.Const.INEG);
     }
 
 

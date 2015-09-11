@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class DUP2_X2 extends StackInstruction {
 
     public DUP2_X2() {
-        super(org.apache.commons.bcel6.Constants.DUP2_X2);
+        super(org.apache.commons.bcel6.Const.DUP2_X2);
     }
 
 

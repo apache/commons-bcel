@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class IXOR extends ArithmeticInstruction {
 
     public IXOR() {
-        super(org.apache.commons.bcel6.Constants.IXOR);
+        super(org.apache.commons.bcel6.Const.IXOR);
     }
 
 

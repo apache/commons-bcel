@@ -28,7 +28,7 @@ public class FDIV extends ArithmeticInstruction {
     /** Divide floats
      */
     public FDIV() {
-        super(org.apache.commons.bcel6.Constants.FDIV);
+        super(org.apache.commons.bcel6.Const.FDIV);
     }
 
 

@@ -28,7 +28,7 @@ public class LASTORE extends ArrayInstruction implements StackConsumer {
     /** Store long into array
      */
     public LASTORE() {
-        super(org.apache.commons.bcel6.Constants.LASTORE);
+        super(org.apache.commons.bcel6.Const.LASTORE);
     }
 
 

@@ -30,7 +30,7 @@ public class ASTORE extends StoreInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     ASTORE() {
-        super(org.apache.commons.bcel6.Constants.ASTORE, org.apache.commons.bcel6.Constants.ASTORE_0);
+        super(org.apache.commons.bcel6.Const.ASTORE, org.apache.commons.bcel6.Const.ASTORE_0);
     }
 
 
@@ -38,7 +38,7 @@ public class ASTORE extends StoreInstruction {
      * @param n index of local variable
      */
     public ASTORE(int n) {
-        super(org.apache.commons.bcel6.Constants.ASTORE, org.apache.commons.bcel6.Constants.ASTORE_0, n);
+        super(org.apache.commons.bcel6.Const.ASTORE, org.apache.commons.bcel6.Const.ASTORE_0, n);
     }
 
 

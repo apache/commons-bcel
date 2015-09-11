@@ -29,7 +29,7 @@ public class DMUL extends ArithmeticInstruction {
     /** Multiply doubles
      */
     public DMUL() {
-        super(org.apache.commons.bcel6.Constants.DMUL);
+        super(org.apache.commons.bcel6.Const.DMUL);
     }
 
 

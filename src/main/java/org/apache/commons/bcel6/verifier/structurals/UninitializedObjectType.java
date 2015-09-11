@@ -18,7 +18,7 @@
 package org.apache.commons.bcel6.verifier.structurals;
 
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.generic.ObjectType;
 import org.apache.commons.bcel6.generic.ReferenceType;
 
@@ -36,7 +36,7 @@ public class UninitializedObjectType extends ReferenceType{
 
     /** Creates a new instance. */
     public UninitializedObjectType(ObjectType t){
-        super(Constants.T_UNKNOWN, "<UNINITIALIZED OBJECT OF TYPE '"+t.getClassName()+"'>");
+        super(Const.T_UNKNOWN, "<UNINITIALIZED OBJECT OF TYPE '"+t.getClassName()+"'>");
         initialized = t;
     }
 

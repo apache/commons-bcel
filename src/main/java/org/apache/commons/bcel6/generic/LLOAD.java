@@ -30,12 +30,12 @@ public class LLOAD extends LoadInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     LLOAD() {
-        super(org.apache.commons.bcel6.Constants.LLOAD, org.apache.commons.bcel6.Constants.LLOAD_0);
+        super(org.apache.commons.bcel6.Const.LLOAD, org.apache.commons.bcel6.Const.LLOAD_0);
     }
 
 
     public LLOAD(int n) {
-        super(org.apache.commons.bcel6.Constants.LLOAD, org.apache.commons.bcel6.Constants.LLOAD_0, n);
+        super(org.apache.commons.bcel6.Const.LLOAD, org.apache.commons.bcel6.Const.LLOAD_0, n);
     }
 
 

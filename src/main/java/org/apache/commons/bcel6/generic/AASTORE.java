@@ -28,7 +28,7 @@ public class AASTORE extends ArrayInstruction implements StackConsumer {
     /** Store into reference array
      */
     public AASTORE() {
-        super(org.apache.commons.bcel6.Constants.AASTORE);
+        super(org.apache.commons.bcel6.Const.AASTORE);
     }
 
 

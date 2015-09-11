@@ -40,7 +40,7 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
      * @param index index to class in constant pool
      */
     public CHECKCAST(int index) {
-        super(org.apache.commons.bcel6.Constants.CHECKCAST, index);
+        super(org.apache.commons.bcel6.Const.CHECKCAST, index);
     }
 
 

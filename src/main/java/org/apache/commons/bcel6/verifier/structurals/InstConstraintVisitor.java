@@ -18,7 +18,7 @@
 package org.apache.commons.bcel6.verifier.structurals;
 
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.Repository;
 import org.apache.commons.bcel6.classfile.Constant;
 import org.apache.commons.bcel6.classfile.ConstantClass;
@@ -1300,7 +1300,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
                         Type o_type = o.getType(cpg);
                         if (f_type.equals(o_type)) {
                             f = field;
-                            if ((f.getAccessFlags() & (Constants.ACC_PUBLIC | Constants.ACC_PROTECTED)) == 0) {
+                            if ((f.getAccessFlags() & (Const.ACC_PUBLIC | Const.ACC_PROTECTED)) == 0) {
                                 f = null;
                             }
                             break outer;
@@ -1905,7 +1905,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
     public void visitINVOKESPECIAL(INVOKESPECIAL o){
         try {
         // Don't init an object twice.
-        if ( (o.getMethodName(cpg).equals(Constants.CONSTRUCTOR_NAME)) &&
+        if ( (o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME)) &&
              (!(stack().peek(o.getArgumentTypes(cpg).length) instanceof UninitializedObjectType)) ){
             constraintViolated(o, "Possibly initializing object twice."+
                  " A valid instruction sequence must not have an uninitialized object on the operand stack or in a local variable"+
@@ -1964,7 +1964,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
             constraintViolated(o, "Expecting a reference type as 'objectref' on the stack, not a '"+objref+"'.");
         }
         String objref_classname = null;
-        if ( !(o.getMethodName(cpg).equals(Constants.CONSTRUCTOR_NAME))){
+        if ( !(o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME))){
             referenceTypeIsInitialized(o, (ReferenceType) objref);
             if (!(objref instanceof ObjectType)){
                 if (!(objref instanceof ArrayType)){ // could be a ReturnaddressType
@@ -2881,7 +2881,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
      */
     @Override
     public void visitRETURN(RETURN o){
-        if (mg.getName().equals(Constants.CONSTRUCTOR_NAME)){// If we leave an <init> method
+        if (mg.getName().equals(Const.CONSTRUCTOR_NAME)){// If we leave an <init> method
             if ((Frame.getThis() != null) && (!(mg.getClassName().equals(Type.OBJECT.getClassName()))) ) {
                 constraintViolated(o, "Leaving a constructor that itself did not call a constructor.");
             }

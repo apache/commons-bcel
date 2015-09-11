@@ -25,7 +25,7 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * Wrapper class that parses a given Java .class file. The method <A
@@ -214,11 +214,11 @@ public final class ClassParser {
         /* Interfaces are implicitely abstract, the flag should be set
          * according to the JVM specification.
          */
-        if ((access_flags & Constants.ACC_INTERFACE) != 0) {
-            access_flags |= Constants.ACC_ABSTRACT;
+        if ((access_flags & Const.ACC_INTERFACE) != 0) {
+            access_flags |= Const.ACC_ABSTRACT;
         }
-        if (((access_flags & Constants.ACC_ABSTRACT) != 0)
-                && ((access_flags & Constants.ACC_FINAL) != 0)) {
+        if (((access_flags & Const.ACC_ABSTRACT) != 0)
+                && ((access_flags & Const.ACC_FINAL) != 0)) {
             throw new ClassFormatException("Class " + file_name + " can't be both final and abstract");
         }
         class_name_index = dataInputStream.readUnsignedShort();
@@ -258,7 +258,7 @@ public final class ClassParser {
      * @throws  ClassFormatException
      */
     private void readID() throws IOException, ClassFormatException {
-        if (dataInputStream.readInt() != Constants.JVM_CLASSFILE_MAGIC) {
+        if (dataInputStream.readInt() != Const.JVM_CLASSFILE_MAGIC) {
             throw new ClassFormatException(file_name + " is not a Java .class file");
         }
     }

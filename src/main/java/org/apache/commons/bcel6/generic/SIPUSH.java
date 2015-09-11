@@ -43,7 +43,7 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
 
 
     public SIPUSH(short b) {
-        super(org.apache.commons.bcel6.Constants.SIPUSH, (short) 3);
+        super(org.apache.commons.bcel6.Const.SIPUSH, (short) 3);
         this.b = b;
     }
 

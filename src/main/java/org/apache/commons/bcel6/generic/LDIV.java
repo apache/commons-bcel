@@ -29,7 +29,7 @@ import org.apache.commons.bcel6.ExceptionConst;
 public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
 
     public LDIV() {
-        super(org.apache.commons.bcel6.Constants.LDIV);
+        super(org.apache.commons.bcel6.Const.LDIV);
     }
 
 

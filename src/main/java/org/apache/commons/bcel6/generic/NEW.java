@@ -37,7 +37,7 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
 
 
     public NEW(int index) {
-        super(org.apache.commons.bcel6.Constants.NEW, index);
+        super(org.apache.commons.bcel6.Const.NEW, index);
     }
 
 

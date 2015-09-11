@@ -30,7 +30,7 @@ public class ISTORE extends StoreInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     ISTORE() {
-        super(org.apache.commons.bcel6.Constants.ISTORE, org.apache.commons.bcel6.Constants.ISTORE_0);
+        super(org.apache.commons.bcel6.Const.ISTORE, org.apache.commons.bcel6.Const.ISTORE_0);
     }
 
 
@@ -38,7 +38,7 @@ public class ISTORE extends StoreInstruction {
      * @param n index of local variable
      */
     public ISTORE(int n) {
-        super(org.apache.commons.bcel6.Constants.ISTORE, org.apache.commons.bcel6.Constants.ISTORE_0, n);
+        super(org.apache.commons.bcel6.Const.ISTORE, org.apache.commons.bcel6.Const.ISTORE_0, n);
     }
 
 

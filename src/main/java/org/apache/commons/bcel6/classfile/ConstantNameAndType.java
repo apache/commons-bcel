@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class is derived from the abstract {@link Constant}
@@ -61,7 +61,7 @@ public final class ConstantNameAndType extends Constant {
      * @param signature_index and its signature
      */
     public ConstantNameAndType(int name_index, int signature_index) {
-        super(Constants.CONSTANT_NameAndType);
+        super(Const.CONSTANT_NameAndType);
         this.name_index = name_index;
         this.signature_index = signature_index;
     }
@@ -105,7 +105,7 @@ public final class ConstantNameAndType extends Constant {
     /** @return name
      */
     public final String getName( ConstantPool cp ) {
-        return cp.constantToString(getNameIndex(), Constants.CONSTANT_Utf8);
+        return cp.constantToString(getNameIndex(), Const.CONSTANT_Utf8);
     }
 
 
@@ -120,7 +120,7 @@ public final class ConstantNameAndType extends Constant {
     /** @return signature
      */
     public final String getSignature( ConstantPool cp ) {
-        return cp.constantToString(getSignatureIndex(), Constants.CONSTANT_Utf8);
+        return cp.constantToString(getSignatureIndex(), Const.CONSTANT_Utf8);
     }
 
 

@@ -27,7 +27,7 @@ package org.apache.commons.bcel6.generic;
 public class LCMP extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
     public LCMP() {
-        super(org.apache.commons.bcel6.Constants.LCMP, (short) 1);
+        super(org.apache.commons.bcel6.Const.LCMP, (short) 1);
     }
 
 

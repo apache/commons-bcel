@@ -28,7 +28,7 @@ public class CALOAD extends ArrayInstruction implements StackProducer {
     /** Load char from array
      */
     public CALOAD() {
-        super(org.apache.commons.bcel6.Constants.CALOAD);
+        super(org.apache.commons.bcel6.Const.CALOAD);
     }
 
 

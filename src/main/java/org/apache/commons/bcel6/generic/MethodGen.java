@@ -24,7 +24,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Stack;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.AnnotationEntry;
 import org.apache.commons.bcel6.classfile.Annotations;
 import org.apache.commons.bcel6.classfile.Attribute;
@@ -177,7 +177,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         this(m.getAccessFlags(), Type.getReturnType(m.getSignature()), Type.getArgumentTypes(m
                 .getSignature()), null /* may be overridden anyway */
         , m.getName(), class_name,
-                ((m.getAccessFlags() & (Constants.ACC_ABSTRACT | Constants.ACC_NATIVE)) == 0)
+                ((m.getAccessFlags() & (Const.ACC_ABSTRACT | Const.ACC_NATIVE)) == 0)
                         ? new InstructionList(m.getCode().getCode())
                         : null, cp);
         Attribute[] attributes = m.getAttributes();
@@ -194,7 +194,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                         ObjectType c_type = null;
                         if (type > 0) {
                             String cen = m.getConstantPool().getConstantString(type,
-                                    Constants.CONSTANT_Class);
+                                    Const.CONSTANT_Class);
                             c_type =  ObjectType.getInstance(cen);
                         }
                         int end_pc = ce.getEndPC();
@@ -274,7 +274,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     public LocalVariableGen addLocalVariable( String name, Type type, int slot,
             InstructionHandle start, InstructionHandle end ) {
         byte t = type.getType();
-        if (t != Constants.T_ADDRESS) {
+        if (t != Const.T_ADDRESS) {
             int add = type.getSize();
             if (slot + add > max_locals) {
                 max_locals = slot + add;
@@ -956,7 +956,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                 } else if (!(branch instanceof IfInstruction)) {
                     // if an instruction that comes back to following PC,
                     // push next instruction, with stack depth reduced by 1.
-                    if (opcode == Constants.JSR || opcode == Constants.JSR_W) {
+                    if (opcode == Const.JSR || opcode == Const.JSR_W) {
                         branchTargets.push(ih.getNext(), stackDepth - 1);
                     }
                     ih = null;
@@ -967,8 +967,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                 branchTargets.push(branch.getTarget(), stackDepth);
             } else {
                 // check for instructions that terminate the method.
-                if (opcode == Constants.ATHROW || opcode == Constants.RET
-                        || (opcode >= Constants.IRETURN && opcode <= Constants.RETURN)) {
+                if (opcode == Const.ATHROW || opcode == Const.RET
+                        || (opcode >= Const.IRETURN && opcode <= Const.RETURN)) {
                     ih = null;
                 }
             }

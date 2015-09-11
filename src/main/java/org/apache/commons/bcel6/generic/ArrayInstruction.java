@@ -55,29 +55,29 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
     public Type getType( ConstantPoolGen cp ) {
         final short _opcode = super.getOpcode();
         switch (_opcode) {
-            case org.apache.commons.bcel6.Constants.IALOAD:
-            case org.apache.commons.bcel6.Constants.IASTORE:
+            case org.apache.commons.bcel6.Const.IALOAD:
+            case org.apache.commons.bcel6.Const.IASTORE:
                 return Type.INT;
-            case org.apache.commons.bcel6.Constants.CALOAD:
-            case org.apache.commons.bcel6.Constants.CASTORE:
+            case org.apache.commons.bcel6.Const.CALOAD:
+            case org.apache.commons.bcel6.Const.CASTORE:
                 return Type.CHAR;
-            case org.apache.commons.bcel6.Constants.BALOAD:
-            case org.apache.commons.bcel6.Constants.BASTORE:
+            case org.apache.commons.bcel6.Const.BALOAD:
+            case org.apache.commons.bcel6.Const.BASTORE:
                 return Type.BYTE;
-            case org.apache.commons.bcel6.Constants.SALOAD:
-            case org.apache.commons.bcel6.Constants.SASTORE:
+            case org.apache.commons.bcel6.Const.SALOAD:
+            case org.apache.commons.bcel6.Const.SASTORE:
                 return Type.SHORT;
-            case org.apache.commons.bcel6.Constants.LALOAD:
-            case org.apache.commons.bcel6.Constants.LASTORE:
+            case org.apache.commons.bcel6.Const.LALOAD:
+            case org.apache.commons.bcel6.Const.LASTORE:
                 return Type.LONG;
-            case org.apache.commons.bcel6.Constants.DALOAD:
-            case org.apache.commons.bcel6.Constants.DASTORE:
+            case org.apache.commons.bcel6.Const.DALOAD:
+            case org.apache.commons.bcel6.Const.DASTORE:
                 return Type.DOUBLE;
-            case org.apache.commons.bcel6.Constants.FALOAD:
-            case org.apache.commons.bcel6.Constants.FASTORE:
+            case org.apache.commons.bcel6.Const.FALOAD:
+            case org.apache.commons.bcel6.Const.FASTORE:
                 return Type.FLOAT;
-            case org.apache.commons.bcel6.Constants.AALOAD:
-            case org.apache.commons.bcel6.Constants.AASTORE:
+            case org.apache.commons.bcel6.Const.AALOAD:
+            case org.apache.commons.bcel6.Const.AASTORE:
                 return Type.OBJECT;
             default:
                 throw new ClassGenException("Oops: unknown case in switch" + _opcode);

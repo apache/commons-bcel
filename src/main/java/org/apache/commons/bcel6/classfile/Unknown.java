@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class represents a reference to an unknown (i.e.,
@@ -73,9 +73,9 @@ public final class Unknown extends Attribute {
      * @param constant_pool Array of constants
      */
     public Unknown(int name_index, int length, byte[] bytes, ConstantPool constant_pool) {
-        super(Constants.ATTR_UNKNOWN, name_index, length, constant_pool);
+        super(Const.ATTR_UNKNOWN, name_index, length, constant_pool);
         this.bytes = bytes;
-        name = ((ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8))
+        name = ((ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8))
                 .getBytes();
         unknown_attributes.put(name, this);
     }

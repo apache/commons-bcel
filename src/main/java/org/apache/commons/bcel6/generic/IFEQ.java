@@ -35,7 +35,7 @@ public class IFEQ extends IfInstruction {
 
 
     public IFEQ(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IFEQ, target);
+        super(org.apache.commons.bcel6.Const.IFEQ, target);
     }
 
 

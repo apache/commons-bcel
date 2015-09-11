@@ -35,7 +35,7 @@ public class IF_ICMPGE extends IfInstruction {
 
 
     public IF_ICMPGE(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IF_ICMPGE, target);
+        super(org.apache.commons.bcel6.Const.IF_ICMPGE, target);
     }
 
 

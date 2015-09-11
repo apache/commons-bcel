@@ -35,7 +35,7 @@ public class IF_ICMPNE extends IfInstruction {
 
 
     public IF_ICMPNE(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IF_ICMPNE, target);
+        super(org.apache.commons.bcel6.Const.IF_ICMPNE, target);
     }
 
 

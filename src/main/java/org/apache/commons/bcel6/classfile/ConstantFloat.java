@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class is derived from the abstract {@link Constant} 
@@ -39,7 +39,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      * @param bytes Data
      */
     public ConstantFloat(float bytes) {
-        super(Constants.CONSTANT_Float);
+        super(Const.CONSTANT_Float);
         this.bytes = bytes;
     }
 

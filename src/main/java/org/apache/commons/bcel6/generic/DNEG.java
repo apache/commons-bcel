@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class DNEG extends ArithmeticInstruction {
 
     public DNEG() {
-        super(org.apache.commons.bcel6.Constants.DNEG);
+        super(org.apache.commons.bcel6.Const.DNEG);
     }
 
 

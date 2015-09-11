@@ -22,7 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class represents a bootstrap method attribute, i.e., the bootstrap
@@ -128,7 +128,7 @@ public class BootstrapMethod implements Cloneable {
         StringBuilder buf = new StringBuilder();
         String bootstrap_method_name;
         bootstrap_method_name = constant_pool.constantToString(bootstrap_method_ref,
-                Constants.CONSTANT_MethodHandle);
+                Const.CONSTANT_MethodHandle);
         buf.append(Utility.compactClassName(bootstrap_method_name));
         final int num_bootstrap_arguments = bootstrap_arguments.length;
         if (num_bootstrap_arguments > 0) {

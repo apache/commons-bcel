@@ -30,7 +30,7 @@ public class FSTORE extends StoreInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     FSTORE() {
-        super(org.apache.commons.bcel6.Constants.FSTORE, org.apache.commons.bcel6.Constants.FSTORE_0);
+        super(org.apache.commons.bcel6.Const.FSTORE, org.apache.commons.bcel6.Const.FSTORE_0);
     }
 
 
@@ -38,7 +38,7 @@ public class FSTORE extends StoreInstruction {
      * @param n index of local variable
      */
     public FSTORE(int n) {
-        super(org.apache.commons.bcel6.Constants.FSTORE, org.apache.commons.bcel6.Constants.FSTORE_0, n);
+        super(org.apache.commons.bcel6.Const.FSTORE, org.apache.commons.bcel6.Const.FSTORE_0, n);
     }
 
 

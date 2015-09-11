@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class represents colection of local variables in a
@@ -53,7 +53,7 @@ public class LocalVariableTable extends Attribute {
      */
     public LocalVariableTable(int name_index, int length, LocalVariable[] local_variable_table,
             ConstantPool constant_pool) {
-        super(Constants.ATTR_LOCAL_VARIABLE_TABLE, name_index, length, constant_pool);
+        super(Const.ATTR_LOCAL_VARIABLE_TABLE, name_index, length, constant_pool);
         this.local_variable_table = local_variable_table;
     }
 

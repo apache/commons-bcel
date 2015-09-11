@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class LSHL extends ArithmeticInstruction {
 
     public LSHL() {
-        super(org.apache.commons.bcel6.Constants.LSHL);
+        super(org.apache.commons.bcel6.Const.LSHL);
     }
 
 

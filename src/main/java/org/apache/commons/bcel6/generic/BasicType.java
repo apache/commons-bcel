@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * Denotes basic type such as int.
@@ -30,11 +30,11 @@ public final class BasicType extends Type {
      * Constructor for basic types such as int, long, `void'
      *
      * @param type one of T_INT, T_BOOLEAN, ..., T_VOID
-     * @see Constants
+     * @see Const
      */
     BasicType(byte type) {
-        super(type, Constants.getShortTypeName(type));
-        if ((type < Constants.T_BOOLEAN) || (type > Constants.T_VOID)) {
+        super(type, Const.getShortTypeName(type));
+        if ((type < Const.T_BOOLEAN) || (type > Const.T_VOID)) {
             throw new ClassGenException("Invalid type: " + type);
         }
     }
@@ -43,23 +43,23 @@ public final class BasicType extends Type {
     // @since 6.0 no longer final
     public static BasicType getType( byte type ) {
         switch (type) {
-            case Constants.T_VOID:
+            case Const.T_VOID:
                 return VOID;
-            case Constants.T_BOOLEAN:
+            case Const.T_BOOLEAN:
                 return BOOLEAN;
-            case Constants.T_BYTE:
+            case Const.T_BYTE:
                 return BYTE;
-            case Constants.T_SHORT:
+            case Const.T_SHORT:
                 return SHORT;
-            case Constants.T_CHAR:
+            case Const.T_CHAR:
                 return CHAR;
-            case Constants.T_INT:
+            case Const.T_INT:
                 return INT;
-            case Constants.T_LONG:
+            case Const.T_LONG:
                 return LONG;
-            case Constants.T_DOUBLE:
+            case Const.T_DOUBLE:
                 return DOUBLE;
-            case Constants.T_FLOAT:
+            case Const.T_FLOAT:
                 return FLOAT;
             default:
                 throw new ClassGenException("Invalid type: " + type);

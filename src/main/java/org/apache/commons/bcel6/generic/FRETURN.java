@@ -28,7 +28,7 @@ public class FRETURN extends ReturnInstruction {
     /** Return float from method
      */
     public FRETURN() {
-        super(org.apache.commons.bcel6.Constants.FRETURN);
+        super(org.apache.commons.bcel6.Const.FRETURN);
     }
 
 

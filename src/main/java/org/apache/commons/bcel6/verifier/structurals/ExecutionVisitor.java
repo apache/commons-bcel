@@ -18,7 +18,7 @@
 package org.apache.commons.bcel6.verifier.structurals;
 
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.Constant;
 import org.apache.commons.bcel6.classfile.ConstantClass;
 import org.apache.commons.bcel6.classfile.ConstantDouble;
@@ -836,7 +836,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitINVOKESPECIAL(INVOKESPECIAL o){
-        if (o.getMethodName(cpg).equals(Constants.CONSTRUCTOR_NAME)){
+        if (o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME)){
             UninitializedObjectType t = (UninitializedObjectType) stack().peek(o.getArgumentTypes(cpg).length);
             if (t == Frame.getThis()){
                 Frame.setThis(null);

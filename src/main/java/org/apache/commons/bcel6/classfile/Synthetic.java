@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class is derived from <em>Attribute</em> and declares this class as
@@ -58,7 +58,7 @@ public final class Synthetic extends Attribute {
      * with.
      */
     public Synthetic(int name_index, int length, byte[] bytes, ConstantPool constant_pool) {
-        super(Constants.ATTR_SYNTHETIC, name_index, length, constant_pool);
+        super(Const.ATTR_SYNTHETIC, name_index, length, constant_pool);
         this.bytes = bytes;
     }
 

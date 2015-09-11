@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class is derived from <em>Attribute</em> and denotes that this class
@@ -54,7 +54,7 @@ public final class InnerClasses extends Attribute {
      */
     public InnerClasses(int name_index, int length, InnerClass[] inner_classes,
             ConstantPool constant_pool) {
-        super(Constants.ATTR_INNER_CLASSES, name_index, length, constant_pool);
+        super(Const.ATTR_INNER_CLASSES, name_index, length, constant_pool);
         this.inner_classes = inner_classes != null ? inner_classes : new InnerClass[0];
     }
 

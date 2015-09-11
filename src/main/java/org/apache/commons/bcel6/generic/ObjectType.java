@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.Repository;
 import org.apache.commons.bcel6.classfile.JavaClass;
 
@@ -41,7 +41,7 @@ public class ObjectType extends ReferenceType {
      * @param class_name fully qualified class name, e.g. java.lang.String
      */
     public ObjectType(String class_name) {
-        super(Constants.T_REFERENCE, "L" + class_name.replace('.', '/') + ";");
+        super(Const.T_REFERENCE, "L" + class_name.replace('.', '/') + ";");
         this.class_name = class_name.replace('/', '.');
     }
 

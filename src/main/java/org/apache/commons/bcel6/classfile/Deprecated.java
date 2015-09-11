@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class is derived from <em>Attribute</em> and denotes that this is a
@@ -52,7 +52,7 @@ public final class Deprecated extends Attribute {
      * @param constant_pool Array of constants
      */
     public Deprecated(int name_index, int length, byte[] bytes, ConstantPool constant_pool) {
-        super(Constants.ATTR_DEPRECATED, name_index, length, constant_pool);
+        super(Const.ATTR_DEPRECATED, name_index, length, constant_pool);
         this.bytes = bytes;
     }
 
@@ -126,7 +126,7 @@ public final class Deprecated extends Attribute {
      */
     @Override
     public final String toString() {
-        return Constants.getAttributeName(Constants.ATTR_DEPRECATED);
+        return Const.getAttributeName(Const.ATTR_DEPRECATED);
     }
 
 

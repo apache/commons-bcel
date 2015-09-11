@@ -30,7 +30,7 @@ public class ILOAD extends LoadInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     ILOAD() {
-        super(org.apache.commons.bcel6.Constants.ILOAD, org.apache.commons.bcel6.Constants.ILOAD_0);
+        super(org.apache.commons.bcel6.Const.ILOAD, org.apache.commons.bcel6.Const.ILOAD_0);
     }
 
 
@@ -38,7 +38,7 @@ public class ILOAD extends LoadInstruction {
      * @param n index of local variable
      */
     public ILOAD(int n) {
-        super(org.apache.commons.bcel6.Constants.ILOAD, org.apache.commons.bcel6.Constants.ILOAD_0, n);
+        super(org.apache.commons.bcel6.Const.ILOAD, org.apache.commons.bcel6.Const.ILOAD_0, n);
     }
 
 

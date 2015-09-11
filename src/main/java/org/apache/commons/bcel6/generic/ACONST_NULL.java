@@ -29,7 +29,7 @@ public class ACONST_NULL extends Instruction implements PushInstruction, TypedIn
      * Push null reference
      */
     public ACONST_NULL() {
-        super(org.apache.commons.bcel6.Constants.ACONST_NULL, (short) 1);
+        super(org.apache.commons.bcel6.Const.ACONST_NULL, (short) 1);
     }
 
 

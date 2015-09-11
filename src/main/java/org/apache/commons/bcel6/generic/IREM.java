@@ -30,7 +30,7 @@ public class IREM extends ArithmeticInstruction implements ExceptionThrower {
     /** Remainder of ints
      */
     public IREM() {
-        super(org.apache.commons.bcel6.Constants.IREM);
+        super(org.apache.commons.bcel6.Const.IREM);
     }
 
 

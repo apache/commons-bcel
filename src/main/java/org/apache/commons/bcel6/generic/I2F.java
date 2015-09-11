@@ -28,7 +28,7 @@ public class I2F extends ConversionInstruction {
     /** Convert int to float
      */
     public I2F() {
-        super(org.apache.commons.bcel6.Constants.I2F);
+        super(org.apache.commons.bcel6.Const.I2F);
     }
 
 

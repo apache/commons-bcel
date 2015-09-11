@@ -35,7 +35,7 @@ public class IF_ACMPEQ extends IfInstruction {
 
 
     public IF_ACMPEQ(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IF_ACMPEQ, target);
+        super(org.apache.commons.bcel6.Const.IF_ACMPEQ, target);
     }
 
 

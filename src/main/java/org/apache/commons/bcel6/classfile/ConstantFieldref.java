@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class represents a constant pool reference to a field.
@@ -33,7 +33,7 @@ public final class ConstantFieldref extends ConstantCP {
      * Initialize from another object.
      */
     public ConstantFieldref(ConstantFieldref c) {
-        super(Constants.CONSTANT_Fieldref, c.getClassIndex(), c.getNameAndTypeIndex());
+        super(Const.CONSTANT_Fieldref, c.getClassIndex(), c.getNameAndTypeIndex());
     }
 
 
@@ -44,7 +44,7 @@ public final class ConstantFieldref extends ConstantCP {
      * @throws IOException
      */
     ConstantFieldref(DataInput input) throws IOException {
-        super(Constants.CONSTANT_Fieldref, input);
+        super(Const.CONSTANT_Fieldref, input);
     }
 
 
@@ -53,7 +53,7 @@ public final class ConstantFieldref extends ConstantCP {
      * @param name_and_type_index and the Field signature
      */
     public ConstantFieldref(int class_index, int name_and_type_index) {
-        super(Constants.CONSTANT_Fieldref, class_index, name_and_type_index);
+        super(Const.CONSTANT_Fieldref, class_index, name_and_type_index);
     }
 
 

@@ -28,7 +28,7 @@ public class FREM extends ArithmeticInstruction {
     /** Remainder of floats
      */
     public FREM() {
-        super(org.apache.commons.bcel6.Constants.FREM);
+        super(org.apache.commons.bcel6.Const.FREM);
     }
 
 

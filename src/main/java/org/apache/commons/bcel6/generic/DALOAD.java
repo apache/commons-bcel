@@ -28,7 +28,7 @@ public class DALOAD extends ArrayInstruction implements StackProducer {
     /** Load double from array
      */
     public DALOAD() {
-        super(org.apache.commons.bcel6.Constants.DALOAD);
+        super(org.apache.commons.bcel6.Const.DALOAD);
     }
 
 

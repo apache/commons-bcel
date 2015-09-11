@@ -35,7 +35,19 @@ limitations under the License.
     <differenceType>4001</differenceType>
     <to>java/io/Serializable</to>
   </difference>
-  <!-- Method added to an interface -->
+  <!-- We no longer want to implement the deprecated Constants class -->
+  <difference>
+    <className>**/*</className>
+    <differenceType>4001</differenceType>
+    <to>org/apache/commons/bcel6/Constants</to>
+  </difference>
+  <!-- We no longer want to implement the deprecated InstructionConstants class -->
+  <difference>
+    <className>**/*</className>
+    <differenceType>4001</differenceType>
+    <to>org/apache/commons/bcel6/generic/InstructionConstants</to>
+  </difference>
+  <!-- Method added to an interface is not binary incompat -->
   <difference>
     <className>**/*</className>
     <differenceType>7012</differenceType>

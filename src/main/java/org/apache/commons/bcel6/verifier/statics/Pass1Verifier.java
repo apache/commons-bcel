@@ -141,7 +141,7 @@ public final class Pass1Verifier extends PassVerifier{
      * (otherwise you would not be able to load it into BCEL).</P>
      *
      * @see org.apache.commons.bcel6.Repository
-     * @see org.apache.commons.bcel6.Constants#JVM_CLASSFILE_MAGIC
+     * @see org.apache.commons.bcel6.Const#JVM_CLASSFILE_MAGIC
      */
     @Override
     public VerificationResult do_verify(){

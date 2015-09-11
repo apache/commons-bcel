@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * Represents a parameter annotation that is represented in the class file
@@ -39,6 +39,6 @@ public class RuntimeVisibleParameterAnnotations extends ParameterAnnotations {
      */
     public RuntimeVisibleParameterAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool)
             throws IOException {
-        super(Constants.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS, name_index, length, input, constant_pool);
+        super(Const.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS, name_index, length, input, constant_pool);
     }
 }

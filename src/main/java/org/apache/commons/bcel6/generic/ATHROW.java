@@ -31,7 +31,7 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
      *  Throw exception
      */
     public ATHROW() {
-        super(org.apache.commons.bcel6.Constants.ATHROW, (short) 1);
+        super(org.apache.commons.bcel6.Const.ATHROW, (short) 1);
     }
 
 

@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class L2D extends ConversionInstruction {
 
     public L2D() {
-        super(org.apache.commons.bcel6.Constants.L2D);
+        super(org.apache.commons.bcel6.Const.L2D);
     }
 
 

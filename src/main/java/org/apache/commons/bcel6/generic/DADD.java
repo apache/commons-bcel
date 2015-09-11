@@ -29,7 +29,7 @@ public class DADD extends ArithmeticInstruction {
     /** Add doubles
      */
     public DADD() {
-        super(org.apache.commons.bcel6.Constants.DADD);
+        super(org.apache.commons.bcel6.Const.DADD);
     }
 
 

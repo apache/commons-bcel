@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class represents a table of line numbers for debugging
@@ -55,7 +55,7 @@ public final class LineNumberTable extends Attribute {
      */
     public LineNumberTable(int name_index, int length, LineNumber[] line_number_table,
             ConstantPool constant_pool) {
-        super(Constants.ATTR_LINE_NUMBER_TABLE, name_index, length, constant_pool);
+        super(Const.ATTR_LINE_NUMBER_TABLE, name_index, length, constant_pool);
         this.line_number_table = line_number_table;
     }
 

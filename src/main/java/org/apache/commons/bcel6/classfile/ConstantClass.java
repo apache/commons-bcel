@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class is derived from the abstract {@link Constant}
@@ -59,7 +59,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
      * ConstantUtf8.
      */
     public ConstantClass(int name_index) {
-        super(Constants.CONSTANT_Class);
+        super(Const.CONSTANT_Class);
         this.name_index = name_index;
     }
 
@@ -110,7 +110,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
      */
     @Override
     public Object getConstantValue( ConstantPool cp ) {
-        Constant c = cp.getConstant(name_index, Constants.CONSTANT_Utf8);
+        Constant c = cp.getConstant(name_index, Const.CONSTANT_Utf8);
         return ((ConstantUtf8) c).getBytes();
     }
 

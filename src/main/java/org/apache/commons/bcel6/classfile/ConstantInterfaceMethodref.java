@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class represents a constant pool reference to an interface method.
@@ -33,7 +33,7 @@ public final class ConstantInterfaceMethodref extends ConstantCP {
      * Initialize from another object.
      */
     public ConstantInterfaceMethodref(ConstantInterfaceMethodref c) {
-        super(Constants.CONSTANT_InterfaceMethodref, c.getClassIndex(), c.getNameAndTypeIndex());
+        super(Const.CONSTANT_InterfaceMethodref, c.getClassIndex(), c.getNameAndTypeIndex());
     }
 
 
@@ -44,7 +44,7 @@ public final class ConstantInterfaceMethodref extends ConstantCP {
      * @throws IOException
      */
     ConstantInterfaceMethodref(DataInput input) throws IOException {
-        super(Constants.CONSTANT_InterfaceMethodref, input);
+        super(Const.CONSTANT_InterfaceMethodref, input);
     }
 
 
@@ -53,7 +53,7 @@ public final class ConstantInterfaceMethodref extends ConstantCP {
      * @param name_and_type_index and the method signature
      */
     public ConstantInterfaceMethodref(int class_index, int name_and_type_index) {
-        super(Constants.CONSTANT_InterfaceMethodref, class_index, name_and_type_index);
+        super(Const.CONSTANT_InterfaceMethodref, class_index, name_and_type_index);
     }
 
 

@@ -28,7 +28,7 @@ public class D2F extends ConversionInstruction {
     /** Convert double to float
      */
     public D2F() {
-        super(org.apache.commons.bcel6.Constants.D2F);
+        super(org.apache.commons.bcel6.Const.D2F);
     }
 
 

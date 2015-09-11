@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class DCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
     public DCMPG() {
-        super(org.apache.commons.bcel6.Constants.DCMPG, (short) 1);
+        super(org.apache.commons.bcel6.Const.DCMPG, (short) 1);
     }
 
     /** @return Type.DOUBLE

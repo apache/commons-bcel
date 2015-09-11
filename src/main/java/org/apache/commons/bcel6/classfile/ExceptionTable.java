@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class represents the table of exceptions that are thrown by a
@@ -56,7 +56,7 @@ public final class ExceptionTable extends Attribute {
      */
     public ExceptionTable(int name_index, int length, int[] exception_index_table,
             ConstantPool constant_pool) {
-        super(Constants.ATTR_EXCEPTIONS, name_index, length, constant_pool);
+        super(Const.ATTR_EXCEPTIONS, name_index, length, constant_pool);
         this.exception_index_table = exception_index_table != null ? exception_index_table : new int[0];
     }
 
@@ -131,7 +131,7 @@ public final class ExceptionTable extends Attribute {
         String[] names = new String[exception_index_table.length];
         for (int i = 0; i < exception_index_table.length; i++) {
             names[i] = super.getConstantPool().getConstantString(exception_index_table[i], 
-                    Constants.CONSTANT_Class).replace('/', '.');
+                    Const.CONSTANT_Class).replace('/', '.');
         }
         return names;
     }
@@ -155,7 +155,7 @@ public final class ExceptionTable extends Attribute {
         String str;
         buf.append("Exceptions: ");
         for (int i = 0; i < exception_index_table.length; i++) {
-            str = super.getConstantPool().getConstantString(exception_index_table[i], Constants.CONSTANT_Class);
+            str = super.getConstantPool().getConstantString(exception_index_table[i], Const.CONSTANT_Class);
             buf.append(Utility.compactClassName(str, false));
             if (i < exception_index_table.length - 1) {
                 buf.append(", ");

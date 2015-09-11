@@ -28,7 +28,7 @@ public class BALOAD extends ArrayInstruction implements StackProducer {
     /** Load byte or boolean from array
      */
     public BALOAD() {
-        super(org.apache.commons.bcel6.Constants.BALOAD);
+        super(org.apache.commons.bcel6.Const.BALOAD);
     }
 
 

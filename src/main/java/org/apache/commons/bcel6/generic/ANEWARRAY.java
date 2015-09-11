@@ -37,7 +37,7 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
 
 
     public ANEWARRAY(int index) {
-        super(org.apache.commons.bcel6.Constants.ANEWARRAY, index);
+        super(org.apache.commons.bcel6.Const.ANEWARRAY, index);
     }
 
 

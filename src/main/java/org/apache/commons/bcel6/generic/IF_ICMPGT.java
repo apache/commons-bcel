@@ -35,7 +35,7 @@ public class IF_ICMPGT extends IfInstruction {
 
 
     public IF_ICMPGT(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IF_ICMPGT, target);
+        super(org.apache.commons.bcel6.Const.IF_ICMPGT, target);
     }
 
 

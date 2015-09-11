@@ -29,7 +29,7 @@ public class IASTORE extends ArrayInstruction implements StackConsumer {
      * Store into int array
      */
     public IASTORE() {
-        super(org.apache.commons.bcel6.Constants.IASTORE);
+        super(org.apache.commons.bcel6.Const.IASTORE);
     }
 
 

@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * Abstract super class for <em>Attribute</em> objects. Currently the
@@ -168,19 +168,19 @@ public abstract class Attribute implements Cloneable, Node {
     public static Attribute readAttribute(DataInput file, ConstantPool constant_pool)
             throws IOException, ClassFormatException
     {
-        byte tag = Constants.ATTR_UNKNOWN; // Unknown attribute
+        byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via `name_index' indirection
         int name_index = file.readUnsignedShort();
-        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8);
+        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
         String name = c.getBytes();
         
         // Length of data in bytes
         int length = file.readInt();
         
         // Compare strings to find known attribute
-        for (byte i = 0; i < Constants.KNOWN_ATTRIBUTES; i++)
+        for (byte i = 0; i < Const.KNOWN_ATTRIBUTES; i++)
         {
-            if (name.equals(Constants.getAttributeName(i)))
+            if (name.equals(Const.getAttributeName(i)))
             {
                 tag = i; // found!
                 break;
@@ -190,56 +190,56 @@ public abstract class Attribute implements Cloneable, Node {
         // Call proper constructor, depending on `tag'
         switch (tag)
         {
-            case Constants.ATTR_UNKNOWN:
+            case Const.ATTR_UNKNOWN:
                 Object r = readers.get(name);
                 if (r instanceof UnknownAttributeReader)
                 {
                     return ((UnknownAttributeReader) r).createAttribute(name_index, length, file, constant_pool);
                 }
                 return new Unknown(name_index, length, file, constant_pool);
-            case Constants.ATTR_CONSTANT_VALUE:
+            case Const.ATTR_CONSTANT_VALUE:
                 return new ConstantValue(name_index, length, file, constant_pool);
-            case Constants.ATTR_SOURCE_FILE:
+            case Const.ATTR_SOURCE_FILE:
                 return new SourceFile(name_index, length, file, constant_pool);
-            case Constants.ATTR_CODE:
+            case Const.ATTR_CODE:
                 return new Code(name_index, length, file, constant_pool);
-            case Constants.ATTR_EXCEPTIONS:
+            case Const.ATTR_EXCEPTIONS:
                 return new ExceptionTable(name_index, length, file, constant_pool);
-            case Constants.ATTR_LINE_NUMBER_TABLE:
+            case Const.ATTR_LINE_NUMBER_TABLE:
                 return new LineNumberTable(name_index, length, file, constant_pool);
-            case Constants.ATTR_LOCAL_VARIABLE_TABLE:
+            case Const.ATTR_LOCAL_VARIABLE_TABLE:
                 return new LocalVariableTable(name_index, length, file, constant_pool);
-            case Constants.ATTR_INNER_CLASSES:
+            case Const.ATTR_INNER_CLASSES:
                 return new InnerClasses(name_index, length, file, constant_pool);
-            case Constants.ATTR_SYNTHETIC:
+            case Const.ATTR_SYNTHETIC:
                 return new Synthetic(name_index, length, file, constant_pool);
-            case Constants.ATTR_DEPRECATED:
+            case Const.ATTR_DEPRECATED:
                 return new Deprecated(name_index, length, file, constant_pool);
-            case Constants.ATTR_PMG:
+            case Const.ATTR_PMG:
                 return new PMGClass(name_index, length, file, constant_pool);
-            case Constants.ATTR_SIGNATURE:
+            case Const.ATTR_SIGNATURE:
                 return new Signature(name_index, length, file, constant_pool);
-            case Constants.ATTR_STACK_MAP:
+            case Const.ATTR_STACK_MAP:
                 return new StackMap(name_index, length, file, constant_pool);
-            case Constants.ATTR_RUNTIME_VISIBLE_ANNOTATIONS:
+            case Const.ATTR_RUNTIME_VISIBLE_ANNOTATIONS:
                 return new RuntimeVisibleAnnotations(name_index, length, file, constant_pool);
-            case Constants.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS:
+            case Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS:
                 return new RuntimeInvisibleAnnotations(name_index, length, file, constant_pool);
-            case Constants.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS:
+            case Const.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS:
                 return new RuntimeVisibleParameterAnnotations(name_index, length, file, constant_pool);
-            case Constants.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS:
+            case Const.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS:
                 return new RuntimeInvisibleParameterAnnotations(name_index, length, file, constant_pool);
-            case Constants.ATTR_ANNOTATION_DEFAULT:
+            case Const.ATTR_ANNOTATION_DEFAULT:
                 return new AnnotationDefault(name_index, length, file, constant_pool);
-            case Constants.ATTR_LOCAL_VARIABLE_TYPE_TABLE:
+            case Const.ATTR_LOCAL_VARIABLE_TYPE_TABLE:
                 return new LocalVariableTypeTable(name_index, length, file, constant_pool);
-            case Constants.ATTR_ENCLOSING_METHOD:
+            case Const.ATTR_ENCLOSING_METHOD:
                 return new EnclosingMethod(name_index, length, file, constant_pool);
-            case Constants.ATTR_STACK_MAP_TABLE:
+            case Const.ATTR_STACK_MAP_TABLE:
                 return new StackMap(name_index, length, file, constant_pool);
-            case Constants.ATTR_BOOTSTRAP_METHODS:
+            case Const.ATTR_BOOTSTRAP_METHODS:
                 return new BootstrapMethods(name_index, length, file, constant_pool);
-            case Constants.ATTR_METHOD_PARAMETERS:
+            case Const.ATTR_METHOD_PARAMETERS:
                 return new MethodParameters(name_index, length, file, constant_pool);
             default:
                 // Never reached
@@ -253,7 +253,7 @@ public abstract class Attribute implements Cloneable, Node {
      */
     public String getName()
     {
-        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8);
+        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 
@@ -347,6 +347,6 @@ public abstract class Attribute implements Cloneable, Node {
     @Override
     public String toString()
     {
-        return Constants.getAttributeName(tag);
+        return Const.getAttributeName(tag);
     }
 }

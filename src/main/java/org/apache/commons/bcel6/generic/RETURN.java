@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class RETURN extends ReturnInstruction {
 
     public RETURN() {
-        super(org.apache.commons.bcel6.Constants.RETURN);
+        super(org.apache.commons.bcel6.Const.RETURN);
     }
 
 

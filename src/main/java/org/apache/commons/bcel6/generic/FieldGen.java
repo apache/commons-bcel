@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.AnnotationEntry;
 import org.apache.commons.bcel6.classfile.Annotations;
 import org.apache.commons.bcel6.classfile.Attribute;
@@ -237,19 +237,19 @@ public class FieldGen extends FieldGenOrMethodGen {
 
     private int addConstant() {
         switch (super.getType().getType()) { // sic
-            case Constants.T_INT:
-            case Constants.T_CHAR:
-            case Constants.T_BYTE:
-            case Constants.T_BOOLEAN:
-            case Constants.T_SHORT:
+            case Const.T_INT:
+            case Const.T_CHAR:
+            case Const.T_BYTE:
+            case Const.T_BOOLEAN:
+            case Const.T_SHORT:
                 return super.getConstantPool().addInteger(((Integer) value).intValue());
-            case Constants.T_FLOAT:
+            case Const.T_FLOAT:
                 return super.getConstantPool().addFloat(((Float) value).floatValue());
-            case Constants.T_DOUBLE:
+            case Const.T_DOUBLE:
                 return super.getConstantPool().addDouble(((Double) value).doubleValue());
-            case Constants.T_LONG:
+            case Const.T_LONG:
                 return super.getConstantPool().addLong(((Long) value).longValue());
-            case Constants.T_REFERENCE:
+            case Const.T_REFERENCE:
                 return super.getConstantPool().addString((String) value);
             default:
                 throw new RuntimeException("Oops: Unhandled : " + super.getType().getType()); // sic

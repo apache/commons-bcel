@@ -18,7 +18,7 @@
 package org.apache.commons.bcel6.verifier.statics;
 
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.generic.Type;
 
 /**
@@ -32,7 +32,7 @@ public final class DOUBLE_Upper extends Type{
 
     /** The constructor; this class must not be instantiated from the outside. */
     private DOUBLE_Upper(){
-        super(Constants.T_UNKNOWN, "Long_Upper");
+        super(Const.T_UNKNOWN, "Long_Upper");
     }
 
     /** Use this method to get the single instance of this class. */

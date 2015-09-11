@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.ExceptionConst;
 import org.apache.commons.bcel6.classfile.ConstantPool;
 import org.apache.commons.bcel6.util.ByteSequence;
@@ -48,7 +48,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
 
 
     public INVOKEINTERFACE(int index, int nargs) {
-        super(Constants.INVOKEINTERFACE, index);
+        super(Const.INVOKEINTERFACE, index);
         super.setLength(5);
         if (nargs < 1) {
             throw new ClassGenException("Number of arguments must be > 0 " + nargs);

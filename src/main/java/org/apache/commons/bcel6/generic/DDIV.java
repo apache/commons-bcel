@@ -29,7 +29,7 @@ public class DDIV extends ArithmeticInstruction {
     /** Divide doubles
      */
     public DDIV() {
-        super(org.apache.commons.bcel6.Constants.DDIV);
+        super(org.apache.commons.bcel6.Const.DDIV);
     }
 
 

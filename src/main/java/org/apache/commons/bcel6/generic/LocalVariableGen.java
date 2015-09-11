@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.LocalVariable;
 
 /** 
@@ -51,7 +51,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      */
     public LocalVariableGen(int index, String name, Type type, InstructionHandle start,
             InstructionHandle end) {
-        if ((index < 0) || (index > Constants.MAX_SHORT)) {
+        if ((index < 0) || (index > Const.MAX_SHORT)) {
             throw new ClassGenException("Invalid index index: " + index);
         }
         this.name = name;

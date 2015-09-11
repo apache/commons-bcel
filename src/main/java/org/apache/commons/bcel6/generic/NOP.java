@@ -25,7 +25,7 @@ package org.apache.commons.bcel6.generic;
 public class NOP extends Instruction {
 
     public NOP() {
-        super(org.apache.commons.bcel6.Constants.NOP, (short) 1);
+        super(org.apache.commons.bcel6.Const.NOP, (short) 1);
     }
 
 

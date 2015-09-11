@@ -29,7 +29,7 @@ public class DREM extends ArithmeticInstruction {
     /** Remainder of doubles
      */
     public DREM() {
-        super(org.apache.commons.bcel6.Constants.DREM);
+        super(org.apache.commons.bcel6.Const.DREM);
     }
 
 

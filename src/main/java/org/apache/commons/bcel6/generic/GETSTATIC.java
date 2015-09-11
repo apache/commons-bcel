@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
@@ -39,7 +39,7 @@ public class GETSTATIC extends FieldInstruction implements PushInstruction, Exce
 
 
     public GETSTATIC(int index) {
-        super(Constants.GETSTATIC, index);
+        super(Const.GETSTATIC, index);
     }
 
 

@@ -28,7 +28,7 @@ public class I2C extends ConversionInstruction {
     /** Convert int to char
      */
     public I2C() {
-        super(org.apache.commons.bcel6.Constants.I2C);
+        super(org.apache.commons.bcel6.Const.I2C);
     }
 
 

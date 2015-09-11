@@ -38,7 +38,7 @@ public class JSR_W extends JsrInstruction {
 
 
     public JSR_W(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.JSR_W, target);
+        super(org.apache.commons.bcel6.Const.JSR_W, target);
         super.setLength(5);
     }
 

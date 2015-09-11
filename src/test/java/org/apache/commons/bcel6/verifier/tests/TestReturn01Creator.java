@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.verifier.tests;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.generic.ClassGen;
 import org.apache.commons.bcel6.generic.ConstantPoolGen;
 import org.apache.commons.bcel6.generic.InstructionConst;
@@ -38,7 +38,7 @@ public class TestReturn01Creator extends TestCreator {
 
   public TestReturn01Creator() {
     _cg = new ClassGen(TEST_PACKAGE+".TestReturn01", "java.lang.Object", "TestReturn01.java",
-            Constants.ACC_PUBLIC | Constants.ACC_SUPER, new String[] {  });
+            Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {  });
 
     _cp = _cg.getConstantPool();
     _factory = new InstructionFactory(_cg, _cp);
@@ -53,12 +53,12 @@ public void create(OutputStream out) throws IOException {
 
   private void createMethod_0() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(Constants.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  },
+    MethodGen method = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  },
             "<init>", TEST_PACKAGE+".TestReturn01", il, _cp);
 
     InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
     Assert.assertNotNull(ih_0); // TODO why is this not used
-    il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Constants.INVOKESPECIAL));
+    il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Const.INVOKESPECIAL));
     InstructionHandle ih_4 = il.append(InstructionFactory.createReturn(Type.VOID));
     Assert.assertNotNull(ih_4); // TODO why is this not used
     method.setMaxStack();
@@ -69,13 +69,13 @@ public void create(OutputStream out) throws IOException {
 
   private void createMethod_1() {
     InstructionList il = new InstructionList();
-    MethodGen method = new MethodGen(Constants.ACC_PUBLIC | Constants.ACC_STATIC, Type.VOID, Type.NO_ARGS,
+    MethodGen method = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.VOID, Type.NO_ARGS,
             new String[] {  }, "foo", TEST_PACKAGE+".TestReturn01", il, _cp);
 
     InstructionHandle ih_0 = il.append(_factory.createNew("java.lang.Object"));
     Assert.assertNotNull(ih_0); // TODO why is this not used
     il.append(InstructionConst.DUP);
-    il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Constants.INVOKESPECIAL));
+    il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Const.INVOKESPECIAL));
     il.append(InstructionConst.NOP);
     InstructionHandle ih_8 = il.append(InstructionFactory.createReturn(Type.OBJECT));
     Assert.assertNotNull(ih_8); // TODO why is this not used

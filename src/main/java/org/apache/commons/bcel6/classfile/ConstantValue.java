@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a constant 
@@ -67,7 +67,7 @@ public final class ConstantValue extends Attribute {
      */
     public ConstantValue(int name_index, int length, int constantvalue_index,
             ConstantPool constant_pool) {
-        super(Constants.ATTR_CONSTANT_VALUE, name_index, length, constant_pool);
+        super(Const.ATTR_CONSTANT_VALUE, name_index, length, constant_pool);
         this.constantvalue_index = constantvalue_index;
     }
 
@@ -124,21 +124,21 @@ public final class ConstantValue extends Attribute {
         int i;
         // Print constant to string depending on its type
         switch (c.getTag()) {
-            case Constants.CONSTANT_Long:
+            case Const.CONSTANT_Long:
                 buf = String.valueOf(((ConstantLong) c).getBytes());
                 break;
-            case Constants.CONSTANT_Float:
+            case Const.CONSTANT_Float:
                 buf = String.valueOf(((ConstantFloat) c).getBytes());
                 break;
-            case Constants.CONSTANT_Double:
+            case Const.CONSTANT_Double:
                 buf = String.valueOf(((ConstantDouble) c).getBytes());
                 break;
-            case Constants.CONSTANT_Integer:
+            case Const.CONSTANT_Integer:
                 buf = String.valueOf(((ConstantInteger) c).getBytes());
                 break;
-            case Constants.CONSTANT_String:
+            case Const.CONSTANT_String:
                 i = ((ConstantString) c).getStringIndex();
-                c = super.getConstantPool().getConstant(i, Constants.CONSTANT_Utf8);
+                c = super.getConstantPool().getConstant(i, Const.CONSTANT_Utf8);
                 buf = "\"" + Utility.convertString(((ConstantUtf8) c).getBytes()) + "\"";
                 break;
             default:

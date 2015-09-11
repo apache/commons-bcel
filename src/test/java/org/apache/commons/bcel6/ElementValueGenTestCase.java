@@ -37,7 +37,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
     private ClassGen createClassGen(String classname)
     {
         return new ClassGen(classname, "java.lang.Object", "<generated>",
-                Constants.ACC_PUBLIC | Constants.ACC_SUPER, null);
+                Const.ACC_PUBLIC | Const.ACC_SUPER, null);
     }
 
     /**

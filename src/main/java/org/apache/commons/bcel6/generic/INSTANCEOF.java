@@ -37,7 +37,7 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
 
 
     public INSTANCEOF(int index) {
-        super(org.apache.commons.bcel6.Constants.INSTANCEOF, index);
+        super(org.apache.commons.bcel6.Const.INSTANCEOF, index);
     }
 
 

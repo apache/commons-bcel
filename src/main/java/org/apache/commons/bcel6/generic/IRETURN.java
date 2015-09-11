@@ -28,7 +28,7 @@ public class IRETURN extends ReturnInstruction {
     /** Return int from method
      */
     public IRETURN() {
-        super(org.apache.commons.bcel6.Constants.IRETURN);
+        super(org.apache.commons.bcel6.Const.IRETURN);
     }
 
 

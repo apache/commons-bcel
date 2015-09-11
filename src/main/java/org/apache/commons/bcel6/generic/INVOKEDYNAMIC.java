@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.ExceptionConst;
 import org.apache.commons.bcel6.classfile.ConstantPool;
 import org.apache.commons.bcel6.util.ByteSequence;
@@ -47,7 +47,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
 
 
     public INVOKEDYNAMIC(int index) {
-        super(Constants.INVOKEDYNAMIC, index);
+        super(Const.INVOKEDYNAMIC, index);
     }
 
 

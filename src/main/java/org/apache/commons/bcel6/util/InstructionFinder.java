@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.generic.ClassGenException;
 import org.apache.commons.bcel6.generic.InstructionHandle;
 import org.apache.commons.bcel6.generic.InstructionList;
@@ -114,7 +114,7 @@ public class InstructionFinder {
             return result;
         }
         for (short i = 0; i < NO_OPCODES; i++) {
-            if (pattern.equals(Constants.getOpcodeName(i))) {
+            if (pattern.equals(Const.getOpcodeName(i))) {
                 return "" + makeChar(i);
             }
         }
@@ -343,20 +343,20 @@ public class InstructionFinder {
         map.put("if_acmp", "(if_acmpeq|if_acmpne)");
         map.put("if", "(ifeq|ifne|iflt|ifge|ifgt|ifle)");
         // Precompile some aliases first
-        map.put("iconst", precompile(Constants.ICONST_0, Constants.ICONST_5, Constants.ICONST_M1));
-        map.put("lconst", new String(new char[] { '(', makeChar(Constants.LCONST_0), '|', makeChar(Constants.LCONST_1), ')' }));
-        map.put("dconst", new String(new char[] { '(', makeChar(Constants.DCONST_0), '|', makeChar(Constants.DCONST_1), ')' }));
-        map.put("fconst", new String(new char[] { '(', makeChar(Constants.FCONST_0), '|', makeChar(Constants.FCONST_1), ')' }));
-        map.put("lload", precompile(Constants.LLOAD_0, Constants.LLOAD_3, Constants.LLOAD));
-        map.put("iload", precompile(Constants.ILOAD_0, Constants.ILOAD_3, Constants.ILOAD));
-        map.put("dload", precompile(Constants.DLOAD_0, Constants.DLOAD_3, Constants.DLOAD));
-        map.put("fload", precompile(Constants.FLOAD_0, Constants.FLOAD_3, Constants.FLOAD));
-        map.put("aload", precompile(Constants.ALOAD_0, Constants.ALOAD_3, Constants.ALOAD));
-        map.put("lstore", precompile(Constants.LSTORE_0, Constants.LSTORE_3, Constants.LSTORE));
-        map.put("istore", precompile(Constants.ISTORE_0, Constants.ISTORE_3, Constants.ISTORE));
-        map.put("dstore", precompile(Constants.DSTORE_0, Constants.DSTORE_3, Constants.DSTORE));
-        map.put("fstore", precompile(Constants.FSTORE_0, Constants.FSTORE_3, Constants.FSTORE));
-        map.put("astore", precompile(Constants.ASTORE_0, Constants.ASTORE_3, Constants.ASTORE));
+        map.put("iconst", precompile(Const.ICONST_0, Const.ICONST_5, Const.ICONST_M1));
+        map.put("lconst", new String(new char[] { '(', makeChar(Const.LCONST_0), '|', makeChar(Const.LCONST_1), ')' }));
+        map.put("dconst", new String(new char[] { '(', makeChar(Const.DCONST_0), '|', makeChar(Const.DCONST_1), ')' }));
+        map.put("fconst", new String(new char[] { '(', makeChar(Const.FCONST_0), '|', makeChar(Const.FCONST_1), ')' }));
+        map.put("lload", precompile(Const.LLOAD_0, Const.LLOAD_3, Const.LLOAD));
+        map.put("iload", precompile(Const.ILOAD_0, Const.ILOAD_3, Const.ILOAD));
+        map.put("dload", precompile(Const.DLOAD_0, Const.DLOAD_3, Const.DLOAD));
+        map.put("fload", precompile(Const.FLOAD_0, Const.FLOAD_3, Const.FLOAD));
+        map.put("aload", precompile(Const.ALOAD_0, Const.ALOAD_3, Const.ALOAD));
+        map.put("lstore", precompile(Const.LSTORE_0, Const.LSTORE_3, Const.LSTORE));
+        map.put("istore", precompile(Const.ISTORE_0, Const.ISTORE_3, Const.ISTORE));
+        map.put("dstore", precompile(Const.DSTORE_0, Const.DSTORE_3, Const.DSTORE));
+        map.put("fstore", precompile(Const.FSTORE_0, Const.FSTORE_3, Const.FSTORE));
+        map.put("astore", precompile(Const.ASTORE_0, Const.ASTORE_3, Const.ASTORE));
         // Compile strings
         for (Map.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
@@ -369,7 +369,7 @@ public class InstructionFinder {
         // Add instruction alias to match anything
         StringBuilder buf = new StringBuilder("(");
         for (short i = 0; i < NO_OPCODES; i++) {
-            if (Constants.getNoOfOperands(i) != Constants.UNDEFINED) { // Not an invalid opcode
+            if (Const.getNoOfOperands(i) != Const.UNDEFINED) { // Not an invalid opcode
                 buf.append(makeChar(i));
                 if (i < NO_OPCODES - 1) {
                     buf.append('|');

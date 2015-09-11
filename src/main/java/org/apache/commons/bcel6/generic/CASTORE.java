@@ -28,7 +28,7 @@ public class CASTORE extends ArrayInstruction implements StackConsumer {
     /** Store char into array
      */
     public CASTORE() {
-        super(org.apache.commons.bcel6.Constants.CASTORE);
+        super(org.apache.commons.bcel6.Const.CASTORE);
     }
 
 

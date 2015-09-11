@@ -30,7 +30,7 @@ public class ALOAD extends LoadInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     ALOAD() {
-        super(org.apache.commons.bcel6.Constants.ALOAD, org.apache.commons.bcel6.Constants.ALOAD_0);
+        super(org.apache.commons.bcel6.Const.ALOAD, org.apache.commons.bcel6.Const.ALOAD_0);
     }
 
 
@@ -38,7 +38,7 @@ public class ALOAD extends LoadInstruction {
      * @param n index of local variable
      */
     public ALOAD(int n) {
-        super(org.apache.commons.bcel6.Constants.ALOAD, org.apache.commons.bcel6.Constants.ALOAD_0, n);
+        super(org.apache.commons.bcel6.Const.ALOAD, org.apache.commons.bcel6.Const.ALOAD_0, n);
     }
 
 

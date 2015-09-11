@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class represents a inner class attribute, i.e., the class
@@ -182,18 +182,18 @@ public final class InnerClass implements Cloneable, Node {
         String outer_class_name;
         String inner_name;
         String inner_class_name = constant_pool.getConstantString(inner_class_index,
-                Constants.CONSTANT_Class);
+                Const.CONSTANT_Class);
         inner_class_name = Utility.compactClassName(inner_class_name);
         if (outer_class_index != 0) {
             outer_class_name = constant_pool.getConstantString(outer_class_index,
-                    Constants.CONSTANT_Class);
+                    Const.CONSTANT_Class);
             outer_class_name = " of class " + Utility.compactClassName(outer_class_name);
         } else {
             outer_class_name = "";
         }
         if (inner_name_index != 0) {
             inner_name = ((ConstantUtf8) constant_pool.getConstant(inner_name_index,
-                    Constants.CONSTANT_Utf8)).getBytes();
+                    Const.CONSTANT_Utf8)).getBytes();
         } else {
             inner_name = "(anonymous)";
         }

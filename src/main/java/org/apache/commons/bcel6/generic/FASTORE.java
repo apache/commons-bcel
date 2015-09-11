@@ -28,7 +28,7 @@ public class FASTORE extends ArrayInstruction implements StackConsumer {
     /** Store float into array
      */
     public FASTORE() {
-        super(org.apache.commons.bcel6.Constants.FASTORE);
+        super(org.apache.commons.bcel6.Const.FASTORE);
     }
 
 

@@ -25,7 +25,7 @@ package org.apache.commons.bcel6.generic;
 public class BREAKPOINT extends Instruction {
 
     public BREAKPOINT() {
-        super(org.apache.commons.bcel6.Constants.BREAKPOINT, (short) 1);
+        super(org.apache.commons.bcel6.Const.BREAKPOINT, (short) 1);
     }
 
 

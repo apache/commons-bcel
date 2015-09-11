@@ -28,7 +28,7 @@ public class D2I extends ConversionInstruction {
     /** Convert double to int
      */
     public D2I() {
-        super(org.apache.commons.bcel6.Constants.D2I);
+        super(org.apache.commons.bcel6.Const.D2I);
     }
 
 

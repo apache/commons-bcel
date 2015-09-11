@@ -39,7 +39,7 @@ public class LOOKUPSWITCH extends Select {
 
 
     public LOOKUPSWITCH(int[] match, InstructionHandle[] targets, InstructionHandle defaultTarget) {
-        super(org.apache.commons.bcel6.Constants.LOOKUPSWITCH, match, targets, defaultTarget);
+        super(org.apache.commons.bcel6.Const.LOOKUPSWITCH, match, targets, defaultTarget);
         /* alignment remainder assumed 0 here, until dump time. */
         final short _length = (short) (9 + getMatch_length() * 8);
         super.setLength(_length);

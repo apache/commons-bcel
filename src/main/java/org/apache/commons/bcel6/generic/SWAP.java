@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class SWAP extends StackInstruction implements StackConsumer, StackProducer {
 
     public SWAP() {
-        super(org.apache.commons.bcel6.Constants.SWAP);
+        super(org.apache.commons.bcel6.Const.SWAP);
     }
 
 

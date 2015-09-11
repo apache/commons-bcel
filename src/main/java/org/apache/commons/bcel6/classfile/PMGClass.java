@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a reference
@@ -69,7 +69,7 @@ public final class PMGClass extends Attribute {
      */
     public PMGClass(int name_index, int length, int pmg_index, int pmg_class_index,
             ConstantPool constant_pool) {
-        super(Constants.ATTR_PMG, name_index, length, constant_pool);
+        super(Const.ATTR_PMG, name_index, length, constant_pool);
         this.pmg_index = pmg_index;
         this.pmg_class_index = pmg_class_index;
     }
@@ -139,7 +139,7 @@ public final class PMGClass extends Attribute {
      */
     public final String getPMGName() {
         ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmg_index,
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 
@@ -149,7 +149,7 @@ public final class PMGClass extends Attribute {
      */
     public final String getPMGClassName() {
         ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmg_class_index,
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 

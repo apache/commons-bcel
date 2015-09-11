@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class LOR extends ArithmeticInstruction {
 
     public LOR() {
-        super(org.apache.commons.bcel6.Constants.LOR);
+        super(org.apache.commons.bcel6.Const.LOR);
     }
 
 

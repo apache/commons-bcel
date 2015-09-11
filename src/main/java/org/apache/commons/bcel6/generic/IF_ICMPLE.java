@@ -35,7 +35,7 @@ public class IF_ICMPLE extends IfInstruction {
 
 
     public IF_ICMPLE(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IF_ICMPLE, target);
+        super(org.apache.commons.bcel6.Const.IF_ICMPLE, target);
     }
 
 

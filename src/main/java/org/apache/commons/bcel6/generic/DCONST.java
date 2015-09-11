@@ -38,11 +38,11 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
 
 
     public DCONST(double f) {
-        super(org.apache.commons.bcel6.Constants.DCONST_0, (short) 1);
+        super(org.apache.commons.bcel6.Const.DCONST_0, (short) 1);
         if (f == 0.0) {
-            super.setOpcode(org.apache.commons.bcel6.Constants.DCONST_0);
+            super.setOpcode(org.apache.commons.bcel6.Const.DCONST_0);
         } else if (f == 1.0) {
-            super.setOpcode(org.apache.commons.bcel6.Constants.DCONST_1);
+            super.setOpcode(org.apache.commons.bcel6.Const.DCONST_1);
         } else {
             throw new ClassGenException("DCONST can be used only for 0.0 and 1.0: " + f);
         }

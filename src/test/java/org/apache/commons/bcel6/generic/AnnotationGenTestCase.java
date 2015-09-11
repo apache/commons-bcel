@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.bcel6.AbstractTestCase;
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.Annotations;
 import org.apache.commons.bcel6.classfile.Attribute;
 import org.apache.commons.bcel6.classfile.RuntimeInvisibleAnnotations;
@@ -37,7 +37,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
     private ClassGen createClassGen(String classname)
     {
         return new ClassGen(classname, "java.lang.Object", "<generated>",
-                Constants.ACC_PUBLIC | Constants.ACC_SUPER, null);
+                Const.ACC_PUBLIC | Const.ACC_SUPER, null);
     }
 
     /**

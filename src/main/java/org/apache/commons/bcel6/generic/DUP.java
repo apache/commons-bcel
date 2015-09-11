@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class DUP extends StackInstruction implements PushInstruction {
 
     public DUP() {
-        super(org.apache.commons.bcel6.Constants.DUP);
+        super(org.apache.commons.bcel6.Const.DUP);
     }
 
 

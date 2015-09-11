@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.generic.Type;
 import org.apache.commons.bcel6.util.BCELComparator;
 
@@ -101,7 +101,7 @@ public final class Field extends FieldOrMethod {
      */
     public final ConstantValue getConstantValue() {
         for (Attribute attribute : super.getAttributes()) {
-            if (attribute.getTag() == Constants.ATTR_CONSTANT_VALUE) {
+            if (attribute.getTag() == Const.ATTR_CONSTANT_VALUE) {
                 return (ConstantValue) attribute;
             }
         }

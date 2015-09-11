@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * Represents the default value of a annotation for a method info
@@ -51,7 +51,7 @@ public class AnnotationDefault extends Attribute {
      * @param constant_pool Array of constants
      */
     public AnnotationDefault(int name_index, int length, ElementValue defaultValue, ConstantPool constant_pool) {
-        super(Constants.ATTR_ANNOTATION_DEFAULT, name_index, length, constant_pool);
+        super(Const.ATTR_ANNOTATION_DEFAULT, name_index, length, constant_pool);
         this.default_value = defaultValue;
     }
 

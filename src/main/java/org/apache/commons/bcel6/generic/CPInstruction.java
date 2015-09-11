@@ -98,7 +98,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
         if (c instanceof ConstantClass) {
             str = str.replace('.', '/');
         }
-        return org.apache.commons.bcel6.Constants.getOpcodeName(super.getOpcode()) + " " + str;
+        return org.apache.commons.bcel6.Const.getOpcodeName(super.getOpcode()) + " " + str;
     }
 
 
@@ -141,7 +141,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     @Override
     public Type getType( ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
-        String name = cp.getConstantString(index, org.apache.commons.bcel6.Constants.CONSTANT_Class);
+        String name = cp.getConstantString(index, org.apache.commons.bcel6.Const.CONSTANT_Class);
         if (!name.startsWith("[")) {
             name = "L" + name + ";";
         }

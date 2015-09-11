@@ -28,7 +28,7 @@ import org.apache.commons.bcel6.ExceptionConst;
 public class MONITOREXIT extends Instruction implements ExceptionThrower, StackConsumer {
 
     public MONITOREXIT() {
-        super(org.apache.commons.bcel6.Constants.MONITOREXIT, (short) 1);
+        super(org.apache.commons.bcel6.Const.MONITOREXIT, (short) 1);
     }
 
 

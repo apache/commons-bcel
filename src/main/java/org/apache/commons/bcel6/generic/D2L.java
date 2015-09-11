@@ -28,7 +28,7 @@ public class D2L extends ConversionInstruction {
     /** Convert double to long
      */
     public D2L() {
-        super(org.apache.commons.bcel6.Constants.D2L);
+        super(org.apache.commons.bcel6.Const.D2L);
     }
 
 

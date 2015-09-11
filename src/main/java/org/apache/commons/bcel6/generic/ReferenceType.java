@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.Repository;
 import org.apache.commons.bcel6.classfile.JavaClass;
 
@@ -36,7 +36,7 @@ public abstract class ReferenceType extends Type {
     /** Class is non-abstract but not instantiable from the outside
      */
     ReferenceType() {
-        super(Constants.T_OBJECT, "<null object>");
+        super(Const.T_OBJECT, "<null object>");
     }
 
 
@@ -161,7 +161,7 @@ public abstract class ReferenceType extends Type {
             // on one of them "interfaces implemented by arrays" is exchanged with "'Cloneable' or
             // 'java.io.Serializable'"
             if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
-                for (String element : Constants.getInterfacesImplementedByArrays()) {
+                for (String element : Const.getInterfacesImplementedByArrays()) {
                     if (T.equals(ObjectType.getInstance(element))) {
                         return true;
                     }

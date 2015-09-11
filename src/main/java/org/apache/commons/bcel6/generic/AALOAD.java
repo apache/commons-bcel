@@ -28,7 +28,7 @@ public class AALOAD extends ArrayInstruction implements StackProducer {
     /** Load reference from array
      */
     public AALOAD() {
-        super(org.apache.commons.bcel6.Constants.AALOAD);
+        super(org.apache.commons.bcel6.Const.AALOAD);
     }
 
 

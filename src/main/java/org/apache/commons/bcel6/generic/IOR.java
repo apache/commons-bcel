@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class IOR extends ArithmeticInstruction {
 
     public IOR() {
-        super(org.apache.commons.bcel6.Constants.IOR);
+        super(org.apache.commons.bcel6.Const.IOR);
     }
 
 

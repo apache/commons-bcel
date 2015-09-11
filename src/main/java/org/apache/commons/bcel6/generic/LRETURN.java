@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class LRETURN extends ReturnInstruction {
 
     public LRETURN() {
-        super(org.apache.commons.bcel6.Constants.LRETURN);
+        super(org.apache.commons.bcel6.Const.LRETURN);
     }
 
 

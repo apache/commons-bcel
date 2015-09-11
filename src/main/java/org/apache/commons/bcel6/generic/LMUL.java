@@ -27,7 +27,7 @@ package org.apache.commons.bcel6.generic;
 public class LMUL extends ArithmeticInstruction {
 
     public LMUL() {
-        super(org.apache.commons.bcel6.Constants.LMUL);
+        super(org.apache.commons.bcel6.Const.LMUL);
     }
 
 

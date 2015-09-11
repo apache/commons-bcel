@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class FNEG extends ArithmeticInstruction {
 
     public FNEG() {
-        super(org.apache.commons.bcel6.Constants.FNEG);
+        super(org.apache.commons.bcel6.Const.FNEG);
     }
 
 

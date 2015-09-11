@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class represents a BootstrapMethods attribute.
@@ -50,7 +50,7 @@ public class BootstrapMethods extends Attribute {
      * @param constant_pool Array of constants
      */
     public BootstrapMethods(int name_index, int length, BootstrapMethod[] bootstrap_methods, ConstantPool constant_pool) {
-        super(Constants.ATTR_BOOTSTRAP_METHODS, name_index, length, constant_pool);
+        super(Const.ATTR_BOOTSTRAP_METHODS, name_index, length, constant_pool);
         this.bootstrap_methods = bootstrap_methods;
     }
 

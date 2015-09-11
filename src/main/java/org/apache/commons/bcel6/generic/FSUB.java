@@ -28,7 +28,7 @@ public class FSUB extends ArithmeticInstruction {
     /** Substract floats
      */
     public FSUB() {
-        super(org.apache.commons.bcel6.Constants.FSUB);
+        super(org.apache.commons.bcel6.Const.FSUB);
     }
 
 

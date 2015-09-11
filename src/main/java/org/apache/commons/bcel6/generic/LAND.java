@@ -27,7 +27,7 @@ package org.apache.commons.bcel6.generic;
 public class LAND extends ArithmeticInstruction {
 
     public LAND() {
-        super(org.apache.commons.bcel6.Constants.LAND);
+        super(org.apache.commons.bcel6.Const.LAND);
     }
 
 

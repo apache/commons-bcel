@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * represents one annotation in the annotation table
@@ -95,7 +95,7 @@ public class AnnotationEntry implements Node {
      * @return the annotation type name
      */
     public String getAnnotationType() {
-        final ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(type_index, Constants.CONSTANT_Utf8);
+        final ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(type_index, Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 

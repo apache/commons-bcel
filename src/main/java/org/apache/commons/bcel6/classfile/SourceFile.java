@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a reference
@@ -74,7 +74,7 @@ public final class SourceFile extends Attribute {
      * many cases, the JVM.
      */
     public SourceFile(int name_index, int length, int sourcefile_index, ConstantPool constant_pool) {
-        super(Constants.ATTR_SOURCE_FILE, name_index, length, constant_pool);
+        super(Const.ATTR_SOURCE_FILE, name_index, length, constant_pool);
         this.sourcefile_index = sourcefile_index;
     }
 
@@ -126,7 +126,7 @@ public final class SourceFile extends Attribute {
      */
     public final String getSourceFileName() {
         ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(sourcefile_index,
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 

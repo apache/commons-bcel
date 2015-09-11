@@ -28,7 +28,7 @@ public class IADD extends ArithmeticInstruction {
     /** Add ints
      */
     public IADD() {
-        super(org.apache.commons.bcel6.Constants.IADD);
+        super(org.apache.commons.bcel6.Const.IADD);
     }
 
 

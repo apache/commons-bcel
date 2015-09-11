@@ -30,7 +30,7 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
     /** Get length of array
      */
     public ARRAYLENGTH() {
-        super(org.apache.commons.bcel6.Constants.ARRAYLENGTH, (short) 1);
+        super(org.apache.commons.bcel6.Const.ARRAYLENGTH, (short) 1);
     }
 
 

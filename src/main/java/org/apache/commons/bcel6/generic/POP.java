@@ -27,7 +27,7 @@ package org.apache.commons.bcel6.generic;
 public class POP extends StackInstruction implements PopInstruction {
 
     public POP() {
-        super(org.apache.commons.bcel6.Constants.POP);
+        super(org.apache.commons.bcel6.Const.POP);
     }
 
 

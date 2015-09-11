@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class ISHL extends ArithmeticInstruction {
 
     public ISHL() {
-        super(org.apache.commons.bcel6.Constants.ISHL);
+        super(org.apache.commons.bcel6.Const.ISHL);
     }
 
 

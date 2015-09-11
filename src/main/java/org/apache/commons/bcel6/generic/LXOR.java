@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class LXOR extends ArithmeticInstruction {
 
     public LXOR() {
-        super(org.apache.commons.bcel6.Constants.LXOR);
+        super(org.apache.commons.bcel6.Const.LXOR);
     }
 
 

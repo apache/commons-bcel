@@ -28,7 +28,7 @@ public class BASTORE extends ArrayInstruction implements StackConsumer {
     /** Store byte or boolean into array
      */
     public BASTORE() {
-        super(org.apache.commons.bcel6.Constants.BASTORE);
+        super(org.apache.commons.bcel6.Const.BASTORE);
     }
 
 

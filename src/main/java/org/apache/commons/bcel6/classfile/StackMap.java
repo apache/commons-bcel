@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class represents a stack map attribute used for
@@ -49,7 +49,7 @@ public final class StackMap extends Attribute {
      * @param constant_pool Array of constants
      */
     public StackMap(int name_index, int length, StackMapEntry[] map, ConstantPool constant_pool) {
-        super(Constants.ATTR_STACK_MAP, name_index, length, constant_pool);
+        super(Const.ATTR_STACK_MAP, name_index, length, constant_pool);
         this.map = map;
     }
 

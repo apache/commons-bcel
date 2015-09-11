@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class represents a MethodParameters attribute.
@@ -35,7 +35,7 @@ public class MethodParameters extends Attribute {
     private MethodParameter[] parameters = new MethodParameter[0];
 
     MethodParameters(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
-        super(Constants.ATTR_METHOD_PARAMETERS, name_index, length, constant_pool);
+        super(Const.ATTR_METHOD_PARAMETERS, name_index, length, constant_pool);
 
         int parameters_count = input.readUnsignedByte();
         parameters = new MethodParameter[parameters_count];

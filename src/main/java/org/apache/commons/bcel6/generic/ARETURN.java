@@ -29,7 +29,7 @@ public class ARETURN extends ReturnInstruction {
      * Return reference from method
      */
     public ARETURN() {
-        super(org.apache.commons.bcel6.Constants.ARETURN);
+        super(org.apache.commons.bcel6.Const.ARETURN);
     }
 
 

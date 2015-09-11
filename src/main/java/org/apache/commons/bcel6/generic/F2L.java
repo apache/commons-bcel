@@ -28,7 +28,7 @@ public class F2L extends ConversionInstruction {
     /** Convert float to long
      */
     public F2L() {
-        super(org.apache.commons.bcel6.Constants.F2L);
+        super(org.apache.commons.bcel6.Const.F2L);
     }
 
 

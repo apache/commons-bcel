@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class I2S extends ConversionInstruction {
 
     public I2S() {
-        super(org.apache.commons.bcel6.Constants.I2S);
+        super(org.apache.commons.bcel6.Const.I2S);
     }
 
 

@@ -45,7 +45,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
 
 
     public NEWARRAY(byte type) {
-        super(org.apache.commons.bcel6.Constants.NEWARRAY, (short) 2);
+        super(org.apache.commons.bcel6.Const.NEWARRAY, (short) 2);
         this.type = type;
     }
 
@@ -87,7 +87,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      */
     @Override
     public String toString( boolean verbose ) {
-        return super.toString(verbose) + " " + org.apache.commons.bcel6.Constants.getTypeName(type);
+        return super.toString(verbose) + " " + org.apache.commons.bcel6.Const.getTypeName(type);
     }
 
 

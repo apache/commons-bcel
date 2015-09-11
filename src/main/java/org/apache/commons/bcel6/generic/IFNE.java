@@ -35,7 +35,7 @@ public class IFNE extends IfInstruction {
 
 
     public IFNE(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IFNE, target);
+        super(org.apache.commons.bcel6.Const.IFNE, target);
     }
 
 

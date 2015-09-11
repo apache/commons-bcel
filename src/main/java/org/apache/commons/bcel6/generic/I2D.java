@@ -28,7 +28,7 @@ public class I2D extends ConversionInstruction {
     /** Convert int to double
      */
     public I2D() {
-        super(org.apache.commons.bcel6.Constants.I2D);
+        super(org.apache.commons.bcel6.Const.I2D);
     }
 
 

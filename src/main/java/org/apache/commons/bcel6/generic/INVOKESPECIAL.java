@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
@@ -45,7 +45,7 @@ public class INVOKESPECIAL extends InvokeInstruction {
 
 
     public INVOKESPECIAL(int index) {
-        super(Constants.INVOKESPECIAL, index);
+        super(Const.INVOKESPECIAL, index);
     }
 
 

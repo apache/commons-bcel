@@ -35,7 +35,7 @@ public class IFGT extends IfInstruction {
 
 
     public IFGT(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IFGT, target);
+        super(org.apache.commons.bcel6.Const.IFGT, target);
     }
 
 

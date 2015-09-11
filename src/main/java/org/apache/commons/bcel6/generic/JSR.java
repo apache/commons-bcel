@@ -36,7 +36,7 @@ public class JSR extends JsrInstruction implements VariableLengthInstruction {
 
 
     public JSR(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.JSR, target);
+        super(org.apache.commons.bcel6.Const.JSR, target);
     }
 
 
@@ -47,7 +47,7 @@ public class JSR extends JsrInstruction implements VariableLengthInstruction {
     @Override
     public void dump( DataOutputStream out ) throws IOException {
         super.setIndex(getTargetOffset());
-        if (super.getOpcode() == org.apache.commons.bcel6.Constants.JSR) {
+        if (super.getOpcode() == org.apache.commons.bcel6.Const.JSR) {
             super.dump(out);
         } else { // JSR_W
             super.setIndex(getTargetOffset());
@@ -62,7 +62,7 @@ public class JSR extends JsrInstruction implements VariableLengthInstruction {
         int i = getTargetOffset(); // Depending on old position value
         setPosition(getPosition() + offset); // Position may be shifted by preceding expansions
         if (Math.abs(i) >= (Short.MAX_VALUE - max_offset)) { // to large for short (estimate)
-            super.setOpcode(org.apache.commons.bcel6.Constants.JSR_W);
+            super.setOpcode(org.apache.commons.bcel6.Const.JSR_W);
             short old_length = (short) super.getLength();
             super.setLength(5);
             return super.getLength() - old_length;

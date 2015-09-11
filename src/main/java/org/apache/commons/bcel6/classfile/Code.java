@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class represents a chunk of Java byte code contained in a
@@ -110,7 +110,7 @@ public final class Code extends Attribute {
      */
     public Code(int name_index, int length, int max_stack, int max_locals, byte[] code,
             CodeException[] exception_table, Attribute[] attributes, ConstantPool constant_pool) {
-        super(Constants.ATTR_CODE, name_index, length, constant_pool);
+        super(Const.ATTR_CODE, name_index, length, constant_pool);
         this.max_stack = max_stack;
         this.max_locals = max_locals;
         this.code = code != null ? code : new byte[0];

@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This class represents the constant pool, i.e., a table of constants, of
@@ -72,7 +72,7 @@ public class ConstantPool implements Cloneable, Node {
              * Thus we have to increment the index counter.
              */
             tag = constant_pool[i].getTag();
-            if ((tag == Constants.CONSTANT_Double) || (tag == Constants.CONSTANT_Long)) {
+            if ((tag == Const.CONSTANT_Double) || (tag == Const.CONSTANT_Long)) {
                 i++;
             }
         }
@@ -103,61 +103,61 @@ public class ConstantPool implements Cloneable, Node {
         int i;
         byte tag = c.getTag();
         switch (tag) {
-            case Constants.CONSTANT_Class:
+            case Const.CONSTANT_Class:
                 i = ((ConstantClass) c).getNameIndex();
-                c = getConstant(i, Constants.CONSTANT_Utf8);
+                c = getConstant(i, Const.CONSTANT_Utf8);
                 str = Utility.compactClassName(((ConstantUtf8) c).getBytes(), false);
                 break;
-            case Constants.CONSTANT_String:
+            case Const.CONSTANT_String:
                 i = ((ConstantString) c).getStringIndex();
-                c = getConstant(i, Constants.CONSTANT_Utf8);
+                c = getConstant(i, Const.CONSTANT_Utf8);
                 str = "\"" + escape(((ConstantUtf8) c).getBytes()) + "\"";
                 break;
-            case Constants.CONSTANT_Utf8:
+            case Const.CONSTANT_Utf8:
                 str = ((ConstantUtf8) c).getBytes();
                 break;
-            case Constants.CONSTANT_Double:
+            case Const.CONSTANT_Double:
                 str = String.valueOf(((ConstantDouble) c).getBytes());
                 break;
-            case Constants.CONSTANT_Float:
+            case Const.CONSTANT_Float:
                 str = String.valueOf(((ConstantFloat) c).getBytes());
                 break;
-            case Constants.CONSTANT_Long:
+            case Const.CONSTANT_Long:
                 str = String.valueOf(((ConstantLong) c).getBytes());
                 break;
-            case Constants.CONSTANT_Integer:
+            case Const.CONSTANT_Integer:
                 str = String.valueOf(((ConstantInteger) c).getBytes());
                 break;
-            case Constants.CONSTANT_NameAndType:
+            case Const.CONSTANT_NameAndType:
                 str = constantToString(((ConstantNameAndType) c).getNameIndex(),
-                        Constants.CONSTANT_Utf8)
+                        Const.CONSTANT_Utf8)
                         + ":" + constantToString(((ConstantNameAndType) c).getSignatureIndex(),
-                        Constants.CONSTANT_Utf8);
+                        Const.CONSTANT_Utf8);
                 break;
-            case Constants.CONSTANT_InterfaceMethodref:
-            case Constants.CONSTANT_Methodref:
-            case Constants.CONSTANT_Fieldref:
-                str = constantToString(((ConstantCP) c).getClassIndex(), Constants.CONSTANT_Class)
+            case Const.CONSTANT_InterfaceMethodref:
+            case Const.CONSTANT_Methodref:
+            case Const.CONSTANT_Fieldref:
+                str = constantToString(((ConstantCP) c).getClassIndex(), Const.CONSTANT_Class)
                         + "." + constantToString(((ConstantCP) c).getNameAndTypeIndex(),
-                        Constants.CONSTANT_NameAndType);
+                        Const.CONSTANT_NameAndType);
                 break;
-            case Constants.CONSTANT_MethodHandle:
+            case Const.CONSTANT_MethodHandle:
                 // Note that the ReferenceIndex may point to a Fieldref, Methodref or
                 // InterfaceMethodref - so we need to peek ahead to get the actual type.
                 ConstantMethodHandle cmh = (ConstantMethodHandle) c;
-                str = Constants.getMethodHandleName(cmh.getReferenceKind())
+                str = Const.getMethodHandleName(cmh.getReferenceKind())
                         + " " + constantToString(cmh.getReferenceIndex(),
                         getConstant(cmh.getReferenceIndex()).getTag());
                 break;            
-            case Constants.CONSTANT_MethodType:
+            case Const.CONSTANT_MethodType:
                 ConstantMethodType cmt = (ConstantMethodType) c;
-                str = constantToString(cmt.getDescriptorIndex(), Constants.CONSTANT_Utf8);
+                str = constantToString(cmt.getDescriptorIndex(), Const.CONSTANT_Utf8);
                 break;
-            case Constants.CONSTANT_InvokeDynamic:
+            case Const.CONSTANT_InvokeDynamic:
                 ConstantInvokeDynamic cid = (ConstantInvokeDynamic) c;
                 str = cid.getBootstrapMethodAttrIndex()
                         + ":" + constantToString(cid.getNameAndTypeIndex(),
-                        Constants.CONSTANT_NameAndType);
+                        Const.CONSTANT_NameAndType);
                 break;
             default: // Never reached
                 throw new RuntimeException("Unknown constant type " + tag);
@@ -258,7 +258,7 @@ public class ConstantPool implements Cloneable, Node {
             throw new ClassFormatException("Constant pool at index " + index + " is null.");
         }
         if (c.getTag() != tag) {
-            throw new ClassFormatException("Expected class `" + Constants.getConstantName(tag)
+            throw new ClassFormatException("Expected class `" + Const.getConstantName(tag)
                     + "' at index " + index + " and got " + c);
         }
         return c;
@@ -299,17 +299,17 @@ public class ConstantPool implements Cloneable, Node {
          * variable name or by subclassing.
          */
         switch (tag) {
-            case Constants.CONSTANT_Class:
+            case Const.CONSTANT_Class:
                 i = ((ConstantClass) c).getNameIndex();
                 break;
-            case Constants.CONSTANT_String:
+            case Const.CONSTANT_String:
                 i = ((ConstantString) c).getStringIndex();
                 break;
             default:
                 throw new RuntimeException("getConstantString called with illegal tag " + tag);
         }
         // Finally get the string from the constant pool
-        c = getConstant(i, Constants.CONSTANT_Utf8);
+        c = getConstant(i, Const.CONSTANT_Utf8);
         return ((ConstantUtf8) c).getBytes();
     }
 

@@ -28,7 +28,7 @@ public class ISUB extends ArithmeticInstruction {
     /** Substract ints
      */
     public ISUB() {
-        super(org.apache.commons.bcel6.Constants.ISUB);
+        super(org.apache.commons.bcel6.Const.ISUB);
     }
 
 

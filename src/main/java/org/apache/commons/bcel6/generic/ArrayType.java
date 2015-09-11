@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * Denotes array type, such as int[][]
@@ -56,17 +56,17 @@ public final class ArrayType extends ReferenceType {
      * @param type type of array (may be an array itself)
      */
     public ArrayType(Type type, int dimensions) {
-        super(Constants.T_ARRAY, "<dummy>");
-        if ((dimensions < 1) || (dimensions > Constants.MAX_BYTE)) {
+        super(Const.T_ARRAY, "<dummy>");
+        if ((dimensions < 1) || (dimensions > Const.MAX_BYTE)) {
             throw new ClassGenException("Invalid number of dimensions: " + dimensions);
         }
         switch (type.getType()) {
-            case Constants.T_ARRAY:
+            case Const.T_ARRAY:
                 ArrayType array = (ArrayType) type;
                 this.dimensions = dimensions + array.dimensions;
                 basic_type = array.basic_type;
                 break;
-            case Constants.T_VOID:
+            case Const.T_VOID:
                 throw new ClassGenException("Invalid type: void[]");
             default: // Basic type or reference
                 this.dimensions = dimensions;

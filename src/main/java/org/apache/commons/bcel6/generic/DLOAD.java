@@ -30,7 +30,7 @@ public class DLOAD extends LoadInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     DLOAD() {
-        super(org.apache.commons.bcel6.Constants.DLOAD, org.apache.commons.bcel6.Constants.DLOAD_0);
+        super(org.apache.commons.bcel6.Const.DLOAD, org.apache.commons.bcel6.Const.DLOAD_0);
     }
 
 
@@ -38,7 +38,7 @@ public class DLOAD extends LoadInstruction {
      * @param n index of local variable
      */
     public DLOAD(int n) {
-        super(org.apache.commons.bcel6.Constants.DLOAD, org.apache.commons.bcel6.Constants.DLOAD_0, n);
+        super(org.apache.commons.bcel6.Const.DLOAD, org.apache.commons.bcel6.Const.DLOAD_0, n);
     }
 
 

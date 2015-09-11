@@ -28,7 +28,7 @@ public class FADD extends ArithmeticInstruction {
     /** Add floats
      */
     public FADD() {
-        super(org.apache.commons.bcel6.Constants.FADD);
+        super(org.apache.commons.bcel6.Const.FADD);
     }
 
 

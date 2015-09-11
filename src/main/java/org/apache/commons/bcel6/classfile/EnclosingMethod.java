@@ -20,7 +20,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * This attribute exists for local or 
@@ -50,7 +50,7 @@ public class EnclosingMethod extends Attribute {
     }
 
     private EnclosingMethod(int nameIndex, int len, int classIdx,int methodIdx, ConstantPool cpool) {
-        super(Constants.ATTR_ENCLOSING_METHOD, nameIndex, len, cpool);
+        super(Const.ATTR_ENCLOSING_METHOD, nameIndex, len, cpool);
         classIndex  = classIdx;
         methodIndex = methodIdx;
     }
@@ -74,7 +74,7 @@ public class EnclosingMethod extends Attribute {
 
     public final ConstantClass getEnclosingClass() {
         ConstantClass c = 
-            (ConstantClass)super.getConstantPool().getConstant(classIndex,Constants.CONSTANT_Class);
+            (ConstantClass)super.getConstantPool().getConstant(classIndex,Const.CONSTANT_Class);
         return c;
     }
 
@@ -83,7 +83,7 @@ public class EnclosingMethod extends Attribute {
             return null;
         }
         ConstantNameAndType nat = 
-            (ConstantNameAndType)super.getConstantPool().getConstant(methodIndex,Constants.CONSTANT_NameAndType);
+            (ConstantNameAndType)super.getConstantPool().getConstant(methodIndex,Const.CONSTANT_NameAndType);
         return nat;
     }
 

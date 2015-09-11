@@ -28,7 +28,7 @@ public class I2B extends ConversionInstruction {
     /** Convert int to byte
      */
     public I2B() {
-        super(org.apache.commons.bcel6.Constants.I2B);
+        super(org.apache.commons.bcel6.Const.I2B);
     }
 
 

@@ -25,7 +25,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.Repository;
 import org.apache.commons.bcel6.classfile.Attribute;
 import org.apache.commons.bcel6.classfile.ClassFormatException;
@@ -438,7 +438,7 @@ public final class Pass2Verifier extends PassVerifier {
         /////////////////////////////
         @Override
         public void visitConstantClass(ConstantClass obj){
-            if (obj.getTag() != Constants.CONSTANT_Class){
+            if (obj.getTag() != Const.CONSTANT_Class){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
@@ -446,7 +446,7 @@ public final class Pass2Verifier extends PassVerifier {
         }
         @Override
         public void visitConstantFieldref(ConstantFieldref obj){
-            if (obj.getTag() != Constants.CONSTANT_Fieldref){
+            if (obj.getTag() != Const.CONSTANT_Fieldref){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             checkIndex(obj, obj.getClassIndex(), CONST_Class);
@@ -454,7 +454,7 @@ public final class Pass2Verifier extends PassVerifier {
         }
         @Override
         public void visitConstantMethodref(ConstantMethodref obj){
-            if (obj.getTag() != Constants.CONSTANT_Methodref){
+            if (obj.getTag() != Const.CONSTANT_Methodref){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             checkIndex(obj, obj.getClassIndex(), CONST_Class);
@@ -462,7 +462,7 @@ public final class Pass2Verifier extends PassVerifier {
         }
         @Override
         public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj){
-            if (obj.getTag() != Constants.CONSTANT_InterfaceMethodref){
+            if (obj.getTag() != Const.CONSTANT_InterfaceMethodref){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             checkIndex(obj, obj.getClassIndex(), CONST_Class);
@@ -470,42 +470,42 @@ public final class Pass2Verifier extends PassVerifier {
         }
         @Override
         public void visitConstantString(ConstantString obj){
-            if (obj.getTag() != Constants.CONSTANT_String){
+            if (obj.getTag() != Const.CONSTANT_String){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             checkIndex(obj, obj.getStringIndex(), CONST_Utf8);
         }
         @Override
         public void visitConstantInteger(ConstantInteger obj){
-            if (obj.getTag() != Constants.CONSTANT_Integer){
+            if (obj.getTag() != Const.CONSTANT_Integer){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             // no indices to check
         }
         @Override
         public void visitConstantFloat(ConstantFloat obj){
-            if (obj.getTag() != Constants.CONSTANT_Float){
+            if (obj.getTag() != Const.CONSTANT_Float){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             //no indices to check
         }
         @Override
         public void visitConstantLong(ConstantLong obj){
-            if (obj.getTag() != Constants.CONSTANT_Long){
+            if (obj.getTag() != Const.CONSTANT_Long){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             //no indices to check
         }
         @Override
         public void visitConstantDouble(ConstantDouble obj){
-            if (obj.getTag() != Constants.CONSTANT_Double){
+            if (obj.getTag() != Const.CONSTANT_Double){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             //no indices to check
         }
         @Override
         public void visitConstantNameAndType(ConstantNameAndType obj){
-            if (obj.getTag() != Constants.CONSTANT_NameAndType){
+            if (obj.getTag() != Const.CONSTANT_NameAndType){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
@@ -514,7 +514,7 @@ public final class Pass2Verifier extends PassVerifier {
         }
         @Override
         public void visitConstantUtf8(ConstantUtf8 obj){
-            if (obj.getTag() != Constants.CONSTANT_Utf8){
+            if (obj.getTag() != Const.CONSTANT_Utf8){
                 throw new ClassConstraintException("Wrong constant tag in '"+tostring(obj)+"'.");
             }
             //no indices to check
@@ -561,8 +561,8 @@ public final class Pass2Verifier extends PassVerifier {
                 }
             }
 
-            if ((obj.getAccessFlags() & ~(Constants.ACC_PUBLIC|Constants.ACC_PRIVATE|Constants.ACC_PROTECTED|Constants.ACC_STATIC|
-                                          Constants.ACC_FINAL|Constants.ACC_VOLATILE|Constants.ACC_TRANSIENT)) > 0){
+            if ((obj.getAccessFlags() & ~(Const.ACC_PUBLIC|Const.ACC_PRIVATE|Const.ACC_PROTECTED|Const.ACC_STATIC|
+                                          Const.ACC_FINAL|Const.ACC_VOLATILE|Const.ACC_TRANSIENT)) > 0){
                 addMessage("Field '"+tostring(obj)+
                     "' has access flag(s) other than ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED,"+
                         " ACC_STATIC, ACC_FINAL, ACC_VOLATILE, ACC_TRANSIENT set (ignored).");
@@ -672,7 +672,7 @@ public final class Pass2Verifier extends PassVerifier {
             }
 
             // Nearly forgot this! Funny return values are allowed, but a non-empty arguments list makes a different method out of it!
-            if (name.equals(Constants.STATIC_INITIALIZER_NAME) && (ts.length != 0)){
+            if (name.equals(Const.STATIC_INITIALIZER_NAME) && (ts.length != 0)){
                 throw new ClassConstraintException(
                     "Method '"+tostring(obj)+"' has illegal name '"+name+"'."+
                     " Its name resembles the class or interface initialization method"+
@@ -723,7 +723,7 @@ public final class Pass2Verifier extends PassVerifier {
                 }
 
                 // A specific instance initialization method... (vmspec2,Page 116).
-                if (name.equals(Constants.CONSTRUCTOR_NAME)) {
+                if (name.equals(Const.CONSTRUCTOR_NAME)) {
                     //..may have at most one of ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC set: is checked above.
                     //..may also have ACC_STRICT set, but none of the other flags in table 4.5 (vmspec2, page 115)
                     if (obj.isStatic() ||
@@ -737,8 +737,8 @@ public final class Pass2Verifier extends PassVerifier {
                 }
             }
             else{ // isInterface!
-                if (!name.equals(Constants.STATIC_INITIALIZER_NAME)){//vmspec2, p.116, 2nd paragraph
-                    if (jc.getMajor() >= Constants.MAJOR_1_8) {
+                if (!name.equals(Const.STATIC_INITIALIZER_NAME)){//vmspec2, p.116, 2nd paragraph
+                    if (jc.getMajor() >= Const.MAJOR_1_8) {
                         if (!(obj.isPublic() ^ obj.isPrivate())) {
                             throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have" +
                                 " exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
@@ -776,8 +776,8 @@ public final class Pass2Verifier extends PassVerifier {
             }
 
             if ((obj.getAccessFlags() & 
-                    ~(Constants.ACC_PUBLIC|Constants.ACC_PRIVATE|Constants.ACC_PROTECTED|Constants.ACC_STATIC|Constants.ACC_FINAL|
-                      Constants.ACC_SYNCHRONIZED|Constants.ACC_NATIVE|Constants.ACC_ABSTRACT|Constants.ACC_STRICT)) > 0){
+                    ~(Const.ACC_PUBLIC|Const.ACC_PRIVATE|Const.ACC_PROTECTED|Const.ACC_STATIC|Const.ACC_FINAL|
+                      Const.ACC_SYNCHRONIZED|Const.ACC_NATIVE|Const.ACC_ABSTRACT|Const.ACC_STRICT)) > 0){
                 addMessage("Method '"+tostring(obj)+"' has access flag(s) other than"+
                     " ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL,"+
                         " ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT set (ignored).");
@@ -893,8 +893,8 @@ public final class Pass2Verifier extends PassVerifier {
                     checkIndex(obj, innername_idx, CONST_Utf8);
                 }
                 int acc = ic.getInnerAccessFlags();
-                acc = acc & (~ (Constants.ACC_PUBLIC | Constants.ACC_PRIVATE | Constants.ACC_PROTECTED |
-                                Constants.ACC_STATIC | Constants.ACC_FINAL | Constants.ACC_INTERFACE | Constants.ACC_ABSTRACT));
+                acc = acc & (~ (Const.ACC_PUBLIC | Const.ACC_PRIVATE | Const.ACC_PROTECTED |
+                                Const.ACC_STATIC | Const.ACC_FINAL | Const.ACC_INTERFACE | Const.ACC_ABSTRACT));
                 if (acc != 0){
                     addMessage(
                         "Unknown access flag for inner class '"+tostring(ic)+"' set (InnerClasses attribute '"+tostring(obj)+"').");
@@ -1313,7 +1313,7 @@ public final class Pass2Verifier extends PassVerifier {
 
         @Override
         public void visitConstantFieldref(ConstantFieldref obj){
-            if (obj.getTag() != Constants.CONSTANT_Fieldref){
+            if (obj.getTag() != Const.CONSTANT_Fieldref){
                 throw new ClassConstraintException("ConstantFieldref '"+tostring(obj)+"' has wrong tag!");
             }
             int name_and_type_index = obj.getNameAndTypeIndex();
@@ -1342,7 +1342,7 @@ public final class Pass2Verifier extends PassVerifier {
 
         @Override
         public void visitConstantMethodref(ConstantMethodref obj){
-            if (obj.getTag() != Constants.CONSTANT_Methodref){
+            if (obj.getTag() != Const.CONSTANT_Methodref){
                 throw new ClassConstraintException("ConstantMethodref '"+tostring(obj)+"' has wrong tag!");
             }
             int name_and_type_index = obj.getNameAndTypeIndex();
@@ -1364,7 +1364,7 @@ public final class Pass2Verifier extends PassVerifier {
 
             try{
                 Type   t  = Type.getReturnType(sig);
-                if ( name.equals(Constants.CONSTRUCTOR_NAME) && (t != Type.VOID) ){
+                if ( name.equals(Const.CONSTRUCTOR_NAME) && (t != Type.VOID) ){
                     throw new ClassConstraintException("Instance initialization method must have VOID return type.");
                 }
             }
@@ -1375,7 +1375,7 @@ public final class Pass2Verifier extends PassVerifier {
 
         @Override
         public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj){
-            if (obj.getTag() != Constants.CONSTANT_InterfaceMethodref){
+            if (obj.getTag() != Const.CONSTANT_InterfaceMethodref){
                 throw new ClassConstraintException("ConstantInterfaceMethodref '"+tostring(obj)+"' has wrong tag!");
             }
             int name_and_type_index = obj.getNameAndTypeIndex();
@@ -1396,8 +1396,8 @@ public final class Pass2Verifier extends PassVerifier {
 
             try{
                 Type   t  = Type.getReturnType(sig);
-                if ( name.equals(Constants.STATIC_INITIALIZER_NAME) && (t != Type.VOID) ){
-                    addMessage("Class or interface initialization method '"+Constants.STATIC_INITIALIZER_NAME+
+                if ( name.equals(Const.STATIC_INITIALIZER_NAME) && (t != Type.VOID) ){
+                    addMessage("Class or interface initialization method '"+Const.STATIC_INITIALIZER_NAME+
                         "' usually has VOID return type instead of '"+t+
                         "'. Note this is really not a requirement of The Java Virtual Machine Specification, Second Edition.");
                 }
@@ -1435,9 +1435,9 @@ public final class Pass2Verifier extends PassVerifier {
         }
 
         if (allowStaticInit){
-            return name.equals(Constants.CONSTRUCTOR_NAME) || name.equals(Constants.STATIC_INITIALIZER_NAME);
+            return name.equals(Const.CONSTRUCTOR_NAME) || name.equals(Const.STATIC_INITIALIZER_NAME);
         }
-        return name.equals(Constants.CONSTRUCTOR_NAME);
+        return name.equals(Const.CONSTRUCTOR_NAME);
     }
 
     /**

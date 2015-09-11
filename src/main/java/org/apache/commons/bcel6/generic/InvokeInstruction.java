@@ -19,7 +19,7 @@ package org.apache.commons.bcel6.generic;
 
 import java.util.StringTokenizer;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.Constant;
 import org.apache.commons.bcel6.classfile.ConstantCP;
 import org.apache.commons.bcel6.classfile.ConstantPool;
@@ -55,7 +55,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     public String toString( ConstantPool cp ) {
         Constant c = cp.getConstant(super.getIndex());
         StringTokenizer tok = new StringTokenizer(cp.constantToString(c));
-        return Constants.getOpcodeName(super.getOpcode()) + " " + tok.nextToken().replace('.', '/')
+        return Const.getOpcodeName(super.getOpcode()) + " " + tok.nextToken().replace('.', '/')
                 + tok.nextToken();
     }
 
@@ -68,7 +68,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     @Override
     public int consumeStack( ConstantPoolGen cpg ) {
         int sum;
-        if ((super.getOpcode() == Constants.INVOKESTATIC) || (super.getOpcode() == Constants.INVOKEDYNAMIC)) {
+        if ((super.getOpcode() == Const.INVOKESTATIC) || (super.getOpcode() == Const.INVOKEDYNAMIC)) {
             sum = 0;
         } else {
             sum = 1; // this reference
@@ -130,7 +130,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     public String getClassName( ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
         ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
-        String className = cp.getConstantString(cmr.getClassIndex(), Constants.CONSTANT_Class);
+        String className = cp.getConstantString(cmr.getClassIndex(), Const.CONSTANT_Class);
         if (className.startsWith("[")) {
             throw new IllegalArgumentException("Cannot be used on an array type");
         }

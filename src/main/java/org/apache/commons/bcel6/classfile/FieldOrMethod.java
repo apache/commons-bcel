@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * Abstract super class for fields and methods.
@@ -194,7 +194,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     public final String getName() {
         ConstantUtf8 c;
-        c = (ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8);
+        c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 
@@ -204,7 +204,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     public final String getSignature() {
         ConstantUtf8 c;
-        c = (ConstantUtf8) constant_pool.getConstant(signature_index, Constants.CONSTANT_Utf8);
+        c = (ConstantUtf8) constant_pool.getConstant(signature_index, Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 

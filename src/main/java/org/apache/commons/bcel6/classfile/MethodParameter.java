@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * Entry of the parameters table.
@@ -68,7 +68,7 @@ public class MethodParameter implements Cloneable {
         if (name_index == 0) {
             return null;
         }
-        return ((ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8)).getBytes();
+        return ((ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8)).getBytes();
        }
 
     public int getAccessFlags() {
@@ -80,15 +80,15 @@ public class MethodParameter implements Cloneable {
     }
 
     public boolean isFinal() {
-        return (access_flags & Constants.ACC_FINAL) != 0;
+        return (access_flags & Const.ACC_FINAL) != 0;
     }
 
     public boolean isSynthetic() {
-        return (access_flags & Constants.ACC_SYNTHETIC) != 0;
+        return (access_flags & Const.ACC_SYNTHETIC) != 0;
     }
 
     public boolean isMandated() {
-        return (access_flags & Constants.ACC_MANDATED) != 0;
+        return (access_flags & Const.ACC_MANDATED) != 0;
     }
 
     /**

@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
@@ -40,7 +40,7 @@ public class GETFIELD extends FieldInstruction implements ExceptionThrower, Stac
 
 
     public GETFIELD(int index) {
-        super(Constants.GETFIELD, index);
+        super(Const.GETFIELD, index);
     }
 
 

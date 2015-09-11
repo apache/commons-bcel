@@ -35,7 +35,7 @@ public class IFLT extends IfInstruction {
 
 
     public IFLT(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IFLT, target);
+        super(org.apache.commons.bcel6.Const.IFLT, target);
     }
 
 

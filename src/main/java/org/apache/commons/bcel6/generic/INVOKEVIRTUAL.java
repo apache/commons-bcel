@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.ExceptionConst;
 
 /** 
@@ -44,7 +44,7 @@ public class INVOKEVIRTUAL extends InvokeInstruction {
 
 
     public INVOKEVIRTUAL(int index) {
-        super(Constants.INVOKEVIRTUAL, index);
+        super(Const.INVOKEVIRTUAL, index);
     }
 
 

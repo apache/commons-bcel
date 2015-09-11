@@ -21,7 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.Attribute;
 import org.apache.commons.bcel6.classfile.Code;
 import org.apache.commons.bcel6.classfile.ConstantValue;
@@ -89,7 +89,7 @@ final class MethodHTML {
             attribute_html.writeAttribute(attributes[i], name + "@" + i);
         }
         for (int i = 0; i < attributes.length; i++) {
-            if (attributes[i].getTag() == Constants.ATTR_CONSTANT_VALUE) { // Default value
+            if (attributes[i].getTag() == Const.ATTR_CONSTANT_VALUE) { // Default value
                 String str = ((ConstantValue) attributes[i]).toString();
                 // Reference attribute in _attributes.html
                 file.print("<TD>= <A HREF=\"" + class_name + "_attributes.html#" + name + "@" + i
@@ -137,7 +137,7 @@ final class MethodHTML {
             attribute_html.writeAttribute(attributes[i], "method" + method_number + "@" + i,
                     method_number);
             byte tag = attributes[i].getTag();
-            if (tag == Constants.ATTR_EXCEPTIONS) {
+            if (tag == Const.ATTR_EXCEPTIONS) {
                 file.print("<TR VALIGN=TOP><TD COLSPAN=2></TD><TH ALIGN=LEFT>throws</TH><TD>");
                 int[] exceptions = ((ExceptionTable) attributes[i]).getExceptionIndexTable();
                 for (int j = 0; j < exceptions.length; j++) {
@@ -147,7 +147,7 @@ final class MethodHTML {
                     }
                 }
                 file.println("</TD></TR>");
-            } else if (tag == Constants.ATTR_CODE) {
+            } else if (tag == Const.ATTR_CODE) {
                 Attribute[] c_a = ((Code) attributes[i]).getAttributes();
                 for (int j = 0; j < c_a.length; j++) {
                     attribute_html.writeAttribute(c_a[j], "method" + method_number + "@" + i + "@"

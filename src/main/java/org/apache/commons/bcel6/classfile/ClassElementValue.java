@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * @since 6.0
@@ -46,7 +46,7 @@ public class ClassElementValue extends ElementValue
     public String getClassString()
     {
         ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(idx,
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 
@@ -54,7 +54,7 @@ public class ClassElementValue extends ElementValue
     public String stringifyValue()
     {
         ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(idx,
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         return cu8.getBytes();
     }
 

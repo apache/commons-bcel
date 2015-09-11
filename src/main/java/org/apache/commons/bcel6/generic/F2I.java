@@ -28,7 +28,7 @@ public class F2I extends ConversionInstruction {
     /** Convert float to int
      */
     public F2I() {
-        super(org.apache.commons.bcel6.Constants.F2I);
+        super(org.apache.commons.bcel6.Const.F2I);
     }
 
 

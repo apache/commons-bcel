@@ -28,7 +28,7 @@ public class F2D extends ConversionInstruction {
     /** Convert float to double
      */
     public F2D() {
-        super(org.apache.commons.bcel6.Constants.F2D);
+        super(org.apache.commons.bcel6.Const.F2D);
     }
 
 

@@ -25,7 +25,7 @@ package org.apache.commons.bcel6.generic;
 public class IMPDEP2 extends Instruction {
 
     public IMPDEP2() {
-        super(org.apache.commons.bcel6.Constants.IMPDEP2, (short) 1);
+        super(org.apache.commons.bcel6.Const.IMPDEP2, (short) 1);
     }
 
 

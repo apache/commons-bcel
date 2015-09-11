@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class FCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
     public FCMPG() {
-        super(org.apache.commons.bcel6.Constants.FCMPG, (short) 1);
+        super(org.apache.commons.bcel6.Const.FCMPG, (short) 1);
     }
 
 

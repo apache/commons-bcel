@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class represents a constant pool reference to a method.
@@ -33,7 +33,7 @@ public final class ConstantMethodref extends ConstantCP {
      * Initialize from another object.
      */
     public ConstantMethodref(ConstantMethodref c) {
-        super(Constants.CONSTANT_Methodref, c.getClassIndex(), c.getNameAndTypeIndex());
+        super(Const.CONSTANT_Methodref, c.getClassIndex(), c.getNameAndTypeIndex());
     }
 
 
@@ -44,7 +44,7 @@ public final class ConstantMethodref extends ConstantCP {
      * @throws IOException
      */
     ConstantMethodref(DataInput input) throws IOException {
-        super(Constants.CONSTANT_Methodref, input);
+        super(Const.CONSTANT_Methodref, input);
     }
 
 
@@ -53,7 +53,7 @@ public final class ConstantMethodref extends ConstantCP {
      * @param name_and_type_index and the method signature
      */
     public ConstantMethodref(int class_index, int name_and_type_index) {
-        super(Constants.CONSTANT_Methodref, class_index, name_and_type_index);
+        super(Const.CONSTANT_Methodref, class_index, name_and_type_index);
     }
 
 

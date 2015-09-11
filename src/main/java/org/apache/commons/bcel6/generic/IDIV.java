@@ -30,7 +30,7 @@ public class IDIV extends ArithmeticInstruction implements ExceptionThrower {
     /** Divide ints
      */
     public IDIV() {
-        super(org.apache.commons.bcel6.Constants.IDIV);
+        super(org.apache.commons.bcel6.Const.IDIV);
     }
 
 

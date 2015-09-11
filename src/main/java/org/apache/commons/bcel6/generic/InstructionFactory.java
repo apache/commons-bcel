@@ -17,7 +17,7 @@
  */
 package org.apache.commons.bcel6.generic;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * Instances of this class may be used, e.g., to generate typed
@@ -29,7 +29,7 @@ import org.apache.commons.bcel6.Constants;
  * from the {@link InstructionConst} class.
  *
  * @version $Id$
- * @see Constants
+ * @see Const
  * @see InstructionConst
  */
 public class InstructionFactory {
@@ -80,7 +80,7 @@ public class InstructionFactory {
      * @param arg_types argument types of method
      * @param kind how to invoke, i.e., INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL,
      * or INVOKESPECIAL
-     * @see Constants
+     * @see Const
      */
     public InvokeInstruction createInvoke( String class_name, String name, Type ret_type,
             Type[] arg_types, short kind ) {
@@ -90,19 +90,19 @@ public class InstructionFactory {
         for (Type arg_type : arg_types) {
             nargs += arg_type.getSize();
         }
-        if (kind == Constants.INVOKEINTERFACE) {
+        if (kind == Const.INVOKEINTERFACE) {
             index = cp.addInterfaceMethodref(class_name, name, signature);
         } else {
             index = cp.addMethodref(class_name, name, signature);
         }
         switch (kind) {
-            case Constants.INVOKESPECIAL:
+            case Const.INVOKESPECIAL:
                 return new INVOKESPECIAL(index);
-            case Constants.INVOKEVIRTUAL:
+            case Const.INVOKEVIRTUAL:
                 return new INVOKEVIRTUAL(index);
-            case Constants.INVOKESTATIC:
+            case Const.INVOKESTATIC:
                 return new INVOKESTATIC(index);
-            case Constants.INVOKEINTERFACE:
+            case Const.INVOKEINTERFACE:
                 return new INVOKEINTERFACE(index, nargs + 1);
             default:
                 throw new RuntimeException("Oops: Unknown invoke kind:" + kind);
@@ -238,21 +238,21 @@ public class InstructionFactory {
     public Instruction createAppend( Type type ) {
         byte t = type.getType();
         if (isString(type)) {
-            return createInvoke(append_mos[0], Constants.INVOKEVIRTUAL);
+            return createInvoke(append_mos[0], Const.INVOKEVIRTUAL);
         }
         switch (t) {
-            case Constants.T_BOOLEAN:
-            case Constants.T_CHAR:
-            case Constants.T_FLOAT:
-            case Constants.T_DOUBLE:
-            case Constants.T_BYTE:
-            case Constants.T_SHORT:
-            case Constants.T_INT:
-            case Constants.T_LONG:
-                return createInvoke(append_mos[t], Constants.INVOKEVIRTUAL);
-            case Constants.T_ARRAY:
-            case Constants.T_OBJECT:
-                return createInvoke(append_mos[1], Constants.INVOKEVIRTUAL);
+            case Const.T_BOOLEAN:
+            case Const.T_CHAR:
+            case Const.T_FLOAT:
+            case Const.T_DOUBLE:
+            case Const.T_BYTE:
+            case Const.T_SHORT:
+            case Const.T_INT:
+            case Const.T_LONG:
+                return createInvoke(append_mos[t], Const.INVOKEVIRTUAL);
+            case Const.T_ARRAY:
+            case Const.T_OBJECT:
+                return createInvoke(append_mos[1], Const.INVOKEVIRTUAL);
             default:
                 throw new RuntimeException("Oops: No append for this type? " + type);
         }
@@ -265,20 +265,20 @@ public class InstructionFactory {
      * @param name name of the referenced field
      * @param type  type of field
      * @param kind how to access, i.e., GETFIELD, PUTFIELD, GETSTATIC, PUTSTATIC
-     * @see Constants
+     * @see Const
      */
     public FieldInstruction createFieldAccess( String class_name, String name, Type type, short kind ) {
         int index;
         String signature = type.getSignature();
         index = cp.addFieldref(class_name, name, signature);
         switch (kind) {
-            case Constants.GETFIELD:
+            case Const.GETFIELD:
                 return new GETFIELD(index);
-            case Constants.PUTFIELD:
+            case Const.PUTFIELD:
                 return new PUTFIELD(index);
-            case Constants.GETSTATIC:
+            case Const.GETSTATIC:
                 return new GETSTATIC(index);
-            case Constants.PUTSTATIC:
+            case Const.PUTSTATIC:
                 return new PUTSTATIC(index);
             default:
                 throw new RuntimeException("Oops: Unknown getfield kind:" + kind);
@@ -297,22 +297,22 @@ public class InstructionFactory {
      */
     public static ReturnInstruction createReturn( Type type ) {
         switch (type.getType()) {
-            case Constants.T_ARRAY:
-            case Constants.T_OBJECT:
+            case Const.T_ARRAY:
+            case Const.T_OBJECT:
                 return InstructionConst.ARETURN;
-            case Constants.T_INT:
-            case Constants.T_SHORT:
-            case Constants.T_BOOLEAN:
-            case Constants.T_CHAR:
-            case Constants.T_BYTE:
+            case Const.T_INT:
+            case Const.T_SHORT:
+            case Const.T_BOOLEAN:
+            case Const.T_CHAR:
+            case Const.T_BYTE:
                 return InstructionConst.IRETURN;
-            case Constants.T_FLOAT:
+            case Const.T_FLOAT:
                 return InstructionConst.FRETURN;
-            case Constants.T_DOUBLE:
+            case Const.T_DOUBLE:
                 return InstructionConst.DRETURN;
-            case Constants.T_LONG:
+            case Const.T_LONG:
                 return InstructionConst.LRETURN;
-            case Constants.T_VOID:
+            case Const.T_VOID:
                 return InstructionConst.RETURN;
             default:
                 throw new RuntimeException("Invalid type: " + type);
@@ -420,16 +420,16 @@ public class InstructionFactory {
     public static ArithmeticInstruction createBinaryOperation( String op, Type type ) {
         char first = op.charAt(0);
         switch (type.getType()) {
-            case Constants.T_BYTE:
-            case Constants.T_SHORT:
-            case Constants.T_INT:
-            case Constants.T_CHAR:
+            case Const.T_BYTE:
+            case Const.T_SHORT:
+            case Const.T_INT:
+            case Const.T_CHAR:
                 return createBinaryIntOp(first, op);
-            case Constants.T_LONG:
+            case Const.T_LONG:
                 return createBinaryLongOp(first, op);
-            case Constants.T_FLOAT:
+            case Const.T_FLOAT:
                 return createBinaryFloatOp(first);
-            case Constants.T_DOUBLE:
+            case Const.T_DOUBLE:
                 return createBinaryDoubleOp(first);
             default:
                 throw new RuntimeException("Invalid type " + type);
@@ -474,20 +474,20 @@ public class InstructionFactory {
      */
     public static LocalVariableInstruction createStore( Type type, int index ) {
         switch (type.getType()) {
-            case Constants.T_BOOLEAN:
-            case Constants.T_CHAR:
-            case Constants.T_BYTE:
-            case Constants.T_SHORT:
-            case Constants.T_INT:
+            case Const.T_BOOLEAN:
+            case Const.T_CHAR:
+            case Const.T_BYTE:
+            case Const.T_SHORT:
+            case Const.T_INT:
                 return new ISTORE(index);
-            case Constants.T_FLOAT:
+            case Const.T_FLOAT:
                 return new FSTORE(index);
-            case Constants.T_DOUBLE:
+            case Const.T_DOUBLE:
                 return new DSTORE(index);
-            case Constants.T_LONG:
+            case Const.T_LONG:
                 return new LSTORE(index);
-            case Constants.T_ARRAY:
-            case Constants.T_OBJECT:
+            case Const.T_ARRAY:
+            case Const.T_OBJECT:
                 return new ASTORE(index);
             default:
                 throw new RuntimeException("Invalid type " + type);
@@ -500,20 +500,20 @@ public class InstructionFactory {
      */
     public static LocalVariableInstruction createLoad( Type type, int index ) {
         switch (type.getType()) {
-            case Constants.T_BOOLEAN:
-            case Constants.T_CHAR:
-            case Constants.T_BYTE:
-            case Constants.T_SHORT:
-            case Constants.T_INT:
+            case Const.T_BOOLEAN:
+            case Const.T_CHAR:
+            case Const.T_BYTE:
+            case Const.T_SHORT:
+            case Const.T_INT:
                 return new ILOAD(index);
-            case Constants.T_FLOAT:
+            case Const.T_FLOAT:
                 return new FLOAD(index);
-            case Constants.T_DOUBLE:
+            case Const.T_DOUBLE:
                 return new DLOAD(index);
-            case Constants.T_LONG:
+            case Const.T_LONG:
                 return new LLOAD(index);
-            case Constants.T_ARRAY:
-            case Constants.T_OBJECT:
+            case Const.T_ARRAY:
+            case Const.T_OBJECT:
                 return new ALOAD(index);
             default:
                 throw new RuntimeException("Invalid type " + type);
@@ -526,23 +526,23 @@ public class InstructionFactory {
      */
     public static ArrayInstruction createArrayLoad( Type type ) {
         switch (type.getType()) {
-            case Constants.T_BOOLEAN:
-            case Constants.T_BYTE:
+            case Const.T_BOOLEAN:
+            case Const.T_BYTE:
                 return InstructionConst.BALOAD;
-            case Constants.T_CHAR:
+            case Const.T_CHAR:
                 return InstructionConst.CALOAD;
-            case Constants.T_SHORT:
+            case Const.T_SHORT:
                 return InstructionConst.SALOAD;
-            case Constants.T_INT:
+            case Const.T_INT:
                 return InstructionConst.IALOAD;
-            case Constants.T_FLOAT:
+            case Const.T_FLOAT:
                 return InstructionConst.FALOAD;
-            case Constants.T_DOUBLE:
+            case Const.T_DOUBLE:
                 return InstructionConst.DALOAD;
-            case Constants.T_LONG:
+            case Const.T_LONG:
                 return InstructionConst.LALOAD;
-            case Constants.T_ARRAY:
-            case Constants.T_OBJECT:
+            case Const.T_ARRAY:
+            case Const.T_OBJECT:
                 return InstructionConst.AALOAD;
             default:
                 throw new RuntimeException("Invalid type " + type);
@@ -555,23 +555,23 @@ public class InstructionFactory {
      */
     public static ArrayInstruction createArrayStore( Type type ) {
         switch (type.getType()) {
-            case Constants.T_BOOLEAN:
-            case Constants.T_BYTE:
+            case Const.T_BOOLEAN:
+            case Const.T_BYTE:
                 return InstructionConst.BASTORE;
-            case Constants.T_CHAR:
+            case Const.T_CHAR:
                 return InstructionConst.CASTORE;
-            case Constants.T_SHORT:
+            case Const.T_SHORT:
                 return InstructionConst.SASTORE;
-            case Constants.T_INT:
+            case Const.T_INT:
                 return InstructionConst.IASTORE;
-            case Constants.T_FLOAT:
+            case Const.T_FLOAT:
                 return InstructionConst.FASTORE;
-            case Constants.T_DOUBLE:
+            case Const.T_DOUBLE:
                 return InstructionConst.DASTORE;
-            case Constants.T_LONG:
+            case Const.T_LONG:
                 return InstructionConst.LASTORE;
-            case Constants.T_ARRAY:
-            case Constants.T_OBJECT:
+            case Const.T_ARRAY:
+            case Const.T_OBJECT:
                 return InstructionConst.AASTORE;
             default:
                 throw new RuntimeException("Invalid type " + type);
@@ -586,12 +586,12 @@ public class InstructionFactory {
         if ((src_type instanceof BasicType) && (dest_type instanceof BasicType)) {
             byte dest = dest_type.getType();
             byte src = src_type.getType();
-            if (dest == Constants.T_LONG
-                    && (src == Constants.T_CHAR || src == Constants.T_BYTE || src == Constants.T_SHORT)) {
-                src = Constants.T_INT;
+            if (dest == Const.T_LONG
+                    && (src == Const.T_CHAR || src == Const.T_BYTE || src == Const.T_SHORT)) {
+                src = Const.T_INT;
             }
-            String name = "org.apache.commons.bcel6.generic." + short_names[src - Constants.T_CHAR] + "2"
-                    + short_names[dest - Constants.T_CHAR];
+            String name = "org.apache.commons.bcel6.generic." + short_names[src - Const.T_CHAR] + "2"
+                    + short_names[dest - Const.T_CHAR];
             Instruction i = null;
             try {
                 i = (Instruction) java.lang.Class.forName(name).newInstance();
@@ -683,22 +683,22 @@ public class InstructionFactory {
      */
     public static Instruction createNull( Type type ) {
         switch (type.getType()) {
-            case Constants.T_ARRAY:
-            case Constants.T_OBJECT:
+            case Const.T_ARRAY:
+            case Const.T_OBJECT:
                 return InstructionConst.ACONST_NULL;
-            case Constants.T_INT:
-            case Constants.T_SHORT:
-            case Constants.T_BOOLEAN:
-            case Constants.T_CHAR:
-            case Constants.T_BYTE:
+            case Const.T_INT:
+            case Const.T_SHORT:
+            case Const.T_BOOLEAN:
+            case Const.T_CHAR:
+            case Const.T_BYTE:
                 return InstructionConst.ICONST_0;
-            case Constants.T_FLOAT:
+            case Const.T_FLOAT:
                 return InstructionConst.FCONST_0;
-            case Constants.T_DOUBLE:
+            case Const.T_DOUBLE:
                 return InstructionConst.DCONST_0;
-            case Constants.T_LONG:
+            case Const.T_LONG:
                 return InstructionConst.LCONST_0;
-            case Constants.T_VOID:
+            case Const.T_VOID:
                 return InstructionConst.NOP;
             default:
                 throw new RuntimeException("Invalid type: " + type);
@@ -711,45 +711,45 @@ public class InstructionFactory {
      */
     public static BranchInstruction createBranchInstruction( short opcode, InstructionHandle target ) {
         switch (opcode) {
-            case Constants.IFEQ:
+            case Const.IFEQ:
                 return new IFEQ(target);
-            case Constants.IFNE:
+            case Const.IFNE:
                 return new IFNE(target);
-            case Constants.IFLT:
+            case Const.IFLT:
                 return new IFLT(target);
-            case Constants.IFGE:
+            case Const.IFGE:
                 return new IFGE(target);
-            case Constants.IFGT:
+            case Const.IFGT:
                 return new IFGT(target);
-            case Constants.IFLE:
+            case Const.IFLE:
                 return new IFLE(target);
-            case Constants.IF_ICMPEQ:
+            case Const.IF_ICMPEQ:
                 return new IF_ICMPEQ(target);
-            case Constants.IF_ICMPNE:
+            case Const.IF_ICMPNE:
                 return new IF_ICMPNE(target);
-            case Constants.IF_ICMPLT:
+            case Const.IF_ICMPLT:
                 return new IF_ICMPLT(target);
-            case Constants.IF_ICMPGE:
+            case Const.IF_ICMPGE:
                 return new IF_ICMPGE(target);
-            case Constants.IF_ICMPGT:
+            case Const.IF_ICMPGT:
                 return new IF_ICMPGT(target);
-            case Constants.IF_ICMPLE:
+            case Const.IF_ICMPLE:
                 return new IF_ICMPLE(target);
-            case Constants.IF_ACMPEQ:
+            case Const.IF_ACMPEQ:
                 return new IF_ACMPEQ(target);
-            case Constants.IF_ACMPNE:
+            case Const.IF_ACMPNE:
                 return new IF_ACMPNE(target);
-            case Constants.GOTO:
+            case Const.GOTO:
                 return new GOTO(target);
-            case Constants.JSR:
+            case Const.JSR:
                 return new JSR(target);
-            case Constants.IFNULL:
+            case Const.IFNULL:
                 return new IFNULL(target);
-            case Constants.IFNONNULL:
+            case Const.IFNONNULL:
                 return new IFNONNULL(target);
-            case Constants.GOTO_W:
+            case Const.GOTO_W:
                 return new GOTO_W(target);
-            case Constants.JSR_W:
+            case Const.JSR_W:
                 return new JSR_W(target);
             default:
                 throw new RuntimeException("Invalid opcode: " + opcode);

@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class IUSHR extends ArithmeticInstruction {
 
     public IUSHR() {
-        super(org.apache.commons.bcel6.Constants.IUSHR);
+        super(org.apache.commons.bcel6.Const.IUSHR);
     }
 
 

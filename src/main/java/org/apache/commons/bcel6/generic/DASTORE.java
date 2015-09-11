@@ -28,7 +28,7 @@ public class DASTORE extends ArrayInstruction implements StackConsumer {
     /** Store double into array
      */
     public DASTORE() {
-        super(org.apache.commons.bcel6.Constants.DASTORE);
+        super(org.apache.commons.bcel6.Const.DASTORE);
     }
 
 

@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * @since 6.0
@@ -56,21 +56,21 @@ public class EnumElementValue extends ElementValue
     public String stringifyValue()
     {
         ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         return cu8.getBytes();
     }
 
     public String getEnumTypeString()
     {
         ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(typeIdx,
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         return cu8.getBytes();// Utility.signatureToString(cu8.getBytes());
     }
 
     public String getEnumValueString()
     {
         ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         return cu8.getBytes();
     }
 

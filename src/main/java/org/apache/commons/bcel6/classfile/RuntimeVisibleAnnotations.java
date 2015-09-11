@@ -21,7 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /**
  * represents an annotation that is represented in the class file and is
@@ -44,7 +44,7 @@ public class RuntimeVisibleAnnotations extends Annotations
      */
     public RuntimeVisibleAnnotations(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException
     {
-        super(Constants.ATTR_RUNTIME_VISIBLE_ANNOTATIONS, name_index, length, input, constant_pool, true);
+        super(Const.ATTR_RUNTIME_VISIBLE_ANNOTATIONS, name_index, length, input, constant_pool, true);
     }
 
     /**

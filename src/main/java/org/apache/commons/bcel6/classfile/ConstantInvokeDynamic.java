@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.classfile;
 import java.io.DataInput;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 
 /** 
  * This class is derived from the abstract {@link Constant}
@@ -53,7 +53,7 @@ public final class ConstantInvokeDynamic extends ConstantCP {
 
 
     public ConstantInvokeDynamic(int bootstrap_method_attr_index, int name_and_type_index) {
-        super(Constants.CONSTANT_InvokeDynamic, bootstrap_method_attr_index, name_and_type_index);
+        super(Const.CONSTANT_InvokeDynamic, bootstrap_method_attr_index, name_and_type_index);
     }
 
 

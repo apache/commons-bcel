@@ -35,7 +35,7 @@ public class IFNULL extends IfInstruction {
 
 
     public IFNULL(InstructionHandle target) {
-        super(org.apache.commons.bcel6.Constants.IFNULL, target);
+        super(org.apache.commons.bcel6.Const.IFNULL, target);
     }
 
 

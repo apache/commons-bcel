@@ -30,12 +30,12 @@ public class LSTORE extends StoreInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     LSTORE() {
-        super(org.apache.commons.bcel6.Constants.LSTORE, org.apache.commons.bcel6.Constants.LSTORE_0);
+        super(org.apache.commons.bcel6.Const.LSTORE, org.apache.commons.bcel6.Const.LSTORE_0);
     }
 
 
     public LSTORE(int n) {
-        super(org.apache.commons.bcel6.Constants.LSTORE, org.apache.commons.bcel6.Constants.LSTORE_0, n);
+        super(org.apache.commons.bcel6.Const.LSTORE, org.apache.commons.bcel6.Const.LSTORE_0, n);
     }
 
 

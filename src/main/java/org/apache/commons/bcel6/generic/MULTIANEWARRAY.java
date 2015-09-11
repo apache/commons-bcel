@@ -45,7 +45,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 
 
     public MULTIANEWARRAY(int index, short dimensions) {
-        super(org.apache.commons.bcel6.Constants.MULTIANEWARRAY, index);
+        super(org.apache.commons.bcel6.Const.MULTIANEWARRAY, index);
         if (dimensions < 1) {
             throw new ClassGenException("Invalid dimensions value: " + dimensions);
         }

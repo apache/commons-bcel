@@ -45,7 +45,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     /** Push byte on stack
      */
     public BIPUSH(byte b) {
-        super(org.apache.commons.bcel6.Constants.BIPUSH, (short) 2);
+        super(org.apache.commons.bcel6.Const.BIPUSH, (short) 2);
         this.b = b;
     }
 

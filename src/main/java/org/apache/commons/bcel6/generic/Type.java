@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.generic;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.Constants;
+import org.apache.commons.bcel6.Const;
 import org.apache.commons.bcel6.classfile.ClassFormatException;
 import org.apache.commons.bcel6.classfile.Utility;
 
@@ -45,15 +45,15 @@ public abstract class Type {
     protected String signature; // signature for the type TODO should be private
     /** Predefined constants
      */
-    public static final BasicType VOID = new BasicType(Constants.T_VOID);
-    public static final BasicType BOOLEAN = new BasicType(Constants.T_BOOLEAN);
-    public static final BasicType INT = new BasicType(Constants.T_INT);
-    public static final BasicType SHORT = new BasicType(Constants.T_SHORT);
-    public static final BasicType BYTE = new BasicType(Constants.T_BYTE);
-    public static final BasicType LONG = new BasicType(Constants.T_LONG);
-    public static final BasicType DOUBLE = new BasicType(Constants.T_DOUBLE);
-    public static final BasicType FLOAT = new BasicType(Constants.T_FLOAT);
-    public static final BasicType CHAR = new BasicType(Constants.T_CHAR);
+    public static final BasicType VOID = new BasicType(Const.T_VOID);
+    public static final BasicType BOOLEAN = new BasicType(Const.T_BOOLEAN);
+    public static final BasicType INT = new BasicType(Const.T_INT);
+    public static final BasicType SHORT = new BasicType(Const.T_SHORT);
+    public static final BasicType BYTE = new BasicType(Const.T_BYTE);
+    public static final BasicType LONG = new BasicType(Const.T_LONG);
+    public static final BasicType DOUBLE = new BasicType(Const.T_DOUBLE);
+    public static final BasicType FLOAT = new BasicType(Const.T_FLOAT);
+    public static final BasicType CHAR = new BasicType(Const.T_CHAR);
     public static final ObjectType OBJECT = new ObjectType("java.lang.Object");
     public static final ObjectType CLASS = new ObjectType("java.lang.Class");
     public static final ObjectType STRING = new ObjectType("java.lang.String");
@@ -62,7 +62,7 @@ public abstract class Type {
     public static final Type[] NO_ARGS = new Type[0]; // EMPTY, so immutable
     public static final ReferenceType NULL = new ReferenceType() {
     };
-    public static final Type UNKNOWN = new Type(Constants.T_UNKNOWN, "<unknown object>") {
+    public static final Type UNKNOWN = new Type(Const.T_UNKNOWN, "<unknown object>") {
     };
 
 
@@ -129,10 +129,10 @@ public abstract class Type {
      */
     public int getSize() {
         switch (type) {
-            case Constants.T_DOUBLE:
-            case Constants.T_LONG:
+            case Const.T_DOUBLE:
+            case Const.T_LONG:
                 return 2;
-            case Constants.T_VOID:
+            case Const.T_VOID:
                 return 0;
             default:
                 return 1;
@@ -145,7 +145,7 @@ public abstract class Type {
      */
     @Override
     public String toString() {
-        return ((this.equals(Type.NULL) || (type >= Constants.T_UNKNOWN))) ? signature : Utility
+        return ((this.equals(Type.NULL) || (type >= Const.T_UNKNOWN))) ? signature : Utility
                 .signatureToString(signature, false);
     }
 
@@ -197,11 +197,11 @@ public abstract class Type {
     // @since 6.0 no longer final
     public static Type getType( String signature ) throws StringIndexOutOfBoundsException {
         byte type = Utility.typeOfSignature(signature);
-        if (type <= Constants.T_VOID) {
+        if (type <= Const.T_VOID) {
             //corrected concurrent private static field acess
             wrap(consumed_chars, 1);
             return BasicType.getType(type);
-        } else if (type == Constants.T_ARRAY) {
+        } else if (type == Const.T_ARRAY) {
             int dim = 0;
             do { // Count dimensions
                 dim++;
@@ -371,9 +371,9 @@ public abstract class Type {
 
     static int getTypeSize( String signature ) throws StringIndexOutOfBoundsException {
         byte type = Utility.typeOfSignature(signature);
-        if (type <= Constants.T_VOID) {
+        if (type <= Const.T_VOID) {
             return encode(BasicType.getType(type).getSize(), 1);
-        } else if (type == Constants.T_ARRAY) {
+        } else if (type == Const.T_ARRAY) {
             int dim = 0;
             do { // Count dimensions
                 dim++;
