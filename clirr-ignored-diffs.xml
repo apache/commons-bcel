@@ -53,4 +53,10 @@ limitations under the License.
     <differenceType>7012</differenceType>
     <method>*</method>
   </difference>
+  <!--  ignore method now non-final informational reports -->
+  <difference>
+    <className>**/*</className>
+    <differenceType>7015</differenceType>
+    <method>*</method>
+  </difference>
 </differences>
