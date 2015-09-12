@@ -196,9 +196,7 @@ public class SimpleElementValue extends ElementValue
                     Const.CONSTANT_Utf8);
             return cu8.getBytes();
         default:
-            throw new RuntimeException(
-                    "SimpleElementValue class does not know how to stringify type "
-                            + _type);
+            throw new RuntimeException("SimpleElementValue class does not know how to stringify type " + _type);
         }
     }
 
@@ -221,9 +219,7 @@ public class SimpleElementValue extends ElementValue
             dos.writeShort(getIndex());
             break;
         default:
-            throw new RuntimeException(
-                    "SimpleElementValue doesnt know how to write out type "
-                            + _type);
+            throw new RuntimeException("SimpleElementValue doesnt know how to write out type " + _type);
         }
     }
 }

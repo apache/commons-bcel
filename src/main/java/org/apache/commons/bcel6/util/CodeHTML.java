@@ -367,8 +367,7 @@ final class CodeHTML {
                                 buf.append(bytes.readInt());
                                 break;
                             default: // Never reached
-                                throw new IllegalStateException(
-                                    "Unreachable default case reached! "+Const.getOperandType(opcode, i));
+                                throw new IllegalStateException("Unreachable default case reached! "+Const.getOperandType(opcode, i));
                         }
                         buf.append("&nbsp;");
                     }
