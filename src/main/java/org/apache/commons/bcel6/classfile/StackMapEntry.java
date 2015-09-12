@@ -31,7 +31,7 @@ import org.apache.commons.bcel6.Const;
  * @see     StackMap
  * @see     StackMapType
  */
-public final class StackMapEntry implements Cloneable
+public final class StackMapEntry implements Node, Cloneable
 {
 
     private int frame_type;
@@ -404,6 +404,7 @@ public final class StackMapEntry implements Cloneable
      *
      * @param v Visitor object
      */
+    @Override
     public void accept( Visitor v ) {
         v.visitStackMapEntry(this);
     }
