@@ -216,10 +216,7 @@ final class ConstantHTML {
                         + "\">Signature index(" + signature_index + ")</A></UL>\n");
                 break;
             default:
-                file
-                        .println("<P><TT>"
-                                + Class2HTML.toHTML(constant_pool.constantToString(index, tag))
-                                + "</TT>\n");
+                file.println("<P><TT>" + Class2HTML.toHTML(constant_pool.constantToString(index, tag)) + "</TT>\n");
         } // switch
     }
 
