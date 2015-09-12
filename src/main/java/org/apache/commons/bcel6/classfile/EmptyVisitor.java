@@ -274,4 +274,26 @@ public class EmptyVisitor implements Visitor
     public void visitMethodParameters(MethodParameters obj)
     {
     }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantMethodType(ConstantMethodType obj)
+    {
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantMethodHandle(ConstantMethodHandle constantMethodHandle) {
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitParameterAnnotationEntry(ParameterAnnotationEntry parameterAnnotationEntry) {
+    }
 }

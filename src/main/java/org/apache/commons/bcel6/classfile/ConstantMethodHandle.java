@@ -71,7 +71,7 @@ public final class ConstantMethodHandle extends Constant {
      */
     @Override
     public void accept( Visitor v ) {
-        // TODO Add .visitMethodHandle to Visitor interface
+        v.visitConstantMethodHandle(this);
     }
 
 

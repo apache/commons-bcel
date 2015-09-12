@@ -69,7 +69,7 @@ public final class ConstantMethodType extends Constant {
      */
     @Override
     public void accept( Visitor v ) {
-        // TODO Add .visitMethodType to Visitor interface
+        v.visitConstantMethodType(this);
     }
 
 

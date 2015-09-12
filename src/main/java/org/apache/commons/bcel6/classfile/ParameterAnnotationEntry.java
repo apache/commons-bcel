@@ -60,7 +60,7 @@ public class ParameterAnnotationEntry implements Node {
      */
     @Override
     public void accept( Visitor v ) {
-        // v.visitParameterAnnotationEntry(this);
+        v.visitParameterAnnotationEntry(this);
     }
 
     /**
