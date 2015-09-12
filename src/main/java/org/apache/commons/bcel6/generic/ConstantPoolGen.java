@@ -75,7 +75,7 @@ public class ConstantPoolGen {
     private static final String METHODREF_DELIM = ":";
     private static final String IMETHODREF_DELIM = "#";
     private static final String FIELDREF_DELIM = "&";
-    private static final String NAT_DELIM = "%";
+    private static final String NAT_DELIM = "%"; // Name and Type
 
     private static class Index {
 
@@ -180,6 +180,22 @@ public class ConstantPoolGen {
                 if (!cp_table.containsKey(key)) {
                     cp_table.put(key, new Index(i));
                 }
+            } else if (c == null) { // entries may be null
+                // nothing to do
+            } else if (c instanceof ConstantInteger) {
+                // nothing to do
+            } else if (c instanceof ConstantLong) {
+                // nothing to do
+            } else if (c instanceof ConstantFloat) {
+                // nothing to do
+            } else if (c instanceof ConstantDouble) {
+                // nothing to do
+            } else if (c instanceof org.apache.commons.bcel6.classfile.ConstantMethodType) {
+                // TODO should this be handled somehow?
+            } else if (c instanceof org.apache.commons.bcel6.classfile.ConstantMethodHandle) {
+                // TODO should this be handled somehow?
+            } else {
+                assert false : "Unexpected constant type: " + c.getClass().getName();
             }
         }
     }
