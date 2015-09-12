@@ -18,6 +18,8 @@
 package org.apache.commons.bcel6.verifier.statics;
 
 
+import org.apache.commons.bcel6.classfile.AnnotationDefault;
+import org.apache.commons.bcel6.classfile.AnnotationEntry;
 import org.apache.commons.bcel6.classfile.Annotations;
 import org.apache.commons.bcel6.classfile.BootstrapMethods;
 import org.apache.commons.bcel6.classfile.Code;
@@ -28,7 +30,10 @@ import org.apache.commons.bcel6.classfile.ConstantFieldref;
 import org.apache.commons.bcel6.classfile.ConstantFloat;
 import org.apache.commons.bcel6.classfile.ConstantInteger;
 import org.apache.commons.bcel6.classfile.ConstantInterfaceMethodref;
+import org.apache.commons.bcel6.classfile.ConstantInvokeDynamic;
 import org.apache.commons.bcel6.classfile.ConstantLong;
+import org.apache.commons.bcel6.classfile.ConstantMethodHandle;
+import org.apache.commons.bcel6.classfile.ConstantMethodType;
 import org.apache.commons.bcel6.classfile.ConstantMethodref;
 import org.apache.commons.bcel6.classfile.ConstantNameAndType;
 import org.apache.commons.bcel6.classfile.ConstantPool;
@@ -50,9 +55,12 @@ import org.apache.commons.bcel6.classfile.LocalVariableTypeTable;
 import org.apache.commons.bcel6.classfile.Method;
 import org.apache.commons.bcel6.classfile.MethodParameters;
 import org.apache.commons.bcel6.classfile.Node;
+import org.apache.commons.bcel6.classfile.ParameterAnnotationEntry;
+import org.apache.commons.bcel6.classfile.ParameterAnnotations;
 import org.apache.commons.bcel6.classfile.Signature;
 import org.apache.commons.bcel6.classfile.SourceFile;
 import org.apache.commons.bcel6.classfile.StackMap;
+import org.apache.commons.bcel6.classfile.StackMapEntry;
 import org.apache.commons.bcel6.classfile.Synthetic;
 import org.apache.commons.bcel6.classfile.Unknown;
 import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
@@ -330,6 +338,70 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      */
     @Override
     public void visitMethodParameters(MethodParameters obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantInvokeDynamic(ConstantInvokeDynamic obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitStackMapEntry(StackMapEntry obj) {
+        tostring = toString(obj);
+    }
+    /**
+     * @since 6.0
+     */
+
+    @Override
+    public void visitParameterAnnotation(ParameterAnnotations obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitAnnotationEntry(AnnotationEntry obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitAnnotationDefault(AnnotationDefault obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantMethodType(ConstantMethodType obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantMethodHandle(ConstantMethodHandle obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitParameterAnnotationEntry(ParameterAnnotationEntry obj) {
         tostring = toString(obj);
     }
 }
