@@ -31,15 +31,12 @@ public class TestArray01{
         return a;
     }
 
-    @SuppressWarnings("unused")
     public static void test2(Object o){
     }
 
-    @SuppressWarnings("unused")
     public static void test3(Serializable o){
     }
 
-    @SuppressWarnings("unused")
     public static void test4(Cloneable o){
     }
 
