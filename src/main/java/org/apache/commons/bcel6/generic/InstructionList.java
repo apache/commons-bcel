@@ -955,6 +955,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
                 Instruction i = ih.getInstruction();
                 i.dump(out); // Traverse list
             }
+            out.flush();
         } catch (IOException e) {
             System.err.println(e);
             return new byte[0];
