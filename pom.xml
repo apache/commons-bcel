@@ -55,7 +55,7 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <findbugs.plugin.version>3.0.3</findbugs.plugin.version>
+    <commons.findbugs.version>3.0.3</commons.findbugs.version>
     <checkstyle.plugin.version>2.16</checkstyle.plugin.version>
   </properties>
 
@@ -315,7 +315,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>findbugs-maven-plugin</artifactId>
-        <version>${findbugs.plugin.version}</version>
+        <version>${commons.findbugs.version}</version>
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
