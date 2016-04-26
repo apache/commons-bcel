@@ -55,7 +55,7 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <findbugs.plugin.version>2.5.5</findbugs.plugin.version>
+    <findbugs.plugin.version>3.0.3</findbugs.plugin.version>
     <checkstyle.plugin.version>2.16</checkstyle.plugin.version>
   </properties>
 
@@ -373,16 +373,6 @@
   </dependencies>
 
   <profiles>
-    <profile>
-      <id>jdk7</id>
-      <activation>
-        <jdk>[1.7,)</jdk>
-      </activation>
-      <properties>
-        <findbugs.plugin.version>3.0.3</findbugs.plugin.version>
-      </properties>
-    </profile>
-
     <!-- Profile to build and run PerformanceTest. Use 'mvn test -Pjdk-rt' -->
 	<profile>
 	      <id>jdk-rt</id>
