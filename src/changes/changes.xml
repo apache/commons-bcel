@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+      <action issue="BCEL-272" type="add">Add constants for Java 9 class file version 53</action>
       <action issue="BCEL-271" type="fix">FCONST pattern does not include FCONST_2</action>
       <action issue="BCEL-264" type="fix">Add missing Node.accept() implementations (ConstantMethodHandle, ConstantMethodType, ParameterAnnotationEntry)</action>
       <action issue="BCEL-221" type="fix">BCELifier is not working for Java8Example (incomplete)</action>
