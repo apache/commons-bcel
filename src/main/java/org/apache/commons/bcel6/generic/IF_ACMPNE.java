@@ -34,7 +34,7 @@ public class IF_ACMPNE extends IfInstruction {
     }
 
 
-    public IF_ACMPNE(InstructionHandle target) {
+    public IF_ACMPNE(final InstructionHandle target) {
         super(org.apache.commons.bcel6.Const.IF_ACMPNE, target);
     }
 
@@ -57,7 +57,7 @@ public class IF_ACMPNE extends IfInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);
         v.visitIfInstruction(this);

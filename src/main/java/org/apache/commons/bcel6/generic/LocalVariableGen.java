@@ -49,8 +49,8 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * @param start from where the instruction is valid (null means from the start)
      * @param end until where the instruction is valid (null means to the end)
      */
-    public LocalVariableGen(int index, String name, Type type, InstructionHandle start,
-            InstructionHandle end) {
+    public LocalVariableGen(final int index, final String name, final Type type, final InstructionHandle start,
+            final InstructionHandle end) {
         if ((index < 0) || (index > Const.MAX_SHORT)) {
             throw new ClassGenException("Invalid index index: " + index);
         }
@@ -76,7 +76,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      *
      * @param cp constant pool
      */
-    public LocalVariable getLocalVariable( ConstantPoolGen cp ) {
+    public LocalVariable getLocalVariable( final ConstantPoolGen cp ) {
         int start_pc = 0;
         int length = 0;
         if ((start != null) && (end != null)) {
@@ -93,7 +93,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
-    public void setIndex( int index ) {
+    public void setIndex( final int index ) {
         this.index = index;
     }
 
@@ -104,7 +104,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
 
     @Override
-    public void setName( String name ) {
+    public void setName( final String name ) {
         this.name = name;
     }
 
@@ -116,7 +116,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
 
     @Override
-    public void setType( Type type ) {
+    public void setType( final Type type ) {
         this.type = type;
     }
 
@@ -137,13 +137,13 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
-    public void setStart( InstructionHandle start ) { // TODO could be package-protected?
+    public void setStart( final InstructionHandle start ) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.start, start, this);
         this.start = start;
     }
 
 
-    public void setEnd( InstructionHandle end ) { // TODO could be package-protected?
+    public void setEnd( final InstructionHandle end ) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.end, end, this);
         this.end = end;
     }
@@ -154,7 +154,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * @param new_ih new target
      */
     @Override
-    public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
+    public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
         boolean targeted = false;
         if (start == old_ih) {
             targeted = true;
@@ -182,7 +182,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * @return true, if ih is target of this variable
      */
     @Override
-    public boolean containsTarget( InstructionHandle ih ) {
+    public boolean containsTarget( final InstructionHandle ih ) {
         return (start == ih) || (end == ih);
     }
 
@@ -200,7 +200,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * are valid in the same range.
      */
     @Override
-    public boolean equals( Object o ) {
+    public boolean equals( final Object o ) {
         if (!(o instanceof LocalVariableGen)) {
             return false;
         }

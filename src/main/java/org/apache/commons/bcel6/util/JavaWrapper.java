@@ -52,7 +52,7 @@ public class JavaWrapper {
     }
 
 
-    public JavaWrapper(java.lang.ClassLoader loader) {
+    public JavaWrapper(final java.lang.ClassLoader loader) {
         this.loader = loader;
     }
 
@@ -67,7 +67,7 @@ public class JavaWrapper {
      * @param class_name the fully qualified class name
      * @param argv the arguments just as you would pass them directly
      */
-    public void runMain( String class_name, String[] argv ) throws ClassNotFoundException {
+    public void runMain( final String class_name, final String[] argv ) throws ClassNotFoundException {
         Class<?> cl = loader.loadClass(class_name);
         Method method = null;
         try {
@@ -100,7 +100,7 @@ public class JavaWrapper {
     /** Default main method used as wrapper, expects the fully qualified class name
      * of the real class as the first argument.
      */
-    public static void main( String[] argv ) throws Exception {
+    public static void main( final String[] argv ) throws Exception {
         /* Expects class name as first argument, other arguments are by-passed.
          */
         if (argv.length == 0) {

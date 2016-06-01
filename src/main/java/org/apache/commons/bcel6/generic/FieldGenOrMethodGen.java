@@ -63,12 +63,12 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * @since 6.0
      */
-    protected FieldGenOrMethodGen(int access_flags) { // TODO could this be package protected?
+    protected FieldGenOrMethodGen(final int access_flags) { // TODO could this be package protected?
         super(access_flags);
     }
 
     @Override
-    public void setType( Type type ) { // TODO could be package-protected?
+    public void setType( final Type type ) { // TODO could be package-protected?
         if (type.getType() == Const.T_ADDRESS) {
             throw new IllegalArgumentException("Type can not be " + type);
         }
@@ -91,7 +91,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
 
 
     @Override
-    public void setName( String name ) { // TODO could be package-protected?
+    public void setName( final String name ) { // TODO could be package-protected?
         this.name = name;
     }
 
@@ -101,7 +101,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
 
-    public void setConstantPool( ConstantPoolGen cp ) { // TODO could be package-protected?
+    public void setConstantPool( final ConstantPoolGen cp ) { // TODO could be package-protected?
         this.cp = cp;
     }
 
@@ -114,14 +114,14 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
      *
      * @param a attribute to be added
      */
-    public void addAttribute( Attribute a ) {
+    public void addAttribute( final Attribute a ) {
         attribute_vec.add(a);
     }
 
     /**
      * @since 6.0
      */
-    protected void addAnnotationEntry(AnnotationEntryGen ag) // TODO could this be package protected?
+    protected void addAnnotationEntry(final AnnotationEntryGen ag) // TODO could this be package protected?
     {
         annotation_vec.add(ag);
     }
@@ -130,14 +130,14 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * Remove an attribute.
      */
-    public void removeAttribute( Attribute a ) {
+    public void removeAttribute( final Attribute a ) {
         attribute_vec.remove(a);
     }
 
     /**
      * @since 6.0
      */
-    protected void removeAnnotationEntry(AnnotationEntryGen ag) // TODO could this be package protected?
+    protected void removeAnnotationEntry(final AnnotationEntryGen ag) // TODO could this be package protected?
     {
         annotation_vec.remove(ag);
     }

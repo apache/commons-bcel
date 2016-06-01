@@ -28,7 +28,7 @@ import org.apache.commons.bcel6.classfile.JavaClass;
  */
 public abstract class ReferenceType extends Type {
 
-    protected ReferenceType(byte t, String s) {
+    protected ReferenceType(final byte t, final String s) {
         super(t, s);
     }
 
@@ -51,7 +51,7 @@ public abstract class ReferenceType extends Type {
      * @throws ClassNotFoundException if any classes or interfaces required
      *  to determine assignment compatibility can't be found
      */
-    public boolean isCastableTo( Type t ) throws ClassNotFoundException {
+    public boolean isCastableTo( final Type t ) throws ClassNotFoundException {
         if (this.equals(Type.NULL)) {
             return t instanceof ReferenceType; // If this is ever changed in isAssignmentCompatible()
         }
@@ -69,7 +69,7 @@ public abstract class ReferenceType extends Type {
      * @throws ClassNotFoundException if any classes or interfaces required
      *  to determine assignment compatibility can't be found
      */
-    public boolean isAssignmentCompatibleWith( Type t ) throws ClassNotFoundException {
+    public boolean isAssignmentCompatibleWith( final Type t ) throws ClassNotFoundException {
         if (!(t instanceof ReferenceType)) {
             return false;
         }
@@ -190,7 +190,7 @@ public abstract class ReferenceType extends Type {
      * @throws ClassNotFoundException on failure to find superclasses of this
      *  type, or the type passed as a parameter
      */
-    public ReferenceType getFirstCommonSuperclass( ReferenceType t ) throws ClassNotFoundException {
+    public ReferenceType getFirstCommonSuperclass( final ReferenceType t ) throws ClassNotFoundException {
         if (this.equals(Type.NULL)) {
             return t;
         }
@@ -274,7 +274,7 @@ public abstract class ReferenceType extends Type {
      *  type, or the type passed as a parameter
      */
     @Deprecated
-    public ReferenceType firstCommonSuperclass( ReferenceType t ) throws ClassNotFoundException {
+    public ReferenceType firstCommonSuperclass( final ReferenceType t ) throws ClassNotFoundException {
         if (this.equals(Type.NULL)) {
             return t;
         }

@@ -71,7 +71,7 @@ public final class Pass1Verifier extends PassVerifier{
      *
      * @see Verifier
      */
-    public Pass1Verifier(Verifier owner){
+    public Pass1Verifier(final Verifier owner){
         myOwner = owner;
     }
 

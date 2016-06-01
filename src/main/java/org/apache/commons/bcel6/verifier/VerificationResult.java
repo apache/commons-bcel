@@ -63,7 +63,7 @@ public class VerificationResult {
 
 
     /** The usual constructor. */
-    public VerificationResult(int status, String message) {
+    public VerificationResult(final int status, final String message) {
         numeric = status;
         detailMessage = message;
     }
@@ -97,7 +97,7 @@ public class VerificationResult {
      * Returns if two VerificationResult instances are equal.
      */
     @Override
-    public boolean equals( Object o ) {
+    public boolean equals( final Object o ) {
         if (!(o instanceof VerificationResult)) {
             return false;
         }

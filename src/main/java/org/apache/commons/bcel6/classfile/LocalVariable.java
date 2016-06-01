@@ -46,7 +46,7 @@ public final class LocalVariable implements Cloneable, Node {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
      */
-    public LocalVariable(LocalVariable c) {
+    public LocalVariable(final LocalVariable c) {
         this(c.getStartPC(), c.getLength(), c.getNameIndex(), c.getSignatureIndex(), c.getIndex(),
                 c.getConstantPool());
     }
@@ -57,7 +57,7 @@ public final class LocalVariable implements Cloneable, Node {
      * @param file Input stream
      * @throws IOException
      */
-    LocalVariable(DataInput file, ConstantPool constant_pool) throws IOException {
+    LocalVariable(final DataInput file, final ConstantPool constant_pool) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file
                 .readUnsignedShort(), file.readUnsignedShort(), constant_pool);
     }
@@ -71,8 +71,8 @@ public final class LocalVariable implements Cloneable, Node {
      * @param index Variable is `index'th local variable on the method's frame
      * @param constant_pool Array of constants
      */
-    public LocalVariable(int start_pc, int length, int name_index, int signature_index, int index,
-            ConstantPool constant_pool) {
+    public LocalVariable(final int start_pc, final int length, final int name_index, final int signature_index, final int index,
+            final ConstantPool constant_pool) {
         this.start_pc = start_pc;
         this.length = length;
         this.name_index = name_index;
@@ -90,7 +90,7 @@ public final class LocalVariable implements Cloneable, Node {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLocalVariable(this);
     }
 
@@ -101,7 +101,7 @@ public final class LocalVariable implements Cloneable, Node {
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(start_pc);
         file.writeShort(length);
         file.writeShort(name_index);
@@ -181,7 +181,7 @@ public final class LocalVariable implements Cloneable, Node {
     /*
      * Helper method shared with LocalVariableTypeTable
      */
-    final String toStringShared( boolean typeTable ) {
+    final String toStringShared( final boolean typeTable ) {
         String name = getName();
         String signature = Utility.signatureToString(getSignature(), false);
         String label = "LocalVariable" + (typeTable ? "Types" : "" );
@@ -193,7 +193,7 @@ public final class LocalVariable implements Cloneable, Node {
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( ConstantPool constant_pool ) {
+    public final void setConstantPool( final ConstantPool constant_pool ) {
         this.constant_pool = constant_pool;
     }
 
@@ -201,7 +201,7 @@ public final class LocalVariable implements Cloneable, Node {
     /**
      * @param length the length of this local variable
      */
-    public final void setLength( int length ) {
+    public final void setLength( final int length ) {
         this.length = length;
     }
 
@@ -209,7 +209,7 @@ public final class LocalVariable implements Cloneable, Node {
     /**
      * @param name_index the index into the constant pool for the name of this variable
      */
-    public final void setNameIndex( int name_index ) { // TODO unused
+    public final void setNameIndex( final int name_index ) { // TODO unused
         this.name_index = name_index;
     }
 
@@ -217,7 +217,7 @@ public final class LocalVariable implements Cloneable, Node {
     /**
      * @param signature_index the index into the constant pool for the signature of this variable
      */
-    public final void setSignatureIndex( int signature_index ) { // TODO unused
+    public final void setSignatureIndex( final int signature_index ) { // TODO unused
         this.signature_index = signature_index;
     }
 
@@ -225,7 +225,7 @@ public final class LocalVariable implements Cloneable, Node {
     /**
      * @param index the index in the local variable table of this variable
      */
-    public final void setIndex( int index ) { // TODO unused
+    public final void setIndex( final int index ) { // TODO unused
         this.index = index;
     }
 
@@ -233,7 +233,7 @@ public final class LocalVariable implements Cloneable, Node {
     /**
      * @param start_pc Specify range where the local variable is valid.
      */
-    public final void setStartPC( int start_pc ) { // TODO unused
+    public final void setStartPC( final int start_pc ) { // TODO unused
         this.start_pc = start_pc;
     }
 

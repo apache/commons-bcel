@@ -37,7 +37,7 @@ public class JSR_W extends JsrInstruction {
     }
 
 
-    public JSR_W(InstructionHandle target) {
+    public JSR_W(final InstructionHandle target) {
         super(org.apache.commons.bcel6.Const.JSR_W, target);
         super.setLength(5);
     }
@@ -48,7 +48,7 @@ public class JSR_W extends JsrInstruction {
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         super.setIndex(getTargetOffset());
         out.writeByte(super.getOpcode());
         out.writeInt(super.getIndex());
@@ -59,7 +59,7 @@ public class JSR_W extends JsrInstruction {
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.setIndex(bytes.readInt());
         super.setLength(5);
     }
@@ -74,7 +74,7 @@ public class JSR_W extends JsrInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackProducer(this);
         v.visitBranchInstruction(this);
         v.visitJsrInstruction(this);

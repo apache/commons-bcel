@@ -38,7 +38,7 @@ public final class ConstantString extends Constant implements ConstantObject {
     /**
      * Initialize from another object.
      */
-    public ConstantString(ConstantString c) {
+    public ConstantString(final ConstantString c) {
         this(c.getStringIndex());
     }
 
@@ -49,7 +49,7 @@ public final class ConstantString extends Constant implements ConstantObject {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantString(DataInput file) throws IOException {
+    ConstantString(final DataInput file) throws IOException {
         this(file.readUnsignedShort());
     }
 
@@ -57,7 +57,7 @@ public final class ConstantString extends Constant implements ConstantObject {
     /**
      * @param string_index Index of Constant_Utf8 in constant pool
      */
-    public ConstantString(int string_index) {
+    public ConstantString(final int string_index) {
         super(Const.CONSTANT_String);
         this.string_index = string_index;
     }
@@ -71,7 +71,7 @@ public final class ConstantString extends Constant implements ConstantObject {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantString(this);
     }
 
@@ -83,7 +83,7 @@ public final class ConstantString extends Constant implements ConstantObject {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeShort(string_index);
     }
@@ -100,7 +100,7 @@ public final class ConstantString extends Constant implements ConstantObject {
     /**
      * @param string_index the index into the constant of the string value
      */
-    public final void setStringIndex( int string_index ) {
+    public final void setStringIndex( final int string_index ) {
         this.string_index = string_index;
     }
 
@@ -117,7 +117,7 @@ public final class ConstantString extends Constant implements ConstantObject {
     /** @return String object
      */
     @Override
-    public Object getConstantValue( ConstantPool cp ) {
+    public Object getConstantValue( final ConstantPool cp ) {
         Constant c = cp.getConstant(string_index, Const.CONSTANT_Utf8);
         return ((ConstantUtf8) c).getBytes();
     }
@@ -125,7 +125,7 @@ public final class ConstantString extends Constant implements ConstantObject {
 
     /** @return dereferenced string
      */
-    public String getBytes( ConstantPool cp ) {
+    public String getBytes( final ConstantPool cp ) {
         return (String) getConstantValue(cp);
     }
 }

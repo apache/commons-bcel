@@ -21,7 +21,7 @@ package org.apache.commons.bcel6.data;
 @CombinedAnnotation( { @SimpleAnnotation(id = 4) })
 public class AnnotatedWithCombinedAnnotation
 {
-    public AnnotatedWithCombinedAnnotation(int param1, @SimpleAnnotation(id=42) int param2) {
+    public AnnotatedWithCombinedAnnotation(final int param1, @SimpleAnnotation(id=42) final int param2) {
     }
 
     @CombinedAnnotation( {})

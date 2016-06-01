@@ -44,7 +44,7 @@ public class TABLESWITCH extends Select {
      * @param targets where to branch for matched values
      * @param defaultTarget default branch
      */
-    public TABLESWITCH(int[] match, InstructionHandle[] targets, InstructionHandle defaultTarget) {
+    public TABLESWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle defaultTarget) {
         super(org.apache.commons.bcel6.Const.TABLESWITCH, match, targets, defaultTarget);
         /* Alignment remainder assumed 0 here, until dump time */
         final short _length = (short) (13 + getMatch_length() * 4);
@@ -58,7 +58,7 @@ public class TABLESWITCH extends Select {
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         super.dump(out);
         final int _match_length = getMatch_length();
         int low = (_match_length > 0) ? super.getMatch(0) : 0;
@@ -75,7 +75,7 @@ public class TABLESWITCH extends Select {
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
         int low = bytes.readInt();
         int high = bytes.readInt();
@@ -103,7 +103,7 @@ public class TABLESWITCH extends Select {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitVariableLengthInstruction(this);
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);

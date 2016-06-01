@@ -34,7 +34,7 @@ public class MethodParameters extends Attribute {
 
     private MethodParameter[] parameters = new MethodParameter[0];
 
-    MethodParameters(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
+    MethodParameters(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         super(Const.ATTR_METHOD_PARAMETERS, name_index, length, constant_pool);
 
         int parameters_count = input.readUnsignedByte();
@@ -48,17 +48,17 @@ public class MethodParameters extends Attribute {
         return parameters;
     }
 
-    public void setParameters(MethodParameter[] parameters) {
+    public void setParameters(final MethodParameter[] parameters) {
         this.parameters = parameters;
     }
 
     @Override
-    public void accept(Visitor v) {
+    public void accept(final Visitor v) {
         v.visitMethodParameters(this);
     }
 
     @Override
-    public Attribute copy(ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool _constant_pool) {
         MethodParameters c = (MethodParameters) clone();
         c.parameters = new MethodParameter[parameters.length];
 
@@ -76,7 +76,7 @@ public class MethodParameters extends Attribute {
      * @throws IOException
      */
     @Override
-       public void dump(DataOutputStream file) throws IOException {
+       public void dump(final DataOutputStream file) throws IOException {
            super.dump(file);
            file.writeByte(parameters.length);
         for (MethodParameter parameter : parameters) {

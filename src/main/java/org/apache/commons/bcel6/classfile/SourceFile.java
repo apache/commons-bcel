@@ -41,7 +41,7 @@ public final class SourceFile extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    public SourceFile(SourceFile c) {
+    public SourceFile(final SourceFile c) {
         this(c.getNameIndex(), c.getLength(), c.getSourceFileIndex(), c.getConstantPool());
     }
 
@@ -54,7 +54,7 @@ public final class SourceFile extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    SourceFile(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    SourceFile(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, input.readUnsignedShort(), constant_pool);
     }
@@ -73,7 +73,7 @@ public final class SourceFile extends Attribute {
      * information has to be supplied the consumer of this attribute - in
      * many cases, the JVM.
      */
-    public SourceFile(int name_index, int length, int sourcefile_index, ConstantPool constant_pool) {
+    public SourceFile(final int name_index, final int length, final int sourcefile_index, final ConstantPool constant_pool) {
         super(Const.ATTR_SOURCE_FILE, name_index, length, constant_pool);
         this.sourcefile_index = sourcefile_index;
     }
@@ -87,7 +87,7 @@ public final class SourceFile extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitSourceFile(this);
     }
 
@@ -99,7 +99,7 @@ public final class SourceFile extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(sourcefile_index);
     }
@@ -116,7 +116,7 @@ public final class SourceFile extends Attribute {
     /**
      * @param sourcefile_index
      */
-    public final void setSourceFileIndex( int sourcefile_index ) {
+    public final void setSourceFileIndex( final int sourcefile_index ) {
         this.sourcefile_index = sourcefile_index;
     }
 
@@ -144,7 +144,7 @@ public final class SourceFile extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         return (Attribute) clone();
     }
 }

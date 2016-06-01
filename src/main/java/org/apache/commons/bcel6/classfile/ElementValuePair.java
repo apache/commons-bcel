@@ -36,8 +36,8 @@ public class ElementValuePair
 
     private final int elementNameIndex;
 
-    public ElementValuePair(int elementNameIndex, ElementValue elementValue,
-            ConstantPool constantPool)
+    public ElementValuePair(final int elementNameIndex, final ElementValue elementValue,
+            final ConstantPool constantPool)
     {
         this.elementValue = elementValue;
         this.elementNameIndex = elementNameIndex;
@@ -69,7 +69,7 @@ public class ElementValuePair
         return result.toString();
     }
 
-    protected void dump(DataOutputStream dos) throws IOException {
+    protected void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(elementNameIndex); // u2 name of the element
         elementValue.dump(dos);
     }

@@ -46,7 +46,7 @@ public abstract class ElementValueGen
     @Deprecated
     protected ConstantPoolGen cpGen;
 
-    protected ElementValueGen(int type, ConstantPoolGen cpGen)
+    protected ElementValueGen(final int type, final ConstantPoolGen cpGen)
     {
         this.type = type;
         this.cpGen = cpGen;
@@ -92,8 +92,8 @@ public abstract class ElementValueGen
 
     public static final int PRIMITIVE_BOOLEAN = 'Z';
 
-    public static ElementValueGen readElementValue(DataInput dis,
-            ConstantPoolGen cpGen) throws IOException
+    public static ElementValueGen readElementValue(final DataInput dis,
+            final ConstantPoolGen cpGen) throws IOException
     {
         int type = dis.readUnsignedByte();
         switch (type)
@@ -159,8 +159,8 @@ public abstract class ElementValueGen
      * Creates an (modifiable) ElementValueGen copy of an (immutable)
      * ElementValue - constant pool is assumed correct.
      */
-    public static ElementValueGen copy(ElementValue value,
-            ConstantPoolGen cpool, boolean copyPoolEntries)
+    public static ElementValueGen copy(final ElementValue value,
+            final ConstantPoolGen cpool, final boolean copyPoolEntries)
     {
         switch (value.getElementValueType())
         {

@@ -33,14 +33,14 @@ public class ObjectType extends ReferenceType {
     /**
      * @since 6.0
      */
-    public static ObjectType getInstance(String class_name) {
+    public static ObjectType getInstance(final String class_name) {
         return new ObjectType(class_name);
     }
 
     /**
      * @param class_name fully qualified class name, e.g. java.lang.String
      */
-    public ObjectType(String class_name) {
+    public ObjectType(final String class_name) {
         super(Const.T_REFERENCE, "L" + class_name.replace('.', '/') + ";");
         this.class_name = class_name.replace('/', '.');
     }
@@ -64,7 +64,7 @@ public class ObjectType extends ReferenceType {
     /** @return true if both type objects refer to the same class.
      */
     @Override
-    public boolean equals( Object type ) {
+    public boolean equals( final Object type ) {
         return (type instanceof ObjectType)
                 ? ((ObjectType) type).class_name.equals(class_name)
                 : false;
@@ -140,7 +140,7 @@ public class ObjectType extends ReferenceType {
      * @throws ClassNotFoundException if any of this class's superclasses
      *  can't be found
      */
-    public boolean subclassOf( ObjectType superclass ) throws ClassNotFoundException {
+    public boolean subclassOf( final ObjectType superclass ) throws ClassNotFoundException {
         if (this.referencesInterfaceExact() || superclass.referencesInterfaceExact()) {
             return false;
         }
@@ -153,7 +153,7 @@ public class ObjectType extends ReferenceType {
      * @throws ClassNotFoundException if the class referenced by this type
      *   can't be found
      */
-    public boolean accessibleTo( ObjectType accessor ) throws ClassNotFoundException {
+    public boolean accessibleTo( final ObjectType accessor ) throws ClassNotFoundException {
         JavaClass jc = Repository.lookupClass(class_name);
         if (jc.isPublic()) {
             return true;

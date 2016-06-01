@@ -39,8 +39,8 @@ public abstract class Annotations extends Attribute {
      * @param input Input stream
      * @param constant_pool Array of constants
      */
-    Annotations(byte annotation_type, int name_index, int length, DataInput input,
-            ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException {
+    Annotations(final byte annotation_type, final int name_index, final int length, final DataInput input,
+            final ConstantPool constant_pool, final boolean isRuntimeVisible) throws IOException {
         this(annotation_type, name_index, length, (AnnotationEntry[]) null, constant_pool, isRuntimeVisible);
         final int annotation_table_length = input.readUnsignedShort();
         annotation_table = new AnnotationEntry[annotation_table_length];
@@ -56,8 +56,8 @@ public abstract class Annotations extends Attribute {
      * @param annotation_table the actual annotations
      * @param constant_pool Array of constants
      */
-    public Annotations(byte annotation_type, int name_index, int length, AnnotationEntry[] annotation_table,
-            ConstantPool constant_pool, boolean isRuntimeVisible) {
+    public Annotations(final byte annotation_type, final int name_index, final int length, final AnnotationEntry[] annotation_table,
+            final ConstantPool constant_pool, final boolean isRuntimeVisible) {
         super(annotation_type, name_index, length, constant_pool);
         this.annotation_table = annotation_table;
         this.isRuntimeVisible = isRuntimeVisible;
@@ -70,14 +70,14 @@ public abstract class Annotations extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept(Visitor v) {
+    public void accept(final Visitor v) {
         v.visitAnnotation(this);
     }
 
     /**
      * @param annotation_table the entries to set in this annotation
      */
-    public final void setAnnotationTable(AnnotationEntry[] annotation_table) {
+    public final void setAnnotationTable(final AnnotationEntry[] annotation_table) {
         this.annotation_table = annotation_table;
     }
 
@@ -102,7 +102,7 @@ public abstract class Annotations extends Attribute {
         return isRuntimeVisible;
     }
 
-    protected void writeAnnotations(DataOutputStream dos) throws IOException {
+    protected void writeAnnotations(final DataOutputStream dos) throws IOException {
         if (annotation_table == null) {
             return;
         }

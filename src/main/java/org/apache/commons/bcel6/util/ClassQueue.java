@@ -36,7 +36,7 @@ public class ClassQueue {
     protected LinkedList<JavaClass> vec = new LinkedList<>(); // TODO not used externally
 
 
-    public void enqueue( JavaClass clazz ) {
+    public void enqueue( final JavaClass clazz ) {
         vec.addLast(clazz);
     }
 

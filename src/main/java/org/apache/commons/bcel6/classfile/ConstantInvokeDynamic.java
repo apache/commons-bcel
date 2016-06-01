@@ -36,7 +36,7 @@ public final class ConstantInvokeDynamic extends ConstantCP {
     /**
      * Initialize from another object.
      */
-    public ConstantInvokeDynamic(ConstantInvokeDynamic c) {
+    public ConstantInvokeDynamic(final ConstantInvokeDynamic c) {
         this(c.getBootstrapMethodAttrIndex(), c.getNameAndTypeIndex());
     }
 
@@ -47,12 +47,12 @@ public final class ConstantInvokeDynamic extends ConstantCP {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantInvokeDynamic(DataInput file) throws IOException {
+    ConstantInvokeDynamic(final DataInput file) throws IOException {
         this(file.readShort(), file.readShort());
     }
 
 
-    public ConstantInvokeDynamic(int bootstrap_method_attr_index, int name_and_type_index) {
+    public ConstantInvokeDynamic(final int bootstrap_method_attr_index, final int name_and_type_index) {
         super(Const.CONSTANT_InvokeDynamic, bootstrap_method_attr_index, name_and_type_index);
     }
 
@@ -65,7 +65,7 @@ public final class ConstantInvokeDynamic extends ConstantCP {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantInvokeDynamic(this);
     }
 

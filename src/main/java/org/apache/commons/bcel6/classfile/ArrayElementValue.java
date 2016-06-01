@@ -44,7 +44,7 @@ public class ArrayElementValue extends ElementValue
         return sb.toString();
     }
 
-    public ArrayElementValue(int type, ElementValue[] datums, ConstantPool cpool)
+    public ArrayElementValue(final int type, final ElementValue[] datums, final ConstantPool cpool)
     {
         super(type, cpool);
         if (type != ARRAY) {
@@ -55,7 +55,7 @@ public class ArrayElementValue extends ElementValue
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         dos.writeByte(super.getType()); // u1 type of value (ARRAY == '[')
         dos.writeShort(evalues.length);

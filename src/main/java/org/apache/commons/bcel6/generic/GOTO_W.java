@@ -37,7 +37,7 @@ public class GOTO_W extends GotoInstruction {
     }
 
 
-    public GOTO_W(InstructionHandle target) {
+    public GOTO_W(final InstructionHandle target) {
         super(org.apache.commons.bcel6.Const.GOTO_W, target);
         super.setLength(5);
     }
@@ -48,7 +48,7 @@ public class GOTO_W extends GotoInstruction {
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         super.setIndex(getTargetOffset());
         out.writeByte(super.getOpcode());
         out.writeInt(super.getIndex());
@@ -59,7 +59,7 @@ public class GOTO_W extends GotoInstruction {
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.setIndex(bytes.readInt());
         super.setLength(5);
     }
@@ -74,7 +74,7 @@ public class GOTO_W extends GotoInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitUnconditionalBranch(this);
         v.visitBranchInstruction(this);
         v.visitGotoInstruction(this);

@@ -44,7 +44,7 @@ public class INVOKESPECIAL extends InvokeInstruction {
     }
 
 
-    public INVOKESPECIAL(int index) {
+    public INVOKESPECIAL(final int index) {
         super(Const.INVOKESPECIAL, index);
     }
 
@@ -54,7 +54,7 @@ public class INVOKESPECIAL extends InvokeInstruction {
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(super.getOpcode());
         out.writeShort(super.getIndex());
     }
@@ -78,7 +78,7 @@ public class INVOKESPECIAL extends InvokeInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);
         v.visitStackConsumer(this);

@@ -32,7 +32,7 @@ public final class ConstantFieldref extends ConstantCP {
     /**
      * Initialize from another object.
      */
-    public ConstantFieldref(ConstantFieldref c) {
+    public ConstantFieldref(final ConstantFieldref c) {
         super(Const.CONSTANT_Fieldref, c.getClassIndex(), c.getNameAndTypeIndex());
     }
 
@@ -43,7 +43,7 @@ public final class ConstantFieldref extends ConstantCP {
      * @param input input stream
      * @throws IOException
      */
-    ConstantFieldref(DataInput input) throws IOException {
+    ConstantFieldref(final DataInput input) throws IOException {
         super(Const.CONSTANT_Fieldref, input);
     }
 
@@ -52,7 +52,7 @@ public final class ConstantFieldref extends ConstantCP {
      * @param class_index Reference to the class containing the Field
      * @param name_and_type_index and the Field signature
      */
-    public ConstantFieldref(int class_index, int name_and_type_index) {
+    public ConstantFieldref(final int class_index, final int name_and_type_index) {
         super(Const.CONSTANT_Fieldref, class_index, name_and_type_index);
     }
 
@@ -65,7 +65,7 @@ public final class ConstantFieldref extends ConstantCP {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantFieldref(this);
     }
 }

@@ -41,7 +41,7 @@ public abstract class AccessFlags {
     /**
      * @param a inital access flags
      */
-    public AccessFlags(int a) {
+    public AccessFlags(final int a) {
         access_flags = a;
     }
 
@@ -65,7 +65,7 @@ public abstract class AccessFlags {
     /** Set access flags aka "modifiers".
      * @param access_flags Access flags of the object. 
      */
-    public final void setAccessFlags( int access_flags ) {
+    public final void setAccessFlags( final int access_flags ) {
         this.access_flags = access_flags;
     }
 
@@ -73,12 +73,12 @@ public abstract class AccessFlags {
     /** Set access flags aka "modifiers".
      * @param access_flags Access flags of the object. 
      */
-    public final void setModifiers( int access_flags ) {
+    public final void setModifiers( final int access_flags ) {
         setAccessFlags(access_flags);
     }
 
 
-    private void setFlag( int flag, boolean set ) {
+    private void setFlag( final int flag, final boolean set ) {
         if ((access_flags & flag) != 0) { // Flag is set already
             if (!set) {
                 access_flags ^= flag;
@@ -91,7 +91,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isPublic( boolean flag ) {
+    public final void isPublic( final boolean flag ) {
         setFlag(Const.ACC_PUBLIC, flag);
     }
 
@@ -101,7 +101,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isPrivate( boolean flag ) {
+    public final void isPrivate( final boolean flag ) {
         setFlag(Const.ACC_PRIVATE, flag);
     }
 
@@ -111,7 +111,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isProtected( boolean flag ) {
+    public final void isProtected( final boolean flag ) {
         setFlag(Const.ACC_PROTECTED, flag);
     }
 
@@ -121,7 +121,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isStatic( boolean flag ) {
+    public final void isStatic( final boolean flag ) {
         setFlag(Const.ACC_STATIC, flag);
     }
 
@@ -131,7 +131,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isFinal( boolean flag ) {
+    public final void isFinal( final boolean flag ) {
         setFlag(Const.ACC_FINAL, flag);
     }
 
@@ -141,7 +141,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isSynchronized( boolean flag ) {
+    public final void isSynchronized( final boolean flag ) {
         setFlag(Const.ACC_SYNCHRONIZED, flag);
     }
 
@@ -151,7 +151,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isVolatile( boolean flag ) {
+    public final void isVolatile( final boolean flag ) {
         setFlag(Const.ACC_VOLATILE, flag);
     }
 
@@ -161,7 +161,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isTransient( boolean flag ) {
+    public final void isTransient( final boolean flag ) {
         setFlag(Const.ACC_TRANSIENT, flag);
     }
 
@@ -171,7 +171,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isNative( boolean flag ) {
+    public final void isNative( final boolean flag ) {
         setFlag(Const.ACC_NATIVE, flag);
     }
 
@@ -181,7 +181,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isInterface( boolean flag ) {
+    public final void isInterface( final boolean flag ) {
         setFlag(Const.ACC_INTERFACE, flag);
     }
 
@@ -191,7 +191,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isAbstract( boolean flag ) {
+    public final void isAbstract( final boolean flag ) {
         setFlag(Const.ACC_ABSTRACT, flag);
     }
 
@@ -201,7 +201,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isStrictfp( boolean flag ) {
+    public final void isStrictfp( final boolean flag ) {
         setFlag(Const.ACC_STRICT, flag);
     }
 
@@ -211,7 +211,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isSynthetic( boolean flag ) {
+    public final void isSynthetic( final boolean flag ) {
         setFlag(Const.ACC_SYNTHETIC, flag);
     }
 
@@ -221,7 +221,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isAnnotation( boolean flag ) {
+    public final void isAnnotation( final boolean flag ) {
         setFlag(Const.ACC_ANNOTATION, flag);
     }
 
@@ -231,7 +231,7 @@ public abstract class AccessFlags {
     }
 
 
-    public final void isEnum( boolean flag ) {
+    public final void isEnum( final boolean flag ) {
         setFlag(Const.ACC_ENUM, flag);
     }
 

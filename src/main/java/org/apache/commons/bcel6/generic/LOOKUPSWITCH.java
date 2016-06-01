@@ -38,7 +38,7 @@ public class LOOKUPSWITCH extends Select {
     }
 
 
-    public LOOKUPSWITCH(int[] match, InstructionHandle[] targets, InstructionHandle defaultTarget) {
+    public LOOKUPSWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle defaultTarget) {
         super(org.apache.commons.bcel6.Const.LOOKUPSWITCH, match, targets, defaultTarget);
         /* alignment remainder assumed 0 here, until dump time. */
         final short _length = (short) (9 + getMatch_length() * 8);
@@ -52,7 +52,7 @@ public class LOOKUPSWITCH extends Select {
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         super.dump(out);
         final int _match_length = getMatch_length();
         out.writeInt(_match_length); // npairs
@@ -67,7 +67,7 @@ public class LOOKUPSWITCH extends Select {
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.initFromFile(bytes, wide); // reads padding
         final int _match_length = bytes.readInt();
         setMatch_length(_match_length);
@@ -94,7 +94,7 @@ public class LOOKUPSWITCH extends Select {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitVariableLengthInstruction(this);
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);

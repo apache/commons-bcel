@@ -35,7 +35,7 @@ public final class ArrayType extends ReferenceType {
      *
      * @param type array type, e.g. T_INT
      */
-    public ArrayType(byte type, int dimensions) {
+    public ArrayType(final byte type, final int dimensions) {
         this(BasicType.getType(type), dimensions);
     }
 
@@ -45,7 +45,7 @@ public final class ArrayType extends ReferenceType {
      *
      * @param class_name complete name of class (java.lang.String, e.g.)
      */
-    public ArrayType(String class_name, int dimensions) {
+    public ArrayType(final String class_name, final int dimensions) {
         this(ObjectType.getInstance(class_name), dimensions);
     }
 
@@ -55,7 +55,7 @@ public final class ArrayType extends ReferenceType {
      *
      * @param type type of array (may be an array itself)
      */
-    public ArrayType(Type type, int dimensions) {
+    public ArrayType(final Type type, final int dimensions) {
         super(Const.T_ARRAY, "<dummy>");
         if ((dimensions < 1) || (dimensions > Const.MAX_BYTE)) {
             throw new ClassGenException("Invalid number of dimensions: " + dimensions);
@@ -119,7 +119,7 @@ public final class ArrayType extends ReferenceType {
     /** @return true if both type objects refer to the same array type.
      */
     @Override
-    public boolean equals( Object _type ) {
+    public boolean equals( final Object _type ) {
         if (_type instanceof ArrayType) {
             ArrayType array = (ArrayType) _type;
             return (array.dimensions == dimensions) && array.basic_type.equals(basic_type);

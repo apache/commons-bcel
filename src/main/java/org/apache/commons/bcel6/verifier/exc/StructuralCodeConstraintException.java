@@ -34,7 +34,7 @@ public class StructuralCodeConstraintException extends CodeConstraintException{
     /**
      * Constructs a new StructuralCodeConstraintException with the specified error message.
      */
-    public StructuralCodeConstraintException(String message){
+    public StructuralCodeConstraintException(final String message){
         super(message);
     }
     /**

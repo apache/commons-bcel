@@ -42,7 +42,7 @@ public final class LineNumber implements Cloneable, Node {
      * 
      * @param c the object to copy
      */
-    public LineNumber(LineNumber c) {
+    public LineNumber(final LineNumber c) {
         this(c.getStartPC(), c.getLineNumber());
     }
 
@@ -53,7 +53,7 @@ public final class LineNumber implements Cloneable, Node {
      * @param file Input stream
      * @throws IOEXception if an I/O Exception occurs in readUnsignedShort
      */
-    LineNumber(DataInput file) throws IOException {
+    LineNumber(final DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort());
     }
 
@@ -62,7 +62,7 @@ public final class LineNumber implements Cloneable, Node {
      * @param start_pc Program Counter (PC) corresponds to
      * @param line_number line number in source file
      */
-    public LineNumber(int start_pc, int line_number) {
+    public LineNumber(final int start_pc, final int line_number) {
         this.start_pc = (short) start_pc;
         this.line_number = (short)line_number;
     }
@@ -76,7 +76,7 @@ public final class LineNumber implements Cloneable, Node {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLineNumber(this);
     }
 
@@ -87,7 +87,7 @@ public final class LineNumber implements Cloneable, Node {
      * @param file Output file stream
      * @throws IOEXception if an I/O Exception occurs in writeShort
      */
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(start_pc);
         file.writeShort(line_number);
     }
@@ -112,7 +112,7 @@ public final class LineNumber implements Cloneable, Node {
     /**
      * @param line_number the source line number
      */
-    public final void setLineNumber( int line_number ) {
+    public final void setLineNumber( final int line_number ) {
         this.line_number = (short) line_number;
     }
 
@@ -120,7 +120,7 @@ public final class LineNumber implements Cloneable, Node {
     /**
      * @param start_pc the pc for this line number
      */
-    public final void setStartPC( int start_pc ) {
+    public final void setStartPC( final int start_pc ) {
         this.start_pc = (short) start_pc;
     }
 

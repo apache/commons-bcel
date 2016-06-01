@@ -19,7 +19,7 @@ package org.apache.commons.bcel6.verifier.tests;
 
 public abstract class TestLegalInvokeVirtual02 implements Runnable{
 
-    public static void test1(TestLegalInvokeVirtual02 t, int i){
+    public static void test1(final TestLegalInvokeVirtual02 t, final int i){
         if(i > 0){
             t.run();
         }

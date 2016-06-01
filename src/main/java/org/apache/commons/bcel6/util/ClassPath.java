@@ -47,7 +47,7 @@ public class ClassPath {
     private static final FilenameFilter ARCHIVE_FILTER = new FilenameFilter() {
 
         @Override
-        public boolean accept( File dir, String name ) {
+        public boolean accept( final File dir, String name ) {
             name = name.toLowerCase(Locale.ENGLISH);
             return name.endsWith(".zip") || name.endsWith(".jar");
         }
@@ -57,7 +57,7 @@ public class ClassPath {
     private final String class_path;
     private ClassPath parent;
 
-    public ClassPath(ClassPath parent, String class_path) {
+    public ClassPath(final ClassPath parent, final String class_path) {
         this(class_path);
         this.parent = parent;
     }
@@ -67,7 +67,7 @@ public class ClassPath {
      * 
      * @param class_path
      */
-    public ClassPath(String class_path) {
+    public ClassPath(final String class_path) {
         this.class_path = class_path;
         List<PathEntry> vec = new ArrayList<>();
         for (StringTokenizer tok = new StringTokenizer(class_path, File.pathSeparator); tok.hasMoreTokens();) {
@@ -122,7 +122,7 @@ public class ClassPath {
 
 
     @Override
-    public boolean equals( Object o ) {
+    public boolean equals( final Object o ) {
         if (o instanceof ClassPath) {
             ClassPath cp = (ClassPath)o;
             return class_path.equals(cp.toString());
@@ -131,7 +131,7 @@ public class ClassPath {
     }
 
 
-    private static void getPathComponents( String path, List<String> list ) {
+    private static void getPathComponents( final String path, final List<String> list ) {
         if (path != null) {
             StringTokenizer tok = new StringTokenizer(path, File.pathSeparator);
             while (tok.hasMoreTokens()) {
@@ -184,7 +184,7 @@ public class ClassPath {
      * @param name fully qualified class name, e.g. java.lang.String
      * @return input stream for class
      */
-    public InputStream getInputStream( String name ) throws IOException {
+    public InputStream getInputStream( final String name ) throws IOException {
         return getInputStream(name.replace('.', '/'), ".class");
     }
 
@@ -196,7 +196,7 @@ public class ClassPath {
      * @param suffix file name ends with suff, e.g. .java
      * @return input stream for file on class path
      */
-    public InputStream getInputStream( String name, String suffix ) throws IOException {
+    public InputStream getInputStream( final String name, final String suffix ) throws IOException {
         InputStream is = null;
         try {
             is = getClass().getClassLoader().getResourceAsStream(name + suffix); // may return null
@@ -214,7 +214,7 @@ public class ClassPath {
      * @return InputStream supplying the resource, or null if no resource with that name.
      * @since 6.0
      */
-    public InputStream getResourceAsStream(String name) {
+    public InputStream getResourceAsStream(final String name) {
         for (PathEntry path : paths) {
             InputStream is;
             if ((is = path.getResourceAsStream(name)) != null) {
@@ -229,7 +229,7 @@ public class ClassPath {
      * @return URL supplying the resource, or null if no resource with that name.
      * @since 6.0
      */
-    public URL getResource(String name) {
+    public URL getResource(final String name) {
         for (PathEntry path : paths) {
             URL url;
             if ((url = path.getResource(name)) != null) {
@@ -245,7 +245,7 @@ public class ClassPath {
      * empty Enumeration if no resource with that name.
      * @since 6.0
      */
-    public Enumeration<URL> getResources(String name) {
+    public Enumeration<URL> getResources(final String name) {
         Vector<URL> results = new Vector<>();
         for (PathEntry path : paths) {
             URL url;
@@ -261,7 +261,7 @@ public class ClassPath {
      * @param suffix file name ends with suff, e.g. .java
      * @return class file for the java class
      */
-    public ClassFile getClassFile( String name, String suffix ) throws IOException {
+    public ClassFile getClassFile( final String name, final String suffix ) throws IOException {
         ClassFile cf = null;
 
         if (parent != null) {
@@ -279,7 +279,7 @@ public class ClassPath {
         throw new IOException("Couldn't find: " + name + suffix);
     }
 
-    private ClassFile getClassFileInternal(String name, String suffix) throws IOException {
+    private ClassFile getClassFileInternal(final String name, final String suffix) throws IOException {
 
       for (PathEntry path : paths) {
           ClassFile cf = path.getClassFile(name, suffix);
@@ -297,7 +297,7 @@ public class ClassPath {
      * @param name fully qualified class name, e.g. java.lang.String
      * @return input stream for class
      */
-    public ClassFile getClassFile( String name ) throws IOException {
+    public ClassFile getClassFile( final String name ) throws IOException {
         return getClassFile(name, ".class");
     }
 
@@ -307,7 +307,7 @@ public class ClassPath {
      * @param suffix file name ends with suffix, e.g. .java
      * @return byte array for file on class path
      */
-    public byte[] getBytes( String name, String suffix ) throws IOException {
+    public byte[] getBytes( final String name, final String suffix ) throws IOException {
         DataInputStream dis = null;
         try {
             InputStream is = getInputStream(name, suffix);
@@ -329,7 +329,7 @@ public class ClassPath {
     /**
      * @return byte array for class
      */
-    public byte[] getBytes( String name ) throws IOException {
+    public byte[] getBytes( final String name ) throws IOException {
         return getBytes(name, ".class");
     }
 
@@ -354,7 +354,7 @@ public class ClassPath {
      * @param suffix file name suffix, e.g. .java
      * @return full (canonical) path for file, if it exists
      */
-    public String getPath( String name, String suffix ) throws IOException {
+    public String getPath( final String name, final String suffix ) throws IOException {
         return getClassFile(name, suffix).getPath();
     }
 
@@ -400,12 +400,12 @@ public class ClassPath {
         private final String dir;
 
 
-        Dir(String d) {
+        Dir(final String d) {
             dir = d;
         }
 
         @Override
-        URL getResource(String name) {
+        URL getResource(final String name) {
             // Resource specification uses '/' whatever the platform
             final File file = new File(dir + File.separatorChar + name.replace('/', File.separatorChar));
             try {
@@ -416,7 +416,7 @@ public class ClassPath {
         }
 
         @Override
-        InputStream getResourceAsStream(String name) {
+        InputStream getResourceAsStream(final String name) {
             // Resource specification uses '/' whatever the platform
             final File file = new File(dir + File.separatorChar + name.replace('/', File.separatorChar));
             try {
@@ -427,7 +427,7 @@ public class ClassPath {
         }
 
         @Override
-        ClassFile getClassFile( String name, String suffix ) throws IOException {
+        ClassFile getClassFile( final String name, final String suffix ) throws IOException {
             final File file = new File(dir + File.separatorChar
                     + name.replace('.', File.separatorChar) + suffix);
             return file.exists() ? new ClassFile() {
@@ -479,12 +479,12 @@ public class ClassPath {
         private final ZipFile zip;
 
 
-        Zip(ZipFile z) {
+        Zip(final ZipFile z) {
             zip = z;
         }
 
         @Override
-        URL getResource(String name) {
+        URL getResource(final String name) {
             final ZipEntry entry = zip.getEntry(name);
             try {
                 return (entry != null) ? new URL("jar:file:" + zip.getName() + "!/" + name) : null;
@@ -494,7 +494,7 @@ public class ClassPath {
         }
 
         @Override
-        InputStream getResourceAsStream(String name) {
+        InputStream getResourceAsStream(final String name) {
             final ZipEntry entry = zip.getEntry(name);
             try {
                 return (entry != null) ? zip.getInputStream(entry) : null;
@@ -504,7 +504,7 @@ public class ClassPath {
         }
 
         @Override
-        ClassFile getClassFile( String name, String suffix ) throws IOException {
+        ClassFile getClassFile( final String name, final String suffix ) throws IOException {
             final ZipEntry entry = zip.getEntry(name.replace('.', '/') + suffix);
 
             if (entry == null) {

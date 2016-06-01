@@ -43,7 +43,7 @@ public final class ExceptionTable extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
      */
-    public ExceptionTable(ExceptionTable c) {
+    public ExceptionTable(final ExceptionTable c) {
         this(c.getNameIndex(), c.getLength(), c.getExceptionIndexTable(), c.getConstantPool());
     }
 
@@ -54,8 +54,8 @@ public final class ExceptionTable extends Attribute {
      * @param exception_index_table Table of indices in constant pool
      * @param constant_pool Array of constants
      */
-    public ExceptionTable(int name_index, int length, int[] exception_index_table,
-            ConstantPool constant_pool) {
+    public ExceptionTable(final int name_index, final int length, final int[] exception_index_table,
+            final ConstantPool constant_pool) {
         super(Const.ATTR_EXCEPTIONS, name_index, length, constant_pool);
         this.exception_index_table = exception_index_table != null ? exception_index_table : new int[0];
     }
@@ -69,7 +69,7 @@ public final class ExceptionTable extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    ExceptionTable(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
+    ExceptionTable(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, (int[]) null, constant_pool);
         int number_of_exceptions = input.readUnsignedShort();
         exception_index_table = new int[number_of_exceptions];
@@ -87,7 +87,7 @@ public final class ExceptionTable extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitExceptionTable(this);
     }
 
@@ -99,7 +99,7 @@ public final class ExceptionTable extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(exception_index_table.length);
         for (int index : exception_index_table) {
@@ -141,7 +141,7 @@ public final class ExceptionTable extends Attribute {
      * @param exception_index_table the list of exception indexes
      * Also redefines number_of_exceptions according to table length.
      */
-    public final void setExceptionIndexTable( int[] exception_index_table ) {
+    public final void setExceptionIndexTable( final int[] exception_index_table ) {
         this.exception_index_table = exception_index_table != null ? exception_index_table : new int[0];
     }
 
@@ -169,7 +169,7 @@ public final class ExceptionTable extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         ExceptionTable c = (ExceptionTable) clone();
         if (exception_index_table != null) {
             c.exception_index_table = new int[exception_index_table.length];

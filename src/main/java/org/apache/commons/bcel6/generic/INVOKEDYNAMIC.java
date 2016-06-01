@@ -48,7 +48,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     }
 
 
-    public INVOKEDYNAMIC(int index) {
+    public INVOKEDYNAMIC(final int index) {
         super(Const.INVOKEDYNAMIC, index);
     }
 
@@ -58,7 +58,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(super.getOpcode());
         out.writeShort(super.getIndex());
         out.writeByte(0);
@@ -70,7 +70,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      * Read needed data (i.e., index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
         super.setLength(5);
         bytes.readByte(); // Skip 0 byte
@@ -82,7 +82,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      * @return mnemonic for instruction with symbolic references resolved
      */
     @Override
-    public String toString( ConstantPool cp ) {
+    public String toString( final ConstantPool cp ) {
         return super.toString(cp);
     }
 
@@ -106,7 +106,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);
         v.visitStackConsumer(this);
@@ -121,7 +121,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     /**
      * Override the parent method because our classname is held elsewhere.
      */
-    public String getClassName( ConstantPoolGen cpg ) {
+    public String getClassName( final ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
         ConstantInvokeDynamic cid = (ConstantInvokeDynamic) cp.getConstant(super.getIndex(), Const.CONSTANT_InvokeDynamic);
         return ((ConstantNameAndType) cp.getConstant(cid.getNameAndTypeIndex())).getName(cp);

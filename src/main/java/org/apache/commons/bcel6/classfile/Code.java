@@ -54,7 +54,7 @@ public final class Code extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
      */
-    public Code(Code c) {
+    public Code(final Code c) {
         this(c.getNameIndex(), c.getLength(), c.getMaxStack(), c.getMaxLocals(), c.getCode(), c
                 .getExceptionTable(), c.getAttributes(), c.getConstantPool());
     }
@@ -66,7 +66,7 @@ public final class Code extends Attribute {
      * @param file Input stream
      * @param constant_pool Array of constants
      */
-    Code(int name_index, int length, DataInput file, ConstantPool constant_pool)
+    Code(final int name_index, final int length, final DataInput file, final ConstantPool constant_pool)
             throws IOException {
         // Initialize with some default values which will be overwritten later
         this(name_index, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null,
@@ -108,8 +108,8 @@ public final class Code extends Attribute {
      * @param attributes Attributes of code: LineNumber or LocalVariable
      * @param constant_pool Array of constants
      */
-    public Code(int name_index, int length, int max_stack, int max_locals, byte[] code,
-            CodeException[] exception_table, Attribute[] attributes, ConstantPool constant_pool) {
+    public Code(final int name_index, final int length, final int max_stack, final int max_locals, final byte[] code,
+            final CodeException[] exception_table, final Attribute[] attributes, final ConstantPool constant_pool) {
         super(Const.ATTR_CODE, name_index, length, constant_pool);
         this.max_stack = max_stack;
         this.max_locals = max_locals;
@@ -128,7 +128,7 @@ public final class Code extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitCode(this);
     }
 
@@ -140,7 +140,7 @@ public final class Code extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(max_stack);
         file.writeShort(max_locals);
@@ -256,7 +256,7 @@ public final class Code extends Attribute {
     /**
      * @param attributes the attributes to set for this Code
      */
-    public final void setAttributes( Attribute[] attributes ) {
+    public final void setAttributes( final Attribute[] attributes ) {
         this.attributes = attributes != null ? attributes : new Attribute[0];
         super.setLength(calculateLength()); // Adjust length
     }
@@ -265,7 +265,7 @@ public final class Code extends Attribute {
     /**
      * @param code byte code
      */
-    public final void setCode( byte[] code ) {
+    public final void setCode( final byte[] code ) {
         this.code = code != null ? code : new byte[0];
         super.setLength(calculateLength()); // Adjust length
     }
@@ -274,7 +274,7 @@ public final class Code extends Attribute {
     /**
      * @param exception_table exception table
      */
-    public final void setExceptionTable( CodeException[] exception_table ) {
+    public final void setExceptionTable( final CodeException[] exception_table ) {
         this.exception_table = exception_table != null ? exception_table : new CodeException[0];
         super.setLength(calculateLength()); // Adjust length
     }
@@ -283,7 +283,7 @@ public final class Code extends Attribute {
     /**
      * @param max_locals maximum number of local variables
      */
-    public final void setMaxLocals( int max_locals ) {
+    public final void setMaxLocals( final int max_locals ) {
         this.max_locals = max_locals;
     }
 
@@ -291,7 +291,7 @@ public final class Code extends Attribute {
     /**
      * @param max_stack maximum stack size
      */
-    public final void setMaxStack( int max_stack ) {
+    public final void setMaxStack( final int max_stack ) {
         this.max_stack = max_stack;
     }
 
@@ -299,7 +299,7 @@ public final class Code extends Attribute {
     /**
      * @return String representation of code chunk.
      */
-    public final String toString( boolean verbose ) {
+    public final String toString( final boolean verbose ) {
         StringBuilder buf = new StringBuilder(100); // CHECKSTYLE IGNORE MagicNumber
         buf.append("Code(max_stack = ").append(max_stack).append(", max_locals = ").append(
                 max_locals).append(", code_length = ").append(code.length).append(")\n").append(
@@ -335,7 +335,7 @@ public final class Code extends Attribute {
      * @param _constant_pool the constant pool to duplicate
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         Code c = (Code) clone();
         if (code != null) {
             c.code = new byte[code.length];

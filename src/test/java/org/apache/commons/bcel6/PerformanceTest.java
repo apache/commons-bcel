@@ -66,7 +66,7 @@ public final class PerformanceTest extends TestCase {
         }
     }
 
-    private static void test(File lib) throws IOException {
+    private static void test(final File lib) throws IOException {
         NanoTimer total = new NanoTimer();
         NanoTimer parseTime = new NanoTimer();
         NanoTimer cgenTime = new NanoTimer();
@@ -136,7 +136,7 @@ public final class PerformanceTest extends TestCase {
         javaLib.listFiles(new FileFilter() {
 
             @Override
-            public boolean accept(File file) {
+            public boolean accept(final File file) {
                 if(file.getName().endsWith(".jar")) {
                     try {
                         test(file);

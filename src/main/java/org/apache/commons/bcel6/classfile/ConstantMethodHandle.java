@@ -39,7 +39,7 @@ public final class ConstantMethodHandle extends Constant {
     /**
      * Initialize from another object.
      */
-    public ConstantMethodHandle(ConstantMethodHandle c) {
+    public ConstantMethodHandle(final ConstantMethodHandle c) {
         this(c.getReferenceKind(), c.getReferenceIndex());
     }
 
@@ -50,12 +50,12 @@ public final class ConstantMethodHandle extends Constant {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantMethodHandle(DataInput file) throws IOException {
+    ConstantMethodHandle(final DataInput file) throws IOException {
         this(file.readUnsignedByte(), file.readUnsignedShort());
     }
 
 
-    public ConstantMethodHandle(int reference_kind, int reference_index) {
+    public ConstantMethodHandle(final int reference_kind, final int reference_index) {
         super(Const.CONSTANT_MethodHandle);
         this.reference_kind = reference_kind;
         this.reference_index = reference_index;
@@ -70,7 +70,7 @@ public final class ConstantMethodHandle extends Constant {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantMethodHandle(this);
     }
 
@@ -82,7 +82,7 @@ public final class ConstantMethodHandle extends Constant {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeByte(reference_kind);
         file.writeShort(reference_index);
@@ -94,7 +94,7 @@ public final class ConstantMethodHandle extends Constant {
     }
 
 
-    public void setReferenceKind(int reference_kind) {
+    public void setReferenceKind(final int reference_kind) {
         this.reference_kind = reference_kind;
     }
 
@@ -104,7 +104,7 @@ public final class ConstantMethodHandle extends Constant {
     }
 
 
-    public void setReferenceIndex(int reference_index) {
+    public void setReferenceIndex(final int reference_index) {
         this.reference_index = reference_index;
     }
 

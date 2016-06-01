@@ -44,7 +44,7 @@ public class OperandStack implements Cloneable {
     /**
      * Creates an empty stack with a maximum of maxStack slots.
      */
-    public OperandStack(int maxStack){
+    public OperandStack(final int maxStack){
         this.maxStack = maxStack;
     }
 
@@ -52,7 +52,7 @@ public class OperandStack implements Cloneable {
      * Creates an otherwise empty stack with a maximum of maxStack slots and
      * the ObjectType 'obj' at the top.
      */
-    public OperandStack(int maxStack, ObjectType obj){
+    public OperandStack(final int maxStack, final ObjectType obj){
         this.maxStack = maxStack;
         this.push(obj);
     }    
@@ -88,7 +88,7 @@ public class OperandStack implements Cloneable {
      * objects on the stacks.
      */
     @Override
-    public boolean equals(Object o){
+    public boolean equals(final Object o){
         if (!(o instanceof OperandStack)) {
             return false;
         }
@@ -130,7 +130,7 @@ public class OperandStack implements Cloneable {
    * Returns the element that's i elements below the top element; that means,
    * iff i==0 the top element is returned. The element is not popped off the stack!
    */
-    public Type peek(int i){
+    public Type peek(final int i){
         return stack.get(size()-i-1);
     }
 
@@ -145,7 +145,7 @@ public class OperandStack implements Cloneable {
     /**
      * Pops i elements off the stack. ALWAYS RETURNS "null"!!!
      */
-    public Type pop(int i){
+    public Type pop(final int i){
         for (int j=0; j<i; j++){
             pop();
         }
@@ -155,7 +155,7 @@ public class OperandStack implements Cloneable {
     /**
      * Pushes a Type object onto the stack.
      */
-    public void push(Type type){
+    public void push(final Type type){
         if (type == null) {
             throw new AssertionViolatedException("Cannot push NULL onto OperandStack.");
         }
@@ -217,7 +217,7 @@ public class OperandStack implements Cloneable {
      * See the Java Virtual Machine Specification, Second Edition, page 146: 4.9.2
      * for details.
      */
-    public void merge(OperandStack s){
+    public void merge(final OperandStack s){
         try {
         if ( (slotsUsed() != s.slotsUsed()) || (size() != s.size()) ) {
             throw new StructuralCodeConstraintException(
@@ -263,7 +263,7 @@ public class OperandStack implements Cloneable {
      * Replaces all occurences of u in this OperandStack instance
      * with an "initialized" ObjectType.
      */
-    public void initializeObject(UninitializedObjectType u){
+    public void initializeObject(final UninitializedObjectType u){
         for (int i=0; i<stack.size(); i++){
             if (stack.get(i) == u){
                 stack.set(i, u.getInitialized());

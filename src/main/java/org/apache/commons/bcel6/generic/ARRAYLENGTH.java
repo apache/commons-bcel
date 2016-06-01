@@ -53,7 +53,7 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitStackProducer(this);
         v.visitARRAYLENGTH(this);

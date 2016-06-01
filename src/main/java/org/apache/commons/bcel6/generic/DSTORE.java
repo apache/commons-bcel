@@ -37,7 +37,7 @@ public class DSTORE extends StoreInstruction {
     /** Store double into local variable
      * @param n index of local variable
      */
-    public DSTORE(int n) {
+    public DSTORE(final int n) {
         super(org.apache.commons.bcel6.Const.DSTORE, org.apache.commons.bcel6.Const.DSTORE_0, n);
     }
 
@@ -51,7 +51,7 @@ public class DSTORE extends StoreInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         super.accept(v);
         v.visitDSTORE(this);
     }

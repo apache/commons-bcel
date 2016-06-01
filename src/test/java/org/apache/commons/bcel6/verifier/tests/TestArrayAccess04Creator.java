@@ -47,7 +47,7 @@ public class TestArrayAccess04Creator extends TestCreator {
   }
 
   @Override
-public void create(OutputStream out) throws IOException {
+public void create(final OutputStream out) throws IOException {
     createMethod_0();
     createMethod_1();
     _cg.getJavaClass().dump(out);

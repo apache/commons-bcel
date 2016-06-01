@@ -37,7 +37,7 @@ public abstract class FieldInstruction extends FieldOrMethod {
     /**
      * @param index to constant pool
      */
-    protected FieldInstruction(short opcode, int index) {
+    protected FieldInstruction(final short opcode, final int index) {
         super(opcode, index);
     }
 
@@ -46,7 +46,7 @@ public abstract class FieldInstruction extends FieldOrMethod {
      * @return mnemonic for instruction with symbolic references resolved
      */
     @Override
-    public String toString( ConstantPool cp ) {
+    public String toString( final ConstantPool cp ) {
         return org.apache.commons.bcel6.Const.getOpcodeName(super.getOpcode()) + " "
                 + cp.constantToString(super.getIndex(), org.apache.commons.bcel6.Const.CONSTANT_Fieldref);
     }
@@ -54,7 +54,7 @@ public abstract class FieldInstruction extends FieldOrMethod {
 
     /** @return size of field (1 or 2)
      */
-    protected int getFieldSize( ConstantPoolGen cpg ) {
+    protected int getFieldSize( final ConstantPoolGen cpg ) {
         return Type.size(Type.getTypeSize(getSignature(cpg)));
     }
 
@@ -62,21 +62,21 @@ public abstract class FieldInstruction extends FieldOrMethod {
     /** @return return type of referenced field
      */
     @Override
-    public Type getType( ConstantPoolGen cpg ) {
+    public Type getType( final ConstantPoolGen cpg ) {
         return getFieldType(cpg);
     }
 
 
     /** @return type of field
      */
-    public Type getFieldType( ConstantPoolGen cpg ) {
+    public Type getFieldType( final ConstantPoolGen cpg ) {
         return Type.getType(getSignature(cpg));
     }
 
 
     /** @return name of referenced field.
      */
-    public String getFieldName( ConstantPoolGen cpg ) {
+    public String getFieldName( final ConstantPoolGen cpg ) {
         return getName(cpg);
     }
 }

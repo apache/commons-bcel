@@ -40,7 +40,7 @@ public final class ConstantNameAndType extends Constant {
     /**
      * Initialize from another object.
      */
-    public ConstantNameAndType(ConstantNameAndType c) {
+    public ConstantNameAndType(final ConstantNameAndType c) {
         this(c.getNameIndex(), c.getSignatureIndex());
     }
 
@@ -51,7 +51,7 @@ public final class ConstantNameAndType extends Constant {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantNameAndType(DataInput file) throws IOException {
+    ConstantNameAndType(final DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort());
     }
 
@@ -60,7 +60,7 @@ public final class ConstantNameAndType extends Constant {
      * @param name_index Name of field/method
      * @param signature_index and its signature
      */
-    public ConstantNameAndType(int name_index, int signature_index) {
+    public ConstantNameAndType(final int name_index, final int signature_index) {
         super(Const.CONSTANT_NameAndType);
         this.name_index = name_index;
         this.signature_index = signature_index;
@@ -75,7 +75,7 @@ public final class ConstantNameAndType extends Constant {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantNameAndType(this);
     }
 
@@ -87,7 +87,7 @@ public final class ConstantNameAndType extends Constant {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeShort(name_index);
         file.writeShort(signature_index);
@@ -104,7 +104,7 @@ public final class ConstantNameAndType extends Constant {
 
     /** @return name
      */
-    public final String getName( ConstantPool cp ) {
+    public final String getName( final ConstantPool cp ) {
         return cp.constantToString(getNameIndex(), Const.CONSTANT_Utf8);
     }
 
@@ -119,7 +119,7 @@ public final class ConstantNameAndType extends Constant {
 
     /** @return signature
      */
-    public final String getSignature( ConstantPool cp ) {
+    public final String getSignature( final ConstantPool cp ) {
         return cp.constantToString(getSignatureIndex(), Const.CONSTANT_Utf8);
     }
 
@@ -127,7 +127,7 @@ public final class ConstantNameAndType extends Constant {
     /**
      * @param name_index the name index of this constant
      */
-    public final void setNameIndex( int name_index ) {
+    public final void setNameIndex( final int name_index ) {
         this.name_index = name_index;
     }
 
@@ -135,7 +135,7 @@ public final class ConstantNameAndType extends Constant {
     /**
      * @param signature_index the signature index in the constant pool of this type
      */
-    public final void setSignatureIndex( int signature_index ) {
+    public final void setSignatureIndex( final int signature_index ) {
         this.signature_index = signature_index;
     }
 

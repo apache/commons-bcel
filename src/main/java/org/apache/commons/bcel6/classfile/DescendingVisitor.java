@@ -47,7 +47,7 @@ public class DescendingVisitor implements Visitor
      *            nesting level, i.e., 0 returns the direct predecessor
      * @return container of current entitity, i.e., predecessor during traversal
      */
-    public Object predecessor(int level)
+    public Object predecessor(final int level)
     {
         int size = stack.size();
         if ((size < 2) || (level < 0))
@@ -71,7 +71,7 @@ public class DescendingVisitor implements Visitor
      * @param visitor
      *            visitor object to apply to all components
      */
-    public DescendingVisitor(JavaClass clazz, Visitor visitor)
+    public DescendingVisitor(final JavaClass clazz, final Visitor visitor)
     {
         this.clazz = clazz;
         this.visitor = visitor;
@@ -86,7 +86,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitJavaClass(JavaClass _clazz)
+    public void visitJavaClass(final JavaClass _clazz)
     {
         stack.push(_clazz);
         _clazz.accept(visitor);
@@ -110,7 +110,7 @@ public class DescendingVisitor implements Visitor
      * @since 6.0
      */
     @Override
-    public void visitAnnotation(Annotations annotation)
+    public void visitAnnotation(final Annotations annotation)
     {
         stack.push(annotation);
         annotation.accept(visitor);
@@ -125,7 +125,7 @@ public class DescendingVisitor implements Visitor
      * @since 6.0
      */
     @Override
-    public void visitAnnotationEntry(AnnotationEntry annotationEntry)
+    public void visitAnnotationEntry(final AnnotationEntry annotationEntry)
     {
         stack.push(annotationEntry);
         annotationEntry.accept(visitor);
@@ -133,7 +133,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitField(Field field)
+    public void visitField(final Field field)
     {
         stack.push(field);
         field.accept(visitor);
@@ -145,7 +145,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantValue(ConstantValue cv)
+    public void visitConstantValue(final ConstantValue cv)
     {
         stack.push(cv);
         cv.accept(visitor);
@@ -153,7 +153,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitMethod(Method method)
+    public void visitMethod(final Method method)
     {
         stack.push(method);
         method.accept(visitor);
@@ -165,7 +165,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitExceptionTable(ExceptionTable table)
+    public void visitExceptionTable(final ExceptionTable table)
     {
         stack.push(table);
         table.accept(visitor);
@@ -173,7 +173,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitCode(Code code)
+    public void visitCode(final Code code)
     {
         stack.push(code);
         code.accept(visitor);
@@ -189,7 +189,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitCodeException(CodeException ce)
+    public void visitCodeException(final CodeException ce)
     {
         stack.push(ce);
         ce.accept(visitor);
@@ -197,7 +197,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitLineNumberTable(LineNumberTable table)
+    public void visitLineNumberTable(final LineNumberTable table)
     {
         stack.push(table);
         table.accept(visitor);
@@ -209,7 +209,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitLineNumber(LineNumber number)
+    public void visitLineNumber(final LineNumber number)
     {
         stack.push(number);
         number.accept(visitor);
@@ -217,7 +217,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitLocalVariableTable(LocalVariableTable table)
+    public void visitLocalVariableTable(final LocalVariableTable table)
     {
         stack.push(table);
         table.accept(visitor);
@@ -229,7 +229,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitStackMap(StackMap table)
+    public void visitStackMap(final StackMap table)
     {
         stack.push(table);
         table.accept(visitor);
@@ -241,7 +241,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitStackMapEntry(StackMapEntry var)
+    public void visitStackMapEntry(final StackMapEntry var)
     {
         stack.push(var);
         var.accept(visitor);
@@ -275,7 +275,7 @@ public class DescendingVisitor implements Visitor
      */
 
     @Override
-    public void visitLocalVariable(LocalVariable var)
+    public void visitLocalVariable(final LocalVariable var)
     {
         stack.push(var);
         var.accept(visitor);
@@ -283,7 +283,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantPool(ConstantPool cp)
+    public void visitConstantPool(final ConstantPool cp)
     {
         stack.push(cp);
         cp.accept(visitor);
@@ -299,7 +299,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantClass(ConstantClass constant)
+    public void visitConstantClass(final ConstantClass constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -307,7 +307,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantDouble(ConstantDouble constant)
+    public void visitConstantDouble(final ConstantDouble constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -315,7 +315,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantFieldref(ConstantFieldref constant)
+    public void visitConstantFieldref(final ConstantFieldref constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -323,7 +323,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantFloat(ConstantFloat constant)
+    public void visitConstantFloat(final ConstantFloat constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -331,7 +331,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantInteger(ConstantInteger constant)
+    public void visitConstantInteger(final ConstantInteger constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -340,7 +340,7 @@ public class DescendingVisitor implements Visitor
 
     @Override
     public void visitConstantInterfaceMethodref(
-            ConstantInterfaceMethodref constant)
+            final ConstantInterfaceMethodref constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -352,7 +352,7 @@ public class DescendingVisitor implements Visitor
      */
     @Override
     public void visitConstantInvokeDynamic(
-            ConstantInvokeDynamic constant)
+            final ConstantInvokeDynamic constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -360,7 +360,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantLong(ConstantLong constant)
+    public void visitConstantLong(final ConstantLong constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -368,7 +368,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantMethodref(ConstantMethodref constant)
+    public void visitConstantMethodref(final ConstantMethodref constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -376,7 +376,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantNameAndType(ConstantNameAndType constant)
+    public void visitConstantNameAndType(final ConstantNameAndType constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -384,7 +384,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantString(ConstantString constant)
+    public void visitConstantString(final ConstantString constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -392,7 +392,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantUtf8(ConstantUtf8 constant)
+    public void visitConstantUtf8(final ConstantUtf8 constant)
     {
         stack.push(constant);
         constant.accept(visitor);
@@ -400,7 +400,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitInnerClasses(InnerClasses ic)
+    public void visitInnerClasses(final InnerClasses ic)
     {
         stack.push(ic);
         ic.accept(visitor);
@@ -412,7 +412,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitInnerClass(InnerClass inner)
+    public void visitInnerClass(final InnerClass inner)
     {
         stack.push(inner);
         inner.accept(visitor);
@@ -423,7 +423,7 @@ public class DescendingVisitor implements Visitor
      * @since 6.0
      */
     @Override
-    public void visitBootstrapMethods(BootstrapMethods bm)
+    public void visitBootstrapMethods(final BootstrapMethods bm)
     {
         stack.push(bm);
         bm.accept(visitor);
@@ -436,7 +436,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitDeprecated(Deprecated attribute)
+    public void visitDeprecated(final Deprecated attribute)
     {
         stack.push(attribute);
         attribute.accept(visitor);
@@ -444,7 +444,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitSignature(Signature attribute)
+    public void visitSignature(final Signature attribute)
     {
         stack.push(attribute);
         attribute.accept(visitor);
@@ -452,7 +452,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitSourceFile(SourceFile attribute)
+    public void visitSourceFile(final SourceFile attribute)
     {
         stack.push(attribute);
         attribute.accept(visitor);
@@ -460,7 +460,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitSynthetic(Synthetic attribute)
+    public void visitSynthetic(final Synthetic attribute)
     {
         stack.push(attribute);
         attribute.accept(visitor);
@@ -468,7 +468,7 @@ public class DescendingVisitor implements Visitor
     }
 
     @Override
-    public void visitUnknown(Unknown attribute)
+    public void visitUnknown(final Unknown attribute)
     {
         stack.push(attribute);
         attribute.accept(visitor);
@@ -479,7 +479,7 @@ public class DescendingVisitor implements Visitor
      * @since 6.0
      */
     @Override
-    public void visitAnnotationDefault(AnnotationDefault obj)
+    public void visitAnnotationDefault(final AnnotationDefault obj)
     {
         stack.push(obj);
         obj.accept(visitor);
@@ -490,7 +490,7 @@ public class DescendingVisitor implements Visitor
      * @since 6.0
      */
     @Override
-    public void visitEnclosingMethod(EnclosingMethod obj)
+    public void visitEnclosingMethod(final EnclosingMethod obj)
     {
         stack.push(obj);
         obj.accept(visitor);
@@ -501,7 +501,7 @@ public class DescendingVisitor implements Visitor
      * @since 6.0
      */
     @Override
-    public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
+    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj)
     {
         stack.push(obj);
         obj.accept(visitor);
@@ -512,7 +512,7 @@ public class DescendingVisitor implements Visitor
      * @since 6.0
      */
     @Override
-    public void visitParameterAnnotation(ParameterAnnotations obj)
+    public void visitParameterAnnotation(final ParameterAnnotations obj)
     {
         stack.push(obj);
         obj.accept(visitor);
@@ -523,7 +523,7 @@ public class DescendingVisitor implements Visitor
      * @since 6.0
      */
     @Override
-    public void visitMethodParameters(MethodParameters obj)
+    public void visitMethodParameters(final MethodParameters obj)
     {
         stack.push(obj);
         obj.accept(visitor);
@@ -532,7 +532,7 @@ public class DescendingVisitor implements Visitor
 
     /** @since 6.0 */
     @Override
-    public void visitConstantMethodType(ConstantMethodType obj) {
+    public void visitConstantMethodType(final ConstantMethodType obj) {
         stack.push(obj);
         obj.accept(visitor);
         stack.pop();
@@ -540,7 +540,7 @@ public class DescendingVisitor implements Visitor
 
     /** @since 6.0 */
     @Override
-    public void visitConstantMethodHandle(ConstantMethodHandle obj) {
+    public void visitConstantMethodHandle(final ConstantMethodHandle obj) {
         stack.push(obj);
         obj.accept(visitor);
         stack.pop();
@@ -548,7 +548,7 @@ public class DescendingVisitor implements Visitor
 
     /** @since 6.0 */
     @Override
-    public void visitParameterAnnotationEntry(ParameterAnnotationEntry obj) {
+    public void visitParameterAnnotationEntry(final ParameterAnnotationEntry obj) {
         stack.push(obj);
         obj.accept(visitor);
         stack.pop();

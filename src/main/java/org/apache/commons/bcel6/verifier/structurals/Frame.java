@@ -52,7 +52,7 @@ public class Frame{
     /**
      *
      */
-    public Frame(int maxLocals, int maxStack){
+    public Frame(final int maxLocals, final int maxStack){
         locals = new LocalVariables(maxLocals);
         stack = new OperandStack(maxStack);
     }
@@ -60,7 +60,7 @@ public class Frame{
     /**
      *
      */
-    public Frame(LocalVariables locals, OperandStack stack){
+    public Frame(final LocalVariables locals, final OperandStack stack){
         this.locals = locals;
         this.stack = stack;
     }
@@ -104,7 +104,7 @@ public class Frame{
      *
      */
     @Override
-    public boolean equals(Object o){
+    public boolean equals(final Object o){
         if (!(o instanceof Frame)) {
             return false; // implies "null" is non-equal.
         }
@@ -136,7 +136,7 @@ public class Frame{
      * @param _this the _this to set
      * @since 6.0
      */
-    public static void setThis(UninitializedObjectType _this) {
+    public static void setThis(final UninitializedObjectType _this) {
         Frame._this = _this;
     }
 }

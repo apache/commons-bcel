@@ -43,7 +43,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     }
 
 
-    public RET(int index) {
+    public RET(final int index) {
         super(org.apache.commons.bcel6.Const.RET, (short) 2);
         setIndex(index); // May set wide as side effect
     }
@@ -54,7 +54,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         if (wide) {
             out.writeByte(org.apache.commons.bcel6.Const.WIDE);
         }
@@ -81,7 +81,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         this.wide = wide;
         if (wide) {
             index = bytes.readUnsignedShort();
@@ -106,7 +106,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      * Set index of local variable containg the return address
      */
     @Override
-    public final void setIndex( int n ) {
+    public final void setIndex( final int n ) {
         if (n < 0) {
             throw new ClassGenException("Negative index value: " + n);
         }
@@ -119,7 +119,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      * @return mnemonic for instruction
      */
     @Override
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         return super.toString(verbose) + " " + index;
     }
 
@@ -127,7 +127,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     /** @return return address type
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return ReturnaddressType.NO_TARGET;
     }
 
@@ -141,7 +141,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitRET(this);
     }
 }

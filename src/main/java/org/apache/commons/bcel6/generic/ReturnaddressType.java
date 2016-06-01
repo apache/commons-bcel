@@ -42,7 +42,7 @@ public class ReturnaddressType extends Type {
     /**
      * Creates a ReturnaddressType object with a target.
      */
-    public ReturnaddressType(InstructionHandle returnTarget) {
+    public ReturnaddressType(final InstructionHandle returnTarget) {
         super(Const.T_ADDRESS, "<return address targeting " + returnTarget + ">");
         this.returnTarget = returnTarget;
     }
@@ -63,7 +63,7 @@ public class ReturnaddressType extends Type {
      * Returns if the two Returnaddresses refer to the same target.
      */
     @Override
-    public boolean equals( Object rat ) {
+    public boolean equals( final Object rat ) {
         if (!(rat instanceof ReturnaddressType)) {
             return false;
         }

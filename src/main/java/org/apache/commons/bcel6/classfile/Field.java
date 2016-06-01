@@ -35,7 +35,7 @@ public final class Field extends FieldOrMethod {
     private static BCELComparator _cmp = new BCELComparator() {
 
         @Override
-        public boolean equals( Object o1, Object o2 ) {
+        public boolean equals( final Object o1, final Object o2 ) {
             Field THIS = (Field) o1;
             Field THAT = (Field) o2;
             return THIS.getName().equals(THAT.getName())
@@ -44,7 +44,7 @@ public final class Field extends FieldOrMethod {
 
 
         @Override
-        public int hashCode( Object o ) {
+        public int hashCode( final Object o ) {
             Field THIS = (Field) o;
             return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
         }
@@ -55,7 +55,7 @@ public final class Field extends FieldOrMethod {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    public Field(Field c) {
+    public Field(final Field c) {
         super(c);
     }
 
@@ -64,7 +64,7 @@ public final class Field extends FieldOrMethod {
      * Construct object from file stream.
      * @param file Input stream
      */
-    Field(DataInput file, ConstantPool constant_pool) throws IOException,
+    Field(final DataInput file, final ConstantPool constant_pool) throws IOException,
             ClassFormatException {
         super(file, constant_pool);
     }
@@ -77,8 +77,8 @@ public final class Field extends FieldOrMethod {
      * @param attributes Collection of attributes
      * @param constant_pool Array of constants
      */
-    public Field(int access_flags, int name_index, int signature_index, Attribute[] attributes,
-            ConstantPool constant_pool) {
+    public Field(final int access_flags, final int name_index, final int signature_index, final Attribute[] attributes,
+            final ConstantPool constant_pool) {
         super(access_flags, name_index, signature_index, attributes, constant_pool);
     }
 
@@ -91,7 +91,7 @@ public final class Field extends FieldOrMethod {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitField(this);
     }
 
@@ -144,7 +144,7 @@ public final class Field extends FieldOrMethod {
     /**
      * @return deep copy of this field
      */
-    public final Field copy( ConstantPool _constant_pool ) {
+    public final Field copy( final ConstantPool _constant_pool ) {
         return (Field) copy_(_constant_pool);
     }
 
@@ -168,7 +168,7 @@ public final class Field extends FieldOrMethod {
     /**
      * @param comparator Comparison strategy object
      */
-    public static void setComparator( BCELComparator comparator ) {
+    public static void setComparator( final BCELComparator comparator ) {
         _cmp = comparator;
     }
 
@@ -181,7 +181,7 @@ public final class Field extends FieldOrMethod {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object obj ) {
+    public boolean equals( final Object obj ) {
         return _cmp.equals(this, obj);
     }
 

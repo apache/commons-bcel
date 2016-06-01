@@ -49,7 +49,7 @@ public class AnnotationEntry implements Node {
      * @return the entry
      * @throws IOException
      */
-    public static AnnotationEntry read(DataInput input, ConstantPool constant_pool, boolean isRuntimeVisible) throws IOException {
+    public static AnnotationEntry read(final DataInput input, final ConstantPool constant_pool, final boolean isRuntimeVisible) throws IOException {
 
         final AnnotationEntry annotationEntry = new AnnotationEntry(input.readUnsignedShort(), constant_pool, isRuntimeVisible);
         final int num_element_value_pairs = input.readUnsignedShort();
@@ -62,7 +62,7 @@ public class AnnotationEntry implements Node {
         return annotationEntry;
     }
 
-    public AnnotationEntry(int type_index, ConstantPool constant_pool, boolean isRuntimeVisible) {
+    public AnnotationEntry(final int type_index, final ConstantPool constant_pool, final boolean isRuntimeVisible) {
         this.type_index = type_index;
         this.constant_pool = constant_pool;
         this.isRuntimeVisible = isRuntimeVisible;
@@ -87,7 +87,7 @@ public class AnnotationEntry implements Node {
      * @param v Visitor object
      */
     @Override
-    public void accept(Visitor v) {
+    public void accept(final Visitor v) {
         v.visitAnnotationEntry(this);
     }
 
@@ -121,7 +121,7 @@ public class AnnotationEntry implements Node {
         return element_value_pairs.toArray(new ElementValuePair[element_value_pairs.size()]);
     }
 
-    public void dump(DataOutputStream dos) throws IOException {
+    public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(type_index); // u2 index of type name in cpool
         dos.writeShort(element_value_pairs.size()); // u2 element_value pair
         // count
@@ -130,7 +130,7 @@ public class AnnotationEntry implements Node {
         }
     }
 
-    public void addElementNameValuePair(ElementValuePair elementNameValuePair) {
+    public void addElementNameValuePair(final ElementValuePair elementNameValuePair) {
         element_value_pairs.add(elementNameValuePair);
     }
 
@@ -153,7 +153,7 @@ public class AnnotationEntry implements Node {
         return toShortString();
     }
 
-    public static AnnotationEntry[] createAnnotationEntries(Attribute[] attrs) {
+    public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attrs) {
         // Find attributes that contain annotation data
         List<AnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
         for (Attribute attribute : attrs) {

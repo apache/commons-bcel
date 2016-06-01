@@ -38,7 +38,7 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
     /**
      * @param opcode of instruction
      */
-    protected ArrayInstruction(short opcode) {
+    protected ArrayInstruction(final short opcode) {
         super(opcode, (short) 1);
     }
 
@@ -52,7 +52,7 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
     /** @return type associated with the instruction
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         final short _opcode = super.getOpcode();
         switch (_opcode) {
             case org.apache.commons.bcel6.Const.IALOAD:

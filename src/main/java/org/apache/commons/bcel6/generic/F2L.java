@@ -41,7 +41,7 @@ public class F2L extends ConversionInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitTypedInstruction(this);
         v.visitStackProducer(this);
         v.visitStackConsumer(this);

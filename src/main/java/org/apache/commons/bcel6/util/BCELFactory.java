@@ -71,7 +71,7 @@ class BCELFactory extends EmptyVisitor {
     private final ConstantPoolGen _cp;
 
 
-    BCELFactory(MethodGen mg, PrintWriter out) {
+    BCELFactory(final MethodGen mg, final PrintWriter out) {
         _mg = mg;
         _cp = mg.getConstantPool();
         _out = out;
@@ -107,7 +107,7 @@ class BCELFactory extends EmptyVisitor {
     }
 
 
-    private boolean visitInstruction( Instruction i ) {
+    private boolean visitInstruction( final Instruction i ) {
         short opcode = i.getOpcode();
         if ((InstructionConst.getInstruction(opcode) != null)
                 && !(i instanceof ConstantPushInstruction) && !(i instanceof ReturnInstruction)) { // Handled below
@@ -120,7 +120,7 @@ class BCELFactory extends EmptyVisitor {
 
 
     @Override
-    public void visitLocalVariableInstruction( LocalVariableInstruction i ) {
+    public void visitLocalVariableInstruction( final LocalVariableInstruction i ) {
         short opcode = i.getOpcode();
         Type type = i.getType(_cp);
         if (opcode == Const.IINC) {
@@ -135,7 +135,7 @@ class BCELFactory extends EmptyVisitor {
 
 
     @Override
-    public void visitArrayInstruction( ArrayInstruction i ) {
+    public void visitArrayInstruction( final ArrayInstruction i ) {
         short opcode = i.getOpcode();
         Type type = i.getType(_cp);
         String kind = (opcode < Const.IASTORE) ? "Load" : "Store";
@@ -145,7 +145,7 @@ class BCELFactory extends EmptyVisitor {
 
 
     @Override
-    public void visitFieldInstruction( FieldInstruction i ) {
+    public void visitFieldInstruction( final FieldInstruction i ) {
         short opcode = i.getOpcode();
         String class_name = i.getClassName(_cp);
         String field_name = i.getFieldName(_cp);
@@ -157,7 +157,7 @@ class BCELFactory extends EmptyVisitor {
 
 
     @Override
-    public void visitInvokeInstruction( InvokeInstruction i ) {
+    public void visitInvokeInstruction( final InvokeInstruction i ) {
         short opcode = i.getOpcode();
         String class_name = i.getClassName(_cp);
         String method_name = i.getMethodName(_cp);
@@ -171,7 +171,7 @@ class BCELFactory extends EmptyVisitor {
 
 
     @Override
-    public void visitAllocationInstruction( AllocationInstruction i ) {
+    public void visitAllocationInstruction( final AllocationInstruction i ) {
         Type type;
         if (i instanceof CPInstruction) {
             type = ((CPInstruction) i).getType(_cp);
@@ -202,7 +202,7 @@ class BCELFactory extends EmptyVisitor {
     }
 
 
-    private void createConstant( Object value ) {
+    private void createConstant( final Object value ) {
         String embed = value.toString();
         if (value instanceof String) {
             embed = '"' + Utility.convertString(embed) + '"';
@@ -222,39 +222,39 @@ class BCELFactory extends EmptyVisitor {
 
 
     @Override
-    public void visitLDC( LDC i ) {
+    public void visitLDC( final LDC i ) {
         createConstant(i.getValue(_cp));
     }
 
 
     @Override
-    public void visitLDC2_W( LDC2_W i ) {
+    public void visitLDC2_W( final LDC2_W i ) {
         createConstant(i.getValue(_cp));
     }
 
 
     @Override
-    public void visitConstantPushInstruction( ConstantPushInstruction i ) {
+    public void visitConstantPushInstruction( final ConstantPushInstruction i ) {
         createConstant(i.getValue());
     }
 
 
     @Override
-    public void visitINSTANCEOF( INSTANCEOF i ) {
+    public void visitINSTANCEOF( final INSTANCEOF i ) {
         Type type = i.getType(_cp);
         _out.println("il.append(new INSTANCEOF(_cp.addClass(" + BCELifier.printType(type) + ")));");
     }
 
 
     @Override
-    public void visitCHECKCAST( CHECKCAST i ) {
+    public void visitCHECKCAST( final CHECKCAST i ) {
         Type type = i.getType(_cp);
         _out.println("il.append(_factory.createCheckCast(" + BCELifier.printType(type) + "));");
     }
 
 
     @Override
-    public void visitReturnInstruction( ReturnInstruction i ) {
+    public void visitReturnInstruction( final ReturnInstruction i ) {
         Type type = i.getType(_cp);
         _out.println("il.append(_factory.createReturn(" + BCELifier.printType(type) + "));");
     }
@@ -264,7 +264,7 @@ class BCELFactory extends EmptyVisitor {
 
 
     @Override
-    public void visitBranchInstruction( BranchInstruction bi ) {
+    public void visitBranchInstruction( final BranchInstruction bi ) {
         BranchHandle bh = (BranchHandle) branch_map.get(bi);
         int pos = bh.getPosition();
         String name = bi.getName() + "_" + pos;
@@ -311,7 +311,7 @@ class BCELFactory extends EmptyVisitor {
 
 
     @Override
-    public void visitRET( RET i ) {
+    public void visitRET( final RET i ) {
         _out.println("il.append(new RET(" + i.getIndex() + ")));");
     }
 

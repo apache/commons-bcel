@@ -41,7 +41,7 @@ public class TransitiveHull implements VerifierFactoryObserver {
 
     /* Implementing VerifierFactoryObserver. */
     @Override
-    public void update( String classname ) {
+    public void update( final String classname ) {
         System.gc(); // avoid swapping if possible.
         for (int i = 0; i < indent; i++) {
             System.out.print(" ");
@@ -87,7 +87,7 @@ public class TransitiveHull implements VerifierFactoryObserver {
      * all class files encountered; this may take up a lot of time and,
      * more notably, memory.
      */
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
         if (args.length != 1) {
             System.out.println("Need exactly one argument: The root class to verify.");
             System.exit(1);

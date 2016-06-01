@@ -32,7 +32,7 @@ public final class BasicType extends Type {
      * @param type one of T_INT, T_BOOLEAN, ..., T_VOID
      * @see Const
      */
-    BasicType(byte type) {
+    BasicType(final byte type) {
         super(type, Const.getShortTypeName(type));
         if ((type < Const.T_BOOLEAN) || (type > Const.T_VOID)) {
             throw new ClassGenException("Invalid type: " + type);
@@ -41,7 +41,7 @@ public final class BasicType extends Type {
 
 
     // @since 6.0 no longer final
-    public static BasicType getType( byte type ) {
+    public static BasicType getType( final byte type ) {
         switch (type) {
             case Const.T_VOID:
                 return VOID;
@@ -78,7 +78,7 @@ public final class BasicType extends Type {
     /** @return true if both type objects refer to the same type
      */
     @Override
-    public boolean equals( Object _type ) {
+    public boolean equals( final Object _type ) {
         return (_type instanceof BasicType) ? ((BasicType) _type).getType() == this.getType() : false;
     }
 }

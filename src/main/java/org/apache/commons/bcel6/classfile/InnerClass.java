@@ -42,7 +42,7 @@ public final class InnerClass implements Cloneable, Node {
     /**
      * Initialize from another object.
      */
-    public InnerClass(InnerClass c) {
+    public InnerClass(final InnerClass c) {
         this(c.getInnerClassIndex(), c.getOuterClassIndex(), c.getInnerNameIndex(), c
                 .getInnerAccessFlags());
     }
@@ -53,7 +53,7 @@ public final class InnerClass implements Cloneable, Node {
      * @param file Input stream
      * @throws IOException
      */
-    InnerClass(DataInput file) throws IOException {
+    InnerClass(final DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file
                 .readUnsignedShort());
     }
@@ -65,8 +65,8 @@ public final class InnerClass implements Cloneable, Node {
      * @param inner_name_index  Name index in constant pool of inner class
      * @param inner_access_flags Access flags of inner class
      */
-    public InnerClass(int inner_class_index, int outer_class_index, int inner_name_index,
-            int inner_access_flags) {
+    public InnerClass(final int inner_class_index, final int outer_class_index, final int inner_name_index,
+            final int inner_access_flags) {
         this.inner_class_index = inner_class_index;
         this.outer_class_index = outer_class_index;
         this.inner_name_index = inner_name_index;
@@ -82,7 +82,7 @@ public final class InnerClass implements Cloneable, Node {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitInnerClass(this);
     }
 
@@ -93,7 +93,7 @@ public final class InnerClass implements Cloneable, Node {
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(inner_class_index);
         file.writeShort(outer_class_index);
         file.writeShort(inner_name_index);
@@ -136,7 +136,7 @@ public final class InnerClass implements Cloneable, Node {
     /**
      * @param inner_access_flags access flags for this inner class
      */
-    public final void setInnerAccessFlags( int inner_access_flags ) {
+    public final void setInnerAccessFlags( final int inner_access_flags ) {
         this.inner_access_flags = inner_access_flags;
     }
 
@@ -144,7 +144,7 @@ public final class InnerClass implements Cloneable, Node {
     /**
      * @param inner_class_index index into the constant pool for this class
      */
-    public final void setInnerClassIndex( int inner_class_index ) {
+    public final void setInnerClassIndex( final int inner_class_index ) {
         this.inner_class_index = inner_class_index;
     }
 
@@ -152,7 +152,7 @@ public final class InnerClass implements Cloneable, Node {
     /**
      * @param inner_name_index index into the constant pool for this class's name
      */
-    public final void setInnerNameIndex( int inner_name_index ) { // TODO unused
+    public final void setInnerNameIndex( final int inner_name_index ) { // TODO unused
         this.inner_name_index = inner_name_index;
     }
 
@@ -160,7 +160,7 @@ public final class InnerClass implements Cloneable, Node {
     /**
      * @param outer_class_index index into the constant pool for the owning class
      */
-    public final void setOuterClassIndex( int outer_class_index ) { // TODO unused
+    public final void setOuterClassIndex( final int outer_class_index ) { // TODO unused
         this.outer_class_index = outer_class_index;
     }
 
@@ -178,7 +178,7 @@ public final class InnerClass implements Cloneable, Node {
     /**
      * @return Resolved string representation
      */
-    public final String toString( ConstantPool constant_pool ) {
+    public final String toString( final ConstantPool constant_pool ) {
         String outer_class_name;
         String inner_name;
         String inner_class_name = constant_pool.getConstantString(inner_class_index,

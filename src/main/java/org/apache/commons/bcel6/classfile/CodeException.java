@@ -47,7 +47,7 @@ public final class CodeException implements Cloneable, Node {
     /**
      * Initialize from another object.
      */
-    public CodeException(CodeException c) {
+    public CodeException(final CodeException c) {
         this(c.getStartPC(), c.getEndPC(), c.getHandlerPC(), c.getCatchType());
     }
 
@@ -57,7 +57,7 @@ public final class CodeException implements Cloneable, Node {
      * @param file Input stream
      * @throws IOException
      */
-    CodeException(DataInput file) throws IOException {
+    CodeException(final DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file
                 .readUnsignedShort());
     }
@@ -73,7 +73,7 @@ public final class CodeException implements Cloneable, Node {
      * exception, otherwise it points to the exception class which is 
      * to be caught.
      */
-    public CodeException(int start_pc, int end_pc, int handler_pc, int catch_type) {
+    public CodeException(final int start_pc, final int end_pc, final int handler_pc, final int catch_type) {
         this.start_pc = start_pc;
         this.end_pc = end_pc;
         this.handler_pc = handler_pc;
@@ -89,7 +89,7 @@ public final class CodeException implements Cloneable, Node {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitCodeException(this);
     }
 
@@ -100,7 +100,7 @@ public final class CodeException implements Cloneable, Node {
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(start_pc);
         file.writeShort(end_pc);
         file.writeShort(handler_pc);
@@ -144,7 +144,7 @@ public final class CodeException implements Cloneable, Node {
     /**
      * @param catch_type the type of exception that is caught
      */
-    public final void setCatchType( int catch_type ) {
+    public final void setCatchType( final int catch_type ) {
         this.catch_type = catch_type;
     }
 
@@ -152,7 +152,7 @@ public final class CodeException implements Cloneable, Node {
     /**
      * @param end_pc end of handled block
      */
-    public final void setEndPC( int end_pc ) {
+    public final void setEndPC( final int end_pc ) {
         this.end_pc = end_pc;
     }
 
@@ -160,7 +160,7 @@ public final class CodeException implements Cloneable, Node {
     /**
      * @param handler_pc where the actual code is
      */
-    public final void setHandlerPC( int handler_pc ) { // TODO unused
+    public final void setHandlerPC( final int handler_pc ) { // TODO unused
         this.handler_pc = handler_pc;
     }
 
@@ -168,7 +168,7 @@ public final class CodeException implements Cloneable, Node {
     /**
      * @param start_pc start of handled block
      */
-    public final void setStartPC( int start_pc ) { // TODO unused
+    public final void setStartPC( final int start_pc ) { // TODO unused
         this.start_pc = start_pc;
     }
 
@@ -186,7 +186,7 @@ public final class CodeException implements Cloneable, Node {
     /**
      * @return String representation.
      */
-    public final String toString( ConstantPool cp, boolean verbose ) {
+    public final String toString( final ConstantPool cp, final boolean verbose ) {
         String str;
         if (catch_type == 0) {
             str = "<Any exception>(0)";
@@ -198,7 +198,7 @@ public final class CodeException implements Cloneable, Node {
     }
 
 
-    public final String toString( ConstantPool cp ) {
+    public final String toString( final ConstantPool cp ) {
         return toString(cp, true);
     }
 

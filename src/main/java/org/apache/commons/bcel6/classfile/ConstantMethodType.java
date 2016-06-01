@@ -38,7 +38,7 @@ public final class ConstantMethodType extends Constant {
     /**
      * Initialize from another object.
      */
-    public ConstantMethodType(ConstantMethodType c) {
+    public ConstantMethodType(final ConstantMethodType c) {
         this(c.getDescriptorIndex());
     }
 
@@ -49,12 +49,12 @@ public final class ConstantMethodType extends Constant {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantMethodType(DataInput file) throws IOException {
+    ConstantMethodType(final DataInput file) throws IOException {
         this(file.readUnsignedShort());
     }
 
 
-    public ConstantMethodType(int descriptor_index) {
+    public ConstantMethodType(final int descriptor_index) {
         super(Const.CONSTANT_MethodType);
         this.descriptor_index = descriptor_index;
     }
@@ -68,7 +68,7 @@ public final class ConstantMethodType extends Constant {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantMethodType(this);
     }
 
@@ -80,7 +80,7 @@ public final class ConstantMethodType extends Constant {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeShort(descriptor_index);
     }
@@ -91,7 +91,7 @@ public final class ConstantMethodType extends Constant {
     }
 
 
-    public void setDescriptorIndex(int descriptor_index) {
+    public void setDescriptorIndex(final int descriptor_index) {
         this.descriptor_index = descriptor_index;
     }
 

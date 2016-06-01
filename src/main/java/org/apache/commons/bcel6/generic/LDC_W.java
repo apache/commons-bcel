@@ -38,7 +38,7 @@ public class LDC_W extends LDC {
     }
 
 
-    public LDC_W(int index) {
+    public LDC_W(final int index) {
         super(index);
     }
 
@@ -47,7 +47,7 @@ public class LDC_W extends LDC {
      * Read needed data (i.e., index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         setIndex(bytes.readUnsignedShort());
         // Override just in case it has been changed
         super.setOpcode(org.apache.commons.bcel6.Const.LDC_W);

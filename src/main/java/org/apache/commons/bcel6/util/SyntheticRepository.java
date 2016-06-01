@@ -35,7 +35,7 @@ public class SyntheticRepository extends MemorySensitiveClassPathRepository impl
     // private static final String DEFAULT_PATH = ClassPath.getClassPath();
     private static final Map<ClassPath, SyntheticRepository> _instances = new HashMap<>(); // CLASSPATH X REPOSITORY
 
-    private SyntheticRepository(ClassPath path) {
+    private SyntheticRepository(final ClassPath path) {
         super(path);
     }
 
@@ -43,7 +43,7 @@ public class SyntheticRepository extends MemorySensitiveClassPathRepository impl
         return getInstance(ClassPath.SYSTEM_CLASS_PATH);
     }
 
-    public static SyntheticRepository getInstance(ClassPath classPath) {
+    public static SyntheticRepository getInstance(final ClassPath classPath) {
         SyntheticRepository rep = _instances.get(classPath);
         if (rep == null) {
             rep = new SyntheticRepository(classPath);

@@ -19,7 +19,7 @@ package org.apache.commons.bcel6.verifier.tests;
 
 public class TestReturn02 {
 
-    public static String test1(char[] data, int offset, int count) {
+    public static String test1(final char[] data, final int offset, final int count) {
         return new String(data, offset, count);
     }
     

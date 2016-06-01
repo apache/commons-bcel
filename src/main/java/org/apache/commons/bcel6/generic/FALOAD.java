@@ -41,7 +41,7 @@ public class FALOAD extends ArrayInstruction implements StackProducer {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackProducer(this);
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);

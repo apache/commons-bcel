@@ -34,7 +34,7 @@ public interface InstructionComparator {
     public static final InstructionComparator DEFAULT = new InstructionComparator() {
 
         @Override
-        public boolean equals( Instruction i1, Instruction i2 ) {
+        public boolean equals( final Instruction i1, final Instruction i2 ) {
             if (i1.getOpcode() == i2.getOpcode()) {
                 if (i1 instanceof BranchInstruction) {
                  // BIs are never equal to make targeters work correctly (BCEL-195)

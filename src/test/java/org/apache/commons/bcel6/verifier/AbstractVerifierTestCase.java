@@ -33,7 +33,7 @@ public abstract class AbstractVerifierTestCase extends TestCase {
      * @param classname simple classname of the class to verify
      * @param message   message displayed if assertion fails
      */
-    public void assertVerifyOK(String classname, String message) {
+    public void assertVerifyOK(final String classname, final String message) {
         final String testClassname = TEST_PACKAGE + classname;
         assertTrue(message, doAllPasses(testClassname));
     }
@@ -45,7 +45,7 @@ public abstract class AbstractVerifierTestCase extends TestCase {
      * @param classname simple classname of the class to verify
      * @param message   message displayed if assertion fails
      */
-    public void assertVerifyRejected(String classname, String message) {
+    public void assertVerifyRejected(final String classname, final String message) {
         final String testClassname = TEST_PACKAGE + classname;
         assertFalse(message, doAllPasses(testClassname));
     }
@@ -56,7 +56,7 @@ public abstract class AbstractVerifierTestCase extends TestCase {
      * @param classname name of the class to verify
      * @return false if the verification fails, true otherwise
      */
-    public boolean doAllPasses(String classname) {
+    public boolean doAllPasses(final String classname) {
         int nbMethods = 0;
 
         try {

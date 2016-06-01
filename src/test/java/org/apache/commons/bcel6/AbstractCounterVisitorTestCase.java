@@ -43,7 +43,7 @@ public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
         return visitor;
     }
 
-    public void setVisitor(CounterVisitor visitor)
+    public void setVisitor(final CounterVisitor visitor)
     {
         this.visitor = visitor;
     }

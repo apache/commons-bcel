@@ -45,7 +45,7 @@ public class BootstrapMethod implements Cloneable {
     /**
      * Initialize from another object.
      */
-    public BootstrapMethod(BootstrapMethod c) {
+    public BootstrapMethod(final BootstrapMethod c) {
         this(c.getBootstrapMethodRef(), c.getBootstrapArguments());
     }
 
@@ -55,7 +55,7 @@ public class BootstrapMethod implements Cloneable {
      * @param input Input stream
      * @throws IOException
      */
-    BootstrapMethod(DataInput input) throws IOException {
+    BootstrapMethod(final DataInput input) throws IOException {
         this(input.readUnsignedShort(), input.readUnsignedShort());
 
         for (int i = 0; i < bootstrap_arguments.length; i++) {
@@ -64,7 +64,7 @@ public class BootstrapMethod implements Cloneable {
     }
 
     // helper method
-    private BootstrapMethod(int bootstrap_method_ref, int num_bootstrap_arguments) {
+    private BootstrapMethod(final int bootstrap_method_ref, final int num_bootstrap_arguments) {
         this(bootstrap_method_ref, new int[num_bootstrap_arguments]);
     }
 
@@ -72,7 +72,7 @@ public class BootstrapMethod implements Cloneable {
      * @param bootstrap_method_ref int index into constant_pool of CONSTANT_MethodHandle
      * @param bootstrap_arguments int[] indices into constant_pool of CONSTANT_<type>_info
      */
-    public BootstrapMethod(int bootstrap_method_ref, int[] bootstrap_arguments) {
+    public BootstrapMethod(final int bootstrap_method_ref, final int[] bootstrap_arguments) {
         this.bootstrap_method_ref = bootstrap_method_ref;
         this.bootstrap_arguments = bootstrap_arguments;
     }
@@ -87,7 +87,7 @@ public class BootstrapMethod implements Cloneable {
     /**
      * @param bootstrap_method_ref int index into constant_pool of CONSTANT_MethodHandle
      */
-    public void setBootstrapMethodRef(int bootstrap_method_ref) {
+    public void setBootstrapMethodRef(final int bootstrap_method_ref) {
         this.bootstrap_method_ref = bootstrap_method_ref;
     }
 
@@ -108,7 +108,7 @@ public class BootstrapMethod implements Cloneable {
     /**
      * @param bootstrap_arguments int[] indices into constant_pool of CONSTANT_<type>_info
      */
-    public void setBootstrapArguments(int[] bootstrap_arguments) {
+    public void setBootstrapArguments(final int[] bootstrap_arguments) {
         this.bootstrap_arguments = bootstrap_arguments;
     }
 
@@ -124,7 +124,7 @@ public class BootstrapMethod implements Cloneable {
     /**
      * @return Resolved string representation
      */
-    public final String toString( ConstantPool constant_pool ) {
+    public final String toString( final ConstantPool constant_pool ) {
         StringBuilder buf = new StringBuilder();
         String bootstrap_method_name;
         bootstrap_method_name = constant_pool.constantToString(bootstrap_method_ref,
@@ -147,7 +147,7 @@ public class BootstrapMethod implements Cloneable {
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump(DataOutputStream file) throws IOException {
+    public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(bootstrap_method_ref);
         file.writeShort(bootstrap_arguments.length);
         for (int bootstrap_argument : bootstrap_arguments) {

@@ -37,7 +37,7 @@ public class ASTORE extends StoreInstruction {
     /** Store reference into local variable
      * @param n index of local variable
      */
-    public ASTORE(int n) {
+    public ASTORE(final int n) {
         super(org.apache.commons.bcel6.Const.ASTORE, org.apache.commons.bcel6.Const.ASTORE_0, n);
     }
 
@@ -51,7 +51,7 @@ public class ASTORE extends StoreInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         super.accept(v);
         v.visitASTORE(this);
     }

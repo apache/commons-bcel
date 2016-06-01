@@ -32,7 +32,7 @@ public class ClassElementValue extends ElementValue
     // For 'class' this points to the class entry in the cpool
     private final int idx;
 
-    public ClassElementValue(int type, int idx, ConstantPool cpool)
+    public ClassElementValue(final int type, final int idx, final ConstantPool cpool)
     {
         super(type, cpool);
         this.idx = idx;
@@ -59,7 +59,7 @@ public class ClassElementValue extends ElementValue
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         dos.writeByte(super.getType()); // u1 kind of value
         dos.writeShort(idx);

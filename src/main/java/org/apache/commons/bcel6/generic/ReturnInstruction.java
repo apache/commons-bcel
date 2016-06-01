@@ -39,7 +39,7 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     /**
      * @param opcode of instruction
      */
-    protected ReturnInstruction(short opcode) {
+    protected ReturnInstruction(final short opcode) {
         super(opcode, (short) 1);
     }
 
@@ -76,7 +76,7 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     /** @return type associated with the instruction
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return getType();
     }
 }

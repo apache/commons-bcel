@@ -45,7 +45,7 @@ public class IINC extends LocalVariableInstruction {
      * @param n index of local variable
      * @param c increment factor
      */
-    public IINC(int n, int c) {
+    public IINC(final int n, final int c) {
         super(); // Default behaviour of LocalVariableInstruction causes error
         super.setOpcode(org.apache.commons.bcel6.Const.IINC);
         super.setLength((short) 3);
@@ -59,7 +59,7 @@ public class IINC extends LocalVariableInstruction {
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         if (wide) {
             out.writeByte(org.apache.commons.bcel6.Const.WIDE);
         }
@@ -88,7 +88,7 @@ public class IINC extends LocalVariableInstruction {
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         this.wide = wide;
         if (wide) {
             super.setLength(6);
@@ -106,7 +106,7 @@ public class IINC extends LocalVariableInstruction {
      * @return mnemonic for instruction
      */
     @Override
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         return super.toString(verbose) + " " + c;
     }
 
@@ -115,7 +115,7 @@ public class IINC extends LocalVariableInstruction {
      * Set index of local variable.
      */
     @Override
-    public final void setIndex( int n ) {
+    public final void setIndex( final int n ) {
         if (n < 0) {
             throw new ClassGenException("Negative index value: " + n);
         }
@@ -135,7 +135,7 @@ public class IINC extends LocalVariableInstruction {
     /**
      * Set increment factor.
      */
-    public final void setIncrement( int c ) {
+    public final void setIncrement( final int c ) {
         this.c = c;
         setWide();
     }
@@ -144,7 +144,7 @@ public class IINC extends LocalVariableInstruction {
     /** @return int type
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return Type.INT;
     }
 
@@ -158,7 +158,7 @@ public class IINC extends LocalVariableInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLocalVariableInstruction(this);
         v.visitIINC(this);
     }

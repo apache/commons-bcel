@@ -134,7 +134,7 @@ public final class Pass3aVerifier extends PassVerifier{
     private Code code;
 
     /** Should only be instantiated by a Verifier. */
-    public Pass3aVerifier(Verifier owner, int method_no){
+    public Pass3aVerifier(final Verifier owner, final int method_no){
         myOwner = owner;
         this.method_no = method_no;
     }
@@ -452,7 +452,7 @@ public final class Pass3aVerifier extends PassVerifier{
     }
 
     /** A small utility method returning if a given int i is in the given int[] ints. */
-    private static boolean contains(int[] ints, int i){
+    private static boolean contains(final int[] ints, final int i){
         for (int k : ints) {
             if (k==i) {
                 return true;
@@ -475,7 +475,7 @@ public final class Pass3aVerifier extends PassVerifier{
         private final ConstantPoolGen cpg;
 
         /** The only Constructor. */
-        InstOperandConstraintVisitor(ConstantPoolGen cpg){
+        InstOperandConstraintVisitor(final ConstantPoolGen cpg){
             this.cpg = cpg;
         }
 
@@ -495,7 +495,7 @@ public final class Pass3aVerifier extends PassVerifier{
         /**
          * A utility method to always raise an exeption.
          */
-        private void constraintViolated(Instruction i, String message) {
+        private void constraintViolated(final Instruction i, final String message) {
             throw new StaticCodeInstructionOperandConstraintException("Instruction "+i+" constraint violated: "+message);
         }
 
@@ -503,7 +503,7 @@ public final class Pass3aVerifier extends PassVerifier{
          * A utility method to raise an exception if the index is not
          * a valid constant pool index.
          */
-        private void indexValid(Instruction i, int idx){
+        private void indexValid(final Instruction i, final int idx){
             if (idx < 0 || idx >= cpg.getSize()){
                 constraintViolated(i, "Illegal constant pool index '"+idx+"'.");
             }
@@ -517,7 +517,7 @@ public final class Pass3aVerifier extends PassVerifier{
          * The referenced class is loaded and pass2-verified.
          */
         @Override
-        public void visitLoadClass(LoadClass o){
+        public void visitLoadClass(final LoadClass o){
             ObjectType t = o.getLoadClassType(cpg);
             if (t != null){// null means "no class is loaded"
                 Verifier v = VerifierFactory.getVerifier(t.getClassName());
@@ -539,7 +539,7 @@ public final class Pass3aVerifier extends PassVerifier{
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         // LDC and LDC_W (LDC_W is a subclass of LDC in BCEL's model)
         @Override
-        public void visitLDC(LDC o){
+        public void visitLDC(final LDC o){
             indexValid(o, o.getIndex());
             Constant c = cpg.getConstant(o.getIndex());
             if (c instanceof ConstantClass){
@@ -558,7 +558,7 @@ public final class Pass3aVerifier extends PassVerifier{
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         // LDC2_W
         @Override
-        public void visitLDC2_W(LDC2_W o){
+        public void visitLDC2_W(final LDC2_W o){
             indexValid(o, o.getIndex());
             Constant c = cpg.getConstant(o.getIndex());
             if (! ( (c instanceof ConstantLong)    ||
@@ -573,7 +573,7 @@ public final class Pass3aVerifier extends PassVerifier{
             }
         }
 
-        private ObjectType getObjectType(FieldInstruction o) {
+        private ObjectType getObjectType(final FieldInstruction o) {
             ReferenceType rt = o.getReferenceType(cpg);
             if(rt instanceof ObjectType) {
                 return (ObjectType)rt;
@@ -585,7 +585,7 @@ public final class Pass3aVerifier extends PassVerifier{
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
          //getfield, putfield, getstatic, putstatic
          @Override
-        public void visitFieldInstruction(FieldInstruction o){
+        public void visitFieldInstruction(final FieldInstruction o){
            try {
             indexValid(o, o.getIndex());
             Constant c = cpg.getConstant(o.getIndex());
@@ -659,7 +659,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitInvokeInstruction(InvokeInstruction o){
+        public void visitInvokeInstruction(final InvokeInstruction o){
             indexValid(o, o.getIndex());
             if (    (o instanceof INVOKEVIRTUAL)    ||
                         (o instanceof INVOKESPECIAL)    ||
@@ -738,7 +738,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitINSTANCEOF(INSTANCEOF o){
+        public void visitINSTANCEOF(final INSTANCEOF o){
             indexValid(o, o.getIndex());
             Constant c = cpg.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)){
@@ -748,7 +748,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitCHECKCAST(CHECKCAST o){
+        public void visitCHECKCAST(final CHECKCAST o){
             indexValid(o, o.getIndex());
             Constant c = cpg.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)){
@@ -758,7 +758,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitNEW(NEW o){
+        public void visitNEW(final NEW o){
             indexValid(o, o.getIndex());
             Constant c = cpg.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)){
@@ -776,7 +776,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitMULTIANEWARRAY(MULTIANEWARRAY o){
+        public void visitMULTIANEWARRAY(final MULTIANEWARRAY o){
             indexValid(o, o.getIndex());
             Constant c = cpg.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)){
@@ -803,7 +803,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitANEWARRAY(ANEWARRAY o){
+        public void visitANEWARRAY(final ANEWARRAY o){
             indexValid(o, o.getIndex());
             Constant c = cpg.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)){
@@ -822,7 +822,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitNEWARRAY(NEWARRAY o){
+        public void visitNEWARRAY(final NEWARRAY o){
             byte t = o.getTypecode();
             if (!    (    (t == Const.T_BOOLEAN)    ||
                             (t == Const.T_CHAR)            ||
@@ -838,7 +838,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitILOAD(ILOAD o){
+        public void visitILOAD(final ILOAD o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative.");
@@ -853,7 +853,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitFLOAD(FLOAD o){
+        public void visitFLOAD(final FLOAD o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative.");
@@ -868,7 +868,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitALOAD(ALOAD o){
+        public void visitALOAD(final ALOAD o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative.");
@@ -883,7 +883,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitISTORE(ISTORE o){
+        public void visitISTORE(final ISTORE o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative.");
@@ -898,7 +898,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitFSTORE(FSTORE o){
+        public void visitFSTORE(final FSTORE o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative.");
@@ -913,7 +913,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitASTORE(ASTORE o){
+        public void visitASTORE(final ASTORE o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative.");
@@ -928,7 +928,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitIINC(IINC o){
+        public void visitIINC(final IINC o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative.");
@@ -943,7 +943,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitRET(RET o){
+        public void visitRET(final RET o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative.");
@@ -958,7 +958,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitLLOAD(LLOAD o){
+        public void visitLLOAD(final LLOAD o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative."+
@@ -974,7 +974,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitDLOAD(DLOAD o){
+        public void visitDLOAD(final DLOAD o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative."+
@@ -990,7 +990,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitLSTORE(LSTORE o){
+        public void visitLSTORE(final LSTORE o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative."+
@@ -1006,7 +1006,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitDSTORE(DSTORE o){
+        public void visitDSTORE(final DSTORE o){
             int idx = o.getIndex();
             if (idx < 0){
                 constraintViolated(o, "Index '"+idx+"' must be non-negative."+
@@ -1022,7 +1022,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitLOOKUPSWITCH(LOOKUPSWITCH o){
+        public void visitLOOKUPSWITCH(final LOOKUPSWITCH o){
             int[] matchs = o.getMatchs();
             int max = Integer.MIN_VALUE;
             for (int i=0; i<matchs.length; i++){
@@ -1040,14 +1040,14 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitTABLESWITCH(TABLESWITCH o){     
+        public void visitTABLESWITCH(final TABLESWITCH o){     
             // "high" must be >= "low". We cannot check this, as BCEL hides
             // it from us.
         }
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitPUTSTATIC(PUTSTATIC o){
+        public void visitPUTSTATIC(final PUTSTATIC o){
             try {
             String field_name = o.getFieldName(cpg);
             JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
@@ -1089,7 +1089,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitGETSTATIC(GETSTATIC o){
+        public void visitGETSTATIC(final GETSTATIC o){
             try {
             String field_name = o.getFieldName(cpg);
             JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
@@ -1126,13 +1126,13 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitINVOKEDYNAMIC(INVOKEDYNAMIC o){
+        public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o){
             throw new RuntimeException("INVOKEDYNAMIC instruction is not supported at this time");
         }
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitINVOKEINTERFACE(INVOKEINTERFACE o){
+        public void visitINVOKEINTERFACE(final INVOKEINTERFACE o){
             try {
             // INVOKEINTERFACE is a LoadClass; the Class where the referenced method is declared in,
             // is therefore resolved/verified.
@@ -1161,7 +1161,7 @@ public final class Pass3aVerifier extends PassVerifier{
          * @param invoke the instruction that references the method
          * @return the referenced method or null if not found.
          */
-        private Method getMethodRecursive(JavaClass jc, InvokeInstruction invoke) throws ClassNotFoundException{
+        private Method getMethodRecursive(final JavaClass jc, final InvokeInstruction invoke) throws ClassNotFoundException{
             Method m;
             //look in the given class
             m = getMethod(jc, invoke);
@@ -1194,7 +1194,7 @@ public final class Pass3aVerifier extends PassVerifier{
          * @param invoke the instruction that references the method
          * @return the referenced method or null if not found.
          */
-        private Method getMethod(JavaClass jc, InvokeInstruction invoke){
+        private Method getMethod(final JavaClass jc, final InvokeInstruction invoke){
             Method[] ms = jc.getMethods();
             for (Method element : ms) {
                 if ( (element.getName().equals(invoke.getMethodName(cpg))) &&
@@ -1209,7 +1209,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitINVOKESPECIAL(INVOKESPECIAL o){
+        public void visitINVOKESPECIAL(final INVOKESPECIAL o){
             try {
             // INVOKESPECIAL is a LoadClass; the Class where the referenced method is declared in,
             // is therefore resolved/verified.
@@ -1268,7 +1268,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitINVOKESTATIC(INVOKESTATIC o){
+        public void visitINVOKESTATIC(final INVOKESTATIC o){
             try {
             // INVOKESTATIC is a LoadClass; the Class where the referenced method is declared in,
             // is therefore resolved/verified.
@@ -1293,7 +1293,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitINVOKEVIRTUAL(INVOKEVIRTUAL o){
+        public void visitINVOKEVIRTUAL(final INVOKEVIRTUAL o){
             try {
             // INVOKEVIRTUAL is a LoadClass; the Class where the referenced method is declared in,
             // is therefore resolved/verified.
@@ -1324,7 +1324,7 @@ public final class Pass3aVerifier extends PassVerifier{
          * The equality of the elements is based on their equals(Object)
          * method instead of their object identity.
          */ 
-        private boolean objarrayequals(Object[] o, Object[] p){
+        private boolean objarrayequals(final Object[] o, final Object[] p){
             if (o.length != p.length){
                 return false;
             }

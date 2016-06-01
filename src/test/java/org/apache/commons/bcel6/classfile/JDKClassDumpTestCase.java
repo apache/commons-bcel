@@ -43,7 +43,7 @@ public class JDKClassDumpTestCase {
         javaLib.listFiles(new FileFilter() {
 
             @Override
-            public boolean accept(File file) {
+            public boolean accept(final File file) {
                 if(file.getName().endsWith(".jar")) {
                     try {
                         testJar(file);
@@ -57,7 +57,7 @@ public class JDKClassDumpTestCase {
     }
 
 
-    private void testJar(File file) throws Exception {
+    private void testJar(final File file) throws Exception {
         System.out.println("parsing " + file);
         JarFile jar = new JarFile(file);
         Enumeration<JarEntry> en = jar.entries();
@@ -76,7 +76,7 @@ public class JDKClassDumpTestCase {
         jar.close();
     }
 
-    private void compare(JavaClass jc, InputStream inputStream, String name) throws Exception {
+    private void compare(final JavaClass jc, final InputStream inputStream, final String name) throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
         jc.dump(dos);

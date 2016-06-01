@@ -36,7 +36,7 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
     }
 
 
-    public ANEWARRAY(int index) {
+    public ANEWARRAY(final int index) {
         super(org.apache.commons.bcel6.Const.ANEWARRAY, index);
     }
 
@@ -57,7 +57,7 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLoadClass(this);
         v.visitAllocationInstruction(this);
         v.visitExceptionThrower(this);
@@ -69,7 +69,7 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
 
 
     @Override
-    public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
+    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
         Type t = getType(cpg);
         if (t instanceof ArrayType) {
             t = ((ArrayType) t).getBasicType();

@@ -73,7 +73,7 @@ public abstract class Attribute implements Cloneable, Node {
     @java.lang.Deprecated
     protected ConstantPool constant_pool; // TODO make private (has getter & setter)
 
-    protected Attribute(byte tag, int name_index, int length, ConstantPool constant_pool)
+    protected Attribute(final byte tag, final int name_index, final int length, final ConstantPool constant_pool)
     {
         this.tag = tag;
         this.name_index = name_index;
@@ -99,7 +99,7 @@ public abstract class Attribute implements Cloneable, Node {
      *            Output file stream
      * @throws IOException
      */
-    public void dump(DataOutputStream file) throws IOException
+    public void dump(final DataOutputStream file) throws IOException
     {
         file.writeShort(name_index);
         file.writeInt(length);
@@ -117,7 +117,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @deprecated Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead
      */
     @java.lang.Deprecated
-    public static void addAttributeReader(String name, AttributeReader r)
+    public static void addAttributeReader(final String name, final AttributeReader r)
     {
         readers.put(name, r);
     }
@@ -130,7 +130,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @param name the name of the attribute as stored in the class file
      * @param r    the reader object
      */
-    public static void addAttributeReader(String name, UnknownAttributeReader r)
+    public static void addAttributeReader(final String name, final UnknownAttributeReader r)
     {
         readers.put(name, r);
     }
@@ -140,7 +140,7 @@ public abstract class Attribute implements Cloneable, Node {
      * 
      * @param name the name of the attribute as stored in the class file
      */
-    public static void removeAttributeReader(String name)
+    public static void removeAttributeReader(final String name)
     {
         readers.remove(name);
     }
@@ -159,7 +159,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @throws IOException
      * @throws ClassFormatException
      */
-    public static Attribute readAttribute(DataInputStream file, ConstantPool constant_pool)
+    public static Attribute readAttribute(final DataInputStream file, final ConstantPool constant_pool)
             throws IOException, ClassFormatException
     {
         return readAttribute((DataInput) file, constant_pool);
@@ -180,7 +180,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @throws ClassFormatException
      * @since 6.0
      */
-    public static Attribute readAttribute(DataInput file, ConstantPool constant_pool)
+    public static Attribute readAttribute(final DataInput file, final ConstantPool constant_pool)
             throws IOException, ClassFormatException
     {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
@@ -283,7 +283,7 @@ public abstract class Attribute implements Cloneable, Node {
     /**
      * @param length length in bytes.
      */
-    public final void setLength(int length)
+    public final void setLength(final int length)
     {
         this.length = length;
     }
@@ -291,7 +291,7 @@ public abstract class Attribute implements Cloneable, Node {
     /**
      * @param name_index of attribute.
      */
-    public final void setNameIndex(int name_index)
+    public final void setNameIndex(final int name_index)
     {
         this.name_index = name_index;
     }
@@ -325,7 +325,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @param constant_pool Constant pool to be used for this object.
      * @see ConstantPool
      */
-    public final void setConstantPool(ConstantPool constant_pool)
+    public final void setConstantPool(final ConstantPool constant_pool)
     {
         this.constant_pool = constant_pool;
     }

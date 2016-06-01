@@ -75,7 +75,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    protected FieldOrMethod(FieldOrMethod c) {
+    protected FieldOrMethod(final FieldOrMethod c) {
         this(c.getAccessFlags(), c.getNameIndex(), c.getSignatureIndex(), c.getAttributes(), c
                 .getConstantPool());
     }
@@ -88,7 +88,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @throws ClassFormatException
      * @deprecated Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
      */
-    protected FieldOrMethod(DataInputStream file, ConstantPool constant_pool) throws IOException,
+    protected FieldOrMethod(final DataInputStream file, final ConstantPool constant_pool) throws IOException,
             ClassFormatException {
         this((DataInput) file, constant_pool);
     }
@@ -99,7 +99,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @throws IOException
      * @throws ClassFormatException
      */
-    protected FieldOrMethod(DataInput file, ConstantPool constant_pool) throws IOException, ClassFormatException {
+    protected FieldOrMethod(final DataInput file, final ConstantPool constant_pool) throws IOException, ClassFormatException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null,
                 constant_pool);
         int attributes_count = file.readUnsignedShort();
@@ -118,8 +118,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @param attributes Collection of attributes
      * @param constant_pool Array of constants
      */
-    protected FieldOrMethod(int access_flags, int name_index, int signature_index,
-            Attribute[] attributes, ConstantPool constant_pool) {
+    protected FieldOrMethod(final int access_flags, final int name_index, final int signature_index,
+            final Attribute[] attributes, final ConstantPool constant_pool) {
         super(access_flags);
         this.name_index = name_index;
         this.signature_index = signature_index;
@@ -134,7 +134,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(super.getAccessFlags());
         file.writeShort(name_index);
         file.writeShort(signature_index);
@@ -156,7 +156,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * @param attributes Collection of object attributes.
      */
-    public final void setAttributes( Attribute[] attributes ) {
+    public final void setAttributes( final Attribute[] attributes ) {
         this.attributes = attributes;
         this.attributes_count = attributes != null ? attributes.length : 0; // init deprecated field
     }
@@ -173,7 +173,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( ConstantPool constant_pool ) {
+    public final void setConstantPool( final ConstantPool constant_pool ) {
         this.constant_pool = constant_pool;
     }
 
@@ -189,7 +189,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * @param name_index Index in constant pool of object's name.
      */
-    public final void setNameIndex( int name_index ) {
+    public final void setNameIndex( final int name_index ) {
         this.name_index = name_index;
     }
 
@@ -205,7 +205,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * @param signature_index Index in constant pool of field signature.
      */
-    public final void setSignatureIndex( int signature_index ) {
+    public final void setSignatureIndex( final int signature_index ) {
         this.signature_index = signature_index;
     }
 
@@ -233,7 +233,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * @return deep copy of this field
      */
-    protected FieldOrMethod copy_( ConstantPool _constant_pool ) {
+    protected FieldOrMethod copy_( final ConstantPool _constant_pool ) {
         FieldOrMethod c = null;
 
         try {

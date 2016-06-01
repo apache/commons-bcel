@@ -39,7 +39,7 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
     /** Check whether object is of given type
      * @param index index to class in constant pool
      */
-    public CHECKCAST(int index) {
+    public CHECKCAST(final int index) {
         super(org.apache.commons.bcel6.Const.CHECKCAST, index);
     }
 
@@ -54,7 +54,7 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
 
 
     @Override
-    public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
+    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
         Type t = getType(cpg);
         if (t instanceof ArrayType) {
             t = ((ArrayType) t).getBasicType();
@@ -72,7 +72,7 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLoadClass(this);
         v.visitExceptionThrower(this);
         v.visitStackProducer(this);

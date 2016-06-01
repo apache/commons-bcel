@@ -37,7 +37,7 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
     }
 
 
-    public FCONST(float f) {
+    public FCONST(final float f) {
         super(org.apache.commons.bcel6.Const.FCONST_0, (short) 1);
         if (f == 0.0) {
             super.setOpcode(org.apache.commons.bcel6.Const.FCONST_0);
@@ -61,7 +61,7 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
     /** @return Type.FLOAT
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return Type.FLOAT;
     }
 
@@ -75,7 +75,7 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitPushInstruction(this);
         v.visitStackProducer(this);
         v.visitTypedInstruction(this);

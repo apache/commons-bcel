@@ -34,7 +34,7 @@ public class BCELifierTestCase {
         testClassOnPath("target/test-classes/Java8Example.class");
     }
 
-    private void testClassOnPath(String javaClass) throws Exception {
+    private void testClassOnPath(final String javaClass) throws Exception {
         // Get javap of the input class
         final String initial = exec(null, "javap", "-p", "-c", javaClass);
 
@@ -53,7 +53,7 @@ public class BCELifierTestCase {
         assertEquals(initial, output);
     }
 
-    private String exec(File workDir, String ... args) throws Exception {
+    private String exec(final File workDir, final String ... args) throws Exception {
 //        System.err.println(java.util.Arrays.toString(args));
         ProcessBuilder pb = new ProcessBuilder( args );
         pb.directory(workDir);

@@ -40,7 +40,7 @@ public final class Deprecated extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    public Deprecated(Deprecated c) {
+    public Deprecated(final Deprecated c) {
         this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
     }
 
@@ -51,7 +51,7 @@ public final class Deprecated extends Attribute {
      * @param bytes Attribute contents
      * @param constant_pool Array of constants
      */
-    public Deprecated(int name_index, int length, byte[] bytes, ConstantPool constant_pool) {
+    public Deprecated(final int name_index, final int length, final byte[] bytes, final ConstantPool constant_pool) {
         super(Const.ATTR_DEPRECATED, name_index, length, constant_pool);
         this.bytes = bytes;
     }
@@ -66,7 +66,7 @@ public final class Deprecated extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    Deprecated(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    Deprecated(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (byte[]) null, constant_pool);
         if (length > 0) {
@@ -85,7 +85,7 @@ public final class Deprecated extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitDeprecated(this);
     }
 
@@ -97,7 +97,7 @@ public final class Deprecated extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         if (super.getLength() > 0) {
             file.write(bytes, 0, super.getLength());
@@ -116,7 +116,7 @@ public final class Deprecated extends Attribute {
     /**
      * @param bytes the raw bytes that represents this byte array
      */
-    public final void setBytes( byte[] bytes ) {
+    public final void setBytes( final byte[] bytes ) {
         this.bytes = bytes;
     }
 
@@ -134,7 +134,7 @@ public final class Deprecated extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         Deprecated c = (Deprecated) clone();
         if (bytes != null) {
             c.bytes = new byte[bytes.length];

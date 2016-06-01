@@ -40,7 +40,7 @@ public final class Signature extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    public Signature(Signature c) {
+    public Signature(final Signature c) {
         this(c.getNameIndex(), c.getLength(), c.getSignatureIndex(), c.getConstantPool());
     }
 
@@ -53,7 +53,7 @@ public final class Signature extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    Signature(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    Signature(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, input.readUnsignedShort(), constant_pool);
     }
@@ -65,7 +65,7 @@ public final class Signature extends Attribute {
      * @param signature_index Index in constant pool to CONSTANT_Utf8
      * @param constant_pool Array of constants
      */
-    public Signature(int name_index, int length, int signature_index, ConstantPool constant_pool) {
+    public Signature(final int name_index, final int length, final int signature_index, final ConstantPool constant_pool) {
         super(Const.ATTR_SIGNATURE, name_index, length, constant_pool);
         this.signature_index = signature_index;
     }
@@ -79,7 +79,7 @@ public final class Signature extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         //System.err.println("Visiting non-standard Signature object");
         v.visitSignature(this);
     }
@@ -92,7 +92,7 @@ public final class Signature extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(signature_index);
     }
@@ -109,7 +109,7 @@ public final class Signature extends Attribute {
     /**
      * @param signature_index the index info the constant pool of this signature
      */
-    public final void setSignatureIndex( int signature_index ) {
+    public final void setSignatureIndex( final int signature_index ) {
         this.signature_index = signature_index;
     }
 
@@ -128,7 +128,7 @@ public final class Signature extends Attribute {
      */
     private static final class MyByteArrayInputStream extends ByteArrayInputStream {
 
-        MyByteArrayInputStream(String data) {
+        MyByteArrayInputStream(final String data) {
             super(data.getBytes());
         }
 
@@ -146,12 +146,12 @@ public final class Signature extends Attribute {
     }
 
 
-    private static boolean identStart( int ch ) {
+    private static boolean identStart( final int ch ) {
         return ch == 'T' || ch == 'L';
     }
 
 
-    private static void matchIdent( MyByteArrayInputStream in, StringBuilder buf ) {
+    private static void matchIdent( final MyByteArrayInputStream in, final StringBuilder buf ) {
         int ch;
         if ((ch = in.read()) == -1) {
             throw new RuntimeException("Illegal signature: " + in.getData()
@@ -194,7 +194,7 @@ public final class Signature extends Attribute {
     }
 
 
-    private static void matchGJIdent( MyByteArrayInputStream in, StringBuilder buf ) {
+    private static void matchGJIdent( final MyByteArrayInputStream in, final StringBuilder buf ) {
         int ch;
         matchIdent(in, buf);
         ch = in.read();
@@ -230,7 +230,7 @@ public final class Signature extends Attribute {
     }
 
 
-    public static String translate( String s ) {
+    public static String translate( final String s ) {
         //System.out.println("Sig:" + s);
         StringBuilder buf = new StringBuilder();
         matchGJIdent(new MyByteArrayInputStream(s), buf);
@@ -239,13 +239,13 @@ public final class Signature extends Attribute {
 
 
     // @since 6.0 is no longer final
-    public static boolean isFormalParameterList( String s ) {
+    public static boolean isFormalParameterList( final String s ) {
         return s.startsWith("<") && (s.indexOf(':') > 0);
     }
 
 
     // @since 6.0 is no longer final
-    public static boolean isActualParameterList( String s ) {
+    public static boolean isActualParameterList( final String s ) {
         return s.startsWith("L") && s.endsWith(">;");
     }
 
@@ -264,7 +264,7 @@ public final class Signature extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         return (Attribute) clone();
     }
 }

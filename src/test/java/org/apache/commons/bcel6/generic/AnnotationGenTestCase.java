@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.classfile.RuntimeVisibleAnnotations;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {
-    private ClassGen createClassGen(String classname)
+    private ClassGen createClassGen(final String classname)
     {
         return new ClassGen(classname, "java.lang.Object", "<generated>",
                 Const.ACC_PUBLIC | Const.ACC_SUPER, null);
@@ -118,7 +118,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         assertTrue("Should have seen a RuntimeInvisibleAnnotation", foundRIV);
     }
 
-    private void checkSerialize(AnnotationEntryGen a, ConstantPoolGen cpg)
+    private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg)
     {
         try
         {

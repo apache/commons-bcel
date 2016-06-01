@@ -44,7 +44,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     }
 
 
-    public MULTIANEWARRAY(int index, short dimensions) {
+    public MULTIANEWARRAY(final int index, final short dimensions) {
         super(org.apache.commons.bcel6.Const.MULTIANEWARRAY, index);
         if (dimensions < 1) {
             throw new ClassGenException("Invalid dimensions value: " + dimensions);
@@ -59,7 +59,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(super.getOpcode());
         out.writeShort(super.getIndex());
         out.writeByte(dimensions);
@@ -70,7 +70,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      * Read needed data (i.e., no. dimension) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
         dimensions = bytes.readByte();
         super.setLength(4);
@@ -89,7 +89,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      * @return mnemonic for instruction
      */
     @Override
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         return super.toString(verbose) + " " + super.getIndex() + " " + dimensions;
     }
 
@@ -98,7 +98,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      * @return mnemonic for instruction with symbolic references resolved
      */
     @Override
-    public String toString( ConstantPool cp ) {
+    public String toString( final ConstantPool cp ) {
         return super.toString(cp) + " " + dimensions;
     }
 
@@ -109,7 +109,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      * @return Number of words consumed from stack by this instruction
      */
     @Override
-    public int consumeStack( ConstantPoolGen cpg ) {
+    public int consumeStack( final ConstantPoolGen cpg ) {
         return dimensions;
     }
 
@@ -123,7 +123,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 
 
     @Override
-    public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
+    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
         Type t = getType(cpg);
         if (t instanceof ArrayType) {
             t = ((ArrayType) t).getBasicType();
@@ -141,7 +141,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLoadClass(this);
         v.visitAllocationInstruction(this);
         v.visitExceptionThrower(this);

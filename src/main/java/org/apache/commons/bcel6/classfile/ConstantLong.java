@@ -38,7 +38,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /** 
      * @param bytes Data
      */
-    public ConstantLong(long bytes) {
+    public ConstantLong(final long bytes) {
         super(Const.CONSTANT_Long);
         this.bytes = bytes;
     }
@@ -47,7 +47,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /**
      * Initialize from another object.
      */
-    public ConstantLong(ConstantLong c) {
+    public ConstantLong(final ConstantLong c) {
         this(c.getBytes());
     }
 
@@ -58,7 +58,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantLong(DataInput file) throws IOException {
+    ConstantLong(final DataInput file) throws IOException {
         this(file.readLong());
     }
 
@@ -71,7 +71,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantLong(this);
     }
 
@@ -83,7 +83,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeLong(bytes);
     }
@@ -100,7 +100,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /**
      * @param bytes the raw bytes that represent this long
      */
-    public final void setBytes( long bytes ) {
+    public final void setBytes( final long bytes ) {
         this.bytes = bytes;
     }
 
@@ -117,7 +117,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /** @return Long object
      */
     @Override
-    public Object getConstantValue( ConstantPool cp ) {
+    public Object getConstantValue( final ConstantPool cp ) {
         return Long.valueOf(bytes);
     }
 }

@@ -38,17 +38,17 @@ public class ClassVector implements java.io.Serializable {
     protected List<JavaClass> vec = new ArrayList<JavaClass>();
 
 
-    public void addElement( JavaClass clazz ) {
+    public void addElement( final JavaClass clazz ) {
         vec.add(clazz);
     }
 
 
-    public JavaClass elementAt( int index ) {
+    public JavaClass elementAt( final int index ) {
         return vec.get(index);
     }
 
 
-    public void removeElementAt( int index ) {
+    public void removeElementAt( final int index ) {
         vec.remove(index);
     }
 

@@ -50,8 +50,8 @@ final class ConstantHTML {
     private final Method[] methods;
 
 
-    ConstantHTML(String dir, String class_name, String class_package, Method[] methods,
-            ConstantPool constant_pool) throws IOException {
+    ConstantHTML(final String dir, final String class_name, final String class_package, final Method[] methods,
+            final ConstantPool constant_pool) throws IOException {
         this.class_name = class_name;
         this.class_package = class_package;
         this.constant_pool = constant_pool;
@@ -78,12 +78,12 @@ final class ConstantHTML {
     }
 
 
-    String referenceConstant( int index ) {
+    String referenceConstant( final int index ) {
         return constant_ref[index];
     }
 
 
-    private void writeConstant( int index ) {
+    private void writeConstant( final int index ) {
         byte tag = constants[index].getTag();
         int class_index;
         int name_index;
@@ -221,7 +221,7 @@ final class ConstantHTML {
     }
 
 
-    private int getMethodNumber( String str ) {
+    private int getMethodNumber( final String str ) {
         for (int i = 0; i < methods.length; i++) {
             String cmp = methods[i].getName() + methods[i].getSignature();
             if (cmp.equals(str)) {

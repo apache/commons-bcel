@@ -48,7 +48,7 @@ public class MethodParameter implements Cloneable {
      * @throws java.io.IOException
      * @throws ClassFormatException
      */
-    MethodParameter(DataInput input) throws IOException {
+    MethodParameter(final DataInput input) throws IOException {
         name_index = input.readUnsignedShort();
         access_flags = input.readUnsignedShort();
     }
@@ -57,14 +57,14 @@ public class MethodParameter implements Cloneable {
         return name_index;
     }
 
-    public void setNameIndex(int name_index) {
+    public void setNameIndex(final int name_index) {
         this.name_index = name_index;
     }
 
     /**
      * Returns the name of the parameter.
      */
-    public String getParameterName(ConstantPool constant_pool) {
+    public String getParameterName(final ConstantPool constant_pool) {
         if (name_index == 0) {
             return null;
         }
@@ -75,7 +75,7 @@ public class MethodParameter implements Cloneable {
         return access_flags;
     }
 
-    public void setAccessFlags(int access_flags) {
+    public void setAccessFlags(final int access_flags) {
         this.access_flags = access_flags;
     }
 
@@ -97,7 +97,7 @@ public class MethodParameter implements Cloneable {
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump(DataOutputStream file) throws IOException {
+    public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(name_index);
         file.writeShort(access_flags);
     }

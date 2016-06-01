@@ -76,7 +76,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     private static BCELComparator _cmp = new BCELComparator() {
 
         @Override
-        public boolean equals( Object o1, Object o2 ) {
+        public boolean equals( final Object o1, final Object o2 ) {
             JavaClass THIS = (JavaClass) o1;
             JavaClass THAT = (JavaClass) o2;
             return THIS.getClassName().equals(THAT.getClassName());
@@ -84,7 +84,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
 
         @Override
-        public int hashCode( Object o ) {
+        public int hashCode( final Object o ) {
             JavaClass THIS = (JavaClass) o;
             return THIS.getClassName().hashCode();
         }
@@ -116,9 +116,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param attributes Class attributes
      * @param source Read from file or generated in memory?
      */
-    public JavaClass(int class_name_index, int superclass_name_index, String file_name, int major,
-            int minor, int access_flags, ConstantPool constant_pool, int[] interfaces,
-            Field[] fields, Method[] methods, Attribute[] attributes, byte source) {
+    public JavaClass(final int class_name_index, final int superclass_name_index, final String file_name, final int major,
+            final int minor, final int access_flags, final ConstantPool constant_pool, int[] interfaces,
+            Field[] fields, Method[] methods, Attribute[] attributes, final byte source) {
         super(access_flags);
         if (interfaces == null) {
             interfaces = new int[0];
@@ -193,9 +193,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param methods Class methods
      * @param attributes Class attributes
      */
-    public JavaClass(int class_name_index, int superclass_name_index, String file_name, int major,
-            int minor, int access_flags, ConstantPool constant_pool, int[] interfaces,
-            Field[] fields, Method[] methods, Attribute[] attributes) {
+    public JavaClass(final int class_name_index, final int superclass_name_index, final String file_name, final int major,
+            final int minor, final int access_flags, final ConstantPool constant_pool, final int[] interfaces,
+            final Field[] fields, final Method[] methods, final Attribute[] attributes) {
         this(class_name_index, superclass_name_index, file_name, major, minor, access_flags,
                 constant_pool, interfaces, fields, methods, attributes, HEAP);
     }
@@ -209,14 +209,14 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitJavaClass(this);
     }
 
 
     /* Print debug information depending on `JavaClass.debug'
      */
-    static void Debug( String str ) {
+    static void Debug( final String str ) {
         if (debug) {
             System.out.println(str);
         }
@@ -229,7 +229,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param file Output file
      * @throws IOException
      */
-    public void dump( File file ) throws IOException {
+    public void dump( final File file ) throws IOException {
         String parent = file.getParent();
         if (parent != null) {
             File dir = new File(parent);
@@ -257,7 +257,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param _file_name Output file name
      * @exception IOException
      */
-    public void dump( String _file_name ) throws IOException {
+    public void dump( final String _file_name ) throws IOException {
         dump(new File(_file_name));
     }
 
@@ -289,7 +289,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param file Output stream
      * @exception IOException
      */
-    public void dump( OutputStream file ) throws IOException {
+    public void dump( final OutputStream file ) throws IOException {
         dump(new DataOutputStream(file));
     }
 
@@ -300,7 +300,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param file Output stream
      * @exception IOException
      */
-    public void dump( DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeInt(Const.JVM_CLASSFILE_MAGIC);
         file.writeShort(minor);
         file.writeShort(major);
@@ -437,7 +437,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @return A {@link Method} corresponding to
      * java.lang.reflect.Method if any
      */
-    public Method getMethod( java.lang.reflect.Method m ) {
+    public Method getMethod( final java.lang.reflect.Method m ) {
         for (Method method : methods) {
             if (m.getName().equals(method.getName()) && (m.getModifiers() == method.getModifiers())
                     && Type.getSignature(m).equals(method.getSignature())) {
@@ -486,7 +486,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param attributes .
      */
-    public void setAttributes( Attribute[] attributes ) {
+    public void setAttributes( final Attribute[] attributes ) {
         this.attributes = attributes;
     }
 
@@ -494,7 +494,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param class_name .
      */
-    public void setClassName( String class_name ) {
+    public void setClassName( final String class_name ) {
         this.class_name = class_name;
     }
 
@@ -502,7 +502,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param class_name_index .
      */
-    public void setClassNameIndex( int class_name_index ) {
+    public void setClassNameIndex( final int class_name_index ) {
         this.class_name_index = class_name_index;
     }
 
@@ -510,7 +510,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param constant_pool .
      */
-    public void setConstantPool( ConstantPool constant_pool ) {
+    public void setConstantPool( final ConstantPool constant_pool ) {
         this.constant_pool = constant_pool;
     }
 
@@ -518,7 +518,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param fields .
      */
-    public void setFields( Field[] fields ) {
+    public void setFields( final Field[] fields ) {
         this.fields = fields;
     }
 
@@ -526,7 +526,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Set File name of class, aka SourceFile attribute value
      */
-    public void setFileName( String file_name ) {
+    public void setFileName( final String file_name ) {
         this.file_name = file_name;
     }
 
@@ -534,7 +534,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param interface_names .
      */
-    public void setInterfaceNames( String[] interface_names ) {
+    public void setInterfaceNames( final String[] interface_names ) {
         this.interface_names = interface_names;
     }
 
@@ -542,7 +542,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param interfaces .
      */
-    public void setInterfaces( int[] interfaces ) {
+    public void setInterfaces( final int[] interfaces ) {
         this.interfaces = interfaces;
     }
 
@@ -550,7 +550,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param major .
      */
-    public void setMajor( int major ) {
+    public void setMajor( final int major ) {
         this.major = major;
     }
 
@@ -558,7 +558,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param methods .
      */
-    public void setMethods( Method[] methods ) {
+    public void setMethods( final Method[] methods ) {
         this.methods = methods;
     }
 
@@ -566,7 +566,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param minor .
      */
-    public void setMinor( int minor ) {
+    public void setMinor( final int minor ) {
         this.minor = minor;
     }
 
@@ -574,7 +574,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Set absolute path to file this class was read from.
      */
-    public void setSourceFileName( String source_file_name ) {
+    public void setSourceFileName( final String source_file_name ) {
         this.source_file_name = source_file_name;
     }
 
@@ -582,7 +582,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param superclass_name .
      */
-    public void setSuperclassName( String superclass_name ) {
+    public void setSuperclassName( final String superclass_name ) {
         this.superclass_name = superclass_name;
     }
 
@@ -590,7 +590,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param superclass_name_index .
      */
-    public void setSuperclassNameIndex( int superclass_name_index ) {
+    public void setSuperclassNameIndex( final int superclass_name_index ) {
         this.superclass_name_index = superclass_name_index;
     }
 
@@ -652,7 +652,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
 
-    private static String indent( Object obj ) {
+    private static String indent( final Object obj ) {
         StringTokenizer tok = new StringTokenizer(obj.toString(), "\n");
         StringBuilder buf = new StringBuilder();
         while (tok.hasMoreTokens()) {
@@ -765,7 +765,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Sets the ClassRepository which loaded the JavaClass.
      * Should be called immediately after parsing is done.
      */
-    public void setRepository( org.apache.commons.bcel6.util.Repository repository ) { // TODO make protected?
+    public void setRepository( final org.apache.commons.bcel6.util.Repository repository ) { // TODO make protected?
         this.repository = repository;
     }
 
@@ -776,7 +776,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @throws ClassNotFoundException if superclasses or superinterfaces
      *   of this object can't be found
      */
-    public final boolean instanceOf( JavaClass super_class ) throws ClassNotFoundException {
+    public final boolean instanceOf( final JavaClass super_class ) throws ClassNotFoundException {
         if (this.equals(super_class)) {
             return true;
         }
@@ -798,7 +798,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @throws ClassNotFoundException if superclasses or superinterfaces
      *   of this class can't be found
      */
-    public boolean implementationOf( JavaClass inter ) throws ClassNotFoundException {
+    public boolean implementationOf( final JavaClass inter ) throws ClassNotFoundException {
         if (!inter.isInterface()) {
             throw new IllegalArgumentException(inter.getClassName() + " is no interface");
         }
@@ -893,7 +893,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param comparator Comparison strategy object
      */
-    public static void setComparator( BCELComparator comparator ) {
+    public static void setComparator( final BCELComparator comparator ) {
         _cmp = comparator;
     }
 
@@ -906,7 +906,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object obj ) {
+    public boolean equals( final Object obj ) {
         return _cmp.equals(this, obj);
     }
 
@@ -917,7 +917,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @since 6.0
      */
     @Override
-    public int compareTo( JavaClass obj ) {
+    public int compareTo( final JavaClass obj ) {
         return getClassName().compareTo(obj.getClassName());
     }
 

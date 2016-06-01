@@ -39,8 +39,8 @@ public abstract class ParameterAnnotations extends Attribute {
      * @param input Input stream
      * @param constant_pool Array of constants
      */
-    ParameterAnnotations(byte parameter_annotation_type, int name_index, int length,
-            DataInput input, ConstantPool constant_pool) throws IOException {
+    ParameterAnnotations(final byte parameter_annotation_type, final int name_index, final int length,
+            final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(parameter_annotation_type, name_index, length, (ParameterAnnotationEntry[]) null,
                 constant_pool);
         int num_parameters = input.readUnsignedByte();
@@ -58,8 +58,8 @@ public abstract class ParameterAnnotations extends Attribute {
      * @param parameter_annotation_table the actual parameter annotations
      * @param constant_pool Array of constants
      */
-    public ParameterAnnotations(byte parameter_annotation_type, int name_index, int length,
-            ParameterAnnotationEntry[] parameter_annotation_table, ConstantPool constant_pool) {
+    public ParameterAnnotations(final byte parameter_annotation_type, final int name_index, final int length,
+            final ParameterAnnotationEntry[] parameter_annotation_table, final ConstantPool constant_pool) {
         super(parameter_annotation_type, name_index, length, constant_pool);
         this.parameter_annotation_table = parameter_annotation_table;
     }
@@ -73,7 +73,7 @@ public abstract class ParameterAnnotations extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitParameterAnnotation(this);
     }
 
@@ -81,7 +81,7 @@ public abstract class ParameterAnnotations extends Attribute {
     /**
      * @param parameter_annotation_table the entries to set in this parameter annotation
      */
-    public final void setParameterAnnotationTable(ParameterAnnotationEntry[] parameter_annotation_table ) {
+    public final void setParameterAnnotationTable(final ParameterAnnotationEntry[] parameter_annotation_table ) {
         this.parameter_annotation_table = parameter_annotation_table;
     }
 
@@ -102,7 +102,7 @@ public abstract class ParameterAnnotations extends Attribute {
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         super.dump(dos);
         dos.writeByte(parameter_annotation_table.length);
@@ -117,7 +117,7 @@ public abstract class ParameterAnnotations extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool constant_pool ) {
+    public Attribute copy( final ConstantPool constant_pool ) {
         return (Attribute) clone();
     }
 }

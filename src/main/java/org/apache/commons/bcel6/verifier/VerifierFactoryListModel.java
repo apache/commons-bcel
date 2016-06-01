@@ -45,7 +45,7 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver,
 
 
     @Override
-    public synchronized void update( String s ) {
+    public synchronized void update( final String s ) {
         Verifier[] verifiers = VerifierFactory.getVerifiers();
         int num_of_verifiers = verifiers.length;
         cache.clear();
@@ -60,13 +60,13 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver,
 
 
     @Override
-    public synchronized void addListDataListener( ListDataListener l ) {
+    public synchronized void addListDataListener( final ListDataListener l ) {
         listeners.add(l);
     }
 
 
     @Override
-    public synchronized void removeListDataListener( javax.swing.event.ListDataListener l ) {
+    public synchronized void removeListDataListener( final javax.swing.event.ListDataListener l ) {
         listeners.remove(l);
     }
 
@@ -78,7 +78,7 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver,
 
 
     @Override
-    public synchronized String getElementAt( int index ) {
+    public synchronized String getElementAt( final int index ) {
         return (cache.toArray(new String[cache.size()]))[index];
     }
 }

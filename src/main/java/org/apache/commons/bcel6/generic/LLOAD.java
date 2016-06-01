@@ -34,7 +34,7 @@ public class LLOAD extends LoadInstruction {
     }
 
 
-    public LLOAD(int n) {
+    public LLOAD(final int n) {
         super(org.apache.commons.bcel6.Const.LLOAD, org.apache.commons.bcel6.Const.LLOAD_0, n);
     }
 
@@ -48,7 +48,7 @@ public class LLOAD extends LoadInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         super.accept(v);
         v.visitLLOAD(this);
     }

@@ -59,7 +59,7 @@ public final class ConstantUtf8 extends Constant {
             private static final long serialVersionUID = -8506975356158971766L;
 
             @Override
-            protected boolean removeEldestEntry(Map.Entry<String, ConstantUtf8> eldest) {
+            protected boolean removeEldestEntry(final Map.Entry<String, ConstantUtf8> eldest) {
                  return size() > MAX_CACHE_ENTRIES;
             }
         };
@@ -91,7 +91,7 @@ public final class ConstantUtf8 extends Constant {
     /**
      * @since 6.0
      */
-    public static ConstantUtf8 getCachedInstance(String s) {
+    public static ConstantUtf8 getCachedInstance(final String s) {
         if (s.length() > MAX_CACHED_SIZE) {
             skipped++;
             return  new ConstantUtf8(s);
@@ -112,21 +112,21 @@ public final class ConstantUtf8 extends Constant {
     /**
      * @since 6.0
      */
-    public static ConstantUtf8 getInstance(String s) {
+    public static ConstantUtf8 getInstance(final String s) {
         return new ConstantUtf8(s);
     }
 
     /**
      * @since 6.0
      */
-    public static ConstantUtf8 getInstance (DataInput input)  throws IOException {
+    public static ConstantUtf8 getInstance (final DataInput input)  throws IOException {
         return getInstance(input.readUTF());
     }
 
     /**
      * Initialize from another object.
      */
-    public ConstantUtf8(ConstantUtf8 c) {
+    public ConstantUtf8(final ConstantUtf8 c) {
         this(c.getBytes());
     }
 
@@ -137,7 +137,7 @@ public final class ConstantUtf8 extends Constant {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantUtf8(DataInput file) throws IOException {
+    ConstantUtf8(final DataInput file) throws IOException {
         super(Const.CONSTANT_Utf8);
         bytes = file.readUTF();
         created++;
@@ -147,7 +147,7 @@ public final class ConstantUtf8 extends Constant {
     /**
      * @param bytes Data
      */
-    public ConstantUtf8(String bytes) {
+    public ConstantUtf8(final String bytes) {
         super(Const.CONSTANT_Utf8);
         if (bytes == null) {
             throw new IllegalArgumentException("bytes must not be null!");
@@ -165,7 +165,7 @@ public final class ConstantUtf8 extends Constant {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantUtf8(this);
     }
 
@@ -177,7 +177,7 @@ public final class ConstantUtf8 extends Constant {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeUTF(bytes);
     }
@@ -196,7 +196,7 @@ public final class ConstantUtf8 extends Constant {
      * @deprecated
      */
     @java.lang.Deprecated
-    public final void setBytes( String bytes ) {
+    public final void setBytes( final String bytes ) {
         throw new UnsupportedOperationException();
     }
 

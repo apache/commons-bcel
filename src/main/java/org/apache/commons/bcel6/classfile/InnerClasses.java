@@ -41,7 +41,7 @@ public final class InnerClasses extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    public InnerClasses(InnerClasses c) {
+    public InnerClasses(final InnerClasses c) {
         this(c.getNameIndex(), c.getLength(), c.getInnerClasses(), c.getConstantPool());
     }
 
@@ -52,8 +52,8 @@ public final class InnerClasses extends Attribute {
      * @param inner_classes array of inner classes attributes
      * @param constant_pool Array of constants
      */
-    public InnerClasses(int name_index, int length, InnerClass[] inner_classes,
-            ConstantPool constant_pool) {
+    public InnerClasses(final int name_index, final int length, final InnerClass[] inner_classes,
+            final ConstantPool constant_pool) {
         super(Const.ATTR_INNER_CLASSES, name_index, length, constant_pool);
         this.inner_classes = inner_classes != null ? inner_classes : new InnerClass[0];
     }
@@ -68,7 +68,7 @@ public final class InnerClasses extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    InnerClasses(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    InnerClasses(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (InnerClass[]) null, constant_pool);
         int number_of_classes = input.readUnsignedShort();
@@ -87,7 +87,7 @@ public final class InnerClasses extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitInnerClasses(this);
     }
 
@@ -99,7 +99,7 @@ public final class InnerClasses extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(inner_classes.length);
         for (InnerClass inner_class : inner_classes) {
@@ -119,7 +119,7 @@ public final class InnerClasses extends Attribute {
     /**
      * @param inner_classes the array of inner classes
      */
-    public final void setInnerClasses( InnerClass[] inner_classes ) {
+    public final void setInnerClasses( final InnerClass[] inner_classes ) {
         this.inner_classes = inner_classes != null ? inner_classes : new InnerClass[0];
     }
 
@@ -144,7 +144,7 @@ public final class InnerClasses extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         // TODO this could be recoded to use a lower level constructor after creating a copy of the inner classes
         InnerClasses c = (InnerClasses) clone();
         c.inner_classes = new InnerClass[inner_classes.length];

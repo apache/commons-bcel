@@ -80,7 +80,7 @@ public class Class2HTML {
      * @param java_class The class to write
      * @param dir The directory to put the files in
      */
-    public Class2HTML(JavaClass java_class, String dir) throws IOException {
+    public Class2HTML(final JavaClass java_class, final String dir) throws IOException {
         Method[] methods = java_class.getMethods();
         this.java_class = java_class;
         this.dir = dir;
@@ -109,7 +109,7 @@ public class Class2HTML {
     }
 
 
-    public static void main( String[] argv ) throws IOException {
+    public static void main( final String[] argv ) throws IOException {
         String[] file_name = new String[argv.length];
         int files = 0;
         ClassParser parser = null;
@@ -166,7 +166,7 @@ public class Class2HTML {
      * Utility method that converts a class reference in the constant pool,
      * i.e., an index to a string.
      */
-    static String referenceClass( int index ) {
+    static String referenceClass( final int index ) {
         String str = constant_pool.getConstantString(index, Const.CONSTANT_Class);
         str = Utility.compactClassName(str);
         str = Utility.compactClassName(str, class_package + ".", true);
@@ -175,7 +175,7 @@ public class Class2HTML {
     }
 
 
-    static String referenceType( String type ) {
+    static String referenceType( final String type ) {
         String short_type = Utility.compactClassName(type);
         short_type = Utility.compactClassName(short_type, class_package + ".", true);
         int index = type.indexOf('['); // Type is an array?
@@ -191,7 +191,7 @@ public class Class2HTML {
     }
 
 
-    static String toHTML( String str ) {
+    static String toHTML( final String str ) {
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
             char ch;
@@ -216,7 +216,7 @@ public class Class2HTML {
     }
 
 
-    private void writeMainHTML( AttributeHTML attribute_html ) throws IOException {
+    private void writeMainHTML( final AttributeHTML attribute_html ) throws IOException {
         PrintWriter file = new PrintWriter(new FileOutputStream(dir + class_name + ".html"));
         Attribute[] attributes = java_class.getAttributes();
         file.println("<HTML>\n" + "<HEAD><TITLE>Documentation for " + class_name + "</TITLE>"

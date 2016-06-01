@@ -38,7 +38,7 @@ public abstract class ArithmeticInstruction extends Instruction implements Typed
     /**
      * @param opcode of instruction
      */
-    protected ArithmeticInstruction(short opcode) {
+    protected ArithmeticInstruction(final short opcode) {
         super(opcode, (short) 1);
     }
 
@@ -46,7 +46,7 @@ public abstract class ArithmeticInstruction extends Instruction implements Typed
     /** @return type associated with the instruction
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         final short _opcode = super.getOpcode();
         switch (_opcode) {
             case Const.DADD:

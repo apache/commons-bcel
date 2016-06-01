@@ -36,7 +36,7 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
     }
 
 
-    public NEW(int index) {
+    public NEW(final int index) {
         super(org.apache.commons.bcel6.Const.NEW, index);
     }
 
@@ -50,7 +50,7 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
 
 
     @Override
-    public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
+    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
         return (ObjectType) getType(cpg);
     }
 
@@ -64,7 +64,7 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLoadClass(this);
         v.visitAllocationInstruction(this);
         v.visitExceptionThrower(this);

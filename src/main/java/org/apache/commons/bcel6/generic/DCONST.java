@@ -37,7 +37,7 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
     }
 
 
-    public DCONST(double f) {
+    public DCONST(final double f) {
         super(org.apache.commons.bcel6.Const.DCONST_0, (short) 1);
         if (f == 0.0) {
             super.setOpcode(org.apache.commons.bcel6.Const.DCONST_0);
@@ -59,7 +59,7 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
     /** @return Type.DOUBLE
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return Type.DOUBLE;
     }
 
@@ -73,7 +73,7 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitPushInstruction(this);
         v.visitStackProducer(this);
         v.visitTypedInstruction(this);

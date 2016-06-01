@@ -155,269 +155,269 @@ public class CounterVisitor implements Visitor
 
 
     @Override
-    public void visitAnnotation(Annotations obj)
+    public void visitAnnotation(final Annotations obj)
     {
         annotationCount++;
     }
 
     @Override
-    public void visitAnnotationDefault(AnnotationDefault obj)
+    public void visitAnnotationDefault(final AnnotationDefault obj)
     {
         annotationDefaultCount++;
     }
 
     @Override
-    public void visitAnnotationEntry(AnnotationEntry obj)
+    public void visitAnnotationEntry(final AnnotationEntry obj)
     {
         annotationEntryCount++;
     }
 
     @Override
-    public void visitCode(Code obj)
+    public void visitCode(final Code obj)
     {
         codeCount++;
     }
 
     @Override
-    public void visitCodeException(CodeException obj)
+    public void visitCodeException(final CodeException obj)
     {
         codeExceptionCount++;
     }
 
     @Override
-    public void visitConstantClass(ConstantClass obj)
+    public void visitConstantClass(final ConstantClass obj)
     {
         constantClassCount++;
     }
 
     @Override
-    public void visitConstantDouble(ConstantDouble obj)
+    public void visitConstantDouble(final ConstantDouble obj)
     {
         constantDoubleCount++;
     }
 
     @Override
-    public void visitConstantFieldref(ConstantFieldref obj)
+    public void visitConstantFieldref(final ConstantFieldref obj)
     {
         constantFieldrefCount++;
     }
 
     @Override
-    public void visitConstantFloat(ConstantFloat obj)
+    public void visitConstantFloat(final ConstantFloat obj)
     {
         constantFloatCount++;
     }
 
     @Override
-    public void visitConstantInteger(ConstantInteger obj)
+    public void visitConstantInteger(final ConstantInteger obj)
     {
         constantIntegerCount++;
     }
 
     @Override
-    public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj)
+    public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref obj)
     {
         constantInterfaceMethodrefCount++;
     }
 
     @Override
-    public void visitConstantLong(ConstantLong obj)
+    public void visitConstantLong(final ConstantLong obj)
     {
         constantLongCount++;
     }
 
     @Override
-    public void visitConstantMethodref(ConstantMethodref obj)
+    public void visitConstantMethodref(final ConstantMethodref obj)
     {
         constantMethodrefCount++;
     }
 
     @Override
-    public void visitConstantNameAndType(ConstantNameAndType obj)
+    public void visitConstantNameAndType(final ConstantNameAndType obj)
     {
         constantNameAndTypeCount++;
     }
 
     @Override
-    public void visitConstantPool(ConstantPool obj)
+    public void visitConstantPool(final ConstantPool obj)
     {
         constantPoolCount++;
     }
 
     @Override
-    public void visitConstantString(ConstantString obj)
+    public void visitConstantString(final ConstantString obj)
     {
         constantStringCount++;
     }
 
     @Override
-    public void visitConstantUtf8(ConstantUtf8 obj)
+    public void visitConstantUtf8(final ConstantUtf8 obj)
     {
         constantUtf8Count++;
     }
 
     @Override
-    public void visitConstantValue(ConstantValue obj)
+    public void visitConstantValue(final ConstantValue obj)
     {
         constantValueCount++;
     }
 
     @Override
-    public void visitDeprecated(Deprecated obj)
+    public void visitDeprecated(final Deprecated obj)
     {
         deprecatedCount++;
     }
 
     @Override
-    public void visitEnclosingMethod(EnclosingMethod obj)
+    public void visitEnclosingMethod(final EnclosingMethod obj)
     {
         enclosingMethodCount++;
     }
 
     @Override
-    public void visitExceptionTable(ExceptionTable obj)
+    public void visitExceptionTable(final ExceptionTable obj)
     {
         exceptionTableCount++;
     }
 
     @Override
-    public void visitField(Field obj)
+    public void visitField(final Field obj)
     {
         fieldCount++;
     }
 
     @Override
-    public void visitInnerClass(InnerClass obj)
+    public void visitInnerClass(final InnerClass obj)
     {
         innerClassCount++;
     }
 
     @Override
-    public void visitInnerClasses(InnerClasses obj)
+    public void visitInnerClasses(final InnerClasses obj)
     {
         innerClassesCount++;
     }
 
     @Override
-    public void visitJavaClass(JavaClass obj)
+    public void visitJavaClass(final JavaClass obj)
     {
         javaClassCount++;
     }
 
     @Override
-    public void visitLineNumber(LineNumber obj)
+    public void visitLineNumber(final LineNumber obj)
     {
         lineNumberCount++;
     }
 
     @Override
-    public void visitLineNumberTable(LineNumberTable obj)
+    public void visitLineNumberTable(final LineNumberTable obj)
     {
         lineNumberTableCount++;
     }
 
     @Override
-    public void visitLocalVariable(LocalVariable obj)
+    public void visitLocalVariable(final LocalVariable obj)
     {
         localVariableCount++;
     }
 
     @Override
-    public void visitLocalVariableTable(LocalVariableTable obj)
+    public void visitLocalVariableTable(final LocalVariableTable obj)
     {
         localVariableTableCount++;
     }
 
     @Override
-    public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
+    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj)
     {
         localVariableTypeTableCount++;
     }
 
     @Override
-    public void visitMethod(Method obj)
+    public void visitMethod(final Method obj)
     {
         methodCount++;
     }
 
     @Override
-    public void visitParameterAnnotation(ParameterAnnotations obj)
+    public void visitParameterAnnotation(final ParameterAnnotations obj)
     {
         parameterAnnotationCount++;
     }
 
     @Override
-    public void visitSignature(Signature obj)
+    public void visitSignature(final Signature obj)
     {
         signatureAnnotationCount++;
     }
 
     @Override
-    public void visitSourceFile(SourceFile obj)
+    public void visitSourceFile(final SourceFile obj)
     {
         sourceFileCount++;
     }
 
     @Override
-    public void visitStackMap(StackMap obj)
+    public void visitStackMap(final StackMap obj)
     {
         stackMapCount++;
     }
 
     @Override
-    public void visitStackMapEntry(StackMapEntry obj)
+    public void visitStackMapEntry(final StackMapEntry obj)
     {
         stackMapEntryCount++;
     }
 
     @Override
-    public void visitSynthetic(Synthetic obj)
+    public void visitSynthetic(final Synthetic obj)
     {
         syntheticCount++;
     }
 
     @Override
-    public void visitUnknown(Unknown obj)
+    public void visitUnknown(final Unknown obj)
     {
         unknownCount++;
     }
 
     /** @since 6.0 */
     @Override
-    public void visitBootstrapMethods(BootstrapMethods obj)
+    public void visitBootstrapMethods(final BootstrapMethods obj)
     {
         bootstrapMethodsCount++;
     }
 
     /** @since 6.0 */
     @Override
-    public void visitMethodParameters(MethodParameters obj)
+    public void visitMethodParameters(final MethodParameters obj)
     {
         methodParametersCount++;
     }
 
     /** @since 6.0 */
     @Override
-    public void visitConstantInvokeDynamic(ConstantInvokeDynamic obj)
+    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj)
     {
         constantInvokeDynamic++;
     }
 
     /** @since 6.0 */
     @Override
-    public void visitConstantMethodType(ConstantMethodType obj) {
+    public void visitConstantMethodType(final ConstantMethodType obj) {
         // TODO Auto-generated method stub        
     }
 
     /** @since 6.0 */
     @Override
-    public void visitConstantMethodHandle(ConstantMethodHandle constantMethodHandle) {
+    public void visitConstantMethodHandle(final ConstantMethodHandle constantMethodHandle) {
         // TODO Auto-generated method stub
     }
 
     /** @since 6.0 */
     @Override
-    public void visitParameterAnnotationEntry(ParameterAnnotationEntry parameterAnnotationEntry) {
+    public void visitParameterAnnotationEntry(final ParameterAnnotationEntry parameterAnnotationEntry) {
         // TODO Auto-generated method stub        
     }
 }

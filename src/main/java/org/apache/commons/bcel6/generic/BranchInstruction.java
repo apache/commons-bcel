@@ -63,7 +63,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @param opcode Instruction opcode
      * @param target instruction to branch to
      */
-    protected BranchInstruction(short opcode, InstructionHandle target) {
+    protected BranchInstruction(final short opcode, final InstructionHandle target) {
         super(opcode, (short) 3);
         setTarget(target);
     }
@@ -74,7 +74,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(super.getOpcode());
         index = getTargetOffset();
         if (!isValidShort(index)) {
@@ -88,7 +88,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @param _target branch target
      * @return the offset to  `target' relative to this instruction
      */
-    protected int getTargetOffset( InstructionHandle _target ) {
+    protected int getTargetOffset( final InstructionHandle _target ) {
         if (_target == null) {
             throw new ClassGenException("Target of " + super.toString(true)
                     + " is invalid null handle");
@@ -120,7 +120,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @param max_offset the maximum offset that may be caused by these instructions
      * @return additional offset caused by possible change of this instruction's length
      */
-    protected int updatePosition( int offset, int max_offset ) {
+    protected int updatePosition( final int offset, final int max_offset ) {
         position += offset;
         return 0;
     }
@@ -138,7 +138,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @return mnemonic for instruction
      */
     @Override
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         String s = super.toString(verbose);
         String t = "null";
         if (verbose) {
@@ -175,7 +175,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @see InstructionList
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.setLength(3);
         index = bytes.readShort();
     }
@@ -201,7 +201,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * Set branch target
      * @param target branch target
      */
-    public void setTarget( InstructionHandle target ) {
+    public void setTarget( final InstructionHandle target ) {
         notifyTarget(this.target, target, this);
         this.target = target;
     }
@@ -210,8 +210,8 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Used by BranchInstruction, LocalVariableGen, CodeExceptionGen, LineNumberGen
      */
-    static void notifyTarget( InstructionHandle old_ih, InstructionHandle new_ih,
-            InstructionTargeter t ) {
+    static void notifyTarget( final InstructionHandle old_ih, final InstructionHandle new_ih,
+            final InstructionTargeter t ) {
         if (old_ih != null) {
             old_ih.removeTargeter(t);
         }
@@ -226,7 +226,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @param new_ih new target
      */
     @Override
-    public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
+    public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
         if (target == old_ih) {
             setTarget(new_ih);
         } else {
@@ -239,7 +239,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @return true, if ih is target of this instruction
      */
     @Override
-    public boolean containsTarget( InstructionHandle ih ) {
+    public boolean containsTarget( final InstructionHandle ih ) {
         return target == ih;
     }
 
@@ -269,7 +269,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @return the new position
      * @since 6.0
      */
-    protected void setPosition(int position) {
+    protected void setPosition(final int position) {
         this.position = position;
     }
 
@@ -278,7 +278,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * @param index the index to set
      * @since 6.0
      */
-    protected void setIndex(int index) {
+    protected void setIndex(final int index) {
         this.index = index;
     }
 

@@ -40,7 +40,7 @@ public class LocalVariableTable extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
      */
-    public LocalVariableTable(LocalVariableTable c) {
+    public LocalVariableTable(final LocalVariableTable c) {
         this(c.getNameIndex(), c.getLength(), c.getLocalVariableTable(), c.getConstantPool());
     }
 
@@ -51,8 +51,8 @@ public class LocalVariableTable extends Attribute {
      * @param local_variable_table Table of local variables
      * @param constant_pool Array of constants
      */
-    public LocalVariableTable(int name_index, int length, LocalVariable[] local_variable_table,
-            ConstantPool constant_pool) {
+    public LocalVariableTable(final int name_index, final int length, final LocalVariable[] local_variable_table,
+            final ConstantPool constant_pool) {
         super(Const.ATTR_LOCAL_VARIABLE_TABLE, name_index, length, constant_pool);
         this.local_variable_table = local_variable_table;
     }
@@ -66,7 +66,7 @@ public class LocalVariableTable extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    LocalVariableTable(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    LocalVariableTable(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (LocalVariable[]) null, constant_pool);
         int local_variable_table_length = input.readUnsignedShort();
@@ -85,7 +85,7 @@ public class LocalVariableTable extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLocalVariableTable(this);
     }
 
@@ -97,7 +97,7 @@ public class LocalVariableTable extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(local_variable_table.length);
         for (LocalVariable variable : local_variable_table) {
@@ -124,7 +124,7 @@ public class LocalVariableTable extends Attribute {
      *             same slot, use getLocalVariable(int index, int pc) instead.
      */
     @java.lang.Deprecated
-    public final LocalVariable getLocalVariable( int index ) {
+    public final LocalVariable getLocalVariable( final int index ) {
         for (LocalVariable variable : local_variable_table) {
             if (variable.getIndex() == index) {
                 return variable;
@@ -141,7 +141,7 @@ public class LocalVariableTable extends Attribute {
      * 
      * @return the LocalVariable that matches or null if not found
      */
-    public final LocalVariable getLocalVariable( int index, int pc ) {
+    public final LocalVariable getLocalVariable( final int index, final int pc ) {
         for (LocalVariable variable : local_variable_table) {
             if (variable.getIndex() == index) {
                 int start_pc = variable.getStartPC();
@@ -155,7 +155,7 @@ public class LocalVariableTable extends Attribute {
     }
 
 
-    public final void setLocalVariableTable( LocalVariable[] local_variable_table ) {
+    public final void setLocalVariableTable( final LocalVariable[] local_variable_table ) {
         this.local_variable_table = local_variable_table;
     }
 
@@ -180,7 +180,7 @@ public class LocalVariableTable extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         LocalVariableTable c = (LocalVariableTable) clone();
         c.local_variable_table = new LocalVariable[local_variable_table.length];
         for (int i = 0; i < local_variable_table.length; i++) {

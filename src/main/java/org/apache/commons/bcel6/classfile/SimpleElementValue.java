@@ -29,7 +29,7 @@ public class SimpleElementValue extends ElementValue
 {
     private int index;
 
-    public SimpleElementValue(int type, int index, ConstantPool cpool)
+    public SimpleElementValue(final int type, final int index, final ConstantPool cpool)
     {
         super(type, cpool);
         this.index = index;
@@ -43,7 +43,7 @@ public class SimpleElementValue extends ElementValue
         return index;
     }
 
-    public void setIndex(int index)
+    public void setIndex(final int index)
     {
         this.index = index;
     }
@@ -201,7 +201,7 @@ public class SimpleElementValue extends ElementValue
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         final int _type = super.getType();
         dos.writeByte(_type); // u1 kind of value

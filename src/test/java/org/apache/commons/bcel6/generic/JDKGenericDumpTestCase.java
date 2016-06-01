@@ -48,7 +48,7 @@ public class JDKGenericDumpTestCase {
         }
     }
 
-    private void testJar(File file) throws Exception {
+    private void testJar(final File file) throws Exception {
         System.out.println(file);
         JarFile jar = new JarFile(file);
         Enumeration<JarEntry> en = jar.entries();
@@ -69,7 +69,7 @@ public class JDKGenericDumpTestCase {
         jar.close();
     }
 
-    private void compare(String name, Method m) {
+    private void compare(final String name, final Method m) {
 //        System.out.println("Method: " + m);
         Code c = m.getCode();
         if (c==null) {
@@ -95,14 +95,14 @@ public class JDKGenericDumpTestCase {
         File javaLib = new File(System.getProperty("java.home") + "/lib");
         return javaLib.listFiles(new FileFilter() {
             @Override
-            public boolean accept(File file) {
+            public boolean accept(final File file) {
                 return file.getName().endsWith(".jar");
             }
         });
     }
 
     private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
-    private static String bytesToHex(byte[] bytes) {
+    private static String bytesToHex(final byte[] bytes) {
         char[] hexChars = new char[bytes.length * 3];
         int i=0;
         for ( int j = 0; j < bytes.length; j++ ) {

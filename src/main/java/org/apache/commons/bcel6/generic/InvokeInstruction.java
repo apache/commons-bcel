@@ -43,7 +43,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * @param index to constant pool
      */
-    protected InvokeInstruction(short opcode, int index) {
+    protected InvokeInstruction(final short opcode, final int index) {
         super(opcode, index);
     }
 
@@ -52,7 +52,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      * @return mnemonic for instruction with symbolic references resolved
      */
     @Override
-    public String toString( ConstantPool cp ) {
+    public String toString( final ConstantPool cp ) {
         Constant c = cp.getConstant(super.getIndex());
         StringTokenizer tok = new StringTokenizer(cp.constantToString(c));
         return Const.getOpcodeName(super.getOpcode()) + " " + tok.nextToken().replace('.', '/')
@@ -66,7 +66,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      * @return Number of words consumed from stack by this instruction
      */
     @Override
-    public int consumeStack( ConstantPoolGen cpg ) {
+    public int consumeStack( final ConstantPoolGen cpg ) {
         int sum;
         if ((super.getOpcode() == Const.INVOKESTATIC) || (super.getOpcode() == Const.INVOKEDYNAMIC)) {
             sum = 0;
@@ -86,7 +86,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      * @return Number of words produced onto stack by this instruction
      */
     @Override
-    public int produceStack( ConstantPoolGen cpg ) {
+    public int produceStack( final ConstantPoolGen cpg ) {
         String signature = getSignature(cpg);
         return Type.getReturnTypeSize(signature);
     }
@@ -95,28 +95,28 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /** @return return type of referenced method.
      */
     @Override
-    public Type getType( ConstantPoolGen cpg ) {
+    public Type getType( final ConstantPoolGen cpg ) {
         return getReturnType(cpg);
     }
 
 
     /** @return name of referenced method.
      */
-    public String getMethodName( ConstantPoolGen cpg ) {
+    public String getMethodName( final ConstantPoolGen cpg ) {
         return getName(cpg);
     }
 
 
     /** @return return type of referenced method.
      */
-    public Type getReturnType( ConstantPoolGen cpg ) {
+    public Type getReturnType( final ConstantPoolGen cpg ) {
         return Type.getReturnType(getSignature(cpg));
     }
 
 
     /** @return argument types of referenced method.
      */
-    public Type[] getArgumentTypes( ConstantPoolGen cpg ) {
+    public Type[] getArgumentTypes( final ConstantPoolGen cpg ) {
         return Type.getArgumentTypes(getSignature(cpg));
     }
 
@@ -127,7 +127,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      * @throws IllegalArgumentException if the referenced class is an array (this should not happen)
      */
     @Override
-    public String getClassName( ConstantPoolGen cpg ) {
+    public String getClassName( final ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
         ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         String className = cp.getConstantString(cmr.getClassIndex(), Const.CONSTANT_Class);

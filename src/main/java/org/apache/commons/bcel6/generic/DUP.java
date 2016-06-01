@@ -39,7 +39,7 @@ public class DUP extends StackInstruction implements PushInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);
         v.visitStackInstruction(this);

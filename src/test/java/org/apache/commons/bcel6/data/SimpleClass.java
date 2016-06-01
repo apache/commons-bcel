@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.data;
 
 public class SimpleClass
 {
-    public static void main(String[] argv)
+    public static void main(final String[] argv)
     {
         // Nothing unusual in this class
     }

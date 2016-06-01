@@ -56,7 +56,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     /**
      * @param index to constant pool
      */
-    protected CPInstruction(short opcode, int index) {
+    protected CPInstruction(final short opcode, final int index) {
         super(opcode, (short) 3);
         setIndex(index);
     }
@@ -67,7 +67,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(super.getOpcode());
         out.writeShort(index);
     }
@@ -83,7 +83,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * @return mnemonic for instruction
      */
     @Override
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         return super.toString(verbose) + " " + index;
     }
 
@@ -92,7 +92,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * @return mnemonic for instruction with symbolic references resolved
      */
     @Override
-    public String toString( ConstantPool cp ) {
+    public String toString( final ConstantPool cp ) {
         Constant c = cp.getConstant(index);
         String str = cp.constantToString(c);
         if (c instanceof ConstantClass) {
@@ -108,7 +108,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * @param wide wide prefix?
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         setIndex(bytes.readUnsignedShort());
         super.setLength(3);
     }
@@ -128,7 +128,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * @param index in  constant pool.
      */
     @Override
-    public void setIndex( int index ) { // TODO could be package-protected?
+    public void setIndex( final int index ) { // TODO could be package-protected?
         if (index < 0) {
             throw new ClassGenException("Negative index value: " + index);
         }
@@ -139,7 +139,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     /** @return type related with this instruction.
      */
     @Override
-    public Type getType( ConstantPoolGen cpg ) {
+    public Type getType( final ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
         String name = cp.getConstantString(index, org.apache.commons.bcel6.Const.CONSTANT_Class);
         if (!name.startsWith("[")) {

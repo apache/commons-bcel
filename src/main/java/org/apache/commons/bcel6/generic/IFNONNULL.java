@@ -34,7 +34,7 @@ public class IFNONNULL extends IfInstruction {
     }
 
 
-    public IFNONNULL(InstructionHandle target) {
+    public IFNONNULL(final InstructionHandle target) {
         super(org.apache.commons.bcel6.Const.IFNONNULL, target);
     }
 
@@ -57,7 +57,7 @@ public class IFNONNULL extends IfInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);
         v.visitIfInstruction(this);

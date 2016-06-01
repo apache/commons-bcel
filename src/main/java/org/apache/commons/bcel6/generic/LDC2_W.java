@@ -34,13 +34,13 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
     }
 
 
-    public LDC2_W(int index) {
+    public LDC2_W(final int index) {
         super(org.apache.commons.bcel6.Const.LDC2_W, index);
     }
 
 
     @Override
-    public Type getType( ConstantPoolGen cpg ) {
+    public Type getType( final ConstantPoolGen cpg ) {
         switch (cpg.getConstantPool().getConstant(super.getIndex()).getTag()) {
             case org.apache.commons.bcel6.Const.CONSTANT_Long:
                 return Type.LONG;
@@ -52,7 +52,7 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
     }
 
 
-    public Number getValue( ConstantPoolGen cpg ) {
+    public Number getValue( final ConstantPoolGen cpg ) {
         org.apache.commons.bcel6.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
         switch (c.getTag()) {
             case org.apache.commons.bcel6.Const.CONSTANT_Long:
@@ -74,7 +74,7 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);
         v.visitTypedInstruction(this);

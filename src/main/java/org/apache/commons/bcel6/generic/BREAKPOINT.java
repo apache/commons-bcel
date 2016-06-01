@@ -38,7 +38,7 @@ public class BREAKPOINT extends Instruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitBREAKPOINT(this);
     }
 }

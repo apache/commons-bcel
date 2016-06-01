@@ -281,7 +281,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         }
     }
 
-    private void assertMethodAnnotations(Method method, int expectedNumberAnnotations, int nExpectedArrayValues)
+    private void assertMethodAnnotations(final Method method, final int expectedNumberAnnotations, final int nExpectedArrayValues)
     {
         String methodName= method.getName();
         AnnotationEntry[] annos= method.getAnnotationEntries();
@@ -292,7 +292,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         }
     }
 
-    private void assertArrayElementValue(int nExpectedArrayValues, AnnotationEntry anno)
+    private void assertArrayElementValue(final int nExpectedArrayValues, final AnnotationEntry anno)
     {
         ElementValuePair elementValuePair = anno.getElementValuePairs()[0];
         assertEquals("value", elementValuePair.getNameString());
@@ -301,7 +301,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         assertEquals(nExpectedArrayValues, eva.length);
     }
 
-    private void assertParameterAnnotations(Method method, int... expectedNumberOfParmeterAnnotations)
+    private void assertParameterAnnotations(final Method method, final int... expectedNumberOfParmeterAnnotations)
     {
         String methodName= "For "+method.getName();
         ParameterAnnotationEntry[] parameterAnnotations= method.getParameterAnnotationEntries();
@@ -320,7 +320,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         }
     }
 
-    private void assertSimpleElementValue(AnnotationEntry anno)
+    private void assertSimpleElementValue(final AnnotationEntry anno)
     {
         ElementValuePair elementValuePair = anno.getElementValuePairs()[0];
         assertEquals("id", elementValuePair.getNameString());
@@ -393,7 +393,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // System.err.println(jc2.toString());
     }
 
-    private void dumpClass(ClassGen cg, String fname)
+    private void dumpClass(final ClassGen cg, final String fname)
     {
         try
         {
@@ -406,13 +406,13 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         }
     }
 
-    private void dumpClass(ClassGen cg, String dir, String fname)
+    private void dumpClass(final ClassGen cg, final String dir, final String fname)
     {
         dumpClass(cg, dir + File.separator + fname);
     }
 
-    private void buildClassContentsWithAnnotatedMethods(ClassGen cg,
-            ConstantPoolGen cp, InstructionList il)
+    private void buildClassContentsWithAnnotatedMethods(final ClassGen cg,
+            final ConstantPoolGen cp, final InstructionList il)
     {
         // Create method 'public static void main(String[]argv)'
         MethodGen mg = createMethodGen("main", il, cp);
@@ -507,8 +507,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         cg.addEmptyConstructor(Const.ACC_PUBLIC);
     }
 
-    private void buildClassContents(ClassGen cg, ConstantPoolGen cp,
-            InstructionList il)
+    private void buildClassContents(final ClassGen cg, final ConstantPoolGen cp,
+            final InstructionList il)
     {
         // Create method 'public static void main(String[]argv)'
         MethodGen mg = createMethodGen("main", il, cp);
@@ -601,7 +601,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         cg.addEmptyConstructor(Const.ACC_PUBLIC);
     }
 
-    private JavaClass getClassFrom(String where, String clazzname)
+    private JavaClass getClassFrom(final String where, final String clazzname)
             throws ClassNotFoundException
     {
         // System.out.println(where);
@@ -610,14 +610,14 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     }
 
     // helper methods
-    private ClassGen createClassGen(String classname)
+    private ClassGen createClassGen(final String classname)
     {
         return new ClassGen(classname, "java.lang.Object", "<generated>",
                 Const.ACC_PUBLIC | Const.ACC_SUPER, null);
     }
 
-    private MethodGen createMethodGen(String methodname, InstructionList il,
-            ConstantPoolGen cp)
+    private MethodGen createMethodGen(final String methodname, final InstructionList il,
+            final ConstantPoolGen cp)
     {
         return new MethodGen(Const.ACC_STATIC | Const.ACC_PUBLIC, // access
                 // flags
@@ -629,7 +629,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 il, cp);
     }
 
-    public AnnotationEntryGen createSimpleVisibleAnnotation(ConstantPoolGen cp)
+    public AnnotationEntryGen createSimpleVisibleAnnotation(final ConstantPoolGen cp)
     {
         SimpleElementValueGen evg = new SimpleElementValueGen(
                 ElementValueGen.PRIMITIVE_INT, cp, 4);
@@ -641,8 +641,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         return a;
     }
 
-    public AnnotationEntryGen createFruitAnnotation(ConstantPoolGen cp,
-            String aFruit)
+    public AnnotationEntryGen createFruitAnnotation(final ConstantPoolGen cp,
+            final String aFruit)
     {
         SimpleElementValueGen evg = new SimpleElementValueGen(
                 ElementValueGen.STRING, cp, aFruit);
@@ -653,7 +653,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         return new AnnotationEntryGen(t, elements, true, cp);
     }
 
-    public AnnotationEntryGen createCombinedAnnotation(ConstantPoolGen cp)
+    public AnnotationEntryGen createCombinedAnnotation(final ConstantPoolGen cp)
     {
         // Create an annotation instance
         AnnotationEntryGen a = createSimpleVisibleAnnotation(cp);
@@ -666,7 +666,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 elements, true, cp);
     }
 
-    public AnnotationEntryGen createSimpleInvisibleAnnotation(ConstantPoolGen cp)
+    public AnnotationEntryGen createSimpleInvisibleAnnotation(final ConstantPoolGen cp)
     {
         SimpleElementValueGen evg = new SimpleElementValueGen(
                 ElementValueGen.PRIMITIVE_INT, cp, 4);

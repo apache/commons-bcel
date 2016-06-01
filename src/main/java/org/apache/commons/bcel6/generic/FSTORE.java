@@ -37,7 +37,7 @@ public class FSTORE extends StoreInstruction {
     /** Store float into local variable
      * @param n index of local variable
      */
-    public FSTORE(int n) {
+    public FSTORE(final int n) {
         super(org.apache.commons.bcel6.Const.FSTORE, org.apache.commons.bcel6.Const.FSTORE_0, n);
     }
 
@@ -51,7 +51,7 @@ public class FSTORE extends StoreInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         super.accept(v);
         v.visitFSTORE(this);
     }

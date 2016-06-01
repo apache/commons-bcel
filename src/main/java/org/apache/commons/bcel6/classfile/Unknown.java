@@ -59,7 +59,7 @@ public final class Unknown extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    public Unknown(Unknown c) {
+    public Unknown(final Unknown c) {
         this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
     }
 
@@ -72,7 +72,7 @@ public final class Unknown extends Attribute {
      * @param bytes Attribute contents
      * @param constant_pool Array of constants
      */
-    public Unknown(int name_index, int length, byte[] bytes, ConstantPool constant_pool) {
+    public Unknown(final int name_index, final int length, final byte[] bytes, final ConstantPool constant_pool) {
         super(Const.ATTR_UNKNOWN, name_index, length, constant_pool);
         this.bytes = bytes;
         name = ((ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8))
@@ -90,7 +90,7 @@ public final class Unknown extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    Unknown(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    Unknown(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (byte[]) null, constant_pool);
         if (length > 0) {
@@ -108,7 +108,7 @@ public final class Unknown extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitUnknown(this);
     }
 
@@ -120,7 +120,7 @@ public final class Unknown extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         if (super.getLength() > 0) {
             file.write(bytes, 0, super.getLength());
@@ -148,7 +148,7 @@ public final class Unknown extends Attribute {
     /**
      * @param bytes the bytes to set
      */
-    public final void setBytes( byte[] bytes ) {
+    public final void setBytes( final byte[] bytes ) {
         this.bytes = bytes;
     }
 
@@ -177,7 +177,7 @@ public final class Unknown extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         Unknown c = (Unknown) clone();
         if (bytes != null) {
             c.bytes = new byte[bytes.length];

@@ -44,7 +44,7 @@ public final class StackMapType implements Cloneable {
      * @param file Input stream
      * @throws IOException
      */
-    StackMapType(DataInput file, ConstantPool constant_pool) throws IOException {
+    StackMapType(final DataInput file, final ConstantPool constant_pool) throws IOException {
         this(file.readByte(), -1, constant_pool);
         if (hasIndex()) {
             this.index = file.readShort();
@@ -57,7 +57,7 @@ public final class StackMapType implements Cloneable {
      * @param type type tag as defined in the Constants interface
      * @param index index to constant pool, or byte code offset
      */
-    public StackMapType(byte type, int index, ConstantPool constant_pool) {
+    public StackMapType(final byte type, final int index, final ConstantPool constant_pool) {
         if ((type < Const.ITEM_Bogus) || (type > Const.ITEM_NewObject)) {
             throw new RuntimeException("Illegal type for StackMapType: " + type);
         }
@@ -67,7 +67,7 @@ public final class StackMapType implements Cloneable {
     }
 
 
-    public void setType( byte t ) {
+    public void setType( final byte t ) {
         if ((t < Const.ITEM_Bogus) || (t > Const.ITEM_NewObject)) {
             throw new RuntimeException("Illegal type for StackMapType: " + t);
         }
@@ -80,7 +80,7 @@ public final class StackMapType implements Cloneable {
     }
 
 
-    public void setIndex( int t ) {
+    public void setIndex( final int t ) {
         index = t;
     }
 
@@ -99,7 +99,7 @@ public final class StackMapType implements Cloneable {
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(type);
         if (hasIndex()) {
             file.writeShort(getIndex());
@@ -161,7 +161,7 @@ public final class StackMapType implements Cloneable {
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( ConstantPool constant_pool ) {
+    public final void setConstantPool( final ConstantPool constant_pool ) {
         this.constant_pool = constant_pool;
     }
 }

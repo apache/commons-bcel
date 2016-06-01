@@ -31,7 +31,7 @@ public class NanoTimer {
         time += System.nanoTime();
     }
 
-    public void subtract(NanoTimer o) {
+    public void subtract(final NanoTimer o) {
         time -= o.time;
     }
 

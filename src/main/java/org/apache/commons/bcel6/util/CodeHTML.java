@@ -54,8 +54,8 @@ final class CodeHTML {
     private static boolean wide = false;
 
 
-    CodeHTML(String dir, String class_name, Method[] methods, ConstantPool constant_pool,
-            ConstantHTML constant_html) throws IOException {
+    CodeHTML(final String dir, final String class_name, final Method[] methods, final ConstantPool constant_pool,
+            final ConstantHTML constant_html) throws IOException {
         this.class_name = class_name;
 //        this.methods = methods;
         this.constant_pool = constant_pool;
@@ -77,7 +77,7 @@ final class CodeHTML {
      * @param  stream data input stream
      * @return String representation of byte code
      */
-    private String codeToHTML( ByteSequence bytes, int method_number ) throws IOException {
+    private String codeToHTML( final ByteSequence bytes, final int method_number ) throws IOException {
         short opcode = (short) bytes.readUnsignedByte();
         String name;
         String signature;
@@ -382,7 +382,7 @@ final class CodeHTML {
      * Find all target addresses in code, so that they can be marked
      * with &lt;A NAME = ...&gt;. Target addresses are kept in an BitSet object.
      */
-    private void findGotos( ByteSequence bytes, Code code ) throws IOException {
+    private void findGotos( final ByteSequence bytes, final Code code ) throws IOException {
         int index;
         goto_set = new BitSet(bytes.available());
         int opcode;
@@ -491,7 +491,7 @@ final class CodeHTML {
     /**
      * Write a single method with the byte code associated with it.
      */
-    private void writeMethod( Method method, int method_number ) throws IOException {
+    private void writeMethod( final Method method, final int method_number ) throws IOException {
         // Get raw signature
         String signature = method.getSignature();
         // Get array of strings containing the argument types

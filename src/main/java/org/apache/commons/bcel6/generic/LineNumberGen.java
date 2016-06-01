@@ -38,7 +38,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
      *
      * @param ih instruction handle to reference
      */
-    public LineNumberGen(InstructionHandle ih, int src_line) {
+    public LineNumberGen(final InstructionHandle ih, final int src_line) {
         setInstruction(ih);
         setSourceLine(src_line);
     }
@@ -48,7 +48,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
      * @return true, if ih is target of this line number
      */
     @Override
-    public boolean containsTarget( InstructionHandle ih ) {
+    public boolean containsTarget( final InstructionHandle ih ) {
         return this.ih == ih;
     }
 
@@ -58,7 +58,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
      * @param new_ih new target
      */
     @Override
-    public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
+    public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
         if (old_ih != ih) {
             throw new ClassGenException("Not targeting " + old_ih + ", but " + ih + "}");
         }
@@ -77,7 +77,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
 
-    public void setInstruction( InstructionHandle ih ) { // TODO could be package-protected?
+    public void setInstruction( final InstructionHandle ih ) { // TODO could be package-protected?
         if (ih == null) {
             throw new NullPointerException("InstructionHandle may not be null");
         }
@@ -101,7 +101,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
 
-    public void setSourceLine( int src_line ) { // TODO could be package-protected?
+    public void setSourceLine( final int src_line ) { // TODO could be package-protected?
         this.src_line = src_line;
     }
 

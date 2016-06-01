@@ -32,7 +32,7 @@ public final class ByteSequence extends DataInputStream {
     private final ByteArrayStream byteStream;
 
 
-    public ByteSequence(byte[] bytes) {
+    public ByteSequence(final byte[] bytes) {
         super(new ByteArrayStream(bytes));
         byteStream = (ByteArrayStream) in;
     }
@@ -49,7 +49,7 @@ public final class ByteSequence extends DataInputStream {
 
     private static final class ByteArrayStream extends ByteArrayInputStream {
 
-        ByteArrayStream(byte[] bytes) {
+        ByteArrayStream(final byte[] bytes) {
             super(bytes);
         }
 

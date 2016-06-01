@@ -46,7 +46,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     private static BCELComparator _cmp = new BCELComparator() {
 
         @Override
-        public boolean equals( Object o1, Object o2 ) {
+        public boolean equals( final Object o1, final Object o2 ) {
             FieldGen THIS = (FieldGen) o1;
             FieldGen THAT = (FieldGen) o2;
             return THIS.getName().equals(THAT.getName())
@@ -55,7 +55,7 @@ public class FieldGen extends FieldGenOrMethodGen {
 
 
         @Override
-        public int hashCode( Object o ) {
+        public int hashCode( final Object o ) {
             FieldGen THIS = (FieldGen) o;
             return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
         }
@@ -72,7 +72,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * @param name field name
      * @param cp constant pool
      */
-    public FieldGen(int access_flags, Type type, String name, ConstantPoolGen cp) {
+    public FieldGen(final int access_flags, final Type type, final String name, final ConstantPoolGen cp) {
         super(access_flags);
         setType(type);
         setName(name);
@@ -86,7 +86,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * @param field Field object
      * @param cp constant pool (must contain the same entries as the field's constant pool)
      */
-    public FieldGen(Field field, ConstantPoolGen cp) {
+    public FieldGen(final Field field, final ConstantPoolGen cp) {
         this(field.getAccessFlags(), Type.getType(field.getSignature()), field.getName(), cp);
         Attribute[] attrs = field.getAttributes();
         for (Attribute attr : attrs) {
@@ -105,7 +105,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    private void setValue( int index ) {
+    private void setValue( final int index ) {
         ConstantPool cp = super.getConstantPool().getConstantPool();
         Constant c = cp.getConstant(index);
         value = ((ConstantObject) c).getConstantValue(cp);
@@ -116,7 +116,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * Set (optional) initial value of field, otherwise it will be set to null/0/false
      * by the JVM automatically.
      */
-    public void setInitValue( String str ) {
+    public void setInitValue( final String str ) {
         checkType(  ObjectType.getInstance("java.lang.String"));
         if (str != null) {
             value = str;
@@ -124,7 +124,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( long l ) {
+    public void setInitValue( final long l ) {
         checkType(Type.LONG);
         if (l != 0L) {
             value = Long.valueOf(l);
@@ -132,7 +132,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( int i ) {
+    public void setInitValue( final int i ) {
         checkType(Type.INT);
         if (i != 0) {
             value = Integer.valueOf(i);
@@ -140,7 +140,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( short s ) {
+    public void setInitValue( final short s ) {
         checkType(Type.SHORT);
         if (s != 0) {
             value = Integer.valueOf(s);
@@ -148,7 +148,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( char c ) {
+    public void setInitValue( final char c ) {
         checkType(Type.CHAR);
         if (c != 0) {
             value = Integer.valueOf(c);
@@ -156,7 +156,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( byte b ) {
+    public void setInitValue( final byte b ) {
         checkType(Type.BYTE);
         if (b != 0) {
             value = Integer.valueOf(b);
@@ -164,7 +164,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( boolean b ) {
+    public void setInitValue( final boolean b ) {
         checkType(Type.BOOLEAN);
         if (b) {
             value = Integer.valueOf(1);
@@ -172,7 +172,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( float f ) {
+    public void setInitValue( final float f ) {
         checkType(Type.FLOAT);
         if (f != 0.0) {
             value = new Float(f);
@@ -180,7 +180,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    public void setInitValue( double d ) {
+    public void setInitValue( final double d ) {
         checkType(Type.DOUBLE);
         if (d != 0.0) {
             value = new Double(d);
@@ -195,7 +195,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    private void checkType( Type atype ) {
+    private void checkType( final Type atype ) {
         final Type superType = super.getType();
         if (superType == null) {
             throw new ClassGenException("You haven't defined the type of the field yet");
@@ -227,7 +227,7 @@ public class FieldGen extends FieldGenOrMethodGen {
                 super.getConstantPool().getConstantPool()); // sic
     }
 
-    private void addAnnotationsAsAttribute(ConstantPoolGen cp) {
+    private void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
           Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
         for (Attribute attr : attrs) {
             addAttribute(attr);
@@ -267,7 +267,7 @@ public class FieldGen extends FieldGenOrMethodGen {
 
     /** Add observer for this object.
      */
-    public void addObserver( FieldObserver o ) {
+    public void addObserver( final FieldObserver o ) {
         if (observers == null) {
             observers = new ArrayList<>();
         }
@@ -277,7 +277,7 @@ public class FieldGen extends FieldGenOrMethodGen {
 
     /** Remove observer for this object.
      */
-    public void removeObserver( FieldObserver o ) {
+    public void removeObserver( final FieldObserver o ) {
         if (observers != null) {
             observers.remove(o);
         }
@@ -332,7 +332,7 @@ public class FieldGen extends FieldGenOrMethodGen {
 
     /** @return deep copy of this field
      */
-    public FieldGen copy( ConstantPoolGen cp ) {
+    public FieldGen copy( final ConstantPoolGen cp ) {
         FieldGen fg = (FieldGen) clone();
         fg.setConstantPool(cp);
         return fg;
@@ -350,7 +350,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * @param comparator Comparison strategy object
      */
-    public static void setComparator( BCELComparator comparator ) {
+    public static void setComparator( final BCELComparator comparator ) {
         _cmp = comparator;
     }
 
@@ -363,7 +363,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object obj ) {
+    public boolean equals( final Object obj ) {
         return _cmp.equals(this, obj);
     }
 

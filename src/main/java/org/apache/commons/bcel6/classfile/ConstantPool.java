@@ -43,7 +43,7 @@ public class ConstantPool implements Cloneable, Node {
     /**
      * @param constant_pool Array of constants
      */
-    public ConstantPool(Constant[] constant_pool) {
+    public ConstantPool(final Constant[] constant_pool) {
         this.constant_pool = constant_pool;
     }
 
@@ -55,7 +55,7 @@ public class ConstantPool implements Cloneable, Node {
      * @throws IOException
      * @throws ClassFormatException
      */
-    public ConstantPool(DataInput input) throws IOException, ClassFormatException {
+    public ConstantPool(final DataInput input) throws IOException, ClassFormatException {
         byte tag;
         int constant_pool_count = input.readUnsignedShort();
         constant_pool = new Constant[constant_pool_count];
@@ -87,7 +87,7 @@ public class ConstantPool implements Cloneable, Node {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantPool(this);
     }
 
@@ -166,7 +166,7 @@ public class ConstantPool implements Cloneable, Node {
     }
 
 
-    private static String escape( String str ) {
+    private static String escape( final String str ) {
         int len = str.length();
         StringBuilder buf = new StringBuilder(len + 5);
         char[] ch = str.toCharArray();
@@ -203,7 +203,7 @@ public class ConstantPool implements Cloneable, Node {
      * @param  tag expected type
      * @return String representation
      */
-    public String constantToString( int index, byte tag ) throws ClassFormatException {
+    public String constantToString( final int index, final byte tag ) throws ClassFormatException {
         Constant c = getConstant(index, tag);
         return constantToString(c);
     }
@@ -215,7 +215,7 @@ public class ConstantPool implements Cloneable, Node {
      * @param file Output file stream
      * @throws IOException
      */
-    public void dump( DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(constant_pool.length);
         for (int i = 1; i < constant_pool.length; i++) {
             if (constant_pool[i] != null) {
@@ -232,7 +232,7 @@ public class ConstantPool implements Cloneable, Node {
      * @return Constant value
      * @see    Constant
      */
-    public Constant getConstant( int index ) {
+    public Constant getConstant( final int index ) {
         if (index >= constant_pool.length || index < 0) {
             throw new ClassFormatException("Invalid constant pool reference: " + index
                     + ". Constant pool size is: " + constant_pool.length);
@@ -251,7 +251,7 @@ public class ConstantPool implements Cloneable, Node {
      * @see    Constant
      * @throws  ClassFormatException
      */
-    public Constant getConstant( int index, byte tag ) throws ClassFormatException {
+    public Constant getConstant( final int index, final byte tag ) throws ClassFormatException {
         Constant c;
         c = getConstant(index);
         if (c == null) {
@@ -287,7 +287,7 @@ public class ConstantPool implements Cloneable, Node {
      * @see    ConstantString
      * @throws  ClassFormatException
      */
-    public String getConstantString( int index, byte tag ) throws ClassFormatException {
+    public String getConstantString( final int index, final byte tag ) throws ClassFormatException {
         Constant c;
         int i;
         c = getConstant(index, tag);
@@ -325,7 +325,7 @@ public class ConstantPool implements Cloneable, Node {
     /**
      * @param constant Constant to set
      */
-    public void setConstant( int index, Constant constant ) {
+    public void setConstant( final int index, final Constant constant ) {
         constant_pool[index] = constant;
     }
 
@@ -333,7 +333,7 @@ public class ConstantPool implements Cloneable, Node {
     /**
      * @param constant_pool
      */
-    public void setConstantPool( Constant[] constant_pool ) {
+    public void setConstantPool( final Constant[] constant_pool ) {
         this.constant_pool = constant_pool;
     }
 

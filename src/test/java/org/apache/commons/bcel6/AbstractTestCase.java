@@ -53,17 +53,17 @@ public abstract class AbstractTestCase extends TestCase
      * @param name
      * @return Path to file under the TESTDATA directory
      */
-    protected File createTestdataFile(String name)
+    protected File createTestdataFile(final String name)
     {
         return new File(TESTDATA, name);
     }
 
-    protected JavaClass getTestClass(String name) throws ClassNotFoundException
+    protected JavaClass getTestClass(final String name) throws ClassNotFoundException
     {
         return SyntheticRepository.getInstance().loadClass(name);
     }
 
-    protected Method getMethod(JavaClass cl, String methodname)
+    protected Method getMethod(final JavaClass cl, final String methodname)
     {
         Method[] methods = cl.getMethods();
         for (Method m : methods) {
@@ -80,7 +80,7 @@ public abstract class AbstractTestCase extends TestCase
      * @param name
      * @return
      */
-    protected boolean wipe(String name)
+    protected boolean wipe(final String name)
     {
         return new File(TESTDATA, name).delete();
     }
@@ -91,7 +91,7 @@ public abstract class AbstractTestCase extends TestCase
      * @param name
      * @return true if the file was deleted
      */
-    protected boolean wipe(String dir, String name)
+    protected boolean wipe(final String dir, final String name)
     {
         // The parameter is relative to the TESTDATA dir
         boolean b = wipe(dir + File.separator + name);
@@ -108,14 +108,14 @@ public abstract class AbstractTestCase extends TestCase
         return b;
     }
 
-    public SyntheticRepository createRepos(String cpentry)
+    public SyntheticRepository createRepos(final String cpentry)
     {
         ClassPath cp = new ClassPath("target" + File.separator + "testdata"
                 + File.separator + cpentry + File.separator);
         return SyntheticRepository.getInstance(cp);
     }
 
-    protected Attribute[] findAttribute(String name, JavaClass clazz)
+    protected Attribute[] findAttribute(final String name, final JavaClass clazz)
     {
         Attribute[] all = clazz.getAttributes();
         List<Attribute> chosenAttrsList = new ArrayList<>();
@@ -130,7 +130,7 @@ public abstract class AbstractTestCase extends TestCase
         return chosenAttrsList.toArray(new Attribute[] {});
     }
 
-    protected Attribute findAttribute(String name, Attribute[] all)
+    protected Attribute findAttribute(final String name, final Attribute[] all)
     {
         List<Attribute> chosenAttrsList = new ArrayList<>();
         for (Attribute element : all) {
@@ -146,7 +146,7 @@ public abstract class AbstractTestCase extends TestCase
         return chosenAttrsList.get(0);
     }
 
-    protected String dumpAttributes(Attribute[] as)
+    protected String dumpAttributes(final Attribute[] as)
     {
         StringBuilder result = new StringBuilder();
         result.append("AttributeArray:[");
@@ -162,7 +162,7 @@ public abstract class AbstractTestCase extends TestCase
         return result.toString();
     }
 
-    protected String dumpAnnotationEntries(AnnotationEntry[] as)
+    protected String dumpAnnotationEntries(final AnnotationEntry[] as)
     {
         StringBuilder result = new StringBuilder();
         result.append("[");
@@ -178,7 +178,7 @@ public abstract class AbstractTestCase extends TestCase
         return result.toString();
     }
 
-    protected String dumpAnnotationEntries(AnnotationEntryGen[] as)
+    protected String dumpAnnotationEntries(final AnnotationEntryGen[] as)
     {
         StringBuilder result = new StringBuilder();
         result.append("[");
@@ -194,8 +194,8 @@ public abstract class AbstractTestCase extends TestCase
         return result.toString();
     }
 
-    public AnnotationEntryGen createFruitAnnotationEntry(ConstantPoolGen cp,
-            String aFruit, boolean visibility)
+    public AnnotationEntryGen createFruitAnnotationEntry(final ConstantPoolGen cp,
+            final String aFruit, final boolean visibility)
     {
         SimpleElementValueGen evg = new SimpleElementValueGen(
                 ElementValueGen.STRING, cp, aFruit);

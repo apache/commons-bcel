@@ -34,7 +34,7 @@ public class IF_ACMPEQ extends IfInstruction {
     }
 
 
-    public IF_ACMPEQ(InstructionHandle target) {
+    public IF_ACMPEQ(final InstructionHandle target) {
         super(org.apache.commons.bcel6.Const.IF_ACMPEQ, target);
     }
 
@@ -57,7 +57,7 @@ public class IF_ACMPEQ extends IfInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);
         v.visitIfInstruction(this);

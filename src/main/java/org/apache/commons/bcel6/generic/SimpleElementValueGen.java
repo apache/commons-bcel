@@ -44,55 +44,55 @@ public class SimpleElementValueGen extends ElementValueGen
      * Protected ctor used for deserialization, doesn't *put* an entry in the
      * constant pool, assumes the one at the supplied index is correct.
      */
-    protected SimpleElementValueGen(int type, int idx, ConstantPoolGen cpGen)
+    protected SimpleElementValueGen(final int type, final int idx, final ConstantPoolGen cpGen)
     {
         super(type, cpGen);
         this.idx = idx;
     }
 
-    public SimpleElementValueGen(int type, ConstantPoolGen cpGen, int value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final int value)
     {
         super(type, cpGen);
         idx = getConstantPool().addInteger(value);
     }
 
-    public SimpleElementValueGen(int type, ConstantPoolGen cpGen, long value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final long value)
     {
         super(type, cpGen);
         idx = getConstantPool().addLong(value);
     }
 
-    public SimpleElementValueGen(int type, ConstantPoolGen cpGen, double value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final double value)
     {
         super(type, cpGen);
         idx = getConstantPool().addDouble(value);
     }
 
-    public SimpleElementValueGen(int type, ConstantPoolGen cpGen, float value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final float value)
     {
         super(type, cpGen);
         idx = getConstantPool().addFloat(value);
     }
 
-    public SimpleElementValueGen(int type, ConstantPoolGen cpGen, short value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final short value)
     {
         super(type, cpGen);
         idx = getConstantPool().addInteger(value);
     }
 
-    public SimpleElementValueGen(int type, ConstantPoolGen cpGen, byte value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final byte value)
     {
         super(type, cpGen);
         idx = getConstantPool().addInteger(value);
     }
 
-    public SimpleElementValueGen(int type, ConstantPoolGen cpGen, char value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final char value)
     {
         super(type, cpGen);
         idx = getConstantPool().addInteger(value);
     }
 
-    public SimpleElementValueGen(int type, ConstantPoolGen cpGen, boolean value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final boolean value)
     {
         super(type, cpGen);
         if (value) {
@@ -102,7 +102,7 @@ public class SimpleElementValueGen extends ElementValueGen
         }
     }
 
-    public SimpleElementValueGen(int type, ConstantPoolGen cpGen, String value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final String value)
     {
         super(type, cpGen);
         idx = getConstantPool().addUtf8(value);
@@ -113,8 +113,8 @@ public class SimpleElementValueGen extends ElementValueGen
      * the 'new'. You need to use this ctor if the annotation is being copied
      * from one file to another.
      */
-    public SimpleElementValueGen(SimpleElementValue value,
-            ConstantPoolGen cpool, boolean copyPoolEntries)
+    public SimpleElementValueGen(final SimpleElementValue value,
+            final ConstantPoolGen cpool, final boolean copyPoolEntries)
     {
         super(value.getElementValueType(), cpool);
         if (!copyPoolEntries)
@@ -245,7 +245,7 @@ public class SimpleElementValueGen extends ElementValueGen
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         dos.writeByte(super.getElementValueType()); // u1 kind of value
         switch (super.getElementValueType())

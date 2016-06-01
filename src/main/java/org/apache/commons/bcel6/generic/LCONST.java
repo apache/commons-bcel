@@ -37,7 +37,7 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
     }
 
 
-    public LCONST(long l) {
+    public LCONST(final long l) {
         super(org.apache.commons.bcel6.Const.LCONST_0, (short) 1);
         if (l == 0) {
             super.setOpcode(org.apache.commons.bcel6.Const.LCONST_0);
@@ -59,7 +59,7 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
     /** @return Type.LONG
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return Type.LONG;
     }
 
@@ -73,7 +73,7 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitPushInstruction(this);
         v.visitStackProducer(this);
         v.visitTypedInstruction(this);

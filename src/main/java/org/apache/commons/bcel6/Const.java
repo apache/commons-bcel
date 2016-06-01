@@ -258,7 +258,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static String getAccessName(int index) {
+  public static String getAccessName(final int index) {
       return ACCESS_NAMES[index];
   }
 
@@ -356,7 +356,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static String getConstantName(int index) {
+  public static String getConstantName(final int index) {
       return CONSTANT_NAMES[index];
   }
 
@@ -1496,7 +1496,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static String getTypeName(int index) {
+  public static String getTypeName(final int index) {
       return TYPE_NAMES[index];
   }
 
@@ -1518,7 +1518,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static String getClassTypeName(int index) {
+  public static String getClassTypeName(final int index) {
       return CLASS_TYPE_NAMES[index];
   }
 
@@ -1537,7 +1537,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static String getShortTypeName(int index) {
+  public static String getShortTypeName(final int index) {
       return SHORT_TYPE_NAMES[index];
   }
 
@@ -1614,7 +1614,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static short getNoOfOperands(int index) {
+  public static short getNoOfOperands(final int index) {
       return NO_OF_OPERANDS[index];
   }
 
@@ -1690,14 +1690,14 @@ public final class Const {
   /**
    * @since 6.0
    */
-  public static short getOperandType(int opcode, int index) {
+  public static short getOperandType(final int opcode, final int index) {
       return TYPE_OF_OPERANDS[opcode][index];
   }
 
   /**
    * @since 6.0
    */
-  public static long getOperandTypeCount(int opcode) {
+  public static long getOperandTypeCount(final int opcode) {
       return TYPE_OF_OPERANDS[opcode].length;
   }
 
@@ -1762,7 +1762,7 @@ public final class Const {
   /**
    * @since 6.0
    */
-  public static String getOpcodeName(int index) {
+  public static String getOpcodeName(final int index) {
       return OPCODE_NAMES[index]; 
   }
 
@@ -1828,7 +1828,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static int getConsumeStack(int index) {
+  public static int getConsumeStack(final int index) {
       return CONSUME_STACK[index];
   }
 
@@ -1895,7 +1895,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static int getProduceStack(int index) {
+  public static int getProduceStack(final int index) {
       return PRODUCE_STACK[index];
   }
 
@@ -1944,7 +1944,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static String getAttributeName(int index) {
+  public static String getAttributeName(final int index) {
       return ATTRIBUTE_NAMES[index];
   }
 
@@ -1971,7 +1971,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static String getItemName(int index) {
+  public static String getItemName(final int index) {
       return ITEM_NAMES[index];
   }
 
@@ -2022,7 +2022,7 @@ public final class Const {
    * @return
    * @since 6.0
    */
-  public static String getMethodHandleName(int index) {
+  public static String getMethodHandleName(final int index) {
       return METHODHANDLE_NAMES[index];
   }
 

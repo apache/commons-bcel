@@ -31,14 +31,14 @@ public class AnnotationElementValueGen extends ElementValueGen
     // For annotation element values, this is the annotation
     private final AnnotationEntryGen a;
 
-    public AnnotationElementValueGen(AnnotationEntryGen a, ConstantPoolGen cpool)
+    public AnnotationElementValueGen(final AnnotationEntryGen a, final ConstantPoolGen cpool)
     {
         super(ANNOTATION, cpool);
         this.a = a;
     }
 
-    public AnnotationElementValueGen(int type, AnnotationEntryGen annotation,
-            ConstantPoolGen cpool)
+    public AnnotationElementValueGen(final int type, final AnnotationEntryGen annotation,
+            final ConstantPoolGen cpool)
     {
         super(type, cpool);
         if (type != ANNOTATION) {
@@ -48,15 +48,15 @@ public class AnnotationElementValueGen extends ElementValueGen
         this.a = annotation;
     }
 
-    public AnnotationElementValueGen(AnnotationElementValue value,
-            ConstantPoolGen cpool, boolean copyPoolEntries)
+    public AnnotationElementValueGen(final AnnotationElementValue value,
+            final ConstantPoolGen cpool, final boolean copyPoolEntries)
     {
         super(ANNOTATION, cpool);
         a = new AnnotationEntryGen(value.getAnnotationEntry(), cpool, copyPoolEntries);
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         dos.writeByte(super.getElementValueType()); // u1 type of value (ANNOTATION == '@')
         a.dump(dos);

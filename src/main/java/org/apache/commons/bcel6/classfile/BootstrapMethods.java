@@ -38,7 +38,7 @@ public class BootstrapMethods extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    public BootstrapMethods(BootstrapMethods c) {
+    public BootstrapMethods(final BootstrapMethods c) {
         this(c.getNameIndex(), c.getLength(), c.getBootstrapMethods(), c.getConstantPool());
     }
 
@@ -49,7 +49,7 @@ public class BootstrapMethods extends Attribute {
      * @param bootstrap_methods array of bootstrap methods
      * @param constant_pool Array of constants
      */
-    public BootstrapMethods(int name_index, int length, BootstrapMethod[] bootstrap_methods, ConstantPool constant_pool) {
+    public BootstrapMethods(final int name_index, final int length, final BootstrapMethod[] bootstrap_methods, final ConstantPool constant_pool) {
         super(Const.ATTR_BOOTSTRAP_METHODS, name_index, length, constant_pool);
         this.bootstrap_methods = bootstrap_methods;
     }
@@ -63,7 +63,7 @@ public class BootstrapMethods extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    BootstrapMethods(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
+    BootstrapMethods(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, (BootstrapMethod[]) null, constant_pool);
 
         int num_bootstrap_methods = input.readUnsignedShort();
@@ -83,7 +83,7 @@ public class BootstrapMethods extends Attribute {
     /**
      * @param bootstrap_methods the array of bootstrap methods
      */
-    public final void setBootstrapMethods(BootstrapMethod[] bootstrap_methods) {
+    public final void setBootstrapMethods(final BootstrapMethod[] bootstrap_methods) {
         this.bootstrap_methods = bootstrap_methods;
     }
 
@@ -91,7 +91,7 @@ public class BootstrapMethods extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept(Visitor v) {
+    public void accept(final Visitor v) {
         v.visitBootstrapMethods(this);
     }
 
@@ -99,7 +99,7 @@ public class BootstrapMethods extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public BootstrapMethods copy(ConstantPool _constant_pool) {
+    public BootstrapMethods copy(final ConstantPool _constant_pool) {
         BootstrapMethods c = (BootstrapMethods) clone();
         c.bootstrap_methods = new BootstrapMethod[bootstrap_methods.length];
 
@@ -117,7 +117,7 @@ public class BootstrapMethods extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump(DataOutputStream file) throws IOException {
+    public final void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
 
         file.writeShort(bootstrap_methods.length);

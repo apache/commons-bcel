@@ -78,21 +78,21 @@ public final class Pass3bVerifier extends PassVerifier{
     private static final class InstructionContextQueue{
         private final List<InstructionContext> ics = new Vector<>();
         private final List<ArrayList<InstructionContext>> ecs = new Vector<>();
-        public void add(InstructionContext ic, ArrayList<InstructionContext> executionChain){
+        public void add(final InstructionContext ic, final ArrayList<InstructionContext> executionChain){
             ics.add(ic);
             ecs.add(executionChain);
         }
         public boolean isEmpty(){
             return ics.isEmpty();
         }
-        public void remove(int i){
+        public void remove(final int i){
             ics.remove(i);
             ecs.remove(i);
         }
-        public InstructionContext getIC(int i){
+        public InstructionContext getIC(final int i){
             return ics.get(i);
         }
-        public ArrayList<InstructionContext> getEC(int i){
+        public ArrayList<InstructionContext> getEC(final int i){
             return ecs.get(i);
         }
         public int size(){
@@ -114,7 +114,7 @@ public final class Pass3bVerifier extends PassVerifier{
      *
      * @see org.apache.commons.bcel6.verifier.Verifier
      */
-    public Pass3bVerifier(Verifier owner, int method_no){
+    public Pass3bVerifier(final Verifier owner, final int method_no){
         myOwner = owner;
         this.method_no = method_no;
     }
@@ -126,8 +126,8 @@ public final class Pass3bVerifier extends PassVerifier{
    * The proof of termination is about the existence of a
    * fix point of frame merging.
      */
-    private void circulationPump(MethodGen m,ControlFlowGraph cfg, InstructionContext start,
-            Frame vanillaFrame, InstConstraintVisitor icv, ExecutionVisitor ev){
+    private void circulationPump(final MethodGen m,final ControlFlowGraph cfg, final InstructionContext start,
+            final Frame vanillaFrame, final InstConstraintVisitor icv, final ExecutionVisitor ev){
         final Random random = new Random();
         InstructionContextQueue icq = new InstructionContextQueue();
 
@@ -294,7 +294,7 @@ public final class Pass3bVerifier extends PassVerifier{
      * @throws StructuralCodeConstraintException always
      * @since 6.0
      */
-    public void invalidReturnTypeError(Type returnedType, MethodGen m){
+    public void invalidReturnTypeError(final Type returnedType, final MethodGen m){
         throw new StructuralCodeConstraintException(
             "Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
     }

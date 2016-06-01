@@ -83,7 +83,7 @@ public class ControlFlowGraph{
          * Creates an InstructionHandleImpl object from an InstructionHandle.
          * Creation of one per InstructionHandle suffices. Don't create more.
          */
-        public InstructionContextImpl(InstructionHandle inst){
+        public InstructionContextImpl(final InstructionHandle inst){
             if (inst == null) {
                 throw new AssertionViolatedException("Cannot instantiate InstructionContextImpl from NULL.");
             }
@@ -101,7 +101,7 @@ public class ControlFlowGraph{
 
         /* Satisfies InstructionContext.setTag(int). */
         @Override
-        public void setTag(int tag){ // part of InstructionContext interface
+        public void setTag(final int tag){ // part of InstructionContext interface
             TAG = tag;
         }
 
@@ -117,7 +117,7 @@ public class ControlFlowGraph{
          * Returns a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
          */    
         @Override
-        public Frame getOutFrame(ArrayList<InstructionContext> execChain){
+        public Frame getOutFrame(final ArrayList<InstructionContext> execChain){
             executionPredecessors = execChain;
 
             Frame org;
@@ -163,7 +163,7 @@ public class ControlFlowGraph{
          * changed from the one before execute()ing.
          */
         @Override
-        public boolean execute(Frame inFrame, ArrayList<InstructionContext> execPreds, InstConstraintVisitor icv, ExecutionVisitor ev){
+        public boolean execute(final Frame inFrame, final ArrayList<InstructionContext> execPreds, final InstConstraintVisitor icv, final ExecutionVisitor ev){
 
             @SuppressWarnings("unchecked") // OK because execPreds is compatible type
             final List<InstructionContext> clone = (List<InstructionContext>) execPreds.clone();
@@ -238,7 +238,7 @@ public class ControlFlowGraph{
          * Does the actual merging (vmspec2, page 146).
          * Returns true IFF this.inFrame was changed in course of merging with inFrame.
          */
-        private boolean mergeInFrames(Frame inFrame) {
+        private boolean mergeInFrames(final Frame inFrame) {
             // TODO: Can be performance-improved.
             Frame inF = inFrames.get(lastExecutionJSR());
             OperandStack oldstack = inF.getStack().getClone();
@@ -272,7 +272,7 @@ public class ControlFlowGraph{
          * This extended message will then reflect the execution flow needed to get to the constraint
          * violation that triggered the throwing of the "e" object.
          */
-        private void extendMessageWithFlow(StructuralCodeConstraintException e){
+        private void extendMessageWithFlow(final StructuralCodeConstraintException e){
             String s = "Execution flow:\n";
             e.extendMessage("", s+getExecutionChain());
         }
@@ -412,7 +412,7 @@ public class ControlFlowGraph{
      * A Control Flow Graph; with additional JustIce checks
      * @param  method_gen the method generator instance
      */
-    public ControlFlowGraph(MethodGen method_gen){
+    public ControlFlowGraph(final MethodGen method_gen){
         this(method_gen, true);
     }
 
@@ -422,7 +422,7 @@ public class ControlFlowGraph{
      * @param enableJustIceCheck if true, additional JustIce checks are performed
      * @since 6.0
      */
-    public ControlFlowGraph(MethodGen method_gen, boolean enableJustIceCheck){
+    public ControlFlowGraph(final MethodGen method_gen, final boolean enableJustIceCheck){
         subroutines = new Subroutines(method_gen, enableJustIceCheck);
         exceptionhandlers = new ExceptionHandlers(method_gen);
 
@@ -437,7 +437,7 @@ public class ControlFlowGraph{
     /**
      * Returns the InstructionContext of a given instruction.
      */
-    public InstructionContext contextOf(InstructionHandle inst){
+    public InstructionContext contextOf(final InstructionHandle inst){
         InstructionContext ic = instructionContexts.get(inst);
         if (ic == null){
             throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known!");
@@ -449,7 +449,7 @@ public class ControlFlowGraph{
      * Returns the InstructionContext[] of a given InstructionHandle[],
      * in a naturally ordered manner.
      */
-    public InstructionContext[] contextsOf(InstructionHandle[] insts){
+    public InstructionContext[] contextsOf(final InstructionHandle[] insts){
         InstructionContext[] ret = new InstructionContext[insts.length];
         for (int i=0; i<insts.length; i++){
             ret[i] = contextOf(insts[i]);
@@ -471,7 +471,7 @@ public class ControlFlowGraph{
      * Returns true, if and only if the said instruction is not reachable; that means,
      * if it is not part of this ControlFlowGraph.
      */
-    public boolean isDead(InstructionHandle i){
+    public boolean isDead(final InstructionHandle i){
         return subroutines.subroutineOf(i) == null;
     }     
 }

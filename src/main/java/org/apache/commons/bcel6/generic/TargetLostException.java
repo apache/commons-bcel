@@ -51,7 +51,7 @@ public final class TargetLostException extends Exception {
     private final InstructionHandle[] targets;
 
 
-    TargetLostException(InstructionHandle[] t, String mesg) {
+    TargetLostException(final InstructionHandle[] t, final String mesg) {
         super(mesg);
         targets = t;
     }

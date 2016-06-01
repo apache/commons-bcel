@@ -90,7 +90,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      *
      * @see #toString()
      */
-    public StringRepresentation(Node n) {
+    public StringRepresentation(final Node n) {
         this.n = n;
         n.accept(this); // assign a string representation to field 'tostring' if we know n's class.
     }
@@ -117,7 +117,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * this is obj.toString() if it does not throw any RuntimeException,
      * or else it is a string derived only from obj's class name.
      */
-    private String toString(Node obj) {
+    private String toString(final Node obj) {
         String ret;
         try {
             ret = obj.toString();
@@ -140,7 +140,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
     // e.g. we could also simply output "Code" instead of a possibly
     // lengthy Code attribute's toString().
     @Override
-    public void visitCode(Code obj) {
+    public void visitCode(final Code obj) {
         //tostring = toString(obj);
         tostring = "<CODE>"; // We don't need real code outputs.
     }
@@ -149,7 +149,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitAnnotation(Annotations obj)
+    public void visitAnnotation(final Annotations obj)
     {
         //this is invoked whenever an annotation is found
         //when verifier is passed over a class
@@ -160,7 +160,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitLocalVariableTypeTable(LocalVariableTypeTable obj)
+    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj)
     {
         //this is invoked whenever a local variable type is found
         //when verifier is passed over a class
@@ -168,160 +168,152 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
     }
     
     @Override
-    public void visitCodeException(CodeException obj) {
+    public void visitCodeException(final CodeException obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantClass(ConstantClass obj) {
+    public void visitConstantClass(final ConstantClass obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantDouble(ConstantDouble obj) {
+    public void visitConstantDouble(final ConstantDouble obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantFieldref(ConstantFieldref obj) {
+    public void visitConstantFieldref(final ConstantFieldref obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantFloat(ConstantFloat obj) {
+    public void visitConstantFloat(final ConstantFloat obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantInteger(ConstantInteger obj) {
+    public void visitConstantInteger(final ConstantInteger obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj) {
+    public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantLong(ConstantLong obj) {
+    public void visitConstantLong(final ConstantLong obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantMethodref(ConstantMethodref obj) {
+    public void visitConstantMethodref(final ConstantMethodref obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantNameAndType(ConstantNameAndType obj) {
+    public void visitConstantNameAndType(final ConstantNameAndType obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantPool(ConstantPool obj) {
+    public void visitConstantPool(final ConstantPool obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantString(ConstantString obj) {
+    public void visitConstantString(final ConstantString obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantUtf8(ConstantUtf8 obj) {
+    public void visitConstantUtf8(final ConstantUtf8 obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitConstantValue(ConstantValue obj) {
+    public void visitConstantValue(final ConstantValue obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitDeprecated(Deprecated obj) {
+    public void visitDeprecated(final Deprecated obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitExceptionTable(ExceptionTable obj) {
+    public void visitExceptionTable(final ExceptionTable obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitField(Field obj) {
+    public void visitField(final Field obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitInnerClass(InnerClass obj) {
+    public void visitInnerClass(final InnerClass obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitInnerClasses(InnerClasses obj) {
+    public void visitInnerClasses(final InnerClasses obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitJavaClass(JavaClass obj) {
+    public void visitJavaClass(final JavaClass obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitLineNumber(LineNumber obj) {
+    public void visitLineNumber(final LineNumber obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitLineNumberTable(LineNumberTable obj) {
+    public void visitLineNumberTable(final LineNumberTable obj) {
         tostring = "<LineNumberTable: " + toString(obj) + ">";
     }
 
     @Override
-    public void visitLocalVariable(LocalVariable obj) {
+    public void visitLocalVariable(final LocalVariable obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitLocalVariableTable(LocalVariableTable obj) {
+    public void visitLocalVariableTable(final LocalVariableTable obj) {
         tostring = "<LocalVariableTable: " + toString(obj) + ">";
     }
 
     @Override
-    public void visitMethod(Method obj) {
+    public void visitMethod(final Method obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitSignature(Signature obj) {
+    public void visitSignature(final Signature obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitSourceFile(SourceFile obj) {
+    public void visitSourceFile(final SourceFile obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitStackMap(StackMap obj) {
+    public void visitStackMap(final StackMap obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitSynthetic(Synthetic obj) {
+    public void visitSynthetic(final Synthetic obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitUnknown(Unknown obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitEnclosingMethod(EnclosingMethod obj) {
+    public void visitUnknown(final Unknown obj) {
         tostring = toString(obj);
     }
 
@@ -329,7 +321,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitBootstrapMethods(BootstrapMethods obj) {
+    public void visitEnclosingMethod(final EnclosingMethod obj) {
         tostring = toString(obj);
     }
 
@@ -337,7 +329,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitMethodParameters(MethodParameters obj) {
+    public void visitBootstrapMethods(final BootstrapMethods obj) {
         tostring = toString(obj);
     }
 
@@ -345,7 +337,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitConstantInvokeDynamic(ConstantInvokeDynamic obj) {
+    public void visitMethodParameters(final MethodParameters obj) {
         tostring = toString(obj);
     }
 
@@ -353,15 +345,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitStackMapEntry(StackMapEntry obj) {
-        tostring = toString(obj);
-    }
-    /**
-     * @since 6.0
-     */
-
-    @Override
-    public void visitParameterAnnotation(ParameterAnnotations obj) {
+    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj) {
         tostring = toString(obj);
     }
 
@@ -369,7 +353,15 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitAnnotationEntry(AnnotationEntry obj) {
+    public void visitStackMapEntry(final StackMapEntry obj) {
+        tostring = toString(obj);
+    }
+    /**
+     * @since 6.0
+     */
+
+    @Override
+    public void visitParameterAnnotation(final ParameterAnnotations obj) {
         tostring = toString(obj);
     }
 
@@ -377,7 +369,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitAnnotationDefault(AnnotationDefault obj) {
+    public void visitAnnotationEntry(final AnnotationEntry obj) {
         tostring = toString(obj);
     }
 
@@ -385,7 +377,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitConstantMethodType(ConstantMethodType obj) {
+    public void visitAnnotationDefault(final AnnotationDefault obj) {
         tostring = toString(obj);
     }
 
@@ -393,7 +385,7 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitConstantMethodHandle(ConstantMethodHandle obj) {
+    public void visitConstantMethodType(final ConstantMethodType obj) {
         tostring = toString(obj);
     }
 
@@ -401,7 +393,15 @@ public class StringRepresentation extends org.apache.commons.bcel6.classfile.Emp
      * @since 6.0
      */
     @Override
-    public void visitParameterAnnotationEntry(ParameterAnnotationEntry obj) {
+    public void visitConstantMethodHandle(final ConstantMethodHandle obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitParameterAnnotationEntry(final ParameterAnnotationEntry obj) {
         tostring = toString(obj);
     }
 }

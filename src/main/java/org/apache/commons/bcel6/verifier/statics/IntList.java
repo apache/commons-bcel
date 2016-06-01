@@ -34,11 +34,11 @@ public class IntList{
         theList = new ArrayList<>();
     }
     /** Adds an element to the list. */
-    void add(int i){
+    void add(final int i){
         theList.add(Integer.valueOf(i));
     }
     /** Checks if the specified int is already in the list. */
-    boolean contains(int i){
+    boolean contains(final int i){
         Integer[] ints = new Integer[theList.size()];
         theList.toArray(ints);
         for (Integer k : ints) {

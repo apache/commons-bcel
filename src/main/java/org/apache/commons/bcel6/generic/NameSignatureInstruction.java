@@ -35,18 +35,18 @@ public abstract class NameSignatureInstruction extends CPInstruction {
         super();
     }
 
-    public NameSignatureInstruction(short opcode, int index) {
+    public NameSignatureInstruction(final short opcode, final int index) {
         super(opcode, index);
     }
 
-    public ConstantNameAndType getNameAndType(ConstantPoolGen cpg) {
+    public ConstantNameAndType getNameAndType(final ConstantPoolGen cpg) {
         ConstantPool cp = cpg.getConstantPool();
         ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         return  (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
     }
     /** @return signature of referenced method/field.
      */
-    public String getSignature(ConstantPoolGen cpg) {
+    public String getSignature(final ConstantPoolGen cpg) {
         ConstantPool cp = cpg.getConstantPool();
         ConstantNameAndType cnat = getNameAndType(cpg);
         return ((ConstantUtf8) cp.getConstant(cnat.getSignatureIndex())).getBytes();
@@ -54,7 +54,7 @@ public abstract class NameSignatureInstruction extends CPInstruction {
 
     /** @return name of referenced method/field.
      */
-    public String getName(ConstantPoolGen cpg) {
+    public String getName(final ConstantPoolGen cpg) {
         ConstantPool cp = cpg.getConstantPool();
         ConstantNameAndType cnat = getNameAndType(cpg);
         return ((ConstantUtf8) cp.getConstant(cnat.getNameIndex())).getBytes();

@@ -44,7 +44,7 @@ public final class AssertionViolatedException extends RuntimeException{
      * Constructs a new AssertionViolationException with the specified error message and initial cause
      * @since 6.0
      */
-    public AssertionViolatedException(String message, Throwable initCause) {
+    public AssertionViolatedException(String message, final Throwable initCause) {
         super(message = "INTERNAL ERROR: "+message, initCause);
         detailMessage=message;
     }    
@@ -77,7 +77,7 @@ public final class AssertionViolatedException extends RuntimeException{
     /** 
      * DO NOT USE. It's for experimental testing during development only.
      */
-    public static void main(String[] args){
+    public static void main(final String[] args){
         AssertionViolatedException ave = new AssertionViolatedException("Oops!");
         ave.extendMessage("\nFOUND:\n\t","\nExiting!!\n");
         throw ave;

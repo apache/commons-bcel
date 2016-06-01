@@ -32,8 +32,8 @@ public class EnumElementValue extends ElementValue
 
     private final int valueIdx;
 
-    public EnumElementValue(int type, int typeIdx, int valueIdx,
-            ConstantPool cpool)
+    public EnumElementValue(final int type, final int typeIdx, final int valueIdx,
+            final ConstantPool cpool)
     {
         super(type, cpool);
         if (type != ENUM_CONSTANT) {
@@ -45,7 +45,7 @@ public class EnumElementValue extends ElementValue
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         dos.writeByte(super.getType()); // u1 type of value (ENUM_CONSTANT == 'e')
         dos.writeShort(typeIdx); // u2

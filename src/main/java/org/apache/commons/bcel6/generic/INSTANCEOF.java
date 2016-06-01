@@ -36,7 +36,7 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
     }
 
 
-    public INSTANCEOF(int index) {
+    public INSTANCEOF(final int index) {
         super(org.apache.commons.bcel6.Const.INSTANCEOF, index);
     }
 
@@ -48,7 +48,7 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
 
 
     @Override
-    public ObjectType getLoadClassType( ConstantPoolGen cpg ) {
+    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
         Type t = getType(cpg);
         if (t instanceof ArrayType) {
             t = ((ArrayType) t).getBasicType();
@@ -66,7 +66,7 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLoadClass(this);
         v.visitExceptionThrower(this);
         v.visitStackProducer(this);

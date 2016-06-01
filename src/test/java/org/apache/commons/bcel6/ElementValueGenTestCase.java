@@ -34,7 +34,7 @@ import org.apache.commons.bcel6.generic.SimpleElementValueGen;
 
 public class ElementValueGenTestCase extends AbstractTestCase
 {
-    private ClassGen createClassGen(String classname)
+    private ClassGen createClassGen(final String classname)
     {
         return new ClassGen(classname, "java.lang.Object", "<generated>",
                 Const.ACC_PUBLIC | Const.ACC_SUPER, null);
@@ -209,7 +209,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
         checkSerialize(evg, cp);
     }
 
-    private void checkSerialize(ElementValueGen evgBefore, ConstantPoolGen cpg)
+    private void checkSerialize(final ElementValueGen evgBefore, final ConstantPoolGen cpg)
     {
         try
         {

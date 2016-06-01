@@ -43,7 +43,7 @@ public class INVOKEVIRTUAL extends InvokeInstruction {
     }
 
 
-    public INVOKEVIRTUAL(int index) {
+    public INVOKEVIRTUAL(final int index) {
         super(Const.INVOKEVIRTUAL, index);
     }
 
@@ -53,7 +53,7 @@ public class INVOKEVIRTUAL extends InvokeInstruction {
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(super.getOpcode());
         out.writeShort(super.getIndex());
     }
@@ -77,7 +77,7 @@ public class INVOKEVIRTUAL extends InvokeInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);
         v.visitStackConsumer(this);

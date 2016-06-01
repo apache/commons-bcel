@@ -34,7 +34,7 @@ public class LCMP extends Instruction implements TypedInstruction, StackProducer
     /** @return Type.LONG
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return Type.LONG;
     }
 
@@ -48,7 +48,7 @@ public class LCMP extends Instruction implements TypedInstruction, StackProducer
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitTypedInstruction(this);
         v.visitStackProducer(this);
         v.visitStackConsumer(this);

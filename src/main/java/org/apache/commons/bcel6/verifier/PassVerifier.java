@@ -86,7 +86,7 @@ public abstract class PassVerifier {
      *
      * @see #getMessages()
      */
-    public void addMessage( String message ) {
+    public void addMessage( final String message ) {
         messages.add(message);
     }
 

@@ -34,13 +34,13 @@ public class ClassElementValueGen extends ElementValueGen
     // For 'class' this points to the class entry in the cpool
     private int idx;
 
-    protected ClassElementValueGen(int typeIdx, ConstantPoolGen cpool)
+    protected ClassElementValueGen(final int typeIdx, final ConstantPoolGen cpool)
     {
         super(ElementValueGen.CLASS, cpool);
         this.idx = typeIdx;
     }
 
-    public ClassElementValueGen(ObjectType t, ConstantPoolGen cpool)
+    public ClassElementValueGen(final ObjectType t, final ConstantPoolGen cpool)
     {
         super(ElementValueGen.CLASS, cpool);
         // this.idx = cpool.addClass(t);
@@ -58,8 +58,8 @@ public class ClassElementValueGen extends ElementValueGen
                 getConstantPool().getConstantPool());
     }
 
-    public ClassElementValueGen(ClassElementValue value, ConstantPoolGen cpool,
-            boolean copyPoolEntries)
+    public ClassElementValueGen(final ClassElementValue value, final ConstantPoolGen cpool,
+            final boolean copyPoolEntries)
     {
         super(CLASS, cpool);
         if (copyPoolEntries)
@@ -95,7 +95,7 @@ public class ClassElementValueGen extends ElementValueGen
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         dos.writeByte(super.getElementValueType()); // u1 kind of value
         dos.writeShort(idx);

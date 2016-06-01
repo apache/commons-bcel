@@ -43,7 +43,7 @@ public class INVOKESTATIC extends InvokeInstruction {
     }
 
 
-    public INVOKESTATIC(int index) {
+    public INVOKESTATIC(final int index) {
         super(Const.INVOKESTATIC, index);
     }
 
@@ -53,7 +53,7 @@ public class INVOKESTATIC extends InvokeInstruction {
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
       out.writeByte(super.getOpcode());
       out.writeShort(super.getIndex());
     }
@@ -75,7 +75,7 @@ public class INVOKESTATIC extends InvokeInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);
         v.visitStackConsumer(this);

@@ -38,7 +38,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     /** 
      * @param bytes Data
      */
-    public ConstantFloat(float bytes) {
+    public ConstantFloat(final float bytes) {
         super(Const.CONSTANT_Float);
         this.bytes = bytes;
     }
@@ -48,7 +48,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    public ConstantFloat(ConstantFloat c) {
+    public ConstantFloat(final ConstantFloat c) {
         this(c.getBytes());
     }
 
@@ -59,7 +59,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantFloat(DataInput file) throws IOException {
+    ConstantFloat(final DataInput file) throws IOException {
         this(file.readFloat());
     }
 
@@ -72,7 +72,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantFloat(this);
     }
 
@@ -84,7 +84,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeFloat(bytes);
     }
@@ -101,7 +101,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     /**
      * @param bytes the raw bytes that represent this float
      */
-    public final void setBytes( float bytes ) {
+    public final void setBytes( final float bytes ) {
         this.bytes = bytes;
     }
 
@@ -118,7 +118,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     /** @return Float object
      */
     @Override
-    public Object getConstantValue( ConstantPool cp ) {
+    public Object getConstantValue( final ConstantPool cp ) {
         return new Float(bytes);
     }
 }

@@ -37,7 +37,7 @@ public class ALOAD extends LoadInstruction {
     /** Load reference from local variable
      * @param n index of local variable
      */
-    public ALOAD(int n) {
+    public ALOAD(final int n) {
         super(org.apache.commons.bcel6.Const.ALOAD, org.apache.commons.bcel6.Const.ALOAD_0, n);
     }
 
@@ -51,7 +51,7 @@ public class ALOAD extends LoadInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         super.accept(v);
         v.visitALOAD(this);
     }

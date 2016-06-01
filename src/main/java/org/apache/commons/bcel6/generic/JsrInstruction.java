@@ -25,7 +25,7 @@ package org.apache.commons.bcel6.generic;
 public abstract class JsrInstruction extends BranchInstruction implements UnconditionalBranch,
         TypedInstruction, StackProducer {
 
-    JsrInstruction(short opcode, InstructionHandle target) {
+    JsrInstruction(final short opcode, final InstructionHandle target) {
         super(opcode, target);
     }
 
@@ -41,7 +41,7 @@ public abstract class JsrInstruction extends BranchInstruction implements Uncond
     /** @return return address type
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return new ReturnaddressType(physicalSuccessor());
     }
 

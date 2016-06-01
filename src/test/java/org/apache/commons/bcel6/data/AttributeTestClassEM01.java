@@ -20,7 +20,7 @@ package org.apache.commons.bcel6.data;
 
 public class AttributeTestClassEM01
 {
-    public static void main(String[] argv)
+    public static void main(final String[] argv)
     {
         @SuppressWarnings("unused")
         class S

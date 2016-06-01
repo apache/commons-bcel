@@ -40,7 +40,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     }
 
 
-    public LDC(int index) {
+    public LDC(final int index) {
         super(org.apache.commons.bcel6.Const.LDC_W, index);
         setSize();
     }
@@ -63,7 +63,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(super.getOpcode());
         if (super.getLength() == 2) { // TODO useless check?
             out.writeByte(super.getIndex());
@@ -77,7 +77,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      * Set the index to constant pool and adjust size.
      */
     @Override
-    public final void setIndex( int index ) {
+    public final void setIndex( final int index ) {
         super.setIndex(index);
         setSize();
     }
@@ -87,13 +87,13 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.setLength(2);
         super.setIndex(bytes.readUnsignedByte());
     }
 
 
-    public Object getValue( ConstantPoolGen cpg ) {
+    public Object getValue( final ConstantPoolGen cpg ) {
         org.apache.commons.bcel6.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
         switch (c.getTag()) {
             case org.apache.commons.bcel6.Const.CONSTANT_String:
@@ -115,7 +115,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
 
 
     @Override
-    public Type getType( ConstantPoolGen cpg ) {
+    public Type getType( final ConstantPoolGen cpg ) {
         switch (cpg.getConstantPool().getConstant(super.getIndex()).getTag()) {
             case org.apache.commons.bcel6.Const.CONSTANT_String:
                 return Type.STRING;
@@ -146,7 +146,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);
         v.visitExceptionThrower(this);

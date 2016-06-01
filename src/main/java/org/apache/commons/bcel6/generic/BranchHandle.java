@@ -30,7 +30,7 @@ package org.apache.commons.bcel6.generic;
  */
 public final class BranchHandle extends InstructionHandle {
 
-    private BranchHandle(BranchInstruction i) {
+    private BranchHandle(final BranchInstruction i) {
         super(i);
     }
 
@@ -39,7 +39,7 @@ public final class BranchHandle extends InstructionHandle {
     private static BranchHandle bh_list = null; // List of reusable handles
 
 
-    static BranchHandle getBranchHandle( BranchInstruction i ) {
+    static BranchHandle getBranchHandle( final BranchInstruction i ) {
         if (bh_list == null) {
             return new BranchHandle(i);
         }
@@ -75,7 +75,7 @@ public final class BranchHandle extends InstructionHandle {
 
 
     @Override
-    void setPosition( int pos ) {
+    void setPosition( final int pos ) {
         // Original code: i_position = bi.position = pos;
         getBI().setPosition(pos);
         super.setPosition(pos);
@@ -83,7 +83,7 @@ public final class BranchHandle extends InstructionHandle {
 
 
     @Override
-    protected int updatePosition( int offset, int max_offset ) {
+    protected int updatePosition( final int offset, final int max_offset ) {
         int x = getBI().updatePosition(offset, max_offset);
         super.setPosition(getBI().getPosition());
         return x;
@@ -93,7 +93,7 @@ public final class BranchHandle extends InstructionHandle {
     /**
      * Pass new target to instruction.
      */
-    public void setTarget( InstructionHandle ih ) {
+    public void setTarget( final InstructionHandle ih ) {
         getBI().setTarget(ih);
     }
 
@@ -101,7 +101,7 @@ public final class BranchHandle extends InstructionHandle {
     /**
      * Update target of instruction.
      */
-    public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
+    public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
         getBI().updateTarget(old_ih, new_ih);
     }
 
@@ -118,7 +118,7 @@ public final class BranchHandle extends InstructionHandle {
      * Set new contents. Old instruction is disposed and may not be used anymore.
      */
     @Override // This is only done in order to apply the additional type check; could be merged with super impl.
-    public void setInstruction( Instruction i ) { // TODO could be package-protected?
+    public void setInstruction( final Instruction i ) { // TODO could be package-protected?
         super.setInstruction(i);
         if (!(i instanceof BranchInstruction)) {
             throw new ClassGenException("Assigning " + i

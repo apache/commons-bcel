@@ -35,8 +35,8 @@ public class ElementValuePairGen
 
     private final ConstantPoolGen cpool;
 
-    public ElementValuePairGen(ElementValuePair nvp, ConstantPoolGen cpool,
-            boolean copyPoolEntries)
+    public ElementValuePairGen(final ElementValuePair nvp, final ConstantPoolGen cpool,
+            final boolean copyPoolEntries)
     {
         this.cpool = cpool;
         // J5ASSERT:
@@ -68,23 +68,23 @@ public class ElementValuePairGen
                 .getConstantPool());
     }
 
-    protected ElementValuePairGen(int idx, ElementValueGen value,
-            ConstantPoolGen cpool)
+    protected ElementValuePairGen(final int idx, final ElementValueGen value,
+            final ConstantPoolGen cpool)
     {
         this.nameIdx = idx;
         this.value = value;
         this.cpool = cpool;
     }
 
-    public ElementValuePairGen(String name, ElementValueGen value,
-            ConstantPoolGen cpool)
+    public ElementValuePairGen(final String name, final ElementValueGen value,
+            final ConstantPoolGen cpool)
     {
         this.nameIdx = cpool.addUtf8(name);
         this.value = value;
         this.cpool = cpool;
     }
 
-    protected void dump(DataOutputStream dos) throws IOException
+    protected void dump(final DataOutputStream dos) throws IOException
     {
         dos.writeShort(nameIdx); // u2 name of the element
         value.dump(dos);

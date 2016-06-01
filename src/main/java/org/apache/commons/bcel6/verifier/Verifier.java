@@ -78,7 +78,7 @@ public class Verifier {
 
 
     /** Returns the VerificationResult for the given pass. */
-    public VerificationResult doPass3a( int method_no ) {
+    public VerificationResult doPass3a( final int method_no ) {
         String key = Integer.toString(method_no);
         Pass3aVerifier p3av;
         p3av = p3avs.get(key);
@@ -91,7 +91,7 @@ public class Verifier {
 
 
     /** Returns the VerificationResult for the given pass. */
-    public VerificationResult doPass3b( int method_no ) {
+    public VerificationResult doPass3b( final int method_no ) {
         String key = Integer.toString(method_no);
         Pass3bVerifier p3bv;
         p3bv = p3bvs.get(key);
@@ -108,7 +108,7 @@ public class Verifier {
      *
      * @see VerifierFactory
      */
-    Verifier(String fully_qualified_classname) {
+    Verifier(final String fully_qualified_classname) {
         classname = fully_qualified_classname;
         flush();
     }
@@ -191,7 +191,7 @@ public class Verifier {
      * documentation for questions about this) or you must have put the classes
      * into the BCEL Repository yourself (via 'addClass(JavaClass)').
      */
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
         System.out
                 .println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<http://commons.apache.org/bcel>\n");
         for (int k = 0; k < args.length; k++) {

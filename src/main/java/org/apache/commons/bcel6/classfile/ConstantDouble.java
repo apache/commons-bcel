@@ -38,7 +38,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /** 
      * @param bytes Data
      */
-    public ConstantDouble(double bytes) {
+    public ConstantDouble(final double bytes) {
         super(Const.CONSTANT_Double);
         this.bytes = bytes;
     }
@@ -47,7 +47,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /**
      * Initialize from another object.
      */
-    public ConstantDouble(ConstantDouble c) {
+    public ConstantDouble(final ConstantDouble c) {
         this(c.getBytes());
     }
 
@@ -58,7 +58,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantDouble(DataInput file) throws IOException {
+    ConstantDouble(final DataInput file) throws IOException {
         this(file.readDouble());
     }
 
@@ -71,7 +71,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantDouble(this);
     }
 
@@ -83,7 +83,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeDouble(bytes);
     }
@@ -100,7 +100,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /**
      * @param bytes the raw bytes that represent the double value
      */
-    public final void setBytes( double bytes ) {
+    public final void setBytes( final double bytes ) {
         this.bytes = bytes;
     }
 
@@ -117,7 +117,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /** @return Double object
      */
     @Override
-    public Object getConstantValue( ConstantPool cp ) {
+    public Object getConstantValue( final ConstantPool cp ) {
         return new Double(bytes);
     }
 }

@@ -44,7 +44,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
 
     /** Push byte on stack
      */
-    public BIPUSH(byte b) {
+    public BIPUSH(final byte b) {
         super(org.apache.commons.bcel6.Const.BIPUSH, (short) 2);
         this.b = b;
     }
@@ -54,7 +54,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
      * Dump instruction as byte code to stream out.
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         super.dump(out);
         out.writeByte(b);
     }
@@ -64,7 +64,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
      * @return mnemonic for instruction
      */
     @Override
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         return super.toString(verbose) + " " + b;
     }
 
@@ -73,7 +73,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.setLength(2);
         b = bytes.readByte();
     }
@@ -88,7 +88,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     /** @return Type.BYTE
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return Type.BYTE;
     }
 
@@ -102,7 +102,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitPushInstruction(this);
         v.visitStackProducer(this);
         v.visitTypedInstruction(this);

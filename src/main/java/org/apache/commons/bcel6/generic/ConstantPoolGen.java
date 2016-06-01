@@ -82,7 +82,7 @@ public class ConstantPoolGen {
         final int index;
 
 
-        Index(int i) {
+        Index(final int i) {
             index = i;
         }
     }
@@ -93,7 +93,7 @@ public class ConstantPoolGen {
      *
      * @param cs array of given constants, new ones will be appended
      */
-    public ConstantPoolGen(Constant[] cs) {
+    public ConstantPoolGen(final Constant[] cs) {
         StringBuilder sb = new StringBuilder(DEFAULT_BUFFER_SIZE);
 
         size = Math.max(DEFAULT_BUFFER_SIZE, cs.length + 64);
@@ -204,7 +204,7 @@ public class ConstantPoolGen {
     /**
      * Initialize with given constant pool.
      */
-    public ConstantPoolGen(ConstantPool cp) {
+    public ConstantPoolGen(final ConstantPool cp) {
         this(cp.getConstantPool());
     }
 
@@ -238,7 +238,7 @@ public class ConstantPoolGen {
      * @param str String to search for
      * @return index on success, -1 otherwise
      */
-    public int lookupString( String str ) {
+    public int lookupString( final String str ) {
         Index index = string_table.get(str);
         return (index != null) ? index.index : -1;
     }
@@ -250,7 +250,7 @@ public class ConstantPoolGen {
      * @param str String to add
      * @return index of entry
      */
-    public int addString( String str ) {
+    public int addString( final String str ) {
         int ret;
         if ((ret = lookupString(str)) != -1) {
             return ret; // Already in CP
@@ -275,13 +275,13 @@ public class ConstantPoolGen {
      * @param str String to search for
      * @return index on success, -1 otherwise
      */
-    public int lookupClass( String str ) {
+    public int lookupClass( final String str ) {
         Index index = class_table.get(str.replace('.', '/'));
         return (index != null) ? index.index : -1;
     }
 
 
-    private int addClass_( String clazz ) {
+    private int addClass_( final String clazz ) {
         int ret;
         if ((ret = lookupClass(clazz)) != -1) {
             return ret; // Already in CP
@@ -303,7 +303,7 @@ public class ConstantPoolGen {
      * @param str Class to add
      * @return index of entry
      */
-    public int addClass( String str ) {
+    public int addClass( final String str ) {
         return addClass_(str.replace('.', '/'));
     }
 
@@ -314,7 +314,7 @@ public class ConstantPoolGen {
      * @param type Class to add
      * @return index of entry
      */
-    public int addClass( ObjectType type ) {
+    public int addClass( final ObjectType type ) {
         return addClass(type.getClassName());
     }
 
@@ -326,7 +326,7 @@ public class ConstantPoolGen {
      * @param type type of array class
      * @return index of entry
      */
-    public int addArrayClass( ArrayType type ) {
+    public int addArrayClass( final ArrayType type ) {
         return addClass_(type.getSignature());
     }
 
@@ -337,7 +337,7 @@ public class ConstantPoolGen {
      * @param n integer number to look for
      * @return index on success, -1 otherwise
      */
-    public int lookupInteger( int n ) {
+    public int lookupInteger( final int n ) {
         for (int i = 1; i < index; i++) {
             if (constants[i] instanceof ConstantInteger) {
                 ConstantInteger c = (ConstantInteger) constants[i];
@@ -356,7 +356,7 @@ public class ConstantPoolGen {
      * @param n integer number to add
      * @return index of entry
      */
-    public int addInteger( int n ) {
+    public int addInteger( final int n ) {
         int ret;
         if ((ret = lookupInteger(n)) != -1) {
             return ret; // Already in CP
@@ -374,7 +374,7 @@ public class ConstantPoolGen {
      * @param n Float number to look for
      * @return index on success, -1 otherwise
      */
-    public int lookupFloat( float n ) {
+    public int lookupFloat( final float n ) {
         int bits = Float.floatToIntBits(n);
         for (int i = 1; i < index; i++) {
             if (constants[i] instanceof ConstantFloat) {
@@ -394,7 +394,7 @@ public class ConstantPoolGen {
      * @param n Float number to add
      * @return index of entry
      */
-    public int addFloat( float n ) {
+    public int addFloat( final float n ) {
         int ret;
         if ((ret = lookupFloat(n)) != -1) {
             return ret; // Already in CP
@@ -414,7 +414,7 @@ public class ConstantPoolGen {
      * @param n Utf8 string to look for
      * @return index on success, -1 otherwise
      */
-    public int lookupUtf8( String n ) {
+    public int lookupUtf8( final String n ) {
         Index index = utf8_table.get(n);
         return (index != null) ? index.index : -1;
     }
@@ -426,7 +426,7 @@ public class ConstantPoolGen {
      * @param n Utf8 string to add
      * @return index of entry
      */
-    public int addUtf8( String n ) {
+    public int addUtf8( final String n ) {
         int ret;
         if ((ret = lookupUtf8(n)) != -1) {
             return ret; // Already in CP
@@ -447,7 +447,7 @@ public class ConstantPoolGen {
      * @param n Long number to look for
      * @return index on success, -1 otherwise
      */
-    public int lookupLong( long n ) {
+    public int lookupLong( final long n ) {
         for (int i = 1; i < index; i++) {
             if (constants[i] instanceof ConstantLong) {
                 ConstantLong c = (ConstantLong) constants[i];
@@ -466,7 +466,7 @@ public class ConstantPoolGen {
      * @param n Long number to add
      * @return index of entry
      */
-    public int addLong( long n ) {
+    public int addLong( final long n ) {
         int ret;
         if ((ret = lookupLong(n)) != -1) {
             return ret; // Already in CP
@@ -485,7 +485,7 @@ public class ConstantPoolGen {
      * @param n Double number to look for
      * @return index on success, -1 otherwise
      */
-    public int lookupDouble( double n ) {
+    public int lookupDouble( final double n ) {
         long bits = Double.doubleToLongBits(n);
         for (int i = 1; i < index; i++) {
             if (constants[i] instanceof ConstantDouble) {
@@ -505,7 +505,7 @@ public class ConstantPoolGen {
      * @param n Double number to add
      * @return index of entry
      */
-    public int addDouble( double n ) {
+    public int addDouble( final double n ) {
         int ret;
         if ((ret = lookupDouble(n)) != -1) {
             return ret; // Already in CP
@@ -527,7 +527,7 @@ public class ConstantPoolGen {
      * @param signature of variable/method
      * @return index on success, -1 otherwise
      */
-    public int lookupNameAndType( String name, String signature ) {
+    public int lookupNameAndType( final String name, final String signature ) {
         Index _index = n_a_t_table.get(name + NAT_DELIM + signature);
         return (_index != null) ? _index.index : -1;
     }
@@ -541,7 +541,7 @@ public class ConstantPoolGen {
      * @param signature signature string to add
      * @return index of entry
      */
-    public int addNameAndType( String name, String signature ) {
+    public int addNameAndType( final String name, final String signature ) {
         int ret;
         int name_index;
         int signature_index;
@@ -571,14 +571,14 @@ public class ConstantPoolGen {
      * @param signature return and argument types
      * @return index on success, -1 otherwise
      */
-    public int lookupMethodref( String class_name, String method_name, String signature ) {
+    public int lookupMethodref( final String class_name, final String method_name, final String signature ) {
         Index index = cp_table.get(class_name + METHODREF_DELIM + method_name
                 + METHODREF_DELIM + signature);
         return (index != null) ? index.index : -1;
     }
 
 
-    public int lookupMethodref( MethodGen method ) {
+    public int lookupMethodref( final MethodGen method ) {
         return lookupMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
 
@@ -592,7 +592,7 @@ public class ConstantPoolGen {
      * @param signature method signature string to add
      * @return index of entry
      */
-    public int addMethodref( String class_name, String method_name, String signature ) {
+    public int addMethodref( final String class_name, final String method_name, final String signature ) {
         int ret;
         int class_index;
         int name_and_type_index;
@@ -612,7 +612,7 @@ public class ConstantPoolGen {
     }
 
 
-    public int addMethodref( MethodGen method ) {
+    public int addMethodref( final MethodGen method ) {
         return addMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
 
@@ -625,14 +625,14 @@ public class ConstantPoolGen {
      * @param signature return and argument types
      * @return index on success, -1 otherwise
      */
-    public int lookupInterfaceMethodref( String class_name, String method_name, String signature ) {
+    public int lookupInterfaceMethodref( final String class_name, final String method_name, final String signature ) {
         Index index = cp_table.get(class_name + IMETHODREF_DELIM + method_name
                 + IMETHODREF_DELIM + signature);
         return (index != null) ? index.index : -1;
     }
 
 
-    public int lookupInterfaceMethodref( MethodGen method ) {
+    public int lookupInterfaceMethodref( final MethodGen method ) {
         return lookupInterfaceMethodref(method.getClassName(), method.getName(), method
                 .getSignature());
     }
@@ -647,7 +647,7 @@ public class ConstantPoolGen {
      * @param signature signature string to add
      * @return index of entry
      */
-    public int addInterfaceMethodref( String class_name, String method_name, String signature ) {
+    public int addInterfaceMethodref( final String class_name, final String method_name, final String signature ) {
         int ret;
         int class_index;
         int name_and_type_index;
@@ -667,7 +667,7 @@ public class ConstantPoolGen {
     }
 
 
-    public int addInterfaceMethodref( MethodGen method ) {
+    public int addInterfaceMethodref( final MethodGen method ) {
         return addInterfaceMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
 
@@ -680,7 +680,7 @@ public class ConstantPoolGen {
      * @param signature return and argument types
      * @return index on success, -1 otherwise
      */
-    public int lookupFieldref( String class_name, String field_name, String signature ) {
+    public int lookupFieldref( final String class_name, final String field_name, final String signature ) {
         Index index = cp_table.get(class_name + FIELDREF_DELIM + field_name
                 + FIELDREF_DELIM + signature);
         return (index != null) ? index.index : -1;
@@ -696,7 +696,7 @@ public class ConstantPoolGen {
      * @param signature signature string to add
      * @return index of entry
      */
-    public int addFieldref( String class_name, String field_name, String signature ) {
+    public int addFieldref( final String class_name, final String field_name, final String signature ) {
         int ret;
         int class_index;
         int name_and_type_index;
@@ -720,7 +720,7 @@ public class ConstantPoolGen {
      * @param i index in constant pool
      * @return constant pool entry at index i
      */
-    public Constant getConstant( int i ) {
+    public Constant getConstant( final int i ) {
         return constants[i];
     }
 
@@ -731,7 +731,7 @@ public class ConstantPoolGen {
      * @param i index in constant pool
      * @param c new constant pool entry at index i
      */
-    public void setConstant( int i, Constant c ) {
+    public void setConstant( final int i, final Constant c ) {
         constants[i] = c;
     }
 
@@ -777,7 +777,7 @@ public class ConstantPoolGen {
 
     /** Import constant from another ConstantPool and return new index.
      */
-    public int addConstant( Constant c, ConstantPoolGen cp ) {
+    public int addConstant( final Constant c, final ConstantPoolGen cp ) {
         Constant[] constants = cp.getConstantPool().getConstantPool();
         switch (c.getTag()) {
             case Const.CONSTANT_String: {

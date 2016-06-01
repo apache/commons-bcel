@@ -34,7 +34,7 @@ public class IFGT extends IfInstruction {
     }
 
 
-    public IFGT(InstructionHandle target) {
+    public IFGT(final InstructionHandle target) {
         super(org.apache.commons.bcel6.Const.IFGT, target);
     }
 
@@ -57,7 +57,7 @@ public class IFGT extends IfInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);
         v.visitIfInstruction(this);

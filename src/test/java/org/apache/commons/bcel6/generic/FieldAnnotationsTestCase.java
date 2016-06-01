@@ -113,9 +113,9 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     }
 
     // helper methods
-    public void checkAnnotatedField(JavaClass clazz, String fieldname,
-            String AnnotationEntryName, String AnnotationEntryElementName,
-            String AnnotationEntryElementValue)
+    public void checkAnnotatedField(final JavaClass clazz, final String fieldname,
+            final String AnnotationEntryName, final String AnnotationEntryElementName,
+            final String AnnotationEntryElementValue)
     {
         Field[] fields = clazz.getFields();
         for (Field f : fields) {
@@ -128,8 +128,8 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
         }
     }
 
-    private void checkAnnotationEntry(AnnotationEntry a, String name, String elementname,
-            String elementvalue)
+    private void checkAnnotationEntry(final AnnotationEntry a, final String name, final String elementname,
+            final String elementvalue)
     {
         assertTrue("Expected AnnotationEntry to have name " + name
                 + " but it had name " + a.getAnnotationType(), a.getAnnotationType()
@@ -146,7 +146,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     }
 
     // helper methods
-    public void checkValue(AnnotationEntry a, String name, String tostring)
+    public void checkValue(final AnnotationEntry a, final String name, final String tostring)
     {
         for (int i = 0; i < a.getElementValuePairs().length; i++)
         {

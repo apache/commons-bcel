@@ -42,7 +42,7 @@ public class ExceptionHandlers{
     /**
      * Constructor. Creates a new ExceptionHandlers instance.
      */
-    public ExceptionHandlers(MethodGen mg){
+    public ExceptionHandlers(final MethodGen mg){
         exceptionhandlers = new HashMap<>();
         CodeExceptionGen[] cegs = mg.getExceptionHandlers();
         for (CodeExceptionGen ceg : cegs) {
@@ -63,7 +63,7 @@ public class ExceptionHandlers{
      * Returns all the ExceptionHandler instances representing exception
      * handlers that protect the instruction ih.
      */
-    public ExceptionHandler[] getExceptionHandlers(InstructionHandle ih){
+    public ExceptionHandler[] getExceptionHandlers(final InstructionHandle ih){
         Set<ExceptionHandler> hsSet = exceptionhandlers.get(ih);
         if (hsSet == null) {
             return new ExceptionHandler[0];

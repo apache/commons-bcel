@@ -33,7 +33,7 @@ package org.apache.commons.bcel6.verifier.exc;
 public class StaticCodeInstructionConstraintException extends StaticCodeConstraintException{
     private static final long serialVersionUID = 4987255974346614794L;
 
-    public StaticCodeInstructionConstraintException(String message){
+    public StaticCodeInstructionConstraintException(final String message){
         super(message);
     }
 }

@@ -42,14 +42,14 @@ public class LocalVariableInfo{
      * Adds a name of a local variable and a certain slot to our 'names'
      * (Hashtable) database.
      */
-    private void setName(int offset, String name){
+    private void setName(final int offset, final String name){
         names.put(Integer.toString(offset), name);
     }
     /**
      * Adds a type of a local variable and a certain slot to our 'types'
      * (Hashtable) database.
      */
-    private void setType(int offset, Type t){
+    private void setType(final int offset, final Type t){
         types.put(Integer.toString(offset), t);
     }
 
@@ -61,7 +61,7 @@ public class LocalVariableInfo{
      * May return 'null' if nothing is known about the type of this local
      * variable slot at the given bytecode offset.
      */
-    public Type getType(int offset){
+    public Type getType(final int offset){
         return types.get(Integer.toString(offset));
     }
     /**
@@ -72,7 +72,7 @@ public class LocalVariableInfo{
      * May return 'null' if nothing is known about the type of this local
      * variable slot at the given bytecode offset.
      */
-    public String getName(int offset){
+    public String getName(final int offset){
         return names.get(Integer.toString(offset));
     }
     /**
@@ -80,7 +80,7 @@ public class LocalVariableInfo{
      * @throws LocalVariableInfoInconsistentException if the new information conflicts
      *         with already gathered information.
      */
-    public void add(String name, int startpc, int length, Type t) throws LocalVariableInfoInconsistentException{
+    public void add(final String name, final int startpc, final int length, final Type t) throws LocalVariableInfoInconsistentException{
         for (int i=startpc; i<=startpc+length; i++){ // incl/incl-notation!
             add(i,name,t);
         }
@@ -91,7 +91,7 @@ public class LocalVariableInfo{
      * @throws LocalVariableInfoInconsistentException if the new information conflicts
      *         with already gathered information.
      */
-    private void add(int offset, String name, Type t) throws LocalVariableInfoInconsistentException{
+    private void add(final int offset, final String name, final Type t) throws LocalVariableInfoInconsistentException{
         if (getName(offset) != null){
             if (! getName(offset).equals(name)){
                 throw new LocalVariableInfoInconsistentException("At bytecode offset '"+offset+

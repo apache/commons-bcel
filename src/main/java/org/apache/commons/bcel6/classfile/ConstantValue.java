@@ -40,7 +40,7 @@ public final class ConstantValue extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
-    public ConstantValue(ConstantValue c) {
+    public ConstantValue(final ConstantValue c) {
         this(c.getNameIndex(), c.getLength(), c.getConstantValueIndex(), c.getConstantPool());
     }
 
@@ -53,7 +53,7 @@ public final class ConstantValue extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    ConstantValue(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    ConstantValue(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, input.readUnsignedShort(), constant_pool);
     }
@@ -65,8 +65,8 @@ public final class ConstantValue extends Attribute {
      * @param constantvalue_index Index in constant pool
      * @param constant_pool Array of constants
      */
-    public ConstantValue(int name_index, int length, int constantvalue_index,
-            ConstantPool constant_pool) {
+    public ConstantValue(final int name_index, final int length, final int constantvalue_index,
+            final ConstantPool constant_pool) {
         super(Const.ATTR_CONSTANT_VALUE, name_index, length, constant_pool);
         this.constantvalue_index = constantvalue_index;
     }
@@ -80,7 +80,7 @@ public final class ConstantValue extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantValue(this);
     }
 
@@ -92,7 +92,7 @@ public final class ConstantValue extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(constantvalue_index);
     }
@@ -109,7 +109,7 @@ public final class ConstantValue extends Attribute {
     /**
      * @param constantvalue_index the index info the constant pool of this constant value
      */
-    public final void setConstantValueIndex( int constantvalue_index ) {
+    public final void setConstantValueIndex( final int constantvalue_index ) {
         this.constantvalue_index = constantvalue_index;
     }
 
@@ -152,7 +152,7 @@ public final class ConstantValue extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         ConstantValue c = (ConstantValue) clone();
         c.setConstantPool(_constant_pool);
         return c;

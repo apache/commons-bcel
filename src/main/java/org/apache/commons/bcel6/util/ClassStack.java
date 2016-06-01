@@ -32,7 +32,7 @@ public class ClassStack {
     private final Stack<JavaClass> stack = new Stack<>();
 
 
-    public void push( JavaClass clazz ) {
+    public void push( final JavaClass clazz ) {
         stack.push(clazz);
     }
 

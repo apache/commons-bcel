@@ -44,14 +44,14 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
     /**
      * Constructs a new VerifierConstraintViolatedException with the specified error message.
      */
-    VerifierConstraintViolatedException(String message){
+    VerifierConstraintViolatedException(final String message){
         super(message); // Not that important
         detailMessage = message;
     }
     /**
      * Constructs a new VerifierConstraintViolationException with the specified error message and cause
      */
-    VerifierConstraintViolatedException(String message, Throwable initCause){
+    VerifierConstraintViolatedException(final String message, final Throwable initCause){
         super(message, initCause);
         detailMessage = message;
     }

@@ -91,7 +91,7 @@ public class Subroutines{
          * Refer to the Subroutine interface for documentation.
          */
         @Override
-        public boolean contains(InstructionHandle inst){
+        public boolean contains(final InstructionHandle inst){
             return instructions.contains(inst);
         }
 
@@ -182,7 +182,7 @@ public class Subroutines{
         /**
          * Adds a new JSR or JSR_W that has this subroutine as its target.
          */
-        public void addEnteringJsrInstruction(InstructionHandle jsrInst){
+        public void addEnteringJsrInstruction(final InstructionHandle jsrInst){
             if ( (jsrInst == null) || (! (jsrInst.getInstruction() instanceof JsrInstruction))){
                 throw new AssertionViolatedException("Expecting JsrInstruction InstructionHandle.");
             }
@@ -223,7 +223,7 @@ public class Subroutines{
          * All instructions must have been added before invoking setLeavingRET().
          * @see #setLeavingRET
          */
-        void addInstruction(InstructionHandle ih){
+        void addInstruction(final InstructionHandle ih){
             if (theRET != null){
                 throw new AssertionViolatedException("All instructions must have been added before invoking setLeavingRET().");
             }
@@ -252,7 +252,7 @@ public class Subroutines{
          * A recursive helper method for getRecursivelyAccessedLocalsIndices().
          * @see #getRecursivelyAccessedLocalsIndices()
          */
-        private void _getRecursivelyAccessedLocalsIndicesHelper(Set<Integer> s, Subroutine[] subs){
+        private void _getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> s, final Subroutine[] subs){
             for (Subroutine sub : subs) {
                 int[] lvs = sub.getAccessedLocalsIndices();
                 for (int lv : lvs) {
@@ -334,7 +334,7 @@ public class Subroutines{
          * This subroutine's RET operates on that same local variable
          * slot, of course.
          */
-        void setLocalVariable(int i){
+        void setLocalVariable(final int i){
             if (localVariable != UNSET){
                 throw new AssertionViolatedException("localVariable set twice.");
             }
@@ -379,7 +379,7 @@ public class Subroutines{
      * create the Subroutine objects of.
      * Assumes that JustIce strict checks are needed.
      */
-    public Subroutines(MethodGen mg){
+    public Subroutines(final MethodGen mg){
         this(mg, true);
     }
 
@@ -390,7 +390,7 @@ public class Subroutines{
      * @param enableJustIceCheck whether to enable additional JustIce checks
      * @since 6.0
      */
-    public Subroutines(MethodGen mg, boolean enableJustIceCheck){
+    public Subroutines(final MethodGen mg, final boolean enableJustIceCheck){
         InstructionHandle[] all = mg.getInstructionList().getInstructionHandles();
         CodeExceptionGen[] handlers = mg.getExceptionHandlers();
 
@@ -535,7 +535,7 @@ public class Subroutines{
      *
      * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
      */
-    private void noRecursiveCalls(Subroutine sub, Set<Integer> set){
+    private void noRecursiveCalls(final Subroutine sub, final Set<Integer> set){
         Subroutine[] subs = sub.subSubs();
 
         for (Subroutine sub2 : subs) {
@@ -564,7 +564,7 @@ public class Subroutines{
      *
      * @see #getTopLevel()
      */
-    public Subroutine getSubroutine(InstructionHandle leader){
+    public Subroutine getSubroutine(final InstructionHandle leader){
         Subroutine ret = subroutines.get(leader);
 
         if (ret == null){
@@ -590,7 +590,7 @@ public class Subroutines{
      * @see #getSubroutine(InstructionHandle)
      * @see #getTopLevel()
      */
-    public Subroutine subroutineOf(InstructionHandle any){
+    public Subroutine subroutineOf(final InstructionHandle any){
         for (Subroutine s : subroutines.values()) {
             if (s.contains(any)) {
                 return s;
@@ -620,7 +620,7 @@ System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead c
      * as defined here. A JsrInstruction has its physical successor as its successor
      * (opposed to its target) as defined here.
      */
-    private static InstructionHandle[] getSuccessors(InstructionHandle instruction){
+    private static InstructionHandle[] getSuccessors(final InstructionHandle instruction){
         final InstructionHandle[] empty = new InstructionHandle[0];
         final InstructionHandle[] single = new InstructionHandle[1];
 

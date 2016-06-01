@@ -36,7 +36,7 @@ public class ACONST_NULL extends Instruction implements PushInstruction, TypedIn
     /** @return Type.NULL
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return Type.NULL;
     }
 
@@ -50,7 +50,7 @@ public class ACONST_NULL extends Instruction implements PushInstruction, TypedIn
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);
         v.visitTypedInstruction(this);

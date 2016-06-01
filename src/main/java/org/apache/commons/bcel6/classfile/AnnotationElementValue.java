@@ -28,8 +28,8 @@ public class AnnotationElementValue extends ElementValue
         // For annotation element values, this is the annotation
         private final AnnotationEntry annotationEntry;
 
-        public AnnotationElementValue(int type, AnnotationEntry annotationEntry,
-                        ConstantPool cpool)
+        public AnnotationElementValue(final int type, final AnnotationEntry annotationEntry,
+                        final ConstantPool cpool)
         {
                 super(type, cpool);
                 if (type != ANNOTATION) {
@@ -40,7 +40,7 @@ public class AnnotationElementValue extends ElementValue
         }
 
         @Override
-        public void dump(DataOutputStream dos) throws IOException
+        public void dump(final DataOutputStream dos) throws IOException
         {
                 dos.writeByte(super.getType()); // u1 type of value (ANNOTATION == '@')
                 annotationEntry.dump(dos);

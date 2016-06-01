@@ -72,7 +72,7 @@ public final class ExceptionConst {
     };
 
     // helper method to merge exception class arrays
-    private static Class<?>[] mergeExceptions(Class<?>[] input, Class<?> ... extraClasses) {
+    private static Class<?>[] mergeExceptions(final Class<?>[] input, final Class<?> ... extraClasses) {
         int extraLen = extraClasses == null ? 0 : extraClasses.length;
         Class<?>[] excs = new Class<?>[input.length + extraLen];
         System.arraycopy(input, 0, excs, 0, input.length);
@@ -88,7 +88,7 @@ public final class ExceptionConst {
      * @param extraClasses additional classes, if any
      * @return the merged array
      */
-    public static Class<?>[] createExceptions(EXCS type, Class<?> ... extraClasses) {
+    public static Class<?>[] createExceptions(final EXCS type, final Class<?> ... extraClasses) {
         switch (type) {
         case EXCS_CLASS_AND_INTERFACE_RESOLUTION:
             return mergeExceptions(EXCS_CLASS_AND_INTERFACE_RESOLUTION, extraClasses);

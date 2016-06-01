@@ -45,23 +45,23 @@ public class EnclosingMethod extends Attribute {
     private int methodIndex;
 
     // Ctors - and code to read an attribute in.
-    EnclosingMethod(int nameIndex, int len, DataInput input, ConstantPool cpool) throws IOException {
+    EnclosingMethod(final int nameIndex, final int len, final DataInput input, final ConstantPool cpool) throws IOException {
         this(nameIndex, len, input.readUnsignedShort(), input.readUnsignedShort(), cpool);
     }
 
-    private EnclosingMethod(int nameIndex, int len, int classIdx,int methodIdx, ConstantPool cpool) {
+    private EnclosingMethod(final int nameIndex, final int len, final int classIdx,final int methodIdx, final ConstantPool cpool) {
         super(Const.ATTR_ENCLOSING_METHOD, nameIndex, len, cpool);
         classIndex  = classIdx;
         methodIndex = methodIdx;
     }
 
     @Override
-    public void accept(Visitor v) {
+    public void accept(final Visitor v) {
       v.visitEnclosingMethod(this);
     }
 
     @Override
-    public Attribute copy(ConstantPool constant_pool) {
+    public Attribute copy(final ConstantPool constant_pool) {
         return (Attribute) clone();
     }
 
@@ -69,8 +69,8 @@ public class EnclosingMethod extends Attribute {
     public final int getEnclosingClassIndex() { return classIndex; }  
     public final int getEnclosingMethodIndex(){ return methodIndex;}
 
-    public final void setEnclosingClassIndex(int idx) {classIndex = idx;}
-    public final void setEnclosingMethodIndex(int idx){methodIndex= idx;}
+    public final void setEnclosingClassIndex(final int idx) {classIndex = idx;}
+    public final void setEnclosingMethodIndex(final int idx){methodIndex= idx;}
 
     public final ConstantClass getEnclosingClass() {
         ConstantClass c = 
@@ -88,7 +88,7 @@ public class EnclosingMethod extends Attribute {
     }
 
     @Override
-    public final void dump(DataOutputStream file) throws IOException {
+    public final void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
         file.writeShort(classIndex);
         file.writeShort(methodIndex);

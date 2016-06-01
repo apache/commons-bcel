@@ -29,7 +29,7 @@ public class AttributeTestClassEM02
         }
     };
 
-    public static void main(String[] argv)
+    public static void main(final String[] argv)
     {
     }
 }

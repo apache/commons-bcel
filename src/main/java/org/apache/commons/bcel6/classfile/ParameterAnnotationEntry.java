@@ -41,7 +41,7 @@ public class ParameterAnnotationEntry implements Node {
      * @param input Input stream
      * @throws IOException
      */
-    ParameterAnnotationEntry(DataInput input, ConstantPool constant_pool) throws IOException {
+    ParameterAnnotationEntry(final DataInput input, final ConstantPool constant_pool) throws IOException {
         int annotation_table_length = input.readUnsignedShort();
         annotation_table = new AnnotationEntry[annotation_table_length];
         for (int i = 0; i < annotation_table_length; i++) {
@@ -59,7 +59,7 @@ public class ParameterAnnotationEntry implements Node {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitParameterAnnotationEntry(this);
     }
 
@@ -70,14 +70,14 @@ public class ParameterAnnotationEntry implements Node {
         return annotation_table;
     }
 
-    public void dump(DataOutputStream dos) throws IOException {
+    public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(annotation_table.length);
         for (AnnotationEntry entry : annotation_table) {
             entry.dump(dos);
         }
     }
 
-  public static ParameterAnnotationEntry[] createParameterAnnotationEntries(Attribute[] attrs) {
+  public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attrs) {
       // Find attributes that contain parameter annotation data
       List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
       for (Attribute attribute : attrs) {

@@ -41,7 +41,7 @@ public class FASTORE extends ArrayInstruction implements StackConsumer {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackConsumer(this);
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);

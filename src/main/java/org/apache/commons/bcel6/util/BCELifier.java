@@ -67,7 +67,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     /** @param clazz Java class to "decompile"
      * @param out where to output Java program
      */
-    public BCELifier(JavaClass clazz, OutputStream out) {
+    public BCELifier(final JavaClass clazz, final OutputStream out) {
         _clazz = clazz;
         _out = new PrintWriter(out);
         _cp = new ConstantPoolGen(_clazz.getConstantPool());
@@ -83,7 +83,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
 
 
     @Override
-    public void visitJavaClass( JavaClass clazz ) {
+    public void visitJavaClass( final JavaClass clazz ) {
         String class_name = clazz.getClassName();
         String super_name = clazz.getSuperclassName();
         String package_name = clazz.getPackageName();
@@ -163,7 +163,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
 
 
     @Override
-    public void visitField( Field field ) {
+    public void visitField( final Field field ) {
         _out.println();
         _out.println("    field = new FieldGen(" + printFlags(field.getAccessFlags()) + ", "
                 + printType(field.getSignature()) + ", \"" + field.getName() + "\", _cp);");
@@ -177,7 +177,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
 
 
     @Override
-    public void visitMethod( Method method ) {
+    public void visitMethod( final Method method ) {
         MethodGen mg = new MethodGen(method, _clazz.getClassName(), _cp);
         _out.println("    InstructionList il = new InstructionList();");
         _out.println("    MethodGen method = new MethodGen("
@@ -196,7 +196,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     }
 
 
-    static String printFlags( int flags ) {
+    static String printFlags( final int flags ) {
         return printFlags(flags, FLAGS.UNKNOWN);
     }
 
@@ -207,7 +207,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
      * @return the formatted string
      * @since 6.0 made public
      */
-    public static String printFlags( int flags, FLAGS location ) {
+    public static String printFlags( final int flags, final FLAGS location ) {
         if (flags == 0) {
             return "0";
         }
@@ -235,7 +235,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     }
 
 
-    static String printArgumentTypes( Type[] arg_types ) {
+    static String printArgumentTypes( final Type[] arg_types ) {
         if (arg_types.length == 0) {
             return "Type.NO_ARGS";
         }
@@ -250,12 +250,12 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
     }
 
 
-    static String printType( Type type ) {
+    static String printType( final Type type ) {
         return printType(type.getSignature());
     }
 
 
-    static String printType( String signature ) {
+    static String printType( final String signature ) {
         Type type = Type.getType(signature);
         byte t = type.getType();
         if (t <= Const.T_VOID) {
@@ -278,7 +278,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
 
     /** Default main method
      */
-    public static void main( String[] argv ) throws Exception {
+    public static void main( final String[] argv ) throws Exception {
         if (argv.length != 1) {
             System.out.println("Usage: BCELifier classname");
             System.out.println("\tThe class must exist on the classpath");
@@ -291,7 +291,7 @@ public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
 
 
     // Needs to be accessible from unit test code
-    static JavaClass getJavaClass(String name) throws ClassNotFoundException, IOException {
+    static JavaClass getJavaClass(final String name) throws ClassNotFoundException, IOException {
         JavaClass java_class;
         if ((java_class = Repository.lookupClass(name)) == null) {
             java_class = new ClassParser(name).parse(); // May throw IOException

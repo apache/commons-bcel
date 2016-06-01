@@ -39,7 +39,7 @@ public class DUP_X1 extends StackInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackInstruction(this);
         v.visitDUP_X1(this);
     }

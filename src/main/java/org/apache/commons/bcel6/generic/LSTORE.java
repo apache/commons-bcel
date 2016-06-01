@@ -34,7 +34,7 @@ public class LSTORE extends StoreInstruction {
     }
 
 
-    public LSTORE(int n) {
+    public LSTORE(final int n) {
         super(org.apache.commons.bcel6.Const.LSTORE, org.apache.commons.bcel6.Const.LSTORE_0, n);
     }
 
@@ -48,7 +48,7 @@ public class LSTORE extends StoreInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         super.accept(v);
         v.visitLSTORE(this);
     }

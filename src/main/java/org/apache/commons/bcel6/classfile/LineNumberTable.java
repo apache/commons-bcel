@@ -42,7 +42,7 @@ public final class LineNumberTable extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
      */
-    public LineNumberTable(LineNumberTable c) {
+    public LineNumberTable(final LineNumberTable c) {
         this(c.getNameIndex(), c.getLength(), c.getLineNumberTable(), c.getConstantPool());
     }
 
@@ -53,8 +53,8 @@ public final class LineNumberTable extends Attribute {
      * @param line_number_table Table of line/numbers pairs
      * @param constant_pool Array of constants
      */
-    public LineNumberTable(int name_index, int length, LineNumber[] line_number_table,
-            ConstantPool constant_pool) {
+    public LineNumberTable(final int name_index, final int length, final LineNumber[] line_number_table,
+            final ConstantPool constant_pool) {
         super(Const.ATTR_LINE_NUMBER_TABLE, name_index, length, constant_pool);
         this.line_number_table = line_number_table;
     }
@@ -68,7 +68,7 @@ public final class LineNumberTable extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOEXception if an I/O Exception occurs in readUnsignedShort
      */
-    LineNumberTable(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    LineNumberTable(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (LineNumber[]) null, constant_pool);
         int line_number_table_length = input.readUnsignedShort();
@@ -87,7 +87,7 @@ public final class LineNumberTable extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitLineNumberTable(this);
     }
 
@@ -99,7 +99,7 @@ public final class LineNumberTable extends Attribute {
      * @throws IOEXception if an I/O Exception occurs in writeShort
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(line_number_table.length);
         for (LineNumber lineNumber : line_number_table) {
@@ -119,7 +119,7 @@ public final class LineNumberTable extends Attribute {
     /**
      * @param line_number_table the line number entries for this table
      */
-    public final void setLineNumberTable( LineNumber[] line_number_table ) {
+    public final void setLineNumberTable( final LineNumber[] line_number_table ) {
         this.line_number_table = line_number_table;
     }
 
@@ -154,7 +154,7 @@ public final class LineNumberTable extends Attribute {
      * @param pos byte code offset
      * @return corresponding line in source code
      */
-    public int getSourceLine( int pos ) {
+    public int getSourceLine( final int pos ) {
         int l = 0;
         int r = line_number_table.length - 1;
         if (r < 0) {
@@ -197,7 +197,7 @@ public final class LineNumberTable extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         // TODO could use the lower level constructor and thereby allow 
         // line_number_table to be made final
         LineNumberTable c = (LineNumberTable) clone();

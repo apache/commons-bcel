@@ -30,7 +30,7 @@ public abstract class LoadInstruction extends LocalVariableInstruction implement
      * Instruction.readInstruction(). Not to be used otherwise.
      * tag and length are defined in readInstruction and initFromFile, respectively.
      */
-    LoadInstruction(short canon_tag, short c_tag) {
+    LoadInstruction(final short canon_tag, final short c_tag) {
         super(canon_tag, c_tag);
     }
 
@@ -40,7 +40,7 @@ public abstract class LoadInstruction extends LocalVariableInstruction implement
      * @param c_tag Instruction number for compact version, ALOAD_0, e.g.
      * @param n local variable index (unsigned short)
      */
-    protected LoadInstruction(short opcode, short c_tag, int n) {
+    protected LoadInstruction(final short opcode, final short c_tag, final int n) {
         super(opcode, c_tag, n);
     }
 
@@ -54,7 +54,7 @@ public abstract class LoadInstruction extends LocalVariableInstruction implement
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);
         v.visitTypedInstruction(this);

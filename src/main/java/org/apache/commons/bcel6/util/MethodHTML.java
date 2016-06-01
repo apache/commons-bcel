@@ -44,8 +44,8 @@ final class MethodHTML {
     private final AttributeHTML attribute_html;
 
 
-    MethodHTML(String dir, String class_name, Method[] methods, Field[] fields,
-            ConstantHTML constant_html, AttributeHTML attribute_html) throws IOException {
+    MethodHTML(final String dir, final String class_name, final Method[] methods, final Field[] fields,
+            final ConstantHTML constant_html, final AttributeHTML attribute_html) throws IOException {
         this.class_name = class_name;
         this.attribute_html = attribute_html;
         this.constant_html = constant_html;
@@ -74,7 +74,7 @@ final class MethodHTML {
      * @param field field to print
      * @exception java.io.IOException
      */
-    private void writeField( Field field ) throws IOException {
+    private void writeField( final Field field ) throws IOException {
         String type = Utility.signatureToString(field.getSignature());
         String name = field.getName();
         String access = Utility.accessToString(field.getAccessFlags());
@@ -101,7 +101,7 @@ final class MethodHTML {
     }
 
 
-    private void writeMethod( Method method, int method_number ) {
+    private void writeMethod( final Method method, final int method_number ) {
         // Get raw signature
         String signature = method.getSignature();
         // Get array of strings containing the argument types 

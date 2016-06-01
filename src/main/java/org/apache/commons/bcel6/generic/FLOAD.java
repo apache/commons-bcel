@@ -37,7 +37,7 @@ public class FLOAD extends LoadInstruction {
     /** Load float from local variable
      * @param n index of local variable
      */
-    public FLOAD(int n) {
+    public FLOAD(final int n) {
         super(org.apache.commons.bcel6.Const.FLOAD, org.apache.commons.bcel6.Const.FLOAD_0, n);
     }
 
@@ -51,7 +51,7 @@ public class FLOAD extends LoadInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         super.accept(v);
         v.visitFLOAD(this);
     }

@@ -48,7 +48,7 @@ public final class StackMap extends Attribute {
      * @param map Table of stack map entries
      * @param constant_pool Array of constants
      */
-    public StackMap(int name_index, int length, StackMapEntry[] map, ConstantPool constant_pool) {
+    public StackMap(final int name_index, final int length, final StackMapEntry[] map, final ConstantPool constant_pool) {
         super(Const.ATTR_STACK_MAP, name_index, length, constant_pool);
         this.map = map;
     }
@@ -63,7 +63,7 @@ public final class StackMap extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    StackMap(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
+    StackMap(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, (StackMapEntry[]) null, constant_pool);
         int map_length = input.readUnsignedShort();
         map = new StackMapEntry[map_length];
@@ -80,7 +80,7 @@ public final class StackMap extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(map.length);
         for (StackMapEntry entry : map) {
@@ -100,7 +100,7 @@ public final class StackMap extends Attribute {
     /**
      * @param map Array of stack map entries
      */
-    public final void setStackMap( StackMapEntry[] map ) {
+    public final void setStackMap( final StackMapEntry[] map ) {
         this.map = map;
         int len = 2; // Length of 'number_of_entries' field prior to the array of stack maps
         for (int i = 0; i < map.length; i++) {
@@ -131,7 +131,7 @@ public final class StackMap extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         StackMap c = (StackMap) clone();
         c.map = new StackMapEntry[map.length];
         for (int i = 0; i < map.length; i++) {
@@ -150,7 +150,7 @@ public final class StackMap extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackMap(this);
     }
 

@@ -36,7 +36,7 @@ public abstract class Constant implements Cloneable, Node {
     private static BCELComparator _cmp = new BCELComparator() {
 
         @Override
-        public boolean equals( Object o1, Object o2 ) {
+        public boolean equals( final Object o1, final Object o2 ) {
             Constant THIS = (Constant) o1;
             Constant THAT = (Constant) o2;
             return THIS.toString().equals(THAT.toString());
@@ -44,7 +44,7 @@ public abstract class Constant implements Cloneable, Node {
 
 
         @Override
-        public int hashCode( Object o ) {
+        public int hashCode( final Object o ) {
             Constant THIS = (Constant) o;
             return THIS.toString().hashCode();
         }
@@ -64,7 +64,7 @@ public abstract class Constant implements Cloneable, Node {
     protected byte tag; // TODO should be private & final
 
 
-    Constant(byte tag) {
+    Constant(final byte tag) {
         this.tag = tag;
     }
 
@@ -131,7 +131,7 @@ public abstract class Constant implements Cloneable, Node {
      * @return Constant object
      * @since 6.0 made public
      */
-    public static Constant readConstant( DataInput input ) throws IOException,
+    public static Constant readConstant( final DataInput input ) throws IOException,
             ClassFormatException {
         byte b = input.readByte(); // Read tag byte
         switch (b) {
@@ -180,7 +180,7 @@ public abstract class Constant implements Cloneable, Node {
     /**
      * @param comparator Comparison strategy object
      */
-    public static void setComparator( BCELComparator comparator ) {
+    public static void setComparator( final BCELComparator comparator ) {
         _cmp = comparator;
     }
 
@@ -193,7 +193,7 @@ public abstract class Constant implements Cloneable, Node {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object obj ) {
+    public boolean equals( final Object obj ) {
         return _cmp.equals(this, obj);
     }
 

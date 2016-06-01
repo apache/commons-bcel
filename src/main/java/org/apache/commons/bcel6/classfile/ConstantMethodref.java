@@ -32,7 +32,7 @@ public final class ConstantMethodref extends ConstantCP {
     /**
      * Initialize from another object.
      */
-    public ConstantMethodref(ConstantMethodref c) {
+    public ConstantMethodref(final ConstantMethodref c) {
         super(Const.CONSTANT_Methodref, c.getClassIndex(), c.getNameAndTypeIndex());
     }
 
@@ -43,7 +43,7 @@ public final class ConstantMethodref extends ConstantCP {
      * @param input input stream
      * @throws IOException
      */
-    ConstantMethodref(DataInput input) throws IOException {
+    ConstantMethodref(final DataInput input) throws IOException {
         super(Const.CONSTANT_Methodref, input);
     }
 
@@ -52,7 +52,7 @@ public final class ConstantMethodref extends ConstantCP {
      * @param class_index Reference to the class containing the method
      * @param name_and_type_index and the method signature
      */
-    public ConstantMethodref(int class_index, int name_and_type_index) {
+    public ConstantMethodref(final int class_index, final int name_and_type_index) {
         super(Const.CONSTANT_Methodref, class_index, name_and_type_index);
     }
 
@@ -65,7 +65,7 @@ public final class ConstantMethodref extends ConstantCP {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitConstantMethodref(this);
     }
 }

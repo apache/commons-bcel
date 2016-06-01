@@ -47,7 +47,7 @@ public final class StackMapEntry implements Node, Cloneable
      * @param input Input stream
      * @throws IOException
      */
-    StackMapEntry(DataInput input, ConstantPool constant_pool) throws IOException {
+    StackMapEntry(final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(input.readByte() & 0xFF, -1, null, null, constant_pool);
 
         if (frame_type >= Const.SAME_FRAME && frame_type <= Const.SAME_FRAME_MAX) {
@@ -102,9 +102,9 @@ public final class StackMapEntry implements Node, Cloneable
      * @deprecated Since 6.0, use {@link #StackMapEntry(int, int, StackMapType[], StackMapType[], ConstantPool)}
      * instead
      */
-    public StackMapEntry(int byte_code_offset, int number_of_locals,
-            StackMapType[] types_of_locals, int number_of_stack_items,
-            StackMapType[] types_of_stack_items, ConstantPool constant_pool) {
+    public StackMapEntry(final int byte_code_offset, final int number_of_locals,
+            final StackMapType[] types_of_locals, final int number_of_stack_items,
+            final StackMapType[] types_of_stack_items, final ConstantPool constant_pool) {
         this.byte_code_offset = byte_code_offset;
         this.types_of_locals = types_of_locals != null ? types_of_locals : new StackMapType[0];
         this.types_of_stack_items = types_of_stack_items != null ? types_of_stack_items : new StackMapType[0];
@@ -120,9 +120,9 @@ public final class StackMapEntry implements Node, Cloneable
      * @param types_of_stack_items array ot {@link StackMapType}s of stack items
      * @param constant_pool the constant pool
      */
-    public StackMapEntry(int tag, int byte_code_offset,
-            StackMapType[] types_of_locals,
-            StackMapType[] types_of_stack_items, ConstantPool constant_pool) {
+    public StackMapEntry(final int tag, final int byte_code_offset,
+            final StackMapType[] types_of_locals,
+            final StackMapType[] types_of_stack_items, final ConstantPool constant_pool) {
         this.frame_type = tag;
         this.byte_code_offset = byte_code_offset;
         this.types_of_locals = types_of_locals != null ? types_of_locals : new StackMapType[0];
@@ -137,7 +137,7 @@ public final class StackMapEntry implements Node, Cloneable
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.write(frame_type);
         if (frame_type >= Const.SAME_FRAME && frame_type <= Const.SAME_FRAME_MAX) {
             // nothing to be done
@@ -261,7 +261,7 @@ public final class StackMapEntry implements Node, Cloneable
     }
 
 
-    public void setFrameType( int f ) {
+    public void setFrameType( final int f ) {
         if (f >= Const.SAME_FRAME && f <= Const.SAME_FRAME_MAX) {
             byte_code_offset = f - Const.SAME_FRAME;
         } else if (f >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME && 
@@ -284,7 +284,7 @@ public final class StackMapEntry implements Node, Cloneable
     }
 
 
-    public void setByteCodeOffset( int new_offset ) {
+    public void setByteCodeOffset( final int new_offset ) {
         if (new_offset < 0 || new_offset > 32767) {
             throw new RuntimeException("Invalid StackMap offset: " + new_offset);
         }
@@ -324,7 +324,7 @@ public final class StackMapEntry implements Node, Cloneable
      *
      * @param int offset delta
      */
-    public void updateByteCodeOffset(int delta) {
+    public void updateByteCodeOffset(final int delta) {
         setByteCodeOffset(byte_code_offset + delta);
     }
 
@@ -335,7 +335,7 @@ public final class StackMapEntry implements Node, Cloneable
 
 
     @java.lang.Deprecated
-    public void setNumberOfLocals( int n ) { // TODO unused
+    public void setNumberOfLocals( final int n ) { // TODO unused
     }
 
 
@@ -344,7 +344,7 @@ public final class StackMapEntry implements Node, Cloneable
     }
 
 
-    public void setTypesOfLocals( StackMapType[] types ) {
+    public void setTypesOfLocals( final StackMapType[] types ) {
         types_of_locals = types != null ? types : new StackMapType[0];
     }
 
@@ -355,7 +355,7 @@ public final class StackMapEntry implements Node, Cloneable
 
 
     @java.lang.Deprecated
-    public void setNumberOfStackItems( int n ) { // TODO unused
+    public void setNumberOfStackItems( final int n ) { // TODO unused
     }
 
 
@@ -364,7 +364,7 @@ public final class StackMapEntry implements Node, Cloneable
     }
 
 
-    public void setTypesOfStackItems( StackMapType[] types ) {
+    public void setTypesOfStackItems( final StackMapType[] types ) {
         types_of_stack_items = types != null ? types : new StackMapType[0];
     }
 
@@ -405,7 +405,7 @@ public final class StackMapEntry implements Node, Cloneable
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackMapEntry(this);
     }
 
@@ -421,7 +421,7 @@ public final class StackMapEntry implements Node, Cloneable
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( ConstantPool constant_pool ) {
+    public final void setConstantPool( final ConstantPool constant_pool ) {
         this.constant_pool = constant_pool;
     }
 }

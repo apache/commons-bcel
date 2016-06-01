@@ -35,14 +35,14 @@ public abstract class StackInstruction extends Instruction {
     /**
      * @param opcode instruction opcode
      */
-    protected StackInstruction(short opcode) {
+    protected StackInstruction(final short opcode) {
         super(opcode, (short) 1);
     }
 
 
     /** @return Type.UNKNOWN
      */
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return Type.UNKNOWN;
     }
 }

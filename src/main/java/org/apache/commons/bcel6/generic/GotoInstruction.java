@@ -24,7 +24,7 @@ package org.apache.commons.bcel6.generic;
  */
 public abstract class GotoInstruction extends BranchInstruction implements UnconditionalBranch {
 
-    GotoInstruction(short opcode, InstructionHandle target) {
+    GotoInstruction(final short opcode, final InstructionHandle target) {
         super(opcode, target);
     }
 

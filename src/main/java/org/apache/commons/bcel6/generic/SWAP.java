@@ -39,7 +39,7 @@ public class SWAP extends StackInstruction implements StackConsumer, StackProduc
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackConsumer(this);
         v.visitStackProducer(this);
         v.visitStackInstruction(this);

@@ -53,8 +53,8 @@ final class AttributeHTML {
     private final ConstantPool constant_pool;
 
 
-    AttributeHTML(String dir, String class_name, ConstantPool constant_pool,
-            ConstantHTML constant_html) throws IOException {
+    AttributeHTML(final String dir, final String class_name, final ConstantPool constant_pool,
+            final ConstantHTML constant_html) throws IOException {
         this.class_name = class_name;
         this.constant_pool = constant_pool;
         this.constant_html = constant_html;
@@ -63,7 +63,7 @@ final class AttributeHTML {
     }
 
 
-    private String codeLink( int link, int method_number ) {
+    private String codeLink( final int link, final int method_number ) {
         return "<A HREF=\"" + class_name + "_code.html#code" + method_number + "@" + link
                 + "\" TARGET=Code>" + link + "</A>";
     }
@@ -75,12 +75,12 @@ final class AttributeHTML {
     }
 
 
-    final void writeAttribute( Attribute attribute, String anchor ) {
+    final void writeAttribute( final Attribute attribute, final String anchor ) {
         writeAttribute(attribute, anchor, 0);
     }
 
 
-    final void writeAttribute( Attribute attribute, String anchor, int method_number ) {
+    final void writeAttribute( final Attribute attribute, final String anchor, final int method_number ) {
         byte tag = attribute.getTag();
         int index;
         if (tag == Const.ATTR_UNKNOWN) {

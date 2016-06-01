@@ -54,7 +54,7 @@ public abstract class Instruction implements Cloneable {
     }
 
 
-    public Instruction(short opcode, short length) {
+    public Instruction(final short opcode, final short length) {
         this.length = length;
         this.opcode = opcode;
     }
@@ -64,7 +64,7 @@ public abstract class Instruction implements Cloneable {
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(opcode); // Common for all instructions
     }
 
@@ -85,7 +85,7 @@ public abstract class Instruction implements Cloneable {
      * @param verbose long/short format switch
      * @return mnemonic for instruction
      */
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         if (verbose) {
             return getName() + "[" + opcode + "](" + length + ")";
         }
@@ -105,7 +105,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * @return mnemonic for instruction with sumbolic references resolved
      */
-    public String toString( ConstantPool cp ) {
+    public String toString( final ConstantPool cp ) {
         return toString(false);
     }
 
@@ -141,7 +141,7 @@ public abstract class Instruction implements Cloneable {
      * @param wide "wide" instruction flag
      * @throws IOException may be thrown if the implementation needs to read data from the file
      */
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
     }
 
 
@@ -156,7 +156,7 @@ public abstract class Instruction implements Cloneable {
      * @see InstructionConst#getInstruction(int)
      */
     // @since 6.0 no longer final
-    public static Instruction readInstruction( ByteSequence bytes ) throws IOException {
+    public static Instruction readInstruction( final ByteSequence bytes ) throws IOException {
         boolean wide = false;
         short opcode = (short) bytes.readUnsignedByte();
         Instruction obj = null;
@@ -482,7 +482,7 @@ public abstract class Instruction implements Cloneable {
      *  @return Number of words consumed from stack by this instruction,
      * or Constants.UNPREDICTABLE, if this can not be computed statically
      */
-    public int consumeStack( ConstantPoolGen cpg ) {
+    public int consumeStack( final ConstantPoolGen cpg ) {
         return Const.getConsumeStack(opcode);
     }
 
@@ -494,7 +494,7 @@ public abstract class Instruction implements Cloneable {
      * @return Number of words produced onto stack by this instruction,
      * or Constants.UNPREDICTABLE, if this can not be computed statically
      */
-    public int produceStack( ConstantPoolGen cpg ) {
+    public int produceStack( final ConstantPoolGen cpg ) {
         return Const.getProduceStack(opcode);
     }
 
@@ -518,7 +518,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Needed in readInstruction and subclasses in this package
      */
-    final void setOpcode( short opcode ) {
+    final void setOpcode( final short opcode ) {
         this.opcode = opcode;
     }
 
@@ -527,7 +527,7 @@ public abstract class Instruction implements Cloneable {
      * Needed in readInstruction and subclasses in this package
      * @since 6.0
      */
-    final void setLength( int length ) {
+    final void setLength( final int length ) {
         this.length = (short) length; // TODO check range?
     }
 
@@ -565,7 +565,7 @@ public abstract class Instruction implements Cloneable {
       * @deprecated use the built in comparator, or wrap this class in another object that implements these methods
      */
     @Deprecated
-    public static void setComparator( InstructionComparator c ) {
+    public static void setComparator( final InstructionComparator c ) {
         cmp = c;
     }
 
@@ -574,7 +574,7 @@ public abstract class Instruction implements Cloneable {
      * @return true if that is an Instruction and has the same opcode
      */
     @Override
-    public boolean equals( Object that ) {
+    public boolean equals( final Object that ) {
         return (that instanceof Instruction) ? cmp.equals(this, (Instruction) that) : false;
     }
 
@@ -593,7 +593,7 @@ public abstract class Instruction implements Cloneable {
      * @return true if the value is in range
      * @since 6.0
      */
-    public static boolean isValidByte(int value) {
+    public static boolean isValidByte(final int value) {
         return value >= Byte.MIN_VALUE && value <= Byte.MAX_VALUE;
     }
 
@@ -603,7 +603,7 @@ public abstract class Instruction implements Cloneable {
      * @return true if the value is in range
      * @since 6.0
      */
-    public static boolean isValidShort(int value) {
+    public static boolean isValidShort(final int value) {
         return value >= Short.MIN_VALUE && value <= Short.MAX_VALUE;
     }
 }

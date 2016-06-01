@@ -44,13 +44,13 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     }
 
 
-    public NEWARRAY(byte type) {
+    public NEWARRAY(final byte type) {
         super(org.apache.commons.bcel6.Const.NEWARRAY, (short) 2);
         this.type = type;
     }
 
 
-    public NEWARRAY(BasicType type) {
+    public NEWARRAY(final BasicType type) {
         this(type.getType());
     }
 
@@ -60,7 +60,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(super.getOpcode());
         out.writeByte(type);
     }
@@ -86,7 +86,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      * @return mnemonic for instruction
      */
     @Override
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         return super.toString(verbose) + " " + org.apache.commons.bcel6.Const.getTypeName(type);
     }
 
@@ -95,7 +95,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         type = bytes.readByte();
         super.setLength(2);
     }
@@ -118,7 +118,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitAllocationInstruction(this);
         v.visitExceptionThrower(this);
         v.visitStackProducer(this);

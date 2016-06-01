@@ -38,7 +38,7 @@ public abstract class NativeVerifier {
     /**
      * Works only on the first argument.
      */
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
         if (args.length != 1) {
             System.out.println("Verifier front-end: need exactly one argument.");
             System.exit(1);

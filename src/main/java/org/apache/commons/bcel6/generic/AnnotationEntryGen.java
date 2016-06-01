@@ -55,8 +55,8 @@ public class AnnotationEntryGen {
      * entries across. We need to copy the type and the element name value pairs
      * and the visibility.
      */
-    public AnnotationEntryGen(AnnotationEntry a, ConstantPoolGen cpool,
-                              boolean copyPoolEntries) {
+    public AnnotationEntryGen(final AnnotationEntry a, final ConstantPoolGen cpool,
+                              final boolean copyPoolEntries) {
         this.cpool = cpool;
         if (copyPoolEntries) {
             typeIndex = cpool.addUtf8(a.getAnnotationType());
@@ -67,8 +67,8 @@ public class AnnotationEntryGen {
         evs = copyValues(a.getElementValuePairs(), cpool, copyPoolEntries);
     }
 
-    private List<ElementValuePairGen> copyValues(ElementValuePair[] in, ConstantPoolGen cpool,
-                                                 boolean copyPoolEntries) {
+    private List<ElementValuePairGen> copyValues(final ElementValuePair[] in, final ConstantPoolGen cpool,
+                                                 final boolean copyPoolEntries) {
         List<ElementValuePairGen> out = new ArrayList<>();
         for (ElementValuePair nvp : in) {
             out.add(new ElementValuePairGen(nvp, cpool, copyPoolEntries));
@@ -76,7 +76,7 @@ public class AnnotationEntryGen {
         return out;
     }
 
-    private AnnotationEntryGen(ConstantPoolGen cpool) {
+    private AnnotationEntryGen(final ConstantPoolGen cpool) {
         this.cpool = cpool;
     }
 
@@ -92,17 +92,17 @@ public class AnnotationEntryGen {
         return a;
     }
 
-    public AnnotationEntryGen(ObjectType type,
-                              List<ElementValuePairGen> elements, boolean vis,
-                              ConstantPoolGen cpool) {
+    public AnnotationEntryGen(final ObjectType type,
+                              final List<ElementValuePairGen> elements, final boolean vis,
+                              final ConstantPoolGen cpool) {
         this.cpool = cpool;
         this.typeIndex = cpool.addUtf8(type.getSignature());
         evs = elements;
         isRuntimeVisible = vis;
     }
 
-    public static AnnotationEntryGen read(DataInput dis,
-                                          ConstantPoolGen cpool, boolean b) throws IOException {
+    public static AnnotationEntryGen read(final DataInput dis,
+                                          final ConstantPoolGen cpool, final boolean b) throws IOException {
         AnnotationEntryGen a = new AnnotationEntryGen(cpool);
         a.typeIndex = dis.readUnsignedShort();
         int elemValuePairCount = dis.readUnsignedShort();
@@ -115,7 +115,7 @@ public class AnnotationEntryGen {
         return a;
     }
 
-    public void dump(DataOutputStream dos) throws IOException {
+    public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(typeIndex); // u2 index of type name in cpool
         dos.writeShort(evs.size()); // u2 element_value pair count
         for (ElementValuePairGen envp : evs) {
@@ -123,7 +123,7 @@ public class AnnotationEntryGen {
         }
     }
 
-    public void addElementNameValuePair(ElementValuePairGen evp) {
+    public void addElementNameValuePair(final ElementValuePairGen evp) {
         if (evs == null) {
             evs = new ArrayList<>();
         }
@@ -180,7 +180,7 @@ public class AnnotationEntryGen {
         return s.toString();
     }
 
-    private void isRuntimeVisible(boolean b) {
+    private void isRuntimeVisible(final boolean b) {
         isRuntimeVisible = b;
     }
 
@@ -196,7 +196,7 @@ public class AnnotationEntryGen {
      * @param cp  The constant pool gen where we can create the necessary name refs
      * @param annotationEntryGens An array of AnnotationGen objects
      */
-    static Attribute[] getAnnotationAttributes(ConstantPoolGen cp, AnnotationEntryGen[] annotationEntryGens) {
+    static Attribute[] getAnnotationAttributes(final ConstantPoolGen cp, final AnnotationEntryGen[] annotationEntryGens) {
         if (annotationEntryGens.length == 0) {
             return new Attribute[0];
         }
@@ -274,8 +274,8 @@ public class AnnotationEntryGen {
      * - RuntimeInvisibleParameterAnnotations
      */
     static Attribute[] getParameterAnnotationAttributes(
-            ConstantPoolGen cp,
-            List<AnnotationEntryGen>[] /*Array of lists, array size depends on #params */vec) {
+            final ConstantPoolGen cp,
+            final List<AnnotationEntryGen>[] /*Array of lists, array size depends on #params */vec) {
         int[] visCount = new int[vec.length];
         int totalVisCount = 0;
         int[] invisCount = new int[vec.length];

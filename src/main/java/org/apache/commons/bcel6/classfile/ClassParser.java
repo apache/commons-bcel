@@ -67,7 +67,7 @@ public final class ClassParser {
      * @param inputStream Input stream
      * @param file_name File name
      */
-    public ClassParser(InputStream inputStream, String file_name) {
+    public ClassParser(final InputStream inputStream, final String file_name) {
         this.file_name = file_name;
         fileOwned = false;
         String clazz = inputStream.getClass().getName(); // Not a very clean solution ...
@@ -84,7 +84,7 @@ public final class ClassParser {
      *
      * @param file_name file name
      */
-    public ClassParser(String file_name) {
+    public ClassParser(final String file_name) {
         is_zip = false;
         this.file_name = file_name;
         fileOwned = true;
@@ -96,7 +96,7 @@ public final class ClassParser {
      * @param zip_file zip file name
      * @param file_name file name
      */
-    public ClassParser(String zip_file, String file_name) {
+    public ClassParser(final String zip_file, final String file_name) {
         is_zip = true;
         fileOwned = true;
         this.zip_file = zip_file;

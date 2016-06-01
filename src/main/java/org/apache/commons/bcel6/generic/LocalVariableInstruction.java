@@ -51,7 +51,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * Instruction.readInstruction(). Not to be used otherwise.
      * tag and length are defined in readInstruction and initFromFile, respectively.
      */
-    LocalVariableInstruction(short canon_tag, short c_tag) {
+    LocalVariableInstruction(final short canon_tag, final short c_tag) {
         super();
         this.canon_tag = canon_tag;
         this.c_tag = c_tag;
@@ -71,7 +71,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * @param c_tag Instruction number for compact version, ALOAD_0, e.g.
      * @param n local variable index (unsigned short)
      */
-    protected LocalVariableInstruction(short opcode, short c_tag, int n) {
+    protected LocalVariableInstruction(final short opcode, final short c_tag, final int n) {
         super(opcode, (short) 2);
         this.c_tag = c_tag;
         canon_tag = opcode;
@@ -84,7 +84,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         if (wide()) {
             out.writeByte(Const.WIDE);
         }
@@ -109,7 +109,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * @return mnemonic for instruction
      */
     @Override
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         final short _opcode = super.getOpcode();
         if (((_opcode >= Const.ILOAD_0) && (_opcode <= Const.ALOAD_3))
          || ((_opcode >= Const.ISTORE_0) && (_opcode <= Const.ASTORE_3))) {
@@ -126,7 +126,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * </pre>
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         if (wide) {
             n = bytes.readUnsignedShort();
             super.setLength(4);
@@ -163,7 +163,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * @see #setIndexOnly(int)
      */
     @Override
-    public void setIndex( int n ) { // TODO could be package-protected?
+    public void setIndex( final int n ) { // TODO could be package-protected?
         if ((n < 0) || (n > Const.MAX_SHORT)) {
             throw new ClassGenException("Illegal value: " + n);
         }
@@ -199,7 +199,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * @return type associated with the instruction
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         switch (canon_tag) {
             case Const.ILOAD:
             case Const.ISTORE:
@@ -226,7 +226,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * @since 6.0
      * @see #setIndex(int)
      */
-    final void setIndexOnly(int n) {
+    final void setIndexOnly(final int n) {
         this.n = n;
     }
 }

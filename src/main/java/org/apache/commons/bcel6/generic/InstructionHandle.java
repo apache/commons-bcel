@@ -77,7 +77,7 @@ public class InstructionHandle {
      * Replace current instruction contained in this handle.
      * Old instruction is disposed using Instruction.dispose().
      */
-    public void setInstruction( Instruction i ) { // Overridden in BranchHandle TODO could be package-protected?
+    public void setInstruction( final Instruction i ) { // Overridden in BranchHandle TODO could be package-protected?
         if (i == null) {
             throw new ClassGenException("Assigning null to handle");
         }
@@ -96,14 +96,14 @@ public class InstructionHandle {
      * anything. Meant to be used by a debugger, implementing
      * breakpoints. Current instruction is returned.
      */
-    public Instruction swapInstruction( Instruction i ) {
+    public Instruction swapInstruction( final Instruction i ) {
         Instruction oldInstruction = instruction;
         instruction = i;
         return oldInstruction;
     }
 
 
-    /*private*/protected InstructionHandle(Instruction i) {
+    /*private*/protected InstructionHandle(final Instruction i) {
         setInstruction(i);
     }
 
@@ -112,7 +112,7 @@ public class InstructionHandle {
 
     /** Factory method.
      */
-    static InstructionHandle getInstructionHandle( Instruction i ) {
+    static InstructionHandle getInstructionHandle( final Instruction i ) {
         if (ih_list == null) {
             return new InstructionHandle(i);
         }
@@ -133,7 +133,7 @@ public class InstructionHandle {
      * @param max_offset the maximum offset that may be caused by these instructions
      * @return additional offset caused by possible change of this instruction's length
      */
-    protected int updatePosition( int offset, int max_offset ) {
+    protected int updatePosition( final int offset, final int max_offset ) {
         i_position += offset;
         return 0;
     }
@@ -151,7 +151,7 @@ public class InstructionHandle {
     /** Set the position, i.e., the byte code offset of the contained
      * instruction.
      */
-    void setPosition( int pos ) {
+    void setPosition( final int pos ) {
         i_position = pos;
     }
 
@@ -190,7 +190,7 @@ public class InstructionHandle {
     /**
      * Denote this handle isn't referenced anymore by t.
      */
-    public void removeTargeter( InstructionTargeter t ) {
+    public void removeTargeter( final InstructionTargeter t ) {
         if (targeters != null) {
             targeters.remove(t);
         }
@@ -200,7 +200,7 @@ public class InstructionHandle {
     /**
      * Denote this handle is being referenced by t.
      */
-    public void addTargeter( InstructionTargeter t ) {
+    public void addTargeter( final InstructionTargeter t ) {
         if (targeters == null) {
             targeters = new HashSet<>();
         }
@@ -229,7 +229,7 @@ public class InstructionHandle {
 
     /** @return a (verbose) string representation of the contained instruction. 
      */
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         return Utility.format(i_position, 4, false, ' ') + ": " + instruction.toString(verbose);
     }
 
@@ -247,7 +247,7 @@ public class InstructionHandle {
      * @param key the key object to store/retrieve the attribute
      * @param attr the attribute to associate with this handle
      */
-    public void addAttribute( Object key, Object attr ) {
+    public void addAttribute( final Object key, final Object attr ) {
         if (attributes == null) {
             attributes = new HashMap<>(3);
         }
@@ -259,7 +259,7 @@ public class InstructionHandle {
      *
      * @param key the key object to retrieve the attribute
      */
-    public void removeAttribute( Object key ) {
+    public void removeAttribute( final Object key ) {
         if (attributes != null) {
             attributes.remove(key);
         }
@@ -270,7 +270,7 @@ public class InstructionHandle {
      *
      * @param key the key object to store/retrieve the attribute
      */
-    public Object getAttribute( Object key ) {
+    public Object getAttribute( final Object key ) {
         if (attributes != null) {
             return attributes.get(key);
         }
@@ -292,7 +292,7 @@ public class InstructionHandle {
      *
      * @param v Visitor object
      */
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         instruction.accept(v);
     }
 
@@ -301,7 +301,7 @@ public class InstructionHandle {
      * @param next the next to set
      * @ since 6.0
      */
-    final InstructionHandle setNext(InstructionHandle next) {
+    final InstructionHandle setNext(final InstructionHandle next) {
         this.next = next;
         return next;
     }
@@ -311,7 +311,7 @@ public class InstructionHandle {
      * @param prev the prev to set
      * @ since 6.0
      */
-    final InstructionHandle setPrev(InstructionHandle prev) {
+    final InstructionHandle setPrev(final InstructionHandle prev) {
         this.prev = prev;
         return prev;
     }

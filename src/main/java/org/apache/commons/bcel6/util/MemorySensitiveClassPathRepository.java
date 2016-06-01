@@ -38,7 +38,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
     private ClassPath _path = null;
     private final Map<String, SoftReference<JavaClass>> _loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
-    public MemorySensitiveClassPathRepository(ClassPath path) {
+    public MemorySensitiveClassPathRepository(final ClassPath path) {
         _path = path;
     }
 
@@ -46,7 +46,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
      * Store a new JavaClass instance into this Repository.
      */
     @Override
-    public void storeClass(JavaClass clazz) {
+    public void storeClass(final JavaClass clazz) {
         _loadedClasses.put(clazz.getClassName(), new SoftReference<>(clazz));
         clazz.setRepository(this);
     }
@@ -55,7 +55,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
      * Remove class from repository
      */
     @Override
-    public void removeClass(JavaClass clazz) {
+    public void removeClass(final JavaClass clazz) {
         _loadedClasses.remove(clazz.getClassName());
     }
 
@@ -63,7 +63,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
      * Find an already defined (cached) JavaClass object by name.
      */
     @Override
-    public JavaClass findClass(String className) {
+    public JavaClass findClass(final String className) {
         SoftReference<JavaClass> ref = _loadedClasses.get(className);
         if (ref == null) {
             return null;
@@ -111,7 +111,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
      *             if the class is not in the Repository, and its representation could not be found
      */
     @Override
-    public JavaClass loadClass(Class<?> clazz) throws ClassNotFoundException {
+    public JavaClass loadClass(final Class<?> clazz) throws ClassNotFoundException {
         InputStream clsStream = null;
         try {
             String className = clazz.getName();
@@ -137,7 +137,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
         }
     }
 
-    private JavaClass loadClass(InputStream is, String className) throws ClassNotFoundException {
+    private JavaClass loadClass(final InputStream is, final String className) throws ClassNotFoundException {
         try {
             if (is != null) {
                 ClassParser parser = new ClassParser(is, className);

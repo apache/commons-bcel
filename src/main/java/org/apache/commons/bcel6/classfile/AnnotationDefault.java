@@ -39,7 +39,7 @@ public class AnnotationDefault extends Attribute {
      * @param input         Input stream
      * @param constant_pool Array of constants
      */
-    AnnotationDefault(int name_index, int length, DataInput input, ConstantPool constant_pool) throws IOException {
+    AnnotationDefault(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, (ElementValue) null, constant_pool);
         default_value = ElementValue.readElementValue(input, constant_pool);
     }
@@ -50,7 +50,7 @@ public class AnnotationDefault extends Attribute {
      * @param defaultValue  the annotation's default value
      * @param constant_pool Array of constants
      */
-    public AnnotationDefault(int name_index, int length, ElementValue defaultValue, ConstantPool constant_pool) {
+    public AnnotationDefault(final int name_index, final int length, final ElementValue defaultValue, final ConstantPool constant_pool) {
         super(Const.ATTR_ANNOTATION_DEFAULT, name_index, length, constant_pool);
         this.default_value = defaultValue;
     }
@@ -63,14 +63,14 @@ public class AnnotationDefault extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept(Visitor v) {
+    public void accept(final Visitor v) {
         v.visitAnnotationDefault(this);
     }
 
     /**
      * @param defaultValue the default value of this methodinfo's annotation
      */
-    public final void setDefaultValue(ElementValue defaultValue) {
+    public final void setDefaultValue(final ElementValue defaultValue) {
         default_value = defaultValue;
     }
 
@@ -82,12 +82,12 @@ public class AnnotationDefault extends Attribute {
     }
 
     @Override
-    public Attribute copy(ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool _constant_pool) {
         return (Attribute) clone();
     }
 
     @Override
-    public final void dump(DataOutputStream dos) throws IOException {
+    public final void dump(final DataOutputStream dos) throws IOException {
         super.dump(dos);
         default_value.dump(dos);
     }

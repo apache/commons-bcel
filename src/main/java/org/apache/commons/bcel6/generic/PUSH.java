@@ -36,7 +36,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param cp Constant pool
      * @param value to be pushed 
      */
-    public PUSH(ConstantPoolGen cp, int value) {
+    public PUSH(final ConstantPoolGen cp, final int value) {
         if ((value >= -1) && (value <= 5)) {
             instruction = InstructionConst.getInstruction(Const.ICONST_0 + value);
         } else if (Instruction.isValidByte(value)) {
@@ -53,7 +53,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param cp Constant pool
      * @param value to be pushed 
      */
-    public PUSH(ConstantPoolGen cp, boolean value) {
+    public PUSH(final ConstantPoolGen cp, final boolean value) {
         instruction = InstructionConst.getInstruction(Const.ICONST_0 + (value ? 1 : 0));
     }
 
@@ -62,7 +62,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param cp Constant pool
      * @param value to be pushed 
      */
-    public PUSH(ConstantPoolGen cp, float value) {
+    public PUSH(final ConstantPoolGen cp, final float value) {
         if (value == 0.0) {
             instruction = InstructionConst.FCONST_0;
         } else if (value == 1.0) {
@@ -79,7 +79,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param cp Constant pool
      * @param value to be pushed 
      */
-    public PUSH(ConstantPoolGen cp, long value) {
+    public PUSH(final ConstantPoolGen cp, final long value) {
         if (value == 0) {
             instruction = InstructionConst.LCONST_0;
         } else if (value == 1) {
@@ -94,7 +94,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param cp Constant pool
      * @param value to be pushed 
      */
-    public PUSH(ConstantPoolGen cp, double value) {
+    public PUSH(final ConstantPoolGen cp, final double value) {
         if (value == 0.0) {
             instruction = InstructionConst.DCONST_0;
         } else if (value == 1.0) {
@@ -109,7 +109,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param cp Constant pool
      * @param value to be pushed 
      */
-    public PUSH(ConstantPoolGen cp, String value) {
+    public PUSH(final ConstantPoolGen cp, final String value) {
         if (value == null) {
             instruction = InstructionConst.ACONST_NULL;
         } else {
@@ -123,7 +123,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param value
      * @since 6.0
      */
-    public PUSH(ConstantPoolGen cp, ObjectType value) {
+    public PUSH(final ConstantPoolGen cp, final ObjectType value) {
         if (value == null) {
             instruction = InstructionConst.ACONST_NULL;
         } else {
@@ -135,7 +135,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param cp Constant pool
      * @param value to be pushed 
      */
-    public PUSH(ConstantPoolGen cp, Number value) {
+    public PUSH(final ConstantPoolGen cp, final Number value) {
         if ((value instanceof Integer) || (value instanceof Short) || (value instanceof Byte)) {
             instruction = new PUSH(cp, value.intValue()).instruction;
         } else if (value instanceof Double) {
@@ -157,7 +157,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param cp Constant pool
      * @param value to be pushed 
      */
-    public PUSH(ConstantPoolGen cp, Character value) {
+    public PUSH(final ConstantPoolGen cp, final Character value) {
         this(cp, value.charValue());
     }
 
@@ -166,7 +166,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param cp Constant pool
      * @param value to be pushed 
      */
-    public PUSH(ConstantPoolGen cp, Boolean value) {
+    public PUSH(final ConstantPoolGen cp, final Boolean value) {
         this(cp, value.booleanValue());
     }
 

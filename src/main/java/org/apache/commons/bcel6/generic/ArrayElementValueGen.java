@@ -34,14 +34,14 @@ public class ArrayElementValueGen extends ElementValueGen
     // modify ...
     private final List<ElementValueGen> evalues;
 
-    public ArrayElementValueGen(ConstantPoolGen cp)
+    public ArrayElementValueGen(final ConstantPoolGen cp)
     {
         super(ARRAY, cp);
         evalues = new ArrayList<>();
     }
 
-    public ArrayElementValueGen(int type, ElementValue[] datums,
-            ConstantPoolGen cpool)
+    public ArrayElementValueGen(final int type, final ElementValue[] datums,
+            final ConstantPoolGen cpool)
     {
         super(type, cpool);
         if (type != ARRAY) {
@@ -74,8 +74,8 @@ public class ArrayElementValueGen extends ElementValueGen
      * @param value
      * @param cpool
      */
-    public ArrayElementValueGen(ArrayElementValue value, ConstantPoolGen cpool,
-            boolean copyPoolEntries)
+    public ArrayElementValueGen(final ArrayElementValue value, final ConstantPoolGen cpool,
+            final boolean copyPoolEntries)
     {
         super(ARRAY, cpool);
         evalues = new ArrayList<>();
@@ -86,7 +86,7 @@ public class ArrayElementValueGen extends ElementValueGen
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         dos.writeByte(super.getElementValueType()); // u1 type of value (ARRAY == '[')
         dos.writeShort(evalues.size());
@@ -120,7 +120,7 @@ public class ArrayElementValueGen extends ElementValueGen
         return evalues.size();
     }
 
-    public void addElement(ElementValueGen gen)
+    public void addElement(final ElementValueGen gen)
     {
         evalues.add(gen);
     }

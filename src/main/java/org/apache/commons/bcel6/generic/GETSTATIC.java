@@ -38,13 +38,13 @@ public class GETSTATIC extends FieldInstruction implements PushInstruction, Exce
     }
 
 
-    public GETSTATIC(int index) {
+    public GETSTATIC(final int index) {
         super(Const.GETSTATIC, index);
     }
 
 
     @Override
-    public int produceStack( ConstantPoolGen cpg ) {
+    public int produceStack( final ConstantPoolGen cpg ) {
         return getFieldSize(cpg);
     }
 
@@ -65,7 +65,7 @@ public class GETSTATIC extends FieldInstruction implements PushInstruction, Exce
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitStackProducer(this);
         v.visitPushInstruction(this);
         v.visitExceptionThrower(this);

@@ -37,7 +37,7 @@ public class ILOAD extends LoadInstruction {
     /** Load int from local variable
      * @param n index of local variable
      */
-    public ILOAD(int n) {
+    public ILOAD(final int n) {
         super(org.apache.commons.bcel6.Const.ILOAD, org.apache.commons.bcel6.Const.ILOAD_0, n);
     }
 
@@ -51,7 +51,7 @@ public class ILOAD extends LoadInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         super.accept(v);
         v.visitILOAD(this);
     }

@@ -36,7 +36,7 @@ public class ClassSet {
     private final Map<String, JavaClass> _map = new HashMap<>();
 
 
-    public boolean add( JavaClass clazz ) {
+    public boolean add( final JavaClass clazz ) {
         boolean result = false;
         if (!_map.containsKey(clazz.getClassName())) {
             result = true;
@@ -46,7 +46,7 @@ public class ClassSet {
     }
 
 
-    public void remove( JavaClass clazz ) {
+    public void remove( final JavaClass clazz ) {
         _map.remove(clazz.getClassName());
     }
 

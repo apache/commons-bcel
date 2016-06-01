@@ -78,7 +78,7 @@ public class ClassLoader extends java.lang.ClassLoader {
 
     /** @param deferTo delegate class loader to use for ignored packages
      */
-    public ClassLoader(java.lang.ClassLoader deferTo) {
+    public ClassLoader(final java.lang.ClassLoader deferTo) {
         super(deferTo);
         this.ignored_packages = DEFAULT_IGNORED_PACKAGES;
         this.repository = new ClassLoaderRepository(deferTo);
@@ -88,7 +88,7 @@ public class ClassLoader extends java.lang.ClassLoader {
     /** @param ignored_packages classes contained in these packages will be loaded
      * with the system class loader
      */
-    public ClassLoader(String[] ignored_packages) {
+    public ClassLoader(final String[] ignored_packages) {
         this.ignored_packages = ignored_packages;
     }
 
@@ -97,13 +97,13 @@ public class ClassLoader extends java.lang.ClassLoader {
      * with the system class loader
      * @param deferTo delegate class loader to use for ignored packages
      */
-    public ClassLoader(java.lang.ClassLoader deferTo, String[] ignored_packages) {
+    public ClassLoader(final java.lang.ClassLoader deferTo, final String[] ignored_packages) {
         this(ignored_packages);
         this.repository = new ClassLoaderRepository(deferTo);
     }
 
     @Override
-    protected Class<?> loadClass( String class_name, boolean resolve ) throws ClassNotFoundException {
+    protected Class<?> loadClass( final String class_name, final boolean resolve ) throws ClassNotFoundException {
         Class<?> cl = null;
         /* First try: lookup hash table.
          */
@@ -149,7 +149,7 @@ public class ClassLoader extends java.lang.ClassLoader {
     /** Override this method if you want to alter a class before it gets actually
      * loaded. Does nothing by default.
      */
-    protected JavaClass modifyClass( JavaClass clazz ) {
+    protected JavaClass modifyClass( final JavaClass clazz ) {
         return clazz;
     }
 
@@ -168,7 +168,7 @@ public class ClassLoader extends java.lang.ClassLoader {
      *
      * @param class_name compressed byte code with "$$BCEL$$" in it
      */
-    protected JavaClass createClass( String class_name ) {
+    protected JavaClass createClass( final String class_name ) {
         int index = class_name.indexOf(BCEL_TOKEN);
         String real_name = class_name.substring(index + BCEL_TOKEN.length());
         JavaClass clazz = null;

@@ -42,7 +42,7 @@ public class ClassLoaderRepository implements Repository {
     private final Map<String, JavaClass> loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
 
-    public ClassLoaderRepository(java.lang.ClassLoader loader) {
+    public ClassLoaderRepository(final java.lang.ClassLoader loader) {
         this.loader = loader;
     }
 
@@ -51,7 +51,7 @@ public class ClassLoaderRepository implements Repository {
      * Store a new JavaClass into this Repository.
      */
     @Override
-    public void storeClass( JavaClass clazz ) {
+    public void storeClass( final JavaClass clazz ) {
         loadedClasses.put(clazz.getClassName(), clazz);
         clazz.setRepository(this);
     }
@@ -61,7 +61,7 @@ public class ClassLoaderRepository implements Repository {
      * Remove class from repository
      */
     @Override
-    public void removeClass( JavaClass clazz ) {
+    public void removeClass( final JavaClass clazz ) {
         loadedClasses.remove(clazz.getClassName());
     }
 
@@ -70,7 +70,7 @@ public class ClassLoaderRepository implements Repository {
      * Find an already defined JavaClass.
      */
     @Override
-    public JavaClass findClass( String className ) {
+    public JavaClass findClass( final String className ) {
         return loadedClasses.containsKey(className) ? loadedClasses.get(className) : null;
     }
 
@@ -79,7 +79,7 @@ public class ClassLoaderRepository implements Repository {
      * Lookup a JavaClass object from the Class Name provided.
      */
     @Override
-    public JavaClass loadClass( String className ) throws ClassNotFoundException {
+    public JavaClass loadClass( final String className ) throws ClassNotFoundException {
         String classFile = className.replace('.', '/');
         JavaClass RC = findClass(className);
         if (RC != null) {
@@ -105,7 +105,7 @@ public class ClassLoaderRepository implements Repository {
 
 
     @Override
-    public JavaClass loadClass( Class<?> clazz ) throws ClassNotFoundException {
+    public JavaClass loadClass( final Class<?> clazz ) throws ClassNotFoundException {
         return loadClass(clazz.getName());
     }
 

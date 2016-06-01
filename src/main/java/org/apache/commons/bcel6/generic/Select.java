@@ -88,7 +88,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param targets instruction targets
      * @param defaultTarget default instruction target
      */
-    Select(short opcode, int[] match, InstructionHandle[] targets, InstructionHandle defaultTarget) {
+    Select(final short opcode, final int[] match, final InstructionHandle[] targets, final InstructionHandle defaultTarget) {
         // don't set default target before instuction is built
         super(opcode, null);
         this.match = match;
@@ -120,7 +120,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @return additional offset caused by possible change of this instruction's length
      */
     @Override
-    protected int updatePosition( int offset, int max_offset ) {
+    protected int updatePosition( final int offset, final int max_offset ) {
         setPosition(getPosition() + offset); // Additional offset caused by preceding SWITCHs, GOTOs, etc.
         short old_length = (short) super.getLength();
         /* Alignment on 4-byte-boundary, + 1, because of tag byte.
@@ -136,7 +136,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param out Output stream
      */
     @Override
-    public void dump( DataOutputStream out ) throws IOException {
+    public void dump( final DataOutputStream out ) throws IOException {
         out.writeByte(super.getOpcode());
         for (int i = 0; i < padding; i++) {
             out.writeByte(0);
@@ -150,7 +150,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         padding = (4 - (bytes.getIndex() % 4)) % 4; // Compute number of pad bytes
         for (int i = 0; i < padding; i++) {
             bytes.readByte();
@@ -164,7 +164,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @return mnemonic for instruction
      */
     @Override
-    public String toString( boolean verbose ) {
+    public String toString( final boolean verbose ) {
         StringBuilder buf = new StringBuilder(super.toString(verbose));
         if (verbose) {
             for (int i = 0; i < match_length; i++) {
@@ -185,7 +185,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     /**
      * Set branch target for `i'th case
      */
-    public void setTarget( int i, InstructionHandle target ) { // TODO could be package-protected?
+    public void setTarget( final int i, final InstructionHandle target ) { // TODO could be package-protected?
         notifyTarget(targets[i], target, this);
         targets[i] = target;
     }
@@ -196,7 +196,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param new_ih new target
      */
     @Override
-    public void updateTarget( InstructionHandle old_ih, InstructionHandle new_ih ) {
+    public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
         boolean targeted = false;
         if (super.getTarget() == old_ih) {
             targeted = true;
@@ -218,7 +218,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @return true, if ih is target of this instruction
      */
     @Override
-    public boolean containsTarget( InstructionHandle ih ) {
+    public boolean containsTarget( final InstructionHandle ih ) {
         if (super.getTarget() == ih) {
             return true;
         }
@@ -280,7 +280,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @return match entry
      * @since 6.0
      */
-    final int getMatch(int index) {
+    final int getMatch(final int index) {
         return match[index];
     }
 
@@ -289,7 +289,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @return index entry from indices
      * @since 6.0
      */
-    final int getIndices(int index) {
+    final int getIndices(final int index) {
         return indices[index];
     }
 
@@ -297,7 +297,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @return target entry
      * @since 6.0
      */
-    final InstructionHandle getTarget(int index) {
+    final InstructionHandle getTarget(final int index) {
         return targets[index];
     }
 
@@ -315,7 +315,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param fixed_length the fixed_length to set
      * @since 6.0
      */
-    final void setFixed_length(int fixed_length) {
+    final void setFixed_length(final int fixed_length) {
         this.fixed_length = fixed_length;
     }
 
@@ -333,7 +333,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param match_length the match_length to set
      * @since 6.0
      */
-    final int setMatch_length(int match_length) {
+    final int setMatch_length(final int match_length) {
         this.match_length = match_length;
         return match_length;
     }
@@ -344,7 +344,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param value
      * @since 6.0
      */
-    final void setMatch(int index, int value) {
+    final void setMatch(final int index, final int value) {
         match[index] = value;
     }
     
@@ -353,7 +353,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param array
      * @since 6.0
      */
-    final void setIndices(int[] array) {
+    final void setIndices(final int[] array) {
         indices = array;
     }
     
@@ -362,7 +362,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param array
      * @since 6.0
      */
-    final void setMatches(int[] array) {
+    final void setMatches(final int[] array) {
         match = array;
     }
     
@@ -371,7 +371,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param array
      * @since 6.0
      */
-    final void setTargets(InstructionHandle[] array) {
+    final void setTargets(final InstructionHandle[] array) {
         targets = array;
     }
     
@@ -386,7 +386,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
 
 
     /** @since 6.0 */
-    final int setIndices(int i, int value) {
+    final int setIndices(final int i, final int value) {
         indices[i] = value;
         return value;  // Allow use in nested calls
     }

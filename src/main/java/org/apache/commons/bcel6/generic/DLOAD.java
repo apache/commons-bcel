@@ -37,7 +37,7 @@ public class DLOAD extends LoadInstruction {
     /** Load double from local variable
      * @param n index of local variable
      */
-    public DLOAD(int n) {
+    public DLOAD(final int n) {
         super(org.apache.commons.bcel6.Const.DLOAD, org.apache.commons.bcel6.Const.DLOAD_0, n);
     }
 
@@ -51,7 +51,7 @@ public class DLOAD extends LoadInstruction {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         super.accept(v);
         v.visitDLOAD(this);
     }

@@ -40,7 +40,7 @@ public final class PMGClass extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
      */
-    public PMGClass(PMGClass c) {
+    public PMGClass(final PMGClass c) {
         this(c.getNameIndex(), c.getLength(), c.getPMGIndex(), c.getPMGClassIndex(), c
                 .getConstantPool());
     }
@@ -54,7 +54,7 @@ public final class PMGClass extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    PMGClass(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    PMGClass(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, input.readUnsignedShort(), input.readUnsignedShort(), constant_pool);
     }
@@ -67,8 +67,8 @@ public final class PMGClass extends Attribute {
      * @param pmg_class_index Index in constant pool to CONSTANT_Utf8
      * @param constant_pool Array of constants
      */
-    public PMGClass(int name_index, int length, int pmg_index, int pmg_class_index,
-            ConstantPool constant_pool) {
+    public PMGClass(final int name_index, final int length, final int pmg_index, final int pmg_class_index,
+            final ConstantPool constant_pool) {
         super(Const.ATTR_PMG, name_index, length, constant_pool);
         this.pmg_index = pmg_index;
         this.pmg_class_index = pmg_class_index;
@@ -83,7 +83,7 @@ public final class PMGClass extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         System.err.println("Visiting non-standard PMGClass object");
     }
 
@@ -95,7 +95,7 @@ public final class PMGClass extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(pmg_index);
         file.writeShort(pmg_class_index);
@@ -113,7 +113,7 @@ public final class PMGClass extends Attribute {
     /**
      * @param pmg_class_index
      */
-    public final void setPMGClassIndex( int pmg_class_index ) {
+    public final void setPMGClassIndex( final int pmg_class_index ) {
         this.pmg_class_index = pmg_class_index;
     }
 
@@ -129,7 +129,7 @@ public final class PMGClass extends Attribute {
     /**
      * @param pmg_index
      */
-    public final void setPMGIndex( int pmg_index ) {
+    public final void setPMGIndex( final int pmg_index ) {
         this.pmg_index = pmg_index;
     }
 
@@ -167,7 +167,7 @@ public final class PMGClass extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         return (Attribute) clone();
     }
 }

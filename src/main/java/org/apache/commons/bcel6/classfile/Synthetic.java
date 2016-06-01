@@ -44,7 +44,7 @@ public final class Synthetic extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
      */
-    public Synthetic(Synthetic c) {
+    public Synthetic(final Synthetic c) {
         this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
     }
 
@@ -57,7 +57,7 @@ public final class Synthetic extends Attribute {
      * @param constant_pool The constant pool this attribute is associated
      * with.
      */
-    public Synthetic(int name_index, int length, byte[] bytes, ConstantPool constant_pool) {
+    public Synthetic(final int name_index, final int length, final byte[] bytes, final ConstantPool constant_pool) {
         super(Const.ATTR_SYNTHETIC, name_index, length, constant_pool);
         this.bytes = bytes;
     }
@@ -72,7 +72,7 @@ public final class Synthetic extends Attribute {
      * @param constant_pool Array of constants
      * @throws IOException
      */
-    Synthetic(int name_index, int length, DataInput input, ConstantPool constant_pool)
+    Synthetic(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (byte[]) null, constant_pool);
         if (length > 0) {
@@ -91,7 +91,7 @@ public final class Synthetic extends Attribute {
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitSynthetic(this);
     }
 
@@ -103,7 +103,7 @@ public final class Synthetic extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         if (super.getLength() > 0) {
             file.write(bytes, 0, super.getLength());
@@ -122,7 +122,7 @@ public final class Synthetic extends Attribute {
     /**
      * @param bytes
      */
-    public final void setBytes( byte[] bytes ) {
+    public final void setBytes( final byte[] bytes ) {
         this.bytes = bytes;
     }
 
@@ -144,7 +144,7 @@ public final class Synthetic extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( ConstantPool _constant_pool ) {
+    public Attribute copy( final ConstantPool _constant_pool ) {
         Synthetic c = (Synthetic) clone();
         if (bytes != null) {
             c.bytes = new byte[bytes.length];

@@ -36,7 +36,7 @@ public class LocalVariables implements Cloneable {
     /**
      * Creates a new LocalVariables object.
      */
-    public LocalVariables(int maxLocals){
+    public LocalVariables(final int maxLocals){
         locals = new Type[maxLocals];
         for (int i=0; i<maxLocals; i++){
             locals[i] = Type.UNKNOWN;
@@ -60,7 +60,7 @@ public class LocalVariables implements Cloneable {
     /**
      * Returns the type of the local variable slot i.
      */
-    public Type get(int i){
+    public Type get(final int i){
         return locals[i];
     }
 
@@ -83,7 +83,7 @@ public class LocalVariables implements Cloneable {
     /**
      * Sets a new Type for the given local variable slot.
      */
-    public void set(int i, Type type){ // TODO could be package-protected?
+    public void set(final int i, final Type type){ // TODO could be package-protected?
         if (type == Type.BYTE || type == Type.SHORT || type == Type.BOOLEAN || type == Type.CHAR){
             throw new AssertionViolatedException("LocalVariables do not know about '"+type+"'. Use Type.INT instead.");
         }
@@ -99,7 +99,7 @@ public class LocalVariables implements Cloneable {
      * Fulfills the general contract of Object.equals().
      */
     @Override
-    public boolean equals(Object o){
+    public boolean equals(final Object o){
         if (!(o instanceof LocalVariables)) {
             return false;
         }
@@ -120,7 +120,7 @@ public class LocalVariables implements Cloneable {
      * Merges two local variables sets as described in the Java Virtual Machine Specification,
      * Second Edition, section 4.9.2, page 146.
      */
-    public void merge(LocalVariables lv){
+    public void merge(final LocalVariables lv){
 
         if (this.locals.length != lv.locals.length){
             throw new AssertionViolatedException("Merging LocalVariables of different size?!? From different methods or what?!?");
@@ -136,7 +136,7 @@ public class LocalVariables implements Cloneable {
      *
      * @see #merge(LocalVariables)
      */
-    private void merge(LocalVariables lv, int i){
+    private void merge(final LocalVariables lv, final int i){
         try {
 
         // We won't accept an unitialized object if we know it was initialized;
@@ -208,7 +208,7 @@ public class LocalVariables implements Cloneable {
      * Replaces all occurences of u in this local variables set
      * with an "initialized" ObjectType.
      */
-    public void initializeObject(UninitializedObjectType u){
+    public void initializeObject(final UninitializedObjectType u){
         for (int i=0; i<locals.length; i++){
             if (locals[i] == u){
                 locals[i] = u.getInitialized();

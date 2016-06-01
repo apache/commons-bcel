@@ -32,7 +32,7 @@ public class DCMPG extends Instruction implements TypedInstruction, StackProduce
     /** @return Type.DOUBLE
      */
     @Override
-    public Type getType( ConstantPoolGen cp ) {
+    public Type getType( final ConstantPoolGen cp ) {
         return Type.DOUBLE;
     }
 
@@ -45,7 +45,7 @@ public class DCMPG extends Instruction implements TypedInstruction, StackProduce
      * @param v Visitor object
      */
     @Override
-    public void accept( Visitor v ) {
+    public void accept( final Visitor v ) {
         v.visitTypedInstruction(this);
         v.visitStackProducer(this);
         v.visitStackConsumer(this);

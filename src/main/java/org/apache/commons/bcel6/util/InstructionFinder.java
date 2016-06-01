@@ -79,7 +79,7 @@ public class InstructionFinder {
      * @param il
      *          instruction list to search for given patterns
      */
-    public InstructionFinder(InstructionList il) {
+    public InstructionFinder(final InstructionList il) {
         this.il = il;
         reread();
     }
@@ -108,7 +108,7 @@ public class InstructionFinder {
      *          instruction pattern in lower case
      * @return encoded string for a pattern such as "BranchInstruction".
      */
-    private static String mapName( String pattern ) {
+    private static String mapName( final String pattern ) {
         String result = map.get(pattern);
         if (result != null) {
             return result;
@@ -131,7 +131,7 @@ public class InstructionFinder {
      *          The pattern to compile
      * @return translated regular expression string
      */
-    private static String compilePattern( String pattern ) {
+    private static String compilePattern( final String pattern ) {
         //Bug: BCEL-77 - Instructions are assumed to be english, to avoid odd Locale issues
         String lower = pattern.toLowerCase(Locale.ENGLISH);
         StringBuilder buf = new StringBuilder();
@@ -161,7 +161,7 @@ public class InstructionFinder {
     /**
      * @return the matched piece of code as an array of instruction (handles)
      */
-    private InstructionHandle[] getMatch( int matched_from, int match_length ) {
+    private InstructionHandle[] getMatch( final int matched_from, final int match_length ) {
         InstructionHandle[] match = new InstructionHandle[match_length];
         System.arraycopy(handles, matched_from, match, 0, match_length);
         return match;
@@ -203,7 +203,7 @@ public class InstructionFinder {
      * @return iterator of matches where e.nextElement() returns an array of
      *         instruction handles describing the matched area
      */
-    public final Iterator<InstructionHandle[]> search( String pattern, InstructionHandle from, CodeConstraint constraint ) {
+    public final Iterator<InstructionHandle[]> search( final String pattern, final InstructionHandle from, final CodeConstraint constraint ) {
         String search = compilePattern(pattern);
         int start = -1;
         for (int i = 0; i < handles.length; i++) {
@@ -241,7 +241,7 @@ public class InstructionFinder {
      * @return iterator of matches where e.nextElement() returns an array of
      *         instruction handles describing the matched area
      */
-    public final Iterator<InstructionHandle[]> search( String pattern ) {
+    public final Iterator<InstructionHandle[]> search( final String pattern ) {
         return search(pattern, il.getStart(), null);
     }
 
@@ -256,7 +256,7 @@ public class InstructionFinder {
      * @return iterator of matches where e.nextElement() returns an array of
      *         instruction handles describing the matched area
      */
-    public final Iterator<InstructionHandle[]> search( String pattern, InstructionHandle from ) {
+    public final Iterator<InstructionHandle[]> search( final String pattern, final InstructionHandle from ) {
         return search(pattern, from, null);
     }
 
@@ -271,7 +271,7 @@ public class InstructionFinder {
      *          constraints to be checked on matching code
      * @return instruction handle or `null' if the match failed
      */
-    public final Iterator<InstructionHandle[]> search( String pattern, CodeConstraint constraint ) {
+    public final Iterator<InstructionHandle[]> search( final String pattern, final CodeConstraint constraint ) {
         return search(pattern, il.getStart(), constraint);
     }
 
@@ -279,7 +279,7 @@ public class InstructionFinder {
     /**
      * Convert opcode number to char.
      */
-    private static char makeChar( short opcode ) {
+    private static char makeChar( final short opcode ) {
         return (char) (opcode + OFFSET);
     }
 
@@ -381,7 +381,7 @@ public class InstructionFinder {
     }
 
 
-    private static String precompile( short from, short to, short extra ) {
+    private static String precompile( final short from, final short to, final short extra ) {
         StringBuilder buf = new StringBuilder("(");
         for (short i = from; i <= to; i++) {
             buf.append(makeChar(i));

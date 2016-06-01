@@ -39,8 +39,8 @@ public class EnumElementValueGen extends ElementValueGen
      * value - as indicated by typeIdx and valueIdx. This ctor is used for
      * deserialization
      */
-    protected EnumElementValueGen(int typeIdx, int valueIdx,
-            ConstantPoolGen cpool)
+    protected EnumElementValueGen(final int typeIdx, final int valueIdx,
+            final ConstantPoolGen cpool)
     {
         super(ElementValueGen.ENUM_CONSTANT, cpool);
         if (super.getElementValueType() != ENUM_CONSTANT) {
@@ -63,15 +63,15 @@ public class EnumElementValueGen extends ElementValueGen
                 getConstantPool().getConstantPool());
     }
 
-    public EnumElementValueGen(ObjectType t, String value, ConstantPoolGen cpool)
+    public EnumElementValueGen(final ObjectType t, final String value, final ConstantPoolGen cpool)
     {
         super(ElementValueGen.ENUM_CONSTANT, cpool);
         typeIdx = cpool.addUtf8(t.getSignature());// was addClass(t);
         valueIdx = cpool.addUtf8(value);// was addString(value);
     }
 
-    public EnumElementValueGen(EnumElementValue value, ConstantPoolGen cpool,
-            boolean copyPoolEntries)
+    public EnumElementValueGen(final EnumElementValue value, final ConstantPoolGen cpool,
+            final boolean copyPoolEntries)
     {
         super(ENUM_CONSTANT, cpool);
         if (copyPoolEntries)
@@ -89,7 +89,7 @@ public class EnumElementValueGen extends ElementValueGen
     }
 
     @Override
-    public void dump(DataOutputStream dos) throws IOException
+    public void dump(final DataOutputStream dos) throws IOException
     {
         dos.writeByte(super.getElementValueType()); // u1 type of value (ENUM_CONSTANT == 'e')
         dos.writeShort(typeIdx); // u2

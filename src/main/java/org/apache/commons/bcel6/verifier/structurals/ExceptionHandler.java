@@ -36,7 +36,7 @@ public class ExceptionHandler{
     private final InstructionHandle handlerpc;
 
     /** Leave instance creation to JustIce. */
-    ExceptionHandler(ObjectType catch_type, InstructionHandle handler_pc){
+    ExceptionHandler(final ObjectType catch_type, final InstructionHandle handler_pc){
         catchtype = catch_type;
         handlerpc = handler_pc;
     }

@@ -47,7 +47,7 @@ public final class SWITCH implements CompoundInstruction {
      * @param target the default target
      * @param max_gap maximum gap that may between case branches
      */
-    public SWITCH(int[] match, InstructionHandle[] targets, InstructionHandle target, int max_gap) {
+    public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target, final int max_gap) {
         this.match = match.clone();
         this.targets = targets.clone();
         if ((match_length = match.length) < 2) {
@@ -64,12 +64,12 @@ public final class SWITCH implements CompoundInstruction {
     }
 
 
-    public SWITCH(int[] match, InstructionHandle[] targets, InstructionHandle target) {
+    public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target) {
         this(match, targets, target, 1);
     }
 
 
-    private void fillup( int max_gap, InstructionHandle target ) {
+    private void fillup( final int max_gap, final InstructionHandle target ) {
         int max_size = match_length + match_length * max_gap;
         int[] m_vec = new int[max_size];
         InstructionHandle[] t_vec = new InstructionHandle[max_size];
@@ -98,7 +98,7 @@ public final class SWITCH implements CompoundInstruction {
     /**
      * Sort match and targets array with QuickSort.
      */
-    private void sort( int l, int r ) {
+    private void sort( final int l, final int r ) {
         int i = l;
         int j = r;
         int h;
@@ -134,7 +134,7 @@ public final class SWITCH implements CompoundInstruction {
     /**
      * @return match is sorted in ascending order with no gap bigger than max_gap?
      */
-    private boolean matchIsOrdered( int max_gap ) {
+    private boolean matchIsOrdered( final int max_gap ) {
         for (int i = 1; i < match_length; i++) {
             if (match[i] - match[i - 1] > max_gap) {
                 return false;

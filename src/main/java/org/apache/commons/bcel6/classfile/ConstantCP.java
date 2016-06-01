@@ -56,7 +56,7 @@ public abstract class ConstantCP extends Constant {
     /**
      * Initialize from another object.
      */
-    public ConstantCP(ConstantCP c) {
+    public ConstantCP(final ConstantCP c) {
         this(c.getTag(), c.getClassIndex(), c.getNameAndTypeIndex());
     }
 
@@ -68,7 +68,7 @@ public abstract class ConstantCP extends Constant {
      * @param file Input stream
      * @throws IOException
      */
-    ConstantCP(byte tag, DataInput file) throws IOException {
+    ConstantCP(final byte tag, final DataInput file) throws IOException {
         this(tag, file.readUnsignedShort(), file.readUnsignedShort());
     }
 
@@ -77,7 +77,7 @@ public abstract class ConstantCP extends Constant {
      * @param class_index Reference to the class containing the field
      * @param name_and_type_index and the field signature
      */
-    protected ConstantCP(byte tag, int class_index, int name_and_type_index) {
+    protected ConstantCP(final byte tag, final int class_index, final int name_and_type_index) {
         super(tag);
         this.class_index = class_index;
         this.name_and_type_index = name_and_type_index;
@@ -91,7 +91,7 @@ public abstract class ConstantCP extends Constant {
      * @throws IOException
      */
     @Override
-    public final void dump( DataOutputStream file ) throws IOException {
+    public final void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeShort(class_index);
         file.writeShort(name_and_type_index);
@@ -109,7 +109,7 @@ public abstract class ConstantCP extends Constant {
     /**
      * @param class_index points to Constant_class 
      */
-    public final void setClassIndex( int class_index ) {
+    public final void setClassIndex( final int class_index ) {
         this.class_index = class_index;
     }
 
@@ -125,7 +125,7 @@ public abstract class ConstantCP extends Constant {
     /**
      * @param name_and_type_index points to Constant_NameAndType
      */
-    public final void setNameAndTypeIndex( int name_and_type_index ) {
+    public final void setNameAndTypeIndex( final int name_and_type_index ) {
         this.name_and_type_index = name_and_type_index;
     }
 
@@ -133,7 +133,7 @@ public abstract class ConstantCP extends Constant {
     /**
      * @return Class this field belongs to.
      */
-    public String getClass( ConstantPool cp ) {
+    public String getClass( final ConstantPool cp ) {
         return cp.constantToString(class_index, Const.CONSTANT_Class);
     }
 

@@ -31,13 +31,13 @@ public class TestArray01{
         return a;
     }
 
-    public static void test2(Object o){
+    public static void test2(final Object o){
     }
 
-    public static void test3(Serializable o){
+    public static void test3(final Serializable o){
     }
 
-    public static void test4(Cloneable o){
+    public static void test4(final Cloneable o){
     }
 
     public static Serializable test5(){
@@ -48,7 +48,7 @@ public class TestArray01{
         return new Object[1];
     }
 
-    public static Object foo(String s){
+    public static Object foo(final String s){
         return s;
     }
 }
