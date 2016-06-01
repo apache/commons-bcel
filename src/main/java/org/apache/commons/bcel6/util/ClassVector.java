@@ -35,7 +35,7 @@ public class ClassVector implements java.io.Serializable {
 
     private static final long serialVersionUID = 5600397075672780806L;
     @Deprecated
-    protected List<JavaClass> vec = new ArrayList<JavaClass>();
+    protected List<JavaClass> vec = new ArrayList<>();
 
 
     public void addElement( final JavaClass clazz ) {

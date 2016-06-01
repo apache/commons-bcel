@@ -62,7 +62,7 @@ public class ClassLoader extends java.lang.ClassLoader {
             "java.", "javax.", "sun."
     };
 
-    private final Hashtable<String, Class<?>> classes = new Hashtable<String, Class<?>>();
+    private final Hashtable<String, Class<?>> classes = new Hashtable<>();
     // Hashtable is synchronized thus thread-safe
     private final String[] ignored_packages;
     private Repository repository = SyntheticRepository.getInstance();
