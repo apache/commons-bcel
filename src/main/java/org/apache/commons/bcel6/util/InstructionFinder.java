@@ -346,7 +346,7 @@ public class InstructionFinder {
         map.put("iconst", precompile(Const.ICONST_0, Const.ICONST_5, Const.ICONST_M1));
         map.put("lconst", new String(new char[] { '(', makeChar(Const.LCONST_0), '|', makeChar(Const.LCONST_1), ')' }));
         map.put("dconst", new String(new char[] { '(', makeChar(Const.DCONST_0), '|', makeChar(Const.DCONST_1), ')' }));
-        map.put("fconst", new String(new char[] { '(', makeChar(Const.FCONST_0), '|', makeChar(Const.FCONST_1), ')' }));
+        map.put("fconst", new String(new char[] { '(', makeChar(Const.FCONST_0), '|', makeChar(Const.FCONST_1), '|', makeChar(Const.FCONST_2), ')' }));
         map.put("lload", precompile(Const.LLOAD_0, Const.LLOAD_3, Const.LLOAD));
         map.put("iload", precompile(Const.ILOAD_0, Const.ILOAD_3, Const.ILOAD));
         map.put("dload", precompile(Const.DLOAD_0, Const.DLOAD_3, Const.DLOAD));
