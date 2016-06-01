@@ -111,10 +111,20 @@ public final class Const {
    *  */
   public static final short MAJOR_1_8 = 52;
 
+  /** Major version number of class files for Java 1.9.
+   *  @see #MINOR_1_9
+   *  */
+  public static final short MAJOR_1_9 = 53;
+
   /** Minor version number of class files for Java 1.8.
    *  @see #MAJOR_1_8
    *  */
   public static final short MINOR_1_8 = 0;
+
+  /** Minor version number of class files for Java 1.9.
+   *  @see #MAJOR_1_9
+   *  */
+  public static final short MINOR_1_9 = 0;
 
   /** Default major version number.  Class file is for Java 1.1.
    *  @see #MAJOR_1_1
