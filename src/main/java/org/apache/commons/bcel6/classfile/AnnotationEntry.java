@@ -149,6 +149,7 @@ public class AnnotationEntry implements Node {
         return result.toString();
     }
     
+    @Override
     public String toString() {
         return toShortString();
     }

@@ -121,6 +121,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     /**
      * Override the parent method because our classname is held elsewhere.
      */
+    @Override
     public String getClassName( final ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
         ConstantInvokeDynamic cid = (ConstantInvokeDynamic) cp.getConstant(super.getIndex(), Const.CONSTANT_InvokeDynamic);
