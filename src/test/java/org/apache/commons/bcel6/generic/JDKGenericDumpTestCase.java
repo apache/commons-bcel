@@ -105,8 +105,8 @@ public class JDKGenericDumpTestCase {
     private static String bytesToHex(final byte[] bytes) {
         char[] hexChars = new char[bytes.length * 3];
         int i=0;
-        for ( int j = 0; j < bytes.length; j++ ) {
-            int v = bytes[j] & 0xFF;
+        for (byte b : bytes) {
+            int v = b & 0xFF;
             hexChars[i++] = hexArray[v >>> 4];
             hexChars[i++] = hexArray[v & 0x0F];
             hexChars[i++] = ' ';

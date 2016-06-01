@@ -103,8 +103,8 @@ public final class StackMap extends Attribute {
     public final void setStackMap( final StackMapEntry[] map ) {
         this.map = map;
         int len = 2; // Length of 'number_of_entries' field prior to the array of stack maps
-        for (int i = 0; i < map.length; i++) {
-            len += map[i].getMapEntrySize();
+        for (StackMapEntry element : map) {
+            len += element.getMapEntrySize();
         }
         setLength(len);
     }
