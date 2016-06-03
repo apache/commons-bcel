@@ -188,6 +188,15 @@
 
   <build>
     <plugins>
+       <!-- Allow Clirr to be run from command line -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>clirr-maven-plugin</artifactId>
+          <version>${commons.clirr.version}</version>
+          <configuration>
+            <minSeverity>${minSeverity}</minSeverity>
+          </configuration>
+        </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
