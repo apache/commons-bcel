@@ -57,6 +57,8 @@
     <commons.jira.pid>12314220</commons.jira.pid>
     <commons.findbugs.version>3.0.3</commons.findbugs.version>
     <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+    <!-- Latest Clirr Plugin version (2.7) causes NPE -->
+    <commons.clirr.version>2.6.1</commons.clirr.version>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
