@@ -24,7 +24,7 @@ import java.util.Collections;
  * Constants for the project, mostly defined in the JVM specification.
  *
  * @version $Id$
- * @since 6.0 (intended to replace the Constant interface)
+ * @since 6.0 (intended to replace the Constants interface)
  */
 public final class Const {
 
