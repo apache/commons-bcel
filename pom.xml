@@ -386,21 +386,19 @@
   <profiles>
     <!-- Profile to build and run PerformanceTest. Use 'mvn test -Pjdk-rt' -->
 	<profile>
-	      <id>jdk-rt</id>
-	            <build>
+	  <id>jdk-rt</id>
+	  <build>
         <plugins>
-                <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <includes>
-            <include>**/PerformanceTest.java</include>
-          </includes>
-        </configuration>
-      </plugin>
-
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/PerformanceTest.java</include>
+              </includes>
+            </configuration>
+          </plugin>
         </plugins>
       </build>
-	      
 	</profile>
 	
     <!-- Profile to build and run the benchmarks. Use 'mvn test -Pbenchmark', and add '-Dbenchmark=foo' to run only the foo benchmark -->
