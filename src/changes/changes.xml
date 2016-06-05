@@ -62,7 +62,34 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support">
+    <release version="6.0" date="TBA" description="Major release with Java 7 and 8 support
+    
+N.B. The Clirr report shows that there are several incompatible changes which in theory can affect
+ projects that update to this version. However the changes are considered to be OK, because they
+ apply to code that is not generally directly referenced externally.
+ For example, the Visitor interfaces have some new methods. These interfaces have lots of methods,
+ so external code will use the provided abstract implementation instead.
+
+
+ Classes no longer implement Serializable.
+ It does not make sense to serialize BCEL, and it would be unlikely to work anyway.
+
+
+ The following classes no longer implement the Constants interface:
+ classfile.CodeException (final)
+ classfile.LocalVariable (final)
+ generic.InstructionFactory
+ verifier.statics.Pass2Verifier
+ verifier.structurals.UninitializedObjectType
+
+
+ The following classes no longer implement the InstructionConstants interface:
+ generic.PUSH
+
+
+ External code should not have been relying on such classes to provide definitions of the constants.
+
+">
       <action issue="BCEL-272" type="add">Add constants for Java 9 class file version 53</action>
       <action issue="BCEL-271" type="fix">FCONST pattern does not include FCONST_2</action>
       <action issue="BCEL-264" type="fix">Add missing Node.accept() implementations (ConstantMethodHandle, ConstantMethodType, ParameterAnnotationEntry)</action>
@@ -84,7 +111,6 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-127" type="update">Document that Instruction Factory returns singleton instances</action>
       <action issue="BCEL-198" type="update">better support for clone/copy methods</action>
       <action issue="BCEL-242" type="remove">Remove Serializable</action>
-      <action issue="BCEL-231" type="remove">Remove deprecated methods and classes</action>
       <action issue="BCEL-110" type="remove">Problem with JAXB if the bcel classloader is used; remove the broken ClassLoader class</action>
       <action issue="BCEL-201" type="update">modify several toString methods to make output similar to "javap"</action>
       <action issue="BCEL-205" type="update">add javadoc comments to LineNumber.java and LineNumberTable.java</action>
