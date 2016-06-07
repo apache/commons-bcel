@@ -174,12 +174,16 @@ public final class ClassParser {
                     if (dataInputStream != null) {
                         dataInputStream.close();
                     }
-                    if (zip != null) {
-                        zip.close();
-                    }
                 } catch (IOException ioe) {
                     //ignore close exceptions
                 }
+            }
+            try {
+                if (zip != null) {
+                    zip.close();
+                }
+            } catch (IOException ioe) {
+                //ignore close exceptions
             }
         }
         // Return the information we have gathered in a new object
