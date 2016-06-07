@@ -16,16 +16,16 @@
  *
  */
 
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.EnclosingMethod;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.util.SyntheticRepository;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.EnclosingMethod;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.util.SyntheticRepository;
 import org.junit.Assert;
 
 public class EnclosingMethodAttributeTestCase extends AbstractTestCase

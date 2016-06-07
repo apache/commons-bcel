@@ -24,32 +24,32 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
 
-import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.ClassParser;
-import org.apache.commons.bcel6.classfile.Code;
-import org.apache.commons.bcel6.classfile.ConstantValue;
-import org.apache.commons.bcel6.classfile.Deprecated;
-import org.apache.commons.bcel6.classfile.ExceptionTable;
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.Synthetic;
-import org.apache.commons.bcel6.classfile.Utility;
-import org.apache.commons.bcel6.generic.BranchHandle;
-import org.apache.commons.bcel6.generic.BranchInstruction;
-import org.apache.commons.bcel6.generic.CodeExceptionGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.Instruction;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.LineNumberGen;
-import org.apache.commons.bcel6.generic.LocalVariableGen;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.Select;
-import org.apache.commons.bcel6.generic.TABLESWITCH;
+import org.apache.bcel.Constants;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.Deprecated;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Synthetic;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.BranchHandle;
+import org.apache.bcel.generic.BranchInstruction;
+import org.apache.bcel.generic.CodeExceptionGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.LineNumberGen;
+import org.apache.bcel.generic.LocalVariableGen;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.Select;
+import org.apache.bcel.generic.TABLESWITCH;
 
 /**
  * Disassemble Java class object into the <a href="http://jasmin.sourceforge.net">
@@ -57,7 +57,7 @@ import org.apache.commons.bcel6.generic.TABLESWITCH;
  *
  * @version $Id$
  */
-public class JasminVisitor extends org.apache.commons.bcel6.classfile.EmptyVisitor {
+public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     private JavaClass clazz;
     private PrintWriter out;
     private String class_name;
@@ -74,7 +74,7 @@ public class JasminVisitor extends org.apache.commons.bcel6.classfile.EmptyVisit
      * Start traversal using DefaultVisitor pattern.
      */
     public void disassemble() {
-        new org.apache.commons.bcel6.classfile.DescendingVisitor(clazz, this).visit();
+        new org.apache.bcel.classfile.DescendingVisitor(clazz, this).visit();
         out.close();
     }
 

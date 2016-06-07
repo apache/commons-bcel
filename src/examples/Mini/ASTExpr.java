@@ -19,19 +19,19 @@
 /* JJT: 0.3pre1 */
 
 package Mini;
-import org.apache.commons.bcel6.generic.BranchHandle;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.GOTO;
-import org.apache.commons.bcel6.generic.IF_ICMPEQ;
-import org.apache.commons.bcel6.generic.IF_ICMPGE;
-import org.apache.commons.bcel6.generic.IF_ICMPGT;
-import org.apache.commons.bcel6.generic.IF_ICMPLE;
-import org.apache.commons.bcel6.generic.IF_ICMPLT;
-import org.apache.commons.bcel6.generic.IF_ICMPNE;
-import org.apache.commons.bcel6.generic.InstructionConstants;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.PUSH;
+import org.apache.bcel.generic.BranchHandle;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.GOTO;
+import org.apache.bcel.generic.IF_ICMPEQ;
+import org.apache.bcel.generic.IF_ICMPGE;
+import org.apache.bcel.generic.IF_ICMPGT;
+import org.apache.bcel.generic.IF_ICMPLE;
+import org.apache.bcel.generic.IF_ICMPLT;
+import org.apache.bcel.generic.IF_ICMPNE;
+import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.PUSH;
 
 /**
  * Represents arithmetic expressions such as `(a + 12 == b) OR c'.
@@ -48,7 +48,7 @@ import org.apache.commons.bcel6.generic.PUSH;
  * are discarded in the first pass.
 */
 public class ASTExpr extends SimpleNode 
-implements MiniParserConstants, MiniParserTreeConstants, org.apache.commons.bcel6.Constants {
+implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constants {
   protected int         kind=-1;    // Single twig to leaf?
   private   int         unop=-1;    // Special case: Unary operand applied
   protected ASTExpr[]   exprs;      // Sub expressions

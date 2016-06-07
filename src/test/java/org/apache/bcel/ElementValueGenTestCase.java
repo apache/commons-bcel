@@ -16,7 +16,7 @@
  * 
  */
 
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,13 +24,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.generic.ClassElementValueGen;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.ElementValueGen;
-import org.apache.commons.bcel6.generic.EnumElementValueGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.SimpleElementValueGen;
+import org.apache.bcel.generic.ClassElementValueGen;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.ElementValueGen;
+import org.apache.bcel.generic.EnumElementValueGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.SimpleElementValueGen;
 
 public class ElementValueGenTestCase extends AbstractTestCase
 {

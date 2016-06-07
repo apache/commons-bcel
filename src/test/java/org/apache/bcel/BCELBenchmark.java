@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -23,12 +23,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.commons.bcel6.classfile.ClassParser;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.MethodGen;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.collections4.iterators.FilterIterator;

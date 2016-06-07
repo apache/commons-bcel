@@ -19,18 +19,18 @@
 /* JJT: 0.3pre1 */
 
 package Mini;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.ILOAD;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.LocalVariableGen;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.PUSH;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.ILOAD;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.LocalVariableGen;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.PUSH;
 
 /**
  *
  * @version $Id$
  */
-public class ASTIdent extends ASTExpr implements org.apache.commons.bcel6.Constants {
+public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   private String   name;
   private Variable reference; // Reference in environment to decl of this ident
 

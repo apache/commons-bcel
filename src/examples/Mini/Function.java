@@ -23,7 +23,7 @@ package Mini;
  *
  * @version $Id$
  */
-public class Function implements org.apache.commons.bcel6.Constants, EnvEntry {
+public class Function implements org.apache.bcel.Constants, EnvEntry {
   private ASTIdent   name;         // Reference to the original declaration
   private ASTIdent[] args;         // Reference to argument identifiers
 //  private ASTExpr    body;         // Reference to function expression body

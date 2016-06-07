@@ -21,14 +21,14 @@ import java.io.IOException;
 
 import javax.imageio.stream.FileImageInputStream;
 
-import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.ClassFormatException;
-import org.apache.commons.bcel6.classfile.Constant;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.util.BCELifier;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.util.BCELifier;
 
 /** 
  * Display Java .class file data.

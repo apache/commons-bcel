@@ -16,7 +16,7 @@
  * 
  */
 
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
 public class NanoTimer {
 

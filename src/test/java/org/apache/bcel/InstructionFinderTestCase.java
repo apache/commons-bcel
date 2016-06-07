@@ -15,15 +15,15 @@
  * limitations under the License.
  * 
  */
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
 import java.util.Iterator;
 
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.util.InstructionFinder;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.util.InstructionFinder;
 
 public class InstructionFinderTestCase extends AbstractTestCase
 {

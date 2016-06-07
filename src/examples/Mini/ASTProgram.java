@@ -21,23 +21,23 @@
 package Mini;
 import java.io.PrintWriter;
 
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.generic.ALOAD;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.GETSTATIC;
-import org.apache.commons.bcel6.generic.ILOAD;
-import org.apache.commons.bcel6.generic.INVOKESPECIAL;
-import org.apache.commons.bcel6.generic.INVOKESTATIC;
-import org.apache.commons.bcel6.generic.INVOKEVIRTUAL;
-import org.apache.commons.bcel6.generic.InstructionConstants;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.NEW;
-import org.apache.commons.bcel6.generic.PUSH;
-import org.apache.commons.bcel6.generic.PUTSTATIC;
-import org.apache.commons.bcel6.generic.RETURN;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.generic.ALOAD;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.GETSTATIC;
+import org.apache.bcel.generic.ILOAD;
+import org.apache.bcel.generic.INVOKESPECIAL;
+import org.apache.bcel.generic.INVOKESTATIC;
+import org.apache.bcel.generic.INVOKEVIRTUAL;
+import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.NEW;
+import org.apache.bcel.generic.PUSH;
+import org.apache.bcel.generic.PUTSTATIC;
+import org.apache.bcel.generic.RETURN;
+import org.apache.bcel.generic.Type;
 
 /**
  * Root node of everything, direct children are nodes of type FunDecl
@@ -45,7 +45,7 @@ import org.apache.commons.bcel6.generic.Type;
  * @version $Id$
  */
 public class ASTProgram extends SimpleNode
-implements MiniParserConstants, MiniParserTreeConstants, org.apache.commons.bcel6.Constants {
+implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constants {
   private ASTFunDecl[] fun_decls; // Children: Function declarations
   private Environment  env;       // Environment contains variables and functions
 

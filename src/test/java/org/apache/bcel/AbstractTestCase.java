@@ -16,24 +16,24 @@
  * 
  */
 
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.classfile.AnnotationEntry;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.generic.AnnotationEntryGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.ElementValueGen;
-import org.apache.commons.bcel6.generic.ElementValuePairGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.SimpleElementValueGen;
-import org.apache.commons.bcel6.util.ClassPath;
-import org.apache.commons.bcel6.util.SyntheticRepository;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.AnnotationEntryGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.ElementValueGen;
+import org.apache.bcel.generic.ElementValuePairGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.SimpleElementValueGen;
+import org.apache.bcel.util.ClassPath;
+import org.apache.bcel.util.SyntheticRepository;
 
 import junit.framework.TestCase;
 

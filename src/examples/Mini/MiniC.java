@@ -21,11 +21,11 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Vector;
 
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
 
-public class MiniC implements org.apache.commons.bcel6.Constants {
+public class MiniC implements org.apache.bcel.Constants {
   private static Vector<String> errors   = null;
   private static Vector<String> warnings = null;
   private static String file     = null;

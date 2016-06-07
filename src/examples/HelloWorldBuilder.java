@@ -18,22 +18,22 @@
 
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.generic.ALOAD;
-import org.apache.commons.bcel6.generic.ASTORE;
-import org.apache.commons.bcel6.generic.ArrayType;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.GOTO;
-import org.apache.commons.bcel6.generic.InstructionConstants;
-import org.apache.commons.bcel6.generic.InstructionFactory;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.LocalVariableGen;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.PUSH;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.Constants;
+import org.apache.bcel.generic.ALOAD;
+import org.apache.bcel.generic.ASTORE;
+import org.apache.bcel.generic.ArrayType;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.GOTO;
+import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionFactory;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.LocalVariableGen;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.PUSH;
+import org.apache.bcel.generic.Type;
 
 /**
  * Create HelloWorld class:

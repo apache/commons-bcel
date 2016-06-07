@@ -22,33 +22,33 @@ package Mini;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
-import org.apache.commons.bcel6.generic.ALOAD;
-import org.apache.commons.bcel6.generic.ASTORE;
-import org.apache.commons.bcel6.generic.ArrayType;
-import org.apache.commons.bcel6.generic.BranchHandle;
-import org.apache.commons.bcel6.generic.BranchInstruction;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.GETSTATIC;
-import org.apache.commons.bcel6.generic.GOTO;
-import org.apache.commons.bcel6.generic.INVOKEVIRTUAL;
-import org.apache.commons.bcel6.generic.InstructionConstants;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.InstructionTargeter;
-import org.apache.commons.bcel6.generic.LocalVariableGen;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.TargetLostException;
-import org.apache.commons.bcel6.generic.Type;
-import org.apache.commons.bcel6.util.InstructionFinder;
+import org.apache.bcel.generic.ALOAD;
+import org.apache.bcel.generic.ASTORE;
+import org.apache.bcel.generic.ArrayType;
+import org.apache.bcel.generic.BranchHandle;
+import org.apache.bcel.generic.BranchInstruction;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.GETSTATIC;
+import org.apache.bcel.generic.GOTO;
+import org.apache.bcel.generic.INVOKEVIRTUAL;
+import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.InstructionTargeter;
+import org.apache.bcel.generic.LocalVariableGen;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.TargetLostException;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.util.InstructionFinder;
 
 /**
  *
  * @version $Id$
  */
 public class ASTFunDecl extends SimpleNode
-implements MiniParserTreeConstants, org.apache.commons.bcel6.Constants {
+implements MiniParserTreeConstants, org.apache.bcel.Constants {
   private ASTIdent    name;
   private ASTIdent[]  argv;
   private ASTExpr     body;

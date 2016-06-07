@@ -19,18 +19,18 @@
 /* JJT: 0.3pre1 */
 
 package Mini;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.INVOKESTATIC;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.INVOKESTATIC;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.Type;
 
 /**
  *
  * @version $Id$
  */
 public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
-  org.apache.commons.bcel6.Constants {
+  org.apache.bcel.Constants {
   private ASTIdent name;
   private Function function; // Points to Function in environment
 

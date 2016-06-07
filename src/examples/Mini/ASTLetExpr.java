@@ -19,20 +19,20 @@
 /* JJT: 0.3pre1 */
 
 package Mini;
-import org.apache.commons.bcel6.generic.BasicType;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.ISTORE;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.LocalVariableGen;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.generic.BasicType;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.ISTORE;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.LocalVariableGen;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.Type;
 
 /**
  *
  * @version $Id$
  */
-public class ASTLetExpr extends ASTExpr implements org.apache.commons.bcel6.Constants {
+public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
   private ASTIdent[]  idents;
   private ASTExpr[]   exprs;
   private ASTExpr     body;

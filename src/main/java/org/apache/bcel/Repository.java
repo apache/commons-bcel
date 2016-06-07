@@ -15,39 +15,39 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
 import java.io.IOException;
 
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.util.ClassPath;
-import org.apache.commons.bcel6.util.SyntheticRepository;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.util.ClassPath;
+import org.apache.bcel.util.SyntheticRepository;
 
 /**
  * The repository maintains informations about class interdependencies, e.g.,
  * whether a class is a sub-class of another. Delegates actual class loading
  * to SyntheticRepository with current class path by default.
  *
- * @see org.apache.commons.bcel6.util.Repository
+ * @see org.apache.bcel.util.Repository
  * @see SyntheticRepository
  *
  * @version $Id$
  */
 public abstract class Repository {
 
-    private static org.apache.commons.bcel6.util.Repository _repository = SyntheticRepository.getInstance();
+    private static org.apache.bcel.util.Repository _repository = SyntheticRepository.getInstance();
 
 
     /** @return currently used repository instance
      */
-    public static org.apache.commons.bcel6.util.Repository getRepository() {
+    public static org.apache.bcel.util.Repository getRepository() {
         return _repository;
     }
 
 
     /** Set repository instance to be used for class loading
      */
-    public static void setRepository( final org.apache.commons.bcel6.util.Repository rep ) {
+    public static void setRepository( final org.apache.bcel.util.Repository rep ) {
         _repository = rep;
     }
 

@@ -16,26 +16,26 @@
  * 
  */
 
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.classfile.JavaClass;
 
-public class EnumAccessFlagTestCase extends AbstractTestCase
+public class AnnotationAccessFlagTestCase extends AbstractTestCase
 {
     /**
-     * An enumerated type, once compiled, should result in a class file that is
-     * marked such that we can determine from the access flags (through BCEL)
-     * that it was originally an enum type declaration.
+     * If you write an annotation and compile it, the class file generated
+     * should be marked as an annotation type - which is detectable through
+     * BCEL.
      */
-    public void testEnumClassSaysItIs() throws ClassNotFoundException
+    public void testAnnotationClassSaysItIs() throws ClassNotFoundException
     {
-        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleEnum");
+        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotation");
         assertTrue(
-                "Expected SimpleEnum class to say it was an enum - but it didn't !",
-                clazz.isEnum());
+                "Expected SimpleAnnotation class to say it was an annotation - but it didn't !",
+                clazz.isAnnotation());
         clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleClass");
         assertTrue(
-                "Expected SimpleClass class to say it was not an enum - but it didn't !",
-                !clazz.isEnum());
+                "Expected SimpleClass class to say it was not an annotation - but it didn't !",
+                !clazz.isAnnotation());
     }
 }

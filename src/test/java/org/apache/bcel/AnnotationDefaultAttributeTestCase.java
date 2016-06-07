@@ -16,13 +16,13 @@
  * 
  */
 
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
-import org.apache.commons.bcel6.classfile.AnnotationDefault;
-import org.apache.commons.bcel6.classfile.ElementValue;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.SimpleElementValue;
+import org.apache.bcel.classfile.AnnotationDefault;
+import org.apache.bcel.classfile.ElementValue;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.SimpleElementValue;
 
 public class AnnotationDefaultAttributeTestCase extends AbstractTestCase
 {

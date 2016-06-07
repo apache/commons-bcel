@@ -16,11 +16,11 @@
  * 
  */
 
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
-import org.apache.commons.bcel6.classfile.DescendingVisitor;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.visitors.CounterVisitor;
+import org.apache.bcel.classfile.DescendingVisitor;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.visitors.CounterVisitor;
 
 public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
 {

@@ -16,7 +16,7 @@
  *
  */
 package Mini;
-import org.apache.commons.bcel6.generic.LocalVariableGen;
+import org.apache.bcel.generic.LocalVariableGen;
 
 /**
  * Represents a variable declared in a LET expression or a FUN declaration.

@@ -19,19 +19,19 @@
 /* JJT: 0.3pre1 */
 
 package Mini;
-import org.apache.commons.bcel6.generic.BranchHandle;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.GOTO;
-import org.apache.commons.bcel6.generic.IFEQ;
-import org.apache.commons.bcel6.generic.InstructionConstants;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.MethodGen;
+import org.apache.bcel.generic.BranchHandle;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.GOTO;
+import org.apache.bcel.generic.IFEQ;
+import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
 
 /**
  *
  * @version $Id$
  */
-public class ASTIfExpr extends ASTExpr implements org.apache.commons.bcel6.Constants {
+public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   private ASTExpr if_expr, then_expr, else_expr;
 
   // Generated methods

@@ -19,25 +19,25 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.classfile.Utility;
-import org.apache.commons.bcel6.generic.ALOAD;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.GETSTATIC;
-import org.apache.commons.bcel6.generic.INVOKEVIRTUAL;
-import org.apache.commons.bcel6.generic.InstructionConstants;
-import org.apache.commons.bcel6.generic.InstructionFactory;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.PUSH;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.ALOAD;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.GETSTATIC;
+import org.apache.bcel.generic.INVOKEVIRTUAL;
+import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionFactory;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.PUSH;
+import org.apache.bcel.generic.Type;
 
 /**
  * Dynamically creates and uses a proxy for {@code java.awt.event.ActionListener}
  * via the classloader mechanism if called with
- * <pre>java org.apache.commons.bcel6.util.JavaWrapper ProxyCreator</pre>
+ * <pre>java org.apache.bcel.util.JavaWrapper ProxyCreator</pre>
  *
  * The trick is to encode the byte code we need into the class name
  * using the Utility.encode() method. This will result however in big
@@ -47,7 +47,7 @@ import org.apache.commons.bcel6.generic.Type;
  * {@code java.lang.reflect.Proxy}, but much more flexible.
  *
  * @version $Id$
- * @see org.apache.commons.bcel6.util.JavaWrapper
+ * @see org.apache.bcel.util.JavaWrapper
  * @see Utility
  */
 public class ProxyCreator {
@@ -76,7 +76,7 @@ public class ProxyCreator {
 
         // instanceof won't work here ...
         // TODO this is broken; cannot ever be true now that ClassLoader has been dropped
-        if (loader.getClass().toString().equals("class org.apache.commons.bcel6.util.ClassLoader")) {
+        if (loader.getClass().toString().equals("class org.apache.bcel.util.ClassLoader")) {
             // Real class name will be set by the class loader
             ClassGen cg = new ClassGen("foo", "java.lang.Object", "", Constants.ACC_PUBLIC,
                     new String[]{"java.awt.event.ActionListener"});
@@ -128,7 +128,7 @@ public class ProxyCreator {
 
             a.actionPerformed(new ActionEvent(a, ActionEvent.ACTION_PERFORMED, "hello"));
         } else {
-            System.err.println("Call me with java org.apache.commons.bcel6.util.JavaWrapper ProxyCreator");
+            System.err.println("Call me with java org.apache.bcel.util.JavaWrapper ProxyCreator");
         }
     }
 

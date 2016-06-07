@@ -16,9 +16,9 @@
  * 
  */
 
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.classfile.JavaClass;
 
 public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase
 {

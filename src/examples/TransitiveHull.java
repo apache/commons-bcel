@@ -19,22 +19,22 @@
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import org.apache.commons.bcel6.Constants;
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.ClassParser;
-import org.apache.commons.bcel6.classfile.ConstantCP;
-import org.apache.commons.bcel6.classfile.ConstantClass;
-import org.apache.commons.bcel6.classfile.ConstantFieldref;
-import org.apache.commons.bcel6.classfile.ConstantInterfaceMethodref;
-import org.apache.commons.bcel6.classfile.ConstantMethodref;
-import org.apache.commons.bcel6.classfile.ConstantNameAndType;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.generic.ArrayType;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.Type;
-import org.apache.commons.bcel6.util.ClassQueue;
-import org.apache.commons.bcel6.util.ClassSet;
+import org.apache.bcel.Constants;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.ConstantCP;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantFieldref;
+import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.generic.ArrayType;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.util.ClassQueue;
+import org.apache.bcel.util.ClassSet;
 
 /**
  * Find all classes referenced by given start class and all classes referenced
@@ -51,7 +51,7 @@ import org.apache.commons.bcel6.util.ClassSet;
  *
  * @version $Id$
  */
-public class TransitiveHull extends org.apache.commons.bcel6.classfile.EmptyVisitor {
+public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
 
     private ClassQueue queue;
     private ClassSet set;
@@ -84,7 +84,7 @@ public class TransitiveHull extends org.apache.commons.bcel6.classfile.EmptyVisi
             JavaClass clazz = queue.dequeue();
             cp = clazz.getConstantPool();
 
-            new org.apache.commons.bcel6.classfile.DescendingVisitor(clazz, this).visit();
+            new org.apache.bcel.classfile.DescendingVisitor(clazz, this).visit();
         }
     }
 
