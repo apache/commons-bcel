@@ -31,7 +31,7 @@
       <b>Q: </b>How can I ... with BCEL?
       <br/>
       <b>A: </b>Take a look at
-      <tt>org.apache.commons.bcel6.util.BCELifier</tt>, it takes a given class
+      <tt>org.apache.bcel.util.BCELifier</tt>, it takes a given class
       and converts it to a BCEL program (in Java, of course). It will
       show you how certain code is generated using BCEL.
     </p>
@@ -85,7 +85,7 @@
       <b>A:</b> Use the JustIce verifier that comes together with BCEL
       to get more detailed information:
        <pre>
-       java org.apache.commons.bcel6.verifier.Verifier &lt;your class&gt;</pre>
+       java org.apache.bcel.verifier.Verifier &lt;your class&gt;</pre>
     </p>
     
     </section>

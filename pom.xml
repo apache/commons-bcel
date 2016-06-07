@@ -48,7 +48,7 @@
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
     <!-- Configuration properties for the OSGi maven-bundle-plugin -->
     <commons.osgi.symbolicName>org.apache.${commons.componentid}</commons.osgi.symbolicName>
-    <commons.osgi.export>org.apache.commons.bcel6.*;version=${project.version};-noimport:=true</commons.osgi.export>
+    <commons.osgi.export>org.apache.bcel.*;version=${project.version};-noimport:=true</commons.osgi.export>
     <commons.osgi.import>*</commons.osgi.import>
     <commons.osgi.dynamicImport />
     <commons.osgi.private />

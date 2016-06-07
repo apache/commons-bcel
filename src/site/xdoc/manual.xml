@@ -623,7 +623,7 @@
   <p>
     The "static" component of the <font
      face="helvetica,arial">BCEL</font> API resides in the package
-     <tt>org.apache.commons.bcel6.classfile</tt> and closely represents class
+     <tt>org.apache.bcel.classfile</tt> and closely represents class
      files. All of the binary components and data structures declared
      in the <a
      href="http://docs.oracle.com/javase/specs/">JVM
@@ -751,7 +751,7 @@
 
   <section name="3.3 ClassGen">
   <p>
-    This part of the API (package <tt>org.apache.commons.bcel6.generic</tt>)
+    This part of the API (package <tt>org.apache.bcel.generic</tt>)
     supplies an abstraction level for creating or transforming class
     files dynamically. It makes the static constraints of Java class
     files like the hard-coded byte code addresses "generic". The
@@ -1095,7 +1095,7 @@
 
   <p>
     The <tt>search()</tt> method of class
-    <tt>org.apache.commons.bcel6.util.InstructionFinder</tt> gets a regular
+    <tt>org.apache.bcel.util.InstructionFinder</tt> gets a regular
     expression and a starting point as arguments and returns an
     iterator describing the area of matched instructions. Additional
     constraints to the matching area of instructions, which can not be
@@ -1577,10 +1577,10 @@ symbolic type signature encoded with <tt>Type</tt> objects.
 import java.io.*;
 
 import java.util.Iterator;
-import org.apache.commons.bcel6.classfile.*;
-import org.apache.commons.bcel6.generic.*;
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.util.InstructionFinder;
+import org.apache.bcel.classfile.*;
+import org.apache.bcel.generic.*;
+import org.apache.bcel.Repository;
+import org.apache.bcel.util.InstructionFinder;
 
 public class Peephole {
 
