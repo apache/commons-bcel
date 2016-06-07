@@ -19,43 +19,101 @@
 -->
 
 <document>
-
+  <properties>
+    <title>Home</title>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
+  </properties>
   <body>
   
-  <section name="BCEL">
-  <p>
-    The Byte Code Engineering Library (Apache Commons BCEL&#x2122;) is intended to give users a
-    convenient way to analyze, create, and manipulate (binary)
-    Java class files (those ending with .class). Classes are
-    represented by objects which contain all the symbolic information
-    of the given class: methods, fields and byte code instructions, in
-    particular.
-  </p>
-  
-  <p>
-    Such objects can be read from an existing file, be transformed
-    by a program (e.g. a class loader at run-time) and written to a file again. 
-    An even more interesting application is the creation of classes from scratch 
-    at run-time. The Byte Code Engineering Library (BCEL) may be also useful 
-    if you want to learn about the Java Virtual Machine (JVM) and the format of 
-    Java .class files. 
-  </p>
-  
-  <p>
-    BCEL contains a byte code verifier named JustIce, which usually
-    gives you much better information about what's wrong with your
-    code than the standard JVM message.
-  </p>
+    <section name="Commons BCEL">
+      <p>
+        The Byte Code Engineering Library (Apache Commons BCEL&#x2122;) is intended to give users a
+        convenient way to analyze, create, and manipulate (binary)
+        Java class files (those ending with .class). Classes are
+        represented by objects which contain all the symbolic information
+        of the given class: methods, fields and byte code instructions, in
+        particular.
+      </p>
+    
+      <p>
+        Such objects can be read from an existing file, be transformed
+        by a program (e.g. a class loader at run-time) and written to a file again. 
+        An even more interesting application is the creation of classes from scratch 
+        at run-time. The Byte Code Engineering Library (BCEL) may be also useful 
+        if you want to learn about the Java Virtual Machine (JVM) and the format of 
+        Java .class files. 
+      </p>
+    
+      <p>
+        BCEL contains a byte code verifier named JustIce, which usually
+        gives you much better information about what's wrong with your
+        code than the standard JVM message.
+      </p>
+    
+      <p>
+        BCEL is already being used successfully in several projects such
+        as compilers, optimizers, obsfuscators, code generators
+        and analysis tools. Unfortunately there hasn't been much development
+        going on over the past few years. Feel free to help out or you
+        might want to have a look into the ASM project at objectweb.
+      </p>
+    </section>
 
-  <p>
-    BCEL is already being used successfully in several projects such
-    as compilers, optimizers, obsfuscators, code generators
-    and analysis tools. Unfortunately there hasn't been much development
-    going on over the past few years. Feel free to help out or you
-    might want to have a look into the ASM project at objectweb.
-  </p>
+    <section name="Documentation">
+      <p>
+        The package descriptions in the <a href="javadocs/api-release/index.html">JavaDoc</a> give an overview of the available features
+        and various <a href="project-reports.html">project reports</a> are provided.
+      </p>
+      <p>
+        The JavaDoc API documents are available online:
+      </p>
+      <ul>
+        <li>The <a href="apidocs/index.html">latest JavaDocs from SVN</a> [Java 7.0+]</li>
+        <li>The <a href="javadocs/api-5.2/index.html">current stable release 5.2</a></li>
+      </ul>
+      <p>
+        The <a href="source-repository.html">svn repository</a> can be
+        <a href="http://svn.apache.org/viewvc/commons/proper/bcel/trunk">browsed</a>, or you can browse/contribute via <a href="https://github.com/apache/commons-bcel">GitHub</a>.
+      </p>
+    </section>
+    <!-- ================================================== -->
+    <section name="Release Information">
+      <p>The latest stable release of BCEL is 5.2. You may: </p>
+      <ul>
+        <li>Download <a href="http://commons.apache.org/lang/download_bcel.cgi">3.4</a></li>
+        <li>Read the <a href="release-notes/RELEASE-NOTES-5.2.txt">5.2 release notes</a></li>
+      </ul>
+      <p>
+        Alternatively you can pull it from the central Maven repositories:
+        <pre>
+          &lt;groupId&gt;org.apache.bcel&lt;/groupId&gt;
+          &lt;artifactId&gt;bcel&lt;/artifactId&gt;
+          &lt;version&gt;5.2&lt;/version&gt;
+        </pre>
+      </p>
 
-  </section>
-  
+    </section>
+    <!-- ================================================== -->
+    <section name="Getting Involved">
+      <p>
+        The <a href="mail-lists.html">commons developer mailing list</a> is the main channel of communication for contributors. Please remember that the lists are shared between all commons components, so prefix your email by [lang]. </p>
+      <p>You can also visit the #apache-commons IRC channel on irc.freenode.net or peruse <a href="issue-tracking.html">JIRA</a>. 
+      <p>Alternatively you can go through the <em>Needs Work</em> tags in the <a href="taglist.html">TagList report</a>.</p>
+      <p>If you'd like to offer up pull requests via GitHub rather than applying patches to JIRA, we have a <a href="https://github.com/apache/commons-bcel/">GitHub mirror</a>. </p>
+    </section>
+    <!-- ================================================== -->
+    <section name="Support">
+      <p>
+        The <a href="mail-lists.html">commons mailing lists</a> act as the main support forum.
+        The user list is suitable for most library usage queries.
+        The dev list is intended for the development discussion.
+        Please remember that the lists are shared between all commons components,
+        so prefix your email by [BCEL].
+      </p>
+      <p>
+        Bug reports and enhancements are also welcomed via the <a href="issue-tracking.html">JIRA</a> issue tracker.
+        Please read the instructions carefully.
+      </p>
+    </section>
   </body>
 </document>
