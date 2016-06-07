@@ -72,7 +72,7 @@ final class MethodHTML {
      * Print field of class.
      *
      * @param field field to print
-     * @exception java.io.IOException
+     * @throws java.io.IOException
      */
     private void writeField( final Field field ) throws IOException {
         String type = Utility.signatureToString(field.getSignature());
