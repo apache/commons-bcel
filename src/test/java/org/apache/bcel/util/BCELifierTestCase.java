@@ -29,7 +29,6 @@ public class BCELifierTestCase {
      * TODO: detect if JDK present and skip test if not 
      */
     @Test
-    @org.junit.Ignore // does not work properly on some systems. Also the output is rather different 
     public void testJavapCompare() throws Exception {
         testClassOnPath("target/test-classes/Java8Example.class");
     }
@@ -50,7 +49,15 @@ public class BCELifierTestCase {
         exec(workDir, "javac", "-cp", "classes", outfile.getName());
         exec(workDir, "java", "-cp", ".:classes", outfile.getName().replace(".java", ""));
         final String output = exec(workDir, "javap", "-p", "-c", infile.getName());
-        assertEquals(initial, output);
+        assertEquals(canonHashRef(initial), canonHashRef(output));
+    }
+
+    // Canonicalise the javap output so it compares better
+    private String canonHashRef(String input) {
+        input = input.replaceAll("#\\d+", "#n"); // numbers may vary in length
+        input = input.replaceAll(" +", " "); // collapse spaces
+        input = input.replaceAll("//.+",""); // comments may vary
+        return input;
     }
 
     private String exec(final File workDir, final String ... args) throws Exception {
