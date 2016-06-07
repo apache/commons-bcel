@@ -406,6 +406,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-surefire-plugin</artifactId>
+            <version>${commons.surefire.version}</version>
             <configuration>
               <includes>
                 <include>**/PerformanceTest.java</include>
@@ -460,6 +461,7 @@
           <!-- Enable the compilation of the benchmarks -->
           <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
+            <version>${commons.compiler.version}</version>
             <configuration combine.self="override">
               <testIncludes>
                 <testInclude>**/*</testInclude>
