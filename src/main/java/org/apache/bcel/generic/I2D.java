@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /**
  * I2D - Convert int to double
@@ -28,7 +28,7 @@ public class I2D extends ConversionInstruction {
     /** Convert int to double
      */
     public I2D() {
-        super(org.apache.commons.bcel6.Const.I2D);
+        super(org.apache.bcel.Const.I2D);
     }
 
 

@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -27,9 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.Constant;
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.util.ByteSequence;
 
 /**
  * This class is a container for a list of <a href="Instruction.html">Instruction</a> objects. Instructions can be appended, inserted, moved, deleted, etc..

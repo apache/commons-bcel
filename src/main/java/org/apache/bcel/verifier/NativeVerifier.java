@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.verifier;
+package org.apache.bcel.verifier;
 
 /**
  * The NativeVerifier class implements a main(String[] args) method that's

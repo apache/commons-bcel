@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * BALOAD - Load byte or boolean from array
@@ -28,7 +28,7 @@ public class BALOAD extends ArrayInstruction implements StackProducer {
     /** Load byte or boolean from array
      */
     public BALOAD() {
-        super(org.apache.commons.bcel6.Const.BALOAD);
+        super(org.apache.bcel.Const.BALOAD);
     }
 
 

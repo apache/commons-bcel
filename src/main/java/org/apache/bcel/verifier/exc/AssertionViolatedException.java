@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.exc;
+package org.apache.bcel.verifier.exc;
 
 
 /**

@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /**
  * I2L - Convert int to long
@@ -28,7 +28,7 @@ public class I2L extends ConversionInstruction {
     /** Convert int to long
      */
     public I2L() {
-        super(org.apache.commons.bcel6.Const.I2L);
+        super(org.apache.bcel.Const.I2L);
     }
 
 

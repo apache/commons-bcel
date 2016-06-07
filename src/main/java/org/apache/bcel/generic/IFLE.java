@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IFLE - Branch if int comparison with zero succeeds
@@ -35,7 +35,7 @@ public class IFLE extends IfInstruction {
 
 
     public IFLE(final InstructionHandle target) {
-        super(org.apache.commons.bcel6.Const.IFLE, target);
+        super(org.apache.bcel.Const.IFLE, target);
     }
 
 

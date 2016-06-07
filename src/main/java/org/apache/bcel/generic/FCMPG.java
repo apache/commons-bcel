@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * FCMPG - Compare floats: value1 &gt; value2
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class FCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
     public FCMPG() {
-        super(org.apache.commons.bcel6.Const.FCMPG, (short) 1);
+        super(org.apache.bcel.Const.FCMPG, (short) 1);
     }
 
 

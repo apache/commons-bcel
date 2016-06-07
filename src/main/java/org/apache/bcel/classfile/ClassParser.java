@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -25,7 +25,7 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.apache.commons.bcel6.Const;
+import org.apache.bcel.Const;
 
 /**
  * Wrapper class that parses a given Java .class file. The method <A

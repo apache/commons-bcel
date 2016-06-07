@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DASTORE -  Store into double array
@@ -28,7 +28,7 @@ public class DASTORE extends ArrayInstruction implements StackConsumer {
     /** Store double into array
      */
     public DASTORE() {
-        super(org.apache.commons.bcel6.Const.DASTORE);
+        super(org.apache.bcel.Const.DASTORE);
     }
 
 

@@ -15,13 +15,13 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.ExceptionConst;
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.ExceptionConst;
+import org.apache.bcel.util.ByteSequence;
 
 /** 
  * NEWARRAY -  Create new array of basic type (int, short, ...)
@@ -45,7 +45,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
 
 
     public NEWARRAY(final byte type) {
-        super(org.apache.commons.bcel6.Const.NEWARRAY, (short) 2);
+        super(org.apache.bcel.Const.NEWARRAY, (short) 2);
         this.type = type;
     }
 
@@ -87,7 +87,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      */
     @Override
     public String toString( final boolean verbose ) {
-        return super.toString(verbose) + " " + org.apache.commons.bcel6.Const.getTypeName(type);
+        return super.toString(verbose) + " " + org.apache.bcel.Const.getTypeName(type);
     }
 
 

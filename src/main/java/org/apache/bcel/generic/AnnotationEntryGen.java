@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,14 +26,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.classfile.AnnotationEntry;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.ConstantUtf8;
-import org.apache.commons.bcel6.classfile.ElementValuePair;
-import org.apache.commons.bcel6.classfile.RuntimeInvisibleAnnotations;
-import org.apache.commons.bcel6.classfile.RuntimeInvisibleParameterAnnotations;
-import org.apache.commons.bcel6.classfile.RuntimeVisibleAnnotations;
-import org.apache.commons.bcel6.classfile.RuntimeVisibleParameterAnnotations;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.ElementValuePair;
+import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
+import org.apache.bcel.classfile.RuntimeInvisibleParameterAnnotations;
+import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
+import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
 
 /**
  * @since 6.0

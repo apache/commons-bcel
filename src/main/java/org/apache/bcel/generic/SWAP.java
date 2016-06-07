@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * SWAP - Swa top operand stack word
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class SWAP extends StackInstruction implements StackConsumer, StackProducer {
 
     public SWAP() {
-        super(org.apache.commons.bcel6.Const.SWAP);
+        super(org.apache.bcel.Const.SWAP);
     }
 
 

@@ -15,23 +15,23 @@
  * limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.AbstractTestCase;
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.AnnotationEntry;
-import org.apache.commons.bcel6.classfile.ArrayElementValue;
-import org.apache.commons.bcel6.classfile.ElementValue;
-import org.apache.commons.bcel6.classfile.ElementValuePair;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.ParameterAnnotationEntry;
-import org.apache.commons.bcel6.classfile.SimpleElementValue;
-import org.apache.commons.bcel6.util.SyntheticRepository;
+import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.ArrayElementValue;
+import org.apache.bcel.classfile.ElementValue;
+import org.apache.bcel.classfile.ElementValuePair;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.ParameterAnnotationEntry;
+import org.apache.bcel.classfile.SimpleElementValue;
+import org.apache.bcel.util.SyntheticRepository;
 
 /**
  * The program that some of the tests generate looks like this:

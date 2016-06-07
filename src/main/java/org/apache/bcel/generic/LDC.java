@@ -15,13 +15,13 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.ExceptionConst;
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.ExceptionConst;
+import org.apache.bcel.util.ByteSequence;
 
 /** 
  * LDC - Push item from constant pool.
@@ -41,18 +41,18 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
 
 
     public LDC(final int index) {
-        super(org.apache.commons.bcel6.Const.LDC_W, index);
+        super(org.apache.bcel.Const.LDC_W, index);
         setSize();
     }
 
 
     // Adjust to proper size
     protected final void setSize() {
-        if (super.getIndex() <= org.apache.commons.bcel6.Const.MAX_BYTE) { // Fits in one byte?
-            super.setOpcode(org.apache.commons.bcel6.Const.LDC);
+        if (super.getIndex() <= org.apache.bcel.Const.MAX_BYTE) { // Fits in one byte?
+            super.setOpcode(org.apache.bcel.Const.LDC);
             super.setLength(2);
         } else {
-            super.setOpcode(org.apache.commons.bcel6.Const.LDC_W);
+            super.setOpcode(org.apache.bcel.Const.LDC_W);
             super.setLength(3);
         }
     }
@@ -94,20 +94,20 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
 
 
     public Object getValue( final ConstantPoolGen cpg ) {
-        org.apache.commons.bcel6.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
+        org.apache.bcel.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
         switch (c.getTag()) {
-            case org.apache.commons.bcel6.Const.CONSTANT_String:
-                int i = ((org.apache.commons.bcel6.classfile.ConstantString) c).getStringIndex();
+            case org.apache.bcel.Const.CONSTANT_String:
+                int i = ((org.apache.bcel.classfile.ConstantString) c).getStringIndex();
                 c = cpg.getConstantPool().getConstant(i);
-                return ((org.apache.commons.bcel6.classfile.ConstantUtf8) c).getBytes();
-            case org.apache.commons.bcel6.Const.CONSTANT_Float:
-                return new Float(((org.apache.commons.bcel6.classfile.ConstantFloat) c).getBytes());
-            case org.apache.commons.bcel6.Const.CONSTANT_Integer:
-                return Integer.valueOf(((org.apache.commons.bcel6.classfile.ConstantInteger) c).getBytes());
-            case org.apache.commons.bcel6.Const.CONSTANT_Class:
-                int nameIndex = ((org.apache.commons.bcel6.classfile.ConstantClass) c).getNameIndex();
+                return ((org.apache.bcel.classfile.ConstantUtf8) c).getBytes();
+            case org.apache.bcel.Const.CONSTANT_Float:
+                return new Float(((org.apache.bcel.classfile.ConstantFloat) c).getBytes());
+            case org.apache.bcel.Const.CONSTANT_Integer:
+                return Integer.valueOf(((org.apache.bcel.classfile.ConstantInteger) c).getBytes());
+            case org.apache.bcel.Const.CONSTANT_Class:
+                int nameIndex = ((org.apache.bcel.classfile.ConstantClass) c).getNameIndex();
                 c = cpg.getConstantPool().getConstant(nameIndex);
-                return new ObjectType(((org.apache.commons.bcel6.classfile.ConstantUtf8) c).getBytes());
+                return new ObjectType(((org.apache.bcel.classfile.ConstantUtf8) c).getBytes());
             default: // Never reached
                 throw new RuntimeException("Unknown or invalid constant type at " + super.getIndex());
         }
@@ -117,13 +117,13 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     @Override
     public Type getType( final ConstantPoolGen cpg ) {
         switch (cpg.getConstantPool().getConstant(super.getIndex()).getTag()) {
-            case org.apache.commons.bcel6.Const.CONSTANT_String:
+            case org.apache.bcel.Const.CONSTANT_String:
                 return Type.STRING;
-            case org.apache.commons.bcel6.Const.CONSTANT_Float:
+            case org.apache.bcel.Const.CONSTANT_Float:
                 return Type.FLOAT;
-            case org.apache.commons.bcel6.Const.CONSTANT_Integer:
+            case org.apache.bcel.Const.CONSTANT_Integer:
                 return Type.INT;
-            case org.apache.commons.bcel6.Const.CONSTANT_Class:
+            case org.apache.bcel.Const.CONSTANT_Class:
                 return Type.CLASS;
             default: // Never reached
                 throw new RuntimeException("Unknown or invalid constant type at " + super.getIndex());

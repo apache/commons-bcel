@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IAND - Bitwise AND int
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class IAND extends ArithmeticInstruction {
 
     public IAND() {
-        super(org.apache.commons.bcel6.Const.IAND);
+        super(org.apache.bcel.Const.IAND);
     }
 
 

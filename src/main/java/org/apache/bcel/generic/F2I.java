@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * F2I - Convert float to int
@@ -28,7 +28,7 @@ public class F2I extends ConversionInstruction {
     /** Convert float to int
      */
     public F2I() {
-        super(org.apache.commons.bcel6.Const.F2I);
+        super(org.apache.bcel.Const.F2I);
     }
 
 

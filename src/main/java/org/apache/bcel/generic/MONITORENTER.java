@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.ExceptionConst;
+import org.apache.bcel.ExceptionConst;
 
 /** 
  * MONITORENTER - Enter monitor for object
@@ -28,7 +28,7 @@ import org.apache.commons.bcel6.ExceptionConst;
 public class MONITORENTER extends Instruction implements ExceptionThrower, StackConsumer {
 
     public MONITORENTER() {
-        super(org.apache.commons.bcel6.Const.MONITORENTER, (short) 1);
+        super(org.apache.bcel.Const.MONITORENTER, (short) 1);
     }
 
 

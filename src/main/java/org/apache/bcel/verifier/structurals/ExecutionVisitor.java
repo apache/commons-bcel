@@ -15,19 +15,19 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.Constant;
-import org.apache.commons.bcel6.classfile.ConstantClass;
-import org.apache.commons.bcel6.classfile.ConstantDouble;
-import org.apache.commons.bcel6.classfile.ConstantFloat;
-import org.apache.commons.bcel6.classfile.ConstantInteger;
-import org.apache.commons.bcel6.classfile.ConstantLong;
-import org.apache.commons.bcel6.classfile.ConstantString;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantString;
 // CHECKSTYLE:OFF (there are lots of references!)
-import org.apache.commons.bcel6.generic.*;
+import org.apache.bcel.generic.*;
 //CHECKSTYLE:ON
 
 /**

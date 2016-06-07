@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IALOAD - Load int from array
@@ -29,7 +29,7 @@ public class IALOAD extends ArrayInstruction implements StackProducer {
      * Load int from array
      */
     public IALOAD() {
-        super(org.apache.commons.bcel6.Const.IALOAD);
+        super(org.apache.bcel.Const.IALOAD);
     }
 
 

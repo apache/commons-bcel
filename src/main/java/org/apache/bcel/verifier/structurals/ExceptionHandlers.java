@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 
 import java.util.HashMap;
@@ -23,9 +23,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.bcel6.generic.CodeExceptionGen;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.MethodGen;
+import org.apache.bcel.generic.CodeExceptionGen;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.MethodGen;
 
 /**
  * This class allows easy access to ExceptionHandler objects.

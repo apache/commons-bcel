@@ -15,20 +15,20 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.Code;
-import org.apache.commons.bcel6.classfile.ConstantValue;
-import org.apache.commons.bcel6.classfile.ExceptionTable;
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.Utility;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Convert methods and fields into HTML file.

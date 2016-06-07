@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +26,7 @@ import java.util.Map;
  * This repository uses a factory design, allowing it to maintain a collection of different classpaths, and as such It is designed to be used as a singleton per
  * classpath.
  *
- * @see org.apache.commons.bcel6.Repository
+ * @see org.apache.bcel.Repository
  *
  * @version $Id$
  */

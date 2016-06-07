@@ -1,4 +1,4 @@
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.classfile.JavaClass;
 import org.junit.Test;
 
 

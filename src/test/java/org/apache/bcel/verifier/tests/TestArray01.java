@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package org.apache.commons.bcel6.verifier.tests;
+package org.apache.bcel.verifier.tests;
 
 import java.io.Serializable;
 

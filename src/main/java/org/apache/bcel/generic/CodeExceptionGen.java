@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.classfile.CodeException;
+import org.apache.bcel.classfile.CodeException;
 
 /** 
  * This class represents an exception handler, i.e., specifies the  region where

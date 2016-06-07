@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
 
 
     public GOTO(final InstructionHandle target) {
-        super(org.apache.commons.bcel6.Const.GOTO, target);
+        super(org.apache.bcel.Const.GOTO, target);
     }
 
 
@@ -48,7 +48,7 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
     public void dump( final DataOutputStream out ) throws IOException {
         super.setIndex(getTargetOffset());
         final short _opcode = getOpcode();
-        if (_opcode == org.apache.commons.bcel6.Const.GOTO) {
+        if (_opcode == org.apache.bcel.Const.GOTO) {
             super.dump(out);
         } else { // GOTO_W
             super.setIndex(getTargetOffset());
@@ -71,7 +71,7 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
         int i = getTargetOffset(); // Depending on old position value
         setPosition(getPosition() + offset); // Position may be shifted by preceding expansions
         if (Math.abs(i) >= (Short.MAX_VALUE - max_offset)) { // to large for short (estimate)
-            super.setOpcode(org.apache.commons.bcel6.Const.GOTO_W);
+            super.setOpcode(org.apache.bcel.Const.GOTO_W);
             short old_length = (short) super.getLength();
             super.setLength(5);
             return super.getLength() - old_length;

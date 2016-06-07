@@ -15,55 +15,55 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.statics;
+package org.apache.bcel.verifier.statics;
 
 
-import org.apache.commons.bcel6.classfile.AnnotationDefault;
-import org.apache.commons.bcel6.classfile.AnnotationEntry;
-import org.apache.commons.bcel6.classfile.Annotations;
-import org.apache.commons.bcel6.classfile.BootstrapMethods;
-import org.apache.commons.bcel6.classfile.Code;
-import org.apache.commons.bcel6.classfile.CodeException;
-import org.apache.commons.bcel6.classfile.ConstantClass;
-import org.apache.commons.bcel6.classfile.ConstantDouble;
-import org.apache.commons.bcel6.classfile.ConstantFieldref;
-import org.apache.commons.bcel6.classfile.ConstantFloat;
-import org.apache.commons.bcel6.classfile.ConstantInteger;
-import org.apache.commons.bcel6.classfile.ConstantInterfaceMethodref;
-import org.apache.commons.bcel6.classfile.ConstantInvokeDynamic;
-import org.apache.commons.bcel6.classfile.ConstantLong;
-import org.apache.commons.bcel6.classfile.ConstantMethodHandle;
-import org.apache.commons.bcel6.classfile.ConstantMethodType;
-import org.apache.commons.bcel6.classfile.ConstantMethodref;
-import org.apache.commons.bcel6.classfile.ConstantNameAndType;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.ConstantString;
-import org.apache.commons.bcel6.classfile.ConstantUtf8;
-import org.apache.commons.bcel6.classfile.ConstantValue;
-import org.apache.commons.bcel6.classfile.Deprecated;
-import org.apache.commons.bcel6.classfile.EnclosingMethod;
-import org.apache.commons.bcel6.classfile.ExceptionTable;
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.classfile.InnerClass;
-import org.apache.commons.bcel6.classfile.InnerClasses;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.LineNumber;
-import org.apache.commons.bcel6.classfile.LineNumberTable;
-import org.apache.commons.bcel6.classfile.LocalVariable;
-import org.apache.commons.bcel6.classfile.LocalVariableTable;
-import org.apache.commons.bcel6.classfile.LocalVariableTypeTable;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.MethodParameters;
-import org.apache.commons.bcel6.classfile.Node;
-import org.apache.commons.bcel6.classfile.ParameterAnnotationEntry;
-import org.apache.commons.bcel6.classfile.ParameterAnnotations;
-import org.apache.commons.bcel6.classfile.Signature;
-import org.apache.commons.bcel6.classfile.SourceFile;
-import org.apache.commons.bcel6.classfile.StackMap;
-import org.apache.commons.bcel6.classfile.StackMapEntry;
-import org.apache.commons.bcel6.classfile.Synthetic;
-import org.apache.commons.bcel6.classfile.Unknown;
-import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.classfile.AnnotationDefault;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Annotations;
+import org.apache.bcel.classfile.BootstrapMethods;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.CodeException;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFieldref;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantInvokeDynamic;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantMethodHandle;
+import org.apache.bcel.classfile.ConstantMethodType;
+import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.Deprecated;
+import org.apache.bcel.classfile.EnclosingMethod;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.InnerClass;
+import org.apache.bcel.classfile.InnerClasses;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.LineNumber;
+import org.apache.bcel.classfile.LineNumberTable;
+import org.apache.bcel.classfile.LocalVariable;
+import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.LocalVariableTypeTable;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.MethodParameters;
+import org.apache.bcel.classfile.Node;
+import org.apache.bcel.classfile.ParameterAnnotationEntry;
+import org.apache.bcel.classfile.ParameterAnnotations;
+import org.apache.bcel.classfile.Signature;
+import org.apache.bcel.classfile.SourceFile;
+import org.apache.bcel.classfile.StackMap;
+import org.apache.bcel.classfile.StackMapEntry;
+import org.apache.bcel.classfile.Synthetic;
+import org.apache.bcel.classfile.Unknown;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
 
 /**
  * BCEL's Node classes (those from the classfile API that <B>accept()</B> Visitor
@@ -79,7 +79,7 @@ import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
  *
  * @version $Id$
  */
-public class StringRepresentation extends org.apache.commons.bcel6.classfile.EmptyVisitor {
+public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor {
     /** The string representation, created by a visitXXX() method, output by toString(). */
     private String tostring;
     /** The node we ask for its string representation. Not really needed; only for debug output. */

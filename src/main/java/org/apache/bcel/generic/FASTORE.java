@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * FASTORE -  Store into float array
@@ -28,7 +28,7 @@ public class FASTORE extends ArrayInstruction implements StackConsumer {
     /** Store float into array
      */
     public FASTORE() {
-        super(org.apache.commons.bcel6.Const.FASTORE);
+        super(org.apache.bcel.Const.FASTORE);
     }
 
 

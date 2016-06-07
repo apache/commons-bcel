@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IFEQ - Branch if int comparison with zero succeeds
@@ -35,7 +35,7 @@ public class IFEQ extends IfInstruction {
 
 
     public IFEQ(final InstructionHandle target) {
-        super(org.apache.commons.bcel6.Const.IFEQ, target);
+        super(org.apache.bcel.Const.IFEQ, target);
     }
 
 

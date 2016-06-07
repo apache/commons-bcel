@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DSTORE - Store double into local variable
@@ -30,7 +30,7 @@ public class DSTORE extends StoreInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     DSTORE() {
-        super(org.apache.commons.bcel6.Const.DSTORE, org.apache.commons.bcel6.Const.DSTORE_0);
+        super(org.apache.bcel.Const.DSTORE, org.apache.bcel.Const.DSTORE_0);
     }
 
 
@@ -38,7 +38,7 @@ public class DSTORE extends StoreInstruction {
      * @param n index of local variable
      */
     public DSTORE(final int n) {
-        super(org.apache.commons.bcel6.Const.DSTORE, org.apache.commons.bcel6.Const.DSTORE_0, n);
+        super(org.apache.bcel.Const.DSTORE, org.apache.bcel.Const.DSTORE_0, n);
     }
 
 

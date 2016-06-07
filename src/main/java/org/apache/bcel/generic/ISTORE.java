@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * ISTORE - Store int from stack into local variable
@@ -30,7 +30,7 @@ public class ISTORE extends StoreInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     ISTORE() {
-        super(org.apache.commons.bcel6.Const.ISTORE, org.apache.commons.bcel6.Const.ISTORE_0);
+        super(org.apache.bcel.Const.ISTORE, org.apache.bcel.Const.ISTORE_0);
     }
 
 
@@ -38,7 +38,7 @@ public class ISTORE extends StoreInstruction {
      * @param n index of local variable
      */
     public ISTORE(final int n) {
-        super(org.apache.commons.bcel6.Const.ISTORE, org.apache.commons.bcel6.Const.ISTORE_0, n);
+        super(org.apache.bcel.Const.ISTORE, org.apache.bcel.Const.ISTORE_0, n);
     }
 
 

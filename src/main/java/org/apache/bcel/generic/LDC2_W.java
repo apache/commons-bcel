@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * LDC2_W - Push long or double from constant pool
@@ -35,16 +35,16 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
 
 
     public LDC2_W(final int index) {
-        super(org.apache.commons.bcel6.Const.LDC2_W, index);
+        super(org.apache.bcel.Const.LDC2_W, index);
     }
 
 
     @Override
     public Type getType( final ConstantPoolGen cpg ) {
         switch (cpg.getConstantPool().getConstant(super.getIndex()).getTag()) {
-            case org.apache.commons.bcel6.Const.CONSTANT_Long:
+            case org.apache.bcel.Const.CONSTANT_Long:
                 return Type.LONG;
-            case org.apache.commons.bcel6.Const.CONSTANT_Double:
+            case org.apache.bcel.Const.CONSTANT_Double:
                 return Type.DOUBLE;
             default: // Never reached
                 throw new RuntimeException("Unknown constant type " + super.getOpcode());
@@ -53,12 +53,12 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
 
 
     public Number getValue( final ConstantPoolGen cpg ) {
-        org.apache.commons.bcel6.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
+        org.apache.bcel.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
         switch (c.getTag()) {
-            case org.apache.commons.bcel6.Const.CONSTANT_Long:
-                return Long.valueOf(((org.apache.commons.bcel6.classfile.ConstantLong) c).getBytes());
-            case org.apache.commons.bcel6.Const.CONSTANT_Double:
-                return new Double(((org.apache.commons.bcel6.classfile.ConstantDouble) c).getBytes());
+            case org.apache.bcel.Const.CONSTANT_Long:
+                return Long.valueOf(((org.apache.bcel.classfile.ConstantLong) c).getBytes());
+            case org.apache.bcel.Const.CONSTANT_Double:
+                return new Double(((org.apache.bcel.classfile.ConstantDouble) c).getBytes());
             default: // Never reached
                 throw new RuntimeException("Unknown or invalid constant type at " + super.getIndex());
         }

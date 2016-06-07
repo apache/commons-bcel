@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * SALOAD - Load short from array
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class SALOAD extends ArrayInstruction implements StackProducer {
 
     public SALOAD() {
-        super(org.apache.commons.bcel6.Const.SALOAD);
+        super(org.apache.bcel.Const.SALOAD);
     }
 
 

@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * F2L - Convert float to long
@@ -28,7 +28,7 @@ public class F2L extends ConversionInstruction {
     /** Convert float to long
      */
     public F2L() {
-        super(org.apache.commons.bcel6.Const.F2L);
+        super(org.apache.bcel.Const.F2L);
     }
 
 

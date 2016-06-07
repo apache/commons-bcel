@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * D2I - Convert double to int
@@ -28,7 +28,7 @@ public class D2I extends ConversionInstruction {
     /** Convert double to int
      */
     public D2I() {
-        super(org.apache.commons.bcel6.Const.D2I);
+        super(org.apache.bcel.Const.D2I);
     }
 
 

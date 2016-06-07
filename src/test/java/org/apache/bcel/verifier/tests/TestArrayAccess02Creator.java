@@ -15,22 +15,22 @@
  * limitations under the License.
  * 
  */
-package org.apache.commons.bcel6.verifier.tests;
+package org.apache.bcel.verifier.tests;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.generic.ClassGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.InstructionConst;
-import org.apache.commons.bcel6.generic.InstructionFactory;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InstructionList;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.PUSH;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.Const;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.InstructionConst;
+import org.apache.bcel.generic.InstructionFactory;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.PUSH;
+import org.apache.bcel.generic.Type;
 import org.junit.Assert;
 
 public class TestArrayAccess02Creator extends TestCreator {

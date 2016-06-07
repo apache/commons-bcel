@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IF_ICMPGT - Branch if int comparison succeeds
@@ -35,7 +35,7 @@ public class IF_ICMPGT extends IfInstruction {
 
 
     public IF_ICMPGT(final InstructionHandle target) {
-        super(org.apache.commons.bcel6.Const.IF_ICMPGT, target);
+        super(org.apache.bcel.Const.IF_ICMPGT, target);
     }
 
 

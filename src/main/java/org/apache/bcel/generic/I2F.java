@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * I2F - Convert int to float
@@ -28,7 +28,7 @@ public class I2F extends ConversionInstruction {
     /** Convert int to float
      */
     public I2F() {
-        super(org.apache.commons.bcel6.Const.I2F);
+        super(org.apache.bcel.Const.I2F);
     }
 
 

@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * LLOAD - Load long from local variable
@@ -30,12 +30,12 @@ public class LLOAD extends LoadInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     LLOAD() {
-        super(org.apache.commons.bcel6.Const.LLOAD, org.apache.commons.bcel6.Const.LLOAD_0);
+        super(org.apache.bcel.Const.LLOAD, org.apache.bcel.Const.LLOAD_0);
     }
 
 
     public LLOAD(final int n) {
-        super(org.apache.commons.bcel6.Const.LLOAD, org.apache.commons.bcel6.Const.LLOAD_0, n);
+        super(org.apache.bcel.Const.LLOAD, org.apache.bcel.Const.LLOAD_0, n);
     }
 
 

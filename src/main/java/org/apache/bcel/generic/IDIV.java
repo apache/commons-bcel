@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.ExceptionConst;
+import org.apache.bcel.ExceptionConst;
 
 /**
  * IDIV - Divide ints
@@ -30,7 +30,7 @@ public class IDIV extends ArithmeticInstruction implements ExceptionThrower {
     /** Divide ints
      */
     public IDIV() {
-        super(org.apache.commons.bcel6.Const.IDIV);
+        super(org.apache.bcel.Const.IDIV);
     }
 
 

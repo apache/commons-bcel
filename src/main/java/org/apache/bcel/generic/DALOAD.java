@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DALOAD - Load double from array
@@ -28,7 +28,7 @@ public class DALOAD extends ArrayInstruction implements StackProducer {
     /** Load double from array
      */
     public DALOAD() {
-        super(org.apache.commons.bcel6.Const.DALOAD);
+        super(org.apache.bcel.Const.DALOAD);
     }
 
 

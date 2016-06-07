@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,10 +26,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.generic.ClassGenException;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InstructionList;
+import org.apache.bcel.Const;
+import org.apache.bcel.generic.ClassGenException;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
 
 /**
  * InstructionFinder is a tool to search for given instructions patterns, i.e.,

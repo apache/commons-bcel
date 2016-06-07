@@ -1,4 +1,4 @@
-package org.apache.commons.bcel6.verifier.tests;
+package org.apache.bcel.verifier.tests;
 
 import java.io.File;
 import java.io.FileOutputStream;

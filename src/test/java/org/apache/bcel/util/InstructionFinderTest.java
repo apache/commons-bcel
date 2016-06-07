@@ -16,16 +16,16 @@
  * 
  */
 
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.util.Iterator;
 
-import org.apache.commons.bcel6.AbstractTestCase;
-import org.apache.commons.bcel6.generic.IADD;
-import org.apache.commons.bcel6.generic.ILOAD;
-import org.apache.commons.bcel6.generic.ISTORE;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InstructionList;
+import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.generic.IADD;
+import org.apache.bcel.generic.ILOAD;
+import org.apache.bcel.generic.ISTORE;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
 
 public class InstructionFinderTest extends AbstractTestCase {
 

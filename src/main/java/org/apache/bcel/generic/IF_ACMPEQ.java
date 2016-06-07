@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IF_ACMPEQ - Branch if reference comparison succeeds
@@ -35,7 +35,7 @@ public class IF_ACMPEQ extends IfInstruction {
 
 
     public IF_ACMPEQ(final InstructionHandle target) {
-        super(org.apache.commons.bcel6.Const.IF_ACMPEQ, target);
+        super(org.apache.bcel.Const.IF_ACMPEQ, target);
     }
 
 

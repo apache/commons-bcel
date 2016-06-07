@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
 /** 
  * Thrown when the BCEL attempts to read a class file and determines

@@ -16,7 +16,7 @@
  * 
  */
 
-package org.apache.commons.bcel6.verifier;
+package org.apache.bcel.verifier;
 
 
 public class VerifierInvokeTestCase extends AbstractVerifierTestCase {

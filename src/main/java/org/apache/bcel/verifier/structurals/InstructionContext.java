@@ -15,12 +15,12 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 
 import java.util.ArrayList;
 
-import org.apache.commons.bcel6.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionHandle;
 
 /**
  * An InstructionContext offers convenient access

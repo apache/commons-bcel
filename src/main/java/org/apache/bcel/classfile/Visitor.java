@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
 /**
  * Interface to make use of the Visitor pattern programming style. I.e. a class

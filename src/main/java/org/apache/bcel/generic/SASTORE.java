@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /**
  * SASTORE - Store into short array
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class SASTORE extends ArrayInstruction implements StackConsumer {
 
     public SASTORE() {
-        super(org.apache.commons.bcel6.Const.SASTORE);
+        super(org.apache.bcel.Const.SASTORE);
     }
 
 

@@ -15,13 +15,13 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.commons.bcel6.generic.ReferenceType;
-import org.apache.commons.bcel6.generic.Type;
-import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
-import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
+import org.apache.bcel.generic.ReferenceType;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
  * This class implements an array of local variables used for symbolic JVM
@@ -174,8 +174,8 @@ public class LocalVariables implements Cloneable {
         else{
             if (! (locals[i].equals(lv.locals[i])) ){
 /*TODO
-                if ((locals[i] instanceof org.apache.commons.bcel6.generic.ReturnaddressType) &&
-                    (lv.locals[i] instanceof org.apache.commons.bcel6.generic.ReturnaddressType)){
+                if ((locals[i] instanceof org.apache.bcel.generic.ReturnaddressType) &&
+                    (lv.locals[i] instanceof org.apache.bcel.generic.ReturnaddressType)){
                     //System.err.println("merging "+locals[i]+" and "+lv.locals[i]);
                     throw new AssertionViolatedException("Merging different ReturnAddresses: '"+locals[i]+"' and '"+lv.locals[i]+"'.");
                 }

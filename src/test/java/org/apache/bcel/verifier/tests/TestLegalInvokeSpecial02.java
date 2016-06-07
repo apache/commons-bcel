@@ -15,7 +15,7 @@
  * limitations under the License.
  * 
  */
-package org.apache.commons.bcel6.verifier.tests;
+package org.apache.bcel.verifier.tests;
 
 public abstract class TestLegalInvokeSpecial02 implements Runnable{
 

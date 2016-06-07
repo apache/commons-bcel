@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.ExceptionConst;
+import org.apache.bcel.ExceptionConst;
 
 /** 
  * CHECKCAST - Check whether object is of given type
@@ -40,7 +40,7 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
      * @param index index to class in constant pool
      */
     public CHECKCAST(final int index) {
-        super(org.apache.commons.bcel6.Const.CHECKCAST, index);
+        super(org.apache.bcel.Const.CHECKCAST, index);
     }
 
 

@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * LAND - Bitwise AND longs
@@ -27,7 +27,7 @@ package org.apache.commons.bcel6.generic;
 public class LAND extends ArithmeticInstruction {
 
     public LAND() {
-        super(org.apache.commons.bcel6.Const.LAND);
+        super(org.apache.bcel.Const.LAND);
     }
 
 

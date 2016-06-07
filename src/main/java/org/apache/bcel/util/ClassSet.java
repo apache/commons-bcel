@@ -15,13 +15,13 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.classfile.JavaClass;
 
 /** 
  * Utility class implementing a (typesafe) set of JavaClass objects.

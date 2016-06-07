@@ -15,12 +15,12 @@
  * limitations under the License.
  */
 
-package org.apache.commons.bcel6.verifier;
+package org.apache.bcel.verifier;
 
 import java.io.IOException;
 
-import org.apache.commons.bcel6.verifier.tests.TestReturn01Creator;
-import org.apache.commons.bcel6.verifier.tests.TestReturn03Creator;
+import org.apache.bcel.verifier.tests.TestReturn01Creator;
+import org.apache.bcel.verifier.tests.TestReturn03Creator;
 
 public class VerifierReturnTestCase extends AbstractVerifierTestCase {
 

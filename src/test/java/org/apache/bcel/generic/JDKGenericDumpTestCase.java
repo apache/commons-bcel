@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.fail;
@@ -27,10 +27,10 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.commons.bcel6.classfile.ClassParser;
-import org.apache.commons.bcel6.classfile.Code;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
 import org.junit.Test;
 
 /**

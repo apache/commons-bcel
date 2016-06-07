@@ -15,25 +15,25 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Locale;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.ClassParser;
-import org.apache.commons.bcel6.classfile.ConstantValue;
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.Utility;
-import org.apache.commons.bcel6.generic.ArrayType;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.Const;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.ArrayType;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.Type;
 
 /** 
  * This class takes a given JavaClass object and converts it to a
@@ -44,7 +44,7 @@ import org.apache.commons.bcel6.generic.Type;
  *
  * @version $Id$
  */
-public class BCELifier extends org.apache.commons.bcel6.classfile.EmptyVisitor {
+public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 
     /**
      * Enum corresponding to flag source.

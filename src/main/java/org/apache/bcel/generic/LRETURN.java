@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * LRETURN -  Return long from method
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class LRETURN extends ReturnInstruction {
 
     public LRETURN() {
-        super(org.apache.commons.bcel6.Const.LRETURN);
+        super(org.apache.bcel.Const.LRETURN);
     }
 
 

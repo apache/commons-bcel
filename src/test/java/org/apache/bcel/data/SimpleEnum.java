@@ -16,6 +16,6 @@
  * 
  */
 
-package org.apache.commons.bcel6.data;
+package org.apache.bcel.data;
 
 public enum SimpleEnum { Red,Orange,Yellow,Green,Blue,Indigo,Violet }

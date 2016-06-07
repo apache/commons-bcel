@@ -1,4 +1,4 @@
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -15,27 +15,27 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.Constant;
-import org.apache.commons.bcel6.classfile.ConstantCP;
-import org.apache.commons.bcel6.classfile.ConstantClass;
-import org.apache.commons.bcel6.classfile.ConstantDouble;
-import org.apache.commons.bcel6.classfile.ConstantFieldref;
-import org.apache.commons.bcel6.classfile.ConstantFloat;
-import org.apache.commons.bcel6.classfile.ConstantInteger;
-import org.apache.commons.bcel6.classfile.ConstantInterfaceMethodref;
-import org.apache.commons.bcel6.classfile.ConstantInvokeDynamic;
-import org.apache.commons.bcel6.classfile.ConstantLong;
-import org.apache.commons.bcel6.classfile.ConstantMethodref;
-import org.apache.commons.bcel6.classfile.ConstantNameAndType;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.ConstantString;
-import org.apache.commons.bcel6.classfile.ConstantUtf8;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantCP;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFieldref;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantInvokeDynamic;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.ConstantUtf8;
 
 /** 
  * This class is used to build up a constant pool. The user adds
@@ -190,9 +190,9 @@ public class ConstantPoolGen {
                 // nothing to do
             } else if (c instanceof ConstantDouble) {
                 // nothing to do
-            } else if (c instanceof org.apache.commons.bcel6.classfile.ConstantMethodType) {
+            } else if (c instanceof org.apache.bcel.classfile.ConstantMethodType) {
                 // TODO should this be handled somehow?
-            } else if (c instanceof org.apache.commons.bcel6.classfile.ConstantMethodHandle) {
+            } else if (c instanceof org.apache.bcel.classfile.ConstantMethodHandle) {
                 // TODO should this be handled somehow?
             } else {
                 assert false : "Unexpected constant type: " + c.getClass().getName();

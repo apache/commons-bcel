@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * LCONST - Push 0 or 1, other values cause an exception
@@ -38,11 +38,11 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
 
 
     public LCONST(final long l) {
-        super(org.apache.commons.bcel6.Const.LCONST_0, (short) 1);
+        super(org.apache.bcel.Const.LCONST_0, (short) 1);
         if (l == 0) {
-            super.setOpcode(org.apache.commons.bcel6.Const.LCONST_0);
+            super.setOpcode(org.apache.bcel.Const.LCONST_0);
         } else if (l == 1) {
-            super.setOpcode(org.apache.commons.bcel6.Const.LCONST_1);
+            super.setOpcode(org.apache.bcel.Const.LCONST_1);
         } else {
             throw new ClassGenException("LCONST can be used only for 0 and 1: " + l);
         }

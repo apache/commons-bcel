@@ -16,7 +16,7 @@
  * 
  */
 
-package org.apache.commons.bcel6.data;
+package org.apache.bcel.data;
 
 @AnnotationEnumElement(enumval = SimpleEnum.Red)
 public class AnnotatedWithEnumClass

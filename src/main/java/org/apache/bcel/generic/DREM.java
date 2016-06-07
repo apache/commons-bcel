@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DREM - Remainder of doubles
@@ -29,7 +29,7 @@ public class DREM extends ArithmeticInstruction {
     /** Remainder of doubles
      */
     public DREM() {
-        super(org.apache.commons.bcel6.Const.DREM);
+        super(org.apache.bcel.Const.DREM);
     }
 
 

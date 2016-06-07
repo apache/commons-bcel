@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DMUL - Multiply doubles
@@ -29,7 +29,7 @@ public class DMUL extends ArithmeticInstruction {
     /** Multiply doubles
      */
     public DMUL() {
-        super(org.apache.commons.bcel6.Const.DMUL);
+        super(org.apache.bcel.Const.DMUL);
     }
 
 

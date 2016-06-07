@@ -15,29 +15,29 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.Constant;
-import org.apache.commons.bcel6.classfile.ConstantClass;
-import org.apache.commons.bcel6.classfile.ConstantDouble;
-import org.apache.commons.bcel6.classfile.ConstantFieldref;
-import org.apache.commons.bcel6.classfile.ConstantFloat;
-import org.apache.commons.bcel6.classfile.ConstantInteger;
-import org.apache.commons.bcel6.classfile.ConstantLong;
-import org.apache.commons.bcel6.classfile.ConstantString;
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.Const;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFieldref;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.JavaClass;
 //CHECKSTYLE:OFF (there are lots of references!)
-import org.apache.commons.bcel6.generic.*;
+import org.apache.bcel.generic.*;
 //CHECKSTYLE:ON
-import org.apache.commons.bcel6.verifier.VerificationResult;
-import org.apache.commons.bcel6.verifier.Verifier;
-import org.apache.commons.bcel6.verifier.VerifierFactory;
-import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
-import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
+import org.apache.bcel.verifier.VerificationResult;
+import org.apache.bcel.verifier.Verifier;
+import org.apache.bcel.verifier.VerifierFactory;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 
 /**

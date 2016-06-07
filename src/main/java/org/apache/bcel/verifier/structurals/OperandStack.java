@@ -15,16 +15,16 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 
 import java.util.ArrayList;
 
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.ReferenceType;
-import org.apache.commons.bcel6.generic.Type;
-import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
-import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.ReferenceType;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
  * This class implements a stack used for symbolic JVM stack simulation.

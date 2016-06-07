@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * ASTORE - Store reference into local variable
@@ -30,7 +30,7 @@ public class ASTORE extends StoreInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     ASTORE() {
-        super(org.apache.commons.bcel6.Const.ASTORE, org.apache.commons.bcel6.Const.ASTORE_0);
+        super(org.apache.bcel.Const.ASTORE, org.apache.bcel.Const.ASTORE_0);
     }
 
 
@@ -38,7 +38,7 @@ public class ASTORE extends StoreInstruction {
      * @param n index of local variable
      */
     public ASTORE(final int n) {
-        super(org.apache.commons.bcel6.Const.ASTORE, org.apache.commons.bcel6.Const.ASTORE_0, n);
+        super(org.apache.bcel.Const.ASTORE, org.apache.bcel.Const.ASTORE_0, n);
     }
 
 

@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * FCONST - Push 0.0, 1.0 or 2.0, other values cause an exception
@@ -38,13 +38,13 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
 
 
     public FCONST(final float f) {
-        super(org.apache.commons.bcel6.Const.FCONST_0, (short) 1);
+        super(org.apache.bcel.Const.FCONST_0, (short) 1);
         if (f == 0.0) {
-            super.setOpcode(org.apache.commons.bcel6.Const.FCONST_0);
+            super.setOpcode(org.apache.bcel.Const.FCONST_0);
         } else if (f == 1.0) {
-            super.setOpcode(org.apache.commons.bcel6.Const.FCONST_1);
+            super.setOpcode(org.apache.bcel.Const.FCONST_1);
         } else if (f == 2.0) {
-            super.setOpcode(org.apache.commons.bcel6.Const.FCONST_2);
+            super.setOpcode(org.apache.bcel.Const.FCONST_2);
         } else {
             throw new ClassGenException("FCONST can be used only for 0.0, 1.0 and 2.0: " + f);
         }

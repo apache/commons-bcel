@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.Const;
+import org.apache.bcel.Const;
 
 /** 
  * Instances of this class may be used, e.g., to generate typed
@@ -592,7 +592,7 @@ public class InstructionFactory {
                     && (src == Const.T_CHAR || src == Const.T_BYTE || src == Const.T_SHORT)) {
                 src = Const.T_INT;
             }
-            String name = "org.apache.commons.bcel6.generic." + short_names[src - Const.T_CHAR] + "2"
+            String name = "org.apache.bcel.generic." + short_names[src - Const.T_CHAR] + "2"
                     + short_names[dest - Const.T_CHAR];
             Instruction i = null;
             try {

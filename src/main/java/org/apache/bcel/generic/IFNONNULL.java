@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IFNONNULL - Branch if reference is not null
@@ -35,7 +35,7 @@ public class IFNONNULL extends IfInstruction {
 
 
     public IFNONNULL(final InstructionHandle target) {
-        super(org.apache.commons.bcel6.Const.IFNONNULL, target);
+        super(org.apache.bcel.Const.IFNONNULL, target);
     }
 
 

@@ -15,17 +15,17 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.ExceptionConst;
-import org.apache.commons.bcel6.classfile.ConstantInvokeDynamic;
-import org.apache.commons.bcel6.classfile.ConstantNameAndType;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.Const;
+import org.apache.bcel.ExceptionConst;
+import org.apache.bcel.classfile.ConstantInvokeDynamic;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.util.ByteSequence;
 
 /**
  * Class for INVOKEDYNAMIC. Not an instance of InvokeInstruction, since that class

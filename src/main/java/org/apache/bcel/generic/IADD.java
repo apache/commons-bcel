@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IADD - Add ints
@@ -28,7 +28,7 @@ public class IADD extends ArithmeticInstruction {
     /** Add ints
      */
     public IADD() {
-        super(org.apache.commons.bcel6.Const.IADD);
+        super(org.apache.bcel.Const.IADD);
     }
 
 

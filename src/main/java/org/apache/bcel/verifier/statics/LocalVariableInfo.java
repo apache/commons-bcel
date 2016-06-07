@@ -15,13 +15,13 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.statics;
+package org.apache.bcel.verifier.statics;
 
 
 import java.util.Hashtable;
 
-import org.apache.commons.bcel6.generic.Type;
-import org.apache.commons.bcel6.verifier.exc.LocalVariableInfoInconsistentException;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
 
 /**
  * A utility class holding the information about

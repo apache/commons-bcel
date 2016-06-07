@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IF_ACMPNE - Branch if reference comparison doesn't succeed
@@ -35,7 +35,7 @@ public class IF_ACMPNE extends IfInstruction {
 
 
     public IF_ACMPNE(final InstructionHandle target) {
-        super(org.apache.commons.bcel6.Const.IF_ACMPNE, target);
+        super(org.apache.bcel.Const.IF_ACMPNE, target);
     }
 
 

@@ -15,14 +15,14 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.AccessFlags;
-import org.apache.commons.bcel6.classfile.Attribute;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.AccessFlags;
+import org.apache.bcel.classfile.Attribute;
 
 /**
  * Super class for FieldGen and MethodGen objects, since they have

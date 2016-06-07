@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * LADD - Add longs
@@ -27,7 +27,7 @@ package org.apache.commons.bcel6.generic;
 public class LADD extends ArithmeticInstruction {
 
     public LADD() {
-        super(org.apache.commons.bcel6.Const.LADD);
+        super(org.apache.bcel.Const.LADD);
     }
 
 

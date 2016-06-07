@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.verifier;
+package org.apache.bcel.verifier;
 
 import java.util.ArrayList;
 import java.util.List;

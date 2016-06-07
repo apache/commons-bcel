@@ -15,18 +15,18 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.classfile.ConstantDouble;
-import org.apache.commons.bcel6.classfile.ConstantFloat;
-import org.apache.commons.bcel6.classfile.ConstantInteger;
-import org.apache.commons.bcel6.classfile.ConstantLong;
-import org.apache.commons.bcel6.classfile.ConstantUtf8;
-import org.apache.commons.bcel6.classfile.ElementValue;
-import org.apache.commons.bcel6.classfile.SimpleElementValue;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.ElementValue;
+import org.apache.bcel.classfile.SimpleElementValue;
 
 /**
  * @since 6.0

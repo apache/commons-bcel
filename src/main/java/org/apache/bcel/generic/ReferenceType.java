@@ -15,11 +15,11 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.Const;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
 
 /**
  * Super class for object and array types.

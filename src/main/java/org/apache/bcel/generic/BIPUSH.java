@@ -15,12 +15,12 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.util.ByteSequence;
 
 /** 
  * BIPUSH - Push byte on stack
@@ -45,7 +45,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     /** Push byte on stack
      */
     public BIPUSH(final byte b) {
-        super(org.apache.commons.bcel6.Const.BIPUSH, (short) 2);
+        super(org.apache.bcel.Const.BIPUSH, (short) 2);
         this.b = b;
     }
 

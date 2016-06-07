@@ -58,6 +58,7 @@
     <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
     <!-- Latest Clirr Plugin version (2.7) causes NPE -->
     <commons.clirr.version>2.6.1</commons.clirr.version>
+    <additionalparam>-Xdoclint:none</additionalparam>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->

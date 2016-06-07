@@ -15,10 +15,10 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.LocalVariable;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.LocalVariable;
 
 /** 
  * This class represents a local variable within a method. It contains its

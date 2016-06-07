@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * CASTORE -  Store into char array
@@ -28,7 +28,7 @@ public class CASTORE extends ArrayInstruction implements StackConsumer {
     /** Store char into array
      */
     public CASTORE() {
-        super(org.apache.commons.bcel6.Const.CASTORE);
+        super(org.apache.bcel.Const.CASTORE);
     }
 
 

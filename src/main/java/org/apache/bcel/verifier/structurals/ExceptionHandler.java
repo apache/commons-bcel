@@ -15,11 +15,11 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.ObjectType;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.ObjectType;
 
 /**
  * This class represents an exception handler; that is, an ObjectType

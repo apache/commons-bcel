@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IASTORE -  Store into int array
@@ -29,7 +29,7 @@ public class IASTORE extends ArrayInstruction implements StackConsumer {
      * Store into int array
      */
     public IASTORE() {
-        super(org.apache.commons.bcel6.Const.IASTORE);
+        super(org.apache.bcel.Const.IASTORE);
     }
 
 

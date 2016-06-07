@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DADD - Add doubles
@@ -29,7 +29,7 @@ public class DADD extends ArithmeticInstruction {
     /** Add doubles
      */
     public DADD() {
-        super(org.apache.commons.bcel6.Const.DADD);
+        super(org.apache.bcel.Const.DADD);
     }
 
 

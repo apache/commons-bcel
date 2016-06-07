@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DCONST - Push 0.0 or 1.0, other values cause an exception
@@ -38,11 +38,11 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
 
 
     public DCONST(final double f) {
-        super(org.apache.commons.bcel6.Const.DCONST_0, (short) 1);
+        super(org.apache.bcel.Const.DCONST_0, (short) 1);
         if (f == 0.0) {
-            super.setOpcode(org.apache.commons.bcel6.Const.DCONST_0);
+            super.setOpcode(org.apache.bcel.Const.DCONST_0);
         } else if (f == 1.0) {
-            super.setOpcode(org.apache.commons.bcel6.Const.DCONST_1);
+            super.setOpcode(org.apache.bcel.Const.DCONST_1);
         } else {
             throw new ClassGenException("DCONST can be used only for 0.0 and 1.0: " + f);
         }

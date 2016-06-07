@@ -15,12 +15,12 @@
  * limitations under the License.
  */
 
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.io.File;
 import java.io.FileInputStream;
 
-import org.apache.commons.bcel6.classfile.ClassParser;
+import org.apache.bcel.classfile.ClassParser;
 import org.junit.Assert;
 
 import junit.framework.TestCase;

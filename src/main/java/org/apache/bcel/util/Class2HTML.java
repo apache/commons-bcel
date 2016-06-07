@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,13 +24,13 @@ import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.ClassParser;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.Utility;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Read class file(s) and convert them into HTML files.

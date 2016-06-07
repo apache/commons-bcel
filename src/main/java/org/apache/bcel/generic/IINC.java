@@ -15,12 +15,12 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.util.ByteSequence;
 
 /**
  * IINC - Increment local variable by constant
@@ -47,7 +47,7 @@ public class IINC extends LocalVariableInstruction {
      */
     public IINC(final int n, final int c) {
         super(); // Default behaviour of LocalVariableInstruction causes error
-        super.setOpcode(org.apache.commons.bcel6.Const.IINC);
+        super.setOpcode(org.apache.bcel.Const.IINC);
         super.setLength((short) 3);
         setIndex(n); // May set wide as side effect
         setIncrement(c);
@@ -61,7 +61,7 @@ public class IINC extends LocalVariableInstruction {
     @Override
     public void dump( final DataOutputStream out ) throws IOException {
         if (wide) {
-            out.writeByte(org.apache.commons.bcel6.Const.WIDE);
+            out.writeByte(org.apache.bcel.Const.WIDE);
         }
         out.writeByte(super.getOpcode());
         if (wide) {
@@ -75,7 +75,7 @@ public class IINC extends LocalVariableInstruction {
 
 
     private void setWide() {
-        wide = (super.getIndex() > org.apache.commons.bcel6.Const.MAX_BYTE) || (Math.abs(c) > Byte.MAX_VALUE);
+        wide = (super.getIndex() > org.apache.bcel.Const.MAX_BYTE) || (Math.abs(c) > Byte.MAX_VALUE);
         if (wide) {
             super.setLength(6); // wide byte included  
         } else {

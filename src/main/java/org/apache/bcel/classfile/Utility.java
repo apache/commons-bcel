@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -34,8 +34,8 @@ import java.util.Locale;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.Const;
+import org.apache.bcel.util.ByteSequence;
 
 /**
  * Utility functions that do not really belong to any class in particular.

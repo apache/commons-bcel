@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * I2B - Convert int to byte
@@ -28,7 +28,7 @@ public class I2B extends ConversionInstruction {
     /** Convert int to byte
      */
     public I2B() {
-        super(org.apache.commons.bcel6.Const.I2B);
+        super(org.apache.bcel.Const.I2B);
     }
 
 

@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DUP - Duplicate top operand stack word
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class DUP extends StackInstruction implements PushInstruction {
 
     public DUP() {
-        super(org.apache.commons.bcel6.Const.DUP);
+        super(org.apache.bcel.Const.DUP);
     }
 
 

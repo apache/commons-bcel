@@ -15,14 +15,14 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.ExceptionConst;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.ExceptionConst;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.util.ByteSequence;
 
 /** 
  * MULTIANEWARRAY - Create new mutidimensional array of references
@@ -45,7 +45,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 
 
     public MULTIANEWARRAY(final int index, final short dimensions) {
-        super(org.apache.commons.bcel6.Const.MULTIANEWARRAY, index);
+        super(org.apache.bcel.Const.MULTIANEWARRAY, index);
         if (dimensions < 1) {
             throw new ClassGenException("Invalid dimensions value: " + dimensions);
         }

@@ -15,28 +15,28 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.Code;
-import org.apache.commons.bcel6.classfile.CodeException;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.ConstantUtf8;
-import org.apache.commons.bcel6.classfile.ConstantValue;
-import org.apache.commons.bcel6.classfile.ExceptionTable;
-import org.apache.commons.bcel6.classfile.InnerClass;
-import org.apache.commons.bcel6.classfile.InnerClasses;
-import org.apache.commons.bcel6.classfile.LineNumber;
-import org.apache.commons.bcel6.classfile.LineNumberTable;
-import org.apache.commons.bcel6.classfile.LocalVariable;
-import org.apache.commons.bcel6.classfile.LocalVariableTable;
-import org.apache.commons.bcel6.classfile.SourceFile;
-import org.apache.commons.bcel6.classfile.Utility;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.CodeException;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.InnerClass;
+import org.apache.bcel.classfile.InnerClasses;
+import org.apache.bcel.classfile.LineNumber;
+import org.apache.bcel.classfile.LineNumberTable;
+import org.apache.bcel.classfile.LocalVariable;
+import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.SourceFile;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Convert found attributes into HTML file.

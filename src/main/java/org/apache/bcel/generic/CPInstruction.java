@@ -15,15 +15,15 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.classfile.Constant;
-import org.apache.commons.bcel6.classfile.ConstantClass;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.util.ByteSequence;
 
 /** 
  * Abstract super class for instructions that use an index into the 
@@ -98,7 +98,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
         if (c instanceof ConstantClass) {
             str = str.replace('.', '/');
         }
-        return org.apache.commons.bcel6.Const.getOpcodeName(super.getOpcode()) + " " + str;
+        return org.apache.bcel.Const.getOpcodeName(super.getOpcode()) + " " + str;
     }
 
 
@@ -141,7 +141,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     @Override
     public Type getType( final ConstantPoolGen cpg ) {
         ConstantPool cp = cpg.getConstantPool();
-        String name = cp.getConstantString(index, org.apache.commons.bcel6.Const.CONSTANT_Class);
+        String name = cp.getConstantString(index, org.apache.bcel.Const.CONSTANT_Class);
         if (!name.startsWith("[")) {
             name = "L" + name + ";";
         }

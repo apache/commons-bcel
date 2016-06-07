@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * D2L - Convert double to long
@@ -28,7 +28,7 @@ public class D2L extends ConversionInstruction {
     /** Convert double to long
      */
     public D2L() {
-        super(org.apache.commons.bcel6.Const.D2L);
+        super(org.apache.bcel.Const.D2L);
     }
 
 

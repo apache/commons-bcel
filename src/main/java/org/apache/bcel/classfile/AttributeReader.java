@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
 /**
  * Unknown (non-standard) attributes may be read via user-defined factory

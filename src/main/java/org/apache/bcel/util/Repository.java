@@ -15,16 +15,16 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.classfile.JavaClass;
 
 /**
  * Abstract definition of a class repository. Instances may be used
  * to load classes from different sources and may be used in the
  * Repository.setRepository method.
  *
- * @see org.apache.commons.bcel6.Repository
+ * @see org.apache.bcel.Repository
  * @version $Id$
  */
 public interface Repository {

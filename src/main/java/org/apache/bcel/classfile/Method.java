@@ -15,14 +15,14 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
 import java.io.DataInput;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.generic.Type;
-import org.apache.commons.bcel6.util.BCELComparator;
+import org.apache.bcel.Const;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.util.BCELComparator;
 
 /**
  * This class represents the method info structure, i.e., the representation 

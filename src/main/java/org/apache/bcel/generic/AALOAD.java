@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * AALOAD - Load reference from array
@@ -28,7 +28,7 @@ public class AALOAD extends ArrayInstruction implements StackProducer {
     /** Load reference from array
      */
     public AALOAD() {
-        super(org.apache.commons.bcel6.Const.AALOAD);
+        super(org.apache.bcel.Const.AALOAD);
     }
 
 

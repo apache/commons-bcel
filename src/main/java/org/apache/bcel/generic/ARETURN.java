@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * ARETURN -  Return reference from method
@@ -29,7 +29,7 @@ public class ARETURN extends ReturnInstruction {
      * Return reference from method
      */
     public ARETURN() {
-        super(org.apache.commons.bcel6.Const.ARETURN);
+        super(org.apache.bcel.Const.ARETURN);
     }
 
 

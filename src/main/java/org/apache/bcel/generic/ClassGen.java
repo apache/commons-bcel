@@ -15,24 +15,24 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.AccessFlags;
-import org.apache.commons.bcel6.classfile.AnnotationEntry;
-import org.apache.commons.bcel6.classfile.Annotations;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.RuntimeInvisibleAnnotations;
-import org.apache.commons.bcel6.classfile.RuntimeVisibleAnnotations;
-import org.apache.commons.bcel6.classfile.SourceFile;
-import org.apache.commons.bcel6.util.BCELComparator;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.AccessFlags;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Annotations;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
+import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
+import org.apache.bcel.classfile.SourceFile;
+import org.apache.bcel.util.BCELComparator;
 
 /** 
  * Template class for building up a java class. May be initialized with an

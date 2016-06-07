@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -29,11 +29,11 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.generic.Type;
-import org.apache.commons.bcel6.util.BCELComparator;
-import org.apache.commons.bcel6.util.ClassQueue;
-import org.apache.commons.bcel6.util.SyntheticRepository;
+import org.apache.bcel.Const;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.util.BCELComparator;
+import org.apache.bcel.util.ClassQueue;
+import org.apache.bcel.util.SyntheticRepository;
 
 /**
  * Represents a Java class, i.e., the data structures, constant pool,
@@ -44,7 +44,7 @@ import org.apache.commons.bcel6.util.SyntheticRepository;
  * should see the <a href="../generic/ClassGen.html">ClassGen</a> class.
 
  * @version $Id$
- * @see org.apache.commons.bcel6.generic.ClassGen
+ * @see org.apache.bcel.generic.ClassGen
  */
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
 
@@ -94,7 +94,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * use the default SyntheticRepository, because we
      * don't know any better.
      */
-    private transient org.apache.commons.bcel6.util.Repository repository = SyntheticRepository
+    private transient org.apache.bcel.util.Repository repository = SyntheticRepository
             .getInstance();
 
 
@@ -756,7 +756,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Gets the ClassRepository which holds its definition. By default
      * this is the same as SyntheticRepository.getInstance();
      */
-    public org.apache.commons.bcel6.util.Repository getRepository() {
+    public org.apache.bcel.util.Repository getRepository() {
         return repository;
     }
 
@@ -765,7 +765,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Sets the ClassRepository which loaded the JavaClass.
      * Should be called immediately after parsing is done.
      */
-    public void setRepository( final org.apache.commons.bcel6.util.Repository repository ) { // TODO make protected?
+    public void setRepository( final org.apache.bcel.util.Repository repository ) { // TODO make protected?
         this.repository = repository;
     }
 

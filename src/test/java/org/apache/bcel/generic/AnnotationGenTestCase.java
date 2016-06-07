@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -25,12 +25,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.AbstractTestCase;
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.Annotations;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.RuntimeInvisibleAnnotations;
-import org.apache.commons.bcel6.classfile.RuntimeVisibleAnnotations;
+import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Annotations;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
+import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {

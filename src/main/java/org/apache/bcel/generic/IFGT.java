@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * IFGT - Branch if int comparison with zero succeeds
@@ -35,7 +35,7 @@ public class IFGT extends IfInstruction {
 
 
     public IFGT(final InstructionHandle target) {
-        super(org.apache.commons.bcel6.Const.IFGT, target);
+        super(org.apache.bcel.Const.IFGT, target);
     }
 
 

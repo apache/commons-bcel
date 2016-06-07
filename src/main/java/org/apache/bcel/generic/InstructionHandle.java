@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.bcel6.classfile.Utility;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Instances of this class give users a handle to the instructions contained in

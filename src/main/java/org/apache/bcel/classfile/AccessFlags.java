@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
-import org.apache.commons.bcel6.Const;
+import org.apache.bcel.Const;
 
 /**
  * Super class for all objects that have modifiers like private, final, ...

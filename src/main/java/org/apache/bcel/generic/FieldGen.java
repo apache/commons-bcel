@@ -15,22 +15,22 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.AnnotationEntry;
-import org.apache.commons.bcel6.classfile.Annotations;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.Constant;
-import org.apache.commons.bcel6.classfile.ConstantObject;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.ConstantValue;
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.classfile.Utility;
-import org.apache.commons.bcel6.util.BCELComparator;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Annotations;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantObject;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.util.BCELComparator;
 
 /** 
  * Template class for building up a field.  The only extraordinary thing

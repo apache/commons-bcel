@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,22 +24,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.bcel6.generic.ASTORE;
-import org.apache.commons.bcel6.generic.ATHROW;
-import org.apache.commons.bcel6.generic.BranchInstruction;
-import org.apache.commons.bcel6.generic.CodeExceptionGen;
-import org.apache.commons.bcel6.generic.GotoInstruction;
-import org.apache.commons.bcel6.generic.IndexedInstruction;
-import org.apache.commons.bcel6.generic.Instruction;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.JsrInstruction;
-import org.apache.commons.bcel6.generic.LocalVariableInstruction;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.RET;
-import org.apache.commons.bcel6.generic.ReturnInstruction;
-import org.apache.commons.bcel6.generic.Select;
-import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
-import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
+import org.apache.bcel.generic.ASTORE;
+import org.apache.bcel.generic.ATHROW;
+import org.apache.bcel.generic.BranchInstruction;
+import org.apache.bcel.generic.CodeExceptionGen;
+import org.apache.bcel.generic.GotoInstruction;
+import org.apache.bcel.generic.IndexedInstruction;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.JsrInstruction;
+import org.apache.bcel.generic.LocalVariableInstruction;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.RET;
+import org.apache.bcel.generic.ReturnInstruction;
+import org.apache.bcel.generic.Select;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
  * Instances of this class contain information about the subroutines

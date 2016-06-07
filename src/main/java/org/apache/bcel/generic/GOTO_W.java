@@ -15,12 +15,12 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.util.ByteSequence;
 
 /** 
  * GOTO_W - Branch always (to relative offset, not absolute address)
@@ -38,7 +38,7 @@ public class GOTO_W extends GotoInstruction {
 
 
     public GOTO_W(final InstructionHandle target) {
-        super(org.apache.commons.bcel6.Const.GOTO_W, target);
+        super(org.apache.bcel.Const.GOTO_W, target);
         super.setLength(5);
     }
 

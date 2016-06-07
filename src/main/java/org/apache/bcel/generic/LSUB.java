@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * LSUB - Substract longs
@@ -27,7 +27,7 @@ package org.apache.commons.bcel6.generic;
 public class LSUB extends ArithmeticInstruction {
 
     public LSUB() {
-        super(org.apache.commons.bcel6.Const.LSUB);
+        super(org.apache.bcel.Const.LSUB);
     }
 
 

@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * FALOAD - Load float from array
@@ -28,7 +28,7 @@ public class FALOAD extends ArrayInstruction implements StackProducer {
     /** Load float from array
      */
     public FALOAD() {
-        super(org.apache.commons.bcel6.Const.FALOAD);
+        super(org.apache.bcel.Const.FALOAD);
     }
 
 

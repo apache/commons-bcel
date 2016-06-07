@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 
 import java.io.PrintWriter;
@@ -25,26 +25,26 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.JsrInstruction;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.RET;
-import org.apache.commons.bcel6.generic.ReferenceType;
-import org.apache.commons.bcel6.generic.ReturnInstruction;
-import org.apache.commons.bcel6.generic.ReturnaddressType;
-import org.apache.commons.bcel6.generic.Type;
-import org.apache.commons.bcel6.verifier.PassVerifier;
-import org.apache.commons.bcel6.verifier.VerificationResult;
-import org.apache.commons.bcel6.verifier.Verifier;
-import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
-import org.apache.commons.bcel6.verifier.exc.StructuralCodeConstraintException;
-import org.apache.commons.bcel6.verifier.exc.VerifierConstraintViolatedException;
+import org.apache.bcel.Const;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.JsrInstruction;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.RET;
+import org.apache.bcel.generic.ReferenceType;
+import org.apache.bcel.generic.ReturnInstruction;
+import org.apache.bcel.generic.ReturnaddressType;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.PassVerifier;
+import org.apache.bcel.verifier.VerificationResult;
+import org.apache.bcel.verifier.Verifier;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
+import org.apache.bcel.verifier.exc.VerifierConstraintViolatedException;
 
 /**
  * This PassVerifier verifies a method of class file according to pass 3,
@@ -112,7 +112,7 @@ public final class Pass3bVerifier extends PassVerifier{
     /**
      * This class should only be instantiated by a Verifier.
      *
-     * @see org.apache.commons.bcel6.verifier.Verifier
+     * @see org.apache.bcel.verifier.Verifier
      */
     public Pass3bVerifier(final Verifier owner, final int method_no){
         myOwner = owner;
@@ -306,8 +306,8 @@ public final class Pass3bVerifier extends PassVerifier{
       * verifier-inferred types and the class file's debug information (LocalVariables
       * attributes) match [TODO].
       *
-      * @see org.apache.commons.bcel6.verifier.statics.LocalVariablesInfo
-      * @see org.apache.commons.bcel6.verifier.statics.Pass2Verifier#getLocalVariablesInfo(int)
+      * @see org.apache.bcel.verifier.statics.LocalVariablesInfo
+      * @see org.apache.bcel.verifier.statics.Pass2Verifier#getLocalVariablesInfo(int)
       */
     @Override
     public VerificationResult do_verify(){

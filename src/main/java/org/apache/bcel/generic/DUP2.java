@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DUP2 - Duplicate two top operand stack words
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class DUP2 extends StackInstruction implements PushInstruction {
 
     public DUP2() {
-        super(org.apache.commons.bcel6.Const.DUP2);
+        super(org.apache.bcel.Const.DUP2);
     }
 
 

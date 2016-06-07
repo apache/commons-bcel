@@ -15,13 +15,13 @@
  *  limitations under the License.
  */
 
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.util.Arrays;
 
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.Method;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
 
 import junit.framework.TestCase;
 

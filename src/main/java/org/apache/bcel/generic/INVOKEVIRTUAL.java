@@ -15,13 +15,13 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.ExceptionConst;
+import org.apache.bcel.Const;
+import org.apache.bcel.ExceptionConst;
 
 /** 
  * INVOKEVIRTUAL - Invoke instance method; dispatch based on class

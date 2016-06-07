@@ -15,17 +15,17 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.statics;
+package org.apache.bcel.verifier.statics;
 
 
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.ClassFormatException;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.verifier.PassVerifier;
-import org.apache.commons.bcel6.verifier.VerificationResult;
-import org.apache.commons.bcel6.verifier.Verifier;
-import org.apache.commons.bcel6.verifier.exc.LoadingException;
-import org.apache.commons.bcel6.verifier.exc.Utility;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.verifier.PassVerifier;
+import org.apache.bcel.verifier.VerificationResult;
+import org.apache.bcel.verifier.Verifier;
+import org.apache.bcel.verifier.exc.LoadingException;
+import org.apache.bcel.verifier.exc.Utility;
 
 /**
  * This PassVerifier verifies a class file according to pass 1 as
@@ -140,8 +140,8 @@ public final class Pass1Verifier extends PassVerifier{
      * (like the check for extra bytes at the end of the class file) are handy when actually using BCEL to repair a class file
      * (otherwise you would not be able to load it into BCEL).</P>
      *
-     * @see org.apache.commons.bcel6.Repository
-     * @see org.apache.commons.bcel6.Const#JVM_CLASSFILE_MAGIC
+     * @see org.apache.bcel.Repository
+     * @see org.apache.bcel.Const#JVM_CLASSFILE_MAGIC
      */
     @Override
     public VerificationResult do_verify(){

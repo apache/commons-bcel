@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /**
  * ISHL - Arithmetic shift left int
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class ISHL extends ArithmeticInstruction {
 
     public ISHL() {
-        super(org.apache.commons.bcel6.Const.ISHL);
+        super(org.apache.bcel.Const.ISHL);
     }
 
 

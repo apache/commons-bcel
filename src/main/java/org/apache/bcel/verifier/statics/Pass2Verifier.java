@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.statics;
+package org.apache.bcel.verifier.statics;
 
 
 import java.util.HashMap;
@@ -25,53 +25,53 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.ClassFormatException;
-import org.apache.commons.bcel6.classfile.Code;
-import org.apache.commons.bcel6.classfile.CodeException;
-import org.apache.commons.bcel6.classfile.Constant;
-import org.apache.commons.bcel6.classfile.ConstantClass;
-import org.apache.commons.bcel6.classfile.ConstantDouble;
-import org.apache.commons.bcel6.classfile.ConstantFieldref;
-import org.apache.commons.bcel6.classfile.ConstantFloat;
-import org.apache.commons.bcel6.classfile.ConstantInteger;
-import org.apache.commons.bcel6.classfile.ConstantInterfaceMethodref;
-import org.apache.commons.bcel6.classfile.ConstantLong;
-import org.apache.commons.bcel6.classfile.ConstantMethodref;
-import org.apache.commons.bcel6.classfile.ConstantNameAndType;
-import org.apache.commons.bcel6.classfile.ConstantPool;
-import org.apache.commons.bcel6.classfile.ConstantString;
-import org.apache.commons.bcel6.classfile.ConstantUtf8;
-import org.apache.commons.bcel6.classfile.ConstantValue;
-import org.apache.commons.bcel6.classfile.Deprecated;
-import org.apache.commons.bcel6.classfile.DescendingVisitor;
-import org.apache.commons.bcel6.classfile.EmptyVisitor;
-import org.apache.commons.bcel6.classfile.ExceptionTable;
-import org.apache.commons.bcel6.classfile.Field;
-import org.apache.commons.bcel6.classfile.InnerClass;
-import org.apache.commons.bcel6.classfile.InnerClasses;
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.classfile.LineNumber;
-import org.apache.commons.bcel6.classfile.LineNumberTable;
-import org.apache.commons.bcel6.classfile.LocalVariable;
-import org.apache.commons.bcel6.classfile.LocalVariableTable;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.Node;
-import org.apache.commons.bcel6.classfile.SourceFile;
-import org.apache.commons.bcel6.classfile.Synthetic;
-import org.apache.commons.bcel6.classfile.Unknown;
-import org.apache.commons.bcel6.generic.ArrayType;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.Type;
-import org.apache.commons.bcel6.verifier.PassVerifier;
-import org.apache.commons.bcel6.verifier.VerificationResult;
-import org.apache.commons.bcel6.verifier.Verifier;
-import org.apache.commons.bcel6.verifier.VerifierFactory;
-import org.apache.commons.bcel6.verifier.exc.AssertionViolatedException;
-import org.apache.commons.bcel6.verifier.exc.ClassConstraintException;
-import org.apache.commons.bcel6.verifier.exc.LocalVariableInfoInconsistentException;
+import org.apache.bcel.Const;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.CodeException;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFieldref;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.Deprecated;
+import org.apache.bcel.classfile.DescendingVisitor;
+import org.apache.bcel.classfile.EmptyVisitor;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.InnerClass;
+import org.apache.bcel.classfile.InnerClasses;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.LineNumber;
+import org.apache.bcel.classfile.LineNumberTable;
+import org.apache.bcel.classfile.LocalVariable;
+import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Node;
+import org.apache.bcel.classfile.SourceFile;
+import org.apache.bcel.classfile.Synthetic;
+import org.apache.bcel.classfile.Unknown;
+import org.apache.bcel.generic.ArrayType;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.Type;
+import org.apache.bcel.verifier.PassVerifier;
+import org.apache.bcel.verifier.VerificationResult;
+import org.apache.bcel.verifier.Verifier;
+import org.apache.bcel.verifier.VerifierFactory;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.exc.ClassConstraintException;
+import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
 
 /**
  * This PassVerifier verifies a class file according to
@@ -314,7 +314,7 @@ public final class Pass2Verifier extends PassVerifier {
      *
      * @see #constant_pool_entries_satisfy_static_constraints()
      */
-    private final class CPESSC_Visitor extends org.apache.commons.bcel6.classfile.EmptyVisitor{
+    private final class CPESSC_Visitor extends org.apache.bcel.classfile.EmptyVisitor{
         private final Class<?> CONST_Class;
         /*
         private Class<?> CONST_Fieldref;
@@ -1303,7 +1303,7 @@ public final class Pass2Verifier extends PassVerifier {
      * pool must be valid.</B>
      *
      * @see #constant_pool_entries_satisfy_static_constraints()
-     * @see org.apache.commons.bcel6.classfile.ConstantCP
+     * @see org.apache.bcel.classfile.ConstantCP
      */
     private final class FAMRAV_Visitor extends EmptyVisitor{
         private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work.

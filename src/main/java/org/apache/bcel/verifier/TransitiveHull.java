@@ -15,10 +15,10 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.verifier;
+package org.apache.bcel.verifier;
 
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
 
 /**
  * This class has a main method implementing a demonstration program

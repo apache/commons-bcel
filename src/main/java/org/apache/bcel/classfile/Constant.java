@@ -15,14 +15,14 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.util.BCELComparator;
+import org.apache.bcel.Const;
+import org.apache.bcel.util.BCELComparator;
 
 /**
  * Abstract superclass for classes to represent the different constant types

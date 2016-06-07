@@ -15,11 +15,11 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.statics;
+package org.apache.bcel.verifier.statics;
 
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.Const;
+import org.apache.bcel.generic.Type;
 
 /**
  * This class represents the upper half of a DOUBLE variable.

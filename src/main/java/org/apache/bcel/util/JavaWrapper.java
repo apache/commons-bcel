@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -26,10 +26,10 @@ import java.lang.reflect.Modifier;
  * for your own applications.<br>
  * Call this wrapper with:
  * 
- * <pre>java org.apache.commons.bcel6.util.JavaWrapper &lt;real.class.name&gt; [arguments]</pre>
+ * <pre>java org.apache.bcel.util.JavaWrapper &lt;real.class.name&gt; [arguments]</pre>
  * 
  * <p>To use your own class loader you can set the "bcel.classloader" system property<p>
- * <pre>java org.apache.commons.bcel6.util.JavaWrapper -Dbcel.classloader=foo.MyLoader &lt;real.class.name&gt; [arguments]</pre>
+ * <pre>java org.apache.bcel.util.JavaWrapper -Dbcel.classloader=foo.MyLoader &lt;real.class.name&gt; [arguments]</pre>
  *
  * @version $Id$
  * @see ClassLoader

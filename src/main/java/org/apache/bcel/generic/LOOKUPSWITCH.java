@@ -15,12 +15,12 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.util.ByteSequence;
 
 /** 
  * LOOKUPSWITCH - Switch with unordered set of values
@@ -39,7 +39,7 @@ public class LOOKUPSWITCH extends Select {
 
 
     public LOOKUPSWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle defaultTarget) {
-        super(org.apache.commons.bcel6.Const.LOOKUPSWITCH, match, targets, defaultTarget);
+        super(org.apache.bcel.Const.LOOKUPSWITCH, match, targets, defaultTarget);
         /* alignment remainder assumed 0 here, until dump time. */
         final short _length = (short) (9 + getMatch_length() * 8);
         super.setLength(_length);

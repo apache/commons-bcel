@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.ExceptionConst;
+import org.apache.bcel.ExceptionConst;
 
 /** 
  * ATHROW -  Throw exception
@@ -31,7 +31,7 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
      *  Throw exception
      */
     public ATHROW() {
-        super(org.apache.commons.bcel6.Const.ATHROW, (short) 1);
+        super(org.apache.bcel.Const.ATHROW, (short) 1);
     }
 
 

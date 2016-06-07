@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * LASTORE -  Store into long array
@@ -28,7 +28,7 @@ public class LASTORE extends ArrayInstruction implements StackConsumer {
     /** Store long into array
      */
     public LASTORE() {
-        super(org.apache.commons.bcel6.Const.LASTORE);
+        super(org.apache.bcel.Const.LASTORE);
     }
 
 

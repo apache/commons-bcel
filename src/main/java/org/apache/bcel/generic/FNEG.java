@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * FNEG - Negate float
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class FNEG extends ArithmeticInstruction {
 
     public FNEG() {
-        super(org.apache.commons.bcel6.Const.FNEG);
+        super(org.apache.bcel.Const.FNEG);
     }
 
 

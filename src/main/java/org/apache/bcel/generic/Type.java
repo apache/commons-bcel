@@ -15,14 +15,14 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.ClassFormatException;
-import org.apache.commons.bcel6.classfile.Utility;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Abstract super class for all possible java types, namely basic types

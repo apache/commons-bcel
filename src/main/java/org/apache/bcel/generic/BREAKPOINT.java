@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /**
  * BREAKPOINT, JVM dependent, ignored by default
@@ -25,7 +25,7 @@ package org.apache.commons.bcel6.generic;
 public class BREAKPOINT extends Instruction {
 
     public BREAKPOINT() {
-        super(org.apache.commons.bcel6.Const.BREAKPOINT, (short) 1);
+        super(org.apache.bcel.Const.BREAKPOINT, (short) 1);
     }
 
 

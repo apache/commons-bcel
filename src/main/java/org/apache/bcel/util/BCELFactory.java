@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -24,37 +24,37 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.Utility;
-import org.apache.commons.bcel6.generic.AllocationInstruction;
-import org.apache.commons.bcel6.generic.ArrayInstruction;
-import org.apache.commons.bcel6.generic.ArrayType;
-import org.apache.commons.bcel6.generic.BranchHandle;
-import org.apache.commons.bcel6.generic.BranchInstruction;
-import org.apache.commons.bcel6.generic.CHECKCAST;
-import org.apache.commons.bcel6.generic.CPInstruction;
-import org.apache.commons.bcel6.generic.CodeExceptionGen;
-import org.apache.commons.bcel6.generic.ConstantPoolGen;
-import org.apache.commons.bcel6.generic.ConstantPushInstruction;
-import org.apache.commons.bcel6.generic.EmptyVisitor;
-import org.apache.commons.bcel6.generic.FieldInstruction;
-import org.apache.commons.bcel6.generic.IINC;
-import org.apache.commons.bcel6.generic.INSTANCEOF;
-import org.apache.commons.bcel6.generic.Instruction;
-import org.apache.commons.bcel6.generic.InstructionConst;
-import org.apache.commons.bcel6.generic.InstructionHandle;
-import org.apache.commons.bcel6.generic.InvokeInstruction;
-import org.apache.commons.bcel6.generic.LDC;
-import org.apache.commons.bcel6.generic.LDC2_W;
-import org.apache.commons.bcel6.generic.LocalVariableInstruction;
-import org.apache.commons.bcel6.generic.MULTIANEWARRAY;
-import org.apache.commons.bcel6.generic.MethodGen;
-import org.apache.commons.bcel6.generic.NEWARRAY;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.RET;
-import org.apache.commons.bcel6.generic.ReturnInstruction;
-import org.apache.commons.bcel6.generic.Select;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.AllocationInstruction;
+import org.apache.bcel.generic.ArrayInstruction;
+import org.apache.bcel.generic.ArrayType;
+import org.apache.bcel.generic.BranchHandle;
+import org.apache.bcel.generic.BranchInstruction;
+import org.apache.bcel.generic.CHECKCAST;
+import org.apache.bcel.generic.CPInstruction;
+import org.apache.bcel.generic.CodeExceptionGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.ConstantPushInstruction;
+import org.apache.bcel.generic.EmptyVisitor;
+import org.apache.bcel.generic.FieldInstruction;
+import org.apache.bcel.generic.IINC;
+import org.apache.bcel.generic.INSTANCEOF;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionConst;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InvokeInstruction;
+import org.apache.bcel.generic.LDC;
+import org.apache.bcel.generic.LDC2_W;
+import org.apache.bcel.generic.LocalVariableInstruction;
+import org.apache.bcel.generic.MULTIANEWARRAY;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.NEWARRAY;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.RET;
+import org.apache.bcel.generic.ReturnInstruction;
+import org.apache.bcel.generic.Select;
+import org.apache.bcel.generic.Type;
 
 /**
  * Factory creates il.append() statements, and sets instruction targets.

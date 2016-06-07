@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * DCMPG - Compare doubles: value1 &gt; value2
@@ -26,7 +26,7 @@ package org.apache.commons.bcel6.generic;
 public class DCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
     public DCMPG() {
-        super(org.apache.commons.bcel6.Const.DCMPG, (short) 1);
+        super(org.apache.bcel.Const.DCMPG, (short) 1);
     }
 
     /** @return Type.DOUBLE

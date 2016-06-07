@@ -15,12 +15,12 @@
  *  limitations under the License.
  *
  */ 
-package org.apache.commons.bcel6.verifier.structurals;
+package org.apache.bcel.verifier.structurals;
 
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.generic.ObjectType;
-import org.apache.commons.bcel6.generic.ReferenceType;
+import org.apache.bcel.Const;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.ReferenceType;
 
 /**
  * This class represents an uninitialized object type; see The Java

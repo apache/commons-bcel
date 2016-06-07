@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.ExceptionConst;
+import org.apache.bcel.ExceptionConst;
 
 /**
  * IREM - Remainder of int
@@ -30,7 +30,7 @@ public class IREM extends ArithmeticInstruction implements ExceptionThrower {
     /** Remainder of ints
      */
     public IREM() {
-        super(org.apache.commons.bcel6.Const.IREM);
+        super(org.apache.bcel.Const.IREM);
     }
 
 

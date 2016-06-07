@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * FADD - Add floats
@@ -28,7 +28,7 @@ public class FADD extends ArithmeticInstruction {
     /** Add floats
      */
     public FADD() {
-        super(org.apache.commons.bcel6.Const.FADD);
+        super(org.apache.bcel.Const.FADD);
     }
 
 

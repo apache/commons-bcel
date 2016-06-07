@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,23 +24,23 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Stack;
 
-import org.apache.commons.bcel6.Const;
-import org.apache.commons.bcel6.classfile.AnnotationEntry;
-import org.apache.commons.bcel6.classfile.Annotations;
-import org.apache.commons.bcel6.classfile.Attribute;
-import org.apache.commons.bcel6.classfile.Code;
-import org.apache.commons.bcel6.classfile.CodeException;
-import org.apache.commons.bcel6.classfile.ExceptionTable;
-import org.apache.commons.bcel6.classfile.LineNumber;
-import org.apache.commons.bcel6.classfile.LineNumberTable;
-import org.apache.commons.bcel6.classfile.LocalVariable;
-import org.apache.commons.bcel6.classfile.LocalVariableTable;
-import org.apache.commons.bcel6.classfile.Method;
-import org.apache.commons.bcel6.classfile.ParameterAnnotationEntry;
-import org.apache.commons.bcel6.classfile.ParameterAnnotations;
-import org.apache.commons.bcel6.classfile.RuntimeVisibleParameterAnnotations;
-import org.apache.commons.bcel6.classfile.Utility;
-import org.apache.commons.bcel6.util.BCELComparator;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.Annotations;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.CodeException;
+import org.apache.bcel.classfile.ExceptionTable;
+import org.apache.bcel.classfile.LineNumber;
+import org.apache.bcel.classfile.LineNumberTable;
+import org.apache.bcel.classfile.LocalVariable;
+import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.ParameterAnnotationEntry;
+import org.apache.bcel.classfile.ParameterAnnotations;
+import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.util.BCELComparator;
 
 /** 
  * Template class for building up a method. This is done by defining exception

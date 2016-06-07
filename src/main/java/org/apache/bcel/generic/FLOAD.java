@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * FLOAD - Load float from local variable
@@ -30,7 +30,7 @@ public class FLOAD extends LoadInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     FLOAD() {
-        super(org.apache.commons.bcel6.Const.FLOAD, org.apache.commons.bcel6.Const.FLOAD_0);
+        super(org.apache.bcel.Const.FLOAD, org.apache.bcel.Const.FLOAD_0);
     }
 
 
@@ -38,7 +38,7 @@ public class FLOAD extends LoadInstruction {
      * @param n index of local variable
      */
     public FLOAD(final int n) {
-        super(org.apache.commons.bcel6.Const.FLOAD, org.apache.commons.bcel6.Const.FLOAD_0, n);
+        super(org.apache.bcel.Const.FLOAD, org.apache.bcel.Const.FLOAD_0, n);
     }
 
 

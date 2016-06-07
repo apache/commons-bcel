@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * ILOAD - Load int from local variable onto stack
@@ -30,7 +30,7 @@ public class ILOAD extends LoadInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     ILOAD() {
-        super(org.apache.commons.bcel6.Const.ILOAD, org.apache.commons.bcel6.Const.ILOAD_0);
+        super(org.apache.bcel.Const.ILOAD, org.apache.bcel.Const.ILOAD_0);
     }
 
 
@@ -38,7 +38,7 @@ public class ILOAD extends LoadInstruction {
      * @param n index of local variable
      */
     public ILOAD(final int n) {
-        super(org.apache.commons.bcel6.Const.ILOAD, org.apache.commons.bcel6.Const.ILOAD_0, n);
+        super(org.apache.bcel.Const.ILOAD, org.apache.bcel.Const.ILOAD_0, n);
     }
 
 

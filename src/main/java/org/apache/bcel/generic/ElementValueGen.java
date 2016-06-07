@@ -15,19 +15,19 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.classfile.AnnotationElementValue;
-import org.apache.commons.bcel6.classfile.AnnotationEntry;
-import org.apache.commons.bcel6.classfile.ArrayElementValue;
-import org.apache.commons.bcel6.classfile.ClassElementValue;
-import org.apache.commons.bcel6.classfile.ElementValue;
-import org.apache.commons.bcel6.classfile.EnumElementValue;
-import org.apache.commons.bcel6.classfile.SimpleElementValue;
+import org.apache.bcel.classfile.AnnotationElementValue;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.ArrayElementValue;
+import org.apache.bcel.classfile.ClassElementValue;
+import org.apache.bcel.classfile.ElementValue;
+import org.apache.bcel.classfile.EnumElementValue;
+import org.apache.bcel.classfile.SimpleElementValue;
 
 /**
  * @since 6.0

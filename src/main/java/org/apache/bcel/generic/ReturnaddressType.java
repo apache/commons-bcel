@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.Const;
+import org.apache.bcel.Const;
 
 /** 
  * Returnaddress, the type JSR or JSR_W instructions push upon the stack.

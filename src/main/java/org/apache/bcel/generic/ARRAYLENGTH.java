@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.ExceptionConst;
+import org.apache.bcel.ExceptionConst;
 
 /** 
  * ARRAYLENGTH -  Get length of array
@@ -30,7 +30,7 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
     /** Get length of array
      */
     public ARRAYLENGTH() {
-        super(org.apache.commons.bcel6.Const.ARRAYLENGTH, (short) 1);
+        super(org.apache.bcel.Const.ARRAYLENGTH, (short) 1);
     }
 
 

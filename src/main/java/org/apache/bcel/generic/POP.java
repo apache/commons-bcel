@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /**
  * POP - Pop top operand stack word
@@ -27,7 +27,7 @@ package org.apache.commons.bcel6.generic;
 public class POP extends StackInstruction implements PopInstruction {
 
     public POP() {
-        super(org.apache.commons.bcel6.Const.POP);
+        super(org.apache.bcel.Const.POP);
     }
 
 

@@ -15,15 +15,15 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.bcel6.classfile.ArrayElementValue;
-import org.apache.commons.bcel6.classfile.ElementValue;
+import org.apache.bcel.classfile.ArrayElementValue;
+import org.apache.bcel.classfile.ElementValue;
 
 /**
  * @since 6.0

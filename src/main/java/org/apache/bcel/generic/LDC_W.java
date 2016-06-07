@@ -15,11 +15,11 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 import java.io.IOException;
 
-import org.apache.commons.bcel6.util.ByteSequence;
+import org.apache.bcel.util.ByteSequence;
 
 /** 
  * LDC_W - Push item from constant pool (wide index)
@@ -50,7 +50,7 @@ public class LDC_W extends LDC {
     protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         setIndex(bytes.readUnsignedShort());
         // Override just in case it has been changed
-        super.setOpcode(org.apache.commons.bcel6.Const.LDC_W);
+        super.setOpcode(org.apache.bcel.Const.LDC_W);
         super.setLength(3);
     }
 }

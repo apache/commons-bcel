@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * I2C - Convert int to char
@@ -28,7 +28,7 @@ public class I2C extends ConversionInstruction {
     /** Convert int to char
      */
     public I2C() {
-        super(org.apache.commons.bcel6.Const.I2C);
+        super(org.apache.bcel.Const.I2C);
     }
 
 

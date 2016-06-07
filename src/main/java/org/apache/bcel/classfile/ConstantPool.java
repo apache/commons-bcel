@@ -15,13 +15,13 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.classfile;
+package org.apache.bcel.classfile;
 
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.bcel6.Const;
+import org.apache.bcel.Const;
 
 /**
  * This class represents the constant pool, i.e., a table of constants, of
@@ -33,7 +33,7 @@ import org.apache.commons.bcel6.Const;
 
  * @version $Id$
  * @see     Constant
- * @see     org.apache.commons.bcel6.generic.ConstantPoolGen
+ * @see     org.apache.bcel.generic.ConstantPoolGen
  */
 public class ConstantPool implements Cloneable, Node {
 

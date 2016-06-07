@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * LSTORE - Store long into local variable
@@ -30,12 +30,12 @@ public class LSTORE extends StoreInstruction {
      * Instruction.readInstruction(). Not to be used otherwise.
      */
     LSTORE() {
-        super(org.apache.commons.bcel6.Const.LSTORE, org.apache.commons.bcel6.Const.LSTORE_0);
+        super(org.apache.bcel.Const.LSTORE, org.apache.bcel.Const.LSTORE_0);
     }
 
 
     public LSTORE(final int n) {
-        super(org.apache.commons.bcel6.Const.LSTORE, org.apache.commons.bcel6.Const.LSTORE_0, n);
+        super(org.apache.bcel.Const.LSTORE, org.apache.bcel.Const.LSTORE_0, n);
     }
 
 

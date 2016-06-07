@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
 /** 
  * ICONST - Push value between -1, ..., 5, other values cause an exception
@@ -38,9 +38,9 @@ public class ICONST extends Instruction implements ConstantPushInstruction {
 
 
     public ICONST(final int i) {
-        super(org.apache.commons.bcel6.Const.ICONST_0, (short) 1);
+        super(org.apache.bcel.Const.ICONST_0, (short) 1);
         if ((i >= -1) && (i <= 5)) {
-            super.setOpcode((short) (org.apache.commons.bcel6.Const.ICONST_0 + i)); // Even works for i == -1
+            super.setOpcode((short) (org.apache.bcel.Const.ICONST_0 + i)); // Even works for i == -1
         } else {
             throw new ClassGenException("ICONST can be used only for value between -1 and 5: " + i);
         }

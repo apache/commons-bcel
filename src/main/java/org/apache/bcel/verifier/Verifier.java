@@ -15,18 +15,18 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.verifier;
+package org.apache.bcel.verifier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.bcel6.classfile.JavaClass;
-import org.apache.commons.bcel6.verifier.statics.Pass1Verifier;
-import org.apache.commons.bcel6.verifier.statics.Pass2Verifier;
-import org.apache.commons.bcel6.verifier.statics.Pass3aVerifier;
-import org.apache.commons.bcel6.verifier.structurals.Pass3bVerifier;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.verifier.statics.Pass1Verifier;
+import org.apache.bcel.verifier.statics.Pass2Verifier;
+import org.apache.bcel.verifier.statics.Pass3aVerifier;
+import org.apache.bcel.verifier.structurals.Pass3bVerifier;
 
 /**
  * A Verifier instance is there to verify a class file according to The Java Virtual
@@ -163,7 +163,7 @@ public class Verifier {
             int meth = pv.getMethodNo();
             for (String element : p3am) {
                 messages.add("Pass 3a, method " + meth + " ('"
-                        + org.apache.commons.bcel6.Repository.lookupClass(classname).getMethods()[meth]
+                        + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth]
                         + "'): " + element);
             }
         }
@@ -172,7 +172,7 @@ public class Verifier {
             int meth = pv.getMethodNo();
             for (String element : p3bm) {
                 messages.add("Pass 3b, method " + meth + " ('"
-                        + org.apache.commons.bcel6.Repository.lookupClass(classname).getMethods()[meth]
+                        + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth]
                         + "'): " + element);
             }
         }
@@ -211,7 +211,7 @@ public class Verifier {
                 vr = v.doPass2();
                 System.out.println("Pass 2:\n" + vr);
                 if (vr == VerificationResult.VR_OK) {
-                    JavaClass jc = org.apache.commons.bcel6.Repository.lookupClass(args[k]);
+                    JavaClass jc = org.apache.bcel.Repository.lookupClass(args[k]);
                     for (int i = 0; i < jc.getMethods().length; i++) {
                         vr = v.doPass3a(i);
                         System.out.println("Pass 3a, method number " + i + " ['"
@@ -232,7 +232,7 @@ public class Verifier {
                 System.out.println("\n");
                 // avoid swapping.
                 v.flush();
-                org.apache.commons.bcel6.Repository.clearCache();
+                org.apache.bcel.Repository.clearCache();
                 System.gc();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

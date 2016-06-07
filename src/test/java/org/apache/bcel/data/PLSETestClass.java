@@ -16,7 +16,7 @@
  * 
  */
 
-package org.apache.commons.bcel6.data;
+package org.apache.bcel.data;
 
 import java.util.ArrayList;
 

@@ -15,21 +15,21 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.util;
+package org.apache.bcel.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.bcel6.classfile.ClassParser;
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.JavaClass;
 
 /**
  * This repository is used in situations where a Class is created outside the realm of a ClassLoader. Classes are loaded from the file systems using the paths
  * specified in the given class path. By default, this is the value returned by ClassPath.getClassPath(). <br>
  *
- * @see org.apache.commons.bcel6.Repository
+ * @see org.apache.bcel.Repository
  */
 public class ClassPathRepository implements Repository {
 

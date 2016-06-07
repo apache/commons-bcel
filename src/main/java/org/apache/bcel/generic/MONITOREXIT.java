@@ -15,9 +15,9 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.bcel6.generic;
+package org.apache.bcel.generic;
 
-import org.apache.commons.bcel6.ExceptionConst;
+import org.apache.bcel.ExceptionConst;
 
 /** 
  * MONITOREXIT - Exit monitor for object
@@ -28,7 +28,7 @@ import org.apache.commons.bcel6.ExceptionConst;
 public class MONITOREXIT extends Instruction implements ExceptionThrower, StackConsumer {
 
     public MONITOREXIT() {
-        super(org.apache.commons.bcel6.Const.MONITOREXIT, (short) 1);
+        super(org.apache.bcel.Const.MONITOREXIT, (short) 1);
     }
 
 

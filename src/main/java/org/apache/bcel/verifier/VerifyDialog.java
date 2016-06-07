@@ -15,12 +15,12 @@
  *  limitations under the License.
  */
 
-package org.apache.commons.bcel6.verifier;
+package org.apache.bcel.verifier;
 
 import java.awt.Color;
 
-import org.apache.commons.bcel6.Repository;
-import org.apache.commons.bcel6.classfile.JavaClass;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
 
 /**
  * A class for simple graphical class file verification.
