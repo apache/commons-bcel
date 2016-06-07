@@ -21,7 +21,6 @@ import java.util.StringTokenizer;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Constant;
-import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantPool;
 
 /**
