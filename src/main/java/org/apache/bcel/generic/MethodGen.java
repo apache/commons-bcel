@@ -544,7 +544,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Add an attribute to the code. Currently, the JVM knows about the
-     * LineNumberTable, LocalVariableTable and StackMap attributes,
+     * LineNumberTable, LocalVariableTable and StackMapTable attributes,
      * where the former two will be generated automatically and the
      * latter is used for the MIDP only. Other attributes will be
      * ignored by the JVM but do no harm.

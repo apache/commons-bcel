@@ -2204,7 +2204,7 @@ public final class Const {
       return ATTRIBUTE_NAMES[index];
   }
 
-  /** Constants used in the StackMap attribute.
+  /** Constants used in the StackMapTable attribute.
    */
   public static final byte ITEM_Bogus      = 0;
   public static final byte ITEM_Integer    = 1;
@@ -2231,7 +2231,7 @@ public final class Const {
       return ITEM_NAMES[index];
   }
 
-  /** Constants used to identify StackMapEntry types.
+  /** Constants used to identify StackMapTableEntry types.
    *
    * For those types which can specify a range, the
    * constant names the lowest value.

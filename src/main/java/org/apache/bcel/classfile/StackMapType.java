@@ -25,11 +25,11 @@ import org.apache.bcel.Const;
 
 /**
  * This class represents the type of a local variable or item on stack
- * used in the StackMap entries.
+ * used in the StackMapTable entries.
  *
  * @version $Id$
- * @see     StackMapEntry
- * @see     StackMap
+ * @see     StackMapTableEntry
+ * @see     StackMapTable
  * @see     Const
  */
 public final class StackMapType implements Cloneable {
