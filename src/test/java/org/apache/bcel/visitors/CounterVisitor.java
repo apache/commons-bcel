@@ -60,6 +60,8 @@ import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
 import org.apache.bcel.classfile.StackMapEntry;
+import org.apache.bcel.classfile.StackMapTable;
+import org.apache.bcel.classfile.StackMapTableEntry;
 import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.classfile.Visitor;
@@ -72,8 +74,12 @@ public class CounterVisitor implements Visitor
     public int syntheticCount = 0;
 
     public int stackMapEntryCount = 0;
-
+    
     public int stackMapCount = 0;
+    
+    public int stackMapTableEntryCount = 0;
+
+    public int stackMapTableCount = 0;
 
     public int sourceFileCount = 0;
 
@@ -361,13 +367,25 @@ public class CounterVisitor implements Visitor
     @Override
     public void visitStackMap(final StackMap obj)
     {
-        stackMapCount++;
+    	stackMapCount++;
     }
-
+    
     @Override
     public void visitStackMapEntry(final StackMapEntry obj)
     {
-        stackMapEntryCount++;
+    	stackMapEntryCount++;
+    }
+
+    @Override
+    public void visitStackMapTable(final StackMapTable obj)
+    {
+        stackMapTableCount++;
+    }
+
+    @Override
+    public void visitStackMapTableEntry(final StackMapTableEntry obj)
+    {
+        stackMapTableEntryCount++;
     }
 
     @Override

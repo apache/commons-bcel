@@ -61,6 +61,8 @@ import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
 import org.apache.bcel.classfile.StackMapEntry;
+import org.apache.bcel.classfile.StackMapTable;
+import org.apache.bcel.classfile.StackMapTableEntry;
 import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
@@ -304,6 +306,11 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitStackMap(final StackMap obj) {
+    	tostring = toString(obj);
+    }
+    
+    @Override
+    public void visitStackMapTable(final StackMapTable obj) {
         tostring = toString(obj);
     }
 
@@ -348,12 +355,17 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj) {
         tostring = toString(obj);
     }
+    
+    @Override
+    public void visitStackMapEntry(final StackMapEntry obj) {
+    	tostring = toString(obj);
+    }
 
     /**
      * @since 6.0
      */
     @Override
-    public void visitStackMapEntry(final StackMapEntry obj) {
+    public void visitStackMapTableEntry(final StackMapTableEntry obj) {
         tostring = toString(obj);
     }
     /**

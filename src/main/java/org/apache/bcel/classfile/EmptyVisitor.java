@@ -237,19 +237,19 @@ public class EmptyVisitor implements Visitor
 
     /**
      * @since 6.0
+     */
     @Override
     public void visitStackMapTable(StackMapTable obj)
     {
     }
-     */
 
     /**
      * @since 6.0
+     */
     @Override
     public void visitStackMapTableEntry(StackMapTableEntry obj)
     {
     }
-     */
 
     /**
      * @since 6.0
