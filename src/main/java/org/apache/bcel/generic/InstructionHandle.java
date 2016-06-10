@@ -95,7 +95,13 @@ public class InstructionHandle {
      * Temporarily swap the current instruction, without disturbing
      * anything. Meant to be used by a debugger, implementing
      * breakpoints. Current instruction is returned.
+     * <p>
+     * Warning: if this is used on a BranchHandle then some methods such as
+     * getPosition() will still refer to the original cached instruction, whereas
+     * other BH methods may affect the cache and the replacement instruction.
      */
+    // See BCEL-273
+    // TODO remove this method in any redesign of BCEL
     public Instruction swapInstruction( final Instruction i ) {
         Instruction oldInstruction = instruction;
         instruction = i;
