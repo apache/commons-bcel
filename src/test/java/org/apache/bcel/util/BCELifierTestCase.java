@@ -41,13 +41,13 @@ public class BCELifierTestCase {
         File infile = new File(javaClass);
         JavaClass java_class = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
         assertNotNull(java_class);
-        File outfile = new File(workDir,infile.getName().replace(".class", "Creator.java"));
+        File outfile = new File(workDir, infile.getName().replace(".class", "Creator.java"));
         FileOutputStream fos = new FileOutputStream(outfile);
         BCELifier bcelifier = new BCELifier(java_class, fos);
         bcelifier.start();
         fos.close();
         exec(workDir, "javac", "-cp", "classes", outfile.getName());
-        exec(workDir, "java", "-cp", ".:classes", outfile.getName().replace(".java", ""));
+        exec(workDir, "java", "-cp", "." + File.pathSeparator + "classes", outfile.getName().replace(".java", ""));
         final String output = exec(workDir, "javap", "-p", "-c", infile.getName());
         assertEquals(canonHashRef(initial), canonHashRef(output));
     }
