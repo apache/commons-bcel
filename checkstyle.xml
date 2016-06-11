@@ -57,7 +57,7 @@ limitations under the License.
     <!-- 
      -->
     <module name="LineLength">
-      <property name="max" value="135"/>
+      <property name="max" value="160"/>
     </module>
  
     <!-- Checks for Naming Conventions.                  -->
