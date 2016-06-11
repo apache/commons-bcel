@@ -160,9 +160,7 @@ public abstract class Utility {
                 }
             }
         } catch (IOException e) {
-            System.out.println(buf.toString());
-            e.printStackTrace();
-            throw new ClassFormatException("Byte code error: " + e, e);
+            throw new ClassFormatException("Byte code error: " + buf.toString(), e);
         }
         return buf.toString();
     }
@@ -442,7 +440,7 @@ public abstract class Utility {
                                 buf.append(bytes.readInt());
                                 break;
                             default: // Never reached
-                            	throw new IllegalStateException("Unreachable default case reached!");
+                                throw new IllegalStateException("Unreachable default case reached!");
                         }
                     }
                 }
