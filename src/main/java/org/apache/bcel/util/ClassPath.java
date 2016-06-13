@@ -69,7 +69,7 @@ public class ClassPath {
      */
     public ClassPath(final String class_path) {
         this.class_path = class_path;
-        List<PathEntry> vec = new ArrayList<>();
+        List<PathEntry> list = new ArrayList<>();
         for (StringTokenizer tok = new StringTokenizer(class_path, File.pathSeparator); tok.hasMoreTokens();) {
             String path = tok.nextToken();
             if (!path.equals("")) {
@@ -77,9 +77,9 @@ public class ClassPath {
                 try {
                     if (file.exists()) {
                         if (file.isDirectory()) {
-                            vec.add(new Dir(path));
+                            list.add(new Dir(path));
                         } else {
-                            vec.add(new Zip(new ZipFile(file)));
+                            list.add(new Zip(new ZipFile(file)));
                         }
                     }
                 } catch (IOException e) {
@@ -89,8 +89,8 @@ public class ClassPath {
                 }
             }
         }
-        paths = new PathEntry[vec.size()];
-        vec.toArray(paths);
+        paths = new PathEntry[list.size()];
+        list.toArray(paths);
     }
 
     /**
