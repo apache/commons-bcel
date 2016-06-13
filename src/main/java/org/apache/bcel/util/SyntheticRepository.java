@@ -33,7 +33,7 @@ import java.util.Map;
 public class SyntheticRepository extends MemorySensitiveClassPathRepository {
 
     // private static final String DEFAULT_PATH = ClassPath.getClassPath();
-    private static final Map<ClassPath, SyntheticRepository> _instances = new HashMap<>(); // CLASSPATH X REPOSITORY
+    private static final Map<ClassPath, SyntheticRepository> instances = new HashMap<>(); // CLASSPATH X REPOSITORY
 
     private SyntheticRepository(final ClassPath path) {
         super(path);
@@ -44,10 +44,10 @@ public class SyntheticRepository extends MemorySensitiveClassPathRepository {
     }
 
     public static SyntheticRepository getInstance(final ClassPath classPath) {
-        SyntheticRepository rep = _instances.get(classPath);
+        SyntheticRepository rep = instances.get(classPath);
         if (rep == null) {
             rep = new SyntheticRepository(classPath);
-            _instances.put(classPath, rep);
+            instances.put(classPath, rep);
         }
         return rep;
     }
