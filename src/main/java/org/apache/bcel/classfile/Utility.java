@@ -147,16 +147,14 @@ public abstract class Utility {
     public static String codeToString( final byte[] code, final ConstantPool constant_pool, final int index,
             final int length, final boolean verbose ) {
         StringBuilder buf = new StringBuilder(code.length * 20); // Should be sufficient // CHECKSTYLE IGNORE MagicNumber
-        ByteSequence stream = new ByteSequence(code);
-        try {
+        try (ByteSequence stream = new ByteSequence(code)) {
             for (int i = 0; i < index; i++) {
                 codeToString(stream, constant_pool, verbose);
             }
             for (int i = 0; stream.available() > 0; i++) {
                 if ((length < 0) || (i < length)) {
                     String indices = fillup(stream.getIndex() + ":", 6, true, ' ');
-                    buf.append(indices).append(codeToString(stream, constant_pool, verbose))
-                            .append('\n');
+                    buf.append(indices).append(codeToString(stream, constant_pool, verbose)).append('\n');
                 }
             }
         } catch (IOException e) {
@@ -1276,12 +1274,12 @@ public abstract class Utility {
             bytes = baos.toByteArray();
         }
         CharArrayWriter caw = new CharArrayWriter();
-        JavaWriter jw = new JavaWriter(caw);
-        for (byte b : bytes) {
-            int in = b & 0x000000ff; // Normalize to unsigned
-            jw.write(in);
+        try (JavaWriter jw = new JavaWriter(caw)) {
+            for (byte b : bytes) {
+                int in = b & 0x000000ff; // Normalize to unsigned
+                jw.write(in);
+            }
         }
-        jw.close();
         return caw.toString();
     }
 
