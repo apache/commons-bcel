@@ -79,25 +79,20 @@ public class ClassLoaderRepository implements Repository {
      * Lookup a JavaClass object from the Class Name provided.
      */
     @Override
-    public JavaClass loadClass( final String className ) throws ClassNotFoundException {
+    public JavaClass loadClass(final String className) throws ClassNotFoundException {
         String classFile = className.replace('.', '/');
         JavaClass RC = findClass(className);
         if (RC != null) {
             return RC;
         }
-        try {
-            InputStream is = loader.getResourceAsStream(classFile + ".class");
+        try (InputStream is = loader.getResourceAsStream(classFile + ".class")) {
             if (is == null) {
                 throw new ClassNotFoundException(className + " not found.");
             }
-            try {
-                ClassParser parser = new ClassParser(is, className);
-                RC = parser.parse();
-                storeClass(RC);
-                return RC;
-            } finally {
-                is.close();
-            }
+            ClassParser parser = new ClassParser(is, className);
+            RC = parser.parse();
+            storeClass(RC);
+            return RC;
         } catch (IOException e) {
             throw new ClassNotFoundException(className + " not found: " + e, e);
         }

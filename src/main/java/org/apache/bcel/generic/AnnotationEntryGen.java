@@ -216,23 +216,21 @@ public class AnnotationEntryGen {
 
             ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
             ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
-            DataOutputStream rvaDos = new DataOutputStream(rvaBytes);
-            DataOutputStream riaDos = new DataOutputStream(riaBytes);
+            try (DataOutputStream rvaDos = new DataOutputStream(rvaBytes);
+                    DataOutputStream riaDos = new DataOutputStream(riaBytes)) {
 
-            rvaDos.writeShort(countVisible);
-            riaDos.writeShort(countInvisible);
+                rvaDos.writeShort(countVisible);
+                riaDos.writeShort(countInvisible);
 
-            // put the annotations in the right output stream
-            for (AnnotationEntryGen a : annotationEntryGens) {
-                if (a.isRuntimeVisible()) {
-                    a.dump(rvaDos);
-                } else {
-                    a.dump(riaDos);
+                // put the annotations in the right output stream
+                for (AnnotationEntryGen a : annotationEntryGens) {
+                    if (a.isRuntimeVisible()) {
+                        a.dump(rvaDos);
+                    } else {
+                        a.dump(riaDos);
+                    }
                 }
             }
-
-            rvaDos.close();
-            riaDos.close();
 
             byte[] rvaData = rvaBytes.toByteArray();
             byte[] riaData = riaBytes.toByteArray();
@@ -296,34 +294,34 @@ public class AnnotationEntryGen {
             }
             // Lets do the visible ones
             ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
-            DataOutputStream rvaDos = new DataOutputStream(rvaBytes);
-            rvaDos.writeByte(vec.length); // First goes number of parameters
-            for (int i = 0; i < vec.length; i++) {
-                rvaDos.writeShort(visCount[i]);
-                if (visCount[i] > 0) {
-                    for (AnnotationEntryGen element : vec[i]) {
-                        if (element.isRuntimeVisible()) {
-                            element.dump(rvaDos);
+            try (DataOutputStream rvaDos = new DataOutputStream(rvaBytes)) {
+                rvaDos.writeByte(vec.length); // First goes number of parameters
+                for (int i = 0; i < vec.length; i++) {
+                    rvaDos.writeShort(visCount[i]);
+                    if (visCount[i] > 0) {
+                        for (AnnotationEntryGen element : vec[i]) {
+                            if (element.isRuntimeVisible()) {
+                                element.dump(rvaDos);
+                            }
                         }
                     }
                 }
             }
-            rvaDos.close();
             // Lets do the invisible ones
             ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
-            DataOutputStream riaDos = new DataOutputStream(riaBytes);
-            riaDos.writeByte(vec.length); // First goes number of parameters
-            for (int i = 0; i < vec.length; i++) {
-                riaDos.writeShort(invisCount[i]);
-                if (invisCount[i] > 0) {
-                    for (AnnotationEntryGen element : vec[i]) {
-                        if (!element.isRuntimeVisible()) {
-                            element.dump(riaDos);
+            try (DataOutputStream riaDos = new DataOutputStream(riaBytes)) {
+                riaDos.writeByte(vec.length); // First goes number of parameters
+                for (int i = 0; i < vec.length; i++) {
+                    riaDos.writeShort(invisCount[i]);
+                    if (invisCount[i] > 0) {
+                        for (AnnotationEntryGen element : vec[i]) {
+                            if (!element.isRuntimeVisible()) {
+                                element.dump(riaDos);
+                            }
                         }
                     }
                 }
             }
-            riaDos.close();
             byte[] rvaData = rvaBytes.toByteArray();
             byte[] riaData = riaBytes.toByteArray();
             int rvaIndex = -1;

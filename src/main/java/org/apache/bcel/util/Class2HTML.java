@@ -217,24 +217,19 @@ public class Class2HTML {
 
 
     private void writeMainHTML( final AttributeHTML attribute_html ) throws IOException {
-        PrintWriter file = new PrintWriter(new FileOutputStream(dir + class_name + ".html"));
+        try (PrintWriter file = new PrintWriter(new FileOutputStream(dir + class_name + ".html"))) {
+            file.println("<HTML>\n" + "<HEAD><TITLE>Documentation for " + class_name + "</TITLE>" + "</HEAD>\n"
+                    + "<FRAMESET BORDER=1 cols=\"30%,*\">\n" + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
+                    + "<FRAME NAME=\"ConstantPool\" SRC=\"" + class_name + "_cp.html" + "\"\n MARGINWIDTH=\"0\" "
+                    + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "<FRAME NAME=\"Attributes\" SRC=\""
+                    + class_name + "_attributes.html" + "\"\n MARGINWIDTH=\"0\" "
+                    + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "</FRAMESET>\n"
+                    + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"Code\" SRC=\"" + class_name
+                    + "_code.html\"\n MARGINWIDTH=0 " + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
+                    + "<FRAME NAME=\"Methods\" SRC=\"" + class_name + "_methods.html\"\n MARGINWIDTH=0 "
+                    + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n" + "</FRAMESET></FRAMESET></HTML>");
+        }
         Attribute[] attributes = java_class.getAttributes();
-        file.println("<HTML>\n" + "<HEAD><TITLE>Documentation for " + class_name + "</TITLE>"
-                + "</HEAD>\n" + "<FRAMESET BORDER=1 cols=\"30%,*\">\n"
-                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"ConstantPool\" SRC=\""
-                + class_name + "_cp.html" + "\"\n MARGINWIDTH=\"0\" "
-                + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n"
-                + "<FRAME NAME=\"Attributes\" SRC=\"" + class_name + "_attributes.html"
-                + "\"\n MARGINWIDTH=\"0\" "
-                + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "</FRAMESET>\n"
-                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"Code\" SRC=\""
-                + class_name + "_code.html\"\n MARGINWIDTH=0 "
-                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
-                + "<FRAME NAME=\"Methods\" SRC=\"" + class_name
-                + "_methods.html\"\n MARGINWIDTH=0 "
-                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
-                + "</FRAMESET></FRAMESET></HTML>");
-        file.close();
         for (int i = 0; i < attributes.length; i++) {
             attribute_html.writeAttribute(attributes[i], "class" + i);
         }

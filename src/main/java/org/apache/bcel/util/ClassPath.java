@@ -307,10 +307,9 @@ public class ClassPath {
      * @param suffix file name ends with suffix, e.g. .java
      * @return byte array for file on class path
      */
-    public byte[] getBytes( final String name, final String suffix ) throws IOException {
+    public byte[] getBytes(final String name, final String suffix) throws IOException {
         DataInputStream dis = null;
-        try {
-            InputStream is = getInputStream(name, suffix);
+        try (InputStream is = getInputStream(name, suffix)) {
             if (is == null) {
                 throw new IOException("Couldn't find: " + name + suffix);
             }

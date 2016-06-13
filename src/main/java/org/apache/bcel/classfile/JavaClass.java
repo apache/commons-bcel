@@ -229,7 +229,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param file Output file
      * @throws IOException
      */
-    public void dump( final File file ) throws IOException {
+    public void dump(final File file) throws IOException {
         String parent = file.getParent();
         if (parent != null) {
             File dir = new File(parent);
@@ -239,14 +239,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                 }
             }
         }
-        DataOutputStream dos = null;
-        try {
-            dos = new DataOutputStream(new FileOutputStream(file));
+        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(file))) {
             dump(dos);
-        } finally {
-            if (dos != null) {
-                dos.close();
-            }
         }
     }
 

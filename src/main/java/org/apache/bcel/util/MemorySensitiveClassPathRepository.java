@@ -112,29 +112,23 @@ public class MemorySensitiveClassPathRepository implements Repository {
      */
     @Override
     public JavaClass loadClass(final Class<?> clazz) throws ClassNotFoundException {
-        InputStream clsStream = null;
-        try {
-            String className = clazz.getName();
-            JavaClass repositoryClass = findClass(className);
-            if (repositoryClass != null) {
-                return repositoryClass;
-            }
-            String name = className;
-            int i = name.lastIndexOf('.');
-            if (i > 0) {
-                name = name.substring(i + 1);
-            }
-            clsStream = clazz.getResourceAsStream(name + ".class");
-            return loadClass(clsStream, className);
-        } finally {
-            try {
-                if (clsStream != null) {
-                    clsStream.close();
-                }
-            } catch (IOException ioe) {
-                // don't care
-            }
+        String className = clazz.getName();
+        JavaClass repositoryClass = findClass(className);
+        if (repositoryClass != null) {
+            return repositoryClass;
         }
+        String name = className;
+        int i = name.lastIndexOf('.');
+        if (i > 0) {
+            name = name.substring(i + 1);
+        }
+        JavaClass cls = null;
+        try (InputStream clsStream = clazz.getResourceAsStream(name + ".class")) {
+            return cls = loadClass(clsStream, className);
+        } catch (IOException e) {
+            return cls;
+        }
+
     }
 
     private JavaClass loadClass(final InputStream is, final String className) throws ClassNotFoundException {
