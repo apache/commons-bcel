@@ -1264,14 +1264,13 @@ public abstract class Utility {
      * 
      * @throws IOException if there's a gzip exception
      */
-    public static String encode( byte[] bytes, final boolean compress ) throws IOException {
+    public static String encode(byte[] bytes, final boolean compress) throws IOException {
         if (compress) {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            GZIPOutputStream gos = new GZIPOutputStream(baos);
-            gos.write(bytes, 0, bytes.length);
-            gos.close();
-            baos.close();
-            bytes = baos.toByteArray();
+            try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    GZIPOutputStream gos = new GZIPOutputStream(baos)) {
+                gos.write(bytes, 0, bytes.length);
+                bytes = baos.toByteArray();
+            }
         }
         CharArrayWriter caw = new CharArrayWriter();
         try (JavaWriter jw = new JavaWriter(caw)) {
@@ -1292,19 +1291,16 @@ public abstract class Utility {
      * 
      * @throws IOException if there's a gzip exception
      */
-    public static byte[] decode( final String s, final boolean uncompress ) throws IOException {
-        char[] chars = s.toCharArray();
-        CharArrayReader car = new CharArrayReader(chars);
-        JavaReader jr = new JavaReader(car);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        int ch;
-        while ((ch = jr.read()) >= 0) {
-            bos.write(ch);
+    public static byte[] decode(final String s, final boolean uncompress) throws IOException {
+        byte[] bytes;
+        try (JavaReader jr = new JavaReader(new CharArrayReader(s.toCharArray()));
+                ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            int ch;
+            while ((ch = jr.read()) >= 0) {
+                bos.write(ch);
+            }
+            bytes = bos.toByteArray();
         }
-        bos.close();
-        car.close();
-        jr.close();
-        byte[] bytes = bos.toByteArray();
         if (uncompress) {
             GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(bytes));
             byte[] tmp = new byte[bytes.length * 3]; // Rough estimate
