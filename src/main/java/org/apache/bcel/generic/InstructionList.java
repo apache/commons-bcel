@@ -153,14 +153,15 @@ public class InstructionList implements Iterable<InstructionHandle> {
      *            byte array containing the instructions
      */
     public InstructionList(final byte[] code) {
-        ByteSequence bytes = new ByteSequence(code);
-        InstructionHandle[] ihs = new InstructionHandle[code.length];
-        int[] pos = new int[code.length]; // Can't be more than that
         int count = 0; // Contains actual length
-        /*
-         * Pass 1: Create an object for each byte code and append them to the list.
-         */
-        try {
+        int[] pos;
+        InstructionHandle[] ihs;
+        try (ByteSequence bytes = new ByteSequence(code)) {
+            ihs = new InstructionHandle[code.length];
+            pos = new int[code.length]; // Can't be more than that
+            /*
+             * Pass 1: Create an object for each byte code and append them to the list.
+             */
             while (bytes.available() > 0) {
                 // Remember byte offset and associate it with the instruction
                 int off = bytes.getIndex();
@@ -952,9 +953,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * @return an array of instructions without target information for branch instructions.
      */
     public Instruction[] getInstructions() {
-        ByteSequence bytes = new ByteSequence(getByteCode());
         List<Instruction> instructions = new ArrayList<>();
-        try {
+        try (ByteSequence bytes = new ByteSequence(getByteCode())) {
             while (bytes.available() > 0) {
                 instructions.add(Instruction.readInstruction(bytes));
             }
