@@ -131,7 +131,7 @@ public final class PerformanceTest extends TestCase {
         }
     }
 
-    public void testPerformance() throws IOException {
+    public void testPerformance() {
         File javaLib = new File(System.getProperty("java.home") + "/lib");
         javaLib.listFiles(new FileFilter() {
 
