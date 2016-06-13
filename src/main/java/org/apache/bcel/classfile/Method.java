@@ -185,7 +185,7 @@ public final class Method extends FieldOrMethod {
         ExceptionTable e = getExceptionTable();
         if (e != null) {
             String str = e.toString();
-            if (!str.equals("")) {
+            if (!str.isEmpty()) {
                 buf.append("\n\t\tthrows ").append(str);
             }
         }

@@ -198,7 +198,7 @@ public final class InnerClass implements Cloneable, Node {
             inner_name = "(anonymous)";
         }
         String access = Utility.accessToString(inner_access_flags, true);
-        access = access.equals("") ? "" : (access + " ");
+        access = access.isEmpty() ? "" : (access + " ");
         return "  " + access + inner_name + "=class " + inner_class_name + outer_class_name;
     }
 

@@ -595,7 +595,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     @Override
     public String toString() {
         String access = Utility.accessToString(super.getAccessFlags(), true);
-        access = access.equals("") ? "" : (access + " ");
+        access = access.isEmpty() ? "" : (access + " ");
         StringBuilder buf = new StringBuilder(128);
         buf.append(access).append(Utility.classOrInterface(super.getAccessFlags())).append(" ").append(
                 class_name).append(" extends ").append(

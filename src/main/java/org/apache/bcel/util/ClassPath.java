@@ -72,7 +72,7 @@ public class ClassPath {
         List<PathEntry> list = new ArrayList<>();
         for (StringTokenizer tok = new StringTokenizer(class_path, File.pathSeparator); tok.hasMoreTokens();) {
             String path = tok.nextToken();
-            if (!path.equals("")) {
+            if (!path.isEmpty()) {
                 File file = new File(path);
                 try {
                     if (file.exists()) {

@@ -83,7 +83,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
      */
     @Override
     public JavaClass loadClass(String className) throws ClassNotFoundException {
-        if ((className == null) || className.equals("")) {
+        if ((className == null) || className.isEmpty()) {
             throw new IllegalArgumentException("Invalid class name " + className);
         }
         className = className.replace('/', '.'); // Just in case, canonical form

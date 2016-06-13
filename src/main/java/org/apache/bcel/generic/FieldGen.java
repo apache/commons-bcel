@@ -317,7 +317,7 @@ public class FieldGen extends FieldGenOrMethodGen {
         String signature;
         String access; // Short cuts to constant pool
         access = Utility.accessToString(super.getAccessFlags());
-        access = access.equals("") ? "" : (access + " ");
+        access = access.isEmpty() ? "" : (access + " ");
         signature = super.getType().toString();
         name = getName();
         StringBuilder buf = new StringBuilder(32); // CHECKSTYLE IGNORE MagicNumber

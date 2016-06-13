@@ -318,7 +318,7 @@ public class VerifierAppFrame extends JFrame {
     void newFileMenuItem_actionPerformed( final ActionEvent e ) {
         String classname = JOptionPane
                 .showInputDialog("Please enter the fully qualified name of a class or interface to verify:");
-        if ((classname == null) || (classname.equals(""))) {
+        if ((classname == null) || (classname.isEmpty())) {
             return;
         }
         VerifierFactory.getVerifier(classname); // let observers do the rest.
