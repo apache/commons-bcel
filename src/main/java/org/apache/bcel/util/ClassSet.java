@@ -33,31 +33,31 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class ClassSet {
 
-    private final Map<String, JavaClass> _map = new HashMap<>();
+    private final Map<String, JavaClass> map = new HashMap<>();
 
 
     public boolean add( final JavaClass clazz ) {
         boolean result = false;
-        if (!_map.containsKey(clazz.getClassName())) {
+        if (!map.containsKey(clazz.getClassName())) {
             result = true;
-            _map.put(clazz.getClassName(), clazz);
+            map.put(clazz.getClassName(), clazz);
         }
         return result;
     }
 
 
     public void remove( final JavaClass clazz ) {
-        _map.remove(clazz.getClassName());
+        map.remove(clazz.getClassName());
     }
 
 
     public boolean empty() {
-        return _map.isEmpty();
+        return map.isEmpty();
     }
 
 
     public JavaClass[] toArray() {
-        Collection<JavaClass> values = _map.values();
+        Collection<JavaClass> values = map.values();
         JavaClass[] classes = new JavaClass[values.size()];
         values.toArray(classes);
         return classes;
@@ -65,6 +65,6 @@ public class ClassSet {
 
 
     public String[] getClassNames() {
-        return _map.keySet().toArray(new String[_map.size()]);
+        return map.keySet().toArray(new String[map.size()]);
     }
 }
