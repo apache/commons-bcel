@@ -73,7 +73,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public static final byte ZIP = 3;
     private static final boolean debug = Boolean.getBoolean("JavaClass.debug");; // Debugging on/off
     
-    private static BCELComparator _cmp = new BCELComparator() {
+    private static BCELComparator bcelComparator = new BCELComparator() {
 
         @Override
         public boolean equals( final Object o1, final Object o2 ) {
@@ -880,7 +880,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @return Comparison strategy object
      */
     public static BCELComparator getComparator() {
-        return _cmp;
+        return bcelComparator;
     }
 
 
@@ -888,7 +888,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param comparator Comparison strategy object
      */
     public static void setComparator( final BCELComparator comparator ) {
-        _cmp = comparator;
+        bcelComparator = comparator;
     }
 
 
@@ -901,7 +901,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      */
     @Override
     public boolean equals( final Object obj ) {
-        return _cmp.equals(this, obj);
+        return bcelComparator.equals(this, obj);
     }
 
 
@@ -924,6 +924,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      */
     @Override
     public int hashCode() {
-        return _cmp.hashCode(this);
+        return bcelComparator.hashCode(this);
     }
 }
