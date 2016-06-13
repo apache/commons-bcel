@@ -32,7 +32,7 @@ import org.apache.bcel.util.BCELComparator;
  */
 public final class Field extends FieldOrMethod {
 
-    private static BCELComparator _cmp = new BCELComparator() {
+    private static BCELComparator bcelComparator = new BCELComparator() {
 
         @Override
         public boolean equals( final Object o1, final Object o2 ) {
@@ -161,7 +161,7 @@ public final class Field extends FieldOrMethod {
      * @return Comparison strategy object
      */
     public static BCELComparator getComparator() {
-        return _cmp;
+        return bcelComparator;
     }
 
 
@@ -169,7 +169,7 @@ public final class Field extends FieldOrMethod {
      * @param comparator Comparison strategy object
      */
     public static void setComparator( final BCELComparator comparator ) {
-        _cmp = comparator;
+        bcelComparator = comparator;
     }
 
 
@@ -182,7 +182,7 @@ public final class Field extends FieldOrMethod {
      */
     @Override
     public boolean equals( final Object obj ) {
-        return _cmp.equals(this, obj);
+        return bcelComparator.equals(this, obj);
     }
 
 
@@ -194,6 +194,6 @@ public final class Field extends FieldOrMethod {
      */
     @Override
     public int hashCode() {
-        return _cmp.hashCode(this);
+        return bcelComparator.hashCode(this);
     }
 }
