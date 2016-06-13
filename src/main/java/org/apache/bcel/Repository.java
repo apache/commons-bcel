@@ -35,20 +35,20 @@ import org.apache.bcel.util.SyntheticRepository;
  */
 public abstract class Repository {
 
-    private static org.apache.bcel.util.Repository _repository = SyntheticRepository.getInstance();
+    private static org.apache.bcel.util.Repository repository = SyntheticRepository.getInstance();
 
 
     /** @return currently used repository instance
      */
     public static org.apache.bcel.util.Repository getRepository() {
-        return _repository;
+        return repository;
     }
 
 
     /** Set repository instance to be used for class loading
      */
     public static void setRepository( final org.apache.bcel.util.Repository rep ) {
-        _repository = rep;
+        repository = rep;
     }
 
 
@@ -60,7 +60,7 @@ public abstract class Repository {
      * parsed correctly
      */
     public static JavaClass lookupClass( final String class_name ) throws ClassNotFoundException {
-        return _repository.loadClass(class_name);
+        return repository.loadClass(class_name);
     }
 
 
@@ -72,7 +72,7 @@ public abstract class Repository {
      * parsed correctly
      */
     public static JavaClass lookupClass( final Class<?> clazz ) throws ClassNotFoundException {
-        return _repository.loadClass(clazz);
+        return repository.loadClass(clazz);
     }
 
 
@@ -83,7 +83,7 @@ public abstract class Repository {
      */
     public static ClassPath.ClassFile lookupClassFile( final String class_name ) {
         try {
-            ClassPath path = _repository.getClassPath();
+            ClassPath path = repository.getClassPath();
             if (path == null) {
                 return null;
             }
@@ -97,7 +97,7 @@ public abstract class Repository {
     /** Clear the repository.
      */
     public static void clearCache() {
-        _repository.clear();
+        repository.clear();
     }
 
 
@@ -107,8 +107,8 @@ public abstract class Repository {
      * @return old entry in repository
      */
     public static JavaClass addClass( final JavaClass clazz ) {
-        JavaClass old = _repository.findClass(clazz.getClassName());
-        _repository.storeClass(clazz);
+        JavaClass old = repository.findClass(clazz.getClassName());
+        repository.storeClass(clazz);
         return old;
     }
 
@@ -117,7 +117,7 @@ public abstract class Repository {
      * Remove class with given (fully qualified) name from repository.
      */
     public static void removeClass( final String clazz ) {
-        _repository.removeClass(_repository.findClass(clazz));
+        repository.removeClass(repository.findClass(clazz));
     }
 
 
@@ -125,7 +125,7 @@ public abstract class Repository {
      * Remove given class from repository.
      */
     public static void removeClass( final JavaClass clazz ) {
-        _repository.removeClass(clazz);
+        repository.removeClass(clazz);
     }
 
 
