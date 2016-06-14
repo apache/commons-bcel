@@ -82,10 +82,10 @@ public class JDKClassDumpTestCase {
         jc.dump(dos);
         dos.close();
         DataInputStream src = new DataInputStream(inputStream);
-        int i=0;
-        for(int out : baos.toByteArray()) {
+        int i = 0;
+        for (int out : baos.toByteArray()) {
             int in = src.read();
-            assertEquals(name + ": Mismatch at "+i, in, out&0xFF);
+            assertEquals(name + ": Mismatch at " + i, in, out & 0xFF);
             i++;
         }
         src.close();
