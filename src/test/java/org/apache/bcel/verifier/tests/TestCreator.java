@@ -30,12 +30,8 @@ public abstract class TestCreator {
 
     public void create() throws IOException {
         File classFile = new File(getPackageFolder(), getClassName());
-        FileOutputStream out = new FileOutputStream(classFile);
-        try {
+        try (FileOutputStream out = new FileOutputStream(classFile)) {
             create(out);
-        }
-        finally {
-            out.close();
         }
     }
     

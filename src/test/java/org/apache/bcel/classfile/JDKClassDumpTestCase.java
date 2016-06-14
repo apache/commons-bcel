@@ -44,7 +44,7 @@ public class JDKClassDumpTestCase {
 
             @Override
             public boolean accept(final File file) {
-                if(file.getName().endsWith(".jar")) {
+                if (file.getName().endsWith(".jar")) {
                     try {
                         testJar(file);
                     } catch (Exception e) {
@@ -59,21 +59,21 @@ public class JDKClassDumpTestCase {
 
     private void testJar(final File file) throws Exception {
         System.out.println("parsing " + file);
-        JarFile jar = new JarFile(file);
-        Enumeration<JarEntry> en = jar.entries();
-
-        while (en.hasMoreElements()) {
-            JarEntry e = en.nextElement();
-            final String name = e.getName();
-            if (name.endsWith(".class")) {
-//                System.out.println("parsing " + name);
-                InputStream in = jar.getInputStream(e);
-                ClassParser parser = new ClassParser(in, name);
-                JavaClass jc = parser.parse();
-                compare(jc, jar.getInputStream(e), name);
+        try (JarFile jar = new JarFile(file)) {
+            Enumeration<JarEntry> en = jar.entries();
+            while (en.hasMoreElements()) {
+                JarEntry e = en.nextElement();
+                final String name = e.getName();
+                if (name.endsWith(".class")) {
+                    // System.out.println("parsing " + name);
+                    try (InputStream in = jar.getInputStream(e)) {
+                        ClassParser parser = new ClassParser(in, name);
+                        JavaClass jc = parser.parse();
+                        compare(jc, jar.getInputStream(e), name);
+                    }
+                }
             }
         }
-        jar.close();
     }
 
     private void compare(final JavaClass jc, final InputStream inputStream, final String name) throws Exception {
