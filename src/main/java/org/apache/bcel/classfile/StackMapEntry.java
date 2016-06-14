@@ -102,6 +102,7 @@ public final class StackMapEntry implements Node, Cloneable
      * @deprecated Since 6.0, use {@link #StackMapEntry(int, int, StackMapType[], StackMapType[], ConstantPool)}
      * instead
      */
+    @java.lang.Deprecated
     public StackMapEntry(final int byte_code_offset, final int number_of_locals,
             final StackMapType[] types_of_locals, final int number_of_stack_items,
             final StackMapType[] types_of_stack_items, final ConstantPool constant_pool) {
