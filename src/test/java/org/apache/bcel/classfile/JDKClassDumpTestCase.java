@@ -78,17 +78,17 @@ public class JDKClassDumpTestCase {
 
     private void compare(final JavaClass jc, final InputStream inputStream, final String name) throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        DataOutputStream dos = new DataOutputStream(baos);
-        jc.dump(dos);
-        dos.close();
-        DataInputStream src = new DataInputStream(inputStream);
-        int i = 0;
-        for (int out : baos.toByteArray()) {
-            int in = src.read();
-            assertEquals(name + ": Mismatch at " + i, in, out & 0xFF);
-            i++;
+        try (DataOutputStream dos = new DataOutputStream(baos)) {
+            jc.dump(dos);
         }
-        src.close();
+        try (DataInputStream src = new DataInputStream(inputStream)) {
+            int i = 0;
+            for (int out : baos.toByteArray()) {
+                int in = src.read();
+                assertEquals(name + ": Mismatch at " + i, in, out & 0xFF);
+                i++;
+            }
+        }
     }
 
 
