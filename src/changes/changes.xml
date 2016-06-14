@@ -90,6 +90,7 @@ N.B. The Clirr report shows that there are several incompatible changes which in
  External code should not have been relying on such classes to provide definitions of the constants.
 
 ">
+      <action issue="BCEL-243" type="fix">Type.getType() needs to understand TypeVariableSignature(s)</action>
       <action issue="BCEL-272" type="add">Add constants for Java 9 class file version 53</action>
       <action issue="BCEL-271" type="fix">FCONST pattern does not include FCONST_2</action>
       <action issue="BCEL-264" type="fix">Add missing Node.accept() implementations (ConstantMethodHandle, ConstantMethodType, ParameterAnnotationEntry)</action>

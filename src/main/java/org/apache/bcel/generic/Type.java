@@ -214,13 +214,11 @@ public abstract class Type {
             wrap(consumed_chars, _temp);
             return new ArrayType(t, dim);
         } else { // type == T_REFERENCE
-            int index = signature.indexOf(';'); // Look for closing `;'
-            if (index < 0) {
-                throw new ClassFormatException("Invalid signature: " + signature);
-            }
-            //corrected concurrent private static field acess
-            wrap(consumed_chars, index + 1); // "Lblabla;" `L' and `;' are removed
-            return ObjectType.getInstance(signature.substring(1, index).replace('/', '.'));
+            // Utility.signatureToString understands how to parse
+            // generic types.
+            String parsedSignature = Utility.signatureToString(signature, false);
+            wrap(consumed_chars, parsedSignature.length() + 2); // "Lblabla;" `L' and `;' are removed
+            return ObjectType.getInstance(parsedSignature.replace('/', '.'));
         }
     }
 
