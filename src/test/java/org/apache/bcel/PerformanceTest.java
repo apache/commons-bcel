@@ -83,9 +83,11 @@ public final class PerformanceTest extends TestCase {
             while (en.hasMoreElements()) {
                 JarEntry e = (JarEntry) en.nextElement();
                 if (e.getName().endsWith(".class")) {
-                    InputStream in = jar.getInputStream(e);
-                    byte[] bytes = read(in);
-
+                    byte[] bytes;
+                    try (InputStream in = jar.getInputStream(e)) {
+                        bytes = read(in);
+                    }
+                    
                     parseTime.start();
                     JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), e.getName()).parse();
                     parseTime.stop();
