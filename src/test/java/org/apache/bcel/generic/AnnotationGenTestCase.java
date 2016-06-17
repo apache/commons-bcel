@@ -124,16 +124,16 @@ public class AnnotationGenTestCase extends AbstractTestCase
         {
             String beforeName = a.getTypeName();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            DataOutputStream dos = new DataOutputStream(baos);
-            a.dump(dos);
-            dos.flush();
-            dos.close();
+            try (DataOutputStream dos = new DataOutputStream(baos)) {
+                a.dump(dos);
+                dos.flush();
+            }
             byte[] bs = baos.toByteArray();
             ByteArrayInputStream bais = new ByteArrayInputStream(bs);
-            DataInputStream dis = new DataInputStream(bais);
-            AnnotationEntryGen annAfter = AnnotationEntryGen.read(dis, cpg, a
-                    .isRuntimeVisible());
-            dis.close();
+            AnnotationEntryGen annAfter;
+            try (DataInputStream dis = new DataInputStream(bais)) {
+                annAfter = AnnotationEntryGen.read(dis, cpg, a.isRuntimeVisible());
+            }
             String afterName = annAfter.getTypeName();
             if (!beforeName.equals(afterName))
             {
