@@ -33,10 +33,11 @@ public class Class2HTMLTestCase extends TestCase {
             Assert.assertTrue(outputDir.isDirectory()); // fail if missing
         }
 
-        FileInputStream file = new FileInputStream("target/test-classes/Java8Example.class");
+        try (FileInputStream file = new FileInputStream("target/test-classes/Java8Example.class")) {
 
-        ClassParser parser = new ClassParser(file, "Java8Example.class");
+            ClassParser parser = new ClassParser(file, "Java8Example.class");
 
-        new Class2HTML(parser.parse(), outputDir.getAbsolutePath() + "/");
+            new Class2HTML(parser.parse(), outputDir.getAbsolutePath() + "/");
+        }
     }
 }
