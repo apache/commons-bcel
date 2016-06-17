@@ -42,10 +42,10 @@ public class BCELifierTestCase {
         JavaClass java_class = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
         assertNotNull(java_class);
         File outfile = new File(workDir, infile.getName().replace(".class", "Creator.java"));
-        FileOutputStream fos = new FileOutputStream(outfile);
-        BCELifier bcelifier = new BCELifier(java_class, fos);
-        bcelifier.start();
-        fos.close();
+        try (FileOutputStream fos = new FileOutputStream(outfile)) {
+            BCELifier bcelifier = new BCELifier(java_class, fos);
+            bcelifier.start();
+        }
         exec(workDir, "javac", "-cp", "classes", outfile.getName());
         exec(workDir, "java", "-cp", "." + File.pathSeparator + "classes", outfile.getName().replace(".java", ""));
         final String output = exec(workDir, "javap", "-p", "-c", infile.getName());
@@ -65,21 +65,21 @@ public class BCELifierTestCase {
         ProcessBuilder pb = new ProcessBuilder(args);
         pb.directory(workDir);
         Process proc = pb.start();
-        BufferedInputStream is = new BufferedInputStream(proc.getInputStream());
-        InputStream es = proc.getErrorStream();
-        proc.waitFor();
-        byte[] buff = new byte[2048];
-        int len;
-        while ((len = es.read(buff)) != -1) {
-            System.err.print(new String(buff, 0, len));
-        }
+        try (BufferedInputStream is = new BufferedInputStream(proc.getInputStream());
+                InputStream es = proc.getErrorStream()) {
+            proc.waitFor();
+            byte[] buff = new byte[2048];
+            int len;
+            while ((len = es.read(buff)) != -1) {
+                System.err.print(new String(buff, 0, len));
+            }
 
-        StringBuilder sb = new StringBuilder();
-        while ((len = is.read(buff)) != -1) {
-            sb.append(new String(buff, 0, len));
+            StringBuilder sb = new StringBuilder();
+            while ((len = is.read(buff)) != -1) {
+                sb.append(new String(buff, 0, len));
+            }
+            return sb.toString();
         }
-        is.close();
-        return sb.toString();
     }
 
 }
