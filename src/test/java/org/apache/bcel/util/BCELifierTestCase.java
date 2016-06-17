@@ -60,23 +60,23 @@ public class BCELifierTestCase {
         return input;
     }
 
-    private String exec(final File workDir, final String ... args) throws Exception {
-//        System.err.println(java.util.Arrays.toString(args));
-        ProcessBuilder pb = new ProcessBuilder( args );
+    private String exec(final File workDir, final String... args) throws Exception {
+        // System.err.println(java.util.Arrays.toString(args));
+        ProcessBuilder pb = new ProcessBuilder(args);
         pb.directory(workDir);
         Process proc = pb.start();
         BufferedInputStream is = new BufferedInputStream(proc.getInputStream());
         InputStream es = proc.getErrorStream();
         proc.waitFor();
-        byte []buff=new byte[2048];
+        byte[] buff = new byte[2048];
         int len;
-        while((len=es.read(buff)) != -1) {
-            System.err.print(new String(buff,0,len));
+        while ((len = es.read(buff)) != -1) {
+            System.err.print(new String(buff, 0, len));
         }
-        
+
         StringBuilder sb = new StringBuilder();
-        while((len=is.read(buff)) != -1) {
-            sb.append(new String(buff,0,len));
+        while ((len = is.read(buff)) != -1) {
+            sb.append(new String(buff, 0, len));
         }
         is.close();
         return sb.toString();
