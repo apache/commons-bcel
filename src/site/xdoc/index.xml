@@ -97,24 +97,10 @@
     <!-- ================================================== -->
     <section name="Getting Involved">
       <p>
-        The <a href="mail-lists.html">commons developer mailing list</a> is the main channel of communication for contributors. Please remember that the lists are shared between all commons components, so prefix your email by [lang]. </p>
+        The <a href="mail-lists.html">commons developer mailing list</a> is the main channel of communication for contributors. Please remember that the lists are shared between all commons components, so prefix your email by [bcel]. </p>
       <p>You can also visit the #apache-commons IRC channel on irc.freenode.net or peruse <a href="issue-tracking.html">JIRA</a>.</p>
       <p>Alternatively you can go through the <em>Needs Work</em> tags in the <a href="taglist.html">TagList report</a>.</p>
       <p>If you'd like to offer up pull requests via GitHub rather than applying patches to JIRA, we have a <a href="https://github.com/apache/commons-bcel/">GitHub mirror</a>. </p>
-    </section>
-    <!-- ================================================== -->
-    <section name="Support">
-      <p>
-        The <a href="mail-lists.html">commons mailing lists</a> act as the main support forum.
-        The user list is suitable for most library usage queries.
-        The dev list is intended for the development discussion.
-        Please remember that the lists are shared between all commons components,
-        so prefix your email by [BCEL].
-      </p>
-      <p>
-        Bug reports and enhancements are also welcomed via the <a href="issue-tracking.html">JIRA</a> issue tracker.
-        Please read the instructions carefully.
-      </p>
     </section>
   </body>
 </document>
