@@ -266,7 +266,6 @@ public abstract class BranchInstruction extends Instruction implements Instructi
 
     /**
      * @param position the position to set
-     * @return the new position
      * @since 6.0
      */
     protected void setPosition(final int position) {

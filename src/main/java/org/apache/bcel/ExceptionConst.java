@@ -61,7 +61,7 @@ public final class ExceptionConst {
 
     /** 
      * Enum corresponding to the various Exception Class arrays, 
-     * used by {@link ExceptionConstants#createExceptions(EXCS, Class...)}
+     * used by {@link ExceptionConst#createExceptions(EXCS, Class...)}
      */
     public enum EXCS {
         EXCS_CLASS_AND_INTERFACE_RESOLUTION,

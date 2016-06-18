@@ -61,7 +61,7 @@ import org.apache.bcel.generic.InstructionList;
  * </pre>
  * 
  * @version $Id$
- * @see Instruction
+ * @see org.apache.bcel.generic.Instruction
  * @see InstructionList
  */
 public class InstructionFinder {

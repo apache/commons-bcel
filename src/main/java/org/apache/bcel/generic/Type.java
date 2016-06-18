@@ -113,8 +113,6 @@ public abstract class Type {
      * boolean, short and char variable are considered as int in the stack or local variable area.
      * Returns {@link Type#INT} for {@link Type#BOOLEAN}, {@link Type#SHORT} or {@link Type#CHAR}, otherwise
      * returns the given type.
-     * @see OperandStack#push(Type)
-     * @see LocalVariables#set(int, Type)
      * @since 6.0
      */
     public Type normalizeForStackOrLocal(){

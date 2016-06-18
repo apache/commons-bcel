@@ -263,9 +263,8 @@ public final class Const {
   public static final int ACCESS_NAMES_LENGTH = ACCESS_NAMES.length;
   
   /**
-   * 
    * @param index
-   * @return
+   * @return the ACCESS_NAMES entry at the given index
    * @since 6.0
    */
   public static String getAccessName(final int index) {
@@ -363,7 +362,7 @@ public final class Const {
   /**
    * 
    * @param index
-   * @return
+   * @return the CONSTANT_NAMES entry at the given index
    * @since 6.0
    */
   public static String getConstantName(final int index) {
@@ -387,9 +386,6 @@ public final class Const {
   private static final String[] INTERFACES_IMPLEMENTED_BY_ARRAYS = {"java.lang.Cloneable", "java.io.Serializable"};
 
   /**
-   * 
-   * @param index
-   * @return
    * @since 6.0
    */
   public static Iterable<String> getInterfacesImplementedByArrays() {
@@ -1749,7 +1745,7 @@ public final class Const {
    * The primitive type names corresponding to the T_XX constants,
    * e.g., TYPE_NAMES[T_INT] = "int"
    * @param index
-   * @return
+   * @return the type name
    * @since 6.0
    */
   public static String getTypeName(final int index) {
@@ -1771,7 +1767,7 @@ public final class Const {
    * The primitive class names corresponding to the T_XX constants,
    * e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
    * @param index
-   * @return
+   * @return the class name
    * @since 6.0
    */
   public static String getClassTypeName(final int index) {
@@ -1790,7 +1786,7 @@ public final class Const {
   /**
    * 
    * @param index
-   * @return
+   * @return the short type name
    * @since 6.0
    */
   public static String getShortTypeName(final int index) {
@@ -1867,7 +1863,7 @@ public final class Const {
   /**
    * 
    * @param index
-   * @return
+   * @return Number of byte code operands
    * @since 6.0
    */
   public static short getNoOfOperands(final int index) {
@@ -2081,7 +2077,7 @@ public final class Const {
   /**
    * 
    * @param index
-   * @return
+   * @return Number of words consumed on operand stack 
    * @since 6.0
    */
   public static int getConsumeStack(final int index) {
@@ -2148,7 +2144,7 @@ public final class Const {
   /**
    * 
    * @param index
-   * @return
+   * @return Number of words produced onto operand stack
    * @since 6.0
    */
   public static int getProduceStack(final int index) {
@@ -2197,7 +2193,7 @@ public final class Const {
   /**
    * 
    * @param index
-   * @return
+   * @return the attribute name
    * @since 6.0
    */
   public static String getAttributeName(final int index) {
@@ -2224,7 +2220,7 @@ public final class Const {
   /**
    * 
    * @param index
-   * @return
+   * @return the item name
    * @since 6.0
    */
   public static String getItemName(final int index) {
@@ -2275,7 +2271,7 @@ public final class Const {
   /**
    * 
    * @param index
-   * @return
+   * @return the method handle name
    * @since 6.0
    */
   public static String getMethodHandleName(final int index) {

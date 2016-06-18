@@ -377,7 +377,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     
     /**
      * 
-     * @return
+     * @return the padding
      * @since 6.0
      */
     final int getPadding() {

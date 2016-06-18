@@ -323,7 +323,7 @@ public final class StackMapEntry implements Node, Cloneable
      * entry to the next.  Note that this might cause the the
      * frame type to change.  Note also that delta may be negative.
      *
-     * @param int offset delta
+     * @param delta offset delta
      */
     public void updateByteCodeOffset(final int delta) {
         setByteCodeOffset(byte_code_offset + delta);
