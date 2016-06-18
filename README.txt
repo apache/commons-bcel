@@ -22,15 +22,3 @@ Running a graphics based verifier
 
  to launch one. Again, you may have to resolve a memory issue depending
  on the classes to verify.
-
-
-Contact
-
- If you spot a bug in the BCEL or its accompanying verifier "JustIce" please
- check with the BCEL mailing list
-
-   http://commons.apache.org/bcel
-
- or enter the issue into the BCEL bug database
-
-  https://issues.apache.org/jira/browse/BCEL
