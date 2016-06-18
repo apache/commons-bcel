@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<!--
+    * Licensed to the Apache Software Foundation (ASF) under one
+    * or more contributor license agreements.  See the NOTICE file
+    * distributed with this work for additional information
+    * regarding copyright ownership.  The ASF licenses this file
+    * to you under the Apache License, Version 2.0 (the
+    * "License"); you may not use this file except in compliance
+    * with the License.  You may obtain a copy of the License at
+    * 
+    *   http://www.apache.org/licenses/LICENSE-2.0
+    * 
+    * Unless required by applicable law or agreed to in writing,
+    * software distributed under the License is distributed on an
+    * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    * KIND, either express or implied.  See the License for the
+    * specific language governing permissions and limitations
+    * under the License.    
+-->
+<document>
+  <properties>
+    <title>The Java Virtual Machine</title>
+  </properties>
+
+  <body>
+    <section name="The Java Virtual Machine">
+      <p>
+        Readers already familiar with the Java Virtual Machine and the
+        Java class file format may want to skip this section and proceed
+        with <a href="bcel-api.html">section 3</a>.
+      </p>
+
+      <p>
+        Programs written in the Java language are compiled into a portable
+        binary format called <em>byte code</em>. Every class is
+        represented by a single class file containing class related data
+        and byte code instructions. These files are loaded dynamically
+        into an interpreter (<a
+              href="http://docs.oracle.com/javase/specs/">Java
+        Virtual Machine</a>, aka. JVM) and executed.
+      </p>
+
+      <p>
+        <a href="#Figure 1">Figure 1</a> illustrates the procedure of
+        compiling and executing a Java class: The source file
+        (<tt>HelloWorld.java</tt>) is compiled into a Java class file
+        (<tt>HelloWorld.class</tt>), loaded by the byte code interpreter
+        and executed. In order to implement additional features,
+        researchers may want to transform class files (drawn with bold
+        lines) before they get actually executed. This application area
+        is one of the main issues of this article.
+      </p>
+
+      <p align="center">
+        <a name="Figure 1">
+          <img src="../images/jvm.gif"/>
+          <br/>
+          Figure 1: Compilation and execution of Java classes</a>
+      </p>
+
+      <p>
+        Note that the use of the general term "Java" implies in fact two
+        meanings: on the one hand, Java as a programming language, on the
+        other hand, the Java Virtual Machine, which is not necessarily
+        targeted by the Java language exclusively, but may be used by <a
+              href="http://www.robert-tolksdorf.de/vmlanguages.html">other
+        languages</a> as well. We assume the reader to be familiar with
+        the Java language and to have a general understanding of the
+        Virtual Machine.
+      </p>
+
+    <subsection name="Java class file format">
+      <p>
+        Giving a full overview of the design issues of the Java class file
+        format and the associated byte code instructions is beyond the
+        scope of this paper. We will just give a brief introduction
+        covering the details that are necessary for understanding the rest
+        of this paper. The format of class files and the byte code
+        instruction set are described in more detail in the <a
+              href="http://docs.oracle.com/javase/specs/">Java
+        Virtual Machine Specification</a>. Especially, we will not deal
+        with the security constraints that the Java Virtual Machine has to
+        check at run-time, i.e. the byte code verifier.
+      </p>
+
+      <p>
+        <a href="#Figure 2">Figure 2</a> shows a simplified example of the
+        contents of a Java class file: It starts with a header containing
+        a "magic number" (<tt>0xCAFEBABE</tt>) and the version number,
+        followed by the <em>constant pool</em>, which can be roughly
+        thought of as the text segment of an executable, the <em>access
+        rights</em> of the class encoded by a bit mask, a list of
+        interfaces implemented by the class, lists containing the fields
+        and methods of the class, and finally the <em>class
+        attributes</em>, e.g.,  the <tt>SourceFile</tt> attribute telling
+        the name of the source file. Attributes are a way of putting
+        additional, user-defined information into class file data
+        structures. For example, a custom class loader may evaluate such
+        attribute data in order to perform its transformations. The JVM
+        specification declares that unknown, i.e., user-defined attributes
+        must be ignored by any Virtual Machine implementation.
+      </p>
+
+      <p align="center">
+        <a name="Figure 2">
+          <img src="../images/classfile.gif"/>
+          <br/>
+          Figure 2: Java class file format</a>
+      </p>
+
+      <p>
+        Because all of the information needed to dynamically resolve the
+        symbolic references to classes, fields and methods at run-time is
+        coded with string constants, the constant pool contains in fact
+        the largest portion of an average class file, approximately
+        60%. In fact, this makes the constant pool an easy target for code
+        manipulation issues. The byte code instructions themselves just
+        make up 12%.
+      </p>
+
+      <p>
+        The right upper box shows a "zoomed" excerpt of the constant pool,
+        while the rounded box below depicts some instructions that are
+        contained within a method of the example class. These
+        instructions represent the straightforward translation of the
+        well-known statement:
+      </p>
+
+      <p align="center">
+        <source>System.out.println("Hello, world");</source>
+      </p>
+
+      <p>
+        The first instruction loads the contents of the field <tt>out</tt>
+        of class <tt>java.lang.System</tt> onto the operand stack. This is
+        an instance of the class <tt>java.io.PrintStream</tt>. The
+        <tt>ldc</tt> ("Load constant") pushes a reference to the string
+        "Hello world" on the stack. The next instruction invokes the
+        instance method <tt>println</tt> which takes both values as
+        parameters (Instance methods always implicitly take an instance
+        reference as their first argument).
+      </p>
+
+      <p>
+        Instructions, other data structures within the class file and
+        constants themselves may refer to constants in the constant pool.
+        Such references are implemented via fixed indexes encoded directly
+        into the instructions. This is illustrated for some items of the
+        figure emphasized with a surrounding box.
+      </p>
+
+      <p>
+        For example, the <tt>invokevirtual</tt> instruction refers to a
+        <tt>MethodRef</tt> constant that contains information about the
+        name of the called method, the signature (i.e., the encoded
+        argument and return types), and to which class the method belongs.
+        In fact, as emphasized by the boxed value, the <tt>MethodRef</tt>
+        constant itself just refers to other entries holding the real
+        data, e.g., it refers to a <tt>ConstantClass</tt> entry containing
+        a symbolic reference to the class <tt>java.io.PrintStream</tt>.
+        To keep the class file compact, such constants are typically
+        shared by different instructions and other constant pool
+        entries. Similarly, a field is represented by a <tt>Fieldref</tt>
+        constant that includes information about the name, the type and
+        the containing class of the field.
+      </p>
+
+      <p>
+        The constant pool basically holds the following types of
+        constants: References to methods, fields and classes, strings,
+        integers, floats, longs, and doubles.
+      </p>
+
+    </subsection>
+
+    <subsection name="Byte code instruction set">
+      <p>
+        The JVM is a stack-oriented interpreter that creates a local stack
+        frame of fixed size for every method invocation. The size of the
+        local stack has to be computed by the compiler. Values may also be
+        stored intermediately in a frame area containing <em>local
+        variables</em> which can be used like a set of registers. These
+        local variables are numbered from 0 to 65535, i.e., you have a
+        maximum of 65536 of local variables per method. The stack frames
+        of caller and callee method are overlapping, i.e., the caller
+        pushes arguments onto the operand stack and the called method
+        receives them in local variables.
+      </p>
+
+      <p>
+        The byte code instruction set currently consists of 212
+        instructions, 44 opcodes are marked as reserved and may be used
+        for future extensions or intermediate optimizations within the
+        Virtual Machine. The instruction set can be roughly grouped as
+        follows:
+      </p>
+
+      <p>
+        <b>Stack operations:</b> Constants can be pushed onto the stack
+        either by loading them from the constant pool with the
+        <tt>ldc</tt> instruction or with special "short-cut"
+        instructions where the operand is encoded into the instructions,
+        e.g.,  <tt>iconst_0</tt> or <tt>bipush</tt> (push byte value).
+      </p>
+
+      <p>
+        <b>Arithmetic operations:</b> The instruction set of the Java
+        Virtual Machine distinguishes its operand types using different
+        instructions to operate on values of specific type. Arithmetic
+        operations starting with <tt>i</tt>, for example, denote an
+        integer operation. E.g., <tt>iadd</tt> that adds two integers
+        and pushes the result back on the stack. The Java types
+        <tt>boolean</tt>, <tt>byte</tt>, <tt>short</tt>, and
+        <tt>char</tt> are handled as integers by the JVM.
+      </p>
+
+      <p>
+        <b>Control flow:</b> There are branch instructions like
+        <tt>goto</tt>, and <tt>if_icmpeq</tt>, which compares two integers
+        for equality. There is also a <tt>jsr</tt> (jump to sub-routine)
+        and <tt>ret</tt> pair of instructions that is used to implement
+        the <tt>finally</tt> clause of <tt>try-catch</tt> blocks.
+        Exceptions may be thrown with the <tt>athrow</tt> instruction.
+        Branch targets are coded as offsets from the current byte code
+        position, i.e., with an integer number.
+      </p>
+
+      <p>
+        <b>Load and store operations</b> for local variables like
+        <tt>iload</tt> and <tt>istore</tt>. There are also array
+        operations like <tt>iastore</tt> which stores an integer value
+        into an array.
+      </p>
+
+      <p>
+        <b>Field access:</b> The value of an instance field may be
+        retrieved with <tt>getfield</tt> and written with
+        <tt>putfield</tt>. For static fields, there are
+        <tt>getstatic</tt> and <tt>putstatic</tt> counterparts.
+      </p>
+
+      <p>
+        <b>Method invocation:</b> Static Methods may either be called via
+        <tt>invokestatic</tt> or be bound virtually with the
+        <tt>invokevirtual</tt> instruction. Super class methods and
+        private methods are invoked with <tt>invokespecial</tt>. A
+        special case are interface methods which are invoked with
+        <tt>invokeinterface</tt>.
+      </p>
+
+      <p>
+        <b>Object allocation:</b> Class instances are allocated with the
+        <tt>new</tt> instruction, arrays of basic type like
+        <tt>int[]</tt> with <tt>newarray</tt>, arrays of references like
+        <tt>String[][]</tt> with <tt>anewarray</tt> or
+        <tt>multianewarray</tt>.
+      </p>
+
+      <p>
+        <b>Conversion and type checking:</b> For stack operands of basic
+        type there exist casting operations like <tt>f2i</tt> which
+        converts a float value into an integer. The validity of a type
+        cast may be checked with <tt>checkcast</tt> and the
+        <tt>instanceof</tt> operator can be directly mapped to the
+        equally named instruction.
+      </p>
+
+      <p>
+        Most instructions have a fixed length, but there are also some
+        variable-length instructions: In particular, the
+        <tt>lookupswitch</tt> and <tt>tableswitch</tt> instructions, which
+        are used to implement <tt>switch()</tt> statements.  Since the
+        number of <tt>case</tt> clauses may vary, these instructions
+        contain a variable number of statements.
+      </p>
+
+      <p>
+        We will not list all byte code instructions here, since these are
+        explained in detail in the <a
+              href="http://docs.oracle.com/javase/specs/">JVM
+        specification</a>. The opcode names are mostly self-explaining,
+        so understanding the following code examples should be fairly
+        intuitive.
+      </p>
+
+    </subsection>
+
+    <subsection name="Method code">
+      <p>
+        Non-abstract (and non-native) methods contain an attribute
+        "<tt>Code</tt>" that holds the following data: The maximum size of
+        the method's stack frame, the number of local variables and an
+        array of byte code instructions. Optionally, it may also contain
+        information about the names of local variables and source file
+        line numbers that can be used by a debugger.
+      </p>
+
+      <p>
+        Whenever an exception is raised during execution, the JVM performs
+        exception handling by looking into a table of exception
+        handlers. The table marks handlers, i.e., code chunks, to be
+        responsible for exceptions of certain types that are raised within
+        a given area of the byte code. When there is no appropriate
+        handler the exception is propagated back to the caller of the
+        method. The handler information is itself stored in an attribute
+        contained within the <tt>Code</tt> attribute.
+      </p>
+
+    </subsection>
+
+    <subsection name="Byte code offsets">
+      <p>
+        Targets of branch instructions like <tt>goto</tt> are encoded as
+        relative offsets in the array of byte codes. Exception handlers
+        and local variables refer to absolute addresses within the byte
+        code.  The former contains references to the start and the end of
+        the <tt>try</tt> block, and to the instruction handler code. The
+        latter marks the range in which a local variable is valid, i.e.,
+        its scope. This makes it difficult to insert or delete code areas
+        on this level of abstraction, since one has to recompute the
+        offsets every time and update the referring objects. We will see
+        in <a href="bcel-api.html#ClassGen">section 3.3</a> how <font
+              face="helvetica,arial">BCEL</font> remedies this restriction.
+      </p>
+
+    </subsection>
+
+    <subsection name="Type information">
+      <p>
+        Java is a type-safe language and the information about the types
+        of fields, local variables, and methods is stored in so called
+        <em>signatures</em>. These are strings stored in the constant pool
+        and encoded in a special format. For example the argument and
+        return types of the <tt>main</tt> method
+      </p>
+
+      <p align="center">
+        <source>public static void main(String[] argv)</source>
+      </p>
+
+      <p>
+        are represented by the signature
+      </p>
+
+      <p align="center">
+        <source>([java/lang/String;)V</source>
+      </p>
+
+      <p>
+        Classes are internally represented by strings like
+        <tt>"java/lang/String"</tt>, basic types like <tt>float</tt> by an
+        integer number. Within signatures they are represented by single
+        characters, e.g., <tt>I</tt>, for integer. Arrays are denoted with
+        a <tt>[</tt> at the start of the signature.
+      </p>
+
+    </subsection>
+
+    <subsection name="Code example">
+      <p>
+        The following example program prompts for a number and prints the
+        factorial of it. The <tt>readLine()</tt> method reading from the
+        standard input may raise an <tt>IOException</tt> and if a
+        misspelled number is passed to <tt>parseInt()</tt> it throws a
+        <tt>NumberFormatException</tt>. Thus, the critical area of code
+        must be encapsulated in a <tt>try-catch</tt> block.
+      </p>
+
+      <source>
+import java.io.*;
+
+public class Factorial {
+    private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+    public static int fac(int n) {
+        return (n == 0) ? 1 : n * fac(n - 1);
+    }
+
+    public static int readInt() {
+        int n = 4711;
+        try {
+            System.out.print("Please enter a number&gt; ");
+            n = Integer.parseInt(in.readLine());
+        } catch (IOException e1) {
+            System.err.println(e1);
+        } catch (NumberFormatException e2) {
+            System.err.println(e2);
+        }
+        return n;
+    }
+    
+    public static void main(String[] argv) {
+        int n = readInt();
+        System.out.println("Factorial of " + n + " is " + fac(n));
+    }
+}
+      </source>
+
+      <p>
+        This code example typically compiles to the following chunks of
+        byte code:
+      </p>
+
+      <source>
+        0:  iload_0
+        1:  ifne            #8
+        4:  iconst_1
+        5:  goto            #16
+        8:  iload_0
+        9:  iload_0
+        10: iconst_1
+        11: isub
+        12: invokestatic    Factorial.fac (I)I (12)
+        15: imul
+        16: ireturn
+
+        LocalVariable(start_pc = 0, length = 16, index = 0:int n)
+      </source>
+
+      <p><b>fac():</b>
+        The method <tt>fac</tt> has only one local variable, the argument
+        <tt>n</tt>, stored at index 0. This variable's scope ranges from
+        the start of the byte code sequence to the very end.  If the value
+        of <tt>n</tt> (the value fetched with <tt>iload_0</tt>) is not
+        equal to 0, the <tt>ifne</tt> instruction branches to the byte
+        code at offset 8, otherwise a 1 is pushed onto the operand stack
+        and the control flow branches to the final return.  For ease of
+        reading, the offsets of the branch instructions, which are
+        actually relative, are displayed as absolute addresses in these
+        examples.
+      </p>
+
+      <p>
+        If recursion has to continue, the arguments for the multiplication
+        (<tt>n</tt> and <tt>fac(n - 1)</tt>) are evaluated and the results
+        pushed onto the operand stack.  After the multiplication operation
+        has been performed the function returns the computed value from
+        the top of the stack.
+      </p>
+
+      <source>
+        0:  sipush        4711
+        3:  istore_0
+        4:  getstatic     java.lang.System.out Ljava/io/PrintStream;
+        7:  ldc           "Please enter a number&gt; "
+        9:  invokevirtual java.io.PrintStream.print (Ljava/lang/String;)V
+        12: getstatic     Factorial.in Ljava/io/BufferedReader;
+        15: invokevirtual java.io.BufferedReader.readLine ()Ljava/lang/String;
+        18: invokestatic  java.lang.Integer.parseInt (Ljava/lang/String;)I
+        21: istore_0
+        22: goto          #44
+        25: astore_1
+        26: getstatic     java.lang.System.err Ljava/io/PrintStream;
+        29: aload_1
+        30: invokevirtual java.io.PrintStream.println (Ljava/lang/Object;)V
+        33: goto          #44
+        36: astore_1
+        37: getstatic     java.lang.System.err Ljava/io/PrintStream;
+        40: aload_1
+        41: invokevirtual java.io.PrintStream.println (Ljava/lang/Object;)V
+        44: iload_0
+        45: ireturn
+
+        Exception handler(s) =
+        From    To      Handler Type
+        4       22      25      java.io.IOException(6)
+        4       22      36      NumberFormatException(10)
+      </source>
+
+      <p><b>readInt():</b> First the local variable <tt>n</tt> (at index 0)
+        is initialized to the value 4711.  The next instruction,
+        <tt>getstatic</tt>, loads the referencs held by the static
+        <tt>System.out</tt> field onto the stack. Then a string is loaded
+        and printed, a number read from the standard input and assigned to
+        <tt>n</tt>.
+      </p>
+
+      <p>
+        If one of the called methods (<tt>readLine()</tt> and
+        <tt>parseInt()</tt>) throws an exception, the Java Virtual Machine
+        calls one of the declared exception handlers, depending on the
+        type of the exception.  The <tt>try</tt>-clause itself does not
+        produce any code, it merely defines the range in which the
+        subsequent handlers are active. In the example, the specified
+        source code area maps to a byte code area ranging from offset 4
+        (inclusive) to 22 (exclusive).  If no exception has occurred
+        ("normal" execution flow) the <tt>goto</tt> instructions branch
+        behind the handler code. There the value of <tt>n</tt> is loaded
+        and returned.
+      </p>
+
+      <p>
+        The handler for <tt>java.io.IOException</tt> starts at
+        offset 25. It simply prints the error and branches back to the
+        normal execution flow, i.e., as if no exception had occurred.
+      </p>
+
+    </subsection>
+    </section>
+  </body>
+
+</document>

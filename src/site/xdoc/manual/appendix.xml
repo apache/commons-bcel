@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<!--
+    * Licensed to the Apache Software Foundation (ASF) under one
+    * or more contributor license agreements.  See the NOTICE file
+    * distributed with this work for additional information
+    * regarding copyright ownership.  The ASF licenses this file
+    * to you under the Apache License, Version 2.0 (the
+    * "License"); you may not use this file except in compliance
+    * with the License.  You may obtain a copy of the License at
+    * 
+    *   http://www.apache.org/licenses/LICENSE-2.0
+    * 
+    * Unless required by applicable law or agreed to in writing,
+    * software distributed under the License is distributed on an
+    * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    * KIND, either express or implied.  See the License for the
+    * specific language governing permissions and limitations
+    * under the License.    
+-->
+<document>
+  <properties>
+    <title>Appendix</title>
+  </properties>
+
+  <body>
+    <section name="Appendix">
+
+    <subsection name="HelloWorldBuilder">
+      <p>
+        The following program reads a name from the standard input and
+        prints a friendly "Hello". Since the <tt>readLine()</tt> method may
+        throw an <tt>IOException</tt> it is enclosed by a <tt>try-catch</tt>
+        clause.
+      </p>
+
+      <source>
+import java.io.*;
+
+public class HelloWorld {
+    public static void main(String[] argv) {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String name = null;
+
+        try {
+            System.out.print("Please enter your name&gt; ");
+            name = in.readLine();
+        } catch (IOException e) {
+            return;
+        }
+
+        System.out.println("Hello, " + name);
+    }
+}
+      </source>
+
+      <p>
+        We will sketch here how the above Java class can be created from the
+        scratch using the <font face="helvetica,arial">BCEL</font> API. For
+        ease of reading we will use textual signatures and not create them
+        dynamically. For example, the signature
+      </p>
+
+      <source>"(Ljava/lang/String;)Ljava/lang/StringBuffer;"</source>
+
+      <p>
+        actually be created with
+      </p>
+
+      <source>Type.getMethodSignature(Type.STRINGBUFFER, new Type[] { Type.STRING });</source>
+
+      <p><b>Initialization:</b>
+        First we create an empty class and an instruction list:
+      </p>
+
+      <source>
+ClassGen cg = new ClassGen("HelloWorld", "java.lang.Object",
+                            "&lt;generated&gt;", ACC_PUBLIC | ACC_SUPER, null);
+ConstantPoolGen cp = cg.getConstantPool(); // cg creates constant pool
+InstructionList il = new InstructionList();
+      </source>
+
+      <p>
+        We then create the main method, supplying the method's name and the
+        symbolic type signature encoded with <tt>Type</tt> objects.
+      </p>
+
+      <source>
+MethodGen  mg = new MethodGen(ACC_STATIC | ACC_PUBLIC, // access flags
+                              Type.VOID,               // return type
+                              new Type[] {             // argument types
+                              new ArrayType(Type.STRING, 1) },
+                              new String[] { "argv" }, // arg names
+                              "main", "HelloWorld",    // method, class
+                              il, cp);
+InstructionFactory factory = new InstructionFactory(cg);
+      </source>
+
+      <p>
+        We now define some often used types:
+      </p>
+
+      <source>
+ObjectType i_stream = new ObjectType("java.io.InputStream");
+ObjectType p_stream = new ObjectType("java.io.PrintStream");
+      </source>
+
+      <p><b>Create variables <tt>in</tt> and <tt>name</tt>:</b> We call
+        the constructors, i.e., execute
+        <tt>BufferedReader(InputStreamReader(System.in))</tt>. The reference
+        to the <tt>BufferedReader</tt> object stays on top of the stack and
+        is stored in the newly allocated <tt>in</tt> variable.
+      </p>
+
+      <source>
+il.append(factory.createNew("java.io.BufferedReader"));
+il.append(InstructionConstants.DUP); // Use predefined constant
+il.append(factory.createNew("java.io.InputStreamReader"));
+il.append(InstructionConstants.DUP);
+il.append(factory.createFieldAccess("java.lang.System", "in", i_stream, Constants.GETSTATIC));
+il.append(factory.createInvoke("java.io.InputStreamReader", "&lt;init&gt;",
+                                Type.VOID, new Type[] { i_stream },
+                                Constants.INVOKESPECIAL));
+il.append(factory.createInvoke("java.io.BufferedReader", "&lt;init&gt;", Type.VOID,
+                                new Type[] {new ObjectType("java.io.Reader")},
+                                Constants.INVOKESPECIAL));
+
+LocalVariableGen lg = mg.addLocalVariable("in",
+                        new ObjectType("java.io.BufferedReader"), null, null);
+int in = lg.getIndex();
+lg.setStart(il.append(new ASTORE(in))); // "i" valid from here
+      </source>
+
+      <p>
+        Create local variable <tt>name</tt> and  initialize it to <tt>null</tt>.
+      </p>
+
+      <source>
+lg = mg.addLocalVariable("name", Type.STRING, null, null);
+int name = lg.getIndex();
+il.append(InstructionConstants.ACONST_NULL);
+lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
+      </source>
+
+      <p><b>Create try-catch block:</b> We remember the start of the
+        block, read a line from the standard input and store it into the
+        variable <tt>name</tt>.
+      </p>
+
+      <source>
+InstructionHandle try_start =
+  il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Constants.GETSTATIC));
+
+il.append(new PUSH(cp, "Please enter your name&gt; "));
+il.append(factory.createInvoke("java.io.PrintStream", "print", Type.VOID,
+                                new Type[] { Type.STRING },
+                                Constants.INVOKEVIRTUAL));
+il.append(new ALOAD(in));
+il.append(factory.createInvoke("java.io.BufferedReader", "readLine",
+                                Type.STRING, Type.NO_ARGS,
+                                Constants.INVOKEVIRTUAL));
+il.append(new ASTORE(name));
+      </source>
+
+      <p>
+        Upon normal execution we jump behind exception handler, the target
+        address is not known yet.
+      </p>
+
+      <source>
+GOTO g = new GOTO(null);
+InstructionHandle try_end = il.append(g);
+      </source>
+
+      <p>
+        We add the exception handler which simply returns from the method.
+      </p>
+
+      <source>
+InstructionHandle handler = il.append(InstructionConstants.RETURN);
+mg.addExceptionHandler(try_start, try_end, handler, "java.io.IOException");
+      </source>
+
+      <p>
+        "Normal" code continues, now we can set the branch target of the <tt>GOTO</tt>.
+      </p>
+
+      <source>
+InstructionHandle ih =
+  il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Constants.GETSTATIC));
+g.setTarget(ih);
+      </source>
+
+      <p><b>Printing "Hello":</b>
+String concatenation compiles to <tt>StringBuffer</tt> operations.
+      </p>
+
+      <source>
+il.append(factory.createNew(Type.STRINGBUFFER));
+il.append(InstructionConstants.DUP);
+il.append(new PUSH(cp, "Hello, "));
+il.append(factory.createInvoke("java.lang.StringBuffer", "&lt;init&gt;",
+                                Type.VOID, new Type[] { Type.STRING },
+                                Constants.INVOKESPECIAL));
+il.append(new ALOAD(name));
+il.append(factory.createInvoke("java.lang.StringBuffer", "append",
+                                Type.STRINGBUFFER, new Type[] { Type.STRING },
+                                Constants.INVOKEVIRTUAL));
+il.append(factory.createInvoke("java.lang.StringBuffer", "toString",
+                                Type.STRING, Type.NO_ARGS,
+                                Constants.INVOKEVIRTUAL));
+
+il.append(factory.createInvoke("java.io.PrintStream", "println",
+                                Type.VOID, new Type[] { Type.STRING },
+                                Constants.INVOKEVIRTUAL));
+il.append(InstructionConstants.RETURN);
+      </source>
+
+
+      <p><b>Finalization:</b> Finally, we have to set the stack size,
+        which normally would have to be computed on the fly and add a
+        default constructor method to the class, which is empty in this
+        case.
+      </p>
+
+      <source>
+mg.setMaxStack();
+cg.addMethod(mg.getMethod());
+il.dispose(); // Allow instruction handles to be reused
+cg.addEmptyConstructor(ACC_PUBLIC);
+      </source>
+
+      <p>
+        Last but not least we dump the <tt>JavaClass</tt> object to a file.
+      </p>
+
+      <source>
+try {
+    cg.getJavaClass().dump("HelloWorld.class");
+} catch (IOException e) {
+    System.err.println(e);
+}
+      </source>
+
+    </subsection>
+
+    <subsection name="Peephole optimizer">
+      <p>
+        This class implements a simple peephole optimizer that removes any NOP
+        instructions from the given class.
+      </p>
+
+      <source>
+import java.io.*;
+
+import java.util.Iterator;
+import org.apache.bcel.classfile.*;
+import org.apache.bcel.generic.*;
+import org.apache.bcel.Repository;
+import org.apache.bcel.util.InstructionFinder;
+
+public class Peephole {
+
+    public static void main(String[] argv) {
+        try {
+            // Load the class from CLASSPATH.
+            JavaClass clazz  = Repository.lookupClass(argv[0]);
+            Method[] methods = clazz.getMethods();
+            ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
+    
+            for (int i = 0; i &lt; methods.length; i++) {
+                if (!(methods[i].isAbstract() || methods[i].isNative())) {
+                    MethodGen mg = new MethodGen(methods[i], clazz.getClassName(), cp);
+                    Method stripped = removeNOPs(mg);
+        
+                    if (stripped != null)      // Any NOPs stripped?
+                        methods[i] = stripped; // Overwrite with stripped method
+                  }
+            }
+    
+            // Dump the class to "class name"_.class
+            clazz.setConstantPool(cp.getFinalConstantPool());
+            clazz.dump(clazz.getClassName() + "_.class");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Method removeNOPs(MethodGen mg) {
+        InstructionList il = mg.getInstructionList();
+        InstructionFinder f = new InstructionFinder(il);
+        String pat = "NOP+"; // Find at least one NOP
+        InstructionHandle next = null;
+        int count = 0;
+        
+        for (Iterator iter = f.search(pat); iter.hasNext();) {
+            InstructionHandle[] match = (InstructionHandle[]) iter.next();
+            InstructionHandle first = match[0];
+            InstructionHandle last  = match[match.length - 1];
+            
+            // Some nasty Java compilers may add NOP at end of method.
+            if ((next = last.getNext()) == null) {
+                break;
+            }
+            
+            count += match.length;
+            
+            /**
+             * Delete NOPs and redirect any references to them to the following (non-nop) instruction.
+             */
+            try {
+                il.delete(first, last);
+            } catch (TargetLostException e) {
+                for (InstructionHandle target : e.getTargets()) {
+                    for (InstructionTargeter targeter = target.getTargeters()) {
+                        targeter.updateTarget(target, next);
+                    }
+                }
+            }
+        }
+
+        Method m = null;
+
+        if (count &gt; 0) {
+            System.out.println("Removed " + count + " NOP instructions from method " + mg.getName());
+            m = mg.getMethod();
+        }
+
+        il.dispose(); // Reuse instruction handles
+        return m;
+    }
+}
+      </source>
+    </subsection>
+
+    <subsection name="BCELifier">
+      <p>
+        If you want to learn how certain things are generated using BCEL you
+        can do the following: Write your program with the needed features in
+        Java and compile it as usual. Then use <tt>BCELifier</tt> to create
+        a class that creates that very input class using BCEL.<br/>
+        (Think about this sentence for a while, or just try it ...)
+      </p>
+    </subsection>
+
+    <subsection name="Constant pool UML diagram">
+
+      <p align="center">
+        <a name="Figure 8">
+          <img src="../images/constantpool.gif"/>
+          <br/>
+          Figure 8: UML diagram for constant pool classes
+        </a>
+      </p>
+    </subsection>
+  </section>
+  </body>
+</document>

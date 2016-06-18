@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+    * Licensed to the Apache Software Foundation (ASF) under one
+    * or more contributor license agreements.  See the NOTICE file
+    * distributed with this work for additional information
+    * regarding copyright ownership.  The ASF licenses this file
+    * to you under the Apache License, Version 2.0 (the
+    * "License"); you may not use this file except in compliance
+    * with the License.  You may obtain a copy of the License at
+    * 
+    *   http://www.apache.org/licenses/LICENSE-2.0
+    * 
+    * Unless required by applicable law or agreed to in writing,
+    * software distributed under the License is distributed on an
+    * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    * KIND, either express or implied.  See the License for the
+    * specific language governing permissions and limitations
+    * under the License.    
+-->
+<document>
+  <properties>
+    <title>Introduction</title>
+  </properties>
+
+  <body>
+ 
+  <section name="Introduction">
+    <p>
+      The <a href="http://java.sun.com/">Java</a> language has become
+      very popular and many research projects deal with further
+      improvements of the language or its run-time behavior. The
+      possibility to extend a language with new concepts is surely a
+      desirable feature, but the implementation issues should be hidden
+      from the user. Fortunately, the concepts of the Java Virtual
+      Machine permit the user-transparent implementation of such
+      extensions with relatively little effort.
+    </p>
+
+    <p>
+      Because the target language of Java is an interpreted language
+      with a small and easy-to-understand set of instructions (the
+      <em>byte code</em>), developers can implement and test their
+      concepts in a very elegant way. One can write a plug-in
+      replacement for the system's <em>class loader</em> which is
+      responsible for dynamically loading class files at run-time and
+      passing the byte code to the Virtual Machine (see section ).
+      Class loaders may thus be used to intercept the loading process
+      and transform classes before they get actually executed by the
+      JVM. While the original class files always remain unaltered, the
+      behavior of the class loader may be reconfigured for every
+      execution or instrumented dynamically.
+    </p>
+
+    <p>
+      The <font face="helvetica,arial">BCEL</font> API (Byte Code
+      Engineering Library), formerly known as JavaClass, is a toolkit
+      for the static analysis and dynamic creation or transformation of
+      Java class files. It enables developers to implement the desired
+      features on a high level of abstraction without handling all the
+      internal details of the Java class file format and thus
+      re-inventing the wheel every time. <font face="helvetica,arial">BCEL
+    </font> is written entirely in Java and freely available under the
+      terms of the <a href="license.html">Apache Software License</a>.
+    </p>
+
+    <p>
+      This manual is structured as follows: We give a brief description
+      of the Java Virtual Machine and the class file format in <a
+            href="jvm.html">section 2</a>. <a href="bcel-api.html">Section 3</a> 
+      introduces the <font face="helvetica,arial">BCEL</font> API.
+      <a href="application-areas.html">Section 4</a> describes some typical 
+      application areas and example projects. The appendix contains code examples
+      that are to long to be presented in the main part of this paper. All examples
+      are included in the down-loadable distribution.
+    </p>
+  </section>
+
+  </body>
+  
+</document>

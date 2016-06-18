@@ -33,7 +33,13 @@
       <item name="About" href="index.html"/>
       <item name="News" href="news.html"/>
       <item name="Download" href="http://commons.apache.org/bcel/download_bcel.cgi"/>
-      <item name="Manual" href="manual.html"/>
+      <item name="Manual" href="manual/manual.html">
+        <item name="Introduction" href="manual/introduction.html"/>
+        <item name="The JVM" href="manual/jvm.html"/>
+        <item name="The BCEL API" href="manual/bcel-api.html"/>
+        <item name="Application areas" href="manual/application-areas.html"/>
+        <item name="Appendix" href="manual/appendix.html"/>
+      </item>
       <item name="FAQ" href="faq.html"/>
       <item name="Used by" href="projects.html"/>
       <item name="Javadoc (Latest release)" href="javadocs/api-release/index.html"/>
