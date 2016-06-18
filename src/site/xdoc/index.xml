@@ -80,7 +80,7 @@
     <section name="Release Information">
       <p>The latest stable release of BCEL is 5.2. You may: </p>
       <ul>
-        <li>Download <a href="http://commons.apache.org/lang/download_bcel.cgi">3.4</a></li>
+        <li>Download <a href="http://commons.apache.org/lang/download_bcel.cgi">5.2</a></li>
         <li>Read the <a href="release-notes/RELEASE-NOTES-5.2.txt">5.2 release notes</a></li>
       </ul>
       <p>
