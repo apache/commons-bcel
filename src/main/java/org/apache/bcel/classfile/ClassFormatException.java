@@ -38,7 +38,6 @@ public class ClassFormatException extends RuntimeException {
     }
 
     /**
-     * {@inheritDoc}
      * @since 6.0
      */
     public ClassFormatException(final String message, final Throwable cause) {
