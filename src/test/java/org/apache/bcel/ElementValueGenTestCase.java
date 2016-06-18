@@ -210,23 +210,23 @@ public class ElementValueGenTestCase extends AbstractTestCase
     }
 
     private void checkSerialize(final ElementValueGen evgBefore, final ConstantPoolGen cpg) {
-		try {
-			String beforeValue = evgBefore.stringifyValue();
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			try (DataOutputStream dos = new DataOutputStream(baos)) {
-				evgBefore.dump(dos);
-				dos.flush();
-			}
-			ElementValueGen evgAfter;
-			try (DataInputStream dis = new DataInputStream(new ByteArrayInputStream(baos.toByteArray()))) {
-				evgAfter = ElementValueGen.readElementValue(dis, cpg);
-			}
-			String afterValue = evgAfter.stringifyValue();
-			if (!beforeValue.equals(afterValue)) {
-				fail("Deserialization failed: before='" + beforeValue + "' after='" + afterValue + "'");
-			}
-		} catch (IOException ioe) {
-			fail("Unexpected exception whilst checking serialization: " + ioe);
-		}
-	}
+        try {
+            String beforeValue = evgBefore.stringifyValue();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            try (DataOutputStream dos = new DataOutputStream(baos)) {
+                evgBefore.dump(dos);
+                dos.flush();
+            }
+            ElementValueGen evgAfter;
+            try (DataInputStream dis = new DataInputStream(new ByteArrayInputStream(baos.toByteArray()))) {
+                evgAfter = ElementValueGen.readElementValue(dis, cpg);
+            }
+            String afterValue = evgAfter.stringifyValue();
+            if (!beforeValue.equals(afterValue)) {
+                fail("Deserialization failed: before='" + beforeValue + "' after='" + afterValue + "'");
+            }
+        } catch (IOException ioe) {
+            fail("Unexpected exception whilst checking serialization: " + ioe);
+        }
+    }
 }
