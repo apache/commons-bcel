@@ -58,6 +58,7 @@ o BCEL-272: Add constants for Java 9 class file version 53.
 FIXED BUGS:
 ===========
 
+o BCEL-237: non-empty final arrays should be private as they are mutable.
 o BCEL-243: Type.getType() needs to understand TypeVariableSignature(s).
 o BCEL-271: FCONST pattern does not include FCONST_2.
 o BCEL-264: Add missing Node.accept() implementations (ConstantMethodHandle,

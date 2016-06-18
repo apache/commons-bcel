@@ -90,6 +90,7 @@ N.B. The Clirr report shows that there are several incompatible changes which in
  External code should not have been relying on such classes to provide definitions of the constants.
 
 ">
+      <action issue="BCEL-237" type="fix" dev="sebb">non-empty final arrays should be private as they are mutable</action>
       <action issue="BCEL-230" type="update" dev="britter">Document the Java platform requirement clearly and early</action>
       <action issue="BCEL-243" type="fix">Type.getType() needs to understand TypeVariableSignature(s)</action>
       <action issue="BCEL-272" type="add">Add constants for Java 9 class file version 53</action>
