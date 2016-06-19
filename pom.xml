@@ -282,7 +282,7 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${checkstyle.plugin.version}</version>
         <configuration>
-          <configLocation>${basedir}/checkstyle.xml</configLocation>
+          <configLocation>src/conf/checkstyle.xml</configLocation>
           <!-- Needed to define config_loc -->
           <propertyExpansion>config_loc=${basedir}</propertyExpansion>
           <enableRulesSummary>false</enableRulesSummary>
@@ -315,7 +315,7 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${checkstyle.plugin.version}</version>
         <configuration>
-          <configLocation>${basedir}/checkstyle.xml</configLocation>
+          <configLocation>src/conf/checkstyle.xml</configLocation>
           <!-- Needed to define config_loc -->
           <propertyExpansion>config_loc=${basedir}</propertyExpansion>
           <enableRulesSummary>false</enableRulesSummary>
@@ -337,7 +337,7 @@
           <targetJdk>${maven.compiler.target}</targetJdk>
           <linkXref>true</linkXref>
           <rulesets>
-            <ruleset>${basedir}/pmd.xml</ruleset>
+            <ruleset>${basedir}/src/conf/pmd.xml</ruleset>
           </rulesets>
         </configuration>
       </plugin>
@@ -348,7 +348,7 @@
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
-          <excludeFilterFile>${basedir}/findbugs-exclude-filter.xml</excludeFilterFile>
+          <excludeFilterFile>${basedir}/src/conf/findbugs-exclude-filter.xml</excludeFilterFile>
           <fork>true</fork>
           <jvmArgs>-Duser.language=en</jvmArgs>
         </configuration>
@@ -408,7 +408,7 @@
       </activation>
       <properties>
         <!-- It's not possible to undefine this once defined, so we define it in a profile that is normally active -->
-        <clirr.ignoredDifferencesFile>clirr-ignored-diffs.xml</clirr.ignoredDifferencesFile>
+        <clirr.ignoredDifferencesFile>src/conf/clirr-ignored-diffs.xml</clirr.ignoredDifferencesFile>
       </properties>
     </profile>
     <!-- Profile to build and run PerformanceTest. Use 'mvn test -Pjdk-rt' -->
