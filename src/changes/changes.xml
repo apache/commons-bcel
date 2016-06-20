@@ -62,7 +62,7 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.0" date="2016-06-18" description="Major release with Java 7 and 8 support
+    <release version="6.0" date="2016-06-20" description="Major release with Java 7 and 8 support
     
 N.B. The Clirr report shows that there are several incompatible changes which in theory can affect
  projects that update to this version. However the changes are considered to be OK, because they
