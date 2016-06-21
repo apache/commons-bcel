@@ -48,7 +48,11 @@ public class JDKGenericDumpTestCase {
 
     @Parameters(name = "{0}")
     public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] { { System.getProperty("java.home") } });
+        return Arrays.asList(findJavaHomes());
+    }
+
+    private static Object[][] findJavaHomes() {
+        return new Object[][] { { System.getProperty("java.home") } };
     }
 
     public JDKGenericDumpTestCase(final String javaHome) {
