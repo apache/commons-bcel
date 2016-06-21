@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.Constants;
 
 /**
  * This class represents a local variable within a method. It contains its
@@ -30,7 +31,7 @@ import org.apache.bcel.Const;
  * @version $Id$
  * @see     LocalVariableTable
  */
-public final class LocalVariable implements Cloneable, Node {
+public final class LocalVariable implements Cloneable, Node, Constants {
 
     private int start_pc; // Range in which the variable is valid
     private int length;

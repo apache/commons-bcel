@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.ConstantPool;
@@ -53,7 +54,7 @@ import org.apache.bcel.classfile.Utility;
  *
  * @version $Id$
  */
-public class Class2HTML {
+public class Class2HTML implements Constants {
 
     private final JavaClass java_class; // current class object
     private final String dir;

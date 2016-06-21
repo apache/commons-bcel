@@ -32,7 +32,7 @@ import org.apache.bcel.Const;
  * @see Const
  * @see InstructionConst
  */
-public class InstructionFactory {
+public class InstructionFactory implements InstructionConstants {
 
     // N.N. These must agree with the order of Constants.T_CHAR through T_LONG
     private static final String[] short_names = {

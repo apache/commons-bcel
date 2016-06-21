@@ -25,7 +25,7 @@ import org.apache.bcel.Const;
  *
  * @version $Id$
  */
-public final class PUSH implements CompoundInstruction, VariableLengthInstruction {
+public final class PUSH implements CompoundInstruction, VariableLengthInstruction, InstructionConstants {
 
     private Instruction instruction;
 
