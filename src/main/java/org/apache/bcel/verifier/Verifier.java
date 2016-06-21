@@ -79,7 +79,7 @@ public class Verifier {
 
     /** Returns the VerificationResult for the given pass. */
     public VerificationResult doPass3a( final int method_no ) {
-        String key = Integer.toString(method_no);
+        final String key = Integer.toString(method_no);
         Pass3aVerifier p3av;
         p3av = p3avs.get(key);
         if (p3avs.get(key) == null) {
@@ -92,7 +92,7 @@ public class Verifier {
 
     /** Returns the VerificationResult for the given pass. */
     public VerificationResult doPass3b( final int method_no ) {
-        String key = Integer.toString(method_no);
+        final String key = Integer.toString(method_no);
         Pass3bVerifier p3bv;
         p3bv = p3bvs.get(key);
         if (p3bvs.get(key) == null) {
@@ -145,32 +145,32 @@ public class Verifier {
      * A prefix shows from which verifying pass a message originates.
      */
     public String[] getMessages() throws ClassNotFoundException {
-        List<String> messages = new ArrayList<>();
+        final List<String> messages = new ArrayList<>();
         if (p1v != null) {
-            String[] p1m = p1v.getMessages();
-            for (String element : p1m) {
+            final String[] p1m = p1v.getMessages();
+            for (final String element : p1m) {
                 messages.add("Pass 1: " + element);
             }
         }
         if (p2v != null) {
-            String[] p2m = p2v.getMessages();
-            for (String element : p2m) {
+            final String[] p2m = p2v.getMessages();
+            for (final String element : p2m) {
                 messages.add("Pass 2: " + element);
             }
         }
-        for (Pass3aVerifier pv : p3avs.values()) {
-            String[] p3am = pv.getMessages();
-            int meth = pv.getMethodNo();
-            for (String element : p3am) {
+        for (final Pass3aVerifier pv : p3avs.values()) {
+            final String[] p3am = pv.getMessages();
+            final int meth = pv.getMethodNo();
+            for (final String element : p3am) {
                 messages.add("Pass 3a, method " + meth + " ('"
                         + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth]
                         + "'): " + element);
             }
         }
-        for (Pass3bVerifier pv : p3bvs.values()) {
-            String[] p3bm = pv.getMessages();
-            int meth = pv.getMethodNo();
-            for (String element : p3bm) {
+        for (final Pass3bVerifier pv : p3bvs.values()) {
+            final String[] p3bm = pv.getMessages();
+            final int meth = pv.getMethodNo();
+            for (final String element : p3bm) {
                 messages.add("Pass 3b, method " + meth + " ('"
                         + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth]
                         + "'): " + element);
@@ -197,21 +197,21 @@ public class Verifier {
         for (int k = 0; k < args.length; k++) {
             try {
                 if (args[k].endsWith(".class")) {
-                    int dotclasspos = args[k].lastIndexOf(".class");
+                    final int dotclasspos = args[k].lastIndexOf(".class");
                     if (dotclasspos != -1) {
                         args[k] = args[k].substring(0, dotclasspos);
                     }
                 }
                 args[k] = args[k].replace('/', '.');
                 System.out.println("Now verifying: " + args[k] + "\n");
-                Verifier v = VerifierFactory.getVerifier(args[k]);
+                final Verifier v = VerifierFactory.getVerifier(args[k]);
                 VerificationResult vr;
                 vr = v.doPass1();
                 System.out.println("Pass 1:\n" + vr);
                 vr = v.doPass2();
                 System.out.println("Pass 2:\n" + vr);
                 if (vr == VerificationResult.VR_OK) {
-                    JavaClass jc = org.apache.bcel.Repository.lookupClass(args[k]);
+                    final JavaClass jc = org.apache.bcel.Repository.lookupClass(args[k]);
                     for (int i = 0; i < jc.getMethods().length; i++) {
                         vr = v.doPass3a(i);
                         System.out.println("Pass 3a, method number " + i + " ['"
@@ -222,11 +222,11 @@ public class Verifier {
                     }
                 }
                 System.out.println("Warnings:");
-                String[] warnings = v.getMessages();
+                final String[] warnings = v.getMessages();
                 if (warnings.length == 0) {
                     System.out.println("<none>");
                 }
-                for (String warning : warnings) {
+                for (final String warning : warnings) {
                     System.out.println(warning);
                 }
                 System.out.println("\n");
@@ -234,7 +234,7 @@ public class Verifier {
                 v.flush();
                 org.apache.bcel.Repository.clearCache();
                 System.gc();
-            } catch (ClassNotFoundException e) {
+            } catch (final ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }

@@ -101,7 +101,7 @@ public class VerificationResult {
         if (!(o instanceof VerificationResult)) {
             return false;
         }
-        VerificationResult other = (VerificationResult) o;
+        final VerificationResult other = (VerificationResult) o;
         return (other.numeric == this.numeric) && other.detailMessage.equals(this.detailMessage);
     }
 

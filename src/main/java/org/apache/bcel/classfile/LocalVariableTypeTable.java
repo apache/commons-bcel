@@ -70,7 +70,7 @@ public class LocalVariableTypeTable extends Attribute {
     LocalVariableTypeTable(final int nameIdx, final int len, final DataInput input, final ConstantPool cpool) throws IOException {
         this(nameIdx, len, (LocalVariable[]) null, cpool);
 
-        int local_variable_type_table_length = input.readUnsignedShort();
+        final int local_variable_type_table_length = input.readUnsignedShort();
         local_variable_type_table = new LocalVariable[local_variable_type_table_length];
 
         for (int i = 0; i < local_variable_type_table_length; i++) {
@@ -87,7 +87,7 @@ public class LocalVariableTypeTable extends Attribute {
     public final void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
         file.writeShort(local_variable_type_table.length);
-        for (LocalVariable variable : local_variable_type_table) {
+        for (final LocalVariable variable : local_variable_type_table) {
             variable.dump(file);
         }
     }
@@ -97,7 +97,7 @@ public class LocalVariableTypeTable extends Attribute {
     }
 
     public final LocalVariable getLocalVariable(final int index) {
-        for (LocalVariable variable : local_variable_type_table) {
+        for (final LocalVariable variable : local_variable_type_table) {
             if (variable.getIndex() == index) {
                 return variable;
             }
@@ -115,7 +115,7 @@ public class LocalVariableTypeTable extends Attribute {
      */
     @Override
     public final String toString() {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
         for (int i = 0; i < local_variable_type_table.length; i++) {
             buf.append(local_variable_type_table[i].toStringShared(true));
@@ -133,7 +133,7 @@ public class LocalVariableTypeTable extends Attribute {
      */
     @Override
     public Attribute copy(final ConstantPool constant_pool) {
-        LocalVariableTypeTable c = (LocalVariableTypeTable) clone();
+        final LocalVariableTypeTable c = (LocalVariableTypeTable) clone();
 
         c.local_variable_type_table = new LocalVariable[local_variable_type_table.length];
         for (int i = 0; i < local_variable_type_table.length; i++) {

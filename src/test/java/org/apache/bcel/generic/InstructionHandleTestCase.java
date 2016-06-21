@@ -26,7 +26,7 @@ public class InstructionHandleTestCase {
 
     @Test(expected=ClassGenException.class)
     public void testsetInstructionNull() {
-        InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
         Assert.assertNotNull(ih);
         ih.setInstruction(null);
         Assert.assertNotNull(ih);
@@ -34,7 +34,7 @@ public class InstructionHandleTestCase {
 
     @Test
     public void testsetInstructionI() {
-        InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
         Assert.assertNotNull(ih);
         ih.setInstruction(new NOP());        
         Assert.assertNotNull(ih);
@@ -42,7 +42,7 @@ public class InstructionHandleTestCase {
 
     @Test(expected=ClassGenException.class)
     public void testsetInstructionnotI() {
-        InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
         Assert.assertNotNull(ih);
         ih.setInstruction(new GOTO(null));        
         Assert.assertNotNull(ih);
@@ -55,8 +55,8 @@ public class InstructionHandleTestCase {
 
     @Test
     public void testBCEL195() {
-        InstructionList il = new InstructionList();
-        InstructionHandle ih = il.append(InstructionConst.NOP);
+        final InstructionList il = new InstructionList();
+        final InstructionHandle ih = il.append(InstructionConst.NOP);
         new TABLESWITCH(new int[0], new InstructionHandle[0], ih);
         new TABLESWITCH(new int[0], new InstructionHandle[0], ih);
     }

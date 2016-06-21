@@ -153,7 +153,7 @@ public final class ConstantValue extends Attribute {
      */
     @Override
     public Attribute copy( final ConstantPool _constant_pool ) {
-        ConstantValue c = (ConstantValue) clone();
+        final ConstantValue c = (ConstantValue) clone();
         c.setConstantPool(_constant_pool);
         return c;
     }

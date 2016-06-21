@@ -78,7 +78,7 @@ public final class AssertionViolatedException extends RuntimeException{
      * DO NOT USE. It's for experimental testing during development only.
      */
     public static void main(final String[] args) {
-        AssertionViolatedException ave = new AssertionViolatedException("Oops!");
+        final AssertionViolatedException ave = new AssertionViolatedException("Oops!");
         ave.extendMessage("\nFOUND:\n\t","\nExiting!!\n");
         throw ave;
     }

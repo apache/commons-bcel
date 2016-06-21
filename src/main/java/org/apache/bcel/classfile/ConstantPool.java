@@ -57,7 +57,7 @@ public class ConstantPool implements Cloneable, Node {
      */
     public ConstantPool(final DataInput input) throws IOException, ClassFormatException {
         byte tag;
-        int constant_pool_count = input.readUnsignedShort();
+        final int constant_pool_count = input.readUnsignedShort();
         constant_pool = new Constant[constant_pool_count];
         /* constant_pool[0] is unused by the compiler and may be used freely
          * by the implementation.
@@ -101,7 +101,7 @@ public class ConstantPool implements Cloneable, Node {
     public String constantToString( Constant c ) throws ClassFormatException {
         String str;
         int i;
-        byte tag = c.getTag();
+        final byte tag = c.getTag();
         switch (tag) {
             case Const.CONSTANT_Class:
                 i = ((ConstantClass) c).getNameIndex();
@@ -144,17 +144,17 @@ public class ConstantPool implements Cloneable, Node {
             case Const.CONSTANT_MethodHandle:
                 // Note that the ReferenceIndex may point to a Fieldref, Methodref or
                 // InterfaceMethodref - so we need to peek ahead to get the actual type.
-                ConstantMethodHandle cmh = (ConstantMethodHandle) c;
+                final ConstantMethodHandle cmh = (ConstantMethodHandle) c;
                 str = Const.getMethodHandleName(cmh.getReferenceKind())
                         + " " + constantToString(cmh.getReferenceIndex(),
                         getConstant(cmh.getReferenceIndex()).getTag());
                 break;            
             case Const.CONSTANT_MethodType:
-                ConstantMethodType cmt = (ConstantMethodType) c;
+                final ConstantMethodType cmt = (ConstantMethodType) c;
                 str = constantToString(cmt.getDescriptorIndex(), Const.CONSTANT_Utf8);
                 break;
             case Const.CONSTANT_InvokeDynamic:
-                ConstantInvokeDynamic cid = (ConstantInvokeDynamic) c;
+                final ConstantInvokeDynamic cid = (ConstantInvokeDynamic) c;
                 str = cid.getBootstrapMethodAttrIndex()
                         + ":" + constantToString(cid.getNameAndTypeIndex(),
                         Const.CONSTANT_NameAndType);
@@ -167,9 +167,9 @@ public class ConstantPool implements Cloneable, Node {
 
 
     private static String escape( final String str ) {
-        int len = str.length();
-        StringBuilder buf = new StringBuilder(len + 5);
-        char[] ch = str.toCharArray();
+        final int len = str.length();
+        final StringBuilder buf = new StringBuilder(len + 5);
+        final char[] ch = str.toCharArray();
         for (int i = 0; i < len; i++) {
             switch (ch[i]) {
                 case '\n':
@@ -204,7 +204,7 @@ public class ConstantPool implements Cloneable, Node {
      * @return String representation
      */
     public String constantToString( final int index, final byte tag ) throws ClassFormatException {
-        Constant c = getConstant(index, tag);
+        final Constant c = getConstant(index, tag);
         return constantToString(c);
     }
 
@@ -343,7 +343,7 @@ public class ConstantPool implements Cloneable, Node {
      */
     @Override
     public String toString() {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         for (int i = 1; i < constant_pool.length; i++) {
             buf.append(i).append(")").append(constant_pool[i]).append("\n");
         }
@@ -364,7 +364,7 @@ public class ConstantPool implements Cloneable, Node {
                     c.constant_pool[i] = constant_pool[i].copy();
                 }
             }
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             // TODO should this throw?
         }
         return c;

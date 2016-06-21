@@ -111,7 +111,7 @@ public class ClassLoader extends java.lang.ClassLoader {
             /* Second try: Load system class using system class loader. You better
              * don't mess around with them.
              */
-            for (String ignored_package : ignored_packages) {
+            for (final String ignored_package : ignored_packages) {
                 if (class_name.startsWith(ignored_package)) {
                     cl = getParent().loadClass(class_name);
                     break;
@@ -131,7 +131,7 @@ public class ClassLoader extends java.lang.ClassLoader {
                     }
                 }
                 if (clazz != null) {
-                    byte[] bytes = clazz.getBytes();
+                    final byte[] bytes = clazz.getBytes();
                     cl = defineClass(class_name, bytes, 0, bytes.length);
                 } else {
                     cl = Class.forName(class_name);
@@ -169,22 +169,22 @@ public class ClassLoader extends java.lang.ClassLoader {
      * @param class_name compressed byte code with "$$BCEL$$" in it
      */
     protected JavaClass createClass( final String class_name ) {
-        int index = class_name.indexOf(BCEL_TOKEN);
-        String real_name = class_name.substring(index + BCEL_TOKEN.length());
+        final int index = class_name.indexOf(BCEL_TOKEN);
+        final String real_name = class_name.substring(index + BCEL_TOKEN.length());
         JavaClass clazz = null;
         try {
-            byte[] bytes = Utility.decode(real_name, true);
-            ClassParser parser = new ClassParser(new ByteArrayInputStream(bytes), "foo");
+            final byte[] bytes = Utility.decode(real_name, true);
+            final ClassParser parser = new ClassParser(new ByteArrayInputStream(bytes), "foo");
             clazz = parser.parse();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
             return null;
         }
         // Adapt the class name to the passed value
-        ConstantPool cp = clazz.getConstantPool();
-        ConstantClass cl = (ConstantClass) cp.getConstant(clazz.getClassNameIndex(),
+        final ConstantPool cp = clazz.getConstantPool();
+        final ConstantClass cl = (ConstantClass) cp.getConstant(clazz.getClassNameIndex(),
                 Constants.CONSTANT_Class);
-        ConstantUtf8 name = (ConstantUtf8) cp.getConstant(cl.getNameIndex(),
+        final ConstantUtf8 name = (ConstantUtf8) cp.getConstant(cl.getNameIndex(),
                 Constants.CONSTANT_Utf8);
         name.setBytes(class_name.replace('.', '/'));
         return clazz;

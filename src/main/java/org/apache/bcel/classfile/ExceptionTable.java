@@ -71,7 +71,7 @@ public final class ExceptionTable extends Attribute {
      */
     ExceptionTable(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, (int[]) null, constant_pool);
-        int number_of_exceptions = input.readUnsignedShort();
+        final int number_of_exceptions = input.readUnsignedShort();
         exception_index_table = new int[number_of_exceptions];
         for (int i = 0; i < number_of_exceptions; i++) {
             exception_index_table[i] = input.readUnsignedShort();
@@ -102,7 +102,7 @@ public final class ExceptionTable extends Attribute {
     public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(exception_index_table.length);
-        for (int index : exception_index_table) {
+        for (final int index : exception_index_table) {
             file.writeShort(index);
         }
     }
@@ -128,7 +128,7 @@ public final class ExceptionTable extends Attribute {
      * @return class names of thrown exceptions
      */
     public final String[] getExceptionNames() {
-        String[] names = new String[exception_index_table.length];
+        final String[] names = new String[exception_index_table.length];
         for (int i = 0; i < exception_index_table.length; i++) {
             names[i] = super.getConstantPool().getConstantString(exception_index_table[i], 
                     Const.CONSTANT_Class).replace('/', '.');
@@ -151,7 +151,7 @@ public final class ExceptionTable extends Attribute {
      */
     @Override
     public final String toString() {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         String str;
         buf.append("Exceptions: ");
         for (int i = 0; i < exception_index_table.length; i++) {
@@ -170,7 +170,7 @@ public final class ExceptionTable extends Attribute {
      */
     @Override
     public Attribute copy( final ConstantPool _constant_pool ) {
-        ExceptionTable c = (ExceptionTable) clone();
+        final ExceptionTable c = (ExceptionTable) clone();
         if (exception_index_table != null) {
             c.exception_index_table = new int[exception_index_table.length];
             System.arraycopy(exception_index_table, 0, c.exception_index_table, 0,

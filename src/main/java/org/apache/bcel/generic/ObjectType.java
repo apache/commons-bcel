@@ -81,9 +81,9 @@ public class ObjectType extends ReferenceType {
     @Deprecated
     public boolean referencesClass() {
         try {
-            JavaClass jc = Repository.lookupClass(class_name);
+            final JavaClass jc = Repository.lookupClass(class_name);
             return jc.isClass();
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             return false;
         }
     }
@@ -99,9 +99,9 @@ public class ObjectType extends ReferenceType {
     @Deprecated
     public boolean referencesInterface() {
         try {
-            JavaClass jc = Repository.lookupClass(class_name);
+            final JavaClass jc = Repository.lookupClass(class_name);
             return !jc.isClass();
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             return false;
         }
     }
@@ -116,7 +116,7 @@ public class ObjectType extends ReferenceType {
      *   referenced by this type can't be found
      */
     public boolean referencesClassExact() throws ClassNotFoundException {
-        JavaClass jc = Repository.lookupClass(class_name);
+        final JavaClass jc = Repository.lookupClass(class_name);
         return jc.isClass();
     }
 
@@ -130,7 +130,7 @@ public class ObjectType extends ReferenceType {
      *   referenced by this type can't be found
      */
     public boolean referencesInterfaceExact() throws ClassNotFoundException {
-        JavaClass jc = Repository.lookupClass(class_name);
+        final JavaClass jc = Repository.lookupClass(class_name);
         return !jc.isClass();
     }
 
@@ -154,11 +154,11 @@ public class ObjectType extends ReferenceType {
      *   can't be found
      */
     public boolean accessibleTo( final ObjectType accessor ) throws ClassNotFoundException {
-        JavaClass jc = Repository.lookupClass(class_name);
+        final JavaClass jc = Repository.lookupClass(class_name);
         if (jc.isPublic()) {
             return true;
         }
-        JavaClass acc = Repository.lookupClass(accessor.class_name);
+        final JavaClass acc = Repository.lookupClass(accessor.class_name);
         return acc.getPackageName().equals(jc.getPackageName());
     }
 }

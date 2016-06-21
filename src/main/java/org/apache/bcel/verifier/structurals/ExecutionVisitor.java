@@ -125,12 +125,12 @@ public class ExecutionVisitor extends EmptyVisitor{
     public void visitAALOAD(final AALOAD o) {
         stack().pop();                                                        // pop the index int
 //System.out.print(stack().peek());
-        Type t = stack().pop(); // Pop Array type
+        final Type t = stack().pop(); // Pop Array type
         if (t == Type.NULL) {
             stack().push(Type.NULL);
         }    // Do nothing stackwise --- a NullPointerException is thrown at Run-Time
         else{
-            ArrayType at = (ArrayType) t;    
+            final ArrayType at = (ArrayType) t;    
             stack().push(at.getElementType());
         }
     }
@@ -179,7 +179,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitATHROW(final ATHROW o) {
-        Type t = stack().pop();
+        final Type t = stack().pop();
         stack().clear();
         if (t.equals(Type.NULL)) {
             stack().push(Type.getType("Ljava/lang/NullPointerException;"));
@@ -347,15 +347,15 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitDUP(final DUP o) {
-        Type t = stack().pop();
+        final Type t = stack().pop();
         stack().push(t);
         stack().push(t);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitDUP_X1(final DUP_X1 o) {
-        Type w1 = stack().pop();
-        Type w2 = stack().pop();
+        final Type w1 = stack().pop();
+        final Type w2 = stack().pop();
         stack().push(w1);
         stack().push(w2);
         stack().push(w1);
@@ -363,15 +363,15 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitDUP_X2(final DUP_X2 o) {
-        Type w1 = stack().pop();
-        Type w2 = stack().pop();
+        final Type w1 = stack().pop();
+        final Type w2 = stack().pop();
         if (w2.getSize() == 2) {
             stack().push(w1);
             stack().push(w2);
             stack().push(w1);
         }
         else{
-            Type w3 = stack().pop();
+            final Type w3 = stack().pop();
             stack().push(w1);
             stack().push(w3);
             stack().push(w2);
@@ -381,13 +381,13 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitDUP2(final DUP2 o) {
-        Type t = stack().pop();
+        final Type t = stack().pop();
         if (t.getSize() == 2) {
             stack().push(t);
             stack().push(t);
         }
         else{ // t.getSize() is 1
-            Type u = stack().pop();
+            final Type u = stack().pop();
             stack().push(u);
             stack().push(t);
             stack().push(u);
@@ -397,16 +397,16 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitDUP2_X1(final DUP2_X1 o) {
-        Type t = stack().pop();
+        final Type t = stack().pop();
         if (t.getSize() == 2) {
-            Type u = stack().pop();
+            final Type u = stack().pop();
             stack().push(t);
             stack().push(u);
             stack().push(t);
         }
         else{ //t.getSize() is1
-            Type u = stack().pop();
-            Type v = stack().pop();
+            final Type u = stack().pop();
+            final Type v = stack().pop();
             stack().push(u);
             stack().push(t);
             stack().push(v);
@@ -417,15 +417,15 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitDUP2_X2(final DUP2_X2 o) {
-        Type t = stack().pop();
+        final Type t = stack().pop();
         if (t.getSize() == 2) {
-            Type u = stack().pop();
+            final Type u = stack().pop();
             if (u.getSize() == 2) {
                 stack().push(t);
                 stack().push(u);
                 stack().push(t);
             }else{
-                Type v = stack().pop();
+                final Type v = stack().pop();
                 stack().push(t);
                 stack().push(v);
                 stack().push(u);
@@ -433,8 +433,8 @@ public class ExecutionVisitor extends EmptyVisitor{
             }
         }
         else{ //t.getSize() is 1
-            Type u = stack().pop();
-            Type v = stack().pop();
+            final Type u = stack().pop();
+            final Type v = stack().pop();
             if (v.getSize() == 2) {
                 stack().push(u);
                 stack().push(t);
@@ -442,7 +442,7 @@ public class ExecutionVisitor extends EmptyVisitor{
                 stack().push(u);
                 stack().push(t);
             }else{
-                Type w = stack().pop();
+                final Type w = stack().pop();
                 stack().push(u);
                 stack().push(t);
                 stack().push(w);
@@ -837,7 +837,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     @Override
     public void visitINVOKESPECIAL(final INVOKESPECIAL o) {
         if (o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME)) {
-            UninitializedObjectType t = (UninitializedObjectType) stack().peek(o.getArgumentTypes(cpg).length);
+            final UninitializedObjectType t = (UninitializedObjectType) stack().peek(o.getArgumentTypes(cpg).length);
             if (t == Frame.getThis()) {
                 Frame.setThis(null);
             }
@@ -1040,7 +1040,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitLDC(final LDC o) {
-        Constant c = cpg.getConstant(o.getIndex());
+        final Constant c = cpg.getConstant(o.getIndex());
         if (c instanceof ConstantInteger) {
             stack().push(Type.INT);
         }
@@ -1056,7 +1056,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     public void visitLDC_W(final LDC_W o) {
-        Constant c = cpg.getConstant(o.getIndex());
+        final Constant c = cpg.getConstant(o.getIndex());
         if (c instanceof ConstantInteger) {
             stack().push(Type.INT);
         }
@@ -1073,7 +1073,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitLDC2_W(final LDC2_W o) {
-        Constant c = cpg.getConstant(o.getIndex());
+        final Constant c = cpg.getConstant(o.getIndex());
         if (c instanceof ConstantLong) {
             stack().push(Type.LONG);
         }
@@ -1212,7 +1212,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitPOP2(final POP2 o) {
-        Type t = stack().pop();
+        final Type t = stack().pop();
         if (t.getSize() == 1) {
             stack().pop();
         }        
@@ -1261,8 +1261,8 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
     public void visitSWAP(final SWAP o) {
-        Type t = stack().pop();
-        Type u = stack().pop();
+        final Type t = stack().pop();
+        final Type u = stack().pop();
         stack().push(t);
         stack().push(u);
     }

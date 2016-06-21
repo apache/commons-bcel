@@ -31,7 +31,7 @@ public class ArrayElementValue extends ElementValue
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("{");
         for (int i = 0; i < evalues.length; i++)
         {
@@ -59,7 +59,7 @@ public class ArrayElementValue extends ElementValue
     {
         dos.writeByte(super.getType()); // u1 type of value (ARRAY == '[')
         dos.writeShort(evalues.length);
-        for (ElementValue evalue : evalues) {
+        for (final ElementValue evalue : evalues) {
             evalue.dump(dos);
         }
     }
@@ -67,7 +67,7 @@ public class ArrayElementValue extends ElementValue
     @Override
     public String stringifyValue()
     {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (int i = 0; i < evalues.length; i++)
         {

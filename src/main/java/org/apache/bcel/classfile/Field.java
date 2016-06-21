@@ -36,8 +36,8 @@ public final class Field extends FieldOrMethod {
 
         @Override
         public boolean equals( final Object o1, final Object o2 ) {
-            Field THIS = (Field) o1;
-            Field THAT = (Field) o2;
+            final Field THIS = (Field) o1;
+            final Field THAT = (Field) o2;
             return THIS.getName().equals(THAT.getName())
                     && THIS.getSignature().equals(THAT.getSignature());
         }
@@ -45,7 +45,7 @@ public final class Field extends FieldOrMethod {
 
         @Override
         public int hashCode( final Object o ) {
-            Field THIS = (Field) o;
+            final Field THIS = (Field) o;
             return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
         }
     };
@@ -100,7 +100,7 @@ public final class Field extends FieldOrMethod {
      * @return constant value associated with this field (may be null)
      */
     public final ConstantValue getConstantValue() {
-        for (Attribute attribute : super.getAttributes()) {
+        for (final Attribute attribute : super.getAttributes()) {
             if (attribute.getTag() == Const.ATTR_CONSTANT_VALUE) {
                 return (ConstantValue) attribute;
             }
@@ -126,13 +126,13 @@ public final class Field extends FieldOrMethod {
         access = access.isEmpty() ? "" : (access + " ");
         signature = Utility.signatureToString(getSignature());
         name = getName();
-        StringBuilder buf = new StringBuilder(64); // CHECKSTYLE IGNORE MagicNumber
+        final StringBuilder buf = new StringBuilder(64); // CHECKSTYLE IGNORE MagicNumber
         buf.append(access).append(signature).append(" ").append(name);
-        ConstantValue cv = getConstantValue();
+        final ConstantValue cv = getConstantValue();
         if (cv != null) {
             buf.append(" = ").append(cv);
         }
-        for (Attribute attribute : super.getAttributes()) {
+        for (final Attribute attribute : super.getAttributes()) {
             if (!(attribute instanceof ConstantValue)) {
                 buf.append(" [").append(attribute).append("]");
             }

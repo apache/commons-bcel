@@ -86,8 +86,8 @@ public class InstructionFactory implements InstructionConstants {
             final Type[] arg_types, final short kind ) {
         int index;
         int nargs = 0;
-        String signature = Type.getMethodSignature(ret_type, arg_types);
-        for (Type arg_type : arg_types) {
+        final String signature = Type.getMethodSignature(ret_type, arg_types);
+        for (final Type arg_type : arg_types) {
             nargs += arg_type.getSize();
         }
         if (kind == Const.INVOKEINTERFACE) {
@@ -143,9 +143,9 @@ public class InstructionFactory implements InstructionConstants {
      * @param s the string to print
      */
     public InstructionList createPrintln( final String s ) {
-        InstructionList il = new InstructionList();
-        int out = cp.addFieldref("java.lang.System", "out", "Ljava/io/PrintStream;");
-        int println = cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/String;)V");
+        final InstructionList il = new InstructionList();
+        final int out = cp.addFieldref("java.lang.System", "out", "Ljava/io/PrintStream;");
+        final int println = cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/String;)V");
         il.append(new GETSTATIC(out));
         il.append(new PUSH(cp, s));
         il.append(new INVOKEVIRTUAL(println));
@@ -238,7 +238,7 @@ public class InstructionFactory implements InstructionConstants {
 
 
     public Instruction createAppend( final Type type ) {
-        byte t = type.getType();
+        final byte t = type.getType();
         if (isString(type)) {
             return createInvoke(append_mos[0], Const.INVOKEVIRTUAL);
         }
@@ -271,7 +271,7 @@ public class InstructionFactory implements InstructionConstants {
      */
     public FieldInstruction createFieldAccess( final String class_name, final String name, final Type type, final short kind ) {
         int index;
-        String signature = type.getSignature();
+        final String signature = type.getSignature();
         index = cp.addFieldref(class_name, name, signature);
         switch (kind) {
             case Const.GETFIELD:
@@ -420,7 +420,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param op operation, such as "+", "*", "&lt;&lt;", etc.
      */
     public static ArithmeticInstruction createBinaryOperation( final String op, final Type type ) {
-        char first = op.charAt(0);
+        final char first = op.charAt(0);
         switch (type.getType()) {
             case Const.T_BYTE:
             case Const.T_SHORT:
@@ -586,18 +586,18 @@ public class InstructionFactory implements InstructionConstants {
      */
     public Instruction createCast( final Type src_type, final Type dest_type ) {
         if ((src_type instanceof BasicType) && (dest_type instanceof BasicType)) {
-            byte dest = dest_type.getType();
+            final byte dest = dest_type.getType();
             byte src = src_type.getType();
             if (dest == Const.T_LONG
                     && (src == Const.T_CHAR || src == Const.T_BYTE || src == Const.T_SHORT)) {
                 src = Const.T_INT;
             }
-            String name = "org.apache.bcel.generic." + short_names[src - Const.T_CHAR] + "2"
+            final String name = "org.apache.bcel.generic." + short_names[src - Const.T_CHAR] + "2"
                     + short_names[dest - Const.T_CHAR];
             Instruction i = null;
             try {
                 i = (Instruction) java.lang.Class.forName(name).newInstance();
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 throw new RuntimeException("Could not find instruction: " + name, e);
             }
             return i;

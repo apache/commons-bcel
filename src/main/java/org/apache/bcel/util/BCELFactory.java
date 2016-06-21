@@ -84,7 +84,7 @@ class BCELFactory extends EmptyVisitor {
         if (!_mg.isAbstract() && !_mg.isNative()) {
             for (InstructionHandle ih = _mg.getInstructionList().getStart(); ih != null; ih = ih
                     .getNext()) {
-                Instruction i = ih.getInstruction();
+                final Instruction i = ih.getInstruction();
                 if (i instanceof BranchInstruction) {
                     branch_map.put(i, ih); // memorize container
                 }
@@ -108,7 +108,7 @@ class BCELFactory extends EmptyVisitor {
 
 
     private boolean visitInstruction( final Instruction i ) {
-        short opcode = i.getOpcode();
+        final short opcode = i.getOpcode();
         if ((InstructionConst.getInstruction(opcode) != null)
                 && !(i instanceof ConstantPushInstruction) && !(i instanceof ReturnInstruction)) { // Handled below
             _out.println("il.append(InstructionConst."
@@ -121,13 +121,13 @@ class BCELFactory extends EmptyVisitor {
 
     @Override
     public void visitLocalVariableInstruction( final LocalVariableInstruction i ) {
-        short opcode = i.getOpcode();
-        Type type = i.getType(_cp);
+        final short opcode = i.getOpcode();
+        final Type type = i.getType(_cp);
         if (opcode == Const.IINC) {
             _out.println("il.append(new IINC(" + i.getIndex() + ", " + ((IINC) i).getIncrement()
                     + "));");
         } else {
-            String kind = (opcode < Const.ISTORE) ? "Load" : "Store";
+            final String kind = (opcode < Const.ISTORE) ? "Load" : "Store";
             _out.println("il.append(_factory.create" + kind + "(" + BCELifier.printType(type)
                     + ", " + i.getIndex() + "));");
         }
@@ -136,9 +136,9 @@ class BCELFactory extends EmptyVisitor {
 
     @Override
     public void visitArrayInstruction( final ArrayInstruction i ) {
-        short opcode = i.getOpcode();
-        Type type = i.getType(_cp);
-        String kind = (opcode < Const.IASTORE) ? "Load" : "Store";
+        final short opcode = i.getOpcode();
+        final Type type = i.getType(_cp);
+        final String kind = (opcode < Const.IASTORE) ? "Load" : "Store";
         _out.println("il.append(_factory.createArray" + kind + "(" + BCELifier.printType(type)
                 + "));");
     }
@@ -146,10 +146,10 @@ class BCELFactory extends EmptyVisitor {
 
     @Override
     public void visitFieldInstruction( final FieldInstruction i ) {
-        short opcode = i.getOpcode();
-        String class_name = i.getClassName(_cp);
-        String field_name = i.getFieldName(_cp);
-        Type type = i.getFieldType(_cp);
+        final short opcode = i.getOpcode();
+        final String class_name = i.getClassName(_cp);
+        final String field_name = i.getFieldName(_cp);
+        final Type type = i.getFieldType(_cp);
         _out.println("il.append(_factory.createFieldAccess(\"" + class_name + "\", \"" + field_name
                 + "\", " + BCELifier.printType(type) + ", " + CONSTANT_PREFIX
                 + Const.getOpcodeName(opcode).toUpperCase(Locale.ENGLISH) + "));");
@@ -158,11 +158,11 @@ class BCELFactory extends EmptyVisitor {
 
     @Override
     public void visitInvokeInstruction( final InvokeInstruction i ) {
-        short opcode = i.getOpcode();
-        String class_name = i.getClassName(_cp);
-        String method_name = i.getMethodName(_cp);
-        Type type = i.getReturnType(_cp);
-        Type[] arg_types = i.getArgumentTypes(_cp);
+        final short opcode = i.getOpcode();
+        final String class_name = i.getClassName(_cp);
+        final String method_name = i.getMethodName(_cp);
+        final Type type = i.getReturnType(_cp);
+        final Type[] arg_types = i.getArgumentTypes(_cp);
         _out.println("il.append(_factory.createInvoke(\"" + class_name + "\", \"" + method_name
                 + "\", " + BCELifier.printType(type) + ", "
                 + BCELifier.printArgumentTypes(arg_types) + ", " + CONSTANT_PREFIX
@@ -178,7 +178,7 @@ class BCELFactory extends EmptyVisitor {
         } else {
             type = ((NEWARRAY) i).getType();
         }
-        short opcode = ((Instruction) i).getOpcode();
+        final short opcode = ((Instruction) i).getOpcode();
         int dim = 1;
         switch (opcode) {
             case Const.NEW:
@@ -213,7 +213,7 @@ class BCELFactory extends EmptyVisitor {
         } else if (value instanceof Long) {
             embed += "L";
         } else if (value instanceof ObjectType) {
-            ObjectType ot = (ObjectType) value;
+            final ObjectType ot = (ObjectType) value;
             embed = "new ObjectType(\""+ot.getClassName()+"\")";
         }
 
@@ -241,21 +241,21 @@ class BCELFactory extends EmptyVisitor {
 
     @Override
     public void visitINSTANCEOF( final INSTANCEOF i ) {
-        Type type = i.getType(_cp);
+        final Type type = i.getType(_cp);
         _out.println("il.append(new INSTANCEOF(_cp.addClass(" + BCELifier.printType(type) + ")));");
     }
 
 
     @Override
     public void visitCHECKCAST( final CHECKCAST i ) {
-        Type type = i.getType(_cp);
+        final Type type = i.getType(_cp);
         _out.println("il.append(_factory.createCheckCast(" + BCELifier.printType(type) + "));");
     }
 
 
     @Override
     public void visitReturnInstruction( final ReturnInstruction i ) {
-        Type type = i.getType(_cp);
+        final Type type = i.getType(_cp);
         _out.println("il.append(_factory.createReturn(" + BCELifier.printType(type) + "));");
     }
 
@@ -265,14 +265,14 @@ class BCELFactory extends EmptyVisitor {
 
     @Override
     public void visitBranchInstruction( final BranchInstruction bi ) {
-        BranchHandle bh = (BranchHandle) branch_map.get(bi);
-        int pos = bh.getPosition();
-        String name = bi.getName() + "_" + pos;
+        final BranchHandle bh = (BranchHandle) branch_map.get(bi);
+        final int pos = bh.getPosition();
+        final String name = bi.getName() + "_" + pos;
         if (bi instanceof Select) {
-            Select s = (Select) bi;
+            final Select s = (Select) bi;
             branches.add(bi);
-            StringBuilder args = new StringBuilder("new int[] { ");
-            int[] matchs = s.getMatchs();
+            final StringBuilder args = new StringBuilder("new int[] { ");
+            final int[] matchs = s.getMatchs();
             for (int i = 0; i < matchs.length; i++) {
                 args.append(matchs[i]);
                 if (i < matchs.length - 1) {
@@ -290,7 +290,7 @@ class BCELFactory extends EmptyVisitor {
             }
             _out.println(" }, null);");
         } else {
-            int t_pos = bh.getTarget().getPosition();
+            final int t_pos = bh.getTarget().getPosition();
             String target;
             if (pos > t_pos) {
                 target = "ih_" + t_pos;
@@ -317,14 +317,14 @@ class BCELFactory extends EmptyVisitor {
 
 
     private void updateBranchTargets() {
-        for (BranchInstruction bi : branches) {
-            BranchHandle bh = (BranchHandle) branch_map.get(bi);
-            int pos = bh.getPosition();
-            String name = bi.getName() + "_" + pos;
+        for (final BranchInstruction bi : branches) {
+            final BranchHandle bh = (BranchHandle) branch_map.get(bi);
+            final int pos = bh.getPosition();
+            final String name = bi.getName() + "_" + pos;
             int t_pos = bh.getTarget().getPosition();
             _out.println("    " + name + ".setTarget(ih_" + t_pos + ");");
             if (bi instanceof Select) {
-                InstructionHandle[] ihs = ((Select) bi).getTargets();
+                final InstructionHandle[] ihs = ((Select) bi).getTargets();
                 for (int j = 0; j < ihs.length; j++) {
                     t_pos = ihs[j].getPosition();
                     _out.println("    " + name + ".setTarget(" + j + ", ih_" + t_pos + ");");
@@ -335,9 +335,9 @@ class BCELFactory extends EmptyVisitor {
 
 
     private void updateExceptionHandlers() {
-        CodeExceptionGen[] handlers = _mg.getExceptionHandlers();
-        for (CodeExceptionGen h : handlers) {
-            String type = (h.getCatchType() == null) ? "null" : BCELifier.printType(h
+        final CodeExceptionGen[] handlers = _mg.getExceptionHandlers();
+        for (final CodeExceptionGen h : handlers) {
+            final String type = (h.getCatchType() == null) ? "null" : BCELifier.printType(h
                     .getCatchType());
             _out.println("    method.addExceptionHandler(" + "ih_" + h.getStartPC().getPosition()
                     + ", " + "ih_" + h.getEndPC().getPosition() + ", " + "ih_"

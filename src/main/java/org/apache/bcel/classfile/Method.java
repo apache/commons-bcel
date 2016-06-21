@@ -37,8 +37,8 @@ public final class Method extends FieldOrMethod {
 
         @Override
         public boolean equals( final Object o1, final Object o2 ) {
-            Method THIS = (Method) o1;
-            Method THAT = (Method) o2;
+            final Method THIS = (Method) o1;
+            final Method THAT = (Method) o2;
             return THIS.getName().equals(THAT.getName())
                     && THIS.getSignature().equals(THAT.getSignature());
         }
@@ -46,7 +46,7 @@ public final class Method extends FieldOrMethod {
 
         @Override
         public int hashCode( final Object o ) {
-            Method THIS = (Method) o;
+            final Method THIS = (Method) o;
             return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
         }
     };
@@ -113,7 +113,7 @@ public final class Method extends FieldOrMethod {
      * @return Code attribute of method, if any
      */
     public final Code getCode() {
-        for (Attribute attribute : super.getAttributes()) {
+        for (final Attribute attribute : super.getAttributes()) {
             if (attribute instanceof Code) {
                 return (Code) attribute;
             }
@@ -127,7 +127,7 @@ public final class Method extends FieldOrMethod {
      * exceptions the method may throw not exception handlers!
      */
     public final ExceptionTable getExceptionTable() {
-        for (Attribute attribute : super.getAttributes()) {
+        for (final Attribute attribute : super.getAttributes()) {
             if (attribute instanceof ExceptionTable) {
                 return (ExceptionTable) attribute;
             }
@@ -140,7 +140,7 @@ public final class Method extends FieldOrMethod {
      * to the Code atribute.
      */
     public final LocalVariableTable getLocalVariableTable() {
-        Code code = getCode();
+        final Code code = getCode();
         if (code == null) {
             return null;
         }
@@ -152,7 +152,7 @@ public final class Method extends FieldOrMethod {
      * to the Code atribute.
      */
     public final LineNumberTable getLineNumberTable() {
-        Code code = getCode();
+        final Code code = getCode();
         if (code == null) {
             return null;
         }
@@ -168,23 +168,23 @@ public final class Method extends FieldOrMethod {
      */
     @Override
     public final String toString() {
-        String access = Utility.accessToString(super.getAccessFlags());
+        final String access = Utility.accessToString(super.getAccessFlags());
         // Get name and signature from constant pool
         ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(super.getSignatureIndex(), Const.CONSTANT_Utf8);
         String signature = c.getBytes();
         c = (ConstantUtf8) super.getConstantPool().getConstant(super.getNameIndex(), Const.CONSTANT_Utf8);
-        String name = c.getBytes();
+        final String name = c.getBytes();
         signature = Utility.methodSignatureToString(signature, name, access, true,
                 getLocalVariableTable());
-        StringBuilder buf = new StringBuilder(signature);
-        for (Attribute attribute : super.getAttributes()) {
+        final StringBuilder buf = new StringBuilder(signature);
+        for (final Attribute attribute : super.getAttributes()) {
             if (!((attribute instanceof Code) || (attribute instanceof ExceptionTable))) {
                 buf.append(" [").append(attribute).append("]");
             }
         }
-        ExceptionTable e = getExceptionTable();
+        final ExceptionTable e = getExceptionTable();
         if (e != null) {
-            String str = e.toString();
+            final String str = e.toString();
             if (!str.isEmpty()) {
                 buf.append("\n\t\tthrows ").append(str);
             }

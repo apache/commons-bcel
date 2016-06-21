@@ -163,13 +163,13 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
      * @return all attributes of this method.
      */
     public Attribute[] getAttributes() {
-        Attribute[] attributes = new Attribute[attribute_vec.size()];
+        final Attribute[] attributes = new Attribute[attribute_vec.size()];
         attribute_vec.toArray(attributes);
         return attributes;
     }
 
     public AnnotationEntryGen[] getAnnotationEntries() {
-        AnnotationEntryGen[] annotations = new AnnotationEntryGen[annotation_vec.size()];
+        final AnnotationEntryGen[] annotations = new AnnotationEntryGen[annotation_vec.size()];
           annotation_vec.toArray(annotations);
           return annotations;
       }
@@ -184,7 +184,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     public Object clone() {
         try {
             return super.clone();
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             throw new Error("Clone Not Supported"); // never happens
         }
     }

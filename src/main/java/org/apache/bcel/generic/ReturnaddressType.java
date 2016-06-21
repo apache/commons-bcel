@@ -67,7 +67,7 @@ public class ReturnaddressType extends Type {
         if (!(rat instanceof ReturnaddressType)) {
             return false;
         }
-        ReturnaddressType that = (ReturnaddressType) rat;
+        final ReturnaddressType that = (ReturnaddressType) rat;
         if (this.returnTarget == null || that.returnTarget == null) {
             return that.returnTarget == this.returnTarget;
         }

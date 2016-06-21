@@ -43,7 +43,7 @@ public abstract class NativeVerifier {
             System.out.println("Verifier front-end: need exactly one argument.");
             System.exit(1);
         }
-        int dotclasspos = args[0].lastIndexOf(".class");
+        final int dotclasspos = args[0].lastIndexOf(".class");
         if (dotclasspos != -1) {
             args[0] = args[0].substring(0, dotclasspos);
         }
@@ -51,19 +51,19 @@ public abstract class NativeVerifier {
         //System.out.println(args[0]);
         try {
             Class.forName(args[0]);
-        } catch (ExceptionInInitializerError eiie) { //subclass of LinkageError!
+        } catch (final ExceptionInInitializerError eiie) { //subclass of LinkageError!
             System.out.println("NativeVerifier: ExceptionInInitializerError encountered on '"
                     + args[0] + "'.");
             System.out.println(eiie);
             System.exit(1);
-        } catch (LinkageError le) {
+        } catch (final LinkageError le) {
             System.out.println("NativeVerifier: LinkageError encountered on '" + args[0] + "'.");
             System.out.println(le);
             System.exit(1);
-        } catch (ClassNotFoundException cnfe) {
+        } catch (final ClassNotFoundException cnfe) {
             System.out.println("NativeVerifier: FILE NOT FOUND: '" + args[0] + "'.");
             System.exit(1);
-        } catch (Throwable t) { // OK to catch Throwable here as we call exit.
+        } catch (final Throwable t) { // OK to catch Throwable here as we call exit.
             System.out.println("NativeVerifier: Unspecified verification error on '" + args[0] + "'.");
             System.exit(1);
         }

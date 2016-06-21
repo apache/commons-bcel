@@ -66,7 +66,7 @@ public class BootstrapMethods extends Attribute {
     BootstrapMethods(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, (BootstrapMethod[]) null, constant_pool);
 
-        int num_bootstrap_methods = input.readUnsignedShort();
+        final int num_bootstrap_methods = input.readUnsignedShort();
         bootstrap_methods = new BootstrapMethod[num_bootstrap_methods];
         for (int i = 0; i < num_bootstrap_methods; i++) {
             bootstrap_methods[i] = new BootstrapMethod(input);
@@ -100,7 +100,7 @@ public class BootstrapMethods extends Attribute {
      */
     @Override
     public BootstrapMethods copy(final ConstantPool _constant_pool) {
-        BootstrapMethods c = (BootstrapMethods) clone();
+        final BootstrapMethods c = (BootstrapMethods) clone();
         c.bootstrap_methods = new BootstrapMethod[bootstrap_methods.length];
 
         for (int i = 0; i < bootstrap_methods.length; i++) {
@@ -121,7 +121,7 @@ public class BootstrapMethods extends Attribute {
         super.dump(file);
 
         file.writeShort(bootstrap_methods.length);
-        for (BootstrapMethod bootstrap_method : bootstrap_methods) {
+        for (final BootstrapMethod bootstrap_method : bootstrap_methods) {
             bootstrap_method.dump(file);
         }
     }
@@ -131,7 +131,7 @@ public class BootstrapMethods extends Attribute {
      */
     @Override
     public final String toString() {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         buf.append("BootstrapMethods(");
         buf.append(bootstrap_methods.length);
         buf.append("):\n");

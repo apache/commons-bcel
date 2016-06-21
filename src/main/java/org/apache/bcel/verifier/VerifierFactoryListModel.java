@@ -46,14 +46,14 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver,
 
     @Override
     public synchronized void update( final String s ) {
-        Verifier[] verifiers = VerifierFactory.getVerifiers();
-        int num_of_verifiers = verifiers.length;
+        final Verifier[] verifiers = VerifierFactory.getVerifiers();
+        final int num_of_verifiers = verifiers.length;
         cache.clear();
-        for (Verifier verifier : verifiers) {
+        for (final Verifier verifier : verifiers) {
             cache.add(verifier.getClassName());
         }
-        for (ListDataListener listener : listeners) {
-            ListDataEvent e = new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0, num_of_verifiers - 1);
+        for (final ListDataListener listener : listeners) {
+            final ListDataEvent e = new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0, num_of_verifiers - 1);
             listener.contentsChanged(e);
         }
     }

@@ -90,8 +90,8 @@ public final class ExceptionConst {
 
     // helper method to merge exception class arrays
     private static Class<?>[] mergeExceptions(final Class<?>[] input, final Class<?> ... extraClasses) {
-        int extraLen = extraClasses == null ? 0 : extraClasses.length;
-        Class<?>[] excs = new Class<?>[input.length + extraLen];
+        final int extraLen = extraClasses == null ? 0 : extraClasses.length;
+        final Class<?>[] excs = new Class<?>[input.length + extraLen];
         System.arraycopy(input, 0, excs, 0, input.length);
         if (extraLen > 0) {
             System.arraycopy(extraClasses, 0, excs, input.length, extraLen);            

@@ -95,7 +95,7 @@ public abstract class ElementValueGen
     public static ElementValueGen readElementValue(final DataInput dis,
             final ConstantPoolGen cpGen) throws IOException
     {
-        int type = dis.readUnsignedByte();
+        final int type = dis.readUnsignedByte();
         switch (type)
         {
         case 'B': // byte
@@ -137,8 +137,8 @@ public abstract class ElementValueGen
                     new AnnotationEntryGen(AnnotationEntry.read(dis, cpGen
                             .getConstantPool(), true), cpGen, false), cpGen);
         case '[': // Array
-            int numArrayVals = dis.readUnsignedShort();
-            ElementValue[] evalues = new ElementValue[numArrayVals];
+            final int numArrayVals = dis.readUnsignedShort();
+            final ElementValue[] evalues = new ElementValue[numArrayVals];
             for (int j = 0; j < numArrayVals; j++)
             {
                 evalues[j] = ElementValue.readElementValue(dis, cpGen

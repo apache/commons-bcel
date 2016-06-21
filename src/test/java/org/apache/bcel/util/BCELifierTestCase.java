@@ -33,10 +33,10 @@ public class BCELifierTestCase {
 
     @Test
     public void test() throws Exception {
-        OutputStream os = new ByteArrayOutputStream();
-        JavaClass java_class = BCELifier.getJavaClass("Java8Example");
+        final OutputStream os = new ByteArrayOutputStream();
+        final JavaClass java_class = BCELifier.getJavaClass("Java8Example");
         assertNotNull(java_class);
-        BCELifier bcelifier = new BCELifier(java_class, os);
+        final BCELifier bcelifier = new BCELifier(java_class, os);
         bcelifier.start();
     }
 
@@ -55,12 +55,12 @@ public class BCELifierTestCase {
         final String initial = exec(null, "javap", "-p", "-c", javaClass);
 
         final File workDir = new File("target");
-        File infile = new File(javaClass);
-        JavaClass java_class = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
+        final File infile = new File(javaClass);
+        final JavaClass java_class = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
         assertNotNull(java_class);
-        File outfile = new File(workDir, infile.getName().replace(".class", "Creator.java"));
+        final File outfile = new File(workDir, infile.getName().replace(".class", "Creator.java"));
         try (FileOutputStream fos = new FileOutputStream(outfile)) {
-            BCELifier bcelifier = new BCELifier(java_class, fos);
+            final BCELifier bcelifier = new BCELifier(java_class, fos);
             bcelifier.start();
         }
         exec(workDir, "javac", "-cp", "classes", outfile.getName());
@@ -79,19 +79,19 @@ public class BCELifierTestCase {
 
     private String exec(final File workDir, final String... args) throws Exception {
         // System.err.println(java.util.Arrays.toString(args));
-        ProcessBuilder pb = new ProcessBuilder(args);
+        final ProcessBuilder pb = new ProcessBuilder(args);
         pb.directory(workDir);
-        Process proc = pb.start();
+        final Process proc = pb.start();
         try (BufferedInputStream is = new BufferedInputStream(proc.getInputStream());
                 InputStream es = proc.getErrorStream()) {
             proc.waitFor();
-            byte[] buff = new byte[2048];
+            final byte[] buff = new byte[2048];
             int len;
             while ((len = es.read(buff)) != -1) {
                 System.err.print(new String(buff, 0, len));
             }
 
-            StringBuilder sb = new StringBuilder();
+            final StringBuilder sb = new StringBuilder();
             while ((len = is.read(buff)) != -1) {
                 sb.append(new String(buff, 0, len));
             }

@@ -33,11 +33,11 @@ public class AnnotationDefaultAttributeTestCase extends AbstractTestCase
      */
     public void testMethodAnnotations() throws ClassNotFoundException
     {
-        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotation");
-        Method m = getMethod(clazz, "fruit");
-        AnnotationDefault a = (AnnotationDefault) findAttribute(
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotation");
+        final Method m = getMethod(clazz, "fruit");
+        final AnnotationDefault a = (AnnotationDefault) findAttribute(
                 "AnnotationDefault", m.getAttributes());
-        SimpleElementValue val = (SimpleElementValue) a.getDefaultValue();
+        final SimpleElementValue val = (SimpleElementValue) a.getDefaultValue();
         assertTrue("Should be STRING but is " + val.getElementValueType(), val
                 .getElementValueType() == ElementValue.STRING);
         assertTrue("Should have default of bananas but default is "

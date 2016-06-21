@@ -118,7 +118,7 @@ public final class ConstantString extends Constant implements ConstantObject {
      */
     @Override
     public Object getConstantValue( final ConstantPool cp ) {
-        Constant c = cp.getConstant(string_index, Const.CONSTANT_Utf8);
+        final Constant c = cp.getConstant(string_index, Const.CONSTANT_Utf8);
         return ((ConstantUtf8) c).getBytes();
     }
 

@@ -103,7 +103,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     protected FieldOrMethod(final DataInput file, final ConstantPool constant_pool) throws IOException, ClassFormatException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null,
                 constant_pool);
-        int attributes_count = file.readUnsignedShort();
+        final int attributes_count = file.readUnsignedShort();
         attributes = new Attribute[attributes_count];
         for (int i = 0; i < attributes_count; i++) {
             attributes[i] = Attribute.readAttribute(file, constant_pool);
@@ -140,7 +140,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         file.writeShort(name_index);
         file.writeShort(signature_index);
         file.writeShort(attributes.length);
-        for (Attribute attribute : attributes) {
+        for (final Attribute attribute : attributes) {
             attribute.dump(file);
         }
     }
@@ -239,7 +239,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
         try {
           c = (FieldOrMethod)clone();
-        } catch(CloneNotSupportedException e) {
+        } catch(final CloneNotSupportedException e) {
             // ignored, but will cause NPE ...
         }
 

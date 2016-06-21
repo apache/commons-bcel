@@ -185,12 +185,12 @@ public abstract class Attribute implements Cloneable, Node {
     {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via `name_index' indirection
-        int name_index = file.readUnsignedShort();
-        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
-        String name = c.getBytes();
+        final int name_index = file.readUnsignedShort();
+        final ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
+        final String name = c.getBytes();
         
         // Length of data in bytes
-        int length = file.readInt();
+        final int length = file.readInt();
         
         // Compare strings to find known attribute
         for (byte i = 0; i < Const.KNOWN_ATTRIBUTES; i++)
@@ -206,7 +206,7 @@ public abstract class Attribute implements Cloneable, Node {
         switch (tag)
         {
             case Const.ATTR_UNKNOWN:
-                Object r = readers.get(name);
+                final Object r = readers.get(name);
                 if (r instanceof UnknownAttributeReader)
                 {
                     return ((UnknownAttributeReader) r).createAttribute(name_index, length, file, constant_pool);
@@ -268,7 +268,7 @@ public abstract class Attribute implements Cloneable, Node {
      */
     public String getName()
     {
-        ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
+        final ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 
@@ -344,7 +344,7 @@ public abstract class Attribute implements Cloneable, Node {
         {
             attr = (Attribute) super.clone();
         }
-        catch (CloneNotSupportedException e)
+        catch (final CloneNotSupportedException e)
         {
             throw new Error("Clone Not Supported"); // never happens
         }

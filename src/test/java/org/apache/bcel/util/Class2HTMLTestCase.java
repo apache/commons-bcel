@@ -28,14 +28,14 @@ import junit.framework.TestCase;
 public class Class2HTMLTestCase extends TestCase {
 
     public void testConvertJavaUtil() throws Exception {
-        File outputDir = new File("target/test-output/html");
+        final File outputDir = new File("target/test-output/html");
         if (!outputDir.mkdirs()) { // either was not created or already existed
             Assert.assertTrue(outputDir.isDirectory()); // fail if missing
         }
 
         try (FileInputStream file = new FileInputStream("target/test-classes/Java8Example.class")) {
 
-            ClassParser parser = new ClassParser(file, "Java8Example.class");
+            final ClassParser parser = new ClassParser(file, "Java8Example.class");
 
             new Class2HTML(parser.parse(), outputDir.getAbsolutePath() + "/");
         }

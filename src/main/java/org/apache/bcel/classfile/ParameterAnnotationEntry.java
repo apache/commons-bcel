@@ -42,7 +42,7 @@ public class ParameterAnnotationEntry implements Node {
      * @throws IOException
      */
     ParameterAnnotationEntry(final DataInput input, final ConstantPool constant_pool) throws IOException {
-        int annotation_table_length = input.readUnsignedShort();
+        final int annotation_table_length = input.readUnsignedShort();
         annotation_table = new AnnotationEntry[annotation_table_length];
         for (int i = 0; i < annotation_table_length; i++) {
             // TODO isRuntimeVisible
@@ -72,17 +72,17 @@ public class ParameterAnnotationEntry implements Node {
 
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(annotation_table.length);
-        for (AnnotationEntry entry : annotation_table) {
+        for (final AnnotationEntry entry : annotation_table) {
             entry.dump(dos);
         }
     }
 
   public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attrs) {
       // Find attributes that contain parameter annotation data
-      List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
-      for (Attribute attribute : attrs) {
+      final List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
+      for (final Attribute attribute : attrs) {
           if (attribute instanceof ParameterAnnotations) {
-              ParameterAnnotations runtimeAnnotations = (ParameterAnnotations)attribute;
+              final ParameterAnnotations runtimeAnnotations = (ParameterAnnotations)attribute;
               Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getParameterAnnotationEntries());
           }
       }

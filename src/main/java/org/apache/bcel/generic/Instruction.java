@@ -126,7 +126,7 @@ public abstract class Instruction implements Cloneable {
         } else {
             try {
                 i = (Instruction) clone();
-            } catch (CloneNotSupportedException e) {
+            } catch (final CloneNotSupportedException e) {
                 System.err.println(e);
             }
         }

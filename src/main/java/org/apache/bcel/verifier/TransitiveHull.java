@@ -48,7 +48,7 @@ public class TransitiveHull implements VerifierFactoryObserver {
         }
         System.out.println(classname);
         indent += 1;
-        Verifier v = VerifierFactory.getVerifier(classname);
+        final Verifier v = VerifierFactory.getVerifier(classname);
         VerificationResult vr;
         vr = v.doPass1();
         if (vr != VerificationResult.VR_OK) {
@@ -60,7 +60,7 @@ public class TransitiveHull implements VerifierFactoryObserver {
         }
         if (vr == VerificationResult.VR_OK) {
             try {
-                JavaClass jc = Repository.lookupClass(v.getClassName());
+                final JavaClass jc = Repository.lookupClass(v.getClassName());
                 for (int i = 0; i < jc.getMethods().length; i++) {
                     vr = v.doPass3a(i);
                     if (vr != VerificationResult.VR_OK) {
@@ -73,7 +73,7 @@ public class TransitiveHull implements VerifierFactoryObserver {
                                 + jc.getMethods()[i] + "']:\n" + vr);
                     }
                 }
-            } catch (ClassNotFoundException e) {
+            } catch (final ClassNotFoundException e) {
                 System.err.println("Could not find class " + v.getClassName() + " in Repository");
             }
         }
@@ -92,12 +92,12 @@ public class TransitiveHull implements VerifierFactoryObserver {
             System.out.println("Need exactly one argument: The root class to verify.");
             System.exit(1);
         }
-        int dotclasspos = args[0].lastIndexOf(".class");
+        final int dotclasspos = args[0].lastIndexOf(".class");
         if (dotclasspos != -1) {
             args[0] = args[0].substring(0, dotclasspos);
         }
         args[0] = args[0].replace('/', '.');
-        TransitiveHull th = new TransitiveHull();
+        final TransitiveHull th = new TransitiveHull();
         VerifierFactory.attach(th);
         VerifierFactory.getVerifier(args[0]); // the observer is called back and does the actual trick.
         VerifierFactory.detach(th);

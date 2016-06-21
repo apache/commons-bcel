@@ -69,8 +69,8 @@ public class AnnotationEntryGen {
 
     private List<ElementValuePairGen> copyValues(final ElementValuePair[] in, final ConstantPoolGen cpool,
                                                  final boolean copyPoolEntries) {
-        List<ElementValuePairGen> out = new ArrayList<>();
-        for (ElementValuePair nvp : in) {
+        final List<ElementValuePairGen> out = new ArrayList<>();
+        for (final ElementValuePair nvp : in) {
             out.add(new ElementValuePairGen(nvp, cpool, copyPoolEntries));
         }
         return out;
@@ -84,9 +84,9 @@ public class AnnotationEntryGen {
      * Retrieve an immutable version of this AnnotationGen
      */
     public AnnotationEntry getAnnotation() {
-        AnnotationEntry a = new AnnotationEntry(typeIndex, cpool.getConstantPool(),
+        final AnnotationEntry a = new AnnotationEntry(typeIndex, cpool.getConstantPool(),
                 isRuntimeVisible);
-        for (ElementValuePairGen element : evs) {
+        for (final ElementValuePairGen element : evs) {
             a.addElementNameValuePair(element.getElementNameValuePair());
         }
         return a;
@@ -103,11 +103,11 @@ public class AnnotationEntryGen {
 
     public static AnnotationEntryGen read(final DataInput dis,
                                           final ConstantPoolGen cpool, final boolean b) throws IOException {
-        AnnotationEntryGen a = new AnnotationEntryGen(cpool);
+        final AnnotationEntryGen a = new AnnotationEntryGen(cpool);
         a.typeIndex = dis.readUnsignedShort();
-        int elemValuePairCount = dis.readUnsignedShort();
+        final int elemValuePairCount = dis.readUnsignedShort();
         for (int i = 0; i < elemValuePairCount; i++) {
-            int nidx = dis.readUnsignedShort();
+            final int nidx = dis.readUnsignedShort();
             a.addElementNameValuePair(new ElementValuePairGen(nidx,
                     ElementValueGen.readElementValue(dis, cpool), cpool));
         }
@@ -118,7 +118,7 @@ public class AnnotationEntryGen {
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(typeIndex); // u2 index of type name in cpool
         dos.writeShort(evs.size()); // u2 element_value pair count
-        for (ElementValuePairGen envp : evs) {
+        for (final ElementValuePairGen envp : evs) {
             envp.dump(dos);
         }
     }
@@ -136,7 +136,7 @@ public class AnnotationEntryGen {
 
     public final String getTypeSignature() {
         // ConstantClass c = (ConstantClass)cpool.getConstant(typeIndex);
-        ConstantUtf8 utf8 = (ConstantUtf8) cpool
+        final ConstantUtf8 utf8 = (ConstantUtf8) cpool
                 .getConstant(typeIndex/* c.getNameIndex() */);
         return utf8.getBytes();
     }
@@ -155,7 +155,7 @@ public class AnnotationEntryGen {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder(32); // CHECKSTYLE IGNORE MagicNumber
+        final StringBuilder s = new StringBuilder(32); // CHECKSTYLE IGNORE MagicNumber
         s.append("AnnotationGen:[").append(getTypeName()).append(" #").append(evs.size()).append(" {");
         for (int i = 0; i < evs.size(); i++) {
             s.append(evs.get(i));
@@ -168,7 +168,7 @@ public class AnnotationEntryGen {
     }
 
     public String toShortString() {
-        StringBuilder s = new StringBuilder();
+        final StringBuilder s = new StringBuilder();
         s.append("@").append(getTypeName()).append("(");
         for (int i = 0; i < evs.size(); i++) {
             s.append(evs.get(i));
@@ -206,7 +206,7 @@ public class AnnotationEntryGen {
             int countInvisible = 0;
 
             //  put the annotations in the right output stream
-            for (AnnotationEntryGen a : annotationEntryGens) {
+            for (final AnnotationEntryGen a : annotationEntryGens) {
                 if (a.isRuntimeVisible()) {
                     countVisible++;
                 } else {
@@ -214,8 +214,8 @@ public class AnnotationEntryGen {
                 }
             }
 
-            ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
-            ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
+            final ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
+            final ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
             try (DataOutputStream rvaDos = new DataOutputStream(rvaBytes);
                     DataOutputStream riaDos = new DataOutputStream(riaBytes)) {
 
@@ -223,7 +223,7 @@ public class AnnotationEntryGen {
                 riaDos.writeShort(countInvisible);
 
                 // put the annotations in the right output stream
-                for (AnnotationEntryGen a : annotationEntryGens) {
+                for (final AnnotationEntryGen a : annotationEntryGens) {
                     if (a.isRuntimeVisible()) {
                         a.dump(rvaDos);
                     } else {
@@ -232,8 +232,8 @@ public class AnnotationEntryGen {
                 }
             }
 
-            byte[] rvaData = rvaBytes.toByteArray();
-            byte[] riaData = riaBytes.toByteArray();
+            final byte[] rvaData = rvaBytes.toByteArray();
+            final byte[] riaData = riaBytes.toByteArray();
 
             int rvaIndex = -1;
             int riaIndex = -1;
@@ -245,7 +245,7 @@ public class AnnotationEntryGen {
                 riaIndex = cp.addUtf8("RuntimeInvisibleAnnotations");
             }
 
-            List<Attribute> newAttributes = new ArrayList<>();
+            final List<Attribute> newAttributes = new ArrayList<>();
             if (rvaData.length > 2) {
                 newAttributes.add(
                         new RuntimeVisibleAnnotations(rvaIndex, rvaData.length,
@@ -258,7 +258,7 @@ public class AnnotationEntryGen {
             }
 
             return newAttributes.toArray(new Attribute[newAttributes.size()]);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             System.err.println("IOException whilst processing annotations");
             e.printStackTrace();
         }
@@ -274,14 +274,14 @@ public class AnnotationEntryGen {
     static Attribute[] getParameterAnnotationAttributes(
             final ConstantPoolGen cp,
             final List<AnnotationEntryGen>[] /*Array of lists, array size depends on #params */vec) {
-        int[] visCount = new int[vec.length];
+        final int[] visCount = new int[vec.length];
         int totalVisCount = 0;
-        int[] invisCount = new int[vec.length];
+        final int[] invisCount = new int[vec.length];
         int totalInvisCount = 0;
         try {
             for (int i = 0; i < vec.length; i++) {
                 if (vec[i] != null) {
-                    for (AnnotationEntryGen element : vec[i]) {
+                    for (final AnnotationEntryGen element : vec[i]) {
                         if (element.isRuntimeVisible()) {
                             visCount[i]++;
                             totalVisCount++;
@@ -293,13 +293,13 @@ public class AnnotationEntryGen {
                 }
             }
             // Lets do the visible ones
-            ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
+            final ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
             try (DataOutputStream rvaDos = new DataOutputStream(rvaBytes)) {
                 rvaDos.writeByte(vec.length); // First goes number of parameters
                 for (int i = 0; i < vec.length; i++) {
                     rvaDos.writeShort(visCount[i]);
                     if (visCount[i] > 0) {
-                        for (AnnotationEntryGen element : vec[i]) {
+                        for (final AnnotationEntryGen element : vec[i]) {
                             if (element.isRuntimeVisible()) {
                                 element.dump(rvaDos);
                             }
@@ -308,13 +308,13 @@ public class AnnotationEntryGen {
                 }
             }
             // Lets do the invisible ones
-            ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
+            final ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
             try (DataOutputStream riaDos = new DataOutputStream(riaBytes)) {
                 riaDos.writeByte(vec.length); // First goes number of parameters
                 for (int i = 0; i < vec.length; i++) {
                     riaDos.writeShort(invisCount[i]);
                     if (invisCount[i] > 0) {
-                        for (AnnotationEntryGen element : vec[i]) {
+                        for (final AnnotationEntryGen element : vec[i]) {
                             if (!element.isRuntimeVisible()) {
                                 element.dump(riaDos);
                             }
@@ -322,8 +322,8 @@ public class AnnotationEntryGen {
                     }
                 }
             }
-            byte[] rvaData = rvaBytes.toByteArray();
-            byte[] riaData = riaBytes.toByteArray();
+            final byte[] rvaData = rvaBytes.toByteArray();
+            final byte[] riaData = riaBytes.toByteArray();
             int rvaIndex = -1;
             int riaIndex = -1;
             if (totalVisCount > 0) {
@@ -332,7 +332,7 @@ public class AnnotationEntryGen {
             if (totalInvisCount > 0) {
                 riaIndex = cp.addUtf8("RuntimeInvisibleParameterAnnotations");
             }
-            List<Attribute> newAttributes = new ArrayList<>();
+            final List<Attribute> newAttributes = new ArrayList<>();
             if (totalVisCount > 0) {
                 newAttributes
                         .add(new RuntimeVisibleParameterAnnotations(rvaIndex,
@@ -344,7 +344,7 @@ public class AnnotationEntryGen {
                                 riaData.length, new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
             }
             return newAttributes.toArray(new Attribute[newAttributes.size()]);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             System.err
                     .println("IOException whilst processing parameter annotations");
             e.printStackTrace();

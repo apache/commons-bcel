@@ -149,7 +149,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     @Override
     public VerificationResult do_verify() {
         try {
-        VerificationResult vr1 = myOwner.doPass1();
+        final VerificationResult vr1 = myOwner.doPass1();
         if (vr1.equals(VerificationResult.VR_OK)) {
 
             // For every method, we could have information about the local variables out of LocalVariableTable attributes of
@@ -163,14 +163,14 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 every_class_has_an_accessible_superclass();
                 final_methods_are_not_overridden();
             }
-            catch (ClassConstraintException cce) {
+            catch (final ClassConstraintException cce) {
                 vr = new VerificationResult(VerificationResult.VERIFIED_REJECTED, cce.getMessage());
             }
             return vr;
         }
         return VerificationResult.VR_NOTYET;
 
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
         // FIXME: this might not be the best way to handle missing classes.
         throw new AssertionViolatedException("Missing class: " + e, e);
         }
@@ -191,7 +191,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      */
     private void every_class_has_an_accessible_superclass() {
         try {
-        Set<String> hs = new HashSet<>(); // save class names to detect circular inheritance
+        final Set<String> hs = new HashSet<>(); // save class names to detect circular inheritance
         JavaClass jc = Repository.lookupClass(myOwner.getClassName());
         int supidx = -1;
 
@@ -205,12 +205,12 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
             }
             else{
-                String supername = jc.getSuperclassName();
+                final String supername = jc.getSuperclassName();
                 if (! hs.add(supername)) {    // If supername already is in the list
                     throw new ClassConstraintException("Circular superclass hierarchy detected.");
                 }
-                Verifier v = VerifierFactory.getVerifier(supername);
-                VerificationResult vr = v.doPass1();
+                final Verifier v = VerifierFactory.getVerifier(supername);
+                final VerificationResult vr = v.doPass1();
 
                 if (vr != VerificationResult.VR_OK) {
                     throw new ClassConstraintException("Could not load in ancestor class '"+supername+"'.");
@@ -224,7 +224,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             }
         }
 
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
         // FIXME: this might not be the best way to handle missing classes.
         throw new AssertionViolatedException("Missing class: " + e, e);
         }
@@ -243,16 +243,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      */
     private void final_methods_are_not_overridden() {
         try {
-        Map<String, String> hashmap = new HashMap<>();
+        final Map<String, String> hashmap = new HashMap<>();
         JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 
         int supidx = -1;
         while (supidx != 0) {
             supidx = jc.getSuperclassNameIndex();
 
-            Method[] methods = jc.getMethods();
-            for (Method method : methods) {
-                String nameAndSig = method.getName() + method.getSignature();
+            final Method[] methods = jc.getMethods();
+            for (final Method method : methods) {
+                final String nameAndSig = method.getName() + method.getSignature();
 
                 if (hashmap.containsKey(nameAndSig)) {
                     if (method.isFinal()) {
@@ -280,7 +280,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // Well, for OBJECT this returns OBJECT so it works (could return anything but must not throw an Exception).
         }
 
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
         // FIXME: this might not be the best way to handle missing classes.
         throw new AssertionViolatedException("Missing class: " + e, e);
         }
@@ -298,10 +298,10 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         // Most of the consistency is handled internally by BCEL; here
         // we only have to verify if the indices of the constants point
         // to constants of the appropriate type and such.
-        JavaClass jc = Repository.lookupClass(myOwner.getClassName());
+        final JavaClass jc = Repository.lookupClass(myOwner.getClassName());
         new CPESSC_Visitor(jc); // constructor implicitly traverses jc
 
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
         // FIXME: this might not be the best way to handle missing classes.
         throw new AssertionViolatedException("Missing class: " + e, e);
         }
@@ -365,7 +365,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             if ((index < 0) || (index >= cplen)) {
                 throw new ClassConstraintException("Invalid index '"+index+"' used by '"+tostring(referrer)+"'.");
             }
-            Constant c = cp.getConstant(index);
+            final Constant c = cp.getConstant(index);
             if (! shouldbe.isInstance(c)) {
                 /* String isnot = shouldbe.toString().substring(shouldbe.toString().lastIndexOf(".")+1); //Cut all before last "." */
                 throw new ClassCastException("Illegal constant '"+tostring(c)+"' at index '"+
@@ -377,15 +377,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         ///////////////////////////////////////
         @Override
         public void visitJavaClass(final JavaClass obj) {
-            Attribute[] atts = obj.getAttributes();
+            final Attribute[] atts = obj.getAttributes();
             boolean foundSourceFile = false;
             boolean foundInnerClasses = false;
 
             // Is there an InnerClass referenced?
             // This is a costly check; existing verifiers don't do it!
-            boolean hasInnerClass = new InnerClassDetector(jc).innerClassReferenced();
+            final boolean hasInnerClass = new InnerClassDetector(jc).innerClassReferenced();
 
-            for (Attribute att : atts) {
+            for (final Attribute att : atts) {
                 if ((!(att instanceof SourceFile)) &&
                         (!(att instanceof Deprecated)) &&
                         (!(att instanceof InnerClasses)) &&
@@ -570,7 +570,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
-            String name = obj.getName();
+            final String name = obj.getName();
             if (! validFieldName(name)) {
                 throw new ClassConstraintException("Field '"+tostring(obj)+"' has illegal name '"+obj.getName()+"'.");
             }
@@ -578,16 +578,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // A descriptor is often named signature in BCEL
             checkIndex(obj, obj.getSignatureIndex(), CONST_Utf8);
 
-            String sig  = ((ConstantUtf8) (cp.getConstant(obj.getSignatureIndex()))).getBytes(); // Field or Method sig.(=descriptor)
+            final String sig  = ((ConstantUtf8) (cp.getConstant(obj.getSignatureIndex()))).getBytes(); // Field or Method sig.(=descriptor)
 
             try{
                 Type.getType(sig);  /* Don't need the return value */
             }
-            catch (ClassFormatException cfe) {
+            catch (final ClassFormatException cfe) {
                 throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.", cfe);
             }
 
-            String nameanddesc = name+sig;
+            final String nameanddesc = name+sig;
             if (field_names_and_desc.contains(nameanddesc)) {
                 throw new ClassConstraintException("No two fields (like '"+tostring(obj)+
                     "') are allowed have same names and descriptors!");
@@ -599,8 +599,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             field_names_and_desc.add(nameanddesc);
             field_names.add(name);
 
-            Attribute[] atts = obj.getAttributes();
-            for (Attribute att : atts) {
+            final Attribute[] atts = obj.getAttributes();
+            for (final Attribute att : atts) {
                 if ((!(att instanceof ConstantValue)) &&
                         (!(att instanceof Synthetic)) &&
                         (!(att instanceof Deprecated))) {
@@ -621,7 +621,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
-            String name = obj.getName();
+            final String name = obj.getName();
             if (! validMethodName(name, true)) {
                 throw new ClassConstraintException("Method '"+tostring(obj)+"' has illegal name '"+name+"'.");
             }
@@ -629,7 +629,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // A descriptor is often named signature in BCEL
             checkIndex(obj, obj.getSignatureIndex(), CONST_Utf8);
 
-            String sig  = ((ConstantUtf8) (cp.getConstant(obj.getSignatureIndex()))).getBytes(); // Method's signature(=descriptor)
+            final String sig  = ((ConstantUtf8) (cp.getConstant(obj.getSignatureIndex()))).getBytes(); // Method's signature(=descriptor)
 
             Type t;
             Type[] ts; // needed below the try block.
@@ -637,7 +637,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 t  = Type.getReturnType(sig);
                 ts = Type.getArgumentTypes(sig);
             }
-            catch (ClassFormatException cfe) {
+            catch (final ClassFormatException cfe) {
                 throw new ClassConstraintException(
                     "Illegal descriptor (==signature) '"+sig+"' used by Method '"+tostring(obj)+"'.", cfe);
             }
@@ -648,22 +648,22 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 act = ((ArrayType) act).getBasicType();
             }
             if (act instanceof ObjectType) {
-                Verifier v = VerifierFactory.getVerifier( ((ObjectType) act).getClassName() );
-                VerificationResult vr = v.doPass1();
+                final Verifier v = VerifierFactory.getVerifier( ((ObjectType) act).getClassName() );
+                final VerificationResult vr = v.doPass1();
                 if (vr != VerificationResult.VR_OK) {
                     throw new ClassConstraintException(
                         "Method '"+tostring(obj)+"' has a return type that does not pass verification pass 1: '"+vr+"'.");
                 }
             }
 
-            for (Type element : ts) {
+            for (final Type element : ts) {
                 act = element;
                 if (act instanceof ArrayType) {
                     act = ((ArrayType) act).getBasicType();
                 }
                 if (act instanceof ObjectType) {
-                    Verifier v = VerifierFactory.getVerifier( ((ObjectType) act).getClassName() );
-                    VerificationResult vr = v.doPass1();
+                    final Verifier v = VerifierFactory.getVerifier( ((ObjectType) act).getClassName() );
+                    final VerificationResult vr = v.doPass1();
                     if (vr != VerificationResult.VR_OK) {
                         throw new ClassConstraintException(
                             "Method '"+tostring(obj)+"' has an argument type that does not pass verification pass 1: '"+vr+"'.");
@@ -783,16 +783,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         " ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT set (ignored).");
             }
 
-            String nameanddesc = name+sig;
+            final String nameanddesc = name+sig;
             if (method_names_and_desc.contains(nameanddesc)) {
                 throw new ClassConstraintException(
                     "No two methods (like '"+tostring(obj)+"') are allowed have same names and desciptors!");
             }
             method_names_and_desc.add(nameanddesc);
 
-            Attribute[] atts = obj.getAttributes();
+            final Attribute[] atts = obj.getAttributes();
             int num_code_atts = 0;
-            for (Attribute att : atts) {
+            for (final Attribute att : atts) {
                 if ((!(att instanceof Code)) &&
                         (!(att instanceof ExceptionTable)) &&
                         (!(att instanceof Synthetic)) &&
@@ -828,7 +828,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
-            String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
+            final String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
             if (! name.equals("SourceFile")) {
                 throw new ClassConstraintException(
                     "The SourceFile attribute '"+tostring(obj)+"' is not correctly named 'SourceFile' but '"+name+"'.");
@@ -836,8 +836,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             checkIndex(obj, obj.getSourceFileIndex(), CONST_Utf8);
 
-            String sourcefilename = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); //==obj.getSourceFileName() ?
-            String sourcefilenamelc = sourcefilename.toLowerCase(Locale.ENGLISH);
+            final String sourcefilename = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); //==obj.getSourceFileName() ?
+            final String sourcefilenamelc = sourcefilename.toLowerCase(Locale.ENGLISH);
 
             if (    (sourcefilename.indexOf('/') != -1) ||
                         (sourcefilename.indexOf('\\') != -1) ||
@@ -852,7 +852,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         public void visitDeprecated(final Deprecated obj) {//vmspec2 4.7.10
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
-            String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
+            final String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
             if (! name.equals("Deprecated")) {
                 throw new ClassConstraintException("The Deprecated attribute '"+tostring(obj)+
                     "' is not correctly named 'Deprecated' but '"+name+"'.");
@@ -861,7 +861,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitSynthetic(final Synthetic obj) {//vmspec2 4.7.6
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
-            String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
+            final String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
             if (! name.equals("Synthetic")) {
                 throw new ClassConstraintException(
                     "The Synthetic attribute '"+tostring(obj)+"' is not correctly named 'Synthetic' but '"+name+"'.");
@@ -874,21 +874,21 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
-            String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
+            final String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
             if (! name.equals("InnerClasses")) {
                 throw new ClassConstraintException(
                     "The InnerClasses attribute '"+tostring(obj)+"' is not correctly named 'InnerClasses' but '"+name+"'.");
             }
 
-            InnerClass[] ics = obj.getInnerClasses();
+            final InnerClass[] ics = obj.getInnerClasses();
 
-            for (InnerClass ic : ics) {
+            for (final InnerClass ic : ics) {
                 checkIndex(obj, ic.getInnerClassIndex(), CONST_Class);
-                int outer_idx = ic.getOuterClassIndex();
+                final int outer_idx = ic.getOuterClassIndex();
                 if (outer_idx != 0) {
                     checkIndex(obj, outer_idx, CONST_Class);
                 }
-                int innername_idx = ic.getInnerNameIndex();
+                final int innername_idx = ic.getInnerNameIndex();
                 if (innername_idx != 0) {
                     checkIndex(obj, innername_idx, CONST_Utf8);
                 }
@@ -912,23 +912,23 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // not a constant!
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
-            String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
+            final String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
             if (! name.equals("ConstantValue")) {
                 throw new ClassConstraintException(
                     "The ConstantValue attribute '"+tostring(obj)+"' is not correctly named 'ConstantValue' but '"+name+"'.");
             }
 
-            Object pred = carrier.predecessor();
+            final Object pred = carrier.predecessor();
             if (pred instanceof Field) { //ConstantValue attributes are quite senseless if the predecessor is not a field.
-                Field f = (Field) pred;
+                final Field f = (Field) pred;
                 // Field constraints have been checked before -- so we are safe using their type information.
-                Type field_type = Type.getType(((ConstantUtf8) (cp.getConstant(f.getSignatureIndex()))).getBytes());
+                final Type field_type = Type.getType(((ConstantUtf8) (cp.getConstant(f.getSignatureIndex()))).getBytes());
 
-                int index = obj.getConstantValueIndex();
+                final int index = obj.getConstantValueIndex();
                 if ((index < 0) || (index >= cplen)) {
                     throw new ClassConstraintException("Invalid index '"+index+"' used by '"+tostring(obj)+"'.");
                 }
-                Constant c = cp.getConstant(index);
+                final Constant c = cp.getConstant(index);
 
                 if (CONST_Long.isInstance(c) && field_type.equals(Type.LONG)) {
                     return;
@@ -964,7 +964,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
-            String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
+            final String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
             if (! name.equals("Code")) {
                 throw new ClassConstraintException(
                     "The Code attribute '"+tostring(obj)+"' is not correctly named 'Code' but '"+name+"'.");
@@ -985,15 +985,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             }
 
             //In JustIce, the check for correct offsets into the code array is delayed to Pass 3a.
-            CodeException[] exc_table = obj.getExceptionTable();
-            for (CodeException element : exc_table) {
-                int exc_index = element.getCatchType();
+            final CodeException[] exc_table = obj.getExceptionTable();
+            for (final CodeException element : exc_table) {
+                final int exc_index = element.getCatchType();
                 if (exc_index != 0) { // if 0, it catches all Throwables
                     checkIndex(obj, exc_index, CONST_Class);
-                    ConstantClass cc = (ConstantClass) (cp.getConstant(exc_index));
+                    final ConstantClass cc = (ConstantClass) (cp.getConstant(exc_index));
                     // cannot be sure this ConstantClass has already been visited (checked)!
                     checkIndex(cc, cc.getNameIndex(), CONST_Utf8);
-                    String cname = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes().replace('/','.');
+                    final String cname = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes().replace('/','.');
 
                     Verifier v = VerifierFactory.getVerifier(cname);
                     VerificationResult vr = v.doPass1();
@@ -1006,8 +1006,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     // We cannot safely trust any other "instanceof" mechanism. We need to transitively verify
                     // the ancestor hierarchy.
                     JavaClass e = Repository.lookupClass(cname);
-                    JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
-                    JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
+                    final JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
+                    final JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
                     while (e != o) {
                         if (e == t) {
                             break; // It's a subclass of Throwable, OKAY, leave.
@@ -1035,7 +1035,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // This is highly unelegant due to usage of the Visitor pattern.
             // TODO: rework it.
             int method_number = -1;
-            Method[] ms = Repository.lookupClass(myOwner.getClassName()).getMethods();
+            final Method[] ms = Repository.lookupClass(myOwner.getClassName()).getMethods();
             for (int mn=0; mn<ms.length; mn++) {
                 if (m == ms[mn]) {
                     method_number = mn;
@@ -1050,7 +1050,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             int num_of_lvt_attribs = 0;
             // Now iterate through the attributes the Code attribute has.
-            Attribute[] atts = obj.getAttributes();
+            final Attribute[] atts = obj.getAttributes();
             for (int a=0; a<atts.length; a++) {
                 if ((! (atts[a] instanceof LineNumberTable)) &&
                     (! (atts[a] instanceof LocalVariableTable))) {
@@ -1068,41 +1068,41 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 //one certain Code attribute.
                 if (atts[a] instanceof LocalVariableTable) { // checks conforming to vmspec2 4.7.9
 
-                    LocalVariableTable lvt = (LocalVariableTable) atts[a];
+                    final LocalVariableTable lvt = (LocalVariableTable) atts[a];
 
                     checkIndex(lvt, lvt.getNameIndex(), CONST_Utf8);
 
-                    String lvtname = ((ConstantUtf8) cp.getConstant(lvt.getNameIndex())).getBytes();
+                    final String lvtname = ((ConstantUtf8) cp.getConstant(lvt.getNameIndex())).getBytes();
                     if (! lvtname.equals("LocalVariableTable")) {
                         throw new ClassConstraintException("The LocalVariableTable attribute '"+tostring(lvt)+
                                 "' is not correctly named 'LocalVariableTable' but '"+lvtname+"'.");
                     }
 
-                    Code code = obj;
+                    final Code code = obj;
 
                     //In JustIce, the check for correct offsets into the code array is delayed to Pass 3a.
-                    LocalVariable[] localvariables = lvt.getLocalVariableTable();
+                    final LocalVariable[] localvariables = lvt.getLocalVariableTable();
 
-                    for (LocalVariable localvariable : localvariables) {
+                    for (final LocalVariable localvariable : localvariables) {
                         checkIndex(lvt, localvariable.getNameIndex(), CONST_Utf8);
-                        String localname = ((ConstantUtf8) cp.getConstant(localvariable.getNameIndex())).getBytes();
+                        final String localname = ((ConstantUtf8) cp.getConstant(localvariable.getNameIndex())).getBytes();
                         if (!validJavaIdentifier(localname)) {
                             throw new ClassConstraintException("LocalVariableTable '"+tostring(lvt)+
                                 "' references a local variable by the name '"+localname+"' which is not a legal Java simple name.");
                         }
 
                         checkIndex(lvt, localvariable.getSignatureIndex(), CONST_Utf8);
-                        String localsig  =
+                        final String localsig  =
                             ((ConstantUtf8) (cp.getConstant(localvariable.getSignatureIndex()))).getBytes(); // Local sig.(=descriptor)
                         Type t;
                         try{
                             t = Type.getType(localsig);
                         }
-                        catch (ClassFormatException cfe) {
+                        catch (final ClassFormatException cfe) {
                             throw new ClassConstraintException("Illegal descriptor (==signature) '"+localsig+
                                 "' used by LocalVariable '"+tostring(localvariable)+"' referenced by '"+tostring(lvt)+"'.", cfe);
                         }
-                        int localindex = localvariable.getIndex();
+                        final int localindex = localvariable.getIndex();
                         if ( ( (t==Type.LONG || t==Type.DOUBLE)? localindex+1:localindex) >= code.getMaxLocals()) {
                             throw new ClassConstraintException("LocalVariableTable attribute '"+tostring(lvt)+
                                 "' references a LocalVariable '"+tostring(localvariable)+
@@ -1114,7 +1114,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                             localVariablesInfos[method_number].add(localindex, localname, localvariable.getStartPC(),
                                                                    localvariable.getLength(), t);
                         }
-                        catch(LocalVariableInfoInconsistentException lviie) {
+                        catch(final LocalVariableInfoInconsistentException lviie) {
                             throw new ClassConstraintException("Conflicting information in LocalVariableTable '"+tostring(lvt)+
                                 "' found in Code attribute '"+tostring(obj)+
                                 "' (method '"+tostring(m)+"'). "+lviie.getMessage(), lviie);
@@ -1130,7 +1130,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }// if atts[a] instanceof LocalVariableTable END
             }// for all attributes atts[a] END
 
-            } catch (ClassNotFoundException e) {
+            } catch (final ClassNotFoundException e) {
             // FIXME: this might not be the best way to handle missing classes.
             throw new AssertionViolatedException("Missing class: " + e, e);
             }
@@ -1143,21 +1143,21 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // incorrectly named, it's the Exceptions attribute (vmspec2 4.7.4)
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
-            String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
+            final String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
             if (! name.equals("Exceptions")) {
                 throw new ClassConstraintException(
                     "The Exceptions attribute '"+tostring(obj)+"' is not correctly named 'Exceptions' but '"+name+"'.");
             }
 
-            int[] exc_indices = obj.getExceptionIndexTable();
+            final int[] exc_indices = obj.getExceptionIndexTable();
 
-            for (int exc_indice : exc_indices) {
+            for (final int exc_indice : exc_indices) {
                 checkIndex(obj, exc_indice, CONST_Class);
 
-                ConstantClass cc = (ConstantClass) (cp.getConstant(exc_indice));
+                final ConstantClass cc = (ConstantClass) (cp.getConstant(exc_indice));
                 checkIndex(cc, cc.getNameIndex(), CONST_Utf8); // can't be sure this ConstantClass has already been visited (checked)!
                 //convert internal notation on-the-fly to external notation:
-                String cname = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes().replace('/','.');
+                final String cname = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes().replace('/','.');
 
                 Verifier v = VerifierFactory.getVerifier(cname);
                 VerificationResult vr = v.doPass1();
@@ -1169,8 +1169,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 // We cannot safely trust any other "instanceof" mechanism. We need to transitively verify
                 // the ancestor hierarchy.
                 JavaClass e = Repository.lookupClass(cname);
-                JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
-                JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
+                final JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
+                final JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
                 while (e != o) {
                     if (e == t) {
                         break; // It's a subclass of Throwable, OKAY, leave.
@@ -1191,7 +1191,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
             }
 
-            } catch (ClassNotFoundException e) {
+            } catch (final ClassNotFoundException e) {
             // FIXME: this might not be the best way to handle missing classes.
             throw new AssertionViolatedException("Missing class: " + e, e);
             }
@@ -1205,7 +1205,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         public void visitLineNumberTable(final LineNumberTable obj) {//vmspec2 4.7.8
             checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
 
-            String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
+            final String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
             if (! name.equals("LineNumberTable")) {
                 throw new ClassConstraintException("The LineNumberTable attribute '"+tostring(obj)+
                         "' is not correctly named 'LineNumberTable' but '"+name+"'.");
@@ -1286,11 +1286,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      */
     private void field_and_method_refs_are_valid() {
         try {
-        JavaClass jc = Repository.lookupClass(myOwner.getClassName());
-        DescendingVisitor v = new DescendingVisitor(jc, new FAMRAV_Visitor(jc));
+        final JavaClass jc = Repository.lookupClass(myOwner.getClassName());
+        final DescendingVisitor v = new DescendingVisitor(jc, new FAMRAV_Visitor(jc));
         v.visit();
 
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
         // FIXME: this might not be the best way to handle missing classes.
         throw new AssertionViolatedException("Missing class: " + e, e);
         }
@@ -1316,26 +1316,26 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             if (obj.getTag() != Const.CONSTANT_Fieldref) {
                 throw new ClassConstraintException("ConstantFieldref '"+tostring(obj)+"' has wrong tag!");
             }
-            int name_and_type_index = obj.getNameAndTypeIndex();
-            ConstantNameAndType cnat = (ConstantNameAndType) (cp.getConstant(name_and_type_index));
-            String name = ((ConstantUtf8) (cp.getConstant(cnat.getNameIndex()))).getBytes(); // Field or Method name
+            final int name_and_type_index = obj.getNameAndTypeIndex();
+            final ConstantNameAndType cnat = (ConstantNameAndType) (cp.getConstant(name_and_type_index));
+            final String name = ((ConstantUtf8) (cp.getConstant(cnat.getNameIndex()))).getBytes(); // Field or Method name
             if (!validFieldName(name)) {
                 throw new ClassConstraintException("Invalid field name '"+name+"' referenced by '"+tostring(obj)+"'.");
             }
 
-            int class_index = obj.getClassIndex();
-            ConstantClass cc = (ConstantClass) (cp.getConstant(class_index));
-            String className = ((ConstantUtf8) (cp.getConstant(cc.getNameIndex()))).getBytes(); // Class Name in internal form
+            final int class_index = obj.getClassIndex();
+            final ConstantClass cc = (ConstantClass) (cp.getConstant(class_index));
+            final String className = ((ConstantUtf8) (cp.getConstant(cc.getNameIndex()))).getBytes(); // Class Name in internal form
             if (! validClassName(className)) {
                 throw new ClassConstraintException("Illegal class name '"+className+"' used by '"+tostring(obj)+"'.");
             }
 
-            String sig  = ((ConstantUtf8) (cp.getConstant(cnat.getSignatureIndex()))).getBytes(); // Field or Method sig.(=descriptor)
+            final String sig  = ((ConstantUtf8) (cp.getConstant(cnat.getSignatureIndex()))).getBytes(); // Field or Method sig.(=descriptor)
 
             try{
                 Type.getType(sig); /* Don't need the return value */
             }
-            catch (ClassFormatException cfe) {
+            catch (final ClassFormatException cfe) {
                 throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.", cfe);
             }
         }
@@ -1345,30 +1345,30 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             if (obj.getTag() != Const.CONSTANT_Methodref) {
                 throw new ClassConstraintException("ConstantMethodref '"+tostring(obj)+"' has wrong tag!");
             }
-            int name_and_type_index = obj.getNameAndTypeIndex();
-            ConstantNameAndType cnat = (ConstantNameAndType) (cp.getConstant(name_and_type_index));
-            String name = ((ConstantUtf8) (cp.getConstant(cnat.getNameIndex()))).getBytes(); // Field or Method name
+            final int name_and_type_index = obj.getNameAndTypeIndex();
+            final ConstantNameAndType cnat = (ConstantNameAndType) (cp.getConstant(name_and_type_index));
+            final String name = ((ConstantUtf8) (cp.getConstant(cnat.getNameIndex()))).getBytes(); // Field or Method name
             if (!validClassMethodName(name)) {
                 throw new ClassConstraintException(
                     "Invalid (non-interface) method name '"+name+"' referenced by '"+tostring(obj)+"'.");
             }
 
-            int class_index = obj.getClassIndex();
-            ConstantClass cc = (ConstantClass) (cp.getConstant(class_index));
-            String className = ((ConstantUtf8) (cp.getConstant(cc.getNameIndex()))).getBytes(); // Class Name in internal form
+            final int class_index = obj.getClassIndex();
+            final ConstantClass cc = (ConstantClass) (cp.getConstant(class_index));
+            final String className = ((ConstantUtf8) (cp.getConstant(cc.getNameIndex()))).getBytes(); // Class Name in internal form
             if (! validClassName(className)) {
                 throw new ClassConstraintException("Illegal class name '"+className+"' used by '"+tostring(obj)+"'.");
             }
 
-            String sig  = ((ConstantUtf8) (cp.getConstant(cnat.getSignatureIndex()))).getBytes(); // Field or Method sig.(=descriptor)
+            final String sig  = ((ConstantUtf8) (cp.getConstant(cnat.getSignatureIndex()))).getBytes(); // Field or Method sig.(=descriptor)
 
             try{
-                Type   t  = Type.getReturnType(sig);
+                final Type   t  = Type.getReturnType(sig);
                 if ( name.equals(Const.CONSTRUCTOR_NAME) && (t != Type.VOID) ) {
                     throw new ClassConstraintException("Instance initialization method must have VOID return type.");
                 }
             }
-            catch (ClassFormatException cfe) {
+            catch (final ClassFormatException cfe) {
                 throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.", cfe);
             }
         }
@@ -1378,31 +1378,31 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             if (obj.getTag() != Const.CONSTANT_InterfaceMethodref) {
                 throw new ClassConstraintException("ConstantInterfaceMethodref '"+tostring(obj)+"' has wrong tag!");
             }
-            int name_and_type_index = obj.getNameAndTypeIndex();
-            ConstantNameAndType cnat = (ConstantNameAndType) (cp.getConstant(name_and_type_index));
-            String name = ((ConstantUtf8) (cp.getConstant(cnat.getNameIndex()))).getBytes(); // Field or Method name
+            final int name_and_type_index = obj.getNameAndTypeIndex();
+            final ConstantNameAndType cnat = (ConstantNameAndType) (cp.getConstant(name_and_type_index));
+            final String name = ((ConstantUtf8) (cp.getConstant(cnat.getNameIndex()))).getBytes(); // Field or Method name
             if (!validInterfaceMethodName(name)) {
                 throw new ClassConstraintException("Invalid (interface) method name '"+name+"' referenced by '"+tostring(obj)+"'.");
             }
 
-            int class_index = obj.getClassIndex();
-            ConstantClass cc = (ConstantClass) (cp.getConstant(class_index));
-            String className = ((ConstantUtf8) (cp.getConstant(cc.getNameIndex()))).getBytes(); // Class Name in internal form
+            final int class_index = obj.getClassIndex();
+            final ConstantClass cc = (ConstantClass) (cp.getConstant(class_index));
+            final String className = ((ConstantUtf8) (cp.getConstant(cc.getNameIndex()))).getBytes(); // Class Name in internal form
             if (! validClassName(className)) {
                 throw new ClassConstraintException("Illegal class name '"+className+"' used by '"+tostring(obj)+"'.");
             }
 
-            String sig  = ((ConstantUtf8) (cp.getConstant(cnat.getSignatureIndex()))).getBytes(); // Field or Method sig.(=descriptor)
+            final String sig  = ((ConstantUtf8) (cp.getConstant(cnat.getSignatureIndex()))).getBytes(); // Field or Method sig.(=descriptor)
 
             try{
-                Type   t  = Type.getReturnType(sig);
+                final Type   t  = Type.getReturnType(sig);
                 if ( name.equals(Const.STATIC_INITIALIZER_NAME) && (t != Type.VOID) ) {
                     addMessage("Class or interface initialization method '"+Const.STATIC_INITIALIZER_NAME+
                         "' usually has VOID return type instead of '"+t+
                         "'. Note this is really not a requirement of The Java Virtual Machine Specification, Second Edition.");
                 }
             }
-            catch (ClassFormatException cfe) {
+            catch (final ClassFormatException cfe) {
                 throw new ClassConstraintException("Illegal descriptor (==signature) '"+sig+"' used by '"+tostring(obj)+"'.", cfe);
             }
 
@@ -1552,9 +1552,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         /** This method casually visits ConstantClass references. */
         @Override
         public void visitConstantClass(final ConstantClass obj) {
-            Constant c = cp.getConstant(obj.getNameIndex());
+            final Constant c = cp.getConstant(obj.getNameIndex());
             if (c instanceof ConstantUtf8) { //Ignore the case where it's not a ConstantUtf8 here, we'll find out later.
-                String classname = ((ConstantUtf8) c).getBytes();
+                final String classname = ((ConstantUtf8) c).getBytes();
                 if (classname.startsWith(jc.getClassName().replace('.','/')+"$")) {
                     hasInnerClass = true;
                 }

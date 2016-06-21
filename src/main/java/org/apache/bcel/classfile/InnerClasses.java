@@ -71,7 +71,7 @@ public final class InnerClasses extends Attribute {
     InnerClasses(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (InnerClass[]) null, constant_pool);
-        int number_of_classes = input.readUnsignedShort();
+        final int number_of_classes = input.readUnsignedShort();
         inner_classes = new InnerClass[number_of_classes];
         for (int i = 0; i < number_of_classes; i++) {
             inner_classes[i] = new InnerClass(input);
@@ -102,7 +102,7 @@ public final class InnerClasses extends Attribute {
     public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(inner_classes.length);
-        for (InnerClass inner_class : inner_classes) {
+        for (final InnerClass inner_class : inner_classes) {
             inner_class.dump(file);
         }
     }
@@ -129,11 +129,11 @@ public final class InnerClasses extends Attribute {
      */
     @Override
     public final String toString() {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         buf.append("InnerClasses(");
         buf.append(inner_classes.length);
         buf.append("):\n");
-        for (InnerClass inner_class : inner_classes) {
+        for (final InnerClass inner_class : inner_classes) {
             buf.append(inner_class.toString(super.getConstantPool())).append("\n");
         }
         return buf.toString();
@@ -146,7 +146,7 @@ public final class InnerClasses extends Attribute {
     @Override
     public Attribute copy( final ConstantPool _constant_pool ) {
         // TODO this could be recoded to use a lower level constructor after creating a copy of the inner classes
-        InnerClasses c = (InnerClasses) clone();
+        final InnerClasses c = (InnerClasses) clone();
         c.inner_classes = new InnerClass[inner_classes.length];
         for (int i = 0; i < inner_classes.length; i++) {
             c.inner_classes[i] = inner_classes[i].copy();

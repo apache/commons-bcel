@@ -21,7 +21,7 @@ package org.apache.bcel.verifier.tests;
 public class TestArrayAccess01 extends XTestArray01{
 
     public static void test() {
-        XTestArray01[] array = new TestArrayAccess01[1];
+        final XTestArray01[] array = new TestArrayAccess01[1];
         array[0] = new XTestArray01();
     }
    

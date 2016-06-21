@@ -123,7 +123,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
             ret = obj.toString();
         }
         
-        catch (RuntimeException e) {
+        catch (final RuntimeException e) {
             // including ClassFormatException, trying to convert the "signature" of a ReturnaddressType LocalVariable
             // (shouldn't occur, but people do crazy things)
             String s = obj.getClass().getName();

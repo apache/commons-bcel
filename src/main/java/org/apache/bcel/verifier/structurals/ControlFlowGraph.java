@@ -122,7 +122,7 @@ public class ControlFlowGraph{
 
             Frame org;
 
-            InstructionContext jsr = lastExecutionJSR();
+            final InstructionContext jsr = lastExecutionJSR();
 
             org = outFrames.get(jsr);
 
@@ -137,7 +137,7 @@ public class ControlFlowGraph{
     public Frame getInFrame() {
           Frame org;
 
-            InstructionContext jsr = lastExecutionJSR();
+            final InstructionContext jsr = lastExecutionJSR();
 
             org = inFrames.get(jsr);
 
@@ -194,7 +194,7 @@ public class ControlFlowGraph{
             // Now we're sure the inFrame has changed!
 
             // new inFrame is already merged in, see above.        
-            Frame workingFrame = inF.getClone();
+            final Frame workingFrame = inF.getClone();
 
             try{
                 // This verifies the InstructionConstraint for the current
@@ -203,7 +203,7 @@ public class ControlFlowGraph{
                 icv.setFrame(workingFrame);
                 getInstruction().accept(icv);
             }
-            catch(StructuralCodeConstraintException ce) {
+            catch(final StructuralCodeConstraintException ce) {
                 ce.extendMessage("","\nInstructionHandle: "+getInstruction()+"\n");
                 ce.extendMessage("","\nExecution Frame:\n"+workingFrame);
                 extendMessageWithFlow(ce);
@@ -230,7 +230,7 @@ public class ControlFlowGraph{
         //TODO: Put information in the brackets, e.g.
         //      Is this an ExceptionHandler? Is this a RET? Is this the start of
         //      a subroutine?
-            String ret = getInstruction().toString(false)+"\t[InstructionContext]";
+            final String ret = getInstruction().toString(false)+"\t[InstructionContext]";
             return ret;
         }
 
@@ -240,13 +240,13 @@ public class ControlFlowGraph{
          */
         private boolean mergeInFrames(final Frame inFrame) {
             // TODO: Can be performance-improved.
-            Frame inF = inFrames.get(lastExecutionJSR());
-            OperandStack oldstack = inF.getStack().getClone();
-            LocalVariables oldlocals = inF.getLocals().getClone();
+            final Frame inF = inFrames.get(lastExecutionJSR());
+            final OperandStack oldstack = inF.getStack().getClone();
+            final LocalVariables oldlocals = inF.getLocals().getClone();
             try {
                 inF.getStack().merge(inFrame.getStack());
                 inF.getLocals().merge(inFrame.getLocals());
-            } catch (StructuralCodeConstraintException sce) {
+            } catch (final StructuralCodeConstraintException sce) {
                 extendMessageWithFlow(sce);
                 throw sce;
             }
@@ -273,7 +273,7 @@ public class ControlFlowGraph{
          * violation that triggered the throwing of the "e" object.
          */
         private void extendMessageWithFlow(final StructuralCodeConstraintException e) {
-            String s = "Execution flow:\n";
+            final String s = "Execution flow:\n";
             e.extendMessage("", s+getExecutionChain());
         }
 
@@ -294,12 +294,12 @@ public class ControlFlowGraph{
          */
         private InstructionContextImpl lastExecutionJSR() {
 
-            int size = executionPredecessors.size();
+            final int size = executionPredecessors.size();
             int retcount = 0;
 
             for (int i=size-1; i>=0; i--) {
-                InstructionContextImpl current = (InstructionContextImpl) (executionPredecessors.get(i));
-                Instruction currentlast = current.getInstruction().getInstruction();
+                final InstructionContextImpl current = (InstructionContextImpl) (executionPredecessors.get(i));
+                final Instruction currentlast = current.getInstruction().getInstruction();
                 if (currentlast instanceof RET) {
                     retcount++;
                 }
@@ -330,10 +330,10 @@ public class ControlFlowGraph{
             final InstructionHandle[] empty = new InstructionHandle[0];
             final InstructionHandle[] single = new InstructionHandle[1];
 
-            Instruction inst = getInstruction().getInstruction();
+            final Instruction inst = getInstruction().getInstruction();
 
             if (inst instanceof RET) {
-                Subroutine s = subroutines.subroutineOf(getInstruction());
+                final Subroutine s = subroutines.subroutineOf(getInstruction());
                 if (s==null) { //return empty;
                     // RET in dead code. "empty" would be the correct answer, but we know something about the surrounding project...
                     throw new AssertionViolatedException("Asking for successors of a RET in dead code?!");
@@ -343,8 +343,8 @@ public class ControlFlowGraph{
 //      will want it. Thanks Johannes Wust.
 //throw new AssertionViolatedException("DID YOU REALLY WANT TO ASK FOR RET'S SUCCS?");
 
-                InstructionHandle[] jsrs = s.getEnteringJsrInstructions();
-                InstructionHandle[] ret = new InstructionHandle[jsrs.length];
+                final InstructionHandle[] jsrs = s.getEnteringJsrInstructions();
+                final InstructionHandle[] ret = new InstructionHandle[jsrs.length];
                 for (int i=0; i<jsrs.length; i++) {
                     ret[i] = jsrs[i].getNext();
                 }
@@ -377,8 +377,8 @@ public class ControlFlowGraph{
                 if (inst instanceof Select) {
                     // BCEL's getTargets() returns only the non-default targets,
                     // thanks to Eli Tilevich for reporting.
-                    InstructionHandle[] matchTargets = ((Select) inst).getTargets();
-                    InstructionHandle[] ret = new InstructionHandle[matchTargets.length+1];
+                    final InstructionHandle[] matchTargets = ((Select) inst).getTargets();
+                    final InstructionHandle[] ret = new InstructionHandle[matchTargets.length+1];
                     ret[0] = ((Select) inst).getTarget();
                     System.arraycopy(matchTargets, 0, ret, 1, matchTargets.length);
                     return ret;
@@ -426,8 +426,8 @@ public class ControlFlowGraph{
         subroutines = new Subroutines(method_gen, enableJustIceCheck);
         exceptionhandlers = new ExceptionHandlers(method_gen);
 
-        InstructionHandle[] instructionhandles = method_gen.getInstructionList().getInstructionHandles();
-        for (InstructionHandle instructionhandle : instructionhandles) {
+        final InstructionHandle[] instructionhandles = method_gen.getInstructionList().getInstructionHandles();
+        for (final InstructionHandle instructionhandle : instructionhandles) {
             instructionContexts.put(instructionhandle, new InstructionContextImpl(instructionhandle));
         }
 
@@ -438,7 +438,7 @@ public class ControlFlowGraph{
      * Returns the InstructionContext of a given instruction.
      */
     public InstructionContext contextOf(final InstructionHandle inst) {
-        InstructionContext ic = instructionContexts.get(inst);
+        final InstructionContext ic = instructionContexts.get(inst);
         if (ic == null) {
             throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known!");
         }
@@ -450,7 +450,7 @@ public class ControlFlowGraph{
      * in a naturally ordered manner.
      */
     public InstructionContext[] contextsOf(final InstructionHandle[] insts) {
-        InstructionContext[] ret = new InstructionContext[insts.length];
+        final InstructionContext[] ret = new InstructionContext[insts.length];
         for (int i=0; i<insts.length; i++) {
             ret[i] = contextOf(insts[i]);
         }
@@ -463,7 +463,7 @@ public class ControlFlowGraph{
      * <B>(NOT ORDERED!)</B>.
      */
     public InstructionContext[] getInstructionContexts() {
-        InstructionContext[] ret = new InstructionContext[instructionContexts.values().size()];
+        final InstructionContext[] ret = new InstructionContext[instructionContexts.values().size()];
         return instructionContexts.values().toArray(ret);
     }
 

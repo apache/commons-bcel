@@ -40,13 +40,13 @@ public class JavaWrapper {
 
 
     private static java.lang.ClassLoader getClassLoader() {
-        String s = System.getProperty("bcel.classloader");
+        final String s = System.getProperty("bcel.classloader");
         if ((s == null) || "".equals(s)) {
             throw new IllegalArgumentException("The property 'bcel.classloader' must be defined");
         }
         try {
             return (java.lang.ClassLoader) Class.forName(s).newInstance();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new RuntimeException(e.toString(), e);
         }
     }
@@ -68,7 +68,7 @@ public class JavaWrapper {
      * @param argv the arguments just as you would pass them directly
      */
     public void runMain( final String class_name, final String[] argv ) throws ClassNotFoundException {
-        Class<?> cl = loader.loadClass(class_name);
+        final Class<?> cl = loader.loadClass(class_name);
         Method method = null;
         try {
             method = cl.getMethod("main", new Class[] {
@@ -76,13 +76,13 @@ public class JavaWrapper {
             });
             /* Method main is sane ?
              */
-            int m = method.getModifiers();
-            Class<?> r = method.getReturnType();
+            final int m = method.getModifiers();
+            final Class<?> r = method.getReturnType();
             if (!(Modifier.isPublic(m) && Modifier.isStatic(m)) || Modifier.isAbstract(m)
                     || (r != Void.TYPE)) {
                 throw new NoSuchMethodException();
             }
-        } catch (NoSuchMethodException no) {
+        } catch (final NoSuchMethodException no) {
             System.out.println("In class " + class_name
                     + ": public static void main(String[] argv) is not defined");
             return;
@@ -91,7 +91,7 @@ public class JavaWrapper {
             method.invoke(null, new Object[] {
                 argv
             });
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -107,10 +107,10 @@ public class JavaWrapper {
             System.out.println("Missing class name.");
             return;
         }
-        String class_name = argv[0];
-        String[] new_argv = new String[argv.length - 1];
+        final String class_name = argv[0];
+        final String[] new_argv = new String[argv.length - 1];
         System.arraycopy(argv, 1, new_argv, 0, new_argv.length);
-        JavaWrapper wrapper = new JavaWrapper();
+        final JavaWrapper wrapper = new JavaWrapper();
         wrapper.runMain(class_name, new_argv);
     }
 }

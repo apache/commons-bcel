@@ -53,7 +53,7 @@ final class MethodHTML {
         file.println("<HTML><BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
         file.println("<TR><TH ALIGN=LEFT>Access&nbsp;flags</TH><TH ALIGN=LEFT>Type</TH>"
                 + "<TH ALIGN=LEFT>Field&nbsp;name</TH></TR>");
-        for (Field field : fields) {
+        for (final Field field : fields) {
             writeField(field);
         }
         file.println("</TABLE>");
@@ -75,8 +75,8 @@ final class MethodHTML {
      * @throws java.io.IOException
      */
     private void writeField( final Field field ) throws IOException {
-        String type = Utility.signatureToString(field.getSignature());
-        String name = field.getName();
+        final String type = Utility.signatureToString(field.getSignature());
+        final String name = field.getName();
         String access = Utility.accessToString(field.getAccessFlags());
         Attribute[] attributes;
         access = Utility.replace(access, " ", "&nbsp;");
@@ -90,7 +90,7 @@ final class MethodHTML {
         }
         for (int i = 0; i < attributes.length; i++) {
             if (attributes[i].getTag() == Const.ATTR_CONSTANT_VALUE) { // Default value
-                String str = ((ConstantValue) attributes[i]).toString();
+                final String str = ((ConstantValue) attributes[i]).toString();
                 // Reference attribute in _attributes.html
                 file.print("<TD>= <A HREF=\"" + class_name + "_attributes.html#" + name + "@" + i
                         + "\" TARGET=\"Attributes\">" + str + "</TD>\n");
@@ -103,18 +103,18 @@ final class MethodHTML {
 
     private void writeMethod( final Method method, final int method_number ) {
         // Get raw signature
-        String signature = method.getSignature();
+        final String signature = method.getSignature();
         // Get array of strings containing the argument types 
-        String[] args = Utility.methodSignatureArgumentTypes(signature, false);
+        final String[] args = Utility.methodSignatureArgumentTypes(signature, false);
         // Get return type string
-        String type = Utility.methodSignatureReturnType(signature, false);
+        final String type = Utility.methodSignatureReturnType(signature, false);
         // Get method name
-        String name = method.getName();
+        final String name = method.getName();
         String html_name;
         // Get method's access flags
         String access = Utility.accessToString(method.getAccessFlags());
         // Get the method's attributes, the Code Attribute in particular
-        Attribute[] attributes = method.getAttributes();
+        final Attribute[] attributes = method.getAttributes();
         /* HTML doesn't like names like <clinit> and spaces are places to break
          * lines. Both we don't want...
          */
@@ -136,10 +136,10 @@ final class MethodHTML {
         for (int i = 0; i < attributes.length; i++) {
             attribute_html.writeAttribute(attributes[i], "method" + method_number + "@" + i,
                     method_number);
-            byte tag = attributes[i].getTag();
+            final byte tag = attributes[i].getTag();
             if (tag == Const.ATTR_EXCEPTIONS) {
                 file.print("<TR VALIGN=TOP><TD COLSPAN=2></TD><TH ALIGN=LEFT>throws</TH><TD>");
-                int[] exceptions = ((ExceptionTable) attributes[i]).getExceptionIndexTable();
+                final int[] exceptions = ((ExceptionTable) attributes[i]).getExceptionIndexTable();
                 for (int j = 0; j < exceptions.length; j++) {
                     file.print(constant_html.referenceConstant(exceptions[j]));
                     if (j < exceptions.length - 1) {
@@ -148,7 +148,7 @@ final class MethodHTML {
                 }
                 file.println("</TD></TR>");
             } else if (tag == Const.ATTR_CODE) {
-                Attribute[] c_a = ((Code) attributes[i]).getAttributes();
+                final Attribute[] c_a = ((Code) attributes[i]).getAttributes();
                 for (int j = 0; j < c_a.length; j++) {
                     attribute_html.writeAttribute(c_a[j], "method" + method_number + "@" + i + "@"
                             + j, method_number);

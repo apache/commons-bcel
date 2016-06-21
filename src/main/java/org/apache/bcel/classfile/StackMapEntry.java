@@ -67,19 +67,19 @@ public final class StackMapEntry implements Node, Cloneable
             byte_code_offset = input.readShort();
         } else if (frame_type >= Const.APPEND_FRAME && frame_type <= Const.APPEND_FRAME_MAX) {
             byte_code_offset = input.readShort();
-            int number_of_locals = frame_type - 251;
+            final int number_of_locals = frame_type - 251;
             types_of_locals = new StackMapType[number_of_locals];
             for (int i = 0; i < number_of_locals; i++) {
                 types_of_locals[i] = new StackMapType(input, constant_pool);
             }            
         } else if (frame_type == Const.FULL_FRAME) {        
             byte_code_offset = input.readShort();
-            int number_of_locals = input.readShort();
+            final int number_of_locals = input.readShort();
             types_of_locals = new StackMapType[number_of_locals];
             for (int i = 0; i < number_of_locals; i++) {
                 types_of_locals[i] = new StackMapType(input, constant_pool);
             }
-            int number_of_stack_items = input.readShort();
+            final int number_of_stack_items = input.readShort();
             types_of_stack_items = new StackMapType[number_of_stack_items];
             for (int i = 0; i < number_of_stack_items; i++) {
                 types_of_stack_items[i] = new StackMapType(input, constant_pool);
@@ -154,17 +154,17 @@ public final class StackMapEntry implements Node, Cloneable
             file.writeShort(byte_code_offset);
         } else if (frame_type >= Const.APPEND_FRAME && frame_type <= Const.APPEND_FRAME_MAX) {
             file.writeShort(byte_code_offset);
-            for (StackMapType type : types_of_locals) {
+            for (final StackMapType type : types_of_locals) {
                 type.dump(file);
             }            
         } else if (frame_type == Const.FULL_FRAME) {        
             file.writeShort(byte_code_offset);
             file.writeShort(types_of_locals.length);
-            for (StackMapType type : types_of_locals) {
+            for (final StackMapType type : types_of_locals) {
                 type.dump(file);
             }
             file.writeShort(types_of_stack_items.length);
-            for (StackMapType type : types_of_stack_items) {
+            for (final StackMapType type : types_of_stack_items) {
                 type.dump(file);
             }
         } else {
@@ -179,7 +179,7 @@ public final class StackMapEntry implements Node, Cloneable
      */
     @Override
     public final String toString() {
-        StringBuilder buf = new StringBuilder(64);
+        final StringBuilder buf = new StringBuilder(64);
         buf.append("(");
         if (frame_type >= Const.SAME_FRAME && frame_type <= Const.SAME_FRAME_MAX) {
             buf.append("SAME");
@@ -243,16 +243,16 @@ public final class StackMapEntry implements Node, Cloneable
             return 3;
         } else if (frame_type >= Const.APPEND_FRAME && frame_type <= Const.APPEND_FRAME_MAX) {
             int len = 3;
-            for (StackMapType types_of_local : types_of_locals) {
+            for (final StackMapType types_of_local : types_of_locals) {
                 len += types_of_local.hasIndex() ? 3 : 1;
             }            
             return len;
         } else if (frame_type == Const.FULL_FRAME) {        
             int len = 7;
-            for (StackMapType types_of_local : types_of_locals) {
+            for (final StackMapType types_of_local : types_of_locals) {
                 len += types_of_local.hasIndex() ? 3 : 1;
             }
-            for (StackMapType types_of_stack_item : types_of_stack_items) {
+            for (final StackMapType types_of_stack_item : types_of_stack_items) {
                 len += types_of_stack_item.hasIndex() ? 3 : 1;
             }
             return len;
@@ -382,7 +382,7 @@ public final class StackMapEntry implements Node, Cloneable
         StackMapEntry e;
         try {
             e = (StackMapEntry) clone();
-        } catch (CloneNotSupportedException ex) {
+        } catch (final CloneNotSupportedException ex) {
             throw new Error("Clone Not Supported");
         }
 

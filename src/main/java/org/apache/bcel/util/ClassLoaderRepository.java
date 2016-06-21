@@ -80,7 +80,7 @@ public class ClassLoaderRepository implements Repository {
      */
     @Override
     public JavaClass loadClass(final String className) throws ClassNotFoundException {
-        String classFile = className.replace('.', '/');
+        final String classFile = className.replace('.', '/');
         JavaClass RC = findClass(className);
         if (RC != null) {
             return RC;
@@ -89,11 +89,11 @@ public class ClassLoaderRepository implements Repository {
             if (is == null) {
                 throw new ClassNotFoundException(className + " not found.");
             }
-            ClassParser parser = new ClassParser(is, className);
+            final ClassParser parser = new ClassParser(is, className);
             RC = parser.parse();
             storeClass(RC);
             return RC;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new ClassNotFoundException(className + " not found: " + e, e);
         }
     }

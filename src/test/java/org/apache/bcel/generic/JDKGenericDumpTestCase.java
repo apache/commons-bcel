@@ -42,8 +42,8 @@ public class JDKGenericDumpTestCase {
 
     @Test
     public void testJDKjars() throws Exception {
-        File[] jars = listJDKjars();
-        for (File file : jars) {
+        final File[] jars = listJDKjars();
+        for (final File file : jars) {
             testJar(file);
         }
     }
@@ -51,16 +51,16 @@ public class JDKGenericDumpTestCase {
     private void testJar(final File file) throws Exception {
         System.out.println(file);
         try (JarFile jar = new JarFile(file)) {
-            Enumeration<JarEntry> en = jar.entries();
+            final Enumeration<JarEntry> en = jar.entries();
             while (en.hasMoreElements()) {
-                JarEntry e = en.nextElement();
+                final JarEntry e = en.nextElement();
                 final String name = e.getName();
                 if (name.endsWith(".class")) {
                     // System.out.println("- " + name);
                     try (InputStream in = jar.getInputStream(e)) {
-                        ClassParser parser = new ClassParser(in, name);
-                        JavaClass jc = parser.parse();
-                        for (Method m : jc.getMethods()) {
+                        final ClassParser parser = new ClassParser(in, name);
+                        final JavaClass jc = parser.parse();
+                        for (final Method m : jc.getMethods()) {
                             compare(name, m);
                         }
                     }
@@ -71,20 +71,20 @@ public class JDKGenericDumpTestCase {
 
     private void compare(final String name, final Method m) {
 //        System.out.println("Method: " + m);
-        Code c = m.getCode();
+        final Code c = m.getCode();
         if (c==null) {
             return; // e.g. abstract method
         }
-        byte[] src = c.getCode();
-        InstructionList il = new InstructionList(src);
-        byte[] out = il.getByteCode();
+        final byte[] src = c.getCode();
+        final InstructionList il = new InstructionList(src);
+        final byte[] out = il.getByteCode();
         if (src.length == out.length) {
             assertArrayEquals(name + ": "+m.toString(), src, out);
         } else {
             System.out.println(name + ": "+m.toString() +" "+ src.length+" "+out.length);
             System.out.println(bytesToHex(src));
             System.out.println(bytesToHex(out));
-            for (InstructionHandle ih : il) {
+            for (final InstructionHandle ih : il) {
                 System.out.println(ih.toString(false));
             }
             fail("Array comparison failure");
@@ -92,7 +92,7 @@ public class JDKGenericDumpTestCase {
     }
 
     private File[] listJDKjars() throws Exception {
-        File javaLib = new File(System.getProperty("java.home") + "/lib");
+        final File javaLib = new File(System.getProperty("java.home") + "/lib");
         return javaLib.listFiles(new FileFilter() {
             @Override
             public boolean accept(final File file) {
@@ -103,10 +103,10 @@ public class JDKGenericDumpTestCase {
 
     private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
     private static String bytesToHex(final byte[] bytes) {
-        char[] hexChars = new char[bytes.length * 3];
+        final char[] hexChars = new char[bytes.length * 3];
         int i=0;
-        for (byte b : bytes) {
-            int v = b & 0xFF;
+        for (final byte b : bytes) {
+            final int v = b & 0xFF;
             hexChars[i++] = hexArray[v >>> 4];
             hexChars[i++] = hexArray[v & 0x0F];
             hexChars[i++] = ' ';

@@ -80,7 +80,7 @@ public class ClassElementValueGen extends ElementValueGen
 
     public String getClassString()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(idx);
+        final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(idx);
         return cu8.getBytes();
         // ConstantClass c = (ConstantClass)getConstantPool().getConstant(idx);
         // ConstantUtf8 utf8 =

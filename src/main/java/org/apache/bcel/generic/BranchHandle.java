@@ -49,7 +49,7 @@ public final class BranchHandle extends InstructionHandle {
         if (bh_list == null) {
             return new BranchHandle(i);
         }
-        BranchHandle bh = bh_list;
+        final BranchHandle bh = bh_list;
         bh_list = (BranchHandle) bh.getNext();
         bh.setInstruction(i);
         return bh;
@@ -85,7 +85,7 @@ public final class BranchHandle extends InstructionHandle {
 
     @Override
     protected int updatePosition( final int offset, final int max_offset ) {
-        int x = bi.updatePosition(offset, max_offset);
+        final int x = bi.updatePosition(offset, max_offset);
         super.setPosition(bi.getPosition());
         return x;
     }

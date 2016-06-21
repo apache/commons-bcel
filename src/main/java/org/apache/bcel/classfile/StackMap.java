@@ -65,7 +65,7 @@ public final class StackMap extends Attribute {
      */
     StackMap(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, (StackMapEntry[]) null, constant_pool);
-        int map_length = input.readUnsignedShort();
+        final int map_length = input.readUnsignedShort();
         map = new StackMapEntry[map_length];
         for (int i = 0; i < map_length; i++) {
             map[i] = new StackMapEntry(input, constant_pool);
@@ -83,7 +83,7 @@ public final class StackMap extends Attribute {
     public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(map.length);
-        for (StackMapEntry entry : map) {
+        for (final StackMapEntry entry : map) {
             entry.dump(file);
         }
     }
@@ -103,7 +103,7 @@ public final class StackMap extends Attribute {
     public final void setStackMap( final StackMapEntry[] map ) {
         this.map = map;
         int len = 2; // Length of 'number_of_entries' field prior to the array of stack maps
-        for (StackMapEntry element : map) {
+        for (final StackMapEntry element : map) {
             len += element.getMapEntrySize();
         }
         setLength(len);
@@ -115,7 +115,7 @@ public final class StackMap extends Attribute {
      */
     @Override
     public final String toString() {
-        StringBuilder buf = new StringBuilder("StackMap(");
+        final StringBuilder buf = new StringBuilder("StackMap(");
         for (int i = 0; i < map.length; i++) {
             buf.append(map[i]);
             if (i < map.length - 1) {
@@ -132,7 +132,7 @@ public final class StackMap extends Attribute {
      */
     @Override
     public Attribute copy( final ConstantPool _constant_pool ) {
-        StackMap c = (StackMap) clone();
+        final StackMap c = (StackMap) clone();
         c.map = new StackMapEntry[map.length];
         for (int i = 0; i < map.length; i++) {
             c.map[i] = map[i].copy();

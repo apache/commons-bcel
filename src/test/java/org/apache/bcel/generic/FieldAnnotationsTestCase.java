@@ -35,7 +35,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
      */
     public void testFieldAnnotationEntrys() throws ClassNotFoundException
     {
-        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
         // TODO L...;?
         checkAnnotatedField(clazz, "i", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "1");
         checkAnnotatedField(clazz, "s", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "2");
@@ -47,13 +47,13 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     public void testFieldAnnotationEntrysReadWrite() throws ClassNotFoundException,
             IOException
     {
-        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
         checkAnnotatedField(clazz, "i", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "1");
         checkAnnotatedField(clazz, "s", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "2");
         // Write it out
-        File tfile = createTestdataFile("AnnotatedFields.class");
+        final File tfile = createTestdataFile("AnnotatedFields.class");
         clazz.dump(tfile);
-        SyntheticRepository repos2 = createRepos(".");
+        final SyntheticRepository repos2 = createRepos(".");
         repos2.loadClass("AnnotatedFields");
         checkAnnotatedField(clazz, "i", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "1");
         checkAnnotatedField(clazz, "s", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "2");
@@ -67,9 +67,9 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     public void testFieldAnnotationModification()
             throws ClassNotFoundException
     {
-        boolean dbg = false;
-        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
-        ClassGen clg = new ClassGen(clazz);
+        final boolean dbg = false;
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
+        final ClassGen clg = new ClassGen(clazz);
         Field f = clg.getFields()[0];
         if (dbg) {
             System.err.println("Field in freshly constructed class is: " + f);
@@ -78,9 +78,9 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             System.err.println("AnnotationEntrys on field are: "
                     + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
-        AnnotationEntryGen fruitBasedAnnotationEntry = createFruitAnnotationEntry(clg
+        final AnnotationEntryGen fruitBasedAnnotationEntry = createFruitAnnotationEntry(clg
                 .getConstantPool(), "Tomato", false);
-        FieldGen fg = new FieldGen(f, clg.getConstantPool());
+        final FieldGen fg = new FieldGen(f, clg.getConstantPool());
         if (dbg) {
             System.err.println("Adding AnnotationEntry to the field");
         }
@@ -117,9 +117,9 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             final String AnnotationEntryName, final String AnnotationEntryElementName,
             final String AnnotationEntryElementValue)
     {
-        Field[] fields = clazz.getFields();
-        for (Field f : fields) {
-            AnnotationEntry[] fieldAnnotationEntrys = f.getAnnotationEntries();
+        final Field[] fields = clazz.getFields();
+        for (final Field f : fields) {
+            final AnnotationEntry[] fieldAnnotationEntrys = f.getAnnotationEntries();
             if (f.getName().equals(fieldname))
             {
                 checkAnnotationEntry(fieldAnnotationEntrys[0], AnnotationEntryName,
@@ -136,7 +136,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
                 .equals(name));
         assertTrue("Expected AnnotationEntry to have one element but it had "
                 + a.getElementValuePairs().length, a.getElementValuePairs().length == 1);
-        ElementValuePair envp = a.getElementValuePairs()[0];
+        final ElementValuePair envp = a.getElementValuePairs()[0];
         assertTrue("Expected element name " + elementname + " but was "
                 + envp.getNameString(), elementname
                 .equals(envp.getNameString()));
@@ -150,7 +150,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     {
         for (int i = 0; i < a.getElementValuePairs().length; i++)
         {
-            ElementValuePair element = a.getElementValuePairs()[i];
+            final ElementValuePair element = a.getElementValuePairs()[i];
             if (element.getNameString().equals(name))
             {
                 if (!element.getValue().stringifyValue().equals(tostring))

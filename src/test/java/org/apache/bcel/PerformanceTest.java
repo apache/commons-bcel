@@ -48,10 +48,10 @@ public final class PerformanceTest extends TestCase {
         byte[] b = new byte[is.available()];
         int len = 0;
         while (true) {
-            int n = is.read(b, len, b.length - len);
+            final int n = is.read(b, len, b.length - len);
             if (n == -1) {
                 if (len < b.length) {
-                    byte[] c = new byte[len];
+                    final byte[] c = new byte[len];
                     System.arraycopy(b, 0, c, 0, len);
                     b = c;
                 }
@@ -59,7 +59,7 @@ public final class PerformanceTest extends TestCase {
             }
             len += n;
             if (len == b.length) {
-                byte[] c = new byte[b.length + 1000];
+                final byte[] c = new byte[b.length + 1000];
                 System.arraycopy(b, 0, c, 0, len);
                 b = c;
             }
@@ -67,21 +67,21 @@ public final class PerformanceTest extends TestCase {
     }
 
     private static void test(final File lib) throws IOException {
-        NanoTimer total = new NanoTimer();
-        NanoTimer parseTime = new NanoTimer();
-        NanoTimer cgenTime = new NanoTimer();
-        NanoTimer mgenTime = new NanoTimer();
-        NanoTimer mserTime = new NanoTimer();
-        NanoTimer serTime = new NanoTimer();
+        final NanoTimer total = new NanoTimer();
+        final NanoTimer parseTime = new NanoTimer();
+        final NanoTimer cgenTime = new NanoTimer();
+        final NanoTimer mgenTime = new NanoTimer();
+        final NanoTimer mserTime = new NanoTimer();
+        final NanoTimer serTime = new NanoTimer();
 
         System.out.println("parsing " + lib);
 
         total.start();
         try (JarFile jar = new JarFile(lib)) {
-            Enumeration<?> en = jar.entries();
+            final Enumeration<?> en = jar.entries();
 
             while (en.hasMoreElements()) {
-                JarEntry e = (JarEntry) en.nextElement();
+                final JarEntry e = (JarEntry) en.nextElement();
                 if (e.getName().endsWith(".class")) {
                     byte[] bytes;
                     try (InputStream in = jar.getInputStream(e)) {
@@ -89,18 +89,18 @@ public final class PerformanceTest extends TestCase {
                     }
                     
                     parseTime.start();
-                    JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), e.getName()).parse();
+                    final JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), e.getName()).parse();
                     parseTime.stop();
 
                     cgenTime.start();
-                    ClassGen cg = new ClassGen(clazz);
+                    final ClassGen cg = new ClassGen(clazz);
                     cgenTime.stop();
 
-                    Method[] methods = cg.getMethods();
-                    for (Method m : methods) {
+                    final Method[] methods = cg.getMethods();
+                    for (final Method m : methods) {
                         mgenTime.start();
-                        MethodGen mg = new MethodGen(m, cg.getClassName(), cg.getConstantPool());
-                        InstructionList il = mg.getInstructionList();
+                        final MethodGen mg = new MethodGen(m, cg.getClassName(), cg.getConstantPool());
+                        final InstructionList il = mg.getInstructionList();
                         mgenTime.stop();
 
                         mserTime.start();
@@ -132,7 +132,7 @@ public final class PerformanceTest extends TestCase {
     }
 
     public void testPerformance() {
-        File javaLib = new File(System.getProperty("java.home") + "/lib");
+        final File javaLib = new File(System.getProperty("java.home") + "/lib");
         javaLib.listFiles(new FileFilter() {
 
             @Override
@@ -140,7 +140,7 @@ public final class PerformanceTest extends TestCase {
                 if(file.getName().endsWith(".jar")) {
                     try {
                         test(file);
-                    } catch (IOException e) {
+                    } catch (final IOException e) {
                         Assert.fail(e.getMessage());
                     }
                 }

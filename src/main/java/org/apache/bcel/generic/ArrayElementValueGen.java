@@ -49,7 +49,7 @@ public class ArrayElementValueGen extends ElementValueGen
                     "Only element values of type array can be built with this ctor - type specified: " + type);
         }
         this.evalues = new ArrayList<>();
-        for (ElementValue datum : datums) {
+        for (final ElementValue datum : datums) {
             evalues.add(ElementValueGen.copy(datum, cpool, true));
         }
     }
@@ -60,9 +60,9 @@ public class ArrayElementValueGen extends ElementValueGen
     @Override
     public ElementValue getElementValue()
     {
-        ElementValue[] immutableData = new ElementValue[evalues.size()];
+        final ElementValue[] immutableData = new ElementValue[evalues.size()];
         int i = 0;
-        for (ElementValueGen element : evalues) {
+        for (final ElementValueGen element : evalues) {
             immutableData[i++] = element.getElementValue();
         }
         return new ArrayElementValue(super.getElementValueType(),
@@ -79,8 +79,8 @@ public class ArrayElementValueGen extends ElementValueGen
     {
         super(ARRAY, cpool);
         evalues = new ArrayList<>();
-        ElementValue[] in = value.getElementValuesArray();
-        for (ElementValue element : in) {
+        final ElementValue[] in = value.getElementValuesArray();
+        for (final ElementValue element : in) {
             evalues.add(ElementValueGen.copy(element, cpool, copyPoolEntries));
         }
     }
@@ -90,7 +90,7 @@ public class ArrayElementValueGen extends ElementValueGen
     {
         dos.writeByte(super.getElementValueType()); // u1 type of value (ARRAY == '[')
         dos.writeShort(evalues.size());
-        for (ElementValueGen element : evalues) {
+        for (final ElementValueGen element : evalues) {
             element.dump(dos);
         }
     }
@@ -98,10 +98,10 @@ public class ArrayElementValueGen extends ElementValueGen
     @Override
     public String stringifyValue()
     {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("[");
         String comma = "";
-        for (ElementValueGen element : evalues) {
+        for (final ElementValueGen element : evalues) {
             sb.append(comma);
             comma = ",";
             sb.append(element.stringifyValue());

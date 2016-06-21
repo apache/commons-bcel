@@ -78,7 +78,7 @@ final class CodeHTML {
      * @return String representation of byte code
      */
     private String codeToHTML( final ByteSequence bytes, final int method_number ) throws IOException {
-        short opcode = (short) bytes.readUnsignedByte();
+        final short opcode = (short) bytes.readUnsignedByte();
         String name;
         String signature;
         int default_offset = 0;
@@ -91,13 +91,13 @@ final class CodeHTML {
         int[] jump_table;
         int no_pad_bytes = 0;
         int offset;
-        StringBuilder buf = new StringBuilder(256); // CHECKSTYLE IGNORE MagicNumber
+        final StringBuilder buf = new StringBuilder(256); // CHECKSTYLE IGNORE MagicNumber
         buf.append("<TT>").append(Const.getOpcodeName(opcode)).append("</TT></TD><TD>");
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned
          */
         if ((opcode == Const.TABLESWITCH) || (opcode == Const.LOOKUPSWITCH)) {
-            int remainder = bytes.getIndex() % 4;
+            final int remainder = bytes.getIndex() % 4;
             no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
             for (int i = 0; i < no_pad_bytes; i++) {
                 bytes.readByte();
@@ -120,7 +120,7 @@ final class CodeHTML {
                 }
                 buf.append("<TH>default</TH></TR>\n<TR>");
                 // Print target and default indices in second row
-            for (int element : jump_table) {
+            for (final int element : jump_table) {
                 buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(
                         element).append("\">").append(element).append("</A></TD>");
             }
@@ -131,14 +131,14 @@ final class CodeHTML {
             /* Lookup switch has variable length arguments.
              */
             case Const.LOOKUPSWITCH:
-                int npairs = bytes.readInt();
+                final int npairs = bytes.readInt();
                 offset = bytes.getIndex() - 8 - no_pad_bytes - 1;
                 jump_table = new int[npairs];
                 default_offset += offset;
                 buf.append("<TABLE BORDER=1><TR>");
                 // Print switch indices in first row (and default)
                 for (int i = 0; i < npairs; i++) {
-                    int match = bytes.readInt();
+                    final int match = bytes.readInt();
                     jump_table[i] = offset + bytes.readInt();
                     buf.append("<TH>").append(match).append("</TH>");
                 }
@@ -181,7 +181,7 @@ final class CodeHTML {
              */
             case Const.GOTO_W:
             case Const.JSR_W:
-                int windex = bytes.getIndex() + bytes.readInt() - 1;
+                final int windex = bytes.getIndex() + bytes.readInt() - 1;
                 buf.append("<A HREF=\"#code").append(method_number).append("@").append(windex)
                         .append("\">").append(windex).append("</A>");
                 break;
@@ -228,13 +228,13 @@ final class CodeHTML {
             case Const.PUTFIELD:
             case Const.PUTSTATIC:
                 index = bytes.readShort();
-                ConstantFieldref c1 = (ConstantFieldref) constant_pool.getConstant(index,
+                final ConstantFieldref c1 = (ConstantFieldref) constant_pool.getConstant(index,
                         Const.CONSTANT_Fieldref);
                 class_index = c1.getClassIndex();
                 name = constant_pool.getConstantString(class_index, Const.CONSTANT_Class);
                 name = Utility.compactClassName(name, false);
                 index = c1.getNameAndTypeIndex();
-                String field_name = constant_pool.constantToString(index, Const.CONSTANT_NameAndType);
+                final String field_name = constant_pool.constantToString(index, Const.CONSTANT_NameAndType);
                 if (name.equals(class_name)) { // Local field
                     buf.append("<A HREF=\"").append(class_name).append("_methods.html#field")
                             .append(field_name).append("\" TARGET=Methods>").append(field_name)
@@ -259,14 +259,14 @@ final class CodeHTML {
             case Const.INVOKEVIRTUAL:
             case Const.INVOKEINTERFACE:
             case Const.INVOKEDYNAMIC:
-                int m_index = bytes.readShort();
+                final int m_index = bytes.readShort();
                 String str;
                 if (opcode == Const.INVOKEINTERFACE) { // Special treatment needed
                     bytes.readUnsignedByte(); // Redundant
                     bytes.readUnsignedByte(); // Reserved
 //                    int nargs = bytes.readUnsignedByte(); // Redundant
 //                    int reserved = bytes.readUnsignedByte(); // Reserved
-                    ConstantInterfaceMethodref c = (ConstantInterfaceMethodref) constant_pool
+                    final ConstantInterfaceMethodref c = (ConstantInterfaceMethodref) constant_pool
                             .getConstant(m_index, Const.CONSTANT_InterfaceMethodref);
                     class_index = c.getClassIndex();
                     index = c.getNameAndTypeIndex();
@@ -274,7 +274,7 @@ final class CodeHTML {
                 } else if (opcode == Const.INVOKEDYNAMIC) { // Special treatment needed
                     bytes.readUnsignedByte(); // Reserved
                     bytes.readUnsignedByte(); // Reserved
-                    ConstantInvokeDynamic c = (ConstantInvokeDynamic) constant_pool
+                    final ConstantInvokeDynamic c = (ConstantInvokeDynamic) constant_pool
                             .getConstant(m_index, Const.CONSTANT_InvokeDynamic);
                     index = c.getNameAndTypeIndex();
                     name = "#" + c.getBootstrapMethodAttrIndex();
@@ -282,7 +282,7 @@ final class CodeHTML {
                     // UNDONE: Java8 now allows INVOKESPECIAL and INVOKESTATIC to
                     // reference EITHER a Methodref OR an InterfaceMethodref.
                     // Not sure if that affects this code or not.  (markro)
-                    ConstantMethodref c = (ConstantMethodref) constant_pool.getConstant(m_index,
+                    final ConstantMethodref c = (ConstantMethodref) constant_pool.getConstant(m_index,
                             Const.CONSTANT_Methodref);
                     class_index = c.getClassIndex();
                     index = c.getNameAndTypeIndex();
@@ -291,11 +291,11 @@ final class CodeHTML {
                 str = Class2HTML.toHTML(constant_pool.constantToString(constant_pool.getConstant(
                         index, Const.CONSTANT_NameAndType)));
                 // Get signature, i.e., types
-                ConstantNameAndType c2 = (ConstantNameAndType) constant_pool.getConstant(index,
+                final ConstantNameAndType c2 = (ConstantNameAndType) constant_pool.getConstant(index,
                         Const.CONSTANT_NameAndType);
                 signature = constant_pool.constantToString(c2.getSignatureIndex(), Const.CONSTANT_Utf8);
-                String[] args = Utility.methodSignatureArgumentTypes(signature, false);
-                String type = Utility.methodSignatureReturnType(signature, false);
+                final String[] args = Utility.methodSignatureArgumentTypes(signature, false);
+                final String type = Utility.methodSignatureReturnType(signature, false);
                 buf.append(name).append(".<A HREF=\"").append(class_name).append("_cp.html#cp")
                         .append(m_index).append("\" TARGET=ConstantPool>").append(str).append(
                                 "</A>").append("(");
@@ -336,7 +336,7 @@ final class CodeHTML {
              */
             case Const.MULTIANEWARRAY:
                 index = bytes.readShort();
-                int dimensions = bytes.readByte();
+                final int dimensions = bytes.readByte();
                 buf.append(constant_html.referenceConstant(index)).append(":").append(dimensions)
                         .append("-dimensional");
                 break;
@@ -390,21 +390,21 @@ final class CodeHTML {
          * (try .. catch) in this method. We only need the line number here.
          */
         if (code != null) {
-            CodeException[] ce = code.getExceptionTable();
-            for (CodeException cex : ce) {
+            final CodeException[] ce = code.getExceptionTable();
+            for (final CodeException cex : ce) {
                 goto_set.set(cex.getStartPC());
                 goto_set.set(cex.getEndPC());
                 goto_set.set(cex.getHandlerPC());
             }
             // Look for local variables and their range
-            Attribute[] attributes = code.getAttributes();
-            for (Attribute attribute : attributes) {
+            final Attribute[] attributes = code.getAttributes();
+            for (final Attribute attribute : attributes) {
                 if (attribute.getTag() == Const.ATTR_LOCAL_VARIABLE_TABLE) {
-                    LocalVariable[] vars = ((LocalVariableTable) attribute)
+                    final LocalVariable[] vars = ((LocalVariableTable) attribute)
                             .getLocalVariableTable();
-                    for (LocalVariable var : vars) {
-                        int start = var.getStartPC();
-                        int end = start + var.getLength();
+                    for (final LocalVariable var : vars) {
+                        final int start = var.getStartPC();
+                        final int end = start + var.getLength();
                         goto_set.set(start);
                         goto_set.set(end);
                     }
@@ -420,8 +420,8 @@ final class CodeHTML {
                 case Const.TABLESWITCH:
                 case Const.LOOKUPSWITCH:
                     //bytes.readByte(); // Skip already read byte
-                    int remainder = bytes.getIndex() % 4;
-                    int no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
+                    final int remainder = bytes.getIndex() % 4;
+                    final int no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
                     int default_offset;
                     int offset;
                     for (int j = 0; j < no_pad_bytes; j++) {
@@ -430,8 +430,8 @@ final class CodeHTML {
                     // Both cases have a field default_offset in common
                     default_offset = bytes.readInt();
                     if (opcode == Const.TABLESWITCH) {
-                        int low = bytes.readInt();
-                        int high = bytes.readInt();
+                        final int low = bytes.readInt();
+                        final int high = bytes.readInt();
                         offset = bytes.getIndex() - 12 - no_pad_bytes - 1;
                         default_offset += offset;
                         goto_set.set(default_offset);
@@ -440,7 +440,7 @@ final class CodeHTML {
                             goto_set.set(index);
                         }
                     } else { // LOOKUPSWITCH
-                        int npairs = bytes.readInt();
+                        final int npairs = bytes.readInt();
                         offset = bytes.getIndex() - 8 - no_pad_bytes - 1;
                         default_offset += offset;
                         goto_set.set(default_offset);
@@ -493,19 +493,19 @@ final class CodeHTML {
      */
     private void writeMethod( final Method method, final int method_number ) throws IOException {
         // Get raw signature
-        String signature = method.getSignature();
+        final String signature = method.getSignature();
         // Get array of strings containing the argument types
-        String[] args = Utility.methodSignatureArgumentTypes(signature, false);
+        final String[] args = Utility.methodSignatureArgumentTypes(signature, false);
         // Get return type string
-        String type = Utility.methodSignatureReturnType(signature, false);
+        final String type = Utility.methodSignatureReturnType(signature, false);
         // Get method name
-        String name = method.getName();
-        String html_name = Class2HTML.toHTML(name);
+        final String name = method.getName();
+        final String html_name = Class2HTML.toHTML(name);
         // Get method's access flags
         String access = Utility.accessToString(method.getAccessFlags());
         access = Utility.replace(access, " ", "&nbsp;");
         // Get the method's attributes, the Code Attribute in particular
-        Attribute[] attributes = method.getAttributes();
+        final Attribute[] attributes = method.getAttributes();
         file.print("<P><B><FONT COLOR=\"#FF0000\">" + access + "</FONT>&nbsp;" + "<A NAME=method"
                 + method_number + ">" + Class2HTML.referenceType(type) + "</A>&nbsp<A HREF=\""
                 + class_name + "_methods.html#method" + method_number + "\" TARGET=Methods>"
@@ -532,7 +532,7 @@ final class CodeHTML {
                 }
                 if (tag == Const.ATTR_CODE) {
                     c = (Code) attributes[i];
-                    Attribute[] attributes2 = c.getAttributes();
+                    final Attribute[] attributes2 = c.getAttributes();
                     code = c.getCode();
                     file.print("<UL>");
                     for (int j = 0; j < attributes2.length; j++) {
@@ -556,8 +556,8 @@ final class CodeHTML {
                 file.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Byte<BR>offset</TH>"
                         + "<TH ALIGN=LEFT>Instruction</TH><TH ALIGN=LEFT>Argument</TH>");
                 for (; stream.available() > 0;) {
-                    int offset = stream.getIndex();
-                    String str = codeToHTML(stream, method_number);
+                    final int offset = stream.getIndex();
+                    final String str = codeToHTML(stream, method_number);
                     String anchor = "";
                     /*
                      * Set an anchor mark if this line is targetted by a goto, jsr, etc. Defining an anchor for every

@@ -37,15 +37,15 @@ public abstract class Constant implements Cloneable, Node {
 
         @Override
         public boolean equals( final Object o1, final Object o2 ) {
-            Constant THIS = (Constant) o1;
-            Constant THAT = (Constant) o2;
+            final Constant THIS = (Constant) o1;
+            final Constant THAT = (Constant) o2;
             return THIS.toString().equals(THAT.toString());
         }
 
 
         @Override
         public int hashCode( final Object o ) {
-            Constant THIS = (Constant) o;
+            final Constant THIS = (Constant) o;
             return THIS.toString().hashCode();
         }
     };
@@ -107,7 +107,7 @@ public abstract class Constant implements Cloneable, Node {
     public Constant copy() {
         try {
             return (Constant) super.clone();
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             // TODO should this throw?
         }
         return null;
@@ -118,7 +118,7 @@ public abstract class Constant implements Cloneable, Node {
     public Object clone() {
         try {
             return super.clone();
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             throw new Error("Clone Not Supported"); // never happens
         }
     }
@@ -133,7 +133,7 @@ public abstract class Constant implements Cloneable, Node {
      */
     public static Constant readConstant( final DataInput input ) throws IOException,
             ClassFormatException {
-        byte b = input.readByte(); // Read tag byte
+        final byte b = input.readByte(); // Read tag byte
         switch (b) {
             case Const.CONSTANT_Class:
                 return new ConstantClass(input);

@@ -29,10 +29,10 @@ public class InstructionFinderTestCase extends AbstractTestCase
 {
     public void testSearchAll() throws Exception
     {
-        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".util.InstructionFinder");
-        Method[] methods = clazz.getMethods();
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".util.InstructionFinder");
+        final Method[] methods = clazz.getMethods();
         Method searchM = null;
-        for (Method m : methods)
+        for (final Method m : methods)
         {
             if (m.getName().equals("search") && (m.getArgumentTypes().length == 3))
             {
@@ -45,14 +45,14 @@ public class InstructionFinderTestCase extends AbstractTestCase
             throw new Exception("search method not found");
         }
 
-        byte[] bytes = searchM.getCode().getCode();
-        InstructionList il = new InstructionList(bytes);
-        InstructionFinder finder = new InstructionFinder(il);
-        Iterator<?> it = finder.search(".*", il.getStart(), null);
+        final byte[] bytes = searchM.getCode().getCode();
+        final InstructionList il = new InstructionList(bytes);
+        final InstructionFinder finder = new InstructionFinder(il);
+        final Iterator<?> it = finder.search(".*", il.getStart(), null);
 
-        InstructionHandle[] ihs = (InstructionHandle[])it.next();
+        final InstructionHandle[] ihs = (InstructionHandle[])it.next();
         int size = 0;
-        for (InstructionHandle ih : ihs)
+        for (final InstructionHandle ih : ihs)
         {
             size += ih.getInstruction().getLength();
         }

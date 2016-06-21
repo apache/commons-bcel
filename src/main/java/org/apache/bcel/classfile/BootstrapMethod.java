@@ -125,7 +125,7 @@ public class BootstrapMethod implements Cloneable {
      * @return Resolved string representation
      */
     public final String toString( final ConstantPool constant_pool ) {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         String bootstrap_method_name;
         bootstrap_method_name = constant_pool.constantToString(bootstrap_method_ref,
                 Const.CONSTANT_MethodHandle);
@@ -150,7 +150,7 @@ public class BootstrapMethod implements Cloneable {
     public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(bootstrap_method_ref);
         file.writeShort(bootstrap_arguments.length);
-        for (int bootstrap_argument : bootstrap_arguments) {
+        for (final int bootstrap_argument : bootstrap_arguments) {
             file.writeShort(bootstrap_argument);
         }
     }
@@ -161,7 +161,7 @@ public class BootstrapMethod implements Cloneable {
     public BootstrapMethod copy() {
         try {
             return (BootstrapMethod) clone();
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             // TODO should this throw?
         }
         return null;

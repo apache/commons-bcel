@@ -71,7 +71,7 @@ public final class LineNumberTable extends Attribute {
     LineNumberTable(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
         this(name_index, length, (LineNumber[]) null, constant_pool);
-        int line_number_table_length = input.readUnsignedShort();
+        final int line_number_table_length = input.readUnsignedShort();
         line_number_table = new LineNumber[line_number_table_length];
         for (int i = 0; i < line_number_table_length; i++) {
             line_number_table[i] = new LineNumber(input);
@@ -102,7 +102,7 @@ public final class LineNumberTable extends Attribute {
     public final void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(line_number_table.length);
-        for (LineNumber lineNumber : line_number_table) {
+        for (final LineNumber lineNumber : line_number_table) {
             lineNumber.dump(file);
         }
     }
@@ -129,9 +129,9 @@ public final class LineNumberTable extends Attribute {
      */
     @Override
     public final String toString() {
-        StringBuilder buf = new StringBuilder();
-        StringBuilder line = new StringBuilder();
-        String newLine = System.getProperty("line.separator", "\n");
+        final StringBuilder buf = new StringBuilder();
+        final StringBuilder line = new StringBuilder();
+        final String newLine = System.getProperty("line.separator", "\n");
         for (int i = 0; i < line_number_table.length; i++) {
             line.append(line_number_table[i].toString());
             if (i < line_number_table.length - 1) {
@@ -165,8 +165,8 @@ public final class LineNumberTable extends Attribute {
         /* Do a binary search since the array is ordered.
          */
         do {
-            int i = (l + r) / 2;
-            int j = line_number_table[i].getStartPC();
+            final int i = (l + r) / 2;
+            final int j = line_number_table[i].getStartPC();
             if (j == pos) {
                 return line_number_table[i].getLineNumber();
             } else if (pos < j) {
@@ -200,7 +200,7 @@ public final class LineNumberTable extends Attribute {
     public Attribute copy( final ConstantPool _constant_pool ) {
         // TODO could use the lower level constructor and thereby allow 
         // line_number_table to be made final
-        LineNumberTable c = (LineNumberTable) clone();
+        final LineNumberTable c = (LineNumberTable) clone();
         c.line_number_table = new LineNumber[line_number_table.length];
         for (int i = 0; i < line_number_table.length; i++) {
             c.line_number_table[i] = line_number_table[i].copy();

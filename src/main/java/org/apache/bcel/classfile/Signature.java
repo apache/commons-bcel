@@ -118,7 +118,7 @@ public final class Signature extends Attribute {
      * @return GJ signature.
      */
     public final String getSignature() {
-        ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(signature_index,
+        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(signature_index,
                 Const.CONSTANT_Utf8);
         return c.getBytes();
     }
@@ -159,7 +159,7 @@ public final class Signature extends Attribute {
         }
         //System.out.println("return from ident:" + (char)ch);
         if (!identStart(ch)) {
-            StringBuilder buf2 = new StringBuilder();
+            final StringBuilder buf2 = new StringBuilder();
             int count = 1;
             while (Character.isJavaIdentifierPart((char) ch)) {
                 buf2.append((char) ch);
@@ -179,7 +179,7 @@ public final class Signature extends Attribute {
             }
             return;
         }
-        StringBuilder buf2 = new StringBuilder();
+        final StringBuilder buf2 = new StringBuilder();
         ch = in.read();
         do {
             buf2.append((char) ch);
@@ -232,7 +232,7 @@ public final class Signature extends Attribute {
 
     public static String translate( final String s ) {
         //System.out.println("Sig:" + s);
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         matchGJIdent(new MyByteArrayInputStream(s), buf);
         return buf.toString();
     }
@@ -255,7 +255,7 @@ public final class Signature extends Attribute {
      */
     @Override
     public final String toString() {
-        String s = getSignature();
+        final String s = getSignature();
         return "Signature: " + s;
     }
 

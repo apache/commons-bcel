@@ -70,15 +70,15 @@ public final class SWITCH implements CompoundInstruction {
 
 
     private void fillup( final int max_gap, final InstructionHandle target ) {
-        int max_size = match_length + match_length * max_gap;
-        int[] m_vec = new int[max_size];
-        InstructionHandle[] t_vec = new InstructionHandle[max_size];
+        final int max_size = match_length + match_length * max_gap;
+        final int[] m_vec = new int[max_size];
+        final InstructionHandle[] t_vec = new InstructionHandle[max_size];
         int count = 1;
         m_vec[0] = match[0];
         t_vec[0] = targets[0];
         for (int i = 1; i < match_length; i++) {
-            int prev = match[i - 1];
-            int gap = match[i] - prev;
+            final int prev = match[i - 1];
+            final int gap = match[i] - prev;
             for (int j = 1; j < gap; j++) {
                 m_vec[count] = prev + j;
                 t_vec[count] = target;
@@ -102,7 +102,7 @@ public final class SWITCH implements CompoundInstruction {
         int i = l;
         int j = r;
         int h;
-        int m = match[(l + r) / 2];
+        final int m = match[(l + r) / 2];
         InstructionHandle h2;
         do {
             while (match[i] < m) {

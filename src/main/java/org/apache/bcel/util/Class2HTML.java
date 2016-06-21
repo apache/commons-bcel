@@ -82,24 +82,24 @@ public class Class2HTML implements Constants {
      * @param dir The directory to put the files in
      */
     public Class2HTML(final JavaClass java_class, final String dir) throws IOException {
-        Method[] methods = java_class.getMethods();
+        final Method[] methods = java_class.getMethods();
         this.java_class = java_class;
         this.dir = dir;
         class_name = java_class.getClassName(); // Remember full name
         constant_pool = java_class.getConstantPool();
         // Get package name by tacking off everything after the last `.'
-        int index = class_name.lastIndexOf('.');
+        final int index = class_name.lastIndexOf('.');
         if (index > -1) {
             class_package = class_name.substring(0, index);
         } else {
             class_package = ""; // default package
         }
-        ConstantHTML constant_html = new ConstantHTML(dir, class_name, class_package, methods,
+        final ConstantHTML constant_html = new ConstantHTML(dir, class_name, class_package, methods,
                 constant_pool);
         /* Attributes can't be written in one step, so we just open a file
          * which will be written consequently.
          */
-        AttributeHTML attribute_html = new AttributeHTML(dir, class_name, constant_pool,
+        final AttributeHTML attribute_html = new AttributeHTML(dir, class_name, constant_pool,
                 constant_html);
         new MethodHTML(dir, class_name, methods, java_class.getFields(),
                 constant_html, attribute_html);
@@ -111,12 +111,12 @@ public class Class2HTML implements Constants {
 
 
     public static void main( final String[] argv ) throws IOException {
-        String[] file_name = new String[argv.length];
+        final String[] file_name = new String[argv.length];
         int files = 0;
         ClassParser parser = null;
         JavaClass java_class = null;
         String zip_file = null;
-        char sep = File.separatorChar;
+        final char sep = File.separatorChar;
         String dir = "." + sep; // Where to store HTML files
         /* Parse command line arguments.
          */
@@ -129,7 +129,7 @@ public class Class2HTML implements Constants {
                     }
                     final File store = new File(dir);
                     if (!store.isDirectory()) {
-                        boolean created = store.mkdirs(); // Create target directory if necessary
+                        final boolean created = store.mkdirs(); // Create target directory if necessary
                         if (!created) {
                             if (!store.isDirectory()) {
                                 System.out.println("Tried to create the directory " + dir + " but failed");
@@ -179,7 +179,7 @@ public class Class2HTML implements Constants {
     static String referenceType( final String type ) {
         String short_type = Utility.compactClassName(type);
         short_type = Utility.compactClassName(short_type, class_package + ".", true);
-        int index = type.indexOf('['); // Type is an array?
+        final int index = type.indexOf('['); // Type is an array?
         String base_type = type;
         if (index > -1) {
             base_type = type.substring(0, index); // Tack of the `['
@@ -193,7 +193,7 @@ public class Class2HTML implements Constants {
 
 
     static String toHTML( final String str ) {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
             char ch;
             switch (ch = str.charAt(i)) {
@@ -230,7 +230,7 @@ public class Class2HTML implements Constants {
                     + "<FRAME NAME=\"Methods\" SRC=\"" + class_name + "_methods.html\"\n MARGINWIDTH=0 "
                     + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n" + "</FRAMESET></FRAMESET></HTML>");
         }
-        Attribute[] attributes = java_class.getAttributes();
+        final Attribute[] attributes = java_class.getAttributes();
         for (int i = 0; i < attributes.length; i++) {
             attribute_html.writeAttribute(attributes[i], "class" + i);
         }

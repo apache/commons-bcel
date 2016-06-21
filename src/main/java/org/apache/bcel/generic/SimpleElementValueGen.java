@@ -188,7 +188,7 @@ public class SimpleElementValueGen extends ElementValueGen
             throw new RuntimeException(
                     "Dont call getValueString() on a non STRING ElementValue");
         }
-        ConstantUtf8 c = (ConstantUtf8) getConstantPool().getConstant(idx);
+        final ConstantUtf8 c = (ConstantUtf8) getConstantPool().getConstant(idx);
         return c.getBytes();
     }
 
@@ -198,7 +198,7 @@ public class SimpleElementValueGen extends ElementValueGen
             throw new RuntimeException(
                     "Dont call getValueString() on a non STRING ElementValue");
         }
-        ConstantInteger c = (ConstantInteger) getConstantPool().getConstant(idx);
+        final ConstantInteger c = (ConstantInteger) getConstantPool().getConstant(idx);
         return c.getBytes();
     }
 
@@ -209,34 +209,34 @@ public class SimpleElementValueGen extends ElementValueGen
         switch (super.getElementValueType())
         {
         case PRIMITIVE_INT:
-            ConstantInteger c = (ConstantInteger) getConstantPool().getConstant(idx);
+            final ConstantInteger c = (ConstantInteger) getConstantPool().getConstant(idx);
             return Integer.toString(c.getBytes());
         case PRIMITIVE_LONG:
-            ConstantLong j = (ConstantLong) getConstantPool().getConstant(idx);
+            final ConstantLong j = (ConstantLong) getConstantPool().getConstant(idx);
             return Long.toString(j.getBytes());
         case PRIMITIVE_DOUBLE:
-            ConstantDouble d = (ConstantDouble) getConstantPool().getConstant(idx);
+            final ConstantDouble d = (ConstantDouble) getConstantPool().getConstant(idx);
             return Double.toString(d.getBytes());
         case PRIMITIVE_FLOAT:
-            ConstantFloat f = (ConstantFloat) getConstantPool().getConstant(idx);
+            final ConstantFloat f = (ConstantFloat) getConstantPool().getConstant(idx);
             return Float.toString(f.getBytes());
         case PRIMITIVE_SHORT:
-            ConstantInteger s = (ConstantInteger) getConstantPool().getConstant(idx);
+            final ConstantInteger s = (ConstantInteger) getConstantPool().getConstant(idx);
             return Integer.toString(s.getBytes());
         case PRIMITIVE_BYTE:
-            ConstantInteger b = (ConstantInteger) getConstantPool().getConstant(idx);
+            final ConstantInteger b = (ConstantInteger) getConstantPool().getConstant(idx);
             return Integer.toString(b.getBytes());
         case PRIMITIVE_CHAR:
-            ConstantInteger ch = (ConstantInteger) getConstantPool().getConstant(idx);
+            final ConstantInteger ch = (ConstantInteger) getConstantPool().getConstant(idx);
             return Integer.toString(ch.getBytes());
         case PRIMITIVE_BOOLEAN:
-            ConstantInteger bo = (ConstantInteger) getConstantPool().getConstant(idx);
+            final ConstantInteger bo = (ConstantInteger) getConstantPool().getConstant(idx);
             if (bo.getBytes() == 0) {
                 return "false";
             }
             return "true";
         case STRING:
-            ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(idx);
+            final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(idx);
             return cu8.getBytes();
         default:
             throw new RuntimeException(

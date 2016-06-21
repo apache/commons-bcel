@@ -30,14 +30,15 @@ public class MethodGenTestCase extends TestCase {
     public static class Foo {
         public void bar() {
             @SuppressWarnings("unused")
+            final
             int a = 1;
         }
     }
 
     private MethodGen getMethod(final Class<?> cls, final String name) throws ClassNotFoundException {
-        JavaClass jc = Repository.lookupClass(cls);
-        ConstantPoolGen cp = new ConstantPoolGen(jc.getConstantPool());
-        for (Method method : jc.getMethods()) {
+        final JavaClass jc = Repository.lookupClass(cls);
+        final ConstantPoolGen cp = new ConstantPoolGen(jc.getConstantPool());
+        for (final Method method : jc.getMethods()) {
             if (method.getName().equals(name)) {
                 return new MethodGen(method, jc.getClassName(), cp);
             }
@@ -48,12 +49,12 @@ public class MethodGenTestCase extends TestCase {
     }
 
     public void testRemoveLocalVariable() throws Exception {
-        MethodGen mg = getMethod(Foo.class, "bar");
+        final MethodGen mg = getMethod(Foo.class, "bar");
 
-        LocalVariableGen lv = mg.getLocalVariables()[1];
+        final LocalVariableGen lv = mg.getLocalVariables()[1];
         assertEquals("variable name", "a", lv.getName());
-        InstructionHandle start = lv.getStart();
-        InstructionHandle end = lv.getEnd();
+        final InstructionHandle start = lv.getStart();
+        final InstructionHandle end = lv.getEnd();
         assertNotNull("scope start", start);
         assertNotNull("scope end", end);
         assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));
@@ -69,12 +70,12 @@ public class MethodGenTestCase extends TestCase {
     }
 
     public void testRemoveLocalVariables() throws Exception {
-        MethodGen mg = getMethod(Foo.class, "bar");
+        final MethodGen mg = getMethod(Foo.class, "bar");
 
-        LocalVariableGen lv = mg.getLocalVariables()[1];
+        final LocalVariableGen lv = mg.getLocalVariables()[1];
         assertEquals("variable name", "a", lv.getName());
-        InstructionHandle start = lv.getStart();
-        InstructionHandle end = lv.getEnd();
+        final InstructionHandle start = lv.getStart();
+        final InstructionHandle end = lv.getEnd();
         assertNotNull("scope start", start);
         assertNotNull("scope end", end);
         assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));

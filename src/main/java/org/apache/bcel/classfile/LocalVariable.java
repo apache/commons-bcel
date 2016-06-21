@@ -183,9 +183,9 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * Helper method shared with LocalVariableTypeTable
      */
     final String toStringShared( final boolean typeTable ) {
-        String name = getName();
-        String signature = Utility.signatureToString(getSignature(), false);
-        String label = "LocalVariable" + (typeTable ? "Types" : "" );
+        final String name = getName();
+        final String signature = Utility.signatureToString(getSignature(), false);
+        final String label = "LocalVariable" + (typeTable ? "Types" : "" );
         return label + "(start_pc = " + start_pc + ", length = " + length + ", index = "
                 + index + ":" + signature + " " + name + ")";
     }
@@ -254,7 +254,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     public LocalVariable copy() {
         try {
             return (LocalVariable) clone();
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             // TODO should this throw?
         }
         return null;

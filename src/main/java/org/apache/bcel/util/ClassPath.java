@@ -69,11 +69,11 @@ public class ClassPath {
      */
     public ClassPath(final String class_path) {
         this.class_path = class_path;
-        List<PathEntry> list = new ArrayList<>();
-        for (StringTokenizer tok = new StringTokenizer(class_path, File.pathSeparator); tok.hasMoreTokens();) {
-            String path = tok.nextToken();
+        final List<PathEntry> list = new ArrayList<>();
+        for (final StringTokenizer tok = new StringTokenizer(class_path, File.pathSeparator); tok.hasMoreTokens();) {
+            final String path = tok.nextToken();
             if (!path.isEmpty()) {
-                File file = new File(path);
+                final File file = new File(path);
                 try {
                     if (file.exists()) {
                         if (file.isDirectory()) {
@@ -82,7 +82,7 @@ public class ClassPath {
                             list.add(new Zip(new ZipFile(file)));
                         }
                     }
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     if (path.endsWith(".zip") || path.endsWith(".jar")) {
                         System.err.println("CLASSPATH component " + file + ": " + e);
                     }
@@ -124,7 +124,7 @@ public class ClassPath {
     @Override
     public boolean equals( final Object o ) {
         if (o instanceof ClassPath) {
-            ClassPath cp = (ClassPath)o;
+            final ClassPath cp = (ClassPath)o;
             return class_path.equals(cp.toString());
         }
         return false;
@@ -133,10 +133,10 @@ public class ClassPath {
 
     private static void getPathComponents( final String path, final List<String> list ) {
         if (path != null) {
-            StringTokenizer tok = new StringTokenizer(path, File.pathSeparator);
+            final StringTokenizer tok = new StringTokenizer(path, File.pathSeparator);
             while (tok.hasMoreTokens()) {
-                String name = tok.nextToken();
-                File file = new File(name);
+                final String name = tok.nextToken();
+                final File file = new File(name);
                 if (file.exists()) {
                     list.add(name);
                 }
@@ -152,26 +152,26 @@ public class ClassPath {
      */
     // @since 6.0 no longer final
     public static String getClassPath() {
-        String class_path = System.getProperty("java.class.path");
-        String boot_path = System.getProperty("sun.boot.class.path");
-        String ext_path = System.getProperty("java.ext.dirs");
-        List<String> list = new ArrayList<>();
+        final String class_path = System.getProperty("java.class.path");
+        final String boot_path = System.getProperty("sun.boot.class.path");
+        final String ext_path = System.getProperty("java.ext.dirs");
+        final List<String> list = new ArrayList<>();
         getPathComponents(class_path, list);
         getPathComponents(boot_path, list);
-        List<String> dirs = new ArrayList<>();
+        final List<String> dirs = new ArrayList<>();
         getPathComponents(ext_path, dirs);
-        for (String d : dirs) {
-            File ext_dir = new File(d);
-            String[] extensions = ext_dir.list(ARCHIVE_FILTER);
+        for (final String d : dirs) {
+            final File ext_dir = new File(d);
+            final String[] extensions = ext_dir.list(ARCHIVE_FILTER);
             if (extensions != null) {
-                for (String extension : extensions) {
+                for (final String extension : extensions) {
                     list.add(ext_dir.getPath() + File.separatorChar + extension);
                 }
             }
         }
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         String separator = "";
-        for (String path : list) {
+        for (final String path : list) {
             buf.append(separator);
             separator = File.pathSeparator;
             buf.append(path);
@@ -200,7 +200,7 @@ public class ClassPath {
         InputStream is = null;
         try {
             is = getClass().getClassLoader().getResourceAsStream(name + suffix); // may return null
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // ignored
         }
         if (is != null) {
@@ -215,7 +215,7 @@ public class ClassPath {
      * @since 6.0
      */
     public InputStream getResourceAsStream(final String name) {
-        for (PathEntry path : paths) {
+        for (final PathEntry path : paths) {
             InputStream is;
             if ((is = path.getResourceAsStream(name)) != null) {
                 return is;
@@ -230,7 +230,7 @@ public class ClassPath {
      * @since 6.0
      */
     public URL getResource(final String name) {
-        for (PathEntry path : paths) {
+        for (final PathEntry path : paths) {
             URL url;
             if ((url = path.getResource(name)) != null) {
                 return url;
@@ -246,8 +246,8 @@ public class ClassPath {
      * @since 6.0
      */
     public Enumeration<URL> getResources(final String name) {
-        Vector<URL> results = new Vector<>();
-        for (PathEntry path : paths) {
+        final Vector<URL> results = new Vector<>();
+        for (final PathEntry path : paths) {
             URL url;
             if ((url = path.getResource(name)) != null) {
                 results.add(url);
@@ -281,8 +281,8 @@ public class ClassPath {
 
     private ClassFile getClassFileInternal(final String name, final String suffix) throws IOException {
 
-      for (PathEntry path : paths) {
-          ClassFile cf = path.getClassFile(name, suffix);
+      for (final PathEntry path : paths) {
+          final ClassFile cf = path.getClassFile(name, suffix);
 
           if(cf != null) {
               return cf;
@@ -314,7 +314,7 @@ public class ClassPath {
                 throw new IOException("Couldn't find: " + name + suffix);
             }
             dis = new DataInputStream(is);
-            byte[] bytes = new byte[is.available()];
+            final byte[] bytes = new byte[is.available()];
             dis.readFully(bytes);
             return bytes;
         } finally {
@@ -338,7 +338,7 @@ public class ClassPath {
      * @return full (canonical) path for file
      */
     public String getPath( String name ) throws IOException {
-        int index = name.lastIndexOf('.');
+        final int index = name.lastIndexOf('.');
         String suffix = "";
         if (index > 0) {
             suffix = name.substring(index);
@@ -409,7 +409,7 @@ public class ClassPath {
             final File file = new File(dir + File.separatorChar + name.replace('/', File.separatorChar));
             try {
                 return file.exists() ? file.toURI().toURL() : null;
-            } catch (MalformedURLException e) {
+            } catch (final MalformedURLException e) {
                return null;
             }
         }
@@ -420,7 +420,7 @@ public class ClassPath {
             final File file = new File(dir + File.separatorChar + name.replace('/', File.separatorChar));
             try {
                return file.exists() ? new FileInputStream(file) : null;
-            } catch (IOException e) {
+            } catch (final IOException e) {
                return null;
             }
         }
@@ -441,7 +441,7 @@ public class ClassPath {
                 public String getPath() {
                     try {
                         return file.getCanonicalPath();
-                    } catch (IOException e) {
+                    } catch (final IOException e) {
                         return null;
                     }
                 }
@@ -487,7 +487,7 @@ public class ClassPath {
             final ZipEntry entry = zip.getEntry(name);
             try {
                 return (entry != null) ? new URL("jar:file:" + zip.getName() + "!/" + name) : null;
-            } catch (MalformedURLException e) {
+            } catch (final MalformedURLException e) {
                 return null;
            }
         }
@@ -497,7 +497,7 @@ public class ClassPath {
             final ZipEntry entry = zip.getEntry(name);
             try {
                 return (entry != null) ? zip.getInputStream(entry) : null;
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 return null;
             }
         }

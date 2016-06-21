@@ -55,21 +55,21 @@ public class EnumElementValue extends ElementValue
     @Override
     public String stringifyValue()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
+        final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
                 Const.CONSTANT_Utf8);
         return cu8.getBytes();
     }
 
     public String getEnumTypeString()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(typeIdx,
+        final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(typeIdx,
                 Const.CONSTANT_Utf8);
         return cu8.getBytes();// Utility.signatureToString(cu8.getBytes());
     }
 
     public String getEnumValueString()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
+        final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
                 Const.CONSTANT_Utf8);
         return cu8.getBytes();
     }

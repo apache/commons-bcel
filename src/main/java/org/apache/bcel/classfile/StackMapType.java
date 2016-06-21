@@ -143,7 +143,7 @@ public final class StackMapType implements Cloneable {
     public StackMapType copy() {
         try {
             return (StackMapType) clone();
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             // TODO should this throw?
         }
         return null;

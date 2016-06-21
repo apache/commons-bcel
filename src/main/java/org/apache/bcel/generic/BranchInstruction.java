@@ -93,7 +93,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
             throw new ClassGenException("Target of " + super.toString(true)
                     + " is invalid null handle");
         }
-        int t = _target.getPosition();
+        final int t = _target.getPosition();
         if (t < 0) {
             throw new ClassGenException("Invalid branch target position offset for "
                     + super.toString(true) + ":" + t + ":" + _target);
@@ -139,7 +139,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      */
     @Override
     public String toString( final boolean verbose ) {
-        String s = super.toString(verbose);
+        final String s = super.toString(verbose);
         String t = "null";
         if (verbose) {
             if (target != null) {

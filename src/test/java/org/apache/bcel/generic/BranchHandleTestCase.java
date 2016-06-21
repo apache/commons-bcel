@@ -25,7 +25,7 @@ public class BranchHandleTestCase {
     // Test that setInstruction only allows BranchInstructions
     @Test(expected=ClassGenException.class)
     public void testsetInstructionNull() {
-        BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
+        final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
         Assert.assertNotNull(bh);
         bh.setInstruction(null);
         Assert.assertNotNull(bh);
@@ -33,7 +33,7 @@ public class BranchHandleTestCase {
 
     @Test
     public void testsetInstructionBI() {
-        BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
+        final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
         Assert.assertNotNull(bh);
         bh.setInstruction(new GOTO(null));        
         Assert.assertNotNull(bh);
@@ -41,7 +41,7 @@ public class BranchHandleTestCase {
 
     @Test(expected=ClassGenException.class)
     public void testsetInstructionnotBI() {
-        BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
+        final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
         Assert.assertNotNull(bh);
         bh.setInstruction(new NOP());        
         Assert.assertNotNull(bh);

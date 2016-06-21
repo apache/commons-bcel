@@ -63,7 +63,7 @@ public class ElementValuePairGen
      */
     public ElementValuePair getElementNameValuePair()
     {
-        ElementValue immutableValue = value.getElementValue();
+        final ElementValue immutableValue = value.getElementValue();
         return new ElementValuePair(nameIdx, immutableValue, cpool
                 .getConstantPool());
     }

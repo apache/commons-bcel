@@ -48,7 +48,7 @@ public final class Unknown extends Attribute {
     /** @return array of unknown attributes, but just one for each kind.
      */
     static Unknown[] getUnknownAttributes() {
-        Unknown[] unknowns = new Unknown[unknown_attributes.size()];
+        final Unknown[] unknowns = new Unknown[unknown_attributes.size()];
         unknown_attributes.values().toArray(unknowns);
         unknown_attributes.clear();
         return unknowns;
@@ -163,7 +163,7 @@ public final class Unknown extends Attribute {
         }
         String hex;
         if (super.getLength() > 10) {
-            byte[] tmp = new byte[10];
+            final byte[] tmp = new byte[10];
             System.arraycopy(bytes, 0, tmp, 0, 10);
             hex = Utility.toHexString(tmp) + "... (truncated)";
         } else {
@@ -178,7 +178,7 @@ public final class Unknown extends Attribute {
      */
     @Override
     public Attribute copy( final ConstantPool _constant_pool ) {
-        Unknown c = (Unknown) clone();
+        final Unknown c = (Unknown) clone();
         if (bytes != null) {
             c.bytes = new byte[bytes.length];
             System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);

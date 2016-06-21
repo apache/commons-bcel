@@ -70,7 +70,7 @@ public class Frame{
      */
     @Override
     protected Object clone() {
-        Frame f = new Frame(locals.getClone(), stack.getClone());
+        final Frame f = new Frame(locals.getClone(), stack.getClone());
         return f;
     }
 
@@ -108,7 +108,7 @@ public class Frame{
         if (!(o instanceof Frame)) {
             return false; // implies "null" is non-equal.
         }
-        Frame f = (Frame) o;
+        final Frame f = (Frame) o;
         return this.stack.equals(f.stack) && this.locals.equals(f.locals);
     }
 

@@ -71,13 +71,13 @@ public final class Code extends Attribute {
         // Initialize with some default values which will be overwritten later
         this(name_index, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null,
                 (CodeException[]) null, (Attribute[]) null, constant_pool);
-        int code_length = file.readInt();
+        final int code_length = file.readInt();
         code = new byte[code_length]; // Read byte code
         file.readFully(code);
         /* Read exception table that contains all regions where an exception
          * handler is active, i.e., a try { ... } catch() block.
          */
-        int exception_table_length = file.readUnsignedShort();
+        final int exception_table_length = file.readUnsignedShort();
         exception_table = new CodeException[exception_table_length];
         for (int i = 0; i < exception_table_length; i++) {
             exception_table[i] = new CodeException(file);
@@ -85,7 +85,7 @@ public final class Code extends Attribute {
         /* Read all attributes, currently `LineNumberTable' and
          * `LocalVariableTable'
          */
-        int attributes_count = file.readUnsignedShort();
+        final int attributes_count = file.readUnsignedShort();
         attributes = new Attribute[attributes_count];
         for (int i = 0; i < attributes_count; i++) {
             attributes[i] = Attribute.readAttribute(file, constant_pool);
@@ -147,11 +147,11 @@ public final class Code extends Attribute {
         file.writeInt(code.length);
         file.write(code, 0, code.length);
         file.writeShort(exception_table.length);
-        for (CodeException exception : exception_table) {
+        for (final CodeException exception : exception_table) {
             exception.dump(file);
         }
         file.writeShort(attributes.length);
-        for (Attribute attribute : attributes) {
+        for (final Attribute attribute : attributes) {
             attribute.dump(file);
         }
     }
@@ -170,7 +170,7 @@ public final class Code extends Attribute {
      * @return LineNumberTable of Code, if it has one
      */
     public LineNumberTable getLineNumberTable() {
-        for (Attribute attribute : attributes) {
+        for (final Attribute attribute : attributes) {
             if (attribute instanceof LineNumberTable) {
                 return (LineNumberTable) attribute;
             }
@@ -183,7 +183,7 @@ public final class Code extends Attribute {
      * @return LocalVariableTable of Code, if it has one
      */
     public LocalVariableTable getLocalVariableTable() {
-        for (Attribute attribute : attributes) {
+        for (final Attribute attribute : attributes) {
             if (attribute instanceof LocalVariableTable) {
                 return (LocalVariableTable) attribute;
             }
@@ -245,7 +245,7 @@ public final class Code extends Attribute {
     private int calculateLength() {
         int len = 0;
         if (attributes != null) {
-            for (Attribute attribute : attributes) {
+            for (final Attribute attribute : attributes) {
                 len += attribute.getLength() + 6 /*attribute header size*/;
             }
         }
@@ -300,19 +300,19 @@ public final class Code extends Attribute {
      * @return String representation of code chunk.
      */
     public final String toString( final boolean verbose ) {
-        StringBuilder buf = new StringBuilder(100); // CHECKSTYLE IGNORE MagicNumber
+        final StringBuilder buf = new StringBuilder(100); // CHECKSTYLE IGNORE MagicNumber
         buf.append("Code(max_stack = ").append(max_stack).append(", max_locals = ").append(
                 max_locals).append(", code_length = ").append(code.length).append(")\n").append(
                 Utility.codeToString(code, super.getConstantPool(), 0, -1, verbose));
         if (exception_table.length > 0) {
             buf.append("\nException handler(s) = \n").append("From\tTo\tHandler\tType\n");
-            for (CodeException exception : exception_table) {
+            for (final CodeException exception : exception_table) {
                 buf.append(exception.toString(super.getConstantPool(), verbose)).append("\n");
             }
         }
         if (attributes.length > 0) {
             buf.append("\nAttribute(s) = ");
-            for (Attribute attribute : attributes) {
+            for (final Attribute attribute : attributes) {
                 buf.append("\n").append(attribute);
             }
         }
@@ -336,7 +336,7 @@ public final class Code extends Attribute {
      */
     @Override
     public Attribute copy( final ConstantPool _constant_pool ) {
-        Code c = (Code) clone();
+        final Code c = (Code) clone();
         if (code != null) {
             c.code = new byte[code.length];
             System.arraycopy(code, 0, c.code, 0, code.length);

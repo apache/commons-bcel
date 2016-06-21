@@ -22,7 +22,7 @@ import java.io.Serializable;
 public class TestArray01{
 
     public static Object test1() {
-        String[] a = new String[4];
+        final String[] a = new String[4];
         a[0] = "";
         a.equals(null);
         test2(a);

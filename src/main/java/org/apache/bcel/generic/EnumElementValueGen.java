@@ -99,7 +99,7 @@ public class EnumElementValueGen extends ElementValueGen
     @Override
     public String stringifyValue()
     {
-        ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(valueIdx);
+        final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(valueIdx);
         return cu8.getBytes();
         // ConstantString cu8 =
         // (ConstantString)getConstantPool().getConstant(valueIdx);

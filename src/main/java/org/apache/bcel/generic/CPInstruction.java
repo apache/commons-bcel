@@ -93,7 +93,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      */
     @Override
     public String toString( final ConstantPool cp ) {
-        Constant c = cp.getConstant(index);
+        final Constant c = cp.getConstant(index);
         String str = cp.constantToString(c);
         if (c instanceof ConstantClass) {
             str = str.replace('.', '/');
@@ -140,7 +140,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      */
     @Override
     public Type getType( final ConstantPoolGen cpg ) {
-        ConstantPool cp = cpg.getConstantPool();
+        final ConstantPool cp = cpg.getConstantPool();
         String name = cp.getConstantString(index, org.apache.bcel.Const.CONSTANT_Class);
         if (!name.startsWith("[")) {
             name = "L" + name + ";";

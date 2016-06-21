@@ -65,8 +65,8 @@ public abstract class AbstractTestCase extends TestCase
 
     protected Method getMethod(final JavaClass cl, final String methodname)
     {
-        Method[] methods = cl.getMethods();
-        for (Method m : methods) {
+        final Method[] methods = cl.getMethods();
+        for (final Method m : methods) {
             if (m.getName().equals(methodname))
             {
                 return m;
@@ -94,9 +94,9 @@ public abstract class AbstractTestCase extends TestCase
     protected boolean wipe(final String dir, final String name)
     {
         // The parameter is relative to the TESTDATA dir
-        boolean b = wipe(dir + File.separator + name);
+        final boolean b = wipe(dir + File.separator + name);
         final File testDir = new File(TESTDATA, dir);
-        String[] files = testDir.list();
+        final String[] files = testDir.list();
         if (files == null || files.length == 0)
         {
             if (!testDir.delete()) {
@@ -110,16 +110,16 @@ public abstract class AbstractTestCase extends TestCase
 
     public SyntheticRepository createRepos(final String cpentry)
     {
-        ClassPath cp = new ClassPath("target" + File.separator + "testdata"
+        final ClassPath cp = new ClassPath("target" + File.separator + "testdata"
                 + File.separator + cpentry + File.separator);
         return SyntheticRepository.getInstance(cp);
     }
 
     protected Attribute[] findAttribute(final String name, final JavaClass clazz)
     {
-        Attribute[] all = clazz.getAttributes();
-        List<Attribute> chosenAttrsList = new ArrayList<>();
-        for (Attribute element : all) {
+        final Attribute[] all = clazz.getAttributes();
+        final List<Attribute> chosenAttrsList = new ArrayList<>();
+        for (final Attribute element : all) {
             if (verbose) {
                 System.err.println("Attribute: " + element.getName());
             }
@@ -132,8 +132,8 @@ public abstract class AbstractTestCase extends TestCase
 
     protected Attribute findAttribute(final String name, final Attribute[] all)
     {
-        List<Attribute> chosenAttrsList = new ArrayList<>();
-        for (Attribute element : all) {
+        final List<Attribute> chosenAttrsList = new ArrayList<>();
+        for (final Attribute element : all) {
             if (verbose) {
                 System.err.println("Attribute: " + element.getName());
             }
@@ -148,11 +148,11 @@ public abstract class AbstractTestCase extends TestCase
 
     protected String dumpAttributes(final Attribute[] as)
     {
-        StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
         result.append("AttributeArray:[");
         for (int i = 0; i < as.length; i++)
         {
-            Attribute attr = as[i];
+            final Attribute attr = as[i];
             result.append(attr.toString());
             if (i + 1 < as.length) {
                 result.append(",");
@@ -164,11 +164,11 @@ public abstract class AbstractTestCase extends TestCase
 
     protected String dumpAnnotationEntries(final AnnotationEntry[] as)
     {
-        StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
         result.append("[");
         for (int i = 0; i < as.length; i++)
         {
-            AnnotationEntry annotation = as[i];
+            final AnnotationEntry annotation = as[i];
             result.append(annotation.toShortString());
             if (i + 1 < as.length) {
                 result.append(",");
@@ -180,11 +180,11 @@ public abstract class AbstractTestCase extends TestCase
 
     protected String dumpAnnotationEntries(final AnnotationEntryGen[] as)
     {
-        StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
         result.append("[");
         for (int i = 0; i < as.length; i++)
         {
-            AnnotationEntryGen annotation = as[i];
+            final AnnotationEntryGen annotation = as[i];
             result.append(annotation.toShortString());
             if (i + 1 < as.length) {
                 result.append(",");
@@ -197,11 +197,11 @@ public abstract class AbstractTestCase extends TestCase
     public AnnotationEntryGen createFruitAnnotationEntry(final ConstantPoolGen cp,
             final String aFruit, final boolean visibility)
     {
-        SimpleElementValueGen evg = new SimpleElementValueGen(
+        final SimpleElementValueGen evg = new SimpleElementValueGen(
                 ElementValueGen.STRING, cp, aFruit);
-        ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
-        ObjectType t = new ObjectType("SimpleStringAnnotation");
-        List<ElementValuePairGen> elements = new ArrayList<>();
+        final ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
+        final ObjectType t = new ObjectType("SimpleStringAnnotation");
+        final List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
         return new AnnotationEntryGen(t, elements, visibility, cp);
     }

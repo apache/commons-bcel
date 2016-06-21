@@ -54,7 +54,7 @@ public class ClassVector implements java.io.Serializable {
 
 
     public JavaClass[] toArray() {
-        JavaClass[] classes = new JavaClass[vec.size()];
+        final JavaClass[] classes = new JavaClass[vec.size()];
         vec.toArray(classes);
         return classes;
     }

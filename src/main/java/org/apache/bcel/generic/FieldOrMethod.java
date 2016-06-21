@@ -50,9 +50,9 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
     /** @return signature of referenced method/field.
      */
     public String getSignature( final ConstantPoolGen cpg ) {
-        ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
-        ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
+        final ConstantPool cp = cpg.getConstantPool();
+        final ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
+        final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
         return ((ConstantUtf8) cp.getConstant(cnat.getSignatureIndex())).getBytes();
     }
 
@@ -60,9 +60,9 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
     /** @return name of referenced method/field.
      */
     public String getName( final ConstantPoolGen cpg ) {
-        ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
-        ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
+        final ConstantPool cp = cpg.getConstantPool();
+        final ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
+        final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(cmr.getNameAndTypeIndex());
         return ((ConstantUtf8) cp.getConstant(cnat.getNameIndex())).getBytes();
     }
 
@@ -80,9 +80,9 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      */
     @Deprecated
     public String getClassName( final ConstantPoolGen cpg ) {
-        ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
-        String className = cp.getConstantString(cmr.getClassIndex(), Const.CONSTANT_Class);
+        final ConstantPool cp = cpg.getConstantPool();
+        final ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
+        final String className = cp.getConstantString(cmr.getClassIndex(), Const.CONSTANT_Class);
         if (className.startsWith("[")) {
             // Turn array classes into java.lang.Object.
             return "java.lang.Object";
@@ -111,8 +111,8 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      *   type is an array class)
      */
     public ReferenceType getReferenceType( final ConstantPoolGen cpg ) {
-        ConstantPool cp = cpg.getConstantPool();
-        ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
+        final ConstantPool cp = cpg.getConstantPool();
+        final ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         String className = cp.getConstantString(cmr.getClassIndex(), Const.CONSTANT_Class);
         if (className.startsWith("[")) {
             return (ArrayType) Type.getType(className);
@@ -130,7 +130,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      */
     @Override
     public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
-        ReferenceType rt = getReferenceType(cpg);
+        final ReferenceType rt = getReferenceType(cpg);
         if(rt instanceof ObjectType) {
             return (ObjectType)rt;
         }

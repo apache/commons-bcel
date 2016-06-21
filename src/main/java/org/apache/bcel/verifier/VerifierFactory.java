@@ -71,7 +71,7 @@ public class VerifierFactory {
      */
     private static void notify( final String fully_qualified_classname ) {
         // notify the observers
-        for (VerifierFactoryObserver vfo : observers) {
+        for (final VerifierFactoryObserver vfo : observers) {
             vfo.update(fully_qualified_classname);
         }
     }
@@ -85,7 +85,7 @@ public class VerifierFactory {
      * referenced class files.
      */
     public static Verifier[] getVerifiers() {
-        Verifier[] vs = new Verifier[hashMap.values().size()];
+        final Verifier[] vs = new Verifier[hashMap.values().size()];
         return hashMap.values().toArray(vs); // Because vs is big enough, vs is used to store the values into and returned!
     }
 

@@ -103,7 +103,7 @@ public class InstructionHandle {
     // See BCEL-273
     // TODO remove this method in any redesign of BCEL
     public Instruction swapInstruction( final Instruction i ) {
-        Instruction oldInstruction = instruction;
+        final Instruction oldInstruction = instruction;
         instruction = i;
         return oldInstruction;
     }
@@ -122,7 +122,7 @@ public class InstructionHandle {
         if (ih_list == null) {
             return new InstructionHandle(i);
         }
-        InstructionHandle ih = ih_list;
+        final InstructionHandle ih = ih_list;
         ih_list = ih.next;
         ih.setInstruction(i);
         return ih;
@@ -227,7 +227,7 @@ public class InstructionHandle {
         if (!hasTargeters()) {
             return new InstructionTargeter[0];
         }
-        InstructionTargeter[] t = new InstructionTargeter[targeters.size()];
+        final InstructionTargeter[] t = new InstructionTargeter[targeters.size()];
         targeters.toArray(t);
         return t;
     }

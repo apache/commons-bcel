@@ -60,14 +60,14 @@ public abstract class AbstractVerifierTestCase extends TestCase {
         int nbMethods = 0;
 
         try {
-            JavaClass jc = Repository.lookupClass(classname);
+            final JavaClass jc = Repository.lookupClass(classname);
             nbMethods = jc.getMethods().length;
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             fail(e.getMessage());
             return false;
         }
 
-        Verifier verifier = VerifierFactory.getVerifier(classname);
+        final Verifier verifier = VerifierFactory.getVerifier(classname);
         VerificationResult result = verifier.doPass1();
         if (result.getStatus() != VerificationResult.VERIFIED_OK) {
             return false;

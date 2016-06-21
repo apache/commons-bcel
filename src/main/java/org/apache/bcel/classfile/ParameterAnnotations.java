@@ -43,7 +43,7 @@ public abstract class ParameterAnnotations extends Attribute {
             final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(parameter_annotation_type, name_index, length, (ParameterAnnotationEntry[]) null,
                 constant_pool);
-        int num_parameters = input.readUnsignedByte();
+        final int num_parameters = input.readUnsignedByte();
         parameter_annotation_table = new ParameterAnnotationEntry[num_parameters];
         for (int i = 0; i < num_parameters; i++) {
             parameter_annotation_table[i] = new ParameterAnnotationEntry(input, constant_pool);
@@ -107,7 +107,7 @@ public abstract class ParameterAnnotations extends Attribute {
         super.dump(dos);
         dos.writeByte(parameter_annotation_table.length);
 
-        for (ParameterAnnotationEntry element : parameter_annotation_table) {
+        for (final ParameterAnnotationEntry element : parameter_annotation_table) {
             element.dump(dos);
         }
 

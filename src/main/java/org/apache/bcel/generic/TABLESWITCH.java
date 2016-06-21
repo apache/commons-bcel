@@ -61,9 +61,9 @@ public class TABLESWITCH extends Select {
     public void dump( final DataOutputStream out ) throws IOException {
         super.dump(out);
         final int _match_length = getMatch_length();
-        int low = (_match_length > 0) ? super.getMatch(0) : 0;
+        final int low = (_match_length > 0) ? super.getMatch(0) : 0;
         out.writeInt(low);
-        int high = (_match_length > 0) ? super.getMatch(_match_length - 1) : 0;
+        final int high = (_match_length > 0) ? super.getMatch(_match_length - 1) : 0;
         out.writeInt(high);
         for (int i = 0; i < _match_length; i++) {
             out.writeInt(setIndices(i, getTargetOffset(super.getTarget(i))));
@@ -77,8 +77,8 @@ public class TABLESWITCH extends Select {
     @Override
     protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);
-        int low = bytes.readInt();
-        int high = bytes.readInt();
+        final int low = bytes.readInt();
+        final int high = bytes.readInt();
         final int _match_length = high - low + 1;
         setMatch_length(_match_length);
         final short _fixed_length = (short) (13 + _match_length * 4);
