@@ -258,7 +258,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         // check the three methods
         Method[] methods = cgen.getMethods();
         assertEquals(3, methods.length);
-        for(Method method : methods)
+        for (Method method : methods)
         {
             String methodName= method.getName();
             if(methodName.equals("<init>"))
@@ -308,7 +308,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         assertEquals(methodName, expectedNumberOfParmeterAnnotations.length, parameterAnnotations.length);
 
         int i= 0;
-        for(ParameterAnnotationEntry parameterAnnotation : parameterAnnotations)
+        for (ParameterAnnotationEntry parameterAnnotation : parameterAnnotations)
         {
             AnnotationEntry[] annos= parameterAnnotation.getAnnotationEntries();
             int expectedLength = expectedNumberOfParmeterAnnotations[i++];

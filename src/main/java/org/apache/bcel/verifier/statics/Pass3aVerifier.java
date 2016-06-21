@@ -1170,7 +1170,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 return m;
             }
             //method not found, look in super classes
-            for(JavaClass superclass : jc.getSuperClasses()) {
+            for (JavaClass superclass : jc.getSuperClasses()) {
                 m = getMethod(superclass, invoke);
                 if(m != null) {
                     //method found in super class
@@ -1178,7 +1178,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 }
             }
             //method not found, look in super interfaces
-            for(JavaClass superclass : jc.getInterfaces()) {
+            for (JavaClass superclass : jc.getInterfaces()) {
                 m = getMethod(superclass, invoke);
                 if(m != null) {
                     //method found in super interface

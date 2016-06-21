@@ -50,7 +50,7 @@ import org.apache.bcel.generic.InstructionList;
  *   InstructionFinder f   = new InstructionFinder(il);
  *   String            pat = &quot;IfInstruction ICONST_0 GOTO ICONST_1 NOP (IFEQ|IFNE)&quot;;
  *   
- *   for(Iterator i = f.search(pat, constraint); i.hasNext(); ) {
+ *   for (Iterator i = f.search(pat, constraint); i.hasNext(); ) {
  *   InstructionHandle[] match = (InstructionHandle[])i.next();
  *   ...
  *   il.delete(match[1], match[5]);

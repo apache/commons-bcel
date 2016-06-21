@@ -155,7 +155,7 @@ public final class ClassParser {
             readAttributes();
             // Check for unknown variables
             //Unknown[] u = Unknown.getUnknownAttributes();
-            //for(int i=0; i < u.length; i++)
+            //for (int i=0; i < u.length; i++)
             //  System.err.println("WARNING: " + u[i]);
             // Everything should have been read now
             //      if(file.available() > 0) {

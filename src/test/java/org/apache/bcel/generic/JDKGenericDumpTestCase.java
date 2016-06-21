@@ -43,7 +43,7 @@ public class JDKGenericDumpTestCase {
     @Test
     public void testJDKjars() throws Exception {
         File[] jars = listJDKjars();
-        for(File file : jars) {
+        for (File file : jars) {
             testJar(file);
         }
     }
@@ -84,7 +84,7 @@ public class JDKGenericDumpTestCase {
             System.out.println(name + ": "+m.toString() +" "+ src.length+" "+out.length);
             System.out.println(bytesToHex(src));
             System.out.println(bytesToHex(out));
-            for(InstructionHandle ih : il) {
+            for (InstructionHandle ih : il) {
                 System.out.println(ih.toString(false));
             }
             fail("Array comparison failure");
