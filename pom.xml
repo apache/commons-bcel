@@ -199,6 +199,24 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>${commons.rat.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>src/test/resources/**</exclude>
+            <exclude>docs/*.bib</exclude>
+            <exclude>docs/*.mdl</exclude>
+            <exclude>docs/eps/*</exclude>
+            <exclude>**/*.eps</exclude>
+            <exclude>**/*.bnf</exclude>
+            <exclude>**/*.mini</exclude>
+            <exclude>TODO.JustIce</exclude>
+            <exclude>src/examples/Mini/MiniParser$JJCalls</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
       <!-- Allow Clirr to be run from command line -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
