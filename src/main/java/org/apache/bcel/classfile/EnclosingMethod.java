@@ -66,11 +66,21 @@ public class EnclosingMethod extends Attribute {
     }
 
     // Accessors
-    public final int getEnclosingClassIndex() { return classIndex; }  
-    public final int getEnclosingMethodIndex(){ return methodIndex;}
+    public final int getEnclosingClassIndex() {
+        return classIndex;
+    }
 
-    public final void setEnclosingClassIndex(final int idx) {classIndex = idx;}
-    public final void setEnclosingMethodIndex(final int idx){methodIndex= idx;}
+    public final int getEnclosingMethodIndex() {
+        return methodIndex;
+    }
+
+    public final void setEnclosingClassIndex(final int idx) {
+        classIndex = idx;
+    }
+
+    public final void setEnclosingMethodIndex(final int idx) {
+        methodIndex = idx;
+    }
 
     public final ConstantClass getEnclosingClass() {
         ConstantClass c = 
