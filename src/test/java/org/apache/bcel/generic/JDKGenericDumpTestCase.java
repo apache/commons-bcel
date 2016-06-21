@@ -67,7 +67,7 @@ public class JDKGenericDumpTestCase {
             return findJavaHomesOnWindows();
         }
         final Set<String> javaHomes = new HashSet<>(1);
-        javaHomes.add(System.getProperty("java.home"));
+        javaHomes.add(SystemUtils.JAVA_HOME);
         return javaHomes;
     }
 
