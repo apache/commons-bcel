@@ -79,6 +79,7 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver,
 
     @Override
     public synchronized String getElementAt( final int index ) {
-        return (cache.toArray(new String[cache.size()]))[index];
+        return cache.toArray(new String[cache.size()])[index];
     }
+
 }
