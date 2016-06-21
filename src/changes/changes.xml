@@ -62,7 +62,7 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.0" date="2016-06-20" description="Major release with Java 7 and 8 support
+    <release version="6.0" date="2016-06-20" description="Major release with Java 7 and 8 support.
     
 N.B. The Clirr report shows that there are several incompatible changes which in theory can affect
  projects that update to this version. However the changes are considered to be OK, because they
@@ -70,22 +70,8 @@ N.B. The Clirr report shows that there are several incompatible changes which in
  For example, the Visitor interfaces have some new methods. These interfaces have lots of methods,
  so external code will use the provided abstract implementation instead.
 
-
  Classes no longer implement Serializable.
  It does not make sense to serialize BCEL, and it would be unlikely to work anyway.
-
-
- The following classes no longer implement the Constants interface:
- classfile.CodeException (final)
- classfile.LocalVariable (final)
- generic.InstructionFactory
- verifier.statics.Pass2Verifier
- verifier.structurals.UninitializedObjectType
-
-
- The following classes no longer implement the InstructionConstants interface:
- generic.PUSH
-
 
  External code should not have been relying on such classes to provide definitions of the constants.
 
