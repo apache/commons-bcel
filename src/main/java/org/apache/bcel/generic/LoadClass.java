@@ -31,7 +31,7 @@ public interface LoadClass {
      * @return object type that may be loaded or null if a primitive is
      * referenced
      */
-    public ObjectType getLoadClassType( ConstantPoolGen cpg );
+    ObjectType getLoadClassType( ConstantPoolGen cpg );
 
 
     /**
@@ -46,5 +46,5 @@ public interface LoadClass {
      * an int[][].
      * @see #getLoadClassType(ConstantPoolGen)
      */
-    public Type getType( ConstantPoolGen cpg );
+    Type getType( ConstantPoolGen cpg );
 }

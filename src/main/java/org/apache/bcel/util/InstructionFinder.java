@@ -297,14 +297,14 @@ public class InstructionFinder {
      * check constraints that can not expressed with regular expressions.
      * 
      */
-    public static interface CodeConstraint {
+    public interface CodeConstraint {
 
         /**
          * @param match
          *          array of instructions matching the requested pattern
          * @return true if the matched area is really useful
          */
-        public boolean checkCode( InstructionHandle[] match );
+        boolean checkCode( InstructionHandle[] match );
     }
 
     // Initialize pattern map

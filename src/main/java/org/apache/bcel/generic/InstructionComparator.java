@@ -31,7 +31,7 @@ package org.apache.bcel.generic;
  */
 public interface InstructionComparator {
 
-    public static final InstructionComparator DEFAULT = new InstructionComparator() {
+    InstructionComparator DEFAULT = new InstructionComparator() {
 
         @Override
         public boolean equals( final Instruction i1, final Instruction i2 ) {
