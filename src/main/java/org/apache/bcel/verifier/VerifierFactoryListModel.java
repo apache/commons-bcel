@@ -26,26 +26,22 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 /**
- * This class implements an adapter; it implements both a Swing ListModel and
- * a VerifierFactoryObserver.
+ * This class implements an adapter; it implements both a Swing ListModel and a VerifierFactoryObserver.
  *
  * @version $Id$
  */
-public class VerifierFactoryListModel implements VerifierFactoryObserver,
-        javax.swing.ListModel<String> {
+public class VerifierFactoryListModel implements VerifierFactoryObserver, javax.swing.ListModel<String> {
 
     private final List<ListDataListener> listeners = new ArrayList<>();
     private final Set<String> cache = new TreeSet<>();
-
 
     public VerifierFactoryListModel() {
         VerifierFactory.attach(this);
         update(null); // fill cache.
     }
 
-
     @Override
-    public synchronized void update( final String s ) {
+    public synchronized void update(final String s) {
         final Verifier[] verifiers = VerifierFactory.getVerifiers();
         final int num_of_verifiers = verifiers.length;
         cache.clear();
@@ -58,27 +54,23 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver,
         }
     }
 
-
     @Override
-    public synchronized void addListDataListener( final ListDataListener l ) {
+    public synchronized void addListDataListener(final ListDataListener l) {
         listeners.add(l);
     }
 
-
     @Override
-    public synchronized void removeListDataListener( final javax.swing.event.ListDataListener l ) {
+    public synchronized void removeListDataListener(final javax.swing.event.ListDataListener l) {
         listeners.remove(l);
     }
-
 
     @Override
     public synchronized int getSize() {
         return cache.size();
     }
 
-
     @Override
-    public synchronized String getElementAt( final int index ) {
+    public synchronized String getElementAt(final int index) {
         return cache.toArray(new String[cache.size()])[index];
     }
 
