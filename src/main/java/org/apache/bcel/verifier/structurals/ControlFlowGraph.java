@@ -83,7 +83,7 @@ public class ControlFlowGraph{
          * Creates an InstructionHandleImpl object from an InstructionHandle.
          * Creation of one per InstructionHandle suffices. Don't create more.
          */
-        public InstructionContextImpl(final InstructionHandle inst){
+        public InstructionContextImpl(final InstructionHandle inst) {
             if (inst == null) {
                 throw new AssertionViolatedException("Cannot instantiate InstructionContextImpl from NULL.");
             }
@@ -95,13 +95,13 @@ public class ControlFlowGraph{
 
         /* Satisfies InstructionContext.getTag(). */
         @Override
-        public int getTag(){
+        public int getTag() {
             return TAG;
         }
 
         /* Satisfies InstructionContext.setTag(int). */
         @Override
-        public void setTag(final int tag){ // part of InstructionContext interface
+        public void setTag(final int tag) { // part of InstructionContext interface
             TAG = tag;
         }
 
@@ -109,7 +109,7 @@ public class ControlFlowGraph{
          * Returns the exception handlers of this instruction.
          */
         @Override
-        public ExceptionHandler[] getExceptionHandlers(){
+        public ExceptionHandler[] getExceptionHandlers() {
             return exceptionhandlers.getExceptionHandlers(getInstruction());
         }
 
@@ -117,7 +117,7 @@ public class ControlFlowGraph{
          * Returns a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
          */    
         @Override
-        public Frame getOutFrame(final ArrayList<InstructionContext> execChain){
+        public Frame getOutFrame(final ArrayList<InstructionContext> execChain) {
             executionPredecessors = execChain;
 
             Frame org;
@@ -126,7 +126,7 @@ public class ControlFlowGraph{
 
             org = outFrames.get(jsr);
 
-            if (org == null){
+            if (org == null) {
                 throw new AssertionViolatedException(
                     "outFrame not set! This:\n"+this+"\nExecutionChain: "+getExecutionChain()+"\nOutFrames: '"+outFrames+"'.");
             }
@@ -141,7 +141,7 @@ public class ControlFlowGraph{
 
             org = inFrames.get(jsr);
 
-            if (org == null){
+            if (org == null) {
                 throw new AssertionViolatedException("inFrame not set! This:\n"+this+"\nInFrames: '"+inFrames+"'.");
       }
       return org.getClone();
@@ -163,30 +163,30 @@ public class ControlFlowGraph{
          * changed from the one before execute()ing.
          */
         @Override
-        public boolean execute(final Frame inFrame, final ArrayList<InstructionContext> execPreds, final InstConstraintVisitor icv, final ExecutionVisitor ev){
+        public boolean execute(final Frame inFrame, final ArrayList<InstructionContext> execPreds, final InstConstraintVisitor icv, final ExecutionVisitor ev) {
 
             @SuppressWarnings("unchecked") // OK because execPreds is compatible type
             final List<InstructionContext> clone = (List<InstructionContext>) execPreds.clone();
             executionPredecessors = clone;
 
             //sanity check
-            if ( (lastExecutionJSR() == null) && (subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel() ) ){
+            if ( (lastExecutionJSR() == null) && (subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel() ) ) {
                 throw new AssertionViolatedException("Huh?! Am I '"+this+"' part of a subroutine or not?");
             }
-            if ( (lastExecutionJSR() != null) && (subroutines.subroutineOf(getInstruction()) == subroutines.getTopLevel() ) ){
+            if ( (lastExecutionJSR() != null) && (subroutines.subroutineOf(getInstruction()) == subroutines.getTopLevel() ) ) {
                 throw new AssertionViolatedException("Huh?! Am I '"+this+"' part of a subroutine or not?");
             }
 
             Frame inF = inFrames.get(lastExecutionJSR());
-            if (inF == null){// no incoming frame was set, so set it.
+            if (inF == null) {// no incoming frame was set, so set it.
                 inFrames.put(lastExecutionJSR(), inFrame);
                 inF = inFrame;
             }
             else{// if there was an "old" inFrame
-                if (inF.equals(inFrame)){ //shortcut: no need to merge equal frames.
+                if (inF.equals(inFrame)) { //shortcut: no need to merge equal frames.
                     return false;
                 }
-                if (! mergeInFrames(inFrame)){
+                if (! mergeInFrames(inFrame)) {
                     return false;
                 }
             }
@@ -203,7 +203,7 @@ public class ControlFlowGraph{
                 icv.setFrame(workingFrame);
                 getInstruction().accept(icv);
             }
-            catch(StructuralCodeConstraintException ce){
+            catch(StructuralCodeConstraintException ce) {
                 ce.extendMessage("","\nInstructionHandle: "+getInstruction()+"\n");
                 ce.extendMessage("","\nExecution Frame:\n"+workingFrame);
                 extendMessageWithFlow(ce);
@@ -226,7 +226,7 @@ public class ControlFlowGraph{
          * Returns a simple String representation of this InstructionContext.
          */
         @Override
-        public String toString(){
+        public String toString() {
         //TODO: Put information in the brackets, e.g.
         //      Is this an ExceptionHandler? Is this a RET? Is this the start of
         //      a subroutine?
@@ -258,9 +258,9 @@ public class ControlFlowGraph{
          * while execute(Frame, ArrayList)-ing the code represented
          * by the surrounding ControlFlowGraph.
          */
-        private String getExecutionChain(){
+        private String getExecutionChain() {
             String s = this.toString();
-            for (int i=executionPredecessors.size()-1; i>=0; i--){
+            for (int i=executionPredecessors.size()-1; i>=0; i--) {
                 s = executionPredecessors.get(i)+"\n" + s;
             }
             return s;
@@ -272,7 +272,7 @@ public class ControlFlowGraph{
          * This extended message will then reflect the execution flow needed to get to the constraint
          * violation that triggered the throwing of the "e" object.
          */
-        private void extendMessageWithFlow(final StructuralCodeConstraintException e){
+        private void extendMessageWithFlow(final StructuralCodeConstraintException e) {
             String s = "Execution flow:\n";
             e.extendMessage("", s+getExecutionChain());
         }
@@ -281,7 +281,7 @@ public class ControlFlowGraph{
          * Fulfils the contract of InstructionContext.getInstruction().
          */
         @Override
-        public InstructionHandle getInstruction(){
+        public InstructionHandle getInstruction() {
             return instruction;
         }
 
@@ -292,18 +292,18 @@ public class ControlFlowGraph{
          * we were called by this one.
          * Returns null if we were called from the top level.
          */
-        private InstructionContextImpl lastExecutionJSR(){
+        private InstructionContextImpl lastExecutionJSR() {
 
             int size = executionPredecessors.size();
             int retcount = 0;
 
-            for (int i=size-1; i>=0; i--){
+            for (int i=size-1; i>=0; i--) {
                 InstructionContextImpl current = (InstructionContextImpl) (executionPredecessors.get(i));
                 Instruction currentlast = current.getInstruction().getInstruction();
                 if (currentlast instanceof RET) {
                     retcount++;
                 }
-                if (currentlast instanceof JsrInstruction){
+                if (currentlast instanceof JsrInstruction) {
                     retcount--;
                     if (retcount == -1) {
                         return current;
@@ -315,7 +315,7 @@ public class ControlFlowGraph{
 
         /* Satisfies InstructionContext.getSuccessors(). */
         @Override
-        public InstructionContext[] getSuccessors(){
+        public InstructionContext[] getSuccessors() {
             return contextsOf(_getSuccessors());
         }
 
@@ -326,15 +326,15 @@ public class ControlFlowGraph{
          * (opposed to its physical successor) as defined here.
          */
 // TODO: implement caching!
-        private InstructionHandle[] _getSuccessors(){
+        private InstructionHandle[] _getSuccessors() {
             final InstructionHandle[] empty = new InstructionHandle[0];
             final InstructionHandle[] single = new InstructionHandle[1];
 
             Instruction inst = getInstruction().getInstruction();
 
-            if (inst instanceof RET){
+            if (inst instanceof RET) {
                 Subroutine s = subroutines.subroutineOf(getInstruction());
-                if (s==null){ //return empty;
+                if (s==null) { //return empty;
                     // RET in dead code. "empty" would be the correct answer, but we know something about the surrounding project...
                     throw new AssertionViolatedException("Asking for successors of a RET in dead code?!");
                 }
@@ -345,36 +345,36 @@ public class ControlFlowGraph{
 
                 InstructionHandle[] jsrs = s.getEnteringJsrInstructions();
                 InstructionHandle[] ret = new InstructionHandle[jsrs.length];
-                for (int i=0; i<jsrs.length; i++){
+                for (int i=0; i<jsrs.length; i++) {
                     ret[i] = jsrs[i].getNext();
                 }
                 return ret;
             }
 
             // Terminates method normally.
-            if (inst instanceof ReturnInstruction){
+            if (inst instanceof ReturnInstruction) {
                 return empty;
             }
 
             // Terminates method abnormally, because JustIce mandates
             // subroutines not to be protected by exception handlers.
-            if (inst instanceof ATHROW){
+            if (inst instanceof ATHROW) {
                 return empty;
             }
 
             // See method comment.
-            if (inst instanceof JsrInstruction){
+            if (inst instanceof JsrInstruction) {
                 single[0] = ((JsrInstruction) inst).getTarget();
                 return single;
             }
 
-            if (inst instanceof GotoInstruction){
+            if (inst instanceof GotoInstruction) {
                 single[0] = ((GotoInstruction) inst).getTarget();
                 return single;
             }
 
-            if (inst instanceof BranchInstruction){
-                if (inst instanceof Select){
+            if (inst instanceof BranchInstruction) {
+                if (inst instanceof Select) {
                     // BCEL's getTargets() returns only the non-default targets,
                     // thanks to Eli Tilevich for reporting.
                     InstructionHandle[] matchTargets = ((Select) inst).getTargets();
@@ -412,7 +412,7 @@ public class ControlFlowGraph{
      * A Control Flow Graph; with additional JustIce checks
      * @param  method_gen the method generator instance
      */
-    public ControlFlowGraph(final MethodGen method_gen){
+    public ControlFlowGraph(final MethodGen method_gen) {
         this(method_gen, true);
     }
 
@@ -422,7 +422,7 @@ public class ControlFlowGraph{
      * @param enableJustIceCheck if true, additional JustIce checks are performed
      * @since 6.0
      */
-    public ControlFlowGraph(final MethodGen method_gen, final boolean enableJustIceCheck){
+    public ControlFlowGraph(final MethodGen method_gen, final boolean enableJustIceCheck) {
         subroutines = new Subroutines(method_gen, enableJustIceCheck);
         exceptionhandlers = new ExceptionHandlers(method_gen);
 
@@ -437,9 +437,9 @@ public class ControlFlowGraph{
     /**
      * Returns the InstructionContext of a given instruction.
      */
-    public InstructionContext contextOf(final InstructionHandle inst){
+    public InstructionContext contextOf(final InstructionHandle inst) {
         InstructionContext ic = instructionContexts.get(inst);
-        if (ic == null){
+        if (ic == null) {
             throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known!");
         }
         return ic;
@@ -449,9 +449,9 @@ public class ControlFlowGraph{
      * Returns the InstructionContext[] of a given InstructionHandle[],
      * in a naturally ordered manner.
      */
-    public InstructionContext[] contextsOf(final InstructionHandle[] insts){
+    public InstructionContext[] contextsOf(final InstructionHandle[] insts) {
         InstructionContext[] ret = new InstructionContext[insts.length];
-        for (int i=0; i<insts.length; i++){
+        for (int i=0; i<insts.length; i++) {
             ret[i] = contextOf(insts[i]);
         }
         return ret;
@@ -462,7 +462,7 @@ public class ControlFlowGraph{
      * for the method whose control flow is represented by this ControlFlowGraph
      * <B>(NOT ORDERED!)</B>.
      */
-    public InstructionContext[] getInstructionContexts(){
+    public InstructionContext[] getInstructionContexts() {
         InstructionContext[] ret = new InstructionContext[instructionContexts.values().size()];
         return instructionContexts.values().toArray(ret);
     }
@@ -471,7 +471,7 @@ public class ControlFlowGraph{
      * Returns true, if and only if the said instruction is not reachable; that means,
      * if it is not part of this ControlFlowGraph.
      */
-    public boolean isDead(final InstructionHandle i){
+    public boolean isDead(final InstructionHandle i) {
         return subroutines.subroutineOf(i) == null;
     }     
 }

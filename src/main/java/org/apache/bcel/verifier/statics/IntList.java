@@ -30,15 +30,15 @@ public class IntList{
     /** The int are stored as Integer objects here. */
     private final List<Integer> theList;
     /** This constructor creates an empty list. */
-    IntList(){
+    IntList() {
         theList = new ArrayList<>();
     }
     /** Adds an element to the list. */
-    void add(final int i){
+    void add(final int i) {
         theList.add(Integer.valueOf(i));
     }
     /** Checks if the specified int is already in the list. */
-    boolean contains(final int i){
+    boolean contains(final int i) {
         Integer[] ints = new Integer[theList.size()];
         theList.toArray(ints);
         for (Integer k : ints) {

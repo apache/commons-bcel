@@ -212,7 +212,7 @@ class BCELFactory extends EmptyVisitor {
             embed += "f";
         } else if (value instanceof Long) {
             embed += "L";
-        } else if (value instanceof ObjectType){
+        } else if (value instanceof ObjectType) {
             ObjectType ot = (ObjectType) value;
             embed = "new ObjectType(\""+ot.getClassName()+"\")";
         }

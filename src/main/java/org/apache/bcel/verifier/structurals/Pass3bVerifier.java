@@ -78,24 +78,24 @@ public final class Pass3bVerifier extends PassVerifier{
     private static final class InstructionContextQueue{
         private final List<InstructionContext> ics = new Vector<>();
         private final List<ArrayList<InstructionContext>> ecs = new Vector<>();
-        public void add(final InstructionContext ic, final ArrayList<InstructionContext> executionChain){
+        public void add(final InstructionContext ic, final ArrayList<InstructionContext> executionChain) {
             ics.add(ic);
             ecs.add(executionChain);
         }
-        public boolean isEmpty(){
+        public boolean isEmpty() {
             return ics.isEmpty();
         }
-        public void remove(final int i){
+        public void remove(final int i) {
             ics.remove(i);
             ecs.remove(i);
         }
-        public InstructionContext getIC(final int i){
+        public InstructionContext getIC(final int i) {
             return ics.get(i);
         }
-        public ArrayList<InstructionContext> getEC(final int i){
+        public ArrayList<InstructionContext> getEC(final int i) {
             return ecs.get(i);
         }
-        public int size(){
+        public int size() {
             return ics.size();
         }
     } // end Inner Class InstructionContextQueue
@@ -114,7 +114,7 @@ public final class Pass3bVerifier extends PassVerifier{
      *
      * @see org.apache.bcel.verifier.Verifier
      */
-    public Pass3bVerifier(final Verifier owner, final int method_no){
+    public Pass3bVerifier(final Verifier owner, final int method_no) {
         myOwner = owner;
         this.method_no = method_no;
     }
@@ -127,7 +127,7 @@ public final class Pass3bVerifier extends PassVerifier{
    * fix point of frame merging.
      */
     private void circulationPump(final MethodGen m,final ControlFlowGraph cfg, final InstructionContext start,
-            final Frame vanillaFrame, final InstConstraintVisitor icv, final ExecutionVisitor ev){
+            final Frame vanillaFrame, final InstConstraintVisitor icv, final ExecutionVisitor ev) {
         final Random random = new Random();
         InstructionContextQueue icq = new InstructionContextQueue();
 
@@ -137,10 +137,10 @@ public final class Pass3bVerifier extends PassVerifier{
         icq.add(start, new ArrayList<InstructionContext>());
 
         // LOOP!
-        while (!icq.isEmpty()){
+        while (!icq.isEmpty()) {
             InstructionContext u;
             ArrayList<InstructionContext> ec;
-            if (!DEBUG){
+            if (!DEBUG) {
                 int r = random.nextInt(icq.size());
                 u = icq.getIC(r);
                 ec = icq.getEC(r);
@@ -158,7 +158,7 @@ public final class Pass3bVerifier extends PassVerifier{
             ArrayList<InstructionContext> newchain = (ArrayList<InstructionContext>) (ec.clone());
             newchain.add(u);
 
-            if ((u.getInstruction().getInstruction()) instanceof RET){
+            if ((u.getInstruction().getInstruction()) instanceof RET) {
 //System.err.println(u);
                 // We can only follow _one_ successor, the one after the
                 // JSR that was recently executed.
@@ -169,32 +169,32 @@ public final class Pass3bVerifier extends PassVerifier{
                 // Sanity check
                 InstructionContext lastJSR = null;
                 int skip_jsr = 0;
-                for (int ss=oldchain.size()-1; ss >= 0; ss--){
-                    if (skip_jsr < 0){
+                for (int ss=oldchain.size()-1; ss >= 0; ss--) {
+                    if (skip_jsr < 0) {
                         throw new AssertionViolatedException("More RET than JSR in execution chain?!");
                     }
 //System.err.println("+"+oldchain.get(ss));
-                    if ((oldchain.get(ss)).getInstruction().getInstruction() instanceof JsrInstruction){
-                        if (skip_jsr == 0){
+                    if ((oldchain.get(ss)).getInstruction().getInstruction() instanceof JsrInstruction) {
+                        if (skip_jsr == 0) {
                             lastJSR = oldchain.get(ss);
                             break;
                         }
                         skip_jsr--;
                     }
-                    if ((oldchain.get(ss)).getInstruction().getInstruction() instanceof RET){
+                    if ((oldchain.get(ss)).getInstruction().getInstruction() instanceof RET) {
                         skip_jsr++;
                     }
                 }
-                if (lastJSR == null){
+                if (lastJSR == null) {
                     throw new AssertionViolatedException("RET without a JSR before in ExecutionChain?! EC: '"+oldchain+"'.");
                 }
                 JsrInstruction jsr = (JsrInstruction) (lastJSR.getInstruction().getInstruction());
-                if ( theSuccessor != (cfg.contextOf(jsr.physicalSuccessor())) ){
+                if ( theSuccessor != (cfg.contextOf(jsr.physicalSuccessor())) ) {
                     throw new AssertionViolatedException("RET '"+u.getInstruction()+"' info inconsistent: jump back to '"+
                         theSuccessor+"' or '"+cfg.contextOf(jsr.physicalSuccessor())+"'?");
                 }
 
-                if (theSuccessor.execute(u.getOutFrame(oldchain), newchain, icv, ev)){
+                if (theSuccessor.execute(u.getOutFrame(oldchain), newchain, icv, ev)) {
                     @SuppressWarnings("unchecked") // newchain is already of type ArrayList<InstructionContext>
                     ArrayList<InstructionContext> newchainClone = (ArrayList<InstructionContext>) newchain.clone();
                     icq.add(theSuccessor, newchainClone);
@@ -205,7 +205,7 @@ public final class Pass3bVerifier extends PassVerifier{
                 // Normal successors. Add them to the queue of successors.
                 InstructionContext[] succs = u.getSuccessors();
                 for (InstructionContext v : succs) {
-                    if (v.execute(u.getOutFrame(oldchain), newchain, icv, ev)){
+                    if (v.execute(u.getOutFrame(oldchain), newchain, icv, ev)) {
                         @SuppressWarnings("unchecked") // newchain is already of type ArrayList<InstructionContext>
                         ArrayList<InstructionContext> newchainClone = (ArrayList<InstructionContext>) newchain.clone();
                         icq.add(v, newchainClone);
@@ -228,12 +228,12 @@ public final class Pass3bVerifier extends PassVerifier{
                 // by using an empty chain for the exception handlers.
                 //if (v.execute(new Frame(u.getOutFrame(oldchain).getLocals(),
                 // new OperandStack (u.getOutFrame().getStack().maxStack(),
-                // (exc_hds[s].getExceptionType()==null? Type.THROWABLE : exc_hds[s].getExceptionType())) ), newchain), icv, ev){
+                // (exc_hds[s].getExceptionType()==null? Type.THROWABLE : exc_hds[s].getExceptionType())) ), newchain), icv, ev) {
                     //icq.add(v, (ArrayList) newchain.clone());
                 if (v.execute(new Frame(u.getOutFrame(oldchain).getLocals(),
                         new OperandStack (u.getOutFrame(oldchain).getStack().maxStack(),
                         exc_hd.getExceptionType()==null? Type.THROWABLE : exc_hd.getExceptionType())),
-                        new ArrayList<InstructionContext>(), icv, ev)){
+                        new ArrayList<InstructionContext>(), icv, ev)) {
                     icq.add(v, new ArrayList<InstructionContext>());
                 }
             }
@@ -248,15 +248,15 @@ public final class Pass3bVerifier extends PassVerifier{
                 // Maybe some maniac returns from a method when in a subroutine?
                 Frame f = ic.getOutFrame(new ArrayList<InstructionContext>());
                 LocalVariables lvs = f.getLocals();
-                for (int i=0; i<lvs.maxLocals(); i++){
-                    if (lvs.get(i) instanceof UninitializedObjectType){
+                for (int i=0; i<lvs.maxLocals(); i++) {
+                    if (lvs.get(i) instanceof UninitializedObjectType) {
                         this.addMessage("Warning: ReturnInstruction '"+ic+
                             "' may leave method with an uninitialized object in the local variables array '"+lvs+"'.");
                     }
                 }
                 OperandStack os = f.getStack();
-                for (int i=0; i<os.size(); i++){
-                    if (os.peek(i) instanceof UninitializedObjectType){
+                for (int i=0; i<os.size(); i++) {
+                    if (os.peek(i) instanceof UninitializedObjectType) {
                         this.addMessage("Warning: ReturnInstruction '"+ic+
                             "' may leave method with an uninitialized object on the operand stack '"+os+"'.");
                     }
@@ -294,7 +294,7 @@ public final class Pass3bVerifier extends PassVerifier{
      * @throws StructuralCodeConstraintException always
      * @since 6.0
      */
-    public void invalidReturnTypeError(final Type returnedType, final MethodGen m){
+    public void invalidReturnTypeError(final Type returnedType, final MethodGen m) {
         throw new StructuralCodeConstraintException(
             "Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
     }
@@ -310,8 +310,8 @@ public final class Pass3bVerifier extends PassVerifier{
       * @see org.apache.bcel.verifier.statics.Pass2Verifier#getLocalVariablesInfo(int)
       */
     @Override
-    public VerificationResult do_verify(){
-        if (! myOwner.doPass3a(method_no).equals(VerificationResult.VR_OK)){
+    public VerificationResult do_verify() {
+        if (! myOwner.doPass3a(method_no).equals(VerificationResult.VR_OK)) {
             return VerificationResult.VR_NOTYET;
         }
 
@@ -342,14 +342,14 @@ public final class Pass3bVerifier extends PassVerifier{
             icv.setMethodGen(mg);
 
             ////////////// DFA BEGINS HERE ////////////////
-            if (! (mg.isAbstract() || mg.isNative()) ){ // IF mg HAS CODE (See pass 2)
+            if (! (mg.isAbstract() || mg.isNative()) ) { // IF mg HAS CODE (See pass 2)
 
                 ControlFlowGraph cfg = new ControlFlowGraph(mg);
 
                 // Build the initial frame situation for this method.
                 Frame f = new Frame(mg.getMaxLocals(),mg.getMaxStack());
-                if ( !mg.isStatic() ){
-                    if (mg.getName().equals(Const.CONSTRUCTOR_NAME)){
+                if ( !mg.isStatic() ) {
+                    if (mg.getName().equals(Const.CONSTRUCTOR_NAME)) {
                         Frame.setThis(new UninitializedObjectType(ObjectType.getInstance(jc.getClassName())));
                         f.getLocals().set(0, Frame.getThis());
                     }
@@ -360,13 +360,13 @@ public final class Pass3bVerifier extends PassVerifier{
                 }
                 Type[] argtypes = mg.getArgumentTypes();
                 int twoslotoffset = 0;
-                for (int j=0; j<argtypes.length; j++){
+                for (int j=0; j<argtypes.length; j++) {
                     if (argtypes[j] == Type.SHORT || argtypes[j] == Type.BYTE ||
-                        argtypes[j] == Type.CHAR || argtypes[j] == Type.BOOLEAN){
+                        argtypes[j] == Type.CHAR || argtypes[j] == Type.BOOLEAN) {
                         argtypes[j] = Type.INT;
                     }
                     f.getLocals().set(twoslotoffset + j + (mg.isStatic()?0:1), argtypes[j]);
-                    if (argtypes[j].getSize() == 2){
+                    if (argtypes[j].getSize() == 2) {
                         twoslotoffset++;
                         f.getLocals().set(twoslotoffset + j + (mg.isStatic()?0:1), Type.UNKNOWN);
                     }
@@ -374,11 +374,11 @@ public final class Pass3bVerifier extends PassVerifier{
                 circulationPump(mg,cfg, cfg.contextOf(mg.getInstructionList().getStart()), f, icv, ev);
             }
         }
-        catch (VerifierConstraintViolatedException ce){
+        catch (VerifierConstraintViolatedException ce) {
             ce.extendMessage("Constraint violated in method '"+methods[method_no]+"':\n","");
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, ce.getMessage());
         }
-        catch (RuntimeException re){
+        catch (RuntimeException re) {
             // These are internal errors
 
             StringWriter sw = new StringWriter();
@@ -392,7 +392,7 @@ public final class Pass3bVerifier extends PassVerifier{
     }
 
     /** Returns the method number as supplied when instantiating. */
-    public int getMethodNo(){
+    public int getMethodNo() {
         return method_no;
     }
 }

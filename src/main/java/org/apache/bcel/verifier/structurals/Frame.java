@@ -52,7 +52,7 @@ public class Frame{
     /**
      *
      */
-    public Frame(final int maxLocals, final int maxStack){
+    public Frame(final int maxLocals, final int maxStack) {
         locals = new LocalVariables(maxLocals);
         stack = new OperandStack(maxStack);
     }
@@ -60,7 +60,7 @@ public class Frame{
     /**
      *
      */
-    public Frame(final LocalVariables locals, final OperandStack stack){
+    public Frame(final LocalVariables locals, final OperandStack stack) {
         this.locals = locals;
         this.stack = stack;
     }
@@ -69,7 +69,7 @@ public class Frame{
      *
      */
     @Override
-    protected Object clone(){
+    protected Object clone() {
         Frame f = new Frame(locals.getClone(), stack.getClone());
         return f;
     }
@@ -77,21 +77,21 @@ public class Frame{
     /**
      *
      */
-    public Frame getClone(){
+    public Frame getClone() {
         return (Frame) clone();
     }
 
     /**
      *
      */
-    public LocalVariables getLocals(){
+    public LocalVariables getLocals() {
         return locals;
     }
 
     /**
      *
      */
-    public OperandStack getStack(){
+    public OperandStack getStack() {
         return stack;
     }
 
@@ -104,7 +104,7 @@ public class Frame{
      *
      */
     @Override
-    public boolean equals(final Object o){
+    public boolean equals(final Object o) {
         if (!(o instanceof Frame)) {
             return false; // implies "null" is non-equal.
         }
@@ -116,7 +116,7 @@ public class Frame{
      * Returns a String representation of the Frame instance.
      */
     @Override
-    public String toString(){
+    public String toString() {
         String s="Local Variables:\n";
         s += locals;
         s += "OperandStack:\n";

@@ -23,43 +23,43 @@ public class TestReturn02 {
         return new String(data, offset, count);
     }
     
-    public static Object test2(){
+    public static Object test2() {
         return new Object();
     }
     
-    public static boolean test3(){
+    public static boolean test3() {
         return true;
     }
     
-    public static byte test4(){
+    public static byte test4() {
         return 1;
     }
     
-    public static short test5(){
+    public static short test5() {
         return 1;
     }
     
-    public static char test6(){
+    public static char test6() {
         return 'a';
     }
     
-    public static int test7(){
+    public static int test7() {
         return 1;
     }
     
-    public static long test8(){
+    public static long test8() {
         return 1L;
     }
     
-    public static float test9(){
+    public static float test9() {
         return 1.0f;
     }
     
-    public static double test10(){
+    public static double test10() {
         return 1.0;
     }
     
-    public static Object test11(){
+    public static Object test11() {
         return null;
     }
 }

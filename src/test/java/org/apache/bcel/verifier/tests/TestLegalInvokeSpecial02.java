@@ -19,8 +19,8 @@ package org.apache.bcel.verifier.tests;
 
 public abstract class TestLegalInvokeSpecial02 implements Runnable{
 
-    public static void test1(final TestLegalInvokeSpecial02 t, final int i){
-        if(i > 0){
+    public static void test1(final TestLegalInvokeSpecial02 t, final int i) {
+        if(i > 0) {
             t.run();
         }
     }

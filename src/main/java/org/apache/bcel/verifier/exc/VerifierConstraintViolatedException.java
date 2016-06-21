@@ -38,20 +38,20 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
     /**
      * Constructs a new VerifierConstraintViolatedException with null as its error message string.
      */
-    VerifierConstraintViolatedException(){
+    VerifierConstraintViolatedException() {
         super();
     }
     /**
      * Constructs a new VerifierConstraintViolatedException with the specified error message.
      */
-    VerifierConstraintViolatedException(final String message){
+    VerifierConstraintViolatedException(final String message) {
         super(message); // Not that important
         detailMessage = message;
     }
     /**
      * Constructs a new VerifierConstraintViolationException with the specified error message and cause
      */
-    VerifierConstraintViolatedException(final String message, final Throwable initCause){
+    VerifierConstraintViolatedException(final String message, final Throwable initCause) {
         super(message, initCause);
         detailMessage = message;
     }
@@ -62,7 +62,7 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
         is always replaced by the empty string (""). In particular, after invoking this
         method, the error message of this object can no longer be null.
     */
-    public void extendMessage(String pre, String post){
+    public void extendMessage(String pre, String post) {
         if (pre  == null) {
             pre="";
         }
@@ -79,7 +79,7 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
      * @return the error message string of this VerifierConstraintViolatedException.
      */
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return detailMessage;
     }
 }

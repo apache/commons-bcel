@@ -31,14 +31,14 @@ public class ClassConstraintException extends VerificationException{
     /**
      * Constructs a new ClassConstraintException with null as its error message string.
      */
-    public ClassConstraintException(){
+    public ClassConstraintException() {
         super();
     }
 
     /**
      * Constructs a new ClassConstraintException with the specified error message.
      */
-    public ClassConstraintException(final String message){
+    public ClassConstraintException(final String message) {
         super (message);
     }
 
@@ -46,7 +46,7 @@ public class ClassConstraintException extends VerificationException{
      * Constructs a new ClassConstraintException with the specified error message and cause
      * @since 6.0
      */
-    public ClassConstraintException(final String message, final Throwable initCause){
+    public ClassConstraintException(final String message, final Throwable initCause) {
         super(message, initCause);
     }
 }

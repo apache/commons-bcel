@@ -29,13 +29,13 @@ public abstract class CodeConstraintException extends VerificationException{
     /**
      * Constructs a new CodeConstraintException with null as its error message string.
      */
-    CodeConstraintException(){
+    CodeConstraintException() {
         super();
     }
     /**
      * Constructs a new CodeConstraintException with the specified error message.
      */
-    CodeConstraintException(final String message){
+    CodeConstraintException(final String message) {
         super(message);
     }    
 }

@@ -35,16 +35,16 @@ public class LocalVariablesInfo{
     private final LocalVariableInfo[] localVariableInfos;
 
     /** The constructor. */
-    LocalVariablesInfo(final int max_locals){
+    LocalVariablesInfo(final int max_locals) {
         localVariableInfos = new LocalVariableInfo[max_locals];
-        for (int i=0; i<max_locals; i++){
+        for (int i=0; i<max_locals; i++) {
             localVariableInfos[i] = new LocalVariableInfo();
         }
     }
 
     /** Returns the LocalVariableInfo for the given slot. */
-    public LocalVariableInfo getLocalVariableInfo(final int slot){
-        if (slot < 0 || slot >= localVariableInfos.length){
+    public LocalVariableInfo getLocalVariableInfo(final int slot) {
+        if (slot < 0 || slot >= localVariableInfos.length) {
             throw new AssertionViolatedException("Slot number for local variable information out of range.");
         }
         return localVariableInfos[slot];
@@ -59,7 +59,7 @@ public class LocalVariablesInfo{
     public void add(final int slot, final String name, final int startpc, final int length, final Type t) throws LocalVariableInfoInconsistentException{
         // The add operation on LocalVariableInfo may throw the '...Inconsistent...' exception, we don't throw it explicitely here.
 
-        if (slot < 0 || slot >= localVariableInfos.length){
+        if (slot < 0 || slot >= localVariableInfos.length) {
             throw new AssertionViolatedException("Slot number for local variable information out of range.");
         }
 

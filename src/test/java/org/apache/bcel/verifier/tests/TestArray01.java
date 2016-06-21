@@ -21,7 +21,7 @@ import java.io.Serializable;
 
 public class TestArray01{
 
-    public static Object test1(){
+    public static Object test1() {
         String[] a = new String[4];
         a[0] = "";
         a.equals(null);
@@ -31,24 +31,24 @@ public class TestArray01{
         return a;
     }
 
-    public static void test2(final Object o){
+    public static void test2(final Object o) {
     }
 
-    public static void test3(final Serializable o){
+    public static void test3(final Serializable o) {
     }
 
-    public static void test4(final Cloneable o){
+    public static void test4(final Cloneable o) {
     }
 
-    public static Serializable test5(){
+    public static Serializable test5() {
         return new Object[1];
     }
 
-    public static Cloneable test6(){
+    public static Cloneable test6() {
         return new Object[1];
     }
 
-    public static Object foo(final String s){
+    public static Object foo(final String s) {
         return s;
     }
 }

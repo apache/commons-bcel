@@ -42,14 +42,14 @@ public class LocalVariableInfo{
      * Adds a name of a local variable and a certain slot to our 'names'
      * (Hashtable) database.
      */
-    private void setName(final int offset, final String name){
+    private void setName(final int offset, final String name) {
         names.put(Integer.toString(offset), name);
     }
     /**
      * Adds a type of a local variable and a certain slot to our 'types'
      * (Hashtable) database.
      */
-    private void setType(final int offset, final Type t){
+    private void setType(final int offset, final Type t) {
         types.put(Integer.toString(offset), t);
     }
 
@@ -61,7 +61,7 @@ public class LocalVariableInfo{
      * May return 'null' if nothing is known about the type of this local
      * variable slot at the given bytecode offset.
      */
-    public Type getType(final int offset){
+    public Type getType(final int offset) {
         return types.get(Integer.toString(offset));
     }
     /**
@@ -72,7 +72,7 @@ public class LocalVariableInfo{
      * May return 'null' if nothing is known about the type of this local
      * variable slot at the given bytecode offset.
      */
-    public String getName(final int offset){
+    public String getName(final int offset) {
         return names.get(Integer.toString(offset));
     }
     /**
@@ -81,7 +81,7 @@ public class LocalVariableInfo{
      *         with already gathered information.
      */
     public void add(final String name, final int startpc, final int length, final Type t) throws LocalVariableInfoInconsistentException{
-        for (int i=startpc; i<=startpc+length; i++){ // incl/incl-notation!
+        for (int i=startpc; i<=startpc+length; i++) { // incl/incl-notation!
             add(i,name,t);
         }
     }
@@ -92,14 +92,14 @@ public class LocalVariableInfo{
      *         with already gathered information.
      */
     private void add(final int offset, final String name, final Type t) throws LocalVariableInfoInconsistentException{
-        if (getName(offset) != null){
-            if (! getName(offset).equals(name)){
+        if (getName(offset) != null) {
+            if (! getName(offset).equals(name)) {
                 throw new LocalVariableInfoInconsistentException("At bytecode offset '"+offset+
                     "' a local variable has two different names: '"+getName(offset)+"' and '"+name+"'.");
             }
         }
-        if (getType(offset) != null){
-            if (! getType(offset).equals(t)){
+        if (getType(offset) != null) {
+            if (! getType(offset).equals(t)) {
                 throw new LocalVariableInfoInconsistentException("At bytecode offset '"+offset+
                     "' a local variable has two different types: '"+getType(offset)+"' and '"+t+"'.");
             }

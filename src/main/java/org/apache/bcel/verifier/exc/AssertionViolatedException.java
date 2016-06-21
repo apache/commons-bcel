@@ -29,14 +29,14 @@ public final class AssertionViolatedException extends RuntimeException{
     /** The error message. */
     private String detailMessage;
     /** Constructs a new AssertionViolatedException with null as its error message string. */
-    public AssertionViolatedException(){
+    public AssertionViolatedException() {
         super();
     }
     /**
      * Constructs a new AssertionViolatedException with the specified error message preceded
      * by &quot;INTERNAL ERROR: &quot;.
      */
-    public AssertionViolatedException(String message){
+    public AssertionViolatedException(String message) {
         super(message = "INTERNAL ERROR: "+message); // Thanks to Java, the constructor call here must be first.
         detailMessage=message;
     }
@@ -53,7 +53,7 @@ public final class AssertionViolatedException extends RuntimeException{
         is always replaced by the empty string (""). In particular, after invoking this
         method, the error message of this object can no longer be null.
     */
-    public void extendMessage(String pre, String post){
+    public void extendMessage(String pre, String post) {
         if (pre  == null) {
             pre="";
         }
@@ -70,14 +70,14 @@ public final class AssertionViolatedException extends RuntimeException{
      * @return the error message string of this AssertionViolatedException.
      */
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return detailMessage;
     }
 
     /** 
      * DO NOT USE. It's for experimental testing during development only.
      */
-    public static void main(final String[] args){
+    public static void main(final String[] args) {
         AssertionViolatedException ave = new AssertionViolatedException("Oops!");
         ave.extendMessage("\nFOUND:\n\t","\nExiting!!\n");
         throw ave;

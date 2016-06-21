@@ -115,8 +115,8 @@ public abstract class Type {
      * returns the given type.
      * @since 6.0
      */
-    public Type normalizeForStackOrLocal(){
-        if (this == Type.BOOLEAN || this == Type.BYTE || this == Type.SHORT || this == Type.CHAR){
+    public Type normalizeForStackOrLocal() {
+        if (this == Type.BOOLEAN || this == Type.BYTE || this == Type.SHORT || this == Type.CHAR) {
             return Type.INT;
         }
         return this;

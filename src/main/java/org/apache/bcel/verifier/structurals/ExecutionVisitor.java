@@ -75,13 +75,13 @@ public class ExecutionVisitor extends EmptyVisitor{
     /**
      * Constructor. Constructs a new instance of this class.
      */
-    public ExecutionVisitor(){}
+    public ExecutionVisitor() {}
 
     /**
      * The OperandStack from the current Frame we're operating on.
      * @see #setFrame(Frame)
      */
-    private OperandStack stack(){
+    private OperandStack stack() {
         return frame.getStack();
     }
 
@@ -89,14 +89,14 @@ public class ExecutionVisitor extends EmptyVisitor{
      * The LocalVariables from the current Frame we're operating on.
      * @see #setFrame(Frame)
      */
-    private LocalVariables locals(){
+    private LocalVariables locals() {
         return frame.getLocals();
     }
 
     /**
      * Sets the ConstantPoolGen needed for symbolic execution.
      */
-    public void setConstantPoolGen(final ConstantPoolGen cpg){ // TODO could be package-protected?
+    public void setConstantPoolGen(final ConstantPoolGen cpg) { // TODO could be package-protected?
         this.cpg = cpg;
     }
 
@@ -106,12 +106,12 @@ public class ExecutionVisitor extends EmptyVisitor{
      * instance, <B>SET THE ConstantPoolGen FIRST</B>.
      * @see #setConstantPoolGen(ConstantPoolGen)
      */
-    public void setFrame(final Frame f){ // TODO could be package-protected?
+    public void setFrame(final Frame f) { // TODO could be package-protected?
         this.frame = f;
     }
 
     ///** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    //public void visitWIDE(WIDE o){
+    //public void visitWIDE(WIDE o) {
     // The WIDE instruction is modelled as a flag
     // of the embedded instructions in BCEL.
     // Therefore BCEL checks for possible errors
@@ -122,11 +122,11 @@ public class ExecutionVisitor extends EmptyVisitor{
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitAALOAD(final AALOAD o){
+    public void visitAALOAD(final AALOAD o) {
         stack().pop();                                                        // pop the index int
 //System.out.print(stack().peek());
         Type t = stack().pop(); // Pop Array type
-        if (t == Type.NULL){
+        if (t == Type.NULL) {
             stack().push(Type.NULL);
         }    // Do nothing stackwise --- a NullPointerException is thrown at Run-Time
         else{
@@ -136,49 +136,49 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitAASTORE(final AASTORE o){
+    public void visitAASTORE(final AASTORE o) {
         stack().pop();
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitACONST_NULL(final ACONST_NULL o){
+    public void visitACONST_NULL(final ACONST_NULL o) {
         stack().push(Type.NULL);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitALOAD(final ALOAD o){
+    public void visitALOAD(final ALOAD o) {
         stack().push(locals().get(o.getIndex()));
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitANEWARRAY(final ANEWARRAY o){
+    public void visitANEWARRAY(final ANEWARRAY o) {
         stack().pop(); //count
         stack().push( new ArrayType(o.getType(cpg), 1) );
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitARETURN(final ARETURN o){
+    public void visitARETURN(final ARETURN o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitARRAYLENGTH(final ARRAYLENGTH o){
+    public void visitARRAYLENGTH(final ARRAYLENGTH o) {
         stack().pop();
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitASTORE(final ASTORE o){
+    public void visitASTORE(final ASTORE o) {
         locals().set(o.getIndex(), stack().pop());
         //System.err.println("TODO-DEBUG:    set LV '"+o.getIndex()+"' to '"+locals().get(o.getIndex())+"'.");
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitATHROW(final ATHROW o){
+    public void visitATHROW(final ATHROW o) {
         Type t = stack().pop();
         stack().clear();
         if (t.equals(Type.NULL)) {
@@ -190,7 +190,7 @@ public class ExecutionVisitor extends EmptyVisitor{
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitBALOAD(final BALOAD o){
+    public void visitBALOAD(final BALOAD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
@@ -198,7 +198,7 @@ public class ExecutionVisitor extends EmptyVisitor{
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitBASTORE(final BASTORE o){
+    public void visitBASTORE(final BASTORE o) {
         stack().pop();
         stack().pop();
         stack().pop();
@@ -206,27 +206,27 @@ public class ExecutionVisitor extends EmptyVisitor{
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitBIPUSH(final BIPUSH o){
+    public void visitBIPUSH(final BIPUSH o) {
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitCALOAD(final CALOAD o){
+    public void visitCALOAD(final CALOAD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitCASTORE(final CASTORE o){
+    public void visitCASTORE(final CASTORE o) {
         stack().pop();
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitCHECKCAST(final CHECKCAST o){
+    public void visitCHECKCAST(final CHECKCAST o) {
         // It's possibly wrong to do so, but SUN's
         // ByteCode verifier seems to do (only) this, too.
         // TODO: One could use a sophisticated analysis here to check
@@ -238,122 +238,122 @@ public class ExecutionVisitor extends EmptyVisitor{
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitD2F(final D2F o){
+    public void visitD2F(final D2F o) {
         stack().pop();
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitD2I(final D2I o){
+    public void visitD2I(final D2I o) {
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitD2L(final D2L o){
+    public void visitD2L(final D2L o) {
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDADD(final DADD o){
+    public void visitDADD(final DADD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDALOAD(final DALOAD o){
+    public void visitDALOAD(final DALOAD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDASTORE(final DASTORE o){
+    public void visitDASTORE(final DASTORE o) {
         stack().pop();
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDCMPG(final DCMPG o){
+    public void visitDCMPG(final DCMPG o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDCMPL(final DCMPL o){
+    public void visitDCMPL(final DCMPL o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDCONST(final DCONST o){
+    public void visitDCONST(final DCONST o) {
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDDIV(final DDIV o){
-        stack().pop();
-        stack().pop();
-        stack().push(Type.DOUBLE);
-    }
-    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    @Override
-    public void visitDLOAD(final DLOAD o){
-        stack().push(Type.DOUBLE);
-    }
-    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    @Override
-    public void visitDMUL(final DMUL o){
+    public void visitDDIV(final DDIV o) {
         stack().pop();
         stack().pop();
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDNEG(final DNEG o){
+    public void visitDLOAD(final DLOAD o) {
+        stack().push(Type.DOUBLE);
+    }
+    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
+    @Override
+    public void visitDMUL(final DMUL o) {
+        stack().pop();
         stack().pop();
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDREM(final DREM o){
+    public void visitDNEG(final DNEG o) {
+        stack().pop();
+        stack().push(Type.DOUBLE);
+    }
+    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
+    @Override
+    public void visitDREM(final DREM o) {
         stack().pop();
         stack().pop();
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDRETURN(final DRETURN o){
+    public void visitDRETURN(final DRETURN o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDSTORE(final DSTORE o){
+    public void visitDSTORE(final DSTORE o) {
         locals().set(o.getIndex(), stack().pop());
         locals().set(o.getIndex()+1, Type.UNKNOWN);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDSUB(final DSUB o){
+    public void visitDSUB(final DSUB o) {
         stack().pop();
         stack().pop();
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDUP(final DUP o){
+    public void visitDUP(final DUP o) {
         Type t = stack().pop();
         stack().push(t);
         stack().push(t);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDUP_X1(final DUP_X1 o){
+    public void visitDUP_X1(final DUP_X1 o) {
         Type w1 = stack().pop();
         Type w2 = stack().pop();
         stack().push(w1);
@@ -362,10 +362,10 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDUP_X2(final DUP_X2 o){
+    public void visitDUP_X2(final DUP_X2 o) {
         Type w1 = stack().pop();
         Type w2 = stack().pop();
-        if (w2.getSize() == 2){
+        if (w2.getSize() == 2) {
             stack().push(w1);
             stack().push(w2);
             stack().push(w1);
@@ -380,9 +380,9 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDUP2(final DUP2 o){
+    public void visitDUP2(final DUP2 o) {
         Type t = stack().pop();
-        if (t.getSize() == 2){
+        if (t.getSize() == 2) {
             stack().push(t);
             stack().push(t);
         }
@@ -396,9 +396,9 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDUP2_X1(final DUP2_X1 o){
+    public void visitDUP2_X1(final DUP2_X1 o) {
         Type t = stack().pop();
-        if (t.getSize() == 2){
+        if (t.getSize() == 2) {
             Type u = stack().pop();
             stack().push(t);
             stack().push(u);
@@ -416,11 +416,11 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitDUP2_X2(final DUP2_X2 o){
+    public void visitDUP2_X2(final DUP2_X2 o) {
         Type t = stack().pop();
-        if (t.getSize() == 2){
+        if (t.getSize() == 2) {
             Type u = stack().pop();
-            if (u.getSize() == 2){
+            if (u.getSize() == 2) {
                 stack().push(t);
                 stack().push(u);
                 stack().push(t);
@@ -435,7 +435,7 @@ public class ExecutionVisitor extends EmptyVisitor{
         else{ //t.getSize() is 1
             Type u = stack().pop();
             Type v = stack().pop();
-            if (v.getSize() == 2){
+            if (v.getSize() == 2) {
                 stack().push(u);
                 stack().push(t);
                 stack().push(v);
@@ -454,114 +454,114 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitF2D(final F2D o){
+    public void visitF2D(final F2D o) {
         stack().pop();
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitF2I(final F2I o){
+    public void visitF2I(final F2I o) {
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitF2L(final F2L o){
+    public void visitF2L(final F2L o) {
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFADD(final FADD o){
+    public void visitFADD(final FADD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFALOAD(final FALOAD o){
+    public void visitFALOAD(final FALOAD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFASTORE(final FASTORE o){
+    public void visitFASTORE(final FASTORE o) {
         stack().pop();
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFCMPG(final FCMPG o){
+    public void visitFCMPG(final FCMPG o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFCMPL(final FCMPL o){
+    public void visitFCMPL(final FCMPL o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFCONST(final FCONST o){
+    public void visitFCONST(final FCONST o) {
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFDIV(final FDIV o){
-        stack().pop();
-        stack().pop();
-        stack().push(Type.FLOAT);
-    }
-    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    @Override
-    public void visitFLOAD(final FLOAD o){
-        stack().push(Type.FLOAT);
-    }
-    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    @Override
-    public void visitFMUL(final FMUL o){
+    public void visitFDIV(final FDIV o) {
         stack().pop();
         stack().pop();
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFNEG(final FNEG o){
+    public void visitFLOAD(final FLOAD o) {
+        stack().push(Type.FLOAT);
+    }
+    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
+    @Override
+    public void visitFMUL(final FMUL o) {
+        stack().pop();
         stack().pop();
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFREM(final FREM o){
+    public void visitFNEG(final FNEG o) {
+        stack().pop();
+        stack().push(Type.FLOAT);
+    }
+    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
+    @Override
+    public void visitFREM(final FREM o) {
         stack().pop();
         stack().pop();
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFRETURN(final FRETURN o){
+    public void visitFRETURN(final FRETURN o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFSTORE(final FSTORE o){
+    public void visitFSTORE(final FSTORE o) {
         locals().set(o.getIndex(), stack().pop());
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitFSUB(final FSUB o){
+    public void visitFSUB(final FSUB o) {
         stack().pop();
         stack().pop();
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitGETFIELD(final GETFIELD o){
+    public void visitGETFIELD(final GETFIELD o) {
         stack().pop();
         Type t = o.getFieldType(cpg);
         if (    t.equals(Type.BOOLEAN)    ||
@@ -574,7 +574,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitGETSTATIC(final GETSTATIC o){
+    public void visitGETSTATIC(final GETSTATIC o) {
         Type t = o.getFieldType(cpg);
         if (    t.equals(Type.BOOLEAN)    ||
                     t.equals(Type.CHAR)            ||
@@ -586,204 +586,204 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitGOTO(final GOTO o){
+    public void visitGOTO(final GOTO o) {
         // no stack changes.
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitGOTO_W(final GOTO_W o){
+    public void visitGOTO_W(final GOTO_W o) {
         // no stack changes.
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitI2B(final I2B o){
+    public void visitI2B(final I2B o) {
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitI2C(final I2C o){
+    public void visitI2C(final I2C o) {
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitI2D(final I2D o){
+    public void visitI2D(final I2D o) {
         stack().pop();
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitI2F(final I2F o){
+    public void visitI2F(final I2F o) {
         stack().pop();
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitI2L(final I2L o){
+    public void visitI2L(final I2L o) {
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitI2S(final I2S o){
+    public void visitI2S(final I2S o) {
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIADD(final IADD o){
-        stack().pop();
-        stack().pop();
-        stack().push(Type.INT);
-    }
-    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    @Override
-    public void visitIALOAD(final IALOAD o){
+    public void visitIADD(final IADD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIAND(final IAND o){
+    public void visitIALOAD(final IALOAD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIASTORE(final IASTORE o){
-        stack().pop();
-        stack().pop();
-        stack().pop();
-    }
-    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    @Override
-    public void visitICONST(final ICONST o){
-        stack().push(Type.INT);
-    }
-    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    @Override
-    public void visitIDIV(final IDIV o){
+    public void visitIAND(final IAND o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIF_ACMPEQ(final IF_ACMPEQ o){
+    public void visitIASTORE(final IASTORE o) {
         stack().pop();
-        stack().pop();
-    }
-    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    @Override
-    public void visitIF_ACMPNE(final IF_ACMPNE o){
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIF_ICMPEQ(final IF_ICMPEQ o){
+    public void visitICONST(final ICONST o) {
+        stack().push(Type.INT);
+    }
+    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
+    @Override
+    public void visitIDIV(final IDIV o) {
+        stack().pop();
+        stack().pop();
+        stack().push(Type.INT);
+    }
+    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
+    @Override
+    public void visitIF_ACMPEQ(final IF_ACMPEQ o) {
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIF_ICMPGE(final IF_ICMPGE o){
+    public void visitIF_ACMPNE(final IF_ACMPNE o) {
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIF_ICMPGT(final IF_ICMPGT o){
+    public void visitIF_ICMPEQ(final IF_ICMPEQ o) {
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIF_ICMPLE(final IF_ICMPLE o){
+    public void visitIF_ICMPGE(final IF_ICMPGE o) {
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIF_ICMPLT(final IF_ICMPLT o){
+    public void visitIF_ICMPGT(final IF_ICMPGT o) {
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIF_ICMPNE(final IF_ICMPNE o){
+    public void visitIF_ICMPLE(final IF_ICMPLE o) {
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIFEQ(final IFEQ o){
+    public void visitIF_ICMPLT(final IF_ICMPLT o) {
+        stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIFGE(final IFGE o){
+    public void visitIF_ICMPNE(final IF_ICMPNE o) {
+        stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIFGT(final IFGT o){
+    public void visitIFEQ(final IFEQ o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIFLE(final IFLE o){
+    public void visitIFGE(final IFGE o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIFLT(final IFLT o){
+    public void visitIFGT(final IFGT o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIFNE(final IFNE o){
+    public void visitIFLE(final IFLE o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIFNONNULL(final IFNONNULL o){
+    public void visitIFLT(final IFLT o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIFNULL(final IFNULL o){
+    public void visitIFNE(final IFNE o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIINC(final IINC o){
+    public void visitIFNONNULL(final IFNONNULL o) {
+        stack().pop();
+    }
+    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
+    @Override
+    public void visitIFNULL(final IFNULL o) {
+        stack().pop();
+    }
+    /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
+    @Override
+    public void visitIINC(final IINC o) {
         // stack is not changed.
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitILOAD(final ILOAD o){
+    public void visitILOAD(final ILOAD o) {
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIMUL(final IMUL o){
+    public void visitIMUL(final IMUL o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitINEG(final INEG o){
+    public void visitINEG(final INEG o) {
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitINSTANCEOF(final INSTANCEOF o){
+    public void visitINSTANCEOF(final INSTANCEOF o) {
         stack().pop();
         stack().push(Type.INT);
     }
@@ -792,15 +792,15 @@ public class ExecutionVisitor extends EmptyVisitor{
      * @since 6.0
      */ 
     @Override
-    public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o){
-        for (int i=0; i<o.getArgumentTypes(cpg).length; i++){
+    public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
+        for (int i=0; i<o.getArgumentTypes(cpg).length; i++) {
             stack().pop();
         }
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
         // method.
-        if (o.getReturnType(cpg) != Type.VOID){
+        if (o.getReturnType(cpg) != Type.VOID) {
             Type t = o.getReturnType(cpg);
             if (    t.equals(Type.BOOLEAN)    ||
                         t.equals(Type.CHAR)            ||
@@ -813,16 +813,16 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitINVOKEINTERFACE(final INVOKEINTERFACE o){
+    public void visitINVOKEINTERFACE(final INVOKEINTERFACE o) {
         stack().pop();    //objectref
-        for (int i=0; i<o.getArgumentTypes(cpg).length; i++){
+        for (int i=0; i<o.getArgumentTypes(cpg).length; i++) {
             stack().pop();
         }
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
         // method.
-        if (o.getReturnType(cpg) != Type.VOID){
+        if (o.getReturnType(cpg) != Type.VOID) {
             Type t = o.getReturnType(cpg);
             if (    t.equals(Type.BOOLEAN)    ||
                         t.equals(Type.CHAR)            ||
@@ -835,24 +835,24 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitINVOKESPECIAL(final INVOKESPECIAL o){
-        if (o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME)){
+    public void visitINVOKESPECIAL(final INVOKESPECIAL o) {
+        if (o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME)) {
             UninitializedObjectType t = (UninitializedObjectType) stack().peek(o.getArgumentTypes(cpg).length);
-            if (t == Frame.getThis()){
+            if (t == Frame.getThis()) {
                 Frame.setThis(null);
             }
             stack().initializeObject(t);
             locals().initializeObject(t);
         }
         stack().pop();    //objectref
-        for (int i=0; i<o.getArgumentTypes(cpg).length; i++){
+        for (int i=0; i<o.getArgumentTypes(cpg).length; i++) {
             stack().pop();
         }
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
         // method.
-        if (o.getReturnType(cpg) != Type.VOID){
+        if (o.getReturnType(cpg) != Type.VOID) {
             Type t = o.getReturnType(cpg);
             if (    t.equals(Type.BOOLEAN)    ||
                         t.equals(Type.CHAR)            ||
@@ -865,15 +865,15 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitINVOKESTATIC(final INVOKESTATIC o){
-        for (int i=0; i<o.getArgumentTypes(cpg).length; i++){
+    public void visitINVOKESTATIC(final INVOKESTATIC o) {
+        for (int i=0; i<o.getArgumentTypes(cpg).length; i++) {
             stack().pop();
         }
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
         // method.
-        if (o.getReturnType(cpg) != Type.VOID){
+        if (o.getReturnType(cpg) != Type.VOID) {
             Type t = o.getReturnType(cpg);
             if (    t.equals(Type.BOOLEAN)    ||
                         t.equals(Type.CHAR)            ||
@@ -886,16 +886,16 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitINVOKEVIRTUAL(final INVOKEVIRTUAL o){
+    public void visitINVOKEVIRTUAL(final INVOKEVIRTUAL o) {
         stack().pop(); //objectref
-        for (int i=0; i<o.getArgumentTypes(cpg).length; i++){
+        for (int i=0; i<o.getArgumentTypes(cpg).length; i++) {
             stack().pop();
         }
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
         // method.
-        if (o.getReturnType(cpg) != Type.VOID){
+        if (o.getReturnType(cpg) != Type.VOID) {
             Type t = o.getReturnType(cpg);
             if (    t.equals(Type.BOOLEAN)    ||
                         t.equals(Type.CHAR)            ||
@@ -908,59 +908,59 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIOR(final IOR o){
+    public void visitIOR(final IOR o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIREM(final IREM o){
+    public void visitIREM(final IREM o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIRETURN(final IRETURN o){
+    public void visitIRETURN(final IRETURN o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitISHL(final ISHL o){
+    public void visitISHL(final ISHL o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitISHR(final ISHR o){
+    public void visitISHR(final ISHR o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitISTORE(final ISTORE o){
+    public void visitISTORE(final ISTORE o) {
         locals().set(o.getIndex(), stack().pop());
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitISUB(final ISUB o){
+    public void visitISUB(final ISUB o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIUSHR(final IUSHR o){
+    public void visitIUSHR(final IUSHR o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitIXOR(final IXOR o){
+    public void visitIXOR(final IXOR o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
@@ -968,299 +968,299 @@ public class ExecutionVisitor extends EmptyVisitor{
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitJSR(final JSR o){
+    public void visitJSR(final JSR o) {
         stack().push(new ReturnaddressType(o.physicalSuccessor()));
 //System.err.println("TODO-----------:"+o.physicalSuccessor());
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitJSR_W(final JSR_W o){
+    public void visitJSR_W(final JSR_W o) {
         stack().push(new ReturnaddressType(o.physicalSuccessor()));
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitL2D(final L2D o){
+    public void visitL2D(final L2D o) {
         stack().pop();
         stack().push(Type.DOUBLE);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitL2F(final L2F o){
+    public void visitL2F(final L2F o) {
         stack().pop();
         stack().push(Type.FLOAT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitL2I(final L2I o){
+    public void visitL2I(final L2I o) {
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLADD(final LADD o){
+    public void visitLADD(final LADD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLALOAD(final LALOAD o){
+    public void visitLALOAD(final LALOAD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLAND(final LAND o){
+    public void visitLAND(final LAND o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLASTORE(final LASTORE o){
+    public void visitLASTORE(final LASTORE o) {
         stack().pop();
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLCMP(final LCMP o){
+    public void visitLCMP(final LCMP o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLCONST(final LCONST o){
+    public void visitLCONST(final LCONST o) {
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLDC(final LDC o){
+    public void visitLDC(final LDC o) {
         Constant c = cpg.getConstant(o.getIndex());
-        if (c instanceof ConstantInteger){
+        if (c instanceof ConstantInteger) {
             stack().push(Type.INT);
         }
-        if (c instanceof ConstantFloat){
+        if (c instanceof ConstantFloat) {
             stack().push(Type.FLOAT);
         }
-        if (c instanceof ConstantString){
+        if (c instanceof ConstantString) {
             stack().push(Type.STRING);
         }
-        if (c instanceof ConstantClass){
+        if (c instanceof ConstantClass) {
             stack().push(Type.CLASS);
         }
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
-    public void visitLDC_W(final LDC_W o){
+    public void visitLDC_W(final LDC_W o) {
         Constant c = cpg.getConstant(o.getIndex());
-        if (c instanceof ConstantInteger){
+        if (c instanceof ConstantInteger) {
             stack().push(Type.INT);
         }
-        if (c instanceof ConstantFloat){
+        if (c instanceof ConstantFloat) {
             stack().push(Type.FLOAT);
         }
-        if (c instanceof ConstantString){
+        if (c instanceof ConstantString) {
             stack().push(Type.STRING);
         }
-        if (c instanceof ConstantClass){
+        if (c instanceof ConstantClass) {
             stack().push(Type.CLASS);
         }
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLDC2_W(final LDC2_W o){
+    public void visitLDC2_W(final LDC2_W o) {
         Constant c = cpg.getConstant(o.getIndex());
-        if (c instanceof ConstantLong){
+        if (c instanceof ConstantLong) {
             stack().push(Type.LONG);
         }
-        if (c instanceof ConstantDouble){
+        if (c instanceof ConstantDouble) {
             stack().push(Type.DOUBLE);
         }
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLDIV(final LDIV o){
+    public void visitLDIV(final LDIV o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLLOAD(final LLOAD o){
+    public void visitLLOAD(final LLOAD o) {
         stack().push(locals().get(o.getIndex()));
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLMUL(final LMUL o){
+    public void visitLMUL(final LMUL o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLNEG(final LNEG o){
+    public void visitLNEG(final LNEG o) {
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLOOKUPSWITCH(final LOOKUPSWITCH o){
+    public void visitLOOKUPSWITCH(final LOOKUPSWITCH o) {
         stack().pop(); //key
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLOR(final LOR o){
+    public void visitLOR(final LOR o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLREM(final LREM o){
+    public void visitLREM(final LREM o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLRETURN(final LRETURN o){
+    public void visitLRETURN(final LRETURN o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLSHL(final LSHL o){
+    public void visitLSHL(final LSHL o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLSHR(final LSHR o){
+    public void visitLSHR(final LSHR o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLSTORE(final LSTORE o){
+    public void visitLSTORE(final LSTORE o) {
         locals().set(o.getIndex(), stack().pop());
         locals().set(o.getIndex()+1, Type.UNKNOWN);        
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLSUB(final LSUB o){
+    public void visitLSUB(final LSUB o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLUSHR(final LUSHR o){
+    public void visitLUSHR(final LUSHR o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitLXOR(final LXOR o){
+    public void visitLXOR(final LXOR o) {
         stack().pop();
         stack().pop();
         stack().push(Type.LONG);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitMONITORENTER(final MONITORENTER o){
+    public void visitMONITORENTER(final MONITORENTER o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitMONITOREXIT(final MONITOREXIT o){
+    public void visitMONITOREXIT(final MONITOREXIT o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitMULTIANEWARRAY(final MULTIANEWARRAY o){
-        for (int i=0; i<o.getDimensions(); i++){
+    public void visitMULTIANEWARRAY(final MULTIANEWARRAY o) {
+        for (int i=0; i<o.getDimensions(); i++) {
             stack().pop();
         }
         stack().push(o.getType(cpg));
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitNEW(final NEW o){
+    public void visitNEW(final NEW o) {
         stack().push(new UninitializedObjectType((ObjectType) (o.getType(cpg))));
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitNEWARRAY(final NEWARRAY o){
+    public void visitNEWARRAY(final NEWARRAY o) {
         stack().pop();
         stack().push(o.getType());
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitNOP(final NOP o){
+    public void visitNOP(final NOP o) {
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitPOP(final POP o){
+    public void visitPOP(final POP o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitPOP2(final POP2 o){
+    public void visitPOP2(final POP2 o) {
         Type t = stack().pop();
-        if (t.getSize() == 1){
+        if (t.getSize() == 1) {
             stack().pop();
         }        
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitPUTFIELD(final PUTFIELD o){
+    public void visitPUTFIELD(final PUTFIELD o) {
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitPUTSTATIC(final PUTSTATIC o){
+    public void visitPUTSTATIC(final PUTSTATIC o) {
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitRET(final RET o){
+    public void visitRET(final RET o) {
         // do nothing, return address
         // is in in the local variables.
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitRETURN(final RETURN o){
+    public void visitRETURN(final RETURN o) {
         // do nothing.
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitSALOAD(final SALOAD o){
+    public void visitSALOAD(final SALOAD o) {
         stack().pop();
         stack().pop();
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitSASTORE(final SASTORE o){
+    public void visitSASTORE(final SASTORE o) {
         stack().pop();
         stack().pop();
         stack().pop();
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitSIPUSH(final SIPUSH o){
+    public void visitSIPUSH(final SIPUSH o) {
         stack().push(Type.INT);
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitSWAP(final SWAP o){
+    public void visitSWAP(final SWAP o) {
         Type t = stack().pop();
         Type u = stack().pop();
         stack().push(t);
@@ -1268,7 +1268,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */ 
     @Override
-    public void visitTABLESWITCH(final TABLESWITCH o){
+    public void visitTABLESWITCH(final TABLESWITCH o) {
         stack().pop();
     }
 }

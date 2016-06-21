@@ -99,7 +99,7 @@ public abstract class AbstractTestCase extends TestCase
         String[] files = testDir.list();
         if (files == null || files.length == 0)
         {
-            if (!testDir.delete()){
+            if (!testDir.delete()) {
                 System.err.println("Failed to remove: " + testDir);
             }
         } else {

@@ -31,14 +31,14 @@ public class LoadingException extends VerifierConstraintViolatedException{
     /**
      * Constructs a new LoadingException with null as its error message string.
      */
-    public LoadingException(){
+    public LoadingException() {
         super();
     }
 
     /**
      * Constructs a new LoadingException with the specified error message.
      */
-    public LoadingException(final String message){
+    public LoadingException(final String message) {
         super (message);
     }
 }
