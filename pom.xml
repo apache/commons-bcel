@@ -17,7 +17,10 @@
   * specific language governing permissions and limitations
   * under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -196,15 +199,15 @@
 
   <build>
     <plugins>
-       <!-- Allow Clirr to be run from command line -->
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>clirr-maven-plugin</artifactId>
-          <version>${commons.clirr.version}</version>
-          <configuration>
-            <minSeverity>${minSeverity}</minSeverity>
-          </configuration>
-        </plugin>
+      <!-- Allow Clirr to be run from command line -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>clirr-maven-plugin</artifactId>
+        <version>${commons.clirr.version}</version>
+        <configuration>
+          <minSeverity>${minSeverity}</minSeverity>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -241,9 +244,9 @@
         <configuration>
           <systemProperties>
             <property>
-               <!-- Suppress the stats, but keep the test as it exercises the code -->
-               <name>PerformanceTest.report</name>
-               <value>false</value>
+              <!-- Suppress the stats, but keep the test as it exercises the code -->
+              <name>PerformanceTest.report</name>
+              <value>false</value>
             </property>
           </systemProperties>
           <includes>
@@ -404,7 +407,9 @@
       <id>quieten-clirr</id>
       <activation>
         <!-- Enable unless the following is defined -->
-        <property><name>!clirr.allDifferences</name></property>
+        <property>
+          <name>!clirr.allDifferences</name>
+        </property>
       </activation>
       <properties>
         <!-- It's not possible to undefine this once defined, so we define it in a profile that is normally active -->
