@@ -132,7 +132,7 @@ public final class PerformanceTest extends TestCase {
     }
 
     public void testPerformance() {
-        final File javaLib = new File(System.getProperty("java.home") + "/lib");
+        final File javaLib = new File(System.getProperty("java.home"), "lib");
         javaLib.listFiles(new FileFilter() {
 
             @Override

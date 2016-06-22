@@ -152,7 +152,7 @@ public class JDKGenericDumpTestCase {
     }
 
     private File[] listJDKjars() throws Exception {
-        final File javaLib = new File(javaHome + "/lib");
+        final File javaLib = new File(javaHome, "lib");
         return javaLib.listFiles(new FileFilter() {
             @Override
             public boolean accept(final File file) {
