@@ -15,14 +15,24 @@
 ## specific language governing permissions and limitations
 ## under the License.
 ##
-              ${project.name} ${version}
-                  RELEASE NOTES
+              ${project.name}
+                  Version ${version}
+                RELEASE NOTES
 
-The ${developmentTeam} is pleased to announce the release of ${project.name} ${version}
 
-$introduction.replaceAll("(?<!\015)\012", "
-").replaceAll("(?m)^ +","")
+INTRODUCTION:
 
+The ${developmentTeam} is pleased to announce the release of
+${project.name} ${version}!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+##$introduction.replaceAll("(?<!\015)\012", "
+##").replaceAll("(?m)^ +","")
+##
 ## N.B. the available variables are described here:
 ## http://maven.apache.org/plugins/maven-changes-plugin/examples/using-a-custom-announcement-template.html
 ##
@@ -34,7 +44,7 @@ $release.description.replaceAll("  ", "
 #set($props=${project.properties})
 #set($jiralen=$props.get("commons.jira.id").length())
 ## indent1 =   POOL-nnnn:
-#set($blanklen=$jiralen+6)## +6 for "-nnnn:"
+#set($blanklen=$jiralen+5)## +6 for "-nnn:"
 ## must be at least as long as the longest JIRA id
 #set($blanks="                                  ")
 #set($indent1=$blanks.substring(0,$blanklen))
@@ -79,10 +89,10 @@ o $issue ${action}$dueto
 #if ($release.getActions().size() == 0)
 No changes defined in this version.
 #else
-Changes in this version include:
-
 #if ($release.getActions('add').size() !=0)
-New features:
+NEW FEATURES:
+=============
+
 #foreach($actionItem in $release.getActions('add'))
 #processaction()
 #end 
@@ -90,7 +100,9 @@ New features:
 #end
 ##
 #if ($release.getActions('fix').size() !=0)
-Fixed Bugs:
+FIXED BUGS:
+===========
+
 #foreach($actionItem in $release.getActions('fix'))
 #processaction()
 #end
@@ -98,7 +110,9 @@ Fixed Bugs:
 #end
 ##
 #if ($release.getActions('update').size() !=0)
-Changes:
+CHANGES:
+========
+
 #foreach($actionItem in $release.getActions('update'))
 #processaction()
 #end
@@ -106,7 +120,8 @@ Changes:
 #end
 ##
 #if ($release.getActions('remove').size() !=0)
-Removed:
+REMOVED:
+========
 #foreach($actionItem in $release.getActions('remove'))
 #processaction()
 #end
@@ -114,9 +129,21 @@ Removed:
 ## End of main loop
 #end
 
-Historical list of changes: ${project.url}changes-report.html
 
-For complete information on ${project.name}, including instructions on how to submit bug reports,
-patches, or suggestions for improvement, see the Apache ${project.name} website:
+Have fun!
+-Apache Commons BCEL team
 
-${project.url}
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    http://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team

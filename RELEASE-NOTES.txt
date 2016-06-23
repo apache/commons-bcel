@@ -5,7 +5,7 @@
 
 INTRODUCTION:
 
-The Apache Commons team is pleased to announce the release of
+The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.0!
 
 The Byte Code Engineering Library (BCEL) is intended to give users a convenient
@@ -24,31 +24,31 @@ COMPATIBILITY with 5.2
 
 Binary compatible - not strictly compatible
 - The constant interface org.apache.bcel.Constants has been deprecated. Classes
-  which implemented this interface in 5.2 now use the constants defined in the
-  org.apache.bcel.Const class.
+ which implemented this interface in 5.2 now use the constants defined in the
+ org.apache.bcel.Const class.
 - The constant interface org.apache.bcel.generic.InstructionConstants has been
-  deprecated. Classes which implemented this interface in 5.2 now use the
-  constants defined in the org.apache.bcel.generic.InstructionConsts class.
+ deprecated. Classes which implemented this interface in 5.2 now use the
+ constants defined in the org.apache.bcel.generic.InstructionConsts class.
 - Return type of method 'public java.lang.Object getElementAt(int)' in
-  org.apache.bcel.verifier.VerifierFactoryListModel has been changed to
-  java.lang.String.
+ org.apache.bcel.verifier.VerifierFactoryListModel has been changed to
+ java.lang.String.
 - The BCEL classes do no longer implement java.io.Serializable.
 
 Source compatible - Yes, sort of;
  - The org.apache.bcel.classfile.Visitor interface has been enhanced with
-   additional methods. If you implemented it directly instead of extending
-   the EmptyVisitor class you'll have to implement the new methods.
+ additional methods. If you implemented it directly instead of extending
+ the EmptyVisitor class you'll have to implement the new methods.
 
 Semantic compatible - Yes, except:
  - BCEL 6.0 handles new attributes such as code annotations that could only
-   be processed by implementing a custom AttributeReader in the previous
-   versions. Code relying on this behavior will have to be adjusted since
-   the AttributeReader will no longer be called in these cases.
+ be processed by implementing a custom AttributeReader in the previous
+ versions. Code relying on this behavior will have to be adjusted since
+ the AttributeReader will no longer be called in these cases.
 
 For full information about API changes please see the extended Clirr report:
 
-    http://commons.apache.org/bcel/bcel5-bcel6-clirr-report.html
 
+http://commons.apache.org/bcel/clirr-report.html
 
 NEW FEATURES:
 =============
@@ -67,7 +67,7 @@ o BCEL-221: BCELifier is not working for Java8Example (incomplete).
 o BCEL-195: Addition of hashCode() to generic/Instruction.java breaks Targeters.
             Never make distinct BranchInstructions compare equal.
 o BCEL-261: Select constructor allows partially constructed instance to escape.
-            Re-ordered code to delay the escape..
+            Re-ordered code to delay the escape.
 o BCEL-259: Minor doc error in BranchInstruction.java.
 o BCEL-260: ClassDumper example duplicates field attribute types.
 o BCEL-258: No tests to check the output of dump methods.
@@ -100,14 +100,11 @@ o BCEL-207: MethodGen.removeLocalVariable now properly unreference the removed
             variable from the targetters of the instruction handlers delimiting
             the scope of the variable. Thanks to Mark Roberts.
 o BCEL-197: Utility.signatureToString() no longer throws a ClassFormatException
-            on TypeVariables found in generic signatures. Thanks to
-            Mark Roberts.
-o BCEL-194: Removed the 'index' variable from the LocalVariableGen's hash code.
-            Thanks to Mark Roberts.
+            on TypeVariables found in generic signatures. Thanks to Mark Roberts.
+o BCEL-194: Removed the 'index' variable from the LocalVariableGen's hash code. Thanks to Mark Roberts.
 o BCEL-193: The verifier should not check for run time compatibility of objects
             assigned to arrays. Thanks to Jérôme Leroux.
-o BCEL-188: Correct verification of the return value of a method. Thanks
-            to Jérôme Leroux.
+o BCEL-188: Correct verification of the return value of a method. Thanks to Jérôme Leroux.
 o BCEL-186: Performance degradation with the UTF8 cache. getInstance no longer
             uses cache.
 o BCEL-181: org.apache.bcel.util.ClassLoaderRepository.loadClass(String) leaks

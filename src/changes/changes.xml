@@ -42,7 +42,8 @@ The <action> type attribute can be add,update,fix,remove.
 <document>
   <properties>
     <title>Changes</title>
-    <author email="dev@commons.apache.org">Apache Commons devlopers</author>
+    <author email="dev@commons.apache.org">Apache Commons developers</author>
+    <introduction>ANCD</introduction>
   </properties>
 
   <!-- NOTE: 
@@ -62,78 +63,120 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.0" date="2016-06-20" description="Major release with Java 7 and 8 support.
-    
-N.B. The Clirr report shows that there are several incompatible changes which in theory can affect
- projects that update to this version. However the changes are considered to be OK, because they
- apply to code that is not generally directly referenced externally.
- For example, the Visitor interfaces have some new methods. These interfaces have lots of methods,
- so external code will use the provided abstract implementation instead.
+    <release version="6.0" date="2016-06-20" description="Apache Commons BCEL 6.0 is a major release supporting the new features
+ introduced in Java 6, 7 and 8.
 
- Classes no longer implement Serializable.
- It does not make sense to serialize BCEL, and it would be unlikely to work anyway.
 
- External code should not have been relying on such classes to provide definitions of the constants.
+ It requires Java 7 or higher to run.
 
-">
-      <action issue="BCEL-237" type="fix" dev="sebb">non-empty final arrays should be private as they are mutable</action>
-      <action issue="BCEL-230" type="update" dev="britter">Document the Java platform requirement clearly and early</action>
-      <action issue="BCEL-243" type="fix">Type.getType() needs to understand TypeVariableSignature(s)</action>
-      <action issue="BCEL-272" type="add">Add constants for Java 9 class file version 53</action>
-      <action issue="BCEL-271" type="fix">FCONST pattern does not include FCONST_2</action>
-      <action issue="BCEL-264" type="fix">Add missing Node.accept() implementations (ConstantMethodHandle, ConstantMethodType, ParameterAnnotationEntry)</action>
-      <action issue="BCEL-221" type="fix">BCELifier is not working for Java8Example (incomplete)</action>
-      <action issue="BCEL-195" type="fix">addition of hashCode() to generic/Instruction.java breaks Targeters. Never make distinct BranchInstructions compare equal</action>
-      <action issue="BCEL-261" type="fix">Select constructor allows partially constructed instance to escape. Re-ordered code to delay the escape.</action>
-      <action issue="BCEL-259" type="fix">Minor doc error in BranchInstruction.java</action>
-      <action issue="BCEL-260" type="fix">ClassDumper example duplicates field attribute types</action>
-      <action issue="BCEL-258" type="fix">No tests to check the output of dump methods</action>
-      <action issue="BCEL-257" type="fix">INVOKESPECIAL, INVOKESTATIC, INVOKEVIRTUAL need to define dump() methods</action>
+   
+COMPATIBILITY with 5.2
+ ======================
+
+
+ Binary compatible - not strictly compatible
+ - The constant interface org.apache.bcel.Constants has been deprecated. Classes
+  which implemented this interface in 5.2 now use the constants defined in the
+  org.apache.bcel.Const class.
+ - The constant interface org.apache.bcel.generic.InstructionConstants has been
+  deprecated. Classes which implemented this interface in 5.2 now use the
+  constants defined in the org.apache.bcel.generic.InstructionConsts class.
+ - Return type of method 'public java.lang.Object getElementAt(int)' in
+  org.apache.bcel.verifier.VerifierFactoryListModel has been changed to
+  java.lang.String.
+ - The BCEL classes do no longer implement java.io.Serializable.
+
+
+
+Source compatible - Yes, sort of;
+  - The org.apache.bcel.classfile.Visitor interface has been enhanced with
+  additional methods. If you implemented it directly instead of extending
+  the EmptyVisitor class you'll have to implement the new methods.
+
+
+ Semantic compatible - Yes, except:
+  - BCEL 6.0 handles new attributes such as code annotations that could only
+  be processed by implementing a custom AttributeReader in the previous
+  versions. Code relying on this behavior will have to be adjusted since
+  the AttributeReader will no longer be called in these cases.
+
+
+
+For full information about API changes please see the extended Clirr report:
+
+    http://commons.apache.org/bcel/clirr-report.html">
+      <action issue="BCEL-237" type="fix" dev="sebb">non-empty final arrays should be private as they are mutable.</action>
+      <action issue="BCEL-230" type="update" dev="britter">Document the Java platform requirement clearly and early.</action>
+      <action issue="BCEL-243" type="fix">Type.getType() needs to understand TypeVariableSignature(s).</action>
+      <action issue="BCEL-272" type="add">Add constants for Java 9 class file version 53.</action>
+      <action issue="BCEL-271" type="fix">FCONST pattern does not include FCONST_2.</action>
+      <action issue="BCEL-264" type="fix">Add missing Node.accept() implementations (ConstantMethodHandle,
+                                          ConstantMethodType, ParameterAnnotationEntry).</action>
+      <action issue="BCEL-221" type="fix">BCELifier is not working for Java8Example (incomplete).</action>
+      <action issue="BCEL-195" type="fix">Addition of hashCode() to generic/Instruction.java breaks Targeters.
+                                          Never make distinct BranchInstructions compare equal.</action>
+      <action issue="BCEL-261" type="fix">Select constructor allows partially constructed instance to escape.
+                                          Re-ordered code to delay the escape.</action>
+      <action issue="BCEL-259" type="fix">Minor doc error in BranchInstruction.java.</action>
+      <action issue="BCEL-260" type="fix">ClassDumper example duplicates field attribute types.</action>
+      <action issue="BCEL-258" type="fix">No tests to check the output of dump methods.</action>
+      <action issue="BCEL-257" type="fix">INVOKESPECIAL, INVOKESTATIC, INVOKEVIRTUAL need to define dump()
+                                          methods.</action>
       <action issue="BCEL-254" type="fix">Two more methods that would be nice to be public.</action>
-      <action issue="BCEL-245" type="fix">Type class includes constants that reference subclasses</action>
+      <action issue="BCEL-245" type="fix">Type class includes constants that reference subclasses.</action>
       <action issue="BCEL-253" type="fix">Pass 3b verifier is too strict.</action>
-      <action issue="BCEL-248" type="fix">StackMapTable[Entry] should be removed and improvements merged into StackMap[Entry]</action>
-      <action issue="BCEL-202" type="fix">StackMap[Table]Entry.copy() needs to be deep; Improved support for StackMaps</action>
-      <action issue="BCEL-251" type="fix">Pass3aVerifier visitANEWARRAY() does not allow 255 array dimensions</action>
+      <action issue="BCEL-248" type="fix">StackMapTable[Entry] should be removed and improvements merged into
+                                          StackMap[Entry].</action>
+      <action issue="BCEL-202" type="fix">StackMap[Table]Entry.copy() needs to be deep; Improved support for
+                                          StackMaps.</action>
+      <action issue="BCEL-251" type="fix">Pass3aVerifier visitANEWARRAY() does not allow 255 array dimensions.</action>
       <action issue="BCEL-211" type="update">Some additional clone methods should be public.</action>
-      <action issue="BCEL-249" type="fix">Check for max Short seems wrong</action>
-      <action issue="BCEL-127" type="update">Document that Instruction Factory returns singleton instances</action>
-      <action issue="BCEL-198" type="update">better support for clone/copy methods</action>
-      <action issue="BCEL-242" type="remove">Remove Serializable</action>
-      <action issue="BCEL-110" type="remove">Problem with JAXB if the bcel classloader is used; remove the broken ClassLoader class</action>
-      <action issue="BCEL-201" type="update">modify several toString methods to make output similar to "javap"</action>
-      <action issue="BCEL-205" type="update">add javadoc comments to LineNumber.java and LineNumberTable.java</action>
-      <action issue="BCEL-208" type="fix">Need to check for an empty InstructionList</action>
-      <action issue="BCEL-212" type="update">Inconsistent toString() results</action>
-      <action issue="BCEL-217" type="fix">long type instructions are not searched by InstructionFinder using regular expression</action>
-      <action issue="BCEL-244" type="update" dev="ggregory">Update Java requirement from 5 to 7</action>
-      <action issue="BCEL-239" type="fix">Interfaces should not be used to define constants</action>
-      <action issue="BCEL-234" type="fix">Code must not swallow Throwable</action>
+      <action issue="BCEL-249" type="fix">Check for max Short seems wrong.</action>
+      <action issue="BCEL-127" type="update">Document that Instruction Factory returns singleton instances.</action>
+      <action issue="BCEL-198" type="update">better support for clone/copy methods.</action>
+      <action issue="BCEL-242" type="remove">Remove Serializable.</action>
+      <action issue="BCEL-110" type="remove">Problem with JAXB if the bcel classloader is used; remove the broken
+      ClassLoader class.</action>
+      <action issue="BCEL-201" type="update">modify several toString methods to make output similar to "javap".</action>
+      <action issue="BCEL-205" type="update">add javadoc comments to LineNumber.java and LineNumberTable.java.</action>
+      <action issue="BCEL-208" type="fix">Need to check for an empty InstructionList.</action>
+      <action issue="BCEL-212" type="update">Inconsistent toString() results.</action>
+      <action issue="BCEL-217" type="fix">long type instructions are not searched by InstructionFinder using
+                                          regular expression.</action>
+      <action issue="BCEL-244" type="update" dev="ggregory">Update Java requirement from 5 to 7.</action>
+      <action issue="BCEL-239" type="fix">Interfaces should not be used to define constants.</action>
+      <action issue="BCEL-234" type="fix">Code must not swallow Throwable.</action>
       <action issue="BCEL-219" type="update" due-to="Maxim Degtyarev">
-        Make org.apache.bcel.classfile.ConstantPool.ConstantPool(DataInput) public.
+        Make org.apache.bcel.classfile.ConstantPool.ConstantPool(DataInput)
+        public.
       </action>
       <action issue="BCEL-209" type="fix" due-to="Mark Roberts">
-        Bug fixes and improvements to InvokeDynamic and BootStrapMethods implementation
+        Bug fixes and improvements to InvokeDynamic and BootStrapMethods
+        implementation.
       </action>
       <action issue="BCEL-187" type="fix" due-to="Jérôme Leroux">
-        Verification error when an invoke references a method defined in superclass
+        Verification error when an invoke references a method defined in
+        superclass.
       </action>
       <action issue="BCEL-218" type="fix" due-to="chas">
         Remove ObjectType cache.
       </action>
       <action issue="BCEL-184" type="fix" due-to="Jérôme Leroux">
-        The verifier now checks if methods with a void return type attempt to return an object.
+        The verifier now checks if methods with a void return type attempt
+        to return an object.
       </action>
       <action issue="BCEL-184" type="fix" due-to="Jérôme Leroux">
-        The verifier now checks if methods with a void return type attempt to return an object.
+        The verifier now checks if methods with a void return type attempt
+        to return an object.
       </action>
       <action issue="BCEL-207" type="fix" due-to="Mark Roberts">
-        MethodGen.removeLocalVariable now properly unreference the removed variable
-        from the targetters of the instruction handlers delimiting the scope of the variable.
+        MethodGen.removeLocalVariable now properly unreference the removed
+        variable from the targetters of the instruction handlers delimiting
+        the scope of the variable.
       </action>
       <action issue="BCEL-197" type="fix" due-to="Mark Roberts">
-        Utility.signatureToString() no longer throws a ClassFormatException on TypeVariables
-        found in generic signatures.
+        Utility.signatureToString() no longer throws a ClassFormatException
+        on TypeVariables found in generic signatures.
       </action>
       <action issue="BCEL-194" type="fix" due-to="Mark Roberts">
         Removed the 'index' variable from the LocalVariableGen's hash code.
@@ -146,198 +189,221 @@ N.B. The Clirr report shows that there are several incompatible changes which in
         Correct verification of the return value of a method.
       </action>
       <action issue="BCEL-186" type="fix" dev="sebb">
-        Performance degradation with the UTF8 cache
-        getInstance no longer uses cache
+        Performance degradation with the UTF8 cache. getInstance no longer
+        uses cache.
       </action>
       <action issue="BCEL-181" type="fix" dev="ggregory">
-        org.apache.bcel.util.ClassLoaderRepository.loadClass(String) leaks input streams.
+        org.apache.bcel.util.ClassLoaderRepository.loadClass(String) leaks
+        input streams.
       </action>
       <action issue="BCEL-76" type="update">
         Add parent type processing for ClassPath class.
       </action>
       <action issue="BCEL-83" type="update">
-        Add support for getResource and getResourceAsStream to ClassPath
+        Add support for getResource and getResourceAsStream to ClassPath.
       </action>
       <action issue="BCEL-92" type="update">
-        Properly parse StackMapTable attributes in Java 6 classfiles
+        Properly parse StackMapTable attributes in Java 6 classfiles.
       </action>
       <action issue="BCEL-104" type="update">
-        Javadoc overhaul
+        Javadoc overhaul.
       </action>
       <action issue="BCEL-119" type="update">
-        BCEL is unnecessarily slow
+        BCEL is unnecessarily slow.
       </action>
       <action issue="BCEL-157" type="update">
-        Add support for INVOKEDYNAMIC and MethodHandles
+        Add support for INVOKEDYNAMIC and MethodHandles.
       </action>
       <action issue="BCEL-160" type="update" dev="sebb">
         Why using unstable sort at MethodGen.getLocalVariables() ?
       </action>
       <action issue="BCEL-163" type="update">
-        Incorporate patch file from Findbugs
+        Incorporate patch file from Findbugs.
       </action>
       <action issue="BCEL-175" type="update">
-        Implement the MethodParameters attribute
+        Implement the MethodParameters attribute.
       </action>
       <action issue="BCEL-28" type="fix">
-        Mistake in "Peephole optimizer" example at http://commons.apache.org/bcel/manual.html
+        Mistake in "Peephole optimizer" example
+        at http://commons.apache.org/bcel/manual.html
       </action>
       <action issue="BCEL-74" type="fix">
-        BCEL cannot be used as java.system.class.loader
+        BCEL cannot be used as java.system.class.loader.
       </action>
       <action issue="BCEL-77" type="fix">
         XSLT transforms broken in Turkish Locale.
       </action>
       <action issue="BCEL-79" type="fix">
-        java.lang.ClassFormatError: LVTT entry for 'local' in class file org/shiftone/jrat/test/dummy/CrashTestDummy does not match any LVT entry
+        java.lang.ClassFormatError: LVTT entry for 'local' in class file
+        org/shiftone/jrat/test/dummy/CrashTestDummy does not match any LVT
+        entry
       </action>
       <action issue="BCEL-81" type="fix">
-        ClassParser.parse() throws NullPointerException if class does not exist and ClassParser(String) constructor is used
+        ClassParser.parse() throws NullPointerException if class does not
+        exist and ClassParser(String) constructor is used.
       </action>
       <action issue="BCEL-85" type="fix">
-        ArrayOutOfBoundsException in InstructionFinder
+        ArrayOutOfBoundsException in InstructionFinder.
       </action>
       <action issue="BCEL-87" type="fix">
-        Website: Incorrect URL for source; version 5.2 is not in the bug page
+        Website: Incorrect URL for source; version 5.2 is not in the bug
+        page
       </action>
       <action issue="BCEL-88" type="fix">
-        bcelified method doesn't pass verification
+        bcelified method doesn't pass verification.
       </action>
       <action issue="BCEL-89" type="fix">
-        return type not verified by JustIce
+        return type not verified by JustIce.
       </action>
       <action issue="BCEL-94" type="fix">
-        @since tag incorrect for Annotation classes in BCEL trunk
+        @since tag incorrect for Annotation classes in BCEL trunk.
       </action>
       <action issue="BCEL-95" type="fix">
-        InstructionFactory missing % operator for Float, Double
+        InstructionFactory missing % operator for Float, Double.
       </action>
       <action issue="BCEL-96" type="fix">
-        Fields in Annotations and AnnotationEntry are inaccessible to subclasses
+        Fields in Annotations and AnnotationEntry are inaccessible to
+        subclasses
       </action>
       <action issue="BCEL-97" type="fix">
-        Add support for getResources to ClassPath
+        Add support for getResources to ClassPath.
       </action>
       <action issue="BCEL-98" type="fix">
-        Two source files in repository are empty
+        Two source files in repository are empty.
       </action>
       <action issue="BCEL-99" type="fix">
-        Maven POM file calls in apache regex but code does not use it
+        Maven POM file calls in apache regex but code does not use it.
       </action>
       <action issue="BCEL-100" type="fix">
-        ClassParser throws unintelligible Exception
+        ClassParser throws unintelligible Exception.
       </action>
       <action issue="BCEL-101" type="fix">
-        verifier raises an AssertionViolatedException when done against Java 5 files with generics/annotations
+        verifier raises an AssertionViolatedException when done against
+        Java 5 files with generics/annotations.
       </action>
       <action issue="BCEL-102" type="fix">
-        Verifier fails in pass 2 with "Number of LocalVariableTable attributes of Code attribute" on static methods.
+        Verifier fails in pass 2 with "Number of LocalVariableTable
+        attributes of Code attribute" on static methods.
       </action>
       <action issue="BCEL-107" type="fix">
-        ParameterAnnotationEntries are read not dumped
+        ParameterAnnotationEntries are read not dumped.
       </action>
       <action issue="BCEL-108" type="fix">
-        RuntimeVisible Annotations duplicated
+        RuntimeVisible Annotations duplicated.
       </action>
       <action issue="BCEL-112" type="fix">
-        ARRAYLENGTH incorrectly not StackConsumer
+        ARRAYLENGTH incorrectly not StackConsumer.
       </action>
       <action issue="BCEL-114" type="fix">
-        Error in method search() defined in org.apache.bcel.util.InstructionFinder
+        Error in method search() defined in
+        org.apache.bcel.util.InstructionFinder
       </action>
       <action issue="BCEL-115" type="fix">
-        Deleting all instructions of a list shows wrong behaviour
+        Deleting all instructions of a list shows wrong behaviour.
       </action>
       <action issue="BCEL-120" type="fix">
-        Make BCEL JAR OSGi compatible
+        Make BCEL JAR OSGi compatible.
       </action>
       <action issue="BCEL-122" type="fix">
-        ArrayIndexOutOfBoundsException thrown from TABLESWITCH.initFromFile
+        ArrayIndexOutOfBoundsException thrown from TABLESWITCH.initFromFile.
       </action>
       <action issue="BCEL-124" type="fix">
-        tableswitch/lookupswitch invalid alignment of 4-byte operands
+        tableswitch/lookupswitch invalid alignment of 4-byte operands.
       </action>
       <action issue="BCEL-125" type="fix">
-        Incorrect size calculation in InstructionFinder
+        Incorrect size calculation in InstructionFinder.
       </action>
       <action issue="BCEL-130" type="fix">
-        Class files containing "ParameterAnnotations" are dumped incorrectly
+        Class files containing "ParameterAnnotations" are dumped
+        incorrectly.
       </action>
       <action issue="BCEL-131" type="fix">
-        Class files containing "StackMapTable" attributes (on method code) are dumped incorrectly
+        Class files containing "StackMapTable" attributes (on method code)
+        are dumped incorrectly.
       </action>
       <action issue="BCEL-132" type="fix">
-        org.apache.bcel.classfile.ClassParser: NullPointerException caused by fileopen failed
+        org.apache.bcel.classfile.ClassParser: NullPointerException caused
+        by fileopen failed.
       </action>
       <action issue="BCEL-133" type="fix">
-        org.apache.bcel.classfile.ClassParser: NullPointerException caused by invalid filename
+        org.apache.bcel.classfile.ClassParser: NullPointerException caused
+        by invalid filename.
       </action>
       <action issue="BCEL-134" type="fix">
-        ExecutionVisitor doesn't support Class constant type for LDC and LDC_W
+        ExecutionVisitor doesn't support Class constant type for LDC and
+        LDC_W.
       </action>
       <action issue="BCEL-135" type="fix">
-        BCELifier issue: BCELFactory fails to handle float and long constants
+        BCELifier issue: BCELFactory fails to handle float and long
+        constants.
       </action>
       <action issue="BCEL-137" type="fix">
-        "Invalid method signature: TT;" when using MethodGen for a method having a generic parameter
+        "Invalid method signature: TT;" when using MethodGen for a method
+        having a generic parameter.
       </action>
       <action issue="BCEL-138" type="fix">
-        FieldInstruction.getFieldSize() doesn't decode Type.getTypeSize() output
+        FieldInstruction.getFieldSize() doesn't decode Type.getTypeSize()
+        output.
       </action>
       <action issue="BCEL-140" type="fix">
-        org.apache.bcel.generic.Instruction.equals(Object) does not follow Object.equals(Object) rules
+        org.apache.bcel.generic.Instruction.equals(Object) does not follow
+        Object.equals(Object) rules.
       </action>
       <action issue="BCEL-141" type="fix">
-        Select instructions should implement StackConsumer instead of StackProducer
+        Select instructions should implement StackConsumer instead of
+        StackProducer.
       </action>
       <action issue="BCEL-143" type="fix">
-        Fix CPL License issues with EnclosingMethod.java and LocalVariableTypeTable.java
+        Fix CPL License issues with EnclosingMethod.java and
+        LocalVariableTypeTable.java.
       </action>
       <action issue="BCEL-145" type="fix">
-        Type.getReturnTypeSize() doesn't decode Type.getTypeSize() output
+        Type.getReturnTypeSize() doesn't decode Type.getTypeSize() output.
       </action>
       <action issue="BCEL-146" type="fix">
-        SyntheticRepository.loadClass() fails to close the inputStream
+        SyntheticRepository.loadClass() fails to close the inputStream.
       </action>
       <action issue="BCEL-148" type="fix">
-        BCELifier produces incorrect code for methods containing loads of class literals from constant pool
+        BCELifier produces incorrect code for methods containing loads of
+        class literals from constant pool.
       </action>
       <action issue="BCEL-151" type="fix">
-        Code attribute size not updated
+        Code attribute size not updated.
       </action>
       <action issue="BCEL-152" type="fix">
-        Incorrect link for Jasmin assembler language
+        Incorrect link for Jasmin assembler language.
       </action>
       <action issue="BCEL-153" type="fix" dev="sebb">
-        Examples not present in source or binary downloads
+        Examples not present in source or binary downloads.
       </action>
       <action issue="BCEL-154" type="fix">
-        ClassParser.parse() generates NPE if it cannot open the file
+        ClassParser.parse() generates NPE if it cannot open the file.
       </action>
       <action issue="BCEL-155" type="fix">
-        InstConstraintVisitor does not handle class constants
+        InstConstraintVisitor does not handle class constants.
       </action>
       <action issue="BCEL-156" type="fix">
-        Pass3bVerifier crashes on empty methods
+        Pass3bVerifier crashes on empty methods.
       </action>
       <action issue="BCEL-159" type="fix">
-        LocalVariableGen.getLocalVariable() computes incorrect length
+        LocalVariableGen.getLocalVariable() computes incorrect length.
       </action>
       <action issue="BCEL-164" type="fix">
-        Method does not have a method to access parameter annotations
+        Method does not have a method to access parameter annotations.
       </action>
       <action issue="BCEL-167" type="fix">
-        ClassPath.getResource does not correctly perform URL escaping
+        ClassPath.getResource does not correctly perform URL escaping.
       </action>
       <action issue="BCEL-173" type="fix">
-        ClassParser fails to parse JDK classes in Java 8: ClassFormatException: Invalid byte tag in constant pool
+        ClassParser fails to parse JDK classes in Java 8:
+        ClassFormatException: Invalid byte tag in constant pool.
       </action>
       <action issue="BCEL-174" type="fix">
-        Verification of interfaces with default methods fails with Java 8
+        Verification of interfaces with default methods fails with Java 8.
       </action>
       <action issue="BCEL-177" type="fix" dev="markt">
-        When reading the number of parameters in a MethodParameters structure
-        only read a single byte as per the JVM specification.
+        When reading the number of parameters in a MethodParameters
+        structure only read a single byte as per the JVM specification.
       </action>
     </release>
   </body>
