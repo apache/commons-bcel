@@ -553,7 +553,7 @@ public abstract class Instruction implements Cloneable {
      * equality of instructions.
      *
      * @return currently used comparator for equals()
-     * @deprecated use the built in comparator, or wrap this class in another object that implements these methods
+     * @deprecated (6.0) use the built in comparator, or wrap this class in another object that implements these methods
      */
     @Deprecated
     public static InstructionComparator getComparator() {
@@ -562,7 +562,7 @@ public abstract class Instruction implements Cloneable {
 
 
     /** Set comparator to be used for equals().
-      * @deprecated use the built in comparator, or wrap this class in another object that implements these methods
+      * @deprecated (6.0) use the built in comparator, or wrap this class in another object that implements these methods
      */
     @Deprecated
     public static void setComparator( final InstructionComparator c ) {

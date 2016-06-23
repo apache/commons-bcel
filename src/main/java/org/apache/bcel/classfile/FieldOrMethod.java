@@ -86,7 +86,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @param file Input stream
      * @throws IOException
      * @throws ClassFormatException
-     * @deprecated Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
+     * @deprecated (6.0) Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
      */
     @java.lang.Deprecated
     protected FieldOrMethod(final DataInputStream file, final ConstantPool constant_pool) throws IOException,

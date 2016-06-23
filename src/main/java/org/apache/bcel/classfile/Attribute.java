@@ -114,7 +114,7 @@ public abstract class Attribute implements Cloneable, Node {
      * 
      * @param name the name of the attribute as stored in the class file
      * @param r    the reader object
-     * @deprecated Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead
+     * @deprecated (6.0) Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead
      */
     @java.lang.Deprecated
     public static void addAttributeReader(final String name, final AttributeReader r)
