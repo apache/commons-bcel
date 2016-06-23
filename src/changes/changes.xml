@@ -92,6 +92,9 @@ Source compatible - Yes, sort of;
   - The org.apache.bcel.classfile.Visitor interface has been enhanced with
   additional methods. If you implemented it directly instead of extending
   the EmptyVisitor class you'll have to implement the new methods.
+  - The org.apache.bcel.generic.Visitor interface has been enhanced with an
+  additional method. If you implemented it directly instead of extending
+  the EmptyVisitor class you'll have to implement the new methods.
 
 
  Semantic compatible - Yes, except:
