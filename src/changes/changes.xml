@@ -43,7 +43,6 @@ The <action> type attribute can be add,update,fix,remove.
   <properties>
     <title>Changes</title>
     <author email="dev@commons.apache.org">Apache Commons developers</author>
-    <introduction>ANCD</introduction>
   </properties>
 
   <!-- NOTE: 
