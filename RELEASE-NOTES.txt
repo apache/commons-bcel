@@ -97,8 +97,6 @@ o BCEL-187: Verification error when an invoke references a method defined in
 o BCEL-218: Remove ObjectType cache. Thanks to chas.
 o BCEL-184: The verifier now checks if methods with a void return type attempt
             to return an object. Thanks to Jérôme Leroux.
-o BCEL-184: The verifier now checks if methods with a void return type attempt
-            to return an object. Thanks to Jérôme Leroux.
 o BCEL-207: MethodGen.removeLocalVariable now properly unreference the removed
             variable from the targetters of the instruction handlers delimiting
             the scope of the variable. Thanks to Mark Roberts.

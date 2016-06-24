@@ -167,10 +167,6 @@ For full information about API changes please see the extended Clirr report:
         The verifier now checks if methods with a void return type attempt
         to return an object.
       </action>
-      <action issue="BCEL-184" type="fix" due-to="Jérôme Leroux">
-        The verifier now checks if methods with a void return type attempt
-        to return an object.
-      </action>
       <action issue="BCEL-207" type="fix" due-to="Mark Roberts">
         MethodGen.removeLocalVariable now properly unreference the removed
         variable from the targetters of the instruction handlers delimiting
