@@ -71,7 +71,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public static final byte HEAP = 1;
     public static final byte FILE = 2;
     public static final byte ZIP = 3;
-    private static final boolean debug = Boolean.getBoolean("JavaClass.debug");; // Debugging on/off
+    private static final boolean debug = Boolean.getBoolean("JavaClass.debug"); // Debugging on/off
     
     private static BCELComparator bcelComparator = new BCELComparator() {
 
