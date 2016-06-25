@@ -53,7 +53,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         UNKNOWN,
         CLASS,
         METHOD,
-    };
+    }
 
     // The base package name for imports; assumes Const is at the top level
     // N.B we use the class so renames will be detected by the compiler/IDE

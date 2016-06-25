@@ -86,7 +86,7 @@ public final class ExceptionConst {
         EXCS_INTERFACE_METHOD_RESOLUTION,
         EXCS_STRING_RESOLUTION,
         EXCS_ARRAY_EXCEPTION,
-    };
+    }
 
     // helper method to merge exception class arrays
     private static Class<?>[] mergeExceptions(final Class<?>[] input, final Class<?> ... extraClasses) {
