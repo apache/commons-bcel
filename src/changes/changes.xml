@@ -107,6 +107,8 @@ Source compatible - Yes, sort of;
 For full information about API changes please see the extended Clirr report:
 
     http://commons.apache.org/bcel/clirr-report.html">
+      <action issue="BCEL-262" type="update" dev="britter" due-to="Mark Roberts">InvokeInstruction.getClassName(ConstantPoolGen) 
+                                          should throw an exception when it detects an array.</action>
       <action issue="BCEL-237" type="fix" dev="sebb">non-empty final arrays should be private as they are mutable.</action>
       <action issue="BCEL-230" type="update" dev="britter">Document the Java platform requirement clearly and early.</action>
       <action issue="BCEL-243" type="fix">Type.getType() needs to understand TypeVariableSignature(s).</action>

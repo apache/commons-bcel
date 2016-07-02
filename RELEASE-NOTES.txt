@@ -190,6 +190,8 @@ o BCEL-177: When reading the number of parameters in a MethodParameters
 CHANGES:
 ========
 
+o BCEL-262: InvokeInstruction.getClassName(ConstantPoolGen) should throw an
+            exception when it detects an array. Thanks to Mark Roberts.
 o BCEL-230: Document the Java platform requirement clearly and early.
 o BCEL-211: Some additional clone methods should be public.
 o BCEL-127: Document that Instruction Factory returns singleton instances.
