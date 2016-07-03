@@ -45,8 +45,9 @@ import org.junit.runners.Parameterized.Parameters;
 import com.sun.jna.platform.win32.Advapi32Util;
 
 /**
- * Test that the generic dump() methods work on the JDK classes Reads each class into an instruction list and then dumps
- * the instructions. The output bytes should be the same as the input.
+ * Test that the generic dump() methods work on the JDK classes Reads each class
+ * into an instruction list and then dumps the instructions. The output bytes
+ * should be the same as the input.
  */
 @RunWith(Parameterized.class)
 public class JDKGenericDumpTestCase {
@@ -81,11 +82,13 @@ public class JDKGenericDumpTestCase {
     private static Set<String> findJavaHomesOnWindows(final String[] keys) {
         final Set<String> javaHomes = new HashSet<>(keys.length);
         for (final String key : keys) {
-            final String javaHome = Advapi32Util.registryGetStringValue(HKEY_LOCAL_MACHINE, KEY_JRE + "\\" + key,
-                    "JavaHome");
-            if (StringUtils.isNoneBlank(javaHome)) {
-                if (new File(javaHome).exists()) {
-                    javaHomes.add(javaHome);
+            if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, KEY_JRE + "\\" + key)) {
+                final String javaHome = Advapi32Util.registryGetStringValue(HKEY_LOCAL_MACHINE, KEY_JRE + "\\" + key,
+                        "JavaHome");
+                if (StringUtils.isNoneBlank(javaHome)) {
+                    if (new File(javaHome).exists()) {
+                        javaHomes.add(javaHome);
+                    }
                 }
             }
         }
