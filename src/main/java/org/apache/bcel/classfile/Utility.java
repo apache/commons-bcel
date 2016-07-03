@@ -1083,6 +1083,10 @@ public abstract class Utility {
                     return Const.T_BOOLEAN;
                 case 'S':
                     return Const.T_SHORT;
+                case '!':
+                case '+':
+                case '*':
+                    return typeOfSignature(signature.substring(1));
                 default:
                     throw new ClassFormatException("Invalid method signature: " + signature);
             }
