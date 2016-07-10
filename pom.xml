@@ -193,7 +193,7 @@
 
   <scm>
     <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0</developerConnection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/PSproper/bcel/tags/BCEL_6_0</developerConnection>
     <url>http://svn.apache.org/repos/asf/commons/proper/bcel/tags/BCEL_6_0</url>
   </scm>
 
