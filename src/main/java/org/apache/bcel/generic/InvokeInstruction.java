@@ -93,9 +93,8 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
 
     /**
      * This overrides the deprecated version as we know here that the referenced class
-     * cannot be an array unless something has gone badly wrong.
      * may legally be an array.
-     * *
+     *
      * @return name of the referenced class/interface
      * @throws IllegalArgumentException if the referenced class is an array (this should not happen)
      */ 
@@ -104,9 +103,6 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
         final ConstantPool cp = cpg.getConstantPool();
         final ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         final String className = cp.getConstantString(cmr.getClassIndex(), Const.CONSTANT_Class);
-        if (className.startsWith("[")) {
-            throw new IllegalArgumentException("Cannot be used on an array type");
-        }
         return className.replace('/', '.');
     }
 
