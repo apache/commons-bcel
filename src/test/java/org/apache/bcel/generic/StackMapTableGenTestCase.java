@@ -58,5 +58,5 @@ public class StackMapTableGenTestCase extends TestCase {
         List blocks = sg.splitIntoBlocks(mg.getInstructionList(), mg.getConstantPool());
         assertTrue(blocks.size() == 1); //There is only one frame, because the method1 is empty
     }
-    
+
 }
