@@ -62,6 +62,9 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
+    <release version="6.1" date="tba" description="tba">
+    </release>
+
     <release version="6.0" date="2016-07-10" description="Apache Commons BCEL 6.0 is a major release supporting the new features
  introduced in Java 6, 7 and 8.
 
