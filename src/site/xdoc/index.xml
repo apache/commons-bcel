@@ -7,15 +7,15 @@
     * to you under the Apache License, Version 2.0 (the
     * "License"); you may not use this file except in compliance
     * with the License.  You may obtain a copy of the License at
-    * 
+    *
     *   http://www.apache.org/licenses/LICENSE-2.0
-    * 
+    *
     * Unless required by applicable law or agreed to in writing,
     * software distributed under the License is distributed on an
     * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
     * KIND, either express or implied.  See the License for the
     * specific language governing permissions and limitations
-    * under the License.    
+    * under the License.
 -->
 
 <document>
@@ -24,7 +24,7 @@
     <author email="dev@commons.apache.org">Commons Documentation Team</author>
   </properties>
   <body>
-  
+
     <section name="Commons BCEL">
       <p>
         The Byte Code Engineering Library (Apache Commons BCEL&#x2122;) is intended to give users a
@@ -34,22 +34,22 @@
         of the given class: methods, fields and byte code instructions, in
         particular.
       </p>
-    
+
       <p>
         Such objects can be read from an existing file, be transformed
-        by a program (e.g. a class loader at run-time) and written to a file again. 
-        An even more interesting application is the creation of classes from scratch 
-        at run-time. The Byte Code Engineering Library (BCEL) may be also useful 
-        if you want to learn about the Java Virtual Machine (JVM) and the format of 
-        Java .class files. 
+        by a program (e.g. a class loader at run-time) and written to a file again.
+        An even more interesting application is the creation of classes from scratch
+        at run-time. The Byte Code Engineering Library (BCEL) may be also useful
+        if you want to learn about the Java Virtual Machine (JVM) and the format of
+        Java .class files.
       </p>
-    
+
       <p>
         BCEL contains a byte code verifier named JustIce, which usually
         gives you much better information about what's wrong with your
         code than the standard JVM message.
       </p>
-    
+
       <p>
         BCEL is already being used successfully in several projects such
         as compilers, optimizers, obsfuscators, code generators
