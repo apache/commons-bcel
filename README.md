@@ -62,7 +62,7 @@ Alternatively you can pull it from the central Maven repositories:
 <dependency>
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
-  <version>5.2</version>
+  <version>6.0</version>
 </dependency>
 ```
 
