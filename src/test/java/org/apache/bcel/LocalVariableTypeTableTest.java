@@ -34,9 +34,15 @@ public class LocalVariableTypeTableTest extends AbstractTestCase
         String targetClass = PACKAGE_BASE_NAME + ".data.SimpleClassHasMethodIncludeGenericArgument";
         TestClassLoader loader = new TestClassLoader(getClass().getClassLoader());
         Class cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
-        java.lang.reflect.Method method = cls.getDeclaredMethod("a", String.class, List.class);
 
-        method.invoke(null, "a", new LinkedList<String>());
+        java.lang.reflect.Method method = cls.getDeclaredMethod("a", String.class, List.class);
+        method.invoke(null, "a1", new LinkedList<String>());
+        method = cls.getDeclaredMethod("b", String.class, List.class);
+        method.invoke(null, "b1", new LinkedList<String>());
+        method = cls.getDeclaredMethod("c", String.class, String.class);
+        method.invoke(null, "c1", "c2");
+        method = cls.getDeclaredMethod("d", List.class, String.class);
+        method.invoke(null, new LinkedList<String>(), "d2");
     }
 
     private byte[] getBytesFromClass(String className) throws ClassNotFoundException, IOException
@@ -93,11 +99,13 @@ public class LocalVariableTypeTableTest extends AbstractTestCase
     public InstructionList createPrintln(ConstantPoolGen cp, Instruction instruction)
     {
         final InstructionList il = new InstructionList();
+
         final int out = cp.addFieldref("java.lang.System", "out", "Ljava/io/PrintStream;");
         final int println = cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/String;)V");
         il.append(new GETSTATIC(out));
         il.append(instruction);
         il.append(new INVOKEVIRTUAL(println));
+
         return il;
     }
 
