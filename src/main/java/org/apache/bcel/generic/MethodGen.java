@@ -25,21 +25,7 @@ import java.util.List;
 import java.util.Stack;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.classfile.AnnotationEntry;
-import org.apache.bcel.classfile.Annotations;
-import org.apache.bcel.classfile.Attribute;
-import org.apache.bcel.classfile.Code;
-import org.apache.bcel.classfile.CodeException;
-import org.apache.bcel.classfile.ExceptionTable;
-import org.apache.bcel.classfile.LineNumber;
-import org.apache.bcel.classfile.LineNumberTable;
-import org.apache.bcel.classfile.LocalVariable;
-import org.apache.bcel.classfile.LocalVariableTable;
-import org.apache.bcel.classfile.Method;
-import org.apache.bcel.classfile.ParameterAnnotationEntry;
-import org.apache.bcel.classfile.ParameterAnnotations;
-import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
-import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.classfile.*;
 import org.apache.bcel.util.BCELComparator;
 
 /** 

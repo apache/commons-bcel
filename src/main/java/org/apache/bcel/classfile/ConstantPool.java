@@ -131,7 +131,7 @@ public class ConstantPool implements Cloneable, Node {
             case Const.CONSTANT_NameAndType:
                 str = constantToString(((ConstantNameAndType) c).getNameIndex(),
                         Const.CONSTANT_Utf8)
-                        + ":" + constantToString(((ConstantNameAndType) c).getSignatureIndex(),
+                        + " " + constantToString(((ConstantNameAndType) c).getSignatureIndex(),
                         Const.CONSTANT_Utf8);
                 break;
             case Const.CONSTANT_InterfaceMethodref:
