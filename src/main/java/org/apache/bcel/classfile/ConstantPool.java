@@ -131,7 +131,7 @@ public class ConstantPool implements Cloneable, Node {
             case Const.CONSTANT_NameAndType:
                 str = constantToString(((ConstantNameAndType) c).getNameIndex(),
                         Const.CONSTANT_Utf8)
-                        + ":" + constantToString(((ConstantNameAndType) c).getSignatureIndex(),
+                        + " " + constantToString(((ConstantNameAndType) c).getSignatureIndex(),
                         Const.CONSTANT_Utf8);
                 break;
             case Const.CONSTANT_InterfaceMethodref:
@@ -148,7 +148,7 @@ public class ConstantPool implements Cloneable, Node {
                 str = Const.getMethodHandleName(cmh.getReferenceKind())
                         + " " + constantToString(cmh.getReferenceIndex(),
                         getConstant(cmh.getReferenceIndex()).getTag());
-                break;            
+                break;
             case Const.CONSTANT_MethodType:
                 final ConstantMethodType cmt = (ConstantMethodType) c;
                 str = constantToString(cmt.getDescriptorIndex(), Const.CONSTANT_Utf8);
@@ -209,7 +209,7 @@ public class ConstantPool implements Cloneable, Node {
     }
 
 
-    /** 
+    /**
      * Dump constant pool to file stream in binary format.
      *
      * @param file Output file stream
