@@ -17,13 +17,6 @@
  */
 package org.apache.bcel.generic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Stack;
-
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Annotations;
@@ -35,12 +28,20 @@ import org.apache.bcel.classfile.LineNumber;
 import org.apache.bcel.classfile.LineNumberTable;
 import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Stack;
 
 /** 
  * Template class for building up a method. This is done by defining exception
@@ -236,6 +237,22 @@ public class MethodGen extends FieldGenOrMethodGen {
                             }
                             addLocalVariable(l.getName(), Type.getType(l.getSignature()), l
                                     .getIndex(), start, end);
+                        }
+                    } else if (a instanceof LocalVariableTypeTable) { // generic variables by sam.
+                        LocalVariable[] lv = ((LocalVariableTypeTable) a).getLocalVariableTypeTable();
+                        for (int k = 0; k < lv.length; k++)
+                        {
+                            LocalVariable l = lv[k];
+                            InstructionHandle start = il.findHandle(l.getStartPC());
+                            InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
+                            // Repair malformed handles
+                            if (null == start) {
+                                start = il.getStart();
+                            }
+                            if (null == end) {
+                                end = il.getEnd();
+                            }
+                            addLocalVariable(l.getName(), Type.getType(l.getSignature()), l.getIndex(), start, end);
                         }
                     } else {
                         addCodeAttribute(a);
