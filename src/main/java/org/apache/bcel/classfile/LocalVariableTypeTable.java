@@ -80,7 +80,7 @@ public class LocalVariableTypeTable extends Attribute {
 
     @Override
     public void accept(final Visitor v) {
-        v.visitLocalVariableTypeTable(this);
+        //v.visitLocalVariableTypeTable(this);
     }
 
     @Override

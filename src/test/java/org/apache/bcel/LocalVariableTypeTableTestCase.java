@@ -36,10 +36,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author sam
- */
-public class LocalVariableTypeTableTest extends AbstractTestCase {
+public class LocalVariableTypeTableTestCase extends AbstractTestCase {
     public class TestClassLoader extends ClassLoader {
         public TestClassLoader(ClassLoader parent) {
             super(parent);
