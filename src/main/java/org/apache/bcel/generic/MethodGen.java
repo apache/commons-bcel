@@ -239,7 +239,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                                     .getIndex(), start, end);
                         }
                     } else if (a instanceof LocalVariableTypeTable) {
-                        
+                        // No need to add code attribute for LocalVariableTypeTable. It's cause does not match any LVT entry error.
                     } else {
                         addCodeAttribute(a);
                     }
