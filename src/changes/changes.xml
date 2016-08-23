@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.1" date="tba" description="tba">
+      <action issue="BCEL-277" type="fix" dev="britter" due-to="Sam Yoon">Resolving the String representation of a constant throws NoSuchElementException in case of CONSTANT_NameAndType constant.</action>
     </release>
 
     <release version="6.0" date="2016-07-10" description="Apache Commons BCEL 6.0 is a major release supporting the new features
