@@ -66,6 +66,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     private int max_stack;
     private InstructionList il;
     private boolean strip_attributes;
+    private LocalVariableTypeTable local_variable_type_table = null;
     private final List<LocalVariableGen> variable_vec = new ArrayList<>();
     private final List<LineNumberGen> line_number_vec = new ArrayList<>();
     private final List<CodeExceptionGen> exception_vec = new ArrayList<>();
@@ -239,7 +240,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                                     .getIndex(), start, end);
                         }
                     } else if (a instanceof LocalVariableTypeTable) {
-                        // No need to add code attribute for LocalVariableTypeTable. It's cause does not match any LVT entry error.
+                        local_variable_type_table = (LocalVariableTypeTable) a;
                     } else {
                         addCodeAttribute(a);
                     }
@@ -294,7 +295,6 @@ public class MethodGen extends FieldGenOrMethodGen {
         throw new IllegalArgumentException("Can not use " + type
                 + " as type for local variable");
     }
-
 
     /**
      * Adds a local variable to this method and assigns an index automatically.
@@ -633,6 +633,22 @@ public class MethodGen extends FieldGenOrMethodGen {
          */
         if ((variable_vec.size() > 0) && !strip_attributes) {
             addCodeAttribute(lvt = getLocalVariableTable(_cp));
+        }
+        if (local_variable_type_table != null) {
+            // LocalVariableTypeTable start pc is not updated automatically. It's a difference with LocalVariableTable.
+            LocalVariable[] lv = lvt.getLocalVariableTable();
+            LocalVariable[] lvg = local_variable_type_table.getLocalVariableTypeTable();
+
+            for (int i = 0, length = lvg.length; i < length; i++) {
+                for (LocalVariable l : lv) {
+                    if (lvg[i].getName().equals(l.getName()) && lvg[i].getIndex() == l.getIndex()) {
+                        lvg[i].setStartPC(l.getStartPC());
+                        break;
+                    }
+                }
+            }
+
+            addCodeAttribute(local_variable_type_table);
         }
         if ((line_number_vec.size() > 0) && !strip_attributes) {
             addCodeAttribute(lnt = getLineNumberTable(_cp));
