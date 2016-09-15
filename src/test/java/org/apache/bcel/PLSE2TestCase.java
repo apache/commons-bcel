@@ -1,10 +1,10 @@
-package org.apache.commons.bcel6;
+package org.apache.bcel;
 
 import junit.framework.TestCase;
-import org.apache.commons.bcel6.*;
-import org.apache.commons.bcel6.classfile.Signature;
-import org.apache.commons.bcel6.classfile.Utility;
-import org.apache.commons.bcel6.generic.Type;
+import org.apache.bcel.*;
+import org.apache.bcel.classfile.Signature;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.Type;
 
 public class PLSE2TestCase extends AbstractTestCase {
 
