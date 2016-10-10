@@ -137,7 +137,7 @@
         <tt>ldc</tt> ("Load constant") pushes a reference to the string
         "Hello world" on the stack. The next instruction invokes the
         instance method <tt>println</tt> which takes both values as
-        parameters (Instance methods always implicitly take an instance
+        parameters (instance methods always implicitly take an instance
         reference as their first argument).
       </p>
 
@@ -469,7 +469,7 @@ public class Factorial {
 
       <p><b>readInt():</b> First the local variable <tt>n</tt> (at index 0)
         is initialized to the value 4711.  The next instruction,
-        <tt>getstatic</tt>, loads the referencs held by the static
+        <tt>getstatic</tt>, loads the references held by the static
         <tt>System.out</tt> field onto the stack. Then a string is loaded
         and printed, a number read from the standard input and assigned to
         <tt>n</tt>.
