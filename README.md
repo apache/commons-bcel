@@ -45,6 +45,11 @@ Apache Commons BCEL
 
 Apache Commons Bytecode Engineering Library
 
+[![Build Status](https://travis-ci.org/apache/commons-bcel.svg?branch=master)](https://travis-ci.org/apache/commons-bcel)
+[![Coverage Status](https://coveralls.io/repos/apache/commons-bcel/badge.svg?branch=master)](https://coveralls.io/r/apache/commons-bcel)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/)
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+
 Documentation
 -------------
 
