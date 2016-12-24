@@ -21,7 +21,7 @@
 This file is also used by the maven-changes-plugin to generate the release notes.
 Useful ways of finding items to add to this file are:
 
-1.  Add items when you fix a bug or add a feature (this makes the 
+1.  Add items when you fix a bug or add a feature (this makes the
 release process easy :-).
 
 2.  Do a JIRA search for tickets closed since the previous release.
@@ -33,7 +33,7 @@ To generate the release notes from this file:
 
 mvn changes:announcement-generate -Prelease-notes [-Dchanges.version=nnn]
 
-then tweak the formatting if necessary 
+then tweak the formatting if necessary
 and commit
 
 The <action> type attribute can be add,update,fix,remove.
@@ -45,16 +45,16 @@ The <action> type attribute can be add,update,fix,remove.
     <author email="dev@commons.apache.org">Apache Commons developers</author>
   </properties>
 
-  <!-- NOTE: 
+  <!-- NOTE:
   The description below is specially formatted so as to improve the layout of the generated release notes:
   The parsing process removes all line feeds, replacing them with a single space.
   The Velocity template in resources/templates has been enhanced to replace pairs of adjacent spaces
   with a new-line in the release notes. (These spaces are ignored when displaying HTML).
   If the output is not quite correct, check for invisible trailing spaces!
-  
+
   N.B. The release notes template groups actions by type, and only extracts data for the current release.
   The changes report outputs actions in the order they appear in this file.
-  
+
   To regenerate the release notes:
   mvn changes:announcement-generate -Prelease-notes [-Dchanges.version=nnn]
 
@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.1" date="tba" description="tba">
+      <action issue="BCEL-276" type="fix" dev="britter" due-to="Sam Yoon">LocalVariableTypeTable is not updated.</action>
       <action issue="BCEL-277" type="fix" dev="britter" due-to="Sam Yoon">Resolving the String representation of a constant throws NoSuchElementException in case of CONSTANT_NameAndType constant.</action>
     </release>
 
@@ -72,7 +73,7 @@ The <action> type attribute can be add,update,fix,remove.
 
  It requires Java 7 or higher to run.
 
-   
+
 COMPATIBILITY with 5.2
  ======================
 
@@ -111,7 +112,7 @@ Source compatible - Yes, sort of;
 For full information about API changes please see the extended Clirr report:
 
     http://commons.apache.org/bcel/clirr-report.html">
-      <action issue="BCEL-262" type="update" dev="britter" due-to="Mark Roberts">InvokeInstruction.getClassName(ConstantPoolGen) 
+      <action issue="BCEL-262" type="update" dev="britter" due-to="Mark Roberts">InvokeInstruction.getClassName(ConstantPoolGen)
                                           should not throw an exception when it detects an array.</action>
       <action issue="BCEL-237" type="fix" dev="sebb">non-empty final arrays should be private as they are mutable.</action>
       <action issue="BCEL-230" type="update" dev="britter">Document the Java platform requirement clearly and early.</action>
