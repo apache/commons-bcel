@@ -20,7 +20,7 @@ package org.apache.bcel.classfile;
 /**
  * Visitor with empty method bodies, can be extended and used in conjunction
  * with the DescendingVisitor class, e.g. By courtesy of David Spencer.
- * 
+ *
  * @see DescendingVisitor
  * @version $Id$
  */
@@ -295,5 +295,19 @@ public class EmptyVisitor implements Visitor
      */
     @Override
     public void visitParameterAnnotationEntry(final ParameterAnnotationEntry parameterAnnotationEntry) {
+    }
+
+    /**
+     * @since 6.1
+     */
+    @Override
+    public void visitConstantPackage(final ConstantPackage constantPackage) {
+    }
+
+    /**
+     * @since 6.1
+     */
+    @Override
+    public void visitConstantModule(final ConstantModule constantModule) {
     }
 }
