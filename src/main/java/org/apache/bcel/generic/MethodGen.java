@@ -1146,11 +1146,11 @@ public class MethodGen extends FieldGenOrMethodGen {
                 } else {
                     paramAnnInvisAttr = rpa;
                 }
-                for (int j = 0; j < arg_types.length; j++)
+                final ParameterAnnotationEntry[] parameterAnnotationEntries = rpa.getParameterAnnotationEntries();
+                for (int j = 0; j < parameterAnnotationEntries.length; j++)
                 {
                     // This returns Annotation[] ...
-                    final ParameterAnnotationEntry immutableArray = rpa
-                            .getParameterAnnotationEntries()[j];
+                    final ParameterAnnotationEntry immutableArray = rpa.getParameterAnnotationEntries()[j];
                     // ... which needs transforming into an AnnotationGen[] ...
                     final List<AnnotationEntryGen> mutable = makeMutableVersion(immutableArray.getAnnotationEntries());
                     // ... then add these to any we already know about
