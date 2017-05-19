@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.1" date="tba" description="tba">
+      <action issue="BCEL-289" type="fix" dev="kinow">Crash when parsing constructor of inner classes with parameters annotated</action>
       <action issue="BCEL-276" type="fix" dev="britter" due-to="Sam Yoon">LocalVariableTypeTable is not updated.</action>
       <action issue="BCEL-277" type="fix" dev="britter" due-to="Sam Yoon">Resolving the String representation of a constant throws NoSuchElementException in case of CONSTANT_NameAndType constant.</action>
     </release>
