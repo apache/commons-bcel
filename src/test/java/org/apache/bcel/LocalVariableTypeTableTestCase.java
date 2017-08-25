@@ -71,8 +71,9 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
 
         for (int i = 0; i < methods.length; i++) {
             Method method = methods[i];
-            if (!method.isNative() && !method.isAbstract())
+            if (!method.isNative() && !method.isAbstract()) {
                 methods[i] = injection(clazz, method, cp, findFirstStringLocalVariableOffset(method));
+            }
         }
 
         clazz.setConstantPool(cp.getFinalConstantPool());
@@ -96,16 +97,18 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
     }
 
     public InstructionList makeWillBeAddedInstructionList(MethodGen methodGen, int firstStringOffset) {
-        if (firstStringOffset == -1)
+        if (firstStringOffset == -1) {
             return new InstructionList();
+        }
 
         LocalVariableGen localVariableGen = methodGen.getLocalVariables()[firstStringOffset];
         Instruction instruction;
 
-        if (localVariableGen != null)
+        if (localVariableGen != null) {
             instruction = new ALOAD(localVariableGen.getIndex());
-        else
+        } else {
             instruction = new ACONST_NULL();
+        }
 
         return createPrintln(methodGen.getConstantPool(), instruction);
     }
@@ -128,10 +131,11 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
 
         for (int i = 0, count = argumentTypes.length; i < count; i++) {
             if (Type.STRING.getSignature().equals(argumentTypes[i].getSignature())) {
-                if (method.isStatic())
+                if (method.isStatic()) {
                     offset = i;
-                else
+                } else {
                     offset = i + 1;
+                }
 
                 break;
             }
