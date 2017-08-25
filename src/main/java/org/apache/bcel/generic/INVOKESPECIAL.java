@@ -23,7 +23,7 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 import org.apache.bcel.ExceptionConst;
 
-/** 
+/**
  * INVOKESPECIAL - Invoke instance method; special handling for superclass, private
  * and instance initialization method invocations
  *
@@ -62,7 +62,7 @@ public class INVOKESPECIAL extends InvokeInstruction {
     @Override
     public Class<?>[] getExceptions() {
         return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConst.NULL_POINTER_EXCEPTION, 
+            ExceptionConst.NULL_POINTER_EXCEPTION,
             ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR,
             ExceptionConst.ABSTRACT_METHOD_ERROR,
             ExceptionConst.UNSATISFIED_LINK_ERROR);

@@ -22,9 +22,9 @@ import java.io.IOException;
 
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * Select - Abstract super class for LOOKUPSWITCH and TABLESWITCH instructions.
- * 
+ *
  * <p>We use our super's <code>target</code> property as the default target.
  *
  * @version $Id$
@@ -337,9 +337,9 @@ public abstract class Select extends BranchInstruction implements VariableLength
         this.match_length = match_length;
         return match_length;
     }
-    
+
     /**
-     * 
+     *
      * @param index
      * @param value
      * @since 6.0
@@ -347,36 +347,36 @@ public abstract class Select extends BranchInstruction implements VariableLength
     final void setMatch(final int index, final int value) {
         match[index] = value;
     }
-    
+
     /**
-     * 
+     *
      * @param array
      * @since 6.0
      */
     final void setIndices(final int[] array) {
         indices = array;
     }
-    
+
     /**
-     * 
+     *
      * @param array
      * @since 6.0
      */
     final void setMatches(final int[] array) {
         match = array;
     }
-    
+
     /**
-     * 
+     *
      * @param array
      * @since 6.0
      */
     final void setTargets(final InstructionHandle[] array) {
         targets = array;
     }
-    
+
     /**
-     * 
+     *
      * @return the padding
      * @since 6.0
      */

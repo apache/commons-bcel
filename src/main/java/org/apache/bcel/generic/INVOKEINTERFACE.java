@@ -25,7 +25,7 @@ import org.apache.bcel.ExceptionConst;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * INVOKEINTERFACE - Invoke interface method
  * <PRE>Stack: ..., objectref, [arg1, [arg2 ...]] -&gt; ...</PRE>
  *

@@ -20,7 +20,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 import org.apache.bcel.ExceptionConst;
 
-/** 
+/**
  * GETFIELD - Fetch field from object
  * <PRE>Stack: ..., objectref -&gt; ..., value</PRE>
  * OR

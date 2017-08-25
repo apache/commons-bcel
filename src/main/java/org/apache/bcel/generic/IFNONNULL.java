@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * IFNONNULL - Branch if reference is not null
  *
  * <PRE>Stack: ..., reference -&gt; ...</PRE>

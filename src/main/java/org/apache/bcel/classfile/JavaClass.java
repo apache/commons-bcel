@@ -72,7 +72,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public static final byte FILE = 2;
     public static final byte ZIP = 3;
     private static final boolean debug = Boolean.getBoolean("JavaClass.debug"); // Debugging on/off
-    
+
     private static BCELComparator bcelComparator = new BCELComparator() {
 
         @Override
@@ -151,7 +151,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             }
         }
         /* According to the specification the following entries must be of type
-         * `ConstantClass' but we check that anyway via the 
+         * `ConstantClass' but we check that anyway via the
          * `ConstPool.getConstant' method.
          */
         class_name = constant_pool.getConstantString(class_name_index, Const.CONSTANT_Class);
@@ -223,7 +223,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
 
-    /** 
+    /**
      * Dump class to a file.
      *
      * @param file Output file
@@ -245,7 +245,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
 
-    /** 
+    /**
      * Dump class to a file named file_name.
      *
      * @param _file_name Output file name
@@ -341,7 +341,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         if (annotations == null) {
             annotations = AnnotationEntry.createAnnotationEntries(getAttributes());
         }
-        
+
         return annotations;
     }
 
@@ -896,7 +896,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Return value as defined by given BCELComparator strategy.
      * By default two JavaClass objects are said to be equal when
      * their class names are equal.
-     * 
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -919,7 +919,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Return value as defined by given BCELComparator strategy.
      * By default return the hashcode of the class name.
-     * 
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override

@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.statics;
 
 
@@ -51,7 +51,7 @@ public class LocalVariablesInfo{
     }
 
     /**
-     * Adds information about the local variable in slot 'slot'. Automatically 
+     * Adds information about the local variable in slot 'slot'. Automatically
      * adds information for slot+1 if 't' is Type.LONG or Type.DOUBLE.
      * @throws LocalVariableInfoInconsistentException if the new information conflicts
      *         with already gathered information.

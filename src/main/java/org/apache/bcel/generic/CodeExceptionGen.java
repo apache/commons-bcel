@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.classfile.CodeException;
 
-/** 
+/**
  * This class represents an exception handler, i.e., specifies the  region where
  * a handler is active and an instruction where the actual handling is done.
  * pool as parameters. Opposed to the JVM specification the end of the handled
@@ -75,7 +75,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
 
-    /* Set start of handler 
+    /* Set start of handler
      * @param start_pc Start of handled region (inclusive)
      */
     public void setStartPC( final InstructionHandle start_pc ) { // TODO could be package-protected?
@@ -84,7 +84,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
 
-    /* Set end of handler 
+    /* Set end of handler
      * @param end_pc End of handled region (inclusive)
      */
     public void setEndPC( final InstructionHandle end_pc ) { // TODO could be package-protected?

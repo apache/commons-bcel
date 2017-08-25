@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.exc;
 
 
@@ -47,7 +47,7 @@ public final class AssertionViolatedException extends RuntimeException{
     public AssertionViolatedException(String message, final Throwable initCause) {
         super(message = "INTERNAL ERROR: "+message, initCause);
         detailMessage=message;
-    }    
+    }
     /** Extends the error message with a string before ("pre") and after ("post") the
         'old' error message. All of these three strings are allowed to be null, and null
         is always replaced by the empty string (""). In particular, after invoking this
@@ -74,7 +74,7 @@ public final class AssertionViolatedException extends RuntimeException{
         return detailMessage;
     }
 
-    /** 
+    /**
      * DO NOT USE. It's for experimental testing during development only.
      */
     public static void main(final String[] args) {

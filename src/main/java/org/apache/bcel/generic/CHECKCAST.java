@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.ExceptionConst;
 
-/** 
+/**
  * CHECKCAST - Check whether object is of given type
  * <PRE>Stack: ..., objectref -&gt; ..., objectref</PRE>
  *

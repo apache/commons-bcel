@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.structurals;
 
 
@@ -55,7 +55,7 @@ public class OperandStack implements Cloneable {
     public OperandStack(final int maxStack, final ObjectType obj) {
         this.maxStack = maxStack;
         this.push(obj);
-    }    
+    }
     /**
      * Returns a deep copy of this object; that means, the clone operates
      * on a new stack. However, the Type objects on the stack are
@@ -179,7 +179,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the number of stack slots used.
      * @see #maxStack()
-     */    
+     */
     public int slotsUsed() {
         /*  XXX change this to a better implementation using a variable
             that keeps track of the actual slotsUsed()-value monitoring

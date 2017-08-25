@@ -21,7 +21,7 @@ import java.util.LinkedList;
 
 import org.apache.bcel.classfile.JavaClass;
 
-/** 
+/**
  * Utility class implementing a (typesafe) queue of JavaClass
  * objects.
  *

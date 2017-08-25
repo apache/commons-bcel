@@ -34,7 +34,7 @@ import org.apache.bcel.classfile.Utility;
  * Convert methods and fields into HTML file.
  *
  * @version $Id$
- * 
+ *
  */
 final class MethodHTML {
 
@@ -104,7 +104,7 @@ final class MethodHTML {
     private void writeMethod( final Method method, final int method_number ) {
         // Get raw signature
         final String signature = method.getSignature();
-        // Get array of strings containing the argument types 
+        // Get array of strings containing the argument types
         final String[] args = Utility.methodSignatureArgumentTypes(signature, false);
         // Get return type string
         final String type = Utility.methodSignatureReturnType(signature, false);

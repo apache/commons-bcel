@@ -89,10 +89,10 @@ public abstract class ElementValue
             case PRIMITIVE_BOOLEAN:
             case STRING:
                 return new SimpleElementValue(type, input.readUnsignedShort(), cpool);
-            
+
             case ENUM_CONSTANT:
                 return new EnumElementValue(ENUM_CONSTANT, input.readUnsignedShort(), input.readUnsignedShort(), cpool);
-            
+
             case CLASS:
                 return new ClassElementValue(CLASS, input.readUnsignedShort(), cpool);
 

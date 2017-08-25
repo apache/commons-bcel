@@ -33,13 +33,13 @@ public final class LineNumber implements Cloneable, Node {
 
     /** Program Counter (PC) corresponds to line */
     private short start_pc;
-    
+
     /** number in source file */
     private short line_number;
 
     /**
      * Initialize from another object.
-     * 
+     *
      * @param c the object to copy
      */
     public LineNumber(final LineNumber c) {
@@ -49,7 +49,7 @@ public final class LineNumber implements Cloneable, Node {
 
     /**
      * Construct object from file stream.
-     * 
+     *
      * @param file Input stream
      * @throws IOEXception if an I/O Exception occurs in readUnsignedShort
      */

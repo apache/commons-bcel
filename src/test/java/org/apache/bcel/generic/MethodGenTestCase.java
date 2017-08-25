@@ -36,7 +36,7 @@ public class MethodGenTestCase extends TestCase {
         }
     }
 
-    @interface A {        
+    @interface A {
     }
 
     @interface B {
@@ -45,7 +45,7 @@ public class MethodGenTestCase extends TestCase {
     public static class Bar {
         public class Inner {
             public Inner(@A final Object a, @B final Object b) {
-                
+
             }
         }
     }

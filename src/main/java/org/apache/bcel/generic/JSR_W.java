@@ -22,7 +22,7 @@ import java.io.IOException;
 
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * JSR_W - Jump to subroutine
  *
  * @version $Id$

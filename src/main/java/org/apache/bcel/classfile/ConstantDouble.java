@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * This class is derived from the abstract  {@link Constant}
  * and represents a reference to a Double object.
  *
@@ -35,7 +35,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     private double bytes;
 
 
-    /** 
+    /**
      * @param bytes Data
      */
     public ConstantDouble(final double bytes) {
@@ -52,7 +52,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     }
 
 
-    /** 
+    /**
      * Initialize instance from file data.
      *
      * @param file Input stream

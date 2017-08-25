@@ -20,7 +20,7 @@ package org.apache.bcel.classfile;
 import junit.framework.TestCase;
 
 public class UtilityTestCase extends TestCase {
-    
+
     public void testSignatureToStringWithGenerics() throws Exception {
         assertEquals("generic signature",
                 "java.util.Map<X, java.util.List<Y>>",

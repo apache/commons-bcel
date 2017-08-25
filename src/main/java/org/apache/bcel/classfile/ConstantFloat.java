@@ -23,8 +23,8 @@ import java.io.IOException;
 
 import org.apache.bcel.Const;
 
-/** 
- * This class is derived from the abstract {@link Constant} 
+/**
+ * This class is derived from the abstract {@link Constant}
  * and represents a reference to a float object.
  *
  * @version $Id$
@@ -35,7 +35,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     private float bytes;
 
 
-    /** 
+    /**
      * @param bytes Data
      */
     public ConstantFloat(final float bytes) {
@@ -53,7 +53,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     }
 
 
-    /** 
+    /**
      * Initialize instance from file data.
      *
      * @param file Input stream

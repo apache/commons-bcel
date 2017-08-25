@@ -24,7 +24,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * Abstract super class for all Java byte codes.
  *
  * @version $Id$
@@ -35,7 +35,7 @@ public abstract class Instruction implements Cloneable {
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
-    protected short length = 1; // Length of instruction in bytes 
+    protected short length = 1; // Length of instruction in bytes
 
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
@@ -79,7 +79,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Long output format:
      *
-     * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]" 
+     * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]"
      * "("&lt;length of instruction&gt;")"
      *
      * @param verbose long/short format switch
@@ -112,7 +112,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * Use with caution, since `BranchInstruction's have a `target' reference which
-     * is not copied correctly (only basic types are). This also applies for 
+     * is not copied correctly (only basic types are). This also applies for
      * `Select' instructions with their multiple branch targets.
      *
      * @see BranchInstruction

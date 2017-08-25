@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * BALOAD - Load byte or boolean from array
  * <PRE>Stack: ..., arrayref, index -&gt; ..., value</PRE>
  *

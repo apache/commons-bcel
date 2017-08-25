@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * Returnaddress, the type JSR or JSR_W instructions push upon the stack.
  *
  * see vmspec2 �3.3.3

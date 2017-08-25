@@ -33,7 +33,7 @@ import org.apache.bcel.Const;
  * <em>LocalVariableTable</em>, <em>InnerClasses</em> and
  * <em>Synthetic</em> attributes are supported. The <em>Unknown</em>
  * attribute stands for non-standard-attributes.
- * 
+ *
  * @version $Id$
  * @see ConstantValue
  * @see SourceFile
@@ -85,7 +85,7 @@ public abstract class Attribute implements Cloneable, Node {
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
-     * 
+     *
      * @param v
      *            Visitor object
      */
@@ -94,7 +94,7 @@ public abstract class Attribute implements Cloneable, Node {
 
     /**
      * Dump attribute to file stream in binary format.
-     * 
+     *
      * @param file
      *            Output file stream
      * @throws IOException
@@ -111,7 +111,7 @@ public abstract class Attribute implements Cloneable, Node {
      * Add an Attribute reader capable of parsing (user-defined) attributes
      * named "name". You should not add readers for the standard attributes such
      * as "LineNumberTable", because those are handled internally.
-     * 
+     *
      * @param name the name of the attribute as stored in the class file
      * @param r    the reader object
      * @deprecated (6.0) Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead
@@ -126,7 +126,7 @@ public abstract class Attribute implements Cloneable, Node {
      * Add an Attribute reader capable of parsing (user-defined) attributes
      * named "name". You should not add readers for the standard attributes such
      * as "LineNumberTable", because those are handled internally.
-     * 
+     *
      * @param name the name of the attribute as stored in the class file
      * @param r    the reader object
      */
@@ -137,7 +137,7 @@ public abstract class Attribute implements Cloneable, Node {
 
     /**
      * Remove attribute reader
-     * 
+     *
      * @param name the name of the attribute as stored in the class file
      */
     public static void removeAttributeReader(final String name)
@@ -149,10 +149,10 @@ public abstract class Attribute implements Cloneable, Node {
      * Class method reads one attribute from the input data stream. This method
      * must not be accessible from the outside. It is called by the Field and
      * Method constructor methods.
-     * 
+     *
      * @see Field
      * @see Method
-     * 
+     *
      * @param file Input stream
      * @param constant_pool Array of constants
      * @return Attribute
@@ -169,10 +169,10 @@ public abstract class Attribute implements Cloneable, Node {
      * Class method reads one attribute from the input data stream. This method
      * must not be accessible from the outside. It is called by the Field and
      * Method constructor methods.
-     * 
+     *
      * @see Field
      * @see Method
-     * 
+     *
      * @param file Input stream
      * @param constant_pool Array of constants
      * @return Attribute
@@ -188,10 +188,10 @@ public abstract class Attribute implements Cloneable, Node {
         final int name_index = file.readUnsignedShort();
         final ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
         final String name = c.getBytes();
-        
+
         // Length of data in bytes
         final int length = file.readInt();
-        
+
         // Compare strings to find known attribute
         for (byte i = 0; i < Const.KNOWN_ATTRIBUTES; i++)
         {
@@ -333,7 +333,7 @@ public abstract class Attribute implements Cloneable, Node {
     /**
      * Use copy() if you want to have a deep copy(), i.e., with all references
      * copied correctly.
-     * 
+     *
      * @return shallow copy of this attribute
      */
     @Override

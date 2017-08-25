@@ -37,7 +37,7 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.ConstantUtf8;
 
-/** 
+/**
  * This class is used to build up a constant pool. The user adds
  * constants via `addXXX' methods, `addString', `addClass',
  * etc.. These methods return an index into the constant
@@ -58,7 +58,7 @@ public class ConstantPoolGen {
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
-    protected int size; 
+    protected int size;
 
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
@@ -232,7 +232,7 @@ public class ConstantPoolGen {
     private final Map<String, Index> string_table = new HashMap<>();
 
 
-    /** 
+    /**
      * Look for ConstantString in ConstantPool containing String `str'.
      *
      * @param str String to search for
@@ -331,7 +331,7 @@ public class ConstantPoolGen {
     }
 
 
-    /** 
+    /**
      * Look for ConstantInteger in ConstantPool.
      *
      * @param n integer number to look for
@@ -368,7 +368,7 @@ public class ConstantPoolGen {
     }
 
 
-    /** 
+    /**
      * Look for ConstantFloat in ConstantPool.
      *
      * @param n Float number to look for
@@ -408,7 +408,7 @@ public class ConstantPoolGen {
     private final Map<String, Index> utf8_table = new HashMap<>();
 
 
-    /** 
+    /**
      * Look for ConstantUtf8 in ConstantPool.
      *
      * @param n Utf8 string to look for
@@ -441,7 +441,7 @@ public class ConstantPoolGen {
     }
 
 
-    /** 
+    /**
      * Look for ConstantLong in ConstantPool.
      *
      * @param n Long number to look for
@@ -479,7 +479,7 @@ public class ConstantPoolGen {
     }
 
 
-    /** 
+    /**
      * Look for ConstantDouble in ConstantPool.
      *
      * @param n Double number to look for
@@ -520,7 +520,7 @@ public class ConstantPoolGen {
     private final Map<String, Index> n_a_t_table = new HashMap<>();
 
 
-    /** 
+    /**
      * Look for ConstantNameAndType in ConstantPool.
      *
      * @param name of variable/method
@@ -534,7 +534,7 @@ public class ConstantPoolGen {
 
 
     /**
-     * Add a new NameAndType constant to the ConstantPool if it is not already 
+     * Add a new NameAndType constant to the ConstantPool if it is not already
      * in there.
      *
      * @param name Name string to add
@@ -563,7 +563,7 @@ public class ConstantPoolGen {
     private final Map<String, Index> cp_table = new HashMap<>();
 
 
-    /** 
+    /**
      * Look for ConstantMethodref in ConstantPool.
      *
      * @param class_name Where to find method
@@ -584,7 +584,7 @@ public class ConstantPoolGen {
 
 
     /**
-     * Add a new Methodref constant to the ConstantPool, if it is not already 
+     * Add a new Methodref constant to the ConstantPool, if it is not already
      * in there.
      *
      * @param class_name class name string to add
@@ -617,7 +617,7 @@ public class ConstantPoolGen {
     }
 
 
-    /** 
+    /**
      * Look for ConstantInterfaceMethodref in ConstantPool.
      *
      * @param class_name Where to find method
@@ -639,7 +639,7 @@ public class ConstantPoolGen {
 
 
     /**
-     * Add a new InterfaceMethodref constant to the ConstantPool, if it is not already 
+     * Add a new InterfaceMethodref constant to the ConstantPool, if it is not already
      * in there.
      *
      * @param class_name class name string to add
@@ -672,7 +672,7 @@ public class ConstantPoolGen {
     }
 
 
-    /** 
+    /**
      * Look for ConstantFieldref in ConstantPool.
      *
      * @param class_name Where to find method
@@ -688,7 +688,7 @@ public class ConstantPoolGen {
 
 
     /**
-     * Add a new Fieldref constant to the ConstantPool, if it is not already 
+     * Add a new Fieldref constant to the ConstantPool, if it is not already
      * in there.
      *
      * @param class_name class name string to add

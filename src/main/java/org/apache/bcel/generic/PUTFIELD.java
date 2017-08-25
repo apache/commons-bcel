@@ -20,7 +20,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 import org.apache.bcel.ExceptionConst;
 
-/** 
+/**
  * PUTFIELD - Put field in object
  * <PRE>Stack: ..., objectref, value -&gt; ...</PRE>
  * OR

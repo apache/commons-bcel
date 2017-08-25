@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
-/** 
+/**
  * This interface denotes those constants that have a "natural" value,
  * such as ConstantLong, ConstantString, etc..
  *

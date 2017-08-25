@@ -23,7 +23,7 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 import org.apache.bcel.ExceptionConst;
 
-/** 
+/**
  * INVOKESTATIC - Invoke a class (static) method
  *
  * <PRE>Stack: ..., [arg1, [arg2 ...]] -&gt; ...</PRE>

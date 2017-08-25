@@ -20,7 +20,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 import org.apache.bcel.ExceptionConst;
 
-/** 
+/**
  * PUTSTATIC - Put static field in class
  * <PRE>Stack: ..., value -&gt; ...</PRE>
  * OR

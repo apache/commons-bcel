@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * IF_ACMPEQ - Branch if reference comparison succeeds
  *
  * <PRE>Stack: ..., value1, value2 -&gt; ...</PRE>

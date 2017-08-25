@@ -56,7 +56,7 @@ public final class StackMap extends Attribute {
 
     /**
      * Construct object from input stream.
-     * 
+     *
      * @param name_index Index of name
      * @param length Content length in bytes
      * @param input Input stream

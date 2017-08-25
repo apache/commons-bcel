@@ -54,7 +54,7 @@ public abstract class Constant implements Cloneable, Node {
      * places we will use the tag for switch()es anyway.
      *
      * First, we want match the specification as closely as possible. Second we
-     * need the tag as an index to select the corresponding class name from the 
+     * need the tag as an index to select the corresponding class name from the
      * `CONSTANT_NAMES' array.
      */
     /**
@@ -189,7 +189,7 @@ public abstract class Constant implements Cloneable, Node {
      * Return value as defined by given BCELComparator strategy.
      * By default two Constant objects are said to be equal when
      * the result of toString() is equal.
-     * 
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -201,7 +201,7 @@ public abstract class Constant implements Cloneable, Node {
     /**
      * Return value as defined by given BCELComparator strategy.
      * By default return the hashcode of the result of toString().
-     * 
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override

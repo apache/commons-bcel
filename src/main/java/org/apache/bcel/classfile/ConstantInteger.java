@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * This class is derived from the abstract {@link Constant}
  * and represents a reference to an int object.
  *
@@ -35,7 +35,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     private int bytes;
 
 
-    /** 
+    /**
      * @param bytes Data
      */
     public ConstantInteger(final int bytes) {
@@ -52,7 +52,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     }
 
 
-    /** 
+    /**
      * Initialize instance from file data.
      *
      * @param file Input stream

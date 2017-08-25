@@ -24,7 +24,7 @@ import org.apache.bcel.Const;
 
 /**
  * an annotation's element value pair
- * 
+ *
  * @version $Id: ElementValuePair
  * @since 6.0
  */

@@ -25,8 +25,8 @@ import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.ByteSequence;
 
-/** 
- * Abstract super class for instructions that use an index into the 
+/**
+ * Abstract super class for instructions that use an index into the
  * constant pool such as LDC, INVOKEVIRTUAL, etc.
  *
  * @see ConstantPoolGen
@@ -76,7 +76,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     /**
      * Long output format:
      *
-     * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]" 
+     * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]"
      * "("&lt;length of instruction&gt;")" "&lt;"&lt; constant pool index&gt;"&gt;"
      *
      * @param verbose long/short format switch

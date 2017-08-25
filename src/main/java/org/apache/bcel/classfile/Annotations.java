@@ -23,7 +23,7 @@ import java.io.IOException;
 
 /**
  * base class for annotations
- * 
+ *
  * @version $Id: Annotations
  * @since 6.0
  */
@@ -66,7 +66,7 @@ public abstract class Annotations extends Attribute {
     /**
      * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
-     * 
+     *
      * @param v Visitor object
      */
     @Override

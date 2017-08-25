@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.statics;
 
 
@@ -105,7 +105,7 @@ import org.apache.bcel.verifier.exc.StaticCodeInstructionOperandConstraintExcept
  * pass 3, static part as described in The Java Virtual
  * Machine Specification, 2nd edition.
  * More detailed information is to be found at the do_verify()
- * method's documentation. 
+ * method's documentation.
  *
  * @version $Id$
  * @see #do_verify()
@@ -115,7 +115,7 @@ public final class Pass3aVerifier extends PassVerifier{
     /** The Verifier that created this. */
     private final Verifier myOwner;
 
-    /** 
+    /**
      * The method number to verify.
      * This is the index in the array returned
      * by JavaClass.getMethods().
@@ -125,12 +125,12 @@ public final class Pass3aVerifier extends PassVerifier{
     /**
      * The one and only InstructionList object used by an instance of this class.
      * It's here for performance reasons by do_verify() and its callees.
-     */    
+     */
     private InstructionList instructionList;
     /**
      * The one and only Code object used by an instance of this class.
      *  It's here for performance reasons by do_verify() and its callees.
-     */    
+     */
     private Code code;
 
     /** Should only be instantiated by a Verifier. */
@@ -594,7 +594,7 @@ public final class Pass3aVerifier extends PassVerifier{
             }
 
             final String field_name = o.getFieldName(cpg);
-                    
+
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             Field[] fields = jc.getFields();
             Field f = null;
@@ -655,7 +655,7 @@ public final class Pass3aVerifier extends PassVerifier{
             // FIXME: maybe not the best way to handle this
             throw new AssertionViolatedException("Missing class: " + e, e);
             }
-        }    
+        }
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
@@ -1040,7 +1040,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
-        public void visitTABLESWITCH(final TABLESWITCH o) {     
+        public void visitTABLESWITCH(final TABLESWITCH o) {
             // "high" must be >= "low". We cannot check this, as BCEL hides
             // it from us.
         }
@@ -1203,7 +1203,7 @@ public final class Pass3aVerifier extends PassVerifier{
                     return element;
                 }
             }
-            
+
             return null;
         }
 
@@ -1254,7 +1254,7 @@ public final class Pass3aVerifier extends PassVerifier{
                         if (meth == null) {
                             constraintViolated(o, "ACC_SUPER special lookup procedure not successful: method '"+
                                 o.getMethodName(cpg)+"' with proper signature not declared in superclass hierarchy.");
-                        }                        
+                        }
                     }
                 }
             }
@@ -1323,7 +1323,7 @@ public final class Pass3aVerifier extends PassVerifier{
          * A utility method like equals(Object) for arrays.
          * The equality of the elements is based on their equals(Object)
          * method instead of their object identity.
-         */ 
+         */
         private boolean objarrayequals(final Object[] o, final Object[] p) {
             if (o.length != p.length) {
                 return false;

@@ -102,7 +102,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     /**
      * Long output format:
      *
-     * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]" 
+     * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]"
      * "("&lt;length of instruction&gt;")" "&lt;"&lt; local variable index&gt;"&gt;"
      *
      * @param verbose long/short format switch
@@ -191,7 +191,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
 
     /**
-     * Returns the type associated with the instruction - 
+     * Returns the type associated with the instruction -
      * in case of ALOAD or ASTORE Type.OBJECT is returned.
      * This is just a bit incorrect, because ALOAD and ASTORE
      * may work on every ReferenceType (including Type.NULL) and

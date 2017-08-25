@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.structurals;
 
 
@@ -24,7 +24,7 @@ package org.apache.bcel.verifier.structurals;
  * and java.io.Serializable and they extend java.lang.Object.
  *
  * @version $Id$
- */ 
+ */
 public class GenericArray extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable{
 
     private static final long serialVersionUID = 1991183963515237894L;

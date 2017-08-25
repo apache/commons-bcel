@@ -28,7 +28,7 @@ import org.apache.bcel.Const;
 
 /**
  * represents one annotation in the annotation table
- * 
+ *
  * @version $Id: AnnotationEntry
  * @since 6.0
  */
@@ -42,7 +42,7 @@ public class AnnotationEntry implements Node {
 
     /*
      * Factory method to create an AnnotionEntry from a DataInput
-     * 
+     *
      * @param input
      * @param constant_pool
      * @param isRuntimeVisible
@@ -83,7 +83,7 @@ public class AnnotationEntry implements Node {
     /**
      * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
-     * 
+     *
      * @param v Visitor object
      */
     @Override
@@ -148,7 +148,7 @@ public class AnnotationEntry implements Node {
         }
         return result.toString();
     }
-    
+
     @Override
     public String toString() {
         return toShortString();

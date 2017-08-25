@@ -22,9 +22,9 @@ import java.io.IOException;
 
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * Abstract super class for branching instructions like GOTO, IFEQ, etc..
- * Branch instructions may have a variable length, namely GOTO, JSR, 
+ * Branch instructions may have a variable length, namely GOTO, JSR,
  * LOOKUPSWITCH and TABLESWITCH.
  *
  * @see InstructionList
@@ -130,7 +130,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * Long output format:
      *
      * &lt;position in byte code&gt;
-     * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]" 
+     * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]"
      * "("&lt;length of instruction&gt;")"
      * "&lt;"&lt;target instruction&gt;"&gt;" "@"&lt;branch target offset&gt;
      *

@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * F2I - Convert float to int
  * <PRE>Stack: ..., value -&gt; ..., result</PRE>
  *

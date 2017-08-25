@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.classfile.LineNumber;
 
-/** 
+/**
  * This class represents a line number within a method, i.e., give an instruction
  * a line number corresponding to the source code line.
  *

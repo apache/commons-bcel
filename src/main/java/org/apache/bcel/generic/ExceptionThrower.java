@@ -22,7 +22,7 @@ package org.apache.bcel.generic;
  * exception (or both) during execution.  This is not quite the truth
  * as such; because all instructions may throw an
  * java.lang.VirtualMachineError. These exceptions are omitted.
- * 
+ *
  * The Lava Language Specification specifies exactly which
  * <i>RUN-TIME</i> and which <i>LINKING</i> exceptions each
  * instruction may throw which is reflected by the implementers.  Due

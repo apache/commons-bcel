@@ -21,7 +21,7 @@ import java.io.IOException;
 
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * LDC_W - Push item from constant pool (wide index)
  *
  * <PRE>Stack: ... -&gt; ..., item.word1, item.word2</PRE>

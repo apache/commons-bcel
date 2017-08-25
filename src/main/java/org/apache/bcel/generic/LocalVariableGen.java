@@ -20,7 +20,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.LocalVariable;
 
-/** 
+/**
  * This class represents a local variable within a method. It contains its
  * scope, name and type. The generated LocalVariable object can be obtained
  * with getLocalVariable which needs the instruction list and the constant

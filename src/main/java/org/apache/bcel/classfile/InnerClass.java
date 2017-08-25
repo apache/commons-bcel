@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * This class represents a inner class attribute, i.e., the class
  * indices of the inner and outer classes, the name and the attributes
  * of the inner class.

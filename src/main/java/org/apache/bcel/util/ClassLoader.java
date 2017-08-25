@@ -154,7 +154,7 @@ public class ClassLoader extends java.lang.ClassLoader {
     }
 
 
-    /** 
+    /**
      * Override this method to create you own classes on the fly. The
      * name contains the special token $$BCEL$$. Everything before that
      * token is considered to be a package name. You can encode your own

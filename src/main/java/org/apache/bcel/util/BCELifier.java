@@ -35,7 +35,7 @@ import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
 
-/** 
+/**
  * This class takes a given JavaClass object and converts it to a
  * Java program that creates that very class using BCEL. This
  * gives new users of BCEL a useful example showing how things

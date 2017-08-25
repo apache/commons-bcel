@@ -1693,5 +1693,5 @@ public interface Constants {
     "Bogus", "Integer", "Float", "Double", "Long",
     "Null", "InitObject", "Object", "NewObject"
   };
- 
+
 }

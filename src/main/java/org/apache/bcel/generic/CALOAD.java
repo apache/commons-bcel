@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * CALOAD - Load char from array
  * <PRE>Stack: ..., arrayref, index -&gt; ..., value</PRE>
  *

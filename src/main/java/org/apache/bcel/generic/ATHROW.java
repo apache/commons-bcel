@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.ExceptionConst;
 
-/** 
+/**
  * ATHROW -  Throw exception
  * <PRE>Stack: ..., objectref -&gt; objectref</PRE>
  *
@@ -27,7 +27,7 @@ import org.apache.bcel.ExceptionConst;
  */
 public class ATHROW extends Instruction implements UnconditionalBranch, ExceptionThrower {
 
-    /** 
+    /**
      *  Throw exception
      */
     public ATHROW() {

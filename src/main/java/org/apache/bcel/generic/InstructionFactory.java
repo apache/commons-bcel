@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * Instances of this class may be used, e.g., to generate typed
  * versions of instructions. Its main purpose is to be used as the
  * byte code generating backend of a compiler. You can subclass it to
@@ -232,7 +232,7 @@ public class InstructionFactory implements InstructionConstants {
 
 
     private static boolean isString( final Type type ) {
-        return (type instanceof ObjectType) && 
+        return (type instanceof ObjectType) &&
               ((ObjectType) type).getClassName().equals("java.lang.String");
     }
 

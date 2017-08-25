@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * I2B - Convert int to byte
  * <PRE>Stack: ..., value -&gt; ..., result</PRE>
  *

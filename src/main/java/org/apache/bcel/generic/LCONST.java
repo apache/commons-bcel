@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * LCONST - Push 0 or 1, other values cause an exception
  *
  * <PRE>Stack: ... -&gt; ..., </PRE>

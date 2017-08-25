@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * Denotes array type, such as int[][]
  *
  * @version $Id$

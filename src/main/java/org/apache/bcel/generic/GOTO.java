@@ -20,7 +20,7 @@ package org.apache.bcel.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/** 
+/**
  * GOTO - Branch always (to relative offset, not absolute address)
  *
  * @version $Id$

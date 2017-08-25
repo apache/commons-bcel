@@ -68,7 +68,7 @@ public class ConstantPool implements Cloneable, Node {
              * "All eight byte constants take up two spots in the constant pool.
              * If this is the n'th byte in the constant pool, then the next item
              * will be numbered n+2"
-             * 
+             *
              * Thus we have to increment the index counter.
              */
             tag = constant_pool[i].getTag();
@@ -275,7 +275,7 @@ public class ConstantPool implements Cloneable, Node {
 
 
     /**
-     * Get string from constant pool and bypass the indirection of 
+     * Get string from constant pool and bypass the indirection of
      * `ConstantClass' and `ConstantString' objects. I.e. these classes have
      * an index field that points to another entry of the constant pool of
      * type `ConstantUtf8' which contains the real data.

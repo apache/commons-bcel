@@ -24,7 +24,7 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class is derived from <em>Attribute</em> and represents a constant 
+ * This class is derived from <em>Attribute</em> and represents a constant
  * value, i.e., a default value for initializing a class field.
  * This class is instantiated by the <em>Attribute.readAttribute()</em> method.
  *

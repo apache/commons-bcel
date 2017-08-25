@@ -82,7 +82,7 @@ public abstract class PassVerifier {
      * This method adds a (warning) message to the message pool of this
      * PassVerifier. This method is normally only internally used by
      * BCEL's class file verifier "JustIce" and should not be used from
-     * the outside. 
+     * the outside.
      *
      * @see #getMessages()
      */

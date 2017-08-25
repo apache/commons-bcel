@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * ISUB - Substract ints
  * <PRE>Stack: ..., value1, value2 -&gt; result</PRE>
  *

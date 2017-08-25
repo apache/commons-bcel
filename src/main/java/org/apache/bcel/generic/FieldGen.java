@@ -32,7 +32,7 @@ import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
 
-/** 
+/**
  * Template class for building up a field.  The only extraordinary thing
  * one can do is to add a constant value attribute to a field (which must of
  * course be compatible with to the declared type).
@@ -219,11 +219,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         if (value != null) {
             checkType(super.getType());
             final int index = addConstant();
-            addAttribute(new ConstantValue(super.getConstantPool().addUtf8("ConstantValue"), 2, index, 
+            addAttribute(new ConstantValue(super.getConstantPool().addUtf8("ConstantValue"), 2, index,
                     super.getConstantPool().getConstantPool())); // sic
         }
         addAnnotationsAsAttribute(super.getConstantPool());
-        return new Field(super.getAccessFlags(), name_index, signature_index, getAttributes(), 
+        return new Field(super.getAccessFlags(), name_index, signature_index, getAttributes(),
                 super.getConstantPool().getConstantPool()); // sic
     }
 
@@ -359,7 +359,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * Return value as defined by given BCELComparator strategy.
      * By default two FieldGen objects are said to be equal when
      * their names and signatures are equal.
-     * 
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -371,7 +371,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Return value as defined by given BCELComparator strategy.
      * By default return the hashcode of the field's name XOR signature.
-     * 
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override

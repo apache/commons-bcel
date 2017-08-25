@@ -25,7 +25,7 @@ import org.apache.bcel.Const;
 /**
  * Represents a parameter annotation that is represented in the class file
  * but is not provided to the JVM.
- * 
+ *
  * @version $Id: RuntimeInvisibleParameterAnnotations
  * @since 6.0
  */

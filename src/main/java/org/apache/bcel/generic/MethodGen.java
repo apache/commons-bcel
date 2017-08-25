@@ -325,7 +325,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     /*
      * If the range of the variable has not been set yet, it will be set to be valid from
      * the start to the end of the instruction list.
-     * 
+     *
      * @return array of declared local variables sorted by index
      */
     public LocalVariableGen[] getLocalVariables() {
@@ -1096,7 +1096,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     //J5TODO: Should param_annotations be an array of arrays? Rather than an array of lists, this
-    // is more likely to suggest to the caller it is readonly (which a List does not). 
+    // is more likely to suggest to the caller it is readonly (which a List does not).
     /**
      * Return a list of AnnotationGen objects representing parameter annotations
      * @since 6.0

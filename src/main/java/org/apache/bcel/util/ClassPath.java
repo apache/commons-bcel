@@ -64,7 +64,7 @@ public class ClassPath {
 
     /**
      * Search for classes in given path.
-     * 
+     *
      * @param class_path
      */
     public ClassPath(final String class_path) {
@@ -115,7 +115,7 @@ public class ClassPath {
     @Override
     public int hashCode() {
         if (parent != null) {
-            return class_path.hashCode() + parent.hashCode();            
+            return class_path.hashCode() + parent.hashCode();
         }
         return class_path.hashCode();
     }

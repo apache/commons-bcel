@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * LDC2_W - Push long or double from constant pool
  *
  * <PRE>Stack: ... -&gt; ..., item.word1, item.word2</PRE>
