@@ -49,9 +49,9 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
 
     @Test
     public void testWithGenericArguement() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException {
-        String targetClass = PACKAGE_BASE_NAME + ".data.SimpleClassHasMethodIncludeGenericArgument";
-        TestClassLoader loader = new TestClassLoader(getClass().getClassLoader());
-        Class cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
+        final String targetClass = PACKAGE_BASE_NAME + ".data.SimpleClassHasMethodIncludeGenericArgument";
+        final TestClassLoader loader = new TestClassLoader(getClass().getClassLoader());
+        final Class cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
 
         java.lang.reflect.Method method = cls.getDeclaredMethod("a", String.class, List.class);
         method.invoke(null, "a1", new LinkedList<String>());
@@ -64,13 +64,13 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
     }
 
     private byte[] getBytesFromClass(final String className) throws ClassNotFoundException, IOException {
-        JavaClass clazz = getTestClass(className);
-        ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
+        final JavaClass clazz = getTestClass(className);
+        final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
 
-        Method[] methods = clazz.getMethods();
+        final Method[] methods = clazz.getMethods();
 
         for (int i = 0; i < methods.length; i++) {
-            Method method = methods[i];
+            final Method method = methods[i];
             if (!method.isNative() && !method.isAbstract()) {
                 methods[i] = injection(clazz, method, cp, findFirstStringLocalVariableOffset(method));
             }
@@ -82,9 +82,9 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
     }
 
     public Method injection(final JavaClass clazz, Method method, final ConstantPoolGen cp, final int firstStringOffset) {
-        MethodGen methodGen = new MethodGen(method, clazz.getClassName(), cp);
+        final MethodGen methodGen = new MethodGen(method, clazz.getClassName(), cp);
 
-        InstructionList instructionList = methodGen.getInstructionList();
+        final InstructionList instructionList = methodGen.getInstructionList();
         instructionList.insert(instructionList.getStart(), makeWillBeAddedInstructionList(methodGen, firstStringOffset));
 
         methodGen.setMaxStack();
@@ -101,7 +101,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
             return new InstructionList();
         }
 
-        LocalVariableGen localVariableGen = methodGen.getLocalVariables()[firstStringOffset];
+        final LocalVariableGen localVariableGen = methodGen.getLocalVariables()[firstStringOffset];
         Instruction instruction;
 
         if (localVariableGen != null) {
@@ -126,7 +126,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
     }
 
     public int findFirstStringLocalVariableOffset(final Method method) {
-        Type[] argumentTypes = method.getArgumentTypes();
+        final Type[] argumentTypes = method.getArgumentTypes();
         int offset = -1;
 
         for (int i = 0, count = argumentTypes.length; i < count; i++) {

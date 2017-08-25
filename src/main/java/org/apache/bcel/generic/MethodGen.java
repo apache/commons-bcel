@@ -702,11 +702,11 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     private void adjustLocalVariableLength(final LocalVariableTable lvt) {
-        LocalVariable[] lv = lvt.getLocalVariableTable();
-        LocalVariable[] lvg = local_variable_type_table.getLocalVariableTypeTable();
+        final LocalVariable[] lv = lvt.getLocalVariableTable();
+        final LocalVariable[] lvg = local_variable_type_table.getLocalVariableTypeTable();
 
-        for (LocalVariable element : lvg) {
-            for (LocalVariable l : lv) {
+        for (final LocalVariable element : lvg) {
+            for (final LocalVariable l : lv) {
                 if (element.getName().equals(l.getName()) && element.getIndex() == l.getIndex()) {
                     element.setLength(l.getLength());
                     break;
