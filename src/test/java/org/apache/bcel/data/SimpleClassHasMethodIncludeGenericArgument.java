@@ -20,15 +20,15 @@ package org.apache.bcel.data;
 import java.util.List;
 
 public class SimpleClassHasMethodIncludeGenericArgument {
-    public static void a(String a1, List<String> a2) {
+    public static void a(final String a1, final List<String> a2) {
     }
 
-    public static void b(String b1, List b2) {
+    public static void b(final String b1, final List b2) {
     }
 
-    public static void c(String c1, String c2) {
+    public static void c(final String c1, final String c2) {
     }
 
-    public static void d(List<String> d1, String d2) {
+    public static void d(final List<String> d1, final String d2) {
     }
 }

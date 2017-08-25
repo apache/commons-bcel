@@ -44,7 +44,7 @@ public class MethodGenTestCase extends TestCase {
 
     public static class Bar {
         public class Inner {
-            public Inner(@A Object a, @B Object b) {
+            public Inner(@A final Object a, @B final Object b) {
                 
             }
         }

@@ -683,7 +683,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         return m;
     }
 
-    private void updateLocalVariableTable(LocalVariableTable a) {
+    private void updateLocalVariableTable(final LocalVariableTable a) {
         final LocalVariable[] lv = a.getLocalVariableTable();
         removeLocalVariables();
         for (final LocalVariable l : lv) {
@@ -701,7 +701,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
     }
 
-    private void adjustLocalVariableLength(LocalVariableTable lvt) {
+    private void adjustLocalVariableLength(final LocalVariableTable lvt) {
         LocalVariable[] lv = lvt.getLocalVariableTable();
         LocalVariable[] lvg = local_variable_type_table.getLocalVariableTypeTable();
 

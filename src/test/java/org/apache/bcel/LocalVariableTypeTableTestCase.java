@@ -38,11 +38,11 @@ import java.util.List;
 
 public class LocalVariableTypeTableTestCase extends AbstractTestCase {
     public class TestClassLoader extends ClassLoader {
-        public TestClassLoader(ClassLoader parent) {
+        public TestClassLoader(final ClassLoader parent) {
             super(parent);
         }
 
-        public Class<?> findClass(String name, byte[] bytes) {
+        public Class<?> findClass(final String name, final byte[] bytes) {
             return defineClass(name, bytes, 0, bytes.length);
         }
     }
@@ -63,7 +63,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         method.invoke(null, new LinkedList<String>(), "d2");
     }
 
-    private byte[] getBytesFromClass(String className) throws ClassNotFoundException, IOException {
+    private byte[] getBytesFromClass(final String className) throws ClassNotFoundException, IOException {
         JavaClass clazz = getTestClass(className);
         ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
 
@@ -81,7 +81,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         return clazz.getBytes();
     }
 
-    public Method injection(JavaClass clazz, Method method, ConstantPoolGen cp, int firstStringOffset) {
+    public Method injection(final JavaClass clazz, Method method, final ConstantPoolGen cp, final int firstStringOffset) {
         MethodGen methodGen = new MethodGen(method, clazz.getClassName(), cp);
 
         InstructionList instructionList = methodGen.getInstructionList();
@@ -96,7 +96,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         return method;
     }
 
-    public InstructionList makeWillBeAddedInstructionList(MethodGen methodGen, int firstStringOffset) {
+    public InstructionList makeWillBeAddedInstructionList(final MethodGen methodGen, final int firstStringOffset) {
         if (firstStringOffset == -1) {
             return new InstructionList();
         }
@@ -113,7 +113,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         return createPrintln(methodGen.getConstantPool(), instruction);
     }
 
-    public InstructionList createPrintln(ConstantPoolGen cp, Instruction instruction) {
+    public InstructionList createPrintln(final ConstantPoolGen cp, final Instruction instruction) {
         final InstructionList il = new InstructionList();
 
         final int out = cp.addFieldref("java.lang.System", "out", "Ljava/io/PrintStream;");
@@ -125,7 +125,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         return il;
     }
 
-    public int findFirstStringLocalVariableOffset(Method method) {
+    public int findFirstStringLocalVariableOffset(final Method method) {
         Type[] argumentTypes = method.getArgumentTypes();
         int offset = -1;
 

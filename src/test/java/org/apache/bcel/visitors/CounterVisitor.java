@@ -431,13 +431,13 @@ public class CounterVisitor implements Visitor
 
     /** @since 6.1 */
     @Override
-    public void visitConstantPackage(ConstantPackage constantPackage) {
+    public void visitConstantPackage(final ConstantPackage constantPackage) {
         constantPackageCount++;
     }
 
     /** @since 6.1 */
     @Override
-    public void visitConstantModule(ConstantModule constantModule) {
+    public void visitConstantModule(final ConstantModule constantModule) {
         constantModuleCount++;
     }
 }

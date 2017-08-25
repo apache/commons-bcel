@@ -41,7 +41,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
         }
     }
 
-    private InstructionHandle[] getInstructionHandles(JavaClass clazz, ConstantPoolGen cp, Method method) {
+    private InstructionHandle[] getInstructionHandles(final JavaClass clazz, final ConstantPoolGen cp, final Method method) {
         MethodGen methodGen = new MethodGen(method, clazz.getClassName(), cp);
         InstructionList instructionList = methodGen.getInstructionList();
         return instructionList.getInstructionHandles();
