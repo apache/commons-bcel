@@ -136,6 +136,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      * @param cpg
      *            the ConstantPoolGen used to create the instruction
      * @return an ObjectType for java.lang.Object
+     * @since 6.1
      */
     @Override
     public ReferenceType getReferenceType(final ConstantPoolGen cpg) {
