@@ -58,7 +58,7 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <commons.findbugs.version>3.0.5</commons.findbugs.version>
+    <commons.findbugs.version>3.0.4</commons.findbugs.version>
     <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
     <commons.clirr.version>2.8</commons.clirr.version>
     <jna.version>4.4.0</jna.version>
