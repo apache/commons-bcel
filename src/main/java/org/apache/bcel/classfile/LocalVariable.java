@@ -41,6 +41,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * this method's frame.
      */
     private ConstantPool constant_pool;
+    private int orig_index; // never changes; used to match up with LocalVariableTypeTable entries
 
 
     /**
@@ -50,6 +51,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     public LocalVariable(final LocalVariable c) {
         this(c.getStartPC(), c.getLength(), c.getNameIndex(), c.getSignatureIndex(), c.getIndex(),
                 c.getConstantPool());
+        this.orig_index = c.getOrigIndex();
     }
 
 
@@ -80,6 +82,28 @@ public final class LocalVariable implements Cloneable, Node, Constants {
         this.signature_index = signature_index;
         this.index = index;
         this.constant_pool = constant_pool;
+        this.orig_index = index;
+    }
+
+
+    /**
+     * @param start_pc Range in which the variable
+     * @param length ... is valid
+     * @param name_index Index in constant pool of variable name
+     * @param signature_index Index of variable's signature
+     * @param index Variable is `index'th local variable on the method's frame
+     * @param constant_pool Array of constants
+     * @param orig_index Variable is `index'th local variable on the method's frame prior to any changes
+     */
+    public LocalVariable(final int start_pc, final int length, final int name_index, final int signature_index, final int index,
+            final ConstantPool constant_pool, final int orig_index) {
+        this.start_pc = start_pc;
+        this.length = length;
+        this.name_index = name_index;
+        this.signature_index = signature_index;
+        this.index = index;
+        this.constant_pool = constant_pool;
+        this.orig_index = orig_index;
     }
 
 
@@ -168,6 +192,14 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      */
     public final int getIndex() {
         return index;
+    }
+
+
+    /**
+     * @return index of register where variable was originally stored
+     */
+    public final int getOrigIndex() {
+        return orig_index;
     }
 
 

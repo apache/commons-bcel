@@ -66,7 +66,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-287" type="fix" dev="britter" due-to="Mark Roberts">IINC does not handle -128 properly</action>
       <action issue="BCEL-283" type="fix" dev="britter" due-to="Mark Roberts">Support for StackMap should be different from StackMapTable</action>
       <action issue="BCEL-289" type="fix" dev="kinow">Crash when parsing constructor of inner classes with parameters annotated</action>
-      <action issue="BCEL-276" type="fix" dev="britter" due-to="Sam Yoon">LocalVariableTypeTable is not updated.</action>
+      <action issue="BCEL-276" type="fix" dev="britter" due-to="Sam Yoon, Mark Roberts">LocalVariableTypeTable is not updated.</action>
       <action issue="BCEL-277" type="fix" dev="britter" due-to="Sam Yoon">Resolving the String representation of a constant throws NoSuchElementException in case of CONSTANT_NameAndType constant.</action>
     </release>
 
