@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.1" date="tba" description="tba">
+      <action issue="BCEL-292" type="add" dev="markt">Add minimal Java 9 support</action>
       <action issue="BCEL-286" type="fix" dev="britter" due-to="Mark Roberts">Utility.signatureToString fails if a method has multiple type arguments</action>
       <action issue="BCEL-287" type="fix" dev="britter" due-to="Mark Roberts">IINC does not handle -128 properly</action>
       <action issue="BCEL-283" type="fix" dev="britter" due-to="Mark Roberts">Support for StackMap should be different from StackMapTable</action>
