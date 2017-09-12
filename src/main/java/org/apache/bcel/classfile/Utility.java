@@ -849,12 +849,23 @@ public abstract class Utility {
                     if (index < 0) {
                         throw new ClassFormatException("Invalid signature: " + signature);
                     }
+
                     // check to see if there are any TypeArguments
                     final int bracketIndex = signature.substring(0, index).indexOf('<');
                     if (bracketIndex < 0) {
                         // just a class identifier
                         wrap(consumed_chars, index + 1); // "Lblabla;" `L' and `;' are removed
                         return compactClassName(signature.substring(1, index), chopit);
+                    }
+                    // but make sure we are not looking past the end of the current item
+                    fromIndex = signature.indexOf(';');
+                    if (fromIndex < 0) {
+                        throw new ClassFormatException("Invalid signature: " + signature);
+                    }
+                    if (fromIndex < bracketIndex) {
+                        // just a class identifier
+                        wrap(consumed_chars, fromIndex + 1); // "Lblabla;" `L' and `;' are removed
+                        return compactClassName(signature.substring(1, fromIndex), chopit);
                     }
 
                     // we have TypeArguments; build up partial result
@@ -869,37 +880,63 @@ public abstract class Utility {
                     } else if (signature.charAt(consumed_chars) == '-') {
                         type.append("? super ");
                         consumed_chars++;
-                    } else if (signature.charAt(consumed_chars) == '*') {
-                        // must be at end of signature
-                        if (signature.charAt(consumed_chars + 1) != '>') {
-                            throw new ClassFormatException("Invalid signature: " + signature);
-                        }
-                        if (signature.charAt(consumed_chars + 2) != ';') {
-                            throw new ClassFormatException("Invalid signature: " + signature);
-                        }
-                        wrap(Utility.consumed_chars, consumed_chars + 3); // remove final "*>;"
-                        return type + "?>...";
                     }
 
                     // get the first TypeArgument
-                    type.append(signatureToString(signature.substring(consumed_chars), chopit));
-                    // update our consumed count by the number of characters the for type argument
-                    consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
-                    wrap(Utility.consumed_chars, consumed_chars);
-
-                    // are there more TypeArguments?
-                    while (signature.charAt(consumed_chars) != '>') {
-                        type.append(", ").append(signatureToString(signature.substring(consumed_chars), chopit));
+                    if (signature.charAt(consumed_chars) == '*') {
+                        type.append("?");
+                        consumed_chars++;
+                    } else {
+                        type.append(signatureToString(signature.substring(consumed_chars), chopit));
                         // update our consumed count by the number of characters the for type argument
                         consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
                         wrap(Utility.consumed_chars, consumed_chars);
                     }
 
-                    if (signature.charAt(consumed_chars + 1) != ';') {
+                    // are there more TypeArguments?
+                    while (signature.charAt(consumed_chars) != '>') {
+                        type.append(", ");
+                        // check for wildcards
+                        if (signature.charAt(consumed_chars) == '+') {
+                            type.append("? extends ");
+                            consumed_chars++;
+                        } else if (signature.charAt(consumed_chars) == '-') {
+                            type.append("? super ");
+                            consumed_chars++;
+                        }
+                        if (signature.charAt(consumed_chars) == '*') {
+                            type.append("?");
+                            consumed_chars++;
+                        } else {
+                            type.append(signatureToString(signature.substring(consumed_chars), chopit));
+                            // update our consumed count by the number of characters the for type argument
+                            consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
+                            wrap(Utility.consumed_chars, consumed_chars);
+                        }
+                    }
+
+                    // process the closing ">"
+                    consumed_chars++;
+                    type.append(">");
+
+                    if (signature.charAt(consumed_chars) == '.') {
+                        // we have a ClassTypeSignatureSuffix
+                        type.append(".");
+                        // convert SimpleClassTypeSignature to fake ClassTypeSignature
+                        // and then recurse to parse it
+                        type.append(signatureToString("L" + signature.substring(consumed_chars+1), chopit));
+                        // update our consumed count by the number of characters the for type argument
+                        // note that this count includes the "L" we added, but that is ok
+                        // as it accounts for the "." we didn't consume
+                        consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
+                        wrap(Utility.consumed_chars, consumed_chars);
+                        return type.toString();
+                    }
+                    if (signature.charAt(consumed_chars) != ';') {
                         throw new ClassFormatException("Invalid signature: " + signature);
                     }
-                    wrap(Utility.consumed_chars, consumed_chars + 2); // remove final ">;"
-                    return type.append(">").toString();
+                    wrap(Utility.consumed_chars, consumed_chars + 1); // remove final ";"
+                    return type.toString();
                 }
                 case 'S':
                     return "short";
