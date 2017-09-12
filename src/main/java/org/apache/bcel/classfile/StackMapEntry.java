@@ -25,7 +25,7 @@ import org.apache.bcel.Const;
 /**
  * This class represents a stack map entry recording the types of
  * local variables and the the of stack items at a given byte code offset.
- * See CLDC specification �5.3.1.2
+ * See CLDC specification 5.3.1.2
  *
  * @version $Id$
  * @see     StackMap
