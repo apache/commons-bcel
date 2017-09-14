@@ -1,6 +1,92 @@
               Apache Commons BCEL
-                  Version 6.0
+                  Version 6.1
                 RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.1!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+Apache Commons BCEL 6.1 is a bugfix and feature release supporting bringing
+experimental support for Java 9.
+
+It requires Java 7 or higher to run.
+
+
+COMPATIBILITY with 6.1
+======================
+
+Binary compatible - Yes
+
+Source compatible - Yes, sort of;
+ - The org.apache.bcel.classfile.Visitor interface has been enhanced with
+ additional methods. If you implemented it directly instead of extending
+ the EmptyVisitor class you'll have to implement the new methods.
+ - The org.apache.bcel.generic.Visitor interface has been enhanced with an
+ additional method. If you implemented it directly instead of extending
+ the EmptyVisitor class you'll have to implement the new methods.
+
+Semantic compatible - Yes
+
+For full information about API changes please see the extended Clirr report:
+
+
+http://commons.apache.org/bcel/clirr-report.html
+
+
+COMPATIBILITY with Java 9
+=========================
+
+The MANIFEST.MF now contains an additional entry:
+
+  Automatic-Module-Name: org.apache.bcel
+
+This should make it possible to use Commons BCEL 6.1 as a module in the Java 9
+module system. For more information see the corresponding issue and the
+referenced mailing list discussions:
+
+https://issues.apache.org/jira/browse/BCEL-293
+
+The build currently on Java 9 fails with test failures related to Locales. We
+are still working on this. For more information see:
+
+https://issues.apache.org/jira/browse/BCEL-275
+
+
+NEW FEATURES:
+=============
+
+o BCEL-293: Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.
+o BCEL-292: Add minimal Java 9 support.
+
+FIXED BUGS:
+===========
+
+o BCEL-286: Utility.signatureToString fails if a method has multiple type
+            arguments. Thanks to Mark Roberts.
+o BCEL-287: IINC does not handle -128 properly. Thanks to Mark Roberts.
+o BCEL-283: Support for StackMap should be different from StackMapTable.
+            Thanks to Mark Roberts.
+o BCEL-289: Crash when parsing constructor of inner classes with parameters
+            annotated.
+o BCEL-276: LocalVariableTypeTable is not updated.
+            Thanks to Sam Yoon, Mark Roberts.
+o BCEL-277: Resolving the String representation of a constant throws
+            NoSuchElementException in case of CONSTANT_NameAndType constant.
+            Thanks to Sam Yoon.
+
+
+Have fun!
+-Apache Commons BCEL team
+
+
+              Release Notes for 6.0
 
 
 INTRODUCTION:
