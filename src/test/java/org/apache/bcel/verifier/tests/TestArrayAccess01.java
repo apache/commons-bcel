@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package org.apache.bcel.verifier.tests;
 
@@ -24,9 +24,9 @@ public class TestArrayAccess01 extends XTestArray01{
         final XTestArray01[] array = new TestArrayAccess01[1];
         array[0] = new XTestArray01();
     }
-   
+
 }
 
 class XTestArray01 {
-    
+
 }

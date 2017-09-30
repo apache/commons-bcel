@@ -93,7 +93,7 @@ public abstract class Utility {
      * Special case: Classes compiled with new compilers and with the
      * `ACC_SUPER' flag would be said to be "synchronized". This is
      * because SUN used the same value for the flags `ACC_SUPER' and
-     * `ACC_SYNCHRONIZED'. 
+     * `ACC_SYNCHRONIZED'.
      *
      * @param  access_flags Access flags
      * @param  for_class access flags are for class qualifiers ?
@@ -122,7 +122,7 @@ public abstract class Utility {
 
     /**
      * @param access_flags the class flags
-     * 
+     *
      * @return "class" or "interface", depending on the ACC_INTERFACE flag
      */
     public static String classOrInterface( final int access_flags ) {
@@ -131,7 +131,7 @@ public abstract class Utility {
 
 
     /**
-     * Disassemble a byte array of JVM byte codes starting from code line 
+     * Disassemble a byte array of JVM byte codes starting from code line
      * `index' and return the disassembled string representation. Decode only
      * `num' opcodes (including their operands), use -1 if you want to
      * decompile everything.
@@ -177,7 +177,7 @@ public abstract class Utility {
      * @param  constant_pool Array of constants
      * @param  verbose be verbose, e.g. print constant pool index
      * @return String representation of byte code
-     * 
+     *
      * @throws IOException if a failure from reading from the bytes argument occurs
      */
     public static String codeToString( final ByteSequence bytes, final ConstantPool constant_pool,
@@ -454,7 +454,7 @@ public abstract class Utility {
 
 
     /**
-     * Shorten long class names, <em>java/lang/String</em> becomes 
+     * Shorten long class names, <em>java/lang/String</em> becomes
      * <em>String</em>.
      *
      * @param str The long class name
@@ -490,7 +490,7 @@ public abstract class Utility {
 
 
     /**
-     * Shorten long class names, <em>java/lang/String</em> becomes 
+     * Shorten long class names, <em>java/lang/String</em> becomes
      * <em>java.lang.String</em>,
      * e.g.. If <em>chopit</em> is <em>true</em> the prefix <em>java.lang</em>
      * is also removed.
@@ -530,13 +530,13 @@ public abstract class Utility {
 
 
     /**
-     * Converts string containing the method return and argument types 
+     * Converts string containing the method return and argument types
      * to a byte code method signature.
      *
      * @param  ret Return type of method
      * @param  argv Types of method arguments
      * @return Byte code representation of method signature
-     * 
+     *
      * @throws ClassFormatException if the signature is for Void
      */
     public static String methodTypeToSignature( final String ret, final String[] argv )
@@ -561,7 +561,7 @@ public abstract class Utility {
     /**
      * @param  signature    Method signature
      * @return Array of argument types
-     * @throws  ClassFormatException  
+     * @throws  ClassFormatException
      */
     public static String[] methodSignatureArgumentTypes( final String signature )
             throws ClassFormatException {
@@ -573,9 +573,9 @@ public abstract class Utility {
      * @param  signature    Method signature
      * @param chopit Shorten class names ?
      * @return Array of argument types
-     * @throws  ClassFormatException  
+     * @throws  ClassFormatException
      */
-    public static String[] methodSignatureArgumentTypes( final String signature, final boolean chopit ) 
+    public static String[] methodSignatureArgumentTypes( final String signature, final boolean chopit )
             throws ClassFormatException {
         final List<String> vec = new ArrayList<>();
         int index;
@@ -599,7 +599,7 @@ public abstract class Utility {
     /**
      * @param  signature    Method signature
      * @return return type of method
-     * @throws  ClassFormatException  
+     * @throws  ClassFormatException
      */
     public static String methodSignatureReturnType( final String signature ) throws ClassFormatException {
         return methodSignatureReturnType(signature, true);
@@ -610,7 +610,7 @@ public abstract class Utility {
      * @param  signature    Method signature
      * @param chopit Shorten class names ?
      * @return return type of method
-     * @throws  ClassFormatException  
+     * @throws  ClassFormatException
      */
     public static String methodSignatureReturnType( final String signature, final boolean chopit ) throws ClassFormatException {
         int index;
@@ -668,7 +668,7 @@ public abstract class Utility {
      * </pre>
      *
      * This method converts such a string into a Java type declaration like
-     * `void main(String[])' and throws a `ClassFormatException' when the parsed 
+     * `void main(String[])' and throws a `ClassFormatException' when the parsed
      * type is invalid.
      *
      * @param  signature    Method signature
@@ -677,7 +677,7 @@ public abstract class Utility {
      * @param chopit
      * @param vars
      * @return Java type declaration
-     * @throws  ClassFormatException  
+     * @throws  ClassFormatException
      */
     public static String methodSignatureToString( final String signature, final String name,
             final String access, final boolean chopit, final LocalVariableTable vars ) throws ClassFormatException {
@@ -774,8 +774,8 @@ public abstract class Utility {
 
 
     /**
-     * The field signature represents the value of an argument to a function or 
-     * the value of a variable. It is a series of bytes generated by the 
+     * The field signature represents the value of an argument to a function or
+     * the value of a variable. It is a series of bytes generated by the
      * following grammar:
      *
      * <PRE>
@@ -799,7 +799,7 @@ public abstract class Utility {
      * </PRE>
      *
      * This method converts this string into a Java type declaration such as
-     * `String[]' and throws a `ClassFormatException' when the parsed type is 
+     * `String[]' and throws a `ClassFormatException' when the parsed type is
      * invalid.
      *
      * @param  signature  Class signature
@@ -849,12 +849,23 @@ public abstract class Utility {
                     if (index < 0) {
                         throw new ClassFormatException("Invalid signature: " + signature);
                     }
+
                     // check to see if there are any TypeArguments
                     final int bracketIndex = signature.substring(0, index).indexOf('<');
                     if (bracketIndex < 0) {
                         // just a class identifier
                         wrap(consumed_chars, index + 1); // "Lblabla;" `L' and `;' are removed
                         return compactClassName(signature.substring(1, index), chopit);
+                    }
+                    // but make sure we are not looking past the end of the current item
+                    fromIndex = signature.indexOf(';');
+                    if (fromIndex < 0) {
+                        throw new ClassFormatException("Invalid signature: " + signature);
+                    }
+                    if (fromIndex < bracketIndex) {
+                        // just a class identifier
+                        wrap(consumed_chars, fromIndex + 1); // "Lblabla;" `L' and `;' are removed
+                        return compactClassName(signature.substring(1, fromIndex), chopit);
                     }
 
                     // we have TypeArguments; build up partial result
@@ -869,37 +880,63 @@ public abstract class Utility {
                     } else if (signature.charAt(consumed_chars) == '-') {
                         type.append("? super ");
                         consumed_chars++;
-                    } else if (signature.charAt(consumed_chars) == '*') {
-                        // must be at end of signature
-                        if (signature.charAt(consumed_chars + 1) != '>') {
-                            throw new ClassFormatException("Invalid signature: " + signature);
-                        }
-                        if (signature.charAt(consumed_chars + 2) != ';') {
-                            throw new ClassFormatException("Invalid signature: " + signature);
-                        }
-                        wrap(Utility.consumed_chars, consumed_chars + 3); // remove final "*>;"
-                        return type + "?>...";
                     }
 
                     // get the first TypeArgument
-                    type.append(signatureToString(signature.substring(consumed_chars), chopit));
-                    // update our consumed count by the number of characters the for type argument
-                    consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
-                    wrap(Utility.consumed_chars, consumed_chars);
-
-                    // are there more TypeArguments?
-                    while (signature.charAt(consumed_chars) != '>') {
-                        type.append(", ").append(signatureToString(signature.substring(consumed_chars), chopit));
+                    if (signature.charAt(consumed_chars) == '*') {
+                        type.append("?");
+                        consumed_chars++;
+                    } else {
+                        type.append(signatureToString(signature.substring(consumed_chars), chopit));
                         // update our consumed count by the number of characters the for type argument
                         consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
                         wrap(Utility.consumed_chars, consumed_chars);
                     }
 
-                    if (signature.charAt(consumed_chars + 1) != ';') {
+                    // are there more TypeArguments?
+                    while (signature.charAt(consumed_chars) != '>') {
+                        type.append(", ");
+                        // check for wildcards
+                        if (signature.charAt(consumed_chars) == '+') {
+                            type.append("? extends ");
+                            consumed_chars++;
+                        } else if (signature.charAt(consumed_chars) == '-') {
+                            type.append("? super ");
+                            consumed_chars++;
+                        }
+                        if (signature.charAt(consumed_chars) == '*') {
+                            type.append("?");
+                            consumed_chars++;
+                        } else {
+                            type.append(signatureToString(signature.substring(consumed_chars), chopit));
+                            // update our consumed count by the number of characters the for type argument
+                            consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
+                            wrap(Utility.consumed_chars, consumed_chars);
+                        }
+                    }
+
+                    // process the closing ">"
+                    consumed_chars++;
+                    type.append(">");
+
+                    if (signature.charAt(consumed_chars) == '.') {
+                        // we have a ClassTypeSignatureSuffix
+                        type.append(".");
+                        // convert SimpleClassTypeSignature to fake ClassTypeSignature
+                        // and then recurse to parse it
+                        type.append(signatureToString("L" + signature.substring(consumed_chars+1), chopit));
+                        // update our consumed count by the number of characters the for type argument
+                        // note that this count includes the "L" we added, but that is ok
+                        // as it accounts for the "." we didn't consume
+                        consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
+                        wrap(Utility.consumed_chars, consumed_chars);
+                        return type.toString();
+                    }
+                    if (signature.charAt(consumed_chars) != ';') {
                         throw new ClassFormatException("Invalid signature: " + signature);
                     }
-                    wrap(Utility.consumed_chars, consumed_chars + 2); // remove final ">;"
-                    return type.append(">").toString();
+                    wrap(Utility.consumed_chars, consumed_chars + 1); // remove final ";"
+                    return type.toString();
                 }
                 case 'S':
                     return "short";
@@ -1031,7 +1068,7 @@ public abstract class Utility {
      * @param  signature in format described above
      * @return type of method signature
      * @see    Const
-     * 
+     *
      * @throws ClassFormatException if signature is not a method signature
      */
     public static byte typeOfMethodSignature( final String signature ) throws ClassFormatException {
@@ -1054,7 +1091,7 @@ public abstract class Utility {
      * @param  signature in format described above
      * @return type of signature
      * @see    Const
-     * 
+     *
      * @throws ClassFormatException if signature isn't a known type
      */
     public static byte typeOfSignature( final String signature ) throws ClassFormatException {
@@ -1121,7 +1158,7 @@ public abstract class Utility {
     /** Convert bytes into hexadecimal string
      *
      * @param bytes an array of bytes to convert to hexadecimal
-     * 
+     *
      * @return bytes as hexadecimal string, e.g. 00 fa 12 ...
      */
     public static String toHexString( final byte[] bytes ) {
@@ -1237,9 +1274,9 @@ public abstract class Utility {
     }
 
 
-    /** 
+    /**
      * @param ch the character to test if it's part of an identifier
-     * 
+     *
      * @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _)
      */
     public static boolean isJavaIdentifierPart( final char ch ) {
@@ -1255,7 +1292,7 @@ public abstract class Utility {
      * clever: if the current byte's ASCII value already is a valid Java
      * identifier part, leave it as it is. Otherwise it writes the
      * escape character($) followed by:
-     * 
+     *
      * <ul>
      *   <li> the ASCII value as a hexadecimal string, if the value is not in the range 200..247</li>
      *   <li>a Java identifier char not used in a lowercase hexadecimal string, if the value is in the range 200..247</li>
@@ -1265,7 +1302,7 @@ public abstract class Utility {
      *
      * @param bytes the byte array to convert
      * @param compress use gzip to minimize string
-     * 
+     *
      * @throws IOException if there's a gzip exception
      */
     public static String encode(byte[] bytes, final boolean compress) throws IOException {
@@ -1292,7 +1329,7 @@ public abstract class Utility {
      *
      * @param s the string to convert
      * @param uncompress use gzip to uncompress the stream of bytes
-     * 
+     *
      * @throws IOException if there's a gzip exception
      */
     public static byte[] decode(final String s, final boolean uncompress) throws IOException {

@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * This class represents the table of exceptions that are thrown by a
  * method. This attribute may be used once per method.  The name of
  * this class is <em>ExceptionTable</em> for historical reasons; The
@@ -130,7 +130,7 @@ public final class ExceptionTable extends Attribute {
     public final String[] getExceptionNames() {
         final String[] names = new String[exception_index_table.length];
         for (int i = 0; i < exception_index_table.length; i++) {
-            names[i] = super.getConstantPool().getConstantString(exception_index_table[i], 
+            names[i] = super.getConstantPool().getConstantString(exception_index_table[i],
                     Const.CONSTANT_Class).replace('/', '.');
         }
         return names;

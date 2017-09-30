@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.structurals;
 
 
@@ -71,10 +71,10 @@ public class ControlFlowGraph{
         /**
          * The 'outgoing' execution Frames.
          */
-        private final Map<InstructionContext, Frame> outFrames; // key: the last-executed JSR 
+        private final Map<InstructionContext, Frame> outFrames; // key: the last-executed JSR
 
         /**
-         * The 'execution predecessors' - a list of type InstructionContext 
+         * The 'execution predecessors' - a list of type InstructionContext
          * of those instances that have been execute()d before in that order.
          */
         private List<InstructionContext> executionPredecessors = null; // Type: InstructionContext
@@ -115,7 +115,7 @@ public class ControlFlowGraph{
 
         /**
          * Returns a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
-         */    
+         */
         @Override
         public Frame getOutFrame(final ArrayList<InstructionContext> execChain) {
             executionPredecessors = execChain;
@@ -193,7 +193,7 @@ public class ControlFlowGraph{
 
             // Now we're sure the inFrame has changed!
 
-            // new inFrame is already merged in, see above.        
+            // new inFrame is already merged in, see above.
             final Frame workingFrame = inF.getClone();
 
             try{
@@ -389,7 +389,7 @@ public class ControlFlowGraph{
                 return pair;
             }
 
-            // default case: Fall through.        
+            // default case: Fall through.
             single[0] = getInstruction().getNext();
             return single;
         }
@@ -408,7 +408,7 @@ public class ControlFlowGraph{
     /** All InstructionContext instances of this ControlFlowGraph. */
     private final Map<InstructionHandle, InstructionContext> instructionContexts = new HashMap<>();
 
-    /** 
+    /**
      * A Control Flow Graph; with additional JustIce checks
      * @param  method_gen the method generator instance
      */
@@ -416,7 +416,7 @@ public class ControlFlowGraph{
         this(method_gen, true);
     }
 
-    /** 
+    /**
      * A Control Flow Graph.
      * @param  method_gen the method generator instance
      * @param enableJustIceCheck if true, additional JustIce checks are performed
@@ -473,5 +473,5 @@ public class ControlFlowGraph{
      */
     public boolean isDead(final InstructionHandle i) {
         return subroutines.subroutineOf(i) == null;
-    }     
+    }
 }

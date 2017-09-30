@@ -37,29 +37,29 @@ import org.apache.bcel.generic.InstructionList;
  * expressions. This can be used, e.g., in order to implement a peep hole
  * optimizer that looks for code patterns and replaces them with faster
  * equivalents.
- * 
+ *
  * <p>
  * This class internally uses the java.util.regex
  * package to search for regular expressions.
- * 
+ *
  * A typical application would look like this:
- * 
+ *
  * <pre>
- * 
- *  
+ *
+ *
  *   InstructionFinder f   = new InstructionFinder(il);
  *   String            pat = &quot;IfInstruction ICONST_0 GOTO ICONST_1 NOP (IFEQ|IFNE)&quot;;
- *   
+ *
  *   for (Iterator i = f.search(pat, constraint); i.hasNext(); ) {
  *   InstructionHandle[] match = (InstructionHandle[])i.next();
  *   ...
  *   il.delete(match[1], match[5]);
  *   ...
  *   }
- *   
- *  
+ *
+ *
  * </pre>
- * 
+ *
  * @version $Id$
  * @see org.apache.bcel.generic.Instruction
  * @see InstructionList
@@ -103,7 +103,7 @@ public class InstructionFinder {
 
     /**
      * Map symbolic instruction names like "getfield" to a single character.
-     * 
+     *
      * @param pattern
      *          instruction pattern in lower case
      * @return encoded string for a pattern such as "BranchInstruction".
@@ -126,7 +126,7 @@ public class InstructionFinder {
      * Replace symbolic names of instructions with the appropiate character and
      * remove all white space from string. Meta characters such as +, * are
      * ignored.
-     * 
+     *
      * @param pattern
      *          The pattern to compile
      * @return translated regular expression string
@@ -175,24 +175,24 @@ public class InstructionFinder {
      * "BranchInstruction" or "LoadInstruction". "istore" is also an alias for all
      * "istore_x" instructions. Additional aliases are "if" for "ifxx", "if_icmp"
      * for "if_icmpxx", "if_acmp" for "if_acmpxx".
-     * 
+     *
      * Consecutive instruction names must be separated by white space which will
      * be removed during the compilation of the pattern.
-     * 
+     *
      * For the rest the usual pattern matching rules for regular expressions
      * apply.
      * <P>
      * Example pattern:
-     * 
+     *
      * <pre>
      * search(&quot;BranchInstruction NOP ((IfInstruction|GOTO)+ ISTORE Instruction)*&quot;);
      * </pre>
-     * 
+     *
      * <p>
      * If you alter the instruction list upon a match such that other matching
      * areas are affected, you should call reread() to update the finder and call
      * search() again, because the matches are cached.
-     * 
+     *
      * @param pattern
      *          the instruction pattern to search for, where case is ignored
      * @param from
@@ -235,7 +235,7 @@ public class InstructionFinder {
 
     /**
      * Start search beginning from the start of the given instruction list.
-     * 
+     *
      * @param pattern
      *          the instruction pattern to search for, where case is ignored
      * @return iterator of matches where e.nextElement() returns an array of
@@ -248,7 +248,7 @@ public class InstructionFinder {
 
     /**
      * Start search beginning from `from'.
-     * 
+     *
      * @param pattern
      *          the instruction pattern to search for, where case is ignored
      * @param from
@@ -264,7 +264,7 @@ public class InstructionFinder {
     /**
      * Start search beginning from the start of the given instruction list. Check
      * found matches with the constraint object.
-     * 
+     *
      * @param pattern
      *          the instruction pattern to search for, case is ignored
      * @param constraint
@@ -295,7 +295,7 @@ public class InstructionFinder {
      * Code patterns found may be checked using an additional user-defined
      * constraint object whether they really match the needed criterion. I.e.,
      * check constraints that can not expressed with regular expressions.
-     * 
+     *
      */
     public interface CodeConstraint {
 

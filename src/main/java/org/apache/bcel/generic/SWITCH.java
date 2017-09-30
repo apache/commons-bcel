@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * SWITCH - Branch depending on int value, generates either LOOKUPSWITCH or
  * TABLESWITCH instruction, depending on whether the match values (int[]) can be
  * sorted with no gaps between the numbers.
@@ -38,7 +38,7 @@ public final class SWITCH implements CompoundInstruction {
      * between the numbers, a TABLESWITCH instruction is generated, and
      * a LOOKUPSWITCH otherwise. The former may be more efficient, but
      * needs more space.
-     * 
+     *
      * Note, that the key array always will be sorted, though we leave
      * the original arrays unaltered.
      *

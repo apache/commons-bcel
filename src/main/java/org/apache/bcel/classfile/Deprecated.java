@@ -59,7 +59,7 @@ public final class Deprecated extends Attribute {
 
     /**
      * Construct object from input stream.
-     * 
+     *
      * @param name_index Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
      * @param input Input stream

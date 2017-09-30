@@ -20,7 +20,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 import org.apache.bcel.ExceptionConst;
 
-/** 
+/**
  * GETSTATIC - Fetch static field from class
  * <PRE>Stack: ..., -&gt; ..., value</PRE>
  * OR

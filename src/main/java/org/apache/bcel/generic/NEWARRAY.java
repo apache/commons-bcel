@@ -23,11 +23,11 @@ import java.io.IOException;
 import org.apache.bcel.ExceptionConst;
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * NEWARRAY -  Create new array of basic type (int, short, ...)
  * <PRE>Stack: ..., count -&gt; ..., arrayref</PRE>
  * type must be one of T_INT, T_SHORT, ...
- * 
+ *
  * @version $Id$
  */
 public class NEWARRAY extends Instruction implements AllocationInstruction, ExceptionThrower,

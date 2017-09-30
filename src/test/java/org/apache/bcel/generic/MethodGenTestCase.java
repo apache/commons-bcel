@@ -18,6 +18,7 @@
 package org.apache.bcel.generic;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
@@ -32,6 +33,20 @@ public class MethodGenTestCase extends TestCase {
             @SuppressWarnings("unused")
             final
             int a = 1;
+        }
+    }
+
+    @interface A {
+    }
+
+    @interface B {
+    }
+
+    public static class Bar {
+        public class Inner {
+            public Inner(@A final Object a, @B final Object b) {
+
+            }
         }
     }
 
@@ -88,5 +103,15 @@ public class MethodGenTestCase extends TestCase {
         assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
         assertNull("scope start", lv.getStart());
         assertNull("scope end", lv.getEnd());
+    }
+
+    public void testAnnotationsAreUnpacked() throws Exception {
+        final JavaClass jc = Repository.lookupClass(Bar.Inner.class);
+        final ClassGen cg = new ClassGen(jc);
+        final MethodGen mg = new MethodGen(cg.getMethodAt(0), cg.getClassName(), cg.getConstantPool());
+        final List<AnnotationEntryGen> firstParamAnnotations = mg.getAnnotationsOnParameter(0);
+        assertEquals("Wrong number of annotations in the first parameter", 1, firstParamAnnotations.size());
+        final List<AnnotationEntryGen> secondParamAnnotations = mg.getAnnotationsOnParameter(1);
+        assertEquals("Wrong number of annotations in the second parameter", 1, secondParamAnnotations.size());
     }
 }

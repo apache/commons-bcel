@@ -51,7 +51,7 @@ public interface ExceptionConstants {
     Class<VerifyError> VERIFY_ERROR = VerifyError.class;
     /* UnsupportedClassVersionError is new in JDK 1.2 */
 //    Class UnsupportedClassVersionError = UnsupportedClassVersionError.class;
-    /** Run-Time Exceptions 
+    /** Run-Time Exceptions
      */
     Class<NullPointerException> NULL_POINTER_EXCEPTION = NullPointerException.class;
     Class<ArrayIndexOutOfBoundsException> ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION

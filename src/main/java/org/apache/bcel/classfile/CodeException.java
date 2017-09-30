@@ -70,8 +70,8 @@ public final class CodeException implements Cloneable, Node, Constants {
      * @param end_pc is exclusive
      * @param handler_pc Starting address of exception handler, i.e.,
      * an offset from start of code.
-     * @param catch_type If zero the handler catches any 
-     * exception, otherwise it points to the exception class which is 
+     * @param catch_type If zero the handler catches any
+     * exception, otherwise it points to the exception class which is
      * to be caught.
      */
     public CodeException(final int start_pc, final int end_pc, final int handler_pc, final int catch_type) {

@@ -124,7 +124,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
      */
     public void setFrame(final Frame f) { // TODO could be package-protected?
         this.frame = f;
-        //if (singleInstance.mg == null || singleInstance.cpg == null) 
+        //if (singleInstance.mg == null || singleInstance.cpg == null)
         // throw new AssertionViolatedException("Forgot to set important values first.");
     }
 

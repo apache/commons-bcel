@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.statics;
 
 
@@ -261,7 +261,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                                 "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + "'.");
                         }
                         addMessage("Method '" + nameAndSig + "' in class '" + hashmap.get(nameAndSig) +
-                            "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + 
+                            "' overrides the final (not-overridable) definition in class '" + jc.getClassName() +
                             "'. This is okay, as the original definition was private; however this constraint leverage"+
                             " was introduced by JLS 8.4.6 (not vmspec2) and the behaviour of the Sun verifiers.");
                     } else {
@@ -775,7 +775,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
             }
 
-            if ((obj.getAccessFlags() & 
+            if ((obj.getAccessFlags() &
                     ~(Const.ACC_PUBLIC|Const.ACC_PRIVATE|Const.ACC_PROTECTED|Const.ACC_STATIC|Const.ACC_FINAL|
                       Const.ACC_SYNCHRONIZED|Const.ACC_NATIVE|Const.ACC_ABSTRACT|Const.ACC_STRICT)) > 0) {
                 addMessage("Method '"+tostring(obj)+"' has access flag(s) other than"+

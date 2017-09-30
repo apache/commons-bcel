@@ -23,24 +23,24 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This attribute exists for local or 
+ * This attribute exists for local or
  * anonymous classes and ... there can be only one.
- * 
+ *
  * @since 6.0
  */
 public class EnclosingMethod extends Attribute {
 
-    // Pointer to the CONSTANT_Class_info structure representing the 
+    // Pointer to the CONSTANT_Class_info structure representing the
     // innermost class that encloses the declaration of the current class.
     private int classIndex;
 
-    // If the current class is not immediately enclosed by a method or 
-    // constructor, then the value of the method_index item must be zero.  
-    // Otherwise, the value of the  method_index item must point to a 
-    // CONSTANT_NameAndType_info structure representing the name and the 
-    // type of a method in the class referenced by the class we point 
-    // to in the class_index.  *It is the compiler responsibility* to 
-    // ensure that the method identified by this index is the closest 
+    // If the current class is not immediately enclosed by a method or
+    // constructor, then the value of the method_index item must be zero.
+    // Otherwise, the value of the  method_index item must point to a
+    // CONSTANT_NameAndType_info structure representing the name and the
+    // type of a method in the class referenced by the class we point
+    // to in the class_index.  *It is the compiler responsibility* to
+    // ensure that the method identified by this index is the closest
     // lexically enclosing method that includes the local/anonymous class.
     private int methodIndex;
 
@@ -83,7 +83,7 @@ public class EnclosingMethod extends Attribute {
     }
 
     public final ConstantClass getEnclosingClass() {
-        final ConstantClass c = 
+        final ConstantClass c =
             (ConstantClass)super.getConstantPool().getConstant(classIndex,Const.CONSTANT_Class);
         return c;
     }
@@ -92,7 +92,7 @@ public class EnclosingMethod extends Attribute {
         if (methodIndex == 0) {
             return null;
         }
-        final ConstantNameAndType nat = 
+        final ConstantNameAndType nat =
             (ConstantNameAndType)super.getConstantPool().getConstant(methodIndex,Const.CONSTANT_NameAndType);
         return nat;
     }
@@ -102,5 +102,5 @@ public class EnclosingMethod extends Attribute {
         super.dump(file);
         file.writeShort(classIndex);
         file.writeShort(methodIndex);
-    }    
+    }
 }

@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 
 package org.apache.bcel.verifier;
@@ -25,7 +25,7 @@ import org.apache.bcel.verifier.tests.TestArrayAccess03Creator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04Creator;
 
 public class VerifierArrayAccessTestCase extends AbstractVerifierTestCase {
-    
+
     public void testInvalidArrayAccess() throws IOException {
         new TestArrayAccess03Creator().create();
         assertVerifyRejected("TestArrayAccess03", "Verification of an arraystore instruction on an object must fail.");
@@ -38,8 +38,8 @@ public class VerifierArrayAccessTestCase extends AbstractVerifierTestCase {
         assertVerifyOK("TestArrayAccess01",
                 "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");
         new TestArrayAccess02Creator().create();
-        assertVerifyOK("TestArrayAccess02", 
+        assertVerifyOK("TestArrayAccess02",
                 "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");
     }
-    
+
 }

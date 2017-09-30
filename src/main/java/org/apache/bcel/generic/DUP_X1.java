@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * DUP_X1 - Duplicate top operand stack word and put two down
  * <PRE>Stack: ..., word2, word1 -&gt; ..., word1, word2, word1</PRE>
  *

@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.statics;
 
 
@@ -48,7 +48,7 @@ public final class Pass1Verifier extends PassVerifier{
      */
     private final Verifier myOwner;
 
-    /** 
+    /**
      * Used to load in and return the myOwner-matching JavaClass object when needed.
      * Avoids loading in a class file when it's not really needed!
      */
@@ -133,7 +133,7 @@ public final class Pass1Verifier extends PassVerifier{
      * </UL>
      * (From the Paper <A HREF="http://www.cs.sfu.ca/people/GradStudents/pwfong/personal/JVM/pass1/">
      * The Mysterious Pass One, first draft, September 2, 1997</A>.)
-     * 
+     *
      * <P>However, most of this is done by parsing a class file or generating a class file into BCEL's internal data structure.
      * <B>Therefore, all that is really done here is look up the class file from BCEL's repository.</B>
      * This is also motivated by the fact that some omitted things

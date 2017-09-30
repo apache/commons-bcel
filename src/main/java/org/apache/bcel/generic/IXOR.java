@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * IXOR - Bitwise XOR int
  * <PRE>Stack: ..., value1, value2 -&gt; ..., result</PRE>
  *

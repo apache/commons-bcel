@@ -26,7 +26,7 @@ import java.util.Map;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * This class is derived from the abstract {@link Constant}
  * and represents a reference to a Utf8 encoded string.
  *
@@ -54,7 +54,7 @@ public final class ConstantUtf8 extends Constant {
         private static final int MAX_CACHE_ENTRIES = 20000;
         private static final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
 
-        private static final HashMap<String, ConstantUtf8> CACHE = 
+        private static final HashMap<String, ConstantUtf8> CACHE =
                 new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
             private static final long serialVersionUID = -8506975356158971766L;
 
@@ -71,7 +71,7 @@ public final class ConstantUtf8 extends Constant {
         System.err.println("Cache hit " + hits + "/" + considered +", " + skipped + " skipped");
         System.err.println("Total of " + created + " ConstantUtf8 objects created");
     }
-    
+
     // for accesss by test code
     static void clearStats() {
         hits = considered = skipped = created = 0;

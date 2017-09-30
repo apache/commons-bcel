@@ -24,7 +24,7 @@ import java.io.IOException;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * Abstract super class for fields and methods.
  *
  * @version $Id$
@@ -35,7 +35,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @java.lang.Deprecated
-    protected int name_index; // Points to field name in constant pool 
+    protected int name_index; // Points to field name in constant pool
 
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
@@ -56,7 +56,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     protected int attributes_count; // No. of attributes
 
     // @since 6.0
-    private AnnotationEntry[] annotationEntries; // annotations defined on the field or method 
+    private AnnotationEntry[] annotationEntries; // annotations defined on the field or method
 
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
@@ -262,7 +262,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         if (annotationEntries == null) {
             annotationEntries = AnnotationEntry.createAnnotationEntries(getAttributes());
         }
-        
+
         return annotationEntries;
     }
 

@@ -43,7 +43,8 @@
       concepts in a very elegant way. One can write a plug-in
       replacement for the system's <em>class loader</em> which is
       responsible for dynamically loading class files at run-time and
-      passing the byte code to the Virtual Machine (see section ).
+      passing the byte code to the Virtual Machine (see <a
+      href="jvm.html">section 2</a>).
       Class loaders may thus be used to intercept the loading process
       and transform classes before they get actually executed by the
       JVM. While the original class files always remain unaltered, the

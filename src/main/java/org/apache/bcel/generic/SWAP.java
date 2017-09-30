@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * SWAP - Swa top operand stack word
  * <PRE>Stack: ..., word2, word1 -&gt; ..., word1, word2</PRE>
  *

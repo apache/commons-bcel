@@ -22,7 +22,7 @@ import java.io.IOException;
 
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * RET - Return from subroutine
  *
  * <PRE>Stack: ... -&gt; ...</PRE>
@@ -70,7 +70,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     private void setWide() {
         wide = index > org.apache.bcel.Const.MAX_BYTE;
         if (wide) {
-            super.setLength(4); // Including the wide byte  
+            super.setLength(4); // Including the wide byte
         } else {
             super.setLength(2);
         }

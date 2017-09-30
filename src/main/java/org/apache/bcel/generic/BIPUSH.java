@@ -22,7 +22,7 @@ import java.io.IOException;
 
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * BIPUSH - Push byte on stack
  *
  * <PRE>Stack: ... -&gt; ..., value</PRE>

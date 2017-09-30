@@ -23,10 +23,10 @@ import java.io.IOException;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * This class is derived from the abstract {@link Constant}
  * and represents a reference to a method handle.
- * 
+ *
  * @see     Constant
  * @since 6.0
  */

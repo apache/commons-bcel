@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * This class is derived from the abstract {@link Constant}
  * and represents a reference to a (external) class.
  *
@@ -77,7 +77,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
     }
 
 
-    /** 
+    /**
      * Dump constant class to file stream in binary format.
      *
      * @param file Output file stream

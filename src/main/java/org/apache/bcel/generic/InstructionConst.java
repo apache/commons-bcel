@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * This interface contains shareable instruction objects.
  *
  * In order to save memory you can use some instructions multiply,
@@ -37,7 +37,7 @@ import org.apache.bcel.Const;
  */
 public final class InstructionConst {
 
-    /** 
+    /**
      * Predefined instruction objects
      */
     /*
@@ -284,7 +284,7 @@ public final class InstructionConst {
         INSTRUCTIONS[Const.MONITOREXIT] = MONITOREXIT;
     }
 
-    private InstructionConst() { } // non-instantiable 
+    private InstructionConst() { } // non-instantiable
 
     /**
      * Gets the Instruction.

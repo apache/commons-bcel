@@ -35,11 +35,11 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class MemorySensitiveClassPathRepository implements Repository {
 
-    private ClassPath path = null;
-    private final Map<String, SoftReference<JavaClass>> loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
+    private ClassPath _path = null;
+    private final Map<String, SoftReference<JavaClass>> _loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
     public MemorySensitiveClassPathRepository(final ClassPath path) {
-        this.path = path;
+        this._path = path;
     }
 
     /**
@@ -47,7 +47,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
      */
     @Override
     public void storeClass(final JavaClass clazz) {
-        loadedClasses.put(clazz.getClassName(), new SoftReference<>(clazz));
+        _loadedClasses.put(clazz.getClassName(), new SoftReference<>(clazz));
         clazz.setRepository(this);
     }
 
@@ -56,7 +56,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
      */
     @Override
     public void removeClass(final JavaClass clazz) {
-        loadedClasses.remove(clazz.getClassName());
+        _loadedClasses.remove(clazz.getClassName());
     }
 
     /**
@@ -64,7 +64,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
      */
     @Override
     public JavaClass findClass(final String className) {
-        final SoftReference<JavaClass> ref = loadedClasses.get(className);
+        final SoftReference<JavaClass> ref = _loadedClasses.get(className);
         if (ref == null) {
             return null;
         }
@@ -92,7 +92,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
             return clazz;
         }
         try {
-            return loadClass(path.getInputStream(className), className);
+            return loadClass(_path.getInputStream(className), className);
         } catch (final IOException e) {
             throw new ClassNotFoundException("Exception while looking for class " + className + ": " + e, e);
         }
@@ -158,7 +158,7 @@ public class MemorySensitiveClassPathRepository implements Repository {
      */
     @Override
     public ClassPath getClassPath() {
-        return path;
+        return _path;
     }
 
     /**
@@ -166,6 +166,6 @@ public class MemorySensitiveClassPathRepository implements Repository {
      */
     @Override
     public void clear() {
-        loadedClasses.clear();
+        _loadedClasses.clear();
     }
 }

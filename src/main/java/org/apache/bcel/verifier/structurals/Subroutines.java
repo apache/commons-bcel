@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.structurals;
 
 import java.util.ArrayList;
@@ -438,7 +438,7 @@ public class Subroutines{
         //Graph colouring. Key: InstructionHandle, Value: ColourConstants enum .
         final Map<InstructionHandle, ColourConstants> colors = new HashMap<>();
 
-        final List<InstructionHandle> Q = new ArrayList<>();        
+        final List<InstructionHandle> Q = new ArrayList<>();
         for (final InstructionHandle actual : sub_leaders) {
             // Do some BFS with "actual" as the root of the graph.
             // Init colors
@@ -554,7 +554,7 @@ public class Subroutines{
 
             set.remove(Integer.valueOf(index));
         }
-    } 
+    }
 
     /**
      * Returns the Subroutine object associated with the given
@@ -668,7 +668,7 @@ System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead c
             return pair;
         }
 
-        // default case: Fall through.        
+        // default case: Fall through.
         single[0] = instruction.getNext();
         return single;
     }

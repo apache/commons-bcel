@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * Super class for GOTO
  *
  * @version $Id$

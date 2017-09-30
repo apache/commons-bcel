@@ -35,7 +35,7 @@ public class BranchHandleTestCase {
     public void testsetInstructionBI() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
         Assert.assertNotNull(bh);
-        bh.setInstruction(new GOTO(null));        
+        bh.setInstruction(new GOTO(null));
         Assert.assertNotNull(bh);
     }
 
@@ -43,12 +43,12 @@ public class BranchHandleTestCase {
     public void testsetInstructionnotBI() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
         Assert.assertNotNull(bh);
-        bh.setInstruction(new NOP());        
+        bh.setInstruction(new NOP());
         Assert.assertNotNull(bh);
     }
 
     @Test(expected=ClassGenException.class)
     public void testGetBHnull() {
-        BranchHandle.getBranchHandle(null); 
+        BranchHandle.getBranchHandle(null);
     }
 }

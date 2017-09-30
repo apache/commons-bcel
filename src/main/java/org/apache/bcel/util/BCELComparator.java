@@ -19,7 +19,7 @@ package org.apache.bcel.util;
 
 /**
  * Used for BCEL comparison strategy
- * 
+ *
  * @version $Id$
  * @since 5.2
  */
@@ -27,7 +27,7 @@ public interface BCELComparator {
 
     /**
      * Compare two objects and return what THIS.equals(THAT) should return
-     * 
+     *
      * @param THIS
      * @param THAT
      * @return true if and only if THIS equals THAT
@@ -37,7 +37,7 @@ public interface BCELComparator {
 
     /**
      * Return hashcode for THIS.hashCode()
-     * 
+     *
      * @param THIS
      * @return hashcode for THIS.hashCode()
      */

@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * FNEG - Negate float
  * <PRE>Stack: ..., value -&gt; ..., result</PRE>
  *

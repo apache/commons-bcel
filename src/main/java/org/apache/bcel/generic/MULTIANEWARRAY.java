@@ -24,7 +24,7 @@ import org.apache.bcel.ExceptionConst;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * MULTIANEWARRAY - Create new mutidimensional array of references
  * <PRE>Stack: ..., count1, [count2, ...] -&gt; ..., arrayref</PRE>
  *

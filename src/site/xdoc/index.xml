@@ -68,8 +68,7 @@
         The JavaDoc API documents are available online:
       </p>
       <ul>
-        <li>The <a href="apidocs/index.html">latest JavaDocs from SVN</a> [Java 7.0+]</li>
-        <li>The <a href="javadocs/api-6.0/index.html">current stable release 6.0</a></li>
+        <li>The <a href="apidocs/index.html">current stable release</a></li>
       </ul>
       <p>
         The <a href="source-repository.html">svn repository</a> can be
@@ -78,10 +77,10 @@
     </section>
     <!-- ================================================== -->
     <section name="Release Information">
-      <p>The latest stable release of BCEL is 6.0. You may: </p>
+      <p>The latest stable release of BCEL is 6.1. You may: </p>
       <ul>
-        <li>Download <a href="http://commons.apache.org/lang/download_bcel.cgi">6.0</a></li>
-        <li>Read the <a href="release-notes/RELEASE-NOTES-6.0.txt">6.0 release notes</a></li>
+        <li>Download <a href="https://commons.apache.org/proper/commons-bcel/download_bcel.cgi">6.1</a></li>
+	<li>Read the <a href="https://www.apache.org/dist/commons/bcel/RELEASE-NOTES.txt">6.1 release notes</a></li>
         <li>Inspect the <a href="bcel5-bcel6-clirr-report.html">extended Clirr report</a> comparing 5.2 with 6.0</li>
       </ul>
       <p>
@@ -90,7 +89,7 @@
 &lt;dependency&gt;
     &lt;groupId&gt;org.apache.bcel&lt;/groupId&gt;
     &lt;artifactId&gt;bcel&lt;/artifactId&gt;
-    &lt;version&gt;6.0&lt;/version&gt;
+    &lt;version&gt;6.1&lt;/version&gt;
 &lt;/dependency&gt;
         </pre>
       </p>

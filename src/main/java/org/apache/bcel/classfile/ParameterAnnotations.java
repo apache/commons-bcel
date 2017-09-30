@@ -23,7 +23,7 @@ import java.io.IOException;
 
 /**
  * base class for parameter annotations
- * 
+ *
  * @version $Id: ParameterAnnotations
  * @since 6.0
  */

@@ -198,7 +198,7 @@ public final class LineNumberTable extends Attribute {
      */
     @Override
     public Attribute copy( final ConstantPool _constant_pool ) {
-        // TODO could use the lower level constructor and thereby allow 
+        // TODO could use the lower level constructor and thereby allow
         // line_number_table to be made final
         final LineNumberTable c = (LineNumberTable) clone();
         c.line_number_table = new LineNumber[line_number_table.length];

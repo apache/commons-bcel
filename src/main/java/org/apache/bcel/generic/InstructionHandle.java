@@ -40,7 +40,7 @@ import org.apache.bcel.classfile.Utility;
  * @version $Id$
  * @see Instruction
  * @see BranchHandle
- * @see InstructionList 
+ * @see InstructionList
  */
 public class InstructionHandle {
 
@@ -233,14 +233,14 @@ public class InstructionHandle {
     }
 
 
-    /** @return a (verbose) string representation of the contained instruction. 
+    /** @return a (verbose) string representation of the contained instruction.
      */
     public String toString( final boolean verbose ) {
         return Utility.format(i_position, 4, false, ' ') + ": " + instruction.toString(verbose);
     }
 
 
-    /** @return a string representation of the contained instruction. 
+    /** @return a string representation of the contained instruction.
      */
     @Override
     public String toString() {

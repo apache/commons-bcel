@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.ExceptionConst;
 
-/** 
+/**
  * ANEWARRAY -  Create new array of references
  * <PRE>Stack: ..., count -&gt; ..., arrayref</PRE>
  *

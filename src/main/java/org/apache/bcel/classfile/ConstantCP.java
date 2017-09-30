@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * Abstract super class for Fieldref, Methodref, InterfaceMethodref and
  *                          InvokeDynamic constants.
  *
@@ -84,7 +84,7 @@ public abstract class ConstantCP extends Constant {
     }
 
 
-    /** 
+    /**
      * Dump constant field reference to file stream in binary format.
      *
      * @param file Output file stream
@@ -107,7 +107,7 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
-     * @param class_index points to Constant_class 
+     * @param class_index points to Constant_class
      */
     public final void setClassIndex( final int class_index ) {
         this.class_index = class_index;

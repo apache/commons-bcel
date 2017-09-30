@@ -22,7 +22,7 @@ import java.io.IOException;
 
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * LOOKUPSWITCH - Switch with unordered set of values
  *
  * @version $Id$

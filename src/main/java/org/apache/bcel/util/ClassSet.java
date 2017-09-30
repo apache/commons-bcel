@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.apache.bcel.classfile.JavaClass;
 
-/** 
+/**
  * Utility class implementing a (typesafe) set of JavaClass objects.
  * Since JavaClass has no equals() method, the name of the class is
  * used for comparison.

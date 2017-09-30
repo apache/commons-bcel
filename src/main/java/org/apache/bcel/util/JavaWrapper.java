@@ -25,9 +25,9 @@ import java.lang.reflect.Modifier;
  * to modify/generate classes as they're requested. You can take this as a template
  * for your own applications.<br>
  * Call this wrapper with:
- * 
+ *
  * <pre>java org.apache.bcel.util.JavaWrapper &lt;real.class.name&gt; [arguments]</pre>
- * 
+ *
  * <p>To use your own class loader you can set the "bcel.classloader" system property<p>
  * <pre>java org.apache.bcel.util.JavaWrapper -Dbcel.classloader=foo.MyLoader &lt;real.class.name&gt; [arguments]</pre>
  *

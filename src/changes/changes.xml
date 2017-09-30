@@ -21,7 +21,7 @@
 This file is also used by the maven-changes-plugin to generate the release notes.
 Useful ways of finding items to add to this file are:
 
-1.  Add items when you fix a bug or add a feature (this makes the 
+1.  Add items when you fix a bug or add a feature (this makes the
 release process easy :-).
 
 2.  Do a JIRA search for tickets closed since the previous release.
@@ -33,7 +33,7 @@ To generate the release notes from this file:
 
 mvn changes:announcement-generate -Prelease-notes [-Dchanges.version=nnn]
 
-then tweak the formatting if necessary 
+then tweak the formatting if necessary
 and commit
 
 The <action> type attribute can be add,update,fix,remove.
@@ -45,16 +45,16 @@ The <action> type attribute can be add,update,fix,remove.
     <author email="dev@commons.apache.org">Apache Commons developers</author>
   </properties>
 
-  <!-- NOTE: 
+  <!-- NOTE:
   The description below is specially formatted so as to improve the layout of the generated release notes:
   The parsing process removes all line feeds, replacing them with a single space.
   The Velocity template in resources/templates has been enhanced to replace pairs of adjacent spaces
   with a new-line in the release notes. (These spaces are ignored when displaying HTML).
   If the output is not quite correct, check for invisible trailing spaces!
-  
+
   N.B. The release notes template groups actions by type, and only extracts data for the current release.
   The changes report outputs actions in the order they appear in this file.
-  
+
   To regenerate the release notes:
   mvn changes:announcement-generate -Prelease-notes [-Dchanges.version=nnn]
 
@@ -62,7 +62,18 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.1" date="tba" description="tba">
+    <release version="6.2" date="tba" description="tba">
+    </release>
+
+    <release version="6.1" date="2017-09-14" description="Experimental Java 9 Support">
+      <action issue="BCEL-293" type="add" dev="britter">Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility</action>
+      <action issue="BCEL-292" type="add" dev="markt">Add minimal Java 9 support</action>
+      <action issue="BCEL-286" type="fix" dev="britter" due-to="Mark Roberts">Utility.signatureToString fails if a method has multiple type arguments</action>
+      <action issue="BCEL-287" type="fix" dev="britter" due-to="Mark Roberts">IINC does not handle -128 properly</action>
+      <action issue="BCEL-283" type="fix" dev="britter" due-to="Mark Roberts">Support for StackMap should be different from StackMapTable</action>
+      <action issue="BCEL-289" type="fix" dev="kinow">Crash when parsing constructor of inner classes with parameters annotated</action>
+      <action issue="BCEL-276" type="fix" dev="britter" due-to="Sam Yoon, Mark Roberts">LocalVariableTypeTable is not updated.</action>
+      <action issue="BCEL-277" type="fix" dev="britter" due-to="Sam Yoon">Resolving the String representation of a constant throws NoSuchElementException in case of CONSTANT_NameAndType constant.</action>
     </release>
 
     <release version="6.0" date="2016-07-10" description="Apache Commons BCEL 6.0 is a major release supporting the new features
@@ -71,7 +82,7 @@ The <action> type attribute can be add,update,fix,remove.
 
  It requires Java 7 or higher to run.
 
-   
+
 COMPATIBILITY with 5.2
  ======================
 
@@ -110,7 +121,7 @@ Source compatible - Yes, sort of;
 For full information about API changes please see the extended Clirr report:
 
     http://commons.apache.org/bcel/clirr-report.html">
-      <action issue="BCEL-262" type="update" dev="britter" due-to="Mark Roberts">InvokeInstruction.getClassName(ConstantPoolGen) 
+      <action issue="BCEL-262" type="update" dev="britter" due-to="Mark Roberts">InvokeInstruction.getClassName(ConstantPoolGen)
                                           should not throw an exception when it detects an array.</action>
       <action issue="BCEL-237" type="fix" dev="sebb">non-empty final arrays should be private as they are mutable.</action>
       <action issue="BCEL-230" type="update" dev="britter">Document the Java platform requirement clearly and early.</action>

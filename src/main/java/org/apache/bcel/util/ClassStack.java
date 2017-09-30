@@ -21,7 +21,7 @@ import java.util.Stack;
 
 import org.apache.bcel.classfile.JavaClass;
 
-/** 
+/**
  * Utility class implementing a (typesafe) stack of JavaClass objects.
  *
  * @version $Id$

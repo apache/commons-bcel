@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * ICONST - Push value between -1, ..., 5, other values cause an exception
  *
  * <PRE>Stack: ... -&gt; ..., </PRE>

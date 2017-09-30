@@ -43,12 +43,15 @@
 Apache Commons BCEL
 ===================
 
+[![Build Status](https://travis-ci.org/apache/commons-bcel.svg?branch=trunk)](https://travis-ci.org/apache/commons-bcel)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/)
+
 Apache Commons Bytecode Engineering Library
 
 Documentation
 -------------
 
-More information can be found on the [homepage](https://commons.apache.org/proper/commons-bcel).
+More information can be found on the [Apache Commons BCEL homepage](https://commons.apache.org/proper/commons-bcel).
 The [JavaDoc](https://commons.apache.org/proper/commons-bcel/javadocs/api-release) can be browsed.
 Questions related to the usage of Apache Commons BCEL should be posted to the [user mailing list][ml].
 
@@ -62,14 +65,14 @@ Alternatively you can pull it from the central Maven repositories:
 <dependency>
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
-  <version>6.0</version>
+  <version>6.1</version>
 </dependency>
 ```
 
 Contributing
 ------------
 
-We accept PRs via github. The [developer mailing list][ml] is the main channel of communication for contributors.
+We accept Pull Requests via GitHub. The [developer mailing list][ml] is the main channel of communication for contributors.
 There are some guidelines which will make applying PRs easier for us:
 + No tabs! Please use spaces for indentation.
 + Respect the code style.
@@ -81,7 +84,9 @@ You can learn more about contributing via GitHub in our [contribution guidelines
 
 License
 -------
-Code is under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
+This code is under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0).
+
+See the `NOTICE.txt` file for required notices and attributions.
 
 Donations
 ---------
@@ -91,8 +96,8 @@ Additional Resources
 --------------------
 
 + [Apache Commons Homepage](https://commons.apache.org/)
-+ [Apache Bugtracker (JIRA)](https://issues.apache.org/jira/)
++ [Apache Issue Tracker (JIRA)](https://issues.apache.org/jira/browse/BCEL)
 + [Apache Commons Twitter Account](https://twitter.com/ApacheCommons)
-+ #apachecommons IRC channel on freenode.org
++ `#apache-commons` IRC channel on `irc.freenode.org`
 
 [ml]:https://commons.apache.org/mail-lists.html

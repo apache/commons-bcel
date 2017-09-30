@@ -62,7 +62,7 @@ public class Class2HTML implements Constants {
     private static String class_name; // name of current class, dito
     private static ConstantPool constant_pool;
     private static final Set<String> basic_types = new HashSet<>();
-    
+
     static {
         basic_types.add("int");
         basic_types.add("short");
@@ -77,7 +77,7 @@ public class Class2HTML implements Constants {
 
     /**
      * Write contents of the given JavaClass into HTML files.
-     * 
+     *
      * @param java_class The class to write
      * @param dir The directory to put the files in
      */

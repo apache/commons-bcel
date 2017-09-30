@@ -23,7 +23,7 @@ import java.util.Stack;
  * Traverses a JavaClass with another Visitor object 'piggy-backed' that is
  * applied to all components of a JavaClass object. I.e. this class supplies the
  * traversal strategy, other classes can make use of it.
- * 
+ *
  * @version $Id$
  */
 public class DescendingVisitor implements Visitor
@@ -528,4 +528,19 @@ public class DescendingVisitor implements Visitor
         stack.pop();
     }
 
+    /** @since 6.1 */
+    @Override
+    public void visitConstantPackage(final ConstantPackage obj) {
+        stack.push(obj);
+        obj.accept(visitor);
+        stack.pop();
+    }
+
+    /** @since 6.1 */
+    @Override
+    public void visitConstantModule(final ConstantModule obj) {
+        stack.push(obj);
+        obj.accept(visitor);
+        stack.pop();
+    }
 }

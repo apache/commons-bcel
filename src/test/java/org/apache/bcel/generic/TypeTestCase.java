@@ -27,7 +27,7 @@ public class TypeTestCase extends TestCase {
         // not understand generics so we need to substitute the modified value below.
         final String expectedValue = "Ljava/util/Map<X, java/util/List<Y>>;";
         final String actualValue = (Type.getType("Ljava/util/Map<TX;Ljava/util/List<TY;>;>;")).getSignature();
-        assertEquals("Type.getType", expectedValue, actualValue);        
+        assertEquals("Type.getType", expectedValue, actualValue);
     }
 
 }

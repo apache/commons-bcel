@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 
 package org.apache.bcel.visitors;
@@ -35,7 +35,9 @@ import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantMethodHandle;
 import org.apache.bcel.classfile.ConstantMethodType;
 import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantModule;
 import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPackage;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.ConstantUtf8;
@@ -151,6 +153,12 @@ public class CounterVisitor implements Visitor
 
     /** @since 6.0 */
     public int constantInvokeDynamic = 0;
+
+    /** @since 6.1 */
+    public int constantModuleCount = 0;
+
+    /** @since 6.1 */
+    public int constantPackageCount = 0;
     // CHECKSTYLE:ON
 
 
@@ -406,7 +414,7 @@ public class CounterVisitor implements Visitor
     /** @since 6.0 */
     @Override
     public void visitConstantMethodType(final ConstantMethodType obj) {
-        // TODO Auto-generated method stub        
+        // TODO Auto-generated method stub
     }
 
     /** @since 6.0 */
@@ -418,6 +426,18 @@ public class CounterVisitor implements Visitor
     /** @since 6.0 */
     @Override
     public void visitParameterAnnotationEntry(final ParameterAnnotationEntry parameterAnnotationEntry) {
-        // TODO Auto-generated method stub        
+        // TODO Auto-generated method stub
+    }
+
+    /** @since 6.1 */
+    @Override
+    public void visitConstantPackage(final ConstantPackage constantPackage) {
+        constantPackageCount++;
+    }
+
+    /** @since 6.1 */
+    @Override
+    public void visitConstantModule(final ConstantModule constantModule) {
+        constantModuleCount++;
     }
 }

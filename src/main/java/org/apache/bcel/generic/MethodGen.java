@@ -35,6 +35,7 @@ import org.apache.bcel.classfile.LineNumber;
 import org.apache.bcel.classfile.LineNumberTable;
 import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
+import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
@@ -42,7 +43,7 @@ import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
 
-/** 
+/**
  * Template class for building up a method. This is done by defining exception
  * handlers, adding thrown exceptions, local variables and attributes, whereas
  * the `LocalVariableTable' and `LineNumberTable' attributes will be set
@@ -65,6 +66,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     private int max_stack;
     private InstructionList il;
     private boolean strip_attributes;
+    private LocalVariableTypeTable local_variable_type_table = null;
     private final List<LocalVariableGen> variable_vec = new ArrayList<>();
     private final List<LineNumberGen> line_number_vec = new ArrayList<>();
     private final List<CodeExceptionGen> exception_vec = new ArrayList<>();
@@ -222,21 +224,9 @@ public class MethodGen extends FieldGenOrMethodGen {
                             }
                         }
                     } else if (a instanceof LocalVariableTable) {
-                        final LocalVariable[] lv = ((LocalVariableTable) a).getLocalVariableTable();
-                        removeLocalVariables();
-                        for (final LocalVariable l : lv) {
-                            InstructionHandle start = il.findHandle(l.getStartPC());
-                            InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
-                            // Repair malformed handles
-                            if (null == start) {
-                                start = il.getStart();
-                            }
-                            if (null == end) {
-                                end = il.getEnd();
-                            }
-                            addLocalVariable(l.getName(), Type.getType(l.getSignature()), l
-                                    .getIndex(), start, end);
-                        }
+                        updateLocalVariableTable((LocalVariableTable) a);
+                    } else if (a instanceof LocalVariableTypeTable) {
+                        this.local_variable_type_table = (LocalVariableTypeTable) a.copy(cp.getConstantPool());
                     } else {
                         addCodeAttribute(a);
                     }
@@ -258,6 +248,40 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Adds a local variable to this method.
+     *
+     * @param name variable name
+     * @param type variable type
+     * @param slot the index of the local variable, if type is long or double, the next available
+     * index is slot+2
+     * @param start from where the variable is valid
+     * @param end until where the variable is valid
+     * @param orig_index the index of the local variable prior to any modifications
+     * @return new local variable object
+     * @see LocalVariable
+     */
+    public LocalVariableGen addLocalVariable( final String name, final Type type, final int slot,
+            final InstructionHandle start, final InstructionHandle end, final int orig_index ) {
+        final byte t = type.getType();
+        if (t != Const.T_ADDRESS) {
+            final int add = type.getSize();
+            if (slot + add > max_locals) {
+                max_locals = slot + add;
+            }
+            final LocalVariableGen l = new LocalVariableGen(slot, name, type, start, end, orig_index);
+            int i;
+            if ((i = variable_vec.indexOf(l)) >= 0) {
+                variable_vec.set(i, l);
+            } else {
+                variable_vec.add(l);
+            }
+            return l;
+        }
+        throw new IllegalArgumentException("Can not use " + type
+                + " as type for local variable");
+    }
+
 
     /**
      * Adds a local variable to this method.
@@ -273,25 +297,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public LocalVariableGen addLocalVariable( final String name, final Type type, final int slot,
             final InstructionHandle start, final InstructionHandle end ) {
-        final byte t = type.getType();
-        if (t != Const.T_ADDRESS) {
-            final int add = type.getSize();
-            if (slot + add > max_locals) {
-                max_locals = slot + add;
-            }
-            final LocalVariableGen l = new LocalVariableGen(slot, name, type, start, end);
-            int i;
-            if ((i = variable_vec.indexOf(l)) >= 0) {
-                variable_vec.set(i, l);
-            } else {
-                variable_vec.add(l);
-            }
-            return l;
-        }
-        throw new IllegalArgumentException("Can not use " + type
-                + " as type for local variable");
+        return addLocalVariable(name, type, slot, start, end, slot);
     }
-
 
     /**
      * Adds a local variable to this method and assigns an index automatically.
@@ -335,7 +342,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     /*
      * If the range of the variable has not been set yet, it will be set to be valid from
      * the start to the end of the instruction list.
-     * 
+     *
      * @return array of declared local variables sorted by index
      */
     public LocalVariableGen[] getLocalVariables() {
@@ -376,6 +383,12 @@ public class MethodGen extends FieldGenOrMethodGen {
                 .getConstantPool());
     }
 
+    /**
+     * @return `LocalVariableTypeTable' attribute of this method.
+     */
+    public LocalVariableTypeTable getLocalVariableTypeTable() {
+        return local_variable_type_table;
+    }
 
     /**
      * Give an instruction a line number corresponding to the source code line.
@@ -557,6 +570,13 @@ public class MethodGen extends FieldGenOrMethodGen {
 
 
     /**
+     * Remove the LocalVariableTypeTable
+     */
+    public void removeLocalVariableTypeTable( ) {
+        local_variable_type_table = null;
+    }
+
+    /**
      * Remove a code attribute.
      */
     public void removeCodeAttribute( final Attribute a ) {
@@ -568,6 +588,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove all code attributes.
      */
     public void removeCodeAttributes() {
+        local_variable_type_table = null;
         code_attrs_vec.clear();
     }
 
@@ -629,7 +650,15 @@ public class MethodGen extends FieldGenOrMethodGen {
         /* Create LocalVariableTable and LineNumberTable attributes (for debuggers, e.g.)
          */
         if ((variable_vec.size() > 0) && !strip_attributes) {
+            updateLocalVariableTable(getLocalVariableTable(_cp));
             addCodeAttribute(lvt = getLocalVariableTable(_cp));
+        }
+        if (local_variable_type_table != null) {
+            // LocalVariable length in LocalVariableTypeTable is not updated automatically. It's a difference with LocalVariableTable.
+            if (lvt != null) {
+                adjustLocalVariableTypeTable(lvt);
+            }
+            addCodeAttribute(local_variable_type_table);
         }
         if ((line_number_vec.size() > 0) && !strip_attributes) {
             addCodeAttribute(lnt = getLineNumberTable(_cp));
@@ -671,6 +700,9 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (lvt != null) {
             removeCodeAttribute(lvt);
         }
+        if (local_variable_type_table != null) {
+            removeCodeAttribute(local_variable_type_table);
+        }
         if (lnt != null) {
             removeCodeAttribute(lnt);
         }
@@ -681,6 +713,42 @@ public class MethodGen extends FieldGenOrMethodGen {
             removeAttribute(et);
         }
         return m;
+    }
+
+    private void updateLocalVariableTable(final LocalVariableTable a) {
+        final LocalVariable[] lv = a.getLocalVariableTable();
+        removeLocalVariables();
+        for (final LocalVariable l : lv) {
+            InstructionHandle start = il.findHandle(l.getStartPC());
+            InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
+            // Repair malformed handles
+            if (null == start) {
+                start = il.getStart();
+            }
+            if (null == end) {
+                end = il.getEnd();
+            }
+            // Since we are recreating the LocalVaraible, we must
+            // propagate the orig_index to new copy.
+            addLocalVariable(l.getName(), Type.getType(l.getSignature()), l
+                    .getIndex(), start, end, l.getOrigIndex());
+        }
+    }
+
+    private void adjustLocalVariableTypeTable(final LocalVariableTable lvt) {
+        final LocalVariable[] lv = lvt.getLocalVariableTable();
+        final LocalVariable[] lvg = local_variable_type_table.getLocalVariableTypeTable();
+
+        for (final LocalVariable element : lvg) {
+            for (final LocalVariable l : lv) {
+                if (element.getName().equals(l.getName()) && element.getIndex() == l.getOrigIndex()) {
+                    element.setLength(l.getLength());
+                    element.setStartPC(l.getStartPC());
+                    element.setIndex(l.getIndex());
+                    break;
+                }
+            }
+        }
     }
 
 
@@ -1064,7 +1132,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     //J5TODO: Should param_annotations be an array of arrays? Rather than an array of lists, this
-    // is more likely to suggest to the caller it is readonly (which a List does not). 
+    // is more likely to suggest to the caller it is readonly (which a List does not).
     /**
      * Return a list of AnnotationGen objects representing parameter annotations
      * @since 6.0
@@ -1114,11 +1182,11 @@ public class MethodGen extends FieldGenOrMethodGen {
                 } else {
                     paramAnnInvisAttr = rpa;
                 }
-                for (int j = 0; j < arg_types.length; j++)
+                final ParameterAnnotationEntry[] parameterAnnotationEntries = rpa.getParameterAnnotationEntries();
+                for (int j = 0; j < parameterAnnotationEntries.length; j++)
                 {
                     // This returns Annotation[] ...
-                    final ParameterAnnotationEntry immutableArray = rpa
-                            .getParameterAnnotationEntries()[j];
+                    final ParameterAnnotationEntry immutableArray = rpa.getParameterAnnotationEntries()[j];
                     // ... which needs transforming into an AnnotationGen[] ...
                     final List<AnnotationEntryGen> mutable = makeMutableVersion(immutableArray.getAnnotationEntries());
                     // ... then add these to any we already know about
@@ -1167,7 +1235,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             l.add(annotation);
             param_annotations[parameterIndex] = l;
         }
-    }          
+    }
 
 
 
@@ -1192,7 +1260,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Return value as defined by given BCELComparator strategy.
      * By default two MethodGen objects are said to be equal when
      * their names and signatures are equal.
-     * 
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -1204,7 +1272,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Return value as defined by given BCELComparator strategy.
      * By default return the hashcode of the method's name XOR signature.
-     * 
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override

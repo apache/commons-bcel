@@ -23,7 +23,7 @@ import java.io.IOException;
 import org.apache.bcel.ExceptionConst;
 import org.apache.bcel.util.ByteSequence;
 
-/** 
+/**
  * LDC - Push item from constant pool.
  *
  * <PRE>Stack: ... -&gt; ..., item</PRE>

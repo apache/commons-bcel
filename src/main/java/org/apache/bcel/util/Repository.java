@@ -30,7 +30,7 @@ import org.apache.bcel.classfile.JavaClass;
 public interface Repository {
 
     /**
-     * Store the provided class under "clazz.getClassName()" 
+     * Store the provided class under "clazz.getClassName()"
      */
     void storeClass( JavaClass clazz );
 

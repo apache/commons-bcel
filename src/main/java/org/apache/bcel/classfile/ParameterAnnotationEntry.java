@@ -37,7 +37,7 @@ public class ParameterAnnotationEntry implements Node {
 
     /**
      * Construct object from input stream.
-     * 
+     *
      * @param input Input stream
      * @throws IOException
      */

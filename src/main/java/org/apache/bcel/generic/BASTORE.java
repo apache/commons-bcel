@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * BASTORE -  Store into byte or boolean array
  * <PRE>Stack: ..., arrayref, index, value -&gt; ...</PRE>
  *

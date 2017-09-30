@@ -28,7 +28,7 @@ import org.apache.bcel.Const;
  * This class represents a bootstrap method attribute, i.e., the bootstrap
  * method ref, the number of bootstrap arguments and an array of the
  * bootstrap arguments.
- * 
+ *
  * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.23">
  * The class File Format : The BootstrapMethods Attribute</a>
  * @since 6.0
@@ -51,7 +51,7 @@ public class BootstrapMethod implements Cloneable {
 
     /**
      * Construct object from input stream.
-     * 
+     *
      * @param input Input stream
      * @throws IOException
      */

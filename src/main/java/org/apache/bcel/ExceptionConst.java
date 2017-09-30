@@ -48,7 +48,7 @@ public final class ExceptionConst {
     public static final Class<VerifyError> VERIFY_ERROR = VerifyError.class;
     /* UnsupportedClassVersionError is new in JDK 1.2 */
 //    public static final Class UnsupportedClassVersionError = UnsupportedClassVersionError.class;
-    /** Run-Time Exceptions 
+    /** Run-Time Exceptions
      */
     public static final Class<NullPointerException> NULL_POINTER_EXCEPTION = NullPointerException.class;
     public static final Class<ArrayIndexOutOfBoundsException> ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION
@@ -60,7 +60,7 @@ public final class ExceptionConst {
 
     /**
      * Pre-defined exception arrays according to chapters 5.1-5.4 of the Java Virtual
-     * Machine Specification 
+     * Machine Specification
      */
     private static final Class<?>[] EXCS_CLASS_AND_INTERFACE_RESOLUTION = {
             NO_CLASS_DEF_FOUND_ERROR, CLASS_FORMAT_ERROR, VERIFY_ERROR, ABSTRACT_METHOD_ERROR,
@@ -76,8 +76,8 @@ public final class ExceptionConst {
             NULL_POINTER_EXCEPTION, ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION
     };
 
-    /** 
-     * Enum corresponding to the various Exception Class arrays, 
+    /**
+     * Enum corresponding to the various Exception Class arrays,
      * used by {@link ExceptionConst#createExceptions(EXCS, Class...)}
      */
     public enum EXCS {
@@ -94,7 +94,7 @@ public final class ExceptionConst {
         final Class<?>[] excs = new Class<?>[input.length + extraLen];
         System.arraycopy(input, 0, excs, 0, input.length);
         if (extraLen > 0) {
-            System.arraycopy(extraClasses, 0, excs, input.length, extraLen);            
+            System.arraycopy(extraClasses, 0, excs, input.length, extraLen);
         }
         return excs;
     }

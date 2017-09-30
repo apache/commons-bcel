@@ -58,7 +58,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
 
     /**
      * Create instruction list containing one instruction.
-     * 
+     *
      * @param i
      *            initial instruction
      */
@@ -68,7 +68,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
 
     /**
      * Create instruction list containing one instruction.
-     * 
+     *
      * @param i
      *            initial instruction
      */

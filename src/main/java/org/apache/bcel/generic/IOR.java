@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * IOR - Bitwise OR int
  * <PRE>Stack: ..., value1, value2 -&gt; ..., result</PRE>
  *

@@ -21,7 +21,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 
-/** 
+/**
  * Denotes reference such as java.lang.String.
  *
  * @version $Id$

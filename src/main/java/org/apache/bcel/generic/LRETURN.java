@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * LRETURN -  Return long from method
  * <PRE>Stack: ..., value.word1, value.word2 -&gt; &lt;empty&gt;</PRE>
  *

@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- */ 
+ */
 package org.apache.bcel.verifier.statics;
 
 
@@ -122,7 +122,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         try {
             ret = obj.toString();
         }
-        
+
         catch (final RuntimeException e) {
             // including ClassFormatException, trying to convert the "signature" of a ReturnaddressType LocalVariable
             // (shouldn't occur, but people do crazy things)
@@ -155,7 +155,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         //when verifier is passed over a class
         tostring = toString(obj);
     }
-    
+
     /**
      * @since 6.0
      */
@@ -166,7 +166,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         //when verifier is passed over a class
         tostring = toString(obj);
     }
-    
+
     @Override
     public void visitCodeException(final CodeException obj) {
         tostring = toString(obj);

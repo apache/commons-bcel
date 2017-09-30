@@ -114,12 +114,12 @@ public class LocalVariableTable extends Attribute {
     }
 
 
-    /** 
-     * 
+    /**
+     *
      * @param index the variable slot
-     * 
+     *
      * @return the first LocalVariable that matches the slot or null if not found
-     * 
+     *
      * @deprecated since 5.2 because multiple variables can share the
      *             same slot, use getLocalVariable(int index, int pc) instead.
      */
@@ -134,11 +134,11 @@ public class LocalVariableTable extends Attribute {
     }
 
 
-    /** 
-     * 
+    /**
+     *
      * @param index the variable slot
      * @param pc the current pc that this variable is alive
-     * 
+     *
      * @return the LocalVariable that matches or null if not found
      */
     public final LocalVariable getLocalVariable( final int index, final int pc ) {

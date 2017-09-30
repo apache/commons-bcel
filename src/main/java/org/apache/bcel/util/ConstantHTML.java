@@ -37,7 +37,7 @@ import org.apache.bcel.classfile.Utility;
  * Convert constant pool into HTML file.
  *
  * @version $Id$
- * 
+ *
  */
 final class ConstantHTML {
 
@@ -91,7 +91,7 @@ final class ConstantHTML {
         // The header is always the same
         file.println("<H4> <A NAME=cp" + index + ">" + index + "</A> " + Const.getConstantName(tag)
                 + "</H4>");
-        /* For every constant type get the needed parameters and print them appropiately 
+        /* For every constant type get the needed parameters and print them appropiately
          */
         switch (tag) {
             case Const.CONSTANT_InterfaceMethodref:

@@ -25,7 +25,7 @@ import org.apache.bcel.Const;
 /**
  * This class represents a stack map entry recording the types of
  * local variables and the the of stack items at a given byte code offset.
- * See CLDC specification �5.3.1.2
+ * See CLDC specification 5.3.1.2
  *
  * @version $Id$
  * @see     StackMap
@@ -43,24 +43,24 @@ public final class StackMapEntry implements Node, Cloneable
 
     /**
      * Construct object from input stream.
-     * 
+     *
      * @param input Input stream
      * @throws IOException
      */
-    StackMapEntry(final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(input.readByte() & 0xFF, -1, null, null, constant_pool);
+    StackMapEntry(final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(input.readByte() & 0xFF, -1, null, null, constantPool);
 
         if (frame_type >= Const.SAME_FRAME && frame_type <= Const.SAME_FRAME_MAX) {
             byte_code_offset = frame_type - Const.SAME_FRAME;
-        } else if (frame_type >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME && 
+        } else if (frame_type >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME &&
                    frame_type <= Const.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             byte_code_offset = frame_type - Const.SAME_LOCALS_1_STACK_ITEM_FRAME;
             types_of_stack_items = new StackMapType[1];
-            types_of_stack_items[0] = new StackMapType(input, constant_pool);
+            types_of_stack_items[0] = new StackMapType(input, constantPool);
         } else if (frame_type == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             byte_code_offset = input.readShort();
             types_of_stack_items = new StackMapType[1];
-            types_of_stack_items[0] = new StackMapType(input, constant_pool);
+            types_of_stack_items[0] = new StackMapType(input, constantPool);
         } else if (frame_type >= Const.CHOP_FRAME && frame_type <= Const.CHOP_FRAME_MAX) {
             byte_code_offset = input.readShort();
         } else if (frame_type == Const.SAME_FRAME_EXTENDED) {
@@ -70,19 +70,19 @@ public final class StackMapEntry implements Node, Cloneable
             final int number_of_locals = frame_type - 251;
             types_of_locals = new StackMapType[number_of_locals];
             for (int i = 0; i < number_of_locals; i++) {
-                types_of_locals[i] = new StackMapType(input, constant_pool);
-            }            
-        } else if (frame_type == Const.FULL_FRAME) {        
+                types_of_locals[i] = new StackMapType(input, constantPool);
+            }
+        } else if (frame_type == Const.FULL_FRAME) {
             byte_code_offset = input.readShort();
             final int number_of_locals = input.readShort();
             types_of_locals = new StackMapType[number_of_locals];
             for (int i = 0; i < number_of_locals; i++) {
-                types_of_locals[i] = new StackMapType(input, constant_pool);
+                types_of_locals[i] = new StackMapType(input, constantPool);
             }
             final int number_of_stack_items = input.readShort();
             types_of_stack_items = new StackMapType[number_of_stack_items];
             for (int i = 0; i < number_of_stack_items; i++) {
-                types_of_stack_items[i] = new StackMapType(input, constant_pool);
+                types_of_stack_items[i] = new StackMapType(input, constantPool);
             }
         } else {
             /* Can't happen */
@@ -93,42 +93,42 @@ public final class StackMapEntry implements Node, Cloneable
     /**
      * DO NOT USE
      *
-     * @param byte_code_offset
-     * @param number_of_locals NOT USED
-     * @param types_of_locals array of {@link StackMapType}s of locals
-     * @param number_of_stack_items NOT USED
-     * @param types_of_stack_items array ot {@link StackMapType}s of stack items
-     * @param constant_pool the constant pool
+     * @param byteCodeOffset
+     * @param numberOfLocals NOT USED
+     * @param typesOfLocals array of {@link StackMapType}s of locals
+     * @param numberOfStackItems NOT USED
+     * @param typesOfStackItems array ot {@link StackMapType}s of stack items
+     * @param constantPool the constant pool
      * @deprecated Since 6.0, use {@link #StackMapEntry(int, int, StackMapType[], StackMapType[], ConstantPool)}
      * instead
      */
     @java.lang.Deprecated
-    public StackMapEntry(final int byte_code_offset, final int number_of_locals,
-            final StackMapType[] types_of_locals, final int number_of_stack_items,
-            final StackMapType[] types_of_stack_items, final ConstantPool constant_pool) {
-        this.byte_code_offset = byte_code_offset;
-        this.types_of_locals = types_of_locals != null ? types_of_locals : new StackMapType[0];
-        this.types_of_stack_items = types_of_stack_items != null ? types_of_stack_items : new StackMapType[0];
-        this.constant_pool = constant_pool;
+    public StackMapEntry(final int byteCodeOffset, final int numberOfLocals,
+            final StackMapType[] typesOfLocals, final int numberOfStackItems,
+            final StackMapType[] typesOfStackItems, final ConstantPool constantPool) {
+        this.byte_code_offset = byteCodeOffset;
+        this.types_of_locals = typesOfLocals != null ? typesOfLocals : new StackMapType[0];
+        this.types_of_stack_items = typesOfStackItems != null ? typesOfStackItems : new StackMapType[0];
+        this.constant_pool = constantPool;
     }
 
     /**
      * Create an instance
      *
      * @param tag the frame_type to use
-     * @param byte_code_offset
-     * @param types_of_locals array of {@link StackMapType}s of locals
-     * @param types_of_stack_items array ot {@link StackMapType}s of stack items
-     * @param constant_pool the constant pool
+     * @param byteCodeOffset
+     * @param typesOfLocals array of {@link StackMapType}s of locals
+     * @param typesOfStackItems array ot {@link StackMapType}s of stack items
+     * @param constantPool the constant pool
      */
-    public StackMapEntry(final int tag, final int byte_code_offset,
-            final StackMapType[] types_of_locals,
-            final StackMapType[] types_of_stack_items, final ConstantPool constant_pool) {
+    public StackMapEntry(final int tag, final int byteCodeOffset,
+            final StackMapType[] typesOfLocals,
+            final StackMapType[] typesOfStackItems, final ConstantPool constantPool) {
         this.frame_type = tag;
-        this.byte_code_offset = byte_code_offset;
-        this.types_of_locals = types_of_locals != null ? types_of_locals : new StackMapType[0];
-        this.types_of_stack_items = types_of_stack_items != null ? types_of_stack_items : new StackMapType[0];
-        this.constant_pool = constant_pool;
+        this.byte_code_offset = byteCodeOffset;
+        this.types_of_locals = typesOfLocals != null ? typesOfLocals : new StackMapType[0];
+        this.types_of_stack_items = typesOfStackItems != null ? typesOfStackItems : new StackMapType[0];
+        this.constant_pool = constantPool;
     }
 
 
@@ -156,8 +156,8 @@ public final class StackMapEntry implements Node, Cloneable
             file.writeShort(byte_code_offset);
             for (final StackMapType type : types_of_locals) {
                 type.dump(file);
-            }            
-        } else if (frame_type == Const.FULL_FRAME) {        
+            }
+        } else if (frame_type == Const.FULL_FRAME) {
             file.writeShort(byte_code_offset);
             file.writeShort(types_of_locals.length);
             for (final StackMapType type : types_of_locals) {
@@ -194,7 +194,7 @@ public final class StackMapEntry implements Node, Cloneable
             buf.append("SAME_EXTENDED");
         } else if (frame_type >= Const.APPEND_FRAME && frame_type <= Const.APPEND_FRAME_MAX) {
             buf.append("APPEND ").append(String.valueOf(frame_type-251));
-        } else if (frame_type == Const.FULL_FRAME) {        
+        } else if (frame_type == Const.FULL_FRAME) {
             buf.append("FULL");
         } else {
             buf.append("UNKNOWN (").append(frame_type).append(")");
@@ -232,7 +232,7 @@ public final class StackMapEntry implements Node, Cloneable
     int getMapEntrySize() {
         if (frame_type >= Const.SAME_FRAME && frame_type <= Const.SAME_FRAME_MAX) {
             return 1;
-        } else if (frame_type >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME && 
+        } else if (frame_type >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME &&
                    frame_type <= Const.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             return 1 + (types_of_stack_items[0].hasIndex() ? 3 : 1);
         } else if (frame_type == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
@@ -245,9 +245,9 @@ public final class StackMapEntry implements Node, Cloneable
             int len = 3;
             for (final StackMapType types_of_local : types_of_locals) {
                 len += types_of_local.hasIndex() ? 3 : 1;
-            }            
+            }
             return len;
-        } else if (frame_type == Const.FULL_FRAME) {        
+        } else if (frame_type == Const.FULL_FRAME) {
             int len = 7;
             for (final StackMapType types_of_local : types_of_locals) {
                 len += types_of_local.hasIndex() ? 3 : 1;
@@ -265,7 +265,7 @@ public final class StackMapEntry implements Node, Cloneable
     public void setFrameType( final int f ) {
         if (f >= Const.SAME_FRAME && f <= Const.SAME_FRAME_MAX) {
             byte_code_offset = f - Const.SAME_FRAME;
-        } else if (f >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME && 
+        } else if (f >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME &&
                    f <= Const.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             byte_code_offset = f - Const.SAME_LOCALS_1_STACK_ITEM_FRAME;
         } else if (f == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) { // CHECKSTYLE IGNORE EmptyBlock
@@ -336,7 +336,7 @@ public final class StackMapEntry implements Node, Cloneable
 
 
     /**
-     * 
+     *
      * @deprecated since 6.0
      */
     @java.lang.Deprecated
@@ -360,7 +360,7 @@ public final class StackMapEntry implements Node, Cloneable
 
 
     /**
-     * 
+     *
      * @deprecated since 6.0
      */
     @java.lang.Deprecated

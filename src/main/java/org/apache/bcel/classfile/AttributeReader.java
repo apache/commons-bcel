@@ -24,8 +24,8 @@ package org.apache.bcel.classfile;
 
  * @see Attribute
  * @version $Id$
- * 
- * @deprecated Use UnknownAttributeReader instead 
+ *
+ * @deprecated Use UnknownAttributeReader instead
  */
 @java.lang.Deprecated
 public interface AttributeReader {

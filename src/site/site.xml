@@ -32,7 +32,7 @@
     <menu name="BCEL">
       <item name="About" href="index.html"/>
       <item name="News" href="news.html"/>
-      <item name="Download" href="http://commons.apache.org/bcel/download_bcel.cgi"/>
+      <item name="Download" href="https://commons.apache.org/proper/commons-bcel/download_bcel.cgi"/>
       <item name="Manual" href="manual/manual.html">
         <item name="Introduction" href="manual/introduction.html"/>
         <item name="The JVM" href="manual/jvm.html"/>
@@ -42,8 +42,7 @@
       </item>
       <item name="FAQ" href="faq.html"/>
       <item name="Used by" href="projects.html"/>
-      <item name="Javadoc (Latest release)" href="javadocs/api-release/index.html"/>
-      <item name="Javadoc (SVN latest)" href="apidocs/index.html"/>
+      <item name="Javadoc (Latest release)" href="apidocs/index.html"/>
     </menu>
 
   </body>

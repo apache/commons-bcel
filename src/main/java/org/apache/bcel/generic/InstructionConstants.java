@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Const;
 
-/** 
+/**
  * This interface contains shareable instruction objects.
  *
  * In order to save memory you can use some instructions multiply,

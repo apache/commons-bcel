@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * IFNE - Branch if int comparison with zero succeeds
  *
  * <PRE>Stack: ..., value -&gt; ...</PRE>

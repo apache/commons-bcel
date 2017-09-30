@@ -17,7 +17,7 @@
  */
 package org.apache.bcel.generic;
 
-/** 
+/**
  * FALOAD - Load float from array
  * <PRE>Stack: ..., arrayref, index -&gt; ..., value</PRE>
  *

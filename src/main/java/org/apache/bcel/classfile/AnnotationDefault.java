@@ -30,7 +30,7 @@ import org.apache.bcel.Const;
  * @since 6.0
  */
 public class AnnotationDefault extends Attribute {
-    
+
     private ElementValue default_value;
 
     /**

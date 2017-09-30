@@ -21,7 +21,7 @@ import java.net.URISyntaxException;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 public abstract class TestCreator {
 
@@ -34,7 +34,7 @@ public abstract class TestCreator {
             create(out);
         }
     }
-    
+
     private String getClassName() {
         final String name = getClass().getName();
         return name.substring(name.lastIndexOf('.')+1).replace("Creator", ".class");

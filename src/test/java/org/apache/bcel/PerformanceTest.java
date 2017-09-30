@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 
 package org.apache.bcel;
@@ -87,7 +87,7 @@ public final class PerformanceTest extends TestCase {
                     try (InputStream in = jar.getInputStream(e)) {
                         bytes = read(in);
                     }
-                    
+
                     parseTime.start();
                     final JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), e.getName()).parse();
                     parseTime.stop();

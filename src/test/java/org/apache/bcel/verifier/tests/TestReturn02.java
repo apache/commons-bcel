@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package org.apache.bcel.verifier.tests;
 
@@ -22,43 +22,43 @@ public class TestReturn02 {
     public static String test1(final char[] data, final int offset, final int count) {
         return new String(data, offset, count);
     }
-    
+
     public static Object test2() {
         return new Object();
     }
-    
+
     public static boolean test3() {
         return true;
     }
-    
+
     public static byte test4() {
         return 1;
     }
-    
+
     public static short test5() {
         return 1;
     }
-    
+
     public static char test6() {
         return 'a';
     }
-    
+
     public static int test7() {
         return 1;
     }
-    
+
     public static long test8() {
         return 1L;
     }
-    
+
     public static float test9() {
         return 1.0f;
     }
-    
+
     public static double test10() {
         return 1.0;
     }
-    
+
     public static Object test11() {
         return null;
     }
