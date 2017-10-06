@@ -38,6 +38,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     private InstructionHandle start;
     private InstructionHandle end;
     private int orig_index; // never changes; used to match up with LocalVariableTypeTable entries
+    private boolean live_past_end;
 
 
     /**
@@ -61,6 +62,11 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         setStart(start);
         setEnd(end);
         this.orig_index = index;
+        if (end == null) {
+            this.live_past_end = true;
+        } else {
+            this.live_past_end = false;
+        }
     }
 
 
@@ -102,7 +108,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         if ((start != null) && (end != null)) {
             start_pc = start.getPosition();
             length = end.getPosition() - start_pc;
-            if (end.getNext() == null) {
+            if ((end.getNext() == null) && live_past_end) {
                 length += end.getInstruction().getLength();
             }
         }
@@ -125,6 +131,16 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
     public int getOrigIndex() {
         return orig_index;
+    }
+
+
+    public void setLivePastEnd( final boolean live_past_end) {
+        this.live_past_end = live_past_end;
+    }
+
+
+    public boolean getLivePastEnd() {
+        return live_past_end;
     }
 
 
