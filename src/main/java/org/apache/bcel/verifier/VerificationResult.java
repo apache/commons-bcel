@@ -70,7 +70,7 @@ public class VerificationResult {
 
 
     /**
-     * Returns one one the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET},
+     * Returns one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET},
      * {@link #VERIFIED_REJECTED} constants.
      */
     public int getStatus() {
