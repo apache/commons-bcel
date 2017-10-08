@@ -32,7 +32,7 @@ public final class DOUBLE_Upper extends Type{
 
     /** The constructor; this class must not be instantiated from the outside. */
     private DOUBLE_Upper() {
-        super(Const.T_UNKNOWN, "Long_Upper");
+        super(Const.T_UNKNOWN, "Double_Upper");
     }
 
     /** Use this method to get the single instance of this class. */
