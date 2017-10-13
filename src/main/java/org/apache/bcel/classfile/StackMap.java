@@ -74,7 +74,7 @@ public final class StackMap extends Attribute {
 
 
     /**
-     * Dump line number table attribute to file stream in binary format.
+     * Dump stack map table attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException
