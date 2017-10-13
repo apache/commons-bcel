@@ -26,8 +26,8 @@ package org.apache.bcel.generic;
 public class ILOAD extends LoadInstruction {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     ILOAD() {
         super(org.apache.bcel.Const.ILOAD, org.apache.bcel.Const.ILOAD_0);

@@ -26,8 +26,8 @@ package org.apache.bcel.generic;
 public class FSTORE extends StoreInstruction {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     FSTORE() {
         super(org.apache.bcel.Const.FSTORE, org.apache.bcel.Const.FSTORE_0);

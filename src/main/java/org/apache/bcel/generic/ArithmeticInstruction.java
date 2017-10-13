@@ -28,8 +28,8 @@ public abstract class ArithmeticInstruction extends Instruction implements Typed
         StackProducer, StackConsumer {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     ArithmeticInstruction() {
     }

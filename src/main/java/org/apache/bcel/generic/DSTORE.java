@@ -26,8 +26,8 @@ package org.apache.bcel.generic;
 public class DSTORE extends StoreInstruction {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     DSTORE() {
         super(org.apache.bcel.Const.DSTORE, org.apache.bcel.Const.DSTORE_0);

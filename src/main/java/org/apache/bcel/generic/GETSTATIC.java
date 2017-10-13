@@ -31,8 +31,8 @@ import org.apache.bcel.ExceptionConst;
 public class GETSTATIC extends FieldInstruction implements PushInstruction, ExceptionThrower {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     GETSTATIC() {
     }

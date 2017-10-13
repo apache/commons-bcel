@@ -27,8 +27,8 @@ package org.apache.bcel.generic;
 public class IFGT extends IfInstruction {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     IFGT() {
     }

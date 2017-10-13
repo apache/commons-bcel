@@ -28,8 +28,8 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
         TypedInstruction {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     ArrayInstruction() {
     }
