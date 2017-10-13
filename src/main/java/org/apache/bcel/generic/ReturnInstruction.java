@@ -29,8 +29,8 @@ public abstract class ReturnInstruction extends Instruction implements Exception
         TypedInstruction, StackConsumer {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     ReturnInstruction() {
     }

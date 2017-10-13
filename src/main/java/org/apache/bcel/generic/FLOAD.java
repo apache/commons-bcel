@@ -26,8 +26,8 @@ package org.apache.bcel.generic;
 public class FLOAD extends LoadInstruction {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     FLOAD() {
         super(org.apache.bcel.Const.FLOAD, org.apache.bcel.Const.FLOAD_0);

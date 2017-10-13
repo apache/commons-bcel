@@ -27,8 +27,8 @@ import org.apache.bcel.classfile.ConstantPool;
 public abstract class FieldInstruction extends FieldOrMethod {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     FieldInstruction() {
     }
