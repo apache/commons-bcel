@@ -133,7 +133,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         InstructionHandle end = null;
         if (!abstract_) {
             start = il.getStart();
-            end = il.getEnd();
+            // end == null => live to end of method
             /* Add local variables, namely the implicit `this' and the arguments
              */
             if (!isStatic() && (class_name != null)) { // Instance method -> `this' is local var 0
@@ -725,9 +725,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             if (null == start) {
                 start = il.getStart();
             }
-            if (null == end) {
-                end = il.getEnd();
-            }
+            // end == null => live to end of method
             // Since we are recreating the LocalVaraible, we must
             // propagate the orig_index to new copy.
             addLocalVariable(l.getName(), Type.getType(l.getSignature()), l
