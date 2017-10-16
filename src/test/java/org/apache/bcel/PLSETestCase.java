@@ -95,20 +95,17 @@ public class PLSETestCase extends AbstractTestCase
      */
     public void testB295() throws Exception
     {
-        try (FileInputStream file = new FileInputStream("src/test/java/org/apache/bcel/data/PLSETestClass2.class")) {
-            final ClassParser parser = new ClassParser(file, "Java8Example.class");
-            final JavaClass clazz = parser.parse();
-            final ClassGen cg = new ClassGen(clazz);
-            final ConstantPoolGen pool = cg.getConstantPool();
-            final Method m = cg.getMethodAt(1);  // 'main'
-            final LocalVariableTable lvt = m.getLocalVariableTable();
-            final LocalVariable lv = lvt.getLocalVariable(5, 34);  // 'maxMemory'
-            //System.out.println(lv);
-            final MethodGen mg = new MethodGen(m, cg.getClassName(), pool);
-            final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
-            final LocalVariable new_lv = new_lvt.getLocalVariable(5, 34);  // 'maxMemory'
-            //System.out.println(new_lv);
-            assertEquals("live range length", lv.getLength(), new_lv.getLength());
-        }
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.PLSETestClass2");
+        final ClassGen cg = new ClassGen(clazz);
+        final ConstantPoolGen pool = cg.getConstantPool();
+        final Method m = cg.getMethodAt(1);  // 'main'
+        final LocalVariableTable lvt = m.getLocalVariableTable();
+        final LocalVariable lv = lvt.getLocalVariable(2, 4);  // 'i'
+        //System.out.println(lv);
+        final MethodGen mg = new MethodGen(m, cg.getClassName(), pool);
+        final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
+        final LocalVariable new_lv = new_lvt.getLocalVariable(2, 4);  // 'i'
+        //System.out.println(new_lv);
+        assertEquals("live range length", lv.getLength(), new_lv.getLength());
     }
 }
