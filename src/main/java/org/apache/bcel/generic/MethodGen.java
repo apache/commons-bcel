@@ -130,7 +130,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         setConstantPool(cp);
         final boolean abstract_ = isAbstract() || isNative();
         InstructionHandle start = null;
-        InstructionHandle end = null;
+        final InstructionHandle end = null;
         if (!abstract_) {
             start = il.getStart();
             // end == null => live to end of method
@@ -720,7 +720,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         removeLocalVariables();
         for (final LocalVariable l : lv) {
             InstructionHandle start = il.findHandle(l.getStartPC());
-            InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
+            final InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
             // Repair malformed handles
             if (null == start) {
                 start = il.getStart();
