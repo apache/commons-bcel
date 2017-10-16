@@ -62,11 +62,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         setStart(start);
         setEnd(end);
         this.orig_index = index;
-        if (end == null) {
-            this.live_to_end = true;
-        } else {
-            this.live_to_end = false;
-        }
+        this.live_to_end = end == null;
     }
 
 
