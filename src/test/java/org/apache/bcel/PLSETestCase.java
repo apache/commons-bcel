@@ -18,7 +18,6 @@
 
 package org.apache.bcel;
 
-import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
@@ -30,7 +29,6 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.InvokeInstruction;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
-import java.io.FileInputStream;
 
 public class PLSETestCase extends AbstractTestCase
 {
