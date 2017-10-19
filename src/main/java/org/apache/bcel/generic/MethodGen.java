@@ -130,10 +130,10 @@ public class MethodGen extends FieldGenOrMethodGen {
         setConstantPool(cp);
         final boolean abstract_ = isAbstract() || isNative();
         InstructionHandle start = null;
-        InstructionHandle end = null;
+        final InstructionHandle end = null;
         if (!abstract_) {
             start = il.getStart();
-            end = il.getEnd();
+            // end == null => live to end of method
             /* Add local variables, namely the implicit `this' and the arguments
              */
             if (!isStatic() && (class_name != null)) { // Instance method -> `this' is local var 0
@@ -720,14 +720,12 @@ public class MethodGen extends FieldGenOrMethodGen {
         removeLocalVariables();
         for (final LocalVariable l : lv) {
             InstructionHandle start = il.findHandle(l.getStartPC());
-            InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
+            final InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
             // Repair malformed handles
             if (null == start) {
                 start = il.getStart();
             }
-            if (null == end) {
-                end = il.getEnd();
-            }
+            // end == null => live to end of method
             // Since we are recreating the LocalVaraible, we must
             // propagate the orig_index to new copy.
             addLocalVariable(l.getName(), Type.getType(l.getSignature()), l

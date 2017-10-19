@@ -38,7 +38,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     private InstructionHandle start;
     private InstructionHandle end;
     private int orig_index; // never changes; used to match up with LocalVariableTypeTable entries
-    private boolean live_past_end;
+    private boolean live_to_end;
 
 
     /**
@@ -62,11 +62,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         setStart(start);
         setEnd(end);
         this.orig_index = index;
-        if (end == null) {
-            this.live_past_end = true;
-        } else {
-            this.live_past_end = false;
-        }
+        this.live_to_end = end == null;
     }
 
 
@@ -94,11 +90,11 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * This relies on that the instruction list has already been dumped to byte code or
      * or that the `setPositions' methods has been called for the instruction list.
      *
-     * Note that for local variables whose scope end at the last
-     * instruction of the method's code, the JVM specification is ambiguous:
-     * both a start_pc+length ending at the last instruction and
-     * start_pc+length ending at first index beyond the end of the code are
-     * valid.
+     * Note that due to the conversion from byte code offset to InstructionHandle,
+     * it is impossible to tell the difference between a live range that ends BEFORE
+     * the last insturction of the method or a live range that ends AFTER the last
+     * instruction of the method.  Hence the live_to_end flag to differentiate
+     * between these two cases.
      *
      * @param cp constant pool
      */
@@ -108,7 +104,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         if ((start != null) && (end != null)) {
             start_pc = start.getPosition();
             length = end.getPosition() - start_pc;
-            if ((end.getNext() == null) && live_past_end) {
+            if ((end.getNext() == null) && live_to_end) {
                 length += end.getInstruction().getLength();
             }
         }
@@ -134,13 +130,13 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
-    public void setLivePastEnd( final boolean live_past_end) {
-        this.live_past_end = live_past_end;
+    public void setLiveToEnd( final boolean live_to_end) {
+        this.live_to_end = live_to_end;
     }
 
 
-    public boolean getLivePastEnd() {
-        return live_past_end;
+    public boolean getLiveToEnd() {
+        return live_to_end;
     }
 
 

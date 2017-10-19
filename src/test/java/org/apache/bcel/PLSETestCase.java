@@ -19,6 +19,7 @@
 package org.apache.bcel;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
@@ -85,5 +86,24 @@ public class PLSETestCase extends AbstractTestCase
         //   java.lang.IllegalArgumentException: Cannot be used on an array type
         final String cn = ii.getClassName(pool);
         assertEquals("[Lorg.apache.bcel.data.PLSETestEnum;", cn);
+    }
+
+    /**
+     * BCEL-295:
+     */
+    public void testB295() throws Exception
+    {
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.PLSETestClass2");
+        final ClassGen cg = new ClassGen(clazz);
+        final ConstantPoolGen pool = cg.getConstantPool();
+        final Method m = cg.getMethodAt(1);  // 'main'
+        final LocalVariableTable lvt = m.getLocalVariableTable();
+        final LocalVariable lv = lvt.getLocalVariable(2, 4);  // 'i'
+        //System.out.println(lv);
+        final MethodGen mg = new MethodGen(m, cg.getClassName(), pool);
+        final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
+        final LocalVariable new_lv = new_lvt.getLocalVariable(2, 4);  // 'i'
+        //System.out.println(new_lv);
+        assertEquals("live range length", lv.getLength(), new_lv.getLength());
     }
 }
