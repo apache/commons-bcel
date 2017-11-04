@@ -24,9 +24,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.StringTokenizer;
 import java.util.List;
 import java.util.Set;
-import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 import org.apache.bcel.Const;
@@ -79,7 +80,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         public boolean equals( final Object o1, final Object o2 ) {
             final JavaClass THIS = (JavaClass) o1;
             final JavaClass THAT = (JavaClass) o2;
-            return THIS.getClassName().equals(THAT.getClassName());
+            return Objects.equals(THIS.getClassName(), THAT.getClassName());
         }
 
 

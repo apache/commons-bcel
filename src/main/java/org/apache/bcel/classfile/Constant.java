@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.util.BCELComparator;
@@ -39,7 +40,7 @@ public abstract class Constant implements Cloneable, Node {
         public boolean equals( final Object o1, final Object o2 ) {
             final Constant THIS = (Constant) o1;
             final Constant THAT = (Constant) o2;
-            return THIS.toString().equals(THAT.toString());
+            return Objects.equals(THIS.toString(), THAT.toString());
         }
 
 

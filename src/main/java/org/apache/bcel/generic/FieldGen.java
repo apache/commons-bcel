@@ -19,6 +19,7 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -49,8 +50,8 @@ public class FieldGen extends FieldGenOrMethodGen {
         public boolean equals( final Object o1, final Object o2 ) {
             final FieldGen THIS = (FieldGen) o1;
             final FieldGen THAT = (FieldGen) o2;
-            return THIS.getName().equals(THAT.getName())
-                    && THIS.getSignature().equals(THAT.getSignature());
+            return Objects.equals(THIS.getName(), THAT.getName())
+                    && Objects.equals(THIS.getSignature(), THAT.getSignature());
         }
 
 
