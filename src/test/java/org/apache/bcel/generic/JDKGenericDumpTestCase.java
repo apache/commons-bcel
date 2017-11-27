@@ -75,13 +75,15 @@ public class JDKGenericDumpTestCase {
 
     private static Set<String> findJavaHomesOnWindows() {
         Set<String> javaHomes = new HashSet<>();
-        javaHomes.addAll(findJavaHomesOnWindows(KEY_JRE, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JRE)));
-        javaHomes
-                .addAll(findJavaHomesOnWindows(KEY_JRE_9, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JRE_9)));
-        javaHomes.addAll(findJavaHomesOnWindows(KEY_JDK, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JDK)));
-        javaHomes
-                .addAll(findJavaHomesOnWindows(KEY_JDK_9, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JDK_9)));
+        addAllJavaHomesOnWindows(KEY_JRE, javaHomes);
+        addAllJavaHomesOnWindows(KEY_JRE_9, javaHomes);
+        addAllJavaHomesOnWindows(KEY_JDK, javaHomes);
+        addAllJavaHomesOnWindows(KEY_JDK_9, javaHomes);
         return javaHomes;
+    }
+
+    private static void addAllJavaHomesOnWindows(final String keyJre, Set<String> javaHomes) {
+        javaHomes.addAll(findJavaHomesOnWindows(keyJre, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, keyJre)));
     }
 
     private static Set<String> findJavaHomesOnWindows(String keyJavaHome, final String[] keys) {
