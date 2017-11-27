@@ -74,7 +74,7 @@ public class JDKGenericDumpTestCase {
     }
 
     private static Set<String> findJavaHomesOnWindows() {
-        Set<String> javaHomes = new HashSet<>();
+        final Set<String> javaHomes = new HashSet<>();
         addAllJavaHomesOnWindows(KEY_JRE, javaHomes);
         addAllJavaHomesOnWindows(KEY_JRE_9, javaHomes);
         addAllJavaHomesOnWindows(KEY_JDK, javaHomes);
@@ -82,11 +82,11 @@ public class JDKGenericDumpTestCase {
         return javaHomes;
     }
 
-    private static void addAllJavaHomesOnWindows(final String keyJre, Set<String> javaHomes) {
+    private static void addAllJavaHomesOnWindows(final String keyJre, final Set<String> javaHomes) {
         javaHomes.addAll(findJavaHomesOnWindows(keyJre, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, keyJre)));
     }
 
-    private static Set<String> findJavaHomesOnWindows(String keyJavaHome, final String[] keys) {
+    private static Set<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
         final Set<String> javaHomes = new HashSet<>(keys.length);
         for (final String key : keys) {
             if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJavaHome + "\\" + key)) {
