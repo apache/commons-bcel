@@ -51,6 +51,8 @@ import com.sun.jna.platform.win32.Advapi32Util;
 @RunWith(Parameterized.class)
 public class JDKGenericDumpTestCase {
 
+    private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
+
     private static final String KEY_JDK = "SOFTWARE\\JavaSoft\\Java Development Kit";
 
     private static final String KEY_JDK_9 = "SOFTWARE\\JavaSoft\\JDK";
@@ -58,6 +60,22 @@ public class JDKGenericDumpTestCase {
     private static final String KEY_JRE = "SOFTWARE\\JavaSoft\\Java Runtime Environment";
 
     private static final String KEY_JRE_9 = "SOFTWARE\\JavaSoft\\JRE";
+
+    private static void addAllJavaHomesOnWindows(final String keyJre, final Set<String> javaHomes) {
+        javaHomes.addAll(findJavaHomesOnWindows(keyJre, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, keyJre)));
+    }
+
+    private static String bytesToHex(final byte[] bytes) {
+        final char[] hexChars = new char[bytes.length * 3];
+        int i = 0;
+        for (final byte b : bytes) {
+            final int v = b & 0xFF;
+            hexChars[i++] = hexArray[v >>> 4];
+            hexChars[i++] = hexArray[v & 0x0F];
+            hexChars[i++] = ' ';
+        }
+        return new String(hexChars);
+    }
 
     @Parameters(name = "{0}")
     public static Collection<String> data() {
@@ -82,10 +100,6 @@ public class JDKGenericDumpTestCase {
         return javaHomes;
     }
 
-    private static void addAllJavaHomesOnWindows(final String keyJre, final Set<String> javaHomes) {
-        javaHomes.addAll(findJavaHomesOnWindows(keyJre, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, keyJre)));
-    }
-
     private static Set<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
         final Set<String> javaHomes = new HashSet<>(keys.length);
         for (final String key : keys) {
@@ -102,41 +116,10 @@ public class JDKGenericDumpTestCase {
         return javaHomes;
     }
 
-    public JDKGenericDumpTestCase(final String javaHome) {
-        this.javaHome = javaHome;
-    }
-
     private final String javaHome;
 
-    @Test
-    public void testJDKjars() throws Exception {
-        final File[] jars = listJDKjars();
-        if (jars != null) {
-            for (final File file : jars) {
-                testJar(file);
-            }
-        }
-    }
-
-    private void testJar(final File file) throws Exception {
-        System.out.println(file);
-        try (JarFile jar = new JarFile(file)) {
-            final Enumeration<JarEntry> en = jar.entries();
-            while (en.hasMoreElements()) {
-                final JarEntry e = en.nextElement();
-                final String name = e.getName();
-                if (name.endsWith(".class")) {
-                    // System.out.println("- " + name);
-                    try (InputStream in = jar.getInputStream(e)) {
-                        final ClassParser parser = new ClassParser(in, name);
-                        final JavaClass jc = parser.parse();
-                        for (final Method m : jc.getMethods()) {
-                            compare(name, m);
-                        }
-                    }
-                }
-            }
-        }
+    public JDKGenericDumpTestCase(final String javaHome) {
+        this.javaHome = javaHome;
     }
 
     private void compare(final String name, final Method m) {
@@ -171,17 +154,34 @@ public class JDKGenericDumpTestCase {
         });
     }
 
-    private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
-
-    private static String bytesToHex(final byte[] bytes) {
-        final char[] hexChars = new char[bytes.length * 3];
-        int i = 0;
-        for (final byte b : bytes) {
-            final int v = b & 0xFF;
-            hexChars[i++] = hexArray[v >>> 4];
-            hexChars[i++] = hexArray[v & 0x0F];
-            hexChars[i++] = ' ';
+    private void testJar(final File file) throws Exception {
+        System.out.println(file);
+        try (JarFile jar = new JarFile(file)) {
+            final Enumeration<JarEntry> en = jar.entries();
+            while (en.hasMoreElements()) {
+                final JarEntry e = en.nextElement();
+                final String name = e.getName();
+                if (name.endsWith(".class")) {
+                    // System.out.println("- " + name);
+                    try (InputStream in = jar.getInputStream(e)) {
+                        final ClassParser parser = new ClassParser(in, name);
+                        final JavaClass jc = parser.parse();
+                        for (final Method m : jc.getMethods()) {
+                            compare(name, m);
+                        }
+                    }
+                }
+            }
         }
-        return new String(hexChars);
+    }
+
+    @Test
+    public void testJDKjars() throws Exception {
+        final File[] jars = listJDKjars();
+        if (jars != null) {
+            for (final File file : jars) {
+                testJar(file);
+            }
+        }
     }
 }
