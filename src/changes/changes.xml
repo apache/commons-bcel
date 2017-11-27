@@ -66,6 +66,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-294" type="fix" dev="britter" due-to="Mark Roberts">Incorrect comment in StackMap.java</action>
       <action issue="BCEL-296" type="fix" dev="ggregory" due-to="Mark Roberts">Incorrect comment in several classes.</action>
       <action issue="BCEL-295" type="fix" dev="ggregory" due-to="Mark Roberts">Fix local variable live range length; add test case.</action>
+      <action issue="BCEL-300" type="fix" dev="ggregory" due-to="Mark Roberts">org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 19.</action>
     </release>
 
     <release version="6.1" date="2017-09-14" description="Experimental Java 9 Support">
