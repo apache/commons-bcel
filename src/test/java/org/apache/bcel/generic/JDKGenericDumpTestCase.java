@@ -45,16 +45,19 @@ import org.junit.runners.Parameterized.Parameters;
 import com.sun.jna.platform.win32.Advapi32Util;
 
 /**
- * Test that the generic dump() methods work on the JDK classes Reads each class
- * into an instruction list and then dumps the instructions. The output bytes
- * should be the same as the input.
+ * Test that the generic dump() methods work on the JDK classes Reads each class into an instruction list and then dumps
+ * the instructions. The output bytes should be the same as the input.
  */
 @RunWith(Parameterized.class)
 public class JDKGenericDumpTestCase {
 
     private static final String KEY_JDK = "SOFTWARE\\JavaSoft\\Java Development Kit";
 
+    private static final String KEY_JDK_9 = "SOFTWARE\\JavaSoft\\JDK";
+
     private static final String KEY_JRE = "SOFTWARE\\JavaSoft\\Java Runtime Environment";
+
+    private static final String KEY_JRE_9 = "SOFTWARE\\JavaSoft\\JRE";
 
     @Parameters(name = "{0}")
     public static Collection<String> data() {
@@ -72,19 +75,21 @@ public class JDKGenericDumpTestCase {
 
     private static Set<String> findJavaHomesOnWindows() {
         Set<String> javaHomes = new HashSet<>();
-        final String[] jreKeys = Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JRE);
-        javaHomes = findJavaHomesOnWindows(jreKeys);
-        final String[] jdkKeys = Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JDK);
-        javaHomes.addAll(findJavaHomesOnWindows(jdkKeys));
+        javaHomes.addAll(findJavaHomesOnWindows(KEY_JRE, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JRE)));
+        javaHomes
+                .addAll(findJavaHomesOnWindows(KEY_JRE_9, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JRE_9)));
+        javaHomes.addAll(findJavaHomesOnWindows(KEY_JDK, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JDK)));
+        javaHomes
+                .addAll(findJavaHomesOnWindows(KEY_JDK_9, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, KEY_JDK_9)));
         return javaHomes;
     }
 
-    private static Set<String> findJavaHomesOnWindows(final String[] keys) {
+    private static Set<String> findJavaHomesOnWindows(String keyJavaHome, final String[] keys) {
         final Set<String> javaHomes = new HashSet<>(keys.length);
         for (final String key : keys) {
-            if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, KEY_JRE + "\\" + key)) {
-                final String javaHome = Advapi32Util.registryGetStringValue(HKEY_LOCAL_MACHINE, KEY_JRE + "\\" + key,
-                        "JavaHome");
+            if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJavaHome + "\\" + key)) {
+                final String javaHome = Advapi32Util.registryGetStringValue(HKEY_LOCAL_MACHINE,
+                        keyJavaHome + "\\" + key, "JavaHome");
                 if (StringUtils.isNoneBlank(javaHome)) {
                     if (new File(javaHome).exists()) {
                         javaHomes.add(javaHome);
