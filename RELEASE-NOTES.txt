@@ -1,4 +1,51 @@
               Apache Commons BCEL
+                  Version 6.2
+                RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.2!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+Experimental Java 9 Support
+
+FIXED BUGS:
+===========
+
+o BCEL-294: Incorrect comment in StackMap.java Thanks to Mark Roberts.
+o BCEL-296: Incorrect comment in several classes. Thanks to Mark Roberts.
+o BCEL-295: Fix local variable live range length; add test case. Thanks to Mark Roberts.
+o BCEL-300: org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 19.
+o BCEL-301: org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 20.
+
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    http://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BCEL
                   Version 6.1
                 RELEASE NOTES
 
@@ -85,6 +132,7 @@ o BCEL-277: Resolving the String representation of a constant throws
 Have fun!
 -Apache Commons BCEL team
 
+-----------------------------------------------------------------------------
 
               Release Notes for 6.0
 
