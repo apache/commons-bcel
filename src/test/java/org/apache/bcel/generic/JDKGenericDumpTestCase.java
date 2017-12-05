@@ -62,7 +62,9 @@ public class JDKGenericDumpTestCase {
     private static final String KEY_JRE_9 = "SOFTWARE\\JavaSoft\\JRE";
 
     private static void addAllJavaHomesOnWindows(final String keyJre, final Set<String> javaHomes) {
-        javaHomes.addAll(findJavaHomesOnWindows(keyJre, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, keyJre)));
+        if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJre)) {
+            javaHomes.addAll(findJavaHomesOnWindows(keyJre, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, keyJre)));
+        }
     }
 
     private static String bytesToHex(final byte[] bytes) {
