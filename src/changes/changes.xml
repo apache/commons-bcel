@@ -62,7 +62,10 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.2" date="2017-12-DD" description="Experimental Java 9 Support">
+    <release version="6.3" date="2017-MM-DD" description="?">
+    </release>
+
+    <release version="6.2" date="2017-12-08" description="Experimental Java 9 Support">
       <action issue="BCEL-294" type="fix" dev="britter" due-to="Mark Roberts">Incorrect comment in StackMap.java</action>
       <action issue="BCEL-296" type="fix" dev="ggregory" due-to="Mark Roberts">Incorrect comment in several classes.</action>
       <action issue="BCEL-295" type="fix" dev="ggregory" due-to="Mark Roberts">Fix local variable live range length; add test case.</action>
