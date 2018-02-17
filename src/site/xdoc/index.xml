@@ -77,11 +77,11 @@
     </section>
     <!-- ================================================== -->
     <section name="Release Information">
-      <p>The latest stable release of BCEL is 6.1. You may: </p>
+      <p>The latest stable release of BCEL is here, you may: </p>
       <ul>
-        <li>Download <a href="https://commons.apache.org/proper/commons-bcel/download_bcel.cgi">6.1</a></li>
-	<li>Read the <a href="https://www.apache.org/dist/commons/bcel/RELEASE-NOTES.txt">6.1 release notes</a></li>
-        <li>Inspect the <a href="bcel5-bcel6-clirr-report.html">extended Clirr report</a> comparing 5.2 with 6.0</li>
+        <li><a href="https://commons.apache.org/proper/commons-bcel/download_bcel.cgi">Download</a></li>
+	    <li>Read the <a href="https://www.apache.org/dist/commons/bcel/RELEASE-NOTES.txt">release notes</a></li>
+        <li>Inspect the <a href="bcel5-bcel6-clirr-report.html">extended Clirr report</a> comparing 5.2 with 6.x</li>
       </ul>
       <p>
         Alternatively you can pull it from the central Maven repositories:
@@ -89,7 +89,7 @@
 &lt;dependency&gt;
     &lt;groupId&gt;org.apache.bcel&lt;/groupId&gt;
     &lt;artifactId&gt;bcel&lt;/artifactId&gt;
-    &lt;version&gt;6.1&lt;/version&gt;
+    &lt;version&gt;6.2&lt;/version&gt;
 &lt;/dependency&gt;
         </pre>
       </p>

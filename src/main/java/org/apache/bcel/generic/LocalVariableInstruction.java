@@ -47,8 +47,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      * tag and length are defined in readInstruction and initFromFile, respectively.
      */
     LocalVariableInstruction(final short canon_tag, final short c_tag) {
@@ -59,8 +59,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Also used by IINC()!
+     * Empty constructor needed for Instruction.readInstruction.
+     * Also used by IINC()!
      */
     LocalVariableInstruction() {
     }

@@ -31,8 +31,8 @@ import org.apache.bcel.ExceptionConst;
 public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, PopInstruction {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     PUTSTATIC() {
     }

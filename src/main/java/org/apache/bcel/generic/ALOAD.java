@@ -26,8 +26,8 @@ package org.apache.bcel.generic;
 public class ALOAD extends LoadInstruction {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     ALOAD() {
         super(org.apache.bcel.Const.ALOAD, org.apache.bcel.Const.ALOAD_0);

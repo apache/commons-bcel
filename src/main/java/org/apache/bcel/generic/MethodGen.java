@@ -617,13 +617,13 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
       public void addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
           if (!hasParameterAnnotations) {
-            return;
-        }
-          final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp,param_annotations);
-          if (attrs!=null) {
-          for (final Attribute attr : attrs) {
-              addAttribute(attr);
+              return;
           }
+          final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp,param_annotations);
+          if (attrs != null) {
+              for (final Attribute attr : attrs) {
+                  addAttribute(attr);
+              }
           }
       }
 

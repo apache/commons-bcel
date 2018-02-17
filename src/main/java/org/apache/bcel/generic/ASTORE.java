@@ -26,8 +26,8 @@ package org.apache.bcel.generic;
 public class ASTORE extends StoreInstruction {
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     ASTORE() {
         super(org.apache.bcel.Const.ASTORE, org.apache.bcel.Const.ASTORE_0);

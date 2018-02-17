@@ -43,8 +43,10 @@
 Apache Commons BCEL
 ===================
 
-[![Build Status](https://travis-ci.org/apache/commons-bcel.svg?branch=trunk)](https://travis-ci.org/apache/commons-bcel)
+[![Build Status](https://travis-ci.org/apache/bcel.svg?branch=master)](https://travis-ci.org/apache/bcel)
+[![Coverage Status](https://coveralls.io/repos/apache/bcel/badge.svg?branch=master)](https://coveralls.io/r/apache/bcel)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/)
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Apache Commons Bytecode Engineering Library
 
@@ -65,7 +67,7 @@ Alternatively you can pull it from the central Maven repositories:
 <dependency>
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
-  <version>6.0</version>
+  <version>6.2</version>
 </dependency>
 ```
 

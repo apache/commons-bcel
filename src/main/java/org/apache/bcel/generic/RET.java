@@ -36,8 +36,8 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
 
 
     /**
-     * Empty constructor needed for the Class.newInstance() statement in
-     * Instruction.readInstruction(). Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction.
+     * Not to be used otherwise.
      */
     RET() {
     }

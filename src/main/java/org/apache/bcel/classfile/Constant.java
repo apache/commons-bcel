@@ -163,6 +163,10 @@ public abstract class Constant implements Cloneable, Node {
                 return new ConstantMethodType(input);
             case Const.CONSTANT_InvokeDynamic:
                 return new ConstantInvokeDynamic(input);
+            case Const.CONSTANT_Module:
+                return new ConstantModule(input);
+            case Const.CONSTANT_Package:
+                return new ConstantPackage(input);
             default:
                 throw new ClassFormatException("Invalid byte tag in constant pool: " + b);
         }
