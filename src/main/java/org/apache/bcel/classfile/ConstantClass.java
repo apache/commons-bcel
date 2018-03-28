@@ -27,7 +27,6 @@ import org.apache.bcel.Const;
  * This class is derived from the abstract {@link Constant}
  * and represents a reference to a (external) class.
  *
- * @version $Id$
  * @see     Constant
  */
 public final class ConstantClass extends Constant implements ConstantObject {
@@ -78,10 +77,10 @@ public final class ConstantClass extends Constant implements ConstantObject {
 
 
     /**
-     * Dump constant class to file stream in binary format.
+     * Dumps constant class to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs writing to the DataOutputStream.
      */
     @Override
     public final void dump( final DataOutputStream file ) throws IOException {
