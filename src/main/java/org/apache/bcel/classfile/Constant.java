@@ -127,51 +127,51 @@ public abstract class Constant implements Cloneable, Node {
     /**
      * Read one constant from the given input, the type depends on a tag byte.
      *
-     * @param input Input stream
+     * @param dataInput Input stream
      * @return Constant object
+     * @throws IOException if an I/O error occurs reading from the given {@code dataInput}.
+     * @throws ClassFormatException if the next byte is not recognized
      * @since 6.0 made public
      */
-    public static Constant readConstant( final DataInput input ) throws IOException,
-            ClassFormatException {
-        final byte b = input.readByte(); // Read tag byte
+    public static Constant readConstant(final DataInput dataInput) throws IOException, ClassFormatException {
+        final byte b = dataInput.readByte(); // Read tag byte
         switch (b) {
-            case Const.CONSTANT_Class:
-                return new ConstantClass(input);
-            case Const.CONSTANT_Fieldref:
-                return new ConstantFieldref(input);
-            case Const.CONSTANT_Methodref:
-                return new ConstantMethodref(input);
-            case Const.CONSTANT_InterfaceMethodref:
-                return new ConstantInterfaceMethodref(input);
-            case Const.CONSTANT_String:
-                return new ConstantString(input);
-            case Const.CONSTANT_Integer:
-                return new ConstantInteger(input);
-            case Const.CONSTANT_Float:
-                return new ConstantFloat(input);
-            case Const.CONSTANT_Long:
-                return new ConstantLong(input);
-            case Const.CONSTANT_Double:
-                return new ConstantDouble(input);
-            case Const.CONSTANT_NameAndType:
-                return new ConstantNameAndType(input);
-            case Const.CONSTANT_Utf8:
-                return ConstantUtf8.getInstance(input);
-            case Const.CONSTANT_MethodHandle:
-                return new ConstantMethodHandle(input);
-            case Const.CONSTANT_MethodType:
-                return new ConstantMethodType(input);
-            case Const.CONSTANT_InvokeDynamic:
-                return new ConstantInvokeDynamic(input);
-            case Const.CONSTANT_Module:
-                return new ConstantModule(input);
-            case Const.CONSTANT_Package:
-                return new ConstantPackage(input);
-            default:
-                throw new ClassFormatException("Invalid byte tag in constant pool: " + b);
+        case Const.CONSTANT_Class:
+            return new ConstantClass(dataInput);
+        case Const.CONSTANT_Fieldref:
+            return new ConstantFieldref(dataInput);
+        case Const.CONSTANT_Methodref:
+            return new ConstantMethodref(dataInput);
+        case Const.CONSTANT_InterfaceMethodref:
+            return new ConstantInterfaceMethodref(dataInput);
+        case Const.CONSTANT_String:
+            return new ConstantString(dataInput);
+        case Const.CONSTANT_Integer:
+            return new ConstantInteger(dataInput);
+        case Const.CONSTANT_Float:
+            return new ConstantFloat(dataInput);
+        case Const.CONSTANT_Long:
+            return new ConstantLong(dataInput);
+        case Const.CONSTANT_Double:
+            return new ConstantDouble(dataInput);
+        case Const.CONSTANT_NameAndType:
+            return new ConstantNameAndType(dataInput);
+        case Const.CONSTANT_Utf8:
+            return ConstantUtf8.getInstance(dataInput);
+        case Const.CONSTANT_MethodHandle:
+            return new ConstantMethodHandle(dataInput);
+        case Const.CONSTANT_MethodType:
+            return new ConstantMethodType(dataInput);
+        case Const.CONSTANT_InvokeDynamic:
+            return new ConstantInvokeDynamic(dataInput);
+        case Const.CONSTANT_Module:
+            return new ConstantModule(dataInput);
+        case Const.CONSTANT_Package:
+            return new ConstantPackage(dataInput);
+        default:
+            throw new ClassFormatException("Invalid byte tag in constant pool: " + b);
         }
     }
-
 
     /**
      * @return Comparison strategy object
