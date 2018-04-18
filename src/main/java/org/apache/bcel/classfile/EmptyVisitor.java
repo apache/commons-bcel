@@ -310,4 +310,12 @@ public class EmptyVisitor implements Visitor
     @Override
     public void visitConstantModule(final ConstantModule constantModule) {
     }
+
+
+    /**
+     * @since 6.3
+     */
+    @Override
+    public void visitConstantDynamic(final ConstantDynamic obj) {
+    }
 }

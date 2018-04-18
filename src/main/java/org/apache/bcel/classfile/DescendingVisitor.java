@@ -543,4 +543,12 @@ public class DescendingVisitor implements Visitor
         obj.accept(visitor);
         stack.pop();
     }
+
+    /** @since 6.3 */
+    @Override
+    public void visitConstantDynamic(final ConstantDynamic obj) {
+        stack.push(obj);
+        obj.accept(visitor);
+        stack.pop();
+    }
 }

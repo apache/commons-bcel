@@ -385,6 +385,14 @@ public final class Const {
   public static final byte CONSTANT_MethodType         = 16;
 
   /**
+   * Marks a constant pool entry as dynamically computed.
+   * @see  <a href="https://bugs.openjdk.java.net/secure/attachment/74618/constant-dynamic.html">
+   * Change request for JEP 309</a>
+   * @since 6.3
+   */
+  public static final byte CONSTANT_Dynamic            = 17;
+
+  /**
    * Marks a constant pool entry as an Invoke Dynamic
    * @see  <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.10">
    * The Constant Pool in The Java Virtual Machine Specification</a>
@@ -417,7 +425,7 @@ public final class Const {
     "CONSTANT_Class", "CONSTANT_String", "CONSTANT_Fieldref",
     "CONSTANT_Methodref", "CONSTANT_InterfaceMethodref",
     "CONSTANT_NameAndType", "", "", "CONSTANT_MethodHandle",
-    "CONSTANT_MethodType", "", "CONSTANT_InvokeDynamic",
+    "CONSTANT_MethodType", "CONSTANT_Dynamic", "CONSTANT_InvokeDynamic",
     "CONSTANT_Module", "CONSTANT_Package"};
 
   /**

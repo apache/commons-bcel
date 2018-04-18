@@ -162,6 +162,8 @@ public abstract class Constant implements Cloneable, Node {
             return new ConstantMethodHandle(dataInput);
         case Const.CONSTANT_MethodType:
             return new ConstantMethodType(dataInput);
+        case Const.CONSTANT_Dynamic:
+            return new ConstantDynamic(dataInput);
         case Const.CONSTANT_InvokeDynamic:
             return new ConstantInvokeDynamic(dataInput);
         case Const.CONSTANT_Module:

@@ -156,4 +156,9 @@ public interface Visitor
      * @since 6.1
      */
     void visitConstantModule(ConstantModule constantModule);
+
+    /**
+     * @since 6.3
+     */
+    void visitConstantDynamic(ConstantDynamic constantDynamic);
 }
