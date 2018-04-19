@@ -116,35 +116,47 @@ public final class Const {
    *  */
   public static final short MINOR_1_8 = 0;
 
-  /** Major version number of class files for Java 1.9.
-   *  @see #MINOR_1_9
+  /** Major version number of class files for Java 9.
+   *  @see #MINOR_9
    *  */
-  public static final short MAJOR_1_9 = 53;
+  public static final short MAJOR_9 = 53;
 
-  /** Minor version number of class files for Java 1.9.
-   *  @see #MAJOR_1_9
+  /** Minor version number of class files for Java 9.
+   *  @see #MAJOR_9
    *  */
-  public static final short MINOR_1_9 = 0;
+  public static final short MINOR_9 = 0;
+
+  /**
+   * @deprecated Use {@link #MAJOR_9} instead
+   */
+  @Deprecated
+  public static final short MAJOR_1_9 = MAJOR_9;
+
+  /**
+   * @deprecated Use {@link #MINOR_9} instead
+   */
+  @Deprecated
+  public static final short MINOR_1_9 = MINOR_9;
 
   /** Major version number of class files for Java 10.
-   *  @see #MINOR_1_10
+   *  @see #MINOR_10
    *  */
-  public static final short MAJOR_1_10 = 54;
+  public static final short MAJOR_10 = 54;
 
   /** Minor version number of class files for Java 10.
-   *  @see #MAJOR_1_10
+   *  @see #MAJOR_10
    *  */
-  public static final short MINOR_1_10 = 0;
+  public static final short MINOR_10 = 0;
 
   /** Major version number of class files for Java 11.
-   *  @see #MINOR_1_11
+   *  @see #MINOR_11
    *  */
-  public static final short MAJOR_1_11 = 55;
+  public static final short MAJOR_11 = 55;
 
   /** Minor version number of class files for Java 11.
-   *  @see #MAJOR_1_11
+   *  @see #MAJOR_11
    *  */
-  public static final short MINOR_1_11 = 0;
+  public static final short MINOR_11 = 0;
 
   /** Default major version number.  Class file is for Java 1.1.
    *  @see #MAJOR_1_1
