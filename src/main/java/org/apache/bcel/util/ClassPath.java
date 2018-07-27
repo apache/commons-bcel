@@ -53,6 +53,15 @@ public class ClassPath {
         }
     };
 
+    private static final FilenameFilter MODULES_FILTER = new FilenameFilter() {
+
+        @Override
+        public boolean accept( final File dir, String name ) {
+            name = name.toLowerCase(Locale.ENGLISH);
+            return name.endsWith(".jmod");
+        }
+    };
+
     private final PathEntry[] paths;
     private final String class_path;
     private ClassPath parent;
@@ -167,6 +176,19 @@ public class ClassPath {
                 for (final String extension : extensions) {
                     list.add(ext_dir.getPath() + File.separatorChar + extension);
                 }
+            }
+        }
+        // Starting in Java 9, .class files are in the jmods directory. Add them to the path.
+        String modules_path = System.getProperty("java.modules.path");
+        if (modules_path == null || modules_path.trim().isEmpty()) {
+            // Default to looking in JAVA_HOME/jmods
+            modules_path = System.getProperty("java.home") + File.separator + "jmods";
+        }
+        final File modules_dir = new File(modules_path);
+        if (modules_dir.exists()) {
+            final String[] modules = modules_dir.list(MODULES_FILTER);
+            for (final String module : modules) {
+                list.add(modules_dir.getPath() + File.separatorChar + module);
             }
         }
         final StringBuilder buf = new StringBuilder();
@@ -504,7 +526,14 @@ public class ClassPath {
 
         @Override
         ClassFile getClassFile( final String name, final String suffix ) throws IOException {
-            final ZipEntry entry = zip.getEntry(name.replace('.', '/') + suffix);
+            String lookup = null;
+            if (zip.getName().endsWith("jmod")) {
+                // In modules, .class files are in the classes directory
+                lookup = "classes/" + name.replace('.', '/');
+            } else {
+                lookup = name.replace('.', '/');
+            } 
+            final ZipEntry entry = zip.getEntry(lookup + suffix);
 
             if (entry == null) {
                 return null;
