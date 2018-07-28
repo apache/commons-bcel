@@ -25,23 +25,15 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.DirectoryStream;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -358,34 +350,16 @@ public class ClassPath implements Closeable {
 
     private static class JrtModules extends AbstractPathEntry {
 
-        private final URLClassLoader classLoader;
-        private final FileSystem jrtFileSystem;
+        private final ModularRuntimeImage modularRuntimeImage;
         private final JrtModule[] modules;
 
-        @SuppressWarnings("resource")
-        public JrtModules() {
-            final List<JrtModule> list = new ArrayList<>();
-            final Map<String, ?> emptyMap = Collections.emptyMap();
-            final Path jrePath = Paths.get(System.getProperty("java.home"));
-            final Path jrtFsPath = jrePath.resolve("lib").resolve("jrt-fs.jar");
-            URLClassLoader tempClassLoader = null;
-            FileSystem tempFs = null;
-            try {
-                tempClassLoader = new URLClassLoader(new URL[] {jrtFsPath.toUri().toURL() });
-                tempFs = FileSystems.newFileSystem(URI.create("jrt:/"), emptyMap, tempClassLoader);
-                try (DirectoryStream<Path> ds = Files.newDirectoryStream(tempFs.getPath("/modules"))) {
-                    final Iterator<Path> iterator = ds.iterator();
-                    while (iterator.hasNext()) {
-                        list.add(new JrtModule(iterator.next()));
-                    }
-                }
-            } catch (final IOException e) {
-                // TODO ?
-                e.printStackTrace();
+        public JrtModules(String path) throws IOException {
+            this.modularRuntimeImage = new ModularRuntimeImage();
+            final List<Path> list = modularRuntimeImage.list(path);
+            this.modules = new JrtModule[list.size()];
+            for (int i = 0; i < modules.length; i++) {
+                modules[i] = new JrtModule(list.get(i));
             }
-            this.classLoader = tempClassLoader;
-            this.jrtFileSystem = tempFs;
-            this.modules = list.toArray(new JrtModule[list.size()]);
         }
 
         @Override
@@ -396,11 +370,8 @@ public class ClassPath implements Closeable {
                     modules[i].close();
                 }
             }
-            if (classLoader != null) {
-                classLoader.close();
-            }
-            if (jrtFileSystem != null) {
-                jrtFileSystem.close();
+            if (modularRuntimeImage != null) {
+                modularRuntimeImage.close();
             }
         }
 
@@ -603,8 +574,8 @@ public class ClassPath implements Closeable {
                             list.add(new Dir(path));
                         } else if (path.endsWith(".jmod")) {
                             list.add(new Module(new ZipFile(file)));
-                        } else if (path.endsWith(File.separator + "modules")) {
-                            list.add(new JrtModules());
+                        } else if (path.endsWith(ModularRuntimeImage.MODULES_PATH)) {
+                            list.add(new JrtModules(ModularRuntimeImage.MODULES_PATH));
                         } else {
                             list.add(new Jar(new ZipFile(file)));
                         }
