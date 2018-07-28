@@ -199,9 +199,9 @@ public class JdkGenericDumpTestCase {
 
     @Test
     public void testJdkModules() throws Exception {
-        final File[] jars = listJdkModules();
-        if (jars != null) {
-            for (final File file : jars) {
+        final File[] jmods = listJdkModules();
+        if (jmods != null) {
+            for (final File file : jmods) {
                 testJar(file);
             }
         }
