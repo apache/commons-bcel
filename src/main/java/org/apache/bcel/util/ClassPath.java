@@ -358,30 +358,6 @@ public class ClassPath implements Closeable {
 
     private static class JrtModules extends AbstractPathEntry {
 
-        @SuppressWarnings("resource")
-        private static JrtModule[] getJreModules() {
-            final List<JrtModule> list = new ArrayList<>();
-            final Path jrePath = Paths.get(System.getProperty("java.home"));
-            try {
-                final Path jrtFsPath = jrePath.resolve("lib").resolve("jrt-fs.jar");
-                if (Files.exists(jrtFsPath)) {
-                    final Map<String, ?> emptyMap = Collections.emptyMap();
-                    try (URLClassLoader classLoader = new URLClassLoader(new URL[] {jrtFsPath.toUri().toURL() });
-                            FileSystem fs = FileSystems.newFileSystem(URI.create("jrt:/"), emptyMap, classLoader)) {
-                        try (DirectoryStream<Path> ds = Files.newDirectoryStream(fs.getPath("/modules"))) {
-                            final Iterator<Path> iterator = ds.iterator();
-                            while (iterator.hasNext()) {
-                                list.add(new JrtModule(iterator.next()));
-                            }
-                        }
-                    }
-                }
-            } catch (final Exception e) {
-                // Log?
-                e.printStackTrace();
-            }
-            return list.toArray(new JrtModule[list.size()]);
-        }
         URLClassLoader classLoader;
         FileSystem fs;
 
