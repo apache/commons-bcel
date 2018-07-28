@@ -394,12 +394,12 @@ public class ClassPath implements Closeable {
                 for (final JrtModule module : modules) {
                     module.close();
                 }
-                if (classLoader != null) {
-                    classLoader.close();
-                }
-                if (jrtFileSystem != null) {
-                    jrtFileSystem.close();
-                }
+            }
+            if (classLoader != null) {
+                classLoader.close();
+            }
+            if (jrtFileSystem != null) {
+                jrtFileSystem.close();
             }
         }
 
