@@ -358,21 +358,22 @@ public class ClassPath implements Closeable {
 
     private static class JrtModules extends AbstractPathEntry {
 
-        URLClassLoader classLoader;
-        FileSystem fs;
-
+        private final URLClassLoader classLoader;
+        private final FileSystem fs;
         private final JrtModule[] modules;
 
         @SuppressWarnings("resource")
         public JrtModules() {
             final List<JrtModule> list = new ArrayList<>();
+            final Map<String, ?> emptyMap = Collections.emptyMap();
+            final Path jrePath = Paths.get(System.getProperty("java.home"));
+            final Path jrtFsPath = jrePath.resolve("lib").resolve("jrt-fs.jar");
+            URLClassLoader tempClassLoader = null;
+            FileSystem tempFs = null;
             try {
-                final Map<String, ?> emptyMap = Collections.emptyMap();
-                final Path jrePath = Paths.get(System.getProperty("java.home"));
-                final Path jrtFsPath = jrePath.resolve("lib").resolve("jrt-fs.jar");
-                this.classLoader = new URLClassLoader(new URL[] {jrtFsPath.toUri().toURL() });
-                this.fs = FileSystems.newFileSystem(URI.create("jrt:/"), emptyMap, classLoader);
-                try (DirectoryStream<Path> ds = Files.newDirectoryStream(fs.getPath("/modules"))) {
+                tempClassLoader = new URLClassLoader(new URL[] {jrtFsPath.toUri().toURL() });
+                tempFs = FileSystems.newFileSystem(URI.create("jrt:/"), emptyMap, tempClassLoader);
+                try (DirectoryStream<Path> ds = Files.newDirectoryStream(tempFs.getPath("/modules"))) {
                     final Iterator<Path> iterator = ds.iterator();
                     while (iterator.hasNext()) {
                         list.add(new JrtModule(iterator.next()));
@@ -382,6 +383,8 @@ public class ClassPath implements Closeable {
                 // TODO ?
                 e.printStackTrace();
             }
+            this.classLoader = tempClassLoader;
+            this.fs = tempFs;
             this.modules = list.toArray(new JrtModule[list.size()]);
         }
 
@@ -390,6 +393,12 @@ public class ClassPath implements Closeable {
             if (modules != null) {
                 for (final JrtModule module : modules) {
                     module.close();
+                }
+                if (classLoader != null) {
+                    classLoader.close();
+                }
+                if (fs != null) {
+                    fs.close();
                 }
             }
         }
