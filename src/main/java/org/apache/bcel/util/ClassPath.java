@@ -391,8 +391,9 @@ public class ClassPath implements Closeable {
         @Override
         public void close() throws IOException {
             if (modules != null) {
-                for (final JrtModule module : modules) {
-                    module.close();
+                // don't use a for each loop to avoid creating an iterator for the GC to collect.
+                for (int i = 0; i < modules.length; i++) {
+                    modules[i].close();
                 }
             }
             if (classLoader != null) {
