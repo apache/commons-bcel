@@ -49,7 +49,7 @@ import com.sun.jna.platform.win32.Advapi32Util;
  * the instructions. The output bytes should be the same as the input.
  */
 @RunWith(Parameterized.class)
-public class JDKGenericDumpTestCase {
+public class JdkGenericDumpTestCase {
 
     private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
 
@@ -120,7 +120,7 @@ public class JDKGenericDumpTestCase {
 
     private final String javaHome;
 
-    public JDKGenericDumpTestCase(final String javaHome) {
+    public JdkGenericDumpTestCase(final String javaHome) {
         this.javaHome = javaHome;
     }
 
@@ -146,7 +146,7 @@ public class JDKGenericDumpTestCase {
         }
     }
 
-    private File[] listJDKjars() throws Exception {
+    private File[] listJdkJars() throws Exception {
         final File javaLib = new File(javaHome, "lib");
         return javaLib.listFiles(new FileFilter() {
             @Override
@@ -178,8 +178,8 @@ public class JDKGenericDumpTestCase {
     }
 
     @Test
-    public void testJDKjars() throws Exception {
-        final File[] jars = listJDKjars();
+    public void testJdkJars() throws Exception {
+        final File[] jars = listJdkJars();
         if (jars != null) {
             for (final File file : jars) {
                 testJar(file);
