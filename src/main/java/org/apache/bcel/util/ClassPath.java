@@ -359,7 +359,7 @@ public class ClassPath implements Closeable {
     private static class JrtModules extends AbstractPathEntry {
 
         private final URLClassLoader classLoader;
-        private final FileSystem fs;
+        private final FileSystem jrtFileSystem;
         private final JrtModule[] modules;
 
         @SuppressWarnings("resource")
@@ -384,7 +384,7 @@ public class ClassPath implements Closeable {
                 e.printStackTrace();
             }
             this.classLoader = tempClassLoader;
-            this.fs = tempFs;
+            this.jrtFileSystem = tempFs;
             this.modules = list.toArray(new JrtModule[list.size()]);
         }
 
@@ -397,8 +397,8 @@ public class ClassPath implements Closeable {
                 if (classLoader != null) {
                     classLoader.close();
                 }
-                if (fs != null) {
-                    fs.close();
+                if (jrtFileSystem != null) {
+                    jrtFileSystem.close();
                 }
             }
         }
