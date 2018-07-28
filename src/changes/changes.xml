@@ -62,7 +62,8 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.3" date="2017-MM-DD" description="?">
+    <release version="6.3" date="2018-MM-DD" description="?">
+      <action issue="BCEL-304" type="fix" dev="ggregory" due-to="Gary Gregory, Ed Pavlak">ClassPath.getClassFile does not work with JDK 9 and higher.</action>
     </release>
 
     <release version="6.2" date="2017-12-08" description="Experimental Java 9 Support">
