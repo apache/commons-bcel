@@ -19,12 +19,25 @@
 package org.apache.bcel.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.bcel.AbstractTestCase;
+import org.junit.Assert;
 
 public class ClassPathTestCase extends AbstractTestCase {
 
     public void testGetClassFile() throws IOException {
-        ClassPath.SYSTEM_CLASS_PATH.getClassFile("java.lang.String");
+        Assert.assertNotNull(ClassPath.SYSTEM_CLASS_PATH.getClassFile("java.lang.String"));
+    }
+
+    public void testGetResource() throws IOException {
+        Assert.assertNotNull(ClassPath.SYSTEM_CLASS_PATH.getResource("java/lang/String.class"));
+    }
+
+    public void testGetResourceAsStream() throws IOException {
+        try (final InputStream inputStream = ClassPath.SYSTEM_CLASS_PATH
+                .getResourceAsStream("java/lang/String.class")) {
+            Assert.assertNotNull(inputStream);
+        }
     }
 }

@@ -17,6 +17,7 @@
  */
 package org.apache.bcel.util;
 
+import java.io.Closeable;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,11 +25,24 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.file.DirectoryStream;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
@@ -39,9 +53,9 @@ import java.util.zip.ZipFile;
  *
  * @version $Id$
  */
-public class ClassPath {
+public class ClassPath implements Closeable {
 
-    private abstract static class AbstractPathEntry {
+    private abstract static class AbstractPathEntry implements Closeable {
 
         abstract ClassFile getClassFile(String name, String suffix) throws IOException;
 
@@ -52,15 +66,23 @@ public class ClassPath {
 
     private static abstract class AbstractZip extends AbstractPathEntry {
 
-        private final ZipFile zip;
+        private final ZipFile zipFile;
 
-        AbstractZip(final ZipFile zip) {
-            this.zip = zip;
+        AbstractZip(final ZipFile zipFile) {
+            this.zipFile = Objects.requireNonNull(zipFile, "zipFile");
+        }
+
+        @Override
+        public void close() throws IOException {
+            if (zipFile != null) {
+                zipFile.close();
+            }
+
         }
 
         @Override
         ClassFile getClassFile(final String name, final String suffix) throws IOException {
-            final ZipEntry entry = zip.getEntry(toEntryName(name, suffix));
+            final ZipEntry entry = zipFile.getEntry(toEntryName(name, suffix));
 
             if (entry == null) {
                 return null;
@@ -70,12 +92,12 @@ public class ClassPath {
 
                 @Override
                 public String getBase() {
-                    return zip.getName();
+                    return zipFile.getName();
                 }
 
                 @Override
                 public InputStream getInputStream() throws IOException {
-                    return zip.getInputStream(entry);
+                    return zipFile.getInputStream(entry);
                 }
 
                 @Override
@@ -97,9 +119,9 @@ public class ClassPath {
 
         @Override
         URL getResource(final String name) {
-            final ZipEntry entry = zip.getEntry(name);
+            final ZipEntry entry = zipFile.getEntry(name);
             try {
-                return entry != null ? new URL("jar:file:" + zip.getName() + "!/" + name) : null;
+                return entry != null ? new URL("jar:file:" + zipFile.getName() + "!/" + name) : null;
             } catch (final MalformedURLException e) {
                 return null;
             }
@@ -107,9 +129,9 @@ public class ClassPath {
 
         @Override
         InputStream getResourceAsStream(final String name) {
-            final ZipEntry entry = zip.getEntry(name);
+            final ZipEntry entry = zipFile.getEntry(name);
             try {
-                return entry != null ? zip.getInputStream(entry) : null;
+                return entry != null ? zipFile.getInputStream(entry) : null;
             } catch (final IOException e) {
                 return null;
             }
@@ -119,7 +141,7 @@ public class ClassPath {
 
         @Override
         public String toString() {
-            return zip.getName();
+            return zipFile.getName();
         }
 
     }
@@ -162,6 +184,12 @@ public class ClassPath {
 
         Dir(final String d) {
             dir = d;
+        }
+
+        @Override
+        public void close() throws IOException {
+            // Nothing to do
+
         }
 
         @Override
@@ -231,6 +259,7 @@ public class ClassPath {
             return dir;
         }
     }
+
     private static class Jar extends AbstractZip {
 
         Jar(final ZipFile zip) {
@@ -243,6 +272,195 @@ public class ClassPath {
         }
 
     }
+
+    private static class JrtModule extends AbstractPathEntry {
+
+        private final Path modulePath;
+
+        public JrtModule(final Path modulePath) {
+            this.modulePath = Objects.requireNonNull(modulePath, "modulePath");
+        }
+
+        @Override
+        public void close() throws IOException {
+            // Nothing to do.
+
+        }
+
+        @Override
+        ClassFile getClassFile(final String name, final String suffix) throws IOException {
+            final Path resolved = modulePath.resolve(packageToFolder(name) + suffix);
+            if (Files.exists(resolved)) {
+                return new ClassFile() {
+
+                    @Override
+                    public String getBase() {
+                        return resolved.getFileName().toString();
+                    }
+
+                    @Override
+                    public InputStream getInputStream() throws IOException {
+                        return Files.newInputStream(resolved);
+                    }
+
+                    @Override
+                    public String getPath() {
+                        return resolved.toString();
+                    }
+
+                    @Override
+                    public long getSize() {
+                        try {
+                            return Files.size(resolved);
+                        } catch (final IOException e) {
+                            return 0;
+                        }
+                    }
+
+                    @Override
+                    public long getTime() {
+                        try {
+                            return Files.getLastModifiedTime(resolved).toMillis();
+                        } catch (final IOException e) {
+                            return 0;
+                        }
+                    }
+                };
+            }
+            return null;
+        }
+
+        @Override
+        URL getResource(final String name) {
+            final Path resovled = modulePath.resolve(name);
+            try {
+                return Files.exists(resovled) ? new URL("jrt:" + modulePath + "/" + name) : null;
+            } catch (final MalformedURLException e) {
+                return null;
+            }
+        }
+
+        @Override
+        InputStream getResourceAsStream(final String name) {
+            try {
+                return Files.newInputStream(modulePath.resolve(name));
+            } catch (final IOException e) {
+                return null;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return modulePath.toString();
+        }
+
+    }
+
+    private static class JrtModules extends AbstractPathEntry {
+
+        @SuppressWarnings("resource")
+        private static JrtModule[] getJreModules() {
+            final List<JrtModule> list = new ArrayList<>();
+            final Path jrePath = Paths.get(System.getProperty("java.home"));
+            try {
+                final Path jrtFsPath = jrePath.resolve("lib").resolve("jrt-fs.jar");
+                if (Files.exists(jrtFsPath)) {
+                    final Map<String, ?> emptyMap = Collections.emptyMap();
+                    try (URLClassLoader classLoader = new URLClassLoader(new URL[] {jrtFsPath.toUri().toURL() });
+                            FileSystem fs = FileSystems.newFileSystem(URI.create("jrt:/"), emptyMap, classLoader)) {
+                        try (DirectoryStream<Path> ds = Files.newDirectoryStream(fs.getPath("/modules"))) {
+                            final Iterator<Path> iterator = ds.iterator();
+                            while (iterator.hasNext()) {
+                                list.add(new JrtModule(iterator.next()));
+                            }
+                        }
+                    }
+                }
+            } catch (final Exception e) {
+                // Log?
+                e.printStackTrace();
+            }
+            return list.toArray(new JrtModule[list.size()]);
+        }
+        URLClassLoader classLoader;
+        FileSystem fs;
+
+        private final JrtModule[] modules;
+
+        @SuppressWarnings("resource")
+        public JrtModules() {
+            final List<JrtModule> list = new ArrayList<>();
+            try {
+                final Map<String, ?> emptyMap = Collections.emptyMap();
+                final Path jrePath = Paths.get(System.getProperty("java.home"));
+                final Path jrtFsPath = jrePath.resolve("lib").resolve("jrt-fs.jar");
+                this.classLoader = new URLClassLoader(new URL[] {jrtFsPath.toUri().toURL() });
+                this.fs = FileSystems.newFileSystem(URI.create("jrt:/"), emptyMap, classLoader);
+                try (DirectoryStream<Path> ds = Files.newDirectoryStream(fs.getPath("/modules"))) {
+                    final Iterator<Path> iterator = ds.iterator();
+                    while (iterator.hasNext()) {
+                        list.add(new JrtModule(iterator.next()));
+                    }
+                }
+            } catch (final IOException e) {
+                // TODO ?
+                e.printStackTrace();
+            }
+            this.modules = list.toArray(new JrtModule[list.size()]);
+        }
+
+        @Override
+        public void close() throws IOException {
+            if (modules != null) {
+                for (final JrtModule module : modules) {
+                    module.close();
+                }
+            }
+        }
+
+        @Override
+        ClassFile getClassFile(final String name, final String suffix) throws IOException {
+            // don't use a for each loop to avoid creating an iterator for the GC to collect.
+            for (final JrtModule module : modules) {
+                final ClassFile classFile = module.getClassFile(name, suffix);
+                if (classFile != null) {
+                    return classFile;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        URL getResource(final String name) {
+            // don't use a for each loop to avoid creating an iterator for the GC to collect.
+            for (final JrtModule module : modules) {
+                final URL url = module.getResource(name);
+                if (url != null) {
+                    return url;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        InputStream getResourceAsStream(final String name) {
+            // don't use a for each loop to avoid creating an iterator for the GC to collect.
+            for (final JrtModule module : modules) {
+                final InputStream inputStream = module.getResourceAsStream(name);
+                if (inputStream != null) {
+                    return inputStream;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return Arrays.toString(modules);
+        }
+
+    }
+
     private static class Module extends AbstractZip {
 
         Module(final ZipFile zip) {
@@ -276,6 +494,21 @@ public class ClassPath {
 
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath(getClassPath());
 
+    private static void addJdkModules(final String javaHome, final List<String> list) {
+        String modulesPath = System.getProperty("java.modules.path");
+        if (modulesPath == null || modulesPath.trim().isEmpty()) {
+            // Default to looking in JAVA_HOME/jmods
+            modulesPath = javaHome + File.separator + "jmods";
+        }
+        final File modulesDir = new File(modulesPath);
+        if (modulesDir.exists()) {
+            final String[] modules = modulesDir.list(MODULES_FILTER);
+            for (final String module : modules) {
+                list.add(modulesDir.getPath() + File.separatorChar + module);
+            }
+        }
+    }
+
     /**
      * Checks for class path components in the following properties: "java.class.path", "sun.boot.class.path",
      * "java.ext.dirs"
@@ -287,7 +520,21 @@ public class ClassPath {
         final String classPathProp = System.getProperty("java.class.path");
         final String bootClassPathProp = System.getProperty("sun.boot.class.path");
         final String extDirs = System.getProperty("java.ext.dirs");
+        // System.out.println("java.version = " + System.getProperty("java.version"));
+        // System.out.println("java.class.path = " + classPathProp);
+        // System.out.println("sun.boot.class.path=" + bootClassPathProp);
+        // System.out.println("java.ext.dirs=" + extDirs);
+        final String javaHome = System.getProperty("java.home");
         final List<String> list = new ArrayList<>();
+
+        // Starting in JRE 9, .class files are in the modules directory. Add them to the path.
+        final Path modulesPath = Paths.get(javaHome).resolve("lib/modules");
+        if (Files.exists(modulesPath) && Files.isRegularFile(modulesPath)) {
+            list.add(modulesPath.toAbsolutePath().toString());
+        }
+        // Starting in JDK 9, .class files are in the jmods directory. Add them to the path.
+        addJdkModules(javaHome, list);
+
         getPathComponents(classPathProp, list);
         getPathComponents(bootClassPathProp, list);
         final List<String> dirs = new ArrayList<>();
@@ -301,20 +548,7 @@ public class ClassPath {
                 }
             }
         }
-        final String javaHome = System.getProperty("java.home");
-        // Starting in JDK 9, .class files are in the jmods directory. Add them to the path.
-        String modulesPath = System.getProperty("java.modules.path");
-        if (modulesPath == null || modulesPath.trim().isEmpty()) {
-            // Default to looking in JAVA_HOME/jmods
-            modulesPath = javaHome + File.separator + "jmods";
-        }
-        final File modules_dir = new File(modulesPath);
-        if (modules_dir.exists()) {
-            final String[] modules = modules_dir.list(MODULES_FILTER);
-            for (final String module : modules) {
-                list.add(modules_dir.getPath() + File.separatorChar + module);
-            }
-        }
+
         final StringBuilder buf = new StringBuilder();
         String separator = "";
         for (final String path : list) {
@@ -327,9 +561,9 @@ public class ClassPath {
 
     private static void getPathComponents(final String path, final List<String> list) {
         if (path != null) {
-            final StringTokenizer tok = new StringTokenizer(path, File.pathSeparator);
-            while (tok.hasMoreTokens()) {
-                final String name = tok.nextToken();
+            final StringTokenizer tokenizer = new StringTokenizer(path, File.pathSeparator);
+            while (tokenizer.hasMoreTokens()) {
+                final String name = tokenizer.nextToken();
                 final File file = new File(name);
                 if (file.exists()) {
                     list.add(name);
@@ -358,20 +592,21 @@ public class ClassPath {
         this(getClassPath());
     }
 
-    public ClassPath(final ClassPath parent, final String class_path) {
-        this(class_path);
+    public ClassPath(final ClassPath parent, final String classPath) {
+        this(classPath);
         this.parent = parent;
     }
 
     /**
      * Search for classes in given path.
      *
-     * @param class_path
+     * @param classPath
      */
-    public ClassPath(final String class_path) {
-        this.classPath = class_path;
+    @SuppressWarnings("resource")
+    public ClassPath(final String classPath) {
+        this.classPath = classPath;
         final List<AbstractPathEntry> list = new ArrayList<>();
-        for (final StringTokenizer tokenizer = new StringTokenizer(class_path, File.pathSeparator); tokenizer
+        for (final StringTokenizer tokenizer = new StringTokenizer(classPath, File.pathSeparator); tokenizer
                 .hasMoreTokens();) {
             final String path = tokenizer.nextToken();
             if (!path.isEmpty()) {
@@ -382,6 +617,8 @@ public class ClassPath {
                             list.add(new Dir(path));
                         } else if (path.endsWith(".jmod")) {
                             list.add(new Module(new ZipFile(file)));
+                        } else if (path.endsWith(File.separator + "modules")) {
+                            list.add(new JrtModules());
                         } else {
                             list.add(new Jar(new ZipFile(file)));
                         }
@@ -395,6 +632,16 @@ public class ClassPath {
         }
         paths = new AbstractPathEntry[list.size()];
         list.toArray(paths);
+    }
+
+    @Override
+    public void close() throws IOException {
+        if (paths != null) {
+            for (final AbstractPathEntry path : paths) {
+                path.close();
+            }
+        }
+
     }
 
     @Override
