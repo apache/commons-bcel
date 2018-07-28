@@ -284,14 +284,14 @@ public class ClassPath {
      */
     // @since 6.0 no longer final
     public static String getClassPath() {
-        final String class_path = System.getProperty("java.class.path");
-        final String boot_path = System.getProperty("sun.boot.class.path");
-        final String ext_path = System.getProperty("java.ext.dirs");
+        final String classPathProp = System.getProperty("java.class.path");
+        final String bootClassPathProp = System.getProperty("sun.boot.class.path");
+        final String extDirs = System.getProperty("java.ext.dirs");
         final List<String> list = new ArrayList<>();
-        getPathComponents(class_path, list);
-        getPathComponents(boot_path, list);
+        getPathComponents(classPathProp, list);
+        getPathComponents(bootClassPathProp, list);
         final List<String> dirs = new ArrayList<>();
-        getPathComponents(ext_path, dirs);
+        getPathComponents(extDirs, dirs);
         for (final String d : dirs) {
             final File ext_dir = new File(d);
             final String[] extensions = ext_dir.list(ARCHIVE_FILTER);
@@ -301,13 +301,14 @@ public class ClassPath {
                 }
             }
         }
+        final String javaHome = System.getProperty("java.home");
         // Starting in JDK 9, .class files are in the jmods directory. Add them to the path.
-        String modules_path = System.getProperty("java.modules.path");
-        if (modules_path == null || modules_path.trim().isEmpty()) {
+        String modulesPath = System.getProperty("java.modules.path");
+        if (modulesPath == null || modulesPath.trim().isEmpty()) {
             // Default to looking in JAVA_HOME/jmods
-            modules_path = System.getProperty("java.home") + File.separator + "jmods";
+            modulesPath = javaHome + File.separator + "jmods";
         }
-        final File modules_dir = new File(modules_path);
+        final File modules_dir = new File(modulesPath);
         if (modules_dir.exists()) {
             final String[] modules = modules_dir.list(MODULES_FILTER);
             for (final String module : modules) {
@@ -370,8 +371,9 @@ public class ClassPath {
     public ClassPath(final String class_path) {
         this.classPath = class_path;
         final List<AbstractPathEntry> list = new ArrayList<>();
-        for (final StringTokenizer tok = new StringTokenizer(class_path, File.pathSeparator); tok.hasMoreTokens();) {
-            final String path = tok.nextToken();
+        for (final StringTokenizer tokenizer = new StringTokenizer(class_path, File.pathSeparator); tokenizer
+                .hasMoreTokens();) {
+            final String path = tokenizer.nextToken();
             if (!path.isEmpty()) {
                 final File file = new File(path);
                 try {
@@ -420,12 +422,12 @@ public class ClassPath {
      */
     public byte[] getBytes(final String name, final String suffix) throws IOException {
         DataInputStream dis = null;
-        try (InputStream is = getInputStream(name, suffix)) {
-            if (is == null) {
+        try (InputStream inputStream = getInputStream(name, suffix)) {
+            if (inputStream == null) {
                 throw new IOException("Couldn't find: " + name + suffix);
             }
-            dis = new DataInputStream(is);
-            final byte[] bytes = new byte[is.available()];
+            dis = new DataInputStream(inputStream);
+            final byte[] bytes = new byte[inputStream.available()];
             dis.readFully(bytes);
             return bytes;
         } finally {
@@ -501,14 +503,14 @@ public class ClassPath {
      * @return input stream for file on class path
      */
     public InputStream getInputStream(final String name, final String suffix) throws IOException {
-        InputStream is = null;
+        InputStream inputStream = null;
         try {
-            is = getClass().getClassLoader().getResourceAsStream(name + suffix); // may return null
+            inputStream = getClass().getClassLoader().getResourceAsStream(name + suffix); // may return null
         } catch (final Exception e) {
             // ignored
         }
-        if (is != null) {
-            return is;
+        if (inputStream != null) {
+            return inputStream;
         }
         return getClassFile(name, suffix).getInputStream();
     }
