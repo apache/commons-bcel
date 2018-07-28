@@ -30,43 +30,45 @@ import org.apache.bcel.classfile.JavaClass;
 public interface Repository {
 
     /**
-     * Store the provided class under "clazz.getClassName()"
+     * Stores the provided class under "clazz.getClassName()"
      */
     void storeClass( JavaClass clazz );
 
 
     /**
-     * Remove class from repository
+     * Removes class from repository
      */
     void removeClass( JavaClass clazz );
 
 
     /**
-     * Find the class with the name provided, if the class
+     * Finds the class with the name provided, if the class
      * isn't there, return NULL.
      */
     JavaClass findClass( String className );
 
 
     /**
-     * Find the class with the name provided, if the class
+     * Finds the class with the name provided, if the class
      * isn't there, make an attempt to load it.
      */
     JavaClass loadClass( String className ) throws java.lang.ClassNotFoundException;
 
 
     /**
-     * Find the JavaClass instance for the given run-time class object
+     * Finds the JavaClass instance for the given run-time class object
      */
     JavaClass loadClass( Class<?> clazz ) throws java.lang.ClassNotFoundException;
 
 
-    /** Clear all entries from cache.
+    /** 
+     * Clears all entries from cache.
      */
     void clear();
 
 
-    /** Get the ClassPath associated with this Repository
+    /** 
+     * Gets the ClassPath associated with this Repository
      */
     ClassPath getClassPath();
 }
