@@ -156,6 +156,16 @@ public class JdkGenericDumpTestCase {
         });
     }
 
+    private File[] listJdkModules() throws Exception {
+        final File javaLib = new File(javaHome, "jmods");
+        return javaLib.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(final File file) {
+                return file.getName().endsWith(".jmod");
+            }
+        });
+    }
+
     private void testJar(final File file) throws Exception {
         System.out.println(file);
         try (JarFile jar = new JarFile(file)) {
@@ -180,6 +190,16 @@ public class JdkGenericDumpTestCase {
     @Test
     public void testJdkJars() throws Exception {
         final File[] jars = listJdkJars();
+        if (jars != null) {
+            for (final File file : jars) {
+                testJar(file);
+            }
+        }
+    }
+
+    @Test
+    public void testJdkModules() throws Exception {
+        final File[] jars = listJdkModules();
         if (jars != null) {
             for (final File file : jars) {
                 testJar(file);
