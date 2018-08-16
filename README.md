@@ -43,7 +43,7 @@
 Apache Commons BCEL
 ===================
 
-[![Build Status](https://travis-ci.org/apache/bcel.svg?branch=master)](https://travis-ci.org/apache/bcel)
+[![Build Status](https://travis-ci.org/codespecs/commons-bcel.svg?branch=master)](https://travis-ci.org/codespecs/commons-bcel)
 [![Coverage Status](https://coveralls.io/repos/apache/bcel/badge.svg?branch=master)](https://coveralls.io/r/apache/bcel)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
