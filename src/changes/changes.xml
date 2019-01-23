@@ -65,6 +65,11 @@ The <action> type attribute can be add,update,fix,remove.
     <release version="6.3" date="2018-MM-DD" description="?">
       <action issue="BCEL-304" type="fix" dev="ggregory" due-to="Gary Gregory, Ed Pavlak">ClassPath.getClassFile() and friends do not work with JDK 9 and higher (PR #22.)</action>
       <action issue="BCEL-305" type="fix" dev="ggregory" due-to="Gary Gregory">ClassPath.getClassFile() and friends do not work with JRE 9 and higher</action>
+      <action                  type="update" dev="ggregory" due-to="Mark Thomas, Gary Gregory">Initial support for Java 11</action>
+      <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added org.apache.bcel.classfile.Visitor.visitConstantDynamic(ConstantDynamic)</action>
+      <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added org.apache.bcel.classfile.ConstantDynamic</action>
+      <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added fields in org.apache.bcel.Const for Java 9, 10, and 11.</action>      
+      <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added fields in org.apache.bcel.Const for Java 12 and 13 based on Java Early Access releases.</action>      
     </release>
 
     <release version="6.2" date="2017-12-08" description="Experimental Java 9 Support">
