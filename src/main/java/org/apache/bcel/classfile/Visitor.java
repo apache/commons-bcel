@@ -160,5 +160,7 @@ public interface Visitor
     /**
      * @since 6.3
      */
-    void visitConstantDynamic(ConstantDynamic constantDynamic);
+	default void visitConstantDynamic(ConstantDynamic constantDynamic) {
+		// empty
+	}
 }

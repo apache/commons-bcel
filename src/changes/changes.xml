@@ -70,6 +70,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added org.apache.bcel.classfile.ConstantDynamic</action>
       <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added fields in org.apache.bcel.Const for Java 9, 10, and 11.</action>      
       <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added fields in org.apache.bcel.Const for Java 12 and 13 based on Java Early Access releases.</action>      
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update Java requirement from Java 7 to Java 8.</action>      
     </release>
 
     <release version="6.2" date="2017-12-08" description="Experimental Java 9 Support">
