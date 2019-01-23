@@ -32,6 +32,7 @@ import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -151,10 +152,21 @@ public class JdkGenericDumpTestCase {
         addAllJavaHomesOnWindows(KEY_JRE_9, javaHomes);
         addAllJavaHomesOnWindows(KEY_JDK, javaHomes);
         addAllJavaHomesOnWindows(KEY_JDK_9, javaHomes);
+        addAllJavaHomes("ExtraJavaHomes", javaHomes);
         return javaHomes;
     }
 
-    private static Set<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
+    private static void addAllJavaHomes(String extraJavaHomesProp, Set<String> javaHomes) {
+		String path = System.getProperty(extraJavaHomesProp);
+		if (StringUtils.isEmpty(path)) {
+			return;
+		}
+		String[] paths = path.split(File.pathSeparator);
+		javaHomes.addAll(Arrays.asList(paths));
+		
+	}
+
+	private static Set<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
         final Set<String> javaHomes = new HashSet<>(keys.length);
         for (final String key : keys) {
             if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJavaHome + "\\" + key)) {
