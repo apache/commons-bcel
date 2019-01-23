@@ -1,4 +1,63 @@
               Apache Commons BCEL
+                  Version 6.3-SNAPSHOT
+                RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.3-SNAPSHOT!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+?
+
+NEW FEATURES:
+=============
+
+o           Added org.apache.bcel.classfile.Visitor.visitConstantDynamic(ConstantDynamic) Thanks to Mark Thomas.
+o           Added org.apache.bcel.classfile.ConstantDynamic Thanks to Mark Thomas.
+o           Added fields in org.apache.bcel.Const for Java 9, 10, and 11. Thanks to Mark Thomas.
+o           Added fields in org.apache.bcel.Const for Java 12 and 13 based on Java Early Access releases. Thanks to Mark Thomas.
+
+FIXED BUGS:
+===========
+
+o BCEL-304: ClassPath.getClassFile() and friends do not work with JDK 9 and higher (PR #22.) Thanks to Gary Gregory, Ed Pavlak.
+o BCEL-305: ClassPath.getClassFile() and friends do not work with JRE 9 and higher Thanks to Gary Gregory.
+
+CHANGES:
+========
+
+o           Initial support for Java 11 Thanks to Mark Thomas, Gary Gregory.
+o           Update Java requirement from Java 7 to Java 8. Thanks to Gary Gregory.
+
+
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    http://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BCEL
                   Version 6.2
                 RELEASE NOTES
 
