@@ -56,7 +56,7 @@ public class ClassPath implements Closeable {
         abstract InputStream getResourceAsStream(String name);
     }
 
-    private static abstract class AbstractZip extends AbstractPathEntry {
+    private abstract static class AbstractZip extends AbstractPathEntry {
 
         private final ZipFile zipFile;
 
