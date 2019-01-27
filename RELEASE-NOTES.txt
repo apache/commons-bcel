@@ -1,12 +1,12 @@
               Apache Commons BCEL
-                  Version 6.3-SNAPSHOT
+                  Version 6.3
                 RELEASE NOTES
 
 
 INTRODUCTION:
 
 The Apache Commons BCEL team is pleased to announce the release of
-Apache Commons BCEL 6.3-SNAPSHOT!
+Apache Commons BCEL 6.3!
 
 The Byte Code Engineering Library (BCEL) is intended to give users a convenient
 way to analyze, create, and manipulate compiled .class files. Classes are
