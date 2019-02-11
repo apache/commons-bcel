@@ -63,7 +63,7 @@ public class BCELifierTestCase {
             final BCELifier bcelifier = new BCELifier(java_class, fos);
             bcelifier.start();
         }
-        exec(workDir, "javac", "-cp", "classes", outfile.getName());
+        exec(workDir, "javac", "-cp", "classes", outfile.getName(), "-source", "1.8", "-target", "1.8");
         exec(workDir, "java", "-cp", "." + File.pathSeparator + "classes", outfile.getName().replace(".java", ""));
         final String output = exec(workDir, "javap", "-p", "-c", infile.getName());
         assertEquals(canonHashRef(initial), canonHashRef(output));
