@@ -19,6 +19,7 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AccessFlags;
@@ -66,7 +67,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
         public boolean equals( final Object o1, final Object o2 ) {
             final ClassGen THIS = (ClassGen) o1;
             final ClassGen THAT = (ClassGen) o2;
-            return THIS.getClassName().equals(THAT.getClassName());
+            return Objects.equals(THIS.getClassName(), THAT.getClassName());
         }
 
 
