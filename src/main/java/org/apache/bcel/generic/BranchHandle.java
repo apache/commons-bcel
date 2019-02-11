@@ -40,28 +40,10 @@ public final class BranchHandle extends InstructionHandle {
         bi = i;
     }
 
-    /** Factory methods.
+    /** Factory method.
      */
-    private static BranchHandle bh_list = null; // List of reusable handles
-
-
     static BranchHandle getBranchHandle( final BranchInstruction i ) {
-        if (bh_list == null) {
-            return new BranchHandle(i);
-        }
-        final BranchHandle bh = bh_list;
-        bh_list = (BranchHandle) bh.getNext();
-        bh.setInstruction(i);
-        return bh;
-    }
-
-
-    /** Handle adds itself to the list of resuable handles.
-     */
-    @Override
-    protected void addHandle() {
-        super.setNext(bh_list);
-        bh_list = this;
+    	return new BranchHandle(i);
     }
 
 

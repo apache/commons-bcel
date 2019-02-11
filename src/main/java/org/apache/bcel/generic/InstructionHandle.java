@@ -113,19 +113,10 @@ public class InstructionHandle {
         setInstruction(i);
     }
 
-    private static InstructionHandle ih_list = null; // List of reusable handles
-
-
     /** Factory method.
      */
     static InstructionHandle getInstructionHandle( final Instruction i ) {
-        if (ih_list == null) {
-            return new InstructionHandle(i);
-        }
-        final InstructionHandle ih = ih_list;
-        ih_list = ih.next;
-        ih.setInstruction(i);
-        return ih;
+    	return new InstructionHandle(i);
     }
 
 
@@ -162,16 +153,8 @@ public class InstructionHandle {
     }
 
 
-    /** Overridden in BranchHandle
-     */
-    protected void addHandle() {
-        next = ih_list;
-        ih_list = this;
-    }
-
-
     /**
-     * Delete contents, i.e., remove user access and make handle reusable.
+     * Delete contents, i.e., remove user access.
      */
     void dispose() {
         next = prev = null;
@@ -180,7 +163,6 @@ public class InstructionHandle {
         i_position = -1;
         attributes = null;
         removeAllTargeters();
-        addHandle();
     }
 
 
