@@ -64,7 +64,8 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
     <release version="6.4" date="2019-MM-DD" description="TO DO">
       <action issue="BCEL-267" type="fix" dev="ggregory" due-to="Stephan Herrmann, Sebb, Gary Gregory, Torsten Curdt">Race conditions on static fields in BranchHandle and InstructionHandle.</action>
-      <action issue="BCEL-297" type="fix" dev="ggregory" due-to="Mark Roberts, mingleizhang">Possible NPE in override implementation of Object.equals.</action>
+      <action issue="BCEL-297" type="fix" dev="ggregory" due-to="Mark Roberts, mingleizhang">Possible NPE in override implementation of Object.equals (#20)</action>
+      <action issue="BCEL-298" type="update" dev="ggregory" due-to="mingleizhang">Add some files to .gitignore (#19)</action>
     </release>
 
     <release version="6.3" date="2019-01-23" description="Experimental Java 9, 10, 11, 12-EA, and 13-EA Support">
