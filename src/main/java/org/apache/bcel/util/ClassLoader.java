@@ -21,7 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Hashtable;
 
-import org.apache.bcel.Constants;
+import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantPool;
@@ -183,9 +183,9 @@ public class ClassLoader extends java.lang.ClassLoader {
         // Adapt the class name to the passed value
         final ConstantPool cp = clazz.getConstantPool();
         final ConstantClass cl = (ConstantClass) cp.getConstant(clazz.getClassNameIndex(),
-                Constants.CONSTANT_Class);
+                Const.CONSTANT_Class);
         final ConstantUtf8 name = (ConstantUtf8) cp.getConstant(cl.getNameIndex(),
-                Constants.CONSTANT_Utf8);
+                Const.CONSTANT_Utf8);
         name.setBytes(class_name.replace('.', '/'));
         return clazz;
     }
