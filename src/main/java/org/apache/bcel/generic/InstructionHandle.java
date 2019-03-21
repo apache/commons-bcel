@@ -58,6 +58,16 @@ public class InstructionHandle {
     private Map<Object, Object> attributes;
 
 
+    /**
+     * Does nothing.
+     * 
+     * @deprecated Does nothing as of 6.3.1.
+     */
+    @Deprecated
+    protected void addHandle() {
+        // noop
+    }
+    
     public final InstructionHandle getNext() {
         return next;
     }
