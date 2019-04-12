@@ -84,7 +84,7 @@ public final class PMGClass extends Attribute {
      */
     @Override
     public void accept( final Visitor v ) {
-        System.err.println("Visiting non-standard PMGClass object");
+        println("Visiting non-standard PMGClass object");
     }
 
 

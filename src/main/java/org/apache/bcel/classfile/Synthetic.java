@@ -78,7 +78,7 @@ public final class Synthetic extends Attribute {
         if (length > 0) {
             bytes = new byte[length];
             input.readFully(bytes);
-            System.err.println("Synthetic attribute with length > 0");
+            println("Synthetic attribute with length > 0");
         }
     }
 

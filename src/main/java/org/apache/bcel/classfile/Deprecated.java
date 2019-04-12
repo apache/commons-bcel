@@ -72,7 +72,7 @@ public final class Deprecated extends Attribute {
         if (length > 0) {
             bytes = new byte[length];
             input.readFully(bytes);
-            System.err.println("Deprecated attribute with length > 0");
+            println("Deprecated attribute with length > 0");
         }
     }
 
