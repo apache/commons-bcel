@@ -113,7 +113,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
          * Do a binary search since the pos array is orderd.
          */
         do {
-            final int i = (l + r) / 2;
+            final int i = (l + r) >>> 1;
             final int j = pos[i];
             if (j == target) {
                 return ihs[i];

@@ -165,7 +165,7 @@ public final class LineNumberTable extends Attribute {
         /* Do a binary search since the array is ordered.
          */
         do {
-            final int i = (l + r) / 2;
+            final int i = (l + r) >>> 1;
             final int j = line_number_table[i].getStartPC();
             if (j == pos) {
                 return line_number_table[i].getLineNumber();
