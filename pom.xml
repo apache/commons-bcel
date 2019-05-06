@@ -59,7 +59,6 @@
     <!-- Configuration properties for the OSGi maven-bundle-plugin -->
     <commons.osgi.symbolicName>org.apache.${commons.componentid}</commons.osgi.symbolicName>
     <commons.osgi.export>org.apache.bcel.*;version=${project.version};-noimport:=true</commons.osgi.export>
-    <commons.osgi.import>*</commons.osgi.import>
     <commons.osgi.dynamicImport />
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
