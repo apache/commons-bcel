@@ -52,17 +52,6 @@ public final class ConstantUtf8 extends Constant {
 
     private static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
 
-    static {
-        if (BCEL_STATISTICS) {
-            Runtime.getRuntime().addShutdownHook(new Thread() {
-                @Override
-                public void run() {
-                    printStats();
-                }
-            });
-        }
-    }
-
     interface Generator {
         ConstantUtf8 getInstance(String s);
     }
@@ -117,6 +106,17 @@ public final class ConstantUtf8 extends Constant {
     // for accesss by test code
     static void clearStats() {
         hits = considered = skipped = created = 0;
+    }
+
+    static {
+        if (BCEL_STATISTICS) {
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+                @Override
+                public void run() {
+                    printStats();
+                }
+            });
+        }
     }
 
     /**
