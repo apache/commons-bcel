@@ -45,18 +45,43 @@ public final class ConstantUtf8 extends Constant {
 
     // Set the size to 0 or below to skip caching entirely
     private static final int MAX_CACHED_SIZE =
-            Integer.getInteger("bcel.maxcached.size", 200).intValue();// CHECKSTYLE IGNORE MagicNumber
+            Integer.getInteger("bcel.maxcached.size", 200);// CHECKSTYLE IGNORE MagicNumber
+
+    private static final Generator generator = MAX_CACHED_SIZE > 0 ? new CachedGenerator() :
+            new NormalGenerator();
+
     private static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
 
+    static {
+        if (BCEL_STATISTICS) {
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+                @Override
+                public void run() {
+                    printStats();
+                }
+            });
+        }
+    }
 
-    private static class CACHE_HOLDER {
+    interface Generator {
+        ConstantUtf8 getInstance(String s);
+    }
 
-        private static final int MAX_CACHE_ENTRIES = 20000;
+    static class NormalGenerator implements Generator {
+        @Override
+        public ConstantUtf8 getInstance(String s) {
+            return new ConstantUtf8(s);
+        }
+    }
+
+    static class CachedGenerator implements Generator {
+        private static final int MAX_CACHE_ENTRIES =
+            Integer.getInteger("bcel.maxcache.entries", 20000);// CHECKSTYLE IGNORE MagicNumber
         private static final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
 
-        private static final HashMap<String, ConstantUtf8> CACHE =
+        private final HashMap<String, ConstantUtf8> cache =
                 new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
-            private static final long serialVersionUID = -8506975356158971766L;
+            private static final long serialVersionUID = -8506975356158971767L;
 
             @Override
             protected boolean removeEldestEntry(final Map.Entry<String, ConstantUtf8> eldest) {
@@ -64,6 +89,23 @@ public final class ConstantUtf8 extends Constant {
             }
         };
 
+        public ConstantUtf8 getInstance(final String s) {
+            if (s.length() > MAX_CACHED_SIZE) {
+                skipped++;
+                return  new ConstantUtf8(s);
+            }
+            considered++;
+            synchronized (cache) {
+                ConstantUtf8 result = cache.get(s);
+                if (result != null) {
+                    hits++;
+                    return result;
+                }
+                result = new ConstantUtf8(s);
+                cache.put(s, result);
+                return result;
+            }
+        }
     }
 
     // for accesss by test code
@@ -77,50 +119,11 @@ public final class ConstantUtf8 extends Constant {
         hits = considered = skipped = created = 0;
     }
 
-    static {
-        if (BCEL_STATISTICS) {
-            Runtime.getRuntime().addShutdownHook(new Thread() {
-                @Override
-                public void run() {
-                    printStats();
-                }
-            });
-        }
-    }
-
-    /**
-     * @since 6.0
-     */
-    public static ConstantUtf8 getCachedInstance(final String s) {
-        if (s.length() > MAX_CACHED_SIZE) {
-            skipped++;
-            return  new ConstantUtf8(s);
-        }
-        considered++;
-        synchronized (ConstantUtf8.class) { // might be better with a specific lock object
-            ConstantUtf8 result = CACHE_HOLDER.CACHE.get(s);
-            if (result != null) {
-                    hits++;
-                    return result;
-                }
-            result = new ConstantUtf8(s);
-            CACHE_HOLDER.CACHE.put(s, result);
-            return result;
-        }
-    }
-
-    /**
-     * @since 6.0
-     */
-    public static ConstantUtf8 getInstance(final String s) {
-        return new ConstantUtf8(s);
-    }
-
     /**
      * @since 6.0
      */
     public static ConstantUtf8 getInstance (final DataInput input)  throws IOException {
-        return getInstance(input.readUTF());
+        return generator.getInstance(input.readUTF());
     }
 
     /**
