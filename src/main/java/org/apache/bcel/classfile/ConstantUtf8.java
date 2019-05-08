@@ -43,12 +43,19 @@ public final class ConstantUtf8 extends Constant {
     private static volatile int skipped = 0;
     private static volatile int created = 0;
 
+    static final String MAX_CACHED_SIZE_PROPERTY_KEY = "bcel.maxcached.size";
+
     // Set the size to 0 or below to skip caching entirely
     private static final int MAX_CACHED_SIZE =
-            Integer.getInteger("bcel.maxcached.size", 200);// CHECKSTYLE IGNORE MagicNumber
+            Integer.getInteger(MAX_CACHED_SIZE_PROPERTY_KEY, 0);// CHECKSTYLE IGNORE MagicNumber
 
-    private static final Generator generator = MAX_CACHED_SIZE > 0 ? new CachedGenerator() :
-            new NormalGenerator();
+    private static final Generator generator = createGenerator();
+
+    static Generator createGenerator() {
+        // Not static so that unit test can change the properties before instantiating them
+        int maxCachedSize =  Integer.getInteger(MAX_CACHED_SIZE_PROPERTY_KEY, 0);
+        return maxCachedSize > 0 ? new CachingGenerator() : new NormalGenerator();
+    }
 
     private static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
 
@@ -63,14 +70,15 @@ public final class ConstantUtf8 extends Constant {
         }
     }
 
-    static class CachedGenerator implements Generator {
-        private static final int MAX_CACHE_ENTRIES =
-            Integer.getInteger("bcel.maxcache.entries", 20000);// CHECKSTYLE IGNORE MagicNumber
-        private static final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
+    static class CachingGenerator implements Generator {
+        private final int MAX_CACHE_ENTRIES =
+                Integer.getInteger("bcel.maxcache.entries", 20000);// CHECKSTYLE IGNORE MagicNumber
+        private final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
+
+        private final int maxCachedSize = Integer.getInteger(MAX_CACHED_SIZE_PROPERTY_KEY, 0);
 
         private final HashMap<String, ConstantUtf8> cache =
                 new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
-            private static final long serialVersionUID = -8506975356158971767L;
 
             @Override
             protected boolean removeEldestEntry(final Map.Entry<String, ConstantUtf8> eldest) {
@@ -79,7 +87,7 @@ public final class ConstantUtf8 extends Constant {
         };
 
         public ConstantUtf8 getInstance(final String s) {
-            if (s.length() > MAX_CACHED_SIZE) {
+            if (s.length() > maxCachedSize) {
                 skipped++;
                 return  new ConstantUtf8(s);
             }
