@@ -43,7 +43,7 @@ public final class ConstantUtf8 extends Constant {
     private static volatile int skipped = 0;
     private static volatile int created = 0;
 
-    // If this system property is set more than zero, the instances are reused for the same value.
+    // If this system property is more than zero, instances are reused for the same value.
     // By default, the instances are not reused to avoid performance degradation (BCEL-186).
     static final String MAX_CACHED_ENTRY_LENGTH_KEY = "bcel.constant.cache.entry.max.length";
     static final String MAX_CACHED_SIZE_KEY = "bcel.constant.cache.max.size";
