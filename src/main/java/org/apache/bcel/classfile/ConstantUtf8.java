@@ -71,19 +71,19 @@ public final class ConstantUtf8 extends Constant {
     }
 
     private static final class CachingGenerator implements Generator {
-        private final int MAX_CACHE_ENTRIES =
+        private final int maxCacheEntries =
                 Integer.getInteger(MAX_CACHED_SIZE_KEY, 20000);// CHECKSTYLE IGNORE MagicNumber
-        private final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
+        private final int initialCacheCapacity = (int)(maxCacheEntries /0.75);
 
         // Not static so that unit test can change the value before instantiating them
         private final int maxCachedSize = Integer.getInteger(MAX_CACHED_ENTRY_LENGTH_KEY, 0);
 
         private final HashMap<String, ConstantUtf8> cache =
-                new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
+                new LinkedHashMap<String, ConstantUtf8>(initialCacheCapacity, 0.75f, true) {
 
             @Override
             protected boolean removeEldestEntry(final Map.Entry<String, ConstantUtf8> eldest) {
-                 return size() > MAX_CACHE_ENTRIES;
+                 return size() > maxCacheEntries;
             }
         };
 
