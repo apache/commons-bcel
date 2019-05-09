@@ -43,18 +43,18 @@ public final class ConstantUtf8 extends Constant {
     private static volatile int skipped = 0;
     private static volatile int created = 0;
 
-    static final String MAX_CACHED_SIZE_PROPERTY_KEY = "bcel.maxcached.size";
-
-    // Set the size to 0 or below to skip caching entirely
-    private static final int MAX_CACHED_SIZE =
-            Integer.getInteger(MAX_CACHED_SIZE_PROPERTY_KEY, 0);// CHECKSTYLE IGNORE MagicNumber
+    // If this system property is set more than zero, the instances are reused for the same value.
+    // By default, the instances are not reused to avoid performance degradation (BCEL-186).
+    static final String MAX_CACHED_ENTRY_LENGTH_KEY = "bcel.constant.cache.entry.max.length";
+    static final String MAX_CACHED_SIZE_KEY = "bcel.constant.cache.max.size";
 
     private static final Generator generator = createGenerator();
 
     static Generator createGenerator() {
-        // Not static so that unit test can change the properties before instantiating them
-        int maxCachedSize =  Integer.getInteger(MAX_CACHED_SIZE_PROPERTY_KEY, 0);
-        return maxCachedSize > 0 ? new CachingGenerator() : new NormalGenerator();
+
+        // Not static so that unit test can change the value before instantiating them
+        int maxCachedSize =  Integer.getInteger(MAX_CACHED_ENTRY_LENGTH_KEY, 0);
+        return maxCachedSize > 0 ? new CachingGenerator() : new DefaultGenerator();
     }
 
     private static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
@@ -63,19 +63,20 @@ public final class ConstantUtf8 extends Constant {
         ConstantUtf8 getInstance(String s);
     }
 
-    static class NormalGenerator implements Generator {
+    private static final class DefaultGenerator implements Generator {
         @Override
         public ConstantUtf8 getInstance(String s) {
             return new ConstantUtf8(s);
         }
     }
 
-    static class CachingGenerator implements Generator {
+    private static final class CachingGenerator implements Generator {
         private final int MAX_CACHE_ENTRIES =
-                Integer.getInteger("bcel.maxcache.entries", 20000);// CHECKSTYLE IGNORE MagicNumber
+                Integer.getInteger(MAX_CACHED_SIZE_KEY, 20000);// CHECKSTYLE IGNORE MagicNumber
         private final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
 
-        private final int maxCachedSize = Integer.getInteger(MAX_CACHED_SIZE_PROPERTY_KEY, 0);
+        // Not static so that unit test can change the value before instantiating them
+        private final int maxCachedSize = Integer.getInteger(MAX_CACHED_ENTRY_LENGTH_KEY, 0);
 
         private final HashMap<String, ConstantUtf8> cache =
                 new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
