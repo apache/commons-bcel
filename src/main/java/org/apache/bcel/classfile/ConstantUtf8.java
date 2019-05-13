@@ -45,16 +45,21 @@ public final class ConstantUtf8 extends Constant {
 
     // If this system property is more than zero, instances are reused for the same value.
     // By default, the instances are not reused to avoid performance degradation (BCEL-186).
-    static final String MAX_CACHED_ENTRY_LENGTH_KEY = "bcel.constant.cache.entry.max.length";
     static final String MAX_CACHED_SIZE_KEY = "bcel.constant.cache.max.size";
+    // The maximum length of cached ConstantUtf8 string. Default: 200.
+    static final String MAX_CACHED_ENTRY_LENGTH_KEY = "bcel.constant.cache.entry.max.length";
 
-    private static final Generator generator = createGenerator();
+    private static final CachingGenerator cachingGenerator = new CachingGenerator();
+    private static final DefaultGenerator defaultGenerator = new DefaultGenerator();
 
-    static Generator createGenerator() {
+    private static final Generator generator = selectGenerator();
+
+    static Generator selectGenerator() {
 
         // Not static so that unit test can change the value before instantiating them
-        int maxCachedSize =  Integer.getInteger(MAX_CACHED_ENTRY_LENGTH_KEY, 0);
-        return maxCachedSize > 0 ? new CachingGenerator() : new DefaultGenerator();
+        int maxCachedSize =  Integer.getInteger(MAX_CACHED_SIZE_KEY, 0);
+        System.out.println("maxCachedSize" + maxCachedSize);
+        return maxCachedSize > 0 ? cachingGenerator : defaultGenerator;
     }
 
     private static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
@@ -63,7 +68,7 @@ public final class ConstantUtf8 extends Constant {
         ConstantUtf8 getInstance(String s);
     }
 
-    private static final class DefaultGenerator implements Generator {
+    static final class DefaultGenerator implements Generator {
         @Override
         public ConstantUtf8 getInstance(String s) {
             return new ConstantUtf8(s);
@@ -71,12 +76,12 @@ public final class ConstantUtf8 extends Constant {
     }
 
     private static final class CachingGenerator implements Generator {
+        // Not static so that unit test can change the value before instantiating them
         private final int maxCacheEntries =
                 Integer.getInteger(MAX_CACHED_SIZE_KEY, 20000);// CHECKSTYLE IGNORE MagicNumber
         private final int initialCacheCapacity = (int)(maxCacheEntries /0.75);
 
-        // Not static so that unit test can change the value before instantiating them
-        private final int maxCachedSize = Integer.getInteger(MAX_CACHED_ENTRY_LENGTH_KEY, 0);
+        private final int maxCachedSize = Integer.getInteger(MAX_CACHED_ENTRY_LENGTH_KEY, 200);
 
         private final HashMap<String, ConstantUtf8> cache =
                 new LinkedHashMap<String, ConstantUtf8>(initialCacheCapacity, 0.75f, true) {
@@ -131,8 +136,22 @@ public final class ConstantUtf8 extends Constant {
     /**
      * @since 6.0
      */
-    public static ConstantUtf8 getInstance (final DataInput input)  throws IOException {
-        return generator.getInstance(input.readUTF());
+    public static ConstantUtf8 getCachedInstance(final String s) {
+        return cachingGenerator.getInstance(s);
+    }
+
+    /**
+     * @since 6.0
+     */
+    public static ConstantUtf8 getInstance(final String s) {
+        return generator.getInstance(s);
+    }
+
+    /**
+     * @since 6.0
+     */
+    public static ConstantUtf8 getInstance(final DataInput input)  throws IOException {
+        return getInstance(input.readUTF());
     }
 
     /**

@@ -18,7 +18,6 @@
 package org.apache.bcel.classfile;
 
 import junit.framework.TestCase;
-import org.apache.bcel.classfile.ConstantUtf8.CachingGenerator;
 import org.apache.bcel.classfile.ConstantUtf8.DefaultGenerator;
 import org.junit.After;
 import org.junit.Test;
@@ -26,18 +25,19 @@ import org.junit.Test;
 public class ConstantUtf8TestCase extends TestCase {
     @After
     public void cleanup() {
+        System.clearProperty(ConstantUtf8.MAX_CACHED_SIZE_KEY);
         System.clearProperty(ConstantUtf8.MAX_CACHED_ENTRY_LENGTH_KEY);
     }
 
     @Test
     public void testDefaultBehavior() {
-        ConstantUtf8.Generator defaultGenerator = ConstantUtf8.createGenerator();
+        ConstantUtf8.Generator defaultGenerator = ConstantUtf8.selectGenerator();
         assertTrue("Default generator should be DefaultGenerator",
                 defaultGenerator instanceof DefaultGenerator);
     }
     @Test
     public void testUncachedInstance()  {
-        ConstantUtf8.Generator normalGenerator = ConstantUtf8.createGenerator();
+        ConstantUtf8.Generator normalGenerator = ConstantUtf8.selectGenerator();
         ConstantUtf8 instance1 = normalGenerator.getInstance("java.lang.String");
         ConstantUtf8 instance2 = normalGenerator.getInstance("java.lang.String");
         assertNotSame(instance1, instance2);
@@ -45,8 +45,8 @@ public class ConstantUtf8TestCase extends TestCase {
 
     @Test
     public void testCachedInstance()  {
-        System.setProperty(ConstantUtf8.MAX_CACHED_ENTRY_LENGTH_KEY, "200");
-        ConstantUtf8.Generator cachedGenerator = ConstantUtf8.createGenerator();
+        System.setProperty(ConstantUtf8.MAX_CACHED_SIZE_KEY, "20000");
+        ConstantUtf8.Generator cachedGenerator = ConstantUtf8.selectGenerator();
         ConstantUtf8 instance1 = cachedGenerator.getInstance("java.lang.String");
         ConstantUtf8 instance2 = cachedGenerator.getInstance("java.lang.String");
         assertSame(instance1, instance2);
