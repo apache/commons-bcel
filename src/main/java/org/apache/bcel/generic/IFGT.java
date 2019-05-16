@@ -22,7 +22,6 @@ package org.apache.bcel.generic;
  *
  * <PRE>Stack: ..., value -&gt; ...</PRE>
  *
- * @version $Id$
  */
 public class IFGT extends IfInstruction {
 

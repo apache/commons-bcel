@@ -43,7 +43,6 @@ import java.util.zip.ZipFile;
 /**
  * Responsible for loading (class) files from the CLASSPATH. Inspired by sun.tools.ClassPath.
  *
- * @version $Id$
  */
 public class ClassPath implements Closeable {
 

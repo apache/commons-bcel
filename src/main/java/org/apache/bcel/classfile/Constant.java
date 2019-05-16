@@ -30,7 +30,6 @@ import org.apache.bcel.util.BCELComparator;
  * in the constant pool of a class file. The classes keep closely to
  * the JVM specification.
  *
- * @version $Id$
  */
 public abstract class Constant implements Cloneable, Node {
 

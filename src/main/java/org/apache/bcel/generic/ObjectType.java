@@ -24,7 +24,6 @@ import org.apache.bcel.classfile.JavaClass;
 /**
  * Denotes reference such as java.lang.String.
  *
- * @version $Id$
  */
 public class ObjectType extends ReferenceType {
 

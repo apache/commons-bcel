@@ -33,7 +33,6 @@ import org.apache.bcel.Const;
  * The Instructions can also accessed directly under their names, so
  * it's possible to write il.append(Instruction.ICONST_0);
  *
- * @version $Id$
  * @deprecated (since 6.0) Do not use. Use InstructionConst instead.
  */
 @Deprecated

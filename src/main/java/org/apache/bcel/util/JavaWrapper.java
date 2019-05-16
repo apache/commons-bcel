@@ -31,7 +31,6 @@ import java.lang.reflect.Modifier;
  * <p>To use your own class loader you can set the "bcel.classloader" system property<p>
  * <pre>java org.apache.bcel.util.JavaWrapper -Dbcel.classloader=foo.MyLoader &lt;real.class.name&gt; [arguments]</pre>
  *
- * @version $Id$
  * @see ClassLoader
  */
 public class JavaWrapper {

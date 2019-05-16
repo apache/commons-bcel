@@ -25,7 +25,6 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * IINC - Increment local variable by constant
  *
- * @version $Id$
  */
 public class IINC extends LocalVariableInstruction {
 

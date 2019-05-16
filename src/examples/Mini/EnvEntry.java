@@ -20,7 +20,6 @@ package Mini;
 /**
  * Entry in environment.
  *
- * @version $Id$
  */
 public interface EnvEntry {
   public String getHashKey();

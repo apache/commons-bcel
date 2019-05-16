@@ -23,7 +23,6 @@ import org.apache.bcel.ExceptionConst;
  * ARRAYLENGTH -  Get length of array
  * <PRE>Stack: ..., arrayref -&gt; ..., length</PRE>
  *
- * @version $Id$
  */
 public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackProducer, StackConsumer /* since 6.0 */ {
 

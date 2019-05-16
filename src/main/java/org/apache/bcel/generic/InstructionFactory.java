@@ -28,7 +28,6 @@ import org.apache.bcel.Const;
  * Note: The static createXXX methods return singleton instances
  * from the {@link InstructionConst} class.
  *
- * @version $Id$
  * @see Const
  * @see InstructionConst
  */

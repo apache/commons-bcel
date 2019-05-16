@@ -23,7 +23,6 @@ import org.apache.bcel.ExceptionConst;
  * ATHROW -  Throw exception
  * <PRE>Stack: ..., objectref -&gt; objectref</PRE>
  *
- * @version $Id$
  */
 public class ATHROW extends Instruction implements UnconditionalBranch, ExceptionThrower {
 

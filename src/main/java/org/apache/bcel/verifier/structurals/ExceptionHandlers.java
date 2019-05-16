@@ -30,7 +30,6 @@ import org.apache.bcel.generic.MethodGen;
 /**
  * This class allows easy access to ExceptionHandler objects.
  *
- * @version $Id$
  */
 public class ExceptionHandlers{
     /**

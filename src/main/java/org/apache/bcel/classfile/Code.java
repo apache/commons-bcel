@@ -35,7 +35,6 @@ import org.apache.bcel.Const;
  * is used for debugging purposes and <em>LocalVariableTable</em> which
  * contains information about the local variables.
  *
- * @version $Id$
  * @see     Attribute
  * @see     CodeException
  * @see     LineNumberTable

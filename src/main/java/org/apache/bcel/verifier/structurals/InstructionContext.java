@@ -27,7 +27,6 @@ import org.apache.bcel.generic.InstructionHandle;
  * to information like control flow successors and
  * such.
  *
- * @version $Id$
  */
 public interface InstructionContext{
 

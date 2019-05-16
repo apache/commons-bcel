@@ -27,7 +27,6 @@ package org.apache.bcel.verifier.exc;
  * These are the constraints where data-flow analysis is needed to verify if they hold.
  * The data flow analysis of pass 3 is called pass 3b in JustIce.
  *
- * @version $Id$
  */
 public class StructuralCodeConstraintException extends CodeConstraintException{
     private static final long serialVersionUID = 5406842000007181420L;

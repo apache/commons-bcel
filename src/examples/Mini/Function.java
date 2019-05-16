@@ -21,7 +21,6 @@ package Mini;
  * Represents a function declaration and its arguments. Type information is contained
  * in the ASTIdent fields.
  *
- * @version $Id$
  */
 public class Function implements org.apache.bcel.Constants, EnvEntry {
   private ASTIdent   name;         // Reference to the original declaration

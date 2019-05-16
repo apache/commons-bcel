@@ -42,7 +42,6 @@ import org.apache.bcel.generic.Type;
  * are done with BCEL. It does not cover all features of BCEL,
  * but tries to mimic hand-written code as close as possible.
  *
- * @version $Id$
  */
 public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 

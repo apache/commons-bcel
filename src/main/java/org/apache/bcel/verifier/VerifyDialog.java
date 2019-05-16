@@ -31,7 +31,6 @@ import org.apache.bcel.classfile.JavaClass;
  * class in your application.
  * [This class was created using VisualAge for Java,
  * but it does not work under VAJ itself (Version 3.02 JDK 1.2)]
- * @version $Id$
  * @see #main(String[])
  * @see #VerifyDialog(String)
  */

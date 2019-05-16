@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * LSTORE - Store long into local variable
  * <PRE>Stack: ..., value.word1, value.word2 -&gt; ... </PRE>
  *
- * @version $Id$
  */
 public class LSTORE extends StoreInstruction {
 

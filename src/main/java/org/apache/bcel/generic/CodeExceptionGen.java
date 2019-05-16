@@ -28,7 +28,6 @@ import org.apache.bcel.classfile.CodeException;
  * The end of the region is automatically mapped to be exclusive when calling
  * getCodeException(), i.e., there is no difference semantically.
  *
- * @version $Id$
  * @see     MethodGen
  * @see     CodeException
  * @see     InstructionHandle

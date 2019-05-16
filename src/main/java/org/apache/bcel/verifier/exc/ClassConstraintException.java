@@ -23,7 +23,6 @@ package org.apache.bcel.verifier.exc;
  * when a class file to verify does not pass the verification pass 2 as described
  * in the Java Virtual Machine specification, 2nd edition.
  *
- * @version $Id$
  */
 public class ClassConstraintException extends VerificationException{
     private static final long serialVersionUID = -4745598983569128296L;

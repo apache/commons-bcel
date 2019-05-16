@@ -80,7 +80,6 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
  * More detailed information is to be found at the do_verify()
  * method's documentation.
  *
- * @version $Id$
  * @see #do_verify()
  */
 public final class Pass2Verifier extends PassVerifier implements Constants {

@@ -40,7 +40,6 @@ import org.apache.bcel.util.BCELComparator;
  * existing java class (file).
  *
  * @see JavaClass
- * @version $Id$
  */
 public class ClassGen extends AccessFlags implements Cloneable {
 

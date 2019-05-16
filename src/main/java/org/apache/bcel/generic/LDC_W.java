@@ -26,7 +26,6 @@ import org.apache.bcel.util.ByteSequence;
  *
  * <PRE>Stack: ... -&gt; ..., item.word1, item.word2</PRE>
  *
- * @version $Id$
  */
 public class LDC_W extends LDC {
 

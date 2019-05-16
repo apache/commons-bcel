@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * Denotes an unparameterized instruction to pop a value on top from the stack,
  * such as ISTORE, POP, PUTSTATIC.
  *
- * @version $Id$
  * @see ISTORE
  * @see POP
  */

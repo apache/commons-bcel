@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * F2D - Convert float to double
  * <PRE>Stack: ..., value -&gt; ..., result.word1, result.word2</PRE>
  *
- * @version $Id$
  */
 public class F2D extends ConversionInstruction {
 

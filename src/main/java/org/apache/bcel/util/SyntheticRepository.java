@@ -28,7 +28,6 @@ import java.util.Map;
  *
  * @see org.apache.bcel.Repository
  *
- * @version $Id$
  */
 public class SyntheticRepository extends MemorySensitiveClassPathRepository {
 

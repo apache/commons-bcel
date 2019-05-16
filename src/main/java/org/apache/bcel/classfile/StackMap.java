@@ -32,7 +32,6 @@ import org.apache.bcel.Const;
  * within the Code attribute of a method. See CLDC specification
  * �5.3.1.2
  *
- * @version $Id$
  * @see     Code
  * @see     StackMapEntry
  * @see     StackMapType

@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * ACONST_NULL - Push null reference
  * <PRE>Stack: ... -&gt; ..., null</PRE>
  *
- * @version $Id$
  */
 public class ACONST_NULL extends Instruction implements PushInstruction, TypedInstruction {
 

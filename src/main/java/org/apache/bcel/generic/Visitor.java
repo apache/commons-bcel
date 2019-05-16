@@ -23,7 +23,6 @@ package org.apache.bcel.generic;
  * instructions with the properly typed methods just by calling the accept()
  * method.
  *
- * @version $Id$
  */
 public interface Visitor {
 

@@ -38,7 +38,6 @@ import org.apache.bcel.util.ByteSequence;
  *
  * A list is finally dumped to a byte code array with <a href="#getByteCode()">getByteCode</a>.
  *
- * @version $Id$
  * @see Instruction
  * @see InstructionHandle
  * @see BranchHandle

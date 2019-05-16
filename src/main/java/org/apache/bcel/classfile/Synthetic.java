@@ -32,7 +32,6 @@ import org.apache.bcel.Const;
  * is intended to be instantiated from the
  * <em>Attribute.readAttribute()</em> method.
  *
- * @version $Id$
  * @see     Attribute
  */
 public final class Synthetic extends Attribute {

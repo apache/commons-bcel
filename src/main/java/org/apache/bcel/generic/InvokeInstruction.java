@@ -27,7 +27,6 @@ import org.apache.bcel.classfile.ConstantPool;
 /**
  * Super class for the INVOKExxx family of instructions.
  *
- * @version $Id$
  */
 public abstract class InvokeInstruction extends FieldOrMethod implements ExceptionThrower,
         StackConsumer, StackProducer {

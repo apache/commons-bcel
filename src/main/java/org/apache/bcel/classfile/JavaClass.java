@@ -44,7 +44,6 @@ import org.apache.bcel.util.SyntheticRepository;
  * class file.  Those interested in programatically generating classes
  * should see the <a href="../generic/ClassGen.html">ClassGen</a> class.
 
- * @version $Id$
  * @see org.apache.bcel.generic.ClassGen
  */
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {

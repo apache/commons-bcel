@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * ASTORE - Store reference into local variable
  * <PRE>Stack ..., objectref -&gt; ... </PRE>
  *
- * @version $Id$
  */
 public class ASTORE extends StoreInstruction {
 

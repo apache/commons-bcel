@@ -20,7 +20,6 @@ package org.apache.bcel.generic;
 /**
  * Super class for JSR - Jump to subroutine
  *
- * @version $Id$
  */
 public abstract class JsrInstruction extends BranchInstruction implements UnconditionalBranch,
         TypedInstruction, StackProducer {

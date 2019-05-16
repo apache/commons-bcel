@@ -48,7 +48,6 @@ import org.apache.bcel.classfile.Utility;
  * constructor. The default value contains "java.", "sun.",
  * "javax."</p>
  *
- * @version $Id$
  * @see JavaWrapper
  * @see ClassPath
  * @deprecated 6.0 Do not use - does not work

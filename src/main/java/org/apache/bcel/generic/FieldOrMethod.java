@@ -27,7 +27,6 @@ import org.apache.bcel.classfile.ConstantUtf8;
  * Super class for InvokeInstruction and FieldInstruction, since they have
  * some methods in common!
  *
- * @version $Id$
  */
 public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
 

@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * FLOAD - Load float from local variable
  * <PRE>Stack ... -&gt; ..., result</PRE>
  *
- * @version $Id$
  */
 public class FLOAD extends LoadInstruction {
 

@@ -27,7 +27,6 @@ import org.apache.bcel.Const;
  * This class is derived from the abstract {@link Constant}
  * and represents a reference to an int object.
  *
- * @version $Id$
  * @see     Constant
  */
 public final class ConstantInteger extends Constant implements ConstantObject {

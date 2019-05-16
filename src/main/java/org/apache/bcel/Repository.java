@@ -31,7 +31,6 @@ import org.apache.bcel.util.SyntheticRepository;
  * @see org.apache.bcel.util.Repository
  * @see SyntheticRepository
  *
- * @version $Id$
  */
 public abstract class Repository {
 

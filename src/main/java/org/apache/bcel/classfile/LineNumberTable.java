@@ -28,7 +28,6 @@ import org.apache.bcel.Const;
  * purposes. This attribute is used by the <em>Code</em> attribute. It
  * contains pairs of PCs and line numbers.
  *
- * @version $Id$
  * @see     Code
  * @see LineNumber
  */

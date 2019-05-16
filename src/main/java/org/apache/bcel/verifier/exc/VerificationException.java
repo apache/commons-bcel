@@ -27,7 +27,6 @@ package org.apache.bcel.verifier.exc;
  * edition, page 164, 5.4.1 where verification as a part of the linking process is
  * defined to be the verification happening in passes 2 and 3.
  *
- * @version $Id$
  */
 public abstract class VerificationException extends VerifierConstraintViolatedException{
     private static final long serialVersionUID = 8012776320318623652L;

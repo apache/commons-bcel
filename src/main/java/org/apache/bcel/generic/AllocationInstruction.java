@@ -20,7 +20,6 @@ package org.apache.bcel.generic;
 /**
  * Denote family of instructions that allocates space in the heap.
  *
- * @version $Id$
  */
 public interface AllocationInstruction {
 }

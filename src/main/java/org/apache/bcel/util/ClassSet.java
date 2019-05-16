@@ -28,7 +28,6 @@ import org.apache.bcel.classfile.JavaClass;
  * Since JavaClass has no equals() method, the name of the class is
  * used for comparison.
  *
- * @version $Id$
  * @see ClassStack
  */
 public class ClassSet {

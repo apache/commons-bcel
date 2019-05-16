@@ -42,7 +42,6 @@ import org.apache.bcel.generic.Type;
 /**
  * Root node of everything, direct children are nodes of type FunDecl
  *
- * @version $Id$
  */
 public class ASTProgram extends SimpleNode
 implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constants {

@@ -27,7 +27,6 @@ import org.apache.bcel.Const;
 /**
  * Abstract super class for fields and methods.
  *
- * @version $Id$
  */
 public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
 

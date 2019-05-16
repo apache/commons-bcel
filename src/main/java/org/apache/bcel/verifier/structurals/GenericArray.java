@@ -23,7 +23,6 @@ package org.apache.bcel.verifier.structurals;
  * has some of the properties arrays have. They implement java.lang.Cloneable
  * and java.io.Serializable and they extend java.lang.Object.
  *
- * @version $Id$
  */
 public class GenericArray extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable{
 

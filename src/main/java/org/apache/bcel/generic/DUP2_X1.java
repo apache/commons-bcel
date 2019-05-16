@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * DUP2_X1 - Duplicate two top operand stack words and put three down
  * <PRE>Stack: ..., word3, word2, word1 -&gt; ..., word2, word1, word3, word2, word1</PRE>
  *
- * @version $Id$
  */
 public class DUP2_X1 extends StackInstruction {
 

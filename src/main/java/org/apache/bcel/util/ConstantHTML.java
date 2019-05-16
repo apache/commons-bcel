@@ -36,7 +36,6 @@ import org.apache.bcel.classfile.Utility;
 /**
  * Convert constant pool into HTML file.
  *
- * @version $Id$
  *
  */
 final class ConstantHTML {

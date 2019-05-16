@@ -43,7 +43,6 @@ package org.apache.bcel.generic;
  * @see InstructionHandle
  * @see InstructionList
  * @see InstructionTargeter
- * @version $Id$
  */
 public final class TargetLostException extends Exception {
 

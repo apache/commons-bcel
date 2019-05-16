@@ -28,7 +28,6 @@ import org.apache.bcel.Constants;
  * This class represents a local variable within a method. It contains its
  * scope, name, signature and index on the method's frame.
  *
- * @version $Id$
  * @see     LocalVariableTable
  */
 public final class LocalVariable implements Cloneable, Node, Constants {

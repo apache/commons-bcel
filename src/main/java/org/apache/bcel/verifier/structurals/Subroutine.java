@@ -25,7 +25,6 @@ import org.apache.bcel.generic.InstructionHandle;
  * Note that it is 'abused' to maintain the top-level code in a
  * consistent fashion, too.
  *
- * @version $Id$
  */
 public interface Subroutine{
     /**

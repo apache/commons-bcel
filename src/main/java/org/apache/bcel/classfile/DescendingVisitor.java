@@ -24,7 +24,6 @@ import java.util.Stack;
  * applied to all components of a JavaClass object. I.e. this class supplies the
  * traversal strategy, other classes can make use of it.
  *
- * @version $Id$
  */
 public class DescendingVisitor implements Visitor
 {

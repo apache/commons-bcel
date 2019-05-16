@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * Denotes an unparameterized instruction to store a value into a local variable,
  * e.g. ISTORE.
  *
- * @version $Id$
  */
 public abstract class StoreInstruction extends LocalVariableInstruction implements PopInstruction {
 

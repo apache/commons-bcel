@@ -26,7 +26,6 @@ import org.apache.bcel.classfile.JavaClass;
  * all class files encountered; this may take up a lot of time and,
  * more notably, memory.
  *
- * @version $Id$
  */
 public class TransitiveHull implements VerifierFactoryObserver {
 

@@ -28,7 +28,6 @@ package org.apache.bcel.generic;
  * The interface provides the possibilty for the user to write
  * `templates' or `macros' for such reuseable code patterns.
  *
- * @version $Id$
  * @see PUSH
  * @see SWITCH
  */

@@ -22,7 +22,6 @@ import org.apache.bcel.Const;
 /**
  * Denotes array type, such as int[][]
  *
- * @version $Id$
  */
 public final class ArrayType extends ReferenceType {
 

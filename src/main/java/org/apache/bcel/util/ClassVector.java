@@ -26,7 +26,6 @@ import org.apache.bcel.classfile.JavaClass;
  * Utility class implementing a (typesafe) collection of JavaClass
  * objects. Contains the most important methods of a Vector.
  *
- * @version $Id$
  *
  * @deprecated as of 5.1.1 - 7/17/2005
  */

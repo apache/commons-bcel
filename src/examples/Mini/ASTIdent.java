@@ -28,7 +28,6 @@ import org.apache.bcel.generic.PUSH;
 
 /**
  *
- * @version $Id$
  */
 public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   private String   name;

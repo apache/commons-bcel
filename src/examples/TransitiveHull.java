@@ -49,7 +49,6 @@ import org.apache.bcel.util.ClassSet;
  * You'll need Apache's regular expression library supplied together with BCEL
  * to use this class.
  *
- * @version $Id$
  */
 public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
 

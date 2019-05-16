@@ -20,7 +20,6 @@ package org.apache.bcel.util;
 /**
  * Used for BCEL comparison strategy
  *
- * @version $Id$
  * @since 5.2
  */
 public interface BCELComparator {

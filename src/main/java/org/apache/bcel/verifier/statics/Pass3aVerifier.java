@@ -107,7 +107,6 @@ import org.apache.bcel.verifier.exc.StaticCodeInstructionOperandConstraintExcept
  * More detailed information is to be found at the do_verify()
  * method's documentation.
  *
- * @version $Id$
  * @see #do_verify()
  */
 public final class Pass3aVerifier extends PassVerifier{

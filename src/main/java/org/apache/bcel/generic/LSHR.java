@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * LSHR - Arithmetic shift right long
  * <PRE>Stack: ..., value1.word1, value1.word2, value2 -&gt; ..., result.word1, result.word2</PRE>
  *
- * @version $Id$
  */
 public class LSHR extends ArithmeticInstruction {
 

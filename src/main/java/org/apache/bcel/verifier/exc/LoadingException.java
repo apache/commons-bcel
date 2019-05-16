@@ -22,7 +22,6 @@ package org.apache.bcel.verifier.exc;
  * When loading a class file, BCEL will throw an instance of LoadingException if
  * the class file is malformed; so it is not conforming to the "Pass 1" verification
  * process as described in the Java Virtual Machine specification, 2nd. edition.
- * @version $Id$
  */
 public class LoadingException extends VerifierConstraintViolatedException{
 

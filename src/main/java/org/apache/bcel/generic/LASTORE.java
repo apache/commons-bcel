@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * LASTORE -  Store into long array
  * <PRE>Stack: ..., arrayref, index, value.word1, value.word2 -&gt; ...</PRE>
  *
- * @version $Id$
  */
 public class LASTORE extends ArrayInstruction implements StackConsumer {
 

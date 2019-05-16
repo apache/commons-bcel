@@ -27,7 +27,6 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  * This class implements an array of local variables used for symbolic JVM
  * simulation.
  *
- * @version $Id$
  */
 public class LocalVariables implements Cloneable {
     /** The Type[] containing the local variable slots. */

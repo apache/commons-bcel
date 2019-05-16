@@ -28,7 +28,6 @@ import org.apache.bcel.Const;
  * value, i.e., a default value for initializing a class field.
  * This class is instantiated by the <em>Attribute.readAttribute()</em> method.
  *
- * @version $Id$
  * @see     Attribute
  */
 public final class ConstantValue extends Attribute {

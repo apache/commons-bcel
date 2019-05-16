@@ -55,7 +55,6 @@ import org.apache.bcel.generic.*;
  * <p>If a two-slot type is stored into a local variable, the next variable
  * is given the type Type.UNKNOWN.</p>
  *
- * @version $Id$
  * @see #visitDSTORE(DSTORE o)
  * @see InstConstraintVisitor
  */

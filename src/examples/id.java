@@ -38,7 +38,6 @@ import org.apache.bcel.generic.MethodGen;
  * % diff foo bar | more
  * <pre>
  *
- * @version $Id$
  */
 public class id {
 

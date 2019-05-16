@@ -28,7 +28,6 @@ import org.apache.bcel.util.ByteSequence;
  * LOOKUPSWITCH and TABLESWITCH.
  *
  * @see InstructionList
- * @version $Id$
  */
 public abstract class BranchInstruction extends Instruction implements InstructionTargeter {
 

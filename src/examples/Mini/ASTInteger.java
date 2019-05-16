@@ -26,7 +26,6 @@ import org.apache.bcel.generic.PUSH;
 
 /**
  *
- * @version $Id$
  */
 public class ASTInteger extends ASTExpr {
   private int value;

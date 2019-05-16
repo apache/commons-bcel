@@ -22,7 +22,6 @@ import org.apache.bcel.Const;
 /**
  * Super class for the family of arithmetic instructions.
  *
- * @version $Id$
  */
 public abstract class ArithmeticInstruction extends Instruction implements TypedInstruction,
         StackProducer, StackConsumer {

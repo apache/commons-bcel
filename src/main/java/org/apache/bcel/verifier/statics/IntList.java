@@ -24,7 +24,6 @@ import java.util.List;
 /**
  * A small utility class representing a set of basic int values.
  *
- * @version $Id$
  */
 public class IntList{
     /** The int are stored as Integer objects here. */

@@ -45,7 +45,6 @@ import org.apache.bcel.util.InstructionFinder;
 
 /**
  *
- * @version $Id$
  */
 public class ASTFunDecl extends SimpleNode
 implements MiniParserTreeConstants, org.apache.bcel.Constants {

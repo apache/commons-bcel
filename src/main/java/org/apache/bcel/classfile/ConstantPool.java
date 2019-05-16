@@ -31,7 +31,6 @@ import org.apache.bcel.Const;
  * programatically should see <a href="../generic/ConstantPoolGen.html">
  * ConstantPoolGen</a>.
 
- * @version $Id$
  * @see     Constant
  * @see     org.apache.bcel.generic.ConstantPoolGen
  */

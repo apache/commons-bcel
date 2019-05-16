@@ -29,7 +29,6 @@ import org.apache.bcel.Constants;
  * attribute and is used only there. It contains a range in which a
  * particular exception handler is active.
  *
- * @version $Id$
  * @see     Code
  */
 public final class CodeException implements Cloneable, Node, Constants {

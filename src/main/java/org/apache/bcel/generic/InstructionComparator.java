@@ -27,7 +27,6 @@ package org.apache.bcel.generic;
  * instructions must have the same target.
  *
  * @see Instruction
- * @version $Id$
  */
 public interface InstructionComparator {
 

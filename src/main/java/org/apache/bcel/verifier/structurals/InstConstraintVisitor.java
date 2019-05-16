@@ -48,7 +48,6 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  * TODO: Currently, the JVM's behaviour concerning monitors (MONITORENTER,
  * MONITOREXIT) is not modeled in JustIce.
  *
- * @version $Id$
  * @see StructuralCodeConstraintException
  */
 public class InstConstraintVisitor extends EmptyVisitor{

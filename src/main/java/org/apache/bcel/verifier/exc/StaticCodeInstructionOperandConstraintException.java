@@ -28,7 +28,6 @@ package org.apache.bcel.verifier.exc;
  * pass 3a and are described on page 134-137 in the Java Virtual Machine Specification,
  * Second Edition.
  *
- * @version $Id$
  */
 public class StaticCodeInstructionOperandConstraintException extends StaticCodeConstraintException{
     private static final long serialVersionUID = 4780787099381933487L;

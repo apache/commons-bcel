@@ -22,7 +22,6 @@ package org.apache.bcel.generic;
  *
  * <PRE>Stack: ... -&gt; ..., </PRE>
  *
- * @version $Id$
  */
 public class DCONST extends Instruction implements ConstantPushInstruction {
 

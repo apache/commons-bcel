@@ -23,7 +23,6 @@ import org.apache.bcel.ExceptionConst;
  * MONITOREXIT - Exit monitor for object
  * <PRE>Stack: ..., objectref -&gt; ...</PRE>
  *
- * @version $Id$
  */
 public class MONITOREXIT extends Instruction implements ExceptionThrower, StackConsumer {
 

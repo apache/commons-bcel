@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * RETURN -  Return from void method
  * <PRE>Stack: ... -&gt; &lt;empty&gt;</PRE>
  *
- * @version $Id$
  */
 public class RETURN extends ReturnInstruction {
 

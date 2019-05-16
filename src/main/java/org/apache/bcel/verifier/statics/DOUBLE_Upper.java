@@ -23,7 +23,6 @@ import org.apache.bcel.generic.Type;
 
 /**
  * This class represents the upper half of a DOUBLE variable.
- * @version $Id$
  */
 public final class DOUBLE_Upper extends Type{
 

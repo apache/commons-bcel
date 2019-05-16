@@ -28,7 +28,6 @@ import java.util.Vector;
  * operate on. That means, for every class (represented by a unique fully qualified
  * class name) there is exactly one Verifier.
  *
- * @version $Id$
  * @see Verifier
  */
 public class VerifierFactory {

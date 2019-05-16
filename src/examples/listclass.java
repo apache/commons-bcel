@@ -76,7 +76,6 @@ import org.apache.bcel.classfile.Method;
  * </p>
  *
  *         <a href="mailto:twheeler@objectspace.com">Thomas Wheeler</A>
- * @version $Id$
  */
 public class listclass {
 

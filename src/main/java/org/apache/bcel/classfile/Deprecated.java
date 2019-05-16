@@ -28,7 +28,6 @@ import org.apache.bcel.Const;
  * deprecated method.
  * It is instantiated from the <em>Attribute.readAttribute()</em> method.
  *
- * @version $Id$
  * @see     Attribute
  */
 public final class Deprecated extends Attribute {

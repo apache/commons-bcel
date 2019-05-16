@@ -30,7 +30,6 @@ import org.apache.bcel.Const;
  * This class is derived from the abstract {@link Constant}
  * and represents a reference to a Utf8 encoded string.
  *
- * @version $Id$
  * @see     Constant
  */
 public final class ConstantUtf8 extends Constant {

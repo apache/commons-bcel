@@ -27,7 +27,6 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * Abstract super class for all Java byte codes.
  *
- * @version $Id$
  */
 public abstract class Instruction implements Cloneable {
 

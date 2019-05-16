@@ -46,7 +46,6 @@ import org.apache.bcel.generic.Type;
  * comparable to the mechanism provided via
  * {@code java.lang.reflect.Proxy}, but much more flexible.
  *
- * @version $Id$
  * @see org.apache.bcel.util.JavaWrapper
  * @see Utility
  */

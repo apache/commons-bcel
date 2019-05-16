@@ -24,7 +24,6 @@ import org.apache.bcel.classfile.JavaClass;
 /**
  * Super class for object and array types.
  *
- * @version $Id$
  */
 public abstract class ReferenceType extends Type {
 

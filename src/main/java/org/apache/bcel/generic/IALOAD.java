@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * IALOAD - Load int from array
  * <PRE>Stack: ..., arrayref, index -&gt; ..., value</PRE>
  *
- * @version $Id$
  */
 public class IALOAD extends ArrayInstruction implements StackProducer {
 

@@ -28,7 +28,6 @@ import org.apache.bcel.Const;
  * and represents a reference to the name and signature
  * of a field or method.
  *
- * @version $Id$
  * @see     Constant
  */
 public final class ConstantNameAndType extends Constant {

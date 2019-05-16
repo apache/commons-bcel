@@ -27,7 +27,6 @@ import org.apache.bcel.Const;
  * This class represents the type of a local variable or item on stack
  * used in the StackMap entries.
  *
- * @version $Id$
  * @see     StackMapEntry
  * @see     StackMap
  * @see     Const

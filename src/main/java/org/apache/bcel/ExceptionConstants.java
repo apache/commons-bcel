@@ -20,7 +20,6 @@ package org.apache.bcel;
 /**
  * Exception constants.
  *
- * @version $Id$
  * @deprecated (since 6.0) DO NOT USE - use ExceptionConst instead
  */
 @Deprecated
