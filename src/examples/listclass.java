@@ -62,7 +62,9 @@ import org.apache.bcel.classfile.Method;
  * <li>{@code -nocontents} Do not print JavaClass.toString() for the class. I added
  * this because sometimes I'm only interested in dependency information.</li>
  * </ul>
- * <p>Here's a couple examples of how I typically use listclass:<br>
+ * <p>
+ * Here's a couple examples of how I typically use listclass:
+ * </p>
  * <pre>java listclass -code MyClass</pre>
  * Print information about the class and the byte code of the methods
  * <pre>java listclass -nocontents -dependencies MyClass</pre>
@@ -71,6 +73,7 @@ import org.apache.bcel.classfile.Method;
  * Print a recursive listing of all classes which MyClass depends on.  Do not
  * analyze classes beginning with "java.", "javax.", or "sun.".
  * <pre>java listclass -nocontents -dependencies -recurse MyClass -exclude java.javax. sun.</pre>
+ * <p>
  * Print a recursive listing of dependency information for MyClass and its
  * dependents.  Do not analyze classes beginning with "java.", "javax.", or "sun."
  * </p>

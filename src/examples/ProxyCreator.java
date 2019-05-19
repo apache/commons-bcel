@@ -42,9 +42,11 @@ import org.apache.bcel.generic.Type;
  * The trick is to encode the byte code we need into the class name
  * using the Utility.encode() method. This will result however in big
  * ugly class name, so for many cases it will be more sufficient to
- * put some clever creation code into the class loader.<br> This is
- * comparable to the mechanism provided via
+ * put some clever creation code into the class loader.
+ * <p>
+ * This is comparable to the mechanism provided via
  * {@code java.lang.reflect.Proxy}, but much more flexible.
+ * </p>
  *
  * @see org.apache.bcel.util.JavaWrapper
  * @see Utility
