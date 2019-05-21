@@ -28,7 +28,22 @@ import org.apache.bcel.Const;
 
 /**
  * This class is derived from the abstract {@link Constant}
- * and represents a reference to a Utf8 encoded string.
+ * and represents a reference to a UTF-8 encoded string.
+ *
+ * <p>When working with large number of class files, caching {@link ConstantUtf8} instances that
+ * have the same underlying string saves run-time memory usage.
+ * By default, the instances are not cached.
+ * The following system properties control the behavior of the caching instances of the same value:
+ *
+ * <dl>
+ *   <dt>{@code bcel.constant.cache.max.size}</dt>
+ *   <dd>The maximum size of cache table. When the cache table exceeds the size, it removes the
+ *   eldest entry from the table. By default it is {@code 0} (no caching). To remove the limit, set
+ *   this to {@code -1}.</dd>
+ *   <dt>{@code bcel.constant.cache.entry.max.length}</dt>
+ *   <dd>The maximum length of the UTF-8 encoded string to store in the cache table. By default it
+ *   is 200. </dd>
+ * </dl>
  *
  * @version $Id$
  * @see     Constant
@@ -79,18 +94,25 @@ public final class ConstantUtf8 extends Constant {
         // Not static so that unit test can change the value before instantiating them
         private final int maxCacheEntries =
                 Integer.getInteger(MAX_CACHED_SIZE_KEY, 20000);// CHECKSTYLE IGNORE MagicNumber
-        private final int initialCacheCapacity = (int)(maxCacheEntries /0.75);
 
         private final int maxCachedSize = Integer.getInteger(MAX_CACHED_ENTRY_LENGTH_KEY, 200);
 
-        private final HashMap<String, ConstantUtf8> cache =
-                new LinkedHashMap<String, ConstantUtf8>(initialCacheCapacity, 0.75f, true) {
+        private final HashMap<String, ConstantUtf8> cache;
 
-            @Override
-            protected boolean removeEldestEntry(final Map.Entry<String, ConstantUtf8> eldest) {
-                 return size() > maxCacheEntries;
+        private CachingGenerator() {
+            int initialCacheCapacity = (int)(maxCacheEntries /0.75);
+            if (maxCacheEntries == -1) {
+                // No capacity limit
+                cache = new HashMap<>(initialCacheCapacity);
+            } else {
+                cache = new LinkedHashMap<String, ConstantUtf8>(initialCacheCapacity, 0.75f, true) {
+                    @Override
+                    protected boolean removeEldestEntry(final Map.Entry<String, ConstantUtf8> eldest) {
+                        return size() > maxCacheEntries;
+                    }
+                };
             }
-        };
+        }
 
         public ConstantUtf8 getInstance(final String s) {
             if (s.length() > maxCachedSize) {
