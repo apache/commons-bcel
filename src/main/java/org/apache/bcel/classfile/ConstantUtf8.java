@@ -32,17 +32,18 @@ import org.apache.bcel.Const;
  *
  * <p>When working with large number of class files, caching {@link ConstantUtf8} instances that
  * have the same underlying string saves run-time memory usage.
- * By default, the instances are not cached.
- * The following system properties control the behavior of the caching instances of the same value:
+ * By default, the instances are not cached; for example, {@code ConstantUtf8("java.lang.String)}
+ * in different {@link org.apache.bcel.util.ClassPath.ClassFile} are different instances.
+ * The following system properties control the behavior of the caching:
  *
  * <dl>
  *   <dt>{@code bcel.constant.cache.max.size}</dt>
  *   <dd>The maximum size of cache table. When the cache table exceeds the size, it removes the
  *   eldest entry from the table. By default it is {@code 0} (no caching). To remove the limit, set
- *   this to {@code -1}.</dd>
+ *   this value to {@code -1}.</dd>
  *   <dt>{@code bcel.constant.cache.entry.max.length}</dt>
  *   <dd>The maximum length of the UTF-8 encoded string to store in the cache table. By default it
- *   is 200. </dd>
+ *   is {@code 200}. </dd>
  * </dl>
  *
  * @version $Id$
