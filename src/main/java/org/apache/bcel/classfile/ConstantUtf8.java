@@ -32,7 +32,7 @@ import org.apache.bcel.Const;
  *
  * <p>When working with large number of class files, caching {@link ConstantUtf8} instances that
  * have the same underlying string saves run-time memory usage.
- * By default, the instances are not cached; for example, {@code ConstantUtf8("java.lang.String)}
+ * By default, the instances are not cached; for example, {@code ConstantUtf8("java.lang.String")}
  * in different {@link org.apache.bcel.util.ClassPath.ClassFile} are different instances.
  * The following system properties control the behavior of the caching:
  *
