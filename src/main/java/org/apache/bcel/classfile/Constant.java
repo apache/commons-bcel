@@ -29,7 +29,6 @@ import org.apache.bcel.util.BCELComparator;
  * Abstract superclass for classes to represent the different constant types
  * in the constant pool of a class file. The classes keep closely to
  * the JVM specification.
- *
  */
 public abstract class Constant implements Cloneable, Node {
 
