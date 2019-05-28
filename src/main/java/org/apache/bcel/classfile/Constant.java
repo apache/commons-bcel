@@ -64,11 +64,9 @@ public abstract class Constant implements Cloneable, Node {
     @java.lang.Deprecated
     protected byte tag; // TODO should be private & final
 
-
     Constant(final byte tag) {
         this.tag = tag;
     }
-
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitely
@@ -80,9 +78,7 @@ public abstract class Constant implements Cloneable, Node {
     @Override
     public abstract void accept( Visitor v );
 
-
     public abstract void dump( DataOutputStream file ) throws IOException;
-
 
     /**
      * @return Tag of constant, i.e., its type. No setTag() method to avoid
@@ -92,7 +88,6 @@ public abstract class Constant implements Cloneable, Node {
         return tag;
     }
 
-
     /**
      * @return String representation.
      */
@@ -100,7 +95,6 @@ public abstract class Constant implements Cloneable, Node {
     public String toString() {
         return Const.getConstantName(tag) + "[" + tag + "]";
     }
-
 
     /**
      * @return deep copy of this constant
@@ -113,7 +107,6 @@ public abstract class Constant implements Cloneable, Node {
         }
         return null;
     }
-
 
     @Override
     public Object clone() {
@@ -182,14 +175,12 @@ public abstract class Constant implements Cloneable, Node {
         return bcelComparator;
     }
 
-
     /**
      * @param comparator Comparison strategy object
      */
     public static void setComparator( final BCELComparator comparator ) {
         bcelComparator = comparator;
     }
-
 
     /**
      * Returns value as defined by given BCELComparator strategy.
@@ -202,7 +193,6 @@ public abstract class Constant implements Cloneable, Node {
     public boolean equals( final Object obj ) {
         return bcelComparator.equals(this, obj);
     }
-
 
     /**
      * Returns value as defined by given BCELComparator strategy.
