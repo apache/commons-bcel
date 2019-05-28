@@ -74,7 +74,6 @@ public final class ConstantUtf8 extends Constant {
 
         // Not static so that unit test can change the value before instantiating them
         int maxCachedSize =  Integer.getInteger(MAX_CACHED_SIZE_KEY, 0);
-        System.out.println("maxCachedSize" + maxCachedSize);
         return maxCachedSize > 0 ? cachingGenerator : defaultGenerator;
     }
 
