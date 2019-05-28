@@ -49,6 +49,7 @@ public abstract class Constant implements Cloneable, Node {
             return THIS.toString().hashCode();
         }
     };
+
     /* In fact this tag is redundant since we can distinguish different
      * `Constant' objects by their type, i.e., via `instanceof'. In some
      * places we will use the tag for switch()es anyway.
@@ -123,9 +124,8 @@ public abstract class Constant implements Cloneable, Node {
         }
     }
 
-
     /**
-     * Read one constant from the given input, the type depends on a tag byte.
+     * Reads one constant from the given input, the type depends on a tag byte.
      *
      * @param dataInput Input stream
      * @return Constant object
@@ -192,7 +192,7 @@ public abstract class Constant implements Cloneable, Node {
 
 
     /**
-     * Return value as defined by given BCELComparator strategy.
+     * Returns value as defined by given BCELComparator strategy.
      * By default two Constant objects are said to be equal when
      * the result of toString() is equal.
      *
@@ -205,7 +205,7 @@ public abstract class Constant implements Cloneable, Node {
 
 
     /**
-     * Return value as defined by given BCELComparator strategy.
+     * Returns value as defined by given BCELComparator strategy.
      * By default return the hashcode of the result of toString().
      *
      * @see java.lang.Object#hashCode()
