@@ -71,11 +71,11 @@ Enver Haase
 September 2001
 \layout Publishers
 
-Freie Universität Berlin 
+Freie Universitï¿½t Berlin 
 \newline 
-Institut für Informatik
+Institut fï¿½r Informatik
 \newline 
-Takustraße 9
+Takustraï¿½e 9
 \newline 
 D-14195 Berlin
 \layout Lowertitleback
@@ -91,7 +91,7 @@ Revision
 $Id$
 \layout Minisec
 
-Erklärung
+Erklï¿½rung
 \begin_float footnote 
 \layout Standard
 
@@ -104,8 +104,8 @@ Diplomarbeit
 \end_float 
 \layout Standard
 
-Hiermit versichere ich, die vorliegende Diplomarbeit selbständig und ohne
- fremde Hilfe verfaßt zu haben.
+Hiermit versichere ich, die vorliegende Diplomarbeit selbstï¿½ndig und ohne
+ fremde Hilfe verfaï¿½t zu haben.
  Es wurden nur die in der Bibliographie angegebenen Quellen benutzt.
 \layout Minisec
 
@@ -126,14 +126,14 @@ Diplomarbeit
 \end_float 
 \layout Standard
 
-Während der Anfertigung dieser Diplomarbeit wurde ich von Prof.
+Wï¿½hrend der Anfertigung dieser Diplomarbeit wurde ich von Prof.
  Dr.
  Elfriede Fehr und Dipl.-Inform.
- Markus Dahm betreut, wofür ich mich an dieser Stelle herzlich bedanke.
+ Markus Dahm betreut, wofï¿½r ich mich an dieser Stelle herzlich bedanke.
 \layout Standard
 
 Desweiteren bedanke ich mich bei Keith Seymour, der mir eine Reihe sprachspezifi
-scher Verbesserungsvorschläge sandte.
+scher Verbesserungsvorschlï¿½ge sandte.
 \layout Minisec
 
 Autor
@@ -146,7 +146,7 @@ Author
 
 Enver Haase
 \newline 
-Gubener Straße 18
+Gubener Straï¿½e 18
 \newline 
 D-10243 Berlin
 \newline 
@@ -323,14 +323,14 @@ run-time system
 
 A run-time system cannot safely assume that untrusted code is well-behaved.
  Code could cause stack overflows, stack underruns, or otherwise erroneous
- behaviour that may bring the run-time system into an undefined state --
+ behavior that may bring the run-time system into an undefined state --
  possibly allowing access to protected memory areas.
  One could protect the run-time system by letting it predict the effects
  of every single instruction just in time while actually executing it --
  but that would be too time-consuming to be applicable in practice.
 \layout Standard
 
-Therefore, good behaviour of program code has to be enforced 
+Therefore, good behavior of program code has to be enforced 
 \emph on 
 before
 \emph default 
@@ -472,7 +472,7 @@ To our knowledge, JustIce is the only implementation of a Java class file
 \begin_float footnote 
 \layout Standard
 
-In a personal communication, Robert Stärk told the author that there was
+In a personal communication, Robert Stï¿½rk told the author that there was
  a Java implementation of the verifier discussed in 
 \begin_inset LatexCommand \cite{JBook}
 
@@ -762,7 +762,7 @@ texttrademark
 
 \end_inset 
 
- and comparing the behaviour of JustIce with the behaviour of commercial
+ and comparing the behavior of JustIce with the behavior of commercial
  implementations of Sun Microsystems and IBM Corporation.
 \layout Standard
 
@@ -6099,7 +6099,7 @@ Sometimes implementation details are discussed in this chapter.
 
 \end_inset 
 
- was ambigous about some issue, the behaviour of Sun's JVM implementations
+ was ambigous about some issue, the behavior of Sun's JVM implementations
  was observed.
  The discussed details are part of the specification of the JustIce verifier.
 \layout Section
@@ -6173,7 +6173,7 @@ Observations show that most existing JVM verifiers
 \begin_float footnote 
 \layout Standard
 
-An example of a verifier with this behaviour is the one implemented in Sun's
+An example of a verifier with this behavior is the one implemented in Sun's
  Solaris port of the JVM, version 1.3.0_01.
 \end_float 
  ignore 
@@ -7681,11 +7681,11 @@ While the first example passes Sun's verifier, the second example is rejected.
 \emph on 
 subroutine
 \emph default 
- cannot be deducted from ther behaviour of Sun's verifier.
+ cannot be deducted from ther behavior of Sun's verifier.
 \layout Standard
 
 A new, clean specification had to be defined.
- Such a specification can of course not be compatible with the behaviour
+ Such a specification can of course not be compatible with the behavior
  of Sun's verifier in all corner cases.
 \layout Subsubsection
 
@@ -7708,7 +7708,7 @@ javac
 \emph on 
 javac
 \emph default 
-'s behaviour.
+'s behavior.
  This makes the definition compatible with a lot of existing code, but without
  violating the validity of far-reaching conclusions earned by exploiting
  a clean definition
@@ -8454,7 +8454,7 @@ Instance Initialization and Newly Created Objects
 It would be difficult to verify that a newly created instance is initialized
  exactly once, given all possible paths of execution flow in a method.
  Fortunately (from a verifier implementor's view), Sun puts constraints
- on object initialization that match the behaviour of the verifier --- instead
+ on object initialization that match the behavior of the verifier --- instead
  of putting sane constraints on object initialization and actually verifying
  them.
 \layout Standard
@@ -8552,7 +8552,7 @@ There are tests that have to be performed at run-time: for example, if an
 Implementation of the Verification Passes
 \layout Standard
 
-Occasionally, the behaviour of other verifier implementations was explained
+Occasionally, the behavior of other verifier implementations was explained
  in section 
 \begin_inset LatexCommand \ref{SpecPasses}
 
@@ -8571,11 +8571,11 @@ This is not a mistake; the Java Virtual Machine Specification, Second Edition
 
  is unfortunately not detailed enough to make a clean-room implementation
  of the JVM verifier possible.
- Having a close look at the behaviour of existing verifier implementations
+ Having a close look at the behavior of existing verifier implementations
  is sometimes necessary to interpret the specification correctly.
- For that reason, the behaviour of these implementations is part of the
+ For that reason, the behavior of these implementations is part of the
  specification of JustIce whereever appropriate.
- Still, there are some minor differences in behaviour between JustIce and
+ Still, there are some minor differences in behavior between JustIce and
  the traditional JVM built-in verifiers.
  These differences were observed by using the traditional verifiers, not
  by inspecting their source code.
@@ -8605,7 +8605,7 @@ The Byte Code Engineering Library (BCEL) presents an object oriented view
  Only minor changes were made to the BCEL to make it more verbose when exception
 al situations occur; i.e., when a garbled class file is loaded in.
  The BCEL uses Java's exception mechanism to signal these situations; JustIce
- transforms this behaviour into the behaviour expected by users of the Verificat
+ transforms this behavior into the behavior expected by users of the Verificat
 ion API (see section 
 \begin_inset LatexCommand \ref{Verification API}
 
@@ -8617,7 +8617,7 @@ ion API (see section
 Comparison to Sun's Implementation
 \layout Standard
 
-There does not seem to be any difference in behaviour between JustIce and
+There does not seem to be any difference in behavior between JustIce and
  the traditional verifiers.
  Still, this conviction is a result of black box tests so it might not be
  true in corner cases.
@@ -8838,14 +8838,14 @@ C
 C$I
 \emph default 
 .
- There is, however, no guarantee for that: this is only observed behaviour
+ There is, however, no guarantee for that: this is only observed behavior
  of javac.
  Please see section 
 \begin_inset LatexCommand \ref{InnerBug}
 
 \end_inset 
 
- for an example how this behaviour can lead to unexpected problems.
+ for an example how this behavior can lead to unexpected problems.
 \end_float 
  class files that are otherwise indistinguishable from normal class files.
 \layout Standard
@@ -8909,8 +8909,8 @@ List
 \family default 
  object already implies that the static constraints on instructions are
  satisfied.
- Similar to pass one, JustIce transforms the behaviour of BCEL's exception
- mechanism into the behaviour expected by users of the Verification API
+ Similar to pass one, JustIce transforms the behavior of BCEL's exception
+ mechanism into the behavior expected by users of the Verification API
  (see section 
 \begin_inset LatexCommand \ref{Verification API}
 
@@ -9433,7 +9433,7 @@ Similarly, the
 \emph default 
 ExecutionVisitor
 \family default 
- class contains information about the behaviour of every bytecode instruction.
+ class contains information about the behavior of every bytecode instruction.
  An instance of this class is used to model the effect of the bytecode instructi
 ons on a 
 \emph on 
@@ -9951,7 +9951,7 @@ JustIce was originally aimed to be as compatible to Sun's implementation
  perfect compatibility.
 \layout Standard
 
-Fortunately, it JustIce closely matches Sun's implementation in its behaviour.
+Fortunately, it JustIce closely matches Sun's implementation in its behavior.
  As a test case, the author verified the transitive hull of the referenced
  class files starting with the 
 \emph on 
@@ -11641,7 +11641,7 @@ interface}
 ).
 \layout Standard
 
-Stärk et al.
+Stï¿½rk et al.
  suggest the use of 
 \emph on 
 sets
@@ -11900,8 +11900,8 @@ The Kimera project
 \end_inset 
 
  was the first known project to implement a stand-alone Java verifier.
- The people behind the project had to test the behaviour of their verifier
- against the behaviour of the previous implementations.
+ The people behind the project had to test the behavior of their verifier
+ against the behavior of the previous implementations.
  Tests have been run in order to validate the Kimera verifier.
  These tests range from simply introducing random one-byte errors into class
  files and automatically running Kimera against other verifiers to elaborate
@@ -12360,8 +12360,8 @@ The implementation of a provably correct verifier is not possible because
 \emph on 
 javac
 \emph default 
- produces or by redefining the verifier's behaviour, however, they are never
- one-to-one with the behaviour of the existing JVMs.
+ produces or by redefining the verifier's behavior, however, they are never
+ one-to-one with the behavior of the existing JVMs.
 \layout Standard
 
 Sun's specification does not define the term 
@@ -12444,7 +12444,7 @@ invokeinterface
 \layout Standard
 
 Still, there is another case where one would suspect the specification describes
- the behaviour of the verifier: on pages 147 and 148 of the specification
+ the behavior of the verifier: on pages 147 and 148 of the specification
  
 \begin_inset LatexCommand \cite{vmspec2}
 
@@ -12551,7 +12551,7 @@ In
 
 \end_inset 
 
-, Stärk and Schmid give a few code examples which are compiled correctly
+, Stï¿½rk and Schmid give a few code examples which are compiled correctly
  by the 
 \emph on 
 javac
@@ -12581,7 +12581,7 @@ javac
 
 \end_inset 
 
-Stärk and Schmid's Rejected Class, Java Language Version
+Stï¿½rk and Schmid's Rejected Class, Java Language Version
 \layout Standard
 
 
@@ -12704,7 +12704,7 @@ return i;
 
 \end_inset 
 
-Stärk and Schmid's Rejected Class, JVM Bytecode Version
+Stï¿½rk and Schmid's Rejected Class, JVM Bytecode Version
 \layout Standard
 
 
@@ -12868,7 +12868,7 @@ Localvariable 2 contains wrong type
 \newline 
 
 \family default 
-In his lectures, Stärk explains that the problem lies in the polymorphic
+In his lectures, Stï¿½rk explains that the problem lies in the polymorphic
  nature of JVM subroutines 
 \begin_inset LatexCommand \cite{JLectures}
 
@@ -12936,7 +12936,7 @@ unusable
 \family default 
 .
  This is the reason why JustIce does not reject the above bytecode, thus
- being slightly incompatible with the behaviour of other verifiers.
+ being slightly incompatible with the behavior of other verifiers.
 \layout Paragraph
 
 The Maximum Method Length May Be Exceeded
@@ -13145,7 +13145,7 @@ Also, they validated their verifier implementation and published several
 .
 \layout Subsection
 
-The Verifier by Stärk, Schmid and Börger
+The Verifier by Stï¿½rk, Schmid and Bï¿½rger
 \layout Standard
 
 In 
@@ -13619,7 +13619,7 @@ triangleright
 packages) into own programs.
 \layout Description
 
-Debugger A program used to investigate the behaviour of another program.
+Debugger A program used to investigate the behavior of another program.
  Often used to find and remove programming errors, so-called bugs.
 \layout Description
 
@@ -13764,7 +13764,7 @@ http://www.tydo.org
 \bibitem [BCEL98]{BCEL98}
 
 Markus Dahm: Byte Code Engineering with the BCEL API.
- Freie Universität Berlin, Institut für Informatik.
+ Freie Universitï¿½t Berlin, Institut fï¿½r Informatik.
  Technical Report B-17-98.
 \layout Bibliography
 \bibitem [BCEL-WWW]{BCEL-WWW}
@@ -13779,7 +13779,7 @@ http://bcel.sourceforge.net
 
 Cornelia Pusch: Proving the Soundness of a Java Bytecode Verifier Specification
  in Isabelle/HOL.
- Technische Universität München, Institut für Informatik.
+ Technische Universitï¿½t Mï¿½nchen, Institut fï¿½r Informatik.
  
 \newline 
 
@@ -13912,7 +13912,7 @@ http://jcp.org/aboutJava/communityprocess/final/jsr030/
 \layout Bibliography
 \bibitem [JBook]{JBook}
 
-Robert Stärk, Joachim Schmid, Egon Börger: Java
+Robert Stï¿½rk, Joachim Schmid, Egon Bï¿½rger: Java
 \latex latex 
 
 \backslash 
@@ -13936,8 +13936,8 @@ http://www.inf.ethz.ch/~jbook/
 \bibitem [JPaper]{JPaper}
 
 Robert F.
- Stärk, Joachim Schmid: Java bytecode verification is not possible.
- ETH Zürich, Department of Computer Science 2000.
+ Stï¿½rk, Joachim Schmid: Java bytecode verification is not possible.
+ ETH Zï¿½rich, Department of Computer Science 2000.
 \emph on 
 
 \newline 
@@ -13946,7 +13946,7 @@ http://www.inf.ethz.ch/~staerk/pdf/jbv00.pdf
 \bibitem [JLectures]{JLectures}
 
 Robert F.
- Stärk: Java and the JVM: Definition and Verification (37-474).
+ Stï¿½rk: Java and the JVM: Definition and Verification (37-474).
 \newline 
 
 \emph on 
@@ -13984,7 +13984,7 @@ Enver Haase: JustIce.
 texttrademark
 \latex default 
 \SpecialChar ~
-.Freie Universität Berlin, Takustraße 9, D-14195 Berlin; September 2001.
+.Freie Universitï¿½t Berlin, Takustraï¿½e 9, D-14195 Berlin; September 2001.
 \newline 
 
 \emph on 
@@ -14042,7 +14042,7 @@ http://www-kimera.cs.washington.edu
 \layout Bibliography
 \bibitem [Kimera-TestingJVM]{Kimera-TestingJVM}
 
-Emin Gün Sirer: Testing Java Virtual Machines.
+Emin Gï¿½n Sirer: Testing Java Virtual Machines.
  An Experience Report on Automatically Testing Java Virtual Machines.
  University of Washington, Dept.
  of Computer Science and Engineering.
@@ -14053,7 +14053,7 @@ http://kimera.cs.washington.edu
 \layout Bibliography
 \bibitem [Kimera-ProdGram]{Kimera-ProdGram}
 
-Emin Gün Sirer, Brian N.
+Emin Gï¿½n Sirer, Brian N.
  Bershad: Using Production Grammars in Software Testing.
  University of Washington, Department of Computer Science.
 \newline 
@@ -14142,7 +14142,7 @@ texttrademark
 \latex default 
 \SpecialChar ~
  Virtual Machine Instructions for Objects, Methods and Subroutines.
- Bremen Institute for Safe Systems (BISS), FB3 Informatik, Universität Bremen,
+ Bremen Institute for Safe Systems (BISS), FB3 Informatik, Universitï¿½t Bremen,
  D-28334 Bremen, Germany.
 \layout Bibliography
 \bibitem [SableVM-WWW]{SableVM-WWW}

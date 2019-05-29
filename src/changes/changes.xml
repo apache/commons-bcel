@@ -341,7 +341,7 @@ For full information about API changes please see the extended Clirr report:
         org.apache.bcel.util.InstructionFinder
       </action>
       <action issue="BCEL-115" type="fix">
-        Deleting all instructions of a list shows wrong behaviour.
+        Deleting all instructions of a list shows wrong behavior.
       </action>
       <action issue="BCEL-120" type="fix">
         Make BCEL JAR OSGi compatible.
