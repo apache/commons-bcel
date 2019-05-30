@@ -611,7 +611,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             }
             buf.append('\n');
         }
-        buf.append("filename\t\t").append(file_name).append('\n');
+        buf.append("file name\t\t").append(file_name).append('\n');
         buf.append("compiled from\t\t").append(source_file_name).append('\n');
         buf.append("compiler version\t").append(major).append(".").append(minor).append('\n');
         buf.append("access flags\t\t").append(super.getAccessFlags()).append('\n');

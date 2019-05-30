@@ -835,16 +835,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             checkIndex(obj, obj.getSourceFileIndex(), CONST_Utf8);
 
-            final String sourcefilename = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); //==obj.getSourceFileName() ?
-            final String sourcefilenamelc = sourcefilename.toLowerCase(Locale.ENGLISH);
+            final String sourceFileName = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); //==obj.getSourceFileName() ?
+            final String sourceFileNameLc = sourceFileName.toLowerCase(Locale.ENGLISH);
 
-            if (    (sourcefilename.indexOf('/') != -1) ||
-                        (sourcefilename.indexOf('\\') != -1) ||
-                        (sourcefilename.indexOf(':') != -1) ||
-                        (sourcefilenamelc.lastIndexOf(".java") == -1)    ) {
+            if (    (sourceFileName.indexOf('/') != -1) ||
+                        (sourceFileName.indexOf('\\') != -1) ||
+                        (sourceFileName.indexOf(':') != -1) ||
+                        (sourceFileNameLc.lastIndexOf(".java") == -1)    ) {
                 addMessage("SourceFile attribute '"+tostring(obj)+
                     "' has a funny name: remember not to confuse certain parsers working on javap's output. Also, this name ('"+
-                    sourcefilename+"') is considered an unqualified (simple) file name only.");
+                    sourceFileName+"') is considered an unqualified (simple) file name only.");
             }
         }
         @Override
