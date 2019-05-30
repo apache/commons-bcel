@@ -22,7 +22,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
- * @version $Id: ElementValue
  * @since 6.0
  */
 public abstract class ElementValue

@@ -24,7 +24,6 @@ import java.io.IOException;
 /**
  * base class for parameter annotations
  *
- * @version $Id: ParameterAnnotations
  * @since 6.0
  */
 public abstract class ParameterAnnotations extends Attribute {

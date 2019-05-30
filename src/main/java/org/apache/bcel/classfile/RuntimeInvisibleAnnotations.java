@@ -27,7 +27,6 @@ import org.apache.bcel.Const;
  * represents an annotation that is represented in the class file but is not
  * provided to the JVM.
  *
- * @version $Id: RuntimeInvisibleAnnotations
  * @since 6.0
  */
 public class RuntimeInvisibleAnnotations extends Annotations
