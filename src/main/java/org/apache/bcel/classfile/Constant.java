@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 
+import java.util.function.Function;
 import org.apache.bcel.Const;
 import org.apache.bcel.util.BCELComparator;
 
@@ -48,6 +49,15 @@ public abstract class Constant implements Cloneable, Node {
             return THIS.toString().hashCode();
         }
     };
+
+    // Switch caching ConstantUtf8 or not; no caching by default.
+    // Using getInstance(String) rather than getInstance(DataInput) which throws IOException and
+    // thus cannot come here.
+    // Accessing ConstantUtf8 from this superclass may cause deadlock in multithreaded environment,
+    // but BCEL was (deliberately) not designed for thread safety.
+    private static final Function<String, ConstantUtf8> constantUtf8Generator =
+        Integer.getInteger(ConstantUtf8.CONSTANT_UTF8_MAX_CACHED_SIZE_KEY, 0) > 0
+            ? ConstantUtf8::getCachedInstance : ConstantUtf8::getInstance;
 
     /* In fact this tag is redundant since we can distinguish different
      * `Constant' objects by their type, i.e., via `instanceof'. In some
@@ -149,7 +159,7 @@ public abstract class Constant implements Cloneable, Node {
         case Const.CONSTANT_NameAndType:
             return new ConstantNameAndType(dataInput);
         case Const.CONSTANT_Utf8:
-            return ConstantUtf8.getInstance(dataInput);
+            return constantUtf8Generator.apply(dataInput.readUTF());
         case Const.CONSTANT_MethodHandle:
             return new ConstantMethodHandle(dataInput);
         case Const.CONSTANT_MethodType:
