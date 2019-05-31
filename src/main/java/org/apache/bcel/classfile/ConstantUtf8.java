@@ -43,9 +43,11 @@ public final class ConstantUtf8 extends Constant {
     private static volatile int skipped = 0;
     private static volatile int created = 0;
 
+    static final String CONSTANT_UTF8_MAX_CACHED_SIZE_KEY = "bcel.maxcached.size";
     // Set the size to 0 or below to skip caching entirely
     private static final int MAX_CACHED_SIZE =
-            Integer.getInteger("bcel.maxcached.size", 200).intValue();// CHECKSTYLE IGNORE MagicNumber
+            Integer.getInteger(
+                CONSTANT_UTF8_MAX_CACHED_SIZE_KEY, 200).intValue();// CHECKSTYLE IGNORE MagicNumber
     private static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
 
 
