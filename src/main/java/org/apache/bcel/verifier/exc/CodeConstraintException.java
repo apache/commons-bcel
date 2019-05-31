@@ -22,7 +22,6 @@ package org.apache.bcel.verifier.exc;
  * a class file does not pass the verification pass 3. Note that the pass 3 used by
  * "JustIce" involves verification that is usually delayed to pass 4.
  *
- * @version $Id$
  */
 public abstract class CodeConstraintException extends VerificationException{
     private static final long serialVersionUID = -7265388214714996640L;

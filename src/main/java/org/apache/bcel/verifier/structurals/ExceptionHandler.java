@@ -26,7 +26,6 @@ import org.apache.bcel.generic.ObjectType;
  * representing a subclass of java.lang.Throwable and the instruction
  * the handler starts off (represented by an InstructionContext).
  *
- * @version $Id$
  */
 public class ExceptionHandler{
     /** The type of the exception to catch. NULL means ANY. */

@@ -46,7 +46,6 @@ import org.apache.bcel.Const;
  *   is {@code 200}. </dd>
  * </dl>
  *
- * @version $Id$
  * @see     Constant
  */
 public final class ConstantUtf8 extends Constant {

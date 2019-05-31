@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * DNEG - Negate double
  * <PRE>Stack: ..., value.word1, value.word2 -&gt; ..., result.word1, result.word2</PRE>
  *
- * @version $Id$
  */
 public class DNEG extends ArithmeticInstruction {
 

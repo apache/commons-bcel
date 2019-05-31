@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * Denote entity that refers to an index, e.g. local variable instructions,
  * RET, CPInstruction, etc.
  *
- * @version $Id$
  */
 public interface IndexedInstruction {
 

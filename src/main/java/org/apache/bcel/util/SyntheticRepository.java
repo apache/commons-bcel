@@ -22,13 +22,14 @@ import java.util.Map;
 
 /**
  * This repository is used in situations where a Class is created outside the realm of a ClassLoader. Classes are loaded from the file systems using the paths
- * specified in the given class path. By default, this is the value returned by ClassPath.getClassPath(). <br>
+ * specified in the given class path. By default, this is the value returned by ClassPath.getClassPath().
+ * <p>
  * This repository uses a factory design, allowing it to maintain a collection of different classpaths, and as such It is designed to be used as a singleton per
  * classpath.
+ * </p>
  *
  * @see org.apache.bcel.Repository
  *
- * @version $Id$
  */
 public class SyntheticRepository extends MemorySensitiveClassPathRepository {
 

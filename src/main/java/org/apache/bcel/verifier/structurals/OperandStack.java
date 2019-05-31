@@ -31,7 +31,6 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  * [It's used an an operand stack substitute.]
  * Elements of this stack are {@link Type} objects.
  *
- * @version $Id$
  */
 public class OperandStack implements Cloneable {
 

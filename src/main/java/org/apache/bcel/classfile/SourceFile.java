@@ -29,7 +29,6 @@ import org.apache.bcel.Const;
  * should appear per classfile.  The intention of this class is that it is
  * instantiated from the <em>Attribute.readAttribute()</em> method.
  *
- * @version $Id$
  * @see     Attribute
  */
 public final class SourceFile extends Attribute {

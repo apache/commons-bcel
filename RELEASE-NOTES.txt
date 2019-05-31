@@ -384,7 +384,7 @@ o BCEL-108: RuntimeVisible Annotations duplicated.
 o BCEL-112: ARRAYLENGTH incorrectly not StackConsumer.
 o BCEL-114: Error in method search() defined in
             org.apache.bcel.util.InstructionFinder
-o BCEL-115: Deleting all instructions of a list shows wrong behaviour.
+o BCEL-115: Deleting all instructions of a list shows wrong behavior.
 o BCEL-120: Make BCEL JAR OSGi compatible.
 o BCEL-122: ArrayIndexOutOfBoundsException thrown from TABLESWITCH.initFromFile.
 o BCEL-124: tableswitch/lookupswitch invalid alignment of 4-byte operands.

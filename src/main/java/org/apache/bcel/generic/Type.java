@@ -28,7 +28,6 @@ import org.apache.bcel.classfile.Utility;
  * Abstract super class for all possible java types, namely basic types
  * such as int, object types like String and array types, e.g. int[]
  *
- * @version $Id$
  */
 public abstract class Type {
 

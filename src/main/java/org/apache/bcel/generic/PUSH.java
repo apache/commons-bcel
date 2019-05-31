@@ -23,7 +23,6 @@ import org.apache.bcel.Const;
  * Wrapper class for push operations, which are implemented either as BIPUSH,
  * LDC or xCONST_n instructions.
  *
- * @version $Id$
  */
 public final class PUSH implements CompoundInstruction, VariableLengthInstruction, InstructionConstants {
 

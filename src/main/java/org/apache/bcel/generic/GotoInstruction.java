@@ -20,7 +20,6 @@ package org.apache.bcel.generic;
 /**
  * Super class for GOTO
  *
- * @version $Id$
  */
 public abstract class GotoInstruction extends BranchInstruction implements UnconditionalBranch {
 

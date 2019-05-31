@@ -41,7 +41,6 @@ import java.util.List;
  * That means, if you really want a new verification run of a certain
  * pass you must use a new instance of a given PassVerifier.
  *
- * @version $Id$
  * @see Verifier
  * @see #verify()
  */

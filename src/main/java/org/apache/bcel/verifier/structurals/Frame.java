@@ -23,7 +23,6 @@ package org.apache.bcel.verifier.structurals;
  * This class represents a JVM execution frame; that means,
  * a local variable array and an operand stack.
  *
- * @version $Id$
  */
 
 public class Frame{

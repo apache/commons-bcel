@@ -28,7 +28,6 @@ import org.apache.bcel.classfile.Attribute;
  * Super class for FieldGen and MethodGen objects, since they have
  * some methods in common!
  *
- * @version $Id$
  */
 public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAndTyped, Cloneable {
 

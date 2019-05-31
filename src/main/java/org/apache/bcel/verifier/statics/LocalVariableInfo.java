@@ -29,7 +29,6 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
  * a given slot (== index). This information
  * often changes in course of byte code offsets.
  *
- * @version $Id$
  */
 public class LocalVariableInfo{
 

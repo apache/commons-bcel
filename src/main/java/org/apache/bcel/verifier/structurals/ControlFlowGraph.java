@@ -39,7 +39,6 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 /**
  * This class represents a control flow graph of a method.
  *
- * @version $Id$
  */
 public class ControlFlowGraph{
 

@@ -22,7 +22,6 @@ import org.apache.bcel.Const;
 /**
  * Super class for all objects that have modifiers like private, final, ... I.e. classes, fields, and methods.
  *
- * @version $Id$
  */
 public abstract class AccessFlags {
 

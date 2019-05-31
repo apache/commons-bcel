@@ -33,7 +33,6 @@ import org.apache.bcel.verifier.exc.Utility;
  * More detailed information is to be found at the do_verify() method's
  * documentation.
  *
- * @version $Id$
  * @see #do_verify()
  */
 public final class Pass1Verifier extends PassVerifier{
@@ -176,7 +175,7 @@ public final class Pass1Verifier extends PassVerifier{
         if (jc != null) {
             return VerificationResult.VR_OK;
         }
-        //TODO: Maybe change Repository's behaviour to throw a LoadingException instead of just returning "null"
+        //TODO: Maybe change Repository's behavior to throw a LoadingException instead of just returning "null"
         //      if a class file cannot be found or in another way be looked up.
         return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Repository.lookup() failed. FILE NOT FOUND?");
     }

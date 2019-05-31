@@ -20,7 +20,6 @@ package org.apache.bcel.generic;
 /**
  * Denote an instruction that may consume a value from the stack.
  *
- * @version $Id$
  */
 public interface StackConsumer {
 

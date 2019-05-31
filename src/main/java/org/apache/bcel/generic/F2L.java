@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * F2L - Convert float to long
  * <PRE>Stack: ..., value -&gt; ..., result.word1, result.word2</PRE>
  *
- * @version $Id$
  */
 public class F2L extends ConversionInstruction {
 

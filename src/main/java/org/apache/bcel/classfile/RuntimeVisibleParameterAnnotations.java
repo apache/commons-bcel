@@ -26,7 +26,6 @@ import org.apache.bcel.Const;
  * Represents a parameter annotation that is represented in the class file
  * and is provided to the JVM.
  *
- * @version $Id: RuntimeVisibleParameterAnnotations
  * @since 6.0
  */
 public class RuntimeVisibleParameterAnnotations extends ParameterAnnotations {

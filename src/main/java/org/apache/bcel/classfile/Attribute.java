@@ -34,7 +34,6 @@ import org.apache.bcel.Const;
  * <em>Synthetic</em> attributes are supported. The <em>Unknown</em>
  * attribute stands for non-standard-attributes.
  *
- * @version $Id$
  * @see ConstantValue
  * @see SourceFile
  * @see Code

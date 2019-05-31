@@ -25,7 +25,6 @@ import org.apache.bcel.classfile.JavaClass;
  * Repository.setRepository method.
  *
  * @see org.apache.bcel.Repository
- * @version $Id$
  */
 public interface Repository {
 

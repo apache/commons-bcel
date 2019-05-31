@@ -80,7 +80,6 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
  * More detailed information is to be found at the do_verify()
  * method's documentation.
  *
- * @version $Id$
  * @see #do_verify()
  */
 public final class Pass2Verifier extends PassVerifier implements Constants {
@@ -263,7 +262,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         addMessage("Method '" + nameAndSig + "' in class '" + hashmap.get(nameAndSig) +
                             "' overrides the final (not-overridable) definition in class '" + jc.getClassName() +
                             "'. This is okay, as the original definition was private; however this constraint leverage"+
-                            " was introduced by JLS 8.4.6 (not vmspec2) and the behaviour of the Sun verifiers.");
+                            " was introduced by JLS 8.4.6 (not vmspec2) and the behavior of the Sun verifiers.");
                     } else {
                         if (!method.isStatic()) { // static methods don't inherit
                             hashmap.put(nameAndSig, jc.getClassName());
@@ -836,16 +835,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             checkIndex(obj, obj.getSourceFileIndex(), CONST_Utf8);
 
-            final String sourcefilename = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); //==obj.getSourceFileName() ?
-            final String sourcefilenamelc = sourcefilename.toLowerCase(Locale.ENGLISH);
+            final String sourceFileName = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); //==obj.getSourceFileName() ?
+            final String sourceFileNameLc = sourceFileName.toLowerCase(Locale.ENGLISH);
 
-            if (    (sourcefilename.indexOf('/') != -1) ||
-                        (sourcefilename.indexOf('\\') != -1) ||
-                        (sourcefilename.indexOf(':') != -1) ||
-                        (sourcefilenamelc.lastIndexOf(".java") == -1)    ) {
+            if (    (sourceFileName.indexOf('/') != -1) ||
+                        (sourceFileName.indexOf('\\') != -1) ||
+                        (sourceFileName.indexOf(':') != -1) ||
+                        (sourceFileNameLc.lastIndexOf(".java") == -1)    ) {
                 addMessage("SourceFile attribute '"+tostring(obj)+
                     "' has a funny name: remember not to confuse certain parsers working on javap's output. Also, this name ('"+
-                    sourcefilename+"') is considered an unqualified (simple) file name only.");
+                    sourceFileName+"') is considered an unqualified (simple) file name only.");
             }
         }
         @Override

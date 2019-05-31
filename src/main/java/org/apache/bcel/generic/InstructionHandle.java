@@ -37,7 +37,6 @@ import org.apache.bcel.classfile.Utility;
  * can traverse the list via an Enumeration returned by
  * InstructionList.elements().
  *
- * @version $Id$
  * @see Instruction
  * @see BranchHandle
  * @see InstructionList

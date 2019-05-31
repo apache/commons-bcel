@@ -25,7 +25,6 @@ package org.apache.bcel.verifier.exc;
  * LocalVariableTable entries in the Code attribute of a certain
  * Method object.
  *
- * @version $Id$
  */
 public class LocalVariableInfoInconsistentException extends ClassConstraintException{
     private static final long serialVersionUID = -2833180480144304190L;

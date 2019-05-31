@@ -54,7 +54,6 @@ import org.apache.bcel.util.BCELComparator;
  * use the `removeNOPs' method to get rid off them.
  * The resulting method object can be obtained via the `getMethod()' method.
  *
- * @version $Id$
  * @see     InstructionList
  * @see     Method
  */

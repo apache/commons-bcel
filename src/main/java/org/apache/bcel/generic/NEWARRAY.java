@@ -28,7 +28,6 @@ import org.apache.bcel.util.ByteSequence;
  * <PRE>Stack: ..., count -&gt; ..., arrayref</PRE>
  * type must be one of T_INT, T_SHORT, ...
  *
- * @version $Id$
  */
 public class NEWARRAY extends Instruction implements AllocationInstruction, ExceptionThrower,
         StackProducer {

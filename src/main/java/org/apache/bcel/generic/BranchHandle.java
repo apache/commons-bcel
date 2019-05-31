@@ -26,7 +26,6 @@ package org.apache.bcel.generic;
  * @see InstructionHandle
  * @see Instruction
  * @see InstructionList
- * @version $Id$
  */
 public final class BranchHandle extends InstructionHandle {
 

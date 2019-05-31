@@ -33,7 +33,6 @@ import org.apache.bcel.util.ByteSequence;
  * @see LDC
  * @see INVOKEVIRTUAL
  *
- * @version $Id$
  */
 public abstract class CPInstruction extends Instruction implements TypedInstruction,
         IndexedInstruction {

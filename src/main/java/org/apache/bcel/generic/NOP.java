@@ -20,7 +20,6 @@ package org.apache.bcel.generic;
 /**
  * NOP - Do nothing
  *
- * @version $Id$
  */
 public class NOP extends Instruction {
 

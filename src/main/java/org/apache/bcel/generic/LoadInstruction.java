@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * Denotes an unparameterized instruction to load a value from a local
  * variable, e.g. ILOAD.
  *
- * @version $Id$
  */
 public abstract class LoadInstruction extends LocalVariableInstruction implements PushInstruction {
 

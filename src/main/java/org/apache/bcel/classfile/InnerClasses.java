@@ -29,7 +29,6 @@ import org.apache.bcel.Const;
  * to the source file of this class.
  * It is instantiated from the <em>Attribute.readAttribute()</em> method.
  *
- * @version $Id$
  * @see     Attribute
  */
 public final class InnerClasses extends Attribute {

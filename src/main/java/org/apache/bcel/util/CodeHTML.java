@@ -40,7 +40,6 @@ import org.apache.bcel.classfile.Utility;
 /**
  * Convert code into HTML file.
  *
- * @version $Id$
  *
  */
 final class CodeHTML {

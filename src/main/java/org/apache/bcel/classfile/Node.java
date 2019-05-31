@@ -20,7 +20,6 @@ package org.apache.bcel.classfile;
 /**
  * Denote class to have an accept method();
  *
- * @version $Id$
  */
 public interface Node {
 

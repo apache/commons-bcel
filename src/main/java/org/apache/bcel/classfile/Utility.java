@@ -40,7 +40,6 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * Utility functions that do not really belong to any class in particular.
  *
- * @version $Id$
  */
 // @since 6.0 methods are no longer final
 public abstract class Utility {

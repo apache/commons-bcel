@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * Denotes an unparameterized instruction to produce a value on top of the stack,
  * such as ILOAD, LDC, SIPUSH, DUP, ICONST, etc.
  *
- * @version $Id$
 
  * @see ILOAD
  * @see ICONST

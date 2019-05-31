@@ -25,7 +25,6 @@ package org.apache.bcel.verifier.exc;
  * 2nd edition, 4.8.1, pages 133-137. The static constraints checking part of pass 3
  * is called pass 3a in JustIce.
  *
- * @version $Id$
  */
 public abstract class StaticCodeConstraintException extends CodeConstraintException{
     private static final long serialVersionUID = 3858523065007725128L;

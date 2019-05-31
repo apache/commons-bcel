@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * FSUB - Substract floats
  * <PRE>Stack: ..., value1, value2 -&gt; result</PRE>
  *
- * @version $Id$
  */
 public class FSUB extends ArithmeticInstruction {
 

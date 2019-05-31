@@ -52,7 +52,6 @@ import org.apache.bcel.classfile.Utility;
  * method in the Method's frame will jump to the appropriate method in
  * the Code frame.
  *
- * @version $Id$
  */
 public class Class2HTML implements Constants {
 

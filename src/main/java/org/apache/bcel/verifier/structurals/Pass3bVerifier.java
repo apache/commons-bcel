@@ -53,7 +53,6 @@ import org.apache.bcel.verifier.exc.VerifierConstraintViolatedException;
  * More detailed information is to be found at the do_verify() method's
  * documentation.
  *
- * @version $Id$
  * @see #do_verify()
  */
 

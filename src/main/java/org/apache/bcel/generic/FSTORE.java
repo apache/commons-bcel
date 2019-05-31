@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * FSTORE - Store float into local variable
  * <PRE>Stack: ..., value -&gt; ... </PRE>
  *
- * @version $Id$
  */
 public class FSTORE extends StoreInstruction {
 

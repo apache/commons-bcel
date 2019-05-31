@@ -29,7 +29,6 @@ import java.util.Vector;
  * The table consists of `SIZE' fields which have `SLOTS' subfields. Thus 
  * the maximum number of storable items is `SLOTS' * `SIZE'.
  *
- * @version $Id$
  */
 public class Environment implements Cloneable {
   private static final int SIZE  = 127; // Prime number large enough for most cases

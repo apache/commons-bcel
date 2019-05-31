@@ -25,7 +25,6 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * IINC - Increment local variable by constant
  *
- * @version $Id$
  */
 public class IINC extends LocalVariableInstruction {
 
@@ -46,7 +45,7 @@ public class IINC extends LocalVariableInstruction {
      * @param c increment factor
      */
     public IINC(final int n, final int c) {
-        super(); // Default behaviour of LocalVariableInstruction causes error
+        super(); // Default behavior of LocalVariableInstruction causes error
         super.setOpcode(org.apache.bcel.Const.IINC);
         super.setLength((short) 3);
         setIndex(n); // May set wide as side effect

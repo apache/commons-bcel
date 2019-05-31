@@ -27,7 +27,6 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
  * the names and the types of the local variables in
  * a given method.
  *
- * @version $Id$
  */
 public class LocalVariablesInfo{
 

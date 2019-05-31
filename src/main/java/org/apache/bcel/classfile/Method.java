@@ -30,7 +30,6 @@ import org.apache.bcel.util.BCELComparator;
  * for a method in the class. See JVM specification for details.
  * A method has access flags, a name, a signature and a number of attributes.
  *
- * @version $Id$
  */
 public final class Method extends FieldOrMethod {
 

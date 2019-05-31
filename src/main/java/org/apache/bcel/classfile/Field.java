@@ -29,7 +29,6 @@ import org.apache.bcel.util.BCELComparator;
  * This class represents the field info structure, i.e., the representation
  * for a variable in the class. See JVM specification for details.
  *
- * @version $Id$
  */
 public final class Field extends FieldOrMethod {
 

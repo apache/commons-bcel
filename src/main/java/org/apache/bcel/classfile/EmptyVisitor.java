@@ -22,7 +22,6 @@ package org.apache.bcel.classfile;
  * with the DescendingVisitor class, e.g. By courtesy of David Spencer.
  *
  * @see DescendingVisitor
- * @version $Id$
  */
 public class EmptyVisitor implements Visitor
 {

@@ -61,7 +61,6 @@ import org.apache.bcel.generic.Type;
  * A helper class for BCELifier.
  *
  * @see BCELifier
- * @version $Id$
  */
 class BCELFactory extends EmptyVisitor {
 

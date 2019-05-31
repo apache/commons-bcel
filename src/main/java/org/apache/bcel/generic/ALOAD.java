@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * ALOAD - Load reference from local variable
  * <PRE>Stack: ... -&gt; ..., objectref</PRE>
  *
- * @version $Id$
  */
 public class ALOAD extends LoadInstruction {
 

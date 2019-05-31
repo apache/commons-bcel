@@ -43,7 +43,7 @@ import org.apache.bcel.generic.*;
  * visitIADD(IADD o), then there are two stack slots popped and one
  * stack slot containing a Type.INT is pushed (where you could also
  * pop only one slot if you know there are two Type.INT on top of the
- * stack). Monitor-specific behaviour is not simulated.</p>
+ * stack). Monitor-specific behavior is not simulated.</p>
  *
  * <b>Conventions:</b>
  *
@@ -55,7 +55,6 @@ import org.apache.bcel.generic.*;
  * <p>If a two-slot type is stored into a local variable, the next variable
  * is given the type Type.UNKNOWN.</p>
  *
- * @version $Id$
  * @see #visitDSTORE(DSTORE o)
  * @see InstConstraintVisitor
  */

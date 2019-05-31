@@ -38,7 +38,6 @@ import org.apache.bcel.generic.PUSH;
  * Read class file(s) and patch all of its methods, so that they print
  * "hello" and their name and signature before doing anything else.
  *
- * @version $Id$
  */
 public final class helloify implements Constants {
 

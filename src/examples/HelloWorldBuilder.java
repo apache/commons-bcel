@@ -58,7 +58,6 @@ import org.apache.bcel.generic.Type;
  * }
  * </PRE>
  *
- * @version $Id$
  */
 public class HelloWorldBuilder {
     public static void main(String[] argv) {

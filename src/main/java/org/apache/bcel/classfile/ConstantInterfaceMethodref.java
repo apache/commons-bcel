@@ -25,7 +25,6 @@ import org.apache.bcel.Const;
 /**
  * This class represents a constant pool reference to an interface method.
  *
- * @version $Id$
  */
 public final class ConstantInterfaceMethodref extends ConstantCP {
 

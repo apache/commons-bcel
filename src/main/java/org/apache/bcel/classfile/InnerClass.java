@@ -28,7 +28,6 @@ import org.apache.bcel.Const;
  * indices of the inner and outer classes, the name and the attributes
  * of the inner class.
  *
- * @version $Id$
  * @see InnerClasses
  */
 public final class InnerClass implements Cloneable, Node {

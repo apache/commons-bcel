@@ -48,7 +48,6 @@ import org.apache.bcel.classfile.Utility;
  * constructor. The default value contains "java.", "sun.",
  * "javax."</p>
  *
- * @version $Id$
  * @see JavaWrapper
  * @see ClassPath
  * @deprecated 6.0 Do not use - does not work
@@ -160,11 +159,12 @@ public class ClassLoader extends java.lang.ClassLoader {
      * token is considered to be a package name. You can encode your own
      * arguments into the subsequent string. You must ensure however not
      * to use any "illegal" characters, i.e., characters that may not
-     * appear in a Java class name too<br>
-     *
+     * appear in a Java class name too
+     * <p>
      * The default implementation interprets the string as a encoded compressed
      * Java class, unpacks and decodes it with the Utility.decode() method, and
      * parses the resulting byte array and returns the resulting JavaClass object.
+     * </p>
      *
      * @param class_name compressed byte code with "$$BCEL$$" in it
      */

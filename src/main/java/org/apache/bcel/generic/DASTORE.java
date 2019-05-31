@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * DASTORE -  Store into double array
  * <PRE>Stack: ..., arrayref, index, value.word1, value.word2 -&gt; ...</PRE>
  *
- * @version $Id$
  */
 public class DASTORE extends ArrayInstruction implements StackConsumer {
 

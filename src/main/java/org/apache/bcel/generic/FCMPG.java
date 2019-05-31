@@ -21,7 +21,6 @@ package org.apache.bcel.generic;
  * FCMPG - Compare floats: value1 &gt; value2
  * <PRE>Stack: ..., value1, value2 -&gt; ..., result</PRE>
  *
- * @version $Id$
  */
 public class FCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 

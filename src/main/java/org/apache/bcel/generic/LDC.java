@@ -28,7 +28,6 @@ import org.apache.bcel.util.ByteSequence;
  *
  * <PRE>Stack: ... -&gt; ..., item</PRE>
  *
- * @version $Id$
  */
 public class LDC extends CPInstruction implements PushInstruction, ExceptionThrower {
 
