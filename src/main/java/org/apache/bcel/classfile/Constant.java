@@ -21,8 +21,8 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Objects;
-
 import java.util.function.Function;
+
 import org.apache.bcel.Const;
 import org.apache.bcel.util.BCELComparator;
 
