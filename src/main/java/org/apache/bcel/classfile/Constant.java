@@ -52,7 +52,11 @@ public abstract class Constant implements Cloneable, Node {
         }
     };
 
-    // getInstance(DataInput) has IOException and cannot place here
+    // Switch caching ConstantUtf8 or not; no caching by default.
+    // Using getInstance(String) rather than getInstance(DataInput) which throws IOException and
+    // thus cannot come here.
+    // Accessing ConstantUtf8 from this superclass may cause deadlock in multithreaded environment,
+    // but BCEL was (deliberately) not designed for thread safety.
     private static final Function<String, ConstantUtf8> constantUtf8Generator =
         Integer.getInteger(ConstantUtf8.CONSTANT_UTF8_MAX_CACHED_SIZE_KEY, 0) > 0
             ? ConstantUtf8::getCachedInstance : ConstantUtf8::getInstance;
