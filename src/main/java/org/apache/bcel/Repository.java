@@ -37,21 +37,24 @@ public abstract class Repository {
     private static org.apache.bcel.util.Repository repository = SyntheticRepository.getInstance();
 
 
-    /** @return currently used repository instance
+    /** 
+     * @return currently used repository instance
      */
     public static org.apache.bcel.util.Repository getRepository() {
         return repository;
     }
 
 
-    /** Set repository instance to be used for class loading
+    /** 
+     * Sets repository instance to be used for class loading
      */
     public static void setRepository( final org.apache.bcel.util.Repository rep ) {
         repository = rep;
     }
 
 
-    /** Lookup class somewhere found on your CLASSPATH, or whereever the
+    /** 
+     * Lookups class somewhere found on your CLASSPATH, or whereever the
      * repository instance looks for it.
      *
      * @return class object for given fully qualified class name
@@ -64,7 +67,8 @@ public abstract class Repository {
 
 
     /**
-     * Try to find class source using the internal repository instance.
+     * Tries to find class source using the internal repository instance.
+     * 
      * @see Class
      * @return JavaClass object for given runtime class
      * @throws ClassNotFoundException if the class could not be found or
@@ -93,7 +97,8 @@ public abstract class Repository {
     }
 
 
-    /** Clear the repository.
+    /** 
+     * Clears the repository.
      */
     public static void clearCache() {
         repository.clear();
@@ -101,7 +106,7 @@ public abstract class Repository {
 
 
     /**
-     * Add clazz to repository if there isn't an equally named class already in there.
+     * Adds clazz to repository if there isn't an equally named class already in there.
      *
      * @return old entry in repository
      */
@@ -113,7 +118,7 @@ public abstract class Repository {
 
 
     /**
-     * Remove class with given (fully qualified) name from repository.
+     * Removes class with given (fully qualified) name from repository.
      */
     public static void removeClass( final String clazz ) {
         repository.removeClass(repository.findClass(clazz));
@@ -121,7 +126,7 @@ public abstract class Repository {
 
 
     /**
-     * Remove given class from repository.
+     * Removes given class from repository.
      */
     public static void removeClass( final JavaClass clazz ) {
         repository.removeClass(clazz);

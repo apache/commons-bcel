@@ -36,29 +36,29 @@ public class ClassPathRepository implements Repository {
     private ClassPath _path = null;
     private final Map<String, JavaClass> _loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
-    public ClassPathRepository(final ClassPath path) {
-        _path = path;
+    public ClassPathRepository(final ClassPath classPath) {
+        _path = classPath;
     }
 
     /**
-     * Store a new JavaClass instance into this Repository.
+     * Stores a new JavaClass instance into this Repository.
      */
     @Override
-    public void storeClass(final JavaClass clazz) {
-        _loadedClasses.put(clazz.getClassName(), clazz);
-        clazz.setRepository(this);
+    public void storeClass(final JavaClass javaClass) {
+        _loadedClasses.put(javaClass.getClassName(), javaClass);
+        javaClass.setRepository(this);
     }
 
     /**
-     * Remove class from repository
+     * Removes class from repository
      */
     @Override
-    public void removeClass(final JavaClass clazz) {
-        _loadedClasses.remove(clazz.getClassName());
+    public void removeClass(final JavaClass javaClass) {
+        _loadedClasses.remove(javaClass.getClassName());
     }
 
     /**
-     * Find an already defined (cached) JavaClass object by name.
+     * Finds an already defined (cached) JavaClass object by name.
      */
     @Override
     public JavaClass findClass(final String className) {
@@ -66,7 +66,7 @@ public class ClassPathRepository implements Repository {
     }
 
     /**
-     * Find a JavaClass object by name. If it is already in this Repository, the Repository version is returned. Otherwise, the Repository's classpath is
+     * Finds a JavaClass object by name. If it is already in this Repository, the Repository version is returned. Otherwise, the Repository's classpath is
      * searched for the class (and it is added to the Repository if found).
      *
      * @param className
@@ -93,7 +93,7 @@ public class ClassPathRepository implements Repository {
     }
 
     /**
-     * Find the JavaClass object for a runtime Class object. If a class with the same name is already in this Repository, the Repository version is returned.
+     * Finds the JavaClass object for a runtime Class object. If a class with the same name is already in this Repository, the Repository version is returned.
      * Otherwise, getResourceAsStream() is called on the Class object to find the class's representation. If the representation is found, it is added to the
      * Repository.
      *
@@ -124,10 +124,10 @@ public class ClassPathRepository implements Repository {
         }
     }
 
-    private JavaClass loadClass(final InputStream is, final String className) throws ClassNotFoundException {
+    private JavaClass loadClass(final InputStream inputStream, final String className) throws ClassNotFoundException {
         try {
-            if (is != null) {
-                final ClassParser parser = new ClassParser(is, className);
+            if (inputStream != null) {
+                final ClassParser parser = new ClassParser(inputStream, className);
                 final JavaClass clazz = parser.parse();
                 storeClass(clazz);
                 return clazz;
@@ -135,9 +135,9 @@ public class ClassPathRepository implements Repository {
         } catch (final IOException e) {
             throw new ClassNotFoundException("Exception while looking for class " + className + ": " + e, e);
         } finally {
-            if (is != null) {
+            if (inputStream != null) {
                 try {
-                    is.close();
+                    inputStream.close();
                 } catch (final IOException e) {
                     // ignored
                 }
@@ -155,7 +155,7 @@ public class ClassPathRepository implements Repository {
     }
 
     /**
-     * Clear all entries from cache.
+     * Clears all entries from cache.
      */
     @Override
     public void clear() {

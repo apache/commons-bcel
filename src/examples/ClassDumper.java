@@ -36,8 +36,6 @@ import org.apache.bcel.util.BCELifier;
  * Built using the BCEL libary.
  *
  */
-
-
 class ClassDumper {
 
     private FileImageInputStream file;
@@ -55,7 +53,7 @@ class ClassDumper {
     private Attribute[] attributes; // attributes defined in the class
 
     /**
-     * Parse class from the given stream.
+     * Parses class from the given stream.
      *
      * @param file Input stream
      * @param file_name File name
@@ -66,7 +64,7 @@ class ClassDumper {
     }
 
     /**
-     * Parse the given Java class file and return an object that represents
+     * Parses the given Java class file and return an object that represents
      * the contained data, i.e., constants, methods, fields and commands.
      * A <em>ClassFormatException</em> is raised, if the file is not a valid
      * .class file. (This does not include verification of the byte code as it
@@ -106,7 +104,7 @@ class ClassDumper {
     }
 
     /**
-     * Check whether the header of the file is ok.
+     * Checks whether the header of the file is ok.
      * Of course, this has to be the first action on successive file reads.
      * @throws  IOException
      * @throws  ClassFormatException
@@ -123,7 +121,7 @@ class ClassDumper {
     }
 
     /**
-     * Process major and minor version of compiler which created the file.
+     * Processes major and minor version of compiler which created the file.
      * @throws  IOException
      * @throws  ClassFormatException
      */
@@ -136,7 +134,7 @@ class ClassDumper {
     }
 
     /**
-     * Process constant pool entries.
+     * Processes constant pool entries.
      * @throws  IOException
      * @throws  ClassFormatException
      */
@@ -171,7 +169,7 @@ class ClassDumper {
     }
 
     /**
-     * Process information about the class and its super class.
+     * Processes information about the class and its super class.
      * @throws  IOException
      * @throws  ClassFormatException
      */
@@ -202,7 +200,7 @@ class ClassDumper {
     }
 
     /**
-     * Process information about the interfaces implemented by this class.
+     * Processes information about the interfaces implemented by this class.
      * @throws  IOException
      * @throws  ClassFormatException
      */
@@ -230,7 +228,7 @@ class ClassDumper {
     }
 
     /**
-     * Process information about the fields of the class, i.e., its variables.
+     * Processes information about the fields of the class, i.e., its variables.
      * @throws  IOException
      * @throws  ClassFormatException
      */
@@ -251,7 +249,7 @@ class ClassDumper {
     }
 
     /**
-     * Process information about the methods of the class.
+     * Processes information about the methods of the class.
      * @throws  IOException
      * @throws  ClassFormatException
      */
@@ -271,7 +269,7 @@ class ClassDumper {
     }
 
     /**
-     * Process information about the attributes of the class.
+     * Processes information about the attributes of the class.
      * @throws  IOException
      * @throws  ClassFormatException
      */
@@ -289,7 +287,7 @@ class ClassDumper {
     }
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      * @param file Input stream
      * @throws IOException
      * @throws ClassFormatException
@@ -347,18 +345,19 @@ class ClassDumper {
 
 class DumpClass {
 
-    public static void main (String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         if (args.length != 1) {
             throw new RuntimeException("Require file name as only argument");
         }
 
-        FileImageInputStream file = new FileImageInputStream(new File(args[0]));
+        try (FileImageInputStream file = new FileImageInputStream(new File(args[0]))) {
 
-        ClassDumper cd = new ClassDumper(file, args[0]);
-        cd.dump();
+            ClassDumper cd = new ClassDumper(file, args[0]);
+            cd.dump();
+        }
 
-        System.out.printf("End of Class Dump%n"); 
+        System.out.printf("End of Class Dump%n");
 
     }
 }
