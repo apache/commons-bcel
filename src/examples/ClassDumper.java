@@ -345,18 +345,19 @@ class ClassDumper {
 
 class DumpClass {
 
-    public static void main (String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         if (args.length != 1) {
             throw new RuntimeException("Require file name as only argument");
         }
 
-        FileImageInputStream file = new FileImageInputStream(new File(args[0]));
+        try (FileImageInputStream file = new FileImageInputStream(new File(args[0]))) {
 
-        ClassDumper cd = new ClassDumper(file, args[0]);
-        cd.dump();
+            ClassDumper cd = new ClassDumper(file, args[0]);
+            cd.dump();
+        }
 
-        System.out.printf("End of Class Dump%n"); 
+        System.out.printf("End of Class Dump%n");
 
     }
 }
