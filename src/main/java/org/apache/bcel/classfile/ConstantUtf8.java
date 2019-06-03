@@ -83,7 +83,7 @@ public final class ConstantUtf8 extends Constant {
     public static void clearCache() {
         CACHE_HOLDER.CACHE.clear();
     }
-
+    
     // for accesss by test code
     static void clearStats() {
         hits = considered = skipped = created = 0;
