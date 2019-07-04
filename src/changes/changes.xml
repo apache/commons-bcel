@@ -150,7 +150,7 @@ Source compatible - Yes, sort of;
 
 For full information about API changes please see the extended Clirr report:
 
-    http://commons.apache.org/bcel/clirr-report.html">
+    https://commons.apache.org/bcel/clirr-report.html">
       <action issue="BCEL-262" type="update" dev="britter" due-to="Mark Roberts">InvokeInstruction.getClassName(ConstantPoolGen)
                                           should not throw an exception when it detects an array.</action>
       <action issue="BCEL-237" type="fix" dev="sebb">non-empty final arrays should be private as they are mutable.</action>
@@ -269,7 +269,7 @@ For full information about API changes please see the extended Clirr report:
       </action>
       <action issue="BCEL-28" type="fix">
         Mistake in "Peephole optimizer" example
-        at http://commons.apache.org/bcel/manual.html
+        at https://commons.apache.org/bcel/manual.html
       </action>
       <action issue="BCEL-74" type="fix">
         BCEL cannot be used as java.system.class.loader.

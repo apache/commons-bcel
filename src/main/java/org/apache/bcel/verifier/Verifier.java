@@ -192,7 +192,7 @@ public class Verifier {
      */
     public static void main( final String[] args ) {
         System.out
-                .println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<http://commons.apache.org/bcel>\n");
+                .println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<https://commons.apache.org/bcel>\n");
         for (int k = 0; k < args.length; k++) {
             try {
                 if (args[k].endsWith(".class")) {

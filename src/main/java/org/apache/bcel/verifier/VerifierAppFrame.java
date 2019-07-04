@@ -392,7 +392,7 @@ public class VerifierAppFrame extends JFrame {
                 .showMessageDialog(
                         this,
                         "JustIce is a Java class file verifier.\n"+
-                        "It was implemented by Enver Haase in 2001, 2002.\n<http://commons.apache.org/bcel/>",
+                        "It was implemented by Enver Haase in 2001, 2002.\n<https://commons.apache.org/bcel/>",
                         JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
     }
 

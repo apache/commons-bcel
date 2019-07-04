@@ -80,7 +80,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     @Override
     public void visitJavaClass(JavaClass clazz) {
         out.println(";; Produced by JasminVisitor (BCEL)");
-        out.println(";; http://commons.apache.org/bcel/");
+        out.println(";; https://commons.apache.org/bcel/");
         out.println(";; " + new Date() + "\n");
 
         out.println(".source " + clazz.getSourceFileName());

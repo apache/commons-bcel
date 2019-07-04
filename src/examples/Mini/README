@@ -4,7 +4,7 @@
 Mini is a very simple (semi-functional) language that I wrote to test
 the generic package of BCEL.
 
-    http://commons.apache.org/bcel/
+    https://commons.apache.org/bcel/
 
 Mini uses the JavaCC parser generator which comes precompiled from
 

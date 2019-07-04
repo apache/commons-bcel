@@ -37,7 +37,7 @@ Feedback
 
 Open source works best when you give feedback:
 
-    http://commons.apache.org/bcel
+    https://commons.apache.org/bcel
 
 Please direct all bug reports to JIRA:
 
@@ -95,7 +95,7 @@ Feedback
 
 Open source works best when you give feedback:
 
-    http://commons.apache.org/bcel
+    https://commons.apache.org/bcel
 
 Please direct all bug reports to JIRA:
 
@@ -142,7 +142,7 @@ Feedback
 
 Open source works best when you give feedback:
 
-    http://commons.apache.org/bcel
+    https://commons.apache.org/bcel
 
 Please direct all bug reports to JIRA:
 
@@ -193,7 +193,7 @@ Semantic compatible - Yes
 For full information about API changes please see the extended Clirr report:
 
 
-http://commons.apache.org/bcel/clirr-report.html
+https://commons.apache.org/bcel/clirr-report.html
 
 
 COMPATIBILITY with Java 9
@@ -294,7 +294,7 @@ Semantic compatible - Yes, except:
 For full information about API changes please see the extended Clirr report:
 
 
-http://commons.apache.org/bcel/clirr-report.html
+https://commons.apache.org/bcel/clirr-report.html
 
 NEW FEATURES:
 =============
@@ -354,7 +354,7 @@ o BCEL-186: Performance degradation with the UTF8 cache. getInstance no longer
 o BCEL-181: org.apache.bcel.util.ClassLoaderRepository.loadClass(String) leaks
             input streams.
 o BCEL-28:  Mistake in "Peephole optimizer" example
-            at http://commons.apache.org/bcel/manual.html
+            at https://commons.apache.org/bcel/manual.html
 o BCEL-74:  BCEL cannot be used as java.system.class.loader.
 o BCEL-77:  XSLT transforms broken in Turkish Locale.
 o BCEL-79:  java.lang.ClassFormatError: LVTT entry for 'local' in class file
@@ -470,7 +470,7 @@ Feedback
 
 Open source works best when you give feedback:
 
-    http://commons.apache.org/bcel
+    https://commons.apache.org/bcel
 
 Please direct all bug reports to JIRA:
 

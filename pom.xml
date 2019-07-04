@@ -37,7 +37,7 @@
   <name>Apache Commons BCEL</name>
   <description>Apache Commons Bytecode Engineering Library</description>
 
-  <url>http://commons.apache.org/proper/commons-bcel</url>
+  <url>https://commons.apache.org/proper/commons-bcel</url>
   <inceptionYear>2004</inceptionYear>
 
   <properties>
