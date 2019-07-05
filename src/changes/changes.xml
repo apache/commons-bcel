@@ -67,6 +67,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-278" type="fix" dev="ggregory" due-to="Valery Barysoky">InvokeInstruction.toString(final ConstantPool cp) throws NoSuchElementException #11.</action>
       <action issue="BCEL-318" type="fix" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.ConstantUtf8.clearCache().</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 4.5.0 to 5.3.1.</action>
+      <action issue="BCEL-317" type="update" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">Pluggable cache for ConstantUtf8.</action>
     </release>
 
     <release version="6.3.1" date="2019-03-20" description="Bug fix release">
