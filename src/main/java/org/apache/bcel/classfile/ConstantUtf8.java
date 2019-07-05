@@ -34,7 +34,7 @@ import org.apache.bcel.Const;
  */
 public final class ConstantUtf8 extends Constant {
 
-    private static class CACHE_HOLDER {
+    private static class CacheHolder {
 
         private static final int MAX_CACHE_ENTRIES = 20000;
         private static final int INITIAL_CACHE_CAPACITY = (int) (MAX_CACHE_ENTRIES / 0.75);
@@ -80,7 +80,7 @@ public final class ConstantUtf8 extends Constant {
      * @since 6.4.0
      */
     public static void clearCache() {
-        CACHE_HOLDER.CACHE.clear();
+        CacheHolder.CACHE.clear();
     }
     
     // for accesss by test code
@@ -98,13 +98,13 @@ public final class ConstantUtf8 extends Constant {
         }
         considered++;
         synchronized (ConstantUtf8.class) { // might be better with a specific lock object
-            ConstantUtf8 result = CACHE_HOLDER.CACHE.get(s);
+            ConstantUtf8 result = CacheHolder.CACHE.get(s);
             if (result != null) {
                 hits++;
                 return result;
             }
             result = new ConstantUtf8(s);
-            CACHE_HOLDER.CACHE.put(s, result);
+            CacheHolder.CACHE.put(s, result);
             return result;
         }
     }
