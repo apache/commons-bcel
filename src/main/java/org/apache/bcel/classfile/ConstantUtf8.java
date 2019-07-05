@@ -37,15 +37,16 @@ public final class ConstantUtf8 extends Constant {
     private static class CACHE_HOLDER {
 
         private static final int MAX_CACHE_ENTRIES = 20000;
-        private static final int INITIAL_CACHE_CAPACITY = (int)(MAX_CACHE_ENTRIES/0.75);
+        private static final int INITIAL_CACHE_CAPACITY = (int) (MAX_CACHE_ENTRIES / 0.75);
 
-        private static final HashMap<String, ConstantUtf8> CACHE =
-                new LinkedHashMap<String, ConstantUtf8>(INITIAL_CACHE_CAPACITY, 0.75f, true) {
+        private static final HashMap<String, ConstantUtf8> CACHE = new LinkedHashMap<String, ConstantUtf8>(
+            INITIAL_CACHE_CAPACITY, 0.75f, true) {
+            
             private static final long serialVersionUID = -8506975356158971766L;
 
             @Override
             protected boolean removeEldestEntry(final Map.Entry<String, ConstantUtf8> eldest) {
-                 return size() > MAX_CACHE_ENTRIES;
+                return size() > MAX_CACHE_ENTRIES;
             }
         };
 
@@ -58,8 +59,7 @@ public final class ConstantUtf8 extends Constant {
     private static volatile int created = 0;
 
     // Set the size to 0 or below to skip caching entirely
-    private static final int MAX_CACHED_SIZE =
-            Integer.getInteger("bcel.maxcached.size", 200).intValue();// CHECKSTYLE IGNORE MagicNumber
+    private static final int MAX_CACHED_SIZE = Integer.getInteger("bcel.maxcached.size", 200).intValue();
     private static final boolean BCEL_STATISTICS = Boolean.getBoolean("bcel.statistics");
 
 
@@ -94,15 +94,15 @@ public final class ConstantUtf8 extends Constant {
     public static ConstantUtf8 getCachedInstance(final String s) {
         if (s.length() > MAX_CACHED_SIZE) {
             skipped++;
-            return  new ConstantUtf8(s);
+            return new ConstantUtf8(s);
         }
         considered++;
         synchronized (ConstantUtf8.class) { // might be better with a specific lock object
             ConstantUtf8 result = CACHE_HOLDER.CACHE.get(s);
             if (result != null) {
-                    hits++;
-                    return result;
-                }
+                hits++;
+                return result;
+            }
             result = new ConstantUtf8(s);
             CACHE_HOLDER.CACHE.put(s, result);
             return result;
