@@ -61,9 +61,14 @@ import com.sun.jna.platform.win32.Advapi32Util;
 /**
  * Test that the generic dump() methods work on the JDK classes Reads each class into an instruction list and then dumps
  * the instructions. The output bytes should be the same as the input.
+ * <p>
+ * Set the property {@value #EXTRA_JAVA_HOMES} to a comma-sepaarted list of JRE/JDK paths for additional testing.
+ * </p>
  */
 @RunWith(Parameterized.class)
 public class JdkGenericDumpTestCase {
+
+    private static final String EXTRA_JAVA_HOMES = "ExtraJavaHomes";
 
     private static class ClassParserFilesVisitor extends SimpleFileVisitor<Path> {
 
@@ -152,7 +157,7 @@ public class JdkGenericDumpTestCase {
         addAllJavaHomesOnWindows(KEY_JRE_9, javaHomes);
         addAllJavaHomesOnWindows(KEY_JDK, javaHomes);
         addAllJavaHomesOnWindows(KEY_JDK_9, javaHomes);
-        addAllJavaHomes("ExtraJavaHomes", javaHomes);
+        addAllJavaHomes(EXTRA_JAVA_HOMES, javaHomes);
         return javaHomes;
     }
 
