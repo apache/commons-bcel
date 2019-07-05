@@ -125,8 +125,8 @@ public final class ConstantUtf8 extends Constant {
 
     // for accesss by test code
     static void printStats() {
-        System.err.println("Cache hit " + hits + "/" + considered +", " + skipped + " skipped");
-        System.err.println("Total of " + created + " ConstantUtf8 objects created");
+        System.err.printf("Cache hit %,d/%,d, %d skipped.%n",hits,considered,skipped);
+        System.err.printf("Total of %,d ConstantUtf8 objects created.%n", created);
     }
 
     private final String bytes;
