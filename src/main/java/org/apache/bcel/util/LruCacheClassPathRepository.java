@@ -23,27 +23,32 @@ import java.util.Map;
 import org.apache.bcel.classfile.JavaClass;
 
 /**
- * This repository maintains least-recently-used (LRU) cache of {@link JavaClass} with maximum size {@code cacheSize}.
+ * Maintains a least-recently-used (LRU) cache of {@link JavaClass} with maximum size {@code cacheSize}.
  *
- * <p>This repository supports a class path consisting of too many JAR files to handle in {@link
- * ClassPathRepository} or {@link MemorySensitiveClassPathRepository} without causing {@code OutOfMemoryError}.
- *
+ * <p>
+ * This repository supports a class path consisting of too many JAR files to handle in {@link ClassPathRepository} or
+ * {@link MemorySensitiveClassPathRepository} without causing {@code OutOfMemoryError}.
+ * </p>
+ * 
  * @since 6.4.0
  */
 public class LruCacheClassPathRepository extends ClassPathRepository {
 
-    private final LinkedHashMap<String, JavaClass> loadedClass;
+    private final LinkedHashMap<String, JavaClass> loadedClasses;
 
     public LruCacheClassPathRepository(final ClassPath path, final int cacheSize) {
         super(path);
 
         if (cacheSize < 1) {
-            throw new IllegalArgumentException("cacheSize must be a positive number");
+            throw new IllegalArgumentException("cacheSize must be a positive number.");
         }
         int initialCapacity = (int) (0.75 * cacheSize);
         boolean accessOrder = true; // Evicts least-recently-accessed
-        loadedClass = new LinkedHashMap<String, JavaClass>(initialCapacity, cacheSize,
-                accessOrder) {
+        loadedClasses = new LinkedHashMap<String, JavaClass>(initialCapacity, cacheSize, accessOrder) {
+
+            private static final long serialVersionUID = 1L;
+
+            @Override
             protected boolean removeEldestEntry(Map.Entry<String, JavaClass> eldest) {
                 return size() > cacheSize;
             }
@@ -51,14 +56,14 @@ public class LruCacheClassPathRepository extends ClassPathRepository {
     }
 
     @Override
-    public void storeClass(final JavaClass javaClass) {
-        // Not storing parent's _loadedClass
-        loadedClass.put(javaClass.getClassName(), javaClass);
-        javaClass.setRepository(this);
+    public JavaClass findClass(final String className) {
+        return loadedClasses.get(className);
     }
 
     @Override
-    public JavaClass findClass(final String className) {
-        return loadedClass.get(className);
+    public void storeClass(final JavaClass javaClass) {
+        // Not storing parent's _loadedClass
+        loadedClasses.put(javaClass.getClassName(), javaClass);
+        javaClass.setRepository(this);
     }
 }
