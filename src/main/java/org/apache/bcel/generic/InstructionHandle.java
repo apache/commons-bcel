@@ -125,7 +125,7 @@ public class InstructionHandle {
     /** Factory method.
      */
     static InstructionHandle getInstructionHandle( final Instruction i ) {
-    	return new InstructionHandle(i);
+        return new InstructionHandle(i);
     }
 
 

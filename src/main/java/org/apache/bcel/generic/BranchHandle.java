@@ -42,7 +42,7 @@ public final class BranchHandle extends InstructionHandle {
     /** Factory method.
      */
     static BranchHandle getBranchHandle( final BranchInstruction i ) {
-    	return new BranchHandle(i);
+        return new BranchHandle(i);
     }
 
 

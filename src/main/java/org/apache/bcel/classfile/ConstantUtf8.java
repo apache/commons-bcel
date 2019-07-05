@@ -108,7 +108,7 @@ public final class ConstantUtf8 extends Constant {
      * 
      * @since 6.4.0
      */
-    public synchronized static void clearCache() {
+    public static synchronized void clearCache() {
         Cache.CACHE.clear();
     }
 
