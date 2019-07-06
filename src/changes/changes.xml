@@ -71,6 +71,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-320" type="add" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">Add LruCacheClassPathRepository that can scan many JAR files without OutOfMemoryError.</action>
       <action issue="BCEL-299" type="update" dev="ggregory" due-to="Gary Gregory, zhangminglei ">Fix example src/examples/ClassDumper.java ClassDumper.processID().</action>
       <action issue="BCEL-322" type="add" dev="ggregory" due-to="Gary Gregory">Add constants to org.apache.bcel.Const for Java 14.</action>
+      <action issue="BCEL-291" type="fix" dev="ggregory" due-to="Gary Gregory">Verifier rejects invokevirtual on array: org.apache.bcel.generic.ClassGenException: [Ljava/lang/Object; does not represent an ObjectType.</action>
     </release>
 
     <release version="6.3.1" date="2019-03-20" description="Bug fix release">
