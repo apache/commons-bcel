@@ -31,44 +31,6 @@ import org.junit.Test;
 
 public class BCELifierTestCase {
 
-    @Test
-    public void test() throws Exception {
-        final OutputStream os = new ByteArrayOutputStream();
-        final JavaClass java_class = BCELifier.getJavaClass("Java8Example");
-        assertNotNull(java_class);
-        final BCELifier bcelifier = new BCELifier(java_class, os);
-        bcelifier.start();
-    }
-
-    /*
-     * Dump a class using "javap" and compare with the same class recreated
-     * using BCELifier, "javac", "java" and dumped with "javap"
-     * TODO: detect if JDK present and skip test if not
-     */
-    @Test
-    public void testJavapCompare() throws Exception {
-        testClassOnPath("target/test-classes/Java8Example.class");
-    }
-
-    private void testClassOnPath(final String javaClass) throws Exception {
-        // Get javap of the input class
-        final String initial = exec(null, "javap", "-p", "-c", javaClass);
-
-        final File workDir = new File("target");
-        final File infile = new File(javaClass);
-        final JavaClass java_class = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
-        assertNotNull(java_class);
-        final File outfile = new File(workDir, infile.getName().replace(".class", "Creator.java"));
-        try (FileOutputStream fos = new FileOutputStream(outfile)) {
-            final BCELifier bcelifier = new BCELifier(java_class, fos);
-            bcelifier.start();
-        }
-        exec(workDir, "javac", "-cp", "classes", outfile.getName(), "-source", "1.8", "-target", "1.8");
-        exec(workDir, "java", "-cp", "." + File.pathSeparator + "classes", outfile.getName().replace(".java", ""));
-        final String output = exec(workDir, "javap", "-p", "-c", infile.getName());
-        assertEquals(canonHashRef(initial), canonHashRef(output));
-    }
-
     // Canonicalise the javap output so it compares better
     private String canonHashRef(String input) {
         input = input.replaceAll("#\\d+", "#n"); // numbers may vary in length
@@ -97,6 +59,44 @@ public class BCELifierTestCase {
             }
             return sb.toString();
         }
+    }
+
+    private void testClassOnPath(final String javaClass) throws Exception {
+        // Get javap of the input class
+        final String initial = exec(null, "javap", "-p", "-c", javaClass);
+
+        final File workDir = new File("target");
+        final File infile = new File(javaClass);
+        final JavaClass java_class = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
+        assertNotNull(java_class);
+        final File outfile = new File(workDir, infile.getName().replace(".class", "Creator.java"));
+        try (FileOutputStream fos = new FileOutputStream(outfile)) {
+            final BCELifier bcelifier = new BCELifier(java_class, fos);
+            bcelifier.start();
+        }
+        exec(workDir, "javac", "-cp", "classes", outfile.getName(), "-source", "1.8", "-target", "1.8");
+        exec(workDir, "java", "-cp", "." + File.pathSeparator + "classes", outfile.getName().replace(".java", ""));
+        final String output = exec(workDir, "javap", "-p", "-c", infile.getName());
+        assertEquals(canonHashRef(initial), canonHashRef(output));
+    }
+
+    /*
+     * Dump a class using "javap" and compare with the same class recreated
+     * using BCELifier, "javac", "java" and dumped with "javap"
+     * TODO: detect if JDK present and skip test if not
+     */
+    @Test
+    public void testJavapCompare() throws Exception {
+        testClassOnPath("target/test-classes/Java8Example.class");
+    }
+
+    @Test
+    public void testStart() throws Exception {
+        final OutputStream os = new ByteArrayOutputStream();
+        final JavaClass java_class = BCELifier.getJavaClass("Java8Example");
+        assertNotNull(java_class);
+        final BCELifier bcelifier = new BCELifier(java_class, os);
+        bcelifier.start();
     }
 
 }
