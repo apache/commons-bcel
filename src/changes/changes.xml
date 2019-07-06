@@ -69,6 +69,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 4.5.0 to 5.3.1.</action>
       <action issue="BCEL-317" type="update" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">Pluggable cache for ConstantUtf8.</action>
       <action issue="BCEL-320" type="add" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">Add LruCacheClassPathRepository that can scan many JAR files without OutOfMemoryError.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix example src/examples/ClassDumper.java ClassDumper.processID().</action>
     </release>
 
     <release version="6.3.1" date="2019-03-20" description="Bug fix release">

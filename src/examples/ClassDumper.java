@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import javax.imageio.stream.FileImageInputStream;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassFormatException;
@@ -111,7 +112,7 @@ class ClassDumper {
      */
     private final void processID () throws IOException, ClassFormatException {
         final int magic = file.readInt();
-        if (magic != Constants.JVM_CLASSFILE_MAGIC) {
+        if (magic != Const.JVM_CLASSFILE_MAGIC) {
             throw new ClassFormatException(file_name + " is not a Java .class file");
         }
         System.out.println("Java Class Dump"); 
