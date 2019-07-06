@@ -130,8 +130,8 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
     @Override
     public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
         final ReferenceType rt = getReferenceType(cpg);
-        if(rt instanceof ObjectType) {
-            return (ObjectType)rt;
+        if (rt instanceof ObjectType) {
+            return (ObjectType) rt;
         }
         throw new ClassGenException(rt.getSignature() + " does not represent an ObjectType");
     }
