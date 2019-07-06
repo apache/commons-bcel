@@ -177,6 +177,18 @@ public final class Const {
    *  */
   public static final short MINOR_13 = 0;
 
+  /** Major version number of class files for Java 14.
+   *  @see #MINOR_14
+   *  @since 6.4.0
+   *  */
+  public static final short MAJOR_14 = 58;
+
+  /** Minor version number of class files for Java 14.
+   *  @see #MAJOR_14
+   *  @since 6.4.0
+   *  */
+  public static final short MINOR_14 = 0;
+
   /** Default major version number.  Class file is for Java 1.1.
    *  @see #MAJOR_1_1
    *  */
