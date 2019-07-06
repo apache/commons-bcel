@@ -18,8 +18,10 @@
 
 package org.apache.bcel.verifier;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class JiraBcel291TestCase {
 
     @Test
