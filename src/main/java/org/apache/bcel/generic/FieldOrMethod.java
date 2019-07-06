@@ -102,7 +102,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
 
 
     /**
-     * Return the reference type representing the class, interface,
+     * Gets the reference type representing the class, interface,
      * or array class referenced by the instruction.
      * @param cpg the ConstantPoolGen used to create the instruction
      * @return an ObjectType (if the referenced class type is a class
@@ -122,7 +122,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
 
 
     /**
-     * Get the ObjectType of the method return or field.
+     * Gets the ObjectType of the method return or field.
      *
      * @return type of the referenced class/interface
      * @throws ClassGenException when the field is (or method returns) an array,
