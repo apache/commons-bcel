@@ -193,49 +193,54 @@ public class Verifier {
     public static void main( final String[] args ) {
         System.out
                 .println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<https://commons.apache.org/bcel>\n");
-        for (int k = 0; k < args.length; k++) {
+        for (int index = 0; index < args.length; index++) {
             try {
-                if (args[k].endsWith(".class")) {
-                    final int dotclasspos = args[k].lastIndexOf(".class");
+                if (args[index].endsWith(".class")) {
+                    final int dotclasspos = args[index].lastIndexOf(".class");
                     if (dotclasspos != -1) {
-                        args[k] = args[k].substring(0, dotclasspos);
+                        args[index] = args[index].substring(0, dotclasspos);
                     }
                 }
-                args[k] = args[k].replace('/', '.');
-                System.out.println("Now verifying: " + args[k] + "\n");
-                final Verifier v = VerifierFactory.getVerifier(args[k]);
-                VerificationResult vr;
-                vr = v.doPass1();
-                System.out.println("Pass 1:\n" + vr);
-                vr = v.doPass2();
-                System.out.println("Pass 2:\n" + vr);
-                if (vr == VerificationResult.VR_OK) {
-                    final JavaClass jc = org.apache.bcel.Repository.lookupClass(args[k]);
-                    for (int i = 0; i < jc.getMethods().length; i++) {
-                        vr = v.doPass3a(i);
-                        System.out.println("Pass 3a, method number " + i + " ['"
-                                + jc.getMethods()[i] + "']:\n" + vr);
-                        vr = v.doPass3b(i);
-                        System.out.println("Pass 3b, method number " + i + " ['"
-                                + jc.getMethods()[i] + "']:\n" + vr);
-                    }
-                }
-                System.out.println("Warnings:");
-                final String[] warnings = v.getMessages();
-                if (warnings.length == 0) {
-                    System.out.println("<none>");
-                }
-                for (final String warning : warnings) {
-                    System.out.println(warning);
-                }
-                System.out.println("\n");
-                // avoid swapping.
-                v.flush();
+                args[index] = args[index].replace('/', '.');
+                System.out.println("Now verifying: " + args[index] + "\n");
+                verifyType(args[index]);
                 org.apache.bcel.Repository.clearCache();
                 System.gc();
             } catch (final ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    static void verifyType(final String fullyQualifiedClassName) throws ClassNotFoundException {
+        final Verifier verifier = VerifierFactory.getVerifier(fullyQualifiedClassName);
+        VerificationResult verificationResult;
+        verificationResult = verifier.doPass1();
+        System.out.println("Pass 1:\n" + verificationResult);
+        verificationResult = verifier.doPass2();
+        System.out.println("Pass 2:\n" + verificationResult);
+        if (verificationResult == VerificationResult.VR_OK) {
+            final JavaClass jc = org.apache.bcel.Repository.lookupClass(fullyQualifiedClassName);
+            for (int i = 0; i < jc.getMethods().length; i++) {
+                verificationResult = verifier.doPass3a(i);
+                System.out.println("Pass 3a, method number " + i + " ['"
+                        + jc.getMethods()[i] + "']:\n" + verificationResult);
+                verificationResult = verifier.doPass3b(i);
+                System.out.println("Pass 3b, method number " + i + " ['"
+                        + jc.getMethods()[i] + "']:\n" + verificationResult);
+            }
+        }
+        System.out.println("Warnings:");
+        final String[] warnings = verifier.getMessages();
+        if (warnings.length == 0) {
+            System.out.println("<none>");
+        }
+        for (final String warning : warnings) {
+            System.out.println(warning);
+        }
+        System.out.println("\n");
+        // avoid swapping.
+        verifier.flush();
     }
 }
