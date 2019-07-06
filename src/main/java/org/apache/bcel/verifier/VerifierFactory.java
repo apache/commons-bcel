@@ -54,12 +54,12 @@ public class VerifierFactory {
      * Possibly a new Verifier object is transparently created.
      * @return the (only) verifier responsible for the class with the given name.
      */
-    public static Verifier getVerifier( final String fully_qualified_classname ) {
-        Verifier v = hashMap.get(fully_qualified_classname);
+    public static Verifier getVerifier( final String fullyQualifiedClassName ) {
+        Verifier v = hashMap.get(fullyQualifiedClassName);
         if (v == null) {
-            v = new Verifier(fully_qualified_classname);
-            hashMap.put(fully_qualified_classname, v);
-            notify(fully_qualified_classname);
+            v = new Verifier(fullyQualifiedClassName);
+            hashMap.put(fullyQualifiedClassName, v);
+            notify(fullyQualifiedClassName);
         }
         return v;
     }
@@ -68,10 +68,10 @@ public class VerifierFactory {
     /**
      * Notifies the observers of a newly generated Verifier.
      */
-    private static void notify( final String fully_qualified_classname ) {
+    private static void notify( final String fullyQualifiedClassName ) {
         // notify the observers
         for (final VerifierFactoryObserver vfo : observers) {
-            vfo.update(fully_qualified_classname);
+            vfo.update(fullyQualifiedClassName);
         }
     }
 
