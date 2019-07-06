@@ -469,13 +469,13 @@ public final class Pass3aVerifier extends PassVerifier{
      * This visitor class does the actual checking for the instruction
      * operand's constraints.
      */
-    private class InstOperandConstraintVisitor extends org.apache.bcel.generic.EmptyVisitor{
+    private class InstOperandConstraintVisitor extends org.apache.bcel.generic.EmptyVisitor {
         /** The ConstantPoolGen instance this Visitor operates on. */
-        private final ConstantPoolGen cpg;
+        private final ConstantPoolGen constantPoolGen;
 
         /** The only Constructor. */
-        InstOperandConstraintVisitor(final ConstantPoolGen cpg) {
-            this.cpg = cpg;
+        InstOperandConstraintVisitor(final ConstantPoolGen constantPoolGen) {
+            this.constantPoolGen = constantPoolGen;
         }
 
         /**
@@ -503,7 +503,7 @@ public final class Pass3aVerifier extends PassVerifier{
          * a valid constant pool index.
          */
         private void indexValid(final Instruction i, final int idx) {
-            if (idx < 0 || idx >= cpg.getSize()) {
+            if (idx < 0 || idx >= constantPoolGen.getSize()) {
                 constraintViolated(i, "Illegal constant pool index '"+idx+"'.");
             }
         }
@@ -516,14 +516,14 @@ public final class Pass3aVerifier extends PassVerifier{
          * The referenced class is loaded and pass2-verified.
          */
         @Override
-        public void visitLoadClass(final LoadClass o) {
-            final ObjectType t = o.getLoadClassType(cpg);
+        public void visitLoadClass(final LoadClass loadClass) {
+            final ObjectType t = loadClass.getLoadClassType(constantPoolGen);
             if (t != null) {// null means "no class is loaded"
                 final Verifier v = VerifierFactory.getVerifier(t.getClassName());
                 final VerificationResult vr = v.doPass1();
                 if (vr.getStatus() != VerificationResult.VERIFIED_OK) {
-                    constraintViolated((Instruction) o,
-                        "Class '"+o.getLoadClassType(cpg).getClassName()+"' is referenced, but cannot be loaded: '"+vr+"'.");
+                    constraintViolated((Instruction) loadClass,
+                        "Class '"+loadClass.getLoadClassType(constantPoolGen).getClassName()+"' is referenced, but cannot be loaded: '"+vr+"'.");
                 }
             }
         }
@@ -538,9 +538,9 @@ public final class Pass3aVerifier extends PassVerifier{
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         // LDC and LDC_W (LDC_W is a subclass of LDC in BCEL's model)
         @Override
-        public void visitLDC(final LDC o) {
-            indexValid(o, o.getIndex());
-            final Constant c = cpg.getConstant(o.getIndex());
+        public void visitLDC(final LDC ldc) {
+            indexValid(ldc, ldc.getIndex());
+            final Constant c = constantPoolGen.getConstant(ldc.getIndex());
             if (c instanceof ConstantClass) {
               addMessage("Operand of LDC or LDC_W is CONSTANT_Class '"+c+"' - this is only supported in JDK 1.5 and higher.");
             }
@@ -548,7 +548,7 @@ public final class Pass3aVerifier extends PassVerifier{
               if (! ( (c instanceof ConstantInteger)    ||
                       (c instanceof ConstantFloat)         ||
                 (c instanceof ConstantString) ) ) {
-            constraintViolated(o,
+            constraintViolated(ldc,
                 "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float or CONSTANT_String, but is '"+c+"'.");
               }
             }
@@ -559,7 +559,7 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitLDC2_W(final LDC2_W o) {
             indexValid(o, o.getIndex());
-            final Constant c = cpg.getConstant(o.getIndex());
+            final Constant c = constantPoolGen.getConstant(o.getIndex());
             if (! ( (c instanceof ConstantLong)    ||
                             (c instanceof ConstantDouble) ) ) {
                 constraintViolated(o, "Operand of LDC2_W must be CONSTANT_Long or CONSTANT_Double, but is '"+c+"'.");
@@ -573,7 +573,7 @@ public final class Pass3aVerifier extends PassVerifier{
         }
 
         private ObjectType getObjectType(final FieldInstruction o) {
-            final ReferenceType rt = o.getReferenceType(cpg);
+            final ReferenceType rt = o.getReferenceType(constantPoolGen);
             if(rt instanceof ObjectType) {
                 return (ObjectType)rt;
             }
@@ -587,12 +587,12 @@ public final class Pass3aVerifier extends PassVerifier{
         public void visitFieldInstruction(final FieldInstruction o) {
            try {
             indexValid(o, o.getIndex());
-            final Constant c = cpg.getConstant(o.getIndex());
+            final Constant c = constantPoolGen.getConstant(o.getIndex());
             if (! (c instanceof ConstantFieldref)) {
                 constraintViolated(o, "Indexing a constant that's not a CONSTANT_Fieldref but a '"+c+"'.");
             }
 
-            final String field_name = o.getFieldName(cpg);
+            final String field_name = o.getFieldName(constantPoolGen);
 
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             Field[] fields = jc.getFields();
@@ -600,7 +600,7 @@ public final class Pass3aVerifier extends PassVerifier{
             for (final Field field : fields) {
                 if (field.getName().equals(field_name)) {
                   final Type f_type = Type.getType(field.getSignature());
-                  final Type o_type = o.getType(cpg);
+                  final Type o_type = o.getType(constantPoolGen);
                     /* TODO: Check if assignment compatibility is sufficient.
                    * What does Sun do?
                    */
@@ -618,7 +618,7 @@ public final class Pass3aVerifier extends PassVerifier{
                     for (final Field field : fields) {
                         if (field.getName().equals(field_name)) {
                             final Type f_type = Type.getType(field.getSignature());
-                            final Type o_type = o.getType(cpg);
+                            final Type o_type = o.getType(constantPoolGen);
                             if (f_type.equals(o_type)) {
                                 f = field;
                                 if ((f.getAccessFlags() & (Const.ACC_PUBLIC | Const.ACC_PROTECTED)) == 0) {
@@ -637,7 +637,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 /* TODO: Check if assignment compatibility is sufficient.
                    What does Sun do? */
                 Type.getType(f.getSignature());
-                o.getType(cpg);
+                o.getType(constantPoolGen);
 //                Type f_type = Type.getType(f.getSignature());
 //                Type o_type = o.getType(cpg);
 
@@ -663,14 +663,14 @@ public final class Pass3aVerifier extends PassVerifier{
             if (    (o instanceof INVOKEVIRTUAL)    ||
                         (o instanceof INVOKESPECIAL)    ||
                         (o instanceof INVOKESTATIC)    ) {
-                final Constant c = cpg.getConstant(o.getIndex());
+                final Constant c = constantPoolGen.getConstant(o.getIndex());
                 if (! (c instanceof ConstantMethodref)) {
                     constraintViolated(o, "Indexing a constant that's not a CONSTANT_Methodref but a '"+c+"'.");
                 }
                 else{
                     // Constants are okay due to pass2.
-                    final ConstantNameAndType cnat = (ConstantNameAndType) (cpg.getConstant(((ConstantMethodref) c).getNameAndTypeIndex()));
-                    final ConstantUtf8 cutf8 = (ConstantUtf8) (cpg.getConstant(cnat.getNameIndex()));
+                    final ConstantNameAndType cnat = (ConstantNameAndType) (constantPoolGen.getConstant(((ConstantMethodref) c).getNameAndTypeIndex()));
+                    final ConstantUtf8 cutf8 = (ConstantUtf8) (constantPoolGen.getConstant(cnat.getNameIndex()));
                     if (cutf8.getBytes().equals(Const.CONSTRUCTOR_NAME) && (!(o instanceof INVOKESPECIAL)) ) {
                         constraintViolated(o, "Only INVOKESPECIAL is allowed to invoke instance initialization methods.");
                     }
@@ -682,7 +682,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 }
             }
             else{ //if (o instanceof INVOKEINTERFACE) {
-                final Constant c = cpg.getConstant(o.getIndex());
+                final Constant c = constantPoolGen.getConstant(o.getIndex());
                 if (! (c instanceof ConstantInterfaceMethodref)) {
                     constraintViolated(o, "Indexing a constant that's not a CONSTANT_InterfaceMethodref but a '"+c+"'.");
                 }
@@ -693,8 +693,8 @@ public final class Pass3aVerifier extends PassVerifier{
 
                 // Invoked method must not be <init> or <clinit>
                 final ConstantNameAndType cnat =
-                        (ConstantNameAndType) (cpg.getConstant(((ConstantInterfaceMethodref)c).getNameAndTypeIndex()));
-                final String name = ((ConstantUtf8) (cpg.getConstant(cnat.getNameIndex()))).getBytes();
+                        (ConstantNameAndType) (constantPoolGen.getConstant(((ConstantInterfaceMethodref)c).getNameAndTypeIndex()));
+                final String name = ((ConstantUtf8) (constantPoolGen.getConstant(cnat.getNameIndex()))).getBytes();
                 if (name.equals(Const.CONSTRUCTOR_NAME)) {
                     constraintViolated(o, "Method to invoke must not be '"+Const.CONSTRUCTOR_NAME+"'.");
                 }
@@ -705,7 +705,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
             // The LoadClassType is the method-declaring class, so we have to check the other types.
 
-            Type t = o.getReturnType(cpg);
+            Type t = o.getReturnType(constantPoolGen);
             if (t instanceof ArrayType) {
                 t = ((ArrayType) t).getBasicType();
             }
@@ -717,7 +717,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 }
             }
 
-            final Type[] ts = o.getArgumentTypes(cpg);
+            final Type[] ts = o.getArgumentTypes(constantPoolGen);
             for (final Type element : ts) {
                 t = element;
                 if (t instanceof ArrayType) {
@@ -739,7 +739,7 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitINSTANCEOF(final INSTANCEOF o) {
             indexValid(o, o.getIndex());
-            final Constant c = cpg.getConstant(o.getIndex());
+            final Constant c = constantPoolGen.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)) {
                 constraintViolated(o, "Expecting a CONSTANT_Class operand, but found a '"+c+"'.");
             }
@@ -749,7 +749,7 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitCHECKCAST(final CHECKCAST o) {
             indexValid(o, o.getIndex());
-            final Constant c = cpg.getConstant(o.getIndex());
+            final Constant c = constantPoolGen.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)) {
                 constraintViolated(o, "Expecting a CONSTANT_Class operand, but found a '"+c+"'.");
             }
@@ -759,12 +759,12 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitNEW(final NEW o) {
             indexValid(o, o.getIndex());
-            final Constant c = cpg.getConstant(o.getIndex());
+            final Constant c = constantPoolGen.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)) {
                 constraintViolated(o, "Expecting a CONSTANT_Class operand, but found a '"+c+"'.");
             }
             else{
-                final ConstantUtf8 cutf8 = (ConstantUtf8) (cpg.getConstant( ((ConstantClass) c).getNameIndex() ));
+                final ConstantUtf8 cutf8 = (ConstantUtf8) (constantPoolGen.getConstant( ((ConstantClass) c).getNameIndex() ));
                 final Type t = Type.getType("L"+cutf8.getBytes()+";");
                 if (t instanceof ArrayType) {
                     constraintViolated(o, "NEW must not be used to create an array.");
@@ -777,7 +777,7 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitMULTIANEWARRAY(final MULTIANEWARRAY o) {
             indexValid(o, o.getIndex());
-            final Constant c = cpg.getConstant(o.getIndex());
+            final Constant c = constantPoolGen.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)) {
                 constraintViolated(o, "Expecting a CONSTANT_Class operand, but found a '"+c+"'.");
             }
@@ -785,7 +785,7 @@ public final class Pass3aVerifier extends PassVerifier{
             if (dimensions2create < 1) {
                 constraintViolated(o, "Number of dimensions to create must be greater than zero.");
             }
-            final Type t = o.getType(cpg);
+            final Type t = o.getType(constantPoolGen);
             if (t instanceof ArrayType) {
                 final int dimensions = ((ArrayType) t).getDimensions();
                 if (dimensions < dimensions2create) {
@@ -804,11 +804,11 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitANEWARRAY(final ANEWARRAY o) {
             indexValid(o, o.getIndex());
-            final Constant c = cpg.getConstant(o.getIndex());
+            final Constant c = constantPoolGen.getConstant(o.getIndex());
             if (!    (c instanceof ConstantClass)) {
                 constraintViolated(o, "Expecting a CONSTANT_Class operand, but found a '"+c+"'.");
             }
-            final Type t = o.getType(cpg);
+            final Type t = o.getType(constantPoolGen);
             if (t instanceof ArrayType) {
                 final int dimensions = ((ArrayType) t).getDimensions();
                 if (dimensions > Const.MAX_ARRAY_DIMENSIONS) {
@@ -1048,7 +1048,7 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitPUTSTATIC(final PUTSTATIC o) {
             try {
-            final String field_name = o.getFieldName(cpg);
+            final String field_name = o.getFieldName(constantPoolGen);
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             final Field[] fields = jc.getFields();
             Field f = null;
@@ -1066,7 +1066,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 if (!(myOwner.getClassName().equals(getObjectType(o).getClassName()))) {
                     constraintViolated(o,
                         "Referenced field '"+f+"' is final and must therefore be declared in the current class '"+
-                            myOwner.getClassName()+"' which is not the case: it is declared in '"+o.getReferenceType(cpg)+"'.");
+                            myOwner.getClassName()+"' which is not the case: it is declared in '"+o.getReferenceType(constantPoolGen)+"'.");
                 }
             }
 
@@ -1090,7 +1090,7 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitGETSTATIC(final GETSTATIC o) {
             try {
-            final String field_name = o.getFieldName(cpg);
+            final String field_name = o.getFieldName(constantPoolGen);
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             final Field[] fields = jc.getFields();
             Field f = null;
@@ -1137,11 +1137,11 @@ public final class Pass3aVerifier extends PassVerifier{
             // is therefore resolved/verified.
             // INVOKEINTERFACE is an InvokeInstruction, the argument and return types are resolved/verified,
             // too. So are the allowed method names.
-            final String classname = o.getClassName(cpg);
+            final String classname = o.getClassName(constantPoolGen);
             final JavaClass jc = Repository.lookupClass(classname);
             final Method m = getMethodRecursive(jc, o);
             if (m == null) {
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)+
+                constraintViolated(o, "Referenced method '"+o.getMethodName(constantPoolGen)+"' with expected signature '"+o.getSignature(constantPoolGen)+
                     "' not found in class '"+jc.getClassName()+"'.");
             }
             if (jc.isClass()) {
@@ -1196,9 +1196,9 @@ public final class Pass3aVerifier extends PassVerifier{
         private Method getMethod(final JavaClass jc, final InvokeInstruction invoke) {
             final Method[] ms = jc.getMethods();
             for (final Method element : ms) {
-                if ( (element.getName().equals(invoke.getMethodName(cpg))) &&
-                     (Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(cpg))) &&
-                     (objarrayequals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(cpg))) ) {
+                if ( (element.getName().equals(invoke.getMethodName(constantPoolGen))) &&
+                     (Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(constantPoolGen))) &&
+                     (objarrayequals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(constantPoolGen))) ) {
                     return element;
                 }
             }
@@ -1214,11 +1214,11 @@ public final class Pass3aVerifier extends PassVerifier{
             // is therefore resolved/verified.
             // INVOKESPECIAL is an InvokeInstruction, the argument and return types are resolved/verified,
             // too. So are the allowed method names.
-            final String classname = o.getClassName(cpg);
+            final String classname = o.getClassName(constantPoolGen);
             final JavaClass jc = Repository.lookupClass(classname);
             final Method m = getMethodRecursive(jc, o);
             if (m == null) {
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+o.getSignature(cpg)
+                constraintViolated(o, "Referenced method '"+o.getMethodName(constantPoolGen)+"' with expected signature '"+o.getSignature(constantPoolGen)
                     +"' not found in class '"+jc.getClassName()+"'.");
             }
 
@@ -1227,7 +1227,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
                 if ((Repository.instanceOf( current, jc )) && (!current.equals(jc))) {
 
-                    if (! (o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME) )) {
+                    if (! (o.getMethodName(constantPoolGen).equals(Const.CONSTRUCTOR_NAME) )) {
                         // Special lookup procedure for ACC_SUPER classes.
 
                         int supidx = -1;
@@ -1239,9 +1239,9 @@ public final class Pass3aVerifier extends PassVerifier{
 
                             final Method[] meths = current.getMethods();
                             for (final Method meth2 : meths) {
-                                if    ( (meth2.getName().equals(o.getMethodName(cpg))) &&
-                                     (Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(cpg))) &&
-                                     (objarrayequals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(cpg))) ) {
+                                if    ( (meth2.getName().equals(o.getMethodName(constantPoolGen))) &&
+                                     (Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen))) &&
+                                     (objarrayequals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) ) {
                                     meth = meth2;
                                     break;
                                 }
@@ -1252,7 +1252,7 @@ public final class Pass3aVerifier extends PassVerifier{
                         }
                         if (meth == null) {
                             constraintViolated(o, "ACC_SUPER special lookup procedure not successful: method '"+
-                                o.getMethodName(cpg)+"' with proper signature not declared in superclass hierarchy.");
+                                o.getMethodName(constantPoolGen)+"' with proper signature not declared in superclass hierarchy.");
                         }
                     }
                 }
@@ -1273,14 +1273,14 @@ public final class Pass3aVerifier extends PassVerifier{
             // is therefore resolved/verified.
             // INVOKESTATIC is an InvokeInstruction, the argument and return types are resolved/verified,
             // too. So are the allowed method names.
-            final String classname = o.getClassName(cpg);
+            final String classname = o.getClassName(constantPoolGen);
             final JavaClass jc = Repository.lookupClass(classname);
             final Method m = getMethodRecursive(jc, o);
             if (m == null) {
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+
-                    o.getSignature(cpg) +"' not found in class '"+jc.getClassName()+"'.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(constantPoolGen)+"' with expected signature '"+
+                    o.getSignature(constantPoolGen) +"' not found in class '"+jc.getClassName()+"'.");
             } else if (! (m.isStatic())) { // implies it's not abstract, verified in pass 2.
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' has ACC_STATIC unset.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(constantPoolGen)+"' has ACC_STATIC unset.");
             }
 
             } catch (final ClassNotFoundException e) {
@@ -1298,12 +1298,12 @@ public final class Pass3aVerifier extends PassVerifier{
             // is therefore resolved/verified.
             // INVOKEVIRTUAL is an InvokeInstruction, the argument and return types are resolved/verified,
             // too. So are the allowed method names.
-            final String classname = o.getClassName(cpg);
+            final String classname = o.getClassName(constantPoolGen);
             final JavaClass jc = Repository.lookupClass(classname);
             final Method m = getMethodRecursive(jc, o);
             if (m == null) {
-                constraintViolated(o, "Referenced method '"+o.getMethodName(cpg)+"' with expected signature '"+
-                    o.getSignature(cpg)+"' not found in class '"+jc.getClassName()+"'.");
+                constraintViolated(o, "Referenced method '"+o.getMethodName(constantPoolGen)+"' with expected signature '"+
+                    o.getSignature(constantPoolGen)+"' not found in class '"+jc.getClassName()+"'.");
             }
             if (! (jc.isClass())) {
                 constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is an interface, but not a class as expected.");
