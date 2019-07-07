@@ -72,7 +72,7 @@
       </ul>
       <p>
         The <a href="source-repository.html">svn repository</a> can be
-        <a href="http://svn.apache.org/viewvc/commons/proper/bcel/trunk">browsed</a>, or you can browse/contribute via <a href="https://github.com/apache/commons-bcel">GitHub</a>.
+        <a href="https://gitbox.apache.org/repos/asf?p=commons-bcel.git">browsed</a>, or you can browse/contribute via <a href="https://github.com/apache/commons-bcel">GitHub</a>.
       </p>
     </section>
     <!-- ================================================== -->
