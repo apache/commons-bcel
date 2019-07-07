@@ -200,7 +200,7 @@
 
   <issueManagement>
     <system>jira</system>
-    <url>http://issues.apache.org/jira/browse/BCEL</url>
+    <url>https://issues.apache.org/jira/browse/BCEL</url>
   </issueManagement>
 
   <scm>
