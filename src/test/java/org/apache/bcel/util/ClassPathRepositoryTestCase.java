@@ -49,7 +49,7 @@ public class ClassPathRepositoryTestCase {
     @Test
     public void testMemorySensitiveClassPathRepository() throws ClassNotFoundException, IOException {
         try (final ClassPath classPath = new ClassPath("")) {
-            verifyCaching(new ClassPathRepository(classPath));
+            verifyCaching(new MemorySensitiveClassPathRepository(classPath));
         }
     }
 }
