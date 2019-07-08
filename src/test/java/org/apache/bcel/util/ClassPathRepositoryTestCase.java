@@ -31,13 +31,23 @@ import org.junit.Test;
 public class ClassPathRepositoryTestCase {
 
     private void verifyCaching(AbstractClassPathRepository repository) throws ClassNotFoundException {
+        // Tests loadClass()
         JavaClass class1 = repository.loadClass("java.lang.String");
         Assert.assertNotNull(class1);
         JavaClass class2 = repository.loadClass("java.lang.Long");
         Assert.assertNotNull(class2);
 
+        // Tests findClass()
         Assert.assertEquals(class1, repository.findClass("java.lang.String"));
         Assert.assertEquals(class2, repository.findClass("java.lang.Long"));
+
+        // Tests removeClass()
+        repository.removeClass(class1);
+        Assert.assertNull(repository.findClass("java.lang.String"));
+
+        // Tests clear()
+        repository.clear();
+        Assert.assertNull(repository.findClass("java.lang.Long"));
     }
 
     @Test
