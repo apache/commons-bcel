@@ -23,9 +23,10 @@ import org.apache.bcel.classfile.JavaClass;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 /**
  * Tests {@link ClassPathRepository} and {@link MemorySensitiveClassPathRepository}.
+ *
+ * <p>Without memory scarcity, these two classes behave in the same manner.
  */
 public class ClassPathRepositoryTestCase {
 
