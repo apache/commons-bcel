@@ -30,13 +30,13 @@ import org.apache.bcel.Const;
  * Extends the abstract {@link Constant} to represent a reference to a UTF-8 encoded string.
  * <p>
  * The following system properties govern caching this class performs.
+ * </p>
  * <ul>
  * <li>{@value #SYS_PROP_CACHE_MAX_ENTRIES} (since 6.4): The size of the cache, by default 0, meaning caching is disabled.</li>
  * <li>{@value #SYS_PROP_CACHE_MAX_ENTRY_SIZE} (since 6.0): The maximum size of the values to cache, by default 200, 0 disables
  * caching. Values larger than this are <em>not</em> cached.</li>
  * <li>{@value #SYS_PROP_STATISTICS} (since 6.0): Prints statistics on the console when the JVM exits.</li>
  * </ul>
- * </p>
  * <p>
  * Here is a sample Maven invocation with caching disabled:
  * </p>
