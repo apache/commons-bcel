@@ -27,7 +27,7 @@ import java.io.InputStream;
  * This abstract class provides a logic of a loading {@link JavaClass} objects class names via {@link ClassPath}.
  *
  * <p>Subclasses can choose caching strategy of the objects by implementing the abstract methods (e.g., {@link
- * #storeClass(JavaClass)} and {@link #findClass(String)}).
+ * #storeClass(JavaClass)} and {@link #findClass(String)}).</p>
  *
  * @since 6.4.0
  */
@@ -63,7 +63,7 @@ abstract class AbstractClassPathRepository implements Repository {
      */
     @Override
     public JavaClass loadClass(String className) throws ClassNotFoundException {
-        if ((className == null) || className.isEmpty()) {
+        if (className == null || className.isEmpty()) {
             throw new IllegalArgumentException("Invalid class name " + className);
         }
         className = className.replace('/', '.'); // Just in case, canonical form
@@ -101,11 +101,11 @@ abstract class AbstractClassPathRepository implements Repository {
         if (i > 0) {
             name = name.substring(i + 1);
         }
-        JavaClass cls = null;
+
         try (InputStream clsStream = clazz.getResourceAsStream(name + ".class")) {
-            return cls = loadClass(clsStream, className);
+            return loadClass(clsStream, className);
         } catch (final IOException e) {
-            return cls;
+            return null;
         }
     }
 
