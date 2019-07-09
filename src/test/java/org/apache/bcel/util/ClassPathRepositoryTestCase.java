@@ -24,9 +24,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Tests {@link ClassPathRepository} and {@link MemorySensitiveClassPathRepository}.
+ * Tests {@link ClassPathRepository}, {@link MemorySensitiveClassPathRepository}, and {@link
+ * LruCacheClassPathRepository} for their common attributes of caching.
  *
- * <p>Without memory scarcity, these two classes behave in the same manner.
+ * <p>Without memory scarcity, these classes behave in the same manner.
  */
 public class ClassPathRepositoryTestCase {
 
@@ -34,7 +35,7 @@ public class ClassPathRepositoryTestCase {
         // Tests loadClass()
         JavaClass class1 = repository.loadClass("java.lang.String");
         Assert.assertNotNull(class1);
-        JavaClass class2 = repository.loadClass("java.lang.Long");
+        JavaClass class2 = repository.loadClass("java/lang/Long"); // Slashes should work
         Assert.assertNotNull(class2);
 
         // Tests findClass()
@@ -61,6 +62,53 @@ public class ClassPathRepositoryTestCase {
     public void testMemorySensitiveClassPathRepository() throws ClassNotFoundException, IOException {
         try (final ClassPath classPath = new ClassPath("")) {
             verifyCaching(new MemorySensitiveClassPathRepository(classPath));
+        }
+    }
+
+    @Test
+    public void testLruCacheClassPathRepository() throws ClassNotFoundException, IOException {
+        try (final ClassPath classPath = new ClassPath("")) {
+            verifyCaching(new LruCacheClassPathRepository(classPath, 10));
+        }
+    }
+
+    @Test
+    public void testClassPath() throws IOException {
+        try (final ClassPath classPath = new ClassPath("")) {
+            ClassPathRepository repository = new ClassPathRepository(classPath);
+            Assert.assertEquals(classPath, repository.getClassPath());
+        }
+    }
+
+    @Test(expected = ClassNotFoundException.class)
+    public void testNoClassNotFound() throws ClassNotFoundException, IOException {
+        try (final ClassPath classPath = new ClassPath("")) {
+            ClassPathRepository repository = new ClassPathRepository(classPath);
+            repository.loadClass("no.such.Class");
+        }
+    }
+
+    @Test(expected = ClassNotFoundException.class)
+    public void testClassWithoutPackage() throws ClassNotFoundException, IOException {
+        try (final ClassPath classPath = new ClassPath("")) {
+            ClassPathRepository repository = new ClassPathRepository(classPath);
+            repository.loadClass("ClassXYZ");
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyInput() throws ClassNotFoundException, IOException {
+        try (final ClassPath classPath = new ClassPath("")) {
+            ClassPathRepository repository = new ClassPathRepository(classPath);
+            repository.loadClass("");
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullInput() throws ClassNotFoundException, IOException {
+        try (final ClassPath classPath = new ClassPath("")) {
+            ClassPathRepository repository = new ClassPathRepository(classPath);
+            repository.loadClass((String) null);
         }
     }
 }

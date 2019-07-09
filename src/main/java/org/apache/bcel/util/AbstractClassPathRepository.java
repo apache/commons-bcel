@@ -128,7 +128,7 @@ abstract class AbstractClassPathRepository implements Repository {
                 }
             }
         }
-        throw new ClassNotFoundException("SyntheticRepository could not load " + className);
+        throw new ClassNotFoundException("ClassRepository could not load " + className);
     }
 
     @Override
