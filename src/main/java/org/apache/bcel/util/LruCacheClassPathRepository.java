@@ -32,7 +32,7 @@ import org.apache.bcel.classfile.JavaClass;
  * 
  * @since 6.4.0
  */
-public class LruCacheClassPathRepository extends ClassPathRepository {
+public class LruCacheClassPathRepository extends AbstractClassPathRepository {
 
     private final LinkedHashMap<String, JavaClass> loadedClasses;
 
@@ -65,5 +65,15 @@ public class LruCacheClassPathRepository extends ClassPathRepository {
         // Not storing parent's _loadedClass
         loadedClasses.put(javaClass.getClassName(), javaClass);
         javaClass.setRepository(this);
+    }
+
+    @Override
+    public void removeClass(final JavaClass javaClass) {
+        loadedClasses.remove(javaClass.getClassName());
+    }
+
+    @Override
+    public void clear() {
+        loadedClasses.clear();
     }
 }
