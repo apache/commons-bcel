@@ -72,6 +72,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-299" type="update" dev="ggregory" due-to="Gary Gregory, zhangminglei ">Fix example src/examples/ClassDumper.java ClassDumper.processID().</action>
       <action issue="BCEL-322" type="add" dev="ggregory" due-to="Gary Gregory">Add constants to org.apache.bcel.Const for Java 14.</action>
       <action issue="BCEL-270" type="fix" dev="ggregory" due-to="Alexandru-Constantin Bledea">Calling toString(ConstantPool) on InvokeInstruction throws NullPointerException.</action>
+      <action issue="BCEL-321" type="add" dev="ggregory" due-to="Tomo Suzuki">Refactor subclasses of ClassPathRepository for differences in underlying cache.</action>
     </release>
 
     <release version="6.3.1" date="2019-03-20" description="Bug fix release">
