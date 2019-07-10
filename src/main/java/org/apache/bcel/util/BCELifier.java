@@ -108,6 +108,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
                 + "\", \"" + super_name + "\", " + "\"" + clazz.getSourceFileName() + "\", "
                 + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", "
                 + "new String[] { " + inter + " });");
+        _out.println("    _cg.setMajor(" + clazz.getMajor() +");");
+        _out.println("    _cg.setMinor(" + clazz.getMinor() +");");
         _out.println();
         _out.println("    _cp = _cg.getConstantPool();");
         _out.println("    _factory = new InstructionFactory(_cg, _cp);");
