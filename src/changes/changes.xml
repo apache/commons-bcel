@@ -69,7 +69,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 4.5.0 to 5.3.1.</action>
       <action issue="BCEL-317" type="update" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">Pluggable cache for ConstantUtf8.</action>
       <action issue="BCEL-320" type="add" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">Add LruCacheClassPathRepository that can scan many JAR files without OutOfMemoryError.</action>
-      <action issue="BCEL-299" type="update" dev="ggregory" due-to="Gary Gregory, zhangminglei ">Fix example src/examples/ClassDumper.java ClassDumper.processID().</action>
+      <action issue="BCEL-299" type="update" dev="ggregory" due-to="Gary Gregory, zhangminglei">Fix example src/examples/ClassDumper.java ClassDumper.processID().</action>
       <action issue="BCEL-322" type="add" dev="ggregory" due-to="Gary Gregory">Add constants to org.apache.bcel.Const for Java 14.</action>
       <action issue="BCEL-270" type="fix" dev="ggregory" due-to="Alexandru-Constantin Bledea">Calling toString(ConstantPool) on InvokeInstruction throws NullPointerException.</action>
       <action issue="BCEL-321" type="add" dev="ggregory" due-to="Tomo Suzuki">Refactor subclasses of ClassPathRepository for differences in underlying cache.</action>
