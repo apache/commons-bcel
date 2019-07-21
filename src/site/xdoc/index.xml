@@ -71,7 +71,7 @@
         <li>The <a href="apidocs/index.html">current stable release</a></li>
       </ul>
       <p>
-        The <a href="source-repository.html">svn repository</a> can be
+        The <a href="scm.html">source repository</a> can be
         <a href="https://gitbox.apache.org/repos/asf?p=commons-bcel.git">browsed</a>, or you can browse/contribute via <a href="https://github.com/apache/commons-bcel">GitHub</a>.
       </p>
     </section>
