@@ -26,15 +26,24 @@ import org.apache.bcel.Constants;
 
 /**
  * This class represents a local variable within a method. It contains its
- * scope, name, signature and index on the method's frame.
+ * scope, name, signature and index on the method's frame.  It is used both
+ * to represent an element of the LocalVariableTable as well as an element
+ * of the LocalVariableTypeTable.  The nomenclature used here may be a bit confusing;
+ * while the two items have the same layout in a class file, a LocalVariableTable
+ * attribute contains a descriptor_index, not a signature_index.  The
+ * LocalVariableTypeTable attribute does have a signature_index.
+ * @see org.apache.bcel.classfile.Utility for more details on the difference.
  *
  * @see     LocalVariableTable
+ * @see     LocalVariableTypeTable
  */
 public final class LocalVariable implements Cloneable, Node, Constants {
 
     private int start_pc; // Range in which the variable is valid
     private int length;
     private int name_index; // Index in constant pool of variable name
+    // Technically, a decscriptor_index for a local variable table entry
+    // and a signature_index for a local variable type table entry.
     private int signature_index; // Index of variable signature
     private int index; /* Variable is `index'th local variable on
      * this method's frame.
