@@ -193,6 +193,10 @@ public class ConstantPoolGen {
                 // TODO should this be handled somehow?
             } else if (c instanceof org.apache.bcel.classfile.ConstantMethodHandle) {
                 // TODO should this be handled somehow?
+            } else if (c instanceof org.apache.bcel.classfile.ConstantModule) {
+                // TODO should this be handled somehow?
+            } else if (c instanceof org.apache.bcel.classfile.ConstantPackage) {
+                // TODO should this be handled somehow?
             } else {
                 assert false : "Unexpected constant type: " + c.getClass().getName();
             }

@@ -135,7 +135,7 @@ public final class InnerClasses extends Attribute {
         for (final InnerClass inner_class : inner_classes) {
             buf.append(inner_class.toString(super.getConstantPool())).append("\n");
         }
-        return buf.toString();
+        return buf.substring(0, buf.length()-1); // remove the last newline
     }
 
 
