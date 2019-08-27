@@ -28,7 +28,7 @@ import org.apache.bcel.Const;
  * There may be at most one Module attribute in a ClassFile structure.
  *
  * @see   Attribute
- * @since 6.4
+ * @since 6.4.0
  */
 public final class Module extends Attribute {
 

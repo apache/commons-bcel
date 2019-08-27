@@ -132,7 +132,7 @@ public interface Visitor
     void visitMethodParameters(MethodParameters obj);
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     default void visitMethodParameter(MethodParameter obj) {
         // empty
@@ -171,47 +171,47 @@ public interface Visitor
     }
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     void visitModule(Module constantModule);
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     void visitModuleRequires(ModuleRequires constantModule);
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     void visitModuleExports(ModuleExports constantModule);
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     void visitModuleOpens(ModuleOpens constantModule);
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     void visitModuleProvides(ModuleProvides constantModule);
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     void visitModulePackages(ModulePackages constantModule);
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     void visitModuleMainClass(ModuleMainClass obj);
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     void visitNestHost(NestHost obj);
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     void visitNestMembers(NestMembers obj);
 }

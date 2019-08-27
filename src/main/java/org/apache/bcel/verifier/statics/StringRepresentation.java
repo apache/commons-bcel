@@ -406,7 +406,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     /**
-     * @since 6.4
+     * @since 6.4.0
      */
     @Override
     public void visitNestMembers(final NestMembers obj) {

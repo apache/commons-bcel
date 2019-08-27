@@ -28,7 +28,7 @@ import org.apache.bcel.Const;
  * Each entry describes a module on which the parent module depends.
  *
  * @see   Module
- * @since 6.4
+ * @since 6.4.0
  */
 public final class ModuleRequires implements Cloneable, Node {
 

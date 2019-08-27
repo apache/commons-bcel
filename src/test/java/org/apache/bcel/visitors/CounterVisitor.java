@@ -177,31 +177,31 @@ public class CounterVisitor implements Visitor
     /** @since 6.3 */
     public int constantDynamicCount = 0;
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     public int moduleCount = 0;
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     public int moduleExportsCount = 0;
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     public int moduleOpensCount = 0;
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     public int moduleProvidesCount = 0;
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     public int moduleRequiresCount = 0;
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     public int moduleMainClassCount = 0;
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     public int modulePackagesCount = 0;
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     public int nestHostCount = 0;
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     public int nestMembersCount = 0;
     // CHECKSTYLE:ON
 
@@ -498,55 +498,55 @@ public class CounterVisitor implements Visitor
         constantDynamicCount++;
     }
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     @Override
     public void visitModule(final Module obj) {
         moduleCount++;
     }
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     @Override
     public void visitModuleExports(final ModuleExports obj) {
         moduleExportsCount++;
     }
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     @Override
     public void visitModuleOpens(final ModuleOpens obj) {
         moduleOpensCount++;
     }
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     @Override
     public void visitModuleProvides(final ModuleProvides obj) {
         moduleProvidesCount++;
     }
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     @Override
     public void visitModuleRequires(final ModuleRequires obj) {
         moduleRequiresCount++;
     }
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     @Override
     public void visitModuleMainClass(final ModuleMainClass obj) {
         moduleMainClassCount++;
     }
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     @Override
     public void visitModulePackages(final ModulePackages obj) {
         modulePackagesCount++;
     }
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     @Override
     public void visitNestHost(final NestHost obj) {
         nestHostCount++;
     }
 
-    /** @since 6.4 */
+    /** @since 6.4.0 */
     @Override
     public void visitNestMembers(final NestMembers obj) {
         nestMembersCount++;

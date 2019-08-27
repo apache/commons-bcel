@@ -28,7 +28,7 @@ import org.apache.bcel.Const;
  * Each entry describes a package which may open the parent module.
  *
  * @see   Module
- * @since 6.4
+ * @since 6.4.0
  */
 public final class ModuleExports implements Cloneable, Node {
 

@@ -28,7 +28,7 @@ import org.apache.bcel.Const;
  * Each entry describes a service implementation that the parent module provides.
  *
  * @see   Module
- * @since 6.4
+ * @since 6.4.0
  */
 public final class ModuleProvides implements Cloneable, Node {
 
