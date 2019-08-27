@@ -132,6 +132,13 @@ public interface Visitor
     void visitMethodParameters(MethodParameters obj);
 
     /**
+     * @since 6.4
+     */
+    default void visitMethodParameter(MethodParameter obj) {
+        // empty
+    }
+
+    /**
      * @since 6.0
      */
     void visitConstantMethodType(ConstantMethodType obj);
@@ -162,4 +169,49 @@ public interface Visitor
     default void visitConstantDynamic(ConstantDynamic constantDynamic) {
         // empty
     }
+
+    /**
+     * @since 6.4
+     */
+    void visitModule(Module constantModule);
+
+    /**
+     * @since 6.4
+     */
+    void visitModuleRequires(ModuleRequires constantModule);
+
+    /**
+     * @since 6.4
+     */
+    void visitModuleExports(ModuleExports constantModule);
+
+    /**
+     * @since 6.4
+     */
+    void visitModuleOpens(ModuleOpens constantModule);
+
+    /**
+     * @since 6.4
+     */
+    void visitModuleProvides(ModuleProvides constantModule);
+
+    /**
+     * @since 6.4
+     */
+    void visitModulePackages(ModulePackages constantModule);
+
+    /**
+     * @since 6.4
+     */
+    void visitModuleMainClass(ModuleMainClass obj);
+
+    /**
+     * @since 6.4
+     */
+    void visitNestHost(NestHost obj);
+
+    /**
+     * @since 6.4
+     */
+    void visitNestMembers(NestMembers obj);
 }

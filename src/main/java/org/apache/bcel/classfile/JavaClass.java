@@ -721,7 +721,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                       boolean innerClassAttributeRefersToMe = false;
                       String inner_class_name = constant_pool.getConstantString(innerClasse.getInnerClassIndex(),
                                  Const.CONSTANT_Class);
-                      inner_class_name = Utility.compactClassName(inner_class_name);
+                      inner_class_name = Utility.compactClassName(inner_class_name, false);
                       if (inner_class_name.equals(getClassName())) {
                           innerClassAttributeRefersToMe = true;
                       }
