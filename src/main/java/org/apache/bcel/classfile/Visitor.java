@@ -132,9 +132,11 @@ public interface Visitor
     void visitMethodParameters(MethodParameters obj);
 
     /**
-     * @since 6.0
+     * @since 6.4
      */
-    void visitMethodParameter(MethodParameter obj);
+    default void visitMethodParameter(MethodParameter obj) {
+        // empty
+    }
 
     /**
      * @since 6.0

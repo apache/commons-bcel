@@ -508,7 +508,7 @@ public class DescendingVisitor implements Visitor
     }
 
     /**
-     * @since 6.0
+     * @since 6.4
      */
     @Override
     public void visitMethodParameter(final MethodParameter obj)
