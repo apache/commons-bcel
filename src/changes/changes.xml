@@ -66,7 +66,6 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-316" type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Attribute class and subclasses should NOT log to the console by default.</action>
       <action issue="BCEL-278" type="fix" dev="ggregory" due-to="Valery Barysoky">InvokeInstruction.toString(final ConstantPool cp) throws NoSuchElementException #11.</action>
       <action issue="BCEL-318" type="fix" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.ConstantUtf8.clearCache().</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 4.5.0 to 5.3.1.</action>
       <action issue="BCEL-317" type="update" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">Pluggable cache for ConstantUtf8.</action>
       <action issue="BCEL-320" type="add" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">Add LruCacheClassPathRepository that can scan many JAR files without OutOfMemoryError.</action>
       <action issue="BCEL-299" type="update" dev="ggregory" due-to="Gary Gregory, zhangminglei">Fix example src/examples/ClassDumper.java ClassDumper.processID().</action>
@@ -75,6 +74,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-321" type="add" dev="ggregory" due-to="Tomo Suzuki">Refactor subclasses of ClassPathRepository for differences in underlying cache.</action>
       <action issue="BCEL-323" type="fix" dev="ggregory" due-to="Tomo Suzuki">org.apache.bcel.util.BCELifier to set major and minor versions.</action>
       <action issue="BCEL-326" type="fix" dev="ggregory" due-to="TMark Roberts">Add missing Java 9 and Java 11 class file attributes. #33</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 4.5.0 to 5.3.1.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 5.3.1. to 5.4.0.</action>
     </release>
 
     <release version="6.3.1" date="2019-03-20" description="Bug fix release">
