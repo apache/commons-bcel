@@ -182,6 +182,16 @@ public abstract class Attribute implements Cloneable, Node {
                 return new BootstrapMethods(name_index, length, file, constant_pool);
             case Const.ATTR_METHOD_PARAMETERS:
                 return new MethodParameters(name_index, length, file, constant_pool);
+            case Const.ATTR_MODULE:
+                return new Module(name_index, length, file, constant_pool);
+            case Const.ATTR_MODULE_PACKAGES:
+                return new ModulePackages(name_index, length, file, constant_pool);
+            case Const.ATTR_MODULE_MAIN_CLASS:
+                return new ModuleMainClass(name_index, length, file, constant_pool);
+            case Const.ATTR_NEST_HOST:
+                return new NestHost(name_index, length, file, constant_pool);
+            case Const.ATTR_NEST_MEMBERS:
+                return new NestMembers(name_index, length, file, constant_pool);
             default:
                 // Never reached
                 throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);

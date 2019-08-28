@@ -182,11 +182,11 @@ public final class InnerClass implements Cloneable, Node {
         String inner_name;
         String inner_class_name = constant_pool.getConstantString(inner_class_index,
                 Const.CONSTANT_Class);
-        inner_class_name = Utility.compactClassName(inner_class_name);
+        inner_class_name = Utility.compactClassName(inner_class_name, false);
         if (outer_class_index != 0) {
             outer_class_name = constant_pool.getConstantString(outer_class_index,
                     Const.CONSTANT_Class);
-            outer_class_name = " of class " + Utility.compactClassName(outer_class_name);
+            outer_class_name = " of class " + Utility.compactClassName(outer_class_name, false);
         } else {
             outer_class_name = "";
         }

@@ -56,7 +56,17 @@ import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.MethodParameter;
 import org.apache.bcel.classfile.MethodParameters;
+import org.apache.bcel.classfile.Module;
+import org.apache.bcel.classfile.ModuleExports;
+import org.apache.bcel.classfile.ModuleOpens;
+import org.apache.bcel.classfile.ModuleProvides;
+import org.apache.bcel.classfile.ModuleRequires;
+import org.apache.bcel.classfile.ModuleMainClass;
+import org.apache.bcel.classfile.ModulePackages;
+import org.apache.bcel.classfile.NestHost;
+import org.apache.bcel.classfile.NestMembers;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
 import org.apache.bcel.classfile.Signature;
@@ -150,6 +160,9 @@ public class CounterVisitor implements Visitor
     public int bootstrapMethodsCount = 0;
 
     /** @since 6.0 */
+    public int methodParameterCount = 0;
+
+    /** @since 6.0 */
     public int methodParametersCount = 0;
 
     /** @since 6.0 */
@@ -163,6 +176,33 @@ public class CounterVisitor implements Visitor
 
     /** @since 6.3 */
     public int constantDynamicCount = 0;
+
+    /** @since 6.4.0 */
+    public int moduleCount = 0;
+
+    /** @since 6.4.0 */
+    public int moduleExportsCount = 0;
+
+    /** @since 6.4.0 */
+    public int moduleOpensCount = 0;
+
+    /** @since 6.4.0 */
+    public int moduleProvidesCount = 0;
+
+    /** @since 6.4.0 */
+    public int moduleRequiresCount = 0;
+
+    /** @since 6.4.0 */
+    public int moduleMainClassCount = 0;
+
+    /** @since 6.4.0 */
+    public int modulePackagesCount = 0;
+
+    /** @since 6.4.0 */
+    public int nestHostCount = 0;
+
+    /** @since 6.4.0 */
+    public int nestMembersCount = 0;
     // CHECKSTYLE:ON
 
 
@@ -403,6 +443,13 @@ public class CounterVisitor implements Visitor
 
     /** @since 6.0 */
     @Override
+    public void visitMethodParameter(final MethodParameter obj)
+    {
+        methodParameterCount++;
+    }
+
+    /** @since 6.0 */
+    @Override
     public void visitMethodParameters(final MethodParameters obj)
     {
         methodParametersCount++;
@@ -449,5 +496,59 @@ public class CounterVisitor implements Visitor
     @Override
     public void visitConstantDynamic(final ConstantDynamic constantDynamic) {
         constantDynamicCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModule(final Module obj) {
+        moduleCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleExports(final ModuleExports obj) {
+        moduleExportsCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleOpens(final ModuleOpens obj) {
+        moduleOpensCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleProvides(final ModuleProvides obj) {
+        moduleProvidesCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleRequires(final ModuleRequires obj) {
+        moduleRequiresCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleMainClass(final ModuleMainClass obj) {
+        moduleMainClassCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModulePackages(final ModulePackages obj) {
+        modulePackagesCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitNestHost(final NestHost obj) {
+        nestHostCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitNestMembers(final NestMembers obj) {
+        nestMembersCount++;
     }
 }
