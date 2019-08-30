@@ -953,6 +953,7 @@ public abstract class Utility {
      * @param  chopit flag that determines whether chopping is executed or not
      * @return string containing human readable type signature
      * @throws ClassFormatException
+     * @since 6.4.0
      */
     public static String typeSignatureToString( final String signature, final boolean chopit ) throws ClassFormatException {
         //corrected concurrent private static field acess
