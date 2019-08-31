@@ -29,4 +29,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -V package --file pom.xml
+      run: mvn -debug -V package --file pom.xml
