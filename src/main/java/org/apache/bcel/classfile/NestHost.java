@@ -36,7 +36,7 @@ public final class NestHost extends Attribute {
 
 
     /**
-     * Initialize from another object. Note that both objects use the same
+     * Initializes from another object. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
      */
     public NestHost(final NestHost c) {
@@ -58,7 +58,7 @@ public final class NestHost extends Attribute {
 
 
     /**
-     * Construct object from input stream.
+     * Constructs object from input stream.
      * @param name_index Index in constant pool
      * @param length Content length in bytes
      * @param input Input stream
@@ -85,7 +85,7 @@ public final class NestHost extends Attribute {
 
 
     /**
-     * Dump NestHost attribute to file stream in binary format.
+     * Dumps NestHost attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.
