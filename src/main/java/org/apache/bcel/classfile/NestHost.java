@@ -47,7 +47,7 @@ public final class NestHost extends Attribute {
     /**
      * @param name_index Index in constant pool
      * @param length Content length in bytes
-     * @param int Host class index
+     * @param host_class_index Host class index
      * @param constant_pool Array of constants
      */
     public NestHost(final int name_index, final int length, final int host_class_index,
@@ -88,7 +88,7 @@ public final class NestHost extends Attribute {
      * Dump NestHost attribute to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump( final DataOutputStream file ) throws IOException {
@@ -106,7 +106,7 @@ public final class NestHost extends Attribute {
 
 
     /**
-     * @param int the host class index
+     * @param host_class_index the host class index
      */
     public void setHostClassIndex( final int host_class_index ) {
         this.host_class_index = host_class_index;
