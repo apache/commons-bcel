@@ -39,7 +39,7 @@ import junit.framework.TestCase;
 
 public final class PerformanceTest extends TestCase {
 
-    private static final boolean REPORT = Boolean.parseBoolean(System.getProperty("PerformanceTest.report", "true"));;
+    private static final boolean REPORT = Boolean.parseBoolean(System.getProperty("PerformanceTest.report", "true"));
 
     private static byte[] read(final InputStream is) throws IOException {
         if (is == null) {
