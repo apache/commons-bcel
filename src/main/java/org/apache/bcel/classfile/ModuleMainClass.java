@@ -46,7 +46,7 @@ public final class ModuleMainClass extends Attribute {
     /**
      * @param name_index Index in constant pool
      * @param length Content length in bytes
-     * @param int Host class index
+     * @param main_class_index Host class index
      * @param constant_pool Array of constants
      */
     public ModuleMainClass(final int name_index, final int length, final int main_class_index,
@@ -71,7 +71,7 @@ public final class ModuleMainClass extends Attribute {
 
 
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
+     * Called by objects that are traversing the nodes of the tree implicitly
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
      *
@@ -87,7 +87,7 @@ public final class ModuleMainClass extends Attribute {
      * Dump ModuleMainClass attribute to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump( final DataOutputStream file ) throws IOException {
@@ -105,7 +105,7 @@ public final class ModuleMainClass extends Attribute {
 
 
     /**
-     * @param int the host class index
+     * @param main_class_index the host class index
      */
     public void setHostClassIndex( final int main_class_index ) {
         this.main_class_index = main_class_index;
