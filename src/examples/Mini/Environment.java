@@ -71,7 +71,7 @@ public class Environment implements Cloneable {
     elements++; // Count
 
     if(v == null) {
-        table[hash] = v = new Vector<EnvEntry>(SLOTS);
+        table[hash] = v = new Vector<>(SLOTS);
     } else {
       try {
         final int index = lookup(v, key);

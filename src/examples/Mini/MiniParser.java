@@ -1025,7 +1025,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
     }
   }
 
-  static private java.util.Vector<int[]> jj_expentries = new java.util.Vector<int[]>();
+  static private java.util.Vector<int[]> jj_expentries = new java.util.Vector<>();
   static private int[] jj_expentry;
   static private int jj_kind = -1;
   static private int[] jj_lasttokens = new int[100];

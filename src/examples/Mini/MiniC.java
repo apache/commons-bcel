@@ -61,8 +61,8 @@ public class MiniC implements org.apache.bcel.Constants {
     }
 
       for(int j=0; j < files; j++) {
-        errors   = new Vector<String>();
-        warnings = new Vector<String>();
+        errors   = new Vector<>();
+        warnings = new Vector<>();
         pass     = 0;
 
         if(j == 0) {

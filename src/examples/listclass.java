@@ -92,8 +92,8 @@ public class listclass {
     List<String> exclude_name;
 
     public static void main(final String[] argv) {
-        final List<String> file_name = new ArrayList<String>();
-        final List<String> exclude_name = new ArrayList<String>();
+        final List<String> file_name = new ArrayList<>();
+        final List<String> exclude_name = new ArrayList<>();
         boolean code = false;
         boolean constants = false;
         boolean verbose = true;
@@ -167,7 +167,7 @@ public class listclass {
         this.classdep = classdep;
         this.nocontents = nocontents;
         this.recurse = recurse;
-        this.listedClasses = new HashMap<String, String>();
+        this.listedClasses = new HashMap<>();
         this.exclude_name = exclude_name;
     }
 

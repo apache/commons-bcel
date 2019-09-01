@@ -75,20 +75,20 @@ public class Package {
      * Store class name against the JavaClass. From the JavaClass
      * we get the bytes to create the jar.
      */
-    Map<String, JavaClass> allClasses = new TreeMap<String, JavaClass>();
+    Map<String, JavaClass> allClasses = new TreeMap<>();
 
     /**
      * We start at the root classes, put them in here, then go through
      * this list, putting dependent classes in here and from there
      * into allClasses. Store class names against class names of their dependents
      */
-    TreeMap<String, String> dependents = new TreeMap<String, String>();
+    TreeMap<String, String> dependents = new TreeMap<>();
 
     /**
      * Collect all classes that could not be found in the classpath.
      * Store class names against class names of their dependents
      */
-    TreeMap<String, String> notFound = new TreeMap<String, String>();
+    TreeMap<String, String> notFound = new TreeMap<>();
 
     /**
      * See wheather we print the classes that were not found (default = false)
@@ -216,7 +216,7 @@ public class Package {
      * overview. Enabled by -s option
      */
     void printAllClasses() {
-        final List<String> names = new ArrayList<String>(allClasses.keySet());
+        final List<String> names = new ArrayList<>(allClasses.keySet());
         Collections.sort(names);
         for (int i = 0; i < names.size(); i++) {
             final String cl = names.get(i);

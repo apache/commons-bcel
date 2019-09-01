@@ -175,7 +175,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     /* Pass 1: Give all referenced instruction handles a symbolic name, i.e. a
      * label.
      */
-        map = new Hashtable<InstructionHandle, String>();
+        map = new Hashtable<>();
 
         for (final InstructionHandle ih1 : ihs) {
             if (ih1 instanceof BranchHandle) {

@@ -28,8 +28,8 @@ class JJTMiniParserState {
   private boolean node_created;
 
   JJTMiniParserState() {
-    nodes = new java.util.Stack<Node>();
-    marks = new java.util.Stack<Integer>();
+    nodes = new java.util.Stack<>();
+    marks = new java.util.Stack<>();
     sp = 0;
     mk = 0;
   }
