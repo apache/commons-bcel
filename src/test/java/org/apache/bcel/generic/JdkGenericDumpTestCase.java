@@ -169,12 +169,12 @@ public class JdkGenericDumpTestCase {
         return javaHomes;
     }
 
-    private static void addAllJavaHomes(String extraJavaHomesProp, Set<String> javaHomes) {
-        String path = System.getProperty(extraJavaHomesProp);
+    private static void addAllJavaHomes(final String extraJavaHomesProp, final Set<String> javaHomes) {
+        final String path = System.getProperty(extraJavaHomesProp);
         if (StringUtils.isEmpty(path)) {
             return;
         }
-        String[] paths = path.split(File.pathSeparator);
+        final String[] paths = path.split(File.pathSeparator);
         javaHomes.addAll(Arrays.asList(paths));
 
     }

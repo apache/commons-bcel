@@ -39,8 +39,8 @@ import org.apache.bcel.util.BCELifier;
  */
 class ClassDumper {
 
-    private FileImageInputStream file;
-    private String file_name;
+    private final FileImageInputStream file;
+    private final String file_name;
     private int class_name_index;
     private int superclass_name_index;
     private int major;
@@ -59,7 +59,7 @@ class ClassDumper {
      * @param file Input stream
      * @param file_name File name
      */
-    public ClassDumper (FileImageInputStream file, String file_name) {
+    public ClassDumper (final FileImageInputStream file, final String file_name) {
         this.file_name = file_name;
         this.file = file;
     }
@@ -98,7 +98,7 @@ class ClassDumper {
                 if (file != null) {
                     file.close();
                 }
-            } catch (IOException ioe) {
+            } catch (final IOException ioe) {
                 //ignore close exceptions
             }
         }
@@ -141,7 +141,7 @@ class ClassDumper {
      */
     private final void processConstantPool () throws IOException, ClassFormatException {
         byte tag;
-        int constant_pool_count = file.readUnsignedShort();
+        final int constant_pool_count = file.readUnsignedShort();
         constant_items = new Constant[constant_pool_count];
         constant_pool = new ConstantPool(constant_items);
 
@@ -287,8 +287,8 @@ class ClassDumper {
         for (int i = 0; i < attributes_count; i++) {
             attributes[i] = Attribute.readAttribute(file, constant_pool);
             // indent all lines by two spaces
-            String[] lines = attributes[i].toString().split("\\r?\\n");
-            for (String line : lines) {
+            final String[] lines = attributes[i].toString().split("\\r?\\n");
+            for (final String line : lines) {
                 System.out.println("  " + line);
             }
         }
@@ -301,25 +301,25 @@ class ClassDumper {
      * @throws ClassFormatException
      */
     private final void processFieldOrMethod () throws IOException, ClassFormatException {
-        int access_flags = file.readUnsignedShort();
-        int name_index = file.readUnsignedShort();
+        final int access_flags = file.readUnsignedShort();
+        final int name_index = file.readUnsignedShort();
         System.out.printf("  name_index: %d (", name_index); 
         System.out.println(constantToString(name_index) + ")"); 
         System.out.println("  access_flags: " + BCELifier.printFlags(access_flags,
                 BCELifier.FLAGS.METHOD));
-        int descriptor_index = file.readUnsignedShort();
+        final int descriptor_index = file.readUnsignedShort();
         System.out.printf("  descriptor_index: %d (", descriptor_index); 
         System.out.println(constantToString(descriptor_index) + ")"); 
 
-        int attributes_count = file.readUnsignedShort();
-        Attribute[] attributes = new Attribute[attributes_count];
+        final int attributes_count = file.readUnsignedShort();
+        final Attribute[] attributes = new Attribute[attributes_count];
         System.out.println("  attribute count: " + attributes_count); 
 
         for (int i = 0; i < attributes_count; i++) {
             // going to peek ahead a bit
             file.mark();
-            int attribute_name_index = file.readUnsignedShort();
-            int attribute_length = file.readInt();
+            final int attribute_name_index = file.readUnsignedShort();
+            final int attribute_length = file.readInt();
             // restore file location
             file.reset();
             // Usefull for debugging
@@ -332,9 +332,9 @@ class ClassDumper {
             // into a buffer.  Then pass that buffer to readAttribute and also
             // verify we're at EOF of the buffer on return.
 
-            long pos1 = file.getStreamPosition();
+            final long pos1 = file.getStreamPosition();
             attributes[i] = Attribute.readAttribute(file, constant_pool);
-            long pos2 = file.getStreamPosition();
+            final long pos2 = file.getStreamPosition();
             if ((pos2 - pos1) != (attribute_length + 6)) {
                 System.out.printf("%nWHOOPS attribute_length: %d pos2-pos1-6: %d pos1: %x(%d) pos2: %x(%d)%n",
                         attribute_length, pos2-pos1-6, pos1, pos1, pos2, pos2); 
@@ -344,8 +344,8 @@ class ClassDumper {
         }
     }
 
-    private final String constantToString (int index) {
-        Constant c = constant_items[index]; 
+    private final String constantToString (final int index) {
+        final Constant c = constant_items[index]; 
         return constant_pool.constantToString(c); 
     }    
 
@@ -353,7 +353,7 @@ class ClassDumper {
 
 class DumpClass {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(final String[] args) throws IOException {
 
         if (args.length != 1) {
             throw new RuntimeException("Require file name as only argument");
@@ -361,7 +361,7 @@ class DumpClass {
 
         try (FileImageInputStream file = new FileImageInputStream(new File(args[0]))) {
 
-            ClassDumper cd = new ClassDumper(file, args[0]);
+            final ClassDumper cd = new ClassDumper(file, args[0]);
             cd.dump();
         }
 

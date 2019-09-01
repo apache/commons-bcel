@@ -31,8 +31,8 @@ public class MiniC implements org.apache.bcel.Constants {
   private static String file     = null;
   private static int   pass      = 0;
         
-  public static void main(String[] argv) {
-    String[]   file_name = new String[argv.length];
+  public static void main(final String[] argv) {
+    final String[]   file_name = new String[argv.length];
     int        files=0;
     MiniParser parser=null;
     String     base_name=null;
@@ -114,30 +114,30 @@ public class MiniC implements org.apache.bcel.Constants {
         if(errors.size() == 0) {
           if(byte_code) {
             System.out.println("Pass 5: Generating byte code ...");
-            ClassGen class_gen = new ClassGen(base_name, "java.lang.Object",
+            final ClassGen class_gen = new ClassGen(base_name, "java.lang.Object",
                                               file_name[j],
                                               ACC_PUBLIC | ACC_FINAL |
                                               ACC_SUPER, null);
-            ConstantPoolGen cp = class_gen.getConstantPool();
+            final ConstantPoolGen cp = class_gen.getConstantPool();
 
             program.byte_code(class_gen, cp);
-            JavaClass clazz = class_gen.getJavaClass();
+            final JavaClass clazz = class_gen.getJavaClass();
             clazz.dump(base_name + ".class");
           }
           else {
             System.out.println("Pass 5: Generating Java code ...");
-            PrintWriter out = new PrintWriter(new FileOutputStream(base_name + ".java"));
+            final PrintWriter out = new PrintWriter(new FileOutputStream(base_name + ".java"));
             program.code(out, base_name);
             out.close();
 
             System.out.println("Pass 6: Compiling Java code ...");
 
-            String[] args = { "javac", base_name + ".java" };
+            final String[] args = { "javac", base_name + ".java" };
             //sun.tools.javac.Main compiler = new sun.tools.javac.Main(System.err, "javac");
             try {
-              Process p = Runtime.getRuntime().exec(args);
+              final Process p = Runtime.getRuntime().exec(args);
               p.waitFor();
-            } catch(Exception e) {System.out.println(e); }
+            } catch(final Exception e) {System.out.println(e); }
 
             //compiler.compile(args);
           }
@@ -148,28 +148,28 @@ public class MiniC implements org.apache.bcel.Constants {
                              " warnings.");
     }
       }
-    } catch(Exception e) { e.printStackTrace(); }
+    } catch(final Exception e) { e.printStackTrace(); }
   }
 
 
-  final static void addError(int line, int column, String err) {
+  final static void addError(final int line, final int column, final String err) {
     if(pass != 2) {
         errors.addElement(file + ":" + fillup(line, 3) + "," + fillup(column, 2) +
                           ": " + err);
     }
   }
 
-  final static void addWarning(int line, int column, String err) {
+  final static void addWarning(final int line, final int column, final String err) {
     warnings.addElement("Warning: " + file + ":" + fillup(line, 3) + "," +
                         fillup(column, 3) + ": " + err);
   }
 
-  final static String fillup(int n, int len) {
-    String str  = Integer.toString(n);
-    int    diff = len - str.length();
+  final static String fillup(final int n, final int len) {
+    final String str  = Integer.toString(n);
+    final int    diff = len - str.length();
 
     if(diff > 0) {
-      char[] chs = new char[diff];
+      final char[] chs = new char[diff];
       
       for(int i=0; i < diff; i++) {
         chs[i] = ' ';
@@ -181,5 +181,5 @@ public class MiniC implements org.apache.bcel.Constants {
     }
   }
 
-  final static void addWarning(String err) { warnings.addElement(err); }
+  final static void addWarning(final String err) { warnings.addElement(err); }
 }

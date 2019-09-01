@@ -32,9 +32,9 @@ import org.apache.bcel.Const;
  */
 public final class ModuleRequires implements Cloneable, Node {
 
-    private int requires_index;  // points to CONSTANT_Module_info
-    private int requires_flags;
-    private int requires_version_index;  // either 0 or points to CONSTANT_Utf8_info
+    private final int requires_index;  // points to CONSTANT_Module_info
+    private final int requires_flags;
+    private final int requires_version_index;  // either 0 or points to CONSTANT_Utf8_info
 
 
     /**

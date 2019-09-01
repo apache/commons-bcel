@@ -59,19 +59,19 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   private Environment env;
 
   // Generated methods
-  ASTFunDecl(int id) {
+  ASTFunDecl(final int id) {
     super(id);
   }
 
-  ASTFunDecl(MiniParser p, int id) {
+  ASTFunDecl(final MiniParser p, final int id) {
     super(p, id);
   }
 
-  public static Node jjtCreate(MiniParser p, int id) {
+  public static Node jjtCreate(final MiniParser p, final int id) {
     return new ASTFunDecl(p, id);
   }
 
-  ASTFunDecl(ASTIdent name, ASTIdent[] argv, ASTExpr body, int type) {
+  ASTFunDecl(final ASTIdent name, final ASTIdent[] argv, final ASTExpr body, final int type) {
     this(JJTFUNDECL);
     
     this.name = name;
@@ -100,12 +100,12 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   /**
    * First pass of parse tree.
    */
-  public ASTFunDecl traverse(Environment env) {
+  public ASTFunDecl traverse(final Environment env) {
     this.env = env;
 
     // Put arguments into hash table aka environment
     for(int i=0; i < argv.length; i++) {
-      EnvEntry entry = env.get(argv[i].getName());
+      final EnvEntry entry = env.get(argv[i].getName());
 
       if(entry != null) {
         MiniC.addError(argv[i].getLine(), argv[i].getColumn(),
@@ -120,9 +120,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
      * i.e. the user defined a function `TRUE', e.g. and `TRUE' is of type `Variable'.
      */   
     try {
-      Function fun = (Function)env.get(name.getName());
+      final Function fun = (Function)env.get(name.getName());
       fun.setArgs(argv);
-    } catch(ClassCastException e) {} // Who cares?
+    } catch(final ClassCastException e) {} // Who cares?
     
     body = body.traverse(env); // Traverse expression body
 
@@ -132,8 +132,8 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   /** Second pass
    * @return type of expression
    */
-  public int eval(int pass) {
-    int expected = name.getType(); // Maybe other function has already called us
+  public int eval(final int pass) {
+    final int expected = name.getType(); // Maybe other function has already called us
     type = body.eval(expected);    // And updated the env
 
     if((expected != T_UNKNOWN) && (type != expected)) {
@@ -156,11 +156,11 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   /**
    * Fourth pass, produce Java code.
    */
-  public void code(PrintWriter out) {
+  public void code(final PrintWriter out) {
     String expr;
     boolean main=false, ignore=false;
 
-    String fname = name.getName();
+    final String fname = name.getName();
 
     if(fname.equals("main")) {
       out.println("  public static void main(String[] _argv) {");
@@ -185,7 +185,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     }
     
     if(!ignore) {
-      StringBuffer buf = new StringBuffer();
+      final StringBuffer buf = new StringBuffer();
 
       body.code(buf);
       out.println(getVarDecls());
@@ -211,12 +211,12 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   /**
    * Fifth pass, produce Java byte code.
    */
-  public void byte_code(ClassGen class_gen, ConstantPoolGen cp) {
+  public void byte_code(final ClassGen class_gen, final ConstantPoolGen cp) {
     MethodGen method=null;
     boolean main=false, ignore=false;
-    String class_name = class_gen.getClassName();
-    String fname      = name.getName();
-    InstructionList il = new InstructionList();
+    final String class_name = class_gen.getClassName();
+    final String fname      = name.getName();
+    final InstructionList il = new InstructionList();
 
     Type[] args = { new ArrayType(Type.STRING, 1) }; // default for `main'
     String[] arg_names = { "$argv" };
@@ -230,7 +230,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     } else if(fname.equals("READ") || fname.equals("WRITE")) { // Do nothing
       ignore = true;
     } else {
-      int    size  = argv.length;
+      final int    size  = argv.length;
 
       arg_names = new String[size];
       args      = new Type[size];
@@ -244,9 +244,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
                              Type.INT, args, arg_names,
                              fname, class_name, il, cp);
 
-      LocalVariableGen[] lv = method.getLocalVariables();
+      final LocalVariableGen[] lv = method.getLocalVariables();
       for(int i = 0; i < size; i++) {
-        Variable entry = (Variable)env.get(arg_names[i]);
+        final Variable entry = (Variable)env.get(arg_names[i]);
         entry.setLocalVariable(lv[i]);
       }
 
@@ -257,12 +257,13 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
       body.byte_code(il, method, cp);
 
       if(main) {
-        ObjectType e_type = new ObjectType("java.lang.Exception");
-        InstructionHandle start = il.getStart(), end, handler, end_handler;
-        LocalVariableGen exc = method.addLocalVariable("$e",
+        final ObjectType e_type = new ObjectType("java.lang.Exception");
+        final InstructionHandle start = il.getStart();
+        InstructionHandle end, handler, end_handler;
+        final LocalVariableGen exc = method.addLocalVariable("$e",
                                                        e_type,
                                                        null, null);
-        int slot = exc.getIndex();
+        final int slot = exc.getIndex();
 
         il.append(InstructionConstants.POP); pop(); // Remove last element on stack
         end = il.append(InstructionConstants.RETURN); // Use instruction constants, if possible
@@ -296,9 +297,9 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
   private static final InstructionFinder.CodeConstraint my_constraint =
     new InstructionFinder.CodeConstraint() {
-      public boolean checkCode(InstructionHandle[] match) {
-        BranchInstruction if_icmp = (BranchInstruction)match[0].getInstruction();
-        GOTO              goto_   = (GOTO)match[2].getInstruction();
+      public boolean checkCode(final InstructionHandle[] match) {
+        final BranchInstruction if_icmp = (BranchInstruction)match[0].getInstruction();
+        final GOTO              goto_   = (GOTO)match[2].getInstruction();
         return (if_icmp.getTarget() == match[3]) && (goto_.getTarget() == match[4]);
       }
     };
@@ -315,27 +316,27 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
    *
    * where the IF_ICMP__ now branches to the target of the previous IFEQ instruction.
    */
-  private static void optimizeIFs(InstructionList il) {
-    InstructionFinder f   = new InstructionFinder(il);
-    String      pat = "IF_ICMP ICONST_1 GOTO ICONST_0 IFEQ Instruction";
+  private static void optimizeIFs(final InstructionList il) {
+    final InstructionFinder f   = new InstructionFinder(il);
+    final String      pat = "IF_ICMP ICONST_1 GOTO ICONST_0 IFEQ Instruction";
 
-    for(Iterator<InstructionHandle[]> it = f.search(pat, my_constraint); it.hasNext();) {
-      InstructionHandle[] match = it.next();
+    for(final Iterator<InstructionHandle[]> it = f.search(pat, my_constraint); it.hasNext();) {
+      final InstructionHandle[] match = it.next();
       // Everything ok, update code
-      BranchInstruction ifeq    = (BranchInstruction)(match[4].getInstruction());
-      BranchHandle      if_icmp = (BranchHandle)match[0];
+      final BranchInstruction ifeq    = (BranchInstruction)(match[4].getInstruction());
+      final BranchHandle      if_icmp = (BranchHandle)match[0];
 
       if_icmp.setTarget(ifeq.getTarget());
 
       try {
         il.delete(match[1], match[4]);
-      } catch(TargetLostException e) {
-        InstructionHandle[] targets = e.getTargets();
+      } catch(final TargetLostException e) {
+        final InstructionHandle[] targets = e.getTargets();
 
         System.err.println(targets[0]);
 
         for(int i=0; i < targets.length; i++) {
-          InstructionTargeter[] targeters = targets[i].getTargeters();
+          final InstructionTargeter[] targeters = targets[i].getTargeters();
 
           for(int j=0; j < targeters.length; j++) {
         if((targets[i] != match[4]) || (targeters[j] != match[2])) {
@@ -352,7 +353,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
    */
   @Override
   public String toString() {
-    StringBuffer buf = new StringBuffer();
+    final StringBuffer buf = new StringBuffer();
     buf.append(jjtNodeName[id] + " " + name + "(");
 
     for(int i = 0; i < argv.length; i++) {
@@ -372,12 +373,12 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   public int        getNoArgs()           { return argv.length; }
   public ASTIdent[] getArgs()             { return argv; }
   public int        getType()             { return type; }
-  public void       setType(int type)     { this.type = type; }
-  public void       setLine(int line)     { this.line = line; }
+  public void       setType(final int type)     { this.type = type; }
+  public void       setLine(final int line)     { this.line = line; }
   public int        getLine()             { return line; }
-  public void       setColumn(int column) { this.column = column; }
+  public void       setColumn(final int column) { this.column = column; }
   public int        getColumn()           { return column; }
-  public void       setPosition(int line, int column) {
+  public void       setPosition(final int line, final int column) {
     this.line = line;
     this.column = column;
   }
@@ -386,7 +387,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
    * Overrides SimpleNode.dump()
    */
   @Override
-  public void dump(String prefix) {
+  public void dump(final String prefix) {
     System.out.println(toString(prefix));
 
     for(int i = 0; i < argv.length; i++) {
@@ -403,7 +404,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   static void reset() { size = max_size = 0; }
 
   private static String getVarDecls() {
-    StringBuffer buf = new StringBuffer("    int ");
+    final StringBuffer buf = new StringBuffer("    int ");
 
     for(int i=0; i < max_size; i++) {
       buf.append("_s" + i);
@@ -419,8 +420,8 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
   /** Used by byte_code()
    */
-  static void pop(int s) { size -= s; }
-  static void push(int s) {
+  static void pop(final int s) { size -= s; }
+  static void push(final int s) {
     size += s;
 
     if(size > max_size) {
@@ -431,7 +432,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
   /** Used byte code()
    */
-  static void push(StringBuffer buf, String str) {
+  static void push(final StringBuffer buf, final String str) {
     buf.append("    _s" + size + " = " + str + ";\n");
     push(1);
   }

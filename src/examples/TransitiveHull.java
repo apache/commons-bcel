@@ -55,15 +55,15 @@ import org.apache.bcel.util.ClassSet;
  */
 public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
 
-    private ClassQueue queue;
-    private ClassSet set;
+    private final ClassQueue queue;
+    private final ClassSet set;
     private ConstantPool cp;
     private String[] ignored = IGNORED;
 
     public static final String[] IGNORED = {"java[.].*", "javax[.].*", "sun[.].*", "sunw[.].*",
             "com[.]sun[.].*", "org[.]omg[.].*", "org[.]w3c[.].*", "org[.]xml[.].*", "net[.]jini[.].*"};
 
-    public TransitiveHull(JavaClass clazz) {
+    public TransitiveHull(final JavaClass clazz) {
         queue = new ClassQueue();
         queue.enqueue(clazz);
         set = new ClassSet();
@@ -83,7 +83,7 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
      */
     public void start() {
         while (!queue.empty()) {
-            JavaClass clazz = queue.dequeue();
+            final JavaClass clazz = queue.dequeue();
             cp = clazz.getConstantPool();
 
             new org.apache.bcel.classfile.DescendingVisitor(clazz, this).visit();
@@ -93,26 +93,26 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
     private void add(String class_name) {
         class_name = class_name.replace('/', '.');
 
-        for (String anIgnored : ignored) {
+        for (final String anIgnored : ignored) {
             if (Pattern.matches(anIgnored, class_name)) {
                 return;
             }
         }
 
         try {
-            JavaClass clazz = Repository.lookupClass(class_name);
+            final JavaClass clazz = Repository.lookupClass(class_name);
 
             if (set.add(clazz)) {
                 queue.enqueue(clazz);
             }
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             throw new IllegalStateException("Missing class: " + e.toString());
         }
     }
 
     @Override
-    public void visitConstantClass(ConstantClass cc) {
-        String class_name = (String) cc.getConstantValue(cp);
+    public void visitConstantClass(final ConstantClass cc) {
+        final String class_name = (String) cc.getConstantValue(cp);
         add(class_name);
     }
 
@@ -126,21 +126,21 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
         }
     }
 
-    private void visitRef(ConstantCP ccp, boolean method) {
-        String class_name = ccp.getClass(cp);
+    private void visitRef(final ConstantCP ccp, final boolean method) {
+        final String class_name = ccp.getClass(cp);
         add(class_name);
 
-        ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(ccp.getNameAndTypeIndex(),
+        final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(ccp.getNameAndTypeIndex(),
                 Constants.CONSTANT_NameAndType);
 
-        String signature = cnat.getSignature(cp);
+        final String signature = cnat.getSignature(cp);
 
         if (method) {
-            Type type = Type.getReturnType(signature);
+            final Type type = Type.getReturnType(signature);
 
             checkType(type);
 
-            for (Type type1 : Type.getArgumentTypes(signature)) {
+            for (final Type type1 : Type.getArgumentTypes(signature)) {
                 checkType(type1);
             }
         } else {
@@ -149,17 +149,17 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     @Override
-    public void visitConstantMethodref(ConstantMethodref cmr) {
+    public void visitConstantMethodref(final ConstantMethodref cmr) {
         visitRef(cmr, true);
     }
 
     @Override
-    public void visitConstantInterfaceMethodref(ConstantInterfaceMethodref cimr) {
+    public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref cimr) {
         visitRef(cimr, true);
     }
 
     @Override
-    public void visitConstantFieldref(ConstantFieldref cfr) {
+    public void visitConstantFieldref(final ConstantFieldref cfr) {
         visitRef(cfr, false);
     }
 
@@ -172,11 +172,11 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
      *
      * @param v Value to assign to ignored.
      */
-    public void setIgnored(String[] v) {
+    public void setIgnored(final String[] v) {
         ignored = v;
     }
 
-    public static void main(String[] argv) {
+    public static void main(final String[] argv) {
         JavaClass java_class;
 
         try {
@@ -187,12 +187,12 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
                     java_class = new ClassParser(argv[0]).parse();
                 }
 
-                TransitiveHull hull = new TransitiveHull(java_class);
+                final TransitiveHull hull = new TransitiveHull(java_class);
 
                 hull.start();
                 System.out.println(Arrays.asList(hull.getClassNames()));
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }

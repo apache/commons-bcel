@@ -34,19 +34,19 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   private Variable reference; // Reference in environment to decl of this ident
 
   // Generated methods
-  ASTIdent(int id) {
+  ASTIdent(final int id) {
     super(id);
   }
 
-  ASTIdent(MiniParser p, int id) {
+  ASTIdent(final MiniParser p, final int id) {
     super(p, id);
   }
 
-  public static Node jjtCreate(MiniParser p, int id) {
+  public static Node jjtCreate(final MiniParser p, final int id) {
     return new ASTIdent(p, id);
   }
 
-  public ASTIdent(String name, int type, int line, int column) {
+  public ASTIdent(final String name, final int type, final int line, final int column) {
     super(line, column, JJTIDENT);
 
     this.name  = name;
@@ -67,8 +67,8 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
    * Overrides ASTExpr.traverse()
    */
   @Override
-  public ASTExpr traverse(Environment env) {
-    EnvEntry entry = env.get(name);
+  public ASTExpr traverse(final Environment env) {
+    final EnvEntry entry = env.get(name);
 
     if(entry == null) {
         MiniC.addError(line, column, "Undeclared identifier " + name);
@@ -86,9 +86,9 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
    * Overrides AstExpr.eval()
    */
   @Override
-  public int eval(int expected) {
-    ASTIdent ident = reference.getName();
-    int      t     = ident.getType();
+  public int eval(final int expected) {
+    final ASTIdent ident = reference.getName();
+    final int      t     = ident.getType();
 
     is_simple = true; // (Very) simple expression, always true
 
@@ -112,7 +112,7 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
    * Fourth pass, produce Java code.
    */
   @Override
-  public void code(StringBuffer buf) {
+  public void code(final StringBuffer buf) {
     if(name.equals("TRUE")) {
         ASTFunDecl.push(buf, "1");
     } else if(name.equals("FALSE")) {
@@ -126,19 +126,19 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
    * Fifth pass, produce Java byte code.
    */
   @Override
-  public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
+  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
     if(name.equals("TRUE")) {
         il.append(new PUSH(cp, 1));
     } else if(name.equals("FALSE")) {
         il.append(new PUSH(cp, 0));
     } else {
-      LocalVariableGen local_var = reference.getLocalVariable();
+      final LocalVariableGen local_var = reference.getLocalVariable();
       il.append(new ILOAD(local_var.getIndex()));
     }
     ASTFunDecl.push();
   }
 
 
-  public void   setName(String name) { this.name = name; }
+  public void   setName(final String name) { this.name = name; }
   public String getName()            { return name; }
 }

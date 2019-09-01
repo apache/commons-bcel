@@ -352,7 +352,7 @@ public class ClassPath implements Closeable {
         private final ModularRuntimeImage modularRuntimeImage;
         private final JrtModule[] modules;
 
-        public JrtModules(String path) throws IOException {
+        public JrtModules(final String path) throws IOException {
             this.modularRuntimeImage = new ModularRuntimeImage();
             final List<Path> list = modularRuntimeImage.list(path);
             this.modules = new JrtModule[list.size()];

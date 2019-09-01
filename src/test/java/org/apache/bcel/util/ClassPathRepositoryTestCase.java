@@ -31,11 +31,11 @@ import org.junit.Test;
  */
 public class ClassPathRepositoryTestCase {
 
-    private void verifyCaching(AbstractClassPathRepository repository) throws ClassNotFoundException {
+    private void verifyCaching(final AbstractClassPathRepository repository) throws ClassNotFoundException {
         // Tests loadClass()
-        JavaClass class1 = repository.loadClass("java.lang.String");
+        final JavaClass class1 = repository.loadClass("java.lang.String");
         Assert.assertNotNull(class1);
-        JavaClass class2 = repository.loadClass("java/lang/Long"); // Slashes should work
+        final JavaClass class2 = repository.loadClass("java/lang/Long"); // Slashes should work
         Assert.assertNotNull(class2);
 
         // Tests findClass()
@@ -75,7 +75,7 @@ public class ClassPathRepositoryTestCase {
     @Test
     public void testClassPath() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
-            ClassPathRepository repository = new ClassPathRepository(classPath);
+            final ClassPathRepository repository = new ClassPathRepository(classPath);
             Assert.assertEquals(classPath, repository.getClassPath());
         }
     }
@@ -83,7 +83,7 @@ public class ClassPathRepositoryTestCase {
     @Test(expected = ClassNotFoundException.class)
     public void testNoClassNotFound() throws ClassNotFoundException, IOException {
         try (final ClassPath classPath = new ClassPath("")) {
-            ClassPathRepository repository = new ClassPathRepository(classPath);
+            final ClassPathRepository repository = new ClassPathRepository(classPath);
             repository.loadClass("no.such.Class");
         }
     }
@@ -91,7 +91,7 @@ public class ClassPathRepositoryTestCase {
     @Test(expected = ClassNotFoundException.class)
     public void testClassWithoutPackage() throws ClassNotFoundException, IOException {
         try (final ClassPath classPath = new ClassPath("")) {
-            ClassPathRepository repository = new ClassPathRepository(classPath);
+            final ClassPathRepository repository = new ClassPathRepository(classPath);
             repository.loadClass("ClassXYZ");
         }
     }
@@ -99,7 +99,7 @@ public class ClassPathRepositoryTestCase {
     @Test(expected = IllegalArgumentException.class)
     public void testEmptyInput() throws ClassNotFoundException, IOException {
         try (final ClassPath classPath = new ClassPath("")) {
-            ClassPathRepository repository = new ClassPathRepository(classPath);
+            final ClassPathRepository repository = new ClassPathRepository(classPath);
             repository.loadClass("");
         }
     }
@@ -107,7 +107,7 @@ public class ClassPathRepositoryTestCase {
     @Test(expected = IllegalArgumentException.class)
     public void testNullInput() throws ClassNotFoundException, IOException {
         try (final ClassPath classPath = new ClassPath("")) {
-            ClassPathRepository repository = new ClassPathRepository(classPath);
+            final ClassPathRepository repository = new ClassPathRepository(classPath);
             repository.loadClass((String) null);
         }
     }

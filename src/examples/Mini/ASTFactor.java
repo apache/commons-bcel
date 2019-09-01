@@ -25,15 +25,15 @@ package Mini;
  */
 public class ASTFactor extends ASTExpr {
   // Generated methods
-  ASTFactor(int id) {
+  ASTFactor(final int id) {
     super(id);
   }
 
-  ASTFactor(MiniParser p, int id) {
+  ASTFactor(final MiniParser p, final int id) {
     super(p, id);
   }
 
-  public static Node jjtCreate(MiniParser p, int id) {
+  public static Node jjtCreate(final MiniParser p, final int id) {
     return new ASTFactor(p, id);
   }
 
@@ -44,7 +44,7 @@ public class ASTFactor extends ASTExpr {
    * and may be safely replaced with it.
    */
   @Override
-  public ASTExpr traverse(Environment env) {
+  public ASTExpr traverse(final Environment env) {
     if(kind == -1) {
         return exprs[0].traverse(env);
     } else {

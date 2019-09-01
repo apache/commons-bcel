@@ -54,8 +54,8 @@ public class TokenMgrError extends Error
     * Replaces unprintable characters by their espaced (or unicode escaped)
     * equivalents in the given string
     */
-   protected static String addEscapes(String str) {
-      StringBuffer retval = new StringBuffer();
+   protected static String addEscapes(final String str) {
+      final StringBuffer retval = new StringBuffer();
       char ch;
       for (int i = 0; i < str.length(); i++) {
         switch (str.charAt(i))
@@ -88,7 +88,7 @@ public class TokenMgrError extends Error
               continue;
            default:
               if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
-                 String s = "0000" + Integer.toString(ch, 16);
+                 final String s = "0000" + Integer.toString(ch, 16);
                  retval.append("\\u" + s.substring(s.length() - 4, s.length()));
               } else {
                  retval.append(ch);
@@ -111,7 +111,7 @@ public class TokenMgrError extends Error
     *    curchar     : the offending character
     * Note: You can customize the lexical error message by modifying this method.
     */
-   private static String LexicalError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar) {
+   private static String LexicalError(final boolean EOFSeen, final int lexState, final int errorLine, final int errorColumn, final String errorAfter, final char curChar) {
       return("Lexical error at line " +
            errorLine + ", column " +
            errorColumn + ".  Encountered: " +
@@ -140,12 +140,12 @@ public class TokenMgrError extends Error
    public TokenMgrError() {
    }
 
-   public TokenMgrError(String message, int reason) {
+   public TokenMgrError(final String message, final int reason) {
       super(message);
       errorCode = reason;
    }
 
-   public TokenMgrError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar, int reason) {
+   public TokenMgrError(final boolean EOFSeen, final int lexState, final int errorLine, final int errorColumn, final String errorAfter, final char curChar, final int reason) {
       this(LexicalError(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
    }
 }

@@ -60,14 +60,14 @@ import org.apache.bcel.generic.Type;
  *
  */
 public class HelloWorldBuilder {
-    public static void main(String[] argv) {
-        ClassGen cg = new ClassGen("HelloWorld", "java.lang.Object",
+    public static void main(final String[] argv) {
+        final ClassGen cg = new ClassGen("HelloWorld", "java.lang.Object",
                 "<generated>", Constants.ACC_PUBLIC |
                 Constants.ACC_SUPER,
                 null);
-        ConstantPoolGen cp = cg.getConstantPool(); // cg creates constant pool
-        InstructionList il = new InstructionList();
-        MethodGen mg = new MethodGen(Constants.ACC_STATIC |
+        final ConstantPoolGen cp = cg.getConstantPool(); // cg creates constant pool
+        final InstructionList il = new InstructionList();
+        final MethodGen mg = new MethodGen(Constants.ACC_STATIC |
                 Constants.ACC_PUBLIC,// access flags
                 Type.VOID,              // return type
                 new Type[]{            // argument types
@@ -76,10 +76,10 @@ public class HelloWorldBuilder {
                 new String[]{"argv"}, // arg names
                 "main", "HelloWorld",    // method, class
                 il, cp);
-        InstructionFactory factory = new InstructionFactory(cg);
+        final InstructionFactory factory = new InstructionFactory(cg);
 
-        ObjectType i_stream = new ObjectType("java.io.InputStream");
-        ObjectType p_stream = new ObjectType("java.io.PrintStream");
+        final ObjectType i_stream = new ObjectType("java.io.InputStream");
+        final ObjectType p_stream = new ObjectType("java.io.PrintStream");
 
         // Create BufferedReader object and store it in local variable `in'.
         il.append(factory.createNew("java.io.BufferedReader"));
@@ -98,17 +98,17 @@ public class HelloWorldBuilder {
 
         // Create local variable `in'
         LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType("java.io.BufferedReader"), null, null);
-        int in = lg.getIndex();
+        final int in = lg.getIndex();
         lg.setStart(il.append(new ASTORE(in))); // `i' valid from here
 
         // Create local variable `name'
         lg = mg.addLocalVariable("name", Type.STRING, null, null);
-        int name = lg.getIndex();
+        final int name = lg.getIndex();
         il.append(InstructionConstants.ACONST_NULL);
         lg.setStart(il.append(new ASTORE(name))); // `name' valid from here
 
         // try { ...
-        InstructionHandle try_start =
+        final InstructionHandle try_start =
                 il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Constants.GETSTATIC));
 
         il.append(new PUSH(cp, "Please enter your name> "));
@@ -120,13 +120,13 @@ public class HelloWorldBuilder {
         il.append(new ASTORE(name));
 
         // Upon normal execution we jump behind exception handler, the target address is not known yet.
-        GOTO g = new GOTO(null);
-        InstructionHandle try_end = il.append(g);
+        final GOTO g = new GOTO(null);
+        final InstructionHandle try_end = il.append(g);
 
         /* } catch() { ... }
          * Add exception handler: print exception and return from method
          */
-        InstructionHandle handler =
+        final InstructionHandle handler =
                 il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Constants.GETSTATIC));
         // Little trick in order not to save exception object temporarily
         il.append(InstructionConstants.SWAP);
@@ -136,7 +136,7 @@ public class HelloWorldBuilder {
         mg.addExceptionHandler(try_start, try_end, handler, new ObjectType("java.io.IOException"));
 
         // Normal code continues, now we can set the branch target of the GOTO that jumps over the handler code.
-        InstructionHandle ih =
+        final InstructionHandle ih =
                 il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Constants.GETSTATIC));
         g.setTarget(ih);
 
@@ -174,7 +174,7 @@ public class HelloWorldBuilder {
         // Get JavaClass object and dump it to file.
         try {
             cg.getJavaClass().dump("HelloWorld.class");
-        } catch (IOException e) {
+        } catch (final IOException e) {
             System.err.println(e);
         }
     }

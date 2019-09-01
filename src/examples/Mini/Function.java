@@ -23,19 +23,19 @@ package Mini;
  *
  */
 public class Function implements org.apache.bcel.Constants, EnvEntry {
-  private ASTIdent   name;         // Reference to the original declaration
+  private final ASTIdent   name;         // Reference to the original declaration
   private ASTIdent[] args;         // Reference to argument identifiers
 //  private ASTExpr    body;         // Reference to function expression body
-  private boolean    reserved;     // Is a key word?
-  private int        line, column; // Short for name.getToken()
-  private String     fun_name;     // Short for name.getName()
+  private final boolean    reserved;     // Is a key word?
+  private final int        line, column; // Short for name.getToken()
+  private final String     fun_name;     // Short for name.getName()
   private int        no_args;
 
-  public Function(ASTIdent name, ASTIdent[] args) {
+  public Function(final ASTIdent name, final ASTIdent[] args) {
     this(name, args, false);
   }
 
-  public Function(ASTIdent name, ASTIdent[] args, boolean reserved) {
+  public Function(final ASTIdent name, final ASTIdent[] args, final boolean reserved) {
     this.name     = name;
     this.args     = args;
     this.reserved = reserved;
@@ -48,7 +48,7 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
   
   @Override
   public String toString() {
-    StringBuffer buf = new StringBuffer();
+    final StringBuffer buf = new StringBuffer();
 
     for(int i=0; i < no_args; i++) {
       buf.append(args[i].getName());
@@ -58,7 +58,7 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
     }
     }
 
-    String prefix = "Function " + fun_name + "(" + buf.toString() + ")";
+    final String prefix = "Function " + fun_name + "(" + buf.toString() + ")";
 
     if(!reserved) {
         return prefix + " declared at line " + line + ", column " + column;
@@ -72,9 +72,9 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
   public String     getHashKey()      { return fun_name; }
   public int        getLine()         { return line; }
   public int        getColumn()       { return column; }
-  public ASTIdent   getArg(int i)     { return args[i]; }
+  public ASTIdent   getArg(final int i)     { return args[i]; }
   public ASTIdent[] getArgs()         { return args; }
-  public void       setArgs(ASTIdent[] args) { 
+  public void       setArgs(final ASTIdent[] args) { 
     this.args = args; 
     no_args   = (args == null)? 0 : args.length;
   }

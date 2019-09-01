@@ -34,19 +34,19 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
   private Function function; // Points to Function in environment
 
   // Generated methods
-  ASTFunAppl(int id) {
+  ASTFunAppl(final int id) {
     super(id);
   }
 
-  ASTFunAppl(MiniParser p, int id) {
+  ASTFunAppl(final MiniParser p, final int id) {
     super(p, id);
   }
 
-  public static Node jjtCreate(MiniParser p, int id) {
+  public static Node jjtCreate(final MiniParser p, final int id) {
     return new ASTFunAppl(p, id);
   }
 
-  ASTFunAppl(ASTIdent name, Function function, ASTExpr[] exprs) {
+  ASTFunAppl(final ASTIdent name, final Function function, final ASTExpr[] exprs) {
     this(JJTFUNAPPL);
 
     this.name     = name;
@@ -78,9 +78,9 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
    * Overrides ASTExpr.traverse()
    */
   @Override
-  public ASTExpr traverse(Environment env) {
-    String   fname = name.getName();
-    EnvEntry entry = env.get(fname);
+  public ASTExpr traverse(final Environment env) {
+    final String   fname = name.getName();
+    final EnvEntry entry = env.get(fname);
 
     this.env = env;
 
@@ -92,8 +92,8 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
         MiniC.addError(name.getLine(), name.getColumn(),
                  "Applying non-function " + fname + ".");
     } else {
-        int      len = (exprs != null)? exprs.length : 0;
-        Function fun = (Function)entry;
+        final int      len = (exprs != null)? exprs.length : 0;
+        final Function fun = (Function)entry;
 
         if(len != fun.getNoArgs()) {
         MiniC.addError(name.getLine(), name.getColumn(),
@@ -122,11 +122,11 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
    * @param expected type
    */
   @Override
-  public int eval(int expected) {
-    String     fname = name.getName();
-    Function   f     = function;
-    ASTIdent   fun   = f.getName();
-    ASTIdent[] args  = f.getArgs();
+  public int eval(final int expected) {
+    final String     fname = name.getName();
+    final Function   f     = function;
+    final ASTIdent   fun   = f.getName();
+    final ASTIdent[] args  = f.getArgs();
     int        t     = fun.getType();
 
     is_simple = true; // Only true if all arguments are simple expressions
@@ -134,8 +134,8 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
     // Check arguments
     if(exprs != null) {
       for(int i=0; i < exprs.length; i++) { // length match checked in previous pass
-        int expect = args[i].getType();     // May be T_UNKNOWN
-        int t_e    = exprs[i].eval(expect); // May be T_UNKNOWN
+        final int expect = args[i].getType();     // May be T_UNKNOWN
+        final int t_e    = exprs[i].eval(expect); // May be T_UNKNOWN
 
         if((expect != T_UNKNOWN) && (t_e != expect)) {
         MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
@@ -161,8 +161,8 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
    * Fourth pass, produce Java code.
    */
   @Override
-  public void code(StringBuffer buf) {
-    String     fname = name.getName();
+  public void code(final StringBuffer buf) {
+    final String     fname = name.getName();
 //    Function   f     = function;
 //    ASTIdent[] args  = f.getArgs();
 
@@ -179,7 +179,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
     }
       }
 
-      StringBuffer call = new StringBuffer(fname + "(");
+      final StringBuffer call = new StringBuffer(fname + "(");
       // Function call
 
       if(exprs != null) {
@@ -200,12 +200,12 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
    * Fifth pass, produce Java byte code.
    */
   @Override
-  public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
-    String     fname = name.getName();
+  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
+    final String     fname = name.getName();
 //    Function   f     = function;
     //ASTIdent   fun   = f.getName();
 //    ASTIdent[] args  = f.getArgs();
-    String     class_name = method.getClassName();
+    final String     class_name = method.getClassName();
 
     if(fname.equals("READ")) {
         il.append(new INVOKESTATIC(cp.addMethodref(class_name,
@@ -219,7 +219,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
                                                  "(I)I")));
     }
     else { // Normal function
-      int size    = exprs.length;
+      final int size    = exprs.length;
       Type[] argv = null;
 
       if(exprs != null) {

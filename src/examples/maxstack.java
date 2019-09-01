@@ -30,26 +30,26 @@ import org.apache.bcel.generic.MethodGen;
  */
 public final class maxstack {
 
-    public static void main(String[] argv) throws Exception {
-        for (String class_name : argv) {
+    public static void main(final String[] argv) throws Exception {
+        for (final String class_name : argv) {
             JavaClass java_class = Repository.lookupClass(class_name);
 
             if (java_class == null) {
                 java_class = new ClassParser(class_name).parse();
             }
 
-            ConstantPoolGen cp = new ConstantPoolGen(java_class.getConstantPool());
+            final ConstantPoolGen cp = new ConstantPoolGen(java_class.getConstantPool());
 
-            for (Method m : java_class.getMethods()) {
+            for (final Method m : java_class.getMethods()) {
                 if (!(m.isAbstract() || m.isNative())) {
-                    MethodGen mg = new MethodGen(m, class_name, cp);
+                    final MethodGen mg = new MethodGen(m, class_name, cp);
 
-                    int compiled_stack = mg.getMaxStack();
-                    int compiled_locals = mg.getMaxLocals();
+                    final int compiled_stack = mg.getMaxStack();
+                    final int compiled_locals = mg.getMaxLocals();
                     mg.setMaxStack(); // Recompute value
                     mg.setMaxLocals();
-                    int computed_stack = mg.getMaxStack();
-                    int computed_locals = mg.getMaxLocals();
+                    final int computed_stack = mg.getMaxStack();
+                    final int computed_locals = mg.getMaxLocals();
 
                     mg.getInstructionList().dispose(); // Reuse instruction handles
 

@@ -62,25 +62,25 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   protected int         type = T_UNKNOWN;
 
   // Generated methods
-  ASTExpr(int id) {
+  ASTExpr(final int id) {
     super(id);
   }
 
-  ASTExpr(MiniParser p, int id) {
+  ASTExpr(final MiniParser p, final int id) {
     super(p, id);
   }
 
-  public static Node jjtCreate(MiniParser p, int id) {
+  public static Node jjtCreate(final MiniParser p, final int id) {
     return new ASTExpr(p, id);
   }
 
-  ASTExpr(int line, int column, int id) {
+  ASTExpr(final int line, final int column, final int id) {
     super(id);
     this.line   = line;
     this.column = column;
   }
 
-  ASTExpr(int line, int column, int kind, int id) {
+  ASTExpr(final int line, final int column, final int kind, final int id) {
     this(line, column, id);
     this.kind = kind;
   }
@@ -89,7 +89,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
    * ASTFactor.traverse(), when traverse()ing the parse tree replace
    * themselves with Expr nodes. 
    */
-  ASTExpr(ASTExpr[] children, int kind, int line, int column) {
+  ASTExpr(final ASTExpr[] children, final int kind, final int line, final int column) {
     this(line, column, kind, JJTEXPR);
     exprs = children;
   }
@@ -100,7 +100,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   @Override
   public String toString() {
     String op="";
-    int    len = (children != null)? children.length : 0;
+    final int    len = (children != null)? children.length : 0;
     if(unop != -1) {
         op = tokenImage[unop];
     } else if(kind != -1) {
@@ -131,7 +131,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
    * Overridden by subclasses. Traverse the whole parse tree recursively and
    * drop redundant nodes.
    */
-  public ASTExpr traverse(Environment env) {
+  public ASTExpr traverse(final Environment env) {
     this.env = env;
 
     if((kind == -1) && (unop == -1)) {
@@ -150,7 +150,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
    * @return type of expression
    * @param expected type
    */
-  public int eval(int expected) {
+  public int eval(final int expected) {
     int child_type = T_UNKNOWN, t;
     
     is_simple = true;
@@ -192,21 +192,21 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     return type;
   }
 
-  private static String toBool(String i) {
+  private static String toBool(final String i) {
     return "(" + i + " != 0)";
   }
 
-  private static String toInt(String i) {
+  private static String toInt(final String i) {
     return "((" + i + ")? 1 : 0)";
   }
 
   /**
    * Fourth pass, produce Java code.
    */  
-  public void code(StringBuffer buf) {
+  public void code(final StringBuffer buf) {
     if(unop != -1) {
       exprs[0].code(buf);
-      String top = ASTFunDecl.pop();
+      final String top = ASTFunDecl.pop();
       if(unop == MINUS) {
         ASTFunDecl.push(buf, "-" + top);
     } else {
@@ -216,8 +216,8 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     else {
       exprs[0].code(buf);
       exprs[1].code(buf);
-      String _body_int2 = ASTFunDecl.pop();
-      String _body_int  = ASTFunDecl.pop();
+      final String _body_int2 = ASTFunDecl.pop();
+      final String _body_int  = ASTFunDecl.pop();
 
       switch(kind) {
       case PLUS:  ASTFunDecl.push(buf, _body_int + " + " + _body_int2); break;
@@ -251,7 +251,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   /**
    * Fifth pass, produce Java byte code.
    */
-  public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
+  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
     exprs[0].byte_code(il, method, cp);
 
     if(unop != -1) { // Apply unary operand
@@ -302,23 +302,23 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   }
 
   public boolean isSimple()         { return is_simple; }
-  public void setType(int type)     { this.type = type; }
+  public void setType(final int type)     { this.type = type; }
   public int  getType()             { return type; }
-  public void setKind(int kind)     { this.kind = kind; }
+  public void setKind(final int kind)     { this.kind = kind; }
   public int  getKind()             { return kind; }
-  public void setUnOp(int unop)     { this.unop = unop; }
+  public void setUnOp(final int unop)     { this.unop = unop; }
   public int  getUnOp()             { return unop; }
-  public void setLine(int line)     { this.line = line; }
+  public void setLine(final int line)     { this.line = line; }
   public int  getLine()             { return line; }
-  public void setColumn(int column) { this.column = column; }
+  public void setColumn(final int column) { this.column = column; }
   public int  getColumn()           { return column; }
-  public void setPosition(int line, int column) {
+  public void setPosition(final int line, final int column) {
     this.line = line;
     this.column = column;
   }
 
   @Override
-  public void dump(String prefix) {
+  public void dump(final String prefix) {
     System.out.println(toString(prefix));
 
     if(exprs != null) {

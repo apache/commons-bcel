@@ -32,10 +32,10 @@ import org.apache.bcel.Const;
  */
 public final class ModuleOpens implements Cloneable, Node {
 
-    private int opens_index;  // points to CONSTANT_Package_info
-    private int opens_flags;
-    private int opens_to_count;
-    private int opens_to_index[];  // points to CONSTANT_Module_info
+    private final int opens_index;  // points to CONSTANT_Package_info
+    private final int opens_flags;
+    private final int opens_to_count;
+    private final int opens_to_index[];  // points to CONSTANT_Module_info
 
 
     /**

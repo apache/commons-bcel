@@ -46,12 +46,12 @@ public final class helloify implements Constants {
     private static int out;     // reference to System.out
     private static int println; // reference to PrintStream.println
 
-    public static void main(String[] argv) throws Exception {
-        for (String arg : argv) {
+    public static void main(final String[] argv) throws Exception {
+        for (final String arg : argv) {
             if (arg.endsWith(".class")) {
-                JavaClass java_class = new ClassParser(arg).parse();
-                ConstantPool constants = java_class.getConstantPool();
-                String file_name = arg.substring(0, arg.length() - 6) + "_hello.class";
+                final JavaClass java_class = new ClassParser(arg).parse();
+                final ConstantPool constants = java_class.getConstantPool();
+                final String file_name = arg.substring(0, arg.length() - 6) + "_hello.class";
                 cp = new ConstantPoolGen(constants);
 
                 helloifyClassName(java_class);
@@ -59,7 +59,7 @@ public final class helloify implements Constants {
                 out = cp.addFieldref("java.lang.System", "out", "Ljava/io/PrintStream;");
                 println = cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/String;)V");
                 // Patch all methods.
-                Method[] methods = java_class.getMethods();
+                final Method[] methods = java_class.getMethods();
 
                 for (int j = 0; j < methods.length; j++) {
                     methods[j] = helloifyMethod(methods[j]);
@@ -75,7 +75,7 @@ public final class helloify implements Constants {
     /**
      * Change class name to <old_name>_hello
      */
-    private static void helloifyClassName(JavaClass java_class) {
+    private static void helloifyClassName(final JavaClass java_class) {
         class_name = java_class.getClassName() + "_hello";
         int index = java_class.getClassNameIndex();
 
@@ -87,9 +87,9 @@ public final class helloify implements Constants {
      * Patch a method.
      */
     private static Method helloifyMethod(Method m) {
-        Code code = m.getCode();
-        int flags = m.getAccessFlags();
-        String name = m.getName();
+        final Code code = m.getCode();
+        final int flags = m.getAccessFlags();
+        final String name = m.getName();
 
         // Sanity check
         if (m.isNative() || m.isAbstract() || (code == null)) {
@@ -97,17 +97,17 @@ public final class helloify implements Constants {
         }
     
         // Create instruction list to be inserted at method start.
-        String mesg = "Hello from " + Utility.methodSignatureToString(m.getSignature(),
+        final String mesg = "Hello from " + Utility.methodSignatureToString(m.getSignature(),
                 name,
                 Utility.accessToString(flags));
-        InstructionList patch = new InstructionList();
+        final InstructionList patch = new InstructionList();
         patch.append(new GETSTATIC(out));
         patch.append(new PUSH(cp, mesg));
         patch.append(new INVOKEVIRTUAL(println));
 
-        MethodGen mg = new MethodGen(m, class_name, cp);
-        InstructionList il = mg.getInstructionList();
-        InstructionHandle[] ihs = il.getInstructionHandles();
+        final MethodGen mg = new MethodGen(m, class_name, cp);
+        final InstructionList il = mg.getInstructionList();
+        final InstructionHandle[] ihs = il.getInstructionHandles();
 
         if (name.equals("<init>")) { // First let the super or other constructor be called
             for (int j = 1; j < ihs.length; j++) {

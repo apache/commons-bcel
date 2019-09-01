@@ -42,14 +42,14 @@ public class LruCacheClassPathRepository extends AbstractClassPathRepository {
         if (cacheSize < 1) {
             throw new IllegalArgumentException("cacheSize must be a positive number.");
         }
-        int initialCapacity = (int) (0.75 * cacheSize);
-        boolean accessOrder = true; // Evicts least-recently-accessed
+        final int initialCapacity = (int) (0.75 * cacheSize);
+        final boolean accessOrder = true; // Evicts least-recently-accessed
         loadedClasses = new LinkedHashMap<String, JavaClass>(initialCapacity, cacheSize, accessOrder) {
 
             private static final long serialVersionUID = 1L;
 
             @Override
-            protected boolean removeEldestEntry(Map.Entry<String, JavaClass> eldest) {
+            protected boolean removeEldestEntry(final Map.Entry<String, JavaClass> eldest) {
                 return size() > cacheSize;
             }
         };

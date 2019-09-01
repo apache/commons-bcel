@@ -134,7 +134,7 @@ public interface Visitor
     /**
      * @since 6.4.0
      */
-    default void visitMethodParameter(MethodParameter obj) {
+    default void visitMethodParameter(final MethodParameter obj) {
         // empty
     }
 
@@ -166,7 +166,7 @@ public interface Visitor
     /**
      * @since 6.3
      */
-    default void visitConstantDynamic(ConstantDynamic constantDynamic) {
+    default void visitConstantDynamic(final ConstantDynamic constantDynamic) {
         // empty
     }
 

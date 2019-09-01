@@ -41,22 +41,22 @@ import org.apache.bcel.generic.MethodGen;
  */
 public class id {
 
-    public static void main(String[] argv) throws Exception {
+    public static void main(final String[] argv) throws Exception {
         JavaClass clazz;
 
         if ((clazz = Repository.lookupClass(argv[0])) == null) {
             clazz = new ClassParser(argv[0]).parse(); // May throw IOException
         }
 
-        ClassGen cg = new ClassGen(clazz);
+        final ClassGen cg = new ClassGen(clazz);
 
-        for (Method method : clazz.getMethods()) {
-            MethodGen mg = new MethodGen(method, cg.getClassName(), cg.getConstantPool());
+        for (final Method method : clazz.getMethods()) {
+            final MethodGen mg = new MethodGen(method, cg.getClassName(), cg.getConstantPool());
             cg.replaceMethod(method, mg.getMethod());
         }
 
-        for (Field field : clazz.getFields()) {
-            FieldGen fg = new FieldGen(field, cg.getConstantPool());
+        for (final Field field : clazz.getFields()) {
+            final FieldGen fg = new FieldGen(field, cg.getConstantPool());
             cg.replaceField(field, fg.getField());
         }
 

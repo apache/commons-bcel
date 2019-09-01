@@ -34,16 +34,16 @@ public class Environment implements Cloneable {
   private static final int SIZE  = 127; // Prime number large enough for most cases
   private static final int SLOTS = 3;   // Number of slots of each field
   
-  private int       size;               // The table is an array of
-  private Vector<EnvEntry>[]  table;              // Vectors
+  private final int       size;               // The table is an array of
+  private final Vector<EnvEntry>[]  table;              // Vectors
   private int       elements=0;
 
-  public Environment(int size) {
+  public Environment(final int size) {
     this.size = size;
     table     = new Vector[size];
   }
 
-  private Environment(Vector<EnvEntry>[] table) {
+  private Environment(final Vector<EnvEntry>[] table) {
     size       = table.length;
     this.table = table;
   }
@@ -52,7 +52,7 @@ public class Environment implements Cloneable {
     this(SIZE);
   }
 
-  private int hashCode(String key) {
+  private int hashCode(final String key) {
     return Math.abs(key.hashCode()) % size;
   }
 
@@ -60,10 +60,10 @@ public class Environment implements Cloneable {
    * Inserts macro into table or overwrite old contents if it
    * was already stored.
    */
-  public void put(EnvEntry obj) {
+  public void put(final EnvEntry obj) {
     int    hash;
     Vector<EnvEntry> v;
-    String key = obj.getHashKey();
+    final String key = obj.getHashKey();
 
     hash = hashCode(key);
     v    = table[hash];
@@ -74,13 +74,13 @@ public class Environment implements Cloneable {
         table[hash] = v = new Vector<EnvEntry>(SLOTS);
     } else {
       try {
-        int index = lookup(v, key);
+        final int index = lookup(v, key);
 
         if(index >= 0) {
           v.setElementAt(obj, index); // Overwrite
           return;
         }
-      } catch(ArrayIndexOutOfBoundsException e) {}
+      } catch(final ArrayIndexOutOfBoundsException e) {}
     }
 
     // Not found in Vector -> add it
@@ -89,7 +89,7 @@ public class Environment implements Cloneable {
 
   /** Get entry from hash table.
    */
-  public EnvEntry get(String key) {
+  public EnvEntry get(final String key) {
     int       hash;
     Vector<EnvEntry>    v;
     EnvEntry entry = null;
@@ -102,12 +102,12 @@ public class Environment implements Cloneable {
     }
 
     try {
-      int index = lookup(v, key);
+      final int index = lookup(v, key);
 
       if(index >= 0) {
         entry = v.elementAt(index);
     }
-    } catch(ArrayIndexOutOfBoundsException e) {}
+    } catch(final ArrayIndexOutOfBoundsException e) {}
 
     return entry;
   }
@@ -115,7 +115,7 @@ public class Environment implements Cloneable {
   /**
    * Delete an object if it does exist.
    */
-  public void delete(String key) {
+  public void delete(final String key) {
     int       hash;
     Vector<EnvEntry>    v;
 
@@ -127,22 +127,22 @@ public class Environment implements Cloneable {
     }
 
     try {
-      int index = lookup(v, key);
+      final int index = lookup(v, key);
 
       if(index >= 0) {
         elements--; // Count
         v.removeElementAt(index);
       }
-    } catch(ArrayIndexOutOfBoundsException e) {}
+    } catch(final ArrayIndexOutOfBoundsException e) {}
   }
 
-  private static int lookup(Vector<EnvEntry> v, String key) 
+  private static int lookup(final Vector<EnvEntry> v, final String key) 
        throws ArrayIndexOutOfBoundsException
   {
-    int len = v.size();
+    final int len = v.size();
 
     for(int i=0; i < len; i++) {
-      EnvEntry entry = v.elementAt(i);
+      final EnvEntry entry = v.elementAt(i);
 
       if(entry.getHashKey().equals(key)) {
         return i;
@@ -154,7 +154,7 @@ public class Environment implements Cloneable {
 
   @Override
   public Object clone() { 
-    Vector<EnvEntry>[] copy = new Vector[size];
+    final Vector<EnvEntry>[] copy = new Vector[size];
 
     for(int i=0; i < size; i++) {
       if(table[i] != null) {
@@ -176,7 +176,7 @@ public class Environment implements Cloneable {
 
   @Override
   public String toString() {
-    StringBuffer buf = new StringBuffer();
+    final StringBuffer buf = new StringBuffer();
 
     for(int i=0; i < size; i++) {
         if(table[i] != null) {
@@ -188,18 +188,18 @@ public class Environment implements Cloneable {
   }
 
   public EnvEntry[] getEntries() {
-    EnvEntry[] entries = new EnvEntry[elements];
+    final EnvEntry[] entries = new EnvEntry[elements];
     int        k       = 0;
     Vector<EnvEntry>     v;
 
     for(int i=0; i < size; i++) {
       if((v = table[i]) != null) {
-        int len = v.size();
+        final int len = v.size();
         try {
           for(int j=0; j < len; j++) {
         entries[k++] = v.elementAt(j);
     }
-        } catch(ArrayIndexOutOfBoundsException e) {}  
+        } catch(final ArrayIndexOutOfBoundsException e) {}  
       }
     }
 

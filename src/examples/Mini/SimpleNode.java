@@ -29,11 +29,11 @@ public abstract class SimpleNode implements Node {
   protected int id;
   protected MiniParser parser;
 
-  public SimpleNode(int i) {
+  public SimpleNode(final int i) {
     id = i;
   }
 
-  public SimpleNode(MiniParser p, int i) {
+  public SimpleNode(final MiniParser p, final int i) {
     this(i);
     parser = p;
   }
@@ -47,21 +47,21 @@ public abstract class SimpleNode implements Node {
   public void closeNode() {
   }
   
-  public void jjtSetParent(Node n) { parent = n; }
+  public void jjtSetParent(final Node n) { parent = n; }
   public Node jjtGetParent() { return parent; }
 
-  public void jjtAddChild(Node n, int i) {
+  public void jjtAddChild(final Node n, final int i) {
     if (children == null) {
       children = new Node[i + 1];
     } else if (i >= children.length) {
-      Node c[] = new Node[i + 1];
+      final Node c[] = new Node[i + 1];
       System.arraycopy(children, 0, c, 0, children.length);
       children = c;
     }
     children[i] = n;
   }
 
-  public Node jjtGetChild(int i) {
+  public Node jjtGetChild(final int i) {
     return children[i];
   }
 
@@ -77,16 +77,16 @@ public abstract class SimpleNode implements Node {
 
   @Override
   public String toString() { return MiniParserTreeConstants.jjtNodeName[id]; }
-  public String toString(String prefix) { return prefix + toString(); }
+  public String toString(final String prefix) { return prefix + toString(); }
 
   /* Override this method if you want to customize how the node dumps
      out its children. */
 
-  public void dump(String prefix) {
+  public void dump(final String prefix) {
     System.out.println(toString(prefix));
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
-        SimpleNode n = (SimpleNode)children[i];
+        final SimpleNode n = (SimpleNode)children[i];
         if (n != null) {
           n.dump(prefix + " ");
         }

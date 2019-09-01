@@ -41,9 +41,9 @@ public class ParseException extends Exception {
    * print the error message in the form:
    *     ParseException: <result of getMessage>
    */
-  public ParseException(Token currentTokenVal,
-                        int[][] expectedTokenSequencesVal,
-                        String[] tokenImageVal
+  public ParseException(final Token currentTokenVal,
+                        final int[][] expectedTokenSequencesVal,
+                        final String[] tokenImageVal
                        )
   {
     super("");
@@ -68,7 +68,7 @@ public class ParseException extends Exception {
     specialConstructor = false;
   }
 
-  public ParseException(String message) {
+  public ParseException(final String message) {
     super(message);
     specialConstructor = false;
   }
@@ -163,8 +163,8 @@ public class ParseException extends Exception {
    * when these raw version cannot be used as part of an ASCII
    * string literal.
    */
-  protected String add_escapes(String str) {
-      StringBuffer retval = new StringBuffer();
+  protected String add_escapes(final String str) {
+      final StringBuffer retval = new StringBuffer();
       char ch;
       for (int i = 0; i < str.length(); i++) {
         switch (str.charAt(i))
@@ -197,7 +197,7 @@ public class ParseException extends Exception {
               continue;
            default:
               if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
-                 String s = "0000" + Integer.toString(ch, 16);
+                 final String s = "0000" + Integer.toString(ch, 16);
                  retval.append("\\u" + s.substring(s.length() - 4, s.length()));
               } else {
                  retval.append(ch);

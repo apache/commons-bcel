@@ -31,15 +31,15 @@ public class ASTInteger extends ASTExpr {
   private int value;
 
   // Generated methods
-  ASTInteger(int id) {
+  ASTInteger(final int id) {
     super(id);
   }
 
-  ASTInteger(MiniParser p, int id) {
+  ASTInteger(final MiniParser p, final int id) {
     super(p, id);
   }
 
-  public static Node jjtCreate(MiniParser p, int id) {
+  public static Node jjtCreate(final MiniParser p, final int id) {
     return new ASTInteger(p, id);
   }
 
@@ -57,7 +57,7 @@ public class ASTInteger extends ASTExpr {
    * Overrides ASTExpr.traverse()
    */
   @Override
-  public ASTExpr traverse(Environment env) {
+  public ASTExpr traverse(final Environment env) {
     this.env = env;
     return this; // Nothing to reduce/traverse here
   }
@@ -68,7 +68,7 @@ public class ASTInteger extends ASTExpr {
    * @return type of expression
    */
   @Override
-  public int eval(int expected) {
+  public int eval(final int expected) {
     is_simple = true; // (Very) simple expression, always true
 
     return type = T_INT;
@@ -78,7 +78,7 @@ public class ASTInteger extends ASTExpr {
    * Fourth pass, produce Java code.
    */
   @Override
-  public void code(StringBuffer buf) {
+  public void code(final StringBuffer buf) {
     ASTFunDecl.push(buf, "" + value);
   }
 
@@ -86,10 +86,10 @@ public class ASTInteger extends ASTExpr {
    * Fifth pass, produce Java byte code.
    */
   @Override
-  public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
+  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
     il.append(new PUSH(cp, value)); ASTFunDecl.push();
   }
 
-  void setValue(int value) { this.value = value; }
+  void setValue(final int value) { this.value = value; }
   int  getValue()          { return value; }
 }

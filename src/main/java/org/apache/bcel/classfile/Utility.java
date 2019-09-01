@@ -840,7 +840,7 @@ public abstract class Utility {
                 return type;
             }
             // We have a Class signature.
-            StringBuilder typeClass = new StringBuilder(typeParams);
+            final StringBuilder typeClass = new StringBuilder(typeParams);
             typeClass.append(" extends ");
             typeClass.append(type);
             if (index < signature.length()) {
@@ -867,7 +867,7 @@ public abstract class Utility {
      */
     private static String typeParamTypesToString( final String signature, final boolean chopit ) {
         // The first character is guranteed to be '<'
-        StringBuilder typeParams = new StringBuilder("<");
+        final StringBuilder typeParams = new StringBuilder("<");
         int index = 1;  // skip the '<'
         // get the first TypeParameter
         typeParams.append(typeParamTypeToString(signature.substring(index), chopit));
@@ -896,7 +896,7 @@ public abstract class Utility {
             throw new ClassFormatException("Invalid type parameter signature: " + signature);
         }
         // get the TypeParameter identifier
-        StringBuilder typeParam = new StringBuilder(signature.substring(0, index));
+        final StringBuilder typeParam = new StringBuilder(signature.substring(0, index));
         index++;  // account for the ':'
         if (signature.charAt(index) != ':') {
             // we have a class bound
@@ -926,7 +926,7 @@ public abstract class Utility {
      */
     private static String typeSignaturesToString( final String signature, final boolean chopit, final char term ) {
         // The first character will be an 'open' that matches the 'close' contained in term.
-        StringBuilder typeList = new StringBuilder(signature.substring(0, 1));
+        final StringBuilder typeList = new StringBuilder(signature.substring(0, 1));
         int index = 1;  // skip the 'open' character
         // get the first Type in the list
         if (signature.charAt(index) != term) {

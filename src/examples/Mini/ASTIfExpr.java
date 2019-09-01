@@ -34,15 +34,15 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   private ASTExpr if_expr, then_expr, else_expr;
 
   // Generated methods
-  ASTIfExpr(int id) {
+  ASTIfExpr(final int id) {
     super(id);
   }
 
-  ASTIfExpr(MiniParser p, int id) {
+  ASTIfExpr(final MiniParser p, final int id) {
     super(p, id);
   }
 
-  public static Node jjtCreate(MiniParser p, int id) {
+  public static Node jjtCreate(final MiniParser p, final int id) {
     return new ASTIfExpr(p, id);
   }
 
@@ -69,7 +69,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
    * Overrides ASTExpr.traverse()
    */
   @Override
-  public ASTExpr traverse(Environment env) { 
+  public ASTExpr traverse(final Environment env) { 
     this.env = env;
 
     if_expr   = if_expr.traverse(env);
@@ -89,7 +89,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
    * @param expected type
    */
   @Override
-  public int eval(int expected) {
+  public int eval(final int expected) {
     int then_type, else_type, if_type;
 
     if((if_type=if_expr.eval(T_BOOLEAN)) != T_BOOLEAN) {
@@ -140,11 +140,11 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
    * Fourth pass, produce Java code.
    */
   @Override
-  public void code(StringBuffer buf) {
+  public void code(final StringBuffer buf) {
     if_expr.code(buf);
 
     buf.append("    if(" + ASTFunDecl.pop() + " == 1) {\n");
-    int size = ASTFunDecl.size;
+    final int size = ASTFunDecl.size;
     then_expr.code(buf);
     ASTFunDecl.size = size; // reset stack
     buf.append("    } else {\n");
@@ -156,11 +156,11 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
    * Fifth pass, produce Java byte code.
    */
   @Override
-  public void byte_code(InstructionList il, MethodGen method, ConstantPoolGen cp) {
+  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
     if_expr.byte_code(il, method, cp);
 
-    InstructionList then_code = new InstructionList();
-    InstructionList else_code = new InstructionList();
+    final InstructionList then_code = new InstructionList();
+    final InstructionList else_code = new InstructionList();
 
     then_expr.byte_code(then_code, method, cp);
     else_expr.byte_code(else_code, method, cp);
@@ -176,7 +176,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   }
 
   @Override
-  public void dump(String prefix) {
+  public void dump(final String prefix) {
     System.out.println(toString(prefix));
 
     if_expr.dump(prefix + " ");

@@ -32,15 +32,15 @@ import org.apache.bcel.Const;
  */
 public final class Module extends Attribute {
 
-    private int module_name_index;
-    private int module_flags;
-    private int module_version_index;
+    private final int module_name_index;
+    private final int module_flags;
+    private final int module_version_index;
 
     private ModuleRequires[] requires_table;
     private ModuleExports[] exports_table;
     private ModuleOpens[] opens_table;
-    private int uses_count;
-    private int uses_index[];
+    private final int uses_count;
+    private final int uses_index[];
     private ModuleProvides[] provides_table;
 
     /**
