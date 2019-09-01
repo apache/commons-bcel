@@ -68,18 +68,18 @@ final class AttributeHTML {
     }
 
 
-    final void close() {
+    void close() {
         file.println("</TABLE></BODY></HTML>");
         file.close();
     }
 
 
-    final void writeAttribute( final Attribute attribute, final String anchor ) {
+    void writeAttribute( final Attribute attribute, final String anchor ) {
         writeAttribute(attribute, anchor, 0);
     }
 
 
-    final void writeAttribute( final Attribute attribute, final String anchor, final int method_number ) {
+    void writeAttribute( final Attribute attribute, final String anchor, final int method_number ) {
         final byte tag = attribute.getTag();
         int index;
         if (tag == Const.ATTR_UNKNOWN) {

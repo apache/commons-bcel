@@ -112,7 +112,7 @@ public final class Method extends FieldOrMethod {
     /**
      * @return Code attribute of method, if any
      */
-    public final Code getCode() {
+    public Code getCode() {
         for (final Attribute attribute : super.getAttributes()) {
             if (attribute instanceof Code) {
                 return (Code) attribute;
@@ -126,7 +126,7 @@ public final class Method extends FieldOrMethod {
      * @return ExceptionTable attribute of method, if any, i.e., list all
      * exceptions the method may throw not exception handlers!
      */
-    public final ExceptionTable getExceptionTable() {
+    public ExceptionTable getExceptionTable() {
         for (final Attribute attribute : super.getAttributes()) {
             if (attribute instanceof ExceptionTable) {
                 return (ExceptionTable) attribute;
@@ -139,7 +139,7 @@ public final class Method extends FieldOrMethod {
     /** @return LocalVariableTable of code attribute if any, i.e. the call is forwarded
      * to the Code atribute.
      */
-    public final LocalVariableTable getLocalVariableTable() {
+    public LocalVariableTable getLocalVariableTable() {
         final Code code = getCode();
         if (code == null) {
             return null;
@@ -151,7 +151,7 @@ public final class Method extends FieldOrMethod {
     /** @return LineNumberTable of code attribute if any, i.e. the call is forwarded
      * to the Code atribute.
      */
-    public final LineNumberTable getLineNumberTable() {
+    public LineNumberTable getLineNumberTable() {
         final Code code = getCode();
         if (code == null) {
             return null;
@@ -167,7 +167,7 @@ public final class Method extends FieldOrMethod {
      * @return String representation of the method.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         final String access = Utility.accessToString(super.getAccessFlags());
         // Get name and signature from constant pool
         ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(super.getSignatureIndex(), Const.CONSTANT_Utf8);
@@ -196,7 +196,7 @@ public final class Method extends FieldOrMethod {
     /**
      * @return deep copy of this method
      */
-    public final Method copy( final ConstantPool _constant_pool ) {
+    public Method copy( final ConstantPool _constant_pool ) {
         return (Method) copy_(_constant_pool);
     }
 

@@ -37,12 +37,12 @@ public final class ByteSequence extends DataInputStream {
     }
 
 
-    public final int getIndex() {
+    public int getIndex() {
         return byteStream.getPosition();
     }
 
 
-    final void unreadByte() {
+    void unreadByte() {
         byteStream.unreadByte();
     }
 
@@ -52,12 +52,12 @@ public final class ByteSequence extends DataInputStream {
             super(bytes);
         }
 
-        final int getPosition() {
+        int getPosition() {
             // pos is protected in ByteArrayInputStream
             return pos;
         }
 
-        final void unreadByte() {
+        void unreadByte() {
             if (pos > 0) {
                 pos--;
             }

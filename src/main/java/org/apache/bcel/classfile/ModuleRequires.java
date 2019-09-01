@@ -70,7 +70,7 @@ public final class ModuleRequires implements Cloneable, Node {
      * @param file Output file stream
      * @throws IOException if an I/O Exception occurs in writeShort
      */
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(requires_index);
         file.writeShort(requires_flags);
         file.writeShort(requires_version_index);
@@ -81,7 +81,7 @@ public final class ModuleRequires implements Cloneable, Node {
      * @return String representation
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return "requires(" + requires_index + ", " + String.format("%04x", requires_flags) + ", " + requires_version_index + ")";
     }
 
@@ -89,7 +89,7 @@ public final class ModuleRequires implements Cloneable, Node {
     /**
      * @return Resolved string representation
      */
-    public final String toString( final ConstantPool constant_pool ) {
+    public String toString( final ConstantPool constant_pool ) {
         final StringBuilder buf = new StringBuilder();
         final String module_name = constant_pool.constantToString(requires_index, Const.CONSTANT_Module);
         buf.append(Utility.compactClassName(module_name, false));

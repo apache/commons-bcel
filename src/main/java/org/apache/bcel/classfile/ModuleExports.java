@@ -75,7 +75,7 @@ public final class ModuleExports implements Cloneable, Node {
      * @param file Output file stream
      * @throws IOException if an I/O Exception occurs in writeShort
      */
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(exports_index);
         file.writeShort(exports_flags);
         file.writeShort(exports_to_count);
@@ -89,7 +89,7 @@ public final class ModuleExports implements Cloneable, Node {
      * @return String representation
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return "exports(" + exports_index + ", " + exports_flags + ", " + exports_to_count + ", ...)";
     }
 
@@ -97,7 +97,7 @@ public final class ModuleExports implements Cloneable, Node {
     /**
      * @return Resolved string representation
      */
-    public final String toString( final ConstantPool constant_pool ) {
+    public String toString( final ConstantPool constant_pool ) {
         final StringBuilder buf = new StringBuilder();
         final String package_name = constant_pool.constantToString(exports_index, Const.CONSTANT_Package);
         buf.append(Utility.compactClassName(package_name, false));

@@ -134,7 +134,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(start_pc);
         file.writeShort(length);
         file.writeShort(name_index);
@@ -146,7 +146,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @return Constant pool used by this object.
      */
-    public final ConstantPool getConstantPool() {
+    public ConstantPool getConstantPool() {
         return constant_pool;
     }
 
@@ -154,7 +154,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @return Variable is valid within getStartPC() .. getStartPC()+getLength()
      */
-    public final int getLength() {
+    public int getLength() {
         return length;
     }
 
@@ -162,7 +162,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @return Variable name.
      */
-    public final String getName() {
+    public String getName() {
         ConstantUtf8 c;
         c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
         return c.getBytes();
@@ -172,7 +172,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @return Index in constant pool of variable name.
      */
-    public final int getNameIndex() {
+    public int getNameIndex() {
         return name_index;
     }
 
@@ -180,7 +180,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @return Signature.
      */
-    public final String getSignature() {
+    public String getSignature() {
         ConstantUtf8 c;
         c = (ConstantUtf8) constant_pool.getConstant(signature_index, Const.CONSTANT_Utf8);
         return c.getBytes();
@@ -190,7 +190,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @return Index in constant pool of variable signature.
      */
-    public final int getSignatureIndex() {
+    public int getSignatureIndex() {
         return signature_index;
     }
 
@@ -198,7 +198,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @return index of register where variable is stored
      */
-    public final int getIndex() {
+    public int getIndex() {
         return index;
     }
 
@@ -206,7 +206,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @return index of register where variable was originally stored
      */
-    public final int getOrigIndex() {
+    public int getOrigIndex() {
         return orig_index;
     }
 
@@ -214,7 +214,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @return Start of range where he variable is valid
      */
-    public final int getStartPC() {
+    public int getStartPC() {
         return start_pc;
     }
 
@@ -222,7 +222,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /*
      * Helper method shared with LocalVariableTypeTable
      */
-    final String toStringShared( final boolean typeTable ) {
+    String toStringShared( final boolean typeTable ) {
         final String name = getName();
         final String signature = Utility.signatureToString(getSignature(), false);
         final String label = "LocalVariable" + (typeTable ? "Types" : "" );
@@ -234,7 +234,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( final ConstantPool constant_pool ) {
+    public void setConstantPool( final ConstantPool constant_pool ) {
         this.constant_pool = constant_pool;
     }
 
@@ -242,7 +242,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @param length the length of this local variable
      */
-    public final void setLength( final int length ) {
+    public void setLength( final int length ) {
         this.length = length;
     }
 
@@ -250,7 +250,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @param name_index the index into the constant pool for the name of this variable
      */
-    public final void setNameIndex( final int name_index ) { // TODO unused
+    public void setNameIndex( final int name_index ) { // TODO unused
         this.name_index = name_index;
     }
 
@@ -258,7 +258,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @param signature_index the index into the constant pool for the signature of this variable
      */
-    public final void setSignatureIndex( final int signature_index ) { // TODO unused
+    public void setSignatureIndex( final int signature_index ) { // TODO unused
         this.signature_index = signature_index;
     }
 
@@ -266,7 +266,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @param index the index in the local variable table of this variable
      */
-    public final void setIndex( final int index ) { // TODO unused
+    public void setIndex( final int index ) { // TODO unused
         this.index = index;
     }
 
@@ -274,7 +274,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @param start_pc Specify range where the local variable is valid.
      */
-    public final void setStartPC( final int start_pc ) { // TODO unused
+    public void setStartPC( final int start_pc ) { // TODO unused
         this.start_pc = start_pc;
     }
 
@@ -283,7 +283,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @return string representation.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return toStringShared(false);
     }
 

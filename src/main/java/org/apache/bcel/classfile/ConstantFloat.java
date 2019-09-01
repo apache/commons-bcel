@@ -83,7 +83,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeFloat(bytes);
     }
@@ -92,7 +92,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     /**
      * @return data, i.e., 4 bytes.
      */
-    public final float getBytes() {
+    public float getBytes() {
         return bytes;
     }
 
@@ -100,7 +100,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     /**
      * @param bytes the raw bytes that represent this float
      */
-    public final void setBytes( final float bytes ) {
+    public void setBytes( final float bytes ) {
         this.bytes = bytes;
     }
 
@@ -109,7 +109,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      * @return String representation.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
     }
 

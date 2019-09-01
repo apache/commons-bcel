@@ -75,7 +75,7 @@ public final class ModuleOpens implements Cloneable, Node {
      * @param file Output file stream
      * @throws IOException if an I/O Exception occurs in writeShort
      */
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(opens_index);
         file.writeShort(opens_flags);
         file.writeShort(opens_to_count);
@@ -89,7 +89,7 @@ public final class ModuleOpens implements Cloneable, Node {
      * @return String representation
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return "opens(" + opens_index + ", " + opens_flags + ", " + opens_to_count + ", ...)";
     }
 
@@ -97,7 +97,7 @@ public final class ModuleOpens implements Cloneable, Node {
     /**
      * @return Resolved string representation
      */
-    public final String toString( final ConstantPool constant_pool ) {
+    public String toString( final ConstantPool constant_pool ) {
         final StringBuilder buf = new StringBuilder();
         final String package_name = constant_pool.constantToString(opens_index, Const.CONSTANT_Package);
         buf.append(Utility.compactClassName(package_name, false));

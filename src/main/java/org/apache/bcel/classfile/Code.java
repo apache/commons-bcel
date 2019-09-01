@@ -139,7 +139,7 @@ public final class Code extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(max_stack);
         file.writeShort(max_locals);
@@ -160,7 +160,7 @@ public final class Code extends Attribute {
      * @return Collection of code attributes.
      * @see Attribute
      */
-    public final Attribute[] getAttributes() {
+    public Attribute[] getAttributes() {
         return attributes;
     }
 
@@ -194,7 +194,7 @@ public final class Code extends Attribute {
     /**
      * @return Actual byte code of the method.
      */
-    public final byte[] getCode() {
+    public byte[] getCode() {
         return code;
     }
 
@@ -203,7 +203,7 @@ public final class Code extends Attribute {
      * @return Table of handled exceptions.
      * @see CodeException
      */
-    public final CodeException[] getExceptionTable() {
+    public CodeException[] getExceptionTable() {
         return exception_table;
     }
 
@@ -211,7 +211,7 @@ public final class Code extends Attribute {
     /**
      * @return Number of local variables.
      */
-    public final int getMaxLocals() {
+    public int getMaxLocals() {
         return max_locals;
     }
 
@@ -219,7 +219,7 @@ public final class Code extends Attribute {
     /**
      * @return Maximum size of stack used by this method.
      */
-    public final int getMaxStack() {
+    public int getMaxStack() {
         return max_stack;
     }
 
@@ -255,7 +255,7 @@ public final class Code extends Attribute {
     /**
      * @param attributes the attributes to set for this Code
      */
-    public final void setAttributes( final Attribute[] attributes ) {
+    public void setAttributes( final Attribute[] attributes ) {
         this.attributes = attributes != null ? attributes : new Attribute[0];
         super.setLength(calculateLength()); // Adjust length
     }
@@ -264,7 +264,7 @@ public final class Code extends Attribute {
     /**
      * @param code byte code
      */
-    public final void setCode( final byte[] code ) {
+    public void setCode( final byte[] code ) {
         this.code = code != null ? code : new byte[0];
         super.setLength(calculateLength()); // Adjust length
     }
@@ -273,7 +273,7 @@ public final class Code extends Attribute {
     /**
      * @param exception_table exception table
      */
-    public final void setExceptionTable( final CodeException[] exception_table ) {
+    public void setExceptionTable( final CodeException[] exception_table ) {
         this.exception_table = exception_table != null ? exception_table : new CodeException[0];
         super.setLength(calculateLength()); // Adjust length
     }
@@ -282,7 +282,7 @@ public final class Code extends Attribute {
     /**
      * @param max_locals maximum number of local variables
      */
-    public final void setMaxLocals( final int max_locals ) {
+    public void setMaxLocals( final int max_locals ) {
         this.max_locals = max_locals;
     }
 
@@ -290,7 +290,7 @@ public final class Code extends Attribute {
     /**
      * @param max_stack maximum stack size
      */
-    public final void setMaxStack( final int max_stack ) {
+    public void setMaxStack( final int max_stack ) {
         this.max_stack = max_stack;
     }
 
@@ -298,7 +298,7 @@ public final class Code extends Attribute {
     /**
      * @return String representation of code chunk.
      */
-    public final String toString( final boolean verbose ) {
+    public String toString( final boolean verbose ) {
         final StringBuilder buf = new StringBuilder(100); // CHECKSTYLE IGNORE MagicNumber
         buf.append("Code(max_stack = ").append(max_stack).append(", max_locals = ").append(
                 max_locals).append(", code_length = ").append(code.length).append(")\n").append(
@@ -323,7 +323,7 @@ public final class Code extends Attribute {
      * @return String representation of code chunk.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return toString(true);
     }
 

@@ -236,7 +236,7 @@ public final class ConstantUtf8 extends Constant {
      * @throws IOException
      */
     @Override
-    public final void dump(final DataOutputStream file) throws IOException {
+    public void dump(final DataOutputStream file) throws IOException {
         file.writeByte(super.getTag());
         file.writeUTF(value);
     }
@@ -244,7 +244,7 @@ public final class ConstantUtf8 extends Constant {
     /**
      * @return Data converted to string.
      */
-    public final String getBytes() {
+    public String getBytes() {
         return value;
     }
 
@@ -253,7 +253,7 @@ public final class ConstantUtf8 extends Constant {
      * @deprecated (since 6.0)
      */
     @java.lang.Deprecated
-    public final void setBytes(final String bytes) {
+    public void setBytes(final String bytes) {
         throw new UnsupportedOperationException();
     }
 
@@ -261,7 +261,7 @@ public final class ConstantUtf8 extends Constant {
      * @return String representation
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return super.toString() + "(\"" + Utility.replace(value, "\n", "\\n") + "\")";
     }
 }

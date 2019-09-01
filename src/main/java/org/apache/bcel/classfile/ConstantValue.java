@@ -91,7 +91,7 @@ public final class ConstantValue extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(constantvalue_index);
     }
@@ -100,7 +100,7 @@ public final class ConstantValue extends Attribute {
     /**
      * @return Index in constant pool of constant value.
      */
-    public final int getConstantValueIndex() {
+    public int getConstantValueIndex() {
         return constantvalue_index;
     }
 
@@ -108,7 +108,7 @@ public final class ConstantValue extends Attribute {
     /**
      * @param constantvalue_index the index info the constant pool of this constant value
      */
-    public final void setConstantValueIndex( final int constantvalue_index ) {
+    public void setConstantValueIndex( final int constantvalue_index ) {
         this.constantvalue_index = constantvalue_index;
     }
 
@@ -117,7 +117,7 @@ public final class ConstantValue extends Attribute {
      * @return String representation of constant value.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         Constant c = super.getConstantPool().getConstant(constantvalue_index);
         String buf;
         int i;

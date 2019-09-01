@@ -21,20 +21,20 @@ package Mini;
 
 public interface MiniParserTreeConstants
 {
-  public int JJTPROGRAM = 0;
-  public int JJTFUNDECL = 1;
-  public int JJTEXPR = 2;
-  public int JJTIFEXPR = 3;
-  public int JJTLETEXPR = 4;
-  public int JJTFUNAPPL = 5;
-  public int JJTTERM = 6;
-  public int JJTFACTOR = 7;
-  public int JJTVOID = 8;
-  public int JJTINTEGER = 9;
-  public int JJTIDENT = 10;
+  int JJTPROGRAM = 0;
+  int JJTFUNDECL = 1;
+  int JJTEXPR = 2;
+  int JJTIFEXPR = 3;
+  int JJTLETEXPR = 4;
+  int JJTFUNAPPL = 5;
+  int JJTTERM = 6;
+  int JJTFACTOR = 7;
+  int JJTVOID = 8;
+  int JJTINTEGER = 9;
+  int JJTIDENT = 10;
 
 
-  public String[] jjtNodeName = {
+  String[] jjtNodeName = {
     "Program",
     "FunDecl",
     "Expr",

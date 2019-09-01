@@ -73,7 +73,7 @@ public final class ModuleProvides implements Cloneable, Node {
      * @param file Output file stream
      * @throws IOException if an I/O Exception occurs in writeShort
      */
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(provides_index);
         file.writeShort(provides_with_count);
         for (final int entry : provides_with_index) {
@@ -86,7 +86,7 @@ public final class ModuleProvides implements Cloneable, Node {
      * @return String representation
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return "provides(" + provides_index + ", " + provides_with_count + ", ...)";
     }
 
@@ -94,7 +94,7 @@ public final class ModuleProvides implements Cloneable, Node {
     /**
      * @return Resolved string representation
      */
-    public final String toString( final ConstantPool constant_pool ) {
+    public String toString( final ConstantPool constant_pool ) {
         final StringBuilder buf = new StringBuilder();
         final String interface_name = constant_pool.constantToString(provides_index, Const.CONSTANT_Class);
         buf.append(Utility.compactClassName(interface_name, false));

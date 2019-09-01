@@ -137,7 +137,7 @@ public final class StackMapEntry implements Node, Cloneable
      * @param file Output file stream
      * @throws IOException
      */
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.write(frame_type);
         if (frame_type >= Const.SAME_FRAME && frame_type <= Const.SAME_FRAME_MAX) {
             // nothing to be done
@@ -177,7 +177,7 @@ public final class StackMapEntry implements Node, Cloneable
      * @return String representation.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         final StringBuilder buf = new StringBuilder(64);
         buf.append("(");
         if (frame_type >= Const.SAME_FRAME && frame_type <= Const.SAME_FRAME_MAX) {
@@ -421,7 +421,7 @@ public final class StackMapEntry implements Node, Cloneable
     /**
      * @return Constant pool used by this object.
      */
-    public final ConstantPool getConstantPool() {
+    public ConstantPool getConstantPool() {
         return constant_pool;
     }
 
@@ -429,7 +429,7 @@ public final class StackMapEntry implements Node, Cloneable
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( final ConstantPool constant_pool ) {
+    public void setConstantPool( final ConstantPool constant_pool ) {
         this.constant_pool = constant_pool;
     }
 }

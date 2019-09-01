@@ -82,7 +82,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeLong(bytes);
     }
@@ -91,7 +91,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /**
      * @return data, i.e., 8 bytes.
      */
-    public final long getBytes() {
+    public long getBytes() {
         return bytes;
     }
 
@@ -99,7 +99,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /**
      * @param bytes the raw bytes that represent this long
      */
-    public final void setBytes( final long bytes ) {
+    public void setBytes( final long bytes ) {
         this.bytes = bytes;
     }
 
@@ -108,7 +108,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
      * @return String representation.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
     }
 

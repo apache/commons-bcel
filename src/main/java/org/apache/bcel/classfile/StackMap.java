@@ -79,7 +79,7 @@ public final class StackMap extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(map.length);
         for (final StackMapEntry entry : map) {
@@ -91,7 +91,7 @@ public final class StackMap extends Attribute {
     /**
      * @return Array of stack map entries
      */
-    public final StackMapEntry[] getStackMap() {
+    public StackMapEntry[] getStackMap() {
         return map;
     }
 
@@ -99,7 +99,7 @@ public final class StackMap extends Attribute {
     /**
      * @param map Array of stack map entries
      */
-    public final void setStackMap( final StackMapEntry[] map ) {
+    public void setStackMap( final StackMapEntry[] map ) {
         this.map = map;
         int len = 2; // Length of 'number_of_entries' field prior to the array of stack maps
         for (final StackMapEntry element : map) {
@@ -113,7 +113,7 @@ public final class StackMap extends Attribute {
      * @return String representation.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         final StringBuilder buf = new StringBuilder("StackMap(");
         for (int i = 0; i < map.length; i++) {
             buf.append(map[i]);
@@ -154,7 +154,7 @@ public final class StackMap extends Attribute {
     }
 
 
-    public final int getMapLength() {
+    public int getMapLength() {
         return map == null ? 0 : map.length;
     }
 }

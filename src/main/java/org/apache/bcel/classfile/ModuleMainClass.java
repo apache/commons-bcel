@@ -90,7 +90,7 @@ public final class ModuleMainClass extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(main_class_index);
     }
@@ -99,7 +99,7 @@ public final class ModuleMainClass extends Attribute {
     /**
      * @return index into constant pool of host class name.
      */
-    public final int getHostClassIndex() {
+    public int getHostClassIndex() {
         return main_class_index;
     }
 
@@ -107,7 +107,7 @@ public final class ModuleMainClass extends Attribute {
     /**
      * @param int the host class index
      */
-    public final void setHostClassIndex( final int main_class_index ) {
+    public void setHostClassIndex( final int main_class_index ) {
         this.main_class_index = main_class_index;
     }
 
@@ -116,7 +116,7 @@ public final class ModuleMainClass extends Attribute {
      * @return String representation
      */
     @Override
-    public final String toString() {
+    public String toString() {
         final StringBuilder buf = new StringBuilder();
         buf.append("ModuleMainClass: ");
         final String class_name = super.getConstantPool().getConstantString(main_class_index, Const.CONSTANT_Class);

@@ -108,7 +108,7 @@ public final class Module extends Attribute {
      * @return table of required modules
      * @see ModuleRequires
      */
-    public final ModuleRequires[] getRequiresTable() {
+    public ModuleRequires[] getRequiresTable() {
         return requires_table;
     }
 
@@ -117,7 +117,7 @@ public final class Module extends Attribute {
      * @return table of exported interfaces
      * @see ModuleExports
      */
-    public final ModuleExports[] getExportsTable() {
+    public ModuleExports[] getExportsTable() {
         return exports_table;
     }
 
@@ -126,7 +126,7 @@ public final class Module extends Attribute {
      * @return table of provided interfaces
      * @see ModuleOpens
      */
-    public final ModuleOpens[] getOpensTable() {
+    public ModuleOpens[] getOpensTable() {
         return opens_table;
     }
 
@@ -135,7 +135,7 @@ public final class Module extends Attribute {
      * @return table of provided interfaces
      * @see ModuleProvides
      */
-    public final ModuleProvides[] getProvidesTable() {
+    public ModuleProvides[] getProvidesTable() {
         return provides_table;
     }
 
@@ -147,7 +147,7 @@ public final class Module extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
 
         file.writeShort(module_name_index);
@@ -185,7 +185,7 @@ public final class Module extends Attribute {
      * @return String representation, i.e., a list of packages.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         final ConstantPool cp = super.getConstantPool();
         final StringBuilder buf = new StringBuilder();
         buf.append("Module:\n");

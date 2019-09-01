@@ -143,7 +143,7 @@ public final class ASCII_CharStream
      }
   }
 
-  static public final char BeginToken() throws java.io.IOException
+  static public char BeginToken() throws java.io.IOException
   {
      tokenBegin = -1;
      final char c = readChar();
@@ -192,7 +192,7 @@ public final class ASCII_CharStream
      bufcolumn[bufpos] = column;
   }
 
-  static public final char readChar() throws java.io.IOException
+  static public char readChar() throws java.io.IOException
   {
      if (inBuf > 0)
      {
@@ -210,23 +210,23 @@ public final class ASCII_CharStream
      return (c);
   }
 
-  static public final int getEndColumn() {
+  static public int getEndColumn() {
      return bufcolumn[bufpos];
   }
 
-  static public final int getEndLine() {
+  static public int getEndLine() {
      return bufline[bufpos];
   }
 
-  static public final int getBeginColumn() {
+  static public int getBeginColumn() {
      return bufcolumn[tokenBegin];
   }
 
-  static public final int getBeginLine() {
+  static public int getBeginLine() {
      return bufline[tokenBegin];
   }
 
-  static public final void backup(final int amount) {
+  static public void backup(final int amount) {
 
     inBuf += amount;
     if ((bufpos -= amount) < 0) {
@@ -303,7 +303,7 @@ public final class ASCII_CharStream
   {
      ReInit(dstream, startline, startcolumn, 4096);
   }
-  static public final String GetImage()
+  static public String GetImage()
   {
      if (bufpos >= tokenBegin) {
         return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
@@ -313,7 +313,7 @@ public final class ASCII_CharStream
     }
   }
 
-  static public final char[] GetSuffix(final int len)
+  static public char[] GetSuffix(final int len)
   {
      final char[] ret = new char[len];
 

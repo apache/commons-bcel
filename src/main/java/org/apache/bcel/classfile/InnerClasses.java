@@ -98,7 +98,7 @@ public final class InnerClasses extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(inner_classes.length);
         for (final InnerClass inner_class : inner_classes) {
@@ -110,7 +110,7 @@ public final class InnerClasses extends Attribute {
     /**
      * @return array of inner class "records"
      */
-    public final InnerClass[] getInnerClasses() {
+    public InnerClass[] getInnerClasses() {
         return inner_classes;
     }
 
@@ -118,7 +118,7 @@ public final class InnerClasses extends Attribute {
     /**
      * @param inner_classes the array of inner classes
      */
-    public final void setInnerClasses( final InnerClass[] inner_classes ) {
+    public void setInnerClasses( final InnerClass[] inner_classes ) {
         this.inner_classes = inner_classes != null ? inner_classes : new InnerClass[0];
     }
 
@@ -127,7 +127,7 @@ public final class InnerClasses extends Attribute {
      * @return String representation.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         final StringBuilder buf = new StringBuilder();
         buf.append("InnerClasses(");
         buf.append(inner_classes.length);

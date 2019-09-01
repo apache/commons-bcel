@@ -82,7 +82,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
         file.writeInt(bytes);
     }
@@ -91,7 +91,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     /**
      * @return data, i.e., 4 bytes.
      */
-    public final int getBytes() {
+    public int getBytes() {
         return bytes;
     }
 
@@ -99,7 +99,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     /**
      * @param bytes the raw bytes that represent this integer
      */
-    public final void setBytes( final int bytes ) {
+    public void setBytes( final int bytes ) {
         this.bytes = bytes;
     }
 
@@ -108,7 +108,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
      * @return String representation.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
     }
 

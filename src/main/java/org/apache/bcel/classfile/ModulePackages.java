@@ -94,7 +94,7 @@ public final class ModulePackages extends Attribute {
      * @throws IOException
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
         file.writeShort(package_index_table.length);
         for (final int index : package_index_table) {
@@ -106,7 +106,7 @@ public final class ModulePackages extends Attribute {
     /**
      * @return array of indices into constant pool of package names.
      */
-    public final int[] getPackageIndexTable() {
+    public int[] getPackageIndexTable() {
         return package_index_table;
     }
 
@@ -114,7 +114,7 @@ public final class ModulePackages extends Attribute {
     /**
      * @return Length of package table.
      */
-    public final int getNumberOfPackages() {
+    public int getNumberOfPackages() {
         return package_index_table == null ? 0 : package_index_table.length;
     }
 
@@ -122,7 +122,7 @@ public final class ModulePackages extends Attribute {
     /**
      * @return string array of package names
      */
-    public final String[] getPackageNames() {
+    public String[] getPackageNames() {
         final String[] names = new String[package_index_table.length];
         for (int i = 0; i < package_index_table.length; i++) {
             names[i] = super.getConstantPool().getConstantString(package_index_table[i],
@@ -136,7 +136,7 @@ public final class ModulePackages extends Attribute {
      * @param package_index_table the list of package indexes
      * Also redefines number_of_packages according to table length.
      */
-    public final void setPackageIndexTable( final int[] package_index_table ) {
+    public void setPackageIndexTable( final int[] package_index_table ) {
         this.package_index_table = package_index_table != null ? package_index_table : new int[0];
     }
 
@@ -145,7 +145,7 @@ public final class ModulePackages extends Attribute {
      * @return String representation, i.e., a list of packages.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         final StringBuilder buf = new StringBuilder();
         buf.append("ModulePackages(");
         buf.append(package_index_table.length);
