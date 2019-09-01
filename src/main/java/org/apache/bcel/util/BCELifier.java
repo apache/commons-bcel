@@ -213,7 +213,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
             return "0";
         }
         final StringBuilder buf = new StringBuilder();
-        for (int i = 0, pow = 1; pow <= Const.MAX_ACC_FLAG; i++) {
+        for (int i = 0, pow = 1; pow <= Const.MAX_ACC_FLAG_I; i++) {
             if ((flags & pow) != 0) {
                 if ((pow == Const.ACC_SYNCHRONIZED) && (location == FLAGS.CLASS)) {
                     buf.append(CONSTANT_PREFIX+"ACC_SUPER | ");

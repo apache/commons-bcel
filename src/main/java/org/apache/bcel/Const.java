@@ -329,7 +329,20 @@ public final class Const {
    *  @see #ACC_PUBLIC
    */
   public static final short ACC_MODULE       = (short) 0x8000;
-  public static final int MAX_ACC_FLAG       = 0x8000; // ACC_MODULE is negative as a short
+
+  /** One of the access flags for fields, methods, or classes.
+   *  @see #ACC_PUBLIC
+   *  @deprecated Use {@link #MAX_ACC_FLAG_I}
+   */
+  @Deprecated
+  public static final short MAX_ACC_FLAG     = ACC_ENUM;
+  
+  /** One of the access flags for fields, methods, or classes.
+   * ACC_MODULE is negative as a short.
+   * @see #ACC_PUBLIC
+   * @since 6.4.0
+   */
+  public static final int MAX_ACC_FLAG_I = 0x8000; // ACC_MODULE is negative as a short
 
   // Note that do to overloading:
   // 'synchronized' is for methods, might be 'open' (if Module), 'super' (if class), or 'transitive' (if Module).

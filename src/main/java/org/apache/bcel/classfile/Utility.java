@@ -102,7 +102,7 @@ public abstract class Utility {
     public static String accessToString( final int access_flags, final boolean for_class ) {
         final StringBuilder buf = new StringBuilder();
         int p = 0;
-        for (int i = 0; p < Const.MAX_ACC_FLAG; i++) { // Loop through known flags
+        for (int i = 0; p < Const.MAX_ACC_FLAG_I; i++) { // Loop through known flags
             p = pow2(i);
             if ((access_flags & p) != 0) {
                 /* Special case: Classes compiled with new compilers and with the
