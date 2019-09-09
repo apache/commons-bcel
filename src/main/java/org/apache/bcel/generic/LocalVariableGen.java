@@ -21,7 +21,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.classfile.LocalVariable;
 
 /**
- * This class represents a local variable within a method. It contains its
+ * Represents a local variable within a method. It contains its
  * scope, name and type. The generated LocalVariable object can be obtained
  * with getLocalVariable which needs the instruction list and the constant
  * pool as parameters.
@@ -66,7 +66,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
 
     /**
-     * Generate a local variable that with index `index'. Note that double and long
+     * Generates a local variable that with index `index'. Note that double and long
      * variables need two indexs. Index indices have to be provided by the user.
      *
      * @param index index of local variable
@@ -84,7 +84,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
 
     /**
-     * Get LocalVariable object.
+     * Gets LocalVariable object.
      *
      * This relies on that the instruction list has already been dumped to byte code or
      * or that the `setPositions' methods has been called for the instruction list.

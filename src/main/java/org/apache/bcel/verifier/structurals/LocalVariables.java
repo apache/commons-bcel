@@ -29,15 +29,18 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  *
  */
 public class LocalVariables implements Cloneable {
+
     /** The Type[] containing the local variable slots. */
     private final Type[] locals;
 
     /**
      * Creates a new LocalVariables object.
+     *
+     * @param localVariableCount local variable count.
      */
-    public LocalVariables(final int maxLocals) {
-        locals = new Type[maxLocals];
-        for (int i=0; i<maxLocals; i++) {
+    public LocalVariables(final int localVariableCount) {
+        locals = new Type[localVariableCount];
+        for (int i=0; i<localVariableCount; i++) {
             locals[i] = Type.UNKNOWN;
         }
     }
@@ -57,23 +60,29 @@ public class LocalVariables implements Cloneable {
     }
 
     /**
-     * Returns the type of the local variable slot i.
+     * Returns the type of the local variable slot index.
+     *
+     * @param slotIndex Slot to look up.
+     * @return the type of the local variable slot index.
      */
-    public Type get(final int i) {
-        return locals[i];
+    public Type get(final int slotIndex) {
+        return locals[slotIndex];
     }
 
     /**
      * Returns a (correctly typed) clone of this object.
      * This is equivalent to ((LocalVariables) this.clone()).
+     *
+     * @return a (correctly typed) clone of this object.
      */
     public LocalVariables getClone() {
         return (LocalVariables) this.clone();
     }
 
     /**
-     * Returns the number of local variable slots this
-     * LocalVariables instance has.
+     * Returns the number of local variable slots.
+     *
+     * @return the number of local variable slots.
      */
     public int maxLocals() {
         return locals.length;
@@ -81,12 +90,15 @@ public class LocalVariables implements Cloneable {
 
     /**
      * Sets a new Type for the given local variable slot.
+     *
+     * @param slotIndex Target slot index.
+     * @param type Type to save at the given slot index.
      */
-    public void set(final int i, final Type type) { // TODO could be package-protected?
+    public void set(final int slotIndex, final Type type) { // TODO could be package-protected?
         if (type == Type.BYTE || type == Type.SHORT || type == Type.BOOLEAN || type == Type.CHAR) {
             throw new AssertionViolatedException("LocalVariables do not know about '"+type+"'. Use Type.INT instead.");
         }
-        locals[i] = type;
+        locals[slotIndex] = type;
     }
 
     /** @return a hash code value for the object.
@@ -118,15 +130,17 @@ public class LocalVariables implements Cloneable {
     /**
      * Merges two local variables sets as described in the Java Virtual Machine Specification,
      * Second Edition, section 4.9.2, page 146.
+     *
+     * @param localVariable other local variable.
      */
-    public void merge(final LocalVariables lv) {
+    public void merge(final LocalVariables localVariable) {
 
-        if (this.locals.length != lv.locals.length) {
+        if (this.locals.length != localVariable.locals.length) {
             throw new AssertionViolatedException("Merging LocalVariables of different size?!? From different methods or what?!?");
         }
 
         for (int i=0; i<locals.length; i++) {
-            merge(lv, i);
+            merge(localVariable, i);
         }
     }
 
@@ -204,13 +218,15 @@ public class LocalVariables implements Cloneable {
     }
 
     /**
-     * Replaces all occurences of u in this local variables set
+     * Replaces all occurrences of {@code uninitializedObjectType} in this local variables set
      * with an "initialized" ObjectType.
+     *
+     * @param uninitializedObjectType the object to match.
      */
-    public void initializeObject(final UninitializedObjectType u) {
+    public void initializeObject(final UninitializedObjectType uninitializedObjectType) {
         for (int i=0; i<locals.length; i++) {
-            if (locals[i] == u) {
-                locals[i] = u.getInitialized();
+            if (locals[i] == uninitializedObjectType) {
+                locals[i] = uninitializedObjectType.getInitialized();
             }
         }
     }

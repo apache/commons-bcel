@@ -26,7 +26,6 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
  * A utility class holding the information about
  * the names and the types of the local variables in
  * a given method.
- *
  */
 public class LocalVariablesInfo{
 
@@ -41,7 +40,12 @@ public class LocalVariablesInfo{
         }
     }
 
-    /** Returns the LocalVariableInfo for the given slot. */
+    /**
+     * Returns the LocalVariableInfo for the given slot.
+     *
+     * @param slot Slot to query.
+     * @return The LocalVariableInfo for the given slot.
+     */
     public LocalVariableInfo getLocalVariableInfo(final int slot) {
         if (slot < 0 || slot >= localVariableInfos.length) {
             throw new AssertionViolatedException("Slot number for local variable information out of range.");
@@ -52,22 +56,27 @@ public class LocalVariablesInfo{
     /**
      * Adds information about the local variable in slot 'slot'. Automatically
      * adds information for slot+1 if 't' is Type.LONG or Type.DOUBLE.
+     *
+     * @param name variable name
+     * @param startPc Range in which the variable is valid.
+     * @param length length of ...
+     * @param type variable type
      * @throws LocalVariableInfoInconsistentException if the new information conflicts
      *         with already gathered information.
      */
-    public void add(final int slot, final String name, final int startpc, final int length, final Type t) throws LocalVariableInfoInconsistentException{
+    public void add(final int slot, final String name, final int startPc, final int length, final Type type) throws LocalVariableInfoInconsistentException{
         // The add operation on LocalVariableInfo may throw the '...Inconsistent...' exception, we don't throw it explicitely here.
 
         if (slot < 0 || slot >= localVariableInfos.length) {
             throw new AssertionViolatedException("Slot number for local variable information out of range.");
         }
 
-        localVariableInfos[slot].add(name, startpc, length, t);
-        if (t == Type.LONG) {
-            localVariableInfos[slot+1].add(name, startpc, length, LONG_Upper.theInstance());
+        localVariableInfos[slot].add(name, startPc, length, type);
+        if (type == Type.LONG) {
+            localVariableInfos[slot+1].add(name, startPc, length, LONG_Upper.theInstance());
         }
-        if (t == Type.DOUBLE) {
-            localVariableInfos[slot+1].add(name, startpc, length, DOUBLE_Upper.theInstance());
+        if (type == Type.DOUBLE) {
+            localVariableInfos[slot+1].add(name, startPc, length, DOUBLE_Upper.theInstance());
         }
     }
 }
