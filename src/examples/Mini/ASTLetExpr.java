@@ -56,7 +56,7 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
    */
   @Override
   public void closeNode() {
-    int i; /* length must be a multiple of 
+    int i; /* length must be a multiple of
                                          * two (ident = expr) + 1 (body expr) */
     final int len_2 = children.length / 2;
     idents = new ASTIdent[len_2];
@@ -78,12 +78,12 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
   @Override
   public ASTExpr traverse(final Environment env) {
     this.env = env;
-    
+
     // Traverse RHS exprs first, so no references to LHS vars are allowed
     for(int i=0; i < exprs.length; i++) {
         exprs[i] = exprs[i].traverse((Environment)env.clone());
     }
-    
+
     // Put argument names into hash table aka. environment
     for(int i=0; i < idents.length; i++) {
       final ASTIdent id    = idents[i];
@@ -99,10 +99,10 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
     }
 
     body = body.traverse(env);
-    
+
     return this;
   }
-  
+
   /**
    * Second pass
    * Overrides AstExpr.eval()
@@ -115,7 +115,7 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
 
     for(int i=0; i < idents.length; i++) {
       final int t = exprs[i].eval(T_UNKNOWN);
-      
+
       idents[i].setType(t);
       //      is_simple = is_simple && exprs[i].isSimple();
     }

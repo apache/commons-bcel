@@ -183,7 +183,7 @@ public interface Visitor
     default void visitModuleRequires(ModuleRequires constantModule) {
         // empty
     }
-    
+
     /**
      * @since 6.4.0
      */

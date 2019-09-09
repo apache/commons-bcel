@@ -69,7 +69,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
    * Overrides ASTExpr.traverse()
    */
   @Override
-  public ASTExpr traverse(final Environment env) { 
+  public ASTExpr traverse(final Environment env) {
     this.env = env;
 
     if_expr   = if_expr.traverse(env);
@@ -94,7 +94,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
 
     if((if_type=if_expr.eval(T_BOOLEAN)) != T_BOOLEAN) {
         MiniC.addError(if_expr.getLine(), if_expr.getColumn(),
-                     "IF expression is not of type boolean, but " + 
+                     "IF expression is not of type boolean, but " +
                      TYPE_NAMES[if_type] + ".");
     }
 

@@ -57,7 +57,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
      * WRITE has one arg of type T_INT, both return T_INT.
      */
     ASTIdent   ident  = new ASTIdent("WRITE", T_INT, -1, -1);
-    ASTIdent[] args   = { new ASTIdent("", T_INT, -1, -1) }; 
+    ASTIdent[] args   = { new ASTIdent("", T_INT, -1, -1) };
     Function   fun    = new Function(ident, args, true);
     env.put(fun);
 
@@ -65,7 +65,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     args  = new ASTIdent[0];
     fun   = new Function(ident, args, true);
     env.put(fun);
-    
+
     /* Add predefined idents TRUE/FALSE of type T_BOOLEAN
      */
     ident = new ASTIdent("TRUE", T_BOOLEAN, -1, -1);
@@ -103,7 +103,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
    *
    * Put everything into the environment, which is copied appropiately to each
    * recursion level, i.e. each FunDecl gets its own copy that it can further
-   * manipulate. 
+   * manipulate.
    *
    * Checks for name clashes of function declarations.
    */
@@ -121,7 +121,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
         name  = f.getName();
         fname = name.getName();
         fun   = env.get(fname); // Lookup in env
-        
+
         if(fun != null) {
         MiniC.addError(f.getLine(), f.getColumn(),
                          "Redeclaration of " + fun + ".");
@@ -129,24 +129,24 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
         env.put(new Function(name, null)); // `args' will be set by FunDecl.traverse()
     }
 
-        
+
       }
 
       // Go for it
       for(int i=0; i < fun_decls.length; i++) {
         fun_decls[i] = fun_decls[i].traverse((Environment)env.clone());
-        
+
         // Look for `main' routine
         fname = fun_decls[i].getName().getName();
         if(fname.equals("main")) {
         main = (Function)env.get(fname);
     }
       }
-      
+
       if(main == null) {
         MiniC.addError(0, 0, "You didn't declare a `main' function.");
     } else if(main.getNoArgs() != 0) {
-        MiniC.addError(main.getLine(), main.getColumn(), 
+        MiniC.addError(main.getLine(), main.getColumn(),
                         "Main function has too many arguments declared.");
     }
     }
@@ -154,7 +154,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     return this;
   }
 
-  /** 
+  /**
    * Second pass, determine type of each node, if possible.
    */
   public void eval(final int pass) {
@@ -183,11 +183,11 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     out.println("import java.io.IOException;\n");
 
     out.println("public final class " + name + " {");
-    out.println("  private static BufferedReader _in = new BufferedReader" + 
+    out.println("  private static BufferedReader _in = new BufferedReader" +
                 "(new InputStreamReader(System.in));\n");
 
     out.println("  private static int _readInt() throws IOException {\n" +
-                "    System.out.print(\"Please enter a number> \");\n" + 
+                "    System.out.print(\"Please enter a number> \");\n" +
                 "    return Integer.parseInt(_in.readLine());\n  }\n");
 
     out.println("  private static int _writeInt(int n) {\n" +
@@ -268,7 +268,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     il.append(new INVOKEVIRTUAL(cp.addMethodref("java.lang.StringBuffer",
                                                 "toString",
                                                 "()Ljava/lang/String;")));
-    
+
     il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream",
                                                 "println",
                                                 "(Ljava/lang/String;)V")));
@@ -294,7 +294,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
     method = new MethodGen(ACC_PUBLIC, Type.VOID, Type.NO_ARGS, null,
                            "<init>", class_name, il, cp);
-    
+
     method.setMaxStack(1);
     class_gen.addMethod(method.getMethod());
 

@@ -26,7 +26,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ConstantPoolTestCase extends AbstractTestCase {
-    
+
     @Test
     public void testConstantToString() throws ClassNotFoundException {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");

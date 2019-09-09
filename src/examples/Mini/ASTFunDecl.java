@@ -52,7 +52,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
   private ASTIdent[]  argv;
   private ASTExpr     body;
   private int         type = T_UNKNOWN;
-  private int         line, column; 
+  private int         line, column;
   private boolean     is_simple;  // true, if simple expression like `12 + f(a)'
   private boolean     is_recursive; // Not used yet, TODO
 //  private int         max_depth; // max. expression tree depth
@@ -73,13 +73,13 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
   ASTFunDecl(final ASTIdent name, final ASTIdent[] argv, final ASTExpr body, final int type) {
     this(JJTFUNDECL);
-    
+
     this.name = name;
     this.argv = argv;
     this.body = body;
     this.type = type;
   }
-  
+
   /**
    * Overrides SimpleNode.closeNode()
    * Cast children to appropiate type.
@@ -118,12 +118,12 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     /* Update entry of this function, i.e. set argument references.
      * The entry is already in there by garantuee, but may be of wrong type,
      * i.e. the user defined a function `TRUE', e.g. and `TRUE' is of type `Variable'.
-     */   
+     */
     try {
       final Function fun = (Function)env.get(name.getName());
       fun.setArgs(argv);
     } catch(final ClassCastException e) {} // Who cares?
-    
+
     body = body.traverse(env); // Traverse expression body
 
     return this;
@@ -138,7 +138,7 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
 
     if((expected != T_UNKNOWN) && (type != expected)) {
         MiniC.addError(line, column,
-                     "Function f ist not of type " + TYPE_NAMES[expected] + 
+                     "Function f ist not of type " + TYPE_NAMES[expected] +
                      " as previously assumed, but " + TYPE_NAMES[type]);
     }
 
@@ -172,18 +172,18 @@ implements MiniParserTreeConstants, org.apache.bcel.Constants {
     else {
       out.print("  public static final " + "int" + // type_names[type] +
                 " " + fname + "(");
-      
+
       for(int i = 0; i < argv.length; i++) {
         out.print("int " + argv[i].getName());
-        
+
         if(i < argv.length - 1) {
         out.print(", ");
     }
       }
-      
+
       out.println(")\n    throws IOException\n  {");
     }
-    
+
     if(!ignore) {
       final StringBuffer buf = new StringBuffer();
 

@@ -68,7 +68,7 @@ import com.sun.jna.platform.win32.Advapi32Util;
  * <p>
  * For example:
  * </p>
- * 
+ *
  * <pre>
  * mvn test -Dtest=JdkGenericDumpTestCase -DExtraJavaHomes="C:\Program Files\Java\openjdk\jdk-13;C:\Program Files\Java\openjdk\jdk-14"
  * </pre>

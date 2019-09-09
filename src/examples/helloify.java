@@ -95,7 +95,7 @@ public final class helloify implements Constants {
         if (m.isNative() || m.isAbstract() || (code == null)) {
             return m;
         }
-    
+
         // Create instruction list to be inserted at method start.
         final String mesg = "Hello from " + Utility.methodSignatureToString(m.getSignature(),
                 name,

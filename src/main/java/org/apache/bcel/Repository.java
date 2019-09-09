@@ -37,7 +37,7 @@ public abstract class Repository {
     private static org.apache.bcel.util.Repository repository = SyntheticRepository.getInstance();
 
 
-    /** 
+    /**
      * @return currently used repository instance
      */
     public static org.apache.bcel.util.Repository getRepository() {
@@ -45,7 +45,7 @@ public abstract class Repository {
     }
 
 
-    /** 
+    /**
      * Sets repository instance to be used for class loading
      */
     public static void setRepository( final org.apache.bcel.util.Repository rep ) {
@@ -53,7 +53,7 @@ public abstract class Repository {
     }
 
 
-    /** 
+    /**
      * Lookups class somewhere found on your CLASSPATH, or whereever the
      * repository instance looks for it.
      *
@@ -68,7 +68,7 @@ public abstract class Repository {
 
     /**
      * Tries to find class source using the internal repository instance.
-     * 
+     *
      * @see Class
      * @return JavaClass object for given runtime class
      * @throws ClassNotFoundException if the class could not be found or
@@ -97,7 +97,7 @@ public abstract class Repository {
     }
 
 
-    /** 
+    /**
      * Clears the repository.
      */
     public static void clearCache() {

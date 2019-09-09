@@ -49,7 +49,7 @@ import org.apache.bcel.Const;
 public abstract class Attribute implements Cloneable, Node {
 
     private static final boolean debug = Boolean.getBoolean(Attribute.class.getCanonicalName() + ".debug"); // Debugging on/off
-    
+
     private static final Map<String, Object> readers = new HashMap<>();
 
     /**
@@ -270,7 +270,7 @@ public abstract class Attribute implements Cloneable, Node {
      */
     @Override
     public abstract void accept(Visitor v);
-    
+
     /**
      * Use copy() if you want to have a deep copy(), i.e., with all references
      * copied correctly.

@@ -317,7 +317,7 @@ static private int jjMoveStringLiteralDfa2_0(final long old0, long active0)
 {
    if (((active0 &= old0)) == 0L) {
     return jjStartNfa_0(0, old0);
-} 
+}
    try { curChar = ASCII_CharStream.readChar(); }
    catch(final java.io.IOException e) {
       jjStopStringLiteralDfa_0(1, active0);
@@ -361,7 +361,7 @@ static private int jjMoveStringLiteralDfa3_0(final long old0, long active0)
 {
    if (((active0 &= old0)) == 0L) {
     return jjStartNfa_0(1, old0);
-} 
+}
    try { curChar = ASCII_CharStream.readChar(); }
    catch(final java.io.IOException e) {
       jjStopStringLiteralDfa_0(2, active0);
@@ -399,7 +399,7 @@ static private int jjMoveStringLiteralDfa4_0(final long old0, long active0)
 {
    if (((active0 &= old0)) == 0L) {
     return jjStartNfa_0(2, old0);
-} 
+}
    try { curChar = ASCII_CharStream.readChar(); }
    catch(final java.io.IOException e) {
       jjStopStringLiteralDfa_0(3, active0);
@@ -554,34 +554,34 @@ static private int jjMoveNfa_0(final int startState, int curPos)
    }
 }
 static final int[] jjnextStates = {
-   4, 5, 
+   4, 5,
 };
 public static final String[] jjstrLiteralImages = {
-"", null, null, null, null, null, null, null, null, "\106\125\116", 
-"\111\106", "\124\110\105\116", "\105\114\123\105", "\106\111", "\114\105\124", 
-"\111\116", "\76", "\74", "\76\75", "\74\75", "\75\75", "\41\75", "\41", 
-"\106\101\114\123\105", "\124\122\125\105", "\101\116\104", "\117\122", "\53", "\55", "\52", "\45", 
-"\57", "\50", "\51", "\75", "\54", "\122\105\101\104", "\127\122\111\124\105", null, 
+"", null, null, null, null, null, null, null, null, "\106\125\116",
+"\111\106", "\124\110\105\116", "\105\114\123\105", "\106\111", "\114\105\124",
+"\111\116", "\76", "\74", "\76\75", "\74\75", "\75\75", "\41\75", "\41",
+"\106\101\114\123\105", "\124\122\125\105", "\101\116\104", "\117\122", "\53", "\55", "\52", "\45",
+"\57", "\50", "\51", "\75", "\54", "\122\105\101\104", "\127\122\111\124\105", null,
 null, null, null, null, };
 public static final String[] lexStateNames = {
-   "DEFAULT", 
-   "SINGLE_LINE_COMMENT_STATE", 
+   "DEFAULT",
+   "SINGLE_LINE_COMMENT_STATE",
 };
 public static final int[] jjnewLexState = {
-   -1, -1, -1, -1, -1, -1, 1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
-   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+   -1, -1, -1, -1, -1, -1, 1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 };
 static final long[] jjtoToken = {
-   0x73ffffffe01L, 
+   0x73ffffffe01L,
 };
 static final long[] jjtoSkip = {
-   0xbeL, 
+   0xbeL,
 };
 static final long[] jjtoSpecial = {
-   0x80L, 
+   0x80L,
 };
 static final long[] jjtoMore = {
-   0x140L, 
+   0x140L,
 };
 static private ASCII_CharStream input_stream;
 static private final int[] jjrounds = new int[6];
@@ -654,7 +654,7 @@ static int jjround;
 static int jjmatchedPos;
 static int jjmatchedKind;
 
-public static Token getNextToken() 
+public static Token getNextToken()
 {
   Token specialToken = null;
   Token matchedToken;
@@ -662,13 +662,13 @@ public static Token getNextToken()
 
   EOFLoop :
   for (;;)
-  {   
-   try   
-   {     
+  {
+   try
+   {
       curChar = ASCII_CharStream.BeginToken();
-   }     
+   }
    catch(final java.io.IOException e)
-   {        
+   {
       jjmatchedKind = 0;
       matchedToken = jjFillToken();
       matchedToken.specialToken = specialToken;

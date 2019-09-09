@@ -26,14 +26,14 @@ import java.util.Vector;
  * That environment contains all function definitions and identifiers.
  * Hash keys are Strings (identifiers), which are mapped to a table index.
  *
- * The table consists of `SIZE' fields which have `SLOTS' subfields. Thus 
+ * The table consists of `SIZE' fields which have `SLOTS' subfields. Thus
  * the maximum number of storable items is `SLOTS' * `SIZE'.
  *
  */
 public class Environment implements Cloneable {
   private static final int SIZE  = 127; // Prime number large enough for most cases
   private static final int SLOTS = 3;   // Number of slots of each field
-  
+
   private final int       size;               // The table is an array of
   private final Vector<EnvEntry>[]  table;              // Vectors
   private int       elements=0;
@@ -136,7 +136,7 @@ public class Environment implements Cloneable {
     } catch(final ArrayIndexOutOfBoundsException e) {}
   }
 
-  private static int lookup(final Vector<EnvEntry> v, final String key) 
+  private static int lookup(final Vector<EnvEntry> v, final String key)
        throws ArrayIndexOutOfBoundsException
   {
     final int len = v.size();
@@ -153,7 +153,7 @@ public class Environment implements Cloneable {
   }
 
   @Override
-  public Object clone() { 
+  public Object clone() {
     final Vector<EnvEntry>[] copy = new Vector[size];
 
     for(int i=0; i < size; i++) {
@@ -199,7 +199,7 @@ public class Environment implements Cloneable {
           for(int j=0; j < len; j++) {
         entries[k++] = v.elementAt(j);
     }
-        } catch(final ArrayIndexOutOfBoundsException e) {}  
+        } catch(final ArrayIndexOutOfBoundsException e) {}
       }
     }
 

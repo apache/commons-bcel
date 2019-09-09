@@ -56,7 +56,7 @@ public class patchclass {
     }
 
     /*
-     * Replace all occurences of string "<em>old</em>" with 
+     * Replace all occurences of string "<em>old</em>" with
      * "<em>replacement</em>" in all Utf8 constants
      */
     private static void patchIt(final String old, final String replacement, final Constant[] constant_pool) {

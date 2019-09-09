@@ -46,7 +46,7 @@ public abstract class SimpleNode implements Node {
 
   public void closeNode() {
   }
-  
+
   public void jjtSetParent(final Node n) { parent = n; }
   public Node jjtGetParent() { return parent; }
 

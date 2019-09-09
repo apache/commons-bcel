@@ -36,7 +36,7 @@ public interface Node {
   /** This pair of methods are used to inform the node of its
     parent. */
   void jjtSetParent(Node n);
-  
+
   Node jjtGetParent();
 
   /** This method tells the node to add its argument to the node's
