@@ -126,6 +126,7 @@ public final class Pass3aVerifier extends PassVerifier{
      * It's here for performance reasons by do_verify() and its callees.
      */
     private InstructionList instructionList;
+    
     /**
      * The one and only Code object used by an instance of this class.
      *  It's here for performance reasons by do_verify() and its callees.
