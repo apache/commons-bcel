@@ -49,7 +49,7 @@
     <commons.module.name>org.apache.bcel</commons.module.name>
     <commons.release.version>6.4.0</commons.release.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
-    <commons.rc.version>RC1</commons.rc.version>
+    <commons.rc.version>RC2</commons.rc.version>
     <commons.bc.version>6.3.1</commons.bc.version>
     <commons.release.desc>(Java 8)</commons.release.desc>
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
