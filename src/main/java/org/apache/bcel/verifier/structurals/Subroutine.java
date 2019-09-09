@@ -17,72 +17,74 @@
  */
 package org.apache.bcel.verifier.structurals;
 
-
 import org.apache.bcel.generic.InstructionHandle;
 
 /**
- * This interface defines properties of JVM bytecode subroutines.
- * Note that it is 'abused' to maintain the top-level code in a
- * consistent fashion, too.
+ * This interface defines properties of JVM bytecode subroutines. Note that it is 'abused' to maintain the top-level
+ * code in a consistent fashion, too.
  *
  */
-public interface Subroutine{
+public interface Subroutine {
     /**
-     * Returns all the JsrInstructions that have the
-     * first instruction of this subroutine as their target.
-     * <B>Must not be invoked on the 'top-level subroutine'.</B>
+     * Returns all the JsrInstructions that have the first instruction of this subroutine as their target. <B>Must not
+     * be invoked on the 'top-level subroutine'.</B>
+     * 
+     * @return The JsrInstructions that have the first instruction of this subroutine as their target.
      */
     InstructionHandle[] getEnteringJsrInstructions();
 
     /**
-     * Returns the one and only RET that leaves the subroutine.
-     * Note that JustIce has a pretty rigid notion of a subroutine.
-     * <B>Must not be invoked on the 'top-level subroutine'.</B>
+     * Returns the one and only RET that leaves the subroutine. Note that JustIce has a pretty rigid notion of a
+     * subroutine. <B>Must not be invoked on the 'top-level subroutine'.</B>
+     * 
+     * @return The one and only RET that leaves the subroutine.
      *
      * @see Subroutines
      */
     InstructionHandle getLeavingRET();
 
     /**
-     * Returns all instructions that together form this subroutine.
-     * Note that an instruction is part of exactly one subroutine
-     * (the top-level code is considered to be a special subroutine) -
-     * else it is not reachable at all (dead code).
+     * Returns all instructions that together form this subroutine. Note that an instruction is part of exactly one
+     * subroutine (the top-level code is considered to be a special subroutine) - else it is not reachable at all (dead
+     * code).
+     * 
+     * @return All instructions that together form this subroutine.
      */
     InstructionHandle[] getInstructions();
 
     /**
-     * Returns if the given InstructionHandle refers to an instruction
-     * that is part of this subroutine. This is a convenience method
-     * that saves iteration over the InstructionHandle objects returned
-     * by getInstructions().
+     * Returns if the given InstructionHandle refers to an instruction that is part of this subroutine. This is a
+     * convenience method that saves iteration over the InstructionHandle objects returned by getInstructions().
+     * 
+     * @param inst The InstructionHandle to test.
+     * @return Whether the given InstructionHandle refers to an instruction that is part of this subroutine.
      *
      * @see #getInstructions()
      */
     boolean contains(InstructionHandle inst);
 
     /**
-     * Returns an int[] containing the indices of the local variable slots
-     * accessed by this Subroutine (read-accessed, write-accessed or both);
-     * local variables referenced by subroutines of this subroutine are
-     * not included.
-     *
+     * Returns an int[] containing the indices of the local variable slots accessed by this Subroutine (read-accessed,
+     * write-accessed or both); local variables referenced by subroutines of this subroutine are not included.
+     * 
+     * @return An int[] containing the indices of the local variable slots.
      * @see #getRecursivelyAccessedLocalsIndices()
      */
     int[] getAccessedLocalsIndices();
 
     /**
-     * Returns an int[] containing the indices of the local variable slots
-     * accessed by this Subroutine (read-accessed, write-accessed or both);
-     * local variables referenced by subroutines of this subroutine are
-     * included.
-     *
+     * Returns an int[] containing the indices of the local variable slots accessed by this Subroutine (read-accessed,
+     * write-accessed or both); local variables referenced by subroutines of this subroutine are included.
+     * 
+     * @return An int[] containing the indices of the local variable slots.
      * @see #getAccessedLocalsIndices()
      */
     int[] getRecursivelyAccessedLocalsIndices();
 
     /**
      * Returns the subroutines that are directly called from this subroutine.
+     * 
+     * @return The subroutines that are directly called from this subroutine.
      */
     Subroutine[] subSubs();
 }
