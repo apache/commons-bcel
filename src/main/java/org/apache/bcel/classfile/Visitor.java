@@ -173,63 +173,63 @@ public interface Visitor
     /**
      * @since 6.4.0
      */
-    default void visitModule(Module constantModule) {
+    default void visitModule(final Module constantModule) {
         // empty
     }
 
     /**
      * @since 6.4.0
      */
-    default void visitModuleRequires(ModuleRequires constantModule) {
+    default void visitModuleRequires(final ModuleRequires constantModule) {
         // empty
     }
 
     /**
      * @since 6.4.0
      */
-    default void visitModuleExports(ModuleExports constantModule) {
+    default void visitModuleExports(final ModuleExports constantModule) {
         // empty
     }
 
     /**
      * @since 6.4.0
      */
-    default void visitModuleOpens(ModuleOpens constantModule) {
+    default void visitModuleOpens(final ModuleOpens constantModule) {
         // empty
     }
 
     /**
      * @since 6.4.0
      */
-    default void visitModuleProvides(ModuleProvides constantModule) {
+    default void visitModuleProvides(final ModuleProvides constantModule) {
         // empty
     }
 
     /**
      * @since 6.4.0
      */
-    default void visitModulePackages(ModulePackages constantModule) {
+    default void visitModulePackages(final ModulePackages constantModule) {
         // empty
     }
 
     /**
      * @since 6.4.0
      */
-    default void visitModuleMainClass(ModuleMainClass obj) {
+    default void visitModuleMainClass(final ModuleMainClass obj) {
         // empty
     }
 
     /**
      * @since 6.4.0
      */
-    default void visitNestHost(NestHost obj) {
+    default void visitNestHost(final NestHost obj) {
         // empty
     }
 
     /**
      * @since 6.4.0
      */
-    default void visitNestMembers(NestMembers obj) {
+    default void visitNestMembers(final NestMembers obj) {
         // empty
     }
 }
