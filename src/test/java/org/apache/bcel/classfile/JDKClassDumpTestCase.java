@@ -40,19 +40,15 @@ public class JDKClassDumpTestCase {
     @Test
     public void testPerformance() throws Exception {
         final File javaLib = new File(System.getProperty("java.home") + "/lib");
-        javaLib.listFiles(new FileFilter() {
-
-            @Override
-            public boolean accept(final File file) {
-                if (file.getName().endsWith(".jar")) {
-                    try {
-                        testJar(file);
-                    } catch (final Exception e) {
-                        Assert.fail(e.getMessage());
-                    }
+        javaLib.listFiles((FileFilter) file -> {
+            if (file.getName().endsWith(".jar")) {
+                try {
+                    testJar(file);
+                } catch (final Exception e) {
+                    Assert.fail(e.getMessage());
                 }
-                return false;
             }
+            return false;
         });
     }
 

@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Hashtable;
 import java.util.Arrays;
-import java.util.Comparator;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -358,12 +357,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
         }
         if (size > 1) {
-            Arrays.sort(lg, new Comparator<LocalVariableGen>() {
-                @Override
-                public int compare(final LocalVariableGen o1, final LocalVariableGen o2) {
-                    return o1.getIndex() - o2.getIndex();
-                }
-            });
+            Arrays.sort(lg, (o1, o2) -> o1.getIndex() - o2.getIndex());
         }
         return lg;
     }
