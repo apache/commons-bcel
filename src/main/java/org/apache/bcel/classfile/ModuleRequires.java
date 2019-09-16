@@ -94,7 +94,7 @@ public final class ModuleRequires implements Cloneable, Node {
         final String module_name = constant_pool.constantToString(requires_index, Const.CONSTANT_Module);
         buf.append(Utility.compactClassName(module_name, false));
         buf.append(", ").append(String.format("%04x", requires_flags));
-        final String version = (requires_version_index == 0 ? "0" : constant_pool.getConstantString(requires_version_index, Const.CONSTANT_Utf8));
+        final String version = requires_version_index == 0 ? "0" : constant_pool.getConstantString(requires_version_index, Const.CONSTANT_Utf8);
         buf.append(", ").append(version);
         return buf.toString();
     }
