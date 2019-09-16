@@ -40,7 +40,7 @@ public final class Module extends Attribute {
     private ModuleExports[] exports_table;
     private ModuleOpens[] opens_table;
     private final int uses_count;
-    private final int uses_index[];
+    private final int[] uses_index;
     private ModuleProvides[] provides_table;
 
     /**

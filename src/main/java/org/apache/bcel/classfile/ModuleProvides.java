@@ -34,7 +34,7 @@ public final class ModuleProvides implements Cloneable, Node {
 
     private final int provides_index;  // points to CONSTANT_Class_info
     private final int provides_with_count;
-    private final int provides_with_index[];  // points to CONSTANT_Class_info
+    private final int[] provides_with_index;  // points to CONSTANT_Class_info
 
 
     /**
