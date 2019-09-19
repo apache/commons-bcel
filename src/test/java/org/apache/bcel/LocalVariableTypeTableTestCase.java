@@ -17,6 +17,10 @@
  */
 package org.apache.bcel;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ACONST_NULL;
@@ -31,13 +35,10 @@ import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedList;
-import java.util.List;
-
 public class LocalVariableTypeTableTestCase extends AbstractTestCase {
+    
     public class TestClassLoader extends ClassLoader {
+        
         public TestClassLoader(final ClassLoader parent) {
             super(parent);
         }
@@ -48,10 +49,10 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
     }
 
     @Test
-    public void testWithGenericArguement() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException {
+    public void testWithGenericArguement() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         final String targetClass = PACKAGE_BASE_NAME + ".data.SimpleClassHasMethodIncludeGenericArgument";
         final TestClassLoader loader = new TestClassLoader(getClass().getClassLoader());
-        final Class cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
+        final Class<?> cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
 
         java.lang.reflect.Method method = cls.getDeclaredMethod("a", String.class, List.class);
         method.invoke(null, "a1", new LinkedList<String>());
@@ -63,7 +64,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         method.invoke(null, new LinkedList<String>(), "d2");
     }
 
-    private byte[] getBytesFromClass(final String className) throws ClassNotFoundException, IOException {
+    private byte[] getBytesFromClass(final String className) throws ClassNotFoundException {
         final JavaClass clazz = getTestClass(className);
         final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
 
