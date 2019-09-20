@@ -40,7 +40,7 @@ public final class Module extends Attribute {
     private ModuleExports[] exports_table;
     private ModuleOpens[] opens_table;
     private final int uses_count;
-    private final int uses_index[];
+    private final int[] uses_index;
     private ModuleProvides[] provides_table;
 
     /**
@@ -191,7 +191,7 @@ public final class Module extends Attribute {
         buf.append("Module:\n");
         buf.append("  name:    ") .append(cp.getConstantString(module_name_index, Const.CONSTANT_Module).replace('/', '.')).append("\n");
         buf.append("  flags:   ") .append(String.format("%04x", module_flags)).append("\n");
-        final String version = (module_version_index == 0 ? "0" : cp.getConstantString(module_version_index, Const.CONSTANT_Utf8));
+        final String version = module_version_index == 0 ? "0" : cp.getConstantString(module_version_index, Const.CONSTANT_Utf8);
         buf.append("  version: ") .append(version).append("\n");
 
         buf.append("  requires(").append(requires_table.length).append("):\n");

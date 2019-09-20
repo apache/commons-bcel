@@ -30,7 +30,7 @@ public class MiniC implements org.apache.bcel.Constants {
   private static Vector<String> warnings = null;
   private static String file     = null;
   private static int   pass      = 0;
-        
+
   public static void main(final String[] argv) {
     final String[]   file_name = new String[argv.length];
     int        files=0;
@@ -55,7 +55,7 @@ public class MiniC implements org.apache.bcel.Constants {
           file_name[files++] = argv[i];
         }
       }
-        
+
       if(files == 0) {
         System.err.println("Nothing to compile.");
     }
@@ -170,7 +170,7 @@ public class MiniC implements org.apache.bcel.Constants {
 
     if(diff > 0) {
       final char[] chs = new char[diff];
-      
+
       for(int i=0; i < diff; i++) {
         chs[i] = ' ';
     }

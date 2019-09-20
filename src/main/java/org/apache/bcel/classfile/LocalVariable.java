@@ -45,7 +45,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     // Technically, a decscriptor_index for a local variable table entry
     // and a signature_index for a local variable type table entry.
     private int signature_index; // Index of variable signature
-    private int index; /* Variable is `index'th local variable on
+    private int index; /* Variable is index'th local variable on
      * this method's frame.
      */
     private ConstantPool constant_pool;
@@ -53,18 +53,19 @@ public final class LocalVariable implements Cloneable, Node, Constants {
 
 
     /**
-     * Initialize from another object. Note that both objects use the same
+     * Initializes from another LocalVariable. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
+     *
+     * @param localVariable Another LocalVariable.
      */
-    public LocalVariable(final LocalVariable c) {
-        this(c.getStartPC(), c.getLength(), c.getNameIndex(), c.getSignatureIndex(), c.getIndex(),
-                c.getConstantPool());
-        this.orig_index = c.getOrigIndex();
+    public LocalVariable(final LocalVariable localVariable) {
+        this(localVariable.getStartPC(), localVariable.getLength(), localVariable.getNameIndex(),
+                localVariable.getSignatureIndex(), localVariable.getIndex(), localVariable.getConstantPool());
+        this.orig_index = localVariable.getOrigIndex();
     }
 
-
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      * @param file Input stream
      * @throws IOException
      */
@@ -129,19 +130,19 @@ public final class LocalVariable implements Cloneable, Node, Constants {
 
 
     /**
-     * Dump local variable to file stream in binary format.
+     * Dumps local variable to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException
+     * @param dataOutputStream Output file stream
+     * @exception IOException if an I/O error occurs.
+     * @see java.io.FilterOutputStream#out
      */
-    public void dump( final DataOutputStream file ) throws IOException {
-        file.writeShort(start_pc);
-        file.writeShort(length);
-        file.writeShort(name_index);
-        file.writeShort(signature_index);
-        file.writeShort(index);
+    public void dump(final DataOutputStream dataOutputStream) throws IOException {
+        dataOutputStream.writeShort(start_pc);
+        dataOutputStream.writeShort(length);
+        dataOutputStream.writeShort(name_index);
+        dataOutputStream.writeShort(signature_index);
+        dataOutputStream.writeShort(index);
     }
-
 
     /**
      * @return Constant pool used by this object.
@@ -212,7 +213,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
 
 
     /**
-     * @return Start of range where he variable is valid
+     * @return Start of range where the variable is valid
      */
     public int getStartPC() {
         return start_pc;

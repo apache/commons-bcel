@@ -44,15 +44,15 @@ import org.apache.bcel.generic.Type;
  *     public static void main(String[] argv) {
  *         BufferedReader in   = new BufferedReader(new InputStreamReader(System.in));
  *         String name = null;
- * 
+ *
  *         try {
  *             System.out.print("Please enter your name> ");
  *             name = in.readLine();
- *         } catch(IOException e) { 
+ *         } catch(IOException e) {
  *             System.out.println(e);
- *             return; 
+ *             return;
  *         }
- * 
+ *
  *         System.out.println("Hello, " + name);
  *     }
  * }
@@ -148,7 +148,7 @@ public class HelloWorldBuilder {
                 Type.VOID, new Type[]{Type.STRING},
                 Constants.INVOKESPECIAL));
         il.append(new ALOAD(name));
-    
+
         // Concatenate strings using a StringBuffer and print them.
         il.append(factory.createInvoke("java.lang.StringBuffer", "append",
                 Type.STRINGBUFFER, new Type[]{Type.STRING},

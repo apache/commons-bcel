@@ -47,7 +47,7 @@ import org.apache.bcel.generic.PUSH;
  * obeying the aritmetical precedences (* stronger than +, etc.) and
  * are discarded in the first pass.
 */
-public class ASTExpr extends SimpleNode 
+public class ASTExpr extends SimpleNode
 implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constants {
   protected int         kind=-1;    // Single twig to leaf?
   private   int         unop=-1;    // Special case: Unary operand applied
@@ -87,7 +87,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
   /* Special constructor, called from ASTTerm.traverse() and
    * ASTFactor.traverse(), when traverse()ing the parse tree replace
-   * themselves with Expr nodes. 
+   * themselves with Expr nodes.
    */
   ASTExpr(final ASTExpr[] children, final int kind, final int line, final int column) {
     this(line, column, kind, JJTEXPR);
@@ -140,25 +140,25 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
       for(int i=0; i < exprs.length; i++) {
         exprs[i] = exprs[i].traverse(env); // References may change
     }
-    
+
       return this;
     }
   }
 
-  /** 
+  /**
    * Second and third pass
    * @return type of expression
    * @param expected type
    */
   public int eval(final int expected) {
     int child_type = T_UNKNOWN, t;
-    
+
     is_simple = true;
 
     // Determine expected node type depending on used operator.
     if(unop != -1) {
       if(unop == MINUS) {
-        child_type = type = T_INT;  // - 
+        child_type = type = T_INT;  // -
     } else {
         child_type = type = T_BOOLEAN; // !
     }
@@ -178,7 +178,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
     // Get type of subexpressions
     for(int i=0; i < exprs.length; i++) {
-      t = exprs[i].eval(child_type); 
+      t = exprs[i].eval(child_type);
 
       if(t != child_type) {
         MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
@@ -202,7 +202,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
   /**
    * Fourth pass, produce Java code.
-   */  
+   */
   public void code(final StringBuffer buf) {
     if(unop != -1) {
       exprs[0].code(buf);
@@ -225,7 +225,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
       case MULT:  ASTFunDecl.push(buf, _body_int + " * " + _body_int2); break;
       case DIV:   ASTFunDecl.push(buf, _body_int + " / " + _body_int2); break;
 
-      case AND:   ASTFunDecl.push(buf, toInt(toBool(_body_int) + " && " + 
+      case AND:   ASTFunDecl.push(buf, toInt(toBool(_body_int) + " && " +
               toBool(_body_int2))); break;
       case OR:    ASTFunDecl.push(buf, toInt(toBool(_body_int) + " || " +
               toBool(_body_int2))); break;

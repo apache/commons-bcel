@@ -35,7 +35,7 @@ public final class ModuleExports implements Cloneable, Node {
     private final int exports_index;  // points to CONSTANT_Package_info
     private final int exports_flags;
     private final int exports_to_count;
-    private final int exports_to_index[];  // points to CONSTANT_Module_info
+    private final int[] exports_to_index;  // points to CONSTANT_Module_info
 
 
     /**

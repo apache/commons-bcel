@@ -1541,13 +1541,17 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             cp = jc.getConstantPool();
             (new DescendingVisitor(jc, this)).visit();
         }
+
         /**
          * Returns if the JavaClass this InnerClassDetector is working on
          * has an Inner Class reference in its constant pool.
+         *
+         * @return Whether this InnerClassDetector is working on has an Inner Class reference in its constant pool.
          */
         public boolean innerClassReferenced() {
             return hasInnerClass;
         }
+
         /** This method casually visits ConstantClass references. */
         @Override
         public void visitConstantClass(final ConstantClass obj) {

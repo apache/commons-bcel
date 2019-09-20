@@ -430,22 +430,14 @@ public class ClassPath implements Closeable {
 
     }
 
-    private static final FilenameFilter ARCHIVE_FILTER = new FilenameFilter() {
-
-        @Override
-        public boolean accept(final File dir, String name) {
-            name = name.toLowerCase(Locale.ENGLISH);
-            return name.endsWith(".zip") || name.endsWith(".jar");
-        }
+    private static final FilenameFilter ARCHIVE_FILTER = (dir, name) -> {
+        name = name.toLowerCase(Locale.ENGLISH);
+        return name.endsWith(".zip") || name.endsWith(".jar");
     };
 
-    private static final FilenameFilter MODULES_FILTER = new FilenameFilter() {
-
-        @Override
-        public boolean accept(final File dir, String name) {
-            name = name.toLowerCase(Locale.ENGLISH);
-            return name.endsWith(".jmod");
-        }
+    private static final FilenameFilter MODULES_FILTER = (dir, name) -> {
+        name = name.toLowerCase(Locale.ENGLISH);
+        return name.endsWith(".jmod");
     };
 
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath(getClassPath());

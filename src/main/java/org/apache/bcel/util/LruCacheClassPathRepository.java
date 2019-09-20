@@ -29,7 +29,7 @@ import org.apache.bcel.classfile.JavaClass;
  * This repository supports a class path consisting of too many JAR files to handle in {@link ClassPathRepository} or
  * {@link MemorySensitiveClassPathRepository} without causing {@code OutOfMemoryError}.
  * </p>
- * 
+ *
  * @since 6.4.0
  */
 public class LruCacheClassPathRepository extends AbstractClassPathRepository {

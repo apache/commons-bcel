@@ -68,7 +68,7 @@ import com.sun.jna.platform.win32.Advapi32Util;
  * <p>
  * For example:
  * </p>
- * 
+ *
  * <pre>
  * mvn test -Dtest=JdkGenericDumpTestCase -DExtraJavaHomes="C:\Program Files\Java\openjdk\jdk-13;C:\Program Files\Java\openjdk\jdk-14"
  * </pre>
@@ -225,22 +225,12 @@ public class JdkGenericDumpTestCase {
 
     private File[] listJdkJars() throws Exception {
         final File javaLib = new File(javaHome, "lib");
-        return javaLib.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(final File file) {
-                return file.getName().endsWith(".jar");
-            }
-        });
+        return javaLib.listFiles((FileFilter) file -> file.getName().endsWith(".jar"));
     }
 
     private File[] listJdkModules() throws Exception {
         final File javaLib = new File(javaHome, "jmods");
-        return javaLib.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(final File file) {
-                return file.getName().endsWith(".jmod");
-            }
-        });
+        return javaLib.listFiles((FileFilter) file -> file.getName().endsWith(".jmod"));
     }
 
     private void testJar(final File file) throws Exception {

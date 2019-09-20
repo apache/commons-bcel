@@ -336,7 +336,7 @@ public final class Const {
    */
   @Deprecated
   public static final short MAX_ACC_FLAG     = ACC_ENUM;
-  
+
   /** One of the access flags for fields, methods, or classes.
    * ACC_MODULE is negative as a short.
    * @see #ACC_PUBLIC

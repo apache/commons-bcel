@@ -45,7 +45,7 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
     column   = name.getColumn();
     setArgs(args);
   }
-  
+
   @Override
   public String toString() {
     final StringBuffer buf = new StringBuffer();
@@ -74,8 +74,8 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
   public int        getColumn()       { return column; }
   public ASTIdent   getArg(final int i)     { return args[i]; }
   public ASTIdent[] getArgs()         { return args; }
-  public void       setArgs(final ASTIdent[] args) { 
-    this.args = args; 
+  public void       setArgs(final ASTIdent[] args) {
+    this.args = args;
     no_args   = (args == null)? 0 : args.length;
   }
 }
