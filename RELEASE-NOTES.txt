@@ -50,7 +50,7 @@ patches, or suggestions for improvement, see the Apache Apache Commons BCEL webs
 
 https://commons.apache.org/proper/commons-bcel
 
-Download it from https://commons.apache.org/proper/commons-bcel/download_text.cgi
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
 
 Have fun!
 -Apache Commons BCEL team
