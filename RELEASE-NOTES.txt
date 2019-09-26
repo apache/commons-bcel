@@ -1,4 +1,61 @@
               Apache Commons BCEL
+              Version 6.4.1
+              RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.4.1!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+Bug fix release.
+
+FIXED BUGS:
+===========
+
+o BCEL-328: java.util.EmptyStackException at org.apache.bcel.classfile.DescendingVisitor.visitModule (DescendingVisitor.java:592). Thanks to Gary Gregory, Mark Roberts.
+
+CHANGES:
+========
+
+o           Update build from Checkstyle Maven Plugin 3.0.0 to 3.1.0. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BCEL
               Version 6.4.0
               RELEASE NOTES
 
