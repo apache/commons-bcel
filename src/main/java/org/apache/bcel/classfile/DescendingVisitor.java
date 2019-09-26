@@ -579,12 +579,10 @@ public class DescendingVisitor implements Visitor
         for (final ModuleExports element : etable) {
             element.accept(this);
         }
-        stack.pop();
         final ModuleOpens[] otable = obj.getOpensTable();
         for (final ModuleOpens element : otable) {
             element.accept(this);
         }
-        stack.pop();
         final ModuleProvides[] ptable = obj.getProvidesTable();
         for (final ModuleProvides element : ptable) {
             element.accept(this);
