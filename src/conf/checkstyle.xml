@@ -53,7 +53,6 @@ limitations under the License.
   </module>
 
   <module name="TreeWalker">
-    <property name="cacheFile" value="target/cachefile" />
     <!-- 
      -->
     <module name="LineLength">
@@ -171,26 +170,23 @@ limitations under the License.
     <module name="ArrayTypeStyle"/>
     <!--module name="TodoComment"/-->
     <module name="UpperEll"/>
-    
-    <!-- Required for SuppressionCommentFilter below -->
-    <module name="FileContentsHolder"/>
+
+    <module name="SuppressionCommentFilter"/>
+
+    <!-- 
+        Allow comment to suppress checkstyle for a single line
+        e.g. // CHECKSTYLE IGNORE MagicNumber
+     -->
+    <module name="SuppressWithNearbyCommentFilter">
+      <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+)"/>
+      <property name="checkFormat" value="$1"/>
+    </module>
 
   </module>
-
-  <module name="SuppressionCommentFilter"/>
 
   <module name="SuppressionFilter">
     <!-- config_loc is used by Eclipse plugin -->
     <property name="file" value="${config_loc}/src/conf/checkstyle-suppressions.xml"/>
-  </module>
-
-  <!-- 
-      Allow comment to suppress checkstyle for a single line
-      e.g. // CHECKSTYLE IGNORE MagicNumber
-   -->
-  <module name="SuppressWithNearbyCommentFilter">
-    <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+)"/>
-    <property name="checkFormat" value="$1"/>
   </module>
 
 </module>
