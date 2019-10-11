@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.Constants;
 
 /**
  * This class represents an entry in the exception table of the <em>Code</em>
@@ -30,7 +31,7 @@ import org.apache.bcel.Const;
  *
  * @see     Code
  */
-public final class CodeException implements Cloneable, Node {
+public final class CodeException implements Cloneable, Node, Constants {
 
     private int start_pc; // Range in the code the exception handler is
     private int end_pc; // active. start_pc is inclusive, end_pc exclusive

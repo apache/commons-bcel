@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.Constants;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassFormatException;
@@ -81,7 +82,7 @@ import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
  *
  * @see #do_verify()
  */
-public final class Pass2Verifier extends PassVerifier {
+public final class Pass2Verifier extends PassVerifier implements Constants {
 
     /**
      * The LocalVariableInfo instances used by Pass3bVerifier.

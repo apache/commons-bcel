@@ -599,33 +599,27 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * @since 6.0
      */
-    public Attribute[] addAnnotationsAsAttribute(final ConstantPoolGen cp) {
-        final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
+    public void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
+          final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
         for (final Attribute attr : attrs) {
             addAttribute(attr);
         }
-        return attrs;
-    }
+      }
 
     /**
      * @since 6.0
      */
-    public Attribute[] addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
-        if (!hasParameterAnnotations) {
-            return new Attribute[0];
-        }
-        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, param_annotations);
-        for (final Attribute attr : attrs) {
-            addAttribute(attr);
-        }
-        return attrs;
-    }
-
-    private void removeAttributes(Attribute[] attrs) {
-        for (final Attribute attr : attrs) {
-            removeAttribute(attr);
-        }
-    }
+      public void addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
+          if (!hasParameterAnnotations) {
+              return;
+          }
+          final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp,param_annotations);
+          if (attrs != null) {
+              for (final Attribute attr : attrs) {
+                  addAttribute(attr);
+              }
+          }
+      }
 
 
     /**
@@ -687,8 +681,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                     max_stack, max_locals, byte_code, c_exc, code_attrs, _cp.getConstantPool());
             addAttribute(code);
         }
-        Attribute[] annotations = addAnnotationsAsAttribute(_cp);
-        Attribute[] parameterAnnotations = addParameterAnnotationsAsAttribute(_cp);
+        addAnnotationsAsAttribute(_cp);
+        addParameterAnnotationsAsAttribute(_cp);
         ExceptionTable et = null;
         if (throws_vec.size() > 0) {
             addAttribute(et = getExceptionTable(_cp));
@@ -712,8 +706,6 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (et != null) {
             removeAttribute(et);
         }
-        removeAttributes(annotations);
-        removeAttributes(parameterAnnotations);
         return m;
     }
 
