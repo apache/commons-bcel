@@ -599,7 +599,29 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * @since 6.0
      */
-    public Attribute[] addAnnotationsAsAttribute(final ConstantPoolGen cp) {
+    public void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
+        final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
+        for (final Attribute attr : attrs) {
+            addAttribute(attr);
+        }
+    }
+
+    /**
+     * @since 6.0
+     */
+    public void addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
+        if (!hasParameterAnnotations) {
+            return;
+        }
+        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, param_annotations);
+        if (attrs != null) {
+            for (final Attribute attr : attrs) {
+                addAttribute(attr);
+            }
+        }
+    }
+
+    private Attribute[] addRuntimeAnnotationsAsAttribute(final ConstantPoolGen cp) {
         final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
         for (final Attribute attr : attrs) {
             addAttribute(attr);
@@ -607,10 +629,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         return attrs;
     }
 
-    /**
-     * @since 6.0
-     */
-    public Attribute[] addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
+    private Attribute[] addRuntimeParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
         if (!hasParameterAnnotations) {
             return new Attribute[0];
         }
@@ -687,8 +706,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                     max_stack, max_locals, byte_code, c_exc, code_attrs, _cp.getConstantPool());
             addAttribute(code);
         }
-        Attribute[] annotations = addAnnotationsAsAttribute(_cp);
-        Attribute[] parameterAnnotations = addParameterAnnotationsAsAttribute(_cp);
+        Attribute[] annotations = addRuntimeAnnotationsAsAttribute(_cp);
+        Attribute[] parameterAnnotations = addRuntimeParameterAnnotationsAsAttribute(_cp);
         ExceptionTable et = null;
         if (throws_vec.size() > 0) {
             addAttribute(et = getExceptionTable(_cp));
