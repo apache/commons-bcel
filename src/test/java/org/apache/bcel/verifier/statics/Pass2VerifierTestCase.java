@@ -15,40 +15,18 @@
  * limitations under the License.
  */
 
-package org.apache.bcel.util;
+package org.apache.bcel.verifier.statics;
 
-import java.io.File;
-import java.io.FileInputStream;
-
-import org.apache.bcel.classfile.ClassParser;
-import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
+public class Pass2VerifierTestCase {
 
-public class Class2HTMLTestCase extends TestCase {
-
-    public void testConvertJavaUtil() throws Exception {
-        final File outputDir = new File("target/test-output/html");
-        if (!outputDir.mkdirs()) { // either was not created or already existed
-            Assert.assertTrue(outputDir.isDirectory()); // fail if missing
-        }
-
-        try (FileInputStream file = new FileInputStream("target/test-classes/Java8Example.class")) {
-
-            final ClassParser parser = new ClassParser(file, "Java8Example.class");
-
-            new Class2HTML(parser.parse(), outputDir.getAbsolutePath() + "/");
-        }
-    }
-    
     /**
      * Tests that we do not break binary compatibility with BCEL-330.
      */
     @Test
     public void testReferenceToConstant() {
         @SuppressWarnings("unused")
-        short referenceToConstant = Class2HTML.AALOAD;
+        short referenceToConstant = Pass2Verifier.AALOAD;
     }
-
 }
