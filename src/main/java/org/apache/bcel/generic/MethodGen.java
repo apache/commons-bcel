@@ -600,26 +600,56 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @since 6.0
      */
     public void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
-          final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
+        final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
         for (final Attribute attr : attrs) {
             addAttribute(attr);
         }
-      }
+    }
 
     /**
      * @since 6.0
      */
-      public void addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
-          if (!hasParameterAnnotations) {
-              return;
-          }
-          final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp,param_annotations);
-          if (attrs != null) {
-              for (final Attribute attr : attrs) {
-                  addAttribute(attr);
-              }
-          }
-      }
+    public void addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
+        if (!hasParameterAnnotations) {
+            return;
+        }
+        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, param_annotations);
+        if (attrs != null) {
+            for (final Attribute attr : attrs) {
+                addAttribute(attr);
+            }
+        }
+    }
+
+    private Attribute[] addRuntimeAnnotationsAsAttribute(final ConstantPoolGen cp) {
+        final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
+        for (final Attribute attr : attrs) {
+            addAttribute(attr);
+        }
+        return attrs;
+    }
+
+    private Attribute[] addRuntimeParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
+        if (!hasParameterAnnotations) {
+            return new Attribute[0];
+        }
+        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, param_annotations);
+        for (final Attribute attr : attrs) {
+            addAttribute(attr);
+        }
+        return attrs;
+    }
+
+    /**
+     * Would prefer to make this private, but need a way to test if client is
+     * using BCEL version 6.4.2 or later that contains fix for BCEL-329.
+     * @since 6.4.2
+     */
+    public void removeRuntimeAttributes(Attribute[] attrs) {
+        for (final Attribute attr : attrs) {
+            removeAttribute(attr);
+        }
+    }
 
 
     /**
@@ -681,8 +711,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                     max_stack, max_locals, byte_code, c_exc, code_attrs, _cp.getConstantPool());
             addAttribute(code);
         }
-        addAnnotationsAsAttribute(_cp);
-        addParameterAnnotationsAsAttribute(_cp);
+        Attribute[] annotations = addRuntimeAnnotationsAsAttribute(_cp);
+        Attribute[] parameterAnnotations = addRuntimeParameterAnnotationsAsAttribute(_cp);
         ExceptionTable et = null;
         if (throws_vec.size() > 0) {
             addAttribute(et = getExceptionTable(_cp));
@@ -706,6 +736,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (et != null) {
             removeAttribute(et);
         }
+        removeRuntimeAttributes(annotations);
+        removeRuntimeAttributes(parameterAnnotations);
         return m;
     }
 
