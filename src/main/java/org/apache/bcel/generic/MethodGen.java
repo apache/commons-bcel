@@ -640,7 +640,12 @@ public class MethodGen extends FieldGenOrMethodGen {
         return attrs;
     }
 
-    private void removeAttributes(Attribute[] attrs) {
+    /**
+     * Would prefer to make this private, but need a way to test if client is
+     * using BCEL version 6.4.2 or later that contains fix for BCEL-329.
+     * @since 6.4.2
+     */
+    public void removeRuntimeAttributes(Attribute[] attrs) {
         for (final Attribute attr : attrs) {
             removeAttribute(attr);
         }
@@ -731,8 +736,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (et != null) {
             removeAttribute(et);
         }
-        removeAttributes(annotations);
-        removeAttributes(parameterAnnotations);
+        removeRuntimeAttributes(annotations);
+        removeRuntimeAttributes(parameterAnnotations);
         return m;
     }
 
