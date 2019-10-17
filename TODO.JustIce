@@ -1,6 +1,4 @@
 
-$Id$
-
 "TODO" list for JustIce, the Java Class File Verifier by Enver Haase.
 
 - JustIce uses object generalization during pass 3b,  as  supposed  by
