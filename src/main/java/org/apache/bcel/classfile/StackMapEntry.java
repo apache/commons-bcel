@@ -241,20 +241,20 @@ public final class StackMapEntry implements Node, Cloneable
         } else if (frame_type == Const.SAME_FRAME_EXTENDED) {
             return 3;
         } else if (frame_type >= Const.APPEND_FRAME && frame_type <= Const.APPEND_FRAME_MAX) {
-            int len = 3;
+            int length = 3;
             for (final StackMapType types_of_local : types_of_locals) {
-                len += types_of_local.hasIndex() ? 3 : 1;
+                length += types_of_local.hasIndex() ? 3 : 1;
             }
-            return len;
+            return length;
         } else if (frame_type == Const.FULL_FRAME) {
-            int len = 7;
+            int length = 7;
             for (final StackMapType types_of_local : types_of_locals) {
-                len += types_of_local.hasIndex() ? 3 : 1;
+                length += types_of_local.hasIndex() ? 3 : 1;
             }
             for (final StackMapType types_of_stack_item : types_of_stack_items) {
-                len += types_of_stack_item.hasIndex() ? 3 : 1;
+                length += types_of_stack_item.hasIndex() ? 3 : 1;
             }
-            return len;
+            return length;
         } else {
             throw new RuntimeException("Invalid StackMap frame_type: " + frame_type);
         }

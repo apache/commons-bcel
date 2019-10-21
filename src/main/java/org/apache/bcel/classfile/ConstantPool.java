@@ -171,10 +171,10 @@ public class ConstantPool implements Cloneable, Node {
     }
 
     private static String escape( final String str ) {
-        final int len = str.length();
-        final StringBuilder buf = new StringBuilder(len + 5);
+        final int length = str.length();
+        final StringBuilder buf = new StringBuilder(length + 5);
         final char[] ch = str.toCharArray();
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < length; i++) {
             switch (ch[i]) {
                 case '\n':
                     buf.append("\\n");

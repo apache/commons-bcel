@@ -89,11 +89,11 @@ public class InstructionFinder {
      * match.
      */
     public final void reread() {
-        final int size = il.getLength();
-        final char[] buf = new char[size]; // Create a string with length equal to il length
+        final int length = il.getLength();
+        final char[] buf = new char[length]; // Create a string with length equal to il length
         handles = il.getInstructionHandles();
         // Map opcodes to characters
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < length; i++) {
             buf[i] = makeChar(handles[i].getInstruction().getOpcode());
         }
         il_string = new String(buf);
@@ -134,14 +134,14 @@ public class InstructionFinder {
         //Bug: BCEL-77 - Instructions are assumed to be english, to avoid odd Locale issues
         final String lower = pattern.toLowerCase(Locale.ENGLISH);
         final StringBuilder buf = new StringBuilder();
-        final int size = pattern.length();
-        for (int i = 0; i < size; i++) {
+        final int length = pattern.length();
+        for (int i = 0; i < length; i++) {
             char ch = lower.charAt(i);
             if (Character.isLetterOrDigit(ch)) {
                 final StringBuilder name = new StringBuilder();
-                while ((Character.isLetterOrDigit(ch) || ch == '_') && i < size) {
+                while ((Character.isLetterOrDigit(ch) || ch == '_') && i < length) {
                     name.append(ch);
-                    if (++i < size) {
+                    if (++i < length) {
                         ch = lower.charAt(i);
                     } else {
                         break;

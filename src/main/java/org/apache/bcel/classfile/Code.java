@@ -242,13 +242,13 @@ public final class Code extends Attribute {
      * including the size of all its contained attributes
      */
     private int calculateLength() {
-        int len = 0;
+        int length = 0;
         if (attributes != null) {
             for (final Attribute attribute : attributes) {
-                len += attribute.getLength() + 6 /*attribute header size*/;
+                length += attribute.getLength() + 6 /*attribute header size*/;
             }
         }
-        return len + getInternalLength();
+        return length + getInternalLength();
     }
 
 

@@ -492,12 +492,12 @@ public abstract class Utility {
      * @return Compacted class name
      */
     public static String compactClassName( String str, final String prefix, final boolean chopit ) {
-        final int len = prefix.length();
+        final int length = prefix.length();
         str = str.replace('/', '.'); // Is `/' on all systems, even DOS
         if (chopit) {
             // If string starts with `prefix' and contains no further dots
-            if (str.startsWith(prefix) && (str.substring(len).indexOf('.') == -1)) {
-                str = str.substring(len);
+            if (str.startsWith(prefix) && (str.substring(length).indexOf('.') == -1)) {
+                str = str.substring(length);
             }
         }
         return str;
@@ -1565,11 +1565,11 @@ public abstract class Utility {
 
 
         @Override
-        public int read( final char[] cbuf, final int off, final int len ) throws IOException {
-            for (int i = 0; i < len; i++) {
+        public int read( final char[] cbuf, final int off, final int length ) throws IOException {
+            for (int i = 0; i < length; i++) {
                 cbuf[off + i] = (char) read();
             }
-            return len;
+            return length;
         }
     }
 
@@ -1608,16 +1608,16 @@ public abstract class Utility {
 
 
         @Override
-        public void write( final char[] cbuf, final int off, final int len ) throws IOException {
-            for (int i = 0; i < len; i++) {
+        public void write( final char[] cbuf, final int off, final int length ) throws IOException {
+            for (int i = 0; i < length; i++) {
                 write(cbuf[off + i]);
             }
         }
 
 
         @Override
-        public void write( final String str, final int off, final int len ) throws IOException {
-            write(str.toCharArray(), off, len);
+        public void write( final String str, final int off, final int length ) throws IOException {
+            write(str.toCharArray(), off, length);
         }
     }
 

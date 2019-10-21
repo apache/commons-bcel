@@ -2010,12 +2010,12 @@ public final class Const {
 
   /**
    *
-   * @param index
+   * @param opcode
    * @return Number of byte code operands
    * @since 6.0
    */
-  public static short getNoOfOperands(final int index) {
-      return NO_OF_OPERANDS[index];
+  public static short getNoOfOperands(final int opcode) {
+      return NO_OF_OPERANDS[opcode];
   }
 
   /**
@@ -2162,8 +2162,8 @@ public final class Const {
   /**
    * @since 6.0
    */
-  public static String getOpcodeName(final int index) {
-      return OPCODE_NAMES[index];
+  public static String getOpcodeName(final int opcode) {
+      return OPCODE_NAMES[opcode];
   }
 
   /**

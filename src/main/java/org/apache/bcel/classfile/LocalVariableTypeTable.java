@@ -67,8 +67,8 @@ public class LocalVariableTypeTable extends Attribute {
         this.local_variable_type_table = local_variable_table;
     }
 
-    LocalVariableTypeTable(final int nameIdx, final int len, final DataInput input, final ConstantPool cpool) throws IOException {
-        this(nameIdx, len, (LocalVariable[]) null, cpool);
+    LocalVariableTypeTable(final int name_index, final int length, final DataInput input, final ConstantPool cpool) throws IOException {
+        this(name_index, length, (LocalVariable[]) null, cpool);
 
         final int local_variable_type_table_length = input.readUnsignedShort();
         local_variable_type_table = new LocalVariable[local_variable_type_table_length];

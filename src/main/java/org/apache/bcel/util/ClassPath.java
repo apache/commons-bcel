@@ -173,8 +173,8 @@ public class ClassPath implements Closeable {
 
         private final String dir;
 
-        Dir(final String d) {
-            dir = d;
+        Dir(final String path) {
+            dir = path;
         }
 
         @Override
@@ -487,8 +487,8 @@ public class ClassPath implements Closeable {
         getPathComponents(bootClassPathProp, list);
         final List<String> dirs = new ArrayList<>();
         getPathComponents(extDirs, dirs);
-        for (final String d : dirs) {
-            final File ext_dir = new File(d);
+        for (final String path : dirs) {
+            final File ext_dir = new File(path);
             final String[] extensions = ext_dir.list(ARCHIVE_FILTER);
             if (extensions != null) {
                 for (final String extension : extensions) {

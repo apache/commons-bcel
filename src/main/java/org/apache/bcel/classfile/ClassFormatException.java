@@ -32,8 +32,8 @@ public class ClassFormatException extends RuntimeException {
     }
 
 
-    public ClassFormatException(final String s) {
-        super(s);
+    public ClassFormatException(final String message) {
+        super(message);
     }
 
     /**

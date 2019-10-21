@@ -35,11 +35,11 @@ public abstract class AccessFlags {
     }
 
     /**
-     * @param a
+     * @param flags
      *            inital access flags
      */
-    public AccessFlags(final int a) {
-        access_flags = a;
+    public AccessFlags(final int flags) {
+        access_flags = flags;
     }
 
     /**

@@ -121,16 +121,16 @@ public class Subroutines{
             ret.append("', Instructions: '").append(instructions).append("'.");
 
             ret.append(" Accessed local variable slots: '");
-            int[] alv = getAccessedLocalsIndices();
-            for (final int element : alv) {
-                ret.append(element);ret.append(" ");
+            int[] lvs = getAccessedLocalsIndices();
+            for (final int lv : lvs) {
+                ret.append(lv);ret.append(" ");
             }
             ret.append("'.");
 
             ret.append(" Recursively (via subsub...routines) accessed local variable slots: '");
-            alv = getRecursivelyAccessedLocalsIndices();
-            for (final int element : alv) {
-                ret.append(element);ret.append(" ");
+            lvs = getRecursivelyAccessedLocalsIndices();
+            for (final int lv : lvs) {
+                ret.append(lv);ret.append(" ");
             }
             ret.append("'.");
 
