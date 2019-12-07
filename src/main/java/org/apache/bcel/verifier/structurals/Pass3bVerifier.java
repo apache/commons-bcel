@@ -82,7 +82,7 @@ public final class Pass3bVerifier extends PassVerifier{
         private final List<ArrayList<InstructionContext>> ecs = new Vector<>();
 
         /**
-         * Add an (InstructionContext, ExecutionChain) pair to their respective queues.
+         * Adds an (InstructionContext, ExecutionChain) pair to their respective queues.
          *
          * @param ic the InstructionContext
          * @param executionChain the ExecutionChain
@@ -112,7 +112,7 @@ public final class Pass3bVerifier extends PassVerifier{
         }
 
         /**
-         * Fetch a specific InstructionContext from the queue.
+         * Gets a specific InstructionContext from the queue.
          *
          * @param i the index of the item to be fetched
          * @return the indicated InstructionContext
@@ -122,7 +122,7 @@ public final class Pass3bVerifier extends PassVerifier{
         }
 
         /**
-         * Fetch a specific ExecutionChain from the queue.
+         * Gets a specific ExecutionChain from the queue.
          *
          * @param i the index of the item to be fetched
          * @return the indicated ExecutionChain
