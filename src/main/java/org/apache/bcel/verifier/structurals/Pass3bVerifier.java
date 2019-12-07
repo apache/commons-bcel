@@ -93,7 +93,7 @@ public final class Pass3bVerifier extends PassVerifier{
         }
 
         /**
-         * Test if InstructionContext queue is empty.
+         * Tests if InstructionContext queue is empty.
          *
          * @return true if the InstructionContext queue is empty.
          */
@@ -102,7 +102,7 @@ public final class Pass3bVerifier extends PassVerifier{
         }
 
         /**
-         * Remove a specific (InstructionContext, ExecutionChain) pair from their respective queues.
+         * Removes a specific (InstructionContext, ExecutionChain) pair from their respective queues.
          *
          * @param i the index of the items to be removed
          */
@@ -132,7 +132,7 @@ public final class Pass3bVerifier extends PassVerifier{
         }
 
         /**
-         * Get the size of the InstructionContext queue.
+         * Gets the size of the InstructionContext queue.
          *
          * @return the size of the InstructionQueue
          */
