@@ -74,26 +74,68 @@ public final class Pass3bVerifier extends PassVerifier{
      * time, an InstructionContext object will get the current information
      * we have about its symbolic execution predecessors.
      */
-    private static final class InstructionContextQueue{
+    private static final class InstructionContextQueue {
+        // The following two fields together represent the queue.
+        /** The first elements from pairs in the queue. */
         private final List<InstructionContext> ics = new Vector<>();
+        /** The second elements from pairs in the queue. */
         private final List<ArrayList<InstructionContext>> ecs = new Vector<>();
+
+        /**
+         * Adds an (InstructionContext, ExecutionChain) pair to this queue.
+         *
+         * @param ic the InstructionContext
+         * @param executionChain the ExecutionChain
+         */
         public void add(final InstructionContext ic, final ArrayList<InstructionContext> executionChain) {
             ics.add(ic);
             ecs.add(executionChain);
         }
+
+        /**
+         * Tests if InstructionContext queue is empty.
+         *
+         * @return true if the InstructionContext queue is empty.
+         */
         public boolean isEmpty() {
             return ics.isEmpty();
         }
+
+        /**
+         * Removes a specific (InstructionContext, ExecutionChain) pair from their respective queues.
+         *
+         * @param i the index of the items to be removed
+         */
         public void remove(final int i) {
             ics.remove(i);
             ecs.remove(i);
         }
+
+        /**
+         * Gets a specific InstructionContext from the queue.
+         *
+         * @param i the index of the item to be fetched
+         * @return the indicated InstructionContext
+         */
         public InstructionContext getIC(final int i) {
             return ics.get(i);
         }
+
+        /**
+         * Gets a specific ExecutionChain from the queue.
+         *
+         * @param i the index of the item to be fetched
+         * @return the indicated ExecutionChain
+         */
         public ArrayList<InstructionContext> getEC(final int i) {
             return ecs.get(i);
         }
+
+        /**
+         * Gets the size of the InstructionContext queue.
+         *
+         * @return the size of the InstructionQueue
+         */
         public int size() {
             return ics.size();
         }
@@ -122,8 +164,8 @@ public final class Pass3bVerifier extends PassVerifier{
      * Whenever the outgoing frame
      * situation of an InstructionContext changes, all its successors are
      * put [back] into the queue [as if they were unvisited].
-   * The proof of termination is about the existence of a
-   * fix point of frame merging.
+     * The proof of termination is about the existence of a
+     * fix point of frame merging.
      */
     private void circulationPump(final MethodGen m,final ControlFlowGraph cfg, final InstructionContext start,
             final Frame vanillaFrame, final InstConstraintVisitor icv, final ExecutionVisitor ev) {
@@ -293,7 +335,10 @@ public final class Pass3bVerifier extends PassVerifier{
      }
 
     /**
-     * Throws an exception indicating the returned type is not compatible with the return type of the given method
+     * Throws an exception indicating the returned type is not compatible with the return type of the given method.
+     *
+     * @param returnedType the type of the returned expression
+     * @param m the method we are processing
      * @throws StructuralCodeConstraintException always
      * @since 6.0
      */
@@ -305,13 +350,13 @@ public final class Pass3bVerifier extends PassVerifier{
     /**
      * Pass 3b implements the data flow analysis as described in the Java Virtual
      * Machine Specification, Second Edition.
-      * Later versions will use LocalVariablesInfo objects to verify if the
-      * verifier-inferred types and the class file's debug information (LocalVariables
-      * attributes) match [TODO].
-      *
-      * @see org.apache.bcel.verifier.statics.LocalVariablesInfo
-      * @see org.apache.bcel.verifier.statics.Pass2Verifier#getLocalVariablesInfo(int)
-      */
+     * Later versions will use LocalVariablesInfo objects to verify if the
+     * verifier-inferred types and the class file's debug information (LocalVariables
+     * attributes) match [TODO].
+     *
+     * @see org.apache.bcel.verifier.statics.LocalVariablesInfo
+     * @see org.apache.bcel.verifier.statics.Pass2Verifier#getLocalVariablesInfo(int)
+     */
     @Override
     public VerificationResult do_verify() {
         if (! myOwner.doPass3a(method_no).equals(VerificationResult.VR_OK)) {
