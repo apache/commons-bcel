@@ -25,7 +25,7 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * Select - Abstract super class for LOOKUPSWITCH and TABLESWITCH instructions.
  *
- * <p>We use our super's <code>target</code> property as the default target.
+ * <p>We use our super's {@code target} property as the default target.
  *
  * @see LOOKUPSWITCH
  * @see TABLESWITCH
