@@ -41,7 +41,7 @@ public class Class2HTMLTestCase extends TestCase {
             new Class2HTML(parser.parse(), outputDir.getAbsolutePath() + "/");
         }
     }
-    
+
     /**
      * Tests that we do not break binary compatibility with BCEL-330.
      */

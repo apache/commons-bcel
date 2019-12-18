@@ -36,9 +36,9 @@ import org.apache.bcel.generic.Type;
 import org.junit.Test;
 
 public class LocalVariableTypeTableTestCase extends AbstractTestCase {
-    
+
     public class TestClassLoader extends ClassLoader {
-        
+
         public TestClassLoader(final ClassLoader parent) {
             super(parent);
         }
