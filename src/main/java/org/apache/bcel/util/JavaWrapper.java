@@ -72,9 +72,7 @@ public class JavaWrapper {
         final Class<?> cl = loader.loadClass(class_name);
         Method method = null;
         try {
-            method = cl.getMethod("main", new Class[] {
-                argv.getClass()
-            });
+            method = cl.getMethod("main", argv.getClass());
             /* Method main is sane ?
              */
             final int m = method.getModifiers();
@@ -89,9 +87,7 @@ public class JavaWrapper {
             return;
         }
         try {
-            method.invoke(null, new Object[] {
-                argv
-            });
+            method.invoke(null, argv);
         } catch (final Exception ex) {
             ex.printStackTrace();
         }
