@@ -17,6 +17,8 @@
  */
 package org.apache.bcel.generic;
 
+import java.util.Objects;
+
 import org.apache.bcel.classfile.LineNumber;
 
 /**
@@ -30,7 +32,6 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
 
     private InstructionHandle ih;
     private int src_line;
-
 
     /**
      * Create a line number.
@@ -76,12 +77,10 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
 
-    public void setInstruction( final InstructionHandle ih ) { // TODO could be package-protected?
-        if (ih == null) {
-            throw new NullPointerException("InstructionHandle may not be null");
-        }
-        BranchInstruction.notifyTarget(this.ih, ih, this);
-        this.ih = ih;
+    public void setInstruction( final InstructionHandle instructionHandle ) { // TODO could be package-protected?
+        Objects.requireNonNull(instructionHandle, "instructionHandle");
+        BranchInstruction.notifyTarget(this.ih, instructionHandle, this);
+        this.ih = instructionHandle;
     }
 
 
