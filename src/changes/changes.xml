@@ -68,6 +68,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 5.4.0 to 5.5.0.</action>
       <action                  type="update" dev="ggregory" due-to="Arthur Kupriyanov">Replaced deprecated constants in examples ()#38).</action>
       <action                  type="update" dev="ggregory" due-to="Michael Ernst">Improve documentation of Pass3bVerifier (#37).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update JUnit from 4.12 to 4.13.</action>
     </release> 
     <release version="6.4.1" date="2019-09-26" description="Bug fix release.">
       <action issue="BCEL-328" type="fix" dev="ggregory" due-to="Gary Gregory, Mark Roberts">java.util.EmptyStackException at org.apache.bcel.classfile.DescendingVisitor.visitModule (DescendingVisitor.java:592).</action>
