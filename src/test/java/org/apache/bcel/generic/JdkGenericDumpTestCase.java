@@ -165,18 +165,21 @@ public class JdkGenericDumpTestCase {
         addAllJavaHomesOnWindows(KEY_JRE_9, javaHomes);
         addAllJavaHomesOnWindows(KEY_JDK, javaHomes);
         addAllJavaHomesOnWindows(KEY_JDK_9, javaHomes);
-        addAllJavaHomes(EXTRA_JAVA_HOMES, javaHomes);
+        addAllJavaHomesFromKey(EXTRA_JAVA_HOMES, javaHomes);
         return javaHomes;
     }
 
-    private static void addAllJavaHomes(final String extraJavaHomesProp, final Set<String> javaHomes) {
-        final String path = System.getProperty(extraJavaHomesProp);
+    private static void addAllJavaHomesFromKey(final String extraJavaHomesKey, final Set<String> javaHomes) {
+        addAllJavaHomesFromPath(javaHomes, System.getProperty(extraJavaHomesKey));
+        addAllJavaHomesFromPath(javaHomes, System.getenv(extraJavaHomesKey));
+    }
+
+    private static void addAllJavaHomesFromPath(final Set<String> javaHomes, final String path) {
         if (StringUtils.isEmpty(path)) {
             return;
         }
         final String[] paths = path.split(File.pathSeparator);
         javaHomes.addAll(Arrays.asList(paths));
-
     }
 
     private static Set<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
