@@ -30,7 +30,7 @@ public final class Const {
   /**
    * Java class file format Magic number (0xCAFEBABE)
    *
-   * @see <a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.1-200-A">
+   * @see <a href="https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.1-200-A">
    * The ClassFile Structure in The Java Virtual Machine Specification</a>
    */
   public static final int JVM_CLASSFILE_MAGIC = 0xCAFEBABE;
@@ -208,13 +208,13 @@ public final class Const {
   public static final int MAX_BYTE  = 255; // 2^8 - 1
 
   /** One of the access flags for fields, methods, or classes.
-   *  @see <a href='http://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.1-200-E.1'>
+   *  @see <a href="http://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.1-200-E.1">
    *  Flag definitions for Classes in the Java Virtual Machine Specification (Java SE 9 Edition).</a>
-   *  @see <a href='http://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.5'>
+   *  @see <a href="http://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.5">
    *  Flag definitions for Fields in the Java Virtual Machine Specification (Java SE 9 Edition).</a>
-   *  @see <a href='http://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.6'>
+   *  @see <a href="http://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.6">
    *  Flag definitions for Methods in the Java Virtual Machine Specification (Java SE 9 Edition).</a>
-   *  @see <a href='http://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.7.6-300-D.1-D.1'>
+   *  @see <a href="http://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.7.6-300-D.1-D.1">
    *  Flag definitions for Inner Classes in the Java Virtual Machine Specification (Java SE 9 Edition).</a>
    */
   public static final short ACC_PUBLIC       = 0x0001;
