@@ -33,7 +33,7 @@ import org.apache.bcel.util.ByteSequence;
  * mechanism entirely.
  *
  * @see
- * <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokedynamic">
+ * <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokedynamic">
  * The invokedynamic instruction in The Java Virtual Machine Specification</a>
  * @since 6.0
  */

@@ -768,10 +768,10 @@ public abstract class Utility {
      * There is some nomenclature confusion through much of the BCEL code base with
      * respect to the terms Descriptor and Signature.  For the offical definitions see:
      *
-     * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3">
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3">
      * Descriptors in The Java Virtual Machine Specification</a>
      *
-     * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.9.1">
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.9.1">
      * Signatures in The Java Virtual Machine Specification</a>
      *
      * In brief, a descriptor is a string representing the type of a field or method.

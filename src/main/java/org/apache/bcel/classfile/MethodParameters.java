@@ -26,7 +26,7 @@ import org.apache.bcel.Const;
 /**
  * This class represents a MethodParameters attribute.
  *
- * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.24">
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.24">
  * The class File Format : The MethodParameters Attribute</a>
  * @since 6.0
  */

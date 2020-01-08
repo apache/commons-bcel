@@ -39,7 +39,7 @@ import org.apache.bcel.util.SyntheticRepository;
 /**
  * Represents a Java class, i.e., the data structures, constant pool,
  * fields, methods and commands contained in a Java .class file.
- * See <a href="http://docs.oracle.com/javase/specs/">JVM specification</a> for details.
+ * See <a href="https://docs.oracle.com/javase/specs/">JVM specification</a> for details.
  * The intent of this class is to represent a parsed or otherwise existing
  * class file.  Those interested in programatically generating classes
  * should see the <a href="../generic/ClassGen.html">ClassGen</a> class.

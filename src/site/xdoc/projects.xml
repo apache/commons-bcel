@@ -30,7 +30,7 @@
 
   <ul>
     <li>
-     <a href="http://xml.apache.org/xalan-j/">Xalan</a> XSLT Compiler
+     <a href="https://xml.apache.org/xalan-j/">Xalan</a> XSLT Compiler
     </li>
     <li>
       <a HREF="http://objectscript.sourceforge.net/">ObjectScript</a>
@@ -174,8 +174,8 @@
 
   <h2>Related Projects</h2>
   <ul>
-    <li><a href="http://asm.objectweb.org">ASM</a></li>
-    <li><a href="http://www.cs.duke.edu/ari/joie/">JOIE: The Java Object Instrumentation Environment</a></li>
+    <li><a href="https:https://asm.ow2.io/">ASM</a></li>
+    <li><a href="https://www.cs.duke.edu/ari/joie/">JOIE: The Java Object Instrumentation Environment</a></li>
     <li><a href="http://www.alphaworks.ibm.com/tech/cfparse">CFParse</a></li>
     <li><a href="http://www.alphaworks.ibm.com/tech/jikesbt">JikesBT</a></li>
   </ul>

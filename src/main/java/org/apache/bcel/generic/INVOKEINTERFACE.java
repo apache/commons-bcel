@@ -30,7 +30,7 @@ import org.apache.bcel.util.ByteSequence;
  * <PRE>Stack: ..., objectref, [arg1, [arg2 ...]] -&gt; ...</PRE>
  *
  * @see
- * <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokeinterface">
+ * <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokeinterface">
  * The invokeinterface instruction in The Java Virtual Machine Specification</a>
  */
 public final class INVOKEINTERFACE extends InvokeInstruction {

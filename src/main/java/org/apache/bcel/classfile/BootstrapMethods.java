@@ -26,7 +26,7 @@ import org.apache.bcel.Const;
 /**
  * This class represents a BootstrapMethods attribute.
  *
- * @see <a href="http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.23">
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.23">
  * The class File Format : The BootstrapMethods Attribute</a>
  * @since 6.0
  */
