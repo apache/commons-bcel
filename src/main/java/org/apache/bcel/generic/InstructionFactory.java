@@ -83,13 +83,28 @@ public class InstructionFactory implements InstructionConstants {
      */
     public InvokeInstruction createInvoke( final String class_name, final String name, final Type ret_type,
             final Type[] arg_types, final short kind ) {
+        return createInvoke(class_name, name, ret_type, arg_types, kind, kind == Const.INVOKEINTERFACE);
+    }
+
+    /** Create an invoke instruction. (Except for invokedynamic.)
+     *
+     * @param class_name name of the called class
+     * @param name name of the called method
+     * @param ret_type return type of method
+     * @param arg_types argument types of method
+     * @param kind how to invoke: INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
+     * @param use_interface force use of InterfaceMethodref
+     * @since 6.4.2
+     */
+    public InvokeInstruction createInvoke( final String class_name, final String name, final Type ret_type,
+            final Type[] arg_types, final short kind, final boolean use_interface ) {
         int index;
         int nargs = 0;
         final String signature = Type.getMethodSignature(ret_type, arg_types);
         for (final Type arg_type : arg_types) {
             nargs += arg_type.getSize();
         }
-        if (kind == Const.INVOKEINTERFACE) {
+        if (use_interface) {
             index = cp.addInterfaceMethodref(class_name, name, signature);
         } else {
             index = cp.addMethodref(class_name, name, signature);
