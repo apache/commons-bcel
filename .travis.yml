@@ -25,4 +25,4 @@ jdk:
   - openjdk-ea
 
 after_success:
-  - mvn -Ddoclint:none clean cobertura:cobertura coveralls:report
+  - mvn -Drat.skip=true -Ddoclint:none clean cobertura:cobertura coveralls:report
