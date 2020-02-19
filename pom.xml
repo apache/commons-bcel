@@ -230,6 +230,7 @@
             <exclude>**/*.bnf</exclude>
             <exclude>**/*.mini</exclude>
             <exclude>TODO.JustIce</exclude>
+            <exclude>README-codespecs.txt</exclude>
             <exclude>src/examples/Mini/MiniParser$JJCalls</exclude>
           </excludes>
         </configuration>
