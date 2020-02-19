@@ -312,6 +312,7 @@ public final class Code extends Attribute {
         if (attributes.length > 0) {
             buf.append("\nAttribute(s) = ");
             for (final Attribute attribute : attributes) {
+                buf.append("\n").append(attribute.getName()).append(":");
                 buf.append("\n").append(attribute);
             }
         }
