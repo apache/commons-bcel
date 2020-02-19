@@ -120,7 +120,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * @since 6.0
      */
-    protected void addAnnotationEntry(final AnnotationEntryGen ag) // TODO could this be package protected?
+    public void addAnnotationEntry(final AnnotationEntryGen ag) // TODO could this be package protected?
     {
         annotation_vec.add(ag);
     }
@@ -136,7 +136,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * @since 6.0
      */
-    protected void removeAnnotationEntry(final AnnotationEntryGen ag) // TODO could this be package protected?
+    public void removeAnnotationEntry(final AnnotationEntryGen ag) // TODO could this be package protected?
     {
         annotation_vec.remove(ag);
     }
@@ -152,7 +152,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * @since 6.0
      */
-    protected void removeAnnotationEntries() // TODO could this be package protected?
+    public void removeAnnotationEntries() // TODO could this be package protected?
     {
         annotation_vec.clear();
     }
