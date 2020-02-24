@@ -62,7 +62,11 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.4.2" date="2019-MM-DD" description="Bug fix release.">
+    <release version="6.4.1.1" date="2020-02-24" description="University of Washington PLSE Bug fix release.">
+      <action                  type="update" due-to="Mark Roberts">Allow clients to manipulate Annotations.</action>
+      <action issue="BCEL-335" type="fix" due-to="Mark Roberts">fix jdk 11 javadoc error.</action>
+      <action issue="BCEL-334" type="update" due-to="Mark Roberts">Add attribute name headings to toString of a Code attribute.</action>
+      <action issue="BCEL-333" type="fix" due-to="Mark Roberts">InovokeStatic may refer to either a MethodRef or an InterfaceMethodRef.</action>
       <action issue="BCEL-330" type="update" dev="ggregory" due-to="Mark Roberts">Remove unnecessary references to Constants.</action>
       <action issue="BCEL-329" type="fix" dev="ggregory" due-to="Gary Gregory, Mark Roberts">MethodGen duplicates some attributes.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 5.4.0 to 5.5.0.</action>
