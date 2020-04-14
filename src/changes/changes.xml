@@ -70,6 +70,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Michael Ernst">Improve documentation of Pass3bVerifier (#37).</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update JUnit from 4.12 to 4.13.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.9 to 3.10.</action>
+      <action issue="BCEL-336" type="update" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">MethodGen throws NullPointerException upon Invalid Class File Missing Constructor Body.</action>
     </release> 
     <release version="6.4.1" date="2019-09-26" description="Bug fix release.">
       <action issue="BCEL-328" type="fix" dev="ggregory" due-to="Gary Gregory, Mark Roberts">java.util.EmptyStackException at org.apache.bcel.classfile.DescendingVisitor.visitModule (DescendingVisitor.java:592).</action>
