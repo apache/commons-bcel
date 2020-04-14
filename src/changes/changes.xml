@@ -66,7 +66,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-330" type="update" dev="ggregory" due-to="Mark Roberts">Remove unnecessary references to Constants.</action>
       <action issue="BCEL-329" type="fix" dev="ggregory" due-to="Gary Gregory, Mark Roberts">MethodGen duplicates some attributes.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 5.4.0 to 5.5.0.</action>
-      <action                  type="update" dev="ggregory" due-to="Arthur Kupriyanov">Replaced deprecated constants in examples ()#38).</action>
+      <action                  type="update" dev="ggregory" due-to="Arthur Kupriyanov">Replaced deprecated constants in examples (#38).</action>
       <action                  type="update" dev="ggregory" due-to="Michael Ernst">Improve documentation of Pass3bVerifier (#37).</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update JUnit from 4.12 to 4.13.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.9 to 3.10.</action>
