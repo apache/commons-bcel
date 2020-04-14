@@ -28,14 +28,6 @@ import junit.framework.TestCase;
 
 public class MethodGenTestCase extends TestCase {
 
-    public static class Foo {
-        public void bar() {
-            @SuppressWarnings("unused")
-            final
-            int a = 1;
-        }
-    }
-
     @interface A {
     }
 
@@ -50,6 +42,14 @@ public class MethodGenTestCase extends TestCase {
         }
     }
 
+    public static class Foo {
+        public void bar() {
+            @SuppressWarnings("unused")
+            final
+            int a = 1;
+        }
+    }
+
     private MethodGen getMethod(final Class<?> cls, final String name) throws ClassNotFoundException {
         final JavaClass jc = Repository.lookupClass(cls);
         final ConstantPoolGen cp = new ConstantPoolGen(jc.getConstantPool());
@@ -61,6 +61,16 @@ public class MethodGenTestCase extends TestCase {
 
         fail("Method " + name + " not found in class " + cls);
         return null;
+    }
+
+    public void testAnnotationsAreUnpacked() throws Exception {
+        final JavaClass jc = Repository.lookupClass(Bar.Inner.class);
+        final ClassGen cg = new ClassGen(jc);
+        final MethodGen mg = new MethodGen(cg.getMethodAt(0), cg.getClassName(), cg.getConstantPool());
+        final List<AnnotationEntryGen> firstParamAnnotations = mg.getAnnotationsOnParameter(0);
+        assertEquals("Wrong number of annotations in the first parameter", 1, firstParamAnnotations.size());
+        final List<AnnotationEntryGen> secondParamAnnotations = mg.getAnnotationsOnParameter(1);
+        assertEquals("Wrong number of annotations in the second parameter", 1, secondParamAnnotations.size());
     }
 
     public void testRemoveLocalVariable() throws Exception {
@@ -103,15 +113,5 @@ public class MethodGenTestCase extends TestCase {
         assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
         assertNull("scope start", lv.getStart());
         assertNull("scope end", lv.getEnd());
-    }
-
-    public void testAnnotationsAreUnpacked() throws Exception {
-        final JavaClass jc = Repository.lookupClass(Bar.Inner.class);
-        final ClassGen cg = new ClassGen(jc);
-        final MethodGen mg = new MethodGen(cg.getMethodAt(0), cg.getClassName(), cg.getConstantPool());
-        final List<AnnotationEntryGen> firstParamAnnotations = mg.getAnnotationsOnParameter(0);
-        assertEquals("Wrong number of annotations in the first parameter", 1, firstParamAnnotations.size());
-        final List<AnnotationEntryGen> secondParamAnnotations = mg.getAnnotationsOnParameter(1);
-        assertEquals("Wrong number of annotations in the second parameter", 1, secondParamAnnotations.size());
     }
 }
