@@ -65,14 +65,14 @@
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
     <commons.findbugs.version>3.0.5</commons.findbugs.version>
-    <commons.surefire.version>3.0.0-M3</commons.surefire.version>
+    <commons.surefire.version>3.0.0-M4</commons.surefire.version>
     <checkstyle.plugin.version>3.1.0</checkstyle.plugin.version>
     <commons.clirr.version>2.8</commons.clirr.version>
     <jna.version>5.5.0</jna.version>
-    <commons.japicmp.version>0.14.1</commons.japicmp.version>
+    <commons.japicmp.version>0.14.3</commons.japicmp.version>
     <japicmp.skip>false</japicmp.skip>
     <clirr.skip>true</clirr.skip>
-    <commons.jacoco.version>0.8.4</commons.jacoco.version>
+    <commons.jacoco.version>0.8.5</commons.jacoco.version>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
@@ -364,23 +364,6 @@
 
   <reporting>
     <plugins>
-      <!--
-        <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jardiff-maven-plugin</artifactId>
-        <configuration>
-        <artifacts>
-        <artifact>
-        <version>5.2</version>
-        </artifact>
-        <artifact>
-        <groupId>bcel</groupId>
-        <version>5.1</version>
-        </artifact>
-        </artifacts>
-        </configuration>
-        </plugin>
-      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -403,7 +386,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.12.0</version>
+        <version>3.13.0</version>
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
           <linkXref>true</linkXref>

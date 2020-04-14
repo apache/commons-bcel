@@ -170,18 +170,19 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Instantiate from existing method.
      *
-     * @param m method
+     * @param method method
      * @param class_name class name containing this method
      * @param cp constant pool
      */
-    public MethodGen(final Method m, final String class_name, final ConstantPoolGen cp) {
-        this(m.getAccessFlags(), Type.getReturnType(m.getSignature()), Type.getArgumentTypes(m
-                .getSignature()), null /* may be overridden anyway */
-        , m.getName(), class_name,
-                ((m.getAccessFlags() & (Const.ACC_ABSTRACT | Const.ACC_NATIVE)) == 0)
-                        ? new InstructionList(m.getCode().getCode())
-                        : null, cp);
-        final Attribute[] attributes = m.getAttributes();
+    public MethodGen(final Method method, final String class_name, final ConstantPoolGen cp) {
+        this(method.getAccessFlags(), Type.getReturnType(method.getSignature()),
+            Type.getArgumentTypes(method.getSignature()), null /* may be overridden anyway */
+            , method.getName(), class_name,
+            ((method.getAccessFlags() & (Const.ACC_ABSTRACT | Const.ACC_NATIVE)) == 0)
+                ? new InstructionList(getByteCodes(method))
+                : null,
+            cp);
+        final Attribute[] attributes = method.getAttributes();
         for (final Attribute attribute : attributes) {
             Attribute a = attribute;
             if (a instanceof Code) {
@@ -194,12 +195,11 @@ public class MethodGen extends FieldGenOrMethodGen {
                         final int type = ce.getCatchType();
                         ObjectType c_type = null;
                         if (type > 0) {
-                            final String cen = m.getConstantPool().getConstantString(type,
-                                    Const.CONSTANT_Class);
-                            c_type =  ObjectType.getInstance(cen);
+                            final String cen = method.getConstantPool().getConstantString(type, Const.CONSTANT_Class);
+                            c_type = ObjectType.getInstance(cen);
                         }
                         final int end_pc = ce.getEndPC();
-                        final int length = m.getCode().getCode().length;
+                        final int length = getByteCodes(method).length;
                         InstructionHandle end;
                         if (length == end_pc) { // May happen, because end_pc is exclusive
                             end = il.getEnd();
@@ -207,8 +207,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                             end = il.findHandle(end_pc);
                             end = end.getPrev(); // Make it inclusive
                         }
-                        addExceptionHandler(il.findHandle(ce.getStartPC()), end, il.findHandle(ce
-                                .getHandlerPC()), c_type);
+                        addExceptionHandler(il.findHandle(ce.getStartPC()), end, il.findHandle(ce.getHandlerPC()),
+                            c_type);
                     }
                 }
                 final Attribute[] c_attributes = c.getAttributes();
@@ -245,6 +245,15 @@ public class MethodGen extends FieldGenOrMethodGen {
                 addAttribute(a);
             }
         }
+    }
+
+
+    private static byte[] getByteCodes(final Method method) {
+        final Code code = method.getCode();
+        if (code == null) {
+            throw new IllegalStateException(String.format("The method '%s' has no code.", method));
+        }
+        return code.getCode();
     }
 
     /**
