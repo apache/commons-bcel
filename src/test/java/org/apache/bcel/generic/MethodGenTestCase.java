@@ -26,6 +26,8 @@ import org.apache.bcel.classfile.Method;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.mail.internet.MailDateFormat;
+
 public class MethodGenTestCase {
 
     @interface A {
@@ -117,5 +119,13 @@ public class MethodGenTestCase {
         Assert.assertNull("scope start", lv.getStart());
         Assert.assertNull("scope end", lv.getEnd());
     }
-    
+
+    @Test
+    public void testInvalidNullMethodBody() throws Exception {
+        final JavaClass jc = Repository.lookupClass("javax.mail.internet.MailDateFormat");
+        ClassGen classGen = new ClassGen(jc);
+        for (Method method : jc.getMethods()) {
+            new MethodGen(method, jc.getClassName(), classGen.getConstantPool());
+        }
+    }
 }
