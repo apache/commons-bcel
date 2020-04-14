@@ -23,10 +23,10 @@ import java.util.List;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
+import org.junit.Assert;
+import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class MethodGenTestCase extends TestCase {
+public class MethodGenTestCase {
 
     @interface A {
     }
@@ -59,59 +59,63 @@ public class MethodGenTestCase extends TestCase {
             }
         }
 
-        fail("Method " + name + " not found in class " + cls);
+        Assert.fail("Method " + name + " not found in class " + cls);
         return null;
     }
 
+    @Test
     public void testAnnotationsAreUnpacked() throws Exception {
         final JavaClass jc = Repository.lookupClass(Bar.Inner.class);
         final ClassGen cg = new ClassGen(jc);
         final MethodGen mg = new MethodGen(cg.getMethodAt(0), cg.getClassName(), cg.getConstantPool());
         final List<AnnotationEntryGen> firstParamAnnotations = mg.getAnnotationsOnParameter(0);
-        assertEquals("Wrong number of annotations in the first parameter", 1, firstParamAnnotations.size());
+        Assert.assertEquals("Wrong number of annotations in the first parameter", 1, firstParamAnnotations.size());
         final List<AnnotationEntryGen> secondParamAnnotations = mg.getAnnotationsOnParameter(1);
-        assertEquals("Wrong number of annotations in the second parameter", 1, secondParamAnnotations.size());
+        Assert.assertEquals("Wrong number of annotations in the second parameter", 1, secondParamAnnotations.size());
     }
 
+    @Test
     public void testRemoveLocalVariable() throws Exception {
         final MethodGen mg = getMethod(Foo.class, "bar");
 
         final LocalVariableGen lv = mg.getLocalVariables()[1];
-        assertEquals("variable name", "a", lv.getName());
+        Assert.assertEquals("variable name", "a", lv.getName());
         final InstructionHandle start = lv.getStart();
         final InstructionHandle end = lv.getEnd();
-        assertNotNull("scope start", start);
-        assertNotNull("scope end", end);
-        assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertTrue("scope end not targeted by the local variable", Arrays.asList(end.getTargeters()).contains(lv));
+        Assert.assertNotNull("scope start", start);
+        Assert.assertNotNull("scope end", end);
+        Assert.assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));
+        Assert.assertTrue("scope end not targeted by the local variable", Arrays.asList(end.getTargeters()).contains(lv));
 
         // now let's remove the local variable
         mg.removeLocalVariable(lv);
 
-        assertFalse("scope start still targeted by the removed variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
-        assertNull("scope start", lv.getStart());
-        assertNull("scope end", lv.getEnd());
+        Assert.assertFalse("scope start still targeted by the removed variable", Arrays.asList(start.getTargeters()).contains(lv));
+        Assert.assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
+        Assert.assertNull("scope start", lv.getStart());
+        Assert.assertNull("scope end", lv.getEnd());
     }
 
+    @Test
     public void testRemoveLocalVariables() throws Exception {
         final MethodGen mg = getMethod(Foo.class, "bar");
 
         final LocalVariableGen lv = mg.getLocalVariables()[1];
-        assertEquals("variable name", "a", lv.getName());
+        Assert.assertEquals("variable name", "a", lv.getName());
         final InstructionHandle start = lv.getStart();
         final InstructionHandle end = lv.getEnd();
-        assertNotNull("scope start", start);
-        assertNotNull("scope end", end);
-        assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertTrue("scope end not targeted by the local variable", Arrays.asList(end.getTargeters()).contains(lv));
+        Assert.assertNotNull("scope start", start);
+        Assert.assertNotNull("scope end", end);
+        Assert.assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));
+        Assert.assertTrue("scope end not targeted by the local variable", Arrays.asList(end.getTargeters()).contains(lv));
 
         // now let's remove the local variables
         mg.removeLocalVariables();
 
-        assertFalse("scope start still targeted by the removed variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
-        assertNull("scope start", lv.getStart());
-        assertNull("scope end", lv.getEnd());
+        Assert.assertFalse("scope start still targeted by the removed variable", Arrays.asList(start.getTargeters()).contains(lv));
+        Assert.assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
+        Assert.assertNull("scope start", lv.getStart());
+        Assert.assertNull("scope end", lv.getEnd());
     }
+    
 }
