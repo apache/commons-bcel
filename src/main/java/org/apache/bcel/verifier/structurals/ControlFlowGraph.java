@@ -462,7 +462,7 @@ public class ControlFlowGraph{
      * <B>(NOT ORDERED!)</B>.
      */
     public InstructionContext[] getInstructionContexts() {
-        final InstructionContext[] ret = new InstructionContext[instructionContexts.values().size()];
+        final InstructionContext[] ret = new InstructionContext[instructionContexts.size()];
         return instructionContexts.values().toArray(ret);
     }
 
