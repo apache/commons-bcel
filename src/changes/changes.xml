@@ -65,16 +65,16 @@ The <action> type attribute can be add,update,fix,remove.
     <release version="6.4.2" date="2019-MM-DD" description="Bug fix release.">
       <action issue="BCEL-330" type="update" dev="ggregory" due-to="Mark Roberts">Remove unnecessary references to Constants.</action>
       <action issue="BCEL-329" type="fix" dev="ggregory" due-to="Gary Gregory, Mark Roberts">MethodGen duplicates some attributes.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 5.4.0 to 5.5.0.</action>
-      <action                  type="update" dev="ggregory" due-to="Arthur Kupriyanov">Replaced deprecated constants in examples (#38).</action>
-      <action                  type="update" dev="ggregory" due-to="Michael Ernst">Improve documentation of Pass3bVerifier (#37).</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update JUnit from 4.12 to 4.13.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.9 to 3.10.</action>
       <action issue="BCEL-336" type="update" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">MethodGen throws NullPointerException upon Invalid Class File Missing Constructor Body.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">maven-pmd-plugin 3.12.0 -> 3.13.0.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">maven-surefire-plugin 3.0.0-M3 -> 3.0.0-M4.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">japicmp-maven-plugin 0.14.1 -> 0.14.3.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">jacoco-maven-plugin 0.8.4 -> 0.8.5.</action>
+      <action                  type="update" dev="ggregory" due-to="Michael Ernst">Improve documentation of Pass3bVerifier (#37).</action>
+      <action                  type="update" dev="ggregory" due-to="Arthur Kupriyanov">Replaced deprecated constants in examples (#38).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from JNA 5.4.0 to 5.5.0.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests JUnit from 4.12 to 4.13.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.9 to 3.10.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update build maven-pmd-plugin 3.12.0 -> 3.13.0.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests maven-surefire-plugin 3.0.0-M3 -> 3.0.0-M4.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update build japicmp-maven-plugin 0.14.1 -> 0.14.3.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update build jacoco-maven-plugin 0.8.4 -> 0.8.5.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from commons-io:commons-io 2.6 to 2.7.</action>
     </release> 
     <release version="6.4.1" date="2019-09-26" description="Bug fix release.">
