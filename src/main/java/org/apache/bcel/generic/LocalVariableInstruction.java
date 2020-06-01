@@ -216,7 +216,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
             case Const.ASTORE:
                 return Type.OBJECT;
             default:
-                throw new ClassGenException("Oops: unknown case in switch" + canon_tag);
+                throw new ClassGenException("Unknown case in switch" + canon_tag);
         }
     }
 

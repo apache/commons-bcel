@@ -17,6 +17,7 @@
  */
 package org.apache.bcel.verifier.exc;
 
+import java.util.Arrays;
 
 /**
  * Instances of this class should never be thrown. When such an instance is thrown,
@@ -77,7 +78,7 @@ public final class AssertionViolatedException extends RuntimeException{
      * DO NOT USE. It's for experimental testing during development only.
      */
     public static void main(final String[] args) {
-        final AssertionViolatedException ave = new AssertionViolatedException("Oops!");
+        final AssertionViolatedException ave = new AssertionViolatedException(Arrays.toString(args));
         ave.extendMessage("\nFOUND:\n\t","\nExiting!!\n");
         throw ave;
     }

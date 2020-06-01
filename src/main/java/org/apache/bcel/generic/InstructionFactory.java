@@ -101,7 +101,7 @@ public class InstructionFactory implements InstructionConstants {
         final Type[] arg_types, final short kind, final boolean use_interface) {
         if (kind != Const.INVOKESPECIAL && kind != Const.INVOKEVIRTUAL && kind != Const.INVOKESTATIC
             && kind != Const.INVOKEINTERFACE && kind != Const.INVOKEDYNAMIC) {
-            throw new RuntimeException("Oops: Unknown invoke kind: " + kind);
+            throw new RuntimeException("Unknown invoke kind: " + kind);
         }
         int index;
         int nargs = 0;
@@ -276,7 +276,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_OBJECT:
                 return createInvoke(append_mos[1], Const.INVOKEVIRTUAL);
             default:
-                throw new RuntimeException("Oops: No append for this type? " + type);
+                throw new RuntimeException("No append for this type? " + type);
         }
     }
 
@@ -303,7 +303,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.PUTSTATIC:
                 return new PUTSTATIC(index);
             default:
-                throw new RuntimeException("Oops: Unknown getfield kind:" + kind);
+                throw new RuntimeException("Unknown getfield kind:" + kind);
         }
     }
 
