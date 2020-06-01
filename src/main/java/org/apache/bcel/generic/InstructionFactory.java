@@ -95,7 +95,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param kind how to invoke: INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
      * @param use_interface force use of InterfaceMethodref
      * @return A new InvokeInstruction.
-     * @since 6.4.2
+     * @since 6.5.0
      */
     public InvokeInstruction createInvoke( final String class_name, final String name, final Type ret_type,
         final Type[] arg_types, final short kind, final boolean use_interface) {

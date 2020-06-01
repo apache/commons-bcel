@@ -62,7 +62,7 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.4.2" date="2019-MM-DD" description="Bug fix release.">
+    <release version="6.5.0" date="2019-MM-DD" description="Bug fix release.">
       <action issue="BCEL-330" type="update" dev="ggregory" due-to="Mark Roberts">Remove unnecessary references to Constants.</action>
       <action issue="BCEL-329" type="fix" dev="ggregory" due-to="Gary Gregory, Mark Roberts">MethodGen duplicates some attributes.</action>
       <action issue="BCEL-336" type="update" dev="ggregory" due-to="Tomo Suzuki, Gary Gregory">MethodGen throws NullPointerException upon Invalid Class File Missing Constructor Body.</action>
