@@ -177,16 +177,16 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     }
 
     // Get type of subexpressions
-    for(int i=0; i < exprs.length; i++) {
-      t = exprs[i].eval(child_type);
+    for (ASTExpr expr : exprs) {
+      t = expr.eval(child_type);
 
       if(t != child_type) {
-        MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
+        MiniC.addError(expr.getLine(), expr.getColumn(),
                        "Expression has not expected type " + TYPE_NAMES[child_type] +
                        " but " + TYPE_NAMES[t] + ".");
     }
 
-      is_simple = is_simple && exprs[i].isSimple();
+      is_simple = is_simple && expr.isSimple();
     }
 
     return type;
@@ -322,8 +322,8 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     System.out.println(toString(prefix));
 
     if(exprs != null) {
-        for(int i=0; i < exprs.length; ++i) {
-            exprs[i].dump(prefix + " ");
+        for (ASTExpr expr : exprs) {
+            expr.dump(prefix + " ");
         }
     }
   }

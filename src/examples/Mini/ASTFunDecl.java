@@ -103,13 +103,13 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
         this.env = env;
 
         // Put arguments into hash table aka environment
-        for (int i = 0; i < argv.length; i++) {
-            final EnvEntry entry = env.get(argv[i].getName());
+        for (ASTIdent element : argv) {
+            final EnvEntry entry = env.get(element.getName());
 
             if (entry != null) {
-                MiniC.addError(argv[i].getLine(), argv[i].getColumn(), "Redeclaration of " + entry + ".");
+                MiniC.addError(element.getLine(), element.getColumn(), "Redeclaration of " + entry + ".");
             } else {
-                env.put(new Variable(argv[i]));
+                env.put(new Variable(element));
             }
         }
 
@@ -328,11 +328,11 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
 
                 System.err.println(targets[0]);
 
-                for (int i = 0; i < targets.length; i++) {
-                    final InstructionTargeter[] targeters = targets[i].getTargeters();
+                for (InstructionHandle target : targets) {
+                    final InstructionTargeter[] targeters = target.getTargeters();
 
-                    for (int j = 0; j < targeters.length; j++) {
-                        if ((targets[i] != match[4]) || (targeters[j] != match[2])) {
+                    for (InstructionTargeter targeter : targeters) {
+                        if ((target != match[4]) || (targeter != match[2])) {
                             System.err.println("Unexpected: " + e);
                         }
                     }
@@ -416,8 +416,8 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
     public void dump(final String prefix) {
         System.out.println(toString(prefix));
 
-        for (int i = 0; i < argv.length; i++) {
-            argv[i].dump(prefix + " ");
+        for (ASTIdent element : argv) {
+            element.dump(prefix + " ");
         }
 
         body.dump(prefix + " ");

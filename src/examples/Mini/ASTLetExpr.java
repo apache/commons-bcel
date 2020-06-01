@@ -85,8 +85,7 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
     }
 
     // Put argument names into hash table aka. environment
-    for(int i=0; i < idents.length; i++) {
-      final ASTIdent id    = idents[i];
+    for (final ASTIdent id : idents) {
       final String   name  = id.getName();
       final EnvEntry entry = env.get(name);
 

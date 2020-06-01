@@ -218,8 +218,7 @@ public class Package {
     void printAllClasses() {
         final List<String> names = new ArrayList<>(allClasses.keySet());
         Collections.sort(names);
-        for (int i = 0; i < names.size(); i++) {
-            final String cl = names.get(i);
+        for (final String cl : names) {
             System.err.println(cl);
         }
     }

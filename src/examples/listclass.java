@@ -151,8 +151,8 @@ public class listclass {
             final listclass listClass = new listclass(code, constants, verbose, classdep,
                     nocontents, recurse, exclude_name);
 
-            for (int i = 0; i < file_name.size(); i++) {
-                name = file_name.get(i);
+            for (String element : file_name) {
+                name = element;
 
                 listClass.list(name);
             }
@@ -182,8 +182,8 @@ public class listclass {
                 return;
             }
 
-            for (int idx = 0; idx < exclude_name.size(); idx++) {
-                if (name.startsWith(exclude_name.get(idx))) {
+            for (String element : exclude_name) {
+                if (name.startsWith(element)) {
                     return;
                 }
             }
