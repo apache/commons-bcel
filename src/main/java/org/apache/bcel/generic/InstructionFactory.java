@@ -101,7 +101,7 @@ public class InstructionFactory implements InstructionConstants {
         final Type[] arg_types, final short kind, final boolean use_interface) {
         if (kind != Const.INVOKESPECIAL && kind != Const.INVOKEVIRTUAL && kind != Const.INVOKESTATIC
             && kind != Const.INVOKEINTERFACE && kind != Const.INVOKEDYNAMIC) {
-            throw new RuntimeException("Unknown invoke kind: " + kind);
+            throw new IllegalArgumentException("Unknown invoke kind: " + kind);
         }
         int index;
         int nargs = 0;
@@ -276,7 +276,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_OBJECT:
                 return createInvoke(append_mos[1], Const.INVOKEVIRTUAL);
             default:
-                throw new RuntimeException("No append for this type? " + type);
+                throw new IllegalArgumentException("No append for this type? " + type);
         }
     }
 
@@ -303,7 +303,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.PUTSTATIC:
                 return new PUTSTATIC(index);
             default:
-                throw new RuntimeException("Unknown getfield kind:" + kind);
+                throw new IllegalArgumentException("Unknown getfield kind:" + kind);
         }
     }
 
@@ -337,7 +337,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_VOID:
                 return InstructionConst.RETURN;
             default:
-                throw new RuntimeException("Invalid type: " + type);
+                throw new IllegalArgumentException("Invalid type: " + type);
         }
     }
 
@@ -365,7 +365,7 @@ public class InstructionFactory implements InstructionConstants {
             case '>':
                 return op.equals(">>>") ? InstructionConst.IUSHR : InstructionConst.ISHR;
             default:
-                throw new RuntimeException("Invalid operand " + op);
+                throw new IllegalArgumentException("Invalid operand " + op);
         }
     }
 
@@ -393,7 +393,7 @@ public class InstructionFactory implements InstructionConstants {
             case '>':
                 return op.equals(">>>") ? InstructionConst.LUSHR : InstructionConst.LSHR;
             default:
-                throw new RuntimeException("Invalid operand " + op);
+                throw new IllegalArgumentException("Invalid operand " + op);
         }
     }
 
@@ -411,7 +411,7 @@ public class InstructionFactory implements InstructionConstants {
             case '%':
                 return InstructionConst.FREM;
             default:
-                throw new RuntimeException("Invalid operand " + op);
+                throw new IllegalArgumentException("Invalid operand " + op);
         }
     }
 
@@ -429,7 +429,7 @@ public class InstructionFactory implements InstructionConstants {
             case '%':
                 return InstructionConst.DREM;
             default:
-                throw new RuntimeException("Invalid operand " + op);
+                throw new IllegalArgumentException("Invalid operand " + op);
         }
     }
 
@@ -454,7 +454,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_DOUBLE:
                 return createBinaryDoubleOp(first);
             default:
-                throw new RuntimeException("Invalid type " + type);
+                throw new IllegalArgumentException("Invalid type " + type);
         }
     }
 
@@ -512,7 +512,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_OBJECT:
                 return new ASTORE(index);
             default:
-                throw new RuntimeException("Invalid type " + type);
+                throw new IllegalArgumentException("Invalid type " + type);
         }
     }
 
@@ -538,7 +538,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_OBJECT:
                 return new ALOAD(index);
             default:
-                throw new RuntimeException("Invalid type " + type);
+                throw new IllegalArgumentException("Invalid type " + type);
         }
     }
 
@@ -567,7 +567,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_OBJECT:
                 return InstructionConst.AALOAD;
             default:
-                throw new RuntimeException("Invalid type " + type);
+                throw new IllegalArgumentException("Invalid type " + type);
         }
     }
 
@@ -596,7 +596,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_OBJECT:
                 return InstructionConst.AASTORE;
             default:
-                throw new RuntimeException("Invalid type " + type);
+                throw new IllegalArgumentException("Invalid type " + type);
         }
     }
 
@@ -618,7 +618,7 @@ public class InstructionFactory implements InstructionConstants {
             try {
                 i = (Instruction) java.lang.Class.forName(name).newInstance();
             } catch (final Exception e) {
-                throw new RuntimeException("Could not find instruction: " + name, e);
+                throw new IllegalArgumentException("Could not find instruction: " + name, e);
             }
             return i;
         } else if ((src_type instanceof ReferenceType) && (dest_type instanceof ReferenceType)) {
@@ -627,7 +627,7 @@ public class InstructionFactory implements InstructionConstants {
             }
             return new CHECKCAST(cp.addClass(((ObjectType) dest_type).getClassName()));
         } else {
-            throw new RuntimeException("Can not cast " + src_type + " to " + dest_type);
+            throw new IllegalArgumentException("Cannot cast " + src_type + " to " + dest_type);
         }
     }
 
@@ -723,7 +723,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_VOID:
                 return InstructionConst.NOP;
             default:
-                throw new RuntimeException("Invalid type: " + type);
+                throw new IllegalArgumentException("Invalid type: " + type);
         }
     }
 
@@ -774,7 +774,7 @@ public class InstructionFactory implements InstructionConstants {
             case Const.JSR_W:
                 return new JSR_W(target);
             default:
-                throw new RuntimeException("Invalid opcode: " + opcode);
+                throw new IllegalArgumentException("Invalid opcode: " + opcode);
         }
     }
 

@@ -1127,7 +1127,7 @@ public final class Pass3aVerifier extends PassVerifier{
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
         public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
-            throw new RuntimeException("INVOKEDYNAMIC instruction is not supported at this time");
+            throw new UnsupportedOperationException("INVOKEDYNAMIC instruction is not supported at this time");
         }
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */

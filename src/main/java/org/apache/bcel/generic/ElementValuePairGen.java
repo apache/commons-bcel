@@ -45,7 +45,7 @@ public class ElementValuePairGen
         // if
         // (!nvp.getNameString().equals(((ConstantUtf8)cpool.getConstant(nvp.getNameIndex())).getBytes()))
         // {
-        // throw new RuntimeException("envp buggered");
+        // throw new IllegalArgumentException("envp buggered");
         // }
         if (copyPoolEntries)
         {

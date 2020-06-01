@@ -256,7 +256,7 @@ public final class StackMapEntry implements Node, Cloneable
             }
             return len;
         } else {
-            throw new RuntimeException("Invalid StackMap frame_type: " + frame_type);
+            throw new IllegalStateException("Invalid StackMap frame_type: " + frame_type);
         }
     }
 
@@ -273,7 +273,7 @@ public final class StackMapEntry implements Node, Cloneable
         } else if (f >= Const.APPEND_FRAME && f <= Const.APPEND_FRAME_MAX) { // CHECKSTYLE IGNORE EmptyBlock
         } else if (f == Const.FULL_FRAME) { // CHECKSTYLE IGNORE EmptyBlock
         } else {
-            throw new RuntimeException("Invalid StackMap frame_type");
+            throw new IllegalArgumentException("Invalid StackMap frame_type");
         }
         frame_type = f;
     }
@@ -286,7 +286,7 @@ public final class StackMapEntry implements Node, Cloneable
 
     public void setByteCodeOffset( final int new_offset ) {
         if (new_offset < 0 || new_offset > 32767) {
-            throw new RuntimeException("Invalid StackMap offset: " + new_offset);
+            throw new IllegalArgumentException("Invalid StackMap offset: " + new_offset);
         }
 
         if (frame_type >= Const.SAME_FRAME &&
@@ -311,7 +311,7 @@ public final class StackMapEntry implements Node, Cloneable
                    frame_type <= Const.APPEND_FRAME_MAX) { // CHECKSTYLE IGNORE EmptyBlock
         } else if (frame_type == Const.FULL_FRAME) { // CHECKSTYLE IGNORE EmptyBlock
         } else {
-            throw new RuntimeException("Invalid StackMap frame_type: " + frame_type);
+            throw new IllegalStateException("Invalid StackMap frame_type: " + frame_type);
         }
         byte_code_offset = new_offset;
     }

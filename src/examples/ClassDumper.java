@@ -356,7 +356,7 @@ class DumpClass {
     public static void main(final String[] args) throws IOException {
 
         if (args.length != 1) {
-            throw new RuntimeException("Require file name as only argument");
+            throw new IllegalArgumentException("Require file name as only argument");
         }
 
         try (FileImageInputStream file = new FileImageInputStream(new File(args[0]))) {

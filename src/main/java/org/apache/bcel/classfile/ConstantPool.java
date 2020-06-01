@@ -165,7 +165,7 @@ public class ConstantPool implements Cloneable, Node {
                 str = Utility.compactClassName(((ConstantUtf8) c).getBytes(), false);
                 break;
             default: // Never reached
-                throw new RuntimeException("Unknown constant type " + tag);
+                throw new IllegalArgumentException("Unknown constant type " + tag);
         }
         return str;
     }
@@ -310,7 +310,7 @@ public class ConstantPool implements Cloneable, Node {
                 i = ((ConstantPackage) c).getNameIndex();
                 break;
             default:
-                throw new RuntimeException("getConstantString called with illegal tag " + tag);
+                throw new IllegalArgumentException("getConstantString called with illegal tag " + tag);
         }
         // Finally get the string from the constant pool
         c = getConstant(i, Const.CONSTANT_Utf8);

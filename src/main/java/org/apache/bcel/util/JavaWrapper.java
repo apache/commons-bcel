@@ -43,12 +43,12 @@ public class JavaWrapper {
     private static java.lang.ClassLoader getClassLoader() {
         final String s = System.getProperty("bcel.classloader");
         if ((s == null) || "".equals(s)) {
-            throw new IllegalArgumentException("The property 'bcel.classloader' must be defined");
+            throw new IllegalStateException("The property 'bcel.classloader' must be defined");
         }
         try {
             return (java.lang.ClassLoader) Class.forName(s).newInstance();
         } catch (final Exception e) {
-            throw new RuntimeException(e.toString(), e);
+            throw new IllegalStateException(e.toString(), e);
         }
     }
 

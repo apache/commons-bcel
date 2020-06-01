@@ -79,6 +79,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Mark Roberts">Add support for invokestatic of an InterfaceMethodref #39.</action>
       <action                  type="update" dev="ggregory" due-to="Mark Roberts">Add attribute name(s) to Code.toString() #40.</action>
       <action issue="BCEL-338" type="update" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.generic.InstructionFactory.createInvoke() populates its internal ConstantPoolGen on bad input, then throws exception.</action>
+      <action issue="BCEL-339" type="update" dev="ggregory" due-to="Gary Gregory">Throw IllegalArgumentException, IllegalStateException, UnsupportedOperationException instead of RuntimeException.</action>
     </release> 
     <release version="6.4.1" date="2019-09-26" description="Bug fix release.">
       <action issue="BCEL-328" type="fix" dev="ggregory" due-to="Gary Gregory, Mark Roberts">java.util.EmptyStackException at org.apache.bcel.classfile.DescendingVisitor.visitModule (DescendingVisitor.java:592).</action>

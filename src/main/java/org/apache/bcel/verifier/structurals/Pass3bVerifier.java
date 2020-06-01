@@ -323,7 +323,7 @@ public final class Pass3bVerifier extends PassVerifier{
                             }
                         } catch (final ClassNotFoundException e) {
                             // Don't know what do do now, so raise RuntimeException
-                            throw new RuntimeException(e);
+                            throw new IllegalArgumentException(e);
                         }
                     } else if (!returnedType.equals(m.getReturnType().normalizeForStackOrLocal())) {
                         invalidReturnTypeError(returnedType, m);

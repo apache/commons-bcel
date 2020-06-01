@@ -1145,7 +1145,7 @@ public abstract class Utility {
                     break;
                 case '[':
                     if (!char_found) {
-                        throw new RuntimeException("Illegal type: " + type);
+                        throw new IllegalArgumentException("Illegal type: " + type);
                     }
                     index = i;
                     break loop;
@@ -1187,13 +1187,13 @@ public abstract class Utility {
             switch (c) {
                 case '[':
                     if (open) {
-                        throw new RuntimeException("Illegally nested brackets:" + brackets);
+                        throw new IllegalArgumentException("Illegally nested brackets:" + brackets);
                     }
                     open = true;
                     break;
                 case ']':
                     if (!open) {
-                        throw new RuntimeException("Illegally nested brackets:" + brackets);
+                        throw new IllegalArgumentException("Illegally nested brackets:" + brackets);
                     }
                     open = false;
                     count++;
@@ -1204,7 +1204,7 @@ public abstract class Utility {
             }
         }
         if (open) {
-            throw new RuntimeException("Illegally nested brackets:" + brackets);
+            throw new IllegalArgumentException("Illegally nested brackets:" + brackets);
         }
         return count;
     }

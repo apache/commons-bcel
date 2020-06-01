@@ -829,11 +829,11 @@ public class ConstantPoolGen {
                     case Const.CONSTANT_Fieldref:
                         return addFieldref(class_name, name, signature);
                     default: // Never reached
-                        throw new RuntimeException("Unknown constant type " + c);
+                        throw new IllegalArgumentException("Unknown constant type " + c);
                 }
             }
             default: // Never reached
-                throw new RuntimeException("Unknown constant type " + c);
+                throw new IllegalArgumentException("Unknown constant type " + c);
         }
     }
 }

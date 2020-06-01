@@ -117,7 +117,7 @@ public class InstructionFinder {
                 return "" + makeChar(i);
             }
         }
-        throw new RuntimeException("Instruction unknown: " + pattern);
+        throw new IllegalArgumentException("Instruction unknown: " + pattern);
     }
 
 

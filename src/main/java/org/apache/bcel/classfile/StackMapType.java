@@ -58,7 +58,7 @@ public final class StackMapType implements Cloneable {
      */
     public StackMapType(final byte type, final int index, final ConstantPool constant_pool) {
         if ((type < Const.ITEM_Bogus) || (type > Const.ITEM_NewObject)) {
-            throw new RuntimeException("Illegal type for StackMapType: " + type);
+            throw new IllegalArgumentException("Illegal type for StackMapType: " + type);
         }
         this.type = type;
         this.index = index;
@@ -68,7 +68,7 @@ public final class StackMapType implements Cloneable {
 
     public void setType( final byte t ) {
         if ((t < Const.ITEM_Bogus) || (t > Const.ITEM_NewObject)) {
-            throw new RuntimeException("Illegal type for StackMapType: " + t);
+            throw new IllegalArgumentException("Illegal type for StackMapType: " + t);
         }
         type = t;
     }

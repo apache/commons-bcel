@@ -51,7 +51,7 @@ public class SimpleElementValue extends ElementValue
     public String getValueString()
     {
         if (super.getType() != STRING) {
-            throw new RuntimeException(
+            throw new IllegalStateException(
                     "Dont call getValueString() on a non STRING ElementValue");
         }
         final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(getIndex(),
@@ -62,7 +62,7 @@ public class SimpleElementValue extends ElementValue
     public int getValueInt()
     {
         if (super.getType() != PRIMITIVE_INT) {
-            throw new RuntimeException(
+            throw new IllegalStateException(
                     "Dont call getValueString() on a non STRING ElementValue");
         }
         final ConstantInteger c = (ConstantInteger) super.getConstantPool().getConstant(getIndex(),
@@ -73,7 +73,7 @@ public class SimpleElementValue extends ElementValue
     public byte getValueByte()
     {
         if (super.getType() != PRIMITIVE_BYTE) {
-            throw new RuntimeException(
+            throw new IllegalStateException(
                     "Dont call getValueByte() on a non BYTE ElementValue");
         }
         final ConstantInteger c = (ConstantInteger) super.getConstantPool().getConstant(getIndex(),
@@ -84,7 +84,7 @@ public class SimpleElementValue extends ElementValue
     public char getValueChar()
     {
         if (super.getType() != PRIMITIVE_CHAR) {
-            throw new RuntimeException(
+            throw new IllegalStateException(
                     "Dont call getValueChar() on a non CHAR ElementValue");
         }
         final ConstantInteger c = (ConstantInteger) super.getConstantPool().getConstant(getIndex(),
@@ -95,7 +95,7 @@ public class SimpleElementValue extends ElementValue
     public long getValueLong()
     {
         if (super.getType() != PRIMITIVE_LONG) {
-            throw new RuntimeException(
+            throw new IllegalStateException(
                     "Dont call getValueLong() on a non LONG ElementValue");
         }
         final ConstantLong j = (ConstantLong) super.getConstantPool().getConstant(getIndex());
@@ -105,7 +105,7 @@ public class SimpleElementValue extends ElementValue
     public float getValueFloat()
     {
         if (super.getType() != PRIMITIVE_FLOAT) {
-            throw new RuntimeException(
+            throw new IllegalStateException(
                     "Dont call getValueFloat() on a non FLOAT ElementValue");
         }
         final ConstantFloat f = (ConstantFloat) super.getConstantPool().getConstant(getIndex());
@@ -115,7 +115,7 @@ public class SimpleElementValue extends ElementValue
     public double getValueDouble()
     {
         if (super.getType() != PRIMITIVE_DOUBLE) {
-            throw new RuntimeException(
+            throw new IllegalStateException(
                     "Dont call getValueDouble() on a non DOUBLE ElementValue");
         }
         final ConstantDouble d = (ConstantDouble) super.getConstantPool().getConstant(getIndex());
@@ -125,7 +125,7 @@ public class SimpleElementValue extends ElementValue
     public boolean getValueBoolean()
     {
         if (super.getType() != PRIMITIVE_BOOLEAN) {
-            throw new RuntimeException(
+            throw new IllegalStateException(
                     "Dont call getValueBoolean() on a non BOOLEAN ElementValue");
         }
         final ConstantInteger bo = (ConstantInteger) super.getConstantPool().getConstant(getIndex());
@@ -135,7 +135,7 @@ public class SimpleElementValue extends ElementValue
     public short getValueShort()
     {
         if (super.getType() != PRIMITIVE_SHORT) {
-            throw new RuntimeException(
+            throw new IllegalStateException(
                     "Dont call getValueShort() on a non SHORT ElementValue");
         }
         final ConstantInteger s = (ConstantInteger) super.getConstantPool().getConstant(getIndex());
@@ -196,7 +196,7 @@ public class SimpleElementValue extends ElementValue
                     Const.CONSTANT_Utf8);
             return cu8.getBytes();
         default:
-            throw new RuntimeException("SimpleElementValue class does not know how to stringify type " + _type);
+            throw new IllegalStateException("SimpleElementValue class does not know how to stringify type " + _type);
         }
     }
 
@@ -219,7 +219,7 @@ public class SimpleElementValue extends ElementValue
             dos.writeShort(getIndex());
             break;
         default:
-            throw new RuntimeException("SimpleElementValue doesnt know how to write out type " + _type);
+            throw new IllegalStateException("SimpleElementValue doesnt know how to write out type " + _type);
         }
     }
 }

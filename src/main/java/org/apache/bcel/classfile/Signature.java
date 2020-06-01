@@ -153,7 +153,7 @@ public final class Signature extends Attribute {
     private static void matchIdent( final MyByteArrayInputStream in, final StringBuilder buf ) {
         int ch;
         if ((ch = in.read()) == -1) {
-            throw new RuntimeException("Illegal signature: " + in.getData()
+            throw new IllegalArgumentException("Illegal signature: " + in.getData()
                     + " no ident, reaching EOF");
         }
         //System.out.println("return from ident:" + (char)ch);
@@ -203,7 +203,7 @@ public final class Signature extends Attribute {
             matchGJIdent(in, buf);
             while (((ch = in.read()) != '>') && (ch != ')')) { // List of parameters
                 if (ch == -1) {
-                    throw new RuntimeException("Illegal signature: " + in.getData()
+                    throw new IllegalArgumentException("Illegal signature: " + in.getData()
                             + " reaching EOF");
                 }
                 //System.out.println("Still no >");
@@ -224,7 +224,7 @@ public final class Signature extends Attribute {
             in.unread();
             return;
         } else if (ch != ';') {
-            throw new RuntimeException("Illegal signature: " + in.getData() + " read " + (char) ch);
+            throw new IllegalArgumentException("Illegal signature: " + in.getData() + " read " + (char) ch);
         }
     }
 

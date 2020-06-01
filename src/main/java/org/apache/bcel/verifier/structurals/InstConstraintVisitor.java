@@ -1802,7 +1802,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
      */
     @Override
     public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
-        throw new RuntimeException("INVOKEDYNAMIC instruction is not supported at this time");
+        throw new UnsupportedOperationException("INVOKEDYNAMIC instruction is not supported at this time");
     }
 
     /**
