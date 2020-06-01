@@ -94,10 +94,15 @@ public class InstructionFactory implements InstructionConstants {
      * @param arg_types argument types of method
      * @param kind how to invoke: INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
      * @param use_interface force use of InterfaceMethodref
+     * @return A new InvokeInstruction.
      * @since 6.4.2
      */
     public InvokeInstruction createInvoke( final String class_name, final String name, final Type ret_type,
-            final Type[] arg_types, final short kind, final boolean use_interface ) {
+        final Type[] arg_types, final short kind, final boolean use_interface) {
+        if (kind != Const.INVOKESPECIAL && kind != Const.INVOKEVIRTUAL && kind != Const.INVOKESTATIC
+            && kind != Const.INVOKEINTERFACE && kind != Const.INVOKEDYNAMIC) {
+            throw new RuntimeException("Oops: Unknown invoke kind: " + kind);
+        }
         int index;
         int nargs = 0;
         final String signature = Type.getMethodSignature(ret_type, arg_types);
@@ -110,18 +115,19 @@ public class InstructionFactory implements InstructionConstants {
             index = cp.addMethodref(class_name, name, signature);
         }
         switch (kind) {
-            case Const.INVOKESPECIAL:
-                return new INVOKESPECIAL(index);
-            case Const.INVOKEVIRTUAL:
-                return new INVOKEVIRTUAL(index);
-            case Const.INVOKESTATIC:
-                return new INVOKESTATIC(index);
-            case Const.INVOKEINTERFACE:
-                return new INVOKEINTERFACE(index, nargs + 1);
-            case Const.INVOKEDYNAMIC:
-                return new INVOKEDYNAMIC(index);
-            default:
-                throw new RuntimeException("Oops: Unknown invoke kind: " + kind);
+        case Const.INVOKESPECIAL:
+            return new INVOKESPECIAL(index);
+        case Const.INVOKEVIRTUAL:
+            return new INVOKEVIRTUAL(index);
+        case Const.INVOKESTATIC:
+            return new INVOKESTATIC(index);
+        case Const.INVOKEINTERFACE:
+            return new INVOKEINTERFACE(index, nargs + 1);
+        case Const.INVOKEDYNAMIC:
+            return new INVOKEDYNAMIC(index);
+        default:
+            // Can't happen
+            throw new IllegalStateException("Unknown invoke kind: " + kind);
         }
     }
 
