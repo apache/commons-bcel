@@ -130,7 +130,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
 
     /**
      * Second pass
-     * 
+     *
      * @return type of expression
      */
     public int eval(final int pass) {
