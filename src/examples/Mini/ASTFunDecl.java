@@ -289,12 +289,10 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
         reset();
     }
 
-    private static final InstructionFinder.CodeConstraint my_constraint = new InstructionFinder.CodeConstraint() {
-        public boolean checkCode(final InstructionHandle[] match) {
-            final BranchInstruction if_icmp = (BranchInstruction) match[0].getInstruction();
-            final GOTO goto_ = (GOTO) match[2].getInstruction();
-            return (if_icmp.getTarget() == match[3]) && (goto_.getTarget() == match[4]);
-        }
+    private static final InstructionFinder.CodeConstraint my_constraint = match -> {
+        final BranchInstruction if_icmp = (BranchInstruction) match[0].getInstruction();
+        final GOTO goto_ = (GOTO) match[2].getInstruction();
+        return (if_icmp.getTarget() == match[3]) && (goto_.getTarget() == match[4]);
     };
 
     /**
