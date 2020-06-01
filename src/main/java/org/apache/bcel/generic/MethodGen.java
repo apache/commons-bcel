@@ -654,7 +654,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * using BCEL version 6.5.0 or later that contains fix for BCEL-329.
      * @since 6.5.0
      */
-    public void removeRuntimeAttributes(Attribute[] attrs) {
+    public void removeRuntimeAttributes(final Attribute[] attrs) {
         for (final Attribute attr : attrs) {
             removeAttribute(attr);
         }
@@ -720,8 +720,8 @@ public class MethodGen extends FieldGenOrMethodGen {
                     max_stack, max_locals, byte_code, c_exc, code_attrs, _cp.getConstantPool());
             addAttribute(code);
         }
-        Attribute[] annotations = addRuntimeAnnotationsAsAttribute(_cp);
-        Attribute[] parameterAnnotations = addRuntimeParameterAnnotationsAsAttribute(_cp);
+        final Attribute[] annotations = addRuntimeAnnotationsAsAttribute(_cp);
+        final Attribute[] parameterAnnotations = addRuntimeParameterAnnotationsAsAttribute(_cp);
         ExceptionTable et = null;
         if (throws_vec.size() > 0) {
             addAttribute(et = getExceptionTable(_cp));

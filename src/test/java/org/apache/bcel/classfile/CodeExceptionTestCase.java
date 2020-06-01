@@ -27,6 +27,7 @@ public class CodeExceptionTestCase {
     @Test
     public void testReferenceToConstant() {
         @SuppressWarnings("unused")
+        final
         short referenceToConstant = CodeException.AALOAD;
     }
 }

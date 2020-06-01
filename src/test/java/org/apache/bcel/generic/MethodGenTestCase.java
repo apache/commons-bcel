@@ -132,8 +132,8 @@ public class MethodGenTestCase {
 
     private void testInvalidNullMethodBody(final String className) throws ClassNotFoundException {
         final JavaClass jc = Repository.lookupClass(className);
-        ClassGen classGen = new ClassGen(jc);
-        for (Method method : jc.getMethods()) {
+        final ClassGen classGen = new ClassGen(jc);
+        for (final Method method : jc.getMethods()) {
             new MethodGen(method, jc.getClassName(), classGen.getConstantPool());
         }
     }
