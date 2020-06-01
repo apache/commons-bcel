@@ -292,7 +292,7 @@ public class Subroutines{
                             }
                         }
                         catch(final RuntimeException re) {
-                            throw new AssertionViolatedException("Oops. BCEL did not like NULL as a ConstantPoolGen object.", re);
+                            throw new AssertionViolatedException("BCEL did not like NULL as a ConstantPoolGen object.", re);
                         }
                     }
                 }

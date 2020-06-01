@@ -333,7 +333,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
 
                     for (int j = 0; j < targeters.length; j++) {
                         if ((targets[i] != match[4]) || (targeters[j] != match[2])) {
-                            System.err.println("Ooops: " + e);
+                            System.err.println("Unexpected: " + e);
                         }
                     }
                 }

@@ -569,7 +569,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 indexValid(o, o.getIndex()+1);
             }
             catch(final StaticCodeInstructionOperandConstraintException e) {
-                throw new AssertionViolatedException("OOPS: Does not BCEL handle that? LDC2_W operand has a problem.", e);
+                throw new AssertionViolatedException("Does not BCEL handle that? LDC2_W operand has a problem.", e);
             }
         }
 

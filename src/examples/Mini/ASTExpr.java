@@ -243,7 +243,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
       case GT:    ASTFunDecl.push(buf, toInt(_body_int + " > " + _body_int2));
         break;
 
-      default: System.err.println("Ooops");
+      default: System.err.println("Unhandled case: " + kind);
       }
     }
   }
@@ -282,7 +282,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
       case NEQ:   bh = il.append(new IF_ICMPEQ(null)); ASTFunDecl.pop(2); break;
       case LT:    bh = il.append(new IF_ICMPGE(null)); ASTFunDecl.pop(2); break;
       case GT:    bh = il.append(new IF_ICMPLE(null)); ASTFunDecl.pop(2); break;
-      default: System.err.println("Ooops");
+      default: System.err.println("Unhandled case: " + kind);
       }
 
       switch(kind) {
