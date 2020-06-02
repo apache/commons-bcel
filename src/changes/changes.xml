@@ -81,6 +81,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-338" type="update" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.generic.InstructionFactory.createInvoke() populates its internal ConstantPoolGen on bad input, then throws exception.</action>
       <action issue="BCEL-339" type="update" dev="ggregory" due-to="Gary Gregory">Throw IllegalArgumentException, IllegalStateException, UnsupportedOperationException instead of RuntimeException.</action>
       <action                  type="update" dev="ggregory" due-to="Mark Roberts">Make some annotation methods public (#45).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix ConcurrentModificationException in the maven-bundle-plugin:4.2.1:manifest on Java 15-ea.</action>
     </release> 
     <release version="6.4.1" date="2019-09-26" description="Bug fix release.">
       <action issue="BCEL-328" type="fix" dev="ggregory" due-to="Gary Gregory, Mark Roberts">java.util.EmptyStackException at org.apache.bcel.classfile.DescendingVisitor.visitModule (DescendingVisitor.java:592).</action>
