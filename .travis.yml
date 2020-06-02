@@ -25,5 +25,8 @@ jdk:
   - openjdk14  
   - openjdk-ea
 
+script:
+  - mvn
+
 after_success:
   - mvn -Ddoclint:none clean cobertura:cobertura coveralls:report
