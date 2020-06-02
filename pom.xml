@@ -67,7 +67,6 @@
     <commons.findbugs.version>3.0.5</commons.findbugs.version>
     <commons.surefire.version>3.0.0-M4</commons.surefire.version>
     <checkstyle.plugin.version>3.1.0</checkstyle.plugin.version>
-    <commons.clirr.version>2.8</commons.clirr.version>
     <jna.version>5.5.0</jna.version>
     <commons.japicmp.version>0.14.3</commons.japicmp.version>
     <japicmp.skip>false</japicmp.skip>
@@ -232,15 +231,6 @@
             <exclude>TODO.JustIce</exclude>
             <exclude>src/examples/Mini/MiniParser$JJCalls</exclude>
           </excludes>
-        </configuration>
-      </plugin>
-      <!-- Allow Clirr to be run from command line -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>clirr-maven-plugin</artifactId>
-        <version>${commons.clirr.version}</version>
-        <configuration>
-          <minSeverity>${minSeverity}</minSeverity>
         </configuration>
       </plugin>
       <plugin>
@@ -491,23 +481,6 @@
   </dependencies>
 
   <profiles>
-    <!--
-        Profile to ignore certain Clirr errors
-        To show all the errors, use -P!quieten-clirr or -Dclirr.allDifferences
-    -->
-    <profile>
-      <id>quieten-clirr</id>
-      <activation>
-        <!-- Enable unless the following is defined -->
-        <property>
-          <name>!clirr.allDifferences</name>
-        </property>
-      </activation>
-      <properties>
-        <!-- It's not possible to undefine this once defined, so we define it in a profile that is normally active -->
-        <clirr.ignoredDifferencesFile>${basedir}/src/conf/clirr-ignored-diffs.xml</clirr.ignoredDifferencesFile>
-      </properties>
-    </profile>
     <!-- Profile to build and run PerformanceTest. Use 'mvn test -Pjdk-rt' -->
     <profile>
       <id>jdk-rt</id>
