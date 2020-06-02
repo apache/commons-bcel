@@ -26,4 +26,4 @@ jdk:
   - openjdk-ea
 
 after_success:
-  - mvn -Ddoclint:none clean apache-rat:check cobertura:cobertura coveralls:report
+  - mvn -Ddoclint:none clean cobertura:cobertura coveralls:report
