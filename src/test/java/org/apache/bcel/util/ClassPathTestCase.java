@@ -30,7 +30,7 @@ public class ClassPathTestCase extends AbstractTestCase {
         Assert.assertNotNull(ClassPath.SYSTEM_CLASS_PATH.getClassFile("java.lang.String"));
     }
 
-    public void testGetResource() throws IOException {
+    public void testGetResource() {
         Assert.assertNotNull(ClassPath.SYSTEM_CLASS_PATH.getResource("java/lang/String.class"));
     }
 
