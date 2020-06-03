@@ -64,7 +64,6 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <commons.findbugs.version>3.0.5</commons.findbugs.version>
     <commons.surefire.version>3.0.0-M4</commons.surefire.version>
     <checkstyle.plugin.version>3.1.0</checkstyle.plugin.version>
     <jna.version>5.5.0</jna.version>
@@ -398,18 +397,6 @@
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>${commons.findbugs.version}</version>
-        <configuration>
-          <threshold>Normal</threshold>
-          <effort>Default</effort>
-          <excludeFilterFile>${basedir}/src/conf/findbugs-exclude-filter.xml</excludeFilterFile>
-          <fork>true</fork>
-          <jvmArgs>-Duser.language=en</jvmArgs>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
         <artifactId>taglist-maven-plugin</artifactId>
         <version>2.4</version>
         <configuration>
@@ -454,6 +441,15 @@
           </parameter>
         </configuration>
       </plugin>    
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${commons.spotbugs.version}</version>
+        <configuration>
+          <threshold>Normal</threshold>
+          <effort>Default</effort>
+        </configuration>
+      </plugin>
     </plugins>
   </reporting>
 
