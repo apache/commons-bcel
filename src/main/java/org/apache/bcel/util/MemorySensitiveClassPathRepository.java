@@ -32,7 +32,7 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class MemorySensitiveClassPathRepository extends AbstractClassPathRepository {
 
-    private final Map<String, SoftReference<JavaClass>> _loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
+    private final Map<String, SoftReference<JavaClass>> loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
     public MemorySensitiveClassPathRepository(final ClassPath path) {
         super(path);
@@ -44,7 +44,7 @@ public class MemorySensitiveClassPathRepository extends AbstractClassPathReposit
     @Override
     public void storeClass(final JavaClass clazz) {
         // Not calling super.storeClass because this subclass maintains the mapping.
-        _loadedClasses.put(clazz.getClassName(), new SoftReference<>(clazz));
+        loadedClasses.put(clazz.getClassName(), new SoftReference<>(clazz));
         clazz.setRepository(this);
     }
 
@@ -53,7 +53,7 @@ public class MemorySensitiveClassPathRepository extends AbstractClassPathReposit
      */
     @Override
     public void removeClass(final JavaClass clazz) {
-        _loadedClasses.remove(clazz.getClassName());
+        loadedClasses.remove(clazz.getClassName());
     }
 
     /**
@@ -61,7 +61,7 @@ public class MemorySensitiveClassPathRepository extends AbstractClassPathReposit
      */
     @Override
     public JavaClass findClass(final String className) {
-        final SoftReference<JavaClass> ref = _loadedClasses.get(className);
+        final SoftReference<JavaClass> ref = loadedClasses.get(className);
         if (ref == null) {
             return null;
         }
@@ -73,6 +73,6 @@ public class MemorySensitiveClassPathRepository extends AbstractClassPathReposit
      */
     @Override
     public void clear() {
-        _loadedClasses.clear();
+        loadedClasses.clear();
     }
 }

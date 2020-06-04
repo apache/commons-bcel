@@ -26,7 +26,7 @@ import org.apache.bcel.Const;
 public final class ArrayType extends ReferenceType {
 
     private int dimensions;
-    private Type basic_type;
+    private Type basicType;
 
 
     /**
@@ -63,20 +63,20 @@ public final class ArrayType extends ReferenceType {
             case Const.T_ARRAY:
                 final ArrayType array = (ArrayType) type;
                 this.dimensions = dimensions + array.dimensions;
-                basic_type = array.basic_type;
+                basicType = array.basicType;
                 break;
             case Const.T_VOID:
                 throw new ClassGenException("Invalid type: void[]");
             default: // Basic type or reference
                 this.dimensions = dimensions;
-                basic_type = type;
+                basicType = type;
                 break;
         }
         final StringBuilder buf = new StringBuilder();
         for (int i = 0; i < this.dimensions; i++) {
             buf.append('[');
         }
-        buf.append(basic_type.getSignature());
+        buf.append(basicType.getSignature());
         super.setSignature(buf.toString());
     }
 
@@ -85,7 +85,7 @@ public final class ArrayType extends ReferenceType {
      * @return basic type of array, i.e., for int[][][] the basic type is int
      */
     public Type getBasicType() {
-        return basic_type;
+        return basicType;
     }
 
 
@@ -94,9 +94,9 @@ public final class ArrayType extends ReferenceType {
      */
     public Type getElementType() {
         if (dimensions == 1) {
-            return basic_type;
+            return basicType;
         }
-        return new ArrayType(basic_type, dimensions - 1);
+        return new ArrayType(basicType, dimensions - 1);
     }
 
 
@@ -111,7 +111,7 @@ public final class ArrayType extends ReferenceType {
      */
     @Override
     public int hashCode() {
-        return basic_type.hashCode() ^ dimensions;
+        return basicType.hashCode() ^ dimensions;
     }
 
 
@@ -121,7 +121,7 @@ public final class ArrayType extends ReferenceType {
     public boolean equals( final Object _type ) {
         if (_type instanceof ArrayType) {
             final ArrayType array = (ArrayType) _type;
-            return (array.dimensions == dimensions) && array.basic_type.equals(basic_type);
+            return (array.dimensions == dimensions) && array.basicType.equals(basicType);
         }
         return false;
     }

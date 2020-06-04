@@ -58,21 +58,21 @@ import org.apache.bcel.util.BCELComparator;
  */
 public class MethodGen extends FieldGenOrMethodGen {
 
-    private String class_name;
-    private Type[] arg_types;
-    private String[] arg_names;
-    private int max_locals;
-    private int max_stack;
+    private String className;
+    private Type[] argTypes;
+    private String[] argNames;
+    private int maxLocals;
+    private int maxStack;
     private InstructionList il;
-    private boolean strip_attributes;
-    private LocalVariableTypeTable local_variable_type_table = null;
-    private final List<LocalVariableGen> variable_vec = new ArrayList<>();
-    private final List<LineNumberGen> line_number_vec = new ArrayList<>();
-    private final List<CodeExceptionGen> exception_vec = new ArrayList<>();
-    private final List<String> throws_vec = new ArrayList<>();
-    private final List<Attribute> code_attrs_vec = new ArrayList<>();
+    private boolean stripAttributes;
+    private LocalVariableTypeTable localVariableTypeTable = null;
+    private final List<LocalVariableGen> variableList = new ArrayList<>();
+    private final List<LineNumberGen> lineNumberList = new ArrayList<>();
+    private final List<CodeExceptionGen> exceptionList = new ArrayList<>();
+    private final List<String> throwsList = new ArrayList<>();
+    private final List<Attribute> codeAttrsList = new ArrayList<>();
 
-    private List<AnnotationEntryGen>[] param_annotations; // Array of lists containing AnnotationGen objects
+    private List<AnnotationEntryGen>[] paramAnnotations; // Array of lists containing AnnotationGen objects
     private boolean hasParameterAnnotations = false;
     private boolean haveUnpackedParameterAnnotations = false;
 
@@ -108,11 +108,11 @@ public class MethodGen extends FieldGenOrMethodGen {
      *
      * @param access_flags access qualifiers
      * @param return_type  method type
-     * @param arg_types argument types
-     * @param arg_names argument names (if this is null, default names will be provided
+     * @param argTypes argument types
+     * @param argNames argument names (if this is null, default names will be provided
      * for them)
      * @param method_name name of method
-     * @param class_name class name containing this method (may be null, if you don't care)
+     * @param className class name containing this method (may be null, if you don't care)
      * @param il instruction list associated with this method, may be null only for
      * abstract or native methods
      * @param cp constant pool
@@ -171,7 +171,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Instantiate from existing method.
      *
      * @param method method
-     * @param class_name class name containing this method
+     * @param className class name containing this method
      * @param cp constant pool
      */
     public MethodGen(final Method method, final String class_name, final ConstantPoolGen cp) {
@@ -225,7 +225,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                     } else if (a instanceof LocalVariableTable) {
                         updateLocalVariableTable((LocalVariableTable) a);
                     } else if (a instanceof LocalVariableTypeTable) {
-                        this.local_variable_type_table = (LocalVariableTypeTable) a.copy(cp.getConstantPool());
+                        this.localVariableTypeTable = (LocalVariableTypeTable) a.copy(cp.getConstantPool());
                     } else {
                         addCodeAttribute(a);
                     }
@@ -274,15 +274,15 @@ public class MethodGen extends FieldGenOrMethodGen {
         final byte t = type.getType();
         if (t != Const.T_ADDRESS) {
             final int add = type.getSize();
-            if (slot + add > max_locals) {
-                max_locals = slot + add;
+            if (slot + add > maxLocals) {
+                maxLocals = slot + add;
             }
             final LocalVariableGen l = new LocalVariableGen(slot, name, type, start, end, orig_index);
             int i;
-            if ((i = variable_vec.indexOf(l)) >= 0) {
-                variable_vec.set(i, l);
+            if ((i = variableList.indexOf(l)) >= 0) {
+                variableList.set(i, l);
             } else {
-                variable_vec.add(l);
+                variableList.add(l);
             }
             return l;
         }
@@ -322,7 +322,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public LocalVariableGen addLocalVariable( final String name, final Type type, final InstructionHandle start,
             final InstructionHandle end ) {
-        return addLocalVariable(name, type, max_locals, start, end);
+        return addLocalVariable(name, type, maxLocals, start, end);
     }
 
 
@@ -332,7 +332,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public void removeLocalVariable( final LocalVariableGen l ) {
         l.dispose();
-        variable_vec.remove(l);
+        variableList.remove(l);
     }
 
 
@@ -340,10 +340,10 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove all local variables.
      */
     public void removeLocalVariables() {
-        for (final LocalVariableGen lv : variable_vec) {
+        for (final LocalVariableGen lv : variableList) {
             lv.dispose();
         }
-        variable_vec.clear();
+        variableList.clear();
     }
 
 
@@ -354,9 +354,9 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return array of declared local variables sorted by index
      */
     public LocalVariableGen[] getLocalVariables() {
-        final int size = variable_vec.size();
+        final int size = variableList.size();
         final LocalVariableGen[] lg = new LocalVariableGen[size];
-        variable_vec.toArray(lg);
+        variableList.toArray(lg);
         for (int i = 0; i < size; i++) {
             if ((lg[i].getStart() == null) && (il != null)) {
                 lg[i].setStart(il.getStart());
@@ -390,7 +390,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return `LocalVariableTypeTable' attribute of this method.
      */
     public LocalVariableTypeTable getLocalVariableTypeTable() {
-        return local_variable_type_table;
+        return localVariableTypeTable;
     }
 
     /**
@@ -402,7 +402,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public LineNumberGen addLineNumber( final InstructionHandle ih, final int src_line ) {
         final LineNumberGen l = new LineNumberGen(ih, src_line);
-        line_number_vec.add(l);
+        lineNumberList.add(l);
         return l;
     }
 
@@ -411,7 +411,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove a line number.
      */
     public void removeLineNumber( final LineNumberGen l ) {
-        line_number_vec.remove(l);
+        lineNumberList.remove(l);
     }
 
 
@@ -419,7 +419,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove all line numbers.
      */
     public void removeLineNumbers() {
-        line_number_vec.clear();
+        lineNumberList.clear();
     }
 
 
@@ -427,8 +427,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return array of line numbers
      */
     public LineNumberGen[] getLineNumbers() {
-        final LineNumberGen[] lg = new LineNumberGen[line_number_vec.size()];
-        line_number_vec.toArray(lg);
+        final LineNumberGen[] lg = new LineNumberGen[lineNumberList.size()];
+        lineNumberList.toArray(lg);
         return lg;
     }
 
@@ -437,10 +437,10 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return `LineNumberTable' attribute of all the local variables of this method.
      */
     public LineNumberTable getLineNumberTable( final ConstantPoolGen cp ) {
-        final int size = line_number_vec.size();
+        final int size = lineNumberList.size();
         final LineNumber[] ln = new LineNumber[size];
         for (int i = 0; i < size; i++) {
-            ln[i] = line_number_vec.get(i).getLineNumber();
+            ln[i] = lineNumberList.get(i).getLineNumber();
         }
         return new LineNumberTable(cp.addUtf8("LineNumberTable"), 2 + ln.length * 4, ln, cp
                 .getConstantPool());
@@ -464,7 +464,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             throw new ClassGenException("Exception handler target is null instruction");
         }
         final CodeExceptionGen c = new CodeExceptionGen(start_pc, end_pc, handler_pc, catch_type);
-        exception_vec.add(c);
+        exceptionList.add(c);
         return c;
     }
 
@@ -473,7 +473,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove an exception handler.
      */
     public void removeExceptionHandler( final CodeExceptionGen c ) {
-        exception_vec.remove(c);
+        exceptionList.remove(c);
     }
 
 
@@ -481,7 +481,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove all line numbers.
      */
     public void removeExceptionHandlers() {
-        exception_vec.clear();
+        exceptionList.clear();
     }
 
 
@@ -489,8 +489,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return array of declared exception handlers
      */
     public CodeExceptionGen[] getExceptionHandlers() {
-        final CodeExceptionGen[] cg = new CodeExceptionGen[exception_vec.size()];
-        exception_vec.toArray(cg);
+        final CodeExceptionGen[] cg = new CodeExceptionGen[exceptionList.size()];
+        exceptionList.toArray(cg);
         return cg;
     }
 
@@ -499,10 +499,10 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return code exceptions for `Code' attribute
      */
     private CodeException[] getCodeExceptions() {
-        final int size = exception_vec.size();
+        final int size = exceptionList.size();
         final CodeException[] c_exc = new CodeException[size];
         for (int i = 0; i < size; i++) {
-            final CodeExceptionGen c =  exception_vec.get(i);
+            final CodeExceptionGen c =  exceptionList.get(i);
             c_exc[i] = c.getCodeException(super.getConstantPool());
         }
         return c_exc;
@@ -512,10 +512,10 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Add an exception possibly thrown by this method.
      *
-     * @param class_name (fully qualified) name of exception
+     * @param className (fully qualified) name of exception
      */
     public void addException( final String class_name ) {
-        throws_vec.add(class_name);
+        throwsList.add(class_name);
     }
 
 
@@ -523,7 +523,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove an exception.
      */
     public void removeException( final String c ) {
-        throws_vec.remove(c);
+        throwsList.remove(c);
     }
 
 
@@ -531,7 +531,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove all exceptions.
      */
     public void removeExceptions() {
-        throws_vec.clear();
+        throwsList.clear();
     }
 
 
@@ -539,8 +539,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return array of thrown exceptions
      */
     public String[] getExceptions() {
-        final String[] e = new String[throws_vec.size()];
-        throws_vec.toArray(e);
+        final String[] e = new String[throwsList.size()];
+        throwsList.toArray(e);
         return e;
     }
 
@@ -549,10 +549,10 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return `Exceptions' attribute of all the exceptions thrown by this method.
      */
     private ExceptionTable getExceptionTable( final ConstantPoolGen cp ) {
-        final int size = throws_vec.size();
+        final int size = throwsList.size();
         final int[] ex = new int[size];
         for (int i = 0; i < size; i++) {
-            ex[i] = cp.addClass(throws_vec.get(i));
+            ex[i] = cp.addClass(throwsList.get(i));
         }
         return new ExceptionTable(cp.addUtf8("Exceptions"), 2 + 2 * size, ex, cp.getConstantPool());
     }
@@ -568,7 +568,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @param a attribute to be added
      */
     public void addCodeAttribute( final Attribute a ) {
-        code_attrs_vec.add(a);
+        codeAttrsList.add(a);
     }
 
 
@@ -576,14 +576,14 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove the LocalVariableTypeTable
      */
     public void removeLocalVariableTypeTable( ) {
-        local_variable_type_table = null;
+        localVariableTypeTable = null;
     }
 
     /**
      * Remove a code attribute.
      */
     public void removeCodeAttribute( final Attribute a ) {
-        code_attrs_vec.remove(a);
+        codeAttrsList.remove(a);
     }
 
 
@@ -591,8 +591,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove all code attributes.
      */
     public void removeCodeAttributes() {
-        local_variable_type_table = null;
-        code_attrs_vec.clear();
+        localVariableTypeTable = null;
+        codeAttrsList.clear();
     }
 
 
@@ -600,8 +600,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return all attributes of this method.
      */
     public Attribute[] getCodeAttributes() {
-        final Attribute[] attributes = new Attribute[code_attrs_vec.size()];
-        code_attrs_vec.toArray(attributes);
+        final Attribute[] attributes = new Attribute[codeAttrsList.size()];
+        codeAttrsList.toArray(attributes);
         return attributes;
     }
 
@@ -622,7 +622,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (!hasParameterAnnotations) {
             return;
         }
-        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, param_annotations);
+        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, paramAnnotations);
         if (attrs != null) {
             for (final Attribute attr : attrs) {
                 addAttribute(attr);
@@ -642,7 +642,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (!hasParameterAnnotations) {
             return new Attribute[0];
         }
-        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, param_annotations);
+        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, paramAnnotations);
         for (final Attribute attr : attrs) {
             addAttribute(attr);
         }
@@ -682,18 +682,18 @@ public class MethodGen extends FieldGenOrMethodGen {
         LocalVariableTable lvt = null;
         /* Create LocalVariableTable and LineNumberTable attributes (for debuggers, e.g.)
          */
-        if ((variable_vec.size() > 0) && !strip_attributes) {
+        if ((variableList.size() > 0) && !stripAttributes) {
             updateLocalVariableTable(getLocalVariableTable(_cp));
             addCodeAttribute(lvt = getLocalVariableTable(_cp));
         }
-        if (local_variable_type_table != null) {
+        if (localVariableTypeTable != null) {
             // LocalVariable length in LocalVariableTypeTable is not updated automatically. It's a difference with LocalVariableTable.
             if (lvt != null) {
                 adjustLocalVariableTypeTable(lvt);
             }
-            addCodeAttribute(local_variable_type_table);
+            addCodeAttribute(localVariableTypeTable);
         }
-        if ((line_number_vec.size() > 0) && !strip_attributes) {
+        if ((lineNumberList.size() > 0) && !stripAttributes) {
             addCodeAttribute(lnt = getLineNumberTable(_cp));
         }
         final Attribute[] code_attrs = getCodeAttributes();
@@ -717,13 +717,13 @@ public class MethodGen extends FieldGenOrMethodGen {
             code = new Code(_cp.addUtf8("Code"), 8 + byte_code.length + // prologue byte code
                     2 + exc_len + // exceptions
                     2 + attrs_len, // attributes
-                    max_stack, max_locals, byte_code, c_exc, code_attrs, _cp.getConstantPool());
+                    maxStack, maxLocals, byte_code, c_exc, code_attrs, _cp.getConstantPool());
             addAttribute(code);
         }
         final Attribute[] annotations = addRuntimeAnnotationsAsAttribute(_cp);
         final Attribute[] parameterAnnotations = addRuntimeParameterAnnotationsAsAttribute(_cp);
         ExceptionTable et = null;
-        if (throws_vec.size() > 0) {
+        if (throwsList.size() > 0) {
             addAttribute(et = getExceptionTable(_cp));
             // Add `Exceptions' if there are "throws" clauses
         }
@@ -733,8 +733,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (lvt != null) {
             removeCodeAttribute(lvt);
         }
-        if (local_variable_type_table != null) {
-            removeCodeAttribute(local_variable_type_table);
+        if (localVariableTypeTable != null) {
+            removeCodeAttribute(localVariableTypeTable);
         }
         if (lnt != null) {
             removeCodeAttribute(lnt);
@@ -770,7 +770,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     private void adjustLocalVariableTypeTable(final LocalVariableTable lvt) {
         final LocalVariable[] lv = lvt.getLocalVariableTable();
-        final LocalVariable[] lvg = local_variable_type_table.getLocalVariableTypeTable();
+        final LocalVariable[] lvg = localVariableTypeTable.getLocalVariableTypeTable();
 
         for (final LocalVariable element : lvg) {
             for (final LocalVariable l : lv) {
@@ -817,12 +817,12 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Set maximum number of local variables.
      */
     public void setMaxLocals( final int m ) {
-        max_locals = m;
+        maxLocals = m;
     }
 
 
     public int getMaxLocals() {
-        return max_locals;
+        return maxLocals;
     }
 
 
@@ -830,24 +830,24 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Set maximum stack size for this method.
      */
     public void setMaxStack( final int m ) { // TODO could be package-protected?
-        max_stack = m;
+        maxStack = m;
     }
 
 
     public int getMaxStack() {
-        return max_stack;
+        return maxStack;
     }
 
 
     /** @return class that contains this method
      */
     public String getClassName() {
-        return class_name;
+        return className;
     }
 
 
     public void setClassName( final String class_name ) { // TODO could be package-protected?
-        this.class_name = class_name;
+        this.className = class_name;
     }
 
 
@@ -862,42 +862,42 @@ public class MethodGen extends FieldGenOrMethodGen {
 
 
     public void setArgumentTypes( final Type[] arg_types ) {
-        this.arg_types = arg_types;
+        this.argTypes = arg_types;
     }
 
 
     public Type[] getArgumentTypes() {
-        return arg_types.clone();
+        return argTypes.clone();
     }
 
 
     public void setArgumentType( final int i, final Type type ) {
-        arg_types[i] = type;
+        argTypes[i] = type;
     }
 
 
     public Type getArgumentType( final int i ) {
-        return arg_types[i];
+        return argTypes[i];
     }
 
 
     public void setArgumentNames( final String[] arg_names ) {
-        this.arg_names = arg_names;
+        this.argNames = arg_names;
     }
 
 
     public String[] getArgumentNames() {
-        return arg_names.clone();
+        return argNames.clone();
     }
 
 
     public void setArgumentName( final int i, final String name ) {
-        arg_names[i] = name;
+        argNames[i] = name;
     }
 
 
     public String getArgumentName( final int i ) {
-        return arg_names[i];
+        return argNames[i];
     }
 
 
@@ -913,7 +913,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     @Override
     public String getSignature() {
-        return Type.getMethodSignature(super.getType(), arg_types);
+        return Type.getMethodSignature(super.getType(), argTypes);
     }
 
 
@@ -922,9 +922,9 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public void setMaxStack() { // TODO could be package-protected? (some tests would need repackaging)
         if (il != null) {
-            max_stack = getMaxStack(super.getConstantPool(), il, getExceptionHandlers());
+            maxStack = getMaxStack(super.getConstantPool(), il, getExceptionHandlers());
         } else {
-            max_stack = 0;
+            maxStack = 0;
         }
     }
 
@@ -935,8 +935,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     public void setMaxLocals() { // TODO could be package-protected? (some tests would need repackaging)
         if (il != null) {
             int max = isStatic() ? 0 : 1;
-            if (arg_types != null) {
-                for (final Type arg_type : arg_types) {
+            if (argTypes != null) {
+                for (final Type arg_type : argTypes) {
                     max += arg_type.getSize();
                 }
             }
@@ -951,9 +951,9 @@ public class MethodGen extends FieldGenOrMethodGen {
                     }
                 }
             }
-            max_locals = max;
+            maxLocals = max;
         } else {
-            max_locals = 0;
+            maxLocals = 0;
         }
     }
 
@@ -962,7 +962,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * LocalVariableTable, like javac -O
      */
     public void stripAttributes( final boolean flag ) {
-        strip_attributes = flag;
+        stripAttributes = flag;
     }
 
     static final class BranchTarget {
@@ -1133,7 +1133,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     @Override
     public final String toString() {
         final String access = Utility.accessToString(super.getAccessFlags());
-        String signature = Type.getMethodSignature(super.getType(), arg_types);
+        String signature = Type.getMethodSignature(super.getType(), argTypes);
         signature = Utility.methodSignatureToString(signature, super.getName(), access, true,
                 getLocalVariableTable(super.getConstantPool()));
         final StringBuilder buf = new StringBuilder(signature);
@@ -1143,8 +1143,8 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
         }
 
-        if (throws_vec.size() > 0) {
-            for (final String throwsDescriptor : throws_vec) {
+        if (throwsList.size() > 0) {
+            for (final String throwsDescriptor : throwsList) {
                 buf.append("\n\t\tthrows ").append(throwsDescriptor);
             }
         }
@@ -1164,7 +1164,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         return mg;
     }
 
-    //J5TODO: Should param_annotations be an array of arrays? Rather than an array of lists, this
+    //J5TODO: Should paramAnnotations be an array of arrays? Rather than an array of lists, this
     // is more likely to suggest to the caller it is readonly (which a List does not).
     /**
      * Return a list of AnnotationGen objects representing parameter annotations
@@ -1172,10 +1172,10 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public List<AnnotationEntryGen> getAnnotationsOnParameter(final int i) {
         ensureExistingParameterAnnotationsUnpacked();
-        if (!hasParameterAnnotations || i>arg_types.length) {
+        if (!hasParameterAnnotations || i>argTypes.length) {
             return null;
         }
-        return param_annotations[i];
+        return paramAnnotations[i];
     }
 
     /**
@@ -1198,14 +1198,14 @@ public class MethodGen extends FieldGenOrMethodGen {
         for (final Attribute attribute : attrs) {
             if (attribute instanceof ParameterAnnotations)
             {
-                // Initialize param_annotations
+                // Initialize paramAnnotations
                 if (!hasParameterAnnotations)
                 {
                     @SuppressWarnings("unchecked") // OK
-                    final List<AnnotationEntryGen>[] parmList = new List[arg_types.length];
-                    param_annotations = parmList;
-                    for (int j = 0; j < arg_types.length; j++) {
-                        param_annotations[j] = new ArrayList<>();
+                    final List<AnnotationEntryGen>[] parmList = new List[argTypes.length];
+                    paramAnnotations = parmList;
+                    for (int j = 0; j < argTypes.length; j++) {
+                        paramAnnotations[j] = new ArrayList<>();
                     }
                 }
                 hasParameterAnnotations = true;
@@ -1223,7 +1223,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                     // ... which needs transforming into an AnnotationGen[] ...
                     final List<AnnotationEntryGen> mutable = makeMutableVersion(immutableArray.getAnnotationEntries());
                     // ... then add these to any we already know about
-                    param_annotations[j].addAll(mutable);
+                    paramAnnotations[j].addAll(mutable);
                 }
             }
         }
@@ -1253,11 +1253,11 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (!hasParameterAnnotations)
         {
             @SuppressWarnings("unchecked") // OK
-            final List<AnnotationEntryGen>[] parmList = new List[arg_types.length];
-            param_annotations = parmList;
+            final List<AnnotationEntryGen>[] parmList = new List[argTypes.length];
+            paramAnnotations = parmList;
             hasParameterAnnotations = true;
         }
-        final List<AnnotationEntryGen> existingAnnotations = param_annotations[parameterIndex];
+        final List<AnnotationEntryGen> existingAnnotations = paramAnnotations[parameterIndex];
         if (existingAnnotations != null)
         {
             existingAnnotations.add(annotation);
@@ -1266,7 +1266,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         {
             final List<AnnotationEntryGen> l = new ArrayList<>();
             l.add(annotation);
-            param_annotations[parameterIndex] = l;
+            paramAnnotations[parameterIndex] = l;
         }
     }
 

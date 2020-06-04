@@ -31,7 +31,7 @@ import org.apache.bcel.classfile.LineNumber;
 public class LineNumberGen implements InstructionTargeter, Cloneable {
 
     private InstructionHandle ih;
-    private int src_line;
+    private int srcLine;
 
     /**
      * Create a line number.
@@ -73,7 +73,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
      * or that the `setPositions' methods has been called for the instruction list.
      */
     public LineNumber getLineNumber() {
-        return new LineNumber(ih.getPosition(), src_line);
+        return new LineNumber(ih.getPosition(), srcLine);
     }
 
 
@@ -100,11 +100,11 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
 
 
     public void setSourceLine( final int src_line ) { // TODO could be package-protected?
-        this.src_line = src_line;
+        this.srcLine = src_line;
     }
 
 
     public int getSourceLine() {
-        return src_line;
+        return srcLine;
     }
 }

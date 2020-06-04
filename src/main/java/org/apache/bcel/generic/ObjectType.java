@@ -27,7 +27,7 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class ObjectType extends ReferenceType {
 
-    private final String class_name; // Class name of type
+    private final String className; // Class name of type
 
     /**
      * @since 6.0
@@ -37,18 +37,18 @@ public class ObjectType extends ReferenceType {
     }
 
     /**
-     * @param class_name fully qualified class name, e.g. java.lang.String
+     * @param className fully qualified class name, e.g. java.lang.String
      */
     public ObjectType(final String class_name) {
         super(Const.T_REFERENCE, "L" + class_name.replace('.', '/') + ";");
-        this.class_name = class_name.replace('/', '.');
+        this.className = class_name.replace('/', '.');
     }
 
 
     /** @return name of referenced class
      */
     public String getClassName() {
-        return class_name;
+        return className;
     }
 
 
@@ -56,7 +56,7 @@ public class ObjectType extends ReferenceType {
      */
     @Override
     public int hashCode() {
-        return class_name.hashCode();
+        return className.hashCode();
     }
 
 
@@ -65,7 +65,7 @@ public class ObjectType extends ReferenceType {
     @Override
     public boolean equals( final Object type ) {
         return (type instanceof ObjectType)
-                ? ((ObjectType) type).class_name.equals(class_name)
+                ? ((ObjectType) type).className.equals(className)
                 : false;
     }
 
@@ -80,7 +80,7 @@ public class ObjectType extends ReferenceType {
     @Deprecated
     public boolean referencesClass() {
         try {
-            final JavaClass jc = Repository.lookupClass(class_name);
+            final JavaClass jc = Repository.lookupClass(className);
             return jc.isClass();
         } catch (final ClassNotFoundException e) {
             return false;
@@ -98,7 +98,7 @@ public class ObjectType extends ReferenceType {
     @Deprecated
     public boolean referencesInterface() {
         try {
-            final JavaClass jc = Repository.lookupClass(class_name);
+            final JavaClass jc = Repository.lookupClass(className);
             return !jc.isClass();
         } catch (final ClassNotFoundException e) {
             return false;
@@ -115,7 +115,7 @@ public class ObjectType extends ReferenceType {
      *   referenced by this type can't be found
      */
     public boolean referencesClassExact() throws ClassNotFoundException {
-        final JavaClass jc = Repository.lookupClass(class_name);
+        final JavaClass jc = Repository.lookupClass(className);
         return jc.isClass();
     }
 
@@ -129,7 +129,7 @@ public class ObjectType extends ReferenceType {
      *   referenced by this type can't be found
      */
     public boolean referencesInterfaceExact() throws ClassNotFoundException {
-        final JavaClass jc = Repository.lookupClass(class_name);
+        final JavaClass jc = Repository.lookupClass(className);
         return !jc.isClass();
     }
 
@@ -143,7 +143,7 @@ public class ObjectType extends ReferenceType {
         if (this.referencesInterfaceExact() || superclass.referencesInterfaceExact()) {
             return false;
         }
-        return Repository.instanceOf(this.class_name, superclass.class_name);
+        return Repository.instanceOf(this.className, superclass.className);
     }
 
 
@@ -153,11 +153,11 @@ public class ObjectType extends ReferenceType {
      *   can't be found
      */
     public boolean accessibleTo( final ObjectType accessor ) throws ClassNotFoundException {
-        final JavaClass jc = Repository.lookupClass(class_name);
+        final JavaClass jc = Repository.lookupClass(className);
         if (jc.isPublic()) {
             return true;
         }
-        final JavaClass acc = Repository.lookupClass(accessor.class_name);
+        final JavaClass acc = Repository.lookupClass(accessor.className);
         return acc.getPackageName().equals(jc.getPackageName());
     }
 }
