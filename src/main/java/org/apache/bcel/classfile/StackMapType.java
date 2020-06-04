@@ -35,7 +35,7 @@ public final class StackMapType implements Cloneable {
 
     private byte type;
     private int index = -1; // Index to CONSTANT_Class or offset
-    private ConstantPool constant_pool;
+    private ConstantPool constantPool;
 
 
     /**
@@ -48,7 +48,7 @@ public final class StackMapType implements Cloneable {
         if (hasIndex()) {
             this.index = file.readShort();
         }
-        this.constant_pool = constant_pool;
+        this.constantPool = constant_pool;
     }
 
 
@@ -62,7 +62,7 @@ public final class StackMapType implements Cloneable {
         }
         this.type = type;
         this.index = index;
-        this.constant_pool = constant_pool;
+        this.constantPool = constant_pool;
     }
 
 
@@ -118,7 +118,7 @@ public final class StackMapType implements Cloneable {
             if (index < 0) {
                 return ", class=<unknown>";
             }
-            return ", class=" + constant_pool.constantToString(index, Const.CONSTANT_Class);
+            return ", class=" + constantPool.constantToString(index, Const.CONSTANT_Class);
         } else if (type == Const.ITEM_NewObject) {
             return ", offset=" + index;
         } else {
@@ -153,14 +153,14 @@ public final class StackMapType implements Cloneable {
      * @return Constant pool used by this object.
      */
     public ConstantPool getConstantPool() {
-        return constant_pool;
+        return constantPool;
     }
 
 
     /**
-     * @param constant_pool Constant pool to be used for this object.
+     * @param constantPool Constant pool to be used for this object.
      */
     public void setConstantPool( final ConstantPool constant_pool ) {
-        this.constant_pool = constant_pool;
+        this.constantPool = constant_pool;
     }
 }

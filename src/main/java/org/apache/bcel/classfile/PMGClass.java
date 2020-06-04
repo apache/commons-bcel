@@ -31,8 +31,8 @@ import org.apache.bcel.Const;
  */
 public final class PMGClass extends Attribute {
 
-    private int pmg_class_index;
-    private int pmg_index;
+    private int pmgClassIndex;
+    private int pmgIndex;
 
 
     /**
@@ -62,15 +62,15 @@ public final class PMGClass extends Attribute {
     /**
      * @param name_index Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
-     * @param pmg_index index in constant pool for source file name
-     * @param pmg_class_index Index in constant pool to CONSTANT_Utf8
+     * @param pmgIndex index in constant pool for source file name
+     * @param pmgClassIndex Index in constant pool to CONSTANT_Utf8
      * @param constant_pool Array of constants
      */
     public PMGClass(final int name_index, final int length, final int pmg_index, final int pmg_class_index,
             final ConstantPool constant_pool) {
         super(Const.ATTR_PMG, name_index, length, constant_pool);
-        this.pmg_index = pmg_index;
-        this.pmg_class_index = pmg_class_index;
+        this.pmgIndex = pmg_index;
+        this.pmgClassIndex = pmg_class_index;
     }
 
 
@@ -96,8 +96,8 @@ public final class PMGClass extends Attribute {
     @Override
     public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
-        file.writeShort(pmg_index);
-        file.writeShort(pmg_class_index);
+        file.writeShort(pmgIndex);
+        file.writeShort(pmgClassIndex);
     }
 
 
@@ -105,15 +105,15 @@ public final class PMGClass extends Attribute {
      * @return Index in constant pool of source file name.
      */
     public int getPMGClassIndex() {
-        return pmg_class_index;
+        return pmgClassIndex;
     }
 
 
     /**
-     * @param pmg_class_index
+     * @param pmgClassIndex
      */
     public void setPMGClassIndex( final int pmg_class_index ) {
-        this.pmg_class_index = pmg_class_index;
+        this.pmgClassIndex = pmg_class_index;
     }
 
 
@@ -121,15 +121,15 @@ public final class PMGClass extends Attribute {
      * @return Index in constant pool of source file name.
      */
     public int getPMGIndex() {
-        return pmg_index;
+        return pmgIndex;
     }
 
 
     /**
-     * @param pmg_index
+     * @param pmgIndex
      */
     public void setPMGIndex( final int pmg_index ) {
-        this.pmg_index = pmg_index;
+        this.pmgIndex = pmg_index;
     }
 
 
@@ -137,7 +137,7 @@ public final class PMGClass extends Attribute {
      * @return PMG name.
      */
     public String getPMGName() {
-        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmg_index,
+        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmgIndex,
                 Const.CONSTANT_Utf8);
         return c.getBytes();
     }
@@ -147,7 +147,7 @@ public final class PMGClass extends Attribute {
      * @return PMG class name.
      */
     public String getPMGClassName() {
-        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmg_class_index,
+        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmgClassIndex,
                 Const.CONSTANT_Utf8);
         return c.getBytes();
     }

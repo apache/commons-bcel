@@ -32,7 +32,7 @@ import org.apache.bcel.Const;
  */
 public final class ConstantMethodType extends Constant {
 
-    private int descriptor_index;
+    private int descriptorIndex;
 
 
     /**
@@ -56,7 +56,7 @@ public final class ConstantMethodType extends Constant {
 
     public ConstantMethodType(final int descriptor_index) {
         super(Const.CONSTANT_MethodType);
-        this.descriptor_index = descriptor_index;
+        this.descriptorIndex = descriptor_index;
     }
 
 
@@ -82,17 +82,17 @@ public final class ConstantMethodType extends Constant {
     @Override
     public void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
-        file.writeShort(descriptor_index);
+        file.writeShort(descriptorIndex);
     }
 
 
     public int getDescriptorIndex() {
-        return descriptor_index;
+        return descriptorIndex;
     }
 
 
     public void setDescriptorIndex(final int descriptor_index) {
-        this.descriptor_index = descriptor_index;
+        this.descriptorIndex = descriptor_index;
     }
 
 
@@ -101,6 +101,6 @@ public final class ConstantMethodType extends Constant {
      */
     @Override
     public String toString() {
-        return super.toString() + "(descriptor_index = " + descriptor_index + ")";
+        return super.toString() + "(descriptorIndex = " + descriptorIndex + ")";
     }
 }

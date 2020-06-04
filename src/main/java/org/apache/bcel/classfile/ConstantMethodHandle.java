@@ -32,8 +32,8 @@ import org.apache.bcel.Const;
  */
 public final class ConstantMethodHandle extends Constant {
 
-    private int reference_kind;
-    private int reference_index;
+    private int referenceKind;
+    private int referenceIndex;
 
 
     /**
@@ -57,8 +57,8 @@ public final class ConstantMethodHandle extends Constant {
 
     public ConstantMethodHandle(final int reference_kind, final int reference_index) {
         super(Const.CONSTANT_MethodHandle);
-        this.reference_kind = reference_kind;
-        this.reference_index = reference_index;
+        this.referenceKind = reference_kind;
+        this.referenceIndex = reference_index;
     }
 
 
@@ -84,28 +84,28 @@ public final class ConstantMethodHandle extends Constant {
     @Override
     public void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(super.getTag());
-        file.writeByte(reference_kind);
-        file.writeShort(reference_index);
+        file.writeByte(referenceKind);
+        file.writeShort(referenceIndex);
     }
 
 
     public int getReferenceKind() {
-        return reference_kind;
+        return referenceKind;
     }
 
 
     public void setReferenceKind(final int reference_kind) {
-        this.reference_kind = reference_kind;
+        this.referenceKind = reference_kind;
     }
 
 
     public int getReferenceIndex() {
-        return reference_index;
+        return referenceIndex;
     }
 
 
     public void setReferenceIndex(final int reference_index) {
-        this.reference_index = reference_index;
+        this.referenceIndex = reference_index;
     }
 
 
@@ -114,7 +114,7 @@ public final class ConstantMethodHandle extends Constant {
      */
     @Override
     public String toString() {
-        return super.toString() + "(reference_kind = " + reference_kind +
-                ", reference_index = " + reference_index + ")";
+        return super.toString() + "(referenceKind = " + referenceKind +
+                ", referenceIndex = " + referenceIndex + ")";
     }
 }

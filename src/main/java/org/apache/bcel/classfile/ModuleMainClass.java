@@ -31,7 +31,7 @@ import org.apache.bcel.Const;
  */
 public final class ModuleMainClass extends Attribute {
 
-    private int main_class_index;
+    private int mainClassIndex;
 
 
     /**
@@ -46,13 +46,13 @@ public final class ModuleMainClass extends Attribute {
     /**
      * @param name_index Index in constant pool
      * @param length Content length in bytes
-     * @param main_class_index Host class index
+     * @param mainClassIndex Host class index
      * @param constant_pool Array of constants
      */
     public ModuleMainClass(final int name_index, final int length, final int main_class_index,
             final ConstantPool constant_pool) {
         super(Const.ATTR_NEST_MEMBERS, name_index, length, constant_pool);
-        this.main_class_index = main_class_index;
+        this.mainClassIndex = main_class_index;
     }
 
 
@@ -66,7 +66,7 @@ public final class ModuleMainClass extends Attribute {
      */
     ModuleMainClass(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, 0, constant_pool);
-        main_class_index = input.readUnsignedShort();
+        mainClassIndex = input.readUnsignedShort();
     }
 
 
@@ -92,7 +92,7 @@ public final class ModuleMainClass extends Attribute {
     @Override
     public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
-        file.writeShort(main_class_index);
+        file.writeShort(mainClassIndex);
     }
 
 
@@ -100,15 +100,15 @@ public final class ModuleMainClass extends Attribute {
      * @return index into constant pool of host class name.
      */
     public int getHostClassIndex() {
-        return main_class_index;
+        return mainClassIndex;
     }
 
 
     /**
-     * @param main_class_index the host class index
+     * @param mainClassIndex the host class index
      */
     public void setHostClassIndex( final int main_class_index ) {
-        this.main_class_index = main_class_index;
+        this.mainClassIndex = main_class_index;
     }
 
 
@@ -119,7 +119,7 @@ public final class ModuleMainClass extends Attribute {
     public String toString() {
         final StringBuilder buf = new StringBuilder();
         buf.append("ModuleMainClass: ");
-        final String class_name = super.getConstantPool().getConstantString(main_class_index, Const.CONSTANT_Class);
+        final String class_name = super.getConstantPool().getConstantString(mainClassIndex, Const.CONSTANT_Class);
         buf.append(Utility.compactClassName(class_name, false));
         return buf.toString();
     }
