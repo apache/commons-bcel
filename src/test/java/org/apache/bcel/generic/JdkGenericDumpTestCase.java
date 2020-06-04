@@ -206,11 +206,11 @@ public class JdkGenericDumpTestCase {
 
     private void compare(final String name, final Method m) {
         // System.out.println("Method: " + m);
-        final Code c = m.getCode();
-        if (c == null) {
+        final Code code = m.getCode();
+        if (code == null) {
             return; // e.g. abstract method
         }
-        final byte[] src = c.getCode();
+        final byte[] src = code.getCode();
         final InstructionList il = new InstructionList(src);
         final byte[] out = il.getByteCode();
         if (src.length == out.length) {
@@ -241,15 +241,15 @@ public class JdkGenericDumpTestCase {
         try (JarFile jar = new JarFile(file)) {
             final Enumeration<JarEntry> en = jar.entries();
             while (en.hasMoreElements()) {
-                final JarEntry e = en.nextElement();
-                final String name = e.getName();
+                final JarEntry jarEntry = en.nextElement();
+                final String name = jarEntry.getName();
                 if (name.endsWith(".class")) {
                     // System.out.println("- " + name);
-                    try (InputStream in = jar.getInputStream(e)) {
-                        final ClassParser parser = new ClassParser(in, name);
-                        final JavaClass jc = parser.parse();
-                        for (final Method m : jc.getMethods()) {
-                            compare(name, m);
+                    try (InputStream inputStream = jar.getInputStream(jarEntry)) {
+                        final ClassParser classParser = new ClassParser(inputStream, name);
+                        final JavaClass javaClass = classParser.parse();
+                        for (final Method method : javaClass.getMethods()) {
+                            compare(name, method);
                         }
                     }
                 }
