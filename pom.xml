@@ -71,6 +71,7 @@
     <japicmp.skip>false</japicmp.skip>
     <clirr.skip>true</clirr.skip>
     <commons.jacoco.version>0.8.5</commons.jacoco.version>
+    <commons.javadoc.version>3.2.0</commons.javadoc.version>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
