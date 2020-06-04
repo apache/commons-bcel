@@ -64,12 +64,12 @@ public final class InnerClass implements Cloneable, Node {
      * @param innerNameIndex  Name index in constant pool of inner class
      * @param innerAccessFlags Access flags of inner class
      */
-    public InnerClass(final int inner_class_index, final int outer_class_index, final int inner_name_index,
-            final int inner_access_flags) {
-        this.innerClassIndex = inner_class_index;
-        this.outerClassIndex = outer_class_index;
-        this.innerNameIndex = inner_name_index;
-        this.innerAccessFlags = inner_access_flags;
+    public InnerClass(final int innerClassIndex, final int outerClassIndex, final int innerNameIndex,
+            final int innerAccessFlags) {
+        this.innerClassIndex = innerClassIndex;
+        this.outerClassIndex = outerClassIndex;
+        this.innerNameIndex = innerNameIndex;
+        this.innerAccessFlags = innerAccessFlags;
     }
 
 
@@ -135,32 +135,32 @@ public final class InnerClass implements Cloneable, Node {
     /**
      * @param innerAccessFlags access flags for this inner class
      */
-    public void setInnerAccessFlags( final int inner_access_flags ) {
-        this.innerAccessFlags = inner_access_flags;
+    public void setInnerAccessFlags( final int innerAccessFlags ) {
+        this.innerAccessFlags = innerAccessFlags;
     }
 
 
     /**
      * @param innerClassIndex index into the constant pool for this class
      */
-    public void setInnerClassIndex( final int inner_class_index ) {
-        this.innerClassIndex = inner_class_index;
+    public void setInnerClassIndex( final int innerClassIndex ) {
+        this.innerClassIndex = innerClassIndex;
     }
 
 
     /**
      * @param innerNameIndex index into the constant pool for this class's name
      */
-    public void setInnerNameIndex( final int inner_name_index ) { // TODO unused
-        this.innerNameIndex = inner_name_index;
+    public void setInnerNameIndex( final int innerNameIndex ) { // TODO unused
+        this.innerNameIndex = innerNameIndex;
     }
 
 
     /**
      * @param outerClassIndex index into the constant pool for the owning class
      */
-    public void setOuterClassIndex( final int outer_class_index ) { // TODO unused
-        this.outerClassIndex = outer_class_index;
+    public void setOuterClassIndex( final int outerClassIndex ) { // TODO unused
+        this.outerClassIndex = outerClassIndex;
     }
 
 
@@ -177,21 +177,21 @@ public final class InnerClass implements Cloneable, Node {
     /**
      * @return Resolved string representation
      */
-    public String toString( final ConstantPool constant_pool ) {
+    public String toString( final ConstantPool constantPool ) {
         String outer_class_name;
         String inner_name;
-        String inner_class_name = constant_pool.getConstantString(innerClassIndex,
+        String inner_class_name = constantPool.getConstantString(innerClassIndex,
                 Const.CONSTANT_Class);
         inner_class_name = Utility.compactClassName(inner_class_name, false);
         if (outerClassIndex != 0) {
-            outer_class_name = constant_pool.getConstantString(outerClassIndex,
+            outer_class_name = constantPool.getConstantString(outerClassIndex,
                     Const.CONSTANT_Class);
             outer_class_name = " of class " + Utility.compactClassName(outer_class_name, false);
         } else {
             outer_class_name = "";
         }
         if (innerNameIndex != 0) {
-            inner_name = ((ConstantUtf8) constant_pool.getConstant(innerNameIndex,
+            inner_name = ((ConstantUtf8) constantPool.getConstant(innerNameIndex,
                     Const.CONSTANT_Utf8)).getBytes();
         } else {
             inner_name = "(anonymous)";

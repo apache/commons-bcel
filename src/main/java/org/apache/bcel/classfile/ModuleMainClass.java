@@ -47,25 +47,25 @@ public final class ModuleMainClass extends Attribute {
      * @param name_index Index in constant pool
      * @param length Content length in bytes
      * @param mainClassIndex Host class index
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public ModuleMainClass(final int name_index, final int length, final int main_class_index,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_NEST_MEMBERS, name_index, length, constant_pool);
-        this.mainClassIndex = main_class_index;
+    public ModuleMainClass(final int name_index, final int length, final int mainClassIndex,
+            final ConstantPool constantPool) {
+        super(Const.ATTR_NEST_MEMBERS, name_index, length, constantPool);
+        this.mainClassIndex = mainClassIndex;
     }
 
 
     /**
      * Construct object from input stream.
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @throws IOException
      */
-    ModuleMainClass(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, 0, constant_pool);
+    ModuleMainClass(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, 0, constantPool);
         mainClassIndex = input.readUnsignedShort();
     }
 
@@ -107,8 +107,8 @@ public final class ModuleMainClass extends Attribute {
     /**
      * @param mainClassIndex the host class index
      */
-    public void setHostClassIndex( final int main_class_index ) {
-        this.mainClassIndex = main_class_index;
+    public void setHostClassIndex( final int mainClassIndex ) {
+        this.mainClassIndex = mainClassIndex;
     }
 
 

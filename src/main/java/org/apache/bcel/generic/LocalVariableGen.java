@@ -77,9 +77,9 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * @param origIndex index of local variable prior to any changes to index
      */
     public LocalVariableGen(final int index, final String name, final Type type, final InstructionHandle start,
-            final InstructionHandle end, final int orig_index) {
+            final InstructionHandle end, final int origIndex) {
         this(index, name, type, start, end);
-        this.origIndex = orig_index;
+        this.origIndex = origIndex;
     }
 
 

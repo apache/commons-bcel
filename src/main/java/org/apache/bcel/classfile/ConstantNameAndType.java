@@ -59,10 +59,10 @@ public final class ConstantNameAndType extends Constant {
      * @param nameIndex Name of field/method
      * @param signatureIndex and its signature
      */
-    public ConstantNameAndType(final int name_index, final int signature_index) {
+    public ConstantNameAndType(final int nameIndex, final int signatureIndex) {
         super(Const.CONSTANT_NameAndType);
-        this.nameIndex = name_index;
-        this.signatureIndex = signature_index;
+        this.nameIndex = nameIndex;
+        this.signatureIndex = signatureIndex;
     }
 
 
@@ -126,16 +126,16 @@ public final class ConstantNameAndType extends Constant {
     /**
      * @param nameIndex the name index of this constant
      */
-    public void setNameIndex( final int name_index ) {
-        this.nameIndex = name_index;
+    public void setNameIndex( final int nameIndex ) {
+        this.nameIndex = nameIndex;
     }
 
 
     /**
      * @param signatureIndex the signature index in the constant pool of this type
      */
-    public void setSignatureIndex( final int signature_index ) {
-        this.signatureIndex = signature_index;
+    public void setSignatureIndex( final int signatureIndex ) {
+        this.signatureIndex = signatureIndex;
     }
 
 

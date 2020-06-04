@@ -83,24 +83,24 @@ public class ClassGen extends AccessFlags implements Cloneable {
      * @param className fully qualified class name
      * @param superClassName fully qualified superclass name
      * @param fileName source file name
-     * @param access_flags access qualifiers
+     * @param accessFlags access qualifiers
      * @param interfaces implemented interfaces
      * @param cp constant pool to use
      */
-    public ClassGen(final String class_name, final String super_class_name, final String file_name, final int access_flags,
+    public ClassGen(final String className, final String superClassName, final String fileName, final int accessFlags,
             final String[] interfaces, final ConstantPoolGen cp) {
-        super(access_flags);
-        this.className = class_name;
-        this.superClassName = super_class_name;
-        this.fileName = file_name;
+        super(accessFlags);
+        this.className = className;
+        this.superClassName = superClassName;
+        this.fileName = fileName;
         this.cp = cp;
         // Put everything needed by default into the constant pool and the vectors
-        if (file_name != null) {
-            addAttribute(new SourceFile(cp.addUtf8("SourceFile"), 2, cp.addUtf8(file_name), cp
+        if (fileName != null) {
+            addAttribute(new SourceFile(cp.addUtf8("SourceFile"), 2, cp.addUtf8(fileName), cp
                     .getConstantPool()));
         }
-        classNameIndex = cp.addClass(class_name);
-        superclass_name_index = cp.addClass(super_class_name);
+        classNameIndex = cp.addClass(className);
+        superclass_name_index = cp.addClass(superClassName);
         if (interfaces != null) {
             for (final String interface1 : interfaces) {
                 addInterface(interface1);
@@ -114,12 +114,12 @@ public class ClassGen extends AccessFlags implements Cloneable {
      * @param className fully qualified class name
      * @param superClassName fully qualified superclass name
      * @param fileName source file name
-     * @param access_flags access qualifiers
+     * @param accessFlags access qualifiers
      * @param interfaces implemented interfaces
      */
-    public ClassGen(final String class_name, final String super_class_name, final String file_name, final int access_flags,
+    public ClassGen(final String className, final String superClassName, final String fileName, final int accessFlags,
             final String[] interfaces) {
-        this(class_name, super_class_name, file_name, access_flags, interfaces,
+        this(className, superClassName, fileName, accessFlags, interfaces,
                 new ConstantPoolGen());
     }
 

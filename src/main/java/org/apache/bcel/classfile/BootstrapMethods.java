@@ -49,9 +49,9 @@ public class BootstrapMethods extends Attribute {
      * @param bootstrapMethods array of bootstrap methods
      * @param constant_pool Array of constants
      */
-    public BootstrapMethods(final int name_index, final int length, final BootstrapMethod[] bootstrap_methods, final ConstantPool constant_pool) {
+    public BootstrapMethods(final int name_index, final int length, final BootstrapMethod[] bootstrapMethods, final ConstantPool constant_pool) {
         super(Const.ATTR_BOOTSTRAP_METHODS, name_index, length, constant_pool);
-        this.bootstrapMethods = bootstrap_methods;
+        this.bootstrapMethods = bootstrapMethods;
     }
 
     /**
@@ -83,8 +83,8 @@ public class BootstrapMethods extends Attribute {
     /**
      * @param bootstrapMethods the array of bootstrap methods
      */
-    public final void setBootstrapMethods(final BootstrapMethod[] bootstrap_methods) {
-        this.bootstrapMethods = bootstrap_methods;
+    public final void setBootstrapMethods(final BootstrapMethod[] bootstrapMethods) {
+        this.bootstrapMethods = bootstrapMethods;
     }
 
     /**

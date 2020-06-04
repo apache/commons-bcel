@@ -49,12 +49,12 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
      * @param handlerPc Where handling is done
      * @param catchType which exception is handled, null for ANY
      */
-    public CodeExceptionGen(final InstructionHandle start_pc, final InstructionHandle end_pc,
-            final InstructionHandle handler_pc, final ObjectType catch_type) {
-        setStartPC(start_pc);
-        setEndPC(end_pc);
-        setHandlerPC(handler_pc);
-        this.catchType = catch_type;
+    public CodeExceptionGen(final InstructionHandle startPc, final InstructionHandle endPc,
+            final InstructionHandle handlerPc, final ObjectType catchType) {
+        setStartPC(startPc);
+        setEndPC(endPc);
+        setHandlerPC(handlerPc);
+        this.catchType = catchType;
     }
 
 
@@ -137,8 +137,8 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
 
 
     /** Sets the type of the Exception to catch. Set 'null' for ANY. */
-    public void setCatchType( final ObjectType catch_type ) {
-        this.catchType = catch_type;
+    public void setCatchType( final ObjectType catchType ) {
+        this.catchType = catchType;
     }
 
 

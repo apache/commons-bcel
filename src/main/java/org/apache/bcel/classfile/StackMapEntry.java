@@ -429,7 +429,7 @@ public final class StackMapEntry implements Node, Cloneable
     /**
      * @param constantPool Constant pool to be used for this object.
      */
-    public void setConstantPool( final ConstantPool constant_pool ) {
-        this.constantPool = constant_pool;
+    public void setConstantPool( final ConstantPool constantPool ) {
+        this.constantPool = constantPool;
     }
 }
