@@ -113,14 +113,14 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * <B>Repository.lookupClass(myOwner.getClassname()).getMethods()[method_nr];</B>.
      * You should not add own information. Leave that to JustIce.
      */
-    public LocalVariablesInfo getLocalVariablesInfo(final int method_nr) {
+    public LocalVariablesInfo getLocalVariablesInfo(final int methodNr) {
         if (this.verify() != VerificationResult.VR_OK) {
             return null; // It's cached, don't worry.
         }
-        if (method_nr < 0 || method_nr >= localVariablesInfos.length) {
+        if (methodNr < 0 || methodNr >= localVariablesInfos.length) {
             throw new AssertionViolatedException("Method number out of range.");
         }
-        return localVariablesInfos[method_nr];
+        return localVariablesInfos[methodNr];
     }
 
     /**
@@ -1536,9 +1536,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         private final ConstantPool cp;
 
         /** Constructs an InnerClassDetector working on the JavaClass _jc. */
-        public InnerClassDetector(final JavaClass _jc) {
-            jc = _jc;
-            cp = jc.getConstantPool();
+        public InnerClassDetector(final JavaClass javaClass) {
+            this.jc = javaClass;
+            this.cp = jc.getConstantPool();
             (new DescendingVisitor(jc, this)).visit();
         }
 

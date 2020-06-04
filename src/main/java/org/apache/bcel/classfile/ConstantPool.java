@@ -41,8 +41,8 @@ public class ConstantPool implements Cloneable, Node {
     /**
      * @param constantPool Array of constants
      */
-    public ConstantPool(final Constant[] constant_pool) {
-        this.constantPool = constant_pool;
+    public ConstantPool(final Constant[] constantPool) {
+        this.constantPool = constantPool;
     }
 
     /**
@@ -337,8 +337,8 @@ public class ConstantPool implements Cloneable, Node {
     /**
      * @param constantPool
      */
-    public void setConstantPool( final Constant[] constant_pool ) {
-        this.constantPool = constant_pool;
+    public void setConstantPool( final Constant[] constantPool ) {
+        this.constantPool = constantPool;
     }
 
 

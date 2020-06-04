@@ -45,15 +45,15 @@ public class LocalVariableTable extends Attribute {
 
 
     /**
-     * @param name_index Index in constant pool to `LocalVariableTable'
+     * @param nameIndex Index in constant pool to `LocalVariableTable'
      * @param length Content length in bytes
      * @param localVariableTable Table of local variables
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public LocalVariableTable(final int name_index, final int length, final LocalVariable[] local_variable_table,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_LOCAL_VARIABLE_TABLE, name_index, length, constant_pool);
-        this.localVariableTable = local_variable_table;
+    public LocalVariableTable(final int nameIndex, final int length, final LocalVariable[] localVariableTable,
+            final ConstantPool constantPool) {
+        super(Const.ATTR_LOCAL_VARIABLE_TABLE, nameIndex, length, constantPool);
+        this.localVariableTable = localVariableTable;
     }
 
 

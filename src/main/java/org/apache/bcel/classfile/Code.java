@@ -103,17 +103,17 @@ public final class Code extends Attribute {
      * @param maxStack Maximum size of stack
      * @param maxLocals Number of local variables
      * @param code Actual byte code
-     * @param exceptionTable Table of handled exceptions
+     * @param exceptionTable of handled exceptions
      * @param attributes Attributes of code: LineNumber or LocalVariable
      * @param constant_pool Array of constants
      */
-    public Code(final int name_index, final int length, final int max_stack, final int max_locals, final byte[] code,
-            final CodeException[] exception_table, final Attribute[] attributes, final ConstantPool constant_pool) {
+    public Code(final int name_index, final int length, final int maxStack, final int maxLocals, final byte[] code,
+            final CodeException[] exceptionTable, final Attribute[] attributes, final ConstantPool constant_pool) {
         super(Const.ATTR_CODE, name_index, length, constant_pool);
-        this.maxStack = max_stack;
-        this.maxLocals = max_locals;
+        this.maxStack = maxStack;
+        this.maxLocals = maxLocals;
         this.code = code != null ? code : new byte[0];
-        this.exceptionTable = exception_table != null ? exception_table : new CodeException[0];
+        this.exceptionTable = exceptionTable != null ? exceptionTable : new CodeException[0];
         this.attributes = attributes != null ? attributes : new Attribute[0];
         super.setLength(calculateLength()); // Adjust length
     }
@@ -273,8 +273,8 @@ public final class Code extends Attribute {
     /**
      * @param exceptionTable exception table
      */
-    public void setExceptionTable( final CodeException[] exception_table ) {
-        this.exceptionTable = exception_table != null ? exception_table : new CodeException[0];
+    public void setExceptionTable( final CodeException[] exceptionTable ) {
+        this.exceptionTable = exceptionTable != null ? exceptionTable : new CodeException[0];
         super.setLength(calculateLength()); // Adjust length
     }
 
@@ -282,16 +282,16 @@ public final class Code extends Attribute {
     /**
      * @param maxLocals maximum number of local variables
      */
-    public void setMaxLocals( final int max_locals ) {
-        this.maxLocals = max_locals;
+    public void setMaxLocals( final int maxLocals ) {
+        this.maxLocals = maxLocals;
     }
 
 
     /**
      * @param maxStack maximum stack size
      */
-    public void setMaxStack( final int max_stack ) {
-        this.maxStack = max_stack;
+    public void setMaxStack( final int maxStack ) {
+        this.maxStack = maxStack;
     }
 
 

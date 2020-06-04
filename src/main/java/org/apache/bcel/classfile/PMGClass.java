@@ -39,9 +39,9 @@ public final class PMGClass extends Attribute {
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use copy() for a physical copy.
      */
-    public PMGClass(final PMGClass c) {
-        this(c.getNameIndex(), c.getLength(), c.getPMGIndex(), c.getPMGClassIndex(), c
-                .getConstantPool());
+    public PMGClass(final PMGClass pgmClass) {
+        this(pgmClass.getNameIndex(), pgmClass.getLength(), pgmClass.getPMGIndex(), pgmClass.getPMGClassIndex(),
+            pgmClass.getConstantPool());
     }
 
 
@@ -64,13 +64,13 @@ public final class PMGClass extends Attribute {
      * @param length Content length in bytes
      * @param pmgIndex index in constant pool for source file name
      * @param pmgClassIndex Index in constant pool to CONSTANT_Utf8
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public PMGClass(final int name_index, final int length, final int pmg_index, final int pmg_class_index,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_PMG, name_index, length, constant_pool);
-        this.pmgIndex = pmg_index;
-        this.pmgClassIndex = pmg_class_index;
+    public PMGClass(final int name_index, final int length, final int pmgIndex, final int pmgClassIndex,
+            final ConstantPool constantPool) {
+        super(Const.ATTR_PMG, name_index, length, constantPool);
+        this.pmgIndex = pmgIndex;
+        this.pmgClassIndex = pmgClassIndex;
     }
 
 
@@ -112,8 +112,8 @@ public final class PMGClass extends Attribute {
     /**
      * @param pmgClassIndex
      */
-    public void setPMGClassIndex( final int pmg_class_index ) {
-        this.pmgClassIndex = pmg_class_index;
+    public void setPMGClassIndex( final int pmgClassIndex ) {
+        this.pmgClassIndex = pmgClassIndex;
     }
 
 
@@ -128,8 +128,8 @@ public final class PMGClass extends Attribute {
     /**
      * @param pmgIndex
      */
-    public void setPMGIndex( final int pmg_index ) {
-        this.pmgIndex = pmg_index;
+    public void setPMGIndex( final int pmgIndex ) {
+        this.pmgIndex = pmgIndex;
     }
 
 

@@ -116,8 +116,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param attributes Class attributes
      * @param source Read from file or generated in memory?
      */
-    public JavaClass(final int class_name_index, final int superclass_name_index, final String file_name, final int major,
-            final int minor, final int access_flags, final ConstantPool constant_pool, int[] interfaces,
+    public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major,
+            final int minor, final int access_flags, final ConstantPool constantPool, int[] interfaces,
             Field[] fields, Method[] methods, Attribute[] attributes, final byte source) {
         super(access_flags);
         if (interfaces == null) {
@@ -132,12 +132,12 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         if (methods == null) {
             methods = new Method[0];
         }
-        this.classNameIndex = class_name_index;
-        this.superclassNameIndex = superclass_name_index;
-        this.fileName = file_name;
+        this.classNameIndex = classNameIndex;
+        this.superclassNameIndex = superclassNameIndex;
+        this.fileName = fileName;
         this.major = major;
         this.minor = minor;
-        this.constantPool = constant_pool;
+        this.constantPool = constantPool;
         this.interfaces = interfaces;
         this.fields = fields;
         this.methods = methods;
@@ -154,7 +154,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
          * `ConstantClass' but we check that anyway via the
          * `ConstPool.getConstant' method.
          */
-        className = constant_pool.getConstantString(class_name_index, Const.CONSTANT_Class);
+        className = constantPool.getConstantString(classNameIndex, Const.CONSTANT_Class);
         className = Utility.compactClassName(className, false);
         final int index = className.lastIndexOf('.');
         if (index < 0) {
@@ -162,9 +162,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         } else {
             packageName = className.substring(0, index);
         }
-        if (superclass_name_index > 0) {
+        if (superclassNameIndex > 0) {
             // May be zero -> class is java.lang.Object
-            superclassName = constant_pool.getConstantString(superclass_name_index,
+            superclassName = constantPool.getConstantString(superclassNameIndex,
                     Const.CONSTANT_Class);
             superclassName = Utility.compactClassName(superclassName, false);
         } else {
@@ -172,7 +172,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         }
         interfaceNames = new String[interfaces.length];
         for (int i = 0; i < interfaces.length; i++) {
-            final String str = constant_pool.getConstantString(interfaces[i], Const.CONSTANT_Class);
+            final String str = constantPool.getConstantString(interfaces[i], Const.CONSTANT_Class);
             interfaceNames[i] = Utility.compactClassName(str, false);
         }
     }
@@ -193,11 +193,11 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param methods Class methods
      * @param attributes Class attributes
      */
-    public JavaClass(final int class_name_index, final int superclass_name_index, final String file_name, final int major,
-            final int minor, final int access_flags, final ConstantPool constant_pool, final int[] interfaces,
+    public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major,
+            final int minor, final int access_flags, final ConstantPool constantPool, final int[] interfaces,
             final Field[] fields, final Method[] methods, final Attribute[] attributes) {
-        this(class_name_index, superclass_name_index, file_name, major, minor, access_flags,
-                constant_pool, interfaces, fields, methods, attributes, HEAP);
+        this(classNameIndex, superclassNameIndex, fileName, major, minor, access_flags,
+                constantPool, interfaces, fields, methods, attributes, HEAP);
     }
 
 
@@ -488,24 +488,24 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * @param className .
      */
-    public void setClassName( final String class_name ) {
-        this.className = class_name;
+    public void setClassName( final String className ) {
+        this.className = className;
     }
 
 
     /**
      * @param classNameIndex .
      */
-    public void setClassNameIndex( final int class_name_index ) {
-        this.classNameIndex = class_name_index;
+    public void setClassNameIndex( final int classNameIndex ) {
+        this.classNameIndex = classNameIndex;
     }
 
 
     /**
      * @param constantPool .
      */
-    public void setConstantPool( final ConstantPool constant_pool ) {
-        this.constantPool = constant_pool;
+    public void setConstantPool( final ConstantPool constantPool ) {
+        this.constantPool = constantPool;
     }
 
 
@@ -520,16 +520,16 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Set File name of class, aka SourceFile attribute value
      */
-    public void setFileName( final String file_name ) {
-        this.fileName = file_name;
+    public void setFileName( final String fileName ) {
+        this.fileName = fileName;
     }
 
 
     /**
      * @param interfaceNames .
      */
-    public void setInterfaceNames( final String[] interface_names ) {
-        this.interfaceNames = interface_names;
+    public void setInterfaceNames( final String[] interfaceNames ) {
+        this.interfaceNames = interfaceNames;
     }
 
 
@@ -568,24 +568,24 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Set absolute path to file this class was read from.
      */
-    public void setSourceFileName( final String source_file_name ) {
-        this.sourceFileName = source_file_name;
+    public void setSourceFileName( final String sourceFileName ) {
+        this.sourceFileName = sourceFileName;
     }
 
 
     /**
      * @param superclassName .
      */
-    public void setSuperclassName( final String superclass_name ) {
-        this.superclassName = superclass_name;
+    public void setSuperclassName( final String superclassName ) {
+        this.superclassName = superclassName;
     }
 
 
     /**
      * @param superclassNameIndex .
      */
-    public void setSuperclassNameIndex( final int superclass_name_index ) {
-        this.superclassNameIndex = superclass_name_index;
+    public void setSuperclassNameIndex( final int superclassNameIndex ) {
+        this.superclassNameIndex = superclassNameIndex;
     }
 
 

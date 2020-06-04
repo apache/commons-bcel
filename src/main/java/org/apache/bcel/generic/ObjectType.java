@@ -32,16 +32,16 @@ public class ObjectType extends ReferenceType {
     /**
      * @since 6.0
      */
-    public static ObjectType getInstance(final String class_name) {
-        return new ObjectType(class_name);
+    public static ObjectType getInstance(final String className) {
+        return new ObjectType(className);
     }
 
     /**
      * @param className fully qualified class name, e.g. java.lang.String
      */
-    public ObjectType(final String class_name) {
-        super(Const.T_REFERENCE, "L" + class_name.replace('.', '/') + ";");
-        this.className = class_name.replace('/', '.');
+    public ObjectType(final String className) {
+        super(Const.T_REFERENCE, "L" + className.replace('.', '/') + ";");
+        this.className = className.replace('/', '.');
     }
 
 

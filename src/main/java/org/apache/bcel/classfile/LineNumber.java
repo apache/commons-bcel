@@ -61,9 +61,9 @@ public final class LineNumber implements Cloneable, Node {
      * @param startPc Program Counter (PC) corresponds to
      * @param lineNumber line number in source file
      */
-    public LineNumber(final int start_pc, final int line_number) {
-        this.startPc = (short) start_pc;
-        this.lineNumber = (short)line_number;
+    public LineNumber(final int startPc, final int lineNumber) {
+        this.startPc = (short) startPc;
+        this.lineNumber = (short)lineNumber;
     }
 
 
@@ -111,16 +111,16 @@ public final class LineNumber implements Cloneable, Node {
     /**
      * @param lineNumber the source line number
      */
-    public void setLineNumber( final int line_number ) {
-        this.lineNumber = (short) line_number;
+    public void setLineNumber( final int lineNumber ) {
+        this.lineNumber = (short) lineNumber;
     }
 
 
     /**
      * @param startPc the pc for this line number
      */
-    public void setStartPC( final int start_pc ) {
-        this.startPc = (short) start_pc;
+    public void setStartPC( final int startPc ) {
+        this.startPc = (short) startPc;
     }
 
 

@@ -51,16 +51,16 @@ public abstract class ParameterAnnotations extends Attribute {
 
 
     /**
-     * @param parameter_annotation_type the subclass type of the parameter annotation
-     * @param name_index Index pointing to the name <em>Code</em>
+     * @param parameterAnnotationType the subclass type of the parameter annotation
+     * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
      * @param parameterAnnotationTable the actual parameter annotations
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public ParameterAnnotations(final byte parameter_annotation_type, final int name_index, final int length,
-            final ParameterAnnotationEntry[] parameter_annotation_table, final ConstantPool constant_pool) {
-        super(parameter_annotation_type, name_index, length, constant_pool);
-        this.parameterAnnotationTable = parameter_annotation_table;
+    public ParameterAnnotations(final byte parameterAnnotationType, final int nameIndex, final int length,
+            final ParameterAnnotationEntry[] parameterAnnotationTable, final ConstantPool constantPool) {
+        super(parameterAnnotationType, nameIndex, length, constantPool);
+        this.parameterAnnotationTable = parameterAnnotationTable;
     }
 
 
@@ -80,8 +80,8 @@ public abstract class ParameterAnnotations extends Attribute {
     /**
      * @param parameterAnnotationTable the entries to set in this parameter annotation
      */
-    public final void setParameterAnnotationTable(final ParameterAnnotationEntry[] parameter_annotation_table ) {
-        this.parameterAnnotationTable = parameter_annotation_table;
+    public final void setParameterAnnotationTable(final ParameterAnnotationEntry[] parameterAnnotationTable ) {
+        this.parameterAnnotationTable = parameterAnnotationTable;
     }
 
 

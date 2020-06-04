@@ -44,15 +44,15 @@ public final class ModulePackages extends Attribute {
 
 
     /**
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param packageIndexTable Table of indices in constant pool
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public ModulePackages(final int name_index, final int length, final int[] package_index_table,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_MODULE_PACKAGES, name_index, length, constant_pool);
-        this.packageIndexTable = package_index_table != null ? package_index_table : new int[0];
+    public ModulePackages(final int nameIndex, final int length, final int[] packageIndexTable,
+            final ConstantPool constantPool) {
+        super(Const.ATTR_MODULE_PACKAGES, nameIndex, length, constantPool);
+        this.packageIndexTable = packageIndexTable != null ? packageIndexTable : new int[0];
     }
 
 
@@ -136,8 +136,8 @@ public final class ModulePackages extends Attribute {
      * @param packageIndexTable the list of package indexes
      * Also redefines number_of_packages according to table length.
      */
-    public void setPackageIndexTable( final int[] package_index_table ) {
-        this.packageIndexTable = package_index_table != null ? package_index_table : new int[0];
+    public void setPackageIndexTable( final int[] packageIndexTable ) {
+        this.packageIndexTable = packageIndexTable != null ? packageIndexTable : new int[0];
     }
 
 

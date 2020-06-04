@@ -56,9 +56,9 @@ public final class ConstantString extends Constant implements ConstantObject {
     /**
      * @param stringIndex Index of Constant_Utf8 in constant pool
      */
-    public ConstantString(final int string_index) {
+    public ConstantString(final int stringIndex) {
         super(Const.CONSTANT_String);
-        this.stringIndex = string_index;
+        this.stringIndex = stringIndex;
     }
 
 
@@ -99,8 +99,8 @@ public final class ConstantString extends Constant implements ConstantObject {
     /**
      * @param stringIndex the index into the constant of the string value
      */
-    public void setStringIndex( final int string_index ) {
-        this.stringIndex = string_index;
+    public void setStringIndex( final int stringIndex ) {
+        this.stringIndex = stringIndex;
     }
 
 

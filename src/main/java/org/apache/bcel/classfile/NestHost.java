@@ -45,15 +45,15 @@ public final class NestHost extends Attribute {
 
 
     /**
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param hostClassIndex Host class index
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public NestHost(final int name_index, final int length, final int host_class_index,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_NEST_MEMBERS, name_index, length, constant_pool);
-        this.hostClassIndex = host_class_index;
+    public NestHost(final int nameIndex, final int length, final int hostClassIndex,
+            final ConstantPool constantPool) {
+        super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
+        this.hostClassIndex = hostClassIndex;
     }
 
 
@@ -108,8 +108,8 @@ public final class NestHost extends Attribute {
     /**
      * @param hostClassIndex the host class index
      */
-    public void setHostClassIndex( final int host_class_index ) {
-        this.hostClassIndex = host_class_index;
+    public void setHostClassIndex( final int hostClassIndex ) {
+        this.hostClassIndex = hostClassIndex;
     }
 
 

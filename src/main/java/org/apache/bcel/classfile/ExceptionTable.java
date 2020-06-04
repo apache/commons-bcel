@@ -53,23 +53,23 @@ public final class ExceptionTable extends Attribute {
      * @param exceptionIndexTable Table of indices in constant pool
      * @param constant_pool Array of constants
      */
-    public ExceptionTable(final int name_index, final int length, final int[] exception_index_table,
+    public ExceptionTable(final int name_index, final int length, final int[] exceptionIndexTable,
             final ConstantPool constant_pool) {
         super(Const.ATTR_EXCEPTIONS, name_index, length, constant_pool);
-        this.exceptionIndexTable = exception_index_table != null ? exception_index_table : new int[0];
+        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : new int[0];
     }
 
 
     /**
      * Construct object from input stream.
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @throws IOException
      */
-    ExceptionTable(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, (int[]) null, constant_pool);
+    ExceptionTable(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (int[]) null, constantPool);
         final int number_of_exceptions = input.readUnsignedShort();
         exceptionIndexTable = new int[number_of_exceptions];
         for (int i = 0; i < number_of_exceptions; i++) {
@@ -140,8 +140,8 @@ public final class ExceptionTable extends Attribute {
      * @param exceptionIndexTable the list of exception indexes
      * Also redefines number_of_exceptions according to table length.
      */
-    public void setExceptionIndexTable( final int[] exception_index_table ) {
-        this.exceptionIndexTable = exception_index_table != null ? exception_index_table : new int[0];
+    public void setExceptionIndexTable( final int[] exceptionIndexTable ) {
+        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : new int[0];
     }
 
 

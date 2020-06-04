@@ -57,9 +57,9 @@ public final class ConstantClass extends Constant implements ConstantObject {
      * @param nameIndex Name index in constant pool.  Should refer to a
      * ConstantUtf8.
      */
-    public ConstantClass(final int name_index) {
+    public ConstantClass(final int nameIndex) {
         super(Const.CONSTANT_Class);
-        this.nameIndex = name_index;
+        this.nameIndex = nameIndex;
     }
 
 
@@ -100,8 +100,8 @@ public final class ConstantClass extends Constant implements ConstantObject {
     /**
      * @param nameIndex the name index in the constant pool of this Constant Class
      */
-    public void setNameIndex( final int name_index ) {
-        this.nameIndex = name_index;
+    public void setNameIndex( final int nameIndex ) {
+        this.nameIndex = nameIndex;
     }
 
 

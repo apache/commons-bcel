@@ -64,10 +64,10 @@ public final class ConstantValue extends Attribute {
      * @param constantValueIndex Index in constant pool
      * @param constant_pool Array of constants
      */
-    public ConstantValue(final int name_index, final int length, final int constantvalue_index,
+    public ConstantValue(final int name_index, final int length, final int constantValueIndex,
             final ConstantPool constant_pool) {
         super(Const.ATTR_CONSTANT_VALUE, name_index, length, constant_pool);
-        this.constantValueIndex = constantvalue_index;
+        this.constantValueIndex = constantValueIndex;
     }
 
 
@@ -108,8 +108,8 @@ public final class ConstantValue extends Attribute {
     /**
      * @param constantValueIndex the index info the constant pool of this constant value
      */
-    public void setConstantValueIndex( final int constantvalue_index ) {
-        this.constantValueIndex = constantvalue_index;
+    public void setConstantValueIndex( final int constantValueIndex ) {
+        this.constantValueIndex = constantValueIndex;
     }
 
 

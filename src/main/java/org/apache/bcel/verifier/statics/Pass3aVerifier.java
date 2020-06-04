@@ -134,9 +134,9 @@ public final class Pass3aVerifier extends PassVerifier{
     private Code code;
 
     /** Should only be instantiated by a Verifier. */
-    public Pass3aVerifier(final Verifier owner, final int method_no) {
+    public Pass3aVerifier(final Verifier owner, final int methodNo) {
         myOwner = owner;
-        this.methodNo = method_no;
+        this.methodNo = methodNo;
     }
 
     /**

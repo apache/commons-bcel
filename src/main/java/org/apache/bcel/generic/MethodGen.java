@@ -117,14 +117,14 @@ public class MethodGen extends FieldGenOrMethodGen {
      * abstract or native methods
      * @param cp constant pool
      */
-    public MethodGen(final int access_flags, final Type return_type, final Type[] arg_types, String[] arg_names,
-            final String method_name, final String class_name, final InstructionList il, final ConstantPoolGen cp) {
+    public MethodGen(final int access_flags, final Type return_type, final Type[] argTypes, String[] argNames,
+            final String method_name, final String className, final InstructionList il, final ConstantPoolGen cp) {
         super(access_flags);
         setType(return_type);
-        setArgumentTypes(arg_types);
-        setArgumentNames(arg_names);
+        setArgumentTypes(argTypes);
+        setArgumentNames(argNames);
         setName(method_name);
-        setClassName(class_name);
+        setClassName(className);
         setInstructionList(il);
         setConstantPool(cp);
         final boolean abstract_ = isAbstract() || isNative();
@@ -135,32 +135,32 @@ public class MethodGen extends FieldGenOrMethodGen {
             // end == null => live to end of method
             /* Add local variables, namely the implicit `this' and the arguments
              */
-            if (!isStatic() && (class_name != null)) { // Instance method -> `this' is local var 0
-                addLocalVariable("this",  ObjectType.getInstance(class_name), start, end);
+            if (!isStatic() && (className != null)) { // Instance method -> `this' is local var 0
+                addLocalVariable("this",  ObjectType.getInstance(className), start, end);
             }
         }
-        if (arg_types != null) {
-            final int size = arg_types.length;
-            for (final Type arg_type : arg_types) {
+        if (argTypes != null) {
+            final int size = argTypes.length;
+            for (final Type arg_type : argTypes) {
                 if (Type.VOID == arg_type) {
                     throw new ClassGenException("'void' is an illegal argument type for a method");
                 }
             }
-            if (arg_names != null) { // Names for variables provided?
-                if (size != arg_names.length) {
+            if (argNames != null) { // Names for variables provided?
+                if (size != argNames.length) {
                     throw new ClassGenException("Mismatch in argument array lengths: " + size
-                            + " vs. " + arg_names.length);
+                            + " vs. " + argNames.length);
                 }
             } else { // Give them dummy names
-                arg_names = new String[size];
+                argNames = new String[size];
                 for (int i = 0; i < size; i++) {
-                    arg_names[i] = "arg" + i;
+                    argNames[i] = "arg" + i;
                 }
-                setArgumentNames(arg_names);
+                setArgumentNames(argNames);
             }
             if (!abstract_) {
                 for (int i = 0; i < size; i++) {
-                    addLocalVariable(arg_names[i], arg_types[i], start, end);
+                    addLocalVariable(argNames[i], argTypes[i], start, end);
                 }
             }
         }
@@ -174,10 +174,10 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @param className class name containing this method
      * @param cp constant pool
      */
-    public MethodGen(final Method method, final String class_name, final ConstantPoolGen cp) {
+    public MethodGen(final Method method, final String className, final ConstantPoolGen cp) {
         this(method.getAccessFlags(), Type.getReturnType(method.getSignature()),
             Type.getArgumentTypes(method.getSignature()), null /* may be overridden anyway */
-            , method.getName(), class_name,
+            , method.getName(), className,
             ((method.getAccessFlags() & (Const.ACC_ABSTRACT | Const.ACC_NATIVE)) == 0)
                 ? new InstructionList(getByteCodes(method))
                 : null,
@@ -400,8 +400,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return new line number object
      * @see LineNumber
      */
-    public LineNumberGen addLineNumber( final InstructionHandle ih, final int src_line ) {
-        final LineNumberGen l = new LineNumberGen(ih, src_line);
+    public LineNumberGen addLineNumber( final InstructionHandle ih, final int srcLine ) {
+        final LineNumberGen l = new LineNumberGen(ih, srcLine);
         lineNumberList.add(l);
         return l;
     }
@@ -514,8 +514,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      *
      * @param className (fully qualified) name of exception
      */
-    public void addException( final String class_name ) {
-        throwsList.add(class_name);
+    public void addException( final String className ) {
+        throwsList.add(className);
     }
 
 
@@ -1154,9 +1154,9 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /** @return deep copy of this method
      */
-    public MethodGen copy( final String class_name, final ConstantPoolGen cp ) {
+    public MethodGen copy( final String className, final ConstantPoolGen cp ) {
         final Method m = ((MethodGen) clone()).getMethod();
-        final MethodGen mg = new MethodGen(m, class_name, super.getConstantPool());
+        final MethodGen mg = new MethodGen(m, className, super.getConstantPool());
         if (super.getConstantPool() != cp) {
             mg.setConstantPool(cp);
             mg.getInstructionList().replaceConstantPool(super.getConstantPool(), cp);

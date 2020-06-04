@@ -83,14 +83,14 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @param index Variable is `index'th local variable on the method's frame
      * @param constantPool Array of constants
      */
-    public LocalVariable(final int start_pc, final int length, final int name_index, final int signature_index, final int index,
-            final ConstantPool constant_pool) {
-        this.startPc = start_pc;
+    public LocalVariable(final int startPc, final int length, final int nameIndex, final int signatureIndex, final int index,
+            final ConstantPool constantPool) {
+        this.startPc = startPc;
         this.length = length;
-        this.nameIndex = name_index;
-        this.signatureIndex = signature_index;
+        this.nameIndex = nameIndex;
+        this.signatureIndex = signatureIndex;
         this.index = index;
-        this.constantPool = constant_pool;
+        this.constantPool = constantPool;
         this.origIndex = index;
     }
 
@@ -104,15 +104,15 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @param constantPool Array of constants
      * @param origIndex Variable is `index'th local variable on the method's frame prior to any changes
      */
-    public LocalVariable(final int start_pc, final int length, final int name_index, final int signature_index, final int index,
-            final ConstantPool constant_pool, final int orig_index) {
-        this.startPc = start_pc;
+    public LocalVariable(final int startPc, final int length, final int nameIndex, final int signatureIndex, final int index,
+            final ConstantPool constantPool, final int origIndex) {
+        this.startPc = startPc;
         this.length = length;
-        this.nameIndex = name_index;
-        this.signatureIndex = signature_index;
+        this.nameIndex = nameIndex;
+        this.signatureIndex = signatureIndex;
         this.index = index;
-        this.constantPool = constant_pool;
-        this.origIndex = orig_index;
+        this.constantPool = constantPool;
+        this.origIndex = origIndex;
     }
 
 
@@ -235,8 +235,8 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @param constantPool Constant pool to be used for this object.
      */
-    public void setConstantPool( final ConstantPool constant_pool ) {
-        this.constantPool = constant_pool;
+    public void setConstantPool( final ConstantPool constantPool ) {
+        this.constantPool = constantPool;
     }
 
 
@@ -251,16 +251,16 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @param nameIndex the index into the constant pool for the name of this variable
      */
-    public void setNameIndex( final int name_index ) { // TODO unused
-        this.nameIndex = name_index;
+    public void setNameIndex( final int nameIndex ) { // TODO unused
+        this.nameIndex = nameIndex;
     }
 
 
     /**
      * @param signatureIndex the index into the constant pool for the signature of this variable
      */
-    public void setSignatureIndex( final int signature_index ) { // TODO unused
-        this.signatureIndex = signature_index;
+    public void setSignatureIndex( final int signatureIndex ) { // TODO unused
+        this.signatureIndex = signatureIndex;
     }
 
 
@@ -275,8 +275,8 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * @param startPc Specify range where the local variable is valid.
      */
-    public void setStartPC( final int start_pc ) { // TODO unused
-        this.startPc = start_pc;
+    public void setStartPC( final int startPc ) { // TODO unused
+        this.startPc = startPc;
     }
 
 

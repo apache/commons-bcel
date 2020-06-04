@@ -51,10 +51,10 @@ public final class InnerClasses extends Attribute {
      * @param innerClasses array of inner classes attributes
      * @param constant_pool Array of constants
      */
-    public InnerClasses(final int name_index, final int length, final InnerClass[] inner_classes,
+    public InnerClasses(final int name_index, final int length, final InnerClass[] innerClasses,
             final ConstantPool constant_pool) {
         super(Const.ATTR_INNER_CLASSES, name_index, length, constant_pool);
-        this.innerClasses = inner_classes != null ? inner_classes : new InnerClass[0];
+        this.innerClasses = innerClasses != null ? innerClasses : new InnerClass[0];
     }
 
 
@@ -118,8 +118,8 @@ public final class InnerClasses extends Attribute {
     /**
      * @param innerClasses the array of inner classes
      */
-    public void setInnerClasses( final InnerClass[] inner_classes ) {
-        this.innerClasses = inner_classes != null ? inner_classes : new InnerClass[0];
+    public void setInnerClasses( final InnerClass[] innerClasses ) {
+        this.innerClasses = innerClasses != null ? innerClasses : new InnerClass[0];
     }
 
 

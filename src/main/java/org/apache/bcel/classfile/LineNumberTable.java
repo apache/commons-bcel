@@ -118,8 +118,8 @@ public final class LineNumberTable extends Attribute {
     /**
      * @param lineNumberTable the line number entries for this table
      */
-    public void setLineNumberTable( final LineNumber[] line_number_table ) {
-        this.lineNumberTable = line_number_table;
+    public void setLineNumberTable( final LineNumber[] lineNumberTable ) {
+        this.lineNumberTable = lineNumberTable;
     }
 
 

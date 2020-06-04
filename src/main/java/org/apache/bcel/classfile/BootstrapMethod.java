@@ -72,9 +72,9 @@ public class BootstrapMethod implements Cloneable {
      * @param bootstrapMethodRef int index into constant_pool of CONSTANT_MethodHandle
      * @param bootstrapArguments int[] indices into constant_pool of CONSTANT_[type]_info
      */
-    public BootstrapMethod(final int bootstrap_method_ref, final int[] bootstrap_arguments) {
-        this.bootstrapMethodRef = bootstrap_method_ref;
-        this.bootstrapArguments = bootstrap_arguments;
+    public BootstrapMethod(final int bootstrapMethodRef, final int[] bootstrapArguments) {
+        this.bootstrapMethodRef = bootstrapMethodRef;
+        this.bootstrapArguments = bootstrapArguments;
     }
 
     /**
@@ -87,8 +87,8 @@ public class BootstrapMethod implements Cloneable {
     /**
      * @param bootstrapMethodRef int index into constant_pool of CONSTANT_MethodHandle
      */
-    public void setBootstrapMethodRef(final int bootstrap_method_ref) {
-        this.bootstrapMethodRef = bootstrap_method_ref;
+    public void setBootstrapMethodRef(final int bootstrapMethodRef) {
+        this.bootstrapMethodRef = bootstrapMethodRef;
     }
 
     /**
@@ -108,8 +108,8 @@ public class BootstrapMethod implements Cloneable {
     /**
      * @param bootstrapArguments int[] indices into constant_pool of CONSTANT_[type]_info
      */
-    public void setBootstrapArguments(final int[] bootstrap_arguments) {
-        this.bootstrapArguments = bootstrap_arguments;
+    public void setBootstrapArguments(final int[] bootstrapArguments) {
+        this.bootstrapArguments = bootstrapArguments;
     }
 
     /**
@@ -124,10 +124,10 @@ public class BootstrapMethod implements Cloneable {
     /**
      * @return Resolved string representation
      */
-    public final String toString( final ConstantPool constant_pool ) {
+    public final String toString( final ConstantPool constantPool ) {
         final StringBuilder buf = new StringBuilder();
         String bootstrap_method_name;
-        bootstrap_method_name = constant_pool.constantToString(bootstrapMethodRef,
+        bootstrap_method_name = constantPool.constantToString(bootstrapMethodRef,
                 Const.CONSTANT_MethodHandle);
         buf.append(Utility.compactClassName(bootstrap_method_name, false));
         final int num_bootstrap_arguments = bootstrapArguments.length;
@@ -135,7 +135,7 @@ public class BootstrapMethod implements Cloneable {
             buf.append("\nMethod Arguments:");
             for (int i = 0; i < num_bootstrap_arguments; i++) {
                 buf.append("\n  ").append(i).append(": ");
-                buf.append(constant_pool.constantToString(constant_pool.getConstant(bootstrapArguments[i])));
+                buf.append(constantPool.constantToString(constantPool.getConstant(bootstrapArguments[i])));
             }
         }
         return buf.toString();

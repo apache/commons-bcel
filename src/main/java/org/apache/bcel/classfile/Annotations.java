@@ -49,16 +49,16 @@ public abstract class Annotations extends Attribute {
     }
 
     /**
-     * @param annotation_type the subclass type of the annotation
-     * @param name_index Index pointing to the name <em>Code</em>
+     * @param annotationType the subclass type of the annotation
+     * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
      * @param annotationTable the actual annotations
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public Annotations(final byte annotation_type, final int name_index, final int length, final AnnotationEntry[] annotation_table,
-            final ConstantPool constant_pool, final boolean isRuntimeVisible) {
-        super(annotation_type, name_index, length, constant_pool);
-        this.annotationTable = annotation_table;
+    public Annotations(final byte annotationType, final int nameIndex, final int length, final AnnotationEntry[] annotationTable,
+            final ConstantPool constantPool, final boolean isRuntimeVisible) {
+        super(annotationType, nameIndex, length, constantPool);
+        this.annotationTable = annotationTable;
         this.isRuntimeVisible = isRuntimeVisible;
     }
 
@@ -76,8 +76,8 @@ public abstract class Annotations extends Attribute {
     /**
      * @param annotationTable the entries to set in this annotation
      */
-    public final void setAnnotationTable(final AnnotationEntry[] annotation_table) {
-        this.annotationTable = annotation_table;
+    public final void setAnnotationTable(final AnnotationEntry[] annotationTable) {
+        this.annotationTable = annotationTable;
     }
 
     /**

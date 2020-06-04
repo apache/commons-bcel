@@ -73,11 +73,11 @@ public final class CodeException implements Cloneable, Node, Constants {
      * exception, otherwise it points to the exception class which is
      * to be caught.
      */
-    public CodeException(final int start_pc, final int end_pc, final int handler_pc, final int catch_type) {
-        this.startPc = start_pc;
-        this.endPc = end_pc;
-        this.handlerPc = handler_pc;
-        this.catchType = catch_type;
+    public CodeException(final int startPc, final int endPc, final int handlerPc, final int catchType) {
+        this.startPc = startPc;
+        this.endPc = endPc;
+        this.handlerPc = handlerPc;
+        this.catchType = catchType;
     }
 
 
@@ -144,32 +144,32 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * @param catchType the type of exception that is caught
      */
-    public void setCatchType( final int catch_type ) {
-        this.catchType = catch_type;
+    public void setCatchType( final int catchType ) {
+        this.catchType = catchType;
     }
 
 
     /**
      * @param endPc end of handled block
      */
-    public void setEndPC( final int end_pc ) {
-        this.endPc = end_pc;
+    public void setEndPC( final int endPc ) {
+        this.endPc = endPc;
     }
 
 
     /**
      * @param handlerPc where the actual code is
      */
-    public void setHandlerPC( final int handler_pc ) { // TODO unused
-        this.handlerPc = handler_pc;
+    public void setHandlerPC( final int handlerPc ) { // TODO unused
+        this.handlerPc = handlerPc;
     }
 
 
     /**
      * @param startPc start of handled block
      */
-    public void setStartPC( final int start_pc ) { // TODO unused
-        this.startPc = start_pc;
+    public void setStartPC( final int startPc ) { // TODO unused
+        this.startPc = startPc;
     }
 
 
