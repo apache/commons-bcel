@@ -113,32 +113,32 @@ limitations under the License.
       </p>
     </subsection>
     </section>
-    <section name="Apache Commons BCEL 6.4.1 (Java 8)">
+    <section name="Apache Commons BCEL 6.5.0 (Java 8)">
       <subsection name="Binaries">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/bcel/binaries/bcel-6.4.1-bin.tar.gz">bcel-6.4.1-bin.tar.gz</a></td>
-              <td><a href="https://www.apache.org/dist/commons/bcel/binaries/bcel-6.4.1-bin.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://www.apache.org/dist/commons/bcel/binaries/bcel-6.4.1-bin.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/bcel/binaries/bcel-6.5.0-bin.tar.gz">bcel-6.5.0-bin.tar.gz</a></td>
+              <td><a href="https://www.apache.org/dist/commons/bcel/binaries/bcel-6.5.0-bin.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://www.apache.org/dist/commons/bcel/binaries/bcel-6.5.0-bin.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/bcel/binaries/bcel-6.4.1-bin.zip">bcel-6.4.1-bin.zip</a></td>
-              <td><a href="https://www.apache.org/dist/commons/bcel/binaries/bcel-6.4.1-bin.zip.sha512">sha512</a></td>
-              <td><a href="https://www.apache.org/dist/commons/bcel/binaries/bcel-6.4.1-bin.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/bcel/binaries/bcel-6.5.0-bin.zip">bcel-6.5.0-bin.zip</a></td>
+              <td><a href="https://www.apache.org/dist/commons/bcel/binaries/bcel-6.5.0-bin.zip.sha512">sha512</a></td>
+              <td><a href="https://www.apache.org/dist/commons/bcel/binaries/bcel-6.5.0-bin.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
       <subsection name="Source">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/bcel/source/bcel-6.4.1-src.tar.gz">bcel-6.4.1-src.tar.gz</a></td>
-              <td><a href="https://www.apache.org/dist/commons/bcel/source/bcel-6.4.1-src.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://www.apache.org/dist/commons/bcel/source/bcel-6.4.1-src.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/bcel/source/bcel-6.5.0-src.tar.gz">bcel-6.5.0-src.tar.gz</a></td>
+              <td><a href="https://www.apache.org/dist/commons/bcel/source/bcel-6.5.0-src.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://www.apache.org/dist/commons/bcel/source/bcel-6.5.0-src.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/bcel/source/bcel-6.4.1-src.zip">bcel-6.4.1-src.zip</a></td>
-              <td><a href="https://www.apache.org/dist/commons/bcel/source/bcel-6.4.1-src.zip.sha512">sha512</a></td>
-              <td><a href="https://www.apache.org/dist/commons/bcel/source/bcel-6.4.1-src.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/bcel/source/bcel-6.5.0-src.zip">bcel-6.5.0-src.zip</a></td>
+              <td><a href="https://www.apache.org/dist/commons/bcel/source/bcel-6.5.0-src.zip.sha512">sha512</a></td>
+              <td><a href="https://www.apache.org/dist/commons/bcel/source/bcel-6.5.0-src.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
