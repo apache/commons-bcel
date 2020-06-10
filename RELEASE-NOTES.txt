@@ -53,7 +53,7 @@ https://commons.apache.org/proper/commons-bcel
 Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
 
 Have fun!
--Apache Commons BCEL team
+-Apache Commons Team
 
 Feedback
 --------
@@ -110,7 +110,7 @@ https://commons.apache.org/proper/commons-bcel
 Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
 
 Have fun!
--Apache Commons BCEL team
+-Apache Commons Team
 
 Feedback
 --------
@@ -184,7 +184,7 @@ https://commons.apache.org/proper/commons-bcel
 Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
 
 Have fun!
--Apache Commons BCEL team
+-Apache Commons Team
 
 Feedback
 --------
@@ -236,7 +236,7 @@ o BCEL-298: Add some files to .gitignore (#19) Thanks to mingleizhang.
 
 
 Have fun!
--Apache Commons BCEL team
+-Apache Commons Team
 
 Feedback
 --------
@@ -294,7 +294,7 @@ o           Update Java requirement from Java 7 to Java 8. Thanks to Gary Gregor
 
 
 Have fun!
--Apache Commons BCEL team
+-Apache Commons Team
 
 Feedback
 --------
@@ -341,7 +341,7 @@ o BCEL-301: org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in 
 
 
 Have fun!
--Apache Commons BCEL team
+-Apache Commons Team
 
 Feedback
 --------
@@ -445,7 +445,7 @@ o BCEL-277: Resolving the String representation of a constant throws
 
 
 Have fun!
--Apache Commons BCEL team
+-Apache Commons Team
 
 -----------------------------------------------------------------------------
 
@@ -669,7 +669,7 @@ o BCEL-110: Problem with JAXB if the bcel classloader is used; remove the broken
 
 
 Have fun!
--Apache Commons BCEL team
+-Apache Commons Team
 
 Feedback
 --------
