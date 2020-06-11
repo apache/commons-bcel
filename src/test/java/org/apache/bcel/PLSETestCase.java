@@ -18,10 +18,12 @@
 
 package org.apache.bcel;
 
+import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.InstructionHandle;
@@ -105,5 +107,26 @@ public class PLSETestCase extends AbstractTestCase
         final LocalVariable new_lv = new_lvt.getLocalVariable(2, 4);  // 'i'
         //System.out.println(new_lv);
         assertEquals("live range length", lv.getLength(), new_lv.getLength());
+    }
+
+    /**
+     * Test to improve BCEL tests code coverage for classfile/Utility.java.
+     */
+    public void testCoverage() throws ClassNotFoundException, java.io.IOException
+    {
+        // load a class with a wide variety of byte codes - including tableswitch and lookupswitch
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.DummySignatureParser");
+        for (final Method m: clazz.getMethods()) {
+            String signature = m.getSignature();
+            Utility.methodTypeToSignature(Utility.methodSignatureReturnType(signature),
+                Utility.methodSignatureArgumentTypes(signature));  // discard result
+            final Code code = m.getCode();
+            if (code != null) {
+                final String encoded = Utility.encode(code.getCode(), true);
+                // following statement will throw exeception without classfile/Utility.encode fix
+                Utility.decode(encoded, true); // discard result
+                code.toString();  // discard result
+            }
+        }
     }
 }

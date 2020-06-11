@@ -1457,6 +1457,7 @@ public abstract class Utility {
             try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     GZIPOutputStream gos = new GZIPOutputStream(baos)) {
                 gos.write(bytes, 0, bytes.length);
+                gos.close();
                 bytes = baos.toByteArray();
             }
         }
