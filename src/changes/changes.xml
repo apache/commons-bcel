@@ -66,6 +66,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.10 to 3.11.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update commons-parent from 50 to 51.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Update biz.aQute.bndlib from 5.1.0 to 5.1.2 #54.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Update maven-surefire-plugin from 3.0.0-M4 to 3.0.0-M5 #53.</action>
     </release>
     <release version="6.5.0" date="2020-06-05" description="Minor feature and bug fix release.">
       <action issue="BCEL-330" type="update" dev="ggregory" due-to="Mark Roberts">Remove unnecessary references to Constants.</action>
