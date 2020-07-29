@@ -286,7 +286,7 @@ public class ClassPath implements Closeable {
 
                     @Override
                     public String getBase() {
-                        return resolved.getFileName().toString();
+                        return Objects.toString(resolved.getFileName(), null);
                     }
 
                     @Override
