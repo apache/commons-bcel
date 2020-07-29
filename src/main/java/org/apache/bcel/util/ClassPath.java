@@ -451,8 +451,10 @@ public class ClassPath implements Closeable {
         final File modulesDir = new File(modulesPath);
         if (modulesDir.exists()) {
             final String[] modules = modulesDir.list(MODULES_FILTER);
-            for (String module : modules) {
-                list.add(modulesDir.getPath() + File.separatorChar + module);
+            if (modules != null) {
+                for (String module : modules) {
+                    list.add(modulesDir.getPath() + File.separatorChar + module);
+                }
             }
         }
     }
