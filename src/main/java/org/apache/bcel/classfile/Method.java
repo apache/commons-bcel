@@ -79,7 +79,19 @@ public final class Method extends FieldOrMethod {
      */
     Method(final DataInput file, final ConstantPool constant_pool) throws IOException,
             ClassFormatException {
-        super(file, constant_pool);
+        this(file, constant_pool, false);
+    }
+
+    /**
+     * Construct object from file stream.
+     * @param file Input stream
+     * @param isOak If the class file is oak
+     * @throws IOException
+     * @throws ClassFormatException
+     */
+    Method(final DataInput file, final ConstantPool constant_pool, final boolean isOak) throws IOException,
+            ClassFormatException {
+        super(file, constant_pool, isOak);
     }
 
 

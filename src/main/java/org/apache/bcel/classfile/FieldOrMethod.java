@@ -100,12 +100,23 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @throws ClassFormatException
      */
     protected FieldOrMethod(final DataInput file, final ConstantPool constant_pool) throws IOException, ClassFormatException {
+        this(file, constant_pool, false);
+    }
+
+    /**
+     * Construct object from file stream.
+     * @param file Input stream
+     * @param isOak If the class file is oak
+     * @throws IOException
+     * @throws ClassFormatException
+     */
+    protected FieldOrMethod(final DataInput file, final ConstantPool constant_pool, final boolean isOak) throws IOException, ClassFormatException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null,
                 constant_pool);
         final int attributes_count = file.readUnsignedShort();
         attributes = new Attribute[attributes_count];
         for (int i = 0; i < attributes_count; i++) {
-            attributes[i] = Attribute.readAttribute(file, constant_pool);
+            attributes[i] = Attribute.readAttribute(file, constant_pool, isOak);
         }
         this.attributes_count = attributes_count; // init deprecated field
     }
