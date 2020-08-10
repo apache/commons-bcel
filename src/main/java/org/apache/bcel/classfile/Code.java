@@ -82,8 +82,8 @@ public final class Code extends Attribute {
     Code(final int name_index, final int length, final DataInput file, final ConstantPool constant_pool, final boolean isOak)
             throws IOException {
         // Initialize with some default values which will be overwritten later
-        this(name_index, length, isOak ? file.readUnsignedByte() : file.readUnsignedShort(), isOak ? file.readUnsignedByte() : file.readUnsignedShort(), (byte[]) null,
-                (CodeException[]) null, (Attribute[]) null, constant_pool);
+        this(name_index, length, isOak ? file.readUnsignedByte() : file.readUnsignedShort(), isOak ? file.readUnsignedByte() : file.readUnsignedShort(),
+                (byte[]) null, (CodeException[]) null, (Attribute[]) null, constant_pool);
         this.isOak = isOak;
         final int code_length = isOak ? file.readUnsignedShort() : file.readInt();
         code = new byte[code_length]; // Read byte code
