@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-/*package org.apache.bcel;
+package org.apache.bcel;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -69,7 +69,6 @@ public class BCELBenchmark {
     /**
      * Baseline benchmark. Read the classes but don't parse them.
      */
-/*
     @Benchmark
     public void baseline(Blackhole bh) throws IOException {
         JarFile jar = getJarFile();
@@ -124,4 +123,4 @@ public class BCELBenchmark {
 
         jar.close();
     }
-}*/
+}
