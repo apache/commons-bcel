@@ -267,7 +267,19 @@ public final class Code extends Attribute {
      * and excluding all its attributes
      */
     private int getInternalLength() {
-        return 2 /*maxStack*/+ 2 /*maxLocals*/+ 4 /*code length*/
+        final int maxStack;
+        final int maxLocals;
+        final int codeLength;
+        if (isOak) {
+            maxStack = 1;
+            maxLocals = 1;
+            codeLength = 2;
+        } else {
+            maxStack = 2;
+            maxLocals = 2;
+            codeLength = 4;
+        }
+        return maxStack + maxLocals + codeLength
                 + code.length /*byte-code*/
                 + 2 /*exception-table length*/
                 + 8 * (exceptionTable == null ? 0 : exceptionTable.length) /* exception table */
