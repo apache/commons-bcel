@@ -153,6 +153,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      * Going further than the last test - when we reload the method back in,
      * let's change it (adding a new annotation) and then store that, read it
      * back in and verify both annotations are there !
+     * Also check that we can remove method annotations.
      */
     public void testGenerateMethodLevelAnnotations2()
             throws ClassNotFoundException
@@ -172,11 +173,11 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 .getAnnotationEntries().length == 1);
         final MethodGen mainMethod2 = new MethodGen(mainMethod1, cg2.getClassName(),
                 cg2.getConstantPool());
-        assertTrue("The 'MethodGen' should have one annotations but has "
+        assertTrue("The 'MethodGen' should have one annotation but has "
                 + mainMethod2.getAnnotationEntries().length, mainMethod2
                 .getAnnotationEntries().length == 1);
-        mainMethod2.addAnnotationEntry(createFruitAnnotation(cg2
-                .getConstantPool(), "Pear"));
+        AnnotationEntryGen fruit = createFruitAnnotation(cg2.getConstantPool(), "Pear");
+        mainMethod2.addAnnotationEntry(fruit);
         cg2.removeMethod(mainMethod1);
         cg2.addMethod(mainMethod2.getMethod());
         dumpClass(cg2, "temp3", "HelloWorld.class");
@@ -186,6 +187,14 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final int i = mainMethod3.getAnnotationEntries().length;
         assertTrue("The 'Method' should now have two annotations but has " + i,
                 i == 2);
+        mainMethod2.removeAnnotationEntry(fruit);
+        assertTrue("The 'MethodGen' should have one annotation but has "
+                + mainMethod2.getAnnotationEntries().length, mainMethod2
+                .getAnnotationEntries().length == 1);
+        mainMethod2.removeAnnotationEntries();
+        assertTrue("The 'MethodGen' should have no annotations but has "
+                + mainMethod2.getAnnotationEntries().length, mainMethod2
+                .getAnnotationEntries().length == 0);
         assertTrue(wipe("temp2", "HelloWorld.class"));
         assertTrue(wipe("temp3", "HelloWorld.class"));
     }
