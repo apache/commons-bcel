@@ -115,7 +115,7 @@ public class PLSETestCase extends AbstractTestCase
     public void testCoverage() throws ClassNotFoundException, java.io.IOException
     {
         // load a class with a wide variety of byte codes - including tableswitch and lookupswitch
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.DummySignatureParser");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.ConstantPoolX");
         for (final Method m: clazz.getMethods()) {
             String signature = m.getSignature();
             Utility.methodTypeToSignature(Utility.methodSignatureReturnType(signature),
