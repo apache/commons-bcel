@@ -69,7 +69,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Dependabot">Update maven-surefire-plugin from 3.0.0-M4 to 3.0.0-M5 #53.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update maven-checkstyle-plugin from 3.1.0 to 3.1.1.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Update actions/checkout from v2.3.1 to v2.3.2 #59.</action>      
-      <action                  type="update" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Improve test case coverage; fix Utility.encode bug #46.</action>      
+      <action                  type="update" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Improve test case coverage; fix Utility.encode bug #46.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Update actions/setup-java from v1.4.0 to v1.4.2 #62.</action>      
     </release>
     <release version="6.5.0" date="2020-06-05" description="Minor feature and bug fix release.">
       <action issue="BCEL-330" type="update" dev="ggregory" due-to="Mark Roberts">Remove unnecessary references to Constants.</action>
