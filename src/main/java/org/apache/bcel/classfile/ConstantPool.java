@@ -28,7 +28,7 @@ import org.apache.bcel.Const;
  * a parsed classfile. It may contain null references, due to the JVM
  * specification that skips an entry after an 8-byte constant (double,
  * long) entry.  Those interested in generating constant pools
- * programatically should see <a href="../generic/ConstantPoolGen.html">
+ * programmatically should see <a href="../generic/ConstantPoolGen.html">
  * ConstantPoolGen</a>.
 
  * @see     Constant
