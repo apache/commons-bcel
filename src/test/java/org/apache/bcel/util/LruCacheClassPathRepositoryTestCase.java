@@ -17,14 +17,15 @@
  */
 package org.apache.bcel.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 
 import org.apache.bcel.classfile.JavaClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link LruCacheClassPathRepository}.
@@ -66,10 +67,10 @@ public class LruCacheClassPathRepositoryTestCase {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testZeroCacheSize() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
-            new LruCacheClassPathRepository(classPath, 0);
+            assertThrows(IllegalArgumentException.class, () -> new LruCacheClassPathRepository(classPath, 0));
         }
     }
 }

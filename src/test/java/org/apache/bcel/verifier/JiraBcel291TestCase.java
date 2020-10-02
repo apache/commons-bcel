@@ -18,10 +18,10 @@
 
 package org.apache.bcel.verifier;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-@Ignore
+@Disabled
 public class JiraBcel291TestCase {
 
     @Test

@@ -26,9 +26,9 @@ import org.apache.bcel.generic.ILOAD;
 import org.apache.bcel.generic.ISTORE;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InstructionFinderTest extends AbstractTestCase {
 

@@ -31,11 +31,11 @@ import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {
@@ -61,9 +61,8 @@ public class AnnotationGenTestCase extends AbstractTestCase
         final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg,
                 cp);
         // Check it looks right
-        assertTrue(
-                "Should include string 'id=4' but says: " + nvGen.toString(),
-                nvGen.toString().contains("id=4"));
+        assertTrue(nvGen.toString().contains("id=4"),
+                "Should include string 'id=4' but says: " + nvGen.toString());
         final ObjectType t = new ObjectType("SimpleAnnotation");
         final List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
@@ -87,9 +86,8 @@ public class AnnotationGenTestCase extends AbstractTestCase
         final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg,
                 cp);
         // Check it looks right
-        assertTrue(
-                "Should include string 'id=4' but says: " + nvGen.toString(),
-                nvGen.toString().contains("id=4"));
+        assertTrue(nvGen.toString().contains("id=4"),
+                "Should include string 'id=4' but says: " + nvGen.toString());
         final ObjectType t = new ObjectType("SimpleAnnotation");
         final List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
@@ -107,7 +105,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
                 foundRV = true;
             }
         }
-        assertTrue("Should have seen a RuntimeVisibleAnnotation", foundRV);
+        assertTrue(foundRV, "Should have seen a RuntimeVisibleAnnotation");
         // Build a RIV annotation of type 'SimpleAnnotation' with 'id=4' as the
         // only value :)
         final AnnotationEntryGen a2 = new AnnotationEntryGen(t, elements, false, cp);
@@ -122,7 +120,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
                 foundRIV = true;
             }
         }
-        assertTrue("Should have seen a RuntimeInvisibleAnnotation", foundRIV);
+        assertTrue(foundRIV, "Should have seen a RuntimeInvisibleAnnotation");
     }
 
     private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg)

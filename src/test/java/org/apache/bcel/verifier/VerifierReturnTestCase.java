@@ -21,7 +21,7 @@ import java.io.IOException;
 
 import org.apache.bcel.verifier.tests.TestReturn01Creator;
 import org.apache.bcel.verifier.tests.TestReturn03Creator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class VerifierReturnTestCase extends AbstractVerifierTestCase {
 

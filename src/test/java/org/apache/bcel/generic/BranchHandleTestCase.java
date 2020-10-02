@@ -17,19 +17,19 @@
  */
 package org.apache.bcel.generic;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BranchHandleTestCase {
 
     // Test that setInstruction only allows BranchInstructions
-    @Test(expected=ClassGenException.class)
+    @Test
     public void testsetInstructionNull() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
         assertNotNull(bh);
-        bh.setInstruction(null);
-        assertNotNull(bh);
+        assertThrows(ClassGenException.class, () -> bh.setInstruction(null));
     }
 
     @Test
@@ -40,16 +40,15 @@ public class BranchHandleTestCase {
         assertNotNull(bh);
     }
 
-    @Test(expected=ClassGenException.class)
+    @Test
     public void testsetInstructionnotBI() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
         assertNotNull(bh);
-        bh.setInstruction(new NOP());
-        assertNotNull(bh);
+        assertThrows(ClassGenException.class, () -> bh.setInstruction(new NOP()));
     }
 
-    @Test(expected=ClassGenException.class)
+    @Test
     public void testGetBHnull() {
-        BranchHandle.getBranchHandle(null);
+        assertThrows(ClassGenException.class, () -> BranchHandle.getBranchHandle(null));
     }
 }

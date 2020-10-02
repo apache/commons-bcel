@@ -18,11 +18,11 @@
 
 package org.apache.bcel.verifier;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VerifierTestCase {
 
@@ -33,12 +33,12 @@ public class VerifierTestCase {
         final Verifier verifier = VerifierFactory.getVerifier(classname);
         VerificationResult result = verifier.doPass1();
 
-        assertEquals("Pass 1 verification of " + classname + " failed: " + result.getMessage(), VerificationResult.VERIFIED_OK,
-                result.getStatus());
+        assertEquals(VerificationResult.VERIFIED_OK, result.getStatus(),
+                "Pass 1 verification of " + classname + " failed: " + result.getMessage());
 
         result = verifier.doPass2();
 
-        assertEquals("Pass 2 verification of " + classname + " failed: " + result.getMessage(), VerificationResult.VERIFIED_OK,
-                result.getStatus());
+        assertEquals(VerificationResult.VERIFIED_OK, result.getStatus(),
+                "Pass 2 verification of " + classname + " failed: " + result.getMessage());
     }
 }

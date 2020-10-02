@@ -23,7 +23,7 @@ import org.apache.bcel.generic.ILOAD;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.NOP;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for https://issues.apache.org/jira/browse/BCEL-267 "Race conditions on

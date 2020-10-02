@@ -18,7 +18,7 @@
 
 package org.apache.bcel.verifier;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class VerifierInvokeTestCase extends AbstractVerifierTestCase {
 

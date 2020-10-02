@@ -17,9 +17,9 @@
  */
 package org.apache.bcel.generic;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TypeTestCase {
     @Test
@@ -30,7 +30,7 @@ public class TypeTestCase {
         // not understand generics so we need to substitute the modified value below.
         final String expectedValue = "Ljava/util/Map<X, java/util/List<Y>>;";
         final String actualValue = (Type.getType("Ljava/util/Map<TX;Ljava/util/List<TY;>;>;")).getSignature();
-        assertEquals("Type.getType", expectedValue, actualValue);
+        assertEquals(expectedValue, actualValue, "Type.getType");
     }
 
 }

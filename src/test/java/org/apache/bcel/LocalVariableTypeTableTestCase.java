@@ -33,7 +33,7 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.LocalVariableGen;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LocalVariableTypeTableTestCase extends AbstractTestCase {
 

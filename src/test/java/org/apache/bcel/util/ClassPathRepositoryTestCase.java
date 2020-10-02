@@ -20,11 +20,12 @@ package org.apache.bcel.util;
 import java.io.IOException;
 
 import org.apache.bcel.classfile.JavaClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests {@link ClassPathRepository}, {@link MemorySensitiveClassPathRepository}, and {@link
@@ -83,35 +84,35 @@ public class ClassPathRepositoryTestCase {
         }
     }
 
-    @Test(expected = ClassNotFoundException.class)
-    public void testNoClassNotFound() throws ClassNotFoundException, IOException {
+    @Test
+    public void testNoClassNotFound() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
-            repository.loadClass("no.such.Class");
+            assertThrows(ClassNotFoundException.class, () -> repository.loadClass("no.such.Class"));
         }
     }
 
-    @Test(expected = ClassNotFoundException.class)
-    public void testClassWithoutPackage() throws ClassNotFoundException, IOException {
+    @Test
+    public void testClassWithoutPackage() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
-            repository.loadClass("ClassXYZ");
+            assertThrows(ClassNotFoundException.class, () -> repository.loadClass("ClassXYZ"));
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testEmptyInput() throws ClassNotFoundException, IOException {
+    @Test
+    public void testEmptyInput() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
-            repository.loadClass("");
+            assertThrows(IllegalArgumentException.class, () -> repository.loadClass(""));
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullInput() throws ClassNotFoundException, IOException {
+    @Test
+    public void testNullInput() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
-            repository.loadClass((String) null);
+            assertThrows(IllegalArgumentException.class, () -> repository.loadClass((String) null));
         }
     }
 }

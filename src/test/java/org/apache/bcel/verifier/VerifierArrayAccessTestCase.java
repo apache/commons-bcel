@@ -23,7 +23,7 @@ import java.io.IOException;
 import org.apache.bcel.verifier.tests.TestArrayAccess02Creator;
 import org.apache.bcel.verifier.tests.TestArrayAccess03Creator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04Creator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class VerifierArrayAccessTestCase extends AbstractVerifierTestCase {
 

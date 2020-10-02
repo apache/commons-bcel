@@ -32,11 +32,11 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.SimpleElementValue;
 import org.apache.bcel.util.SyntheticRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * The program that some of the tests generate looks like this:
@@ -91,28 +91,24 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         dumpClass(cg, "HelloWorld.class");
         final JavaClass jc = getClassFrom(".", "HelloWorld");
         final AnnotationEntry[] as = jc.getAnnotationEntries();
-        assertTrue("Should be two AnnotationEntries but found " + as.length,
-                as.length == 2);
+        assertTrue(as.length == 2,
+                "Should be two AnnotationEntries but found " + as.length);
         // TODO L??;
-        assertTrue(
+        assertTrue(as[0].getAnnotationType().equals("LSimpleAnnotation;"),
                 "Name of annotation 1 should be LSimpleAnnotation; but it is "
-                        + as[0].getAnnotationType(), as[0].getAnnotationType()
-                        .equals("LSimpleAnnotation;"));
-        assertTrue(
+                                + as[0].getAnnotationType());
+        assertTrue(as[1].getAnnotationType().equals("LSimpleAnnotation;"),
                 "Name of annotation 2 should be LSimpleAnnotation; but it is "
-                        + as[1].getAnnotationType(), as[1].getAnnotationType()
-                        .equals("LSimpleAnnotation;"));
+                                + as[1].getAnnotationType());
         final ElementValuePair[] vals = as[0].getElementValuePairs();
         final ElementValuePair nvp = vals[0];
-        assertTrue(
-                "Name of element in SimpleAnnotation should be 'id' but it is "
-                        + nvp.getNameString(), nvp.getNameString().equals("id"));
+        assertTrue(nvp.getNameString().equals("id"),
+                "Name of element in SimpleAnnotation should be 'id' but it is " + nvp.getNameString());
         final ElementValue ev = nvp.getValue();
-        assertTrue("Type of element value should be int but it is "
-                + ev.getElementValueType(),
-                ev.getElementValueType() == ElementValue.PRIMITIVE_INT);
-        assertTrue("Value of element should be 4 but it is "
-                + ev.stringifyValue(), ev.stringifyValue().equals("4"));
+        assertTrue(ev.getElementValueType() == ElementValue.PRIMITIVE_INT,
+                "Type of element value should be int but it is " + ev.getElementValueType());
+        assertTrue(ev.stringifyValue().equals("4"),
+                "Value of element should be 4 but it is " + ev.stringifyValue());
         assertTrue(createTestdataFile("HelloWorld.class").delete());
     }
 
@@ -131,27 +127,26 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         buildClassContentsWithAnnotatedMethods(cg, cp, il);
         // Check annotation is OK
         int i = cg.getMethods()[0].getAnnotationEntries().length;
-        assertTrue(
-                "Prior to dumping, main method should have 1 annotation but has "
-                        + i, i == 1);
+        assertTrue(i == 1,
+                "Prior to dumping, main method should have 1 annotation but has " + i);
         dumpClass(cg, "temp1" + File.separator + "HelloWorld.class");
         final JavaClass jc2 = getClassFrom("temp1", "HelloWorld");
         // Check annotation is OK
         i = jc2.getMethods()[0].getAnnotationEntries().length;
-        assertTrue("JavaClass should say 1 annotation on main method but says "
-                + i, i == 1);
+        assertTrue(i == 1,
+                "JavaClass should say 1 annotation on main method but says " + i);
         final ClassGen cg2 = new ClassGen(jc2);
         // Check it now it is a ClassGen
         final Method[] m = cg2.getMethods();
         i = m[0].getAnnotationEntries().length;
-        assertTrue("The main 'Method' should have one annotation but has " + i,
-                i == 1);
+        assertTrue(i == 1,
+                "The main 'Method' should have one annotation but has " + i);
         final MethodGen mg = new MethodGen(m[0], cg2.getClassName(), cg2
                 .getConstantPool());
         // Check it finally when the Method is changed to a MethodGen
         i = mg.getAnnotationEntries().length;
-        assertTrue("The main 'MethodGen' should have one annotation but has "
-                + i, i == 1);
+        assertTrue(i == 1,
+                "The main 'MethodGen' should have one annotation but has " + i);
 
         assertTrue(wipe("temp1", "HelloWorld.class"));
     }
@@ -176,14 +171,14 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final ClassGen cg2 = new ClassGen(jc2);
         // Main method after reading the class back in
         final Method mainMethod1 = jc2.getMethods()[0];
-        assertTrue("The 'Method' should have one annotations but has "
-                + mainMethod1.getAnnotationEntries().length, mainMethod1
-                .getAnnotationEntries().length == 1);
+        assertTrue(mainMethod1.getAnnotationEntries().length == 1,
+                "The 'Method' should have one annotations but has "
+                        + mainMethod1.getAnnotationEntries().length);
         final MethodGen mainMethod2 = new MethodGen(mainMethod1, cg2.getClassName(),
                 cg2.getConstantPool());
-        assertTrue("The 'MethodGen' should have one annotation but has "
-                + mainMethod2.getAnnotationEntries().length, mainMethod2
-                .getAnnotationEntries().length == 1);
+        assertTrue(mainMethod2.getAnnotationEntries().length == 1,
+                "The 'MethodGen' should have one annotation but has "
+                        + mainMethod2.getAnnotationEntries().length);
         AnnotationEntryGen fruit = createFruitAnnotation(cg2.getConstantPool(), "Pear");
         mainMethod2.addAnnotationEntry(fruit);
         cg2.removeMethod(mainMethod1);
@@ -193,16 +188,16 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final ClassGen cg3 = new ClassGen(jc3);
         final Method mainMethod3 = cg3.getMethods()[1];
         final int i = mainMethod3.getAnnotationEntries().length;
-        assertTrue("The 'Method' should now have two annotations but has " + i,
-                i == 2);
+        assertTrue(i == 2,
+                "The 'Method' should now have two annotations but has " + i);
         mainMethod2.removeAnnotationEntry(fruit);
-        assertTrue("The 'MethodGen' should have one annotation but has "
-                + mainMethod2.getAnnotationEntries().length, mainMethod2
-                .getAnnotationEntries().length == 1);
+        assertTrue(mainMethod2.getAnnotationEntries().length == 1,
+                "The 'MethodGen' should have one annotation but has "
+                        + mainMethod2.getAnnotationEntries().length);
         mainMethod2.removeAnnotationEntries();
-        assertTrue("The 'MethodGen' should have no annotations but has "
-                + mainMethod2.getAnnotationEntries().length, mainMethod2
-                .getAnnotationEntries().length == 0);
+        assertTrue(mainMethod2.getAnnotationEntries().length == 0,
+                "The 'MethodGen' should have no annotations but has "
+                        + mainMethod2.getAnnotationEntries().length);
         assertTrue(wipe("temp2", "HelloWorld.class"));
         assertTrue(wipe("temp3", "HelloWorld.class"));
     }
@@ -219,8 +214,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
-        assertTrue("Expected one annotation but found " + annotations.length,
-                annotations.length == 1);
+        assertTrue(annotations.length == 1,
+                "Expected one annotation but found " + annotations.length);
     }
 
     /**
@@ -235,8 +230,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
-        assertTrue("Expected one annotation but found " + annotations.length,
-                annotations.length == 1);
+        assertTrue(annotations.length == 1,
+                "Expected one annotation but found " + annotations.length);
     }
 
     /**
@@ -251,29 +246,27 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
-        assertTrue("Expected one annotation but found " + annotations.length,
-                annotations.length == 1);
+        assertTrue(annotations.length == 1,
+                "Expected one annotation but found " + annotations.length);
         final AnnotationEntryGen a = annotations[0];
-        assertTrue("That annotation should only have one value but has "
-                + a.getValues().size(), a.getValues().size() == 1);
+        assertTrue(a.getValues().size() == 1,
+                "That annotation should only have one value but has " + a.getValues().size());
         final ElementValuePairGen nvp = a.getValues().get(0);
         final ElementValueGen value = nvp.getValue();
-        assertTrue("Value should be ArrayElementValueGen but is " + value,
-                value instanceof ArrayElementValueGen);
+        assertTrue(value instanceof ArrayElementValueGen,
+                "Value should be ArrayElementValueGen but is " + value);
         final ArrayElementValueGen arrayValue = (ArrayElementValueGen) value;
-        assertTrue("Array value should be size one but is "
-                + arrayValue.getElementValuesSize(), arrayValue
-                .getElementValuesSize() == 1);
+        assertTrue(arrayValue.getElementValuesSize() == 1,
+                "Array value should be size one but is " + arrayValue.getElementValuesSize());
         final ElementValueGen innerValue = arrayValue.getElementValues().get(0);
         assertTrue(
-                "Value in the array should be AnnotationElementValueGen but is "
-                        + innerValue,
-                innerValue instanceof AnnotationElementValueGen);
+                innerValue instanceof AnnotationElementValueGen,
+                "Value in the array should be AnnotationElementValueGen but is " + innerValue);
         final AnnotationElementValueGen innerAnnotationValue = (AnnotationElementValueGen) innerValue;
-        assertTrue("Should be called L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation; but is called: "
-                + innerAnnotationValue.getAnnotation().getTypeName(),
-                innerAnnotationValue.getAnnotation().getTypeSignature().equals(
-                        "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;"));
+        assertTrue(innerAnnotationValue.getAnnotation().getTypeSignature().equals(
+                                "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;"),
+                "Should be called L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation; but is called: "
+                        + innerAnnotationValue.getAnnotation().getTypeName());
 
         // check the three methods
         final Method[] methods = cgen.getMethods();
@@ -305,7 +298,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     {
         final String methodName= method.getName();
         final AnnotationEntry[] annos= method.getAnnotationEntries();
-        assertEquals("For "+methodName, expectedNumberAnnotations, annos.length);
+        assertEquals(expectedNumberAnnotations, annos.length, "For " + methodName);
         if(expectedNumberAnnotations!=0)
         {
             assertArrayElementValue(nExpectedArrayValues, annos[0]);
@@ -325,14 +318,14 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     {
         final String methodName= "For "+method.getName();
         final ParameterAnnotationEntry[] parameterAnnotations= method.getParameterAnnotationEntries();
-        assertEquals(methodName, expectedNumberOfParmeterAnnotations.length, parameterAnnotations.length);
+        assertEquals(expectedNumberOfParmeterAnnotations.length, parameterAnnotations.length, methodName);
 
         int i= 0;
         for (final ParameterAnnotationEntry parameterAnnotation : parameterAnnotations)
         {
             final AnnotationEntry[] annos= parameterAnnotation.getAnnotationEntries();
             final int expectedLength = expectedNumberOfParmeterAnnotations[i++];
-            assertEquals(methodName+" parameter "+i, expectedLength, annos.length);
+            assertEquals(expectedLength, annos.length, methodName + " parameter " + i);
             if(expectedLength!=0)
             {
                 assertSimpleElementValue(annos[0]);
@@ -359,8 +352,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
-        assertTrue("Expected one annotation but found " + annotations.length,
-                annotations.length == 1);
+        assertTrue(annotations.length == 1,
+                "Expected one annotation but found " + annotations.length);
         final List<?> l = annotations[0].getValues();
         boolean found = false;
         for (final Object name : l) {
@@ -373,8 +366,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
                 }
             }
         }
-        assertTrue("Did not find double annotation value with value 33.4",
-                found);
+        assertTrue(found, "Did not find double annotation value with value 33.4");
     }
 
     /**
@@ -388,9 +380,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final ClassGen cgen = new ClassGen(jc);
         final ConstantPoolGen cp = cgen.getConstantPool();
         cgen.addAnnotationEntry(createFruitAnnotation(cp, "Pineapple"));
-        assertTrue("Should now have two annotations but has "
-                + cgen.getAnnotationEntries().length, cgen
-                .getAnnotationEntries().length == 2);
+        assertTrue(cgen.getAnnotationEntries().length == 2,
+                "Should now have two annotations but has " + cgen.getAnnotationEntries().length);
         dumpClass(cgen, "SimpleAnnotatedClass.class");
         assertTrue(wipe("SimpleAnnotatedClass.class"));
     }
@@ -406,9 +397,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final ClassGen cgen = new ClassGen(jc);
         final ConstantPoolGen cp = cgen.getConstantPool();
         cgen.addAnnotationEntry(createCombinedAnnotation(cp));
-        assertTrue("Should now have two annotations but has "
-                + cgen.getAnnotationEntries().length, cgen
-                .getAnnotationEntries().length == 2);
+        assertTrue(cgen.getAnnotationEntries().length == 2,
+                "Should now have two annotations but has " + cgen.getAnnotationEntries().length);
         dumpClass(cgen, "SimpleAnnotatedClass.class");
         final JavaClass jc2 = getClassFrom(".", "SimpleAnnotatedClass");
         jc2.getAnnotationEntries();

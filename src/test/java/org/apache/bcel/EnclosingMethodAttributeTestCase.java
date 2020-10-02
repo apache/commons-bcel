@@ -26,10 +26,10 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.EnclosingMethod;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EnclosingMethodAttributeTestCase extends AbstractTestCase
 {
@@ -44,17 +44,16 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AttributeTestClassEM01$1S");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
-        assertTrue("Expected 1 EnclosingMethod attribute but found "
-                + encMethodAttrs.length, encMethodAttrs.length == 1);
+        assertTrue(encMethodAttrs.length == 1,
+                "Expected 1 EnclosingMethod attribute but found " + encMethodAttrs.length);
         final EnclosingMethod em = (EnclosingMethod) encMethodAttrs[0];
         final String enclosingClassName = em.getEnclosingClass().getBytes(pool);
         final String enclosingMethodName = em.getEnclosingMethod().getName(pool);
-        assertTrue(
+        assertTrue(enclosingClassName.equals(PACKAGE_BASE_SIG+"/data/AttributeTestClassEM01"),
                 "Expected class name to be '"+PACKAGE_BASE_SIG+"/data/AttributeTestClassEM01' but was "
-                        + enclosingClassName, enclosingClassName
-                        .equals(PACKAGE_BASE_SIG+"/data/AttributeTestClassEM01"));
-        assertTrue("Expected method name to be 'main' but was "
-                + enclosingMethodName, enclosingMethodName.equals("main"));
+                        + enclosingClassName);
+        assertTrue(enclosingMethodName.equals("main"),
+                "Expected method name to be 'main' but was " + enclosingMethodName);
     }
 
     /**
@@ -68,18 +67,16 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AttributeTestClassEM02$1");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
-        assertTrue("Expected 1 EnclosingMethod attribute but found "
-                + encMethodAttrs.length, encMethodAttrs.length == 1);
+        assertTrue(encMethodAttrs.length == 1,
+                "Expected 1 EnclosingMethod attribute but found " + encMethodAttrs.length);
         final EnclosingMethod em = (EnclosingMethod) encMethodAttrs[0];
         final String enclosingClassName = em.getEnclosingClass().getBytes(pool);
-        assertTrue(
+        assertTrue(em.getEnclosingMethodIndex() == 0,
                 "The class is not within a method, so method_index should be null, but it is "
-                        + em.getEnclosingMethodIndex(), em
-                        .getEnclosingMethodIndex() == 0);
-        assertTrue(
+                        + em.getEnclosingMethodIndex());
+        assertTrue(enclosingClassName.equals(PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02"),
                 "Expected class name to be '"+PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02' but was "
-                        + enclosingClassName, enclosingClassName
-                        .equals(PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02"));
+                        + enclosingClassName);
     }
 
     /**
@@ -92,8 +89,8 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AttributeTestClassEM02$1");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
-        assertTrue("Expected 1 EnclosingMethod attribute but found "
-                + encMethodAttrs.length, encMethodAttrs.length == 1);
+        assertTrue(encMethodAttrs.length == 1,
+                "Expected 1 EnclosingMethod attribute but found " + encMethodAttrs.length);
         // Write it out
         final File tfile = createTestdataFile("AttributeTestClassEM02$1.class");
         clazz.dump(tfile);
@@ -103,14 +100,12 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
         assertNotNull(clazz2); // Use the variable to avoid a warning
         final EnclosingMethod em = (EnclosingMethod) encMethodAttrs[0];
         final String enclosingClassName = em.getEnclosingClass().getBytes(pool);
-        assertTrue(
+        assertTrue(em.getEnclosingMethodIndex() == 0,
                 "The class is not within a method, so method_index should be null, but it is "
-                        + em.getEnclosingMethodIndex(), em
-                        .getEnclosingMethodIndex() == 0);
-        assertTrue(
+                        + em.getEnclosingMethodIndex());
+        assertTrue(enclosingClassName.equals(PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02"),
                 "Expected class name to be '"+PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02' but was "
-                        + enclosingClassName, enclosingClassName
-                        .equals(PACKAGE_BASE_SIG+"/data/AttributeTestClassEM02"));
+                        + enclosingClassName);
         tfile.deleteOnExit();
     }
 }

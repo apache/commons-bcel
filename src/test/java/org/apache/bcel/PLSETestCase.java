@@ -31,9 +31,9 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.InvokeInstruction;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PLSETestCase extends AbstractTestCase
 {
@@ -71,7 +71,7 @@ public class PLSETestCase extends AbstractTestCase
         final MethodGen mg = new MethodGen(m, gen.getClassName(), pool);
         final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
         //System.out.println(new_lvt);
-        assertEquals("number of locals", lvt.getTableLength(), new_lvt.getTableLength());
+        assertEquals(lvt.getTableLength(), new_lvt.getTableLength(), "number of locals");
     }
 
     /**
@@ -113,7 +113,7 @@ public class PLSETestCase extends AbstractTestCase
         final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
         final LocalVariable new_lv = new_lvt.getLocalVariable(2, 4);  // 'i'
         //System.out.println(new_lv);
-        assertEquals("live range length", lv.getLength(), new_lv.getLength());
+        assertEquals(lv.getLength(), new_lv.getLength(), "live range length");
     }
 
     /**

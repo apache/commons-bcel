@@ -22,9 +22,9 @@ import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ConstantPoolTestCase extends AbstractTestCase {
 

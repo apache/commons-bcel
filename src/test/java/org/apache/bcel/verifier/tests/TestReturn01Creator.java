@@ -30,7 +30,7 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestReturn01Creator extends TestCreator {
   private final InstructionFactory _factory;

@@ -27,10 +27,10 @@ import org.apache.bcel.classfile.ElementValuePair;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class FieldAnnotationsTestCase extends AbstractTestCase
 {
@@ -115,8 +115,9 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             System.err.println("With AnnotationEntrys: "
                     + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
-        assertTrue("Should be 2 AnnotationEntrys on this field, but there are "
-                + f.getAnnotationEntries().length, f.getAnnotationEntries().length == 2);
+        assertTrue(f.getAnnotationEntries().length == 2,
+                "Should be 2 AnnotationEntrys on this field, but there are "
+                        + f.getAnnotationEntries().length);
     }
 
     // helper methods
@@ -138,18 +139,19 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     private void checkAnnotationEntry(final AnnotationEntry a, final String name, final String elementname,
             final String elementvalue)
     {
-        assertTrue("Expected AnnotationEntry to have name " + name
-                + " but it had name " + a.getAnnotationType(), a.getAnnotationType()
-                .equals(name));
-        assertTrue("Expected AnnotationEntry to have one element but it had "
-                + a.getElementValuePairs().length, a.getElementValuePairs().length == 1);
+        assertTrue(a.getAnnotationType().equals(name),
+                "Expected AnnotationEntry to have name " + name
+                        + " but it had name " + a.getAnnotationType());
+        assertTrue(a.getElementValuePairs().length == 1,
+                "Expected AnnotationEntry to have one element but it had "
+                        + a.getElementValuePairs().length);
         final ElementValuePair envp = a.getElementValuePairs()[0];
-        assertTrue("Expected element name " + elementname + " but was "
-                + envp.getNameString(), elementname
-                .equals(envp.getNameString()));
-        assertTrue("Expected element value " + elementvalue + " but was "
-                + envp.getValue().stringifyValue(), elementvalue.equals(envp
-                .getValue().stringifyValue()));
+        assertTrue(elementname.equals(envp.getNameString()),
+                "Expected element name " + elementname + " but was "
+                        + envp.getNameString());
+        assertTrue(elementvalue.equals(envp.getValue().stringifyValue()),
+                "Expected element value " + elementvalue + " but was "
+                        + envp.getValue().stringifyValue());
     }
 
     // helper methods

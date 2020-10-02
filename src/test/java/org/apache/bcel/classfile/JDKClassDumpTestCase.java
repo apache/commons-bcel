@@ -17,8 +17,8 @@
 
 package org.apache.bcel.classfile;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -30,7 +30,7 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test that dump() methods work on the JDK classes
@@ -81,7 +81,7 @@ public class JDKClassDumpTestCase {
             int i = 0;
             for (final int out : baos.toByteArray()) {
                 final int in = src.read();
-                assertEquals(name + ": Mismatch at " + i, in, out & 0xFF);
+                assertEquals(in, out & 0xFF, name + ": Mismatch at " + i);
                 i++;
             }
         }

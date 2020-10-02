@@ -23,9 +23,9 @@ import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.SimpleElementValue;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnnotationDefaultAttributeTestCase extends AbstractTestCase
 {
@@ -42,9 +42,9 @@ public class AnnotationDefaultAttributeTestCase extends AbstractTestCase
         final AnnotationDefault a = (AnnotationDefault) findAttribute(
                 "AnnotationDefault", m.getAttributes());
         final SimpleElementValue val = (SimpleElementValue) a.getDefaultValue();
-        assertTrue("Should be STRING but is " + val.getElementValueType(), val
-                .getElementValueType() == ElementValue.STRING);
-        assertTrue("Should have default of bananas but default is "
-                + val.getValueString(), val.getValueString().equals("bananas"));
+        assertTrue(val.getElementValueType() == ElementValue.STRING,
+                "Should be STRING but is " + val.getElementValueType());
+        assertTrue(val.getValueString().equals("bananas"),
+                "Should have default of bananas but default is " + val.getValueString());
     }
 }

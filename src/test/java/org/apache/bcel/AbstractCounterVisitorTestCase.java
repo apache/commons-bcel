@@ -21,7 +21,7 @@ package org.apache.bcel;
 import org.apache.bcel.classfile.DescendingVisitor;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.visitors.CounterVisitor;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
 {
@@ -29,7 +29,7 @@ public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
 
     private CounterVisitor visitor = null;
 
-    @Before
+    @BeforeEach
     public void setUp() throws ClassNotFoundException
     {
         visitor = new CounterVisitor();

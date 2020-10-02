@@ -32,7 +32,7 @@ import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.PUSH;
 import org.apache.bcel.generic.Type;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestArrayAccess02Creator extends TestCreator {
   private final InstructionFactory _factory;

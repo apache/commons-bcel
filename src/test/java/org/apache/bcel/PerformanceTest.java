@@ -33,9 +33,9 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public final class PerformanceTest {
 

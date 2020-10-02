@@ -35,7 +35,7 @@ import org.apache.bcel.generic.SimpleElementValueGen;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class AbstractTestCase
 {
@@ -141,8 +141,8 @@ public abstract class AbstractTestCase
                 chosenAttrsList.add(element);
             }
         }
-        assertTrue("Should be one match: " + chosenAttrsList.size(),
-                chosenAttrsList.size() == 1);
+        assertTrue(chosenAttrsList.size() == 1,
+                "Should be one match: " + chosenAttrsList.size());
         return chosenAttrsList.get(0);
     }
 

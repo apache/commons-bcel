@@ -23,16 +23,17 @@ import java.util.List;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.mail.internet.MailDateFormat;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class MethodGenTestCase {
 
@@ -77,9 +78,9 @@ public class MethodGenTestCase {
         final ClassGen cg = new ClassGen(jc);
         final MethodGen mg = new MethodGen(cg.getMethodAt(0), cg.getClassName(), cg.getConstantPool());
         final List<AnnotationEntryGen> firstParamAnnotations = mg.getAnnotationsOnParameter(0);
-        assertEquals("Wrong number of annotations in the first parameter", 1, firstParamAnnotations.size());
+        assertEquals(1, firstParamAnnotations.size(), "Wrong number of annotations in the first parameter");
         final List<AnnotationEntryGen> secondParamAnnotations = mg.getAnnotationsOnParameter(1);
-        assertEquals("Wrong number of annotations in the second parameter", 1, secondParamAnnotations.size());
+        assertEquals(1, secondParamAnnotations.size(), "Wrong number of annotations in the second parameter");
     }
 
     @Test
@@ -87,21 +88,21 @@ public class MethodGenTestCase {
         final MethodGen mg = getMethod(Foo.class, "bar");
 
         final LocalVariableGen lv = mg.getLocalVariables()[1];
-        assertEquals("variable name", "a", lv.getName());
+        assertEquals("a", lv.getName(), "variable name");
         final InstructionHandle start = lv.getStart();
         final InstructionHandle end = lv.getEnd();
-        assertNotNull("scope start", start);
-        assertNotNull("scope end", end);
-        assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertTrue("scope end not targeted by the local variable", Arrays.asList(end.getTargeters()).contains(lv));
+        assertNotNull(start, "scope start");
+        assertNotNull(end, "scope end");
+        assertTrue(Arrays.asList(start.getTargeters()).contains(lv), "scope start not targeted by the local variable");
+        assertTrue(Arrays.asList(end.getTargeters()).contains(lv), "scope end not targeted by the local variable");
 
         // now let's remove the local variable
         mg.removeLocalVariable(lv);
 
-        assertFalse("scope start still targeted by the removed variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
-        assertNull("scope start", lv.getStart());
-        assertNull("scope end", lv.getEnd());
+        assertFalse(Arrays.asList(start.getTargeters()).contains(lv), "scope start still targeted by the removed variable");
+        assertFalse(Arrays.asList(end.getTargeters()).contains(lv), "scope end still targeted by the removed variable");
+        assertNull(lv.getStart(), "scope start");
+        assertNull(lv.getEnd(), "scope end");
     }
 
     @Test
@@ -109,26 +110,26 @@ public class MethodGenTestCase {
         final MethodGen mg = getMethod(Foo.class, "bar");
 
         final LocalVariableGen lv = mg.getLocalVariables()[1];
-        assertEquals("variable name", "a", lv.getName());
+        assertEquals("a", lv.getName(), "variable name");
         final InstructionHandle start = lv.getStart();
         final InstructionHandle end = lv.getEnd();
-        assertNotNull("scope start", start);
-        assertNotNull("scope end", end);
-        assertTrue("scope start not targeted by the local variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertTrue("scope end not targeted by the local variable", Arrays.asList(end.getTargeters()).contains(lv));
+        assertNotNull(start, "scope start");
+        assertNotNull(end, "scope end");
+        assertTrue(Arrays.asList(start.getTargeters()).contains(lv), "scope start not targeted by the local variable");
+        assertTrue(Arrays.asList(end.getTargeters()).contains(lv), "scope end not targeted by the local variable");
 
         // now let's remove the local variables
         mg.removeLocalVariables();
 
-        assertFalse("scope start still targeted by the removed variable", Arrays.asList(start.getTargeters()).contains(lv));
-        assertFalse("scope end still targeted by the removed variable", Arrays.asList(end.getTargeters()).contains(lv));
-        assertNull("scope start", lv.getStart());
-        assertNull("scope end", lv.getEnd());
+        assertFalse(Arrays.asList(start.getTargeters()).contains(lv), "scope start still targeted by the removed variable");
+        assertFalse(Arrays.asList(end.getTargeters()).contains(lv), "scope end still targeted by the removed variable");
+        assertNull(lv.getStart(), "scope start");
+        assertNull(lv.getEnd(), "scope end");
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void testInvalidNullMethodBody_MailDateFormat() throws Exception {
-        testInvalidNullMethodBody("javax.mail.internet.MailDateFormat");
+    @Test
+    public void testInvalidNullMethodBody_MailDateFormat() {
+        assertThrows(IllegalStateException.class, () -> testInvalidNullMethodBody("javax.mail.internet.MailDateFormat"));
     }
 
     @Test
