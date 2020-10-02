@@ -26,7 +26,6 @@ import java.util.List;
 import org.apache.bcel.generic.JdkGenericDumpTestCase;
 import org.apache.commons.lang3.JavaVersion;
 import org.apache.commons.lang3.SystemUtils;
-import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -34,6 +33,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 /**
  * Tests {@link ModularRuntimeImage}.
@@ -51,7 +51,7 @@ public class ModularRuntimeImageTestCase {
 
     public ModularRuntimeImageTestCase(final String javaHome) throws IOException {
         this.javaHome = javaHome;
-        Assume.assumeTrue(SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_9));
+        assumeTrue(SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_9));
         this.modularRuntimeImage = new ModularRuntimeImage(javaHome);
     }
 
