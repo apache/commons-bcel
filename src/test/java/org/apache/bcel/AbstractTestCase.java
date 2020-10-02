@@ -35,9 +35,9 @@ import org.apache.bcel.generic.SimpleElementValueGen;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertTrue;
 
-public abstract class AbstractTestCase extends TestCase
+public abstract class AbstractTestCase
 {
     private static final boolean verbose = false;
 

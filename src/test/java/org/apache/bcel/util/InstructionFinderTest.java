@@ -26,9 +26,13 @@ import org.apache.bcel.generic.ILOAD;
 import org.apache.bcel.generic.ISTORE;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class InstructionFinderTest extends AbstractTestCase {
 
+    @Test
     public void testSearch() {
         final InstructionList il = new InstructionList();
         il.append(new ILOAD(1));

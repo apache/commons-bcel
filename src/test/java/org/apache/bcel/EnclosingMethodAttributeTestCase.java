@@ -27,6 +27,9 @@ import org.apache.bcel.classfile.EnclosingMethod;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.Assert;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class EnclosingMethodAttributeTestCase extends AbstractTestCase
 {
@@ -34,6 +37,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
      * Verify for an inner class declared inside the 'main' method that the
      * enclosing method attribute is set correctly.
      */
+    @Test
     public void testCheckMethodLevelNamedInnerClass()
             throws ClassNotFoundException
     {
@@ -57,6 +61,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
      * Verify for an inner class declared at the type level that the
      * EnclosingMethod attribute is set correctly (i.e. to a null value)
      */
+    @Test
     public void testCheckClassLevelNamedInnerClass()
             throws ClassNotFoundException
     {
@@ -80,6 +85,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
     /**
      * Check that we can save and load the attribute correctly.
      */
+    @Test
     public void testAttributeSerializtion() throws ClassNotFoundException,
             IOException
     {

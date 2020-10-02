@@ -18,12 +18,15 @@
 
 package org.apache.bcel.verifier;
 
+import org.junit.Test;
+
 import java.util.Collection;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
-public class VerifierTestCase extends TestCase {
+public class VerifierTestCase {
 
+    @Test
     public void testDefaultMethodValidation() {
         final String classname = Collection.class.getName();
 

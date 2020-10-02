@@ -32,6 +32,11 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.SimpleElementValue;
 import org.apache.bcel.util.SyntheticRepository;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * The program that some of the tests generate looks like this:
@@ -69,6 +74,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      * <li>Check the attributes are OK</li>
      * </ol>
      */
+    @Test
     public void testGenerateClassLevelAnnotations()
             throws ClassNotFoundException
     {
@@ -114,6 +120,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      * Just check that we can dump a class that has a method annotation on it
      * and it is still there when we read it back in
      */
+    @Test
     public void testGenerateMethodLevelAnnotations1()
             throws ClassNotFoundException
     {
@@ -155,6 +162,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      * back in and verify both annotations are there !
      * Also check that we can remove method annotations.
      */
+    @Test
     public void testGenerateMethodLevelAnnotations2()
             throws ClassNotFoundException
     {
@@ -203,6 +211,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     /**
      * Transform simple class from an immutable to a mutable object.
      */
+    @Test
     public void testTransformClassToClassGen_SimpleTypes()
             throws ClassNotFoundException
     {
@@ -218,6 +227,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      * Transform simple class from an immutable to a mutable object. The class
      * is annotated with an annotation that uses an enum.
      */
+    @Test
     public void testTransformClassToClassGen_EnumType()
             throws ClassNotFoundException
     {
@@ -233,6 +243,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      * Transform simple class from an immutable to a mutable object. The class
      * is annotated with an annotation that uses an array of SimpleAnnotations.
      */
+    @Test
     public void testTransformClassToClassGen_ArrayAndAnnotationTypes()
             throws ClassNotFoundException
     {
@@ -340,6 +351,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     /**
      * Transform complex class from an immutable to a mutable object.
      */
+    @Test
     public void testTransformComplexClassToClassGen()
             throws ClassNotFoundException
     {
@@ -369,6 +381,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      * Load a class in and modify it with a new attribute - A SimpleAnnotation
      * annotation
      */
+    @Test
     public void testModifyingClasses1() throws ClassNotFoundException
     {
         final JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");
@@ -386,6 +399,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
      * Load a class in and modify it with a new attribute - A ComplexAnnotation
      * annotation
      */
+    @Test
     public void testModifyingClasses2() throws ClassNotFoundException
     {
         final JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");

@@ -23,6 +23,9 @@ import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.SimpleElementValue;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class AnnotationDefaultAttributeTestCase extends AbstractTestCase
 {
@@ -31,6 +34,7 @@ public class AnnotationDefaultAttributeTestCase extends AbstractTestCase
      * to query the AnnotationDefault attribute against the method to discover
      * the default value that was originally declared.
      */
+    @Test
     public void testMethodAnnotations() throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotation");

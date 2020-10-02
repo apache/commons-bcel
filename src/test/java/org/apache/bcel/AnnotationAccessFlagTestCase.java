@@ -19,6 +19,9 @@
 package org.apache.bcel;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class AnnotationAccessFlagTestCase extends AbstractTestCase
 {
@@ -27,6 +30,7 @@ public class AnnotationAccessFlagTestCase extends AbstractTestCase
      * should be marked as an annotation type - which is detectable through
      * BCEL.
      */
+    @Test
     public void testAnnotationClassSaysItIs() throws ClassNotFoundException
     {
         JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotation");

@@ -18,22 +18,27 @@
 
 package org.apache.bcel.verifier;
 
+import org.junit.Test;
 
 public class VerifierInvokeTestCase extends AbstractVerifierTestCase {
 
+    @Test
     public void testLegalInvokeVirtual() {
         assertVerifyOK("TestLegalInvokeVirtual01", "Verification of invokevirtual on method defined in superclass must pass.");
         assertVerifyOK("TestLegalInvokeVirtual02", "Verification of invokevirtual on method defined in superinterface must pass.");
     }
 
+    @Test
     public void testLegalInvokeStatic() {
         assertVerifyOK("TestLegalInvokeStatic01", "Verification of invokestatic on method defined in superclass must pass.");
     }
 
+    @Test
     public void testLegalInvokeInterface() {
         assertVerifyOK("TestLegalInvokeInterface01", "Verification of invokeinterface on method defined in superinterface must pass.");
     }
 
+    @Test
     public void testLegalInvokeSpecial() {
         assertVerifyOK("TestLegalInvokeSpecial01", "Verification of invokespecial on method defined in superclass must pass.");
         assertVerifyOK("TestLegalInvokeSpecial02", "Verification of invokespecial on method defined in superclass must pass.");

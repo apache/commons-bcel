@@ -24,9 +24,13 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.util.InstructionFinder;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class InstructionFinderTestCase extends AbstractTestCase
 {
+    @Test
     public void testSearchAll() throws Exception
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".util.InstructionFinder");

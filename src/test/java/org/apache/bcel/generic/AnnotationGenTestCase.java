@@ -31,6 +31,11 @@ import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {
@@ -43,6 +48,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
     /**
      * Programmatically construct an mutable annotation (AnnotationGen) object.
      */
+    @Test
     public void testConstructMutableAnnotation()
     {
         // Create the containing class
@@ -68,6 +74,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         checkSerialize(a, cp);
     }
 
+    @Test
     public void testVisibleInvisibleAnnotationGen()
     {
         // Create the containing class

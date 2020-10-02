@@ -27,12 +27,17 @@ import org.apache.bcel.classfile.ElementValuePair;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class FieldAnnotationsTestCase extends AbstractTestCase
 {
     /**
      * Check field AnnotationEntrys are retrievable.
      */
+    @Test
     public void testFieldAnnotationEntrys() throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
@@ -44,6 +49,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     /**
      * Check field AnnotationEntrys (de)serialize ok.
      */
+    @Test
     public void testFieldAnnotationEntrysReadWrite() throws ClassNotFoundException,
             IOException
     {
@@ -64,6 +70,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
      * Check we can load in a class, modify its field AnnotationEntrys, save it,
      * reload it and everything is correct.
      */
+    @Test
     public void testFieldAnnotationModification()
             throws ClassNotFoundException
     {

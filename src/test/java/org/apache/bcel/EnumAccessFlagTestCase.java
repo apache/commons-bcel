@@ -19,6 +19,9 @@
 package org.apache.bcel;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class EnumAccessFlagTestCase extends AbstractTestCase
 {
@@ -27,6 +30,7 @@ public class EnumAccessFlagTestCase extends AbstractTestCase
      * marked such that we can determine from the access flags (through BCEL)
      * that it was originally an enum type declaration.
      */
+    @Test
     public void testEnumClassSaysItIs() throws ClassNotFoundException
     {
         JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleEnum");

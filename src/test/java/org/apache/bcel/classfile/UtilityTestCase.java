@@ -17,10 +17,13 @@
 
 package org.apache.bcel.classfile;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class UtilityTestCase extends TestCase {
+import static org.junit.Assert.assertEquals;
 
+public class UtilityTestCase {
+
+    @Test
     public void testSignatureToStringWithGenerics() throws Exception {
     // tests for BCEL-197
         assertEquals("generic signature",

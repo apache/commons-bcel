@@ -31,6 +31,10 @@ import org.apache.bcel.generic.ElementValueGen;
 import org.apache.bcel.generic.EnumElementValueGen;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.SimpleElementValueGen;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class ElementValueGenTestCase extends AbstractTestCase
 {
@@ -43,6 +47,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
     /**
      * Create primitive element values
      */
+    @Test
     public void testCreateIntegerElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");
@@ -57,6 +62,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
         checkSerialize(evg, cp);
     }
 
+    @Test
     public void testCreateFloatElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");
@@ -71,6 +77,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
         checkSerialize(evg, cp);
     }
 
+    @Test
     public void testCreateDoubleElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");
@@ -85,6 +92,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
         checkSerialize(evg, cp);
     }
 
+    @Test
     public void testCreateLongElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");
@@ -99,6 +107,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
         checkSerialize(evg, cp);
     }
 
+    @Test
     public void testCreateCharElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");
@@ -113,6 +122,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
         checkSerialize(evg, cp);
     }
 
+    @Test
     public void testCreateByteElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");
@@ -127,6 +137,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
         checkSerialize(evg, cp);
     }
 
+    @Test
     public void testCreateBooleanElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");
@@ -141,6 +152,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
         checkSerialize(evg, cp);
     }
 
+    @Test
     public void testCreateShortElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");
@@ -157,6 +169,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
 
     // //
     // Create string element values
+    @Test
     public void testCreateStringElementValue() throws Exception
     {
         // Create HelloWorld
@@ -174,6 +187,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
 
     // //
     // Create enum element value
+    @Test
     public void testCreateEnumElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");
@@ -198,6 +212,7 @@ public class ElementValueGenTestCase extends AbstractTestCase
 
     // //
     // Create class element value
+    @Test
     public void testCreateClassElementValue() throws Exception
     {
         final ClassGen cg = createClassGen("HelloWorld");

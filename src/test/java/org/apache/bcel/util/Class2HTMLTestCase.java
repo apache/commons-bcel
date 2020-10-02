@@ -21,17 +21,17 @@ import java.io.File;
 import java.io.FileInputStream;
 
 import org.apache.bcel.classfile.ClassParser;
-import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertTrue;
 
-public class Class2HTMLTestCase extends TestCase {
+public class Class2HTMLTestCase {
 
+    @Test
     public void testConvertJavaUtil() throws Exception {
         final File outputDir = new File("target/test-output/html");
         if (!outputDir.mkdirs()) { // either was not created or already existed
-            Assert.assertTrue(outputDir.isDirectory()); // fail if missing
+            assertTrue(outputDir.isDirectory()); // fail if missing
         }
 
         try (FileInputStream file = new FileInputStream("target/test-classes/Java8Example.class")) {

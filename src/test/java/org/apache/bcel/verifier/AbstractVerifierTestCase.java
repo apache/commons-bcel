@@ -21,9 +21,11 @@ package org.apache.bcel.verifier;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-public abstract class AbstractVerifierTestCase extends TestCase {
+public abstract class AbstractVerifierTestCase {
 
     public static final String TEST_PACKAGE = AbstractVerifierTestCase.class.getPackage().getName() + ".tests.";
 

@@ -23,17 +23,21 @@ import java.io.InputStream;
 
 import org.apache.bcel.AbstractTestCase;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class ClassPathTestCase extends AbstractTestCase {
 
+    @Test
     public void testGetClassFile() throws IOException {
         Assert.assertNotNull(ClassPath.SYSTEM_CLASS_PATH.getClassFile("java.lang.String"));
     }
 
+    @Test
     public void testGetResource() {
         Assert.assertNotNull(ClassPath.SYSTEM_CLASS_PATH.getResource("java/lang/String.class"));
     }
 
+    @Test
     public void testGetResourceAsStream() throws IOException {
         try (final InputStream inputStream = ClassPath.SYSTEM_CLASS_PATH
                 .getResourceAsStream("java/lang/String.class")) {

@@ -17,9 +17,12 @@
  */
 package org.apache.bcel.generic;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class TypeTestCase extends TestCase {
+import static org.junit.Assert.assertEquals;
+
+public class TypeTestCase {
+    @Test
     public void testBCEL243() {
         // expectedValue = "Ljava/util/Map<TX;Ljava/util/List<TY;>;>;";
         // The line commented out above is the correct expected value; however,

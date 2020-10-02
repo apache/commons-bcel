@@ -33,11 +33,11 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
-import org.junit.Assert;
+import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.fail;
 
-public final class PerformanceTest extends TestCase {
+public final class PerformanceTest {
 
     private static final boolean REPORT = Boolean.parseBoolean(System.getProperty("PerformanceTest.report", "true"));
 
@@ -131,6 +131,7 @@ public final class PerformanceTest extends TestCase {
         }
     }
 
+    @Test
     public void testPerformance() {
         final File javaLib = new File(System.getProperty("java.home"), "lib");
         javaLib.listFiles((FileFilter) file -> {
@@ -138,7 +139,7 @@ public final class PerformanceTest extends TestCase {
                 try {
                     test(file);
                 } catch (final IOException e) {
-                    Assert.fail(e.getMessage());
+                    fail(e.getMessage());
                 }
             }
             return false;

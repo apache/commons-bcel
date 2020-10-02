@@ -19,9 +19,14 @@
 package org.apache.bcel;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class AnonymousClassTestCase extends AbstractTestCase
 {
+    @Test
     public void testRegularClassIsNotAnonymous() throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest");
@@ -30,6 +35,7 @@ public class AnonymousClassTestCase extends AbstractTestCase
         assertFalse("regular outer classes are not nested", clazz.isNested());
     }
 
+    @Test
     public void testNamedInnerClassIsNotAnonymous()
             throws ClassNotFoundException
     {
@@ -39,6 +45,7 @@ public class AnonymousClassTestCase extends AbstractTestCase
         assertTrue("regular inner classes are nested", clazz.isNested());
     }
 
+    @Test
     public void testStaticInnerClassIsNotAnonymous()
             throws ClassNotFoundException
     {
@@ -48,6 +55,7 @@ public class AnonymousClassTestCase extends AbstractTestCase
         assertTrue("regular static inner classes are nested", clazz.isNested());
     }
 
+    @Test
     public void testAnonymousInnerClassIsAnonymous()
             throws ClassNotFoundException
     {
