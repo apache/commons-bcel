@@ -22,8 +22,9 @@ import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
 
 public class ConstantPoolTestCase extends AbstractTestCase {
 
@@ -38,7 +39,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
             if (method.getName().equals("<init>")) {
                 for (final InstructionHandle instructionHandle : getInstructionHandles(clazz, cp, method)) {
                     final String string = instructionHandle.getInstruction().toString(cp.getConstantPool());
-                    Assert.assertNotNull(string);
+                    assertNotNull(string);
                     // TODO Need real assertions.
                     // System.out.println(string);
                 }

@@ -18,12 +18,12 @@
 package org.apache.bcel.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
 import org.apache.bcel.classfile.JavaClass;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -36,11 +36,11 @@ public class LruCacheClassPathRepositoryTestCase {
         try (final ClassPath classPath = new ClassPath("")) {
             final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
             final JavaClass class1 = repository.loadClass("java.lang.String");
-            Assert.assertNotNull(class1);
+            assertNotNull(class1);
             final JavaClass class2 = repository.loadClass("java.lang.Long");
-            Assert.assertNotNull(class2);
+            assertNotNull(class2);
             final JavaClass class3 = repository.loadClass("java.lang.Integer"); // Evicts class1
-            Assert.assertNotNull(class3);
+            assertNotNull(class3);
 
             assertNull(repository.findClass("java.lang.String"));
             final JavaClass cachedClass2 = repository.findClass("java.lang.Long");
@@ -53,12 +53,12 @@ public class LruCacheClassPathRepositoryTestCase {
         try (final ClassPath classPath = new ClassPath("")) {
             final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
             final JavaClass class1 = repository.loadClass("java.lang.String");
-            Assert.assertNotNull(class1);
+            assertNotNull(class1);
             final JavaClass class2 = repository.loadClass("java.lang.Long");
-            Assert.assertNotNull(class2);
+            assertNotNull(class2);
             repository.findClass("java.lang.String"); // Uses class1
             final JavaClass class3 = repository.loadClass("java.lang.Integer"); // Evicts class2
-            Assert.assertNotNull(class3);
+            assertNotNull(class3);
 
             assertNull(repository.findClass("java.lang.Long"));
             final JavaClass cachedClass1 = repository.findClass("java.lang.String");

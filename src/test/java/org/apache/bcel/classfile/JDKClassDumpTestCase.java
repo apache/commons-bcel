@@ -18,6 +18,7 @@
 package org.apache.bcel.classfile;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -29,7 +30,6 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -45,7 +45,7 @@ public class JDKClassDumpTestCase {
                 try {
                     testJar(file);
                 } catch (final Exception e) {
-                    Assert.fail(e.getMessage());
+                    fail(e.getMessage());
                 }
             }
             return false;

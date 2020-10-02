@@ -17,8 +17,9 @@
  */
 package org.apache.bcel.generic;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
 
 public class InstructionHandleTestCase {
 
@@ -27,25 +28,25 @@ public class InstructionHandleTestCase {
     @Test(expected=ClassGenException.class)
     public void testsetInstructionNull() {
         final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
-        Assert.assertNotNull(ih);
+        assertNotNull(ih);
         ih.setInstruction(null);
-        Assert.assertNotNull(ih);
+        assertNotNull(ih);
     }
 
     @Test
     public void testsetInstructionI() {
         final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
-        Assert.assertNotNull(ih);
+        assertNotNull(ih);
         ih.setInstruction(new NOP());
-        Assert.assertNotNull(ih);
+        assertNotNull(ih);
     }
 
     @Test(expected=ClassGenException.class)
     public void testsetInstructionnotI() {
         final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
-        Assert.assertNotNull(ih);
+        assertNotNull(ih);
         ih.setInstruction(new GOTO(null));
-        Assert.assertNotNull(ih);
+        assertNotNull(ih);
     }
 
     @Test(expected=ClassGenException.class)

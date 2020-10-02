@@ -26,9 +26,9 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.EnclosingMethod;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
-import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class EnclosingMethodAttributeTestCase extends AbstractTestCase
@@ -100,7 +100,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
         // Read in the new version and check it is OK
         final SyntheticRepository repos2 = createRepos(".");
         final JavaClass clazz2 = repos2.loadClass("AttributeTestClassEM02$1");
-        Assert.assertNotNull(clazz2); // Use the variable to avoid a warning
+        assertNotNull(clazz2); // Use the variable to avoid a warning
         final EnclosingMethod em = (EnclosingMethod) encMethodAttrs[0];
         final String enclosingClassName = em.getEnclosingClass().getBytes(pool);
         assertTrue(

@@ -19,6 +19,8 @@ package org.apache.bcel.generic;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -49,7 +51,6 @@ import org.apache.bcel.util.ModularRuntimeImage;
 import org.apache.commons.lang3.JavaVersion;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
-import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -92,7 +93,7 @@ public class JdkGenericDumpTestCase {
                 try (final InputStream inputStream = Files.newInputStream(path)) {
                     final ClassParser classParser = new ClassParser(inputStream, name.toAbsolutePath().toString());
                     final JavaClass javaClass = classParser.parse();
-                    Assert.assertNotNull(javaClass);
+                    assertNotNull(javaClass);
                 }
 
             }
@@ -282,7 +283,7 @@ public class JdkGenericDumpTestCase {
         Assume.assumeTrue(SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_9));
         try (final ModularRuntimeImage mri = new ModularRuntimeImage(javaHome)) {
             final List<Path> modules = mri.modules();
-            Assert.assertFalse(modules.isEmpty());
+            assertFalse(modules.isEmpty());
             for (final Path path : modules) {
                 Files.walkFileTree(path, new ClassParserFilesVisitor("*.class"));
             }

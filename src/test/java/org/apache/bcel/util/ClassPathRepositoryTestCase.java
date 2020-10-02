@@ -20,8 +20,11 @@ package org.apache.bcel.util;
 import java.io.IOException;
 
 import org.apache.bcel.classfile.JavaClass;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests {@link ClassPathRepository}, {@link MemorySensitiveClassPathRepository}, and {@link
@@ -34,21 +37,21 @@ public class ClassPathRepositoryTestCase {
     private void verifyCaching(final AbstractClassPathRepository repository) throws ClassNotFoundException {
         // Tests loadClass()
         final JavaClass class1 = repository.loadClass("java.lang.String");
-        Assert.assertNotNull(class1);
+        assertNotNull(class1);
         final JavaClass class2 = repository.loadClass("java/lang/Long"); // Slashes should work
-        Assert.assertNotNull(class2);
+        assertNotNull(class2);
 
         // Tests findClass()
-        Assert.assertEquals(class1, repository.findClass("java.lang.String"));
-        Assert.assertEquals(class2, repository.findClass("java.lang.Long"));
+        assertEquals(class1, repository.findClass("java.lang.String"));
+        assertEquals(class2, repository.findClass("java.lang.Long"));
 
         // Tests removeClass()
         repository.removeClass(class1);
-        Assert.assertNull(repository.findClass("java.lang.String"));
+        assertNull(repository.findClass("java.lang.String"));
 
         // Tests clear()
         repository.clear();
-        Assert.assertNull(repository.findClass("java.lang.Long"));
+        assertNull(repository.findClass("java.lang.Long"));
     }
 
     @Test
@@ -76,7 +79,7 @@ public class ClassPathRepositoryTestCase {
     public void testClassPath() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
-            Assert.assertEquals(classPath, repository.getClassPath());
+            assertEquals(classPath, repository.getClassPath());
         }
     }
 
