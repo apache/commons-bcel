@@ -29,7 +29,8 @@ import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
-import org.junit.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestReturn01Creator extends TestCreator {
   private final InstructionFactory _factory;
@@ -57,10 +58,10 @@ public void create(final OutputStream out) throws IOException {
             "<init>", TEST_PACKAGE+".TestReturn01", il, _cp);
 
     final InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
-    Assert.assertNotNull(ih_0); // TODO why is this not used
+    assertNotNull(ih_0); // TODO why is this not used
     il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Const.INVOKESPECIAL));
     final InstructionHandle ih_4 = il.append(InstructionFactory.createReturn(Type.VOID));
-    Assert.assertNotNull(ih_4); // TODO why is this not used
+    assertNotNull(ih_4); // TODO why is this not used
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());
@@ -73,12 +74,12 @@ public void create(final OutputStream out) throws IOException {
             new String[] {  }, "foo", TEST_PACKAGE+".TestReturn01", il, _cp);
 
     final InstructionHandle ih_0 = il.append(_factory.createNew("java.lang.Object"));
-    Assert.assertNotNull(ih_0); // TODO why is this not used
+    assertNotNull(ih_0); // TODO why is this not used
     il.append(InstructionConst.DUP);
     il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Const.INVOKESPECIAL));
     il.append(InstructionConst.NOP);
     final InstructionHandle ih_8 = il.append(InstructionFactory.createReturn(Type.OBJECT));
-    Assert.assertNotNull(ih_8); // TODO why is this not used
+    assertNotNull(ih_8); // TODO why is this not used
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());

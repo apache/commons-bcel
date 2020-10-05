@@ -31,6 +31,9 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.InvokeInstruction;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PLSETestCase extends AbstractTestCase
 {
@@ -38,6 +41,7 @@ public class PLSETestCase extends AbstractTestCase
      * BCEL-208: A couple of methods in MethodGen.java need to test for
      * an empty instruction list.
      */
+    @Test
     public void testB208() throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.PLSETestClass");
@@ -54,6 +58,7 @@ public class PLSETestCase extends AbstractTestCase
     /**
      * BCEL-79:
      */
+    @Test
     public void testB79() throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.PLSETestClass");
@@ -66,12 +71,13 @@ public class PLSETestCase extends AbstractTestCase
         final MethodGen mg = new MethodGen(m, gen.getClassName(), pool);
         final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
         //System.out.println(new_lvt);
-        assertEquals("number of locals", lvt.getTableLength(), new_lvt.getTableLength());
+        assertEquals(lvt.getTableLength(), new_lvt.getTableLength(), "number of locals");
     }
 
     /**
      * BCEL-262:
      */
+    @Test
     public void testB262() throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.PLSETestEnum");
@@ -93,6 +99,7 @@ public class PLSETestCase extends AbstractTestCase
     /**
      * BCEL-295:
      */
+    @Test
     public void testB295() throws Exception
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.PLSETestClass2");
@@ -106,12 +113,13 @@ public class PLSETestCase extends AbstractTestCase
         final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
         final LocalVariable new_lv = new_lvt.getLocalVariable(2, 4);  // 'i'
         //System.out.println(new_lv);
-        assertEquals("live range length", lv.getLength(), new_lv.getLength());
+        assertEquals(lv.getLength(), new_lv.getLength(), "live range length");
     }
 
     /**
      * Test to improve BCEL tests code coverage for classfile/Utility.java.
      */
+    @Test
     public void testCoverage() throws ClassNotFoundException, java.io.IOException
     {
         // load a class with a wide variety of byte codes - including tableswitch and lookupswitch

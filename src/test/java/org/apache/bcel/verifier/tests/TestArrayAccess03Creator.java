@@ -31,7 +31,8 @@ import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.PUSH;
 import org.apache.bcel.generic.Type;
-import org.junit.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestArrayAccess03Creator extends TestCreator {
   private final InstructionFactory _factory;
@@ -59,10 +60,10 @@ public void create(final OutputStream out) throws IOException {
             TEST_PACKAGE+".TestArrayAccess03", il, _cp);
 
     final InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
-    Assert.assertNotNull(ih_0); // TODO why is this not used
+    assertNotNull(ih_0); // TODO why is this not used
     il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Const.INVOKESPECIAL));
     final InstructionHandle ih_4 = il.append(InstructionFactory.createReturn(Type.VOID));
-    Assert.assertNotNull(ih_4); // TODO why is this not used
+    assertNotNull(ih_4); // TODO why is this not used
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());
@@ -75,18 +76,18 @@ public void create(final OutputStream out) throws IOException {
             new String[] { "arg0" }, "test", TEST_PACKAGE+".TestArrayAccess03", il, _cp);
 
     final InstructionHandle ih_0 = il.append(new PUSH(_cp, 1));
-    Assert.assertNotNull(ih_0); // TODO why is this not used
+    assertNotNull(ih_0); // TODO why is this not used
     il.append(_factory.createNewArray(new ObjectType(TEST_PACKAGE+".TestArrayAccess03"), (short) 1));
     il.append(InstructionFactory.createStore(Type.OBJECT, 1));
     final InstructionHandle ih_5 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
-    Assert.assertNotNull(ih_5); // TODO why is this not used
+    assertNotNull(ih_5); // TODO why is this not used
     il.append(new PUSH(_cp, 0));
     il.append(_factory.createNew(TEST_PACKAGE+".TestArrayAccess03"));
     il.append(InstructionConst.DUP);
     il.append(_factory.createInvoke(TEST_PACKAGE+".TestArrayAccess03", "<init>", Type.VOID, Type.NO_ARGS, Const.INVOKESPECIAL));
     il.append(InstructionConst.AASTORE);
     final InstructionHandle ih_15 = il.append(InstructionFactory.createReturn(Type.VOID));
-    Assert.assertNotNull(ih_15); // TODO why is this not used
+    assertNotNull(ih_15); // TODO why is this not used
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());

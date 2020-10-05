@@ -17,38 +17,38 @@
  */
 package org.apache.bcel.generic;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BranchHandleTestCase {
 
     // Test that setInstruction only allows BranchInstructions
-    @Test(expected=ClassGenException.class)
+    @Test
     public void testsetInstructionNull() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
-        Assert.assertNotNull(bh);
-        bh.setInstruction(null);
-        Assert.assertNotNull(bh);
+        assertNotNull(bh);
+        assertThrows(ClassGenException.class, () -> bh.setInstruction(null));
     }
 
     @Test
     public void testsetInstructionBI() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
-        Assert.assertNotNull(bh);
+        assertNotNull(bh);
         bh.setInstruction(new GOTO(null));
-        Assert.assertNotNull(bh);
+        assertNotNull(bh);
     }
 
-    @Test(expected=ClassGenException.class)
+    @Test
     public void testsetInstructionnotBI() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
-        Assert.assertNotNull(bh);
-        bh.setInstruction(new NOP());
-        Assert.assertNotNull(bh);
+        assertNotNull(bh);
+        assertThrows(ClassGenException.class, () -> bh.setInstruction(new NOP()));
     }
 
-    @Test(expected=ClassGenException.class)
+    @Test
     public void testGetBHnull() {
-        BranchHandle.getBranchHandle(null);
+        assertThrows(ClassGenException.class, () -> BranchHandle.getBranchHandle(null));
     }
 }

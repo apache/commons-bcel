@@ -17,14 +17,15 @@
  */
 package org.apache.bcel.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 
 import org.apache.bcel.classfile.JavaClass;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link LruCacheClassPathRepository}.
@@ -36,11 +37,11 @@ public class LruCacheClassPathRepositoryTestCase {
         try (final ClassPath classPath = new ClassPath("")) {
             final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
             final JavaClass class1 = repository.loadClass("java.lang.String");
-            Assert.assertNotNull(class1);
+            assertNotNull(class1);
             final JavaClass class2 = repository.loadClass("java.lang.Long");
-            Assert.assertNotNull(class2);
+            assertNotNull(class2);
             final JavaClass class3 = repository.loadClass("java.lang.Integer"); // Evicts class1
-            Assert.assertNotNull(class3);
+            assertNotNull(class3);
 
             assertNull(repository.findClass("java.lang.String"));
             final JavaClass cachedClass2 = repository.findClass("java.lang.Long");
@@ -53,12 +54,12 @@ public class LruCacheClassPathRepositoryTestCase {
         try (final ClassPath classPath = new ClassPath("")) {
             final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
             final JavaClass class1 = repository.loadClass("java.lang.String");
-            Assert.assertNotNull(class1);
+            assertNotNull(class1);
             final JavaClass class2 = repository.loadClass("java.lang.Long");
-            Assert.assertNotNull(class2);
+            assertNotNull(class2);
             repository.findClass("java.lang.String"); // Uses class1
             final JavaClass class3 = repository.loadClass("java.lang.Integer"); // Evicts class2
-            Assert.assertNotNull(class3);
+            assertNotNull(class3);
 
             assertNull(repository.findClass("java.lang.Long"));
             final JavaClass cachedClass1 = repository.findClass("java.lang.String");
@@ -66,10 +67,10 @@ public class LruCacheClassPathRepositoryTestCase {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testZeroCacheSize() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
-            new LruCacheClassPathRepository(classPath, 0);
+            assertThrows(IllegalArgumentException.class, () -> new LruCacheClassPathRepository(classPath, 0));
         }
     }
 }

@@ -23,9 +23,7 @@ import org.apache.bcel.generic.ILOAD;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.NOP;
-import org.junit.Test;
-
-import junit.framework.AssertionFailedError;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for https://issues.apache.org/jira/browse/BCEL-267 "Race conditions on
@@ -55,7 +53,7 @@ public class HandleTestCase {
                     if (j > 0) {
                         checkLinkage(handle, j);
                         if (start != ((GOTO) handle.getInstruction()).getTarget()) {
-                            final AssertionFailedError error = new AssertionFailedError(
+                            final AssertionError error = new AssertionError(
                                     "unexpected instruction at index " + j);
                             exception = error;
                             throw error;
@@ -81,7 +79,7 @@ public class HandleTestCase {
         final InstructionHandle prev = ih.getPrev();
         final InstructionHandle next = ih.getNext();
         if ((prev != null && prev.getNext() != ih) || (next != null && next.getPrev() != ih)) {
-            final AssertionFailedError error = new AssertionFailedError("corrupt instruction list at index " + index);
+            final AssertionError error = new AssertionError("corrupt instruction list at index " + index);
             exception = error;
             throw error;
         }
@@ -103,7 +101,7 @@ public class HandleTestCase {
                     final InstructionHandle handle = instructionHandles[j];
                     checkLinkage(handle, j);
                     if (j != ((ILOAD) handle.getInstruction()).getIndex()) {
-                        final AssertionFailedError error = new AssertionFailedError("unexpected instruction at index " + j);
+                        final AssertionError error = new AssertionError("unexpected instruction at index " + j);
                         exception = error;
                         throw error;
                     }

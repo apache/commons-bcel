@@ -21,9 +21,11 @@ package org.apache.bcel.verifier;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-public abstract class AbstractVerifierTestCase extends TestCase {
+public abstract class AbstractVerifierTestCase {
 
     public static final String TEST_PACKAGE = AbstractVerifierTestCase.class.getPackage().getName() + ".tests.";
 
@@ -35,7 +37,7 @@ public abstract class AbstractVerifierTestCase extends TestCase {
      */
     public void assertVerifyOK(final String classname, final String message) {
         final String testClassname = TEST_PACKAGE + classname;
-        assertTrue(message, doAllPasses(testClassname));
+        assertTrue(doAllPasses(testClassname), message);
     }
 
     /**
@@ -47,7 +49,7 @@ public abstract class AbstractVerifierTestCase extends TestCase {
      */
     public void assertVerifyRejected(final String classname, final String message) {
         final String testClassname = TEST_PACKAGE + classname;
-        assertFalse(message, doAllPasses(testClassname));
+        assertFalse(doAllPasses(testClassname), message);
     }
 
     /**
