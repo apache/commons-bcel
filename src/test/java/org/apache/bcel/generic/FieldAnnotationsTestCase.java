@@ -171,6 +171,6 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
                 return;
             }
         }
-        fail("Didnt find named element " + name);
+        fail("Didn't find named element " + name);
     }
 }
