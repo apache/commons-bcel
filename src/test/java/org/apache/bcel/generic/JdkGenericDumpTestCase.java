@@ -197,7 +197,7 @@ public class JdkGenericDumpTestCase {
         final InstructionList instructionList = new InstructionList(src);
         final byte[] out = instructionList.getByteCode();
         if (src.length == out.length) {
-            assertArrayEquals(src, out, name + ": " + method.toString());
+            assertArrayEquals(src, out, () -> name + ": " + method.toString());
         } else {
             System.out.println(name + ": " + method.toString() + " " + src.length + " " + out.length);
             System.out.println(bytesToHex(src));

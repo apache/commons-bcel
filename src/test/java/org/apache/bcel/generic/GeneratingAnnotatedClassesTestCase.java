@@ -263,7 +263,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
             }
             else
             {
-                fail("unexpected method "+method.getName());
+                fail(() -> "unexpected method " + method.getName());
             }
         }
     }
@@ -272,7 +272,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
     {
         final String methodName= method.getName();
         final AnnotationEntry[] annos= method.getAnnotationEntries();
-        assertEquals(expectedNumberAnnotations, annos.length, "For " + methodName);
+        assertEquals(expectedNumberAnnotations, annos.length, () -> "For " + methodName);
         if(expectedNumberAnnotations!=0)
         {
             assertArrayElementValue(nExpectedArrayValues, annos[0]);
@@ -299,7 +299,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         {
             final AnnotationEntry[] annos= parameterAnnotation.getAnnotationEntries();
             final int expectedLength = expectedNumberOfParmeterAnnotations[i++];
-            assertEquals(expectedLength, annos.length, methodName + " parameter " + i);
+            int j = i;
+            assertEquals(expectedLength, annos.length, () -> methodName + " parameter " + j);
             if(expectedLength!=0)
             {
                 assertSimpleElementValue(annos[0]);

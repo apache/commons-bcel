@@ -68,7 +68,7 @@ public class MethodGenTestCase {
             }
         }
 
-        fail("Method " + name + " not found in class " + cls);
+        fail(() -> "Method " + name + " not found in class " + cls);
         return null;
     }
 

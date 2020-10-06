@@ -80,7 +80,8 @@ public class JDKClassDumpTestCase {
             int i = 0;
             for (final int out : baos.toByteArray()) {
                 final int in = src.read();
-                assertEquals(in, out & 0xFF, name + ": Mismatch at " + i);
+                int j = i;
+                assertEquals(in, out & 0xFF, () -> (name + ": Mismatch at " + j));
                 i++;
             }
         }
