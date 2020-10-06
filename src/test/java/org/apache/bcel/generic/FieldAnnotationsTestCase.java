@@ -29,6 +29,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FieldAnnotationsTestCase extends AbstractTestCase
@@ -114,9 +115,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             System.err.println("With AnnotationEntrys: "
                     + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
-        assertTrue(f.getAnnotationEntries().length == 2,
-                "Should be 2 AnnotationEntrys on this field, but there are "
-                        + f.getAnnotationEntries().length);
+        assertEquals(2, f.getAnnotationEntries().length, "Wrong number of AnnotationEntries");
     }
 
     // helper methods
@@ -138,18 +137,10 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     private void checkAnnotationEntry(final AnnotationEntry a, final String name, final String elementname,
             final String elementvalue)
     {
-        assertTrue(a.getAnnotationType().equals(name),
-                "Expected AnnotationEntry to have name " + name
-                        + " but it had name " + a.getAnnotationType());
-        assertTrue(a.getElementValuePairs().length == 1,
-                "Expected AnnotationEntry to have one element but it had "
-                        + a.getElementValuePairs().length);
+        assertEquals(name, a.getAnnotationType(), "Wrong AnnotationEntry name");
+        assertEquals(1, a.getElementValuePairs().length, "Wrong number of AnnotationEntry elements");
         final ElementValuePair envp = a.getElementValuePairs()[0];
-        assertTrue(elementname.equals(envp.getNameString()),
-                "Expected element name " + elementname + " but was "
-                        + envp.getNameString());
-        assertTrue(elementvalue.equals(envp.getValue().stringifyValue()),
-                "Expected element value " + elementvalue + " but was "
-                        + envp.getValue().stringifyValue());
+        assertEquals(envp.getNameString(), elementname, "Wrong element name");
+        assertEquals(envp.getValue().stringifyValue(), elementvalue, "Wrong element value");
     }
 }
