@@ -35,7 +35,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ElementValueGenTestCase extends AbstractTestCase
 {
@@ -223,8 +222,6 @@ public class ElementValueGenTestCase extends AbstractTestCase
             evgAfter = ElementValueGen.readElementValue(dis, cpg);
         }
         final String afterValue = evgAfter.stringifyValue();
-        if (!beforeValue.equals(afterValue)) {
-            fail("Deserialization failed: before='" + beforeValue + "' after='" + afterValue + "'");
-        }
+        assertEquals(beforeValue, afterValue, "Deserialization failed");
     }
 }

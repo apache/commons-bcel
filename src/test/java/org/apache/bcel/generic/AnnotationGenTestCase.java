@@ -33,6 +33,7 @@ import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -140,27 +141,13 @@ public class AnnotationGenTestCase extends AbstractTestCase
                 annAfter = AnnotationEntryGen.read(dis, cpg, a.isRuntimeVisible());
             }
             final String afterName = annAfter.getTypeName();
-            if (!beforeName.equals(afterName))
-            {
-                fail("Deserialization failed: before type='" + beforeName
-                        + "' after type='" + afterName + "'");
-            }
-            if (a.getValues().size() != annAfter.getValues().size())
-            {
-                fail("Different numbers of element name value pairs?? "
-                        + a.getValues().size() + "!="
-                        + annAfter.getValues().size());
-            }
-            for (int i = 0; i < a.getValues().size(); i++)
-            {
+            assertEquals(beforeName, afterName, "Deserialization failed");
+            assertEquals(a.getValues().size(), annAfter.getValues().size(),
+                    "Different numbers of element name value pairs??");
+            for (int i = 0; i < a.getValues().size(); i++) {
                 final ElementValuePairGen beforeElement = a.getValues().get(i);
                 final ElementValuePairGen afterElement = annAfter.getValues().get(i);
-                if (!beforeElement.getNameString().equals(
-                        afterElement.getNameString()))
-                {
-                    fail("Different names?? " + beforeElement.getNameString()
-                            + "!=" + afterElement.getNameString());
-                }
+                assertEquals(beforeElement.getNameString(), afterElement.getNameString(), "Different names??");
             }
         }
         catch (final IOException ioe)
