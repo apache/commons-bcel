@@ -30,7 +30,6 @@ import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class FieldAnnotationsTestCase extends AbstractTestCase
 {
@@ -152,25 +151,5 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
         assertTrue(elementvalue.equals(envp.getValue().stringifyValue()),
                 "Expected element value " + elementvalue + " but was "
                         + envp.getValue().stringifyValue());
-    }
-
-    // helper methods
-    public void checkValue(final AnnotationEntry a, final String name, final String tostring)
-    {
-        for (int i = 0; i < a.getElementValuePairs().length; i++)
-        {
-            final ElementValuePair element = a.getElementValuePairs()[i];
-            if (element.getNameString().equals(name))
-            {
-                if (!element.getValue().stringifyValue().equals(tostring))
-                {
-                    fail("Expected element " + name + " to have value "
-                            + tostring + " but it had value "
-                            + element.getValue().stringifyValue());
-                }
-                return;
-            }
-        }
-        fail("Didn't find named element " + name);
     }
 }
