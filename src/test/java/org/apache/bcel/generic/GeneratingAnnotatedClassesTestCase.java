@@ -360,8 +360,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
             final ElementValuePairGen element = (ElementValuePairGen) name;
             if (element.getNameString().equals("dval"))
             {
-                if (((SimpleElementValueGen) element.getValue())
-                        .stringifyValue().equals("33.4")) {
+                if (element.getValue().stringifyValue().equals("33.4")) {
                     found = true;
                 }
             }

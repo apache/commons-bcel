@@ -20,7 +20,6 @@ package org.apache.bcel;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
@@ -134,7 +133,7 @@ public final class PerformanceTest {
     @Test
     public void testPerformance() {
         final File javaLib = new File(System.getProperty("java.home"), "lib");
-        javaLib.listFiles((FileFilter) file -> {
+        javaLib.listFiles(file -> {
             if(file.getName().endsWith(".jar")) {
                 try {
                     test(file);
