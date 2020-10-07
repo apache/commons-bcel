@@ -33,9 +33,9 @@ import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {
@@ -49,7 +49,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
      * Programmatically construct an mutable annotation (AnnotationGen) object.
      */
     @Test
-    public void testConstructMutableAnnotation()
+    public void testConstructMutableAnnotation() throws IOException
     {
         // Create the containing class
         final ClassGen cg = createClassGen("HelloWorld");
@@ -123,49 +123,28 @@ public class AnnotationGenTestCase extends AbstractTestCase
         assertTrue(foundRIV, "Should have seen a RuntimeInvisibleAnnotation");
     }
 
-    private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg)
+    private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg) throws IOException
     {
-        try
-        {
-            final String beforeName = a.getTypeName();
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            try (DataOutputStream dos = new DataOutputStream(baos)) {
-                a.dump(dos);
-                dos.flush();
-            }
-            final byte[] bs = baos.toByteArray();
-            final ByteArrayInputStream bais = new ByteArrayInputStream(bs);
-            AnnotationEntryGen annAfter;
-            try (DataInputStream dis = new DataInputStream(bais)) {
-                annAfter = AnnotationEntryGen.read(dis, cpg, a.isRuntimeVisible());
-            }
-            final String afterName = annAfter.getTypeName();
-            if (!beforeName.equals(afterName))
-            {
-                fail("Deserialization failed: before type='" + beforeName
-                        + "' after type='" + afterName + "'");
-            }
-            if (a.getValues().size() != annAfter.getValues().size())
-            {
-                fail("Different numbers of element name value pairs?? "
-                        + a.getValues().size() + "!="
-                        + annAfter.getValues().size());
-            }
-            for (int i = 0; i < a.getValues().size(); i++)
-            {
-                final ElementValuePairGen beforeElement = a.getValues().get(i);
-                final ElementValuePairGen afterElement = annAfter.getValues().get(i);
-                if (!beforeElement.getNameString().equals(
-                        afterElement.getNameString()))
-                {
-                    fail("Different names?? " + beforeElement.getNameString()
-                            + "!=" + afterElement.getNameString());
-                }
-            }
+        final String beforeName = a.getTypeName();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (DataOutputStream dos = new DataOutputStream(baos)) {
+            a.dump(dos);
+            dos.flush();
         }
-        catch (final IOException ioe)
-        {
-            fail("Unexpected exception whilst checking serialization: " + ioe);
+        final byte[] bs = baos.toByteArray();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(bs);
+        AnnotationEntryGen annAfter;
+        try (DataInputStream dis = new DataInputStream(bais)) {
+            annAfter = AnnotationEntryGen.read(dis, cpg, a.isRuntimeVisible());
+        }
+        final String afterName = annAfter.getTypeName();
+        assertEquals(beforeName, afterName, "Deserialization failed");
+        assertEquals(a.getValues().size(), annAfter.getValues().size(),
+                "Different numbers of element name value pairs??");
+        for (int i = 0; i < a.getValues().size(); i++) {
+            final ElementValuePairGen beforeElement = a.getValues().get(i);
+            final ElementValuePairGen afterElement = annAfter.getValues().get(i);
+            assertEquals(beforeElement.getNameString(), afterElement.getNameString(), "Different names??");
         }
     }
 }

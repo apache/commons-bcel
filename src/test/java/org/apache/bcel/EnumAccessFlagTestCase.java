@@ -21,6 +21,7 @@ package org.apache.bcel;
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EnumAccessFlagTestCase extends AbstractTestCase
@@ -37,7 +38,7 @@ public class EnumAccessFlagTestCase extends AbstractTestCase
         assertTrue(clazz.isEnum(),
                 "Expected SimpleEnum class to say it was an enum - but it didn't !");
         clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleClass");
-        assertTrue(!clazz.isEnum(),
+        assertFalse(clazz.isEnum(),
                 "Expected SimpleClass class to say it was not an enum - but it didn't !");
     }
 }

@@ -25,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystems;
@@ -198,7 +197,7 @@ public class JdkGenericDumpTestCase {
         final InstructionList instructionList = new InstructionList(src);
         final byte[] out = instructionList.getByteCode();
         if (src.length == out.length) {
-            assertArrayEquals(src, out, name + ": " + method.toString());
+            assertArrayEquals(src, out, () -> name + ": " + method.toString());
         } else {
             System.out.println(name + ": " + method.toString() + " " + src.length + " " + out.length);
             System.out.println(bytesToHex(src));
@@ -212,12 +211,12 @@ public class JdkGenericDumpTestCase {
 
     private File[] listJdkJars(String javaHome) throws Exception {
         final File javaLib = new File(javaHome, "lib");
-        return javaLib.listFiles((FileFilter) file -> file.getName().endsWith(".jar"));
+        return javaLib.listFiles(file -> file.getName().endsWith(".jar"));
     }
 
     private File[] listJdkModules(String javaHome) throws Exception {
         final File javaLib = new File(javaHome, "jmods");
-        return javaLib.listFiles((FileFilter) file -> file.getName().endsWith(".jmod"));
+        return javaLib.listFiles(file -> file.getName().endsWith(".jmod"));
     }
 
     private void testJar(final File file) throws Exception {

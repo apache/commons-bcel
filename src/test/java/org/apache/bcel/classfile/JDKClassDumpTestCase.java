@@ -24,7 +24,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
@@ -40,7 +39,7 @@ public class JDKClassDumpTestCase {
     @Test
     public void testPerformance() throws Exception {
         final File javaLib = new File(System.getProperty("java.home") + "/lib");
-        javaLib.listFiles((FileFilter) file -> {
+        javaLib.listFiles(file -> {
             if (file.getName().endsWith(".jar")) {
                 try {
                     testJar(file);
@@ -81,7 +80,8 @@ public class JDKClassDumpTestCase {
             int i = 0;
             for (final int out : baos.toByteArray()) {
                 final int in = src.read();
-                assertEquals(in, out & 0xFF, name + ": Mismatch at " + i);
+                int j = i;
+                assertEquals(in, out & 0xFF, () -> (name + ": Mismatch at " + j));
                 i++;
             }
         }

@@ -21,6 +21,7 @@ package org.apache.bcel;
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnnotationAccessFlagTestCase extends AbstractTestCase
@@ -37,7 +38,7 @@ public class AnnotationAccessFlagTestCase extends AbstractTestCase
         assertTrue(clazz.isAnnotation(),
                 "Expected SimpleAnnotation class to say it was an annotation - but it didn't !");
         clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleClass");
-        assertTrue(!clazz.isAnnotation(),
+        assertFalse(clazz.isAnnotation(),
                 "Expected SimpleClass class to say it was not an annotation - but it didn't !");
     }
 }
