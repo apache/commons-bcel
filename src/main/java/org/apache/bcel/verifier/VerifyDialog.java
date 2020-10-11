@@ -64,7 +64,7 @@ public class VerifyDialog extends javax.swing.JDialog {
      * instances so the JVM can be exited afer every Dialog had been
      * closed.
      */
-    private static int classes_to_verify;
+    private static int classesToVerify;
 
     /** Machine-generated. */
     class IvjEventHandler implements java.awt.event.ActionListener {
@@ -472,7 +472,7 @@ public class VerifyDialog extends javax.swing.JDialog {
      * @param args java.lang.String[] fully qualified names of classes to verify.
      */
     public static void main( final java.lang.String[] args ) {
-        classes_to_verify = args.length;
+        classesToVerify = args.length;
         for (final String arg : args) {
             try {
                 VerifyDialog aVerifyDialog;
@@ -482,8 +482,8 @@ public class VerifyDialog extends javax.swing.JDialog {
 
                     @Override
                     public void windowClosing( final java.awt.event.WindowEvent e ) {
-                        classes_to_verify--;
-                        if (classes_to_verify == 0) {
+                        classesToVerify--;
+                        if (classesToVerify == 0) {
                             System.exit(0);
                         }
                     }

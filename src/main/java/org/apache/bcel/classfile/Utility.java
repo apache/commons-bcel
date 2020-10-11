@@ -831,30 +831,29 @@ public abstract class Utility {
             index += unwrap(consumed_chars); // update position
             // ignore any throws information in the signature
             return type;
-        } else {
-            // Could be Class or Type...
-            type = typeSignatureToString(signature.substring(index), chopit);
-            index += unwrap(consumed_chars); // update position
-            if ((typeParams.length() == 0) && (index == signature.length())) {
-                // We have a Type signature.
-                return type;
-            }
-            // We have a Class signature.
-            final StringBuilder typeClass = new StringBuilder(typeParams);
-            typeClass.append(" extends ");
-            typeClass.append(type);
-            if (index < signature.length()) {
-                typeClass.append(" implements ");
-                typeClass.append(typeSignatureToString(signature.substring(index), chopit));
-                index += unwrap(consumed_chars); // update position
-            }
-            while (index < signature.length()) {
-                typeClass.append(", ");
-                typeClass.append(typeSignatureToString(signature.substring(index), chopit));
-                index += unwrap(consumed_chars); // update position
-            }
-            return typeClass.toString();
         }
+        // Could be Class or Type...
+        type = typeSignatureToString(signature.substring(index), chopit);
+        index += unwrap(consumed_chars); // update position
+        if ((typeParams.length() == 0) && (index == signature.length())) {
+            // We have a Type signature.
+            return type;
+        }
+        // We have a Class signature.
+        final StringBuilder typeClass = new StringBuilder(typeParams);
+        typeClass.append(" extends ");
+        typeClass.append(type);
+        if (index < signature.length()) {
+            typeClass.append(" implements ");
+            typeClass.append(typeSignatureToString(signature.substring(index), chopit));
+            index += unwrap(consumed_chars); // update position
+        }
+        while (index < signature.length()) {
+            typeClass.append(", ");
+            typeClass.append(typeSignatureToString(signature.substring(index), chopit));
+            index += unwrap(consumed_chars); // update position
+        }
+        return typeClass.toString();
     }
 
 
@@ -1145,7 +1144,7 @@ public abstract class Utility {
                     break;
                 case '[':
                     if (!char_found) {
-                        throw new RuntimeException("Illegal type: " + type);
+                        throw new IllegalArgumentException("Illegal type: " + type);
                     }
                     index = i;
                     break loop;
@@ -1187,13 +1186,13 @@ public abstract class Utility {
             switch (c) {
                 case '[':
                     if (open) {
-                        throw new RuntimeException("Illegally nested brackets:" + brackets);
+                        throw new IllegalArgumentException("Illegally nested brackets:" + brackets);
                     }
                     open = true;
                     break;
                 case ']':
                     if (!open) {
-                        throw new RuntimeException("Illegally nested brackets:" + brackets);
+                        throw new IllegalArgumentException("Illegally nested brackets:" + brackets);
                     }
                     open = false;
                     count++;
@@ -1204,7 +1203,7 @@ public abstract class Utility {
             }
         }
         if (open) {
-            throw new RuntimeException("Illegally nested brackets:" + brackets);
+            throw new IllegalArgumentException("Illegally nested brackets:" + brackets);
         }
         return count;
     }

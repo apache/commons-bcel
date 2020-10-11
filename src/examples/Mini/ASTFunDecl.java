@@ -19,6 +19,7 @@
 /* JJT: 0.3pre1 */
 
 package Mini;
+
 import java.io.PrintWriter;
 import java.util.Iterator;
 
@@ -46,398 +47,432 @@ import org.apache.bcel.util.InstructionFinder;
 /**
  *
  */
-public class ASTFunDecl extends SimpleNode
-implements MiniParserTreeConstants, org.apache.bcel.Constants {
-  private ASTIdent    name;
-  private ASTIdent[]  argv;
-  private ASTExpr     body;
-  private int         type = T_UNKNOWN;
-  private int         line, column;
-  private boolean     is_simple;  // true, if simple expression like `12 + f(a)'
-  private boolean     is_recursive; // Not used yet, TODO
+public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, org.apache.bcel.Constants {
+    private ASTIdent name;
+    private ASTIdent[] argv;
+    private ASTExpr body;
+    private int type = T_UNKNOWN;
+    private int line, column;
+    private boolean is_simple; // true, if simple expression like `12 + f(a)'
+    private boolean is_recursive; // Not used yet, TODO
 //  private int         max_depth; // max. expression tree depth
-  private Environment env;
+    private Environment env;
 
-  // Generated methods
-  ASTFunDecl(final int id) {
-    super(id);
-  }
-
-  ASTFunDecl(final MiniParser p, final int id) {
-    super(p, id);
-  }
-
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTFunDecl(p, id);
-  }
-
-  ASTFunDecl(final ASTIdent name, final ASTIdent[] argv, final ASTExpr body, final int type) {
-    this(JJTFUNDECL);
-
-    this.name = name;
-    this.argv = argv;
-    this.body = body;
-    this.type = type;
-  }
-
-  /**
-   * Overrides SimpleNode.closeNode()
-   * Cast children to appropiate type.
-   */
-  @Override
-  public void closeNode() {
-    name = (ASTIdent)children[0];
-    body = (ASTExpr)children[children.length - 1];
-
-    argv = new ASTIdent[children.length - 2]; // May be 0-size array
-    for(int i = 1; i < children.length - 1; i++) {
-        argv[i - 1] = (ASTIdent)children[i];
+    // Generated methods
+    ASTFunDecl(final int id) {
+        super(id);
     }
 
-    children=null; // Throw away old reference
-  }
-
-  /**
-   * First pass of parse tree.
-   */
-  public ASTFunDecl traverse(final Environment env) {
-    this.env = env;
-
-    // Put arguments into hash table aka environment
-    for(int i=0; i < argv.length; i++) {
-      final EnvEntry entry = env.get(argv[i].getName());
-
-      if(entry != null) {
-        MiniC.addError(argv[i].getLine(), argv[i].getColumn(),
-                       "Redeclaration of " + entry + ".");
-    } else {
-        env.put(new Variable(argv[i]));
-    }
+    ASTFunDecl(final MiniParser p, final int id) {
+        super(p, id);
     }
 
-    /* Update entry of this function, i.e. set argument references.
-     * The entry is already in there by garantuee, but may be of wrong type,
-     * i.e. the user defined a function `TRUE', e.g. and `TRUE' is of type `Variable'.
+    public static Node jjtCreate(final MiniParser p, final int id) {
+        return new ASTFunDecl(p, id);
+    }
+
+    ASTFunDecl(final ASTIdent name, final ASTIdent[] argv, final ASTExpr body, final int type) {
+        this(JJTFUNDECL);
+
+        this.name = name;
+        this.argv = argv;
+        this.body = body;
+        this.type = type;
+    }
+
+    /**
+     * Overrides SimpleNode.closeNode() Cast children to appropiate type.
      */
-    try {
-      final Function fun = (Function)env.get(name.getName());
-      fun.setArgs(argv);
-    } catch(final ClassCastException e) {} // Who cares?
+    @Override
+    public void closeNode() {
+        name = (ASTIdent) children[0];
+        body = (ASTExpr) children[children.length - 1];
 
-    body = body.traverse(env); // Traverse expression body
+        argv = new ASTIdent[children.length - 2]; // May be 0-size array
+        for (int i = 1; i < children.length - 1; i++) {
+            argv[i - 1] = (ASTIdent) children[i];
+        }
 
-    return this;
-  }
-
-  /** Second pass
-   * @return type of expression
-   */
-  public int eval(final int pass) {
-    final int expected = name.getType(); // Maybe other function has already called us
-    type = body.eval(expected);    // And updated the env
-
-    if((expected != T_UNKNOWN) && (type != expected)) {
-        MiniC.addError(line, column,
-                     "Function f ist not of type " + TYPE_NAMES[expected] +
-                     " as previously assumed, but " + TYPE_NAMES[type]);
+        children = null; // Throw away old reference
     }
 
-    name.setType(type);
+    /**
+     * First pass of parse tree.
+     */
+    public ASTFunDecl traverse(final Environment env) {
+        this.env = env;
 
-    is_simple = body.isSimple();
+        // Put arguments into hash table aka environment
+        for (ASTIdent element : argv) {
+            final EnvEntry entry = env.get(element.getName());
 
-    if(pass == 2 && type == T_UNKNOWN) {
-        is_recursive = true;
+            if (entry != null) {
+                MiniC.addError(element.getLine(), element.getColumn(), "Redeclaration of " + entry + ".");
+            } else {
+                env.put(new Variable(element));
+            }
+        }
+
+        /*
+         * Update entry of this function, i.e. set argument references. The entry is already in there by garantuee, but
+         * may be of wrong type, i.e. the user defined a function `TRUE', e.g. and `TRUE' is of type `Variable'.
+         */
+        try {
+            final Function fun = (Function) env.get(name.getName());
+            fun.setArgs(argv);
+        } catch (final ClassCastException e) {
+        } // Who cares?
+
+        body = body.traverse(env); // Traverse expression body
+
+        return this;
     }
 
-    return type;
-  }
+    /**
+     * Second pass
+     *
+     * @return type of expression
+     */
+    public int eval(final int pass) {
+        final int expected = name.getType(); // Maybe other function has already called us
+        type = body.eval(expected); // And updated the env
 
-  /**
-   * Fourth pass, produce Java code.
-   */
-  public void code(final PrintWriter out) {
-    String expr;
-    boolean main=false, ignore=false;
+        if ((expected != T_UNKNOWN) && (type != expected)) {
+            MiniC.addError(line, column, "Function f ist not of type " + TYPE_NAMES[expected]
+                + " as previously assumed, but " + TYPE_NAMES[type]);
+        }
 
-    final String fname = name.getName();
+        name.setType(type);
 
-    if(fname.equals("main")) {
-      out.println("  public static void main(String[] _argv) {");
-      main = true;
+        is_simple = body.isSimple();
+
+        if (pass == 2 && type == T_UNKNOWN) {
+            is_recursive = true;
+        }
+
+        return type;
     }
-    else if(fname.equals("READ") || fname.equals("WRITE")) { // Do nothing
-      ignore = true;
-    }
-    else {
-      out.print("  public static final " + "int" + // type_names[type] +
+
+    /**
+     * Fourth pass, produce Java code.
+     */
+    public void code(final PrintWriter out) {
+        String expr;
+        boolean main = false, ignore = false;
+
+        final String fname = name.getName();
+
+        if (fname.equals("main")) {
+            out.println("  public static void main(String[] _argv) {");
+            main = true;
+        } else if (fname.equals("READ") || fname.equals("WRITE")) { // Do nothing
+            ignore = true;
+        } else {
+            out.print("  public static final " + "int" + // type_names[type] +
                 " " + fname + "(");
 
-      for(int i = 0; i < argv.length; i++) {
-        out.print("int " + argv[i].getName());
+            for (int i = 0; i < argv.length; i++) {
+                out.print("int " + argv[i].getName());
 
-        if(i < argv.length - 1) {
-        out.print(", ");
-    }
-      }
+                if (i < argv.length - 1) {
+                    out.print(", ");
+                }
+            }
 
-      out.println(")\n    throws IOException\n  {");
-    }
+            out.println(")\n    throws IOException\n  {");
+        }
 
-    if(!ignore) {
-      final StringBuffer buf = new StringBuffer();
+        if (!ignore) {
+            final StringBuffer buf = new StringBuffer();
 
-      body.code(buf);
-      out.println(getVarDecls());
+            body.code(buf);
+            out.println(getVarDecls());
 
-      expr = buf.toString();
+            expr = buf.toString();
 
-      if(main) {
-        out.println("    try {");
-    }
+            if (main) {
+                out.println("    try {");
+            }
 
-      out.println(expr);
+            out.println(expr);
 
-      if(main) {
-        out.println("    } catch(Exception e) { System.err.println(e); }\n  }\n");
-    } else {
-        out.println("\n    return " + pop() + ";\n  }\n");
-    }
-    }
+            if (main) {
+                out.println("    } catch(Exception e) { System.err.println(e); }\n  }\n");
+            } else {
+                out.println("\n    return " + pop() + ";\n  }\n");
+            }
+        }
 
-    reset();
-  }
-
-  /**
-   * Fifth pass, produce Java byte code.
-   */
-  public void byte_code(final ClassGen class_gen, final ConstantPoolGen cp) {
-    MethodGen method=null;
-    boolean main=false, ignore=false;
-    final String class_name = class_gen.getClassName();
-    final String fname      = name.getName();
-    final InstructionList il = new InstructionList();
-
-    Type[] args = { new ArrayType(Type.STRING, 1) }; // default for `main'
-    String[] arg_names = { "$argv" };
-
-    if(fname.equals("main")) {
-      method = new MethodGen(ACC_STATIC | ACC_PUBLIC,
-                             Type.VOID, args, arg_names,
-                             "main", class_name, il, cp);
-
-      main = true;
-    } else if(fname.equals("READ") || fname.equals("WRITE")) { // Do nothing
-      ignore = true;
-    } else {
-      final int    size  = argv.length;
-
-      arg_names = new String[size];
-      args      = new Type[size];
-
-      for(int i = 0; i < size; i++) {
-        args[i] = Type.INT;
-        arg_names[i] =  argv[i].getName();
-      }
-
-      method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL,
-                             Type.INT, args, arg_names,
-                             fname, class_name, il, cp);
-
-      final LocalVariableGen[] lv = method.getLocalVariables();
-      for(int i = 0; i < size; i++) {
-        final Variable entry = (Variable)env.get(arg_names[i]);
-        entry.setLocalVariable(lv[i]);
-      }
-
-      method.addException("java.io.IOException");
+        reset();
     }
 
-    if(!ignore) {
-      body.byte_code(il, method, cp);
+    /**
+     * Fifth pass, produce Java byte code.
+     */
+    public void byte_code(final ClassGen class_gen, final ConstantPoolGen cp) {
+        MethodGen method = null;
+        boolean main = false, ignore = false;
+        final String class_name = class_gen.getClassName();
+        final String fname = name.getName();
+        final InstructionList il = new InstructionList();
 
-      if(main) {
-        final ObjectType e_type = new ObjectType("java.lang.Exception");
-        final InstructionHandle start = il.getStart();
-        InstructionHandle end, handler, end_handler;
-        final LocalVariableGen exc = method.addLocalVariable("$e",
-                                                       e_type,
-                                                       null, null);
-        final int slot = exc.getIndex();
+        Type[] args = { new ArrayType(Type.STRING, 1) }; // default for `main'
+        String[] arg_names = { "$argv" };
 
-        il.append(InstructionConstants.POP); pop(); // Remove last element on stack
-        end = il.append(InstructionConstants.RETURN); // Use instruction constants, if possible
+        if (fname.equals("main")) {
+            method = new MethodGen(ACC_STATIC | ACC_PUBLIC, Type.VOID, args, arg_names, "main", class_name, il, cp);
 
-        // catch
-        handler = il.append(new ASTORE(slot)); // save exception object
-        il.append(new GETSTATIC(cp.addFieldref("java.lang.System", "err",
-                                               "Ljava/io/PrintStream;")));
-        il.append(new ALOAD(slot)); push(2);
-        il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream",
-                                                "println",
-                                                "(Ljava/lang/Object;)V")));
-        pop(2);
-        end_handler = il.append(InstructionConstants.RETURN);
-        method.addExceptionHandler(start, end, handler, e_type);
-        exc.setStart(handler); exc.setEnd(end_handler);
-      } else {
-        il.append(InstructionConstants.IRETURN); // Reuse object to save memory
+            main = true;
+        } else if (fname.equals("READ") || fname.equals("WRITE")) { // Do nothing
+            ignore = true;
+        } else {
+            final int size = argv.length;
+
+            arg_names = new String[size];
+            args = new Type[size];
+
+            for (int i = 0; i < size; i++) {
+                args[i] = Type.INT;
+                arg_names[i] = argv[i].getName();
+            }
+
+            method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, args, arg_names, fname, class_name,
+                il, cp);
+
+            final LocalVariableGen[] lv = method.getLocalVariables();
+            for (int i = 0; i < size; i++) {
+                final Variable entry = (Variable) env.get(arg_names[i]);
+                entry.setLocalVariable(lv[i]);
+            }
+
+            method.addException("java.io.IOException");
+        }
+
+        if (!ignore) {
+            body.byte_code(il, method, cp);
+
+            if (main) {
+                final ObjectType e_type = new ObjectType("java.lang.Exception");
+                final InstructionHandle start = il.getStart();
+                InstructionHandle end, handler, end_handler;
+                final LocalVariableGen exc = method.addLocalVariable("$e", e_type, null, null);
+                final int slot = exc.getIndex();
+
+                il.append(InstructionConstants.POP);
+                pop(); // Remove last element on stack
+                end = il.append(InstructionConstants.RETURN); // Use instruction constants, if possible
+
+                // catch
+                handler = il.append(new ASTORE(slot)); // save exception object
+                il.append(new GETSTATIC(cp.addFieldref("java.lang.System", "err", "Ljava/io/PrintStream;")));
+                il.append(new ALOAD(slot));
+                push(2);
+                il.append(
+                    new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/Object;)V")));
+                pop(2);
+                end_handler = il.append(InstructionConstants.RETURN);
+                method.addExceptionHandler(start, end, handler, e_type);
+                exc.setStart(handler);
+                exc.setEnd(end_handler);
+            } else {
+                il.append(InstructionConstants.IRETURN); // Reuse object to save memory
+            }
+
+            method.removeNOPs(); // First optimization pass, provided by MethodGen
+            optimizeIFs(il); // Second optimization pass, application-specific
+            method.setMaxStack(max_size);
+            class_gen.addMethod(method.getMethod());
+        }
+
+        il.dispose(); // Dispose instruction handles for better memory utilization
+
+        reset();
     }
 
-      method.removeNOPs(); // First optimization pass, provided by MethodGen
-      optimizeIFs(il);     // Second optimization pass, application-specific
-      method.setMaxStack(max_size);
-      class_gen.addMethod(method.getMethod());
-    }
-
-    il.dispose(); // Dispose instruction handles for better memory utilization
-
-    reset();
-  }
-
-  private static final InstructionFinder.CodeConstraint my_constraint =
-    new InstructionFinder.CodeConstraint() {
-      public boolean checkCode(final InstructionHandle[] match) {
-        final BranchInstruction if_icmp = (BranchInstruction)match[0].getInstruction();
-        final GOTO              goto_   = (GOTO)match[2].getInstruction();
+    private static final InstructionFinder.CodeConstraint my_constraint = match -> {
+        final BranchInstruction if_icmp = (BranchInstruction) match[0].getInstruction();
+        final GOTO goto_ = (GOTO) match[2].getInstruction();
         return (if_icmp.getTarget() == match[3]) && (goto_.getTarget() == match[4]);
-      }
     };
 
-  /**
-   * Replaces instruction sequences (typically generated by ASTIfExpr) of the form
-   *
-   * IF_ICMP__, ICONST_1, GOTO, ICONST_0, IFEQ, Instruction
-   *
-   * where the IF_ICMP__ branches to the ICONST_0 (else part) and the GOTO branches
-   * to the IFEQ with the simpler expression
-   *
-   * IF_ICMP__, Instruction
-   *
-   * where the IF_ICMP__ now branches to the target of the previous IFEQ instruction.
-   */
-  private static void optimizeIFs(final InstructionList il) {
-    final InstructionFinder f   = new InstructionFinder(il);
-    final String      pat = "IF_ICMP ICONST_1 GOTO ICONST_0 IFEQ Instruction";
+    /**
+     * Replaces instruction sequences (typically generated by ASTIfExpr) of the form
+     *
+     * IF_ICMP__, ICONST_1, GOTO, ICONST_0, IFEQ, Instruction
+     *
+     * where the IF_ICMP__ branches to the ICONST_0 (else part) and the GOTO branches to the IFEQ with the simpler
+     * expression
+     *
+     * IF_ICMP__, Instruction
+     *
+     * where the IF_ICMP__ now branches to the target of the previous IFEQ instruction.
+     */
+    private static void optimizeIFs(final InstructionList il) {
+        final InstructionFinder f = new InstructionFinder(il);
+        final String pat = "IF_ICMP ICONST_1 GOTO ICONST_0 IFEQ Instruction";
 
-    for(final Iterator<InstructionHandle[]> it = f.search(pat, my_constraint); it.hasNext();) {
-      final InstructionHandle[] match = it.next();
-      // Everything ok, update code
-      final BranchInstruction ifeq    = (BranchInstruction)(match[4].getInstruction());
-      final BranchHandle      if_icmp = (BranchHandle)match[0];
+        for (final Iterator<InstructionHandle[]> it = f.search(pat, my_constraint); it.hasNext();) {
+            final InstructionHandle[] match = it.next();
+            // Everything ok, update code
+            final BranchInstruction ifeq = (BranchInstruction) (match[4].getInstruction());
+            final BranchHandle if_icmp = (BranchHandle) match[0];
 
-      if_icmp.setTarget(ifeq.getTarget());
+            if_icmp.setTarget(ifeq.getTarget());
 
-      try {
-        il.delete(match[1], match[4]);
-      } catch(final TargetLostException e) {
-        final InstructionHandle[] targets = e.getTargets();
+            try {
+                il.delete(match[1], match[4]);
+            } catch (final TargetLostException e) {
+                final InstructionHandle[] targets = e.getTargets();
 
-        System.err.println(targets[0]);
+                System.err.println(targets[0]);
 
-        for(int i=0; i < targets.length; i++) {
-          final InstructionTargeter[] targeters = targets[i].getTargeters();
+                for (InstructionHandle target : targets) {
+                    final InstructionTargeter[] targeters = target.getTargeters();
 
-          for(int j=0; j < targeters.length; j++) {
-        if((targets[i] != match[4]) || (targeters[j] != match[2])) {
-            System.err.println("Ooops: " + e);
+                    for (InstructionTargeter targeter : targeters) {
+                        if ((target != match[4]) || (targeter != match[2])) {
+                            System.err.println("Unexpected: " + e);
+                        }
+                    }
+                }
+            }
         }
     }
+
+    /**
+     * Overrides SimpleNode.toString()
+     */
+    @Override
+    public String toString() {
+        final StringBuffer buf = new StringBuffer();
+        buf.append(jjtNodeName[id] + " " + name + "(");
+
+        for (int i = 0; i < argv.length; i++) {
+            buf.append(argv[i].getName());
+            if (i < argv.length - 1) {
+                buf.append(", ");
+            }
         }
-      }
-    }
-  }
 
-  /**
-   * Overrides SimpleNode.toString()
-   */
-  @Override
-  public String toString() {
-    final StringBuffer buf = new StringBuffer();
-    buf.append(jjtNodeName[id] + " " + name + "(");
-
-    for(int i = 0; i < argv.length; i++) {
-      buf.append(argv[i].getName());
-      if(i < argv.length - 1) {
-        buf.append(", ");
-    }
+        buf.append(")");
+        return buf.toString();
     }
 
-    buf.append(")");
-    return buf.toString();
-  }
-
-  public boolean    isrecursive()         { return is_recursive; }
-  public boolean    isSimple()            { return is_simple; }
-  public ASTIdent   getName()             { return name; }
-  public int        getNoArgs()           { return argv.length; }
-  public ASTIdent[] getArgs()             { return argv; }
-  public int        getType()             { return type; }
-  public void       setType(final int type)     { this.type = type; }
-  public void       setLine(final int line)     { this.line = line; }
-  public int        getLine()             { return line; }
-  public void       setColumn(final int column) { this.column = column; }
-  public int        getColumn()           { return column; }
-  public void       setPosition(final int line, final int column) {
-    this.line = line;
-    this.column = column;
-  }
-
-  /**
-   * Overrides SimpleNode.dump()
-   */
-  @Override
-  public void dump(final String prefix) {
-    System.out.println(toString(prefix));
-
-    for(int i = 0; i < argv.length; i++) {
-        argv[i].dump(prefix + " ");
+    public boolean isrecursive() {
+        return is_recursive;
     }
 
-    body.dump(prefix + " ");
-  }
-
-  /* Used to simpulate stack with local vars and compute maximum stack size.
-   */
-  static int size, max_size;
-
-  static void reset() { size = max_size = 0; }
-
-  private static String getVarDecls() {
-    final StringBuffer buf = new StringBuffer("    int ");
-
-    for(int i=0; i < max_size; i++) {
-      buf.append("_s" + i);
-
-      if(i < max_size - 1) {
-        buf.append(", ");
-    }
+    public boolean isSimple() {
+        return is_simple;
     }
 
-    buf.append(";\n");
-    return buf.toString();
-  }
-
-  /** Used by byte_code()
-   */
-  static void pop(final int s) { size -= s; }
-  static void push(final int s) {
-    size += s;
-
-    if(size > max_size) {
-        max_size = size;
+    public ASTIdent getName() {
+        return name;
     }
-  }
-  static void push() { push(1); }
 
-  /** Used byte code()
-   */
-  static void push(final StringBuffer buf, final String str) {
-    buf.append("    _s" + size + " = " + str + ";\n");
-    push(1);
-  }
+    public int getNoArgs() {
+        return argv.length;
+    }
 
-  static String pop() {
-    return "_s" + (--size);
-  }
+    public ASTIdent[] getArgs() {
+        return argv;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(final int type) {
+        this.type = type;
+    }
+
+    public void setLine(final int line) {
+        this.line = line;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setColumn(final int column) {
+        this.column = column;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setPosition(final int line, final int column) {
+        this.line = line;
+        this.column = column;
+    }
+
+    /**
+     * Overrides SimpleNode.dump()
+     */
+    @Override
+    public void dump(final String prefix) {
+        System.out.println(toString(prefix));
+
+        for (ASTIdent element : argv) {
+            element.dump(prefix + " ");
+        }
+
+        body.dump(prefix + " ");
+    }
+
+    /*
+     * Used to simpulate stack with local vars and compute maximum stack size.
+     */
+    static int size, max_size;
+
+    static void reset() {
+        size = max_size = 0;
+    }
+
+    private static String getVarDecls() {
+        final StringBuffer buf = new StringBuffer("    int ");
+
+        for (int i = 0; i < max_size; i++) {
+            buf.append("_s" + i);
+
+            if (i < max_size - 1) {
+                buf.append(", ");
+            }
+        }
+
+        buf.append(";\n");
+        return buf.toString();
+    }
+
+    /**
+     * Used by byte_code()
+     */
+    static void pop(final int s) {
+        size -= s;
+    }
+
+    static void push(final int s) {
+        size += s;
+
+        if (size > max_size) {
+            max_size = size;
+        }
+    }
+
+    static void push() {
+        push(1);
+    }
+
+    /**
+     * Used byte code()
+     */
+    static void push(final StringBuffer buf, final String str) {
+        buf.append("    _s" + size + " = " + str + ";\n");
+        push(1);
+    }
+
+    static String pop() {
+        return "_s" + (--size);
+    }
 }

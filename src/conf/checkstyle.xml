@@ -26,7 +26,10 @@ limitations under the License.
 
   <!-- Checks whether files end with a new line. -->
   <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
-  <module name="NewlineAtEndOfFile" />
+  <module name="NewlineAtEndOfFile">
+    <!-- The files are saved in the repo with LF, and on Windows you should use git config core.autocrlf input -->
+    <property name="lineSeparator" value="lf" />
+  </module>
 
   <!-- Checks for Tab characters -->
   <!-- See http://checkstyle.sourceforge.net/config_whitespace.html#FileTabCharacter -->

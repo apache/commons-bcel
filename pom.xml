@@ -33,7 +33,7 @@
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
   <packaging>jar</packaging>
-  <version>6.4.2-SNAPSHOT</version>
+  <version>6.5.0</version>
   <name>Apache Commons BCEL</name>
   <description>Apache Commons Bytecode Engineering Library</description>
 
@@ -47,7 +47,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <commons.componentid>bcel</commons.componentid>
     <commons.module.name>org.apache.bcel</commons.module.name>
-    <commons.release.version>6.4.2</commons.release.version>
+    <commons.release.version>6.5.0</commons.release.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <commons.rc.version>RC1</commons.rc.version>
     <commons.bc.version>6.4.1</commons.bc.version>
@@ -64,15 +64,14 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <commons.findbugs.version>3.0.5</commons.findbugs.version>
-    <commons.surefire.version>3.0.0-M3</commons.surefire.version>
+    <commons.surefire.version>3.0.0-M4</commons.surefire.version>
     <checkstyle.plugin.version>3.1.0</checkstyle.plugin.version>
-    <commons.clirr.version>2.8</commons.clirr.version>
     <jna.version>5.5.0</jna.version>
-    <commons.japicmp.version>0.14.1</commons.japicmp.version>
+    <commons.japicmp.version>0.14.3</commons.japicmp.version>
     <japicmp.skip>false</japicmp.skip>
     <clirr.skip>true</clirr.skip>
-    <commons.jacoco.version>0.8.4</commons.jacoco.version>
+    <commons.jacoco.version>0.8.5</commons.jacoco.version>
+    <commons.javadoc.version>3.2.0</commons.javadoc.version>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
@@ -217,6 +216,17 @@
     <defaultGoal>clean verify apache-rat:check japicmp:cmp checkstyle:check javadoc:javadoc</defaultGoal>
     <plugins>
       <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>biz.aQute.bnd</groupId>
+            <artifactId>biz.aQute.bndlib</artifactId>
+            <version>5.1.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
         <version>${commons.rat.version}</version>
@@ -233,15 +243,6 @@
             <exclude>README-codespecs.txt</exclude>
             <exclude>src/examples/Mini/MiniParser$JJCalls</exclude>
           </excludes>
-        </configuration>
-      </plugin>
-      <!-- Allow Clirr to be run from command line -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>clirr-maven-plugin</artifactId>
-        <version>${commons.clirr.version}</version>
-        <configuration>
-          <minSeverity>${minSeverity}</minSeverity>
         </configuration>
       </plugin>
       <plugin>
@@ -365,23 +366,6 @@
 
   <reporting>
     <plugins>
-      <!--
-        <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jardiff-maven-plugin</artifactId>
-        <configuration>
-        <artifacts>
-        <artifact>
-        <version>5.2</version>
-        </artifact>
-        <artifact>
-        <groupId>bcel</groupId>
-        <version>5.1</version>
-        </artifact>
-        </artifacts>
-        </configuration>
-        </plugin>
-      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -404,25 +388,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.12.0</version>
+        <version>3.13.0</version>
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
           <linkXref>true</linkXref>
           <rulesets>
             <ruleset>${basedir}/src/conf/pmd.xml</ruleset>
           </rulesets>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>${commons.findbugs.version}</version>
-        <configuration>
-          <threshold>Normal</threshold>
-          <effort>Default</effort>
-          <excludeFilterFile>${basedir}/src/conf/findbugs-exclude-filter.xml</excludeFilterFile>
-          <fork>true</fork>
-          <jvmArgs>-Duser.language=en</jvmArgs>
         </configuration>
       </plugin>
       <plugin>
@@ -471,6 +443,15 @@
           </parameter>
         </configuration>
       </plugin>    
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${commons.spotbugs.version}</version>
+        <configuration>
+          <threshold>Normal</threshold>
+          <effort>Default</effort>
+        </configuration>
+      </plugin>
     </plugins>
   </reporting>
 
@@ -496,29 +477,19 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.9</version>
+      <version>3.10</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+       <!-- BCEL-336 refers to this specific version.  -->
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>6.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
 
   <profiles>
-    <!--
-        Profile to ignore certain Clirr errors
-        To show all the errors, use -P!quieten-clirr or -Dclirr.allDifferences
-    -->
-    <profile>
-      <id>quieten-clirr</id>
-      <activation>
-        <!-- Enable unless the following is defined -->
-        <property>
-          <name>!clirr.allDifferences</name>
-        </property>
-      </activation>
-      <properties>
-        <!-- It's not possible to undefine this once defined, so we define it in a profile that is normally active -->
-        <clirr.ignoredDifferencesFile>${basedir}/src/conf/clirr-ignored-diffs.xml</clirr.ignoredDifferencesFile>
-      </properties>
-    </profile>
     <!-- Profile to build and run PerformanceTest. Use 'mvn test -Pjdk-rt' -->
     <profile>
       <id>jdk-rt</id>
@@ -565,7 +536,7 @@
         <dependency>
           <groupId>commons-io</groupId>
           <artifactId>commons-io</artifactId>
-          <version>2.6</version>
+          <version>2.7</version>
           <scope>test</scope>
         </dependency>
 

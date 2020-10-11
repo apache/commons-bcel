@@ -41,18 +41,18 @@ public class MiniC implements org.apache.bcel.Constants {
     try {
       /* Parse command line arguments.
        */
-      for(int i=0; i < argv.length; i++) {
-        if(argv[i].charAt(0) == '-') {  // command line switch
-          if(argv[i].equals("-java")) {
+      for (String element : argv) {
+        if(element.charAt(0) == '-') {  // command line switch
+          if(element.equals("-java")) {
         byte_code=false;
-    } else if(argv[i].equals("-bytecode")) {
+    } else if(element.equals("-bytecode")) {
         byte_code=true;
     } else {
-        throw new Exception("Unknown option: " + argv[i]);
+        throw new Exception("Unknown option: " + element);
     }
         }
         else { // add file name to list
-          file_name[files++] = argv[i];
+          file_name[files++] = element;
         }
       }
 

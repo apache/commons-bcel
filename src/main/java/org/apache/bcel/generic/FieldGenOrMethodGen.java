@@ -49,10 +49,10 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     @Deprecated
     protected ConstantPoolGen cp;
 
-    private final List<Attribute> attribute_vec = new ArrayList<>();
+    private final List<Attribute> attributeList = new ArrayList<>();
 
     // @since 6.0
-    private final List<AnnotationEntryGen>       annotation_vec= new ArrayList<>();
+    private final List<AnnotationEntryGen>       annotationList= new ArrayList<>();
 
 
     protected FieldGenOrMethodGen() {
@@ -114,15 +114,15 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
      * @param a attribute to be added
      */
     public void addAttribute( final Attribute a ) {
-        attribute_vec.add(a);
+        attributeList.add(a);
     }
 
     /**
      * @since 6.0
      */
-    public void addAnnotationEntry(final AnnotationEntryGen ag) // TODO could this be package protected?
+    public void addAnnotationEntry(final AnnotationEntryGen ag)
     {
-        annotation_vec.add(ag);
+        annotationList.add(ag);
     }
 
 
@@ -130,15 +130,15 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
      * Remove an attribute.
      */
     public void removeAttribute( final Attribute a ) {
-        attribute_vec.remove(a);
+        attributeList.remove(a);
     }
 
     /**
      * @since 6.0
      */
-    public void removeAnnotationEntry(final AnnotationEntryGen ag) // TODO could this be package protected?
+    public void removeAnnotationEntry(final AnnotationEntryGen ag)
     {
-        annotation_vec.remove(ag);
+        annotationList.remove(ag);
     }
 
 
@@ -146,15 +146,15 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
      * Remove all attributes.
      */
     public void removeAttributes() {
-        attribute_vec.clear();
+        attributeList.clear();
     }
 
     /**
      * @since 6.0
      */
-    public void removeAnnotationEntries() // TODO could this be package protected?
+    public void removeAnnotationEntries()
     {
-        annotation_vec.clear();
+        annotationList.clear();
     }
 
 
@@ -162,14 +162,14 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
      * @return all attributes of this method.
      */
     public Attribute[] getAttributes() {
-        final Attribute[] attributes = new Attribute[attribute_vec.size()];
-        attribute_vec.toArray(attributes);
+        final Attribute[] attributes = new Attribute[attributeList.size()];
+        attributeList.toArray(attributes);
         return attributes;
     }
 
     public AnnotationEntryGen[] getAnnotationEntries() {
-        final AnnotationEntryGen[] annotations = new AnnotationEntryGen[annotation_vec.size()];
-          annotation_vec.toArray(annotations);
+        final AnnotationEntryGen[] annotations = new AnnotationEntryGen[annotationList.size()];
+          annotationList.toArray(annotations);
           return annotations;
       }
 

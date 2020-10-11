@@ -119,7 +119,7 @@ public final class Pass3aVerifier extends PassVerifier{
      * This is the index in the array returned
      * by JavaClass.getMethods().
      */
-    private final int method_no;
+    private final int methodNo;
 
     /**
      * The one and only InstructionList object used by an instance of this class.
@@ -134,9 +134,9 @@ public final class Pass3aVerifier extends PassVerifier{
     private Code code;
 
     /** Should only be instantiated by a Verifier. */
-    public Pass3aVerifier(final Verifier owner, final int method_no) {
+    public Pass3aVerifier(final Verifier owner, final int methodNo) {
         myOwner = owner;
-        this.method_no = method_no;
+        this.methodNo = methodNo;
     }
 
     /**
@@ -164,10 +164,10 @@ public final class Pass3aVerifier extends PassVerifier{
             // and satisfies static constraints of Pass 2.
             final JavaClass jc = Repository.lookupClass(myOwner.getClassName());
             final Method[] methods = jc.getMethods();
-            if (method_no >= methods.length) {
+            if (methodNo >= methods.length) {
                 throw new InvalidMethodException("METHOD DOES NOT EXIST!");
             }
-            final Method method = methods[method_no];
+            final Method method = methods[methodNo];
             code = method.getCode();
 
             // No Code? Nothing to verify!
@@ -463,7 +463,7 @@ public final class Pass3aVerifier extends PassVerifier{
 
     /** Returns the method number as supplied when instantiating. */
     public int getMethodNo() {
-        return method_no;
+        return methodNo;
     }
 
     /**
@@ -485,7 +485,7 @@ public final class Pass3aVerifier extends PassVerifier{
          */
         private int max_locals() {
            try {
-            return Repository.lookupClass(myOwner.getClassName()).getMethods()[method_no].getCode().getMaxLocals();
+            return Repository.lookupClass(myOwner.getClassName()).getMethods()[methodNo].getCode().getMaxLocals();
             } catch (final ClassNotFoundException e) {
             // FIXME: maybe not the best way to handle this
             throw new AssertionViolatedException("Missing class: " + e, e);
@@ -569,7 +569,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 indexValid(o, o.getIndex()+1);
             }
             catch(final StaticCodeInstructionOperandConstraintException e) {
-                throw new AssertionViolatedException("OOPS: Does not BCEL handle that? LDC2_W operand has a problem.", e);
+                throw new AssertionViolatedException("Does not BCEL handle that? LDC2_W operand has a problem.", e);
             }
         }
 
@@ -1075,7 +1075,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 constraintViolated(o, "Referenced field '"+f+"' is not static which it should be.");
             }
 
-            final String meth_name = Repository.lookupClass(myOwner.getClassName()).getMethods()[method_no].getName();
+            final String meth_name = Repository.lookupClass(myOwner.getClassName()).getMethods()[methodNo].getName();
 
             // If it's an interface, it can be set only in <clinit>.
             if ((!(jc.isClass())) && (!(meth_name.equals(Const.STATIC_INITIALIZER_NAME)))) {
@@ -1127,7 +1127,7 @@ public final class Pass3aVerifier extends PassVerifier{
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
         @Override
         public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
-            throw new RuntimeException("INVOKEDYNAMIC instruction is not supported at this time");
+            throw new UnsupportedOperationException("INVOKEDYNAMIC instruction is not supported at this time");
         }
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */

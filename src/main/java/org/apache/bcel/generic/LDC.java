@@ -108,7 +108,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
                 c = cpg.getConstantPool().getConstant(nameIndex);
                 return new ObjectType(((org.apache.bcel.classfile.ConstantUtf8) c).getBytes());
             default: // Never reached
-                throw new RuntimeException("Unknown or invalid constant type at " + super.getIndex());
+                throw new IllegalArgumentException("Unknown or invalid constant type at " + super.getIndex());
         }
     }
 
@@ -125,7 +125,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
             case org.apache.bcel.Const.CONSTANT_Class:
                 return Type.CLASS;
             default: // Never reached
-                throw new RuntimeException("Unknown or invalid constant type at " + super.getIndex());
+                throw new IllegalArgumentException("Unknown or invalid constant type at " + super.getIndex());
         }
     }
 

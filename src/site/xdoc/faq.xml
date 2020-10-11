@@ -57,8 +57,7 @@
     <p>
       <b>Q: </b> (Typically for users of Xalan (XSLTC)) I'm getting
       <pre>
-      ClassGenException: Branch target offset too large for short
-      </pre>
+      ClassGenException: Branch target offset too large for short</pre>
       when compiling large files.
       <br/>
 

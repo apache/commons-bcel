@@ -27,6 +27,7 @@ public class Pass2VerifierTestCase {
     @Test
     public void testReferenceToConstant() {
         @SuppressWarnings("unused")
+        final
         short referenceToConstant = Pass2Verifier.AALOAD;
     }
 }

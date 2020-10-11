@@ -252,7 +252,7 @@ public class FieldGen extends FieldGenOrMethodGen {
             case Const.T_REFERENCE:
                 return super.getConstantPool().addString((String) value);
             default:
-                throw new RuntimeException("Oops: Unhandled : " + super.getType().getType()); // sic
+                throw new IllegalStateException("Unhandled : " + super.getType().getType()); // sic
         }
     }
 

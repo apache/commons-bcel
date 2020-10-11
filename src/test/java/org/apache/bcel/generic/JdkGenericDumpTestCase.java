@@ -90,9 +90,9 @@ public class JdkGenericDumpTestCase {
             final Path name = path.getFileName();
             if (name != null && matcher.matches(name)) {
                 try (final InputStream inputStream = Files.newInputStream(path)) {
-                    final ClassParser parser = new ClassParser(inputStream, name.toAbsolutePath().toString());
-                    final JavaClass jc = parser.parse();
-                    Assert.assertNotNull(jc);
+                    final ClassParser classParser = new ClassParser(inputStream, name.toAbsolutePath().toString());
+                    final JavaClass javaClass = classParser.parse();
+                    Assert.assertNotNull(javaClass);
                 }
 
             }
@@ -204,23 +204,23 @@ public class JdkGenericDumpTestCase {
         this.javaHome = javaHome;
     }
 
-    private void compare(final String name, final Method m) {
+    private void compare(final String name, final Method method) {
         // System.out.println("Method: " + m);
-        final Code c = m.getCode();
-        if (c == null) {
+        final Code code = method.getCode();
+        if (code == null) {
             return; // e.g. abstract method
         }
-        final byte[] src = c.getCode();
-        final InstructionList il = new InstructionList(src);
-        final byte[] out = il.getByteCode();
+        final byte[] src = code.getCode();
+        final InstructionList instructionList = new InstructionList(src);
+        final byte[] out = instructionList.getByteCode();
         if (src.length == out.length) {
-            assertArrayEquals(name + ": " + m.toString(), src, out);
+            assertArrayEquals(name + ": " + method.toString(), src, out);
         } else {
-            System.out.println(name + ": " + m.toString() + " " + src.length + " " + out.length);
+            System.out.println(name + ": " + method.toString() + " " + src.length + " " + out.length);
             System.out.println(bytesToHex(src));
             System.out.println(bytesToHex(out));
-            for (final InstructionHandle ih : il) {
-                System.out.println(ih.toString(false));
+            for (final InstructionHandle instructionHandle : instructionList) {
+                System.out.println(instructionHandle.toString(false));
             }
             fail("Array comparison failure");
         }
@@ -241,15 +241,15 @@ public class JdkGenericDumpTestCase {
         try (JarFile jar = new JarFile(file)) {
             final Enumeration<JarEntry> en = jar.entries();
             while (en.hasMoreElements()) {
-                final JarEntry e = en.nextElement();
-                final String name = e.getName();
+                final JarEntry jarEntry = en.nextElement();
+                final String name = jarEntry.getName();
                 if (name.endsWith(".class")) {
                     // System.out.println("- " + name);
-                    try (InputStream in = jar.getInputStream(e)) {
-                        final ClassParser parser = new ClassParser(in, name);
-                        final JavaClass jc = parser.parse();
-                        for (final Method m : jc.getMethods()) {
-                            compare(name, m);
+                    try (InputStream inputStream = jar.getInputStream(jarEntry)) {
+                        final ClassParser classParser = new ClassParser(inputStream, name);
+                        final JavaClass javaClass = classParser.parse();
+                        for (final Method method : javaClass.getMethods()) {
+                            compare(name, method);
                         }
                     }
                 }

@@ -1,4 +1,78 @@
               Apache Commons BCEL
+              Version 6.5.0
+              RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.5.0!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+Minor feature and bug fix release.
+
+FIXED BUGS:
+===========
+
+o BCEL-329: MethodGen duplicates some attributes. Thanks to Gary Gregory, Mark Roberts.
+
+CHANGES:
+========
+
+o BCEL-330: Remove unnecessary references to Constants. Thanks to Mark Roberts.
+o BCEL-336: MethodGen throws NullPointerException upon Invalid Class File Missing Constructor Body. Thanks to Tomo Suzuki, Gary Gregory.
+o           Improve documentation of Pass3bVerifier (#37). Thanks to Michael Ernst.
+o           Replaced deprecated constants in examples (#38). Thanks to Arthur Kupriyanov.
+o           Update tests from JNA 5.4.0 to 5.5.0. Thanks to Gary Gregory.
+o           Update tests JUnit from 4.12 to 4.13. Thanks to Gary Gregory.
+o           Update tests from Apache Commons Lang 3.9 to 3.10. Thanks to Gary Gregory.
+o           Update build maven-pmd-plugin 3.12.0 -> 3.13.0. Thanks to Gary Gregory.
+o           Update tests maven-surefire-plugin 3.0.0-M3 -> 3.0.0-M4. Thanks to Gary Gregory.
+o           Update build japicmp-maven-plugin 0.14.1 -> 0.14.3. Thanks to Gary Gregory.
+o           Update build jacoco-maven-plugin 0.8.4 -> 0.8.5. Thanks to Gary Gregory.
+o           Update tests from commons-io:commons-io 2.6 to 2.7. Thanks to Gary Gregory.
+o           Add support for invokestatic of an InterfaceMethodref #39. Thanks to Mark Roberts.
+o           Add attribute name(s) to Code.toString() #40. Thanks to Mark Roberts.
+o BCEL-338: org.apache.bcel.generic.InstructionFactory.createInvoke() populates its internal ConstantPoolGen on bad input, then throws exception. Thanks to Gary Gregory.
+o BCEL-339: Throw IllegalArgumentException, IllegalStateException, UnsupportedOperationException instead of RuntimeException. Thanks to Gary Gregory.
+o           Make some annotation methods public (#45). Thanks to Mark Roberts.
+o           Fix ConcurrentModificationException in the maven-bundle-plugin:4.2.1:manifest on Java 15-ea. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes-report.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BCEL
               Version 6.4.1
               RELEASE NOTES
 

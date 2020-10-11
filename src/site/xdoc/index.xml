@@ -89,7 +89,7 @@
 &lt;dependency&gt;
     &lt;groupId&gt;org.apache.bcel&lt;/groupId&gt;
     &lt;artifactId&gt;bcel&lt;/artifactId&gt;
-    &lt;version&gt;6.4.0&lt;/version&gt;
+    &lt;version&gt;6.5.0&lt;/version&gt;
 &lt;/dependency&gt;
         </pre>
       </p>

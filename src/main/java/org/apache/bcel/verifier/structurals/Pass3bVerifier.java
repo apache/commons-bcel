@@ -148,7 +148,7 @@ public final class Pass3bVerifier extends PassVerifier{
     private final Verifier myOwner;
 
     /** The method number to verify. */
-    private final int method_no;
+    private final int methodNo;
 
     /**
      * This class should only be instantiated by a Verifier.
@@ -157,7 +157,7 @@ public final class Pass3bVerifier extends PassVerifier{
      */
     public Pass3bVerifier(final Verifier owner, final int method_no) {
         myOwner = owner;
-        this.method_no = method_no;
+        this.methodNo = method_no;
     }
 
     /**
@@ -323,7 +323,7 @@ public final class Pass3bVerifier extends PassVerifier{
                             }
                         } catch (final ClassNotFoundException e) {
                             // Don't know what do do now, so raise RuntimeException
-                            throw new RuntimeException(e);
+                            throw new IllegalArgumentException(e);
                         }
                     } else if (!returnedType.equals(m.getReturnType().normalizeForStackOrLocal())) {
                         invalidReturnTypeError(returnedType, m);
@@ -359,7 +359,7 @@ public final class Pass3bVerifier extends PassVerifier{
      */
     @Override
     public VerificationResult do_verify() {
-        if (! myOwner.doPass3a(method_no).equals(VerificationResult.VR_OK)) {
+        if (! myOwner.doPass3a(methodNo).equals(VerificationResult.VR_OK)) {
             return VerificationResult.VR_NOTYET;
         }
 
@@ -381,11 +381,11 @@ public final class Pass3bVerifier extends PassVerifier{
         final ExecutionVisitor ev = new ExecutionVisitor();
         ev.setConstantPoolGen(constantPoolGen);
 
-        final Method[] methods = jc.getMethods(); // Method no "method_no" exists, we ran Pass3a before on it!
+        final Method[] methods = jc.getMethods(); // Method no "methodNo" exists, we ran Pass3a before on it!
 
         try{
 
-            final MethodGen mg = new MethodGen(methods[method_no], myOwner.getClassName(), constantPoolGen);
+            final MethodGen mg = new MethodGen(methods[methodNo], myOwner.getClassName(), constantPoolGen);
 
             icv.setMethodGen(mg);
 
@@ -423,7 +423,7 @@ public final class Pass3bVerifier extends PassVerifier{
             }
         }
         catch (final VerifierConstraintViolatedException ce) {
-            ce.extendMessage("Constraint violated in method '"+methods[method_no]+"':\n","");
+            ce.extendMessage("Constraint violated in method '"+methods[methodNo]+"':\n","");
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, ce.getMessage());
         }
         catch (final RuntimeException re) {
@@ -434,13 +434,13 @@ public final class Pass3bVerifier extends PassVerifier{
             re.printStackTrace(pw);
 
             throw new AssertionViolatedException("Some RuntimeException occured while verify()ing class '"+jc.getClassName()+
-                "', method '"+methods[method_no]+"'. Original RuntimeException's stack trace:\n---\n"+sw+"---\n", re);
+                "', method '"+methods[methodNo]+"'. Original RuntimeException's stack trace:\n---\n"+sw+"---\n", re);
         }
         return VerificationResult.VR_OK;
     }
 
     /** Returns the method number as supplied when instantiating. */
     public int getMethodNo() {
-        return method_no;
+        return methodNo;
     }
 }

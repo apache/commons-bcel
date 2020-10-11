@@ -32,7 +32,7 @@ import org.apache.bcel.Const;
  */
 public final class NestHost extends Attribute {
 
-    private int host_class_index;
+    private int hostClassIndex;
 
 
     /**
@@ -45,15 +45,15 @@ public final class NestHost extends Attribute {
 
 
     /**
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
-     * @param host_class_index Host class index
-     * @param constant_pool Array of constants
+     * @param hostClassIndex Host class index
+     * @param constantPool Array of constants
      */
-    public NestHost(final int name_index, final int length, final int host_class_index,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_NEST_MEMBERS, name_index, length, constant_pool);
-        this.host_class_index = host_class_index;
+    public NestHost(final int nameIndex, final int length, final int hostClassIndex,
+            final ConstantPool constantPool) {
+        super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
+        this.hostClassIndex = hostClassIndex;
     }
 
 
@@ -67,7 +67,7 @@ public final class NestHost extends Attribute {
      */
     NestHost(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, 0, constant_pool);
-        host_class_index = input.readUnsignedShort();
+        hostClassIndex = input.readUnsignedShort();
     }
 
 
@@ -93,7 +93,7 @@ public final class NestHost extends Attribute {
     @Override
     public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
-        file.writeShort(host_class_index);
+        file.writeShort(hostClassIndex);
     }
 
 
@@ -101,15 +101,15 @@ public final class NestHost extends Attribute {
      * @return index into constant pool of host class name.
      */
     public int getHostClassIndex() {
-        return host_class_index;
+        return hostClassIndex;
     }
 
 
     /**
-     * @param host_class_index the host class index
+     * @param hostClassIndex the host class index
      */
-    public void setHostClassIndex( final int host_class_index ) {
-        this.host_class_index = host_class_index;
+    public void setHostClassIndex( final int hostClassIndex ) {
+        this.hostClassIndex = hostClassIndex;
     }
 
 
@@ -120,7 +120,7 @@ public final class NestHost extends Attribute {
     public String toString() {
         final StringBuilder buf = new StringBuilder();
         buf.append("NestHost: ");
-        final String class_name = super.getConstantPool().getConstantString(host_class_index, Const.CONSTANT_Class);
+        final String class_name = super.getConstantPool().getConstantString(hostClassIndex, Const.CONSTANT_Class);
         buf.append(Utility.compactClassName(class_name, false));
         return buf.toString();
     }

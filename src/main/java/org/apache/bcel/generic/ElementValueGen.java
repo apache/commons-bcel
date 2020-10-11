@@ -146,7 +146,7 @@ public abstract class ElementValueGen
             }
             return new ArrayElementValueGen(ARRAY, evalues, cpGen);
         default:
-            throw new RuntimeException("Unexpected element value kind in annotation: " + type);
+            throw new IllegalArgumentException("Unexpected element value kind in annotation: " + type);
         }
     }
 
@@ -188,7 +188,7 @@ public abstract class ElementValueGen
             return new ClassElementValueGen((ClassElementValue) value, cpool,
                     copyPoolEntries);
         default:
-            throw new RuntimeException("Not implemented yet! (" + value.getElementValueType() + ")");
+            throw new UnsupportedOperationException("Not implemented yet! (" + value.getElementValueType() + ")");
         }
     }
 }

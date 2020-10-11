@@ -84,7 +84,7 @@ public class VerifierFactory {
      * referenced class files.
      */
     public static Verifier[] getVerifiers() {
-        final Verifier[] vs = new Verifier[hashMap.values().size()];
+        final Verifier[] vs = new Verifier[hashMap.size()];
         return hashMap.values().toArray(vs); // Because vs is big enough, vs is used to store the values into and returned!
     }
 

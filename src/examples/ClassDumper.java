@@ -336,7 +336,7 @@ class ClassDumper {
             attributes[i] = Attribute.readAttribute(file, constant_pool);
             final long pos2 = file.getStreamPosition();
             if ((pos2 - pos1) != (attribute_length + 6)) {
-                System.out.printf("%nWHOOPS attribute_length: %d pos2-pos1-6: %d pos1: %x(%d) pos2: %x(%d)%n",
+                System.out.printf("%nattribute_length: %d pos2-pos1-6: %d pos1: %x(%d) pos2: %x(%d)%n",
                         attribute_length, pos2-pos1-6, pos1, pos1, pos2, pos2);
             }
             System.out.printf("  ");
@@ -356,7 +356,7 @@ class DumpClass {
     public static void main(final String[] args) throws IOException {
 
         if (args.length != 1) {
-            throw new RuntimeException("Require file name as only argument");
+            throw new IllegalArgumentException("Require file name as only argument");
         }
 
         try (FileImageInputStream file = new FileImageInputStream(new File(args[0]))) {

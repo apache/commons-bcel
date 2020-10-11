@@ -196,7 +196,7 @@ class BCELFactory extends EmptyVisitor {
                         + ", (short) " + dim + "));");
                 break;
             default:
-                throw new RuntimeException("Oops: " + opcode);
+                throw new IllegalArgumentException("Unhandled opcode: " + opcode);
         }
     }
 

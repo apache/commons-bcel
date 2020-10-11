@@ -116,8 +116,8 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
     if(fun_decls != null) {
       // Put function names into hash table aka. environment
-      for(int i=0; i < fun_decls.length; i++) {
-        f     = fun_decls[i];
+      for (ASTFunDecl fun_decl : fun_decls) {
+        f     = fun_decl;
         name  = f.getName();
         fname = name.getName();
         fun   = env.get(fname); // Lookup in env
@@ -159,11 +159,11 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
    */
   public void eval(final int pass) {
 
-    for(int i=0; i < fun_decls.length; i++) {
-      fun_decls[i].eval(pass);
+    for (ASTFunDecl fun_decl : fun_decls) {
+      fun_decl.eval(pass);
 
       if(pass == 3) { // Final check for unresolved types
-        final ASTIdent name = fun_decls[i].getName();
+        final ASTIdent name = fun_decl.getName();
 
         if(name.getType() == T_UNKNOWN) {
         MiniC.addError(name.getColumn(), name.getLine(),
@@ -193,8 +193,8 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     out.println("  private static int _writeInt(int n) {\n" +
                 "    System.out.println(\"Result: \" + n);\n    return 0;\n  }\n");
 
-    for(int i=0; i < fun_decls.length; i++) {
-        fun_decls[i].code(out);
+    for (ASTFunDecl fun_decl : fun_decls) {
+        fun_decl.code(out);
     }
 
     out.println("}");
@@ -321,8 +321,8 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     method.setMaxStack(5);
     class_gen.addMethod(method.getMethod());
 
-    for(int i=0; i < fun_decls.length; i++) {
-        fun_decls[i].byte_code(class_gen, cp);
+    for (ASTFunDecl fun_decl : fun_decls) {
+        fun_decl.byte_code(class_gen, cp);
     }
   }
 
@@ -330,8 +330,8 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   public void dump(final String prefix) {
     System.out.println(toString(prefix));
 
-    for(int i = 0; i < fun_decls.length; ++i) {
-        fun_decls[i].dump(prefix + " ");
+    for (ASTFunDecl fun_decl : fun_decls) {
+        fun_decl.dump(prefix + " ");
     }
   }
 }

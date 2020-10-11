@@ -1802,7 +1802,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
      */
     @Override
     public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
-        throw new RuntimeException("INVOKEDYNAMIC instruction is not supported at this time");
+        throw new UnsupportedOperationException("INVOKEDYNAMIC instruction is not supported at this time");
     }
 
     /**
@@ -2869,7 +2869,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
             constraintViolated(o, "Expecting a ReturnaddressType in local variable "+o.getIndex()+".");
         }
         if (locals().get(o.getIndex()) == ReturnaddressType.NO_TARGET) {
-            throw new AssertionViolatedException("Oops: RET expecting a target!");
+            throw new AssertionViolatedException("RET expecting a target!");
         }
         // Other constraints such as non-allowed overlapping subroutines are enforced
         // while building the Subroutines data structure.

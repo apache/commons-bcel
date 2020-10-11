@@ -22,7 +22,11 @@ jdk:
   - openjdk11
   - openjdk12
   - openjdk13
+  - openjdk14  
   - openjdk-ea
 
+script:
+  - mvn -Ddoclint=none
+
 after_success:
-  - mvn -Ddoclint:none clean cobertura:cobertura coveralls:report
+  - mvn -Ddoclint=none clean cobertura:cobertura coveralls:report
