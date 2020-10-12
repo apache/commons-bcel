@@ -27,4 +27,6 @@ Pull in that commit:
 git pull https://github.com/apache/commons-bcel <commitid>
 
 Resolve any conflicts with our local changes and rebuild.
+If there is a merge conflict related to version numbers,
+use the upstream version number.
 
