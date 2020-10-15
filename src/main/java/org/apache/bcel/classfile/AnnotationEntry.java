@@ -142,7 +142,10 @@ public class AnnotationEntry implements Node {
             result.append("(");
             for (final ElementValuePair element : evPairs) {
                 result.append(element.toShortString());
+                result.append(", ");
             }
+            // remove last ", "
+            result.setLength(result.length() - 2);
             result.append(")");
         }
         return result.toString();
