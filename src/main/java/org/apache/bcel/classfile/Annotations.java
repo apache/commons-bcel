@@ -39,7 +39,8 @@ public abstract class Annotations extends Attribute {
      * @param length Content length in bytes
      * @param input Input stream
      * @param constant_pool Array of constants
-     * @param isRuntimeVisible is Annotation visible at runtime?
+     * @param isRuntimeVisible whether this Annotation visible at runtime
+     * @throws IOException if an I/O error occurs.
      */
     Annotations(final byte annotation_type, final int name_index, final int length, final DataInput input,
             final ConstantPool constant_pool, final boolean isRuntimeVisible) throws IOException {
@@ -57,7 +58,7 @@ public abstract class Annotations extends Attribute {
      * @param length Content length in bytes
      * @param annotationTable the actual annotations
      * @param constantPool Array of constants
-     * @param isRuntimeVisible is Annotation visible at runtime?
+     * @param isRuntimeVisible whether this Annotation visible at runtime
      */
     public Annotations(final byte annotationType, final int nameIndex, final int length, final AnnotationEntry[] annotationTable,
             final ConstantPool constantPool, final boolean isRuntimeVisible) {
