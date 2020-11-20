@@ -29,6 +29,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.zip.GZIPInputStream;
@@ -1352,9 +1353,7 @@ public abstract class Utility {
     public static String fillup( final String str, final int length, final boolean left_justify, final char fill ) {
         final int len = length - str.length();
         final char[] buf = new char[(len < 0) ? 0 : len];
-        for (int j = 0; j < buf.length; j++) {
-            buf[j] = fill;
-        }
+        Arrays.fill(buf, fill);
         if (left_justify) {
             return str + new String(buf);
         }
