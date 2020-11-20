@@ -34,7 +34,7 @@ public class DescendingVisitor implements Visitor
     private final Stack<Object> stack = new Stack<>();
 
     /**
-     * @return container of current entitity, i.e., predecessor during traversal
+     * @return container of current entity, i.e., predecessor during traversal
      */
     public Object predecessor()
     {
@@ -44,7 +44,7 @@ public class DescendingVisitor implements Visitor
     /**
      * @param level
      *            nesting level, i.e., 0 returns the direct predecessor
-     * @return container of current entitity, i.e., predecessor during traversal
+     * @return container of current entity, i.e., predecessor during traversal
      */
     public Object predecessor(final int level)
     {

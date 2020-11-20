@@ -969,13 +969,12 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     "The Code attribute '"+tostring(obj)+"' is not correctly named 'Code' but '"+name+"'.");
             }
 
-            Method m = null; // satisfy compiler
             if (!(carrier.predecessor() instanceof Method)) {
                 addMessage("Code attribute '"+tostring(obj)+"' is not declared in a method_info structure but in '"+
                             carrier.predecessor()+"'. Ignored.");
                 return;
             }
-            m = (Method) carrier.predecessor();    // we can assume this method was visited before;
+            final Method m = (Method) carrier.predecessor();    // we can assume this method was visited before;
                                                                                     // i.e. the data consistency was verified.
 
             if (obj.getCode().length == 0) {
