@@ -51,7 +51,6 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * tag and length are defined in readInstruction and initFromFile, respectively.
      */
     LocalVariableInstruction(final short canon_tag, final short c_tag) {
-        super();
         this.canonTag = canon_tag;
         this.cTag = c_tag;
     }

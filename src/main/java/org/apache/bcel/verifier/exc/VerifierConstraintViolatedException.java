@@ -38,7 +38,6 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
      * Constructs a new VerifierConstraintViolatedException with null as its error message string.
      */
     VerifierConstraintViolatedException() {
-        super();
     }
     /**
      * Constructs a new VerifierConstraintViolatedException with the specified error message.

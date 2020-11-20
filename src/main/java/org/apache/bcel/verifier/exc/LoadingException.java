@@ -31,7 +31,6 @@ public class LoadingException extends VerifierConstraintViolatedException{
      * Constructs a new LoadingException with null as its error message string.
      */
     public LoadingException() {
-        super();
     }
 
     /**

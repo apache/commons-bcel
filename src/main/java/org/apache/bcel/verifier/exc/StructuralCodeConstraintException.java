@@ -40,6 +40,5 @@ public class StructuralCodeConstraintException extends CodeConstraintException{
      * Constructs a new StructuralCodeConstraintException with null as its error message string.
      */
     public StructuralCodeConstraintException() {
-        super();
     }
 }

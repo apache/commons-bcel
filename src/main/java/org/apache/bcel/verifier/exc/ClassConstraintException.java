@@ -31,7 +31,6 @@ public class ClassConstraintException extends VerificationException{
      * Constructs a new ClassConstraintException with null as its error message string.
      */
     public ClassConstraintException() {
-        super();
     }
 
     /**

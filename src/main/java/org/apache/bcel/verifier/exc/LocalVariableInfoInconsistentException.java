@@ -33,7 +33,6 @@ public class LocalVariableInfoInconsistentException extends ClassConstraintExcep
      * Constructs a new LocalVariableInfoInconsistentException with null as its error message string.
      */
     public LocalVariableInfoInconsistentException() {
-        super();
     }
 
     /**
