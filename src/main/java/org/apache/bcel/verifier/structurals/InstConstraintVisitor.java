@@ -992,9 +992,6 @@ public class InstConstraintVisitor extends EmptyVisitor{
                 constraintViolated(o, "If stack top's size is 2, then stack next-to-top's size must be 1. But it is '"+
                     stack().peek(1)+"' of size '"+stack().peek(1).getSize()+"'.");
             }
-            else{
-                return; // Form 2
-            }
         }
         else{ // stack top is of size 1
             if ( stack().peek(1).getSize() != 1 ) {
