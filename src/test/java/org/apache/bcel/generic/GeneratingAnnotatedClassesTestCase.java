@@ -163,7 +163,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         final MethodGen mainMethod2 = new MethodGen(mainMethod1, cg2.getClassName(),
                 cg2.getConstantPool());
         assertEquals(1, mainMethod2.getAnnotationEntries().length, "Wrong number of annotations of the 'MethodGen'");
-        AnnotationEntryGen fruit = createFruitAnnotation(cg2.getConstantPool(), "Pear");
+        final AnnotationEntryGen fruit = createFruitAnnotation(cg2.getConstantPool(), "Pear");
         mainMethod2.addAnnotationEntry(fruit);
         cg2.removeMethod(mainMethod1);
         cg2.addMethod(mainMethod2.getMethod());
@@ -299,7 +299,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         {
             final AnnotationEntry[] annos= parameterAnnotation.getAnnotationEntries();
             final int expectedLength = expectedNumberOfParmeterAnnotations[i++];
-            int j = i;
+            final int j = i;
             assertEquals(expectedLength, annos.length, () -> methodName + " parameter " + j);
             if(expectedLength!=0)
             {

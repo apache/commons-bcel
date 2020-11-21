@@ -365,7 +365,7 @@ public class ClassPath implements Closeable {
         public void close() throws IOException {
             if (modules != null) {
                 // don't use a for each loop to avoid creating an iterator for the GC to collect.
-                for (JrtModule module : modules) {
+                for (final JrtModule module : modules) {
                     module.close();
                 }
             }
@@ -377,7 +377,7 @@ public class ClassPath implements Closeable {
         @Override
         ClassFile getClassFile(final String name, final String suffix) throws IOException {
             // don't use a for each loop to avoid creating an iterator for the GC to collect.
-            for (JrtModule module : modules) {
+            for (final JrtModule module : modules) {
                 final ClassFile classFile = module.getClassFile(name, suffix);
                 if (classFile != null) {
                     return classFile;
@@ -389,7 +389,7 @@ public class ClassPath implements Closeable {
         @Override
         URL getResource(final String name) {
             // don't use a for each loop to avoid creating an iterator for the GC to collect.
-            for (JrtModule module : modules) {
+            for (final JrtModule module : modules) {
                 final URL url = module.getResource(name);
                 if (url != null) {
                     return url;
@@ -401,7 +401,7 @@ public class ClassPath implements Closeable {
         @Override
         InputStream getResourceAsStream(final String name) {
             // don't use a for each loop to avoid creating an iterator for the GC to collect.
-            for (JrtModule module : modules) {
+            for (final JrtModule module : modules) {
                 final InputStream inputStream = module.getResourceAsStream(name);
                 if (inputStream != null) {
                     return inputStream;
@@ -452,7 +452,7 @@ public class ClassPath implements Closeable {
         if (modulesDir.exists()) {
             final String[] modules = modulesDir.list(MODULES_FILTER);
             if (modules != null) {
-                for (String module : modules) {
+                for (final String module : modules) {
                     list.add(modulesDir.getPath() + File.separatorChar + module);
                 }
             }

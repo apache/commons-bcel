@@ -209,12 +209,12 @@ public class JdkGenericDumpTestCase {
         }
     }
 
-    private File[] listJdkJars(String javaHome) throws Exception {
+    private File[] listJdkJars(final String javaHome) throws Exception {
         final File javaLib = new File(javaHome, "lib");
         return javaLib.listFiles(file -> file.getName().endsWith(".jar"));
     }
 
-    private File[] listJdkModules(String javaHome) throws Exception {
+    private File[] listJdkModules(final String javaHome) throws Exception {
         final File javaLib = new File(javaHome, "jmods");
         return javaLib.listFiles(file -> file.getName().endsWith(".jmod"));
     }
@@ -242,7 +242,7 @@ public class JdkGenericDumpTestCase {
 
     @ParameterizedTest
     @MethodSource("findJavaHomes")
-    public void testJdkJars(String javaHome) throws Exception {
+    public void testJdkJars(final String javaHome) throws Exception {
         final File[] jars = listJdkJars(javaHome);
         if (jars != null) {
             for (final File file : jars) {
@@ -253,7 +253,7 @@ public class JdkGenericDumpTestCase {
 
     @ParameterizedTest
     @MethodSource("findJavaHomes")
-    public void testJdkModules(String javaHome) throws Exception {
+    public void testJdkModules(final String javaHome) throws Exception {
         final File[] jmods = listJdkModules(javaHome);
         if (jmods != null) {
             for (final File file : jmods) {
@@ -264,7 +264,7 @@ public class JdkGenericDumpTestCase {
 
     @ParameterizedTest
     @MethodSource("findJavaHomes")
-    public void testJreModules(String javaHome) throws Exception {
+    public void testJreModules(final String javaHome) throws Exception {
         assumeTrue(SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_9));
         try (final ModularRuntimeImage mri = new ModularRuntimeImage(javaHome)) {
             final List<Path> modules = mri.modules();

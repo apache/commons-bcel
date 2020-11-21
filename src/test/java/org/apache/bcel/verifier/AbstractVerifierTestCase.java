@@ -59,7 +59,7 @@ public abstract class AbstractVerifierTestCase {
      */
     public boolean doAllPasses(final String classname) throws ClassNotFoundException {
         final JavaClass jc = Repository.lookupClass(classname);
-        int nbMethods = jc.getMethods().length;
+        final int nbMethods = jc.getMethods().length;
 
         final Verifier verifier = VerifierFactory.getVerifier(classname);
         VerificationResult result = verifier.doPass1();
