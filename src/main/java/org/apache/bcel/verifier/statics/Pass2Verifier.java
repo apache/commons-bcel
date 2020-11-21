@@ -1049,7 +1049,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             int num_of_lvt_attribs = 0;
             // Now iterate through the attributes the Code attribute has.
             final Attribute[] atts = obj.getAttributes();
-            for (Attribute att : atts) {
+            for (final Attribute att : atts) {
                 if ((! (att instanceof LineNumberTable)) &&
                     (! (att instanceof LocalVariableTable))) {
                     addMessage("Attribute '"+tostring(att)+"' as an attribute of Code attribute '"+tostring(obj)+
