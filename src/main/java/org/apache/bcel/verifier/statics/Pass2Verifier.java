@@ -1049,14 +1049,14 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             int num_of_lvt_attribs = 0;
             // Now iterate through the attributes the Code attribute has.
             final Attribute[] atts = obj.getAttributes();
-            for (int a=0; a<atts.length; a++) {
-                if ((! (atts[a] instanceof LineNumberTable)) &&
-                    (! (atts[a] instanceof LocalVariableTable))) {
-                    addMessage("Attribute '"+tostring(atts[a])+"' as an attribute of Code attribute '"+tostring(obj)+
+            for (Attribute att : atts) {
+                if ((! (att instanceof LineNumberTable)) &&
+                    (! (att instanceof LocalVariableTable))) {
+                    addMessage("Attribute '"+tostring(att)+"' as an attribute of Code attribute '"+tostring(obj)+
                         "' (method '"+m+"') is unknown and will therefore be ignored.");
                 }
                 else{// LineNumberTable or LocalVariableTable
-                    addMessage("Attribute '"+tostring(atts[a])+"' as an attribute of Code attribute '"+tostring(obj)+
+                    addMessage("Attribute '"+tostring(att)+"' as an attribute of Code attribute '"+tostring(obj)+
                         "' (method '"+m+"') will effectively be ignored and is only useful for debuggers and such.");
                 }
 
@@ -1064,9 +1064,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 //Here because its easier to collect the information of the
                 //(possibly more than one) LocalVariableTables belonging to
                 //one certain Code attribute.
-                if (atts[a] instanceof LocalVariableTable) { // checks conforming to vmspec2 4.7.9
+                if (att instanceof LocalVariableTable) { // checks conforming to vmspec2 4.7.9
 
-                    final LocalVariableTable lvt = (LocalVariableTable) atts[a];
+                    final LocalVariableTable lvt = (LocalVariableTable) att;
 
                     checkIndex(lvt, lvt.getNameIndex(), CONST_Utf8);
 
