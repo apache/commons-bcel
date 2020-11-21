@@ -85,7 +85,7 @@ public abstract class SimpleNode implements Node {
   public void dump(final String prefix) {
     System.out.println(toString(prefix));
     if (children != null) {
-      for (Node element : children) {
+      for (final Node element : children) {
         final SimpleNode n = (SimpleNode)element;
         if (n != null) {
           n.dump(prefix + " ");

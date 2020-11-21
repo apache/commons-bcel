@@ -103,7 +103,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
         this.env = env;
 
         // Put arguments into hash table aka environment
-        for (ASTIdent element : argv) {
+        for (final ASTIdent element : argv) {
             final EnvEntry entry = env.get(element.getName());
 
             if (entry != null) {
@@ -326,10 +326,10 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
 
                 System.err.println(targets[0]);
 
-                for (InstructionHandle target : targets) {
+                for (final InstructionHandle target : targets) {
                     final InstructionTargeter[] targeters = target.getTargeters();
 
-                    for (InstructionTargeter targeter : targeters) {
+                    for (final InstructionTargeter targeter : targeters) {
                         if ((target != match[4]) || (targeter != match[2])) {
                             System.err.println("Unexpected: " + e);
                         }
@@ -414,7 +414,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
     public void dump(final String prefix) {
         System.out.println(toString(prefix));
 
-        for (ASTIdent element : argv) {
+        for (final ASTIdent element : argv) {
             element.dump(prefix + " ");
         }
 

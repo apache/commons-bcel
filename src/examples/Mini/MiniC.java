@@ -41,7 +41,7 @@ public class MiniC implements org.apache.bcel.Constants {
     try {
       /* Parse command line arguments.
        */
-      for (String element : argv) {
+      for (final String element : argv) {
         if(element.charAt(0) == '-') {  // command line switch
           if(element.equals("-java")) {
         byte_code=false;
