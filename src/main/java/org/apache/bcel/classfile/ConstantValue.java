@@ -119,8 +119,8 @@ public final class ConstantValue extends Attribute {
     @Override
     public String toString() {
         Constant c = super.getConstantPool().getConstant(constantValueIndex);
-        String buf;
-        int i;
+        final String buf;
+        final int i;
         // Print constant to string depending on its type
         switch (c.getTag()) {
             case Const.CONSTANT_Long:

@@ -126,7 +126,7 @@ public class BootstrapMethod implements Cloneable {
      */
     public final String toString( final ConstantPool constantPool ) {
         final StringBuilder buf = new StringBuilder();
-        String bootstrap_method_name;
+        final String bootstrap_method_name;
         bootstrap_method_name = constantPool.constantToString(bootstrapMethodRef,
                 Const.CONSTANT_MethodHandle);
         buf.append(Utility.compactClassName(bootstrap_method_name, false));

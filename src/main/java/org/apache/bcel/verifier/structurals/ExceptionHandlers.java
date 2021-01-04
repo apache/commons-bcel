@@ -51,11 +51,7 @@ public class ExceptionHandlers {
             final ExceptionHandler eh = new ExceptionHandler(ceg.getCatchType(), ceg.getHandlerPC());
             for (InstructionHandle ih = ceg.getStartPC(); ih != ceg.getEndPC().getNext(); ih = ih.getNext()) {
                 Set<ExceptionHandler> hs;
-                hs = exceptionHandlers.get(ih);
-                if (hs == null) {
-                    hs = new HashSet<>();
-                    exceptionHandlers.put(ih, hs);
-                }
+                hs = exceptionHandlers.computeIfAbsent(ih, k -> new HashSet<>());
                 hs.add(eh);
             }
         }

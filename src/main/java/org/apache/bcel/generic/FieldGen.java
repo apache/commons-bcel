@@ -313,8 +313,8 @@ public class FieldGen extends FieldGenOrMethodGen {
      */
     @Override
     public final String toString() {
-        String name;
-        String signature;
+        final String name;
+        final String signature;
         String access; // Short cuts to constant pool
         access = Utility.accessToString(super.getAccessFlags());
         access = access.isEmpty() ? "" : (access + " ");

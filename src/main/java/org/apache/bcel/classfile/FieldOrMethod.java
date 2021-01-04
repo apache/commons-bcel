@@ -216,7 +216,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @return Name of object, i.e., method name or field name
      */
     public final String getName() {
-        ConstantUtf8 c;
+        final ConstantUtf8 c;
         c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
         return c.getBytes();
     }
@@ -226,7 +226,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @return String representation of object's type signature (java style)
      */
     public final String getSignature() {
-        ConstantUtf8 c;
+        final ConstantUtf8 c;
         c = (ConstantUtf8) constant_pool.getConstant(signature_index, Const.CONSTANT_Utf8);
         return c.getBytes();
     }

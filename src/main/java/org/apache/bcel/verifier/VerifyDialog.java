@@ -473,7 +473,7 @@ public class VerifyDialog extends javax.swing.JDialog {
         classesToVerify = args.length;
         for (final String arg : args) {
             try {
-                VerifyDialog aVerifyDialog;
+                final VerifyDialog aVerifyDialog;
                 aVerifyDialog = new VerifyDialog(arg);
                 aVerifyDialog.setModal(true);
                 aVerifyDialog.addWindowListener(new java.awt.event.WindowAdapter() {

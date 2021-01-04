@@ -180,16 +180,16 @@ public abstract class Utility {
             final boolean verbose ) throws IOException {
         final short opcode = (short) bytes.readUnsignedByte();
         int default_offset = 0;
-        int low;
-        int high;
-        int npairs;
-        int index;
-        int vindex;
-        int constant;
-        int[] match;
-        int[] jump_table;
+        final int low;
+        final int high;
+        final int npairs;
+        final int index;
+        final int vindex;
+        final int constant;
+        final int[] match;
+        final int[] jump_table;
         int no_pad_bytes = 0;
-        int offset;
+        final int offset;
         final StringBuilder buf = new StringBuilder(Const.getOpcodeName(opcode));
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned
@@ -198,7 +198,7 @@ public abstract class Utility {
             final int remainder = bytes.getIndex() % 4;
             no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
             for (int i = 0; i < no_pad_bytes; i++) {
-                byte b;
+                final byte b;
                 if ((b = bytes.readByte()) != 0) {
                     System.err.println("Warning: Padding byte != 0 in "
                             + Const.getOpcodeName(opcode) + ":" + b);
@@ -618,8 +618,8 @@ public abstract class Utility {
      * @throws ClassFormatException
      */
     public static String methodSignatureReturnType( final String signature, final boolean chopit ) throws ClassFormatException {
-        int index;
-        String type;
+        final int index;
+        final String type;
         try {
             // Read return type after `)'
             index = signature.lastIndexOf(')') + 1;
@@ -677,7 +677,7 @@ public abstract class Utility {
     public static String methodSignatureToString( final String signature, final String name,
             final String access, final boolean chopit, final LocalVariableTable vars ) throws ClassFormatException {
         final StringBuilder buf = new StringBuilder("(");
-        String type;
+        final String type;
         int index;
         int var_index = access.contains("static") ? 0 : 1;
         try {
@@ -717,7 +717,7 @@ public abstract class Utility {
             buf.setLength(buf.length() - 2);
         }
         buf.append(")");
-        return access + ((!access.isEmpty()) ? " " : "") + // May be an empty string
+        return access + ((access.length() > 0) ? " " : "") + // May be an empty string
                 type + " " + name + buf.toString();
     }
 
@@ -1087,20 +1087,20 @@ public abstract class Utility {
                     return "boolean";
                 case '[': { // Array declaration
                     int n;
-                    StringBuilder brackets;
-                    String type;
-                    int consumed_chars; // Shadows global var
+                    final StringBuilder brackets;
+                    final String type;
+                    final int CONSUMER_CHARS; // Shadows global var
                     brackets = new StringBuilder(); // Accumulate []'s
                     // Count opening brackets and look for optional size argument
                     for (n = 0; signature.charAt(n) == '['; n++) {
                         brackets.append("[]");
                     }
-                    consumed_chars = n; // Remember value
+                    CONSUMER_CHARS = n; // Remember value
                     // The rest of the string denotes a `<field_type>'
                     type = typeSignatureToString(signature.substring(n), chopit);
                     //corrected concurrent private static field acess
-                    //Utility.consumed_chars += consumed_chars; is replaced by:
-                    final int _temp = unwrap(Utility.CONSUMER_CHARS) + consumed_chars;
+                    //Utility.CONSUMER_CHARS += CONSUMER_CHARS; is replaced by:
+                    final int _temp = unwrap(Utility.CONSUMER_CHARS) + CONSUMER_CHARS;
                     wrap(Utility.CONSUMER_CHARS, _temp);
                     return type + brackets.toString();
                 }
@@ -1215,7 +1215,7 @@ public abstract class Utility {
      * @throws ClassFormatException if signature is not a method signature
      */
     public static byte typeOfMethodSignature( final String signature ) throws ClassFormatException {
-        int index;
+        final int index;
         try {
             if (signature.charAt(0) != '(') {
                 throw new ClassFormatException("Invalid method signature: " + signature);
@@ -1357,7 +1357,7 @@ public abstract class Utility {
 
 
     static boolean equals( final byte[] a, final byte[] b ) {
-        int size;
+        final int size;
         if ((size = a.length) != b.length) {
             return false;
         }

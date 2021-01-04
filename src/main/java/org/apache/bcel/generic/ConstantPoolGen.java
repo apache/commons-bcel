@@ -142,7 +142,7 @@ public class ConstantPoolGen {
                 }
             } else if (c instanceof ConstantCP) {
                 final ConstantCP m = (ConstantCP) c;
-                String class_name;
+                final String class_name;
                 ConstantUtf8 u8;
 
                 if (c instanceof ConstantInvokeDynamic) {
@@ -546,8 +546,8 @@ public class ConstantPoolGen {
      */
     public int addNameAndType( final String name, final String signature ) {
         int ret;
-        int name_index;
-        int signature_index;
+        final int name_index;
+        final int signature_index;
         if ((ret = lookupNameAndType(name, signature)) != -1) {
             return ret; // Already in CP
         }
@@ -597,8 +597,8 @@ public class ConstantPoolGen {
      */
     public int addMethodref( final String class_name, final String method_name, final String signature ) {
         int ret;
-        int class_index;
-        int name_and_type_index;
+        final int class_index;
+        final int name_and_type_index;
         if ((ret = lookupMethodref(class_name, method_name, signature)) != -1) {
             return ret; // Already in CP
         }
@@ -652,8 +652,8 @@ public class ConstantPoolGen {
      */
     public int addInterfaceMethodref( final String class_name, final String method_name, final String signature ) {
         int ret;
-        int class_index;
-        int name_and_type_index;
+        final int class_index;
+        final int name_and_type_index;
         if ((ret = lookupInterfaceMethodref(class_name, method_name, signature)) != -1) {
             return ret; // Already in CP
         }
@@ -701,8 +701,8 @@ public class ConstantPoolGen {
      */
     public int addFieldref( final String class_name, final String field_name, final String signature ) {
         int ret;
-        int class_index;
-        int name_and_type_index;
+        final int class_index;
+        final int name_and_type_index;
         if ((ret = lookupFieldref(class_name, field_name, signature)) != -1) {
             return ret; // Already in CP
         }

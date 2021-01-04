@@ -122,8 +122,8 @@ public final class Field extends FieldOrMethod {
      */
     @Override
     public String toString() {
-        String name;
-        String signature;
+        final String name;
+        final String signature;
         String access; // Short cuts to constant pool
 
         // Get names from constant pool

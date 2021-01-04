@@ -160,7 +160,7 @@ public final class Unknown extends Attribute {
         if (super.getLength() == 0 || bytes == null) {
             return "(Unknown attribute " + name + ")";
         }
-        String hex;
+        final String hex;
         if (super.getLength() > 10) {
             final byte[] tmp = new byte[10];
             System.arraycopy(bytes, 0, tmp, 0, 10);

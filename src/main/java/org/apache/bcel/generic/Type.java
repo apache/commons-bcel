@@ -240,7 +240,7 @@ public abstract class Type {
     public static Type[] getArgumentTypes( final String signature ) {
         final List<Type> vec = new ArrayList<>();
         int index;
-        Type[] types;
+        final Type[] types;
         try {
             // Skip any type arguments to read argument declarations between `(' and `)'
             index = signature.indexOf('(') + 1;
@@ -289,8 +289,6 @@ public abstract class Type {
                 return BYTE;
             } else if (cl == Short.TYPE) {
                 return SHORT;
-            } else if (cl == Byte.TYPE) {
-                return BYTE;
             } else if (cl == Long.TYPE) {
                 return LONG;
             } else if (cl == Character.TYPE) {

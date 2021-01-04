@@ -119,7 +119,7 @@ public class ControlFlowGraph{
         public Frame getOutFrame(final ArrayList<InstructionContext> execChain) {
             executionPredecessors = execChain;
 
-            Frame org;
+            final Frame org;
 
             final InstructionContext jsr = lastExecutionJSR();
 
@@ -134,7 +134,7 @@ public class ControlFlowGraph{
 
     @Override
     public Frame getInFrame() {
-          Frame org;
+          final Frame org;
 
             final InstructionContext jsr = lastExecutionJSR();
 

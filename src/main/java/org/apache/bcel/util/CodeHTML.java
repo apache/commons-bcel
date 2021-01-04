@@ -73,23 +73,23 @@ final class CodeHTML {
      * Disassemble a stream of byte codes and return the
      * string representation.
      *
-     * @param  stream data input stream
+     * @param  bytes data input stream
      * @return String representation of byte code
      */
     private String codeToHTML( final ByteSequence bytes, final int method_number ) throws IOException {
         final short opcode = (short) bytes.readUnsignedByte();
         String name;
-        String signature;
+        final String signature;
         int default_offset = 0;
-        int low;
-        int high;
+        final int low;
+        final int high;
         int index;
-        int class_index;
-        int vindex;
-        int constant;
-        int[] jump_table;
+        final int class_index;
+        final int vindex;
+        final int constant;
+        final int[] jump_table;
         int no_pad_bytes = 0;
-        int offset;
+        final int offset;
         final StringBuilder buf = new StringBuilder(256); // CHECKSTYLE IGNORE MagicNumber
         buf.append("<TT>").append(Const.getOpcodeName(opcode)).append("</TT></TD><TD>");
         /* Special case: Skip (0-3) padding bytes, i.e., the
@@ -259,7 +259,7 @@ final class CodeHTML {
             case Const.INVOKEINTERFACE:
             case Const.INVOKEDYNAMIC:
                 final int m_index = bytes.readShort();
-                String str;
+                final String str;
                 if (opcode == Const.INVOKEINTERFACE) { // Special treatment needed
                     bytes.readUnsignedByte(); // Redundant
                     bytes.readUnsignedByte(); // Reserved
@@ -422,7 +422,7 @@ final class CodeHTML {
                     final int remainder = bytes.getIndex() % 4;
                     final int no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
                     int default_offset;
-                    int offset;
+                    final int offset;
                     for (int j = 0; j < no_pad_bytes; j++) {
                         bytes.readByte();
                     }
@@ -565,7 +565,7 @@ final class CodeHTML {
                     if (gotoSet.get(offset)) {
                         anchor = "<A NAME=code" + method_number + "@" + offset + "></A>";
                     }
-                    String anchor2;
+                    final String anchor2;
                     if (stream.getIndex() == code.length) {
                         anchor2 = "<A NAME=code" + method_number + "@" + code.length + ">" + offset + "</A>";
                     } else {

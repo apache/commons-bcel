@@ -179,8 +179,8 @@ public final class Pass3bVerifier extends PassVerifier{
 
         // LOOP!
         while (!icq.isEmpty()) {
-            InstructionContext u;
-            ArrayList<InstructionContext> ec;
+            final InstructionContext u;
+            final ArrayList<InstructionContext> ec;
             if (!DEBUG) {
                 final int r = random.nextInt(icq.size());
                 u = icq.getIC(r);
@@ -365,7 +365,7 @@ public final class Pass3bVerifier extends PassVerifier{
 
         // Pass 3a ran before, so it's safe to assume the JavaClass object is
         // in the BCEL repository.
-        JavaClass jc;
+        final JavaClass jc;
         try {
             jc = Repository.lookupClass(myOwner.getClassName());
         } catch (final ClassNotFoundException e) {

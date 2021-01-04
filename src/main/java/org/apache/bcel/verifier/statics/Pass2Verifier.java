@@ -630,8 +630,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String sig  = ((ConstantUtf8) (cp.getConstant(obj.getSignatureIndex()))).getBytes(); // Method's signature(=descriptor)
 
-            Type t;
-            Type[] ts; // needed below the try block.
+            final Type t;
+            final Type[] ts; // needed below the try block.
             try{
                 t  = Type.getReturnType(sig);
                 ts = Type.getArgumentTypes(sig);
@@ -1092,7 +1092,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         checkIndex(lvt, localvariable.getSignatureIndex(), CONST_Utf8);
                         final String localsig  =
                             ((ConstantUtf8) (cp.getConstant(localvariable.getSignatureIndex()))).getBytes(); // Local sig.(=descriptor)
-                        Type t;
+                        final Type t;
                         try{
                             t = Type.getType(localsig);
                         }

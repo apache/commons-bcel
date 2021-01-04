@@ -94,8 +94,8 @@ public class ConstantPool implements Cloneable, Node {
      * @return String representation
      */
     public String constantToString( Constant c ) throws ClassFormatException {
-        String str;
-        int i;
+        final String str;
+        final int i;
         final byte tag = c.getTag();
         switch (tag) {
             case Const.CONSTANT_Class:
@@ -252,7 +252,7 @@ public class ConstantPool implements Cloneable, Node {
      * @throws  ClassFormatException
      */
     public Constant getConstant( final int index, final byte tag ) throws ClassFormatException {
-        Constant c;
+        final Constant c;
         c = getConstant(index);
         if (c == null) {
             throw new ClassFormatException("Constant pool at index " + index + " is null.");
@@ -287,7 +287,7 @@ public class ConstantPool implements Cloneable, Node {
      */
     public String getConstantString( final int index, final byte tag ) throws ClassFormatException {
         Constant c;
-        int i;
+        final int i;
         c = getConstant(index, tag);
         /* This switch() is not that elegant, since the four classes have the
          * same contents, they just differ in the name of the index
