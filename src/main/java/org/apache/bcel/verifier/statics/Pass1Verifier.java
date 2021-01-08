@@ -159,10 +159,7 @@ public final class Pass1Verifier extends PassVerifier{
             }
 
         }
-        catch(final LoadingException e) {
-            return new VerificationResult(VerificationResult.VERIFIED_REJECTED, e.getMessage());
-        }
-        catch(final ClassFormatException e) {
+        catch(final LoadingException | ClassFormatException e) {
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, e.getMessage());
         }
         catch(final RuntimeException e) {
