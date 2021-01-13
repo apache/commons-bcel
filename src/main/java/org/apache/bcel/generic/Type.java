@@ -167,24 +167,16 @@ public abstract class Type {
         return buf.toString();
     }
 
-    private static final ThreadLocal<Integer> consumed_chars = new ThreadLocal<Integer>() {
-
-        @Override
-        protected Integer initialValue() {
-            return Integer.valueOf(0);
-        }
-    };//int consumed_chars=0; // Remember position in string, see getArgumentTypes
-
+    private static final ThreadLocal<Integer> CONSUMED_CHARS = ThreadLocal.withInitial(() -> Integer.valueOf(0));
+    //int consumed_chars=0; // Remember position in string, see getArgumentTypes
 
     private static int unwrap( final ThreadLocal<Integer> tl ) {
         return tl.get().intValue();
     }
 
-
     private static void wrap( final ThreadLocal<Integer> tl, final int value ) {
         tl.set(Integer.valueOf(value));
     }
-
 
     /**
      * Convert signature to a Type object.
@@ -196,7 +188,7 @@ public abstract class Type {
         final byte type = Utility.typeOfSignature(signature);
         if (type <= Const.T_VOID) {
             //corrected concurrent private static field acess
-            wrap(consumed_chars, 1);
+            wrap(CONSUMED_CHARS, 1);
             return BasicType.getType(type);
         } else if (type == Const.T_ARRAY) {
             int dim = 0;
@@ -207,13 +199,13 @@ public abstract class Type {
             final Type t = getType(signature.substring(dim));
             //corrected concurrent private static field acess
             //  consumed_chars += dim; // update counter - is replaced by
-            final int _temp = unwrap(consumed_chars) + dim;
-            wrap(consumed_chars, _temp);
+            final int _temp = unwrap(CONSUMED_CHARS) + dim;
+            wrap(CONSUMED_CHARS, _temp);
             return new ArrayType(t, dim);
         } else { // type == T_REFERENCE
             // Utility.typeSignatureToString understands how to parse generic types.
             final String parsedSignature = Utility.typeSignatureToString(signature, false);
-            wrap(consumed_chars, parsedSignature.length() + 2); // "Lblabla;" `L' and `;' are removed
+            wrap(CONSUMED_CHARS, parsedSignature.length() + 2); // "Lblabla;" `L' and `;' are removed
             return ObjectType.getInstance(parsedSignature.replace('/', '.'));
         }
     }
@@ -254,7 +246,7 @@ public abstract class Type {
             while (signature.charAt(index) != ')') {
                 vec.add(getType(signature.substring(index)));
                 //corrected concurrent private static field acess
-                index += unwrap(consumed_chars); // update position
+                index += unwrap(CONSUMED_CHARS); // update position
             }
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
             throw new ClassFormatException("Invalid method signature: " + signature, e);
