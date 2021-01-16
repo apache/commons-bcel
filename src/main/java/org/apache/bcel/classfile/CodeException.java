@@ -43,6 +43,11 @@ public final class CodeException implements Cloneable, Node, Constants {
      * exception class which is to be caught.
      */
 
+    /**
+     * Empty array.
+     */
+    static final CodeException[] EMPTY_CODE_EXCEPTION_ARRAY = new CodeException[0];
+
 
     /**
      * Initialize from another object.

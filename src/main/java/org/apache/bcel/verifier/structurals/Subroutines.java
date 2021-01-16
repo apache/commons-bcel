@@ -620,24 +620,23 @@ public class Subroutines{
      * (opposed to its target) as defined here.
      */
     private static InstructionHandle[] getSuccessors(final InstructionHandle instruction) {
-        final InstructionHandle[] empty = new InstructionHandle[0];
         final InstructionHandle[] single = new InstructionHandle[1];
 
         final Instruction inst = instruction.getInstruction();
 
         if (inst instanceof RET) {
-            return empty;
+            return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
         }
 
         // Terminates method normally.
         if (inst instanceof ReturnInstruction) {
-            return empty;
+            return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
         }
 
         // Terminates method abnormally, because JustIce mandates
         // subroutines not to be protected by exception handlers.
         if (inst instanceof ATHROW) {
-            return empty;
+            return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
         }
 
         // See method comment.

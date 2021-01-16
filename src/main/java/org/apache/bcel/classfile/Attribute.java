@@ -53,6 +53,13 @@ public abstract class Attribute implements Cloneable, Node {
     private static final Map<String, Object> readers = new HashMap<>();
 
     /**
+     * Empty array.
+     *
+     * @since 6.6.0
+     */
+    public static final Attribute[] EMPTY_ATTRIBUTE_ARRAY = new Attribute[0];
+
+    /**
      * Add an Attribute reader capable of parsing (user-defined) attributes
      * named "name". You should not add readers for the standard attributes such
      * as "LineNumberTable", because those are handled internally.

@@ -41,6 +41,7 @@ import javax.swing.event.ListSelectionEvent;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This class implements a machine-generated frame for use with
@@ -227,10 +228,10 @@ public class VerifierAppFrame extends JFrame {
             pass2TextPane.setText("");
             pass2TextPane.setBackground(Color.yellow);
             pass3aTextPane.setText("");
-            pass3aJList.setListData(new String[0]);
+            pass3aJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
             pass3aTextPane.setBackground(Color.yellow);
             pass3bTextPane.setText("");
-            pass3bJList.setListData(new String[0]);
+            pass3bJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
             pass3bTextPane.setBackground(Color.yellow);
         } else { // Must be VERIFIED_OK, Pass 1 does not know VERIFIED_NOTYET
             pass1TextPane.setBackground(Color.green);
@@ -241,10 +242,10 @@ public class VerifierAppFrame extends JFrame {
                 pass2TextPane.setBackground(Color.red);
                 pass3aTextPane.setText("");
                 pass3aTextPane.setBackground(Color.yellow);
-                pass3aJList.setListData(new String[0]);
+                pass3aJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
                 pass3bTextPane.setText("");
                 pass3bTextPane.setBackground(Color.yellow);
-                pass3bJList.setListData(new String[0]);
+                pass3bJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
             } else { // must be Verified_OK, because Pass1 was OK (cannot be Verified_NOTYET).
                 pass2TextPane.setText(vr.getMessage());
                 pass2TextPane.setBackground(Color.green);

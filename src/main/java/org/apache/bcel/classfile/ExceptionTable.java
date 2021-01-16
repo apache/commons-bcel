@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This class represents the table of exceptions that are thrown by a
@@ -56,7 +57,7 @@ public final class ExceptionTable extends Attribute {
     public ExceptionTable(final int name_index, final int length, final int[] exceptionIndexTable,
             final ConstantPool constant_pool) {
         super(Const.ATTR_EXCEPTIONS, name_index, length, constant_pool);
-        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : new int[0];
+        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
     }
 
 
@@ -141,7 +142,7 @@ public final class ExceptionTable extends Attribute {
      * Also redefines number_of_exceptions according to table length.
      */
     public void setExceptionIndexTable( final int[] exceptionIndexTable ) {
-        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : new int[0];
+        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
     }
 
 

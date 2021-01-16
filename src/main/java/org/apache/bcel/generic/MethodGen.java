@@ -640,7 +640,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     private Attribute[] addRuntimeParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
         if (!hasParameterAnnotations) {
-            return new Attribute[0];
+            return Attribute.EMPTY_ATTRIBUTE_ARRAY;
         }
         final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, paramAnnotations);
         for (final Attribute attr : attrs) {

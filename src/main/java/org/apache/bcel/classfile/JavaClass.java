@@ -35,6 +35,7 @@ import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.BCELComparator;
 import org.apache.bcel.util.ClassQueue;
 import org.apache.bcel.util.SyntheticRepository;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Represents a Java class, i.e., the data structures, constant pool,
@@ -121,16 +122,16 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             Field[] fields, Method[] methods, Attribute[] attributes, final byte source) {
         super(access_flags);
         if (interfaces == null) {
-            interfaces = new int[0];
+            interfaces = ArrayUtils.EMPTY_INT_ARRAY;
         }
         if (attributes == null) {
-            attributes = new Attribute[0];
+            attributes = Attribute.EMPTY_ATTRIBUTE_ARRAY;
         }
         if (fields == null) {
-            fields = new Field[0];
+            fields = Field.EMPTY_FIELD_ARRAY;
         }
         if (methods == null) {
-            methods = new Method[0];
+            methods = Method.EMPTY_METHOD_ARRAY;
         }
         this.classNameIndex = classNameIndex;
         this.superclassNameIndex = superclassNameIndex;

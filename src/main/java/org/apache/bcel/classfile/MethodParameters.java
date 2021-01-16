@@ -32,7 +32,12 @@ import org.apache.bcel.Const;
  */
 public class MethodParameters extends Attribute {
 
-    private MethodParameter[] parameters = new MethodParameter[0];
+    /**
+     * Empty array.
+     */
+    private static final MethodParameter[] EMPTY_METHOD_PARAMETER_ARRAY = new MethodParameter[0];
+
+    private MethodParameter[] parameters = EMPTY_METHOD_PARAMETER_ARRAY;
 
     MethodParameters(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         super(Const.ATTR_METHOD_PARAMETERS, name_index, length, constant_pool);

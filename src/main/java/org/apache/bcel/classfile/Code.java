@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This class represents a chunk of Java byte code contained in a
@@ -112,9 +113,9 @@ public final class Code extends Attribute {
         super(Const.ATTR_CODE, name_index, length, constant_pool);
         this.maxStack = maxStack;
         this.maxLocals = maxLocals;
-        this.code = code != null ? code : new byte[0];
-        this.exceptionTable = exceptionTable != null ? exceptionTable : new CodeException[0];
-        this.attributes = attributes != null ? attributes : new Attribute[0];
+        this.code = code != null ? code : ArrayUtils.EMPTY_BYTE_ARRAY;
+        this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_CODE_EXCEPTION_ARRAY;
+        this.attributes = attributes != null ? attributes : EMPTY_ATTRIBUTE_ARRAY;
         super.setLength(calculateLength()); // Adjust length
     }
 
@@ -256,7 +257,7 @@ public final class Code extends Attribute {
      * @param attributes the attributes to set for this Code
      */
     public void setAttributes( final Attribute[] attributes ) {
-        this.attributes = attributes != null ? attributes : new Attribute[0];
+        this.attributes = attributes != null ? attributes : EMPTY_ATTRIBUTE_ARRAY;
         super.setLength(calculateLength()); // Adjust length
     }
 
@@ -265,7 +266,7 @@ public final class Code extends Attribute {
      * @param code byte code
      */
     public void setCode( final byte[] code ) {
-        this.code = code != null ? code : new byte[0];
+        this.code = code != null ? code : ArrayUtils.EMPTY_BYTE_ARRAY;
         super.setLength(calculateLength()); // Adjust length
     }
 
@@ -274,7 +275,7 @@ public final class Code extends Attribute {
      * @param exceptionTable exception table
      */
     public void setExceptionTable( final CodeException[] exceptionTable ) {
-        this.exceptionTable = exceptionTable != null ? exceptionTable : new CodeException[0];
+        this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_CODE_EXCEPTION_ARRAY;
         super.setLength(calculateLength()); // Adjust length
     }
 

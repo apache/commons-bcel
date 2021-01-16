@@ -326,7 +326,6 @@ public class ControlFlowGraph{
          */
 // TODO: implement caching!
         private InstructionHandle[] _getSuccessors() {
-            final InstructionHandle[] empty = new InstructionHandle[0];
             final InstructionHandle[] single = new InstructionHandle[1];
 
             final Instruction inst = getInstruction().getInstruction();
@@ -352,13 +351,13 @@ public class ControlFlowGraph{
 
             // Terminates method normally.
             if (inst instanceof ReturnInstruction) {
-                return empty;
+                return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
             }
 
             // Terminates method abnormally, because JustIce mandates
             // subroutines not to be protected by exception handlers.
             if (inst instanceof ATHROW) {
-                return empty;
+                return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
             }
 
             // See method comment.

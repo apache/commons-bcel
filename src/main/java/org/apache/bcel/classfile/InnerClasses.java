@@ -33,6 +33,11 @@ import org.apache.bcel.Const;
  */
 public final class InnerClasses extends Attribute {
 
+    /**
+     * Empty array.
+     */
+    private static final InnerClass[] EMPTY_INNER_CLASSE_ARRAY = new InnerClass[0];
+
     private InnerClass[] innerClasses;
 
 
@@ -54,7 +59,7 @@ public final class InnerClasses extends Attribute {
     public InnerClasses(final int name_index, final int length, final InnerClass[] innerClasses,
             final ConstantPool constant_pool) {
         super(Const.ATTR_INNER_CLASSES, name_index, length, constant_pool);
-        this.innerClasses = innerClasses != null ? innerClasses : new InnerClass[0];
+        this.innerClasses = innerClasses != null ? innerClasses : EMPTY_INNER_CLASSE_ARRAY;
     }
 
 
@@ -119,7 +124,7 @@ public final class InnerClasses extends Attribute {
      * @param innerClasses the array of inner classes
      */
     public void setInnerClasses( final InnerClass[] innerClasses ) {
-        this.innerClasses = innerClasses != null ? innerClasses : new InnerClass[0];
+        this.innerClasses = innerClasses != null ? innerClasses : EMPTY_INNER_CLASSE_ARRAY;
     }
 
 
