@@ -145,7 +145,7 @@ public class listclass {
             }
         }
 
-        if (file_name.size() == 0) {
+        if (file_name.isEmpty()) {
             System.err.println("list: No input files specified");
         } else {
             final listclass listClass = new listclass(code, constants, verbose, classdep,
