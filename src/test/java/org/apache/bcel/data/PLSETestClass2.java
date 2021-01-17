@@ -20,7 +20,7 @@ package org.apache.bcel.data;
 
 public class PLSETestClass2
 {
-    public static void main(final String args[]) {
+    public static void main(final String[] args) {
         int t = 0;
 
         for (int i = 0; i < 100; i++) {

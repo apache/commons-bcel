@@ -30,9 +30,9 @@ import org.apache.bcel.classfile.EnumElementValue;
 public class EnumElementValueGen extends ElementValueGen
 {
     // For enum types, these two indices point to the type and value
-    private int typeIdx;
+    private final int typeIdx;
 
-    private int valueIdx;
+    private final int valueIdx;
 
     /**
      * This ctor assumes the constant pool already contains the right type and

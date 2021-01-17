@@ -36,7 +36,7 @@ public class SimpleElementValueGen extends ElementValueGen
     // For primitive types and string type, this points to the value entry in
     // the cpGen
     // For 'class' this points to the class entry in the cpGen
-    private int idx;
+    private final int idx;
 
     // ctors for each supported type... type could be inferred but for now lets
     // force it to be passed

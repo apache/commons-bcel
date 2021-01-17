@@ -50,7 +50,7 @@ import org.apache.commons.lang3.ArrayUtils;
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
 
     private String fileName;
-    private String packageName;
+    private final String packageName;
     private String sourceFileName = "<Unknown>";
     private int classNameIndex;
     private int superclassNameIndex;

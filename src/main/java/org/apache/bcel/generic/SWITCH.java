@@ -27,8 +27,8 @@ public final class SWITCH implements CompoundInstruction {
 
     private int[] match;
     private InstructionHandle[] targets;
-    private Select instruction;
-    private int matchLength;
+    private final Select instruction;
+    private final int matchLength;
 
 
     /**

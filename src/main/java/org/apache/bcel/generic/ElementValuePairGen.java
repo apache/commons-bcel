@@ -29,7 +29,7 @@ import org.apache.bcel.classfile.ElementValuePair;
  */
 public class ElementValuePairGen
 {
-    private int nameIdx;
+    private final int nameIdx;
 
     private final ElementValueGen value;
 
