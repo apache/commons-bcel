@@ -219,7 +219,7 @@ public class InstructionHandle {
 
 
     public boolean hasTargeters() {
-        return (targeters != null) && (targeters.size() > 0);
+        return (targeters != null) && (!targeters.isEmpty());
     }
 
 

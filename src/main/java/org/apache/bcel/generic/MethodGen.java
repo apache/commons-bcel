@@ -682,7 +682,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         LocalVariableTable lvt = null;
         /* Create LocalVariableTable and LineNumberTable attributes (for debuggers, e.g.)
          */
-        if ((variableList.size() > 0) && !stripAttributes) {
+        if ((!variableList.isEmpty()) && !stripAttributes) {
             updateLocalVariableTable(getLocalVariableTable(_cp));
             addCodeAttribute(lvt = getLocalVariableTable(_cp));
         }
@@ -693,7 +693,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
             addCodeAttribute(localVariableTypeTable);
         }
-        if ((lineNumberList.size() > 0) && !stripAttributes) {
+        if ((!lineNumberList.isEmpty()) && !stripAttributes) {
             addCodeAttribute(lnt = getLineNumberTable(_cp));
         }
         final Attribute[] code_attrs = getCodeAttributes();
@@ -723,7 +723,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         final Attribute[] annotations = addRuntimeAnnotationsAsAttribute(_cp);
         final Attribute[] parameterAnnotations = addRuntimeParameterAnnotationsAsAttribute(_cp);
         ExceptionTable et = null;
-        if (throwsList.size() > 0) {
+        if (!throwsList.isEmpty()) {
             addAttribute(et = getExceptionTable(_cp));
             // Add `Exceptions' if there are "throws" clauses
         }
@@ -1143,7 +1143,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
         }
 
-        if (throwsList.size() > 0) {
+        if (!throwsList.isEmpty()) {
             for (final String throwsDescriptor : throwsList) {
                 buf.append("\n\t\tthrows ").append(throwsDescriptor);
             }
