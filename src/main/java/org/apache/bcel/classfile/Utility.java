@@ -717,7 +717,7 @@ public abstract class Utility {
             buf.setLength(buf.length() - 2);
         }
         buf.append(")");
-        return access + ((access.length() > 0) ? " " : "") + // May be an empty string
+        return access + ((!access.isEmpty()) ? " " : "") + // May be an empty string
                 type + " " + name + buf.toString();
     }
 
