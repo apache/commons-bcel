@@ -831,7 +831,7 @@ public abstract class Utility {
         // Could be Class or Type...
         type = typeSignatureToString(signature.substring(index), chopit);
         index += unwrap(CONSUMER_CHARS); // update position
-        if ((typeParams.length() == 0) && (index == signature.length())) {
+        if ((typeParams.isEmpty()) && (index == signature.length())) {
             // We have a Type signature.
             return type;
         }

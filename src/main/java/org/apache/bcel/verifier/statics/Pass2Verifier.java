@@ -1484,7 +1484,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * represents a valid Java identifier (so-called simple name).
      */
     private static boolean validJavaIdentifier(final String name) {
-    if  (name.length() == 0) {
+    if  (name.isEmpty()) {
         return false; // must not be empty, reported by <francis.andre@easynet.fr>, thanks!
     }
 
