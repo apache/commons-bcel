@@ -80,7 +80,7 @@ public interface ExceptionConstants {
      */
     @Deprecated
     Class<?>[] EXCS_INTERFACE_METHOD_RESOLUTION = new Class[0]; // Chapter 5.3 (as below)
-    
+
     /**
      * Empty array.
      */

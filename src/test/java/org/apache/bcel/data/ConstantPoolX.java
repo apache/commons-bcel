@@ -24,7 +24,6 @@ package org.apache.bcel.data;
  * The code is not executed but the classfile is used as input to a BCEL test case.
  */
 
-import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 

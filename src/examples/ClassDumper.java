@@ -22,7 +22,6 @@ import java.io.IOException;
 import javax.imageio.stream.FileImageInputStream;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.Constant;

@@ -54,7 +54,7 @@ public class InstructionHandle {
      * Empty array.
      */
     static final InstructionTargeter[] EMPTY_INSTRUCTION_TARGETER_ARRAY = new InstructionTargeter[0];
-    
+
     private InstructionHandle next;
     private InstructionHandle prev;
     private Instruction instruction;

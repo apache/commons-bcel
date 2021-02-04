@@ -698,7 +698,7 @@ public class ClassPath implements Closeable {
      * @param suffix
      *            file name ends with suff, e.g. .java
      * @return input stream for file on class path
-     * @throws IOException 
+     * @throws IOException
      */
     public InputStream getInputStream(final String name, final String suffix) throws IOException {
         InputStream inputStream = null;
