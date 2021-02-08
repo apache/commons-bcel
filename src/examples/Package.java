@@ -268,7 +268,7 @@ public class Package {
                 addClassString(clas.substring(1), from);
                 return;
             }
-            throw new IOException("Can't recognize class name =" + clas);
+            throw new IllegalArgumentException("Can't recognize class name =" + clas);
         }
 
         if (!clas.startsWith("java/") && allClasses.get(clas) == null) {

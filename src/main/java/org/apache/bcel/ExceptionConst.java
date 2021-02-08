@@ -78,8 +78,17 @@ public final class ExceptionConst {
     private static final Class<?>[] EXCS_FIELD_AND_METHOD_RESOLUTION = {
             NO_SUCH_FIELD_ERROR, ILLEGAL_ACCESS_ERROR, NO_SUCH_METHOD_ERROR
     }; // Chapter 5.2
+
+    /**
+     * Empty array.
+     */
     private static final Class<?>[] EXCS_INTERFACE_METHOD_RESOLUTION = new Class[0]; // Chapter 5.3 (as below)
+
+    /**
+     * Empty array.
+     */
     private static final Class<?>[] EXCS_STRING_RESOLUTION = new Class[0];
+
     // Chapter 5.4 (no errors but the ones that _always_ could happen! How stupid.)
     private static final Class<?>[] EXCS_ARRAY_EXCEPTION = {
             NULL_POINTER_EXCEPTION, ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION

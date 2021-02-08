@@ -574,7 +574,7 @@ public abstract class Instruction implements Cloneable {
      */
     @Override
     public boolean equals( final Object that ) {
-        return (that instanceof Instruction) ? cmp.equals(this, (Instruction) that) : false;
+        return that instanceof Instruction && cmp.equals(this, (Instruction) that);
     }
 
     /** calculate the hashCode of this object

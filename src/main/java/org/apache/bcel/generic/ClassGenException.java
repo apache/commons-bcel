@@ -27,7 +27,6 @@ public class ClassGenException extends RuntimeException {
     private static final long serialVersionUID = 7247369755051242791L;
 
     public ClassGenException() {
-        super();
     }
 
 

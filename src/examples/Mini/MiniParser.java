@@ -956,7 +956,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
       jj_gen++;
       if (++jj_gc > 100) {
         jj_gc = 0;
-        for (JJCalls jj_2_rtn : jj_2_rtns) {
+        for (final JJCalls jj_2_rtn : jj_2_rtns) {
           JJCalls c = jj_2_rtn;
           while (c != null) {
             if (c.gen < jj_gen) {
@@ -1043,7 +1043,7 @@ public class MiniParser/*@bgen(jjtree)*/implements MiniParserTreeConstants, Mini
         jj_expentry[i] = jj_lasttokens[i];
       }
       boolean exists = false;
-      for (int[] j : jj_expentries) {
+      for (final int[] j : jj_expentries) {
         final int[] oldentry = (j);
         if (oldentry.length == jj_expentry.length) {
           exists = true;

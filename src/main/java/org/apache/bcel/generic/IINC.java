@@ -45,7 +45,7 @@ public class IINC extends LocalVariableInstruction {
      * @param c increment factor
      */
     public IINC(final int n, final int c) {
-        super(); // Default behavior of LocalVariableInstruction causes error
+         // Default behavior of LocalVariableInstruction causes error
         super.setOpcode(org.apache.bcel.Const.IINC);
         super.setLength((short) 3);
         setIndex(n); // May set wide as side effect

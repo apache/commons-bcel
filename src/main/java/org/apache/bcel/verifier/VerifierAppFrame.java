@@ -41,6 +41,7 @@ import javax.swing.event.ListSelectionEvent;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This class implements a machine-generated frame for use with
@@ -126,7 +127,7 @@ public class VerifierAppFrame extends JFrame {
         jScrollPane1.getViewport().setBackground(Color.red);
         messagesScrollPane.getViewport().setBackground(Color.red);
         messagesScrollPane.setPreferredSize(new Dimension(10, 10));
-        classNamesJList.addListSelectionListener(e -> classNamesJList_valueChanged(e));
+        classNamesJList.addListSelectionListener(this::classNamesJList_valueChanged);
         classNamesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setBorder(BorderFactory.createLineBorder(Color.black));
         jScrollPane3.setPreferredSize(new Dimension(100, 100));
@@ -145,16 +146,16 @@ public class VerifierAppFrame extends JFrame {
         newFileMenuItem.setText("New...");
         newFileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(78,
                 InputEvent.CTRL_MASK, true));
-        newFileMenuItem.addActionListener(e -> newFileMenuItem_actionPerformed(e));
+        newFileMenuItem.addActionListener(this::newFileMenuItem_actionPerformed);
         pass3aTextPane.setEditable(false);
         pass3bTextPane.setEditable(false);
-        pass3aJList.addListSelectionListener(e -> pass3aJList_valueChanged(e));
-        pass3bJList.addListSelectionListener(e -> pass3bJList_valueChanged(e));
+        pass3aJList.addListSelectionListener(this::pass3aJList_valueChanged);
+        pass3bJList.addListSelectionListener(this::pass3bJList_valueChanged);
         jMenu2.setText("Help");
         whatisMenuItem.setText("What is...");
-        whatisMenuItem.addActionListener(e -> whatisMenuItem_actionPerformed(e));
+        whatisMenuItem.addActionListener(this::whatisMenuItem_actionPerformed);
         aboutMenuItem.setText("About");
-        aboutMenuItem.addActionListener(e -> aboutMenuItem_actionPerformed(e));
+        aboutMenuItem.addActionListener(this::aboutMenuItem_actionPerformed);
         jSplitPane2.add(messagesPanel, JSplitPane.BOTTOM);
         messagesPanel.add(messagesScrollPane, null);
         messagesScrollPane.getViewport().add(messagesTextPane, null);
@@ -227,10 +228,10 @@ public class VerifierAppFrame extends JFrame {
             pass2TextPane.setText("");
             pass2TextPane.setBackground(Color.yellow);
             pass3aTextPane.setText("");
-            pass3aJList.setListData(new String[0]);
+            pass3aJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
             pass3aTextPane.setBackground(Color.yellow);
             pass3bTextPane.setText("");
-            pass3bJList.setListData(new String[0]);
+            pass3bJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
             pass3bTextPane.setBackground(Color.yellow);
         } else { // Must be VERIFIED_OK, Pass 1 does not know VERIFIED_NOTYET
             pass1TextPane.setBackground(Color.green);
@@ -241,10 +242,10 @@ public class VerifierAppFrame extends JFrame {
                 pass2TextPane.setBackground(Color.red);
                 pass3aTextPane.setText("");
                 pass3aTextPane.setBackground(Color.yellow);
-                pass3aJList.setListData(new String[0]);
+                pass3aJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
                 pass3bTextPane.setText("");
                 pass3bTextPane.setBackground(Color.yellow);
-                pass3bJList.setListData(new String[0]);
+                pass3bJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
             } else { // must be Verified_OK, because Pass1 was OK (cannot be Verified_NOTYET).
                 pass2TextPane.setText(vr.getMessage());
                 pass2TextPane.setBackground(Color.green);

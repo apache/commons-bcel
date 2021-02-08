@@ -437,7 +437,7 @@ public class Subroutines{
         //Graph colouring. Key: InstructionHandle, Value: ColourConstants enum .
         final Map<InstructionHandle, ColourConstants> colors = new HashMap<>();
 
-        final List<InstructionHandle> Q = new ArrayList<>();
+        final List<InstructionHandle> qList = new ArrayList<>();
         for (final InstructionHandle actual : sub_leaders) {
             // Do some BFS with "actual" as the root of the graph.
             // Init colors
@@ -447,8 +447,8 @@ public class Subroutines{
             colors.put(actual, ColourConstants.GRAY);
             // Init Queue
 
-            Q.clear();
-            Q.add(actual); // add(Obj) adds to the end, remove(0) removes from the start.
+            qList.clear();
+            qList.add(actual); // add(Obj) adds to the end, remove(0) removes from the start.
 
             /*
              * BFS ALGORITHM MODIFICATION:
@@ -459,19 +459,19 @@ public class Subroutines{
             if (actual == all[0]) {
                 for (final CodeExceptionGen handler : handlers) {
                     colors.put(handler.getHandlerPC(), ColourConstants.GRAY);
-                    Q.add(handler.getHandlerPC());
+                    qList.add(handler.getHandlerPC());
                 }
             }
             /* CONTINUE NORMAL BFS ALGORITHM */
 
             // Loop until Queue is empty
-            while (Q.size() != 0) {
-                final InstructionHandle u = Q.remove(0);
+            while (!qList.isEmpty()) {
+                final InstructionHandle u = qList.remove(0);
                 final InstructionHandle[] successors = getSuccessors(u);
                 for (final InstructionHandle successor : successors) {
                     if (colors.get(successor) == ColourConstants.WHITE) {
                         colors.put(successor, ColourConstants.GRAY);
-                        Q.add(successor);
+                        qList.add(successor);
                     }
                 }
                 colors.put(u, ColourConstants.BLACK);
@@ -620,24 +620,23 @@ public class Subroutines{
      * (opposed to its target) as defined here.
      */
     private static InstructionHandle[] getSuccessors(final InstructionHandle instruction) {
-        final InstructionHandle[] empty = new InstructionHandle[0];
         final InstructionHandle[] single = new InstructionHandle[1];
 
         final Instruction inst = instruction.getInstruction();
 
         if (inst instanceof RET) {
-            return empty;
+            return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
         }
 
         // Terminates method normally.
         if (inst instanceof ReturnInstruction) {
-            return empty;
+            return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
         }
 
         // Terminates method abnormally, because JustIce mandates
         // subroutines not to be protected by exception handlers.
         if (inst instanceof ATHROW) {
-            return empty;
+            return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
         }
 
         // See method comment.

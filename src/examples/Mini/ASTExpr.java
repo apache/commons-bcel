@@ -177,7 +177,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     }
 
     // Get type of subexpressions
-    for (ASTExpr expr : exprs) {
+    for (final ASTExpr expr : exprs) {
       t = expr.eval(child_type);
 
       if(t != child_type) {
@@ -322,7 +322,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     System.out.println(toString(prefix));
 
     if(exprs != null) {
-        for (ASTExpr expr : exprs) {
+        for (final ASTExpr expr : exprs) {
             expr.dump(prefix + " ");
         }
     }

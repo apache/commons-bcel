@@ -92,7 +92,6 @@ public class VerifyDialog extends javax.swing.JDialog {
 
     /** Machine-generated. */
     public VerifyDialog() {
-        super();
         initialize();
     }
 
@@ -151,7 +150,6 @@ public class VerifyDialog extends javax.swing.JDialog {
      * @param fully_qualified_class_name java.lang.String
      */
     public VerifyDialog(String fully_qualified_class_name) {
-        super();
         final int dotclasspos = fully_qualified_class_name.lastIndexOf(".class");
         if (dotclasspos != -1) {
             fully_qualified_class_name = fully_qualified_class_name.substring(0, dotclasspos);

@@ -55,6 +55,11 @@ public final class Method extends FieldOrMethod {
     private ParameterAnnotationEntry[] parameterAnnotationEntries;
 
     /**
+     * Empty array.
+     */
+    static final Method[] EMPTY_METHOD_ARRAY = new Method[0];
+
+    /**
      * Empty constructor, all attributes have to be defined via `setXXX'
      * methods. Use at your own risk.
      */

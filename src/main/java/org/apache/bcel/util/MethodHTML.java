@@ -24,7 +24,6 @@ import java.io.PrintWriter;
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.Code;
-import org.apache.bcel.classfile.ConstantValue;
 import org.apache.bcel.classfile.ExceptionTable;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.Method;
@@ -89,7 +88,7 @@ final class MethodHTML {
         }
         for (int i = 0; i < attributes.length; i++) {
             if (attributes[i].getTag() == Const.ATTR_CONSTANT_VALUE) { // Default value
-                final String str = ((ConstantValue) attributes[i]).toString();
+                final String str = attributes[i].toString();
                 // Reference attribute in _attributes.html
                 file.print("<TD>= <A HREF=\"" + className + "_attributes.html#" + name + "@" + i
                         + "\" TARGET=\"Attributes\">" + str + "</TD>\n");

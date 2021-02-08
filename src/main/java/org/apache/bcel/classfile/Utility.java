@@ -29,6 +29,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.zip.GZIPInputStream;
@@ -57,12 +58,7 @@ public abstract class Utility {
      * Read by methodSignatureToString().
      * Set by side effect, but only internally.
      */
-    private static ThreadLocal<Integer> consumed_chars = new ThreadLocal<Integer>() {
-        @Override
-        protected Integer initialValue() {
-            return Integer.valueOf(0);
-        }
-    };
+    private static final ThreadLocal<Integer> CONSUMER_CHARS = ThreadLocal.withInitial(() -> Integer.valueOf(0));
 
     /* The `WIDE' instruction is used in the
      * byte code to allow 16-bit wide indices
@@ -592,7 +588,7 @@ public abstract class Utility {
             while (signature.charAt(index) != ')') {
                 vec.add(typeSignatureToString(signature.substring(index), chopit));
                 //corrected concurrent private static field acess
-                index += unwrap(consumed_chars); // update position
+                index += unwrap(CONSUMER_CHARS); // update position
             }
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
             throw new ClassFormatException("Invalid method signature: " + signature, e);
@@ -708,7 +704,7 @@ public abstract class Utility {
                 }
                 buf.append(", ");
                 //corrected concurrent private static field acess
-                index += unwrap(consumed_chars); // update position
+                index += unwrap(CONSUMER_CHARS); // update position
             }
             index++; // update position
             // Read return type after `)'
@@ -721,7 +717,7 @@ public abstract class Utility {
             buf.setLength(buf.length() - 2);
         }
         buf.append(")");
-        return access + ((access.length() > 0) ? " " : "") + // May be an empty string
+        return access + ((!access.isEmpty()) ? " " : "") + // May be an empty string
                 type + " " + name + buf.toString();
     }
 
@@ -819,23 +815,23 @@ public abstract class Utility {
         if (signature.charAt(0) == '<') {
             // we have type paramters
             typeParams = typeParamTypesToString(signature, chopit);
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
         }
         if (signature.charAt(index) == '(') {
             // We have a Method signature.
             // add types of arguments
             type = typeParams + typeSignaturesToString(signature.substring(index), chopit, ')');
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
             // add return type
             type = type + typeSignatureToString(signature.substring(index), chopit);
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
             // ignore any throws information in the signature
             return type;
         }
         // Could be Class or Type...
         type = typeSignatureToString(signature.substring(index), chopit);
-        index += unwrap(consumed_chars); // update position
-        if ((typeParams.length() == 0) && (index == signature.length())) {
+        index += unwrap(CONSUMER_CHARS); // update position
+        if ((typeParams.isEmpty()) && (index == signature.length())) {
             // We have a Type signature.
             return type;
         }
@@ -846,12 +842,12 @@ public abstract class Utility {
         if (index < signature.length()) {
             typeClass.append(" implements ");
             typeClass.append(typeSignatureToString(signature.substring(index), chopit));
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
         }
         while (index < signature.length()) {
             typeClass.append(", ");
             typeClass.append(typeSignatureToString(signature.substring(index), chopit));
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
         }
         return typeClass.toString();
     }
@@ -870,14 +866,14 @@ public abstract class Utility {
         int index = 1;  // skip the '<'
         // get the first TypeParameter
         typeParams.append(typeParamTypeToString(signature.substring(index), chopit));
-        index += unwrap(consumed_chars); // update position
+        index += unwrap(CONSUMER_CHARS); // update position
         // are there more TypeParameters?
         while (signature.charAt(index) != '>') {
             typeParams.append(", ");
             typeParams.append(typeParamTypeToString(signature.substring(index), chopit));
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
         }
-        wrap(consumed_chars, index + 1); // account for the '>' char
+        wrap(CONSUMER_CHARS, index + 1); // account for the '>' char
         return typeParams.append(">").toString();
     }
 
@@ -901,16 +897,16 @@ public abstract class Utility {
             // we have a class bound
             typeParam.append(" extends ");
             typeParam.append(typeSignatureToString(signature.substring(index), chopit));
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
         }
         // look for interface bounds
         while (signature.charAt(index) == ':') {
             index++;  // skip over the ':'
             typeParam.append(" & ");
             typeParam.append(typeSignatureToString(signature.substring(index), chopit));
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
         }
-        wrap(consumed_chars, index);
+        wrap(CONSUMER_CHARS, index);
         return typeParam.toString();
     }
 
@@ -930,15 +926,15 @@ public abstract class Utility {
         // get the first Type in the list
         if (signature.charAt(index) != term) {
             typeList.append(typeSignatureToString(signature.substring(index), chopit));
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
         }
         // are there more types in the list?
         while (signature.charAt(index) != term) {
             typeList.append(", ");
             typeList.append(typeSignatureToString(signature.substring(index), chopit));
-            index += unwrap(consumed_chars); // update position
+            index += unwrap(CONSUMER_CHARS); // update position
         }
-        wrap(consumed_chars, index + 1); // account for the term char
+        wrap(CONSUMER_CHARS, index + 1); // account for the term char
         return typeList.append(term).toString();
     }
 
@@ -956,7 +952,7 @@ public abstract class Utility {
      */
     public static String typeSignatureToString( final String signature, final boolean chopit ) throws ClassFormatException {
         //corrected concurrent private static field acess
-        wrap(consumed_chars, 1); // This is the default, read just one char like `B'
+        wrap(CONSUMER_CHARS, 1); // This is the default, read just one char like `B'
         try {
             switch (signature.charAt(0)) {
                 case 'B':
@@ -977,7 +973,7 @@ public abstract class Utility {
                         throw new ClassFormatException("Invalid type variable signature: " + signature);
                     }
                     //corrected concurrent private static field acess
-                    wrap(consumed_chars, index + 1); // "Tblabla;" `T' and `;' are removed
+                    wrap(CONSUMER_CHARS, index + 1); // "Tblabla;" `T' and `;' are removed
                     return compactClassName(signature.substring(1, index), chopit);
                 }
                 case 'L': { // Full class name
@@ -1001,7 +997,7 @@ public abstract class Utility {
                     final int bracketIndex = signature.substring(0, index).indexOf('<');
                     if (bracketIndex < 0) {
                         // just a class identifier
-                        wrap(consumed_chars, index + 1); // "Lblabla;" `L' and `;' are removed
+                        wrap(CONSUMER_CHARS, index + 1); // "Lblabla;" `L' and `;' are removed
                         return compactClassName(signature.substring(1, index), chopit);
                     }
                     // but make sure we are not looking past the end of the current item
@@ -1011,7 +1007,7 @@ public abstract class Utility {
                     }
                     if (fromIndex < bracketIndex) {
                         // just a class identifier
-                        wrap(consumed_chars, fromIndex + 1); // "Lblabla;" `L' and `;' are removed
+                        wrap(CONSUMER_CHARS, fromIndex + 1); // "Lblabla;" `L' and `;' are removed
                         return compactClassName(signature.substring(1, fromIndex), chopit);
                     }
 
@@ -1036,8 +1032,8 @@ public abstract class Utility {
                     } else {
                         type.append(typeSignatureToString(signature.substring(consumed_chars), chopit));
                         // update our consumed count by the number of characters the for type argument
-                        consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
-                        wrap(Utility.consumed_chars, consumed_chars);
+                        consumed_chars = unwrap(Utility.CONSUMER_CHARS) + consumed_chars;
+                        wrap(Utility.CONSUMER_CHARS, consumed_chars);
                     }
 
                     // are there more TypeArguments?
@@ -1057,8 +1053,8 @@ public abstract class Utility {
                         } else {
                             type.append(typeSignatureToString(signature.substring(consumed_chars), chopit));
                             // update our consumed count by the number of characters the for type argument
-                            consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
-                            wrap(Utility.consumed_chars, consumed_chars);
+                            consumed_chars = unwrap(Utility.CONSUMER_CHARS) + consumed_chars;
+                            wrap(Utility.CONSUMER_CHARS, consumed_chars);
                         }
                     }
 
@@ -1075,14 +1071,14 @@ public abstract class Utility {
                         // update our consumed count by the number of characters the for type argument
                         // note that this count includes the "L" we added, but that is ok
                         // as it accounts for the "." we didn't consume
-                        consumed_chars = unwrap(Utility.consumed_chars) + consumed_chars;
-                        wrap(Utility.consumed_chars, consumed_chars);
+                        consumed_chars = unwrap(Utility.CONSUMER_CHARS) + consumed_chars;
+                        wrap(Utility.CONSUMER_CHARS, consumed_chars);
                         return type.toString();
                     }
                     if (signature.charAt(consumed_chars) != ';') {
                         throw new ClassFormatException("Invalid signature: " + signature);
                     }
-                    wrap(Utility.consumed_chars, consumed_chars + 1); // remove final ";"
+                    wrap(Utility.CONSUMER_CHARS, consumed_chars + 1); // remove final ";"
                     return type.toString();
                 }
                 case 'S':
@@ -1104,8 +1100,8 @@ public abstract class Utility {
                     type = typeSignatureToString(signature.substring(n), chopit);
                     //corrected concurrent private static field acess
                     //Utility.consumed_chars += consumed_chars; is replaced by:
-                    final int _temp = unwrap(Utility.consumed_chars) + consumed_chars;
-                    wrap(Utility.consumed_chars, _temp);
+                    final int _temp = unwrap(Utility.CONSUMER_CHARS) + consumed_chars;
+                    wrap(Utility.CONSUMER_CHARS, _temp);
                     return type + brackets.toString();
                 }
                 case 'V':
@@ -1352,9 +1348,7 @@ public abstract class Utility {
     public static String fillup( final String str, final int length, final boolean left_justify, final char fill ) {
         final int len = length - str.length();
         final char[] buf = new char[(len < 0) ? 0 : len];
-        for (int j = 0; j < buf.length; j++) {
-            buf[j] = fill;
-        }
+        Arrays.fill(buf, fill);
         if (left_justify) {
             return str + new String(buf);
         }
@@ -1457,6 +1451,7 @@ public abstract class Utility {
             try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     GZIPOutputStream gos = new GZIPOutputStream(baos)) {
                 gos.write(bytes, 0, bytes.length);
+                gos.close();
                 bytes = baos.toByteArray();
             }
         }
@@ -1505,8 +1500,8 @@ public abstract class Utility {
 
     // A-Z, g-z, _, $
     private static final int FREE_CHARS = 48;
-    private static int[] CHAR_MAP = new int[FREE_CHARS];
-    private static int[] MAP_CHAR = new int[256]; // Reverse map
+    private static final int[] CHAR_MAP = new int[FREE_CHARS];
+    private static final int[] MAP_CHAR = new int[256]; // Reverse map
     private static final char ESCAPE_CHAR = '$';
     static {
         int j = 0;

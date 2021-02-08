@@ -198,7 +198,7 @@ public class AnnotationEntryGen {
      */
     static Attribute[] getAnnotationAttributes(final ConstantPoolGen cp, final AnnotationEntryGen[] annotationEntryGens) {
         if (annotationEntryGens.length == 0) {
-            return new Attribute[0];
+            return Attribute.EMPTY_ATTRIBUTE_ARRAY;
         }
 
         try {

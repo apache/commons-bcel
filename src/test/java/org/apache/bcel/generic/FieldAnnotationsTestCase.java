@@ -27,12 +27,17 @@ import org.apache.bcel.classfile.ElementValuePair;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FieldAnnotationsTestCase extends AbstractTestCase
 {
     /**
      * Check field AnnotationEntrys are retrievable.
      */
+    @Test
     public void testFieldAnnotationEntrys() throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
@@ -44,6 +49,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     /**
      * Check field AnnotationEntrys (de)serialize ok.
      */
+    @Test
     public void testFieldAnnotationEntrysReadWrite() throws ClassNotFoundException,
             IOException
     {
@@ -64,6 +70,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
      * Check we can load in a class, modify its field AnnotationEntrys, save it,
      * reload it and everything is correct.
      */
+    @Test
     public void testFieldAnnotationModification()
             throws ClassNotFoundException
     {
@@ -108,8 +115,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             System.err.println("With AnnotationEntrys: "
                     + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
-        assertTrue("Should be 2 AnnotationEntrys on this field, but there are "
-                + f.getAnnotationEntries().length, f.getAnnotationEntries().length == 2);
+        assertEquals(2, f.getAnnotationEntries().length, "Wrong number of AnnotationEntries");
     }
 
     // helper methods
@@ -131,37 +137,10 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     private void checkAnnotationEntry(final AnnotationEntry a, final String name, final String elementname,
             final String elementvalue)
     {
-        assertTrue("Expected AnnotationEntry to have name " + name
-                + " but it had name " + a.getAnnotationType(), a.getAnnotationType()
-                .equals(name));
-        assertTrue("Expected AnnotationEntry to have one element but it had "
-                + a.getElementValuePairs().length, a.getElementValuePairs().length == 1);
+        assertEquals(name, a.getAnnotationType(), "Wrong AnnotationEntry name");
+        assertEquals(1, a.getElementValuePairs().length, "Wrong number of AnnotationEntry elements");
         final ElementValuePair envp = a.getElementValuePairs()[0];
-        assertTrue("Expected element name " + elementname + " but was "
-                + envp.getNameString(), elementname
-                .equals(envp.getNameString()));
-        assertTrue("Expected element value " + elementvalue + " but was "
-                + envp.getValue().stringifyValue(), elementvalue.equals(envp
-                .getValue().stringifyValue()));
-    }
-
-    // helper methods
-    public void checkValue(final AnnotationEntry a, final String name, final String tostring)
-    {
-        for (int i = 0; i < a.getElementValuePairs().length; i++)
-        {
-            final ElementValuePair element = a.getElementValuePairs()[i];
-            if (element.getNameString().equals(name))
-            {
-                if (!element.getValue().stringifyValue().equals(tostring))
-                {
-                    fail("Expected element " + name + " to have value "
-                            + tostring + " but it had value "
-                            + element.getValue().stringifyValue());
-                }
-                return;
-            }
-        }
-        fail("Didnt find named element " + name);
+        assertEquals(envp.getNameString(), elementname, "Wrong element name");
+        assertEquals(envp.getValue().stringifyValue(), elementvalue, "Wrong element value");
     }
 }

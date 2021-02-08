@@ -30,6 +30,7 @@ import java.util.NoSuchElementException;
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.util.ByteSequence;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This class is a container for a list of <a href="Instruction.html">Instruction</a> objects. Instructions can be appended, inserted, moved, deleted, etc..
@@ -945,7 +946,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
             out.flush();
         } catch (final IOException e) {
             System.err.println(e);
-            return new byte[0];
+            return ArrayUtils.EMPTY_BYTE_ARRAY;
         }
         return b.toByteArray();
     }

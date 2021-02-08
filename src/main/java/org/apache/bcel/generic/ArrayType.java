@@ -25,8 +25,8 @@ import org.apache.bcel.Const;
  */
 public final class ArrayType extends ReferenceType {
 
-    private int dimensions;
-    private Type basicType;
+    private final int dimensions;
+    private final Type basicType;
 
 
     /**

@@ -222,7 +222,6 @@ public final class Signature extends Attribute {
             matchGJIdent(in, buf);
         } else if (ch == ')') {
             in.unread();
-            return;
         } else if (ch != ';') {
             throw new IllegalArgumentException("Illegal signature: " + in.getData() + " read " + (char) ch);
         }

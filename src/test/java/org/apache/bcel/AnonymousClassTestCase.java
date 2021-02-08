@@ -19,40 +19,45 @@
 package org.apache.bcel;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnonymousClassTestCase extends AbstractTestCase
 {
+    @Test
     public void testRegularClassIsNotAnonymous() throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest");
-        assertFalse("regular outer classes are not anonymous", clazz
-                .isAnonymous());
-        assertFalse("regular outer classes are not nested", clazz.isNested());
+        assertFalse(clazz.isAnonymous(), "regular outer classes are not anonymous");
+        assertFalse(clazz.isNested(), "regular outer classes are not nested");
     }
 
+    @Test
     public void testNamedInnerClassIsNotAnonymous()
             throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest$X");
-        assertFalse("regular inner classes are not anonymous", clazz
-                .isAnonymous());
-        assertTrue("regular inner classes are nested", clazz.isNested());
+        assertFalse(clazz.isAnonymous(), "regular inner classes are not anonymous");
+        assertTrue(clazz.isNested(), "regular inner classes are nested");
     }
 
+    @Test
     public void testStaticInnerClassIsNotAnonymous()
             throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest$Y");
-        assertFalse("regular static inner classes are not anonymous", clazz
-                .isAnonymous());
-        assertTrue("regular static inner classes are nested", clazz.isNested());
+        assertFalse(clazz.isAnonymous(), "regular static inner classes are not anonymous");
+        assertTrue(clazz.isNested(), "regular static inner classes are nested");
     }
 
+    @Test
     public void testAnonymousInnerClassIsAnonymous()
             throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest$1");
-        assertTrue("anonymous inner classes are anonymous", clazz.isAnonymous());
-        assertTrue("anonymous inner classes are anonymous", clazz.isNested());
+        assertTrue(clazz.isAnonymous(), "anonymous inner classes are anonymous");
+        assertTrue(clazz.isNested(), "anonymous inner classes are anonymous");
     }
 }

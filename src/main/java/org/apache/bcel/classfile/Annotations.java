@@ -21,6 +21,8 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.Const;
+
 /**
  * base class for annotations
  *
@@ -37,6 +39,8 @@ public abstract class Annotations extends Attribute {
      * @param length Content length in bytes
      * @param input Input stream
      * @param constant_pool Array of constants
+     * @param isRuntimeVisible whether this Annotation visible at runtime
+     * @throws IOException if an I/O error occurs.
      */
     Annotations(final byte annotation_type, final int name_index, final int length, final DataInput input,
             final ConstantPool constant_pool, final boolean isRuntimeVisible) throws IOException {
@@ -54,6 +58,7 @@ public abstract class Annotations extends Attribute {
      * @param length Content length in bytes
      * @param annotationTable the actual annotations
      * @param constantPool Array of constants
+     * @param isRuntimeVisible whether this Annotation visible at runtime
      */
     public Annotations(final byte annotationType, final int nameIndex, final int length, final AnnotationEntry[] annotationTable,
             final ConstantPool constantPool, final boolean isRuntimeVisible) {
@@ -110,4 +115,21 @@ public abstract class Annotations extends Attribute {
             element.dump(dos);
         }
     }
+
+    /**
+     * @return String representation
+     */
+    @Override
+    public final String toString() {
+        final StringBuilder buf = new StringBuilder(Const.getAttributeName(getTag()));
+        buf.append(":\n");
+        for (int i = 0; i < annotationTable.length; i++) {
+            buf.append("  ").append(annotationTable[i]);
+            if (i < annotationTable.length - 1) {
+                buf.append('\n');
+            }
+        }
+        return buf.toString();
+    }
+
 }

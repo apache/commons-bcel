@@ -116,7 +116,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
     if(fun_decls != null) {
       // Put function names into hash table aka. environment
-      for (ASTFunDecl fun_decl : fun_decls) {
+      for (final ASTFunDecl fun_decl : fun_decls) {
         f     = fun_decl;
         name  = f.getName();
         fname = name.getName();
@@ -159,7 +159,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
    */
   public void eval(final int pass) {
 
-    for (ASTFunDecl fun_decl : fun_decls) {
+    for (final ASTFunDecl fun_decl : fun_decls) {
       fun_decl.eval(pass);
 
       if(pass == 3) { // Final check for unresolved types
@@ -193,7 +193,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     out.println("  private static int _writeInt(int n) {\n" +
                 "    System.out.println(\"Result: \" + n);\n    return 0;\n  }\n");
 
-    for (ASTFunDecl fun_decl : fun_decls) {
+    for (final ASTFunDecl fun_decl : fun_decls) {
         fun_decl.code(out);
     }
 
@@ -321,7 +321,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     method.setMaxStack(5);
     class_gen.addMethod(method.getMethod());
 
-    for (ASTFunDecl fun_decl : fun_decls) {
+    for (final ASTFunDecl fun_decl : fun_decls) {
         fun_decl.byte_code(class_gen, cp);
     }
   }
@@ -330,7 +330,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
   public void dump(final String prefix) {
     System.out.println(toString(prefix));
 
-    for (ASTFunDecl fun_decl : fun_decls) {
+    for (final ASTFunDecl fun_decl : fun_decls) {
         fun_decl.dump(prefix + " ");
     }
   }

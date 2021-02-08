@@ -33,6 +33,11 @@ import org.apache.bcel.Const;
 public final class StackMapEntry implements Node, Cloneable
 {
 
+    /**
+     * Empty array.
+     */
+    private static final StackMapType[] EMPTY_STACK_MAP_TYPE_ARRAY = new StackMapType[0];
+
     private int frameType;
     private int byteCodeOffset;
     private StackMapType[] typesOfLocals;
@@ -106,8 +111,8 @@ public final class StackMapEntry implements Node, Cloneable
             final StackMapType[] typesOfLocals, final int numberOfStackItems,
             final StackMapType[] typesOfStackItems, final ConstantPool constantPool) {
         this.byteCodeOffset = byteCodeOffset;
-        this.typesOfLocals = typesOfLocals != null ? typesOfLocals : new StackMapType[0];
-        this.typesOfStackItems = typesOfStackItems != null ? typesOfStackItems : new StackMapType[0];
+        this.typesOfLocals = typesOfLocals != null ? typesOfLocals : EMPTY_STACK_MAP_TYPE_ARRAY;
+        this.typesOfStackItems = typesOfStackItems != null ? typesOfStackItems : EMPTY_STACK_MAP_TYPE_ARRAY;
         this.constantPool = constantPool;
     }
 
@@ -125,8 +130,8 @@ public final class StackMapEntry implements Node, Cloneable
             final StackMapType[] typesOfStackItems, final ConstantPool constantPool) {
         this.frameType = tag;
         this.byteCodeOffset = byteCodeOffset;
-        this.typesOfLocals = typesOfLocals != null ? typesOfLocals : new StackMapType[0];
-        this.typesOfStackItems = typesOfStackItems != null ? typesOfStackItems : new StackMapType[0];
+        this.typesOfLocals = typesOfLocals != null ? typesOfLocals : EMPTY_STACK_MAP_TYPE_ARRAY;
+        this.typesOfStackItems = typesOfStackItems != null ? typesOfStackItems : EMPTY_STACK_MAP_TYPE_ARRAY;
         this.constantPool = constantPool;
     }
 
@@ -349,7 +354,7 @@ public final class StackMapEntry implements Node, Cloneable
 
 
     public void setTypesOfLocals( final StackMapType[] types ) {
-        typesOfLocals = types != null ? types : new StackMapType[0];
+        typesOfLocals = types != null ? types : EMPTY_STACK_MAP_TYPE_ARRAY;
     }
 
 
@@ -373,7 +378,7 @@ public final class StackMapEntry implements Node, Cloneable
 
 
     public void setTypesOfStackItems( final StackMapType[] types ) {
-        typesOfStackItems = types != null ? types : new StackMapType[0];
+        typesOfStackItems = types != null ? types : EMPTY_STACK_MAP_TYPE_ARRAY;
     }
 
 

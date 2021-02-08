@@ -19,6 +19,10 @@
 package org.apache.bcel;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EnumAccessFlagTestCase extends AbstractTestCase
 {
@@ -27,15 +31,14 @@ public class EnumAccessFlagTestCase extends AbstractTestCase
      * marked such that we can determine from the access flags (through BCEL)
      * that it was originally an enum type declaration.
      */
+    @Test
     public void testEnumClassSaysItIs() throws ClassNotFoundException
     {
         JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleEnum");
-        assertTrue(
-                "Expected SimpleEnum class to say it was an enum - but it didn't !",
-                clazz.isEnum());
+        assertTrue(clazz.isEnum(),
+                "Expected SimpleEnum class to say it was an enum - but it didn't !");
         clazz = getTestClass(PACKAGE_BASE_NAME+".data.SimpleClass");
-        assertTrue(
-                "Expected SimpleClass class to say it was not an enum - but it didn't !",
-                !clazz.isEnum());
+        assertFalse(clazz.isEnum(),
+                "Expected SimpleClass class to say it was not an enum - but it didn't !");
     }
 }

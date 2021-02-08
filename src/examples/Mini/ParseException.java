@@ -64,7 +64,6 @@ public class ParseException extends Exception {
    */
 
   public ParseException() {
-    super();
     specialConstructor = false;
   }
 
@@ -118,7 +117,7 @@ public class ParseException extends Exception {
     }
     String expected = "";
     int maxSize = 0;
-    for (int[] expectedTokenSequence : expectedTokenSequences) {
+    for (final int[] expectedTokenSequence : expectedTokenSequences) {
       if (maxSize < expectedTokenSequence.length) {
         maxSize = expectedTokenSequence.length;
       }

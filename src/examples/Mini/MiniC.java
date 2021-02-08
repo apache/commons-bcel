@@ -41,7 +41,7 @@ public class MiniC implements org.apache.bcel.Constants {
     try {
       /* Parse command line arguments.
        */
-      for (String element : argv) {
+      for (final String element : argv) {
         if(element.charAt(0) == '-') {  // command line switch
           if(element.equals("-java")) {
         byte_code=false;
@@ -93,12 +93,12 @@ public class MiniC implements org.apache.bcel.Constants {
         program = program.traverse();
         // program.dump(">");
 
-        if(errors.size() == 0) {
+        if(errors.isEmpty()) {
           System.out.println("Pass 2: Type checking (I) ...");
           program.eval(pass=2);
         }
 
-        if(errors.size() == 0) {
+        if(errors.isEmpty()) {
           System.out.println("Pass 3: Type checking (II) ...");
           program.eval(pass=3);
         }
@@ -111,7 +111,7 @@ public class MiniC implements org.apache.bcel.Constants {
             System.out.println(warnings.elementAt(i));
         }
 
-        if(errors.size() == 0) {
+        if(errors.isEmpty()) {
           if(byte_code) {
             System.out.println("Pass 5: Generating byte code ...");
             final ClassGen class_gen = new ClassGen(base_name, "java.lang.Object",
@@ -143,7 +143,7 @@ public class MiniC implements org.apache.bcel.Constants {
           }
         }
 
-        if((errors.size() > 0) || (warnings.size() > 0)) {
+        if((!errors.isEmpty()) || (!warnings.isEmpty())) {
         System.out.println(errors.size() + " errors and " + warnings.size() +
                              " warnings.");
     }

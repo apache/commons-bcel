@@ -32,7 +32,7 @@ public class ClassElementValueGen extends ElementValueGen
     // For primitive types and string type, this points to the value entry in
     // the cpool
     // For 'class' this points to the class entry in the cpool
-    private int idx;
+    private final int idx;
 
     protected ClassElementValueGen(final int typeIdx, final ConstantPoolGen cpool)
     {

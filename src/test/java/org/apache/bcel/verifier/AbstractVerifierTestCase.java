@@ -21,9 +21,10 @@ package org.apache.bcel.verifier;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public abstract class AbstractVerifierTestCase extends TestCase {
+public abstract class AbstractVerifierTestCase {
 
     public static final String TEST_PACKAGE = AbstractVerifierTestCase.class.getPackage().getName() + ".tests.";
 
@@ -33,9 +34,9 @@ public abstract class AbstractVerifierTestCase extends TestCase {
      * @param classname simple classname of the class to verify
      * @param message   message displayed if assertion fails
      */
-    public void assertVerifyOK(final String classname, final String message) {
+    public void assertVerifyOK(final String classname, final String message) throws ClassNotFoundException {
         final String testClassname = TEST_PACKAGE + classname;
-        assertTrue(message, doAllPasses(testClassname));
+        assertTrue(doAllPasses(testClassname), message);
     }
 
     /**
@@ -45,9 +46,9 @@ public abstract class AbstractVerifierTestCase extends TestCase {
      * @param classname simple classname of the class to verify
      * @param message   message displayed if assertion fails
      */
-    public void assertVerifyRejected(final String classname, final String message) {
+    public void assertVerifyRejected(final String classname, final String message) throws ClassNotFoundException {
         final String testClassname = TEST_PACKAGE + classname;
-        assertFalse(message, doAllPasses(testClassname));
+        assertFalse(doAllPasses(testClassname), message);
     }
 
     /**
@@ -56,16 +57,9 @@ public abstract class AbstractVerifierTestCase extends TestCase {
      * @param classname name of the class to verify
      * @return false if the verification fails, true otherwise
      */
-    public boolean doAllPasses(final String classname) {
-        int nbMethods = 0;
-
-        try {
-            final JavaClass jc = Repository.lookupClass(classname);
-            nbMethods = jc.getMethods().length;
-        } catch (final ClassNotFoundException e) {
-            fail(e.getMessage());
-            return false;
-        }
+    public boolean doAllPasses(final String classname) throws ClassNotFoundException {
+        final JavaClass jc = Repository.lookupClass(classname);
+        final int nbMethods = jc.getMethods().length;
 
         final Verifier verifier = VerifierFactory.getVerifier(classname);
         VerificationResult result = verifier.doPass1();

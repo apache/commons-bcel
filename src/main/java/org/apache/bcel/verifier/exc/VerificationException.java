@@ -35,7 +35,6 @@ public abstract class VerificationException extends VerifierConstraintViolatedEx
      * Constructs a new VerificationException with null as its error message string.
      */
     VerificationException() {
-        super();
     }
     /**
      * Constructs a new VerificationException with the specified error message.

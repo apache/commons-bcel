@@ -43,6 +43,18 @@ import org.apache.bcel.classfile.Utility;
  */
 public class InstructionHandle {
 
+    /**
+     * Empty array.
+     *
+     * @since 6.6.0
+     */
+    public static final InstructionHandle[] EMPTY_INSTRUCTION_HANDLE_ARRAY = new InstructionHandle[0];
+
+    /**
+     * Empty array.
+     */
+    static final InstructionTargeter[] EMPTY_INSTRUCTION_TARGETER_ARRAY = new InstructionTargeter[0];
+
     private InstructionHandle next;
     private InstructionHandle prev;
     private Instruction instruction;
@@ -207,7 +219,7 @@ public class InstructionHandle {
 
 
     public boolean hasTargeters() {
-        return (targeters != null) && (targeters.size() > 0);
+        return (targeters != null) && (!targeters.isEmpty());
     }
 
 
@@ -216,7 +228,7 @@ public class InstructionHandle {
      */
     public InstructionTargeter[] getTargeters() {
         if (!hasTargeters()) {
-            return new InstructionTargeter[0];
+            return EMPTY_INSTRUCTION_TARGETER_ARRAY;
         }
         final InstructionTargeter[] t = new InstructionTargeter[targeters.size()];
         targeters.toArray(t);

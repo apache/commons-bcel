@@ -31,7 +31,6 @@ import org.apache.bcel.classfile.ConstantUtf8;
 public abstract class NameSignatureInstruction extends CPInstruction {
 
     public NameSignatureInstruction() {
-        super();
     }
 
     public NameSignatureInstruction(final short opcode, final int index) {

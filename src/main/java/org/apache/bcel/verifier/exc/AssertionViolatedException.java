@@ -30,7 +30,6 @@ public final class AssertionViolatedException extends RuntimeException{
     private String detailMessage;
     /** Constructs a new AssertionViolatedException with null as its error message string. */
     public AssertionViolatedException() {
-        super();
     }
     /**
      * Constructs a new AssertionViolatedException with the specified error message preceded

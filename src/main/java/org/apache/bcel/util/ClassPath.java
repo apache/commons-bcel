@@ -48,7 +48,7 @@ public class ClassPath implements Closeable {
 
     private abstract static class AbstractPathEntry implements Closeable {
 
-        abstract ClassFile getClassFile(String name, String suffix) throws IOException;
+        abstract ClassFile getClassFile(String name, String suffix);
 
         abstract URL getResource(String name);
 
@@ -72,7 +72,7 @@ public class ClassPath implements Closeable {
         }
 
         @Override
-        ClassFile getClassFile(final String name, final String suffix) throws IOException {
+        ClassFile getClassFile(final String name, final String suffix) {
             final ZipEntry entry = zipFile.getEntry(toEntryName(name, suffix));
 
             if (entry == null) {
@@ -184,7 +184,7 @@ public class ClassPath implements Closeable {
         }
 
         @Override
-        ClassFile getClassFile(final String name, final String suffix) throws IOException {
+        ClassFile getClassFile(final String name, final String suffix) {
             final File file = new File(dir + File.separatorChar + name.replace('.', File.separatorChar) + suffix);
             return file.exists() ? new ClassFile() {
 
@@ -279,7 +279,7 @@ public class ClassPath implements Closeable {
         }
 
         @Override
-        ClassFile getClassFile(final String name, final String suffix) throws IOException {
+        ClassFile getClassFile(final String name, final String suffix) {
             final Path resolved = modulePath.resolve(packageToFolder(name) + suffix);
             if (Files.exists(resolved)) {
                 return new ClassFile() {
@@ -365,7 +365,7 @@ public class ClassPath implements Closeable {
         public void close() throws IOException {
             if (modules != null) {
                 // don't use a for each loop to avoid creating an iterator for the GC to collect.
-                for (JrtModule module : modules) {
+                for (final JrtModule module : modules) {
                     module.close();
                 }
             }
@@ -375,9 +375,9 @@ public class ClassPath implements Closeable {
         }
 
         @Override
-        ClassFile getClassFile(final String name, final String suffix) throws IOException {
+        ClassFile getClassFile(final String name, final String suffix) {
             // don't use a for each loop to avoid creating an iterator for the GC to collect.
-            for (JrtModule module : modules) {
+            for (final JrtModule module : modules) {
                 final ClassFile classFile = module.getClassFile(name, suffix);
                 if (classFile != null) {
                     return classFile;
@@ -389,7 +389,7 @@ public class ClassPath implements Closeable {
         @Override
         URL getResource(final String name) {
             // don't use a for each loop to avoid creating an iterator for the GC to collect.
-            for (JrtModule module : modules) {
+            for (final JrtModule module : modules) {
                 final URL url = module.getResource(name);
                 if (url != null) {
                     return url;
@@ -401,7 +401,7 @@ public class ClassPath implements Closeable {
         @Override
         InputStream getResourceAsStream(final String name) {
             // don't use a for each loop to avoid creating an iterator for the GC to collect.
-            for (JrtModule module : modules) {
+            for (final JrtModule module : modules) {
                 final InputStream inputStream = module.getResourceAsStream(name);
                 if (inputStream != null) {
                     return inputStream;
@@ -452,7 +452,7 @@ public class ClassPath implements Closeable {
         if (modulesDir.exists()) {
             final String[] modules = modulesDir.list(MODULES_FILTER);
             if (modules != null) {
-                for (String module : modules) {
+                for (final String module : modules) {
                     list.add(modulesDir.getPath() + File.separatorChar + module);
                 }
             }
@@ -668,7 +668,7 @@ public class ClassPath implements Closeable {
         throw new IOException("Couldn't find: " + name + suffix);
     }
 
-    private ClassFile getClassFileInternal(final String name, final String suffix) throws IOException {
+    private ClassFile getClassFileInternal(final String name, final String suffix) {
 
         for (final AbstractPathEntry path : paths) {
             final ClassFile cf = path.getClassFile(name, suffix);
@@ -698,6 +698,7 @@ public class ClassPath implements Closeable {
      * @param suffix
      *            file name ends with suff, e.g. .java
      * @return input stream for file on class path
+     * @throws IOException
      */
     public InputStream getInputStream(final String name, final String suffix) throws IOException {
         InputStream inputStream = null;

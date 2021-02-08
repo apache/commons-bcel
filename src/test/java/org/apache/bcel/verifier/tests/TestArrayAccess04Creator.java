@@ -31,7 +31,8 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.PUSH;
 import org.apache.bcel.generic.Type;
-import org.junit.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestArrayAccess04Creator extends TestCreator {
   private final InstructionFactory _factory;
@@ -59,10 +60,10 @@ public void create(final OutputStream out) throws IOException {
             TEST_PACKAGE+".TestArrayAccess04", il, _cp);
 
     final InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
-    Assert.assertNotNull(ih_0); // TODO why is this not used
+    assertNotNull(ih_0); // TODO why is this not used
     il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Const.INVOKESPECIAL));
     final InstructionHandle ih_4 = il.append(InstructionFactory.createReturn(Type.VOID));
-    Assert.assertNotNull(ih_4); // TODO why is this not used
+    assertNotNull(ih_4); // TODO why is this not used
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());
@@ -75,19 +76,19 @@ public void create(final OutputStream out) throws IOException {
             new String[] { "arg0" }, "test", TEST_PACKAGE+".TestArrayAccess04", il, _cp);
 
     final InstructionHandle ih_0 = il.append(new PUSH(_cp, 1));
-    Assert.assertNotNull(ih_0); // TODO why is this not used
+    assertNotNull(ih_0); // TODO why is this not used
     il.append(_factory.createNewArray(Type.OBJECT, (short) 1));
     il.append(InstructionFactory.createStore(Type.OBJECT, 1));
     final InstructionHandle ih_5 = il.append(new PUSH(_cp, 1));
-    Assert.assertNotNull(ih_5); // TODO why is this not used
+    assertNotNull(ih_5); // TODO why is this not used
     il.append(InstructionFactory.createStore(Type.INT, 2));
     final InstructionHandle ih_7 = il.append(InstructionFactory.createLoad(Type.OBJECT, 1));
-    Assert.assertNotNull(ih_7); // TODO why is this not used
+    assertNotNull(ih_7); // TODO why is this not used
     il.append(new PUSH(_cp, 0));
     il.append(InstructionFactory.createLoad(Type.INT, 2));
     il.append(InstructionConst.AASTORE);
     final InstructionHandle ih_11 = il.append(InstructionFactory.createReturn(Type.VOID));
-    Assert.assertNotNull(ih_11); // TODO why is this not used
+    assertNotNull(ih_11); // TODO why is this not used
     method.setMaxStack();
     method.setMaxLocals();
     _cg.addMethod(method.getMethod());

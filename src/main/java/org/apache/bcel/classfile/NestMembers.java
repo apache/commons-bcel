@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This class is derived from <em>Attribute</em> and records the classes and interfaces that
@@ -53,7 +54,7 @@ public final class NestMembers extends Attribute {
     public NestMembers(final int name_index, final int length, final int[] classes,
             final ConstantPool constant_pool) {
         super(Const.ATTR_NEST_MEMBERS, name_index, length, constant_pool);
-        this.classes = classes != null ? classes : new int[0];
+        this.classes = classes != null ? classes : ArrayUtils.EMPTY_INT_ARRAY;
     }
 
 
@@ -138,7 +139,7 @@ public final class NestMembers extends Attribute {
      * Also redefines number_of_classes according to table length.
      */
     public void setClasses( final int[] classes ) {
-        this.classes = classes != null ? classes : new int[0];
+        this.classes = classes != null ? classes : ArrayUtils.EMPTY_INT_ARRAY;
     }
 
 

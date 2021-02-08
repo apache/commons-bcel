@@ -15,77 +15,35 @@
  *  limitations under the License.
  *
  */
-package org.apache.bcel.classfile;
+package org.apache.bcel.data;
 
-import java.io.DataInput;
+/*
+ * This file is a modified copy of org.apache.bcel.classfile.ConstantPool.java.
+ * It was chosen as it generates both tableswitch and lookupswitch byte codes.
+ * It has been modified to compile stand alone within the BCEL test environment.
+ * The code is not executed but the classfile is used as input to a BCEL test case.
+ */
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.classfile.*;
 
 /**
  * This class represents the constant pool, i.e., a table of constants, of
  * a parsed classfile. It may contain null references, due to the JVM
  * specification that skips an entry after an 8-byte constant (double,
  * long) entry.  Those interested in generating constant pools
- * programmatically should see <a href="../generic/ConstantPoolGen.html">
+ * programatically should see <a href="../generic/ConstantPoolGen.html">
  * ConstantPoolGen</a>.
 
  * @see     Constant
  * @see     org.apache.bcel.generic.ConstantPoolGen
  */
-public class ConstantPool implements Cloneable, Node {
+public abstract class ConstantPoolX implements Cloneable, Node {
 
     private Constant[] constantPool;
-
-    /**
-     * @param constantPool Array of constants
-     */
-    public ConstantPool(final Constant[] constantPool) {
-        this.constantPool = constantPool;
-    }
-
-    /**
-     * Reads constants from given input stream.
-     *
-     * @param input Input stream
-     * @throws IOException
-     * @throws ClassFormatException
-     */
-    public ConstantPool(final DataInput input) throws IOException, ClassFormatException {
-        byte tag;
-        final int constant_pool_count = input.readUnsignedShort();
-        constantPool = new Constant[constant_pool_count];
-        /* constantPool[0] is unused by the compiler and may be used freely
-         * by the implementation.
-         */
-        for (int i = 1; i < constant_pool_count; i++) {
-            constantPool[i] = Constant.readConstant(input);
-            /* Quote from the JVM specification:
-             * "All eight byte constants take up two spots in the constant pool.
-             * If this is the n'th byte in the constant pool, then the next item
-             * will be numbered n+2"
-             *
-             * Thus we have to increment the index counter.
-             */
-            tag = constantPool[i].getTag();
-            if ((tag == Const.CONSTANT_Double) || (tag == Const.CONSTANT_Long)) {
-                i++;
-            }
-        }
-    }
-
-    /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitConstantPool(this);
-    }
 
     /**
      * Resolves constant to a string representation.
@@ -354,23 +312,4 @@ public class ConstantPool implements Cloneable, Node {
         return buf.toString();
     }
 
-
-    /**
-     * @return deep copy of this constant pool
-     */
-    public ConstantPool copy() {
-        ConstantPool c = null;
-        try {
-            c = (ConstantPool) clone();
-            c.constantPool = new Constant[constantPool.length];
-            for (int i = 1; i < constantPool.length; i++) {
-                if (constantPool[i] != null) {
-                    c.constantPool[i] = constantPool[i].copy();
-                }
-            }
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return c;
-    }
 }

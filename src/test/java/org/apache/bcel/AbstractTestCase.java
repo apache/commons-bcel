@@ -35,9 +35,9 @@ import org.apache.bcel.generic.SimpleElementValueGen;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public abstract class AbstractTestCase extends TestCase
+public abstract class AbstractTestCase
 {
     private static final boolean verbose = false;
 
@@ -141,25 +141,8 @@ public abstract class AbstractTestCase extends TestCase
                 chosenAttrsList.add(element);
             }
         }
-        assertTrue("Should be one match: " + chosenAttrsList.size(),
-                chosenAttrsList.size() == 1);
+        assertEquals(1, chosenAttrsList.size(), "Wrong number of matches");
         return chosenAttrsList.get(0);
-    }
-
-    protected String dumpAttributes(final Attribute[] as)
-    {
-        final StringBuilder result = new StringBuilder();
-        result.append("AttributeArray:[");
-        for (int i = 0; i < as.length; i++)
-        {
-            final Attribute attr = as[i];
-            result.append(attr.toString());
-            if (i + 1 < as.length) {
-                result.append(",");
-            }
-        }
-        result.append("]");
-        return result.toString();
     }
 
     protected String dumpAnnotationEntries(final AnnotationEntry[] as)

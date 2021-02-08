@@ -21,6 +21,7 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.bcel.Const;
 
 /**
@@ -52,7 +53,7 @@ public final class ModulePackages extends Attribute {
     public ModulePackages(final int nameIndex, final int length, final int[] packageIndexTable,
             final ConstantPool constantPool) {
         super(Const.ATTR_MODULE_PACKAGES, nameIndex, length, constantPool);
-        this.packageIndexTable = packageIndexTable != null ? packageIndexTable : new int[0];
+        this.packageIndexTable = packageIndexTable != null ? packageIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
     }
 
 
@@ -137,7 +138,7 @@ public final class ModulePackages extends Attribute {
      * Also redefines number_of_packages according to table length.
      */
     public void setPackageIndexTable( final int[] packageIndexTable ) {
-        this.packageIndexTable = packageIndexTable != null ? packageIndexTable : new int[0];
+        this.packageIndexTable = packageIndexTable != null ? packageIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
     }
 
 

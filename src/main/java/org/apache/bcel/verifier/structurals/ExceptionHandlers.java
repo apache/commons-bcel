@@ -17,7 +17,6 @@
  */
 package org.apache.bcel.verifier.structurals;
 
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -29,12 +28,16 @@ import org.apache.bcel.generic.MethodGen;
 
 /**
  * This class allows easy access to ExceptionHandler objects.
- *
  */
-public class ExceptionHandlers{
+public class ExceptionHandlers {
+
     /**
-     * The ExceptionHandler instances.
-     * Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
+     * Empty array.
+     */
+    private static final ExceptionHandler[] EMPTY_EXCEPTION_HANDLER_ARRAY = new ExceptionHandler[0];
+
+    /**
+     * The ExceptionHandler instances. Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
      */
     private final Map<InstructionHandle, Set<ExceptionHandler>> exceptionHandlers;
 
@@ -46,7 +49,7 @@ public class ExceptionHandlers{
         final CodeExceptionGen[] cegs = mg.getExceptionHandlers();
         for (final CodeExceptionGen ceg : cegs) {
             final ExceptionHandler eh = new ExceptionHandler(ceg.getCatchType(), ceg.getHandlerPC());
-            for (InstructionHandle ih=ceg.getStartPC(); ih != ceg.getEndPC().getNext(); ih=ih.getNext()) {
+            for (InstructionHandle ih = ceg.getStartPC(); ih != ceg.getEndPC().getNext(); ih = ih.getNext()) {
                 Set<ExceptionHandler> hs;
                 hs = exceptionHandlers.get(ih);
                 if (hs == null) {
@@ -59,13 +62,12 @@ public class ExceptionHandlers{
     }
 
     /**
-     * Returns all the ExceptionHandler instances representing exception
-     * handlers that protect the instruction ih.
+     * Returns all the ExceptionHandler instances representing exception handlers that protect the instruction ih.
      */
     public ExceptionHandler[] getExceptionHandlers(final InstructionHandle ih) {
         final Set<ExceptionHandler> hsSet = exceptionHandlers.get(ih);
         if (hsSet == null) {
-            return new ExceptionHandler[0];
+            return EMPTY_EXCEPTION_HANDLER_ARRAY;
         }
         return hsSet.toArray(new ExceptionHandler[hsSet.size()]);
     }

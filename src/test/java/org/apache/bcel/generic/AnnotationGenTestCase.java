@@ -31,6 +31,11 @@ import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {
@@ -43,7 +48,8 @@ public class AnnotationGenTestCase extends AbstractTestCase
     /**
      * Programmatically construct an mutable annotation (AnnotationGen) object.
      */
-    public void testConstructMutableAnnotation()
+    @Test
+    public void testConstructMutableAnnotation() throws IOException
     {
         // Create the containing class
         final ClassGen cg = createClassGen("HelloWorld");
@@ -55,9 +61,8 @@ public class AnnotationGenTestCase extends AbstractTestCase
         final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg,
                 cp);
         // Check it looks right
-        assertTrue(
-                "Should include string 'id=4' but says: " + nvGen.toString(),
-                nvGen.toString().contains("id=4"));
+        assertTrue(nvGen.toString().contains("id=4"),
+                "Should include string 'id=4' but says: " + nvGen.toString());
         final ObjectType t = new ObjectType("SimpleAnnotation");
         final List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
@@ -68,6 +73,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         checkSerialize(a, cp);
     }
 
+    @Test
     public void testVisibleInvisibleAnnotationGen()
     {
         // Create the containing class
@@ -80,9 +86,8 @@ public class AnnotationGenTestCase extends AbstractTestCase
         final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg,
                 cp);
         // Check it looks right
-        assertTrue(
-                "Should include string 'id=4' but says: " + nvGen.toString(),
-                nvGen.toString().contains("id=4"));
+        assertTrue(nvGen.toString().contains("id=4"),
+                "Should include string 'id=4' but says: " + nvGen.toString());
         final ObjectType t = new ObjectType("SimpleAnnotation");
         final List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
@@ -100,7 +105,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
                 foundRV = true;
             }
         }
-        assertTrue("Should have seen a RuntimeVisibleAnnotation", foundRV);
+        assertTrue(foundRV, "Should have seen a RuntimeVisibleAnnotation");
         // Build a RIV annotation of type 'SimpleAnnotation' with 'id=4' as the
         // only value :)
         final AnnotationEntryGen a2 = new AnnotationEntryGen(t, elements, false, cp);
@@ -115,52 +120,31 @@ public class AnnotationGenTestCase extends AbstractTestCase
                 foundRIV = true;
             }
         }
-        assertTrue("Should have seen a RuntimeInvisibleAnnotation", foundRIV);
+        assertTrue(foundRIV, "Should have seen a RuntimeInvisibleAnnotation");
     }
 
-    private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg)
+    private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg) throws IOException
     {
-        try
-        {
-            final String beforeName = a.getTypeName();
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            try (DataOutputStream dos = new DataOutputStream(baos)) {
-                a.dump(dos);
-                dos.flush();
-            }
-            final byte[] bs = baos.toByteArray();
-            final ByteArrayInputStream bais = new ByteArrayInputStream(bs);
-            AnnotationEntryGen annAfter;
-            try (DataInputStream dis = new DataInputStream(bais)) {
-                annAfter = AnnotationEntryGen.read(dis, cpg, a.isRuntimeVisible());
-            }
-            final String afterName = annAfter.getTypeName();
-            if (!beforeName.equals(afterName))
-            {
-                fail("Deserialization failed: before type='" + beforeName
-                        + "' after type='" + afterName + "'");
-            }
-            if (a.getValues().size() != annAfter.getValues().size())
-            {
-                fail("Different numbers of element name value pairs?? "
-                        + a.getValues().size() + "!="
-                        + annAfter.getValues().size());
-            }
-            for (int i = 0; i < a.getValues().size(); i++)
-            {
-                final ElementValuePairGen beforeElement = a.getValues().get(i);
-                final ElementValuePairGen afterElement = annAfter.getValues().get(i);
-                if (!beforeElement.getNameString().equals(
-                        afterElement.getNameString()))
-                {
-                    fail("Different names?? " + beforeElement.getNameString()
-                            + "!=" + afterElement.getNameString());
-                }
-            }
+        final String beforeName = a.getTypeName();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (DataOutputStream dos = new DataOutputStream(baos)) {
+            a.dump(dos);
+            dos.flush();
         }
-        catch (final IOException ioe)
-        {
-            fail("Unexpected exception whilst checking serialization: " + ioe);
+        final byte[] bs = baos.toByteArray();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(bs);
+        AnnotationEntryGen annAfter;
+        try (DataInputStream dis = new DataInputStream(bais)) {
+            annAfter = AnnotationEntryGen.read(dis, cpg, a.isRuntimeVisible());
+        }
+        final String afterName = annAfter.getTypeName();
+        assertEquals(beforeName, afterName, "Deserialization failed");
+        assertEquals(a.getValues().size(), annAfter.getValues().size(),
+                "Different numbers of element name value pairs??");
+        for (int i = 0; i < a.getValues().size(); i++) {
+            final ElementValuePairGen beforeElement = a.getValues().get(i);
+            final ElementValuePairGen afterElement = annAfter.getValues().get(i);
+            assertEquals(beforeElement.getNameString(), afterElement.getNameString(), "Different names??");
         }
     }
 }

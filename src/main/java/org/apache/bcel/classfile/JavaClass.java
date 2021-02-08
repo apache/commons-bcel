@@ -35,13 +35,14 @@ import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.BCELComparator;
 import org.apache.bcel.util.ClassQueue;
 import org.apache.bcel.util.SyntheticRepository;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Represents a Java class, i.e., the data structures, constant pool,
  * fields, methods and commands contained in a Java .class file.
  * See <a href="https://docs.oracle.com/javase/specs/">JVM specification</a> for details.
  * The intent of this class is to represent a parsed or otherwise existing
- * class file.  Those interested in programatically generating classes
+ * class file.  Those interested in programmatically generating classes
  * should see the <a href="../generic/ClassGen.html">ClassGen</a> class.
 
  * @see org.apache.bcel.generic.ClassGen
@@ -49,7 +50,7 @@ import org.apache.bcel.util.SyntheticRepository;
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
 
     private String fileName;
-    private String packageName;
+    private final String packageName;
     private String sourceFileName = "<Unknown>";
     private int classNameIndex;
     private int superclassNameIndex;
@@ -121,16 +122,16 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             Field[] fields, Method[] methods, Attribute[] attributes, final byte source) {
         super(access_flags);
         if (interfaces == null) {
-            interfaces = new int[0];
+            interfaces = ArrayUtils.EMPTY_INT_ARRAY;
         }
         if (attributes == null) {
-            attributes = new Attribute[0];
+            attributes = Attribute.EMPTY_ATTRIBUTE_ARRAY;
         }
         if (fields == null) {
-            fields = new Field[0];
+            fields = Field.EMPTY_FIELD_ARRAY;
         }
         if (methods == null) {
-            methods = new Method[0];
+            methods = Method.EMPTY_METHOD_ARRAY;
         }
         this.classNameIndex = classNameIndex;
         this.superclassNameIndex = superclassNameIndex;

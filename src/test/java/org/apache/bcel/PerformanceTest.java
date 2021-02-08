@@ -20,7 +20,6 @@ package org.apache.bcel;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
@@ -33,11 +32,11 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
-import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.fail;
 
-public final class PerformanceTest extends TestCase {
+public final class PerformanceTest {
 
     private static final boolean REPORT = Boolean.parseBoolean(System.getProperty("PerformanceTest.report", "true"));
 
@@ -131,14 +130,15 @@ public final class PerformanceTest extends TestCase {
         }
     }
 
+    @Test
     public void testPerformance() {
         final File javaLib = new File(System.getProperty("java.home"), "lib");
-        javaLib.listFiles((FileFilter) file -> {
+        javaLib.listFiles(file -> {
             if(file.getName().endsWith(".jar")) {
                 try {
                     test(file);
                 } catch (final IOException e) {
-                    Assert.fail(e.getMessage());
+                    fail(e.getMessage());
                 }
             }
             return false;
