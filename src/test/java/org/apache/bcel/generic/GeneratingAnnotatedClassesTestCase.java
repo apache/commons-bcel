@@ -332,11 +332,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         boolean found = false;
         for (final Object name : l) {
             final ElementValuePairGen element = (ElementValuePairGen) name;
-            if (element.getNameString().equals("dval"))
-            {
-                if (element.getValue().stringifyValue().equals("33.4")) {
-                    found = true;
-                }
+            if (element.getNameString().equals("dval") && element.getValue().stringifyValue().equals("33.4")) {
+                found = true;
             }
         }
         assertTrue(found, "Did not find double annotation value with value 33.4");

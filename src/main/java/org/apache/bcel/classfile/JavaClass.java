@@ -234,10 +234,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         final String parent = file.getParent();
         if (parent != null) {
             final File dir = new File(parent);
-            if (!dir.mkdirs()) { // either was not created or already existed
-                if (!dir.isDirectory()) {
-                    throw new IOException("Could not create the directory " + dir);
-                }
+            if (!dir.mkdirs() && !dir.isDirectory()) {
+                throw new IOException("Could not create the directory " + dir);
             }
         }
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(file))) {

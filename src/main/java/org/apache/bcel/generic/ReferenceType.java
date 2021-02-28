@@ -93,11 +93,9 @@ public abstract class ReferenceType extends Type {
             }
             /* If T is an interface type, this must implement interface T.
              */
-            if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
-                if (Repository.implementationOf(((ObjectType) this).getClassName(),
-                        ((ObjectType) T).getClassName())) {
-                    return true;
-                }
+            if (((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) && Repository.implementationOf(((ObjectType) this).getClassName(),
+                    ((ObjectType) T).getClassName())) {
+                return true;
             }
         }
         /* If this is an interface type, then:
@@ -105,10 +103,8 @@ public abstract class ReferenceType extends Type {
         if ((this instanceof ObjectType) && (((ObjectType) this).referencesInterfaceExact())) {
             /* If T is a class type, then T must be Object (�2.4.7).
              */
-            if ((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) {
-                if (T.equals(Type.OBJECT)) {
-                    return true;
-                }
+            if (((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) && T.equals(Type.OBJECT)) {
+                return true;
             }
             /* If T is an interface type, then T must be the same interface
              * as this or a superinterface of this (�2.13.2).
@@ -129,10 +125,8 @@ public abstract class ReferenceType extends Type {
         if (this instanceof ArrayType) {
             /* If T is a class type, then T must be Object (�2.4.7).
              */
-            if ((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) {
-                if (T.equals(Type.OBJECT)) {
-                    return true;
-                }
+            if (((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) && T.equals(Type.OBJECT)) {
+                return true;
             }
             /* If T is an array type TC[], that is, an array of components
              * of type TC, then one of the following must be true:

@@ -1063,12 +1063,10 @@ public final class Pass3aVerifier extends PassVerifier{
                 throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
             }
 
-            if (f.isFinal()) {
-                if (!(myOwner.getClassName().equals(getObjectType(o).getClassName()))) {
-                    constraintViolated(o,
-                        "Referenced field '"+f+"' is final and must therefore be declared in the current class '"+
-                            myOwner.getClassName()+"' which is not the case: it is declared in '"+o.getReferenceType(constantPoolGen)+"'.");
-                }
+            if (f.isFinal() && !(myOwner.getClassName().equals(getObjectType(o).getClassName()))) {
+                constraintViolated(o,
+                    "Referenced field '"+f+"' is final and must therefore be declared in the current class '"+
+                        myOwner.getClassName()+"' which is not the case: it is declared in '"+o.getReferenceType(constantPoolGen)+"'.");
             }
 
             if (! (f.isStatic())) {
@@ -1224,37 +1222,34 @@ public final class Pass3aVerifier extends PassVerifier{
             }
 
             JavaClass current = Repository.lookupClass(myOwner.getClassName());
-            if (current.isSuper()) {
+            if (current.isSuper() && ((Repository.instanceOf( current, jc )) && (!current.equals(jc)))) {
 
-                if ((Repository.instanceOf( current, jc )) && (!current.equals(jc))) {
+                if (! (o.getMethodName(constantPoolGen).equals(Const.CONSTRUCTOR_NAME) )) {
+                    // Special lookup procedure for ACC_SUPER classes.
 
-                    if (! (o.getMethodName(constantPoolGen).equals(Const.CONSTRUCTOR_NAME) )) {
-                        // Special lookup procedure for ACC_SUPER classes.
+                    int supidx = -1;
 
-                        int supidx = -1;
+                    Method meth = null;
+                    while (supidx != 0) {
+                        supidx = current.getSuperclassNameIndex();
+                        current = Repository.lookupClass(current.getSuperclassName());
 
-                        Method meth = null;
-                        while (supidx != 0) {
-                            supidx = current.getSuperclassNameIndex();
-                            current = Repository.lookupClass(current.getSuperclassName());
-
-                            final Method[] meths = current.getMethods();
-                            for (final Method meth2 : meths) {
-                                if    ( (meth2.getName().equals(o.getMethodName(constantPoolGen))) &&
-                                     (Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen))) &&
-                                     (objarrayequals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) ) {
-                                    meth = meth2;
-                                    break;
-                                }
-                            }
-                            if (meth != null) {
+                        final Method[] meths = current.getMethods();
+                        for (final Method meth2 : meths) {
+                            if    ( (meth2.getName().equals(o.getMethodName(constantPoolGen))) &&
+                                 (Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen))) &&
+                                 (objarrayequals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) ) {
+                                meth = meth2;
                                 break;
                             }
                         }
-                        if (meth == null) {
-                            constraintViolated(o, "ACC_SUPER special lookup procedure not successful: method '"+
-                                o.getMethodName(constantPoolGen)+"' with proper signature not declared in superclass hierarchy.");
+                        if (meth != null) {
+                            break;
                         }
+                    }
+                    if (meth == null) {
+                        constraintViolated(o, "ACC_SUPER special lookup procedure not successful: method '"+
+                            o.getMethodName(constantPoolGen)+"' with proper signature not declared in superclass hierarchy.");
                     }
                 }
             }

@@ -334,43 +334,40 @@ public class InstConstraintVisitor extends EmptyVisitor{
      */
     @Override
     public void visitLoadInstruction(final LoadInstruction o) {
-        //visitLocalVariableInstruction(o) is called before, because it is more generic.
+        // visitLocalVariableInstruction(o) is called before, because it is more generic.
 
         // LOAD instructions must not read Type.UNKNOWN
         if (locals().get(o.getIndex()) == Type.UNKNOWN) {
-            constraintViolated(o, "Read-Access on local variable "+o.getIndex()+" with unknown content.");
+            constraintViolated(o, "Read-Access on local variable " + o.getIndex() + " with unknown content.");
         }
 
         // LOAD instructions, two-slot-values at index N must have Type.UNKNOWN
         // as a symbol for the higher halve at index N+1
         // [suppose some instruction put an int at N+1--- our double at N is defective]
-        if (o.getType(cpg).getSize() == 2) {
-            if (locals().get(o.getIndex()+1) != Type.UNKNOWN) {
-                constraintViolated(o,
-                    "Reading a two-locals value from local variables "+o.getIndex()+
-                    " and "+(o.getIndex()+1)+" where the latter one is destroyed.");
-            }
+        if ((o.getType(cpg).getSize() == 2) && (locals().get(o.getIndex() + 1) != Type.UNKNOWN)) {
+            constraintViolated(o, "Reading a two-locals value from local variables " + o.getIndex() + " and "
+                + (o.getIndex() + 1) + " where the latter one is destroyed.");
         }
 
         // LOAD instructions must read the correct type.
         if (!(o instanceof ALOAD)) {
-            if (locals().get(o.getIndex()) != o.getType(cpg) ) {
-                constraintViolated(o,"Local Variable type and LOADing Instruction type mismatch: Local Variable: '"+
-                    locals().get(o.getIndex())+"'; Instruction type: '"+o.getType(cpg)+"'.");
+            if (locals().get(o.getIndex()) != o.getType(cpg)) {
+                constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"
+                    + locals().get(o.getIndex()) + "'; Instruction type: '" + o.getType(cpg) + "'.");
             }
-        }
-        else{ // we deal with an ALOAD
+        } else { // we deal with an ALOAD
             if (!(locals().get(o.getIndex()) instanceof ReferenceType)) {
-                constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"+
-                    locals().get(o.getIndex())+"'; Instruction expects a ReferenceType.");
+                constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"
+                    + locals().get(o.getIndex()) + "'; Instruction expects a ReferenceType.");
             }
             // ALOAD __IS ALLOWED__ to put uninitialized objects onto the stack!
-            //referenceTypeIsInitialized(o, (ReferenceType) (locals().get(o.getIndex())));
+            // referenceTypeIsInitialized(o, (ReferenceType) (locals().get(o.getIndex())));
         }
 
         // LOAD instructions must have enough free stack slots.
         if ((stack().maxStack() - stack().slotsUsed()) < o.getType(cpg).getSize()) {
-            constraintViolated(o, "Not enough free stack slots to load a '"+o.getType(cpg)+"' onto the OperandStack.");
+            constraintViolated(o,
+                "Not enough free stack slots to load a '" + o.getType(cpg) + "' onto the OperandStack.");
         }
     }
 
@@ -464,14 +461,12 @@ public class InstConstraintVisitor extends EmptyVisitor{
         final Type index    = stack().peek(0);
 
         indexOfInt(o, index);
-        if (arrayrefOfArrayType(o, arrayref)) {
-            if (! (((ArrayType) arrayref).getElementType() instanceof ReferenceType)) {
-                constraintViolated(o,
-                    "The 'arrayref' does not refer to an array with elements of a ReferenceType but to an array of "+
-                    ((ArrayType) arrayref).getElementType()+".");
-            }
-            //referenceTypeIsInitialized(o, (ReferenceType) (((ArrayType) arrayref).getElementType()));
+        if (arrayrefOfArrayType(o, arrayref) && ! (((ArrayType) arrayref).getElementType() instanceof ReferenceType)) {
+            constraintViolated(o,
+                "The 'arrayref' does not refer to an array with elements of a ReferenceType but to an array of "+
+                ((ArrayType) arrayref).getElementType()+".");
         }
+        //referenceTypeIsInitialized(o, (ReferenceType) (((ArrayType) arrayref).getElementType()));
     }
 
     /**
@@ -491,13 +486,11 @@ public class InstConstraintVisitor extends EmptyVisitor{
         }
         // Don't bother further with "referenceTypeIsInitialized()", there are no arrays
         // of an uninitialized object type.
-        if (arrayrefOfArrayType(o, arrayref)) {
-            if (! (((ArrayType) arrayref).getElementType() instanceof ReferenceType)) {
-                constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a ReferenceType but to an array of "+
-                    ((ArrayType) arrayref).getElementType()+".");
-            }
-            // No check for array element assignment compatibility. This is done at runtime.
+        if (arrayrefOfArrayType(o, arrayref) && ! (((ArrayType) arrayref).getElementType() instanceof ReferenceType)) {
+            constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a ReferenceType but to an array of "+
+                ((ArrayType) arrayref).getElementType()+".");
         }
+        // No check for array element assignment compatibility. This is done at runtime.
     }
 
     /**
@@ -609,13 +602,11 @@ public class InstConstraintVisitor extends EmptyVisitor{
         final Type arrayref = stack().peek(1);
         final Type index    = stack().peek(0);
         indexOfInt(o, index);
-        if (arrayrefOfArrayType(o, arrayref)) {
-            if (! ( (((ArrayType) arrayref).getElementType().equals(Type.BOOLEAN)) ||
-                    (((ArrayType) arrayref).getElementType().equals(Type.BYTE)) ) ) {
-                constraintViolated(o,
-                    "The 'arrayref' does not refer to an array with elements of a Type.BYTE or Type.BOOLEAN but to an array of '"+
-                    ((ArrayType) arrayref).getElementType()+"'.");
-            }
+        if (arrayrefOfArrayType(o, arrayref) && ! ( (((ArrayType) arrayref).getElementType().equals(Type.BOOLEAN)) ||
+                (((ArrayType) arrayref).getElementType().equals(Type.BYTE)) ) ) {
+            constraintViolated(o,
+                "The 'arrayref' does not refer to an array with elements of a Type.BYTE or Type.BOOLEAN but to an array of '"+
+                ((ArrayType) arrayref).getElementType()+"'.");
         }
     }
 
@@ -630,13 +621,11 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
         indexOfInt(o, index);
         valueOfInt(o, value);
-        if (arrayrefOfArrayType(o, arrayref)) {
-            if (! ( (((ArrayType) arrayref).getElementType().equals(Type.BOOLEAN)) ||
-                    (((ArrayType) arrayref).getElementType().equals(Type.BYTE)) ) ) {
-                constraintViolated(o,
-                    "The 'arrayref' does not refer to an array with elements of a Type.BYTE or Type.BOOLEAN but to an array of '"+
-                    ((ArrayType) arrayref).getElementType()+"'.");
-            }
+        if (arrayrefOfArrayType(o, arrayref) && ! ( (((ArrayType) arrayref).getElementType().equals(Type.BOOLEAN)) ||
+                (((ArrayType) arrayref).getElementType().equals(Type.BYTE)) ) ) {
+            constraintViolated(o,
+                "The 'arrayref' does not refer to an array with elements of a Type.BYTE or Type.BOOLEAN but to an array of '"+
+                ((ArrayType) arrayref).getElementType()+"'.");
         }
     }
 
@@ -680,11 +669,9 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
         indexOfInt(o, index);
         valueOfInt(o, value);
-        if (arrayrefOfArrayType(o, arrayref)) {
-            if (! ((ArrayType) arrayref).getElementType().equals(Type.CHAR) ) {
-                constraintViolated(o, "The 'arrayref' does not refer to an array with elements of type char but to an array of type "+
-                    ((ArrayType) arrayref).getElementType()+".");
-            }
+        if (arrayrefOfArrayType(o, arrayref) && ! ((ArrayType) arrayref).getElementType().equals(Type.CHAR) ) {
+            constraintViolated(o, "The 'arrayref' does not refer to an array with elements of type char but to an array of type "+
+                ((ArrayType) arrayref).getElementType()+".");
         }
     }
 
@@ -2877,10 +2864,8 @@ public class InstConstraintVisitor extends EmptyVisitor{
      */
     @Override
     public void visitRETURN(final RETURN o) {
-        if (mg.getName().equals(Const.CONSTRUCTOR_NAME)) {// If we leave an <init> method
-            if ((Frame.getThis() != null) && (!(mg.getClassName().equals(Type.OBJECT.getClassName()))) ) {
-                constraintViolated(o, "Leaving a constructor that itself did not call a constructor.");
-            }
+        if (mg.getName().equals(Const.CONSTRUCTOR_NAME) && ((Frame.getThis() != null) && (!(mg.getClassName().equals(Type.OBJECT.getClassName())))) ) {
+            constraintViolated(o, "Leaving a constructor that itself did not call a constructor.");
         }
     }
 

@@ -236,10 +236,8 @@ public class OperandStack implements Cloneable {
                 throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object on the stack detected.");
             }
             // on the other hand...
-            if (stack.get(i) instanceof UninitializedObjectType) { //if we have an uninitialized object here
-                if (! (s.stack.get(i) instanceof UninitializedObjectType)) { //that has been initialized by now
-                    stack.set(i, ((UninitializedObjectType) (stack.get(i))).getInitialized() ); //note that.
-                }
+            if ((stack.get(i) instanceof UninitializedObjectType) && !(s.stack.get(i) instanceof UninitializedObjectType)) { //that has been initialized by now
+                stack.set(i, ((UninitializedObjectType) (stack.get(i))).getInitialized() ); //note that.
             }
             if (! stack.get(i).equals(s.stack.get(i))) {
                 if (    (stack.get(i) instanceof ReferenceType) &&

@@ -129,10 +129,8 @@ public class Class2HTML implements Constants {
                     final File store = new File(dir);
                     if (!store.isDirectory()) {
                         final boolean created = store.mkdirs(); // Create target directory if necessary
-                        if (!created) {
-                            if (!store.isDirectory()) {
-                                System.out.println("Tried to create the directory " + dir + " but failed");
-                            }
+                        if (!created && !store.isDirectory()) {
+                            System.out.println("Tried to create the directory " + dir + " but failed");
                         }
                     }
                 } else if (argv[i].equals("-zip")) {

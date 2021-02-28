@@ -177,10 +177,8 @@ public class JdkGenericDumpTestCase {
             if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJavaHome + "\\" + key)) {
                 final String javaHome = Advapi32Util.registryGetStringValue(HKEY_LOCAL_MACHINE,
                     keyJavaHome + "\\" + key, "JavaHome");
-                if (StringUtils.isNoneBlank(javaHome)) {
-                    if (new File(javaHome).exists()) {
-                        javaHomes.add(javaHome);
-                    }
+                if (StringUtils.isNoneBlank(javaHome) && new File(javaHome).exists()) {
+                    javaHomes.add(javaHome);
                 }
             }
         }

@@ -148,14 +148,12 @@ public final class Pass1Verifier extends PassVerifier{
         try{
             jc = getJavaClass();    //loads in the class file if not already done.
 
-            if (jc != null) {
-                /* If we find more constraints to check, we should do this in an own method. */
-                if (! myOwner.getClassName().equals(jc.getClassName())) {
-                    // This should maybe caught by BCEL: In case of renamed .class files we get wrong
-                    // JavaClass objects here.
-                    throw new LoadingException("Wrong name: the internal name of the .class file '"+jc.getClassName()+
-                        "' does not match the file's name '"+myOwner.getClassName()+"'.");
-                }
+            /* If we find more constraints to check, we should do this in an own method. */
+            if ((jc != null) && ! myOwner.getClassName().equals(jc.getClassName())) {
+                // This should maybe caught by BCEL: In case of renamed .class files we get wrong
+                // JavaClass objects here.
+                throw new LoadingException("Wrong name: the internal name of the .class file '"+jc.getClassName()+
+                    "' does not match the file's name '"+myOwner.getClassName()+"'.");
             }
 
         }

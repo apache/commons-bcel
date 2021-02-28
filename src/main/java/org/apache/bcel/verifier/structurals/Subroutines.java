@@ -500,12 +500,10 @@ public class Subroutines{
                 while (_protected != handler.getEndPC().getNext()) {
                     // Note the inclusive/inclusive notation of "generic API" exception handlers!
                     for (final Subroutine sub : subroutines.values()) {
-                        if (sub != subroutines.get(all[0])) {    // We don't want to forbid top-level exception handlers.
-                            if (sub.contains(_protected)) {
-                                throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+
-                                    "' is protected by an exception handler, '"+handler+
-                                    "'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
-                            }
+                        if ((sub != subroutines.get(all[0])) && sub.contains(_protected)) {
+                            throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+
+                                "' is protected by an exception handler, '"+handler+
+                                "'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
                         }
                     }
                     _protected = _protected.getNext();

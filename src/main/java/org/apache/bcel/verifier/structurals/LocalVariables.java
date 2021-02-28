@@ -164,10 +164,8 @@ public class LocalVariables implements Cloneable {
                 "Backwards branch with an uninitialized object in the local variables detected.");
         }
         // If we just didn't know that it was initialized, we have now learned.
-        if (locals[i] instanceof UninitializedObjectType) {
-            if (! (lv.locals[i] instanceof UninitializedObjectType)) {
-                locals[i] = ((UninitializedObjectType) locals[i]).getInitialized();
-            }
+        if ((locals[i] instanceof UninitializedObjectType) && !(lv.locals[i] instanceof UninitializedObjectType)) {
+            locals[i] = ((UninitializedObjectType) locals[i]).getInitialized();
         }
         if ((locals[i] instanceof ReferenceType) && (lv.locals[i] instanceof ReferenceType)) {
             if (! locals[i].equals(lv.locals[i])) { // needed in case of two UninitializedObjectType instances

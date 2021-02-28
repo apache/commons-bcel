@@ -74,12 +74,9 @@ static private int jjMoveNfa_1(final int startState, int curPos)
             switch(jjstateSet[--i])
             {
                case 0:
-                  if ((0x2400L & l) != 0L)
-                  {
-                     if (kind > 7) {
-                        kind = 7;
-                    }
-                  }
+                  if (((0x2400L & l) != 0L) && (kind > 7)) {
+                    kind = 7;
+                }
                   if (curChar == 13) {
                     jjstateSet[jjnewStateCnt++] = 1;
                 }
