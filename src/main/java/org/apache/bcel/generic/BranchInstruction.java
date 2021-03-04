@@ -226,11 +226,10 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      */
     @Override
     public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
-        if (target == old_ih) {
-            setTarget(new_ih);
-        } else {
+        if (target != old_ih) {
             throw new ClassGenException("Not targeting " + old_ih + ", but " + target);
         }
+        setTarget(new_ih);
     }
 
 

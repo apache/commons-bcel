@@ -261,19 +261,22 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         final byte t = type.getType();
         if (t <= Const.T_VOID) {
             return "Type." + Const.getTypeName(t).toUpperCase(Locale.ENGLISH);
-        } else if (type.toString().equals("java.lang.String")) {
+        }
+        if (type.toString().equals("java.lang.String")) {
             return "Type.STRING";
-        } else if (type.toString().equals("java.lang.Object")) {
+        }
+        if (type.toString().equals("java.lang.Object")) {
             return "Type.OBJECT";
-        } else if (type.toString().equals("java.lang.StringBuffer")) {
+        }
+        if (type.toString().equals("java.lang.StringBuffer")) {
             return "Type.STRINGBUFFER";
-        } else if (type instanceof ArrayType) {
+        }
+        if (type instanceof ArrayType) {
             final ArrayType at = (ArrayType) type;
             return "new ArrayType(" + printType(at.getBasicType()) + ", " + at.getDimensions()
                     + ")";
-        } else {
-            return "new ObjectType(\"" + Utility.signatureToString(signature, false) + "\")";
         }
+        return "new ObjectType(\"" + Utility.signatureToString(signature, false) + "\")";
     }
 
 

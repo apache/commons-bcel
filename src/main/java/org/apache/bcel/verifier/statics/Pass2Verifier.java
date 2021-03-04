@@ -394,12 +394,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
 
                 if (att instanceof SourceFile) {
-                    if (!foundSourceFile) {
-                        foundSourceFile = true;
-                    } else {
+                    if (foundSourceFile) {
                         throw new ClassConstraintException("A ClassFile structure (like '" +
                             tostring(obj) + "') may have no more than one SourceFile attribute."); //vmspec2 4.7.7
                     }
+                    foundSourceFile = true;
                 }
 
                 if (att instanceof InnerClasses) {

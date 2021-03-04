@@ -123,11 +123,10 @@ public class ClassLoader extends java.lang.ClassLoader {
                 if (class_name.contains(BCEL_TOKEN)) {
                     clazz = createClass(class_name);
                 } else { // Fourth try: Load classes via repository
-                    if ((clazz = repository.loadClass(class_name)) != null) {
-                        clazz = modifyClass(clazz);
-                    } else {
+                    if ((clazz = repository.loadClass(class_name)) == null) {
                         throw new ClassNotFoundException(class_name);
                     }
+                    clazz = modifyClass(clazz);
                 }
                 if (clazz != null) {
                     final byte[] bytes = clazz.getBytes();

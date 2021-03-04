@@ -171,14 +171,12 @@ public class LocalVariables implements Cloneable {
             if (! locals[i].equals(lv.locals[i])) { // needed in case of two UninitializedObjectType instances
                 final Type sup = ((ReferenceType) locals[i]).getFirstCommonSuperclass((ReferenceType) (lv.locals[i]));
 
-                if (sup != null) {
-                    locals[i] = sup;
-                }
-                else{
+                if (sup == null) {
                     // We should have checked this in Pass2!
                     throw new AssertionViolatedException(
                         "Could not load all the super classes of '"+locals[i]+"' and '"+lv.locals[i]+"'.");
                 }
+                locals[i] = sup;
             }
         }
         else{

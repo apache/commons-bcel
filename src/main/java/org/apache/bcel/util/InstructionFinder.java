@@ -141,11 +141,10 @@ public class InstructionFinder {
                 final StringBuilder name = new StringBuilder();
                 while ((Character.isLetterOrDigit(ch) || ch == '_') && i < size) {
                     name.append(ch);
-                    if (++i < size) {
-                        ch = lower.charAt(i);
-                    } else {
+                    if (++i >= size) {
                         break;
                     }
+                    ch = lower.charAt(i);
                 }
                 i--;
                 buf.append(mapName(name.toString()));

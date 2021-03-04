@@ -194,24 +194,24 @@ public abstract class Type {
             //corrected concurrent private static field acess
             wrap(CONSUMED_CHARS, 1);
             return BasicType.getType(type);
-        } else if (type == Const.T_ARRAY) {
-            int dim = 0;
-            do { // Count dimensions
-                dim++;
-            } while (signature.charAt(dim) == '[');
-            // Recurse, but just once, if the signature is ok
-            final Type t = getType(signature.substring(dim));
-            //corrected concurrent private static field acess
-            //  consumed_chars += dim; // update counter - is replaced by
-            final int _temp = unwrap(CONSUMED_CHARS) + dim;
-            wrap(CONSUMED_CHARS, _temp);
-            return new ArrayType(t, dim);
-        } else { // type == T_REFERENCE
+        }
+        if (type != Const.T_ARRAY) { // type == T_REFERENCE
             // Utility.typeSignatureToString understands how to parse generic types.
             final String parsedSignature = Utility.typeSignatureToString(signature, false);
             wrap(CONSUMED_CHARS, parsedSignature.length() + 2); // "Lblabla;" `L' and `;' are removed
             return ObjectType.getInstance(parsedSignature.replace('/', '.'));
         }
+        int dim = 0;
+        do { // Count dimensions
+            dim++;
+        } while (signature.charAt(dim) == '[');
+        // Recurse, but just once, if the signature is ok
+        final Type t = getType(signature.substring(dim));
+        //corrected concurrent private static field acess
+        //  consumed_chars += dim; // update counter - is replaced by
+        final int _temp = unwrap(CONSUMED_CHARS) + dim;
+        wrap(CONSUMED_CHARS, _temp);
+        return new ArrayType(t, dim);
     }
 
 
@@ -274,33 +274,41 @@ public abstract class Type {
          */
         if (cl.isArray()) {
             return getType(cl.getName());
-        } else if (cl.isPrimitive()) {
-            if (cl == Integer.TYPE) {
-                return INT;
-            } else if (cl == Void.TYPE) {
-                return VOID;
-            } else if (cl == Double.TYPE) {
-                return DOUBLE;
-            } else if (cl == Float.TYPE) {
-                return FLOAT;
-            } else if (cl == Boolean.TYPE) {
-                return BOOLEAN;
-            } else if (cl == Byte.TYPE) {
-                return BYTE;
-            } else if (cl == Short.TYPE) {
-                return SHORT;
-            } else if (cl == Byte.TYPE) {
-                return BYTE;
-            } else if (cl == Long.TYPE) {
-                return LONG;
-            } else if (cl == Character.TYPE) {
-                return CHAR;
-            } else {
-                throw new IllegalStateException("Unknown primitive type " + cl);
-            }
-        } else { // "Real" class
+        }
+        if (!cl.isPrimitive()) { // "Real" class
             return ObjectType.getInstance(cl.getName());
         }
+        if (cl == Integer.TYPE) {
+            return INT;
+        }
+        if (cl == Void.TYPE) {
+            return VOID;
+        }
+        if (cl == Double.TYPE) {
+            return DOUBLE;
+        }
+        if (cl == Float.TYPE) {
+            return FLOAT;
+        }
+        if (cl == Boolean.TYPE) {
+            return BOOLEAN;
+        }
+        if (cl == Byte.TYPE) {
+            return BYTE;
+        }
+        if (cl == Short.TYPE) {
+            return SHORT;
+        }
+        if (cl == Byte.TYPE) {
+            return BYTE;
+        }
+        if (cl == Long.TYPE) {
+            return LONG;
+        }
+        if (cl == Character.TYPE) {
+            return CHAR;
+        }
+        throw new IllegalStateException("Unknown primitive type " + cl);
     }
 
 
@@ -365,7 +373,8 @@ public abstract class Type {
         final byte type = Utility.typeOfSignature(signature);
         if (type <= Const.T_VOID) {
             return encode(BasicType.getType(type).getSize(), 1);
-        } else if (type == Const.T_ARRAY) {
+        }
+        if (type == Const.T_ARRAY) {
             int dim = 0;
             do { // Count dimensions
                 dim++;
@@ -373,13 +382,12 @@ public abstract class Type {
             // Recurse, but just once, if the signature is ok
             final int consumed = consumed(getTypeSize(signature.substring(dim)));
             return encode(1, dim + consumed);
-        } else { // type == T_REFERENCE
-            final int index = signature.indexOf(';'); // Look for closing `;'
-            if (index < 0) {
-                throw new ClassFormatException("Invalid signature: " + signature);
-            }
-            return encode(1, index + 1);
         }
+        final int index = signature.indexOf(';'); // Look for closing `;'
+        if (index < 0) {
+            throw new ClassFormatException("Invalid signature: " + signature);
+        }
+        return encode(1, index + 1);
     }
 
 

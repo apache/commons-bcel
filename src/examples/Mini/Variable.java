@@ -47,9 +47,8 @@ public class Variable implements EnvEntry {
   public String toString() {
     if(!reserved) {
         return var_name + " declared at line " + line + ", column " + column;
-    } else {
-        return var_name + " <reserved key word>";
     }
+    return var_name + " <reserved key word>";
   }
 
   public ASTIdent getName()    { return name; }

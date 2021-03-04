@@ -136,13 +136,12 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
     if((kind == -1) && (unop == -1)) {
         return exprs[0].traverse(env);  // --> Replaced by successor
-    } else {
-      for(int i=0; i < exprs.length; i++) {
+    }
+    for(int i=0; i < exprs.length; i++) {
         exprs[i] = exprs[i].traverse(env); // References may change
     }
 
       return this;
-    }
   }
 
   /**

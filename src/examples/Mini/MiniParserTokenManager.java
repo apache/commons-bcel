@@ -267,13 +267,16 @@ static private int jjMoveStringLiteralDfa1_0(final long active0)
       case 61:
          if ((active0 & 0x40000L) != 0L) {
             return jjStopAtPos(1, 18);
-        } else if ((active0 & 0x80000L) != 0L) {
-            return jjStopAtPos(1, 19);
-        } else if ((active0 & 0x100000L) != 0L) {
-            return jjStopAtPos(1, 20);
-        } else if ((active0 & 0x200000L) != 0L) {
-            return jjStopAtPos(1, 21);
-        }
+         }
+         if ((active0 & 0x80000L) != 0L) {
+             return jjStopAtPos(1, 19);
+         }
+         if ((active0 & 0x100000L) != 0L) {
+             return jjStopAtPos(1, 20);
+         }
+         if ((active0 & 0x200000L) != 0L) {
+             return jjStopAtPos(1, 21);
+         }
          break;
       case 65:
          return jjMoveStringLiteralDfa2_0(active0, 0x800000L);
@@ -374,9 +377,10 @@ static private int jjMoveStringLiteralDfa3_0(final long old0, long active0)
       case 69:
          if ((active0 & 0x1000L) != 0L) {
             return jjStartNfaWithStates_0(3, 12, 1);
-        } else if ((active0 & 0x1000000L) != 0L) {
-            return jjStartNfaWithStates_0(3, 24, 1);
         }
+    if ((active0 & 0x1000000L) != 0L) {
+        return jjStartNfaWithStates_0(3, 24, 1);
+    }
          break;
       case 78:
          if ((active0 & 0x800L) != 0L) {
@@ -407,9 +411,10 @@ static private int jjMoveStringLiteralDfa4_0(final long old0, long active0)
       case 69:
          if ((active0 & 0x800000L) != 0L) {
             return jjStartNfaWithStates_0(4, 23, 1);
-        } else if ((active0 & 0x2000000000L) != 0L) {
-            return jjStartNfaWithStates_0(4, 37, 1);
         }
+    if ((active0 & 0x2000000000L) != 0L) {
+        return jjStartNfaWithStates_0(4, 37, 1);
+    }
          break;
       default :
          break;
@@ -626,9 +631,8 @@ static public void SwitchTo(final int lexState)
    if (lexState >= 2 || lexState < 0) {
     throw new TokenMgrError("Error: Ignoring invalid lexical state : " + lexState + ". State unchanged.",
         TokenMgrError.INVALID_LEXICAL_STATE);
-} else {
-    curLexState = lexState;
 }
+curLexState = lexState;
 }
 
 static private Token jjFillToken()
@@ -713,7 +717,7 @@ public static Token getNextToken()
     }
            return matchedToken;
         }
-        else if ((jjtoSkip[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
+        if ((jjtoSkip[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
         {
            if ((jjtoSpecial[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
            {

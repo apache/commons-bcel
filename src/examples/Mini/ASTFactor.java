@@ -47,8 +47,7 @@ public class ASTFactor extends ASTExpr {
   public ASTExpr traverse(final Environment env) {
     if(kind == -1) {
         return exprs[0].traverse(env);
-    } else {
-        return new ASTExpr(exprs, kind, line, column).traverse(env);
     }
+    return new ASTExpr(exprs, kind, line, column).traverse(env);
   }
 }

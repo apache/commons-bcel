@@ -236,33 +236,38 @@ public final class StackMapEntry implements Node, Cloneable
     int getMapEntrySize() {
         if (frameType >= Const.SAME_FRAME && frameType <= Const.SAME_FRAME_MAX) {
             return 1;
-        } else if (frameType >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME &&
+        }
+        if (frameType >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME &&
                    frameType <= Const.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             return 1 + (typesOfStackItems[0].hasIndex() ? 3 : 1);
-        } else if (frameType == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
+        }
+        if (frameType == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             return 3 + (typesOfStackItems[0].hasIndex() ? 3 : 1);
-        } else if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX) {
+        }
+        if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX) {
             return 3;
-        } else if (frameType == Const.SAME_FRAME_EXTENDED) {
+        }
+        if (frameType == Const.SAME_FRAME_EXTENDED) {
             return 3;
-        } else if (frameType >= Const.APPEND_FRAME && frameType <= Const.APPEND_FRAME_MAX) {
+        }
+        if (frameType >= Const.APPEND_FRAME && frameType <= Const.APPEND_FRAME_MAX) {
             int len = 3;
             for (final StackMapType types_of_local : typesOfLocals) {
                 len += types_of_local.hasIndex() ? 3 : 1;
             }
             return len;
-        } else if (frameType == Const.FULL_FRAME) {
-            int len = 7;
-            for (final StackMapType types_of_local : typesOfLocals) {
-                len += types_of_local.hasIndex() ? 3 : 1;
-            }
-            for (final StackMapType types_of_stack_item : typesOfStackItems) {
-                len += types_of_stack_item.hasIndex() ? 3 : 1;
-            }
-            return len;
-        } else {
+        }
+        if (frameType != Const.FULL_FRAME) {
             throw new IllegalStateException("Invalid StackMap frameType: " + frameType);
         }
+        int len = 7;
+        for (final StackMapType types_of_local : typesOfLocals) {
+            len += types_of_local.hasIndex() ? 3 : 1;
+        }
+        for (final StackMapType types_of_stack_item : typesOfStackItems) {
+            len += types_of_stack_item.hasIndex() ? 3 : 1;
+        }
+        return len;
     }
 
 

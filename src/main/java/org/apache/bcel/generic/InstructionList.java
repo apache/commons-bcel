@@ -117,7 +117,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
             final int j = pos[i];
             if (j == target) {
                 return ihs[i];
-            } else if (target < j) {
+            }
+            if (target < j) {
                 r = i - 1;
             } else {
                 l = i + 1;
@@ -627,7 +628,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
         for (InstructionHandle ih = start; ih != end.getNext(); ih = ih.getNext()) {
             if (ih == null) {
                 throw new ClassGenException("Invalid range: From " + start + " to " + end);
-            } else if (ih == target) {
+            }
+            if (ih == target) {
                 throw new ClassGenException("Invalid range: From " + start + " to " + end + " contains target " + target);
             }
         }

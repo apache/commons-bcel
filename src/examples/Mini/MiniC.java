@@ -168,17 +168,16 @@ public class MiniC implements org.apache.bcel.Constants {
     final String str  = Integer.toString(n);
     final int    diff = len - str.length();
 
-    if(diff > 0) {
-      final char[] chs = new char[diff];
+    if(diff <= 0) {
+        return str;
+    }
+    final char[] chs = new char[diff];
 
       for(int i=0; i < diff; i++) {
         chs[i] = ' ';
     }
 
       return new String(chs) + str;
-    } else {
-        return str;
-    }
   }
 
   final static void addWarning(final String err) { warnings.addElement(err); }

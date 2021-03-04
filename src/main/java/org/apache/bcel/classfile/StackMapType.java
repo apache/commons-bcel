@@ -119,11 +119,11 @@ public final class StackMapType implements Cloneable {
                 return ", class=<unknown>";
             }
             return ", class=" + constantPool.constantToString(index, Const.CONSTANT_Class);
-        } else if (type == Const.ITEM_NewObject) {
-            return ", offset=" + index;
-        } else {
-            return "";
         }
+        if (type == Const.ITEM_NewObject) {
+            return ", offset=" + index;
+        }
+        return "";
     }
 
 

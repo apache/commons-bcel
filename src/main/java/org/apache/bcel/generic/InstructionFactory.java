@@ -621,14 +621,14 @@ public class InstructionFactory implements InstructionConstants {
                 throw new IllegalArgumentException("Could not find instruction: " + name, e);
             }
             return i;
-        } else if ((src_type instanceof ReferenceType) && (dest_type instanceof ReferenceType)) {
-            if (dest_type instanceof ArrayType) {
-                return new CHECKCAST(cp.addArrayClass((ArrayType) dest_type));
-            }
-            return new CHECKCAST(cp.addClass(((ObjectType) dest_type).getClassName()));
-        } else {
+        }
+        if (!(src_type instanceof ReferenceType) || !(dest_type instanceof ReferenceType)) {
             throw new IllegalArgumentException("Cannot cast " + src_type + " to " + dest_type);
         }
+        if (dest_type instanceof ArrayType) {
+            return new CHECKCAST(cp.addArrayClass((ArrayType) dest_type));
+        }
+        return new CHECKCAST(cp.addClass(((ObjectType) dest_type).getClassName()));
     }
 
 
@@ -685,11 +685,11 @@ public class InstructionFactory implements InstructionConstants {
         if (dim == 1) {
             if (t instanceof ObjectType) {
                 return new ANEWARRAY(cp.addClass((ObjectType) t));
-            } else if (t instanceof ArrayType) {
-                return new ANEWARRAY(cp.addArrayClass((ArrayType) t));
-            } else {
-                return new NEWARRAY(t.getType());
             }
+            if (t instanceof ArrayType) {
+                return new ANEWARRAY(cp.addArrayClass((ArrayType) t));
+            }
+            return new NEWARRAY(t.getType());
         }
         ArrayType at;
         if (t instanceof ArrayType) {

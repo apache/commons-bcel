@@ -40,17 +40,19 @@ public interface InstructionComparator {
                 return false;
 //                } else if (i1 == i2) { TODO consider adding this shortcut
 //                    return true; // this must be AFTER the BI test
-            } else if (i1 instanceof ConstantPushInstruction) {
+            }
+            if (i1 instanceof ConstantPushInstruction) {
                 return ((ConstantPushInstruction) i1).getValue().equals(
                         ((ConstantPushInstruction) i2).getValue());
-            } else if (i1 instanceof IndexedInstruction) {
+            }
+            if (i1 instanceof IndexedInstruction) {
                 return ((IndexedInstruction) i1).getIndex() == ((IndexedInstruction) i2)
                         .getIndex();
-            } else if (i1 instanceof NEWARRAY) {
-                return ((NEWARRAY) i1).getTypecode() == ((NEWARRAY) i2).getTypecode();
-            } else {
-                return true;
             }
+            if (i1 instanceof NEWARRAY) {
+                return ((NEWARRAY) i1).getTypecode() == ((NEWARRAY) i2).getTypecode();
+            }
+            return true;
         }
         return false;
     };

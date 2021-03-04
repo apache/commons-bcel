@@ -240,14 +240,11 @@ public class OperandStack implements Cloneable {
                 stack.set(i, ((UninitializedObjectType) (stack.get(i))).getInitialized() ); //note that.
             }
             if (! stack.get(i).equals(s.stack.get(i))) {
-                if (    (stack.get(i) instanceof ReferenceType) &&
-                            (s.stack.get(i) instanceof ReferenceType)  ) {
-                    stack.set(i, ((ReferenceType) stack.get(i)).getFirstCommonSuperclass((ReferenceType) (s.stack.get(i))));
-                }
-                else{
+                if (!(stack.get(i) instanceof ReferenceType) || !(s.stack.get(i) instanceof ReferenceType)  ) {
                     throw new StructuralCodeConstraintException(
                         "Cannot merge stacks of different types:\nStack A:\n"+this+"\nStack B:\n"+s);
                 }
+                stack.set(i, ((ReferenceType) stack.get(i)).getFirstCommonSuperclass((ReferenceType) (s.stack.get(i))));
             }
         }
         } catch (final ClassNotFoundException e) {

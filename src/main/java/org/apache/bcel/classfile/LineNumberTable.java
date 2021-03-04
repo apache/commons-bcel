@@ -168,7 +168,8 @@ public final class LineNumberTable extends Attribute {
             final int j = lineNumberTable[i].getStartPC();
             if (j == pos) {
                 return lineNumberTable[i].getLineNumber();
-            } else if (pos < j) {
+            }
+            if (pos < j) {
                 r = i - 1;
             } else {
                 l = i + 1;

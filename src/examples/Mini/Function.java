@@ -62,9 +62,8 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
 
     if(!reserved) {
         return prefix + " declared at line " + line + ", column " + column;
-    } else {
-        return prefix + " <predefined function>";
     }
+    return prefix + " <predefined function>";
   }
 
   public int        getNoArgs()       { return no_args; }

@@ -414,12 +414,10 @@ public class InstConstraintVisitor extends EmptyVisitor{
             }
 
         if (o instanceof RETURN) {
-            if (method_type != Type.VOID) {
-                constraintViolated(o, "RETURN instruction in non-void method.");
-            }
-            else{
+            if (method_type == Type.VOID) {
                 return;
             }
+            constraintViolated(o, "RETURN instruction in non-void method.");
         }
         if (o instanceof ARETURN) {
             if (method_type == Type.VOID) {
@@ -1003,14 +1001,12 @@ public class InstConstraintVisitor extends EmptyVisitor{
                 return; // Form 4
             }
             // stack top size is 2, next-to-top's size is 1
-            if ( stack().peek(2).getSize() != 1 ) {
-                constraintViolated(o, "If stack top's size is 2 and stack-next-to-top's size is 1,"+
-                    " then stack next-to-next-to-top's size must also be 1. But it is '"+stack().peek(2)+
-                    "' of size '"+stack().peek(2).getSize()+"'.");
-            }
-            else{
+            if ( stack().peek(2).getSize() == 1 ) {
                 return; // Form 2
             }
+            constraintViolated(o, "If stack top's size is 2 and stack-next-to-top's size is 1,"+
+                " then stack next-to-next-to-top's size must also be 1. But it is '"+stack().peek(2)+
+                "' of size '"+stack().peek(2).getSize()+"'.");
         }
         else{// stack top is of size 1
             if (stack().peek(1).getSize() == 1) {
