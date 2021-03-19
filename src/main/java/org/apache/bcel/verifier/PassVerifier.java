@@ -49,7 +49,7 @@ public abstract class PassVerifier {
     /** The (warning) messages. */
     private final List<String> messages = new ArrayList<>();
     /** The VerificationResult cache. */
-    private VerificationResult verificationResult = null;
+    private VerificationResult verificationResult;
 
 
     /**
@@ -99,6 +99,6 @@ public abstract class PassVerifier {
      */
     public String[] getMessages() {
         verify(); // create messages if not already done (cached!)
-        return messages.toArray(new String[messages.size()]);
+        return messages.toArray(new String[0]);
     }
 }

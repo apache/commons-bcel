@@ -45,7 +45,7 @@ public class AnnotationEntryGen {
 
     private final ConstantPoolGen cpool;
 
-    private boolean isRuntimeVisible = false;
+    private boolean isRuntimeVisible;
 
     /**
      * Here we are taking a fixed annotation of type Annotation and building a
@@ -257,7 +257,7 @@ public class AnnotationEntryGen {
                             new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
             }
 
-            return newAttributes.toArray(new Attribute[newAttributes.size()]);
+            return newAttributes.toArray(new Attribute[0]);
         } catch (final IOException e) {
             System.err.println("IOException whilst processing annotations");
             e.printStackTrace();
@@ -343,7 +343,7 @@ public class AnnotationEntryGen {
                         .add(new RuntimeInvisibleParameterAnnotations(riaIndex,
                                 riaData.length, new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
             }
-            return newAttributes.toArray(new Attribute[newAttributes.size()]);
+            return newAttributes.toArray(new Attribute[0]);
         } catch (final IOException e) {
             System.err
                     .println("IOException whilst processing parameter annotations");

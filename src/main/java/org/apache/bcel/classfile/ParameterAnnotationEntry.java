@@ -85,7 +85,7 @@ public class ParameterAnnotationEntry implements Node {
               Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getParameterAnnotationEntries());
           }
       }
-      return accumulatedAnnotations.toArray(new ParameterAnnotationEntry[accumulatedAnnotations.size()]);
+      return accumulatedAnnotations.toArray(new ParameterAnnotationEntry[0]);
   }
 }
 

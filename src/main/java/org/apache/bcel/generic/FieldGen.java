@@ -42,7 +42,7 @@ import org.apache.bcel.util.BCELComparator;
  */
 public class FieldGen extends FieldGenOrMethodGen {
 
-    private Object value = null;
+    private Object value;
     private static BCELComparator bcelComparator = new BCELComparator() {
 
         @Override

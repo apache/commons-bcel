@@ -143,7 +143,7 @@ public class BootstrapMethods extends Attribute {
             final String[] lines = (bootstrapMethods[i].toString(super.getConstantPool())).split("\\r?\\n");
             buf.append(lines[0]);
             for (int j = 1; j < lines.length; j++) {
-                buf.append("\n").append("          ".substring(0,indent_count)).append(lines[j]);
+                buf.append("\n").append("          ", 0, indent_count).append(lines[j]);
             }
         }
         return buf.toString();

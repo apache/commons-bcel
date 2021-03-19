@@ -133,7 +133,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         }
         final byte[] bs = baos.toByteArray();
         final ByteArrayInputStream bais = new ByteArrayInputStream(bs);
-        AnnotationEntryGen annAfter;
+        final AnnotationEntryGen annAfter;
         try (DataInputStream dis = new DataInputStream(bais)) {
             annAfter = AnnotationEntryGen.read(dis, cpg, a.isRuntimeVisible());
         }

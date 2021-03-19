@@ -65,7 +65,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     private int maxStack;
     private InstructionList il;
     private boolean stripAttributes;
-    private LocalVariableTypeTable localVariableTypeTable = null;
+    private LocalVariableTypeTable localVariableTypeTable;
     private final List<LocalVariableGen> variableList = new ArrayList<>();
     private final List<LineNumberGen> lineNumberList = new ArrayList<>();
     private final List<CodeExceptionGen> exceptionList = new ArrayList<>();
@@ -73,8 +73,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     private final List<Attribute> codeAttrsList = new ArrayList<>();
 
     private List<AnnotationEntryGen>[] paramAnnotations; // Array of lists containing AnnotationGen objects
-    private boolean hasParameterAnnotations = false;
-    private boolean haveUnpackedParameterAnnotations = false;
+    private boolean hasParameterAnnotations;
+    private boolean haveUnpackedParameterAnnotations;
 
     private static BCELComparator bcelComparator = new BCELComparator() {
 

@@ -1529,7 +1529,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * time even fail to detect missing InnerClasses attributes in pass 2.
      */
     private static class InnerClassDetector extends EmptyVisitor{
-        private boolean hasInnerClass = false;
+        private boolean hasInnerClass;
         private final JavaClass jc;
         private final ConstantPool cp;
 

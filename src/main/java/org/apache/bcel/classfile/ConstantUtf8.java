@@ -83,10 +83,10 @@ public final class ConstantUtf8 extends Constant {
     }
 
     // TODO these should perhaps be AtomicInt?
-    private static volatile int considered = 0;
-    private static volatile int created = 0;
-    private static volatile int hits = 0;
-    private static volatile int skipped = 0;
+    private static volatile int considered;
+    private static volatile int created;
+    private static volatile int hits;
+    private static volatile int skipped;
 
     private static final String SYS_PROP_CACHE_MAX_ENTRIES = "bcel.maxcached";
     private static final String SYS_PROP_CACHE_MAX_ENTRY_SIZE = "bcel.maxcached.size";

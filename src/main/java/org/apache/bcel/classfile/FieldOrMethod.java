@@ -63,8 +63,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     @java.lang.Deprecated
     protected ConstantPool constant_pool;
 
-    private String signatureAttributeString = null;
-    private boolean searchedForSignatureAttribute = false;
+    private String signatureAttributeString;
+    private boolean searchedForSignatureAttribute;
 
     FieldOrMethod() {
     }

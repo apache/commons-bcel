@@ -66,9 +66,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     private Attribute[] attributes; // attributes defined in the class
     private AnnotationEntry[] annotations;   // annotations defined on the class
     private byte source = HEAP; // Generated in memory
-    private boolean isAnonymous = false;
-    private boolean isNested = false;
-    private boolean computedNestedTypeStatus = false;
+    private boolean isAnonymous;
+    private boolean isNested;
+    private boolean computedNestedTypeStatus;
     public static final byte HEAP = 1;
     public static final byte FILE = 2;
     public static final byte ZIP = 3;
@@ -832,7 +832,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         for (clazz = clazz.getSuperClass(); clazz != null; clazz = clazz.getSuperClass()) {
             allSuperClasses.add(clazz);
         }
-        return allSuperClasses.toArray(new JavaClass[allSuperClasses.size()]);
+        return allSuperClasses.toArray(new JavaClass[0]);
     }
 
 
@@ -871,7 +871,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                 queue.enqueue(_interface);
             }
         }
-        return allInterfaces.toArray(new JavaClass[allInterfaces.size()]);
+        return allInterfaces.toArray(new JavaClass[0]);
     }
 
 

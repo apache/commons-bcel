@@ -68,7 +68,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
-    protected int padding = 0; // number of pad bytes for alignment TODO could be package-protected?
+    protected int padding; // number of pad bytes for alignment TODO could be package-protected?
 
 
     /**

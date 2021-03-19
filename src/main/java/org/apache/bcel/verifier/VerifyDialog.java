@@ -38,19 +38,19 @@ public class VerifyDialog extends javax.swing.JDialog {
 
     private static final long serialVersionUID = -6374807677043142313L;
     /** Machine-generated. */
-    private javax.swing.JPanel ivjJDialogContentPane = null;
+    private javax.swing.JPanel ivjJDialogContentPane;
     /** Machine-generated. */
-    private javax.swing.JPanel ivjPass1Panel = null;
+    private javax.swing.JPanel ivjPass1Panel;
     /** Machine-generated. */
-    private javax.swing.JPanel ivjPass2Panel = null;
+    private javax.swing.JPanel ivjPass2Panel;
     /** Machine-generated. */
-    private javax.swing.JPanel ivjPass3Panel = null;
+    private javax.swing.JPanel ivjPass3Panel;
     /** Machine-generated. */
-    private javax.swing.JButton ivjPass1Button = null;
+    private javax.swing.JButton ivjPass1Button;
     /** Machine-generated. */
-    private javax.swing.JButton ivjPass2Button = null;
+    private javax.swing.JButton ivjPass2Button;
     /** Machine-generated. */
-    private javax.swing.JButton ivjPass3Button = null;
+    private javax.swing.JButton ivjPass3Button;
     /** Machine-generated. */
     private final IvjEventHandler ivjEventHandler = new IvjEventHandler();
     /**
@@ -87,7 +87,7 @@ public class VerifyDialog extends javax.swing.JDialog {
     }
 
     /** Machine-generated. */
-    private javax.swing.JButton ivjFlushButton = null;
+    private javax.swing.JButton ivjFlushButton;
 
 
     /** Machine-generated. */
@@ -473,7 +473,7 @@ public class VerifyDialog extends javax.swing.JDialog {
         classesToVerify = args.length;
         for (final String arg : args) {
             try {
-                VerifyDialog aVerifyDialog;
+                final VerifyDialog aVerifyDialog;
                 aVerifyDialog = new VerifyDialog(arg);
                 aVerifyDialog.setModal(true);
                 aVerifyDialog.addWindowListener(new java.awt.event.WindowAdapter() {

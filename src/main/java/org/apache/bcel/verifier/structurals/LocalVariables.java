@@ -52,9 +52,7 @@ public class LocalVariables implements Cloneable {
     @Override
     public Object clone() {
         final LocalVariables lvs = new LocalVariables(locals.length);
-        for (int i=0; i<locals.length; i++) {
-            lvs.locals[i] = this.locals[i];
-        }
+        System.arraycopy(this.locals, 0, lvs.locals, 0, locals.length);
         return lvs;
     }
 

@@ -20,7 +20,7 @@ package org.apache.bcel;
 
 public class NanoTimer {
 
-    private long timeNanos = 0;
+    private long timeNanos;
 
     public NanoTimer start() {
         timeNanos -= System.nanoTime();

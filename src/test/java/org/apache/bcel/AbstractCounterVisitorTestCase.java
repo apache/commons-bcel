@@ -27,7 +27,7 @@ public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
 {
     protected abstract JavaClass getTestClass() throws ClassNotFoundException;
 
-    private CounterVisitor visitor = null;
+    private CounterVisitor visitor;
 
     @BeforeEach
     public void setUp() throws ClassNotFoundException

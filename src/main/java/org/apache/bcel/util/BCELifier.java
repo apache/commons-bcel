@@ -216,14 +216,14 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         for (int i = 0, pow = 1; pow <= Const.MAX_ACC_FLAG_I; i++) {
             if ((flags & pow) != 0) {
                 if ((pow == Const.ACC_SYNCHRONIZED) && (location == FLAGS.CLASS)) {
-                    buf.append(CONSTANT_PREFIX+"ACC_SUPER | ");
+                    buf.append(CONSTANT_PREFIX).append("ACC_SUPER | ");
                 } else if ((pow == Const.ACC_VOLATILE) && (location == FLAGS.METHOD)) {
-                    buf.append(CONSTANT_PREFIX+"ACC_BRIDGE | ");
+                    buf.append(CONSTANT_PREFIX).append("ACC_BRIDGE | ");
                 } else if ((pow == Const.ACC_TRANSIENT) && (location == FLAGS.METHOD)) {
-                    buf.append(CONSTANT_PREFIX+"ACC_VARARGS | ");
+                    buf.append(CONSTANT_PREFIX).append("ACC_VARARGS | ");
                 } else {
                     if (i < Const.ACCESS_NAMES_LENGTH) {
-                        buf.append(CONSTANT_PREFIX+"ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
+                        buf.append(CONSTANT_PREFIX).append("ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
                     } else {
                         buf.append(String.format (CONSTANT_PREFIX+"ACC_BIT %x | ", pow));
                     }

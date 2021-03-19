@@ -76,7 +76,7 @@ public class ControlFlowGraph{
          * The 'execution predecessors' - a list of type InstructionContext
          * of those instances that have been execute()d before in that order.
          */
-        private List<InstructionContext> executionPredecessors = null; // Type: InstructionContext
+        private List<InstructionContext> executionPredecessors; // Type: InstructionContext
 
         /**
          * Creates an InstructionHandleImpl object from an InstructionHandle.
@@ -258,11 +258,11 @@ public class ControlFlowGraph{
          * by the surrounding ControlFlowGraph.
          */
         private String getExecutionChain() {
-            String s = this.toString();
+            StringBuilder s = new StringBuilder(this.toString());
             for (int i=executionPredecessors.size()-1; i>=0; i--) {
-                s = executionPredecessors.get(i)+"\n" + s;
+                s.insert(0, executionPredecessors.get(i) + "\n");
             }
-            return s;
+            return s.toString();
         }
 
 

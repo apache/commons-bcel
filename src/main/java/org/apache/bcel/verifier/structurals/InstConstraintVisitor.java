@@ -66,21 +66,21 @@ public class InstConstraintVisitor extends EmptyVisitor{
      * @see #locals()
      * @see #stack()
      */
-    private Frame frame = null;
+    private Frame frame;
 
     /**
      * The ConstantPoolGen we're working on.
      *
      * @see #setConstantPoolGen(ConstantPoolGen cpg)
      */
-    private ConstantPoolGen cpg = null;
+    private ConstantPoolGen cpg;
 
     /**
      * The MethodGen we're working on.
      *
      * @see #setMethodGen(MethodGen mg)
      */
-    private MethodGen mg = null;
+    private MethodGen mg;
 
     /**
      * The OperandStack we're working on.
