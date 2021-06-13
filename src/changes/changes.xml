@@ -68,7 +68,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-343" type="update" dev="ggregory" due-to="Allon Murienik, Gary Gregory">JUnit Assertion improvement #69.</action>
       <action                  type="update" dev="ggregory" due-to="Mark Roberts">Minor improvements to comments and toString() methods #71.</action>
       <!-- UPDATES -->
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.10 to 3.11.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.10 to 3.12.0</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update commons-parent from 50 to 52.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Update biz.aQute.bndlib from 5.1.0 to 5.2.0, #54, #72.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Update maven-surefire-plugin from 3.0.0-M4 to 3.0.0-M5 #53.</action>
@@ -76,12 +76,11 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Dependabot">Update actions/checkout from v2.3.1 to v2.3.4 #59, #66, #73.</action>      
       <action                  type="update" dev="ggregory" due-to="Dependabot">Update actions/setup-java from v1.4.0 to v1.4.3 #62, #67.</action>      
       <action                  type="update" dev="ggregory" due-to="Dependabot">Update Jacoco from 0.8.5 to 0.8.6.</action>      
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Update commons-io from 2.7 to 2.9.0 #65.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Update commons-io from 2.7 to 2.10.0 #65.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Update exec-maven-plugin from 1.6.0 to 3.0.0 #51.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update commons.japicmp.version 0.14.3 -> 0.15.3.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump maven-pmd-plugin from 3.13.0 to 3.14.0 #74.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump junit-jupiter from 5.7.0 to 5.7.1 #78.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update commons-lang3 3.11 -> 3.12.0.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump actions/setup-java from v1.4.3 to v2.</action>
     </release>
     <release version="6.5.0" date="2020-06-05" description="Minor feature and bug fix release.">
