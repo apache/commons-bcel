@@ -482,7 +482,7 @@
        <!-- BCEL-336 refers to this specific version.  -->
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
-      <version>6.0</version>
+      <version>8.0.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
