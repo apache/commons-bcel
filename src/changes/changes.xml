@@ -63,11 +63,13 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.5.1" date="2020-MM-DD" description="TBD.">
+       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Improve test case coverage; fix Utility.encode bug #46.</action>
-      <action issue="BCEL-342" type="update" dev="ggregory" due-to="Allon Murienik, Gary Gregory">Migrate test suite to JUnit Jupiter #68.</action>
-      <action issue="BCEL-343" type="update" dev="ggregory" due-to="Allon Murienik, Gary Gregory">JUnit Assertion improvement #69.</action>
-      <action                  type="update" dev="ggregory" due-to="Mark Roberts">Minor improvements to comments and toString() methods #71.</action>
-      <action                  type="update" dev="ggregory" due-to="Arturo Bernal">Minor Improvements #83.</action>
+      <action issue="BCEL-342" type="fix" dev="ggregory" due-to="Allon Murienik, Gary Gregory">Migrate test suite to JUnit Jupiter #68.</action>
+      <action issue="BCEL-343" type="fix" dev="ggregory" due-to="Allon Murienik, Gary Gregory">JUnit Assertion improvement #69.</action>
+      <action                  type="fix" dev="ggregory" due-to="Mark Roberts">Minor improvements to comments and toString() methods #71.</action>
+      <action                  type="fix" dev="ggregory" due-to="Arturo Bernal">Minor Improvements #83.</action>
+      <!-- ADD -->
       <!-- UPDATES -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.10 to 3.12.0</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update commons-parent from 50 to 52.</action>
