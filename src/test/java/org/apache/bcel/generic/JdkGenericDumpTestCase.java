@@ -34,7 +34,6 @@ import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
@@ -51,10 +50,10 @@ import org.apache.bcel.util.ModularRuntimeImage;
 import org.apache.commons.lang3.JavaVersion;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
-
-import com.sun.jna.platform.win32.Advapi32Util;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import com.sun.jna.platform.win32.Advapi32Util;
 
 /**
  * Test that the generic dump() methods work on the JDK classes Reads each class into an instruction list and then dumps
@@ -168,7 +167,7 @@ public class JdkGenericDumpTestCase {
         if (StringUtils.isEmpty(path)) {
             return Stream.empty();
         }
-        return Arrays.stream(path.split(File.pathSeparator));
+        return Stream.of(path.split(File.pathSeparator));
     }
 
     private static Stream<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
