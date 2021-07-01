@@ -176,7 +176,7 @@ public class Verifier {
             }
         }
 
-        return messages.toArray(new String[messages.size()]);
+        return messages.toArray(new String[0]);
     }
 
 

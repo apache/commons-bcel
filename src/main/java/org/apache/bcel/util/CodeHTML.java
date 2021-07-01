@@ -50,7 +50,7 @@ final class CodeHTML {
     private BitSet gotoSet;
     private final ConstantPool constantPool;
     private final ConstantHTML constantHtml;
-    private static boolean wide = false;
+    private static boolean wide;
 
 
     CodeHTML(final String dir, final String class_name, final Method[] methods, final ConstantPool constant_pool,

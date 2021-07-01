@@ -63,13 +63,13 @@ public class ExecutionVisitor extends EmptyVisitor{
     /**
      * The executionframe we're operating on.
      */
-    private Frame frame = null;
+    private Frame frame;
 
     /**
      * The ConstantPoolGen we're working with.
      * @see #setConstantPoolGen(ConstantPoolGen)
      */
-    private ConstantPoolGen cpg = null;
+    private ConstantPoolGen cpg;
 
     /**
      * Constructor. Constructs a new instance of this class.

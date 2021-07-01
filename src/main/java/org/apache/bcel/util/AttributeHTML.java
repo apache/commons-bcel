@@ -47,7 +47,7 @@ final class AttributeHTML {
 
     private final String class_name; // name of current class
     private final PrintWriter file; // file to write to
-    private int attr_count = 0;
+    private int attr_count;
     private final ConstantHTML constant_html;
     private final ConstantPool constant_pool;
 
@@ -185,8 +185,8 @@ final class AttributeHTML {
                 // List inner classes
                 file.print("<UL>");
                 for (final InnerClass classe : classes) {
-                    String name;
-                    String access;
+                    final String name;
+                    final String access;
                     index = classe.getInnerNameIndex();
                     if (index > 0) {
                         name = ((ConstantUtf8) constant_pool.getConstant(index, Const.CONSTANT_Utf8))

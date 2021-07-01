@@ -45,9 +45,9 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class InstructionList implements Iterable<InstructionHandle> {
 
-    private InstructionHandle start = null;
-    private InstructionHandle end = null;
-    private int length = 0; // number of elements in list
+    private InstructionHandle start;
+    private InstructionHandle end;
+    private int length; // number of elements in list
     private int[] bytePositions; // byte code offsets corresponding to instructions
 
     /**
@@ -965,7 +965,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
         } catch (final IOException e) {
             throw new ClassGenException(e.toString(), e);
         }
-        return instructions.toArray(new Instruction[instructions.size()]);
+        return instructions.toArray(new Instruction[0]);
     }
 
     @Override

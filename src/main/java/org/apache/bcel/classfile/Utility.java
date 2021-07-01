@@ -69,7 +69,7 @@ public abstract class Utility {
      * following byte to form a
      * 16-bit value.
      */
-    private static boolean wide = false;
+    private static boolean wide;
 
 
     /**
@@ -591,7 +591,7 @@ public abstract class Utility {
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
             throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
-        return vec.toArray(new String[vec.size()]);
+        return vec.toArray(new String[0]);
     }
 
 
@@ -742,7 +742,7 @@ public abstract class Utility {
                 old_index = 0; // String start offset
                 // While we have something to replace
                 while ((index = str.indexOf(old, old_index)) != -1) {
-                    buf.append(str.substring(old_index, index)); // append prefix
+                    buf.append(str, old_index, index); // append prefix
                     buf.append(new_); // append replacement
                     old_index = index + old.length(); // Skip `old'.length chars
                 }

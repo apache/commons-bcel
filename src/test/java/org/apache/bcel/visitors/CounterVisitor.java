@@ -80,129 +80,129 @@ import org.apache.bcel.classfile.Visitor;
 public class CounterVisitor implements Visitor
 {
     // CHECKSTYLE:OFF (public mutable fields in test code)
-    public int unknownCount = 0;
+    public int unknownCount;
 
-    public int syntheticCount = 0;
+    public int syntheticCount;
 
-    public int stackMapEntryCount = 0;
+    public int stackMapEntryCount;
 
-    public int stackMapCount = 0;
+    public int stackMapCount;
 
-    public int sourceFileCount = 0;
+    public int sourceFileCount;
 
-    public int signatureAnnotationCount = 0;
+    public int signatureAnnotationCount;
 
-    public int parameterAnnotationCount = 0;
+    public int parameterAnnotationCount;
 
-    public int methodCount = 0;
+    public int methodCount;
 
-    public int localVariableTypeTableCount = 0;
+    public int localVariableTypeTableCount;
 
-    public int localVariableTableCount = 0;
+    public int localVariableTableCount;
 
-    public int localVariableCount = 0;
+    public int localVariableCount;
 
-    public int lineNumberTableCount = 0;
+    public int lineNumberTableCount;
 
-    public int lineNumberCount = 0;
+    public int lineNumberCount;
 
-    public int javaClassCount = 0;
+    public int javaClassCount;
 
-    public int innerClassesCount = 0;
+    public int innerClassesCount;
 
-    public int innerClassCount = 0;
+    public int innerClassCount;
 
-    public int fieldCount = 0;
+    public int fieldCount;
 
-    public int exceptionTableCount = 0;
+    public int exceptionTableCount;
 
-    public int enclosingMethodCount = 0;
+    public int enclosingMethodCount;
 
-    public int deprecatedCount = 0;
+    public int deprecatedCount;
 
-    public int constantValueCount = 0;
+    public int constantValueCount;
 
-    public int constantUtf8Count = 0;
+    public int constantUtf8Count;
 
-    public int constantStringCount = 0;
+    public int constantStringCount;
 
-    public int constantNameAndTypeCount = 0;
+    public int constantNameAndTypeCount;
 
-    public int constantPoolCount = 0;
+    public int constantPoolCount;
 
-    public int constantMethodrefCount = 0;
+    public int constantMethodrefCount;
 
-    public int constantLongCount = 0;
+    public int constantLongCount;
 
-    public int constantIntegerCount = 0;
+    public int constantIntegerCount;
 
-    public int constantInterfaceMethodrefCount = 0;
+    public int constantInterfaceMethodrefCount;
 
-    public int constantFloatCount = 0;
+    public int constantFloatCount;
 
-    public int constantFieldrefCount = 0;
+    public int constantFieldrefCount;
 
-    public int constantClassCount = 0;
+    public int constantClassCount;
 
-    public int constantDoubleCount = 0;
+    public int constantDoubleCount;
 
-    public int codeExceptionCount = 0;
+    public int codeExceptionCount;
 
-    public int codeCount = 0;
+    public int codeCount;
 
-    public int annotationEntryCount = 0;
+    public int annotationEntryCount;
 
-    public int annotationDefaultCount = 0;
+    public int annotationDefaultCount;
 
-    public int annotationCount = 0;
-
-    /** @since 6.0 */
-    public int bootstrapMethodsCount = 0;
+    public int annotationCount;
 
     /** @since 6.0 */
-    public int methodParameterCount = 0;
+    public int bootstrapMethodsCount;
 
     /** @since 6.0 */
-    public int methodParametersCount = 0;
+    public int methodParameterCount;
 
     /** @since 6.0 */
-    public int constantInvokeDynamic = 0;
+    public int methodParametersCount;
+
+    /** @since 6.0 */
+    public int constantInvokeDynamic;
 
     /** @since 6.1 */
-    public int constantModuleCount = 0;
+    public int constantModuleCount;
 
     /** @since 6.1 */
-    public int constantPackageCount = 0;
+    public int constantPackageCount;
 
     /** @since 6.3 */
-    public int constantDynamicCount = 0;
+    public int constantDynamicCount;
 
     /** @since 6.4.0 */
-    public int moduleCount = 0;
+    public int moduleCount;
 
     /** @since 6.4.0 */
-    public int moduleExportsCount = 0;
+    public int moduleExportsCount;
 
     /** @since 6.4.0 */
-    public int moduleOpensCount = 0;
+    public int moduleOpensCount;
 
     /** @since 6.4.0 */
-    public int moduleProvidesCount = 0;
+    public int moduleProvidesCount;
 
     /** @since 6.4.0 */
-    public int moduleRequiresCount = 0;
+    public int moduleRequiresCount;
 
     /** @since 6.4.0 */
-    public int moduleMainClassCount = 0;
+    public int moduleMainClassCount;
 
     /** @since 6.4.0 */
-    public int modulePackagesCount = 0;
+    public int modulePackagesCount;
 
     /** @since 6.4.0 */
-    public int nestHostCount = 0;
+    public int nestHostCount;
 
     /** @since 6.4.0 */
-    public int nestMembersCount = 0;
+    public int nestMembersCount;
     // CHECKSTYLE:ON
 
 

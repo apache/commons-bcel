@@ -53,7 +53,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class BCELBenchmark {
 
     private JarFile getJarFile() throws IOException {
-        String javaHome = System.getProperty("java.home");
+        final String javaHome = System.getProperty("java.home");
         return new JarFile(javaHome + "/lib/rt.jar");
     }
 

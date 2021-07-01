@@ -117,7 +117,7 @@ public class AnnotationEntry implements Node {
      */
     public ElementValuePair[] getElementValuePairs() {
         // TODO return List
-        return elementValuePairs.toArray(new ElementValuePair[elementValuePairs.size()]);
+        return elementValuePairs.toArray(new ElementValuePair[0]);
     }
 
     public void dump(final DataOutputStream dos) throws IOException {
@@ -165,6 +165,6 @@ public class AnnotationEntry implements Node {
                 Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getAnnotationEntries());
             }
         }
-        return accumulatedAnnotations.toArray(new AnnotationEntry[accumulatedAnnotations.size()]);
+        return accumulatedAnnotations.toArray(new AnnotationEntry[0]);
     }
 }
