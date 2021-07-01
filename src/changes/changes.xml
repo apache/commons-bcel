@@ -67,6 +67,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-342" type="update" dev="ggregory" due-to="Allon Murienik, Gary Gregory">Migrate test suite to JUnit Jupiter #68.</action>
       <action issue="BCEL-343" type="update" dev="ggregory" due-to="Allon Murienik, Gary Gregory">JUnit Assertion improvement #69.</action>
       <action                  type="update" dev="ggregory" due-to="Mark Roberts">Minor improvements to comments and toString() methods #71.</action>
+      <action                  type="update" dev="ggregory" due-to="Arturo Bernal">Minor Improvements #83.</action>
       <!-- UPDATES -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.10 to 3.12.0</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update commons-parent from 50 to 52.</action>
