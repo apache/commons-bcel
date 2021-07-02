@@ -18,6 +18,7 @@
 package org.apache.bcel.generic;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.List;
 import java.util.Stack;
@@ -366,7 +367,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
         }
         if (size > 1) {
-            Arrays.sort(lg, (o1, o2) -> o1.getIndex() - o2.getIndex());
+            Arrays.sort(lg, Comparator.comparingInt(LocalVariableGen::getIndex));
         }
         return lg;
     }

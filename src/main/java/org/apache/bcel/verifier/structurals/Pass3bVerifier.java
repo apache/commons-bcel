@@ -172,10 +172,10 @@ public final class Pass3bVerifier extends PassVerifier{
         final Random random = new Random();
         final InstructionContextQueue icq = new InstructionContextQueue();
 
-        start.execute(vanillaFrame, new ArrayList<InstructionContext>(), icv, ev);
+        start.execute(vanillaFrame, new ArrayList<>(), icv, ev);
         // new ArrayList() <=>    no Instruction was executed before
         //                                    => Top-Level routine (no jsr call before)
-        icq.add(start, new ArrayList<InstructionContext>());
+        icq.add(start, new ArrayList<>());
 
         // LOOP!
         while (!icq.isEmpty()) {
@@ -278,8 +278,8 @@ public final class Pass3bVerifier extends PassVerifier{
                 if (v.execute(new Frame(u.getOutFrame(oldchain).getLocals(),
                         new OperandStack (u.getOutFrame(oldchain).getStack().maxStack(),
                         exc_hd.getExceptionType()==null? Type.THROWABLE : exc_hd.getExceptionType())),
-                        new ArrayList<InstructionContext>(), icv, ev)) {
-                    icq.add(v, new ArrayList<InstructionContext>());
+                        new ArrayList<>(), icv, ev)) {
+                    icq.add(v, new ArrayList<>());
                 }
             }
 
@@ -291,7 +291,7 @@ public final class Pass3bVerifier extends PassVerifier{
                 final InstructionContext ic = cfg.contextOf(ih);
                 // TODO: This is buggy, we check only the top-level return instructions this way.
                 // Maybe some maniac returns from a method when in a subroutine?
-                final Frame f = ic.getOutFrame(new ArrayList<InstructionContext>());
+                final Frame f = ic.getOutFrame(new ArrayList<>());
                 final LocalVariables lvs = f.getLocals();
                 for (int i=0; i<lvs.maxLocals(); i++) {
                     if (lvs.get(i) instanceof UninitializedObjectType) {
