@@ -137,8 +137,7 @@ public class OperandStack implements Cloneable {
      * Returns the element on top of the stack. The element is popped off the stack.
      */
     public Type pop() {
-        final Type e = stack.remove(size()-1);
-        return e;
+        return stack.remove(size()-1);
     }
 
     /**
