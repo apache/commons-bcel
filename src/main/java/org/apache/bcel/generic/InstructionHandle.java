@@ -102,7 +102,7 @@ public class InstructionHandle {
         if (i == null) {
             throw new ClassGenException("Assigning null to handle");
         }
-        if ((this.getClass() != BranchHandle.class) && (i instanceof BranchInstruction)) {
+        if (this.getClass() != BranchHandle.class && i instanceof BranchInstruction) {
             throw new ClassGenException("Assigning branch instruction " + i + " to plain handle");
         }
         if (instruction != null) {
@@ -219,7 +219,7 @@ public class InstructionHandle {
 
 
     public boolean hasTargeters() {
-        return (targeters != null) && (!targeters.isEmpty());
+        return targeters != null && !targeters.isEmpty();
     }
 
 

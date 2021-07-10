@@ -70,7 +70,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     public CodeException getCodeException( final ConstantPoolGen cp ) {
         return new CodeException(startPc.getPosition(), endPc.getPosition()
                 + endPc.getInstruction().getLength(), handlerPc.getPosition(),
-                (catchType == null) ? 0 : cp.addClass(catchType));
+                catchType == null ? 0 : cp.addClass(catchType));
     }
 
 
@@ -132,7 +132,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
      */
     @Override
     public boolean containsTarget( final InstructionHandle ih ) {
-        return (startPc == ih) || (endPc == ih) || (handlerPc == ih);
+        return startPc == ih || endPc == ih || handlerPc == ih;
     }
 
 

@@ -252,7 +252,7 @@ public class InstructionFactory implements InstructionConstants {
 
 
     private static boolean isString( final Type type ) {
-        return (type instanceof ObjectType) &&
+        return type instanceof ObjectType &&
               ((ObjectType) type).getClassName().equals("java.lang.String");
     }
 
@@ -463,7 +463,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createPop( final int size ) {
-        return (size == 2) ? InstructionConst.POP2 : InstructionConst.POP;
+        return size == 2 ? InstructionConst.POP2 : InstructionConst.POP;
     }
 
 
@@ -471,7 +471,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup( final int size ) {
-        return (size == 2) ? InstructionConst.DUP2 : InstructionConst.DUP;
+        return size == 2 ? InstructionConst.DUP2 : InstructionConst.DUP;
     }
 
 
@@ -479,7 +479,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup_2( final int size ) {
-        return (size == 2) ? InstructionConst.DUP2_X2 : InstructionConst.DUP_X2;
+        return size == 2 ? InstructionConst.DUP2_X2 : InstructionConst.DUP_X2;
     }
 
 
@@ -487,7 +487,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param size size of operand, either 1 (int, e.g.) or 2 (double)
      */
     public static StackInstruction createDup_1( final int size ) {
-        return (size == 2) ? InstructionConst.DUP2_X1 : InstructionConst.DUP_X1;
+        return size == 2 ? InstructionConst.DUP2_X1 : InstructionConst.DUP_X1;
     }
 
 
@@ -605,7 +605,7 @@ public class InstructionFactory implements InstructionConstants {
      * if the operands are basic types and CHECKCAST if they are reference types.
      */
     public Instruction createCast( final Type src_type, final Type dest_type ) {
-        if ((src_type instanceof BasicType) && (dest_type instanceof BasicType)) {
+        if (src_type instanceof BasicType && dest_type instanceof BasicType) {
             final byte dest = dest_type.getType();
             byte src = src_type.getType();
             if (dest == Const.T_LONG

@@ -58,7 +58,7 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
         if (t instanceof ArrayType) {
             t = ((ArrayType) t).getBasicType();
         }
-        return (t instanceof ObjectType) ? (ObjectType) t : null;
+        return t instanceof ObjectType ? (ObjectType) t : null;
     }
 
 

@@ -91,7 +91,7 @@ public abstract class Type {
     public boolean equals(final Object o) {
           if (o instanceof Type) {
               final Type t = (Type)o;
-              return (type == t.type) && signature.equals(t.signature);
+              return type == t.type && signature.equals(t.signature);
           }
           return false;
     }
@@ -146,7 +146,7 @@ public abstract class Type {
      */
     @Override
     public String toString() {
-        return ((this.equals(Type.NULL) || (type >= Const.T_UNKNOWN))) ? signature : Utility
+        return this.equals(Type.NULL) || type >= Const.T_UNKNOWN ? signature : Utility
                 .signatureToString(signature, false);
     }
 

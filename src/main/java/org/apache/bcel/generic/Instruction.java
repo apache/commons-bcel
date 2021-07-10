@@ -466,7 +466,7 @@ public abstract class Instruction implements Cloneable {
         }
 
         if (wide
-                && !((obj instanceof LocalVariableInstruction) || (obj instanceof IINC) || (obj instanceof RET))) {
+                && !(obj instanceof LocalVariableInstruction || obj instanceof IINC || obj instanceof RET)) {
             throw new ClassGenException("Illegal opcode after wide: " + opcode);
         }
         obj.setOpcode(opcode);

@@ -73,6 +73,6 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
         if (t instanceof ArrayType) {
             t = ((ArrayType) t).getBasicType();
         }
-        return (t instanceof ObjectType) ? (ObjectType) t : null;
+        return t instanceof ObjectType ? (ObjectType) t : null;
     }
 }

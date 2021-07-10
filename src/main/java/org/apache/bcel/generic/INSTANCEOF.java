@@ -52,7 +52,7 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
         if (t instanceof ArrayType) {
             t = ((ArrayType) t).getBasicType();
         }
-        return (t instanceof ObjectType) ? (ObjectType) t : null;
+        return t instanceof ObjectType ? (ObjectType) t : null;
     }
 
 

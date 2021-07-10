@@ -52,7 +52,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      */
     public LocalVariableGen(final int index, final String name, final Type type, final InstructionHandle start,
             final InstructionHandle end) {
-        if ((index < 0) || (index > Const.MAX_SHORT)) {
+        if (index < 0 || index > Const.MAX_SHORT) {
             throw new ClassGenException("Invalid index index: " + index);
         }
         this.name = name;
@@ -100,10 +100,10 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     public LocalVariable getLocalVariable( final ConstantPoolGen cp ) {
         int start_pc = 0;
         int length = 0;
-        if ((start != null) && (end != null)) {
+        if (start != null && end != null) {
             start_pc = start.getPosition();
             length = end.getPosition() - start_pc;
-            if ((end.getNext() == null) && liveToEnd) {
+            if (end.getNext() == null && liveToEnd) {
                 length += end.getInstruction().getLength();
             }
         }
@@ -219,7 +219,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      */
     @Override
     public boolean containsTarget( final InstructionHandle ih ) {
-        return (start == ih) || (end == ih);
+        return start == ih || end == ih;
     }
 
 
@@ -241,7 +241,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
             return false;
         }
         final LocalVariableGen l = (LocalVariableGen) o;
-        return (l.index == index) && (l.start == start) && (l.end == end);
+        return l.index == index && l.start == start && l.end == end;
     }
 
 

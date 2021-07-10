@@ -101,7 +101,7 @@ public class VerificationResult {
             return false;
         }
         final VerificationResult other = (VerificationResult) o;
-        return (other.numeric == this.numeric) && other.detailMessage.equals(this.detailMessage);
+        return other.numeric == this.numeric && other.detailMessage.equals(this.detailMessage);
     }
 
 

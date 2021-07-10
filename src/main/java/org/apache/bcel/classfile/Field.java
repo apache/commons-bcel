@@ -128,7 +128,7 @@ public final class Field extends FieldOrMethod {
 
         // Get names from constant pool
         access = Utility.accessToString(super.getAccessFlags());
-        access = access.isEmpty() ? "" : (access + " ");
+        access = access.isEmpty() ? "" : access + " ";
         signature = Utility.signatureToString(getSignature());
         name = getName();
         final StringBuilder buf = new StringBuilder(64); // CHECKSTYLE IGNORE MagicNumber

@@ -151,23 +151,23 @@ public class LocalVariables implements Cloneable {
 
         // We won't accept an unitialized object if we know it was initialized;
         // compare vmspec2, 4.9.4, last paragraph.
-        if ( (!(locals[i] instanceof UninitializedObjectType)) && (lv.locals[i] instanceof UninitializedObjectType) ) {
+        if ( !(locals[i] instanceof UninitializedObjectType) && lv.locals[i] instanceof UninitializedObjectType ) {
             throw new StructuralCodeConstraintException(
                 "Backwards branch with an uninitialized object in the local variables detected.");
         }
         // Even harder, what about _different_ uninitialized object types?!
-        if ( (!(locals[i].equals(lv.locals[i]))) && (locals[i] instanceof UninitializedObjectType) &&
-                (lv.locals[i] instanceof UninitializedObjectType) ) {
+        if ( !locals[i].equals(lv.locals[i]) && locals[i] instanceof UninitializedObjectType &&
+                lv.locals[i] instanceof UninitializedObjectType ) {
             throw new StructuralCodeConstraintException(
                 "Backwards branch with an uninitialized object in the local variables detected.");
         }
         // If we just didn't know that it was initialized, we have now learned.
-        if ((locals[i] instanceof UninitializedObjectType) && !(lv.locals[i] instanceof UninitializedObjectType)) {
+        if (locals[i] instanceof UninitializedObjectType && !(lv.locals[i] instanceof UninitializedObjectType)) {
             locals[i] = ((UninitializedObjectType) locals[i]).getInitialized();
         }
-        if ((locals[i] instanceof ReferenceType) && (lv.locals[i] instanceof ReferenceType)) {
+        if (locals[i] instanceof ReferenceType && lv.locals[i] instanceof ReferenceType) {
             if (! locals[i].equals(lv.locals[i])) { // needed in case of two UninitializedObjectType instances
-                final Type sup = ((ReferenceType) locals[i]).getFirstCommonSuperclass((ReferenceType) (lv.locals[i]));
+                final Type sup = ((ReferenceType) locals[i]).getFirstCommonSuperclass((ReferenceType) lv.locals[i]);
 
                 if (sup == null) {
                     // We should have checked this in Pass2!
@@ -178,7 +178,7 @@ public class LocalVariables implements Cloneable {
             }
         }
         else{
-            if (! (locals[i].equals(lv.locals[i])) ) {
+            if (! locals[i].equals(lv.locals[i]) ) {
 /*TODO
                 if ((locals[i] instanceof org.apache.bcel.generic.ReturnaddressType) &&
                     (lv.locals[i] instanceof org.apache.bcel.generic.ReturnaddressType)) {

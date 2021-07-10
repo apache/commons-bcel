@@ -124,7 +124,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
         final short old_length = (short) super.getLength();
         /* Alignment on 4-byte-boundary, + 1, because of tag byte.
          */
-        padding = (4 - ((getPosition() + 1) % 4)) % 4;
+        padding = (4 - (getPosition() + 1) % 4) % 4;
         super.setLength((short) (fixed_length + padding)); // Update length
         return super.getLength() - old_length;
     }
@@ -150,7 +150,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      */
     @Override
     protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
-        padding = (4 - (bytes.getIndex() % 4)) % 4; // Compute number of pad bytes
+        padding = (4 - bytes.getIndex() % 4) % 4; // Compute number of pad bytes
         for (int i = 0; i < padding; i++) {
             bytes.readByte();
         }

@@ -102,11 +102,11 @@ public class LocalVariableInfo{
      *         with already gathered information.
      */
     private void add(final int offset, final String name, final Type t) throws LocalVariableInfoInconsistentException {
-        if ((getName(offset) != null) && !getName(offset).equals(name)) {
+        if (getName(offset) != null && !getName(offset).equals(name)) {
             throw new LocalVariableInfoInconsistentException("At bytecode offset '" + offset
                     + "' a local variable has two different names: '" + getName(offset) + "' and '" + name + "'.");
         }
-        if ((getType(offset) != null) && !getType(offset).equals(t)) {
+        if (getType(offset) != null && !getType(offset).equals(t)) {
             throw new LocalVariableInfoInconsistentException("At bytecode offset '" + offset
                     + "' a local variable has two different types: '" + getType(offset) + "' and '" + t + "'.");
         }

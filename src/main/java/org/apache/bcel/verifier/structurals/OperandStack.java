@@ -218,7 +218,7 @@ public class OperandStack implements Cloneable {
      */
     public void merge(final OperandStack s) {
         try {
-        if ( (slotsUsed() != s.slotsUsed()) || (size() != s.size()) ) {
+        if ( slotsUsed() != s.slotsUsed() || size() != s.size() ) {
             throw new StructuralCodeConstraintException(
                 "Cannot merge stacks of different size:\nOperandStack A:\n"+this+"\nOperandStack B:\n"+s);
         }
@@ -226,25 +226,25 @@ public class OperandStack implements Cloneable {
         for (int i=0; i<size(); i++) {
             // If the object _was_ initialized and we're supposed to merge
             // in some uninitialized object, we reject the code (see vmspec2, 4.9.4, last paragraph).
-            if ( (! (stack.get(i) instanceof UninitializedObjectType)) && (s.stack.get(i) instanceof UninitializedObjectType) ) {
+            if ( ! (stack.get(i) instanceof UninitializedObjectType) && s.stack.get(i) instanceof UninitializedObjectType ) {
                 throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object on the stack detected.");
             }
             // Even harder, we're not initialized but are supposed to broaden
             // the known object type
-            if ( (!(stack.get(i).equals(s.stack.get(i)))) &&
-                    (stack.get(i) instanceof UninitializedObjectType) && (!(s.stack.get(i) instanceof UninitializedObjectType))) {
+            if ( !stack.get(i).equals(s.stack.get(i)) &&
+                    stack.get(i) instanceof UninitializedObjectType && !(s.stack.get(i) instanceof UninitializedObjectType)) {
                 throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object on the stack detected.");
             }
             // on the other hand...
-            if ((stack.get(i) instanceof UninitializedObjectType) && !(s.stack.get(i) instanceof UninitializedObjectType)) { //that has been initialized by now
-                stack.set(i, ((UninitializedObjectType) (stack.get(i))).getInitialized() ); //note that.
+            if (stack.get(i) instanceof UninitializedObjectType && !(s.stack.get(i) instanceof UninitializedObjectType)) { //that has been initialized by now
+                stack.set(i, ((UninitializedObjectType) stack.get(i)).getInitialized() ); //note that.
             }
             if (! stack.get(i).equals(s.stack.get(i))) {
                 if (!(stack.get(i) instanceof ReferenceType) || !(s.stack.get(i) instanceof ReferenceType)  ) {
                     throw new StructuralCodeConstraintException(
                         "Cannot merge stacks of different types:\nStack A:\n"+this+"\nStack B:\n"+s);
                 }
-                stack.set(i, ((ReferenceType) stack.get(i)).getFirstCommonSuperclass((ReferenceType) (s.stack.get(i))));
+                stack.set(i, ((ReferenceType) stack.get(i)).getFirstCommonSuperclass((ReferenceType) s.stack.get(i)));
             }
         }
         } catch (final ClassNotFoundException e) {

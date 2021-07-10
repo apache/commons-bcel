@@ -38,7 +38,7 @@ public class ICONST extends Instruction implements ConstantPushInstruction {
 
     public ICONST(final int i) {
         super(org.apache.bcel.Const.ICONST_0, (short) 1);
-        if ((i < -1) || (i > 5)) {
+        if (i < -1 || i > 5) {
             throw new ClassGenException("ICONST can be used only for value between -1 and 5: " + i);
         }
         super.setOpcode((short) (org.apache.bcel.Const.ICONST_0 + i)); // Even works for i == -1

@@ -78,7 +78,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     @Override
     public int consumeStack( final ConstantPoolGen cpg ) {
         int sum;
-        if ((super.getOpcode() == Const.INVOKESTATIC) || (super.getOpcode() == Const.INVOKEDYNAMIC)) {
+        if (super.getOpcode() == Const.INVOKESTATIC || super.getOpcode() == Const.INVOKEDYNAMIC) {
             sum = 0;
         } else {
             sum = 1; // this reference

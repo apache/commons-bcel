@@ -432,7 +432,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      */
     public Method getMethod( final java.lang.reflect.Method m ) {
         for (final Method method : methods) {
-            if (m.getName().equals(method.getName()) && (m.getModifiers() == method.getModifiers())
+            if (m.getName().equals(method.getName()) && m.getModifiers() == method.getModifiers()
                     && Type.getSignature(m).equals(method.getSignature())) {
                 return method;
             }
@@ -594,7 +594,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     @Override
     public String toString() {
         String access = Utility.accessToString(super.getAccessFlags(), true);
-        access = access.isEmpty() ? "" : (access + " ");
+        access = access.isEmpty() ? "" : access + " ";
         final StringBuilder buf = new StringBuilder(128);
         buf.append(access).append(Utility.classOrInterface(super.getAccessFlags())).append(" ").append(
                 className).append(" extends ").append(

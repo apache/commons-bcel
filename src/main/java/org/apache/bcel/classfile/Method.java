@@ -183,7 +183,7 @@ public final class Method extends FieldOrMethod {
                 getLocalVariableTable());
         final StringBuilder buf = new StringBuilder(signature);
         for (final Attribute attribute : super.getAttributes()) {
-            if (!((attribute instanceof Code) || (attribute instanceof ExceptionTable))) {
+            if (!(attribute instanceof Code || attribute instanceof ExceptionTable)) {
                 buf.append(" [").append(attribute).append("]");
             }
         }

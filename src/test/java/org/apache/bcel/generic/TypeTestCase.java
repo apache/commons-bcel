@@ -29,7 +29,7 @@ public class TypeTestCase {
         // the constructor for ObjectType is yet another place where BCEL does
         // not understand generics so we need to substitute the modified value below.
         final String expectedValue = "Ljava/util/Map<X, java/util/List<Y>>;";
-        final String actualValue = (Type.getType("Ljava/util/Map<TX;Ljava/util/List<TY;>;>;")).getSignature();
+        final String actualValue = Type.getType("Ljava/util/Map<TX;Ljava/util/List<TY;>;>;").getSignature();
         assertEquals(expectedValue, actualValue, "Type.getType");
     }
 

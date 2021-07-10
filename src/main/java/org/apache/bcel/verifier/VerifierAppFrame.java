@@ -282,7 +282,7 @@ public class VerifierAppFrame extends JFrame {
     void newFileMenuItem_actionPerformed( final ActionEvent e ) {
         final String classname = JOptionPane
                 .showInputDialog("Please enter the fully qualified name of a class or interface to verify:");
-        if ((classname == null) || (classname.isEmpty())) {
+        if (classname == null || classname.isEmpty()) {
             return;
         }
         VerifierFactory.getVerifier(classname); // let observers do the rest.
@@ -317,7 +317,7 @@ public class VerifierAppFrame extends JFrame {
             }
         }
         pass3aTextPane.setText(all3amsg.toString());
-        pass3aTextPane.setBackground(all3aok ? Color.green : (rejected ? Color.red : Color.yellow));
+        pass3aTextPane.setBackground(all3aok ? Color.green : rejected ? Color.red : Color.yellow);
     }
 
 
@@ -348,7 +348,7 @@ public class VerifierAppFrame extends JFrame {
             }
         }
         pass3bTextPane.setText(all3bmsg.toString());
-        pass3bTextPane.setBackground(all3bok ? Color.green : (rejected ? Color.red : Color.yellow));
+        pass3bTextPane.setBackground(all3bok ? Color.green : rejected ? Color.red : Color.yellow);
     }
 
 

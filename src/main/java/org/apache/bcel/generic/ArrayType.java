@@ -56,7 +56,7 @@ public final class ArrayType extends ReferenceType {
      */
     public ArrayType(final Type type, final int dimensions) {
         super(Const.T_ARRAY, "<dummy>");
-        if ((dimensions < 1) || (dimensions > Const.MAX_BYTE)) {
+        if (dimensions < 1 || dimensions > Const.MAX_BYTE) {
             throw new ClassGenException("Invalid number of dimensions: " + dimensions);
         }
         switch (type.getType()) {
@@ -121,7 +121,7 @@ public final class ArrayType extends ReferenceType {
     public boolean equals( final Object _type ) {
         if (_type instanceof ArrayType) {
             final ArrayType array = (ArrayType) _type;
-            return (array.dimensions == dimensions) && array.basicType.equals(basicType);
+            return array.dimensions == dimensions && array.basicType.equals(basicType);
         }
         return false;
     }

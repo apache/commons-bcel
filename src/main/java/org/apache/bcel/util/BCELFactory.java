@@ -108,7 +108,7 @@ class BCELFactory extends EmptyVisitor {
 
     private boolean visitInstruction( final Instruction i ) {
         final short opcode = i.getOpcode();
-        if ((InstructionConst.getInstruction(opcode) != null)
+        if (InstructionConst.getInstruction(opcode) != null
                 && !(i instanceof ConstantPushInstruction) && !(i instanceof ReturnInstruction)) { // Handled below
             _out.println("il.append(InstructionConst."
                     + i.getName().toUpperCase(Locale.ENGLISH) + ");");
@@ -126,7 +126,7 @@ class BCELFactory extends EmptyVisitor {
             _out.println("il.append(new IINC(" + i.getIndex() + ", " + ((IINC) i).getIncrement()
                     + "));");
         } else {
-            final String kind = (opcode < Const.ISTORE) ? "Load" : "Store";
+            final String kind = opcode < Const.ISTORE ? "Load" : "Store";
             _out.println("il.append(_factory.create" + kind + "(" + BCELifier.printType(type)
                     + ", " + i.getIndex() + "));");
         }
@@ -137,7 +137,7 @@ class BCELFactory extends EmptyVisitor {
     public void visitArrayInstruction( final ArrayInstruction i ) {
         final short opcode = i.getOpcode();
         final Type type = i.getType(_cp);
-        final String kind = (opcode < Const.IASTORE) ? "Load" : "Store";
+        final String kind = opcode < Const.IASTORE ? "Load" : "Store";
         _out.println("il.append(_factory.createArray" + kind + "(" + BCELifier.printType(type)
                 + "));");
     }
@@ -336,7 +336,7 @@ class BCELFactory extends EmptyVisitor {
     private void updateExceptionHandlers() {
         final CodeExceptionGen[] handlers = _mg.getExceptionHandlers();
         for (final CodeExceptionGen h : handlers) {
-            final String type = (h.getCatchType() == null) ? "null" : BCELifier.printType(h
+            final String type = h.getCatchType() == null ? "null" : BCELifier.printType(h
                     .getCatchType());
             _out.println("    method.addExceptionHandler(" + "ih_" + h.getStartPC().getPosition()
                     + ", " + "ih_" + h.getEndPC().getPosition() + ", " + "ih_"

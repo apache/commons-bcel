@@ -184,7 +184,7 @@ public final class Signature extends Attribute {
             buf2.append((char) ch);
             ch = in.read();
             //System.out.println("within ident:"+ (char)ch);
-        } while ((ch != -1) && (Character.isJavaIdentifierPart((char) ch) || (ch == '/')));
+        } while (ch != -1 && (Character.isJavaIdentifierPart((char) ch) || ch == '/'));
         buf.append(buf2.toString().replace('/', '.'));
         //System.out.println("regular return ident:"+ (char)ch + ":" + buf2);
         if (ch != -1) {
@@ -197,11 +197,11 @@ public final class Signature extends Attribute {
         int ch;
         matchIdent(in, buf);
         ch = in.read();
-        if ((ch == '<') || ch == '(') { // Parameterized or method
+        if (ch == '<' || ch == '(') { // Parameterized or method
             //System.out.println("Enter <");
             buf.append((char) ch);
             matchGJIdent(in, buf);
-            while (((ch = in.read()) != '>') && (ch != ')')) { // List of parameters
+            while ((ch = in.read()) != '>' && ch != ')') { // List of parameters
                 if (ch == -1) {
                     throw new IllegalArgumentException("Illegal signature: " + in.getData()
                             + " reaching EOF");
@@ -238,7 +238,7 @@ public final class Signature extends Attribute {
 
     // @since 6.0 is no longer final
     public static boolean isFormalParameterList( final String s ) {
-        return s.startsWith("<") && (s.indexOf(':') > 0);
+        return s.startsWith("<") && s.indexOf(':') > 0;
     }
 
 

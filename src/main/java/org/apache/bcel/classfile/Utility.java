@@ -106,7 +106,7 @@ public abstract class Utility {
                  * because SUN used the same value for the flags `ACC_SUPER' and
                  * `ACC_SYNCHRONIZED'.
                  */
-                if (for_class && ((p == Const.ACC_SUPER) || (p == Const.ACC_INTERFACE))) {
+                if (for_class && (p == Const.ACC_SUPER || p == Const.ACC_INTERFACE)) {
                     continue;
                 }
                 buf.append(Const.getAccessName(i)).append(" ");
@@ -122,7 +122,7 @@ public abstract class Utility {
      * @return "class" or "interface", depending on the ACC_INTERFACE flag
      */
     public static String classOrInterface( final int access_flags ) {
-        return ((access_flags & Const.ACC_INTERFACE) != 0) ? "interface" : "class";
+        return (access_flags & Const.ACC_INTERFACE) != 0 ? "interface" : "class";
     }
 
 
@@ -148,7 +148,7 @@ public abstract class Utility {
                 codeToString(stream, constant_pool, verbose);
             }
             for (int i = 0; stream.available() > 0; i++) {
-                if ((length < 0) || (i < length)) {
+                if (length < 0 || i < length) {
                     final String indices = fillup(stream.getIndex() + ":", 6, true, ' ');
                     buf.append(indices).append(codeToString(stream, constant_pool, verbose)).append('\n');
                 }
@@ -194,9 +194,9 @@ public abstract class Utility {
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned
          */
-        if ((opcode == Const.TABLESWITCH) || (opcode == Const.LOOKUPSWITCH)) {
+        if (opcode == Const.TABLESWITCH || opcode == Const.LOOKUPSWITCH) {
             final int remainder = bytes.getIndex() % 4;
-            no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
+            no_pad_bytes = remainder == 0 ? 0 : 4 - remainder;
             for (int i = 0; i < no_pad_bytes; i++) {
                 byte b;
                 if ((b = bytes.readByte()) != 0) {
@@ -269,13 +269,13 @@ public abstract class Utility {
             case Const.IF_ICMPLE:
             case Const.IF_ICMPLT:
             case Const.IF_ICMPNE:
-                buf.append("\t\t#").append((bytes.getIndex() - 1) + bytes.readShort());
+                buf.append("\t\t#").append(bytes.getIndex() - 1 + bytes.readShort());
                 break;
             /* 32-bit wide jumps
              */
             case Const.GOTO_W:
             case Const.JSR_W:
-                buf.append("\t\t#").append((bytes.getIndex() - 1) + bytes.readInt());
+                buf.append("\t\t#").append(bytes.getIndex() - 1 + bytes.readInt());
                 break;
             /* Index byte references local variable (register)
              */
@@ -491,7 +491,7 @@ public abstract class Utility {
         final int len = prefix.length();
         str = str.replace('/', '.'); // Is `/' on all systems, even DOS
         // If string starts with `prefix' and contains no further dots
-        if (chopit && (str.startsWith(prefix) && (str.substring(len).indexOf('.') == -1))) {
+        if (chopit && str.startsWith(prefix) && str.substring(len).indexOf('.') == -1) {
             str = str.substring(len);
         }
         return str;
@@ -715,7 +715,7 @@ public abstract class Utility {
             buf.setLength(buf.length() - 2);
         }
         buf.append(")");
-        return access + ((!access.isEmpty()) ? " " : "") + // May be an empty string
+        return access + (!access.isEmpty() ? " " : "") + // May be an empty string
                 type + " " + name + buf.toString();
     }
 
@@ -829,7 +829,7 @@ public abstract class Utility {
         // Could be Class or Type...
         type = typeSignatureToString(signature.substring(index), chopit);
         index += unwrap(CONSUMER_CHARS); // update position
-        if ((typeParams.isEmpty()) && (index == signature.length())) {
+        if (typeParams.isEmpty() && index == signature.length()) {
             // We have a Type signature.
             return type;
         }
@@ -1159,7 +1159,7 @@ public abstract class Utility {
             buf.append('[');
         }
         boolean found = false;
-        for (int i = Const.T_BOOLEAN; (i <= Const.T_VOID) && !found; i++) {
+        for (int i = Const.T_BOOLEAN; i <= Const.T_VOID && !found; i++) {
             if (Const.getTypeName(i).equals(type)) {
                 found = true;
                 buf.append(Const.getShortTypeName(i));
@@ -1292,7 +1292,7 @@ public abstract class Utility {
      * values become positive.
      */
     private static short byteToShort( final byte b ) {
-        return (b < 0) ? (short) (256 + b) : (short) b;
+        return b < 0 ? (short) (256 + b) : (short) b;
     }
 
 
@@ -1345,7 +1345,7 @@ public abstract class Utility {
      */
     public static String fillup( final String str, final int length, final boolean left_justify, final char fill ) {
         final int len = length - str.length();
-        final char[] buf = new char[(len < 0) ? 0 : len];
+        final char[] buf = new char[len < 0 ? 0 : len];
         Arrays.fill(buf, fill);
         if (left_justify) {
             return str + new String(buf);
@@ -1419,8 +1419,8 @@ public abstract class Utility {
      * @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _)
      */
     public static boolean isJavaIdentifierPart( final char ch ) {
-        return ((ch >= 'a') && (ch <= 'z')) || ((ch >= 'A') && (ch <= 'Z'))
-                || ((ch >= '0') && (ch <= '9')) || (ch == '_');
+        return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z'
+                || ch >= '0' && ch <= '9' || ch == '_';
     }
 
 
@@ -1541,7 +1541,7 @@ public abstract class Utility {
             if (i < 0) {
                 return -1;
             }
-            if (((i >= '0') && (i <= '9')) || ((i >= 'a') && (i <= 'f'))) { // Normal escape
+            if (i >= '0' && i <= '9' || i >= 'a' && i <= 'f') { // Normal escape
                 final int j = in.read();
                 if (j < 0) {
                     return -1;
@@ -1578,7 +1578,7 @@ public abstract class Utility {
 
         @Override
         public void write( final int b ) throws IOException {
-            if (isJavaIdentifierPart((char) b) && (b != ESCAPE_CHAR)) {
+            if (isJavaIdentifierPart((char) b) && b != ESCAPE_CHAR) {
                 out.write(b);
             } else {
                 out.write(ESCAPE_CHAR); // Escape character

@@ -104,7 +104,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         _out.println();
         _out.println("  public " + class_name + "Creator() {");
         _out.println("    _cg = new ClassGen(\""
-                + (("".equals(package_name)) ? class_name : package_name + "." + class_name)
+                + ("".equals(package_name) ? class_name : package_name + "." + class_name)
                 + "\", \"" + super_name + "\", " + "\"" + clazz.getSourceFileName() + "\", "
                 + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", "
                 + "new String[] { " + inter + " });");
@@ -215,11 +215,11 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         final StringBuilder buf = new StringBuilder();
         for (int i = 0, pow = 1; pow <= Const.MAX_ACC_FLAG_I; i++) {
             if ((flags & pow) != 0) {
-                if ((pow == Const.ACC_SYNCHRONIZED) && (location == FLAGS.CLASS)) {
+                if (pow == Const.ACC_SYNCHRONIZED && location == FLAGS.CLASS) {
                     buf.append(CONSTANT_PREFIX).append("ACC_SUPER | ");
-                } else if ((pow == Const.ACC_VOLATILE) && (location == FLAGS.METHOD)) {
+                } else if (pow == Const.ACC_VOLATILE && location == FLAGS.METHOD) {
                     buf.append(CONSTANT_PREFIX).append("ACC_BRIDGE | ");
-                } else if ((pow == Const.ACC_TRANSIENT) && (location == FLAGS.METHOD)) {
+                } else if (pow == Const.ACC_TRANSIENT && location == FLAGS.METHOD) {
                     buf.append(CONSTANT_PREFIX).append("ACC_VARARGS | ");
                 } else {
                     if (i < Const.ACCESS_NAMES_LENGTH) {

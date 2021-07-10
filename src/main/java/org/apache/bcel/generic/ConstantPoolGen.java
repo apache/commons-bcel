@@ -243,7 +243,7 @@ public class ConstantPoolGen {
      */
     public int lookupString( final String str ) {
         final Index index = stringTable.get(str);
-        return (index != null) ? index.index : -1;
+        return index != null ? index.index : -1;
     }
 
 
@@ -280,7 +280,7 @@ public class ConstantPoolGen {
      */
     public int lookupClass( final String str ) {
         final Index index = classTable.get(str.replace('.', '/'));
-        return (index != null) ? index.index : -1;
+        return index != null ? index.index : -1;
     }
 
 
@@ -419,7 +419,7 @@ public class ConstantPoolGen {
      */
     public int lookupUtf8( final String n ) {
         final Index index = utf8Table.get(n);
-        return (index != null) ? index.index : -1;
+        return index != null ? index.index : -1;
     }
 
 
@@ -532,7 +532,7 @@ public class ConstantPoolGen {
      */
     public int lookupNameAndType( final String name, final String signature ) {
         final Index _index = natTable.get(name + NAT_DELIM + signature);
-        return (_index != null) ? _index.index : -1;
+        return _index != null ? _index.index : -1;
     }
 
 
@@ -577,7 +577,7 @@ public class ConstantPoolGen {
     public int lookupMethodref( final String class_name, final String method_name, final String signature ) {
         final Index index = cpTable.get(class_name + METHODREF_DELIM + method_name
                 + METHODREF_DELIM + signature);
-        return (index != null) ? index.index : -1;
+        return index != null ? index.index : -1;
     }
 
 
@@ -631,7 +631,7 @@ public class ConstantPoolGen {
     public int lookupInterfaceMethodref( final String class_name, final String method_name, final String signature ) {
         final Index index = cpTable.get(class_name + IMETHODREF_DELIM + method_name
                 + IMETHODREF_DELIM + signature);
-        return (index != null) ? index.index : -1;
+        return index != null ? index.index : -1;
     }
 
 
@@ -686,7 +686,7 @@ public class ConstantPoolGen {
     public int lookupFieldref( final String class_name, final String field_name, final String signature ) {
         final Index index = cpTable.get(class_name + FIELDREF_DELIM + field_name
                 + FIELDREF_DELIM + signature);
-        return (index != null) ? index.index : -1;
+        return index != null ? index.index : -1;
     }
 
 

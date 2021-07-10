@@ -69,7 +69,7 @@ public class ConstantPool implements Cloneable, Node {
              * Thus we have to increment the index counter.
              */
             tag = constantPool[i].getTag();
-            if ((tag == Const.CONSTANT_Double) || (tag == Const.CONSTANT_Long)) {
+            if (tag == Const.CONSTANT_Double || tag == Const.CONSTANT_Long) {
                 i++;
             }
         }

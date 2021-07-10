@@ -136,7 +136,7 @@ public final class LineNumberTable extends Attribute {
             if (i < lineNumberTable.length - 1) {
                 line.append(", ");
             }
-            if ((line.length() > MAX_LINE_LENGTH) && (i < lineNumberTable.length - 1)) {
+            if (line.length() > MAX_LINE_LENGTH && i < lineNumberTable.length - 1) {
                 line.append(newLine);
                 buf.append(line);
                 line.setLength(0);
@@ -164,7 +164,7 @@ public final class LineNumberTable extends Attribute {
         /* Do a binary search since the array is ordered.
          */
         do {
-            final int i = (l + r) >>> 1;
+            final int i = l + r >>> 1;
             final int j = lineNumberTable[i].getStartPC();
             if (j == pos) {
                 return lineNumberTable[i].getLineNumber();

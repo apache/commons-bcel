@@ -89,7 +89,7 @@ public class PLSETestCase extends AbstractTestCase
         final InstructionList il = mg.getInstructionList();
         // get the invokevirtual instruction
         final InstructionHandle ih = il.findHandle(3);
-        final InvokeInstruction ii = (InvokeInstruction)(ih.getInstruction());
+        final InvokeInstruction ii = (InvokeInstruction)ih.getInstruction();
         // without fix, the getClassName() will throw:
         //   java.lang.IllegalArgumentException: Cannot be used on an array type
         final String cn = ii.getClassName(pool);

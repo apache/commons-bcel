@@ -195,17 +195,17 @@ public final class Pass3bVerifier extends PassVerifier{
 
             @SuppressWarnings("unchecked") // ec is of type ArrayList<InstructionContext>
             final
-            ArrayList<InstructionContext> oldchain = (ArrayList<InstructionContext>) (ec.clone());
+            ArrayList<InstructionContext> oldchain = (ArrayList<InstructionContext>) ec.clone();
             @SuppressWarnings("unchecked") // ec is of type ArrayList<InstructionContext>
             final
-            ArrayList<InstructionContext> newchain = (ArrayList<InstructionContext>) (ec.clone());
+            ArrayList<InstructionContext> newchain = (ArrayList<InstructionContext>) ec.clone();
             newchain.add(u);
 
-            if ((u.getInstruction().getInstruction()) instanceof RET) {
+            if (u.getInstruction().getInstruction() instanceof RET) {
 //System.err.println(u);
                 // We can only follow _one_ successor, the one after the
                 // JSR that was recently executed.
-                final RET ret = (RET) (u.getInstruction().getInstruction());
+                final RET ret = (RET) u.getInstruction().getInstruction();
                 final ReturnaddressType t = (ReturnaddressType) u.getOutFrame(oldchain).getLocals().get(ret.getIndex());
                 final InstructionContext theSuccessor = cfg.contextOf(t.getTarget());
 
@@ -217,22 +217,22 @@ public final class Pass3bVerifier extends PassVerifier{
                         throw new AssertionViolatedException("More RET than JSR in execution chain?!");
                     }
 //System.err.println("+"+oldchain.get(ss));
-                    if ((oldchain.get(ss)).getInstruction().getInstruction() instanceof JsrInstruction) {
+                    if (oldchain.get(ss).getInstruction().getInstruction() instanceof JsrInstruction) {
                         if (skip_jsr == 0) {
                             lastJSR = oldchain.get(ss);
                             break;
                         }
                         skip_jsr--;
                     }
-                    if ((oldchain.get(ss)).getInstruction().getInstruction() instanceof RET) {
+                    if (oldchain.get(ss).getInstruction().getInstruction() instanceof RET) {
                         skip_jsr++;
                     }
                 }
                 if (lastJSR == null) {
                     throw new AssertionViolatedException("RET without a JSR before in ExecutionChain?! EC: '"+oldchain+"'.");
                 }
-                final JsrInstruction jsr = (JsrInstruction) (lastJSR.getInstruction().getInstruction());
-                if ( theSuccessor != (cfg.contextOf(jsr.physicalSuccessor())) ) {
+                final JsrInstruction jsr = (JsrInstruction) lastJSR.getInstruction().getInstruction();
+                if ( theSuccessor != cfg.contextOf(jsr.physicalSuccessor()) ) {
                     throw new AssertionViolatedException("RET '"+u.getInstruction()+"' info inconsistent: jump back to '"+
                         theSuccessor+"' or '"+cfg.contextOf(jsr.physicalSuccessor())+"'?");
                 }
@@ -287,7 +287,7 @@ public final class Pass3bVerifier extends PassVerifier{
 
         InstructionHandle ih = start.getInstruction();
         do{
-            if ((ih.getInstruction() instanceof ReturnInstruction) && (!(cfg.isDead(ih)))) {
+            if (ih.getInstruction() instanceof ReturnInstruction && !cfg.isDead(ih)) {
                 final InstructionContext ic = cfg.contextOf(ih);
                 // TODO: This is buggy, we check only the top-level return instructions this way.
                 // Maybe some maniac returns from a method when in a subroutine?

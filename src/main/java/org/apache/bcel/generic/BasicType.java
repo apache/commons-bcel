@@ -33,7 +33,7 @@ public final class BasicType extends Type {
      */
     BasicType(final byte type) {
         super(type, Const.getShortTypeName(type));
-        if ((type < Const.T_BOOLEAN) || (type > Const.T_VOID)) {
+        if (type < Const.T_BOOLEAN || type > Const.T_VOID) {
             throw new ClassGenException("Invalid type: " + type);
         }
     }
@@ -78,6 +78,6 @@ public final class BasicType extends Type {
      */
     @Override
     public boolean equals( final Object _type ) {
-        return (_type instanceof BasicType) ? ((BasicType) _type).getType() == this.getType() : false;
+        return _type instanceof BasicType ? ((BasicType) _type).getType() == this.getType() : false;
     }
 }

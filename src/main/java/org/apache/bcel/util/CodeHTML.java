@@ -95,9 +95,9 @@ final class CodeHTML {
         /* Special case: Skip (0-3) padding bytes, i.e., the
          * following bytes are 4-byte-aligned
          */
-        if ((opcode == Const.TABLESWITCH) || (opcode == Const.LOOKUPSWITCH)) {
+        if (opcode == Const.TABLESWITCH || opcode == Const.LOOKUPSWITCH) {
             final int remainder = bytes.getIndex() % 4;
-            no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
+            no_pad_bytes = remainder == 0 ? 0 : 4 - remainder;
             for (int i = 0; i < no_pad_bytes; i++) {
                 bytes.readByte();
             }
@@ -420,7 +420,7 @@ final class CodeHTML {
                 case Const.LOOKUPSWITCH:
                     //bytes.readByte(); // Skip already read byte
                     final int remainder = bytes.getIndex() % 4;
-                    final int no_pad_bytes = (remainder == 0) ? 0 : 4 - remainder;
+                    final int no_pad_bytes = remainder == 0 ? 0 : 4 - remainder;
                     int default_offset;
                     int offset;
                     for (int j = 0; j < no_pad_bytes; j++) {
@@ -434,7 +434,7 @@ final class CodeHTML {
                         offset = bytes.getIndex() - 12 - no_pad_bytes - 1;
                         default_offset += offset;
                         gotoSet.set(default_offset);
-                        for (int j = 0; j < (high - low + 1); j++) {
+                        for (int j = 0; j < high - low + 1; j++) {
                             index = offset + bytes.readInt();
                             gotoSet.set(index);
                         }

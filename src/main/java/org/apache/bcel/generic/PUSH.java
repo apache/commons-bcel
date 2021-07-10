@@ -36,7 +36,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param value to be pushed
      */
     public PUSH(final ConstantPoolGen cp, final int value) {
-        if ((value >= -1) && (value <= 5)) {
+        if (value >= -1 && value <= 5) {
             instruction = InstructionConst.getInstruction(Const.ICONST_0 + value);
         } else if (Instruction.isValidByte(value)) {
             instruction = new BIPUSH((byte) value);
@@ -135,7 +135,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param value to be pushed
      */
     public PUSH(final ConstantPoolGen cp, final Number value) {
-        if ((value instanceof Integer) || (value instanceof Short) || (value instanceof Byte)) {
+        if (value instanceof Integer || value instanceof Short || value instanceof Byte) {
             instruction = new PUSH(cp, value.intValue()).instruction;
         } else if (value instanceof Double) {
             instruction = new PUSH(cp, value.doubleValue()).instruction;

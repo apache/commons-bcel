@@ -135,7 +135,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             // end == null => live to end of method
             /* Add local variables, namely the implicit `this' and the arguments
              */
-            if (!isStatic() && (className != null)) { // Instance method -> `this' is local var 0
+            if (!isStatic() && className != null) { // Instance method -> `this' is local var 0
                 addLocalVariable("this",  ObjectType.getInstance(className), start, end);
             }
         }
@@ -178,7 +178,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         this(method.getAccessFlags(), Type.getReturnType(method.getSignature()),
             Type.getArgumentTypes(method.getSignature()), null /* may be overridden anyway */
             , method.getName(), className,
-            ((method.getAccessFlags() & (Const.ACC_ABSTRACT | Const.ACC_NATIVE)) == 0)
+            (method.getAccessFlags() & (Const.ACC_ABSTRACT | Const.ACC_NATIVE)) == 0
                 ? new InstructionList(getByteCodes(method))
                 : null,
             cp);
@@ -358,10 +358,10 @@ public class MethodGen extends FieldGenOrMethodGen {
         final LocalVariableGen[] lg = new LocalVariableGen[size];
         variableList.toArray(lg);
         for (int i = 0; i < size; i++) {
-            if ((lg[i].getStart() == null) && (il != null)) {
+            if (lg[i].getStart() == null && il != null) {
                 lg[i].setStart(il.getStart());
             }
-            if ((lg[i].getEnd() == null) && (il != null)) {
+            if (lg[i].getEnd() == null && il != null) {
                 lg[i].setEnd(il.getEnd());
             }
         }
@@ -460,7 +460,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public CodeExceptionGen addExceptionHandler( final InstructionHandle start_pc,
             final InstructionHandle end_pc, final InstructionHandle handler_pc, final ObjectType catch_type ) {
-        if ((start_pc == null) || (end_pc == null) || (handler_pc == null)) {
+        if (start_pc == null || end_pc == null || handler_pc == null) {
             throw new ClassGenException("Exception handler target is null instruction");
         }
         final CodeExceptionGen c = new CodeExceptionGen(start_pc, end_pc, handler_pc, catch_type);
@@ -682,7 +682,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         LocalVariableTable lvt = null;
         /* Create LocalVariableTable and LineNumberTable attributes (for debuggers, e.g.)
          */
-        if ((!variableList.isEmpty()) && !stripAttributes) {
+        if (!variableList.isEmpty() && !stripAttributes) {
             updateLocalVariableTable(getLocalVariableTable(_cp));
             addCodeAttribute(lvt = getLocalVariableTable(_cp));
         }
@@ -693,7 +693,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
             addCodeAttribute(localVariableTypeTable);
         }
-        if ((!lineNumberList.isEmpty()) && !stripAttributes) {
+        if (!lineNumberList.isEmpty() && !stripAttributes) {
             addCodeAttribute(lnt = getLineNumberTable(_cp));
         }
         final Attribute[] code_attrs = getCodeAttributes();
@@ -706,7 +706,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         final CodeException[] c_exc = getCodeExceptions();
         final int exc_len = c_exc.length * 8; // Every entry takes 8 bytes
         Code code = null;
-        if ((il != null) && !isAbstract() && !isNative()) {
+        if (il != null && !isAbstract() && !isNative()) {
             // Remove any stale code attribute
             final Attribute[] attributes = getAttributes();
             for (final Attribute a : attributes) {
@@ -797,7 +797,7 @@ public class MethodGen extends FieldGenOrMethodGen {
              */
             for (InstructionHandle ih = il.getStart(); ih != null; ih = next) {
                 next = ih.getNext();
-                if ((next != null) && (ih.getInstruction() instanceof NOP)) {
+                if (next != null && ih.getInstruction() instanceof NOP) {
                     try {
                         il.delete(ih);
                     } catch (final TargetLostException e) {
@@ -942,8 +942,8 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
             for (InstructionHandle ih = il.getStart(); ih != null; ih = ih.getNext()) {
                 final Instruction ins = ih.getInstruction();
-                if ((ins instanceof LocalVariableInstruction) || (ins instanceof RET)
-                        || (ins instanceof IINC)) {
+                if (ins instanceof LocalVariableInstruction || ins instanceof RET
+                        || ins instanceof IINC) {
                     final int index = ((IndexedInstruction) ins).getIndex()
                             + ((TypedInstruction) ins).getType(super.getConstantPool()).getSize();
                     if (index > max) {
@@ -1069,7 +1069,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             } else {
                 // check for instructions that terminate the method.
                 if (opcode == Const.ATHROW || opcode == Const.RET
-                        || (opcode >= Const.IRETURN && opcode <= Const.RETURN)) {
+                        || opcode >= Const.IRETURN && opcode <= Const.RETURN) {
                     ih = null;
                 }
             }
@@ -1138,7 +1138,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                 getLocalVariableTable(super.getConstantPool()));
         final StringBuilder buf = new StringBuilder(signature);
         for (final Attribute a : getAttributes()) {
-            if (!((a instanceof Code) || (a instanceof ExceptionTable))) {
+            if (!(a instanceof Code || a instanceof ExceptionTable)) {
                 buf.append(" [").append(a).append("]");
             }
         }

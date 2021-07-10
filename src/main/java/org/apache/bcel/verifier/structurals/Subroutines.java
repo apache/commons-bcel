@@ -182,7 +182,7 @@ public class Subroutines{
          * Adds a new JSR or JSR_W that has this subroutine as its target.
          */
         public void addEnteringJsrInstruction(final InstructionHandle jsrInst) {
-            if ( (jsrInst == null) || (! (jsrInst.getInstruction() instanceof JsrInstruction))) {
+            if ( jsrInst == null || ! (jsrInst.getInstruction() instanceof JsrInstruction)) {
                 throw new AssertionViolatedException("Expecting JsrInstruction InstructionHandle.");
             }
             if (localVariable == UNSET) {
@@ -191,7 +191,7 @@ public class Subroutines{
             // Something is wrong when an ASTORE is targeted that does not operate on the same local variable than the rest of the
             // JsrInstruction-targets and the RET.
             // (We don't know out leader here so we cannot check if we're really targeted!)
-            if (localVariable != ((ASTORE) (((JsrInstruction) jsrInst.getInstruction()).getTarget().getInstruction())).getIndex()) {
+            if (localVariable != ((ASTORE) ((JsrInstruction) jsrInst.getInstruction()).getTarget().getInstruction()).getIndex()) {
                 throw new AssertionViolatedException("Setting a wrong JsrInstruction.");
             }
             theJSRs.add(jsrInst);
@@ -278,7 +278,7 @@ public class Subroutines{
                 for (final InstructionHandle ih : instructions) {
                     // RET is not a LocalVariableInstruction in the current version of BCEL.
                     if (ih.getInstruction() instanceof LocalVariableInstruction || ih.getInstruction() instanceof RET) {
-                        final int idx = ((IndexedInstruction) (ih.getInstruction())).getIndex();
+                        final int idx = ((IndexedInstruction) ih.getInstruction()).getIndex();
                         acc.add(Integer.valueOf(idx));
                         // LONG? DOUBLE?.
                         try{
@@ -408,7 +408,7 @@ public class Subroutines{
         // Build up the database.
         for (final InstructionHandle astore : sub_leaders) {
             final SubroutineImpl sr = new SubroutineImpl();
-            sr.setLocalVariable( ((ASTORE) (astore.getInstruction())).getIndex() );
+            sr.setLocalVariable( ((ASTORE) astore.getInstruction()).getIndex() );
             subroutines.put(astore, sr);
         }
 
@@ -500,7 +500,7 @@ public class Subroutines{
                 while (_protected != handler.getEndPC().getNext()) {
                     // Note the inclusive/inclusive notation of "generic API" exception handlers!
                     for (final Subroutine sub : subroutines.values()) {
-                        if ((sub != subroutines.get(all[0])) && sub.contains(_protected)) {
+                        if (sub != subroutines.get(all[0]) && sub.contains(_protected)) {
                             throw new StructuralCodeConstraintException("Subroutine instruction '"+_protected+
                                 "' is protected by an exception handler, '"+handler+
                                 "'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
@@ -536,7 +536,7 @@ public class Subroutines{
         final Subroutine[] subs = sub.subSubs();
 
         for (final Subroutine sub2 : subs) {
-            final int index = ((RET) (sub2.getLeavingRET().getInstruction())).getIndex();
+            final int index = ((RET) sub2.getLeavingRET().getInstruction()).getIndex();
 
             if (!set.add(Integer.valueOf(index))) {
                 // Don't use toString() here because of possibly infinite recursive subSubs() calls then.
@@ -622,18 +622,12 @@ public class Subroutines{
 
         final Instruction inst = instruction.getInstruction();
 
-        if (inst instanceof RET) {
-            return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
-        }
+        
 
         // Terminates method normally.
-        if (inst instanceof ReturnInstruction) {
-            return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
-        }
-
         // Terminates method abnormally, because JustIce mandates
         // subroutines not to be protected by exception handlers.
-        if (inst instanceof ATHROW) {
+        if ((inst instanceof RET) || (inst instanceof ReturnInstruction) || (inst instanceof ATHROW)) {
             return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
         }
 

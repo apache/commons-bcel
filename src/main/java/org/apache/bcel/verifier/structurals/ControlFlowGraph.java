@@ -168,24 +168,21 @@ public class ControlFlowGraph{
             final List<InstructionContext> clone = (List<InstructionContext>) execPreds.clone();
             executionPredecessors = clone;
 
-            //sanity check
-            if ( (lastExecutionJSR() == null) && (subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel() ) ) {
-                throw new AssertionViolatedException("Huh?! Am I '"+this+"' part of a subroutine or not?");
-            }
-            if ( (lastExecutionJSR() != null) && (subroutines.subroutineOf(getInstruction()) == subroutines.getTopLevel() ) ) {
-                throw new AssertionViolatedException("Huh?! Am I '"+this+"' part of a subroutine or not?");
+            // sanity check
+            if ((lastExecutionJSR() == null && subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel()) ||
+                    (lastExecutionJSR() != null && subroutines.subroutineOf(getInstruction()) == subroutines.getTopLevel())) {
+                throw new AssertionViolatedException("Huh?! Am I '" + this + "' part of a subroutine or not?");
             }
 
             Frame inF = inFrames.get(lastExecutionJSR());
             if (inF == null) {// no incoming frame was set, so set it.
                 inFrames.put(lastExecutionJSR(), inFrame);
                 inF = inFrame;
-            }
-            else{// if there was an "old" inFrame
-                if (inF.equals(inFrame)) { //shortcut: no need to merge equal frames.
+            } else {// if there was an "old" inFrame
+                if (inF.equals(inFrame)) { // shortcut: no need to merge equal frames.
                     return false;
                 }
-                if (! mergeInFrames(inFrame)) {
+                if (!mergeInFrames(inFrame)) {
                     return false;
                 }
             }
@@ -195,16 +192,15 @@ public class ControlFlowGraph{
             // new inFrame is already merged in, see above.
             final Frame workingFrame = inF.getClone();
 
-            try{
+            try {
                 // This verifies the InstructionConstraint for the current
                 // instruction, but does not modify the workingFrame object.
 //InstConstraintVisitor icv = InstConstraintVisitor.getInstance(VerifierFactory.getVerifier(method_gen.getClassName()));
                 icv.setFrame(workingFrame);
                 getInstruction().accept(icv);
-            }
-            catch(final StructuralCodeConstraintException ce) {
-                ce.extendMessage("","\nInstructionHandle: "+getInstruction()+"\n");
-                ce.extendMessage("","\nExecution Frame:\n"+workingFrame);
+            } catch (final StructuralCodeConstraintException ce) {
+                ce.extendMessage("", "\nInstructionHandle: " + getInstruction() + "\n");
+                ce.extendMessage("", "\nExecution Frame:\n" + workingFrame);
                 extendMessageWithFlow(ce);
                 throw ce;
             }
@@ -214,11 +210,11 @@ public class ControlFlowGraph{
 //ExecutionVisitor ev = ExecutionVisitor.getInstance(VerifierFactory.getVerifier(method_gen.getClassName()));
             ev.setFrame(workingFrame);
             getInstruction().accept(ev);
-            //getInstruction().accept(ExecutionVisitor.withFrame(workingFrame));
+            // getInstruction().accept(ExecutionVisitor.withFrame(workingFrame));
             outFrames.put(lastExecutionJSR(), workingFrame);
 
-            return true;    // new inFrame was different from old inFrame so merging them
-                                        // yielded a different this.inFrame.
+            return true; // new inFrame was different from old inFrame so merging them
+                         // yielded a different this.inFrame.
         }
 
         /**
@@ -258,7 +254,7 @@ public class ControlFlowGraph{
          * by the surrounding ControlFlowGraph.
          */
         private String getExecutionChain() {
-            StringBuilder s = new StringBuilder(this.toString());
+            final StringBuilder s = new StringBuilder(this.toString());
             for (int i=executionPredecessors.size()-1; i>=0; i--) {
                 s.insert(0, executionPredecessors.get(i) + "\n");
             }
@@ -297,7 +293,7 @@ public class ControlFlowGraph{
             int retcount = 0;
 
             for (int i=size-1; i>=0; i--) {
-                final InstructionContextImpl current = (InstructionContextImpl) (executionPredecessors.get(i));
+                final InstructionContextImpl current = (InstructionContextImpl) executionPredecessors.get(i);
                 final Instruction currentlast = current.getInstruction().getInstruction();
                 if (currentlast instanceof RET) {
                     retcount++;
@@ -350,13 +346,9 @@ public class ControlFlowGraph{
             }
 
             // Terminates method normally.
-            if (inst instanceof ReturnInstruction) {
-                return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
-            }
-
             // Terminates method abnormally, because JustIce mandates
             // subroutines not to be protected by exception handlers.
-            if (inst instanceof ATHROW) {
+            if ((inst instanceof ReturnInstruction) || (inst instanceof ATHROW)) {
                 return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
             }
 

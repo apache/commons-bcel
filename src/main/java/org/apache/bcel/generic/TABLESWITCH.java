@@ -60,9 +60,9 @@ public class TABLESWITCH extends Select {
     public void dump( final DataOutputStream out ) throws IOException {
         super.dump(out);
         final int _match_length = getMatch_length();
-        final int low = (_match_length > 0) ? super.getMatch(0) : 0;
+        final int low = _match_length > 0 ? super.getMatch(0) : 0;
         out.writeInt(low);
-        final int high = (_match_length > 0) ? super.getMatch(_match_length - 1) : 0;
+        final int high = _match_length > 0 ? super.getMatch(_match_length - 1) : 0;
         out.writeInt(high);
         for (int i = 0; i < _match_length; i++) {
             out.writeInt(setIndices(i, getTargetOffset(super.getTarget(i))));

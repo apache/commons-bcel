@@ -38,7 +38,7 @@ public class InstructionFinderTestCase extends AbstractTestCase
         Method searchM = null;
         for (final Method m : methods)
         {
-            if (m.getName().equals("search") && (m.getArgumentTypes().length == 3))
+            if (m.getName().equals("search") && m.getArgumentTypes().length == 3)
             {
                 searchM = m;
                 break;

@@ -42,7 +42,7 @@ public class JavaWrapper {
 
     private static java.lang.ClassLoader getClassLoader() {
         final String s = System.getProperty("bcel.classloader");
-        if ((s == null) || "".equals(s)) {
+        if (s == null || "".equals(s)) {
             throw new IllegalStateException("The property 'bcel.classloader' must be defined");
         }
         try {
@@ -78,7 +78,7 @@ public class JavaWrapper {
             final int m = method.getModifiers();
             final Class<?> r = method.getReturnType();
             if (!(Modifier.isPublic(m) && Modifier.isStatic(m)) || Modifier.isAbstract(m)
-                    || (r != Void.TYPE)) {
+                    || r != Void.TYPE) {
                 throw new NoSuchMethodException();
             }
         } catch (final NoSuchMethodException no) {

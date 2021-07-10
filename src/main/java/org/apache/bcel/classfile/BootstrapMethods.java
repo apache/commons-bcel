@@ -140,7 +140,7 @@ public class BootstrapMethods extends Attribute {
             final int start = buf.length();
             buf.append("  ").append(i).append(": ");
             final int indent_count = buf.length() - start;
-            final String[] lines = (bootstrapMethods[i].toString(super.getConstantPool())).split("\\r?\\n");
+            final String[] lines = bootstrapMethods[i].toString(super.getConstantPool()).split("\\r?\\n");
             buf.append(lines[0]);
             for (int j = 1; j < lines.length; j++) {
                 buf.append("\n").append("          ", 0, indent_count).append(lines[j]);

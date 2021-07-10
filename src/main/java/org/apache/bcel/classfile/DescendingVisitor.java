@@ -49,7 +49,7 @@ public class DescendingVisitor implements Visitor
     public Object predecessor(final int level)
     {
         final int size = stack.size();
-        if ((size < 2) || (level < 0))
+        if (size < 2 || level < 0)
         {
             return null;
         }

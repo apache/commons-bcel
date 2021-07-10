@@ -1191,7 +1191,7 @@ public class ExecutionVisitor extends EmptyVisitor{
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitNEW(final NEW o) {
-        stack().push(new UninitializedObjectType((ObjectType) (o.getType(cpg))));
+        stack().push(new UninitializedObjectType((ObjectType) o.getType(cpg)));
     }
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override

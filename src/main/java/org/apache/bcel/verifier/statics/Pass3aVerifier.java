@@ -285,7 +285,7 @@ public final class Pass3aVerifier extends PassVerifier{
                                 + "' has a LocalVariableTable attribute '" + code.getLocalVariableTable()
                                 + "' referring to a code offset ('" + startpc + "') that does not exist.");
                     }
-                    if ((!contains(instructionPositions, startpc + length)) && (startpc + length != codeLength)) {
+                    if (!contains(instructionPositions, startpc + length) && startpc + length != codeLength) {
                         throw new ClassConstraintException("Code attribute '" + code
                                 + "' has a LocalVariableTable attribute '" + code.getLocalVariableTable()
                                 + "' referring to a code offset start_pc+length ('" + (startpc + length)
@@ -314,7 +314,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+
                     "' that has a non-existant bytecode offset as its start_pc ('"+startpc+"').");
             }
-            if ( (!contains(instructionPositions, endpc)) && (endpc != codeLength)) {
+            if ( !contains(instructionPositions, endpc) && endpc != codeLength) {
                 throw new ClassConstraintException("Code attribute '"+code+"' has an exception_table entry '"+element+
                     "' that has a non-existant bytecode offset as its end_pc ('"+startpc+
                     "') [that is also not equal to code_length ('"+codeLength+"')].");
@@ -383,10 +383,10 @@ public final class Pass3aVerifier extends PassVerifier{
         // end of the code, which is stupid -- but with the original
         // verifier's subroutine semantics one cannot predict reachability.
         final Instruction last = instructionList.getEnd().getInstruction();
-        if (! ((last instanceof ReturnInstruction)    ||
-                    (last instanceof RET)                                ||
-                    (last instanceof GotoInstruction)            ||
-                    (last instanceof ATHROW) )) {
+        if (! (last instanceof ReturnInstruction    ||
+                    last instanceof RET                                ||
+                    last instanceof GotoInstruction            ||
+                    last instanceof ATHROW )) {
             throw new StaticCodeInstructionConstraintException(
                 "Execution must not fall off the bottom of the code array."+
                 " This constraint is enforced statically as some existing verifiers do"+
@@ -546,9 +546,9 @@ public final class Pass3aVerifier extends PassVerifier{
               addMessage("Operand of LDC or LDC_W is CONSTANT_Class '"+c+"' - this is only supported in JDK 1.5 and higher.");
             }
             else{
-              if (! ( (c instanceof ConstantInteger)    ||
-                      (c instanceof ConstantFloat)         ||
-                (c instanceof ConstantString) ) ) {
+              if (! ( c instanceof ConstantInteger    ||
+                      c instanceof ConstantFloat         ||
+                c instanceof ConstantString ) ) {
             constraintViolated(ldc,
                 "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float or CONSTANT_String, but is '"+c+"'.");
               }
@@ -561,8 +561,8 @@ public final class Pass3aVerifier extends PassVerifier{
         public void visitLDC2_W(final LDC2_W o) {
             indexValid(o, o.getIndex());
             final Constant c = constantPoolGen.getConstant(o.getIndex());
-            if (! ( (c instanceof ConstantLong)    ||
-                            (c instanceof ConstantDouble) ) ) {
+            if (! ( c instanceof ConstantLong    ||
+                            c instanceof ConstantDouble ) ) {
                 constraintViolated(o, "Operand of LDC2_W must be CONSTANT_Long or CONSTANT_Double, but is '"+c+"'.");
             }
             try{
@@ -661,21 +661,21 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitInvokeInstruction(final InvokeInstruction o) {
             indexValid(o, o.getIndex());
-            if (    (o instanceof INVOKEVIRTUAL)    ||
-                        (o instanceof INVOKESPECIAL)    ||
-                        (o instanceof INVOKESTATIC)    ) {
+            if (    o instanceof INVOKEVIRTUAL    ||
+                        o instanceof INVOKESPECIAL    ||
+                        o instanceof INVOKESTATIC    ) {
                 final Constant c = constantPoolGen.getConstant(o.getIndex());
                 if (! (c instanceof ConstantMethodref)) {
                     constraintViolated(o, "Indexing a constant that's not a CONSTANT_Methodref but a '"+c+"'.");
                 }
                 else{
                     // Constants are okay due to pass2.
-                    final ConstantNameAndType cnat = (ConstantNameAndType) (constantPoolGen.getConstant(((ConstantMethodref) c).getNameAndTypeIndex()));
-                    final ConstantUtf8 cutf8 = (ConstantUtf8) (constantPoolGen.getConstant(cnat.getNameIndex()));
-                    if (cutf8.getBytes().equals(Const.CONSTRUCTOR_NAME) && (!(o instanceof INVOKESPECIAL)) ) {
+                    final ConstantNameAndType cnat = (ConstantNameAndType) constantPoolGen.getConstant(((ConstantMethodref) c).getNameAndTypeIndex());
+                    final ConstantUtf8 cutf8 = (ConstantUtf8) constantPoolGen.getConstant(cnat.getNameIndex());
+                    if (cutf8.getBytes().equals(Const.CONSTRUCTOR_NAME) && !(o instanceof INVOKESPECIAL) ) {
                         constraintViolated(o, "Only INVOKESPECIAL is allowed to invoke instance initialization methods.");
                     }
-                    if ( (! (cutf8.getBytes().equals(Const.CONSTRUCTOR_NAME)) ) && (cutf8.getBytes().startsWith("<")) ) {
+                    if ( ! cutf8.getBytes().equals(Const.CONSTRUCTOR_NAME) && cutf8.getBytes().startsWith("<") ) {
                         constraintViolated(o,
                             "No method with a name beginning with '<' other than the instance initialization methods"+
                             " may be called by the method invocation instructions.");
@@ -694,8 +694,8 @@ public final class Pass3aVerifier extends PassVerifier{
 
                 // Invoked method must not be <init> or <clinit>
                 final ConstantNameAndType cnat =
-                        (ConstantNameAndType) (constantPoolGen.getConstant(((ConstantInterfaceMethodref)c).getNameAndTypeIndex()));
-                final String name = ((ConstantUtf8) (constantPoolGen.getConstant(cnat.getNameIndex()))).getBytes();
+                        (ConstantNameAndType) constantPoolGen.getConstant(((ConstantInterfaceMethodref)c).getNameAndTypeIndex());
+                final String name = ((ConstantUtf8) constantPoolGen.getConstant(cnat.getNameIndex())).getBytes();
                 if (name.equals(Const.CONSTRUCTOR_NAME)) {
                     constraintViolated(o, "Method to invoke must not be '"+Const.CONSTRUCTOR_NAME+"'.");
                 }
@@ -765,7 +765,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 constraintViolated(o, "Expecting a CONSTANT_Class operand, but found a '"+c+"'.");
             }
             else{
-                final ConstantUtf8 cutf8 = (ConstantUtf8) (constantPoolGen.getConstant( ((ConstantClass) c).getNameIndex() ));
+                final ConstantUtf8 cutf8 = (ConstantUtf8) constantPoolGen.getConstant( ((ConstantClass) c).getNameIndex() );
                 final Type t = Type.getType("L"+cutf8.getBytes()+";");
                 if (t instanceof ArrayType) {
                     constraintViolated(o, "NEW must not be used to create an array.");
@@ -824,14 +824,14 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitNEWARRAY(final NEWARRAY o) {
             final byte t = o.getTypecode();
-            if (!    (    (t == Const.T_BOOLEAN)    ||
-                            (t == Const.T_CHAR)            ||
-                            (t == Const.T_FLOAT)        ||
-                            (t == Const.T_DOUBLE)        ||
-                            (t == Const.T_BYTE)            ||
-                            (t == Const.T_SHORT)        ||
-                            (t == Const.T_INT)            ||
-                            (t == Const.T_LONG)    )    ) {
+            if (!    (    t == Const.T_BOOLEAN    ||
+                            t == Const.T_CHAR            ||
+                            t == Const.T_FLOAT        ||
+                            t == Const.T_DOUBLE        ||
+                            t == Const.T_BYTE            ||
+                            t == Const.T_SHORT        ||
+                            t == Const.T_INT            ||
+                            t == Const.T_LONG    )    ) {
                 constraintViolated(o, "Illegal type code '+t+' for 'atype' operand.");
             }
         }
@@ -1063,20 +1063,20 @@ public final class Pass3aVerifier extends PassVerifier{
                 throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
             }
 
-            if (f.isFinal() && !(myOwner.getClassName().equals(getObjectType(o).getClassName()))) {
+            if (f.isFinal() && !myOwner.getClassName().equals(getObjectType(o).getClassName())) {
                 constraintViolated(o,
                     "Referenced field '"+f+"' is final and must therefore be declared in the current class '"+
                         myOwner.getClassName()+"' which is not the case: it is declared in '"+o.getReferenceType(constantPoolGen)+"'.");
             }
 
-            if (! (f.isStatic())) {
+            if (! f.isStatic()) {
                 constraintViolated(o, "Referenced field '"+f+"' is not static which it should be.");
             }
 
             final String meth_name = Repository.lookupClass(myOwner.getClassName()).getMethods()[methodNo].getName();
 
             // If it's an interface, it can be set only in <clinit>.
-            if ((!(jc.isClass())) && (!(meth_name.equals(Const.STATIC_INITIALIZER_NAME)))) {
+            if (!jc.isClass() && !meth_name.equals(Const.STATIC_INITIALIZER_NAME)) {
                 constraintViolated(o, "Interface field '"+f+"' must be set in a '"+Const.STATIC_INITIALIZER_NAME+"' method.");
             }
             } catch (final ClassNotFoundException e) {
@@ -1103,7 +1103,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
             }
 
-            if (! (f.isStatic())) {
+            if (! f.isStatic()) {
                 constraintViolated(o, "Referenced field '"+f+"' is not static which it should be.");
             }
             } catch (final ClassNotFoundException e) {
@@ -1195,9 +1195,9 @@ public final class Pass3aVerifier extends PassVerifier{
         private Method getMethod(final JavaClass jc, final InvokeInstruction invoke) {
             final Method[] ms = jc.getMethods();
             for (final Method element : ms) {
-                if ( (element.getName().equals(invoke.getMethodName(constantPoolGen))) &&
-                     (Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(constantPoolGen))) &&
-                     (objarrayequals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(constantPoolGen))) ) {
+                if ( element.getName().equals(invoke.getMethodName(constantPoolGen)) &&
+                     Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(constantPoolGen)) &&
+                     objarrayequals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(constantPoolGen)) ) {
                     return element;
                 }
             }
@@ -1222,9 +1222,9 @@ public final class Pass3aVerifier extends PassVerifier{
             }
 
             JavaClass current = Repository.lookupClass(myOwner.getClassName());
-            if (current.isSuper() && ((Repository.instanceOf( current, jc )) && (!current.equals(jc)))) {
+            if (current.isSuper() && Repository.instanceOf( current, jc ) && !current.equals(jc)) {
 
-                if (! (o.getMethodName(constantPoolGen).equals(Const.CONSTRUCTOR_NAME) )) {
+                if (! o.getMethodName(constantPoolGen).equals(Const.CONSTRUCTOR_NAME)) {
                     // Special lookup procedure for ACC_SUPER classes.
 
                     int supidx = -1;
@@ -1236,9 +1236,9 @@ public final class Pass3aVerifier extends PassVerifier{
 
                         final Method[] meths = current.getMethods();
                         for (final Method meth2 : meths) {
-                            if    ( (meth2.getName().equals(o.getMethodName(constantPoolGen))) &&
-                                 (Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen))) &&
-                                 (objarrayequals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) ) {
+                            if    ( meth2.getName().equals(o.getMethodName(constantPoolGen)) &&
+                                 Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen)) &&
+                                 objarrayequals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen)) ) {
                                 meth = meth2;
                                 break;
                             }
@@ -1275,7 +1275,7 @@ public final class Pass3aVerifier extends PassVerifier{
             if (m == null) {
                 constraintViolated(o, "Referenced method '"+o.getMethodName(constantPoolGen)+"' with expected signature '"+
                     o.getSignature(constantPoolGen) +"' not found in class '"+jc.getClassName()+"'.");
-            } else if (! (m.isStatic())) { // implies it's not abstract, verified in pass 2.
+            } else if (! m.isStatic()) { // implies it's not abstract, verified in pass 2.
                 constraintViolated(o, "Referenced method '"+o.getMethodName(constantPoolGen)+"' has ACC_STATIC unset.");
             }
 
@@ -1301,7 +1301,7 @@ public final class Pass3aVerifier extends PassVerifier{
                 constraintViolated(o, "Referenced method '"+o.getMethodName(constantPoolGen)+"' with expected signature '"+
                     o.getSignature(constantPoolGen)+"' not found in class '"+jc.getClassName()+"'.");
             }
-            if (! (jc.isClass())) {
+            if (! jc.isClass()) {
                 constraintViolated(o, "Referenced class '"+jc.getClassName()+"' is an interface, but not a class as expected.");
             }
 
@@ -1325,7 +1325,7 @@ public final class Pass3aVerifier extends PassVerifier{
             }
 
             for (int i=0; i<o.length; i++) {
-                if (! (o[i].equals(p[i])) ) {
+                if (! o[i].equals(p[i]) ) {
                     return false;
                 }
             }

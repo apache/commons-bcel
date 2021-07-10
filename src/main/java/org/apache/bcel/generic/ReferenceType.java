@@ -78,42 +78,36 @@ public abstract class ReferenceType extends Type {
         }
         /* If this is a class type then
          */
-        if ((this instanceof ObjectType) && (((ObjectType) this).referencesClassExact())) {
+        if (this instanceof ObjectType && ((ObjectType) this).referencesClassExact()) {
             /* If T is a class type, then this must be the same class as T,
              or this must be a subclass of T;
              */
-            if ((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) {
-                if (this.equals(T)) {
-                    return true;
-                }
-                if (Repository.instanceOf(((ObjectType) this).getClassName(), ((ObjectType) T)
+            if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact()) {
+                if (this.equals(T) || Repository.instanceOf(((ObjectType) this).getClassName(), ((ObjectType) T)
                         .getClassName())) {
                     return true;
                 }
             }
             /* If T is an interface type, this must implement interface T.
              */
-            if (((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) && Repository.implementationOf(((ObjectType) this).getClassName(),
+            if (T instanceof ObjectType && ((ObjectType) T).referencesInterfaceExact() && Repository.implementationOf(((ObjectType) this).getClassName(),
                     ((ObjectType) T).getClassName())) {
                 return true;
             }
         }
         /* If this is an interface type, then:
          */
-        if ((this instanceof ObjectType) && (((ObjectType) this).referencesInterfaceExact())) {
+        if (this instanceof ObjectType && ((ObjectType) this).referencesInterfaceExact()) {
             /* If T is a class type, then T must be Object (�2.4.7).
              */
-            if (((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) && T.equals(Type.OBJECT)) {
+            if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact() && T.equals(Type.OBJECT)) {
                 return true;
             }
             /* If T is an interface type, then T must be the same interface
              * as this or a superinterface of this (�2.13.2).
              */
-            if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
-                if (this.equals(T)) {
-                    return true;
-                }
-                if (Repository.implementationOf(((ObjectType) this).getClassName(),
+            if (T instanceof ObjectType && ((ObjectType) T).referencesInterfaceExact()) {
+                if (this.equals(T) || Repository.implementationOf(((ObjectType) this).getClassName(),
                         ((ObjectType) T).getClassName())) {
                     return true;
                 }
@@ -125,7 +119,7 @@ public abstract class ReferenceType extends Type {
         if (this instanceof ArrayType) {
             /* If T is a class type, then T must be Object (�2.4.7).
              */
-            if (((T instanceof ObjectType) && (((ObjectType) T).referencesClassExact())) && T.equals(Type.OBJECT)) {
+            if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact() && T.equals(Type.OBJECT)) {
                 return true;
             }
             /* If T is an array type TC[], that is, an array of components
@@ -153,7 +147,7 @@ public abstract class ReferenceType extends Type {
             // are at least two different pages where assignment compatibility is defined and
             // on one of them "interfaces implemented by arrays" is exchanged with "'Cloneable' or
             // 'java.io.Serializable'"
-            if ((T instanceof ObjectType) && (((ObjectType) T).referencesInterfaceExact())) {
+            if (T instanceof ObjectType && ((ObjectType) T).referencesInterfaceExact()) {
                 for (final String element : Const.getInterfacesImplementedByArrays()) {
                     if (T.equals(ObjectType.getInstance(element))) {
                         return true;
@@ -187,10 +181,7 @@ public abstract class ReferenceType extends Type {
         if (this.equals(Type.NULL)) {
             return t;
         }
-        if (t.equals(Type.NULL)) {
-            return this;
-        }
-        if (this.equals(t)) {
+        if (t.equals(Type.NULL) || this.equals(t)) {
             return this;
             /*
              * TODO: Above sounds a little arbitrary. On the other hand, there is
@@ -201,10 +192,10 @@ public abstract class ReferenceType extends Type {
              */
         }
         /* This code is from a bug report by Konstantin Shagin <konst@cs.technion.ac.il> */
-        if ((this instanceof ArrayType) && (t instanceof ArrayType)) {
+        if (this instanceof ArrayType && t instanceof ArrayType) {
             final ArrayType arrType1 = (ArrayType) this;
             final ArrayType arrType2 = (ArrayType) t;
-            if ((arrType1.getDimensions() == arrType2.getDimensions())
+            if (arrType1.getDimensions() == arrType2.getDimensions()
                     && arrType1.getBasicType() instanceof ObjectType
                     && arrType2.getBasicType() instanceof ObjectType) {
                 return new ArrayType(((ObjectType) arrType1.getBasicType())
@@ -212,12 +203,12 @@ public abstract class ReferenceType extends Type {
                         .getDimensions());
             }
         }
-        if ((this instanceof ArrayType) || (t instanceof ArrayType)) {
+        if (this instanceof ArrayType || t instanceof ArrayType) {
             return Type.OBJECT;
             // TODO: Is there a proof of OBJECT being the direct ancestor of every ArrayType?
         }
-        if (((this instanceof ObjectType) && ((ObjectType) this).referencesInterfaceExact())
-                || ((t instanceof ObjectType) && ((ObjectType) t).referencesInterfaceExact())) {
+        if (this instanceof ObjectType && ((ObjectType) this).referencesInterfaceExact()
+                || t instanceof ObjectType && ((ObjectType) t).referencesInterfaceExact()) {
             return Type.OBJECT;
             // TODO: The above line is correct comparing to the vmspec2. But one could
             // make class file verification a bit stronger here by using the notion of
@@ -228,7 +219,7 @@ public abstract class ReferenceType extends Type {
         final ObjectType other = (ObjectType) t;
         final JavaClass[] thiz_sups = Repository.getSuperClasses(thiz.getClassName());
         final JavaClass[] other_sups = Repository.getSuperClasses(other.getClassName());
-        if ((thiz_sups == null) || (other_sups == null)) {
+        if (thiz_sups == null || other_sups == null) {
             return null;
         }
         // Waaahh...
@@ -271,10 +262,7 @@ public abstract class ReferenceType extends Type {
         if (this.equals(Type.NULL)) {
             return t;
         }
-        if (t.equals(Type.NULL)) {
-            return this;
-        }
-        if (this.equals(t)) {
+        if (t.equals(Type.NULL) || this.equals(t)) {
             return this;
             /*
              * TODO: Above sounds a little arbitrary. On the other hand, there is
@@ -284,12 +272,12 @@ public abstract class ReferenceType extends Type {
              * "null" is not referring to an instance of java.lang.Object :)
              */
         }
-        if ((this instanceof ArrayType) || (t instanceof ArrayType)) {
+        if (this instanceof ArrayType || t instanceof ArrayType) {
             return Type.OBJECT;
             // TODO: Is there a proof of OBJECT being the direct ancestor of every ArrayType?
         }
-        if (((this instanceof ObjectType) && ((ObjectType) this).referencesInterface())
-                || ((t instanceof ObjectType) && ((ObjectType) t).referencesInterface())) {
+        if (this instanceof ObjectType && ((ObjectType) this).referencesInterface()
+                || t instanceof ObjectType && ((ObjectType) t).referencesInterface()) {
             return Type.OBJECT;
             // TODO: The above line is correct comparing to the vmspec2. But one could
             // make class file verification a bit stronger here by using the notion of
@@ -300,7 +288,7 @@ public abstract class ReferenceType extends Type {
         final ObjectType other = (ObjectType) t;
         final JavaClass[] thiz_sups = Repository.getSuperClasses(thiz.getClassName());
         final JavaClass[] other_sups = Repository.getSuperClasses(other.getClassName());
-        if ((thiz_sups == null) || (other_sups == null)) {
+        if (thiz_sups == null || other_sups == null) {
             return null;
         }
         // Waaahh...
