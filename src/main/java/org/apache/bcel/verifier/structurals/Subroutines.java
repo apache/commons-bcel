@@ -622,7 +622,7 @@ public class Subroutines{
 
         final Instruction inst = instruction.getInstruction();
 
-        
+
 
         // Terminates method normally.
         // Terminates method abnormally, because JustIce mandates

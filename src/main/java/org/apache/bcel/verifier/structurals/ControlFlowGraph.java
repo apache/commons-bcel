@@ -179,10 +179,7 @@ public class ControlFlowGraph{
                 inFrames.put(lastExecutionJSR(), inFrame);
                 inF = inFrame;
             } else {// if there was an "old" inFrame
-                if (inF.equals(inFrame)) { // shortcut: no need to merge equal frames.
-                    return false;
-                }
-                if (!mergeInFrames(inFrame)) {
+                if (inF.equals(inFrame) || !mergeInFrames(inFrame)) {
                     return false;
                 }
             }
