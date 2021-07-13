@@ -93,6 +93,7 @@ public abstract class Attribute implements Cloneable, Node {
         }
     }
 
+
     /**
      * Class method reads one attribute from the input data stream. This method
      * must not be accessible from the outside. It is called by the Field and
@@ -109,6 +110,28 @@ public abstract class Attribute implements Cloneable, Node {
      * @since 6.0
      */
     public static Attribute readAttribute(final DataInput file, final ConstantPool constant_pool)
+            throws IOException, ClassFormatException
+    {
+        return readAttribute(file, constant_pool, false);
+    }
+
+    /**
+     * Class method reads one attribute from the input data stream. This method
+     * must not be accessible from the outside. It is called by the Field and
+     * Method constructor methods.
+     *
+     * @see Field
+     * @see Method
+     *
+     * @param file Input stream
+     * @param constant_pool Array of constants
+     * @param isOak If the the class file is oak
+     * @return Attribute
+     * @throws IOException
+     * @throws ClassFormatException
+     * @since 6.0
+     */
+    public static Attribute readAttribute(final DataInput file, final ConstantPool constant_pool, final boolean isOak)
             throws IOException, ClassFormatException
     {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
@@ -145,7 +168,7 @@ public abstract class Attribute implements Cloneable, Node {
             case Const.ATTR_SOURCE_FILE:
                 return new SourceFile(name_index, length, file, constant_pool);
             case Const.ATTR_CODE:
-                return new Code(name_index, length, file, constant_pool);
+                return new Code(name_index, length, file, constant_pool, isOak);
             case Const.ATTR_EXCEPTIONS:
                 return new ExceptionTable(name_index, length, file, constant_pool);
             case Const.ATTR_LINE_NUMBER_TABLE:
