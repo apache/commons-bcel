@@ -94,12 +94,7 @@ public final class ConstantUtf8 extends Constant {
 
     static {
         if (Cache.BCEL_STATISTICS) {
-            Runtime.getRuntime().addShutdownHook(new Thread() {
-                @Override
-                public void run() {
-                    printStats();
-                }
-            });
+            Runtime.getRuntime().addShutdownHook(new Thread(ConstantUtf8::printStats));
         }
     }
 

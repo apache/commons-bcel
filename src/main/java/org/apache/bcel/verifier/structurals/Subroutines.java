@@ -517,7 +517,7 @@ public class Subroutines{
         // This includes that subroutines may not call themselves
         // recursively, even not through intermediate calls to other
         // subroutines.
-        noRecursiveCalls(getTopLevel(), new HashSet<Integer>());
+        noRecursiveCalls(getTopLevel(), new HashSet<>());
 
     }
 

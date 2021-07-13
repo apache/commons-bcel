@@ -70,7 +70,7 @@ public class ClassLoaderRepository implements Repository {
      */
     @Override
     public JavaClass findClass( final String className ) {
-        return loadedClasses.containsKey(className) ? loadedClasses.get(className) : null;
+        return loadedClasses.getOrDefault(className, null);
     }
 
 
