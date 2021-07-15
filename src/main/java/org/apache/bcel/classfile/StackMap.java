@@ -115,8 +115,10 @@ public final class StackMap extends Attribute {
     @Override
     public String toString() {
         final StringBuilder buf = new StringBuilder("StackMap(");
+        int running_offset = -1; // no +1 on first entry
         for (int i = 0; i < map.length; i++) {
-            buf.append(map[i]);
+            running_offset = map[i].getByteCodeOffset() + running_offset + 1;
+            buf.append(String.format("%n@%03d %s", running_offset, map[i]));
             if (i < map.length - 1) {
                 buf.append(", ");
             }
