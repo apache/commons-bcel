@@ -222,8 +222,7 @@ public class ControlFlowGraph{
         //TODO: Put information in the brackets, e.g.
         //      Is this an ExceptionHandler? Is this a RET? Is this the start of
         //      a subroutine?
-            final String ret = getInstruction().toString(false)+"\t[InstructionContext]";
-            return ret;
+            return getInstruction().toString(false)+"\t[InstructionContext]";
         }
 
         /**

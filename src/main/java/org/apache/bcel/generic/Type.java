@@ -299,9 +299,6 @@ public abstract class Type {
         if (cl == Short.TYPE) {
             return SHORT;
         }
-        if (cl == Byte.TYPE) {
-            return BYTE;
-        }
         if (cl == Long.TYPE) {
             return LONG;
         }
