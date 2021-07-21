@@ -69,8 +69,7 @@ public class Frame{
      */
     @Override
     protected Object clone() {
-        final Frame f = new Frame(locals.getClone(), stack.getClone());
-        return f;
+        return new Frame(locals.getClone(), stack.getClone());
     }
 
     /**

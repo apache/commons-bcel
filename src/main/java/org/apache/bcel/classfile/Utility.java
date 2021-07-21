@@ -1549,8 +1549,7 @@ public abstract class Utility {
                 final char[] tmp = {
                         (char) i, (char) j
                 };
-                final int s = Integer.parseInt(new String(tmp), 16);
-                return s;
+                return Integer.parseInt(new String(tmp), 16);
             }
             return MAP_CHAR[i];
         }

@@ -1072,7 +1072,6 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                                 "' is not correctly named 'LocalVariableTable' but '"+lvtname+"'.");
                     }
 
-                    final Code code = obj;
 
                     //In JustIce, the check for correct offsets into the code array is delayed to Pass 3a.
                     final LocalVariable[] localvariables = lvt.getLocalVariableTable();
@@ -1097,11 +1096,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                                 "' used by LocalVariable '"+tostring(localvariable)+"' referenced by '"+tostring(lvt)+"'.", cfe);
                         }
                         final int localindex = localvariable.getIndex();
-                        if ( ( t==Type.LONG || t==Type.DOUBLE? localindex+1:localindex) >= code.getMaxLocals()) {
+                        if ( ( t==Type.LONG || t==Type.DOUBLE? localindex+1:localindex) >= obj.getMaxLocals()) {
                             throw new ClassConstraintException("LocalVariableTable attribute '"+tostring(lvt)+
                                 "' references a LocalVariable '"+tostring(localvariable)+
                                 "' with an index that exceeds the surrounding Code attribute's max_locals value of '"+
-                                code.getMaxLocals()+"'.");
+                                obj.getMaxLocals()+"'.");
                         }
 
                         try{
