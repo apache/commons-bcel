@@ -100,7 +100,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Declare method. If the method is non-static the constructor
      * automatically declares a local variable `$this' in slot 0. The
      * actual code is contained in the `il' parameter, which may further
-     * manipulated by the user. But he must take care not to remove any
+     * manipulated by the user. But they must take care not to remove any
      * instruction (handles) that are still referenced from this object.
      *
      * For example one may not add a local variable and later remove the
@@ -1113,7 +1113,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /** Call notify() method on all observers. This method is not called
      * automatically whenever the state has changed, but has to be
-     * called by the user after he has finished editing the object.
+     * called by the user after they have finished editing the object.
      */
     public void update() {
         if (observers != null) {

@@ -83,7 +83,7 @@
         reflection supported by the <a
               href="http://java.sun.com/j2se/1.3/docs/guide/reflection/index.html">Java
         Reflection API</a>. Load-time transformations supply the user with
-        a new level of abstraction. He is not strictly tied to the static
+        a new level of abstraction. They are not strictly tied to the static
         constraints of the original authors of the classes but may
         customize the applications with third-party code in order to
         benefit from new features. Such transformations may be executed on

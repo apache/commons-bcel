@@ -442,7 +442,7 @@ il.dispose(); // Reuse instruction handles of list
         To simplify the creation of certain instructions the user can use
         the supplied <tt>InstructionFactory</tt> class which offers a lot
         of useful methods to create instructions from
-        scratch. Alternatively, he can also use <em>compound
+        scratch. Alternatively, they can also use <em>compound
         instructions</em>: When producing byte code, some patterns
         typically occur very frequently, for instance the compilation of
         arithmetic or comparison expressions. You certainly do not want
