@@ -544,7 +544,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /** Call notify() method on all observers. This method is not called
      * automatically whenever the state has changed, but has to be
-     * called by the user after he has finished editing the object.
+     * called by the user after he or she has finished editing the object.
      */
     public void update() {
         if (observers != null) {
