@@ -130,14 +130,13 @@ public class MethodGen extends FieldGenOrMethodGen {
         setConstantPool(cp);
         final boolean abstract_ = isAbstract() || isNative();
         InstructionHandle start = null;
-        final InstructionHandle end = null;
         if (!abstract_) {
             start = il.getStart();
             // end == null => live to end of method
             /* Add local variables, namely the implicit `this' and the arguments
              */
             if (!isStatic() && className != null) { // Instance method -> `this' is local var 0
-                addLocalVariable("this",  ObjectType.getInstance(className), start, end);
+                addLocalVariable("this",  ObjectType.getInstance(className), start, null);
             }
         }
         if (argTypes != null) {
@@ -161,7 +160,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
             if (!abstract_) {
                 for (int i = 0; i < size; i++) {
-                    addLocalVariable(argNames[i], argTypes[i], start, end);
+                    addLocalVariable(argNames[i], argTypes[i], start, null);
                 }
             }
         }

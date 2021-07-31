@@ -73,7 +73,7 @@ final class CodeHTML {
      * Disassemble a stream of byte codes and return the
      * string representation.
      *
-     * @param  stream data input stream
+     * @param  bytes data byte sequence
      * @return String representation of byte code
      */
     private String codeToHTML( final ByteSequence bytes, final int method_number ) throws IOException {

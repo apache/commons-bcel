@@ -139,7 +139,7 @@ public class InstructionFinder {
             char ch = lower.charAt(i);
             if (Character.isLetterOrDigit(ch)) {
                 final StringBuilder name = new StringBuilder();
-                while ((Character.isLetterOrDigit(ch) || ch == '_') && i < size) {
+                while (Character.isLetterOrDigit(ch) || ch == '_') {
                     name.append(ch);
                     if (++i >= size) {
                         break;

@@ -127,7 +127,7 @@ public abstract class AbstractTestCase
                 chosenAttrsList.add(element);
             }
         }
-        return chosenAttrsList.toArray(new Attribute[] {});
+        return chosenAttrsList.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
     }
 
     protected Attribute findAttribute(final String name, final Attribute[] all)

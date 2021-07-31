@@ -57,7 +57,7 @@ public class InstructionHandleTestCase {
     public void testBCEL195() {
         final InstructionList il = new InstructionList();
         final InstructionHandle ih = il.append(InstructionConst.NOP);
-        new TABLESWITCH(new int[0], new InstructionHandle[0], ih);
-        new TABLESWITCH(new int[0], new InstructionHandle[0], ih);
+        new TABLESWITCH(new int[0], InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY, ih);
+        new TABLESWITCH(new int[0], InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY, ih);
     }
 }
