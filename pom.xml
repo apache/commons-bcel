@@ -517,7 +517,7 @@
       <properties>
         <skipTests>true</skipTests>
         <benchmark>org.apache</benchmark>
-        <jmh.version>1.32</jmh.version>
+        <jmh.version>1.33</jmh.version>
       </properties>
 
       <dependencies>
