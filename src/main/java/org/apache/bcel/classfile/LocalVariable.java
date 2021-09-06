@@ -133,7 +133,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * Dumps local variable to file stream in binary format.
      *
      * @param dataOutputStream Output file stream
-     * @exception IOException if an I/O error occurs.
+     * @throws IOException if an I/O error occurs.
      * @see java.io.FilterOutputStream#out
      */
     public void dump(final DataOutputStream dataOutputStream) throws IOException {
