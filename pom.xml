@@ -72,6 +72,7 @@
     <clirr.skip>true</clirr.skip>
     <commons.jacoco.version>0.8.7</commons.jacoco.version>
     <commons.javadoc.version>3.3.0</commons.javadoc.version>
+    <biz.aQute.bndlib.version>6.1.0</biz.aQute.bndlib.version>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
@@ -223,13 +224,6 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>biz.aQute.bnd</groupId>
-            <artifactId>biz.aQute.bndlib</artifactId>
-            <version>6.1.0</version>
-          </dependency>
-        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.apache.rat</groupId>
