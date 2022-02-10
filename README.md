@@ -43,7 +43,6 @@
 Apache Commons BCEL
 ===================
 
-[![Travis-CI Status](https://travis-ci.org/apache/commons-bcel.svg)](https://travis-ci.org/apache/commons-bcel)
 [![GitHub Actions Status](https://github.com/apache/commons-bcel/workflows/Java%20CI/badge.svg)](https://github.com/apache/commons-bcel/actions)
 [![Coverage Status](https://coveralls.io/repos/apache/commons-bcel/badge.svg)](https://coveralls.io/r/apache/commons-bcel)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/)
