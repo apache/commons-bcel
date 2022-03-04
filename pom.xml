@@ -220,7 +220,7 @@
   </scm>
 
   <build>
-    <defaultGoal>clean package apache-rat:check japicmp:cmp checkstyle:check javadoc:javadoc</defaultGoal>
+    <defaultGoal>clean verify apache-rat:check japicmp:cmp checkstyle:check javadoc:javadoc</defaultGoal>
     <plugins>
       <plugin>
         <groupId>org.apache.felix</groupId>
