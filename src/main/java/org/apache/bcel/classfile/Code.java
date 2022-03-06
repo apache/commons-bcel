@@ -48,6 +48,7 @@ public final class Code extends Attribute {
     private byte[] code; // Actual byte code
     private CodeException[] exceptionTable; // Table of handled exceptions
     private Attribute[] attributes; // or LocalVariable
+    private boolean isOak; // If the class file follows oak format
 
 
     /**
@@ -60,6 +61,7 @@ public final class Code extends Attribute {
     }
 
 
+
     /**
      * @param name_index Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
@@ -68,10 +70,23 @@ public final class Code extends Attribute {
      */
     Code(final int name_index, final int length, final DataInput file, final ConstantPool constant_pool)
             throws IOException {
+        this(name_index, length, file, constant_pool, false);
+    }
+
+    /**
+     * @param name_index Index pointing to the name <em>Code</em>
+     * @param length Content length in bytes
+     * @param file Input stream
+     * @param constant_pool Array of constants
+     * @param isOak If the class file is oak
+     */
+    Code(final int name_index, final int length, final DataInput file, final ConstantPool constant_pool, final boolean isOak)
+            throws IOException {
         // Initialize with some default values which will be overwritten later
-        this(name_index, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null,
-                (CodeException[]) null, (Attribute[]) null, constant_pool);
-        final int code_length = file.readInt();
+        this(name_index, length, isOak ? file.readUnsignedByte() : file.readUnsignedShort(), isOak ? file.readUnsignedByte() : file.readUnsignedShort(),
+                (byte[]) null, (CodeException[]) null, (Attribute[]) null, constant_pool);
+        this.isOak = isOak;
+        final int code_length = isOak ? file.readUnsignedShort() : file.readInt();
         code = new byte[code_length]; // Read byte code
         file.readFully(code);
         /* Read exception table that contains all regions where an exception
@@ -109,13 +124,30 @@ public final class Code extends Attribute {
      * @param constant_pool Array of constants
      */
     public Code(final int name_index, final int length, final int maxStack, final int maxLocals, final byte[] code,
-            final CodeException[] exceptionTable, final Attribute[] attributes, final ConstantPool constant_pool) {
+                final CodeException[] exceptionTable, final Attribute[] attributes, final ConstantPool constant_pool) {
+        this(name_index, length, maxStack, maxLocals, code, exceptionTable, attributes, constant_pool, false);
+    }
+
+    /**
+     * @param name_index Index pointing to the name <em>Code</em>
+     * @param length Content length in bytes
+     * @param maxStack Maximum size of stack
+     * @param maxLocals Number of local variables
+     * @param code Actual byte code
+     * @param exceptionTable of handled exceptions
+     * @param attributes Attributes of code: LineNumber or LocalVariable
+     * @param constant_pool Array of constants
+     * @param isOak If the class file follows the oak format
+     */
+    public Code(final int name_index, final int length, final int maxStack, final int maxLocals, final byte[] code,
+            final CodeException[] exceptionTable, final Attribute[] attributes, final ConstantPool constant_pool, final boolean isOak) {
         super(Const.ATTR_CODE, name_index, length, constant_pool);
         this.maxStack = maxStack;
         this.maxLocals = maxLocals;
         this.code = code != null ? code : ArrayUtils.EMPTY_BYTE_ARRAY;
         this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_CODE_EXCEPTION_ARRAY;
         this.attributes = attributes != null ? attributes : EMPTY_ATTRIBUTE_ARRAY;
+        this.isOak = isOak;
         super.setLength(calculateLength()); // Adjust length
     }
 
@@ -142,9 +174,15 @@ public final class Code extends Attribute {
     @Override
     public void dump( final DataOutputStream file ) throws IOException {
         super.dump(file);
-        file.writeShort(maxStack);
-        file.writeShort(maxLocals);
-        file.writeInt(code.length);
+        if (isOak) {
+            file.writeByte(maxStack);
+            file.writeByte(maxLocals);
+            file.writeShort(code.length);
+        } else {
+            file.writeShort(maxStack);
+            file.writeShort(maxLocals);
+            file.writeInt(code.length);
+        }
         file.write(code, 0, code.length);
         file.writeShort(exceptionTable.length);
         for (final CodeException exception : exceptionTable) {
@@ -230,7 +268,19 @@ public final class Code extends Attribute {
      * and excluding all its attributes
      */
     private int getInternalLength() {
-        return 2 /*maxStack*/+ 2 /*maxLocals*/+ 4 /*code length*/
+        final int maxStack;
+        final int maxLocals;
+        final int codeLength;
+        if (isOak) {
+            maxStack = 1;
+            maxLocals = 1;
+            codeLength = 2;
+        } else {
+            maxStack = 2;
+            maxLocals = 2;
+            codeLength = 4;
+        }
+        return maxStack + maxLocals + codeLength
                 + code.length /*byte-code*/
                 + 2 /*exception-table length*/
                 + 8 * (exceptionTable == null ? 0 : exceptionTable.length) /* exception table */

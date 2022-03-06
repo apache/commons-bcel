@@ -58,6 +58,7 @@ public final class ClassParser {
     private Attribute[] attributes; // attributes defined in the class
     private final boolean isZip; // Loaded from zip file
     private static final int BUFSIZE = 8192;
+    private boolean isOak; // Is oak class file
 
 
     /**
@@ -290,7 +291,7 @@ public final class ClassParser {
         final int methods_count = dataInputStream.readUnsignedShort();
         methods = new Method[methods_count];
         for (int i = 0; i < methods_count; i++) {
-            methods[i] = new Method(dataInputStream, constantPool);
+            methods[i] = new Method(dataInputStream, constantPool, isOak);
         }
     }
 
@@ -303,5 +304,6 @@ public final class ClassParser {
     private void readVersion() throws IOException, ClassFormatException {
         minor = dataInputStream.readUnsignedShort();
         major = dataInputStream.readUnsignedShort();
+        isOak = major < Const.MAJOR_1_1 || (major == Const.MAJOR_1_1 && minor < 3);
     }
 }
