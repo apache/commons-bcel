@@ -26,6 +26,7 @@ import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantDynamic;
 import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
@@ -35,7 +36,9 @@ import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantMethodHandle;
 import org.apache.bcel.classfile.ConstantMethodType;
 import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantModule;
 import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPackage;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.ConstantUtf8;
@@ -357,10 +360,10 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     public void visitStackMapEntry(final StackMapEntry obj) {
         tostring = toString(obj);
     }
+
     /**
      * @since 6.0
      */
-
     @Override
     public void visitParameterAnnotation(final ParameterAnnotations obj) {
         tostring = toString(obj);
@@ -403,6 +406,30 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
      */
     @Override
     public void visitParameterAnnotationEntry(final ParameterAnnotationEntry obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.1
+     */
+    @Override
+    public void visitConstantModule(final ConstantModule obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.1
+     */
+    @Override
+    public void visitConstantPackage(final ConstantPackage obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.3
+     */
+    @Override
+    public void visitConstantDynamic(final ConstantDynamic obj) {
         tostring = toString(obj);
     }
 

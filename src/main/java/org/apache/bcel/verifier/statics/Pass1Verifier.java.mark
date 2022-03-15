@@ -27,6 +27,16 @@ import org.apache.bcel.verifier.Verifier;
 import org.apache.bcel.verifier.exc.LoadingException;
 import org.apache.bcel.verifier.exc.Utility;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.apache.bcel.classfile.*;
+import org.apache.bcel.util.BCELifier;
+
 /**
  * This PassVerifier verifies a class file according to pass 1 as
  * described in The Java Virtual Machine Specification, 2nd edition.
@@ -152,14 +162,10 @@ public final class Pass1Verifier extends PassVerifier{
             if (jc != null && ! myOwner.getClassName().equals(jc.getClassName())) {
                 // This should maybe caught by BCEL: In case of renamed .class files we get wrong
                 // JavaClass objects here.
-                // This test should be much more complicated.  It needs to take the classname, remove any portion at the
-                // end that matches the file name and then see if the remainder matches anything on the class path.
-                // Dumb test for now, see if the class name ends with the file name.
-                if (!jc.getClassName().endsWith(myOwner.getClassName())) {
-                    throw new LoadingException("Wrong name: the internal name of the .class file '"+jc.getClassName()+
+        if (!jc.getClassName().endsWith(myOwner.getClassName()))        throw new LoadingException("Wrong name: the internal name of the .class file '"+jc.getClassName()+
                     "' does not match the file's name '"+myOwner.getClassName()+"'.");
-                }
             }
+
         }
         catch(final LoadingException | ClassFormatException e) {
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, e.getMessage());
@@ -168,10 +174,10 @@ public final class Pass1Verifier extends PassVerifier{
             // BCEL does not catch every possible RuntimeException; e.g. if
             // a constant pool index is referenced that does not exist.
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Parsing via BCEL did not succeed. "+
-                " exception occured:\n" + e.toString());
-                // Don't think we want to dump a stack trace unless we have some sort of a debug option.
-                //e.getClass().getName()+" occured:\n"+Utility.getStackTrace(e));
+                e.getClass().getName()+" occured:\n"+Utility.getStackTrace(e));
         }
+
+        //bcelDump(jc);
 
         if (jc != null) {
             return VerificationResult.VR_OK;
@@ -195,6 +201,96 @@ public final class Pass1Verifier extends PassVerifier{
     public String[] getMessages() {
         // This method is only here to override the javadoc-comment.
         return super.getMessages();
+    }
+
+
+    /**
+     * This code is a modified version of BcelUtil.dump.
+     *
+     * Dumps the contents of the specified class System.out.
+     *
+     * @param jc JavaClass to dump
+     */
+    public static void bcelDump(JavaClass jc) {
+  
+      try {
+        PrintStream p = System.out;
+  
+        // Print the class file format version
+        p.printf("%nClass header:%n");
+        p.printf("  minor version: %s%n", jc.getMinor());
+        p.printf("  major version: %s%n", jc.getMajor());
+  
+        // Print the details of the constant pool.
+        ConstantPool cp = jc.getConstantPool();
+        Constant[] constants = cp.getConstantPool();
+        // constant_pool[0] is unused by the compiler
+        p.printf("%nConstant pool(%d):%n", constants.length - 1);
+        for (int ii = 1; ii < constants.length; ii++) {
+          // i'm sure there is a better way to do this
+          if (ii < 10) {
+              p.printf("   #%1d = ", ii);
+          } else if (ii <100) {
+              p.printf("  #%2d = ", ii);
+          } else {
+              p.printf(" #%d = ", ii);
+          }
+          p.println(constants[ii]);
+        }
+
+        // Print the class flags and superclass
+        p.printf("%nClass info:%n");
+        p.println("  flags: " + BCELifier.printFlags(jc.getAccessFlags(), BCELifier.FLAGS.CLASS));
+        p.printf("  class %s extends %s%n", jc.getClassName(), jc.getSuperclassName());
+
+        // Print the interfaces
+        String[] inames = jc.getInterfaceNames();
+        p.printf("%nInterfaces(%d):%n", inames.length);
+        boolean first = true;
+        if ((inames != null) && (inames.length > 0)) {
+          p.printf("   implements ");
+          for (String iname : inames) {
+            if (!first) p.printf(", ");
+            p.printf("%s", iname);
+            first = false;
+          }
+          p.printf("%n");
+        }
+  
+        // Print the fields
+        Field[] fields = jc.getFields();
+        p.printf("%nFields(%d):%n", fields.length);
+        for (Field f : fields) {
+          p.printf("  %s%n", f);
+        }
+  
+        // Print the signature of each method
+        Method[] methods = jc.getMethods();
+        p.printf("%nMethods(%d):%n", methods.length);
+        for (Method m : methods) {
+          p.printf("  %s%n", m);
+        }
+  
+        // Print the contents of each method
+        for (Method m : methods) {
+          Code code = m.getCode();
+          if (code != null) {
+            p.printf("%nMethod %s%n", m);
+            p.printf("  %s%n", code.toString().replace("\n", "\n  "));
+          }
+        }
+  
+        // Print the class attributes
+        Attribute[] attributes = jc.getAttributes();
+        p.printf("%nAttributes(%d):%n", attributes.length);
+        for (Attribute a : attributes) {
+          p.printf("  %s%n", a);
+        }
+  
+      } catch (Exception e) {
+        throw new Error(
+          "Unexpected error dumping JavaClass: " + jc.getClassName(), e);
+      }
     }
 
 }

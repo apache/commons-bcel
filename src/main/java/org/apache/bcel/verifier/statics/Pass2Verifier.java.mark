@@ -162,7 +162,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 every_class_has_an_accessible_superclass();
                 final_methods_are_not_overridden();
             }
-            catch (final ClassConstraintException | ClassCastException cce) {
+            catch (final ClassConstraintException cce) {
                 vr = new VerificationResult(VerificationResult.VERIFIED_REJECTED, cce.getMessage());
             }
             return vr;
@@ -1036,17 +1036,6 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     break;
                 }
             }
-            // If the .class file is malformed the loop above may not find a method.
-            // Try matching names instead of pointers.
-            if (method_number < 0) {
-                for (int mn=0; mn<ms.length; mn++) {
-                    if (m.getName().equals(ms[mn].getName())) {
-                        method_number = mn;
-                        break;
-                    }
-                }
-            }
-
             if (method_number < 0) { // Mmmmh. Can we be sure BCEL does not sometimes instantiate new objects?
                 throw new AssertionViolatedException(
                     "Could not find a known BCEL Method object in the corresponding BCEL JavaClass object.");
@@ -1057,13 +1046,18 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // Now iterate through the attributes the Code attribute has.
             final Attribute[] atts = obj.getAttributes();
             for (final Attribute att : atts) {
+        System.out.println("att name: " + att.getName());
+        System.out.println("att tag: " + att.getTag());
+        System.out.println("att length: " + att.getLength());
                 if (! (att instanceof LineNumberTable) &&
                     ! (att instanceof LocalVariableTable)) {
-                    addMessage("Attribute '"+tostring(att)+"' as an attribute of Code attribute '"+tostring(obj)+
+                    //addMessage("Attribute '"+tostring(att)+"' as an attribute of Code attribute '"+tostring(obj)+
+                    addMessage("Attribute '"+"???"+"' as an attribute of Code attribute '"+tostring(obj)+
                         "' (method '"+m+"') is unknown and will therefore be ignored.");
                 }
                 else{// LineNumberTable or LocalVariableTable
-                    addMessage("Attribute '"+tostring(att)+"' as an attribute of Code attribute '"+tostring(obj)+
+                    //addMessage("Attribute '"+tostring(att)+"' as an attribute of Code attribute '"+tostring(obj)+
+                    addMessage("Attribute '"+"???"+"' as an attribute of Code attribute '"+tostring(obj)+
                         "' (method '"+m+"') will effectively be ignored and is only useful for debuggers and such.");
                 }
 
