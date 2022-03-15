@@ -25,7 +25,6 @@ import org.apache.bcel.verifier.PassVerifier;
 import org.apache.bcel.verifier.VerificationResult;
 import org.apache.bcel.verifier.Verifier;
 import org.apache.bcel.verifier.exc.LoadingException;
-import org.apache.bcel.verifier.exc.Utility;
 
 /**
  * This PassVerifier verifies a class file according to pass 1 as

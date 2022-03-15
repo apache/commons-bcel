@@ -100,7 +100,6 @@ import org.apache.bcel.verifier.exc.InvalidMethodException;
 import org.apache.bcel.verifier.exc.StaticCodeConstraintException;
 import org.apache.bcel.verifier.exc.StaticCodeInstructionConstraintException;
 import org.apache.bcel.verifier.exc.StaticCodeInstructionOperandConstraintException;
-import org.apache.bcel.verifier.statics.Pass2Verifier;
 
 /**
  * This PassVerifier verifies a class file according to
