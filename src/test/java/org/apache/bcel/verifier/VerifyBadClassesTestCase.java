@@ -37,93 +37,94 @@ import org.apache.commons.exec.PumpStreamHandler;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test a number of BCEL issues related to running the Verifier on
+ * a bad or malformed .class file and having it die with an exception
+ * rather than report a verification failure.
+ */
 public class VerifyBadClassesTestCase {
 
     /**
-     * There are a number of BCEL issues related to running the Verifier
-     * on a bad or malformed .class file and having it die with an exception
-     * rather than report a verification failure.
-     */
-
-    /**
-     * BCEL-303:
+     * BCEL-303: AssertionViolatedException in Pass 3A Verification of invoke instructions
      */
     @Test
-    public void testB303() throws Exception
+    public void testB303()
     {
         testVerify("issue303/example", "A");
     }
 
     /**
-     * BCEL-307:
+     * BCEL-307: ClassFormatException thrown in Pass 3A verification
      */
     @Test
-    public void testB307() throws Exception
+    public void testB307()
     {
         testVerify("issue307/example", "A");
     }
 
     /**
-     * BCEL-337:
+     * BCEL-337: StringIndexOutOfBounds in Pass 2 Verification of empty method names in the constant pool
      */
     @Test
-    public void testB337() throws Exception
+    public void testB337()
     {
         testVerify("issue337/example", "A");
     }
 
     /**
-     * BCEL-308:
+     * BCEL-308: NullPointerException in Verifier Pass 3A
      */
     @Test
-    public void testB308() throws Exception
+    public void testB308()
     {
         testVerify("issue308", "Hello");
     }
 
     /**
-     * BCEL-309:
+     * BCEL-309: NegativeArraySizeException when Code attribute length is negative
      */
     @Test
-    public void testB309() throws Exception
+    public void testB309()
     {
         testVerify("issue309", "Hello");
     }
 
     /**
-     * BCEL-310:
+     * BCEL-310: ArrayIndexOutOfBounds in Verifier Pass 3A
      */
     @Test
-    public void testB310() throws Exception
+    public void testB310()
     {
         testVerify("issue310", "Hello");
     }
 
     /**
-     * BCEL-311:
+     * BCEL-311: ClassCastException in Verifier Pass 2
      */
     @Test
-    public void testB311() throws Exception
+    public void testB311()
     {
         testVerify("issue311", "Hello");
     }
 
     /**
-     * BCEL-312:
+     * BCEL-312: AssertionViolation: INTERNAL ERROR Please adapt StringRepresentation
+     *           to deal with ConstantPackage in Verifier Pass 2
      */
     @Test
-    public void testB312() throws Exception
+    public void testB312()
     {
         testVerify("issue312", "Hello");
     }
 
     /**
-     * BCEL-313:
+     * BCEL-313: ClassFormatException: Invalid signature: Ljava/lang/String)V in Verifier Pass 3A
      */
     @Test
-    public void testB313() throws Exception
+    public void testB313()
     {
         testVerify("issue313", "Hello");
     }
@@ -137,7 +138,7 @@ public class VerifyBadClassesTestCase {
      * to '.class' and then back to '.classx' after the test.  If we can
      * get animal-sniffer to ignore the files, these steps could be omitted.
      */
-    private void testVerify(String directory, String className) throws Exception {
+    private void testVerify(String directory, String className) {
         final String baseDir = "target/test-classes";
         String testDir = baseDir + (directory.isEmpty() ? "" : "/" + directory);
 
@@ -145,13 +146,13 @@ public class VerifyBadClassesTestCase {
         File testFile = new File(testDir + "/" + className + ".class");
 
          if (!origFile.renameTo(testFile)) {
-             throw new Exception("Failed to rename orig file");
+             fail("Failed to rename orig file");
          }
 
          String result = run(buildVerifyCommand(className, testDir));
 
          if (!testFile.renameTo(origFile)) {
-             throw new Exception("Failed to rename test file");
+             fail("Failed to rename test file");
          }
 
          assertTrue(result.isEmpty(), result);
@@ -178,9 +179,8 @@ public class VerifyBadClassesTestCase {
      *
      * @param command the command to be run in the process
      * @return a String capturing the error output of executing the command
-     * @throws if there is an error running the command
      */
-    private String run(List<String> command) throws Exception {
+    private String run(List<String> command) {
 
       /** The process timeout in milliseconds. Defaults to 30 seconds. */
       long timeout = 30 * 1000;
@@ -203,7 +203,7 @@ public class VerifyBadClassesTestCase {
       try {
         executor.execute(cmdLine, resultHandler);
       } catch (IOException e) {
-        throw new Exception("Exception starting process", e);
+        fail("Exception starting process: " + e.getMessage());
       }
 
       int exitValue = -1;

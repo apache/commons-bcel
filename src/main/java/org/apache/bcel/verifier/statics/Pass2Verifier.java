@@ -162,7 +162,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 every_class_has_an_accessible_superclass();
                 final_methods_are_not_overridden();
             }
-            catch (final ClassConstraintException | ClassCastException cce) {
+            catch (final ClassConstraintException cce) {
                 vr = new VerificationResult(VerificationResult.VERIFIED_REJECTED, cce.getMessage());
             }
             return vr;
@@ -367,8 +367,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             final Constant c = cp.getConstant(index);
             if (! shouldbe.isInstance(c)) {
                 /* String isnot = shouldbe.toString().substring(shouldbe.toString().lastIndexOf(".")+1); //Cut all before last "." */
-                throw new ClassCastException("Illegal constant '"+tostring(c)+"' at index '"+
-                    index+"'. '"+tostring(referrer)+"' expects a '"+shouldbe+"'.");
+                throw new ClassConstraintException("Illegal constant '" + tostring(c) + "' at index '" +
+                    index + "'. '" + tostring(referrer) + "' expects a '" + shouldbe + "'.");
             }
         }
         ///////////////////////////////////////
@@ -1030,7 +1030,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // TODO: rework it.
             int method_number = -1;
             final Method[] ms = Repository.lookupClass(myOwner.getClassName()).getMethods();
-            for (int mn=0; mn<ms.length; mn++) {
+            for (int mn = 0; mn < ms.length; mn++) {
                 if (m == ms[mn]) {
                     method_number = mn;
                     break;
@@ -1039,7 +1039,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // If the .class file is malformed the loop above may not find a method.
             // Try matching names instead of pointers.
             if (method_number < 0) {
-                for (int mn=0; mn<ms.length; mn++) {
+                for (int mn = 0; mn < ms.length; mn++) {
                     if (m.getName().equals(ms[mn].getName())) {
                         method_number = mn;
                         break;

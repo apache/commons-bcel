@@ -155,8 +155,8 @@ public final class Pass1Verifier extends PassVerifier{
                 // end that matches the file name and then see if the remainder matches anything on the class path.
                 // Dumb test for now, see if the class name ends with the file name.
                 if (!jc.getClassName().endsWith(myOwner.getClassName())) {
-                    throw new LoadingException("Wrong name: the internal name of the .class file '"+jc.getClassName()+
-                    "' does not match the file's name '"+myOwner.getClassName()+"'.");
+                    throw new LoadingException("Wrong name: the internal name of the .class file '" + jc.getClassName() +
+                    "' does not match the file's name '" + myOwner.getClassName() + "'.");
                 }
             }
         }
