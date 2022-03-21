@@ -96,7 +96,7 @@ public final class LineNumber implements Cloneable, Node {
      * @return Corresponding source line
      */
     public int getLineNumber() {
-        return 0xffff & lineNumber;
+        return lineNumber & 0xffff;
     }
 
 
@@ -104,7 +104,7 @@ public final class LineNumber implements Cloneable, Node {
      * @return PC in code
      */
     public int getStartPC() {
-        return  0xffff & startPc;
+        return startPc & 0xffff;
     }
 
 
@@ -129,7 +129,7 @@ public final class LineNumber implements Cloneable, Node {
      */
     @Override
     public String toString() {
-        return "LineNumber(" + startPc + ", " + lineNumber + ")";
+        return "LineNumber(" + (((int) startPc) & 0xffff) + ", " + (((int) lineNumber) & 0xffff) + ")";
     }
 
 

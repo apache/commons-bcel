@@ -20,6 +20,8 @@ package org.apache.bcel;
 
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.LineNumber;
+import org.apache.bcel.classfile.LineNumberTable;
 import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
@@ -34,6 +36,7 @@ import org.apache.bcel.generic.Type;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class PLSETestCase extends AbstractTestCase
 {
@@ -114,6 +117,25 @@ public class PLSETestCase extends AbstractTestCase
         final LocalVariable new_lv = new_lvt.getLocalVariable(2, 4);  // 'i'
         //System.out.println(new_lv);
         assertEquals(lv.getLength(), new_lv.getLength(), "live range length");
+    }
+
+    /**
+     * BCEL-361: LineNumber.toString() treats code offset as signed
+     */
+    @Test
+    public void testB361() throws Exception
+    {
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.LargeMethod");
+        final Method[] methods = clazz.getMethods();
+        final Method m = methods[0];
+        //System.out.println(m.getName());
+        final Code code = m.getCode();
+        final LineNumberTable lnt = code.getLineNumberTable();
+        final LineNumber[] lineNumbers = lnt.getLineNumberTable();
+        final String data = lineNumbers[lineNumbers.length - 1].toString();
+        //System.out.println(data);
+        //System.out.println(data.contains("-"));
+        assertFalse(data.contains("-"), "code offsets must be positive");
     }
 
     /**
