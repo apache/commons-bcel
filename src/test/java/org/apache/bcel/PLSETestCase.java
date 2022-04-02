@@ -37,6 +37,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.stream.Stream;
 
 public class PLSETestCase extends AbstractTestCase
 {
@@ -136,6 +139,8 @@ public class PLSETestCase extends AbstractTestCase
         //System.out.println(data);
         //System.out.println(data.contains("-"));
         assertFalse(data.contains("-"), "code offsets must be positive");
+        Stream.of(lineNumbers).forEach(ln -> assertFalse(ln.getLineNumber() < 0));
+        Stream.of(lineNumbers).forEach(ln -> assertFalse(ln.getStartPC() < 0));
     }
 
     /**
