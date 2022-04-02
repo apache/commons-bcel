@@ -73,6 +73,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Formalize PerformanceTest #168.</action>
       <action                  type="fix" dev="ggregory" due-to="Arturo Bernal">Java 8 improvements #95.</action>
       <action issue="BCEL-345" type="fix" dev="ggregory" due-to="Christine Poerschke">Make documentation wording more inclusive #98.</action>
+      <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Force unsigned short for LineNumber.toString() #118.</action>
       <!-- ADD -->
       <!-- UPDATES -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update tests from Apache Commons Lang 3.10 to 3.12.0</action>
