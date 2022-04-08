@@ -64,7 +64,7 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <commons.surefire.version>3.0.0-M5</commons.surefire.version>
+    <commons.surefire.version>3.0.0-M6</commons.surefire.version>
     <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
     <jna.version>5.11.0</jna.version>
     <commons.japicmp.version>0.15.3</commons.japicmp.version>
