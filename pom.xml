@@ -67,7 +67,7 @@
     <commons.surefire.version>3.0.0-M6</commons.surefire.version>
     <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
     <jna.version>5.11.0</jna.version>
-    <commons.japicmp.version>0.15.3</commons.japicmp.version>
+    <commons.japicmp.version>0.15.7</commons.japicmp.version>
     <japicmp.skip>false</japicmp.skip>
     <clirr.skip>true</clirr.skip>
     <commons.jacoco.version>0.8.8</commons.jacoco.version>
