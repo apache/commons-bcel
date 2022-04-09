@@ -478,7 +478,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
 
     public Attribute[] getAttributes() {
-        return attributeList.toArray(new Attribute[0]);
+        return attributeList.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
     }
 
     //  J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?

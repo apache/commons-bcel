@@ -257,7 +257,7 @@ public class AnnotationEntryGen {
                             new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
             }
 
-            return newAttributes.toArray(new Attribute[0]);
+            return newAttributes.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
         } catch (final IOException e) {
             System.err.println("IOException whilst processing annotations");
             e.printStackTrace();
@@ -343,7 +343,7 @@ public class AnnotationEntryGen {
                         .add(new RuntimeInvisibleParameterAnnotations(riaIndex,
                                 riaData.length, new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
             }
-            return newAttributes.toArray(new Attribute[0]);
+            return newAttributes.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
         } catch (final IOException e) {
             System.err
                     .println("IOException whilst processing parameter annotations");

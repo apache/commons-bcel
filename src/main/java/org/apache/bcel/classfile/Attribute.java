@@ -57,7 +57,7 @@ public abstract class Attribute implements Cloneable, Node {
      *
      * @since 6.6.0
      */
-    public static final Attribute[] EMPTY_ATTRIBUTE_ARRAY = new Attribute[0];
+    public static final Attribute[] EMPTY_ATTRIBUTE_ARRAY = {};
 
     /**
      * Add an Attribute reader capable of parsing (user-defined) attributes
