@@ -268,10 +268,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                             hashmap.put(nameAndSig, jc.getClassName());
                         }
                     }
-                } else {
-                    if (!method.isStatic()) { // static methods don't inherit
-                        hashmap.put(nameAndSig, jc.getClassName());
-                    }
+                } else if (!method.isStatic()) { // static methods don't inherit
+                    hashmap.put(nameAndSig, jc.getClassName());
                 }
             }
 
@@ -404,13 +402,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 if (att instanceof InnerClasses) {
                     if (!foundInnerClasses) {
                         foundInnerClasses = true;
-                    } else {
-                        if (hasInnerClass) {
-                            throw new ClassConstraintException("A Classfile structure (like '" + tostring(obj) +
-                                "') must have exactly one InnerClasses attribute"+
-                                " if at least one Inner Class is referenced (which is the case)."+
-                                " More than one InnerClasses attribute was found.");
-                        }
+                    } else if (hasInnerClass) {
+                        throw new ClassConstraintException("A Classfile structure (like '" + tostring(obj) +
+                            "') must have exactly one InnerClasses attribute"+
+                            " if at least one Inner Class is referenced (which is the case)."+
+                            " More than one InnerClasses attribute was found.");
                     }
                     if (!hasInnerClass) {
                         addMessage("No referenced Inner Class found, but InnerClasses attribute '" + tostring(att) +
@@ -928,7 +924,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
                 final Constant c = cp.getConstant(index);
 
-                if ((CONST_Long.isInstance(c) && field_type.equals(Type.LONG)) || (CONST_Float.isInstance(c) && field_type.equals(Type.FLOAT))) {
+                if (CONST_Long.isInstance(c) && field_type.equals(Type.LONG) || CONST_Float.isInstance(c) && field_type.equals(Type.FLOAT)) {
                     return;
                 }
                 if (CONST_Double.isInstance(c) && field_type.equals(Type.DOUBLE)) {

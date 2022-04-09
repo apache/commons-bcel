@@ -355,14 +355,12 @@ public class InstConstraintVisitor extends EmptyVisitor{
                 constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"
                     + locals().get(o.getIndex()) + "'; Instruction type: '" + o.getType(cpg) + "'.");
             }
-        } else { // we deal with an ALOAD
-            if (!(locals().get(o.getIndex()) instanceof ReferenceType)) {
-                constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"
-                    + locals().get(o.getIndex()) + "'; Instruction expects a ReferenceType.");
-            }
-            // ALOAD __IS ALLOWED__ to put uninitialized objects onto the stack!
-            // referenceTypeIsInitialized(o, (ReferenceType) (locals().get(o.getIndex())));
+        } else if (!(locals().get(o.getIndex()) instanceof ReferenceType)) {
+            constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"
+                + locals().get(o.getIndex()) + "'; Instruction expects a ReferenceType.");
         }
+        // ALOAD __IS ALLOWED__ to put uninitialized objects onto the stack!
+        // referenceTypeIsInitialized(o, (ReferenceType) (locals().get(o.getIndex())));
 
         // LOAD instructions must have enough free stack slots.
         if (stack().maxStack() - stack().slotsUsed() < o.getType(cpg).getSize()) {
@@ -437,12 +435,9 @@ public class InstConstraintVisitor extends EmptyVisitor{
             //    constraintViolated(o, "Type on stack top which should be returned is a '"+stack().peek()+
             //    "' which is not assignment compatible with the return type of this method, '"+mg.getType()+"'.");
             //}
-        }
-        else{
-            if (! method_type.equals( stack().peek() )) {
-                constraintViolated(o, "Current method has return type of '"+mg.getType()+"' expecting a '"+method_type+
-                    "' on top of the stack. But stack top is a '"+stack().peek()+"'.");
-            }
+        } else if (! method_type.equals( stack().peek() )) {
+            constraintViolated(o, "Current method has return type of '"+mg.getType()+"' expecting a '"+method_type+
+                "' on top of the stack. But stack top is a '"+stack().peek()+"'.");
         }
     }
 
@@ -998,19 +993,14 @@ public class InstConstraintVisitor extends EmptyVisitor{
 
         if (stack().peek(0).getSize() == 2) {
              // stack top size is 2, next-to-top's size is 1
-            if ( (stack().peek(1).getSize() == 2) || (stack().peek(2).getSize() == 1) ) {
+            if ( stack().peek(1).getSize() == 2 || stack().peek(2).getSize() == 1 ) {
                 return; // Form 2
             }
             constraintViolated(o, "If stack top's size is 2 and stack-next-to-top's size is 1,"+
                 " then stack next-to-next-to-top's size must also be 1. But it is '"+stack().peek(2)+
                 "' of size '"+stack().peek(2).getSize()+"'.");
-        }
-        else{// stack top is of size 1
-            if (stack().peek(1).getSize() == 1) {
-                if ( (stack().peek(2).getSize() == 2) || (stack().peek(3).getSize() == 1)) {
-                    return; // Form 1
-                }
-            }
+        } else if ( stack().peek(1).getSize() == 1 && (stack().peek(2).getSize() == 2 || stack().peek(3).getSize() == 1)) {
+            return; // Form 1
         }
         constraintViolated(o, "The operand sizes on the stack do not match any of the four forms of usage of this instruction.");
     }
@@ -2727,11 +2717,8 @@ public class InstConstraintVisitor extends EmptyVisitor{
             if (!rvalue.isAssignmentCompatibleWith(shouldbe)) {
                 constraintViolated(o, "The stack top type '"+value+"' is not assignment compatible with '"+shouldbe+"'.");
             }
-        }
-        else{
-            if (shouldbe != value) {
-                constraintViolated(o, "The stack top type '"+value+"' is not of type '"+shouldbe+"' as expected.");
-            }
+        } else if (shouldbe != value) {
+            constraintViolated(o, "The stack top type '"+value+"' is not of type '"+shouldbe+"' as expected.");
         }
 
         if (f.isProtected()) {
@@ -2820,13 +2807,9 @@ public class InstConstraintVisitor extends EmptyVisitor{
                 constraintViolated(o, "The stack top type '"+value+"' is not assignment compatible with '"+shouldbe+"'.");
             }
         }
-        else{
-            if (shouldbe != value) {
-                constraintViolated(o, "The stack top type '"+value+"' is not of type '"+shouldbe+"' as expected.");
-            }
+        else if (shouldbe != value) {
+            constraintViolated(o, "The stack top type '"+value+"' is not of type '"+shouldbe+"' as expected.");
         }
-        // TODO: Interface fields may be assigned to only once. (Hard to implement in
-        //       JustIce's execution model). This may only happen in <clinit>, see Pass 3a.
 
         } catch (final ClassNotFoundException e) {
         // FIXME: maybe not the best way to handle this

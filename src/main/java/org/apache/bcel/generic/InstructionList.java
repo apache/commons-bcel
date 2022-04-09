@@ -113,7 +113,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
          * Do a binary search since the pos array is orderd.
          */
         do {
-            final int i = (l + r) >>> 1;
+            final int i = l + r >>> 1;
             final int j = pos[i];
             if (j == target) {
                 return ihs[i];
@@ -619,10 +619,10 @@ public class InstructionList implements Iterable<InstructionHandle> {
      */
     public void move(final InstructionHandle start, final InstructionHandle end, final InstructionHandle target) {
         // Step 1: Check constraints
-        if ((start == null) || (end == null)) {
+        if (start == null || end == null) {
             throw new ClassGenException("Invalid null handle: From " + start + " to " + end);
         }
-        if ((target == start) || (target == end)) {
+        if (target == start || target == end) {
             throw new ClassGenException("Invalid range: From " + start + " to " + end + " contains target " + target);
         }
         for (InstructionHandle ih = start; ih != end.getNext(); ih = ih.getNext()) {
@@ -691,7 +691,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     private void remove(final InstructionHandle prev, InstructionHandle next) throws TargetLostException {
         InstructionHandle first;
         InstructionHandle last; // First and last deleted instruction
-        if ((prev == null) && (next == null)) {
+        if (prev == null && next == null) {
             first = start;
             last = end;
             start = end = null;

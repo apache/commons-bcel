@@ -169,8 +169,8 @@ public class ControlFlowGraph{
             executionPredecessors = clone;
 
             // sanity check
-            if ((lastExecutionJSR() == null && subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel()) ||
-                    (lastExecutionJSR() != null && subroutines.subroutineOf(getInstruction()) == subroutines.getTopLevel())) {
+            if (lastExecutionJSR() == null && subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel() ||
+                    lastExecutionJSR() != null && subroutines.subroutineOf(getInstruction()) == subroutines.getTopLevel()) {
                 throw new AssertionViolatedException("Huh?! Am I '" + this + "' part of a subroutine or not?");
             }
 
@@ -344,7 +344,7 @@ public class ControlFlowGraph{
             // Terminates method normally.
             // Terminates method abnormally, because JustIce mandates
             // subroutines not to be protected by exception handlers.
-            if ((inst instanceof ReturnInstruction) || (inst instanceof ATHROW)) {
+            if (inst instanceof ReturnInstruction || inst instanceof ATHROW) {
                 return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
             }
 
