@@ -33,6 +33,13 @@ import org.apache.bcel.util.BCELComparator;
  */
 public final class Method extends FieldOrMethod {
 
+    /**
+     * Empty array constant.
+     *
+     * @since 6.6.0
+     */
+    public static final Method[] EMPTY_ARRAY = {};
+
     private static BCELComparator bcelComparator = new BCELComparator() {
 
         @Override

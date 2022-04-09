@@ -31,6 +31,8 @@ import java.util.List;
  */
 public class ParameterAnnotationEntry implements Node {
 
+    static final ParameterAnnotationEntry[] EMPTY_ARRAY = {};
+    
     private final AnnotationEntry[] annotationTable;
 
 
@@ -85,7 +87,7 @@ public class ParameterAnnotationEntry implements Node {
               Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getParameterAnnotationEntries());
           }
       }
-      return accumulatedAnnotations.toArray(new ParameterAnnotationEntry[0]);
+      return accumulatedAnnotations.toArray(ParameterAnnotationEntry.EMPTY_ARRAY);
   }
 }
 

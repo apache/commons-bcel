@@ -27,7 +27,10 @@ import org.apache.bcel.generic.ObjectType;
  * the handler starts off (represented by an InstructionContext).
  *
  */
-public class ExceptionHandler{
+public class ExceptionHandler {
+    
+    static final ExceptionHandler[] EMPTY_ARRAY = {};
+    
     /** The type of the exception to catch. NULL means ANY. */
     private final ObjectType catchType;
 

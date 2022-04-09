@@ -33,6 +33,8 @@ import org.apache.bcel.Const;
  */
 public class AnnotationEntry implements Node {
 
+    public static final AnnotationEntry[] EMPTY_ARRAY = {};
+    
     private final int typeIndex;
     private final ConstantPool constantPool;
     private final boolean isRuntimeVisible;
@@ -117,7 +119,7 @@ public class AnnotationEntry implements Node {
      */
     public ElementValuePair[] getElementValuePairs() {
         // TODO return List
-        return elementValuePairs.toArray(new ElementValuePair[0]);
+        return elementValuePairs.toArray(ElementValuePair.EMPTY_ARRAY);
     }
 
     public void dump(final DataOutputStream dos) throws IOException {
@@ -165,6 +167,6 @@ public class AnnotationEntry implements Node {
                 Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getAnnotationEntries());
             }
         }
-        return accumulatedAnnotations.toArray(new AnnotationEntry[0]);
+        return accumulatedAnnotations.toArray(AnnotationEntry.EMPTY_ARRAY);
     }
 }

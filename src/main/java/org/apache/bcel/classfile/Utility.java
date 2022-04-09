@@ -37,6 +37,7 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Utility functions that do not really belong to any class in particular.
@@ -591,7 +592,7 @@ public abstract class Utility {
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
             throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
-        return vec.toArray(new String[0]);
+        return vec.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
 

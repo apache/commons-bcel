@@ -96,7 +96,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         final AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
         final List<AnnotationEntryGen> v = new ArrayList<>();
         v.add(a);
-        final Attribute[] attributes = AnnotationEntryGen.getAnnotationAttributes(cp, v.toArray(new AnnotationEntryGen[0]));
+        final Attribute[] attributes = AnnotationEntryGen.getAnnotationAttributes(cp, v.toArray(AnnotationEntryGen.EMPTY_ARRAY));
         boolean foundRV = false;
         for (final Attribute attribute : attributes) {
             if (attribute instanceof RuntimeVisibleAnnotations)
@@ -111,7 +111,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         final AnnotationEntryGen a2 = new AnnotationEntryGen(t, elements, false, cp);
         final List<AnnotationEntryGen> v2 = new ArrayList<>();
         v2.add(a2);
-        final Attribute[] attributes2 = AnnotationEntryGen.getAnnotationAttributes(cp, v2.toArray(new AnnotationEntryGen[0]));
+        final Attribute[] attributes2 = AnnotationEntryGen.getAnnotationAttributes(cp, v2.toArray(AnnotationEntryGen.EMPTY_ARRAY));
         boolean foundRIV = false;
         for (final Attribute attribute : attributes2) {
             if (attribute instanceof RuntimeInvisibleAnnotations)

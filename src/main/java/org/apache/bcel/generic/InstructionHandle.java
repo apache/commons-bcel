@@ -48,7 +48,7 @@ public class InstructionHandle {
      *
      * @since 6.6.0
      */
-    public static final InstructionHandle[] EMPTY_INSTRUCTION_HANDLE_ARRAY = new InstructionHandle[0];
+    public static final InstructionHandle[] EMPTY_ARRAY = new InstructionHandle[0];
 
     /**
      * Empty array.

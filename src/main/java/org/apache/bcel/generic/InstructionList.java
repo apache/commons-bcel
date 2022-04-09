@@ -965,7 +965,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
         } catch (final IOException e) {
             throw new ClassGenException(e.toString(), e);
         }
-        return instructions.toArray(new Instruction[0]);
+        return instructions.toArray(Instruction.EMPTY_ARRAY);
     }
 
     @Override

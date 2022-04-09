@@ -34,7 +34,7 @@ public class ExceptionHandlers {
     /**
      * Empty array.
      */
-    private static final ExceptionHandler[] EMPTY_EXCEPTION_HANDLER_ARRAY = new ExceptionHandler[0];
+    private static final ExceptionHandler[] EMPTY_ARRAY = new ExceptionHandler[0];
 
     /**
      * The ExceptionHandler instances. Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
@@ -63,9 +63,9 @@ public class ExceptionHandlers {
     public ExceptionHandler[] getExceptionHandlers(final InstructionHandle ih) {
         final Set<ExceptionHandler> hsSet = exceptionHandlers.get(ih);
         if (hsSet == null) {
-            return EMPTY_EXCEPTION_HANDLER_ARRAY;
+            return EMPTY_ARRAY;
         }
-        return hsSet.toArray(new ExceptionHandler[0]);
+        return hsSet.toArray(ExceptionHandler.EMPTY_ARRAY);
     }
 
 }

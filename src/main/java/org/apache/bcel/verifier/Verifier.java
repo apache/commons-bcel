@@ -27,6 +27,7 @@ import org.apache.bcel.verifier.statics.Pass1Verifier;
 import org.apache.bcel.verifier.statics.Pass2Verifier;
 import org.apache.bcel.verifier.statics.Pass3aVerifier;
 import org.apache.bcel.verifier.structurals.Pass3bVerifier;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * A Verifier instance is there to verify a class file according to The Java Virtual
@@ -176,7 +177,7 @@ public class Verifier {
             }
         }
 
-        return messages.toArray(new String[0]);
+        return messages.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
 

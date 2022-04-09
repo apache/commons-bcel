@@ -28,6 +28,8 @@ package org.apache.bcel.generic;
  */
 public interface InstructionTargeter {
 
+    //static final InstructionTargeter[] EMPTY_ARRAY = new InstructionTargeter[0];
+    
     /**
      * Checks whether this targeter targets the specified instruction handle.
      */

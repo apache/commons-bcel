@@ -20,6 +20,8 @@ package org.apache.bcel.verifier;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 /**
  * A PassVerifier actually verifies a class file; it is instantiated
  * by a Verifier.
@@ -99,6 +101,6 @@ public abstract class PassVerifier {
      */
     public String[] getMessages() {
         verify(); // create messages if not already done (cached!)
-        return messages.toArray(new String[0]);
+        return messages.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 }
