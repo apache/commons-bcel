@@ -70,7 +70,7 @@
     <commons.japicmp.version>0.15.3</commons.japicmp.version>
     <japicmp.skip>false</japicmp.skip>
     <clirr.skip>true</clirr.skip>
-    <commons.jacoco.version>0.8.7</commons.jacoco.version>
+    <commons.jacoco.version>0.8.8</commons.jacoco.version>
     <commons.javadoc.version>3.3.2</commons.javadoc.version>
     <commons.felix.version>5.1.3</commons.felix.version>
     <biz.aQute.bndlib.version>6.2.0</biz.aQute.bndlib.version>
