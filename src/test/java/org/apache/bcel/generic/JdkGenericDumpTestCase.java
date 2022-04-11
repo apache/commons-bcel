@@ -144,7 +144,11 @@ public class JdkGenericDumpTestCase {
 
     public static Stream<String> findJavaHomes() {
         if (SystemUtils.IS_OS_WINDOWS) {
-            return findJavaHomesOnWindows();
+            final Stream<String> stream = findJavaHomesOnWindows();
+            if (stream.count() > 0) {
+                return findJavaHomesOnWindows();
+            }
+            // Falls back here on CI env like GitHub Actions. 
         }
         return Stream.of(SystemUtils.JAVA_HOME);
     }
