@@ -36,7 +36,7 @@ public final class StackMapEntry implements Node, Cloneable
     /**
      * Empty array.
      */
-    private static final StackMapType[] EMPTY_STACK_MAP_TYPE_ARRAY = new StackMapType[0];
+    private static final StackMapType[] EMPTY_STACK_MAP_TYPE_ARRAY = {};
 
     private int frameType;
     private int byteCodeOffset;
@@ -244,7 +244,7 @@ public final class StackMapEntry implements Node, Cloneable
         if (frameType == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             return 3 + (typesOfStackItems[0].hasIndex() ? 3 : 1);
         }
-        if ((frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX) || (frameType == Const.SAME_FRAME_EXTENDED)) {
+        if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX || frameType == Const.SAME_FRAME_EXTENDED) {
             return 3;
         }
         if (frameType >= Const.APPEND_FRAME && frameType <= Const.APPEND_FRAME_MAX) {

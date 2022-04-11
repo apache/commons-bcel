@@ -23,12 +23,15 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * an annotation's element value pair
+ * An annotation's element value pair.
  *
  * @since 6.0
  */
 public class ElementValuePair
 {
+    
+    static final ElementValuePair[] EMPTY_ARRAY = {};
+    
     private final ElementValue elementValue;
 
     private final ConstantPool constantPool;

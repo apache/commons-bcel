@@ -109,8 +109,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     @Override
     public String toString( final boolean verbose ) {
         final short _opcode = super.getOpcode();
-        if (((_opcode >= Const.ILOAD_0) && (_opcode <= Const.ALOAD_3))
-         || ((_opcode >= Const.ISTORE_0) && (_opcode <= Const.ASTORE_3))) {
+        if (_opcode >= Const.ILOAD_0 && _opcode <= Const.ALOAD_3
+         || _opcode >= Const.ISTORE_0 && _opcode <= Const.ASTORE_3) {
             return super.toString(verbose);
         }
         return super.toString(verbose) + " " + n;
@@ -130,8 +130,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
             super.setLength(4);
         } else {
             final short _opcode = super.getOpcode();
-            if (((_opcode >= Const.ILOAD) && (_opcode <= Const.ALOAD))
-             || ((_opcode >= Const.ISTORE) && (_opcode <= Const.ASTORE))) {
+            if (_opcode >= Const.ILOAD && _opcode <= Const.ALOAD
+             || _opcode >= Const.ISTORE && _opcode <= Const.ASTORE) {
                 n = bytes.readUnsignedByte();
                 super.setLength(2);
             } else if (_opcode <= Const.ALOAD_3) { // compact load instruction such as ILOAD_2
@@ -162,7 +162,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      */
     @Override
     public void setIndex( final int n ) { // TODO could be package-protected?
-        if ((n < 0) || (n > Const.MAX_SHORT)) {
+        if (n < 0 || n > Const.MAX_SHORT) {
             throw new ClassGenException("Illegal value: " + n);
         }
         this.n = n;

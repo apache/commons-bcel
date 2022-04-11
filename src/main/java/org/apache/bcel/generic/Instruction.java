@@ -30,6 +30,8 @@ import org.apache.bcel.util.ByteSequence;
  */
 public abstract class Instruction implements Cloneable {
 
+    static final Instruction[] EMPTY_ARRAY = {};
+
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */

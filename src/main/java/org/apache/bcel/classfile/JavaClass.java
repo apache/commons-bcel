@@ -49,6 +49,8 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
 
+    static final JavaClass[] EMPTY_ARRAY = {};
+    
     private String fileName;
     private final String packageName;
     private String sourceFileName = "<Unknown>";
@@ -832,7 +834,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         for (clazz = clazz.getSuperClass(); clazz != null; clazz = clazz.getSuperClass()) {
             allSuperClasses.add(clazz);
         }
-        return allSuperClasses.toArray(new JavaClass[0]);
+        return allSuperClasses.toArray(JavaClass.EMPTY_ARRAY);
     }
 
 
@@ -871,7 +873,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                 queue.enqueue(_interface);
             }
         }
-        return allInterfaces.toArray(new JavaClass[0]);
+        return allInterfaces.toArray(JavaClass.EMPTY_ARRAY);
     }
 
 

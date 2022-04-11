@@ -627,8 +627,8 @@ public class Subroutines{
         // Terminates method normally.
         // Terminates method abnormally, because JustIce mandates
         // subroutines not to be protected by exception handlers.
-        if ((inst instanceof RET) || (inst instanceof ReturnInstruction) || (inst instanceof ATHROW)) {
-            return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
+        if (inst instanceof RET || inst instanceof ReturnInstruction || inst instanceof ATHROW) {
+            return InstructionHandle.EMPTY_ARRAY;
         }
 
         // See method comment.

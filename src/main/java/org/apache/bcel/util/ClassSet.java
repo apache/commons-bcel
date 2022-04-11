@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Utility class implementing a (typesafe) set of JavaClass objects.
@@ -64,6 +65,6 @@ public class ClassSet {
 
 
     public String[] getClassNames() {
-        return map.keySet().toArray(new String[0]);
+        return map.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 }

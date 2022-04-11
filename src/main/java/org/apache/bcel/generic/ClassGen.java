@@ -190,7 +190,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
                     }
                 }
         }
-        return annotationGenObjs.toArray(new AnnotationEntryGen[0]);
+        return annotationGenObjs.toArray(AnnotationEntryGen.EMPTY_ARRAY);
     }
 
 
@@ -432,7 +432,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
 
     public Method[] getMethods() {
-        return methodList.toArray(new Method[0]);
+        return methodList.toArray(Method.EMPTY_ARRAY);
     }
 
 
@@ -473,17 +473,17 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
 
     public Field[] getFields() {
-        return fieldList.toArray(new Field[0]);
+        return fieldList.toArray(Field.EMPTY_ARRAY);
     }
 
 
     public Attribute[] getAttributes() {
-        return attributeList.toArray(new Attribute[0]);
+        return attributeList.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
     }
 
     //  J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?
     public AnnotationEntryGen[] getAnnotationEntries() {
-        return annotationList.toArray(new AnnotationEntryGen[0]);
+        return annotationList.toArray(AnnotationEntryGen.EMPTY_ARRAY);
     }
 
 
