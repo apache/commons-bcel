@@ -40,6 +40,8 @@ jobs:
       fail-fast: false
         
     steps:
+    - name: Prepare git
+      run: git config core.autocrlf false
     - uses: actions/checkout@v3
     - uses: actions/cache@v3
       with:
