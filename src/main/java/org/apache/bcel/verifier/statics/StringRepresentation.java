@@ -410,7 +410,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     /**
-     * @since 6.1
+     * @since 6.6.0
      */
     @Override
     public void visitConstantModule(final ConstantModule obj) {
@@ -418,7 +418,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     /**
-     * @since 6.1
+     * @since 6.6.0
      */
     @Override
     public void visitConstantPackage(final ConstantPackage obj) {
@@ -426,7 +426,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     /**
-     * @since 6.3
+     * @since 6.6.0
      */
     @Override
     public void visitConstantDynamic(final ConstantDynamic obj) {

@@ -32,6 +32,7 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.environment.EnvironmentUtils;
+import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
 
@@ -140,7 +141,7 @@ public class VerifyBadClassesTestCase {
      */
     private void testVerify(String directory, String className) {
         final String baseDir = "target/test-classes";
-        String testDir = baseDir + (directory.isEmpty() ? "" : "/" + directory);
+        final String testDir = baseDir + (directory.isEmpty() ? "" : "/" + directory);
 
         File origFile = new File(testDir + "/" + className + ".classx");
         File testFile = new File(testDir + "/" + className + ".class");
@@ -149,7 +150,13 @@ public class VerifyBadClassesTestCase {
              fail("Failed to rename orig file");
          }
 
-         String result = run(buildVerifyCommand(className, testDir));
+         String result;
+         try {
+             result = run(buildVerifyCommand(className, testDir));
+         } catch (Exception e) {
+             result = e.getMessage();
+         }
+
 
          if (!testFile.renameTo(origFile)) {
              fail("Failed to rename test file");
@@ -179,11 +186,13 @@ public class VerifyBadClassesTestCase {
      *
      * @param command the command to be run in the process
      * @return a String capturing the error output of executing the command
+     * @throws ExecuteException if executor fails
+     * @throws IOException if executor fails
      */
-    private String run(List<String> command) {
+    private String run(List<String> command) throws ExecuteException, IOException {
 
       /** The process timeout in milliseconds. Defaults to 30 seconds. */
-      long timeout = 30 * 1000;
+      final long timeout = 30 * 1000;
 
       String[] args = command.toArray(new String[0]);
       CommandLine cmdLine = new CommandLine(args[0]); // constructor requires executable name
@@ -192,19 +201,14 @@ public class VerifyBadClassesTestCase {
       DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
       DefaultExecutor executor = new DefaultExecutor();
 
-      ExecuteWatchdog watchdog = new ExecuteWatchdog(timeout);
+      final ExecuteWatchdog watchdog = new ExecuteWatchdog(timeout);
       executor.setWatchdog(watchdog);
 
       final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
       final ByteArrayOutputStream errStream = new ByteArrayOutputStream();
       PumpStreamHandler streamHandler = new PumpStreamHandler(outStream, errStream);
       executor.setStreamHandler(streamHandler);
-
-      try {
-        executor.execute(cmdLine, resultHandler);
-      } catch (IOException e) {
-        fail("Exception starting process: " + e.getMessage());
-      }
+      executor.execute(cmdLine, resultHandler);
 
       int exitValue = -1;
       try {
@@ -213,7 +217,7 @@ public class VerifyBadClassesTestCase {
       } catch (InterruptedException e) {
         // Ignore exception, but watchdog.killedProcess() records that the process timed out.
       }
-      boolean timedOut = executor.isFailure(exitValue) && watchdog.killedProcess();
+      final boolean timedOut = executor.isFailure(exitValue) && watchdog.killedProcess();
       if (timedOut) {
         return "Command timed out.";
       }
