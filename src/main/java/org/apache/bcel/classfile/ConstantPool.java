@@ -309,6 +309,14 @@ public class ConstantPool implements Cloneable, Node {
             case Const.CONSTANT_Package:
                 i = ((ConstantPackage) c).getNameIndex();
                 break;
+            case Const.CONSTANT_Utf8:
+                if (c instanceof ConstantUtf8) {
+                    // In the case of Module, ModuleRequires and perhaps others,
+                    // we already have a ConstantUtf8 which we should simply
+                    // use, and otherwise will trip over the default clause below.
+                    return ((ConstantUtf8) c).getBytes();
+                }
+                // fallthrough
             default:
                 throw new IllegalArgumentException("getConstantString called with illegal tag " + tag);
         }
