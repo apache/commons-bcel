@@ -74,6 +74,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Arturo Bernal">Java 8 improvements #95.</action>
       <action issue="BCEL-345" type="fix" dev="ggregory" due-to="Christine Poerschke">Make documentation wording more inclusive #98.</action>
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Force unsigned short for LineNumber.toString() #118.</action>
+      <action                  type="fix" dev="ggregory" due-to="Tim Boudreau, Gary Gregory">Fix IllegalStateException when calling toString(ConstantPool) on a Module or ModuleRequires #125.</action>
       <!-- ADD -->
       <!-- UPDATES -->
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/cache from 2 to 3.0.2 #88, #93, #110, #119.</action>

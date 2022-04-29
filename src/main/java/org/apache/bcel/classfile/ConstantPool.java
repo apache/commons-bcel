@@ -309,6 +309,9 @@ public class ConstantPool implements Cloneable, Node {
             case Const.CONSTANT_Package:
                 i = ((ConstantPackage) c).getNameIndex();
                 break;
+            case Const.CONSTANT_Utf8:
+                return ((ConstantUtf8) c).getBytes();
+                // fallthrough
             default:
                 throw new IllegalArgumentException("getConstantString called with illegal tag " + tag);
         }
