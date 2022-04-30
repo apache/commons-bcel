@@ -365,8 +365,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             final Constant c = cp.getConstant(index);
             if (! shouldbe.isInstance(c)) {
                 /* String isnot = shouldbe.toString().substring(shouldbe.toString().lastIndexOf(".")+1); //Cut all before last "." */
-                throw new ClassCastException("Illegal constant '"+tostring(c)+"' at index '"+
-                    index+"'. '"+tostring(referrer)+"' expects a '"+shouldbe+"'.");
+                throw new ClassConstraintException("Illegal constant '" + tostring(c) + "' at index '" +
+                    index + "'. '" + tostring(referrer) + "' expects a '" + shouldbe + "'.");
             }
         }
         ///////////////////////////////////////
@@ -1026,12 +1026,23 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // TODO: rework it.
             int method_number = -1;
             final Method[] ms = Repository.lookupClass(myOwner.getClassName()).getMethods();
-            for (int mn=0; mn<ms.length; mn++) {
+            for (int mn = 0; mn < ms.length; mn++) {
                 if (m == ms[mn]) {
                     method_number = mn;
                     break;
                 }
             }
+            // If the .class file is malformed the loop above may not find a method.
+            // Try matching names instead of pointers.
+            if (method_number < 0) {
+                for (int mn = 0; mn < ms.length; mn++) {
+                    if (m.getName().equals(ms[mn].getName())) {
+                        method_number = mn;
+                        break;
+                    }
+                }
+            }
+
             if (method_number < 0) { // Mmmmh. Can we be sure BCEL does not sometimes instantiate new objects?
                 throw new AssertionViolatedException(
                     "Could not find a known BCEL Method object in the corresponding BCEL JavaClass object.");
@@ -1445,16 +1456,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * Conforming to: The Java Virtual Machine Specification, Second Edition, �2.7, �2.7.1, �2.2.
      */
     private static boolean validJavaLangMethodName(final String name) {
-        if (!Character.isJavaIdentifierStart(name.charAt(0))) {
-            return false;
-        }
-
-        for (int i=1; i<name.length(); i++) {
-            if (!Character.isJavaIdentifierPart(name.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
+        return validJavaIdentifier(name);
     }
 
     /**
@@ -1472,7 +1474,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
     /**
      * This method returns true if and only if the supplied String
-     * represents a valid Java identifier (so-called simple name).
+     * represents a valid Java identifier (so-called simple or unqualified name).
      */
     private static boolean validJavaIdentifier(final String name) {
     // vmspec2 2.7, vmspec2 2.2

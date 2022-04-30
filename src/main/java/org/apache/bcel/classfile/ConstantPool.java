@@ -49,10 +49,9 @@ public class ConstantPool implements Cloneable, Node {
      * Reads constants from given input stream.
      *
      * @param input Input stream
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException if problem in readUnsignedShort or readConstant
      */
-    public ConstantPool(final DataInput input) throws IOException, ClassFormatException {
+    public ConstantPool(final DataInput input) throws IOException {
         byte tag;
         final int constant_pool_count = input.readUnsignedShort();
         constantPool = new Constant[constant_pool_count];
@@ -92,8 +91,9 @@ public class ConstantPool implements Cloneable, Node {
      *
      * @param  c Constant to be printed
      * @return String representation
+     * @throws IllegalArgumentException if c is unknown constant type
      */
-    public String constantToString( Constant c ) throws ClassFormatException {
+    public String constantToString( Constant c ) throws IllegalArgumentException {
         String str;
         int i;
         final byte tag = c.getTag();
@@ -206,7 +206,7 @@ public class ConstantPool implements Cloneable, Node {
      * @param  tag expected type
      * @return String representation
      */
-    public String constantToString( final int index, final byte tag ) throws ClassFormatException {
+    public String constantToString( final int index, final byte tag ) {
         final Constant c = getConstant(index, tag);
         return constantToString(c);
     }
@@ -215,7 +215,7 @@ public class ConstantPool implements Cloneable, Node {
      * Dump constant pool to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if problem in writeShort or dump
      */
     public void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(constantPool.length);
@@ -232,13 +232,18 @@ public class ConstantPool implements Cloneable, Node {
      * @param  index Index in constant pool
      * @return Constant value
      * @see    Constant
+     * @throws ClassFormatException if index is invalid
      */
-    public Constant getConstant( final int index ) {
+    public Constant getConstant( final int index ) throws ClassFormatException {
         if (index >= constantPool.length || index < 0) {
             throw new ClassFormatException("Invalid constant pool reference: " + index
                     + ". Constant pool size is: " + constantPool.length);
         }
-        return constantPool[index];
+        Constant ret = constantPool[index];
+        if (ret == null) {
+            throw new ClassFormatException("Constant pool at index " + index + " is null.");
+        }
+        return ret;
     }
 
     /**
@@ -249,14 +254,10 @@ public class ConstantPool implements Cloneable, Node {
      * @param  tag Tag of expected constant, i.e., its type
      * @return Constant value
      * @see    Constant
-     * @throws  ClassFormatException
+     * @throws  ClassFormatException if constant type does not match tag
      */
     public Constant getConstant( final int index, final byte tag ) throws ClassFormatException {
-        Constant c;
-        c = getConstant(index);
-        if (c == null) {
-            throw new ClassFormatException("Constant pool at index " + index + " is null.");
-        }
+        Constant c = getConstant(index);
         if (c.getTag() != tag) {
             throw new ClassFormatException("Expected class `" + Const.getConstantName(tag)
                     + "' at index " + index + " and got " + c);
@@ -283,9 +284,9 @@ public class ConstantPool implements Cloneable, Node {
      * @return Contents of string reference
      * @see    ConstantClass
      * @see    ConstantString
-     * @throws  ClassFormatException
+     * @throws  IllegalArgumentException if tag is invalid
      */
-    public String getConstantString( final int index, final byte tag ) throws ClassFormatException {
+    public String getConstantString( final int index, final byte tag ) throws IllegalArgumentException {
         Constant c;
         int i;
         c = getConstant(index, tag);

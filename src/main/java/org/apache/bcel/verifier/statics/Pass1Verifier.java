@@ -25,7 +25,6 @@ import org.apache.bcel.verifier.PassVerifier;
 import org.apache.bcel.verifier.VerificationResult;
 import org.apache.bcel.verifier.Verifier;
 import org.apache.bcel.verifier.exc.LoadingException;
-import org.apache.bcel.verifier.exc.Utility;
 
 /**
  * This PassVerifier verifies a class file according to pass 1 as
@@ -152,10 +151,14 @@ public final class Pass1Verifier extends PassVerifier{
             if (jc != null && ! myOwner.getClassName().equals(jc.getClassName())) {
                 // This should maybe caught by BCEL: In case of renamed .class files we get wrong
                 // JavaClass objects here.
-                throw new LoadingException("Wrong name: the internal name of the .class file '"+jc.getClassName()+
-                    "' does not match the file's name '"+myOwner.getClassName()+"'.");
+                // This test should be much more complicated.  It needs to take the classname, remove any portion at the
+                // end that matches the file name and then see if the remainder matches anything on the class path.
+                // Dumb test for now, see if the class name ends with the file name.
+                if (!jc.getClassName().endsWith(myOwner.getClassName())) {
+                    throw new LoadingException("Wrong name: the internal name of the .class file '" + jc.getClassName() +
+                    "' does not match the file's name '" + myOwner.getClassName() + "'.");
+                }
             }
-
         }
         catch(final LoadingException | ClassFormatException e) {
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, e.getMessage());
@@ -164,7 +167,9 @@ public final class Pass1Verifier extends PassVerifier{
             // BCEL does not catch every possible RuntimeException; e.g. if
             // a constant pool index is referenced that does not exist.
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Parsing via BCEL did not succeed. "+
-                e.getClass().getName()+" occured:\n"+Utility.getStackTrace(e));
+                " exception occured:\n" + e.toString());
+                // Don't think we want to dump a stack trace unless we have some sort of a debug option.
+                //e.getClass().getName()+" occured:\n"+Utility.getStackTrace(e));
         }
 
         if (jc != null) {
