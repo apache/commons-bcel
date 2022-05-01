@@ -62,7 +62,7 @@ public abstract class Type {
     /**
      * Empty array.
      */
-    public static final Type[] NO_ARGS = new Type[0];
+    public static final Type[] NO_ARGS = {};
     public static final ReferenceType NULL = new ReferenceType() {
     };
     public static final Type UNKNOWN = new Type(Const.T_UNKNOWN, "<unknown object>") {
