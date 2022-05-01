@@ -121,8 +121,8 @@ public class ParseException extends Exception {
       if (maxSize < expectedTokenSequence.length) {
         maxSize = expectedTokenSequence.length;
       }
-      for (int j = 0; j < expectedTokenSequence.length; j++) {
-        expected += tokenImage[expectedTokenSequence[j]] + " ";
+      for (final int element : expectedTokenSequence) {
+        expected += tokenImage[element] + " ";
       }
       if (expectedTokenSequence[expectedTokenSequence.length - 1] != 0) {
         expected += "...";
@@ -163,7 +163,7 @@ public class ParseException extends Exception {
    * string literal.
    */
   protected String add_escapes(final String str) {
-      final StringBuffer retval = new StringBuffer();
+      final StringBuilder retval = new StringBuilder();
       char ch;
       for (int i = 0; i < str.length(); i++) {
         switch (str.charAt(i))
