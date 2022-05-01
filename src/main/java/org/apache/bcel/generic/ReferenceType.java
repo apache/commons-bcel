@@ -82,11 +82,9 @@ public abstract class ReferenceType extends Type {
             /* If T is a class type, then this must be the same class as T,
              or this must be a subclass of T;
              */
-            if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact()) {
-                if (this.equals(T) || Repository.instanceOf(((ObjectType) this).getClassName(), ((ObjectType) T)
-                        .getClassName())) {
-                    return true;
-                }
+            if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact()
+                && (this.equals(T) || Repository.instanceOf(((ObjectType) this).getClassName(), ((ObjectType) T).getClassName()))) {
+                return true;
             }
             /* If T is an interface type, this must implement interface T.
              */
@@ -106,11 +104,9 @@ public abstract class ReferenceType extends Type {
             /* If T is an interface type, then T must be the same interface
              * as this or a superinterface of this (�2.13.2).
              */
-            if (T instanceof ObjectType && ((ObjectType) T).referencesInterfaceExact()) {
-                if (this.equals(T) || Repository.implementationOf(((ObjectType) this).getClassName(),
-                        ((ObjectType) T).getClassName())) {
-                    return true;
-                }
+            if (T instanceof ObjectType && ((ObjectType) T).referencesInterfaceExact()
+                && (this.equals(T) || Repository.implementationOf(((ObjectType) this).getClassName(), ((ObjectType) T).getClassName()))) {
+                return true;
             }
         }
         /* If this is an array type, namely, the type SC[], that is, an
