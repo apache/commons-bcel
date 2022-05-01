@@ -29,14 +29,6 @@ public class FCMPL extends Instruction implements TypedInstruction, StackProduce
     }
 
 
-    /** @return Type.FLOAT
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.FLOAT;
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -51,5 +43,13 @@ public class FCMPL extends Instruction implements TypedInstruction, StackProduce
         v.visitStackProducer(this);
         v.visitStackConsumer(this);
         v.visitFCMPL(this);
+    }
+
+
+    /** @return Type.FLOAT
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.FLOAT;
     }
 }

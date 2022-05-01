@@ -81,6 +81,24 @@ public class MethodGenTestCase {
         assertEquals(1, secondParamAnnotations.size(), "Wrong number of annotations in the second parameter");
     }
 
+    private void testInvalidNullMethodBody(final String className) throws ClassNotFoundException {
+        final JavaClass jc = Repository.lookupClass(className);
+        final ClassGen classGen = new ClassGen(jc);
+        for (final Method method : jc.getMethods()) {
+            new MethodGen(method, jc.getClassName(), classGen.getConstantPool());
+        }
+    }
+
+    @Test
+    public void testInvalidNullMethodBody_EmptyStaticInit() throws Exception {
+        testInvalidNullMethodBody("org.apache.bcel.generic.EmptyStaticInit");
+    }
+
+    @Test
+    public void testInvalidNullMethodBody_MailDateFormat() {
+        assertThrows(IllegalStateException.class, () -> testInvalidNullMethodBody("javax.mail.internet.MailDateFormat"));
+    }
+
     @Test
     public void testRemoveLocalVariable() throws Exception {
         final MethodGen mg = getMethod(Foo.class, "bar");
@@ -123,23 +141,5 @@ public class MethodGenTestCase {
         assertFalse(Arrays.asList(end.getTargeters()).contains(lv), "scope end still targeted by the removed variable");
         assertNull(lv.getStart(), "scope start");
         assertNull(lv.getEnd(), "scope end");
-    }
-
-    @Test
-    public void testInvalidNullMethodBody_MailDateFormat() {
-        assertThrows(IllegalStateException.class, () -> testInvalidNullMethodBody("javax.mail.internet.MailDateFormat"));
-    }
-
-    @Test
-    public void testInvalidNullMethodBody_EmptyStaticInit() throws Exception {
-        testInvalidNullMethodBody("org.apache.bcel.generic.EmptyStaticInit");
-    }
-
-    private void testInvalidNullMethodBody(final String className) throws ClassNotFoundException {
-        final JavaClass jc = Repository.lookupClass(className);
-        final ClassGen classGen = new ClassGen(jc);
-        for (final Method method : jc.getMethods()) {
-            new MethodGen(method, jc.getClassName(), classGen.getConstantPool());
-        }
     }
 }

@@ -39,21 +39,11 @@ public class MemorySensitiveClassPathRepository extends AbstractClassPathReposit
     }
 
     /**
-     * Store a new JavaClass instance into this Repository.
+     * Clear all entries from cache.
      */
     @Override
-    public void storeClass(final JavaClass clazz) {
-        // Not calling super.storeClass because this subclass maintains the mapping.
-        loadedClasses.put(clazz.getClassName(), new SoftReference<>(clazz));
-        clazz.setRepository(this);
-    }
-
-    /**
-     * Remove class from repository
-     */
-    @Override
-    public void removeClass(final JavaClass clazz) {
-        loadedClasses.remove(clazz.getClassName());
+    public void clear() {
+        loadedClasses.clear();
     }
 
     /**
@@ -69,10 +59,20 @@ public class MemorySensitiveClassPathRepository extends AbstractClassPathReposit
     }
 
     /**
-     * Clear all entries from cache.
+     * Remove class from repository
      */
     @Override
-    public void clear() {
-        loadedClasses.clear();
+    public void removeClass(final JavaClass clazz) {
+        loadedClasses.remove(clazz.getClassName());
+    }
+
+    /**
+     * Store a new JavaClass instance into this Repository.
+     */
+    @Override
+    public void storeClass(final JavaClass clazz) {
+        // Not calling super.storeClass because this subclass maintains the mapping.
+        loadedClasses.put(clazz.getClassName(), new SoftReference<>(clazz));
+        clazz.setRepository(this);
     }
 }

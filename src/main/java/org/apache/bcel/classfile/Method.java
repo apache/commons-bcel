@@ -58,28 +58,35 @@ public final class Method extends FieldOrMethod {
         }
     };
 
-    // annotations defined on the parameters of a method
-    private ParameterAnnotationEntry[] parameterAnnotationEntries;
-
     /**
      * Empty array.
      */
     static final Method[] EMPTY_METHOD_ARRAY = {};
 
     /**
+     * @return Comparison strategy object
+     */
+    public static BCELComparator getComparator() {
+        return bcelComparator;
+    }
+
+    /**
+     * @param comparator Comparison strategy object
+     */
+    public static void setComparator( final BCELComparator comparator ) {
+        bcelComparator = comparator;
+    }
+
+
+    // annotations defined on the parameters of a method
+    private ParameterAnnotationEntry[] parameterAnnotationEntries;
+
+
+    /**
      * Empty constructor, all attributes have to be defined via `setXXX'
      * methods. Use at your own risk.
      */
     public Method() {
-    }
-
-
-    /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
-     */
-    public Method(final Method c) {
-        super(c);
     }
 
 
@@ -109,6 +116,15 @@ public final class Method extends FieldOrMethod {
 
 
     /**
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use clone() for a physical copy.
+     */
+    public Method(final Method c) {
+        super(c);
+    }
+
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
@@ -118,6 +134,35 @@ public final class Method extends FieldOrMethod {
     @Override
     public void accept( final Visitor v ) {
         v.visitMethod(this);
+    }
+
+
+    /**
+     * @return deep copy of this method
+     */
+    public Method copy( final ConstantPool _constant_pool ) {
+        return (Method) copy_(_constant_pool);
+    }
+
+
+    /**
+     * Return value as defined by given BCELComparator strategy.
+     * By default two method objects are said to be equal when
+     * their names and signatures are equal.
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals( final Object obj ) {
+        return bcelComparator.equals(this, obj);
+    }
+
+
+    /**
+     * @return array of method argument types
+     */
+    public Type[] getArgumentTypes() {
+        return Type.getArgumentTypes(getSignature());
     }
 
 
@@ -148,6 +193,18 @@ public final class Method extends FieldOrMethod {
     }
 
 
+    /** @return LineNumberTable of code attribute if any, i.e. the call is forwarded
+     * to the Code atribute.
+     */
+    public LineNumberTable getLineNumberTable() {
+        final Code code = getCode();
+        if (code == null) {
+            return null;
+        }
+        return code.getLineNumberTable();
+    }
+
+
     /** @return LocalVariableTable of code attribute if any, i.e. the call is forwarded
      * to the Code atribute.
      */
@@ -160,17 +217,36 @@ public final class Method extends FieldOrMethod {
     }
 
 
-    /** @return LineNumberTable of code attribute if any, i.e. the call is forwarded
-     * to the Code atribute.
+    /**
+     * @return Annotations on the parameters of a method
+     * @since 6.0
      */
-    public LineNumberTable getLineNumberTable() {
-        final Code code = getCode();
-        if (code == null) {
-            return null;
+    public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
+        if (parameterAnnotationEntries == null) {
+            parameterAnnotationEntries = ParameterAnnotationEntry.createParameterAnnotationEntries(getAttributes());
         }
-        return code.getLineNumberTable();
+        return parameterAnnotationEntries;
     }
 
+
+    /**
+     * @return return type of method
+     */
+    public Type getReturnType() {
+        return Type.getReturnType(getSignature());
+    }
+
+
+    /**
+     * Return value as defined by given BCELComparator strategy.
+     * By default return the hashcode of the method's name XOR signature.
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return bcelComparator.hashCode(this);
+    }
 
     /**
      * Return string representation close to declaration format,
@@ -202,81 +278,5 @@ public final class Method extends FieldOrMethod {
             }
         }
         return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this method
-     */
-    public Method copy( final ConstantPool _constant_pool ) {
-        return (Method) copy_(_constant_pool);
-    }
-
-
-    /**
-     * @return return type of method
-     */
-    public Type getReturnType() {
-        return Type.getReturnType(getSignature());
-    }
-
-
-    /**
-     * @return array of method argument types
-     */
-    public Type[] getArgumentTypes() {
-        return Type.getArgumentTypes(getSignature());
-    }
-
-
-    /**
-     * @return Comparison strategy object
-     */
-    public static BCELComparator getComparator() {
-        return bcelComparator;
-    }
-
-
-    /**
-     * @param comparator Comparison strategy object
-     */
-    public static void setComparator( final BCELComparator comparator ) {
-        bcelComparator = comparator;
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default two method objects are said to be equal when
-     * their names and signatures are equal.
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals( final Object obj ) {
-        return bcelComparator.equals(this, obj);
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default return the hashcode of the method's name XOR signature.
-     *
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return bcelComparator.hashCode(this);
-    }
-
-    /**
-     * @return Annotations on the parameters of a method
-     * @since 6.0
-     */
-    public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
-        if (parameterAnnotationEntries == null) {
-            parameterAnnotationEntries = ParameterAnnotationEntry.createParameterAnnotationEntries(getAttributes());
-        }
-        return parameterAnnotationEntries;
     }
 }

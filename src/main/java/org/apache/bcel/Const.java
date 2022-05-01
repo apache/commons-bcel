@@ -363,26 +363,17 @@ public final class Const {
   public static final int ACCESS_NAMES_LENGTH = ACCESS_NAMES.length;
 
   /**
-   * @param index
-   * @return the ACCESS_NAMES entry at the given index
-   * @since 6.0
+   * Marks a constant pool entry as type UTF-8.
+   * @see  <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.7">
+   * The Constant Pool in The Java Virtual Machine Specification</a>
    */
-  public static String getAccessName(final int index) {
-      return ACCESS_NAMES[index];
-  }
+  public static final byte CONSTANT_Utf8               = 1;
 
   /*
    * The description of the constant pool is at:
    * http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4
    * References below are to the individual sections
    */
-
-  /**
-   * Marks a constant pool entry as type UTF-8.
-   * @see  <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.7">
-   * The Constant Pool in The Java Virtual Machine Specification</a>
-   */
-  public static final byte CONSTANT_Utf8               = 1;
 
   /**
    * Marks a constant pool entry as type Integer.
@@ -508,16 +499,6 @@ public final class Const {
     "CONSTANT_MethodType", "CONSTANT_Dynamic", "CONSTANT_InvokeDynamic",
     "CONSTANT_Module", "CONSTANT_Package"};
 
-  /**
-   *
-   * @param index
-   * @return the CONSTANT_NAMES entry at the given index
-   * @since 6.0
-   */
-  public static String getConstantName(final int index) {
-      return CONSTANT_NAMES[index];
-  }
-
   /** The name of the static initializer, also called &quot;class
    *  initialization method&quot; or &quot;interface initialization
    *   method&quot;. This is &quot;&lt;clinit&gt;&quot;.
@@ -533,13 +514,6 @@ public final class Const {
    * The names of the interfaces implemented by arrays
    */
   private static final String[] INTERFACES_IMPLEMENTED_BY_ARRAYS = {"java.lang.Cloneable", "java.io.Serializable"};
-
-  /**
-   * @since 6.0
-   */
-  public static Iterable<String> getInterfacesImplementedByArrays() {
-      return Collections.unmodifiableList(Arrays.asList(INTERFACES_IMPLEMENTED_BY_ARRAYS));
-  }
 
   /**
    * Maximum Constant Pool entries.
@@ -1890,17 +1864,6 @@ public final class Const {
     "void", "array", "object", "unknown", "address"
   };
 
-  /**
-   * The primitive type names corresponding to the T_XX constants,
-   * e.g., TYPE_NAMES[T_INT] = "int"
-   * @param index
-   * @return the type name
-   * @since 6.0
-   */
-  public static String getTypeName(final int index) {
-      return TYPE_NAMES[index];
-  }
-
   /** The primitive class names corresponding to the T_XX constants,
    * e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
    */
@@ -1912,17 +1875,6 @@ public final class Const {
     ILLEGAL_TYPE, ILLEGAL_TYPE,  ILLEGAL_TYPE,  ILLEGAL_TYPE
   };
 
-  /**
-   * The primitive class names corresponding to the T_XX constants,
-   * e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
-   * @param index
-   * @return the class name
-   * @since 6.0
-   */
-  public static String getClassTypeName(final int index) {
-      return CLASS_TYPE_NAMES[index];
-  }
-
   /** The signature characters corresponding to primitive types,
    * e.g., SHORT_TYPE_NAMES[T_INT] = "I"
    */
@@ -1931,17 +1883,6 @@ public final class Const {
     "Z", "C", "F", "D", "B", "S", "I", "J",
     "V", ILLEGAL_TYPE, ILLEGAL_TYPE, ILLEGAL_TYPE
   };
-
-  /**
-   *
-   * @param index
-   * @return the short type name
-   * @since 6.0
-   */
-  public static String getShortTypeName(final int index) {
-      return SHORT_TYPE_NAMES[index];
-  }
-
 
   /**
    * Number of byte code operands for each opcode, i.e., number of bytes after the tag byte
@@ -2008,16 +1949,6 @@ public final class Const {
     UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED, UNDEFINED,
     UNDEFINED, UNDEFINED, RESERVED/*impdep1*/, RESERVED/*impdep2*/
   };
-
-  /**
-   *
-   * @param index
-   * @return Number of byte code operands
-   * @since 6.0
-   */
-  public static short getNoOfOperands(final int index) {
-      return NO_OF_OPERANDS[index];
-  }
 
   /**
    * How the byte code operands are to be interpreted for each opcode.
@@ -2089,20 +2020,6 @@ public final class Const {
   };
 
   /**
-   * @since 6.0
-   */
-  public static short getOperandType(final int opcode, final int index) {
-      return TYPE_OF_OPERANDS[opcode][index];
-  }
-
-  /**
-   * @since 6.0
-   */
-  public static long getOperandTypeCount(final int opcode) {
-      return TYPE_OF_OPERANDS[opcode].length;
-  }
-
-  /**
    * Names of opcodes.  Indexed by opcode.  OPCODE_NAMES[ALOAD] = "aload".
    */
   private static final String[] OPCODE_NAMES = {
@@ -2158,14 +2075,6 @@ public final class Const {
    * @since 6.0
    */
   public static final int OPCODE_NAMES_LENGTH = OPCODE_NAMES.length;
-
-
-  /**
-   * @since 6.0
-   */
-  public static String getOpcodeName(final int index) {
-      return OPCODE_NAMES[index];
-  }
 
   /**
    * Number of words consumed on operand stack by instructions.
@@ -2224,17 +2133,6 @@ public final class Const {
   };
 
   /**
-   *
-   * @param index
-   * @return Number of words consumed on operand stack
-   * @since 6.0
-   */
-  public static int getConsumeStack(final int index) {
-      return CONSUME_STACK[index];
-  }
-
-
-  /**
    * Number of words produced onto operand stack by instructions.
    * Indexed by opcode.  CONSUME_STACK[DALOAD] = number of words
    * consumed from the stack by a daload instruction.
@@ -2290,30 +2188,35 @@ public final class Const {
     UNDEFINED, UNPREDICTABLE/*impdep1*/, UNPREDICTABLE/*impdep2*/
   };
 
-  /**
-   *
-   * @param index
-   * @return Number of words produced onto operand stack
-   * @since 6.0
-   */
-  public static int getProduceStack(final int index) {
-      return PRODUCE_STACK[index];
-  }
 
   /** Attributes and their corresponding names.
    */
   public static final byte ATTR_UNKNOWN                                 = -1;
+
   public static final byte ATTR_SOURCE_FILE                             = 0;
+
   public static final byte ATTR_CONSTANT_VALUE                          = 1;
+
   public static final byte ATTR_CODE                                    = 2;
+
   public static final byte ATTR_EXCEPTIONS                              = 3;
+
   public static final byte ATTR_LINE_NUMBER_TABLE                       = 4;
+
   public static final byte ATTR_LOCAL_VARIABLE_TABLE                    = 5;
+
+
   public static final byte ATTR_INNER_CLASSES                           = 6;
+
   public static final byte ATTR_SYNTHETIC                               = 7;
+
   public static final byte ATTR_DEPRECATED                              = 8;
+
+
   public static final byte ATTR_PMG                                     = 9;
+
   public static final byte ATTR_SIGNATURE                               = 10;
+
   public static final byte ATTR_STACK_MAP                               = 11;
   public static final byte ATTR_RUNTIME_VISIBLE_ANNOTATIONS             = 12;
   public static final byte ATTR_RUNTIME_INVISIBLE_ANNOTATIONS           = 13;
@@ -2330,9 +2233,7 @@ public final class Const {
   public static final byte ATTR_MODULE_MAIN_CLASS                       = 24;
   public static final byte ATTR_NEST_HOST                               = 25;
   public static final byte ATTR_NEST_MEMBERS                            = 26;
-
   public static final short KNOWN_ATTRIBUTES = 27; // count of attributes
-
   private static final String[] ATTRIBUTE_NAMES = {
     "SourceFile", "ConstantValue", "Code", "Exceptions",
     "LineNumberTable", "LocalVariableTable",
@@ -2344,17 +2245,6 @@ public final class Const {
     "BootstrapMethods", "MethodParameters", "Module", "ModulePackages",
     "ModuleMainClass", "NestHost", "NestMembers"
   };
-
-  /**
-   *
-   * @param index
-   * @return the attribute name
-   * @since 6.0
-   */
-  public static String getAttributeName(final int index) {
-      return ATTRIBUTE_NAMES[index];
-  }
-
   /** Constants used in the StackMap attribute.
    */
   public static final byte ITEM_Bogus      = 0;
@@ -2366,12 +2256,107 @@ public final class Const {
   public static final byte ITEM_InitObject = 6;
   public static final byte ITEM_Object     = 7;
   public static final byte ITEM_NewObject  = 8;
-
   private static final String[] ITEM_NAMES = {
     "Bogus", "Integer", "Float", "Double", "Long",
     "Null", "InitObject", "Object", "NewObject"
   };
 
+  /** Constants used to identify StackMapEntry types.
+   *
+   * For those types which can specify a range, the
+   * constant names the lowest value.
+   */
+  public static final int SAME_FRAME = 0;
+
+  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME = 64;
+
+  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED = 247;
+
+  public static final int CHOP_FRAME = 248;
+  public static final int SAME_FRAME_EXTENDED = 251;
+  public static final int APPEND_FRAME = 252;
+  public static final int FULL_FRAME = 255;
+  /** Constants that define the maximum value of
+   * those constants which store ranges. */
+
+  public static final int SAME_FRAME_MAX = 63;
+  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_MAX = 127;
+  public static final int CHOP_FRAME_MAX = 250;
+  public static final int APPEND_FRAME_MAX = 254;
+  public static final byte REF_getField         = 1;
+
+  public static final byte REF_getStatic        = 2;
+
+  public static final byte REF_putField         = 3;
+
+  public static final byte REF_putStatic        = 4;
+  public static final byte REF_invokeVirtual    = 5;
+  public static final byte REF_invokeStatic     = 6;
+  public static final byte REF_invokeSpecial    = 7;
+  public static final byte REF_newInvokeSpecial = 8;
+  public static final byte REF_invokeInterface  = 9;
+  /**
+   * The names of the reference_kinds of a CONSTANT_MethodHandle_info.
+   */
+  private static final String[] METHODHANDLE_NAMES = {
+      "", "getField", "getStatic", "putField", "putStatic", "invokeVirtual",
+      "invokeStatic", "invokeSpecial", "newInvokeSpecial", "invokeInterface" };
+
+  /**
+   * @param index
+   * @return the ACCESS_NAMES entry at the given index
+   * @since 6.0
+   */
+  public static String getAccessName(final int index) {
+      return ACCESS_NAMES[index];
+  }
+  /**
+   *
+   * @param index
+   * @return the attribute name
+   * @since 6.0
+   */
+  public static String getAttributeName(final int index) {
+      return ATTRIBUTE_NAMES[index];
+  }
+  /**
+   * The primitive class names corresponding to the T_XX constants,
+   * e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
+   * @param index
+   * @return the class name
+   * @since 6.0
+   */
+  public static String getClassTypeName(final int index) {
+      return CLASS_TYPE_NAMES[index];
+  }
+  /**
+   *
+   * @param index
+   * @return the CONSTANT_NAMES entry at the given index
+   * @since 6.0
+   */
+  public static String getConstantName(final int index) {
+      return CONSTANT_NAMES[index];
+  }
+
+
+  // Constants defining the behavior of the Method Handles (JVMS �5.4.3.5)
+
+  /**
+   *
+   * @param index
+   * @return Number of words consumed on operand stack
+   * @since 6.0
+   */
+  public static int getConsumeStack(final int index) {
+      return CONSUME_STACK[index];
+  }
+  /**
+   * @since 6.0
+   */
+  public static Iterable<String> getInterfacesImplementedByArrays() {
+      return Collections.unmodifiableList(Arrays.asList(INTERFACES_IMPLEMENTED_BY_ARRAYS));
+  }
   /**
    *
    * @param index
@@ -2381,48 +2366,6 @@ public final class Const {
   public static String getItemName(final int index) {
       return ITEM_NAMES[index];
   }
-
-  /** Constants used to identify StackMapEntry types.
-   *
-   * For those types which can specify a range, the
-   * constant names the lowest value.
-   */
-  public static final int SAME_FRAME = 0;
-  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME = 64;
-  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED = 247;
-  public static final int CHOP_FRAME = 248;
-  public static final int SAME_FRAME_EXTENDED = 251;
-  public static final int APPEND_FRAME = 252;
-  public static final int FULL_FRAME = 255;
-
-  /** Constants that define the maximum value of
-   * those constants which store ranges. */
-
-  public static final int SAME_FRAME_MAX = 63;
-  public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_MAX = 127;
-  public static final int CHOP_FRAME_MAX = 250;
-  public static final int APPEND_FRAME_MAX = 254;
-
-
-  // Constants defining the behavior of the Method Handles (JVMS �5.4.3.5)
-
-  public static final byte REF_getField         = 1;
-  public static final byte REF_getStatic        = 2;
-  public static final byte REF_putField         = 3;
-  public static final byte REF_putStatic        = 4;
-  public static final byte REF_invokeVirtual    = 5;
-  public static final byte REF_invokeStatic     = 6;
-  public static final byte REF_invokeSpecial    = 7;
-  public static final byte REF_newInvokeSpecial = 8;
-  public static final byte REF_invokeInterface  = 9;
-
-  /**
-   * The names of the reference_kinds of a CONSTANT_MethodHandle_info.
-   */
-  private static final String[] METHODHANDLE_NAMES = {
-      "", "getField", "getStatic", "putField", "putStatic", "invokeVirtual",
-      "invokeStatic", "invokeSpecial", "newInvokeSpecial", "invokeInterface" };
-
   /**
    *
    * @param index
@@ -2431,6 +2374,63 @@ public final class Const {
    */
   public static String getMethodHandleName(final int index) {
       return METHODHANDLE_NAMES[index];
+  }
+  /**
+   *
+   * @param index
+   * @return Number of byte code operands
+   * @since 6.0
+   */
+  public static short getNoOfOperands(final int index) {
+      return NO_OF_OPERANDS[index];
+  }
+  /**
+   * @since 6.0
+   */
+  public static String getOpcodeName(final int index) {
+      return OPCODE_NAMES[index];
+  }
+  /**
+   * @since 6.0
+   */
+  public static short getOperandType(final int opcode, final int index) {
+      return TYPE_OF_OPERANDS[opcode][index];
+  }
+  /**
+   * @since 6.0
+   */
+  public static long getOperandTypeCount(final int opcode) {
+      return TYPE_OF_OPERANDS[opcode].length;
+  }
+  /**
+   *
+   * @param index
+   * @return Number of words produced onto operand stack
+   * @since 6.0
+   */
+  public static int getProduceStack(final int index) {
+      return PRODUCE_STACK[index];
+  }
+
+  /**
+   *
+   * @param index
+   * @return the short type name
+   * @since 6.0
+   */
+  public static String getShortTypeName(final int index) {
+      return SHORT_TYPE_NAMES[index];
+  }
+
+  /**
+   * The primitive type names corresponding to the T_XX constants,
+   * e.g., TYPE_NAMES[T_INT] = "int"
+   * @param index
+   * @return the type name
+   * @since 6.0
+   */
+  public static String getTypeName(final int index) {
+      return TYPE_NAMES[index];
   }
 
   private Const() { } // not instantiable

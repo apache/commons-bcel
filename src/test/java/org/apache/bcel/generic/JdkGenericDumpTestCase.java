@@ -72,8 +72,6 @@ import com.sun.jna.platform.win32.Advapi32Util;
  */
 public class JdkGenericDumpTestCase {
 
-    private static final String EXTRA_JAVA_HOMES = "ExtraJavaHomes";
-
     private static class ClassParserFilesVisitor extends SimpleFileVisitor<Path> {
 
         private final PathMatcher matcher;
@@ -113,6 +111,8 @@ public class JdkGenericDumpTestCase {
         }
     }
 
+    private static final String EXTRA_JAVA_HOMES = "ExtraJavaHomes";
+
     private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     private static final String KEY_JDK = "SOFTWARE\\JavaSoft\\Java Development Kit";
@@ -122,13 +122,6 @@ public class JdkGenericDumpTestCase {
     private static final String KEY_JRE = "SOFTWARE\\JavaSoft\\Java Runtime Environment";
 
     private static final String KEY_JRE_9 = "SOFTWARE\\JavaSoft\\JRE";
-
-    private static Stream<String> getAllJavaHomesOnWindows(final String keyJre) {
-        if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJre)) {
-            return findJavaHomesOnWindows(keyJre, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, keyJre));
-        }
-        return Stream.empty();
-    }
 
     private static String bytesToHex(final byte[] bytes) {
         final char[] hexChars = new char[bytes.length * 3];
@@ -161,6 +154,20 @@ public class JdkGenericDumpTestCase {
         ).distinct();
     }
 
+    private static Stream<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
+        final Set<String> javaHomes = new HashSet<>(keys.length);
+        for (final String key : keys) {
+            if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJavaHome + "\\" + key)) {
+                final String javaHome = Advapi32Util.registryGetStringValue(HKEY_LOCAL_MACHINE,
+                    keyJavaHome + "\\" + key, "JavaHome");
+                if (StringUtils.isNoneBlank(javaHome) && new File(javaHome).exists()) {
+                    javaHomes.add(javaHome);
+                }
+            }
+        }
+        return javaHomes.stream();
+    }
+
     private static Stream<String> getAllJavaHomesFromKey(final String extraJavaHomesKey) {
         return Stream.concat(
                 getAllJavaHomesFromPath(System.getProperty(extraJavaHomesKey)),
@@ -174,18 +181,11 @@ public class JdkGenericDumpTestCase {
         return Stream.of(path.split(File.pathSeparator));
     }
 
-    private static Stream<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
-        final Set<String> javaHomes = new HashSet<>(keys.length);
-        for (final String key : keys) {
-            if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJavaHome + "\\" + key)) {
-                final String javaHome = Advapi32Util.registryGetStringValue(HKEY_LOCAL_MACHINE,
-                    keyJavaHome + "\\" + key, "JavaHome");
-                if (StringUtils.isNoneBlank(javaHome) && new File(javaHome).exists()) {
-                    javaHomes.add(javaHome);
-                }
-            }
+    private static Stream<String> getAllJavaHomesOnWindows(final String keyJre) {
+        if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJre)) {
+            return findJavaHomesOnWindows(keyJre, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, keyJre));
         }
-        return javaHomes.stream();
+        return Stream.empty();
     }
 
     private void compare(final String name, final Method method) {

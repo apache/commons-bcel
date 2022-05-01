@@ -69,11 +69,15 @@ public class VerificationResult {
 
 
     /**
-     * Returns one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET},
-     * {@link #VERIFIED_REJECTED} constants.
+     * Returns if two VerificationResult instances are equal.
      */
-    public int getStatus() {
-        return numeric;
+    @Override
+    public boolean equals( final Object o ) {
+        if (!(o instanceof VerificationResult)) {
+            return false;
+        }
+        final VerificationResult other = (VerificationResult) o;
+        return other.numeric == this.numeric && other.detailMessage.equals(this.detailMessage);
     }
 
 
@@ -84,24 +88,20 @@ public class VerificationResult {
 
 
     /**
+     * Returns one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET},
+     * {@link #VERIFIED_REJECTED} constants.
+     */
+    public int getStatus() {
+        return numeric;
+    }
+
+
+    /**
      * @return a hash code value for the object.
      */
     @Override
     public int hashCode() {
         return numeric ^ detailMessage.hashCode();
-    }
-
-
-    /**
-     * Returns if two VerificationResult instances are equal.
-     */
-    @Override
-    public boolean equals( final Object o ) {
-        if (!(o instanceof VerificationResult)) {
-            return false;
-        }
-        final VerificationResult other = (VerificationResult) o;
-        return other.numeric == this.numeric && other.detailMessage.equals(this.detailMessage);
     }
 
 

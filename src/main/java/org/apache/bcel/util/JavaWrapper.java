@@ -37,9 +37,6 @@ import java.lang.reflect.Modifier;
  */
 public class JavaWrapper {
 
-    private final java.lang.ClassLoader loader;
-
-
     private static java.lang.ClassLoader getClassLoader() {
         final String s = System.getProperty("bcel.classloader");
         if (s == null || "".equals(s)) {
@@ -53,13 +50,34 @@ public class JavaWrapper {
     }
 
 
-    public JavaWrapper(final java.lang.ClassLoader loader) {
-        this.loader = loader;
+    /** Default main method used as wrapper, expects the fully qualified class name
+     * of the real class as the first argument.
+     */
+    public static void main( final String[] argv ) throws Exception {
+        /* Expects class name as first argument, other arguments are by-passed.
+         */
+        if (argv.length == 0) {
+            System.out.println("Missing class name.");
+            return;
+        }
+        final String class_name = argv[0];
+        final String[] new_argv = new String[argv.length - 1];
+        System.arraycopy(argv, 1, new_argv, 0, new_argv.length);
+        final JavaWrapper wrapper = new JavaWrapper();
+        wrapper.runMain(class_name, new_argv);
     }
+
+
+    private final java.lang.ClassLoader loader;
 
 
     public JavaWrapper() {
         this(getClassLoader());
+    }
+
+
+    public JavaWrapper(final java.lang.ClassLoader loader) {
+        this.loader = loader;
     }
 
 
@@ -91,23 +109,5 @@ public class JavaWrapper {
         } catch (final Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-
-    /** Default main method used as wrapper, expects the fully qualified class name
-     * of the real class as the first argument.
-     */
-    public static void main( final String[] argv ) throws Exception {
-        /* Expects class name as first argument, other arguments are by-passed.
-         */
-        if (argv.length == 0) {
-            System.out.println("Missing class name.");
-            return;
-        }
-        final String class_name = argv[0];
-        final String[] new_argv = new String[argv.length - 1];
-        System.arraycopy(argv, 1, new_argv, 0, new_argv.length);
-        final JavaWrapper wrapper = new JavaWrapper();
-        wrapper.runMain(class_name, new_argv);
     }
 }

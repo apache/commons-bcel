@@ -78,27 +78,13 @@ public abstract class ParameterAnnotations extends Attribute {
 
 
     /**
-     * @param parameterAnnotationTable the entries to set in this parameter annotation
+     * @return deep copy of this attribute
      */
-    public final void setParameterAnnotationTable(final ParameterAnnotationEntry[] parameterAnnotationTable ) {
-        this.parameterAnnotationTable = parameterAnnotationTable;
+    @Override
+    public Attribute copy( final ConstantPool constant_pool ) {
+        return (Attribute) clone();
     }
 
-
-    /**
-     * @return the parameter annotation entry table
-     */
-    public final ParameterAnnotationEntry[] getParameterAnnotationTable() {
-        return parameterAnnotationTable;
-    }
-
-
-    /**
-     * returns the array of parameter annotation entries in this parameter annotation
-     */
-    public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
-        return parameterAnnotationTable;
-    }
 
     @Override
     public void dump(final DataOutputStream dos) throws IOException
@@ -112,11 +98,25 @@ public abstract class ParameterAnnotations extends Attribute {
 
     }
 
+
     /**
-     * @return deep copy of this attribute
+     * returns the array of parameter annotation entries in this parameter annotation
      */
-    @Override
-    public Attribute copy( final ConstantPool constant_pool ) {
-        return (Attribute) clone();
+    public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
+        return parameterAnnotationTable;
+    }
+
+    /**
+     * @return the parameter annotation entry table
+     */
+    public final ParameterAnnotationEntry[] getParameterAnnotationTable() {
+        return parameterAnnotationTable;
+    }
+
+    /**
+     * @param parameterAnnotationTable the entries to set in this parameter annotation
+     */
+    public final void setParameterAnnotationTable(final ParameterAnnotationEntry[] parameterAnnotationTable ) {
+        this.parameterAnnotationTable = parameterAnnotationTable;
     }
 }

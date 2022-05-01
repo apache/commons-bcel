@@ -53,6 +53,24 @@ public class TABLESWITCH extends Select {
 
 
     /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitVariableLengthInstruction(this);
+        v.visitStackConsumer(this);
+        v.visitBranchInstruction(this);
+        v.visitSelect(this);
+        v.visitTABLESWITCH(this);
+    }
+
+
+    /**
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
@@ -90,23 +108,5 @@ public class TABLESWITCH extends Select {
             super.setMatch(i, low + i);
             super.setIndices(i, bytes.readInt());
         }
-    }
-
-
-    /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitVariableLengthInstruction(this);
-        v.visitStackConsumer(this);
-        v.visitBranchInstruction(this);
-        v.visitSelect(this);
-        v.visitTABLESWITCH(this);
     }
 }

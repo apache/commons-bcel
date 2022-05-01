@@ -20,6 +20,10 @@ package org.apache.bcel.data;
 
 public class AttributeTestClassEM02
 {
+    public static void main(final String[] argv)
+    {
+    }
+
     Runnable r = new Runnable()
     {
         @Override
@@ -28,8 +32,4 @@ public class AttributeTestClassEM02
             System.err.println("hello");
         }
     };
-
-    public static void main(final String[] argv)
-    {
-    }
 }

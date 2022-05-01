@@ -25,20 +25,6 @@ import org.apache.bcel.Const;
  */
 public final class BasicType extends Type {
 
-    /**
-     * Constructor for basic types such as int, long, `void'
-     *
-     * @param type one of T_INT, T_BOOLEAN, ..., T_VOID
-     * @see Const
-     */
-    BasicType(final byte type) {
-        super(type, Const.getShortTypeName(type));
-        if (type < Const.T_BOOLEAN || type > Const.T_VOID) {
-            throw new ClassGenException("Invalid type: " + type);
-        }
-    }
-
-
     // @since 6.0 no longer final
     public static BasicType getType( final byte type ) {
         switch (type) {
@@ -66,11 +52,17 @@ public final class BasicType extends Type {
     }
 
 
-    /** @return a hash code value for the object.
+    /**
+     * Constructor for basic types such as int, long, `void'
+     *
+     * @param type one of T_INT, T_BOOLEAN, ..., T_VOID
+     * @see Const
      */
-    @Override
-    public int hashCode() {
-        return super.getType();
+    BasicType(final byte type) {
+        super(type, Const.getShortTypeName(type));
+        if (type < Const.T_BOOLEAN || type > Const.T_VOID) {
+            throw new ClassGenException("Invalid type: " + type);
+        }
     }
 
 
@@ -79,5 +71,13 @@ public final class BasicType extends Type {
     @Override
     public boolean equals( final Object _type ) {
         return _type instanceof BasicType ? ((BasicType) _type).getType() == this.getType() : false;
+    }
+
+
+    /** @return a hash code value for the object.
+     */
+    @Override
+    public int hashCode() {
+        return super.getType();
     }
 }

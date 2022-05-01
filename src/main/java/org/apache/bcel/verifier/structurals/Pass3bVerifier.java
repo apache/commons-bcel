@@ -93,6 +93,26 @@ public final class Pass3bVerifier extends PassVerifier{
         }
 
         /**
+         * Gets a specific ExecutionChain from the queue.
+         *
+         * @param i the index of the item to be fetched
+         * @return the indicated ExecutionChain
+         */
+        public ArrayList<InstructionContext> getEC(final int i) {
+            return ecs.get(i);
+        }
+
+        /**
+         * Gets a specific InstructionContext from the queue.
+         *
+         * @param i the index of the item to be fetched
+         * @return the indicated InstructionContext
+         */
+        public InstructionContext getIC(final int i) {
+            return ics.get(i);
+        }
+
+        /**
          * Tests if InstructionContext queue is empty.
          *
          * @return true if the InstructionContext queue is empty.
@@ -109,26 +129,6 @@ public final class Pass3bVerifier extends PassVerifier{
         public void remove(final int i) {
             ics.remove(i);
             ecs.remove(i);
-        }
-
-        /**
-         * Gets a specific InstructionContext from the queue.
-         *
-         * @param i the index of the item to be fetched
-         * @return the indicated InstructionContext
-         */
-        public InstructionContext getIC(final int i) {
-            return ics.get(i);
-        }
-
-        /**
-         * Gets a specific ExecutionChain from the queue.
-         *
-         * @param i the index of the item to be fetched
-         * @return the indicated ExecutionChain
-         */
-        public ArrayList<InstructionContext> getEC(final int i) {
-            return ecs.get(i);
         }
 
         /**
@@ -335,19 +335,6 @@ public final class Pass3bVerifier extends PassVerifier{
      }
 
     /**
-     * Throws an exception indicating the returned type is not compatible with the return type of the given method.
-     *
-     * @param returnedType the type of the returned expression
-     * @param m the method we are processing
-     * @throws StructuralCodeConstraintException always
-     * @since 6.0
-     */
-    public void invalidReturnTypeError(final Type returnedType, final MethodGen m) {
-        throw new StructuralCodeConstraintException(
-            "Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
-    }
-
-    /**
      * Pass 3b implements the data flow analysis as described in the Java Virtual
      * Machine Specification, Second Edition.
      * Later versions will use LocalVariablesInfo objects to verify if the
@@ -442,5 +429,18 @@ public final class Pass3bVerifier extends PassVerifier{
     /** Returns the method number as supplied when instantiating. */
     public int getMethodNo() {
         return methodNo;
+    }
+
+    /**
+     * Throws an exception indicating the returned type is not compatible with the return type of the given method.
+     *
+     * @param returnedType the type of the returned expression
+     * @param m the method we are processing
+     * @throws StructuralCodeConstraintException always
+     * @since 6.0
+     */
+    public void invalidReturnTypeError(final Type returnedType, final MethodGen m) {
+        throw new StructuralCodeConstraintException(
+            "Returned type "+returnedType+" does not match Method's return type "+m.getReturnType());
     }
 }

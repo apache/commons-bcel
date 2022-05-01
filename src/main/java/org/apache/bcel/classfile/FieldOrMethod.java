@@ -71,29 +71,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
-     */
-    protected FieldOrMethod(final FieldOrMethod c) {
-        this(c.getAccessFlags(), c.getNameIndex(), c.getSignatureIndex(), c.getAttributes(), c
-                .getConstantPool());
-    }
-
-
-    /**
-     * Construct object from file stream.
-     * @param file Input stream
-     * @throws IOException
-     * @throws ClassFormatException
-     * @deprecated (6.0) Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
-     */
-    @java.lang.Deprecated
-    protected FieldOrMethod(final DataInputStream file, final ConstantPool constant_pool) throws IOException,
-            ClassFormatException {
-        this((DataInput) file, constant_pool);
-    }
-
-    /**
      * Construct object from file stream.
      * @param file Input stream
      * @throws IOException
@@ -112,6 +89,29 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
 
     /**
+     * Construct object from file stream.
+     * @param file Input stream
+     * @throws IOException
+     * @throws ClassFormatException
+     * @deprecated (6.0) Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
+     */
+    @java.lang.Deprecated
+    protected FieldOrMethod(final DataInputStream file, final ConstantPool constant_pool) throws IOException,
+            ClassFormatException {
+        this((DataInput) file, constant_pool);
+    }
+
+    /**
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use clone() for a physical copy.
+     */
+    protected FieldOrMethod(final FieldOrMethod c) {
+        this(c.getAccessFlags(), c.getNameIndex(), c.getSignatureIndex(), c.getAttributes(), c
+                .getConstantPool());
+    }
+
+
+    /**
      * @param access_flags Access rights of method
      * @param name_index Points to field name in constant pool
      * @param signature_index Points to encoded signature
@@ -125,110 +125,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         this.signature_index = signature_index;
         this.constant_pool = constant_pool;
         setAttributes(attributes);
-    }
-
-
-    /**
-     * Dump object to file stream on binary format.
-     *
-     * @param file Output file stream
-     * @throws IOException
-     */
-    public final void dump(final DataOutputStream file) throws IOException {
-        file.writeShort(super.getAccessFlags());
-        file.writeShort(name_index);
-        file.writeShort(signature_index);
-        file.writeShort(attributes_count);
-        if (attributes != null) {
-            for (final Attribute attribute : attributes) {
-                attribute.dump(file);
-            }
-        }
-    }
-
-
-    /**
-     * @return Collection of object attributes.
-     */
-    public final Attribute[] getAttributes() {
-        return attributes;
-    }
-
-
-    /**
-     * @param attributes Collection of object attributes.
-     */
-    public final void setAttributes( final Attribute[] attributes ) {
-        this.attributes = attributes;
-        this.attributes_count = attributes != null ? attributes.length : 0; // init deprecated field
-    }
-
-
-    /**
-     * @return Constant pool used by this object.
-     */
-    public final ConstantPool getConstantPool() {
-        return constant_pool;
-    }
-
-
-    /**
-     * @param constant_pool Constant pool to be used for this object.
-     */
-    public final void setConstantPool( final ConstantPool constant_pool ) {
-        this.constant_pool = constant_pool;
-    }
-
-
-    /**
-     * @return Index in constant pool of object's name.
-     */
-    public final int getNameIndex() {
-        return name_index;
-    }
-
-
-    /**
-     * @param name_index Index in constant pool of object's name.
-     */
-    public final void setNameIndex( final int name_index ) {
-        this.name_index = name_index;
-    }
-
-
-    /**
-     * @return Index in constant pool of field signature.
-     */
-    public final int getSignatureIndex() {
-        return signature_index;
-    }
-
-
-    /**
-     * @param signature_index Index in constant pool of field signature.
-     */
-    public final void setSignatureIndex( final int signature_index ) {
-        this.signature_index = signature_index;
-    }
-
-
-    /**
-     * @return Name of object, i.e., method name or field name
-     */
-    public final String getName() {
-        ConstantUtf8 c;
-        c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
-        return c.getBytes();
-    }
-
-
-    /**
-     * @return String representation of object's type signature (java style)
-     */
-    public final String getSignature() {
-        ConstantUtf8 c;
-        c = (ConstantUtf8) constant_pool.getConstant(signature_index, Const.CONSTANT_Utf8);
-        return c.getBytes();
     }
 
 
@@ -255,6 +151,26 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         return c;
     }
 
+
+    /**
+     * Dump object to file stream on binary format.
+     *
+     * @param file Output file stream
+     * @throws IOException
+     */
+    public final void dump(final DataOutputStream file) throws IOException {
+        file.writeShort(super.getAccessFlags());
+        file.writeShort(name_index);
+        file.writeShort(signature_index);
+        file.writeShort(attributes_count);
+        if (attributes != null) {
+            for (final Attribute attribute : attributes) {
+                attribute.dump(file);
+            }
+        }
+    }
+
+
     /**
      * @return Annotations on the field or method
      * @since 6.0
@@ -266,6 +182,23 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
         return annotationEntries;
     }
+
+
+    /**
+     * @return Collection of object attributes.
+     */
+    public final Attribute[] getAttributes() {
+        return attributes;
+    }
+
+
+    /**
+     * @return Constant pool used by this object.
+     */
+    public final ConstantPool getConstantPool() {
+        return constant_pool;
+    }
+
 
     /**
      * Hunts for a signature attribute on the member and returns its contents.  So where the 'regular' signature
@@ -290,5 +223,72 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
             searchedForSignatureAttribute = true;
         }
         return signatureAttributeString;
+    }
+
+
+    /**
+     * @return Name of object, i.e., method name or field name
+     */
+    public final String getName() {
+        ConstantUtf8 c;
+        c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
+        return c.getBytes();
+    }
+
+
+    /**
+     * @return Index in constant pool of object's name.
+     */
+    public final int getNameIndex() {
+        return name_index;
+    }
+
+
+    /**
+     * @return String representation of object's type signature (java style)
+     */
+    public final String getSignature() {
+        ConstantUtf8 c;
+        c = (ConstantUtf8) constant_pool.getConstant(signature_index, Const.CONSTANT_Utf8);
+        return c.getBytes();
+    }
+
+
+    /**
+     * @return Index in constant pool of field signature.
+     */
+    public final int getSignatureIndex() {
+        return signature_index;
+    }
+
+
+    /**
+     * @param attributes Collection of object attributes.
+     */
+    public final void setAttributes( final Attribute[] attributes ) {
+        this.attributes = attributes;
+        this.attributes_count = attributes != null ? attributes.length : 0; // init deprecated field
+    }
+
+
+    /**
+     * @param constant_pool Constant pool to be used for this object.
+     */
+    public final void setConstantPool( final ConstantPool constant_pool ) {
+        this.constant_pool = constant_pool;
+    }
+
+    /**
+     * @param name_index Index in constant pool of object's name.
+     */
+    public final void setNameIndex( final int name_index ) {
+        this.name_index = name_index;
+    }
+
+    /**
+     * @param signature_index Index in constant pool of field signature.
+     */
+    public final void setSignatureIndex( final int signature_index ) {
+        this.signature_index = signature_index;
     }
 }

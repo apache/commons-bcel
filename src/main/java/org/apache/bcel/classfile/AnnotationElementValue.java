@@ -46,6 +46,11 @@ public class AnnotationElementValue extends ElementValue
                 annotationEntry.dump(dos);
         }
 
+        public AnnotationEntry getAnnotationEntry()
+        {
+                return annotationEntry;
+        }
+
         @Override
         public String stringifyValue()
         {
@@ -56,10 +61,5 @@ public class AnnotationElementValue extends ElementValue
         public String toString()
         {
                 return stringifyValue();
-        }
-
-        public AnnotationEntry getAnnotationEntry()
-        {
-                return annotationEntry;
         }
 }

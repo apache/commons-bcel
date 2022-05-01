@@ -39,15 +39,6 @@ public class IFLT extends IfInstruction {
 
 
     /**
-     * @return negation of instruction
-     */
-    @Override
-    public IfInstruction negate() {
-        return new IFGE(super.getTarget());
-    }
-
-
-    /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
      * call methods according to the class hierarchy in descending order,
@@ -61,5 +52,14 @@ public class IFLT extends IfInstruction {
         v.visitBranchInstruction(this);
         v.visitIfInstruction(this);
         v.visitIFLT(this);
+    }
+
+
+    /**
+     * @return negation of instruction
+     */
+    @Override
+    public IfInstruction negate() {
+        return new IFGE(super.getTarget());
     }
 }

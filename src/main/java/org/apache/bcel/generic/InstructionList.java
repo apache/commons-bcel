@@ -45,54 +45,6 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class InstructionList implements Iterable<InstructionHandle> {
 
-    private InstructionHandle start;
-    private InstructionHandle end;
-    private int length; // number of elements in list
-    private int[] bytePositions; // byte code offsets corresponding to instructions
-
-    /**
-     * Create (empty) instruction list.
-     */
-    public InstructionList() {
-    }
-
-    /**
-     * Create instruction list containing one instruction.
-     *
-     * @param i
-     *            initial instruction
-     */
-    public InstructionList(final Instruction i) {
-        append(i);
-    }
-
-    /**
-     * Create instruction list containing one instruction.
-     *
-     * @param i
-     *            initial instruction
-     */
-    public InstructionList(final BranchInstruction i) {
-        append(i);
-    }
-
-    /**
-     * Initialize list with (nonnull) compound instruction. Consumes argument list, i.e., it becomes empty.
-     *
-     * @param c
-     *            compound instruction (list)
-     */
-    public InstructionList(final CompoundInstruction c) {
-        append(c.getInstructionList());
-    }
-
-    /**
-     * Test for empty list.
-     */
-    public boolean isEmpty() {
-        return start == null;
-    } // && end == null
-
     /**
      * Find the target instruction (handle) that corresponds to the given target position (byte code offset).
      *
@@ -126,25 +78,28 @@ public class InstructionList implements Iterable<InstructionHandle> {
         } while (l <= r);
         return null;
     }
+    private InstructionHandle start;
+    private InstructionHandle end;
+    private int length; // number of elements in list
+
+    private int[] bytePositions; // byte code offsets corresponding to instructions
+
+    private List<InstructionListObserver> observers;
 
     /**
-     * Get instruction handle for instruction at byte code position pos. This only works properly, if the list is freshly initialized from a byte array or
-     * setPositions() has been called before this method.
-     *
-     * @param pos
-     *            byte code position to search for
-     * @return target position's instruction handle if available
+     * Create (empty) instruction list.
      */
-    public InstructionHandle findHandle(final int pos) {
-        final int[] positions = bytePositions;
-        InstructionHandle ih = start;
-        for (int i = 0; i < length; i++) {
-            if (positions[i] == pos) {
-                return ih;
-            }
-            ih = ih.getNext();
-        }
-        return null;
+    public InstructionList() {
+    }
+
+    /**
+     * Create instruction list containing one instruction.
+     *
+     * @param i
+     *            initial instruction
+     */
+    public InstructionList(final BranchInstruction i) {
+        append(i);
     }
 
     /**
@@ -219,6 +174,178 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
+     * Initialize list with (nonnull) compound instruction. Consumes argument list, i.e., it becomes empty.
+     *
+     * @param c
+     *            compound instruction (list)
+     */
+    public InstructionList(final CompoundInstruction c) {
+        append(c.getInstructionList());
+    }
+
+    /**
+     * Create instruction list containing one instruction.
+     *
+     * @param i
+     *            initial instruction
+     */
+    public InstructionList(final Instruction i) {
+        append(i);
+    }
+
+    /**
+     * Add observer for this object.
+     */
+    public void addObserver(final InstructionListObserver o) {
+        if (observers == null) {
+            observers = new ArrayList<>();
+        }
+        observers.add(o);
+    }
+
+    /**
+     * Append a branch instruction to the end of this list.
+     *
+     * @param i
+     *            branch instruction to append
+     * @return branch instruction handle of the appended instruction
+     */
+    public BranchHandle append(final BranchInstruction i) {
+        final BranchHandle ih = BranchHandle.getBranchHandle(i);
+        append(ih);
+        return ih;
+    }
+
+    /**
+     * Append a compound instruction.
+     *
+     * @param c
+     *            The composite instruction (containing an InstructionList)
+     * @return instruction handle of the first appended instruction
+     */
+    public InstructionHandle append(final CompoundInstruction c) {
+        return append(c.getInstructionList());
+    }
+
+    /**
+     * Append an instruction to the end of this list.
+     *
+     * @param i
+     *            instruction to append
+     * @return instruction handle of the appended instruction
+     */
+    public InstructionHandle append(final Instruction i) {
+        final InstructionHandle ih = InstructionHandle.getInstructionHandle(i);
+        append(ih);
+        return ih;
+    }
+
+    /**
+     * Append a compound instruction, after instruction i.
+     *
+     * @param i
+     *            Instruction in list
+     * @param c
+     *            The composite instruction (containing an InstructionList)
+     * @return instruction handle of the first appended instruction
+     */
+    public InstructionHandle append(final Instruction i, final CompoundInstruction c) {
+        return append(i, c.getInstructionList());
+    }
+
+    /**
+     * Append a single instruction j after another instruction i, which must be in this list of course!
+     *
+     * @param i
+     *            Instruction in list
+     * @param j
+     *            Instruction to append after i in list
+     * @return instruction handle of the first appended instruction
+     */
+    public InstructionHandle append(final Instruction i, final Instruction j) {
+        return append(i, new InstructionList(j));
+    }
+
+    /**
+     * Append another list after instruction i contained in this list. Consumes argument list, i.e., it becomes empty.
+     *
+     * @param i
+     *            where to append the instruction list
+     * @param il
+     *            Instruction list to append to this one
+     * @return instruction handle pointing to the <B>first</B> appended instruction
+     */
+    public InstructionHandle append(final Instruction i, final InstructionList il) {
+        InstructionHandle ih;
+        if ((ih = findInstruction2(i)) == null) {
+            throw new ClassGenException("Instruction " + i + " is not contained in this list.");
+        }
+        return append(ih, il);
+    }
+
+    /**
+     * Append an instruction to the end of this list.
+     *
+     * @param ih
+     *            instruction to append
+     */
+    private void append(final InstructionHandle ih) {
+        if (isEmpty()) {
+            start = end = ih;
+            ih.setNext(ih.setPrev(null));
+        } else {
+            end.setNext(ih);
+            ih.setPrev(end);
+            ih.setNext(null);
+            end = ih;
+        }
+        length++; // Update length
+    }
+
+    /**
+     * Append an instruction after instruction (handle) ih contained in this list.
+     *
+     * @param ih
+     *            where to append the instruction list
+     * @param i
+     *            Instruction to append
+     * @return instruction handle pointing to the <B>first</B> appended instruction
+     */
+    public BranchHandle append(final InstructionHandle ih, final BranchInstruction i) {
+        final BranchHandle bh = BranchHandle.getBranchHandle(i);
+        final InstructionList il = new InstructionList();
+        il.append(bh);
+        append(ih, il);
+        return bh;
+    }
+
+    /**
+     * Append a compound instruction.
+     *
+     * @param ih
+     *            where to append the instruction list
+     * @param c
+     *            The composite instruction (containing an InstructionList)
+     * @return instruction handle of the first appended instruction
+     */
+    public InstructionHandle append(final InstructionHandle ih, final CompoundInstruction c) {
+        return append(ih, c.getInstructionList());
+    }
+
+    /**
+     * Append an instruction after instruction (handle) ih contained in this list.
+     *
+     * @param ih
+     *            where to append the instruction list
+     * @param i
+     *            Instruction to append
+     * @return instruction handle pointing to the <B>first</B> appended instruction
+     */
+    public InstructionHandle append(final InstructionHandle ih, final Instruction i) {
+        return append(ih, new InstructionList(i));
+    }
+
+    /**
      * Append another list after instruction (handle) ih contained in this list. Consumes argument list, i.e., it becomes empty.
      *
      * @param ih
@@ -250,23 +377,6 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Append another list after instruction i contained in this list. Consumes argument list, i.e., it becomes empty.
-     *
-     * @param i
-     *            where to append the instruction list
-     * @param il
-     *            Instruction list to append to this one
-     * @return instruction handle pointing to the <B>first</B> appended instruction
-     */
-    public InstructionHandle append(final Instruction i, final InstructionList il) {
-        InstructionHandle ih;
-        if ((ih = findInstruction2(i)) == null) {
-            throw new ClassGenException("Instruction " + i + " is not contained in this list.");
-        }
-        return append(ih, il);
-    }
-
-    /**
      * Append another list to this one. Consumes argument list, i.e., it becomes empty.
      *
      * @param il
@@ -290,129 +400,420 @@ public class InstructionList implements Iterable<InstructionHandle> {
         return append(end, il); // was end.instruction
     }
 
+    private void clear() {
+        start = end = null;
+        length = 0;
+    }
+
+    public boolean contains(final Instruction i) {
+        return findInstruction1(i) != null;
+    }
+
+    public boolean contains(final InstructionHandle i) {
+        if (i == null) {
+            return false;
+        }
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+            if (ih == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
-     * Append an instruction to the end of this list.
+     * @return complete, i.e., deep copy of this list
+     */
+    public InstructionList copy() {
+        final Map<InstructionHandle, InstructionHandle> map = new HashMap<>();
+        final InstructionList il = new InstructionList();
+        /*
+         * Pass 1: Make copies of all instructions, append them to the new list and associate old instruction references with the new ones, i.e., a 1:1 mapping.
+         */
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+            final Instruction i = ih.getInstruction();
+            final Instruction c = i.copy(); // Use clone for shallow copy
+            if (c instanceof BranchInstruction) {
+                map.put(ih, il.append((BranchInstruction) c));
+            } else {
+                map.put(ih, il.append(c));
+            }
+        }
+        /*
+         * Pass 2: Update branch targets.
+         */
+        InstructionHandle ih = start;
+        InstructionHandle ch = il.start;
+        while (ih != null) {
+            final Instruction i = ih.getInstruction();
+            final Instruction c = ch.getInstruction();
+            if (i instanceof BranchInstruction) {
+                final BranchInstruction bi = (BranchInstruction) i;
+                final BranchInstruction bc = (BranchInstruction) c;
+                final InstructionHandle itarget = bi.getTarget(); // old target
+                // New target is in hash map
+                bc.setTarget(map.get(itarget));
+                if (bi instanceof Select) { // Either LOOKUPSWITCH or TABLESWITCH
+                    final InstructionHandle[] itargets = ((Select) bi).getTargets();
+                    final InstructionHandle[] ctargets = ((Select) bc).getTargets();
+                    for (int j = 0; j < itargets.length; j++) { // Update all targets
+                        ctargets[j] = map.get(itargets[j]);
+                    }
+                }
+            }
+            ih = ih.getNext();
+            ch = ch.getNext();
+        }
+        return il;
+    }
+
+    /**
+     * Remove instruction from this list. The corresponding Instruction handles must not be reused!
+     *
+     * @param i
+     *            instruction to remove
+     */
+    public void delete(final Instruction i) throws TargetLostException {
+        InstructionHandle ih;
+        if ((ih = findInstruction1(i)) == null) {
+            throw new ClassGenException("Instruction " + i + " is not contained in this list.");
+        }
+        delete(ih);
+    }
+
+    /**
+     * Remove instructions from instruction `from' to instruction `to' contained in this list. The user must ensure that `from' is an instruction before `to',
+     * or risk havoc. The corresponding Instruction handles must not be reused!
+     *
+     * @param from
+     *            where to start deleting (inclusive)
+     * @param to
+     *            where to end deleting (inclusive)
+     */
+    public void delete(final Instruction from, final Instruction to) throws TargetLostException {
+        InstructionHandle from_ih;
+        InstructionHandle to_ih;
+        if ((from_ih = findInstruction1(from)) == null) {
+            throw new ClassGenException("Instruction " + from + " is not contained in this list.");
+        }
+        if ((to_ih = findInstruction2(to)) == null) {
+            throw new ClassGenException("Instruction " + to + " is not contained in this list.");
+        }
+        delete(from_ih, to_ih);
+    }
+
+    /**
+     * Remove instruction from this list. The corresponding Instruction handles must not be reused!
      *
      * @param ih
-     *            instruction to append
+     *            instruction (handle) to remove
      */
-    private void append(final InstructionHandle ih) {
-        if (isEmpty()) {
-            start = end = ih;
-            ih.setNext(ih.setPrev(null));
-        } else {
-            end.setNext(ih);
-            ih.setPrev(end);
-            ih.setNext(null);
-            end = ih;
+    public void delete(final InstructionHandle ih) throws TargetLostException {
+        remove(ih.getPrev(), ih.getNext());
+    }
+
+    /**
+     * Remove instructions from instruction `from' to instruction `to' contained in this list. The user must ensure that `from' is an instruction before `to',
+     * or risk havoc. The corresponding Instruction handles must not be reused!
+     *
+     * @param from
+     *            where to start deleting (inclusive)
+     * @param to
+     *            where to end deleting (inclusive)
+     */
+    public void delete(final InstructionHandle from, final InstructionHandle to) throws TargetLostException {
+        remove(from.getPrev(), to.getNext());
+    }
+
+    /**
+     * Delete contents of list. Provides better memory utilization, because the system then may reuse the instruction handles. This method is typically called
+     * right after {@link MethodGen#getMethod()}.
+     */
+    public void dispose() {
+        // Traverse in reverse order, because ih.next is overwritten
+        for (InstructionHandle ih = end; ih != null; ih = ih.getPrev()) {
+            /*
+             * Causes BranchInstructions to release target and targeters, because it calls dispose() on the contained instruction.
+             */
+            ih.dispose();
         }
-        length++; // Update length
+        clear();
     }
 
     /**
-     * Append an instruction to the end of this list.
+     * Get instruction handle for instruction at byte code position pos. This only works properly, if the list is freshly initialized from a byte array or
+     * setPositions() has been called before this method.
      *
-     * @param i
-     *            instruction to append
-     * @return instruction handle of the appended instruction
+     * @param pos
+     *            byte code position to search for
+     * @return target position's instruction handle if available
      */
-    public InstructionHandle append(final Instruction i) {
-        final InstructionHandle ih = InstructionHandle.getInstructionHandle(i);
-        append(ih);
-        return ih;
+    public InstructionHandle findHandle(final int pos) {
+        final int[] positions = bytePositions;
+        InstructionHandle ih = start;
+        for (int i = 0; i < length; i++) {
+            if (positions[i] == pos) {
+                return ih;
+            }
+            ih = ih.getNext();
+        }
+        return null;
     }
 
     /**
-     * Append a branch instruction to the end of this list.
+     * Search for given Instruction reference, start at beginning of list.
      *
      * @param i
-     *            branch instruction to append
+     *            instruction to search for
+     * @return instruction found on success, null otherwise
+     */
+    private InstructionHandle findInstruction1(final Instruction i) {
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+            if (ih.getInstruction() == i) {
+                return ih;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Search for given Instruction reference, start at end of list
+     *
+     * @param i
+     *            instruction to search for
+     * @return instruction found on success, null otherwise
+     */
+    private InstructionHandle findInstruction2(final Instruction i) {
+        for (InstructionHandle ih = end; ih != null; ih = ih.getPrev()) {
+            if (ih.getInstruction() == i) {
+                return ih;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * When everything is finished, use this method to convert the instruction list into an array of bytes.
+     *
+     * @return the byte code ready to be dumped
+     */
+    public byte[] getByteCode() {
+        // Update position indices of instructions
+        setPositions();
+        final ByteArrayOutputStream b = new ByteArrayOutputStream();
+        final DataOutputStream out = new DataOutputStream(b);
+        try {
+            for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+                final Instruction i = ih.getInstruction();
+                i.dump(out); // Traverse list
+            }
+            out.flush();
+        } catch (final IOException e) {
+            System.err.println(e);
+            return ArrayUtils.EMPTY_BYTE_ARRAY;
+        }
+        return b.toByteArray();
+    }
+
+    /**
+     * @return end of list
+     */
+    public InstructionHandle getEnd() {
+        return end;
+    }
+
+    /**
+     * @return array containing all instructions (handles)
+     */
+    public InstructionHandle[] getInstructionHandles() {
+        final InstructionHandle[] ihs = new InstructionHandle[length];
+        InstructionHandle ih = start;
+        for (int i = 0; i < length; i++) {
+            ihs[i] = ih;
+            ih = ih.getNext();
+        }
+        return ihs;
+    }
+
+    /**
+     * Get positions (offsets) of all instructions in the list. This relies on that the list has been freshly created from an byte code array, or that
+     * setPositions() has been called. Otherwise this may be inaccurate.
+     *
+     * @return array containing all instruction's offset in byte code
+     */
+    public int[] getInstructionPositions() {
+        return bytePositions;
+    }
+
+    /**
+     * @return an array of instructions without target information for branch instructions.
+     */
+    public Instruction[] getInstructions() {
+        final List<Instruction> instructions = new ArrayList<>();
+        try (ByteSequence bytes = new ByteSequence(getByteCode())) {
+            while (bytes.available() > 0) {
+                instructions.add(Instruction.readInstruction(bytes));
+            }
+        } catch (final IOException e) {
+            throw new ClassGenException(e.toString(), e);
+        }
+        return instructions.toArray(Instruction.EMPTY_ARRAY);
+    }
+
+    /**
+     * @return length of list (Number of instructions, not bytes)
+     */
+    public int getLength() {
+        return length;
+    }
+
+    /**
+     * @return start of list
+     */
+    public InstructionHandle getStart() {
+        return start;
+    }
+
+    /**
+     * Insert a branch instruction at start of this list.
+     *
+     * @param i
+     *            branch instruction to insert
      * @return branch instruction handle of the appended instruction
      */
-    public BranchHandle append(final BranchInstruction i) {
+    public BranchHandle insert(final BranchInstruction i) {
         final BranchHandle ih = BranchHandle.getBranchHandle(i);
-        append(ih);
+        insert(ih);
         return ih;
     }
 
     /**
-     * Append a single instruction j after another instruction i, which must be in this list of course!
+     * Insert a compound instruction.
+     *
+     * @param c
+     *            The composite instruction (containing an InstructionList)
+     * @return instruction handle of the first inserted instruction
+     */
+    public InstructionHandle insert(final CompoundInstruction c) {
+        return insert(c.getInstructionList());
+    }
+
+    /**
+     * Insert an instruction at start of this list.
+     *
+     * @param i
+     *            instruction to insert
+     * @return instruction handle of the inserted instruction
+     */
+    public InstructionHandle insert(final Instruction i) {
+        final InstructionHandle ih = InstructionHandle.getInstructionHandle(i);
+        insert(ih);
+        return ih;
+    }
+
+    /**
+     * Insert a compound instruction before instruction i.
+     *
+     * @param i
+     *            Instruction in list
+     * @param c
+     *            The composite instruction (containing an InstructionList)
+     * @return instruction handle of the first inserted instruction
+     */
+    public InstructionHandle insert(final Instruction i, final CompoundInstruction c) {
+        return insert(i, c.getInstructionList());
+    }
+
+    /**
+     * Insert a single instruction j before another instruction i, which must be in this list of course!
      *
      * @param i
      *            Instruction in list
      * @param j
-     *            Instruction to append after i in list
-     * @return instruction handle of the first appended instruction
+     *            Instruction to insert before i in list
+     * @return instruction handle of the first inserted instruction
      */
-    public InstructionHandle append(final Instruction i, final Instruction j) {
-        return append(i, new InstructionList(j));
+    public InstructionHandle insert(final Instruction i, final Instruction j) {
+        return insert(i, new InstructionList(j));
     }
 
     /**
-     * Append a compound instruction, after instruction i.
+     * Insert another list before Instruction i contained in this list. Consumes argument list, i.e., it becomes empty.
      *
      * @param i
-     *            Instruction in list
-     * @param c
-     *            The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first appended instruction
+     *            where to append the instruction list
+     * @param il
+     *            Instruction list to insert
+     * @return instruction handle pointing to the first inserted instruction, i.e., il.getStart()
      */
-    public InstructionHandle append(final Instruction i, final CompoundInstruction c) {
-        return append(i, c.getInstructionList());
+    public InstructionHandle insert(final Instruction i, final InstructionList il) {
+        InstructionHandle ih;
+        if ((ih = findInstruction1(i)) == null) {
+            throw new ClassGenException("Instruction " + i + " is not contained in this list.");
+        }
+        return insert(ih, il);
     }
 
     /**
-     * Append a compound instruction.
-     *
-     * @param c
-     *            The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first appended instruction
-     */
-    public InstructionHandle append(final CompoundInstruction c) {
-        return append(c.getInstructionList());
-    }
-
-    /**
-     * Append a compound instruction.
+     * Insert an instruction at start of this list.
      *
      * @param ih
-     *            where to append the instruction list
-     * @param c
-     *            The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first appended instruction
+     *            instruction to insert
      */
-    public InstructionHandle append(final InstructionHandle ih, final CompoundInstruction c) {
-        return append(ih, c.getInstructionList());
+    private void insert(final InstructionHandle ih) {
+        if (isEmpty()) {
+            start = end = ih;
+            ih.setNext(ih.setPrev(null));
+        } else {
+            start.setPrev(ih);
+            ih.setNext(start);
+            ih.setPrev(null);
+            start = ih;
+        }
+        length++;
     }
 
     /**
-     * Append an instruction after instruction (handle) ih contained in this list.
+     * Insert an instruction before instruction (handle) ih contained in this list.
      *
      * @param ih
-     *            where to append the instruction list
+     *            where to insert to the instruction list
      * @param i
-     *            Instruction to append
-     * @return instruction handle pointing to the <B>first</B> appended instruction
+     *            Instruction to insert
+     * @return instruction handle of the first inserted instruction
      */
-    public InstructionHandle append(final InstructionHandle ih, final Instruction i) {
-        return append(ih, new InstructionList(i));
-    }
-
-    /**
-     * Append an instruction after instruction (handle) ih contained in this list.
-     *
-     * @param ih
-     *            where to append the instruction list
-     * @param i
-     *            Instruction to append
-     * @return instruction handle pointing to the <B>first</B> appended instruction
-     */
-    public BranchHandle append(final InstructionHandle ih, final BranchInstruction i) {
+    public BranchHandle insert(final InstructionHandle ih, final BranchInstruction i) {
         final BranchHandle bh = BranchHandle.getBranchHandle(i);
         final InstructionList il = new InstructionList();
         il.append(bh);
-        append(ih, il);
+        insert(ih, il);
         return bh;
+    }
+
+    /**
+     * Insert a compound instruction.
+     *
+     * @param ih
+     *            where to insert the instruction list
+     * @param c
+     *            The composite instruction (containing an InstructionList)
+     * @return instruction handle of the first inserted instruction
+     */
+    public InstructionHandle insert(final InstructionHandle ih, final CompoundInstruction c) {
+        return insert(ih, c.getInstructionList());
+    }
+
+    /**
+     * Insert an instruction before instruction (handle) ih contained in this list.
+     *
+     * @param ih
+     *            where to insert to the instruction list
+     * @param i
+     *            Instruction to insert
+     * @return instruction handle of the first inserted instruction
+     */
+    public InstructionHandle insert(final InstructionHandle ih, final Instruction i) {
+        return insert(ih, new InstructionList(i));
     }
 
     /**
@@ -462,145 +863,53 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Insert an instruction at start of this list.
+     * Test for empty list.
+     */
+    public boolean isEmpty() {
+        return start == null;
+    } // && end == null
+
+    /**
+     * @return iterator that lists all instructions (handles)
+     */
+    @Override
+    public Iterator<InstructionHandle> iterator() {
+        return new Iterator<InstructionHandle>() {
+
+            private InstructionHandle ih = start;
+
+            @Override
+            public boolean hasNext() {
+                return ih != null;
+            }
+
+            @Override
+            public InstructionHandle next() throws NoSuchElementException {
+                if (ih == null) {
+                    throw new NoSuchElementException();
+                }
+                final InstructionHandle i = ih;
+                ih = ih.getNext();
+                return i;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
+
+    /**
+     * Move a single instruction (handle) to a new location.
      *
      * @param ih
-     *            instruction to insert
+     *            moved instruction
+     * @param target
+     *            new location of moved instruction
      */
-    private void insert(final InstructionHandle ih) {
-        if (isEmpty()) {
-            start = end = ih;
-            ih.setNext(ih.setPrev(null));
-        } else {
-            start.setPrev(ih);
-            ih.setNext(start);
-            ih.setPrev(null);
-            start = ih;
-        }
-        length++;
-    }
-
-    /**
-     * Insert another list before Instruction i contained in this list. Consumes argument list, i.e., it becomes empty.
-     *
-     * @param i
-     *            where to append the instruction list
-     * @param il
-     *            Instruction list to insert
-     * @return instruction handle pointing to the first inserted instruction, i.e., il.getStart()
-     */
-    public InstructionHandle insert(final Instruction i, final InstructionList il) {
-        InstructionHandle ih;
-        if ((ih = findInstruction1(i)) == null) {
-            throw new ClassGenException("Instruction " + i + " is not contained in this list.");
-        }
-        return insert(ih, il);
-    }
-
-    /**
-     * Insert an instruction at start of this list.
-     *
-     * @param i
-     *            instruction to insert
-     * @return instruction handle of the inserted instruction
-     */
-    public InstructionHandle insert(final Instruction i) {
-        final InstructionHandle ih = InstructionHandle.getInstructionHandle(i);
-        insert(ih);
-        return ih;
-    }
-
-    /**
-     * Insert a branch instruction at start of this list.
-     *
-     * @param i
-     *            branch instruction to insert
-     * @return branch instruction handle of the appended instruction
-     */
-    public BranchHandle insert(final BranchInstruction i) {
-        final BranchHandle ih = BranchHandle.getBranchHandle(i);
-        insert(ih);
-        return ih;
-    }
-
-    /**
-     * Insert a single instruction j before another instruction i, which must be in this list of course!
-     *
-     * @param i
-     *            Instruction in list
-     * @param j
-     *            Instruction to insert before i in list
-     * @return instruction handle of the first inserted instruction
-     */
-    public InstructionHandle insert(final Instruction i, final Instruction j) {
-        return insert(i, new InstructionList(j));
-    }
-
-    /**
-     * Insert a compound instruction before instruction i.
-     *
-     * @param i
-     *            Instruction in list
-     * @param c
-     *            The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first inserted instruction
-     */
-    public InstructionHandle insert(final Instruction i, final CompoundInstruction c) {
-        return insert(i, c.getInstructionList());
-    }
-
-    /**
-     * Insert a compound instruction.
-     *
-     * @param c
-     *            The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first inserted instruction
-     */
-    public InstructionHandle insert(final CompoundInstruction c) {
-        return insert(c.getInstructionList());
-    }
-
-    /**
-     * Insert an instruction before instruction (handle) ih contained in this list.
-     *
-     * @param ih
-     *            where to insert to the instruction list
-     * @param i
-     *            Instruction to insert
-     * @return instruction handle of the first inserted instruction
-     */
-    public InstructionHandle insert(final InstructionHandle ih, final Instruction i) {
-        return insert(ih, new InstructionList(i));
-    }
-
-    /**
-     * Insert a compound instruction.
-     *
-     * @param ih
-     *            where to insert the instruction list
-     * @param c
-     *            The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first inserted instruction
-     */
-    public InstructionHandle insert(final InstructionHandle ih, final CompoundInstruction c) {
-        return insert(ih, c.getInstructionList());
-    }
-
-    /**
-     * Insert an instruction before instruction (handle) ih contained in this list.
-     *
-     * @param ih
-     *            where to insert to the instruction list
-     * @param i
-     *            Instruction to insert
-     * @return instruction handle of the first inserted instruction
-     */
-    public BranchHandle insert(final InstructionHandle ih, final BranchInstruction i) {
-        final BranchHandle bh = BranchHandle.getBranchHandle(i);
-        final InstructionList il = new InstructionList();
-        il.append(bh);
-        insert(ih, il);
-        return bh;
+    public void move(final InstructionHandle ih, final InstructionHandle target) {
+        move(ih, ih, target);
     }
 
     /**
@@ -668,15 +977,81 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Move a single instruction (handle) to a new location.
+     * Redirect all references from old_target to new_target, i.e., update targets of branch instructions.
      *
-     * @param ih
-     *            moved instruction
-     * @param target
-     *            new location of moved instruction
+     * @param old_target
+     *            the old target instruction handle
+     * @param new_target
+     *            the new target instruction handle
      */
-    public void move(final InstructionHandle ih, final InstructionHandle target) {
-        move(ih, ih, target);
+    public void redirectBranches(final InstructionHandle old_target, final InstructionHandle new_target) {
+        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
+            final Instruction i = ih.getInstruction();
+            if (i instanceof BranchInstruction) {
+                final BranchInstruction b = (BranchInstruction) i;
+                final InstructionHandle target = b.getTarget();
+                if (target == old_target) {
+                    b.setTarget(new_target);
+                }
+                if (b instanceof Select) { // Either LOOKUPSWITCH or TABLESWITCH
+                    final InstructionHandle[] targets = ((Select) b).getTargets();
+                    for (int j = 0; j < targets.length; j++) {
+                        if (targets[j] == old_target) {
+                            ((Select) b).setTarget(j, new_target);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Redirect all references of exception handlers from old_target to new_target.
+     *
+     * @param exceptions
+     *            array of exception handlers
+     * @param old_target
+     *            the old target instruction handle
+     * @param new_target
+     *            the new target instruction handle
+     * @see MethodGen
+     */
+    public void redirectExceptionHandlers(final CodeExceptionGen[] exceptions, final InstructionHandle old_target, final InstructionHandle new_target) {
+        for (final CodeExceptionGen exception : exceptions) {
+            if (exception.getStartPC() == old_target) {
+                exception.setStartPC(new_target);
+            }
+            if (exception.getEndPC() == old_target) {
+                exception.setEndPC(new_target);
+            }
+            if (exception.getHandlerPC() == old_target) {
+                exception.setHandlerPC(new_target);
+            }
+        }
+    }
+
+    /**
+     * Redirect all references of local variables from old_target to new_target.
+     *
+     * @param lg
+     *            array of local variables
+     * @param old_target
+     *            the old target instruction handle
+     * @param new_target
+     *            the new target instruction handle
+     * @see MethodGen
+     */
+    public void redirectLocalVariables(final LocalVariableGen[] lg, final InstructionHandle old_target, final InstructionHandle new_target) {
+        for (final LocalVariableGen element : lg) {
+            final InstructionHandle start = element.getStart();
+            final InstructionHandle end = element.getEnd();
+            if (start == old_target) {
+                element.setStart(new_target);
+            }
+            if (end == old_target) {
+                element.setEnd(new_target);
+            }
+        }
     }
 
     /**
@@ -738,109 +1113,26 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Remove instruction from this list. The corresponding Instruction handles must not be reused!
-     *
-     * @param ih
-     *            instruction (handle) to remove
+     * Remove observer for this object.
      */
-    public void delete(final InstructionHandle ih) throws TargetLostException {
-        remove(ih.getPrev(), ih.getNext());
-    }
-
-    /**
-     * Remove instruction from this list. The corresponding Instruction handles must not be reused!
-     *
-     * @param i
-     *            instruction to remove
-     */
-    public void delete(final Instruction i) throws TargetLostException {
-        InstructionHandle ih;
-        if ((ih = findInstruction1(i)) == null) {
-            throw new ClassGenException("Instruction " + i + " is not contained in this list.");
+    public void removeObserver(final InstructionListObserver o) {
+        if (observers != null) {
+            observers.remove(o);
         }
-        delete(ih);
     }
 
     /**
-     * Remove instructions from instruction `from' to instruction `to' contained in this list. The user must ensure that `from' is an instruction before `to',
-     * or risk havoc. The corresponding Instruction handles must not be reused!
-     *
-     * @param from
-     *            where to start deleting (inclusive)
-     * @param to
-     *            where to end deleting (inclusive)
+     * Replace all references to the old constant pool with references to the new constant pool
      */
-    public void delete(final InstructionHandle from, final InstructionHandle to) throws TargetLostException {
-        remove(from.getPrev(), to.getNext());
-    }
-
-    /**
-     * Remove instructions from instruction `from' to instruction `to' contained in this list. The user must ensure that `from' is an instruction before `to',
-     * or risk havoc. The corresponding Instruction handles must not be reused!
-     *
-     * @param from
-     *            where to start deleting (inclusive)
-     * @param to
-     *            where to end deleting (inclusive)
-     */
-    public void delete(final Instruction from, final Instruction to) throws TargetLostException {
-        InstructionHandle from_ih;
-        InstructionHandle to_ih;
-        if ((from_ih = findInstruction1(from)) == null) {
-            throw new ClassGenException("Instruction " + from + " is not contained in this list.");
-        }
-        if ((to_ih = findInstruction2(to)) == null) {
-            throw new ClassGenException("Instruction " + to + " is not contained in this list.");
-        }
-        delete(from_ih, to_ih);
-    }
-
-    /**
-     * Search for given Instruction reference, start at beginning of list.
-     *
-     * @param i
-     *            instruction to search for
-     * @return instruction found on success, null otherwise
-     */
-    private InstructionHandle findInstruction1(final Instruction i) {
+    public void replaceConstantPool(final ConstantPoolGen old_cp, final ConstantPoolGen new_cp) {
         for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
-            if (ih.getInstruction() == i) {
-                return ih;
+            final Instruction i = ih.getInstruction();
+            if (i instanceof CPInstruction) {
+                final CPInstruction ci = (CPInstruction) i;
+                final Constant c = old_cp.getConstant(ci.getIndex());
+                ci.setIndex(new_cp.addConstant(c, old_cp));
             }
         }
-        return null;
-    }
-
-    /**
-     * Search for given Instruction reference, start at end of list
-     *
-     * @param i
-     *            instruction to search for
-     * @return instruction found on success, null otherwise
-     */
-    private InstructionHandle findInstruction2(final Instruction i) {
-        for (InstructionHandle ih = end; ih != null; ih = ih.getPrev()) {
-            if (ih.getInstruction() == i) {
-                return ih;
-            }
-        }
-        return null;
-    }
-
-    public boolean contains(final InstructionHandle i) {
-        if (i == null) {
-            return false;
-        }
-        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
-            if (ih == i) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean contains(final Instruction i) {
-        return findInstruction1(i) != null;
     }
 
     public void setPositions() { // TODO could be package-protected? (some test code would need to be repackaged)
@@ -931,41 +1223,10 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * When everything is finished, use this method to convert the instruction list into an array of bytes.
-     *
-     * @return the byte code ready to be dumped
+     * @return length of list (Number of instructions, not bytes)
      */
-    public byte[] getByteCode() {
-        // Update position indices of instructions
-        setPositions();
-        final ByteArrayOutputStream b = new ByteArrayOutputStream();
-        final DataOutputStream out = new DataOutputStream(b);
-        try {
-            for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
-                final Instruction i = ih.getInstruction();
-                i.dump(out); // Traverse list
-            }
-            out.flush();
-        } catch (final IOException e) {
-            System.err.println(e);
-            return ArrayUtils.EMPTY_BYTE_ARRAY;
-        }
-        return b.toByteArray();
-    }
-
-    /**
-     * @return an array of instructions without target information for branch instructions.
-     */
-    public Instruction[] getInstructions() {
-        final List<Instruction> instructions = new ArrayList<>();
-        try (ByteSequence bytes = new ByteSequence(getByteCode())) {
-            while (bytes.available() > 0) {
-                instructions.add(Instruction.readInstruction(bytes));
-            }
-        } catch (final IOException e) {
-            throw new ClassGenException(e.toString(), e);
-        }
-        return instructions.toArray(Instruction.EMPTY_ARRAY);
+    public int size() {
+        return length;
     }
 
     @Override
@@ -984,267 +1245,6 @@ public class InstructionList implements Iterable<InstructionHandle> {
             buf.append(ih.toString(verbose)).append("\n");
         }
         return buf.toString();
-    }
-
-    /**
-     * @return iterator that lists all instructions (handles)
-     */
-    @Override
-    public Iterator<InstructionHandle> iterator() {
-        return new Iterator<InstructionHandle>() {
-
-            private InstructionHandle ih = start;
-
-            @Override
-            public InstructionHandle next() throws NoSuchElementException {
-                if (ih == null) {
-                    throw new NoSuchElementException();
-                }
-                final InstructionHandle i = ih;
-                ih = ih.getNext();
-                return i;
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
-
-            @Override
-            public boolean hasNext() {
-                return ih != null;
-            }
-        };
-    }
-
-    /**
-     * @return array containing all instructions (handles)
-     */
-    public InstructionHandle[] getInstructionHandles() {
-        final InstructionHandle[] ihs = new InstructionHandle[length];
-        InstructionHandle ih = start;
-        for (int i = 0; i < length; i++) {
-            ihs[i] = ih;
-            ih = ih.getNext();
-        }
-        return ihs;
-    }
-
-    /**
-     * Get positions (offsets) of all instructions in the list. This relies on that the list has been freshly created from an byte code array, or that
-     * setPositions() has been called. Otherwise this may be inaccurate.
-     *
-     * @return array containing all instruction's offset in byte code
-     */
-    public int[] getInstructionPositions() {
-        return bytePositions;
-    }
-
-    /**
-     * @return complete, i.e., deep copy of this list
-     */
-    public InstructionList copy() {
-        final Map<InstructionHandle, InstructionHandle> map = new HashMap<>();
-        final InstructionList il = new InstructionList();
-        /*
-         * Pass 1: Make copies of all instructions, append them to the new list and associate old instruction references with the new ones, i.e., a 1:1 mapping.
-         */
-        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
-            final Instruction i = ih.getInstruction();
-            final Instruction c = i.copy(); // Use clone for shallow copy
-            if (c instanceof BranchInstruction) {
-                map.put(ih, il.append((BranchInstruction) c));
-            } else {
-                map.put(ih, il.append(c));
-            }
-        }
-        /*
-         * Pass 2: Update branch targets.
-         */
-        InstructionHandle ih = start;
-        InstructionHandle ch = il.start;
-        while (ih != null) {
-            final Instruction i = ih.getInstruction();
-            final Instruction c = ch.getInstruction();
-            if (i instanceof BranchInstruction) {
-                final BranchInstruction bi = (BranchInstruction) i;
-                final BranchInstruction bc = (BranchInstruction) c;
-                final InstructionHandle itarget = bi.getTarget(); // old target
-                // New target is in hash map
-                bc.setTarget(map.get(itarget));
-                if (bi instanceof Select) { // Either LOOKUPSWITCH or TABLESWITCH
-                    final InstructionHandle[] itargets = ((Select) bi).getTargets();
-                    final InstructionHandle[] ctargets = ((Select) bc).getTargets();
-                    for (int j = 0; j < itargets.length; j++) { // Update all targets
-                        ctargets[j] = map.get(itargets[j]);
-                    }
-                }
-            }
-            ih = ih.getNext();
-            ch = ch.getNext();
-        }
-        return il;
-    }
-
-    /**
-     * Replace all references to the old constant pool with references to the new constant pool
-     */
-    public void replaceConstantPool(final ConstantPoolGen old_cp, final ConstantPoolGen new_cp) {
-        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
-            final Instruction i = ih.getInstruction();
-            if (i instanceof CPInstruction) {
-                final CPInstruction ci = (CPInstruction) i;
-                final Constant c = old_cp.getConstant(ci.getIndex());
-                ci.setIndex(new_cp.addConstant(c, old_cp));
-            }
-        }
-    }
-
-    private void clear() {
-        start = end = null;
-        length = 0;
-    }
-
-    /**
-     * Delete contents of list. Provides better memory utilization, because the system then may reuse the instruction handles. This method is typically called
-     * right after {@link MethodGen#getMethod()}.
-     */
-    public void dispose() {
-        // Traverse in reverse order, because ih.next is overwritten
-        for (InstructionHandle ih = end; ih != null; ih = ih.getPrev()) {
-            /*
-             * Causes BranchInstructions to release target and targeters, because it calls dispose() on the contained instruction.
-             */
-            ih.dispose();
-        }
-        clear();
-    }
-
-    /**
-     * @return start of list
-     */
-    public InstructionHandle getStart() {
-        return start;
-    }
-
-    /**
-     * @return end of list
-     */
-    public InstructionHandle getEnd() {
-        return end;
-    }
-
-    /**
-     * @return length of list (Number of instructions, not bytes)
-     */
-    public int getLength() {
-        return length;
-    }
-
-    /**
-     * @return length of list (Number of instructions, not bytes)
-     */
-    public int size() {
-        return length;
-    }
-
-    /**
-     * Redirect all references from old_target to new_target, i.e., update targets of branch instructions.
-     *
-     * @param old_target
-     *            the old target instruction handle
-     * @param new_target
-     *            the new target instruction handle
-     */
-    public void redirectBranches(final InstructionHandle old_target, final InstructionHandle new_target) {
-        for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
-            final Instruction i = ih.getInstruction();
-            if (i instanceof BranchInstruction) {
-                final BranchInstruction b = (BranchInstruction) i;
-                final InstructionHandle target = b.getTarget();
-                if (target == old_target) {
-                    b.setTarget(new_target);
-                }
-                if (b instanceof Select) { // Either LOOKUPSWITCH or TABLESWITCH
-                    final InstructionHandle[] targets = ((Select) b).getTargets();
-                    for (int j = 0; j < targets.length; j++) {
-                        if (targets[j] == old_target) {
-                            ((Select) b).setTarget(j, new_target);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Redirect all references of local variables from old_target to new_target.
-     *
-     * @param lg
-     *            array of local variables
-     * @param old_target
-     *            the old target instruction handle
-     * @param new_target
-     *            the new target instruction handle
-     * @see MethodGen
-     */
-    public void redirectLocalVariables(final LocalVariableGen[] lg, final InstructionHandle old_target, final InstructionHandle new_target) {
-        for (final LocalVariableGen element : lg) {
-            final InstructionHandle start = element.getStart();
-            final InstructionHandle end = element.getEnd();
-            if (start == old_target) {
-                element.setStart(new_target);
-            }
-            if (end == old_target) {
-                element.setEnd(new_target);
-            }
-        }
-    }
-
-    /**
-     * Redirect all references of exception handlers from old_target to new_target.
-     *
-     * @param exceptions
-     *            array of exception handlers
-     * @param old_target
-     *            the old target instruction handle
-     * @param new_target
-     *            the new target instruction handle
-     * @see MethodGen
-     */
-    public void redirectExceptionHandlers(final CodeExceptionGen[] exceptions, final InstructionHandle old_target, final InstructionHandle new_target) {
-        for (final CodeExceptionGen exception : exceptions) {
-            if (exception.getStartPC() == old_target) {
-                exception.setStartPC(new_target);
-            }
-            if (exception.getEndPC() == old_target) {
-                exception.setEndPC(new_target);
-            }
-            if (exception.getHandlerPC() == old_target) {
-                exception.setHandlerPC(new_target);
-            }
-        }
-    }
-
-    private List<InstructionListObserver> observers;
-
-    /**
-     * Add observer for this object.
-     */
-    public void addObserver(final InstructionListObserver o) {
-        if (observers == null) {
-            observers = new ArrayList<>();
-        }
-        observers.add(o);
-    }
-
-    /**
-     * Remove observer for this object.
-     */
-    public void removeObserver(final InstructionListObserver o) {
-        if (observers != null) {
-            observers.remove(o);
-        }
     }
 
     /**

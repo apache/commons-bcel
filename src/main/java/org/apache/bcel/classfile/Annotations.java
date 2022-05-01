@@ -34,6 +34,21 @@ public abstract class Annotations extends Attribute {
     private final boolean isRuntimeVisible;
 
     /**
+     * @param annotationType the subclass type of the annotation
+     * @param nameIndex Index pointing to the name <em>Code</em>
+     * @param length Content length in bytes
+     * @param annotationTable the actual annotations
+     * @param constantPool Array of constants
+     * @param isRuntimeVisible whether this Annotation visible at runtime
+     */
+    public Annotations(final byte annotationType, final int nameIndex, final int length, final AnnotationEntry[] annotationTable,
+            final ConstantPool constantPool, final boolean isRuntimeVisible) {
+        super(annotationType, nameIndex, length, constantPool);
+        this.annotationTable = annotationTable;
+        this.isRuntimeVisible = isRuntimeVisible;
+    }
+
+    /**
      * @param annotation_type the subclass type of the annotation
      * @param name_index Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
@@ -53,21 +68,6 @@ public abstract class Annotations extends Attribute {
     }
 
     /**
-     * @param annotationType the subclass type of the annotation
-     * @param nameIndex Index pointing to the name <em>Code</em>
-     * @param length Content length in bytes
-     * @param annotationTable the actual annotations
-     * @param constantPool Array of constants
-     * @param isRuntimeVisible whether this Annotation visible at runtime
-     */
-    public Annotations(final byte annotationType, final int nameIndex, final int length, final AnnotationEntry[] annotationTable,
-            final ConstantPool constantPool, final boolean isRuntimeVisible) {
-        super(annotationType, nameIndex, length, constantPool);
-        this.annotationTable = annotationTable;
-        this.isRuntimeVisible = isRuntimeVisible;
-    }
-
-    /**
      * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
@@ -76,13 +76,6 @@ public abstract class Annotations extends Attribute {
     @Override
     public void accept(final Visitor v) {
         v.visitAnnotation(this);
-    }
-
-    /**
-     * @param annotationTable the entries to set in this annotation
-     */
-    public final void setAnnotationTable(final AnnotationEntry[] annotationTable) {
-        this.annotationTable = annotationTable;
     }
 
     /**
@@ -106,14 +99,11 @@ public abstract class Annotations extends Attribute {
         return isRuntimeVisible;
     }
 
-    protected void writeAnnotations(final DataOutputStream dos) throws IOException {
-        if (annotationTable == null) {
-            return;
-        }
-        dos.writeShort(annotationTable.length);
-        for (final AnnotationEntry element : annotationTable) {
-            element.dump(dos);
-        }
+    /**
+     * @param annotationTable the entries to set in this annotation
+     */
+    public final void setAnnotationTable(final AnnotationEntry[] annotationTable) {
+        this.annotationTable = annotationTable;
     }
 
     /**
@@ -130,6 +120,16 @@ public abstract class Annotations extends Attribute {
             }
         }
         return buf.toString();
+    }
+
+    protected void writeAnnotations(final DataOutputStream dos) throws IOException {
+        if (annotationTable == null) {
+            return;
+        }
+        dos.writeShort(annotationTable.length);
+        for (final AnnotationEntry element : annotationTable) {
+            element.dump(dos);
+        }
     }
 
 }

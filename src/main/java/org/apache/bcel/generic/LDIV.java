@@ -32,14 +32,6 @@ public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
     }
 
 
-    @Override
-    public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.ARITHMETIC_EXCEPTION
-        };
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -56,5 +48,13 @@ public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
         v.visitStackConsumer(this);
         v.visitArithmeticInstruction(this);
         v.visitLDIV(this);
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return new Class[] {
+            ExceptionConst.ARITHMETIC_EXCEPTION
+        };
     }
 }

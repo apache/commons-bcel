@@ -37,28 +37,6 @@ public final class LineNumberTable extends Attribute {
     private LineNumber[] lineNumberTable; // Table of line/numbers pairs
 
 
-    /*
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use copy() for a physical copy.
-     */
-    public LineNumberTable(final LineNumberTable c) {
-        this(c.getNameIndex(), c.getLength(), c.getLineNumberTable(), c.getConstantPool());
-    }
-
-
-    /*
-     * @param name_index Index of name
-     * @param length Content length in bytes
-     * @param lineNumberTable Table of line/numbers pairs
-     * @param constant_pool Array of constants
-     */
-    public LineNumberTable(final int name_index, final int length, final LineNumber[] line_number_table,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_LINE_NUMBER_TABLE, name_index, length, constant_pool);
-        this.lineNumberTable = line_number_table;
-    }
-
-
     /**
      * Construct object from input stream.
      * @param name_index Index of name
@@ -78,6 +56,28 @@ public final class LineNumberTable extends Attribute {
     }
 
 
+    /*
+     * @param name_index Index of name
+     * @param length Content length in bytes
+     * @param lineNumberTable Table of line/numbers pairs
+     * @param constant_pool Array of constants
+     */
+    public LineNumberTable(final int name_index, final int length, final LineNumber[] line_number_table,
+            final ConstantPool constant_pool) {
+        super(Const.ATTR_LINE_NUMBER_TABLE, name_index, length, constant_pool);
+        this.lineNumberTable = line_number_table;
+    }
+
+
+    /*
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use copy() for a physical copy.
+     */
+    public LineNumberTable(final LineNumberTable c) {
+        this(c.getNameIndex(), c.getLength(), c.getLineNumberTable(), c.getConstantPool());
+    }
+
+
     /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
@@ -88,6 +88,23 @@ public final class LineNumberTable extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         v.visitLineNumberTable(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        // TODO could use the lower level constructor and thereby allow
+        // lineNumberTable to be made final
+        final LineNumberTable c = (LineNumberTable) clone();
+        c.lineNumberTable = new LineNumber[lineNumberTable.length];
+        for (int i = 0; i < lineNumberTable.length; i++) {
+            c.lineNumberTable[i] = lineNumberTable[i].copy();
+        }
+        c.setConstantPool(_constant_pool);
+        return c;
     }
 
 
@@ -112,38 +129,6 @@ public final class LineNumberTable extends Attribute {
      */
     public LineNumber[] getLineNumberTable() {
         return lineNumberTable;
-    }
-
-
-    /**
-     * @param lineNumberTable the line number entries for this table
-     */
-    public void setLineNumberTable( final LineNumber[] lineNumberTable ) {
-        this.lineNumberTable = lineNumberTable;
-    }
-
-
-    /**
-     * @return String representation.
-     */
-    @Override
-    public String toString() {
-        final StringBuilder buf = new StringBuilder();
-        final StringBuilder line = new StringBuilder();
-        final String newLine = System.getProperty("line.separator", "\n");
-        for (int i = 0; i < lineNumberTable.length; i++) {
-            line.append(lineNumberTable[i].toString());
-            if (i < lineNumberTable.length - 1) {
-                line.append(", ");
-            }
-            if (line.length() > MAX_LINE_LENGTH && i < lineNumberTable.length - 1) {
-                line.append(newLine);
-                buf.append(line);
-                line.setLength(0);
-            }
-        }
-        buf.append(line);
-        return buf.toString();
     }
 
 
@@ -193,24 +178,39 @@ public final class LineNumberTable extends Attribute {
     }
 
 
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        // TODO could use the lower level constructor and thereby allow
-        // lineNumberTable to be made final
-        final LineNumberTable c = (LineNumberTable) clone();
-        c.lineNumberTable = new LineNumber[lineNumberTable.length];
-        for (int i = 0; i < lineNumberTable.length; i++) {
-            c.lineNumberTable[i] = lineNumberTable[i].copy();
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
+    public int getTableLength() {
+        return lineNumberTable == null ? 0 : lineNumberTable.length;
     }
 
 
-    public int getTableLength() {
-        return lineNumberTable == null ? 0 : lineNumberTable.length;
+    /**
+     * @param lineNumberTable the line number entries for this table
+     */
+    public void setLineNumberTable( final LineNumber[] lineNumberTable ) {
+        this.lineNumberTable = lineNumberTable;
+    }
+
+
+    /**
+     * @return String representation.
+     */
+    @Override
+    public String toString() {
+        final StringBuilder buf = new StringBuilder();
+        final StringBuilder line = new StringBuilder();
+        final String newLine = System.getProperty("line.separator", "\n");
+        for (int i = 0; i < lineNumberTable.length; i++) {
+            line.append(lineNumberTable[i].toString());
+            if (i < lineNumberTable.length - 1) {
+                line.append(", ");
+            }
+            if (line.length() > MAX_LINE_LENGTH && i < lineNumberTable.length - 1) {
+                line.append(newLine);
+                buf.append(line);
+                line.setLength(0);
+            }
+        }
+        buf.append(line);
+        return buf.toString();
     }
 }

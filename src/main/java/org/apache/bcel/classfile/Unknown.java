@@ -39,11 +39,7 @@ import org.apache.bcel.Const;
  */
 public final class Unknown extends Attribute {
 
-    private byte[] bytes;
-    private final String name;
     private static final Map<String, Unknown> unknownAttributes = new HashMap<>();
-
-
     /** @return array of unknown attributes, but just one for each kind.
      */
     static Unknown[] getUnknownAttributes() {
@@ -52,15 +48,10 @@ public final class Unknown extends Attribute {
         unknownAttributes.clear();
         return unknowns;
     }
+    private byte[] bytes;
 
 
-    /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
-     */
-    public Unknown(final Unknown c) {
-        this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
-    }
+    private final String name;
 
 
     /**
@@ -100,6 +91,15 @@ public final class Unknown extends Attribute {
 
 
     /**
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use clone() for a physical copy.
+     */
+    public Unknown(final Unknown c) {
+        this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
+    }
+
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
@@ -109,6 +109,21 @@ public final class Unknown extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         v.visitUnknown(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final Unknown c = (Unknown) clone();
+        if (bytes != null) {
+            c.bytes = new byte[bytes.length];
+            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
+        }
+        c.setConstantPool(_constant_pool);
+        return c;
     }
 
 
@@ -169,20 +184,5 @@ public final class Unknown extends Attribute {
             hex = Utility.toHexString(bytes);
         }
         return "(Unknown attribute " + name + ": " + hex + ")";
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final Unknown c = (Unknown) clone();
-        if (bytes != null) {
-            c.bytes = new byte[bytes.length];
-            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

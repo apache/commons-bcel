@@ -58,6 +58,31 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
 
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (final CloneNotSupportedException e) {
+            throw new Error("Clone Not Supported"); // never happens
+        }
+    }
+
+
+    /**
+     * @return true, if ih is target of this handler
+     */
+    @Override
+    public boolean containsTarget( final InstructionHandle ih ) {
+        return startPc == ih || endPc == ih || handlerPc == ih;
+    }
+
+
+    /** Gets the type of the Exception to catch, 'null' for ANY. */
+    public ObjectType getCatchType() {
+        return catchType;
+    }
+
+
     /**
      * Get CodeException object.<BR>
      *
@@ -74,12 +99,30 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
 
-    /* Set start of handler
-     * @param startPc Start of handled region (inclusive)
+    /** @return end of handled region (inclusive)
      */
-    public void setStartPC( final InstructionHandle start_pc ) { // TODO could be package-protected?
-        BranchInstruction.notifyTarget(this.startPc, start_pc, this);
-        this.startPc = start_pc;
+    public InstructionHandle getEndPC() {
+        return endPc;
+    }
+
+
+    /** @return start of handler
+     */
+    public InstructionHandle getHandlerPC() {
+        return handlerPc;
+    }
+
+
+    /** @return start of handled region (inclusive)
+     */
+    public InstructionHandle getStartPC() {
+        return startPc;
+    }
+
+
+    /** Sets the type of the Exception to catch. Set 'null' for ANY. */
+    public void setCatchType( final ObjectType catchType ) {
+        this.catchType = catchType;
     }
 
 
@@ -98,6 +141,21 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     public void setHandlerPC( final InstructionHandle handler_pc ) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.handlerPc, handler_pc, this);
         this.handlerPc = handler_pc;
+    }
+
+
+    /* Set start of handler
+     * @param startPc Start of handled region (inclusive)
+     */
+    public void setStartPC( final InstructionHandle start_pc ) { // TODO could be package-protected?
+        BranchInstruction.notifyTarget(this.startPc, start_pc, this);
+        this.startPc = start_pc;
+    }
+
+
+    @Override
+    public String toString() {
+        return "CodeExceptionGen(" + startPc + ", " + endPc + ", " + handlerPc + ")";
     }
 
 
@@ -123,64 +181,6 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
         if (!targeted) {
             throw new ClassGenException("Not targeting " + old_ih + ", but {" + startPc + ", "
                     + endPc + ", " + handlerPc + "}");
-        }
-    }
-
-
-    /**
-     * @return true, if ih is target of this handler
-     */
-    @Override
-    public boolean containsTarget( final InstructionHandle ih ) {
-        return startPc == ih || endPc == ih || handlerPc == ih;
-    }
-
-
-    /** Sets the type of the Exception to catch. Set 'null' for ANY. */
-    public void setCatchType( final ObjectType catchType ) {
-        this.catchType = catchType;
-    }
-
-
-    /** Gets the type of the Exception to catch, 'null' for ANY. */
-    public ObjectType getCatchType() {
-        return catchType;
-    }
-
-
-    /** @return start of handled region (inclusive)
-     */
-    public InstructionHandle getStartPC() {
-        return startPc;
-    }
-
-
-    /** @return end of handled region (inclusive)
-     */
-    public InstructionHandle getEndPC() {
-        return endPc;
-    }
-
-
-    /** @return start of handler
-     */
-    public InstructionHandle getHandlerPC() {
-        return handlerPc;
-    }
-
-
-    @Override
-    public String toString() {
-        return "CodeExceptionGen(" + startPc + ", " + endPc + ", " + handlerPc + ")";
-    }
-
-
-    @Override
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
         }
     }
 }

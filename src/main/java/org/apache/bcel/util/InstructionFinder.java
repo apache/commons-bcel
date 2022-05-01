@@ -65,230 +65,6 @@ import org.apache.bcel.generic.InstructionList;
  */
 public class InstructionFinder {
 
-    private static final int OFFSET = 32767; // char + OFFSET is outside of LATIN-1
-    private static final int NO_OPCODES = 256; // Potential number, some are not used
-    private static final Map<String, String> map = new HashMap<>();
-    private final InstructionList il;
-    private String ilString; // instruction list as string
-    private InstructionHandle[] handles; // map instruction
-
-
-    // list to array
-    /**
-     * @param il
-     *          instruction list to search for given patterns
-     */
-    public InstructionFinder(final InstructionList il) {
-        this.il = il;
-        reread();
-    }
-
-
-    /**
-     * Reread the instruction list, e.g., after you've altered the list upon a
-     * match.
-     */
-    public final void reread() {
-        final int size = il.getLength();
-        final char[] buf = new char[size]; // Create a string with length equal to il length
-        handles = il.getInstructionHandles();
-        // Map opcodes to characters
-        for (int i = 0; i < size; i++) {
-            buf[i] = makeChar(handles[i].getInstruction().getOpcode());
-        }
-        ilString = new String(buf);
-    }
-
-
-    /**
-     * Map symbolic instruction names like "getfield" to a single character.
-     *
-     * @param pattern
-     *          instruction pattern in lower case
-     * @return encoded string for a pattern such as "BranchInstruction".
-     */
-    private static String mapName( final String pattern ) {
-        final String result = map.get(pattern);
-        if (result != null) {
-            return result;
-        }
-        for (short i = 0; i < NO_OPCODES; i++) {
-            if (pattern.equals(Const.getOpcodeName(i))) {
-                return "" + makeChar(i);
-            }
-        }
-        throw new IllegalArgumentException("Instruction unknown: " + pattern);
-    }
-
-
-    /**
-     * Replace symbolic names of instructions with the appropiate character and
-     * remove all white space from string. Meta characters such as +, * are
-     * ignored.
-     *
-     * @param pattern
-     *          The pattern to compile
-     * @return translated regular expression string
-     */
-    private static String compilePattern( final String pattern ) {
-        //Bug: BCEL-77 - Instructions are assumed to be english, to avoid odd Locale issues
-        final String lower = pattern.toLowerCase(Locale.ENGLISH);
-        final StringBuilder buf = new StringBuilder();
-        final int size = pattern.length();
-        for (int i = 0; i < size; i++) {
-            char ch = lower.charAt(i);
-            if (Character.isLetterOrDigit(ch)) {
-                final StringBuilder name = new StringBuilder();
-                while ((Character.isLetterOrDigit(ch) || ch == '_') && i < size) {
-                    name.append(ch);
-                    if (++i >= size) {
-                        break;
-                    }
-                    ch = lower.charAt(i);
-                }
-                i--;
-                buf.append(mapName(name.toString()));
-            } else if (!Character.isWhitespace(ch)) {
-                buf.append(ch);
-            }
-        }
-        return buf.toString();
-    }
-
-
-    /**
-     * @return the matched piece of code as an array of instruction (handles)
-     */
-    private InstructionHandle[] getMatch( final int matched_from, final int match_length ) {
-        final InstructionHandle[] match = new InstructionHandle[match_length];
-        System.arraycopy(handles, matched_from, match, 0, match_length);
-        return match;
-    }
-
-
-    /**
-     * Search for the given pattern in the instruction list. You can search for
-     * any valid opcode via its symbolic name, e.g. "istore". You can also use a
-     * super class or an interface name to match a whole set of instructions, e.g.
-     * "BranchInstruction" or "LoadInstruction". "istore" is also an alias for all
-     * "istore_x" instructions. Additional aliases are "if" for "ifxx", "if_icmp"
-     * for "if_icmpxx", "if_acmp" for "if_acmpxx".
-     *
-     * Consecutive instruction names must be separated by white space which will
-     * be removed during the compilation of the pattern.
-     *
-     * For the rest the usual pattern matching rules for regular expressions
-     * apply.
-     * <P>
-     * Example pattern:
-     *
-     * <pre>
-     * search(&quot;BranchInstruction NOP ((IfInstruction|GOTO)+ ISTORE Instruction)*&quot;);
-     * </pre>
-     *
-     * <p>
-     * If you alter the instruction list upon a match such that other matching
-     * areas are affected, you should call reread() to update the finder and call
-     * search() again, because the matches are cached.
-     *
-     * @param pattern
-     *          the instruction pattern to search for, where case is ignored
-     * @param from
-     *          where to start the search in the instruction list
-     * @param constraint
-     *          optional CodeConstraint to check the found code pattern for
-     *          user-defined constraints
-     * @return iterator of matches where e.nextElement() returns an array of
-     *         instruction handles describing the matched area
-     */
-    public final Iterator<InstructionHandle[]> search( final String pattern, final InstructionHandle from, final CodeConstraint constraint ) {
-        final String search = compilePattern(pattern);
-        int start = -1;
-        for (int i = 0; i < handles.length; i++) {
-            if (handles[i] == from) {
-                start = i; // Where to start search from (index)
-                break;
-            }
-        }
-        if (start == -1) {
-            throw new ClassGenException("Instruction handle " + from
-                    + " not found in instruction list.");
-        }
-        final Pattern regex = Pattern.compile(search);
-        final List<InstructionHandle[]> matches = new ArrayList<>();
-        final Matcher matcher = regex.matcher(ilString);
-        while (start < ilString.length() && matcher.find(start)) {
-            final int startExpr = matcher.start();
-            final int endExpr = matcher.end();
-            final int lenExpr = endExpr - startExpr;
-            final InstructionHandle[] match = getMatch(startExpr, lenExpr);
-            if (constraint == null || constraint.checkCode(match)) {
-                matches.add(match);
-            }
-            start = endExpr;
-        }
-        return matches.iterator();
-    }
-
-
-    /**
-     * Start search beginning from the start of the given instruction list.
-     *
-     * @param pattern
-     *          the instruction pattern to search for, where case is ignored
-     * @return iterator of matches where e.nextElement() returns an array of
-     *         instruction handles describing the matched area
-     */
-    public final Iterator<InstructionHandle[]> search( final String pattern ) {
-        return search(pattern, il.getStart(), null);
-    }
-
-
-    /**
-     * Start search beginning from `from'.
-     *
-     * @param pattern
-     *          the instruction pattern to search for, where case is ignored
-     * @param from
-     *          where to start the search in the instruction list
-     * @return iterator of matches where e.nextElement() returns an array of
-     *         instruction handles describing the matched area
-     */
-    public final Iterator<InstructionHandle[]> search( final String pattern, final InstructionHandle from ) {
-        return search(pattern, from, null);
-    }
-
-
-    /**
-     * Start search beginning from the start of the given instruction list. Check
-     * found matches with the constraint object.
-     *
-     * @param pattern
-     *          the instruction pattern to search for, case is ignored
-     * @param constraint
-     *          constraints to be checked on matching code
-     * @return instruction handle or `null' if the match failed
-     */
-    public final Iterator<InstructionHandle[]> search( final String pattern, final CodeConstraint constraint ) {
-        return search(pattern, il.getStart(), constraint);
-    }
-
-
-    /**
-     * Convert opcode number to char.
-     */
-    private static char makeChar( final short opcode ) {
-        return (char) (opcode + OFFSET);
-    }
-
-
-    /**
-     * @return the inquired instruction list
-     */
-    public final InstructionList getInstructionList() {
-        return il;
-    }
-
     /**
      * Code patterns found may be checked using an additional user-defined
      * constraint object whether they really match the needed criterion. I.e.,
@@ -304,7 +80,9 @@ public class InstructionFinder {
          */
         boolean checkCode( InstructionHandle[] match );
     }
-
+    private static final int OFFSET = 32767; // char + OFFSET is outside of LATIN-1
+    private static final int NO_OPCODES = 256; // Potential number, some are not used
+    private static final Map<String, String> map = new HashMap<>();
     // Initialize pattern map
     static {
         map.put("arithmeticinstruction","(irem|lrem|iand|ior|ineg|isub|lneg|fneg|fmul|ldiv|fadd|lxor|frem|idiv|land|ixor|ishr|fsub|lshl|fdiv|iadd|lor|dmul|lsub|ishl|imul|lmul|lushr|dneg|iushr|lshr|ddiv|drem|dadd|ladd|dsub)");
@@ -377,6 +155,68 @@ public class InstructionFinder {
         buf.append(')');
         map.put("instruction", buf.toString());
     }
+    /**
+     * Replace symbolic names of instructions with the appropiate character and
+     * remove all white space from string. Meta characters such as +, * are
+     * ignored.
+     *
+     * @param pattern
+     *          The pattern to compile
+     * @return translated regular expression string
+     */
+    private static String compilePattern( final String pattern ) {
+        //Bug: BCEL-77 - Instructions are assumed to be english, to avoid odd Locale issues
+        final String lower = pattern.toLowerCase(Locale.ENGLISH);
+        final StringBuilder buf = new StringBuilder();
+        final int size = pattern.length();
+        for (int i = 0; i < size; i++) {
+            char ch = lower.charAt(i);
+            if (Character.isLetterOrDigit(ch)) {
+                final StringBuilder name = new StringBuilder();
+                while ((Character.isLetterOrDigit(ch) || ch == '_') && i < size) {
+                    name.append(ch);
+                    if (++i >= size) {
+                        break;
+                    }
+                    ch = lower.charAt(i);
+                }
+                i--;
+                buf.append(mapName(name.toString()));
+            } else if (!Character.isWhitespace(ch)) {
+                buf.append(ch);
+            }
+        }
+        return buf.toString();
+    }
+
+
+    /**
+     * Convert opcode number to char.
+     */
+    private static char makeChar( final short opcode ) {
+        return (char) (opcode + OFFSET);
+    }
+
+
+    /**
+     * Map symbolic instruction names like "getfield" to a single character.
+     *
+     * @param pattern
+     *          instruction pattern in lower case
+     * @return encoded string for a pattern such as "BranchInstruction".
+     */
+    private static String mapName( final String pattern ) {
+        final String result = map.get(pattern);
+        if (result != null) {
+            return result;
+        }
+        for (short i = 0; i < NO_OPCODES; i++) {
+            if (pattern.equals(Const.getOpcodeName(i))) {
+                return "" + makeChar(i);
+            }
+        }
+        throw new IllegalArgumentException("Instruction unknown: " + pattern);
+    }
 
 
     private static String precompile( final short from, final short to, final short extra ) {
@@ -388,6 +228,166 @@ public class InstructionFinder {
         buf.append(makeChar(extra));
         buf.append(")");
         return buf.toString();
+    }
+
+
+    private final InstructionList il;
+
+
+    private String ilString; // instruction list as string
+
+
+    private InstructionHandle[] handles; // map instruction
+
+
+    // list to array
+    /**
+     * @param il
+     *          instruction list to search for given patterns
+     */
+    public InstructionFinder(final InstructionList il) {
+        this.il = il;
+        reread();
+    }
+
+
+    /**
+     * @return the inquired instruction list
+     */
+    public final InstructionList getInstructionList() {
+        return il;
+    }
+
+
+    /**
+     * @return the matched piece of code as an array of instruction (handles)
+     */
+    private InstructionHandle[] getMatch( final int matched_from, final int match_length ) {
+        final InstructionHandle[] match = new InstructionHandle[match_length];
+        System.arraycopy(handles, matched_from, match, 0, match_length);
+        return match;
+    }
+
+
+    /**
+     * Reread the instruction list, e.g., after you've altered the list upon a
+     * match.
+     */
+    public final void reread() {
+        final int size = il.getLength();
+        final char[] buf = new char[size]; // Create a string with length equal to il length
+        handles = il.getInstructionHandles();
+        // Map opcodes to characters
+        for (int i = 0; i < size; i++) {
+            buf[i] = makeChar(handles[i].getInstruction().getOpcode());
+        }
+        ilString = new String(buf);
+    }
+
+
+    /**
+     * Start search beginning from the start of the given instruction list.
+     *
+     * @param pattern
+     *          the instruction pattern to search for, where case is ignored
+     * @return iterator of matches where e.nextElement() returns an array of
+     *         instruction handles describing the matched area
+     */
+    public final Iterator<InstructionHandle[]> search( final String pattern ) {
+        return search(pattern, il.getStart(), null);
+    }
+
+    /**
+     * Start search beginning from the start of the given instruction list. Check
+     * found matches with the constraint object.
+     *
+     * @param pattern
+     *          the instruction pattern to search for, case is ignored
+     * @param constraint
+     *          constraints to be checked on matching code
+     * @return instruction handle or `null' if the match failed
+     */
+    public final Iterator<InstructionHandle[]> search( final String pattern, final CodeConstraint constraint ) {
+        return search(pattern, il.getStart(), constraint);
+    }
+
+    /**
+     * Start search beginning from `from'.
+     *
+     * @param pattern
+     *          the instruction pattern to search for, where case is ignored
+     * @param from
+     *          where to start the search in the instruction list
+     * @return iterator of matches where e.nextElement() returns an array of
+     *         instruction handles describing the matched area
+     */
+    public final Iterator<InstructionHandle[]> search( final String pattern, final InstructionHandle from ) {
+        return search(pattern, from, null);
+    }
+
+
+    /**
+     * Search for the given pattern in the instruction list. You can search for
+     * any valid opcode via its symbolic name, e.g. "istore". You can also use a
+     * super class or an interface name to match a whole set of instructions, e.g.
+     * "BranchInstruction" or "LoadInstruction". "istore" is also an alias for all
+     * "istore_x" instructions. Additional aliases are "if" for "ifxx", "if_icmp"
+     * for "if_icmpxx", "if_acmp" for "if_acmpxx".
+     *
+     * Consecutive instruction names must be separated by white space which will
+     * be removed during the compilation of the pattern.
+     *
+     * For the rest the usual pattern matching rules for regular expressions
+     * apply.
+     * <P>
+     * Example pattern:
+     *
+     * <pre>
+     * search(&quot;BranchInstruction NOP ((IfInstruction|GOTO)+ ISTORE Instruction)*&quot;);
+     * </pre>
+     *
+     * <p>
+     * If you alter the instruction list upon a match such that other matching
+     * areas are affected, you should call reread() to update the finder and call
+     * search() again, because the matches are cached.
+     *
+     * @param pattern
+     *          the instruction pattern to search for, where case is ignored
+     * @param from
+     *          where to start the search in the instruction list
+     * @param constraint
+     *          optional CodeConstraint to check the found code pattern for
+     *          user-defined constraints
+     * @return iterator of matches where e.nextElement() returns an array of
+     *         instruction handles describing the matched area
+     */
+    public final Iterator<InstructionHandle[]> search( final String pattern, final InstructionHandle from, final CodeConstraint constraint ) {
+        final String search = compilePattern(pattern);
+        int start = -1;
+        for (int i = 0; i < handles.length; i++) {
+            if (handles[i] == from) {
+                start = i; // Where to start search from (index)
+                break;
+            }
+        }
+        if (start == -1) {
+            throw new ClassGenException("Instruction handle " + from
+                    + " not found in instruction list.");
+        }
+        final Pattern regex = Pattern.compile(search);
+        final List<InstructionHandle[]> matches = new ArrayList<>();
+        final Matcher matcher = regex.matcher(ilString);
+        while (start < ilString.length() && matcher.find(start)) {
+            final int startExpr = matcher.start();
+            final int endExpr = matcher.end();
+            final int lenExpr = endExpr - startExpr;
+            final InstructionHandle[] match = getMatch(startExpr, lenExpr);
+            if (constraint == null || constraint.checkCode(match)) {
+                matches.add(match);
+            }
+            start = endExpr;
+        }
+        return matches.iterator();
     }
 
 

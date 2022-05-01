@@ -46,6 +46,67 @@ import org.apache.commons.lang3.ArrayUtils;
 public class Verifier {
 
     /**
+     * Verifies class files.
+     * This is a simple demonstration of how the API of BCEL's
+     * class file verifier "JustIce" may be used.
+     * You should supply command-line arguments which are
+     * fully qualified namea of the classes to verify. These class files
+     * must be somewhere in your CLASSPATH (refer to Sun's
+     * documentation for questions about this) or you must have put the classes
+     * into the BCEL Repository yourself (via 'addClass(JavaClass)').
+     */
+    public static void main( final String[] args ) {
+        System.out
+                .println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<https://commons.apache.org/bcel>\n");
+        for (int index = 0; index < args.length; index++) {
+            try {
+                if (args[index].endsWith(".class")) {
+                    final int dotclasspos = args[index].lastIndexOf(".class");
+                    if (dotclasspos != -1) {
+                        args[index] = args[index].substring(0, dotclasspos);
+                    }
+                }
+                args[index] = args[index].replace('/', '.');
+                System.out.println("Now verifying: " + args[index] + "\n");
+                verifyType(args[index]);
+                org.apache.bcel.Repository.clearCache();
+                System.gc();
+            } catch (final ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    static void verifyType(final String fullyQualifiedClassName) throws ClassNotFoundException {
+        final Verifier verifier = VerifierFactory.getVerifier(fullyQualifiedClassName);
+        VerificationResult verificationResult;
+        verificationResult = verifier.doPass1();
+        System.out.println("Pass 1:\n" + verificationResult);
+        verificationResult = verifier.doPass2();
+        System.out.println("Pass 2:\n" + verificationResult);
+        if (verificationResult == VerificationResult.VR_OK) {
+            final JavaClass jc = org.apache.bcel.Repository.lookupClass(fullyQualifiedClassName);
+            for (int i = 0; i < jc.getMethods().length; i++) {
+                verificationResult = verifier.doPass3a(i);
+                System.out.println("Pass 3a, method number " + i + " ['"
+                        + jc.getMethods()[i] + "']:\n" + verificationResult);
+                verificationResult = verifier.doPass3b(i);
+                System.out.println("Pass 3b, method number " + i + " ['"
+                        + jc.getMethods()[i] + "']:\n" + verificationResult);
+            }
+        }
+        System.out.println("Warnings:");
+        final String[] warnings = verifier.getMessages();
+        if (warnings.length == 0) {
+            System.out.println("<none>");
+        }
+        for (final String warning : warnings) {
+            System.out.println(warning);
+        }
+        System.out.println("\n");
+        // avoid swapping.
+        verifier.flush();
+    }
+    /**
      * The name of the class this verifier operates on.
      */
     private final String classname;
@@ -53,10 +114,25 @@ public class Verifier {
     private Pass1Verifier p1v;
     /** A Pass2Verifier for this Verifier instance. */
     private Pass2Verifier p2v;
+
+
     /** The Pass3aVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
     private final Map<String, Pass3aVerifier> p3avs = new HashMap<>();
+
+
     /** The Pass3bVerifiers for this Verifier instance. Key: Interned string specifying the method number. */
     private final Map<String, Pass3bVerifier> p3bvs = new HashMap<>();
+
+
+    /**
+     * Instantiation is done by the VerifierFactory.
+     *
+     * @see VerifierFactory
+     */
+    Verifier(final String fully_qualified_classname) {
+        classname = fully_qualified_classname;
+        flush();
+    }
 
 
     /** Returns the VerificationResult for the given pass. */
@@ -104,13 +180,16 @@ public class Verifier {
 
 
     /**
-     * Instantiation is done by the VerifierFactory.
+     * Forget everything known about the class file; that means, really
+     * start a new verification of a possibly different class file from
+     * BCEL's repository.
      *
-     * @see VerifierFactory
      */
-    Verifier(final String fully_qualified_classname) {
-        classname = fully_qualified_classname;
-        flush();
+    public void flush() {
+        p1v = null;
+        p2v = null;
+        p3avs.clear();
+        p3bvs.clear();
     }
 
 
@@ -123,20 +202,6 @@ public class Verifier {
      */
     public final String getClassName() {
         return classname;
-    }
-
-
-    /**
-     * Forget everything known about the class file; that means, really
-     * start a new verification of a possibly different class file from
-     * BCEL's repository.
-     *
-     */
-    public void flush() {
-        p1v = null;
-        p2v = null;
-        p3avs.clear();
-        p3bvs.clear();
     }
 
 
@@ -178,70 +243,5 @@ public class Verifier {
         }
 
         return messages.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-    }
-
-
-    /**
-     * Verifies class files.
-     * This is a simple demonstration of how the API of BCEL's
-     * class file verifier "JustIce" may be used.
-     * You should supply command-line arguments which are
-     * fully qualified namea of the classes to verify. These class files
-     * must be somewhere in your CLASSPATH (refer to Sun's
-     * documentation for questions about this) or you must have put the classes
-     * into the BCEL Repository yourself (via 'addClass(JavaClass)').
-     */
-    public static void main( final String[] args ) {
-        System.out
-                .println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<https://commons.apache.org/bcel>\n");
-        for (int index = 0; index < args.length; index++) {
-            try {
-                if (args[index].endsWith(".class")) {
-                    final int dotclasspos = args[index].lastIndexOf(".class");
-                    if (dotclasspos != -1) {
-                        args[index] = args[index].substring(0, dotclasspos);
-                    }
-                }
-                args[index] = args[index].replace('/', '.');
-                System.out.println("Now verifying: " + args[index] + "\n");
-                verifyType(args[index]);
-                org.apache.bcel.Repository.clearCache();
-                System.gc();
-            } catch (final ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    static void verifyType(final String fullyQualifiedClassName) throws ClassNotFoundException {
-        final Verifier verifier = VerifierFactory.getVerifier(fullyQualifiedClassName);
-        VerificationResult verificationResult;
-        verificationResult = verifier.doPass1();
-        System.out.println("Pass 1:\n" + verificationResult);
-        verificationResult = verifier.doPass2();
-        System.out.println("Pass 2:\n" + verificationResult);
-        if (verificationResult == VerificationResult.VR_OK) {
-            final JavaClass jc = org.apache.bcel.Repository.lookupClass(fullyQualifiedClassName);
-            for (int i = 0; i < jc.getMethods().length; i++) {
-                verificationResult = verifier.doPass3a(i);
-                System.out.println("Pass 3a, method number " + i + " ['"
-                        + jc.getMethods()[i] + "']:\n" + verificationResult);
-                verificationResult = verifier.doPass3b(i);
-                System.out.println("Pass 3b, method number " + i + " ['"
-                        + jc.getMethods()[i] + "']:\n" + verificationResult);
-            }
-        }
-        System.out.println("Warnings:");
-        final String[] warnings = verifier.getMessages();
-        if (warnings.length == 0) {
-            System.out.println("<none>");
-        }
-        for (final String warning : warnings) {
-            System.out.println(warning);
-        }
-        System.out.println("\n");
-        // avoid swapping.
-        verifier.flush();
     }
 }

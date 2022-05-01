@@ -42,123 +42,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class VerifyBadClassesTestCase {
 
-    /**
-     * BCEL-303: AssertionViolatedException in Pass 3A Verification of invoke instructions
-     */
-    @Test
-    public void testB303()
-    {
-        testVerify("issue303/example", "A");
-    }
-
-    /**
-     * BCEL-307: ClassFormatException thrown in Pass 3A verification
-     */
-    @Test
-    public void testB307()
-    {
-        testVerify("issue307/example", "A");
-    }
-
-    /**
-     * BCEL-337: StringIndexOutOfBounds in Pass 2 Verification of empty method names in the constant pool
-     */
-    @Test
-    public void testB337()
-    {
-        testVerify("issue337/example", "A");
-    }
-
-    /**
-     * BCEL-308: NullPointerException in Verifier Pass 3A
-     */
-    @Test
-    public void testB308()
-    {
-        testVerify("issue308", "Hello");
-    }
-
-    /**
-     * BCEL-309: NegativeArraySizeException when Code attribute length is negative
-     */
-    @Test
-    public void testB309()
-    {
-        testVerify("issue309", "Hello");
-    }
-
-    /**
-     * BCEL-310: ArrayIndexOutOfBounds in Verifier Pass 3A
-     */
-    @Test
-    public void testB310()
-    {
-        testVerify("issue310", "Hello");
-    }
-
-    /**
-     * BCEL-311: ClassCastException in Verifier Pass 2
-     */
-    @Test
-    public void testB311()
-    {
-        testVerify("issue311", "Hello");
-    }
-
-    /**
-     * BCEL-312: AssertionViolation: INTERNAL ERROR Please adapt StringRepresentation
-     *           to deal with ConstantPackage in Verifier Pass 2
-     */
-    @Test
-    public void testB312()
-    {
-        testVerify("issue312", "Hello");
-    }
-
-    /**
-     * BCEL-313: ClassFormatException: Invalid signature: Ljava/lang/String)V in Verifier Pass 3A
-     */
-    @Test
-    public void testB313()
-    {
-        testVerify("issue313", "Hello");
-    }
-
-    /**
-     * Note that the test classes are bad or malformed and this causes the
-     * animal-sniffer-maven-plugin to fail during the build/verification
-     * process. I was not able to figure out the right incantations to get
-     * it to ignore these files.  Hence, their file extension is '.classx'
-     * to avoid this problem.  As part of the test process we rename them
-     * to '.class' and then back to '.classx' after the test.  If we can
-     * get animal-sniffer to ignore the files, these steps could be omitted.
-     */
-    private void testVerify(final String directory, final String className) {
-        final String baseDir = "target/test-classes";
-        final String testDir = baseDir + (directory.isEmpty() ? "" : "/" + directory);
-
-        final File origFile = new File(testDir + "/" + className + ".classx");
-        final File testFile = new File(testDir + "/" + className + ".class");
-
-         if (!origFile.renameTo(testFile)) {
-             fail("Failed to rename orig file");
-         }
-
-         String result;
-         try {
-             result = run(buildVerifyCommand(className, testDir));
-         } catch (final Exception e) {
-             result = e.getMessage();
-         }
-
-
-         if (!testFile.renameTo(origFile)) {
-             fail("Failed to rename test file");
-         }
-
-         assertTrue(result.isEmpty(), result);
-    }
-
     private List<String> buildVerifyCommand(final String className, final String testDir) {
       final List<String> command = new ArrayList<>();
       command.add("java");
@@ -218,5 +101,122 @@ public class VerifyBadClassesTestCase {
 
       //return "stdout: " + outStream.toString() + "\nstderr: " + errStream.toString();
       return errStream.toString();
+    }
+
+    /**
+     * BCEL-303: AssertionViolatedException in Pass 3A Verification of invoke instructions
+     */
+    @Test
+    public void testB303()
+    {
+        testVerify("issue303/example", "A");
+    }
+
+    /**
+     * BCEL-307: ClassFormatException thrown in Pass 3A verification
+     */
+    @Test
+    public void testB307()
+    {
+        testVerify("issue307/example", "A");
+    }
+
+    /**
+     * BCEL-308: NullPointerException in Verifier Pass 3A
+     */
+    @Test
+    public void testB308()
+    {
+        testVerify("issue308", "Hello");
+    }
+
+    /**
+     * BCEL-309: NegativeArraySizeException when Code attribute length is negative
+     */
+    @Test
+    public void testB309()
+    {
+        testVerify("issue309", "Hello");
+    }
+
+    /**
+     * BCEL-310: ArrayIndexOutOfBounds in Verifier Pass 3A
+     */
+    @Test
+    public void testB310()
+    {
+        testVerify("issue310", "Hello");
+    }
+
+    /**
+     * BCEL-311: ClassCastException in Verifier Pass 2
+     */
+    @Test
+    public void testB311()
+    {
+        testVerify("issue311", "Hello");
+    }
+
+    /**
+     * BCEL-312: AssertionViolation: INTERNAL ERROR Please adapt StringRepresentation
+     *           to deal with ConstantPackage in Verifier Pass 2
+     */
+    @Test
+    public void testB312()
+    {
+        testVerify("issue312", "Hello");
+    }
+
+    /**
+     * BCEL-313: ClassFormatException: Invalid signature: Ljava/lang/String)V in Verifier Pass 3A
+     */
+    @Test
+    public void testB313()
+    {
+        testVerify("issue313", "Hello");
+    }
+
+    /**
+     * BCEL-337: StringIndexOutOfBounds in Pass 2 Verification of empty method names in the constant pool
+     */
+    @Test
+    public void testB337()
+    {
+        testVerify("issue337/example", "A");
+    }
+
+    /**
+     * Note that the test classes are bad or malformed and this causes the
+     * animal-sniffer-maven-plugin to fail during the build/verification
+     * process. I was not able to figure out the right incantations to get
+     * it to ignore these files.  Hence, their file extension is '.classx'
+     * to avoid this problem.  As part of the test process we rename them
+     * to '.class' and then back to '.classx' after the test.  If we can
+     * get animal-sniffer to ignore the files, these steps could be omitted.
+     */
+    private void testVerify(final String directory, final String className) {
+        final String baseDir = "target/test-classes";
+        final String testDir = baseDir + (directory.isEmpty() ? "" : "/" + directory);
+
+        final File origFile = new File(testDir + "/" + className + ".classx");
+        final File testFile = new File(testDir + "/" + className + ".class");
+
+         if (!origFile.renameTo(testFile)) {
+             fail("Failed to rename orig file");
+         }
+
+         String result;
+         try {
+             result = run(buildVerifyCommand(className, testDir));
+         } catch (final Exception e) {
+             result = e.getMessage();
+         }
+
+
+         if (!testFile.renameTo(origFile)) {
+             fail("Failed to rename test file");
+         }
+
+         assertTrue(result.isEmpty(), result);
     }
 }

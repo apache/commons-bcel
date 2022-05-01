@@ -104,6 +104,39 @@ public class VerifierAppFrame extends JFrame {
     }
 
 
+    void aboutMenuItem_actionPerformed( final ActionEvent e ) {
+        JOptionPane
+                .showMessageDialog(
+                        this,
+                        "JustIce is a Java class file verifier.\n"+
+                        "It was implemented by Enver Haase in 2001, 2002.\n<https://commons.apache.org/bcel/>",
+                        JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+
+    synchronized void classNamesJList_valueChanged( final ListSelectionEvent e ) {
+        if (e.getValueIsAdjusting()) {
+            return;
+        }
+        current_class = classNamesJList.getSelectedValue();
+        try {
+            verify();
+        } catch (final ClassNotFoundException ex) {
+            // FIXME: report the error using the GUI
+            ex.printStackTrace();
+        }
+        classNamesJList.setSelectedValue(current_class, true);
+    }
+
+
+    /**
+     * @return the classNamesJList
+     */
+    JList<String> getClassNamesJList() {
+        return classNamesJList;
+    }
+
+
     /** Initizalization of the components. */
     private void jbInit() throws Exception {
         //setIconImage(Toolkit.getDefaultToolkit().createImage(Frame1.class.getResource("[Ihr Symbol]")));
@@ -191,94 +224,6 @@ public class VerifierAppFrame extends JFrame {
     }
 
 
-    /** Overridden to stop the application on a closing window. */
-    @Override
-    protected void processWindowEvent( final WindowEvent e ) {
-        super.processWindowEvent(e);
-        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-            System.exit(0);
-        }
-    }
-
-
-    synchronized void classNamesJList_valueChanged( final ListSelectionEvent e ) {
-        if (e.getValueIsAdjusting()) {
-            return;
-        }
-        current_class = classNamesJList.getSelectedValue();
-        try {
-            verify();
-        } catch (final ClassNotFoundException ex) {
-            // FIXME: report the error using the GUI
-            ex.printStackTrace();
-        }
-        classNamesJList.setSelectedValue(current_class, true);
-    }
-
-
-    private void verify() throws ClassNotFoundException {
-        setTitle("PLEASE WAIT");
-        final Verifier v = VerifierFactory.getVerifier(current_class);
-        v.flush(); // Don't cache the verification result for this class.
-        VerificationResult vr;
-        vr = v.doPass1();
-        if (vr.getStatus() == VerificationResult.VERIFIED_REJECTED) {
-            pass1TextPane.setText(vr.getMessage());
-            pass1TextPane.setBackground(Color.red);
-            pass2TextPane.setText("");
-            pass2TextPane.setBackground(Color.yellow);
-            pass3aTextPane.setText("");
-            pass3aJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
-            pass3aTextPane.setBackground(Color.yellow);
-            pass3bTextPane.setText("");
-            pass3bJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
-            pass3bTextPane.setBackground(Color.yellow);
-        } else { // Must be VERIFIED_OK, Pass 1 does not know VERIFIED_NOTYET
-            pass1TextPane.setBackground(Color.green);
-            pass1TextPane.setText(vr.getMessage());
-            vr = v.doPass2();
-            if (vr.getStatus() == VerificationResult.VERIFIED_REJECTED) {
-                pass2TextPane.setText(vr.getMessage());
-                pass2TextPane.setBackground(Color.red);
-                pass3aTextPane.setText("");
-                pass3aTextPane.setBackground(Color.yellow);
-                pass3aJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
-                pass3bTextPane.setText("");
-                pass3bTextPane.setBackground(Color.yellow);
-                pass3bJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
-            } else { // must be Verified_OK, because Pass1 was OK (cannot be Verified_NOTYET).
-                pass2TextPane.setText(vr.getMessage());
-                pass2TextPane.setBackground(Color.green);
-                final JavaClass jc = Repository.lookupClass(current_class);
-                /*
-                 boolean all3aok = true;
-                 boolean all3bok = true;
-                 String all3amsg = "";
-                 String all3bmsg = "";
-                 */
-                final String[] methodnames = new String[jc.getMethods().length];
-                for (int i = 0; i < jc.getMethods().length; i++) {
-                    methodnames[i] = jc.getMethods()[i].toString().replace('\n', ' ').replace('\t',
-                            ' ');
-                }
-                pass3aJList.setListData(methodnames);
-                pass3aJList.setSelectionInterval(0, jc.getMethods().length - 1);
-                pass3bJList.setListData(methodnames);
-                pass3bJList.setSelectionInterval(0, jc.getMethods().length - 1);
-            }
-        }
-        final String[] msgs = v.getMessages();
-        messagesTextPane.setBackground(msgs.length == 0 ? Color.green : Color.yellow);
-        final StringBuilder allmsgs = new StringBuilder();
-        for (int i = 0; i < msgs.length; i++) {
-            msgs[i] = msgs[i].replace('\n', ' ');
-            allmsgs.append(msgs[i]).append("\n\n");
-        }
-        messagesTextPane.setText(allmsgs.toString());
-        setTitle(current_class + " - " + JUSTICE_VERSION);
-    }
-
-
     void newFileMenuItem_actionPerformed( final ActionEvent e ) {
         final String classname = JOptionPane
                 .showInputDialog("Please enter the fully qualified name of a class or interface to verify:");
@@ -352,13 +297,76 @@ public class VerifierAppFrame extends JFrame {
     }
 
 
-    void aboutMenuItem_actionPerformed( final ActionEvent e ) {
-        JOptionPane
-                .showMessageDialog(
-                        this,
-                        "JustIce is a Java class file verifier.\n"+
-                        "It was implemented by Enver Haase in 2001, 2002.\n<https://commons.apache.org/bcel/>",
-                        JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
+    /** Overridden to stop the application on a closing window. */
+    @Override
+    protected void processWindowEvent( final WindowEvent e ) {
+        super.processWindowEvent(e);
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+            System.exit(0);
+        }
+    }
+
+
+    private void verify() throws ClassNotFoundException {
+        setTitle("PLEASE WAIT");
+        final Verifier v = VerifierFactory.getVerifier(current_class);
+        v.flush(); // Don't cache the verification result for this class.
+        VerificationResult vr;
+        vr = v.doPass1();
+        if (vr.getStatus() == VerificationResult.VERIFIED_REJECTED) {
+            pass1TextPane.setText(vr.getMessage());
+            pass1TextPane.setBackground(Color.red);
+            pass2TextPane.setText("");
+            pass2TextPane.setBackground(Color.yellow);
+            pass3aTextPane.setText("");
+            pass3aJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
+            pass3aTextPane.setBackground(Color.yellow);
+            pass3bTextPane.setText("");
+            pass3bJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
+            pass3bTextPane.setBackground(Color.yellow);
+        } else { // Must be VERIFIED_OK, Pass 1 does not know VERIFIED_NOTYET
+            pass1TextPane.setBackground(Color.green);
+            pass1TextPane.setText(vr.getMessage());
+            vr = v.doPass2();
+            if (vr.getStatus() == VerificationResult.VERIFIED_REJECTED) {
+                pass2TextPane.setText(vr.getMessage());
+                pass2TextPane.setBackground(Color.red);
+                pass3aTextPane.setText("");
+                pass3aTextPane.setBackground(Color.yellow);
+                pass3aJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
+                pass3bTextPane.setText("");
+                pass3bTextPane.setBackground(Color.yellow);
+                pass3bJList.setListData(ArrayUtils.EMPTY_STRING_ARRAY);
+            } else { // must be Verified_OK, because Pass1 was OK (cannot be Verified_NOTYET).
+                pass2TextPane.setText(vr.getMessage());
+                pass2TextPane.setBackground(Color.green);
+                final JavaClass jc = Repository.lookupClass(current_class);
+                /*
+                 boolean all3aok = true;
+                 boolean all3bok = true;
+                 String all3amsg = "";
+                 String all3bmsg = "";
+                 */
+                final String[] methodnames = new String[jc.getMethods().length];
+                for (int i = 0; i < jc.getMethods().length; i++) {
+                    methodnames[i] = jc.getMethods()[i].toString().replace('\n', ' ').replace('\t',
+                            ' ');
+                }
+                pass3aJList.setListData(methodnames);
+                pass3aJList.setSelectionInterval(0, jc.getMethods().length - 1);
+                pass3bJList.setListData(methodnames);
+                pass3bJList.setSelectionInterval(0, jc.getMethods().length - 1);
+            }
+        }
+        final String[] msgs = v.getMessages();
+        messagesTextPane.setBackground(msgs.length == 0 ? Color.green : Color.yellow);
+        final StringBuilder allmsgs = new StringBuilder();
+        for (int i = 0; i < msgs.length; i++) {
+            msgs[i] = msgs[i].replace('\n', ' ');
+            allmsgs.append(msgs[i]).append("\n\n");
+        }
+        messagesTextPane.setText(allmsgs.toString());
+        setTitle(current_class + " - " + JUSTICE_VERSION);
     }
 
 
@@ -371,14 +379,6 @@ public class VerifierAppFrame extends JFrame {
                         " Pass one, Pass two, Pass three (before data flow analysis), Pass three (data flow analysis).\n"+
                         "The bottom box to the right shows (warning) messages; warnings do not cause a class to be rejected.",
                         JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
-    }
-
-
-    /**
-     * @return the classNamesJList
-     */
-    JList<String> getClassNamesJList() {
-        return classNamesJList;
     }
 
 

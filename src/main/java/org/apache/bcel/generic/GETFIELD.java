@@ -43,20 +43,6 @@ public class GETFIELD extends FieldInstruction implements ExceptionThrower, Stac
     }
 
 
-    @Override
-    public int produceStack( final ConstantPoolGen cpg ) {
-        return getFieldSize(cpg);
-    }
-
-
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConst.NULL_POINTER_EXCEPTION,
-            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -76,5 +62,19 @@ public class GETFIELD extends FieldInstruction implements ExceptionThrower, Stac
         v.visitFieldOrMethod(this);
         v.visitFieldInstruction(this);
         v.visitGETFIELD(this);
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConst.NULL_POINTER_EXCEPTION,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
+    }
+
+
+    @Override
+    public int produceStack( final ConstantPoolGen cpg ) {
+        return getFieldSize(cpg);
     }
 }

@@ -33,16 +33,6 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
     }
 
 
-    /** @return exceptions this instruction may cause
-     */
-    @Override
-    public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.NULL_POINTER_EXCEPTION
-        };
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -56,5 +46,15 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
         v.visitExceptionThrower(this);
         v.visitStackProducer(this);
         v.visitARRAYLENGTH(this);
+    }
+
+
+    /** @return exceptions this instruction may cause
+     */
+    @Override
+    public Class<?>[] getExceptions() {
+        return new Class[] {
+            ExceptionConst.NULL_POINTER_EXCEPTION
+        };
     }
 }

@@ -55,11 +55,6 @@ public class InstConstraintVisitor extends EmptyVisitor{
     private static final ObjectType GENERIC_ARRAY = ObjectType.getInstance(GenericArray.class.getName());
 
     /**
-     * The constructor. Constructs a new instance of this class.
-     */
-    public InstConstraintVisitor() {}
-
-    /**
      * The Execution Frame we're working on.
      *
      * @see #setFrame(Frame f)
@@ -83,106 +78,9 @@ public class InstConstraintVisitor extends EmptyVisitor{
     private MethodGen mg;
 
     /**
-     * The OperandStack we're working on.
-     *
-     * @see #setFrame(Frame f)
+     * The constructor. Constructs a new instance of this class.
      */
-    private OperandStack stack() {
-        return frame.getStack();
-    }
-
-    /**
-     * The LocalVariables we're working on.
-     *
-     * @see #setFrame(Frame f)
-     */
-    private LocalVariables locals() {
-        return frame.getLocals();
-    }
-
-    /**
-   * This method is called by the visitXXX() to notify the acceptor of this InstConstraintVisitor
-   * that a constraint violation has occured. This is done by throwing an instance of a
-   * StructuralCodeConstraintException.
-   * @throws StructuralCodeConstraintException always.
-   */
-    private void constraintViolated(final Instruction violator, final String description) {
-        final String fq_classname = violator.getClass().getName();
-        throw new StructuralCodeConstraintException(
-            "Instruction "+ fq_classname.substring(fq_classname.lastIndexOf('.')+1) +" constraint violated: " + description);
-    }
-
-    /**
-     * This returns the single instance of the InstConstraintVisitor class.
-     * To operate correctly, other values must have been set before actually
-     * using the instance.
-     * Use this method for performance reasons.
-     *
-     * @see #setConstantPoolGen(ConstantPoolGen cpg)
-     * @see #setMethodGen(MethodGen mg)
-     */
-    public void setFrame(final Frame f) { // TODO could be package-protected?
-        this.frame = f;
-        //if (singleInstance.mg == null || singleInstance.cpg == null)
-        // throw new AssertionViolatedException("Forgot to set important values first.");
-    }
-
-    /**
-     * Sets the ConstantPoolGen instance needed for constraint
-     * checking prior to execution.
-     */
-    public void setConstantPoolGen(final ConstantPoolGen cpg) { // TODO could be package-protected?
-        this.cpg = cpg;
-    }
-
-    /**
-     * Sets the MethodGen instance needed for constraint
-     * checking prior to execution.
-     */
-    public void setMethodGen(final MethodGen mg) {
-        this.mg = mg;
-    }
-
-    /**
-     * Assures index is of type INT.
-     * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
-     */
-    private void indexOfInt(final Instruction o, final Type index) {
-        if (! index.equals(Type.INT)) {
-            constraintViolated(o, "The 'index' is not of type int but of type "+index+".");
-        }
-    }
-
-    /**
-     * Assures the ReferenceType r is initialized (or Type.NULL).
-     * Formally, this means (!(r instanceof UninitializedObjectType)), because
-     * there are no uninitialized array types.
-     * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
-     */
-    private void referenceTypeIsInitialized(final Instruction o, final ReferenceType r) {
-        if (r instanceof UninitializedObjectType) {
-            constraintViolated(o, "Working on an uninitialized object '"+r+"'.");
-        }
-    }
-
-    /** Assures value is of type INT. */
-    private void valueOfInt(final Instruction o, final Type value) {
-        if (! value.equals(Type.INT)) {
-            constraintViolated(o, "The 'value' is not of type int but of type "+value+".");
-        }
-    }
-
-    /**
-     * Assures arrayref is of ArrayType or NULL;
-     * returns true if and only if arrayref is non-NULL.
-     * @throws StructuralCodeConstraintException if the above constraint is violated.
-      */
-    private boolean arrayrefOfArrayType(final Instruction o, final Type arrayref) {
-        if (! (arrayref instanceof ArrayType || arrayref.equals(Type.NULL)) ) {
-            constraintViolated(o, "The 'arrayref' does not refer to an array but is of type "+arrayref+".");
-        }
-        return arrayref instanceof ArrayType;
-    }
+    public InstConstraintVisitor() {}
 
     /***************************************************************/
     /* MISC                                                        */
@@ -216,234 +114,122 @@ public class InstConstraintVisitor extends EmptyVisitor{
         }
     }
 
+    /**
+     * Assures arrayref is of ArrayType or NULL;
+     * returns true if and only if arrayref is non-NULL.
+     * @throws StructuralCodeConstraintException if the above constraint is violated.
+      */
+    private boolean arrayrefOfArrayType(final Instruction o, final Type arrayref) {
+        if (! (arrayref instanceof ArrayType || arrayref.equals(Type.NULL)) ) {
+            constraintViolated(o, "The 'arrayref' does not refer to an array but is of type "+arrayref+".");
+        }
+        return arrayref instanceof ArrayType;
+    }
+
+    /**
+   * This method is called by the visitXXX() to notify the acceptor of this InstConstraintVisitor
+   * that a constraint violation has occured. This is done by throwing an instance of a
+   * StructuralCodeConstraintException.
+   * @throws StructuralCodeConstraintException always.
+   */
+    private void constraintViolated(final Instruction violator, final String description) {
+        final String fq_classname = violator.getClass().getName();
+        throw new StructuralCodeConstraintException(
+            "Instruction "+ fq_classname.substring(fq_classname.lastIndexOf('.')+1) +" constraint violated: " + description);
+    }
+
+    private ObjectType getObjectType(final FieldInstruction o) {
+        final ReferenceType rt = o.getReferenceType(cpg);
+        if(rt instanceof ObjectType) {
+            return (ObjectType)rt;
+        }
+        constraintViolated(o, "expecting ObjectType but got "+rt);
+        return null;
+    }
+
+    /**
+     * Assures index is of type INT.
+     * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
+     */
+    private void indexOfInt(final Instruction o, final Type index) {
+        if (! index.equals(Type.INT)) {
+            constraintViolated(o, "The 'index' is not of type int but of type "+index+".");
+        }
+    }
+
+    /**
+     * The LocalVariables we're working on.
+     *
+     * @see #setFrame(Frame f)
+     */
+    private LocalVariables locals() {
+        return frame.getLocals();
+    }
+
+    /**
+     * Assures the ReferenceType r is initialized (or Type.NULL).
+     * Formally, this means (!(r instanceof UninitializedObjectType)), because
+     * there are no uninitialized array types.
+     * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
+     */
+    private void referenceTypeIsInitialized(final Instruction o, final ReferenceType r) {
+        if (r instanceof UninitializedObjectType) {
+            constraintViolated(o, "Working on an uninitialized object '"+r+"'.");
+        }
+    }
+
+    /**
+     * Sets the ConstantPoolGen instance needed for constraint
+     * checking prior to execution.
+     */
+    public void setConstantPoolGen(final ConstantPoolGen cpg) { // TODO could be package-protected?
+        this.cpg = cpg;
+    }
+
+    /**
+     * This returns the single instance of the InstConstraintVisitor class.
+     * To operate correctly, other values must have been set before actually
+     * using the instance.
+     * Use this method for performance reasons.
+     *
+     * @see #setConstantPoolGen(ConstantPoolGen cpg)
+     * @see #setMethodGen(MethodGen mg)
+     */
+    public void setFrame(final Frame f) { // TODO could be package-protected?
+        this.frame = f;
+        //if (singleInstance.mg == null || singleInstance.cpg == null)
+        // throw new AssertionViolatedException("Forgot to set important values first.");
+    }
+
+    /**
+     * Sets the MethodGen instance needed for constraint
+     * checking prior to execution.
+     */
+    public void setMethodGen(final MethodGen mg) {
+        this.mg = mg;
+    }
+
+    /**
+     * The OperandStack we're working on.
+     *
+     * @see #setFrame(Frame f)
+     */
+    private OperandStack stack() {
+        return frame.getStack();
+    }
+
     /***************************************************************/
     /* "generic"visitXXXX methods where XXXX is an interface       */
     /* therefore, we don't know the order of visiting; but we know */
     /* these methods are called before the visitYYYY methods below */
     /***************************************************************/
 
-    /**
-     * Assures the generic preconditions of a LoadClass instance.
-     * The referenced class is loaded and pass2-verified.
-     */
-    @Override
-    public void visitLoadClass(final LoadClass o) {
-        final ObjectType t = o.getLoadClassType(cpg);
-        if (t != null) {// null means "no class is loaded"
-            final Verifier v = VerifierFactory.getVerifier(t.getClassName());
-            final VerificationResult vr = v.doPass2();
-            if (vr.getStatus() != VerificationResult.VERIFIED_OK) {
-                constraintViolated((Instruction) o, "Class '"+o.getLoadClassType(cpg).getClassName()+
-                    "' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
-            }
+    /** Assures value is of type INT. */
+    private void valueOfInt(final Instruction o, final Type value) {
+        if (! value.equals(Type.INT)) {
+            constraintViolated(o, "The 'value' is not of type int but of type "+value+".");
         }
     }
-
-    /**
-     * Ensures the general preconditions of a StackConsumer instance.
-     */
-    @Override
-    public void visitStackConsumer(final StackConsumer o) {
-        _visitStackAccessor((Instruction) o);
-    }
-
-    /**
-     * Ensures the general preconditions of a StackProducer instance.
-     */
-    @Override
-    public void visitStackProducer(final StackProducer o) {
-        _visitStackAccessor((Instruction) o);
-    }
-
-
-    /***************************************************************/
-    /* "generic" visitYYYY methods where YYYY is a superclass.     */
-    /* therefore, we know the order of visiting; we know           */
-    /* these methods are called after the visitXXXX methods above. */
-    /***************************************************************/
-    /**
-     * Ensures the general preconditions of a CPInstruction instance.
-     */
-    @Override
-    public void visitCPInstruction(final CPInstruction o) {
-        final int idx = o.getIndex();
-        if (idx < 0 || idx >= cpg.getSize()) {
-            throw new AssertionViolatedException(
-                "Huh?! Constant pool index of instruction '"+o+"' illegal? Pass 3a should have checked this!");
-        }
-    }
-
-    /**
-     * Ensures the general preconditions of a FieldInstruction instance.
-     */
-     @Override
-    public void visitFieldInstruction(final FieldInstruction o) {
-         // visitLoadClass(o) has been called before: Every FieldOrMethod
-         // implements LoadClass.
-         // visitCPInstruction(o) has been called before.
-        // A FieldInstruction may be: GETFIELD, GETSTATIC, PUTFIELD, PUTSTATIC
-            final Constant c = cpg.getConstant(o.getIndex());
-            if (!(c instanceof ConstantFieldref)) {
-                constraintViolated(o,
-                    "Index '"+o.getIndex()+"' should refer to a CONSTANT_Fieldref_info structure, but refers to '"+c+"'.");
-            }
-            // the o.getClassType(cpg) type has passed pass 2; see visitLoadClass(o).
-            final Type t = o.getType(cpg);
-            if (t instanceof ObjectType) {
-                final String name = ((ObjectType)t).getClassName();
-                final Verifier v = VerifierFactory.getVerifier( name );
-                final VerificationResult vr = v.doPass2();
-                if (vr.getStatus() != VerificationResult.VERIFIED_OK) {
-                    constraintViolated(o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
-                }
-            }
-     }
-
-    /**
-     * Ensures the general preconditions of an InvokeInstruction instance.
-     */
-     @Override
-    public void visitInvokeInstruction(final InvokeInstruction o) {
-         // visitLoadClass(o) has been called before: Every FieldOrMethod
-         // implements LoadClass.
-         // visitCPInstruction(o) has been called before.
-        //TODO
-     }
-
-    /**
-     * Ensures the general preconditions of a StackInstruction instance.
-     */
-    @Override
-    public void visitStackInstruction(final StackInstruction o) {
-        _visitStackAccessor(o);
-    }
-
-    /**
-     * Assures the generic preconditions of a LocalVariableInstruction instance.
-     * That is, the index of the local variable must be valid.
-     */
-    @Override
-    public void visitLocalVariableInstruction(final LocalVariableInstruction o) {
-        if (locals().maxLocals() <= (o.getType(cpg).getSize()==1? o.getIndex() : o.getIndex()+1) ) {
-            constraintViolated(o, "The 'index' is not a valid index into the local variable array.");
-        }
-    }
-
-    /**
-     * Assures the generic preconditions of a LoadInstruction instance.
-     */
-    @Override
-    public void visitLoadInstruction(final LoadInstruction o) {
-        // visitLocalVariableInstruction(o) is called before, because it is more generic.
-
-        // LOAD instructions must not read Type.UNKNOWN
-        if (locals().get(o.getIndex()) == Type.UNKNOWN) {
-            constraintViolated(o, "Read-Access on local variable " + o.getIndex() + " with unknown content.");
-        }
-
-        // LOAD instructions, two-slot-values at index N must have Type.UNKNOWN
-        // as a symbol for the higher halve at index N+1
-        // [suppose some instruction put an int at N+1--- our double at N is defective]
-        if (o.getType(cpg).getSize() == 2 && locals().get(o.getIndex() + 1) != Type.UNKNOWN) {
-            constraintViolated(o, "Reading a two-locals value from local variables " + o.getIndex() + " and "
-                + (o.getIndex() + 1) + " where the latter one is destroyed.");
-        }
-
-        // LOAD instructions must read the correct type.
-        if (!(o instanceof ALOAD)) {
-            if (locals().get(o.getIndex()) != o.getType(cpg)) {
-                constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"
-                    + locals().get(o.getIndex()) + "'; Instruction type: '" + o.getType(cpg) + "'.");
-            }
-        } else if (!(locals().get(o.getIndex()) instanceof ReferenceType)) {
-            constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"
-                + locals().get(o.getIndex()) + "'; Instruction expects a ReferenceType.");
-        }
-        // ALOAD __IS ALLOWED__ to put uninitialized objects onto the stack!
-        // referenceTypeIsInitialized(o, (ReferenceType) (locals().get(o.getIndex())));
-
-        // LOAD instructions must have enough free stack slots.
-        if (stack().maxStack() - stack().slotsUsed() < o.getType(cpg).getSize()) {
-            constraintViolated(o,
-                "Not enough free stack slots to load a '" + o.getType(cpg) + "' onto the OperandStack.");
-        }
-    }
-
-    /**
-     * Assures the generic preconditions of a StoreInstruction instance.
-     */
-    @Override
-    public void visitStoreInstruction(final StoreInstruction o) {
-        //visitLocalVariableInstruction(o) is called before, because it is more generic.
-
-        if (stack().isEmpty()) { // Don't bother about 1 or 2 stack slots used. This check is implicitly done below while type checking.
-            constraintViolated(o, "Cannot STORE: Stack to read from is empty.");
-        }
-
-        if ( !(o instanceof ASTORE) ) {
-            if (! (stack().peek() == o.getType(cpg)) ) {// the other xSTORE types are singletons in BCEL.
-                constraintViolated(o, "Stack top type and STOREing Instruction type mismatch: Stack top: '"+stack().peek()+
-                    "'; Instruction type: '"+o.getType(cpg)+"'.");
-            }
-        }
-        else{ // we deal with ASTORE
-            final Type stacktop = stack().peek();
-            if ( !(stacktop instanceof ReferenceType) && !(stacktop instanceof ReturnaddressType) ) {
-                constraintViolated(o, "Stack top type and STOREing Instruction type mismatch: Stack top: '"+stack().peek()+
-                    "'; Instruction expects a ReferenceType or a ReturnadressType.");
-            }
-            //if (stacktop instanceof ReferenceType) {
-            //    referenceTypeIsInitialized(o, (ReferenceType) stacktop);
-            //}
-        }
-    }
-
-    /**
-     * Assures the generic preconditions of a ReturnInstruction instance.
-     */
-    @Override
-    public void visitReturnInstruction(final ReturnInstruction o) {
-        Type method_type = mg.getType();
-        if (method_type == Type.BOOLEAN ||
-            method_type == Type.BYTE ||
-            method_type == Type.SHORT ||
-            method_type == Type.CHAR) {
-                method_type = Type.INT;
-            }
-
-        if (o instanceof RETURN) {
-            if (method_type == Type.VOID) {
-                return;
-            }
-            constraintViolated(o, "RETURN instruction in non-void method.");
-        }
-        if (o instanceof ARETURN) {
-            if (method_type == Type.VOID) {
-                constraintViolated(o, "ARETURN instruction in void method.");
-            }
-            if (stack().peek() == Type.NULL) {
-                return;
-            }
-            if (! (stack().peek() instanceof ReferenceType)) {
-                constraintViolated(o, "Reference type expected on top of stack, but is: '"+stack().peek()+"'.");
-            }
-            referenceTypeIsInitialized(o, (ReferenceType) stack().peek());
-            //ReferenceType objectref = (ReferenceType) (stack().peek());
-            // TODO: This can only be checked if using Staerk-et-al's "set of object types" instead of a
-            // "wider cast object type" created during verification.
-            //if (! (objectref.isAssignmentCompatibleWith(mg.getType())) ) {
-            //    constraintViolated(o, "Type on stack top which should be returned is a '"+stack().peek()+
-            //    "' which is not assignment compatible with the return type of this method, '"+mg.getType()+"'.");
-            //}
-        } else if (! method_type.equals( stack().peek() )) {
-            constraintViolated(o, "Current method has return type of '"+mg.getType()+"' expecting a '"+method_type+
-                "' on top of the stack. But stack top is a '"+stack().peek()+"'.");
-        }
-    }
-
-    /***************************************************************/
-    /* "special"visitXXXX methods for one type of instruction each */
-    /***************************************************************/
 
     /**
      * Ensures the specific preconditions of the said instruction.
@@ -485,6 +271,7 @@ public class InstConstraintVisitor extends EmptyVisitor{
         }
         // No check for array element assignment compatibility. This is done at runtime.
     }
+
 
     /**
      * Ensures the specific preconditions of the said instruction.
@@ -603,6 +390,10 @@ public class InstConstraintVisitor extends EmptyVisitor{
         }
     }
 
+    /***************************************************************/
+    /* "special"visitXXXX methods for one type of instruction each */
+    /***************************************************************/
+
     /**
      * Ensures the specific preconditions of the said instruction.
      */
@@ -687,6 +478,23 @@ public class InstConstraintVisitor extends EmptyVisitor{
         final Constant c = cpg.getConstant(o.getIndex());
         if (! (c instanceof ConstantClass)) {
             constraintViolated(o, "The Constant at 'index' is not a ConstantClass, but '"+c+"'.");
+        }
+    }
+
+    /***************************************************************/
+    /* "generic" visitYYYY methods where YYYY is a superclass.     */
+    /* therefore, we know the order of visiting; we know           */
+    /* these methods are called after the visitXXXX methods above. */
+    /***************************************************************/
+    /**
+     * Ensures the general preconditions of a CPInstruction instance.
+     */
+    @Override
+    public void visitCPInstruction(final CPInstruction o) {
+        final int idx = o.getIndex();
+        if (idx < 0 || idx >= cpg.getSize()) {
+            throw new AssertionViolatedException(
+                "Huh?! Constant pool index of instruction '"+o+"' illegal? Pass 3a should have checked this!");
         }
     }
 
@@ -1135,6 +943,32 @@ public class InstConstraintVisitor extends EmptyVisitor{
     }
 
     /**
+     * Ensures the general preconditions of a FieldInstruction instance.
+     */
+     @Override
+    public void visitFieldInstruction(final FieldInstruction o) {
+         // visitLoadClass(o) has been called before: Every FieldOrMethod
+         // implements LoadClass.
+         // visitCPInstruction(o) has been called before.
+        // A FieldInstruction may be: GETFIELD, GETSTATIC, PUTFIELD, PUTSTATIC
+            final Constant c = cpg.getConstant(o.getIndex());
+            if (!(c instanceof ConstantFieldref)) {
+                constraintViolated(o,
+                    "Index '"+o.getIndex()+"' should refer to a CONSTANT_Fieldref_info structure, but refers to '"+c+"'.");
+            }
+            // the o.getClassType(cpg) type has passed pass 2; see visitLoadClass(o).
+            final Type t = o.getType(cpg);
+            if (t instanceof ObjectType) {
+                final String name = ((ObjectType)t).getClassName();
+                final Verifier v = VerifierFactory.getVerifier( name );
+                final VerificationResult vr = v.doPass2();
+                if (vr.getStatus() != VerificationResult.VERIFIED_OK) {
+                    constraintViolated(o, "Class '"+name+"' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
+                }
+            }
+     }
+
+    /**
      * Ensures the specific preconditions of the said instruction.
      */
     @Override
@@ -1211,15 +1045,6 @@ public class InstConstraintVisitor extends EmptyVisitor{
         if (stack().peek(1) != Type.FLOAT) {
             constraintViolated(o, "The value at the stack next-to-top is not of type 'float', but of type '"+stack().peek(1)+"'.");
         }
-    }
-
-    private ObjectType getObjectType(final FieldInstruction o) {
-        final ReferenceType rt = o.getReferenceType(cpg);
-        if(rt instanceof ObjectType) {
-            return (ObjectType)rt;
-        }
-        constraintViolated(o, "expecting ObjectType but got "+rt);
-        return null;
     }
 
     /**
@@ -1768,6 +1593,17 @@ public class InstConstraintVisitor extends EmptyVisitor{
     public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
         throw new UnsupportedOperationException("INVOKEDYNAMIC instruction is not supported at this time");
     }
+
+    /**
+     * Ensures the general preconditions of an InvokeInstruction instance.
+     */
+     @Override
+    public void visitInvokeInstruction(final InvokeInstruction o) {
+         // visitLoadClass(o) has been called before: Every FieldOrMethod
+         // implements LoadClass.
+         // visitCPInstruction(o) has been called before.
+        //TODO
+     }
 
     /**
      * Ensures the specific preconditions of the said instruction.
@@ -2432,6 +2268,74 @@ public class InstConstraintVisitor extends EmptyVisitor{
     }
 
     /**
+     * Assures the generic preconditions of a LoadClass instance.
+     * The referenced class is loaded and pass2-verified.
+     */
+    @Override
+    public void visitLoadClass(final LoadClass o) {
+        final ObjectType t = o.getLoadClassType(cpg);
+        if (t != null) {// null means "no class is loaded"
+            final Verifier v = VerifierFactory.getVerifier(t.getClassName());
+            final VerificationResult vr = v.doPass2();
+            if (vr.getStatus() != VerificationResult.VERIFIED_OK) {
+                constraintViolated((Instruction) o, "Class '"+o.getLoadClassType(cpg).getClassName()+
+                    "' is referenced, but cannot be loaded and resolved: '"+vr+"'.");
+            }
+        }
+    }
+
+    /**
+     * Assures the generic preconditions of a LoadInstruction instance.
+     */
+    @Override
+    public void visitLoadInstruction(final LoadInstruction o) {
+        // visitLocalVariableInstruction(o) is called before, because it is more generic.
+
+        // LOAD instructions must not read Type.UNKNOWN
+        if (locals().get(o.getIndex()) == Type.UNKNOWN) {
+            constraintViolated(o, "Read-Access on local variable " + o.getIndex() + " with unknown content.");
+        }
+
+        // LOAD instructions, two-slot-values at index N must have Type.UNKNOWN
+        // as a symbol for the higher halve at index N+1
+        // [suppose some instruction put an int at N+1--- our double at N is defective]
+        if (o.getType(cpg).getSize() == 2 && locals().get(o.getIndex() + 1) != Type.UNKNOWN) {
+            constraintViolated(o, "Reading a two-locals value from local variables " + o.getIndex() + " and "
+                + (o.getIndex() + 1) + " where the latter one is destroyed.");
+        }
+
+        // LOAD instructions must read the correct type.
+        if (!(o instanceof ALOAD)) {
+            if (locals().get(o.getIndex()) != o.getType(cpg)) {
+                constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"
+                    + locals().get(o.getIndex()) + "'; Instruction type: '" + o.getType(cpg) + "'.");
+            }
+        } else if (!(locals().get(o.getIndex()) instanceof ReferenceType)) {
+            constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '"
+                + locals().get(o.getIndex()) + "'; Instruction expects a ReferenceType.");
+        }
+        // ALOAD __IS ALLOWED__ to put uninitialized objects onto the stack!
+        // referenceTypeIsInitialized(o, (ReferenceType) (locals().get(o.getIndex())));
+
+        // LOAD instructions must have enough free stack slots.
+        if (stack().maxStack() - stack().slotsUsed() < o.getType(cpg).getSize()) {
+            constraintViolated(o,
+                "Not enough free stack slots to load a '" + o.getType(cpg) + "' onto the OperandStack.");
+        }
+    }
+
+    /**
+     * Assures the generic preconditions of a LocalVariableInstruction instance.
+     * That is, the index of the local variable must be valid.
+     */
+    @Override
+    public void visitLocalVariableInstruction(final LocalVariableInstruction o) {
+        if (locals().maxLocals() <= (o.getType(cpg).getSize()==1? o.getIndex() : o.getIndex()+1) ) {
+            constraintViolated(o, "The 'index' is not a valid index into the local variable array.");
+        }
+    }
+
+    /**
      * Ensures the specific preconditions of the said instruction.
      */
     @Override
@@ -2843,6 +2747,49 @@ public class InstConstraintVisitor extends EmptyVisitor{
     }
 
     /**
+     * Assures the generic preconditions of a ReturnInstruction instance.
+     */
+    @Override
+    public void visitReturnInstruction(final ReturnInstruction o) {
+        Type method_type = mg.getType();
+        if (method_type == Type.BOOLEAN ||
+            method_type == Type.BYTE ||
+            method_type == Type.SHORT ||
+            method_type == Type.CHAR) {
+                method_type = Type.INT;
+            }
+
+        if (o instanceof RETURN) {
+            if (method_type == Type.VOID) {
+                return;
+            }
+            constraintViolated(o, "RETURN instruction in non-void method.");
+        }
+        if (o instanceof ARETURN) {
+            if (method_type == Type.VOID) {
+                constraintViolated(o, "ARETURN instruction in void method.");
+            }
+            if (stack().peek() == Type.NULL) {
+                return;
+            }
+            if (! (stack().peek() instanceof ReferenceType)) {
+                constraintViolated(o, "Reference type expected on top of stack, but is: '"+stack().peek()+"'.");
+            }
+            referenceTypeIsInitialized(o, (ReferenceType) stack().peek());
+            //ReferenceType objectref = (ReferenceType) (stack().peek());
+            // TODO: This can only be checked if using Staerk-et-al's "set of object types" instead of a
+            // "wider cast object type" created during verification.
+            //if (! (objectref.isAssignmentCompatibleWith(mg.getType())) ) {
+            //    constraintViolated(o, "Type on stack top which should be returned is a '"+stack().peek()+
+            //    "' which is not assignment compatible with the return type of this method, '"+mg.getType()+"'.");
+            //}
+        } else if (! method_type.equals( stack().peek() )) {
+            constraintViolated(o, "Current method has return type of '"+mg.getType()+"' expecting a '"+method_type+
+                "' on top of the stack. But stack top is a '"+stack().peek()+"'.");
+        }
+    }
+
+    /**
      * Ensures the specific preconditions of the said instruction.
      */
     @Override
@@ -2887,6 +2834,59 @@ public class InstConstraintVisitor extends EmptyVisitor{
     @Override
     public void visitSIPUSH(final SIPUSH o) {
         // nothing to do here. Generic visitXXX() methods did the trick before.
+    }
+
+    /**
+     * Ensures the general preconditions of a StackConsumer instance.
+     */
+    @Override
+    public void visitStackConsumer(final StackConsumer o) {
+        _visitStackAccessor((Instruction) o);
+    }
+
+    /**
+     * Ensures the general preconditions of a StackInstruction instance.
+     */
+    @Override
+    public void visitStackInstruction(final StackInstruction o) {
+        _visitStackAccessor(o);
+    }
+
+    /**
+     * Ensures the general preconditions of a StackProducer instance.
+     */
+    @Override
+    public void visitStackProducer(final StackProducer o) {
+        _visitStackAccessor((Instruction) o);
+    }
+
+    /**
+     * Assures the generic preconditions of a StoreInstruction instance.
+     */
+    @Override
+    public void visitStoreInstruction(final StoreInstruction o) {
+        //visitLocalVariableInstruction(o) is called before, because it is more generic.
+
+        if (stack().isEmpty()) { // Don't bother about 1 or 2 stack slots used. This check is implicitly done below while type checking.
+            constraintViolated(o, "Cannot STORE: Stack to read from is empty.");
+        }
+
+        if ( !(o instanceof ASTORE) ) {
+            if (! (stack().peek() == o.getType(cpg)) ) {// the other xSTORE types are singletons in BCEL.
+                constraintViolated(o, "Stack top type and STOREing Instruction type mismatch: Stack top: '"+stack().peek()+
+                    "'; Instruction type: '"+o.getType(cpg)+"'.");
+            }
+        }
+        else{ // we deal with ASTORE
+            final Type stacktop = stack().peek();
+            if ( !(stacktop instanceof ReferenceType) && !(stacktop instanceof ReturnaddressType) ) {
+                constraintViolated(o, "Stack top type and STOREing Instruction type mismatch: Stack top: '"+stack().peek()+
+                    "'; Instruction expects a ReferenceType or a ReturnadressType.");
+            }
+            //if (stacktop instanceof ReferenceType) {
+            //    referenceTypeIsInitialized(o, (ReferenceType) stacktop);
+            //}
+        }
     }
 
     /**

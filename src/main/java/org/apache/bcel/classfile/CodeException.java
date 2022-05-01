@@ -33,20 +33,20 @@ import org.apache.bcel.Constants;
  */
 public final class CodeException implements Cloneable, Node, Constants {
 
+    /**
+     * Empty array.
+     */
+    static final CodeException[] EMPTY_CODE_EXCEPTION_ARRAY = {};
     private int startPc; // Range in the code the exception handler is
     private int endPc; // active. startPc is inclusive, endPc exclusive
     private int handlerPc; /* Starting address of exception handler, i.e.,
      * an offset from start of code.
      */
+
     private int catchType; /* If this is zero the handler catches any
      * exception, otherwise it points to the
      * exception class which is to be caught.
      */
-
-    /**
-     * Empty array.
-     */
-    static final CodeException[] EMPTY_CODE_EXCEPTION_ARRAY = {};
 
 
     /**
@@ -96,6 +96,19 @@ public final class CodeException implements Cloneable, Node, Constants {
     @Override
     public void accept( final Visitor v ) {
         v.visitCodeException(this);
+    }
+
+
+    /**
+     * @return deep copy of this object
+     */
+    public CodeException copy() {
+        try {
+            return (CodeException) clone();
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
+        }
+        return null;
     }
 
 
@@ -188,6 +201,11 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
 
+    public String toString( final ConstantPool cp ) {
+        return toString(cp, true);
+    }
+
+
     /**
      * @return String representation.
      */
@@ -200,23 +218,5 @@ public final class CodeException implements Cloneable, Node, Constants {
                     + (verbose ? "(" + catchType + ")" : "");
         }
         return startPc + "\t" + endPc + "\t" + handlerPc + "\t" + str;
-    }
-
-
-    public String toString( final ConstantPool cp ) {
-        return toString(cp, true);
-    }
-
-
-    /**
-     * @return deep copy of this object
-     */
-    public CodeException copy() {
-        try {
-            return (CodeException) clone();
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return null;
     }
 }

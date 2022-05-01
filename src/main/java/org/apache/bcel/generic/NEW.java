@@ -40,20 +40,6 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
     }
 
 
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
-            ExceptionConst.ILLEGAL_ACCESS_ERROR,
-            ExceptionConst.INSTANTIATION_ERROR);
-    }
-
-
-    @Override
-    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
-        return (ObjectType) getType(cpg);
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -71,5 +57,19 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
         v.visitTypedInstruction(this);
         v.visitCPInstruction(this);
         v.visitNEW(this);
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+            ExceptionConst.ILLEGAL_ACCESS_ERROR,
+            ExceptionConst.INSTANTIATION_ERROR);
+    }
+
+
+    @Override
+    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
+        return (ObjectType) getType(cpg);
     }
 }

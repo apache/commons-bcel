@@ -36,11 +36,16 @@ public final class NestHost extends Attribute {
 
 
     /**
-     * Initializes from another object. Note that both objects use the same
-     * references (shallow copy). Use copy() for a physical copy.
+     * Constructs object from input stream.
+     * @param name_index Index in constant pool
+     * @param length Content length in bytes
+     * @param input Input stream
+     * @param constant_pool Array of constants
+     * @throws IOException
      */
-    public NestHost(final NestHost c) {
-        this(c.getNameIndex(), c.getLength(), c.getHostClassIndex(), c.getConstantPool());
+    NestHost(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
+        this(name_index, length, 0, constant_pool);
+        hostClassIndex = input.readUnsignedShort();
     }
 
 
@@ -58,16 +63,11 @@ public final class NestHost extends Attribute {
 
 
     /**
-     * Constructs object from input stream.
-     * @param name_index Index in constant pool
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constant_pool Array of constants
-     * @throws IOException
+     * Initializes from another object. Note that both objects use the same
+     * references (shallow copy). Use copy() for a physical copy.
      */
-    NestHost(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, 0, constant_pool);
-        hostClassIndex = input.readUnsignedShort();
+    public NestHost(final NestHost c) {
+        this(c.getNameIndex(), c.getLength(), c.getHostClassIndex(), c.getConstantPool());
     }
 
 
@@ -81,6 +81,17 @@ public final class NestHost extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         v.visitNestHost(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final NestHost c = (NestHost) clone();
+        c.setConstantPool(_constant_pool);
+        return c;
     }
 
 
@@ -123,16 +134,5 @@ public final class NestHost extends Attribute {
         final String class_name = super.getConstantPool().getConstantString(hostClassIndex, Const.CONSTANT_Class);
         buf.append(Utility.compactClassName(class_name, false));
         return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final NestHost c = (NestHost) clone();
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

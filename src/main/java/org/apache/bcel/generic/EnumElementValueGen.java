@@ -34,42 +34,6 @@ public class EnumElementValueGen extends ElementValueGen
 
     private final int valueIdx;
 
-    /**
-     * This ctor assumes the constant pool already contains the right type and
-     * value - as indicated by typeIdx and valueIdx. This ctor is used for
-     * deserialization
-     */
-    protected EnumElementValueGen(final int typeIdx, final int valueIdx,
-            final ConstantPoolGen cpool)
-    {
-        super(ElementValueGen.ENUM_CONSTANT, cpool);
-        if (super.getElementValueType() != ENUM_CONSTANT) {
-            throw new IllegalArgumentException(
-                    "Only element values of type enum can be built with this ctor - type specified: " + super.getElementValueType());
-        }
-        this.typeIdx = typeIdx;
-        this.valueIdx = valueIdx;
-    }
-
-    /**
-     * Return immutable variant of this EnumElementValue
-     */
-    @Override
-    public ElementValue getElementValue()
-    {
-        System.err.println("Duplicating value: " + getEnumTypeString() + ":"
-                + getEnumValueString());
-        return new EnumElementValue(super.getElementValueType(), typeIdx, valueIdx,
-                getConstantPool().getConstantPool());
-    }
-
-    public EnumElementValueGen(final ObjectType t, final String value, final ConstantPoolGen cpool)
-    {
-        super(ElementValueGen.ENUM_CONSTANT, cpool);
-        typeIdx = cpool.addUtf8(t.getSignature());// was addClass(t);
-        valueIdx = cpool.addUtf8(value);// was addString(value);
-    }
-
     public EnumElementValueGen(final EnumElementValue value, final ConstantPoolGen cpool,
             final boolean copyPoolEntries)
     {
@@ -88,6 +52,30 @@ public class EnumElementValueGen extends ElementValueGen
         }
     }
 
+    /**
+     * This ctor assumes the constant pool already contains the right type and
+     * value - as indicated by typeIdx and valueIdx. This ctor is used for
+     * deserialization
+     */
+    protected EnumElementValueGen(final int typeIdx, final int valueIdx,
+            final ConstantPoolGen cpool)
+    {
+        super(ElementValueGen.ENUM_CONSTANT, cpool);
+        if (super.getElementValueType() != ENUM_CONSTANT) {
+            throw new IllegalArgumentException(
+                    "Only element values of type enum can be built with this ctor - type specified: " + super.getElementValueType());
+        }
+        this.typeIdx = typeIdx;
+        this.valueIdx = valueIdx;
+    }
+
+    public EnumElementValueGen(final ObjectType t, final String value, final ConstantPoolGen cpool)
+    {
+        super(ElementValueGen.ENUM_CONSTANT, cpool);
+        typeIdx = cpool.addUtf8(t.getSignature());// was addClass(t);
+        valueIdx = cpool.addUtf8(value);// was addString(value);
+    }
+
     @Override
     public void dump(final DataOutputStream dos) throws IOException
     {
@@ -96,15 +84,16 @@ public class EnumElementValueGen extends ElementValueGen
         dos.writeShort(valueIdx); // u2
     }
 
+    /**
+     * Return immutable variant of this EnumElementValue
+     */
     @Override
-    public String stringifyValue()
+    public ElementValue getElementValue()
     {
-        final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(valueIdx);
-        return cu8.getBytes();
-        // ConstantString cu8 =
-        // (ConstantString)getConstantPool().getConstant(valueIdx);
-        // return
-        // ((ConstantUtf8)getConstantPool().getConstant(cu8.getStringIndex())).getBytes();
+        System.err.println("Duplicating value: " + getEnumTypeString() + ":"
+                + getEnumValueString());
+        return new EnumElementValue(super.getElementValueType(), typeIdx, valueIdx,
+                getConstantPool().getConstantPool());
     }
 
     // BCELBUG: Should we need to call utility.signatureToString() on the output
@@ -130,13 +119,24 @@ public class EnumElementValueGen extends ElementValueGen
         // ((ConstantUtf8)getConstantPool().getConstant(cu8.getStringIndex())).getBytes();
     }
 
+    public int getTypeIndex()
+    {
+        return typeIdx;
+    }
+
     public int getValueIndex()
     {
         return valueIdx;
     }
 
-    public int getTypeIndex()
+    @Override
+    public String stringifyValue()
     {
-        return typeIdx;
+        final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(valueIdx);
+        return cu8.getBytes();
+        // ConstantString cu8 =
+        // (ConstantString)getConstantPool().getConstant(valueIdx);
+        // return
+        // ((ConstantUtf8)getConstantPool().getConstant(cu8.getStringIndex())).getBytes();
     }
 }

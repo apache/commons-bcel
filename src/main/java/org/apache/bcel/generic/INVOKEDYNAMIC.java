@@ -53,50 +53,6 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
 
 
     /**
-     * Dump instruction as byte code to stream out.
-     * @param out Output stream
-     */
-    @Override
-    public void dump( final DataOutputStream out ) throws IOException {
-        out.writeByte(super.getOpcode());
-        out.writeShort(super.getIndex());
-        out.writeByte(0);
-        out.writeByte(0);
-       }
-
-
-    /**
-     * Read needed data (i.e., index) from file.
-     */
-    @Override
-    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
-        super.initFromFile(bytes, wide);
-        super.setLength(5);
-        bytes.readByte(); // Skip 0 byte
-        bytes.readByte(); // Skip 0 byte
-    }
-
-
-    /**
-     * @return mnemonic for instruction with symbolic references resolved
-     */
-    @Override
-    public String toString( final ConstantPool cp ) {
-        return super.toString(cp);
-    }
-
-
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_INTERFACE_METHOD_RESOLUTION,
-            ExceptionConst.UNSATISFIED_LINK_ERROR,
-            ExceptionConst.ABSTRACT_METHOD_ERROR,
-            ExceptionConst.ILLEGAL_ACCESS_ERROR,
-            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
-    }
-
-
-    /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
      * call methods according to the class hierarchy in descending order,
@@ -117,6 +73,20 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
         v.visitINVOKEDYNAMIC(this);
     }
 
+
+    /**
+     * Dump instruction as byte code to stream out.
+     * @param out Output stream
+     */
+    @Override
+    public void dump( final DataOutputStream out ) throws IOException {
+        out.writeByte(super.getOpcode());
+        out.writeShort(super.getIndex());
+        out.writeByte(0);
+        out.writeByte(0);
+       }
+
+
     /**
      * Override the parent method because our classname is held elsewhere.
      *
@@ -132,6 +102,16 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     }
 
 
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_INTERFACE_METHOD_RESOLUTION,
+            ExceptionConst.UNSATISFIED_LINK_ERROR,
+            ExceptionConst.ABSTRACT_METHOD_ERROR,
+            ExceptionConst.ILLEGAL_ACCESS_ERROR,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
+    }
+
+
     /**
      * Since InvokeDynamic doesn't refer to a reference type, just return java.lang.Object,
      * as that is the only type we can say for sure the reference will be.
@@ -144,5 +124,25 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     @Override
     public ReferenceType getReferenceType(final ConstantPoolGen cpg) {
         return new ObjectType(Object.class.getName());
+    }
+
+    /**
+     * Read needed data (i.e., index) from file.
+     */
+    @Override
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
+        super.initFromFile(bytes, wide);
+        super.setLength(5);
+        bytes.readByte(); // Skip 0 byte
+        bytes.readByte(); // Skip 0 byte
+    }
+
+
+    /**
+     * @return mnemonic for instruction with symbolic references resolved
+     */
+    @Override
+    public String toString( final ConstantPool cp ) {
+        return super.toString(cp);
     }
 }

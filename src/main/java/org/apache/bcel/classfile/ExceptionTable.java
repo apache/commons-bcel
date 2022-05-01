@@ -49,19 +49,6 @@ public final class ExceptionTable extends Attribute {
 
 
     /**
-     * @param name_index Index in constant pool
-     * @param length Content length in bytes
-     * @param exceptionIndexTable Table of indices in constant pool
-     * @param constant_pool Array of constants
-     */
-    public ExceptionTable(final int name_index, final int length, final int[] exceptionIndexTable,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_EXCEPTIONS, name_index, length, constant_pool);
-        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
-    }
-
-
-    /**
      * Construct object from input stream.
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes
@@ -80,6 +67,19 @@ public final class ExceptionTable extends Attribute {
 
 
     /**
+     * @param name_index Index in constant pool
+     * @param length Content length in bytes
+     * @param exceptionIndexTable Table of indices in constant pool
+     * @param constant_pool Array of constants
+     */
+    public ExceptionTable(final int name_index, final int length, final int[] exceptionIndexTable,
+            final ConstantPool constant_pool) {
+        super(Const.ATTR_EXCEPTIONS, name_index, length, constant_pool);
+        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
+    }
+
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
@@ -89,6 +89,22 @@ public final class ExceptionTable extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         v.visitExceptionTable(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final ExceptionTable c = (ExceptionTable) clone();
+        if (exceptionIndexTable != null) {
+            c.exceptionIndexTable = new int[exceptionIndexTable.length];
+            System.arraycopy(exceptionIndexTable, 0, c.exceptionIndexTable, 0,
+                    exceptionIndexTable.length);
+        }
+        c.setConstantPool(_constant_pool);
+        return c;
     }
 
 
@@ -117,14 +133,6 @@ public final class ExceptionTable extends Attribute {
 
 
     /**
-     * @return Length of exception table.
-     */
-    public int getNumberOfExceptions() {
-        return exceptionIndexTable == null ? 0 : exceptionIndexTable.length;
-    }
-
-
-    /**
      * @return class names of thrown exceptions
      */
     public String[] getExceptionNames() {
@@ -134,6 +142,14 @@ public final class ExceptionTable extends Attribute {
                     Const.CONSTANT_Class).replace('/', '.');
         }
         return names;
+    }
+
+
+    /**
+     * @return Length of exception table.
+     */
+    public int getNumberOfExceptions() {
+        return exceptionIndexTable == null ? 0 : exceptionIndexTable.length;
     }
 
 
@@ -162,21 +178,5 @@ public final class ExceptionTable extends Attribute {
             }
         }
         return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final ExceptionTable c = (ExceptionTable) clone();
-        if (exceptionIndexTable != null) {
-            c.exceptionIndexTable = new int[exceptionIndexTable.length];
-            System.arraycopy(exceptionIndexTable, 0, c.exceptionIndexTable, 0,
-                    exceptionIndexTable.length);
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

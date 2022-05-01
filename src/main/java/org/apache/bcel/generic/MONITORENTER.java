@@ -31,14 +31,6 @@ public class MONITORENTER extends Instruction implements ExceptionThrower, Stack
     }
 
 
-    @Override
-    public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.NULL_POINTER_EXCEPTION
-        };
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -52,5 +44,13 @@ public class MONITORENTER extends Instruction implements ExceptionThrower, Stack
         v.visitExceptionThrower(this);
         v.visitStackConsumer(this);
         v.visitMONITORENTER(this);
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return new Class[] {
+            ExceptionConst.NULL_POINTER_EXCEPTION
+        };
     }
 }

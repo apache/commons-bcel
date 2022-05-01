@@ -44,13 +44,13 @@ import org.apache.bcel.classfile.Utility;
  */
 final class CodeHTML {
 
-    private final String className; // name of current class
-//    private Method[] methods; // Methods to print
+    private static boolean wide;
+private final String className; // name of current class
+    //    private Method[] methods; // Methods to print
     private final PrintWriter file; // file to write to
     private BitSet gotoSet;
     private final ConstantPool constantPool;
     private final ConstantHTML constantHtml;
-    private static boolean wide;
 
 
     CodeHTML(final String dir, final String class_name, final Method[] methods, final ConstantPool constant_pool,

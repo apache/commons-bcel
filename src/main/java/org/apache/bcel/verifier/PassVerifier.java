@@ -55,6 +55,36 @@ public abstract class PassVerifier {
 
 
     /**
+     * This method adds a (warning) message to the message pool of this
+     * PassVerifier. This method is normally only internally used by
+     * BCEL's class file verifier "JustIce" and should not be used from
+     * the outside.
+     *
+     * @see #getMessages()
+     */
+    public void addMessage( final String message ) {
+        messages.add(message);
+    }
+
+
+    /** Does the real verification work, uncached. */
+    public abstract VerificationResult do_verify();
+
+
+    /**
+     * Returns the (warning) messages that this PassVerifier accumulated
+     * during its do_verify()ing work.
+     *
+     * @see #addMessage(String)
+     * @see #do_verify()
+     */
+    public String[] getMessages() {
+        verify(); // create messages if not already done (cached!)
+        return messages.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+
+    /**
      * This method runs a verification pass conforming to the
      * Java Virtual Machine Specification, 2nd edition, on a
      * class file.
@@ -72,35 +102,5 @@ public abstract class PassVerifier {
             verificationResult = do_verify();
         }
         return verificationResult;
-    }
-
-
-    /** Does the real verification work, uncached. */
-    public abstract VerificationResult do_verify();
-
-
-    /**
-     * This method adds a (warning) message to the message pool of this
-     * PassVerifier. This method is normally only internally used by
-     * BCEL's class file verifier "JustIce" and should not be used from
-     * the outside.
-     *
-     * @see #getMessages()
-     */
-    public void addMessage( final String message ) {
-        messages.add(message);
-    }
-
-
-    /**
-     * Returns the (warning) messages that this PassVerifier accumulated
-     * during its do_verify()ing work.
-     *
-     * @see #addMessage(String)
-     * @see #do_verify()
-     */
-    public String[] getMessages() {
-        verify(); // create messages if not already done (cached!)
-        return messages.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 }

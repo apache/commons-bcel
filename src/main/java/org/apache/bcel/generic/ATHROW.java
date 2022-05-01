@@ -34,16 +34,6 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
     }
 
 
-    /** @return exceptions this instruction may cause
-     */
-    @Override
-    public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.THROWABLE
-        };
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -57,5 +47,15 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
         v.visitUnconditionalBranch(this);
         v.visitExceptionThrower(this);
         v.visitATHROW(this);
+    }
+
+
+    /** @return exceptions this instruction may cause
+     */
+    @Override
+    public Class<?>[] getExceptions() {
+        return new Class[] {
+            ExceptionConst.THROWABLE
+        };
     }
 }

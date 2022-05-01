@@ -32,14 +32,6 @@ public class ACONST_NULL extends Instruction implements PushInstruction, TypedIn
     }
 
 
-    /** @return Type.NULL
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.NULL;
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -54,5 +46,13 @@ public class ACONST_NULL extends Instruction implements PushInstruction, TypedIn
         v.visitPushInstruction(this);
         v.visitTypedInstruction(this);
         v.visitACONST_NULL(this);
+    }
+
+
+    /** @return Type.NULL
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.NULL;
     }
 }

@@ -56,15 +56,13 @@ public class LruCacheClassPathRepository extends AbstractClassPathRepository {
     }
 
     @Override
-    public JavaClass findClass(final String className) {
-        return loadedClasses.get(className);
+    public void clear() {
+        loadedClasses.clear();
     }
 
     @Override
-    public void storeClass(final JavaClass javaClass) {
-        // Not storing parent's _loadedClass
-        loadedClasses.put(javaClass.getClassName(), javaClass);
-        javaClass.setRepository(this);
+    public JavaClass findClass(final String className) {
+        return loadedClasses.get(className);
     }
 
     @Override
@@ -73,7 +71,9 @@ public class LruCacheClassPathRepository extends AbstractClassPathRepository {
     }
 
     @Override
-    public void clear() {
-        loadedClasses.clear();
+    public void storeClass(final JavaClass javaClass) {
+        // Not storing parent's _loadedClass
+        loadedClasses.put(javaClass.getClassName(), javaClass);
+        javaClass.setRepository(this);
     }
 }

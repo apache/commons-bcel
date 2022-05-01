@@ -30,14 +30,6 @@ public class LCMP extends Instruction implements TypedInstruction, StackProducer
     }
 
 
-    /** @return Type.LONG
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.LONG;
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -52,5 +44,13 @@ public class LCMP extends Instruction implements TypedInstruction, StackProducer
         v.visitStackProducer(this);
         v.visitStackConsumer(this);
         v.visitLCMP(this);
+    }
+
+
+    /** @return Type.LONG
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.LONG;
     }
 }

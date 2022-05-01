@@ -45,15 +45,22 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     }
 
 
-    // Adjust to proper size
-    protected final void setSize() {
-        if (super.getIndex() <= org.apache.bcel.Const.MAX_BYTE) { // Fits in one byte?
-            super.setOpcode(org.apache.bcel.Const.LDC);
-            super.setLength(2);
-        } else {
-            super.setOpcode(org.apache.bcel.Const.LDC_W);
-            super.setLength(3);
-        }
+    /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitStackProducer(this);
+        v.visitPushInstruction(this);
+        v.visitExceptionThrower(this);
+        v.visitTypedInstruction(this);
+        v.visitCPInstruction(this);
+        v.visitLDC(this);
     }
 
 
@@ -72,23 +79,26 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     }
 
 
-    /**
-     * Set the index to constant pool and adjust size.
-     */
     @Override
-    public final void setIndex( final int index ) {
-        super.setIndex(index);
-        setSize();
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_STRING_RESOLUTION);
     }
 
 
-    /**
-     * Read needed data (e.g. index) from file.
-     */
     @Override
-    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
-        super.setLength(2);
-        super.setIndex(bytes.readUnsignedByte());
+    public Type getType( final ConstantPoolGen cpg ) {
+        switch (cpg.getConstantPool().getConstant(super.getIndex()).getTag()) {
+            case org.apache.bcel.Const.CONSTANT_String:
+                return Type.STRING;
+            case org.apache.bcel.Const.CONSTANT_Float:
+                return Type.FLOAT;
+            case org.apache.bcel.Const.CONSTANT_Integer:
+                return Type.INT;
+            case org.apache.bcel.Const.CONSTANT_Class:
+                return Type.CLASS;
+            default: // Never reached
+                throw new IllegalArgumentException("Unknown or invalid constant type at " + super.getIndex());
+        }
     }
 
 
@@ -113,44 +123,34 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     }
 
 
+    /**
+     * Read needed data (e.g. index) from file.
+     */
     @Override
-    public Type getType( final ConstantPoolGen cpg ) {
-        switch (cpg.getConstantPool().getConstant(super.getIndex()).getTag()) {
-            case org.apache.bcel.Const.CONSTANT_String:
-                return Type.STRING;
-            case org.apache.bcel.Const.CONSTANT_Float:
-                return Type.FLOAT;
-            case org.apache.bcel.Const.CONSTANT_Integer:
-                return Type.INT;
-            case org.apache.bcel.Const.CONSTANT_Class:
-                return Type.CLASS;
-            default: // Never reached
-                throw new IllegalArgumentException("Unknown or invalid constant type at " + super.getIndex());
-        }
-    }
-
-
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_STRING_RESOLUTION);
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
+        super.setLength(2);
+        super.setIndex(bytes.readUnsignedByte());
     }
 
 
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
+     * Set the index to constant pool and adjust size.
      */
     @Override
-    public void accept( final Visitor v ) {
-        v.visitStackProducer(this);
-        v.visitPushInstruction(this);
-        v.visitExceptionThrower(this);
-        v.visitTypedInstruction(this);
-        v.visitCPInstruction(this);
-        v.visitLDC(this);
+    public final void setIndex( final int index ) {
+        super.setIndex(index);
+        setSize();
+    }
+
+
+    // Adjust to proper size
+    protected final void setSize() {
+        if (super.getIndex() <= org.apache.bcel.Const.MAX_BYTE) { // Fits in one byte?
+            super.setOpcode(org.apache.bcel.Const.LDC);
+            super.setLength(2);
+        } else {
+            super.setOpcode(org.apache.bcel.Const.LDC_W);
+            super.setLength(3);
+        }
     }
 }

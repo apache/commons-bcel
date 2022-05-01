@@ -41,13 +41,10 @@ public abstract class FieldInstruction extends FieldOrMethod {
     }
 
 
-    /**
-     * @return mnemonic for instruction with symbolic references resolved
+    /** @return name of referenced field.
      */
-    @Override
-    public String toString( final ConstantPool cp ) {
-        return org.apache.bcel.Const.getOpcodeName(super.getOpcode()) + " "
-                + cp.constantToString(super.getIndex(), org.apache.bcel.Const.CONSTANT_Fieldref);
+    public String getFieldName( final ConstantPoolGen cpg ) {
+        return getName(cpg);
     }
 
 
@@ -55,6 +52,13 @@ public abstract class FieldInstruction extends FieldOrMethod {
      */
     protected int getFieldSize( final ConstantPoolGen cpg ) {
         return Type.size(Type.getTypeSize(getSignature(cpg)));
+    }
+
+
+    /** @return type of field
+     */
+    public Type getFieldType( final ConstantPoolGen cpg ) {
+        return Type.getType(getSignature(cpg));
     }
 
 
@@ -66,16 +70,12 @@ public abstract class FieldInstruction extends FieldOrMethod {
     }
 
 
-    /** @return type of field
+    /**
+     * @return mnemonic for instruction with symbolic references resolved
      */
-    public Type getFieldType( final ConstantPoolGen cpg ) {
-        return Type.getType(getSignature(cpg));
-    }
-
-
-    /** @return name of referenced field.
-     */
-    public String getFieldName( final ConstantPoolGen cpg ) {
-        return getName(cpg);
+    @Override
+    public String toString( final ConstantPool cp ) {
+        return org.apache.bcel.Const.getOpcodeName(super.getOpcode()) + " "
+                + cp.constantToString(super.getIndex(), org.apache.bcel.Const.CONSTANT_Fieldref);
     }
 }

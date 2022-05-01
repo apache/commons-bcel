@@ -47,17 +47,6 @@ public class ReturnaddressType extends Type {
     }
 
 
-    /** @return a hash code value for the object.
-     */
-    @Override
-    public int hashCode() {
-        if (returnTarget == null) {
-            return 0;
-        }
-        return returnTarget.hashCode();
-    }
-
-
     /**
      * Returns if the two Returnaddresses refer to the same target.
      */
@@ -79,5 +68,16 @@ public class ReturnaddressType extends Type {
      */
     public InstructionHandle getTarget() {
         return returnTarget;
+    }
+
+
+    /** @return a hash code value for the object.
+     */
+    @Override
+    public int hashCode() {
+        if (returnTarget == null) {
+            return 0;
+        }
+        return returnTarget.hashCode();
     }
 }

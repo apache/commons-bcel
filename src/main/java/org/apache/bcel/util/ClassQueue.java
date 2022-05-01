@@ -35,11 +35,6 @@ public class ClassQueue {
     protected LinkedList<JavaClass> vec = new LinkedList<>(); // TODO not used externally
 
 
-    public void enqueue( final JavaClass clazz ) {
-        vec.addLast(clazz);
-    }
-
-
     public JavaClass dequeue() {
         return vec.removeFirst();
     }
@@ -47,6 +42,11 @@ public class ClassQueue {
 
     public boolean empty() {
         return vec.isEmpty();
+    }
+
+
+    public void enqueue( final JavaClass clazz ) {
+        vec.addLast(clazz);
     }
 
 

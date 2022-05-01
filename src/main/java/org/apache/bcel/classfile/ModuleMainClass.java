@@ -35,11 +35,16 @@ public final class ModuleMainClass extends Attribute {
 
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use copy() for a physical copy.
+     * Construct object from input stream.
+     * @param nameIndex Index in constant pool
+     * @param length Content length in bytes
+     * @param input Input stream
+     * @param constantPool Array of constants
+     * @throws IOException
      */
-    public ModuleMainClass(final ModuleMainClass c) {
-        this(c.getNameIndex(), c.getLength(), c.getHostClassIndex(), c.getConstantPool());
+    ModuleMainClass(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, 0, constantPool);
+        mainClassIndex = input.readUnsignedShort();
     }
 
 
@@ -57,16 +62,11 @@ public final class ModuleMainClass extends Attribute {
 
 
     /**
-     * Construct object from input stream.
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
-     * @throws IOException
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use copy() for a physical copy.
      */
-    ModuleMainClass(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
-        this(nameIndex, length, 0, constantPool);
-        mainClassIndex = input.readUnsignedShort();
+    public ModuleMainClass(final ModuleMainClass c) {
+        this(c.getNameIndex(), c.getLength(), c.getHostClassIndex(), c.getConstantPool());
     }
 
 
@@ -80,6 +80,17 @@ public final class ModuleMainClass extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         v.visitModuleMainClass(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final ModuleMainClass c = (ModuleMainClass) clone();
+        c.setConstantPool(_constant_pool);
+        return c;
     }
 
 
@@ -122,16 +133,5 @@ public final class ModuleMainClass extends Attribute {
         final String class_name = super.getConstantPool().getConstantString(mainClassIndex, Const.CONSTANT_Class);
         buf.append(Utility.compactClassName(class_name, false));
         return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final ModuleMainClass c = (ModuleMainClass) clone();
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

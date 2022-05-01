@@ -43,68 +43,14 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     }
 
 
-    public NEWARRAY(final byte type) {
-        super(org.apache.bcel.Const.NEWARRAY, (short) 2);
-        this.type = type;
-    }
-
-
     public NEWARRAY(final BasicType type) {
         this(type.getType());
     }
 
 
-    /**
-     * Dump instruction as byte code to stream out.
-     * @param out Output stream
-     */
-    @Override
-    public void dump( final DataOutputStream out ) throws IOException {
-        out.writeByte(super.getOpcode());
-        out.writeByte(type);
-    }
-
-
-    /**
-     * @return numeric code for basic element type
-     */
-    public final byte getTypecode() {
-        return type;
-    }
-
-
-    /**
-     * @return type of constructed array
-     */
-    public final Type getType() {
-        return new ArrayType(BasicType.getType(type), 1);
-    }
-
-
-    /**
-     * @return mnemonic for instruction
-     */
-    @Override
-    public String toString( final boolean verbose ) {
-        return super.toString(verbose) + " " + org.apache.bcel.Const.getTypeName(type);
-    }
-
-
-    /**
-     * Read needed data (e.g. index) from file.
-     */
-    @Override
-    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
-        type = bytes.readByte();
-        super.setLength(2);
-    }
-
-
-    @Override
-    public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.NEGATIVE_ARRAY_SIZE_EXCEPTION
-        };
+    public NEWARRAY(final byte type) {
+        super(org.apache.bcel.Const.NEWARRAY, (short) 2);
+        this.type = type;
     }
 
 
@@ -122,5 +68,59 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
         v.visitExceptionThrower(this);
         v.visitStackProducer(this);
         v.visitNEWARRAY(this);
+    }
+
+
+    /**
+     * Dump instruction as byte code to stream out.
+     * @param out Output stream
+     */
+    @Override
+    public void dump( final DataOutputStream out ) throws IOException {
+        out.writeByte(super.getOpcode());
+        out.writeByte(type);
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return new Class[] {
+            ExceptionConst.NEGATIVE_ARRAY_SIZE_EXCEPTION
+        };
+    }
+
+
+    /**
+     * @return type of constructed array
+     */
+    public final Type getType() {
+        return new ArrayType(BasicType.getType(type), 1);
+    }
+
+
+    /**
+     * @return numeric code for basic element type
+     */
+    public final byte getTypecode() {
+        return type;
+    }
+
+
+    /**
+     * Read needed data (e.g. index) from file.
+     */
+    @Override
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
+        type = bytes.readByte();
+        super.setLength(2);
+    }
+
+
+    /**
+     * @return mnemonic for instruction
+     */
+    @Override
+    public String toString( final boolean verbose ) {
+        return super.toString(verbose) + " " + org.apache.bcel.Const.getTypeName(type);
     }
 }

@@ -93,14 +93,6 @@ public final class ConstantNameAndType extends Constant {
     }
 
 
-    /**
-     * @return Name index in constant pool of field/method name.
-     */
-    public int getNameIndex() {
-        return nameIndex;
-    }
-
-
     /** @return name
      */
     public String getName( final ConstantPool cp ) {
@@ -109,10 +101,10 @@ public final class ConstantNameAndType extends Constant {
 
 
     /**
-     * @return Index in constant pool of field/method signature.
+     * @return Name index in constant pool of field/method name.
      */
-    public int getSignatureIndex() {
-        return signatureIndex;
+    public int getNameIndex() {
+        return nameIndex;
     }
 
 
@@ -120,6 +112,14 @@ public final class ConstantNameAndType extends Constant {
      */
     public String getSignature( final ConstantPool cp ) {
         return cp.constantToString(getSignatureIndex(), Const.CONSTANT_Utf8);
+    }
+
+
+    /**
+     * @return Index in constant pool of field/method signature.
+     */
+    public int getSignatureIndex() {
+        return signatureIndex;
     }
 
 

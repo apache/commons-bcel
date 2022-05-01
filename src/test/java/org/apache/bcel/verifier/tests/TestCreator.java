@@ -35,6 +35,16 @@ public abstract class TestCreator {
         }
     }
 
+    public abstract void create(OutputStream out) throws IOException;
+
+    private File getClassesFolder() throws IOException {
+        try {
+            return new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+        } catch (final URISyntaxException e) {
+            throw new IOException(e);
+        }
+    }
+
     private String getClassName() {
         final String name = getClass().getName();
         return name.substring(name.lastIndexOf('.')+1).replace("Creator", ".class");
@@ -47,14 +57,4 @@ public abstract class TestCreator {
     protected String getPackageName() {
         return getClass().getPackage().getName().replace('.', '/');
     }
-
-    private File getClassesFolder() throws IOException {
-        try {
-            return new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
-        } catch (final URISyntaxException e) {
-            throw new IOException(e);
-        }
-    }
-
-    public abstract void create(OutputStream out) throws IOException;
 }

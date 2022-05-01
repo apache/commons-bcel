@@ -66,42 +66,12 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         super(access_flags);
     }
 
-    @Override
-    public void setType( final Type type ) { // TODO could be package-protected?
-        if (type.getType() == Const.T_ADDRESS) {
-            throw new IllegalArgumentException("Type can not be " + type);
-        }
-        this.type = type;
-    }
-
-
-    @Override
-    public Type getType() {
-        return type;
-    }
-
-
-    /** @return name of method/field.
+    /**
+     * @since 6.0
      */
-    @Override
-    public String getName() {
-        return name;
-    }
-
-
-    @Override
-    public void setName( final String name ) { // TODO could be package-protected?
-        this.name = name;
-    }
-
-
-    public ConstantPoolGen getConstantPool() {
-        return cp;
-    }
-
-
-    public void setConstantPool( final ConstantPoolGen cp ) { // TODO could be package-protected?
-        this.cp = cp;
+    public void addAnnotationEntry(final AnnotationEntryGen ag)
+    {
+        annotationList.add(ag);
     }
 
 
@@ -117,36 +87,54 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         attributeList.add(a);
     }
 
-    /**
-     * @since 6.0
-     */
-    public void addAnnotationEntry(final AnnotationEntryGen ag)
-    {
-        annotationList.add(ag);
+
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (final CloneNotSupportedException e) {
+            throw new Error("Clone Not Supported"); // never happens
+        }
     }
 
 
+    public AnnotationEntryGen[] getAnnotationEntries() {
+        final AnnotationEntryGen[] annotations = new AnnotationEntryGen[annotationList.size()];
+          annotationList.toArray(annotations);
+          return annotations;
+      }
+
+
     /**
-     * Remove an attribute.
+     * @return all attributes of this method.
      */
-    public void removeAttribute( final Attribute a ) {
-        attributeList.remove(a);
+    public Attribute[] getAttributes() {
+        final Attribute[] attributes = new Attribute[attributeList.size()];
+        attributeList.toArray(attributes);
+        return attributes;
     }
 
-    /**
-     * @since 6.0
-     */
-    public void removeAnnotationEntry(final AnnotationEntryGen ag)
-    {
-        annotationList.remove(ag);
+
+    public ConstantPoolGen getConstantPool() {
+        return cp;
     }
 
 
-    /**
-     * Remove all attributes.
+    /** @return name of method/field.
      */
-    public void removeAttributes() {
-        attributeList.clear();
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    /** @return signature of method/field.
+     */
+    public abstract String getSignature();
+
+
+    @Override
+    public Type getType() {
+        return type;
     }
 
     /**
@@ -159,32 +147,44 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
 
 
     /**
-     * @return all attributes of this method.
+     * @since 6.0
      */
-    public Attribute[] getAttributes() {
-        final Attribute[] attributes = new Attribute[attributeList.size()];
-        attributeList.toArray(attributes);
-        return attributes;
+    public void removeAnnotationEntry(final AnnotationEntryGen ag)
+    {
+        annotationList.remove(ag);
     }
 
-    public AnnotationEntryGen[] getAnnotationEntries() {
-        final AnnotationEntryGen[] annotations = new AnnotationEntryGen[annotationList.size()];
-          annotationList.toArray(annotations);
-          return annotations;
-      }
-
-
-    /** @return signature of method/field.
+    /**
+     * Remove an attribute.
      */
-    public abstract String getSignature();
+    public void removeAttribute( final Attribute a ) {
+        attributeList.remove(a);
+    }
+
+
+    /**
+     * Remove all attributes.
+     */
+    public void removeAttributes() {
+        attributeList.clear();
+    }
+
+    public void setConstantPool( final ConstantPoolGen cp ) { // TODO could be package-protected?
+        this.cp = cp;
+    }
 
 
     @Override
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
+    public void setName( final String name ) { // TODO could be package-protected?
+        this.name = name;
+    }
+
+
+    @Override
+    public void setType( final Type type ) { // TODO could be package-protected?
+        if (type.getType() == Const.T_ADDRESS) {
+            throw new IllegalArgumentException("Type can not be " + type);
         }
+        this.type = type;
     }
 }

@@ -52,14 +52,6 @@ public class EnumElementValue extends ElementValue
         dos.writeShort(valueIdx); // u2
     }
 
-    @Override
-    public String stringifyValue()
-    {
-        final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
-                Const.CONSTANT_Utf8);
-        return cu8.getBytes();
-    }
-
     public String getEnumTypeString()
     {
         final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(typeIdx,
@@ -74,13 +66,21 @@ public class EnumElementValue extends ElementValue
         return cu8.getBytes();
     }
 
+    public int getTypeIndex()
+    {
+        return typeIdx;
+    }
+
     public int getValueIndex()
     {
         return valueIdx;
     }
 
-    public int getTypeIndex()
+    @Override
+    public String stringifyValue()
     {
-        return typeIdx;
+        final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx,
+                Const.CONSTANT_Utf8);
+        return cu8.getBytes();
     }
 }

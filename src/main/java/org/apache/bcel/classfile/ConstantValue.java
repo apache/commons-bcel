@@ -85,6 +85,17 @@ public final class ConstantValue extends Attribute {
 
 
     /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final ConstantValue c = (ConstantValue) clone();
+        c.setConstantPool(_constant_pool);
+        return c;
+    }
+
+
+    /**
      * Dump constant value attribute to file stream on binary format.
      *
      * @param file Output file stream
@@ -144,16 +155,5 @@ public final class ConstantValue extends Attribute {
                 throw new IllegalStateException("Type of ConstValue invalid: " + c);
         }
         return buf;
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final ConstantValue c = (ConstantValue) clone();
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

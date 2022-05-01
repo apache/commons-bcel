@@ -48,24 +48,6 @@ public class INVOKESTATIC extends InvokeInstruction {
 
 
     /**
-     * Dump instruction as byte code to stream out.
-     * @param out Output stream
-     */
-    @Override
-    public void dump( final DataOutputStream out ) throws IOException {
-      out.writeByte(super.getOpcode());
-      out.writeShort(super.getIndex());
-    }
-
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConst.UNSATISFIED_LINK_ERROR,
-            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
-    }
-
-
-    /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
      * call methods according to the class hierarchy in descending order,
@@ -84,5 +66,23 @@ public class INVOKESTATIC extends InvokeInstruction {
         v.visitFieldOrMethod(this);
         v.visitInvokeInstruction(this);
         v.visitINVOKESTATIC(this);
+    }
+
+    /**
+     * Dump instruction as byte code to stream out.
+     * @param out Output stream
+     */
+    @Override
+    public void dump( final DataOutputStream out ) throws IOException {
+      out.writeByte(super.getOpcode());
+      out.writeShort(super.getIndex());
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConst.UNSATISFIED_LINK_ERROR,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 }

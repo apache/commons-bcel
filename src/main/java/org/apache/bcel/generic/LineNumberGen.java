@@ -44,6 +44,16 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
 
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (final CloneNotSupportedException e) {
+            throw new Error("Clone Not Supported"); // never happens
+        }
+    }
+
+
     /**
      * @return true, if ih is target of this line number
      */
@@ -53,16 +63,8 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
 
-    /**
-     * @param old_ih old target
-     * @param new_ih new target
-     */
-    @Override
-    public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
-        if (old_ih != ih) {
-            throw new ClassGenException("Not targeting " + old_ih + ", but " + ih + "}");
-        }
-        setInstruction(new_ih);
+    public InstructionHandle getInstruction() {
+        return ih;
     }
 
 
@@ -77,25 +79,15 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
 
+    public int getSourceLine() {
+        return srcLine;
+    }
+
+
     public void setInstruction( final InstructionHandle instructionHandle ) { // TODO could be package-protected?
         Objects.requireNonNull(instructionHandle, "instructionHandle");
         BranchInstruction.notifyTarget(this.ih, instructionHandle, this);
         this.ih = instructionHandle;
-    }
-
-
-    @Override
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
-        }
-    }
-
-
-    public InstructionHandle getInstruction() {
-        return ih;
     }
 
 
@@ -104,7 +96,15 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
 
-    public int getSourceLine() {
-        return srcLine;
+    /**
+     * @param old_ih old target
+     * @param new_ih new target
+     */
+    @Override
+    public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
+        if (old_ih != ih) {
+            throw new ClassGenException("Not targeting " + old_ih + ", but " + ih + "}");
+        }
+        setInstruction(new_ih);
     }
 }

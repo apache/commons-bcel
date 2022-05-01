@@ -33,16 +33,6 @@ public class IREM extends ArithmeticInstruction implements ExceptionThrower {
     }
 
 
-    /** @return exceptions this instruction may cause
-     */
-    @Override
-    public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.ARITHMETIC_EXCEPTION
-        };
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -59,5 +49,15 @@ public class IREM extends ArithmeticInstruction implements ExceptionThrower {
         v.visitStackConsumer(this);
         v.visitArithmeticInstruction(this);
         v.visitIREM(this);
+    }
+
+
+    /** @return exceptions this instruction may cause
+     */
+    @Override
+    public Class<?>[] getExceptions() {
+        return new Class[] {
+            ExceptionConst.ARITHMETIC_EXCEPTION
+        };
     }
 }

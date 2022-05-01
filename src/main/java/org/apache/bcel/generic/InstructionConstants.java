@@ -38,6 +38,118 @@ import org.apache.bcel.Const;
 @Deprecated
 public interface InstructionConstants {
 
+    class Clinit {
+
+        Clinit() {
+            INSTRUCTIONS[Const.NOP] = NOP;
+            INSTRUCTIONS[Const.ACONST_NULL] = ACONST_NULL;
+            INSTRUCTIONS[Const.ICONST_M1] = ICONST_M1;
+            INSTRUCTIONS[Const.ICONST_0] = ICONST_0;
+            INSTRUCTIONS[Const.ICONST_1] = ICONST_1;
+            INSTRUCTIONS[Const.ICONST_2] = ICONST_2;
+            INSTRUCTIONS[Const.ICONST_3] = ICONST_3;
+            INSTRUCTIONS[Const.ICONST_4] = ICONST_4;
+            INSTRUCTIONS[Const.ICONST_5] = ICONST_5;
+            INSTRUCTIONS[Const.LCONST_0] = LCONST_0;
+            INSTRUCTIONS[Const.LCONST_1] = LCONST_1;
+            INSTRUCTIONS[Const.FCONST_0] = FCONST_0;
+            INSTRUCTIONS[Const.FCONST_1] = FCONST_1;
+            INSTRUCTIONS[Const.FCONST_2] = FCONST_2;
+            INSTRUCTIONS[Const.DCONST_0] = DCONST_0;
+            INSTRUCTIONS[Const.DCONST_1] = DCONST_1;
+            INSTRUCTIONS[Const.IALOAD] = IALOAD;
+            INSTRUCTIONS[Const.LALOAD] = LALOAD;
+            INSTRUCTIONS[Const.FALOAD] = FALOAD;
+            INSTRUCTIONS[Const.DALOAD] = DALOAD;
+            INSTRUCTIONS[Const.AALOAD] = AALOAD;
+            INSTRUCTIONS[Const.BALOAD] = BALOAD;
+            INSTRUCTIONS[Const.CALOAD] = CALOAD;
+            INSTRUCTIONS[Const.SALOAD] = SALOAD;
+            INSTRUCTIONS[Const.IASTORE] = IASTORE;
+            INSTRUCTIONS[Const.LASTORE] = LASTORE;
+            INSTRUCTIONS[Const.FASTORE] = FASTORE;
+            INSTRUCTIONS[Const.DASTORE] = DASTORE;
+            INSTRUCTIONS[Const.AASTORE] = AASTORE;
+            INSTRUCTIONS[Const.BASTORE] = BASTORE;
+            INSTRUCTIONS[Const.CASTORE] = CASTORE;
+            INSTRUCTIONS[Const.SASTORE] = SASTORE;
+            INSTRUCTIONS[Const.POP] = POP;
+            INSTRUCTIONS[Const.POP2] = POP2;
+            INSTRUCTIONS[Const.DUP] = DUP;
+            INSTRUCTIONS[Const.DUP_X1] = DUP_X1;
+            INSTRUCTIONS[Const.DUP_X2] = DUP_X2;
+            INSTRUCTIONS[Const.DUP2] = DUP2;
+            INSTRUCTIONS[Const.DUP2_X1] = DUP2_X1;
+            INSTRUCTIONS[Const.DUP2_X2] = DUP2_X2;
+            INSTRUCTIONS[Const.SWAP] = SWAP;
+            INSTRUCTIONS[Const.IADD] = IADD;
+            INSTRUCTIONS[Const.LADD] = LADD;
+            INSTRUCTIONS[Const.FADD] = FADD;
+            INSTRUCTIONS[Const.DADD] = DADD;
+            INSTRUCTIONS[Const.ISUB] = ISUB;
+            INSTRUCTIONS[Const.LSUB] = LSUB;
+            INSTRUCTIONS[Const.FSUB] = FSUB;
+            INSTRUCTIONS[Const.DSUB] = DSUB;
+            INSTRUCTIONS[Const.IMUL] = IMUL;
+            INSTRUCTIONS[Const.LMUL] = LMUL;
+            INSTRUCTIONS[Const.FMUL] = FMUL;
+            INSTRUCTIONS[Const.DMUL] = DMUL;
+            INSTRUCTIONS[Const.IDIV] = IDIV;
+            INSTRUCTIONS[Const.LDIV] = LDIV;
+            INSTRUCTIONS[Const.FDIV] = FDIV;
+            INSTRUCTIONS[Const.DDIV] = DDIV;
+            INSTRUCTIONS[Const.IREM] = IREM;
+            INSTRUCTIONS[Const.LREM] = LREM;
+            INSTRUCTIONS[Const.FREM] = FREM;
+            INSTRUCTIONS[Const.DREM] = DREM;
+            INSTRUCTIONS[Const.INEG] = INEG;
+            INSTRUCTIONS[Const.LNEG] = LNEG;
+            INSTRUCTIONS[Const.FNEG] = FNEG;
+            INSTRUCTIONS[Const.DNEG] = DNEG;
+            INSTRUCTIONS[Const.ISHL] = ISHL;
+            INSTRUCTIONS[Const.LSHL] = LSHL;
+            INSTRUCTIONS[Const.ISHR] = ISHR;
+            INSTRUCTIONS[Const.LSHR] = LSHR;
+            INSTRUCTIONS[Const.IUSHR] = IUSHR;
+            INSTRUCTIONS[Const.LUSHR] = LUSHR;
+            INSTRUCTIONS[Const.IAND] = IAND;
+            INSTRUCTIONS[Const.LAND] = LAND;
+            INSTRUCTIONS[Const.IOR] = IOR;
+            INSTRUCTIONS[Const.LOR] = LOR;
+            INSTRUCTIONS[Const.IXOR] = IXOR;
+            INSTRUCTIONS[Const.LXOR] = LXOR;
+            INSTRUCTIONS[Const.I2L] = I2L;
+            INSTRUCTIONS[Const.I2F] = I2F;
+            INSTRUCTIONS[Const.I2D] = I2D;
+            INSTRUCTIONS[Const.L2I] = L2I;
+            INSTRUCTIONS[Const.L2F] = L2F;
+            INSTRUCTIONS[Const.L2D] = L2D;
+            INSTRUCTIONS[Const.F2I] = F2I;
+            INSTRUCTIONS[Const.F2L] = F2L;
+            INSTRUCTIONS[Const.F2D] = F2D;
+            INSTRUCTIONS[Const.D2I] = D2I;
+            INSTRUCTIONS[Const.D2L] = D2L;
+            INSTRUCTIONS[Const.D2F] = D2F;
+            INSTRUCTIONS[Const.I2B] = I2B;
+            INSTRUCTIONS[Const.I2C] = I2C;
+            INSTRUCTIONS[Const.I2S] = I2S;
+            INSTRUCTIONS[Const.LCMP] = LCMP;
+            INSTRUCTIONS[Const.FCMPL] = FCMPL;
+            INSTRUCTIONS[Const.FCMPG] = FCMPG;
+            INSTRUCTIONS[Const.DCMPL] = DCMPL;
+            INSTRUCTIONS[Const.DCMPG] = DCMPG;
+            INSTRUCTIONS[Const.IRETURN] = IRETURN;
+            INSTRUCTIONS[Const.LRETURN] = LRETURN;
+            INSTRUCTIONS[Const.FRETURN] = FRETURN;
+            INSTRUCTIONS[Const.DRETURN] = DRETURN;
+            INSTRUCTIONS[Const.ARETURN] = ARETURN;
+            INSTRUCTIONS[Const.RETURN] = RETURN;
+            INSTRUCTIONS[Const.ARRAYLENGTH] = ARRAYLENGTH;
+            INSTRUCTIONS[Const.ATHROW] = ATHROW;
+            INSTRUCTIONS[Const.MONITORENTER] = MONITORENTER;
+            INSTRUCTIONS[Const.MONITOREXIT] = MONITOREXIT;
+        }
+    }
     /** Predefined instruction objects
      */
     /*
@@ -171,121 +283,9 @@ public interface InstructionConstants {
      * branch instructions entries are set to null.
      */
     Instruction[] INSTRUCTIONS = new Instruction[256];
+
     /** Interfaces may have no static initializers, so we simulate this
      * with an inner class.
      */
     Clinit bla = new Clinit();
-
-    class Clinit {
-
-        Clinit() {
-            INSTRUCTIONS[Const.NOP] = NOP;
-            INSTRUCTIONS[Const.ACONST_NULL] = ACONST_NULL;
-            INSTRUCTIONS[Const.ICONST_M1] = ICONST_M1;
-            INSTRUCTIONS[Const.ICONST_0] = ICONST_0;
-            INSTRUCTIONS[Const.ICONST_1] = ICONST_1;
-            INSTRUCTIONS[Const.ICONST_2] = ICONST_2;
-            INSTRUCTIONS[Const.ICONST_3] = ICONST_3;
-            INSTRUCTIONS[Const.ICONST_4] = ICONST_4;
-            INSTRUCTIONS[Const.ICONST_5] = ICONST_5;
-            INSTRUCTIONS[Const.LCONST_0] = LCONST_0;
-            INSTRUCTIONS[Const.LCONST_1] = LCONST_1;
-            INSTRUCTIONS[Const.FCONST_0] = FCONST_0;
-            INSTRUCTIONS[Const.FCONST_1] = FCONST_1;
-            INSTRUCTIONS[Const.FCONST_2] = FCONST_2;
-            INSTRUCTIONS[Const.DCONST_0] = DCONST_0;
-            INSTRUCTIONS[Const.DCONST_1] = DCONST_1;
-            INSTRUCTIONS[Const.IALOAD] = IALOAD;
-            INSTRUCTIONS[Const.LALOAD] = LALOAD;
-            INSTRUCTIONS[Const.FALOAD] = FALOAD;
-            INSTRUCTIONS[Const.DALOAD] = DALOAD;
-            INSTRUCTIONS[Const.AALOAD] = AALOAD;
-            INSTRUCTIONS[Const.BALOAD] = BALOAD;
-            INSTRUCTIONS[Const.CALOAD] = CALOAD;
-            INSTRUCTIONS[Const.SALOAD] = SALOAD;
-            INSTRUCTIONS[Const.IASTORE] = IASTORE;
-            INSTRUCTIONS[Const.LASTORE] = LASTORE;
-            INSTRUCTIONS[Const.FASTORE] = FASTORE;
-            INSTRUCTIONS[Const.DASTORE] = DASTORE;
-            INSTRUCTIONS[Const.AASTORE] = AASTORE;
-            INSTRUCTIONS[Const.BASTORE] = BASTORE;
-            INSTRUCTIONS[Const.CASTORE] = CASTORE;
-            INSTRUCTIONS[Const.SASTORE] = SASTORE;
-            INSTRUCTIONS[Const.POP] = POP;
-            INSTRUCTIONS[Const.POP2] = POP2;
-            INSTRUCTIONS[Const.DUP] = DUP;
-            INSTRUCTIONS[Const.DUP_X1] = DUP_X1;
-            INSTRUCTIONS[Const.DUP_X2] = DUP_X2;
-            INSTRUCTIONS[Const.DUP2] = DUP2;
-            INSTRUCTIONS[Const.DUP2_X1] = DUP2_X1;
-            INSTRUCTIONS[Const.DUP2_X2] = DUP2_X2;
-            INSTRUCTIONS[Const.SWAP] = SWAP;
-            INSTRUCTIONS[Const.IADD] = IADD;
-            INSTRUCTIONS[Const.LADD] = LADD;
-            INSTRUCTIONS[Const.FADD] = FADD;
-            INSTRUCTIONS[Const.DADD] = DADD;
-            INSTRUCTIONS[Const.ISUB] = ISUB;
-            INSTRUCTIONS[Const.LSUB] = LSUB;
-            INSTRUCTIONS[Const.FSUB] = FSUB;
-            INSTRUCTIONS[Const.DSUB] = DSUB;
-            INSTRUCTIONS[Const.IMUL] = IMUL;
-            INSTRUCTIONS[Const.LMUL] = LMUL;
-            INSTRUCTIONS[Const.FMUL] = FMUL;
-            INSTRUCTIONS[Const.DMUL] = DMUL;
-            INSTRUCTIONS[Const.IDIV] = IDIV;
-            INSTRUCTIONS[Const.LDIV] = LDIV;
-            INSTRUCTIONS[Const.FDIV] = FDIV;
-            INSTRUCTIONS[Const.DDIV] = DDIV;
-            INSTRUCTIONS[Const.IREM] = IREM;
-            INSTRUCTIONS[Const.LREM] = LREM;
-            INSTRUCTIONS[Const.FREM] = FREM;
-            INSTRUCTIONS[Const.DREM] = DREM;
-            INSTRUCTIONS[Const.INEG] = INEG;
-            INSTRUCTIONS[Const.LNEG] = LNEG;
-            INSTRUCTIONS[Const.FNEG] = FNEG;
-            INSTRUCTIONS[Const.DNEG] = DNEG;
-            INSTRUCTIONS[Const.ISHL] = ISHL;
-            INSTRUCTIONS[Const.LSHL] = LSHL;
-            INSTRUCTIONS[Const.ISHR] = ISHR;
-            INSTRUCTIONS[Const.LSHR] = LSHR;
-            INSTRUCTIONS[Const.IUSHR] = IUSHR;
-            INSTRUCTIONS[Const.LUSHR] = LUSHR;
-            INSTRUCTIONS[Const.IAND] = IAND;
-            INSTRUCTIONS[Const.LAND] = LAND;
-            INSTRUCTIONS[Const.IOR] = IOR;
-            INSTRUCTIONS[Const.LOR] = LOR;
-            INSTRUCTIONS[Const.IXOR] = IXOR;
-            INSTRUCTIONS[Const.LXOR] = LXOR;
-            INSTRUCTIONS[Const.I2L] = I2L;
-            INSTRUCTIONS[Const.I2F] = I2F;
-            INSTRUCTIONS[Const.I2D] = I2D;
-            INSTRUCTIONS[Const.L2I] = L2I;
-            INSTRUCTIONS[Const.L2F] = L2F;
-            INSTRUCTIONS[Const.L2D] = L2D;
-            INSTRUCTIONS[Const.F2I] = F2I;
-            INSTRUCTIONS[Const.F2L] = F2L;
-            INSTRUCTIONS[Const.F2D] = F2D;
-            INSTRUCTIONS[Const.D2I] = D2I;
-            INSTRUCTIONS[Const.D2L] = D2L;
-            INSTRUCTIONS[Const.D2F] = D2F;
-            INSTRUCTIONS[Const.I2B] = I2B;
-            INSTRUCTIONS[Const.I2C] = I2C;
-            INSTRUCTIONS[Const.I2S] = I2S;
-            INSTRUCTIONS[Const.LCMP] = LCMP;
-            INSTRUCTIONS[Const.FCMPL] = FCMPL;
-            INSTRUCTIONS[Const.FCMPG] = FCMPG;
-            INSTRUCTIONS[Const.DCMPL] = DCMPL;
-            INSTRUCTIONS[Const.DCMPG] = DCMPG;
-            INSTRUCTIONS[Const.IRETURN] = IRETURN;
-            INSTRUCTIONS[Const.LRETURN] = LRETURN;
-            INSTRUCTIONS[Const.FRETURN] = FRETURN;
-            INSTRUCTIONS[Const.DRETURN] = DRETURN;
-            INSTRUCTIONS[Const.ARETURN] = ARETURN;
-            INSTRUCTIONS[Const.RETURN] = RETURN;
-            INSTRUCTIONS[Const.ARRAYLENGTH] = ARRAYLENGTH;
-            INSTRUCTIONS[Const.ATHROW] = ATHROW;
-            INSTRUCTIONS[Const.MONITORENTER] = MONITORENTER;
-            INSTRUCTIONS[Const.MONITOREXIT] = MONITOREXIT;
-        }
-    }
 }

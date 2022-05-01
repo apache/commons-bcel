@@ -24,12 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BranchHandleTestCase {
 
-    // Test that setInstruction only allows BranchInstructions
     @Test
-    public void testsetInstructionNull() {
-        final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
-        assertNotNull(bh);
-        assertThrows(ClassGenException.class, () -> bh.setInstruction(null));
+    public void testGetBHnull() {
+        assertThrows(ClassGenException.class, () -> BranchHandle.getBranchHandle(null));
     }
 
     @Test
@@ -47,8 +44,11 @@ public class BranchHandleTestCase {
         assertThrows(ClassGenException.class, () -> bh.setInstruction(new NOP()));
     }
 
+    // Test that setInstruction only allows BranchInstructions
     @Test
-    public void testGetBHnull() {
-        assertThrows(ClassGenException.class, () -> BranchHandle.getBranchHandle(null));
+    public void testsetInstructionNull() {
+        final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null));// have to start with a valid BI
+        assertNotNull(bh);
+        assertThrows(ClassGenException.class, () -> bh.setInstruction(null));
     }
 }

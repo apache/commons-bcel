@@ -64,6 +64,339 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
 {
+    private void assertArrayElementValue(final int nExpectedArrayValues, final AnnotationEntry anno)
+    {
+        final ElementValuePair elementValuePair = anno.getElementValuePairs()[0];
+        assertEquals("value", elementValuePair.getNameString());
+        final ArrayElementValue ev = (ArrayElementValue) elementValuePair.getValue();
+        final ElementValue[] eva = ev.getElementValuesArray();
+        assertEquals(nExpectedArrayValues, eva.length);
+    }
+
+    private void assertMethodAnnotations(final Method method, final int expectedNumberAnnotations, final int nExpectedArrayValues)
+    {
+        final String methodName= method.getName();
+        final AnnotationEntry[] annos= method.getAnnotationEntries();
+        assertEquals(expectedNumberAnnotations, annos.length, () -> "For " + methodName);
+        if(expectedNumberAnnotations!=0)
+        {
+            assertArrayElementValue(nExpectedArrayValues, annos[0]);
+        }
+    }
+
+    private void assertParameterAnnotations(final Method method, final int... expectedNumberOfParmeterAnnotations)
+    {
+        final String methodName= "For "+method.getName();
+        final ParameterAnnotationEntry[] parameterAnnotations= method.getParameterAnnotationEntries();
+        assertEquals(expectedNumberOfParmeterAnnotations.length, parameterAnnotations.length, methodName);
+
+        int i= 0;
+        for (final ParameterAnnotationEntry parameterAnnotation : parameterAnnotations)
+        {
+            final AnnotationEntry[] annos= parameterAnnotation.getAnnotationEntries();
+            final int expectedLength = expectedNumberOfParmeterAnnotations[i++];
+            final int j = i;
+            assertEquals(expectedLength, annos.length, () -> methodName + " parameter " + j);
+            if(expectedLength!=0)
+            {
+                assertSimpleElementValue(annos[0]);
+            }
+        }
+    }
+
+    private void assertSimpleElementValue(final AnnotationEntry anno)
+    {
+        final ElementValuePair elementValuePair = anno.getElementValuePairs()[0];
+        assertEquals("id", elementValuePair.getNameString());
+        final SimpleElementValue ev = (SimpleElementValue)elementValuePair.getValue();
+        assertEquals(42, ev.getValueInt());
+    }
+
+    private void buildClassContents(final ClassGen cg, final ConstantPoolGen cp,
+            final InstructionList il)
+    {
+        // Create method 'public static void main(String[]argv)'
+        final MethodGen mg = createMethodGen("main", il, cp);
+        final InstructionFactory factory = new InstructionFactory(cg);
+        // We now define some often used types:
+        final ObjectType i_stream = new ObjectType("java.io.InputStream");
+        final ObjectType p_stream = new ObjectType("java.io.PrintStream");
+        // Create variables in and name : We call the constructors, i.e.,
+        // execute BufferedReader(InputStreamReader(System.in)) . The reference
+        // to the BufferedReader object stays on top of the stack and is stored
+        // in the newly allocated in variable.
+        il.append(factory.createNew("java.io.BufferedReader"));
+        il.append(InstructionConst.DUP); // Use predefined constant
+        il.append(factory.createNew("java.io.InputStreamReader"));
+        il.append(InstructionConst.DUP);
+        il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
+                Const.GETSTATIC));
+        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>",
+                Type.VOID, new Type[] { i_stream }, Const.INVOKESPECIAL));
+        il.append(factory.createInvoke("java.io.BufferedReader", "<init>",
+                Type.VOID, new Type[] { new ObjectType("java.io.Reader") },
+                Const.INVOKESPECIAL));
+        LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType(
+                "java.io.BufferedReader"), null, null);
+        final int in = lg.getIndex();
+        lg.setStart(il.append(new ASTORE(in))); // "in" valid from here
+        // Create local variable name and initialize it to null
+        lg = mg.addLocalVariable("name", Type.STRING, null, null);
+        final int name = lg.getIndex();
+        il.append(InstructionConst.ACONST_NULL);
+        lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
+        // Create try-catch block: We remember the start of the block, read a
+        // line from the standard input and store it into the variable name .
+        // InstructionHandle try_start = il.append(factory.createFieldAccess(
+        // "java.lang.System", "out", p_stream, Constants.GETSTATIC));
+        // il.append(new PUSH(cp, "Please enter your name> "));
+        // il.append(factory.createInvoke("java.io.PrintStream", "print",
+        // Type.VOID, new Type[] { Type.STRING },
+        // Constants.INVOKEVIRTUAL));
+        // il.append(new ALOAD(in));
+        // il.append(factory.createInvoke("java.io.BufferedReader", "readLine",
+        // Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
+        final InstructionHandle try_start = il.append(new PUSH(cp, "Andy"));
+        il.append(new ASTORE(name));
+        // Upon normal execution we jump behind exception handler, the target
+        // address is not known yet.
+        final GOTO g = new GOTO(null);
+        final InstructionHandle try_end = il.append(g);
+        // We add the exception handler which simply returns from the method.
+        final LocalVariableGen var_ex = mg.addLocalVariable("ex", Type
+                .getType("Ljava.io.IOException;"), null, null);
+        final int var_ex_slot = var_ex.getIndex();
+        final InstructionHandle handler = il.append(new ASTORE(var_ex_slot));
+        var_ex.setStart(handler);
+        var_ex.setEnd(il.append(InstructionConst.RETURN));
+        mg.addExceptionHandler(try_start, try_end, handler, new ObjectType(
+                "java.io.IOException"));
+        // "Normal" code continues, now we can set the branch target of the GOTO
+        // .
+        final InstructionHandle ih = il.append(factory.createFieldAccess(
+                "java.lang.System", "out", p_stream, Const.GETSTATIC));
+        g.setTarget(ih);
+        // Printing "Hello": String concatenation compiles to StringBuffer
+        // operations.
+        il.append(factory.createNew(Type.STRINGBUFFER));
+        il.append(InstructionConst.DUP);
+        il.append(new PUSH(cp, "Hello, "));
+        il
+                .append(factory.createInvoke("java.lang.StringBuffer",
+                        "<init>", Type.VOID, new Type[] { Type.STRING },
+                        Const.INVOKESPECIAL));
+        il.append(new ALOAD(name));
+        il.append(factory.createInvoke("java.lang.StringBuffer", "append",
+                Type.STRINGBUFFER, new Type[] { Type.STRING },
+                Const.INVOKEVIRTUAL));
+        il.append(factory.createInvoke("java.lang.StringBuffer", "toString",
+                Type.STRING, Type.NO_ARGS, Const.INVOKEVIRTUAL));
+        il
+                .append(factory.createInvoke("java.io.PrintStream", "println",
+                        Type.VOID, new Type[] { Type.STRING },
+                        Const.INVOKEVIRTUAL));
+        il.append(InstructionConst.RETURN);
+        // Finalization: Finally, we have to set the stack size, which normally
+        // would have to be computed on the fly and add a default constructor
+        // method to the class, which is empty in this case.
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+        il.dispose(); // Allow instruction handles to be reused
+        cg.addEmptyConstructor(Const.ACC_PUBLIC);
+    }
+
+    private void buildClassContentsWithAnnotatedMethods(final ClassGen cg,
+            final ConstantPoolGen cp, final InstructionList il)
+    {
+        // Create method 'public static void main(String[]argv)'
+        final MethodGen mg = createMethodGen("main", il, cp);
+        final InstructionFactory factory = new InstructionFactory(cg);
+        mg.addAnnotationEntry(createSimpleVisibleAnnotation(mg
+                .getConstantPool()));
+        // We now define some often used types:
+        final ObjectType i_stream = new ObjectType("java.io.InputStream");
+        final ObjectType p_stream = new ObjectType("java.io.PrintStream");
+        // Create variables in and name : We call the constructors, i.e.,
+        // execute BufferedReader(InputStreamReader(System.in)) . The reference
+        // to the BufferedReader object stays on top of the stack and is stored
+        // in the newly allocated in variable.
+        il.append(factory.createNew("java.io.BufferedReader"));
+        il.append(InstructionConst.DUP); // Use predefined constant
+        il.append(factory.createNew("java.io.InputStreamReader"));
+        il.append(InstructionConst.DUP);
+        il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
+                Const.GETSTATIC));
+        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>",
+                Type.VOID, new Type[] { i_stream }, Const.INVOKESPECIAL));
+        il.append(factory.createInvoke("java.io.BufferedReader", "<init>",
+                Type.VOID, new Type[] { new ObjectType("java.io.Reader") },
+                Const.INVOKESPECIAL));
+        LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType(
+                "java.io.BufferedReader"), null, null);
+        final int in = lg.getIndex();
+        lg.setStart(il.append(new ASTORE(in))); // "in" valid from here
+        // Create local variable name and initialize it to null
+        lg = mg.addLocalVariable("name", Type.STRING, null, null);
+        final int name = lg.getIndex();
+        il.append(InstructionConst.ACONST_NULL);
+        lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
+        // Create try-catch block: We remember the start of the block, read a
+        // line from the standard input and store it into the variable name .
+        // InstructionHandle try_start = il.append(factory.createFieldAccess(
+        // "java.lang.System", "out", p_stream, Constants.GETSTATIC));
+        // il.append(new PUSH(cp, "Please enter your name> "));
+        // il.append(factory.createInvoke("java.io.PrintStream", "print",
+        // Type.VOID, new Type[] { Type.STRING },
+        // Constants.INVOKEVIRTUAL));
+        // il.append(new ALOAD(in));
+        // il.append(factory.createInvoke("java.io.BufferedReader", "readLine",
+        // Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
+        final InstructionHandle try_start = il.append(new PUSH(cp, "Andy"));
+        il.append(new ASTORE(name));
+        // Upon normal execution we jump behind exception handler, the target
+        // address is not known yet.
+        final GOTO g = new GOTO(null);
+        final InstructionHandle try_end = il.append(g);
+        // We add the exception handler which simply returns from the method.
+        final LocalVariableGen var_ex = mg.addLocalVariable("ex", Type
+                .getType("Ljava.io.IOException;"), null, null);
+        final int var_ex_slot = var_ex.getIndex();
+        final InstructionHandle handler = il.append(new ASTORE(var_ex_slot));
+        var_ex.setStart(handler);
+        var_ex.setEnd(il.append(InstructionConst.RETURN));
+        mg.addExceptionHandler(try_start, try_end, handler, new ObjectType(
+                "java.io.IOException"));
+        // "Normal" code continues, now we can set the branch target of the GOTO
+        // .
+        final InstructionHandle ih = il.append(factory.createFieldAccess(
+                "java.lang.System", "out", p_stream, Const.GETSTATIC));
+        g.setTarget(ih);
+        // Printing "Hello": String concatenation compiles to StringBuffer
+        // operations.
+        il.append(factory.createNew(Type.STRINGBUFFER));
+        il.append(InstructionConst.DUP);
+        il.append(new PUSH(cp, "Hello, "));
+        il
+                .append(factory.createInvoke("java.lang.StringBuffer",
+                        "<init>", Type.VOID, new Type[] { Type.STRING },
+                        Const.INVOKESPECIAL));
+        il.append(new ALOAD(name));
+        il.append(factory.createInvoke("java.lang.StringBuffer", "append",
+                Type.STRINGBUFFER, new Type[] { Type.STRING },
+                Const.INVOKEVIRTUAL));
+        il.append(factory.createInvoke("java.lang.StringBuffer", "toString",
+                Type.STRING, Type.NO_ARGS, Const.INVOKEVIRTUAL));
+        il
+                .append(factory.createInvoke("java.io.PrintStream", "println",
+                        Type.VOID, new Type[] { Type.STRING },
+                        Const.INVOKEVIRTUAL));
+        il.append(InstructionConst.RETURN);
+        // Finalization: Finally, we have to set the stack size, which normally
+        // would have to be computed on the fly and add a default constructor
+        // method to the class, which is empty in this case.
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+        il.dispose(); // Allow instruction handles to be reused
+        cg.addEmptyConstructor(Const.ACC_PUBLIC);
+    }
+
+    // helper methods
+    private ClassGen createClassGen(final String classname)
+    {
+        return new ClassGen(classname, "java.lang.Object", "<generated>",
+                Const.ACC_PUBLIC | Const.ACC_SUPER, null);
+    }
+
+    public AnnotationEntryGen createCombinedAnnotation(final ConstantPoolGen cp)
+    {
+        // Create an annotation instance
+        final AnnotationEntryGen a = createSimpleVisibleAnnotation(cp);
+        final ArrayElementValueGen array = new ArrayElementValueGen(cp);
+        array.addElement(new AnnotationElementValueGen(a, cp));
+        final ElementValuePairGen nvp = new ElementValuePairGen("value", array, cp);
+        final List<ElementValuePairGen> elements = new ArrayList<>();
+        elements.add(nvp);
+        return new AnnotationEntryGen(new ObjectType("CombinedAnnotation"),
+                elements, true, cp);
+    }
+
+    public AnnotationEntryGen createFruitAnnotation(final ConstantPoolGen cp,
+            final String aFruit)
+    {
+        final SimpleElementValueGen evg = new SimpleElementValueGen(
+                ElementValueGen.STRING, cp, aFruit);
+        final ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
+        final ObjectType t = new ObjectType("SimpleStringAnnotation");
+        final List<ElementValuePairGen> elements = new ArrayList<>();
+        elements.add(nvGen);
+        return new AnnotationEntryGen(t, elements, true, cp);
+    }
+
+    private MethodGen createMethodGen(final String methodname, final InstructionList il,
+            final ConstantPoolGen cp)
+    {
+        return new MethodGen(Const.ACC_STATIC | Const.ACC_PUBLIC, // access
+                // flags
+                Type.VOID, // return type
+                new Type[] { new ArrayType(Type.STRING, 1) }, // argument
+                // types
+                new String[] { "argv" }, // arg names
+                methodname, "HelloWorld", // method, class
+                il, cp);
+    }
+
+    public AnnotationEntryGen createSimpleInvisibleAnnotation(final ConstantPoolGen cp)
+    {
+        final SimpleElementValueGen evg = new SimpleElementValueGen(
+                ElementValueGen.PRIMITIVE_INT, cp, 4);
+        final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
+        final ObjectType t = new ObjectType("SimpleAnnotation");
+        final List<ElementValuePairGen> elements = new ArrayList<>();
+        elements.add(nvGen);
+        final AnnotationEntryGen a = new AnnotationEntryGen(t, elements, false, cp);
+        return a;
+    }
+
+    public AnnotationEntryGen createSimpleVisibleAnnotation(final ConstantPoolGen cp)
+    {
+        final SimpleElementValueGen evg = new SimpleElementValueGen(
+                ElementValueGen.PRIMITIVE_INT, cp, 4);
+        final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
+        final ObjectType t = new ObjectType("SimpleAnnotation");
+        final List<ElementValuePairGen> elements = new ArrayList<>();
+        elements.add(nvGen);
+        final AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
+        return a;
+    }
+
+    private void dumpClass(final ClassGen cg, final String fname)
+    {
+        try
+        {
+            final File f = createTestdataFile(fname);
+            cg.getJavaClass().dump(f);
+        }
+        catch (final java.io.IOException e)
+        {
+            System.err.println(e);
+        }
+    }
+
+    private void dumpClass(final ClassGen cg, final String dir, final String fname)
+    {
+        dumpClass(cg, dir + File.separator + fname);
+    }
+
+    private JavaClass getClassFrom(final String where, final String clazzname)
+            throws ClassNotFoundException
+    {
+        // System.out.println(where);
+        final SyntheticRepository repos = createRepos(where);
+        return repos.loadClass(clazzname);
+    }
+
     /**
      * Steps in the test:
      * <ol>
@@ -182,34 +515,39 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         assertTrue(wipe("temp3", "HelloWorld.class"));
     }
 
-    // J5TODO: Need to add deleteFile calls to many of these tests
     /**
-     * Transform simple class from an immutable to a mutable object.
+     * Load a class in and modify it with a new attribute - A SimpleAnnotation
+     * annotation
      */
     @Test
-    public void testTransformClassToClassGen_SimpleTypes()
-            throws ClassNotFoundException
+    public void testModifyingClasses1() throws ClassNotFoundException
     {
         final JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
-        // Check annotations are correctly preserved
-        final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
-        assertEquals(1, annotations.length, "Wrong number of annotations");
+        final ConstantPoolGen cp = cgen.getConstantPool();
+        cgen.addAnnotationEntry(createFruitAnnotation(cp, "Pineapple"));
+        assertEquals(2, cgen.getAnnotationEntries().length, "Wrong number of annotations");
+        dumpClass(cgen, "SimpleAnnotatedClass.class");
+        assertTrue(wipe("SimpleAnnotatedClass.class"));
     }
 
     /**
-     * Transform simple class from an immutable to a mutable object. The class
-     * is annotated with an annotation that uses an enum.
+     * Load a class in and modify it with a new attribute - A ComplexAnnotation
+     * annotation
      */
     @Test
-    public void testTransformClassToClassGen_EnumType()
-            throws ClassNotFoundException
+    public void testModifyingClasses2() throws ClassNotFoundException
     {
-        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedWithEnumClass");
+        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
-        // Check annotations are correctly preserved
-        final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
-        assertEquals(1, annotations.length, "Wrong number of annotations");
+        final ConstantPoolGen cp = cgen.getConstantPool();
+        cgen.addAnnotationEntry(createCombinedAnnotation(cp));
+        assertEquals(2, cgen.getAnnotationEntries().length, "Wrong number of annotations");
+        dumpClass(cgen, "SimpleAnnotatedClass.class");
+        final JavaClass jc2 = getClassFrom(".", "SimpleAnnotatedClass");
+        jc2.getAnnotationEntries();
+        assertTrue(wipe("SimpleAnnotatedClass.class"));
+        // System.err.println(jc2.toString());
     }
 
     /**
@@ -268,52 +606,34 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
         }
     }
 
-    private void assertMethodAnnotations(final Method method, final int expectedNumberAnnotations, final int nExpectedArrayValues)
+    /**
+     * Transform simple class from an immutable to a mutable object. The class
+     * is annotated with an annotation that uses an enum.
+     */
+    @Test
+    public void testTransformClassToClassGen_EnumType()
+            throws ClassNotFoundException
     {
-        final String methodName= method.getName();
-        final AnnotationEntry[] annos= method.getAnnotationEntries();
-        assertEquals(expectedNumberAnnotations, annos.length, () -> "For " + methodName);
-        if(expectedNumberAnnotations!=0)
-        {
-            assertArrayElementValue(nExpectedArrayValues, annos[0]);
-        }
+        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedWithEnumClass");
+        final ClassGen cgen = new ClassGen(jc);
+        // Check annotations are correctly preserved
+        final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
+        assertEquals(1, annotations.length, "Wrong number of annotations");
     }
 
-    private void assertArrayElementValue(final int nExpectedArrayValues, final AnnotationEntry anno)
+    // J5TODO: Need to add deleteFile calls to many of these tests
+    /**
+     * Transform simple class from an immutable to a mutable object.
+     */
+    @Test
+    public void testTransformClassToClassGen_SimpleTypes()
+            throws ClassNotFoundException
     {
-        final ElementValuePair elementValuePair = anno.getElementValuePairs()[0];
-        assertEquals("value", elementValuePair.getNameString());
-        final ArrayElementValue ev = (ArrayElementValue) elementValuePair.getValue();
-        final ElementValue[] eva = ev.getElementValuesArray();
-        assertEquals(nExpectedArrayValues, eva.length);
-    }
-
-    private void assertParameterAnnotations(final Method method, final int... expectedNumberOfParmeterAnnotations)
-    {
-        final String methodName= "For "+method.getName();
-        final ParameterAnnotationEntry[] parameterAnnotations= method.getParameterAnnotationEntries();
-        assertEquals(expectedNumberOfParmeterAnnotations.length, parameterAnnotations.length, methodName);
-
-        int i= 0;
-        for (final ParameterAnnotationEntry parameterAnnotation : parameterAnnotations)
-        {
-            final AnnotationEntry[] annos= parameterAnnotation.getAnnotationEntries();
-            final int expectedLength = expectedNumberOfParmeterAnnotations[i++];
-            final int j = i;
-            assertEquals(expectedLength, annos.length, () -> methodName + " parameter " + j);
-            if(expectedLength!=0)
-            {
-                assertSimpleElementValue(annos[0]);
-            }
-        }
-    }
-
-    private void assertSimpleElementValue(final AnnotationEntry anno)
-    {
-        final ElementValuePair elementValuePair = anno.getElementValuePairs()[0];
-        assertEquals("id", elementValuePair.getNameString());
-        final SimpleElementValue ev = (SimpleElementValue)elementValuePair.getValue();
-        assertEquals(42, ev.getValueInt());
+        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");
+        final ClassGen cgen = new ClassGen(jc);
+        // Check annotations are correctly preserved
+        final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
+        assertEquals(1, annotations.length, "Wrong number of annotations");
     }
 
     /**
@@ -337,325 +657,5 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase
             }
         }
         assertTrue(found, "Did not find double annotation value with value 33.4");
-    }
-
-    /**
-     * Load a class in and modify it with a new attribute - A SimpleAnnotation
-     * annotation
-     */
-    @Test
-    public void testModifyingClasses1() throws ClassNotFoundException
-    {
-        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");
-        final ClassGen cgen = new ClassGen(jc);
-        final ConstantPoolGen cp = cgen.getConstantPool();
-        cgen.addAnnotationEntry(createFruitAnnotation(cp, "Pineapple"));
-        assertEquals(2, cgen.getAnnotationEntries().length, "Wrong number of annotations");
-        dumpClass(cgen, "SimpleAnnotatedClass.class");
-        assertTrue(wipe("SimpleAnnotatedClass.class"));
-    }
-
-    /**
-     * Load a class in and modify it with a new attribute - A ComplexAnnotation
-     * annotation
-     */
-    @Test
-    public void testModifyingClasses2() throws ClassNotFoundException
-    {
-        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME+".data.SimpleAnnotatedClass");
-        final ClassGen cgen = new ClassGen(jc);
-        final ConstantPoolGen cp = cgen.getConstantPool();
-        cgen.addAnnotationEntry(createCombinedAnnotation(cp));
-        assertEquals(2, cgen.getAnnotationEntries().length, "Wrong number of annotations");
-        dumpClass(cgen, "SimpleAnnotatedClass.class");
-        final JavaClass jc2 = getClassFrom(".", "SimpleAnnotatedClass");
-        jc2.getAnnotationEntries();
-        assertTrue(wipe("SimpleAnnotatedClass.class"));
-        // System.err.println(jc2.toString());
-    }
-
-    private void dumpClass(final ClassGen cg, final String fname)
-    {
-        try
-        {
-            final File f = createTestdataFile(fname);
-            cg.getJavaClass().dump(f);
-        }
-        catch (final java.io.IOException e)
-        {
-            System.err.println(e);
-        }
-    }
-
-    private void dumpClass(final ClassGen cg, final String dir, final String fname)
-    {
-        dumpClass(cg, dir + File.separator + fname);
-    }
-
-    private void buildClassContentsWithAnnotatedMethods(final ClassGen cg,
-            final ConstantPoolGen cp, final InstructionList il)
-    {
-        // Create method 'public static void main(String[]argv)'
-        final MethodGen mg = createMethodGen("main", il, cp);
-        final InstructionFactory factory = new InstructionFactory(cg);
-        mg.addAnnotationEntry(createSimpleVisibleAnnotation(mg
-                .getConstantPool()));
-        // We now define some often used types:
-        final ObjectType i_stream = new ObjectType("java.io.InputStream");
-        final ObjectType p_stream = new ObjectType("java.io.PrintStream");
-        // Create variables in and name : We call the constructors, i.e.,
-        // execute BufferedReader(InputStreamReader(System.in)) . The reference
-        // to the BufferedReader object stays on top of the stack and is stored
-        // in the newly allocated in variable.
-        il.append(factory.createNew("java.io.BufferedReader"));
-        il.append(InstructionConst.DUP); // Use predefined constant
-        il.append(factory.createNew("java.io.InputStreamReader"));
-        il.append(InstructionConst.DUP);
-        il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
-                Const.GETSTATIC));
-        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>",
-                Type.VOID, new Type[] { i_stream }, Const.INVOKESPECIAL));
-        il.append(factory.createInvoke("java.io.BufferedReader", "<init>",
-                Type.VOID, new Type[] { new ObjectType("java.io.Reader") },
-                Const.INVOKESPECIAL));
-        LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType(
-                "java.io.BufferedReader"), null, null);
-        final int in = lg.getIndex();
-        lg.setStart(il.append(new ASTORE(in))); // "in" valid from here
-        // Create local variable name and initialize it to null
-        lg = mg.addLocalVariable("name", Type.STRING, null, null);
-        final int name = lg.getIndex();
-        il.append(InstructionConst.ACONST_NULL);
-        lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
-        // Create try-catch block: We remember the start of the block, read a
-        // line from the standard input and store it into the variable name .
-        // InstructionHandle try_start = il.append(factory.createFieldAccess(
-        // "java.lang.System", "out", p_stream, Constants.GETSTATIC));
-        // il.append(new PUSH(cp, "Please enter your name> "));
-        // il.append(factory.createInvoke("java.io.PrintStream", "print",
-        // Type.VOID, new Type[] { Type.STRING },
-        // Constants.INVOKEVIRTUAL));
-        // il.append(new ALOAD(in));
-        // il.append(factory.createInvoke("java.io.BufferedReader", "readLine",
-        // Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
-        final InstructionHandle try_start = il.append(new PUSH(cp, "Andy"));
-        il.append(new ASTORE(name));
-        // Upon normal execution we jump behind exception handler, the target
-        // address is not known yet.
-        final GOTO g = new GOTO(null);
-        final InstructionHandle try_end = il.append(g);
-        // We add the exception handler which simply returns from the method.
-        final LocalVariableGen var_ex = mg.addLocalVariable("ex", Type
-                .getType("Ljava.io.IOException;"), null, null);
-        final int var_ex_slot = var_ex.getIndex();
-        final InstructionHandle handler = il.append(new ASTORE(var_ex_slot));
-        var_ex.setStart(handler);
-        var_ex.setEnd(il.append(InstructionConst.RETURN));
-        mg.addExceptionHandler(try_start, try_end, handler, new ObjectType(
-                "java.io.IOException"));
-        // "Normal" code continues, now we can set the branch target of the GOTO
-        // .
-        final InstructionHandle ih = il.append(factory.createFieldAccess(
-                "java.lang.System", "out", p_stream, Const.GETSTATIC));
-        g.setTarget(ih);
-        // Printing "Hello": String concatenation compiles to StringBuffer
-        // operations.
-        il.append(factory.createNew(Type.STRINGBUFFER));
-        il.append(InstructionConst.DUP);
-        il.append(new PUSH(cp, "Hello, "));
-        il
-                .append(factory.createInvoke("java.lang.StringBuffer",
-                        "<init>", Type.VOID, new Type[] { Type.STRING },
-                        Const.INVOKESPECIAL));
-        il.append(new ALOAD(name));
-        il.append(factory.createInvoke("java.lang.StringBuffer", "append",
-                Type.STRINGBUFFER, new Type[] { Type.STRING },
-                Const.INVOKEVIRTUAL));
-        il.append(factory.createInvoke("java.lang.StringBuffer", "toString",
-                Type.STRING, Type.NO_ARGS, Const.INVOKEVIRTUAL));
-        il
-                .append(factory.createInvoke("java.io.PrintStream", "println",
-                        Type.VOID, new Type[] { Type.STRING },
-                        Const.INVOKEVIRTUAL));
-        il.append(InstructionConst.RETURN);
-        // Finalization: Finally, we have to set the stack size, which normally
-        // would have to be computed on the fly and add a default constructor
-        // method to the class, which is empty in this case.
-        mg.setMaxStack();
-        mg.setMaxLocals();
-        cg.addMethod(mg.getMethod());
-        il.dispose(); // Allow instruction handles to be reused
-        cg.addEmptyConstructor(Const.ACC_PUBLIC);
-    }
-
-    private void buildClassContents(final ClassGen cg, final ConstantPoolGen cp,
-            final InstructionList il)
-    {
-        // Create method 'public static void main(String[]argv)'
-        final MethodGen mg = createMethodGen("main", il, cp);
-        final InstructionFactory factory = new InstructionFactory(cg);
-        // We now define some often used types:
-        final ObjectType i_stream = new ObjectType("java.io.InputStream");
-        final ObjectType p_stream = new ObjectType("java.io.PrintStream");
-        // Create variables in and name : We call the constructors, i.e.,
-        // execute BufferedReader(InputStreamReader(System.in)) . The reference
-        // to the BufferedReader object stays on top of the stack and is stored
-        // in the newly allocated in variable.
-        il.append(factory.createNew("java.io.BufferedReader"));
-        il.append(InstructionConst.DUP); // Use predefined constant
-        il.append(factory.createNew("java.io.InputStreamReader"));
-        il.append(InstructionConst.DUP);
-        il.append(factory.createFieldAccess("java.lang.System", "in", i_stream,
-                Const.GETSTATIC));
-        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>",
-                Type.VOID, new Type[] { i_stream }, Const.INVOKESPECIAL));
-        il.append(factory.createInvoke("java.io.BufferedReader", "<init>",
-                Type.VOID, new Type[] { new ObjectType("java.io.Reader") },
-                Const.INVOKESPECIAL));
-        LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType(
-                "java.io.BufferedReader"), null, null);
-        final int in = lg.getIndex();
-        lg.setStart(il.append(new ASTORE(in))); // "in" valid from here
-        // Create local variable name and initialize it to null
-        lg = mg.addLocalVariable("name", Type.STRING, null, null);
-        final int name = lg.getIndex();
-        il.append(InstructionConst.ACONST_NULL);
-        lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
-        // Create try-catch block: We remember the start of the block, read a
-        // line from the standard input and store it into the variable name .
-        // InstructionHandle try_start = il.append(factory.createFieldAccess(
-        // "java.lang.System", "out", p_stream, Constants.GETSTATIC));
-        // il.append(new PUSH(cp, "Please enter your name> "));
-        // il.append(factory.createInvoke("java.io.PrintStream", "print",
-        // Type.VOID, new Type[] { Type.STRING },
-        // Constants.INVOKEVIRTUAL));
-        // il.append(new ALOAD(in));
-        // il.append(factory.createInvoke("java.io.BufferedReader", "readLine",
-        // Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
-        final InstructionHandle try_start = il.append(new PUSH(cp, "Andy"));
-        il.append(new ASTORE(name));
-        // Upon normal execution we jump behind exception handler, the target
-        // address is not known yet.
-        final GOTO g = new GOTO(null);
-        final InstructionHandle try_end = il.append(g);
-        // We add the exception handler which simply returns from the method.
-        final LocalVariableGen var_ex = mg.addLocalVariable("ex", Type
-                .getType("Ljava.io.IOException;"), null, null);
-        final int var_ex_slot = var_ex.getIndex();
-        final InstructionHandle handler = il.append(new ASTORE(var_ex_slot));
-        var_ex.setStart(handler);
-        var_ex.setEnd(il.append(InstructionConst.RETURN));
-        mg.addExceptionHandler(try_start, try_end, handler, new ObjectType(
-                "java.io.IOException"));
-        // "Normal" code continues, now we can set the branch target of the GOTO
-        // .
-        final InstructionHandle ih = il.append(factory.createFieldAccess(
-                "java.lang.System", "out", p_stream, Const.GETSTATIC));
-        g.setTarget(ih);
-        // Printing "Hello": String concatenation compiles to StringBuffer
-        // operations.
-        il.append(factory.createNew(Type.STRINGBUFFER));
-        il.append(InstructionConst.DUP);
-        il.append(new PUSH(cp, "Hello, "));
-        il
-                .append(factory.createInvoke("java.lang.StringBuffer",
-                        "<init>", Type.VOID, new Type[] { Type.STRING },
-                        Const.INVOKESPECIAL));
-        il.append(new ALOAD(name));
-        il.append(factory.createInvoke("java.lang.StringBuffer", "append",
-                Type.STRINGBUFFER, new Type[] { Type.STRING },
-                Const.INVOKEVIRTUAL));
-        il.append(factory.createInvoke("java.lang.StringBuffer", "toString",
-                Type.STRING, Type.NO_ARGS, Const.INVOKEVIRTUAL));
-        il
-                .append(factory.createInvoke("java.io.PrintStream", "println",
-                        Type.VOID, new Type[] { Type.STRING },
-                        Const.INVOKEVIRTUAL));
-        il.append(InstructionConst.RETURN);
-        // Finalization: Finally, we have to set the stack size, which normally
-        // would have to be computed on the fly and add a default constructor
-        // method to the class, which is empty in this case.
-        mg.setMaxStack();
-        mg.setMaxLocals();
-        cg.addMethod(mg.getMethod());
-        il.dispose(); // Allow instruction handles to be reused
-        cg.addEmptyConstructor(Const.ACC_PUBLIC);
-    }
-
-    private JavaClass getClassFrom(final String where, final String clazzname)
-            throws ClassNotFoundException
-    {
-        // System.out.println(where);
-        final SyntheticRepository repos = createRepos(where);
-        return repos.loadClass(clazzname);
-    }
-
-    // helper methods
-    private ClassGen createClassGen(final String classname)
-    {
-        return new ClassGen(classname, "java.lang.Object", "<generated>",
-                Const.ACC_PUBLIC | Const.ACC_SUPER, null);
-    }
-
-    private MethodGen createMethodGen(final String methodname, final InstructionList il,
-            final ConstantPoolGen cp)
-    {
-        return new MethodGen(Const.ACC_STATIC | Const.ACC_PUBLIC, // access
-                // flags
-                Type.VOID, // return type
-                new Type[] { new ArrayType(Type.STRING, 1) }, // argument
-                // types
-                new String[] { "argv" }, // arg names
-                methodname, "HelloWorld", // method, class
-                il, cp);
-    }
-
-    public AnnotationEntryGen createSimpleVisibleAnnotation(final ConstantPoolGen cp)
-    {
-        final SimpleElementValueGen evg = new SimpleElementValueGen(
-                ElementValueGen.PRIMITIVE_INT, cp, 4);
-        final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
-        final ObjectType t = new ObjectType("SimpleAnnotation");
-        final List<ElementValuePairGen> elements = new ArrayList<>();
-        elements.add(nvGen);
-        final AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
-        return a;
-    }
-
-    public AnnotationEntryGen createFruitAnnotation(final ConstantPoolGen cp,
-            final String aFruit)
-    {
-        final SimpleElementValueGen evg = new SimpleElementValueGen(
-                ElementValueGen.STRING, cp, aFruit);
-        final ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
-        final ObjectType t = new ObjectType("SimpleStringAnnotation");
-        final List<ElementValuePairGen> elements = new ArrayList<>();
-        elements.add(nvGen);
-        return new AnnotationEntryGen(t, elements, true, cp);
-    }
-
-    public AnnotationEntryGen createCombinedAnnotation(final ConstantPoolGen cp)
-    {
-        // Create an annotation instance
-        final AnnotationEntryGen a = createSimpleVisibleAnnotation(cp);
-        final ArrayElementValueGen array = new ArrayElementValueGen(cp);
-        array.addElement(new AnnotationElementValueGen(a, cp));
-        final ElementValuePairGen nvp = new ElementValuePairGen("value", array, cp);
-        final List<ElementValuePairGen> elements = new ArrayList<>();
-        elements.add(nvp);
-        return new AnnotationEntryGen(new ObjectType("CombinedAnnotation"),
-                elements, true, cp);
-    }
-
-    public AnnotationEntryGen createSimpleInvisibleAnnotation(final ConstantPoolGen cp)
-    {
-        final SimpleElementValueGen evg = new SimpleElementValueGen(
-                ElementValueGen.PRIMITIVE_INT, cp, 4);
-        final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
-        final ObjectType t = new ObjectType("SimpleAnnotation");
-        final List<ElementValuePairGen> elements = new ArrayList<>();
-        elements.add(nvGen);
-        final AnnotationEntryGen a = new AnnotationEntryGen(t, elements, false, cp);
-        return a;
     }
 }

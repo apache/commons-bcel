@@ -49,20 +49,6 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
     }
 
 
-    @Override
-    public Number getValue() {
-        return Long.valueOf(value);
-    }
-
-
-    /** @return Type.LONG
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.LONG;
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -78,5 +64,19 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
         v.visitTypedInstruction(this);
         v.visitConstantPushInstruction(this);
         v.visitLCONST(this);
+    }
+
+
+    /** @return Type.LONG
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.LONG;
+    }
+
+
+    @Override
+    public Number getValue() {
+        return Long.valueOf(value);
     }
 }

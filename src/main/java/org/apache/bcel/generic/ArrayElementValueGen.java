@@ -34,6 +34,21 @@ public class ArrayElementValueGen extends ElementValueGen
     // modify ...
     private final List<ElementValueGen> evalues;
 
+    /**
+     * @param value
+     * @param cpool
+     */
+    public ArrayElementValueGen(final ArrayElementValue value, final ConstantPoolGen cpool,
+            final boolean copyPoolEntries)
+    {
+        super(ARRAY, cpool);
+        evalues = new ArrayList<>();
+        final ElementValue[] in = value.getElementValuesArray();
+        for (final ElementValue element : in) {
+            evalues.add(ElementValueGen.copy(element, cpool, copyPoolEntries));
+        }
+    }
+
     public ArrayElementValueGen(final ConstantPoolGen cp)
     {
         super(ARRAY, cp);
@@ -54,6 +69,21 @@ public class ArrayElementValueGen extends ElementValueGen
         }
     }
 
+    public void addElement(final ElementValueGen gen)
+    {
+        evalues.add(gen);
+    }
+
+    @Override
+    public void dump(final DataOutputStream dos) throws IOException
+    {
+        dos.writeByte(super.getElementValueType()); // u1 type of value (ARRAY == '[')
+        dos.writeShort(evalues.size());
+        for (final ElementValueGen element : evalues) {
+            element.dump(dos);
+        }
+    }
+
     /**
      * Return immutable variant of this ArrayElementValueGen
      */
@@ -70,29 +100,14 @@ public class ArrayElementValueGen extends ElementValueGen
                 getConstantPool().getConstantPool());
     }
 
-    /**
-     * @param value
-     * @param cpool
-     */
-    public ArrayElementValueGen(final ArrayElementValue value, final ConstantPoolGen cpool,
-            final boolean copyPoolEntries)
+    public List<ElementValueGen> getElementValues()
     {
-        super(ARRAY, cpool);
-        evalues = new ArrayList<>();
-        final ElementValue[] in = value.getElementValuesArray();
-        for (final ElementValue element : in) {
-            evalues.add(ElementValueGen.copy(element, cpool, copyPoolEntries));
-        }
+        return evalues;
     }
 
-    @Override
-    public void dump(final DataOutputStream dos) throws IOException
+    public int getElementValuesSize()
     {
-        dos.writeByte(super.getElementValueType()); // u1 type of value (ARRAY == '[')
-        dos.writeShort(evalues.size());
-        for (final ElementValueGen element : evalues) {
-            element.dump(dos);
-        }
+        return evalues.size();
     }
 
     @Override
@@ -108,20 +123,5 @@ public class ArrayElementValueGen extends ElementValueGen
         }
         sb.append("]");
         return sb.toString();
-    }
-
-    public List<ElementValueGen> getElementValues()
-    {
-        return evalues;
-    }
-
-    public int getElementValuesSize()
-    {
-        return evalues.size();
-    }
-
-    public void addElement(final ElementValueGen gen)
-    {
-        evalues.add(gen);
     }
 }

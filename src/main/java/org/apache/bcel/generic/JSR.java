@@ -40,6 +40,24 @@ public class JSR extends JsrInstruction implements VariableLengthInstruction {
 
 
     /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitStackProducer(this);
+        v.visitVariableLengthInstruction(this);
+        v.visitBranchInstruction(this);
+        v.visitJsrInstruction(this);
+        v.visitJSR(this);
+    }
+
+
+    /**
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
@@ -67,23 +85,5 @@ public class JSR extends JsrInstruction implements VariableLengthInstruction {
             return super.getLength() - old_length;
         }
         return 0;
-    }
-
-
-    /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitStackProducer(this);
-        v.visitVariableLengthInstruction(this);
-        v.visitBranchInstruction(this);
-        v.visitJsrInstruction(this);
-        v.visitJSR(this);
     }
 }

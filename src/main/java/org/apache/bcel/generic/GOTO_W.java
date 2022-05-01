@@ -43,6 +43,23 @@ public class GOTO_W extends GotoInstruction {
 
 
     /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitUnconditionalBranch(this);
+        v.visitBranchInstruction(this);
+        v.visitGotoInstruction(this);
+        v.visitGOTO_W(this);
+    }
+
+
+    /**
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
@@ -61,22 +78,5 @@ public class GOTO_W extends GotoInstruction {
     protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.setIndex(bytes.readInt());
         super.setLength(5);
-    }
-
-
-    /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitUnconditionalBranch(this);
-        v.visitBranchInstruction(this);
-        v.visitGotoInstruction(this);
-        v.visitGOTO_W(this);
     }
 }

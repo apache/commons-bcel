@@ -27,11 +27,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AnonymousClassTestCase extends AbstractTestCase
 {
     @Test
-    public void testRegularClassIsNotAnonymous() throws ClassNotFoundException
+    public void testAnonymousInnerClassIsAnonymous()
+            throws ClassNotFoundException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest");
-        assertFalse(clazz.isAnonymous(), "regular outer classes are not anonymous");
-        assertFalse(clazz.isNested(), "regular outer classes are not nested");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest$1");
+        assertTrue(clazz.isAnonymous(), "anonymous inner classes are anonymous");
+        assertTrue(clazz.isNested(), "anonymous inner classes are anonymous");
     }
 
     @Test
@@ -44,20 +45,19 @@ public class AnonymousClassTestCase extends AbstractTestCase
     }
 
     @Test
+    public void testRegularClassIsNotAnonymous() throws ClassNotFoundException
+    {
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest");
+        assertFalse(clazz.isAnonymous(), "regular outer classes are not anonymous");
+        assertFalse(clazz.isNested(), "regular outer classes are not nested");
+    }
+
+    @Test
     public void testStaticInnerClassIsNotAnonymous()
             throws ClassNotFoundException
     {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest$Y");
         assertFalse(clazz.isAnonymous(), "regular static inner classes are not anonymous");
         assertTrue(clazz.isNested(), "regular static inner classes are nested");
-    }
-
-    @Test
-    public void testAnonymousInnerClassIsAnonymous()
-            throws ClassNotFoundException
-    {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest$1");
-        assertTrue(clazz.isAnonymous(), "anonymous inner classes are anonymous");
-        assertTrue(clazz.isNested(), "anonymous inner classes are anonymous");
     }
 }

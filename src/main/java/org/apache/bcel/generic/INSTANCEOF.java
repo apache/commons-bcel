@@ -40,22 +40,6 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
     }
 
 
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION);
-    }
-
-
-    @Override
-    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
-        Type t = getType(cpg);
-        if (t instanceof ArrayType) {
-            t = ((ArrayType) t).getBasicType();
-        }
-        return t instanceof ObjectType ? (ObjectType) t : null;
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -73,5 +57,21 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
         v.visitTypedInstruction(this);
         v.visitCPInstruction(this);
         v.visitINSTANCEOF(this);
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION);
+    }
+
+
+    @Override
+    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
+        Type t = getType(cpg);
+        if (t instanceof ArrayType) {
+            t = ((ArrayType) t).getBasicType();
+        }
+        return t instanceof ObjectType ? (ObjectType) t : null;
     }
 }

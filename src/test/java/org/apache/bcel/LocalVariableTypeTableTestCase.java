@@ -48,20 +48,35 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         }
     }
 
-    @Test
-    public void testWithGenericArguement() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final String targetClass = PACKAGE_BASE_NAME + ".data.SimpleClassHasMethodIncludeGenericArgument";
-        final TestClassLoader loader = new TestClassLoader(getClass().getClassLoader());
-        final Class<?> cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
+    public InstructionList createPrintln(final ConstantPoolGen cp, final Instruction instruction) {
+        final InstructionList il = new InstructionList();
 
-        java.lang.reflect.Method method = cls.getDeclaredMethod("a", String.class, List.class);
-        method.invoke(null, "a1", new LinkedList<String>());
-        method = cls.getDeclaredMethod("b", String.class, List.class);
-        method.invoke(null, "b1", new LinkedList<String>());
-        method = cls.getDeclaredMethod("c", String.class, String.class);
-        method.invoke(null, "c1", "c2");
-        method = cls.getDeclaredMethod("d", List.class, String.class);
-        method.invoke(null, new LinkedList<String>(), "d2");
+        final int out = cp.addFieldref("java.lang.System", "out", "Ljava/io/PrintStream;");
+        final int println = cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/String;)V");
+        il.append(new GETSTATIC(out));
+        il.append(instruction);
+        il.append(new INVOKEVIRTUAL(println));
+
+        return il;
+    }
+
+    public int findFirstStringLocalVariableOffset(final Method method) {
+        final Type[] argumentTypes = method.getArgumentTypes();
+        int offset = -1;
+
+        for (int i = 0, count = argumentTypes.length; i < count; i++) {
+            if (Type.STRING.getSignature().equals(argumentTypes[i].getSignature())) {
+                if (method.isStatic()) {
+                    offset = i;
+                } else {
+                    offset = i + 1;
+                }
+
+                break;
+            }
+        }
+
+        return offset;
     }
 
     private byte[] getBytesFromClass(final String className) throws ClassNotFoundException {
@@ -114,34 +129,19 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         return createPrintln(methodGen.getConstantPool(), instruction);
     }
 
-    public InstructionList createPrintln(final ConstantPoolGen cp, final Instruction instruction) {
-        final InstructionList il = new InstructionList();
+    @Test
+    public void testWithGenericArguement() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        final String targetClass = PACKAGE_BASE_NAME + ".data.SimpleClassHasMethodIncludeGenericArgument";
+        final TestClassLoader loader = new TestClassLoader(getClass().getClassLoader());
+        final Class<?> cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
 
-        final int out = cp.addFieldref("java.lang.System", "out", "Ljava/io/PrintStream;");
-        final int println = cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/String;)V");
-        il.append(new GETSTATIC(out));
-        il.append(instruction);
-        il.append(new INVOKEVIRTUAL(println));
-
-        return il;
-    }
-
-    public int findFirstStringLocalVariableOffset(final Method method) {
-        final Type[] argumentTypes = method.getArgumentTypes();
-        int offset = -1;
-
-        for (int i = 0, count = argumentTypes.length; i < count; i++) {
-            if (Type.STRING.getSignature().equals(argumentTypes[i].getSignature())) {
-                if (method.isStatic()) {
-                    offset = i;
-                } else {
-                    offset = i + 1;
-                }
-
-                break;
-            }
-        }
-
-        return offset;
+        java.lang.reflect.Method method = cls.getDeclaredMethod("a", String.class, List.class);
+        method.invoke(null, "a1", new LinkedList<String>());
+        method = cls.getDeclaredMethod("b", String.class, List.class);
+        method.invoke(null, "b1", new LinkedList<String>());
+        method = cls.getDeclaredMethod("c", String.class, String.class);
+        method.invoke(null, "c1", "c2");
+        method = cls.getDeclaredMethod("d", List.class, String.class);
+        method.invoke(null, new LinkedList<String>(), "d2");
     }
 }

@@ -42,20 +42,6 @@ public class PUTFIELD extends FieldInstruction implements PopInstruction, Except
     }
 
 
-    @Override
-    public int consumeStack( final ConstantPoolGen cpg ) {
-        return getFieldSize(cpg) + 1;
-    }
-
-
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConst.NULL_POINTER_EXCEPTION,
-            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -75,5 +61,19 @@ public class PUTFIELD extends FieldInstruction implements PopInstruction, Except
         v.visitFieldOrMethod(this);
         v.visitFieldInstruction(this);
         v.visitPUTFIELD(this);
+    }
+
+
+    @Override
+    public int consumeStack( final ConstantPoolGen cpg ) {
+        return getFieldSize(cpg) + 1;
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConst.NULL_POINTER_EXCEPTION,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 }

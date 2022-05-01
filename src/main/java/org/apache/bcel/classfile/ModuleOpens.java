@@ -70,6 +70,19 @@ public final class ModuleOpens implements Cloneable, Node {
     // TODO add more getters and setters?
 
     /**
+     * @return deep copy of this object
+     */
+    public ModuleOpens copy() {
+        try {
+            return (ModuleOpens) clone();
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
+        }
+        return null;
+    }
+
+
+    /**
      * Dump table entry to file stream in binary format.
      *
      * @param file Output file stream
@@ -108,18 +121,5 @@ public final class ModuleOpens implements Cloneable, Node {
             buf.append("      ").append(Utility.compactClassName(module_name, false)).append("\n");
         }
         return buf.substring(0, buf.length()-1); // remove the last newline
-    }
-
-
-    /**
-     * @return deep copy of this object
-     */
-    public ModuleOpens copy() {
-        try {
-            return (ModuleOpens) clone();
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return null;
     }
 }

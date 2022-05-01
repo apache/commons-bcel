@@ -29,6 +29,29 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class TransitiveHull implements VerifierFactoryObserver {
 
+    /**
+     * This method implements a demonstration program
+     * of how to use the VerifierFactoryObserver. It transitively verifies
+     * all class files encountered; this may take up a lot of time and,
+     * more notably, memory.
+     */
+    public static void main( final String[] args ) {
+        if (args.length != 1) {
+            System.out.println("Need exactly one argument: The root class to verify.");
+            System.exit(1);
+        }
+        final int dotclasspos = args[0].lastIndexOf(".class");
+        if (dotclasspos != -1) {
+            args[0] = args[0].substring(0, dotclasspos);
+        }
+        args[0] = args[0].replace('/', '.');
+        final TransitiveHull th = new TransitiveHull();
+        VerifierFactory.attach(th);
+        VerifierFactory.getVerifier(args[0]); // the observer is called back and does the actual trick.
+        VerifierFactory.detach(th);
+    }
+
+
     /** Used for indentation. */
     private int indent;
 
@@ -77,28 +100,5 @@ public class TransitiveHull implements VerifierFactoryObserver {
             }
         }
         indent -= 1;
-    }
-
-
-    /**
-     * This method implements a demonstration program
-     * of how to use the VerifierFactoryObserver. It transitively verifies
-     * all class files encountered; this may take up a lot of time and,
-     * more notably, memory.
-     */
-    public static void main( final String[] args ) {
-        if (args.length != 1) {
-            System.out.println("Need exactly one argument: The root class to verify.");
-            System.exit(1);
-        }
-        final int dotclasspos = args[0].lastIndexOf(".class");
-        if (dotclasspos != -1) {
-            args[0] = args[0].substring(0, dotclasspos);
-        }
-        args[0] = args[0].replace('/', '.');
-        final TransitiveHull th = new TransitiveHull();
-        VerifierFactory.attach(th);
-        VerifierFactory.getVerifier(args[0]); // the observer is called back and does the actual trick.
-        VerifierFactory.detach(th);
     }
 }

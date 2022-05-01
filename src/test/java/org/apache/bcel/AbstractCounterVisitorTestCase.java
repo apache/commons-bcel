@@ -25,16 +25,9 @@ import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
 {
-    protected abstract JavaClass getTestClass() throws ClassNotFoundException;
-
     private CounterVisitor visitor;
 
-    @BeforeEach
-    public void setUp() throws ClassNotFoundException
-    {
-        visitor = new CounterVisitor();
-        new DescendingVisitor(getTestClass(), getVisitor()).visit();
-    }
+    protected abstract JavaClass getTestClass() throws ClassNotFoundException;
 
     public CounterVisitor getVisitor()
     {
@@ -42,6 +35,13 @@ public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase
             visitor = new CounterVisitor();
         }
         return visitor;
+    }
+
+    @BeforeEach
+    public void setUp() throws ClassNotFoundException
+    {
+        visitor = new CounterVisitor();
+        new DescendingVisitor(getTestClass(), getVisitor()).visit();
     }
 
     public void setVisitor(final CounterVisitor visitor)

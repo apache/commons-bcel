@@ -31,14 +31,14 @@ package org.apache.bcel.verifier.exc;
 public class StructuralCodeConstraintException extends CodeConstraintException{
     private static final long serialVersionUID = 5406842000007181420L;
     /**
+     * Constructs a new StructuralCodeConstraintException with null as its error message string.
+     */
+    public StructuralCodeConstraintException() {
+    }
+    /**
      * Constructs a new StructuralCodeConstraintException with the specified error message.
      */
     public StructuralCodeConstraintException(final String message) {
         super(message);
-    }
-    /**
-     * Constructs a new StructuralCodeConstraintException with null as its error message string.
-     */
-    public StructuralCodeConstraintException() {
     }
 }

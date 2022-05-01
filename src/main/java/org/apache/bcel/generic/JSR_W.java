@@ -43,6 +43,23 @@ public class JSR_W extends JsrInstruction {
 
 
     /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitStackProducer(this);
+        v.visitBranchInstruction(this);
+        v.visitJsrInstruction(this);
+        v.visitJSR_W(this);
+    }
+
+
+    /**
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
@@ -61,22 +78,5 @@ public class JSR_W extends JsrInstruction {
     protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
         super.setIndex(bytes.readInt());
         super.setLength(5);
-    }
-
-
-    /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitStackProducer(this);
-        v.visitBranchInstruction(this);
-        v.visitJsrInstruction(this);
-        v.visitJSR_W(this);
     }
 }

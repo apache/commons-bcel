@@ -81,11 +81,30 @@ public final class ArrayType extends ReferenceType {
     }
 
 
+    /** @return true if both type objects refer to the same array type.
+     */
+    @Override
+    public boolean equals( final Object _type ) {
+        if (_type instanceof ArrayType) {
+            final ArrayType array = (ArrayType) _type;
+            return array.dimensions == dimensions && array.basicType.equals(basicType);
+        }
+        return false;
+    }
+
+
     /**
      * @return basic type of array, i.e., for int[][][] the basic type is int
      */
     public Type getBasicType() {
         return basicType;
+    }
+
+
+    /** @return number of dimensions of array
+     */
+    public int getDimensions() {
+        return dimensions;
     }
 
 
@@ -100,29 +119,10 @@ public final class ArrayType extends ReferenceType {
     }
 
 
-    /** @return number of dimensions of array
-     */
-    public int getDimensions() {
-        return dimensions;
-    }
-
-
     /** @return a hash code value for the object.
      */
     @Override
     public int hashCode() {
         return basicType.hashCode() ^ dimensions;
-    }
-
-
-    /** @return true if both type objects refer to the same array type.
-     */
-    @Override
-    public boolean equals( final Object _type ) {
-        if (_type instanceof ArrayType) {
-            final ArrayType array = (ArrayType) _type;
-            return array.dimensions == dimensions && array.basicType.equals(basicType);
-        }
-        return false;
     }
 }

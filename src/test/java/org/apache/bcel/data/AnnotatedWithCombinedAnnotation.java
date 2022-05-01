@@ -24,11 +24,11 @@ public class AnnotatedWithCombinedAnnotation
     public AnnotatedWithCombinedAnnotation(final int param1, @SimpleAnnotation(id=42) final int param2) {
     }
 
-    @CombinedAnnotation( {})
-    public void methodWithArrayOfZeroAnnotations() {
-    }
-
     @CombinedAnnotation( { @SimpleAnnotation(id=1, fruit="apples"), @SimpleAnnotation(id= 2, fruit="oranges")})
     public void methodWithArrayOfTwoAnnotations() {
+    }
+
+    @CombinedAnnotation( {})
+    public void methodWithArrayOfZeroAnnotations() {
     }
 }

@@ -42,6 +42,7 @@ import org.apache.bcel.Const;
  */
 public final class ClassParser {
 
+    private static final int BUFSIZE = 8192;
     private DataInputStream dataInputStream;
     private final boolean fileOwned;
     private final String fileName;
@@ -57,7 +58,6 @@ public final class ClassParser {
     private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
     private final boolean isZip; // Loaded from zip file
-    private static final int BUFSIZE = 8192;
 
 
     /**

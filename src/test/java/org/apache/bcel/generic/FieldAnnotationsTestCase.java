@@ -34,6 +34,32 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FieldAnnotationsTestCase extends AbstractTestCase
 {
+    // helper methods
+    public void checkAnnotatedField(final JavaClass clazz, final String fieldname,
+            final String AnnotationEntryName, final String AnnotationEntryElementName,
+            final String AnnotationEntryElementValue)
+    {
+        final Field[] fields = clazz.getFields();
+        for (final Field f : fields) {
+            final AnnotationEntry[] fieldAnnotationEntrys = f.getAnnotationEntries();
+            if (f.getName().equals(fieldname))
+            {
+                checkAnnotationEntry(fieldAnnotationEntrys[0], AnnotationEntryName,
+                        AnnotationEntryElementName, AnnotationEntryElementValue);
+            }
+        }
+    }
+
+    private void checkAnnotationEntry(final AnnotationEntry a, final String name, final String elementname,
+            final String elementvalue)
+    {
+        assertEquals(name, a.getAnnotationType(), "Wrong AnnotationEntry name");
+        assertEquals(1, a.getElementValuePairs().length, "Wrong number of AnnotationEntry elements");
+        final ElementValuePair envp = a.getElementValuePairs()[0];
+        assertEquals(envp.getNameString(), elementname, "Wrong element name");
+        assertEquals(envp.getValue().stringifyValue(), elementvalue, "Wrong element value");
+    }
+
     /**
      * Check field AnnotationEntrys are retrievable.
      */
@@ -116,31 +142,5 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
                     + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
         assertEquals(2, f.getAnnotationEntries().length, "Wrong number of AnnotationEntries");
-    }
-
-    // helper methods
-    public void checkAnnotatedField(final JavaClass clazz, final String fieldname,
-            final String AnnotationEntryName, final String AnnotationEntryElementName,
-            final String AnnotationEntryElementValue)
-    {
-        final Field[] fields = clazz.getFields();
-        for (final Field f : fields) {
-            final AnnotationEntry[] fieldAnnotationEntrys = f.getAnnotationEntries();
-            if (f.getName().equals(fieldname))
-            {
-                checkAnnotationEntry(fieldAnnotationEntrys[0], AnnotationEntryName,
-                        AnnotationEntryElementName, AnnotationEntryElementValue);
-            }
-        }
-    }
-
-    private void checkAnnotationEntry(final AnnotationEntry a, final String name, final String elementname,
-            final String elementvalue)
-    {
-        assertEquals(name, a.getAnnotationType(), "Wrong AnnotationEntry name");
-        assertEquals(1, a.getElementValuePairs().length, "Wrong number of AnnotationEntry elements");
-        final ElementValuePair envp = a.getElementValuePairs()[0];
-        assertEquals(envp.getNameString(), elementname, "Wrong element name");
-        assertEquals(envp.getValue().stringifyValue(), elementvalue, "Wrong element value");
     }
 }

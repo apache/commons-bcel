@@ -64,6 +64,13 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
  * @see #getTopLevel()
  */
 public class Subroutines{
+    //Node coloring constants
+    private enum ColourConstants{
+        WHITE,
+        GRAY,
+        BLACK
+    }
+
     /**
      * This inner class implements the Subroutine interface.
      */
@@ -86,14 +93,6 @@ public class Subroutines{
         /** The instructions that belong to this subroutine. */
         private final Set<InstructionHandle> instructions = new HashSet<>(); // Elements: InstructionHandle
 
-        /*
-         * Refer to the Subroutine interface for documentation.
-         */
-        @Override
-        public boolean contains(final InstructionHandle inst) {
-            return instructions.contains(inst);
-        }
-
         /**
          * The JSR or JSR_W instructions that define this
          * subroutine by targeting it.
@@ -106,76 +105,25 @@ public class Subroutines{
         private InstructionHandle theRET;
 
         /**
-         * Returns a String representation of this object, merely
-         * for debugging purposes.
-         * (Internal) Warning: Verbosity on a problematic subroutine may cause
-         * stack overflow errors due to recursive subSubs() calls.
-         * Don't use this, then.
+         * The default constructor.
          */
-        @Override
-        public String toString() {
-            final StringBuilder ret = new StringBuilder();
-            ret.append("Subroutine: Local variable is '").append(localVariable);
-            ret.append("', JSRs are '").append(theJSRs);
-            ret.append("', RET is '").append(theRET);
-            ret.append("', Instructions: '").append(instructions).append("'.");
-
-            ret.append(" Accessed local variable slots: '");
-            int[] alv = getAccessedLocalsIndices();
-            for (final int element : alv) {
-                ret.append(element);ret.append(" ");
-            }
-            ret.append("'.");
-
-            ret.append(" Recursively (via subsub...routines) accessed local variable slots: '");
-            alv = getRecursivelyAccessedLocalsIndices();
-            for (final int element : alv) {
-                ret.append(element);ret.append(" ");
-            }
-            ret.append("'.");
-
-            return ret.toString();
+        public SubroutineImpl() {
         }
 
         /**
-         * Sets the leaving RET instruction. Must be invoked after all instructions are added.
-         * Must not be invoked for top-level 'subroutine'.
+         * A recursive helper method for getRecursivelyAccessedLocalsIndices().
+         * @see #getRecursivelyAccessedLocalsIndices()
          */
-        void setLeavingRET() {
-            if (localVariable == UNSET) {
-                throw new AssertionViolatedException(
-                    "setLeavingRET() called for top-level 'subroutine' or forgot to set local variable first.");
-            }
-            InstructionHandle ret = null;
-            for (final InstructionHandle actual : instructions) {
-                if (actual.getInstruction() instanceof RET) {
-                    if (ret != null) {
-                        throw new StructuralCodeConstraintException(
-                            "Subroutine with more then one RET detected: '"+ret+"' and '"+actual+"'.");
-                    }
-                    ret = actual;
+        private void _getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> s, final Subroutine[] subs) {
+            for (final Subroutine sub : subs) {
+                final int[] lvs = sub.getAccessedLocalsIndices();
+                for (final int lv : lvs) {
+                    s.add(Integer.valueOf(lv));
+                }
+                if(sub.subSubs().length != 0) {
+                    _getRecursivelyAccessedLocalsIndicesHelper(s, sub.subSubs());
                 }
             }
-            if (ret == null) {
-                throw new StructuralCodeConstraintException("Subroutine without a RET detected.");
-            }
-            if (((RET) ret.getInstruction()).getIndex() != localVariable) {
-                throw new StructuralCodeConstraintException(
-                    "Subroutine uses '"+ret+"' which does not match the correct local variable '"+localVariable+"'.");
-            }
-            theRET = ret;
-        }
-
-        /*
-         * Refer to the Subroutine interface for documentation.
-         */
-        @Override
-        public InstructionHandle[] getEnteringJsrInstructions() {
-            if (this == getTopLevel()) {
-                throw new AssertionViolatedException("getLeavingRET() called on top level pseudo-subroutine.");
-            }
-            final InstructionHandle[] jsrs = new InstructionHandle[theJSRs.size()];
-            return theJSRs.toArray(jsrs);
         }
 
         /**
@@ -198,26 +146,6 @@ public class Subroutines{
         }
 
         /*
-         * Refer to the Subroutine interface for documentation.
-         */
-        @Override
-        public InstructionHandle getLeavingRET() {
-            if (this == getTopLevel()) {
-                throw new AssertionViolatedException("getLeavingRET() called on top level pseudo-subroutine.");
-            }
-            return theRET;
-        }
-
-        /*
-         * Refer to the Subroutine interface for documentation.
-         */
-        @Override
-        public InstructionHandle[] getInstructions() {
-            final InstructionHandle[] ret = new InstructionHandle[instructions.size()];
-            return instructions.toArray(ret);
-        }
-
-        /*
          * Adds an instruction to this subroutine.
          * All instructions must have been added before invoking setLeavingRET().
          * @see #setLeavingRET
@@ -229,38 +157,12 @@ public class Subroutines{
             instructions.add(ih);
         }
 
-        /* Satisfies Subroutine.getRecursivelyAccessedLocalsIndices(). */
-        @Override
-        public int[] getRecursivelyAccessedLocalsIndices() {
-            final Set<Integer> s = new HashSet<>();
-            final int[] lvs = getAccessedLocalsIndices();
-            for (final int lv : lvs) {
-                s.add(Integer.valueOf(lv));
-            }
-            _getRecursivelyAccessedLocalsIndicesHelper(s, this.subSubs());
-            final int[] ret = new int[s.size()];
-            int j=-1;
-            for (final Integer index : s) {
-                j++;
-                ret[j] = index.intValue();
-            }
-            return ret;
-        }
-
-        /**
-         * A recursive helper method for getRecursivelyAccessedLocalsIndices().
-         * @see #getRecursivelyAccessedLocalsIndices()
+        /*
+         * Refer to the Subroutine interface for documentation.
          */
-        private void _getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> s, final Subroutine[] subs) {
-            for (final Subroutine sub : subs) {
-                final int[] lvs = sub.getAccessedLocalsIndices();
-                for (final int lv : lvs) {
-                    s.add(Integer.valueOf(lv));
-                }
-                if(sub.subSubs().length != 0) {
-                    _getRecursivelyAccessedLocalsIndicesHelper(s, sub.subSubs());
-                }
-            }
+        @Override
+        public boolean contains(final InstructionHandle inst) {
+            return instructions.contains(inst);
         }
 
         /*
@@ -310,6 +212,98 @@ public class Subroutines{
         }
 
         /*
+         * Refer to the Subroutine interface for documentation.
+         */
+        @Override
+        public InstructionHandle[] getEnteringJsrInstructions() {
+            if (this == getTopLevel()) {
+                throw new AssertionViolatedException("getLeavingRET() called on top level pseudo-subroutine.");
+            }
+            final InstructionHandle[] jsrs = new InstructionHandle[theJSRs.size()];
+            return theJSRs.toArray(jsrs);
+        }
+
+        /*
+         * Refer to the Subroutine interface for documentation.
+         */
+        @Override
+        public InstructionHandle[] getInstructions() {
+            final InstructionHandle[] ret = new InstructionHandle[instructions.size()];
+            return instructions.toArray(ret);
+        }
+
+        /*
+         * Refer to the Subroutine interface for documentation.
+         */
+        @Override
+        public InstructionHandle getLeavingRET() {
+            if (this == getTopLevel()) {
+                throw new AssertionViolatedException("getLeavingRET() called on top level pseudo-subroutine.");
+            }
+            return theRET;
+        }
+
+        /* Satisfies Subroutine.getRecursivelyAccessedLocalsIndices(). */
+        @Override
+        public int[] getRecursivelyAccessedLocalsIndices() {
+            final Set<Integer> s = new HashSet<>();
+            final int[] lvs = getAccessedLocalsIndices();
+            for (final int lv : lvs) {
+                s.add(Integer.valueOf(lv));
+            }
+            _getRecursivelyAccessedLocalsIndicesHelper(s, this.subSubs());
+            final int[] ret = new int[s.size()];
+            int j=-1;
+            for (final Integer index : s) {
+                j++;
+                ret[j] = index.intValue();
+            }
+            return ret;
+        }
+
+        /**
+         * Sets the leaving RET instruction. Must be invoked after all instructions are added.
+         * Must not be invoked for top-level 'subroutine'.
+         */
+        void setLeavingRET() {
+            if (localVariable == UNSET) {
+                throw new AssertionViolatedException(
+                    "setLeavingRET() called for top-level 'subroutine' or forgot to set local variable first.");
+            }
+            InstructionHandle ret = null;
+            for (final InstructionHandle actual : instructions) {
+                if (actual.getInstruction() instanceof RET) {
+                    if (ret != null) {
+                        throw new StructuralCodeConstraintException(
+                            "Subroutine with more then one RET detected: '"+ret+"' and '"+actual+"'.");
+                    }
+                    ret = actual;
+                }
+            }
+            if (ret == null) {
+                throw new StructuralCodeConstraintException("Subroutine without a RET detected.");
+            }
+            if (((RET) ret.getInstruction()).getIndex() != localVariable) {
+                throw new StructuralCodeConstraintException(
+                    "Subroutine uses '"+ret+"' which does not match the correct local variable '"+localVariable+"'.");
+            }
+            theRET = ret;
+        }
+
+        /*
+         * Sets the local variable slot the ASTORE that is targeted
+         * by the JsrInstructions of this subroutine operates on.
+         * This subroutine's RET operates on that same local variable
+         * slot, of course.
+         */
+        void setLocalVariable(final int i) {
+            if (localVariable != UNSET) {
+                throw new AssertionViolatedException("localVariable set twice.");
+            }
+            localVariable = i;
+        }
+
+        /*
          * Satisfies Subroutine.subSubs().
          */
         @Override
@@ -327,32 +321,90 @@ public class Subroutines{
             return h.toArray(ret);
         }
 
-        /*
-         * Sets the local variable slot the ASTORE that is targeted
-         * by the JsrInstructions of this subroutine operates on.
-         * This subroutine's RET operates on that same local variable
-         * slot, of course.
-         */
-        void setLocalVariable(final int i) {
-            if (localVariable != UNSET) {
-                throw new AssertionViolatedException("localVariable set twice.");
-            }
-            localVariable = i;
-        }
-
         /**
-         * The default constructor.
+         * Returns a String representation of this object, merely
+         * for debugging purposes.
+         * (Internal) Warning: Verbosity on a problematic subroutine may cause
+         * stack overflow errors due to recursive subSubs() calls.
+         * Don't use this, then.
          */
-        public SubroutineImpl() {
+        @Override
+        public String toString() {
+            final StringBuilder ret = new StringBuilder();
+            ret.append("Subroutine: Local variable is '").append(localVariable);
+            ret.append("', JSRs are '").append(theJSRs);
+            ret.append("', RET is '").append(theRET);
+            ret.append("', Instructions: '").append(instructions).append("'.");
+
+            ret.append(" Accessed local variable slots: '");
+            int[] alv = getAccessedLocalsIndices();
+            for (final int element : alv) {
+                ret.append(element);ret.append(" ");
+            }
+            ret.append("'.");
+
+            ret.append(" Recursively (via subsub...routines) accessed local variable slots: '");
+            alv = getRecursivelyAccessedLocalsIndices();
+            for (final int element : alv) {
+                ret.append(element);ret.append(" ");
+            }
+            ret.append("'.");
+
+            return ret.toString();
         }
 
     }// end Inner Class SubrouteImpl
 
-    //Node coloring constants
-    private enum ColourConstants{
-        WHITE,
-        GRAY,
-        BLACK
+    /**
+     * A utility method that calculates the successors of a given InstructionHandle
+     * <B>in the same subroutine</B>. That means, a RET does not have any successors
+     * as defined here. A JsrInstruction has its physical successor as its successor
+     * (opposed to its target) as defined here.
+     */
+    private static InstructionHandle[] getSuccessors(final InstructionHandle instruction) {
+        final InstructionHandle[] single = new InstructionHandle[1];
+
+        final Instruction inst = instruction.getInstruction();
+
+
+
+        // Terminates method normally.
+        // Terminates method abnormally, because JustIce mandates
+        // subroutines not to be protected by exception handlers.
+        if (inst instanceof RET || inst instanceof ReturnInstruction || inst instanceof ATHROW) {
+            return InstructionHandle.EMPTY_ARRAY;
+        }
+
+        // See method comment.
+        if (inst instanceof JsrInstruction) {
+            single[0] = instruction.getNext();
+            return single;
+        }
+
+        if (inst instanceof GotoInstruction) {
+            single[0] = ((GotoInstruction) inst).getTarget();
+            return single;
+        }
+
+        if (inst instanceof BranchInstruction) {
+            if (inst instanceof Select) {
+                // BCEL's getTargets() returns only the non-default targets,
+                // thanks to Eli Tilevich for reporting.
+                final InstructionHandle[] matchTargets = ((Select) inst).getTargets();
+                final InstructionHandle[] ret = new InstructionHandle[matchTargets.length+1];
+                ret[0] = ((Select) inst).getTarget();
+                System.arraycopy(matchTargets, 0, ret, 1, matchTargets.length);
+                return ret;
+            }
+            final InstructionHandle[] pair = new InstructionHandle[2];
+            pair[0] = instruction.getNext();
+            pair[1] = ((BranchInstruction) inst).getTarget();
+            return pair;
+        }
+
+        // default case: Fall through.
+        single[0] = instruction.getNext();
+        return single;
     }
 
     /**
@@ -522,6 +574,43 @@ public class Subroutines{
     }
 
     /**
+     * Returns the Subroutine object associated with the given
+     * leader (that is, the first instruction of the subroutine).
+     * You must not use this to get the top-level instructions
+     * modeled as a Subroutine object.
+     *
+     * @see #getTopLevel()
+     */
+    public Subroutine getSubroutine(final InstructionHandle leader) {
+        final Subroutine ret = subroutines.get(leader);
+
+        if (ret == null) {
+            throw new AssertionViolatedException(
+                "Subroutine requested for an InstructionHandle that is not a leader of a subroutine.");
+        }
+
+        if (ret == TOPLEVEL) {
+            throw new AssertionViolatedException("TOPLEVEL special subroutine requested; use getTopLevel().");
+        }
+
+        return ret;
+    }
+
+    /**
+     * For easy handling, the piece of code that is <B>not</B> a
+     * subroutine, the top-level, is also modeled as a Subroutine
+     * object.
+     * It is a special Subroutine object where <B>you must not invoke
+     * getEnteringJsrInstructions() or getLeavingRET()</B>.
+     *
+     * @see Subroutine#getEnteringJsrInstructions()
+     * @see Subroutine#getLeavingRET()
+     */
+    public Subroutine getTopLevel() {
+        return TOPLEVEL;
+    }
+
+    /**
      * This (recursive) utility method makes sure that
      * no subroutine is calling a subroutine
      * that uses the same local variable for the RET as themselves
@@ -552,30 +641,6 @@ public class Subroutines{
             set.remove(Integer.valueOf(index));
         }
     }
-
-    /**
-     * Returns the Subroutine object associated with the given
-     * leader (that is, the first instruction of the subroutine).
-     * You must not use this to get the top-level instructions
-     * modeled as a Subroutine object.
-     *
-     * @see #getTopLevel()
-     */
-    public Subroutine getSubroutine(final InstructionHandle leader) {
-        final Subroutine ret = subroutines.get(leader);
-
-        if (ret == null) {
-            throw new AssertionViolatedException(
-                "Subroutine requested for an InstructionHandle that is not a leader of a subroutine.");
-        }
-
-        if (ret == TOPLEVEL) {
-            throw new AssertionViolatedException("TOPLEVEL special subroutine requested; use getTopLevel().");
-        }
-
-        return ret;
-    }
-
     /**
      * Returns the subroutine object associated with the
      * given instruction. This is a costly operation, you
@@ -596,71 +661,6 @@ public class Subroutines{
         System.err.println("DEBUG: Please verify '"+any.toString(true)+"' lies in dead code.");
         return null;
         //throw new AssertionViolatedException("No subroutine for InstructionHandle found (DEAD CODE?).");
-    }
-
-    /**
-     * For easy handling, the piece of code that is <B>not</B> a
-     * subroutine, the top-level, is also modeled as a Subroutine
-     * object.
-     * It is a special Subroutine object where <B>you must not invoke
-     * getEnteringJsrInstructions() or getLeavingRET()</B>.
-     *
-     * @see Subroutine#getEnteringJsrInstructions()
-     * @see Subroutine#getLeavingRET()
-     */
-    public Subroutine getTopLevel() {
-        return TOPLEVEL;
-    }
-    /**
-     * A utility method that calculates the successors of a given InstructionHandle
-     * <B>in the same subroutine</B>. That means, a RET does not have any successors
-     * as defined here. A JsrInstruction has its physical successor as its successor
-     * (opposed to its target) as defined here.
-     */
-    private static InstructionHandle[] getSuccessors(final InstructionHandle instruction) {
-        final InstructionHandle[] single = new InstructionHandle[1];
-
-        final Instruction inst = instruction.getInstruction();
-
-
-
-        // Terminates method normally.
-        // Terminates method abnormally, because JustIce mandates
-        // subroutines not to be protected by exception handlers.
-        if (inst instanceof RET || inst instanceof ReturnInstruction || inst instanceof ATHROW) {
-            return InstructionHandle.EMPTY_ARRAY;
-        }
-
-        // See method comment.
-        if (inst instanceof JsrInstruction) {
-            single[0] = instruction.getNext();
-            return single;
-        }
-
-        if (inst instanceof GotoInstruction) {
-            single[0] = ((GotoInstruction) inst).getTarget();
-            return single;
-        }
-
-        if (inst instanceof BranchInstruction) {
-            if (inst instanceof Select) {
-                // BCEL's getTargets() returns only the non-default targets,
-                // thanks to Eli Tilevich for reporting.
-                final InstructionHandle[] matchTargets = ((Select) inst).getTargets();
-                final InstructionHandle[] ret = new InstructionHandle[matchTargets.length+1];
-                ret[0] = ((Select) inst).getTarget();
-                System.arraycopy(matchTargets, 0, ret, 1, matchTargets.length);
-                return ret;
-            }
-            final InstructionHandle[] pair = new InstructionHandle[2];
-            pair[0] = instruction.getNext();
-            pair[1] = ((BranchInstruction) inst).getTarget();
-            return pair;
-        }
-
-        // default case: Fall through.
-        single[0] = instruction.getNext();
-        return single;
     }
 
     /**

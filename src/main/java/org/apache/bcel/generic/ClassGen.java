@@ -43,23 +43,6 @@ import org.apache.bcel.util.BCELComparator;
  */
 public class ClassGen extends AccessFlags implements Cloneable {
 
-    /* Corresponds to the fields found in a JavaClass object.
-     */
-    private String className;
-    private String superClassName;
-    private final String fileName;
-    private int classNameIndex = -1;
-    private int superclass_name_index = -1;
-    private int major = Const.MAJOR_1_1;
-    private int minor = Const.MINOR_1_1;
-    private ConstantPoolGen cp; // Template for building up constant pool
-    // ArrayLists instead of arrays to gather fields, methods, etc.
-    private final List<Field> fieldList = new ArrayList<>();
-    private final List<Method> methodList = new ArrayList<>();
-    private final List<Attribute> attributeList = new ArrayList<>();
-    private final List<String> interfaceList = new ArrayList<>();
-    private final List<AnnotationEntryGen> annotationList = new ArrayList<>();
-
     private static BCELComparator bcelComparator = new BCELComparator() {
 
         @Override
@@ -76,53 +59,42 @@ public class ClassGen extends AccessFlags implements Cloneable {
             return THIS.getClassName().hashCode();
         }
     };
-
-
-    /** Convenience constructor to set up some important values initially.
-     *
-     * @param className fully qualified class name
-     * @param superClassName fully qualified superclass name
-     * @param fileName source file name
-     * @param accessFlags access qualifiers
-     * @param interfaces implemented interfaces
-     * @param cp constant pool to use
+    /**
+     * @return Comparison strategy object
      */
-    public ClassGen(final String className, final String superClassName, final String fileName, final int accessFlags,
-            final String[] interfaces, final ConstantPoolGen cp) {
-        super(accessFlags);
-        this.className = className;
-        this.superClassName = superClassName;
-        this.fileName = fileName;
-        this.cp = cp;
-        // Put everything needed by default into the constant pool and the vectors
-        if (fileName != null) {
-            addAttribute(new SourceFile(cp.addUtf8("SourceFile"), 2, cp.addUtf8(fileName), cp
-                    .getConstantPool()));
-        }
-        classNameIndex = cp.addClass(className);
-        superclass_name_index = cp.addClass(superClassName);
-        if (interfaces != null) {
-            for (final String interface1 : interfaces) {
-                addInterface(interface1);
-            }
-        }
+    public static BCELComparator getComparator() {
+        return bcelComparator;
     }
-
-
-    /** Convenience constructor to set up some important values initially.
-     *
-     * @param className fully qualified class name
-     * @param superClassName fully qualified superclass name
-     * @param fileName source file name
-     * @param accessFlags access qualifiers
-     * @param interfaces implemented interfaces
+    /**
+     * @param comparator Comparison strategy object
      */
-    public ClassGen(final String className, final String superClassName, final String fileName, final int accessFlags,
-            final String[] interfaces) {
-        this(className, superClassName, fileName, accessFlags, interfaces,
-                new ConstantPoolGen());
+    public static void setComparator( final BCELComparator comparator ) {
+        bcelComparator = comparator;
     }
+    /* Corresponds to the fields found in a JavaClass object.
+     */
+    private String className;
+    private String superClassName;
+    private final String fileName;
+    private int classNameIndex = -1;
+    private int superclass_name_index = -1;
+    private int major = Const.MAJOR_1_1;
+    private int minor = Const.MINOR_1_1;
+    private ConstantPoolGen cp; // Template for building up constant pool
+    // ArrayLists instead of arrays to gather fields, methods, etc.
+    private final List<Field> fieldList = new ArrayList<>();
+    private final List<Method> methodList = new ArrayList<>();
 
+    private final List<Attribute> attributeList = new ArrayList<>();
+
+
+    private final List<String> interfaceList = new ArrayList<>();
+
+
+    private final List<AnnotationEntryGen> annotationList = new ArrayList<>();
+
+
+    private List<ClassObserver> observers;
 
     /**
      * Initialize with existing class.
@@ -163,107 +135,55 @@ public class ClassGen extends AccessFlags implements Cloneable {
         }
     }
 
-    /**
-     * Look for attributes representing annotations and unpack them.
+
+    /** Convenience constructor to set up some important values initially.
+     *
+     * @param className fully qualified class name
+     * @param superClassName fully qualified superclass name
+     * @param fileName source file name
+     * @param accessFlags access qualifiers
+     * @param interfaces implemented interfaces
      */
-    private AnnotationEntryGen[] unpackAnnotations(final Attribute[] attrs)
-    {
-        final List<AnnotationEntryGen> annotationGenObjs = new ArrayList<>();
-        for (final Attribute attr : attrs) {
-            if (attr instanceof RuntimeVisibleAnnotations)
-            {
-                final RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
-                final AnnotationEntry[] annos = rva.getAnnotationEntries();
-                for (final AnnotationEntry a : annos) {
-                    annotationGenObjs.add(new AnnotationEntryGen(a,
-                            getConstantPool(), false));
-                }
+    public ClassGen(final String className, final String superClassName, final String fileName, final int accessFlags,
+            final String[] interfaces) {
+        this(className, superClassName, fileName, accessFlags, interfaces,
+                new ConstantPoolGen());
+    }
+
+
+    /** Convenience constructor to set up some important values initially.
+     *
+     * @param className fully qualified class name
+     * @param superClassName fully qualified superclass name
+     * @param fileName source file name
+     * @param accessFlags access qualifiers
+     * @param interfaces implemented interfaces
+     * @param cp constant pool to use
+     */
+    public ClassGen(final String className, final String superClassName, final String fileName, final int accessFlags,
+            final String[] interfaces, final ConstantPoolGen cp) {
+        super(accessFlags);
+        this.className = className;
+        this.superClassName = superClassName;
+        this.fileName = fileName;
+        this.cp = cp;
+        // Put everything needed by default into the constant pool and the vectors
+        if (fileName != null) {
+            addAttribute(new SourceFile(cp.addUtf8("SourceFile"), 2, cp.addUtf8(fileName), cp
+                    .getConstantPool()));
+        }
+        classNameIndex = cp.addClass(className);
+        superclass_name_index = cp.addClass(superClassName);
+        if (interfaces != null) {
+            for (final String interface1 : interfaces) {
+                addInterface(interface1);
             }
-            else
-                if (attr instanceof RuntimeInvisibleAnnotations)
-                {
-                    final RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
-                    final AnnotationEntry[] annos = ria.getAnnotationEntries();
-                    for (final AnnotationEntry a : annos) {
-                        annotationGenObjs.add(new AnnotationEntryGen(a,
-                                getConstantPool(), false));
-                    }
-                }
         }
-        return annotationGenObjs.toArray(AnnotationEntryGen.EMPTY_ARRAY);
     }
 
 
-    /**
-     * @return the (finally) built up Java class object.
-     */
-    public JavaClass getJavaClass() {
-        final int[] interfaces = getInterfaces();
-        final Field[] fields = getFields();
-        final Method[] methods = getMethods();
-        Attribute[] attributes = null;
-        if (annotationList.isEmpty()) {
-            attributes = getAttributes();
-        } else {
-            // TODO: Sometime later, trash any attributes called 'RuntimeVisibleAnnotations' or 'RuntimeInvisibleAnnotations'
-            final Attribute[] annAttributes  = AnnotationEntryGen.getAnnotationAttributes(cp, getAnnotationEntries());
-            attributes = new Attribute[attributeList.size()+annAttributes.length];
-            attributeList.toArray(attributes);
-            System.arraycopy(annAttributes,0,attributes,attributeList.size(),annAttributes.length);
-        }
-        // Must be last since the above calls may still add something to it
-        final ConstantPool _cp = this.cp.getFinalConstantPool();
-        return new JavaClass(classNameIndex, superclass_name_index, fileName, major, minor,
-                super.getAccessFlags(), _cp, interfaces, fields, methods, attributes);
-    }
-
-
-    /**
-     * Add an interface to this class, i.e., this class has to implement it.
-     * @param name interface to implement (fully qualified class name)
-     */
-    public void addInterface( final String name ) {
-        interfaceList.add(name);
-    }
-
-
-    /**
-     * Remove an interface from this class.
-     * @param name interface to remove (fully qualified name)
-     */
-    public void removeInterface( final String name ) {
-        interfaceList.remove(name);
-    }
-
-
-    /**
-     * @return major version number of class file
-     */
-    public int getMajor() {
-        return major;
-    }
-
-
-    /** Set major version number of class file, default value is 45 (JDK 1.1)
-     * @param major major version number
-     */
-    public void setMajor( final int major ) { // TODO could be package-protected - only called by test code
-        this.major = major;
-    }
-
-
-    /** Set minor version number of class file, default value is 3 (JDK 1.1)
-     * @param minor minor version number
-     */
-    public void setMinor( final int minor ) {  // TODO could be package-protected - only called by test code
-        this.minor = minor;
-    }
-
-    /**
-     * @return minor version number of class file
-     */
-    public int getMinor() {
-        return minor;
+    public void addAnnotationEntry(final AnnotationEntryGen a) {
+        annotationList.add(a);
     }
 
 
@@ -273,19 +193,6 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     public void addAttribute( final Attribute a ) {
         attributeList.add(a);
-    }
-
-    public void addAnnotationEntry(final AnnotationEntryGen a) {
-        annotationList.add(a);
-    }
-
-
-    /**
-     * Add a method to this class.
-     * @param m method to add
-     */
-    public void addMethod( final Method m ) {
-        methodList.add(m);
     }
 
 
@@ -313,6 +220,42 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     public void addField( final Field f ) {
         fieldList.add(f);
+    }
+
+    /**
+     * Add an interface to this class, i.e., this class has to implement it.
+     * @param name interface to implement (fully qualified class name)
+     */
+    public void addInterface( final String name ) {
+        interfaceList.add(name);
+    }
+
+
+    /**
+     * Add a method to this class.
+     * @param m method to add
+     */
+    public void addMethod( final Method m ) {
+        methodList.add(m);
+    }
+
+    /** Add observer for this object.
+     */
+    public void addObserver( final ClassObserver o ) {
+        if (observers == null) {
+            observers = new ArrayList<>();
+        }
+        observers.add(o);
+    }
+
+
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (final CloneNotSupportedException e) {
+            throw new Error("Clone Not Supported"); // never happens
+        }
     }
 
 
@@ -346,61 +289,26 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
 
     /**
-     * Remove an attribute from this class.
-     * @param a attribute to remove
+     * Return value as defined by given BCELComparator strategy.
+     * By default two ClassGen objects are said to be equal when
+     * their class names are equal.
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
      */
-    public void removeAttribute( final Attribute a ) {
-        attributeList.remove(a);
+    @Override
+    public boolean equals( final Object obj ) {
+        return bcelComparator.equals(this, obj);
     }
 
 
-    /**
-     * Remove a method from this class.
-     * @param m method to remove
-     */
-    public void removeMethod( final Method m ) {
-        methodList.remove(m);
+    //  J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?
+    public AnnotationEntryGen[] getAnnotationEntries() {
+        return annotationList.toArray(AnnotationEntryGen.EMPTY_ARRAY);
     }
 
 
-    /** Replace given method with new one. If the old one does not exist
-     * add the new_ method to the class anyway.
-     */
-    public void replaceMethod( final Method old, final Method new_ ) {
-        if (new_ == null) {
-            throw new ClassGenException("Replacement method must not be null");
-        }
-        final int i = methodList.indexOf(old);
-        if (i < 0) {
-            methodList.add(new_);
-        } else {
-            methodList.set(i, new_);
-        }
-    }
-
-
-    /** Replace given field with new one. If the old one does not exist
-     * add the new_ field to the class anyway.
-     */
-    public void replaceField( final Field old, final Field new_ ) {
-        if (new_ == null) {
-            throw new ClassGenException("Replacement method must not be null");
-        }
-        final int i = fieldList.indexOf(old);
-        if (i < 0) {
-            fieldList.add(new_);
-        } else {
-            fieldList.set(i, new_);
-        }
-    }
-
-
-    /**
-     * Remove a field to this class.
-     * @param f field to remove
-     */
-    public void removeField( final Field f ) {
-        fieldList.remove(f);
+    public Attribute[] getAttributes() {
+        return attributeList.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
     }
 
 
@@ -409,48 +317,23 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public String getSuperclassName() {
-        return superClassName;
+    public int getClassNameIndex() {
+        return classNameIndex;
+    }
+
+
+    public ConstantPoolGen getConstantPool() {
+        return cp;
+    }
+
+
+    public Field[] getFields() {
+        return fieldList.toArray(Field.EMPTY_ARRAY);
     }
 
 
     public String getFileName() {
         return fileName;
-    }
-
-
-    public void setClassName( final String name ) {
-        className = name.replace('/', '.');
-        classNameIndex = cp.addClass(name);
-    }
-
-
-    public void setSuperclassName( final String name ) {
-        superClassName = name.replace('/', '.');
-        superclass_name_index = cp.addClass(name);
-    }
-
-
-    public Method[] getMethods() {
-        return methodList.toArray(Method.EMPTY_ARRAY);
-    }
-
-
-    public void setMethods( final Method[] methods ) {
-        methodList.clear();
-        for (final Method method : methods) {
-            addMethod(method);
-        }
-    }
-
-
-    public void setMethodAt( final Method method, final int pos ) {
-        methodList.set(pos, method);
-    }
-
-
-    public Method getMethodAt( final int pos ) {
-        return methodList.get(pos);
     }
 
 
@@ -472,28 +355,157 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public Field[] getFields() {
-        return fieldList.toArray(Field.EMPTY_ARRAY);
+    /**
+     * @return the (finally) built up Java class object.
+     */
+    public JavaClass getJavaClass() {
+        final int[] interfaces = getInterfaces();
+        final Field[] fields = getFields();
+        final Method[] methods = getMethods();
+        Attribute[] attributes = null;
+        if (annotationList.isEmpty()) {
+            attributes = getAttributes();
+        } else {
+            // TODO: Sometime later, trash any attributes called 'RuntimeVisibleAnnotations' or 'RuntimeInvisibleAnnotations'
+            final Attribute[] annAttributes  = AnnotationEntryGen.getAnnotationAttributes(cp, getAnnotationEntries());
+            attributes = new Attribute[attributeList.size()+annAttributes.length];
+            attributeList.toArray(attributes);
+            System.arraycopy(annAttributes,0,attributes,attributeList.size(),annAttributes.length);
+        }
+        // Must be last since the above calls may still add something to it
+        final ConstantPool _cp = this.cp.getFinalConstantPool();
+        return new JavaClass(classNameIndex, superclass_name_index, fileName, major, minor,
+                super.getAccessFlags(), _cp, interfaces, fields, methods, attributes);
     }
 
 
-    public Attribute[] getAttributes() {
-        return attributeList.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
-    }
-
-    //  J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?
-    public AnnotationEntryGen[] getAnnotationEntries() {
-        return annotationList.toArray(AnnotationEntryGen.EMPTY_ARRAY);
-    }
-
-
-    public ConstantPoolGen getConstantPool() {
-        return cp;
+    /**
+     * @return major version number of class file
+     */
+    public int getMajor() {
+        return major;
     }
 
 
-    public void setConstantPool( final ConstantPoolGen constant_pool ) {
-        cp = constant_pool;
+    public Method getMethodAt( final int pos ) {
+        return methodList.get(pos);
+    }
+
+
+    public Method[] getMethods() {
+        return methodList.toArray(Method.EMPTY_ARRAY);
+    }
+
+
+    /**
+     * @return minor version number of class file
+     */
+    public int getMinor() {
+        return minor;
+    }
+
+
+    public String getSuperclassName() {
+        return superClassName;
+    }
+
+
+    public int getSuperclassNameIndex() {
+        return superclass_name_index;
+    }
+
+
+    /**
+     * Return value as defined by given BCELComparator strategy.
+     * By default return the hashcode of the class name.
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return bcelComparator.hashCode(this);
+    }
+
+
+    /**
+     * Remove an attribute from this class.
+     * @param a attribute to remove
+     */
+    public void removeAttribute( final Attribute a ) {
+        attributeList.remove(a);
+    }
+
+
+    /**
+     * Remove a field to this class.
+     * @param f field to remove
+     */
+    public void removeField( final Field f ) {
+        fieldList.remove(f);
+    }
+
+    /**
+     * Remove an interface from this class.
+     * @param name interface to remove (fully qualified name)
+     */
+    public void removeInterface( final String name ) {
+        interfaceList.remove(name);
+    }
+
+
+    /**
+     * Remove a method from this class.
+     * @param m method to remove
+     */
+    public void removeMethod( final Method m ) {
+        methodList.remove(m);
+    }
+
+
+    /** Remove observer for this object.
+     */
+    public void removeObserver( final ClassObserver o ) {
+        if (observers != null) {
+            observers.remove(o);
+        }
+    }
+
+
+    /** Replace given field with new one. If the old one does not exist
+     * add the new_ field to the class anyway.
+     */
+    public void replaceField( final Field old, final Field new_ ) {
+        if (new_ == null) {
+            throw new ClassGenException("Replacement method must not be null");
+        }
+        final int i = fieldList.indexOf(old);
+        if (i < 0) {
+            fieldList.add(new_);
+        } else {
+            fieldList.set(i, new_);
+        }
+    }
+
+
+    /** Replace given method with new one. If the old one does not exist
+     * add the new_ method to the class anyway.
+     */
+    public void replaceMethod( final Method old, final Method new_ ) {
+        if (new_ == null) {
+            throw new ClassGenException("Replacement method must not be null");
+        }
+        final int i = methodList.indexOf(old);
+        if (i < 0) {
+            methodList.add(new_);
+        } else {
+            methodList.set(i, new_);
+        }
+    }
+
+
+    public void setClassName( final String name ) {
+        className = name.replace('/', '.');
+        classNameIndex = cp.addClass(name);
     }
 
 
@@ -501,6 +513,45 @@ public class ClassGen extends AccessFlags implements Cloneable {
         this.classNameIndex = class_name_index;
         className = cp.getConstantPool().getConstantString(class_name_index,
                 Const.CONSTANT_Class).replace('/', '.');
+    }
+
+    public void setConstantPool( final ConstantPoolGen constant_pool ) {
+        cp = constant_pool;
+    }
+
+
+    /** Set major version number of class file, default value is 45 (JDK 1.1)
+     * @param major major version number
+     */
+    public void setMajor( final int major ) { // TODO could be package-protected - only called by test code
+        this.major = major;
+    }
+
+
+    public void setMethodAt( final Method method, final int pos ) {
+        methodList.set(pos, method);
+    }
+
+
+    public void setMethods( final Method[] methods ) {
+        methodList.clear();
+        for (final Method method : methods) {
+            addMethod(method);
+        }
+    }
+
+
+    /** Set minor version number of class file, default value is 3 (JDK 1.1)
+     * @param minor minor version number
+     */
+    public void setMinor( final int minor ) {  // TODO could be package-protected - only called by test code
+        this.minor = minor;
+    }
+
+
+    public void setSuperclassName( final String name ) {
+        superClassName = name.replace('/', '.');
+        superclass_name_index = cp.addClass(name);
     }
 
 
@@ -511,34 +562,34 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
 
-    public int getSuperclassNameIndex() {
-        return superclass_name_index;
-    }
-
-
-    public int getClassNameIndex() {
-        return classNameIndex;
-    }
-
-    private List<ClassObserver> observers;
-
-
-    /** Add observer for this object.
+    /**
+     * Look for attributes representing annotations and unpack them.
      */
-    public void addObserver( final ClassObserver o ) {
-        if (observers == null) {
-            observers = new ArrayList<>();
+    private AnnotationEntryGen[] unpackAnnotations(final Attribute[] attrs)
+    {
+        final List<AnnotationEntryGen> annotationGenObjs = new ArrayList<>();
+        for (final Attribute attr : attrs) {
+            if (attr instanceof RuntimeVisibleAnnotations)
+            {
+                final RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
+                final AnnotationEntry[] annos = rva.getAnnotationEntries();
+                for (final AnnotationEntry a : annos) {
+                    annotationGenObjs.add(new AnnotationEntryGen(a,
+                            getConstantPool(), false));
+                }
+            }
+            else
+                if (attr instanceof RuntimeInvisibleAnnotations)
+                {
+                    final RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
+                    final AnnotationEntry[] annos = ria.getAnnotationEntries();
+                    for (final AnnotationEntry a : annos) {
+                        annotationGenObjs.add(new AnnotationEntryGen(a,
+                                getConstantPool(), false));
+                    }
+                }
         }
-        observers.add(o);
-    }
-
-
-    /** Remove observer for this object.
-     */
-    public void removeObserver( final ClassObserver o ) {
-        if (observers != null) {
-            observers.remove(o);
-        }
+        return annotationGenObjs.toArray(AnnotationEntryGen.EMPTY_ARRAY);
     }
 
 
@@ -552,56 +603,5 @@ public class ClassGen extends AccessFlags implements Cloneable {
                 observer.notify(this);
             }
         }
-    }
-
-
-    @Override
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
-        }
-    }
-
-
-    /**
-     * @return Comparison strategy object
-     */
-    public static BCELComparator getComparator() {
-        return bcelComparator;
-    }
-
-
-    /**
-     * @param comparator Comparison strategy object
-     */
-    public static void setComparator( final BCELComparator comparator ) {
-        bcelComparator = comparator;
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default two ClassGen objects are said to be equal when
-     * their class names are equal.
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals( final Object obj ) {
-        return bcelComparator.equals(this, obj);
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default return the hashcode of the class name.
-     *
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return bcelComparator.hashCode(this);
     }
 }

@@ -90,6 +90,10 @@ public class ModularRuntimeImage implements Closeable {
         }
     }
 
+    public FileSystem getFileSystem() {
+        return fileSystem;
+    }
+
     /**
      * Lists all entries in the given directory.
      *
@@ -143,10 +147,6 @@ public class ModularRuntimeImage implements Closeable {
      */
     public List<Path> packages() throws IOException {
         return list(PACKAGES_PATH);
-    }
-
-    public FileSystem getFileSystem() {
-        return fileSystem;
     }
 
 }

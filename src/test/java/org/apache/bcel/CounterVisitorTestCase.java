@@ -32,12 +32,6 @@ public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase
     }
 
     @Test
-    public void testAnnotationsCount()
-    {
-        assertEquals(2, getVisitor().annotationCount, "annotationCount");
-    }
-
-    @Test
     public void testAnnotationDefaultCount()
     {
         assertEquals(0, getVisitor().annotationDefaultCount, "annotationDefaultCount");
@@ -47,6 +41,12 @@ public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase
     public void testAnnotationEntryCount()
     {
         assertEquals(2, getVisitor().annotationEntryCount, "annotationEntryCount");
+    }
+
+    @Test
+    public void testAnnotationsCount()
+    {
+        assertEquals(2, getVisitor().annotationCount, "annotationCount");
     }
 
     @Test

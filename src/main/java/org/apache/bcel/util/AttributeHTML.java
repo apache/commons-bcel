@@ -62,15 +62,15 @@ final class AttributeHTML {
     }
 
 
-    private String codeLink( final int link, final int method_number ) {
-        return "<A HREF=\"" + class_name + "_code.html#code" + method_number + "@" + link
-                + "\" TARGET=Code>" + link + "</A>";
-    }
-
-
     void close() {
         file.println("</TABLE></BODY></HTML>");
         file.close();
+    }
+
+
+    private String codeLink( final int link, final int method_number ) {
+        return "<A HREF=\"" + class_name + "_code.html#code" + method_number + "@" + link
+                + "\" TARGET=Code>" + link + "</A>";
     }
 
 

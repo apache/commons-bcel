@@ -35,15 +35,6 @@ public final class ConstantInteger extends Constant implements ConstantObject {
 
 
     /**
-     * @param bytes Data
-     */
-    public ConstantInteger(final int bytes) {
-        super(Const.CONSTANT_Integer);
-        this.bytes = bytes;
-    }
-
-
-    /**
      * Initialize from another object.
      */
     public ConstantInteger(final ConstantInteger c) {
@@ -59,6 +50,15 @@ public final class ConstantInteger extends Constant implements ConstantObject {
      */
     ConstantInteger(final DataInput file) throws IOException {
         this(file.readInt());
+    }
+
+
+    /**
+     * @param bytes Data
+     */
+    public ConstantInteger(final int bytes) {
+        super(Const.CONSTANT_Integer);
+        this.bytes = bytes;
     }
 
 
@@ -96,6 +96,14 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     }
 
 
+    /** @return Integer object
+     */
+    @Override
+    public Object getConstantValue( final ConstantPool cp ) {
+        return Integer.valueOf(bytes);
+    }
+
+
     /**
      * @param bytes the raw bytes that represent this integer
      */
@@ -110,13 +118,5 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     @Override
     public String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
-    }
-
-
-    /** @return Integer object
-     */
-    @Override
-    public Object getConstantValue( final ConstantPool cp ) {
-        return Integer.valueOf(bytes);
     }
 }

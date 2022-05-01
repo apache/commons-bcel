@@ -36,16 +36,6 @@ public final class PMGClass extends Attribute {
 
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use copy() for a physical copy.
-     */
-    public PMGClass(final PMGClass pgmClass) {
-        this(pgmClass.getNameIndex(), pgmClass.getLength(), pgmClass.getPMGIndex(), pgmClass.getPMGClassIndex(),
-            pgmClass.getConstantPool());
-    }
-
-
-    /**
      * Construct object from input stream.
      * @param name_index Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
@@ -75,6 +65,16 @@ public final class PMGClass extends Attribute {
 
 
     /**
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use copy() for a physical copy.
+     */
+    public PMGClass(final PMGClass pgmClass) {
+        this(pgmClass.getNameIndex(), pgmClass.getLength(), pgmClass.getPMGIndex(), pgmClass.getPMGClassIndex(),
+            pgmClass.getConstantPool());
+    }
+
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
@@ -84,6 +84,15 @@ public final class PMGClass extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         println("Visiting non-standard PMGClass object");
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        return (Attribute) clone();
     }
 
 
@@ -110,10 +119,12 @@ public final class PMGClass extends Attribute {
 
 
     /**
-     * @param pmgClassIndex
+     * @return PMG class name.
      */
-    public void setPMGClassIndex( final int pmgClassIndex ) {
-        this.pmgClassIndex = pmgClassIndex;
+    public String getPMGClassName() {
+        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmgClassIndex,
+                Const.CONSTANT_Utf8);
+        return c.getBytes();
     }
 
 
@@ -122,14 +133,6 @@ public final class PMGClass extends Attribute {
      */
     public int getPMGIndex() {
         return pmgIndex;
-    }
-
-
-    /**
-     * @param pmgIndex
-     */
-    public void setPMGIndex( final int pmgIndex ) {
-        this.pmgIndex = pmgIndex;
     }
 
 
@@ -144,12 +147,18 @@ public final class PMGClass extends Attribute {
 
 
     /**
-     * @return PMG class name.
+     * @param pmgClassIndex
      */
-    public String getPMGClassName() {
-        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(pmgClassIndex,
-                Const.CONSTANT_Utf8);
-        return c.getBytes();
+    public void setPMGClassIndex( final int pmgClassIndex ) {
+        this.pmgClassIndex = pmgClassIndex;
+    }
+
+
+    /**
+     * @param pmgIndex
+     */
+    public void setPMGIndex( final int pmgIndex ) {
+        this.pmgIndex = pmgIndex;
     }
 
 
@@ -159,14 +168,5 @@ public final class PMGClass extends Attribute {
     @Override
     public String toString() {
         return "PMGClass(" + getPMGName() + ", " + getPMGClassName() + ")";
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        return (Attribute) clone();
     }
 }

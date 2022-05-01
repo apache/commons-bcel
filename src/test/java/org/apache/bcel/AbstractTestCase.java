@@ -49,63 +49,16 @@ public abstract class AbstractTestCase
     // package base name in signature format, i.e. with '/' separators instead of '.'
     protected static final String PACKAGE_BASE_SIG = PACKAGE_BASE_NAME.replace('.', '/');
 
-    /**
-     * @param name
-     * @return Path to file under the TESTDATA directory
-     */
-    protected File createTestdataFile(final String name)
+    public AnnotationEntryGen createFruitAnnotationEntry(final ConstantPoolGen cp,
+            final String aFruit, final boolean visibility)
     {
-        return new File(TESTDATA, name);
-    }
-
-    protected JavaClass getTestClass(final String name) throws ClassNotFoundException
-    {
-        return SyntheticRepository.getInstance().loadClass(name);
-    }
-
-    protected Method getMethod(final JavaClass cl, final String methodname)
-    {
-        final Method[] methods = cl.getMethods();
-        for (final Method m : methods) {
-            if (m.getName().equals(methodname))
-            {
-                return m;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Delete a file under the TESTDATA directory
-     * @param name
-     * @return
-     */
-    protected boolean wipe(final String name)
-    {
-        return new File(TESTDATA, name).delete();
-    }
-
-    /**
-     * Delete a directory and file under the TESTDATA directory
-     * @param dir
-     * @param name
-     * @return true if the file was deleted
-     */
-    protected boolean wipe(final String dir, final String name)
-    {
-        // The parameter is relative to the TESTDATA dir
-        final boolean b = wipe(dir + File.separator + name);
-        final File testDir = new File(TESTDATA, dir);
-        final String[] files = testDir.list();
-        if (files == null || files.length == 0)
-        {
-            if (!testDir.delete()) {
-                System.err.println("Failed to remove: " + testDir);
-            }
-        } else {
-            System.err.println("Non-empty directory: " + testDir);
-        }
-        return b;
+        final SimpleElementValueGen evg = new SimpleElementValueGen(
+                ElementValueGen.STRING, cp, aFruit);
+        final ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
+        final ObjectType t = new ObjectType("SimpleStringAnnotation");
+        final List<ElementValuePairGen> elements = new ArrayList<>();
+        elements.add(nvGen);
+        return new AnnotationEntryGen(t, elements, visibility, cp);
     }
 
     public SyntheticRepository createRepos(final String cpentry)
@@ -115,34 +68,13 @@ public abstract class AbstractTestCase
         return SyntheticRepository.getInstance(cp);
     }
 
-    protected Attribute[] findAttribute(final String name, final JavaClass clazz)
+    /**
+     * @param name
+     * @return Path to file under the TESTDATA directory
+     */
+    protected File createTestdataFile(final String name)
     {
-        final Attribute[] all = clazz.getAttributes();
-        final List<Attribute> chosenAttrsList = new ArrayList<>();
-        for (final Attribute element : all) {
-            if (verbose) {
-                System.err.println("Attribute: " + element.getName());
-            }
-            if (element.getName().equals(name)) {
-                chosenAttrsList.add(element);
-            }
-        }
-        return chosenAttrsList.toArray(new Attribute[] {});
-    }
-
-    protected Attribute findAttribute(final String name, final Attribute[] all)
-    {
-        final List<Attribute> chosenAttrsList = new ArrayList<>();
-        for (final Attribute element : all) {
-            if (verbose) {
-                System.err.println("Attribute: " + element.getName());
-            }
-            if (element.getName().equals(name)) {
-                chosenAttrsList.add(element);
-            }
-        }
-        assertEquals(1, chosenAttrsList.size(), "Wrong number of matches");
-        return chosenAttrsList.get(0);
+        return new File(TESTDATA, name);
     }
 
     protected String dumpAnnotationEntries(final AnnotationEntry[] as)
@@ -177,15 +109,83 @@ public abstract class AbstractTestCase
         return result.toString();
     }
 
-    public AnnotationEntryGen createFruitAnnotationEntry(final ConstantPoolGen cp,
-            final String aFruit, final boolean visibility)
+    protected Attribute findAttribute(final String name, final Attribute[] all)
     {
-        final SimpleElementValueGen evg = new SimpleElementValueGen(
-                ElementValueGen.STRING, cp, aFruit);
-        final ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
-        final ObjectType t = new ObjectType("SimpleStringAnnotation");
-        final List<ElementValuePairGen> elements = new ArrayList<>();
-        elements.add(nvGen);
-        return new AnnotationEntryGen(t, elements, visibility, cp);
+        final List<Attribute> chosenAttrsList = new ArrayList<>();
+        for (final Attribute element : all) {
+            if (verbose) {
+                System.err.println("Attribute: " + element.getName());
+            }
+            if (element.getName().equals(name)) {
+                chosenAttrsList.add(element);
+            }
+        }
+        assertEquals(1, chosenAttrsList.size(), "Wrong number of matches");
+        return chosenAttrsList.get(0);
+    }
+
+    protected Attribute[] findAttribute(final String name, final JavaClass clazz)
+    {
+        final Attribute[] all = clazz.getAttributes();
+        final List<Attribute> chosenAttrsList = new ArrayList<>();
+        for (final Attribute element : all) {
+            if (verbose) {
+                System.err.println("Attribute: " + element.getName());
+            }
+            if (element.getName().equals(name)) {
+                chosenAttrsList.add(element);
+            }
+        }
+        return chosenAttrsList.toArray(new Attribute[] {});
+    }
+
+    protected Method getMethod(final JavaClass cl, final String methodname)
+    {
+        final Method[] methods = cl.getMethods();
+        for (final Method m : methods) {
+            if (m.getName().equals(methodname))
+            {
+                return m;
+            }
+        }
+        return null;
+    }
+
+    protected JavaClass getTestClass(final String name) throws ClassNotFoundException
+    {
+        return SyntheticRepository.getInstance().loadClass(name);
+    }
+
+    /**
+     * Delete a file under the TESTDATA directory
+     * @param name
+     * @return
+     */
+    protected boolean wipe(final String name)
+    {
+        return new File(TESTDATA, name).delete();
+    }
+
+    /**
+     * Delete a directory and file under the TESTDATA directory
+     * @param dir
+     * @param name
+     * @return true if the file was deleted
+     */
+    protected boolean wipe(final String dir, final String name)
+    {
+        // The parameter is relative to the TESTDATA dir
+        final boolean b = wipe(dir + File.separator + name);
+        final File testDir = new File(TESTDATA, dir);
+        final String[] files = testDir.list();
+        if (files == null || files.length == 0)
+        {
+            if (!testDir.delete()) {
+                System.err.println("Failed to remove: " + testDir);
+            }
+        } else {
+            System.err.println("Non-empty directory: " + testDir);
+        }
+        return b;
     }
 }

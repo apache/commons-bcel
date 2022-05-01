@@ -24,6 +24,26 @@ package org.apache.bcel.classfile;
  */
 public interface Visitor
 {
+    /**
+     * @since 6.0
+     */
+    void visitAnnotation(Annotations obj);
+
+    /**
+     * @since 6.0
+     */
+    void visitAnnotationDefault(AnnotationDefault obj);
+
+    /**
+     * @since 6.0
+     */
+    void visitAnnotationEntry(AnnotationEntry obj);
+
+    /**
+     * @since 6.0
+     */
+    void visitBootstrapMethods(BootstrapMethods obj);
+
     void visitCode(Code obj);
 
     void visitCodeException(CodeException obj);
@@ -31,6 +51,13 @@ public interface Visitor
     void visitConstantClass(ConstantClass obj);
 
     void visitConstantDouble(ConstantDouble obj);
+
+    /**
+     * @since 6.3
+     */
+    default void visitConstantDynamic(final ConstantDynamic constantDynamic) {
+        // empty
+    }
 
     void visitConstantFieldref(ConstantFieldref obj);
 
@@ -44,9 +71,29 @@ public interface Visitor
 
     void visitConstantLong(ConstantLong obj);
 
+    /**
+     * @since 6.0
+     */
+    void visitConstantMethodHandle(ConstantMethodHandle obj);
+
     void visitConstantMethodref(ConstantMethodref obj);
 
+    /**
+     * @since 6.0
+     */
+    void visitConstantMethodType(ConstantMethodType obj);
+
+    /**
+     * @since 6.1
+     */
+    void visitConstantModule(ConstantModule constantModule);
+
     void visitConstantNameAndType(ConstantNameAndType obj);
+
+    /**
+     * @since 6.1
+     */
+    void visitConstantPackage(ConstantPackage constantPackage);
 
     void visitConstantPool(ConstantPool obj);
 
@@ -57,6 +104,11 @@ public interface Visitor
     void visitConstantValue(ConstantValue obj);
 
     void visitDeprecated(Deprecated obj);
+
+    /**
+     * @since 6.0
+     */
+    void visitEnclosingMethod(EnclosingMethod obj);
 
     void visitExceptionTable(ExceptionTable obj);
 
@@ -76,59 +128,12 @@ public interface Visitor
 
     void visitLocalVariableTable(LocalVariableTable obj);
 
-    void visitMethod(Method obj);
-
-    void visitSignature(Signature obj);
-
-    void visitSourceFile(SourceFile obj);
-
-    void visitSynthetic(Synthetic obj);
-
-    void visitUnknown(Unknown obj);
-
-    void visitStackMap(StackMap obj);
-
-    void visitStackMapEntry(StackMapEntry obj);
-
-    /**
-     * @since 6.0
-     */
-    void visitAnnotation(Annotations obj);
-
-    /**
-     * @since 6.0
-     */
-    void visitParameterAnnotation(ParameterAnnotations obj);
-
-    /**
-     * @since 6.0
-     */
-    void visitAnnotationEntry(AnnotationEntry obj);
-
-    /**
-     * @since 6.0
-     */
-    void visitAnnotationDefault(AnnotationDefault obj);
-
     /**
      * @since 6.0
      */
     void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
 
-    /**
-     * @since 6.0
-     */
-    void visitEnclosingMethod(EnclosingMethod obj);
-
-    /**
-     * @since 6.0
-     */
-    void visitBootstrapMethods(BootstrapMethods obj);
-
-    /**
-     * @since 6.0
-     */
-    void visitMethodParameters(MethodParameters obj);
+    void visitMethod(Method obj);
 
     /**
      * @since 6.4.0
@@ -140,46 +145,12 @@ public interface Visitor
     /**
      * @since 6.0
      */
-    void visitConstantMethodType(ConstantMethodType obj);
-
-    /**
-     * @since 6.0
-     */
-    void visitConstantMethodHandle(ConstantMethodHandle obj);
-
-    /**
-     * @since 6.0
-     */
-    void visitParameterAnnotationEntry(ParameterAnnotationEntry obj);
-
-    /**
-     * @since 6.1
-     */
-    void visitConstantPackage(ConstantPackage constantPackage);
-
-    /**
-     * @since 6.1
-     */
-    void visitConstantModule(ConstantModule constantModule);
-
-    /**
-     * @since 6.3
-     */
-    default void visitConstantDynamic(final ConstantDynamic constantDynamic) {
-        // empty
-    }
+    void visitMethodParameters(MethodParameters obj);
 
     /**
      * @since 6.4.0
      */
     default void visitModule(final Module constantModule) {
-        // empty
-    }
-
-    /**
-     * @since 6.4.0
-     */
-    default void visitModuleRequires(final ModuleRequires constantModule) {
         // empty
     }
 
@@ -193,14 +164,14 @@ public interface Visitor
     /**
      * @since 6.4.0
      */
-    default void visitModuleOpens(final ModuleOpens constantModule) {
+    default void visitModuleMainClass(final ModuleMainClass obj) {
         // empty
     }
 
     /**
      * @since 6.4.0
      */
-    default void visitModuleProvides(final ModuleProvides constantModule) {
+    default void visitModuleOpens(final ModuleOpens constantModule) {
         // empty
     }
 
@@ -214,7 +185,14 @@ public interface Visitor
     /**
      * @since 6.4.0
      */
-    default void visitModuleMainClass(final ModuleMainClass obj) {
+    default void visitModuleProvides(final ModuleProvides constantModule) {
+        // empty
+    }
+
+    /**
+     * @since 6.4.0
+     */
+    default void visitModuleRequires(final ModuleRequires constantModule) {
         // empty
     }
 
@@ -231,4 +209,26 @@ public interface Visitor
     default void visitNestMembers(final NestMembers obj) {
         // empty
     }
+
+    /**
+     * @since 6.0
+     */
+    void visitParameterAnnotation(ParameterAnnotations obj);
+
+    /**
+     * @since 6.0
+     */
+    void visitParameterAnnotationEntry(ParameterAnnotationEntry obj);
+
+    void visitSignature(Signature obj);
+
+    void visitSourceFile(SourceFile obj);
+
+    void visitStackMap(StackMap obj);
+
+    void visitStackMapEntry(StackMapEntry obj);
+
+    void visitSynthetic(Synthetic obj);
+
+    void visitUnknown(Unknown obj);
 }

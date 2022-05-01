@@ -46,20 +46,6 @@ public class ICONST extends Instruction implements ConstantPushInstruction {
     }
 
 
-    @Override
-    public Number getValue() {
-        return Integer.valueOf(value);
-    }
-
-
-    /** @return Type.INT
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.INT;
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -75,5 +61,19 @@ public class ICONST extends Instruction implements ConstantPushInstruction {
         v.visitTypedInstruction(this);
         v.visitConstantPushInstruction(this);
         v.visitICONST(this);
+    }
+
+
+    /** @return Type.INT
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.INT;
+    }
+
+
+    @Override
+    public Number getValue() {
+        return Integer.valueOf(value);
     }
 }

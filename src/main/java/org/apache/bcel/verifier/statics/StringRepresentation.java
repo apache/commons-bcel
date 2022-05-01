@@ -137,18 +137,6 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         return ret;
     }
 
-    ////////////////////////////////
-    // Visitor methods start here //
-    ////////////////////////////////
-    // We don't of course need to call some default implementation:
-    // e.g. we could also simply output "Code" instead of a possibly
-    // lengthy Code attribute's toString().
-    @Override
-    public void visitCode(final Code obj) {
-        //tostring = toString(obj);
-        tostring = "<CODE>"; // We don't need real code outputs.
-    }
-
     /**
      * @since 6.0
      */
@@ -164,11 +152,36 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
      * @since 6.0
      */
     @Override
-    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj)
-    {
-        //this is invoked whenever a local variable type is found
-        //when verifier is passed over a class
+    public void visitAnnotationDefault(final AnnotationDefault obj) {
         tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitAnnotationEntry(final AnnotationEntry obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitBootstrapMethods(final BootstrapMethods obj) {
+        tostring = toString(obj);
+    }
+
+    ////////////////////////////////
+    // Visitor methods start here //
+    ////////////////////////////////
+    // We don't of course need to call some default implementation:
+    // e.g. we could also simply output "Code" instead of a possibly
+    // lengthy Code attribute's toString().
+    @Override
+    public void visitCode(final Code obj) {
+        //tostring = toString(obj);
+        tostring = "<CODE>"; // We don't need real code outputs.
     }
 
     @Override
@@ -183,6 +196,14 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitConstantDouble(final ConstantDouble obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    @Override
+    public void visitConstantDynamic(final ConstantDynamic obj) {
         tostring = toString(obj);
     }
 
@@ -206,8 +227,24 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj) {
+        tostring = toString(obj);
+    }
+
     @Override
     public void visitConstantLong(final ConstantLong obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantMethodHandle(final ConstantMethodHandle obj) {
         tostring = toString(obj);
     }
 
@@ -216,8 +253,32 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantMethodType(final ConstantMethodType obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    @Override
+    public void visitConstantModule(final ConstantModule obj) {
+        tostring = toString(obj);
+    }
+
     @Override
     public void visitConstantNameAndType(final ConstantNameAndType obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    @Override
+    public void visitConstantPackage(final ConstantPackage obj) {
         tostring = toString(obj);
     }
 
@@ -243,6 +304,14 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitDeprecated(final Deprecated obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitEnclosingMethod(final EnclosingMethod obj) {
         tostring = toString(obj);
     }
 
@@ -291,8 +360,51 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = "<LocalVariableTable: " + toString(obj) + ">";
     }
 
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj)
+    {
+        //this is invoked whenever a local variable type is found
+        //when verifier is passed over a class
+        tostring = toString(obj);
+    }
+
     @Override
     public void visitMethod(final Method obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitMethodParameters(final MethodParameters obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.4.0
+     */
+    @Override
+    public void visitNestMembers(final NestMembers obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitParameterAnnotation(final ParameterAnnotations obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitParameterAnnotationEntry(final ParameterAnnotationEntry obj) {
         tostring = toString(obj);
     }
 
@@ -311,48 +423,6 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
-    @Override
-    public void visitSynthetic(final Synthetic obj) {
-        tostring = toString(obj);
-    }
-
-    @Override
-    public void visitUnknown(final Unknown obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitEnclosingMethod(final EnclosingMethod obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitBootstrapMethods(final BootstrapMethods obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitMethodParameters(final MethodParameters obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj) {
-        tostring = toString(obj);
-    }
-
     /**
      * @since 6.0
      */
@@ -361,83 +431,13 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
-    /**
-     * @since 6.0
-     */
     @Override
-    public void visitParameterAnnotation(final ParameterAnnotations obj) {
+    public void visitSynthetic(final Synthetic obj) {
         tostring = toString(obj);
     }
 
-    /**
-     * @since 6.0
-     */
     @Override
-    public void visitAnnotationEntry(final AnnotationEntry obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitAnnotationDefault(final AnnotationDefault obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitConstantMethodType(final ConstantMethodType obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitConstantMethodHandle(final ConstantMethodHandle obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitParameterAnnotationEntry(final ParameterAnnotationEntry obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.6.0
-     */
-    @Override
-    public void visitConstantModule(final ConstantModule obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.6.0
-     */
-    @Override
-    public void visitConstantPackage(final ConstantPackage obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.6.0
-     */
-    @Override
-    public void visitConstantDynamic(final ConstantDynamic obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.4.0
-     */
-    @Override
-    public void visitNestMembers(final NestMembers obj) {
+    public void visitUnknown(final Unknown obj) {
         tostring = toString(obj);
     }
 }

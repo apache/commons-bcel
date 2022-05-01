@@ -57,6 +57,34 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
 
 
     /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitExceptionThrower(this);
+        v.visitTypedInstruction(this);
+        v.visitStackConsumer(this);
+        v.visitStackProducer(this);
+        v.visitLoadClass(this);
+        v.visitCPInstruction(this);
+        v.visitFieldOrMethod(this);
+        v.visitInvokeInstruction(this);
+        v.visitINVOKEINTERFACE(this);
+    }
+
+
+    @Override
+    public int consumeStack( final ConstantPoolGen cpg ) { // nargs is given in byte-code
+        return nargs; // nargs includes this reference
+    }
+
+
+    /**
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
@@ -78,6 +106,16 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     }
 
 
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_INTERFACE_METHOD_RESOLUTION,
+            ExceptionConst.UNSATISFIED_LINK_ERROR,
+            ExceptionConst.ABSTRACT_METHOD_ERROR,
+            ExceptionConst.ILLEGAL_ACCESS_ERROR,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
+    }
+
+
     /**
      * Read needed data (i.e., index) from file.
      */
@@ -96,43 +134,5 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     @Override
     public String toString( final ConstantPool cp ) {
         return super.toString(cp) + " " + nargs;
-    }
-
-
-    @Override
-    public int consumeStack( final ConstantPoolGen cpg ) { // nargs is given in byte-code
-        return nargs; // nargs includes this reference
-    }
-
-
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_INTERFACE_METHOD_RESOLUTION,
-            ExceptionConst.UNSATISFIED_LINK_ERROR,
-            ExceptionConst.ABSTRACT_METHOD_ERROR,
-            ExceptionConst.ILLEGAL_ACCESS_ERROR,
-            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
-    }
-
-
-    /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitExceptionThrower(this);
-        v.visitTypedInstruction(this);
-        v.visitStackConsumer(this);
-        v.visitStackProducer(this);
-        v.visitLoadClass(this);
-        v.visitCPInstruction(this);
-        v.visitFieldOrMethod(this);
-        v.visitInvokeInstruction(this);
-        v.visitINVOKEINTERFACE(this);
     }
 }

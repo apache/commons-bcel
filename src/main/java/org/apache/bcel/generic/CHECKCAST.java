@@ -43,25 +43,6 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
     }
 
 
-    /** @return exceptions this instruction may cause
-     */
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
-            ExceptionConst.CLASS_CAST_EXCEPTION);
-    }
-
-
-    @Override
-    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
-        Type t = getType(cpg);
-        if (t instanceof ArrayType) {
-            t = ((ArrayType) t).getBasicType();
-        }
-        return t instanceof ObjectType ? (ObjectType) t : null;
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -79,5 +60,24 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
         v.visitTypedInstruction(this);
         v.visitCPInstruction(this);
         v.visitCHECKCAST(this);
+    }
+
+
+    /** @return exceptions this instruction may cause
+     */
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+            ExceptionConst.CLASS_CAST_EXCEPTION);
+    }
+
+
+    @Override
+    public ObjectType getLoadClassType( final ConstantPoolGen cpg ) {
+        Type t = getType(cpg);
+        if (t instanceof ArrayType) {
+            t = ((ArrayType) t).getBasicType();
+        }
+        return t instanceof ObjectType ? (ObjectType) t : null;
     }
 }

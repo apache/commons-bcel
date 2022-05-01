@@ -59,24 +59,50 @@ import org.apache.bcel.util.BCELComparator;
  */
 public class MethodGen extends FieldGenOrMethodGen {
 
-    private String className;
-    private Type[] argTypes;
-    private String[] argNames;
-    private int maxLocals;
-    private int maxStack;
-    private InstructionList il;
-    private boolean stripAttributes;
-    private LocalVariableTypeTable localVariableTypeTable;
-    private final List<LocalVariableGen> variableList = new ArrayList<>();
-    private final List<LineNumberGen> lineNumberList = new ArrayList<>();
-    private final List<CodeExceptionGen> exceptionList = new ArrayList<>();
-    private final List<String> throwsList = new ArrayList<>();
-    private final List<Attribute> codeAttrsList = new ArrayList<>();
+    static final class BranchStack {
 
-    private List<AnnotationEntryGen>[] paramAnnotations; // Array of lists containing AnnotationGen objects
-    private boolean hasParameterAnnotations;
-    private boolean haveUnpackedParameterAnnotations;
+        private final Stack<BranchTarget> branchTargets = new Stack<>();
+        private final Hashtable<InstructionHandle, BranchTarget> visitedTargets = new Hashtable<>();
 
+
+        public BranchTarget pop() {
+            if (!branchTargets.empty()) {
+                return branchTargets.pop();
+            }
+            return null;
+        }
+
+
+        public void push( final InstructionHandle target, final int stackDepth ) {
+            if (visited(target)) {
+                return;
+            }
+            branchTargets.push(visit(target, stackDepth));
+        }
+
+
+        private BranchTarget visit( final InstructionHandle target, final int stackDepth ) {
+            final BranchTarget bt = new BranchTarget(target, stackDepth);
+            visitedTargets.put(target, bt);
+            return bt;
+        }
+
+
+        private boolean visited( final InstructionHandle target ) {
+            return visitedTargets.get(target) != null;
+        }
+    }
+    static final class BranchTarget {
+
+        final InstructionHandle target;
+        final int stackDepth;
+
+
+        BranchTarget(final InstructionHandle target, final int stackDepth) {
+            this.target = target;
+            this.stackDepth = stackDepth;
+        }
+    }
     private static BCELComparator bcelComparator = new BCELComparator() {
 
         @Override
@@ -94,6 +120,129 @@ public class MethodGen extends FieldGenOrMethodGen {
             return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
         }
     };
+    private static byte[] getByteCodes(final Method method) {
+        final Code code = method.getCode();
+        if (code == null) {
+            throw new IllegalStateException(String.format("The method '%s' has no code.", method));
+        }
+        return code.getCode();
+    }
+    /**
+     * @return Comparison strategy object
+     */
+    public static BCELComparator getComparator() {
+        return bcelComparator;
+    }
+    /**
+     * Computes stack usage of an instruction list by performing control flow analysis.
+     *
+     * @return maximum stack depth used by method
+     */
+    public static int getMaxStack( final ConstantPoolGen cp, final InstructionList il, final CodeExceptionGen[] et ) {
+        final BranchStack branchTargets = new BranchStack();
+        /* Initially, populate the branch stack with the exception
+         * handlers, because these aren't (necessarily) branched to
+         * explicitly. in each case, the stack will have depth 1,
+         * containing the exception object.
+         */
+        for (final CodeExceptionGen element : et) {
+            final InstructionHandle handler_pc = element.getHandlerPC();
+            if (handler_pc != null) {
+                branchTargets.push(handler_pc, 1);
+            }
+        }
+        int stackDepth = 0;
+        int maxStackDepth = 0;
+        InstructionHandle ih = il.getStart();
+        while (ih != null) {
+            final Instruction instruction = ih.getInstruction();
+            final short opcode = instruction.getOpcode();
+            final int delta = instruction.produceStack(cp) - instruction.consumeStack(cp);
+            stackDepth += delta;
+            if (stackDepth > maxStackDepth) {
+                maxStackDepth = stackDepth;
+            }
+            // choose the next instruction based on whether current is a branch.
+            if (instruction instanceof BranchInstruction) {
+                final BranchInstruction branch = (BranchInstruction) instruction;
+                if (instruction instanceof Select) {
+                    // explore all of the select's targets. the default target is handled below.
+                    final Select select = (Select) branch;
+                    final InstructionHandle[] targets = select.getTargets();
+                    for (final InstructionHandle target : targets) {
+                        branchTargets.push(target, stackDepth);
+                    }
+                    // nothing to fall through to.
+                    ih = null;
+                } else if (!(branch instanceof IfInstruction)) {
+                    // if an instruction that comes back to following PC,
+                    // push next instruction, with stack depth reduced by 1.
+                    if (opcode == Const.JSR || opcode == Const.JSR_W) {
+                        branchTargets.push(ih.getNext(), stackDepth - 1);
+                    }
+                    ih = null;
+                }
+                // for all branches, the target of the branch is pushed on the branch stack.
+                // conditional branches have a fall through case, selects don't, and
+                // jsr/jsr_w return to the next instruction.
+                branchTargets.push(branch.getTarget(), stackDepth);
+            } else // check for instructions that terminate the method.
+            if (opcode == Const.ATHROW || opcode == Const.RET
+                    || opcode >= Const.IRETURN && opcode <= Const.RETURN) {
+                ih = null;
+            }
+            // normal case, go to the next instruction.
+            if (ih != null) {
+                ih = ih.getNext();
+            }
+            // if we have no more instructions, see if there are any deferred branches to explore.
+            if (ih == null) {
+                final BranchTarget bt = branchTargets.pop();
+                if (bt != null) {
+                    ih = bt.target;
+                    stackDepth = bt.stackDepth;
+                }
+            }
+        }
+        return maxStackDepth;
+    }
+    /**
+     * @param comparator Comparison strategy object
+     */
+    public static void setComparator( final BCELComparator comparator ) {
+        bcelComparator = comparator;
+    }
+    private String className;
+    private Type[] argTypes;
+    private String[] argNames;
+    private int maxLocals;
+    private int maxStack;
+    private InstructionList il;
+
+    private boolean stripAttributes;
+    private LocalVariableTypeTable localVariableTypeTable;
+    private final List<LocalVariableGen> variableList = new ArrayList<>();
+
+    private final List<LineNumberGen> lineNumberList = new ArrayList<>();
+
+
+    private final List<CodeExceptionGen> exceptionList = new ArrayList<>();
+
+
+    private final List<String> throwsList = new ArrayList<>();
+
+
+    private final List<Attribute> codeAttrsList = new ArrayList<>();
+
+    private List<AnnotationEntryGen>[] paramAnnotations; // Array of lists containing AnnotationGen objects
+
+
+    private boolean hasParameterAnnotations;
+
+    private boolean haveUnpackedParameterAnnotations;
+
+
+    private List<MethodObserver> observers;
 
 
     /**
@@ -249,13 +398,110 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
 
-    private static byte[] getByteCodes(final Method method) {
-        final Code code = method.getCode();
-        if (code == null) {
-            throw new IllegalStateException(String.format("The method '%s' has no code.", method));
+    /**
+     * @since 6.0
+     */
+    public void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
+        final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
+        for (final Attribute attr : attrs) {
+            addAttribute(attr);
         }
-        return code.getCode();
     }
+
+    /**
+     * Add an attribute to the code. Currently, the JVM knows about the
+     * LineNumberTable, LocalVariableTable and StackMap attributes,
+     * where the former two will be generated automatically and the
+     * latter is used for the MIDP only. Other attributes will be
+     * ignored by the JVM but do no harm.
+     *
+     * @param a attribute to be added
+     */
+    public void addCodeAttribute( final Attribute a ) {
+        codeAttrsList.add(a);
+    }
+
+    /**
+     * Add an exception possibly thrown by this method.
+     *
+     * @param className (fully qualified) name of exception
+     */
+    public void addException( final String className ) {
+        throwsList.add(className);
+    }
+
+
+    /**
+     * Add an exception handler, i.e., specify region where a handler is active and an
+     * instruction where the actual handling is done.
+     *
+     * @param start_pc Start of region (inclusive)
+     * @param end_pc End of region (inclusive)
+     * @param handler_pc Where handling is done
+     * @param catch_type class type of handled exception or null if any
+     * exception is handled
+     * @return new exception handler object
+     */
+    public CodeExceptionGen addExceptionHandler( final InstructionHandle start_pc,
+            final InstructionHandle end_pc, final InstructionHandle handler_pc, final ObjectType catch_type ) {
+        if (start_pc == null || end_pc == null || handler_pc == null) {
+            throw new ClassGenException("Exception handler target is null instruction");
+        }
+        final CodeExceptionGen c = new CodeExceptionGen(start_pc, end_pc, handler_pc, catch_type);
+        exceptionList.add(c);
+        return c;
+    }
+
+
+    /**
+     * Give an instruction a line number corresponding to the source code line.
+     *
+     * @param ih instruction to tag
+     * @return new line number object
+     * @see LineNumber
+     */
+    public LineNumberGen addLineNumber( final InstructionHandle ih, final int srcLine ) {
+        final LineNumberGen l = new LineNumberGen(ih, srcLine);
+        lineNumberList.add(l);
+        return l;
+    }
+
+
+    /**
+     * Adds a local variable to this method and assigns an index automatically.
+     *
+     * @param name variable name
+     * @param type variable type
+     * @param start from where the variable is valid, if this is null,
+     * it is valid from the start
+     * @param end until where the variable is valid, if this is null,
+     * it is valid to the end
+     * @return new local variable object
+     * @see LocalVariable
+     */
+    public LocalVariableGen addLocalVariable( final String name, final Type type, final InstructionHandle start,
+            final InstructionHandle end ) {
+        return addLocalVariable(name, type, maxLocals, start, end);
+    }
+
+
+    /**
+     * Adds a local variable to this method.
+     *
+     * @param name variable name
+     * @param type variable type
+     * @param slot the index of the local variable, if type is long or double, the next available
+     * index is slot+2
+     * @param start from where the variable is valid
+     * @param end until where the variable is valid
+     * @return new local variable object
+     * @see LocalVariable
+     */
+    public LocalVariableGen addLocalVariable( final String name, final Type type, final int slot,
+            final InstructionHandle start, final InstructionHandle end ) {
+        return addLocalVariable(name, type, slot, start, end, slot);
+    }
+
 
     /**
      * Adds a local variable to this method.
@@ -292,59 +538,297 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
 
-    /**
-     * Adds a local variable to this method.
-     *
-     * @param name variable name
-     * @param type variable type
-     * @param slot the index of the local variable, if type is long or double, the next available
-     * index is slot+2
-     * @param start from where the variable is valid
-     * @param end until where the variable is valid
-     * @return new local variable object
-     * @see LocalVariable
+    /** Add observer for this object.
      */
-    public LocalVariableGen addLocalVariable( final String name, final Type type, final int slot,
-            final InstructionHandle start, final InstructionHandle end ) {
-        return addLocalVariable(name, type, slot, start, end, slot);
-    }
-
-    /**
-     * Adds a local variable to this method and assigns an index automatically.
-     *
-     * @param name variable name
-     * @param type variable type
-     * @param start from where the variable is valid, if this is null,
-     * it is valid from the start
-     * @param end until where the variable is valid, if this is null,
-     * it is valid to the end
-     * @return new local variable object
-     * @see LocalVariable
-     */
-    public LocalVariableGen addLocalVariable( final String name, final Type type, final InstructionHandle start,
-            final InstructionHandle end ) {
-        return addLocalVariable(name, type, maxLocals, start, end);
-    }
-
-
-    /**
-     * Remove a local variable, its slot will not be reused, if you do not use addLocalVariable
-     * with an explicit index argument.
-     */
-    public void removeLocalVariable( final LocalVariableGen l ) {
-        l.dispose();
-        variableList.remove(l);
-    }
-
-
-    /**
-     * Remove all local variables.
-     */
-    public void removeLocalVariables() {
-        for (final LocalVariableGen lv : variableList) {
-            lv.dispose();
+    public void addObserver( final MethodObserver o ) {
+        if (observers == null) {
+            observers = new ArrayList<>();
         }
-        variableList.clear();
+        observers.add(o);
+    }
+
+
+    public void addParameterAnnotation(final int parameterIndex,
+            final AnnotationEntryGen annotation)
+    {
+        ensureExistingParameterAnnotationsUnpacked();
+        if (!hasParameterAnnotations)
+        {
+            @SuppressWarnings("unchecked") // OK
+            final List<AnnotationEntryGen>[] parmList = new List[argTypes.length];
+            paramAnnotations = parmList;
+            hasParameterAnnotations = true;
+        }
+        final List<AnnotationEntryGen> existingAnnotations = paramAnnotations[parameterIndex];
+        if (existingAnnotations != null)
+        {
+            existingAnnotations.add(annotation);
+        }
+        else
+        {
+            final List<AnnotationEntryGen> l = new ArrayList<>();
+            l.add(annotation);
+            paramAnnotations[parameterIndex] = l;
+        }
+    }
+
+
+    /**
+     * @since 6.0
+     */
+    public void addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
+        if (!hasParameterAnnotations) {
+            return;
+        }
+        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, paramAnnotations);
+        if (attrs != null) {
+            for (final Attribute attr : attrs) {
+                addAttribute(attr);
+            }
+        }
+    }
+
+
+    private Attribute[] addRuntimeAnnotationsAsAttribute(final ConstantPoolGen cp) {
+        final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
+        for (final Attribute attr : attrs) {
+            addAttribute(attr);
+        }
+        return attrs;
+    }
+
+
+    private Attribute[] addRuntimeParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
+        if (!hasParameterAnnotations) {
+            return Attribute.EMPTY_ATTRIBUTE_ARRAY;
+        }
+        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, paramAnnotations);
+        for (final Attribute attr : attrs) {
+            addAttribute(attr);
+        }
+        return attrs;
+    }
+
+
+    private void adjustLocalVariableTypeTable(final LocalVariableTable lvt) {
+        final LocalVariable[] lv = lvt.getLocalVariableTable();
+        final LocalVariable[] lvg = localVariableTypeTable.getLocalVariableTypeTable();
+
+        for (final LocalVariable element : lvg) {
+            for (final LocalVariable l : lv) {
+                if (element.getName().equals(l.getName()) && element.getIndex() == l.getOrigIndex()) {
+                    element.setLength(l.getLength());
+                    element.setStartPC(l.getStartPC());
+                    element.setIndex(l.getIndex());
+                    break;
+                }
+            }
+        }
+    }
+
+
+    /** @return deep copy of this method
+     */
+    public MethodGen copy( final String className, final ConstantPoolGen cp ) {
+        final Method m = ((MethodGen) clone()).getMethod();
+        final MethodGen mg = new MethodGen(m, className, super.getConstantPool());
+        if (super.getConstantPool() != cp) {
+            mg.setConstantPool(cp);
+            mg.getInstructionList().replaceConstantPool(super.getConstantPool(), cp);
+        }
+        return mg;
+    }
+
+
+    /**
+     * Goes through the attributes on the method and identifies any that are
+     * RuntimeParameterAnnotations, extracting their contents and storing them
+     * as parameter annotations. There are two kinds of parameter annotation -
+     * visible and invisible. Once they have been unpacked, these attributes are
+     * deleted. (The annotations will be rebuilt as attributes when someone
+     * builds a Method object out of this MethodGen object).
+     */
+    private void ensureExistingParameterAnnotationsUnpacked()
+    {
+        if (haveUnpackedParameterAnnotations) {
+            return;
+        }
+        // Find attributes that contain parameter annotation data
+        final Attribute[] attrs = getAttributes();
+        ParameterAnnotations paramAnnVisAttr = null;
+        ParameterAnnotations paramAnnInvisAttr = null;
+        for (final Attribute attribute : attrs) {
+            if (attribute instanceof ParameterAnnotations)
+            {
+                // Initialize paramAnnotations
+                if (!hasParameterAnnotations)
+                {
+                    @SuppressWarnings("unchecked") // OK
+                    final List<AnnotationEntryGen>[] parmList = new List[argTypes.length];
+                    paramAnnotations = parmList;
+                    for (int j = 0; j < argTypes.length; j++) {
+                        paramAnnotations[j] = new ArrayList<>();
+                    }
+                }
+                hasParameterAnnotations = true;
+                final ParameterAnnotations rpa = (ParameterAnnotations) attribute;
+                if (rpa instanceof RuntimeVisibleParameterAnnotations) {
+                    paramAnnVisAttr = rpa;
+                } else {
+                    paramAnnInvisAttr = rpa;
+                }
+                final ParameterAnnotationEntry[] parameterAnnotationEntries = rpa.getParameterAnnotationEntries();
+                for (int j = 0; j < parameterAnnotationEntries.length; j++)
+                {
+                    // This returns Annotation[] ...
+                    final ParameterAnnotationEntry immutableArray = rpa.getParameterAnnotationEntries()[j];
+                    // ... which needs transforming into an AnnotationGen[] ...
+                    final List<AnnotationEntryGen> mutable = makeMutableVersion(immutableArray.getAnnotationEntries());
+                    // ... then add these to any we already know about
+                    paramAnnotations[j].addAll(mutable);
+                }
+            }
+        }
+        if (paramAnnVisAttr != null) {
+            removeAttribute(paramAnnVisAttr);
+        }
+        if (paramAnnInvisAttr != null) {
+            removeAttribute(paramAnnInvisAttr);
+        }
+        haveUnpackedParameterAnnotations = true;
+    }
+
+
+    /**
+     * Return value as defined by given BCELComparator strategy.
+     * By default two MethodGen objects are said to be equal when
+     * their names and signatures are equal.
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals( final Object obj ) {
+        return bcelComparator.equals(this, obj);
+    }
+
+
+    //J5TODO: Should paramAnnotations be an array of arrays? Rather than an array of lists, this
+    // is more likely to suggest to the caller it is readonly (which a List does not).
+    /**
+     * Return a list of AnnotationGen objects representing parameter annotations
+     * @since 6.0
+     */
+    public List<AnnotationEntryGen> getAnnotationsOnParameter(final int i) {
+        ensureExistingParameterAnnotationsUnpacked();
+        if (!hasParameterAnnotations || i>argTypes.length) {
+            return null;
+        }
+        return paramAnnotations[i];
+    }
+
+
+    public String getArgumentName( final int i ) {
+        return argNames[i];
+    }
+
+    public String[] getArgumentNames() {
+        return argNames.clone();
+    }
+
+
+    public Type getArgumentType( final int i ) {
+        return argTypes[i];
+    }
+
+
+    public Type[] getArgumentTypes() {
+        return argTypes.clone();
+    }
+
+    /** @return class that contains this method
+     */
+    public String getClassName() {
+        return className;
+    }
+
+    /**
+     * @return all attributes of this method.
+     */
+    public Attribute[] getCodeAttributes() {
+        final Attribute[] attributes = new Attribute[codeAttrsList.size()];
+        codeAttrsList.toArray(attributes);
+        return attributes;
+    }
+
+    /**
+     * @return code exceptions for `Code' attribute
+     */
+    private CodeException[] getCodeExceptions() {
+        final int size = exceptionList.size();
+        final CodeException[] c_exc = new CodeException[size];
+        for (int i = 0; i < size; i++) {
+            final CodeExceptionGen c =  exceptionList.get(i);
+            c_exc[i] = c.getCodeException(super.getConstantPool());
+        }
+        return c_exc;
+    }
+
+    /*
+     * @return array of declared exception handlers
+     */
+    public CodeExceptionGen[] getExceptionHandlers() {
+        final CodeExceptionGen[] cg = new CodeExceptionGen[exceptionList.size()];
+        exceptionList.toArray(cg);
+        return cg;
+    }
+
+    /*
+     * @return array of thrown exceptions
+     */
+    public String[] getExceptions() {
+        final String[] e = new String[throwsList.size()];
+        throwsList.toArray(e);
+        return e;
+    }
+
+
+    /**
+     * @return `Exceptions' attribute of all the exceptions thrown by this method.
+     */
+    private ExceptionTable getExceptionTable( final ConstantPoolGen cp ) {
+        final int size = throwsList.size();
+        final int[] ex = new int[size];
+        for (int i = 0; i < size; i++) {
+            ex[i] = cp.addClass(throwsList.get(i));
+        }
+        return new ExceptionTable(cp.addUtf8("Exceptions"), 2 + 2 * size, ex, cp.getConstantPool());
+    }
+
+    public InstructionList getInstructionList() {
+        return il;
+    }
+
+    /*
+     * @return array of line numbers
+     */
+    public LineNumberGen[] getLineNumbers() {
+        final LineNumberGen[] lg = new LineNumberGen[lineNumberList.size()];
+        lineNumberList.toArray(lg);
+        return lg;
+    }
+
+
+    /**
+     * @return `LineNumberTable' attribute of all the local variables of this method.
+     */
+    public LineNumberTable getLineNumberTable( final ConstantPoolGen cp ) {
+        final int size = lineNumberList.size();
+        final LineNumber[] ln = new LineNumber[size];
+        for (int i = 0; i < size; i++) {
+            ln[i] = lineNumberList.get(i).getLineNumber();
+        }
+        return new LineNumberTable(cp.addUtf8("LineNumberTable"), 2 + ln.length * 4, ln, cp
+                .getConstantPool());
     }
 
 
@@ -387,6 +871,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                 .getConstantPool());
     }
 
+
     /**
      * @return `LocalVariableTypeTable' attribute of this method.
      */
@@ -394,271 +879,14 @@ public class MethodGen extends FieldGenOrMethodGen {
         return localVariableTypeTable;
     }
 
-    /**
-     * Give an instruction a line number corresponding to the source code line.
-     *
-     * @param ih instruction to tag
-     * @return new line number object
-     * @see LineNumber
-     */
-    public LineNumberGen addLineNumber( final InstructionHandle ih, final int srcLine ) {
-        final LineNumberGen l = new LineNumberGen(ih, srcLine);
-        lineNumberList.add(l);
-        return l;
+
+    public int getMaxLocals() {
+        return maxLocals;
     }
 
 
-    /**
-     * Remove a line number.
-     */
-    public void removeLineNumber( final LineNumberGen l ) {
-        lineNumberList.remove(l);
-    }
-
-
-    /**
-     * Remove all line numbers.
-     */
-    public void removeLineNumbers() {
-        lineNumberList.clear();
-    }
-
-
-    /*
-     * @return array of line numbers
-     */
-    public LineNumberGen[] getLineNumbers() {
-        final LineNumberGen[] lg = new LineNumberGen[lineNumberList.size()];
-        lineNumberList.toArray(lg);
-        return lg;
-    }
-
-
-    /**
-     * @return `LineNumberTable' attribute of all the local variables of this method.
-     */
-    public LineNumberTable getLineNumberTable( final ConstantPoolGen cp ) {
-        final int size = lineNumberList.size();
-        final LineNumber[] ln = new LineNumber[size];
-        for (int i = 0; i < size; i++) {
-            ln[i] = lineNumberList.get(i).getLineNumber();
-        }
-        return new LineNumberTable(cp.addUtf8("LineNumberTable"), 2 + ln.length * 4, ln, cp
-                .getConstantPool());
-    }
-
-
-    /**
-     * Add an exception handler, i.e., specify region where a handler is active and an
-     * instruction where the actual handling is done.
-     *
-     * @param start_pc Start of region (inclusive)
-     * @param end_pc End of region (inclusive)
-     * @param handler_pc Where handling is done
-     * @param catch_type class type of handled exception or null if any
-     * exception is handled
-     * @return new exception handler object
-     */
-    public CodeExceptionGen addExceptionHandler( final InstructionHandle start_pc,
-            final InstructionHandle end_pc, final InstructionHandle handler_pc, final ObjectType catch_type ) {
-        if (start_pc == null || end_pc == null || handler_pc == null) {
-            throw new ClassGenException("Exception handler target is null instruction");
-        }
-        final CodeExceptionGen c = new CodeExceptionGen(start_pc, end_pc, handler_pc, catch_type);
-        exceptionList.add(c);
-        return c;
-    }
-
-
-    /**
-     * Remove an exception handler.
-     */
-    public void removeExceptionHandler( final CodeExceptionGen c ) {
-        exceptionList.remove(c);
-    }
-
-
-    /**
-     * Remove all line numbers.
-     */
-    public void removeExceptionHandlers() {
-        exceptionList.clear();
-    }
-
-
-    /*
-     * @return array of declared exception handlers
-     */
-    public CodeExceptionGen[] getExceptionHandlers() {
-        final CodeExceptionGen[] cg = new CodeExceptionGen[exceptionList.size()];
-        exceptionList.toArray(cg);
-        return cg;
-    }
-
-
-    /**
-     * @return code exceptions for `Code' attribute
-     */
-    private CodeException[] getCodeExceptions() {
-        final int size = exceptionList.size();
-        final CodeException[] c_exc = new CodeException[size];
-        for (int i = 0; i < size; i++) {
-            final CodeExceptionGen c =  exceptionList.get(i);
-            c_exc[i] = c.getCodeException(super.getConstantPool());
-        }
-        return c_exc;
-    }
-
-
-    /**
-     * Add an exception possibly thrown by this method.
-     *
-     * @param className (fully qualified) name of exception
-     */
-    public void addException( final String className ) {
-        throwsList.add(className);
-    }
-
-
-    /**
-     * Remove an exception.
-     */
-    public void removeException( final String c ) {
-        throwsList.remove(c);
-    }
-
-
-    /**
-     * Remove all exceptions.
-     */
-    public void removeExceptions() {
-        throwsList.clear();
-    }
-
-
-    /*
-     * @return array of thrown exceptions
-     */
-    public String[] getExceptions() {
-        final String[] e = new String[throwsList.size()];
-        throwsList.toArray(e);
-        return e;
-    }
-
-
-    /**
-     * @return `Exceptions' attribute of all the exceptions thrown by this method.
-     */
-    private ExceptionTable getExceptionTable( final ConstantPoolGen cp ) {
-        final int size = throwsList.size();
-        final int[] ex = new int[size];
-        for (int i = 0; i < size; i++) {
-            ex[i] = cp.addClass(throwsList.get(i));
-        }
-        return new ExceptionTable(cp.addUtf8("Exceptions"), 2 + 2 * size, ex, cp.getConstantPool());
-    }
-
-
-    /**
-     * Add an attribute to the code. Currently, the JVM knows about the
-     * LineNumberTable, LocalVariableTable and StackMap attributes,
-     * where the former two will be generated automatically and the
-     * latter is used for the MIDP only. Other attributes will be
-     * ignored by the JVM but do no harm.
-     *
-     * @param a attribute to be added
-     */
-    public void addCodeAttribute( final Attribute a ) {
-        codeAttrsList.add(a);
-    }
-
-
-    /**
-     * Remove the LocalVariableTypeTable
-     */
-    public void removeLocalVariableTypeTable( ) {
-        localVariableTypeTable = null;
-    }
-
-    /**
-     * Remove a code attribute.
-     */
-    public void removeCodeAttribute( final Attribute a ) {
-        codeAttrsList.remove(a);
-    }
-
-
-    /**
-     * Remove all code attributes.
-     */
-    public void removeCodeAttributes() {
-        localVariableTypeTable = null;
-        codeAttrsList.clear();
-    }
-
-
-    /**
-     * @return all attributes of this method.
-     */
-    public Attribute[] getCodeAttributes() {
-        final Attribute[] attributes = new Attribute[codeAttrsList.size()];
-        codeAttrsList.toArray(attributes);
-        return attributes;
-    }
-
-    /**
-     * @since 6.0
-     */
-    public void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
-        final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
-        for (final Attribute attr : attrs) {
-            addAttribute(attr);
-        }
-    }
-
-    /**
-     * @since 6.0
-     */
-    public void addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
-        if (!hasParameterAnnotations) {
-            return;
-        }
-        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, paramAnnotations);
-        if (attrs != null) {
-            for (final Attribute attr : attrs) {
-                addAttribute(attr);
-            }
-        }
-    }
-
-    private Attribute[] addRuntimeAnnotationsAsAttribute(final ConstantPoolGen cp) {
-        final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
-        for (final Attribute attr : attrs) {
-            addAttribute(attr);
-        }
-        return attrs;
-    }
-
-    private Attribute[] addRuntimeParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
-        if (!hasParameterAnnotations) {
-            return Attribute.EMPTY_ATTRIBUTE_ARRAY;
-        }
-        final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, paramAnnotations);
-        for (final Attribute attr : attrs) {
-            addAttribute(attr);
-        }
-        return attrs;
-    }
-
-    /**
-     * Would prefer to make this private, but need a way to test if client is
-     * using BCEL version 6.5.0 or later that contains fix for BCEL-329.
-     * @since 6.5.0
-     */
-    public void removeRuntimeAttributes(final Attribute[] attrs) {
-        for (final Attribute attr : attrs) {
-            removeAttribute(attr);
-        }
+    public int getMaxStack() {
+        return maxStack;
     }
 
 
@@ -751,38 +979,132 @@ public class MethodGen extends FieldGenOrMethodGen {
         return m;
     }
 
-    private void updateLocalVariableTable(final LocalVariableTable a) {
-        final LocalVariable[] lv = a.getLocalVariableTable();
-        removeLocalVariables();
-        for (final LocalVariable l : lv) {
-            InstructionHandle start = il.findHandle(l.getStartPC());
-            final InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
-            // Repair malformed handles
-            if (null == start) {
-                start = il.getStart();
-            }
-            // end == null => live to end of method
-            // Since we are recreating the LocalVaraible, we must
-            // propagate the orig_index to new copy.
-            addLocalVariable(l.getName(), Type.getType(l.getSignature()), l
-                    .getIndex(), start, end, l.getOrigIndex());
-        }
+
+    public Type getReturnType() {
+        return getType();
     }
 
-    private void adjustLocalVariableTypeTable(final LocalVariableTable lvt) {
-        final LocalVariable[] lv = lvt.getLocalVariableTable();
-        final LocalVariable[] lvg = localVariableTypeTable.getLocalVariableTypeTable();
 
-        for (final LocalVariable element : lvg) {
-            for (final LocalVariable l : lv) {
-                if (element.getName().equals(l.getName()) && element.getIndex() == l.getOrigIndex()) {
-                    element.setLength(l.getLength());
-                    element.setStartPC(l.getStartPC());
-                    element.setIndex(l.getIndex());
-                    break;
-                }
-            }
+    @Override
+    public String getSignature() {
+        return Type.getMethodSignature(super.getType(), argTypes);
+    }
+
+
+    /**
+     * Return value as defined by given BCELComparator strategy.
+     * By default return the hashcode of the method's name XOR signature.
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return bcelComparator.hashCode(this);
+    }
+
+
+    private List<AnnotationEntryGen> makeMutableVersion(final AnnotationEntry[] mutableArray)
+    {
+        final List<AnnotationEntryGen> result = new ArrayList<>();
+        for (final AnnotationEntry element : mutableArray) {
+            result.add(new AnnotationEntryGen(element, getConstantPool(),
+                    false));
         }
+        return result;
+    }
+
+
+    /**
+     * Remove a code attribute.
+     */
+    public void removeCodeAttribute( final Attribute a ) {
+        codeAttrsList.remove(a);
+    }
+
+
+    /**
+     * Remove all code attributes.
+     */
+    public void removeCodeAttributes() {
+        localVariableTypeTable = null;
+        codeAttrsList.clear();
+    }
+
+
+    /**
+     * Remove an exception.
+     */
+    public void removeException( final String c ) {
+        throwsList.remove(c);
+    }
+
+
+    /**
+     * Remove an exception handler.
+     */
+    public void removeExceptionHandler( final CodeExceptionGen c ) {
+        exceptionList.remove(c);
+    }
+
+
+    /**
+     * Remove all line numbers.
+     */
+    public void removeExceptionHandlers() {
+        exceptionList.clear();
+    }
+
+
+    /**
+     * Remove all exceptions.
+     */
+    public void removeExceptions() {
+        throwsList.clear();
+    }
+
+
+    /**
+     * Remove a line number.
+     */
+    public void removeLineNumber( final LineNumberGen l ) {
+        lineNumberList.remove(l);
+    }
+
+
+    /**
+     * Remove all line numbers.
+     */
+    public void removeLineNumbers() {
+        lineNumberList.clear();
+    }
+
+
+    /**
+     * Remove a local variable, its slot will not be reused, if you do not use addLocalVariable
+     * with an explicit index argument.
+     */
+    public void removeLocalVariable( final LocalVariableGen l ) {
+        l.dispose();
+        variableList.remove(l);
+    }
+
+
+    /**
+     * Remove all local variables.
+     */
+    public void removeLocalVariables() {
+        for (final LocalVariableGen lv : variableList) {
+            lv.dispose();
+        }
+        variableList.clear();
+    }
+
+
+    /**
+     * Remove the LocalVariableTypeTable
+     */
+    public void removeLocalVariableTypeTable( ) {
+        localVariableTypeTable = null;
     }
 
 
@@ -813,62 +1135,32 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
     }
 
+    /** Remove observer for this object.
+     */
+    public void removeObserver( final MethodObserver o ) {
+        if (observers != null) {
+            observers.remove(o);
+        }
+    }
 
     /**
-     * Set maximum number of local variables.
+     * Would prefer to make this private, but need a way to test if client is
+     * using BCEL version 6.5.0 or later that contains fix for BCEL-329.
+     * @since 6.5.0
      */
-    public void setMaxLocals( final int m ) {
-        maxLocals = m;
+    public void removeRuntimeAttributes(final Attribute[] attrs) {
+        for (final Attribute attr : attrs) {
+            removeAttribute(attr);
+        }
     }
 
 
-    public int getMaxLocals() {
-        return maxLocals;
+    public void setArgumentName( final int i, final String name ) {
+        argNames[i] = name;
     }
 
-
-    /**
-     * Set maximum stack size for this method.
-     */
-    public void setMaxStack( final int m ) { // TODO could be package-protected?
-        maxStack = m;
-    }
-
-
-    public int getMaxStack() {
-        return maxStack;
-    }
-
-
-    /** @return class that contains this method
-     */
-    public String getClassName() {
-        return className;
-    }
-
-
-    public void setClassName( final String class_name ) { // TODO could be package-protected?
-        this.className = class_name;
-    }
-
-
-    public void setReturnType( final Type return_type ) {
-        setType(return_type);
-    }
-
-
-    public Type getReturnType() {
-        return getType();
-    }
-
-
-    public void setArgumentTypes( final Type[] arg_types ) {
-        this.argTypes = arg_types;
-    }
-
-
-    public Type[] getArgumentTypes() {
-        return argTypes.clone();
+    public void setArgumentNames( final String[] arg_names ) {
+        this.argNames = arg_names;
     }
 
 
@@ -877,56 +1169,18 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
 
-    public Type getArgumentType( final int i ) {
-        return argTypes[i];
+    public void setArgumentTypes( final Type[] arg_types ) {
+        this.argTypes = arg_types;
     }
 
 
-    public void setArgumentNames( final String[] arg_names ) {
-        this.argNames = arg_names;
-    }
-
-
-    public String[] getArgumentNames() {
-        return argNames.clone();
-    }
-
-
-    public void setArgumentName( final int i, final String name ) {
-        argNames[i] = name;
-    }
-
-
-    public String getArgumentName( final int i ) {
-        return argNames[i];
-    }
-
-
-    public InstructionList getInstructionList() {
-        return il;
+    public void setClassName( final String class_name ) { // TODO could be package-protected?
+        this.className = class_name;
     }
 
 
     public void setInstructionList( final InstructionList il ) { // TODO could be package-protected?
         this.il = il;
-    }
-
-
-    @Override
-    public String getSignature() {
-        return Type.getMethodSignature(super.getType(), argTypes);
-    }
-
-
-    /**
-     * Computes max. stack size by performing control flow analysis.
-     */
-    public void setMaxStack() { // TODO could be package-protected? (some tests would need repackaging)
-        if (il != null) {
-            maxStack = getMaxStack(super.getConstantPool(), il, getExceptionHandlers());
-        } else {
-            maxStack = 0;
-        }
     }
 
 
@@ -958,167 +1212,43 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Set maximum number of local variables.
+     */
+    public void setMaxLocals( final int m ) {
+        maxLocals = m;
+    }
+
+    /**
+     * Computes max. stack size by performing control flow analysis.
+     */
+    public void setMaxStack() { // TODO could be package-protected? (some tests would need repackaging)
+        if (il != null) {
+            maxStack = getMaxStack(super.getConstantPool(), il, getExceptionHandlers());
+        } else {
+            maxStack = 0;
+        }
+    }
+
+    /**
+     * Set maximum stack size for this method.
+     */
+    public void setMaxStack( final int m ) { // TODO could be package-protected?
+        maxStack = m;
+    }
+
+    public void setReturnType( final Type return_type ) {
+        setType(return_type);
+    }
+
+
+
 
     /** Do not/Do produce attributes code attributesLineNumberTable and
      * LocalVariableTable, like javac -O
      */
     public void stripAttributes( final boolean flag ) {
         stripAttributes = flag;
-    }
-
-    static final class BranchTarget {
-
-        final InstructionHandle target;
-        final int stackDepth;
-
-
-        BranchTarget(final InstructionHandle target, final int stackDepth) {
-            this.target = target;
-            this.stackDepth = stackDepth;
-        }
-    }
-
-    static final class BranchStack {
-
-        private final Stack<BranchTarget> branchTargets = new Stack<>();
-        private final Hashtable<InstructionHandle, BranchTarget> visitedTargets = new Hashtable<>();
-
-
-        public void push( final InstructionHandle target, final int stackDepth ) {
-            if (visited(target)) {
-                return;
-            }
-            branchTargets.push(visit(target, stackDepth));
-        }
-
-
-        public BranchTarget pop() {
-            if (!branchTargets.empty()) {
-                return branchTargets.pop();
-            }
-            return null;
-        }
-
-
-        private BranchTarget visit( final InstructionHandle target, final int stackDepth ) {
-            final BranchTarget bt = new BranchTarget(target, stackDepth);
-            visitedTargets.put(target, bt);
-            return bt;
-        }
-
-
-        private boolean visited( final InstructionHandle target ) {
-            return visitedTargets.get(target) != null;
-        }
-    }
-
-
-    /**
-     * Computes stack usage of an instruction list by performing control flow analysis.
-     *
-     * @return maximum stack depth used by method
-     */
-    public static int getMaxStack( final ConstantPoolGen cp, final InstructionList il, final CodeExceptionGen[] et ) {
-        final BranchStack branchTargets = new BranchStack();
-        /* Initially, populate the branch stack with the exception
-         * handlers, because these aren't (necessarily) branched to
-         * explicitly. in each case, the stack will have depth 1,
-         * containing the exception object.
-         */
-        for (final CodeExceptionGen element : et) {
-            final InstructionHandle handler_pc = element.getHandlerPC();
-            if (handler_pc != null) {
-                branchTargets.push(handler_pc, 1);
-            }
-        }
-        int stackDepth = 0;
-        int maxStackDepth = 0;
-        InstructionHandle ih = il.getStart();
-        while (ih != null) {
-            final Instruction instruction = ih.getInstruction();
-            final short opcode = instruction.getOpcode();
-            final int delta = instruction.produceStack(cp) - instruction.consumeStack(cp);
-            stackDepth += delta;
-            if (stackDepth > maxStackDepth) {
-                maxStackDepth = stackDepth;
-            }
-            // choose the next instruction based on whether current is a branch.
-            if (instruction instanceof BranchInstruction) {
-                final BranchInstruction branch = (BranchInstruction) instruction;
-                if (instruction instanceof Select) {
-                    // explore all of the select's targets. the default target is handled below.
-                    final Select select = (Select) branch;
-                    final InstructionHandle[] targets = select.getTargets();
-                    for (final InstructionHandle target : targets) {
-                        branchTargets.push(target, stackDepth);
-                    }
-                    // nothing to fall through to.
-                    ih = null;
-                } else if (!(branch instanceof IfInstruction)) {
-                    // if an instruction that comes back to following PC,
-                    // push next instruction, with stack depth reduced by 1.
-                    if (opcode == Const.JSR || opcode == Const.JSR_W) {
-                        branchTargets.push(ih.getNext(), stackDepth - 1);
-                    }
-                    ih = null;
-                }
-                // for all branches, the target of the branch is pushed on the branch stack.
-                // conditional branches have a fall through case, selects don't, and
-                // jsr/jsr_w return to the next instruction.
-                branchTargets.push(branch.getTarget(), stackDepth);
-            } else // check for instructions that terminate the method.
-            if (opcode == Const.ATHROW || opcode == Const.RET
-                    || opcode >= Const.IRETURN && opcode <= Const.RETURN) {
-                ih = null;
-            }
-            // normal case, go to the next instruction.
-            if (ih != null) {
-                ih = ih.getNext();
-            }
-            // if we have no more instructions, see if there are any deferred branches to explore.
-            if (ih == null) {
-                final BranchTarget bt = branchTargets.pop();
-                if (bt != null) {
-                    ih = bt.target;
-                    stackDepth = bt.stackDepth;
-                }
-            }
-        }
-        return maxStackDepth;
-    }
-
-    private List<MethodObserver> observers;
-
-
-    /** Add observer for this object.
-     */
-    public void addObserver( final MethodObserver o ) {
-        if (observers == null) {
-            observers = new ArrayList<>();
-        }
-        observers.add(o);
-    }
-
-
-    /** Remove observer for this object.
-     */
-    public void removeObserver( final MethodObserver o ) {
-        if (observers != null) {
-            observers.remove(o);
-        }
-    }
-
-
-    /** Call notify() method on all observers. This method is not called
-     * automatically whenever the state has changed, but has to be
-     * called by the user after they have finished editing the object.
-     */
-    public void update() {
-        if (observers != null) {
-            for (final MethodObserver observer : observers) {
-                observer.notify(this);
-            }
-        }
     }
 
 
@@ -1150,164 +1280,34 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
 
-    /** @return deep copy of this method
+    /** Call notify() method on all observers. This method is not called
+     * automatically whenever the state has changed, but has to be
+     * called by the user after they have finished editing the object.
      */
-    public MethodGen copy( final String className, final ConstantPoolGen cp ) {
-        final Method m = ((MethodGen) clone()).getMethod();
-        final MethodGen mg = new MethodGen(m, className, super.getConstantPool());
-        if (super.getConstantPool() != cp) {
-            mg.setConstantPool(cp);
-            mg.getInstructionList().replaceConstantPool(super.getConstantPool(), cp);
-        }
-        return mg;
-    }
-
-    //J5TODO: Should paramAnnotations be an array of arrays? Rather than an array of lists, this
-    // is more likely to suggest to the caller it is readonly (which a List does not).
-    /**
-     * Return a list of AnnotationGen objects representing parameter annotations
-     * @since 6.0
-     */
-    public List<AnnotationEntryGen> getAnnotationsOnParameter(final int i) {
-        ensureExistingParameterAnnotationsUnpacked();
-        if (!hasParameterAnnotations || i>argTypes.length) {
-            return null;
-        }
-        return paramAnnotations[i];
-    }
-
-    /**
-     * Goes through the attributes on the method and identifies any that are
-     * RuntimeParameterAnnotations, extracting their contents and storing them
-     * as parameter annotations. There are two kinds of parameter annotation -
-     * visible and invisible. Once they have been unpacked, these attributes are
-     * deleted. (The annotations will be rebuilt as attributes when someone
-     * builds a Method object out of this MethodGen object).
-     */
-    private void ensureExistingParameterAnnotationsUnpacked()
-    {
-        if (haveUnpackedParameterAnnotations) {
-            return;
-        }
-        // Find attributes that contain parameter annotation data
-        final Attribute[] attrs = getAttributes();
-        ParameterAnnotations paramAnnVisAttr = null;
-        ParameterAnnotations paramAnnInvisAttr = null;
-        for (final Attribute attribute : attrs) {
-            if (attribute instanceof ParameterAnnotations)
-            {
-                // Initialize paramAnnotations
-                if (!hasParameterAnnotations)
-                {
-                    @SuppressWarnings("unchecked") // OK
-                    final List<AnnotationEntryGen>[] parmList = new List[argTypes.length];
-                    paramAnnotations = parmList;
-                    for (int j = 0; j < argTypes.length; j++) {
-                        paramAnnotations[j] = new ArrayList<>();
-                    }
-                }
-                hasParameterAnnotations = true;
-                final ParameterAnnotations rpa = (ParameterAnnotations) attribute;
-                if (rpa instanceof RuntimeVisibleParameterAnnotations) {
-                    paramAnnVisAttr = rpa;
-                } else {
-                    paramAnnInvisAttr = rpa;
-                }
-                final ParameterAnnotationEntry[] parameterAnnotationEntries = rpa.getParameterAnnotationEntries();
-                for (int j = 0; j < parameterAnnotationEntries.length; j++)
-                {
-                    // This returns Annotation[] ...
-                    final ParameterAnnotationEntry immutableArray = rpa.getParameterAnnotationEntries()[j];
-                    // ... which needs transforming into an AnnotationGen[] ...
-                    final List<AnnotationEntryGen> mutable = makeMutableVersion(immutableArray.getAnnotationEntries());
-                    // ... then add these to any we already know about
-                    paramAnnotations[j].addAll(mutable);
-                }
+    public void update() {
+        if (observers != null) {
+            for (final MethodObserver observer : observers) {
+                observer.notify(this);
             }
         }
-        if (paramAnnVisAttr != null) {
-            removeAttribute(paramAnnVisAttr);
-        }
-        if (paramAnnInvisAttr != null) {
-            removeAttribute(paramAnnInvisAttr);
-        }
-        haveUnpackedParameterAnnotations = true;
-    }
-
-    private List<AnnotationEntryGen> makeMutableVersion(final AnnotationEntry[] mutableArray)
-    {
-        final List<AnnotationEntryGen> result = new ArrayList<>();
-        for (final AnnotationEntry element : mutableArray) {
-            result.add(new AnnotationEntryGen(element, getConstantPool(),
-                    false));
-        }
-        return result;
-    }
-
-    public void addParameterAnnotation(final int parameterIndex,
-            final AnnotationEntryGen annotation)
-    {
-        ensureExistingParameterAnnotationsUnpacked();
-        if (!hasParameterAnnotations)
-        {
-            @SuppressWarnings("unchecked") // OK
-            final List<AnnotationEntryGen>[] parmList = new List[argTypes.length];
-            paramAnnotations = parmList;
-            hasParameterAnnotations = true;
-        }
-        final List<AnnotationEntryGen> existingAnnotations = paramAnnotations[parameterIndex];
-        if (existingAnnotations != null)
-        {
-            existingAnnotations.add(annotation);
-        }
-        else
-        {
-            final List<AnnotationEntryGen> l = new ArrayList<>();
-            l.add(annotation);
-            paramAnnotations[parameterIndex] = l;
-        }
     }
 
 
-
-
-    /**
-     * @return Comparison strategy object
-     */
-    public static BCELComparator getComparator() {
-        return bcelComparator;
-    }
-
-
-    /**
-     * @param comparator Comparison strategy object
-     */
-    public static void setComparator( final BCELComparator comparator ) {
-        bcelComparator = comparator;
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default two MethodGen objects are said to be equal when
-     * their names and signatures are equal.
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals( final Object obj ) {
-        return bcelComparator.equals(this, obj);
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default return the hashcode of the method's name XOR signature.
-     *
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return bcelComparator.hashCode(this);
+    private void updateLocalVariableTable(final LocalVariableTable a) {
+        final LocalVariable[] lv = a.getLocalVariableTable();
+        removeLocalVariables();
+        for (final LocalVariable l : lv) {
+            InstructionHandle start = il.findHandle(l.getStartPC());
+            final InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
+            // Repair malformed handles
+            if (null == start) {
+                start = il.getStart();
+            }
+            // end == null => live to end of method
+            // Since we are recreating the LocalVaraible, we must
+            // propagate the orig_index to new copy.
+            addLocalVariable(l.getName(), Type.getType(l.getSignature()), l
+                    .getIndex(), start, end, l.getOrigIndex());
+        }
     }
 }

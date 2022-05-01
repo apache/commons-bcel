@@ -43,6 +43,14 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     }
 
 
+    @Override
+    public Class<?>[] getExceptions() {
+        return new Class[] {
+            ExceptionConst.ILLEGAL_MONITOR_STATE
+        };
+    }
+
+
     public Type getType() {
         final short _opcode = super.getOpcode();
         switch (_opcode) {
@@ -61,14 +69,6 @@ public abstract class ReturnInstruction extends Instruction implements Exception
             default: // Never reached
                 throw new ClassGenException("Unknown type " + _opcode);
         }
-    }
-
-
-    @Override
-    public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.ILLEGAL_MONITOR_STATE
-        };
     }
 
 

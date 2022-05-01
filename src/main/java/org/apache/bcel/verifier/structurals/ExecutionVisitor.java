@@ -77,14 +77,6 @@ public class ExecutionVisitor extends EmptyVisitor{
     public ExecutionVisitor() {}
 
     /**
-     * The OperandStack from the current Frame we're operating on.
-     * @see #setFrame(Frame)
-     */
-    private OperandStack stack() {
-        return frame.getStack();
-    }
-
-    /**
      * The LocalVariables from the current Frame we're operating on.
      * @see #setFrame(Frame)
      */
@@ -107,6 +99,14 @@ public class ExecutionVisitor extends EmptyVisitor{
      */
     public void setFrame(final Frame f) { // TODO could be package-protected?
         this.frame = f;
+    }
+
+    /**
+     * The OperandStack from the current Frame we're operating on.
+     * @see #setFrame(Frame)
+     */
+    private OperandStack stack() {
+        return frame.getStack();
     }
 
     ///** Symbolically executes the corresponding Java Virtual Machine instruction. */

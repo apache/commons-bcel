@@ -37,20 +37,11 @@ public class ClassPathRepository extends AbstractClassPathRepository {
     }
 
     /**
-     * Stores a new JavaClass instance into this Repository.
+     * Clears all entries from cache.
      */
     @Override
-    public void storeClass(final JavaClass javaClass) {
-        _loadedClasses.put(javaClass.getClassName(), javaClass);
-        javaClass.setRepository(this);
-    }
-
-    /**
-     * Removes class from repository.
-     */
-    @Override
-    public void removeClass(final JavaClass javaClass) {
-        _loadedClasses.remove(javaClass.getClassName());
+    public void clear() {
+        _loadedClasses.clear();
     }
 
     /**
@@ -62,10 +53,19 @@ public class ClassPathRepository extends AbstractClassPathRepository {
     }
 
     /**
-     * Clears all entries from cache.
+     * Removes class from repository.
      */
     @Override
-    public void clear() {
-        _loadedClasses.clear();
+    public void removeClass(final JavaClass javaClass) {
+        _loadedClasses.remove(javaClass.getClassName());
+    }
+
+    /**
+     * Stores a new JavaClass instance into this Repository.
+     */
+    @Override
+    public void storeClass(final JavaClass javaClass) {
+        _loadedClasses.put(javaClass.getClassName(), javaClass);
+        javaClass.setRepository(this);
     }
 }

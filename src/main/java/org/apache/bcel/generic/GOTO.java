@@ -40,6 +40,24 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
 
 
     /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitVariableLengthInstruction(this);
+        v.visitUnconditionalBranch(this);
+        v.visitBranchInstruction(this);
+        v.visitGotoInstruction(this);
+        v.visitGOTO(this);
+    }
+
+
+    /**
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
@@ -76,23 +94,5 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
             return super.getLength() - old_length;
         }
         return 0;
-    }
-
-
-    /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitVariableLengthInstruction(this);
-        v.visitUnconditionalBranch(this);
-        v.visitBranchInstruction(this);
-        v.visitGotoInstruction(this);
-        v.visitGOTO(this);
     }
 }

@@ -35,15 +35,6 @@ public final class ConstantDouble extends Constant implements ConstantObject {
 
 
     /**
-     * @param bytes Data
-     */
-    public ConstantDouble(final double bytes) {
-        super(Const.CONSTANT_Double);
-        this.bytes = bytes;
-    }
-
-
-    /**
      * Initialize from another object.
      */
     public ConstantDouble(final ConstantDouble c) {
@@ -59,6 +50,15 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      */
     ConstantDouble(final DataInput file) throws IOException {
         this(file.readDouble());
+    }
+
+
+    /**
+     * @param bytes Data
+     */
+    public ConstantDouble(final double bytes) {
+        super(Const.CONSTANT_Double);
+        this.bytes = bytes;
     }
 
 
@@ -96,6 +96,14 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     }
 
 
+    /** @return Double object
+     */
+    @Override
+    public Object getConstantValue( final ConstantPool cp ) {
+        return Double.valueOf(bytes);
+    }
+
+
     /**
      * @param bytes the raw bytes that represent the double value
      */
@@ -110,13 +118,5 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     @Override
     public String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
-    }
-
-
-    /** @return Double object
-     */
-    @Override
-    public Object getConstantValue( final ConstantPool cp ) {
-        return Double.valueOf(bytes);
     }
 }

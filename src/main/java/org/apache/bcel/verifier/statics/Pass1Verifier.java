@@ -47,24 +47,6 @@ public final class Pass1Verifier extends PassVerifier{
     private final Verifier myOwner;
 
     /**
-     * Used to load in and return the myOwner-matching JavaClass object when needed.
-     * Avoids loading in a class file when it's not really needed!
-     */
-    private JavaClass getJavaClass() {
-        if (jc == null) {
-            try {
-                jc = Repository.lookupClass(myOwner.getClassName());
-            } catch (final ClassNotFoundException e) {
-                // FIXME: currently, Pass1Verifier treats jc == null as a special
-                // case, so we don't need to do anything here.  A better solution
-                // would be to simply throw the ClassNotFoundException
-                // out of this method.
-            }
-        }
-        return jc;
-    }
-
-    /**
      * Should only be instantiated by a Verifier.
      *
      * @see Verifier
@@ -178,6 +160,24 @@ public final class Pass1Verifier extends PassVerifier{
         //TODO: Maybe change Repository's behavior to throw a LoadingException instead of just returning "null"
         //      if a class file cannot be found or in another way be looked up.
         return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Repository.lookup() failed. FILE NOT FOUND?");
+    }
+
+    /**
+     * Used to load in and return the myOwner-matching JavaClass object when needed.
+     * Avoids loading in a class file when it's not really needed!
+     */
+    private JavaClass getJavaClass() {
+        if (jc == null) {
+            try {
+                jc = Repository.lookupClass(myOwner.getClassName());
+            } catch (final ClassNotFoundException e) {
+                // FIXME: currently, Pass1Verifier treats jc == null as a special
+                // case, so we don't need to do anything here.  A better solution
+                // would be to simply throw the ClassNotFoundException
+                // out of this method.
+            }
+        }
+        return jc;
     }
 
     /**

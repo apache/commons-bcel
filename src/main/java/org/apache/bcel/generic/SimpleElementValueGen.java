@@ -38,46 +38,14 @@ public class SimpleElementValueGen extends ElementValueGen
     // For 'class' this points to the class entry in the cpGen
     private final int idx;
 
-    // ctors for each supported type... type could be inferred but for now lets
-    // force it to be passed
-    /**
-     * Protected ctor used for deserialization, doesn't *put* an entry in the
-     * constant pool, assumes the one at the supplied index is correct.
-     */
-    protected SimpleElementValueGen(final int type, final int idx, final ConstantPoolGen cpGen)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final boolean value)
     {
         super(type, cpGen);
-        this.idx = idx;
-    }
-
-    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final int value)
-    {
-        super(type, cpGen);
-        idx = getConstantPool().addInteger(value);
-    }
-
-    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final long value)
-    {
-        super(type, cpGen);
-        idx = getConstantPool().addLong(value);
-    }
-
-    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final double value)
-    {
-        super(type, cpGen);
-        idx = getConstantPool().addDouble(value);
-    }
-
-    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final float value)
-    {
-        super(type, cpGen);
-        idx = getConstantPool().addFloat(value);
-    }
-
-    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final short value)
-    {
-        super(type, cpGen);
-        idx = getConstantPool().addInteger(value);
+        if (value) {
+            idx = getConstantPool().addInteger(1);
+        } else {
+            idx = getConstantPool().addInteger(0);
+        }
     }
 
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final byte value)
@@ -92,20 +60,52 @@ public class SimpleElementValueGen extends ElementValueGen
         idx = getConstantPool().addInteger(value);
     }
 
-    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final boolean value)
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final double value)
     {
         super(type, cpGen);
-        if (value) {
-            idx = getConstantPool().addInteger(1);
-        } else {
-            idx = getConstantPool().addInteger(0);
-        }
+        idx = getConstantPool().addDouble(value);
+    }
+
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final float value)
+    {
+        super(type, cpGen);
+        idx = getConstantPool().addFloat(value);
+    }
+
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final int value)
+    {
+        super(type, cpGen);
+        idx = getConstantPool().addInteger(value);
+    }
+
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final long value)
+    {
+        super(type, cpGen);
+        idx = getConstantPool().addLong(value);
+    }
+
+    public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final short value)
+    {
+        super(type, cpGen);
+        idx = getConstantPool().addInteger(value);
     }
 
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final String value)
     {
         super(type, cpGen);
         idx = getConstantPool().addUtf8(value);
+    }
+
+    // ctors for each supported type... type could be inferred but for now lets
+    // force it to be passed
+    /**
+     * Protected ctor used for deserialization, doesn't *put* an entry in the
+     * constant pool, assumes the one at the supplied index is correct.
+     */
+    protected SimpleElementValueGen(final int type, final int idx, final ConstantPoolGen cpGen)
+    {
+        super(type, cpGen);
+        this.idx = idx;
     }
 
     /**
@@ -168,6 +168,29 @@ public class SimpleElementValueGen extends ElementValueGen
         }
     }
 
+    @Override
+    public void dump(final DataOutputStream dos) throws IOException
+    {
+        dos.writeByte(super.getElementValueType()); // u1 kind of value
+        switch (super.getElementValueType())
+        {
+        case PRIMITIVE_INT:
+        case PRIMITIVE_BYTE:
+        case PRIMITIVE_CHAR:
+        case PRIMITIVE_FLOAT:
+        case PRIMITIVE_LONG:
+        case PRIMITIVE_BOOLEAN:
+        case PRIMITIVE_SHORT:
+        case PRIMITIVE_DOUBLE:
+        case STRING:
+            dos.writeShort(idx);
+            break;
+        default:
+            throw new IllegalStateException(
+                "SimpleElementValueGen doesnt know how to write out type " + super.getElementValueType());
+        }
+    }
+
     /**
      * Return immutable variant
      */
@@ -182,16 +205,6 @@ public class SimpleElementValueGen extends ElementValueGen
         return idx;
     }
 
-    public String getValueString()
-    {
-        if (super.getElementValueType() != STRING) {
-            throw new IllegalStateException(
-                    "Dont call getValueString() on a non STRING ElementValue");
-        }
-        final ConstantUtf8 c = (ConstantUtf8) getConstantPool().getConstant(idx);
-        return c.getBytes();
-    }
-
     public int getValueInt()
     {
         if (super.getElementValueType() != PRIMITIVE_INT) {
@@ -199,6 +212,16 @@ public class SimpleElementValueGen extends ElementValueGen
                     "Dont call getValueString() on a non STRING ElementValue");
         }
         final ConstantInteger c = (ConstantInteger) getConstantPool().getConstant(idx);
+        return c.getBytes();
+    }
+
+    public String getValueString()
+    {
+        if (super.getElementValueType() != STRING) {
+            throw new IllegalStateException(
+                    "Dont call getValueString() on a non STRING ElementValue");
+        }
+        final ConstantUtf8 c = (ConstantUtf8) getConstantPool().getConstant(idx);
         return c.getBytes();
     }
 
@@ -241,29 +264,6 @@ public class SimpleElementValueGen extends ElementValueGen
         default:
             throw new IllegalStateException(
                 "SimpleElementValueGen class does not know how to stringify type " + super.getElementValueType());
-        }
-    }
-
-    @Override
-    public void dump(final DataOutputStream dos) throws IOException
-    {
-        dos.writeByte(super.getElementValueType()); // u1 kind of value
-        switch (super.getElementValueType())
-        {
-        case PRIMITIVE_INT:
-        case PRIMITIVE_BYTE:
-        case PRIMITIVE_CHAR:
-        case PRIMITIVE_FLOAT:
-        case PRIMITIVE_LONG:
-        case PRIMITIVE_BOOLEAN:
-        case PRIMITIVE_SHORT:
-        case PRIMITIVE_DOUBLE:
-        case STRING:
-            dos.writeShort(idx);
-            break;
-        default:
-            throw new IllegalStateException(
-                "SimpleElementValueGen doesnt know how to write out type " + super.getElementValueType());
         }
     }
 }

@@ -60,25 +60,6 @@ public class PLSETestCase extends AbstractTestCase
     }
 
     /**
-     * BCEL-79:
-     */
-    @Test
-    public void testB79() throws ClassNotFoundException
-    {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.PLSETestClass");
-        final ClassGen gen = new ClassGen(clazz);
-        final ConstantPoolGen pool = gen.getConstantPool();
-        final Method m = gen.getMethodAt(2);
-        final LocalVariableTable lvt = m.getLocalVariableTable();
-        //System.out.println(lvt);
-        //System.out.println(lvt.getTableLength());
-        final MethodGen mg = new MethodGen(m, gen.getClassName(), pool);
-        final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
-        //System.out.println(new_lvt);
-        assertEquals(lvt.getTableLength(), new_lvt.getTableLength(), "number of locals");
-    }
-
-    /**
      * BCEL-262:
      */
     @Test
@@ -139,6 +120,25 @@ public class PLSETestCase extends AbstractTestCase
         assertFalse(data.contains("-"), "code offsets must be positive");
         Stream.of(lineNumbers).forEach(ln -> assertFalse(ln.getLineNumber() < 0));
         Stream.of(lineNumbers).forEach(ln -> assertFalse(ln.getStartPC() < 0));
+    }
+
+    /**
+     * BCEL-79:
+     */
+    @Test
+    public void testB79() throws ClassNotFoundException
+    {
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.PLSETestClass");
+        final ClassGen gen = new ClassGen(clazz);
+        final ConstantPoolGen pool = gen.getConstantPool();
+        final Method m = gen.getMethodAt(2);
+        final LocalVariableTable lvt = m.getLocalVariableTable();
+        //System.out.println(lvt);
+        //System.out.println(lvt.getTableLength());
+        final MethodGen mg = new MethodGen(m, gen.getClassName(), pool);
+        final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
+        //System.out.println(new_lvt);
+        assertEquals(lvt.getTableLength(), new_lvt.getTableLength(), "number of locals");
     }
 
     /**

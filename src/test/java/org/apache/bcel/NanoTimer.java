@@ -22,6 +22,10 @@ public class NanoTimer {
 
     private long timeNanos;
 
+    public void reset() {
+        timeNanos = 0;
+    }
+
     public NanoTimer start() {
         timeNanos -= System.nanoTime();
         return this;
@@ -33,10 +37,6 @@ public class NanoTimer {
 
     public void subtract(final NanoTimer o) {
         timeNanos -= o.timeNanos;
-    }
-
-    public void reset() {
-        timeNanos = 0;
     }
 
     /**

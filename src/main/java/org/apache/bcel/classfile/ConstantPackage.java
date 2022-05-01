@@ -92,6 +92,22 @@ public final class ConstantPackage extends Constant implements ConstantObject {
     }
 
 
+    /** @return dereferenced string
+     */
+    public String getBytes( final ConstantPool cp ) {
+        return (String) getConstantValue(cp);
+    }
+
+
+    /** @return String object
+     */
+    @Override
+    public Object getConstantValue( final ConstantPool cp ) {
+        final Constant c = cp.getConstant(nameIndex, Const.CONSTANT_Utf8);
+        return ((ConstantUtf8) c).getBytes();
+    }
+
+
     /**
      * @return Name index in constant pool of package name.
      */
@@ -105,22 +121,6 @@ public final class ConstantPackage extends Constant implements ConstantObject {
      */
     public void setNameIndex( final int nameIndex ) {
         this.nameIndex = nameIndex;
-    }
-
-
-    /** @return String object
-     */
-    @Override
-    public Object getConstantValue( final ConstantPool cp ) {
-        final Constant c = cp.getConstant(nameIndex, Const.CONSTANT_Utf8);
-        return ((ConstantUtf8) c).getBytes();
-    }
-
-
-    /** @return dereferenced string
-     */
-    public String getBytes( final ConstantPool cp ) {
-        return (String) getConstantValue(cp);
     }
 
 

@@ -34,38 +34,6 @@ import org.apache.bcel.classfile.SimpleElementValue;
  */
 public abstract class ElementValueGen
 {
-    /**
-     * @deprecated (since 6.0) will be made private and final; do not access directly, use getter
-     */
-    @Deprecated
-    protected int type;
-
-    /**
-     * @deprecated (since 6.0) will be made private and final; do not access directly, use getter
-     */
-    @Deprecated
-    protected ConstantPoolGen cpGen;
-
-    protected ElementValueGen(final int type, final ConstantPoolGen cpGen)
-    {
-        this.type = type;
-        this.cpGen = cpGen;
-    }
-
-    /**
-     * Subtypes return an immutable variant of the ElementValueGen
-     */
-    public abstract ElementValue getElementValue();
-
-    public int getElementValueType()
-    {
-        return type;
-    }
-
-    public abstract String stringifyValue();
-
-    public abstract void dump(DataOutputStream dos) throws IOException;
-
     public static final int STRING = 's';
 
     public static final int ENUM_CONSTANT = 'e';
@@ -91,6 +59,43 @@ public abstract class ElementValueGen
     public static final int PRIMITIVE_SHORT = 'S';
 
     public static final int PRIMITIVE_BOOLEAN = 'Z';
+
+    /**
+     * Creates an (modifiable) ElementValueGen copy of an (immutable)
+     * ElementValue - constant pool is assumed correct.
+     */
+    public static ElementValueGen copy(final ElementValue value,
+            final ConstantPoolGen cpool, final boolean copyPoolEntries)
+    {
+        switch (value.getElementValueType())
+        {
+        case 'B': // byte
+        case 'C': // char
+        case 'D': // double
+        case 'F': // float
+        case 'I': // int
+        case 'J': // long
+        case 'S': // short
+        case 'Z': // boolean
+        case 's': // String
+            return new SimpleElementValueGen((SimpleElementValue) value, cpool,
+                    copyPoolEntries);
+        case 'e': // Enum constant
+            return new EnumElementValueGen((EnumElementValue) value, cpool,
+                    copyPoolEntries);
+        case '@': // Annotation
+            return new AnnotationElementValueGen(
+                    (AnnotationElementValue) value, cpool, copyPoolEntries);
+        case '[': // Array
+            return new ArrayElementValueGen((ArrayElementValue) value, cpool,
+                    copyPoolEntries);
+        case 'c': // Class
+            return new ClassElementValueGen((ClassElementValue) value, cpool,
+                    copyPoolEntries);
+        default:
+            throw new UnsupportedOperationException("Not implemented yet! (" + value.getElementValueType() + ")");
+        }
+    }
 
     public static ElementValueGen readElementValue(final DataInput dis,
             final ConstantPoolGen cpGen) throws IOException
@@ -150,45 +155,40 @@ public abstract class ElementValueGen
         }
     }
 
+    /**
+     * @deprecated (since 6.0) will be made private and final; do not access directly, use getter
+     */
+    @Deprecated
+    protected int type;
+
+    /**
+     * @deprecated (since 6.0) will be made private and final; do not access directly, use getter
+     */
+    @Deprecated
+    protected ConstantPoolGen cpGen;
+
+    protected ElementValueGen(final int type, final ConstantPoolGen cpGen)
+    {
+        this.type = type;
+        this.cpGen = cpGen;
+    }
+
+    public abstract void dump(DataOutputStream dos) throws IOException;
+
     protected ConstantPoolGen getConstantPool()
     {
         return cpGen;
     }
 
     /**
-     * Creates an (modifiable) ElementValueGen copy of an (immutable)
-     * ElementValue - constant pool is assumed correct.
+     * Subtypes return an immutable variant of the ElementValueGen
      */
-    public static ElementValueGen copy(final ElementValue value,
-            final ConstantPoolGen cpool, final boolean copyPoolEntries)
+    public abstract ElementValue getElementValue();
+
+    public int getElementValueType()
     {
-        switch (value.getElementValueType())
-        {
-        case 'B': // byte
-        case 'C': // char
-        case 'D': // double
-        case 'F': // float
-        case 'I': // int
-        case 'J': // long
-        case 'S': // short
-        case 'Z': // boolean
-        case 's': // String
-            return new SimpleElementValueGen((SimpleElementValue) value, cpool,
-                    copyPoolEntries);
-        case 'e': // Enum constant
-            return new EnumElementValueGen((EnumElementValue) value, cpool,
-                    copyPoolEntries);
-        case '@': // Annotation
-            return new AnnotationElementValueGen(
-                    (AnnotationElementValue) value, cpool, copyPoolEntries);
-        case '[': // Array
-            return new ArrayElementValueGen((ArrayElementValue) value, cpool,
-                    copyPoolEntries);
-        case 'c': // Class
-            return new ClassElementValueGen((ClassElementValue) value, cpool,
-                    copyPoolEntries);
-        default:
-            throw new UnsupportedOperationException("Not implemented yet! (" + value.getElementValueType() + ")");
-        }
+        return type;
     }
+
+    public abstract String stringifyValue();
 }

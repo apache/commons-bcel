@@ -42,19 +42,6 @@ public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, Pop
     }
 
 
-    @Override
-    public int consumeStack( final ConstantPoolGen cpg ) {
-        return getFieldSize(cpg);
-    }
-
-
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -74,5 +61,18 @@ public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, Pop
         v.visitFieldOrMethod(this);
         v.visitFieldInstruction(this);
         v.visitPUTSTATIC(this);
+    }
+
+
+    @Override
+    public int consumeStack( final ConstantPoolGen cpg ) {
+        return getFieldSize(cpg);
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
+            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 }

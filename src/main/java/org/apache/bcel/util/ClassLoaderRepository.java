@@ -46,22 +46,11 @@ public class ClassLoaderRepository implements Repository {
     }
 
 
-    /**
-     * Store a new JavaClass into this Repository.
+    /** Clear all entries from cache.
      */
     @Override
-    public void storeClass( final JavaClass clazz ) {
-        loadedClasses.put(clazz.getClassName(), clazz);
-        clazz.setRepository(this);
-    }
-
-
-    /**
-     * Remove class from repository
-     */
-    @Override
-    public void removeClass( final JavaClass clazz ) {
-        loadedClasses.remove(clazz.getClassName());
+    public void clear() {
+        loadedClasses.clear();
     }
 
 
@@ -71,6 +60,21 @@ public class ClassLoaderRepository implements Repository {
     @Override
     public JavaClass findClass( final String className ) {
         return loadedClasses.getOrDefault(className, null);
+    }
+
+
+    /*
+     * @return null
+     */
+    @Override
+    public ClassPath getClassPath() {
+        return null;
+    }
+
+
+    @Override
+    public JavaClass loadClass( final Class<?> clazz ) throws ClassNotFoundException {
+        return loadClass(clazz.getName());
     }
 
 
@@ -98,25 +102,21 @@ public class ClassLoaderRepository implements Repository {
     }
 
 
+    /**
+     * Remove class from repository
+     */
     @Override
-    public JavaClass loadClass( final Class<?> clazz ) throws ClassNotFoundException {
-        return loadClass(clazz.getName());
+    public void removeClass( final JavaClass clazz ) {
+        loadedClasses.remove(clazz.getClassName());
     }
 
 
-    /** Clear all entries from cache.
+    /**
+     * Store a new JavaClass into this Repository.
      */
     @Override
-    public void clear() {
-        loadedClasses.clear();
-    }
-
-
-    /*
-     * @return null
-     */
-    @Override
-    public ClassPath getClassPath() {
-        return null;
+    public void storeClass( final JavaClass clazz ) {
+        loadedClasses.put(clazz.getClassName(), clazz);
+        clazz.setRepository(this);
     }
 }

@@ -31,8 +31,8 @@ public class ClassStack {
     private final Stack<JavaClass> stack = new Stack<>();
 
 
-    public void push( final JavaClass clazz ) {
-        stack.push(clazz);
+    public boolean empty() {
+        return stack.empty();
     }
 
 
@@ -41,12 +41,12 @@ public class ClassStack {
     }
 
 
-    public JavaClass top() {
-        return stack.peek();
+    public void push( final JavaClass clazz ) {
+        stack.push(clazz);
     }
 
 
-    public boolean empty() {
-        return stack.empty();
+    public JavaClass top() {
+        return stack.peek();
     }
 }

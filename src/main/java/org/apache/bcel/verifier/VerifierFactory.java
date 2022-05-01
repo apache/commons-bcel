@@ -43,9 +43,18 @@ public class VerifierFactory {
 
 
     /**
-     * The VerifierFactory is not instantiable.
+     * Adds the VerifierFactoryObserver o to the list of observers.
      */
-    private VerifierFactory() {
+    public static void attach( final VerifierFactoryObserver o ) {
+        observers.add(o);
+    }
+
+
+    /**
+     * Removes the VerifierFactoryObserver o from the list of observers.
+     */
+    public static void detach( final VerifierFactoryObserver o ) {
+        observers.remove(o);
     }
 
 
@@ -66,17 +75,6 @@ public class VerifierFactory {
 
 
     /**
-     * Notifies the observers of a newly generated Verifier.
-     */
-    private static void notify( final String fullyQualifiedClassName ) {
-        // notify the observers
-        for (final VerifierFactoryObserver vfo : observers) {
-            vfo.update(fullyQualifiedClassName);
-        }
-    }
-
-
-    /**
      * Returns all Verifier instances created so far.
      * This is useful when a Verifier recursively lets
      * the VerifierFactory create other Verifier instances
@@ -90,17 +88,19 @@ public class VerifierFactory {
 
 
     /**
-     * Adds the VerifierFactoryObserver o to the list of observers.
+     * Notifies the observers of a newly generated Verifier.
      */
-    public static void attach( final VerifierFactoryObserver o ) {
-        observers.add(o);
+    private static void notify( final String fullyQualifiedClassName ) {
+        // notify the observers
+        for (final VerifierFactoryObserver vfo : observers) {
+            vfo.update(fullyQualifiedClassName);
+        }
     }
 
 
     /**
-     * Removes the VerifierFactoryObserver o from the list of observers.
+     * The VerifierFactory is not instantiable.
      */
-    public static void detach( final VerifierFactoryObserver o ) {
-        observers.remove(o);
+    private VerifierFactory() {
     }
 }

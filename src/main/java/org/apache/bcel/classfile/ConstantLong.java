@@ -35,15 +35,6 @@ public final class ConstantLong extends Constant implements ConstantObject {
 
 
     /**
-     * @param bytes Data
-     */
-    public ConstantLong(final long bytes) {
-        super(Const.CONSTANT_Long);
-        this.bytes = bytes;
-    }
-
-
-    /**
      * Initialize from another object.
      */
     public ConstantLong(final ConstantLong c) {
@@ -59,6 +50,15 @@ public final class ConstantLong extends Constant implements ConstantObject {
      */
     ConstantLong(final DataInput file) throws IOException {
         this(file.readLong());
+    }
+
+
+    /**
+     * @param bytes Data
+     */
+    public ConstantLong(final long bytes) {
+        super(Const.CONSTANT_Long);
+        this.bytes = bytes;
     }
 
 
@@ -96,6 +96,14 @@ public final class ConstantLong extends Constant implements ConstantObject {
     }
 
 
+    /** @return Long object
+     */
+    @Override
+    public Object getConstantValue( final ConstantPool cp ) {
+        return Long.valueOf(bytes);
+    }
+
+
     /**
      * @param bytes the raw bytes that represent this long
      */
@@ -110,13 +118,5 @@ public final class ConstantLong extends Constant implements ConstantObject {
     @Override
     public String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
-    }
-
-
-    /** @return Long object
-     */
-    @Override
-    public Object getConstantValue( final ConstantPool cp ) {
-        return Long.valueOf(bytes);
     }
 }

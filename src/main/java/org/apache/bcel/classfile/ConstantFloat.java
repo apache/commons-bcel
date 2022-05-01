@@ -35,15 +35,6 @@ public final class ConstantFloat extends Constant implements ConstantObject {
 
 
     /**
-     * @param bytes Data
-     */
-    public ConstantFloat(final float bytes) {
-        super(Const.CONSTANT_Float);
-        this.bytes = bytes;
-    }
-
-
-    /**
      * Initialize from another object. Note that both objects use the same
      * references (shallow copy). Use clone() for a physical copy.
      */
@@ -60,6 +51,15 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      */
     ConstantFloat(final DataInput file) throws IOException {
         this(file.readFloat());
+    }
+
+
+    /**
+     * @param bytes Data
+     */
+    public ConstantFloat(final float bytes) {
+        super(Const.CONSTANT_Float);
+        this.bytes = bytes;
     }
 
 
@@ -97,6 +97,14 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     }
 
 
+    /** @return Float object
+     */
+    @Override
+    public Object getConstantValue( final ConstantPool cp ) {
+        return Float.valueOf(bytes);
+    }
+
+
     /**
      * @param bytes the raw bytes that represent this float
      */
@@ -111,13 +119,5 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     @Override
     public String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
-    }
-
-
-    /** @return Float object
-     */
-    @Override
-    public Object getConstantValue( final ConstantPool cp ) {
-        return Float.valueOf(bytes);
     }
 }

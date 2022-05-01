@@ -53,14 +53,6 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
-     * Initialize from another object.
-     */
-    public ConstantCP(final ConstantCP c) {
-        this(c.getTag(), c.getClassIndex(), c.getNameAndTypeIndex());
-    }
-
-
-    /**
      * Initialize instance from file data.
      *
      * @param tag  Constant type tag
@@ -84,6 +76,14 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
+     * Initialize from another object.
+     */
+    public ConstantCP(final ConstantCP c) {
+        this(c.getTag(), c.getClassIndex(), c.getNameAndTypeIndex());
+    }
+
+
+    /**
      * Dump constant field reference to file stream in binary format.
      *
      * @param file Output file stream
@@ -98,18 +98,18 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
-     * @return Reference (index) to class this constant refers to.
+     * @return Class this field belongs to.
      */
-    public final int getClassIndex() {
-        return class_index;
+    public String getClass( final ConstantPool cp ) {
+        return cp.constantToString(class_index, Const.CONSTANT_Class);
     }
 
 
     /**
-     * @param class_index points to Constant_class
+     * @return Reference (index) to class this constant refers to.
      */
-    public final void setClassIndex( final int class_index ) {
-        this.class_index = class_index;
+    public final int getClassIndex() {
+        return class_index;
     }
 
 
@@ -122,18 +122,18 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
-     * @param name_and_type_index points to Constant_NameAndType
+     * @param class_index points to Constant_class
      */
-    public final void setNameAndTypeIndex( final int name_and_type_index ) {
-        this.name_and_type_index = name_and_type_index;
+    public final void setClassIndex( final int class_index ) {
+        this.class_index = class_index;
     }
 
 
     /**
-     * @return Class this field belongs to.
+     * @param name_and_type_index points to Constant_NameAndType
      */
-    public String getClass( final ConstantPool cp ) {
-        return cp.constantToString(class_index, Const.CONSTANT_Class);
+    public final void setNameAndTypeIndex( final int name_and_type_index ) {
+        this.name_and_type_index = name_and_type_index;
     }
 
 

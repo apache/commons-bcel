@@ -47,6 +47,24 @@ public class LOOKUPSWITCH extends Select {
 
 
     /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitVariableLengthInstruction(this);
+        v.visitStackConsumer(this);
+        v.visitBranchInstruction(this);
+        v.visitSelect(this);
+        v.visitLOOKUPSWITCH(this);
+    }
+
+
+    /**
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
@@ -81,23 +99,5 @@ public class LOOKUPSWITCH extends Select {
             super.setMatch(i, bytes.readInt());
             super.setIndices(i, bytes.readInt());
         }
-    }
-
-
-    /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitVariableLengthInstruction(this);
-        v.visitStackConsumer(this);
-        v.visitBranchInstruction(this);
-        v.visitSelect(this);
-        v.visitLOOKUPSWITCH(this);
     }
 }

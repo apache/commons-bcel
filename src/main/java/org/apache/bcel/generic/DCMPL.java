@@ -28,13 +28,6 @@ public class DCMPL extends Instruction implements TypedInstruction, StackProduce
         super(org.apache.bcel.Const.DCMPL, (short) 1);
     }
 
-    /** @return Type.DOUBLE
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.DOUBLE;
-    }
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -49,5 +42,12 @@ public class DCMPL extends Instruction implements TypedInstruction, StackProduce
         v.visitStackProducer(this);
         v.visitStackConsumer(this);
         v.visitDCMPL(this);
+    }
+
+    /** @return Type.DOUBLE
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.DOUBLE;
     }
 }

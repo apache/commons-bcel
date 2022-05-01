@@ -32,96 +32,6 @@ import org.apache.bcel.Const;
  */
 public final class Signature extends Attribute {
 
-    private int signatureIndex;
-
-
-    /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
-     */
-    public Signature(final Signature c) {
-        this(c.getNameIndex(), c.getLength(), c.getSignatureIndex(), c.getConstantPool());
-    }
-
-
-    /**
-     * Construct object from file stream.
-     * @param name_index Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constant_pool Array of constants
-     * @throws IOException
-     */
-    Signature(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
-            throws IOException {
-        this(name_index, length, input.readUnsignedShort(), constant_pool);
-    }
-
-
-    /**
-     * @param name_index Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param signatureIndex Index in constant pool to CONSTANT_Utf8
-     * @param constant_pool Array of constants
-     */
-    public Signature(final int name_index, final int length, final int signatureIndex, final ConstantPool constant_pool) {
-        super(Const.ATTR_SIGNATURE, name_index, length, constant_pool);
-        this.signatureIndex = signatureIndex;
-    }
-
-
-    /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        //System.err.println("Visiting non-standard Signature object");
-        v.visitSignature(this);
-    }
-
-
-    /**
-     * Dump source file attribute to file stream in binary format.
-     *
-     * @param file Output file stream
-     * @throws IOException
-     */
-    @Override
-    public void dump( final DataOutputStream file ) throws IOException {
-        super.dump(file);
-        file.writeShort(signatureIndex);
-    }
-
-
-    /**
-     * @return Index in constant pool of source file name.
-     */
-    public int getSignatureIndex() {
-        return signatureIndex;
-    }
-
-
-    /**
-     * @param signatureIndex the index info the constant pool of this signature
-     */
-    public void setSignatureIndex( final int signatureIndex ) {
-        this.signatureIndex = signatureIndex;
-    }
-
-
-    /**
-     * @return GJ signature.
-     */
-    public String getSignature() {
-        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(signatureIndex,
-                Const.CONSTANT_Utf8);
-        return c.getBytes();
-    }
-
     /**
      * Extends ByteArrayInputStream to make 'unreading' chars possible.
      */
@@ -147,6 +57,53 @@ public final class Signature extends Attribute {
 
     private static boolean identStart( final int ch ) {
         return ch == 'T' || ch == 'L';
+    }
+
+
+    // @since 6.0 is no longer final
+    public static boolean isActualParameterList( final String s ) {
+        return s.startsWith("L") && s.endsWith(">;");
+    }
+
+
+    // @since 6.0 is no longer final
+    public static boolean isFormalParameterList( final String s ) {
+        return s.startsWith("<") && s.indexOf(':') > 0;
+    }
+
+
+    private static void matchGJIdent( final MyByteArrayInputStream in, final StringBuilder buf ) {
+        int ch;
+        matchIdent(in, buf);
+        ch = in.read();
+        if (ch == '<' || ch == '(') { // Parameterized or method
+            //System.out.println("Enter <");
+            buf.append((char) ch);
+            matchGJIdent(in, buf);
+            while ((ch = in.read()) != '>' && ch != ')') { // List of parameters
+                if (ch == -1) {
+                    throw new IllegalArgumentException("Illegal signature: " + in.getData()
+                            + " reaching EOF");
+                }
+                //System.out.println("Still no >");
+                buf.append(", ");
+                in.unread();
+                matchGJIdent(in, buf); // Recursive call
+            }
+            //System.out.println("Exit >");
+            buf.append((char) ch);
+        } else {
+            in.unread();
+        }
+        ch = in.read();
+        if (identStart(ch)) {
+            in.unread();
+            matchGJIdent(in, buf);
+        } else if (ch == ')') {
+            in.unread();
+        } else if (ch != ';') {
+            throw new IllegalArgumentException("Illegal signature: " + in.getData() + " read " + (char) ch);
+        }
     }
 
 
@@ -193,41 +150,6 @@ public final class Signature extends Attribute {
     }
 
 
-    private static void matchGJIdent( final MyByteArrayInputStream in, final StringBuilder buf ) {
-        int ch;
-        matchIdent(in, buf);
-        ch = in.read();
-        if (ch == '<' || ch == '(') { // Parameterized or method
-            //System.out.println("Enter <");
-            buf.append((char) ch);
-            matchGJIdent(in, buf);
-            while ((ch = in.read()) != '>' && ch != ')') { // List of parameters
-                if (ch == -1) {
-                    throw new IllegalArgumentException("Illegal signature: " + in.getData()
-                            + " reaching EOF");
-                }
-                //System.out.println("Still no >");
-                buf.append(", ");
-                in.unread();
-                matchGJIdent(in, buf); // Recursive call
-            }
-            //System.out.println("Exit >");
-            buf.append((char) ch);
-        } else {
-            in.unread();
-        }
-        ch = in.read();
-        if (identStart(ch)) {
-            in.unread();
-            matchGJIdent(in, buf);
-        } else if (ch == ')') {
-            in.unread();
-        } else if (ch != ';') {
-            throw new IllegalArgumentException("Illegal signature: " + in.getData() + " read " + (char) ch);
-        }
-    }
-
-
     public static String translate( final String s ) {
         //System.out.println("Sig:" + s);
         final StringBuilder buf = new StringBuilder();
@@ -236,15 +158,102 @@ public final class Signature extends Attribute {
     }
 
 
-    // @since 6.0 is no longer final
-    public static boolean isFormalParameterList( final String s ) {
-        return s.startsWith("<") && s.indexOf(':') > 0;
+    private int signatureIndex;
+
+
+    /**
+     * Construct object from file stream.
+     * @param name_index Index in constant pool to CONSTANT_Utf8
+     * @param length Content length in bytes
+     * @param input Input stream
+     * @param constant_pool Array of constants
+     * @throws IOException
+     */
+    Signature(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
+            throws IOException {
+        this(name_index, length, input.readUnsignedShort(), constant_pool);
+    }
+
+    /**
+     * @param name_index Index in constant pool to CONSTANT_Utf8
+     * @param length Content length in bytes
+     * @param signatureIndex Index in constant pool to CONSTANT_Utf8
+     * @param constant_pool Array of constants
+     */
+    public Signature(final int name_index, final int length, final int signatureIndex, final ConstantPool constant_pool) {
+        super(Const.ATTR_SIGNATURE, name_index, length, constant_pool);
+        this.signatureIndex = signatureIndex;
     }
 
 
-    // @since 6.0 is no longer final
-    public static boolean isActualParameterList( final String s ) {
-        return s.startsWith("L") && s.endsWith(">;");
+    /**
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use clone() for a physical copy.
+     */
+    public Signature(final Signature c) {
+        this(c.getNameIndex(), c.getLength(), c.getSignatureIndex(), c.getConstantPool());
+    }
+
+
+    /**
+     * Called by objects that are traversing the nodes of the tree implicitely
+     * defined by the contents of a Java class. I.e., the hierarchy of methods,
+     * fields, attributes, etc. spawns a tree of objects.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        //System.err.println("Visiting non-standard Signature object");
+        v.visitSignature(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        return (Attribute) clone();
+    }
+
+
+    /**
+     * Dump source file attribute to file stream in binary format.
+     *
+     * @param file Output file stream
+     * @throws IOException
+     */
+    @Override
+    public void dump( final DataOutputStream file ) throws IOException {
+        super.dump(file);
+        file.writeShort(signatureIndex);
+    }
+
+
+    /**
+     * @return GJ signature.
+     */
+    public String getSignature() {
+        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(signatureIndex,
+                Const.CONSTANT_Utf8);
+        return c.getBytes();
+    }
+
+
+    /**
+     * @return Index in constant pool of source file name.
+     */
+    public int getSignatureIndex() {
+        return signatureIndex;
+    }
+
+
+    /**
+     * @param signatureIndex the index info the constant pool of this signature
+     */
+    public void setSignatureIndex( final int signatureIndex ) {
+        this.signatureIndex = signatureIndex;
     }
 
 
@@ -255,14 +264,5 @@ public final class Signature extends Attribute {
     public String toString() {
         final String s = getSignature();
         return "Signature: " + s;
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        return (Attribute) clone();
     }
 }

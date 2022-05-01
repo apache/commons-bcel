@@ -88,6 +88,22 @@ public final class ConstantString extends Constant implements ConstantObject {
     }
 
 
+    /** @return dereferenced string
+     */
+    public String getBytes( final ConstantPool cp ) {
+        return (String) getConstantValue(cp);
+    }
+
+
+    /** @return String object
+     */
+    @Override
+    public Object getConstantValue( final ConstantPool cp ) {
+        final Constant c = cp.getConstant(stringIndex, Const.CONSTANT_Utf8);
+        return ((ConstantUtf8) c).getBytes();
+    }
+
+
     /**
      * @return Index in constant pool of the string (ConstantUtf8).
      */
@@ -110,21 +126,5 @@ public final class ConstantString extends Constant implements ConstantObject {
     @Override
     public String toString() {
         return super.toString() + "(stringIndex = " + stringIndex + ")";
-    }
-
-
-    /** @return String object
-     */
-    @Override
-    public Object getConstantValue( final ConstantPool cp ) {
-        final Constant c = cp.getConstant(stringIndex, Const.CONSTANT_Utf8);
-        return ((ConstantUtf8) c).getBytes();
-    }
-
-
-    /** @return dereferenced string
-     */
-    public String getBytes( final ConstantPool cp ) {
-        return (String) getConstantValue(cp);
     }
 }

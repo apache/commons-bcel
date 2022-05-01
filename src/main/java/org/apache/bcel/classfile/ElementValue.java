@@ -26,53 +26,26 @@ import java.io.IOException;
  */
 public abstract class ElementValue
 {
-    /**
-     * @deprecated (since 6.0) will be made private and final; do not access directly, use getter
-     */
-    @java.lang.Deprecated
-    protected int type; // TODO should be final
-
-    /**
-     * @deprecated (since 6.0) will be made private and final; do not access directly, use getter
-     */
-    @java.lang.Deprecated
-    protected ConstantPool cpool; // TODO should be final
-
-    @Override
-    public String toString()
-    {
-        return stringifyValue();
-    }
-
-    protected ElementValue(final int type, final ConstantPool cpool)
-    {
-        this.type = type;
-        this.cpool = cpool;
-    }
-
-    public int getElementValueType()
-    {
-        return type;
-    }
-
-    public abstract String stringifyValue();
-
-    public abstract void dump(DataOutputStream dos) throws IOException;
-
     public static final byte STRING            = 's';
+
     public static final byte ENUM_CONSTANT     = 'e';
+
     public static final byte CLASS             = 'c';
+
     public static final byte ANNOTATION        = '@';
+
     public static final byte ARRAY             = '[';
+
     public static final byte PRIMITIVE_INT     = 'I';
+
     public static final byte PRIMITIVE_BYTE    = 'B';
+
     public static final byte PRIMITIVE_CHAR    = 'C';
     public static final byte PRIMITIVE_DOUBLE  = 'D';
     public static final byte PRIMITIVE_FLOAT   = 'F';
     public static final byte PRIMITIVE_LONG    = 'J';
     public static final byte PRIMITIVE_SHORT   = 'S';
     public static final byte PRIMITIVE_BOOLEAN = 'Z';
-
     public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool) throws IOException
     {
         final byte type = input.readByte();
@@ -112,10 +85,29 @@ public abstract class ElementValue
                 throw new IllegalArgumentException("Unexpected element value kind in annotation: " + type);
         }
     }
-
+    /**
+     * @deprecated (since 6.0) will be made private and final; do not access directly, use getter
+     */
+    @java.lang.Deprecated
+    protected int type; // TODO should be final
+    /**
+     * @deprecated (since 6.0) will be made private and final; do not access directly, use getter
+     */
+    @java.lang.Deprecated
+    protected ConstantPool cpool; // TODO should be final
+    protected ElementValue(final int type, final ConstantPool cpool)
+    {
+        this.type = type;
+        this.cpool = cpool;
+    }
+    public abstract void dump(DataOutputStream dos) throws IOException;
     /** @since 6.0 */
     final ConstantPool getConstantPool() {
         return cpool;
+    }
+    public int getElementValueType()
+    {
+        return type;
     }
 
     /** @since 6.0 */
@@ -123,7 +115,15 @@ public abstract class ElementValue
         return type;
     }
 
+    public abstract String stringifyValue();
+
     public String toShortString()
+    {
+        return stringifyValue();
+    }
+
+    @Override
+    public String toString()
     {
         return stringifyValue();
     }

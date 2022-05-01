@@ -29,20 +29,20 @@ package org.apache.bcel.generic;
  */
 public final class BranchHandle extends InstructionHandle {
 
-    // This is also a cache in case the InstructionHandle#swapInstruction() method is used
-    // See BCEL-273
-    private BranchInstruction bi; // An alias in fact, but saves lots of casts
-
-
-    private BranchHandle(final BranchInstruction i) {
-        super(i);
-        bi = i;
-    }
-
     /** Factory method.
      */
     static BranchHandle getBranchHandle( final BranchInstruction i ) {
         return new BranchHandle(i);
+    }
+
+
+    // This is also a cache in case the InstructionHandle#swapInstruction() method is used
+    // See BCEL-273
+    private BranchInstruction bi; // An alias in fact, but saves lots of casts
+
+    private BranchHandle(final BranchInstruction i) {
+        super(i);
+        bi = i;
     }
 
 
@@ -53,38 +53,6 @@ public final class BranchHandle extends InstructionHandle {
     @Override
     public int getPosition() {
         return bi.getPosition();
-    }
-
-
-    @Override
-    void setPosition( final int pos ) {
-        // Original code: i_position = bi.position = pos;
-        bi.setPosition(pos);
-        super.setPosition(pos);
-    }
-
-
-    @Override
-    protected int updatePosition( final int offset, final int max_offset ) {
-        final int x = bi.updatePosition(offset, max_offset);
-        super.setPosition(bi.getPosition());
-        return x;
-    }
-
-
-    /**
-     * Pass new target to instruction.
-     */
-    public void setTarget( final InstructionHandle ih ) {
-        bi.setTarget(ih);
-    }
-
-
-    /**
-     * Update target of instruction.
-     */
-    public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
-        bi.updateTarget(old_ih, new_ih);
     }
 
 
@@ -107,5 +75,37 @@ public final class BranchHandle extends InstructionHandle {
                     + " to branch handle which is not a branch instruction");
         }
         bi = (BranchInstruction) i;
+    }
+
+
+    @Override
+    void setPosition( final int pos ) {
+        // Original code: i_position = bi.position = pos;
+        bi.setPosition(pos);
+        super.setPosition(pos);
+    }
+
+
+    /**
+     * Pass new target to instruction.
+     */
+    public void setTarget( final InstructionHandle ih ) {
+        bi.setTarget(ih);
+    }
+
+
+    @Override
+    protected int updatePosition( final int offset, final int max_offset ) {
+        final int x = bi.updatePosition(offset, max_offset);
+        super.setPosition(bi.getPosition());
+        return x;
+    }
+
+
+    /**
+     * Update target of instruction.
+     */
+    public void updateTarget( final InstructionHandle old_ih, final InstructionHandle new_ih ) {
+        bi.updateTarget(old_ih, new_ih);
     }
 }

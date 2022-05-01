@@ -66,20 +66,6 @@ public class AnnotationDefault extends Attribute {
         v.visitAnnotationDefault(this);
     }
 
-    /**
-     * @param defaultValue the default value of this methodinfo's annotation
-     */
-    public final void setDefaultValue(final ElementValue defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    /**
-     * @return the default value
-     */
-    public final ElementValue getDefaultValue() {
-        return defaultValue;
-    }
-
     @Override
     public Attribute copy(final ConstantPool _constant_pool) {
         return (Attribute) clone();
@@ -89,5 +75,19 @@ public class AnnotationDefault extends Attribute {
     public final void dump(final DataOutputStream dos) throws IOException {
         super.dump(dos);
         defaultValue.dump(dos);
+    }
+
+    /**
+     * @return the default value
+     */
+    public final ElementValue getDefaultValue() {
+        return defaultValue;
+    }
+
+    /**
+     * @param defaultValue the default value of this methodinfo's annotation
+     */
+    public final void setDefaultValue(final ElementValue defaultValue) {
+        this.defaultValue = defaultValue;
     }
 }

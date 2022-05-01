@@ -37,15 +37,6 @@ public final class SourceFile extends Attribute {
 
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
-     */
-    public SourceFile(final SourceFile c) {
-        this(c.getNameIndex(), c.getLength(), c.getSourceFileIndex(), c.getConstantPool());
-    }
-
-
-    /**
      * Construct object from input stream.
      * @param name_index Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
@@ -79,6 +70,15 @@ public final class SourceFile extends Attribute {
 
 
     /**
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use clone() for a physical copy.
+     */
+    public SourceFile(final SourceFile c) {
+        this(c.getNameIndex(), c.getLength(), c.getSourceFileIndex(), c.getConstantPool());
+    }
+
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
@@ -88,6 +88,15 @@ public final class SourceFile extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         v.visitSourceFile(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        return (Attribute) clone();
     }
 
 
@@ -113,14 +122,6 @@ public final class SourceFile extends Attribute {
 
 
     /**
-     * @param sourceFileIndex
-     */
-    public void setSourceFileIndex( final int sourceFileIndex ) {
-        this.sourceFileIndex = sourceFileIndex;
-    }
-
-
-    /**
      * @return Source file name.
      */
     public String getSourceFileName() {
@@ -131,19 +132,18 @@ public final class SourceFile extends Attribute {
 
 
     /**
+     * @param sourceFileIndex
+     */
+    public void setSourceFileIndex( final int sourceFileIndex ) {
+        this.sourceFileIndex = sourceFileIndex;
+    }
+
+
+    /**
      * @return String representation
      */
     @Override
     public String toString() {
         return "SourceFile: " + getSourceFileName();
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        return (Attribute) clone();
     }
 }

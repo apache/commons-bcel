@@ -28,22 +28,6 @@ public class ArrayElementValue extends ElementValue
     // For array types, this is the array
     private final ElementValue[] elementValues;
 
-    @Override
-    public String toString()
-    {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("{");
-        for (int i = 0; i < elementValues.length; i++)
-        {
-            sb.append(elementValues[i]);
-            if (i + 1 < elementValues.length) {
-                sb.append(",");
-            }
-        }
-        sb.append("}");
-        return sb.toString();
-    }
-
     public ArrayElementValue(final int type, final ElementValue[] datums, final ConstantPool cpool)
     {
         super(type, cpool);
@@ -64,6 +48,16 @@ public class ArrayElementValue extends ElementValue
         }
     }
 
+    public ElementValue[] getElementValuesArray()
+    {
+        return elementValues;
+    }
+
+    public int getElementValuesArraySize()
+    {
+        return elementValues.length;
+    }
+
     @Override
     public String stringifyValue()
     {
@@ -80,13 +74,19 @@ public class ArrayElementValue extends ElementValue
         return sb.toString();
     }
 
-    public ElementValue[] getElementValuesArray()
+    @Override
+    public String toString()
     {
-        return elementValues;
-    }
-
-    public int getElementValuesArraySize()
-    {
-        return elementValues.length;
+        final StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        for (int i = 0; i < elementValues.length; i++)
+        {
+            sb.append(elementValues[i]);
+            if (i + 1 < elementValues.length) {
+                sb.append(",");
+            }
+        }
+        sb.append("}");
+        return sb.toString();
     }
 }

@@ -51,20 +51,6 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
     }
 
 
-    @Override
-    public Number getValue() {
-        return Float.valueOf(value);
-    }
-
-
-    /** @return Type.FLOAT
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.FLOAT;
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -80,5 +66,19 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
         v.visitTypedInstruction(this);
         v.visitConstantPushInstruction(this);
         v.visitFCONST(this);
+    }
+
+
+    /** @return Type.FLOAT
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.FLOAT;
+    }
+
+
+    @Override
+    public Number getValue() {
+        return Float.valueOf(value);
     }
 }

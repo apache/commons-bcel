@@ -17,13 +17,13 @@
  */
 package org.apache.bcel.verifier.tests;
 
+interface Interface01 extends Runnable {
+
+}
+
 public class TestLegalInvokeInterface01{
 
     public static void test1(final Interface01 t) {
         t.run();
     }
-}
-
-interface Interface01 extends Runnable {
-
 }

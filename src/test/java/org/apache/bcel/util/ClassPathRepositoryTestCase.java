@@ -35,47 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class ClassPathRepositoryTestCase {
 
-    private void verifyCaching(final AbstractClassPathRepository repository) throws ClassNotFoundException {
-        // Tests loadClass()
-        final JavaClass class1 = repository.loadClass("java.lang.String");
-        assertNotNull(class1);
-        final JavaClass class2 = repository.loadClass("java/lang/Long"); // Slashes should work
-        assertNotNull(class2);
-
-        // Tests findClass()
-        assertEquals(class1, repository.findClass("java.lang.String"));
-        assertEquals(class2, repository.findClass("java.lang.Long"));
-
-        // Tests removeClass()
-        repository.removeClass(class1);
-        assertNull(repository.findClass("java.lang.String"));
-
-        // Tests clear()
-        repository.clear();
-        assertNull(repository.findClass("java.lang.Long"));
-    }
-
-    @Test
-    public void testClassPathRepository() throws ClassNotFoundException, IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
-            verifyCaching(new ClassPathRepository(classPath));
-        }
-    }
-
-    @Test
-    public void testMemorySensitiveClassPathRepository() throws ClassNotFoundException, IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
-            verifyCaching(new MemorySensitiveClassPathRepository(classPath));
-        }
-    }
-
-    @Test
-    public void testLruCacheClassPathRepository() throws ClassNotFoundException, IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
-            verifyCaching(new LruCacheClassPathRepository(classPath, 10));
-        }
-    }
-
     @Test
     public void testClassPath() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
@@ -85,10 +44,9 @@ public class ClassPathRepositoryTestCase {
     }
 
     @Test
-    public void testNoClassNotFound() throws IOException {
+    public void testClassPathRepository() throws ClassNotFoundException, IOException {
         try (final ClassPath classPath = new ClassPath("")) {
-            final ClassPathRepository repository = new ClassPathRepository(classPath);
-            assertThrows(ClassNotFoundException.class, () -> repository.loadClass("no.such.Class"));
+            verifyCaching(new ClassPathRepository(classPath));
         }
     }
 
@@ -109,10 +67,52 @@ public class ClassPathRepositoryTestCase {
     }
 
     @Test
+    public void testLruCacheClassPathRepository() throws ClassNotFoundException, IOException {
+        try (final ClassPath classPath = new ClassPath("")) {
+            verifyCaching(new LruCacheClassPathRepository(classPath, 10));
+        }
+    }
+
+    @Test
+    public void testMemorySensitiveClassPathRepository() throws ClassNotFoundException, IOException {
+        try (final ClassPath classPath = new ClassPath("")) {
+            verifyCaching(new MemorySensitiveClassPathRepository(classPath));
+        }
+    }
+
+    @Test
+    public void testNoClassNotFound() throws IOException {
+        try (final ClassPath classPath = new ClassPath("")) {
+            final ClassPathRepository repository = new ClassPathRepository(classPath);
+            assertThrows(ClassNotFoundException.class, () -> repository.loadClass("no.such.Class"));
+        }
+    }
+
+    @Test
     public void testNullInput() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
             assertThrows(IllegalArgumentException.class, () -> repository.loadClass((String) null));
         }
+    }
+
+    private void verifyCaching(final AbstractClassPathRepository repository) throws ClassNotFoundException {
+        // Tests loadClass()
+        final JavaClass class1 = repository.loadClass("java.lang.String");
+        assertNotNull(class1);
+        final JavaClass class2 = repository.loadClass("java/lang/Long"); // Slashes should work
+        assertNotNull(class2);
+
+        // Tests findClass()
+        assertEquals(class1, repository.findClass("java.lang.String"));
+        assertEquals(class2, repository.findClass("java.lang.Long"));
+
+        // Tests removeClass()
+        repository.removeClass(class1);
+        assertNull(repository.findClass("java.lang.String"));
+
+        // Tests clear()
+        repository.clear();
+        assertNull(repository.findClass("java.lang.Long"));
     }
 }

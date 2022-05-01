@@ -38,9 +38,11 @@ public class ClassElementValue extends ElementValue
         this.idx = idx;
     }
 
-    public int getIndex()
+    @Override
+    public void dump(final DataOutputStream dos) throws IOException
     {
-        return idx;
+        dos.writeByte(super.getType()); // u1 kind of value
+        dos.writeShort(idx);
     }
 
     public String getClassString()
@@ -50,18 +52,16 @@ public class ClassElementValue extends ElementValue
         return c.getBytes();
     }
 
+    public int getIndex()
+    {
+        return idx;
+    }
+
     @Override
     public String stringifyValue()
     {
         final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(idx,
                 Const.CONSTANT_Utf8);
         return cu8.getBytes();
-    }
-
-    @Override
-    public void dump(final DataOutputStream dos) throws IOException
-    {
-        dos.writeByte(super.getType()); // u1 kind of value
-        dos.writeShort(idx);
     }
 }

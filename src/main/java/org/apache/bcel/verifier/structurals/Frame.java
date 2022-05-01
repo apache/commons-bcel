@@ -39,6 +39,22 @@ public class Frame{
     protected static UninitializedObjectType _this;
 
     /**
+     * @return the _this
+     * @since 6.0
+     */
+    public static UninitializedObjectType getThis() {
+        return _this;
+    }
+
+    /**
+     * @param _this the _this to set
+     * @since 6.0
+     */
+    public static void setThis(final UninitializedObjectType _this) {
+        Frame._this = _this;
+    }
+
+    /**
      *
      */
     private final LocalVariables locals;
@@ -75,6 +91,18 @@ public class Frame{
     /**
      *
      */
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof Frame)) {
+            return false; // implies "null" is non-equal.
+        }
+        final Frame f = (Frame) o;
+        return this.stack.equals(f.stack) && this.locals.equals(f.locals);
+    }
+
+    /**
+     *
+     */
     public Frame getClone() {
         return (Frame) clone();
     }
@@ -99,18 +127,6 @@ public class Frame{
     public int hashCode() { return stack.hashCode() ^ locals.hashCode(); }
 
     /**
-     *
-     */
-    @Override
-    public boolean equals(final Object o) {
-        if (!(o instanceof Frame)) {
-            return false; // implies "null" is non-equal.
-        }
-        final Frame f = (Frame) o;
-        return this.stack.equals(f.stack) && this.locals.equals(f.locals);
-    }
-
-    /**
      * Returns a String representation of the Frame instance.
      */
     @Override
@@ -120,21 +136,5 @@ public class Frame{
         s += "OperandStack:\n";
         s += stack;
         return s;
-    }
-
-    /**
-     * @return the _this
-     * @since 6.0
-     */
-    public static UninitializedObjectType getThis() {
-        return _this;
-    }
-
-    /**
-     * @param _this the _this to set
-     * @since 6.0
-     */
-    public static void setThis(final UninitializedObjectType _this) {
-        Frame._this = _this;
     }
 }

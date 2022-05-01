@@ -40,13 +40,6 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
     }
 
 
-    @Override
-    public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
-            ExceptionConst.NEGATIVE_ARRAY_SIZE_EXCEPTION);
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -64,6 +57,13 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
         v.visitTypedInstruction(this);
         v.visitCPInstruction(this);
         v.visitANEWARRAY(this);
+    }
+
+
+    @Override
+    public Class<?>[] getExceptions() {
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+            ExceptionConst.NEGATIVE_ARRAY_SIZE_EXCEPTION);
     }
 
 

@@ -26,33 +26,6 @@ import org.apache.bcel.generic.InstructionHandle;
 public interface Subroutine {
 
     /**
-     * Returns all the JsrInstructions that have the first instruction of this subroutine as their target. <B>Must not
-     * be invoked on the 'top-level subroutine'.</B>
-     *
-     * @return The JsrInstructions that have the first instruction of this subroutine as their target.
-     */
-    InstructionHandle[] getEnteringJsrInstructions();
-
-    /**
-     * Returns the one and only RET that leaves the subroutine. Note that JustIce has a pretty rigid notion of a
-     * subroutine. <B>Must not be invoked on the 'top-level subroutine'.</B>
-     *
-     * @return The one and only RET that leaves the subroutine.
-     *
-     * @see Subroutines
-     */
-    InstructionHandle getLeavingRET();
-
-    /**
-     * Returns all instructions that together form this subroutine. Note that an instruction is part of exactly one
-     * subroutine (the top-level code is considered to be a special subroutine) - else it is not reachable at all (dead
-     * code).
-     *
-     * @return All instructions that together form this subroutine.
-     */
-    InstructionHandle[] getInstructions();
-
-    /**
      * Returns if the given InstructionHandle refers to an instruction that is part of this subroutine. This is a
      * convenience method that saves iteration over the InstructionHandle objects returned by getInstructions().
      *
@@ -71,6 +44,33 @@ public interface Subroutine {
      * @see #getRecursivelyAccessedLocalsIndices()
      */
     int[] getAccessedLocalsIndices();
+
+    /**
+     * Returns all the JsrInstructions that have the first instruction of this subroutine as their target. <B>Must not
+     * be invoked on the 'top-level subroutine'.</B>
+     *
+     * @return The JsrInstructions that have the first instruction of this subroutine as their target.
+     */
+    InstructionHandle[] getEnteringJsrInstructions();
+
+    /**
+     * Returns all instructions that together form this subroutine. Note that an instruction is part of exactly one
+     * subroutine (the top-level code is considered to be a special subroutine) - else it is not reachable at all (dead
+     * code).
+     *
+     * @return All instructions that together form this subroutine.
+     */
+    InstructionHandle[] getInstructions();
+
+    /**
+     * Returns the one and only RET that leaves the subroutine. Note that JustIce has a pretty rigid notion of a
+     * subroutine. <B>Must not be invoked on the 'top-level subroutine'.</B>
+     *
+     * @return The one and only RET that leaves the subroutine.
+     *
+     * @see Subroutines
+     */
+    InstructionHandle getLeavingRET();
 
     /**
      * Returns an int[] containing the indices of the local variable slots accessed by this Subroutine (read-accessed,

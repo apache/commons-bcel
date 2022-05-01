@@ -39,6 +39,20 @@ public final class StackMapType implements Cloneable {
 
 
     /**
+     * @param type type tag as defined in the Constants interface
+     * @param index index to constant pool, or byte code offset
+     */
+    public StackMapType(final byte type, final int index, final ConstantPool constant_pool) {
+        if (type < Const.ITEM_Bogus || type > Const.ITEM_NewObject) {
+            throw new IllegalArgumentException("Illegal type for StackMapType: " + type);
+        }
+        this.type = type;
+        this.index = index;
+        this.constantPool = constant_pool;
+    }
+
+
+    /**
      * Construct object from file stream.
      * @param file Input stream
      * @throws IOException
@@ -53,42 +67,15 @@ public final class StackMapType implements Cloneable {
 
 
     /**
-     * @param type type tag as defined in the Constants interface
-     * @param index index to constant pool, or byte code offset
+     * @return deep copy of this object
      */
-    public StackMapType(final byte type, final int index, final ConstantPool constant_pool) {
-        if (type < Const.ITEM_Bogus || type > Const.ITEM_NewObject) {
-            throw new IllegalArgumentException("Illegal type for StackMapType: " + type);
+    public StackMapType copy() {
+        try {
+            return (StackMapType) clone();
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
         }
-        this.type = type;
-        this.index = index;
-        this.constantPool = constant_pool;
-    }
-
-
-    public void setType( final byte t ) {
-        if (t < Const.ITEM_Bogus || t > Const.ITEM_NewObject) {
-            throw new IllegalArgumentException("Illegal type for StackMapType: " + t);
-        }
-        type = t;
-    }
-
-
-    public byte getType() {
-        return type;
-    }
-
-
-    public void setIndex( final int t ) {
-        index = t;
-    }
-
-
-    /** @return index to constant pool if type == ITEM_Object, or offset
-     * in byte code, if type == ITEM_NewObject, and -1 otherwise
-     */
-    public int getIndex() {
-        return index;
+        return null;
     }
 
 
@@ -103,6 +90,27 @@ public final class StackMapType implements Cloneable {
         if (hasIndex()) {
             file.writeShort(getIndex());
         }
+    }
+
+
+    /**
+     * @return Constant pool used by this object.
+     */
+    public ConstantPool getConstantPool() {
+        return constantPool;
+    }
+
+
+    /** @return index to constant pool if type == ITEM_Object, or offset
+     * in byte code, if type == ITEM_NewObject, and -1 otherwise
+     */
+    public int getIndex() {
+        return index;
+    }
+
+
+    public byte getType() {
+        return type;
     }
 
 
@@ -128,39 +136,31 @@ public final class StackMapType implements Cloneable {
 
 
     /**
+     * @param constantPool Constant pool to be used for this object.
+     */
+    public void setConstantPool( final ConstantPool constantPool ) {
+        this.constantPool = constantPool;
+    }
+
+
+    public void setIndex( final int t ) {
+        index = t;
+    }
+
+
+    public void setType( final byte t ) {
+        if (t < Const.ITEM_Bogus || t > Const.ITEM_NewObject) {
+            throw new IllegalArgumentException("Illegal type for StackMapType: " + t);
+        }
+        type = t;
+    }
+
+
+    /**
      * @return String representation
      */
     @Override
     public String toString() {
         return "(type=" + Const.getItemName(type) + printIndex() + ")";
-    }
-
-
-    /**
-     * @return deep copy of this object
-     */
-    public StackMapType copy() {
-        try {
-            return (StackMapType) clone();
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return null;
-    }
-
-
-    /**
-     * @return Constant pool used by this object.
-     */
-    public ConstantPool getConstantPool() {
-        return constantPool;
-    }
-
-
-    /**
-     * @param constantPool Constant pool to be used for this object.
-     */
-    public void setConstantPool( final ConstantPool constantPool ) {
-        this.constantPool = constantPool;
     }
 }

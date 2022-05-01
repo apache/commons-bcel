@@ -41,18 +41,6 @@ public final class StackMap extends Attribute {
     private StackMapEntry[] map; // Table of stack map entries
 
 
-    /*
-     * @param name_index Index of name
-     * @param length Content length in bytes
-     * @param map Table of stack map entries
-     * @param constant_pool Array of constants
-     */
-    public StackMap(final int name_index, final int length, final StackMapEntry[] map, final ConstantPool constant_pool) {
-        super(Const.ATTR_STACK_MAP, name_index, length, constant_pool);
-        this.map = map;
-    }
-
-
     /**
      * Construct object from input stream.
      *
@@ -72,6 +60,46 @@ public final class StackMap extends Attribute {
     }
 
 
+    /*
+     * @param name_index Index of name
+     * @param length Content length in bytes
+     * @param map Table of stack map entries
+     * @param constant_pool Array of constants
+     */
+    public StackMap(final int name_index, final int length, final StackMapEntry[] map, final ConstantPool constant_pool) {
+        super(Const.ATTR_STACK_MAP, name_index, length, constant_pool);
+        this.map = map;
+    }
+
+
+    /**
+     * Called by objects that are traversing the nodes of the tree implicitely
+     * defined by the contents of a Java class. I.e., the hierarchy of methods,
+     * fields, attributes, etc. spawns a tree of objects.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitStackMap(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final StackMap c = (StackMap) clone();
+        c.map = new StackMapEntry[map.length];
+        for (int i = 0; i < map.length; i++) {
+            c.map[i] = map[i].copy();
+        }
+        c.setConstantPool(_constant_pool);
+        return c;
+    }
+
+
     /**
      * Dump stack map table attribute to file stream in binary format.
      *
@@ -85,6 +113,11 @@ public final class StackMap extends Attribute {
         for (final StackMapEntry entry : map) {
             entry.dump(file);
         }
+    }
+
+
+    public int getMapLength() {
+        return map == null ? 0 : map.length;
     }
 
 
@@ -125,38 +158,5 @@ public final class StackMap extends Attribute {
         }
         buf.append(')');
         return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final StackMap c = (StackMap) clone();
-        c.map = new StackMapEntry[map.length];
-        for (int i = 0; i < map.length; i++) {
-            c.map[i] = map[i].copy();
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
-    }
-
-
-    /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitStackMap(this);
-    }
-
-
-    public int getMapLength() {
-        return map == null ? 0 : map.length;
     }
 }

@@ -55,13 +55,10 @@ import org.apache.bcel.classfile.Utility;
  */
 public class Class2HTML implements Constants {
 
-    private final JavaClass java_class; // current class object
-    private final String dir;
     private static String class_package; // name of package, unclean to make it static, but ...
     private static String class_name; // name of current class, dito
     private static ConstantPool constant_pool;
     private static final Set<String> basic_types = new HashSet<>();
-
     static {
         basic_types.add("int");
         basic_types.add("short");
@@ -73,42 +70,6 @@ public class Class2HTML implements Constants {
         basic_types.add("double");
         basic_types.add("float");
     }
-
-    /**
-     * Write contents of the given JavaClass into HTML files.
-     *
-     * @param java_class The class to write
-     * @param dir The directory to put the files in
-     */
-    public Class2HTML(final JavaClass java_class, final String dir) throws IOException {
-        final Method[] methods = java_class.getMethods();
-        this.java_class = java_class;
-        this.dir = dir;
-        class_name = java_class.getClassName(); // Remember full name
-        constant_pool = java_class.getConstantPool();
-        // Get package name by tacking off everything after the last `.'
-        final int index = class_name.lastIndexOf('.');
-        if (index > -1) {
-            class_package = class_name.substring(0, index);
-        } else {
-            class_package = ""; // default package
-        }
-        final ConstantHTML constant_html = new ConstantHTML(dir, class_name, class_package, methods,
-                constant_pool);
-        /* Attributes can't be written in one step, so we just open a file
-         * which will be written consequently.
-         */
-        final AttributeHTML attribute_html = new AttributeHTML(dir, class_name, constant_pool,
-                constant_html);
-        new MethodHTML(dir, class_name, methods, java_class.getFields(),
-                constant_html, attribute_html);
-        // Write main file (with frames, yuk)
-        writeMainHTML(attribute_html);
-        new CodeHTML(dir, class_name, methods, constant_pool, constant_html);
-        attribute_html.close();
-    }
-
-
     public static void main( final String[] argv ) throws IOException {
         final String[] file_name = new String[argv.length];
         int files = 0;
@@ -159,7 +120,6 @@ public class Class2HTML implements Constants {
         }
     }
 
-
     /**
      * Utility method that converts a class reference in the constant pool,
      * i.e., an index to a string.
@@ -171,7 +131,6 @@ public class Class2HTML implements Constants {
         return "<A HREF=\"" + class_name + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + str
                 + "</A>";
     }
-
 
     static String referenceType( final String type ) {
         String short_type = Utility.compactClassName(type);
@@ -211,6 +170,47 @@ public class Class2HTML implements Constants {
             }
         }
         return buf.toString();
+    }
+
+
+    private final JavaClass java_class; // current class object
+
+
+    private final String dir;
+
+
+    /**
+     * Write contents of the given JavaClass into HTML files.
+     *
+     * @param java_class The class to write
+     * @param dir The directory to put the files in
+     */
+    public Class2HTML(final JavaClass java_class, final String dir) throws IOException {
+        final Method[] methods = java_class.getMethods();
+        this.java_class = java_class;
+        this.dir = dir;
+        class_name = java_class.getClassName(); // Remember full name
+        constant_pool = java_class.getConstantPool();
+        // Get package name by tacking off everything after the last `.'
+        final int index = class_name.lastIndexOf('.');
+        if (index > -1) {
+            class_package = class_name.substring(0, index);
+        } else {
+            class_package = ""; // default package
+        }
+        final ConstantHTML constant_html = new ConstantHTML(dir, class_name, class_package, methods,
+                constant_pool);
+        /* Attributes can't be written in one step, so we just open a file
+         * which will be written consequently.
+         */
+        final AttributeHTML attribute_html = new AttributeHTML(dir, class_name, constant_pool,
+                constant_html);
+        new MethodHTML(dir, class_name, methods, java_class.getFields(),
+                constant_html, attribute_html);
+        // Write main file (with frames, yuk)
+        writeMainHTML(attribute_html);
+        new CodeHTML(dir, class_name, methods, constant_pool, constant_html);
+        attribute_html.close();
     }
 
 

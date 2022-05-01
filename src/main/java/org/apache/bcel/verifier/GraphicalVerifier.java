@@ -29,6 +29,17 @@ import org.apache.bcel.generic.Type;
  */
 public class GraphicalVerifier {
 
+    /** Main method. */
+    public static void main( final String[] args ) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+        new GraphicalVerifier();
+    }
+
+
     private final boolean packFrame = false;
 
 
@@ -57,16 +68,5 @@ public class GraphicalVerifier {
         frame.getClassNamesJList().setModel(new VerifierFactoryListModel());
         VerifierFactory.getVerifier(Type.OBJECT.getClassName()); // Fill list with java.lang.Object
         frame.getClassNamesJList().setSelectedIndex(0); // default, will verify java.lang.Object
-    }
-
-
-    /** Main method. */
-    public static void main( final String[] args ) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-        new GraphicalVerifier();
     }
 }

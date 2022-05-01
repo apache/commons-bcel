@@ -39,15 +39,6 @@ public final class InnerClass implements Cloneable, Node {
 
 
     /**
-     * Initialize from another object.
-     */
-    public InnerClass(final InnerClass c) {
-        this(c.getInnerClassIndex(), c.getOuterClassIndex(), c.getInnerNameIndex(), c
-                .getInnerAccessFlags());
-    }
-
-
-    /**
      * Construct object from file stream.
      * @param file Input stream
      * @throws IOException
@@ -55,6 +46,15 @@ public final class InnerClass implements Cloneable, Node {
     InnerClass(final DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file
                 .readUnsignedShort());
+    }
+
+
+    /**
+     * Initialize from another object.
+     */
+    public InnerClass(final InnerClass c) {
+        this(c.getInnerClassIndex(), c.getOuterClassIndex(), c.getInnerNameIndex(), c
+                .getInnerAccessFlags());
     }
 
 
@@ -83,6 +83,19 @@ public final class InnerClass implements Cloneable, Node {
     @Override
     public void accept( final Visitor v ) {
         v.visitInnerClass(this);
+    }
+
+
+    /**
+     * @return deep copy of this object
+     */
+    public InnerClass copy() {
+        try {
+            return (InnerClass) clone();
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
+        }
+        return null;
     }
 
 
@@ -199,18 +212,5 @@ public final class InnerClass implements Cloneable, Node {
         String access = Utility.accessToString(innerAccessFlags, true);
         access = access.isEmpty() ? "" : access + " ";
         return "  " + access + inner_name + "=class " + inner_class_name + outer_class_name;
-    }
-
-
-    /**
-     * @return deep copy of this object
-     */
-    public InnerClass copy() {
-        try {
-            return (InnerClass) clone();
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return null;
     }
 }

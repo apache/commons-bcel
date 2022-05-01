@@ -37,16 +37,6 @@ public final class LineNumber implements Cloneable, Node {
     private short lineNumber;
 
     /**
-     * Initialize from another object.
-     *
-     * @param c the object to copy
-     */
-    public LineNumber(final LineNumber c) {
-        this(c.getStartPC(), c.getLineNumber());
-    }
-
-
-    /**
      * Construct object from file stream.
      *
      * @param file Input stream
@@ -68,6 +58,16 @@ public final class LineNumber implements Cloneable, Node {
 
 
     /**
+     * Initialize from another object.
+     *
+     * @param c the object to copy
+     */
+    public LineNumber(final LineNumber c) {
+        this(c.getStartPC(), c.getLineNumber());
+    }
+
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
@@ -77,6 +77,19 @@ public final class LineNumber implements Cloneable, Node {
     @Override
     public void accept( final Visitor v ) {
         v.visitLineNumber(this);
+    }
+
+
+    /**
+     * @return deep copy of this object
+     */
+    public LineNumber copy() {
+        try {
+            return (LineNumber) clone();
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
+        }
+        return null;
     }
 
 
@@ -130,18 +143,5 @@ public final class LineNumber implements Cloneable, Node {
     @Override
     public String toString() {
         return "LineNumber(" + getStartPC() + ", " + getLineNumber() + ")";
-    }
-
-
-    /**
-     * @return deep copy of this object
-     */
-    public LineNumber copy() {
-        try {
-            return (LineNumber) clone();
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return null;
     }
 }

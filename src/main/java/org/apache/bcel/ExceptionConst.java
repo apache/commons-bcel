@@ -24,6 +24,18 @@ package org.apache.bcel;
 public final class ExceptionConst {
 
     /**
+     * Enum corresponding to the various Exception Class arrays,
+     * used by {@link ExceptionConst#createExceptions(EXCS, Class...)}
+     */
+    public enum EXCS {
+        EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+        EXCS_FIELD_AND_METHOD_RESOLUTION,
+        EXCS_INTERFACE_METHOD_RESOLUTION,
+        EXCS_STRING_RESOLUTION,
+        EXCS_ARRAY_EXCEPTION,
+    }
+
+    /**
      * The mother of all exceptions
      */
     public static final Class<Throwable> THROWABLE = Throwable.class;
@@ -37,7 +49,6 @@ public final class ExceptionConst {
      * Super class of any linking exception (aka Linkage Error)
      */
     public static final Class<LinkageError> LINKING_EXCEPTION = LinkageError.class;
-
     /**
      * Linking Exceptions
      */
@@ -52,10 +63,10 @@ public final class ExceptionConst {
     public static final Class<NoSuchMethodError> NO_SUCH_METHOD_ERROR = NoSuchMethodError.class;
     public static final Class<NoClassDefFoundError> NO_CLASS_DEF_FOUND_ERROR = NoClassDefFoundError.class;
     public static final Class<UnsatisfiedLinkError> UNSATISFIED_LINK_ERROR = UnsatisfiedLinkError.class;
+
     public static final Class<VerifyError> VERIFY_ERROR = VerifyError.class;
     /* UnsupportedClassVersionError is new in JDK 1.2 */
 //    public static final Class UnsupportedClassVersionError = UnsupportedClassVersionError.class;
-
     /**
      * Run-Time Exceptions
      */
@@ -65,8 +76,8 @@ public final class ExceptionConst {
     public static final Class<ArithmeticException> ARITHMETIC_EXCEPTION = ArithmeticException.class;
     public static final Class<NegativeArraySizeException> NEGATIVE_ARRAY_SIZE_EXCEPTION = NegativeArraySizeException.class;
     public static final Class<ClassCastException> CLASS_CAST_EXCEPTION = ClassCastException.class;
-    public static final Class<IllegalMonitorStateException> ILLEGAL_MONITOR_STATE = IllegalMonitorStateException.class;
 
+    public static final Class<IllegalMonitorStateException> ILLEGAL_MONITOR_STATE = IllegalMonitorStateException.class;
     /**
      * Pre-defined exception arrays according to chapters 5.1-5.4 of the Java Virtual
      * Machine Specification
@@ -75,6 +86,7 @@ public final class ExceptionConst {
             NO_CLASS_DEF_FOUND_ERROR, CLASS_FORMAT_ERROR, VERIFY_ERROR, ABSTRACT_METHOD_ERROR,
             EXCEPTION_IN_INITIALIZER_ERROR, ILLEGAL_ACCESS_ERROR
     }; // Chapter 5.1
+
     private static final Class<?>[] EXCS_FIELD_AND_METHOD_RESOLUTION = {
             NO_SUCH_FIELD_ERROR, ILLEGAL_ACCESS_ERROR, NO_SUCH_METHOD_ERROR
     }; // Chapter 5.2
@@ -93,29 +105,6 @@ public final class ExceptionConst {
     private static final Class<?>[] EXCS_ARRAY_EXCEPTION = {
             NULL_POINTER_EXCEPTION, ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION
     };
-
-    /**
-     * Enum corresponding to the various Exception Class arrays,
-     * used by {@link ExceptionConst#createExceptions(EXCS, Class...)}
-     */
-    public enum EXCS {
-        EXCS_CLASS_AND_INTERFACE_RESOLUTION,
-        EXCS_FIELD_AND_METHOD_RESOLUTION,
-        EXCS_INTERFACE_METHOD_RESOLUTION,
-        EXCS_STRING_RESOLUTION,
-        EXCS_ARRAY_EXCEPTION,
-    }
-
-    // helper method to merge exception class arrays
-    private static Class<?>[] mergeExceptions(final Class<?>[] input, final Class<?> ... extraClasses) {
-        final int extraLen = extraClasses == null ? 0 : extraClasses.length;
-        final Class<?>[] excs = new Class<?>[input.length + extraLen];
-        System.arraycopy(input, 0, excs, 0, input.length);
-        if (extraLen > 0) {
-            System.arraycopy(extraClasses, 0, excs, input.length, extraLen);
-        }
-        return excs;
-    }
 
     /**
      * Creates a copy of the specified Exception Class array combined with any additional Exception classes.
@@ -138,6 +127,17 @@ public final class ExceptionConst {
         default:
             throw new AssertionError("Cannot happen; unexpected enum value: " + type);
         }
+    }
+
+    // helper method to merge exception class arrays
+    private static Class<?>[] mergeExceptions(final Class<?>[] input, final Class<?> ... extraClasses) {
+        final int extraLen = extraClasses == null ? 0 : extraClasses.length;
+        final Class<?>[] excs = new Class<?>[input.length + extraLen];
+        System.arraycopy(input, 0, excs, 0, input.length);
+        if (extraLen > 0) {
+            System.arraycopy(extraClasses, 0, excs, input.length, extraLen);
+        }
+        return excs;
     }
 
 

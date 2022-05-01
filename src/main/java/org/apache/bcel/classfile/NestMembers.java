@@ -37,28 +37,6 @@ public final class NestMembers extends Attribute {
 
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use copy() for a physical copy.
-     */
-    public NestMembers(final NestMembers c) {
-        this(c.getNameIndex(), c.getLength(), c.getClasses(), c.getConstantPool());
-    }
-
-
-    /**
-     * @param name_index Index in constant pool
-     * @param length Content length in bytes
-     * @param classes Table of indices in constant pool
-     * @param constant_pool Array of constants
-     */
-    public NestMembers(final int name_index, final int length, final int[] classes,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_NEST_MEMBERS, name_index, length, constant_pool);
-        this.classes = classes != null ? classes : ArrayUtils.EMPTY_INT_ARRAY;
-    }
-
-
-    /**
      * Construct object from input stream.
      * @param name_index Index in constant pool
      * @param length Content length in bytes
@@ -77,6 +55,28 @@ public final class NestMembers extends Attribute {
 
 
     /**
+     * @param name_index Index in constant pool
+     * @param length Content length in bytes
+     * @param classes Table of indices in constant pool
+     * @param constant_pool Array of constants
+     */
+    public NestMembers(final int name_index, final int length, final int[] classes,
+            final ConstantPool constant_pool) {
+        super(Const.ATTR_NEST_MEMBERS, name_index, length, constant_pool);
+        this.classes = classes != null ? classes : ArrayUtils.EMPTY_INT_ARRAY;
+    }
+
+
+    /**
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use copy() for a physical copy.
+     */
+    public NestMembers(final NestMembers c) {
+        this(c.getNameIndex(), c.getLength(), c.getClasses(), c.getConstantPool());
+    }
+
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
@@ -86,6 +86,22 @@ public final class NestMembers extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         v.visitNestMembers(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final NestMembers c = (NestMembers) clone();
+        if (classes != null) {
+            c.classes = new int[classes.length];
+            System.arraycopy(classes, 0, c.classes, 0,
+                    classes.length);
+        }
+        c.setConstantPool(_constant_pool);
+        return c;
     }
 
 
@@ -114,14 +130,6 @@ public final class NestMembers extends Attribute {
 
 
     /**
-     * @return Length of classes table.
-     */
-    public int getNumberClasses() {
-        return classes == null ? 0 : classes.length;
-    }
-
-
-    /**
      * @return string array of class names
      */
     public String[] getClassNames() {
@@ -131,6 +139,14 @@ public final class NestMembers extends Attribute {
                     Const.CONSTANT_Class).replace('/', '.');
         }
         return names;
+    }
+
+
+    /**
+     * @return Length of classes table.
+     */
+    public int getNumberClasses() {
+        return classes == null ? 0 : classes.length;
     }
 
 
@@ -157,21 +173,5 @@ public final class NestMembers extends Attribute {
             buf.append("  ").append(Utility.compactClassName(class_name, false)).append("\n");
         }
         return buf.substring(0, buf.length()-1); // remove the last newline
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final NestMembers c = (NestMembers) clone();
-        if (classes != null) {
-            c.classes = new int[classes.length];
-            System.arraycopy(classes, 0, c.classes, 0,
-                    classes.length);
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

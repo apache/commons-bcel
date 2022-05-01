@@ -20,6 +20,14 @@ package org.apache.bcel.data;
 
 public class AnonymousClassTest
 {
+    class X
+    {
+    }
+
+    static class Y
+    {
+    }
+
     public void foo()
     {
         new Runnable()
@@ -29,13 +37,5 @@ public class AnonymousClassTest
             {
             }
         }.run();
-    }
-
-    class X
-    {
-    }
-
-    static class Y
-    {
     }
 }

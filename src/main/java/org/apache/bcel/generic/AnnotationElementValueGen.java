@@ -31,6 +31,13 @@ public class AnnotationElementValueGen extends ElementValueGen
     // For annotation element values, this is the annotation
     private final AnnotationEntryGen a;
 
+    public AnnotationElementValueGen(final AnnotationElementValue value,
+            final ConstantPoolGen cpool, final boolean copyPoolEntries)
+    {
+        super(ANNOTATION, cpool);
+        a = new AnnotationEntryGen(value.getAnnotationEntry(), cpool, copyPoolEntries);
+    }
+
     public AnnotationElementValueGen(final AnnotationEntryGen a, final ConstantPoolGen cpool)
     {
         super(ANNOTATION, cpool);
@@ -48,13 +55,6 @@ public class AnnotationElementValueGen extends ElementValueGen
         this.a = annotation;
     }
 
-    public AnnotationElementValueGen(final AnnotationElementValue value,
-            final ConstantPoolGen cpool, final boolean copyPoolEntries)
-    {
-        super(ANNOTATION, cpool);
-        a = new AnnotationEntryGen(value.getAnnotationEntry(), cpool, copyPoolEntries);
-    }
-
     @Override
     public void dump(final DataOutputStream dos) throws IOException
     {
@@ -62,10 +62,9 @@ public class AnnotationElementValueGen extends ElementValueGen
         a.dump(dos);
     }
 
-    @Override
-    public String stringifyValue()
+    public AnnotationEntryGen getAnnotation()
     {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return a;
     }
 
     /**
@@ -79,8 +78,9 @@ public class AnnotationElementValueGen extends ElementValueGen
                 getConstantPool().getConstantPool());
     }
 
-    public AnnotationEntryGen getAnnotation()
+    @Override
+    public String stringifyValue()
     {
-        return a;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 }

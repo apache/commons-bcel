@@ -58,16 +58,6 @@ public class ElementValuePairGen
         value = ElementValueGen.copy(nvp.getValue(), cpool, copyPoolEntries);
     }
 
-    /**
-     * Retrieve an immutable version of this ElementNameValuePairGen
-     */
-    public ElementValuePair getElementNameValuePair()
-    {
-        final ElementValue immutableValue = value.getElementValue();
-        return new ElementValuePair(nameIdx, immutableValue, constantPoolGen
-                .getConstantPool());
-    }
-
     protected ElementValuePairGen(final int idx, final ElementValueGen value,
             final ConstantPoolGen cpool)
     {
@@ -88,6 +78,16 @@ public class ElementValuePairGen
     {
         dos.writeShort(nameIdx); // u2 name of the element
         value.dump(dos);
+    }
+
+    /**
+     * Retrieve an immutable version of this ElementNameValuePairGen
+     */
+    public ElementValuePair getElementNameValuePair()
+    {
+        final ElementValue immutableValue = value.getElementValue();
+        return new ElementValuePair(nameIdx, immutableValue, constantPoolGen
+                .getConstantPool());
     }
 
     public int getNameIndex()

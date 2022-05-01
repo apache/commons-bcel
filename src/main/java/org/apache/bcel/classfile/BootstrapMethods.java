@@ -74,20 +74,6 @@ public class BootstrapMethods extends Attribute {
     }
 
     /**
-     * @return array of bootstrap method "records"
-     */
-    public final BootstrapMethod[] getBootstrapMethods() {
-        return bootstrapMethods;
-    }
-
-    /**
-     * @param bootstrapMethods the array of bootstrap methods
-     */
-    public final void setBootstrapMethods(final BootstrapMethod[] bootstrapMethods) {
-        this.bootstrapMethods = bootstrapMethods;
-    }
-
-    /**
      * @param v Visitor object
      */
     @Override
@@ -124,6 +110,20 @@ public class BootstrapMethods extends Attribute {
         for (final BootstrapMethod bootstrap_method : bootstrapMethods) {
             bootstrap_method.dump(file);
         }
+    }
+
+    /**
+     * @return array of bootstrap method "records"
+     */
+    public final BootstrapMethod[] getBootstrapMethods() {
+        return bootstrapMethods;
+    }
+
+    /**
+     * @param bootstrapMethods the array of bootstrap methods
+     */
+    public final void setBootstrapMethods(final BootstrapMethod[] bootstrapMethods) {
+        this.bootstrapMethods = bootstrapMethods;
     }
 
     /**

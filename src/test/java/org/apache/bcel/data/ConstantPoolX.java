@@ -43,6 +43,34 @@ import org.apache.bcel.classfile.*;
  */
 public abstract class ConstantPoolX implements Cloneable, Node {
 
+    private static String escape( final String str ) {
+        final int len = str.length();
+        final StringBuilder buf = new StringBuilder(len + 5);
+        final char[] ch = str.toCharArray();
+        for (int i = 0; i < len; i++) {
+            switch (ch[i]) {
+                case '\n':
+                    buf.append("\\n");
+                    break;
+                case '\r':
+                    buf.append("\\r");
+                    break;
+                case '\t':
+                    buf.append("\\t");
+                    break;
+                case '\b':
+                    buf.append("\\b");
+                    break;
+                case '"':
+                    buf.append("\\\"");
+                    break;
+                default:
+                    buf.append(ch[i]);
+            }
+        }
+        return buf.toString();
+    }
+
     private Constant[] constantPool;
 
     /**
@@ -126,34 +154,6 @@ public abstract class ConstantPoolX implements Cloneable, Node {
                 throw new IllegalArgumentException("Unknown constant type " + tag);
         }
         return str;
-    }
-
-    private static String escape( final String str ) {
-        final int len = str.length();
-        final StringBuilder buf = new StringBuilder(len + 5);
-        final char[] ch = str.toCharArray();
-        for (int i = 0; i < len; i++) {
-            switch (ch[i]) {
-                case '\n':
-                    buf.append("\\n");
-                    break;
-                case '\r':
-                    buf.append("\\r");
-                    break;
-                case '\t':
-                    buf.append("\\t");
-                    break;
-                case '\b':
-                    buf.append("\\b");
-                    break;
-                case '"':
-                    buf.append("\\\"");
-                    break;
-                default:
-                    buf.append(ch[i]);
-            }
-        }
-        return buf.toString();
     }
 
     /**

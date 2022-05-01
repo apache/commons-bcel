@@ -51,19 +51,6 @@ public final class InnerClasses extends Attribute {
 
 
     /**
-     * @param name_index Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param innerClasses array of inner classes attributes
-     * @param constant_pool Array of constants
-     */
-    public InnerClasses(final int name_index, final int length, final InnerClass[] innerClasses,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_INNER_CLASSES, name_index, length, constant_pool);
-        this.innerClasses = innerClasses != null ? innerClasses : EMPTY_INNER_CLASSE_ARRAY;
-    }
-
-
-    /**
      * Construct object from input stream.
      *
      * @param name_index Index in constant pool to CONSTANT_Utf8
@@ -84,6 +71,19 @@ public final class InnerClasses extends Attribute {
 
 
     /**
+     * @param name_index Index in constant pool to CONSTANT_Utf8
+     * @param length Content length in bytes
+     * @param innerClasses array of inner classes attributes
+     * @param constant_pool Array of constants
+     */
+    public InnerClasses(final int name_index, final int length, final InnerClass[] innerClasses,
+            final ConstantPool constant_pool) {
+        super(Const.ATTR_INNER_CLASSES, name_index, length, constant_pool);
+        this.innerClasses = innerClasses != null ? innerClasses : EMPTY_INNER_CLASSE_ARRAY;
+    }
+
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
@@ -93,6 +93,22 @@ public final class InnerClasses extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         v.visitInnerClasses(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        // TODO this could be recoded to use a lower level constructor after creating a copy of the inner classes
+        final InnerClasses c = (InnerClasses) clone();
+        c.innerClasses = new InnerClass[innerClasses.length];
+        for (int i = 0; i < innerClasses.length; i++) {
+            c.innerClasses[i] = innerClasses[i].copy();
+        }
+        c.setConstantPool(_constant_pool);
+        return c;
     }
 
 
@@ -141,21 +157,5 @@ public final class InnerClasses extends Attribute {
             buf.append(inner_class.toString(super.getConstantPool())).append("\n");
         }
         return buf.substring(0, buf.length()-1); // remove the last newline
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        // TODO this could be recoded to use a lower level constructor after creating a copy of the inner classes
-        final InnerClasses c = (InnerClasses) clone();
-        c.innerClasses = new InnerClass[innerClasses.length];
-        for (int i = 0; i < innerClasses.length; i++) {
-            c.innerClasses[i] = innerClasses[i].copy();
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

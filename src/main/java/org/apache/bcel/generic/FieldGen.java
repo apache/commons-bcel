@@ -42,7 +42,6 @@ import org.apache.bcel.util.BCELComparator;
  */
 public class FieldGen extends FieldGenOrMethodGen {
 
-    private Object value;
     private static BCELComparator bcelComparator = new BCELComparator() {
 
         @Override
@@ -60,24 +59,26 @@ public class FieldGen extends FieldGenOrMethodGen {
             return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
         }
     };
+    /**
+     * @return Comparison strategy object
+     */
+    public static BCELComparator getComparator() {
+        return bcelComparator;
+    }
 
 
     /**
-     * Declare a field. If it is static (isStatic() == true) and has a
-     * basic type like int or String it may have an initial value
-     * associated with it as defined by setInitValue().
-     *
-     * @param access_flags access qualifiers
-     * @param type  field type
-     * @param name field name
-     * @param cp constant pool
+     * @param comparator Comparison strategy object
      */
-    public FieldGen(final int access_flags, final Type type, final String name, final ConstantPoolGen cp) {
-        super(access_flags);
-        setType(type);
-        setName(name);
-        setConstantPool(cp);
+    public static void setComparator( final BCELComparator comparator ) {
+        bcelComparator = comparator;
     }
+
+
+    private Object value;
+
+
+    private List<FieldObserver> observers;
 
 
     /**
@@ -105,127 +106,23 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    private void setValue( final int index ) {
-        final ConstantPool cp = super.getConstantPool().getConstantPool();
-        final Constant c = cp.getConstant(index);
-        value = ((ConstantObject) c).getConstantValue(cp);
-    }
-
-
     /**
-     * Set (optional) initial value of field, otherwise it will be set to null/0/false
-     * by the JVM automatically.
+     * Declare a field. If it is static (isStatic() == true) and has a
+     * basic type like int or String it may have an initial value
+     * associated with it as defined by setInitValue().
+     *
+     * @param access_flags access qualifiers
+     * @param type  field type
+     * @param name field name
+     * @param cp constant pool
      */
-    public void setInitValue( final String str ) {
-        checkType(  ObjectType.getInstance("java.lang.String"));
-        if (str != null) {
-            value = str;
-        }
+    public FieldGen(final int access_flags, final Type type, final String name, final ConstantPoolGen cp) {
+        super(access_flags);
+        setType(type);
+        setName(name);
+        setConstantPool(cp);
     }
 
-
-    public void setInitValue( final long l ) {
-        checkType(Type.LONG);
-        if (l != 0L) {
-            value = Long.valueOf(l);
-        }
-    }
-
-
-    public void setInitValue( final int i ) {
-        checkType(Type.INT);
-        if (i != 0) {
-            value = Integer.valueOf(i);
-        }
-    }
-
-
-    public void setInitValue( final short s ) {
-        checkType(Type.SHORT);
-        if (s != 0) {
-            value = Integer.valueOf(s);
-        }
-    }
-
-
-    public void setInitValue( final char c ) {
-        checkType(Type.CHAR);
-        if (c != 0) {
-            value = Integer.valueOf(c);
-        }
-    }
-
-
-    public void setInitValue( final byte b ) {
-        checkType(Type.BYTE);
-        if (b != 0) {
-            value = Integer.valueOf(b);
-        }
-    }
-
-
-    public void setInitValue( final boolean b ) {
-        checkType(Type.BOOLEAN);
-        if (b) {
-            value = Integer.valueOf(1);
-        }
-    }
-
-
-    public void setInitValue( final float f ) {
-        checkType(Type.FLOAT);
-        if (f != 0.0) {
-            value = Float.valueOf(f);
-        }
-    }
-
-
-    public void setInitValue( final double d ) {
-        checkType(Type.DOUBLE);
-        if (d != 0.0) {
-            value = Double.valueOf(d);
-        }
-    }
-
-
-    /** Remove any initial value.
-     */
-    public void cancelInitValue() {
-        value = null;
-    }
-
-
-    private void checkType( final Type atype ) {
-        final Type superType = super.getType();
-        if (superType == null) {
-            throw new ClassGenException("You haven't defined the type of the field yet");
-        }
-        if (!isFinal()) {
-            throw new ClassGenException("Only final fields may have an initial value!");
-        }
-        if (!superType.equals(atype)) {
-            throw new ClassGenException("Types are not compatible: " + superType + " vs. " + atype);
-        }
-    }
-
-
-    /**
-     * Get field object after having set up all necessary values.
-     */
-    public Field getField() {
-        final String signature = getSignature();
-        final int name_index = super.getConstantPool().addUtf8(super.getName());
-        final int signature_index = super.getConstantPool().addUtf8(signature);
-        if (value != null) {
-            checkType(super.getType());
-            final int index = addConstant();
-            addAttribute(new ConstantValue(super.getConstantPool().addUtf8("ConstantValue"), 2, index,
-                    super.getConstantPool().getConstantPool())); // sic
-        }
-        addAnnotationsAsAttribute(super.getConstantPool());
-        return new Field(super.getAccessFlags(), name_index, signature_index, getAttributes(),
-                super.getConstantPool().getConstantPool()); // sic
-    }
 
     private void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
           final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
@@ -257,14 +154,6 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    @Override
-    public String getSignature() {
-        return super.getType().getSignature();
-    }
-
-    private List<FieldObserver> observers;
-
-
     /** Add observer for this object.
      */
     public void addObserver( final FieldObserver o ) {
@@ -272,6 +161,93 @@ public class FieldGen extends FieldGenOrMethodGen {
             observers = new ArrayList<>();
         }
         observers.add(o);
+    }
+
+
+    /** Remove any initial value.
+     */
+    public void cancelInitValue() {
+        value = null;
+    }
+
+
+    private void checkType( final Type atype ) {
+        final Type superType = super.getType();
+        if (superType == null) {
+            throw new ClassGenException("You haven't defined the type of the field yet");
+        }
+        if (!isFinal()) {
+            throw new ClassGenException("Only final fields may have an initial value!");
+        }
+        if (!superType.equals(atype)) {
+            throw new ClassGenException("Types are not compatible: " + superType + " vs. " + atype);
+        }
+    }
+
+
+    /** @return deep copy of this field
+     */
+    public FieldGen copy( final ConstantPoolGen cp ) {
+        final FieldGen fg = (FieldGen) clone();
+        fg.setConstantPool(cp);
+        return fg;
+    }
+
+
+    /**
+     * Return value as defined by given BCELComparator strategy.
+     * By default two FieldGen objects are said to be equal when
+     * their names and signatures are equal.
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals( final Object obj ) {
+        return bcelComparator.equals(this, obj);
+    }
+
+
+    /**
+     * Get field object after having set up all necessary values.
+     */
+    public Field getField() {
+        final String signature = getSignature();
+        final int name_index = super.getConstantPool().addUtf8(super.getName());
+        final int signature_index = super.getConstantPool().addUtf8(signature);
+        if (value != null) {
+            checkType(super.getType());
+            final int index = addConstant();
+            addAttribute(new ConstantValue(super.getConstantPool().addUtf8("ConstantValue"), 2, index,
+                    super.getConstantPool().getConstantPool())); // sic
+        }
+        addAnnotationsAsAttribute(super.getConstantPool());
+        return new Field(super.getAccessFlags(), name_index, signature_index, getAttributes(),
+                super.getConstantPool().getConstantPool()); // sic
+    }
+
+
+    public String getInitValue() {
+        if (value != null) {
+            return value.toString();
+        }
+        return null;
+    }
+
+
+    @Override
+    public String getSignature() {
+        return super.getType().getSignature();
+    }
+
+    /**
+     * Return value as defined by given BCELComparator strategy.
+     * By default return the hashcode of the field's name XOR signature.
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return bcelComparator.hashCode(this);
     }
 
 
@@ -284,24 +260,85 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    /** Call notify() method on all observers. This method is not called
-     * automatically whenever the state has changed, but has to be
-     * called by the user after they have finished editing the object.
-     */
-    public void update() {
-        if (observers != null) {
-            for (final FieldObserver observer : observers ) {
-                observer.notify(this);
-            }
+    public void setInitValue( final boolean b ) {
+        checkType(Type.BOOLEAN);
+        if (b) {
+            value = Integer.valueOf(1);
+        }
+    }
+
+    public void setInitValue( final byte b ) {
+        checkType(Type.BYTE);
+        if (b != 0) {
+            value = Integer.valueOf(b);
         }
     }
 
 
-    public String getInitValue() {
-        if (value != null) {
-            return value.toString();
+    public void setInitValue( final char c ) {
+        checkType(Type.CHAR);
+        if (c != 0) {
+            value = Integer.valueOf(c);
         }
-        return null;
+    }
+
+
+    public void setInitValue( final double d ) {
+        checkType(Type.DOUBLE);
+        if (d != 0.0) {
+            value = Double.valueOf(d);
+        }
+    }
+
+
+    public void setInitValue( final float f ) {
+        checkType(Type.FLOAT);
+        if (f != 0.0) {
+            value = Float.valueOf(f);
+        }
+    }
+
+
+    public void setInitValue( final int i ) {
+        checkType(Type.INT);
+        if (i != 0) {
+            value = Integer.valueOf(i);
+        }
+    }
+
+
+    public void setInitValue( final long l ) {
+        checkType(Type.LONG);
+        if (l != 0L) {
+            value = Long.valueOf(l);
+        }
+    }
+
+
+    public void setInitValue( final short s ) {
+        checkType(Type.SHORT);
+        if (s != 0) {
+            value = Integer.valueOf(s);
+        }
+    }
+
+
+    /**
+     * Set (optional) initial value of field, otherwise it will be set to null/0/false
+     * by the JVM automatically.
+     */
+    public void setInitValue( final String str ) {
+        checkType(  ObjectType.getInstance("java.lang.String"));
+        if (str != null) {
+            value = str;
+        }
+    }
+
+
+    private void setValue( final int index ) {
+        final ConstantPool cp = super.getConstantPool().getConstantPool();
+        final Constant c = cp.getConstant(index);
+        value = ((ConstantObject) c).getConstantValue(cp);
     }
 
 
@@ -330,52 +367,15 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
 
-    /** @return deep copy of this field
+    /** Call notify() method on all observers. This method is not called
+     * automatically whenever the state has changed, but has to be
+     * called by the user after they have finished editing the object.
      */
-    public FieldGen copy( final ConstantPoolGen cp ) {
-        final FieldGen fg = (FieldGen) clone();
-        fg.setConstantPool(cp);
-        return fg;
-    }
-
-
-    /**
-     * @return Comparison strategy object
-     */
-    public static BCELComparator getComparator() {
-        return bcelComparator;
-    }
-
-
-    /**
-     * @param comparator Comparison strategy object
-     */
-    public static void setComparator( final BCELComparator comparator ) {
-        bcelComparator = comparator;
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default two FieldGen objects are said to be equal when
-     * their names and signatures are equal.
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals( final Object obj ) {
-        return bcelComparator.equals(this, obj);
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default return the hashcode of the field's name XOR signature.
-     *
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return bcelComparator.hashCode(this);
+    public void update() {
+        if (observers != null) {
+            for (final FieldObserver observer : observers ) {
+                observer.notify(this);
+            }
+        }
     }
 }

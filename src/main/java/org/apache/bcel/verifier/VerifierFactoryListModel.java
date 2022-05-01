@@ -42,6 +42,26 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver, javax.
     }
 
     @Override
+    public synchronized void addListDataListener(final ListDataListener l) {
+        listeners.add(l);
+    }
+
+    @Override
+    public synchronized String getElementAt(final int index) {
+        return cache.toArray(ArrayUtils.EMPTY_STRING_ARRAY)[index];
+    }
+
+    @Override
+    public synchronized int getSize() {
+        return cache.size();
+    }
+
+    @Override
+    public synchronized void removeListDataListener(final javax.swing.event.ListDataListener l) {
+        listeners.remove(l);
+    }
+
+    @Override
     public synchronized void update(final String s) {
         final Verifier[] verifiers = VerifierFactory.getVerifiers();
         final int num_of_verifiers = verifiers.length;
@@ -53,26 +73,6 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver, javax.
             final ListDataEvent e = new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0, num_of_verifiers - 1);
             listener.contentsChanged(e);
         }
-    }
-
-    @Override
-    public synchronized void addListDataListener(final ListDataListener l) {
-        listeners.add(l);
-    }
-
-    @Override
-    public synchronized void removeListDataListener(final javax.swing.event.ListDataListener l) {
-        listeners.remove(l);
-    }
-
-    @Override
-    public synchronized int getSize() {
-        return cache.size();
-    }
-
-    @Override
-    public synchronized String getElementAt(final int index) {
-        return cache.toArray(ArrayUtils.EMPTY_STRING_ARRAY)[index];
     }
 
 }

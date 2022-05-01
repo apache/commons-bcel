@@ -54,6 +54,21 @@ public class IINC extends LocalVariableInstruction {
 
 
     /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitLocalVariableInstruction(this);
+        v.visitIINC(this);
+    }
+
+
+    /**
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
@@ -73,18 +88,19 @@ public class IINC extends LocalVariableInstruction {
     }
 
 
-    private void setWide() {
-        wide = super.getIndex() > org.apache.bcel.Const.MAX_BYTE;
-        if (c > 0) {
-            wide = wide || c > Byte.MAX_VALUE;
-        } else {
-            wide = wide || c < Byte.MIN_VALUE;
-        }
-        if (wide) {
-            super.setLength(6); // wide byte included
-        } else {
-            super.setLength(3);
-        }
+    /**
+     * @return increment factor
+     */
+    public final int getIncrement() {
+        return c;
+    }
+
+
+    /** @return int type
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.INT;
     }
 
 
@@ -107,11 +123,11 @@ public class IINC extends LocalVariableInstruction {
 
 
     /**
-     * @return mnemonic for instruction
+     * Set increment factor.
      */
-    @Override
-    public String toString( final boolean verbose ) {
-        return super.toString(verbose) + " " + c;
+    public final void setIncrement( final int c ) {
+        this.c = c;
+        setWide();
     }
 
 
@@ -128,42 +144,26 @@ public class IINC extends LocalVariableInstruction {
     }
 
 
-    /**
-     * @return increment factor
-     */
-    public final int getIncrement() {
-        return c;
+    private void setWide() {
+        wide = super.getIndex() > org.apache.bcel.Const.MAX_BYTE;
+        if (c > 0) {
+            wide = wide || c > Byte.MAX_VALUE;
+        } else {
+            wide = wide || c < Byte.MIN_VALUE;
+        }
+        if (wide) {
+            super.setLength(6); // wide byte included
+        } else {
+            super.setLength(3);
+        }
     }
 
 
     /**
-     * Set increment factor.
-     */
-    public final void setIncrement( final int c ) {
-        this.c = c;
-        setWide();
-    }
-
-
-    /** @return int type
+     * @return mnemonic for instruction
      */
     @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.INT;
-    }
-
-
-    /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitLocalVariableInstruction(this);
-        v.visitIINC(this);
+    public String toString( final boolean verbose ) {
+        return super.toString(verbose) + " " + c;
     }
 }

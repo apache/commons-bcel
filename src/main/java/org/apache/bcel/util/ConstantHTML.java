@@ -77,6 +77,17 @@ final class ConstantHTML {
     }
 
 
+    private int getMethodNumber( final String str ) {
+        for (int i = 0; i < methods.length; i++) {
+            final String cmp = methods[i].getName() + methods[i].getSignature();
+            if (cmp.equals(str)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
     String referenceConstant( final int index ) {
         return constantRef[index];
     }
@@ -217,16 +228,5 @@ final class ConstantHTML {
             default:
                 file.println("<P><TT>" + Class2HTML.toHTML(constantPool.constantToString(index, tag)) + "</TT>\n");
         } // switch
-    }
-
-
-    private int getMethodNumber( final String str ) {
-        for (int i = 0; i < methods.length; i++) {
-            final String cmp = methods[i].getName() + methods[i].getSignature();
-            if (cmp.equals(str)) {
-                return i;
-            }
-        }
-        return -1;
     }
 }

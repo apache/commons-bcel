@@ -49,14 +49,6 @@ public class MethodParameters extends Attribute {
         }
     }
 
-    public MethodParameter[] getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(final MethodParameter[] parameters) {
-        this.parameters = parameters;
-    }
-
     @Override
     public void accept(final Visitor v) {
         v.visitMethodParameters(this);
@@ -87,5 +79,13 @@ public class MethodParameters extends Attribute {
         for (final MethodParameter parameter : parameters) {
             parameter.dump(file);
         }
+    }
+
+    public MethodParameter[] getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(final MethodParameter[] parameters) {
+        this.parameters = parameters;
     }
 }

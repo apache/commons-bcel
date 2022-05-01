@@ -35,12 +35,17 @@ public class AnnotationEntry implements Node {
 
     public static final AnnotationEntry[] EMPTY_ARRAY = {};
 
-    private final int typeIndex;
-    private final ConstantPool constantPool;
-    private final boolean isRuntimeVisible;
-
-    private List<ElementValuePair> elementValuePairs;
-
+    public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attrs) {
+        // Find attributes that contain annotation data
+        final List<AnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
+        for (final Attribute attribute : attrs) {
+            if (attribute instanceof Annotations) {
+                final Annotations runtimeAnnotations = (Annotations) attribute;
+                Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getAnnotationEntries());
+            }
+        }
+        return accumulatedAnnotations.toArray(AnnotationEntry.EMPTY_ARRAY);
+    }
     /*
      * Factory method to create an AnnotionEntry from a DataInput
      *
@@ -62,23 +67,18 @@ public class AnnotationEntry implements Node {
         }
         return annotationEntry;
     }
+    private final int typeIndex;
+
+    private final ConstantPool constantPool;
+
+    private final boolean isRuntimeVisible;
+
+    private List<ElementValuePair> elementValuePairs;
 
     public AnnotationEntry(final int type_index, final ConstantPool constant_pool, final boolean isRuntimeVisible) {
         this.typeIndex = type_index;
         this.constantPool = constant_pool;
         this.isRuntimeVisible = isRuntimeVisible;
-    }
-
-    public int getTypeIndex() {
-        return typeIndex;
-    }
-
-    public ConstantPool getConstantPool() {
-        return constantPool;
-    }
-
-    public boolean isRuntimeVisible() {
-        return isRuntimeVisible;
     }
 
     /**
@@ -90,6 +90,19 @@ public class AnnotationEntry implements Node {
     @Override
     public void accept(final Visitor v) {
         v.visitAnnotationEntry(this);
+    }
+
+    public void addElementNameValuePair(final ElementValuePair elementNameValuePair) {
+        elementValuePairs.add(elementNameValuePair);
+    }
+
+    public void dump(final DataOutputStream dos) throws IOException {
+        dos.writeShort(typeIndex); // u2 index of type name in cpool
+        dos.writeShort(elementValuePairs.size()); // u2 element_value pair
+        // count
+        for (final ElementValuePair envp : elementValuePairs) {
+            envp.dump(dos);
+        }
     }
 
     /**
@@ -107,11 +120,8 @@ public class AnnotationEntry implements Node {
         return typeIndex;
     }
 
-    /**
-     * @return the number of element value pairs in this annotation entry
-     */
-    public final int getNumElementValuePairs() {
-        return elementValuePairs.size();
+    public ConstantPool getConstantPool() {
+        return constantPool;
     }
 
     /**
@@ -122,17 +132,19 @@ public class AnnotationEntry implements Node {
         return elementValuePairs.toArray(ElementValuePair.EMPTY_ARRAY);
     }
 
-    public void dump(final DataOutputStream dos) throws IOException {
-        dos.writeShort(typeIndex); // u2 index of type name in cpool
-        dos.writeShort(elementValuePairs.size()); // u2 element_value pair
-        // count
-        for (final ElementValuePair envp : elementValuePairs) {
-            envp.dump(dos);
-        }
+    /**
+     * @return the number of element value pairs in this annotation entry
+     */
+    public final int getNumElementValuePairs() {
+        return elementValuePairs.size();
     }
 
-    public void addElementNameValuePair(final ElementValuePair elementNameValuePair) {
-        elementValuePairs.add(elementNameValuePair);
+    public int getTypeIndex() {
+        return typeIndex;
+    }
+
+    public boolean isRuntimeVisible() {
+        return isRuntimeVisible;
     }
 
     public String toShortString() {
@@ -156,17 +168,5 @@ public class AnnotationEntry implements Node {
     @Override
     public String toString() {
         return toShortString();
-    }
-
-    public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attrs) {
-        // Find attributes that contain annotation data
-        final List<AnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
-        for (final Attribute attribute : attrs) {
-            if (attribute instanceof Annotations) {
-                final Annotations runtimeAnnotations = (Annotations) attribute;
-                Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getAnnotationEntries());
-            }
-        }
-        return accumulatedAnnotations.toArray(AnnotationEntry.EMPTY_ARRAY);
     }
 }

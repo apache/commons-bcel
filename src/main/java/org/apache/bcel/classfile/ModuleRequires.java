@@ -65,6 +65,19 @@ public final class ModuleRequires implements Cloneable, Node {
     // TODO add more getters and setters?
 
     /**
+     * @return deep copy of this object
+     */
+    public ModuleRequires copy() {
+        try {
+            return (ModuleRequires) clone();
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
+        }
+        return null;
+    }
+
+
+    /**
      * Dump table entry to file stream in binary format.
      *
      * @param file Output file stream
@@ -97,18 +110,5 @@ public final class ModuleRequires implements Cloneable, Node {
         final String version = requiresVersionIndex == 0 ? "0" : constant_pool.getConstantString(requiresVersionIndex, Const.CONSTANT_Utf8);
         buf.append(", ").append(version);
         return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this object
-     */
-    public ModuleRequires copy() {
-        try {
-            return (ModuleRequires) clone();
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return null;
     }
 }

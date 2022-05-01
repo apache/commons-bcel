@@ -105,38 +105,34 @@ public final class Module extends Attribute {
     // TODO add more getters and setters?
 
     /**
-     * @return table of required modules
-     * @see ModuleRequires
+     * @return deep copy of this attribute
      */
-    public ModuleRequires[] getRequiresTable() {
-        return requiresTable;
-    }
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final Module c = (Module) clone();
 
+        c.requiresTable = new ModuleRequires[requiresTable.length];
+        for (int i = 0; i < requiresTable.length; i++) {
+            c.requiresTable[i] = requiresTable[i].copy();
+        }
 
-    /**
-     * @return table of exported interfaces
-     * @see ModuleExports
-     */
-    public ModuleExports[] getExportsTable() {
-        return exportsTable;
-    }
+        c.exportsTable = new ModuleExports[exportsTable.length];
+        for (int i = 0; i < exportsTable.length; i++) {
+            c.exportsTable[i] = exportsTable[i].copy();
+        }
 
+        c.opensTable = new ModuleOpens[opensTable.length];
+        for (int i = 0; i < opensTable.length; i++) {
+            c.opensTable[i] = opensTable[i].copy();
+        }
 
-    /**
-     * @return table of provided interfaces
-     * @see ModuleOpens
-     */
-    public ModuleOpens[] getOpensTable() {
-        return opensTable;
-    }
+        c.providesTable = new ModuleProvides[providesTable.length];
+        for (int i = 0; i < providesTable.length; i++) {
+            c.providesTable[i] = providesTable[i].copy();
+        }
 
-
-    /**
-     * @return table of provided interfaces
-     * @see ModuleProvides
-     */
-    public ModuleProvides[] getProvidesTable() {
-        return providesTable;
+        c.setConstantPool(_constant_pool);
+        return c;
     }
 
 
@@ -182,6 +178,42 @@ public final class Module extends Attribute {
 
 
     /**
+     * @return table of exported interfaces
+     * @see ModuleExports
+     */
+    public ModuleExports[] getExportsTable() {
+        return exportsTable;
+    }
+
+
+    /**
+     * @return table of provided interfaces
+     * @see ModuleOpens
+     */
+    public ModuleOpens[] getOpensTable() {
+        return opensTable;
+    }
+
+
+    /**
+     * @return table of provided interfaces
+     * @see ModuleProvides
+     */
+    public ModuleProvides[] getProvidesTable() {
+        return providesTable;
+    }
+
+
+    /**
+     * @return table of required modules
+     * @see ModuleRequires
+     */
+    public ModuleRequires[] getRequiresTable() {
+        return requiresTable;
+    }
+
+
+    /**
      * @return String representation, i.e., a list of packages.
      */
     @Override
@@ -221,37 +253,5 @@ public final class Module extends Attribute {
         }
 
         return buf.substring(0, buf.length()-1); // remove the last newline
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final Module c = (Module) clone();
-
-        c.requiresTable = new ModuleRequires[requiresTable.length];
-        for (int i = 0; i < requiresTable.length; i++) {
-            c.requiresTable[i] = requiresTable[i].copy();
-        }
-
-        c.exportsTable = new ModuleExports[exportsTable.length];
-        for (int i = 0; i < exportsTable.length; i++) {
-            c.exportsTable[i] = exportsTable[i].copy();
-        }
-
-        c.opensTable = new ModuleOpens[opensTable.length];
-        for (int i = 0; i < opensTable.length; i++) {
-            c.opensTable[i] = opensTable[i].copy();
-        }
-
-        c.providesTable = new ModuleProvides[providesTable.length];
-        for (int i = 0; i < providesTable.length; i++) {
-            c.providesTable[i] = providesTable[i].copy();
-        }
-
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

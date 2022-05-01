@@ -48,49 +48,6 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
 
 
     /**
-     * Dump instruction as short code to stream out.
-     */
-    @Override
-    public void dump( final DataOutputStream out ) throws IOException {
-        super.dump(out);
-        out.writeShort(b);
-    }
-
-
-    /**
-     * @return mnemonic for instruction
-     */
-    @Override
-    public String toString( final boolean verbose ) {
-        return super.toString(verbose) + " " + b;
-    }
-
-
-    /**
-     * Read needed data (e.g. index) from file.
-     */
-    @Override
-    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
-        super.setLength(3);
-        b = bytes.readShort();
-    }
-
-
-    @Override
-    public Number getValue() {
-        return Integer.valueOf(b);
-    }
-
-
-    /** @return Type.SHORT
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.SHORT;
-    }
-
-
-    /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
      * call methods according to the class hierarchy in descending order,
@@ -105,5 +62,48 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
         v.visitTypedInstruction(this);
         v.visitConstantPushInstruction(this);
         v.visitSIPUSH(this);
+    }
+
+
+    /**
+     * Dump instruction as short code to stream out.
+     */
+    @Override
+    public void dump( final DataOutputStream out ) throws IOException {
+        super.dump(out);
+        out.writeShort(b);
+    }
+
+
+    /** @return Type.SHORT
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.SHORT;
+    }
+
+
+    @Override
+    public Number getValue() {
+        return Integer.valueOf(b);
+    }
+
+
+    /**
+     * Read needed data (e.g. index) from file.
+     */
+    @Override
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
+        super.setLength(3);
+        b = bytes.readShort();
+    }
+
+
+    /**
+     * @return mnemonic for instruction
+     */
+    @Override
+    public String toString( final boolean verbose ) {
+        return super.toString(verbose) + " " + b;
     }
 }

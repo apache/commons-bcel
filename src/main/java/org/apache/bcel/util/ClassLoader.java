@@ -86,20 +86,58 @@ public class ClassLoader extends java.lang.ClassLoader {
 
     /** @param ignored_packages classes contained in these packages will be loaded
      * with the system class loader
-     */
-    public ClassLoader(final String[] ignored_packages) {
-        this.ignored_packages = ignored_packages;
-    }
-
-
-    /** @param ignored_packages classes contained in these packages will be loaded
-     * with the system class loader
      * @param deferTo delegate class loader to use for ignored packages
      */
     public ClassLoader(final java.lang.ClassLoader deferTo, final String[] ignored_packages) {
         this(ignored_packages);
         this.repository = new ClassLoaderRepository(deferTo);
     }
+
+
+    /** @param ignored_packages classes contained in these packages will be loaded
+     * with the system class loader
+     */
+    public ClassLoader(final String[] ignored_packages) {
+        this.ignored_packages = ignored_packages;
+    }
+
+    /**
+     * Override this method to create you own classes on the fly. The
+     * name contains the special token $$BCEL$$. Everything before that
+     * token is considered to be a package name. You can encode your own
+     * arguments into the subsequent string. You must ensure however not
+     * to use any "illegal" characters, i.e., characters that may not
+     * appear in a Java class name too
+     * <p>
+     * The default implementation interprets the string as a encoded compressed
+     * Java class, unpacks and decodes it with the Utility.decode() method, and
+     * parses the resulting byte array and returns the resulting JavaClass object.
+     * </p>
+     *
+     * @param class_name compressed byte code with "$$BCEL$$" in it
+     */
+    protected JavaClass createClass( final String class_name ) {
+        final int index = class_name.indexOf(BCEL_TOKEN);
+        final String real_name = class_name.substring(index + BCEL_TOKEN.length());
+        JavaClass clazz = null;
+        try {
+            final byte[] bytes = Utility.decode(real_name, true);
+            final ClassParser parser = new ClassParser(new ByteArrayInputStream(bytes), "foo");
+            clazz = parser.parse();
+        } catch (final IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        // Adapt the class name to the passed value
+        final ConstantPool cp = clazz.getConstantPool();
+        final ConstantClass cl = (ConstantClass) cp.getConstant(clazz.getClassNameIndex(),
+                Const.CONSTANT_Class);
+        final ConstantUtf8 name = (ConstantUtf8) cp.getConstant(cl.getNameIndex(),
+                Const.CONSTANT_Utf8);
+        name.setBytes(class_name.replace('.', '/'));
+        return clazz;
+    }
+
 
     @Override
     protected Class<?> loadClass( final String class_name, final boolean resolve ) throws ClassNotFoundException {
@@ -148,44 +186,6 @@ public class ClassLoader extends java.lang.ClassLoader {
      * loaded. Does nothing by default.
      */
     protected JavaClass modifyClass( final JavaClass clazz ) {
-        return clazz;
-    }
-
-
-    /**
-     * Override this method to create you own classes on the fly. The
-     * name contains the special token $$BCEL$$. Everything before that
-     * token is considered to be a package name. You can encode your own
-     * arguments into the subsequent string. You must ensure however not
-     * to use any "illegal" characters, i.e., characters that may not
-     * appear in a Java class name too
-     * <p>
-     * The default implementation interprets the string as a encoded compressed
-     * Java class, unpacks and decodes it with the Utility.decode() method, and
-     * parses the resulting byte array and returns the resulting JavaClass object.
-     * </p>
-     *
-     * @param class_name compressed byte code with "$$BCEL$$" in it
-     */
-    protected JavaClass createClass( final String class_name ) {
-        final int index = class_name.indexOf(BCEL_TOKEN);
-        final String real_name = class_name.substring(index + BCEL_TOKEN.length());
-        JavaClass clazz = null;
-        try {
-            final byte[] bytes = Utility.decode(real_name, true);
-            final ClassParser parser = new ClassParser(new ByteArrayInputStream(bytes), "foo");
-            clazz = parser.parse();
-        } catch (final IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        // Adapt the class name to the passed value
-        final ConstantPool cp = clazz.getConstantPool();
-        final ConstantClass cl = (ConstantClass) cp.getConstant(clazz.getClassNameIndex(),
-                Const.CONSTANT_Class);
-        final ConstantUtf8 name = (ConstantUtf8) cp.getConstant(cl.getNameIndex(),
-                Const.CONSTANT_Utf8);
-        name.setBytes(class_name.replace('.', '/'));
         return clazz;
     }
 }

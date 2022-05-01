@@ -83,6 +83,63 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (final CloneNotSupportedException e) {
+            throw new Error("Clone Not Supported"); // never happens
+        }
+    }
+
+
+    /**
+     * @return true, if ih is target of this variable
+     */
+    @Override
+    public boolean containsTarget( final InstructionHandle ih ) {
+        return start == ih || end == ih;
+    }
+
+
+    /**
+     * Clear the references from and to this variable when it's removed.
+     */
+    void dispose() {
+        setStart(null);
+        setEnd(null);
+    }
+
+
+    /**
+     * We consider to local variables to be equal, if the use the same index and
+     * are valid in the same range.
+     */
+    @Override
+    public boolean equals( final Object o ) {
+        if (!(o instanceof LocalVariableGen)) {
+            return false;
+        }
+        final LocalVariableGen l = (LocalVariableGen) o;
+        return l.index == index && l.start == start && l.end == end;
+    }
+
+
+    public InstructionHandle getEnd() {
+        return end;
+    }
+
+
+    public int getIndex() {
+        return index;
+    }
+
+
+    public boolean getLiveToEnd() {
+        return liveToEnd;
+    }
+
+
     /**
      * Gets LocalVariable object.
      *
@@ -114,13 +171,9 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
-    public void setIndex( final int index ) {
-        this.index = index;
-    }
-
-
-    public int getIndex() {
-        return index;
+    @Override
+    public String getName() {
+        return name;
     }
 
 
@@ -129,15 +182,38 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
+    public InstructionHandle getStart() {
+        return start;
+    }
+
+
+    @Override
+    public Type getType() {
+        return type;
+    }
+
+
+    @Override
+    public int hashCode() {
+        // If the user changes the name or type, problems with the targeter hashmap will occur.
+        // Note: index cannot be part of hash as it may be changed by the user.
+        return name.hashCode() ^ type.hashCode();
+    }
+
+
+    public void setEnd( final InstructionHandle end ) { // TODO could be package-protected?
+        BranchInstruction.notifyTarget(this.end, end, this);
+        this.end = end;
+    }
+
+
+    public void setIndex( final int index ) {
+        this.index = index;
+    }
+
     public void setLiveToEnd( final boolean live_to_end) {
         this.liveToEnd = live_to_end;
     }
-
-
-    public boolean getLiveToEnd() {
-        return liveToEnd;
-    }
-
 
     @Override
     public void setName( final String name ) {
@@ -145,9 +221,9 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
 
-    @Override
-    public String getName() {
-        return name;
+    public void setStart( final InstructionHandle start ) { // TODO could be package-protected?
+        BranchInstruction.notifyTarget(this.start, start, this);
+        this.start = start;
     }
 
 
@@ -158,30 +234,8 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
 
 
     @Override
-    public Type getType() {
-        return type;
-    }
-
-
-    public InstructionHandle getStart() {
-        return start;
-    }
-
-
-    public InstructionHandle getEnd() {
-        return end;
-    }
-
-
-    public void setStart( final InstructionHandle start ) { // TODO could be package-protected?
-        BranchInstruction.notifyTarget(this.start, start, this);
-        this.start = start;
-    }
-
-
-    public void setEnd( final InstructionHandle end ) { // TODO could be package-protected?
-        BranchInstruction.notifyTarget(this.end, end, this);
-        this.end = end;
+    public String toString() {
+        return "LocalVariableGen(" + name + ", " + type + ", " + start + ", " + end + ")";
     }
 
 
@@ -203,60 +257,6 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         if (!targeted) {
             throw new ClassGenException("Not targeting " + old_ih + ", but {" + start + ", " + end
                     + "}");
-        }
-    }
-
-    /**
-     * Clear the references from and to this variable when it's removed.
-     */
-    void dispose() {
-        setStart(null);
-        setEnd(null);
-    }
-
-    /**
-     * @return true, if ih is target of this variable
-     */
-    @Override
-    public boolean containsTarget( final InstructionHandle ih ) {
-        return start == ih || end == ih;
-    }
-
-
-    @Override
-    public int hashCode() {
-        // If the user changes the name or type, problems with the targeter hashmap will occur.
-        // Note: index cannot be part of hash as it may be changed by the user.
-        return name.hashCode() ^ type.hashCode();
-    }
-
-
-    /**
-     * We consider to local variables to be equal, if the use the same index and
-     * are valid in the same range.
-     */
-    @Override
-    public boolean equals( final Object o ) {
-        if (!(o instanceof LocalVariableGen)) {
-            return false;
-        }
-        final LocalVariableGen l = (LocalVariableGen) o;
-        return l.index == index && l.start == start && l.end == end;
-    }
-
-
-    @Override
-    public String toString() {
-        return "LocalVariableGen(" + name + ", " + type + ", " + start + ", " + end + ")";
-    }
-
-
-    @Override
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
         }
     }
 }

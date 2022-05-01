@@ -56,6 +56,27 @@ public class LocalVariables implements Cloneable {
         return lvs;
     }
 
+    /*
+     * Fulfills the general contract of Object.equals().
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof LocalVariables)) {
+            return false;
+        }
+        final LocalVariables lv = (LocalVariables) o;
+        if (this.locals.length != lv.locals.length) {
+            return false;
+        }
+        for (int i=0; i<this.locals.length; i++) {
+            if (!this.locals[i].equals(lv.locals[i])) {
+                //System.out.println(this.locals[i]+" is not "+lv.locals[i]);
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Returns the type of the local variable slot index.
      *
@@ -76,6 +97,25 @@ public class LocalVariables implements Cloneable {
         return (LocalVariables) this.clone();
     }
 
+    /** @return a hash code value for the object.
+     */
+    @Override
+    public int hashCode() { return locals.length; }
+
+    /**
+     * Replaces all occurrences of {@code uninitializedObjectType} in this local variables set
+     * with an "initialized" ObjectType.
+     *
+     * @param uninitializedObjectType the object to match.
+     */
+    public void initializeObject(final UninitializedObjectType uninitializedObjectType) {
+        for (int i=0; i<locals.length; i++) {
+            if (locals[i] == uninitializedObjectType) {
+                locals[i] = uninitializedObjectType.getInitialized();
+            }
+        }
+    }
+
     /**
      * Returns the number of local variable slots.
      *
@@ -83,45 +123,6 @@ public class LocalVariables implements Cloneable {
      */
     public int maxLocals() {
         return locals.length;
-    }
-
-    /**
-     * Sets a new Type for the given local variable slot.
-     *
-     * @param slotIndex Target slot index.
-     * @param type Type to save at the given slot index.
-     */
-    public void set(final int slotIndex, final Type type) { // TODO could be package-protected?
-        if (type == Type.BYTE || type == Type.SHORT || type == Type.BOOLEAN || type == Type.CHAR) {
-            throw new AssertionViolatedException("LocalVariables do not know about '"+type+"'. Use Type.INT instead.");
-        }
-        locals[slotIndex] = type;
-    }
-
-    /** @return a hash code value for the object.
-     */
-    @Override
-    public int hashCode() { return locals.length; }
-
-    /*
-     * Fulfills the general contract of Object.equals().
-     */
-    @Override
-    public boolean equals(final Object o) {
-        if (!(o instanceof LocalVariables)) {
-            return false;
-        }
-        final LocalVariables lv = (LocalVariables) o;
-        if (this.locals.length != lv.locals.length) {
-            return false;
-        }
-        for (int i=0; i<this.locals.length; i++) {
-            if (!this.locals[i].equals(lv.locals[i])) {
-                //System.out.println(this.locals[i]+" is not "+lv.locals[i]);
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -193,6 +194,19 @@ public class LocalVariables implements Cloneable {
     }
 
     /**
+     * Sets a new Type for the given local variable slot.
+     *
+     * @param slotIndex Target slot index.
+     * @param type Type to save at the given slot index.
+     */
+    public void set(final int slotIndex, final Type type) { // TODO could be package-protected?
+        if (type == Type.BYTE || type == Type.SHORT || type == Type.BOOLEAN || type == Type.CHAR) {
+            throw new AssertionViolatedException("LocalVariables do not know about '"+type+"'. Use Type.INT instead.");
+        }
+        locals[slotIndex] = type;
+    }
+
+    /**
      * Returns a String representation of this object.
      */
     @Override
@@ -205,19 +219,5 @@ public class LocalVariables implements Cloneable {
             sb.append("\n");
         }
         return sb.toString();
-    }
-
-    /**
-     * Replaces all occurrences of {@code uninitializedObjectType} in this local variables set
-     * with an "initialized" ObjectType.
-     *
-     * @param uninitializedObjectType the object to match.
-     */
-    public void initializeObject(final UninitializedObjectType uninitializedObjectType) {
-        for (int i=0; i<locals.length; i++) {
-            if (locals[i] == uninitializedObjectType) {
-                locals[i] = uninitializedObjectType.getInitialized();
-            }
-        }
     }
 }

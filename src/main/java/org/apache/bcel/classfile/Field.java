@@ -64,11 +64,18 @@ public final class Field extends FieldOrMethod {
 
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
+     * @return Comparison strategy object
      */
-    public Field(final Field c) {
-        super(c);
+    public static BCELComparator getComparator() {
+        return bcelComparator;
+    }
+
+
+    /**
+     * @param comparator Comparison strategy object
+     */
+    public static void setComparator( final BCELComparator comparator ) {
+        bcelComparator = comparator;
     }
 
 
@@ -79,6 +86,15 @@ public final class Field extends FieldOrMethod {
     Field(final DataInput file, final ConstantPool constant_pool) throws IOException,
             ClassFormatException {
         super(file, constant_pool);
+    }
+
+
+    /**
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use clone() for a physical copy.
+     */
+    public Field(final Field c) {
+        super(c);
     }
 
 
@@ -109,6 +125,27 @@ public final class Field extends FieldOrMethod {
 
 
     /**
+     * @return deep copy of this field
+     */
+    public Field copy( final ConstantPool _constant_pool ) {
+        return (Field) copy_(_constant_pool);
+    }
+
+
+    /**
+     * Return value as defined by given BCELComparator strategy.
+     * By default two Field objects are said to be equal when
+     * their names and signatures are equal.
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals( final Object obj ) {
+        return bcelComparator.equals(this, obj);
+    }
+
+
+    /**
      * @return constant value associated with this field (may be null)
      */
     public ConstantValue getConstantValue() {
@@ -118,6 +155,26 @@ public final class Field extends FieldOrMethod {
             }
         }
         return null;
+    }
+
+
+    /**
+     * @return type of field
+     */
+    public Type getType() {
+        return Type.getReturnType(getSignature());
+    }
+
+
+    /**
+     * Return value as defined by given BCELComparator strategy.
+     * By default return the hashcode of the field's name XOR signature.
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return bcelComparator.hashCode(this);
     }
 
 
@@ -150,62 +207,5 @@ public final class Field extends FieldOrMethod {
             }
         }
         return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this field
-     */
-    public Field copy( final ConstantPool _constant_pool ) {
-        return (Field) copy_(_constant_pool);
-    }
-
-
-    /**
-     * @return type of field
-     */
-    public Type getType() {
-        return Type.getReturnType(getSignature());
-    }
-
-
-    /**
-     * @return Comparison strategy object
-     */
-    public static BCELComparator getComparator() {
-        return bcelComparator;
-    }
-
-
-    /**
-     * @param comparator Comparison strategy object
-     */
-    public static void setComparator( final BCELComparator comparator ) {
-        bcelComparator = comparator;
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default two Field objects are said to be equal when
-     * their names and signatures are equal.
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals( final Object obj ) {
-        return bcelComparator.equals(this, obj);
-    }
-
-
-    /**
-     * Return value as defined by given BCELComparator strategy.
-     * By default return the hashcode of the field's name XOR signature.
-     *
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return bcelComparator.hashCode(this);
     }
 }

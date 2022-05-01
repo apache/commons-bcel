@@ -40,15 +40,6 @@ public final class Synthetic extends Attribute {
 
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use copy() for a physical copy.
-     */
-    public Synthetic(final Synthetic c) {
-        this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
-    }
-
-
-    /**
      * @param name_index Index in constant pool to CONSTANT_Utf8, which
      * should represent the string "Synthetic".
      * @param length Content length in bytes - should be zero.
@@ -83,6 +74,15 @@ public final class Synthetic extends Attribute {
 
 
     /**
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use copy() for a physical copy.
+     */
+    public Synthetic(final Synthetic c) {
+        this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
+    }
+
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitely
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
@@ -92,6 +92,21 @@ public final class Synthetic extends Attribute {
     @Override
     public void accept( final Visitor v ) {
         v.visitSynthetic(this);
+    }
+
+
+    /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final Synthetic c = (Synthetic) clone();
+        if (bytes != null) {
+            c.bytes = new byte[bytes.length];
+            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
+        }
+        c.setConstantPool(_constant_pool);
+        return c;
     }
 
 
@@ -136,20 +151,5 @@ public final class Synthetic extends Attribute {
             buf.append(" ").append(Utility.toHexString(bytes));
         }
         return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final Synthetic c = (Synthetic) clone();
-        if (bytes != null) {
-            c.bytes = new byte[bytes.length];
-            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

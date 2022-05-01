@@ -27,10 +27,16 @@ public class InstructionHandleTestCase {
     // Test that setInstruction only allows Instructions that are not BranchInstructions
 
     @Test
-    public void testsetInstructionNull() {
-        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
-        assertNotNull(ih);
-        assertThrows(ClassGenException.class, () -> ih.setInstruction(null));
+    public void testBCEL195() {
+        final InstructionList il = new InstructionList();
+        final InstructionHandle ih = il.append(InstructionConst.NOP);
+        new TABLESWITCH(new int[0], InstructionHandle.EMPTY_ARRAY, ih);
+        new TABLESWITCH(new int[0], InstructionHandle.EMPTY_ARRAY, ih);
+    }
+
+    @Test
+    public void testGetIHnull() {
+        assertThrows(ClassGenException.class, () -> InstructionHandle.getInstructionHandle(null));
     }
 
     @Test
@@ -49,15 +55,9 @@ public class InstructionHandleTestCase {
     }
 
     @Test
-    public void testGetIHnull() {
-        assertThrows(ClassGenException.class, () -> InstructionHandle.getInstructionHandle(null));
-    }
-
-    @Test
-    public void testBCEL195() {
-        final InstructionList il = new InstructionList();
-        final InstructionHandle ih = il.append(InstructionConst.NOP);
-        new TABLESWITCH(new int[0], InstructionHandle.EMPTY_ARRAY, ih);
-        new TABLESWITCH(new int[0], InstructionHandle.EMPTY_ARRAY, ih);
+    public void testsetInstructionNull() {
+        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        assertNotNull(ih);
+        assertThrows(ClassGenException.class, () -> ih.setInstruction(null));
     }
 }

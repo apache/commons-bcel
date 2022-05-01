@@ -224,6 +224,13 @@ public class CounterVisitor implements Visitor
         annotationEntryCount++;
     }
 
+    /** @since 6.0 */
+    @Override
+    public void visitBootstrapMethods(final BootstrapMethods obj)
+    {
+        bootstrapMethodsCount++;
+    }
+
     @Override
     public void visitCode(final Code obj)
     {
@@ -246,6 +253,12 @@ public class CounterVisitor implements Visitor
     public void visitConstantDouble(final ConstantDouble obj)
     {
         constantDoubleCount++;
+    }
+
+    /** @since 6.3 */
+    @Override
+    public void visitConstantDynamic(final ConstantDynamic constantDynamic) {
+        constantDynamicCount++;
     }
 
     @Override
@@ -272,10 +285,23 @@ public class CounterVisitor implements Visitor
         constantInterfaceMethodrefCount++;
     }
 
+    /** @since 6.0 */
+    @Override
+    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj)
+    {
+        constantInvokeDynamic++;
+    }
+
     @Override
     public void visitConstantLong(final ConstantLong obj)
     {
         constantLongCount++;
+    }
+
+    /** @since 6.0 */
+    @Override
+    public void visitConstantMethodHandle(final ConstantMethodHandle constantMethodHandle) {
+        // TODO Auto-generated method stub
     }
 
     @Override
@@ -284,10 +310,28 @@ public class CounterVisitor implements Visitor
         constantMethodrefCount++;
     }
 
+    /** @since 6.0 */
+    @Override
+    public void visitConstantMethodType(final ConstantMethodType obj) {
+        // TODO Auto-generated method stub
+    }
+
+    /** @since 6.1 */
+    @Override
+    public void visitConstantModule(final ConstantModule constantModule) {
+        constantModuleCount++;
+    }
+
     @Override
     public void visitConstantNameAndType(final ConstantNameAndType obj)
     {
         constantNameAndTypeCount++;
+    }
+
+    /** @since 6.1 */
+    @Override
+    public void visitConstantPackage(final ConstantPackage constantPackage) {
+        constantPackageCount++;
     }
 
     @Override
@@ -392,10 +436,84 @@ public class CounterVisitor implements Visitor
         methodCount++;
     }
 
+    /** @since 6.0 */
+    @Override
+    public void visitMethodParameter(final MethodParameter obj)
+    {
+        methodParameterCount++;
+    }
+
+    /** @since 6.0 */
+    @Override
+    public void visitMethodParameters(final MethodParameters obj)
+    {
+        methodParametersCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModule(final Module obj) {
+        moduleCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleExports(final ModuleExports obj) {
+        moduleExportsCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleMainClass(final ModuleMainClass obj) {
+        moduleMainClassCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleOpens(final ModuleOpens obj) {
+        moduleOpensCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModulePackages(final ModulePackages obj) {
+        modulePackagesCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleProvides(final ModuleProvides obj) {
+        moduleProvidesCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitModuleRequires(final ModuleRequires obj) {
+        moduleRequiresCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitNestHost(final NestHost obj) {
+        nestHostCount++;
+    }
+
+    /** @since 6.4.0 */
+    @Override
+    public void visitNestMembers(final NestMembers obj) {
+        nestMembersCount++;
+    }
+
     @Override
     public void visitParameterAnnotation(final ParameterAnnotations obj)
     {
         parameterAnnotationCount++;
+    }
+
+    /** @since 6.0 */
+    @Override
+    public void visitParameterAnnotationEntry(final ParameterAnnotationEntry parameterAnnotationEntry) {
+        // TODO Auto-generated method stub
     }
 
     @Override
@@ -432,123 +550,5 @@ public class CounterVisitor implements Visitor
     public void visitUnknown(final Unknown obj)
     {
         unknownCount++;
-    }
-
-    /** @since 6.0 */
-    @Override
-    public void visitBootstrapMethods(final BootstrapMethods obj)
-    {
-        bootstrapMethodsCount++;
-    }
-
-    /** @since 6.0 */
-    @Override
-    public void visitMethodParameter(final MethodParameter obj)
-    {
-        methodParameterCount++;
-    }
-
-    /** @since 6.0 */
-    @Override
-    public void visitMethodParameters(final MethodParameters obj)
-    {
-        methodParametersCount++;
-    }
-
-    /** @since 6.0 */
-    @Override
-    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj)
-    {
-        constantInvokeDynamic++;
-    }
-
-    /** @since 6.0 */
-    @Override
-    public void visitConstantMethodType(final ConstantMethodType obj) {
-        // TODO Auto-generated method stub
-    }
-
-    /** @since 6.0 */
-    @Override
-    public void visitConstantMethodHandle(final ConstantMethodHandle constantMethodHandle) {
-        // TODO Auto-generated method stub
-    }
-
-    /** @since 6.0 */
-    @Override
-    public void visitParameterAnnotationEntry(final ParameterAnnotationEntry parameterAnnotationEntry) {
-        // TODO Auto-generated method stub
-    }
-
-    /** @since 6.1 */
-    @Override
-    public void visitConstantPackage(final ConstantPackage constantPackage) {
-        constantPackageCount++;
-    }
-
-    /** @since 6.1 */
-    @Override
-    public void visitConstantModule(final ConstantModule constantModule) {
-        constantModuleCount++;
-    }
-
-    /** @since 6.3 */
-    @Override
-    public void visitConstantDynamic(final ConstantDynamic constantDynamic) {
-        constantDynamicCount++;
-    }
-
-    /** @since 6.4.0 */
-    @Override
-    public void visitModule(final Module obj) {
-        moduleCount++;
-    }
-
-    /** @since 6.4.0 */
-    @Override
-    public void visitModuleExports(final ModuleExports obj) {
-        moduleExportsCount++;
-    }
-
-    /** @since 6.4.0 */
-    @Override
-    public void visitModuleOpens(final ModuleOpens obj) {
-        moduleOpensCount++;
-    }
-
-    /** @since 6.4.0 */
-    @Override
-    public void visitModuleProvides(final ModuleProvides obj) {
-        moduleProvidesCount++;
-    }
-
-    /** @since 6.4.0 */
-    @Override
-    public void visitModuleRequires(final ModuleRequires obj) {
-        moduleRequiresCount++;
-    }
-
-    /** @since 6.4.0 */
-    @Override
-    public void visitModuleMainClass(final ModuleMainClass obj) {
-        moduleMainClassCount++;
-    }
-
-    /** @since 6.4.0 */
-    @Override
-    public void visitModulePackages(final ModulePackages obj) {
-        modulePackagesCount++;
-    }
-
-    /** @since 6.4.0 */
-    @Override
-    public void visitNestHost(final NestHost obj) {
-        nestHostCount++;
-    }
-
-    /** @since 6.4.0 */
-    @Override
-    public void visitNestMembers(final NestMembers obj) {
-        nestMembersCount++;
     }
 }

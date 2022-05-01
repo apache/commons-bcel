@@ -54,6 +54,36 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 
 
     /**
+     * Call corresponding visitor method(s). The order is:
+     * Call visitor methods of implemented interfaces first, then
+     * call methods according to the class hierarchy in descending order,
+     * i.e., the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public void accept( final Visitor v ) {
+        v.visitLoadClass(this);
+        v.visitAllocationInstruction(this);
+        v.visitExceptionThrower(this);
+        v.visitTypedInstruction(this);
+        v.visitCPInstruction(this);
+        v.visitMULTIANEWARRAY(this);
+    }
+
+
+    /**
+     * Also works for instructions whose stack effect depends on the
+     * constant pool entry they reference.
+     * @return Number of words consumed from stack by this instruction
+     */
+    @Override
+    public int consumeStack( final ConstantPoolGen cpg ) {
+        return dimensions;
+    }
+
+
+    /**
      * Dump instruction as byte code to stream out.
      * @param out Output stream
      */
@@ -66,49 +96,9 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 
 
     /**
-     * Read needed data (i.e., no. dimension) from file.
-     */
-    @Override
-    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
-        super.initFromFile(bytes, wide);
-        dimensions = bytes.readByte();
-        super.setLength(4);
-    }
-
-
-    /**
      * @return number of dimensions to be created
      */
     public final short getDimensions() {
-        return dimensions;
-    }
-
-
-    /**
-     * @return mnemonic for instruction
-     */
-    @Override
-    public String toString( final boolean verbose ) {
-        return super.toString(verbose) + " " + super.getIndex() + " " + dimensions;
-    }
-
-
-    /**
-     * @return mnemonic for instruction with symbolic references resolved
-     */
-    @Override
-    public String toString( final ConstantPool cp ) {
-        return super.toString(cp) + " " + dimensions;
-    }
-
-
-    /**
-     * Also works for instructions whose stack effect depends on the
-     * constant pool entry they reference.
-     * @return Number of words consumed from stack by this instruction
-     */
-    @Override
-    public int consumeStack( final ConstantPoolGen cpg ) {
         return dimensions;
     }
 
@@ -132,20 +122,30 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 
 
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
+     * Read needed data (i.e., no. dimension) from file.
      */
     @Override
-    public void accept( final Visitor v ) {
-        v.visitLoadClass(this);
-        v.visitAllocationInstruction(this);
-        v.visitExceptionThrower(this);
-        v.visitTypedInstruction(this);
-        v.visitCPInstruction(this);
-        v.visitMULTIANEWARRAY(this);
+    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
+        super.initFromFile(bytes, wide);
+        dimensions = bytes.readByte();
+        super.setLength(4);
+    }
+
+
+    /**
+     * @return mnemonic for instruction
+     */
+    @Override
+    public String toString( final boolean verbose ) {
+        return super.toString(verbose) + " " + super.getIndex() + " " + dimensions;
+    }
+
+
+    /**
+     * @return mnemonic for instruction with symbolic references resolved
+     */
+    @Override
+    public String toString( final ConstantPool cp ) {
+        return super.toString(cp) + " " + dimensions;
     }
 }

@@ -40,42 +40,14 @@ abstract class AbstractClassPathRepository implements Repository {
     }
 
     @Override
-    public abstract void storeClass(final JavaClass javaClass);
-
-    @Override
-    public abstract void removeClass(final JavaClass javaClass);
+    public abstract void clear();
 
     @Override
     public abstract JavaClass findClass(final String className);
 
     @Override
-    public abstract void clear();
-
-    /**
-     * Finds a JavaClass object by name. If it is already in this Repository, the Repository version is returned.
-     * Otherwise, the Repository's classpath is searched for the class (and it is added to the Repository if found).
-     *
-     * @param className
-     *            the name of the class
-     * @return the JavaClass object
-     * @throws ClassNotFoundException
-     *             if the class is not in the Repository, and could not be found on the classpath
-     */
-    @Override
-    public JavaClass loadClass(String className) throws ClassNotFoundException {
-        if (className == null || className.isEmpty()) {
-            throw new IllegalArgumentException("Invalid class name " + className);
-        }
-        className = className.replace('/', '.'); // Just in case, canonical form
-        final JavaClass clazz = findClass(className);
-        if (clazz != null) {
-            return clazz;
-        }
-        try {
-            return loadClass(_path.getInputStream(className), className);
-        } catch (final IOException e) {
-            throw new ClassNotFoundException("Exception while looking for class " + className + ": " + e, e);
-        }
+    public ClassPath getClassPath() {
+        return _path;
     }
 
     /**
@@ -131,8 +103,36 @@ abstract class AbstractClassPathRepository implements Repository {
         throw new ClassNotFoundException("ClassRepository could not load " + className);
     }
 
+    /**
+     * Finds a JavaClass object by name. If it is already in this Repository, the Repository version is returned.
+     * Otherwise, the Repository's classpath is searched for the class (and it is added to the Repository if found).
+     *
+     * @param className
+     *            the name of the class
+     * @return the JavaClass object
+     * @throws ClassNotFoundException
+     *             if the class is not in the Repository, and could not be found on the classpath
+     */
     @Override
-    public ClassPath getClassPath() {
-        return _path;
+    public JavaClass loadClass(String className) throws ClassNotFoundException {
+        if (className == null || className.isEmpty()) {
+            throw new IllegalArgumentException("Invalid class name " + className);
+        }
+        className = className.replace('/', '.'); // Just in case, canonical form
+        final JavaClass clazz = findClass(className);
+        if (clazz != null) {
+            return clazz;
+        }
+        try {
+            return loadClass(_path.getInputStream(className), className);
+        } catch (final IOException e) {
+            throw new ClassNotFoundException("Exception while looking for class " + className + ": " + e, e);
+        }
     }
+
+    @Override
+    public abstract void removeClass(final JavaClass javaClass);
+
+    @Override
+    public abstract void storeClass(final JavaClass javaClass);
 }

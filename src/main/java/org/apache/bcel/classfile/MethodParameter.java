@@ -53,46 +53,20 @@ public class MethodParameter implements Cloneable {
         accessFlags = input.readUnsignedShort();
     }
 
-    public int getNameIndex() {
-        return nameIndex;
-    }
-
-    public void setNameIndex(final int name_index) {
-        this.nameIndex = name_index;
+    public void accept(final Visitor v) {
+        v.visitMethodParameter(this);
     }
 
     /**
-     * Returns the name of the parameter.
+     * @return deep copy of this object
      */
-    public String getParameterName(final ConstantPool constant_pool) {
-        if (nameIndex == 0) {
-            return null;
+    public MethodParameter copy() {
+        try {
+            return (MethodParameter) clone();
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
         }
-        return ((ConstantUtf8) constant_pool.getConstant(nameIndex, Const.CONSTANT_Utf8)).getBytes();
-       }
-
-    public int getAccessFlags() {
-        return accessFlags;
-    }
-
-    public void setAccessFlags(final int access_flags) {
-        this.accessFlags = access_flags;
-    }
-
-    public boolean isFinal() {
-        return (accessFlags & Const.ACC_FINAL) != 0;
-    }
-
-    public boolean isSynthetic() {
-        return (accessFlags & Const.ACC_SYNTHETIC) != 0;
-    }
-
-    public boolean isMandated() {
-        return (accessFlags & Const.ACC_MANDATED) != 0;
-    }
-
-    public void accept(final Visitor v) {
-        v.visitMethodParameter(this);
+        return null;
     }
 
     /**
@@ -106,15 +80,41 @@ public class MethodParameter implements Cloneable {
         file.writeShort(accessFlags);
     }
 
+    public int getAccessFlags() {
+        return accessFlags;
+    }
+
+    public int getNameIndex() {
+        return nameIndex;
+    }
+
     /**
-     * @return deep copy of this object
+     * Returns the name of the parameter.
      */
-    public MethodParameter copy() {
-        try {
-            return (MethodParameter) clone();
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
+    public String getParameterName(final ConstantPool constant_pool) {
+        if (nameIndex == 0) {
+            return null;
         }
-        return null;
+        return ((ConstantUtf8) constant_pool.getConstant(nameIndex, Const.CONSTANT_Utf8)).getBytes();
+       }
+
+    public boolean isFinal() {
+        return (accessFlags & Const.ACC_FINAL) != 0;
+    }
+
+    public boolean isMandated() {
+        return (accessFlags & Const.ACC_MANDATED) != 0;
+    }
+
+    public boolean isSynthetic() {
+        return (accessFlags & Const.ACC_SYNTHETIC) != 0;
+    }
+
+    public void setAccessFlags(final int access_flags) {
+        this.accessFlags = access_flags;
+    }
+
+    public void setNameIndex(final int name_index) {
+        this.nameIndex = name_index;
     }
 }

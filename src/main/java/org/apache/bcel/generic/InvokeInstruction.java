@@ -48,29 +48,6 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
 
 
     /**
-     * @return mnemonic for instruction with symbolic references resolved
-     */
-    @Override
-    public String toString( final ConstantPool cp ) {
-        final Constant c = cp.getConstant(super.getIndex());
-        final StringTokenizer tok = new StringTokenizer(cp.constantToString(c));
-
-        final String opcodeName = Const.getOpcodeName(super.getOpcode());
-
-        final StringBuilder sb = new StringBuilder(opcodeName);
-        if (tok.hasMoreTokens()) {
-            sb.append(" ");
-            sb.append(tok.nextToken().replace('.', '/'));
-            if (tok.hasMoreTokens()) {
-                sb.append(tok.nextToken());
-            }
-        }
-
-        return sb.toString();
-    }
-
-
-    /**
      * Also works for instructions whose stack effect depends on the
      * constant pool entry they reference.
      * @return Number of words consumed from stack by this instruction
@@ -90,16 +67,12 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     }
 
 
-    /**
-     * Also works for instructions whose stack effect depends on the
-     * constant pool entry they reference.
-     * @return Number of words produced onto stack by this instruction
+    /** @return argument types of referenced method.
      */
-    @Override
-    public int produceStack( final ConstantPoolGen cpg ) {
-        final String signature = getSignature(cpg);
-        return Type.getReturnTypeSize(signature);
+    public Type[] getArgumentTypes( final ConstantPoolGen cpg ) {
+        return Type.getArgumentTypes(getSignature(cpg));
     }
+
 
     /**
      * This overrides the deprecated version as we know here that the referenced class
@@ -116,20 +89,11 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
         return className.replace('/', '.');
     }
 
-    /** @return return type of referenced method.
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cpg ) {
-        return getReturnType(cpg);
-    }
-
-
     /** @return name of referenced method.
      */
     public String getMethodName( final ConstantPoolGen cpg ) {
         return getName(cpg);
     }
-
 
     /** @return return type of referenced method.
      */
@@ -138,10 +102,46 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     }
 
 
-    /** @return argument types of referenced method.
+    /** @return return type of referenced method.
      */
-    public Type[] getArgumentTypes( final ConstantPoolGen cpg ) {
-        return Type.getArgumentTypes(getSignature(cpg));
+    @Override
+    public Type getType( final ConstantPoolGen cpg ) {
+        return getReturnType(cpg);
+    }
+
+
+    /**
+     * Also works for instructions whose stack effect depends on the
+     * constant pool entry they reference.
+     * @return Number of words produced onto stack by this instruction
+     */
+    @Override
+    public int produceStack( final ConstantPoolGen cpg ) {
+        final String signature = getSignature(cpg);
+        return Type.getReturnTypeSize(signature);
+    }
+
+
+    /**
+     * @return mnemonic for instruction with symbolic references resolved
+     */
+    @Override
+    public String toString( final ConstantPool cp ) {
+        final Constant c = cp.getConstant(super.getIndex());
+        final StringTokenizer tok = new StringTokenizer(cp.constantToString(c));
+
+        final String opcodeName = Const.getOpcodeName(super.getOpcode());
+
+        final StringBuilder sb = new StringBuilder(opcodeName);
+        if (tok.hasMoreTokens()) {
+            sb.append(" ");
+            sb.append(tok.nextToken().replace('.', '/'));
+            if (tok.hasMoreTokens()) {
+                sb.append(tok.nextToken());
+            }
+        }
+
+        return sb.toString();
     }
 
 }

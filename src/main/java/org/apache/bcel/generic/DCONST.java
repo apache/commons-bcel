@@ -49,20 +49,6 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
     }
 
 
-    @Override
-    public Number getValue() {
-        return Double.valueOf(value);
-    }
-
-
-    /** @return Type.DOUBLE
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return Type.DOUBLE;
-    }
-
-
     /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
@@ -78,5 +64,19 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
         v.visitTypedInstruction(this);
         v.visitConstantPushInstruction(this);
         v.visitDCONST(this);
+    }
+
+
+    /** @return Type.DOUBLE
+     */
+    @Override
+    public Type getType( final ConstantPoolGen cp ) {
+        return Type.DOUBLE;
+    }
+
+
+    @Override
+    public Number getValue() {
+        return Double.valueOf(value);
     }
 }

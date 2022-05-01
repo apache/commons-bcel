@@ -31,6 +31,11 @@ public final class SWITCH implements CompoundInstruction {
     private final int matchLength;
 
 
+    public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target) {
+        this(match, targets, target, 1);
+    }
+
+
     /**
      * Template for switch() constructs. If the match array can be
      * sorted in ascending order with gaps no larger than max_gap
@@ -63,11 +68,6 @@ public final class SWITCH implements CompoundInstruction {
     }
 
 
-    public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target) {
-        this(match, targets, target, 1);
-    }
-
-
     private void fillup( final int max_gap, final InstructionHandle target ) {
         final int max_size = matchLength + matchLength * max_gap;
         final int[] m_vec = new int[max_size];
@@ -91,6 +91,30 @@ public final class SWITCH implements CompoundInstruction {
         targets = new InstructionHandle[count];
         System.arraycopy(m_vec, 0, match, 0, count);
         System.arraycopy(t_vec, 0, targets, 0, count);
+    }
+
+
+    public Instruction getInstruction() {
+        return instruction;
+    }
+
+
+    @Override
+    public InstructionList getInstructionList() {
+        return new InstructionList(instruction);
+    }
+
+
+    /**
+     * @return match is sorted in ascending order with no gap bigger than max_gap?
+     */
+    private boolean matchIsOrdered( final int max_gap ) {
+        for (int i = 1; i < matchLength; i++) {
+            if (match[i] - match[i - 1] > max_gap) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -127,29 +151,5 @@ public final class SWITCH implements CompoundInstruction {
         if (i < r) {
             sort(i, r);
         }
-    }
-
-
-    /**
-     * @return match is sorted in ascending order with no gap bigger than max_gap?
-     */
-    private boolean matchIsOrdered( final int max_gap ) {
-        for (int i = 1; i < matchLength; i++) {
-            if (match[i] - match[i - 1] > max_gap) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    @Override
-    public InstructionList getInstructionList() {
-        return new InstructionList(instruction);
-    }
-
-
-    public Instruction getInstruction() {
-        return instruction;
     }
 }

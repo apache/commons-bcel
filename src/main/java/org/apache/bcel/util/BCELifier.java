@@ -59,9 +59,115 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     private static final String BASE_PACKAGE = Const.class.getPackage().getName();
     private static final String CONSTANT_PREFIX = Const.class.getSimpleName()+".";
 
+    // Needs to be accessible from unit test code
+    static JavaClass getJavaClass(final String name) throws ClassNotFoundException, IOException {
+        JavaClass java_class;
+        if ((java_class = Repository.lookupClass(name)) == null) {
+            java_class = new ClassParser(name).parse(); // May throw IOException
+        }
+        return java_class;
+    }
+    /** Default main method
+     */
+    public static void main( final String[] argv ) throws Exception {
+        if (argv.length != 1) {
+            System.out.println("Usage: BCELifier classname");
+            System.out.println("\tThe class must exist on the classpath");
+            return;
+        }
+        final JavaClass java_class = getJavaClass(argv[0]);
+        final BCELifier bcelifier = new BCELifier(java_class, System.out);
+        bcelifier.start();
+    }
+    static String printArgumentTypes( final Type[] arg_types ) {
+        if (arg_types.length == 0) {
+            return "Type.NO_ARGS";
+        }
+        final StringBuilder args = new StringBuilder();
+        for (int i = 0; i < arg_types.length; i++) {
+            args.append(printType(arg_types[i]));
+            if (i < arg_types.length - 1) {
+                args.append(", ");
+            }
+        }
+        return "new Type[] { " + args.toString() + " }";
+    }
+
+    static String printFlags( final int flags ) {
+        return printFlags(flags, FLAGS.UNKNOWN);
+    }
+
+
+    /**
+     * Return a string with the flag settings
+     * @param flags the flags field to interpret
+     * @param location the item type
+     * @return the formatted string
+     * @since 6.0 made public
+     */
+    public static String printFlags( final int flags, final FLAGS location ) {
+        if (flags == 0) {
+            return "0";
+        }
+        final StringBuilder buf = new StringBuilder();
+        for (int i = 0, pow = 1; pow <= Const.MAX_ACC_FLAG_I; i++) {
+            if ((flags & pow) != 0) {
+                if (pow == Const.ACC_SYNCHRONIZED && location == FLAGS.CLASS) {
+                    buf.append(CONSTANT_PREFIX).append("ACC_SUPER | ");
+                } else if (pow == Const.ACC_VOLATILE && location == FLAGS.METHOD) {
+                    buf.append(CONSTANT_PREFIX).append("ACC_BRIDGE | ");
+                } else if (pow == Const.ACC_TRANSIENT && location == FLAGS.METHOD) {
+                    buf.append(CONSTANT_PREFIX).append("ACC_VARARGS | ");
+                } else if (i < Const.ACCESS_NAMES_LENGTH) {
+                    buf.append(CONSTANT_PREFIX).append("ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
+                } else {
+                    buf.append(String.format (CONSTANT_PREFIX+"ACC_BIT %x | ", pow));
+                }
+            }
+            pow <<= 1;
+        }
+        final String str = buf.toString();
+        return str.substring(0, str.length() - 3);
+    }
+
+
+    static String printType( final String signature ) {
+        final Type type = Type.getType(signature);
+        final byte t = type.getType();
+        if (t <= Const.T_VOID) {
+            return "Type." + Const.getTypeName(t).toUpperCase(Locale.ENGLISH);
+        }
+        if (type.toString().equals("java.lang.String")) {
+            return "Type.STRING";
+        }
+        if (type.toString().equals("java.lang.Object")) {
+            return "Type.OBJECT";
+        }
+        if (type.toString().equals("java.lang.StringBuffer")) {
+            return "Type.STRINGBUFFER";
+        }
+        if (type instanceof ArrayType) {
+            final ArrayType at = (ArrayType) type;
+            return "new ArrayType(" + printType(at.getBasicType()) + ", " + at.getDimensions()
+                    + ")";
+        }
+        return "new ObjectType(\"" + Utility.signatureToString(signature, false) + "\")";
+    }
+
+
+    static String printType( final Type type ) {
+        return printType(type.getSignature());
+    }
+
+
     private final JavaClass _clazz;
+
+
     private final PrintWriter _out;
+
+
     private final ConstantPoolGen _cp;
+
 
     /** @param clazz Java class to "decompile"
      * @param out where to output Java program
@@ -72,12 +178,50 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         _cp = new ConstantPoolGen(_clazz.getConstantPool());
     }
 
+    private void printCreate() {
+        _out.println("  public void create(OutputStream out) throws IOException {");
+        final Field[] fields = _clazz.getFields();
+        if (fields.length > 0) {
+            _out.println("    createFields();");
+        }
+        final Method[] methods = _clazz.getMethods();
+        for (int i = 0; i < methods.length; i++) {
+            _out.println("    createMethod_" + i + "();");
+        }
+        _out.println("    _cg.getJavaClass().dump(out);");
+        _out.println("  }");
+        _out.println();
+    }
+
+
+    private void printMain() {
+        final String class_name = _clazz.getClassName();
+        _out.println("  public static void main(String[] args) throws Exception {");
+        _out.println("    " + class_name + "Creator creator = new " + class_name + "Creator();");
+        _out.println("    creator.create(new FileOutputStream(\"" + class_name + ".class\"));");
+        _out.println("  }");
+    }
+
 
     /** Start Java code generation
      */
     public void start() {
         visitJavaClass(_clazz);
         _out.flush();
+    }
+
+
+    @Override
+    public void visitField( final Field field ) {
+        _out.println();
+        _out.println("    field = new FieldGen(" + printFlags(field.getAccessFlags()) + ", "
+                + printType(field.getSignature()) + ", \"" + field.getName() + "\", _cp);");
+        final ConstantValue cv = field.getConstantValue();
+        if (cv != null) {
+            final String value = cv.toString();
+            _out.println("    field.setInitValue(" + value + ")");
+        }
+        _out.println("    _cg.addField(field.getField());");
     }
 
 
@@ -138,45 +282,6 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
 
-    private void printCreate() {
-        _out.println("  public void create(OutputStream out) throws IOException {");
-        final Field[] fields = _clazz.getFields();
-        if (fields.length > 0) {
-            _out.println("    createFields();");
-        }
-        final Method[] methods = _clazz.getMethods();
-        for (int i = 0; i < methods.length; i++) {
-            _out.println("    createMethod_" + i + "();");
-        }
-        _out.println("    _cg.getJavaClass().dump(out);");
-        _out.println("  }");
-        _out.println();
-    }
-
-
-    private void printMain() {
-        final String class_name = _clazz.getClassName();
-        _out.println("  public static void main(String[] args) throws Exception {");
-        _out.println("    " + class_name + "Creator creator = new " + class_name + "Creator();");
-        _out.println("    creator.create(new FileOutputStream(\"" + class_name + ".class\"));");
-        _out.println("  }");
-    }
-
-
-    @Override
-    public void visitField( final Field field ) {
-        _out.println();
-        _out.println("    field = new FieldGen(" + printFlags(field.getAccessFlags()) + ", "
-                + printType(field.getSignature()) + ", \"" + field.getName() + "\", _cp);");
-        final ConstantValue cv = field.getConstantValue();
-        if (cv != null) {
-            final String value = cv.toString();
-            _out.println("    field.setInitValue(" + value + ")");
-        }
-        _out.println("    _cg.addField(field.getField());");
-    }
-
-
     @Override
     public void visitMethod( final Method method ) {
         final MethodGen mg = new MethodGen(method, _clazz.getClassName(), _cp);
@@ -194,110 +299,5 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         _out.println("    method.setMaxLocals();");
         _out.println("    _cg.addMethod(method.getMethod());");
         _out.println("    il.dispose();");
-    }
-
-
-    static String printFlags( final int flags ) {
-        return printFlags(flags, FLAGS.UNKNOWN);
-    }
-
-    /**
-     * Return a string with the flag settings
-     * @param flags the flags field to interpret
-     * @param location the item type
-     * @return the formatted string
-     * @since 6.0 made public
-     */
-    public static String printFlags( final int flags, final FLAGS location ) {
-        if (flags == 0) {
-            return "0";
-        }
-        final StringBuilder buf = new StringBuilder();
-        for (int i = 0, pow = 1; pow <= Const.MAX_ACC_FLAG_I; i++) {
-            if ((flags & pow) != 0) {
-                if (pow == Const.ACC_SYNCHRONIZED && location == FLAGS.CLASS) {
-                    buf.append(CONSTANT_PREFIX).append("ACC_SUPER | ");
-                } else if (pow == Const.ACC_VOLATILE && location == FLAGS.METHOD) {
-                    buf.append(CONSTANT_PREFIX).append("ACC_BRIDGE | ");
-                } else if (pow == Const.ACC_TRANSIENT && location == FLAGS.METHOD) {
-                    buf.append(CONSTANT_PREFIX).append("ACC_VARARGS | ");
-                } else if (i < Const.ACCESS_NAMES_LENGTH) {
-                    buf.append(CONSTANT_PREFIX).append("ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
-                } else {
-                    buf.append(String.format (CONSTANT_PREFIX+"ACC_BIT %x | ", pow));
-                }
-            }
-            pow <<= 1;
-        }
-        final String str = buf.toString();
-        return str.substring(0, str.length() - 3);
-    }
-
-
-    static String printArgumentTypes( final Type[] arg_types ) {
-        if (arg_types.length == 0) {
-            return "Type.NO_ARGS";
-        }
-        final StringBuilder args = new StringBuilder();
-        for (int i = 0; i < arg_types.length; i++) {
-            args.append(printType(arg_types[i]));
-            if (i < arg_types.length - 1) {
-                args.append(", ");
-            }
-        }
-        return "new Type[] { " + args.toString() + " }";
-    }
-
-
-    static String printType( final Type type ) {
-        return printType(type.getSignature());
-    }
-
-
-    static String printType( final String signature ) {
-        final Type type = Type.getType(signature);
-        final byte t = type.getType();
-        if (t <= Const.T_VOID) {
-            return "Type." + Const.getTypeName(t).toUpperCase(Locale.ENGLISH);
-        }
-        if (type.toString().equals("java.lang.String")) {
-            return "Type.STRING";
-        }
-        if (type.toString().equals("java.lang.Object")) {
-            return "Type.OBJECT";
-        }
-        if (type.toString().equals("java.lang.StringBuffer")) {
-            return "Type.STRINGBUFFER";
-        }
-        if (type instanceof ArrayType) {
-            final ArrayType at = (ArrayType) type;
-            return "new ArrayType(" + printType(at.getBasicType()) + ", " + at.getDimensions()
-                    + ")";
-        }
-        return "new ObjectType(\"" + Utility.signatureToString(signature, false) + "\")";
-    }
-
-
-    /** Default main method
-     */
-    public static void main( final String[] argv ) throws Exception {
-        if (argv.length != 1) {
-            System.out.println("Usage: BCELifier classname");
-            System.out.println("\tThe class must exist on the classpath");
-            return;
-        }
-        final JavaClass java_class = getJavaClass(argv[0]);
-        final BCELifier bcelifier = new BCELifier(java_class, System.out);
-        bcelifier.start();
-    }
-
-
-    // Needs to be accessible from unit test code
-    static JavaClass getJavaClass(final String name) throws ClassNotFoundException, IOException {
-        JavaClass java_class;
-        if ((java_class = Repository.lookupClass(name)) == null) {
-            java_class = new ClassParser(name).parse(); // May throw IOException
-        }
-        return java_class;
     }
 }

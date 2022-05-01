@@ -39,15 +39,6 @@ public class IFEQ extends IfInstruction {
 
 
     /**
-     * @return negation of instruction, e.g. IFEQ.negate() == IFNE
-     */
-    @Override
-    public IfInstruction negate() {
-        return new IFNE(super.getTarget());
-    }
-
-
-    /**
      * Call corresponding visitor method(s). The order is:
      * Call visitor methods of implemented interfaces first, then
      * call methods according to the class hierarchy in descending order,
@@ -61,5 +52,14 @@ public class IFEQ extends IfInstruction {
         v.visitBranchInstruction(this);
         v.visitIfInstruction(this);
         v.visitIFEQ(this);
+    }
+
+
+    /**
+     * @return negation of instruction, e.g. IFEQ.negate() == IFNE
+     */
+    @Override
+    public IfInstruction negate() {
+        return new IFNE(super.getTarget());
     }
 }

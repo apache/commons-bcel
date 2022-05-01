@@ -36,6 +36,34 @@ import org.apache.bcel.Const;
  */
 public class ConstantPool implements Cloneable, Node {
 
+    private static String escape( final String str ) {
+        final int len = str.length();
+        final StringBuilder buf = new StringBuilder(len + 5);
+        final char[] ch = str.toCharArray();
+        for (int i = 0; i < len; i++) {
+            switch (ch[i]) {
+                case '\n':
+                    buf.append("\\n");
+                    break;
+                case '\r':
+                    buf.append("\\r");
+                    break;
+                case '\t':
+                    buf.append("\\t");
+                    break;
+                case '\b':
+                    buf.append("\\b");
+                    break;
+                case '"':
+                    buf.append("\\\"");
+                    break;
+                default:
+                    buf.append(ch[i]);
+            }
+        }
+        return buf.toString();
+    }
+
     private Constant[] constantPool;
 
     /**
@@ -170,34 +198,6 @@ public class ConstantPool implements Cloneable, Node {
         return str;
     }
 
-    private static String escape( final String str ) {
-        final int len = str.length();
-        final StringBuilder buf = new StringBuilder(len + 5);
-        final char[] ch = str.toCharArray();
-        for (int i = 0; i < len; i++) {
-            switch (ch[i]) {
-                case '\n':
-                    buf.append("\\n");
-                    break;
-                case '\r':
-                    buf.append("\\r");
-                    break;
-                case '\t':
-                    buf.append("\\t");
-                    break;
-                case '\b':
-                    buf.append("\\b");
-                    break;
-                case '"':
-                    buf.append("\\\"");
-                    break;
-                default:
-                    buf.append(ch[i]);
-            }
-        }
-        return buf.toString();
-    }
-
     /**
      * Retrieves constant at `index' from constant pool and resolve it to
      * a string representation.
@@ -209,6 +209,25 @@ public class ConstantPool implements Cloneable, Node {
     public String constantToString( final int index, final byte tag ) {
         final Constant c = getConstant(index, tag);
         return constantToString(c);
+    }
+
+    /**
+     * @return deep copy of this constant pool
+     */
+    public ConstantPool copy() {
+        ConstantPool c = null;
+        try {
+            c = (ConstantPool) clone();
+            c.constantPool = new Constant[constantPool.length];
+            for (int i = 1; i < constantPool.length; i++) {
+                if (constantPool[i] != null) {
+                    c.constantPool[i] = constantPool[i].copy();
+                }
+            }
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
+        }
+        return c;
     }
 
     /**
@@ -272,6 +291,7 @@ public class ConstantPool implements Cloneable, Node {
     public Constant[] getConstantPool() {
         return constantPool;
     }
+
 
     /**
      * Gets string from constant pool and bypass the indirection of
@@ -356,25 +376,5 @@ public class ConstantPool implements Cloneable, Node {
             buf.append(i).append(")").append(constantPool[i]).append("\n");
         }
         return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this constant pool
-     */
-    public ConstantPool copy() {
-        ConstantPool c = null;
-        try {
-            c = (ConstantPool) clone();
-            c.constantPool = new Constant[constantPool.length];
-            for (int i = 1; i < constantPool.length; i++) {
-                if (constantPool[i] != null) {
-                    c.constantPool[i] = constantPool[i].copy();
-                }
-            }
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return c;
     }
 }

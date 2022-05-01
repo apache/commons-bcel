@@ -90,6 +90,21 @@ public final class Deprecated extends Attribute {
 
 
     /**
+     * @return deep copy of this attribute
+     */
+    @Override
+    public Attribute copy( final ConstantPool _constant_pool ) {
+        final Deprecated c = (Deprecated) clone();
+        if (bytes != null) {
+            c.bytes = new byte[bytes.length];
+            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
+        }
+        c.setConstantPool(_constant_pool);
+        return c;
+    }
+
+
+    /**
      * Dump source file attribute to file stream in binary format.
      *
      * @param file Output file stream
@@ -126,20 +141,5 @@ public final class Deprecated extends Attribute {
     @Override
     public String toString() {
         return Const.getAttributeName(Const.ATTR_DEPRECATED) + ": true";
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final Deprecated c = (Deprecated) clone();
-        if (bytes != null) {
-            c.bytes = new byte[bytes.length];
-            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

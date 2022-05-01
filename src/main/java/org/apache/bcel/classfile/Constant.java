@@ -49,71 +49,11 @@ public abstract class Constant implements Cloneable, Node {
         }
     };
 
-    /* In fact this tag is redundant since we can distinguish different
-     * `Constant' objects by their type, i.e., via `instanceof'. In some
-     * places we will use the tag for switch()es anyway.
-     *
-     * First, we want match the specification as closely as possible. Second we
-     * need the tag as an index to select the corresponding class name from the
-     * `CONSTANT_NAMES' array.
-     */
     /**
-     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     * @return Comparison strategy object
      */
-    @java.lang.Deprecated
-    protected byte tag; // TODO should be private & final
-
-    Constant(final byte tag) {
-        this.tag = tag;
-    }
-
-    /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public abstract void accept( Visitor v );
-
-    public abstract void dump( DataOutputStream file ) throws IOException;
-
-    /**
-     * @return Tag of constant, i.e., its type. No setTag() method to avoid
-     * confusion.
-     */
-    public final byte getTag() {
-        return tag;
-    }
-
-    /**
-     * @return String representation.
-     */
-    @Override
-    public String toString() {
-        return Const.getConstantName(tag) + "[" + tag + "]";
-    }
-
-    /**
-     * @return deep copy of this constant
-     */
-    public Constant copy() {
-        try {
-            return (Constant) super.clone();
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return null;
-    }
-
-    @Override
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
-        }
+    public static BCELComparator getComparator() {
+        return bcelComparator;
     }
 
     /**
@@ -168,18 +108,62 @@ public abstract class Constant implements Cloneable, Node {
     }
 
     /**
-     * @return Comparison strategy object
-     */
-    public static BCELComparator getComparator() {
-        return bcelComparator;
-    }
-
-    /**
      * @param comparator Comparison strategy object
      */
     public static void setComparator( final BCELComparator comparator ) {
         bcelComparator = comparator;
     }
+
+    /* In fact this tag is redundant since we can distinguish different
+     * `Constant' objects by their type, i.e., via `instanceof'. In some
+     * places we will use the tag for switch()es anyway.
+     *
+     * First, we want match the specification as closely as possible. Second we
+     * need the tag as an index to select the corresponding class name from the
+     * `CONSTANT_NAMES' array.
+     */
+    /**
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     */
+    @java.lang.Deprecated
+    protected byte tag; // TODO should be private & final
+
+    Constant(final byte tag) {
+        this.tag = tag;
+    }
+
+    /**
+     * Called by objects that are traversing the nodes of the tree implicitely
+     * defined by the contents of a Java class. I.e., the hierarchy of methods,
+     * fields, attributes, etc. spawns a tree of objects.
+     *
+     * @param v Visitor object
+     */
+    @Override
+    public abstract void accept( Visitor v );
+
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (final CloneNotSupportedException e) {
+            throw new Error("Clone Not Supported"); // never happens
+        }
+    }
+
+    /**
+     * @return deep copy of this constant
+     */
+    public Constant copy() {
+        try {
+            return (Constant) super.clone();
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
+        }
+        return null;
+    }
+
+    public abstract void dump( DataOutputStream file ) throws IOException;
 
     /**
      * Returns value as defined by given BCELComparator strategy.
@@ -194,6 +178,14 @@ public abstract class Constant implements Cloneable, Node {
     }
 
     /**
+     * @return Tag of constant, i.e., its type. No setTag() method to avoid
+     * confusion.
+     */
+    public final byte getTag() {
+        return tag;
+    }
+
+    /**
      * Returns value as defined by given BCELComparator strategy.
      * By default return the hashcode of the result of toString().
      *
@@ -202,5 +194,13 @@ public abstract class Constant implements Cloneable, Node {
     @Override
     public int hashCode() {
         return bcelComparator.hashCode(this);
+    }
+
+    /**
+     * @return String representation.
+     */
+    @Override
+    public String toString() {
+        return Const.getConstantName(tag) + "[" + tag + "]";
     }
 }

@@ -31,26 +31,6 @@ import org.apache.bcel.generic.InstructionHandle;
 public interface InstructionContext{
 
     /**
-     * The getTag and setTag methods may be used for
-     * temporary flagging, such as graph colouring.
-     * Nothing in the InstructionContext object depends
-     * on the value of the tag. JustIce does not use it.
-     *
-     * @see #setTag(int tag)
-     */
-    int getTag();
-
-    /**
-     * The getTag and setTag methods may be used for
-     * temporary flagging, such as graph colouring.
-     * Nothing in the InstructionContext object depends
-     * on the value of the tag. JustIce does not use it.
-     *
-     * @see #getTag()
-     */
-    void setTag(int tag);
-
-    /**
      * This method symbolically executes the Instruction
      * held in the InstructionContext.
      * It "merges in" the incoming execution frame situation
@@ -74,7 +54,20 @@ public interface InstructionContext{
     boolean execute(Frame inFrame, ArrayList<InstructionContext> executionPredecessors,
             InstConstraintVisitor icv, ExecutionVisitor ev);
 
+    /**
+     * Returns the exception handlers that protect this instruction.
+     * They are special control flow successors.
+     */
+    ExceptionHandler[] getExceptionHandlers();
+
     Frame getInFrame();
+
+    /**
+     * Returns the InstructionHandle this InstructionContext is wrapped around.
+     *
+     * @return The InstructionHandle this InstructionContext is wrapped around.
+     */
+    InstructionHandle getInstruction();
 
     /**
      * This method returns the outgoing execution frame situation;
@@ -86,21 +79,28 @@ public interface InstructionContext{
     Frame getOutFrame(ArrayList<InstructionContext> executionPredecessors);
 
     /**
-     * Returns the InstructionHandle this InstructionContext is wrapped around.
-     *
-     * @return The InstructionHandle this InstructionContext is wrapped around.
-     */
-    InstructionHandle getInstruction();
-
-    /**
      * Returns the usual control flow successors.
      * @see #getExceptionHandlers()
      */
     InstructionContext[] getSuccessors();
 
     /**
-     * Returns the exception handlers that protect this instruction.
-     * They are special control flow successors.
+     * The getTag and setTag methods may be used for
+     * temporary flagging, such as graph colouring.
+     * Nothing in the InstructionContext object depends
+     * on the value of the tag. JustIce does not use it.
+     *
+     * @see #setTag(int tag)
      */
-    ExceptionHandler[] getExceptionHandlers();
+    int getTag();
+
+    /**
+     * The getTag and setTag methods may be used for
+     * temporary flagging, such as graph colouring.
+     * Nothing in the InstructionContext object depends
+     * on the value of the tag. JustIce does not use it.
+     *
+     * @see #getTag()
+     */
+    void setTag(int tag);
 }

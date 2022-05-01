@@ -24,16 +24,16 @@ package org.apache.bcel.generic;
 public abstract class JsrInstruction extends BranchInstruction implements UnconditionalBranch,
         TypedInstruction, StackProducer {
 
-    JsrInstruction(final short opcode, final InstructionHandle target) {
-        super(opcode, target);
-    }
-
-
     /**
      * Empty constructor needed for Instruction.readInstruction.
      * Not to be used otherwise.
      */
     JsrInstruction() {
+    }
+
+
+    JsrInstruction(final short opcode, final InstructionHandle target) {
+        super(opcode, target);
     }
 
 

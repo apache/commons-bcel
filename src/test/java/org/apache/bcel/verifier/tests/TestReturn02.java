@@ -23,6 +23,14 @@ public class TestReturn02 {
         return new String(data, offset, count);
     }
 
+    public static double test10() {
+        return 1.0;
+    }
+
+    public static Object test11() {
+        return null;
+    }
+
     public static Object test2() {
         return new Object();
     }
@@ -53,13 +61,5 @@ public class TestReturn02 {
 
     public static float test9() {
         return 1.0f;
-    }
-
-    public static double test10() {
-        return 1.0;
-    }
-
-    public static Object test11() {
-        return null;
     }
 }

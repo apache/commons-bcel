@@ -46,13 +46,18 @@ public class ClassSet {
     }
 
 
-    public void remove( final JavaClass clazz ) {
-        map.remove(clazz.getClassName());
+    public boolean empty() {
+        return map.isEmpty();
     }
 
 
-    public boolean empty() {
-        return map.isEmpty();
+    public String[] getClassNames() {
+        return map.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+
+    public void remove( final JavaClass clazz ) {
+        map.remove(clazz.getClassName());
     }
 
 
@@ -61,10 +66,5 @@ public class ClassSet {
         final JavaClass[] classes = new JavaClass[values.size()];
         values.toArray(classes);
         return classes;
-    }
-
-
-    public String[] getClassNames() {
-        return map.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 }

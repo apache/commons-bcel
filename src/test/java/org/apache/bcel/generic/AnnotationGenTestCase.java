@@ -39,6 +39,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {
+    private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg) throws IOException
+    {
+        final String beforeName = a.getTypeName();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (DataOutputStream dos = new DataOutputStream(baos)) {
+            a.dump(dos);
+            dos.flush();
+        }
+        final byte[] bs = baos.toByteArray();
+        final ByteArrayInputStream bais = new ByteArrayInputStream(bs);
+        final AnnotationEntryGen annAfter;
+        try (DataInputStream dis = new DataInputStream(bais)) {
+            annAfter = AnnotationEntryGen.read(dis, cpg, a.isRuntimeVisible());
+        }
+        final String afterName = annAfter.getTypeName();
+        assertEquals(beforeName, afterName, "Deserialization failed");
+        assertEquals(a.getValues().size(), annAfter.getValues().size(),
+                "Different numbers of element name value pairs??");
+        for (int i = 0; i < a.getValues().size(); i++) {
+            final ElementValuePairGen beforeElement = a.getValues().get(i);
+            final ElementValuePairGen afterElement = annAfter.getValues().get(i);
+            assertEquals(beforeElement.getNameString(), afterElement.getNameString(), "Different names??");
+        }
+    }
+
     private ClassGen createClassGen(final String classname)
     {
         return new ClassGen(classname, "java.lang.Object", "<generated>",
@@ -121,30 +146,5 @@ public class AnnotationGenTestCase extends AbstractTestCase
             }
         }
         assertTrue(foundRIV, "Should have seen a RuntimeInvisibleAnnotation");
-    }
-
-    private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg) throws IOException
-    {
-        final String beforeName = a.getTypeName();
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try (DataOutputStream dos = new DataOutputStream(baos)) {
-            a.dump(dos);
-            dos.flush();
-        }
-        final byte[] bs = baos.toByteArray();
-        final ByteArrayInputStream bais = new ByteArrayInputStream(bs);
-        final AnnotationEntryGen annAfter;
-        try (DataInputStream dis = new DataInputStream(bais)) {
-            annAfter = AnnotationEntryGen.read(dis, cpg, a.isRuntimeVisible());
-        }
-        final String afterName = annAfter.getTypeName();
-        assertEquals(beforeName, afterName, "Deserialization failed");
-        assertEquals(a.getValues().size(), annAfter.getValues().size(),
-                "Different numbers of element name value pairs??");
-        for (int i = 0; i < a.getValues().size(); i++) {
-            final ElementValuePairGen beforeElement = a.getValues().get(i);
-            final ElementValuePairGen afterElement = annAfter.getValues().get(i);
-            assertEquals(beforeElement.getNameString(), afterElement.getNameString(), "Different names??");
-        }
     }
 }

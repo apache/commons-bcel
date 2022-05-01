@@ -41,19 +41,6 @@ public class LocalVariablesInfo{
     }
 
     /**
-     * Returns the LocalVariableInfo for the given slot.
-     *
-     * @param slot Slot to query.
-     * @return The LocalVariableInfo for the given slot.
-     */
-    public LocalVariableInfo getLocalVariableInfo(final int slot) {
-        if (slot < 0 || slot >= localVariableInfos.length) {
-            throw new AssertionViolatedException("Slot number for local variable information out of range.");
-        }
-        return localVariableInfos[slot];
-    }
-
-    /**
      * Adds information about the local variable in slot 'slot'. Automatically
      * adds information for slot+1 if 't' is Type.LONG or Type.DOUBLE.
      *
@@ -78,5 +65,18 @@ public class LocalVariablesInfo{
         if (type == Type.DOUBLE) {
             localVariableInfos[slot+1].add(name, startPc, length, DOUBLE_Upper.theInstance());
         }
+    }
+
+    /**
+     * Returns the LocalVariableInfo for the given slot.
+     *
+     * @param slot Slot to query.
+     * @return The LocalVariableInfo for the given slot.
+     */
+    public LocalVariableInfo getLocalVariableInfo(final int slot) {
+        if (slot < 0 || slot >= localVariableInfos.length) {
+            throw new AssertionViolatedException("Slot number for local variable information out of range.");
+        }
+        return localVariableInfos[slot];
     }
 }

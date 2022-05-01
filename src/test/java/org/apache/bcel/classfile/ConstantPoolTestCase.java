@@ -28,6 +28,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ConstantPoolTestCase extends AbstractTestCase {
 
+    private InstructionHandle[] getInstructionHandles(final JavaClass clazz, final ConstantPoolGen cp, final Method method) {
+        final MethodGen methodGen = new MethodGen(method, clazz.getClassName(), cp);
+        final InstructionList instructionList = methodGen.getInstructionList();
+        return instructionList.getInstructionHandles();
+    }
+
     @Test
     public void testConstantToString() throws ClassNotFoundException {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
@@ -45,11 +51,5 @@ public class ConstantPoolTestCase extends AbstractTestCase {
                 }
             }
         }
-    }
-
-    private InstructionHandle[] getInstructionHandles(final JavaClass clazz, final ConstantPoolGen cp, final Method method) {
-        final MethodGen methodGen = new MethodGen(method, clazz.getClassName(), cp);
-        final InstructionList instructionList = methodGen.getInstructionList();
-        return instructionList.getInstructionHandles();
     }
 }

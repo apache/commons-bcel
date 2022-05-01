@@ -78,17 +78,29 @@ public class BootstrapMethod implements Cloneable {
     }
 
     /**
-     * @return index into constant_pool of bootstrap_method
+     * @return deep copy of this object
      */
-    public int getBootstrapMethodRef() {
-        return bootstrapMethodRef;
+    public BootstrapMethod copy() {
+        try {
+            return (BootstrapMethod) clone();
+        } catch (final CloneNotSupportedException e) {
+            // TODO should this throw?
+        }
+        return null;
     }
 
     /**
-     * @param bootstrapMethodRef int index into constant_pool of CONSTANT_MethodHandle
+     * Dump object to file stream in binary format.
+     *
+     * @param file Output file stream
+     * @throws IOException
      */
-    public void setBootstrapMethodRef(final int bootstrapMethodRef) {
-        this.bootstrapMethodRef = bootstrapMethodRef;
+    public final void dump(final DataOutputStream file) throws IOException {
+        file.writeShort(bootstrapMethodRef);
+        file.writeShort(bootstrapArguments.length);
+        for (final int bootstrap_argument : bootstrapArguments) {
+            file.writeShort(bootstrap_argument);
+        }
     }
 
     /**
@@ -96,6 +108,13 @@ public class BootstrapMethod implements Cloneable {
      */
     public int[] getBootstrapArguments() {
         return bootstrapArguments;
+    }
+
+    /**
+     * @return index into constant_pool of bootstrap_method
+     */
+    public int getBootstrapMethodRef() {
+        return bootstrapMethodRef;
     }
 
     /**
@@ -110,6 +129,13 @@ public class BootstrapMethod implements Cloneable {
      */
     public void setBootstrapArguments(final int[] bootstrapArguments) {
         this.bootstrapArguments = bootstrapArguments;
+    }
+
+    /**
+     * @param bootstrapMethodRef int index into constant_pool of CONSTANT_MethodHandle
+     */
+    public void setBootstrapMethodRef(final int bootstrapMethodRef) {
+        this.bootstrapMethodRef = bootstrapMethodRef;
     }
 
     /**
@@ -139,31 +165,5 @@ public class BootstrapMethod implements Cloneable {
             }
         }
         return buf.toString();
-    }
-
-    /**
-     * Dump object to file stream in binary format.
-     *
-     * @param file Output file stream
-     * @throws IOException
-     */
-    public final void dump(final DataOutputStream file) throws IOException {
-        file.writeShort(bootstrapMethodRef);
-        file.writeShort(bootstrapArguments.length);
-        for (final int bootstrap_argument : bootstrapArguments) {
-            file.writeShort(bootstrap_argument);
-        }
-    }
-
-    /**
-     * @return deep copy of this object
-     */
-    public BootstrapMethod copy() {
-        try {
-            return (BootstrapMethod) clone();
-        } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
-        }
-        return null;
     }
 }

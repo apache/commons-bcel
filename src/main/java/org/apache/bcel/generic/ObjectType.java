@@ -27,8 +27,6 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public class ObjectType extends ReferenceType {
 
-    private final String className; // Class name of type
-
     /**
      * @since 6.0
      */
@@ -36,12 +34,39 @@ public class ObjectType extends ReferenceType {
         return new ObjectType(className);
     }
 
+    private final String className; // Class name of type
+
     /**
      * @param className fully qualified class name, e.g. java.lang.String
      */
     public ObjectType(final String className) {
         super(Const.T_REFERENCE, "L" + className.replace('.', '/') + ";");
         this.className = className.replace('/', '.');
+    }
+
+
+    /**
+     * Java Virtual Machine Specification edition 2, � 5.4.4 Access Control
+     * @throws ClassNotFoundException if the class referenced by this type
+     *   can't be found
+     */
+    public boolean accessibleTo( final ObjectType accessor ) throws ClassNotFoundException {
+        final JavaClass jc = Repository.lookupClass(className);
+        if (jc.isPublic()) {
+            return true;
+        }
+        final JavaClass acc = Repository.lookupClass(accessor.className);
+        return acc.getPackageName().equals(jc.getPackageName());
+    }
+
+
+    /** @return true if both type objects refer to the same class.
+     */
+    @Override
+    public boolean equals( final Object type ) {
+        return type instanceof ObjectType
+                ? ((ObjectType) type).className.equals(className)
+                : false;
     }
 
 
@@ -57,16 +82,6 @@ public class ObjectType extends ReferenceType {
     @Override
     public int hashCode() {
         return className.hashCode();
-    }
-
-
-    /** @return true if both type objects refer to the same class.
-     */
-    @Override
-    public boolean equals( final Object type ) {
-        return type instanceof ObjectType
-                ? ((ObjectType) type).className.equals(className)
-                : false;
     }
 
 
@@ -89,6 +104,20 @@ public class ObjectType extends ReferenceType {
 
 
     /**
+     * Return true if this type references a class,
+     * false if it references an interface.
+     * @return true if the type references a class, false if
+     *   it references an interface
+     * @throws ClassNotFoundException if the class or interface
+     *   referenced by this type can't be found
+     */
+    public boolean referencesClassExact() throws ClassNotFoundException {
+        final JavaClass jc = Repository.lookupClass(className);
+        return jc.isClass();
+    }
+
+
+    /**
      * If "this" doesn't reference an interface, it references a class
      * or a non-existant entity.
      * @deprecated (since 6.0) this method returns an inaccurate result
@@ -103,20 +132,6 @@ public class ObjectType extends ReferenceType {
         } catch (final ClassNotFoundException e) {
             return false;
         }
-    }
-
-
-    /**
-     * Return true if this type references a class,
-     * false if it references an interface.
-     * @return true if the type references a class, false if
-     *   it references an interface
-     * @throws ClassNotFoundException if the class or interface
-     *   referenced by this type can't be found
-     */
-    public boolean referencesClassExact() throws ClassNotFoundException {
-        final JavaClass jc = Repository.lookupClass(className);
-        return jc.isClass();
     }
 
 
@@ -144,20 +159,5 @@ public class ObjectType extends ReferenceType {
             return false;
         }
         return Repository.instanceOf(this.className, superclass.className);
-    }
-
-
-    /**
-     * Java Virtual Machine Specification edition 2, � 5.4.4 Access Control
-     * @throws ClassNotFoundException if the class referenced by this type
-     *   can't be found
-     */
-    public boolean accessibleTo( final ObjectType accessor ) throws ClassNotFoundException {
-        final JavaClass jc = Repository.lookupClass(className);
-        if (jc.isPublic()) {
-            return true;
-        }
-        final JavaClass acc = Repository.lookupClass(accessor.className);
-        return acc.getPackageName().equals(jc.getPackageName());
     }
 }
