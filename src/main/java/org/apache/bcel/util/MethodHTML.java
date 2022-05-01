@@ -70,9 +70,8 @@ final class MethodHTML {
      * Print field of class.
      *
      * @param field field to print
-     * @throws java.io.IOException
      */
-    private void writeField( final Field field ) throws IOException {
+    private void writeField( final Field field ) {
         final String type = Utility.signatureToString(field.getSignature());
         final String name = field.getName();
         String access = Utility.accessToString(field.getAccessFlags());
