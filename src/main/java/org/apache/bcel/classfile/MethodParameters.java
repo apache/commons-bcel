@@ -35,7 +35,7 @@ public class MethodParameters extends Attribute {
     /**
      * Empty array.
      */
-    private static final MethodParameter[] EMPTY_METHOD_PARAMETER_ARRAY = new MethodParameter[0];
+    private static final MethodParameter[] EMPTY_METHOD_PARAMETER_ARRAY = {};
 
     private MethodParameter[] parameters = EMPTY_METHOD_PARAMETER_ARRAY;
 
