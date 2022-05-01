@@ -544,14 +544,10 @@ public final class Pass3aVerifier extends PassVerifier{
             indexValid(ldc, ldc.getIndex());
             final Constant c = constantPoolGen.getConstant(ldc.getIndex());
             if (c instanceof ConstantClass) {
-              addMessage("Operand of LDC or LDC_W is CONSTANT_Class '"+tostring(c)+"' - this is only supported in JDK 1.5 and higher.");
-            } else {
-              if (! ( c instanceof ConstantInteger    ||
-                      c instanceof ConstantFloat         ||
-                c instanceof ConstantString ) ) {
-            constraintViolated(ldc,
-                "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float or CONSTANT_String, but is '"+tostring(c)+"'.");
-              }
+                addMessage("Operand of LDC or LDC_W is CONSTANT_Class '" + tostring(c) + "' - this is only supported in JDK 1.5 and higher.");
+            } else if (!(c instanceof ConstantInteger || c instanceof ConstantFloat || c instanceof ConstantString)) {
+                constraintViolated(ldc,
+                    "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float or CONSTANT_String, but is '" + tostring(c) + "'.");
             }
         }
 
@@ -1191,22 +1187,21 @@ public final class Pass3aVerifier extends PassVerifier{
         @Override
         public void visitINVOKESPECIAL(final INVOKESPECIAL o) {
             try {
-            // INVOKESPECIAL is a LoadClass; the Class where the referenced method is declared in,
-            // is therefore resolved/verified.
-            // INVOKESPECIAL is an InvokeInstruction, the argument and return types are resolved/verified,
-            // too. So are the allowed method names.
-            final String classname = o.getClassName(constantPoolGen);
-            final JavaClass jc = Repository.lookupClass(classname);
-            final Method m = getMethodRecursive(jc, o);
-            if (m == null) {
-                constraintViolated(o, "Referenced method '"+o.getMethodName(constantPoolGen)+"' with expected signature '"+o.getSignature(constantPoolGen)
-                    +"' not found in class '"+jc.getClassName()+"'.");
-            }
+                // INVOKESPECIAL is a LoadClass; the Class where the referenced method is declared in,
+                // is therefore resolved/verified.
+                // INVOKESPECIAL is an InvokeInstruction, the argument and return types are resolved/verified,
+                // too. So are the allowed method names.
+                final String classname = o.getClassName(constantPoolGen);
+                final JavaClass jc = Repository.lookupClass(classname);
+                final Method m = getMethodRecursive(jc, o);
+                if (m == null) {
+                    constraintViolated(o, "Referenced method '" + o.getMethodName(constantPoolGen) + "' with expected signature '"
+                        + o.getSignature(constantPoolGen) + "' not found in class '" + jc.getClassName() + "'.");
+                }
 
-            JavaClass current = Repository.lookupClass(myOwner.getClassName());
-            if (current.isSuper() && Repository.instanceOf( current, jc ) && !current.equals(jc)) {
-
-                if (! o.getMethodName(constantPoolGen).equals(Const.CONSTRUCTOR_NAME)) {
+                JavaClass current = Repository.lookupClass(myOwner.getClassName());
+                if (current.isSuper() && Repository.instanceOf(current, jc) && !current.equals(jc)
+                    && !o.getMethodName(constantPoolGen).equals(Const.CONSTRUCTOR_NAME)) {
                     // Special lookup procedure for ACC_SUPER classes.
 
                     int supidx = -1;
@@ -1218,9 +1213,9 @@ public final class Pass3aVerifier extends PassVerifier{
 
                         final Method[] meths = current.getMethods();
                         for (final Method meth2 : meths) {
-                            if    ( meth2.getName().equals(o.getMethodName(constantPoolGen)) &&
-                                 Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen)) &&
-                                 objarrayequals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen)) ) {
+                            if (meth2.getName().equals(o.getMethodName(constantPoolGen))
+                                && Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen))
+                                && objarrayequals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) {
                                 meth = meth2;
                                 break;
                             }
@@ -1230,15 +1225,14 @@ public final class Pass3aVerifier extends PassVerifier{
                         }
                     }
                     if (meth == null) {
-                        constraintViolated(o, "ACC_SUPER special lookup procedure not successful: method '"+
-                            o.getMethodName(constantPoolGen)+"' with proper signature not declared in superclass hierarchy.");
+                        constraintViolated(o, "ACC_SUPER special lookup procedure not successful: method '" + o.getMethodName(constantPoolGen)
+                            + "' with proper signature not declared in superclass hierarchy.");
                     }
                 }
-            }
 
             } catch (final ClassNotFoundException e) {
-            // FIXME: maybe not the best way to handle this
-            throw new AssertionViolatedException("Missing class: " + e, e);
+                // FIXME: maybe not the best way to handle this
+                throw new AssertionViolatedException("Missing class: " + e, e);
             }
 
         }
