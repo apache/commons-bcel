@@ -211,14 +211,14 @@ public class Class2HTML implements Constants {
         final AttributeHTML attributeHtml = new AttributeHTML(dir, className, constantPool, constantHtml, charset);
         new MethodHTML(dir, className, methods, javaClass.getFields(), constantHtml, attributeHtml, charset);
         // Write main file (with frames, yuk)
-        writeMainHTML(attributeHtml);
+        writeMainHTML(attributeHtml, charset);
         new CodeHTML(dir, className, methods, constantPool, constantHtml, charset);
         attributeHtml.close();
     }
 
 
-    private void writeMainHTML( final AttributeHTML attributeHtml ) throws IOException {
-        try (PrintWriter file = new PrintWriter(new FileOutputStream(dir + className + ".html"))) {
+    private void writeMainHTML( final AttributeHTML attributeHtml, final Charset charset ) throws IOException {
+        try (PrintWriter file = new PrintWriter(dir + className + ".html", charset.name())) {
             file.println("<HTML>\n" + "<HEAD><TITLE>Documentation for " + className + "</TITLE>" + "</HEAD>\n"
                     + "<FRAMESET BORDER=1 cols=\"30%,*\">\n" + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
                     + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n MARGINWIDTH=\"0\" "
