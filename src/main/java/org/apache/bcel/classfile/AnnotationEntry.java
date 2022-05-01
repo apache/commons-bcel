@@ -34,7 +34,7 @@ import org.apache.bcel.Const;
 public class AnnotationEntry implements Node {
 
     public static final AnnotationEntry[] EMPTY_ARRAY = {};
-    
+
     private final int typeIndex;
     private final ConstantPool constantPool;
     private final boolean isRuntimeVisible;
