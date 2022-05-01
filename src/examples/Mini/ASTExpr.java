@@ -161,9 +161,7 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     } else {
         child_type = type = T_BOOLEAN; // !
     }
-    }
-    else {
-      // Compute expected type
+    } else // Compute expected type
       if((kind == PLUS) || (kind == MINUS) || (kind == MULT) ||
        (kind == MOD)  || (kind == DIV)) {
         child_type = type = T_INT;
@@ -173,7 +171,6 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
         child_type = T_INT;
         type       = T_BOOLEAN;
       }
-    }
 
     // Get type of subexpressions
     for (final ASTExpr expr : exprs) {
