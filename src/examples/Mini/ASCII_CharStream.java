@@ -130,7 +130,6 @@ public final class ASCII_CharStream
            throw new java.io.IOException();
         }
         maxNextCharInd += i;
-        return;
      }
      catch(final java.io.IOException e) {
         --bufpos;
