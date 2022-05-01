@@ -178,10 +178,8 @@ public class ControlFlowGraph{
             if (inF == null) {// no incoming frame was set, so set it.
                 inFrames.put(lastExecutionJSR(), inFrame);
                 inF = inFrame;
-            } else {// if there was an "old" inFrame
-                if (inF.equals(inFrame) || !mergeInFrames(inFrame)) {
-                    return false;
-                }
+            } else if (inF.equals(inFrame) || !mergeInFrames(inFrame)) { // if there was an "old" inFrame
+                return false;
             }
 
             // Now we're sure the inFrame has changed!
