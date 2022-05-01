@@ -46,7 +46,7 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Empty array.
      */
-    static final CodeException[] EMPTY_CODE_EXCEPTION_ARRAY = new CodeException[0];
+    static final CodeException[] EMPTY_CODE_EXCEPTION_ARRAY = {};
 
 
     /**
