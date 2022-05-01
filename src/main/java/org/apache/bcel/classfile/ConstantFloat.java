@@ -118,6 +118,6 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      */
     @Override
     public Object getConstantValue( final ConstantPool cp ) {
-        return new Float(bytes);
+        return Float.valueOf(bytes);
     }
 }
