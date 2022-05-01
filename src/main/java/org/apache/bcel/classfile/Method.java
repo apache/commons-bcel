@@ -64,7 +64,7 @@ public final class Method extends FieldOrMethod {
     /**
      * Empty array.
      */
-    static final Method[] EMPTY_METHOD_ARRAY = new Method[0];
+    static final Method[] EMPTY_METHOD_ARRAY = {};
 
     /**
      * Empty constructor, all attributes have to be defined via `setXXX'
