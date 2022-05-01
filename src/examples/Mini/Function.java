@@ -48,7 +48,7 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
 
   @Override
   public String toString() {
-    final StringBuffer buf = new StringBuffer();
+    final StringBuilder buf = new StringBuilder();
 
     for(int i=0; i < no_args; i++) {
       buf.append(args[i].getName());
@@ -68,8 +68,11 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
 
   public int        getNoArgs()       { return no_args; }
   public ASTIdent   getName()         { return name; }
+  @Override
   public String     getHashKey()      { return fun_name; }
+  @Override
   public int        getLine()         { return line; }
+  @Override
   public int        getColumn()       { return column; }
   public ASTIdent   getArg(final int i)     { return args[i]; }
   public ASTIdent[] getArgs()         { return args; }
