@@ -239,7 +239,7 @@ public class ConstantPool implements Cloneable, Node {
             throw new ClassFormatException("Invalid constant pool reference: " + index
                     + ". Constant pool size is: " + constantPool.length);
         }
-        Constant ret = constantPool[index];
+        final Constant ret = constantPool[index];
         if (ret == null) {
             throw new ClassFormatException("Constant pool at index " + index + " is null.");
         }
@@ -257,7 +257,7 @@ public class ConstantPool implements Cloneable, Node {
      * @throws  ClassFormatException if constant type does not match tag
      */
     public Constant getConstant( final int index, final byte tag ) throws ClassFormatException {
-        Constant c = getConstant(index);
+        final Constant c = getConstant(index);
         if (c.getTag() != tag) {
             throw new ClassFormatException("Expected class `" + Const.getConstantName(tag)
                     + "' at index " + index + " and got " + c);
