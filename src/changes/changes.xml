@@ -75,6 +75,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-345" type="fix" dev="ggregory" due-to="Christine Poerschke">Make documentation wording more inclusive #98.</action>
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Force unsigned short for LineNumber.toString() #118.</action>
       <action                  type="fix" dev="ggregory" due-to="Tim Boudreau, Gary Gregory">Fix IllegalStateException when calling toString(ConstantPool) on a Module or ModuleRequires #125.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Generate HTML in UTF-8 instead of whatever happens to be the default platform encoding.</action>
       <!-- ADD -->
       <action                  type="fix" dev="ggregory">Add github/codeql-action.</action>
       <!-- UPDATES -->
