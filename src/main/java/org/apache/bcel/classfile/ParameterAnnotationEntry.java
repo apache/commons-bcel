@@ -32,7 +32,7 @@ import java.util.List;
 public class ParameterAnnotationEntry implements Node {
 
     static final ParameterAnnotationEntry[] EMPTY_ARRAY = {};
-    
+
     private final AnnotationEntry[] annotationTable;
 
 
