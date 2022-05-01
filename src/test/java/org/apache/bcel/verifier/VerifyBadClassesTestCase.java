@@ -18,20 +18,14 @@
 package org.apache.bcel.verifier;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.environment.EnvironmentUtils;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
@@ -139,12 +133,12 @@ public class VerifyBadClassesTestCase {
      * to '.class' and then back to '.classx' after the test.  If we can
      * get animal-sniffer to ignore the files, these steps could be omitted.
      */
-    private void testVerify(String directory, String className) {
+    private void testVerify(final String directory, final String className) {
         final String baseDir = "target/test-classes";
         final String testDir = baseDir + (directory.isEmpty() ? "" : "/" + directory);
 
-        File origFile = new File(testDir + "/" + className + ".classx");
-        File testFile = new File(testDir + "/" + className + ".class");
+        final File origFile = new File(testDir + "/" + className + ".classx");
+        final File testFile = new File(testDir + "/" + className + ".class");
 
          if (!origFile.renameTo(testFile)) {
              fail("Failed to rename orig file");
@@ -153,7 +147,7 @@ public class VerifyBadClassesTestCase {
          String result;
          try {
              result = run(buildVerifyCommand(className, testDir));
-         } catch (Exception e) {
+         } catch (final Exception e) {
              result = e.getMessage();
          }
 
@@ -165,8 +159,8 @@ public class VerifyBadClassesTestCase {
          assertTrue(result.isEmpty(), result);
     }
 
-    private List<String> buildVerifyCommand(String className, String testDir) {
-      List<String> command = new ArrayList<>();
+    private List<String> buildVerifyCommand(final String className, final String testDir) {
+      final List<String> command = new ArrayList<>();
       command.add("java");
       command.add("-ea");
 
@@ -189,24 +183,24 @@ public class VerifyBadClassesTestCase {
      * @throws ExecuteException if executor fails
      * @throws IOException if executor fails
      */
-    private String run(List<String> command) throws ExecuteException, IOException {
+    private String run(final List<String> command) throws ExecuteException, IOException {
 
       /** The process timeout in milliseconds. Defaults to 30 seconds. */
       final long timeout = 30 * 1000;
 
-      String[] args = command.toArray(new String[0]);
-      CommandLine cmdLine = new CommandLine(args[0]); // constructor requires executable name
+      final String[] args = command.toArray(new String[0]);
+      final CommandLine cmdLine = new CommandLine(args[0]); // constructor requires executable name
       cmdLine.addArguments(Arrays.copyOfRange(args, 1, args.length));
 
-      DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
-      DefaultExecutor executor = new DefaultExecutor();
+      final DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
+      final DefaultExecutor executor = new DefaultExecutor();
 
       final ExecuteWatchdog watchdog = new ExecuteWatchdog(timeout);
       executor.setWatchdog(watchdog);
 
       final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
       final ByteArrayOutputStream errStream = new ByteArrayOutputStream();
-      PumpStreamHandler streamHandler = new PumpStreamHandler(outStream, errStream);
+      final PumpStreamHandler streamHandler = new PumpStreamHandler(outStream, errStream);
       executor.setStreamHandler(streamHandler);
       executor.execute(cmdLine, resultHandler);
 
@@ -214,7 +208,7 @@ public class VerifyBadClassesTestCase {
       try {
         resultHandler.waitFor();
         exitValue = resultHandler.getExitValue();
-      } catch (InterruptedException e) {
+      } catch (final InterruptedException e) {
         // Ignore exception, but watchdog.killedProcess() records that the process timed out.
       }
       final boolean timedOut = executor.isFailure(exitValue) && watchdog.killedProcess();
