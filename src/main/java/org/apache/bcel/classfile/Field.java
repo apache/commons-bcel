@@ -60,7 +60,7 @@ public final class Field extends FieldOrMethod {
     /**
      * Empty array.
      */
-    static final Field[] EMPTY_FIELD_ARRAY = new Field[0];
+    static final Field[] EMPTY_FIELD_ARRAY = {};
 
 
     /**
