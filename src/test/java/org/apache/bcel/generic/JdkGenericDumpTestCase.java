@@ -148,7 +148,7 @@ public class JdkGenericDumpTestCase {
             if (stream.count() > 0) {
                 return findJavaHomesOnWindows();
             }
-            // Falls back here on CI env like GitHub Actions. 
+            // Falls back here on CI env like GitHub Actions.
         }
         return Stream.of(SystemUtils.JAVA_HOME);
     }
