@@ -344,7 +344,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
      */
     @Override
     public String toString() {
-        final StringBuffer buf = new StringBuffer();
+        final StringBuilder buf = new StringBuilder();
         buf.append(jjtNodeName[id] + " " + name + "(");
 
         for (int i = 0; i < argv.length; i++) {
@@ -431,7 +431,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
     }
 
     private static String getVarDecls() {
-        final StringBuffer buf = new StringBuffer("    int ");
+        final StringBuilder buf = new StringBuilder("    int ");
 
         for (int i = 0; i < max_size; i++) {
             buf.append("_s" + i);
