@@ -136,12 +136,10 @@ public class listclass {
                 } else {
                     System.err.println("Unknown switch " + arg + " ignored.");
                 }
-            } else { // add file name to list
-                if (exclude) {
-                    exclude_name.add(arg);
-                } else {
-                    file_name.add(arg);
-                }
+            } else if (exclude) { // add file name to list
+                exclude_name.add(arg);
+            } else {
+                file_name.add(arg);
             }
         }
 
