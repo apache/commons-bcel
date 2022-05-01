@@ -21,6 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.bcel.Const;
 
@@ -38,12 +39,12 @@ public final class Signature extends Attribute {
     private static final class MyByteArrayInputStream extends ByteArrayInputStream {
 
         MyByteArrayInputStream(final String data) {
-            super(data.getBytes());
+            super(data.getBytes(StandardCharsets.UTF_8));
         }
 
 
         String getData() {
-            return new String(buf);
+            return new String(buf, StandardCharsets.UTF_8);
         }
 
 
