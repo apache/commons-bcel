@@ -63,7 +63,7 @@ public class ClassLoader extends java.lang.ClassLoader {
 
     private final Hashtable<String, Class<?>> classes = new Hashtable<>();
     // Hashtable is synchronized thus thread-safe
-    private final String[] ignored_packages;
+    private final String[] ignoredPackages;
     private Repository repository = SyntheticRepository.getInstance();
 
 
@@ -79,7 +79,7 @@ public class ClassLoader extends java.lang.ClassLoader {
      */
     public ClassLoader(final java.lang.ClassLoader deferTo) {
         super(deferTo);
-        this.ignored_packages = DEFAULT_IGNORED_PACKAGES;
+        this.ignoredPackages = DEFAULT_IGNORED_PACKAGES;
         this.repository = new ClassLoaderRepository(deferTo);
     }
 
@@ -98,7 +98,7 @@ public class ClassLoader extends java.lang.ClassLoader {
      * with the system class loader
      */
     public ClassLoader(final String[] ignored_packages) {
-        this.ignored_packages = ignored_packages;
+        this.ignoredPackages = ignored_packages;
     }
 
     /**
@@ -148,7 +148,7 @@ public class ClassLoader extends java.lang.ClassLoader {
             /* Second try: Load system class using system class loader. You better
              * don't mess around with them.
              */
-            for (final String ignored_package : ignored_packages) {
+            for (final String ignored_package : ignoredPackages) {
                 if (class_name.startsWith(ignored_package)) {
                     cl = getParent().loadClass(class_name);
                     break;

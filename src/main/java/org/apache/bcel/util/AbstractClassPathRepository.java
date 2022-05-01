@@ -33,10 +33,10 @@ import java.io.InputStream;
  */
 abstract class AbstractClassPathRepository implements Repository {
 
-    private final ClassPath _path;
+    private final ClassPath classPath;
 
     AbstractClassPathRepository(final ClassPath classPath) {
-        _path = classPath;
+        this.classPath = classPath;
     }
 
     @Override
@@ -47,7 +47,7 @@ abstract class AbstractClassPathRepository implements Repository {
 
     @Override
     public ClassPath getClassPath() {
-        return _path;
+        return classPath;
     }
 
     /**
@@ -124,7 +124,7 @@ abstract class AbstractClassPathRepository implements Repository {
             return clazz;
         }
         try {
-            return loadClass(_path.getInputStream(className), className);
+            return loadClass(classPath.getInputStream(className), className);
         } catch (final IOException e) {
             throw new ClassNotFoundException("Exception while looking for class " + className + ": " + e, e);
         }

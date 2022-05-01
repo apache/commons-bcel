@@ -50,11 +50,11 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     // N.N. These must agree with the order of Constants.T_CHAR through T_LONG
-    private static final String[] short_names = {
+    private static final String[] shortNames = {
             "C", "F", "D", "B", "S", "I", "L"
     };
 
-    private static final MethodObject[] append_mos = {
+    private static final MethodObject[] appendMethodObjects = {
             new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {
                 Type.STRING
             }),
@@ -529,7 +529,7 @@ public class InstructionFactory implements InstructionConstants {
     public Instruction createAppend( final Type type ) {
         final byte t = type.getType();
         if (isString(type)) {
-            return createInvoke(append_mos[0], Const.INVOKEVIRTUAL);
+            return createInvoke(appendMethodObjects[0], Const.INVOKEVIRTUAL);
         }
         switch (t) {
             case Const.T_BOOLEAN:
@@ -540,10 +540,10 @@ public class InstructionFactory implements InstructionConstants {
             case Const.T_SHORT:
             case Const.T_INT:
             case Const.T_LONG:
-                return createInvoke(append_mos[t], Const.INVOKEVIRTUAL);
+                return createInvoke(appendMethodObjects[t], Const.INVOKEVIRTUAL);
             case Const.T_ARRAY:
             case Const.T_OBJECT:
-                return createInvoke(append_mos[1], Const.INVOKEVIRTUAL);
+                return createInvoke(appendMethodObjects[1], Const.INVOKEVIRTUAL);
             default:
                 throw new IllegalArgumentException("No append for this type? " + type);
         }
@@ -561,8 +561,8 @@ public class InstructionFactory implements InstructionConstants {
                     && (src == Const.T_CHAR || src == Const.T_BYTE || src == Const.T_SHORT)) {
                 src = Const.T_INT;
             }
-            final String name = "org.apache.bcel.generic." + short_names[src - Const.T_CHAR] + "2"
-                    + short_names[dest - Const.T_CHAR];
+            final String name = "org.apache.bcel.generic." + shortNames[src - Const.T_CHAR] + "2"
+                    + shortNames[dest - Const.T_CHAR];
             Instruction i = null;
             try {
                 i = (Instruction) java.lang.Class.forName(name).newInstance();
