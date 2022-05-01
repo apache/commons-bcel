@@ -50,11 +50,8 @@ public class ModularRuntimeImage implements Closeable {
 
     /**
      * Constructs a default instance.
-     *
-     * @throws IOException
-     *             an I/O error occurs accessing the file system
      */
-    public ModularRuntimeImage() throws IOException {
+    public ModularRuntimeImage() {
         this(null, FileSystems.getFileSystem(URI.create("jrt:/")));
     }
 
