@@ -176,18 +176,15 @@ public class LocalVariables implements Cloneable {
                 }
                 locals[i] = sup;
             }
-        }
-        else{
-            if (! locals[i].equals(lv.locals[i]) ) {
+        } else if (! locals[i].equals(lv.locals[i]) ) {
 /*TODO
-                if ((locals[i] instanceof org.apache.bcel.generic.ReturnaddressType) &&
-                    (lv.locals[i] instanceof org.apache.bcel.generic.ReturnaddressType)) {
-                    //System.err.println("merging "+locals[i]+" and "+lv.locals[i]);
-                    throw new AssertionViolatedException("Merging different ReturnAddresses: '"+locals[i]+"' and '"+lv.locals[i]+"'.");
-                }
-*/
-                locals[i] = Type.UNKNOWN;
+            if ((locals[i] instanceof org.apache.bcel.generic.ReturnaddressType) &&
+                (lv.locals[i] instanceof org.apache.bcel.generic.ReturnaddressType)) {
+                //System.err.println("merging "+locals[i]+" and "+lv.locals[i]);
+                throw new AssertionViolatedException("Merging different ReturnAddresses: '"+locals[i]+"' and '"+lv.locals[i]+"'.");
             }
+*/
+            locals[i] = Type.UNKNOWN;
         }
         } catch (final ClassNotFoundException e) {
         // FIXME: maybe not the best way to handle this
