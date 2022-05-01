@@ -57,7 +57,7 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
             case org.apache.bcel.Const.CONSTANT_Long:
                 return Long.valueOf(((org.apache.bcel.classfile.ConstantLong) c).getBytes());
             case org.apache.bcel.Const.CONSTANT_Double:
-                return new Double(((org.apache.bcel.classfile.ConstantDouble) c).getBytes());
+                return Double.valueOf(((org.apache.bcel.classfile.ConstantDouble) c).getBytes());
             default: // Never reached
                 throw new IllegalArgumentException("Unknown or invalid constant type at " + super.getIndex());
         }
