@@ -117,6 +117,6 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      */
     @Override
     public Object getConstantValue( final ConstantPool cp ) {
-        return new Double(bytes);
+        return Double.valueOf(bytes);
     }
 }
