@@ -63,7 +63,7 @@ public class patchclass {
         ConstantUtf8 c;
         String str;
         int index, old_index;
-        StringBuffer buf;
+        StringBuilder buf;
 
         // Loop through constant pool
         for (short i = 0; i < constant_pool.length; i++) {
@@ -73,7 +73,7 @@ public class patchclass {
                     str = c.getBytes();
 
                     if ((index = str.indexOf(old)) != -1) { // `old' found in str
-                        buf = new StringBuffer();           // target buffer
+                        buf = new StringBuilder();           // target buffer
                         old_index = 0;                      // String start offset
 
                         // While we have something to replace
