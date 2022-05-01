@@ -53,7 +53,7 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
 
     @Override
     public Number getValue() {
-        return new Float(value);
+        return Float.valueOf(value);
     }
 
 
