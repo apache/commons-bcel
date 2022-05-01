@@ -36,7 +36,7 @@ public final class InnerClasses extends Attribute {
     /**
      * Empty array.
      */
-    private static final InnerClass[] EMPTY_INNER_CLASSE_ARRAY = new InnerClass[0];
+    private static final InnerClass[] EMPTY_INNER_CLASSE_ARRAY = {};
 
     private InnerClass[] innerClasses;
 
