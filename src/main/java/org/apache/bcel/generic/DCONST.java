@@ -51,7 +51,7 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
 
     @Override
     public Number getValue() {
-        return new Double(value);
+        return Double.valueOf(value);
     }
 
 
