@@ -46,7 +46,7 @@ final class MethodHTML {
         this.className = className;
         this.attributeHtml = attributeHtml;
         this.constantHtml = constantHtml;
-        printWriter = new PrintWriter(new FileOutputStream(dir + className + "_methods.html"));
+        printWriter = new PrintWriter(dir + className + "_methods.html", charset.name());
         printWriter.print("<HTML><head><meta charset=\"");
         printWriter.print(charset.name());
         printWriter.println("\"></head>");
