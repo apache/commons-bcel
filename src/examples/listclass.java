@@ -85,15 +85,15 @@ public class listclass {
     boolean code;
     boolean constants;
     boolean verbose;
-    boolean classdep;
-    boolean nocontents;
+    boolean classDep;
+    boolean noContents;
     boolean recurse;
     Map<String, String> listedClasses;
-    List<String> exclude_name;
+    List<String> excludeName;
 
     public static void main(final String[] argv) {
-        final List<String> file_name = new ArrayList<>();
-        final List<String> exclude_name = new ArrayList<>();
+        final List<String> fileName = new ArrayList<>();
+        final List<String> excludeName = new ArrayList<>();
         boolean code = false;
         boolean constants = false;
         boolean verbose = true;
@@ -137,19 +137,19 @@ public class listclass {
                     System.err.println("Unknown switch " + arg + " ignored.");
                 }
             } else if (exclude) { // add file name to list
-                exclude_name.add(arg);
+                excludeName.add(arg);
             } else {
-                file_name.add(arg);
+                fileName.add(arg);
             }
         }
 
-        if (file_name.isEmpty()) {
+        if (fileName.isEmpty()) {
             System.err.println("list: No input files specified");
         } else {
             final listclass listClass = new listclass(code, constants, verbose, classdep,
-                    nocontents, recurse, exclude_name);
+                    nocontents, recurse, excludeName);
 
-            for (final String element : file_name) {
+            for (final String element : fileName) {
                 name = element;
 
                 listClass.list(name);
@@ -157,16 +157,16 @@ public class listclass {
         }
     }
 
-    public listclass(final boolean code, final boolean constants, final boolean verbose, final boolean classdep,
-                     final boolean nocontents, final boolean recurse, final List<String> exclude_name) {
+    public listclass(final boolean code, final boolean constants, final boolean verbose, final boolean classDep,
+                     final boolean noContents, final boolean recurse, final List<String> excludeName) {
         this.code = code;
         this.constants = constants;
         this.verbose = verbose;
-        this.classdep = classdep;
-        this.nocontents = nocontents;
+        this.classDep = classDep;
+        this.noContents = noContents;
         this.recurse = recurse;
         this.listedClasses = new HashMap<>();
-        this.exclude_name = exclude_name;
+        this.excludeName = excludeName;
     }
 
     /**
@@ -174,46 +174,46 @@ public class listclass {
      */
     public void list(final String name) {
         try {
-            JavaClass java_class;
+            JavaClass javaClass;
 
             if ((listedClasses.get(name) != null) || name.startsWith("[")) {
                 return;
             }
 
-            for (final String element : exclude_name) {
+            for (final String element : excludeName) {
                 if (name.startsWith(element)) {
                     return;
                 }
             }
 
             if (name.endsWith(".class")) {
-                java_class = new ClassParser(name).parse(); // May throw IOException
+                javaClass = new ClassParser(name).parse(); // May throw IOException
             } else {
-                java_class = Repository.lookupClass(name);
+                javaClass = Repository.lookupClass(name);
             }
 
-            if (nocontents) {
-                System.out.println(java_class.getClassName());
+            if (noContents) {
+                System.out.println(javaClass.getClassName());
             } else {
-                System.out.println(java_class);             // Dump the contents
+                System.out.println(javaClass);             // Dump the contents
             }
 
             if (constants) {
-                System.out.println(java_class.getConstantPool());
+                System.out.println(javaClass.getConstantPool());
             }
 
             if (code) {
-                printCode(java_class.getMethods(), verbose);
+                printCode(javaClass.getMethods(), verbose);
             }
 
-            if (classdep) {
-                printClassDependencies(java_class.getConstantPool());
+            if (classDep) {
+                printClassDependencies(javaClass.getConstantPool());
             }
 
             listedClasses.put(name, name);
 
             if (recurse) {
-                final String[] dependencies = getClassDependencies(java_class.getConstantPool());
+                final String[] dependencies = getClassDependencies(javaClass.getConstantPool());
 
                 for (final String dependency : dependencies) {
                     list(dependency);
