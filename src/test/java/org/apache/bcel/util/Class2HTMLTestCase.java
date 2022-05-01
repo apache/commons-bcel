@@ -48,8 +48,7 @@ public class Class2HTMLTestCase {
     @Test
     public void testReferenceToConstant() {
         @SuppressWarnings("unused")
-        final
-        short referenceToConstant = Class2HTML.AALOAD;
+        final short referenceToConstant = Class2HTML.AALOAD;
     }
 
 }

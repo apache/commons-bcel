@@ -17,9 +17,9 @@
  */
 package org.apache.bcel.util;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.BitSet;
 
 import org.apache.bcel.Const;
@@ -39,33 +39,34 @@ import org.apache.bcel.classfile.Utility;
 
 /**
  * Convert code into HTML file.
- *
- *
  */
 final class CodeHTML {
 
     private static boolean wide;
 private final String className; // name of current class
     //    private Method[] methods; // Methods to print
-    private final PrintWriter file; // file to write to
+    private final PrintWriter printWriter; // file to write to
     private BitSet gotoSet;
     private final ConstantPool constantPool;
     private final ConstantHTML constantHtml;
 
 
     CodeHTML(final String dir, final String class_name, final Method[] methods, final ConstantPool constant_pool,
-            final ConstantHTML constant_html) throws IOException {
+            final ConstantHTML constant_html, final Charset charset) throws IOException {
         this.className = class_name;
 //        this.methods = methods;
         this.constantPool = constant_pool;
         this.constantHtml = constant_html;
-        file = new PrintWriter(new FileOutputStream(dir + class_name + "_code.html"));
-        file.println("<HTML><BODY BGCOLOR=\"#C0C0C0\">");
+        printWriter = new PrintWriter(dir + class_name + "_code.html", charset.name());
+        printWriter.print("<HTML><head><meta charset=\"");
+        printWriter.print(charset.name());
+        printWriter.println("\"></head>");
+        printWriter.println("<BODY BGCOLOR=\"#C0C0C0\">");
         for (int i = 0; i < methods.length; i++) {
             writeMethod(methods[i], i);
         }
-        file.println("</BODY></HTML>");
-        file.close();
+        printWriter.println("</BODY></HTML>");
+        printWriter.close();
     }
 
 
@@ -505,45 +506,45 @@ private final String className; // name of current class
         access = Utility.replace(access, " ", "&nbsp;");
         // Get the method's attributes, the Code Attribute in particular
         final Attribute[] attributes = method.getAttributes();
-        file.print("<P><B><FONT COLOR=\"#FF0000\">" + access + "</FONT>&nbsp;" + "<A NAME=method"
+        printWriter.print("<P><B><FONT COLOR=\"#FF0000\">" + access + "</FONT>&nbsp;" + "<A NAME=method"
                 + method_number + ">" + Class2HTML.referenceType(type) + "</A>&nbsp<A HREF=\""
                 + className + "_methods.html#method" + method_number + "\" TARGET=Methods>"
                 + html_name + "</A>(");
         for (int i = 0; i < args.length; i++) {
-            file.print(Class2HTML.referenceType(args[i]));
+            printWriter.print(Class2HTML.referenceType(args[i]));
             if (i < args.length - 1) {
-                file.print(",&nbsp;");
+                printWriter.print(",&nbsp;");
             }
         }
-        file.println(")</B></P>");
+        printWriter.println(")</B></P>");
         Code c = null;
         byte[] code = null;
         if (attributes.length > 0) {
-            file.print("<H4>Attributes</H4><UL>\n");
+            printWriter.print("<H4>Attributes</H4><UL>\n");
             for (int i = 0; i < attributes.length; i++) {
                 byte tag = attributes[i].getTag();
                 if (tag != Const.ATTR_UNKNOWN) {
-                    file.print("<LI><A HREF=\"" + className + "_attributes.html#method"
+                    printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#method"
                             + method_number + "@" + i + "\" TARGET=Attributes>"
                             + Const.getAttributeName(tag) + "</A></LI>\n");
                 } else {
-                    file.print("<LI>" + attributes[i] + "</LI>");
+                    printWriter.print("<LI>" + attributes[i] + "</LI>");
                 }
                 if (tag == Const.ATTR_CODE) {
                     c = (Code) attributes[i];
                     final Attribute[] attributes2 = c.getAttributes();
                     code = c.getCode();
-                    file.print("<UL>");
+                    printWriter.print("<UL>");
                     for (int j = 0; j < attributes2.length; j++) {
                         tag = attributes2[j].getTag();
-                        file.print("<LI><A HREF=\"" + className + "_attributes.html#" + "method"
+                        printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#" + "method"
                                 + method_number + "@" + i + "@" + j + "\" TARGET=Attributes>"
                                 + Const.getAttributeName(tag) + "</A></LI>\n");
                     }
-                    file.print("</UL>");
+                    printWriter.print("</UL>");
                 }
             }
-            file.println("</UL>");
+            printWriter.println("</UL>");
         }
         if (code != null) { // No code, an abstract method, e.g.
             //System.out.println(name + "\n" + Utility.codeToString(code, constantPool, 0, -1));
@@ -552,7 +553,7 @@ private final String className; // name of current class
                 stream.mark(stream.available());
                 findGotos(stream, c);
                 stream.reset();
-                file.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Byte<BR>offset</TH>"
+                printWriter.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Byte<BR>offset</TH>"
                         + "<TH ALIGN=LEFT>Instruction</TH><TH ALIGN=LEFT>Argument</TH>");
                 for (; stream.available() > 0;) {
                     final int offset = stream.getIndex();
@@ -571,12 +572,12 @@ private final String className; // name of current class
                     } else {
                         anchor2 = "" + offset;
                     }
-                    file.println("<TR VALIGN=TOP><TD>" + anchor2 + "</TD><TD>" + anchor + str + "</TR>");
+                    printWriter.println("<TR VALIGN=TOP><TD>" + anchor2 + "</TD><TD>" + anchor + str + "</TR>");
                 }
             }
             // Mark last line, may be targetted from Attributes window
-            file.println("<TR><TD> </A></TD></TR>");
-            file.println("</TABLE>");
+            printWriter.println("<TR><TD> </A></TD></TR>");
+            printWriter.println("</TABLE>");
         }
     }
 }

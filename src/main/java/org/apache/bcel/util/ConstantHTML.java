@@ -17,9 +17,9 @@
  */
 package org.apache.bcel.util;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Constant;
@@ -35,45 +35,46 @@ import org.apache.bcel.classfile.Utility;
 
 /**
  * Convert constant pool into HTML file.
- *
- *
  */
 final class ConstantHTML {
 
     private final String className; // name of current class
     private final String classPackage; // name of package
     private final ConstantPool constantPool; // reference to constant pool
-    private final PrintWriter file; // file to write to
+    private final PrintWriter printWriter; // file to write to
     private final String[] constantRef; // String to return for cp[i]
     private final Constant[] constants; // The constants in the cp
     private final Method[] methods;
 
 
     ConstantHTML(final String dir, final String class_name, final String class_package, final Method[] methods,
-            final ConstantPool constant_pool) throws IOException {
+        final ConstantPool constant_pool, final Charset charset) throws IOException {
         this.className = class_name;
         this.classPackage = class_package;
         this.constantPool = constant_pool;
         this.methods = methods;
         constants = constant_pool.getConstantPool();
-        file = new PrintWriter(new FileOutputStream(dir + class_name + "_cp.html"));
+        printWriter = new PrintWriter(dir + class_name + "_cp.html", charset.name());
         constantRef = new String[constants.length];
         constantRef[0] = "&lt;unknown&gt;";
-        file.println("<HTML><BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
+        printWriter.print("<HTML><head><meta charset=\"");
+        printWriter.print(charset.name());
+        printWriter.println("\"></head>");
+        printWriter.println("<BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
         // Loop through constants, constants[0] is reserved
         for (int i = 1; i < constants.length; i++) {
             if (i % 2 == 0) {
-                file.print("<TR BGCOLOR=\"#C0C0C0\"><TD>");
+                printWriter.print("<TR BGCOLOR=\"#C0C0C0\"><TD>");
             } else {
-                file.print("<TR BGCOLOR=\"#A0A0A0\"><TD>");
+                printWriter.print("<TR BGCOLOR=\"#A0A0A0\"><TD>");
             }
             if (constants[i] != null) {
                 writeConstant(i);
             }
-            file.print("</TD></TR>\n");
+            printWriter.print("</TD></TR>\n");
         }
-        file.println("</TABLE></BODY></HTML>");
-        file.close();
+        printWriter.println("</TABLE></BODY></HTML>");
+        printWriter.close();
     }
 
 
@@ -99,7 +100,7 @@ final class ConstantHTML {
         int name_index;
         String ref;
         // The header is always the same
-        file.println("<H4> <A NAME=cp" + index + ">" + index + "</A> " + Const.getConstantName(tag)
+        printWriter.println("<H4> <A NAME=cp" + index + ">" + index + "</A> " + Const.getConstantName(tag)
                 + "</H4>");
         /* For every constant type get the needed parameters and print them appropiately
          */
@@ -158,7 +159,7 @@ final class ConstantHTML {
                         + class_index + "\" TARGET=Constants>" + short_method_class
                         + "</A>.<A HREF=\"" + className + "_cp.html#cp" + index
                         + "\" TARGET=ConstantPool>" + html_method_name + "</A>&nbsp;" + arg_types;
-                file.println("<P><TT>" + ret_type + "&nbsp;" + ref + arg_types
+                printWriter.println("<P><TT>" + ret_type + "&nbsp;" + ref + arg_types
                         + "&nbsp;</TT>\n<UL>" + "<LI><A HREF=\"#cp" + class_index
                         + "\">Class index(" + class_index + ")</A>\n" + "<LI><A HREF=\"#cp"
                         + name_index + "\">NameAndType index(" + name_index + ")</A></UL>");
@@ -187,7 +188,7 @@ final class ConstantHTML {
                         + "\" TARGET=Constants>" + short_field_class + "</A>.<A HREF=\""
                         + className + "_cp.html#cp" + index + "\" TARGET=ConstantPool>"
                         + field_name + "</A>";
-                file.println("<P><TT>" + ref + "</TT><BR>\n" + "<UL>" + "<LI><A HREF=\"#cp"
+                printWriter.println("<P><TT>" + ref + "</TT><BR>\n" + "<UL>" + "<LI><A HREF=\"#cp"
                         + class_index + "\">Class(" + class_index + ")</A><BR>\n"
                         + "<LI><A HREF=\"#cp" + name_index + "\">NameAndType(" + name_index
                         + ")</A></UL>");
@@ -203,7 +204,7 @@ final class ConstantHTML {
                         + "</A>";
                 constantRef[index] = "<A HREF=\"" + className + "_cp.html#cp" + index
                         + "\" TARGET=ConstantPool>" + short_class_name + "</A>";
-                file.println("<P><TT>" + ref + "</TT><UL>" + "<LI><A HREF=\"#cp" + name_index
+                printWriter.println("<P><TT>" + ref + "</TT><UL>" + "<LI><A HREF=\"#cp" + name_index
                         + "\">Name index(" + name_index + ")</A></UL>\n");
                 break;
             case Const.CONSTANT_String:
@@ -211,7 +212,7 @@ final class ConstantHTML {
                         Const.CONSTANT_String);
                 name_index = c5.getStringIndex();
                 final String str = Class2HTML.toHTML(constantPool.constantToString(index, tag));
-                file.println("<P><TT>" + str + "</TT><UL>" + "<LI><A HREF=\"#cp" + name_index
+                printWriter.println("<P><TT>" + str + "</TT><UL>" + "<LI><A HREF=\"#cp" + name_index
                         + "\">Name index(" + name_index + ")</A></UL>\n");
                 break;
             case Const.CONSTANT_NameAndType:
@@ -219,14 +220,14 @@ final class ConstantHTML {
                         Const.CONSTANT_NameAndType);
                 name_index = c6.getNameIndex();
                 final int signature_index = c6.getSignatureIndex();
-                file.println("<P><TT>"
+                printWriter.println("<P><TT>"
                         + Class2HTML.toHTML(constantPool.constantToString(index, tag))
                         + "</TT><UL>" + "<LI><A HREF=\"#cp" + name_index + "\">Name index("
                         + name_index + ")</A>\n" + "<LI><A HREF=\"#cp" + signature_index
                         + "\">Signature index(" + signature_index + ")</A></UL>\n");
                 break;
             default:
-                file.println("<P><TT>" + Class2HTML.toHTML(constantPool.constantToString(index, tag)) + "</TT>\n");
+                printWriter.println("<P><TT>" + Class2HTML.toHTML(constantPool.constantToString(index, tag)) + "</TT>\n");
         } // switch
     }
 }

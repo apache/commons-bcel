@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -186,6 +188,10 @@ public class Class2HTML implements Constants {
      * @param dir The directory to put the files in
      */
     public Class2HTML(final JavaClass javaClass, final String dir) throws IOException {
+        this(javaClass, dir, StandardCharsets.UTF_8);
+    }
+
+    private Class2HTML(final JavaClass javaClass, final String dir, final Charset charset) throws IOException {
         final Method[] methods = javaClass.getMethods();
         this.javaClass = javaClass;
         this.dir = dir;
@@ -198,18 +204,15 @@ public class Class2HTML implements Constants {
         } else {
             classPackage = ""; // default package
         }
-        final ConstantHTML constantHtml = new ConstantHTML(dir, className, classPackage, methods,
-                constantPool);
-        /* Attributes can't be written in one step, so we just open a file
-         * which will be written consequently.
+        final ConstantHTML constantHtml = new ConstantHTML(dir, className, classPackage, methods, constantPool, charset);
+        /*
+         * Attributes can't be written in one step, so we just open a file which will be written consequently.
          */
-        final AttributeHTML attributeHtml = new AttributeHTML(dir, className, constantPool,
-                constantHtml);
-        new MethodHTML(dir, className, methods, javaClass.getFields(),
-                constantHtml, attributeHtml);
+        final AttributeHTML attributeHtml = new AttributeHTML(dir, className, constantPool, constantHtml, charset);
+        new MethodHTML(dir, className, methods, javaClass.getFields(), constantHtml, attributeHtml, charset);
         // Write main file (with frames, yuk)
         writeMainHTML(attributeHtml);
-        new CodeHTML(dir, className, methods, constantPool, constantHtml);
+        new CodeHTML(dir, className, methods, constantPool, constantHtml, charset);
         attributeHtml.close();
     }
 
