@@ -221,12 +221,10 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
                     buf.append(CONSTANT_PREFIX).append("ACC_BRIDGE | ");
                 } else if (pow == Const.ACC_TRANSIENT && location == FLAGS.METHOD) {
                     buf.append(CONSTANT_PREFIX).append("ACC_VARARGS | ");
+                } else if (i < Const.ACCESS_NAMES_LENGTH) {
+                    buf.append(CONSTANT_PREFIX).append("ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
                 } else {
-                    if (i < Const.ACCESS_NAMES_LENGTH) {
-                        buf.append(CONSTANT_PREFIX).append("ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ENGLISH)).append( " | ");
-                    } else {
-                        buf.append(String.format (CONSTANT_PREFIX+"ACC_BIT %x | ", pow));
-                    }
+                    buf.append(String.format (CONSTANT_PREFIX+"ACC_BIT %x | ", pow));
                 }
             }
             pow <<= 1;
