@@ -263,10 +263,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                             "' overrides the final (not-overridable) definition in class '" + jc.getClassName() +
                             "'. This is okay, as the original definition was private; however this constraint leverage"+
                             " was introduced by JLS 8.4.6 (not vmspec2) and the behavior of the Sun verifiers.");
-                    } else {
-                        if (!method.isStatic()) { // static methods don't inherit
-                            hashmap.put(nameAndSig, jc.getClassName());
-                        }
+                    } else if (!method.isStatic()) { // static methods don't inherit
+                        hashmap.put(nameAndSig, jc.getClassName());
                     }
                 } else if (!method.isStatic()) { // static methods don't inherit
                     hashmap.put(nameAndSig, jc.getClassName());
@@ -729,42 +727,39 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                             " any of the ACC_STATIC, ACC_FINAL, ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT modifiers set.");
                     }
                 }
-            }
-            else{ // isInterface!
-                if (!name.equals(Const.STATIC_INITIALIZER_NAME)) {//vmspec2, p.116, 2nd paragraph
-                    if (jc.getMajor() >= Const.MAJOR_1_8) {
-                        if (!(obj.isPublic() ^ obj.isPrivate())) {
-                            throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have" +
-                                " exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
-                        }
-                        if (obj.isProtected()
-                                || obj.isFinal()
-                                || obj.isSynchronized()
-                                || obj.isNative()) {
-                            throw new ClassConstraintException("Interface method '"+tostring(obj)+ "' must not have" +
-                                " any of the ACC_PROTECTED, ACC_FINAL, ACC_SYNCHRONIZED, or ACC_NATIVE modifiers set.");
-                        }
+            } else if (!name.equals(Const.STATIC_INITIALIZER_NAME)) {//vmspec2, p.116, 2nd paragraph
+                if (jc.getMajor() >= Const.MAJOR_1_8) {
+                    if (!(obj.isPublic() ^ obj.isPrivate())) {
+                        throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have" +
+                            " exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
+                    }
+                    if (obj.isProtected()
+                            || obj.isFinal()
+                            || obj.isSynchronized()
+                            || obj.isNative()) {
+                        throw new ClassConstraintException("Interface method '"+tostring(obj)+ "' must not have" +
+                            " any of the ACC_PROTECTED, ACC_FINAL, ACC_SYNCHRONIZED, or ACC_NATIVE modifiers set.");
+                    }
 
-                    } else {
-                        if (!obj.isPublic()) {
-                            throw new ClassConstraintException(
-                                "Interface method '"+tostring(obj)+"' must have the ACC_PUBLIC modifier set but hasn't!");
-                        }
-                        if (!obj.isAbstract()) {
-                            throw new ClassConstraintException(
-                                "Interface method '"+tostring(obj)+"' must have the ACC_ABSTRACT modifier set but hasn't!");
-                        }
-                        if (obj.isPrivate()
-                                || obj.isProtected()
-                                || obj.isStatic()
-                                || obj.isFinal()
-                                || obj.isSynchronized()
-                                || obj.isNative()
-                                || obj.isStrictfp() ) {
-                            throw new ClassConstraintException("Interface method '"+tostring(obj)+ "' must not have" +
-                                " any of the ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL, ACC_SYNCHRONIZED,"+
-                                " ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT modifiers set.");
-                        }
+                } else {
+                    if (!obj.isPublic()) {
+                        throw new ClassConstraintException(
+                            "Interface method '"+tostring(obj)+"' must have the ACC_PUBLIC modifier set but hasn't!");
+                    }
+                    if (!obj.isAbstract()) {
+                        throw new ClassConstraintException(
+                            "Interface method '"+tostring(obj)+"' must have the ACC_ABSTRACT modifier set but hasn't!");
+                    }
+                    if (obj.isPrivate()
+                            || obj.isProtected()
+                            || obj.isStatic()
+                            || obj.isFinal()
+                            || obj.isSynchronized()
+                            || obj.isNative()
+                            || obj.isStrictfp() ) {
+                        throw new ClassConstraintException("Interface method '"+tostring(obj)+ "' must not have" +
+                            " any of the ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL, ACC_SYNCHRONIZED,"+
+                            " ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT modifiers set.");
                     }
                 }
             }
