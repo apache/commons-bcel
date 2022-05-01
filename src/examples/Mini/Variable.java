@@ -52,8 +52,11 @@ public class Variable implements EnvEntry {
   }
 
   public ASTIdent getName()    { return name; }
+  @Override
   public String   getHashKey() { return var_name; }
+  @Override
   public int      getLine()    { return line; }
+  @Override
   public int      getColumn()  { return column; }
   public int      getType()    { return name.getType(); }
 
