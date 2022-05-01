@@ -28,9 +28,9 @@ import org.apache.bcel.generic.ObjectType;
  *
  */
 public class ExceptionHandler {
-    
+
     static final ExceptionHandler[] EMPTY_ARRAY = {};
-    
+
     /** The type of the exception to catch. NULL means ANY. */
     private final ObjectType catchType;
 
