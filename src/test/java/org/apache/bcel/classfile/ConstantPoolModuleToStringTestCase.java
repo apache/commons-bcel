@@ -291,7 +291,6 @@ public class ConstantPoolModuleToStringTestCase {
             append(constantModule);
             append(constantModule.toString(pool));
             final String s = constantModule.toString(pool).trim();
-            System.out.println("S: " + s);
             assertTrue(s.startsWith("java.base") || s.startsWith("Othermodularthing"), s);
         }
 
