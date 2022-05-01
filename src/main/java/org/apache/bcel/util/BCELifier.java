@@ -61,11 +61,11 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 
     // Needs to be accessible from unit test code
     static JavaClass getJavaClass(final String name) throws ClassNotFoundException, IOException {
-        JavaClass java_class;
-        if ((java_class = Repository.lookupClass(name)) == null) {
-            java_class = new ClassParser(name).parse(); // May throw IOException
+        JavaClass javaClass;
+        if ((javaClass = Repository.lookupClass(name)) == null) {
+            javaClass = new ClassParser(name).parse(); // May throw IOException
         }
-        return java_class;
+        return javaClass;
     }
     /** Default main method
      */
@@ -75,18 +75,17 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
             System.out.println("\tThe class must exist on the classpath");
             return;
         }
-        final JavaClass java_class = getJavaClass(argv[0]);
-        final BCELifier bcelifier = new BCELifier(java_class, System.out);
+        final BCELifier bcelifier = new BCELifier(getJavaClass(argv[0]), System.out);
         bcelifier.start();
     }
-    static String printArgumentTypes( final Type[] arg_types ) {
-        if (arg_types.length == 0) {
+    static String printArgumentTypes( final Type[] argTypes ) {
+        if (argTypes.length == 0) {
             return "Type.NO_ARGS";
         }
         final StringBuilder args = new StringBuilder();
-        for (int i = 0; i < arg_types.length; i++) {
-            args.append(printType(arg_types[i]));
-            if (i < arg_types.length - 1) {
+        for (int i = 0; i < argTypes.length; i++) {
+            args.append(printType(argTypes[i]));
+            if (i < argTypes.length - 1) {
                 args.append(", ");
             }
         }
@@ -160,68 +159,68 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
 
-    private final JavaClass _clazz;
+    private final JavaClass clazz;
 
 
-    private final PrintWriter _out;
+    private final PrintWriter printWriter;
 
 
-    private final ConstantPoolGen _cp;
+    private final ConstantPoolGen constantPoolGen;
 
 
     /** @param clazz Java class to "decompile"
      * @param out where to output Java program
      */
     public BCELifier(final JavaClass clazz, final OutputStream out) {
-        _clazz = clazz;
-        _out = new PrintWriter(out);
-        _cp = new ConstantPoolGen(_clazz.getConstantPool());
+        this.clazz = clazz;
+        this.printWriter = new PrintWriter(out);
+        this.constantPoolGen = new ConstantPoolGen(this.clazz.getConstantPool());
     }
 
     private void printCreate() {
-        _out.println("  public void create(OutputStream out) throws IOException {");
-        final Field[] fields = _clazz.getFields();
+        printWriter.println("  public void create(OutputStream out) throws IOException {");
+        final Field[] fields = clazz.getFields();
         if (fields.length > 0) {
-            _out.println("    createFields();");
+            printWriter.println("    createFields();");
         }
-        final Method[] methods = _clazz.getMethods();
+        final Method[] methods = clazz.getMethods();
         for (int i = 0; i < methods.length; i++) {
-            _out.println("    createMethod_" + i + "();");
+            printWriter.println("    createMethod_" + i + "();");
         }
-        _out.println("    _cg.getJavaClass().dump(out);");
-        _out.println("  }");
-        _out.println();
+        printWriter.println("    _cg.getJavaClass().dump(out);");
+        printWriter.println("  }");
+        printWriter.println();
     }
 
 
     private void printMain() {
-        final String class_name = _clazz.getClassName();
-        _out.println("  public static void main(String[] args) throws Exception {");
-        _out.println("    " + class_name + "Creator creator = new " + class_name + "Creator();");
-        _out.println("    creator.create(new FileOutputStream(\"" + class_name + ".class\"));");
-        _out.println("  }");
+        final String class_name = clazz.getClassName();
+        printWriter.println("  public static void main(String[] args) throws Exception {");
+        printWriter.println("    " + class_name + "Creator creator = new " + class_name + "Creator();");
+        printWriter.println("    creator.create(new FileOutputStream(\"" + class_name + ".class\"));");
+        printWriter.println("  }");
     }
 
 
     /** Start Java code generation
      */
     public void start() {
-        visitJavaClass(_clazz);
-        _out.flush();
+        visitJavaClass(clazz);
+        printWriter.flush();
     }
 
 
     @Override
     public void visitField( final Field field ) {
-        _out.println();
-        _out.println("    field = new FieldGen(" + printFlags(field.getAccessFlags()) + ", "
+        printWriter.println();
+        printWriter.println("    field = new FieldGen(" + printFlags(field.getAccessFlags()) + ", "
                 + printType(field.getSignature()) + ", \"" + field.getName() + "\", _cp);");
         final ConstantValue cv = field.getConstantValue();
         if (cv != null) {
             final String value = cv.toString();
-            _out.println("    field.setInitValue(" + value + ")");
+            printWriter.println("    field.setInitValue(" + value + ")");
         }
-        _out.println("    _cg.addField(field.getField());");
+        printWriter.println("    _cg.addField(field.getField());");
     }
 
 
@@ -233,71 +232,71 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         final String inter = Utility.printArray(clazz.getInterfaceNames(), false, true);
         if (!"".equals(package_name)) {
             class_name = class_name.substring(package_name.length() + 1);
-            _out.println("package " + package_name + ";");
-            _out.println();
+            printWriter.println("package " + package_name + ";");
+            printWriter.println();
         }
-        _out.println("import " + BASE_PACKAGE + ".generic.*;");
-        _out.println("import " + BASE_PACKAGE + ".classfile.*;");
-        _out.println("import " + BASE_PACKAGE + ".*;");
-        _out.println("import java.io.*;");
-        _out.println();
-        _out.println("public class " + class_name + "Creator {");
-        _out.println("  private InstructionFactory _factory;");
-        _out.println("  private ConstantPoolGen    _cp;");
-        _out.println("  private ClassGen           _cg;");
-        _out.println();
-        _out.println("  public " + class_name + "Creator() {");
-        _out.println("    _cg = new ClassGen(\""
+        printWriter.println("import " + BASE_PACKAGE + ".generic.*;");
+        printWriter.println("import " + BASE_PACKAGE + ".classfile.*;");
+        printWriter.println("import " + BASE_PACKAGE + ".*;");
+        printWriter.println("import java.io.*;");
+        printWriter.println();
+        printWriter.println("public class " + class_name + "Creator {");
+        printWriter.println("  private InstructionFactory _factory;");
+        printWriter.println("  private ConstantPoolGen    _cp;");
+        printWriter.println("  private ClassGen           _cg;");
+        printWriter.println();
+        printWriter.println("  public " + class_name + "Creator() {");
+        printWriter.println("    _cg = new ClassGen(\""
                 + ("".equals(package_name) ? class_name : package_name + "." + class_name)
                 + "\", \"" + super_name + "\", " + "\"" + clazz.getSourceFileName() + "\", "
                 + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", "
                 + "new String[] { " + inter + " });");
-        _out.println("    _cg.setMajor(" + clazz.getMajor() +");");
-        _out.println("    _cg.setMinor(" + clazz.getMinor() +");");
-        _out.println();
-        _out.println("    _cp = _cg.getConstantPool();");
-        _out.println("    _factory = new InstructionFactory(_cg, _cp);");
-        _out.println("  }");
-        _out.println();
+        printWriter.println("    _cg.setMajor(" + clazz.getMajor() +");");
+        printWriter.println("    _cg.setMinor(" + clazz.getMinor() +");");
+        printWriter.println();
+        printWriter.println("    _cp = _cg.getConstantPool();");
+        printWriter.println("    _factory = new InstructionFactory(_cg, _cp);");
+        printWriter.println("  }");
+        printWriter.println();
         printCreate();
         final Field[] fields = clazz.getFields();
         if (fields.length > 0) {
-            _out.println("  private void createFields() {");
-            _out.println("    FieldGen field;");
+            printWriter.println("  private void createFields() {");
+            printWriter.println("    FieldGen field;");
             for (final Field field : fields) {
                 field.accept(this);
             }
-            _out.println("  }");
-            _out.println();
+            printWriter.println("  }");
+            printWriter.println();
         }
         final Method[] methods = clazz.getMethods();
         for (int i = 0; i < methods.length; i++) {
-            _out.println("  private void createMethod_" + i + "() {");
+            printWriter.println("  private void createMethod_" + i + "() {");
             methods[i].accept(this);
-            _out.println("  }");
-            _out.println();
+            printWriter.println("  }");
+            printWriter.println();
         }
         printMain();
-        _out.println("}");
+        printWriter.println("}");
     }
 
 
     @Override
     public void visitMethod( final Method method ) {
-        final MethodGen mg = new MethodGen(method, _clazz.getClassName(), _cp);
-        _out.println("    InstructionList il = new InstructionList();");
-        _out.println("    MethodGen method = new MethodGen("
+        final MethodGen mg = new MethodGen(method, clazz.getClassName(), constantPoolGen);
+        printWriter.println("    InstructionList il = new InstructionList();");
+        printWriter.println("    MethodGen method = new MethodGen("
                 + printFlags(method.getAccessFlags(), FLAGS.METHOD) + ", "
                 + printType(mg.getReturnType()) + ", "
                 + printArgumentTypes(mg.getArgumentTypes()) + ", "
                 + "new String[] { " + Utility.printArray(mg.getArgumentNames(), false, true)
-                + " }, \"" + method.getName() + "\", \"" + _clazz.getClassName() + "\", il, _cp);");
-        _out.println();
-        final BCELFactory factory = new BCELFactory(mg, _out);
+                + " }, \"" + method.getName() + "\", \"" + clazz.getClassName() + "\", il, _cp);");
+        printWriter.println();
+        final BCELFactory factory = new BCELFactory(mg, printWriter);
         factory.start();
-        _out.println("    method.setMaxStack();");
-        _out.println("    method.setMaxLocals();");
-        _out.println("    _cg.addMethod(method.getMethod());");
-        _out.println("    il.dispose();");
+        printWriter.println("    method.setMaxStack();");
+        printWriter.println("    method.setMaxLocals();");
+        printWriter.println("    _cg.addMethod(method.getMethod());");
+        printWriter.println("    il.dispose();");
     }
 }
