@@ -29,9 +29,9 @@ import org.apache.bcel.Const;
  */
 public class ElementValuePair
 {
-    
+
     static final ElementValuePair[] EMPTY_ARRAY = {};
-    
+
     private final ElementValue elementValue;
 
     private final ConstantPool constantPool;
