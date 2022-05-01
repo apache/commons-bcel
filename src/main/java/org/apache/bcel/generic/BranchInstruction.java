@@ -140,8 +140,8 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     public String toString( final boolean verbose ) {
         final String s = super.toString(verbose);
         String t = "null";
-        if (verbose) {
-            if (target != null) {
+        if (target != null) {
+            if (verbose) {
                 if (target.getInstruction() == this) {
                     t = "<points to itself>";
                 } else if (target.getInstruction() == null) {
@@ -152,9 +152,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
                     //t = target.getInstruction().toString(false); // Avoid circles
                     t = "" + target.getPosition();
                 }
-            }
-        } else {
-            if (target != null) {
+            } else {
                 index = target.getPosition();
                 // index = getTargetOffset();  crashes if positions haven't been set
                 // t = "" + (index + position);
