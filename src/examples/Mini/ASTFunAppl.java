@@ -87,8 +87,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
     if(entry == null) {
         MiniC.addError(name.getLine(), name.getColumn(),
                  "Applying unknown function " + fname + ".");
-    } else {
-      if(!(entry instanceof Function)) {
+    } else if(!(entry instanceof Function)) {
         MiniC.addError(name.getLine(), name.getColumn(),
                  "Applying non-function " + fname + ".");
     } else {
@@ -104,7 +103,6 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
           name     = fun.getName();
         }
       }
-    }
 
     if(exprs != null) {
         for(int i=0; i < exprs.length; i++) {
@@ -179,7 +177,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants,
     }
       }
 
-      final StringBuffer call = new StringBuffer(fname + "(");
+      final StringBuilder call = new StringBuilder(fname + "(");
       // Function call
 
       if(exprs != null) {
