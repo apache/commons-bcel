@@ -48,12 +48,12 @@ public class InstructionHandle {
      *
      * @since 6.6.0
      */
-    public static final InstructionHandle[] EMPTY_ARRAY = new InstructionHandle[0];
+    public static final InstructionHandle[] EMPTY_ARRAY = {};
 
     /**
      * Empty array.
      */
-    static final InstructionTargeter[] EMPTY_INSTRUCTION_TARGETER_ARRAY = new InstructionTargeter[0];
+    static final InstructionTargeter[] EMPTY_INSTRUCTION_TARGETER_ARRAY = {};
 
     private InstructionHandle next;
     private InstructionHandle prev;
