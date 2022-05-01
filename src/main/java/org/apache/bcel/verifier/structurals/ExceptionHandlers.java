@@ -34,7 +34,7 @@ public class ExceptionHandlers {
     /**
      * Empty array.
      */
-    private static final ExceptionHandler[] EMPTY_ARRAY = new ExceptionHandler[0];
+    private static final ExceptionHandler[] EMPTY_ARRAY = {};
 
     /**
      * The ExceptionHandler instances. Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
