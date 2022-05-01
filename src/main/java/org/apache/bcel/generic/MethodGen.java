@@ -1066,12 +1066,10 @@ public class MethodGen extends FieldGenOrMethodGen {
                 // conditional branches have a fall through case, selects don't, and
                 // jsr/jsr_w return to the next instruction.
                 branchTargets.push(branch.getTarget(), stackDepth);
-            } else {
-                // check for instructions that terminate the method.
-                if (opcode == Const.ATHROW || opcode == Const.RET
-                        || opcode >= Const.IRETURN && opcode <= Const.RETURN) {
-                    ih = null;
-                }
+            } else // check for instructions that terminate the method.
+            if (opcode == Const.ATHROW || opcode == Const.RET
+                    || opcode >= Const.IRETURN && opcode <= Const.RETURN) {
+                ih = null;
             }
             // normal case, go to the next instruction.
             if (ih != null) {
