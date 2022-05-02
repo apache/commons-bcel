@@ -76,6 +76,14 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Force unsigned short for LineNumber.toString() #118.</action>
       <action                  type="fix" dev="ggregory" due-to="Tim Boudreau, Gary Gregory">Fix IllegalStateException when calling toString(ConstantPool) on a Module or ModuleRequires #125.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Generate HTML in UTF-8 instead of whatever happens to be the default platform encoding.</action>
+      <action issue="BCEL-303" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
+      <action issue="BCEL-307" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
+      <action issue="BCEL-308" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
+      <action issue="BCEL-309" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
+      <action issue="BCEL-311" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
+      <action issue="BCEL-312" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
+      <action issue="BCEL-313" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
+      <action issue="BCEL-337" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
       <!-- ADD -->
       <action                  type="fix" dev="ggregory">Add github/codeql-action.</action>
       <!-- UPDATES -->
