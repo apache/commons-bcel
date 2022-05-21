@@ -45,7 +45,7 @@ public class MethodParameter implements Cloneable {
      * Construct object from input stream.
      *
      * @param input Input stream
-     * @throws java.io.IOException
+     * @throws IOException
      * @throws ClassFormatException
      */
     MethodParameter(final DataInput input) throws IOException {

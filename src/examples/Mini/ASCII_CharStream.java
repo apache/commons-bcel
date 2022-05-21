@@ -95,7 +95,7 @@ public final class ASCII_CharStream
      tokenBegin = 0;
   }
 
-  static private void FillBuff() throws java.io.IOException
+  static private void FillBuff() throws IOException
   {
      if (maxNextCharInd == available)
      {
@@ -141,7 +141,7 @@ public final class ASCII_CharStream
      }
   }
 
-  static public char BeginToken() throws java.io.IOException
+  static public char BeginToken() throws IOException
   {
      tokenBegin = -1;
      final char c = readChar();
@@ -190,7 +190,7 @@ public final class ASCII_CharStream
      bufcolumn[bufpos] = column;
   }
 
-  static public char readChar() throws java.io.IOException
+  static public char readChar() throws IOException
   {
      if (inBuf > 0)
      {
