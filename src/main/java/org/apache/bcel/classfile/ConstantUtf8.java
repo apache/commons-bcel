@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.bcel.Const;
 
@@ -206,10 +207,7 @@ public final class ConstantUtf8 extends Constant {
      */
     public ConstantUtf8(final String value) {
         super(Const.CONSTANT_Utf8);
-        if (value == null) {
-            throw new IllegalArgumentException("Value must not be null.");
-        }
-        this.value = value;
+        this.value = Objects.requireNonNull(value, "value");
         created++;
     }
 

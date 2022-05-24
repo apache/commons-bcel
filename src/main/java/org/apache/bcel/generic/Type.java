@@ -19,6 +19,7 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ClassFormatException;
@@ -174,50 +175,48 @@ public abstract class Type {
 
 
     /** Convert runtime java.lang.Class to BCEL Type object.
-     * @param cl Java class
+     * @param cls Java class
      * @return corresponding Type object
      */
-    public static Type getType( final java.lang.Class<?> cl ) {
-        if (cl == null) {
-            throw new IllegalArgumentException("Class must not be null");
-        }
+    public static Type getType( final java.lang.Class<?> cls ) {
+        Objects.requireNonNull(cls, "cls");
         /* That's an amzingly easy case, because getName() returns
          * the signature. That's what we would have liked anyway.
          */
-        if (cl.isArray()) {
-            return getType(cl.getName());
+        if (cls.isArray()) {
+            return getType(cls.getName());
         }
-        if (!cl.isPrimitive()) { // "Real" class
-            return ObjectType.getInstance(cl.getName());
+        if (!cls.isPrimitive()) { // "Real" class
+            return ObjectType.getInstance(cls.getName());
         }
-        if (cl == Integer.TYPE) {
+        if (cls == Integer.TYPE) {
             return INT;
         }
-        if (cl == Void.TYPE) {
+        if (cls == Void.TYPE) {
             return VOID;
         }
-        if (cl == Double.TYPE) {
+        if (cls == Double.TYPE) {
             return DOUBLE;
         }
-        if (cl == Float.TYPE) {
+        if (cls == Float.TYPE) {
             return FLOAT;
         }
-        if (cl == Boolean.TYPE) {
+        if (cls == Boolean.TYPE) {
             return BOOLEAN;
         }
-        if (cl == Byte.TYPE) {
+        if (cls == Byte.TYPE) {
             return BYTE;
         }
-        if (cl == Short.TYPE) {
+        if (cls == Short.TYPE) {
             return SHORT;
         }
-        if (cl == Long.TYPE) {
+        if (cls == Long.TYPE) {
             return LONG;
         }
-        if (cl == Character.TYPE) {
+        if (cls == Character.TYPE) {
             return CHAR;
         }
-        throw new IllegalStateException("Unknown primitive type " + cl);
+        throw new IllegalStateException("Unknown primitive type " + cls);
     }
 
 
