@@ -339,18 +339,6 @@
       <plugin>
         <groupId>com.github.siom79.japicmp</groupId>
         <artifactId>japicmp-maven-plugin</artifactId>
-        <configuration>
-          <parameter>
-            <overrideCompatibilityChangeParameters>
-              <overrideCompatibilityChangeParameter>
-                <compatibilityChange>METHOD_NEW_DEFAULT</compatibilityChange>
-                <binaryCompatible>true</binaryCompatible>
-                <sourceCompatible>true</sourceCompatible>
-                <semanticVersionLevel>PATCH</semanticVersionLevel>
-              </overrideCompatibilityChangeParameter>
-            </overrideCompatibilityChangeParameters>
-          </parameter>
-        </configuration>
       </plugin>    
       <plugin>
         <groupId>com.github.spotbugs</groupId>
@@ -430,18 +418,6 @@
       <plugin>
         <groupId>com.github.siom79.japicmp</groupId>
         <artifactId>japicmp-maven-plugin</artifactId>
-        <configuration>
-          <parameter>
-            <overrideCompatibilityChangeParameters>
-              <overrideCompatibilityChangeParameter>
-                <compatibilityChange>METHOD_NEW_DEFAULT</compatibilityChange>
-                <binaryCompatible>true</binaryCompatible>
-                <sourceCompatible>true</sourceCompatible>
-                <semanticVersionLevel>PATCH</semanticVersionLevel>
-              </overrideCompatibilityChangeParameter>
-            </overrideCompatibilityChangeParameters>
-          </parameter>
-        </configuration>
       </plugin>    
       <plugin>
         <groupId>com.github.spotbugs</groupId>
