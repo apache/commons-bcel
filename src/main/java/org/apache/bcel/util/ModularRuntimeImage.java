@@ -31,7 +31,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -103,10 +102,7 @@ public class ModularRuntimeImage implements Closeable {
     public List<Path> list(final Path dirPath) throws IOException {
         final List<Path> list = new ArrayList<>();
         try (DirectoryStream<Path> ds = Files.newDirectoryStream(dirPath)) {
-            final Iterator<Path> iterator = ds.iterator();
-            while (iterator.hasNext()) {
-                list.add(iterator.next());
-            }
+            ds.forEach(list::add);
         }
         return list;
     }
