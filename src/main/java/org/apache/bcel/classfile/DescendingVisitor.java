@@ -92,8 +92,7 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(annotation);
         annotation.accept(visitor);
-        final AnnotationEntry[] entries = annotation.getAnnotationEntries();
-        for (final AnnotationEntry entrie : entries) {
+        for (final AnnotationEntry entrie : annotation.getAnnotationEntries()) {
             entrie.accept(this);
         }
         stack.pop();
@@ -142,12 +141,10 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(code);
         code.accept(visitor);
-        final CodeException[] table = code.getExceptionTable();
-        for (final CodeException element : table) {
+        for (final CodeException element : code.getExceptionTable()) {
             element.accept(this);
         }
-        final Attribute[] attributes = code.getAttributes();
-        for (final Attribute attribute : attributes) {
+        for (final Attribute attribute : code.getAttributes()) {
             attribute.accept(this);
         }
         stack.pop();
@@ -358,8 +355,7 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(field);
         field.accept(visitor);
-        final Attribute[] attributes = field.getAttributes();
-        for (final Attribute attribute : attributes) {
+        for (final Attribute attribute : field.getAttributes()) {
             attribute.accept(this);
         }
         stack.pop();
@@ -378,8 +374,7 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(ic);
         ic.accept(visitor);
-        final InnerClass[] ics = ic.getInnerClasses();
-        for (final InnerClass ic2 : ics) {
+        for (final InnerClass ic2 : ic.getInnerClasses()) {
             ic2.accept(this);
         }
         stack.pop();
@@ -390,16 +385,13 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(_clazz);
         _clazz.accept(visitor);
-        final Field[] fields = _clazz.getFields();
-        for (final Field field : fields) {
+        for (final Field field : _clazz.getFields()) {
             field.accept(this);
         }
-        final Method[] methods = _clazz.getMethods();
-        for (final Method method : methods) {
+        for (final Method method : _clazz.getMethods()) {
             method.accept(this);
         }
-        final Attribute[] attributes = _clazz.getAttributes();
-        for (final Attribute attribute : attributes) {
+        for (final Attribute attribute : _clazz.getAttributes()) {
             attribute.accept(this);
         }
         _clazz.getConstantPool().accept(this);
@@ -419,8 +411,7 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(table);
         table.accept(visitor);
-        final LineNumber[] numbers = table.getLineNumberTable();
-        for (final LineNumber number : numbers) {
+        for (final LineNumber number : table.getLineNumberTable()) {
             number.accept(this);
         }
         stack.pop();
@@ -439,8 +430,7 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(table);
         table.accept(visitor);
-        final LocalVariable[] vars = table.getLocalVariableTable();
-        for (final LocalVariable var : vars) {
+        for (final LocalVariable var : table.getLocalVariableTable()) {
             var.accept(this);
         }
         stack.pop();
@@ -462,8 +452,7 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(method);
         method.accept(visitor);
-        final Attribute[] attributes = method.getAttributes();
-        for (final Attribute attribute : attributes) {
+        for (final Attribute attribute : method.getAttributes()) {
             attribute.accept(this);
         }
         stack.pop();
@@ -488,8 +477,7 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(obj);
         obj.accept(visitor);
-        final MethodParameter[] table = obj.getParameters();
-        for (final MethodParameter element : table) {
+        for (final MethodParameter element : obj.getParameters()) {
             element.accept(this);
         }
         stack.pop();
@@ -500,20 +488,16 @@ public class DescendingVisitor implements Visitor
     public void visitModule(final Module obj) {
         stack.push(obj);
         obj.accept(visitor);
-        final ModuleRequires[] rtable = obj.getRequiresTable();
-        for (final ModuleRequires element : rtable) {
+        for (final ModuleRequires element : obj.getRequiresTable()) {
             element.accept(this);
         }
-        final ModuleExports[] etable = obj.getExportsTable();
-        for (final ModuleExports element : etable) {
+        for (final ModuleExports element : obj.getExportsTable()) {
             element.accept(this);
         }
-        final ModuleOpens[] otable = obj.getOpensTable();
-        for (final ModuleOpens element : otable) {
+        for (final ModuleOpens element : obj.getOpensTable()) {
             element.accept(this);
         }
-        final ModuleProvides[] ptable = obj.getProvidesTable();
-        for (final ModuleProvides element : ptable) {
+        for (final ModuleProvides element : obj.getProvidesTable()) {
             element.accept(this);
         }
         stack.pop();
@@ -623,8 +607,7 @@ public class DescendingVisitor implements Visitor
     {
         stack.push(table);
         table.accept(visitor);
-        final StackMapEntry[] vars = table.getStackMap();
-        for (final StackMapEntry var : vars) {
+        for (final StackMapEntry var : table.getStackMap()) {
             var.accept(this);
         }
         stack.pop();
