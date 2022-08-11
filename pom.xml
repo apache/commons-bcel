@@ -27,13 +27,13 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>50</version>
+    <version>53</version>
   </parent>
 
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
   <packaging>jar</packaging>
-  <version>6.5.0</version>
+  <version>6.6.0-SNAPSHOT</version>
   <name>Apache Commons BCEL</name>
   <description>Apache Commons Bytecode Engineering Library</description>
 
@@ -47,10 +47,10 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <commons.componentid>bcel</commons.componentid>
     <commons.module.name>org.apache.bcel</commons.module.name>
-    <commons.release.version>6.5.0</commons.release.version>
+    <commons.release.version>6.6.0</commons.release.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <commons.rc.version>RC1</commons.rc.version>
-    <commons.bc.version>6.4.1</commons.bc.version>
+    <commons.bc.version>6.5.0</commons.bc.version>
     <commons.release.desc>(Java 8)</commons.release.desc>
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
     <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
@@ -64,14 +64,18 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <commons.surefire.version>3.0.0-M4</commons.surefire.version>
-    <checkstyle.plugin.version>3.1.0</checkstyle.plugin.version>
-    <jna.version>5.5.0</jna.version>
-    <commons.japicmp.version>0.14.3</commons.japicmp.version>
+    <commons.surefire.version>3.0.0-M7</commons.surefire.version>
+    <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
+    <jna.version>5.12.1</jna.version>
+    <commons.japicmp.version>0.15.7</commons.japicmp.version>
     <japicmp.skip>false</japicmp.skip>
     <clirr.skip>true</clirr.skip>
-    <commons.jacoco.version>0.8.5</commons.jacoco.version>
-    <commons.javadoc.version>3.2.0</commons.javadoc.version>
+    <commons.jacoco.version>0.8.8</commons.jacoco.version>
+    <commons.javadoc.version>3.3.2</commons.javadoc.version>
+    <commons.felix.version>5.1.3</commons.felix.version>
+    <commons.spotbugs.plugin.version>4.7.1.1</commons.spotbugs.plugin.version>
+    <commons.spotbugs.impl.version>4.7.1</commons.spotbugs.impl.version>    
+    <biz.aQute.bndlib.version>6.2.0</biz.aQute.bndlib.version>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
@@ -127,12 +131,17 @@
     <developer>
       <id>ggregory</id>
       <name>Gary Gregory</name>
-      <email>ggregory@apache.org</email>
-      <organization>Rocket Software</organization>
+      <email>ggregory at apache.org</email>
+      <url>https://www.garygregory.com</url>
+      <organization>The Apache Software Foundation</organization>
+      <organizationUrl>https://www.apache.org/</organizationUrl>      
       <roles>
         <role>PMC Member</role>
       </roles>
       <timezone>America/New_York</timezone>
+      <properties>
+        <picUrl>https://people.apache.org/~ggregory/img/garydgregory80.png</picUrl>
+      </properties>
     </developer>
 
   </developers>
@@ -218,18 +227,10 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>biz.aQute.bnd</groupId>
-            <artifactId>biz.aQute.bndlib</artifactId>
-            <version>5.1.0</version>
-          </dependency>
-        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
-        <version>${commons.rat.version}</version>
         <configuration>
           <excludes>
             <exclude>src/test/resources/**</exclude>
@@ -339,23 +340,11 @@
       <plugin>
         <groupId>com.github.siom79.japicmp</groupId>
         <artifactId>japicmp-maven-plugin</artifactId>
-        <configuration>
-          <parameter>
-            <overrideCompatibilityChangeParameters>
-              <overrideCompatibilityChangeParameter>
-                <compatibilityChange>METHOD_NEW_DEFAULT</compatibilityChange>
-                <binaryCompatible>true</binaryCompatible>
-                <sourceCompatible>true</sourceCompatible>
-                <semanticVersionLevel>PATCH</semanticVersionLevel>
-              </overrideCompatibilityChangeParameter>
-            </overrideCompatibilityChangeParameters>
-          </parameter>
-        </configuration>
       </plugin>    
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>${commons.spotbugs.version}</version>
+        <version>${commons.spotbugs.plugin.version}</version>
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
@@ -388,7 +377,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.13.0</version>
+        <version>3.17.0</version>
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
           <linkXref>true</linkXref>
@@ -400,7 +389,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>taglist-maven-plugin</artifactId>
-        <version>2.4</version>
+        <version>3.0.0</version>
         <configuration>
           <tags>
             <tag>TODO</tag>
@@ -430,23 +419,11 @@
       <plugin>
         <groupId>com.github.siom79.japicmp</groupId>
         <artifactId>japicmp-maven-plugin</artifactId>
-        <configuration>
-          <parameter>
-            <overrideCompatibilityChangeParameters>
-              <overrideCompatibilityChangeParameter>
-                <compatibilityChange>METHOD_NEW_DEFAULT</compatibilityChange>
-                <binaryCompatible>true</binaryCompatible>
-                <sourceCompatible>true</sourceCompatible>
-                <semanticVersionLevel>PATCH</semanticVersionLevel>
-              </overrideCompatibilityChangeParameter>
-            </overrideCompatibilityChangeParameters>
-          </parameter>
-        </configuration>
       </plugin>    
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>${commons.spotbugs.version}</version>
+        <version>${commons.spotbugs.plugin.version}</version>
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
@@ -477,14 +454,19 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.10</version>
-      <scope>test</scope>
+      <version>3.12.0</version>
     </dependency>
     <dependency>
        <!-- BCEL-336 refers to this specific version.  -->
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
       <version>6.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-exec</artifactId>
+      <version>1.3</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -515,7 +497,7 @@
       <properties>
         <skipTests>true</skipTests>
         <benchmark>org.apache</benchmark>
-        <jmh.version>1.19</jmh.version>
+        <jmh.version>1.35</jmh.version>
       </properties>
 
       <dependencies>
@@ -536,7 +518,7 @@
         <dependency>
           <groupId>commons-io</groupId>
           <artifactId>commons-io</artifactId>
-          <version>2.7</version>
+          <version>2.11.0</version>
           <scope>test</scope>
         </dependency>
 
@@ -565,7 +547,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>1.6.0</version>
+            <version>3.1.0</version>
             <executions>
               <execution>
                 <id>benchmark</id>
