@@ -45,25 +45,26 @@ final class MethodHTML {
         this.className = className;
         this.attributeHtml = attributeHtml;
         this.constantHtml = constantHtml;
-        printWriter = new PrintWriter(dir + className + "_methods.html", charset.name());
-        printWriter.print("<HTML><head><meta charset=\"");
-        printWriter.print(charset.name());
-        printWriter.println("\"></head>");
-        printWriter.println("<BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
-        printWriter.println("<TR><TH ALIGN=LEFT>Access&nbsp;flags</TH><TH ALIGN=LEFT>Type</TH>"
-                + "<TH ALIGN=LEFT>Field&nbsp;name</TH></TR>");
-        for (final Field field : fields) {
-            writeField(field);
+        try (PrintWriter newPrintWriter = new PrintWriter(dir + className + "_methods.html", charset.name())) {
+            printWriter = newPrintWriter;
+            printWriter.print("<HTML><head><meta charset=\"");
+            printWriter.print(charset.name());
+            printWriter.println("\"></head>");
+            printWriter.println("<BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
+            printWriter.println("<TR><TH ALIGN=LEFT>Access&nbsp;flags</TH><TH ALIGN=LEFT>Type</TH>"
+                    + "<TH ALIGN=LEFT>Field&nbsp;name</TH></TR>");
+            for (final Field field : fields) {
+                writeField(field);
+            }
+            printWriter.println("</TABLE>");
+            printWriter.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Access&nbsp;flags</TH>"
+                    + "<TH ALIGN=LEFT>Return&nbsp;type</TH><TH ALIGN=LEFT>Method&nbsp;name</TH>"
+                    + "<TH ALIGN=LEFT>Arguments</TH></TR>");
+            for (int i = 0; i < methods.length; i++) {
+                writeMethod(methods[i], i);
+            }
+            printWriter.println("</TABLE></BODY></HTML>");
         }
-        printWriter.println("</TABLE>");
-        printWriter.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Access&nbsp;flags</TH>"
-                + "<TH ALIGN=LEFT>Return&nbsp;type</TH><TH ALIGN=LEFT>Method&nbsp;name</TH>"
-                + "<TH ALIGN=LEFT>Arguments</TH></TR>");
-        for (int i = 0; i < methods.length; i++) {
-            writeMethod(methods[i], i);
-        }
-        printWriter.println("</TABLE></BODY></HTML>");
-        printWriter.close();
     }
 
 

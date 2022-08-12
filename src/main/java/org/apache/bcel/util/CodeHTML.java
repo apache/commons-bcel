@@ -57,16 +57,17 @@ private final String className; // name of current class
 //        this.methods = methods;
         this.constantPool = constant_pool;
         this.constantHtml = constant_html;
-        printWriter = new PrintWriter(dir + class_name + "_code.html", charset.name());
-        printWriter.print("<HTML><head><meta charset=\"");
-        printWriter.print(charset.name());
-        printWriter.println("\"></head>");
-        printWriter.println("<BODY BGCOLOR=\"#C0C0C0\">");
-        for (int i = 0; i < methods.length; i++) {
-            writeMethod(methods[i], i);
+        try (PrintWriter newPrintWriter = new PrintWriter(dir + class_name + "_code.html", charset.name())) {
+            printWriter = newPrintWriter;
+            printWriter.print("<HTML><head><meta charset=\"");
+            printWriter.print(charset.name());
+            printWriter.println("\"></head>");
+            printWriter.println("<BODY BGCOLOR=\"#C0C0C0\">");
+            for (int i = 0; i < methods.length; i++) {
+                writeMethod(methods[i], i);
+            }
+            printWriter.println("</BODY></HTML>");
         }
-        printWriter.println("</BODY></HTML>");
-        printWriter.close();
     }
 
 

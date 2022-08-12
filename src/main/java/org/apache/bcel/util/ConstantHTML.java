@@ -54,27 +54,28 @@ final class ConstantHTML {
         this.constantPool = constant_pool;
         this.methods = methods;
         constants = constant_pool.getConstantPool();
-        printWriter = new PrintWriter(dir + class_name + "_cp.html", charset.name());
-        constantRef = new String[constants.length];
-        constantRef[0] = "&lt;unknown&gt;";
-        printWriter.print("<HTML><head><meta charset=\"");
-        printWriter.print(charset.name());
-        printWriter.println("\"></head>");
-        printWriter.println("<BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
-        // Loop through constants, constants[0] is reserved
-        for (int i = 1; i < constants.length; i++) {
-            if (i % 2 == 0) {
-                printWriter.print("<TR BGCOLOR=\"#C0C0C0\"><TD>");
-            } else {
-                printWriter.print("<TR BGCOLOR=\"#A0A0A0\"><TD>");
+        try (PrintWriter newPrintWriter = new PrintWriter(dir + class_name + "_cp.html", charset.name())) {
+            printWriter = newPrintWriter;
+            constantRef = new String[constants.length];
+            constantRef[0] = "&lt;unknown&gt;";
+            printWriter.print("<HTML><head><meta charset=\"");
+            printWriter.print(charset.name());
+            printWriter.println("\"></head>");
+            printWriter.println("<BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
+            // Loop through constants, constants[0] is reserved
+            for (int i = 1; i < constants.length; i++) {
+                if (i % 2 == 0) {
+                    printWriter.print("<TR BGCOLOR=\"#C0C0C0\"><TD>");
+                } else {
+                    printWriter.print("<TR BGCOLOR=\"#A0A0A0\"><TD>");
+                }
+                if (constants[i] != null) {
+                    writeConstant(i);
+                }
+                printWriter.print("</TD></TR>\n");
             }
-            if (constants[i] != null) {
-                writeConstant(i);
-            }
-            printWriter.print("</TD></TR>\n");
+            printWriter.println("</TABLE></BODY></HTML>");
         }
-        printWriter.println("</TABLE></BODY></HTML>");
-        printWriter.close();
     }
 
 
