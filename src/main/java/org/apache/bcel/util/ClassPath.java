@@ -149,6 +149,7 @@ public class ClassPath implements Closeable {
 
         /**
          * @return input stream for class file.
+         * @throws IOException if an I/O error occurs.
          */
         InputStream getInputStream() throws IOException;
 
@@ -603,7 +604,10 @@ public class ClassPath implements Closeable {
     }
 
     /**
+     * @param name
+     *            fully qualified file name, e.g. java/lang/String
      * @return byte array for class
+     * @throws IOException if an I/O error occurs.
      */
     public byte[] getBytes(final String name) throws IOException {
         return getBytes(name, ".class");
@@ -615,6 +619,7 @@ public class ClassPath implements Closeable {
      * @param suffix
      *            file name ends with suffix, e.g. .java
      * @return byte array for file on class path
+     * @throws IOException if an I/O error occurs.
      */
     public byte[] getBytes(final String name, final String suffix) throws IOException {
         DataInputStream dis = null;
@@ -637,6 +642,7 @@ public class ClassPath implements Closeable {
      * @param name
      *            fully qualified class name, e.g. java.lang.String
      * @return input stream for class
+     * @throws IOException if an I/O error occurs.
      */
     public ClassFile getClassFile(final String name) throws IOException {
         return getClassFile(name, ".class");
@@ -648,6 +654,7 @@ public class ClassPath implements Closeable {
      * @param suffix
      *            file name ends with suff, e.g. .java
      * @return class file for the java class
+     * @throws IOException if an I/O error occurs.
      */
     public ClassFile getClassFile(final String name, final String suffix) throws IOException {
         ClassFile cf = null;
@@ -668,15 +675,12 @@ public class ClassPath implements Closeable {
     }
 
     private ClassFile getClassFileInternal(final String name, final String suffix) {
-
         for (final AbstractPathEntry path : paths) {
             final ClassFile cf = path.getClassFile(name, suffix);
-
             if (cf != null) {
                 return cf;
             }
         }
-
         return null;
     }
 
@@ -684,6 +688,7 @@ public class ClassPath implements Closeable {
      * @param name
      *            fully qualified class name, e.g. java.lang.String
      * @return input stream for class
+     * @throws IOException if an I/O error occurs.
      */
     public InputStream getInputStream(final String name) throws IOException {
         return getInputStream(packageToFolder(name), ".class");
@@ -697,7 +702,7 @@ public class ClassPath implements Closeable {
      * @param suffix
      *            file name ends with suff, e.g. .java
      * @return input stream for file on class path
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     public InputStream getInputStream(final String name, final String suffix) throws IOException {
         InputStream inputStream = null;
@@ -716,6 +721,7 @@ public class ClassPath implements Closeable {
      * @param name
      *            name of file to search for, e.g. java/lang/String.java
      * @return full (canonical) path for file
+     * @throws IOException if an I/O error occurs.
      */
     public String getPath(String name) throws IOException {
         final int index = name.lastIndexOf('.');
@@ -733,6 +739,7 @@ public class ClassPath implements Closeable {
      * @param suffix
      *            file name suffix, e.g. .java
      * @return full (canonical) path for file, if it exists
+     * @throws IOException if an I/O error occurs.
      */
     public String getPath(final String name, final String suffix) throws IOException {
         return getClassFile(name, suffix).getPath();
