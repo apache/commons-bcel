@@ -25,6 +25,7 @@ import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantDynamic;
 import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
@@ -170,8 +171,8 @@ public class ConstantPoolGen {
 
                 if (c instanceof ConstantInvokeDynamic) {
                     class_name = Integer.toString(((ConstantInvokeDynamic) m).getBootstrapMethodAttrIndex());
-                    // since name can't begin with digit, can  use
-                    // METHODREF_DELIM with out fear of duplicates.
+                } else if (c instanceof ConstantDynamic) {
+                    class_name = Integer.toString(((ConstantDynamic) m).getBootstrapMethodAttrIndex());
                 } else {
                 final ConstantClass clazz = (ConstantClass) constants[m.getClassIndex()];
                     u8 = (ConstantUtf8) constants[clazz.getNameIndex()];
@@ -184,6 +185,7 @@ public class ConstantPoolGen {
                 u8 = (ConstantUtf8) constants[n.getSignatureIndex()];
                 final String signature = u8.getBytes();
 
+                // Since name cannot begin with digit, we can use METHODREF_DELIM without fear of duplicates
                 String delim = METHODREF_DELIM;
                 if (c instanceof ConstantInterfaceMethodref) {
                     delim = IMETHODREF_DELIM;

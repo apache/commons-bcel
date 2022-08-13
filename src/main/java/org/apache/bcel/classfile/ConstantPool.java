@@ -182,6 +182,12 @@ public class ConstantPool implements Cloneable, Node {
                         + ":" + constantToString(cid.getNameAndTypeIndex(),
                         Const.CONSTANT_NameAndType);
                 break;
+            case Const.CONSTANT_Dynamic:
+                final ConstantDynamic cd = (ConstantDynamic) c;
+                str = cd.getBootstrapMethodAttrIndex()
+                        + ":" + constantToString(cd.getNameAndTypeIndex(),
+                        Const.CONSTANT_NameAndType);
+                break;
             case Const.CONSTANT_Module:
                 i = ((ConstantModule) c).getNameIndex();
                 c = getConstant(i, Const.CONSTANT_Utf8);
