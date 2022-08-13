@@ -41,8 +41,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /**
- * Responsible for loading (class) files from the CLASSPATH. Inspired by sun.tools.ClassPath.
- *
+ * Loads class files from the CLASSPATH. Inspired by sun.tools.ClassPath.
  */
 public class ClassPath implements Closeable {
 
