@@ -46,7 +46,7 @@ public class JDKClassDumpTestCase {
             for (final int out : baos.toByteArray()) {
                 final int in = src.read();
                 final int j = i;
-                assertEquals(in, out & 0xFF, () -> (name + ": Mismatch at " + j));
+                assertEquals(in, out & 0xFF, () -> name + ": Mismatch at " + j);
                 i++;
             }
         }
@@ -62,10 +62,9 @@ public class JDKClassDumpTestCase {
                 final String name = e.getName();
                 if (name.endsWith(".class")) {
                     // System.out.println("parsing " + name);
-                    try (InputStream in = jar.getInputStream(e)) {
-                        final ClassParser parser = new ClassParser(in, name);
-                        final JavaClass jc = parser.parse();
-                        compare(jc, jar.getInputStream(e), name);
+                    try (InputStream inputStream1 = jar.getInputStream(e);
+                         InputStream inputStream2 = jar.getInputStream(e);) {
+                        compare(new ClassParser(inputStream1, name).parse(), inputStream2, name);
                     }
                 }
             }

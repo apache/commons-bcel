@@ -39,7 +39,9 @@ public class ClassPathRepositoryTestCase {
     public void testClassPath() throws IOException {
         try (final ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
-            assertEquals(classPath, repository.getClassPath());
+            try (final ClassPath repoCp = repository.getClassPath()) {
+                assertEquals(classPath, repoCp);
+            }
         }
     }
 

@@ -76,6 +76,7 @@ public class JdkGenericDumpTestCase {
 
         private final PathMatcher matcher;
 
+        @SuppressWarnings("resource") // FileSystems.getDefault() returns a singleton
         ClassParserFilesVisitor(final String pattern) {
             matcher = FileSystems.getDefault().getPathMatcher("glob:" + pattern);
         }
@@ -85,8 +86,7 @@ public class JdkGenericDumpTestCase {
             if (name != null && matcher.matches(name)) {
                 try (final InputStream inputStream = Files.newInputStream(path)) {
                     final ClassParser classParser = new ClassParser(inputStream, name.toAbsolutePath().toString());
-                    final JavaClass javaClass = classParser.parse();
-                    assertNotNull(javaClass);
+                    assertNotNull(classParser.parse());
                 }
 
             }
