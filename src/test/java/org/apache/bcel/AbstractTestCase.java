@@ -19,6 +19,8 @@
 package org.apache.bcel;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,9 +65,12 @@ public abstract class AbstractTestCase
 
     public SyntheticRepository createRepos(final String cpentry)
     {
-        final ClassPath cp = new ClassPath("target" + File.separator + "testdata"
-                + File.separator + cpentry + File.separator);
-        return SyntheticRepository.getInstance(cp);
+        try (ClassPath cp = new ClassPath("target" + File.separator + "testdata"
+                + File.separator + cpentry + File.separator)) {
+            return SyntheticRepository.getInstance(cp);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     /**

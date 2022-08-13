@@ -229,8 +229,7 @@ public abstract class Repository {
      *  found
      */
     public static ClassPath.ClassFile lookupClassFile( final String class_name ) {
-        try {
-            final ClassPath path = repository.getClassPath();
+        try (final ClassPath path = repository.getClassPath()) {
             if (path == null) {
                 return null;
             }
