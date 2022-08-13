@@ -160,14 +160,13 @@ public class Package {
 
         System.out.println("Creating jar file: " + defaultJar);
 
-        // starting processing: Grab from the dependents list an add back to it
+        // starting processing: Grab from the dependents list and add back to it
         // and the allClasses list. see addDependents
         while (!dependents.isEmpty()) {
             final String name = dependents.firstKey();
             final String from = dependents.remove(name);
             if (allClasses.get(name) == null) {
-                try {
-                    final InputStream is = classPath.getInputStream(name);
+                try (final InputStream is = classPath.getInputStream(name)) {
                     clazz = new ClassParser(is, name).parse();
                     addDependents(clazz);
                 } catch (final IOException e) {

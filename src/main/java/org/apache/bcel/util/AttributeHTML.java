@@ -17,6 +17,7 @@
  */
 package org.apache.bcel.util;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
@@ -41,7 +42,7 @@ import org.apache.bcel.classfile.Utility;
 /**
  * Convert found attributes into HTML file.
  */
-final class AttributeHTML {
+final class AttributeHTML implements Closeable {
 
     private final String className; // name of current class
     private final PrintWriter printWriter; // file to write to
@@ -63,7 +64,8 @@ final class AttributeHTML {
     }
 
 
-    void close() {
+    @Override
+    public void close() {
         printWriter.println("</TABLE></BODY></HTML>");
         printWriter.close();
     }
