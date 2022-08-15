@@ -111,8 +111,8 @@ public final class ClassParser {
      * is performed by the java interpreter).
      *
      * @return Class object representing the parsed class file
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public JavaClass parse() throws IOException, ClassFormatException {
         ZipFile zip = null;
@@ -195,8 +195,8 @@ public final class ClassParser {
 
     /**
      * Reads information about the attributes of the class.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     private void readAttributes() throws IOException, ClassFormatException {
         final int attributes_count = dataInputStream.readUnsignedShort();
@@ -209,8 +209,8 @@ public final class ClassParser {
 
     /**
      * Reads information about the class and its super class.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     private void readClassInfo() throws IOException, ClassFormatException {
         accessFlags = dataInputStream.readUnsignedShort();
@@ -231,8 +231,8 @@ public final class ClassParser {
 
     /**
      * Reads constant pool entries.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     private void readConstantPool() throws IOException, ClassFormatException {
         constantPool = new ConstantPool(dataInputStream);
@@ -241,8 +241,8 @@ public final class ClassParser {
 
     /**
      * Reads information about the fields of the class, i.e., its variables.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     private void readFields() throws IOException, ClassFormatException {
         final int fields_count = dataInputStream.readUnsignedShort();
@@ -257,8 +257,8 @@ public final class ClassParser {
     /**
      * Checks whether the header of the file is ok.
      * Of course, this has to be the first action on successive file reads.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     private void readID() throws IOException, ClassFormatException {
         if (dataInputStream.readInt() != Const.JVM_CLASSFILE_MAGIC) {
@@ -269,8 +269,8 @@ public final class ClassParser {
 
     /**
      * Reads information about the interfaces implemented by this class.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     private void readInterfaces() throws IOException, ClassFormatException {
         final int interfaces_count = dataInputStream.readUnsignedShort();
@@ -283,10 +283,10 @@ public final class ClassParser {
 
     /**
      * Reads information about the methods of the class.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
-    private void readMethods() throws IOException, ClassFormatException {
+    private void readMethods() throws IOException {
         final int methods_count = dataInputStream.readUnsignedShort();
         methods = new Method[methods_count];
         for (int i = 0; i < methods_count; i++) {
@@ -297,8 +297,8 @@ public final class ClassParser {
 
     /**
      * Reads major and minor version of compiler which created the file.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     private void readVersion() throws IOException, ClassFormatException {
         minor = dataInputStream.readUnsignedShort();

@@ -194,7 +194,7 @@ public final class ConstantUtf8 extends Constant {
      * Initializes instance from file data.
      *
      * @param dataInput Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ConstantUtf8(final DataInput dataInput) throws IOException {
         super(Const.CONSTANT_Utf8);
@@ -226,7 +226,7 @@ public final class ConstantUtf8 extends Constant {
      * Dumps String in Utf8 format to file stream.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {

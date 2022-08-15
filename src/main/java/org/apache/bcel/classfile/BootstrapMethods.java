@@ -61,7 +61,7 @@ public class BootstrapMethods extends Attribute {
      * @param length Content length in bytes
      * @param input Input stream
      * @param constant_pool Array of constants
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     BootstrapMethods(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, (BootstrapMethod[]) null, constant_pool);
@@ -100,7 +100,7 @@ public class BootstrapMethods extends Attribute {
      * Dump bootstrap methods attribute to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public final void dump(final DataOutputStream file) throws IOException {

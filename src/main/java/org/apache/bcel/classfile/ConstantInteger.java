@@ -46,7 +46,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
      * Initialize instance from file data.
      *
      * @param file Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ConstantInteger(final DataInput file) throws IOException {
         this(file.readInt());
@@ -79,7 +79,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
      * Dump constant integer to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump( final DataOutputStream file ) throws IOException {

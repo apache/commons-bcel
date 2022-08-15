@@ -48,7 +48,7 @@ public final class ConstantNameAndType extends Constant {
      * Initialize instance from file data.
      *
      * @param file Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ConstantNameAndType(final DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort());
@@ -83,7 +83,7 @@ public final class ConstantNameAndType extends Constant {
      * Dump name and signature index to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump( final DataOutputStream file ) throws IOException {

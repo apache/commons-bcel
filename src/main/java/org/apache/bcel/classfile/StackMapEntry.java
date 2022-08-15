@@ -49,7 +49,7 @@ public final class StackMapEntry implements Node, Cloneable
      * Construct object from input stream.
      *
      * @param input Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     StackMapEntry(final DataInput input, final ConstantPool constantPool) throws IOException {
         this(input.readByte() & 0xFF, -1, null, null, constantPool);
@@ -176,7 +176,7 @@ public final class StackMapEntry implements Node, Cloneable
      * Dump stack map entry
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     public void dump( final DataOutputStream file ) throws IOException {
         file.write(frameType);

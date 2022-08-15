@@ -60,7 +60,7 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Construct object from file stream.
      * @param file Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     CodeException(final DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file
@@ -116,7 +116,7 @@ public final class CodeException implements Cloneable, Node, Constants {
      * Dump code exception to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     public void dump( final DataOutputStream file ) throws IOException {
         file.writeShort(startPc);

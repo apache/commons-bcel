@@ -45,7 +45,7 @@ public final class ConstantDynamic extends ConstantCP {
      * Initialize instance from file data.
      *
      * @param file Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ConstantDynamic(final DataInput file) throws IOException {
         this(file.readShort(), file.readShort());

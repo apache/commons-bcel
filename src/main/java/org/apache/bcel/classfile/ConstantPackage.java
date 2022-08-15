@@ -49,7 +49,7 @@ public final class ConstantPackage extends Constant implements ConstantObject {
      * Initialize instance from file data.
      *
      * @param file Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ConstantPackage(final DataInput file) throws IOException {
         this(file.readUnsignedShort());
@@ -83,7 +83,7 @@ public final class ConstantPackage extends Constant implements ConstantObject {
      * Dump constant package to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump( final DataOutputStream file ) throws IOException {

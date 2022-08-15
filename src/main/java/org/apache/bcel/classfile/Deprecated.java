@@ -63,7 +63,7 @@ public final class Deprecated extends Attribute {
      * @param length Content length in bytes
      * @param input Input stream
      * @param constant_pool Array of constants
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     Deprecated(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {

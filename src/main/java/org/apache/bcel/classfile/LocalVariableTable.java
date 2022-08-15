@@ -41,7 +41,7 @@ public class LocalVariableTable extends Attribute {
      * @param length Content length in bytes
      * @param input Input stream
      * @param constant_pool Array of constants
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     LocalVariableTable(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
@@ -108,7 +108,7 @@ public class LocalVariableTable extends Attribute {
      * Dump local variable table attribute to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public final void dump( final DataOutputStream file ) throws IOException {

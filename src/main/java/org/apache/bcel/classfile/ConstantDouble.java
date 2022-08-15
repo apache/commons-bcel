@@ -46,7 +46,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      * Initialize instance from file data.
      *
      * @param file Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ConstantDouble(final DataInput file) throws IOException {
         this(file.readDouble());
@@ -79,7 +79,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      * Dump constant double to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump( final DataOutputStream file ) throws IOException {

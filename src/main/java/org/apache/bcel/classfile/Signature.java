@@ -168,7 +168,7 @@ public final class Signature extends Attribute {
      * @param length Content length in bytes
      * @param input Input stream
      * @param constant_pool Array of constants
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     Signature(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
             throws IOException {
@@ -223,7 +223,7 @@ public final class Signature extends Attribute {
      * Dump source file attribute to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump( final DataOutputStream file ) throws IOException {

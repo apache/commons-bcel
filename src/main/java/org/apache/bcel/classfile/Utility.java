@@ -930,7 +930,7 @@ public abstract class Utility {
      *
      * @param  signature    Method signature
      * @return String Array of argument types
-     * @throws ClassFormatException
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String[] methodSignatureArgumentTypes( final String signature )
             throws ClassFormatException {
@@ -944,7 +944,7 @@ public abstract class Utility {
      * @param  signature    Method signature
      * @param  chopit flag that determines whether chopping is executed or not
      * @return String Array of argument types
-     * @throws ClassFormatException
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String[] methodSignatureArgumentTypes( final String signature, final boolean chopit )
             throws ClassFormatException {
@@ -973,7 +973,7 @@ public abstract class Utility {
      *
      * @param  signature    Method signature
      * @return String representation of method return type
-     * @throws ClassFormatException
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String methodSignatureReturnType( final String signature ) throws ClassFormatException {
         return methodSignatureReturnType(signature, true);
@@ -986,7 +986,7 @@ public abstract class Utility {
      * @param  signature    Method signature
      * @param  chopit flag that determines whether chopping is executed or not
      * @return String representation of method return type
-     * @throws ClassFormatException
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String methodSignatureReturnType( final String signature, final boolean chopit ) throws ClassFormatException {
         int index;
@@ -1043,7 +1043,7 @@ public abstract class Utility {
      * @param  chopit flag that determines whether chopping is executed or not
      * @param  vars the LocalVariableTable for the method
      * @return Java type declaration
-     * @throws ClassFormatException
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String methodSignatureToString( final String signature, final String name,
             final String access, final boolean chopit, final LocalVariableTable vars ) throws ClassFormatException {
@@ -1469,7 +1469,7 @@ public abstract class Utility {
      * @param  signature type signature
      * @param  chopit flag that determines whether chopping is executed or not
      * @return string containing human readable type signature
-     * @throws ClassFormatException
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      * @since 6.4.0
      */
     public static String typeSignatureToString( final String signature, final boolean chopit ) throws ClassFormatException {

@@ -55,7 +55,7 @@ public final class StackMapType implements Cloneable {
     /**
      * Construct object from file stream.
      * @param file Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     StackMapType(final DataInput file, final ConstantPool constant_pool) throws IOException {
         this(file.readByte(), -1, constant_pool);
@@ -83,7 +83,7 @@ public final class StackMapType implements Cloneable {
      * Dump type entries to file.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     public void dump( final DataOutputStream file ) throws IOException {
         file.writeByte(type);

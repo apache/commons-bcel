@@ -53,7 +53,7 @@ public class BootstrapMethod implements Cloneable {
      * Construct object from input stream.
      *
      * @param input Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     BootstrapMethod(final DataInput input) throws IOException {
         this(input.readUnsignedShort(), input.readUnsignedShort());
@@ -93,7 +93,7 @@ public class BootstrapMethod implements Cloneable {
      * Dump object to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(bootstrapMethodRef);

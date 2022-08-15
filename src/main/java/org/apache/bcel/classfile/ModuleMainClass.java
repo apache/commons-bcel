@@ -40,7 +40,7 @@ public final class ModuleMainClass extends Attribute {
      * @param length Content length in bytes
      * @param input Input stream
      * @param constantPool Array of constants
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ModuleMainClass(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, 0, constantPool);

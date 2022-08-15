@@ -70,7 +70,7 @@ public class MethodParameters extends Attribute {
      * Dump method parameters attribute to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
        public void dump(final DataOutputStream file) throws IOException {

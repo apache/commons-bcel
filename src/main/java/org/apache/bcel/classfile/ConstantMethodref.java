@@ -40,7 +40,7 @@ public final class ConstantMethodref extends ConstantCP {
      * Initialize instance from input data.
      *
      * @param input input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ConstantMethodref(final DataInput input) throws IOException {
         super(Const.CONSTANT_Methodref, input);

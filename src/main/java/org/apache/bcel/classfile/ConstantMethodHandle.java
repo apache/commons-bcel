@@ -48,7 +48,7 @@ public final class ConstantMethodHandle extends Constant {
      * Initialize instance from file data.
      *
      * @param file Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ConstantMethodHandle(final DataInput file) throws IOException {
         this(file.readUnsignedByte(), file.readUnsignedShort());
@@ -79,7 +79,7 @@ public final class ConstantMethodHandle extends Constant {
      * Dump method kind and index to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump( final DataOutputStream file ) throws IOException {

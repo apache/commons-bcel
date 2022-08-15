@@ -279,7 +279,7 @@ public class ConstantPool implements Cloneable, Node {
      * @param  tag Tag of expected constant, i.e., its type
      * @return Constant value
      * @see    Constant
-     * @throws  ClassFormatException if constant type does not match tag
+     * @throws ClassFormatException if constant type does not match tag
      */
     public Constant getConstant( final int index, final byte tag ) throws ClassFormatException {
         final Constant c = getConstant(index);

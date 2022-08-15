@@ -45,8 +45,8 @@ public class MethodParameter implements Cloneable {
      * Construct object from input stream.
      *
      * @param input Input stream
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     MethodParameter(final DataInput input) throws IOException {
         nameIndex = input.readUnsignedShort();
@@ -73,7 +73,7 @@ public class MethodParameter implements Cloneable {
      * Dump object to file stream on binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(nameIndex);

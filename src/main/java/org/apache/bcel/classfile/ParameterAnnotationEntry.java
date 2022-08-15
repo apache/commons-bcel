@@ -53,7 +53,7 @@ public class ParameterAnnotationEntry implements Node {
      * Construct object from input stream.
      *
      * @param input Input stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     ParameterAnnotationEntry(final DataInput input, final ConstantPool constant_pool) throws IOException {
         final int annotation_table_length = input.readUnsignedShort();
