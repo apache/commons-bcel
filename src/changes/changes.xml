@@ -85,6 +85,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-313" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
       <action issue="BCEL-337" type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Several fixes to the verifier #117.</action>
       <action                  type="fix" dev="ggregory" due-to="Michael Ernst, Gary Gregory">Close resources #138.</action>
+      <action                  type="fix" dev="ggregory" due-to="Alexander Kriegisch, Gary Gregory">Improve condy (constant dynamic) support #139.</action>
       <!-- ADD -->
       <action                  type="fix" dev="ggregory">Add github/codeql-action.</action>
       <!-- UPDATES -->
