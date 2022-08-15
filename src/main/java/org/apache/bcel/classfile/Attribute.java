@@ -104,12 +104,11 @@ public abstract class Attribute implements Cloneable, Node {
      * @param file Input stream
      * @param constant_pool Array of constants
      * @return Attribute
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException if an I/O error occurs.
      * @since 6.0
      */
     public static Attribute readAttribute(final DataInput file, final ConstantPool constant_pool)
-            throws IOException, ClassFormatException
+            throws IOException
     {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via `name_index' indirection
@@ -216,11 +215,10 @@ public abstract class Attribute implements Cloneable, Node {
      * @param file Input stream
      * @param constant_pool Array of constants
      * @return Attribute
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException if an I/O error occurs.
      */
     public static Attribute readAttribute(final DataInputStream file, final ConstantPool constant_pool)
-            throws IOException, ClassFormatException
+            throws IOException
     {
         return readAttribute((DataInput) file, constant_pool);
     }
@@ -309,7 +307,7 @@ public abstract class Attribute implements Cloneable, Node {
      *
      * @param file
      *            Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException
     {

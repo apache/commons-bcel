@@ -108,7 +108,7 @@ public final class Deprecated extends Attribute {
      * Dump source file attribute to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void dump( final DataOutputStream file ) throws IOException {

@@ -565,33 +565,23 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Look for attributes representing annotations and unpack them.
      */
-    private AnnotationEntryGen[] unpackAnnotations(final Attribute[] attrs)
-    {
+    private AnnotationEntryGen[] unpackAnnotations(final Attribute[] attrs) {
         final List<AnnotationEntryGen> annotationGenObjs = new ArrayList<>();
         for (final Attribute attr : attrs) {
-            if (attr instanceof RuntimeVisibleAnnotations)
-            {
+            if (attr instanceof RuntimeVisibleAnnotations) {
                 final RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
-                final AnnotationEntry[] annos = rva.getAnnotationEntries();
-                for (final AnnotationEntry a : annos) {
-                    annotationGenObjs.add(new AnnotationEntryGen(a,
-                            getConstantPool(), false));
+                for (final AnnotationEntry a : rva.getAnnotationEntries()) {
+                    annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false));
+                }
+            } else if (attr instanceof RuntimeInvisibleAnnotations) {
+                final RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
+                for (final AnnotationEntry a : ria.getAnnotationEntries()) {
+                    annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false));
                 }
             }
-            else
-                if (attr instanceof RuntimeInvisibleAnnotations)
-                {
-                    final RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
-                    final AnnotationEntry[] annos = ria.getAnnotationEntries();
-                    for (final AnnotationEntry a : annos) {
-                        annotationGenObjs.add(new AnnotationEntryGen(a,
-                                getConstantPool(), false));
-                    }
-                }
         }
         return annotationGenObjs.toArray(AnnotationEntryGen.EMPTY_ARRAY);
     }
-
 
     /** Call notify() method on all observers. This method is not called
      * automatically whenever the state has changed, but has to be

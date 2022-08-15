@@ -21,13 +21,13 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
 
 /**
- * represents one annotation in the annotation table
+ * Represents one annotation in the annotation table
  *
  * @since 6.0
  */
@@ -37,36 +37,32 @@ public class AnnotationEntry implements Node {
 
     public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attrs) {
         // Find attributes that contain annotation data
-        final List<AnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
-        for (final Attribute attribute : attrs) {
-            if (attribute instanceof Annotations) {
-                final Annotations runtimeAnnotations = (Annotations) attribute;
-                Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getAnnotationEntries());
-            }
-        }
-        return accumulatedAnnotations.toArray(AnnotationEntry.EMPTY_ARRAY);
+        return Stream.of(attrs).filter(Annotations.class::isInstance)
+            .flatMap(e -> Stream.of(((Annotations) e).getAnnotationEntries())).toArray(AnnotationEntry[]::new);
     }
-    /*
+
+    /**
      * Factory method to create an AnnotionEntry from a DataInput
      *
      * @param input
      * @param constantPool
      * @param isRuntimeVisible
      * @return the entry
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
-    public static AnnotationEntry read(final DataInput input, final ConstantPool constant_pool, final boolean isRuntimeVisible) throws IOException {
+    public static AnnotationEntry read(final DataInput input, final ConstantPool constantPool, final boolean isRuntimeVisible) throws IOException {
 
-        final AnnotationEntry annotationEntry = new AnnotationEntry(input.readUnsignedShort(), constant_pool, isRuntimeVisible);
+        final AnnotationEntry annotationEntry = new AnnotationEntry(input.readUnsignedShort(), constantPool, isRuntimeVisible);
         final int num_element_value_pairs = input.readUnsignedShort();
         annotationEntry.elementValuePairs = new ArrayList<>();
         for (int i = 0; i < num_element_value_pairs; i++) {
             annotationEntry.elementValuePairs.add(
-                    new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constant_pool),
-                    constant_pool));
+                    new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constantPool),
+                    constantPool));
         }
         return annotationEntry;
     }
+
     private final int typeIndex;
 
     private final ConstantPool constantPool;

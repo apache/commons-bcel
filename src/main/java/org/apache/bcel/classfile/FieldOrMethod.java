@@ -73,16 +73,15 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * Construct object from file stream.
      * @param file Input stream
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException if an I/O error occurs.
      */
-    protected FieldOrMethod(final DataInput file, final ConstantPool constant_pool) throws IOException, ClassFormatException {
+    protected FieldOrMethod(final DataInput file, final ConstantPool constantPool) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null,
-                constant_pool);
+                constantPool);
         final int attributes_count = file.readUnsignedShort();
         attributes = new Attribute[attributes_count];
         for (int i = 0; i < attributes_count; i++) {
-            attributes[i] = Attribute.readAttribute(file, constant_pool);
+            attributes[i] = Attribute.readAttribute(file, constantPool);
         }
         this.attributes_count = attributes_count; // init deprecated field
     }
@@ -91,14 +90,12 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * Construct object from file stream.
      * @param file Input stream
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException if an I/O error occurs.
      * @deprecated (6.0) Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
      */
     @java.lang.Deprecated
-    protected FieldOrMethod(final DataInputStream file, final ConstantPool constant_pool) throws IOException,
-            ClassFormatException {
-        this((DataInput) file, constant_pool);
+    protected FieldOrMethod(final DataInputStream file, final ConstantPool constantPool) throws IOException {
+        this((DataInput) file, constantPool);
     }
 
     /**
@@ -131,17 +128,17 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * @return deep copy of this field
      */
-    protected FieldOrMethod copy_( final ConstantPool _constant_pool ) {
+    protected FieldOrMethod copy_(final ConstantPool constantPool) {
         FieldOrMethod c = null;
 
         try {
-          c = (FieldOrMethod)clone();
-        } catch(final CloneNotSupportedException e) {
+            c = (FieldOrMethod) clone();
+        } catch (final CloneNotSupportedException e) {
             // ignored, but will cause NPE ...
         }
 
-        c.constant_pool    = constant_pool;
-        c.attributes       = new Attribute[attributes.length];
+        c.constant_pool = constant_pool;
+        c.attributes = new Attribute[attributes.length];
         c.attributes_count = attributes_count; // init deprecated field
 
         for (int i = 0; i < attributes.length; i++) {
@@ -156,7 +153,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * Dump object to file stream on binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(super.getAccessFlags());

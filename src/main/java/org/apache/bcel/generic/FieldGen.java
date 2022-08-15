@@ -20,6 +20,7 @@ package org.apache.bcel.generic;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -94,10 +95,9 @@ public class FieldGen extends FieldGenOrMethodGen {
             if (attr instanceof ConstantValue) {
                 setValue(((ConstantValue) attr).getConstantValueIndex());
             } else if (attr instanceof Annotations) {
-                final Annotations runtimeAnnotations = (Annotations)attr;
-                final AnnotationEntry[] annotationEntries = runtimeAnnotations.getAnnotationEntries();
-                for (final AnnotationEntry element : annotationEntries) {
-                    addAnnotationEntry(new AnnotationEntryGen(element,cp,false));
+                final Annotations runtimeAnnotations = (Annotations) attr;
+                for (final AnnotationEntry element : runtimeAnnotations.getAnnotationEntries()) {
+                    addAnnotationEntry(new AnnotationEntryGen(element, cp, false));
                 }
             } else {
                 addAttribute(attr);
@@ -125,11 +125,8 @@ public class FieldGen extends FieldGenOrMethodGen {
 
 
     private void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
-          final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
-        for (final Attribute attr : attrs) {
-            addAttribute(attr);
-        }
-      }
+        Stream.of(AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries())).forEach(this::addAttribute);
+    }
 
 
     private int addConstant() {
