@@ -27,8 +27,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Verify that a constant pool containing dynamic constants (condy) - in this case created by JaCoCo -
  * can be read and the corresponding constant is found after parsing.
- *
- * @author Alexander Kriegisch
  */
 public class JiraBcel362TestCase extends AbstractTestCase {
     @Test
