@@ -21,8 +21,8 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.bcel.Const;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This class is derived from <em>Attribute</em> and represents the list of packages that are exported or opened by the Module attribute.

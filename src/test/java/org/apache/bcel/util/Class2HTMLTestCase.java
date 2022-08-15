@@ -17,13 +17,13 @@
 
 package org.apache.bcel.util;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.FileInputStream;
 
 import org.apache.bcel.classfile.ClassParser;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Class2HTMLTestCase {
 

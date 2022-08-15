@@ -28,7 +28,24 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.classfile.*;
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantCP;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantInvokeDynamic;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantMethodHandle;
+import org.apache.bcel.classfile.ConstantMethodType;
+import org.apache.bcel.classfile.ConstantModule;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPackage;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.Node;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * This class represents the constant pool, i.e., a table of constants, of

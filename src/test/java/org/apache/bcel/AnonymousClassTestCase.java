@@ -18,11 +18,11 @@
 
 package org.apache.bcel;
 
-import org.apache.bcel.classfile.JavaClass;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.apache.bcel.classfile.JavaClass;
+import org.junit.jupiter.api.Test;
 
 public class AnonymousClassTestCase extends AbstractTestCase
 {

@@ -18,6 +18,9 @@
 
 package org.apache.bcel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -32,9 +35,6 @@ import org.apache.bcel.generic.EnumElementValueGen;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.SimpleElementValueGen;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ElementValueGenTestCase extends AbstractTestCase
 {

@@ -17,6 +17,8 @@
  */
 package org.apache.bcel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Iterator;
 
 import org.apache.bcel.classfile.JavaClass;
@@ -25,8 +27,6 @@ import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.util.InstructionFinder;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InstructionFinderTestCase extends AbstractTestCase
 {

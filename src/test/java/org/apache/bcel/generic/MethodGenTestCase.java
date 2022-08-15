@@ -17,14 +17,6 @@
 
 package org.apache.bcel.generic;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.classfile.Method;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -32,6 +24,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.junit.jupiter.api.Test;
 
 public class MethodGenTestCase {
 

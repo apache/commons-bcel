@@ -18,13 +18,13 @@
 
 package org.apache.bcel.util;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.bcel.AbstractTestCase;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ClassPathTestCase extends AbstractTestCase {
 

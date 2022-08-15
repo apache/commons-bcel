@@ -24,10 +24,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.StringTokenizer;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 import org.apache.bcel.Const;

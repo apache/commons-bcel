@@ -18,12 +18,12 @@
 package org.apache.bcel.generic;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.List;
-import java.util.Stack;
-import java.util.Hashtable;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Objects;
+import java.util.Stack;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AnnotationEntry;

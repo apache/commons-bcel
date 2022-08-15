@@ -17,11 +17,11 @@
  */
 package org.apache.bcel.util;
 
-import org.apache.bcel.classfile.ClassParser;
-import org.apache.bcel.classfile.JavaClass;
-
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.JavaClass;
 
 /**
  * This abstract class provides a logic of a loading {@link JavaClass} objects class names via {@link ClassPath}.

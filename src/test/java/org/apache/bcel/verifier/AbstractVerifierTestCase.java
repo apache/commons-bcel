@@ -18,11 +18,11 @@
 
 package org.apache.bcel.verifier;
 
-import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.JavaClass;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
 
 public abstract class AbstractVerifierTestCase {
 

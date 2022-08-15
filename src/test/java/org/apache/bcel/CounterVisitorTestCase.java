@@ -18,10 +18,10 @@
 
 package org.apache.bcel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase
 {

@@ -18,14 +18,14 @@
 
 package org.apache.bcel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.apache.bcel.classfile.AnnotationDefault;
 import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.SimpleElementValue;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AnnotationDefaultAttributeTestCase extends AbstractTestCase
 {

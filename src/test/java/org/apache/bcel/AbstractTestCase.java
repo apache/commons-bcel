@@ -18,6 +18,8 @@
 
 package org.apache.bcel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -36,8 +38,6 @@ import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.SimpleElementValueGen;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class AbstractTestCase
 {

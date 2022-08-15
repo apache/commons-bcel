@@ -17,12 +17,12 @@
 
 package org.apache.bcel.generic;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Verify that a constant pool containing dynamic constants (condy) - in this case created by JaCoCo -

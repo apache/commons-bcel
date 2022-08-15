@@ -18,6 +18,9 @@
 
 package org.apache.bcel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -27,9 +30,6 @@ import org.apache.bcel.classfile.EnclosingMethod;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class EnclosingMethodAttributeTestCase extends AbstractTestCase
 {

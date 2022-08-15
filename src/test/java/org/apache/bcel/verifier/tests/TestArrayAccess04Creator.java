@@ -18,6 +18,8 @@
 
 package org.apache.bcel.verifier.tests;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -31,8 +33,6 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.PUSH;
 import org.apache.bcel.generic.Type;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestArrayAccess04Creator extends TestCreator {
   private final InstructionFactory _factory;

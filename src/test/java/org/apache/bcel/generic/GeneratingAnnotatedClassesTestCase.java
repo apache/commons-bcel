@@ -17,6 +17,10 @@
  */
 package org.apache.bcel.generic;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +37,6 @@ import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.SimpleElementValue;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * The program that some of the tests generate looks like this:

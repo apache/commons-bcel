@@ -17,6 +17,10 @@
 
 package org.apache.bcel.generic;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -32,10 +36,6 @@ import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnnotationGenTestCase extends AbstractTestCase
 {

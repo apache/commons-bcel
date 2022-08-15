@@ -17,14 +17,14 @@
 
 package org.apache.bcel.classfile;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ConstantPoolTestCase extends AbstractTestCase {
 
