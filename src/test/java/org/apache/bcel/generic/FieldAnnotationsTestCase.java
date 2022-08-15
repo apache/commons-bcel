@@ -66,10 +66,10 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     @Test
     public void testFieldAnnotationEntrys() throws ClassNotFoundException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnnotatedFields");
         // TODO L...;?
-        checkAnnotatedField(clazz, "i", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "1");
-        checkAnnotatedField(clazz, "s", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "2");
+        checkAnnotatedField(clazz, "i", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "1");
+        checkAnnotatedField(clazz, "s", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "2");
     }
 
     /**
@@ -79,16 +79,16 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     public void testFieldAnnotationEntrysReadWrite() throws ClassNotFoundException,
             IOException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
-        checkAnnotatedField(clazz, "i", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "1");
-        checkAnnotatedField(clazz, "s", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "2");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnnotatedFields");
+        checkAnnotatedField(clazz, "i", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "1");
+        checkAnnotatedField(clazz, "s", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "2");
         // Write it out
         final File tfile = createTestdataFile("AnnotatedFields.class");
         clazz.dump(tfile);
         final SyntheticRepository repos2 = createRepos(".");
         repos2.loadClass("AnnotatedFields");
-        checkAnnotatedField(clazz, "i", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "1");
-        checkAnnotatedField(clazz, "s", "L"+PACKAGE_BASE_SIG+"/data/SimpleAnnotation;", "id", "2");
+        checkAnnotatedField(clazz, "i", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "1");
+        checkAnnotatedField(clazz, "s", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "2");
         assertTrue(tfile.delete());
     }
 
@@ -101,7 +101,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             throws ClassNotFoundException
     {
         final boolean dbg = false;
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnnotatedFields");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnnotatedFields");
         final ClassGen clg = new ClassGen(clazz);
         Field f = clg.getFields()[0];
         if (dbg) {

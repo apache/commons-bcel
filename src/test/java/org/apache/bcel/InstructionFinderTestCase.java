@@ -33,7 +33,7 @@ public class InstructionFinderTestCase extends AbstractTestCase
     @Test
     public void testSearchAll() throws Exception
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".util.InstructionFinder");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".util.InstructionFinder");
         final Method[] methods = clazz.getMethods();
         Method searchM = null;
         for (final Method m : methods)

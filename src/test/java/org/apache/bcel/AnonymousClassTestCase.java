@@ -30,7 +30,7 @@ public class AnonymousClassTestCase extends AbstractTestCase
     public void testAnonymousInnerClassIsAnonymous()
             throws ClassNotFoundException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest$1");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnonymousClassTest$1");
         assertTrue(clazz.isAnonymous(), "anonymous inner classes are anonymous");
         assertTrue(clazz.isNested(), "anonymous inner classes are anonymous");
     }
@@ -39,7 +39,7 @@ public class AnonymousClassTestCase extends AbstractTestCase
     public void testNamedInnerClassIsNotAnonymous()
             throws ClassNotFoundException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest$X");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnonymousClassTest$X");
         assertFalse(clazz.isAnonymous(), "regular inner classes are not anonymous");
         assertTrue(clazz.isNested(), "regular inner classes are nested");
     }
@@ -47,7 +47,7 @@ public class AnonymousClassTestCase extends AbstractTestCase
     @Test
     public void testRegularClassIsNotAnonymous() throws ClassNotFoundException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnonymousClassTest");
         assertFalse(clazz.isAnonymous(), "regular outer classes are not anonymous");
         assertFalse(clazz.isNested(), "regular outer classes are not nested");
     }
@@ -56,7 +56,7 @@ public class AnonymousClassTestCase extends AbstractTestCase
     public void testStaticInnerClassIsNotAnonymous()
             throws ClassNotFoundException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AnonymousClassTest$Y");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnonymousClassTest$Y");
         assertFalse(clazz.isAnonymous(), "regular static inner classes are not anonymous");
         assertTrue(clazz.isNested(), "regular static inner classes are nested");
     }

@@ -40,7 +40,7 @@ public class TestArrayAccess04Creator extends TestCreator {
   private final ClassGen           _cg;
 
   public TestArrayAccess04Creator() {
-    _cg = new ClassGen(TEST_PACKAGE+".TestArrayAccess04", "java.lang.Object", "TestArrayAccess04.java",
+    _cg = new ClassGen(TEST_PACKAGE + ".TestArrayAccess04", "java.lang.Object", "TestArrayAccess04.java",
             Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {  });
 
     _cp = _cg.getConstantPool();
@@ -57,7 +57,7 @@ public void create(final OutputStream out) throws IOException {
   private void createMethod_0() {
     final InstructionList il = new InstructionList();
     final MethodGen method = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  }, "<init>",
-            TEST_PACKAGE+".TestArrayAccess04", il, _cp);
+            TEST_PACKAGE + ".TestArrayAccess04", il, _cp);
 
     final InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
     assertNotNull(ih_0); // TODO why is this not used
@@ -73,7 +73,7 @@ public void create(final OutputStream out) throws IOException {
   private void createMethod_1() {
     final InstructionList il = new InstructionList();
     final MethodGen method = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.VOID, new Type[] { Type.OBJECT },
-            new String[] { "arg0" }, "test", TEST_PACKAGE+".TestArrayAccess04", il, _cp);
+            new String[] { "arg0" }, "test", TEST_PACKAGE + ".TestArrayAccess04", il, _cp);
 
     final InstructionHandle ih_0 = il.append(new PUSH(_cp, 1));
     assertNotNull(ih_0); // TODO why is this not used

@@ -40,7 +40,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
     public void testAttributeSerializtion() throws ClassNotFoundException,
             IOException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AttributeTestClassEM02$1");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM02$1");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
         assertEquals(1, encMethodAttrs.length, "Wrong number of EnclosingMethod attributes");
@@ -67,7 +67,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
     public void testCheckClassLevelNamedInnerClass()
             throws ClassNotFoundException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AttributeTestClassEM02$1");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM02$1");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
         assertEquals(1, encMethodAttrs.length, "Expected 1 EnclosingMethod attribute but found " + encMethodAttrs.length);
@@ -86,7 +86,7 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
     public void testCheckMethodLevelNamedInnerClass()
             throws ClassNotFoundException
     {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME+".data.AttributeTestClassEM01$1S");
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM01$1S");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
         assertEquals(1, encMethodAttrs.length, "Wrong number of EnclosingMethod attributes");

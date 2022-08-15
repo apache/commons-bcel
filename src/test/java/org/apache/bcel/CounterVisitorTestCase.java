@@ -28,7 +28,7 @@ public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase
     @Override
     protected JavaClass getTestClass() throws ClassNotFoundException
     {
-        return getTestClass(PACKAGE_BASE_NAME+".data.MarkedType");
+        return getTestClass(PACKAGE_BASE_NAME + ".data.MarkedType");
     }
 
     @Test

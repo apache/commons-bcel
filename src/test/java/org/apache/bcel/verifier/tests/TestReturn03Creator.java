@@ -38,7 +38,7 @@ public class TestReturn03Creator extends TestCreator {
   private final ClassGen           _cg;
 
   public TestReturn03Creator() {
-    _cg = new ClassGen(TEST_PACKAGE+".TestReturn03", "java.lang.Object", "TestReturn03.java",
+    _cg = new ClassGen(TEST_PACKAGE + ".TestReturn03", "java.lang.Object", "TestReturn03.java",
             Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {  });
 
     _cp = _cg.getConstantPool();
@@ -55,7 +55,7 @@ public void create(final OutputStream out) throws IOException {
   private void createMethod_0() {
     final InstructionList il = new InstructionList();
     final MethodGen method = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  },
-            "<init>", TEST_PACKAGE+".TestReturn03", il, _cp);
+            "<init>", TEST_PACKAGE + ".TestReturn03", il, _cp);
 
     final InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
     assertNotNull(ih_0); // TODO why is this not used
@@ -71,7 +71,7 @@ public void create(final OutputStream out) throws IOException {
   private void createMethod_1() {
     final InstructionList il = new InstructionList();
     final MethodGen method = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, Type.NO_ARGS,
-            new String[] {  }, "test3", TEST_PACKAGE+".TestReturn03", il, _cp);
+            new String[] {  }, "test3", TEST_PACKAGE + ".TestReturn03", il, _cp);
 
     final InstructionHandle ih_0 = il.append(InstructionConst.ACONST_NULL);
     assertNotNull(ih_0); // TODO why is this not used
