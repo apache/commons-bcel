@@ -69,15 +69,14 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     FieldOrMethod() {
     }
 
-
     /**
      * Construct object from file stream.
+     * 
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      */
     protected FieldOrMethod(final DataInput file, final ConstantPool constantPool) throws IOException {
-        this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null,
-                constantPool);
+        this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null, constantPool);
         final int attributes_count = file.readUnsignedShort();
         attributes = new Attribute[attributes_count];
         for (int i = 0; i < attributes_count; i++) {
@@ -86,9 +85,9 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         this.attributes_count = attributes_count; // init deprecated field
     }
 
-
     /**
      * Construct object from file stream.
+     * 
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      * @deprecated (6.0) Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
@@ -99,14 +98,12 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     }
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
+     * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a
+     * physical copy.
      */
     protected FieldOrMethod(final FieldOrMethod c) {
-        this(c.getAccessFlags(), c.getNameIndex(), c.getSignatureIndex(), c.getAttributes(), c
-                .getConstantPool());
+        this(c.getAccessFlags(), c.getNameIndex(), c.getSignatureIndex(), c.getAttributes(), c.getConstantPool());
     }
-
 
     /**
      * @param access_flags Access rights of method
@@ -115,15 +112,14 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @param attributes Collection of attributes
      * @param constant_pool Array of constants
      */
-    protected FieldOrMethod(final int access_flags, final int name_index, final int signature_index,
-            final Attribute[] attributes, final ConstantPool constant_pool) {
+    protected FieldOrMethod(final int access_flags, final int name_index, final int signature_index, final Attribute[] attributes,
+        final ConstantPool constant_pool) {
         super(access_flags);
         this.name_index = name_index;
         this.signature_index = signature_index;
         this.constant_pool = constant_pool;
         setAttributes(attributes);
     }
-
 
     /**
      * @return deep copy of this field
@@ -148,7 +144,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         return c;
     }
 
-
     /**
      * Dump object to file stream on binary format.
      *
@@ -167,7 +162,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         }
     }
 
-
     /**
      * @return Annotations on the field or method
      * @since 6.0
@@ -180,14 +174,12 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         return annotationEntries;
     }
 
-
     /**
      * @return Collection of object attributes.
      */
     public final Attribute[] getAttributes() {
         return attributes;
     }
-
 
     /**
      * @return Constant pool used by this object.
@@ -196,24 +188,19 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         return constant_pool;
     }
 
-
     /**
-     * Hunts for a signature attribute on the member and returns its contents.  So where the 'regular' signature
-     * may be (Ljava/util/Vector;)V the signature attribute may in fact say 'Ljava/lang/Vector&lt;Ljava/lang/String&gt;;'
-     * Coded for performance - searches for the attribute only when requested - only searches for it once.
+     * Hunts for a signature attribute on the member and returns its contents. So where the 'regular' signature may be
+     * (Ljava/util/Vector;)V the signature attribute may in fact say 'Ljava/lang/Vector&lt;Ljava/lang/String&gt;;' Coded for
+     * performance - searches for the attribute only when requested - only searches for it once.
+     * 
      * @since 6.0
      */
-    public final String getGenericSignature()
-    {
-        if (!searchedForSignatureAttribute)
-        {
+    public final String getGenericSignature() {
+        if (!searchedForSignatureAttribute) {
             boolean found = false;
-            for (int i = 0; !found && i < attributes.length; i++)
-            {
-                if (attributes[i] instanceof Signature)
-                {
-                    signatureAttributeString = ((Signature) attributes[i])
-                            .getSignature();
+            for (int i = 0; !found && i < attributes.length; i++) {
+                if (attributes[i] instanceof Signature) {
+                    signatureAttributeString = ((Signature) attributes[i]).getSignature();
                     found = true;
                 }
             }
@@ -221,7 +208,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         }
         return signatureAttributeString;
     }
-
 
     /**
      * @return Name of object, i.e., method name or field name
@@ -232,14 +218,12 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         return c.getBytes();
     }
 
-
     /**
      * @return Index in constant pool of object's name.
      */
     public final int getNameIndex() {
         return name_index;
     }
-
 
     /**
      * @return String representation of object's type signature (java style)
@@ -250,7 +234,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         return c.getBytes();
     }
 
-
     /**
      * @return Index in constant pool of field signature.
      */
@@ -258,34 +241,32 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         return signature_index;
     }
 
-
     /**
      * @param attributes Collection of object attributes.
      */
-    public final void setAttributes( final Attribute[] attributes ) {
+    public final void setAttributes(final Attribute[] attributes) {
         this.attributes = attributes;
         this.attributes_count = attributes != null ? attributes.length : 0; // init deprecated field
     }
 
-
     /**
      * @param constant_pool Constant pool to be used for this object.
      */
-    public final void setConstantPool( final ConstantPool constant_pool ) {
+    public final void setConstantPool(final ConstantPool constant_pool) {
         this.constant_pool = constant_pool;
     }
 
     /**
      * @param name_index Index in constant pool of object's name.
      */
-    public final void setNameIndex( final int name_index ) {
+    public final void setNameIndex(final int name_index) {
         this.name_index = name_index;
     }
 
     /**
      * @param signature_index Index in constant pool of field signature.
      */
-    public final void setSignatureIndex( final int signature_index ) {
+    public final void setSignatureIndex(final int signature_index) {
         this.signature_index = signature_index;
     }
 }

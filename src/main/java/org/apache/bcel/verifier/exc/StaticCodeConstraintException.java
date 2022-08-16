@@ -17,16 +17,14 @@
  */
 package org.apache.bcel.verifier.exc;
 
-
 /**
- * Instances of this class are thrown by BCEL's class file verifier "JustIce" when
- * a class file to verify does not pass the verification pass 3 because of a violation
- * of a static constraint as described in the Java Virtual Machine Specification,
- * 2nd edition, 4.8.1, pages 133-137. The static constraints checking part of pass 3
- * is called pass 3a in JustIce.
+ * Instances of this class are thrown by BCEL's class file verifier "JustIce" when a class file to verify does not pass
+ * the verification pass 3 because of a violation of a static constraint as described in the Java Virtual Machine
+ * Specification, 2nd edition, 4.8.1, pages 133-137. The static constraints checking part of pass 3 is called pass 3a in
+ * JustIce.
  *
  */
-public abstract class StaticCodeConstraintException extends CodeConstraintException{
+public abstract class StaticCodeConstraintException extends CodeConstraintException {
     private static final long serialVersionUID = 3858523065007725128L;
 
     public StaticCodeConstraintException(final String message) {

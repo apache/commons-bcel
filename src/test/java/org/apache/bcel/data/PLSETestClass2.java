@@ -18,8 +18,7 @@
 
 package org.apache.bcel.data;
 
-public class PLSETestClass2
-{
+public class PLSETestClass2 {
     public static void main(final String[] args) {
         int t = 0;
 

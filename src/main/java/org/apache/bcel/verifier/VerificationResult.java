@@ -18,15 +18,14 @@
 package org.apache.bcel.verifier;
 
 /**
- * A VerificationResult is what a PassVerifier returns
- * after verifying.
+ * A VerificationResult is what a PassVerifier returns after verifying.
  *
  */
 public class VerificationResult {
 
     /**
-     * Constant to indicate verification has not been tried yet.
-     * This happens if some earlier verification pass did not return VERIFIED_OK.
+     * Constant to indicate verification has not been tried yet. This happens if some earlier verification pass did not
+     * return VERIFIED_OK.
      */
     public static final int VERIFIED_NOTYET = 0;
 
@@ -37,8 +36,8 @@ public class VerificationResult {
     public static final int VERIFIED_REJECTED = 2;
 
     /**
-     * This string is the canonical message for verifications that have not been tried yet.
-     * This happens if some earlier verification pass did not return {@link #VERIFIED_OK}.
+     * This string is the canonical message for verifications that have not been tried yet. This happens if some earlier
+     * verification pass did not return {@link #VERIFIED_OK}.
      */
     private static final String VERIFIED_NOTYET_MSG = "Not yet verified.";
 
@@ -46,8 +45,8 @@ public class VerificationResult {
     private static final String VERIFIED_OK_MSG = "Passed verification.";
 
     /**
-     * Canonical VerificationResult for not-yet-tried verifications.
-     * This happens if some earlier verification pass did not return {@link #VERIFIED_OK}.
+     * Canonical VerificationResult for not-yet-tried verifications. This happens if some earlier verification pass did not
+     * return {@link #VERIFIED_OK}.
      */
     public static final VerificationResult VR_NOTYET = new VerificationResult(VERIFIED_NOTYET, VERIFIED_NOTYET_MSG);
 
@@ -60,19 +59,17 @@ public class VerificationResult {
     /** The detailed message. */
     private final String detailMessage;
 
-
     /** The usual constructor. */
     public VerificationResult(final int status, final String message) {
         numeric = status;
         detailMessage = message;
     }
 
-
     /**
      * Returns if two VerificationResult instances are equal.
      */
     @Override
-    public boolean equals( final Object o ) {
+    public boolean equals(final Object o) {
         if (!(o instanceof VerificationResult)) {
             return false;
         }
@@ -80,21 +77,17 @@ public class VerificationResult {
         return other.numeric == this.numeric && other.detailMessage.equals(this.detailMessage);
     }
 
-
     /** Returns a detailed message. */
     public String getMessage() {
         return detailMessage;
     }
 
-
     /**
-     * Returns one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET},
-     * {@link #VERIFIED_REJECTED} constants.
+     * Returns one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET}, {@link #VERIFIED_REJECTED} constants.
      */
     public int getStatus() {
         return numeric;
     }
-
 
     /**
      * @return a hash code value for the object.
@@ -103,7 +96,6 @@ public class VerificationResult {
     public int hashCode() {
         return numeric ^ detailMessage.hashCode();
     }
-
 
     /**
      * Returns a String representation of the VerificationResult.

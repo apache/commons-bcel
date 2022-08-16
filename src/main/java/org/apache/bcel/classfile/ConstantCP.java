@@ -24,17 +24,17 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * Abstract super class for Fieldref, Methodref, InterfaceMethodref and
- *                          InvokeDynamic constants.
+ * Abstract super class for Fieldref, Methodref, InterfaceMethodref and InvokeDynamic constants.
  *
- * @see     ConstantFieldref
- * @see     ConstantMethodref
- * @see     ConstantInterfaceMethodref
- * @see     ConstantInvokeDynamic
+ * @see ConstantFieldref
+ * @see ConstantMethodref
+ * @see ConstantInterfaceMethodref
+ * @see ConstantInvokeDynamic
  */
 public abstract class ConstantCP extends Constant {
 
-    /** References to the constants containing the class and the field signature
+    /**
+     * References to the constants containing the class and the field signature
      */
     // Note that this field is used to store the
     // bootstrap_method_attr_index of a ConstantInvokeDynamic.
@@ -51,18 +51,16 @@ public abstract class ConstantCP extends Constant {
     @java.lang.Deprecated
     protected int name_and_type_index; // TODO make private (has getter & setter)
 
-
     /**
      * Initialize instance from file data.
      *
-     * @param tag  Constant type tag
+     * @param tag Constant type tag
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      */
     ConstantCP(final byte tag, final DataInput file) throws IOException {
         this(tag, file.readUnsignedShort(), file.readUnsignedShort());
     }
-
 
     /**
      * @param class_index Reference to the class containing the field
@@ -74,14 +72,12 @@ public abstract class ConstantCP extends Constant {
         this.name_and_type_index = name_and_type_index;
     }
 
-
     /**
      * Initialize from another object.
      */
     public ConstantCP(final ConstantCP c) {
         this(c.getTag(), c.getClassIndex(), c.getNameAndTypeIndex());
     }
-
 
     /**
      * Dump constant field reference to file stream in binary format.
@@ -90,20 +86,18 @@ public abstract class ConstantCP extends Constant {
      * @throws IOException if an I/O error occurs.
      */
     @Override
-    public final void dump( final DataOutputStream file ) throws IOException {
+    public final void dump(final DataOutputStream file) throws IOException {
         file.writeByte(super.getTag());
         file.writeShort(class_index);
         file.writeShort(name_and_type_index);
     }
 
-
     /**
      * @return Class this field belongs to.
      */
-    public String getClass( final ConstantPool cp ) {
+    public String getClass(final ConstantPool cp) {
         return cp.constantToString(class_index, Const.CONSTANT_Class);
     }
-
 
     /**
      * @return Reference (index) to class this constant refers to.
@@ -112,7 +106,6 @@ public abstract class ConstantCP extends Constant {
         return class_index;
     }
 
-
     /**
      * @return Reference (index) to signature of the field.
      */
@@ -120,31 +113,27 @@ public abstract class ConstantCP extends Constant {
         return name_and_type_index;
     }
 
-
     /**
      * @param class_index points to Constant_class
      */
-    public final void setClassIndex( final int class_index ) {
+    public final void setClassIndex(final int class_index) {
         this.class_index = class_index;
     }
-
 
     /**
      * @param name_and_type_index points to Constant_NameAndType
      */
-    public final void setNameAndTypeIndex( final int name_and_type_index ) {
+    public final void setNameAndTypeIndex(final int name_and_type_index) {
         this.name_and_type_index = name_and_type_index;
     }
-
 
     /**
      * @return String representation.
      *
-     * not final as ConstantInvokeDynamic needs to modify
+     *         not final as ConstantInvokeDynamic needs to modify
      */
     @Override
     public String toString() {
-        return super.toString() + "(class_index = " + class_index + ", name_and_type_index = "
-                + name_and_type_index + ")";
+        return super.toString() + "(class_index = " + class_index + ", name_and_type_index = " + name_and_type_index + ")";
     }
 }

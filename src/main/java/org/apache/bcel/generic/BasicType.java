@@ -26,31 +26,30 @@ import org.apache.bcel.Const;
 public final class BasicType extends Type {
 
     // @since 6.0 no longer final
-    public static BasicType getType( final byte type ) {
+    public static BasicType getType(final byte type) {
         switch (type) {
-            case Const.T_VOID:
-                return VOID;
-            case Const.T_BOOLEAN:
-                return BOOLEAN;
-            case Const.T_BYTE:
-                return BYTE;
-            case Const.T_SHORT:
-                return SHORT;
-            case Const.T_CHAR:
-                return CHAR;
-            case Const.T_INT:
-                return INT;
-            case Const.T_LONG:
-                return LONG;
-            case Const.T_DOUBLE:
-                return DOUBLE;
-            case Const.T_FLOAT:
-                return FLOAT;
-            default:
-                throw new ClassGenException("Invalid type: " + type);
+        case Const.T_VOID:
+            return VOID;
+        case Const.T_BOOLEAN:
+            return BOOLEAN;
+        case Const.T_BYTE:
+            return BYTE;
+        case Const.T_SHORT:
+            return SHORT;
+        case Const.T_CHAR:
+            return CHAR;
+        case Const.T_INT:
+            return INT;
+        case Const.T_LONG:
+            return LONG;
+        case Const.T_DOUBLE:
+            return DOUBLE;
+        case Const.T_FLOAT:
+            return FLOAT;
+        default:
+            throw new ClassGenException("Invalid type: " + type);
         }
     }
-
 
     /**
      * Constructor for basic types such as int, long, `void'
@@ -65,16 +64,16 @@ public final class BasicType extends Type {
         }
     }
 
-
-    /** @return true if both type objects refer to the same type
+    /**
+     * @return true if both type objects refer to the same type
      */
     @Override
-    public boolean equals( final Object _type ) {
+    public boolean equals(final Object _type) {
         return _type instanceof BasicType ? ((BasicType) _type).getType() == this.getType() : false;
     }
 
-
-    /** @return a hash code value for the object.
+    /**
+     * @return a hash code value for the object.
      */
     @Override
     public int hashCode() {

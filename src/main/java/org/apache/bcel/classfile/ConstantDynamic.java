@@ -23,12 +23,12 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class is derived from the abstract {@link Constant}
- * and represents a reference to a dynamically computed constant.
+ * This class is derived from the abstract {@link Constant} and represents a reference to a dynamically computed
+ * constant.
  *
- * @see     Constant
- * @see  <a href="https://bugs.openjdk.java.net/secure/attachment/74618/constant-dynamic.html">
- * Change request for JEP 309</a>
+ * @see Constant
+ * @see <a href="https://bugs.openjdk.java.net/secure/attachment/74618/constant-dynamic.html"> Change request for JEP
+ *      309</a>
  * @since 6.3
  */
 public final class ConstantDynamic extends ConstantCP {
@@ -40,7 +40,6 @@ public final class ConstantDynamic extends ConstantCP {
         this(c.getBootstrapMethodAttrIndex(), c.getNameAndTypeIndex());
     }
 
-
     /**
      * Initialize instance from file data.
      *
@@ -51,33 +50,29 @@ public final class ConstantDynamic extends ConstantCP {
         this(file.readShort(), file.readShort());
     }
 
-
     public ConstantDynamic(final int bootstrap_method_attr_index, final int name_and_type_index) {
         super(Const.CONSTANT_Dynamic, bootstrap_method_attr_index, name_and_type_index);
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitly
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class. I.e.,
+     * the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitConstantDynamic(this);
     }
 
     /**
      * @return Reference (index) to bootstrap method this constant refers to.
      *
-     * Note that this method is a functional duplicate of getClassIndex
-     * for use by ConstantInvokeDynamic.
+     *         Note that this method is a functional duplicate of getClassIndex for use by ConstantInvokeDynamic.
      * @since 6.0
      */
     public int getBootstrapMethodAttrIndex() {
-        return super.getClassIndex();  // AKA bootstrap_method_attr_index
+        return super.getClassIndex(); // AKA bootstrap_method_attr_index
     }
 
     /**

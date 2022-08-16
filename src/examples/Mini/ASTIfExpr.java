@@ -19,6 +19,7 @@
 /* JJT: 0.3pre1 */
 
 package Mini;
+
 import org.apache.bcel.generic.BranchHandle;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.GOTO;
@@ -31,158 +32,149 @@ import org.apache.bcel.generic.MethodGen;
  *
  */
 public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTIfExpr(p, id);
-  }
-
-  private ASTExpr if_expr, then_expr, else_expr;
-
-  // Generated methods
-  ASTIfExpr(final int id) {
-    super(id);
-  }
-
-  ASTIfExpr(final MiniParser p, final int id) {
-    super(p, id);
-  }
-
-  /**
-   * Fifth pass, produce Java byte code.
-   */
-  @Override
-  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
-    if_expr.byte_code(il, method, cp);
-
-    final InstructionList then_code = new InstructionList();
-    final InstructionList else_code = new InstructionList();
-
-    then_expr.byte_code(then_code, method, cp);
-    else_expr.byte_code(else_code, method, cp);
-
-    BranchHandle i, g;
-
-    i = il.append(new IFEQ(null)); // If POP() == FALSE(i.e. 0) then branch to ELSE
-    ASTFunDecl.pop();
-    il.append(then_code);
-    g = il.append(new GOTO(null));
-    i.setTarget(il.append(else_code));
-    g.setTarget(il.append(InstructionConstants.NOP)); // May be optimized away later
-  }
-
-  /**
-   * Overrides ASTExpr.closeNode()
-   * Cast children nodes Node[] to appropiate type ASTExpr[]
-   */
-  @Override
-  public void closeNode() {
-    if_expr = (ASTExpr)children[0];
-    then_expr = (ASTExpr)children[1];
-
-    if(children.length == 3) {
-        else_expr = (ASTExpr)children[2];
-    } else {
-        MiniC.addError(if_expr.getLine(), if_expr.getColumn(),
-                     "IF expression has no ELSE branch");
+    public static Node jjtCreate(final MiniParser p, final int id) {
+        return new ASTIfExpr(p, id);
     }
 
-    children=null; // Throw away
-  }
+    private ASTExpr if_expr, then_expr, else_expr;
 
-  /**
-   * Fourth pass, produce Java code.
-   */
-  @Override
-  public void code(final StringBuffer buf) {
-    if_expr.code(buf);
-
-    buf.append("    if(" + ASTFunDecl.pop() + " == 1) {\n");
-    final int size = ASTFunDecl.size;
-    then_expr.code(buf);
-    ASTFunDecl.size = size; // reset stack
-    buf.append("    } else {\n");
-    else_expr.code(buf);
-    buf.append("    }\n");
-  }
-
-  @Override
-  public void dump(final String prefix) {
-    System.out.println(toString(prefix));
-
-    if_expr.dump(prefix + " ");
-    then_expr.dump(prefix + " ");
-    if(else_expr != null) {
-        else_expr.dump(prefix + " ");
-    }
-  }
-
-  /**
-   * Second pass
-   * Overrides AstExpr.eval()
-   * @return type of expression
-   * @param expected type
-   */
-  @Override
-  public int eval(final int expected) {
-    int then_type, else_type, if_type;
-
-    if((if_type=if_expr.eval(T_BOOLEAN)) != T_BOOLEAN) {
-        MiniC.addError(if_expr.getLine(), if_expr.getColumn(),
-                     "IF expression is not of type boolean, but " +
-                     TYPE_NAMES[if_type] + ".");
+    // Generated methods
+    ASTIfExpr(final int id) {
+        super(id);
     }
 
-    then_type=then_expr.eval(expected);
-
-    if((expected != T_UNKNOWN) && (then_type != expected)) {
-        MiniC.addError(then_expr.getLine(), then_expr.getColumn(),
-                     "THEN expression is not of expected type " +
-                     TYPE_NAMES[expected] + " but " + TYPE_NAMES[then_type] + ".");
+    ASTIfExpr(final MiniParser p, final int id) {
+        super(p, id);
     }
 
-    if(else_expr != null) {
-      else_type = else_expr.eval(expected);
+    /**
+     * Fifth pass, produce Java byte code.
+     */
+    @Override
+    public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
+        if_expr.byte_code(il, method, cp);
 
-      if((expected != T_UNKNOWN) && (else_type != expected)) {
-        MiniC.addError(else_expr.getLine(), else_expr.getColumn(),
-                       "ELSE expression is not of expected type " +
-                       TYPE_NAMES[expected] + " but " + TYPE_NAMES[else_type] + ".");
-    } else if(then_type == T_UNKNOWN) {
-        then_type = else_type;
-        then_expr.setType(else_type);
-      }
-    }
-    else {
-      else_type = then_type;
-      else_expr = then_expr;
-    }
+        final InstructionList then_code = new InstructionList();
+        final InstructionList else_code = new InstructionList();
 
-    if(then_type != else_type) {
-        MiniC.addError(line, column,
-                     "Type mismatch in THEN-ELSE: " +
-                     TYPE_NAMES[then_type] + " vs. " + TYPE_NAMES[else_type] + ".");
-    }
+        then_expr.byte_code(then_code, method, cp);
+        else_expr.byte_code(else_code, method, cp);
 
-    type = then_type;
+        BranchHandle i, g;
 
-    is_simple = if_expr.isSimple() && then_expr.isSimple() && else_expr.isSimple();
-
-    return type;
-  }
-
-  /**
-   * Overrides ASTExpr.traverse()
-   */
-  @Override
-  public ASTExpr traverse(final Environment env) {
-    this.env = env;
-
-    if_expr   = if_expr.traverse(env);
-    then_expr = then_expr.traverse(env);
-
-    if(else_expr != null) {
-        else_expr = else_expr.traverse(env);
+        i = il.append(new IFEQ(null)); // If POP() == FALSE(i.e. 0) then branch to ELSE
+        ASTFunDecl.pop();
+        il.append(then_code);
+        g = il.append(new GOTO(null));
+        i.setTarget(il.append(else_code));
+        g.setTarget(il.append(InstructionConstants.NOP)); // May be optimized away later
     }
 
-    return this;
-  }
+    /**
+     * Overrides ASTExpr.closeNode() Cast children nodes Node[] to appropiate type ASTExpr[]
+     */
+    @Override
+    public void closeNode() {
+        if_expr = (ASTExpr) children[0];
+        then_expr = (ASTExpr) children[1];
+
+        if (children.length == 3) {
+            else_expr = (ASTExpr) children[2];
+        } else {
+            MiniC.addError(if_expr.getLine(), if_expr.getColumn(), "IF expression has no ELSE branch");
+        }
+
+        children = null; // Throw away
+    }
+
+    /**
+     * Fourth pass, produce Java code.
+     */
+    @Override
+    public void code(final StringBuffer buf) {
+        if_expr.code(buf);
+
+        buf.append("    if(" + ASTFunDecl.pop() + " == 1) {\n");
+        final int size = ASTFunDecl.size;
+        then_expr.code(buf);
+        ASTFunDecl.size = size; // reset stack
+        buf.append("    } else {\n");
+        else_expr.code(buf);
+        buf.append("    }\n");
+    }
+
+    @Override
+    public void dump(final String prefix) {
+        System.out.println(toString(prefix));
+
+        if_expr.dump(prefix + " ");
+        then_expr.dump(prefix + " ");
+        if (else_expr != null) {
+            else_expr.dump(prefix + " ");
+        }
+    }
+
+    /**
+     * Second pass Overrides AstExpr.eval()
+     * 
+     * @return type of expression
+     * @param expected type
+     */
+    @Override
+    public int eval(final int expected) {
+        int then_type, else_type, if_type;
+
+        if ((if_type = if_expr.eval(T_BOOLEAN)) != T_BOOLEAN) {
+            MiniC.addError(if_expr.getLine(), if_expr.getColumn(), "IF expression is not of type boolean, but " + TYPE_NAMES[if_type] + ".");
+        }
+
+        then_type = then_expr.eval(expected);
+
+        if ((expected != T_UNKNOWN) && (then_type != expected)) {
+            MiniC.addError(then_expr.getLine(), then_expr.getColumn(),
+                "THEN expression is not of expected type " + TYPE_NAMES[expected] + " but " + TYPE_NAMES[then_type] + ".");
+        }
+
+        if (else_expr != null) {
+            else_type = else_expr.eval(expected);
+
+            if ((expected != T_UNKNOWN) && (else_type != expected)) {
+                MiniC.addError(else_expr.getLine(), else_expr.getColumn(),
+                    "ELSE expression is not of expected type " + TYPE_NAMES[expected] + " but " + TYPE_NAMES[else_type] + ".");
+            } else if (then_type == T_UNKNOWN) {
+                then_type = else_type;
+                then_expr.setType(else_type);
+            }
+        } else {
+            else_type = then_type;
+            else_expr = then_expr;
+        }
+
+        if (then_type != else_type) {
+            MiniC.addError(line, column, "Type mismatch in THEN-ELSE: " + TYPE_NAMES[then_type] + " vs. " + TYPE_NAMES[else_type] + ".");
+        }
+
+        type = then_type;
+
+        is_simple = if_expr.isSimple() && then_expr.isSimple() && else_expr.isSimple();
+
+        return type;
+    }
+
+    /**
+     * Overrides ASTExpr.traverse()
+     */
+    @Override
+    public ASTExpr traverse(final Environment env) {
+        this.env = env;
+
+        if_expr = if_expr.traverse(env);
+        then_expr = then_expr.traverse(env);
+
+        if (else_expr != null) {
+            else_expr = else_expr.traverse(env);
+        }
+
+        return this;
+    }
 }

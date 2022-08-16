@@ -31,9 +31,7 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.util.BCELifier;
 
 /**
- * Display Java .class file data.
- * Output is based on javap tool.
- * Built using the BCEL libary.
+ * Display Java .class file data. Output is based on javap tool. Built using the BCEL libary.
  *
  */
 class ClassDumper {
@@ -58,27 +56,25 @@ class ClassDumper {
      * @param file Input stream
      * @param file_name File name
      */
-    public ClassDumper (final FileImageInputStream file, final String file_name) {
+    public ClassDumper(final FileImageInputStream file, final String file_name) {
         this.file_name = file_name;
         this.file = file;
     }
 
-    private final String constantToString (final int index) {
+    private final String constantToString(final int index) {
         final Constant c = constant_items[index];
         return constant_pool.constantToString(c);
     }
 
     /**
-     * Parses the given Java class file and return an object that represents
-     * the contained data, i.e., constants, methods, fields and commands.
-     * A <em>ClassFormatException</em> is raised, if the file is not a valid
-     * .class file. (This does not include verification of the byte code as it
-     * is performed by the java interpreter).
+     * Parses the given Java class file and return an object that represents the contained data, i.e., constants, methods,
+     * fields and commands. A <em>ClassFormatException</em> is raised, if the file is not a valid .class file. (This does
+     * not include verification of the byte code as it is performed by the java interpreter).
      *
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * @throws IOException
+     * @throws ClassFormatException
      */
-    public void dump () throws IOException, ClassFormatException {
+    public void dump() throws IOException, ClassFormatException {
         try {
             // Check magic tag of class file
             processID();
@@ -103,17 +99,18 @@ class ClassDumper {
                     file.close();
                 }
             } catch (final IOException ioe) {
-                //ignore close exceptions
+                // ignore close exceptions
             }
         }
     }
 
     /**
      * Processes information about the attributes of the class.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * 
+     * @throws IOException
+     * @throws ClassFormatException
      */
-    private final void processAttributes () throws IOException, ClassFormatException {
+    private final void processAttributes() throws IOException, ClassFormatException {
         int attributes_count;
         attributes_count = file.readUnsignedShort();
         attributes = new Attribute[attributes_count];
@@ -132,26 +129,24 @@ class ClassDumper {
 
     /**
      * Processes information about the class and its super class.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * 
+     * @throws IOException
+     * @throws ClassFormatException
      */
-    private final void processClassInfo () throws IOException, ClassFormatException {
+    private final void processClassInfo() throws IOException, ClassFormatException {
         access_flags = file.readUnsignedShort();
-        /* Interfaces are implicitely abstract, the flag should be set
-         * according to the JVM specification.
+        /*
+         * Interfaces are implicitely abstract, the flag should be set according to the JVM specification.
          */
         if ((access_flags & Const.ACC_INTERFACE) != 0) {
             access_flags |= Const.ACC_ABSTRACT;
         }
-        if (((access_flags & Const.ACC_ABSTRACT) != 0)
-                && ((access_flags & Const.ACC_FINAL) != 0)) {
-            throw new ClassFormatException("Class " + file_name +
-                    " can't be both final and abstract");
+        if (((access_flags & Const.ACC_ABSTRACT) != 0) && ((access_flags & Const.ACC_FINAL) != 0)) {
+            throw new ClassFormatException("Class " + file_name + " can't be both final and abstract");
         }
 
         System.out.printf("%nClass info:%n");
-        System.out.println("  flags: " + BCELifier.printFlags(access_flags,
-                BCELifier.FLAGS.CLASS));
+        System.out.println("  flags: " + BCELifier.printFlags(access_flags, BCELifier.FLAGS.CLASS));
         class_name_index = file.readUnsignedShort();
         System.out.printf("  this_class: %d (", class_name_index);
         System.out.println(constantToString(class_name_index) + ")");
@@ -166,10 +161,11 @@ class ClassDumper {
 
     /**
      * Processes constant pool entries.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * 
+     * @throws IOException
+     * @throws ClassFormatException
      */
-    private final void processConstantPool () throws IOException, ClassFormatException {
+    private final void processConstantPool() throws IOException, ClassFormatException {
         byte tag;
         final int constant_pool_count = file.readUnsignedShort();
         constant_items = new Constant[constant_pool_count];
@@ -183,7 +179,7 @@ class ClassDumper {
             // i'm sure there is a better way to do this
             if (i < 10) {
                 System.out.printf("    #%1d = ", i);
-            } else if (i <100) {
+            } else if (i < 100) {
                 System.out.printf("   #%2d = ", i);
             } else {
                 System.out.printf("  #%d = ", i);
@@ -192,8 +188,7 @@ class ClassDumper {
 
             // All eight byte constants take up two spots in the constant pool
             tag = constant_items[i].getTag();
-            if ((tag == Const.CONSTANT_Double) ||
-                    (tag == Const.CONSTANT_Long)) {
+            if ((tag == Const.CONSTANT_Double) || (tag == Const.CONSTANT_Long)) {
                 i++;
             }
         }
@@ -201,17 +196,17 @@ class ClassDumper {
 
     /**
      * Constructs object from file stream.
+     * 
      * @param file Input stream
      * @throws IOException
      * @throws ClassFormatException
      */
-    private final void processFieldOrMethod () throws IOException, ClassFormatException {
+    private final void processFieldOrMethod() throws IOException, ClassFormatException {
         final int access_flags = file.readUnsignedShort();
         final int name_index = file.readUnsignedShort();
         System.out.printf("  name_index: %d (", name_index);
         System.out.println(constantToString(name_index) + ")");
-        System.out.println("  access_flags: " + BCELifier.printFlags(access_flags,
-                BCELifier.FLAGS.METHOD));
+        System.out.println("  access_flags: " + BCELifier.printFlags(access_flags, BCELifier.FLAGS.METHOD));
         final int descriptor_index = file.readUnsignedShort();
         System.out.printf("  descriptor_index: %d (", descriptor_index);
         System.out.println(constantToString(descriptor_index) + ")");
@@ -228,21 +223,21 @@ class ClassDumper {
             // restore file location
             file.reset();
             // Usefull for debugging
-            // System.out.printf("  attribute_name_index: %d (", attribute_name_index);
+            // System.out.printf(" attribute_name_index: %d (", attribute_name_index);
             // System.out.println(constantToString(attribute_name_index) + ")");
-            // System.out.printf("  atribute offset in file: %x%n", + file.getStreamPosition());
-            // System.out.println("  atribute_length: " + attribute_length);
+            // System.out.printf(" atribute offset in file: %x%n", + file.getStreamPosition());
+            // System.out.println(" atribute_length: " + attribute_length);
 
             // A stronger verification test would be to read attribute_length bytes
-            // into a buffer.  Then pass that buffer to readAttribute and also
+            // into a buffer. Then pass that buffer to readAttribute and also
             // verify we're at EOF of the buffer on return.
 
             final long pos1 = file.getStreamPosition();
             attributes[i] = Attribute.readAttribute(file, constant_pool);
             final long pos2 = file.getStreamPosition();
             if ((pos2 - pos1) != (attribute_length + 6)) {
-                System.out.printf("%nattribute_length: %d pos2-pos1-6: %d pos1: %x(%d) pos2: %x(%d)%n",
-                        attribute_length, pos2-pos1-6, pos1, pos1, pos2, pos2);
+                System.out.printf("%nattribute_length: %d pos2-pos1-6: %d pos1: %x(%d) pos2: %x(%d)%n", attribute_length, pos2 - pos1 - 6, pos1, pos1, pos2,
+                    pos2);
             }
             System.out.printf("  ");
             System.out.println(attributes[i]);
@@ -251,10 +246,11 @@ class ClassDumper {
 
     /**
      * Processes information about the fields of the class, i.e., its variables.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * 
+     * @throws IOException
+     * @throws ClassFormatException
      */
-    private final void processFields () throws IOException, ClassFormatException {
+    private final void processFields() throws IOException, ClassFormatException {
         int fields_count;
         fields_count = file.readUnsignedShort();
         fields = new Field[fields_count];
@@ -271,12 +267,12 @@ class ClassDumper {
     }
 
     /**
-     * Checks whether the header of the file is ok.
-     * Of course, this has to be the first action on successive file reads.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * Checks whether the header of the file is ok. Of course, this has to be the first action on successive file reads.
+     * 
+     * @throws IOException
+     * @throws ClassFormatException
      */
-    private final void processID () throws IOException, ClassFormatException {
+    private final void processID() throws IOException, ClassFormatException {
         final int magic = file.readInt();
         if (magic != Const.JVM_CLASSFILE_MAGIC) {
             throw new ClassFormatException(file_name + " is not a Java .class file");
@@ -289,10 +285,11 @@ class ClassDumper {
 
     /**
      * Processes information about the interfaces implemented by this class.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * 
+     * @throws IOException
+     * @throws ClassFormatException
      */
-    private final void processInterfaces () throws IOException, ClassFormatException {
+    private final void processInterfaces() throws IOException, ClassFormatException {
         int interfaces_count;
         interfaces_count = file.readUnsignedShort();
         interfaces = new int[interfaces_count];
@@ -304,23 +301,22 @@ class ClassDumper {
             // i'm sure there is a better way to do this
             if (i < 10) {
                 System.out.printf("   #%1d = ", i);
-            } else if (i <100) {
+            } else if (i < 100) {
                 System.out.printf("  #%2d = ", i);
             } else {
                 System.out.printf(" #%d = ", i);
             }
-            System.out.println(interfaces[i] + " (" +
-                    constant_pool.getConstantString(interfaces[i],
-                            Const.CONSTANT_Class) + ")");
+            System.out.println(interfaces[i] + " (" + constant_pool.getConstantString(interfaces[i], Const.CONSTANT_Class) + ")");
         }
     }
 
     /**
      * Processes information about the methods of the class.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * 
+     * @throws IOException
+     * @throws ClassFormatException
      */
-    private final void processMethods () throws IOException, ClassFormatException {
+    private final void processMethods() throws IOException, ClassFormatException {
         int methods_count;
         methods_count = file.readUnsignedShort();
         methods = new Method[methods_count];
@@ -337,10 +333,11 @@ class ClassDumper {
 
     /**
      * Processes major and minor version of compiler which created the file.
-     * @throws  IOException
-     * @throws  ClassFormatException
+     * 
+     * @throws IOException
+     * @throws ClassFormatException
      */
-    private final void processVersion () throws IOException, ClassFormatException {
+    private final void processVersion() throws IOException, ClassFormatException {
         minor = file.readUnsignedShort();
         System.out.printf("  minor version: %s%n", minor);
 

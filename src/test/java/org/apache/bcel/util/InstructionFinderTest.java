@@ -41,8 +41,8 @@ public class InstructionFinderTest extends AbstractTestCase {
         il.append(new ISTORE(3));
         final InstructionFinder finder = new InstructionFinder(il);
 
-        final Iterator<?> it = finder.search("ILOAD IADD", il.getInstructionHandles()[0], null );
-        final InstructionHandle[] ihs = (InstructionHandle[])it.next();
+        final Iterator<?> it = finder.search("ILOAD IADD", il.getInstructionHandles()[0], null);
+        final InstructionHandle[] ihs = (InstructionHandle[]) it.next();
         assertEquals(2, ihs.length);
         assertEquals(ihs[0].getInstruction(), new ILOAD(2));
         assertEquals(ihs[1].getInstruction(), new IADD());

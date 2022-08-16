@@ -23,25 +23,16 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * A PassVerifier actually verifies a class file; it is instantiated
- * by a Verifier.
- * The verification should conform with a certain pass as described
- * in The Java Virtual Machine Specification, 2nd edition.
- * This book describes four passes. Pass one means loading the
- * class and verifying a few static constraints. Pass two actually
- * verifies some other constraints that could enforce loading in
- * referenced class files. Pass three is the first pass that actually
- * checks constraints in the code array of a method in the class file;
- * it has two parts with the first verifying static constraints and
- * the second part verifying structural constraints (where a data flow
- * analysis is used for). The fourth pass, finally, performs checks
- * that can only be done at run-time.
- * JustIce does not have a run-time pass, but certain constraints that
- * are usually delayed until run-time for performance reasons are also
- * checked during the second part of pass three.
- * PassVerifier instances perform caching.
- * That means, if you really want a new verification run of a certain
- * pass you must use a new instance of a given PassVerifier.
+ * A PassVerifier actually verifies a class file; it is instantiated by a Verifier. The verification should conform with
+ * a certain pass as described in The Java Virtual Machine Specification, 2nd edition. This book describes four passes.
+ * Pass one means loading the class and verifying a few static constraints. Pass two actually verifies some other
+ * constraints that could enforce loading in referenced class files. Pass three is the first pass that actually checks
+ * constraints in the code array of a method in the class file; it has two parts with the first verifying static
+ * constraints and the second part verifying structural constraints (where a data flow analysis is used for). The fourth
+ * pass, finally, performs checks that can only be done at run-time. JustIce does not have a run-time pass, but certain
+ * constraints that are usually delayed until run-time for performance reasons are also checked during the second part
+ * of pass three. PassVerifier instances perform caching. That means, if you really want a new verification run of a
+ * certain pass you must use a new instance of a given PassVerifier.
  *
  * @see Verifier
  * @see #verify()
@@ -53,27 +44,21 @@ public abstract class PassVerifier {
     /** The VerificationResult cache. */
     private VerificationResult verificationResult;
 
-
     /**
-     * This method adds a (warning) message to the message pool of this
-     * PassVerifier. This method is normally only internally used by
-     * BCEL's class file verifier "JustIce" and should not be used from
-     * the outside.
+     * This method adds a (warning) message to the message pool of this PassVerifier. This method is normally only
+     * internally used by BCEL's class file verifier "JustIce" and should not be used from the outside.
      *
      * @see #getMessages()
      */
-    public void addMessage( final String message ) {
+    public void addMessage(final String message) {
         messages.add(message);
     }
-
 
     /** Does the real verification work, uncached. */
     public abstract VerificationResult do_verify();
 
-
     /**
-     * Returns the (warning) messages that this PassVerifier accumulated
-     * during its do_verify()ing work.
+     * Returns the (warning) messages that this PassVerifier accumulated during its do_verify()ing work.
      *
      * @see #addMessage(String)
      * @see #do_verify()
@@ -83,16 +68,11 @@ public abstract class PassVerifier {
         return messages.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
-
     /**
-     * This method runs a verification pass conforming to the
-     * Java Virtual Machine Specification, 2nd edition, on a
-     * class file.
-     * PassVerifier instances perform caching;
-     * i.e. if the verify() method once determined a VerificationResult,
-     * then this result may be returned after every invocation of this
-     * method instead of running the verification pass anew; likewise with
-     * the result of getMessages().
+     * This method runs a verification pass conforming to the Java Virtual Machine Specification, 2nd edition, on a class
+     * file. PassVerifier instances perform caching; i.e. if the verify() method once determined a VerificationResult, then
+     * this result may be returned after every invocation of this method instead of running the verification pass anew;
+     * likewise with the result of getMessages().
      *
      * @see #getMessages()
      * @see #addMessage(String)

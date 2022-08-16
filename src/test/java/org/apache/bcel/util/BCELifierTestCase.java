@@ -30,14 +30,13 @@ import java.io.OutputStream;
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
-
 public class BCELifierTestCase {
 
     // Canonicalise the javap output so it compares better
     private String canonHashRef(String input) {
         input = input.replaceAll("#\\d+", "#n"); // numbers may vary in length
         input = input.replaceAll(" +", " "); // collapse spaces
-        input = input.replaceAll("//.+",""); // comments may vary
+        input = input.replaceAll("//.+", ""); // comments may vary
         return input;
     }
 
@@ -46,8 +45,7 @@ public class BCELifierTestCase {
         final ProcessBuilder pb = new ProcessBuilder(args);
         pb.directory(workDir);
         final Process proc = pb.start();
-        try (BufferedInputStream is = new BufferedInputStream(proc.getInputStream());
-                InputStream es = proc.getErrorStream()) {
+        try (BufferedInputStream is = new BufferedInputStream(proc.getInputStream()); InputStream es = proc.getErrorStream()) {
             proc.waitFor();
             final byte[] buff = new byte[2048];
             int len;
@@ -83,9 +81,8 @@ public class BCELifierTestCase {
     }
 
     /*
-     * Dump a class using "javap" and compare with the same class recreated
-     * using BCELifier, "javac", "java" and dumped with "javap"
-     * TODO: detect if JDK present and skip test if not
+     * Dump a class using "javap" and compare with the same class recreated using BCELifier, "javac", "java" and dumped with
+     * "javap" TODO: detect if JDK present and skip test if not
      */
     @Test
     public void testJavapCompare() throws Exception {

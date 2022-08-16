@@ -46,8 +46,8 @@ public interface Subroutine {
     int[] getAccessedLocalsIndices();
 
     /**
-     * Returns all the JsrInstructions that have the first instruction of this subroutine as their target. <B>Must not
-     * be invoked on the 'top-level subroutine'.</B>
+     * Returns all the JsrInstructions that have the first instruction of this subroutine as their target. <B>Must not be
+     * invoked on the 'top-level subroutine'.</B>
      *
      * @return The JsrInstructions that have the first instruction of this subroutine as their target.
      */
@@ -63,8 +63,8 @@ public interface Subroutine {
     InstructionHandle[] getInstructions();
 
     /**
-     * Returns the one and only RET that leaves the subroutine. Note that JustIce has a pretty rigid notion of a
-     * subroutine. <B>Must not be invoked on the 'top-level subroutine'.</B>
+     * Returns the one and only RET that leaves the subroutine. Note that JustIce has a pretty rigid notion of a subroutine.
+     * <B>Must not be invoked on the 'top-level subroutine'.</B>
      *
      * @return The one and only RET that leaves the subroutine.
      *

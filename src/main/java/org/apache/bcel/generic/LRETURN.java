@@ -18,8 +18,11 @@
 package org.apache.bcel.generic;
 
 /**
- * LRETURN -  Return long from method
- * <PRE>Stack: ..., value.word1, value.word2 -&gt; &lt;empty&gt;</PRE>
+ * LRETURN - Return long from method
+ * 
+ * <PRE>
+ * Stack: ..., value.word1, value.word2 -&gt; &lt;empty&gt;
+ * </PRE>
  *
  */
 public class LRETURN extends ReturnInstruction {
@@ -28,17 +31,14 @@ public class LRETURN extends ReturnInstruction {
         super(org.apache.bcel.Const.LRETURN);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);
         v.visitStackConsumer(this);

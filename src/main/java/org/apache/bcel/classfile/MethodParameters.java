@@ -26,8 +26,8 @@ import org.apache.bcel.Const;
 /**
  * This class represents a MethodParameters attribute.
  *
- * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.24">
- * The class File Format : The MethodParameters Attribute</a>
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.24"> The class File Format :
+ *      The MethodParameters Attribute</a>
  * @since 6.0
  */
 public class MethodParameters extends Attribute {
@@ -73,9 +73,9 @@ public class MethodParameters extends Attribute {
      * @throws IOException if an I/O error occurs.
      */
     @Override
-       public void dump(final DataOutputStream file) throws IOException {
-           super.dump(file);
-           file.writeByte(parameters.length);
+    public void dump(final DataOutputStream file) throws IOException {
+        super.dump(file);
+        file.writeByte(parameters.length);
         for (final MethodParameter parameter : parameters) {
             parameter.dump(file);
         }

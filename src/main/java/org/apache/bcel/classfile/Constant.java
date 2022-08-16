@@ -26,24 +26,22 @@ import org.apache.bcel.Const;
 import org.apache.bcel.util.BCELComparator;
 
 /**
- * Abstract superclass for classes to represent the different constant types
- * in the constant pool of a class file. The classes keep closely to
- * the JVM specification.
+ * Abstract superclass for classes to represent the different constant types in the constant pool of a class file. The
+ * classes keep closely to the JVM specification.
  */
 public abstract class Constant implements Cloneable, Node {
 
     private static BCELComparator bcelComparator = new BCELComparator() {
 
         @Override
-        public boolean equals( final Object o1, final Object o2 ) {
+        public boolean equals(final Object o1, final Object o2) {
             final Constant THIS = (Constant) o1;
             final Constant THAT = (Constant) o2;
             return Objects.equals(THIS.toString(), THAT.toString());
         }
 
-
         @Override
-        public int hashCode( final Object o ) {
+        public int hashCode(final Object o) {
             final Constant THIS = (Constant) o;
             return THIS.toString().hashCode();
         }
@@ -110,17 +108,16 @@ public abstract class Constant implements Cloneable, Node {
     /**
      * @param comparator Comparison strategy object
      */
-    public static void setComparator( final BCELComparator comparator ) {
+    public static void setComparator(final BCELComparator comparator) {
         bcelComparator = comparator;
     }
 
-    /* In fact this tag is redundant since we can distinguish different
-     * `Constant' objects by their type, i.e., via `instanceof'. In some
-     * places we will use the tag for switch()es anyway.
+    /*
+     * In fact this tag is redundant since we can distinguish different `Constant' objects by their type, i.e., via
+     * `instanceof'. In some places we will use the tag for switch()es anyway.
      *
-     * First, we want match the specification as closely as possible. Second we
-     * need the tag as an index to select the corresponding class name from the
-     * `CONSTANT_NAMES' array.
+     * First, we want match the specification as closely as possible. Second we need the tag as an index to select the
+     * corresponding class name from the `CONSTANT_NAMES' array.
      */
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
@@ -133,14 +130,13 @@ public abstract class Constant implements Cloneable, Node {
     }
 
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
+     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
     @Override
-    public abstract void accept( Visitor v );
+    public abstract void accept(Visitor v);
 
     @Override
     public Object clone() {
@@ -163,31 +159,29 @@ public abstract class Constant implements Cloneable, Node {
         return null;
     }
 
-    public abstract void dump( DataOutputStream file ) throws IOException;
+    public abstract void dump(DataOutputStream file) throws IOException;
 
     /**
-     * Returns value as defined by given BCELComparator strategy.
-     * By default two Constant objects are said to be equal when
+     * Returns value as defined by given BCELComparator strategy. By default two Constant objects are said to be equal when
      * the result of toString() is equal.
      *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( final Object obj ) {
+    public boolean equals(final Object obj) {
         return bcelComparator.equals(this, obj);
     }
 
     /**
-     * @return Tag of constant, i.e., its type. No setTag() method to avoid
-     * confusion.
+     * @return Tag of constant, i.e., its type. No setTag() method to avoid confusion.
      */
     public final byte getTag() {
         return tag;
     }
 
     /**
-     * Returns value as defined by given BCELComparator strategy.
-     * By default return the hashcode of the result of toString().
+     * Returns value as defined by given BCELComparator strategy. By default return the hashcode of the result of
+     * toString().
      *
      * @see java.lang.Object#hashCode()
      */

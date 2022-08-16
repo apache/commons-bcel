@@ -30,21 +30,17 @@ public class ClassStack {
 
     private final Stack<JavaClass> stack = new Stack<>();
 
-
     public boolean empty() {
         return stack.empty();
     }
-
 
     public JavaClass pop() {
         return stack.pop();
     }
 
-
-    public void push( final JavaClass clazz ) {
+    public void push(final JavaClass clazz) {
         stack.push(clazz);
     }
-
 
     public JavaClass top() {
         return stack.peek();

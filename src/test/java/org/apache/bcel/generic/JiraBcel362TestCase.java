@@ -25,8 +25,8 @@ import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
 /**
- * Verify that a constant pool containing dynamic constants (condy) - in this case created by JaCoCo -
- * can be read and the corresponding constant is found after parsing.
+ * Verify that a constant pool containing dynamic constants (condy) - in this case created by JaCoCo - can be read and
+ * the corresponding constant is found after parsing.
  */
 public class JiraBcel362TestCase extends AbstractTestCase {
     @Test

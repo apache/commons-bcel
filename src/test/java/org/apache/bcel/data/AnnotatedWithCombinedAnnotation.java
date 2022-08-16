@@ -18,17 +18,16 @@
 
 package org.apache.bcel.data;
 
-@CombinedAnnotation( { @SimpleAnnotation(id = 4) })
-public class AnnotatedWithCombinedAnnotation
-{
-    public AnnotatedWithCombinedAnnotation(final int param1, @SimpleAnnotation(id=42) final int param2) {
+@CombinedAnnotation({@SimpleAnnotation(id = 4)})
+public class AnnotatedWithCombinedAnnotation {
+    public AnnotatedWithCombinedAnnotation(final int param1, @SimpleAnnotation(id = 42) final int param2) {
     }
 
-    @CombinedAnnotation( { @SimpleAnnotation(id=1, fruit="apples"), @SimpleAnnotation(id= 2, fruit="oranges")})
+    @CombinedAnnotation({@SimpleAnnotation(id = 1, fruit = "apples"), @SimpleAnnotation(id = 2, fruit = "oranges")})
     public void methodWithArrayOfTwoAnnotations() {
     }
 
-    @CombinedAnnotation( {})
+    @CombinedAnnotation({})
     public void methodWithArrayOfZeroAnnotations() {
     }
 }

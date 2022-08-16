@@ -18,29 +18,30 @@
 package org.apache.bcel.generic;
 
 /**
- * IRETURN -  Return int from method
- * <PRE>Stack: ..., value -&gt; &lt;empty&gt;</PRE>
+ * IRETURN - Return int from method
+ * 
+ * <PRE>
+ * Stack: ..., value -&gt; &lt;empty&gt;
+ * </PRE>
  *
  */
 public class IRETURN extends ReturnInstruction {
 
-    /** Return int from method
+    /**
+     * Return int from method
      */
     public IRETURN() {
         super(org.apache.bcel.Const.IRETURN);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);
         v.visitStackConsumer(this);

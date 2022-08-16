@@ -27,8 +27,7 @@ import org.apache.bcel.Const;
  *
  * @since 6.0
  */
-public class ElementValuePair
-{
+public class ElementValuePair {
 
     static final ElementValuePair[] EMPTY_ARRAY = {};
 
@@ -38,9 +37,7 @@ public class ElementValuePair
 
     private final int elementNameIndex;
 
-    public ElementValuePair(final int elementNameIndex, final ElementValue elementValue,
-            final ConstantPool constantPool)
-    {
+    public ElementValuePair(final int elementNameIndex, final ElementValue elementValue, final ConstantPool constantPool) {
         this.elementValue = elementValue;
         this.elementNameIndex = elementNameIndex;
         this.constantPool = constantPool;
@@ -51,28 +48,22 @@ public class ElementValuePair
         elementValue.dump(dos);
     }
 
-    public int getNameIndex()
-    {
+    public int getNameIndex() {
         return elementNameIndex;
     }
 
-    public String getNameString()
-    {
-        final ConstantUtf8 c = (ConstantUtf8) constantPool.getConstant(
-                elementNameIndex, Const.CONSTANT_Utf8);
+    public String getNameString() {
+        final ConstantUtf8 c = (ConstantUtf8) constantPool.getConstant(elementNameIndex, Const.CONSTANT_Utf8);
         return c.getBytes();
     }
 
-    public final ElementValue getValue()
-    {
+    public final ElementValue getValue() {
         return elementValue;
     }
 
-    public String toShortString()
-    {
+    public String toShortString() {
         final StringBuilder result = new StringBuilder();
-        result.append(getNameString()).append("=").append(
-                getValue().toShortString());
+        result.append(getNameString()).append("=").append(getValue().toShortString());
         return result.toString();
     }
 }

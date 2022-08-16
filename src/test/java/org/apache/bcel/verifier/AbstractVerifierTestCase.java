@@ -29,10 +29,11 @@ public abstract class AbstractVerifierTestCase {
     public static final String TEST_PACKAGE = AbstractVerifierTestCase.class.getPackage().getName() + ".tests.";
 
     /**
-     * Asserts that the verification of the given class is OK. If it isn't it throws an AssertionFailedError with the given message.
+     * Asserts that the verification of the given class is OK. If it isn't it throws an AssertionFailedError with the given
+     * message.
      *
      * @param classname simple classname of the class to verify
-     * @param message   message displayed if assertion fails
+     * @param message message displayed if assertion fails
      */
     public void assertVerifyOK(final String classname, final String message) throws ClassNotFoundException {
         final String testClassname = TEST_PACKAGE + classname;
@@ -40,11 +41,11 @@ public abstract class AbstractVerifierTestCase {
     }
 
     /**
-     * Asserts that the verification of the given class is rejected.
-     * If it isn't it throws an AssertionFailedError with the given message.
+     * Asserts that the verification of the given class is rejected. If it isn't it throws an AssertionFailedError with the
+     * given message.
      *
      * @param classname simple classname of the class to verify
-     * @param message   message displayed if assertion fails
+     * @param message message displayed if assertion fails
      */
     public void assertVerifyRejected(final String classname, final String message) throws ClassNotFoundException {
         final String testClassname = TEST_PACKAGE + classname;

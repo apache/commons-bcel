@@ -17,14 +17,12 @@
  */
 package org.apache.bcel.verifier.structurals;
 
-
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.ObjectType;
 
 /**
- * This class represents an exception handler; that is, an ObjectType
- * representing a subclass of java.lang.Throwable and the instruction
- * the handler starts off (represented by an InstructionContext).
+ * This class represents an exception handler; that is, an ObjectType representing a subclass of java.lang.Throwable and
+ * the instruction the handler starts off (represented by an InstructionContext).
  *
  */
 public class ExceptionHandler {

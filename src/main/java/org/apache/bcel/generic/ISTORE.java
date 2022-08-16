@@ -19,38 +19,38 @@ package org.apache.bcel.generic;
 
 /**
  * ISTORE - Store int from stack into local variable
- * <PRE>Stack: ..., value -&gt; ... </PRE>
+ * 
+ * <PRE>
+ * Stack: ..., value -&gt; ...
+ * </PRE>
  *
  */
 public class ISTORE extends StoreInstruction {
 
     /**
-     * Empty constructor needed for Instruction.readInstruction.
-     * Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     ISTORE() {
         super(org.apache.bcel.Const.ISTORE, org.apache.bcel.Const.ISTORE_0);
     }
 
-
-    /** Store int into local variable
+    /**
+     * Store int into local variable
+     * 
      * @param n index of local variable
      */
     public ISTORE(final int n) {
         super(org.apache.bcel.Const.ISTORE, org.apache.bcel.Const.ISTORE_0, n);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         super.accept(v);
         v.visitISTORE(this);
     }

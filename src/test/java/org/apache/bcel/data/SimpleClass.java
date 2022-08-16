@@ -18,10 +18,8 @@
 
 package org.apache.bcel.data;
 
-public class SimpleClass
-{
-    public static void main(final String[] argv)
-    {
+public class SimpleClass {
+    public static void main(final String[] argv) {
         // Nothing unusual in this class
     }
 }

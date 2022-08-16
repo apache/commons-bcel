@@ -26,22 +26,21 @@ import org.apache.bcel.Const;
 /**
  * This class represents a BootstrapMethods attribute.
  *
- * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.23">
- * The class File Format : The BootstrapMethods Attribute</a>
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.23"> The class File Format :
+ *      The BootstrapMethods Attribute</a>
  * @since 6.0
  */
 public class BootstrapMethods extends Attribute {
 
-    private BootstrapMethod[] bootstrapMethods;  // TODO this could be made final (setter is not used)
+    private BootstrapMethod[] bootstrapMethods; // TODO this could be made final (setter is not used)
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
+     * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a
+     * physical copy.
      */
     public BootstrapMethods(final BootstrapMethods c) {
         this(c.getNameIndex(), c.getLength(), c.getBootstrapMethods(), c.getConstantPool());
     }
-
 
     /**
      * @param name_index Index in constant pool to CONSTANT_Utf8

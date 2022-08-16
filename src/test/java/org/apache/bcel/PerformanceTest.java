@@ -134,7 +134,7 @@ public final class PerformanceTest {
     public void testPerformance() {
         final File javaLib = new File(System.getProperty("java.home"), "lib");
         javaLib.listFiles(file -> {
-            if(file.getName().endsWith(".jar")) {
+            if (file.getName().endsWith(".jar")) {
                 try {
                     test(file);
                 } catch (final IOException e) {

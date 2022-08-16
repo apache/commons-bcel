@@ -24,22 +24,18 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class represents a stack map attribute used for
- * preverification of Java classes for the <a
- * href="http://java.sun.com/j2me/"> Java 2 Micro Edition</a>
- * (J2ME). This attribute is used by the <a
- * href="http://java.sun.com/products/cldc/">KVM</a> and contained
- * within the Code attribute of a method. See CLDC specification
- * �5.3.1.2
+ * This class represents a stack map attribute used for preverification of Java classes for the
+ * <a href="http://java.sun.com/j2me/"> Java 2 Micro Edition</a> (J2ME). This attribute is used by the
+ * <a href="http://java.sun.com/products/cldc/">KVM</a> and contained within the Code attribute of a method. See CLDC
+ * specification �5.3.1.2
  *
- * @see     Code
- * @see     StackMapEntry
- * @see     StackMapType
+ * @see Code
+ * @see StackMapEntry
+ * @see StackMapType
  */
 public final class StackMap extends Attribute {
 
     private StackMapEntry[] map; // Table of stack map entries
-
 
     /**
      * Construct object from input stream.
@@ -59,11 +55,13 @@ public final class StackMap extends Attribute {
         }
     }
 
-
     /*
      * @param name_index Index of name
+     * 
      * @param length Content length in bytes
+     * 
      * @param map Table of stack map entries
+     * 
      * @param constant_pool Array of constants
      */
     public StackMap(final int name_index, final int length, final StackMapEntry[] map, final ConstantPool constant_pool) {
@@ -71,25 +69,22 @@ public final class StackMap extends Attribute {
         this.map = map;
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
+     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitStackMap(this);
     }
-
 
     /**
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
+    public Attribute copy(final ConstantPool _constant_pool) {
         final StackMap c = (StackMap) clone();
         c.map = new StackMapEntry[map.length];
         for (int i = 0; i < map.length; i++) {
@@ -99,7 +94,6 @@ public final class StackMap extends Attribute {
         return c;
     }
 
-
     /**
      * Dump stack map table attribute to file stream in binary format.
      *
@@ -107,7 +101,7 @@ public final class StackMap extends Attribute {
      * @throws IOException if an I/O error occurs.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
+    public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
         file.writeShort(map.length);
         for (final StackMapEntry entry : map) {
@@ -115,11 +109,9 @@ public final class StackMap extends Attribute {
         }
     }
 
-
     public int getMapLength() {
         return map == null ? 0 : map.length;
     }
-
 
     /**
      * @return Array of stack map entries
@@ -128,11 +120,10 @@ public final class StackMap extends Attribute {
         return map;
     }
 
-
     /**
      * @param map Array of stack map entries
      */
-    public void setStackMap( final StackMapEntry[] map ) {
+    public void setStackMap(final StackMapEntry[] map) {
         this.map = map;
         int len = 2; // Length of 'number_of_entries' field prior to the array of stack maps
         for (final StackMapEntry element : map) {
@@ -140,7 +131,6 @@ public final class StackMap extends Attribute {
         }
         setLength(len);
     }
-
 
     /**
      * @return String representation.

@@ -35,15 +35,15 @@ import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.PUSH;
 
 /**
- * Read class file(s) and patch all of its methods, so that they print
- * "hello" and their name and signature before doing anything else.
+ * Read class file(s) and patch all of its methods, so that they print "hello" and their name and signature before doing
+ * anything else.
  *
  */
 public final class helloify implements Constants {
 
     private static String class_name;
     private static ConstantPoolGen cp;
-    private static int out;     // reference to System.out
+    private static int out; // reference to System.out
     private static int println; // reference to PrintStream.println
 
     /**
@@ -71,9 +71,7 @@ public final class helloify implements Constants {
         }
 
         // Create instruction list to be inserted at method start.
-        final String mesg = "Hello from " + Utility.methodSignatureToString(m.getSignature(),
-                name,
-                Utility.accessToString(flags));
+        final String mesg = "Hello from " + Utility.methodSignatureToString(m.getSignature(), name, Utility.accessToString(flags));
         final InstructionList patch = new InstructionList();
         patch.append(new GETSTATIC(out));
         patch.append(new PUSH(cp, mesg));

@@ -21,8 +21,12 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * LDIV - Divide longs
- * <PRE>Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt;</PRE>
- *        ..., result.word1, result.word2
+ * 
+ * <PRE>
+ * Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt;
+ * </PRE>
+ * 
+ * ..., result.word1, result.word2
  *
  */
 public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
@@ -31,17 +35,14 @@ public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
         super(org.apache.bcel.Const.LDIV);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);
         v.visitStackProducer(this);
@@ -50,11 +51,8 @@ public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
         v.visitLDIV(this);
     }
 
-
     @Override
     public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.ARITHMETIC_EXCEPTION
-        };
+        return new Class[] {ExceptionConst.ARITHMETIC_EXCEPTION};
     }
 }

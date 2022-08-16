@@ -27,7 +27,6 @@ public class LocalVariableTestCase {
     @Test
     public void testReferenceToConstant() {
         @SuppressWarnings("unused")
-        final
-        short referenceToConstant = LocalVariable.AALOAD;
+        final short referenceToConstant = LocalVariable.AALOAD;
     }
 }

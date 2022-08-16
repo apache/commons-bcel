@@ -19,32 +19,18 @@
 
 package Mini;
 
-public interface MiniParserTreeConstants
-{
-  int JJTPROGRAM = 0;
-  int JJTFUNDECL = 1;
-  int JJTEXPR = 2;
-  int JJTIFEXPR = 3;
-  int JJTLETEXPR = 4;
-  int JJTFUNAPPL = 5;
-  int JJTTERM = 6;
-  int JJTFACTOR = 7;
-  int JJTVOID = 8;
-  int JJTINTEGER = 9;
-  int JJTIDENT = 10;
+public interface MiniParserTreeConstants {
+    int JJTPROGRAM = 0;
+    int JJTFUNDECL = 1;
+    int JJTEXPR = 2;
+    int JJTIFEXPR = 3;
+    int JJTLETEXPR = 4;
+    int JJTFUNAPPL = 5;
+    int JJTTERM = 6;
+    int JJTFACTOR = 7;
+    int JJTVOID = 8;
+    int JJTINTEGER = 9;
+    int JJTIDENT = 10;
 
-
-  String[] jjtNodeName = {
-    "Program",
-    "FunDecl",
-    "Expr",
-    "IfExpr",
-    "LetExpr",
-    "FunAppl",
-    "Term",
-    "Factor",
-    "void",
-    "Integer",
-    "Ident",
-  };
+    String[] jjtNodeName = {"Program", "FunDecl", "Expr", "IfExpr", "LetExpr", "FunAppl", "Term", "Factor", "void", "Integer", "Ident",};
 }

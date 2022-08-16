@@ -21,7 +21,7 @@ interface Interface01 extends Runnable {
 
 }
 
-public class TestLegalInvokeInterface01{
+public class TestLegalInvokeInterface01 {
 
     public static void test1(final Interface01 t) {
         t.run();

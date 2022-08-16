@@ -18,14 +18,14 @@
 package org.apache.bcel.generic;
 
 /**
- * Thrown by InstructionList.remove() when one or multiple disposed instructions
- * are still being referenced by an InstructionTargeter object. I.e. the
- * InstructionTargeter has to be notified that (one of) the InstructionHandle it
- * is referencing is being removed from the InstructionList and thus not valid anymore.
+ * Thrown by InstructionList.remove() when one or multiple disposed instructions are still being referenced by an
+ * InstructionTargeter object. I.e. the InstructionTargeter has to be notified that (one of) the InstructionHandle it is
+ * referencing is being removed from the InstructionList and thus not valid anymore.
  *
- * <p>Making this an exception instead of a return value forces the user to handle
- * these case explicitely in a try { ... } catch. The following code illustrates
- * how this may be done:</p>
+ * <p>
+ * Making this an exception instead of a return value forces the user to handle these case explicitely in a try { ... }
+ * catch. The following code illustrates how this may be done:
+ * </p>
  *
  * <PRE>
  *     ...
@@ -49,12 +49,10 @@ public final class TargetLostException extends Exception {
     private static final long serialVersionUID = -6857272667645328384L;
     private final InstructionHandle[] targets;
 
-
     TargetLostException(final InstructionHandle[] t, final String mesg) {
         super(mesg);
         targets = t;
     }
-
 
     /**
      * @return list of instructions still being targeted.

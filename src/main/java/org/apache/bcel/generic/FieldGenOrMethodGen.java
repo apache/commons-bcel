@@ -25,8 +25,7 @@ import org.apache.bcel.classfile.AccessFlags;
 import org.apache.bcel.classfile.Attribute;
 
 /**
- * Super class for FieldGen and MethodGen objects, since they have
- * some methods in common!
+ * Super class for FieldGen and MethodGen objects, since they have some methods in common!
  *
  */
 public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAndTyped, Cloneable {
@@ -52,12 +51,10 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     private final List<Attribute> attributeList = new ArrayList<>();
 
     // @since 6.0
-    private final List<AnnotationEntryGen>       annotationList= new ArrayList<>();
-
+    private final List<AnnotationEntryGen> annotationList = new ArrayList<>();
 
     protected FieldGenOrMethodGen() {
     }
-
 
     /**
      * @since 6.0
@@ -69,24 +66,19 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * @since 6.0
      */
-    public void addAnnotationEntry(final AnnotationEntryGen ag)
-    {
+    public void addAnnotationEntry(final AnnotationEntryGen ag) {
         annotationList.add(ag);
     }
 
-
     /**
-     * Add an attribute to this method. Currently, the JVM knows about
-     * the `Code', `ConstantValue', `Synthetic' and `Exceptions'
-     * attributes. Other attributes will be ignored by the JVM but do no
-     * harm.
+     * Add an attribute to this method. Currently, the JVM knows about the `Code', `ConstantValue', `Synthetic' and
+     * `Exceptions' attributes. Other attributes will be ignored by the JVM but do no harm.
      *
      * @param a attribute to be added
      */
-    public void addAttribute( final Attribute a ) {
+    public void addAttribute(final Attribute a) {
         attributeList.add(a);
     }
-
 
     @Override
     public Object clone() {
@@ -97,13 +89,11 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         }
     }
 
-
     public AnnotationEntryGen[] getAnnotationEntries() {
         final AnnotationEntryGen[] annotations = new AnnotationEntryGen[annotationList.size()];
-          annotationList.toArray(annotations);
-          return annotations;
-      }
-
+        annotationList.toArray(annotations);
+        return annotations;
+    }
 
     /**
      * @return all attributes of this method.
@@ -114,23 +104,22 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         return attributes;
     }
 
-
     public ConstantPoolGen getConstantPool() {
         return cp;
     }
 
-
-    /** @return name of method/field.
+    /**
+     * @return name of method/field.
      */
     @Override
     public String getName() {
         return name;
     }
 
-    /** @return signature of method/field.
+    /**
+     * @return signature of method/field.
      */
     public abstract String getSignature();
-
 
     @Override
     public Type getType() {
@@ -140,27 +129,23 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * @since 6.0
      */
-    public void removeAnnotationEntries()
-    {
+    public void removeAnnotationEntries() {
         annotationList.clear();
     }
-
 
     /**
      * @since 6.0
      */
-    public void removeAnnotationEntry(final AnnotationEntryGen ag)
-    {
+    public void removeAnnotationEntry(final AnnotationEntryGen ag) {
         annotationList.remove(ag);
     }
 
     /**
      * Remove an attribute.
      */
-    public void removeAttribute( final Attribute a ) {
+    public void removeAttribute(final Attribute a) {
         attributeList.remove(a);
     }
-
 
     /**
      * Remove all attributes.
@@ -169,19 +154,17 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         attributeList.clear();
     }
 
-    public void setConstantPool( final ConstantPoolGen cp ) { // TODO could be package-protected?
+    public void setConstantPool(final ConstantPoolGen cp) { // TODO could be package-protected?
         this.cp = cp;
     }
 
-
     @Override
-    public void setName( final String name ) { // TODO could be package-protected?
+    public void setName(final String name) { // TODO could be package-protected?
         this.name = name;
     }
 
-
     @Override
-    public void setType( final Type type ) { // TODO could be package-protected?
+    public void setType(final Type type) { // TODO could be package-protected?
         if (type.getType() == Const.T_ADDRESS) {
             throw new IllegalArgumentException("Type can not be " + type);
         }

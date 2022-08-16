@@ -24,12 +24,10 @@ package org.apache.bcel.generic;
 public abstract class GotoInstruction extends BranchInstruction implements UnconditionalBranch {
 
     /**
-     * Empty constructor needed for Instruction.readInstruction.
-     * Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     GotoInstruction() {
     }
-
 
     GotoInstruction(final short opcode, final InstructionHandle target) {
         super(opcode, target);

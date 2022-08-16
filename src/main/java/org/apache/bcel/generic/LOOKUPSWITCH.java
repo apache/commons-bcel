@@ -30,12 +30,10 @@ import org.apache.bcel.util.ByteSequence;
 public class LOOKUPSWITCH extends Select {
 
     /**
-     * Empty constructor needed for Instruction.readInstruction.
-     * Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     LOOKUPSWITCH() {
     }
-
 
     public LOOKUPSWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle defaultTarget) {
         super(org.apache.bcel.Const.LOOKUPSWITCH, match, targets, defaultTarget);
@@ -45,17 +43,14 @@ public class LOOKUPSWITCH extends Select {
         setFixed_length(_length);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitVariableLengthInstruction(this);
         v.visitStackConsumer(this);
         v.visitBranchInstruction(this);
@@ -63,13 +58,13 @@ public class LOOKUPSWITCH extends Select {
         v.visitLOOKUPSWITCH(this);
     }
 
-
     /**
      * Dump instruction as byte code to stream out.
+     * 
      * @param out Output stream
      */
     @Override
-    public void dump( final DataOutputStream out ) throws IOException {
+    public void dump(final DataOutputStream out) throws IOException {
         super.dump(out);
         final int _match_length = getMatch_length();
         out.writeInt(_match_length); // npairs
@@ -79,12 +74,11 @@ public class LOOKUPSWITCH extends Select {
         }
     }
 
-
     /**
      * Read needed data (e.g. index) from file.
      */
     @Override
-    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
+    protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
         super.initFromFile(bytes, wide); // reads padding
         final int _match_length = bytes.readInt();
         setMatch_length(_match_length);

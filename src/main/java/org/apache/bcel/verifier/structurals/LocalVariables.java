@@ -17,15 +17,13 @@
  */
 package org.apache.bcel.verifier.structurals;
 
-
 import org.apache.bcel.generic.ReferenceType;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
- * This class implements an array of local variables used for symbolic JVM
- * simulation.
+ * This class implements an array of local variables used for symbolic JVM simulation.
  */
 public class LocalVariables implements Cloneable {
 
@@ -39,15 +37,14 @@ public class LocalVariables implements Cloneable {
      */
     public LocalVariables(final int localVariableCount) {
         locals = new Type[localVariableCount];
-        for (int i=0; i<localVariableCount; i++) {
+        for (int i = 0; i < localVariableCount; i++) {
             locals[i] = Type.UNKNOWN;
         }
     }
 
     /**
-     * Returns a deep copy of this object; i.e. the clone
-     * operates on a new local variable array.
-     * However, the Type objects in the array are shared.
+     * Returns a deep copy of this object; i.e. the clone operates on a new local variable array. However, the Type objects
+     * in the array are shared.
      */
     @Override
     public Object clone() {
@@ -68,9 +65,9 @@ public class LocalVariables implements Cloneable {
         if (this.locals.length != lv.locals.length) {
             return false;
         }
-        for (int i=0; i<this.locals.length; i++) {
+        for (int i = 0; i < this.locals.length; i++) {
             if (!this.locals[i].equals(lv.locals[i])) {
-                //System.out.println(this.locals[i]+" is not "+lv.locals[i]);
+                // System.out.println(this.locals[i]+" is not "+lv.locals[i]);
                 return false;
             }
         }
@@ -88,8 +85,7 @@ public class LocalVariables implements Cloneable {
     }
 
     /**
-     * Returns a (correctly typed) clone of this object.
-     * This is equivalent to ((LocalVariables) this.clone()).
+     * Returns a (correctly typed) clone of this object. This is equivalent to ((LocalVariables) this.clone()).
      *
      * @return a (correctly typed) clone of this object.
      */
@@ -97,19 +93,22 @@ public class LocalVariables implements Cloneable {
         return (LocalVariables) this.clone();
     }
 
-    /** @return a hash code value for the object.
+    /**
+     * @return a hash code value for the object.
      */
     @Override
-    public int hashCode() { return locals.length; }
+    public int hashCode() {
+        return locals.length;
+    }
 
     /**
-     * Replaces all occurrences of {@code uninitializedObjectType} in this local variables set
-     * with an "initialized" ObjectType.
+     * Replaces all occurrences of {@code uninitializedObjectType} in this local variables set with an "initialized"
+     * ObjectType.
      *
      * @param uninitializedObjectType the object to match.
      */
     public void initializeObject(final UninitializedObjectType uninitializedObjectType) {
-        for (int i=0; i<locals.length; i++) {
+        for (int i = 0; i < locals.length; i++) {
             if (locals[i] == uninitializedObjectType) {
                 locals[i] = uninitializedObjectType.getInitialized();
             }
@@ -126,8 +125,8 @@ public class LocalVariables implements Cloneable {
     }
 
     /**
-     * Merges two local variables sets as described in the Java Virtual Machine Specification,
-     * Second Edition, section 4.9.2, page 146.
+     * Merges two local variables sets as described in the Java Virtual Machine Specification, Second Edition, section
+     * 4.9.2, page 146.
      *
      * @param localVariable other local variable.
      */
@@ -137,7 +136,7 @@ public class LocalVariables implements Cloneable {
             throw new AssertionViolatedException("Merging LocalVariables of different size?!? From different methods or what?!?");
         }
 
-        for (int i=0; i<locals.length; i++) {
+        for (int i = 0; i < locals.length; i++) {
             merge(localVariable, i);
         }
     }
@@ -150,46 +149,40 @@ public class LocalVariables implements Cloneable {
     private void merge(final LocalVariables lv, final int i) {
         try {
 
-        // We won't accept an unitialized object if we know it was initialized;
-        // compare vmspec2, 4.9.4, last paragraph.
-        if ( !(locals[i] instanceof UninitializedObjectType) && lv.locals[i] instanceof UninitializedObjectType ) {
-            throw new StructuralCodeConstraintException(
-                "Backwards branch with an uninitialized object in the local variables detected.");
-        }
-        // Even harder, what about _different_ uninitialized object types?!
-        if ( !locals[i].equals(lv.locals[i]) && locals[i] instanceof UninitializedObjectType &&
-                lv.locals[i] instanceof UninitializedObjectType ) {
-            throw new StructuralCodeConstraintException(
-                "Backwards branch with an uninitialized object in the local variables detected.");
-        }
-        // If we just didn't know that it was initialized, we have now learned.
-        if (locals[i] instanceof UninitializedObjectType && !(lv.locals[i] instanceof UninitializedObjectType)) {
-            locals[i] = ((UninitializedObjectType) locals[i]).getInitialized();
-        }
-        if (locals[i] instanceof ReferenceType && lv.locals[i] instanceof ReferenceType) {
-            if (! locals[i].equals(lv.locals[i])) { // needed in case of two UninitializedObjectType instances
-                final Type sup = ((ReferenceType) locals[i]).getFirstCommonSuperclass((ReferenceType) lv.locals[i]);
+            // We won't accept an unitialized object if we know it was initialized;
+            // compare vmspec2, 4.9.4, last paragraph.
+            if (!(locals[i] instanceof UninitializedObjectType) && lv.locals[i] instanceof UninitializedObjectType) {
+                throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object in the local variables detected.");
+            }
+            // Even harder, what about _different_ uninitialized object types?!
+            if (!locals[i].equals(lv.locals[i]) && locals[i] instanceof UninitializedObjectType && lv.locals[i] instanceof UninitializedObjectType) {
+                throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object in the local variables detected.");
+            }
+            // If we just didn't know that it was initialized, we have now learned.
+            if (locals[i] instanceof UninitializedObjectType && !(lv.locals[i] instanceof UninitializedObjectType)) {
+                locals[i] = ((UninitializedObjectType) locals[i]).getInitialized();
+            }
+            if (locals[i] instanceof ReferenceType && lv.locals[i] instanceof ReferenceType) {
+                if (!locals[i].equals(lv.locals[i])) { // needed in case of two UninitializedObjectType instances
+                    final Type sup = ((ReferenceType) locals[i]).getFirstCommonSuperclass((ReferenceType) lv.locals[i]);
 
-                if (sup == null) {
-                    // We should have checked this in Pass2!
-                    throw new AssertionViolatedException(
-                        "Could not load all the super classes of '"+locals[i]+"' and '"+lv.locals[i]+"'.");
+                    if (sup == null) {
+                        // We should have checked this in Pass2!
+                        throw new AssertionViolatedException("Could not load all the super classes of '" + locals[i] + "' and '" + lv.locals[i] + "'.");
+                    }
+                    locals[i] = sup;
                 }
-                locals[i] = sup;
+            } else if (!locals[i].equals(lv.locals[i])) {
+                /*
+                 * TODO if ((locals[i] instanceof org.apache.bcel.generic.ReturnaddressType) && (lv.locals[i] instanceof
+                 * org.apache.bcel.generic.ReturnaddressType)) { //System.err.println("merging "+locals[i]+" and "+lv.locals[i]); throw
+                 * new AssertionViolatedException("Merging different ReturnAddresses: '"+locals[i]+"' and '"+lv.locals[i]+"'."); }
+                 */
+                locals[i] = Type.UNKNOWN;
             }
-        } else if (! locals[i].equals(lv.locals[i]) ) {
-/*TODO
-            if ((locals[i] instanceof org.apache.bcel.generic.ReturnaddressType) &&
-                (lv.locals[i] instanceof org.apache.bcel.generic.ReturnaddressType)) {
-                //System.err.println("merging "+locals[i]+" and "+lv.locals[i]);
-                throw new AssertionViolatedException("Merging different ReturnAddresses: '"+locals[i]+"' and '"+lv.locals[i]+"'.");
-            }
-*/
-            locals[i] = Type.UNKNOWN;
-        }
         } catch (final ClassNotFoundException e) {
-        // FIXME: maybe not the best way to handle this
-        throw new AssertionViolatedException("Missing class: " + e, e);
+            // FIXME: maybe not the best way to handle this
+            throw new AssertionViolatedException("Missing class: " + e, e);
         }
     }
 
@@ -201,7 +194,7 @@ public class LocalVariables implements Cloneable {
      */
     public void set(final int slotIndex, final Type type) { // TODO could be package-protected?
         if (type == Type.BYTE || type == Type.SHORT || type == Type.BOOLEAN || type == Type.CHAR) {
-            throw new AssertionViolatedException("LocalVariables do not know about '"+type+"'. Use Type.INT instead.");
+            throw new AssertionViolatedException("LocalVariables do not know about '" + type + "'. Use Type.INT instead.");
         }
         locals[slotIndex] = type;
     }
@@ -212,7 +205,7 @@ public class LocalVariables implements Cloneable {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        for (int i=0; i<locals.length; i++) {
+        for (int i = 0; i < locals.length; i++) {
             sb.append(Integer.toString(i));
             sb.append(": ");
             sb.append(locals[i]);

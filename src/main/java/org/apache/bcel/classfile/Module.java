@@ -24,10 +24,10 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class is derived from <em>Attribute</em> and represents the list of modules required, exported, opened or provided by a module.
- * There may be at most one Module attribute in a ClassFile structure.
+ * This class is derived from <em>Attribute</em> and represents the list of modules required, exported, opened or
+ * provided by a module. There may be at most one Module attribute in a ClassFile structure.
  *
- * @see   Attribute
+ * @see Attribute
  * @since 6.4.0
  */
 public final class Module extends Attribute {
@@ -45,6 +45,7 @@ public final class Module extends Attribute {
 
     /**
      * Construct object from input stream.
+     * 
      * @param name_index Index in constant pool
      * @param length Content length in bytes
      * @param input Input stream
@@ -89,16 +90,14 @@ public final class Module extends Attribute {
         }
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
+     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitModule(this);
     }
 
@@ -108,7 +107,7 @@ public final class Module extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
+    public Attribute copy(final ConstantPool _constant_pool) {
         final Module c = (Module) clone();
 
         c.requiresTable = new ModuleRequires[requiresTable.length];
@@ -135,7 +134,6 @@ public final class Module extends Attribute {
         return c;
     }
 
-
     /**
      * Dump Module attribute to file stream in binary format.
      *
@@ -143,7 +141,7 @@ public final class Module extends Attribute {
      * @throws IOException if an I/O error occurs.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
+    public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
 
         file.writeShort(moduleNameIndex);
@@ -176,7 +174,6 @@ public final class Module extends Attribute {
         }
     }
 
-
     /**
      * @return table of exported interfaces
      * @see ModuleExports
@@ -184,7 +181,6 @@ public final class Module extends Attribute {
     public ModuleExports[] getExportsTable() {
         return exportsTable;
     }
-
 
     /**
      * @return table of provided interfaces
@@ -194,7 +190,6 @@ public final class Module extends Attribute {
         return opensTable;
     }
 
-
     /**
      * @return table of provided interfaces
      * @see ModuleProvides
@@ -202,7 +197,6 @@ public final class Module extends Attribute {
     public ModuleProvides[] getProvidesTable() {
         return providesTable;
     }
-
 
     /**
      * @return table of required modules
@@ -212,7 +206,6 @@ public final class Module extends Attribute {
         return requiresTable;
     }
 
-
     /**
      * @return String representation, i.e., a list of packages.
      */
@@ -221,10 +214,10 @@ public final class Module extends Attribute {
         final ConstantPool cp = super.getConstantPool();
         final StringBuilder buf = new StringBuilder();
         buf.append("Module:\n");
-        buf.append("  name:    ") .append(cp.getConstantString(moduleNameIndex, Const.CONSTANT_Module).replace('/', '.')).append("\n");
-        buf.append("  flags:   ") .append(String.format("%04x", moduleFlags)).append("\n");
+        buf.append("  name:    ").append(cp.getConstantString(moduleNameIndex, Const.CONSTANT_Module).replace('/', '.')).append("\n");
+        buf.append("  flags:   ").append(String.format("%04x", moduleFlags)).append("\n");
         final String version = moduleVersionIndex == 0 ? "0" : cp.getConstantString(moduleVersionIndex, Const.CONSTANT_Utf8);
-        buf.append("  version: ") .append(version).append("\n");
+        buf.append("  version: ").append(version).append("\n");
 
         buf.append("  requires(").append(requiresTable.length).append("):\n");
         for (final ModuleRequires module : requiresTable) {
@@ -252,6 +245,6 @@ public final class Module extends Attribute {
             buf.append("    ").append(module.toString(cp)).append("\n");
         }
 
-        return buf.substring(0, buf.length()-1); // remove the last newline
+        return buf.substring(0, buf.length() - 1); // remove the last newline
     }
 }

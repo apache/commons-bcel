@@ -39,8 +39,7 @@ import org.apache.bcel.generic.SimpleElementValueGen;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
 
-public abstract class AbstractTestCase
-{
+public abstract class AbstractTestCase {
     private static final boolean verbose = false;
 
     protected static final String PACKAGE_BASE_NAME = AbstractTestCase.class.getPackage().getName();
@@ -51,11 +50,8 @@ public abstract class AbstractTestCase
     // package base name in signature format, i.e. with '/' separators instead of '.'
     protected static final String PACKAGE_BASE_SIG = PACKAGE_BASE_NAME.replace('.', '/');
 
-    public AnnotationEntryGen createFruitAnnotationEntry(final ConstantPoolGen cp,
-            final String aFruit, final boolean visibility)
-    {
-        final SimpleElementValueGen evg = new SimpleElementValueGen(
-                ElementValueGen.STRING, cp, aFruit);
+    public AnnotationEntryGen createFruitAnnotationEntry(final ConstantPoolGen cp, final String aFruit, final boolean visibility) {
+        final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.STRING, cp, aFruit);
         final ElementValuePairGen nvGen = new ElementValuePairGen("fruit", evg, cp);
         final ObjectType t = new ObjectType("SimpleStringAnnotation");
         final List<ElementValuePairGen> elements = new ArrayList<>();
@@ -63,10 +59,8 @@ public abstract class AbstractTestCase
         return new AnnotationEntryGen(t, elements, visibility, cp);
     }
 
-    public SyntheticRepository createRepos(final String cpentry)
-    {
-        try (ClassPath cp = new ClassPath("target" + File.separator + "testdata"
-                + File.separator + cpentry + File.separator)) {
+    public SyntheticRepository createRepos(final String cpentry) {
+        try (ClassPath cp = new ClassPath("target" + File.separator + "testdata" + File.separator + cpentry + File.separator)) {
             return SyntheticRepository.getInstance(cp);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -77,17 +71,14 @@ public abstract class AbstractTestCase
      * @param name
      * @return Path to file under the TESTDATA directory
      */
-    protected File createTestdataFile(final String name)
-    {
+    protected File createTestdataFile(final String name) {
         return new File(TESTDATA, name);
     }
 
-    protected String dumpAnnotationEntries(final AnnotationEntry[] as)
-    {
+    protected String dumpAnnotationEntries(final AnnotationEntry[] as) {
         final StringBuilder result = new StringBuilder();
         result.append("[");
-        for (int i = 0; i < as.length; i++)
-        {
+        for (int i = 0; i < as.length; i++) {
             final AnnotationEntry annotation = as[i];
             result.append(annotation.toShortString());
             if (i + 1 < as.length) {
@@ -98,12 +89,10 @@ public abstract class AbstractTestCase
         return result.toString();
     }
 
-    protected String dumpAnnotationEntries(final AnnotationEntryGen[] as)
-    {
+    protected String dumpAnnotationEntries(final AnnotationEntryGen[] as) {
         final StringBuilder result = new StringBuilder();
         result.append("[");
-        for (int i = 0; i < as.length; i++)
-        {
+        for (int i = 0; i < as.length; i++) {
             final AnnotationEntryGen annotation = as[i];
             result.append(annotation.toShortString());
             if (i + 1 < as.length) {
@@ -114,8 +103,7 @@ public abstract class AbstractTestCase
         return result.toString();
     }
 
-    protected Attribute findAttribute(final String name, final Attribute[] all)
-    {
+    protected Attribute findAttribute(final String name, final Attribute[] all) {
         final List<Attribute> chosenAttrsList = new ArrayList<>();
         for (final Attribute element : all) {
             if (verbose) {
@@ -129,8 +117,7 @@ public abstract class AbstractTestCase
         return chosenAttrsList.get(0);
     }
 
-    protected Attribute[] findAttribute(final String name, final JavaClass clazz)
-    {
+    protected Attribute[] findAttribute(final String name, final JavaClass clazz) {
         final Attribute[] all = clazz.getAttributes();
         final List<Attribute> chosenAttrsList = new ArrayList<>();
         for (final Attribute element : all) {
@@ -144,47 +131,43 @@ public abstract class AbstractTestCase
         return chosenAttrsList.toArray(new Attribute[] {});
     }
 
-    protected Method getMethod(final JavaClass cl, final String methodname)
-    {
+    protected Method getMethod(final JavaClass cl, final String methodname) {
         final Method[] methods = cl.getMethods();
         for (final Method m : methods) {
-            if (m.getName().equals(methodname))
-            {
+            if (m.getName().equals(methodname)) {
                 return m;
             }
         }
         return null;
     }
 
-    protected JavaClass getTestClass(final String name) throws ClassNotFoundException
-    {
+    protected JavaClass getTestClass(final String name) throws ClassNotFoundException {
         return SyntheticRepository.getInstance().loadClass(name);
     }
 
     /**
      * Delete a file under the TESTDATA directory
+     * 
      * @param name
      * @return
      */
-    protected boolean wipe(final String name)
-    {
+    protected boolean wipe(final String name) {
         return new File(TESTDATA, name).delete();
     }
 
     /**
      * Delete a directory and file under the TESTDATA directory
+     * 
      * @param dir
      * @param name
      * @return true if the file was deleted
      */
-    protected boolean wipe(final String dir, final String name)
-    {
+    protected boolean wipe(final String dir, final String name) {
         // The parameter is relative to the TESTDATA dir
         final boolean b = wipe(dir + File.separator + name);
         final File testDir = new File(TESTDATA, dir);
         final String[] files = testDir.list();
-        if (files == null || files.length == 0)
-        {
+        if (files == null || files.length == 0) {
             if (!testDir.delete()) {
                 System.err.println("Failed to remove: " + testDir);
             }

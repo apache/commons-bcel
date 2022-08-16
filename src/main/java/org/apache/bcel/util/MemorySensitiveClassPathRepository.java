@@ -24,9 +24,10 @@ import java.util.Map;
 import org.apache.bcel.classfile.JavaClass;
 
 /**
- * This repository is used in situations where a Class is created outside the realm of a ClassLoader. Classes are loaded from the file systems using the paths
- * specified in the given class path. By default, this is the value returned by ClassPath.getClassPath(). This repository holds onto classes with
- * SoftReferences, and will reload as needed, in cases where memory sizes are important.
+ * This repository is used in situations where a Class is created outside the realm of a ClassLoader. Classes are loaded
+ * from the file systems using the paths specified in the given class path. By default, this is the value returned by
+ * ClassPath.getClassPath(). This repository holds onto classes with SoftReferences, and will reload as needed, in cases
+ * where memory sizes are important.
  *
  * @see org.apache.bcel.Repository
  */

@@ -25,16 +25,20 @@ package org.apache.bcel;
 @Deprecated
 public interface ExceptionConstants {
 
-    /** The mother of all exceptions
+    /**
+     * The mother of all exceptions
      */
     Class<Throwable> THROWABLE = Throwable.class;
-    /** Super class of any run-time exception
+    /**
+     * Super class of any run-time exception
      */
     Class<RuntimeException> RUNTIME_EXCEPTION = RuntimeException.class;
-    /** Super class of any linking exception (aka Linkage Error)
+    /**
+     * Super class of any linking exception (aka Linkage Error)
      */
     Class<LinkageError> LINKING_EXCEPTION = LinkageError.class;
-    /** Linking Exceptions
+    /**
+     * Linking Exceptions
      */
     Class<ClassCircularityError> CLASS_CIRCULARITY_ERROR = ClassCircularityError.class;
     Class<ClassFormatError> CLASS_FORMAT_ERROR = ClassFormatError.class;
@@ -50,30 +54,26 @@ public interface ExceptionConstants {
     Class<VerifyError> VERIFY_ERROR = VerifyError.class;
     /* UnsupportedClassVersionError is new in JDK 1.2 */
 //    Class UnsupportedClassVersionError = UnsupportedClassVersionError.class;
-    /** Run-Time Exceptions
+    /**
+     * Run-Time Exceptions
      */
     Class<NullPointerException> NULL_POINTER_EXCEPTION = NullPointerException.class;
-    Class<ArrayIndexOutOfBoundsException> ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION
-                                                            = ArrayIndexOutOfBoundsException.class;
+    Class<ArrayIndexOutOfBoundsException> ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION = ArrayIndexOutOfBoundsException.class;
     Class<ArithmeticException> ARITHMETIC_EXCEPTION = ArithmeticException.class;
     Class<NegativeArraySizeException> NEGATIVE_ARRAY_SIZE_EXCEPTION = NegativeArraySizeException.class;
     Class<ClassCastException> CLASS_CAST_EXCEPTION = ClassCastException.class;
     Class<IllegalMonitorStateException> ILLEGAL_MONITOR_STATE = IllegalMonitorStateException.class;
 
     /**
-     * Pre-defined exception arrays according to chapters 5.1-5.4 of the Java Virtual
-     * Machine Specification
+     * Pre-defined exception arrays according to chapters 5.1-5.4 of the Java Virtual Machine Specification
+     * 
      * @deprecated Do not use these arrays, use the static methods in the ExceptionConst implementation class instead
      */
     @Deprecated
-    Class<?>[] EXCS_CLASS_AND_INTERFACE_RESOLUTION = {
-            NO_CLASS_DEF_FOUND_ERROR, CLASS_FORMAT_ERROR, VERIFY_ERROR, ABSTRACT_METHOD_ERROR,
-            EXCEPTION_IN_INITIALIZER_ERROR, ILLEGAL_ACCESS_ERROR
-    }; // Chapter 5.1
+    Class<?>[] EXCS_CLASS_AND_INTERFACE_RESOLUTION = {NO_CLASS_DEF_FOUND_ERROR, CLASS_FORMAT_ERROR, VERIFY_ERROR, ABSTRACT_METHOD_ERROR,
+        EXCEPTION_IN_INITIALIZER_ERROR, ILLEGAL_ACCESS_ERROR}; // Chapter 5.1
     @Deprecated
-    Class<?>[] EXCS_FIELD_AND_METHOD_RESOLUTION = {
-            NO_SUCH_FIELD_ERROR, ILLEGAL_ACCESS_ERROR, NO_SUCH_METHOD_ERROR
-    }; // Chapter 5.2
+    Class<?>[] EXCS_FIELD_AND_METHOD_RESOLUTION = {NO_SUCH_FIELD_ERROR, ILLEGAL_ACCESS_ERROR, NO_SUCH_METHOD_ERROR}; // Chapter 5.2
 
     /**
      * Empty array.
@@ -88,8 +88,6 @@ public interface ExceptionConstants {
     Class<?>[] EXCS_STRING_RESOLUTION = new Class[0];
     // Chapter 5.4 (no errors but the ones that _always_ could happen! How stupid.)
     @Deprecated
-    Class<?>[] EXCS_ARRAY_EXCEPTION = {
-            NULL_POINTER_EXCEPTION, ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION
-    };
+    Class<?>[] EXCS_ARRAY_EXCEPTION = {NULL_POINTER_EXCEPTION, ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION};
 
 }

@@ -18,23 +18,60 @@
 
 package org.apache.bcel.data;
 
-    // Due to the way try finally is implemented in the standard java compiler
-    // from Oracle, this class generates a huge (>32767 code bytes) <init> method.
-    // Verified with javac versions 1.8.0_261, 11.0.10 and 17.0.1.
-    class LargeMethod {{
-      int a;
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      try {a=0;} finally {
-      a=0;
-      }}}}}}}}}}}}
-    }}
+// Due to the way try finally is implemented in the standard java compiler
+// from Oracle, this class generates a huge (>32767 code bytes) <init> method.
+// Verified with javac versions 1.8.0_261, 11.0.10 and 17.0.1.
+class LargeMethod {
+    {
+        int a;
+        try {
+            a = 0;
+        } finally {
+            try {
+                a = 0;
+            } finally {
+                try {
+                    a = 0;
+                } finally {
+                    try {
+                        a = 0;
+                    } finally {
+                        try {
+                            a = 0;
+                        } finally {
+                            try {
+                                a = 0;
+                            } finally {
+                                try {
+                                    a = 0;
+                                } finally {
+                                    try {
+                                        a = 0;
+                                    } finally {
+                                        try {
+                                            a = 0;
+                                        } finally {
+                                            try {
+                                                a = 0;
+                                            } finally {
+                                                try {
+                                                    a = 0;
+                                                } finally {
+                                                    try {
+                                                        a = 0;
+                                                    } finally {
+                                                        a = 0;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

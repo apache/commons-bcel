@@ -24,24 +24,21 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class is derived from the abstract {@link Constant}
- * and represents a reference to a float object.
+ * This class is derived from the abstract {@link Constant} and represents a reference to a float object.
  *
- * @see     Constant
+ * @see Constant
  */
 public final class ConstantFloat extends Constant implements ConstantObject {
 
     private float bytes;
 
-
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
+     * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a
+     * physical copy.
      */
     public ConstantFloat(final ConstantFloat c) {
         this(c.getBytes());
     }
-
 
     /**
      * Initialize instance from file data.
@@ -53,7 +50,6 @@ public final class ConstantFloat extends Constant implements ConstantObject {
         this(file.readFloat());
     }
 
-
     /**
      * @param bytes Data
      */
@@ -62,19 +58,16 @@ public final class ConstantFloat extends Constant implements ConstantObject {
         this.bytes = bytes;
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
+     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitConstantFloat(this);
     }
-
 
     /**
      * Dump constant float to file stream in binary format.
@@ -83,11 +76,10 @@ public final class ConstantFloat extends Constant implements ConstantObject {
      * @throws IOException if an I/O error occurs.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
+    public void dump(final DataOutputStream file) throws IOException {
         file.writeByte(super.getTag());
         file.writeFloat(bytes);
     }
-
 
     /**
      * @return data, i.e., 4 bytes.
@@ -96,22 +88,20 @@ public final class ConstantFloat extends Constant implements ConstantObject {
         return bytes;
     }
 
-
-    /** @return Float object
+    /**
+     * @return Float object
      */
     @Override
-    public Object getConstantValue( final ConstantPool cp ) {
+    public Object getConstantValue(final ConstantPool cp) {
         return Float.valueOf(bytes);
     }
-
 
     /**
      * @param bytes the raw bytes that represent this float
      */
-    public void setBytes( final float bytes ) {
+    public void setBytes(final float bytes) {
         this.bytes = bytes;
     }
-
 
     /**
      * @return String representation.

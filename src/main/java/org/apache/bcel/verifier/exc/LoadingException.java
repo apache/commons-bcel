@@ -17,13 +17,12 @@
  */
 package org.apache.bcel.verifier.exc;
 
-
 /**
- * When loading a class file, BCEL will throw an instance of LoadingException if
- * the class file is malformed; so it is not conforming to the "Pass 1" verification
- * process as described in the Java Virtual Machine specification, 2nd. edition.
+ * When loading a class file, BCEL will throw an instance of LoadingException if the class file is malformed; so it is
+ * not conforming to the "Pass 1" verification process as described in the Java Virtual Machine specification, 2nd.
+ * edition.
  */
-public class LoadingException extends VerifierConstraintViolatedException{
+public class LoadingException extends VerifierConstraintViolatedException {
 
     private static final long serialVersionUID = -7911901533049018823L;
 
@@ -37,6 +36,6 @@ public class LoadingException extends VerifierConstraintViolatedException{
      * Constructs a new LoadingException with the specified error message.
      */
     public LoadingException(final String message) {
-        super (message);
+        super(message);
     }
 }

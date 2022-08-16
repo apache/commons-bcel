@@ -22,16 +22,13 @@ import org.apache.bcel.Const;
 /**
  * This interface contains shareable instruction objects.
  *
- * In order to save memory you can use some instructions multiply,
- * since they have an immutable state and are directly derived from
- * Instruction.  I.e. they have no instance fields that could be
- * changed. Since some of these instructions like ICONST_0 occur
- * very frequently this can save a lot of time and space. This
- * feature is an adaptation of the FlyWeight design pattern, we
- * just use an array instead of a factory.
+ * In order to save memory you can use some instructions multiply, since they have an immutable state and are directly
+ * derived from Instruction. I.e. they have no instance fields that could be changed. Since some of these instructions
+ * like ICONST_0 occur very frequently this can save a lot of time and space. This feature is an adaptation of the
+ * FlyWeight design pattern, we just use an array instead of a factory.
  *
- * The Instructions can also accessed directly under their names, so
- * it's possible to write il.append(Instruction.ICONST_0);
+ * The Instructions can also accessed directly under their names, so it's possible to write
+ * il.append(Instruction.ICONST_0);
  *
  */
 public final class InstructionConst {
@@ -40,8 +37,7 @@ public final class InstructionConst {
      * Predefined instruction objects
      */
     /*
-     * NOTE these are not currently immutable, because Instruction
-     * has mutable protected fields opcode and length.
+     * NOTE these are not currently immutable, because Instruction has mutable protected fields opcode and length.
      */
     public static final Instruction NOP = new NOP();
     public static final Instruction ACONST_NULL = new ACONST_NULL();
@@ -151,8 +147,9 @@ public final class InstructionConst {
     public static final Instruction MONITORENTER = new MONITORENTER();
     public static final Instruction MONITOREXIT = new MONITOREXIT();
 
-    /** You can use these constants in multiple places safely, if you can guarantee
-     * that you will never alter their internal values, e.g. call setIndex().
+    /**
+     * You can use these constants in multiple places safely, if you can guarantee that you will never alter their internal
+     * values, e.g. call setIndex().
      */
     public static final LocalVariableInstruction THIS = new ALOAD(0);
     public static final LocalVariableInstruction ALOAD_0 = THIS;
@@ -168,8 +165,8 @@ public final class InstructionConst {
     public static final LocalVariableInstruction ISTORE_1 = new ISTORE(1);
     public static final LocalVariableInstruction ISTORE_2 = new ISTORE(2);
 
-    /** Get object via its opcode, for immutable instructions like
-     * branch instructions entries are set to null.
+    /**
+     * Get object via its opcode, for immutable instructions like branch instructions entries are set to null.
      */
     private static final Instruction[] INSTRUCTIONS = new Instruction[256];
 
@@ -285,6 +282,7 @@ public final class InstructionConst {
 
     /**
      * Gets the Instruction.
+     * 
      * @param index the index, e.g. {@link Const#RETURN}
      * @return the entry from the private INSTRUCTIONS table
      */
@@ -292,5 +290,6 @@ public final class InstructionConst {
         return INSTRUCTIONS[index];
     }
 
-    private InstructionConst() { } // non-instantiable
+    private InstructionConst() {
+    } // non-instantiable
 }

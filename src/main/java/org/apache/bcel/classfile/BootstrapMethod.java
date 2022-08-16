@@ -25,12 +25,11 @@ import java.util.Arrays;
 import org.apache.bcel.Const;
 
 /**
- * This class represents a bootstrap method attribute, i.e., the bootstrap
- * method ref, the number of bootstrap arguments and an array of the
- * bootstrap arguments.
+ * This class represents a bootstrap method attribute, i.e., the bootstrap method ref, the number of bootstrap arguments
+ * and an array of the bootstrap arguments.
  *
- * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.23">
- * The class File Format : The BootstrapMethods Attribute</a>
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.23"> The class File Format :
+ *      The BootstrapMethods Attribute</a>
  * @since 6.0
  */
 public class BootstrapMethod implements Cloneable {
@@ -40,7 +39,6 @@ public class BootstrapMethod implements Cloneable {
 
     /** Array of references to the constant_pool table */
     private int[] bootstrapArguments;
-
 
     /**
      * Initialize from another object.
@@ -143,18 +141,16 @@ public class BootstrapMethod implements Cloneable {
      */
     @Override
     public final String toString() {
-        return "BootstrapMethod(" + bootstrapMethodRef + ", " + bootstrapArguments.length + ", "
-               + Arrays.toString(bootstrapArguments) + ")";
+        return "BootstrapMethod(" + bootstrapMethodRef + ", " + bootstrapArguments.length + ", " + Arrays.toString(bootstrapArguments) + ")";
     }
 
     /**
      * @return Resolved string representation
      */
-    public final String toString( final ConstantPool constantPool ) {
+    public final String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
         String bootstrap_method_name;
-        bootstrap_method_name = constantPool.constantToString(bootstrapMethodRef,
-                Const.CONSTANT_MethodHandle);
+        bootstrap_method_name = constantPool.constantToString(bootstrapMethodRef, Const.CONSTANT_MethodHandle);
         buf.append(Utility.compactClassName(bootstrap_method_name, false));
         final int num_bootstrap_arguments = bootstrapArguments.length;
         if (num_bootstrap_arguments > 0) {

@@ -17,23 +17,18 @@
  */
 package org.apache.bcel.verifier.structurals;
 
-
-
 /**
- * This class represents a JVM execution frame; that means,
- * a local variable array and an operand stack.
+ * This class represents a JVM execution frame; that means, a local variable array and an operand stack.
  *
  */
 
-public class Frame{
+public class Frame {
 
     /**
-     * For instance initialization methods, it is important to remember
-     * which instance it is that is not initialized yet. It will be
-     * initialized invoking another constructor later.
-     * NULL means the instance already *is* initialized.
-     * @deprecated Use the getter/setter to access the field as it may
-     * be made private in a later release
+     * For instance initialization methods, it is important to remember which instance it is that is not initialized yet. It
+     * will be initialized invoking another constructor later. NULL means the instance already *is* initialized.
+     * 
+     * @deprecated Use the getter/setter to access the field as it may be made private in a later release
      */
     @Deprecated
     protected static UninitializedObjectType _this;
@@ -121,17 +116,20 @@ public class Frame{
         return stack;
     }
 
-    /** @return a hash code value for the object.
+    /**
+     * @return a hash code value for the object.
      */
     @Override
-    public int hashCode() { return stack.hashCode() ^ locals.hashCode(); }
+    public int hashCode() {
+        return stack.hashCode() ^ locals.hashCode();
+    }
 
     /**
      * Returns a String representation of the Frame instance.
      */
     @Override
     public String toString() {
-        String s="Local Variables:\n";
+        String s = "Local Variables:\n";
         s += locals;
         s += "OperandStack:\n";
         s += stack;

@@ -17,10 +17,10 @@
  */
 package org.apache.bcel.verifier.tests;
 
-public abstract class TestLegalInvokeVirtual02 implements Runnable{
+public abstract class TestLegalInvokeVirtual02 implements Runnable {
 
     public static void test1(final TestLegalInvokeVirtual02 t, final int i) {
-        if(i > 0) {
+        if (i > 0) {
             t.run();
         }
     }

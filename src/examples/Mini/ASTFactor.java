@@ -24,30 +24,29 @@ package Mini;
  *
  */
 public class ASTFactor extends ASTExpr {
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTFactor(p, id);
-  }
-
-  // Generated methods
-  ASTFactor(final int id) {
-    super(id);
-  }
-
-  ASTFactor(final MiniParser p, final int id) {
-    super(p, id);
-  }
-
-  // Inherited closeNode(), dump()
-
-  /**
-   * Drop this node, if kind == -1, because then it has just one child node
-   * and may be safely replaced with it.
-   */
-  @Override
-  public ASTExpr traverse(final Environment env) {
-    if(kind == -1) {
-        return exprs[0].traverse(env);
+    public static Node jjtCreate(final MiniParser p, final int id) {
+        return new ASTFactor(p, id);
     }
-    return new ASTExpr(exprs, kind, line, column).traverse(env);
-  }
+
+    // Generated methods
+    ASTFactor(final int id) {
+        super(id);
+    }
+
+    ASTFactor(final MiniParser p, final int id) {
+        super(p, id);
+    }
+
+    // Inherited closeNode(), dump()
+
+    /**
+     * Drop this node, if kind == -1, because then it has just one child node and may be safely replaced with it.
+     */
+    @Override
+    public ASTExpr traverse(final Environment env) {
+        if (kind == -1) {
+            return exprs[0].traverse(env);
+        }
+        return new ASTExpr(exprs, kind, line, column).traverse(env);
+    }
 }

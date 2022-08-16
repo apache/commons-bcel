@@ -20,21 +20,20 @@ package org.apache.bcel.generic;
 /**
  * FCONST - Push 0.0, 1.0 or 2.0, other values cause an exception
  *
- * <PRE>Stack: ... -&gt; ..., </PRE>
+ * <PRE>
+ * Stack: ... -&gt; ...,
+ * </PRE>
  *
  */
 public class FCONST extends Instruction implements ConstantPushInstruction {
 
     private float value;
 
-
     /**
-     * Empty constructor needed for Instruction.readInstruction.
-     * Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     FCONST() {
     }
-
 
     public FCONST(final float f) {
         super(org.apache.bcel.Const.FCONST_0, (short) 1);
@@ -50,17 +49,14 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
         value = f;
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitPushInstruction(this);
         v.visitStackProducer(this);
         v.visitTypedInstruction(this);
@@ -68,14 +64,13 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
         v.visitFCONST(this);
     }
 
-
-    /** @return Type.FLOAT
+    /**
+     * @return Type.FLOAT
      */
     @Override
-    public Type getType( final ConstantPoolGen cp ) {
+    public Type getType(final ConstantPoolGen cp) {
         return Type.FLOAT;
     }
-
 
     @Override
     public Number getValue() {

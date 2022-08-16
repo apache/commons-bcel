@@ -31,7 +31,7 @@ import org.apache.bcel.generic.Type;
 public class GraphicalVerifier {
 
     /** Main method. */
-    public static void main( final String[] args ) {
+    public static void main(final String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (final Exception e) {
@@ -40,21 +40,19 @@ public class GraphicalVerifier {
         new GraphicalVerifier();
     }
 
-
     private final boolean packFrame = false;
-
 
     /** Constructor. */
     public GraphicalVerifier() {
         final VerifierAppFrame frame = new VerifierAppFrame();
-        //Frames �berpr�fen, die voreingestellte Gr��e haben
-        //Frames packen, die nutzbare bevorzugte Gr��eninformationen enthalten, z.B. aus ihrem Layout
+        // Frames �berpr�fen, die voreingestellte Gr��e haben
+        // Frames packen, die nutzbare bevorzugte Gr��eninformationen enthalten, z.B. aus ihrem Layout
         if (packFrame) {
             frame.pack();
         } else {
             frame.validate();
         }
-        //Das Fenster zentrieren
+        // Das Fenster zentrieren
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         final Dimension frameSize = frame.getSize();
         if (frameSize.height > screenSize.height) {
@@ -63,8 +61,7 @@ public class GraphicalVerifier {
         if (frameSize.width > screenSize.width) {
             frameSize.width = screenSize.width;
         }
-        frame.setLocation((screenSize.width - frameSize.width) / 2,
-                (screenSize.height - frameSize.height) / 2);
+        frame.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
         frame.setVisible(true);
         frame.getClassNamesJList().setModel(new VerifierFactoryListModel());
         VerifierFactory.getVerifier(Type.OBJECT.getClassName()); // Fill list with java.lang.Object

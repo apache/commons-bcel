@@ -47,6 +47,4 @@ public class NanoTimer {
         return (double) timeNanos / 1000000000 + " s";
     }
 
-
-
 }

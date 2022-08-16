@@ -24,15 +24,13 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class is derived from the abstract  {@link Constant}
- * and represents a reference to a Double object.
+ * This class is derived from the abstract {@link Constant} and represents a reference to a Double object.
  *
- * @see     Constant
+ * @see Constant
  */
 public final class ConstantDouble extends Constant implements ConstantObject {
 
     private double bytes;
-
 
     /**
      * Initialize from another object.
@@ -40,7 +38,6 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     public ConstantDouble(final ConstantDouble c) {
         this(c.getBytes());
     }
-
 
     /**
      * Initialize instance from file data.
@@ -52,7 +49,6 @@ public final class ConstantDouble extends Constant implements ConstantObject {
         this(file.readDouble());
     }
 
-
     /**
      * @param bytes Data
      */
@@ -61,19 +57,16 @@ public final class ConstantDouble extends Constant implements ConstantObject {
         this.bytes = bytes;
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
+     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitConstantDouble(this);
     }
-
 
     /**
      * Dump constant double to file stream in binary format.
@@ -82,11 +75,10 @@ public final class ConstantDouble extends Constant implements ConstantObject {
      * @throws IOException if an I/O error occurs.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
+    public void dump(final DataOutputStream file) throws IOException {
         file.writeByte(super.getTag());
         file.writeDouble(bytes);
     }
-
 
     /**
      * @return data, i.e., 8 bytes.
@@ -95,22 +87,20 @@ public final class ConstantDouble extends Constant implements ConstantObject {
         return bytes;
     }
 
-
-    /** @return Double object
+    /**
+     * @return Double object
      */
     @Override
-    public Object getConstantValue( final ConstantPool cp ) {
+    public Object getConstantValue(final ConstantPool cp) {
         return Double.valueOf(bytes);
     }
-
 
     /**
      * @param bytes the raw bytes that represent the double value
      */
-    public void setBytes( final double bytes ) {
+    public void setBytes(final double bytes) {
         this.bytes = bytes;
     }
-
 
     /**
      * @return String representation.

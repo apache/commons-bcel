@@ -26,8 +26,8 @@ import org.apache.bcel.generic.NOP;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test for https://issues.apache.org/jira/browse/BCEL-267 "Race conditions on
- * static fields in BranchHandle and InstructionHandle".
+ * Test for https://issues.apache.org/jira/browse/BCEL-267 "Race conditions on static fields in BranchHandle and
+ * InstructionHandle".
  */
 public class HandleTestCase {
 
@@ -36,8 +36,7 @@ public class HandleTestCase {
     static final int MAXJ = 1000;
 
     /**
-     * Asserts that branch handles can be added an instruction list, without
-     * corrupting the list.
+     * Asserts that branch handles can be added an instruction list, without corrupting the list.
      */
     static void branchHandles() {
         for (int i = 0; i < MAXI; i++) {
@@ -53,8 +52,7 @@ public class HandleTestCase {
                     if (j > 0) {
                         checkLinkage(handle, j);
                         if (start != ((GOTO) handle.getInstruction()).getTarget()) {
-                            final AssertionError error = new AssertionError(
-                                    "unexpected instruction at index " + j);
+                            final AssertionError error = new AssertionError("unexpected instruction at index " + j);
                             exception = error;
                             throw error;
                         }
@@ -86,8 +84,7 @@ public class HandleTestCase {
     }
 
     /**
-     * Asserts that instruction handles can be added an instruction list, without
-     * corrupting the list.
+     * Asserts that instruction handles can be added an instruction list, without corrupting the list.
      */
     static void handles() {
         for (int i = 0; i < MAXI; i++) {
@@ -135,8 +132,7 @@ public class HandleTestCase {
     }
 
     /**
-     * Assert that two independent instruction lists can be modified concurrently.
-     * Here: inserting branch instructions.
+     * Assert that two independent instruction lists can be modified concurrently. Here: inserting branch instructions.
      */
     @Test
     public void testBranchHandle() throws Throwable {
@@ -144,8 +140,7 @@ public class HandleTestCase {
     }
 
     /**
-     * Assert that two independent instruction lists can be modified concurrently.
-     * Here: inserting regular instructions.
+     * Assert that two independent instruction lists can be modified concurrently. Here: inserting regular instructions.
      */
     @Test
     public void testInstructionHandle() throws Throwable {

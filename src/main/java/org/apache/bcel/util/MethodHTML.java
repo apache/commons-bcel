@@ -39,9 +39,8 @@ final class MethodHTML {
     private final ConstantHTML constantHtml;
     private final AttributeHTML attributeHtml;
 
-
-    MethodHTML(final String dir, final String className, final Method[] methods, final Field[] fields,
-            final ConstantHTML constantHtml, final AttributeHTML attributeHtml, final Charset charset) throws IOException {
+    MethodHTML(final String dir, final String className, final Method[] methods, final Field[] fields, final ConstantHTML constantHtml,
+        final AttributeHTML attributeHtml, final Charset charset) throws IOException {
         this.className = className;
         this.attributeHtml = attributeHtml;
         this.constantHtml = constantHtml;
@@ -51,15 +50,13 @@ final class MethodHTML {
             printWriter.print(charset.name());
             printWriter.println("\"></head>");
             printWriter.println("<BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
-            printWriter.println("<TR><TH ALIGN=LEFT>Access&nbsp;flags</TH><TH ALIGN=LEFT>Type</TH>"
-                    + "<TH ALIGN=LEFT>Field&nbsp;name</TH></TR>");
+            printWriter.println("<TR><TH ALIGN=LEFT>Access&nbsp;flags</TH><TH ALIGN=LEFT>Type</TH>" + "<TH ALIGN=LEFT>Field&nbsp;name</TH></TR>");
             for (final Field field : fields) {
                 writeField(field);
             }
             printWriter.println("</TABLE>");
             printWriter.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Access&nbsp;flags</TH>"
-                    + "<TH ALIGN=LEFT>Return&nbsp;type</TH><TH ALIGN=LEFT>Method&nbsp;name</TH>"
-                    + "<TH ALIGN=LEFT>Arguments</TH></TR>");
+                + "<TH ALIGN=LEFT>Return&nbsp;type</TH><TH ALIGN=LEFT>Method&nbsp;name</TH>" + "<TH ALIGN=LEFT>Arguments</TH></TR>");
             for (int i = 0; i < methods.length; i++) {
                 writeMethod(methods[i], i);
             }
@@ -67,21 +64,19 @@ final class MethodHTML {
         }
     }
 
-
     /**
      * Print field of class.
      *
      * @param field field to print
      */
-    private void writeField( final Field field ) {
+    private void writeField(final Field field) {
         final String type = Utility.signatureToString(field.getSignature());
         final String name = field.getName();
         String access = Utility.accessToString(field.getAccessFlags());
         Attribute[] attributes;
         access = Utility.replace(access, " ", "&nbsp;");
-        printWriter.print("<TR><TD><FONT COLOR=\"#FF0000\">" + access + "</FONT></TD>\n<TD>"
-                + Class2HTML.referenceType(type) + "</TD><TD><A NAME=\"field" + name + "\">" + name
-                + "</A></TD>");
+        printWriter.print("<TR><TD><FONT COLOR=\"#FF0000\">" + access + "</FONT></TD>\n<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A NAME=\"field"
+            + name + "\">" + name + "</A></TD>");
         attributes = field.getAttributes();
         // Write them to the Attributes.html file with anchor "<name>[<i>]"
         for (int i = 0; i < attributes.length; i++) {
@@ -91,16 +86,14 @@ final class MethodHTML {
             if (attributes[i].getTag() == Const.ATTR_CONSTANT_VALUE) { // Default value
                 final String str = attributes[i].toString();
                 // Reference attribute in _attributes.html
-                printWriter.print("<TD>= <A HREF=\"" + className + "_attributes.html#" + name + "@" + i
-                        + "\" TARGET=\"Attributes\">" + str + "</TD>\n");
+                printWriter.print("<TD>= <A HREF=\"" + className + "_attributes.html#" + name + "@" + i + "\" TARGET=\"Attributes\">" + str + "</TD>\n");
                 break;
             }
         }
         printWriter.println("</TR>");
     }
 
-
-    private void writeMethod( final Method method, final int methodNumber ) {
+    private void writeMethod(final Method method, final int methodNumber) {
         // Get raw signature
         final String signature = method.getSignature();
         // Get array of strings containing the argument types
@@ -114,16 +107,14 @@ final class MethodHTML {
         String access = Utility.accessToString(method.getAccessFlags());
         // Get the method's attributes, the Code Attribute in particular
         final Attribute[] attributes = method.getAttributes();
-        /* HTML doesn't like names like <clinit> and spaces are places to break
-         * lines. Both we don't want...
+        /*
+         * HTML doesn't like names like <clinit> and spaces are places to break lines. Both we don't want...
          */
         access = Utility.replace(access, " ", "&nbsp;");
         htmlName = Class2HTML.toHTML(name);
-        printWriter.print("<TR VALIGN=TOP><TD><FONT COLOR=\"#FF0000\"><A NAME=method" + methodNumber
-                + ">" + access + "</A></FONT></TD>");
-        printWriter.print("<TD>" + Class2HTML.referenceType(type) + "</TD><TD>" + "<A HREF=" + className
-                + "_code.html#method" + methodNumber + " TARGET=Code>" + htmlName
-                + "</A></TD>\n<TD>(");
+        printWriter.print("<TR VALIGN=TOP><TD><FONT COLOR=\"#FF0000\"><A NAME=method" + methodNumber + ">" + access + "</A></FONT></TD>");
+        printWriter.print("<TD>" + Class2HTML.referenceType(type) + "</TD><TD>" + "<A HREF=" + className + "_code.html#method" + methodNumber + " TARGET=Code>"
+            + htmlName + "</A></TD>\n<TD>(");
         for (int i = 0; i < args.length; i++) {
             printWriter.print(Class2HTML.referenceType(args[i]));
             if (i < args.length - 1) {
@@ -133,8 +124,7 @@ final class MethodHTML {
         printWriter.print(")</TD></TR>");
         // Check for thrown exceptions
         for (int i = 0; i < attributes.length; i++) {
-            attributeHtml.writeAttribute(attributes[i], "method" + methodNumber + "@" + i,
-                    methodNumber);
+            attributeHtml.writeAttribute(attributes[i], "method" + methodNumber + "@" + i, methodNumber);
             final byte tag = attributes[i].getTag();
             if (tag == Const.ATTR_EXCEPTIONS) {
                 printWriter.print("<TR VALIGN=TOP><TD COLSPAN=2></TD><TH ALIGN=LEFT>throws</TH><TD>");
@@ -149,8 +139,7 @@ final class MethodHTML {
             } else if (tag == Const.ATTR_CODE) {
                 final Attribute[] attributeArray = ((Code) attributes[i]).getAttributes();
                 for (int j = 0; j < attributeArray.length; j++) {
-                    attributeHtml.writeAttribute(attributeArray[j], "method" + methodNumber + "@" + i + "@"
-                            + j, methodNumber);
+                    attributeHtml.writeAttribute(attributeArray[j], "method" + methodNumber + "@" + i + "@" + j, methodNumber);
                 }
             }
         }

@@ -147,19 +147,15 @@ public class JdkGenericDumpTestCase {
     }
 
     private static Stream<String> findJavaHomesOnWindows() {
-        return Stream.concat(
-                Stream.of(KEY_JRE, KEY_JRE_9, KEY_JDK, KEY_JDK_9)
-                        .flatMap(JdkGenericDumpTestCase::getAllJavaHomesOnWindows),
-                getAllJavaHomesFromKey(EXTRA_JAVA_HOMES)
-        ).distinct();
+        return Stream.concat(Stream.of(KEY_JRE, KEY_JRE_9, KEY_JDK, KEY_JDK_9).flatMap(JdkGenericDumpTestCase::getAllJavaHomesOnWindows),
+            getAllJavaHomesFromKey(EXTRA_JAVA_HOMES)).distinct();
     }
 
     private static Stream<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
         final Set<String> javaHomes = new HashSet<>(keys.length);
         for (final String key : keys) {
             if (Advapi32Util.registryKeyExists(HKEY_LOCAL_MACHINE, keyJavaHome + "\\" + key)) {
-                final String javaHome = Advapi32Util.registryGetStringValue(HKEY_LOCAL_MACHINE,
-                    keyJavaHome + "\\" + key, "JavaHome");
+                final String javaHome = Advapi32Util.registryGetStringValue(HKEY_LOCAL_MACHINE, keyJavaHome + "\\" + key, "JavaHome");
                 if (StringUtils.isNoneBlank(javaHome) && new File(javaHome).exists()) {
                     javaHomes.add(javaHome);
                 }
@@ -169,9 +165,7 @@ public class JdkGenericDumpTestCase {
     }
 
     private static Stream<String> getAllJavaHomesFromKey(final String extraJavaHomesKey) {
-        return Stream.concat(
-                getAllJavaHomesFromPath(System.getProperty(extraJavaHomesKey)),
-                getAllJavaHomesFromPath(System.getenv(extraJavaHomesKey)));
+        return Stream.concat(getAllJavaHomesFromPath(System.getProperty(extraJavaHomesKey)), getAllJavaHomesFromPath(System.getenv(extraJavaHomesKey)));
     }
 
     private static Stream<String> getAllJavaHomesFromPath(final String path) {

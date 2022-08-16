@@ -68,7 +68,7 @@ public class Peephole {
         InstructionHandle next = null;
         int count = 0;
 
-        for (final Iterator<InstructionHandle[]> e = f.search(pat); e.hasNext(); ) {
+        for (final Iterator<InstructionHandle[]> e = f.search(pat); e.hasNext();) {
             final InstructionHandle[] match = e.next();
             final InstructionHandle first = match[0];
             final InstructionHandle last = match[match.length - 1];

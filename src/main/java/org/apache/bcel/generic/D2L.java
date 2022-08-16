@@ -19,28 +19,29 @@ package org.apache.bcel.generic;
 
 /**
  * D2L - Convert double to long
- * <PRE>Stack: ..., value.word1, value.word2 -&gt; ..., result.word1, result.word2</PRE>
+ * 
+ * <PRE>
+ * Stack: ..., value.word1, value.word2 -&gt; ..., result.word1, result.word2
+ * </PRE>
  *
  */
 public class D2L extends ConversionInstruction {
 
-    /** Convert double to long
+    /**
+     * Convert double to long
      */
     public D2L() {
         super(org.apache.bcel.Const.D2L);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitTypedInstruction(this);
         v.visitStackProducer(this);
         v.visitStackConsumer(this);

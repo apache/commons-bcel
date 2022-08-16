@@ -27,20 +27,16 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.SimpleElementValue;
 import org.junit.jupiter.api.Test;
 
-public class AnnotationDefaultAttributeTestCase extends AbstractTestCase
-{
+public class AnnotationDefaultAttributeTestCase extends AbstractTestCase {
     /**
-     * For values in an annotation that have default values, we should be able
-     * to query the AnnotationDefault attribute against the method to discover
-     * the default value that was originally declared.
+     * For values in an annotation that have default values, we should be able to query the AnnotationDefault attribute
+     * against the method to discover the default value that was originally declared.
      */
     @Test
-    public void testMethodAnnotations() throws ClassNotFoundException
-    {
+    public void testMethodAnnotations() throws ClassNotFoundException {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotation");
         final Method m = getMethod(clazz, "fruit");
-        final AnnotationDefault a = (AnnotationDefault) findAttribute(
-                "AnnotationDefault", m.getAttributes());
+        final AnnotationDefault a = (AnnotationDefault) findAttribute("AnnotationDefault", m.getAttributes());
         final SimpleElementValue val = (SimpleElementValue) a.getDefaultValue();
         assertEquals(ElementValue.STRING, val.getElementValueType(), "Wrong element value type");
         assertEquals("bananas", val.getValueString(), "Wrong default");

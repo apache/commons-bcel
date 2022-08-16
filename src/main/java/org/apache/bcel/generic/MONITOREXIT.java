@@ -21,7 +21,10 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * MONITOREXIT - Exit monitor for object
- * <PRE>Stack: ..., objectref -&gt; ...</PRE>
+ * 
+ * <PRE>
+ * Stack: ..., objectref -&gt; ...
+ * </PRE>
  *
  */
 public class MONITOREXIT extends Instruction implements ExceptionThrower, StackConsumer {
@@ -30,27 +33,21 @@ public class MONITOREXIT extends Instruction implements ExceptionThrower, StackC
         super(org.apache.bcel.Const.MONITOREXIT, (short) 1);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitExceptionThrower(this);
         v.visitStackConsumer(this);
         v.visitMONITOREXIT(this);
     }
 
-
     @Override
     public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.NULL_POINTER_EXCEPTION
-        };
+        return new Class[] {ExceptionConst.NULL_POINTER_EXCEPTION};
     }
 }

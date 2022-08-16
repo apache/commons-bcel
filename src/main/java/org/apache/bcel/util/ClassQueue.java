@@ -22,8 +22,7 @@ import java.util.LinkedList;
 import org.apache.bcel.classfile.JavaClass;
 
 /**
- * Utility class implementing a (typesafe) queue of JavaClass
- * objects.
+ * Utility class implementing a (typesafe) queue of JavaClass objects.
  *
  */
 public class ClassQueue {
@@ -34,21 +33,17 @@ public class ClassQueue {
     @Deprecated
     protected LinkedList<JavaClass> vec = new LinkedList<>(); // TODO not used externally
 
-
     public JavaClass dequeue() {
         return vec.removeFirst();
     }
-
 
     public boolean empty() {
         return vec.isEmpty();
     }
 
-
-    public void enqueue( final JavaClass clazz ) {
+    public void enqueue(final JavaClass clazz) {
         vec.addLast(clazz);
     }
-
 
     @Override
     public String toString() {

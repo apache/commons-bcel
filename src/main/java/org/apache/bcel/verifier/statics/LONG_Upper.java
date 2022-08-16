@@ -17,14 +17,13 @@
  */
 package org.apache.bcel.verifier.statics;
 
-
 import org.apache.bcel.Const;
 import org.apache.bcel.generic.Type;
 
 /**
  * This class represents the upper half of a LONG variable.
  */
-public final class LONG_Upper extends Type{
+public final class LONG_Upper extends Type {
 
     /** The one and only instance of this class. */
     private static final LONG_Upper singleton = new LONG_Upper();

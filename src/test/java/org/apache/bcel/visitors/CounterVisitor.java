@@ -77,8 +77,7 @@ import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.classfile.Visitor;
 
-public class CounterVisitor implements Visitor
-{
+public class CounterVisitor implements Visitor {
     // CHECKSTYLE:OFF (public mutable fields in test code)
     public int unknownCount;
 
@@ -205,53 +204,44 @@ public class CounterVisitor implements Visitor
     public int nestMembersCount;
     // CHECKSTYLE:ON
 
-
     @Override
-    public void visitAnnotation(final Annotations obj)
-    {
+    public void visitAnnotation(final Annotations obj) {
         annotationCount++;
     }
 
     @Override
-    public void visitAnnotationDefault(final AnnotationDefault obj)
-    {
+    public void visitAnnotationDefault(final AnnotationDefault obj) {
         annotationDefaultCount++;
     }
 
     @Override
-    public void visitAnnotationEntry(final AnnotationEntry obj)
-    {
+    public void visitAnnotationEntry(final AnnotationEntry obj) {
         annotationEntryCount++;
     }
 
     /** @since 6.0 */
     @Override
-    public void visitBootstrapMethods(final BootstrapMethods obj)
-    {
+    public void visitBootstrapMethods(final BootstrapMethods obj) {
         bootstrapMethodsCount++;
     }
 
     @Override
-    public void visitCode(final Code obj)
-    {
+    public void visitCode(final Code obj) {
         codeCount++;
     }
 
     @Override
-    public void visitCodeException(final CodeException obj)
-    {
+    public void visitCodeException(final CodeException obj) {
         codeExceptionCount++;
     }
 
     @Override
-    public void visitConstantClass(final ConstantClass obj)
-    {
+    public void visitConstantClass(final ConstantClass obj) {
         constantClassCount++;
     }
 
     @Override
-    public void visitConstantDouble(final ConstantDouble obj)
-    {
+    public void visitConstantDouble(final ConstantDouble obj) {
         constantDoubleCount++;
     }
 
@@ -262,39 +252,33 @@ public class CounterVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantFieldref(final ConstantFieldref obj)
-    {
+    public void visitConstantFieldref(final ConstantFieldref obj) {
         constantFieldrefCount++;
     }
 
     @Override
-    public void visitConstantFloat(final ConstantFloat obj)
-    {
+    public void visitConstantFloat(final ConstantFloat obj) {
         constantFloatCount++;
     }
 
     @Override
-    public void visitConstantInteger(final ConstantInteger obj)
-    {
+    public void visitConstantInteger(final ConstantInteger obj) {
         constantIntegerCount++;
     }
 
     @Override
-    public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref obj)
-    {
+    public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref obj) {
         constantInterfaceMethodrefCount++;
     }
 
     /** @since 6.0 */
     @Override
-    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj)
-    {
+    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj) {
         constantInvokeDynamic++;
     }
 
     @Override
-    public void visitConstantLong(final ConstantLong obj)
-    {
+    public void visitConstantLong(final ConstantLong obj) {
         constantLongCount++;
     }
 
@@ -305,8 +289,7 @@ public class CounterVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantMethodref(final ConstantMethodref obj)
-    {
+    public void visitConstantMethodref(final ConstantMethodref obj) {
         constantMethodrefCount++;
     }
 
@@ -323,8 +306,7 @@ public class CounterVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantNameAndType(final ConstantNameAndType obj)
-    {
+    public void visitConstantNameAndType(final ConstantNameAndType obj) {
         constantNameAndTypeCount++;
     }
 
@@ -335,118 +317,99 @@ public class CounterVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantPool(final ConstantPool obj)
-    {
+    public void visitConstantPool(final ConstantPool obj) {
         constantPoolCount++;
     }
 
     @Override
-    public void visitConstantString(final ConstantString obj)
-    {
+    public void visitConstantString(final ConstantString obj) {
         constantStringCount++;
     }
 
     @Override
-    public void visitConstantUtf8(final ConstantUtf8 obj)
-    {
+    public void visitConstantUtf8(final ConstantUtf8 obj) {
         constantUtf8Count++;
     }
 
     @Override
-    public void visitConstantValue(final ConstantValue obj)
-    {
+    public void visitConstantValue(final ConstantValue obj) {
         constantValueCount++;
     }
 
     @Override
-    public void visitDeprecated(final Deprecated obj)
-    {
+    public void visitDeprecated(final Deprecated obj) {
         deprecatedCount++;
     }
 
     @Override
-    public void visitEnclosingMethod(final EnclosingMethod obj)
-    {
+    public void visitEnclosingMethod(final EnclosingMethod obj) {
         enclosingMethodCount++;
     }
 
     @Override
-    public void visitExceptionTable(final ExceptionTable obj)
-    {
+    public void visitExceptionTable(final ExceptionTable obj) {
         exceptionTableCount++;
     }
 
     @Override
-    public void visitField(final Field obj)
-    {
+    public void visitField(final Field obj) {
         fieldCount++;
     }
 
     @Override
-    public void visitInnerClass(final InnerClass obj)
-    {
+    public void visitInnerClass(final InnerClass obj) {
         innerClassCount++;
     }
 
     @Override
-    public void visitInnerClasses(final InnerClasses obj)
-    {
+    public void visitInnerClasses(final InnerClasses obj) {
         innerClassesCount++;
     }
 
     @Override
-    public void visitJavaClass(final JavaClass obj)
-    {
+    public void visitJavaClass(final JavaClass obj) {
         javaClassCount++;
     }
 
     @Override
-    public void visitLineNumber(final LineNumber obj)
-    {
+    public void visitLineNumber(final LineNumber obj) {
         lineNumberCount++;
     }
 
     @Override
-    public void visitLineNumberTable(final LineNumberTable obj)
-    {
+    public void visitLineNumberTable(final LineNumberTable obj) {
         lineNumberTableCount++;
     }
 
     @Override
-    public void visitLocalVariable(final LocalVariable obj)
-    {
+    public void visitLocalVariable(final LocalVariable obj) {
         localVariableCount++;
     }
 
     @Override
-    public void visitLocalVariableTable(final LocalVariableTable obj)
-    {
+    public void visitLocalVariableTable(final LocalVariableTable obj) {
         localVariableTableCount++;
     }
 
     @Override
-    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj)
-    {
+    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj) {
         localVariableTypeTableCount++;
     }
 
     @Override
-    public void visitMethod(final Method obj)
-    {
+    public void visitMethod(final Method obj) {
         methodCount++;
     }
 
     /** @since 6.0 */
     @Override
-    public void visitMethodParameter(final MethodParameter obj)
-    {
+    public void visitMethodParameter(final MethodParameter obj) {
         methodParameterCount++;
     }
 
     /** @since 6.0 */
     @Override
-    public void visitMethodParameters(final MethodParameters obj)
-    {
+    public void visitMethodParameters(final MethodParameters obj) {
         methodParametersCount++;
     }
 
@@ -505,8 +468,7 @@ public class CounterVisitor implements Visitor
     }
 
     @Override
-    public void visitParameterAnnotation(final ParameterAnnotations obj)
-    {
+    public void visitParameterAnnotation(final ParameterAnnotations obj) {
         parameterAnnotationCount++;
     }
 
@@ -517,38 +479,32 @@ public class CounterVisitor implements Visitor
     }
 
     @Override
-    public void visitSignature(final Signature obj)
-    {
+    public void visitSignature(final Signature obj) {
         signatureAnnotationCount++;
     }
 
     @Override
-    public void visitSourceFile(final SourceFile obj)
-    {
+    public void visitSourceFile(final SourceFile obj) {
         sourceFileCount++;
     }
 
     @Override
-    public void visitStackMap(final StackMap obj)
-    {
+    public void visitStackMap(final StackMap obj) {
         stackMapCount++;
     }
 
     @Override
-    public void visitStackMapEntry(final StackMapEntry obj)
-    {
+    public void visitStackMapEntry(final StackMapEntry obj) {
         stackMapEntryCount++;
     }
 
     @Override
-    public void visitSynthetic(final Synthetic obj)
-    {
+    public void visitSynthetic(final Synthetic obj) {
         syntheticCount++;
     }
 
     @Override
-    public void visitUnknown(final Unknown obj)
-    {
+    public void visitUnknown(final Unknown obj) {
         unknownCount++;
     }
 }

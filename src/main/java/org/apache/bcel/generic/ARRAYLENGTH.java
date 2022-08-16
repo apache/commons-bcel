@@ -20,41 +20,40 @@ package org.apache.bcel.generic;
 import org.apache.bcel.ExceptionConst;
 
 /**
- * ARRAYLENGTH -  Get length of array
- * <PRE>Stack: ..., arrayref -&gt; ..., length</PRE>
+ * ARRAYLENGTH - Get length of array
+ * 
+ * <PRE>
+ * Stack: ..., arrayref -&gt; ..., length
+ * </PRE>
  *
  */
 public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackProducer, StackConsumer /* since 6.0 */ {
 
-    /** Get length of array
+    /**
+     * Get length of array
      */
     public ARRAYLENGTH() {
         super(org.apache.bcel.Const.ARRAYLENGTH, (short) 1);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitExceptionThrower(this);
         v.visitStackProducer(this);
         v.visitARRAYLENGTH(this);
     }
 
-
-    /** @return exceptions this instruction may cause
+    /**
+     * @return exceptions this instruction may cause
      */
     @Override
     public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.NULL_POINTER_EXCEPTION
-        };
+        return new Class[] {ExceptionConst.NULL_POINTER_EXCEPTION};
     }
 }

@@ -31,15 +31,12 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.api.Test;
 
-public class EnclosingMethodAttributeTestCase extends AbstractTestCase
-{
+public class EnclosingMethodAttributeTestCase extends AbstractTestCase {
     /**
      * Check that we can save and load the attribute correctly.
      */
     @Test
-    public void testAttributeSerializtion() throws ClassNotFoundException,
-            IOException
-    {
+    public void testAttributeSerializtion() throws ClassNotFoundException, IOException {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM02$1");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
@@ -53,39 +50,32 @@ public class EnclosingMethodAttributeTestCase extends AbstractTestCase
         assertNotNull(clazz2); // Use the variable to avoid a warning
         final EnclosingMethod em = (EnclosingMethod) encMethodAttrs[0];
         final String enclosingClassName = em.getEnclosingClass().getBytes(pool);
-        assertEquals(em.getEnclosingMethodIndex(), 0,
-                "The class is not within a method, so method_index should be null");
+        assertEquals(em.getEnclosingMethodIndex(), 0, "The class is not within a method, so method_index should be null");
         assertEquals(PACKAGE_BASE_SIG + "/data/AttributeTestClassEM02", enclosingClassName, "Wrong class name");
         tfile.deleteOnExit();
     }
 
     /**
-     * Verify for an inner class declared at the type level that the
-     * EnclosingMethod attribute is set correctly (i.e. to a null value)
+     * Verify for an inner class declared at the type level that the EnclosingMethod attribute is set correctly (i.e. to a
+     * null value)
      */
     @Test
-    public void testCheckClassLevelNamedInnerClass()
-            throws ClassNotFoundException
-    {
+    public void testCheckClassLevelNamedInnerClass() throws ClassNotFoundException {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM02$1");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
         assertEquals(1, encMethodAttrs.length, "Expected 1 EnclosingMethod attribute but found " + encMethodAttrs.length);
         final EnclosingMethod em = (EnclosingMethod) encMethodAttrs[0];
         final String enclosingClassName = em.getEnclosingClass().getBytes(pool);
-        assertEquals(em.getEnclosingMethodIndex(), 0,
-                "The class is not within a method, so method_index should be null");
+        assertEquals(em.getEnclosingMethodIndex(), 0, "The class is not within a method, so method_index should be null");
         assertEquals(PACKAGE_BASE_SIG + "/data/AttributeTestClassEM02", enclosingClassName, "Wrong class name");
     }
 
     /**
-     * Verify for an inner class declared inside the 'main' method that the
-     * enclosing method attribute is set correctly.
+     * Verify for an inner class declared inside the 'main' method that the enclosing method attribute is set correctly.
      */
     @Test
-    public void testCheckMethodLevelNamedInnerClass()
-            throws ClassNotFoundException
-    {
+    public void testCheckMethodLevelNamedInnerClass() throws ClassNotFoundException {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM01$1S");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);

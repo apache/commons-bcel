@@ -18,11 +18,11 @@
 package org.apache.bcel.verifier.exc;
 
 /**
- * Instances of this class are thrown by BCEL's class file verifier "JustIce"
- * when the verification of a method is requested that does not exist.
+ * Instances of this class are thrown by BCEL's class file verifier "JustIce" when the verification of a method is
+ * requested that does not exist.
  *
  */
-public class InvalidMethodException extends RuntimeException{
+public class InvalidMethodException extends RuntimeException {
 
     private static final long serialVersionUID = -7060302743724808051L;
 

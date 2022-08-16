@@ -26,16 +26,15 @@ import org.apache.bcel.generic.FieldGen;
 import org.apache.bcel.generic.MethodGen;
 
 /**
- * Test BCEL if an input file is identical to the outfile generated
- * with BCEL. Of course there may some small differences, e.g., because
- * BCEL generates local variable tables by default.
+ * Test BCEL if an input file is identical to the outfile generated with BCEL. Of course there may some small
+ * differences, e.g., because BCEL generates local variable tables by default.
  *
  * Try to:
+ * 
  * <pre>
- * % java id <someclass>
- * % java listclass -code <someclass> &gt; foo
- * % java listclass -code <someclass>.clazz &gt; bar
- * % diff foo bar | more
+ * % java id <someclass> % java listclass -code <someclass> &gt; foo % java listclass -code <someclass>.clazz &gt; bar %
+ * diff foo bar | more
+ * 
  * <pre>
  *
  */

@@ -18,23 +18,17 @@
 
 package org.apache.bcel.data;
 
-public class AnonymousClassTest
-{
-    class X
-    {
+public class AnonymousClassTest {
+    class X {
     }
 
-    static class Y
-    {
+    static class Y {
     }
 
-    public void foo()
-    {
-        new Runnable()
-        {
+    public void foo() {
+        new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
             }
         }.run();
     }

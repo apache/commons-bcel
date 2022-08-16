@@ -20,21 +20,20 @@ package org.apache.bcel.generic;
 /**
  * ICONST - Push value between -1, ..., 5, other values cause an exception
  *
- * <PRE>Stack: ... -&gt; ..., </PRE>
+ * <PRE>
+ * Stack: ... -&gt; ...,
+ * </PRE>
  *
  */
 public class ICONST extends Instruction implements ConstantPushInstruction {
 
     private int value;
 
-
     /**
-     * Empty constructor needed for Instruction.readInstruction.
-     * Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     ICONST() {
     }
-
 
     public ICONST(final int i) {
         super(org.apache.bcel.Const.ICONST_0, (short) 1);
@@ -45,17 +44,14 @@ public class ICONST extends Instruction implements ConstantPushInstruction {
         value = i;
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitPushInstruction(this);
         v.visitStackProducer(this);
         v.visitTypedInstruction(this);
@@ -63,14 +59,13 @@ public class ICONST extends Instruction implements ConstantPushInstruction {
         v.visitICONST(this);
     }
 
-
-    /** @return Type.INT
+    /**
+     * @return Type.INT
      */
     @Override
-    public Type getType( final ConstantPoolGen cp ) {
+    public Type getType(final ConstantPoolGen cp) {
         return Type.INT;
     }
-
 
     @Override
     public Number getValue() {

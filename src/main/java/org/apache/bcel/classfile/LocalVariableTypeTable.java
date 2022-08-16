@@ -56,7 +56,7 @@ import org.apache.bcel.Const;
  */
 public class LocalVariableTypeTable extends Attribute {
 
-    private LocalVariable[] localVariableTypeTable;        // variables
+    private LocalVariable[] localVariableTypeTable; // variables
 
     LocalVariableTypeTable(final int nameIdx, final int len, final DataInput input, final ConstantPool cpool) throws IOException {
         this(nameIdx, len, (LocalVariable[]) null, cpool);

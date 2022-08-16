@@ -19,28 +19,29 @@ package org.apache.bcel.generic;
 
 /**
  * BALOAD - Load byte or boolean from array
- * <PRE>Stack: ..., arrayref, index -&gt; ..., value</PRE>
+ * 
+ * <PRE>
+ * Stack: ..., arrayref, index -&gt; ..., value
+ * </PRE>
  *
  */
 public class BALOAD extends ArrayInstruction implements StackProducer {
 
-    /** Load byte or boolean from array
+    /**
+     * Load byte or boolean from array
      */
     public BALOAD() {
         super(org.apache.bcel.Const.BALOAD);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitStackProducer(this);
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);

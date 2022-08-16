@@ -22,8 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SimpleAnnotation
-{
+public @interface SimpleAnnotation {
     String fruit() default "bananas";
 
     int id();

@@ -18,8 +18,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Thrown on internal errors. Extends RuntimeException so it hasn't to be declared
- * in the throws clause every time.
+ * Thrown on internal errors. Extends RuntimeException so it hasn't to be declared in the throws clause every time.
  *
  */
 public class ClassGenException extends RuntimeException {
@@ -28,7 +27,6 @@ public class ClassGenException extends RuntimeException {
 
     public ClassGenException() {
     }
-
 
     public ClassGenException(final String s) {
         super(s);

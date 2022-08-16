@@ -18,11 +18,9 @@
 package org.apache.bcel.verifier;
 
 /**
- * The NativeVerifier class implements a main(String[] args) method that's
- * roughly compatible to the one in the Verifier class, but that uses the
- * JVM's internal verifier for its class file verification.
- * This can be used for comparison runs between the JVM-internal verifier
- * and JustIce.
+ * The NativeVerifier class implements a main(String[] args) method that's roughly compatible to the one in the Verifier
+ * class, but that uses the JVM's internal verifier for its class file verification. This can be used for comparison
+ * runs between the JVM-internal verifier and JustIce.
  *
  */
 public abstract class NativeVerifier {
@@ -30,7 +28,7 @@ public abstract class NativeVerifier {
     /**
      * Works only on the first argument.
      */
-    public static void main( final String[] args ) {
+    public static void main(final String[] args) {
         if (args.length != 1) {
             System.out.println("Verifier front-end: need exactly one argument.");
             System.exit(1);
@@ -40,12 +38,11 @@ public abstract class NativeVerifier {
             args[0] = args[0].substring(0, dotclasspos);
         }
         args[0] = args[0].replace('/', '.');
-        //System.out.println(args[0]);
+        // System.out.println(args[0]);
         try {
             Class.forName(args[0]);
-        } catch (final ExceptionInInitializerError eiie) { //subclass of LinkageError!
-            System.out.println("NativeVerifier: ExceptionInInitializerError encountered on '"
-                    + args[0] + "'.");
+        } catch (final ExceptionInInitializerError eiie) { // subclass of LinkageError!
+            System.out.println("NativeVerifier: ExceptionInInitializerError encountered on '" + args[0] + "'.");
             System.out.println(eiie);
             System.exit(1);
         } catch (final LinkageError le) {
@@ -62,7 +59,6 @@ public abstract class NativeVerifier {
         System.out.println("NativeVerifier: Class file '" + args[0] + "' seems to be okay.");
         System.exit(0);
     }
-
 
     /**
      * This class must not be instantiated.

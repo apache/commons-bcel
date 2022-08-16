@@ -52,8 +52,7 @@ public class MethodGenTestCase {
     public static class Foo {
         public void bar() {
             @SuppressWarnings("unused")
-            final
-            int a = 1;
+            final int a = 1;
         }
     }
 

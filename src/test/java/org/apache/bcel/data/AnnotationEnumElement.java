@@ -22,7 +22,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AnnotationEnumElement
-{
+public @interface AnnotationEnumElement {
     SimpleEnum enumval();
 }

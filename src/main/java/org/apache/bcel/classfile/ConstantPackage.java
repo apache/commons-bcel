@@ -24,18 +24,18 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class is derived from the abstract {@link Constant}
- * and represents a reference to a package.
+ * This class is derived from the abstract {@link Constant} and represents a reference to a package.
  *
- * <p>Note: Early access Java 9 support- currently subject to change</p>
+ * <p>
+ * Note: Early access Java 9 support- currently subject to change
+ * </p>
  *
- * @see     Constant
+ * @see Constant
  * @since 6.1
  */
 public final class ConstantPackage extends Constant implements ConstantObject {
 
     private int nameIndex;
-
 
     /**
      * Initialize from another object.
@@ -43,7 +43,6 @@ public final class ConstantPackage extends Constant implements ConstantObject {
     public ConstantPackage(final ConstantPackage c) {
         this(c.getNameIndex());
     }
-
 
     /**
      * Initialize instance from file data.
@@ -55,29 +54,24 @@ public final class ConstantPackage extends Constant implements ConstantObject {
         this(file.readUnsignedShort());
     }
 
-
     /**
-     * @param nameIndex Name index in constant pool.  Should refer to a
-     * ConstantUtf8.
+     * @param nameIndex Name index in constant pool. Should refer to a ConstantUtf8.
      */
     public ConstantPackage(final int nameIndex) {
         super(Const.CONSTANT_Package);
         this.nameIndex = nameIndex;
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitly
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class. I.e.,
+     * the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitConstantPackage(this);
     }
-
 
     /**
      * Dump constant package to file stream in binary format.
@@ -86,27 +80,26 @@ public final class ConstantPackage extends Constant implements ConstantObject {
      * @throws IOException if an I/O error occurs.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
+    public void dump(final DataOutputStream file) throws IOException {
         file.writeByte(super.getTag());
         file.writeShort(nameIndex);
     }
 
-
-    /** @return dereferenced string
+    /**
+     * @return dereferenced string
      */
-    public String getBytes( final ConstantPool cp ) {
+    public String getBytes(final ConstantPool cp) {
         return (String) getConstantValue(cp);
     }
 
-
-    /** @return String object
+    /**
+     * @return String object
      */
     @Override
-    public Object getConstantValue( final ConstantPool cp ) {
+    public Object getConstantValue(final ConstantPool cp) {
         final Constant c = cp.getConstant(nameIndex, Const.CONSTANT_Utf8);
         return ((ConstantUtf8) c).getBytes();
     }
-
 
     /**
      * @return Name index in constant pool of package name.
@@ -115,14 +108,12 @@ public final class ConstantPackage extends Constant implements ConstantObject {
         return nameIndex;
     }
 
-
     /**
      * @param nameIndex the name index in the constant pool of this Constant Package
      */
-    public void setNameIndex( final int nameIndex ) {
+    public void setNameIndex(final int nameIndex) {
         this.nameIndex = nameIndex;
     }
-
 
     /**
      * @return String representation.

@@ -26,8 +26,10 @@ import org.apache.bcel.classfile.JavaClass;
 /**
  * This abstract class provides a logic of a loading {@link JavaClass} objects class names via {@link ClassPath}.
  *
- * <p>Subclasses can choose caching strategy of the objects by implementing the abstract methods (e.g., {@link
- * #storeClass(JavaClass)} and {@link #findClass(String)}).</p>
+ * <p>
+ * Subclasses can choose caching strategy of the objects by implementing the abstract methods (e.g.,
+ * {@link #storeClass(JavaClass)} and {@link #findClass(String)}).
+ * </p>
  *
  * @since 6.4.0
  */
@@ -51,15 +53,14 @@ abstract class AbstractClassPathRepository implements Repository {
     }
 
     /**
-     * Finds the JavaClass object for a runtime Class object. If a class with the same name is already in this
-     * Repository, the Repository version is returned. Otherwise, getResourceAsStream() is called on the Class object to
-     * find the class's representation. If the representation is found, it is added to the Repository.
+     * Finds the JavaClass object for a runtime Class object. If a class with the same name is already in this Repository,
+     * the Repository version is returned. Otherwise, getResourceAsStream() is called on the Class object to find the
+     * class's representation. If the representation is found, it is added to the Repository.
      *
      * @see Class
      * @param clazz the runtime Class object
      * @return JavaClass object for given runtime class
-     * @throws ClassNotFoundException
-     *             if the class is not in the Repository, and its representation could not be found
+     * @throws ClassNotFoundException if the class is not in the Repository, and its representation could not be found
      */
     @Override
     public JavaClass loadClass(final Class<?> clazz) throws ClassNotFoundException {
@@ -104,14 +105,12 @@ abstract class AbstractClassPathRepository implements Repository {
     }
 
     /**
-     * Finds a JavaClass object by name. If it is already in this Repository, the Repository version is returned.
-     * Otherwise, the Repository's classpath is searched for the class (and it is added to the Repository if found).
+     * Finds a JavaClass object by name. If it is already in this Repository, the Repository version is returned. Otherwise,
+     * the Repository's classpath is searched for the class (and it is added to the Repository if found).
      *
-     * @param className
-     *            the name of the class
+     * @param className the name of the class
      * @return the JavaClass object
-     * @throws ClassNotFoundException
-     *             if the class is not in the Repository, and could not be found on the classpath
+     * @throws ClassNotFoundException if the class is not in the Repository, and could not be found on the classpath
      */
     @Override
     public JavaClass loadClass(String className) throws ClassNotFoundException {

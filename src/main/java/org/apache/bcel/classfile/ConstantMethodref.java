@@ -35,7 +35,6 @@ public final class ConstantMethodref extends ConstantCP {
         super(Const.CONSTANT_Methodref, c.getClassIndex(), c.getNameAndTypeIndex());
     }
 
-
     /**
      * Initialize instance from input data.
      *
@@ -46,7 +45,6 @@ public final class ConstantMethodref extends ConstantCP {
         super(Const.CONSTANT_Methodref, input);
     }
 
-
     /**
      * @param class_index Reference to the class containing the method
      * @param name_and_type_index and the method signature
@@ -55,16 +53,14 @@ public final class ConstantMethodref extends ConstantCP {
         super(Const.CONSTANT_Methodref, class_index, name_and_type_index);
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
+     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitConstantMethodref(this);
     }
 }

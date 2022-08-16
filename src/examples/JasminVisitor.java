@@ -52,8 +52,7 @@ import org.apache.bcel.generic.Select;
 import org.apache.bcel.generic.TABLESWITCH;
 
 /**
- * Disassemble Java class object into the <a href="http://jasmin.sourceforge.net">
- * Jasmin</a> format.
+ * Disassemble Java class object into the <a href="http://jasmin.sourceforge.net"> Jasmin</a> format.
  *
  */
 public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
@@ -86,6 +85,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
             System.out.println("File dumped to: " + name);
         }
     }
+
     private final JavaClass clazz;
     private final PrintWriter out;
     private final String class_name;
@@ -117,9 +117,8 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     /**
-     * Unfortunately Jasmin expects ".end method" after each method. Thus we've to check
-     * for every of the method's attributes if it's the last one and print ".end method"
-     * then.
+     * Unfortunately Jasmin expects ".end method" after each method. Thus we've to check for every of the method's
+     * attributes if it's the last one and print ".end method" then.
      */
     private void printEndMethod(final Attribute attr) {
         final Attribute[] attributes = _method.getAttributes();
@@ -154,9 +153,9 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         final InstructionList il = mg.getInstructionList();
         final InstructionHandle[] ihs = il.getInstructionHandles();
 
-    /* Pass 1: Give all referenced instruction handles a symbolic name, i.e. a
-     * label.
-     */
+        /*
+         * Pass 1: Give all referenced instruction handles a symbolic name, i.e. a label.
+         */
         map = new Hashtable<>();
 
         for (final InstructionHandle ih1 : ihs) {
@@ -201,10 +200,8 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
         // Pass 2: Output code.
         for (final LocalVariableGen l : lvs) {
-            out.println(".var " + l.getIndex() + " is " + l.getName() + " " +
-                    l.getType().getSignature() +
-                    " from " + get(l.getStart()) +
-                    " to " + get(l.getEnd()));
+            out.println(
+                ".var " + l.getIndex() + " is " + l.getName() + " " + l.getType().getSignature() + " from " + get(l.getStart()) + " to " + get(l.getEnd()));
         }
 
         out.print("\n");
@@ -254,12 +251,10 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
         for (final CodeExceptionGen c : ehs) {
             final ObjectType caught = c.getCatchType();
-            final String class_name = (caught == null) ?  // catch any exception, used when compiling finally
-                    "all" : caught.getClassName().replace('.', '/');
+            final String class_name = (caught == null) ? // catch any exception, used when compiling finally
+                "all" : caught.getClassName().replace('.', '/');
 
-            out.println(".catch " + class_name + " from " +
-                    get(c.getStartPC()) + " to " + get(c.getEndPC()) +
-                    " using " + get(c.getHandlerPC()));
+            out.println(".catch " + class_name + " from " + get(c.getStartPC()) + " to " + get(c.getEndPC()) + " using " + get(c.getHandlerPC()));
         }
 
         printEndMethod(code);
@@ -286,8 +281,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     @Override
     public void visitField(final Field field) {
-        out.print(".field " + Utility.accessToString(field.getAccessFlags()) +
-                " \"" + field.getName() + "\"" + field.getSignature());
+        out.print(".field " + Utility.accessToString(field.getAccessFlags()) + " \"" + field.getName() + "\"" + field.getSignature());
         if (field.getAttributes().length == 0) {
             out.print("\n");
         }
@@ -300,9 +294,8 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         out.println(";; " + new Date() + "\n");
 
         out.println(".source " + clazz.getSourceFileName());
-        out.println("." + Utility.classOrInterface(clazz.getAccessFlags()) + " " +
-                Utility.accessToString(clazz.getAccessFlags(), true) +
-                " " + clazz.getClassName().replace('.', '/'));
+        out.println("." + Utility.classOrInterface(clazz.getAccessFlags()) + " " + Utility.accessToString(clazz.getAccessFlags(), true) + " "
+            + clazz.getClassName().replace('.', '/'));
         out.println(".super " + clazz.getSuperclassName().replace('.', '/'));
 
         for (final String iface : clazz.getInterfaceNames()) {
@@ -316,8 +309,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     public void visitMethod(final Method method) {
         this._method = method; // Remember for use in subsequent visitXXX calls
 
-        out.println("\n.method " + Utility.accessToString(_method.getAccessFlags()) +
-                " " + _method.getName() + _method.getSignature());
+        out.println("\n.method " + Utility.accessToString(_method.getAccessFlags()) + " " + _method.getName() + _method.getSignature());
 
         final Attribute[] attributes = _method.getAttributes();
         if ((attributes == null) || (attributes.length == 0)) {

@@ -24,12 +24,10 @@ package org.apache.bcel.generic;
 public abstract class IfInstruction extends BranchInstruction implements StackConsumer {
 
     /**
-     * Empty constructor needed for Instruction.readInstruction.
-     * Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     IfInstruction() {
     }
-
 
     /**
      * @param opcode opcode of instruction
@@ -38,7 +36,6 @@ public abstract class IfInstruction extends BranchInstruction implements StackCo
     protected IfInstruction(final short opcode, final InstructionHandle target) {
         super(opcode, target);
     }
-
 
     /**
      * @return negation of instruction, e.g. IFEQ.negate() == IFNE

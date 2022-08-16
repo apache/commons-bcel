@@ -32,27 +32,20 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.api.Test;
 
-public class FieldAnnotationsTestCase extends AbstractTestCase
-{
+public class FieldAnnotationsTestCase extends AbstractTestCase {
     // helper methods
-    public void checkAnnotatedField(final JavaClass clazz, final String fieldname,
-            final String AnnotationEntryName, final String AnnotationEntryElementName,
-            final String AnnotationEntryElementValue)
-    {
+    public void checkAnnotatedField(final JavaClass clazz, final String fieldname, final String AnnotationEntryName, final String AnnotationEntryElementName,
+        final String AnnotationEntryElementValue) {
         final Field[] fields = clazz.getFields();
         for (final Field f : fields) {
             final AnnotationEntry[] fieldAnnotationEntrys = f.getAnnotationEntries();
-            if (f.getName().equals(fieldname))
-            {
-                checkAnnotationEntry(fieldAnnotationEntrys[0], AnnotationEntryName,
-                        AnnotationEntryElementName, AnnotationEntryElementValue);
+            if (f.getName().equals(fieldname)) {
+                checkAnnotationEntry(fieldAnnotationEntrys[0], AnnotationEntryName, AnnotationEntryElementName, AnnotationEntryElementValue);
             }
         }
     }
 
-    private void checkAnnotationEntry(final AnnotationEntry a, final String name, final String elementname,
-            final String elementvalue)
-    {
+    private void checkAnnotationEntry(final AnnotationEntry a, final String name, final String elementname, final String elementvalue) {
         assertEquals(name, a.getAnnotationType(), "Wrong AnnotationEntry name");
         assertEquals(1, a.getElementValuePairs().length, "Wrong number of AnnotationEntry elements");
         final ElementValuePair envp = a.getElementValuePairs()[0];
@@ -64,8 +57,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
      * Check field AnnotationEntrys are retrievable.
      */
     @Test
-    public void testFieldAnnotationEntrys() throws ClassNotFoundException
-    {
+    public void testFieldAnnotationEntrys() throws ClassNotFoundException {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnnotatedFields");
         // TODO L...;?
         checkAnnotatedField(clazz, "i", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "1");
@@ -76,9 +68,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
      * Check field AnnotationEntrys (de)serialize ok.
      */
     @Test
-    public void testFieldAnnotationEntrysReadWrite() throws ClassNotFoundException,
-            IOException
-    {
+    public void testFieldAnnotationEntrysReadWrite() throws ClassNotFoundException, IOException {
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnnotatedFields");
         checkAnnotatedField(clazz, "i", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "1");
         checkAnnotatedField(clazz, "s", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "2");
@@ -93,13 +83,10 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
     }
 
     /**
-     * Check we can load in a class, modify its field AnnotationEntrys, save it,
-     * reload it and everything is correct.
+     * Check we can load in a class, modify its field AnnotationEntrys, save it, reload it and everything is correct.
      */
     @Test
-    public void testFieldAnnotationModification()
-            throws ClassNotFoundException
-    {
+    public void testFieldAnnotationModification() throws ClassNotFoundException {
         final boolean dbg = false;
         final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.AnnotatedFields");
         final ClassGen clg = new ClassGen(clazz);
@@ -108,11 +95,9 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             System.err.println("Field in freshly constructed class is: " + f);
         }
         if (dbg) {
-            System.err.println("AnnotationEntrys on field are: "
-                    + dumpAnnotationEntries(f.getAnnotationEntries()));
+            System.err.println("AnnotationEntrys on field are: " + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
-        final AnnotationEntryGen fruitBasedAnnotationEntry = createFruitAnnotationEntry(clg
-                .getConstantPool(), "Tomato", false);
+        final AnnotationEntryGen fruitBasedAnnotationEntry = createFruitAnnotationEntry(clg.getConstantPool(), "Tomato", false);
         final FieldGen fg = new FieldGen(f, clg.getConstantPool());
         if (dbg) {
             System.err.println("Adding AnnotationEntry to the field");
@@ -122,12 +107,10 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             System.err.println("FieldGen (mutable field) is " + fg);
         }
         if (dbg) {
-            System.err.println("with AnnotationEntrys: "
-                    + dumpAnnotationEntries(fg.getAnnotationEntries()));
+            System.err.println("with AnnotationEntrys: " + dumpAnnotationEntries(fg.getAnnotationEntries()));
         }
         if (dbg) {
-            System.err
-                    .println("Replacing original field with new field that has extra AnnotationEntry");
+            System.err.println("Replacing original field with new field that has extra AnnotationEntry");
         }
         clg.removeField(f);
         clg.addField(fg.getField());
@@ -138,8 +121,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase
             System.err.println("Field now looks like this: " + f);
         }
         if (dbg) {
-            System.err.println("With AnnotationEntrys: "
-                    + dumpAnnotationEntries(f.getAnnotationEntries()));
+            System.err.println("With AnnotationEntrys: " + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
         assertEquals(2, f.getAnnotationEntries().length, "Wrong number of AnnotationEntries");
     }

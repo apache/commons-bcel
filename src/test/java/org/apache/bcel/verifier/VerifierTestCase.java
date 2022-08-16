@@ -33,12 +33,10 @@ public class VerifierTestCase {
         final Verifier verifier = VerifierFactory.getVerifier(classname);
         VerificationResult result = verifier.doPass1();
 
-        assertEquals(VerificationResult.VERIFIED_OK, result.getStatus(),
-                "Pass 1 verification of " + classname + " failed: " + result.getMessage());
+        assertEquals(VerificationResult.VERIFIED_OK, result.getStatus(), "Pass 1 verification of " + classname + " failed: " + result.getMessage());
 
         result = verifier.doPass2();
 
-        assertEquals(VerificationResult.VERIFIED_OK, result.getStatus(),
-                "Pass 2 verification of " + classname + " failed: " + result.getMessage());
+        assertEquals(VerificationResult.VERIFIED_OK, result.getStatus(), "Pass 2 verification of " + classname + " failed: " + result.getMessage());
     }
 }

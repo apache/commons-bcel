@@ -37,8 +37,8 @@ public class AnnotationEntry implements Node {
 
     public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attrs) {
         // Find attributes that contain annotation data
-        return Stream.of(attrs).filter(Annotations.class::isInstance)
-            .flatMap(e -> Stream.of(((Annotations) e).getAnnotationEntries())).toArray(AnnotationEntry[]::new);
+        return Stream.of(attrs).filter(Annotations.class::isInstance).flatMap(e -> Stream.of(((Annotations) e).getAnnotationEntries()))
+            .toArray(AnnotationEntry[]::new);
     }
 
     /**
@@ -56,9 +56,8 @@ public class AnnotationEntry implements Node {
         final int num_element_value_pairs = input.readUnsignedShort();
         annotationEntry.elementValuePairs = new ArrayList<>();
         for (int i = 0; i < num_element_value_pairs; i++) {
-            annotationEntry.elementValuePairs.add(
-                    new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constantPool),
-                    constantPool));
+            annotationEntry.elementValuePairs
+                .add(new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constantPool), constantPool));
         }
         return annotationEntry;
     }

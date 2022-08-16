@@ -18,15 +18,11 @@
 
 package org.apache.bcel.data;
 
-public class AttributeTestClassEM01
-{
-    public static void main(final String[] argv)
-    {
+public class AttributeTestClassEM01 {
+    public static void main(final String[] argv) {
         @SuppressWarnings("unused")
-        class S
-        {
-            public void sayhello()
-            {
+        class S {
+            public void sayhello() {
                 System.err.println("hello");
             }
         }

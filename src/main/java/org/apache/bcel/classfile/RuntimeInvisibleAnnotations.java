@@ -24,26 +24,18 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * represents an annotation that is represented in the class file but is not
- * provided to the JVM.
+ * represents an annotation that is represented in the class file but is not provided to the JVM.
  *
  * @since 6.0
  */
-public class RuntimeInvisibleAnnotations extends Annotations
-{
+public class RuntimeInvisibleAnnotations extends Annotations {
     /**
-     * @param name_index
-     *            Index pointing to the name <em>Code</em>
-     * @param length
-     *            Content length in bytes
-     * @param input
-     *            Input stream
-     * @param constant_pool
-     *            Array of constants
+     * @param name_index Index pointing to the name <em>Code</em>
+     * @param length Content length in bytes
+     * @param input Input stream
+     * @param constant_pool Array of constants
      */
-    public RuntimeInvisibleAnnotations(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
-            throws IOException
-    {
+    public RuntimeInvisibleAnnotations(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         super(Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS, name_index, length, input, constant_pool, false);
     }
 
@@ -51,14 +43,12 @@ public class RuntimeInvisibleAnnotations extends Annotations
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool constant_pool)
-    {
+    public Attribute copy(final ConstantPool constant_pool) {
         return (Attribute) clone();
     }
 
     @Override
-    public final void dump(final DataOutputStream dos) throws IOException
-    {
+    public final void dump(final DataOutputStream dos) throws IOException {
         super.dump(dos);
         writeAnnotations(dos);
     }

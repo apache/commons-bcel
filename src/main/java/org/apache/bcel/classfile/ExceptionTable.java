@@ -25,22 +25,20 @@ import org.apache.bcel.Const;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * This class represents the table of exceptions that are thrown by a
- * method. This attribute may be used once per method.  The name of
- * this class is <em>ExceptionTable</em> for historical reasons; The
- * Java Virtual Machine Specification, Second Edition defines this
- * attribute using the name <em>Exceptions</em> (which is inconsistent
- * with the other classes).
+ * This class represents the table of exceptions that are thrown by a method. This attribute may be used once per
+ * method. The name of this class is <em>ExceptionTable</em> for historical reasons; The Java Virtual Machine
+ * Specification, Second Edition defines this attribute using the name <em>Exceptions</em> (which is inconsistent with
+ * the other classes).
  *
- * @see     Code
+ * @see Code
  */
 public final class ExceptionTable extends Attribute {
 
     private int[] exceptionIndexTable; // constant pool
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use copy() for a physical copy.
+     * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
+     * physical copy.
      */
     public ExceptionTable(final ExceptionTable c) {
         this(c.getNameIndex(), c.getLength(), c.getExceptionIndexTable(), c.getConstantPool());
@@ -48,6 +46,7 @@ public final class ExceptionTable extends Attribute {
 
     /**
      * Construct object from input stream.
+     * 
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param input Input stream
@@ -69,21 +68,19 @@ public final class ExceptionTable extends Attribute {
      * @param exceptionIndexTable Table of indices in constant pool
      * @param constant_pool Array of constants
      */
-    public ExceptionTable(final int name_index, final int length, final int[] exceptionIndexTable,
-            final ConstantPool constant_pool) {
+    public ExceptionTable(final int name_index, final int length, final int[] exceptionIndexTable, final ConstantPool constant_pool) {
         super(Const.ATTR_EXCEPTIONS, name_index, length, constant_pool);
         this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
     }
 
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
+     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitExceptionTable(this);
     }
 
@@ -91,12 +88,11 @@ public final class ExceptionTable extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
+    public Attribute copy(final ConstantPool _constant_pool) {
         final ExceptionTable c = (ExceptionTable) clone();
         if (exceptionIndexTable != null) {
             c.exceptionIndexTable = new int[exceptionIndexTable.length];
-            System.arraycopy(exceptionIndexTable, 0, c.exceptionIndexTable, 0,
-                    exceptionIndexTable.length);
+            System.arraycopy(exceptionIndexTable, 0, c.exceptionIndexTable, 0, exceptionIndexTable.length);
         }
         c.setConstantPool(_constant_pool);
         return c;
@@ -109,7 +105,7 @@ public final class ExceptionTable extends Attribute {
      * @throws IOException if an I/O error occurs.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
+    public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
         file.writeShort(exceptionIndexTable.length);
         for (final int index : exceptionIndexTable) {
@@ -130,8 +126,7 @@ public final class ExceptionTable extends Attribute {
     public String[] getExceptionNames() {
         final String[] names = new String[exceptionIndexTable.length];
         for (int i = 0; i < exceptionIndexTable.length; i++) {
-            names[i] = super.getConstantPool().getConstantString(exceptionIndexTable[i],
-                    Const.CONSTANT_Class).replace('/', '.');
+            names[i] = super.getConstantPool().getConstantString(exceptionIndexTable[i], Const.CONSTANT_Class).replace('/', '.');
         }
         return names;
     }
@@ -144,10 +139,10 @@ public final class ExceptionTable extends Attribute {
     }
 
     /**
-     * @param exceptionIndexTable the list of exception indexes
-     * Also redefines number_of_exceptions according to table length.
+     * @param exceptionIndexTable the list of exception indexes Also redefines number_of_exceptions according to table
+     *        length.
      */
-    public void setExceptionIndexTable( final int[] exceptionIndexTable ) {
+    public void setExceptionIndexTable(final int[] exceptionIndexTable) {
         this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
     }
 

@@ -27,50 +27,40 @@ import org.apache.bcel.classfile.ElementValue;
 /**
  * @since 6.0
  */
-public class ClassElementValueGen extends ElementValueGen
-{
+public class ClassElementValueGen extends ElementValueGen {
     // For primitive types and string type, this points to the value entry in
     // the cpool
     // For 'class' this points to the class entry in the cpool
     private final int idx;
 
-    public ClassElementValueGen(final ClassElementValue value, final ConstantPoolGen cpool,
-            final boolean copyPoolEntries)
-    {
+    public ClassElementValueGen(final ClassElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
         super(CLASS, cpool);
-        if (copyPoolEntries)
-        {
+        if (copyPoolEntries) {
             // idx = cpool.addClass(value.getClassString());
             idx = cpool.addUtf8(value.getClassString());
-        }
-        else
-        {
+        } else {
             idx = value.getIndex();
         }
     }
 
-    protected ClassElementValueGen(final int typeIdx, final ConstantPoolGen cpool)
-    {
+    protected ClassElementValueGen(final int typeIdx, final ConstantPoolGen cpool) {
         super(ElementValueGen.CLASS, cpool);
         this.idx = typeIdx;
     }
 
-    public ClassElementValueGen(final ObjectType t, final ConstantPoolGen cpool)
-    {
+    public ClassElementValueGen(final ObjectType t, final ConstantPoolGen cpool) {
         super(ElementValueGen.CLASS, cpool);
         // this.idx = cpool.addClass(t);
         idx = cpool.addUtf8(t.getSignature());
     }
 
     @Override
-    public void dump(final DataOutputStream dos) throws IOException
-    {
+    public void dump(final DataOutputStream dos) throws IOException {
         dos.writeByte(super.getElementValueType()); // u1 kind of value
         dos.writeShort(idx);
     }
 
-    public String getClassString()
-    {
+    public String getClassString() {
         final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(idx);
         return cu8.getBytes();
         // ConstantClass c = (ConstantClass)getConstantPool().getConstant(idx);
@@ -83,21 +73,16 @@ public class ClassElementValueGen extends ElementValueGen
      * Return immutable variant of this ClassElementValueGen
      */
     @Override
-    public ElementValue getElementValue()
-    {
-        return new ClassElementValue(super.getElementValueType(),
-                idx,
-                getConstantPool().getConstantPool());
+    public ElementValue getElementValue() {
+        return new ClassElementValue(super.getElementValueType(), idx, getConstantPool().getConstantPool());
     }
 
-    public int getIndex()
-    {
+    public int getIndex() {
         return idx;
     }
 
     @Override
-    public String stringifyValue()
-    {
+    public String stringifyValue() {
         return getClassString();
     }
 }

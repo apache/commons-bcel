@@ -37,8 +37,8 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.ClassPath;
 
 /**
- * Package the client. Creates a jar file in the current directory
- * that contains a minimal set of classes needed to run the client.
+ * Package the client. Creates a jar file in the current directory that contains a minimal set of classes needed to run
+ * the client.
  *
  * Use BCEL to extract class names and read/write classes
  *
@@ -51,8 +51,7 @@ public class Package {
     static String defaultJar = "Client.jar";
 
     /*
-     * See usage() for arguments. Create an instance and run that
-     *(just so not all members have to be static)
+     * See usage() for arguments. Create an instance and run that (just so not all members have to be static)
      */
     static void main(final String args[]) {
         final Package instance = new Package();
@@ -65,28 +64,25 @@ public class Package {
     }
 
     /**
-     * We use a "default ClassPath object which uses the environments
-     * CLASSPATH
+     * We use a "default ClassPath object which uses the environments CLASSPATH
      */
     ClassPath classPath = ClassPath.SYSTEM_CLASS_PATH;
 
     /**
-     * A map for all Classes, the ones we're going to package.
-     * Store class name against the JavaClass. From the JavaClass
-     * we get the bytes to create the jar.
+     * A map for all Classes, the ones we're going to package. Store class name against the JavaClass. From the JavaClass we
+     * get the bytes to create the jar.
      */
     Map<String, JavaClass> allClasses = new TreeMap<>();
 
     /**
-     * We start at the root classes, put them in here, then go through
-     * this list, putting dependent classes in here and from there
-     * into allClasses. Store class names against class names of their dependents
+     * We start at the root classes, put them in here, then go through this list, putting dependent classes in here and from
+     * there into allClasses. Store class names against class names of their dependents
      */
     TreeMap<String, String> dependents = new TreeMap<>();
 
     /**
-     * Collect all classes that could not be found in the classpath.
-     * Store class names against class names of their dependents
+     * Collect all classes that could not be found in the classpath. Store class names against class names of their
+     * dependents
      */
     TreeMap<String, String> notFound = new TreeMap<>();
 
@@ -104,8 +100,8 @@ public class Package {
     boolean log = false;
 
     /**
-     * add given class to dependents (from is where its dependent from)
-     * some fiddeling to be done because of array class notation
+     * add given class to dependents (from is where its dependent from) some fiddeling to be done because of array class
+     * notation
      */
     void addClassString(final String clas, final String from) throws IOException {
         if (log) {
@@ -120,7 +116,7 @@ public class Package {
             }
             if ('L' == clas.charAt(1)) {
                 // it's an array of objects, the class name is between [L and ;
-                // like    [Ljava/lang/Object;
+                // like [Ljava/lang/Object;
                 addClassString(clas.substring(2, clas.length() - 1), from);
                 return;
             }
@@ -134,15 +130,15 @@ public class Package {
 
         if (!clas.startsWith("java/") && allClasses.get(clas) == null) {
             dependents.put(clas, from);
-            //      System.out.println("       yes" );
+            // System.out.println(" yes" );
         } else {
-            //      System.out.println("       no" );
+            // System.out.println(" no" );
         }
     }
 
     /**
-     * Add this class to allClasses. Then go through all its dependents
-     * and add them to the dependents list if they are not in allClasses
+     * Add this class to allClasses. Then go through all its dependents and add them to the dependents list if they are not
+     * in allClasses
      */
     void addDependents(final JavaClass clazz) throws IOException {
         final String name = clazz.getClassName().replace('.', '/');
@@ -150,7 +146,7 @@ public class Package {
         final ConstantPool pool = clazz.getConstantPool();
         for (int i = 1; i < pool.getLength(); i++) {
             final Constant cons = pool.getConstant(i);
-            //System.out.println("("+i+") " + cons );
+            // System.out.println("("+i+") " + cons );
             if (cons != null && cons.getTag() == Constants.CONSTANT_Class) {
                 final int idx = ((ConstantClass) pool.getConstant(i)).getNameIndex();
                 final String clas = ((ConstantUtf8) pool.getConstant(idx)).getBytes();
@@ -206,7 +202,7 @@ public class Package {
                     clazz = new ClassParser(is, name).parse();
                     addDependents(clazz);
                 } catch (final IOException e) {
-                    //System.err.println("Error, class not found " + name );
+                    // System.err.println("Error, class not found " + name );
                     notFound.put(name, from);
                 }
             }
@@ -227,11 +223,10 @@ public class Package {
             final int length = bytes.length;
             jarFile.putNextEntry(zipEntry);
             jarFile.write(bytes, 0, length);
-            written += length;  // for logging
+            written += length; // for logging
         }
         jarFile.close();
-        System.err.println("The jar file contains " + allClasses.size()
-                + " classes and contains " + written + " bytes");
+        System.err.println("The jar file contains " + allClasses.size() + " classes and contains " + written + " bytes");
 
         if (!notFound.isEmpty()) {
             System.err.println(notFound.size() + " classes could not be found");
@@ -247,8 +242,7 @@ public class Package {
     }
 
     /**
-     * Print all classes that were packaged. Sort alphabetically for better
-     * overview. Enabled by -s option
+     * Print all classes that were packaged. Sort alphabetically for better overview. Enabled by -s option
      */
     void printAllClasses() {
         final List<String> names = new ArrayList<>(allClasses.keySet());

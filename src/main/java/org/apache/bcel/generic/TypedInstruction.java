@@ -18,11 +18,10 @@
 package org.apache.bcel.generic;
 
 /**
- * Get the type associated with an instruction, int for ILOAD, or the type
- * of the field of a PUTFIELD instruction, e.g..
+ * Get the type associated with an instruction, int for ILOAD, or the type of the field of a PUTFIELD instruction, e.g..
  *
  */
 public interface TypedInstruction {
 
-    Type getType( ConstantPoolGen cpg );
+    Type getType(ConstantPoolGen cpg);
 }

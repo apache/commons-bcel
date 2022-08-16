@@ -22,36 +22,38 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * PUTSTATIC - Put static field in class
- * <PRE>Stack: ..., value -&gt; ...</PRE>
+ * 
+ * <PRE>
+ * Stack: ..., value -&gt; ...
+ * </PRE>
+ * 
  * OR
- * <PRE>Stack: ..., value.word1, value.word2 -&gt; ...</PRE>
+ * 
+ * <PRE>
+ * Stack: ..., value.word1, value.word2 -&gt; ...
+ * </PRE>
  *
  */
 public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, PopInstruction {
 
     /**
-     * Empty constructor needed for Instruction.readInstruction.
-     * Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     PUTSTATIC() {
     }
-
 
     public PUTSTATIC(final int index) {
         super(Const.PUTSTATIC, index);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitExceptionThrower(this);
         v.visitStackConsumer(this);
         v.visitPopInstruction(this);
@@ -63,16 +65,13 @@ public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, Pop
         v.visitPUTSTATIC(this);
     }
 
-
     @Override
-    public int consumeStack( final ConstantPoolGen cpg ) {
+    public int consumeStack(final ConstantPoolGen cpg) {
         return getFieldSize(cpg);
     }
 
-
     @Override
     public Class<?>[] getExceptions() {
-        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION,
-            ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
+        return ExceptionConst.createExceptions(ExceptionConst.EXCS.EXCS_FIELD_AND_METHOD_RESOLUTION, ExceptionConst.INCOMPATIBLE_CLASS_CHANGE_ERROR);
     }
 }

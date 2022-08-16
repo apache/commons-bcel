@@ -37,10 +37,8 @@ import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.junit.jupiter.api.Test;
 
-public class AnnotationGenTestCase extends AbstractTestCase
-{
-    private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg) throws IOException
-    {
+public class AnnotationGenTestCase extends AbstractTestCase {
+    private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg) throws IOException {
         final String beforeName = a.getTypeName();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (DataOutputStream dos = new DataOutputStream(baos)) {
@@ -55,8 +53,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         }
         final String afterName = annAfter.getTypeName();
         assertEquals(beforeName, afterName, "Deserialization failed");
-        assertEquals(a.getValues().size(), annAfter.getValues().size(),
-                "Different numbers of element name value pairs??");
+        assertEquals(a.getValues().size(), annAfter.getValues().size(), "Different numbers of element name value pairs??");
         for (int i = 0; i < a.getValues().size(); i++) {
             final ElementValuePairGen beforeElement = a.getValues().get(i);
             final ElementValuePairGen afterElement = annAfter.getValues().get(i);
@@ -64,30 +61,24 @@ public class AnnotationGenTestCase extends AbstractTestCase
         }
     }
 
-    private ClassGen createClassGen(final String classname)
-    {
-        return new ClassGen(classname, "java.lang.Object", "<generated>",
-                Const.ACC_PUBLIC | Const.ACC_SUPER, null);
+    private ClassGen createClassGen(final String classname) {
+        return new ClassGen(classname, "java.lang.Object", "<generated>", Const.ACC_PUBLIC | Const.ACC_SUPER, null);
     }
 
     /**
      * Programmatically construct an mutable annotation (AnnotationGen) object.
      */
     @Test
-    public void testConstructMutableAnnotation() throws IOException
-    {
+    public void testConstructMutableAnnotation() throws IOException {
         // Create the containing class
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         // Create the simple primitive value '4' of type 'int'
-        final SimpleElementValueGen evg = new SimpleElementValueGen(
-                ElementValueGen.PRIMITIVE_INT, cp, 4);
+        final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_INT, cp, 4);
         // Give it a name, call it 'id'
-        final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg,
-                cp);
+        final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
         // Check it looks right
-        assertTrue(nvGen.toString().contains("id=4"),
-                "Should include string 'id=4' but says: " + nvGen.toString());
+        assertTrue(nvGen.toString().contains("id=4"), "Should include string 'id=4' but says: " + nvGen.toString());
         final ObjectType t = new ObjectType("SimpleAnnotation");
         final List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
@@ -99,20 +90,16 @@ public class AnnotationGenTestCase extends AbstractTestCase
     }
 
     @Test
-    public void testVisibleInvisibleAnnotationGen()
-    {
+    public void testVisibleInvisibleAnnotationGen() {
         // Create the containing class
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         // Create the simple primitive value '4' of type 'int'
-        final SimpleElementValueGen evg = new SimpleElementValueGen(
-                ElementValueGen.PRIMITIVE_INT, cp, 4);
+        final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_INT, cp, 4);
         // Give it a name, call it 'id'
-        final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg,
-                cp);
+        final ElementValuePairGen nvGen = new ElementValuePairGen("id", evg, cp);
         // Check it looks right
-        assertTrue(nvGen.toString().contains("id=4"),
-                "Should include string 'id=4' but says: " + nvGen.toString());
+        assertTrue(nvGen.toString().contains("id=4"), "Should include string 'id=4' but says: " + nvGen.toString());
         final ObjectType t = new ObjectType("SimpleAnnotation");
         final List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
@@ -124,8 +111,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         final Attribute[] attributes = AnnotationEntryGen.getAnnotationAttributes(cp, v.toArray(AnnotationEntryGen.EMPTY_ARRAY));
         boolean foundRV = false;
         for (final Attribute attribute : attributes) {
-            if (attribute instanceof RuntimeVisibleAnnotations)
-            {
+            if (attribute instanceof RuntimeVisibleAnnotations) {
                 assertTrue(((Annotations) attribute).isRuntimeVisible());
                 foundRV = true;
             }
@@ -139,8 +125,7 @@ public class AnnotationGenTestCase extends AbstractTestCase
         final Attribute[] attributes2 = AnnotationEntryGen.getAnnotationAttributes(cp, v2.toArray(AnnotationEntryGen.EMPTY_ARRAY));
         boolean foundRIV = false;
         for (final Attribute attribute : attributes2) {
-            if (attribute instanceof RuntimeInvisibleAnnotations)
-            {
+            if (attribute instanceof RuntimeInvisibleAnnotations) {
                 assertFalse(((Annotations) attribute).isRuntimeVisible());
                 foundRIV = true;
             }

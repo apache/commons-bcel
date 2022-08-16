@@ -18,11 +18,11 @@
 package org.apache.bcel.generic;
 
 /**
- * Implement this interface if you're interested in changes to a MethodGen object
- * and register yourself with addObserver().
+ * Implement this interface if you're interested in changes to a MethodGen object and register yourself with
+ * addObserver().
  *
  */
 public interface MethodObserver {
 
-    void notify( MethodGen method );
+    void notify(MethodGen method);
 }

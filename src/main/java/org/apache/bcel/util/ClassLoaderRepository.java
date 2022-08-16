@@ -26,11 +26,9 @@ import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 
 /**
- * The repository maintains information about which classes have
- * been loaded.
+ * The repository maintains information about which classes have been loaded.
  *
- * It loads its data from the ClassLoader implementation
- * passed into its constructor.
+ * It loads its data from the ClassLoader implementation passed into its constructor.
  *
  * @see org.apache.bcel.Repository
  *
@@ -40,28 +38,25 @@ public class ClassLoaderRepository implements Repository {
     private final java.lang.ClassLoader loader;
     private final Map<String, JavaClass> loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
-
     public ClassLoaderRepository(final java.lang.ClassLoader loader) {
         this.loader = loader;
     }
 
-
-    /** Clear all entries from cache.
+    /**
+     * Clear all entries from cache.
      */
     @Override
     public void clear() {
         loadedClasses.clear();
     }
 
-
     /**
      * Find an already defined JavaClass.
      */
     @Override
-    public JavaClass findClass( final String className ) {
+    public JavaClass findClass(final String className) {
         return loadedClasses.getOrDefault(className, null);
     }
-
 
     /*
      * @return null
@@ -71,12 +66,10 @@ public class ClassLoaderRepository implements Repository {
         return null;
     }
 
-
     @Override
-    public JavaClass loadClass( final Class<?> clazz ) throws ClassNotFoundException {
+    public JavaClass loadClass(final Class<?> clazz) throws ClassNotFoundException {
         return loadClass(clazz.getName());
     }
-
 
     /**
      * Lookup a JavaClass object from the Class Name provided.
@@ -101,21 +94,19 @@ public class ClassLoaderRepository implements Repository {
         }
     }
 
-
     /**
      * Remove class from repository
      */
     @Override
-    public void removeClass( final JavaClass clazz ) {
+    public void removeClass(final JavaClass clazz) {
         loadedClasses.remove(clazz.getClassName());
     }
-
 
     /**
      * Store a new JavaClass into this Repository.
      */
     @Override
-    public void storeClass( final JavaClass clazz ) {
+    public void storeClass(final JavaClass clazz) {
         loadedClasses.put(clazz.getClassName(), clazz);
         clazz.setRepository(this);
     }

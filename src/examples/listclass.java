@@ -36,49 +36,62 @@ import org.apache.bcel.classfile.Method;
 /**
  * Read class file(s) and display its contents. The command line usage is:
  *
- * <pre>java listclass [-constants] [-code] [-brief] [-dependencies] [-nocontents] [-recurse] class... [-exclude <list>]</pre>
+ * <pre>
+ * java listclass [-constants] [-code] [-brief] [-dependencies] [-nocontents] [-recurse] class... [-exclude <list>]
+ * </pre>
+ * 
  * where
  * <ul>
  * <li>{@code -code} List byte code of methods</li>
  * <li>{@code -brief} List byte codes briefly</li>
  * <li>{@code -constants} Print constants table (constant pool)</li>
- * <li>{@code -recurse}  Usually intended to be used along with
- * {@code -dependencies}  When this flag is set, listclass will also print information
- * about all classes which the target class depends on.</li>
+ * <li>{@code -recurse} Usually intended to be used along with {@code -dependencies} When this flag is set, listclass
+ * will also print information about all classes which the target class depends on.</li>
  *
- * <li>{@code -dependencies}  Setting this flag makes listclass print a list of all
- * classes which the target class depends on.  Generated from getting all
- * CONSTANT_Class constants from the constant pool.</li>
+ * <li>{@code -dependencies} Setting this flag makes listclass print a list of all classes which the target class
+ * depends on. Generated from getting all CONSTANT_Class constants from the constant pool.</li>
  *
- * <li>{@code -exclude}  All non-flag arguments after this flag are added to an
- * 'exclusion list'.  Target classes are compared with the members of the
- * exclusion list.  Any target class whose fully qualified name begins with a
- * name in the exclusion list will not be analyzed/listed.  This is meant
- * primarily when using both {@code -recurse} to exclude java, javax, and sun classes,
- * and is recommended as otherwise the output from {@code -recurse} gets quite long and
- * most of it is not interesting.  Note that {@code -exclude} prevents listing of
- * classes, it does not prevent class names from being printed in the
- * {@code -dependencies} list.</li>
- * <li>{@code -nocontents} Do not print JavaClass.toString() for the class. I added
- * this because sometimes I'm only interested in dependency information.</li>
+ * <li>{@code -exclude} All non-flag arguments after this flag are added to an 'exclusion list'. Target classes are
+ * compared with the members of the exclusion list. Any target class whose fully qualified name begins with a name in
+ * the exclusion list will not be analyzed/listed. This is meant primarily when using both {@code -recurse} to exclude
+ * java, javax, and sun classes, and is recommended as otherwise the output from {@code -recurse} gets quite long and
+ * most of it is not interesting. Note that {@code -exclude} prevents listing of classes, it does not prevent class
+ * names from being printed in the {@code -dependencies} list.</li>
+ * <li>{@code -nocontents} Do not print JavaClass.toString() for the class. I added this because sometimes I'm only
+ * interested in dependency information.</li>
  * </ul>
  * <p>
  * Here's a couple examples of how I typically use listclass:
  * </p>
- * <pre>java listclass -code MyClass</pre>
+ * 
+ * <pre>
+ * java listclass -code MyClass
+ * </pre>
+ * 
  * Print information about the class and the byte code of the methods
- * <pre>java listclass -nocontents -dependencies MyClass</pre>
+ * 
+ * <pre>
+ * java listclass -nocontents -dependencies MyClass
+ * </pre>
+ * 
  * Print a list of all classes which MyClass depends on.
- * <pre>java listclass -nocontents -recurse MyClass -exclude java. javax. sun.</pre>
- * Print a recursive listing of all classes which MyClass depends on.  Do not
- * analyze classes beginning with "java.", "javax.", or "sun.".
- * <pre>java listclass -nocontents -dependencies -recurse MyClass -exclude java.javax. sun.</pre>
+ * 
+ * <pre>
+ * java listclass -nocontents -recurse MyClass -exclude java. javax. sun.
+ * </pre>
+ * 
+ * Print a recursive listing of all classes which MyClass depends on. Do not analyze classes beginning with "java.",
+ * "javax.", or "sun.".
+ * 
+ * <pre>
+ * java listclass -nocontents -dependencies -recurse MyClass -exclude java.javax. sun.
+ * </pre>
  * <p>
- * Print a recursive listing of dependency information for MyClass and its
- * dependents.  Do not analyze classes beginning with "java.", "javax.", or "sun."
+ * Print a recursive listing of dependency information for MyClass and its dependents. Do not analyze classes beginning
+ * with "java.", "javax.", or "sun."
  * </p>
  *
- *         <a href="mailto:twheeler@objectspace.com">Thomas Wheeler</A>
+ * <a href="mailto:twheeler@objectspace.com">Thomas Wheeler</A>
  */
 public class listclass {
 
@@ -107,6 +120,7 @@ public class listclass {
         System.arraycopy(tempArray, 0, dependencies, 0, size);
         return dependencies;
     }
+
     public static void main(final String[] argv) {
         final List<String> fileName = new ArrayList<>();
         final List<String> excludeName = new ArrayList<>();
@@ -121,7 +135,7 @@ public class listclass {
 
         // Parse command line arguments.
         for (final String arg : argv) {
-            if (arg.charAt(0) == '-') {  // command line switch
+            if (arg.charAt(0) == '-') { // command line switch
                 if (arg.equals("-constants")) {
                     constants = true;
                 } else if (arg.equals("-code")) {
@@ -137,17 +151,11 @@ public class listclass {
                 } else if (arg.equals("-exclude")) {
                     exclude = true;
                 } else if (arg.equals("-help")) {
-                    System.out.println("Usage: java listclass [-constants] [-code] [-brief] " +
-                            "[-dependencies] [-nocontents] [-recurse] class... " +
-                            "[-exclude <list>]\n" +
-                            "-constants       Print constants table (constant pool)\n" +
-                            "-code            Dump byte code of methods\n" +
-                            "-brief           Brief listing\n" +
-                            "-dependencies    Show class dependencies\n" +
-                            "-nocontents      Do not print field/method information\n" +
-                            "-recurse         Recurse into dependent classes\n" +
-                            "-exclude <list>  Do not list classes beginning with " +
-                            "strings in <list>");
+                    System.out.println("Usage: java listclass [-constants] [-code] [-brief] " + "[-dependencies] [-nocontents] [-recurse] class... "
+                        + "[-exclude <list>]\n" + "-constants       Print constants table (constant pool)\n" + "-code            Dump byte code of methods\n"
+                        + "-brief           Brief listing\n" + "-dependencies    Show class dependencies\n"
+                        + "-nocontents      Do not print field/method information\n" + "-recurse         Recurse into dependent classes\n"
+                        + "-exclude <list>  Do not list classes beginning with " + "strings in <list>");
                     System.exit(0);
                 } else {
                     System.err.println("Unknown switch " + arg + " ignored.");
@@ -162,8 +170,7 @@ public class listclass {
         if (fileName.isEmpty()) {
             System.err.println("list: No input files specified");
         } else {
-            final listclass listClass = new listclass(code, constants, verbose, classdep,
-                    nocontents, recurse, excludeName);
+            final listclass listClass = new listclass(code, constants, verbose, classdep, nocontents, recurse, excludeName);
 
             for (final String element : fileName) {
                 name = element;
@@ -172,6 +179,7 @@ public class listclass {
             }
         }
     }
+
     /**
      * Dump the list of classes this class is dependent on
      */
@@ -181,6 +189,7 @@ public class listclass {
             System.out.println("\t" + name);
         }
     }
+
     /**
      * Dump the disassembled code of all methods in the class.
      */
@@ -194,6 +203,7 @@ public class listclass {
             }
         }
     }
+
     boolean code;
     boolean constants;
     boolean verbose;
@@ -207,8 +217,8 @@ public class listclass {
 
     List<String> excludeName;
 
-    public listclass(final boolean code, final boolean constants, final boolean verbose, final boolean classDep,
-                     final boolean noContents, final boolean recurse, final List<String> excludeName) {
+    public listclass(final boolean code, final boolean constants, final boolean verbose, final boolean classDep, final boolean noContents,
+        final boolean recurse, final List<String> excludeName) {
         this.code = code;
         this.constants = constants;
         this.verbose = verbose;
@@ -245,7 +255,7 @@ public class listclass {
             if (noContents) {
                 System.out.println(javaClass.getClassName());
             } else {
-                System.out.println(javaClass);             // Dump the contents
+                System.out.println(javaClass); // Dump the contents
             }
 
             if (constants) {

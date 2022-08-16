@@ -18,67 +18,57 @@
 package org.apache.bcel.classfile;
 
 /**
- * Visitor with empty method bodies, can be extended and used in conjunction
- * with the DescendingVisitor class, e.g. By courtesy of David Spencer.
+ * Visitor with empty method bodies, can be extended and used in conjunction with the DescendingVisitor class, e.g. By
+ * courtesy of David Spencer.
  *
  * @see DescendingVisitor
  */
-public class EmptyVisitor implements Visitor
-{
-    protected EmptyVisitor()
-    {
+public class EmptyVisitor implements Visitor {
+    protected EmptyVisitor() {
     }
 
     /**
      * @since 6.0
      */
     @Override
-    public void visitAnnotation(final Annotations obj)
-    {
+    public void visitAnnotation(final Annotations obj) {
     }
 
     /**
      * @since 6.0
      */
     @Override
-    public void visitAnnotationDefault(final AnnotationDefault obj)
-    {
+    public void visitAnnotationDefault(final AnnotationDefault obj) {
     }
 
     /**
      * @since 6.0
      */
     @Override
-    public void visitAnnotationEntry(final AnnotationEntry obj)
-    {
+    public void visitAnnotationEntry(final AnnotationEntry obj) {
     }
 
     /**
      * @since 6.0
      */
     @Override
-    public void visitBootstrapMethods(final BootstrapMethods obj)
-    {
+    public void visitBootstrapMethods(final BootstrapMethods obj) {
     }
 
     @Override
-    public void visitCode(final Code obj)
-    {
+    public void visitCode(final Code obj) {
     }
 
     @Override
-    public void visitCodeException(final CodeException obj)
-    {
+    public void visitCodeException(final CodeException obj) {
     }
 
     @Override
-    public void visitConstantClass(final ConstantClass obj)
-    {
+    public void visitConstantClass(final ConstantClass obj) {
     }
 
     @Override
-    public void visitConstantDouble(final ConstantDouble obj)
-    {
+    public void visitConstantDouble(final ConstantDouble obj) {
     }
 
     /**
@@ -89,33 +79,27 @@ public class EmptyVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantFieldref(final ConstantFieldref obj)
-    {
+    public void visitConstantFieldref(final ConstantFieldref obj) {
     }
 
     @Override
-    public void visitConstantFloat(final ConstantFloat obj)
-    {
+    public void visitConstantFloat(final ConstantFloat obj) {
     }
 
     @Override
-    public void visitConstantInteger(final ConstantInteger obj)
-    {
+    public void visitConstantInteger(final ConstantInteger obj) {
     }
 
     @Override
-    public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref obj)
-    {
+    public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref obj) {
     }
 
     @Override
-    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj)
-    {
+    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj) {
     }
 
     @Override
-    public void visitConstantLong(final ConstantLong obj)
-    {
+    public void visitConstantLong(final ConstantLong obj) {
     }
 
     /**
@@ -126,16 +110,14 @@ public class EmptyVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantMethodref(final ConstantMethodref obj)
-    {
+    public void visitConstantMethodref(final ConstantMethodref obj) {
     }
 
     /**
      * @since 6.0
      */
     @Override
-    public void visitConstantMethodType(final ConstantMethodType obj)
-    {
+    public void visitConstantMethodType(final ConstantMethodType obj) {
     }
 
     /**
@@ -146,8 +128,7 @@ public class EmptyVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantNameAndType(final ConstantNameAndType obj)
-    {
+    public void visitConstantNameAndType(final ConstantNameAndType obj) {
     }
 
     /**
@@ -158,126 +139,101 @@ public class EmptyVisitor implements Visitor
     }
 
     @Override
-    public void visitConstantPool(final ConstantPool obj)
-    {
+    public void visitConstantPool(final ConstantPool obj) {
     }
 
     @Override
-    public void visitConstantString(final ConstantString obj)
-    {
+    public void visitConstantString(final ConstantString obj) {
     }
 
     @Override
-    public void visitConstantUtf8(final ConstantUtf8 obj)
-    {
+    public void visitConstantUtf8(final ConstantUtf8 obj) {
     }
 
     @Override
-    public void visitConstantValue(final ConstantValue obj)
-    {
+    public void visitConstantValue(final ConstantValue obj) {
     }
 
     @Override
-    public void visitDeprecated(final Deprecated obj)
-    {
+    public void visitDeprecated(final Deprecated obj) {
     }
 
     /**
      * @since 6.0
      */
     @Override
-    public void visitEnclosingMethod(final EnclosingMethod obj)
-    {
+    public void visitEnclosingMethod(final EnclosingMethod obj) {
     }
 
     @Override
-    public void visitExceptionTable(final ExceptionTable obj)
-    {
+    public void visitExceptionTable(final ExceptionTable obj) {
     }
 
     @Override
-    public void visitField(final Field obj)
-    {
+    public void visitField(final Field obj) {
     }
 
     @Override
-    public void visitInnerClass(final InnerClass obj)
-    {
+    public void visitInnerClass(final InnerClass obj) {
     }
 
     @Override
-    public void visitInnerClasses(final InnerClasses obj)
-    {
+    public void visitInnerClasses(final InnerClasses obj) {
     }
 
     @Override
-    public void visitJavaClass(final JavaClass obj)
-    {
+    public void visitJavaClass(final JavaClass obj) {
     }
 
     @Override
-    public void visitLineNumber(final LineNumber obj)
-    {
+    public void visitLineNumber(final LineNumber obj) {
     }
 
     @Override
-    public void visitLineNumberTable(final LineNumberTable obj)
-    {
+    public void visitLineNumberTable(final LineNumberTable obj) {
     }
 
     @Override
-    public void visitLocalVariable(final LocalVariable obj)
-    {
+    public void visitLocalVariable(final LocalVariable obj) {
     }
 
     @Override
-    public void visitLocalVariableTable(final LocalVariableTable obj)
-    {
+    public void visitLocalVariableTable(final LocalVariableTable obj) {
     }
 
     /**
      * @since 6.0
      */
     @Override
-    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj)
-    {
+    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj) {
     }
 
     @Override
-    public void visitMethod(final Method obj)
-    {
+    public void visitMethod(final Method obj) {
     }
 
     /**
      * @since 6.0
-    @Override
-    public void visitStackMapTable(StackMapTable obj)
-    {
-    }
+     * @Override public void visitStackMapTable(StackMapTable obj) { }
      */
 
     /**
      * @since 6.0
-    @Override
-    public void visitStackMapTableEntry(StackMapTableEntry obj)
-    {
-    }
+     * @Override public void visitStackMapTableEntry(StackMapTableEntry obj) { }
      */
 
     /**
      * @since 6.4.0
      */
     @Override
-    public void visitMethodParameter(final MethodParameter obj)
-    {
+    public void visitMethodParameter(final MethodParameter obj) {
     }
 
     /**
      * @since 6.0
      */
     @Override
-    public void visitMethodParameters(final MethodParameters obj)
-    {
+    public void visitMethodParameters(final MethodParameters obj) {
     }
 
     /** @since 6.4.0 */
@@ -329,8 +285,7 @@ public class EmptyVisitor implements Visitor
      * @since 6.0
      */
     @Override
-    public void visitParameterAnnotation(final ParameterAnnotations obj)
-    {
+    public void visitParameterAnnotation(final ParameterAnnotations obj) {
     }
 
     /**
@@ -341,32 +296,26 @@ public class EmptyVisitor implements Visitor
     }
 
     @Override
-    public void visitSignature(final Signature obj)
-    {
+    public void visitSignature(final Signature obj) {
     }
 
     @Override
-    public void visitSourceFile(final SourceFile obj)
-    {
+    public void visitSourceFile(final SourceFile obj) {
     }
 
     @Override
-    public void visitStackMap(final StackMap obj)
-    {
+    public void visitStackMap(final StackMap obj) {
     }
 
     @Override
-    public void visitStackMapEntry(final StackMapEntry obj)
-    {
+    public void visitStackMapEntry(final StackMapEntry obj) {
     }
 
     @Override
-    public void visitSynthetic(final Synthetic obj)
-    {
+    public void visitSynthetic(final Synthetic obj) {
     }
 
     @Override
-    public void visitUnknown(final Unknown obj)
-    {
+    public void visitUnknown(final Unknown obj) {
     }
 }

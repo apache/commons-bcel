@@ -37,21 +37,18 @@ import org.apache.bcel.classfile.Utility;
 /**
  * Read class file(s) and convert them into HTML files.
  *
- * Given a JavaClass object "class" that is in package "package" five files
- * will be created in the specified directory.
+ * Given a JavaClass object "class" that is in package "package" five files will be created in the specified directory.
  *
  * <OL>
- * <LI> "package"."class".html as the main file which defines the frames for
- * the following subfiles.
- * <LI>  "package"."class"_attributes.html contains all (known) attributes found in the file
- * <LI>  "package"."class"_cp.html contains the constant pool
- * <LI>  "package"."class"_code.html contains the byte code
- * <LI>  "package"."class"_methods.html contains references to all methods and fields of the class
+ * <LI>"package"."class".html as the main file which defines the frames for the following subfiles.
+ * <LI>"package"."class"_attributes.html contains all (known) attributes found in the file
+ * <LI>"package"."class"_cp.html contains the constant pool
+ * <LI>"package"."class"_code.html contains the byte code
+ * <LI>"package"."class"_methods.html contains references to all methods and fields of the class
  * </OL>
  *
- * All subfiles reference each other appropriately, e.g. clicking on a
- * method in the Method's frame will jump to the appropriate method in
- * the Code frame.
+ * All subfiles reference each other appropriately, e.g. clicking on a method in the Method's frame will jump to the
+ * appropriate method in the Code frame.
  *
  */
 public class Class2HTML implements Constants {
@@ -71,7 +68,8 @@ public class Class2HTML implements Constants {
         basicTypes.add("double");
         basicTypes.add("float");
     }
-    public static void main( final String[] argv ) throws IOException {
+
+    public static void main(final String[] argv) throws IOException {
         final String[] fileName = new String[argv.length];
         int files = 0;
         ClassParser parser = null;
@@ -79,7 +77,8 @@ public class Class2HTML implements Constants {
         String zipFile = null;
         final char sep = File.separatorChar;
         String dir = "." + sep; // Where to store HTML files
-        /* Parse command line arguments.
+        /*
+         * Parse command line arguments.
          */
         for (int i = 0; i < argv.length; i++) {
             if (argv[i].charAt(0) == '-') { // command line switch
@@ -122,18 +121,16 @@ public class Class2HTML implements Constants {
     }
 
     /**
-     * Utility method that converts a class reference in the constant pool,
-     * i.e., an index to a string.
+     * Utility method that converts a class reference in the constant pool, i.e., an index to a string.
      */
-    static String referenceClass( final int index ) {
+    static String referenceClass(final int index) {
         String str = constantPool.getConstantString(index, Const.CONSTANT_Class);
         str = Utility.compactClassName(str);
         str = Utility.compactClassName(str, classPackage + ".", true);
-        return "<A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + str
-                + "</A>";
+        return "<A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + str + "</A>";
     }
 
-    static String referenceType( final String type ) {
+    static String referenceType(final String type) {
         String shortType = Utility.compactClassName(type);
         shortType = Utility.compactClassName(shortType, classPackage + ".", true);
         final int index = type.indexOf('['); // Type is an array?
@@ -148,37 +145,33 @@ public class Class2HTML implements Constants {
         return "<A HREF=\"" + baseType + ".html\" TARGET=_top>" + shortType + "</A>";
     }
 
-
-    static String toHTML( final String str ) {
+    static String toHTML(final String str) {
         final StringBuilder buf = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
             char ch;
             switch (ch = str.charAt(i)) {
-                case '<':
-                    buf.append("&lt;");
-                    break;
-                case '>':
-                    buf.append("&gt;");
-                    break;
-                case '\n':
-                    buf.append("\\n");
-                    break;
-                case '\r':
-                    buf.append("\\r");
-                    break;
-                default:
-                    buf.append(ch);
+            case '<':
+                buf.append("&lt;");
+                break;
+            case '>':
+                buf.append("&gt;");
+                break;
+            case '\n':
+                buf.append("\\n");
+                break;
+            case '\r':
+                buf.append("\\r");
+                break;
+            default:
+                buf.append(ch);
             }
         }
         return buf.toString();
     }
 
-
     private final JavaClass javaClass; // current class object
 
-
     private final String dir;
-
 
     /**
      * Write contents of the given JavaClass into HTML files.
@@ -215,19 +208,15 @@ public class Class2HTML implements Constants {
         }
     }
 
-
-    private void writeMainHTML( final AttributeHTML attributeHtml, final Charset charset ) throws IOException {
+    private void writeMainHTML(final AttributeHTML attributeHtml, final Charset charset) throws IOException {
         try (PrintWriter file = new PrintWriter(dir + className + ".html", charset.name())) {
-            file.println("<HTML>\n" + "<HEAD><TITLE>Documentation for " + className + "</TITLE>" + "</HEAD>\n"
-                    + "<FRAMESET BORDER=1 cols=\"30%,*\">\n" + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
-                    + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n MARGINWIDTH=\"0\" "
-                    + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "<FRAME NAME=\"Attributes\" SRC=\""
-                    + className + "_attributes.html" + "\"\n MARGINWIDTH=\"0\" "
-                    + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "</FRAMESET>\n"
-                    + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"Code\" SRC=\"" + className
-                    + "_code.html\"\n MARGINWIDTH=0 " + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
-                    + "<FRAME NAME=\"Methods\" SRC=\"" + className + "_methods.html\"\n MARGINWIDTH=0 "
-                    + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n" + "</FRAMESET></FRAMESET></HTML>");
+            file.println("<HTML>\n" + "<HEAD><TITLE>Documentation for " + className + "</TITLE>" + "</HEAD>\n" + "<FRAMESET BORDER=1 cols=\"30%,*\">\n"
+                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n MARGINWIDTH=\"0\" "
+                + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "<FRAME NAME=\"Attributes\" SRC=\"" + className + "_attributes.html"
+                + "\"\n MARGINWIDTH=\"0\" " + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "</FRAMESET>\n"
+                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"Code\" SRC=\"" + className + "_code.html\"\n MARGINWIDTH=0 "
+                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n" + "<FRAME NAME=\"Methods\" SRC=\"" + className + "_methods.html\"\n MARGINWIDTH=0 "
+                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n" + "</FRAMESET></FRAMESET></HTML>");
         }
         final Attribute[] attributes = javaClass.getAttributes();
         for (int i = 0; i < attributes.length; i++) {

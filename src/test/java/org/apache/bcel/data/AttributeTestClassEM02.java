@@ -18,17 +18,13 @@
 
 package org.apache.bcel.data;
 
-public class AttributeTestClassEM02
-{
-    public static void main(final String[] argv)
-    {
+public class AttributeTestClassEM02 {
+    public static void main(final String[] argv) {
     }
 
-    Runnable r = new Runnable()
-    {
+    Runnable r = new Runnable() {
         @Override
-        public void run()
-        {
+        public void run() {
             System.err.println("hello");
         }
     };

@@ -40,8 +40,7 @@ public class ClassPathTestCase extends AbstractTestCase {
 
     @Test
     public void testGetResourceAsStream() throws IOException {
-        try (final InputStream inputStream = ClassPath.SYSTEM_CLASS_PATH
-                .getResourceAsStream("java/lang/String.class")) {
+        try (final InputStream inputStream = ClassPath.SYSTEM_CLASS_PATH.getResourceAsStream("java/lang/String.class")) {
             assertNotNull(inputStream);
         }
     }

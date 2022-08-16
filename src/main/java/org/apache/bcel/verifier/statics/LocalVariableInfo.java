@@ -17,19 +17,16 @@
  */
 package org.apache.bcel.verifier.statics;
 
-
 import java.util.Hashtable;
 
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
 
 /**
- * A utility class holding the information about
- * the name and the type of a local variable in
- * a given slot (== index). This information
- * often changes in course of byte code offsets.
+ * A utility class holding the information about the name and the type of a local variable in a given slot (== index).
+ * This information often changes in course of byte code offsets.
  */
-public class LocalVariableInfo{
+public class LocalVariableInfo {
 
     /** The types database. KEY: String representing the offset integer. */
     private final Hashtable<String, Type> types = new Hashtable<>();
@@ -40,17 +37,16 @@ public class LocalVariableInfo{
     /**
      * Adds information about name and type for a given offset.
      *
-     * @throws LocalVariableInfoInconsistentException if the new information conflicts
-     *         with already gathered information.
+     * @throws LocalVariableInfoInconsistentException if the new information conflicts with already gathered information.
      */
     private void add(final int offset, final String name, final Type t) throws LocalVariableInfoInconsistentException {
         if (getName(offset) != null && !getName(offset).equals(name)) {
-            throw new LocalVariableInfoInconsistentException("At bytecode offset '" + offset
-                    + "' a local variable has two different names: '" + getName(offset) + "' and '" + name + "'.");
+            throw new LocalVariableInfoInconsistentException(
+                "At bytecode offset '" + offset + "' a local variable has two different names: '" + getName(offset) + "' and '" + name + "'.");
         }
         if (getType(offset) != null && !getType(offset).equals(t)) {
-            throw new LocalVariableInfoInconsistentException("At bytecode offset '" + offset
-                    + "' a local variable has two different types: '" + getType(offset) + "' and '" + t + "'.");
+            throw new LocalVariableInfoInconsistentException(
+                "At bytecode offset '" + offset + "' a local variable has two different types: '" + getType(offset) + "' and '" + t + "'.");
         }
         setName(offset, name);
         setType(offset, t);
@@ -64,11 +60,9 @@ public class LocalVariableInfo{
      * @param length length of ...
      * @param type variable type
      *
-     * @throws LocalVariableInfoInconsistentException if the new information conflicts
-     *         with already gathered information.
+     * @throws LocalVariableInfoInconsistentException if the new information conflicts with already gathered information.
      */
-    public void add(final String name, final int startPc, final int length, final Type type)
-            throws LocalVariableInfoInconsistentException {
+    public void add(final String name, final int startPc, final int length, final Type type) throws LocalVariableInfoInconsistentException {
         for (int i = startPc; i <= startPc + length; i++) { // incl/incl-notation!
             add(i, name, type);
         }
@@ -99,16 +93,14 @@ public class LocalVariableInfo{
     }
 
     /**
-     * Adds a name of a local variable and a certain slot to our 'names'
-     * (Hashtable) database.
+     * Adds a name of a local variable and a certain slot to our 'names' (Hashtable) database.
      */
     private void setName(final int offset, final String name) {
         names.put(Integer.toString(offset), name);
     }
 
     /**
-     * Adds a type of a local variable and a certain slot to our 'types'
-     * (Hashtable) database.
+     * Adds a type of a local variable and a certain slot to our 'types' (Hashtable) database.
      */
     private void setType(final int offset, final Type t) {
         types.put(Integer.toString(offset), t);

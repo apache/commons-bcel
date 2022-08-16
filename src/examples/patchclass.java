@@ -22,8 +22,7 @@ import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.JavaClass;
 
 /**
- * Patch all Utf8 constants in the given class file <em>file</em>.class
- * and save the result in _<em>file</em>.class.
+ * Patch all Utf8 constants in the given class file <em>file</em>.class and save the result in _<em>file</em>.class.
  *
  * Usage: patch <oldstring> <newstring> files
  *
@@ -56,8 +55,7 @@ public class patchclass {
     }
 
     /*
-     * Replace all occurences of string "<em>old</em>" with
-     * "<em>replacement</em>" in all Utf8 constants
+     * Replace all occurences of string "<em>old</em>" with "<em>replacement</em>" in all Utf8 constants
      */
     private static void patchIt(final String old, final String replacement, final Constant[] constant_pool) {
         ConstantUtf8 c;
@@ -73,13 +71,13 @@ public class patchclass {
                     str = c.getBytes();
 
                     if ((index = str.indexOf(old)) != -1) { // `old' found in str
-                        buf = new StringBuilder();           // target buffer
-                        old_index = 0;                      // String start offset
+                        buf = new StringBuilder(); // target buffer
+                        old_index = 0; // String start offset
 
                         // While we have something to replace
                         while ((index = str.indexOf(old, old_index)) != -1) {
                             buf.append(str.substring(old_index, index)); // append prefix
-                            buf.append(replacement);                     // append `replacement'
+                            buf.append(replacement); // append `replacement'
 
                             old_index = index + old.length(); // Skip `old'.length chars
                         }

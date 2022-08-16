@@ -19,7 +19,7 @@ package org.apache.bcel.verifier.tests;
 
 import java.io.Serializable;
 
-public class TestArray01{
+public class TestArray01 {
 
     public static Object foo(final String s) {
         return s;

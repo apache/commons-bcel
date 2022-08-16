@@ -42,7 +42,7 @@ public abstract class Annotations extends Attribute {
      * @param isRuntimeVisible whether this Annotation visible at runtime
      */
     public Annotations(final byte annotationType, final int nameIndex, final int length, final AnnotationEntry[] annotationTable,
-            final ConstantPool constantPool, final boolean isRuntimeVisible) {
+        final ConstantPool constantPool, final boolean isRuntimeVisible) {
         super(annotationType, nameIndex, length, constantPool);
         this.annotationTable = annotationTable;
         this.isRuntimeVisible = isRuntimeVisible;
@@ -57,8 +57,8 @@ public abstract class Annotations extends Attribute {
      * @param isRuntimeVisible whether this Annotation visible at runtime
      * @throws IOException if an I/O error occurs.
      */
-    Annotations(final byte annotation_type, final int name_index, final int length, final DataInput input,
-            final ConstantPool constant_pool, final boolean isRuntimeVisible) throws IOException {
+    Annotations(final byte annotation_type, final int name_index, final int length, final DataInput input, final ConstantPool constant_pool,
+        final boolean isRuntimeVisible) throws IOException {
         this(annotation_type, name_index, length, (AnnotationEntry[]) null, constant_pool, isRuntimeVisible);
         final int annotation_table_length = input.readUnsignedShort();
         annotationTable = new AnnotationEntry[annotation_table_length];

@@ -17,16 +17,13 @@
  */
 package org.apache.bcel.verifier.exc;
 
-
 /**
- * A LocalVariableInfoInconsistentException instance is thrown by
- * the LocalVariableInfo class when it detects that the information
- * it holds is inconsistent; this is normally due to inconsistent
- * LocalVariableTable entries in the Code attribute of a certain
- * Method object.
+ * A LocalVariableInfoInconsistentException instance is thrown by the LocalVariableInfo class when it detects that the
+ * information it holds is inconsistent; this is normally due to inconsistent LocalVariableTable entries in the Code
+ * attribute of a certain Method object.
  *
  */
-public class LocalVariableInfoInconsistentException extends ClassConstraintException{
+public class LocalVariableInfoInconsistentException extends ClassConstraintException {
     private static final long serialVersionUID = -2833180480144304190L;
 
     /**
@@ -39,6 +36,6 @@ public class LocalVariableInfoInconsistentException extends ClassConstraintExcep
      * Constructs a new LocalVariableInfoInconsistentException with the specified error message.
      */
     public LocalVariableInfoInconsistentException(final String message) {
-        super (message);
+        super(message);
     }
 }

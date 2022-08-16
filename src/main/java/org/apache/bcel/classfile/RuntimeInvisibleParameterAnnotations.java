@@ -23,8 +23,7 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * Represents a parameter annotation that is represented in the class file
- * but is not provided to the JVM.
+ * Represents a parameter annotation that is represented in the class file but is not provided to the JVM.
  *
  * @since 6.0
  */
@@ -37,7 +36,7 @@ public class RuntimeInvisibleParameterAnnotations extends ParameterAnnotations {
      * @param constant_pool Array of constants
      */
     public RuntimeInvisibleParameterAnnotations(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
-            throws IOException {
+        throws IOException {
         super(Const.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS, name_index, length, input, constant_pool);
     }
 }

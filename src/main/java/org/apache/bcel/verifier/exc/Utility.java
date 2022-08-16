@@ -17,15 +17,15 @@
  */
 package org.apache.bcel.verifier.exc;
 
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
  * A utility class providing convenience methods concerning Throwable instances.
+ * 
  * @see java.lang.Throwable
  */
-public final class Utility{
+public final class Utility {
     /** This method returns the stack trace of a Throwable instance as a String. */
     public static String getStackTrace(final Throwable t) {
         final StringWriter sw = new StringWriter();
@@ -35,5 +35,6 @@ public final class Utility{
     }
 
     /** This class is not instantiable. */
-    private Utility() {}
+    private Utility() {
+    }
 }

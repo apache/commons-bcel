@@ -45,8 +45,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * This class implements a machine-generated frame for use with
- * the GraphicalVerfifier.
+ * This class implements a machine-generated frame for use with the GraphicalVerfifier.
  *
  * @see GraphicalVerifier
  */
@@ -93,7 +92,6 @@ public class VerifierAppFrame extends JFrame {
     private final JMenuItem whatisMenuItem = new JMenuItem();
     private final JMenuItem aboutMenuItem = new JMenuItem();
 
-
     /** Constructor. */
     public VerifierAppFrame() {
         enableEvents(AWTEvent.WINDOW_EVENT_MASK);
@@ -104,18 +102,13 @@ public class VerifierAppFrame extends JFrame {
         }
     }
 
-
-    void aboutMenuItem_actionPerformed( final ActionEvent e ) {
-        JOptionPane
-                .showMessageDialog(
-                        this,
-                        "JustIce is a Java class file verifier.\n"+
-                        "It was implemented by Enver Haase in 2001, 2002.\n<https://commons.apache.org/bcel/>",
-                        JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
+    void aboutMenuItem_actionPerformed(final ActionEvent e) {
+        JOptionPane.showMessageDialog(this,
+            "JustIce is a Java class file verifier.\n" + "It was implemented by Enver Haase in 2001, 2002.\n<https://commons.apache.org/bcel/>",
+            JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
     }
 
-
-    synchronized void classNamesJList_valueChanged( final ListSelectionEvent e ) {
+    synchronized void classNamesJList_valueChanged(final ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) {
             return;
         }
@@ -129,7 +122,6 @@ public class VerifierAppFrame extends JFrame {
         classNamesJList.setSelectedValue(current_class, true);
     }
 
-
     /**
      * @return the classNamesJList
      */
@@ -137,10 +129,9 @@ public class VerifierAppFrame extends JFrame {
         return classNamesJList;
     }
 
-
     /** Initizalization of the components. */
     private void jbInit() throws Exception {
-        //setIconImage(Toolkit.getDefaultToolkit().createImage(Frame1.class.getResource("[Ihr Symbol]")));
+        // setIconImage(Toolkit.getDefaultToolkit().createImage(Frame1.class.getResource("[Ihr Symbol]")));
         contentPane = (JPanel) this.getContentPane();
         contentPane.setLayout(cardLayout1);
         this.setJMenuBar(jMenuBar1);
@@ -178,8 +169,7 @@ public class VerifierAppFrame extends JFrame {
         messagesTextPane.setBorder(BorderFactory.createRaisedBevelBorder());
         messagesTextPane.setEditable(false);
         newFileMenuItem.setText("New...");
-        newFileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(78,
-                InputEvent.CTRL_MASK, true));
+        newFileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(78, InputEvent.CTRL_MASK, true));
         newFileMenuItem.addActionListener(this::newFileMenuItem_actionPerformed);
         pass3aTextPane.setEditable(false);
         pass3bTextPane.setEditable(false);
@@ -224,10 +214,8 @@ public class VerifierAppFrame extends JFrame {
         jSplitPane4.setDividerLocation(150);
     }
 
-
-    void newFileMenuItem_actionPerformed( final ActionEvent e ) {
-        final String classname = JOptionPane
-                .showInputDialog("Please enter the fully qualified name of a class or interface to verify:");
+    void newFileMenuItem_actionPerformed(final ActionEvent e) {
+        final String classname = JOptionPane.showInputDialog("Please enter the fully qualified name of a class or interface to verify:");
         if (classname == null || classname.isEmpty()) {
             return;
         }
@@ -235,8 +223,7 @@ public class VerifierAppFrame extends JFrame {
         classNamesJList.setSelectedValue(classname, true);
     }
 
-
-    synchronized void pass3aJList_valueChanged( final ListSelectionEvent e ) {
+    synchronized void pass3aJList_valueChanged(final ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) {
             return;
         }
@@ -254,8 +241,7 @@ public class VerifierAppFrame extends JFrame {
                 JavaClass jc = null;
                 try {
                     jc = Repository.lookupClass(v.getClassName());
-                    all3amsg.append("Method '").append(jc.getMethods()[i]).append("': ")
-                            .append(vr.getMessage().replace('\n', ' ') ).append("\n\n");
+                    all3amsg.append("Method '").append(jc.getMethods()[i]).append("': ").append(vr.getMessage().replace('\n', ' ')).append("\n\n");
                 } catch (final ClassNotFoundException ex) {
                     // FIXME: handle the error
                     ex.printStackTrace();
@@ -266,8 +252,7 @@ public class VerifierAppFrame extends JFrame {
         pass3aTextPane.setBackground(all3aok ? Color.green : rejected ? Color.red : Color.yellow);
     }
 
-
-    synchronized void pass3bJList_valueChanged( final ListSelectionEvent e ) {
+    synchronized void pass3bJList_valueChanged(final ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) {
             return;
         }
@@ -285,8 +270,7 @@ public class VerifierAppFrame extends JFrame {
                 JavaClass jc = null;
                 try {
                     jc = Repository.lookupClass(v.getClassName());
-                    all3bmsg.append("Method '").append(jc.getMethods()[i]).append("': ")
-                            .append(vr.getMessage().replace('\n', ' ')).append("\n\n");
+                    all3bmsg.append("Method '").append(jc.getMethods()[i]).append("': ").append(vr.getMessage().replace('\n', ' ')).append("\n\n");
                 } catch (final ClassNotFoundException ex) {
                     // FIXME: handle the error
                     ex.printStackTrace();
@@ -297,16 +281,14 @@ public class VerifierAppFrame extends JFrame {
         pass3bTextPane.setBackground(all3bok ? Color.green : rejected ? Color.red : Color.yellow);
     }
 
-
     /** Overridden to stop the application on a closing window. */
     @Override
-    protected void processWindowEvent( final WindowEvent e ) {
+    protected void processWindowEvent(final WindowEvent e) {
         super.processWindowEvent(e);
         if (e.getID() == WindowEvent.WINDOW_CLOSING) {
             System.exit(0);
         }
     }
-
 
     private void verify() throws ClassNotFoundException {
         setTitle("PLEASE WAIT");
@@ -343,15 +325,11 @@ public class VerifierAppFrame extends JFrame {
                 pass2TextPane.setBackground(Color.green);
                 final JavaClass jc = Repository.lookupClass(current_class);
                 /*
-                 boolean all3aok = true;
-                 boolean all3bok = true;
-                 String all3amsg = "";
-                 String all3bmsg = "";
+                 * boolean all3aok = true; boolean all3bok = true; String all3amsg = ""; String all3bmsg = "";
                  */
                 final String[] methodnames = new String[jc.getMethods().length];
                 for (int i = 0; i < jc.getMethods().length; i++) {
-                    methodnames[i] = jc.getMethods()[i].toString().replace('\n', ' ').replace('\t',
-                            ' ');
+                    methodnames[i] = jc.getMethods()[i].toString().replace('\n', ' ').replace('\t', ' ');
                 }
                 pass3aJList.setListData(methodnames);
                 pass3aJList.setSelectionInterval(0, jc.getMethods().length - 1);
@@ -370,17 +348,13 @@ public class VerifierAppFrame extends JFrame {
         setTitle(current_class + " - " + JUSTICE_VERSION);
     }
 
-
-    void whatisMenuItem_actionPerformed( final ActionEvent e ) {
-        JOptionPane
-                .showMessageDialog(
-                        this,
-                        "The upper four boxes to the right reflect verification passes according to"+
-                        " The Java Virtual Machine Specification.\nThese are (in that order):"+
-                        " Pass one, Pass two, Pass three (before data flow analysis), Pass three (data flow analysis).\n"+
-                        "The bottom box to the right shows (warning) messages; warnings do not cause a class to be rejected.",
-                        JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
+    void whatisMenuItem_actionPerformed(final ActionEvent e) {
+        JOptionPane.showMessageDialog(this,
+            "The upper four boxes to the right reflect verification passes according to"
+                + " The Java Virtual Machine Specification.\nThese are (in that order):"
+                + " Pass one, Pass two, Pass three (before data flow analysis), Pass three (data flow analysis).\n"
+                + "The bottom box to the right shows (warning) messages; warnings do not cause a class to be rejected.",
+            JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
     }
-
 
 }

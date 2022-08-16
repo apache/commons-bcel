@@ -27,56 +27,46 @@ import org.apache.bcel.classfile.JavaClass;
  */
 public abstract class ReferenceType extends Type {
 
-    /** Class is non-abstract but not instantiable from the outside
+    /**
+     * Class is non-abstract but not instantiable from the outside
      */
     ReferenceType() {
         super(Const.T_OBJECT, "<null object>");
     }
 
-
     protected ReferenceType(final byte t, final String s) {
         super(t, s);
     }
 
-
     /**
-     * This commutative operation returns the first common superclass (narrowest ReferenceType
-     * referencing a class, not an interface).
-     * If one of the types is a superclass of the other, the former is returned.
-     * If "this" is Type.NULL, then t is returned.
-     * If t is Type.NULL, then "this" is returned.
-     * If "this" equals t ['this.equals(t)'] "this" is returned.
-     * If "this" or t is an ArrayType, then Type.OBJECT is returned.
-     * If "this" or t is a ReferenceType referencing an interface, then Type.OBJECT is returned.
-     * If not all of the two classes' superclasses cannot be found, "null" is returned.
-     * See the JVM specification edition 2, "�4.9.2 The Bytecode Verifier".
+     * This commutative operation returns the first common superclass (narrowest ReferenceType referencing a class, not an
+     * interface). If one of the types is a superclass of the other, the former is returned. If "this" is Type.NULL, then t
+     * is returned. If t is Type.NULL, then "this" is returned. If "this" equals t ['this.equals(t)'] "this" is returned. If
+     * "this" or t is an ArrayType, then Type.OBJECT is returned. If "this" or t is a ReferenceType referencing an
+     * interface, then Type.OBJECT is returned. If not all of the two classes' superclasses cannot be found, "null" is
+     * returned. See the JVM specification edition 2, "�4.9.2 The Bytecode Verifier".
      *
-     * @deprecated use getFirstCommonSuperclass(ReferenceType t) which has
-     *             slightly changed semantics.
-     * @throws ClassNotFoundException on failure to find superclasses of this
-     *  type, or the type passed as a parameter
+     * @deprecated use getFirstCommonSuperclass(ReferenceType t) which has slightly changed semantics.
+     * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter
      */
     @Deprecated
-    public ReferenceType firstCommonSuperclass( final ReferenceType t ) throws ClassNotFoundException {
+    public ReferenceType firstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
         if (this.equals(Type.NULL)) {
             return t;
         }
         if (t.equals(Type.NULL) || this.equals(t)) {
             return this;
             /*
-             * TODO: Above sounds a little arbitrary. On the other hand, there is
-             * no object referenced by Type.NULL so we can also say all the objects
-             * referenced by Type.NULL were derived from java.lang.Object.
-             * However, the Java Language's "instanceof" operator proves us wrong:
-             * "null" is not referring to an instance of java.lang.Object :)
+             * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by Type.NULL so we can also
+             * say all the objects referenced by Type.NULL were derived from java.lang.Object. However, the Java Language's
+             * "instanceof" operator proves us wrong: "null" is not referring to an instance of java.lang.Object :)
              */
         }
         if (this instanceof ArrayType || t instanceof ArrayType) {
             return Type.OBJECT;
             // TODO: Is there a proof of OBJECT being the direct ancestor of every ArrayType?
         }
-        if (this instanceof ObjectType && ((ObjectType) this).referencesInterface()
-                || t instanceof ObjectType && ((ObjectType) t).referencesInterface()) {
+        if (this instanceof ObjectType && ((ObjectType) this).referencesInterface() || t instanceof ObjectType && ((ObjectType) t).referencesInterface()) {
             return Type.OBJECT;
             // TODO: The above line is correct comparing to the vmspec2. But one could
             // make class file verification a bit stronger here by using the notion of
@@ -108,49 +98,38 @@ public abstract class ReferenceType extends Type {
         return null;
     }
 
-
     /**
-     * This commutative operation returns the first common superclass (narrowest ReferenceType
-     * referencing a class, not an interface).
-     * If one of the types is a superclass of the other, the former is returned.
-     * If "this" is Type.NULL, then t is returned.
-     * If t is Type.NULL, then "this" is returned.
-     * If "this" equals t ['this.equals(t)'] "this" is returned.
-     * If "this" or t is an ArrayType, then Type.OBJECT is returned;
-     * unless their dimensions match. Then an ArrayType of the same
-     * number of dimensions is returned, with its basic type being the
-     * first common super class of the basic types of "this" and t.
-     * If "this" or t is a ReferenceType referencing an interface, then Type.OBJECT is returned.
-     * If not all of the two classes' superclasses cannot be found, "null" is returned.
-     * See the JVM specification edition 2, "�4.9.2 The Bytecode Verifier".
+     * This commutative operation returns the first common superclass (narrowest ReferenceType referencing a class, not an
+     * interface). If one of the types is a superclass of the other, the former is returned. If "this" is Type.NULL, then t
+     * is returned. If t is Type.NULL, then "this" is returned. If "this" equals t ['this.equals(t)'] "this" is returned. If
+     * "this" or t is an ArrayType, then Type.OBJECT is returned; unless their dimensions match. Then an ArrayType of the
+     * same number of dimensions is returned, with its basic type being the first common super class of the basic types of
+     * "this" and t. If "this" or t is a ReferenceType referencing an interface, then Type.OBJECT is returned. If not all of
+     * the two classes' superclasses cannot be found, "null" is returned. See the JVM specification edition 2, "�4.9.2 The
+     * Bytecode Verifier".
      *
-     * @throws ClassNotFoundException on failure to find superclasses of this
-     *  type, or the type passed as a parameter
+     * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter
      */
-    public ReferenceType getFirstCommonSuperclass( final ReferenceType t ) throws ClassNotFoundException {
+    public ReferenceType getFirstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
         if (this.equals(Type.NULL)) {
             return t;
         }
         if (t.equals(Type.NULL) || this.equals(t)) {
             return this;
             /*
-             * TODO: Above sounds a little arbitrary. On the other hand, there is
-             * no object referenced by Type.NULL so we can also say all the objects
-             * referenced by Type.NULL were derived from java.lang.Object.
-             * However, the Java Language's "instanceof" operator proves us wrong:
-             * "null" is not referring to an instance of java.lang.Object :)
+             * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by Type.NULL so we can also
+             * say all the objects referenced by Type.NULL were derived from java.lang.Object. However, the Java Language's
+             * "instanceof" operator proves us wrong: "null" is not referring to an instance of java.lang.Object :)
              */
         }
         /* This code is from a bug report by Konstantin Shagin <konst@cs.technion.ac.il> */
         if (this instanceof ArrayType && t instanceof ArrayType) {
             final ArrayType arrType1 = (ArrayType) this;
             final ArrayType arrType2 = (ArrayType) t;
-            if (arrType1.getDimensions() == arrType2.getDimensions()
-                    && arrType1.getBasicType() instanceof ObjectType
-                    && arrType2.getBasicType() instanceof ObjectType) {
-                return new ArrayType(((ObjectType) arrType1.getBasicType())
-                        .getFirstCommonSuperclass((ObjectType) arrType2.getBasicType()), arrType1
-                        .getDimensions());
+            if (arrType1.getDimensions() == arrType2.getDimensions() && arrType1.getBasicType() instanceof ObjectType
+                && arrType2.getBasicType() instanceof ObjectType) {
+                return new ArrayType(((ObjectType) arrType1.getBasicType()).getFirstCommonSuperclass((ObjectType) arrType2.getBasicType()),
+                    arrType1.getDimensions());
             }
         }
         if (this instanceof ArrayType || t instanceof ArrayType) {
@@ -158,7 +137,7 @@ public abstract class ReferenceType extends Type {
             // TODO: Is there a proof of OBJECT being the direct ancestor of every ArrayType?
         }
         if (this instanceof ObjectType && ((ObjectType) this).referencesInterfaceExact()
-                || t instanceof ObjectType && ((ObjectType) t).referencesInterfaceExact()) {
+            || t instanceof ObjectType && ((ObjectType) t).referencesInterfaceExact()) {
             return Type.OBJECT;
             // TODO: The above line is correct comparing to the vmspec2. But one could
             // make class file verification a bit stronger here by using the notion of
@@ -190,15 +169,14 @@ public abstract class ReferenceType extends Type {
         return null;
     }
 
-
     /**
-     * Return true iff this is assignment compatible with another type t
-     * as defined in the JVM specification; see the AASTORE definition
-     * there.
-     * @throws ClassNotFoundException if any classes or interfaces required
-     *  to determine assignment compatibility can't be found
+     * Return true iff this is assignment compatible with another type t as defined in the JVM specification; see the
+     * AASTORE definition there.
+     * 
+     * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
+     *         found
      */
-    public boolean isAssignmentCompatibleWith( final Type t ) throws ClassNotFoundException {
+    public boolean isAssignmentCompatibleWith(final Type t) throws ClassNotFoundException {
         if (!(t instanceof ReferenceType)) {
             return false;
         }
@@ -206,64 +184,69 @@ public abstract class ReferenceType extends Type {
         if (this.equals(Type.NULL)) {
             return true; // This is not explicitely stated, but clear. Isn't it?
         }
-        /* If this is a class type then
+        /*
+         * If this is a class type then
          */
         if (this instanceof ObjectType && ((ObjectType) this).referencesClassExact()) {
-            /* If T is a class type, then this must be the same class as T,
-             or this must be a subclass of T;
+            /*
+             * If T is a class type, then this must be the same class as T, or this must be a subclass of T;
              */
             if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact()
                 && (this.equals(T) || Repository.instanceOf(((ObjectType) this).getClassName(), ((ObjectType) T).getClassName()))) {
                 return true;
             }
-            /* If T is an interface type, this must implement interface T.
+            /*
+             * If T is an interface type, this must implement interface T.
              */
-            if (T instanceof ObjectType && ((ObjectType) T).referencesInterfaceExact() && Repository.implementationOf(((ObjectType) this).getClassName(),
-                    ((ObjectType) T).getClassName())) {
+            if (T instanceof ObjectType && ((ObjectType) T).referencesInterfaceExact()
+                && Repository.implementationOf(((ObjectType) this).getClassName(), ((ObjectType) T).getClassName())) {
                 return true;
             }
         }
-        /* If this is an interface type, then:
+        /*
+         * If this is an interface type, then:
          */
         if (this instanceof ObjectType && ((ObjectType) this).referencesInterfaceExact()) {
-            /* If T is a class type, then T must be Object (�2.4.7).
+            /*
+             * If T is a class type, then T must be Object (�2.4.7).
              */
             if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact() && T.equals(Type.OBJECT)) {
                 return true;
             }
-            /* If T is an interface type, then T must be the same interface
-             * as this or a superinterface of this (�2.13.2).
+            /*
+             * If T is an interface type, then T must be the same interface as this or a superinterface of this (�2.13.2).
              */
             if (T instanceof ObjectType && ((ObjectType) T).referencesInterfaceExact()
                 && (this.equals(T) || Repository.implementationOf(((ObjectType) this).getClassName(), ((ObjectType) T).getClassName()))) {
                 return true;
             }
         }
-        /* If this is an array type, namely, the type SC[], that is, an
-         * array of components of type SC, then:
+        /*
+         * If this is an array type, namely, the type SC[], that is, an array of components of type SC, then:
          */
         if (this instanceof ArrayType) {
-            /* If T is a class type, then T must be Object (�2.4.7).
+            /*
+             * If T is a class type, then T must be Object (�2.4.7).
              */
             if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact() && T.equals(Type.OBJECT)) {
                 return true;
             }
-            /* If T is an array type TC[], that is, an array of components
-             * of type TC, then one of the following must be true:
+            /*
+             * If T is an array type TC[], that is, an array of components of type TC, then one of the following must be true:
              */
             if (T instanceof ArrayType) {
-                /* TC and SC are the same primitive type (�2.4.1).
+                /*
+                 * TC and SC are the same primitive type (�2.4.1).
                  */
                 final Type sc = ((ArrayType) this).getElementType();
                 final Type tc = ((ArrayType) T).getElementType();
                 if (sc instanceof BasicType && tc instanceof BasicType && sc.equals(tc)) {
                     return true;
                 }
-                /* TC and SC are reference types (�2.4.6), and type SC is
-                 * assignable to TC by these runtime rules.
+                /*
+                 * TC and SC are reference types (�2.4.6), and type SC is assignable to TC by these runtime rules.
                  */
-                if (tc instanceof ReferenceType && sc instanceof ReferenceType
-                        && ((ReferenceType) sc).isAssignmentCompatibleWith(tc)) {
+                if (tc instanceof ReferenceType && sc instanceof ReferenceType && ((ReferenceType) sc).isAssignmentCompatibleWith(tc)) {
                     return true;
                 }
             }
@@ -285,23 +268,20 @@ public abstract class ReferenceType extends Type {
     }
 
     /**
-     * Return true iff this type is castable to another type t as defined in
-     * the JVM specification.  The case where this is Type.NULL is not
-     * defined (see the CHECKCAST definition in the JVM specification).
-     * However, because e.g. CHECKCAST doesn't throw a
-     * ClassCastException when casting a null reference to any Object,
-     * true is returned in this case.
+     * Return true iff this type is castable to another type t as defined in the JVM specification. The case where this is
+     * Type.NULL is not defined (see the CHECKCAST definition in the JVM specification). However, because e.g. CHECKCAST
+     * doesn't throw a ClassCastException when casting a null reference to any Object, true is returned in this case.
      *
-     * @throws ClassNotFoundException if any classes or interfaces required
-     *  to determine assignment compatibility can't be found
+     * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
+     *         found
      */
-    public boolean isCastableTo( final Type t ) throws ClassNotFoundException {
+    public boolean isCastableTo(final Type t) throws ClassNotFoundException {
         if (this.equals(Type.NULL)) {
             return t instanceof ReferenceType; // If this is ever changed in isAssignmentCompatible()
         }
         return isAssignmentCompatibleWith(t);
-        /* Yes, it's true: It's the same definition.
-         * See vmspec2 AASTORE / CHECKCAST definitions.
+        /*
+         * Yes, it's true: It's the same definition. See vmspec2 AASTORE / CHECKCAST definitions.
          */
     }
 }

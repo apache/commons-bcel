@@ -18,18 +18,19 @@
 package org.apache.bcel.verifier.exc;
 
 /**
- * Instances of this class are thrown by BCEL's class file verifier "JustIce" when
- * a class file does not pass the verification pass 3. Note that the pass 3 used by
- * "JustIce" involves verification that is usually delayed to pass 4.
+ * Instances of this class are thrown by BCEL's class file verifier "JustIce" when a class file does not pass the
+ * verification pass 3. Note that the pass 3 used by "JustIce" involves verification that is usually delayed to pass 4.
  *
  */
-public abstract class CodeConstraintException extends VerificationException{
+public abstract class CodeConstraintException extends VerificationException {
     private static final long serialVersionUID = -7265388214714996640L;
+
     /**
      * Constructs a new CodeConstraintException with null as its error message string.
      */
     CodeConstraintException() {
     }
+
     /**
      * Constructs a new CodeConstraintException with the specified error message.
      */

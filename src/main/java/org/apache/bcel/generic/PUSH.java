@@ -20,14 +20,12 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 
 /**
- * Wrapper class for push operations, which are implemented either as BIPUSH,
- * LDC or xCONST_n instructions.
+ * Wrapper class for push operations, which are implemented either as BIPUSH, LDC or xCONST_n instructions.
  *
  */
 public final class PUSH implements CompoundInstruction, VariableLengthInstruction, InstructionConstants {
 
     private final Instruction instruction;
-
 
     /**
      * @param cp Constant pool
@@ -37,7 +35,6 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
         instruction = InstructionConst.getInstruction(Const.ICONST_0 + (value ? 1 : 0));
     }
 
-
     /**
      * @param cp Constant pool
      * @param value to be pushed
@@ -46,10 +43,9 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
         this(cp, value.booleanValue());
     }
 
-
     /**
-     * creates a push object from a Character value. Warning: Make sure not to attempt to allow
-     * autoboxing to create this value parameter, as an alternative constructor will be called
+     * creates a push object from a Character value. Warning: Make sure not to attempt to allow autoboxing to create this
+     * value parameter, as an alternative constructor will be called
      *
      * @param cp Constant pool
      * @param value to be pushed
@@ -57,7 +53,6 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     public PUSH(final ConstantPoolGen cp, final Character value) {
         this(cp, value.charValue());
     }
-
 
     /**
      * @param cp Constant pool
@@ -72,7 +67,6 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
             instruction = new LDC2_W(cp.addDouble(value));
         }
     }
-
 
     /**
      * @param cp Constant pool
@@ -89,7 +83,6 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
             instruction = new LDC(cp.addFloat(value));
         }
     }
-
 
     /**
      * This constructor also applies for values of type short, char, byte
@@ -141,7 +134,6 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
         }
     }
 
-
     /**
      *
      * @param cp
@@ -156,7 +148,6 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
         }
     }
 
-
     /**
      * @param cp Constant pool
      * @param value to be pushed
@@ -169,17 +160,14 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
         }
     }
 
-
     public Instruction getInstruction() {
         return instruction;
     }
-
 
     @Override
     public InstructionList getInstructionList() {
         return new InstructionList(instruction);
     }
-
 
     /**
      * @return mnemonic for instruction

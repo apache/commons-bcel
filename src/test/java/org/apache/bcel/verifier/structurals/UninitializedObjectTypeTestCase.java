@@ -27,7 +27,6 @@ public class UninitializedObjectTypeTestCase {
     @Test
     public void testReferenceToConstant() {
         @SuppressWarnings("unused")
-        final
-        short referenceToConstant = UninitializedObjectType.AALOAD;
+        final short referenceToConstant = UninitializedObjectType.AALOAD;
     }
 }

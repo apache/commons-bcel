@@ -19,6 +19,7 @@
 /* JJT: 0.3pre1 */
 
 package Mini;
+
 import org.apache.bcel.generic.BasicType;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.ISTORE;
@@ -32,158 +33,158 @@ import org.apache.bcel.generic.Type;
  *
  */
 public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTLetExpr(p, id);
-  }
-  private ASTIdent[]  idents;
-  private ASTExpr[]   exprs;
-
-  private ASTExpr     body;
-
-  // Generated methods
-  ASTLetExpr(final int id) {
-    super(id);
-  }
-
-  ASTLetExpr(final MiniParser p, final int id) {
-    super(p, id);
-  }
-
-
-  /**
-   * Fifth pass, produce Java byte code.
-   */
-  @Override
-  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
-    final int size = idents.length;
-    final LocalVariableGen[] l = new LocalVariableGen[size];
-
-    for(int i=0; i < size; i++) {
-      final String           ident = idents[i].getName();
-      final Variable         entry = (Variable)env.get(ident);
-      final Type             t     = BasicType.getType((byte)idents[i].getType());
-      final LocalVariableGen lg    = method.addLocalVariable(ident, t, null, null);
-      final int              slot  = lg.getIndex();
-
-      entry.setLocalVariable(lg);
-      InstructionHandle start = il.getEnd();
-      exprs[i].byte_code(il, method, cp);
-      start = (start == null)? il.getStart() : start.getNext();
-      lg.setStart(start);
-      il.append(new ISTORE(slot));     ASTFunDecl.pop();
-      l[i] = lg;
+    public static Node jjtCreate(final MiniParser p, final int id) {
+        return new ASTLetExpr(p, id);
     }
 
-    body.byte_code(il, method, cp);
-    final InstructionHandle end = il.getEnd();
-    for(int i=0; i < size; i++) {
-        l[i].setEnd(end);
-    }
-  }
+    private ASTIdent[] idents;
+    private ASTExpr[] exprs;
 
-  /**
-   * Overrides ASTExpr.closeNode()
-   * Cast children nodes to appropiate types.
-   */
-  @Override
-  public void closeNode() {
-    int i; /* length must be a multiple of
-                                         * two (ident = expr) + 1 (body expr) */
-    final int len_2 = children.length / 2;
-    idents = new ASTIdent[len_2];
-    exprs  = new ASTExpr[len_2];
+    private ASTExpr body;
 
-    // At least one assignment is enforced by the grammar
-    for(i=0; i < len_2; i++) {
-      idents[i] = (ASTIdent)children[i * 2];
-      exprs[i]  = (ASTExpr)children[i * 2 + 1];
+    // Generated methods
+    ASTLetExpr(final int id) {
+        super(id);
     }
 
-    body = (ASTExpr)children[children.length - 1]; // Last expr is the body
-    children=null; // Throw away old reference
-  }
-
-  /**
-   * Fifth pass, produce Java code.
-   */
-  @Override
-  public void code(final StringBuffer buf) {
-    for(int i = 0; i < idents.length; i++) {
-      final String ident = idents[i].getName();
-      final int    t     = idents[i].getType(); // can only be int
-
-      /* Idents have to be declared at start of function for later use.
-       * Each name is unique, so there shouldn't be a problem in application.
-       */
-      exprs[i].code(buf);
-
-      buf.append("    " + TYPE_NAMES[t] + " " + ident + " = " +
-                 ASTFunDecl.pop() + ";\n");
+    ASTLetExpr(final MiniParser p, final int id) {
+        super(p, id);
     }
 
-    body.code(buf);
-  }
+    /**
+     * Fifth pass, produce Java byte code.
+     */
+    @Override
+    public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
+        final int size = idents.length;
+        final LocalVariableGen[] l = new LocalVariableGen[size];
 
-  @Override
-  public void dump(final String prefix) {
-    System.out.println(toString(prefix));
+        for (int i = 0; i < size; i++) {
+            final String ident = idents[i].getName();
+            final Variable entry = (Variable) env.get(ident);
+            final Type t = BasicType.getType((byte) idents[i].getType());
+            final LocalVariableGen lg = method.addLocalVariable(ident, t, null, null);
+            final int slot = lg.getIndex();
 
-    for(int i=0; i < idents.length; i++) {
-      idents[i].dump(prefix + " ");
-      exprs[i].dump(prefix + " ");
+            entry.setLocalVariable(lg);
+            InstructionHandle start = il.getEnd();
+            exprs[i].byte_code(il, method, cp);
+            start = (start == null) ? il.getStart() : start.getNext();
+            lg.setStart(start);
+            il.append(new ISTORE(slot));
+            ASTFunDecl.pop();
+            l[i] = lg;
+        }
+
+        body.byte_code(il, method, cp);
+        final InstructionHandle end = il.getEnd();
+        for (int i = 0; i < size; i++) {
+            l[i].setEnd(end);
+        }
     }
 
-    body.dump(prefix + " ");
-  }
+    /**
+     * Overrides ASTExpr.closeNode() Cast children nodes to appropiate types.
+     */
+    @Override
+    public void closeNode() {
+        int i; /*
+                * length must be a multiple of two (ident = expr) + 1 (body expr)
+                */
+        final int len_2 = children.length / 2;
+        idents = new ASTIdent[len_2];
+        exprs = new ASTExpr[len_2];
 
-  /**
-   * Second pass
-   * Overrides AstExpr.eval()
-   * @return type of expression
-   * @param expected type
-   */
-  @Override
-  public int eval(final int expected) {
-    //is_simple = true;
+        // At least one assignment is enforced by the grammar
+        for (i = 0; i < len_2; i++) {
+            idents[i] = (ASTIdent) children[i * 2];
+            exprs[i] = (ASTExpr) children[i * 2 + 1];
+        }
 
-    for(int i=0; i < idents.length; i++) {
-      final int t = exprs[i].eval(T_UNKNOWN);
-
-      idents[i].setType(t);
-      //      is_simple = is_simple && exprs[i].isSimple();
+        body = (ASTExpr) children[children.length - 1]; // Last expr is the body
+        children = null; // Throw away old reference
     }
 
-    return type = body.eval(expected);
-  }
+    /**
+     * Fifth pass, produce Java code.
+     */
+    @Override
+    public void code(final StringBuffer buf) {
+        for (int i = 0; i < idents.length; i++) {
+            final String ident = idents[i].getName();
+            final int t = idents[i].getType(); // can only be int
 
-  /**
-   * Overrides ASTExpr.traverse()
-   */
-  @Override
-  public ASTExpr traverse(final Environment env) {
-    this.env = env;
+            /*
+             * Idents have to be declared at start of function for later use. Each name is unique, so there shouldn't be a problem
+             * in application.
+             */
+            exprs[i].code(buf);
 
-    // Traverse RHS exprs first, so no references to LHS vars are allowed
-    for(int i=0; i < exprs.length; i++) {
-        exprs[i] = exprs[i].traverse((Environment)env.clone());
+            buf.append("    " + TYPE_NAMES[t] + " " + ident + " = " + ASTFunDecl.pop() + ";\n");
+        }
+
+        body.code(buf);
     }
 
-    // Put argument names into hash table aka. environment
-    for (final ASTIdent id : idents) {
-      final String   name  = id.getName();
-      final EnvEntry entry = env.get(name);
+    @Override
+    public void dump(final String prefix) {
+        System.out.println(toString(prefix));
 
-      if(entry != null) {
-        MiniC.addError(id.getLine(), id.getColumn(),
-                       "Redeclaration of " + entry + ".");
-    } else {
-        env.put(new Variable(id));
+        for (int i = 0; i < idents.length; i++) {
+            idents[i].dump(prefix + " ");
+            exprs[i].dump(prefix + " ");
+        }
+
+        body.dump(prefix + " ");
     }
+
+    /**
+     * Second pass Overrides AstExpr.eval()
+     * 
+     * @return type of expression
+     * @param expected type
+     */
+    @Override
+    public int eval(final int expected) {
+        // is_simple = true;
+
+        for (int i = 0; i < idents.length; i++) {
+            final int t = exprs[i].eval(T_UNKNOWN);
+
+            idents[i].setType(t);
+            // is_simple = is_simple && exprs[i].isSimple();
+        }
+
+        return type = body.eval(expected);
     }
 
-    body = body.traverse(env);
+    /**
+     * Overrides ASTExpr.traverse()
+     */
+    @Override
+    public ASTExpr traverse(final Environment env) {
+        this.env = env;
 
-    return this;
-  }
+        // Traverse RHS exprs first, so no references to LHS vars are allowed
+        for (int i = 0; i < exprs.length; i++) {
+            exprs[i] = exprs[i].traverse((Environment) env.clone());
+        }
+
+        // Put argument names into hash table aka. environment
+        for (final ASTIdent id : idents) {
+            final String name = id.getName();
+            final EnvEntry entry = env.get(name);
+
+            if (entry != null) {
+                MiniC.addError(id.getLine(), id.getColumn(), "Redeclaration of " + entry + ".");
+            } else {
+                env.put(new Variable(id));
+            }
+        }
+
+        body = body.traverse(env);
+
+        return this;
+    }
 
 }

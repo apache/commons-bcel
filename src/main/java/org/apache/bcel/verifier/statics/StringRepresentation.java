@@ -17,7 +17,6 @@
  */
 package org.apache.bcel.verifier.statics;
 
-
 import org.apache.bcel.classfile.AnnotationDefault;
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Annotations;
@@ -70,16 +69,12 @@ import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 
 /**
- * BCEL's Node classes (those from the classfile API that <B>accept()</B> Visitor
- * instances) have <B>toString()</B> methods that were not designed to be robust,
- * this gap is closed by this class.
- * When performing class file verification, it may be useful to output which
- * entity (e.g. a <B>Code</B> instance) is not satisfying the verifier's
- * constraints, but in this case it could be possible for the <B>toString()</B>
- * method to throw a RuntimeException.
- * A (new StringRepresentation(Node n)).toString() never throws any exception.
- * Note that this class also serves as a placeholder for more sophisticated message
- * handling in future versions of JustIce.
+ * BCEL's Node classes (those from the classfile API that <B>accept()</B> Visitor instances) have <B>toString()</B>
+ * methods that were not designed to be robust, this gap is closed by this class. When performing class file
+ * verification, it may be useful to output which entity (e.g. a <B>Code</B> instance) is not satisfying the verifier's
+ * constraints, but in this case it could be possible for the <B>toString()</B> method to throw a RuntimeException. A
+ * (new StringRepresentation(Node n)).toString() never throws any exception. Note that this class also serves as a
+ * placeholder for more sophisticated message handling in future versions of JustIce.
  *
  */
 public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor {
@@ -110,16 +105,14 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 // If some new "Node" is defined in BCEL (such as some concrete "Attribute"), we
 // want to know that this class has also to be adapted.
         if (tostring == null) {
-            throw new AssertionViolatedException(
-                "Please adapt '" + getClass() + "' to deal with objects of class '" + n.getClass() + "'.");
+            throw new AssertionViolatedException("Please adapt '" + getClass() + "' to deal with objects of class '" + n.getClass() + "'.");
         }
         return tostring;
     }
 
     /**
-     * Returns the String representation of the Node object obj;
-     * this is obj.toString() if it does not throw any RuntimeException,
-     * or else it is a string derived only from obj's class name.
+     * Returns the String representation of the Node object obj; this is obj.toString() if it does not throw any
+     * RuntimeException, or else it is a string derived only from obj's class name.
      */
     private String toString(final Node obj) {
         String ret;
@@ -141,10 +134,9 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
      * @since 6.0
      */
     @Override
-    public void visitAnnotation(final Annotations obj)
-    {
-        //this is invoked whenever an annotation is found
-        //when verifier is passed over a class
+    public void visitAnnotation(final Annotations obj) {
+        // this is invoked whenever an annotation is found
+        // when verifier is passed over a class
         tostring = toString(obj);
     }
 
@@ -180,7 +172,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     // lengthy Code attribute's toString().
     @Override
     public void visitCode(final Code obj) {
-        //tostring = toString(obj);
+        // tostring = toString(obj);
         tostring = "<CODE>"; // We don't need real code outputs.
     }
 
@@ -364,10 +356,9 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
      * @since 6.0
      */
     @Override
-    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj)
-    {
-        //this is invoked whenever a local variable type is found
-        //when verifier is passed over a class
+    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj) {
+        // this is invoked whenever a local variable type is found
+        // when verifier is passed over a class
         tostring = toString(obj);
     }
 

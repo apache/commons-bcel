@@ -21,28 +21,29 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * IDIV - Divide ints
- * <PRE>Stack: ..., value1, value2 -&gt; result</PRE>
+ * 
+ * <PRE>
+ * Stack: ..., value1, value2 -&gt; result
+ * </PRE>
  *
  */
 public class IDIV extends ArithmeticInstruction implements ExceptionThrower {
 
-    /** Divide ints
+    /**
+     * Divide ints
      */
     public IDIV() {
         super(org.apache.bcel.Const.IDIV);
     }
 
-
     /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitExceptionThrower(this);
         v.visitTypedInstruction(this);
         v.visitStackProducer(this);
@@ -51,13 +52,11 @@ public class IDIV extends ArithmeticInstruction implements ExceptionThrower {
         v.visitIDIV(this);
     }
 
-
-    /** @return exceptions this instruction may cause
+    /**
+     * @return exceptions this instruction may cause
      */
     @Override
     public Class<?>[] getExceptions() {
-        return new Class[] {
-            ExceptionConst.ARITHMETIC_EXCEPTION
-        };
+        return new Class[] {ExceptionConst.ARITHMETIC_EXCEPTION};
     }
 }

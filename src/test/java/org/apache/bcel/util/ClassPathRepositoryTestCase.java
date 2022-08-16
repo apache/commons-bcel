@@ -28,10 +28,11 @@ import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests {@link ClassPathRepository}, {@link MemorySensitiveClassPathRepository}, and {@link
- * LruCacheClassPathRepository} for their common attributes of caching.
+ * Tests {@link ClassPathRepository}, {@link MemorySensitiveClassPathRepository}, and
+ * {@link LruCacheClassPathRepository} for their common attributes of caching.
  *
- * <p>Without memory scarcity, these classes behave in the same manner.
+ * <p>
+ * Without memory scarcity, these classes behave in the same manner.
  */
 public class ClassPathRepositoryTestCase {
 

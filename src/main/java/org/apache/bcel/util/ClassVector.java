@@ -23,8 +23,8 @@ import java.util.List;
 import org.apache.bcel.classfile.JavaClass;
 
 /**
- * Utility class implementing a (typesafe) collection of JavaClass
- * objects. Contains the most important methods of a Vector.
+ * Utility class implementing a (typesafe) collection of JavaClass objects. Contains the most important methods of a
+ * Vector.
  *
  * @deprecated as of 5.1.1 - 7/17/2005
  */
@@ -35,21 +35,17 @@ public class ClassVector implements java.io.Serializable {
     @Deprecated
     protected List<JavaClass> vec = new ArrayList<>();
 
-
-    public void addElement( final JavaClass clazz ) {
+    public void addElement(final JavaClass clazz) {
         vec.add(clazz);
     }
 
-
-    public JavaClass elementAt( final int index ) {
+    public JavaClass elementAt(final int index) {
         return vec.get(index);
     }
 
-
-    public void removeElementAt( final int index ) {
+    public void removeElementAt(final int index) {
         vec.remove(index);
     }
-
 
     public JavaClass[] toArray() {
         final JavaClass[] classes = new JavaClass[vec.size()];

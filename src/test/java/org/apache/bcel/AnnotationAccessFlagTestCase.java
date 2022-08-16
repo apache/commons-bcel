@@ -24,21 +24,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
-public class AnnotationAccessFlagTestCase extends AbstractTestCase
-{
+public class AnnotationAccessFlagTestCase extends AbstractTestCase {
     /**
-     * If you write an annotation and compile it, the class file generated
-     * should be marked as an annotation type - which is detectable through
-     * BCEL.
+     * If you write an annotation and compile it, the class file generated should be marked as an annotation type - which is
+     * detectable through BCEL.
      */
     @Test
-    public void testAnnotationClassSaysItIs() throws ClassNotFoundException
-    {
+    public void testAnnotationClassSaysItIs() throws ClassNotFoundException {
         JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotation");
-        assertTrue(clazz.isAnnotation(),
-                "Expected SimpleAnnotation class to say it was an annotation - but it didn't !");
+        assertTrue(clazz.isAnnotation(), "Expected SimpleAnnotation class to say it was an annotation - but it didn't !");
         clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleClass");
-        assertFalse(clazz.isAnnotation(),
-                "Expected SimpleClass class to say it was not an annotation - but it didn't !");
+        assertFalse(clazz.isAnnotation(), "Expected SimpleClass class to say it was not an annotation - but it didn't !");
     }
 }

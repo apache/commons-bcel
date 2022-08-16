@@ -18,8 +18,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Denotes an unparameterized instruction to pop a value on top from the stack,
- * such as ISTORE, POP, PUTSTATIC.
+ * Denotes an unparameterized instruction to pop a value on top from the stack, such as ISTORE, POP, PUTSTATIC.
  *
  * @see ISTORE
  * @see POP

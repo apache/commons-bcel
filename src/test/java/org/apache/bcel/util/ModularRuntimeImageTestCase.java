@@ -53,8 +53,7 @@ public class ModularRuntimeImageTestCase {
     @ParameterizedTest
     @MethodSource("org.apache.bcel.generic.JdkGenericDumpTestCase#findJavaHomes")
     public void testListJreModulePackageDir(final ModularRuntimeImage modularRuntimeImage) throws IOException {
-        final List<Path> listEntries = modularRuntimeImage
-                .list(ModularRuntimeImage.MODULES_PATH + "/java.base/java/lang");
+        final List<Path> listEntries = modularRuntimeImage.list(ModularRuntimeImage.MODULES_PATH + "/java.base/java/lang");
         assertFalse(listEntries.isEmpty());
         assertTrue(listEntries.toString().indexOf("/java.base/java/lang/String.class") > -1);
     }
