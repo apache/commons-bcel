@@ -20,7 +20,7 @@ package org.apache.bcel;
 /**
  * Constants for the project, mostly defined in the JVM specification.
  *
- * @deprecated (since 6.0) DO NOT USE - use Const instead
+ * @deprecated (since 6.0) DO NOT USE - use {@link Const} instead.
  */
 @Deprecated
 public interface Constants {
