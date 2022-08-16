@@ -21,7 +21,7 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * ARRAYLENGTH - Get length of array
- * 
+ *
  * <PRE>
  * Stack: ..., arrayref -&gt; ..., length
  * </PRE>

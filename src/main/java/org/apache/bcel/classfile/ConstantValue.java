@@ -43,7 +43,7 @@ public final class ConstantValue extends Attribute {
 
     /**
      * Construct object from input stream.
-     * 
+     *
      * @param name_index Name index in constant pool
      * @param length Content length in bytes
      * @param input Input stream

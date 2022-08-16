@@ -22,13 +22,13 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * PUTFIELD - Put field in object
- * 
+ *
  * <PRE>
  * Stack: ..., objectref, value -&gt; ...
  * </PRE>
- * 
+ *
  * OR
- * 
+ *
  * <PRE>
  * Stack: ..., objectref, value.word1, value.word2 -&gt; ...
  * </PRE>

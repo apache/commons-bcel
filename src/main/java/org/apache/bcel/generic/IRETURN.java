@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * IRETURN - Return int from method
- * 
+ *
  * <PRE>
  * Stack: ..., value -&gt; &lt;empty&gt;
  * </PRE>

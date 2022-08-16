@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * ASTORE - Store reference into local variable
- * 
+ *
  * <PRE>
  * Stack ..., objectref -&gt; ...
  * </PRE>
@@ -36,7 +36,7 @@ public class ASTORE extends StoreInstruction {
 
     /**
      * Store reference into local variable
-     * 
+     *
      * @param n index of local variable
      */
     public ASTORE(final int n) {

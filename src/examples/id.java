@@ -30,11 +30,11 @@ import org.apache.bcel.generic.MethodGen;
  * differences, e.g., because BCEL generates local variable tables by default.
  *
  * Try to:
- * 
+ *
  * <pre>
  * % java id <someclass> % java listclass -code <someclass> &gt; foo % java listclass -code <someclass>.clazz &gt; bar %
  * diff foo bar | more
- * 
+ *
  * <pre>
  *
  */

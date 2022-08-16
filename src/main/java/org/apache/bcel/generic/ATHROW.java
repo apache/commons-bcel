@@ -21,7 +21,7 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * ATHROW - Throw exception
- * 
+ *
  * <PRE>
  * Stack: ..., objectref -&gt; objectref
  * </PRE>

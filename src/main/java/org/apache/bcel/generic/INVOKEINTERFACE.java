@@ -27,7 +27,7 @@ import org.apache.bcel.util.ByteSequence;
 
 /**
  * INVOKEINTERFACE - Invoke interface method
- * 
+ *
  * <PRE>
  * Stack: ..., objectref, [arg1, [arg2 ...]] -&gt; ...
  * </PRE>
@@ -80,7 +80,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
 
     /**
      * Dump instruction as byte code to stream out.
-     * 
+     *
      * @param out Output stream
      */
     @Override

@@ -22,13 +22,13 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * PUTSTATIC - Put static field in class
- * 
+ *
  * <PRE>
  * Stack: ..., value -&gt; ...
  * </PRE>
- * 
+ *
  * OR
- * 
+ *
  * <PRE>
  * Stack: ..., value.word1, value.word2 -&gt; ...
  * </PRE>

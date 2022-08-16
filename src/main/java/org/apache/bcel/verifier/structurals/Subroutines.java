@@ -99,7 +99,7 @@ public class Subroutines {
 
         /**
          * A recursive helper method for getRecursivelyAccessedLocalsIndices().
-         * 
+         *
          * @see #getRecursivelyAccessedLocalsIndices()
          */
         private void _getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> s, final Subroutine[] subs) {
@@ -135,7 +135,7 @@ public class Subroutines {
 
         /*
          * Adds an instruction to this subroutine. All instructions must have been added before invoking setLeavingRET().
-         * 
+         *
          * @see #setLeavingRET
          */
         void addInstruction(final InstructionHandle ih) {
@@ -401,7 +401,7 @@ public class Subroutines {
 
     /**
      * Constructor.
-     * 
+     *
      * @param mg A MethodGen object representing method to create the Subroutine objects of. Assumes that JustIce strict
      *        checks are needed.
      */
@@ -411,7 +411,7 @@ public class Subroutines {
 
     /**
      * Constructor.
-     * 
+     *
      * @param mg A MethodGen object representing method to create the Subroutine objects of.
      * @param enableJustIceCheck whether to enable additional JustIce checks
      * @since 6.0

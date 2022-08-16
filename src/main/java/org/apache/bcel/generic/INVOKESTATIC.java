@@ -66,7 +66,7 @@ public class INVOKESTATIC extends InvokeInstruction {
 
     /**
      * Dump instruction as byte code to stream out.
-     * 
+     *
      * @param out Output stream
      */
     @Override

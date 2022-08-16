@@ -224,7 +224,7 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns the number of stack slots used.
-     * 
+     *
      * @see #maxStack()
      */
     public int slotsUsed() {

@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * I2C - Convert int to char
- * 
+ *
  * <PRE>
  * Stack: ..., value -&gt; ..., result
  * </PRE>

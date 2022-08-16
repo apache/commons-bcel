@@ -37,126 +37,126 @@ public final class Const {
 
     /**
      * Major version number of class files for Java 1.1.
-     * 
+     *
      * @see #MINOR_1_1
      */
     public static final short MAJOR_1_1 = 45;
 
     /**
      * Minor version number of class files for Java 1.1.
-     * 
+     *
      * @see #MAJOR_1_1
      */
     public static final short MINOR_1_1 = 3;
 
     /**
      * Major version number of class files for Java 1.2.
-     * 
+     *
      * @see #MINOR_1_2
      */
     public static final short MAJOR_1_2 = 46;
 
     /**
      * Minor version number of class files for Java 1.2.
-     * 
+     *
      * @see #MAJOR_1_2
      */
     public static final short MINOR_1_2 = 0;
 
     /**
      * Major version number of class files for Java 1.2.
-     * 
+     *
      * @see #MINOR_1_2
      */
     public static final short MAJOR_1_3 = 47;
 
     /**
      * Minor version number of class files for Java 1.3.
-     * 
+     *
      * @see #MAJOR_1_3
      */
     public static final short MINOR_1_3 = 0;
 
     /**
      * Major version number of class files for Java 1.3.
-     * 
+     *
      * @see #MINOR_1_3
      */
     public static final short MAJOR_1_4 = 48;
 
     /**
      * Minor version number of class files for Java 1.4.
-     * 
+     *
      * @see #MAJOR_1_4
      */
     public static final short MINOR_1_4 = 0;
 
     /**
      * Major version number of class files for Java 1.4.
-     * 
+     *
      * @see #MINOR_1_4
      */
     public static final short MAJOR_1_5 = 49;
 
     /**
      * Minor version number of class files for Java 1.5.
-     * 
+     *
      * @see #MAJOR_1_5
      */
     public static final short MINOR_1_5 = 0;
 
     /**
      * Major version number of class files for Java 1.6.
-     * 
+     *
      * @see #MINOR_1_6
      */
     public static final short MAJOR_1_6 = 50;
 
     /**
      * Minor version number of class files for Java 1.6.
-     * 
+     *
      * @see #MAJOR_1_6
      */
     public static final short MINOR_1_6 = 0;
 
     /**
      * Major version number of class files for Java 1.7.
-     * 
+     *
      * @see #MINOR_1_7
      */
     public static final short MAJOR_1_7 = 51;
 
     /**
      * Minor version number of class files for Java 1.7.
-     * 
+     *
      * @see #MAJOR_1_7
      */
     public static final short MINOR_1_7 = 0;
 
     /**
      * Major version number of class files for Java 1.8.
-     * 
+     *
      * @see #MINOR_1_8
      */
     public static final short MAJOR_1_8 = 52;
 
     /**
      * Minor version number of class files for Java 1.8.
-     * 
+     *
      * @see #MAJOR_1_8
      */
     public static final short MINOR_1_8 = 0;
 
     /**
      * Major version number of class files for Java 9.
-     * 
+     *
      * @see #MINOR_9
      */
     public static final short MAJOR_9 = 53;
 
     /**
      * Minor version number of class files for Java 9.
-     * 
+     *
      * @see #MAJOR_9
      */
     public static final short MINOR_9 = 0;
@@ -175,63 +175,63 @@ public final class Const {
 
     /**
      * Major version number of class files for Java 10.
-     * 
+     *
      * @see #MINOR_10
      */
     public static final short MAJOR_10 = 54;
 
     /**
      * Minor version number of class files for Java 10.
-     * 
+     *
      * @see #MAJOR_10
      */
     public static final short MINOR_10 = 0;
 
     /**
      * Major version number of class files for Java 11.
-     * 
+     *
      * @see #MINOR_11
      */
     public static final short MAJOR_11 = 55;
 
     /**
      * Minor version number of class files for Java 11.
-     * 
+     *
      * @see #MAJOR_11
      */
     public static final short MINOR_11 = 0;
 
     /**
      * Major version number of class files for Java 12.
-     * 
+     *
      * @see #MINOR_12
      */
     public static final short MAJOR_12 = 56;
 
     /**
      * Minor version number of class files for Java 12.
-     * 
+     *
      * @see #MAJOR_12
      */
     public static final short MINOR_12 = 0;
 
     /**
      * Major version number of class files for Java 13.
-     * 
+     *
      * @see #MINOR_13
      */
     public static final short MAJOR_13 = 57;
 
     /**
      * Minor version number of class files for Java 13.
-     * 
+     *
      * @see #MAJOR_13
      */
     public static final short MINOR_13 = 0;
 
     /**
      * Major version number of class files for Java 14.
-     * 
+     *
      * @see #MINOR_14
      * @since 6.4.0
      */
@@ -239,7 +239,7 @@ public final class Const {
 
     /**
      * Minor version number of class files for Java 14.
-     * 
+     *
      * @see #MAJOR_14
      * @since 6.4.0
      */
@@ -247,14 +247,14 @@ public final class Const {
 
     /**
      * Default major version number. Class file is for Java 1.1.
-     * 
+     *
      * @see #MAJOR_1_1
      */
     public static final short MAJOR = MAJOR_1_1;
 
     /**
      * Default major version number. Class file is for Java 1.1.
-     * 
+     *
      * @see #MAJOR_1_1
      */
     public static final short MINOR = MINOR_1_1;
@@ -285,140 +285,140 @@ public final class Const {
 
     /**
      * One of the access flags for fields, methods, or classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_PRIVATE = 0x0002;
 
     /**
      * One of the access flags for fields, methods, or classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_PROTECTED = 0x0004;
 
     /**
      * One of the access flags for fields, methods, or classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_STATIC = 0x0008;
 
     /**
      * One of the access flags for fields, methods, or classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_FINAL = 0x0010;
 
     /**
      * One of the access flags for the Module attribute.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_OPEN = 0x0020;
 
     /**
      * One of the access flags for classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_SUPER = 0x0020;
 
     /**
      * One of the access flags for methods.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_SYNCHRONIZED = 0x0020;
 
     /**
      * One of the access flags for the Module attribute.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_TRANSITIVE = 0x0020;
 
     /**
      * One of the access flags for methods.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_BRIDGE = 0x0040;
 
     /**
      * One of the access flags for the Module attribute.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_STATIC_PHASE = 0x0040;
 
     /**
      * One of the access flags for fields.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_VOLATILE = 0x0040;
 
     /**
      * One of the access flags for fields.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_TRANSIENT = 0x0080;
 
     /**
      * One of the access flags for methods.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_VARARGS = 0x0080;
 
     /**
      * One of the access flags for methods.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_NATIVE = 0x0100;
 
     /**
      * One of the access flags for classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_INTERFACE = 0x0200;
 
     /**
      * One of the access flags for methods or classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_ABSTRACT = 0x0400;
 
     /**
      * One of the access flags for methods.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_STRICT = 0x0800;
 
     /**
      * One of the access flags for fields, methods, classes, MethodParameter attribute, or Module attribute.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_SYNTHETIC = 0x1000;
 
     /**
      * One of the access flags for classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_ANNOTATION = 0x2000;
 
     /**
      * One of the access flags for fields or classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_ENUM = 0x4000;
@@ -426,21 +426,21 @@ public final class Const {
     // Applies to classes compiled by new compilers only
     /**
      * One of the access flags for MethodParameter or Module attributes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_MANDATED = (short) 0x8000;
 
     /**
      * One of the access flags for classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      */
     public static final short ACC_MODULE = (short) 0x8000;
 
     /**
      * One of the access flags for fields, methods, or classes.
-     * 
+     *
      * @see #ACC_PUBLIC
      * @deprecated Use {@link #MAX_ACC_FLAG_I}
      */
@@ -449,7 +449,7 @@ public final class Const {
 
     /**
      * One of the access flags for fields, methods, or classes. ACC_MODULE is negative as a short.
-     * 
+     *
      * @see #ACC_PUBLIC
      * @since 6.4.0
      */
@@ -471,7 +471,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as type UTF-8.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.7"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -484,7 +484,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as type Integer.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.4"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -492,7 +492,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as type Float.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.4"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -500,7 +500,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as type Long.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.5"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -508,7 +508,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as type Double.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.5"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -516,7 +516,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as a Class
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.1"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -524,7 +524,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as a Field Reference.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.2"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -532,7 +532,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as type String
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.3"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -540,7 +540,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as a Method Reference.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.2"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -548,7 +548,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as an Interface Method Reference.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.2"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -556,7 +556,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as a name and type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.6"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -564,7 +564,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as a Method Handle.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.8"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -572,7 +572,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as a Method Type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.9"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -580,7 +580,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as dynamically computed.
-     * 
+     *
      * @see <a href="https://bugs.openjdk.java.net/secure/attachment/74618/constant-dynamic.html"> Change request for JEP
      *      309</a>
      * @since 6.3
@@ -589,7 +589,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as an Invoke Dynamic
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.10"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      */
@@ -597,7 +597,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as a Module Reference.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.4.11"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      * @since 6.1
@@ -606,7 +606,7 @@ public final class Const {
 
     /**
      * Marks a constant pool entry as a Package Reference.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html#jvms-4.4.12"> The Constant Pool in The
      *      Java Virtual Machine Specification</a>
      * @since 6.1
@@ -639,7 +639,7 @@ public final class Const {
 
     /**
      * Maximum Constant Pool entries. One of the limitations of the Java Virtual Machine.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.11-100-A"> The Java Virtual
      *      Machine Specification, Java SE 8 Edition, page 330, chapter 4.11.</a>
      */
@@ -669,7 +669,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.nop"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -677,7 +677,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aconst_null"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -685,7 +685,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -693,7 +693,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -701,7 +701,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -709,7 +709,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -717,7 +717,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -725,7 +725,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -733,7 +733,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iconst_i"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -741,7 +741,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lconst_l"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -749,7 +749,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lconst_l"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -757,7 +757,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fconst_f"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -765,7 +765,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fconst_f"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -773,7 +773,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fconst_f"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -781,7 +781,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dconst_d"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -789,7 +789,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dconst_d"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -797,7 +797,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.bipush"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -805,7 +805,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.sipush"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -813,7 +813,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ldc"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -821,7 +821,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ldc_w"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -829,7 +829,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ldc2_w"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -837,7 +837,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -845,7 +845,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -853,7 +853,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -861,7 +861,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -869,7 +869,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -877,7 +877,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -885,7 +885,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -893,7 +893,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -901,7 +901,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -909,7 +909,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -917,7 +917,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -925,7 +925,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -933,7 +933,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -941,7 +941,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -949,7 +949,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -957,7 +957,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -965,7 +965,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -973,7 +973,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -981,7 +981,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -989,7 +989,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -997,7 +997,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1005,7 +1005,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1013,7 +1013,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1021,7 +1021,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1029,7 +1029,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aload_n"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1037,7 +1037,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iaload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1045,7 +1045,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.laload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1053,7 +1053,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.faload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1061,7 +1061,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.daload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1069,7 +1069,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aaload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1077,7 +1077,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.baload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1085,7 +1085,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.caload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1093,7 +1093,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.saload"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1101,7 +1101,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1109,7 +1109,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1117,7 +1117,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1125,7 +1125,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1133,7 +1133,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1141,7 +1141,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1149,7 +1149,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1157,7 +1157,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1165,7 +1165,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.istore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1173,7 +1173,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1181,7 +1181,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1189,7 +1189,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1197,7 +1197,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1205,7 +1205,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1213,7 +1213,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1221,7 +1221,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1229,7 +1229,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1237,7 +1237,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1245,7 +1245,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1253,7 +1253,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1261,7 +1261,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dstore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1269,7 +1269,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1277,7 +1277,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1285,7 +1285,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1293,7 +1293,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.astore_n"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -1301,7 +1301,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iastore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1309,7 +1309,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lastore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1317,7 +1317,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fastore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1325,7 +1325,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dastore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1333,7 +1333,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.aastore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1341,7 +1341,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.bastore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1349,7 +1349,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.castore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1357,7 +1357,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.sastore"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1365,7 +1365,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.pop"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1373,7 +1373,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.pop2"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1381,7 +1381,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dup"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1389,7 +1389,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dup_x1"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1397,7 +1397,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dup_x2"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1405,7 +1405,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dup2"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1413,7 +1413,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dup2_x1"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1421,7 +1421,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dup2_x2"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1429,7 +1429,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.swap"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1437,7 +1437,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iadd"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1445,7 +1445,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ladd"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1453,7 +1453,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fadd"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1461,7 +1461,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dadd"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1469,7 +1469,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.isub"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1477,7 +1477,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lsub"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1485,7 +1485,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fsub"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1493,7 +1493,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dsub"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1501,7 +1501,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.imul"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1509,7 +1509,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lmul"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1517,7 +1517,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fmul"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1525,7 +1525,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dmul"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1533,7 +1533,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.idiv"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1541,7 +1541,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ldiv"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1549,7 +1549,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fdiv"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1557,7 +1557,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ddiv"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1565,7 +1565,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.irem"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1573,7 +1573,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lrem"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1581,7 +1581,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.frem"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1589,7 +1589,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.drem"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1597,7 +1597,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ineg"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1605,7 +1605,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lneg"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1613,7 +1613,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fneg"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1621,7 +1621,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dneg"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1629,7 +1629,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ishl"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1637,7 +1637,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lshl"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1645,7 +1645,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ishr"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1653,7 +1653,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lshr"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1661,7 +1661,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iushr"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1669,7 +1669,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lushr"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1677,7 +1677,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iand"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1685,7 +1685,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.land"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1693,7 +1693,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ior"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1701,7 +1701,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lor"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1709,7 +1709,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ixor"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1717,7 +1717,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lxor"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1725,7 +1725,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iinc"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1733,7 +1733,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.i2l"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1741,7 +1741,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.i2f"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1749,7 +1749,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.i2d"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1757,7 +1757,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.l2i"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1765,7 +1765,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.l2f"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1773,7 +1773,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.l2d"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1781,7 +1781,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.f2i"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1789,7 +1789,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.f2l"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1797,7 +1797,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.f2d"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1805,7 +1805,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.d2i"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1813,7 +1813,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.d2l"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1821,7 +1821,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.d2f"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1829,7 +1829,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.i2b"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1837,7 +1837,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1845,7 +1845,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.i2c"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1853,7 +1853,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1861,7 +1861,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.i2s"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1869,7 +1869,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -1877,7 +1877,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lcmp"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1885,7 +1885,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fcmpl"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1893,7 +1893,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.fcmpg"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1901,7 +1901,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dcmpl"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1909,7 +1909,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dcmpg"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1917,7 +1917,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ifeq"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1925,7 +1925,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ifne"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1933,7 +1933,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.iflt"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1941,7 +1941,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ifge"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1949,7 +1949,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ifgt"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1957,7 +1957,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ifle"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -1965,7 +1965,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -1973,7 +1973,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -1981,7 +1981,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -1989,7 +1989,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -1997,7 +1997,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2005,7 +2005,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_icmp_cond"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2013,7 +2013,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_acmp_cond"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2021,7 +2021,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.if_acmp_cond"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2029,7 +2029,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.goto"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2037,7 +2037,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.jsr"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -2045,7 +2045,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ret"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -2053,7 +2053,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.tableswitch"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2061,7 +2061,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lookupswitch"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2069,7 +2069,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ireturn"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2077,7 +2077,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.lreturn"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2085,7 +2085,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.freturn"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2093,7 +2093,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.dreturn"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2101,7 +2101,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.areturn"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2109,7 +2109,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.return"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2117,7 +2117,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.getstatic"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -2125,7 +2125,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.putstatic"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -2133,7 +2133,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.getfield"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -2141,7 +2141,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.putfield"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -2149,7 +2149,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokevirtual"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2157,7 +2157,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokespecial"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2165,7 +2165,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -2173,7 +2173,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokestatic"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2181,7 +2181,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokeinterface"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2189,7 +2189,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokedynamic"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2197,7 +2197,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.new"> Opcode definitions in The
      *      Java Virtual Machine Specification</a>
      */
@@ -2205,7 +2205,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.newarray"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -2213,7 +2213,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.anewarray"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -2221,7 +2221,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.arraylength"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2229,7 +2229,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.athrow"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2237,7 +2237,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.checkcast"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -2245,7 +2245,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.instanceof"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -2253,7 +2253,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.monitorenter"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2261,7 +2261,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.monitorexit"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2269,7 +2269,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.wide"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2277,7 +2277,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.multianewarray"> Opcode
      *      definitions in The Java Virtual Machine Specification</a>
      */
@@ -2285,7 +2285,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ifnull"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2293,7 +2293,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.ifnonnull"> Opcode definitions
      *      in The Java Virtual Machine Specification</a>
      */
@@ -2301,7 +2301,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.goto_w"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2309,7 +2309,7 @@ public final class Const {
 
     /**
      * Java VM opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.jsr_w"> Opcode definitions in
      *      The Java Virtual Machine Specification</a>
      */
@@ -2317,7 +2317,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.2"> Reserved opcodes in the Java
      *      Virtual Machine Specification</a>
      */
@@ -2325,7 +2325,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2336,7 +2336,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2347,7 +2347,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2358,7 +2358,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2369,7 +2369,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2380,7 +2380,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2391,7 +2391,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2402,7 +2402,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2413,7 +2413,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2424,7 +2424,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2435,7 +2435,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2446,7 +2446,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2457,7 +2457,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2468,7 +2468,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2479,7 +2479,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2490,7 +2490,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2501,7 +2501,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2512,7 +2512,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2523,7 +2523,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2534,7 +2534,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2545,7 +2545,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2556,7 +2556,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2567,7 +2567,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2578,7 +2578,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2589,7 +2589,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href=
      *      "https://web.archive.org/web/20120108031230/http://java.sun.com/docs/books/jvms/first_edition/html/Quick.doc.html">
      *      Specification of _quick opcodes in the Java Virtual Machine Specification (version 1)</a>
@@ -2600,7 +2600,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.2"> Reserved opcodes in the Java
      *      Virtual Machine Specification</a>
      */
@@ -2608,7 +2608,7 @@ public final class Const {
 
     /**
      * JVM internal opcode.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.2"> Reserved opcodes in the Java
      *      Virtual Machine Specification</a>
      */
@@ -2643,7 +2643,7 @@ public final class Const {
 
     /**
      * Boolean data type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P"> Static Constraints in
      *      the Java Virtual Machine Specification</a>
      */
@@ -2651,7 +2651,7 @@ public final class Const {
 
     /**
      * Char data type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P"> Static Constraints in
      *      the Java Virtual Machine Specification</a>
      */
@@ -2659,7 +2659,7 @@ public final class Const {
 
     /**
      * Float data type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P"> Static Constraints in
      *      the Java Virtual Machine Specification</a>
      */
@@ -2667,7 +2667,7 @@ public final class Const {
 
     /**
      * Double data type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P"> Static Constraints in
      *      the Java Virtual Machine Specification</a>
      */
@@ -2675,7 +2675,7 @@ public final class Const {
 
     /**
      * Byte data type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P"> Static Constraints in
      *      the Java Virtual Machine Specification</a>
      */
@@ -2683,7 +2683,7 @@ public final class Const {
 
     /**
      * Short data type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P"> Static Constraints in
      *      the Java Virtual Machine Specification</a>
      */
@@ -2691,7 +2691,7 @@ public final class Const {
 
     /**
      * Int data type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P"> Static Constraints in
      *      the Java Virtual Machine Specification</a>
      */
@@ -2699,7 +2699,7 @@ public final class Const {
 
     /**
      * Long data type.
-     * 
+     *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.9.1-120-P"> Static Constraints in
      *      the Java Virtual Machine Specification</a>
      */
@@ -3029,7 +3029,7 @@ public final class Const {
 
     /**
      * The primitive class names corresponding to the T_XX constants, e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
-     * 
+     *
      * @param index
      * @return the class name
      * @since 6.0
@@ -3140,7 +3140,7 @@ public final class Const {
 
     /**
      * The primitive type names corresponding to the T_XX constants, e.g., TYPE_NAMES[T_INT] = "int"
-     * 
+     *
      * @param index
      * @return the type name
      * @since 6.0

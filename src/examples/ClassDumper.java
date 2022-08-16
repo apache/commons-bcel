@@ -106,7 +106,7 @@ class ClassDumper {
 
     /**
      * Processes information about the attributes of the class.
-     * 
+     *
      * @throws IOException
      * @throws ClassFormatException
      */
@@ -129,7 +129,7 @@ class ClassDumper {
 
     /**
      * Processes information about the class and its super class.
-     * 
+     *
      * @throws IOException
      * @throws ClassFormatException
      */
@@ -141,7 +141,7 @@ class ClassDumper {
         if ((access_flags & Const.ACC_INTERFACE) != 0) {
             access_flags |= Const.ACC_ABSTRACT;
         }
-        if (((access_flags & Const.ACC_ABSTRACT) != 0) && ((access_flags & Const.ACC_FINAL) != 0)) {
+        if ((access_flags & Const.ACC_ABSTRACT) != 0 && (access_flags & Const.ACC_FINAL) != 0) {
             throw new ClassFormatException("Class " + file_name + " can't be both final and abstract");
         }
 
@@ -161,7 +161,7 @@ class ClassDumper {
 
     /**
      * Processes constant pool entries.
-     * 
+     *
      * @throws IOException
      * @throws ClassFormatException
      */
@@ -188,7 +188,7 @@ class ClassDumper {
 
             // All eight byte constants take up two spots in the constant pool
             tag = constant_items[i].getTag();
-            if ((tag == Const.CONSTANT_Double) || (tag == Const.CONSTANT_Long)) {
+            if (tag == Const.CONSTANT_Double || tag == Const.CONSTANT_Long) {
                 i++;
             }
         }
@@ -196,7 +196,7 @@ class ClassDumper {
 
     /**
      * Constructs object from file stream.
-     * 
+     *
      * @param file Input stream
      * @throws IOException
      * @throws ClassFormatException
@@ -235,7 +235,7 @@ class ClassDumper {
             final long pos1 = file.getStreamPosition();
             attributes[i] = Attribute.readAttribute(file, constant_pool);
             final long pos2 = file.getStreamPosition();
-            if ((pos2 - pos1) != (attribute_length + 6)) {
+            if (pos2 - pos1 != attribute_length + 6) {
                 System.out.printf("%nattribute_length: %d pos2-pos1-6: %d pos1: %x(%d) pos2: %x(%d)%n", attribute_length, pos2 - pos1 - 6, pos1, pos1, pos2,
                     pos2);
             }
@@ -246,7 +246,7 @@ class ClassDumper {
 
     /**
      * Processes information about the fields of the class, i.e., its variables.
-     * 
+     *
      * @throws IOException
      * @throws ClassFormatException
      */
@@ -268,7 +268,7 @@ class ClassDumper {
 
     /**
      * Checks whether the header of the file is ok. Of course, this has to be the first action on successive file reads.
-     * 
+     *
      * @throws IOException
      * @throws ClassFormatException
      */
@@ -285,7 +285,7 @@ class ClassDumper {
 
     /**
      * Processes information about the interfaces implemented by this class.
-     * 
+     *
      * @throws IOException
      * @throws ClassFormatException
      */
@@ -312,7 +312,7 @@ class ClassDumper {
 
     /**
      * Processes information about the methods of the class.
-     * 
+     *
      * @throws IOException
      * @throws ClassFormatException
      */
@@ -333,7 +333,7 @@ class ClassDumper {
 
     /**
      * Processes major and minor version of compiler which created the file.
-     * 
+     *
      * @throws IOException
      * @throws ClassFormatException
      */

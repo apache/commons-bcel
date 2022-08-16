@@ -37,7 +37,7 @@ import org.apache.bcel.generic.Type;
 
 /**
  * Create HelloWorld class:
- * 
+ *
  * <PRE>
  * import java.io.*;
  *

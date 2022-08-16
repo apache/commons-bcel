@@ -151,7 +151,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants, org.
 
     /**
      * Second pass Overrides AstExpr.eval()
-     * 
+     *
      * @return type of expression
      * @param expected type
      */
@@ -171,7 +171,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants, org.
                 final int expect = args[i].getType(); // May be T_UNKNOWN
                 final int t_e = exprs[i].eval(expect); // May be T_UNKNOWN
 
-                if ((expect != T_UNKNOWN) && (t_e != expect)) {
+                if (expect != T_UNKNOWN && t_e != expect) {
                     MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(),
                         "Argument " + (i + 1) + " in application of " + fname + " is not of type " + TYPE_NAMES[expect] + " but " + TYPE_NAMES[t_e]);
                 } else {
@@ -218,7 +218,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants, org.
         } else if (!(entry instanceof Function)) {
             MiniC.addError(name.getLine(), name.getColumn(), "Applying non-function " + fname + ".");
         } else {
-            final int len = (exprs != null) ? exprs.length : 0;
+            final int len = exprs != null ? exprs.length : 0;
             final Function fun = (Function) entry;
 
             if (len != fun.getNoArgs()) {

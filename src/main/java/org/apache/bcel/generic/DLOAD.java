@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * DLOAD - Load double from local variable
- * 
+ *
  * <PRE>
  * Stack ... -&gt; ..., result.word1, result.word2
  * </PRE>
@@ -36,7 +36,7 @@ public class DLOAD extends LoadInstruction {
 
     /**
      * Load double from local variable
-     * 
+     *
      * @param n index of local variable
      */
     public DLOAD(final int n) {

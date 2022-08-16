@@ -22,13 +22,13 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * GETFIELD - Fetch field from object
- * 
+ *
  * <PRE>
  * Stack: ..., objectref -&gt; ..., value
  * </PRE>
- * 
+ *
  * OR
- * 
+ *
  * <PRE>
  * Stack: ..., objectref -&gt; ..., value.word1, value.word2
  * </PRE>

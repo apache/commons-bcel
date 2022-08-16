@@ -57,7 +57,7 @@ public class VerifierFactory {
     /**
      * Returns the (only) verifier responsible for the class with the given name. Possibly a new Verifier object is
      * transparently created.
-     * 
+     *
      * @return the (only) verifier responsible for the class with the given name.
      */
     public static Verifier getVerifier(final String fullyQualifiedClassName) {

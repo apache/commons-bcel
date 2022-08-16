@@ -128,7 +128,7 @@ public final class ASCII_CharStream {
                 System.arraycopy(bufcolumn, 0, newbufcolumn, bufsize - tokenBegin, bufpos);
                 bufcolumn = newbufcolumn;
 
-                maxNextCharInd = (bufpos += (bufsize - tokenBegin));
+                maxNextCharInd = bufpos += bufsize - tokenBegin;
             } else {
                 System.arraycopy(buffer, tokenBegin, newbuffer, 0, bufsize - tokenBegin);
                 buffer = newbuffer;
@@ -139,7 +139,7 @@ public final class ASCII_CharStream {
                 System.arraycopy(bufcolumn, tokenBegin, newbufcolumn, 0, bufsize - tokenBegin);
                 bufcolumn = newbufcolumn;
 
-                maxNextCharInd = (bufpos -= tokenBegin);
+                maxNextCharInd = bufpos -= tokenBegin;
             }
         } catch (final Throwable t) {
             throw new Error(t.getMessage());
@@ -163,7 +163,7 @@ public final class ASCII_CharStream {
                 }
             } else if (available > tokenBegin) {
                 available = bufsize;
-            } else if ((tokenBegin - available) < 2048) {
+            } else if (tokenBegin - available < 2048) {
                 ExpandBuff(true);
             } else {
                 available = tokenBegin;
@@ -213,7 +213,7 @@ public final class ASCII_CharStream {
     static public char[] GetSuffix(final int len) {
         final char[] ret = new char[len];
 
-        if ((bufpos + 1) >= len) {
+        if (bufpos + 1 >= len) {
             System.arraycopy(buffer, bufpos - len + 1, ret, 0, len);
         } else {
             System.arraycopy(buffer, bufsize - (len - bufpos - 1), ret, 0, len - bufpos - 1);
@@ -226,7 +226,7 @@ public final class ASCII_CharStream {
     static public char readChar() throws IOException {
         if (inBuf > 0) {
             --inBuf;
-            return (char) ((char) 0xff & buffer[(bufpos == bufsize - 1) ? (bufpos = 0) : ++bufpos]);
+            return (char) ((char) 0xff & buffer[bufpos == bufsize - 1 ? (bufpos = 0) : ++bufpos]);
         }
 
         if (++bufpos >= maxNextCharInd) {
@@ -236,7 +236,7 @@ public final class ASCII_CharStream {
         final char c = (char) ((char) 0xff & buffer[bufpos]);
 
         UpdateLineColumn(c);
-        return (c);
+        return c;
     }
 
     static public void ReInit(final java.io.InputStream dstream, final int startline, final int startcolumn) {
@@ -272,13 +272,13 @@ public final class ASCII_CharStream {
 
         if (prevCharIsLF) {
             prevCharIsLF = false;
-            line += (column = 1);
+            line += column = 1;
         } else if (prevCharIsCR) {
             prevCharIsCR = false;
             if (c == '\n') {
                 prevCharIsLF = true;
             } else {
-                line += (column = 1);
+                line += column = 1;
             }
         }
 
@@ -291,7 +291,7 @@ public final class ASCII_CharStream {
             break;
         case '\t':
             column--;
-            column += (8 - (column & 07));
+            column += 8 - (column & 07);
             break;
         default:
             break;

@@ -116,7 +116,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
 
     /**
      * Second pass Overrides AstExpr.eval()
-     * 
+     *
      * @return type of expression
      * @param expected type
      */
@@ -130,7 +130,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
 
         then_type = then_expr.eval(expected);
 
-        if ((expected != T_UNKNOWN) && (then_type != expected)) {
+        if (expected != T_UNKNOWN && then_type != expected) {
             MiniC.addError(then_expr.getLine(), then_expr.getColumn(),
                 "THEN expression is not of expected type " + TYPE_NAMES[expected] + " but " + TYPE_NAMES[then_type] + ".");
         }
@@ -138,7 +138,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
         if (else_expr != null) {
             else_type = else_expr.eval(expected);
 
-            if ((expected != T_UNKNOWN) && (else_type != expected)) {
+            if (expected != T_UNKNOWN && else_type != expected) {
                 MiniC.addError(else_expr.getLine(), else_expr.getColumn(),
                     "ELSE expression is not of expected type " + TYPE_NAMES[expected] + " but " + TYPE_NAMES[else_type] + ".");
             } else if (then_type == T_UNKNOWN) {

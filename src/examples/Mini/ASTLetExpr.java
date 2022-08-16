@@ -69,7 +69,7 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
             entry.setLocalVariable(lg);
             InstructionHandle start = il.getEnd();
             exprs[i].byte_code(il, method, cp);
-            start = (start == null) ? il.getStart() : start.getNext();
+            start = start == null ? il.getStart() : start.getNext();
             lg.setStart(start);
             il.append(new ISTORE(slot));
             ASTFunDecl.pop();
@@ -140,7 +140,7 @@ public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
 
     /**
      * Second pass Overrides AstExpr.eval()
-     * 
+     *
      * @return type of expression
      * @param expected type
      */

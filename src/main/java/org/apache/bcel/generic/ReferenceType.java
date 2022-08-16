@@ -172,7 +172,7 @@ public abstract class ReferenceType extends Type {
     /**
      * Return true iff this is assignment compatible with another type t as defined in the JVM specification; see the
      * AASTORE definition there.
-     * 
+     *
      * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
      *         found
      */

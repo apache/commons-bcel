@@ -59,7 +59,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
 
     /**
      * Dump instruction as byte code to stream out.
-     * 
+     *
      * @param out Output stream
      */
     @Override

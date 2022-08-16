@@ -97,7 +97,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Initialize with existing class.
-     * 
+     *
      * @param clazz JavaClass object (e.g. read from file)
      */
     public ClassGen(final JavaClass clazz) {
@@ -184,7 +184,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Add an attribute to this class.
-     * 
+     *
      * @param a attribute to add
      */
     public void addAttribute(final Attribute a) {
@@ -195,7 +195,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      * Convenience method.
      *
      * Add an empty constructor to this class that does nothing but calling super().
-     * 
+     *
      * @param access_flags rights for constructor
      */
     public void addEmptyConstructor(final int access_flags) {
@@ -210,7 +210,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Add a field to this class.
-     * 
+     *
      * @param f field to add
      */
     public void addField(final Field f) {
@@ -219,7 +219,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Add an interface to this class, i.e., this class has to implement it.
-     * 
+     *
      * @param name interface to implement (fully qualified class name)
      */
     public void addInterface(final String name) {
@@ -228,7 +228,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Add a method to this class.
-     * 
+     *
      * @param m method to add
      */
     public void addMethod(final Method m) {
@@ -403,7 +403,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Remove an attribute from this class.
-     * 
+     *
      * @param a attribute to remove
      */
     public void removeAttribute(final Attribute a) {
@@ -412,7 +412,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Remove a field to this class.
-     * 
+     *
      * @param f field to remove
      */
     public void removeField(final Field f) {
@@ -421,7 +421,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Remove an interface from this class.
-     * 
+     *
      * @param name interface to remove (fully qualified name)
      */
     public void removeInterface(final String name) {
@@ -430,7 +430,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Remove a method from this class.
-     * 
+     *
      * @param m method to remove
      */
     public void removeMethod(final Method m) {
@@ -492,7 +492,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Set major version number of class file, default value is 45 (JDK 1.1)
-     * 
+     *
      * @param major major version number
      */
     public void setMajor(final int major) { // TODO could be package-protected - only called by test code
@@ -512,7 +512,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Set minor version number of class file, default value is 3 (JDK 1.1)
-     * 
+     *
      * @param minor minor version number
      */
     public void setMinor(final int minor) { // TODO could be package-protected - only called by test code

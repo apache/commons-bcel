@@ -251,7 +251,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
         for (final CodeExceptionGen c : ehs) {
             final ObjectType caught = c.getCatchType();
-            final String class_name = (caught == null) ? // catch any exception, used when compiling finally
+            final String class_name = caught == null ? // catch any exception, used when compiling finally
                 "all" : caught.getClassName().replace('.', '/');
 
             out.println(".catch " + class_name + " from " + get(c.getStartPC()) + " to " + get(c.getEndPC()) + " using " + get(c.getHandlerPC()));
@@ -312,7 +312,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         out.println("\n.method " + Utility.accessToString(_method.getAccessFlags()) + " " + _method.getName() + _method.getSignature());
 
         final Attribute[] attributes = _method.getAttributes();
-        if ((attributes == null) || (attributes.length == 0)) {
+        if (attributes == null || attributes.length == 0) {
             out.println(".end method");
         }
     }

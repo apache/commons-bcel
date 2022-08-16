@@ -99,9 +99,9 @@ public class TokenMgrError extends Error {
      */
     private static String LexicalError(final boolean EOFSeen, final int lexState, final int errorLine, final int errorColumn, final String errorAfter,
         final char curChar) {
-        return ("Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: "
-            + (EOFSeen ? "<EOF> " : ("\"" + addEscapes(String.valueOf(curChar)) + "\"") + " (" + (int) curChar + "), ") + "after : \"" + addEscapes(errorAfter)
-            + "\"");
+        return "Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: "
+            + (EOFSeen ? "<EOF> " : "\"" + addEscapes(String.valueOf(curChar)) + "\"" + " (" + (int) curChar + "), ") + "after : \"" + addEscapes(errorAfter)
+            + "\"";
     }
 
     /**

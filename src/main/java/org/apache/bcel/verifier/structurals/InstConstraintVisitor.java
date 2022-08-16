@@ -109,7 +109,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /**
      * Assures arrayref is of ArrayType or NULL; returns true if and only if arrayref is non-NULL.
-     * 
+     *
      * @throws StructuralCodeConstraintException if the above constraint is violated.
      */
     private boolean arrayrefOfArrayType(final Instruction o, final Type arrayref) {
@@ -122,7 +122,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     /**
      * This method is called by the visitXXX() to notify the acceptor of this InstConstraintVisitor that a constraint
      * violation has occured. This is done by throwing an instance of a StructuralCodeConstraintException.
-     * 
+     *
      * @throws StructuralCodeConstraintException always.
      */
     private void constraintViolated(final Instruction violator, final String description) {
@@ -142,7 +142,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /**
      * Assures index is of type INT.
-     * 
+     *
      * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
      */
     private void indexOfInt(final Instruction o, final Type index) {
@@ -163,7 +163,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     /**
      * Assures the ReferenceType r is initialized (or Type.NULL). Formally, this means (!(r instanceof
      * UninitializedObjectType)), because there are no uninitialized array types.
-     * 
+     *
      * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
      */
     private void referenceTypeIsInitialized(final Instruction o, final ReferenceType r) {
@@ -1556,7 +1556,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /**
      * Ensures the specific preconditions of the said instruction.
-     * 
+     *
      * @since 6.0
      */
     @Override

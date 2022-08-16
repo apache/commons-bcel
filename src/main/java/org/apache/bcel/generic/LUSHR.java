@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * LUSHR - Logical shift right long
- * 
+ *
  * <PRE>
  * Stack: ..., value1, value2 -&gt; ..., result
  * </PRE>

@@ -22,13 +22,13 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * GETSTATIC - Fetch static field from class
- * 
+ *
  * <PRE>
  * Stack: ..., -&gt; ..., value
  * </PRE>
- * 
+ *
  * OR
- * 
+ *
  * <PRE>
  * Stack: ..., -&gt; ..., value.word1, value.word2
  * </PRE>

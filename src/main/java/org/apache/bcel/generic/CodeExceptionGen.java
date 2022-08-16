@@ -116,7 +116,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
 
     /*
      * Set end of handler
-     * 
+     *
      * @param endPc End of handled region (inclusive)
      */
     public void setEndPC(final InstructionHandle end_pc) { // TODO could be package-protected?
@@ -126,7 +126,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
 
     /*
      * Set handler code
-     * 
+     *
      * @param handlerPc Start of handler
      */
     public void setHandlerPC(final InstructionHandle handler_pc) { // TODO could be package-protected?
@@ -136,7 +136,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
 
     /*
      * Set start of handler
-     * 
+     *
      * @param startPc Start of handled region (inclusive)
      */
     public void setStartPC(final InstructionHandle start_pc) { // TODO could be package-protected?

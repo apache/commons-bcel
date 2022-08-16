@@ -114,7 +114,7 @@ public final class SWITCH implements CompoundInstruction {
         int i = l;
         int j = r;
         int h;
-        final int m = match[(l + r) >>> 1];
+        final int m = match[l + r >>> 1];
         InstructionHandle h2;
         do {
             while (match[i] < m) {

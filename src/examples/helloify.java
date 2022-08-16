@@ -66,7 +66,7 @@ public final class helloify implements Constants {
         final String name = m.getName();
 
         // Sanity check
-        if (m.isNative() || m.isAbstract() || (code == null)) {
+        if (m.isNative() || m.isAbstract() || code == null) {
             return m;
         }
 

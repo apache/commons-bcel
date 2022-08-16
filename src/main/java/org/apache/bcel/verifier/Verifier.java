@@ -180,7 +180,7 @@ public class Verifier {
      * Returns the name of the class this verifier operates on. This is particularly interesting when this verifier was
      * created recursively by another Verifier and you got a reference to this Verifier by the getVerifiers() method of the
      * VerifierFactory.
-     * 
+     *
      * @see VerifierFactory
      */
     public final String getClassName() {

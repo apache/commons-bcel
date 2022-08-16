@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * FSTORE - Store float into local variable
- * 
+ *
  * <PRE>
  * Stack: ..., value -&gt; ...
  * </PRE>
@@ -36,7 +36,7 @@ public class FSTORE extends StoreInstruction {
 
     /**
      * Store float into local variable
-     * 
+     *
      * @param n index of local variable
      */
     public FSTORE(final int n) {

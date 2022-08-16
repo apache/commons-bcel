@@ -57,7 +57,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
 
     /**
      * Dump instruction as byte code to stream out.
-     * 
+     *
      * @param out Output stream
      */
     @Override
@@ -89,7 +89,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
 
     /**
      * Read needed data (i.e., index) from file.
-     * 
+     *
      * @param bytes input stream
      * @param wide wide prefix?
      */
@@ -101,7 +101,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
 
     /**
      * Set the index to constant pool.
-     * 
+     *
      * @param index in constant pool.
      */
     @Override

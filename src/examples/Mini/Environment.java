@@ -76,7 +76,7 @@ public class Environment implements Cloneable {
 
                 /*
                  * int len = table[i].size();
-                 * 
+                 *
                  * copy[i] = new Vector(len); try { for(int j=0; j < len; j++) copy[i].addElement(table[i].elementAt(j)); }
                  * catch(ArrayIndexOutOfBoundsException e) {}
                  */

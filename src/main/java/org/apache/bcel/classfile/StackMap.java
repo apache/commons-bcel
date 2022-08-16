@@ -57,11 +57,11 @@ public final class StackMap extends Attribute {
 
     /*
      * @param name_index Index of name
-     * 
+     *
      * @param length Content length in bytes
-     * 
+     *
      * @param map Table of stack map entries
-     * 
+     *
      * @param constant_pool Array of constants
      */
     public StackMap(final int name_index, final int length, final StackMapEntry[] map, final ConstantPool constant_pool) {

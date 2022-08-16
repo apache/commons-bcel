@@ -27,7 +27,7 @@ public class Frame {
     /**
      * For instance initialization methods, it is important to remember which instance it is that is not initialized yet. It
      * will be initialized invoking another constructor later. NULL means the instance already *is* initialized.
-     * 
+     *
      * @deprecated Use the getter/setter to access the field as it may be made private in a later release
      */
     @Deprecated

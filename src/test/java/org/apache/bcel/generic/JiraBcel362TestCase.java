@@ -32,7 +32,7 @@ public class JiraBcel362TestCase extends AbstractTestCase {
     @Test
     public void testProcessConstantPoolWithCondyEntry() throws ClassNotFoundException {
         final JavaClass clazz = getTestClass("issue362.Bcel362");
-        ConstantPoolGen constantPoolGen = assertDoesNotThrow(() -> new ConstantPoolGen(clazz.getConstantPool()));
+        final ConstantPoolGen constantPoolGen = assertDoesNotThrow(() -> new ConstantPoolGen(clazz.getConstantPool()));
         assertTrue(constantPoolGen.lookupUtf8("$jacocoData") != -1);
     }
 }

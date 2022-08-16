@@ -97,7 +97,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 
     /**
      * Return a string with the flag settings
-     * 
+     *
      * @param flags the flags field to interpret
      * @param location the item type
      * @return the formatted string

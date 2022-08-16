@@ -45,7 +45,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
 
     /**
      * Also works for instructions whose stack effect depends on the constant pool entry they reference.
-     * 
+     *
      * @return Number of words consumed from stack by this instruction
      */
     @Override
@@ -107,7 +107,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
 
     /**
      * Also works for instructions whose stack effect depends on the constant pool entry they reference.
-     * 
+     *
      * @return Number of words produced onto stack by this instruction
      */
     @Override

@@ -53,6 +53,7 @@ public abstract class SimpleNode implements Node {
         }
     }
 
+    @Override
     public void jjtAddChild(final Node n, final int i) {
         if (children == null) {
             children = new Node[i + 1];
@@ -64,21 +65,26 @@ public abstract class SimpleNode implements Node {
         children[i] = n;
     }
 
+    @Override
     public void jjtClose() {
     }
 
+    @Override
     public Node jjtGetChild(final int i) {
         return children[i];
     }
 
+    @Override
     public int jjtGetNumChildren() {
-        return (children == null) ? 0 : children.length;
+        return children == null ? 0 : children.length;
     }
 
+    @Override
     public Node jjtGetParent() {
         return parent;
     }
 
+    @Override
     public void jjtOpen() {
     }
 
@@ -88,6 +94,7 @@ public abstract class SimpleNode implements Node {
      * is probably all you need to do.
      */
 
+    @Override
     public void jjtSetParent(final Node n) {
         parent = n;
     }

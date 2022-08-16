@@ -97,16 +97,16 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
 
         is_simple = true; // (Very) simple expression, always true
 
-        if ((t == T_UNKNOWN) && (expected == T_UNKNOWN)) {
+        if (t == T_UNKNOWN && expected == T_UNKNOWN) {
             type = T_UNKNOWN;
-        } else if ((t == T_UNKNOWN) && (expected != T_UNKNOWN)) {
+        } else if (t == T_UNKNOWN && expected != T_UNKNOWN) {
             ident.setType(expected);
             type = expected;
-        } else if ((t != T_UNKNOWN) && (expected == T_UNKNOWN)) {
-            ident.setType(t);
-            type = t;
         } else {
-            type = t; // Caller has to check for an error, i.e. t != expected
+            if (t != T_UNKNOWN && expected == T_UNKNOWN) {
+                ident.setType(t);
+            }
+            type = t;
         }
 
         return type;

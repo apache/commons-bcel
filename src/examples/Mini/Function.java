@@ -78,7 +78,7 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
 
     public void setArgs(final ASTIdent[] args) {
         this.args = args;
-        no_args = (args == null) ? 0 : args.length;
+        no_args = args == null ? 0 : args.length;
     }
 
     @Override

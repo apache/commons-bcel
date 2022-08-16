@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * ILOAD - Load int from local variable onto stack
- * 
+ *
  * <PRE>
  * Stack: ... -&gt; ..., result
  * </PRE>
@@ -36,7 +36,7 @@ public class ILOAD extends LoadInstruction {
 
     /**
      * Load int from local variable
-     * 
+     *
      * @param n index of local variable
      */
     public ILOAD(final int n) {

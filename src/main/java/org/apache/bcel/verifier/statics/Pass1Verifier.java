@@ -34,7 +34,7 @@ import org.apache.bcel.verifier.exc.LoadingException;
 public final class Pass1Verifier extends PassVerifier {
     /**
      * DON'T USE THIS EVEN PRIVATELY! USE getJavaClass() INSTEAD.
-     * 
+     *
      * @see #getJavaClass()
      */
     private JavaClass jc;
@@ -126,16 +126,14 @@ public final class Pass1Verifier extends PassVerifier {
             jc = getJavaClass(); // loads in the class file if not already done.
 
             /* If we find more constraints to check, we should do this in an own method. */
-            if (jc != null && !myOwner.getClassName().equals(jc.getClassName())) {
-                // This should maybe caught by BCEL: In case of renamed .class files we get wrong
-                // JavaClass objects here.
-                // This test should be much more complicated. It needs to take the classname, remove any portion at the
-                // end that matches the file name and then see if the remainder matches anything on the class path.
-                // Dumb test for now, see if the class name ends with the file name.
-                if (!jc.getClassName().endsWith(myOwner.getClassName())) {
-                    throw new LoadingException("Wrong name: the internal name of the .class file '" + jc.getClassName() + "' does not match the file's name '"
-                        + myOwner.getClassName() + "'.");
-                }
+            // This should maybe caught by BCEL: In case of renamed .class files we get wrong
+            // JavaClass objects here.
+            // This test should be much more complicated. It needs to take the classname, remove any portion at the
+            // end that matches the file name and then see if the remainder matches anything on the class path.
+            // Dumb test for now, see if the class name ends with the file name.
+            if (jc != null && !myOwner.getClassName().equals(jc.getClassName()) && !jc.getClassName().endsWith(myOwner.getClassName())) {
+                throw new LoadingException("Wrong name: the internal name of the .class file '" + jc.getClassName() + "' does not match the file's name '"
+                    + myOwner.getClassName() + "'.");
             }
         } catch (final LoadingException | ClassFormatException e) {
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, e.getMessage());

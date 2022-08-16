@@ -68,7 +68,7 @@ public class MiniParserTokenManager implements MiniParserConstants {
                 case 0:
                     try {
                         ASCII_CharStream.backup(0);
-                        while (curChar <= 32 && (0x100003600L & (1L << curChar)) != 0L) {
+                        while (curChar <= 32 && (0x100003600L & 1L << curChar) != 0L) {
                             curChar = ASCII_CharStream.BeginToken();
                         }
                     } catch (final java.io.IOException e1) {
@@ -91,7 +91,7 @@ public class MiniParserTokenManager implements MiniParserConstants {
                     if (jjmatchedPos + 1 < curPos) {
                         ASCII_CharStream.backup(curPos - jjmatchedPos - 1);
                     }
-                    if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L) {
+                    if ((jjtoToken[jjmatchedKind >> 6] & 1L << (jjmatchedKind & 077)) != 0L) {
                         matchedToken = jjFillToken();
                         matchedToken.specialToken = specialToken;
                         if (jjnewLexState[jjmatchedKind] != -1) {
@@ -99,14 +99,14 @@ public class MiniParserTokenManager implements MiniParserConstants {
                         }
                         return matchedToken;
                     }
-                    if ((jjtoSkip[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L) {
-                        if ((jjtoSpecial[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L) {
+                    if ((jjtoSkip[jjmatchedKind >> 6] & 1L << (jjmatchedKind & 077)) != 0L) {
+                        if ((jjtoSpecial[jjmatchedKind >> 6] & 1L << (jjmatchedKind & 077)) != 0L) {
                             matchedToken = jjFillToken();
                             if (specialToken == null) {
                                 specialToken = matchedToken;
                             } else {
                                 matchedToken.specialToken = specialToken;
-                                specialToken = (specialToken.next = matchedToken);
+                                specialToken = specialToken.next = matchedToken;
                             }
                             SkipLexicalActions(matchedToken);
                         } else {
@@ -177,7 +177,7 @@ public class MiniParserTokenManager implements MiniParserConstants {
         final Token t = Token.newToken(jjmatchedKind);
         t.kind = jjmatchedKind;
         final String im = jjstrLiteralImages[jjmatchedKind];
-        t.image = (im == null) ? ASCII_CharStream.GetImage() : im;
+        t.image = im == null ? ASCII_CharStream.GetImage() : im;
         t.beginLine = ASCII_CharStream.getBeginLine();
         t.beginColumn = ASCII_CharStream.getBeginColumn();
         t.endLine = ASCII_CharStream.getEndLine();
@@ -333,7 +333,7 @@ public class MiniParserTokenManager implements MiniParserConstants {
                 do {
                     switch (jjstateSet[--i]) {
                     case 0:
-                        if (((0x2400L & l) != 0L) && (kind > 7)) {
+                        if ((0x2400L & l) != 0L && kind > 7) {
                             kind = 7;
                         }
                         if (curChar == 13) {
@@ -350,13 +350,6 @@ public class MiniParserTokenManager implements MiniParserConstants {
                             jjstateSet[jjnewStateCnt++] = 1;
                         }
                         break;
-                    default:
-                        break;
-                    }
-                } while (i != startsAt);
-            } else if (curChar < 128) {
-                do {
-                    switch (jjstateSet[--i]) {
                     default:
                         break;
                     }
@@ -508,7 +501,7 @@ public class MiniParserTokenManager implements MiniParserConstants {
     }
 
     static private int jjMoveStringLiteralDfa2_0(final long old0, long active0) {
-        if (((active0 &= old0)) == 0L) {
+        if ((active0 &= old0) == 0L) {
             return jjStartNfa_0(0, old0);
         }
         try {
@@ -552,7 +545,7 @@ public class MiniParserTokenManager implements MiniParserConstants {
     }
 
     static private int jjMoveStringLiteralDfa3_0(final long old0, long active0) {
-        if (((active0 &= old0)) == 0L) {
+        if ((active0 &= old0) == 0L) {
             return jjStartNfa_0(1, old0);
         }
         try {
@@ -591,7 +584,7 @@ public class MiniParserTokenManager implements MiniParserConstants {
     }
 
     static private int jjMoveStringLiteralDfa4_0(final long old0, long active0) {
-        if (((active0 &= old0)) == 0L) {
+        if ((active0 &= old0) == 0L) {
             return jjStartNfa_0(2, old0);
         }
         try {

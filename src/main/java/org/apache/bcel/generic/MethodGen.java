@@ -659,7 +659,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     // is more likely to suggest to the caller it is readonly (which a List does not).
     /**
      * Return a list of AnnotationGen objects representing parameter annotations
-     * 
+     *
      * @since 6.0
      */
     public List<AnnotationEntryGen> getAnnotationsOnParameter(final int i) {
@@ -1064,7 +1064,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Would prefer to make this private, but need a way to test if client is using BCEL version 6.5.0 or later that
      * contains fix for BCEL-329.
-     * 
+     *
      * @since 6.5.0
      */
     public void removeRuntimeAttributes(final Attribute[] attrs) {

@@ -65,7 +65,7 @@ public class ExecutionVisitor extends EmptyVisitor {
 
     /**
      * The ConstantPoolGen we're working with.
-     * 
+     *
      * @see #setConstantPoolGen(ConstantPoolGen)
      */
     private ConstantPoolGen cpg;
@@ -78,7 +78,7 @@ public class ExecutionVisitor extends EmptyVisitor {
 
     /**
      * The LocalVariables from the current Frame we're operating on.
-     * 
+     *
      * @see #setFrame(Frame)
      */
     private LocalVariables locals() {
@@ -95,7 +95,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /**
      * The only method granting access to the single instance of the ExecutionVisitor class. Before actively using this
      * instance, <B>SET THE ConstantPoolGen FIRST</B>.
-     * 
+     *
      * @see #setConstantPoolGen(ConstantPoolGen)
      */
     public void setFrame(final Frame f) { // TODO could be package-protected?
@@ -104,7 +104,7 @@ public class ExecutionVisitor extends EmptyVisitor {
 
     /**
      * The OperandStack from the current Frame we're operating on.
-     * 
+     *
      * @see #setFrame(Frame)
      */
     private OperandStack stack() {
@@ -395,15 +395,13 @@ public class ExecutionVisitor extends EmptyVisitor {
         final Type w2 = stack().pop();
         if (w2.getSize() == 2) {
             stack().push(w1);
-            stack().push(w2);
-            stack().push(w1);
         } else {
             final Type w3 = stack().pop();
             stack().push(w1);
             stack().push(w3);
-            stack().push(w2);
-            stack().push(w1);
         }
+        stack().push(w2);
+        stack().push(w1);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -412,14 +410,13 @@ public class ExecutionVisitor extends EmptyVisitor {
         final Type t = stack().pop();
         if (t.getSize() == 2) {
             stack().push(t);
-            stack().push(t);
         } else { // t.getSize() is 1
             final Type u = stack().pop();
             stack().push(u);
             stack().push(t);
             stack().push(u);
-            stack().push(t);
         }
+        stack().push(t);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -430,7 +427,6 @@ public class ExecutionVisitor extends EmptyVisitor {
             final Type u = stack().pop();
             stack().push(t);
             stack().push(u);
-            stack().push(t);
         } else { // t.getSize() is1
             final Type u = stack().pop();
             final Type v = stack().pop();
@@ -438,8 +434,8 @@ public class ExecutionVisitor extends EmptyVisitor {
             stack().push(t);
             stack().push(v);
             stack().push(u);
-            stack().push(t);
         }
+        stack().push(t);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -450,22 +446,17 @@ public class ExecutionVisitor extends EmptyVisitor {
             final Type u = stack().pop();
             if (u.getSize() == 2) {
                 stack().push(t);
-                stack().push(u);
-                stack().push(t);
             } else {
                 final Type v = stack().pop();
                 stack().push(t);
                 stack().push(v);
-                stack().push(u);
-                stack().push(t);
             }
+            stack().push(u);
+            stack().push(t);
         } else { // t.getSize() is 1
             final Type u = stack().pop();
             final Type v = stack().pop();
             if (v.getSize() == 2) {
-                stack().push(u);
-                stack().push(t);
-                stack().push(v);
                 stack().push(u);
                 stack().push(t);
             } else {
@@ -473,10 +464,10 @@ public class ExecutionVisitor extends EmptyVisitor {
                 stack().push(u);
                 stack().push(t);
                 stack().push(w);
-                stack().push(v);
-                stack().push(u);
-                stack().push(t);
             }
+            stack().push(v);
+            stack().push(u);
+            stack().push(t);
         }
     }
 
@@ -865,7 +856,7 @@ public class ExecutionVisitor extends EmptyVisitor {
 
     /**
      * Symbolically executes the corresponding Java Virtual Machine instruction.
-     * 
+     *
      * @since 6.0
      */
     @Override

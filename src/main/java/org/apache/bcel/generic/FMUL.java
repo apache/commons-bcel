@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * FMUL - Multiply floats
- * 
+ *
  * <PRE>
  * Stack: ..., value1, value2 -&gt; result
  * </PRE>

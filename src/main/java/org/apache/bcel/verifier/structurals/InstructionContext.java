@@ -67,7 +67,7 @@ public interface InstructionContext {
 
     /**
      * Returns the usual control flow successors.
-     * 
+     *
      * @see #getExceptionHandlers()
      */
     InstructionContext[] getSuccessors();

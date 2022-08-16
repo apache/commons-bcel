@@ -290,7 +290,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
 
     /**
      * Second and third pass
-     * 
+     *
      * @return type of expression
      * @param expected type
      */
@@ -307,9 +307,9 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
                 child_type = type = T_BOOLEAN; // !
             }
         } else // Compute expected type
-        if ((kind == PLUS) || (kind == MINUS) || (kind == MULT) || (kind == MOD) || (kind == DIV)) {
+        if (kind == PLUS || kind == MINUS || kind == MULT || kind == MOD || kind == DIV) {
             child_type = type = T_INT;
-        } else if ((kind == AND) || (kind == OR)) {
+        } else if (kind == AND || kind == OR) {
             child_type = type = T_BOOLEAN;
         } else { // LEQ, GT, etc.
             child_type = T_INT;
@@ -385,7 +385,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
     @Override
     public String toString() {
         String op = "";
-        final int len = (children != null) ? children.length : 0;
+        final int len = children != null ? children.length : 0;
         if (unop != -1) {
             op = tokenImage[unop];
         } else if (kind != -1) {
@@ -401,7 +401,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
     public ASTExpr traverse(final Environment env) {
         this.env = env;
 
-        if ((kind == -1) && (unop == -1)) {
+        if (kind == -1 && unop == -1) {
             return exprs[0].traverse(env); // --> Replaced by successor
         }
         for (int i = 0; i < exprs.length; i++) {

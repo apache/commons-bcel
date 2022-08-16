@@ -35,7 +35,7 @@ public final class ModuleMainClass extends Attribute {
 
     /**
      * Construct object from input stream.
-     * 
+     *
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param input Input stream

@@ -54,7 +54,7 @@ public final class AssertionViolatedException extends RuntimeException {
 
     /**
      * Constructs a new AssertionViolationException with the specified error message and initial cause
-     * 
+     *
      * @since 6.0
      */
     public AssertionViolatedException(String message, final Throwable initCause) {
@@ -82,7 +82,7 @@ public final class AssertionViolatedException extends RuntimeException {
 
     /**
      * Returns the error message string of this AssertionViolatedException object.
-     * 
+     *
      * @return the error message string of this AssertionViolatedException.
      */
     @Override

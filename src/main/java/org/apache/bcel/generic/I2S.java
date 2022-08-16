@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * I2S - Convert int to short
- * 
+ *
  * <PRE>
  * Stack: ..., value -&gt; ..., result
  * </PRE>

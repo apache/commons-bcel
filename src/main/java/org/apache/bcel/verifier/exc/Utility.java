@@ -22,7 +22,7 @@ import java.io.StringWriter;
 
 /**
  * A utility class providing convenience methods concerning Throwable instances.
- * 
+ *
  * @see java.lang.Throwable
  */
 public final class Utility {

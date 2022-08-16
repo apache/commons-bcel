@@ -47,7 +47,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * Check if the value can fit in a byte (signed)
-     * 
+     *
      * @param value the value to check
      * @return true if the value is in range
      * @since 6.0
@@ -58,7 +58,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * Check if the value can fit in a short (signed)
-     * 
+     *
      * @param value the value to check
      * @return true if the value is in range
      * @since 6.0
@@ -71,7 +71,7 @@ public abstract class Instruction implements Cloneable {
      * Read an instruction from (byte code) input stream and return the appropiate object.
      * <p>
      * If the Instruction is defined in {@link InstructionConst}, then the singleton instance is returned.
-     * 
+     *
      * @param bytes input stream bytes
      * @return instruction object being read
      * @see InstructionConst#getInstruction(int)
@@ -397,7 +397,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * Set comparator to be used for equals().
-     * 
+     *
      * @deprecated (6.0) use the built in comparator, or wrap this class in another object that implements these methods
      */
     @Deprecated
@@ -439,7 +439,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * This method also gives right results for instructions whose effect on the stack depends on the constant pool entry
      * they reference.
-     * 
+     *
      * @return Number of words consumed from stack by this instruction, or Constants.UNPREDICTABLE, if this can not be
      *         computed statically
      */
@@ -477,7 +477,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * Dump instruction as byte code to stream out.
-     * 
+     *
      * @param out Output stream
      */
     public void dump(final DataOutputStream out) throws IOException {
@@ -486,7 +486,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * Check for equality, delegated to comparator
-     * 
+     *
      * @return true if that is an Instruction and has the same opcode
      */
     @Override
@@ -517,7 +517,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * calculate the hashCode of this object
-     * 
+     *
      * @return the hashCode
      * @since 6.0
      */
@@ -539,7 +539,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * This method also gives right results for instructions whose effect on the stack depends on the constant pool entry
      * they reference.
-     * 
+     *
      * @return Number of words produced onto stack by this instruction, or Constants.UNPREDICTABLE, if this can not be
      *         computed statically
      */
@@ -549,7 +549,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * Needed in readInstruction and subclasses in this package
-     * 
+     *
      * @since 6.0
      */
     final void setLength(final int length) {

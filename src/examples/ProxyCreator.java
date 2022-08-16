@@ -37,7 +37,7 @@ import org.apache.bcel.generic.Type;
 /**
  * Dynamically creates and uses a proxy for {@code java.awt.event.ActionListener} via the classloader mechanism if
  * called with
- * 
+ *
  * <pre>
  * java org.apache.bcel.util.JavaWrapper ProxyCreator
  * </pre>

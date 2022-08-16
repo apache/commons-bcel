@@ -55,7 +55,7 @@ public class GOTO_W extends GotoInstruction {
 
     /**
      * Dump instruction as byte code to stream out.
-     * 
+     *
      * @param out Output stream
      */
     @Override

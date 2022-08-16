@@ -28,7 +28,7 @@ import org.apache.bcel.Const;
  * references, due to the JVM specification that skips an entry after an 8-byte constant (double, long) entry. Those
  * interested in generating constant pools programmatically should see <a href="../generic/ConstantPoolGen.html">
  * ConstantPoolGen</a>.
- * 
+ *
  * @see Constant
  * @see org.apache.bcel.generic.ConstantPoolGen
  */

@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * ALOAD - Load reference from local variable
- * 
+ *
  * <PRE>
  * Stack: ... -&gt; ..., objectref
  * </PRE>
@@ -36,7 +36,7 @@ public class ALOAD extends LoadInstruction {
 
     /**
      * Load reference from local variable
-     * 
+     *
      * @param n index of local variable
      */
     public ALOAD(final int n) {

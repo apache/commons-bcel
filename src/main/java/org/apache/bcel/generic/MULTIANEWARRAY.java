@@ -26,7 +26,7 @@ import org.apache.bcel.util.ByteSequence;
 
 /**
  * MULTIANEWARRAY - Create new mutidimensional array of references
- * 
+ *
  * <PRE>
  * Stack: ..., count1, [count2, ...] -&gt; ..., arrayref
  * </PRE>
@@ -69,7 +69,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 
     /**
      * Also works for instructions whose stack effect depends on the constant pool entry they reference.
-     * 
+     *
      * @return Number of words consumed from stack by this instruction
      */
     @Override
@@ -79,7 +79,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
 
     /**
      * Dump instruction as byte code to stream out.
-     * 
+     *
      * @param out Output stream
      */
     @Override

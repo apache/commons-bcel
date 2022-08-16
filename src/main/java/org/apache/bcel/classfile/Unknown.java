@@ -31,7 +31,7 @@ import org.apache.bcel.Const;
  * application-specific attributes should create an {@link UnknownAttributeReader} implementation and attach it via
  * {@link Attribute#addAttributeReader(String, UnknownAttributeReader)}.
  *
- * 
+ *
  * @see Attribute
  * @see UnknownAttributeReader
  */

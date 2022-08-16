@@ -76,7 +76,7 @@ public class HandleTestCase {
     static void checkLinkage(final InstructionHandle ih, final int index) {
         final InstructionHandle prev = ih.getPrev();
         final InstructionHandle next = ih.getNext();
-        if ((prev != null && prev.getNext() != ih) || (next != null && next.getPrev() != ih)) {
+        if (prev != null && prev.getNext() != ih || next != null && next.getPrev() != ih) {
             final AssertionError error = new AssertionError("corrupt instruction list at index " + index);
             exception = error;
             throw error;

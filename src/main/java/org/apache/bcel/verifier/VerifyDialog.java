@@ -27,7 +27,7 @@ import org.apache.bcel.classfile.JavaClass;
  * as arguments to use it as a stand-alone application. Use the VerifyDialog(String) constructor to use this class in
  * your application. [This class was created using VisualAge for Java, but it does not work under VAJ itself (Version
  * 3.02 JDK 1.2)]
- * 
+ *
  * @see #main(String[])
  * @see #VerifyDialog(String)
  */
@@ -63,7 +63,7 @@ public class VerifyDialog extends javax.swing.JDialog {
     /**
      * Verifies one or more class files. Verification results are presented graphically: Red means 'rejected', green means
      * 'passed' while yellow means 'could not be verified yet'.
-     * 
+     *
      * @param args java.lang.String[] fully qualified names of classes to verify.
      */
     public static void main(final java.lang.String[] args) {
@@ -165,7 +165,7 @@ public class VerifyDialog extends javax.swing.JDialog {
 
     /**
      * Use this constructor if you want a possibility to verify other class files than java.lang.Object.
-     * 
+     *
      * @param fully_qualified_class_name java.lang.String
      */
     public VerifyDialog(String fully_qualified_class_name) {

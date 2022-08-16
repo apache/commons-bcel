@@ -38,7 +38,7 @@ public final class InnerClass implements Cloneable, Node {
 
     /**
      * Construct object from file stream.
-     * 
+     *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      */

@@ -183,7 +183,7 @@ public final class ClassParser {
 
     /**
      * Reads information about the attributes of the class.
-     * 
+     *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
@@ -197,7 +197,7 @@ public final class ClassParser {
 
     /**
      * Reads information about the class and its super class.
-     * 
+     *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
@@ -218,7 +218,7 @@ public final class ClassParser {
 
     /**
      * Reads constant pool entries.
-     * 
+     *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
@@ -228,7 +228,7 @@ public final class ClassParser {
 
     /**
      * Reads information about the fields of the class, i.e., its variables.
-     * 
+     *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
@@ -243,7 +243,7 @@ public final class ClassParser {
     /******************** Private utility methods **********************/
     /**
      * Checks whether the header of the file is ok. Of course, this has to be the first action on successive file reads.
-     * 
+     *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
@@ -255,7 +255,7 @@ public final class ClassParser {
 
     /**
      * Reads information about the interfaces implemented by this class.
-     * 
+     *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
@@ -269,7 +269,7 @@ public final class ClassParser {
 
     /**
      * Reads information about the methods of the class.
-     * 
+     *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
@@ -283,7 +283,7 @@ public final class ClassParser {
 
     /**
      * Reads major and minor version of compiler which created the file.
-     * 
+     *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */

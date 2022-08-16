@@ -130,7 +130,7 @@ public abstract class Repository {
 
     /**
      * Equivalent to runtime "instanceof" operator.
-     * 
+     *
      * @return true, if clazz is an instance of super_class
      * @throws ClassNotFoundException if any superclasses or superinterfaces of clazz can't be found
      */

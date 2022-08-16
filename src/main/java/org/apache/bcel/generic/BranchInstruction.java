@@ -68,7 +68,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
 
     /**
      * Common super constructor
-     * 
+     *
      * @param opcode Instruction opcode
      * @param target instruction to branch to
      */
@@ -97,7 +97,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
 
     /**
      * Dump instruction as byte code to stream out.
-     * 
+     *
      * @param out Output stream
      */
     @Override
@@ -185,7 +185,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
 
     /**
      * Set branch target
-     * 
+     *
      * @param target branch target
      */
     public void setTarget(final InstructionHandle target) {

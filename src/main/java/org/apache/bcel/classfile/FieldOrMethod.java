@@ -71,7 +71,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
     /**
      * Construct object from file stream.
-     * 
+     *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      */
@@ -87,7 +87,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
 
     /**
      * Construct object from file stream.
-     * 
+     *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      * @deprecated (6.0) Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
@@ -192,7 +192,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * Hunts for a signature attribute on the member and returns its contents. So where the 'regular' signature may be
      * (Ljava/util/Vector;)V the signature attribute may in fact say 'Ljava/lang/Vector&lt;Ljava/lang/String&gt;;' Coded for
      * performance - searches for the attribute only when requested - only searches for it once.
-     * 
+     *
      * @since 6.0
      */
     public final String getGenericSignature() {

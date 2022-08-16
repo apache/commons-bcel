@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * I2L - Convert int to long
- * 
+ *
  * <PRE>
  * Stack: ..., value -&gt; ..., result.word1, result.word2
  * </PRE>

@@ -535,7 +535,7 @@ public class InstructionFactory implements InstructionConstants {
 
     /**
      * Uses PUSH to push a constant value onto the stack.
-     * 
+     *
      * @param value must be of type Number, Boolean, Character or String
      */
     public Instruction createConstant(final Object value) {
@@ -670,7 +670,7 @@ public class InstructionFactory implements InstructionConstants {
 
     /**
      * Create new array of given size and type.
-     * 
+     *
      * @return an instruction that creates the corresponding array at runtime, i.e. is an AllocationInstruction
      */
     public Instruction createNewArray(final Type t, final short dim) {

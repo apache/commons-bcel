@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * ISHL - Arithmetic shift left int
- * 
+ *
  * <PRE>
  * Stack: ..., value1, value2 -&gt; ..., result
  * </PRE>

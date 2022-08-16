@@ -73,7 +73,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
 
     static public int AddOp() throws ParseException {
         Token t = null;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
         case PLUS:
             t = jj_consume_token(PLUS);
             break;
@@ -98,7 +98,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
 
     static public int CmpOp() throws ParseException {
         Token t = null;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
         case EQ:
             t = jj_consume_token(EQ);
             break;
@@ -137,7 +137,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
         if (jj_2_1(2)) {
             expr_token = FunAppl();
         } else {
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
             case FALSE:
             case TRUE:
             case READ:
@@ -173,7 +173,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
         int kind = -1;
         int un_op = -1;
         try {
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
             case 10:
                 IfExpr();
                 break;
@@ -188,7 +188,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             case IDENT:
             case INTEGER:
                 Term();
-                switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
                 case OR:
                 case PLUS:
                 case MINUS:
@@ -254,7 +254,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
         int kind = -1;
         try {
             Element();
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
             case GT:
             case LT:
             case GEQ:
@@ -317,7 +317,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             t = Ident();
             jjtn000.setPosition(t.beginLine, t.beginColumn);
             jj_consume_token(LPAREN);
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
             case 10:
             case 14:
             case NOT:
@@ -331,7 +331,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             case INTEGER:
                 Expr();
                 label_4: while (true) {
-                    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                    switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
                     case COMMA:
                         break;
                     default:
@@ -404,7 +404,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             jjtn000.setPosition(t.beginLine, t.beginColumn);
             Ident();
             jj_consume_token(LPAREN);
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
             case FALSE:
             case TRUE:
             case READ:
@@ -412,7 +412,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             case IDENT:
                 Ident();
                 label_2: while (true) {
-                    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                    switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
                     case COMMA:
                         break;
                     default:
@@ -476,10 +476,10 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
         for (int i = 0; i < 17; i++) {
             if (jj_la1[i] == jj_gen) {
                 for (int j = 0; j < 32; j++) {
-                    if ((jj_la1_0[i] & (1 << j)) != 0) {
+                    if ((jj_la1_0[i] & 1 << j) != 0) {
                         la1tokens[j] = true;
                     }
-                    if ((jj_la1_1[i] & (1 << j)) != 0) {
+                    if ((jj_la1_1[i] & 1 << j) != 0) {
                         la1tokens[32 + j] = true;
                     }
                 }
@@ -533,7 +533,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
         jjtreeOpenNodeScope(jjtn000);
         Token t;
         try {
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
             case TRUE:
                 t = jj_consume_token(TRUE);
                 break;
@@ -590,7 +590,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             Expr();
             jj_consume_token(11);
             Expr();
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
             case 12:
                 jj_consume_token(12);
                 Expr();
@@ -674,7 +674,6 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             return true;
         }
         if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-            return false;
         }
         return false;
     }
@@ -684,7 +683,6 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             return true;
         }
         if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-            return false;
         }
         return false;
     }
@@ -694,7 +692,6 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             return true;
         }
         if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-            return false;
         }
         return false;
     }
@@ -710,7 +707,6 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             return true;
         }
         if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-            return false;
         }
         return false;
     }
@@ -730,19 +726,14 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
                             return true;
                         }
                         if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-                            return false;
                         }
                     } else if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-                        return false;
                     }
                 } else if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-                    return false;
                 }
             } else if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-                return false;
             }
         } else if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-            return false;
         }
         return false;
     }
@@ -752,7 +743,6 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             return true;
         }
         if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-            return false;
         }
         return false;
     }
@@ -762,7 +752,6 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             return true;
         }
         if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-            return false;
         }
         return false;
     }
@@ -772,7 +761,6 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             return true;
         }
         if (jj_la == 0 && jj_scanpos == jj_lastpos) {
-            return false;
         }
         return false;
     }
@@ -790,7 +778,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
             }
             boolean exists = false;
             for (final int[] j : jj_expentries) {
-                final int[] oldentry = (j);
+                final int[] oldentry = j;
                 if (oldentry.length == jj_expentry.length) {
                     exists = true;
                     for (int i = 0; i < jj_expentry.length; i++) {
@@ -844,9 +832,9 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
 
     static private int jj_ntk() {
         if ((jj_nt = token.next) == null) {
-            return (jj_ntk = (token.next = MiniParserTokenManager.getNextToken()).kind);
+            return jj_ntk = (token.next = MiniParserTokenManager.getNextToken()).kind;
         }
-        return (jj_ntk = jj_nt.kind);
+        return jj_ntk = jj_nt.kind;
     }
 
     static private void jj_rescan_token() {
@@ -905,7 +893,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
                 jj_add_error_token(kind, i);
             }
         }
-        return (jj_scanpos.kind != kind);
+        return jj_scanpos.kind != kind;
     }
 
     final static void jjtreeCloseNodeScope(final Node n) {
@@ -929,7 +917,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
                 Ident();
                 jj_consume_token(ASSIGN);
                 Expr();
-                switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
                 case FALSE:
                 case TRUE:
                 case READ:
@@ -979,7 +967,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
 
     static public int MultOp() throws ParseException {
         Token t = null;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
         case MULT:
             t = jj_consume_token(MULT);
             break;
@@ -1016,7 +1004,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
         jjtreeOpenNodeScope(jjtn000);
         try {
             label_1: while (true) {
-                switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
                 case 9:
                     break;
                 default:
@@ -1099,7 +1087,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
         int kind = -1;
         try {
             Factor();
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
             case AND:
             case MULT:
             case MOD:
@@ -1151,7 +1139,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
 
     static final public int UnOp() throws ParseException {
         Token t = null;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        switch (jj_ntk == -1 ? jj_ntk() : jj_ntk) {
         case MINUS:
             t = jj_consume_token(MINUS);
             break;

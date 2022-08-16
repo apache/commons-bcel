@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * DSTORE - Store double into local variable
- * 
+ *
  * <pre>
  * Stack: ..., value.word1, value.word2 -&gt; ...
  * </PRE>
@@ -36,7 +36,7 @@ public class DSTORE extends StoreInstruction {
 
     /**
      * Store double into local variable
-     * 
+     *
      * @param n index of local variable
      */
     public DSTORE(final int n) {

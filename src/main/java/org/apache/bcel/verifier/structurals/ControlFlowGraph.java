@@ -164,7 +164,7 @@ public class ControlFlowGraph {
          * with "inFrame". The execPreds ArrayList must contain the InstructionContext objects executed so far in the correct
          * order. This is just one execution path [out of many]. This is needed to correctly "merge" in the special case of a
          * RET's successor. <B>The InstConstraintVisitor and ExecutionVisitor instances must be set up correctly.</B>
-         * 
+         *
          * @return true - if and only if the "outgoing" frame situation changed from the one before execute()ing.
          */
         @Override
@@ -379,7 +379,7 @@ public class ControlFlowGraph {
 
     /**
      * A Control Flow Graph; with additional JustIce checks
-     * 
+     *
      * @param method_gen the method generator instance
      */
     public ControlFlowGraph(final MethodGen method_gen) {
@@ -388,7 +388,7 @@ public class ControlFlowGraph {
 
     /**
      * A Control Flow Graph.
-     * 
+     *
      * @param method_gen the method generator instance
      * @param enableJustIceCheck if true, additional JustIce checks are performed
      * @since 6.0

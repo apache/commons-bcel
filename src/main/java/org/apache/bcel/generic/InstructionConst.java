@@ -282,7 +282,7 @@ public final class InstructionConst {
 
     /**
      * Gets the Instruction.
-     * 
+     *
      * @param index the index, e.g. {@link Const#RETURN}
      * @return the entry from the private INSTRUCTIONS table
      */

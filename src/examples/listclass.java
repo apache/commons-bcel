@@ -39,7 +39,7 @@ import org.apache.bcel.classfile.Method;
  * <pre>
  * java listclass [-constants] [-code] [-brief] [-dependencies] [-nocontents] [-recurse] class... [-exclude <list>]
  * </pre>
- * 
+ *
  * where
  * <ul>
  * <li>{@code -code} List byte code of methods</li>
@@ -63,26 +63,26 @@ import org.apache.bcel.classfile.Method;
  * <p>
  * Here's a couple examples of how I typically use listclass:
  * </p>
- * 
+ *
  * <pre>
  * java listclass -code MyClass
  * </pre>
- * 
+ *
  * Print information about the class and the byte code of the methods
- * 
+ *
  * <pre>
  * java listclass -nocontents -dependencies MyClass
  * </pre>
- * 
+ *
  * Print a list of all classes which MyClass depends on.
- * 
+ *
  * <pre>
  * java listclass -nocontents -recurse MyClass -exclude java. javax. sun.
  * </pre>
- * 
+ *
  * Print a recursive listing of all classes which MyClass depends on. Do not analyze classes beginning with "java.",
  * "javax.", or "sun.".
- * 
+ *
  * <pre>
  * java listclass -nocontents -dependencies -recurse MyClass -exclude java.javax. sun.
  * </pre>
@@ -236,7 +236,7 @@ public class listclass {
         try {
             JavaClass javaClass;
 
-            if ((listedClasses.get(name) != null) || name.startsWith("[")) {
+            if (listedClasses.get(name) != null || name.startsWith("[")) {
                 return;
             }
 

@@ -21,7 +21,7 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * NEW - Create new object
- * 
+ *
  * <PRE>
  * Stack: ... -&gt; ..., objectref
  * </PRE>

@@ -30,7 +30,7 @@ import org.apache.bcel.Constants;
  * LocalVariableTypeTable. The nomenclature used here may be a bit confusing; while the two items have the same layout
  * in a class file, a LocalVariableTable attribute contains a descriptor_index, not a signatureIndex. The
  * LocalVariableTypeTable attribute does have a signatureIndex.
- * 
+ *
  * @see org.apache.bcel.classfile.Utility for more details on the difference.
  *
  * @see LocalVariableTable
@@ -52,7 +52,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
 
     /**
      * Constructs object from file stream.
-     * 
+     *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      */

@@ -46,7 +46,7 @@ public class ObjectType extends ReferenceType {
 
     /**
      * Java Virtual Machine Specification edition 2, � 5.4.4 Access Control
-     * 
+     *
      * @throws ClassNotFoundException if the class referenced by this type can't be found
      */
     public boolean accessibleTo(final ObjectType accessor) throws ClassNotFoundException {
@@ -83,7 +83,7 @@ public class ObjectType extends ReferenceType {
 
     /**
      * If "this" doesn't reference a class, it references an interface or a non-existant entity.
-     * 
+     *
      * @deprecated (since 6.0) this method returns an inaccurate result if the class or interface referenced cannot be
      *             found: use referencesClassExact() instead
      */
@@ -99,7 +99,7 @@ public class ObjectType extends ReferenceType {
 
     /**
      * Return true if this type references a class, false if it references an interface.
-     * 
+     *
      * @return true if the type references a class, false if it references an interface
      * @throws ClassNotFoundException if the class or interface referenced by this type can't be found
      */
@@ -110,7 +110,7 @@ public class ObjectType extends ReferenceType {
 
     /**
      * If "this" doesn't reference an interface, it references a class or a non-existant entity.
-     * 
+     *
      * @deprecated (since 6.0) this method returns an inaccurate result if the class or interface referenced cannot be
      *             found: use referencesInterfaceExact() instead
      */
@@ -126,7 +126,7 @@ public class ObjectType extends ReferenceType {
 
     /**
      * Return true if this type references an interface, false if it references a class.
-     * 
+     *
      * @return true if the type references an interface, false if it references a class
      * @throws ClassNotFoundException if the class or interface referenced by this type can't be found
      */
@@ -137,7 +137,7 @@ public class ObjectType extends ReferenceType {
 
     /**
      * Return true if this type is a subclass of given ObjectType.
-     * 
+     *
      * @throws ClassNotFoundException if any of this class's superclasses can't be found
      */
     public boolean subclassOf(final ObjectType superclass) throws ClassNotFoundException {

@@ -37,7 +37,7 @@ public final class LineNumberTable extends Attribute {
 
     /**
      * Construct object from input stream.
-     * 
+     *
      * @param name_index Index of name
      * @param length Content length in bytes
      * @param input Input stream
@@ -55,11 +55,11 @@ public final class LineNumberTable extends Attribute {
 
     /*
      * @param name_index Index of name
-     * 
+     *
      * @param length Content length in bytes
-     * 
+     *
      * @param lineNumberTable Table of line/numbers pairs
-     * 
+     *
      * @param constant_pool Array of constants
      */
     public LineNumberTable(final int name_index, final int length, final LineNumber[] line_number_table, final ConstantPool constant_pool) {

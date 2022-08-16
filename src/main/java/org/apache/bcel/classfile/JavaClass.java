@@ -42,7 +42,7 @@ import org.apache.commons.lang3.ArrayUtils;
  * .class file. See <a href="https://docs.oracle.com/javase/specs/">JVM specification</a> for details. The intent of
  * this class is to represent a parsed or otherwise existing class file. Those interested in programmatically generating
  * classes should see the <a href="../generic/ClassGen.html">ClassGen</a> class.
- * 
+ *
  * @see org.apache.bcel.generic.ClassGen
  */
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
@@ -241,7 +241,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /**
      * Return the natural ordering of two JavaClasses. This ordering is based on the class name
-     * 
+     *
      * @since 6.0
      */
     @Override

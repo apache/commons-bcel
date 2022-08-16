@@ -51,7 +51,7 @@ public final class StackMapType implements Cloneable {
 
     /**
      * Construct object from file stream.
-     * 
+     *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      */

@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * DUP - Duplicate top operand stack word
- * 
+ *
  * <PRE>
  * Stack: ..., word -&gt; ..., word, word
  * </PRE>

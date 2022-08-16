@@ -55,7 +55,7 @@ public final class CodeException implements Cloneable, Node, Constants {
 
     /**
      * Construct object from file stream.
-     * 
+     *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      */

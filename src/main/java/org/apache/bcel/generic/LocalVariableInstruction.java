@@ -67,7 +67,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
     /**
      * Dump instruction as byte code to stream out.
-     * 
+     *
      * @param out Output stream
      */
     @Override
@@ -104,7 +104,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * Returns the type associated with the instruction - in case of ALOAD or ASTORE Type.OBJECT is returned. This is just a
      * bit incorrect, because ALOAD and ASTORE may work on every ReferenceType (including Type.NULL) and ASTORE may even
      * work on a ReturnaddressType .
-     * 
+     *
      * @return type associated with the instruction
      */
     @Override
@@ -132,7 +132,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
     /**
      * Read needed data (e.g. index) from file.
-     * 
+     *
      * <pre>
      * (ILOAD &lt;= tag &lt;= ALOAD_3) || (ISTORE &lt;= tag &lt;= ASTORE_3)
      * </pre>
@@ -147,11 +147,12 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
             if (_opcode >= Const.ILOAD && _opcode <= Const.ALOAD || _opcode >= Const.ISTORE && _opcode <= Const.ASTORE) {
                 n = bytes.readUnsignedByte();
                 super.setLength(2);
-            } else if (_opcode <= Const.ALOAD_3) { // compact load instruction such as ILOAD_2
-                n = (_opcode - Const.ILOAD_0) % 4;
-                super.setLength(1);
-            } else { // Assert ISTORE_0 <= tag <= ASTORE_3
-                n = (_opcode - Const.ISTORE_0) % 4;
+            } else {
+                if (_opcode <= Const.ALOAD_3) { // compact load instruction such as ILOAD_2
+                    n = (_opcode - Const.ILOAD_0) % 4;
+                } else { // Assert ISTORE_0 <= tag <= ASTORE_3
+                    n = (_opcode - Const.ISTORE_0) % 4;
+                }
                 super.setLength(1);
             }
         }
@@ -159,7 +160,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
     /**
      * Set the local variable index. also updates opcode and length TODO Why?
-     * 
+     *
      * @see #setIndexOnly(int)
      */
     @Override
@@ -184,7 +185,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
     /**
      * Sets the index of the referenced variable (n) only
-     * 
+     *
      * @since 6.0
      * @see #setIndex(int)
      */

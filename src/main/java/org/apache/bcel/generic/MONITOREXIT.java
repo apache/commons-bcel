@@ -21,7 +21,7 @@ import org.apache.bcel.ExceptionConst;
 
 /**
  * MONITOREXIT - Exit monitor for object
- * 
+ *
  * <PRE>
  * Stack: ..., objectref -&gt; ...
  * </PRE>

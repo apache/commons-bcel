@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * D2F - Convert double to float
- * 
+ *
  * <PRE>
  * Stack: ..., value.word1, value.word2 -&gt; ..., result
  * </PRE>

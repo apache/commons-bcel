@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * ISTORE - Store int from stack into local variable
- * 
+ *
  * <PRE>
  * Stack: ..., value -&gt; ...
  * </PRE>
@@ -36,7 +36,7 @@ public class ISTORE extends StoreInstruction {
 
     /**
      * Store int into local variable
-     * 
+     *
      * @param n index of local variable
      */
     public ISTORE(final int n) {

@@ -62,7 +62,7 @@ public abstract class AbstractTestCase {
     public SyntheticRepository createRepos(final String cpentry) {
         try (ClassPath cp = new ClassPath("target" + File.separator + "testdata" + File.separator + cpentry + File.separator)) {
             return SyntheticRepository.getInstance(cp);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new UncheckedIOException(e);
         }
     }
@@ -147,7 +147,7 @@ public abstract class AbstractTestCase {
 
     /**
      * Delete a file under the TESTDATA directory
-     * 
+     *
      * @param name
      * @return
      */
@@ -157,7 +157,7 @@ public abstract class AbstractTestCase {
 
     /**
      * Delete a directory and file under the TESTDATA directory
-     * 
+     *
      * @param dir
      * @param name
      * @return true if the file was deleted

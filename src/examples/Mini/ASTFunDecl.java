@@ -51,7 +51,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
     private static final InstructionFinder.CodeConstraint my_constraint = match -> {
         final BranchInstruction if_icmp = (BranchInstruction) match[0].getInstruction();
         final GOTO goto_ = (GOTO) match[2].getInstruction();
-        return (if_icmp.getTarget() == match[3]) && (goto_.getTarget() == match[4]);
+        return if_icmp.getTarget() == match[3] && goto_.getTarget() == match[4];
     };
     /*
      * Used to simpulate stack with local vars and compute maximum stack size.
@@ -96,7 +96,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
         for (final Iterator<InstructionHandle[]> it = f.search(pat, my_constraint); it.hasNext();) {
             final InstructionHandle[] match = it.next();
             // Everything ok, update code
-            final BranchInstruction ifeq = (BranchInstruction) (match[4].getInstruction());
+            final BranchInstruction ifeq = (BranchInstruction) match[4].getInstruction();
             final BranchHandle if_icmp = (BranchHandle) match[0];
 
             if_icmp.setTarget(ifeq.getTarget());
@@ -112,7 +112,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
                     final InstructionTargeter[] targeters = target.getTargeters();
 
                     for (final InstructionTargeter targeter : targeters) {
-                        if ((target != match[4]) || (targeter != match[2])) {
+                        if (target != match[4] || targeter != match[2]) {
                             System.err.println("Unexpected: " + e);
                         }
                     }
@@ -122,7 +122,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
     }
 
     static String pop() {
-        return "_s" + (--size);
+        return "_s" + --size;
     }
 
     /**
@@ -364,7 +364,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
         final int expected = name.getType(); // Maybe other function has already called us
         type = body.eval(expected); // And updated the env
 
-        if ((expected != T_UNKNOWN) && (type != expected)) {
+        if (expected != T_UNKNOWN && type != expected) {
             MiniC.addError(line, column, "Function f ist not of type " + TYPE_NAMES[expected] + " as previously assumed, but " + TYPE_NAMES[type]);
         }
 

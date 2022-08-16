@@ -19,7 +19,7 @@ package org.apache.bcel;
 
 /**
  * Exception constants.
- * 
+ *
  * @since 6.0 (intended to replace the InstructionConstant interface)
  */
 public final class ExceptionConst {
@@ -97,7 +97,7 @@ public final class ExceptionConst {
 
     /**
      * Creates a copy of the specified Exception Class array combined with any additional Exception classes.
-     * 
+     *
      * @param type the basic array type
      * @param extraClasses additional classes, if any
      * @return the merged array

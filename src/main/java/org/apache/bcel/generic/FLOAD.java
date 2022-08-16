@@ -19,7 +19,7 @@ package org.apache.bcel.generic;
 
 /**
  * FLOAD - Load float from local variable
- * 
+ *
  * <PRE>
  * Stack ... -&gt; ..., result
  * </PRE>
@@ -36,7 +36,7 @@ public class FLOAD extends LoadInstruction {
 
     /**
      * Load float from local variable
-     * 
+     *
      * @param n index of local variable
      */
     public FLOAD(final int n) {

@@ -172,7 +172,7 @@ public class MiniC implements org.apache.bcel.Constants {
                     }
                 }
 
-                if ((!errors.isEmpty()) || (!warnings.isEmpty())) {
+                if (!errors.isEmpty() || !warnings.isEmpty()) {
                     System.out.println(errors.size() + " errors and " + warnings.size() + " warnings.");
                 }
             }
