@@ -45,7 +45,11 @@ import org.apache.bcel.generic.Type;
  */
 public class ASTProgram extends SimpleNode
 implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constants {
+  public static Node jjtCreate(final MiniParser p, final int id) {
+    return new ASTProgram(p, id);
+  }
   private ASTFunDecl[] fun_decls; // Children: Function declarations
+
   private Environment  env;       // Environment contains variables and functions
 
   ASTProgram(final int id) {
@@ -79,125 +83,6 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
 
   ASTProgram(final MiniParser p, final int id) {
     super(p, id);
-  }
-
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTProgram(p, id);
-  }
-
-  /**
-   * Overrides SimpleNode.closeNode().
-   * Cast children to appropiate type.
-   */
-  @Override
-  public void closeNode() {
-    if(children != null) { // Non-empty program ?
-      fun_decls = new ASTFunDecl[children.length];
-      System.arraycopy(children, 0, fun_decls, 0, children.length);
-      children=null; // Throw away old reference
-    }
-  }
-
-  /**
-   * First pass of parse tree.
-   *
-   * Put everything into the environment, which is copied appropiately to each
-   * recursion level, i.e. each FunDecl gets its own copy that it can further
-   * manipulate.
-   *
-   * Checks for name clashes of function declarations.
-   */
-  public ASTProgram traverse() {
-    ASTFunDecl f;
-    ASTIdent   name;
-    String     fname;
-    EnvEntry   fun;
-    Function   main=null;
-
-    if(fun_decls != null) {
-      // Put function names into hash table aka. environment
-      for (final ASTFunDecl fun_decl : fun_decls) {
-        f     = fun_decl;
-        name  = f.getName();
-        fname = name.getName();
-        fun   = env.get(fname); // Lookup in env
-
-        if(fun != null) {
-        MiniC.addError(f.getLine(), f.getColumn(),
-                         "Redeclaration of " + fun + ".");
-    } else {
-        env.put(new Function(name, null)); // `args' will be set by FunDecl.traverse()
-    }
-
-
-      }
-
-      // Go for it
-      for(int i=0; i < fun_decls.length; i++) {
-        fun_decls[i] = fun_decls[i].traverse((Environment)env.clone());
-
-        // Look for `main' routine
-        fname = fun_decls[i].getName().getName();
-        if(fname.equals("main")) {
-        main = (Function)env.get(fname);
-    }
-      }
-
-      if(main == null) {
-        MiniC.addError(0, 0, "You didn't declare a `main' function.");
-    } else if(main.getNoArgs() != 0) {
-        MiniC.addError(main.getLine(), main.getColumn(),
-                        "Main function has too many arguments declared.");
-    }
-    }
-
-    return this;
-  }
-
-  /**
-   * Second pass, determine type of each node, if possible.
-   */
-  public void eval(final int pass) {
-
-    for (final ASTFunDecl fun_decl : fun_decls) {
-      fun_decl.eval(pass);
-
-      if(pass == 3) { // Final check for unresolved types
-        final ASTIdent name = fun_decl.getName();
-
-        if(name.getType() == T_UNKNOWN) {
-        MiniC.addError(name.getColumn(), name.getLine(),
-                         "Type of function " + name.getName() +
-                         " can not be determined (infinite recursion?).");
-    }
-      }
-    }
-  }
-
-  /**
-   * Fifth pass, produce Java code.
-   */
-  public void code(final PrintWriter out, final String name) {
-    out.println("import java.io.BufferedReader;");
-    out.println("import java.io.InputStreamReader;");
-    out.println("import java.io.IOException;\n");
-
-    out.println("public final class " + name + " {");
-    out.println("  private static BufferedReader _in = new BufferedReader" +
-                "(new InputStreamReader(System.in));\n");
-
-    out.println("  private static int _readInt() throws IOException {\n" +
-                "    System.out.print(\"Please enter a number> \");\n" +
-                "    return Integer.parseInt(_in.readLine());\n  }\n");
-
-    out.println("  private static int _writeInt(int n) {\n" +
-                "    System.out.println(\"Result: \" + n);\n    return 0;\n  }\n");
-
-    for (final ASTFunDecl fun_decl : fun_decls) {
-        fun_decl.code(out);
-    }
-
-    out.println("}");
   }
 
   /**
@@ -326,6 +211,45 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     }
   }
 
+  /**
+   * Overrides SimpleNode.closeNode().
+   * Cast children to appropiate type.
+   */
+  @Override
+  public void closeNode() {
+    if(children != null) { // Non-empty program ?
+      fun_decls = new ASTFunDecl[children.length];
+      System.arraycopy(children, 0, fun_decls, 0, children.length);
+      children=null; // Throw away old reference
+    }
+  }
+
+  /**
+   * Fifth pass, produce Java code.
+   */
+  public void code(final PrintWriter out, final String name) {
+    out.println("import java.io.BufferedReader;");
+    out.println("import java.io.InputStreamReader;");
+    out.println("import java.io.IOException;\n");
+
+    out.println("public final class " + name + " {");
+    out.println("  private static BufferedReader _in = new BufferedReader" +
+                "(new InputStreamReader(System.in));\n");
+
+    out.println("  private static int _readInt() throws IOException {\n" +
+                "    System.out.print(\"Please enter a number> \");\n" +
+                "    return Integer.parseInt(_in.readLine());\n  }\n");
+
+    out.println("  private static int _writeInt(int n) {\n" +
+                "    System.out.println(\"Result: \" + n);\n    return 0;\n  }\n");
+
+    for (final ASTFunDecl fun_decl : fun_decls) {
+        fun_decl.code(out);
+    }
+
+    out.println("}");
+  }
+
   @Override
   public void dump(final String prefix) {
     System.out.println(toString(prefix));
@@ -333,5 +257,81 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     for (final ASTFunDecl fun_decl : fun_decls) {
         fun_decl.dump(prefix + " ");
     }
+  }
+
+  /**
+   * Second pass, determine type of each node, if possible.
+   */
+  public void eval(final int pass) {
+
+    for (final ASTFunDecl fun_decl : fun_decls) {
+      fun_decl.eval(pass);
+
+      if(pass == 3) { // Final check for unresolved types
+        final ASTIdent name = fun_decl.getName();
+
+        if(name.getType() == T_UNKNOWN) {
+        MiniC.addError(name.getColumn(), name.getLine(),
+                         "Type of function " + name.getName() +
+                         " can not be determined (infinite recursion?).");
+    }
+      }
+    }
+  }
+
+  /**
+   * First pass of parse tree.
+   *
+   * Put everything into the environment, which is copied appropiately to each
+   * recursion level, i.e. each FunDecl gets its own copy that it can further
+   * manipulate.
+   *
+   * Checks for name clashes of function declarations.
+   */
+  public ASTProgram traverse() {
+    ASTFunDecl f;
+    ASTIdent   name;
+    String     fname;
+    EnvEntry   fun;
+    Function   main=null;
+
+    if(fun_decls != null) {
+      // Put function names into hash table aka. environment
+      for (final ASTFunDecl fun_decl : fun_decls) {
+        f     = fun_decl;
+        name  = f.getName();
+        fname = name.getName();
+        fun   = env.get(fname); // Lookup in env
+
+        if(fun != null) {
+        MiniC.addError(f.getLine(), f.getColumn(),
+                         "Redeclaration of " + fun + ".");
+    } else {
+        env.put(new Function(name, null)); // `args' will be set by FunDecl.traverse()
+    }
+
+
+      }
+
+      // Go for it
+      for(int i=0; i < fun_decls.length; i++) {
+        fun_decls[i] = fun_decls[i].traverse((Environment)env.clone());
+
+        // Look for `main' routine
+        fname = fun_decls[i].getName().getName();
+        if(fname.equals("main")) {
+        main = (Function)env.get(fname);
+    }
+      }
+
+      if(main == null) {
+        MiniC.addError(0, 0, "You didn't declare a `main' function.");
+    } else if(main.getNoArgs() != 0) {
+        MiniC.addError(main.getLine(), main.getColumn(),
+                        "Main function has too many arguments declared.");
+    }
+    }
+
+    return this;
   }
 }

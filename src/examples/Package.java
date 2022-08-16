@@ -103,24 +103,60 @@ public class Package {
      */
     boolean log = false;
 
-    public void usage() {
-        System.out.println(" This program packages classes and all their dependents");
-        System.out.println(" into one jar. Give all starting classes (your main)");
-        System.out.println(" on the command line. Use / as separator, the .class is");
-        System.out.println(" optional. We use the environments CLASSPATH to resolve");
-        System.out.println(" classes. Anything but java.* packages are packaged.");
-        System.out.println(" If you use Class.forName (or similar), be sure to");
-        System.out.println(" include the classes that you load dynamically on the");
-        System.out.println(" command line.\n");
-        System.out.println(" These options are recognized:");
-        System.out.println(" -e -error  Show errors, meaning classes that could not ");
-        System.out.println("   resolved + the classes that referenced them.");
-        System.out.println(" -l -log  Show classes as they are processed. This will");
-        System.out.println("   include doubles, java classes and is difficult to");
-        System.out.println("   read. I use it as a sort of progress monitor");
-        System.out.println(" -s -show  Prints all the classes that were packaged");
-        System.out.println("   in alphabetical order, which is ordered by package");
-        System.out.println("   for the most part.");
+    /**
+     * add given class to dependents (from is where its dependent from)
+     * some fiddeling to be done because of array class notation
+     */
+    void addClassString(final String clas, final String from) throws IOException {
+        if (log) {
+            System.out.println("processing: " + clas + " referenced by " + from);
+        }
+
+        // must check if it's an arrary (start with "[")
+        if (clas.startsWith("[")) {
+            if (clas.length() == 2) {
+                // it's an array of built in type, ignore
+                return;
+            }
+            if ('L' == clas.charAt(1)) {
+                // it's an array of objects, the class name is between [L and ;
+                // like    [Ljava/lang/Object;
+                addClassString(clas.substring(2, clas.length() - 1), from);
+                return;
+            }
+            if ('[' == clas.charAt(1)) {
+                // it's an array of arrays, call recursive
+                addClassString(clas.substring(1), from);
+                return;
+            }
+            throw new IllegalArgumentException("Can't recognize class name =" + clas);
+        }
+
+        if (!clas.startsWith("java/") && allClasses.get(clas) == null) {
+            dependents.put(clas, from);
+            //      System.out.println("       yes" );
+        } else {
+            //      System.out.println("       no" );
+        }
+    }
+
+    /**
+     * Add this class to allClasses. Then go through all its dependents
+     * and add them to the dependents list if they are not in allClasses
+     */
+    void addDependents(final JavaClass clazz) throws IOException {
+        final String name = clazz.getClassName().replace('.', '/');
+        allClasses.put(name, clazz);
+        final ConstantPool pool = clazz.getConstantPool();
+        for (int i = 1; i < pool.getLength(); i++) {
+            final Constant cons = pool.getConstant(i);
+            //System.out.println("("+i+") " + cons );
+            if (cons != null && cons.getTag() == Constants.CONSTANT_Class) {
+                final int idx = ((ConstantClass) pool.getConstant(i)).getNameIndex();
+                final String clas = ((ConstantUtf8) pool.getConstant(idx)).getBytes();
+                addClassString(clas, name);
+            }
+        }
     }
 
     /**
@@ -222,59 +258,23 @@ public class Package {
         }
     }
 
-    /**
-     * Add this class to allClasses. Then go through all its dependents
-     * and add them to the dependents list if they are not in allClasses
-     */
-    void addDependents(final JavaClass clazz) throws IOException {
-        final String name = clazz.getClassName().replace('.', '/');
-        allClasses.put(name, clazz);
-        final ConstantPool pool = clazz.getConstantPool();
-        for (int i = 1; i < pool.getLength(); i++) {
-            final Constant cons = pool.getConstant(i);
-            //System.out.println("("+i+") " + cons );
-            if (cons != null && cons.getTag() == Constants.CONSTANT_Class) {
-                final int idx = ((ConstantClass) pool.getConstant(i)).getNameIndex();
-                final String clas = ((ConstantUtf8) pool.getConstant(idx)).getBytes();
-                addClassString(clas, name);
-            }
-        }
-    }
-
-    /**
-     * add given class to dependents (from is where its dependent from)
-     * some fiddeling to be done because of array class notation
-     */
-    void addClassString(final String clas, final String from) throws IOException {
-        if (log) {
-            System.out.println("processing: " + clas + " referenced by " + from);
-        }
-
-        // must check if it's an arrary (start with "[")
-        if (clas.startsWith("[")) {
-            if (clas.length() == 2) {
-                // it's an array of built in type, ignore
-                return;
-            }
-            if ('L' == clas.charAt(1)) {
-                // it's an array of objects, the class name is between [L and ;
-                // like    [Ljava/lang/Object;
-                addClassString(clas.substring(2, clas.length() - 1), from);
-                return;
-            }
-            if ('[' == clas.charAt(1)) {
-                // it's an array of arrays, call recursive
-                addClassString(clas.substring(1), from);
-                return;
-            }
-            throw new IllegalArgumentException("Can't recognize class name =" + clas);
-        }
-
-        if (!clas.startsWith("java/") && allClasses.get(clas) == null) {
-            dependents.put(clas, from);
-            //      System.out.println("       yes" );
-        } else {
-            //      System.out.println("       no" );
-        }
+    public void usage() {
+        System.out.println(" This program packages classes and all their dependents");
+        System.out.println(" into one jar. Give all starting classes (your main)");
+        System.out.println(" on the command line. Use / as separator, the .class is");
+        System.out.println(" optional. We use the environments CLASSPATH to resolve");
+        System.out.println(" classes. Anything but java.* packages are packaged.");
+        System.out.println(" If you use Class.forName (or similar), be sure to");
+        System.out.println(" include the classes that you load dynamically on the");
+        System.out.println(" command line.\n");
+        System.out.println(" These options are recognized:");
+        System.out.println(" -e -error  Show errors, meaning classes that could not ");
+        System.out.println("   resolved + the classes that referenced them.");
+        System.out.println(" -l -log  Show classes as they are processed. This will");
+        System.out.println("   include doubles, java classes and is difficult to");
+        System.out.println("   read. I use it as a sort of progress monitor");
+        System.out.println(" -s -show  Prints all the classes that were packaged");
+        System.out.println("   in alphabetical order, which is ordered by package");
+        System.out.println("   for the most part.");
     }
 }

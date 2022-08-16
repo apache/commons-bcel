@@ -57,10 +57,44 @@ import org.apache.bcel.generic.TABLESWITCH;
  *
  */
 public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
+    public static void main(final String[] argv) throws Exception {
+        JavaClass java_class;
+
+        if (argv.length == 0) {
+            System.err.println("disassemble: No input files specified");
+            return;
+        }
+
+        for (final String arg : argv) {
+            if ((java_class = Repository.lookupClass(arg)) == null) {
+                java_class = new ClassParser(arg).parse();
+            }
+
+            String class_name = java_class.getClassName();
+            final int index = class_name.lastIndexOf('.');
+            final String path = class_name.substring(0, index + 1).replace('.', File.separatorChar);
+            class_name = class_name.substring(index + 1);
+
+            if (!path.equals("")) {
+                final File f = new File(path);
+                f.mkdirs();
+            }
+
+            final String name = path + class_name + ".j";
+            final FileOutputStream out = new FileOutputStream(name);
+            new JasminVisitor(java_class, out).disassemble();
+            System.out.println("File dumped to: " + name);
+        }
+    }
     private final JavaClass clazz;
     private final PrintWriter out;
     private final String class_name;
+
     private final ConstantPoolGen cp;
+
+    private Method _method;
+
+    private Hashtable<InstructionHandle, String> map;
 
     public JasminVisitor(final JavaClass clazz, final OutputStream out) {
         this.clazz = clazz;
@@ -77,40 +111,10 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         out.close();
     }
 
-    @Override
-    public void visitJavaClass(final JavaClass clazz) {
-        out.println(";; Produced by JasminVisitor (BCEL)");
-        out.println(";; https://commons.apache.org/bcel/");
-        out.println(";; " + new Date() + "\n");
-
-        out.println(".source " + clazz.getSourceFileName());
-        out.println("." + Utility.classOrInterface(clazz.getAccessFlags()) + " " +
-                Utility.accessToString(clazz.getAccessFlags(), true) +
-                " " + clazz.getClassName().replace('.', '/'));
-        out.println(".super " + clazz.getSuperclassName().replace('.', '/'));
-
-        for (final String iface : clazz.getInterfaceNames()) {
-            out.println(".implements " + iface.replace('.', '/'));
-        }
-
-        out.print("\n");
+    private String get(final InstructionHandle ih) {
+        final String str = new StringTokenizer(map.get(ih), "\n").nextToken();
+        return str.substring(0, str.length() - 1);
     }
-
-    @Override
-    public void visitField(final Field field) {
-        out.print(".field " + Utility.accessToString(field.getAccessFlags()) +
-                " \"" + field.getName() + "\"" + field.getSignature());
-        if (field.getAttributes().length == 0) {
-            out.print("\n");
-        }
-    }
-
-    @Override
-    public void visitConstantValue(final ConstantValue cv) {
-        out.println(" = " + cv);
-    }
-
-    private Method _method;
 
     /**
      * Unfortunately Jasmin expects ".end method" after each method. Thus we've to check
@@ -125,41 +129,19 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         }
     }
 
-    @Override
-    public void visitDeprecated(final Deprecated attribute) {
-        printEndMethod(attribute);
-    }
+    private void put(final InstructionHandle ih, final String line) {
+        final String str = map.get(ih);
 
-    @Override
-    public void visitSynthetic(final Synthetic attribute) {
-        if (_method != null) {
-            printEndMethod(attribute);
+        if (str == null) {
+            map.put(ih, line);
+        } else {
+            if (line.startsWith("Label") || str.endsWith(line)) {
+                return;
+            }
+
+            map.put(ih, str + "\n" + line); // append
         }
     }
-
-    @Override
-    public void visitMethod(final Method method) {
-        this._method = method; // Remember for use in subsequent visitXXX calls
-
-        out.println("\n.method " + Utility.accessToString(_method.getAccessFlags()) +
-                " " + _method.getName() + _method.getSignature());
-
-        final Attribute[] attributes = _method.getAttributes();
-        if ((attributes == null) || (attributes.length == 0)) {
-            out.println(".end method");
-        }
-    }
-
-    @Override
-    public void visitExceptionTable(final ExceptionTable e) {
-        for (final String name : e.getExceptionNames()) {
-            out.println(".throws " + name.replace('.', '/'));
-        }
-
-        printEndMethod(e);
-    }
-
-    private Hashtable<InstructionHandle, String> map;
 
     @Override
     public void visitCode(final Code code) {
@@ -283,52 +265,70 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         printEndMethod(code);
     }
 
-    private String get(final InstructionHandle ih) {
-        final String str = new StringTokenizer(map.get(ih), "\n").nextToken();
-        return str.substring(0, str.length() - 1);
+    @Override
+    public void visitConstantValue(final ConstantValue cv) {
+        out.println(" = " + cv);
     }
 
-    private void put(final InstructionHandle ih, final String line) {
-        final String str = map.get(ih);
+    @Override
+    public void visitDeprecated(final Deprecated attribute) {
+        printEndMethod(attribute);
+    }
 
-        if (str == null) {
-            map.put(ih, line);
-        } else {
-            if (line.startsWith("Label") || str.endsWith(line)) {
-                return;
-            }
+    @Override
+    public void visitExceptionTable(final ExceptionTable e) {
+        for (final String name : e.getExceptionNames()) {
+            out.println(".throws " + name.replace('.', '/'));
+        }
 
-            map.put(ih, str + "\n" + line); // append
+        printEndMethod(e);
+    }
+
+    @Override
+    public void visitField(final Field field) {
+        out.print(".field " + Utility.accessToString(field.getAccessFlags()) +
+                " \"" + field.getName() + "\"" + field.getSignature());
+        if (field.getAttributes().length == 0) {
+            out.print("\n");
         }
     }
 
-    public static void main(final String[] argv) throws Exception {
-        JavaClass java_class;
+    @Override
+    public void visitJavaClass(final JavaClass clazz) {
+        out.println(";; Produced by JasminVisitor (BCEL)");
+        out.println(";; https://commons.apache.org/bcel/");
+        out.println(";; " + new Date() + "\n");
 
-        if (argv.length == 0) {
-            System.err.println("disassemble: No input files specified");
-            return;
+        out.println(".source " + clazz.getSourceFileName());
+        out.println("." + Utility.classOrInterface(clazz.getAccessFlags()) + " " +
+                Utility.accessToString(clazz.getAccessFlags(), true) +
+                " " + clazz.getClassName().replace('.', '/'));
+        out.println(".super " + clazz.getSuperclassName().replace('.', '/'));
+
+        for (final String iface : clazz.getInterfaceNames()) {
+            out.println(".implements " + iface.replace('.', '/'));
         }
 
-        for (final String arg : argv) {
-            if ((java_class = Repository.lookupClass(arg)) == null) {
-                java_class = new ClassParser(arg).parse();
-            }
+        out.print("\n");
+    }
 
-            String class_name = java_class.getClassName();
-            final int index = class_name.lastIndexOf('.');
-            final String path = class_name.substring(0, index + 1).replace('.', File.separatorChar);
-            class_name = class_name.substring(index + 1);
+    @Override
+    public void visitMethod(final Method method) {
+        this._method = method; // Remember for use in subsequent visitXXX calls
 
-            if (!path.equals("")) {
-                final File f = new File(path);
-                f.mkdirs();
-            }
+        out.println("\n.method " + Utility.accessToString(_method.getAccessFlags()) +
+                " " + _method.getName() + _method.getSignature());
 
-            final String name = path + class_name + ".j";
-            final FileOutputStream out = new FileOutputStream(name);
-            new JasminVisitor(java_class, out).disassemble();
-            System.out.println("File dumped to: " + name);
+        final Attribute[] attributes = _method.getAttributes();
+        if ((attributes == null) || (attributes.length == 0)) {
+            out.println(".end method");
+        }
+    }
+
+    @Override
+    public void visitSynthetic(final Synthetic attribute) {
+        if (_method != null) {
+            printEndMethod(attribute);
         }
     }
 }

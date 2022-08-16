@@ -82,15 +82,31 @@ import org.apache.bcel.classfile.Method;
  */
 public class listclass {
 
-    boolean code;
-    boolean constants;
-    boolean verbose;
-    boolean classDep;
-    boolean noContents;
-    boolean recurse;
-    Map<String, String> listedClasses;
-    List<String> excludeName;
+    public static String[] getClassDependencies(final ConstantPool pool) {
+        final String[] tempArray = new String[pool.getLength()];
+        int size = 0;
+        final StringBuilder buf = new StringBuilder();
 
+        for (int idx = 0; idx < pool.getLength(); idx++) {
+            final Constant c = pool.getConstant(idx);
+            if (c != null && c.getTag() == Constants.CONSTANT_Class) {
+                final ConstantUtf8 c1 = (ConstantUtf8) pool.getConstant(((ConstantClass) c).getNameIndex());
+                buf.setLength(0);
+                buf.append(c1.getBytes());
+                for (int n = 0; n < buf.length(); n++) {
+                    if (buf.charAt(n) == '/') {
+                        buf.setCharAt(n, '.');
+                    }
+                }
+
+                tempArray[size++] = buf.toString();
+            }
+        }
+
+        final String[] dependencies = new String[size];
+        System.arraycopy(tempArray, 0, dependencies, 0, size);
+        return dependencies;
+    }
     public static void main(final String[] argv) {
         final List<String> fileName = new ArrayList<>();
         final List<String> excludeName = new ArrayList<>();
@@ -156,6 +172,40 @@ public class listclass {
             }
         }
     }
+    /**
+     * Dump the list of classes this class is dependent on
+     */
+    public static void printClassDependencies(final ConstantPool pool) {
+        System.out.println("Dependencies:");
+        for (final String name : getClassDependencies(pool)) {
+            System.out.println("\t" + name);
+        }
+    }
+    /**
+     * Dump the disassembled code of all methods in the class.
+     */
+    public static void printCode(final Method[] methods, final boolean verbose) {
+        for (final Method method : methods) {
+            System.out.println(method);
+
+            final Code code = method.getCode();
+            if (code != null) {
+                System.out.println(code.toString(verbose));
+            }
+        }
+    }
+    boolean code;
+    boolean constants;
+    boolean verbose;
+    boolean classDep;
+
+    boolean noContents;
+
+    boolean recurse;
+
+    Map<String, String> listedClasses;
+
+    List<String> excludeName;
 
     public listclass(final boolean code, final boolean constants, final boolean verbose, final boolean classDep,
                      final boolean noContents, final boolean recurse, final List<String> excludeName) {
@@ -223,56 +273,6 @@ public class listclass {
             System.out.println("Error loading class " + name + " (" + e.getMessage() + ")");
         } catch (final Exception e) {
             System.out.println("Error processing class " + name + " (" + e.getMessage() + ")");
-        }
-    }
-
-    /**
-     * Dump the list of classes this class is dependent on
-     */
-    public static void printClassDependencies(final ConstantPool pool) {
-        System.out.println("Dependencies:");
-        for (final String name : getClassDependencies(pool)) {
-            System.out.println("\t" + name);
-        }
-    }
-
-    public static String[] getClassDependencies(final ConstantPool pool) {
-        final String[] tempArray = new String[pool.getLength()];
-        int size = 0;
-        final StringBuilder buf = new StringBuilder();
-
-        for (int idx = 0; idx < pool.getLength(); idx++) {
-            final Constant c = pool.getConstant(idx);
-            if (c != null && c.getTag() == Constants.CONSTANT_Class) {
-                final ConstantUtf8 c1 = (ConstantUtf8) pool.getConstant(((ConstantClass) c).getNameIndex());
-                buf.setLength(0);
-                buf.append(c1.getBytes());
-                for (int n = 0; n < buf.length(); n++) {
-                    if (buf.charAt(n) == '/') {
-                        buf.setCharAt(n, '.');
-                    }
-                }
-
-                tempArray[size++] = buf.toString();
-            }
-        }
-
-        final String[] dependencies = new String[size];
-        System.arraycopy(tempArray, 0, dependencies, 0, size);
-        return dependencies;
-    }
-
-    /**
-     * Dump the disassembled code of all methods in the class.
-     */
-    public static void printCode(final Method[] methods, final boolean verbose) {
-        for (final Method method : methods) {
-            System.out.println(method);
-
-            final Code code = method.getCode();
-            if (code != null) {
-                System.out.println(code.toString(verbose));
-            }
         }
     }
 }

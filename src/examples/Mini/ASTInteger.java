@@ -28,6 +28,10 @@ import org.apache.bcel.generic.PUSH;
  *
  */
 public class ASTInteger extends ASTExpr {
+  public static Node jjtCreate(final MiniParser p, final int id) {
+    return new ASTInteger(p, id);
+  }
+
   private int value;
 
   // Generated methods
@@ -39,27 +43,22 @@ public class ASTInteger extends ASTExpr {
     super(p, id);
   }
 
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTInteger(p, id);
-  }
-
   // closeNode, dump inherited from Expr
 
   /**
-   * @return identifier and line/column number of appearance
+   * Fifth pass, produce Java byte code.
    */
   @Override
-  public String toString() {
-    return super.toString() + " = " + value;
+  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
+    il.append(new PUSH(cp, value)); ASTFunDecl.push();
   }
 
   /**
-   * Overrides ASTExpr.traverse()
+   * Fourth pass, produce Java code.
    */
   @Override
-  public ASTExpr traverse(final Environment env) {
-    this.env = env;
-    return this; // Nothing to reduce/traverse here
+  public void code(final StringBuffer buf) {
+    ASTFunDecl.push(buf, "" + value);
   }
 
   /**
@@ -74,22 +73,23 @@ public class ASTInteger extends ASTExpr {
     return type = T_INT;
   }
 
-  /**
-   * Fourth pass, produce Java code.
-   */
-  @Override
-  public void code(final StringBuffer buf) {
-    ASTFunDecl.push(buf, "" + value);
-  }
-
-  /**
-   * Fifth pass, produce Java byte code.
-   */
-  @Override
-  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
-    il.append(new PUSH(cp, value)); ASTFunDecl.push();
-  }
+  int  getValue()          { return value; }
 
   void setValue(final int value) { this.value = value; }
-  int  getValue()          { return value; }
+
+  /**
+   * @return identifier and line/column number of appearance
+   */
+  @Override
+  public String toString() {
+    return super.toString() + " = " + value;
+  }
+  /**
+   * Overrides ASTExpr.traverse()
+   */
+  @Override
+  public ASTExpr traverse(final Environment env) {
+    this.env = env;
+    return this; // Nothing to reduce/traverse here
+  }
 }

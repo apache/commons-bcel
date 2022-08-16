@@ -30,7 +30,11 @@ import org.apache.bcel.generic.PUSH;
  *
  */
 public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
+  public static Node jjtCreate(final MiniParser p, final int id) {
+    return new ASTIdent(p, id);
+  }
   private String   name;
+
   private Variable reference; // Reference in environment to decl of this ident
 
   // Generated methods
@@ -40,10 +44,6 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
 
   ASTIdent(final MiniParser p, final int id) {
     super(p, id);
-  }
-
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTIdent(p, id);
   }
 
   public ASTIdent(final String name, final int type, final int line, final int column) {
@@ -56,30 +56,33 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
   // closeNode, dump inherited
 
   /**
-   * @return identifier and line/column number of appearance
+   * Fifth pass, produce Java byte code.
    */
   @Override
-  public String toString() {
-    return super.toString() + " = " + name;
+  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
+    if(name.equals("TRUE")) {
+        il.append(new PUSH(cp, 1));
+    } else if(name.equals("FALSE")) {
+        il.append(new PUSH(cp, 0));
+    } else {
+      final LocalVariableGen local_var = reference.getLocalVariable();
+      il.append(new ILOAD(local_var.getIndex()));
+    }
+    ASTFunDecl.push();
   }
 
   /**
-   * Overrides ASTExpr.traverse()
+   * Fourth pass, produce Java code.
    */
   @Override
-  public ASTExpr traverse(final Environment env) {
-    final EnvEntry entry = env.get(name);
-
-    if(entry == null) {
-        MiniC.addError(line, column, "Undeclared identifier " + name);
-    } else if(entry instanceof Function) {
-        MiniC.addError(line, column,
-                     "Function " + name + " used as an identifier.");
+  public void code(final StringBuffer buf) {
+    if(name.equals("TRUE")) {
+        ASTFunDecl.push(buf, "1");
+    } else if(name.equals("FALSE")) {
+        ASTFunDecl.push(buf, "0");
     } else {
-        reference = (Variable)entry;
+        ASTFunDecl.push(buf, name);
     }
-
-    return this; // Nothing to reduce/traverse further here
   }
 
   /**
@@ -108,37 +111,34 @@ public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
     return type;
   }
 
-  /**
-   * Fourth pass, produce Java code.
-   */
-  @Override
-  public void code(final StringBuffer buf) {
-    if(name.equals("TRUE")) {
-        ASTFunDecl.push(buf, "1");
-    } else if(name.equals("FALSE")) {
-        ASTFunDecl.push(buf, "0");
-    } else {
-        ASTFunDecl.push(buf, name);
-    }
-  }
-
-  /**
-   * Fifth pass, produce Java byte code.
-   */
-  @Override
-  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
-    if(name.equals("TRUE")) {
-        il.append(new PUSH(cp, 1));
-    } else if(name.equals("FALSE")) {
-        il.append(new PUSH(cp, 0));
-    } else {
-      final LocalVariableGen local_var = reference.getLocalVariable();
-      il.append(new ILOAD(local_var.getIndex()));
-    }
-    ASTFunDecl.push();
-  }
-
+  public String getName()            { return name; }
 
   public void   setName(final String name) { this.name = name; }
-  public String getName()            { return name; }
+
+
+  /**
+   * @return identifier and line/column number of appearance
+   */
+  @Override
+  public String toString() {
+    return super.toString() + " = " + name;
+  }
+  /**
+   * Overrides ASTExpr.traverse()
+   */
+  @Override
+  public ASTExpr traverse(final Environment env) {
+    final EnvEntry entry = env.get(name);
+
+    if(entry == null) {
+        MiniC.addError(line, column, "Undeclared identifier " + name);
+    } else if(entry instanceof Function) {
+        MiniC.addError(line, column,
+                     "Function " + name + " used as an identifier.");
+    } else {
+        reference = (Variable)entry;
+    }
+
+    return this; // Nothing to reduce/traverse further here
+  }
 }

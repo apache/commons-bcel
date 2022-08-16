@@ -38,49 +38,8 @@ public abstract class SimpleNode implements Node {
     parser = p;
   }
 
-  public void jjtOpen() {
-  }
-
-  public void jjtClose() {
-  }
-
   public void closeNode() {
   }
-
-  public void jjtSetParent(final Node n) { parent = n; }
-  public Node jjtGetParent() { return parent; }
-
-  public void jjtAddChild(final Node n, final int i) {
-    if (children == null) {
-      children = new Node[i + 1];
-    } else if (i >= children.length) {
-      final Node c[] = new Node[i + 1];
-      System.arraycopy(children, 0, c, 0, children.length);
-      children = c;
-    }
-    children[i] = n;
-  }
-
-  public Node jjtGetChild(final int i) {
-    return children[i];
-  }
-
-  public int jjtGetNumChildren() {
-    return (children == null) ? 0 : children.length;
-  }
-
-  /* You can override these two methods in subclasses of SimpleNode to
-     customize the way the node appears when the tree is dumped.  If
-     your output uses more than one line you should override
-     toString(String), otherwise overriding toString() is probably all
-     you need to do. */
-
-  @Override
-  public String toString() { return MiniParserTreeConstants.jjtNodeName[id]; }
-  public String toString(final String prefix) { return prefix + toString(); }
-
-  /* Override this method if you want to customize how the node dumps
-     out its children. */
 
   public void dump(final String prefix) {
     System.out.println(toString(prefix));
@@ -93,5 +52,46 @@ public abstract class SimpleNode implements Node {
       }
     }
   }
+
+  public void jjtAddChild(final Node n, final int i) {
+    if (children == null) {
+      children = new Node[i + 1];
+    } else if (i >= children.length) {
+      final Node c[] = new Node[i + 1];
+      System.arraycopy(children, 0, c, 0, children.length);
+      children = c;
+    }
+    children[i] = n;
+  }
+
+  public void jjtClose() {
+  }
+  public Node jjtGetChild(final int i) {
+    return children[i];
+  }
+
+  public int jjtGetNumChildren() {
+    return (children == null) ? 0 : children.length;
+  }
+
+  public Node jjtGetParent() { return parent; }
+
+  public void jjtOpen() {
+  }
+
+  /* You can override these two methods in subclasses of SimpleNode to
+     customize the way the node appears when the tree is dumped.  If
+     your output uses more than one line you should override
+     toString(String), otherwise overriding toString() is probably all
+     you need to do. */
+
+  public void jjtSetParent(final Node n) { parent = n; }
+  @Override
+  public String toString() { return MiniParserTreeConstants.jjtNodeName[id]; }
+
+  /* Override this method if you want to customize how the node dumps
+     out its children. */
+
+  public String toString(final String prefix) { return prefix + toString(); }
 }
 

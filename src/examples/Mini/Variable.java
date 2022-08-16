@@ -44,25 +44,25 @@ public class Variable implements EnvEntry {
   }
 
   @Override
+  public int      getColumn()  { return column; }
+
+  @Override
+  public String   getHashKey() { return var_name; }
+  @Override
+  public int      getLine()    { return line; }
+  LocalVariableGen getLocalVariable() { return local_var; }
+  public ASTIdent getName()    { return name; }
+  public int      getType()    { return name.getType(); }
+
+  void setLocalVariable(final LocalVariableGen local_var) {
+    this.local_var = local_var;
+  }
+  @Override
   public String toString() {
     if(!reserved) {
         return var_name + " declared at line " + line + ", column " + column;
     }
     return var_name + " <reserved key word>";
   }
-
-  public ASTIdent getName()    { return name; }
-  @Override
-  public String   getHashKey() { return var_name; }
-  @Override
-  public int      getLine()    { return line; }
-  @Override
-  public int      getColumn()  { return column; }
-  public int      getType()    { return name.getType(); }
-
-  void setLocalVariable(final LocalVariableGen local_var) {
-    this.local_var = local_var;
-  }
-  LocalVariableGen getLocalVariable() { return local_var; }
 }
 

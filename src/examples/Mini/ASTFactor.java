@@ -24,6 +24,10 @@ package Mini;
  *
  */
 public class ASTFactor extends ASTExpr {
+  public static Node jjtCreate(final MiniParser p, final int id) {
+    return new ASTFactor(p, id);
+  }
+
   // Generated methods
   ASTFactor(final int id) {
     super(id);
@@ -31,10 +35,6 @@ public class ASTFactor extends ASTExpr {
 
   ASTFactor(final MiniParser p, final int id) {
     super(p, id);
-  }
-
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTFactor(p, id);
   }
 
   // Inherited closeNode(), dump()

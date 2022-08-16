@@ -49,29 +49,42 @@ import org.apache.bcel.generic.PUSH;
 */
 public class ASTExpr extends SimpleNode
 implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constants {
+  public static Node jjtCreate(final MiniParser p, final int id) {
+    return new ASTExpr(p, id);
+  }
+  private static String toBool(final String i) {
+    return "(" + i + " != 0)";
+  }
+  private static String toInt(final String i) {
+    return "((" + i + ")? 1 : 0)";
+  }
   protected int         kind=-1;    // Single twig to leaf?
   private   int         unop=-1;    // Special case: Unary operand applied
   protected ASTExpr[]   exprs;      // Sub expressions
-  protected Environment env;        // Needed in all passes
+
+ protected Environment env;        // Needed in all passes
+
   protected int         line, column;
+
   protected boolean     is_simple;  // true, if simple expression like `12 + f(a)'
 
- /* Not all children shall inherit this, exceptions are ASTIdent and ASTFunAppl, which
+  /* Not all children shall inherit this, exceptions are ASTIdent and ASTFunAppl, which
   * look up the type in the corresponding environment entry.
   */
   protected int         type = T_UNKNOWN;
 
+  /* Special constructor, called from ASTTerm.traverse() and
+   * ASTFactor.traverse(), when traverse()ing the parse tree replace
+   * themselves with Expr nodes.
+   */
+  ASTExpr(final ASTExpr[] children, final int kind, final int line, final int column) {
+    this(line, column, kind, JJTEXPR);
+    exprs = children;
+  }
+
   // Generated methods
   ASTExpr(final int id) {
     super(id);
-  }
-
-  ASTExpr(final MiniParser p, final int id) {
-    super(p, id);
-  }
-
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTExpr(p, id);
   }
 
   ASTExpr(final int line, final int column, final int id) {
@@ -85,163 +98,8 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     this.kind = kind;
   }
 
-  /* Special constructor, called from ASTTerm.traverse() and
-   * ASTFactor.traverse(), when traverse()ing the parse tree replace
-   * themselves with Expr nodes.
-   */
-  ASTExpr(final ASTExpr[] children, final int kind, final int line, final int column) {
-    this(line, column, kind, JJTEXPR);
-    exprs = children;
-  }
-
-  /**
-   * @return name of node, its kind and the number of children.
-   */
-  @Override
-  public String toString() {
-    String op="";
-    final int    len = (children != null)? children.length : 0;
-    if(unop != -1) {
-        op = tokenImage[unop];
-    } else if(kind != -1) {
-        op = tokenImage[kind];
-    }
-
-    return jjtNodeName[id] + "(" + op + ")[" + len + "]<" +
-      TYPE_NAMES[type] + "> @" + line + ", " + column;
-  }
-
-  /**
-   * Overrides SimpleNode.closeNode(). Overridden by some subclasses.
-   *
-   * Called by the parser when the construction of this node is finished.
-   * Casts children Node[] to precise ASTExpr[] type.
-   */
-  @Override
-  public void closeNode() {
-    if(children != null) {
-      exprs = new ASTExpr[children.length];
-      System.arraycopy(children, 0, exprs, 0, children.length);
-      children=null; // Throw away old reference
-    }
-  }
-
-  /**
-   * First pass
-   * Overridden by subclasses. Traverse the whole parse tree recursively and
-   * drop redundant nodes.
-   */
-  public ASTExpr traverse(final Environment env) {
-    this.env = env;
-
-    if((kind == -1) && (unop == -1)) {
-        return exprs[0].traverse(env);  // --> Replaced by successor
-    }
-    for(int i=0; i < exprs.length; i++) {
-        exprs[i] = exprs[i].traverse(env); // References may change
-    }
-
-      return this;
-  }
-
-  /**
-   * Second and third pass
-   * @return type of expression
-   * @param expected type
-   */
-  public int eval(final int expected) {
-    int child_type = T_UNKNOWN, t;
-
-    is_simple = true;
-
-    // Determine expected node type depending on used operator.
-    if(unop != -1) {
-      if(unop == MINUS) {
-        child_type = type = T_INT;  // -
-    } else {
-        child_type = type = T_BOOLEAN; // !
-    }
-    } else // Compute expected type
-      if((kind == PLUS) || (kind == MINUS) || (kind == MULT) ||
-       (kind == MOD)  || (kind == DIV)) {
-        child_type = type = T_INT;
-    } else if((kind == AND) || (kind == OR)) {
-        child_type = type = T_BOOLEAN;
-    } else { // LEQ, GT, etc.
-        child_type = T_INT;
-        type       = T_BOOLEAN;
-      }
-
-    // Get type of subexpressions
-    for (final ASTExpr expr : exprs) {
-      t = expr.eval(child_type);
-
-      if(t != child_type) {
-        MiniC.addError(expr.getLine(), expr.getColumn(),
-                       "Expression has not expected type " + TYPE_NAMES[child_type] +
-                       " but " + TYPE_NAMES[t] + ".");
-    }
-
-      is_simple = is_simple && expr.isSimple();
-    }
-
-    return type;
-  }
-
-  private static String toBool(final String i) {
-    return "(" + i + " != 0)";
-  }
-
-  private static String toInt(final String i) {
-    return "((" + i + ")? 1 : 0)";
-  }
-
-  /**
-   * Fourth pass, produce Java code.
-   */
-  public void code(final StringBuffer buf) {
-    if(unop != -1) {
-      exprs[0].code(buf);
-      final String top = ASTFunDecl.pop();
-      if(unop == MINUS) {
-        ASTFunDecl.push(buf, "-" + top);
-    } else {
-        ASTFunDecl.push(buf, "(" + top + " == 1)? 0 : 1)");
-    }
-    }
-    else {
-      exprs[0].code(buf);
-      exprs[1].code(buf);
-      final String _body_int2 = ASTFunDecl.pop();
-      final String _body_int  = ASTFunDecl.pop();
-
-      switch(kind) {
-      case PLUS:  ASTFunDecl.push(buf, _body_int + " + " + _body_int2); break;
-      case MINUS: ASTFunDecl.push(buf, _body_int + " - " + _body_int2); break;
-      case MULT:  ASTFunDecl.push(buf, _body_int + " * " + _body_int2); break;
-      case DIV:   ASTFunDecl.push(buf, _body_int + " / " + _body_int2); break;
-
-      case AND:   ASTFunDecl.push(buf, toInt(toBool(_body_int) + " && " +
-              toBool(_body_int2))); break;
-      case OR:    ASTFunDecl.push(buf, toInt(toBool(_body_int) + " || " +
-              toBool(_body_int2))); break;
-
-      case EQ:    ASTFunDecl.push(buf, toInt(_body_int + " == " + _body_int2));
-        break;
-      case LEQ:   ASTFunDecl.push(buf, toInt(_body_int + " <= " + _body_int2));
-        break;
-      case GEQ:   ASTFunDecl.push(buf, toInt(_body_int + " >= " + _body_int2));
-        break;
-      case NEQ:   ASTFunDecl.push(buf, toInt(_body_int + " != " + _body_int2));
-        break;
-      case LT:    ASTFunDecl.push(buf, toInt(_body_int + " < " + _body_int2));
-        break;
-      case GT:    ASTFunDecl.push(buf, toInt(_body_int + " > " + _body_int2));
-        break;
-
-      default: System.err.println("Unhandled case: " + kind);
-      }
-    }
+  ASTExpr(final MiniParser p, final int id) {
+    super(p, id);
   }
 
   /**
@@ -297,20 +155,67 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
     }
   }
 
-  public boolean isSimple()         { return is_simple; }
-  public void setType(final int type)     { this.type = type; }
-  public int  getType()             { return type; }
-  public void setKind(final int kind)     { this.kind = kind; }
-  public int  getKind()             { return kind; }
-  public void setUnOp(final int unop)     { this.unop = unop; }
-  public int  getUnOp()             { return unop; }
-  public void setLine(final int line)     { this.line = line; }
-  public int  getLine()             { return line; }
-  public void setColumn(final int column) { this.column = column; }
-  public int  getColumn()           { return column; }
-  public void setPosition(final int line, final int column) {
-    this.line = line;
-    this.column = column;
+  /**
+   * Overrides SimpleNode.closeNode(). Overridden by some subclasses.
+   *
+   * Called by the parser when the construction of this node is finished.
+   * Casts children Node[] to precise ASTExpr[] type.
+   */
+  @Override
+  public void closeNode() {
+    if(children != null) {
+      exprs = new ASTExpr[children.length];
+      System.arraycopy(children, 0, exprs, 0, children.length);
+      children=null; // Throw away old reference
+    }
+  }
+
+  /**
+   * Fourth pass, produce Java code.
+   */
+  public void code(final StringBuffer buf) {
+    if(unop != -1) {
+      exprs[0].code(buf);
+      final String top = ASTFunDecl.pop();
+      if(unop == MINUS) {
+        ASTFunDecl.push(buf, "-" + top);
+    } else {
+        ASTFunDecl.push(buf, "(" + top + " == 1)? 0 : 1)");
+    }
+    }
+    else {
+      exprs[0].code(buf);
+      exprs[1].code(buf);
+      final String _body_int2 = ASTFunDecl.pop();
+      final String _body_int  = ASTFunDecl.pop();
+
+      switch(kind) {
+      case PLUS:  ASTFunDecl.push(buf, _body_int + " + " + _body_int2); break;
+      case MINUS: ASTFunDecl.push(buf, _body_int + " - " + _body_int2); break;
+      case MULT:  ASTFunDecl.push(buf, _body_int + " * " + _body_int2); break;
+      case DIV:   ASTFunDecl.push(buf, _body_int + " / " + _body_int2); break;
+
+      case AND:   ASTFunDecl.push(buf, toInt(toBool(_body_int) + " && " +
+              toBool(_body_int2))); break;
+      case OR:    ASTFunDecl.push(buf, toInt(toBool(_body_int) + " || " +
+              toBool(_body_int2))); break;
+
+      case EQ:    ASTFunDecl.push(buf, toInt(_body_int + " == " + _body_int2));
+        break;
+      case LEQ:   ASTFunDecl.push(buf, toInt(_body_int + " <= " + _body_int2));
+        break;
+      case GEQ:   ASTFunDecl.push(buf, toInt(_body_int + " >= " + _body_int2));
+        break;
+      case NEQ:   ASTFunDecl.push(buf, toInt(_body_int + " != " + _body_int2));
+        break;
+      case LT:    ASTFunDecl.push(buf, toInt(_body_int + " < " + _body_int2));
+        break;
+      case GT:    ASTFunDecl.push(buf, toInt(_body_int + " > " + _body_int2));
+        break;
+
+      default: System.err.println("Unhandled case: " + kind);
+      }
+    }
   }
 
   @Override
@@ -322,5 +227,100 @@ implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constan
             expr.dump(prefix + " ");
         }
     }
+  }
+
+  /**
+   * Second and third pass
+   * @return type of expression
+   * @param expected type
+   */
+  public int eval(final int expected) {
+    int child_type = T_UNKNOWN, t;
+
+    is_simple = true;
+
+    // Determine expected node type depending on used operator.
+    if(unop != -1) {
+      if(unop == MINUS) {
+        child_type = type = T_INT;  // -
+    } else {
+        child_type = type = T_BOOLEAN; // !
+    }
+    } else // Compute expected type
+      if((kind == PLUS) || (kind == MINUS) || (kind == MULT) ||
+       (kind == MOD)  || (kind == DIV)) {
+        child_type = type = T_INT;
+    } else if((kind == AND) || (kind == OR)) {
+        child_type = type = T_BOOLEAN;
+    } else { // LEQ, GT, etc.
+        child_type = T_INT;
+        type       = T_BOOLEAN;
+      }
+
+    // Get type of subexpressions
+    for (final ASTExpr expr : exprs) {
+      t = expr.eval(child_type);
+
+      if(t != child_type) {
+        MiniC.addError(expr.getLine(), expr.getColumn(),
+                       "Expression has not expected type " + TYPE_NAMES[child_type] +
+                       " but " + TYPE_NAMES[t] + ".");
+    }
+
+      is_simple = is_simple && expr.isSimple();
+    }
+
+    return type;
+  }
+
+  public int  getColumn()           { return column; }
+
+  public int  getKind()             { return kind; }
+  public int  getLine()             { return line; }
+  public int  getType()             { return type; }
+  public int  getUnOp()             { return unop; }
+  public boolean isSimple()         { return is_simple; }
+  public void setColumn(final int column) { this.column = column; }
+  public void setKind(final int kind)     { this.kind = kind; }
+  public void setLine(final int line)     { this.line = line; }
+  public void setPosition(final int line, final int column) {
+    this.line = line;
+    this.column = column;
+  }
+  public void setType(final int type)     { this.type = type; }
+  public void setUnOp(final int unop)     { this.unop = unop; }
+  /**
+   * @return name of node, its kind and the number of children.
+   */
+  @Override
+  public String toString() {
+    String op="";
+    final int    len = (children != null)? children.length : 0;
+    if(unop != -1) {
+        op = tokenImage[unop];
+    } else if(kind != -1) {
+        op = tokenImage[kind];
+    }
+
+    return jjtNodeName[id] + "(" + op + ")[" + len + "]<" +
+      TYPE_NAMES[type] + "> @" + line + ", " + column;
+  }
+
+  /**
+   * First pass
+   * Overridden by subclasses. Traverse the whole parse tree recursively and
+   * drop redundant nodes.
+   */
+  public ASTExpr traverse(final Environment env) {
+    this.env = env;
+
+    if((kind == -1) && (unop == -1)) {
+        return exprs[0].traverse(env);  // --> Replaced by successor
+    }
+    for(int i=0; i < exprs.length; i++) {
+        exprs[i] = exprs[i].traverse(env); // References may change
+    }
+
+      return this;
   }
 }

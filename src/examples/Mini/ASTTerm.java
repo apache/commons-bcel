@@ -24,6 +24,10 @@ package Mini;
  *
  */
 public class ASTTerm extends ASTExpr {
+  public static Node jjtCreate(final MiniParser p, final int id) {
+    return new ASTTerm(p, id);
+  }
+
   // Generated methods
   ASTTerm(final int id) {
     super(id);
@@ -31,10 +35,6 @@ public class ASTTerm extends ASTExpr {
 
   ASTTerm(final MiniParser p, final int id) {
     super(p, id);
-  }
-
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTTerm(p, id);
   }
 
   // Inherited closeNode(), dump()

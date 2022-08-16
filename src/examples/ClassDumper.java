@@ -63,6 +63,11 @@ class ClassDumper {
         this.file = file;
     }
 
+    private final String constantToString (final int index) {
+        final Constant c = constant_items[index];
+        return constant_pool.constantToString(c);
+    }
+
     /**
      * Parses the given Java class file and return an object that represents
      * the contained data, i.e., constants, methods, fields and commands.
@@ -104,66 +109,23 @@ class ClassDumper {
     }
 
     /**
-     * Checks whether the header of the file is ok.
-     * Of course, this has to be the first action on successive file reads.
+     * Processes information about the attributes of the class.
      * @throws  IOException
      * @throws  ClassFormatException
      */
-    private final void processID () throws IOException, ClassFormatException {
-        final int magic = file.readInt();
-        if (magic != Const.JVM_CLASSFILE_MAGIC) {
-            throw new ClassFormatException(file_name + " is not a Java .class file");
-        }
-        System.out.println("Java Class Dump");
-        System.out.println("  file: " + file_name);
-        System.out.printf("%nClass header:%n");
-        System.out.printf("  magic: %X%n", magic);
-    }
+    private final void processAttributes () throws IOException, ClassFormatException {
+        int attributes_count;
+        attributes_count = file.readUnsignedShort();
+        attributes = new Attribute[attributes_count];
 
-    /**
-     * Processes major and minor version of compiler which created the file.
-     * @throws  IOException
-     * @throws  ClassFormatException
-     */
-    private final void processVersion () throws IOException, ClassFormatException {
-        minor = file.readUnsignedShort();
-        System.out.printf("  minor version: %s%n", minor);
+        System.out.printf("%nAttributes(%d):%n", attributes_count);
 
-        major = file.readUnsignedShort();
-        System.out.printf("  major version: %s%n", major);
-    }
-
-    /**
-     * Processes constant pool entries.
-     * @throws  IOException
-     * @throws  ClassFormatException
-     */
-    private final void processConstantPool () throws IOException, ClassFormatException {
-        byte tag;
-        final int constant_pool_count = file.readUnsignedShort();
-        constant_items = new Constant[constant_pool_count];
-        constant_pool = new ConstantPool(constant_items);
-
-        // constant_pool[0] is unused by the compiler
-        System.out.printf("%nConstant pool(%d):%n", constant_pool_count - 1);
-
-        for (int i = 1; i < constant_pool_count; i++) {
-            constant_items[i] = Constant.readConstant(file);
-            // i'm sure there is a better way to do this
-            if (i < 10) {
-                System.out.printf("    #%1d = ", i);
-            } else if (i <100) {
-                System.out.printf("   #%2d = ", i);
-            } else {
-                System.out.printf("  #%d = ", i);
-            }
-            System.out.println(constant_items[i]);
-
-            // All eight byte constants take up two spots in the constant pool
-            tag = constant_items[i].getTag();
-            if ((tag == Const.CONSTANT_Double) ||
-                    (tag == Const.CONSTANT_Long)) {
-                i++;
+        for (int i = 0; i < attributes_count; i++) {
+            attributes[i] = Attribute.readAttribute(file, constant_pool);
+            // indent all lines by two spaces
+            final String[] lines = attributes[i].toString().split("\\r?\\n");
+            for (final String line : lines) {
+                System.out.println("  " + line);
             }
         }
     }
@@ -203,92 +165,36 @@ class ClassDumper {
     }
 
     /**
-     * Processes information about the interfaces implemented by this class.
+     * Processes constant pool entries.
      * @throws  IOException
      * @throws  ClassFormatException
      */
-    private final void processInterfaces () throws IOException, ClassFormatException {
-        int interfaces_count;
-        interfaces_count = file.readUnsignedShort();
-        interfaces = new int[interfaces_count];
+    private final void processConstantPool () throws IOException, ClassFormatException {
+        byte tag;
+        final int constant_pool_count = file.readUnsignedShort();
+        constant_items = new Constant[constant_pool_count];
+        constant_pool = new ConstantPool(constant_items);
 
-        System.out.printf("%nInterfaces(%d):%n", interfaces_count);
+        // constant_pool[0] is unused by the compiler
+        System.out.printf("%nConstant pool(%d):%n", constant_pool_count - 1);
 
-        for (int i = 0; i < interfaces_count; i++) {
-            interfaces[i] = file.readUnsignedShort();
+        for (int i = 1; i < constant_pool_count; i++) {
+            constant_items[i] = Constant.readConstant(file);
             // i'm sure there is a better way to do this
             if (i < 10) {
-                System.out.printf("   #%1d = ", i);
+                System.out.printf("    #%1d = ", i);
             } else if (i <100) {
-                System.out.printf("  #%2d = ", i);
+                System.out.printf("   #%2d = ", i);
             } else {
-                System.out.printf(" #%d = ", i);
+                System.out.printf("  #%d = ", i);
             }
-            System.out.println(interfaces[i] + " (" +
-                    constant_pool.getConstantString(interfaces[i],
-                            Const.CONSTANT_Class) + ")");
-        }
-    }
+            System.out.println(constant_items[i]);
 
-    /**
-     * Processes information about the fields of the class, i.e., its variables.
-     * @throws  IOException
-     * @throws  ClassFormatException
-     */
-    private final void processFields () throws IOException, ClassFormatException {
-        int fields_count;
-        fields_count = file.readUnsignedShort();
-        fields = new Field[fields_count];
-
-        // sometimes fields[0] is magic used for serialization
-        System.out.printf("%nFields(%d):%n", fields_count);
-
-        for (int i = 0; i < fields_count; i++) {
-            processFieldOrMethod();
-            if (i < fields_count - 1) {
-                System.out.println();
-            }
-        }
-    }
-
-    /**
-     * Processes information about the methods of the class.
-     * @throws  IOException
-     * @throws  ClassFormatException
-     */
-    private final void processMethods () throws IOException, ClassFormatException {
-        int methods_count;
-        methods_count = file.readUnsignedShort();
-        methods = new Method[methods_count];
-
-        System.out.printf("%nMethods(%d):%n", methods_count);
-
-        for (int i = 0; i < methods_count; i++) {
-            processFieldOrMethod();
-            if (i < methods_count - 1) {
-                System.out.println();
-            }
-        }
-    }
-
-    /**
-     * Processes information about the attributes of the class.
-     * @throws  IOException
-     * @throws  ClassFormatException
-     */
-    private final void processAttributes () throws IOException, ClassFormatException {
-        int attributes_count;
-        attributes_count = file.readUnsignedShort();
-        attributes = new Attribute[attributes_count];
-
-        System.out.printf("%nAttributes(%d):%n", attributes_count);
-
-        for (int i = 0; i < attributes_count; i++) {
-            attributes[i] = Attribute.readAttribute(file, constant_pool);
-            // indent all lines by two spaces
-            final String[] lines = attributes[i].toString().split("\\r?\\n");
-            for (final String line : lines) {
-                System.out.println("  " + line);
+            // All eight byte constants take up two spots in the constant pool
+            tag = constant_items[i].getTag();
+            if ((tag == Const.CONSTANT_Double) ||
+                    (tag == Const.CONSTANT_Long)) {
+                i++;
             }
         }
     }
@@ -343,9 +249,103 @@ class ClassDumper {
         }
     }
 
-    private final String constantToString (final int index) {
-        final Constant c = constant_items[index];
-        return constant_pool.constantToString(c);
+    /**
+     * Processes information about the fields of the class, i.e., its variables.
+     * @throws  IOException
+     * @throws  ClassFormatException
+     */
+    private final void processFields () throws IOException, ClassFormatException {
+        int fields_count;
+        fields_count = file.readUnsignedShort();
+        fields = new Field[fields_count];
+
+        // sometimes fields[0] is magic used for serialization
+        System.out.printf("%nFields(%d):%n", fields_count);
+
+        for (int i = 0; i < fields_count; i++) {
+            processFieldOrMethod();
+            if (i < fields_count - 1) {
+                System.out.println();
+            }
+        }
+    }
+
+    /**
+     * Checks whether the header of the file is ok.
+     * Of course, this has to be the first action on successive file reads.
+     * @throws  IOException
+     * @throws  ClassFormatException
+     */
+    private final void processID () throws IOException, ClassFormatException {
+        final int magic = file.readInt();
+        if (magic != Const.JVM_CLASSFILE_MAGIC) {
+            throw new ClassFormatException(file_name + " is not a Java .class file");
+        }
+        System.out.println("Java Class Dump");
+        System.out.println("  file: " + file_name);
+        System.out.printf("%nClass header:%n");
+        System.out.printf("  magic: %X%n", magic);
+    }
+
+    /**
+     * Processes information about the interfaces implemented by this class.
+     * @throws  IOException
+     * @throws  ClassFormatException
+     */
+    private final void processInterfaces () throws IOException, ClassFormatException {
+        int interfaces_count;
+        interfaces_count = file.readUnsignedShort();
+        interfaces = new int[interfaces_count];
+
+        System.out.printf("%nInterfaces(%d):%n", interfaces_count);
+
+        for (int i = 0; i < interfaces_count; i++) {
+            interfaces[i] = file.readUnsignedShort();
+            // i'm sure there is a better way to do this
+            if (i < 10) {
+                System.out.printf("   #%1d = ", i);
+            } else if (i <100) {
+                System.out.printf("  #%2d = ", i);
+            } else {
+                System.out.printf(" #%d = ", i);
+            }
+            System.out.println(interfaces[i] + " (" +
+                    constant_pool.getConstantString(interfaces[i],
+                            Const.CONSTANT_Class) + ")");
+        }
+    }
+
+    /**
+     * Processes information about the methods of the class.
+     * @throws  IOException
+     * @throws  ClassFormatException
+     */
+    private final void processMethods () throws IOException, ClassFormatException {
+        int methods_count;
+        methods_count = file.readUnsignedShort();
+        methods = new Method[methods_count];
+
+        System.out.printf("%nMethods(%d):%n", methods_count);
+
+        for (int i = 0; i < methods_count; i++) {
+            processFieldOrMethod();
+            if (i < methods_count - 1) {
+                System.out.println();
+            }
+        }
+    }
+
+    /**
+     * Processes major and minor version of compiler which created the file.
+     * @throws  IOException
+     * @throws  ClassFormatException
+     */
+    private final void processVersion () throws IOException, ClassFormatException {
+        minor = file.readUnsignedShort();
+        System.out.printf("  minor version: %s%n", minor);
+
+        major = file.readUnsignedShort();
+        System.out.printf("  major version: %s%n", major);
     }
 
 }

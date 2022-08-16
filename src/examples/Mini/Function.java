@@ -46,6 +46,21 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
     setArgs(args);
   }
 
+  public ASTIdent   getArg(final int i)     { return args[i]; }
+
+  public ASTIdent[] getArgs()         { return args; }
+  @Override
+  public int        getColumn()       { return column; }
+  @Override
+  public String     getHashKey()      { return fun_name; }
+  @Override
+  public int        getLine()         { return line; }
+  public ASTIdent   getName()         { return name; }
+  public int        getNoArgs()       { return no_args; }
+  public void       setArgs(final ASTIdent[] args) {
+    this.args = args;
+    no_args   = (args == null)? 0 : args.length;
+  }
   @Override
   public String toString() {
     final StringBuilder buf = new StringBuilder();
@@ -64,20 +79,5 @@ public class Function implements org.apache.bcel.Constants, EnvEntry {
         return prefix + " declared at line " + line + ", column " + column;
     }
     return prefix + " <predefined function>";
-  }
-
-  public int        getNoArgs()       { return no_args; }
-  public ASTIdent   getName()         { return name; }
-  @Override
-  public String     getHashKey()      { return fun_name; }
-  @Override
-  public int        getLine()         { return line; }
-  @Override
-  public int        getColumn()       { return column; }
-  public ASTIdent   getArg(final int i)     { return args[i]; }
-  public ASTIdent[] getArgs()         { return args; }
-  public void       setArgs(final ASTIdent[] args) {
-    this.args = args;
-    no_args   = (args == null)? 0 : args.length;
   }
 }

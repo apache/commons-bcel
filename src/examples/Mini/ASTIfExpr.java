@@ -31,6 +31,10 @@ import org.apache.bcel.generic.MethodGen;
  *
  */
 public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
+  public static Node jjtCreate(final MiniParser p, final int id) {
+    return new ASTIfExpr(p, id);
+  }
+
   private ASTExpr if_expr, then_expr, else_expr;
 
   // Generated methods
@@ -42,8 +46,27 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
     super(p, id);
   }
 
-  public static Node jjtCreate(final MiniParser p, final int id) {
-    return new ASTIfExpr(p, id);
+  /**
+   * Fifth pass, produce Java byte code.
+   */
+  @Override
+  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
+    if_expr.byte_code(il, method, cp);
+
+    final InstructionList then_code = new InstructionList();
+    final InstructionList else_code = new InstructionList();
+
+    then_expr.byte_code(then_code, method, cp);
+    else_expr.byte_code(else_code, method, cp);
+
+    BranchHandle i, g;
+
+    i = il.append(new IFEQ(null)); // If POP() == FALSE(i.e. 0) then branch to ELSE
+    ASTFunDecl.pop();
+    il.append(then_code);
+    g = il.append(new GOTO(null));
+    i.setTarget(il.append(else_code));
+    g.setTarget(il.append(InstructionConstants.NOP)); // May be optimized away later
   }
 
   /**
@@ -66,20 +89,30 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   }
 
   /**
-   * Overrides ASTExpr.traverse()
+   * Fourth pass, produce Java code.
    */
   @Override
-  public ASTExpr traverse(final Environment env) {
-    this.env = env;
+  public void code(final StringBuffer buf) {
+    if_expr.code(buf);
 
-    if_expr   = if_expr.traverse(env);
-    then_expr = then_expr.traverse(env);
+    buf.append("    if(" + ASTFunDecl.pop() + " == 1) {\n");
+    final int size = ASTFunDecl.size;
+    then_expr.code(buf);
+    ASTFunDecl.size = size; // reset stack
+    buf.append("    } else {\n");
+    else_expr.code(buf);
+    buf.append("    }\n");
+  }
 
+  @Override
+  public void dump(final String prefix) {
+    System.out.println(toString(prefix));
+
+    if_expr.dump(prefix + " ");
+    then_expr.dump(prefix + " ");
     if(else_expr != null) {
-        else_expr = else_expr.traverse(env);
+        else_expr.dump(prefix + " ");
     }
-
-    return this;
   }
 
   /**
@@ -137,52 +170,19 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
   }
 
   /**
-   * Fourth pass, produce Java code.
+   * Overrides ASTExpr.traverse()
    */
   @Override
-  public void code(final StringBuffer buf) {
-    if_expr.code(buf);
+  public ASTExpr traverse(final Environment env) {
+    this.env = env;
 
-    buf.append("    if(" + ASTFunDecl.pop() + " == 1) {\n");
-    final int size = ASTFunDecl.size;
-    then_expr.code(buf);
-    ASTFunDecl.size = size; // reset stack
-    buf.append("    } else {\n");
-    else_expr.code(buf);
-    buf.append("    }\n");
-  }
+    if_expr   = if_expr.traverse(env);
+    then_expr = then_expr.traverse(env);
 
-  /**
-   * Fifth pass, produce Java byte code.
-   */
-  @Override
-  public void byte_code(final InstructionList il, final MethodGen method, final ConstantPoolGen cp) {
-    if_expr.byte_code(il, method, cp);
-
-    final InstructionList then_code = new InstructionList();
-    final InstructionList else_code = new InstructionList();
-
-    then_expr.byte_code(then_code, method, cp);
-    else_expr.byte_code(else_code, method, cp);
-
-    BranchHandle i, g;
-
-    i = il.append(new IFEQ(null)); // If POP() == FALSE(i.e. 0) then branch to ELSE
-    ASTFunDecl.pop();
-    il.append(then_code);
-    g = il.append(new GOTO(null));
-    i.setTarget(il.append(else_code));
-    g.setTarget(il.append(InstructionConstants.NOP)); // May be optimized away later
-  }
-
-  @Override
-  public void dump(final String prefix) {
-    System.out.println(toString(prefix));
-
-    if_expr.dump(prefix + " ");
-    then_expr.dump(prefix + " ");
     if(else_expr != null) {
-        else_expr.dump(prefix + " ");
+        else_expr = else_expr.traverse(env);
     }
+
+    return this;
   }
 }

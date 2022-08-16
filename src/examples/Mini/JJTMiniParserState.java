@@ -34,86 +34,12 @@ class JJTMiniParserState {
     mk = 0;
   }
 
-  /* Determines whether the current node was actually closed and
-     pushed.  This should only be called in the final user action of a
-     node scope.  */
-  boolean nodeCreated() {
-    return node_created;
-  }
-
-  /* Call this to reinitialize the node stack.  It is called
-     automatically by the parser's ReInit() method. */
-  void reset() {
-    nodes.removeAllElements();
-    marks.removeAllElements();
-    sp = 0;
-    mk = 0;
-  }
-
-  /* Returns the root node of the AST.  It only makes sense to call
-     this after a successful parse. */
-  Node rootNode() {
-    return nodes.elementAt(0);
-  }
-
-  /* Pushes a node on to the stack. */
-  void pushNode(final Node n) {
-    nodes.push(n);
-    ++sp;
-  }
-
-  /* Returns the node on the top of the stack, and remove it from the
-     stack.  */
-  Node popNode() {
-    if (--sp < mk) {
-      mk = marks.pop().intValue();
-    }
-    return nodes.pop();
-  }
-
-  /* Returns the node currently on the top of the stack. */
-  Node peekNode() {
-    return nodes.peek();
-  }
-
-  /* Returns the number of children on the stack in the current node
-     scope. */
-  int nodeArity() {
-    return sp - mk;
-  }
-
-
   void clearNodeScope(final Node n) {
     while (sp > mk) {
       popNode();
     }
     mk = marks.pop().intValue();
   }
-
-
-  void openNodeScope(final Node n) {
-    marks.push(Integer.valueOf(mk));
-    mk = sp;
-    n.jjtOpen();
-  }
-
-
-  /* A definite node is constructed from a specified number of
-     children.  That number of nodes are popped from the stack and
-     made the children of the definite node.  Then the definite node
-     is pushed on to the stack. */
-  void closeNodeScope(final Node n, int num) {
-    mk = marks.pop().intValue();
-    while (num-- > 0) {
-      final Node c = popNode();
-      c.jjtSetParent(n);
-      n.jjtAddChild(c, num);
-    }
-    n.jjtClose();
-    pushNode(n);
-    node_created = true;
-  }
-
 
   /* A conditional node is constructed if its condition is true.  All
      the nodes that have been pushed since the node was opened are
@@ -136,5 +62,79 @@ class JJTMiniParserState {
       mk = marks.pop().intValue();
       node_created = false;
     }
+  }
+
+  /* A definite node is constructed from a specified number of
+     children.  That number of nodes are popped from the stack and
+     made the children of the definite node.  Then the definite node
+     is pushed on to the stack. */
+  void closeNodeScope(final Node n, int num) {
+    mk = marks.pop().intValue();
+    while (num-- > 0) {
+      final Node c = popNode();
+      c.jjtSetParent(n);
+      n.jjtAddChild(c, num);
+    }
+    n.jjtClose();
+    pushNode(n);
+    node_created = true;
+  }
+
+  /* Returns the number of children on the stack in the current node
+     scope. */
+  int nodeArity() {
+    return sp - mk;
+  }
+
+  /* Determines whether the current node was actually closed and
+     pushed.  This should only be called in the final user action of a
+     node scope.  */
+  boolean nodeCreated() {
+    return node_created;
+  }
+
+  void openNodeScope(final Node n) {
+    marks.push(Integer.valueOf(mk));
+    mk = sp;
+    n.jjtOpen();
+  }
+
+  /* Returns the node currently on the top of the stack. */
+  Node peekNode() {
+    return nodes.peek();
+  }
+
+
+  /* Returns the node on the top of the stack, and remove it from the
+     stack.  */
+  Node popNode() {
+    if (--sp < mk) {
+      mk = marks.pop().intValue();
+    }
+    return nodes.pop();
+  }
+
+
+  /* Pushes a node on to the stack. */
+  void pushNode(final Node n) {
+    nodes.push(n);
+    ++sp;
+  }
+
+
+  /* Call this to reinitialize the node stack.  It is called
+     automatically by the parser's ReInit() method. */
+  void reset() {
+    nodes.removeAllElements();
+    marks.removeAllElements();
+    sp = 0;
+    mk = 0;
+  }
+
+
+  /* Returns the root node of the AST.  It only makes sense to call
+     this after a successful parse. */
+  Node rootNode() {
+    return nodes.elementAt(0);
   }
 }

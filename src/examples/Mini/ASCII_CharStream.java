@@ -47,6 +47,79 @@ public final class ASCII_CharStream
   static private int maxNextCharInd = 0;
   static private int inBuf = 0;
 
+  /**
+   * Method to adjust line and column numbers for the start of a token.<BR>
+   */
+  static public void adjustBeginLineColumn(int newLine, final int newCol)
+  {
+     int start = tokenBegin;
+     int len;
+
+     if (bufpos >= tokenBegin)
+     {
+        len = bufpos - tokenBegin + inBuf + 1;
+     }
+     else
+     {
+        len = bufsize - tokenBegin + bufpos + 1 + inBuf;
+     }
+
+     int i = 0, j = 0, k = 0;
+     int nextColDiff = 0, columnDiff = 0;
+
+     while (i < len &&
+            bufline[j = start % bufsize] == bufline[k = ++start % bufsize])
+     {
+        bufline[j] = newLine;
+        nextColDiff = columnDiff + bufcolumn[k] - bufcolumn[j];
+        bufcolumn[j] = newCol + columnDiff;
+        columnDiff = nextColDiff;
+        i++;
+     }
+
+     if (i < len)
+     {
+        bufline[j] = newLine++;
+        bufcolumn[j] = newCol + columnDiff;
+
+        while (i++ < len)
+        {
+           if (bufline[j = start % bufsize] != bufline[++start % bufsize]) {
+            bufline[j] = newLine++;
+        } else {
+            bufline[j] = newLine;
+        }
+        }
+     }
+
+     line = bufline[j];
+     column = bufcolumn[j];
+  }
+
+  static public void backup(final int amount) {
+
+    inBuf += amount;
+    if ((bufpos -= amount) < 0) {
+        bufpos += bufsize;
+    }
+  }
+
+  static public char BeginToken() throws IOException
+  {
+     tokenBegin = -1;
+     final char c = readChar();
+     tokenBegin = bufpos;
+
+     return c;
+  }
+
+  static public void Done()
+  {
+     buffer = null;
+     bufline = null;
+     bufcolumn = null;
+  }
+
   static private void ExpandBuff(final boolean wrapAround)
   {
      final char[] newbuffer = new char[bufsize + 2048];
@@ -143,15 +216,99 @@ public final class ASCII_CharStream
      }
   }
 
-  static public char BeginToken() throws IOException
-  {
-     tokenBegin = -1;
-     final char c = readChar();
-     tokenBegin = bufpos;
-
-     return c;
+  static public int getBeginColumn() {
+     return bufcolumn[tokenBegin];
   }
 
+  static public int getBeginLine() {
+     return bufline[tokenBegin];
+  }
+
+  static public int getEndColumn() {
+     return bufcolumn[bufpos];
+  }
+
+  static public int getEndLine() {
+     return bufline[bufpos];
+  }
+
+  static public String GetImage()
+  {
+     if (bufpos >= tokenBegin) {
+        return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
+    }
+    return new String(buffer, tokenBegin, bufsize - tokenBegin) +
+                          new String(buffer, 0, bufpos + 1);
+  }
+
+  static public char[] GetSuffix(final int len)
+  {
+     final char[] ret = new char[len];
+
+     if ((bufpos + 1) >= len) {
+        System.arraycopy(buffer, bufpos - len + 1, ret, 0, len);
+    } else
+     {
+        System.arraycopy(buffer, bufsize - (len - bufpos - 1), ret, 0,
+                                                          len - bufpos - 1);
+        System.arraycopy(buffer, 0, ret, len - bufpos - 1, bufpos + 1);
+     }
+
+     return ret;
+  }
+  static public char readChar() throws IOException
+  {
+     if (inBuf > 0)
+     {
+        --inBuf;
+        return (char)((char)0xff & buffer[(bufpos == bufsize - 1) ? (bufpos = 0) : ++bufpos]);
+     }
+
+     if (++bufpos >= maxNextCharInd) {
+        FillBuff();
+    }
+
+     final char c = (char)((char)0xff & buffer[bufpos]);
+
+     UpdateLineColumn(c);
+     return (c);
+  }
+
+  static public void ReInit(final java.io.InputStream dstream, final int startline,
+                                                           final int startcolumn)
+  {
+     ReInit(dstream, startline, startcolumn, 4096);
+  }
+  static public void ReInit(final java.io.InputStream dstream, final int startline,
+  final int startcolumn, final int buffersize)
+  {
+     ReInit(new java.io.InputStreamReader(dstream), startline, startcolumn, 4096);
+  }
+
+  static public void ReInit(final java.io.Reader dstream, final int startline,
+                                                           final int startcolumn)
+  {
+     ReInit(dstream, startline, startcolumn, 4096);
+  }
+
+  static public void ReInit(final java.io.Reader dstream, final int startline,
+  final int startcolumn, final int buffersize)
+  {
+    inputStream = dstream;
+    line = startline;
+    column = startcolumn - 1;
+
+    if (buffer == null || buffersize != buffer.length)
+    {
+      available = bufsize = buffersize;
+      buffer = new char[buffersize];
+      bufline = new int[buffersize];
+      bufcolumn = new int[buffersize];
+    }
+    prevCharIsLF = prevCharIsCR = false;
+    tokenBegin = inBuf = maxNextCharInd = 0;
+    bufpos = -1;
+  }
   static private void UpdateLineColumn(final char c)
   {
      column++;
@@ -191,47 +348,22 @@ public final class ASCII_CharStream
      bufline[bufpos] = line;
      bufcolumn[bufpos] = column;
   }
-
-  static public char readChar() throws IOException
+  public ASCII_CharStream(final java.io.InputStream dstream, final int startline,
+                                                           final int startcolumn)
   {
-     if (inBuf > 0)
-     {
-        --inBuf;
-        return (char)((char)0xff & buffer[(bufpos == bufsize - 1) ? (bufpos = 0) : ++bufpos]);
-     }
-
-     if (++bufpos >= maxNextCharInd) {
-        FillBuff();
-    }
-
-     final char c = (char)((char)0xff & buffer[bufpos]);
-
-     UpdateLineColumn(c);
-     return (c);
+     this(dstream, startline, startcolumn, 4096);
   }
 
-  static public int getEndColumn() {
-     return bufcolumn[bufpos];
+  public ASCII_CharStream(final java.io.InputStream dstream, final int startline,
+  final int startcolumn, final int buffersize)
+  {
+     this(new java.io.InputStreamReader(dstream), startline, startcolumn, 4096);
   }
 
-  static public int getEndLine() {
-     return bufline[bufpos];
-  }
-
-  static public int getBeginColumn() {
-     return bufcolumn[tokenBegin];
-  }
-
-  static public int getBeginLine() {
-     return bufline[tokenBegin];
-  }
-
-  static public void backup(final int amount) {
-
-    inBuf += amount;
-    if ((bufpos -= amount) < 0) {
-        bufpos += bufsize;
-    }
+  public ASCII_CharStream(final java.io.Reader dstream, final int startline,
+                                                           final int startcolumn)
+  {
+     this(dstream, startline, startcolumn, 4096);
   }
 
   public ASCII_CharStream(final java.io.Reader dstream, final int startline,
@@ -250,138 +382,6 @@ public final class ASCII_CharStream
     buffer = new char[buffersize];
     bufline = new int[buffersize];
     bufcolumn = new int[buffersize];
-  }
-
-  public ASCII_CharStream(final java.io.Reader dstream, final int startline,
-                                                           final int startcolumn)
-  {
-     this(dstream, startline, startcolumn, 4096);
-  }
-  static public void ReInit(final java.io.Reader dstream, final int startline,
-  final int startcolumn, final int buffersize)
-  {
-    inputStream = dstream;
-    line = startline;
-    column = startcolumn - 1;
-
-    if (buffer == null || buffersize != buffer.length)
-    {
-      available = bufsize = buffersize;
-      buffer = new char[buffersize];
-      bufline = new int[buffersize];
-      bufcolumn = new int[buffersize];
-    }
-    prevCharIsLF = prevCharIsCR = false;
-    tokenBegin = inBuf = maxNextCharInd = 0;
-    bufpos = -1;
-  }
-
-  static public void ReInit(final java.io.Reader dstream, final int startline,
-                                                           final int startcolumn)
-  {
-     ReInit(dstream, startline, startcolumn, 4096);
-  }
-  public ASCII_CharStream(final java.io.InputStream dstream, final int startline,
-  final int startcolumn, final int buffersize)
-  {
-     this(new java.io.InputStreamReader(dstream), startline, startcolumn, 4096);
-  }
-
-  public ASCII_CharStream(final java.io.InputStream dstream, final int startline,
-                                                           final int startcolumn)
-  {
-     this(dstream, startline, startcolumn, 4096);
-  }
-
-  static public void ReInit(final java.io.InputStream dstream, final int startline,
-  final int startcolumn, final int buffersize)
-  {
-     ReInit(new java.io.InputStreamReader(dstream), startline, startcolumn, 4096);
-  }
-  static public void ReInit(final java.io.InputStream dstream, final int startline,
-                                                           final int startcolumn)
-  {
-     ReInit(dstream, startline, startcolumn, 4096);
-  }
-  static public String GetImage()
-  {
-     if (bufpos >= tokenBegin) {
-        return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
-    }
-    return new String(buffer, tokenBegin, bufsize - tokenBegin) +
-                          new String(buffer, 0, bufpos + 1);
-  }
-
-  static public char[] GetSuffix(final int len)
-  {
-     final char[] ret = new char[len];
-
-     if ((bufpos + 1) >= len) {
-        System.arraycopy(buffer, bufpos - len + 1, ret, 0, len);
-    } else
-     {
-        System.arraycopy(buffer, bufsize - (len - bufpos - 1), ret, 0,
-                                                          len - bufpos - 1);
-        System.arraycopy(buffer, 0, ret, len - bufpos - 1, bufpos + 1);
-     }
-
-     return ret;
-  }
-
-  static public void Done()
-  {
-     buffer = null;
-     bufline = null;
-     bufcolumn = null;
-  }
-
-  /**
-   * Method to adjust line and column numbers for the start of a token.<BR>
-   */
-  static public void adjustBeginLineColumn(int newLine, final int newCol)
-  {
-     int start = tokenBegin;
-     int len;
-
-     if (bufpos >= tokenBegin)
-     {
-        len = bufpos - tokenBegin + inBuf + 1;
-     }
-     else
-     {
-        len = bufsize - tokenBegin + bufpos + 1 + inBuf;
-     }
-
-     int i = 0, j = 0, k = 0;
-     int nextColDiff = 0, columnDiff = 0;
-
-     while (i < len &&
-            bufline[j = start % bufsize] == bufline[k = ++start % bufsize])
-     {
-        bufline[j] = newLine;
-        nextColDiff = columnDiff + bufcolumn[k] - bufcolumn[j];
-        bufcolumn[j] = newCol + columnDiff;
-        columnDiff = nextColDiff;
-        i++;
-     }
-
-     if (i < len)
-     {
-        bufline[j] = newLine++;
-        bufcolumn[j] = newCol + columnDiff;
-
-        while (i++ < len)
-        {
-           if (bufline[j = start % bufsize] != bufline[++start % bufsize]) {
-            bufline[j] = newLine++;
-        } else {
-            bufline[j] = newLine;
-        }
-        }
-     }
-
-     line = bufline[j];
-     column = bufcolumn[j];
   }
 
 }
