@@ -435,7 +435,7 @@ public class VerifyDialog extends javax.swing.JDialog {
     }
 
     /** Machine-generated. */
-    private void initConnections() throws java.lang.Exception {
+    private void initConnections() {
         // user code begin {1}
         // user code end
         getPass1Button().addActionListener(ivjEventHandler);

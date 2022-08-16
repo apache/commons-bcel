@@ -130,7 +130,7 @@ public class VerifierAppFrame extends JFrame {
     }
 
     /** Initizalization of the components. */
-    private void jbInit() throws Exception {
+    private void jbInit() {
         // setIconImage(Toolkit.getDefaultToolkit().createImage(Frame1.class.getResource("[Ihr Symbol]")));
         contentPane = (JPanel) this.getContentPane();
         contentPane.setLayout(cardLayout1);
