@@ -295,33 +295,33 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
      * @param expected type
      */
     public int eval(final int expected) {
-        int child_type = T_UNKNOWN, t;
+        int childType = T_UNKNOWN, t;
 
         is_simple = true;
 
         // Determine expected node type depending on used operator.
         if (unop != -1) {
             if (unop == MINUS) {
-                child_type = type = T_INT; // -
+                childType = type = T_INT; // -
             } else {
-                child_type = type = T_BOOLEAN; // !
+                childType = type = T_BOOLEAN; // !
             }
         } else // Compute expected type
         if (kind == PLUS || kind == MINUS || kind == MULT || kind == MOD || kind == DIV) {
-            child_type = type = T_INT;
+            childType = type = T_INT;
         } else if (kind == AND || kind == OR) {
-            child_type = type = T_BOOLEAN;
+            childType = type = T_BOOLEAN;
         } else { // LEQ, GT, etc.
-            child_type = T_INT;
+            childType = T_INT;
             type = T_BOOLEAN;
         }
 
         // Get type of subexpressions
         for (final ASTExpr expr : exprs) {
-            t = expr.eval(child_type);
+            t = expr.eval(childType);
 
-            if (t != child_type) {
-                MiniC.addError(expr.getLine(), expr.getColumn(), "Expression has not expected type " + TYPE_NAMES[child_type] + " but " + TYPE_NAMES[t] + ".");
+            if (t != childType) {
+                MiniC.addError(expr.getLine(), expr.getColumn(), "Expression has not expected type " + TYPE_NAMES[childType] + " but " + TYPE_NAMES[t] + ".");
             }
 
             is_simple = is_simple && expr.isSimple();

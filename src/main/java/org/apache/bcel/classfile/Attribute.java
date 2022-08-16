@@ -274,7 +274,7 @@ public abstract class Attribute implements Cloneable, Node {
     /**
      * @return deep copy of this attribute
      */
-    public abstract Attribute copy(ConstantPool _constant_pool);
+    public abstract Attribute copy(ConstantPool constantPool);
 
     /**
      * Dump attribute to file stream in binary format.

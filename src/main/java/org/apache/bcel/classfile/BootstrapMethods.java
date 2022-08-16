@@ -84,14 +84,14 @@ public class BootstrapMethods extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public BootstrapMethods copy(final ConstantPool _constant_pool) {
+    public BootstrapMethods copy(final ConstantPool constantPool) {
         final BootstrapMethods c = (BootstrapMethods) clone();
         c.bootstrapMethods = new BootstrapMethod[bootstrapMethods.length];
 
         for (int i = 0; i < bootstrapMethods.length; i++) {
             c.bootstrapMethods[i] = bootstrapMethods[i].copy();
         }
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 

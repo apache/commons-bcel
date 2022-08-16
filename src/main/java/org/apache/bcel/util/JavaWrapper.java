@@ -65,11 +65,11 @@ public class JavaWrapper {
             System.out.println("Missing class name.");
             return;
         }
-        final String class_name = argv[0];
-        final String[] new_argv = new String[argv.length - 1];
-        System.arraycopy(argv, 1, new_argv, 0, new_argv.length);
+        final String className = argv[0];
+        final String[] newArgv = new String[argv.length - 1];
+        System.arraycopy(argv, 1, newArgv, 0, newArgv.length);
         final JavaWrapper wrapper = new JavaWrapper();
-        wrapper.runMain(class_name, new_argv);
+        wrapper.runMain(className, newArgv);
     }
 
     private final java.lang.ClassLoader loader;
@@ -85,11 +85,11 @@ public class JavaWrapper {
     /**
      * Runs the main method of the given class with the arguments passed in argv
      *
-     * @param class_name the fully qualified class name
+     * @param className the fully qualified class name
      * @param argv the arguments just as you would pass them directly
      */
-    public void runMain(final String class_name, final String[] argv) throws ClassNotFoundException {
-        final Class<?> cl = loader.loadClass(class_name);
+    public void runMain(final String className, final String[] argv) throws ClassNotFoundException {
+        final Class<?> cl = loader.loadClass(className);
         Method method = null;
         try {
             method = cl.getMethod("main", argv.getClass());
@@ -102,7 +102,7 @@ public class JavaWrapper {
                 throw new NoSuchMethodException();
             }
         } catch (final NoSuchMethodException no) {
-            System.out.println("In class " + class_name + ": public static void main(String[] argv) is not defined");
+            System.out.println("In class " + className + ": public static void main(String[] argv) is not defined");
             return;
         }
         try {

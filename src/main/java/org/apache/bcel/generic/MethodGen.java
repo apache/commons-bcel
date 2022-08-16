@@ -243,22 +243,22 @@ public class MethodGen extends FieldGenOrMethodGen {
      * For example one may not add a local variable and later remove the instructions it refers to without causing havoc. It
      * is safe however if you remove that local variable, too.
      *
-     * @param access_flags access qualifiers
-     * @param return_type method type
+     * @param accessFlags access qualifiers
+     * @param returnType method type
      * @param argTypes argument types
      * @param argNames argument names (if this is null, default names will be provided for them)
-     * @param method_name name of method
+     * @param methodName name of method
      * @param className class name containing this method (may be null, if you don't care)
      * @param il instruction list associated with this method, may be null only for abstract or native methods
      * @param cp constant pool
      */
-    public MethodGen(final int access_flags, final Type return_type, final Type[] argTypes, String[] argNames, final String method_name, final String className,
+    public MethodGen(final int accessFlags, final Type returnType, final Type[] argTypes, String[] argNames, final String methodName, final String className,
         final InstructionList il, final ConstantPoolGen cp) {
-        super(access_flags);
-        setType(return_type);
+        super(accessFlags);
+        setType(returnType);
         setArgumentTypes(argTypes);
         setArgumentNames(argNames);
-        setName(method_name);
+        setName(methodName);
         setClassName(className);
         setInstructionList(il);
         setConstantPool(cp);
@@ -277,8 +277,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
         if (argTypes != null) {
             final int size = argTypes.length;
-            for (final Type arg_type : argTypes) {
-                if (Type.VOID == arg_type) {
+            for (final Type argType : argTypes) {
+                if (Type.VOID == argType) {
                     throw new ClassGenException("'void' is an illegal argument type for a method");
                 }
             }
@@ -324,10 +324,10 @@ public class MethodGen extends FieldGenOrMethodGen {
                 if (ces != null) {
                     for (final CodeException ce : ces) {
                         final int type = ce.getCatchType();
-                        ObjectType c_type = null;
+                        ObjectType cType = null;
                         if (type > 0) {
                             final String cen = method.getConstantPool().getConstantString(type, Const.CONSTANT_Class);
-                            c_type = ObjectType.getInstance(cen);
+                            cType = ObjectType.getInstance(cen);
                         }
                         final int end_pc = ce.getEndPC();
                         final int length = getByteCodes(method).length;
@@ -338,7 +338,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                             end = il.findHandle(end_pc);
                             end = end.getPrev(); // Make it inclusive
                         }
-                        addExceptionHandler(il.findHandle(ce.getStartPC()), end, il.findHandle(ce.getHandlerPC()), c_type);
+                        addExceptionHandler(il.findHandle(ce.getStartPC()), end, il.findHandle(ce.getHandlerPC()), cType);
                     }
                 }
                 final Attribute[] c_attributes = c.getAttributes();
@@ -411,18 +411,18 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Add an exception handler, i.e., specify region where a handler is active and an instruction where the actual handling
      * is done.
      *
-     * @param start_pc Start of region (inclusive)
-     * @param end_pc End of region (inclusive)
-     * @param handler_pc Where handling is done
-     * @param catch_type class type of handled exception or null if any exception is handled
+     * @param startPc Start of region (inclusive)
+     * @param endPc End of region (inclusive)
+     * @param handlerPc Where handling is done
+     * @param catchType class type of handled exception or null if any exception is handled
      * @return new exception handler object
      */
-    public CodeExceptionGen addExceptionHandler(final InstructionHandle start_pc, final InstructionHandle end_pc, final InstructionHandle handler_pc,
-        final ObjectType catch_type) {
-        if (start_pc == null || end_pc == null || handler_pc == null) {
+    public CodeExceptionGen addExceptionHandler(final InstructionHandle startPc, final InstructionHandle endPc, final InstructionHandle handlerPc,
+        final ObjectType catchType) {
+        if (startPc == null || endPc == null || handlerPc == null) {
             throw new ClassGenException("Exception handler target is null instruction");
         }
-        final CodeExceptionGen c = new CodeExceptionGen(start_pc, end_pc, handler_pc, catch_type);
+        final CodeExceptionGen c = new CodeExceptionGen(startPc, endPc, handlerPc, catchType);
         exceptionList.add(c);
         return c;
     }
@@ -830,15 +830,15 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public Method getMethod() {
         final String signature = getSignature();
-        final ConstantPoolGen _cp = super.getConstantPool();
-        final int name_index = _cp.addUtf8(super.getName());
-        final int signature_index = _cp.addUtf8(signature);
+        final ConstantPoolGen cp = super.getConstantPool();
+        final int name_index = cp.addUtf8(super.getName());
+        final int signature_index = cp.addUtf8(signature);
         /*
          * Also updates positions of instructions, i.e., their indices
          */
-        byte[] byte_code = null;
+        byte[] byteCode = null;
         if (il != null) {
-            byte_code = il.getByteCode();
+            byteCode = il.getByteCode();
         }
         LineNumberTable lnt = null;
         LocalVariableTable lvt = null;
@@ -846,8 +846,8 @@ public class MethodGen extends FieldGenOrMethodGen {
          * Create LocalVariableTable and LineNumberTable attributes (for debuggers, e.g.)
          */
         if (!variableList.isEmpty() && !stripAttributes) {
-            updateLocalVariableTable(getLocalVariableTable(_cp));
-            addCodeAttribute(lvt = getLocalVariableTable(_cp));
+            updateLocalVariableTable(getLocalVariableTable(cp));
+            addCodeAttribute(lvt = getLocalVariableTable(cp));
         }
         if (localVariableTypeTable != null) {
             // LocalVariable length in LocalVariableTypeTable is not updated automatically. It's a difference with
@@ -858,18 +858,18 @@ public class MethodGen extends FieldGenOrMethodGen {
             addCodeAttribute(localVariableTypeTable);
         }
         if (!lineNumberList.isEmpty() && !stripAttributes) {
-            addCodeAttribute(lnt = getLineNumberTable(_cp));
+            addCodeAttribute(lnt = getLineNumberTable(cp));
         }
-        final Attribute[] code_attrs = getCodeAttributes();
+        final Attribute[] codeAttrs = getCodeAttributes();
         /*
          * Each attribute causes 6 additional header bytes
          */
         int attrs_len = 0;
-        for (final Attribute code_attr : code_attrs) {
+        for (final Attribute code_attr : codeAttrs) {
             attrs_len += code_attr.getLength() + 6;
         }
-        final CodeException[] c_exc = getCodeExceptions();
-        final int exc_len = c_exc.length * 8; // Every entry takes 8 bytes
+        final CodeException[] cExc = getCodeExceptions();
+        final int exc_len = cExc.length * 8; // Every entry takes 8 bytes
         Code code = null;
         if (il != null && !isAbstract() && !isNative()) {
             // Remove any stale code attribute
@@ -879,20 +879,20 @@ public class MethodGen extends FieldGenOrMethodGen {
                     removeAttribute(a);
                 }
             }
-            code = new Code(_cp.addUtf8("Code"), 8 + byte_code.length + // prologue byte code
+            code = new Code(cp.addUtf8("Code"), 8 + byteCode.length + // prologue byte code
                 2 + exc_len + // exceptions
                 2 + attrs_len, // attributes
-                maxStack, maxLocals, byte_code, c_exc, code_attrs, _cp.getConstantPool());
+                maxStack, maxLocals, byteCode, cExc, codeAttrs, cp.getConstantPool());
             addAttribute(code);
         }
-        final Attribute[] annotations = addRuntimeAnnotationsAsAttribute(_cp);
-        final Attribute[] parameterAnnotations = addRuntimeParameterAnnotationsAsAttribute(_cp);
+        final Attribute[] annotations = addRuntimeAnnotationsAsAttribute(cp);
+        final Attribute[] parameterAnnotations = addRuntimeParameterAnnotationsAsAttribute(cp);
         ExceptionTable et = null;
         if (!throwsList.isEmpty()) {
-            addAttribute(et = getExceptionTable(_cp));
+            addAttribute(et = getExceptionTable(cp));
             // Add `Exceptions' if there are "throws" clauses
         }
-        final Method m = new Method(super.getAccessFlags(), name_index, signature_index, getAttributes(), _cp.getConstantPool());
+        final Method m = new Method(super.getAccessFlags(), name_index, signature_index, getAttributes(), cp.getConstantPool());
         // Undo effects of adding attributes
         if (lvt != null) {
             removeCodeAttribute(lvt);
@@ -1077,20 +1077,20 @@ public class MethodGen extends FieldGenOrMethodGen {
         argNames[i] = name;
     }
 
-    public void setArgumentNames(final String[] arg_names) {
-        this.argNames = arg_names;
+    public void setArgumentNames(final String[] argNames) {
+        this.argNames = argNames;
     }
 
     public void setArgumentType(final int i, final Type type) {
         argTypes[i] = type;
     }
 
-    public void setArgumentTypes(final Type[] arg_types) {
-        this.argTypes = arg_types;
+    public void setArgumentTypes(final Type[] argTypes) {
+        this.argTypes = argTypes;
     }
 
-    public void setClassName(final String class_name) { // TODO could be package-protected?
-        this.className = class_name;
+    public void setClassName(final String className) { // TODO could be package-protected?
+        this.className = className;
     }
 
     public void setInstructionList(final InstructionList il) { // TODO could be package-protected?
@@ -1104,8 +1104,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (il != null) {
             int max = isStatic() ? 0 : 1;
             if (argTypes != null) {
-                for (final Type arg_type : argTypes) {
-                    max += arg_type.getSize();
+                for (final Type argType : argTypes) {
+                    max += argType.getSize();
                 }
             }
             for (InstructionHandle ih = il.getStart(); ih != null; ih = ih.getNext()) {
@@ -1148,8 +1148,8 @@ public class MethodGen extends FieldGenOrMethodGen {
         maxStack = m;
     }
 
-    public void setReturnType(final Type return_type) {
-        setType(return_type);
+    public void setReturnType(final Type returnType) {
+        setType(returnType);
     }
 
     /**

@@ -31,18 +31,18 @@ import org.apache.bcel.generic.MethodGen;
 public final class maxstack {
 
     public static void main(final String[] argv) throws Exception {
-        for (final String class_name : argv) {
-            JavaClass java_class = Repository.lookupClass(class_name);
+        for (final String className : argv) {
+            JavaClass java_class = Repository.lookupClass(className);
 
             if (java_class == null) {
-                java_class = new ClassParser(class_name).parse();
+                java_class = new ClassParser(className).parse();
             }
 
             final ConstantPoolGen cp = new ConstantPoolGen(java_class.getConstantPool());
 
             for (final Method m : java_class.getMethods()) {
                 if (!(m.isAbstract() || m.isNative())) {
-                    final MethodGen mg = new MethodGen(m, class_name, cp);
+                    final MethodGen mg = new MethodGen(m, className, cp);
 
                     final int compiled_stack = mg.getMaxStack();
                     final int compiled_locals = mg.getMaxLocals();

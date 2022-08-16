@@ -38,14 +38,14 @@ class ClassDumper {
 
     private final FileImageInputStream file;
     private final String file_name;
-    private int class_name_index;
-    private int superclass_name_index;
+    private int classNameIndex;
+    private int superclassNameIndex;
     private int major;
     private int minor; // Compiler version
-    private int access_flags; // Access rights of parsed class
+    private int accessFlags; // Access rights of parsed class
     private int[] interfaces; // Names of implemented interfaces
-    private ConstantPool constant_pool; // collection of constants
-    private Constant[] constant_items; // collection of constants
+    private ConstantPool constantPool; // collection of constants
+    private Constant[] constantItems; // collection of constants
     private Field[] fields; // class fields, i.e., its variables
     private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
@@ -62,8 +62,8 @@ class ClassDumper {
     }
 
     private final String constantToString(final int index) {
-        final Constant c = constant_items[index];
-        return constant_pool.constantToString(c);
+        final Constant c = constantItems[index];
+        return constantPool.constantToString(c);
     }
 
     /**
@@ -118,7 +118,7 @@ class ClassDumper {
         System.out.printf("%nAttributes(%d):%n", attributes_count);
 
         for (int i = 0; i < attributes_count; i++) {
-            attributes[i] = Attribute.readAttribute(file, constant_pool);
+            attributes[i] = Attribute.readAttribute(file, constantPool);
             // indent all lines by two spaces
             final String[] lines = attributes[i].toString().split("\\r?\\n");
             for (final String line : lines) {
@@ -134,27 +134,27 @@ class ClassDumper {
      * @throws ClassFormatException
      */
     private final void processClassInfo() throws IOException, ClassFormatException {
-        access_flags = file.readUnsignedShort();
+        accessFlags = file.readUnsignedShort();
         /*
          * Interfaces are implicitely abstract, the flag should be set according to the JVM specification.
          */
-        if ((access_flags & Const.ACC_INTERFACE) != 0) {
-            access_flags |= Const.ACC_ABSTRACT;
+        if ((accessFlags & Const.ACC_INTERFACE) != 0) {
+            accessFlags |= Const.ACC_ABSTRACT;
         }
-        if ((access_flags & Const.ACC_ABSTRACT) != 0 && (access_flags & Const.ACC_FINAL) != 0) {
+        if ((accessFlags & Const.ACC_ABSTRACT) != 0 && (accessFlags & Const.ACC_FINAL) != 0) {
             throw new ClassFormatException("Class " + file_name + " can't be both final and abstract");
         }
 
         System.out.printf("%nClass info:%n");
-        System.out.println("  flags: " + BCELifier.printFlags(access_flags, BCELifier.FLAGS.CLASS));
-        class_name_index = file.readUnsignedShort();
-        System.out.printf("  this_class: %d (", class_name_index);
-        System.out.println(constantToString(class_name_index) + ")");
+        System.out.println("  flags: " + BCELifier.printFlags(accessFlags, BCELifier.FLAGS.CLASS));
+        classNameIndex = file.readUnsignedShort();
+        System.out.printf("  this_class: %d (", classNameIndex);
+        System.out.println(constantToString(classNameIndex) + ")");
 
-        superclass_name_index = file.readUnsignedShort();
-        System.out.printf("  super_class: %d (", superclass_name_index);
-        if (superclass_name_index > 0) {
-            System.out.printf("%s", constantToString(superclass_name_index));
+        superclassNameIndex = file.readUnsignedShort();
+        System.out.printf("  super_class: %d (", superclassNameIndex);
+        if (superclassNameIndex > 0) {
+            System.out.printf("%s", constantToString(superclassNameIndex));
         }
         System.out.println(")");
     }
@@ -168,14 +168,14 @@ class ClassDumper {
     private final void processConstantPool() throws IOException, ClassFormatException {
         byte tag;
         final int constant_pool_count = file.readUnsignedShort();
-        constant_items = new Constant[constant_pool_count];
-        constant_pool = new ConstantPool(constant_items);
+        constantItems = new Constant[constant_pool_count];
+        constantPool = new ConstantPool(constantItems);
 
-        // constant_pool[0] is unused by the compiler
+        // constantPool[0] is unused by the compiler
         System.out.printf("%nConstant pool(%d):%n", constant_pool_count - 1);
 
         for (int i = 1; i < constant_pool_count; i++) {
-            constant_items[i] = Constant.readConstant(file);
+            constantItems[i] = Constant.readConstant(file);
             // i'm sure there is a better way to do this
             if (i < 10) {
                 System.out.printf("    #%1d = ", i);
@@ -184,10 +184,10 @@ class ClassDumper {
             } else {
                 System.out.printf("  #%d = ", i);
             }
-            System.out.println(constant_items[i]);
+            System.out.println(constantItems[i]);
 
             // All eight byte constants take up two spots in the constant pool
-            tag = constant_items[i].getTag();
+            tag = constantItems[i].getTag();
             if (tag == Const.CONSTANT_Double || tag == Const.CONSTANT_Long) {
                 i++;
             }
@@ -206,7 +206,7 @@ class ClassDumper {
         final int name_index = file.readUnsignedShort();
         System.out.printf("  name_index: %d (", name_index);
         System.out.println(constantToString(name_index) + ")");
-        System.out.println("  access_flags: " + BCELifier.printFlags(access_flags, BCELifier.FLAGS.METHOD));
+        System.out.println("  accessFlags: " + BCELifier.printFlags(access_flags, BCELifier.FLAGS.METHOD));
         final int descriptor_index = file.readUnsignedShort();
         System.out.printf("  descriptor_index: %d (", descriptor_index);
         System.out.println(constantToString(descriptor_index) + ")");
@@ -233,7 +233,7 @@ class ClassDumper {
             // verify we're at EOF of the buffer on return.
 
             final long pos1 = file.getStreamPosition();
-            attributes[i] = Attribute.readAttribute(file, constant_pool);
+            attributes[i] = Attribute.readAttribute(file, constantPool);
             final long pos2 = file.getStreamPosition();
             if (pos2 - pos1 != attribute_length + 6) {
                 System.out.printf("%nattribute_length: %d pos2-pos1-6: %d pos1: %x(%d) pos2: %x(%d)%n", attribute_length, pos2 - pos1 - 6, pos1, pos1, pos2,
@@ -306,7 +306,7 @@ class ClassDumper {
             } else {
                 System.out.printf(" #%d = ", i);
             }
-            System.out.println(interfaces[i] + " (" + constant_pool.getConstantString(interfaces[i], Const.CONSTANT_Class) + ")");
+            System.out.println(interfaces[i] + " (" + constantPool.getConstantString(interfaces[i], Const.CONSTANT_Class) + ")");
         }
     }
 

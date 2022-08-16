@@ -43,8 +43,8 @@ public abstract class ConversionInstruction extends Instruction implements Typed
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {
-        final short _opcode = super.getOpcode();
-        switch (_opcode) {
+        final short opcode = super.getOpcode();
+        switch (opcode) {
         case Const.D2I:
         case Const.F2I:
         case Const.L2I:
@@ -68,7 +68,7 @@ public abstract class ConversionInstruction extends Instruction implements Typed
         case Const.I2S:
             return Type.SHORT;
         default: // Never reached
-            throw new ClassGenException("Unknown type " + _opcode);
+            throw new ClassGenException("Unknown type " + opcode);
         }
     }
 }

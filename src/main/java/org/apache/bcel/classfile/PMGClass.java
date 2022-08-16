@@ -82,7 +82,7 @@ public final class PMGClass extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         return (Attribute) clone();
     }
 

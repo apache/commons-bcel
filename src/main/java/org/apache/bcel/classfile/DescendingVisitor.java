@@ -331,13 +331,13 @@ public class DescendingVisitor implements Visitor {
     }
 
     @Override
-    public void visitJavaClass(final JavaClass _clazz) {
-        stack.push(_clazz);
-        _clazz.accept(visitor);
-        accept(_clazz.getFields());
-        accept(_clazz.getMethods());
-        accept(_clazz.getAttributes());
-        _clazz.getConstantPool().accept(this);
+    public void visitJavaClass(final JavaClass clazz) {
+        stack.push(clazz);
+        clazz.accept(visitor);
+        accept(clazz.getFields());
+        accept(clazz.getMethods());
+        accept(clazz.getAttributes());
+        clazz.getConstantPool().accept(this);
         stack.pop();
     }
 

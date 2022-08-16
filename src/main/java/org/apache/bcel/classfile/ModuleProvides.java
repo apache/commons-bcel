@@ -101,14 +101,14 @@ public final class ModuleProvides implements Cloneable, Node {
     /**
      * @return Resolved string representation
      */
-    public String toString(final ConstantPool constant_pool) {
+    public String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
-        final String interface_name = constant_pool.constantToString(providesIndex, Const.CONSTANT_Class);
+        final String interface_name = constantPool.constantToString(providesIndex, Const.CONSTANT_Class);
         buf.append(Utility.compactClassName(interface_name, false));
         buf.append(", with(").append(providesWithCount).append("):\n");
         for (final int index : providesWithIndex) {
-            final String class_name = constant_pool.getConstantString(index, Const.CONSTANT_Class);
-            buf.append("      ").append(Utility.compactClassName(class_name, false)).append("\n");
+            final String className = constantPool.getConstantString(index, Const.CONSTANT_Class);
+            buf.append("      ").append(Utility.compactClassName(className, false)).append("\n");
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }

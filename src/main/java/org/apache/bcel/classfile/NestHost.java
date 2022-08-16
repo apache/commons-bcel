@@ -81,9 +81,9 @@ public final class NestHost extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final NestHost c = (NestHost) clone();
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 
@@ -120,8 +120,8 @@ public final class NestHost extends Attribute {
     public String toString() {
         final StringBuilder buf = new StringBuilder();
         buf.append("NestHost: ");
-        final String class_name = super.getConstantPool().getConstantString(hostClassIndex, Const.CONSTANT_Class);
-        buf.append(Utility.compactClassName(class_name, false));
+        final String className = super.getConstantPool().getConstantString(hostClassIndex, Const.CONSTANT_Class);
+        buf.append(Utility.compactClassName(className, false));
         return buf.toString();
     }
 }

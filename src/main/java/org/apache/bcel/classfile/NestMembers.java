@@ -87,13 +87,13 @@ public final class NestMembers extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final NestMembers c = (NestMembers) clone();
         if (classes != null) {
             c.classes = new int[classes.length];
             System.arraycopy(classes, 0, c.classes, 0, classes.length);
         }
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 
@@ -154,8 +154,8 @@ public final class NestMembers extends Attribute {
         buf.append(classes.length);
         buf.append("):\n");
         for (final int index : classes) {
-            final String class_name = super.getConstantPool().getConstantString(index, Const.CONSTANT_Class);
-            buf.append("  ").append(Utility.compactClassName(class_name, false)).append("\n");
+            final String className = super.getConstantPool().getConstantString(index, Const.CONSTANT_Class);
+            buf.append("  ").append(Utility.compactClassName(className, false)).append("\n");
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }

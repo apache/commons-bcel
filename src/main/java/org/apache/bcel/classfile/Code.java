@@ -138,23 +138,23 @@ public final class Code extends Attribute {
     /**
      * @return deep copy of this attribute
      *
-     * @param _constant_pool the constant pool to duplicate
+     * @param constantPool the constant pool to duplicate
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final Code c = (Code) clone();
         if (code != null) {
             c.code = new byte[code.length];
             System.arraycopy(code, 0, c.code, 0, code.length);
         }
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         c.exceptionTable = new CodeException[exceptionTable.length];
         for (int i = 0; i < exceptionTable.length; i++) {
             c.exceptionTable[i] = exceptionTable[i].copy();
         }
         c.attributes = new Attribute[attributes.length];
         for (int i = 0; i < attributes.length; i++) {
-            c.attributes[i] = attributes[i].copy(_constant_pool);
+            c.attributes[i] = attributes[i].copy(constantPool);
         }
         return c;
     }

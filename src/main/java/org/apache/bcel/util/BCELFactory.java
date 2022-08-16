@@ -271,9 +271,9 @@ class BCELFactory extends EmptyVisitor {
         final String className = i.getClassName(constantPoolGen);
         final String methodName = i.getMethodName(constantPoolGen);
         final Type type = i.getReturnType(constantPoolGen);
-        final Type[] arg_types = i.getArgumentTypes(constantPoolGen);
+        final Type[] argTypes = i.getArgumentTypes(constantPoolGen);
         printWriter.println("il.append(_factory.createInvoke(\"" + className + "\", \"" + methodName + "\", " + BCELifier.printType(type) + ", "
-            + BCELifier.printArgumentTypes(arg_types) + ", " + CONSTANT_PREFIX + Const.getOpcodeName(opcode).toUpperCase(Locale.ENGLISH) + "));");
+            + BCELifier.printArgumentTypes(argTypes) + ", " + CONSTANT_PREFIX + Const.getOpcodeName(opcode).toUpperCase(Locale.ENGLISH) + "));");
     }
 
     @Override

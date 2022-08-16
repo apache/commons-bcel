@@ -35,9 +35,9 @@ public class SimpleElementValue extends ElementValue {
 
     @Override
     public void dump(final DataOutputStream dos) throws IOException {
-        final int _type = super.getType();
-        dos.writeByte(_type); // u1 kind of value
-        switch (_type) {
+        final int type = super.getType();
+        dos.writeByte(type); // u1 kind of value
+        switch (type) {
         case PRIMITIVE_INT:
         case PRIMITIVE_BYTE:
         case PRIMITIVE_CHAR:
@@ -50,7 +50,7 @@ public class SimpleElementValue extends ElementValue {
             dos.writeShort(getIndex());
             break;
         default:
-            throw new IllegalStateException("SimpleElementValue doesnt know how to write out type " + _type);
+            throw new IllegalStateException("SimpleElementValue doesnt know how to write out type " + type);
         }
     }
 
@@ -141,8 +141,8 @@ public class SimpleElementValue extends ElementValue {
     @Override
     public String stringifyValue() {
         final ConstantPool cpool = super.getConstantPool();
-        final int _type = super.getType();
-        switch (_type) {
+        final int type = super.getType();
+        switch (type) {
         case PRIMITIVE_INT:
             final ConstantInteger c = (ConstantInteger) cpool.getConstant(getIndex(), Const.CONSTANT_Integer);
             return Integer.toString(c.getBytes());
@@ -174,7 +174,7 @@ public class SimpleElementValue extends ElementValue {
             final ConstantUtf8 cu8 = (ConstantUtf8) cpool.getConstant(getIndex(), Const.CONSTANT_Utf8);
             return cu8.getBytes();
         default:
-            throw new IllegalStateException("SimpleElementValue class does not know how to stringify type " + _type);
+            throw new IllegalStateException("SimpleElementValue class does not know how to stringify type " + type);
         }
     }
 

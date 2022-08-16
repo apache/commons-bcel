@@ -45,8 +45,8 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     }
 
     public Type getType() {
-        final short _opcode = super.getOpcode();
-        switch (_opcode) {
+        final short opcode = super.getOpcode();
+        switch (opcode) {
         case Const.IRETURN:
             return Type.INT;
         case Const.LRETURN:
@@ -60,7 +60,7 @@ public abstract class ReturnInstruction extends Instruction implements Exception
         case Const.RETURN:
             return Type.VOID;
         default: // Never reached
-            throw new ClassGenException("Unknown type " + _opcode);
+            throw new ClassGenException("Unknown type " + opcode);
         }
     }
 

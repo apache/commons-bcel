@@ -90,20 +90,20 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
     /**
      * Fifth pass, produce Java byte code.
      */
-    public void byte_code(final ClassGen class_gen, final ConstantPoolGen cp) {
+    public void byte_code(final ClassGen classGen, final ConstantPoolGen cp) {
         /*
          * private static BufferedReader _in;
          */
-        class_gen.addField(new Field(ACC_PRIVATE | ACC_STATIC, cp.addUtf8("_in"), cp.addUtf8("Ljava/io/BufferedReader;"), null, cp.getConstantPool()));
+        classGen.addField(new Field(ACC_PRIVATE | ACC_STATIC, cp.addUtf8("_in"), cp.addUtf8("Ljava/io/BufferedReader;"), null, cp.getConstantPool()));
 
         MethodGen method;
         InstructionList il = new InstructionList();
-        final String class_name = class_gen.getClassName();
+        final String className = classGen.getClassName();
 
         /*
          * Often used constant pool entries
          */
-        final int _in = cp.addFieldref(class_name, "_in", "Ljava/io/BufferedReader;");
+        final int _in = cp.addFieldref(className, "_in", "Ljava/io/BufferedReader;");
 
         final int out = cp.addFieldref("java.lang.System", "out", "Ljava/io/PrintStream;");
 
@@ -118,12 +118,12 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         /*
          * private static int _readInt() throws IOException
          */
-        method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, Type.NO_ARGS, null, "_readInt", class_name, il, cp);
+        method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, Type.NO_ARGS, null, "_readInt", className, il, cp);
 
         method.addException("java.io.IOException");
 
         method.setMaxStack(2);
-        class_gen.addMethod(method.getMethod());
+        classGen.addMethod(method.getMethod());
 
         /*
          * private static int _writeInt(int i) throws IOException
@@ -146,10 +146,10 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il.append(new PUSH(cp, 0));
         il.append(InstructionConstants.IRETURN); // Reuse objects, if possible
 
-        method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, args, argv, "_writeInt", class_name, il, cp);
+        method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, args, argv, "_writeInt", className, il, cp);
 
         method.setMaxStack(4);
-        class_gen.addMethod(method.getMethod());
+        classGen.addMethod(method.getMethod());
 
         /*
          * public <init> -- constructor
@@ -161,10 +161,10 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il.append(new INVOKESPECIAL(cp.addMethodref("java.lang.Object", "<init>", "()V")));
         il.append(new RETURN());
 
-        method = new MethodGen(ACC_PUBLIC, Type.VOID, Type.NO_ARGS, null, "<init>", class_name, il, cp);
+        method = new MethodGen(ACC_PUBLIC, Type.VOID, Type.NO_ARGS, null, "<init>", className, il, cp);
 
         method.setMaxStack(1);
-        class_gen.addMethod(method.getMethod());
+        classGen.addMethod(method.getMethod());
 
         /*
          * class initializer
@@ -181,13 +181,13 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il.append(new PUTSTATIC(_in));
         il.append(InstructionConstants.RETURN); // Reuse instruction constants
 
-        method = new MethodGen(ACC_STATIC, Type.VOID, Type.NO_ARGS, null, "<clinit>", class_name, il, cp);
+        method = new MethodGen(ACC_STATIC, Type.VOID, Type.NO_ARGS, null, "<clinit>", className, il, cp);
 
         method.setMaxStack(5);
-        class_gen.addMethod(method.getMethod());
+        classGen.addMethod(method.getMethod());
 
         for (final ASTFunDecl fun_decl : fun_decls) {
-            fun_decl.byte_code(class_gen, cp);
+            fun_decl.byte_code(classGen, cp);
         }
     }
 

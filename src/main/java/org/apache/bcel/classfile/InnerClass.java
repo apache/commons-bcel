@@ -170,23 +170,23 @@ public final class InnerClass implements Cloneable, Node {
      * @return Resolved string representation
      */
     public String toString(final ConstantPool constantPool) {
-        String outer_class_name;
-        String inner_name;
-        String inner_class_name = constantPool.getConstantString(innerClassIndex, Const.CONSTANT_Class);
-        inner_class_name = Utility.compactClassName(inner_class_name, false);
+        String outerClassName;
+        String innerName;
+        String innerClassName = constantPool.getConstantString(innerClassIndex, Const.CONSTANT_Class);
+        innerClassName = Utility.compactClassName(innerClassName, false);
         if (outerClassIndex != 0) {
-            outer_class_name = constantPool.getConstantString(outerClassIndex, Const.CONSTANT_Class);
-            outer_class_name = " of class " + Utility.compactClassName(outer_class_name, false);
+            outerClassName = constantPool.getConstantString(outerClassIndex, Const.CONSTANT_Class);
+            outerClassName = " of class " + Utility.compactClassName(outerClassName, false);
         } else {
-            outer_class_name = "";
+            outerClassName = "";
         }
         if (innerNameIndex != 0) {
-            inner_name = ((ConstantUtf8) constantPool.getConstant(innerNameIndex, Const.CONSTANT_Utf8)).getBytes();
+            innerName = ((ConstantUtf8) constantPool.getConstant(innerNameIndex, Const.CONSTANT_Utf8)).getBytes();
         } else {
-            inner_name = "(anonymous)";
+            innerName = "(anonymous)";
         }
         String access = Utility.accessToString(innerAccessFlags, true);
         access = access.isEmpty() ? "" : access + " ";
-        return "  " + access + inner_name + "=class " + inner_class_name + outer_class_name;
+        return "  " + access + innerName + "=class " + innerClassName + outerClassName;
     }
 }

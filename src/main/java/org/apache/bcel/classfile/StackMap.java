@@ -84,13 +84,13 @@ public final class StackMap extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final StackMap c = (StackMap) clone();
         c.map = new StackMapEntry[map.length];
         for (int i = 0; i < map.length; i++) {
             c.map[i] = map[i].copy();
         }
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 

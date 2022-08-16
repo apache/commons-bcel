@@ -106,11 +106,11 @@ public class ClassLoader extends java.lang.ClassLoader {
      * Utility.decode() method, and parses the resulting byte array and returns the resulting JavaClass object.
      * </p>
      *
-     * @param class_name compressed byte code with "$$BCEL$$" in it
+     * @param className compressed byte code with "$$BCEL$$" in it
      */
-    protected JavaClass createClass(final String class_name) {
-        final int index = class_name.indexOf(BCEL_TOKEN);
-        final String real_name = class_name.substring(index + BCEL_TOKEN.length());
+    protected JavaClass createClass(final String className) {
+        final int index = className.indexOf(BCEL_TOKEN);
+        final String real_name = className.substring(index + BCEL_TOKEN.length());
         JavaClass clazz = null;
         try {
             final byte[] bytes = Utility.decode(real_name, true);
@@ -124,23 +124,23 @@ public class ClassLoader extends java.lang.ClassLoader {
         final ConstantPool cp = clazz.getConstantPool();
         final ConstantClass cl = (ConstantClass) cp.getConstant(clazz.getClassNameIndex(), Const.CONSTANT_Class);
         final ConstantUtf8 name = (ConstantUtf8) cp.getConstant(cl.getNameIndex(), Const.CONSTANT_Utf8);
-        name.setBytes(class_name.replace('.', '/'));
+        name.setBytes(className.replace('.', '/'));
         return clazz;
     }
 
     @Override
-    protected Class<?> loadClass(final String class_name, final boolean resolve) throws ClassNotFoundException {
+    protected Class<?> loadClass(final String className, final boolean resolve) throws ClassNotFoundException {
         Class<?> cl = null;
         /*
          * First try: lookup hash table.
          */
-        if ((cl = classes.get(class_name)) == null) {
+        if ((cl = classes.get(className)) == null) {
             /*
              * Second try: Load system class using system class loader. You better don't mess around with them.
              */
             for (final String ignored_package : ignoredPackages) {
-                if (class_name.startsWith(ignored_package)) {
-                    cl = getParent().loadClass(class_name);
+                if (className.startsWith(ignored_package)) {
+                    cl = getParent().loadClass(className);
                     break;
                 }
             }
@@ -149,26 +149,26 @@ public class ClassLoader extends java.lang.ClassLoader {
                 /*
                  * Third try: Special request?
                  */
-                if (class_name.contains(BCEL_TOKEN)) {
-                    clazz = createClass(class_name);
+                if (className.contains(BCEL_TOKEN)) {
+                    clazz = createClass(className);
                 } else { // Fourth try: Load classes via repository
-                    if ((clazz = repository.loadClass(class_name)) == null) {
-                        throw new ClassNotFoundException(class_name);
+                    if ((clazz = repository.loadClass(className)) == null) {
+                        throw new ClassNotFoundException(className);
                     }
                     clazz = modifyClass(clazz);
                 }
                 if (clazz != null) {
                     final byte[] bytes = clazz.getBytes();
-                    cl = defineClass(class_name, bytes, 0, bytes.length);
+                    cl = defineClass(className, bytes, 0, bytes.length);
                 } else {
-                    cl = Class.forName(class_name);
+                    cl = Class.forName(className);
                 }
             }
             if (resolve) {
                 resolveClass(cl);
             }
         }
-        classes.put(class_name, cl);
+        classes.put(className, cl);
         return cl;
     }
 

@@ -38,9 +38,9 @@ public class LOOKUPSWITCH extends Select {
     public LOOKUPSWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle defaultTarget) {
         super(org.apache.bcel.Const.LOOKUPSWITCH, match, targets, defaultTarget);
         /* alignment remainder assumed 0 here, until dump time. */
-        final short _length = (short) (9 + getMatch_length() * 8);
-        super.setLength(_length);
-        setFixed_length(_length);
+        final short length = (short) (9 + getMatch_length() * 8);
+        super.setLength(length);
+        setFixed_length(length);
     }
 
     /**
@@ -66,9 +66,9 @@ public class LOOKUPSWITCH extends Select {
     @Override
     public void dump(final DataOutputStream out) throws IOException {
         super.dump(out);
-        final int _match_length = getMatch_length();
-        out.writeInt(_match_length); // npairs
-        for (int i = 0; i < _match_length; i++) {
+        final int matchLength = getMatch_length();
+        out.writeInt(matchLength); // npairs
+        for (int i = 0; i < matchLength; i++) {
             out.writeInt(super.getMatch(i)); // match-offset pairs
             out.writeInt(setIndices(i, getTargetOffset(super.getTarget(i))));
         }
@@ -80,16 +80,16 @@ public class LOOKUPSWITCH extends Select {
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
         super.initFromFile(bytes, wide); // reads padding
-        final int _match_length = bytes.readInt();
-        setMatch_length(_match_length);
-        final short _fixed_length = (short) (9 + _match_length * 8);
-        setFixed_length(_fixed_length);
-        final short _length = (short) (_match_length + super.getPadding());
-        super.setLength(_length);
-        super.setMatches(new int[_match_length]);
-        super.setIndices(new int[_match_length]);
-        super.setTargets(new InstructionHandle[_match_length]);
-        for (int i = 0; i < _match_length; i++) {
+        final int matchLength = bytes.readInt();
+        setMatch_length(matchLength);
+        final short fixedLength = (short) (9 + matchLength * 8);
+        setFixed_length(fixedLength);
+        final short length = (short) (matchLength + super.getPadding());
+        super.setLength(length);
+        super.setMatches(new int[matchLength]);
+        super.setIndices(new int[matchLength]);
+        super.setTargets(new InstructionHandle[matchLength]);
+        for (int i = 0; i < matchLength; i++) {
             super.setMatch(i, bytes.readInt());
             super.setIndices(i, bytes.readInt());
         }

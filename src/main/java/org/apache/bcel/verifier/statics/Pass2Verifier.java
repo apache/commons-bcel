@@ -108,26 +108,26 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         private final Set<String> field_names_and_desc = new HashSet<>();
         private final Set<String> method_names_and_desc = new HashSet<>();
 
-        private CPESSC_Visitor(final JavaClass _jc) {
-            jc = _jc;
-            cp = _jc.getConstantPool();
-            cplen = cp.getLength();
+        private CPESSC_Visitor(final JavaClass jc) {
+            this.jc = jc;
+            this.cp = jc.getConstantPool();
+            this.cplen = cp.getLength();
 
-            CONST_Class = ConstantClass.class;
+            this.CONST_Class = ConstantClass.class;
             /*
              * CONST_Fieldref = ConstantFieldref.class; CONST_Methodref = ConstantMethodref.class; CONST_InterfaceMethodref =
              * ConstantInterfaceMethodref.class;
              */
-            CONST_String = ConstantString.class;
-            CONST_Integer = ConstantInteger.class;
-            CONST_Float = ConstantFloat.class;
-            CONST_Long = ConstantLong.class;
-            CONST_Double = ConstantDouble.class;
-            CONST_NameAndType = ConstantNameAndType.class;
-            CONST_Utf8 = ConstantUtf8.class;
+            this.CONST_String = ConstantString.class;
+            this.CONST_Integer = ConstantInteger.class;
+            this.CONST_Float = ConstantFloat.class;
+            this.CONST_Long = ConstantLong.class;
+            this.CONST_Double = ConstantDouble.class;
+            this.CONST_NameAndType = ConstantNameAndType.class;
+            this.CONST_Utf8 = ConstantUtf8.class;
 
-            carrier = new DescendingVisitor(_jc, this);
-            carrier.visit();
+            this.carrier = new DescendingVisitor(jc, this);
+            this.carrier.visit();
         }
 
         private void checkIndex(final Node referrer, final int index, final Class<?> shouldbe) {
@@ -455,7 +455,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             if (pred instanceof Field) { // ConstantValue attributes are quite senseless if the predecessor is not a field.
                 final Field f = (Field) pred;
                 // Field constraints have been checked before -- so we are safe using their type information.
-                final Type field_type = Type.getType(((ConstantUtf8) cp.getConstant(f.getSignatureIndex())).getBytes());
+                final Type fieldType = Type.getType(((ConstantUtf8) cp.getConstant(f.getSignatureIndex())).getBytes());
 
                 final int index = obj.getConstantValueIndex();
                 if (index < 0 || index >= cplen) {
@@ -463,22 +463,22 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
                 final Constant c = cp.getConstant(index);
 
-                if (CONST_Long.isInstance(c) && field_type.equals(Type.LONG) || CONST_Float.isInstance(c) && field_type.equals(Type.FLOAT)) {
+                if (CONST_Long.isInstance(c) && fieldType.equals(Type.LONG) || CONST_Float.isInstance(c) && fieldType.equals(Type.FLOAT)) {
                     return;
                 }
-                if (CONST_Double.isInstance(c) && field_type.equals(Type.DOUBLE)) {
+                if (CONST_Double.isInstance(c) && fieldType.equals(Type.DOUBLE)) {
                     return;
                 }
-                if (CONST_Integer.isInstance(c) && (field_type.equals(Type.INT) || field_type.equals(Type.SHORT) || field_type.equals(Type.CHAR)
-                    || field_type.equals(Type.BYTE) || field_type.equals(Type.BOOLEAN))) {
+                if (CONST_Integer.isInstance(c) && (fieldType.equals(Type.INT) || fieldType.equals(Type.SHORT) || fieldType.equals(Type.CHAR)
+                    || fieldType.equals(Type.BYTE) || fieldType.equals(Type.BOOLEAN))) {
                     return;
                 }
-                if (CONST_String.isInstance(c) && field_type.equals(Type.STRING)) {
+                if (CONST_String.isInstance(c) && fieldType.equals(Type.STRING)) {
                     return;
                 }
 
                 throw new ClassConstraintException("Illegal type of ConstantValue '" + obj + "' embedding Constant '" + c + "'. It is referenced by field '"
-                    + tostring(f) + "' expecting a different type: '" + field_type + "'.");
+                    + tostring(f) + "' expecting a different type: '" + fieldType + "'.");
             }
         }
 
@@ -1010,8 +1010,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     private final class FAMRAV_Visitor extends EmptyVisitor {
         private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work.
 
-        private FAMRAV_Visitor(final JavaClass _jc) {
-            cp = _jc.getConstantPool();
+        private FAMRAV_Visitor(final JavaClass jc) {
+            this.cp = jc.getConstantPool();
         }
 
         @Override
@@ -1019,15 +1019,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             if (obj.getTag() != Const.CONSTANT_Fieldref) {
                 throw new ClassConstraintException("ConstantFieldref '" + tostring(obj) + "' has wrong tag!");
             }
-            final int name_and_type_index = obj.getNameAndTypeIndex();
-            final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(name_and_type_index);
+            final int nameAndTypeIndex = obj.getNameAndTypeIndex();
+            final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
             final String name = ((ConstantUtf8) cp.getConstant(cnat.getNameIndex())).getBytes(); // Field or Method name
             if (!validFieldName(name)) {
                 throw new ClassConstraintException("Invalid field name '" + name + "' referenced by '" + tostring(obj) + "'.");
             }
 
-            final int class_index = obj.getClassIndex();
-            final ConstantClass cc = (ConstantClass) cp.getConstant(class_index);
+            final int classIndex = obj.getClassIndex();
+            final ConstantClass cc = (ConstantClass) cp.getConstant(classIndex);
             final String className = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes(); // Class Name in internal form
             if (!validClassName(className)) {
                 throw new ClassConstraintException("Illegal class name '" + className + "' used by '" + tostring(obj) + "'.");
@@ -1047,15 +1047,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             if (obj.getTag() != Const.CONSTANT_InterfaceMethodref) {
                 throw new ClassConstraintException("ConstantInterfaceMethodref '" + tostring(obj) + "' has wrong tag!");
             }
-            final int name_and_type_index = obj.getNameAndTypeIndex();
-            final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(name_and_type_index);
+            final int nameAndTypeIndex = obj.getNameAndTypeIndex();
+            final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
             final String name = ((ConstantUtf8) cp.getConstant(cnat.getNameIndex())).getBytes(); // Field or Method name
             if (!validInterfaceMethodName(name)) {
                 throw new ClassConstraintException("Invalid (interface) method name '" + name + "' referenced by '" + tostring(obj) + "'.");
             }
 
-            final int class_index = obj.getClassIndex();
-            final ConstantClass cc = (ConstantClass) cp.getConstant(class_index);
+            final int classIndex = obj.getClassIndex();
+            final ConstantClass cc = (ConstantClass) cp.getConstant(classIndex);
             final String className = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes(); // Class Name in internal form
             if (!validClassName(className)) {
                 throw new ClassConstraintException("Illegal class name '" + className + "' used by '" + tostring(obj) + "'.");
@@ -1080,15 +1080,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             if (obj.getTag() != Const.CONSTANT_Methodref) {
                 throw new ClassConstraintException("ConstantMethodref '" + tostring(obj) + "' has wrong tag!");
             }
-            final int name_and_type_index = obj.getNameAndTypeIndex();
-            final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(name_and_type_index);
+            final int nameAndTypeIndex = obj.getNameAndTypeIndex();
+            final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
             final String name = ((ConstantUtf8) cp.getConstant(cnat.getNameIndex())).getBytes(); // Field or Method name
             if (!validClassMethodName(name)) {
                 throw new ClassConstraintException("Invalid (non-interface) method name '" + name + "' referenced by '" + tostring(obj) + "'.");
             }
 
-            final int class_index = obj.getClassIndex();
-            final ConstantClass cc = (ConstantClass) cp.getConstant(class_index);
+            final int classIndex = obj.getClassIndex();
+            final ConstantClass cc = (ConstantClass) cp.getConstant(classIndex);
             final String className = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes(); // Class Name in internal form
             if (!validClassName(className)) {
                 throw new ClassConstraintException("Illegal class name '" + className + "' used by '" + tostring(obj) + "'.");

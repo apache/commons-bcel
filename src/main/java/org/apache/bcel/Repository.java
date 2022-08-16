@@ -68,8 +68,8 @@ public abstract class Repository {
      * @throws ClassNotFoundException if the named class can't be found, or if any of its superclasses or superinterfaces
      *         can't be found
      */
-    public static JavaClass[] getInterfaces(final String class_name) throws ClassNotFoundException {
-        return getInterfaces(lookupClass(class_name));
+    public static JavaClass[] getInterfaces(final String className) throws ClassNotFoundException {
+        return getInterfaces(lookupClass(className));
     }
 
     /**
@@ -91,9 +91,8 @@ public abstract class Repository {
      * @return list of super classes of clazz in ascending order, i.e., Object is always the last element.
      * @throws ClassNotFoundException if the named class or any of its superclasses can't be found
      */
-    public static JavaClass[] getSuperClasses(final String class_name) throws ClassNotFoundException {
-        final JavaClass jc = lookupClass(class_name);
-        return getSuperClasses(jc);
+    public static JavaClass[] getSuperClasses(final String className) throws ClassNotFoundException {
+        return getSuperClasses(lookupClass(className));
     }
 
     /**
@@ -179,20 +178,20 @@ public abstract class Repository {
      * @return class object for given fully qualified class name
      * @throws ClassNotFoundException if the class could not be found or parsed correctly
      */
-    public static JavaClass lookupClass(final String class_name) throws ClassNotFoundException {
-        return repository.loadClass(class_name);
+    public static JavaClass lookupClass(final String className) throws ClassNotFoundException {
+        return repository.loadClass(className);
     }
 
     /**
      * @return class file object for given Java class by looking on the system class path; returns null if the class file
      *         can't be found
      */
-    public static ClassPath.ClassFile lookupClassFile(final String class_name) {
+    public static ClassPath.ClassFile lookupClassFile(final String className) {
         try (final ClassPath path = repository.getClassPath()) {
             if (path == null) {
                 return null;
             }
-            return path.getClassFile(class_name);
+            return path.getClassFile(className);
         } catch (final IOException e) {
             return null;
         }

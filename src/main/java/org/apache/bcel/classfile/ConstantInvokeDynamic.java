@@ -49,8 +49,8 @@ public final class ConstantInvokeDynamic extends ConstantCP {
         this(file.readShort(), file.readShort());
     }
 
-    public ConstantInvokeDynamic(final int bootstrap_method_attr_index, final int name_and_type_index) {
-        super(Const.CONSTANT_InvokeDynamic, bootstrap_method_attr_index, name_and_type_index);
+    public ConstantInvokeDynamic(final int bootstrapMethodAttrIndex, final int nameAndTypeIndex) {
+        super(Const.CONSTANT_InvokeDynamic, bootstrapMethodAttrIndex, nameAndTypeIndex);
     }
 
     /**

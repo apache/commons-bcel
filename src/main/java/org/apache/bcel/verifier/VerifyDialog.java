@@ -113,7 +113,7 @@ public class VerifyDialog extends javax.swing.JDialog {
      * The class to verify. Default set to 'java.lang.Object' in case this class is instantiated via one of the many
      * machine-generated constructors.
      */
-    private String class_name = "java.lang.Object";
+    private String className = "java.lang.Object";
 
     /** Machine-generated. */
     private javax.swing.JButton ivjFlushButton;
@@ -166,15 +166,15 @@ public class VerifyDialog extends javax.swing.JDialog {
     /**
      * Use this constructor if you want a possibility to verify other class files than java.lang.Object.
      *
-     * @param fully_qualified_class_name java.lang.String
+     * @param fullyQualifiedClassName java.lang.String
      */
-    public VerifyDialog(String fully_qualified_class_name) {
-        final int dotclasspos = fully_qualified_class_name.lastIndexOf(".class");
+    public VerifyDialog(String fullyQualifiedClassName) {
+        final int dotclasspos = fullyQualifiedClassName.lastIndexOf(".class");
         if (dotclasspos != -1) {
-            fully_qualified_class_name = fully_qualified_class_name.substring(0, dotclasspos);
+            fullyQualifiedClassName = fullyQualifiedClassName.substring(0, dotclasspos);
         }
-        fully_qualified_class_name = fully_qualified_class_name.replace('/', '.');
-        class_name = fully_qualified_class_name;
+        fullyQualifiedClassName = fullyQualifiedClassName.replace('/', '.');
+        this.className = fullyQualifiedClassName;
         initialize();
     }
 
@@ -240,8 +240,8 @@ public class VerifyDialog extends javax.swing.JDialog {
 
     /** Machine-generated. */
     public void flushButton_ActionPerformed(final java.awt.event.ActionEvent actionEvent) {
-        VerifierFactory.getVerifier(class_name).flush();
-        Repository.removeClass(class_name); // Make sure it will be reloaded.
+        VerifierFactory.getVerifier(className).flush();
+        Repository.removeClass(className); // Make sure it will be reloaded.
         getPass1Panel().setBackground(Color.gray);
         getPass1Panel().repaint();
         getPass2Panel().setBackground(Color.gray);
@@ -461,13 +461,13 @@ public class VerifyDialog extends javax.swing.JDialog {
             handleException(ivjExc);
         }
         // user code begin {2}
-        setTitle("'" + class_name + "' verification - JustIce / BCEL");
+        setTitle("'" + className + "' verification - JustIce / BCEL");
         // user code end
     }
 
     /** Machine-generated. */
     public void pass1Button_ActionPerformed(final java.awt.event.ActionEvent actionEvent) {
-        final Verifier v = VerifierFactory.getVerifier(class_name);
+        final Verifier v = VerifierFactory.getVerifier(className);
         final VerificationResult vr = v.doPass1();
         if (vr.getStatus() == VerificationResult.VERIFIED_OK) {
             getPass1Panel().setBackground(Color.green);
@@ -482,7 +482,7 @@ public class VerifyDialog extends javax.swing.JDialog {
     /** Machine-generated. */
     public void pass2Button_ActionPerformed(final java.awt.event.ActionEvent actionEvent) {
         pass1Button_ActionPerformed(actionEvent);
-        final Verifier v = VerifierFactory.getVerifier(class_name);
+        final Verifier v = VerifierFactory.getVerifier(className);
         final VerificationResult vr = v.doPass2();
         if (vr.getStatus() == VerificationResult.VERIFIED_OK) {
             getPass2Panel().setBackground(Color.green);
@@ -502,12 +502,12 @@ public class VerifyDialog extends javax.swing.JDialog {
     public void pass4Button_ActionPerformed(final java.awt.event.ActionEvent actionEvent) {
         pass2Button_ActionPerformed(actionEvent);
         Color color = Color.green;
-        final Verifier v = VerifierFactory.getVerifier(class_name);
+        final Verifier v = VerifierFactory.getVerifier(className);
         VerificationResult vr = v.doPass2();
         if (vr.getStatus() == VerificationResult.VERIFIED_OK) {
             JavaClass jc = null;
             try {
-                jc = Repository.lookupClass(class_name);
+                jc = Repository.lookupClass(className);
                 final int nr = jc.getMethods().length;
                 for (int i = 0; i < nr; i++) {
                     vr = v.doPass3b(i);

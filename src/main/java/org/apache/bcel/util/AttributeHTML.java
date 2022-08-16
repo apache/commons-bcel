@@ -50,12 +50,12 @@ final class AttributeHTML implements Closeable {
     private final ConstantHTML constantHtml;
     private final ConstantPool constantPool;
 
-    AttributeHTML(final String dir, final String class_name, final ConstantPool constant_pool, final ConstantHTML constant_html, final Charset charset)
+    AttributeHTML(final String dir, final String className, final ConstantPool constantPool, final ConstantHTML constantHtml, final Charset charset)
         throws IOException {
-        this.className = class_name;
-        this.constantPool = constant_pool;
-        this.constantHtml = constant_html;
-        printWriter = new PrintWriter(dir + class_name + "_attributes.html", charset.name());
+        this.className = className;
+        this.constantPool = constantPool;
+        this.constantHtml = constantHtml;
+        printWriter = new PrintWriter(dir + className + "_attributes.html", charset.name());
         printWriter.print("<HTML><head><meta charset=\"");
         printWriter.print(charset.name());
         printWriter.println("\"></head>");
@@ -104,10 +104,10 @@ final class AttributeHTML implements Closeable {
             if (len > 0) {
                 printWriter.print("<P><B>Exceptions handled</B><UL>");
                 for (final CodeException cex : ce) {
-                    final int catch_type = cex.getCatchType(); // Index in constant pool
+                    final int catchType = cex.getCatchType(); // Index in constant pool
                     printWriter.print("<LI>");
-                    if (catch_type != 0) {
-                        printWriter.print(constantHtml.referenceConstant(catch_type)); // Create Link to _cp.html
+                    if (catchType != 0) {
+                        printWriter.print(constantHtml.referenceConstant(catchType)); // Create Link to _cp.html
                     } else {
                         printWriter.print("Any Exception");
                     }

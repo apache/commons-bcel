@@ -107,7 +107,7 @@ public final class Module extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final Module c = (Module) clone();
 
         c.requiresTable = new ModuleRequires[requiresTable.length];
@@ -130,7 +130,7 @@ public final class Module extends Attribute {
             c.providesTable[i] = providesTable[i].copy();
         }
 
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 
@@ -236,8 +236,8 @@ public final class Module extends Attribute {
 
         buf.append("  uses(").append(usesIndex.length).append("):\n");
         for (final int index : usesIndex) {
-            final String class_name = cp.getConstantString(index, Const.CONSTANT_Class);
-            buf.append("    ").append(Utility.compactClassName(class_name, false)).append("\n");
+            final String className = cp.getConstantString(index, Const.CONSTANT_Class);
+            buf.append("    ").append(Utility.compactClassName(className, false)).append("\n");
         }
 
         buf.append("  provides(").append(providesTable.length).append("):\n");

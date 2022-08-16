@@ -40,10 +40,10 @@ public final class ArrayType extends ReferenceType {
     /**
      * Convenience constructor for reference array type, e.g. Object[]
      *
-     * @param class_name complete name of class (java.lang.String, e.g.)
+     * @param className complete name of class (java.lang.String, e.g.)
      */
-    public ArrayType(final String class_name, final int dimensions) {
-        this(ObjectType.getInstance(class_name), dimensions);
+    public ArrayType(final String className, final int dimensions) {
+        this(ObjectType.getInstance(className), dimensions);
     }
 
     /**
@@ -81,9 +81,9 @@ public final class ArrayType extends ReferenceType {
      * @return true if both type objects refer to the same array type.
      */
     @Override
-    public boolean equals(final Object _type) {
-        if (_type instanceof ArrayType) {
-            final ArrayType array = (ArrayType) _type;
+    public boolean equals(final Object type) {
+        if (type instanceof ArrayType) {
+            final ArrayType array = (ArrayType) type;
             return array.dimensions == dimensions && array.basicType.equals(basicType);
         }
         return false;

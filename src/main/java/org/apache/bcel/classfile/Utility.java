@@ -972,8 +972,8 @@ public abstract class Utility {
                 throw new ClassFormatException("Invalid method signature: " + signature);
             }
             while (signature.charAt(index) != ')') {
-                final String param_type = typeSignatureToString(signature.substring(index), chopit);
-                buf.append(param_type);
+                final String paramType = typeSignatureToString(signature.substring(index), chopit);
+                buf.append(paramType);
                 if (vars != null) {
                     final LocalVariable l = vars.getLocalVariable(var_index, 0);
                     if (l != null) {
@@ -982,7 +982,7 @@ public abstract class Utility {
                 } else {
                     buf.append(" arg").append(var_index);
                 }
-                if ("double".equals(param_type) || "long".equals(param_type)) {
+                if ("double".equals(paramType) || "long".equals(paramType)) {
                     var_index += 2;
                 } else {
                     var_index++;
@@ -1525,8 +1525,8 @@ public abstract class Utility {
                 type = typeSignatureToString(signature.substring(n), chopit);
                 // corrected concurrent private static field acess
                 // Utility.consumed_chars += consumed_chars; is replaced by:
-                final int _temp = unwrap(Utility.CONSUMER_CHARS) + consumed_chars;
-                wrap(Utility.CONSUMER_CHARS, _temp);
+                final int temp = unwrap(Utility.CONSUMER_CHARS) + consumed_chars;
+                wrap(Utility.CONSUMER_CHARS, temp);
                 return type + brackets.toString();
             }
             case 'V':

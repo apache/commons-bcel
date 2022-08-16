@@ -90,14 +90,14 @@ public final class InnerClasses extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         // TODO this could be recoded to use a lower level constructor after creating a copy of the inner classes
         final InnerClasses c = (InnerClasses) clone();
         c.innerClasses = new InnerClass[innerClasses.length];
         for (int i = 0; i < innerClasses.length; i++) {
             c.innerClasses[i] = innerClasses[i].copy();
         }
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 

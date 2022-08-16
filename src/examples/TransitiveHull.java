@@ -90,17 +90,17 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
         set.add(clazz);
     }
 
-    private void add(String class_name) {
-        class_name = class_name.replace('/', '.');
+    private void add(String className) {
+        className = className.replace('/', '.');
 
         for (final String anIgnored : ignored) {
-            if (Pattern.matches(anIgnored, class_name)) {
+            if (Pattern.matches(anIgnored, className)) {
                 return;
             }
         }
 
         try {
-            final JavaClass clazz = Repository.lookupClass(class_name);
+            final JavaClass clazz = Repository.lookupClass(className);
 
             if (set.add(clazz)) {
                 queue.enqueue(clazz);
@@ -155,8 +155,8 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
 
     @Override
     public void visitConstantClass(final ConstantClass cc) {
-        final String class_name = (String) cc.getConstantValue(cp);
-        add(class_name);
+        final String className = (String) cc.getConstantValue(cp);
+        add(className);
     }
 
     @Override
@@ -175,8 +175,8 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     private void visitRef(final ConstantCP ccp, final boolean method) {
-        final String class_name = ccp.getClass(cp);
-        add(class_name);
+        final String className = ccp.getClass(cp);
+        add(className);
 
         final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(ccp.getNameAndTypeIndex(), Constants.CONSTANT_NameAndType);
 

@@ -64,14 +64,14 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants, org.
 //    Function   f     = function;
         // ASTIdent fun = f.getName();
 //    ASTIdent[] args  = f.getArgs();
-        final String class_name = method.getClassName();
+        final String className = method.getClassName();
 
         if (fname.equals("READ")) {
-            il.append(new INVOKESTATIC(cp.addMethodref(class_name, "_readInt", "()I")));
+            il.append(new INVOKESTATIC(cp.addMethodref(className, "_readInt", "()I")));
         } else if (fname.equals("WRITE")) {
             exprs[0].byte_code(il, method, cp);
             ASTFunDecl.pop();
-            il.append(new INVOKESTATIC(cp.addMethodref(class_name, "_writeInt", "(I)I")));
+            il.append(new INVOKESTATIC(cp.addMethodref(className, "_writeInt", "(I)I")));
         } else { // Normal function
             final int size = exprs.length;
             Type[] argv = null;
@@ -90,7 +90,7 @@ public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants, org.
             ASTFunDecl.pop(size);
 
             // Function call
-            il.append(new INVOKESTATIC(cp.addMethodref(class_name, fname, Type.getMethodSignature(Type.INT, argv))));
+            il.append(new INVOKESTATIC(cp.addMethodref(className, fname, Type.getMethodSignature(Type.INT, argv))));
         }
 
         ASTFunDecl.push();

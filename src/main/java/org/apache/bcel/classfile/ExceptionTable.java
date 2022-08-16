@@ -88,13 +88,13 @@ public final class ExceptionTable extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final ExceptionTable c = (ExceptionTable) clone();
         if (exceptionIndexTable != null) {
             c.exceptionIndexTable = new int[exceptionIndexTable.length];
             System.arraycopy(exceptionIndexTable, 0, c.exceptionIndexTable, 0, exceptionIndexTable.length);
         }
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 

@@ -86,13 +86,13 @@ public final class ModulePackages extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final ModulePackages c = (ModulePackages) clone();
         if (packageIndexTable != null) {
             c.packageIndexTable = new int[packageIndexTable.length];
             System.arraycopy(packageIndexTable, 0, c.packageIndexTable, 0, packageIndexTable.length);
         }
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 

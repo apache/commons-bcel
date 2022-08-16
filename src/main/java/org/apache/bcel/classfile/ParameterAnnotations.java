@@ -32,15 +32,15 @@ public abstract class ParameterAnnotations extends Attribute {
     private ParameterAnnotationEntry[] parameterAnnotationTable;
 
     /**
-     * @param parameter_annotation_type the subclass type of the parameter annotation
+     * @param parameterAnnotationType the subclass type of the parameter annotation
      * @param name_index Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
      * @param input Input stream
      * @param constant_pool Array of constants
      */
-    ParameterAnnotations(final byte parameter_annotation_type, final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
+    ParameterAnnotations(final byte parameterAnnotationType, final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
         throws IOException {
-        this(parameter_annotation_type, name_index, length, (ParameterAnnotationEntry[]) null, constant_pool);
+        this(parameterAnnotationType, name_index, length, (ParameterAnnotationEntry[]) null, constant_pool);
         final int num_parameters = input.readUnsignedByte();
         parameterAnnotationTable = new ParameterAnnotationEntry[num_parameters];
         for (int i = 0; i < num_parameters; i++) {

@@ -194,10 +194,10 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
     /**
      * Fifth pass, produce Java byte code.
      */
-    public void byte_code(final ClassGen class_gen, final ConstantPoolGen cp) {
+    public void byte_code(final ClassGen classGen, final ConstantPoolGen cp) {
         MethodGen method = null;
         boolean main = false, ignore = false;
-        final String class_name = class_gen.getClassName();
+        final String className = classGen.getClassName();
         final String fname = name.getName();
         final InstructionList il = new InstructionList();
 
@@ -205,7 +205,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
         String[] arg_names = {"$argv"};
 
         if (fname.equals("main")) {
-            method = new MethodGen(ACC_STATIC | ACC_PUBLIC, Type.VOID, args, arg_names, "main", class_name, il, cp);
+            method = new MethodGen(ACC_STATIC | ACC_PUBLIC, Type.VOID, args, arg_names, "main", className, il, cp);
 
             main = true;
         } else if (fname.equals("READ") || fname.equals("WRITE")) { // Do nothing
@@ -221,7 +221,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
                 arg_names[i] = argv[i].getName();
             }
 
-            method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, args, arg_names, fname, class_name, il, cp);
+            method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, args, arg_names, fname, className, il, cp);
 
             final LocalVariableGen[] lv = method.getLocalVariables();
             for (int i = 0; i < size; i++) {
@@ -236,10 +236,10 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
             body.byte_code(il, method, cp);
 
             if (main) {
-                final ObjectType e_type = new ObjectType("java.lang.Exception");
+                final ObjectType eType = new ObjectType("java.lang.Exception");
                 final InstructionHandle start = il.getStart();
                 InstructionHandle end, handler, end_handler;
-                final LocalVariableGen exc = method.addLocalVariable("$e", e_type, null, null);
+                final LocalVariableGen exc = method.addLocalVariable("$e", eType, null, null);
                 final int slot = exc.getIndex();
 
                 il.append(InstructionConstants.POP);
@@ -254,7 +254,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
                 il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/Object;)V")));
                 pop(2);
                 end_handler = il.append(InstructionConstants.RETURN);
-                method.addExceptionHandler(start, end, handler, e_type);
+                method.addExceptionHandler(start, end, handler, eType);
                 exc.setStart(handler);
                 exc.setEnd(end_handler);
             } else {
@@ -264,7 +264,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
             method.removeNOPs(); // First optimization pass, provided by MethodGen
             optimizeIFs(il); // Second optimization pass, application-specific
             method.setMaxStack(max_size);
-            class_gen.addMethod(method.getMethod());
+            classGen.addMethod(method.getMethod());
         }
 
         il.dispose(); // Dispose instruction handles for better memory utilization

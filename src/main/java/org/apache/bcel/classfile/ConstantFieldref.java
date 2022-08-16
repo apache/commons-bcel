@@ -46,11 +46,11 @@ public final class ConstantFieldref extends ConstantCP {
     }
 
     /**
-     * @param class_index Reference to the class containing the Field
-     * @param name_and_type_index and the Field signature
+     * @param classIndex Reference to the class containing the Field
+     * @param nameAndTypeIndex and the Field signature
      */
-    public ConstantFieldref(final int class_index, final int name_and_type_index) {
-        super(Const.CONSTANT_Fieldref, class_index, name_and_type_index);
+    public ConstantFieldref(final int classIndex, final int nameAndTypeIndex) {
+        super(Const.CONSTANT_Fieldref, classIndex, nameAndTypeIndex);
     }
 
     /**

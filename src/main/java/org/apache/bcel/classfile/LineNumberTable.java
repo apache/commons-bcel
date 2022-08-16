@@ -90,7 +90,7 @@ public final class LineNumberTable extends Attribute {
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         // TODO could use the lower level constructor and thereby allow
         // lineNumberTable to be made final
         final LineNumberTable c = (LineNumberTable) clone();
@@ -98,7 +98,7 @@ public final class LineNumberTable extends Attribute {
         for (int i = 0; i < lineNumberTable.length; i++) {
             c.lineNumberTable[i] = lineNumberTable[i].copy();
         }
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 

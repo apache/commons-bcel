@@ -50,13 +50,13 @@ final class CodeHTML {
     private final ConstantPool constantPool;
     private final ConstantHTML constantHtml;
 
-    CodeHTML(final String dir, final String class_name, final Method[] methods, final ConstantPool constant_pool, final ConstantHTML constant_html,
+    CodeHTML(final String dir, final String className, final Method[] methods, final ConstantPool constantPool, final ConstantHTML constantHtml,
         final Charset charset) throws IOException {
-        this.className = class_name;
+        this.className = className;
 //        this.methods = methods;
-        this.constantPool = constant_pool;
-        this.constantHtml = constant_html;
-        try (PrintWriter newPrintWriter = new PrintWriter(dir + class_name + "_code.html", charset.name())) {
+        this.constantPool = constantPool;
+        this.constantHtml = constantHtml;
+        try (PrintWriter newPrintWriter = new PrintWriter(dir + className + "_code.html", charset.name())) {
             printWriter = newPrintWriter;
             printWriter.print("<HTML><head><meta charset=\"");
             printWriter.print(charset.name());

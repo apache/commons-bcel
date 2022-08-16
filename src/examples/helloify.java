@@ -41,7 +41,7 @@ import org.apache.bcel.generic.PUSH;
  */
 public final class helloify implements Constants {
 
-    private static String class_name;
+    private static String className;
     private static ConstantPoolGen cp;
     private static int out; // reference to System.out
     private static int println; // reference to PrintStream.println
@@ -50,11 +50,11 @@ public final class helloify implements Constants {
      * Change class name to <old_name>_hello
      */
     private static void helloifyClassName(final JavaClass java_class) {
-        class_name = java_class.getClassName() + "_hello";
+        className = java_class.getClassName() + "_hello";
         int index = java_class.getClassNameIndex();
 
         index = ((ConstantClass) cp.getConstant(index)).getNameIndex();
-        cp.setConstant(index, new ConstantUtf8(class_name.replace('.', '/')));
+        cp.setConstant(index, new ConstantUtf8(className.replace('.', '/')));
     }
 
     /**
@@ -77,7 +77,7 @@ public final class helloify implements Constants {
         patch.append(new PUSH(cp, mesg));
         patch.append(new INVOKEVIRTUAL(println));
 
-        final MethodGen mg = new MethodGen(m, class_name, cp);
+        final MethodGen mg = new MethodGen(m, className, cp);
         final InstructionList il = mg.getInstructionList();
         final InstructionHandle[] ihs = il.getInstructionHandles();
 

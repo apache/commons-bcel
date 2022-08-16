@@ -68,8 +68,8 @@ public final class BasicType extends Type {
      * @return true if both type objects refer to the same type
      */
     @Override
-    public boolean equals(final Object _type) {
-        return _type instanceof BasicType ? ((BasicType) _type).getType() == this.getType() : false;
+    public boolean equals(final Object type) {
+        return type instanceof BasicType ? ((BasicType) type).getType() == this.getType() : false;
     }
 
     /**

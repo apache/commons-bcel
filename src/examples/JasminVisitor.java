@@ -69,17 +69,17 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
                 java_class = new ClassParser(arg).parse();
             }
 
-            String class_name = java_class.getClassName();
-            final int index = class_name.lastIndexOf('.');
-            final String path = class_name.substring(0, index + 1).replace('.', File.separatorChar);
-            class_name = class_name.substring(index + 1);
+            String className = java_class.getClassName();
+            final int index = className.lastIndexOf('.');
+            final String path = className.substring(0, index + 1).replace('.', File.separatorChar);
+            className = className.substring(index + 1);
 
             if (!path.equals("")) {
                 final File f = new File(path);
                 f.mkdirs();
             }
 
-            final String name = path + class_name + ".j";
+            final String name = path + className + ".j";
             final FileOutputStream out = new FileOutputStream(name);
             new JasminVisitor(java_class, out).disassemble();
             System.out.println("File dumped to: " + name);
@@ -88,7 +88,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     private final JavaClass clazz;
     private final PrintWriter out;
-    private final String class_name;
+    private final String className;
 
     private final ConstantPoolGen cp;
 
@@ -99,7 +99,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     public JasminVisitor(final JavaClass clazz, final OutputStream out) {
         this.clazz = clazz;
         this.out = new PrintWriter(out);
-        this.class_name = clazz.getClassName();
+        this.className = clazz.getClassName();
         this.cp = new ConstantPoolGen(clazz.getConstantPool());
     }
 
@@ -149,7 +149,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         out.println(".limit stack " + code.getMaxStack());
         out.println(".limit locals " + code.getMaxLocals());
 
-        final MethodGen mg = new MethodGen(_method, class_name, cp);
+        final MethodGen mg = new MethodGen(_method, className, cp);
         final InstructionList il = mg.getInstructionList();
         final InstructionHandle[] ihs = il.getInstructionHandles();
 
@@ -251,10 +251,10 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
         for (final CodeExceptionGen c : ehs) {
             final ObjectType caught = c.getCatchType();
-            final String class_name = caught == null ? // catch any exception, used when compiling finally
+            final String className = caught == null ? // catch any exception, used when compiling finally
                 "all" : caught.getClassName().replace('.', '/');
 
-            out.println(".catch " + class_name + " from " + get(c.getStartPC()) + " to " + get(c.getEndPC()) + " using " + get(c.getHandlerPC()));
+            out.println(".catch " + className + " from " + get(c.getStartPC()) + " to " + get(c.getEndPC()) + " using " + get(c.getHandlerPC()));
         }
 
         printEndMethod(code);

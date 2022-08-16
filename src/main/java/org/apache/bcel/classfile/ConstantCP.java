@@ -63,13 +63,13 @@ public abstract class ConstantCP extends Constant {
     }
 
     /**
-     * @param class_index Reference to the class containing the field
-     * @param name_and_type_index and the field signature
+     * @param classIndex Reference to the class containing the field
+     * @param nameAndTypeIndex and the field signature
      */
-    protected ConstantCP(final byte tag, final int class_index, final int name_and_type_index) {
+    protected ConstantCP(final byte tag, final int classIndex, final int nameAndTypeIndex) {
         super(tag);
-        this.class_index = class_index;
-        this.name_and_type_index = name_and_type_index;
+        this.class_index = classIndex;
+        this.name_and_type_index = nameAndTypeIndex;
     }
 
     /**
@@ -121,10 +121,10 @@ public abstract class ConstantCP extends Constant {
     }
 
     /**
-     * @param name_and_type_index points to Constant_NameAndType
+     * @param nameAndTypeIndex points to Constant_NameAndType
      */
-    public final void setNameAndTypeIndex(final int name_and_type_index) {
-        this.name_and_type_index = name_and_type_index;
+    public final void setNameAndTypeIndex(final int nameAndTypeIndex) {
+        this.name_and_type_index = nameAndTypeIndex;
     }
 
     /**

@@ -59,12 +59,12 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
     @Override
     public void dump(final DataOutputStream out) throws IOException {
         super.setIndex(getTargetOffset());
-        final short _opcode = getOpcode();
-        if (_opcode == org.apache.bcel.Const.GOTO) {
+        final short opcode = getOpcode();
+        if (opcode == org.apache.bcel.Const.GOTO) {
             super.dump(out);
         } else { // GOTO_W
             super.setIndex(getTargetOffset());
-            out.writeByte(_opcode);
+            out.writeByte(opcode);
             out.writeInt(super.getIndex());
         }
     }

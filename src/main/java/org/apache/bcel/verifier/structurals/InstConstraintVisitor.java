@@ -1039,12 +1039,12 @@ public class InstConstraintVisitor extends EmptyVisitor {
             Field f = null;
             for (final Field field : fields) {
                 if (field.getName().equals(field_name)) {
-                    final Type f_type = Type.getType(field.getSignature());
-                    final Type o_type = o.getType(cpg);
+                    final Type fType = Type.getType(field.getSignature());
+                    final Type oType = o.getType(cpg);
                     /*
                      * TODO: Check if assignment compatibility is sufficient. What does Sun do?
                      */
-                    if (f_type.equals(o_type)) {
+                    if (fType.equals(oType)) {
                         f = field;
                         break;
                     }
@@ -1057,9 +1057,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
                     fields = superclass.getFields();
                     for (final Field field : fields) {
                         if (field.getName().equals(field_name)) {
-                            final Type f_type = Type.getType(field.getSignature());
-                            final Type o_type = o.getType(cpg);
-                            if (f_type.equals(o_type)) {
+                            final Type fType = Type.getType(field.getSignature());
+                            final Type oType = o.getType(cpg);
+                            if (fType.equals(oType)) {
                                 f = field;
                                 if ((f.getAccessFlags() & (Const.ACC_PUBLIC | Const.ACC_PROTECTED)) == 0) {
                                     f = null;
@@ -2513,12 +2513,12 @@ public class InstConstraintVisitor extends EmptyVisitor {
             Field f = null;
             for (final Field field : fields) {
                 if (field.getName().equals(field_name)) {
-                    final Type f_type = Type.getType(field.getSignature());
-                    final Type o_type = o.getType(cpg);
+                    final Type fType = Type.getType(field.getSignature());
+                    final Type oType = o.getType(cpg);
                     /*
                      * TODO: Check if assignment compatibility is sufficient. What does Sun do?
                      */
-                    if (f_type.equals(o_type)) {
+                    if (fType.equals(oType)) {
                         f = field;
                         break;
                     }
@@ -2597,12 +2597,12 @@ public class InstConstraintVisitor extends EmptyVisitor {
             Field f = null;
             for (final Field field : fields) {
                 if (field.getName().equals(field_name)) {
-                    final Type f_type = Type.getType(field.getSignature());
-                    final Type o_type = o.getType(cpg);
+                    final Type fType = Type.getType(field.getSignature());
+                    final Type oType = o.getType(cpg);
                     /*
                      * TODO: Check if assignment compatibility is sufficient. What does Sun do?
                      */
-                    if (f_type.equals(o_type)) {
+                    if (fType.equals(oType)) {
                         f = field;
                         break;
                     }
@@ -2671,19 +2671,19 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitReturnInstruction(final ReturnInstruction o) {
-        Type method_type = mg.getType();
-        if (method_type == Type.BOOLEAN || method_type == Type.BYTE || method_type == Type.SHORT || method_type == Type.CHAR) {
-            method_type = Type.INT;
+        Type methodType = mg.getType();
+        if (methodType == Type.BOOLEAN || methodType == Type.BYTE || methodType == Type.SHORT || methodType == Type.CHAR) {
+            methodType = Type.INT;
         }
 
         if (o instanceof RETURN) {
-            if (method_type == Type.VOID) {
+            if (methodType == Type.VOID) {
                 return;
             }
             constraintViolated(o, "RETURN instruction in non-void method.");
         }
         if (o instanceof ARETURN) {
-            if (method_type == Type.VOID) {
+            if (methodType == Type.VOID) {
                 constraintViolated(o, "ARETURN instruction in void method.");
             }
             if (stack().peek() == Type.NULL) {
@@ -2700,8 +2700,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
             // constraintViolated(o, "Type on stack top which should be returned is a '"+stack().peek()+
             // "' which is not assignment compatible with the return type of this method, '"+mg.getType()+"'.");
             // }
-        } else if (!method_type.equals(stack().peek())) {
-            constraintViolated(o, "Current method has return type of '" + mg.getType() + "' expecting a '" + method_type
+        } else if (!methodType.equals(stack().peek())) {
+            constraintViolated(o, "Current method has return type of '" + mg.getType() + "' expecting a '" + methodType
                 + "' on top of the stack. But stack top is a '" + stack().peek() + "'.");
         }
     }

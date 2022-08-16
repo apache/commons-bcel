@@ -79,7 +79,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private String superClassName;
     private final String fileName;
     private int classNameIndex = -1;
-    private int superclass_name_index = -1;
+    private int superclassNameIndex = -1;
     private int major = Const.MAJOR_1_1;
     private int minor = Const.MINOR_1_1;
     private ConstantPoolGen cp; // Template for building up constant pool
@@ -103,7 +103,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     public ClassGen(final JavaClass clazz) {
         super(clazz.getAccessFlags());
         classNameIndex = clazz.getClassNameIndex();
-        superclass_name_index = clazz.getSuperclassNameIndex();
+        superclassNameIndex = clazz.getSuperclassNameIndex();
         className = clazz.getClassName();
         superClassName = clazz.getSuperclassName();
         fileName = clazz.getSourceFileName();
@@ -170,7 +170,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
             addAttribute(new SourceFile(cp.addUtf8("SourceFile"), 2, cp.addUtf8(fileName), cp.getConstantPool()));
         }
         classNameIndex = cp.addClass(className);
-        superclass_name_index = cp.addClass(superClassName);
+        superclassNameIndex = cp.addClass(superClassName);
         if (interfaces != null) {
             for (final String interface1 : interfaces) {
                 addInterface(interface1);
@@ -356,8 +356,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
             System.arraycopy(annAttributes, 0, attributes, attributeList.size(), annAttributes.length);
         }
         // Must be last since the above calls may still add something to it
-        final ConstantPool _cp = this.cp.getFinalConstantPool();
-        return new JavaClass(classNameIndex, superclass_name_index, fileName, major, minor, super.getAccessFlags(), _cp, interfaces, fields, methods,
+        final ConstantPool cp = this.cp.getFinalConstantPool();
+        return new JavaClass(classNameIndex, superclassNameIndex, fileName, major, minor, super.getAccessFlags(), cp, interfaces, fields, methods,
             attributes);
     }
 
@@ -388,7 +388,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     public int getSuperclassNameIndex() {
-        return superclass_name_index;
+        return superclassNameIndex;
     }
 
     /**
@@ -481,9 +481,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
         classNameIndex = cp.addClass(name);
     }
 
-    public void setClassNameIndex(final int class_name_index) {
-        this.classNameIndex = class_name_index;
-        className = cp.getConstantPool().getConstantString(class_name_index, Const.CONSTANT_Class).replace('/', '.');
+    public void setClassNameIndex(final int classNameIndex) {
+        this.classNameIndex = classNameIndex;
+        this.className = cp.getConstantPool().getConstantString(classNameIndex, Const.CONSTANT_Class).replace('/', '.');
     }
 
     public void setConstantPool(final ConstantPoolGen constant_pool) {
@@ -521,12 +521,12 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     public void setSuperclassName(final String name) {
         superClassName = name.replace('/', '.');
-        superclass_name_index = cp.addClass(name);
+        superclassNameIndex = cp.addClass(name);
     }
 
-    public void setSuperclassNameIndex(final int superclass_name_index) {
-        this.superclass_name_index = superclass_name_index;
-        superClassName = cp.getConstantPool().getConstantString(superclass_name_index, Const.CONSTANT_Class).replace('/', '.');
+    public void setSuperclassNameIndex(final int superclassNameIndex) {
+        this.superclassNameIndex = superclassNameIndex;
+        superClassName = cp.getConstantPool().getConstantString(superclassNameIndex, Const.CONSTANT_Class).replace('/', '.');
     }
 
     /**

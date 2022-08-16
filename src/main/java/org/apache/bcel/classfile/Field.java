@@ -116,8 +116,8 @@ public final class Field extends FieldOrMethod {
     /**
      * @return deep copy of this field
      */
-    public Field copy(final ConstantPool _constant_pool) {
-        return (Field) copy_(_constant_pool);
+    public Field copy(final ConstantPool constantPool) {
+        return (Field) copy_(constantPool);
     }
 
     /**

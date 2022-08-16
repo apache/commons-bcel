@@ -186,10 +186,10 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     private void printMain() {
-        final String class_name = clazz.getClassName();
+        final String className = clazz.getClassName();
         printWriter.println("  public static void main(String[] args) throws Exception {");
-        printWriter.println("    " + class_name + "Creator creator = new " + class_name + "Creator();");
-        printWriter.println("    creator.create(new FileOutputStream(\"" + class_name + ".class\"));");
+        printWriter.println("    " + className + "Creator creator = new " + className + "Creator();");
+        printWriter.println("    creator.create(new FileOutputStream(\"" + className + ".class\"));");
         printWriter.println("  }");
     }
 
@@ -216,13 +216,13 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 
     @Override
     public void visitJavaClass(final JavaClass clazz) {
-        String class_name = clazz.getClassName();
-        final String super_name = clazz.getSuperclassName();
-        final String package_name = clazz.getPackageName();
+        String className = clazz.getClassName();
+        final String superName = clazz.getSuperclassName();
+        final String packageName = clazz.getPackageName();
         final String inter = Utility.printArray(clazz.getInterfaceNames(), false, true);
-        if (!"".equals(package_name)) {
-            class_name = class_name.substring(package_name.length() + 1);
-            printWriter.println("package " + package_name + ";");
+        if (!"".equals(packageName)) {
+            className = className.substring(packageName.length() + 1);
+            printWriter.println("package " + packageName + ";");
             printWriter.println();
         }
         printWriter.println("import " + BASE_PACKAGE + ".generic.*;");
@@ -230,13 +230,13 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         printWriter.println("import " + BASE_PACKAGE + ".*;");
         printWriter.println("import java.io.*;");
         printWriter.println();
-        printWriter.println("public class " + class_name + "Creator {");
+        printWriter.println("public class " + className + "Creator {");
         printWriter.println("  private InstructionFactory _factory;");
         printWriter.println("  private ConstantPoolGen    _cp;");
         printWriter.println("  private ClassGen           _cg;");
         printWriter.println();
-        printWriter.println("  public " + class_name + "Creator() {");
-        printWriter.println("    _cg = new ClassGen(\"" + ("".equals(package_name) ? class_name : package_name + "." + class_name) + "\", \"" + super_name
+        printWriter.println("  public " + className + "Creator() {");
+        printWriter.println("    _cg = new ClassGen(\"" + ("".equals(packageName) ? className : packageName + "." + className) + "\", \"" + superName
             + "\", " + "\"" + clazz.getSourceFileName() + "\", " + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", " + "new String[] { " + inter + " });");
         printWriter.println("    _cg.setMajor(" + clazz.getMajor() + ");");
         printWriter.println("    _cg.setMinor(" + clazz.getMinor() + ");");

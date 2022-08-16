@@ -32,16 +32,16 @@ public class InstructionFactory implements InstructionConstants {
 
     private static class MethodObject {
 
-        final Type[] arg_types;
-        final Type result_type;
-        final String class_name;
+        final Type[] argTypes;
+        final Type resultType;
+        final String className;
         final String name;
 
         MethodObject(final String c, final String n, final Type r, final Type[] a) {
-            class_name = c;
-            name = n;
-            result_type = r;
-            arg_types = a;
+            this.className = c;
+            this.name = n;
+            this.resultType = r;
+            this.argTypes = a;
         }
     }
 
@@ -185,16 +185,16 @@ public class InstructionFactory implements InstructionConstants {
      * @param bootstrap_index index into the bootstrap_methods array
      * @param name name of the called method
      * @param ret_type return type of method
-     * @param arg_types argument types of method
+     * @param argTypes argument types of method
      * @see Constants
      */
     /*
      * createInvokeDynamic only needed if instrumention code wants to generate a new invokedynamic instruction. I don't
      * think we need. (markro)
      *
-     * public InvokeInstruction createInvokeDynamic( int bootstrap_index, String name, Type ret_type, Type[] arg_types) {
-     * int index; int nargs = 0; String signature = Type.getMethodSignature(ret_type, arg_types); for (int i = 0; i <
-     * arg_types.length; i++) { nargs += arg_types[i].getSize(); } // UNDONE - needs to be added to ConstantPoolGen //index
+     * public InvokeInstruction createInvokeDynamic( int bootstrap_index, String name, Type ret_type, Type[] argTypes) {
+     * int index; int nargs = 0; String signature = Type.getMethodSignature(ret_type, argTypes); for (int i = 0; i <
+     * argTypes.length; i++) { nargs += argTypes[i].getSize(); } // UNDONE - needs to be added to ConstantPoolGen //index
      * = cp.addInvokeDynamic(bootstrap_index, name, signature); index = 0; return new INVOKEDYNAMIC(index); }
      */
 
@@ -501,10 +501,10 @@ public class InstructionFactory implements InstructionConstants {
      * Create conversion operation for two stack operands, this may be an I2C, instruction, e.g., if the operands are basic
      * types and CHECKCAST if they are reference types.
      */
-    public Instruction createCast(final Type src_type, final Type dest_type) {
-        if (src_type instanceof BasicType && dest_type instanceof BasicType) {
-            final byte dest = dest_type.getType();
-            byte src = src_type.getType();
+    public Instruction createCast(final Type srcType, final Type destType) {
+        if (srcType instanceof BasicType && destType instanceof BasicType) {
+            final byte dest = destType.getType();
+            byte src = srcType.getType();
             if (dest == Const.T_LONG && (src == Const.T_CHAR || src == Const.T_BYTE || src == Const.T_SHORT)) {
                 src = Const.T_INT;
             }
@@ -517,13 +517,13 @@ public class InstructionFactory implements InstructionConstants {
             }
             return i;
         }
-        if (!(src_type instanceof ReferenceType) || !(dest_type instanceof ReferenceType)) {
-            throw new IllegalArgumentException("Cannot cast " + src_type + " to " + dest_type);
+        if (!(srcType instanceof ReferenceType) || !(destType instanceof ReferenceType)) {
+            throw new IllegalArgumentException("Cannot cast " + srcType + " to " + destType);
         }
-        if (dest_type instanceof ArrayType) {
-            return new CHECKCAST(cp.addArrayClass((ArrayType) dest_type));
+        if (destType instanceof ArrayType) {
+            return new CHECKCAST(cp.addArrayClass((ArrayType) destType));
         }
-        return new CHECKCAST(cp.addClass(((ObjectType) dest_type).getClassName()));
+        return new CHECKCAST(cp.addClass(((ObjectType) destType).getClassName()));
     }
 
     public CHECKCAST createCheckCast(final ReferenceType t) {
@@ -557,16 +557,16 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create a field instruction.
      *
-     * @param class_name name of the accessed class
+     * @param className name of the accessed class
      * @param name name of the referenced field
      * @param type type of field
      * @param kind how to access, i.e., GETFIELD, PUTFIELD, GETSTATIC, PUTSTATIC
      * @see Const
      */
-    public FieldInstruction createFieldAccess(final String class_name, final String name, final Type type, final short kind) {
+    public FieldInstruction createFieldAccess(final String className, final String name, final Type type, final short kind) {
         int index;
         final String signature = type.getSignature();
-        index = cp.addFieldref(class_name, name, signature);
+        index = cp.addFieldref(className, name, signature);
         switch (kind) {
         case Const.GETFIELD:
             return new GETFIELD(index);
@@ -581,12 +581,12 @@ public class InstructionFactory implements InstructionConstants {
         }
     }
 
-    public GETFIELD createGetField(final String class_name, final String name, final Type t) {
-        return new GETFIELD(cp.addFieldref(class_name, name, t.getSignature()));
+    public GETFIELD createGetField(final String className, final String name, final Type t) {
+        return new GETFIELD(cp.addFieldref(className, name, t.getSignature()));
     }
 
-    public GETSTATIC createGetStatic(final String class_name, final String name, final Type t) {
-        return new GETSTATIC(cp.addFieldref(class_name, name, t.getSignature()));
+    public GETSTATIC createGetStatic(final String className, final String name, final Type t) {
+        return new GETSTATIC(cp.addFieldref(className, name, t.getSignature()));
     }
 
     public INSTANCEOF createInstanceOf(final ReferenceType t) {
@@ -597,36 +597,36 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     private InvokeInstruction createInvoke(final MethodObject m, final short kind) {
-        return createInvoke(m.class_name, m.name, m.result_type, m.arg_types, kind);
+        return createInvoke(m.className, m.name, m.resultType, m.argTypes, kind);
     }
 
     /**
      * Create an invoke instruction. (Except for invokedynamic.)
      *
-     * @param class_name name of the called class
+     * @param className name of the called class
      * @param name name of the called method
-     * @param ret_type return type of method
-     * @param arg_types argument types of method
+     * @param retType return type of method
+     * @param argTypes argument types of method
      * @param kind how to invoke, i.e., INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
      * @see Const
      */
-    public InvokeInstruction createInvoke(final String class_name, final String name, final Type ret_type, final Type[] arg_types, final short kind) {
-        return createInvoke(class_name, name, ret_type, arg_types, kind, kind == Const.INVOKEINTERFACE);
+    public InvokeInstruction createInvoke(final String className, final String name, final Type retType, final Type[] argTypes, final short kind) {
+        return createInvoke(className, name, retType, argTypes, kind, kind == Const.INVOKEINTERFACE);
     }
 
     /**
      * Create an invoke instruction. (Except for invokedynamic.)
      *
-     * @param class_name name of the called class
+     * @param className name of the called class
      * @param name name of the called method
-     * @param ret_type return type of method
-     * @param arg_types argument types of method
+     * @param retType return type of method
+     * @param argTypes argument types of method
      * @param kind how to invoke: INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
      * @param use_interface force use of InterfaceMethodref
      * @return A new InvokeInstruction.
      * @since 6.5.0
      */
-    public InvokeInstruction createInvoke(final String class_name, final String name, final Type ret_type, final Type[] arg_types, final short kind,
+    public InvokeInstruction createInvoke(final String className, final String name, final Type retType, final Type[] argTypes, final short kind,
         final boolean use_interface) {
         if (kind != Const.INVOKESPECIAL && kind != Const.INVOKEVIRTUAL && kind != Const.INVOKESTATIC && kind != Const.INVOKEINTERFACE
             && kind != Const.INVOKEDYNAMIC) {
@@ -634,14 +634,14 @@ public class InstructionFactory implements InstructionConstants {
         }
         int index;
         int nargs = 0;
-        final String signature = Type.getMethodSignature(ret_type, arg_types);
-        for (final Type arg_type : arg_types) {
-            nargs += arg_type.getSize();
+        final String signature = Type.getMethodSignature(retType, argTypes);
+        for (final Type argType : argTypes) {
+            nargs += argType.getSize();
         }
         if (use_interface) {
-            index = cp.addInterfaceMethodref(class_name, name, signature);
+            index = cp.addInterfaceMethodref(className, name, signature);
         } else {
-            index = cp.addMethodref(class_name, name, signature);
+            index = cp.addMethodref(className, name, signature);
         }
         switch (kind) {
         case Const.INVOKESPECIAL:
@@ -707,12 +707,12 @@ public class InstructionFactory implements InstructionConstants {
         return il;
     }
 
-    public PUTFIELD createPutField(final String class_name, final String name, final Type t) {
-        return new PUTFIELD(cp.addFieldref(class_name, name, t.getSignature()));
+    public PUTFIELD createPutField(final String className, final String name, final Type t) {
+        return new PUTFIELD(cp.addFieldref(className, name, t.getSignature()));
     }
 
-    public PUTSTATIC createPutStatic(final String class_name, final String name, final Type t) {
-        return new PUTSTATIC(cp.addFieldref(class_name, name, t.getSignature()));
+    public PUTSTATIC createPutStatic(final String className, final String name, final Type t) {
+        return new PUTSTATIC(cp.addFieldref(className, name, t.getSignature()));
     }
 
     public ClassGen getClassGen() {

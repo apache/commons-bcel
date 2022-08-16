@@ -143,15 +143,15 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
             n = bytes.readUnsignedShort();
             super.setLength(4);
         } else {
-            final short _opcode = super.getOpcode();
-            if (_opcode >= Const.ILOAD && _opcode <= Const.ALOAD || _opcode >= Const.ISTORE && _opcode <= Const.ASTORE) {
+            final short opcode = super.getOpcode();
+            if (opcode >= Const.ILOAD && opcode <= Const.ALOAD || opcode >= Const.ISTORE && opcode <= Const.ASTORE) {
                 n = bytes.readUnsignedByte();
                 super.setLength(2);
             } else {
-                if (_opcode <= Const.ALOAD_3) { // compact load instruction such as ILOAD_2
-                    n = (_opcode - Const.ILOAD_0) % 4;
+                if (opcode <= Const.ALOAD_3) { // compact load instruction such as ILOAD_2
+                    n = (opcode - Const.ILOAD_0) % 4;
                 } else { // Assert ISTORE_0 <= tag <= ASTORE_3
-                    n = (_opcode - Const.ISTORE_0) % 4;
+                    n = (opcode - Const.ISTORE_0) % 4;
                 }
                 super.setLength(1);
             }
@@ -204,8 +204,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      */
     @Override
     public String toString(final boolean verbose) {
-        final short _opcode = super.getOpcode();
-        if (_opcode >= Const.ILOAD_0 && _opcode <= Const.ALOAD_3 || _opcode >= Const.ISTORE_0 && _opcode <= Const.ASTORE_3) {
+        final short opcode = super.getOpcode();
+        if (opcode >= Const.ILOAD_0 && opcode <= Const.ALOAD_3 || opcode >= Const.ISTORE_0 && opcode <= Const.ASTORE_3) {
             return super.toString(verbose);
         }
         return super.toString(verbose) + " " + n;

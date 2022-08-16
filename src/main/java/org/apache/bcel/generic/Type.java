@@ -122,19 +122,19 @@ public abstract class Type {
     /**
      * Convert type to Java method signature, e.g. int[] f(java.lang.String x) becomes (Ljava/lang/String;)[I
      *
-     * @param return_type what the method returns
-     * @param arg_types what are the argument types
+     * @param returnType what the method returns
+     * @param argTypes what are the argument types
      * @return method signature for given type(s).
      */
-    public static String getMethodSignature(final Type return_type, final Type[] arg_types) {
+    public static String getMethodSignature(final Type returnType, final Type[] argTypes) {
         final StringBuilder buf = new StringBuilder("(");
-        if (arg_types != null) {
-            for (final Type arg_type : arg_types) {
-                buf.append(arg_type.getSignature());
+        if (argTypes != null) {
+            for (final Type argType : argTypes) {
+                buf.append(argType.getSignature());
             }
         }
         buf.append(')');
-        buf.append(return_type.getSignature());
+        buf.append(returnType.getSignature());
         return buf.toString();
     }
 
@@ -245,8 +245,8 @@ public abstract class Type {
         final Type t = getType(signature.substring(dim));
         // corrected concurrent private static field acess
         // consumed_chars += dim; // update counter - is replaced by
-        final int _temp = unwrap(CONSUMED_CHARS) + dim;
-        wrap(CONSUMED_CHARS, _temp);
+        final int temp = unwrap(CONSUMED_CHARS) + dim;
+        wrap(CONSUMED_CHARS, temp);
         return new ArrayType(t, dim);
     }
 

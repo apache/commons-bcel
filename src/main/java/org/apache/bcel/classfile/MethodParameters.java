@@ -55,14 +55,14 @@ public class MethodParameters extends Attribute {
     }
 
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final MethodParameters c = (MethodParameters) clone();
         c.parameters = new MethodParameter[parameters.length];
 
         for (int i = 0; i < parameters.length; i++) {
             c.parameters[i] = parameters[i].copy();
         }
-        c.setConstantPool(_constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 

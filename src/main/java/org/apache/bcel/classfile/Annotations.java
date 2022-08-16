@@ -49,21 +49,21 @@ public abstract class Annotations extends Attribute {
     }
 
     /**
-     * @param annotation_type the subclass type of the annotation
-     * @param name_index Index pointing to the name <em>Code</em>
+     * @param annotationType the subclass type of the annotation
+     * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @param isRuntimeVisible whether this Annotation visible at runtime
      * @throws IOException if an I/O error occurs.
      */
-    Annotations(final byte annotation_type, final int name_index, final int length, final DataInput input, final ConstantPool constant_pool,
+    Annotations(final byte annotationType, final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool,
         final boolean isRuntimeVisible) throws IOException {
-        this(annotation_type, name_index, length, (AnnotationEntry[]) null, constant_pool, isRuntimeVisible);
+        this(annotationType, nameIndex, length, (AnnotationEntry[]) null, constantPool, isRuntimeVisible);
         final int annotation_table_length = input.readUnsignedShort();
         annotationTable = new AnnotationEntry[annotation_table_length];
         for (int i = 0; i < annotation_table_length; i++) {
-            annotationTable[i] = AnnotationEntry.read(input, constant_pool, isRuntimeVisible);
+            annotationTable[i] = AnnotationEntry.read(input, constantPool, isRuntimeVisible);
         }
     }
 

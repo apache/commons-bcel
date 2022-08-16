@@ -342,12 +342,12 @@ public final class Pass3aVerifier extends PassVerifier {
                 Field f = null;
                 for (final Field field : fields) {
                     if (field.getName().equals(field_name)) {
-                        final Type f_type = Type.getType(field.getSignature());
-                        final Type o_type = o.getType(constantPoolGen);
+                        final Type fType = Type.getType(field.getSignature());
+                        final Type oType = o.getType(constantPoolGen);
                         /*
                          * TODO: Check if assignment compatibility is sufficient. What does Sun do?
                          */
-                        if (f_type.equals(o_type)) {
+                        if (fType.equals(oType)) {
                             f = field;
                             break;
                         }
@@ -359,9 +359,9 @@ public final class Pass3aVerifier extends PassVerifier {
                         fields = superclass.getFields();
                         for (final Field field : fields) {
                             if (field.getName().equals(field_name)) {
-                                final Type f_type = Type.getType(field.getSignature());
-                                final Type o_type = o.getType(constantPoolGen);
-                                if (f_type.equals(o_type)) {
+                                final Type fType = Type.getType(field.getSignature());
+                                final Type oType = o.getType(constantPoolGen);
+                                if (fType.equals(oType)) {
                                     f = field;
                                     if ((f.getAccessFlags() & (Const.ACC_PUBLIC | Const.ACC_PROTECTED)) == 0) {
                                         f = null;

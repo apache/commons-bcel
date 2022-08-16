@@ -50,8 +50,8 @@ public final class ConstantDynamic extends ConstantCP {
         this(file.readShort(), file.readShort());
     }
 
-    public ConstantDynamic(final int bootstrap_method_attr_index, final int name_and_type_index) {
-        super(Const.CONSTANT_Dynamic, bootstrap_method_attr_index, name_and_type_index);
+    public ConstantDynamic(final int bootstrapMethodAttrIndex, final int nameAndTypeIndex) {
+        super(Const.CONSTANT_Dynamic, bootstrapMethodAttrIndex, nameAndTypeIndex);
     }
 
     /**
