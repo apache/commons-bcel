@@ -92,14 +92,6 @@ abstract class AbstractClassPathRepository implements Repository {
             }
         } catch (final IOException e) {
             throw new ClassNotFoundException("Exception while looking for class " + className + ": " + e, e);
-        } finally {
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (final IOException e) {
-                    // ignored
-                }
-            }
         }
         throw new ClassNotFoundException("ClassRepository could not load " + className);
     }
@@ -122,8 +114,8 @@ abstract class AbstractClassPathRepository implements Repository {
         if (clazz != null) {
             return clazz;
         }
-        try {
-            return loadClass(classPath.getInputStream(className), className);
+        try (InputStream inputStream = classPath.getInputStream(className)) {
+            return loadClass(inputStream, className);
         } catch (final IOException e) {
             throw new ClassNotFoundException("Exception while looking for class " + className + ": " + e, e);
         }
