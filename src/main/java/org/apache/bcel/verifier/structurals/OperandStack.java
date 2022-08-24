@@ -26,7 +26,7 @@ import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
- * This class implements a stack used for symbolic JVM stack simulation. [It's used an an operand stack substitute.]
+ * This class implements a stack used for symbolic JVM stack simulation. [It's used as an operand stack substitute.]
  * Elements of this stack are {@link Type} objects.
  *
  */

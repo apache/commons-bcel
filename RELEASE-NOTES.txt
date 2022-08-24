@@ -46,7 +46,7 @@ o           Fix ConcurrentModificationException in the maven-bundle-plugin:4.2.1
 Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes-report.html
 
 For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
-patches, or suggestions for improvement, see the Apache Apache Commons BCEL website:
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
 
 https://commons.apache.org/proper/commons-bcel
 

@@ -1334,7 +1334,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     @Override
     public void visitRET(final RET o) {
         // do nothing, return address
-        // is in in the local variables.
+        // is in the local variables.
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */

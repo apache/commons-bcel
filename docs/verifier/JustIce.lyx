@@ -11970,7 +11970,7 @@ However, normally web-browsing is considered harmless, so that the employees
  can unrestrictedly gather information, possibly visiting Java-enabled web
  sites.
  The JVMs built into the browser software run software downloaded from the
- World Wide Web; while the the built-in verifiers make sure that no dangerous
+ World Wide Web; while the built-in verifiers make sure that no dangerous
  code can be executed.
 \layout Standard
 

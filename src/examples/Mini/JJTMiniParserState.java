@@ -43,7 +43,7 @@ class JJTMiniParserState {
 
     /*
      * A conditional node is constructed if its condition is true. All the nodes that have been pushed since the node was
-     * opened are made children of the the conditional node, which is then pushed on to the stack. If the condition is false
+     * opened are made children of the conditional node, which is then pushed on to the stack. If the condition is false
      * the node is not constructed and they are left on the stack.
      */
     void closeNodeScope(final Node n, final boolean condition) {
