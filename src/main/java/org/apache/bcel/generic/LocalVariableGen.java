@@ -49,7 +49,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      */
     public LocalVariableGen(final int index, final String name, final Type type, final InstructionHandle start, final InstructionHandle end) {
         if (index < 0 || index > Const.MAX_SHORT) {
-            throw new ClassGenException("Invalid index index: " + index);
+            throw new ClassGenException("Invalid index: " + index);
         }
         this.name = name;
         this.type = type;
@@ -129,7 +129,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * Gets LocalVariable object.
      *
-     * This relies on that the instruction list has already been dumped to byte code or or that the `setPositions' methods
+     * This relies on that the instruction list has already been dumped to byte code or that the `setPositions' methods
      * has been called for the instruction list.
      *
      * Note that due to the conversion from byte code offset to InstructionHandle, it is impossible to tell the difference
