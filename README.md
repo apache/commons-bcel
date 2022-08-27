@@ -47,6 +47,7 @@ Apache Commons BCEL
 [![Coverage Status](https://coveralls.io/repos/apache/commons-bcel/badge.svg)](https://coveralls.io/r/apache/commons-bcel)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/)
 [![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.5.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.5.0)
+[![CodeQL](https://github.com/apache/commons-bcel/workflows/CodeQL/badge.svg)](https://github.com/apache/commons-bcel/actions?query=workflow%3ACodeQL)
 
 Apache Commons Bytecode Engineering Library
 
