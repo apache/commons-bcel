@@ -135,7 +135,7 @@ public final class Method extends FieldOrMethod {
      * Return value as defined by given BCELComparator strategy. By default two method objects are said to be equal when
      * their names and signatures are equal.
      *
-     * @see java.lang.Object#equals(java.lang.Object)
+     * @see java.lang.Object#equals(Object)
      */
     @Override
     public boolean equals(final Object obj) {
@@ -218,7 +218,7 @@ public final class Method extends FieldOrMethod {
      * Return value as defined by given BCELComparator strategy. By default return the hashcode of the method's name XOR
      * signature.
      *
-     * @see java.lang.Object#hashCode()
+     * @see Object#hashCode()
      */
     @Override
     public int hashCode() {

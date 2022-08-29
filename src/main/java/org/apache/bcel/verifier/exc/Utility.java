@@ -23,7 +23,7 @@ import java.io.StringWriter;
 /**
  * A utility class providing convenience methods concerning Throwable instances.
  *
- * @see java.lang.Throwable
+ * @see Throwable
  */
 public final class Utility {
     /** This method returns the stack trace of a Throwable instance as a String. */

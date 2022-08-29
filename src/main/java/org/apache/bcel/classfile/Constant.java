@@ -165,7 +165,7 @@ public abstract class Constant implements Cloneable, Node {
      * Returns value as defined by given BCELComparator strategy. By default two Constant objects are said to be equal when
      * the result of toString() is equal.
      *
-     * @see java.lang.Object#equals(java.lang.Object)
+     * @see Object#equals(Object)
      */
     @Override
     public boolean equals(final Object obj) {
@@ -183,7 +183,7 @@ public abstract class Constant implements Cloneable, Node {
      * Returns value as defined by given BCELComparator strategy. By default return the hashcode of the result of
      * toString().
      *
-     * @see java.lang.Object#hashCode()
+     * @see Object#hashCode()
      */
     @Override
     public int hashCode() {

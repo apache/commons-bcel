@@ -286,7 +286,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      * Return value as defined by given BCELComparator strategy. By default two ClassGen objects are said to be equal when
      * their class names are equal.
      *
-     * @see java.lang.Object#equals(java.lang.Object)
+     * @see java.lang.Object#equals(Object)
      */
     @Override
     public boolean equals(final Object obj) {
@@ -394,7 +394,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Return value as defined by given BCELComparator strategy. By default return the hashcode of the class name.
      *
-     * @see java.lang.Object#hashCode()
+     * @see Object#hashCode()
      */
     @Override
     public int hashCode() {
