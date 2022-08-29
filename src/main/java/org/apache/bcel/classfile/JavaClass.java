@@ -383,7 +383,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Return value as defined by given BCELComparator strategy. By default two JavaClass objects are said to be equal when
      * their class names are equal.
      *
-     * @see java.lang.Object#equals(Object)
+     * @see Object#equals(Object)
      */
     @Override
     public boolean equals(final Object obj) {

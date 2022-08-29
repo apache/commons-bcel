@@ -183,7 +183,7 @@ public class FieldGen extends FieldGenOrMethodGen {
      * Return value as defined by given BCELComparator strategy. By default two FieldGen objects are said to be equal when
      * their names and signatures are equal.
      *
-     * @see java.lang.Object#equals(Object)
+     * @see Object#equals(Object)
      */
     @Override
     public boolean equals(final Object obj) {
