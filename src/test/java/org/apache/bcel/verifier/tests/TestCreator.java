@@ -1,11 +1,3 @@
-package org.apache.bcel.verifier.tests;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URISyntaxException;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -23,6 +15,14 @@ import java.net.URISyntaxException;
  * limitations under the License.
  *
  */
+package org.apache.bcel.verifier.tests;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URISyntaxException;
+
 public abstract class TestCreator {
 
     // Common package base name for generated test classes
