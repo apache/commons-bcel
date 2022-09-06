@@ -42,7 +42,7 @@ jobs:
     steps:
     - name: Prepare git
       run: git config --global core.autocrlf false
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3.0.2
     - uses: actions/cache@v3.0.8
       with:
         path: ~/.m2/repository
