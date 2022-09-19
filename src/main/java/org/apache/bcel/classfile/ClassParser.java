@@ -59,7 +59,7 @@ public final class ClassParser {
     /**
      * Parses class from the given stream.
      *
-     * @param inputStream Input stream
+     * @param inputStream Input stream; the client should close it
      * @param fileName File name
      */
     public ClassParser(final InputStream inputStream, final String fileName) {
