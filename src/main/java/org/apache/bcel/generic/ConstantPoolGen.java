@@ -563,7 +563,7 @@ public class ConstantPoolGen {
     protected void adjustSize() {
         // 3 extra spaces are needed as some entries may take 3 slots
         if (index + 3 >= Const.MAX_CP_ENTRIES + 1) {
-            throw new RuntimeException("The number of constants " + (index + 3)
+            throw new IllegalStateException("The number of constants " + (index + 3)
                     + " is over the size of the constant pool: "
                     + Const.MAX_CP_ENTRIES);
         }
