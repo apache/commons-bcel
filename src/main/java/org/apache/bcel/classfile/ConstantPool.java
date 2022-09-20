@@ -235,7 +235,7 @@ public class ConstantPool implements Cloneable, Node {
          * This is a redundant measure as the ConstantPoolGen should have already
          * reported an error back in the situation.
         */
-        int size = Math.min(constantPool.length, Const.MAX_CP_ENTRIES);
+        final int size = Math.min(constantPool.length, Const.MAX_CP_ENTRIES);
 
         file.writeShort(size);
         for (int i = 1; i < size; i++) {
