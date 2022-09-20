@@ -18,8 +18,10 @@
 package org.apache.bcel.classfile;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.Const;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
@@ -51,5 +53,18 @@ public class ConstantPoolTestCase extends AbstractTestCase {
                 }
             }
         }
+    }
+
+    @Test
+    public void testTooManyConstants() throws ClassNotFoundException {
+        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
+        final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
+
+        int i = cp.getSize();
+        while (i < Const.MAX_CP_ENTRIES - 1) {
+            cp.addLong(i);
+            i = cp.getSize(); // i += 2
+        }
+        assertThrows(IllegalStateException.class, () -> cp.addLong(0));
     }
 }
