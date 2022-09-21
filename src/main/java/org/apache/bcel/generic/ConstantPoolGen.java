@@ -109,7 +109,7 @@ public class ConstantPoolGen {
     public ConstantPoolGen(final Constant[] cs) {
         final StringBuilder sb = new StringBuilder(DEFAULT_BUFFER_SIZE);
 
-        size = Math.max(DEFAULT_BUFFER_SIZE, cs.length + 64);
+        size = Math.min(Math.max(DEFAULT_BUFFER_SIZE, cs.length + 64), Const.MAX_CP_ENTRIES + 1);
         constants = new Constant[size];
 
         System.arraycopy(cs, 0, constants, 0, cs.length);
@@ -561,9 +561,18 @@ public class ConstantPoolGen {
      * Resize internal array of constants.
      */
     protected void adjustSize() {
+        // 3 extra spaces are needed as some entries may take 3 slots
+        if (index + 3 >= Const.MAX_CP_ENTRIES + 1) {
+            throw new IllegalStateException("The number of constants " + (index + 3)
+                    + " is over the size of the constant pool: "
+                    + Const.MAX_CP_ENTRIES);
+        }
+
         if (index + 3 >= size) {
             final Constant[] cs = constants;
             size *= 2;
+            // the constant array shall not exceed the size of the constant pool
+            size = Math.min(size, Const.MAX_CP_ENTRIES + 1);
             constants = new Constant[size];
             System.arraycopy(cs, 0, constants, 0, index);
         }
