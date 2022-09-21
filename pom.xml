@@ -76,6 +76,8 @@
     <commons.spotbugs.plugin.version>4.7.2.0</commons.spotbugs.plugin.version>
     <commons.spotbugs.impl.version>4.7.1</commons.spotbugs.impl.version>    
     <biz.aQute.bndlib.version>6.3.1</biz.aQute.bndlib.version>
+    <commons.pmd.version>3.19.0</commons.pmd.version>
+    <commons.pmd-impl.version>6.49.0</commons.pmd-impl.version>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
@@ -376,7 +378,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.19.0</version>
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
           <linkXref>true</linkXref>
