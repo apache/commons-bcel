@@ -77,6 +77,7 @@
     <commons.biz.aQute.bndlib.version>6.3.1</commons.biz.aQute.bndlib.version>
     <commons.pmd.version>3.19.0</commons.pmd.version>
     <commons.pmd-impl.version>6.49.0</commons.pmd-impl.version>
+    <commons.junit.version>5.9.1</commons.junit.version>
   </properties>
 
   <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
@@ -435,7 +436,6 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.9.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
