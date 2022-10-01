@@ -49,18 +49,16 @@ public class InstructionFactory implements InstructionConstants {
     private static final String[] shortNames = {"C", "F", "D", "B", "S", "I", "L"};
 
     private static final MethodObject[] appendMethodObjects = {
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {Type.STRING}),
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {Type.OBJECT}), null, null, // indices 2, 3
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {Type.BOOLEAN}),
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {Type.CHAR}),
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {Type.FLOAT}),
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {Type.DOUBLE}),
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {Type.INT}),
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, // No append(byte)
-            new Type[] {Type.INT}),
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, // No append(short)
-            new Type[] {Type.INT}),
-        new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] {Type.LONG})};
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.STRING }),
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.OBJECT }), null, null, // indices 2, 3
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.BOOLEAN }),
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.CHAR }),
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.FLOAT }),
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.DOUBLE }),
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.INT }),
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.INT }), // No append(byte)
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.INT }), // No append(short)
+            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.LONG })};
 
     /**
      * @param type type of elements of array, i.e., array.getElementType()
