@@ -104,7 +104,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- UPDATES -->
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/cache from 2 to 3.0.9 #88, #93, #110, #119, #149.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/checkout from 2.3.1 to 3.0.2 #59, #66, #73, #108, #115.</action>      
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/setup-java from 1.4.0 to 3 #62, #67.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/setup-java from 1.4.0 to 3.5.1 #62, #67.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump tests from Apache Commons Lang 3.10 to 3.12.0</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 50 to 54.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump biz.aQute.bndlib from 5.1.0 to 6.3.1, #54, #72, #81, #111.</action>
