@@ -20,6 +20,8 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
 
 import org.apache.bcel.Const;
 
@@ -32,7 +34,7 @@ import org.apache.bcel.Const;
  * @see Constant
  * @see org.apache.bcel.generic.ConstantPoolGen
  */
-public class ConstantPool implements Cloneable, Node {
+public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
 
     private static String escape(final String str) {
         final int len = str.length();
@@ -339,6 +341,11 @@ public class ConstantPool implements Cloneable, Node {
      */
     public int getLength() {
         return constantPool == null ? 0 : constantPool.length;
+    }
+
+    @Override
+    public Iterator<Constant> iterator() {
+        return Arrays.stream(constantPool).iterator();
     }
 
     /**

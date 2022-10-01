@@ -345,13 +345,12 @@ public class MethodGen extends FieldGenOrMethodGen {
                 for (final Attribute c_attribute : c_attributes) {
                     a = c_attribute;
                     if (a instanceof LineNumberTable) {
-                        final LineNumber[] ln = ((LineNumberTable) a).getLineNumberTable();
-                        for (final LineNumber l : ln) {
+                        ((LineNumberTable) a).forEach(l -> {
                             final InstructionHandle ih = il.findHandle(l.getStartPC());
                             if (ih != null) {
                                 addLineNumber(ih, l.getLineNumber());
                             }
-                        }
+                        });
                     } else if (a instanceof LocalVariableTable) {
                         updateLocalVariableTable((LocalVariableTable) a);
                     } else if (a instanceof LocalVariableTypeTable) {
@@ -367,10 +366,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                 }
             } else if (a instanceof Annotations) {
                 final Annotations runtimeAnnotations = (Annotations) a;
-                final AnnotationEntry[] aes = runtimeAnnotations.getAnnotationEntries();
-                for (final AnnotationEntry element : aes) {
-                    addAnnotationEntry(new AnnotationEntryGen(element, cp, false));
-                }
+                runtimeAnnotations.forEach(element -> addAnnotationEntry(new AnnotationEntryGen(element, cp, false)));
             } else {
                 addAttribute(a);
             }
@@ -565,9 +561,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     private void adjustLocalVariableTypeTable(final LocalVariableTable lvt) {
         final LocalVariable[] lv = lvt.getLocalVariableTable();
-        final LocalVariable[] lvg = localVariableTypeTable.getLocalVariableTypeTable();
-
-        for (final LocalVariable element : lvg) {
+        for (final LocalVariable element : localVariableTypeTable.getLocalVariableTypeTable()) {
             for (final LocalVariable l : lv) {
                 if (element.getName().equals(l.getName()) && element.getIndex() == l.getOrigIndex()) {
                     element.setLength(l.getLength());
@@ -1198,9 +1192,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     private void updateLocalVariableTable(final LocalVariableTable a) {
-        final LocalVariable[] lv = a.getLocalVariableTable();
         removeLocalVariables();
-        for (final LocalVariable l : lv) {
+        for (final LocalVariable l : a.getLocalVariableTable()) {
             InstructionHandle start = il.findHandle(l.getStartPC());
             final InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
             // Repair malformed handles

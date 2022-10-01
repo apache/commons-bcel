@@ -23,7 +23,6 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.Constant;
@@ -90,9 +89,7 @@ public class FieldGen extends FieldGenOrMethodGen {
                 setValue(((ConstantValue) attr).getConstantValueIndex());
             } else if (attr instanceof Annotations) {
                 final Annotations runtimeAnnotations = (Annotations) attr;
-                for (final AnnotationEntry element : runtimeAnnotations.getAnnotationEntries()) {
-                    addAnnotationEntry(new AnnotationEntryGen(element, cp, false));
-                }
+                runtimeAnnotations.forEach(element -> addAnnotationEntry(new AnnotationEntryGen(element, cp, false)));
             } else {
                 addAttribute(attr);
             }

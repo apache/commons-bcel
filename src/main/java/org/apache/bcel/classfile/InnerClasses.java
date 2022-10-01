@@ -20,6 +20,8 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
 
@@ -29,7 +31,7 @@ import org.apache.bcel.Const;
  *
  * @see Attribute
  */
-public final class InnerClasses extends Attribute {
+public final class InnerClasses extends Attribute implements Iterable<InnerClass> {
 
     /**
      * Empty array.
@@ -121,6 +123,11 @@ public final class InnerClasses extends Attribute {
      */
     public InnerClass[] getInnerClasses() {
         return innerClasses;
+    }
+
+    @Override
+    public Iterator<InnerClass> iterator() {
+        return Stream.of(innerClasses).iterator();
     }
 
     /**

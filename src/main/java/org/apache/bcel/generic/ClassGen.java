@@ -23,7 +23,6 @@ import java.util.Objects;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AccessFlags;
-import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Annotations;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ConstantPool;
@@ -537,14 +536,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
         for (final Attribute attr : attrs) {
             if (attr instanceof RuntimeVisibleAnnotations) {
                 final RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
-                for (final AnnotationEntry a : rva.getAnnotationEntries()) {
-                    annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false));
-                }
+                rva.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
             } else if (attr instanceof RuntimeInvisibleAnnotations) {
                 final RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
-                for (final AnnotationEntry a : ria.getAnnotationEntries()) {
-                    annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false));
-                }
+                ria.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
             }
         }
         return annotationGenObjs.toArray(AnnotationEntryGen.EMPTY_ARRAY);

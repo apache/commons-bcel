@@ -90,7 +90,16 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-363" type="fix" dev="ggregory" due-to="Richard Atkins, Gary Gregory">Enforce MAX_CP_ENTRIES in ConstantPoolGen and ConstantPool.dump #147.</action>
       <action                  type="fix" dev="ggregory" due-to="Arturo Bernal, Gary Gregory">Minor Changes #99.</action>
       <!-- ADD -->
-      <action                  type="fix" dev="ggregory">Add github/codeql-action.</action>
+      <action                  type="add" dev="ggregory">Add github/codeql-action.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make Annotations implement Iterable&lt;AnnotationEntry&gt;.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make BootstrapMethods implement Iterable&lt;BootstrapMethod&gt;.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make ConstantPool implement Iterable&lt;Constant&gt;.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make InnerClasses implement Iterable&lt;InnerClass&gt;.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make LineNumberTable implement Iterable&lt;LineNumber&gt;.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make LocalVariableTable implement Iterable&lt;LocalVariable&gt;.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make LocalVariableTypeTable implement Iterable&lt;LocalVariable&gt;.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make MethodParameters implement Iterable&lt;MethodParameter&gt;.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make ParameterAnnotations implement Iterable&lt;ParameterAnnotationEntry&gt;.</action>
       <!-- UPDATES -->
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/cache from 2 to 3.0.9 #88, #93, #110, #119, #149.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/checkout from 2.3.1 to 3.0.2 #59, #66, #73, #108, #115.</action>      

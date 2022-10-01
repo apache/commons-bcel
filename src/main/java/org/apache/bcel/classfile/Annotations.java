@@ -20,6 +20,8 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
 
@@ -28,37 +30,41 @@ import org.apache.bcel.Const;
  *
  * @since 6.0
  */
-public abstract class Annotations extends Attribute {
+public abstract class Annotations extends Attribute implements Iterable<AnnotationEntry> {
 
     private AnnotationEntry[] annotationTable;
     private final boolean isRuntimeVisible;
 
     /**
-     * @param annotationType the subclass type of the annotation
-     * @param nameIndex Index pointing to the name <em>Code</em>
-     * @param length Content length in bytes
-     * @param annotationTable the actual annotations
-     * @param constantPool Array of constants
+     * Constructs an instance.
+     *
+     * @param annotationType   the subclass type of the annotation
+     * @param nameIndex        Index pointing to the name <em>Code</em>
+     * @param length           Content length in bytes
+     * @param annotationTable  the actual annotations
+     * @param constantPool     Array of constants
      * @param isRuntimeVisible whether this Annotation visible at runtime
      */
     public Annotations(final byte annotationType, final int nameIndex, final int length, final AnnotationEntry[] annotationTable,
-        final ConstantPool constantPool, final boolean isRuntimeVisible) {
+            final ConstantPool constantPool, final boolean isRuntimeVisible) {
         super(annotationType, nameIndex, length, constantPool);
         this.annotationTable = annotationTable;
         this.isRuntimeVisible = isRuntimeVisible;
     }
 
     /**
-     * @param annotationType the subclass type of the annotation
-     * @param nameIndex Index pointing to the name <em>Code</em>
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
+     * Constructs an instance.
+     *
+     * @param annotationType   the subclass type of the annotation
+     * @param nameIndex        Index pointing to the name <em>Code</em>
+     * @param length           Content length in bytes
+     * @param input            Input stream
+     * @param constantPool     Array of constants
      * @param isRuntimeVisible whether this Annotation visible at runtime
      * @throws IOException if an I/O error occurs.
      */
     Annotations(final byte annotationType, final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool,
-        final boolean isRuntimeVisible) throws IOException {
+            final boolean isRuntimeVisible) throws IOException {
         this(annotationType, nameIndex, length, (AnnotationEntry[]) null, constantPool, isRuntimeVisible);
         final int annotation_table_length = input.readUnsignedShort();
         annotationTable = new AnnotationEntry[annotation_table_length];
@@ -68,8 +74,9 @@ public abstract class Annotations extends Attribute {
     }
 
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitely
+     * defined by the contents of a Java class. I.e., the hierarchy of methods,
+     * fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
@@ -78,14 +85,22 @@ public abstract class Annotations extends Attribute {
         v.visitAnnotation(this);
     }
 
+    @Override
+    public Attribute copy(ConstantPool constantPool) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /**
-     * returns the array of annotation entries in this annotation
+     * Gets the array of annotation entries in this annotation
      */
     public AnnotationEntry[] getAnnotationEntries() {
         return annotationTable;
     }
 
     /**
+     * Gets the number of annotation entries in this annotation.
+     *
      * @return the number of annotation entries in this annotation
      */
     public final int getNumAnnotations() {
@@ -99,7 +114,14 @@ public abstract class Annotations extends Attribute {
         return isRuntimeVisible;
     }
 
+    @Override
+    public Iterator<AnnotationEntry> iterator() {
+        return Stream.of(annotationTable).iterator();
+    }
+
     /**
+     * Sets the entries to set in this annotation.
+     *
      * @param annotationTable the entries to set in this annotation
      */
     public final void setAnnotationTable(final AnnotationEntry[] annotationTable) {
@@ -107,6 +129,8 @@ public abstract class Annotations extends Attribute {
     }
 
     /**
+     * Converts to a String representation.
+     *
      * @return String representation
      */
     @Override

@@ -20,6 +20,8 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
 
@@ -30,7 +32,7 @@ import org.apache.bcel.Const;
  * @see Code
  * @see LineNumber
  */
-public final class LineNumberTable extends Attribute {
+public final class LineNumberTable extends Attribute implements Iterable<LineNumber> {
 
     private static final int MAX_LINE_LENGTH = 72;
     private LineNumber[] lineNumberTable; // Table of line/numbers pairs
@@ -172,6 +174,11 @@ public final class LineNumberTable extends Attribute {
 
     public int getTableLength() {
         return lineNumberTable == null ? 0 : lineNumberTable.length;
+    }
+
+    @Override
+    public Iterator<LineNumber> iterator() {
+        return Stream.of(lineNumberTable).iterator();
     }
 
     /**

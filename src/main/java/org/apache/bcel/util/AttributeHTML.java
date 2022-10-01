@@ -34,7 +34,6 @@ import org.apache.bcel.classfile.InnerClass;
 import org.apache.bcel.classfile.InnerClasses;
 import org.apache.bcel.classfile.LineNumber;
 import org.apache.bcel.classfile.LineNumberTable;
-import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.Utility;
@@ -151,37 +150,35 @@ final class AttributeHTML implements Closeable {
             }
             break;
         case Const.ATTR_LOCAL_VARIABLE_TABLE:
-            final LocalVariable[] vars = ((LocalVariableTable) attribute).getLocalVariableTable();
             // List name, range and type
             printWriter.print("<UL>");
-            for (final LocalVariable var : vars) {
-                index = var.getSignatureIndex();
-                String signature = ((ConstantUtf8) constantPool.getConstant(index, Const.CONSTANT_Utf8)).getBytes();
+            ((LocalVariableTable) attribute).forEach(var -> {
+                int sigIdx = var.getSignatureIndex();
+                String signature = ((ConstantUtf8) constantPool.getConstant(sigIdx, Const.CONSTANT_Utf8)).getBytes();
                 signature = Utility.signatureToString(signature, false);
                 final int start = var.getStartPC();
                 final int end = start + var.getLength();
                 printWriter.println("<LI>" + Class2HTML.referenceType(signature) + "&nbsp;<B>" + var.getName() + "</B> in slot %" + var.getIndex()
                     + "<BR>Valid from lines " + "<A HREF=\"" + className + "_code.html#code" + method_number + "@" + start + "\" TARGET=Code>" + start
                     + "</A> to " + "<A HREF=\"" + className + "_code.html#code" + method_number + "@" + end + "\" TARGET=Code>" + end + "</A></LI>");
-            }
+            });
             printWriter.print("</UL>\n");
             break;
         case Const.ATTR_INNER_CLASSES:
-            final InnerClass[] classes = ((InnerClasses) attribute).getInnerClasses();
             // List inner classes
             printWriter.print("<UL>");
-            for (final InnerClass classe : classes) {
+            for (final InnerClass clazz : ((InnerClasses) attribute).getInnerClasses()) {
                 final String name;
                 final String access;
-                index = classe.getInnerNameIndex();
+                index = clazz.getInnerNameIndex();
                 if (index > 0) {
                     name = ((ConstantUtf8) constantPool.getConstant(index, Const.CONSTANT_Utf8)).getBytes();
                 } else {
                     name = "&lt;anonymous&gt;";
                 }
-                access = Utility.accessToString(classe.getInnerAccessFlags());
-                printWriter.print("<LI><FONT COLOR=\"#FF0000\">" + access + "</FONT> " + constantHtml.referenceConstant(classe.getInnerClassIndex())
-                    + " in&nbsp;class " + constantHtml.referenceConstant(classe.getOuterClassIndex()) + " named " + name + "</LI>\n");
+                access = Utility.accessToString(clazz.getInnerAccessFlags());
+                printWriter.print("<LI><FONT COLOR=\"#FF0000\">" + access + "</FONT> " + constantHtml.referenceConstant(clazz.getInnerClassIndex())
+                    + " in&nbsp;class " + constantHtml.referenceConstant(clazz.getOuterClassIndex()) + " named " + name + "</LI>\n");
             }
             printWriter.print("</UL>\n");
             break;

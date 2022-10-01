@@ -20,13 +20,15 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 /**
  * base class for parameter annotations
  *
  * @since 6.0
  */
-public abstract class ParameterAnnotations extends Attribute {
+public abstract class ParameterAnnotations extends Attribute implements Iterable<ParameterAnnotationEntry> {
 
     /** Table of parameter annotations */
     private ParameterAnnotationEntry[] parameterAnnotationTable;
@@ -103,6 +105,11 @@ public abstract class ParameterAnnotations extends Attribute {
      */
     public final ParameterAnnotationEntry[] getParameterAnnotationTable() {
         return parameterAnnotationTable;
+    }
+
+    @Override
+    public Iterator<ParameterAnnotationEntry> iterator() {
+        return Stream.of(parameterAnnotationTable).iterator();
     }
 
     /**

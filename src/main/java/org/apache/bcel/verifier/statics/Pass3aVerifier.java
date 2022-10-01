@@ -39,7 +39,6 @@ import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.LineNumber;
 import org.apache.bcel.classfile.LineNumberTable;
-import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ALOAD;
@@ -1016,9 +1015,7 @@ public final class Pass3aVerifier extends PassVerifier {
         final Attribute[] atts = code.getAttributes();
         for (final Attribute att : atts) {
             if (att instanceof LocalVariableTable) {
-                final LocalVariableTable lvt = (LocalVariableTable) att;
-                final LocalVariable[] localVariables = lvt.getLocalVariableTable();
-                for (final LocalVariable localVariable : localVariables) {
+                ((LocalVariableTable) att).forEach(localVariable -> {
                     final int startpc = localVariable.getStartPC();
                     final int length = localVariable.getLength();
 
@@ -1031,7 +1028,7 @@ public final class Pass3aVerifier extends PassVerifier {
                             "Code attribute '" + tostring(code) + "' has a LocalVariableTable attribute '" + code.getLocalVariableTable()
                                 + "' referring to a code offset start_pc+length ('" + (startpc + length) + "') that does not exist.");
                     }
-                }
+                });
             }
         }
 

@@ -20,6 +20,8 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
 
@@ -54,7 +56,7 @@ import org.apache.bcel.Const;
 /**
  * @since 6.0
  */
-public class LocalVariableTypeTable extends Attribute {
+public class LocalVariableTypeTable extends Attribute implements Iterable<LocalVariable> {
 
     private LocalVariable[] localVariableTypeTable; // variables
 
@@ -124,6 +126,11 @@ public class LocalVariableTypeTable extends Attribute {
 
     public final int getTableLength() {
         return localVariableTypeTable == null ? 0 : localVariableTypeTable.length;
+    }
+
+    @Override
+    public Iterator<LocalVariable> iterator() {
+        return Stream.of(localVariableTypeTable).iterator();
     }
 
     public final void setLocalVariableTable(final LocalVariable[] local_variable_table) {

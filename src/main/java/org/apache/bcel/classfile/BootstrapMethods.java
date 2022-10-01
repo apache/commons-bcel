@@ -20,6 +20,8 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
 
@@ -30,7 +32,7 @@ import org.apache.bcel.Const;
  *      The BootstrapMethods Attribute</a>
  * @since 6.0
  */
-public class BootstrapMethods extends Attribute {
+public class BootstrapMethods extends Attribute implements Iterable<BootstrapMethod> {
 
     private BootstrapMethod[] bootstrapMethods; // TODO this could be made final (setter is not used)
 
@@ -116,6 +118,11 @@ public class BootstrapMethods extends Attribute {
      */
     public final BootstrapMethod[] getBootstrapMethods() {
         return bootstrapMethods;
+    }
+
+    @Override
+    public Iterator<BootstrapMethod> iterator() {
+        return Stream.of(bootstrapMethods).iterator();
     }
 
     /**

@@ -255,21 +255,20 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         }
         for (final Attribute attribute : this.attributes) {
             if (attribute instanceof InnerClasses) {
-                final InnerClass[] innerClasses = ((InnerClasses) attribute).getInnerClasses();
-                for (final InnerClass innerClasse : innerClasses) {
+                ((InnerClasses) attribute).forEach(innerClass ->  {
                     boolean innerClassAttributeRefersToMe = false;
-                    String innerClassName = constantPool.getConstantString(innerClasse.getInnerClassIndex(), Const.CONSTANT_Class);
+                    String innerClassName = constantPool.getConstantString(innerClass.getInnerClassIndex(), Const.CONSTANT_Class);
                     innerClassName = Utility.compactClassName(innerClassName, false);
                     if (innerClassName.equals(getClassName())) {
                         innerClassAttributeRefersToMe = true;
                     }
                     if (innerClassAttributeRefersToMe) {
                         this.isNested = true;
-                        if (innerClasse.getInnerNameIndex() == 0) {
+                        if (innerClass.getInnerNameIndex() == 0) {
                             this.isAnonymous = true;
                         }
                     }
-                }
+                });
             }
         }
         this.computedNestedTypeStatus = true;

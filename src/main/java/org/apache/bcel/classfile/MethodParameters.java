@@ -20,6 +20,8 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
 
@@ -30,7 +32,7 @@ import org.apache.bcel.Const;
  *      The MethodParameters Attribute</a>
  * @since 6.0
  */
-public class MethodParameters extends Attribute {
+public class MethodParameters extends Attribute implements Iterable<MethodParameter> {
 
     /**
      * Empty array.
@@ -83,6 +85,11 @@ public class MethodParameters extends Attribute {
 
     public MethodParameter[] getParameters() {
         return parameters;
+    }
+
+    @Override
+    public Iterator<MethodParameter> iterator() {
+        return Stream.of(parameters).iterator();
     }
 
     public void setParameters(final MethodParameter[] parameters) {

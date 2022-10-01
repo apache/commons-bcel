@@ -273,9 +273,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         }
 
                         // In JustIce, the check for correct offsets into the code array is delayed to Pass 3a.
-                        final LocalVariable[] localvariables = lvt.getLocalVariableTable();
-
-                        for (final LocalVariable localvariable : localvariables) {
+                        for (final LocalVariable localvariable : lvt.getLocalVariableTable()) {
                             checkIndex(lvt, localvariable.getNameIndex(), CONST_Utf8);
                             final String localname = ((ConstantUtf8) cp.getConstant(localvariable.getNameIndex())).getBytes();
                             if (!validJavaIdentifier(localname)) {
@@ -642,37 +640,35 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         }
 
         @Override
-        public void visitInnerClasses(final InnerClasses obj) {// vmspec2 4.7.5
+        public void visitInnerClasses(final InnerClasses innerClasses) {// vmspec2 4.7.5
 
             // exactly one InnerClasses attr per ClassFile if some inner class is refernced: see visitJavaClass()
 
-            checkIndex(obj, obj.getNameIndex(), CONST_Utf8);
+            checkIndex(innerClasses, innerClasses.getNameIndex(), CONST_Utf8);
 
-            final String name = ((ConstantUtf8) cp.getConstant(obj.getNameIndex())).getBytes();
+            final String name = ((ConstantUtf8) cp.getConstant(innerClasses.getNameIndex())).getBytes();
             if (!name.equals("InnerClasses")) {
                 throw new ClassConstraintException(
-                    "The InnerClasses attribute '" + tostring(obj) + "' is not correctly named 'InnerClasses' but '" + name + "'.");
+                    "The InnerClasses attribute '" + tostring(innerClasses) + "' is not correctly named 'InnerClasses' but '" + name + "'.");
             }
 
-            final InnerClass[] ics = obj.getInnerClasses();
-
-            for (final InnerClass ic : ics) {
-                checkIndex(obj, ic.getInnerClassIndex(), CONST_Class);
+            innerClasses.forEach(ic -> {
+                checkIndex(innerClasses, ic.getInnerClassIndex(), CONST_Class);
                 final int outer_idx = ic.getOuterClassIndex();
                 if (outer_idx != 0) {
-                    checkIndex(obj, outer_idx, CONST_Class);
+                    checkIndex(innerClasses, outer_idx, CONST_Class);
                 }
                 final int innername_idx = ic.getInnerNameIndex();
                 if (innername_idx != 0) {
-                    checkIndex(obj, innername_idx, CONST_Utf8);
+                    checkIndex(innerClasses, innername_idx, CONST_Utf8);
                 }
                 int acc = ic.getInnerAccessFlags();
                 acc = acc & ~(Const.ACC_PUBLIC | Const.ACC_PRIVATE | Const.ACC_PROTECTED | Const.ACC_STATIC | Const.ACC_FINAL | Const.ACC_INTERFACE |
                     Const.ACC_ABSTRACT);
                 if (acc != 0) {
-                    addMessage("Unknown access flag for inner class '" + tostring(ic) + "' set (InnerClasses attribute '" + tostring(obj) + "').");
+                    addMessage("Unknown access flag for inner class '" + tostring(ic) + "' set (InnerClasses attribute '" + tostring(innerClasses) + "').");
                 }
-            }
+            });
             // Semantical consistency is not yet checked by Sun, see vmspec2 4.7.5.
             // [marked TODO in JustIce]
         }

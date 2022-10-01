@@ -32,7 +32,6 @@ import org.apache.bcel.classfile.ConstantInvokeDynamic;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
-import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.Utility;
@@ -388,13 +387,11 @@ final class CodeHTML {
             final Attribute[] attributes = code.getAttributes();
             for (final Attribute attribute : attributes) {
                 if (attribute.getTag() == Const.ATTR_LOCAL_VARIABLE_TABLE) {
-                    final LocalVariable[] vars = ((LocalVariableTable) attribute).getLocalVariableTable();
-                    for (final LocalVariable var : vars) {
+                    ((LocalVariableTable) attribute).forEach(var -> {
                         final int start = var.getStartPC();
-                        final int end = start + var.getLength();
                         gotoSet.set(start);
-                        gotoSet.set(end);
-                    }
+                        gotoSet.set(start + var.getLength());
+                    });
                     break;
                 }
             }
