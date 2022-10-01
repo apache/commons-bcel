@@ -30,6 +30,10 @@ import org.apache.bcel.Const;
  */
 public class InstructionFactory implements InstructionConstants {
 
+    private static final String APPEND = "append";
+
+    private static final String FQCN_STRING_BUFFER = "java.lang.StringBuffer";
+
     private static class MethodObject {
 
         final Type[] argTypes;
@@ -49,16 +53,16 @@ public class InstructionFactory implements InstructionConstants {
     private static final String[] shortNames = {"C", "F", "D", "B", "S", "I", "L"};
 
     private static final MethodObject[] appendMethodObjects = {
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.STRING }),
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.OBJECT }), null, null, // indices 2, 3
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.BOOLEAN }),
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.CHAR }),
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.FLOAT }),
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.DOUBLE }),
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.INT }),
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.INT }), // No append(byte)
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.INT }), // No append(short)
-            new MethodObject("java.lang.StringBuffer", "append", Type.STRINGBUFFER, new Type[] { Type.LONG })};
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.STRING }),
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.OBJECT }), null, null, // indices 2, 3
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.BOOLEAN }),
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.CHAR }),
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.FLOAT }),
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.DOUBLE }),
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.INT }),
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.INT }), // No append(byte)
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.INT }), // No append(short)
+            new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.LONG })};
 
     /**
      * @param type type of elements of array, i.e., array.getElementType()

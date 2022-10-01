@@ -20,11 +20,11 @@ package org.apache.bcel.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
 
 /**
  * IINC - Increment local variable by constant
- *
  */
 public class IINC extends LocalVariableInstruction {
 
@@ -43,14 +43,14 @@ public class IINC extends LocalVariableInstruction {
      */
     public IINC(final int n, final int c) {
         // Default behavior of LocalVariableInstruction causes error
-        super.setOpcode(org.apache.bcel.Const.IINC);
+        super.setOpcode(Const.IINC);
         super.setLength((short) 3);
         setIndex(n); // May set wide as side effect
         setIncrement(c);
     }
 
     /**
-     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * Calls corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
@@ -62,14 +62,14 @@ public class IINC extends LocalVariableInstruction {
     }
 
     /**
-     * Dump instruction as byte code to stream out.
+     * Dumps instruction as byte code to stream out.
      *
      * @param out Output stream
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
         if (wide) {
-            out.writeByte(org.apache.bcel.Const.WIDE);
+            out.writeByte(Const.WIDE);
         }
         out.writeByte(super.getOpcode());
         if (wide) {
@@ -97,7 +97,7 @@ public class IINC extends LocalVariableInstruction {
     }
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Reads needed data (e.g. index) from file.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
@@ -114,7 +114,7 @@ public class IINC extends LocalVariableInstruction {
     }
 
     /**
-     * Set increment factor.
+     * Sets increment factor.
      */
     public final void setIncrement(final int c) {
         this.c = c;
@@ -122,7 +122,7 @@ public class IINC extends LocalVariableInstruction {
     }
 
     /**
-     * Set index of local variable.
+     * Sets index of local variable.
      */
     @Override
     public final void setIndex(final int n) {
@@ -134,7 +134,7 @@ public class IINC extends LocalVariableInstruction {
     }
 
     private void setWide() {
-        wide = super.getIndex() > org.apache.bcel.Const.MAX_BYTE;
+        wide = super.getIndex() > Const.MAX_BYTE;
         if (c > 0) {
             wide = wide || c > Byte.MAX_VALUE;
         } else {
@@ -148,7 +148,9 @@ public class IINC extends LocalVariableInstruction {
     }
 
     /**
-     * @return mnemonic for instruction
+     * Returns mnemonic for instruction.
+     *
+     * @return mnemonic for instruction.
      */
     @Override
     public String toString(final boolean verbose) {
