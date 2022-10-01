@@ -122,11 +122,4 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
         bytes.readByte(); // Skip 0 byte
     }
 
-    /**
-     * @return mnemonic for instruction with symbolic references resolved
-     */
-    @Override
-    public String toString(final ConstantPool cp) {
-        return super.toString(cp);
-    }
 }
