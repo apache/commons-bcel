@@ -184,7 +184,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param name name of the called method
      * @param ret_type return type of method
      * @param argTypes argument types of method
-     * @see Constants
+     * @see Const
      */
     /*
      * createInvokeDynamic only needed if instrumention code wants to generate a new invokedynamic instruction. I don't
