@@ -80,27 +80,13 @@
     <commons.junit.version>5.9.1</commons.junit.version>
   </properties>
 
-  <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
   <distributionManagement>
     <site>
       <id>apache.website</id>
-      <name>Apache Website</name>
-      <url>scp://people.apache.org/www/commons.apache.org/${commons.componentid}/</url>
+      <name>Apache Commons Site</name>
+      <url>scm:svn:https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel/</url>
     </site>
   </distributionManagement>
-
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-
-  <organization>
-    <name>The Apache Software Foundation</name>
-    <url>http://www.apache.org/</url>
-  </organization>
 
   <developers>
     <developer>
@@ -349,6 +335,7 @@
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
+          <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
         </configuration>
       </plugin>
     </plugins>
@@ -380,17 +367,17 @@
         <artifactId>maven-pmd-plugin</artifactId>
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
-          <linkXref>true</linkXref>
+          <linkXRef>true</linkXRef>
           <rulesets>
             <ruleset>${basedir}/src/conf/pmd.xml</ruleset>
           </rulesets>
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>taglist-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <configuration>
+         <groupId>org.codehaus.mojo</groupId>
+         <artifactId>taglist-maven-plugin</artifactId>
+         <version>3.0.0</version>
+         <configuration>
           <tags>
             <tag>TODO</tag>
             <tag>NOPMD</tag>
@@ -427,6 +414,7 @@
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
+          <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
         </configuration>
       </plugin>
     </plugins>

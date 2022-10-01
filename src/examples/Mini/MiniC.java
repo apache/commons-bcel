@@ -134,13 +134,9 @@ public class MiniC implements org.apache.bcel.Constants {
                     program.eval(pass = 3);
                 }
 
-                for (int i = 0; i < errors.size(); i++) {
-                    System.out.println(errors.elementAt(i));
-                }
+                errors.forEach(System.out::println);
 
-                for (int i = 0; i < warnings.size(); i++) {
-                    System.out.println(warnings.elementAt(i));
-                }
+                warnings.forEach(System.out::println);
 
                 if (errors.isEmpty()) {
                     if (byte_code) {

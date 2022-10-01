@@ -123,7 +123,7 @@ class BCELFactory extends EmptyVisitor {
     }
 
     private void updateBranchTargets() {
-        for (final BranchInstruction bi : branches) {
+        branches.forEach(bi -> {
             final BranchHandle bh = (BranchHandle) branch_map.get(bi);
             final int pos = bh.getPosition();
             final String name = bi.getName() + "_" + pos;
@@ -136,7 +136,7 @@ class BCELFactory extends EmptyVisitor {
                     printWriter.println("    " + name + ".setTarget(" + j + ", ih_" + targetPos + ");");
                 }
             }
-        }
+        });
     }
 
     private void updateExceptionHandlers() {
