@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.swing.ListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
@@ -31,7 +32,7 @@ import org.apache.commons.lang3.ArrayUtils;
  * This class implements an adapter; it implements both a Swing ListModel and a VerifierFactoryObserver.
  *
  */
-public class VerifierFactoryListModel implements VerifierFactoryObserver, javax.swing.ListModel<String> {
+public class VerifierFactoryListModel implements VerifierFactoryObserver, ListModel<String> {
 
     private final List<ListDataListener> listeners = new ArrayList<>();
     private final Set<String> cache = new TreeSet<>();
@@ -57,7 +58,7 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver, javax.
     }
 
     @Override
-    public synchronized void removeListDataListener(final javax.swing.event.ListDataListener l) {
+    public synchronized void removeListDataListener(final ListDataListener l) {
         listeners.remove(l);
     }
 

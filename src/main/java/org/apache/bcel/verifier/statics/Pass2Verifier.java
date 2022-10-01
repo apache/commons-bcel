@@ -86,7 +86,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      *
      * @see #constant_pool_entries_satisfy_static_constraints()
      */
-    private final class CPESSC_Visitor extends org.apache.bcel.classfile.EmptyVisitor {
+    private final class CPESSC_Visitor extends EmptyVisitor {
         private final Class<?> CONST_Class;
         /*
          * private Class<?> CONST_Fieldref; private Class<?> CONST_Methodref; private Class<?> CONST_InterfaceMethodref;
