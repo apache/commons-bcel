@@ -45,12 +45,12 @@ public interface Repository {
     /**
      * Finds the JavaClass instance for the given run-time class object
      */
-    JavaClass loadClass(Class<?> clazz) throws java.lang.ClassNotFoundException;
+    JavaClass loadClass(Class<?> clazz) throws ClassNotFoundException;
 
     /**
      * Finds the class with the name provided, if the class isn't there, make an attempt to load it.
      */
-    JavaClass loadClass(String className) throws java.lang.ClassNotFoundException;
+    JavaClass loadClass(String className) throws ClassNotFoundException;
 
     /**
      * Removes class from repository

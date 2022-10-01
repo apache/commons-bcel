@@ -88,6 +88,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      */
     private final class CPESSC_Visitor extends EmptyVisitor {
         private final Class<?> CONST_Class;
+
         /*
          * private Class<?> CONST_Fieldref; private Class<?> CONST_Methodref; private Class<?> CONST_InterfaceMethodref;
          */

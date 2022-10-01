@@ -17,12 +17,14 @@
  */
 package org.apache.bcel.verifier.structurals;
 
+import java.io.Serializable;
+
 /**
  * A placeholder class that can be used to create an ObjectType of which has some of the properties arrays have. They
  * implement java.lang.Cloneable and java.io.Serializable and they extend java.lang.Object.
  *
  */
-public class GenericArray extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable {
+public class GenericArray implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1991183963515237894L;
 

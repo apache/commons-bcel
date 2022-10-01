@@ -397,7 +397,7 @@ final class CodeHTML {
             }
         }
         // Get target addresses from GOTO, JSR, TABLESWITCH, etc.
-        for (; bytes.available() > 0;) {
+        while (bytes.available() > 0) {
             opcode = bytes.readUnsignedByte();
             // System.out.println(getOpcodeName(opcode));
             switch (opcode) {
@@ -533,7 +533,7 @@ final class CodeHTML {
                 findGotos(stream, c);
                 stream.reset();
                 printWriter.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Byte<BR>offset</TH>" + "<TH ALIGN=LEFT>Instruction</TH><TH ALIGN=LEFT>Argument</TH>");
-                for (; stream.available() > 0;) {
+                while (stream.available() > 0) {
                     final int offset = stream.getIndex();
                     final String str = codeToHTML(stream, method_number);
                     String anchor = "";

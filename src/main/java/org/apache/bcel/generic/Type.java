@@ -50,6 +50,7 @@ public abstract class Type {
     public static final ObjectType STRING = new ObjectType("java.lang.String");
     public static final ObjectType STRINGBUFFER = new ObjectType("java.lang.StringBuffer");
     public static final ObjectType THROWABLE = new ObjectType("java.lang.Throwable");
+
     /**
      * Empty array.
      */
@@ -59,6 +60,7 @@ public abstract class Type {
 
     public static final Type UNKNOWN = new Type(Const.T_UNKNOWN, "<unknown object>") {
     };
+
     private static final ThreadLocal<Integer> CONSUMED_CHARS = ThreadLocal.withInitial(() -> Integer.valueOf(0));
 
     // int consumed_chars=0; // Remember position in string, see getArgumentTypes
@@ -176,7 +178,7 @@ public abstract class Type {
      * @param cls Java class
      * @return corresponding Type object
      */
-    public static Type getType(final java.lang.Class<?> cls) {
+    public static Type getType(final Class<?> cls) {
         Objects.requireNonNull(cls, "cls");
         /*
          * That's an amzingly easy case, because getName() returns the signature. That's what we would have liked anyway.
@@ -256,7 +258,7 @@ public abstract class Type {
      * @param classes an array of runtime class objects
      * @return array of corresponding Type objects
      */
-    public static Type[] getTypes(final java.lang.Class<?>[] classes) {
+    public static Type[] getTypes(final Class<?>[] classes) {
         final Type[] ret = new Type[classes.length];
         for (int i = 0; i < ret.length; i++) {
             ret[i] = getType(classes[i]);
