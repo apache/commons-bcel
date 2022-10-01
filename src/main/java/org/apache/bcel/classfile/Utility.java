@@ -728,7 +728,7 @@ public abstract class Utility {
      */
     public static String fillup(final String str, final int length, final boolean left_justify, final char fill) {
         final int len = length - str.length();
-        final char[] buf = new char[len < 0 ? 0 : len];
+        final char[] buf = new char[Math.max(len, 0)];
         Arrays.fill(buf, fill);
         if (left_justify) {
             return str + new String(buf);
