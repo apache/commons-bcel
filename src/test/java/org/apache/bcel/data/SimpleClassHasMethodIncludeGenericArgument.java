@@ -23,7 +23,7 @@ public class SimpleClassHasMethodIncludeGenericArgument {
     public static void a(final String a1, final List<String> a2) {
     }
 
-    public static void b(final String b1, final List b2) {
+    public static void b(final String b1, @SuppressWarnings("rawtypes") final List b2) {
     }
 
     public static void c(final String c1, final String c2) {

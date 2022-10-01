@@ -23,6 +23,7 @@ package org.apache.bcel.data;
 // Verified with javac versions 1.8.0_261, 11.0.10 and 17.0.1.
 class LargeMethod {
     {
+        @SuppressWarnings("unused")
         int a;
         try {
             a = 0;
