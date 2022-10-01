@@ -89,6 +89,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Michael Ernst">Fix typos #140.</action>
       <action issue="BCEL-363" type="fix" dev="ggregory" due-to="Richard Atkins, Gary Gregory">Enforce MAX_CP_ENTRIES in ConstantPoolGen and ConstantPool.dump #147.</action>
       <action                  type="fix" dev="ggregory" due-to="Arturo Bernal, Gary Gregory">Minor Changes #99.</action>
+      <action                  type="fix" dev="ggregory" due-to="Arturo Bernal, Gary Gregory">org.apache.bcel.classfile.Signature.translate(String) does not detect EOF correctly.</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory">Add github/codeql-action.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make Annotations implement Iterable&lt;AnnotationEntry&gt;.</action>

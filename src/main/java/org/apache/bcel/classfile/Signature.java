@@ -114,7 +114,11 @@ public final class Signature extends Attribute {
                 ch = in.read();
             }
             if (ch == ':') { // Ok, formal parameter
-                in.skip("Ljava/lang/Object".length());
+                final int skipExpected = "Ljava/lang/Object".length();
+                final long skipActual = in.skip(skipExpected);
+                if (skipActual != skipExpected) {
+                    throw new IllegalStateException(String.format("Unexpected skip: expected=%,d, actual=%,d", skipExpected, skipActual));
+                }
                 buf.append(buf2);
                 ch = in.read();
                 in.unread();
