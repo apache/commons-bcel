@@ -186,9 +186,10 @@ public class InstructionFactory implements InstructionConstants {
      * @param argTypes argument types of method
      * @see Const
      */
+
     /*
-     * createInvokeDynamic only needed if instrumention code wants to generate a new invokedynamic instruction. I don't
-     * think we need. (markro)
+     * createInvokeDynamic only needed if instrumentation code wants to generate a new invokedynamic instruction. I don't
+     * think we need.
      *
      * public InvokeInstruction createInvokeDynamic( int bootstrap_index, String name, Type ret_type, Type[] argTypes) {
      * int index; int nargs = 0; String signature = Type.getMethodSignature(ret_type, argTypes); for (int i = 0; i <
