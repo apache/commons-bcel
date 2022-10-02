@@ -553,7 +553,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         return packageName;
     }
 
-    /********************* New repository functionality *********************/
     /**
      * Gets the ClassRepository which holds its definition. By default this is the same as
      * SyntheticRepository.getInstance();
@@ -570,7 +569,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return sbsolute path to file where this class was read from
+     * @return absolute path to file where this class was read from
      */
     public String getSourceFileName() {
         return sourceFileName;
