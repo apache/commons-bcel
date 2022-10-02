@@ -885,7 +885,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
             } else if (!name.equals(Const.STATIC_INITIALIZER_NAME)) {// vmspec2, p.116, 2nd paragraph
                 if (jc.getMajor() >= Const.MAJOR_1_8) {
-                    if (!(obj.isPublic() ^ obj.isPrivate())) {
+                    if (obj.isPublic() == obj.isPrivate()) {
                         throw new ClassConstraintException(
                             "Interface method '" + tostring(obj) + "' must have" + " exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
                     }
