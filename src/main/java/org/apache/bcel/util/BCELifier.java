@@ -19,7 +19,9 @@ package org.apache.bcel.util;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 import org.apache.bcel.Const;
@@ -161,12 +163,14 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     private final ConstantPoolGen constantPoolGen;
 
     /**
-     * @param clazz Java class to "decompile"
-     * @param out where to output Java program
+     * Constructs a new instance.
+     *
+     * @param clazz Java class to "decompile".
+     * @param out where to print the Java program in UTF-8. 
      */
     public BCELifier(final JavaClass clazz, final OutputStream out) {
         this.clazz = clazz;
-        this.printWriter = new PrintWriter(out);
+        this.printWriter = new PrintWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8), false);
         this.constantPoolGen = new ConstantPoolGen(this.clazz.getConstantPool());
     }
 
