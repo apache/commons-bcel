@@ -51,7 +51,7 @@
           <li> Various code examples and utilities like a class file viewer,
             a tool to convert class files into HTML, and a converter from
             class files to the <a
-                    href="http://jasmin.sourceforge.net">Jasmin</a> assembly
+                    href="https://jasmin.sourceforge.net">Jasmin</a> assembly
             language.</li>
         </ol>
       </p>
@@ -63,7 +63,7 @@
         <tt>org.apache.bcel.classfile</tt> and closely represents class
         files. All of the binary components and data structures declared
         in the <a
-              href="http://docs.oracle.com/javase/specs/">JVM
+              href="https://docs.oracle.com/javase/specs/">JVM
         specification</a> and described in section <a
               href="#2 The Java Virtual Machine">2</a> are mapped to classes.
 
@@ -179,7 +179,7 @@ public static void printCode(Method[] methods) {
         visitor objects to traverse and analyze the contents of a class
         file. Included in the distribution is a class
         <tt>JasminVisitor</tt> that converts class files into the <a
-              href="http://jasmin.sourceforge.net">Jasmin</a>
+              href="https://jasmin.sourceforge.net">Jasmin</a>
         assembler language.
       </p>
 
@@ -301,7 +301,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
       <p>
         For debugging purposes it may even make sense to "invent" your own
         instructions. In a sophisticated code generator like the one used
-        as a backend of the <a href="http://barat.sourceforge.net">Barat
+        as a backend of the <a href="https://barat.sourceforge.net">Barat
         framework</a> for static analysis one often has to insert
         temporary <tt>nop</tt> (No operation) instructions. When examining
         the produced code it may be very difficult to track back where the

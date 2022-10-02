@@ -1,186 +1,182 @@
 <?xml version="1.0"?>
-<!--
-    * Licensed to the Apache Software Foundation (ASF) under one
-    * or more contributor license agreements.  See the NOTICE file
-    * distributed with this work for additional information
-    * regarding copyright ownership.  The ASF licenses this file
-    * to you under the Apache License, Version 2.0 (the
-    * "License"); you may not use this file except in compliance
-    * with the License.  You may obtain a copy of the License at
-    * 
-    *   http://www.apache.org/licenses/LICENSE-2.0
-    * 
-    * Unless required by applicable law or agreed to in writing,
-    * software distributed under the License is distributed on an
-    * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    * KIND, either express or implied.  See the License for the
-    * specific language governing permissions and limitations
-    * under the License.    
--->
+<!-- * Licensed to the Apache Software Foundation (ASF) under one * or more 
+	contributor license agreements. See the NOTICE file * distributed with this 
+	work for additional information * regarding copyright ownership. The ASF 
+	licenses this file * to you under the Apache License, Version 2.0 (the * 
+	"License"); you may not use this file except in compliance * with the License. 
+	You may obtain a copy of the License at * * http://www.apache.org/licenses/LICENSE-2.0 
+	* * Unless required by applicable law or agreed to in writing, * software 
+	distributed under the License is distributed on an * "AS IS" BASIS, WITHOUT 
+	WARRANTIES OR CONDITIONS OF ANY * KIND, either express or implied. See the 
+	License for the * specific language governing permissions and limitations 
+	* under the License. -->
 
 <document>
 
-  <properties>
-    <title>Projects using BCEL</title>
-  </properties>
+	<properties>
+		<title>Projects using BCEL</title>
+	</properties>
 
-  <body>
+	<body>
 
-  <section name="BCEL Projects">
+		<section name="BCEL Projects">
 
-  <ul>
-    <li>
-     <a href="https://xml.apache.org/xalan-j/">Xalan</a> XSLT Compiler
-    </li>
-    <li>
-      <a HREF="http://objectscript.sourceforge.net/">ObjectScript</a>
-    </li>
-    <li>
-      <a HREF="http://www.jboss.org/">JBoss</a>
-    </li>
-    <li>
-      <a HREF="http://jde.sunsite.dk/">Java Development Environment</a> for Emacs
-    </li>
+			<ul>
+				<li>
+					<a href="https://xml.apache.org/xalan-j/">Xalan</a>
+					XSLT Compiler
+				</li>
+				<li>
+					<a href="https://objectscript.sourceforge.net/">ObjectScript</a>
+				</li>
+				<li>
+					<a href="https://www.jboss.org/">JBoss</a>
+				</li>
+				<li>
+					<a href="https://jde.sunsite.dk/">Java Development Environment</a>
+					for Emacs
+				</li>
+				<li>
+					<a
+						href="https://www.cs.put.poznan.pl/dweiss/index.php/projects/bsh-binding/index.xml?lang=en">BeanShell</a>
+				</li>
+				<li>
+					XMLC (was https://xmlc.enhydra.org)
+				</li>
+				<li>
+					Cougaar Memory Profiler (was https://profiler.cougaar.org)
+				</li>
+				<li>
+					JDO-Implementation (was https://jcredo.com/)
+				</li>
+				<li>
+					LIDO JDO-Implementation (was https://www.libelis.com/)
+				</li>
+				<li>
+					JRelay JDO-Implementation (was
+					https://www.objectindustries.com/)
+				</li>
+				<li>
+					<a href="https://just4log.sourceforge.net/">Just4Log</a>
+				</li>
+				<li>
+					Venus Application Publisher (connection is not private
+					https://www.geocities.com/vamp201/)
+				</li>
+				<li>
+					<a href="https://www.cs.arizona.edu/sandmark/">SandMark: Software Watermarking for Java</a>
+				</li>
 
-    <li>
-      <a HREF="http://www.cs.put.poznan.pl/dweiss/index.php/projects/bsh-binding/index.xml?lang=en">BeanShell</a>
-    </li>
+				<li>
+					<a href="https://jcontractor.sourceforge.net/">jContractor -
+						Design by contract
+					</a>
+				</li>
+				<li>Byte code optimization (was
+					https://www-i2.informatik.rwth-aachen.de/~markusj/jopt/index.html)
+				</li>
+				<li>
+					<a
+						href="https://www.cs.uoregon.edu/research/perpetual/dasada/Software/Gretel/">Gretel</a>
+					- Residual Test Coverage Tool
+				</li>
+				<li>Mobile Code Security Through Java Byte-Code Modification (was
+					https://Theory.Stanford.EDU/~vganesh/project.html)
+				</li>
+				<li>Portable Resource Accounting for Java (was
+					https://www.jraf2.org/)
+				</li>
+				<li>
+					<a href="https://lampwww.epfl.ch/funnel/">Funnel</a>
+				</li>
+				<li>
+					Static analysis of class libraries (connection not secure
+					https://www.uni-paderborn.de/fachbereich/AG/agkastens/wir/mthies/index.htm)
+				</li>
+				<li>
+					Kava: Reflective Java (connection not secure
+					https://www.cs.ncl.ac.uk/research/dependability/reflection/)
+				</li>
+				<li>one.world - Programming for pervasive computing environments
+					(was https://one.cs.washington.edu/)
+				</li>
+				<li>
+					Sally: Simple Aspect Language (was
+					https://www.cs.uni-essen.de/dawis/research/aop/sally/)
+				</li>
+				<li>
+					<a href="https://eclipse.org/aspectj/">AspectJ: Aspect-oriented
+						Java
+					</a>
+				</li>
+				<li>
+					<a href="https://aopclsuite.sourceforge.net/">AOP ClassLoader
+						Suite
+					</a>
+				</li>
+				<li>
+					Brakes: Thread serialization (connection not private
+					https://www.cs.kuleuven.ac.be/~tim/MOS/brakes.html)
+				</li>
+				<li>
+					<a href="https://www.cs.sunysb.edu/~stoller/SPIN2001.html">Transformations
+						for Model Checking Distributed Java
+						Programs
+					</a>
+				</li>
+				<li>
+					Ozone Data base (was https://ozone-db.org/)
+				</li>
+				<li>
+					Method tracing tool (was https://www.jmonde.org/Trace)
+				</li>
+				<li>
+					JMangler (was https://javalab.cs.uni-bonn.de/research/jmangler/)
+				</li>
+				<li>
+					<a href="https://barat.sourceforge.net/">Barat compiler
+						framework
+					</a>
+				</li>
+				<li>
+					<a href="https://quilt.sourceforge.net/">Java code coverage
+						tool for JUnit
+					</a>
+				</li>
+				<li>
+					<a href="https://hup.sourceforge.net/">Heap Usage Profiling</a>
+				</li>
+				<li>
+					<a href="https://importscrubber.sourceforge.net/">Import Scrubber</a>
+				</li>
+				<li>
+					<a href="https://jbackbrowse.sourceforge.net/">jBackBrowse</a>
+				</li>
+				<li>
+					<a href="https://findbugs.sourceforge.net/">FindBugs</a>
+					static analysis tool
+				</li>
+			</ul>
 
-    <li>
-      <a HREF="http://xmlc.enhydra.org">XMLC</a>
-    </li>
- 
-    <li>
-      <a HREF="http://profiler.cougaar.org">Cougaar</a> Memory Profiler
-    </li>
+			<h2>Related Projects</h2>
+			<ul>
+				<li>
+					<a href="https://asm.ow2.io/">ASM</a>
+				</li>
+				<li>
+					<a href="https://www.cs.duke.edu/ari/joie/">JOIE: The Java Object Instrumentation Environment</a>
+				</li>
+				<li>
+					CFParse (connection is not private
+					https://www.alphaworks.ibm.com/tech/cfparse)
+				</li>
+				<li>
+					JikesBT (connection is not private
+					https://www.alphaworks.ibm.com/tech/jikesbt)
+				</li>
+			</ul>
 
-    <li>
-      <a HREF="http://jcredo.com/">JCredo</a> JDO-Implementation
-    </li>
+		</section>
 
-    <li>
-      <a HREF="http://www.libelis.com/">LIDO</a> JDO-Implementation
-    </li>
-
-    <li>
-      <a HREF="http://www.objectindustries.com/">JRelay</a> JDO-Implementation
-    </li>
-
-    <li>
-      <a HREF="http://just4log.sourceforge.net/">Just4Log</a>
-    </li>
-
-    <li>
-      <a HREF="http://www.geocities.com/vamp201/">Venus Application Publisher</a>
-    </li>
-
-    <li><a HREF="http://www.cs.arizona.edu/sandmark/">SandMark: Software Watermarking for Java</a>
-    </li>
-
-    <li><a HREF="http://jcontractor.sourceforge.net/">jContractor -
-    Design by contract</a>
-    </li>
-
-    <li><a
-    HREF="http://www-i2.informatik.rwth-aachen.de/~markusj/jopt/index.html">Byte
-    code optimization</a>
-    </li>
-
-    <li><a HREF="http://www.cs.uoregon.edu/research/perpetual/dasada/Software/Gretel/">Gretel</a> - Residual Test Coverage Tool
-    </li>
-
-    <li><a HREF="http://Theory.Stanford.EDU/~vganesh/project.html">Mobile
-    Code Security Through Java Byte-Code Modification</a>
-    </li>
-
-    <li><a HREF="http://www.jraf2.org/">Portable Resource Accounting
-    for Java</a>
-    </li>
-
-    <li><a HREF="http://lampwww.epfl.ch/funnel/">Funnel</a>
-    </li>
-
-    <li><a HREF="http://www.uni-paderborn.de/fachbereich/AG/agkastens/wir/mthies/index.htm">
-    Static analysis of class libraries</a>
-    </li>
-
-    <li><a HREF="http://www.cs.ncl.ac.uk/research/dependability/reflection/">
-    Kava: Reflective Java</a>
-    </li>
-
-    <li>one.world - <a HREF="http://one.cs.washington.edu/"
-    >Programming for pervasive computing environments</a>
-    </li>
-
-    <li><a
-    HREF="http://www.cs.uni-essen.de/dawis/research/aop/sally/"
-    >Sally: Simple Aspect Language</a>
-    </li>
-
-    <li><a
-    HREF="http://eclipse.org/aspectj/"
-    >AspectJ: Aspect-oriented Java</a>
-    </li>
-
-    <li><a
-    HREF="http://aopclsuite.sourceforge.net/"
-    >AOP ClassLoader Suite</a>
-    </li>
-
-    <li><a
-    HREF="http://www.cs.kuleuven.ac.be/~tim/MOS/brakes.html"
-    >Brakes: Thread serialization</a>
-    </li>
-
-    <li><a
-    HREF="http://www.cs.sunysb.edu/~stoller/SPIN2001.html"
-    >Transformations for Model Checking Distributed Java Programs</a>
-    </li>
-
-    <li><a
-    HREF="http://ozone-db.org/">Ozone Data base</a>
-    </li>
-
-    <li><a
-    HREF="http://www.jmonde.org/Trace">Method tracing tool</a>
-    </li>
-
-    <li><a HREF="http://javalab.cs.uni-bonn.de/research/jmangler/"
-    >JMangler</a>
-    </li>
-
-    <li><a href="http://barat.sourceforge.net/">Barat compiler
-    framework</a>
-    </li>
-
-    <li><a href="http://quilt.sourceforge.net/">Java code coverage
-    tool for JUnit</a>
-    </li>
-
-    <li>
-      <a HREF="http://hup.sourceforge.net/">Heap Usage Profiling</a>
-    </li>
-
-    <li><a HREF="http://importscrubber.sourceforge.net/">Import Scrubber</a>
-    </li>
-
-    <li><a HREF="http://jbackbrowse.sourceforge.net/">jBackBrowse</a>
-    </li>
-
-    <li>
-      <a href="http://findbugs.sourceforge.net/">FindBugs</a> static analysis tool
-    </li>
-  </ul>
-
-  <h2>Related Projects</h2>
-  <ul>
-    <li><a href="https:https://asm.ow2.io/">ASM</a></li>
-    <li><a href="https://www.cs.duke.edu/ari/joie/">JOIE: The Java Object Instrumentation Environment</a></li>
-    <li><a href="http://www.alphaworks.ibm.com/tech/cfparse">CFParse</a></li>
-    <li><a href="http://www.alphaworks.ibm.com/tech/jikesbt">JikesBT</a></li>
-  </ul>
-
-</section>
-
-</body>
+	</body>
 </document>

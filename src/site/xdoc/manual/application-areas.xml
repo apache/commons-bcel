@@ -34,14 +34,14 @@
 
       <p>
         Compilers like the <a
-              href="http://barat.sourceforge.net">Barat</a> compiler use <font
+              href="https://barat.sourceforge.net">Barat</a> compiler use <font
               face="helvetica,arial">BCEL</font> to implement a byte code
         generating back end. Other possible application areas are the
         static analysis of byte code or examining the run-time behavior of
         classes by inserting calls to profiling methods into the
         code. Further examples are extending Java with Eiffel-like
         assertions, automated delegation, or with the concepts of <a
-              href="http://www.eclipse.org/aspectj/">Aspect-Oriented Programming</a>.<br/> A
+              href="https://www.eclipse.org/aspectj/">Aspect-Oriented Programming</a>.<br/> A
         list of projects using <font face="helvetica,arial">BCEL</font> can
         be found <a href="../projects.html">here</a>.
       </p>

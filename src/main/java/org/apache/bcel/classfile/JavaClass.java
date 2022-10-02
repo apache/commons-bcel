@@ -86,10 +86,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     private static String indent(final Object obj) {
-        final StringTokenizer tok = new StringTokenizer(obj.toString(), "\n");
+        final StringTokenizer tokenizer = new StringTokenizer(obj.toString(), "\n");
         final StringBuilder buf = new StringBuilder();
-        while (tok.hasMoreTokens()) {
-            buf.append("\t").append(tok.nextToken()).append("\n");
+        while (tokenizer.hasMoreTokens()) {
+            buf.append("\t").append(tokenizer.nextToken()).append("\n");
         }
         return buf.toString();
     }

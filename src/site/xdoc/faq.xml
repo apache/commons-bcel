@@ -40,7 +40,7 @@
       <b>Q: </b> Is the BCEL thread-safe?
       <br/>
       <b>A: </b>BCEL was (deliberately) not designed for thread
-      safety. See "Concurrent Programming in Java"</a>, by Doug Lea,
+      safety. See "Concurrent Programming in Java", by Doug Lea,
       for an excellent reference on how to build thread-safe wrappers and 
       <a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/further.html">more</a>.
     </p>

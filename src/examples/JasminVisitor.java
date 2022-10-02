@@ -52,7 +52,7 @@ import org.apache.bcel.generic.Select;
 import org.apache.bcel.generic.TABLESWITCH;
 
 /**
- * Disassemble Java class object into the <a href="http://jasmin.sourceforge.net"> Jasmin</a> format.
+ * Disassemble Java class object into the <a href="https://jasmin.sourceforge.net"> Jasmin</a> format.
  *
  */
 public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {

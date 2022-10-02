@@ -478,7 +478,7 @@ public final class Const {
     public static final byte CONSTANT_Utf8 = 1;
 
     /*
-     * The description of the constant pool is at: http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4
+     * The description of the constant pool is at: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4
      * References below are to the individual sections
      */
 
