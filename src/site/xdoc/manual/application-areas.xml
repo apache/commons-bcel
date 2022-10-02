@@ -81,7 +81,7 @@
         This concept enables developers to use <em>load-time
         reflection</em> to implement their ideas as opposed to the static
         reflection supported by the <a
-              href="http://java.sun.com/j2se/1.3/docs/guide/reflection/index.html">Java
+              href="https://docs.oracle.com/javase/8/docs/technotes/guides/reflection/index.html">Java
         Reflection API</a>. Load-time transformations supply the user with
         a new level of abstraction. They are not strictly tied to the static
         constraints of the original authors of the classes but may
