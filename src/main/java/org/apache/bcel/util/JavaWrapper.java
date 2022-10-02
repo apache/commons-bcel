@@ -20,6 +20,8 @@ package org.apache.bcel.util;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Java interpreter replacement, i.e., wrapper that uses its own ClassLoader to modify/generate classes as they're
  * requested. You can take this as a template for your own applications.
@@ -44,7 +46,7 @@ public class JavaWrapper {
 
     private static java.lang.ClassLoader getClassLoader() {
         final String s = System.getProperty("bcel.classloader");
-        if (s == null || "".equals(s)) {
+        if (StringUtils.isEmpty(s)) {
             throw new IllegalStateException("The property 'bcel.classloader' must be defined");
         }
         try {

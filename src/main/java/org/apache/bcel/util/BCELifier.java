@@ -240,7 +240,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         printWriter.println("  private ClassGen           _cg;");
         printWriter.println();
         printWriter.println("  public " + className + "Creator() {");
-        printWriter.println("    _cg = new ClassGen(\"" + ("".equals(packageName) ? className : packageName + "." + className) + "\", \"" + superName
+        printWriter.println("    _cg = new ClassGen(\"" + (packageName.isEmpty() ? className : packageName + "." + className) + "\", \"" + superName
             + "\", " + "\"" + clazz.getSourceFileName() + "\", " + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", " + "new String[] { " + inter + " });");
         printWriter.println("    _cg.setMajor(" + clazz.getMajor() + ");");
         printWriter.println("    _cg.setMinor(" + clazz.getMinor() + ");");
