@@ -44,11 +44,11 @@ Apache Commons BCEL
 ===================
 
 [![GitHub Actions Status](https://github.com/apache/commons-bcel/workflows/Java%20CI/badge.svg)](https://github.com/apache/commons-bcel/actions)
-[![Coverage Status](https://codecov.io/gh/apache/commons-bcel/branch/master/graph/badge.svg)](https://app.codecov.io/gh/apache/commons-bcel/branch/master)
+[![Coverage Status](https://codecov.io/gh/apache/commons-bcel/branch/master/graph/badge.svg)](https://app.codecov.io/gh/apache/commons-bcel)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/?gav=true)
-[![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.5.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.5.0)
-[![CodeQL](https://github.com/apache/commons-bcel/workflows/CodeQL/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml?query=workflow%3ACodeQL)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel)
+[![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.6.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.6.0)
+[![CodeQL](https://github.com/apache/commons-bcel/workflows/CodeQL/badge.svg)](hhttps://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml?query=workflow%3ACodeQL)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-text/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-text)
 
 Apache Commons Bytecode Engineering Library
 
@@ -69,7 +69,7 @@ Alternatively you can pull it from the central Maven repositories:
 <dependency>
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
-  <version>6.5.0</version>
+  <version>6.6.0</version>
 </dependency>
 ```
 
