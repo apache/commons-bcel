@@ -65,7 +65,7 @@ public class ModularRuntimeImage implements Closeable {
         final Map<String, ?> emptyMap = Collections.emptyMap();
         final Path jrePath = Paths.get(javaHome);
         final Path jrtFsPath = jrePath.resolve("lib").resolve("jrt-fs.jar");
-        this.classLoader = new URLClassLoader(new URL[] {jrtFsPath.toUri().toURL()});
+        this.classLoader = URLClassLoader.newInstance(new URL[] {jrtFsPath.toUri().toURL()});
         this.fileSystem = FileSystems.newFileSystem(URI.create("jrt:/"), emptyMap, classLoader);
     }
 

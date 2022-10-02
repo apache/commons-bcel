@@ -92,6 +92,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Arturo Bernal, Gary Gregory">org.apache.bcel.classfile.Signature.translate(String) does not detect EOF correctly.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] High: Found reliance on default encoding in new org.apache.bcel.util.BCELifier(JavaClass, OutputStream): new java.io.PrintWriter(OutputStream) [org.apache.bcel.util.BCELifier] At BCELifier.java:[line 169] DM_DEFAULT_ENCODING.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: Unread field: org.apache.bcel.verifier.GraphicalVerifier.packFrame; should this field be static? [org.apache.bcel.verifier.GraphicalVerifier] At GraphicalVerifier.java:[line 43] SS_SHOULD_BE_STATIC.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: new org.apache.bcel.util.ModularRuntimeImage(String) creates a java.net.URLClassLoader classloader, which should be performed within a doPrivileged block [org.apache.bcel.util.ModularRuntimeImage] At ModularRuntimeImage.java:[line 68] DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED.</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory">Add github/codeql-action.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make Annotations implement Iterable&lt;AnnotationEntry&gt;.</action>
