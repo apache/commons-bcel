@@ -90,7 +90,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-363" type="fix" dev="ggregory" due-to="Richard Atkins, Gary Gregory">Enforce MAX_CP_ENTRIES in ConstantPoolGen and ConstantPool.dump #147.</action>
       <action                  type="fix" dev="ggregory" due-to="Arturo Bernal, Gary Gregory">Minor Changes #99.</action>
       <action                  type="fix" dev="ggregory" due-to="Arturo Bernal, Gary Gregory">org.apache.bcel.classfile.Signature.translate(String) does not detect EOF correctly.</action>
-      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">[ERROR] High: Found reliance on default encoding in new org.apache.bcel.util.BCELifier(JavaClass, OutputStream): new java.io.PrintWriter(OutputStream) [org.apache.bcel.util.BCELifier] At BCELifier.java:[line 169] DM_DEFAULT_ENCODING.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] High: Found reliance on default encoding in new org.apache.bcel.util.BCELifier(JavaClass, OutputStream): new java.io.PrintWriter(OutputStream) [org.apache.bcel.util.BCELifier] At BCELifier.java:[line 169] DM_DEFAULT_ENCODING.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: Unread field: org.apache.bcel.verifier.GraphicalVerifier.packFrame; should this field be static? [org.apache.bcel.verifier.GraphicalVerifier] At GraphicalVerifier.java:[line 43] SS_SHOULD_BE_STATIC.</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory">Add github/codeql-action.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make Annotations implement Iterable&lt;AnnotationEntry&gt;.</action>

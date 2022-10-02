@@ -40,7 +40,7 @@ public class GraphicalVerifier {
         new GraphicalVerifier();
     }
 
-    private final boolean packFrame = false;
+    private static final boolean packFrame = false;
 
     /** Constructor. */
     public GraphicalVerifier() {
