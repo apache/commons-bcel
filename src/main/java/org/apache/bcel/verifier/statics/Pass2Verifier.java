@@ -875,13 +875,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
 
                 // A specific instance initialization method... (vmspec2,Page 116).
-                if (name.equals(Const.CONSTRUCTOR_NAME)) {
-                    // ..may have at most one of ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC set: is checked above.
-                    // ..may also have ACC_STRICT set, but none of the other flags in table 4.5 (vmspec2, page 115)
-                    if (obj.isStatic() || obj.isFinal() || obj.isSynchronized() || obj.isNative() || obj.isAbstract()) {
-                        throw new ClassConstraintException("Instance initialization method '" + tostring(obj) + "' must not have"
+                // ..may have at most one of ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC set: is checked above.
+                // ..may also have ACC_STRICT set, but none of the other flags in table 4.5 (vmspec2, page 115)
+                if (name.equals(Const.CONSTRUCTOR_NAME) && (obj.isStatic() || obj.isFinal() || obj.isSynchronized() || obj.isNative() || obj.isAbstract())) {
+                    throw new ClassConstraintException("Instance initialization method '" + tostring(obj) + "' must not have"
                             + " any of the ACC_STATIC, ACC_FINAL, ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT modifiers set.");
-                    }
                 }
             } else if (!name.equals(Const.STATIC_INITIALIZER_NAME)) {// vmspec2, p.116, 2nd paragraph
                 if (jc.getMajor() >= Const.MAJOR_1_8) {
