@@ -698,7 +698,7 @@ public class ClassPath implements Closeable {
         InputStream inputStream = null;
         try {
             inputStream = getClass().getClassLoader().getResourceAsStream(name + suffix); // may return null
-        } catch (final Exception e) {
+        } catch (final Exception ignored) {
             // ignored
         }
         if (inputStream != null) {
