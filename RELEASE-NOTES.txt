@@ -1,4 +1,124 @@
               Apache Commons BCEL
+              Version 6.6.0
+              RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.6.0!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+NEW FEATURES:
+=============
+
+o           Add github/codeql-action.
+o           Make Annotations implement Iterable<AnnotationEntry>. Thanks to Gary Gregory.
+o           Make BootstrapMethods implement Iterable<BootstrapMethod>. Thanks to Gary Gregory.
+o           Make ConstantPool implement Iterable<Constant>. Thanks to Gary Gregory.
+o           Make InnerClasses implement Iterable<InnerClass>. Thanks to Gary Gregory.
+o           Make LineNumberTable implement Iterable<LineNumber>. Thanks to Gary Gregory.
+o           Make LocalVariableTable implement Iterable<LocalVariable>. Thanks to Gary Gregory.
+o           Make LocalVariableTypeTable implement Iterable<LocalVariable>. Thanks to Gary Gregory.
+o           Make MethodParameters implement Iterable<MethodParameter>. Thanks to Gary Gregory.
+o           Make ParameterAnnotations implement Iterable<ParameterAnnotationEntry>. Thanks to Gary Gregory.
+
+FIXED BUGS:
+===========
+
+o           Improve test case coverage; fix Utility.encode bug #46. Thanks to Mark Roberts, Gary Gregory.
+o BCEL-342: Migrate test suite to JUnit Jupiter #68. Thanks to Allon Murienik, Gary Gregory.
+o BCEL-343: JUnit Assertion improvement #69. Thanks to Allon Murienik, Gary Gregory.
+o           Minor improvements to comments and toString() methods #71. Thanks to Mark Roberts.
+o           Minor Improvements #83. Thanks to Arturo Bernal.
+o           Inline variable and avoid unnecessary variable. #94. Thanks to Arturo Bernal.
+o           Formalize PerformanceTest #168. Thanks to Mark Roberts, Gary Gregory.
+o           Java 8 improvements #95. Thanks to Arturo Bernal.
+o BCEL-345: Make documentation wording more inclusive #98. Thanks to Christine Poerschke.
+o           Force unsigned short for LineNumber.toString() #118. Thanks to Mark Roberts, Gary Gregory.
+o           Fix IllegalStateException when calling toString(ConstantPool) on a Module or ModuleRequires #125. Thanks to Tim Boudreau, Gary Gregory.
+o           Generate HTML in UTF-8 instead of whatever happens to be the default platform encoding. Thanks to Gary Gregory.
+o BCEL-303: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+o BCEL-307: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+o BCEL-308: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+o BCEL-309: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+o BCEL-311: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+o BCEL-312: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+o BCEL-313: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+o BCEL-337: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+o           Close resources #138. Thanks to Michael Ernst, Gary Gregory.
+o           Improve condy (constant dynamic) support #139. Thanks to Alexander Kriegisch, Gary Gregory.
+o           Fix typos #140. Thanks to Michael Ernst.
+o BCEL-363: Enforce MAX_CP_ENTRIES in ConstantPoolGen and ConstantPool.dump #147. Thanks to Richard Atkins, Gary Gregory.
+o           Minor Changes #99. Thanks to Arturo Bernal, Gary Gregory.
+o           Simplify boolean expressions #152. Thanks to Arturo Bernal.
+o           Use Math.max #151. Thanks to Arturo Bernal.
+o           org.apache.bcel.classfile.Signature.translate(String) does not detect EOF correctly. Thanks to Gary Gregory.
+o           Fix SpotBugs [ERROR] High: Found reliance on default encoding in new org.apache.bcel.util.BCELifier(JavaClass, OutputStream): new java.io.PrintWriter(OutputStream) [org.apache.bcel.util.BCELifier] At BCELifier.java:[line 169] DM_DEFAULT_ENCODING. Thanks to Gary Gregory.
+o           Fix SpotBugs [ERROR] Medium: Unread field: org.apache.bcel.verifier.GraphicalVerifier.packFrame; should this field be static? [org.apache.bcel.verifier.GraphicalVerifier] At GraphicalVerifier.java:[line 43] SS_SHOULD_BE_STATIC. Thanks to Gary Gregory.
+o           Fix SpotBugs [ERROR] Medium: new org.apache.bcel.util.ModularRuntimeImage(String) creates a java.net.URLClassLoader classloader, which should be performed within a doPrivileged block [org.apache.bcel.util.ModularRuntimeImage] At ModularRuntimeImage.java:[line 68] DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED. Thanks to Gary Gregory.
+
+CHANGES:
+========
+
+o           Bump actions/cache from 2 to 3.0.9 #88, #93, #110, #119, #149. Thanks to Dependabot, Gary Gregory.
+o           Bump actions/checkout from 2.3.1 to 3.0.2 #59, #66, #73, #108, #115. Thanks to Dependabot, Gary Gregory.
+o           Bump actions/setup-java from 1.4.0 to 3.5.1 #62, #67. Thanks to Dependabot, Gary Gregory.
+o           Bump tests from Apache Commons Lang 3.10 to 3.12.0 Thanks to Gary Gregory.
+o           Bump commons-parent from 50 to 54. Thanks to Gary Gregory.
+o           Bump biz.aQute.bndlib from 5.1.0 to 6.3.1, #54, #72, #81, #111. Thanks to Dependabot, Gary Gregory.
+o           Bump maven-surefire-plugin from 3.0.0-M4 to 3.0.0-M7 #53, #124, #129. Thanks to Dependabot.
+o           Bump maven-checkstyle-plugin from 3.1.0 to 3.2.0, #77, #141. Thanks to Gary Gregory, Dependabot.
+o           Bump Jacoco from 0.8.5 to 0.8.8. Thanks to Dependabot, Gary Gregory.
+o           Bump commons-io from 2.7 to 2.11.0 #65, #96. Thanks to Dependabot, Gary Gregory.
+o           Bump exec-maven-plugin from 1.6.0 to 3.1.0 #51, #134. Thanks to Dependabot.
+o           Bump commons.japicmp.version from 0.14.3 to 0.16.0. Thanks to Gary Gregory.
+o           Bump maven-pmd-plugin from 3.13.0 to 3.19. #74, #103, #116, #130, #142, #144. Thanks to Dependabot.
+o           Bump pmd from 6.44.0 to 6.50.0. Thanks to Dependabot, Gary Gregory.
+o           Bump junit-jupiter from 5.7.0 to 5.9.1 #78, #90, #101, #112, #135. Thanks to Dependabot, Gary Gregory.
+o           Bump jna.version from 5.6.0 to 5.12.1 #84, #102, #109, #120, #131. Thanks to Dependabot.
+o           Bump jmh.version from 1.19 to 1.35 #92, #100, #122. Thanks to Dependabot.
+o           Bump maven-javadoc-plugin from 3.2.0 to 3.4.1. Thanks to Gary Gregory.
+o           Bump Bump maven-bundle-plugin from 5.1.1 to 5.1.3. Thanks to Gary Gregory.
+o           Bump taglist-maven-plugin from 2.4 to 3.0.0 #114. Thanks to Dependabot.
+o           Bump spotbugs-maven-plugin from 4.5.3.0 to 4.7.2.0 #128, #132, #136, #144. Thanks to Gary Gregory, Dependabot.
+o           Bump spotbugs from 4.5.3 to 4.7.1. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BCEL
               Version 6.5.0
               RELEASE NOTES
 
