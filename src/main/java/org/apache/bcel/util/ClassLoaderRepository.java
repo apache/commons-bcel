@@ -55,7 +55,7 @@ public class ClassLoaderRepository implements Repository {
      */
     @Override
     public JavaClass findClass(final String className) {
-        return loadedClasses.getOrDefault(className, null);
+        return loadedClasses.get(className);
     }
 
     /*

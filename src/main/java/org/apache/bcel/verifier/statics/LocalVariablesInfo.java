@@ -17,6 +17,8 @@
  */
 package org.apache.bcel.verifier.statics;
 
+import java.util.Arrays;
+
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
@@ -32,9 +34,7 @@ public class LocalVariablesInfo {
     /** The constructor. */
     LocalVariablesInfo(final int max_locals) {
         localVariableInfos = new LocalVariableInfo[max_locals];
-        for (int i = 0; i < max_locals; i++) {
-            localVariableInfos[i] = new LocalVariableInfo();
-        }
+        Arrays.setAll(localVariableInfos, i -> new LocalVariableInfo());
     }
 
     /**

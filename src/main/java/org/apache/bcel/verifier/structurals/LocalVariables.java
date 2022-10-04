@@ -17,6 +17,8 @@
  */
 package org.apache.bcel.verifier.structurals;
 
+import java.util.Arrays;
+
 import org.apache.bcel.generic.ReferenceType;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
@@ -37,9 +39,7 @@ public class LocalVariables implements Cloneable {
      */
     public LocalVariables(final int localVariableCount) {
         locals = new Type[localVariableCount];
-        for (int i = 0; i < localVariableCount; i++) {
-            locals[i] = Type.UNKNOWN;
-        }
+        Arrays.fill(locals, Type.UNKNOWN);
     }
 
     /**

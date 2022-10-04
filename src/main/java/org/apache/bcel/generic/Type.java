@@ -18,6 +18,7 @@
 package org.apache.bcel.generic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -81,7 +82,6 @@ public abstract class Type {
     public static Type[] getArgumentTypes(final String signature) {
         final List<Type> vec = new ArrayList<>();
         int index;
-        Type[] types;
         try {
             // Skip any type arguments to read argument declarations between `(' and `)'
             index = signature.indexOf('(') + 1;
@@ -96,7 +96,7 @@ public abstract class Type {
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
             throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
-        types = new Type[vec.size()];
+        Type[] types = new Type[vec.size()];
         vec.toArray(types);
         return types;
     }
@@ -260,9 +260,7 @@ public abstract class Type {
      */
     public static Type[] getTypes(final Class<?>[] classes) {
         final Type[] ret = new Type[classes.length];
-        for (int i = 0; i < ret.length; i++) {
-            ret[i] = getType(classes[i]);
-        }
+        Arrays.setAll(ret, i -> getType(classes[i]));
         return ret;
     }
 

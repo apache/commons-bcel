@@ -30,24 +30,18 @@ import java.util.Map;
  * </p>
  *
  * @see org.apache.bcel.Repository
- *
  */
 public class SyntheticRepository extends MemorySensitiveClassPathRepository {
 
     // private static final String DEFAULT_PATH = ClassPath.getClassPath();
-    private static final Map<ClassPath, SyntheticRepository> instances = new HashMap<>(); // CLASSPATH X REPOSITORY
+    private static final Map<ClassPath, SyntheticRepository> MAP = new HashMap<>(); // CLASSPATH X REPOSITORY
 
     public static SyntheticRepository getInstance() {
         return getInstance(ClassPath.SYSTEM_CLASS_PATH);
     }
 
     public static SyntheticRepository getInstance(final ClassPath classPath) {
-        SyntheticRepository rep = instances.get(classPath);
-        if (rep == null) {
-            rep = new SyntheticRepository(classPath);
-            instances.put(classPath, rep);
-        }
-        return rep;
+        return MAP.computeIfAbsent(classPath, SyntheticRepository::new);
     }
 
     private SyntheticRepository(final ClassPath path) {

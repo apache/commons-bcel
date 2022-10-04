@@ -18,6 +18,8 @@
 package org.apache.bcel.generic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,6 +35,7 @@ import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.util.BCELComparator;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Template class for building up a java class. May be initialized with an existing java class (file).
@@ -112,26 +115,15 @@ public class ClassGen extends AccessFlags implements Cloneable {
         final Attribute[] attributes = clazz.getAttributes();
         // J5TODO: Could make unpacking lazy, done on first reference
         final AnnotationEntryGen[] annotations = unpackAnnotations(attributes);
-        final Method[] methods = clazz.getMethods();
-        final Field[] fields = clazz.getFields();
-        final String[] interfaces = clazz.getInterfaceNames();
-        for (final String interface1 : interfaces) {
-            addInterface(interface1);
-        }
+        Collections.addAll(interfaceList, clazz.getInterfaceNames());
         for (final Attribute attribute : attributes) {
             if (!(attribute instanceof Annotations)) {
                 addAttribute(attribute);
             }
         }
-        for (final AnnotationEntryGen annotation : annotations) {
-            addAnnotationEntry(annotation);
-        }
-        for (final Method method : methods) {
-            addMethod(method);
-        }
-        for (final Field field : fields) {
-            addField(field);
-        }
+        Collections.addAll(annotationList, annotations);
+        Collections.addAll(methodList, clazz.getMethods());
+        Collections.addAll(fieldList, clazz.getFields());
     }
 
     /**
@@ -171,9 +163,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
         classNameIndex = cp.addClass(className);
         superclassNameIndex = cp.addClass(superClassName);
         if (interfaces != null) {
-            for (final String interface1 : interfaces) {
-                addInterface(interface1);
-            }
+            Collections.addAll(interfaceList, interfaces);
         }
     }
 
@@ -298,7 +288,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     public Attribute[] getAttributes() {
-        return attributeList.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
+        return attributeList.toArray(Attribute.EMPTY_ARRAY);
     }
 
     public String getClassName() {
@@ -322,18 +312,13 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     public String[] getInterfaceNames() {
-        final int size = interfaceList.size();
-        final String[] interfaces = new String[size];
-        interfaceList.toArray(interfaces);
-        return interfaces;
+        return interfaceList.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     public int[] getInterfaces() {
         final int size = interfaceList.size();
         final int[] interfaces = new int[size];
-        for (int i = 0; i < size; i++) {
-            interfaces[i] = cp.addClass(interfaceList.get(i));
-        }
+        Arrays.setAll(interfaces, i -> cp.addClass(interfaceList.get(i)));
         return interfaces;
     }
 
@@ -504,9 +489,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     public void setMethods(final Method[] methods) {
         methodList.clear();
-        for (final Method method : methods) {
-            addMethod(method);
-        }
+        Collections.addAll(methodList, methods);
     }
 
     /**

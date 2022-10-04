@@ -47,26 +47,26 @@ public abstract class Attribute implements Cloneable, Node {
 
     private static final boolean debug = Boolean.getBoolean(Attribute.class.getCanonicalName() + ".debug"); // Debugging on/off
 
-    private static final Map<String, Object> readers = new HashMap<>();
+    private static final Map<String, Object> READERS = new HashMap<>();
 
     /**
      * Empty array.
      *
      * @since 6.6.0
      */
-    public static final Attribute[] EMPTY_ATTRIBUTE_ARRAY = {};
+    public static final Attribute[] EMPTY_ARRAY = {};
 
     /**
      * Add an Attribute reader capable of parsing (user-defined) attributes named "name". You should not add readers for the
      * standard attributes such as "LineNumberTable", because those are handled internally.
      *
      * @param name the name of the attribute as stored in the class file
-     * @param r the reader object
+     * @param attributeReader the reader object
      * @deprecated (6.0) Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead
      */
     @java.lang.Deprecated
-    public static void addAttributeReader(final String name, final AttributeReader r) {
-        readers.put(name, r);
+    public static void addAttributeReader(final String name, final AttributeReader attributeReader) {
+        READERS.put(name, attributeReader);
     }
 
     /**
@@ -74,10 +74,10 @@ public abstract class Attribute implements Cloneable, Node {
      * standard attributes such as "LineNumberTable", because those are handled internally.
      *
      * @param name the name of the attribute as stored in the class file
-     * @param r the reader object
+     * @param unknownAttributeReader the reader object
      */
-    public static void addAttributeReader(final String name, final UnknownAttributeReader r) {
-        readers.put(name, r);
+    public static void addAttributeReader(final String name, final UnknownAttributeReader unknownAttributeReader) {
+        READERS.put(name, unknownAttributeReader);
     }
 
     protected static void println(final String msg) {
@@ -120,7 +120,7 @@ public abstract class Attribute implements Cloneable, Node {
         // Call proper constructor, depending on `tag'
         switch (tag) {
         case Const.ATTR_UNKNOWN:
-            final Object r = readers.get(name);
+            final Object r = READERS.get(name);
             if (r instanceof UnknownAttributeReader) {
                 return ((UnknownAttributeReader) r).createAttribute(name_index, length, file, constant_pool);
             }
@@ -212,7 +212,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @param name the name of the attribute as stored in the class file
      */
     public static void removeAttributeReader(final String name) {
-        readers.remove(name);
+        READERS.remove(name);
     }
 
     /**

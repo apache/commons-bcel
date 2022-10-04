@@ -50,7 +50,7 @@ public class AnnotationEntryGen {
      */
     static Attribute[] getAnnotationAttributes(final ConstantPoolGen cp, final AnnotationEntryGen[] annotationEntryGens) {
         if (annotationEntryGens.length == 0) {
-            return Attribute.EMPTY_ATTRIBUTE_ARRAY;
+            return Attribute.EMPTY_ARRAY;
         }
 
         try {
@@ -106,7 +106,7 @@ public class AnnotationEntryGen {
                     new RuntimeInvisibleAnnotations(riaIndex, riaData.length, new DataInputStream(new ByteArrayInputStream(riaData)), cp.getConstantPool()));
             }
 
-            return newAttributes.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
+            return newAttributes.toArray(Attribute.EMPTY_ARRAY);
         } catch (final IOException e) {
             System.err.println("IOException whilst processing annotations");
             e.printStackTrace();
@@ -187,7 +187,7 @@ public class AnnotationEntryGen {
                 newAttributes.add(new RuntimeInvisibleParameterAnnotations(riaIndex, riaData.length, new DataInputStream(new ByteArrayInputStream(riaData)),
                     cp.getConstantPool()));
             }
-            return newAttributes.toArray(Attribute.EMPTY_ATTRIBUTE_ARRAY);
+            return newAttributes.toArray(Attribute.EMPTY_ARRAY);
         } catch (final IOException e) {
             System.err.println("IOException whilst processing parameter annotations");
             e.printStackTrace();

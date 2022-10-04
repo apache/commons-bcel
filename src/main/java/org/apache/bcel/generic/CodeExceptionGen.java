@@ -32,6 +32,8 @@ import org.apache.bcel.classfile.CodeException;
  */
 public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
 
+    static final CodeExceptionGen[] EMPTY_ARRAY = {};
+
     private InstructionHandle startPc;
     private InstructionHandle endPc;
     private InstructionHandle handlerPc;

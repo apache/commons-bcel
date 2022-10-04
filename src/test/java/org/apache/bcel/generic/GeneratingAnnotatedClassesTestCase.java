@@ -386,7 +386,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         final Method[] m = cg2.getMethods();
         i = m[0].getAnnotationEntries().length;
         assertEquals(1, i, "Wrong number of annotations on the main 'Method'");
-        final MethodGen mg = new MethodGen(m[0], cg2.getClassName(), cg2.getConstantPool());
+        final FieldGenOrMethodGen mg = new MethodGen(m[0], cg2.getClassName(), cg2.getConstantPool());
         // Check it finally when the Method is changed to a MethodGen
         i = mg.getAnnotationEntries().length;
         assertEquals(1, i, "Wrong number of annotations on the main 'MethodGen'");

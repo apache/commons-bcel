@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
 
@@ -35,7 +36,7 @@ import org.apache.bcel.Const;
  */
 public final class StackMap extends Attribute {
 
-    private StackMapEntry[] map; // Table of stack map entries
+    private StackMapEntry[] table; // Table of stack map entries
 
     /**
      * Construct object from input stream.
@@ -49,9 +50,9 @@ public final class StackMap extends Attribute {
     StackMap(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
         this(name_index, length, (StackMapEntry[]) null, constant_pool);
         final int map_length = input.readUnsignedShort();
-        map = new StackMapEntry[map_length];
+        table = new StackMapEntry[map_length];
         for (int i = 0; i < map_length; i++) {
-            map[i] = new StackMapEntry(input, constant_pool);
+            table[i] = new StackMapEntry(input, constant_pool);
         }
     }
 
@@ -66,7 +67,7 @@ public final class StackMap extends Attribute {
      */
     public StackMap(final int name_index, final int length, final StackMapEntry[] map, final ConstantPool constant_pool) {
         super(Const.ATTR_STACK_MAP, name_index, length, constant_pool);
-        this.map = map;
+        this.table = map;
     }
 
     /**
@@ -86,10 +87,8 @@ public final class StackMap extends Attribute {
     @Override
     public Attribute copy(final ConstantPool constantPool) {
         final StackMap c = (StackMap) clone();
-        c.map = new StackMapEntry[map.length];
-        for (int i = 0; i < map.length; i++) {
-            c.map[i] = map[i].copy();
-        }
+        c.table = new StackMapEntry[table.length];
+        Arrays.setAll(c.table, i -> table[i].copy());
         c.setConstantPool(constantPool);
         return c;
     }
@@ -103,30 +102,30 @@ public final class StackMap extends Attribute {
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(map.length);
-        for (final StackMapEntry entry : map) {
+        file.writeShort(table.length);
+        for (final StackMapEntry entry : table) {
             entry.dump(file);
         }
     }
 
     public int getMapLength() {
-        return map == null ? 0 : map.length;
+        return table == null ? 0 : table.length;
     }
 
     /**
      * @return Array of stack map entries
      */
     public StackMapEntry[] getStackMap() {
-        return map;
+        return table;
     }
 
     /**
-     * @param map Array of stack map entries
+     * @param table Array of stack map entries
      */
-    public void setStackMap(final StackMapEntry[] map) {
-        this.map = map;
+    public void setStackMap(final StackMapEntry[] table) {
+        this.table = table;
         int len = 2; // Length of 'number_of_entries' field prior to the array of stack maps
-        for (final StackMapEntry element : map) {
+        for (final StackMapEntry element : table) {
             len += element.getMapEntrySize();
         }
         setLength(len);
@@ -139,10 +138,10 @@ public final class StackMap extends Attribute {
     public String toString() {
         final StringBuilder buf = new StringBuilder("StackMap(");
         int running_offset = -1; // no +1 on first entry
-        for (int i = 0; i < map.length; i++) {
-            running_offset = map[i].getByteCodeOffset() + running_offset + 1;
-            buf.append(String.format("%n@%03d %s", running_offset, map[i]));
-            if (i < map.length - 1) {
+        for (int i = 0; i < table.length; i++) {
+            running_offset = table[i].getByteCodeOffset() + running_offset + 1;
+            buf.append(String.format("%n@%03d %s", running_offset, table[i]));
+            if (i < table.length - 1) {
                 buf.append(", ");
             }
         }

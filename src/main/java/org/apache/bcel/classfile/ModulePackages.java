@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
 import org.apache.commons.lang3.ArrayUtils;
@@ -130,9 +131,7 @@ public final class ModulePackages extends Attribute {
      */
     public String[] getPackageNames() {
         final String[] names = new String[packageIndexTable.length];
-        for (int i = 0; i < packageIndexTable.length; i++) {
-            names[i] = super.getConstantPool().getConstantString(packageIndexTable[i], Const.CONSTANT_Package).replace('/', '.');
-        }
+        Arrays.setAll(names, i -> super.getConstantPool().getConstantString(packageIndexTable[i], Const.CONSTANT_Package).replace('/', '.'));
         return names;
     }
 

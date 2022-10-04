@@ -128,7 +128,7 @@ public abstract class AbstractTestCase {
                 chosenAttrsList.add(element);
             }
         }
-        return chosenAttrsList.toArray(new Attribute[] {});
+        return chosenAttrsList.toArray(Attribute.EMPTY_ARRAY);
     }
 
     protected Method getMethod(final JavaClass cl, final String methodname) {

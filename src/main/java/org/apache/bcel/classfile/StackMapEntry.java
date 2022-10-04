@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
 
@@ -152,13 +153,9 @@ public final class StackMapEntry implements Node, Cloneable {
         }
 
         e.typesOfLocals = new StackMapType[typesOfLocals.length];
-        for (int i = 0; i < typesOfLocals.length; i++) {
-            e.typesOfLocals[i] = typesOfLocals[i].copy();
-        }
+        Arrays.setAll(e.typesOfLocals, i -> typesOfLocals[i].copy());
         e.typesOfStackItems = new StackMapType[typesOfStackItems.length];
-        for (int i = 0; i < typesOfStackItems.length; i++) {
-            e.typesOfStackItems[i] = typesOfStackItems[i].copy();
-        }
+        Arrays.setAll(e.typesOfStackItems, i -> typesOfStackItems[i].copy());
         return e;
     }
 

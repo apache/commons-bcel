@@ -50,9 +50,8 @@ public class ExceptionHandlers {
         for (final CodeExceptionGen ceg : cegs) {
             final ExceptionHandler eh = new ExceptionHandler(ceg.getCatchType(), ceg.getHandlerPC());
             for (InstructionHandle ih = ceg.getStartPC(); ih != ceg.getEndPC().getNext(); ih = ih.getNext()) {
-                Set<ExceptionHandler> hs;
-                hs = exceptionHandlers.computeIfAbsent(ih, k -> new HashSet<>());
-                hs.add(eh);
+                exceptionHandlers.computeIfAbsent(ih, k -> new HashSet<>()).add(eh);
+                exceptionHandlers.computeIfAbsent(ih, k -> new HashSet<>()).add(eh);
             }
         }
     }

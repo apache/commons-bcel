@@ -1043,9 +1043,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
         }
         buf.append("}");
         if (!target_vec.isEmpty()) {
-            final InstructionHandle[] targeted = new InstructionHandle[target_vec.size()];
-            target_vec.toArray(targeted);
-            throw new TargetLostException(targeted, buf.toString());
+            throw new TargetLostException(target_vec.toArray(InstructionHandle.EMPTY_ARRAY), buf.toString());
         }
     }
 

@@ -61,12 +61,12 @@ public class BCELifierTestCase {
         }
     }
 
-    private void testClassOnPath(final String javaClass) throws Exception {
+    private void testClassOnPath(final String javaClassFileName) throws Exception {
         // Get javap of the input class
-        final String initial = exec(null, "javap", "-p", "-c", javaClass);
+        final String initial = exec(null, "javap", "-p", "-c", javaClassFileName);
 
         final File workDir = new File("target");
-        final File infile = new File(javaClass);
+        final File infile = new File(javaClassFileName);
         final JavaClass java_class = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
         assertNotNull(java_class);
         final File outfile = new File(workDir, infile.getName().replace(".class", "Creator.java"));

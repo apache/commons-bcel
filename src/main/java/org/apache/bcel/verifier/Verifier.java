@@ -43,6 +43,8 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class Verifier {
 
+    static final Verifier[] EMPTY_ARRAY = {};
+
     /**
      * Verifies class files. This is a simple demonstration of how the API of BCEL's class file verifier "JustIce" may be
      * used. You should supply command-line arguments which are fully qualified namea of the classes to verify. These class
@@ -143,8 +145,7 @@ public class Verifier {
     /** Returns the VerificationResult for the given pass. */
     public VerificationResult doPass3a(final int method_no) {
         final String key = Integer.toString(method_no);
-        Pass3aVerifier p3av;
-        p3av = p3avs.get(key);
+        Pass3aVerifier p3av = p3avs.get(key);
         if (p3avs.get(key) == null) {
             p3av = new Pass3aVerifier(this, method_no);
             p3avs.put(key, p3av);
@@ -155,8 +156,7 @@ public class Verifier {
     /** Returns the VerificationResult for the given pass. */
     public VerificationResult doPass3b(final int method_no) {
         final String key = Integer.toString(method_no);
-        Pass3bVerifier p3bv;
-        p3bv = p3bvs.get(key);
+        Pass3bVerifier p3bv = p3bvs.get(key);
         if (p3bvs.get(key) == null) {
             p3bv = new Pass3bVerifier(this, method_no);
             p3bvs.put(key, p3bv);
@@ -194,28 +194,24 @@ public class Verifier {
     public String[] getMessages() throws ClassNotFoundException {
         final List<String> messages = new ArrayList<>();
         if (p1v != null) {
-            final String[] p1m = p1v.getMessages();
-            for (final String element : p1m) {
+            for (final String element : p1v.getMessages()) {
                 messages.add("Pass 1: " + element);
             }
         }
         if (p2v != null) {
-            final String[] p2m = p2v.getMessages();
-            for (final String element : p2m) {
+            for (final String element : p2v.getMessages()) {
                 messages.add("Pass 2: " + element);
             }
         }
         for (final Pass3aVerifier pv : p3avs.values()) {
-            final String[] p3am = pv.getMessages();
             final int meth = pv.getMethodNo();
-            for (final String element : p3am) {
+            for (final String element : pv.getMessages()) {
                 messages.add("Pass 3a, method " + meth + " ('" + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth] + "'): " + element);
             }
         }
         for (final Pass3bVerifier pv : p3bvs.values()) {
-            final String[] p3bm = pv.getMessages();
             final int meth = pv.getMethodNo();
-            for (final String element : p3bm) {
+            for (final String element : pv.getMessages()) {
                 messages.add("Pass 3b, method " + meth + " ('" + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth] + "'): " + element);
             }
         }

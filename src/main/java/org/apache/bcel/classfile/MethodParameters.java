@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -61,9 +62,7 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
         final MethodParameters c = (MethodParameters) clone();
         c.parameters = new MethodParameter[parameters.length];
 
-        for (int i = 0; i < parameters.length; i++) {
-            c.parameters[i] = parameters[i].copy();
-        }
+        Arrays.setAll(c.parameters, i -> parameters[i].copy());
         c.setConstantPool(constantPool);
         return c;
     }

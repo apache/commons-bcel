@@ -19,6 +19,7 @@ package org.apache.bcel.generic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
@@ -43,6 +44,7 @@ import org.apache.bcel.classfile.ParameterAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Template class for building up a method. This is done by defining exception handlers, adding thrown exceptions, local
@@ -102,14 +104,14 @@ public class MethodGen extends FieldGenOrMethodGen {
 
         @Override
         public boolean equals(final Object o1, final Object o2) {
-            final MethodGen THIS = (MethodGen) o1;
-            final MethodGen THAT = (MethodGen) o2;
+            final FieldGenOrMethodGen THIS = (FieldGenOrMethodGen) o1;
+            final FieldGenOrMethodGen THAT = (FieldGenOrMethodGen) o2;
             return Objects.equals(THIS.getName(), THAT.getName()) && Objects.equals(THIS.getSignature(), THAT.getSignature());
         }
 
         @Override
         public int hashCode(final Object o) {
-            final MethodGen THIS = (MethodGen) o;
+            final FieldGenOrMethodGen THIS = (FieldGenOrMethodGen) o;
             return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
         }
     };
@@ -360,10 +362,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                     }
                 }
             } else if (a instanceof ExceptionTable) {
-                final String[] names = ((ExceptionTable) a).getExceptionNames();
-                for (final String name2 : names) {
-                    addException(name2);
-                }
+                Collections.addAll(throwsList, ((ExceptionTable) a).getExceptionNames());
             } else if (a instanceof Annotations) {
                 final Annotations runtimeAnnotations = (Annotations) a;
                 runtimeAnnotations.forEach(element -> addAnnotationEntry(new AnnotationEntryGen(element, cp, false)));
@@ -377,10 +376,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @since 6.0
      */
     public void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
-        final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
-        for (final Attribute attr : attrs) {
-            addAttribute(attr);
-        }
+        addAll(AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries()));
     }
 
     /**
@@ -534,28 +530,22 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
         final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, paramAnnotations);
         if (attrs != null) {
-            for (final Attribute attr : attrs) {
-                addAttribute(attr);
-            }
+            addAll(attrs);
         }
     }
 
     private Attribute[] addRuntimeAnnotationsAsAttribute(final ConstantPoolGen cp) {
         final Attribute[] attrs = AnnotationEntryGen.getAnnotationAttributes(cp, super.getAnnotationEntries());
-        for (final Attribute attr : attrs) {
-            addAttribute(attr);
-        }
+        addAll(attrs);
         return attrs;
     }
 
     private Attribute[] addRuntimeParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
         if (!hasParameterAnnotations) {
-            return Attribute.EMPTY_ATTRIBUTE_ARRAY;
+            return Attribute.EMPTY_ARRAY;
         }
         final Attribute[] attrs = AnnotationEntryGen.getParameterAnnotationAttributes(cp, paramAnnotations);
-        for (final Attribute attr : attrs) {
-            addAttribute(attr);
-        }
+        addAll(attrs);
         return attrs;
     }
 
@@ -607,9 +597,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                     @SuppressWarnings("unchecked") // OK
                     final List<AnnotationEntryGen>[] parmList = new List[argTypes.length];
                     paramAnnotations = parmList;
-                    for (int j = 0; j < argTypes.length; j++) {
-                        paramAnnotations[j] = new ArrayList<>();
-                    }
+                    Arrays.setAll(paramAnnotations, i -> new ArrayList<>());
                 }
                 hasParameterAnnotations = true;
                 final ParameterAnnotations rpa = (ParameterAnnotations) attribute;
@@ -691,9 +679,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return all attributes of this method.
      */
     public Attribute[] getCodeAttributes() {
-        final Attribute[] attributes = new Attribute[codeAttrsList.size()];
-        codeAttrsList.toArray(attributes);
-        return attributes;
+        return codeAttrsList.toArray(Attribute.EMPTY_ARRAY);
     }
 
     /**
@@ -702,10 +688,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     private CodeException[] getCodeExceptions() {
         final int size = exceptionList.size();
         final CodeException[] c_exc = new CodeException[size];
-        for (int i = 0; i < size; i++) {
-            final CodeExceptionGen c = exceptionList.get(i);
-            c_exc[i] = c.getCodeException(super.getConstantPool());
-        }
+        Arrays.setAll(c_exc, i -> exceptionList.get(i).getCodeException(super.getConstantPool()));
         return c_exc;
     }
 
@@ -713,18 +696,14 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return array of declared exception handlers
      */
     public CodeExceptionGen[] getExceptionHandlers() {
-        final CodeExceptionGen[] cg = new CodeExceptionGen[exceptionList.size()];
-        exceptionList.toArray(cg);
-        return cg;
+        return exceptionList.toArray(CodeExceptionGen.EMPTY_ARRAY);
     }
 
     /*
      * @return array of thrown exceptions
      */
     public String[] getExceptions() {
-        final String[] e = new String[throwsList.size()];
-        throwsList.toArray(e);
-        return e;
+        return throwsList.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -733,9 +712,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     private ExceptionTable getExceptionTable(final ConstantPoolGen cp) {
         final int size = throwsList.size();
         final int[] ex = new int[size];
-        for (int i = 0; i < size; i++) {
-            ex[i] = cp.addClass(throwsList.get(i));
-        }
+        Arrays.setAll(ex, i -> cp.addClass(throwsList.get(i)));
         return new ExceptionTable(cp.addUtf8("Exceptions"), 2 + 2 * size, ex, cp.getConstantPool());
     }
 
@@ -747,9 +724,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * @return array of line numbers
      */
     public LineNumberGen[] getLineNumbers() {
-        final LineNumberGen[] lg = new LineNumberGen[lineNumberList.size()];
-        lineNumberList.toArray(lg);
-        return lg;
+        return lineNumberList.toArray(LineNumberGen.EMPTY_ARRAY);
     }
 
     /**
@@ -758,9 +733,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     public LineNumberTable getLineNumberTable(final ConstantPoolGen cp) {
         final int size = lineNumberList.size();
         final LineNumber[] ln = new LineNumber[size];
-        for (int i = 0; i < size; i++) {
-            ln[i] = lineNumberList.get(i).getLineNumber();
-        }
+        Arrays.setAll(ln, i -> lineNumberList.get(i).getLineNumber());
         return new LineNumberTable(cp.addUtf8("LineNumberTable"), 2 + ln.length * 4, ln, cp.getConstantPool());
     }
 
@@ -795,9 +768,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         final LocalVariableGen[] lg = getLocalVariables();
         final int size = lg.length;
         final LocalVariable[] lv = new LocalVariable[size];
-        for (int i = 0; i < size; i++) {
-            lv[i] = lg[i].getLocalVariable(cp);
-        }
+        Arrays.setAll(lv, i -> lg[i].getLocalVariable(cp));
         return new LocalVariableTable(cp.addUtf8("LocalVariableTable"), 2 + lv.length * 10, lv, cp.getConstantPool());
     }
 
@@ -1006,9 +977,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Remove all local variables.
      */
     public void removeLocalVariables() {
-        for (final LocalVariableGen lv : variableList) {
-            lv.dispose();
-        }
+        variableList.forEach(LocalVariableGen::dispose);
         variableList.clear();
     }
 

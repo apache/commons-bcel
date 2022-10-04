@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -91,9 +92,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     public Attribute copy(final ConstantPool constantPool) {
         final LocalVariableTable c = (LocalVariableTable) clone();
         c.localVariableTable = new LocalVariable[localVariableTable.length];
-        for (int i = 0; i < localVariableTable.length; i++) {
-            c.localVariableTable[i] = localVariableTable[i].copy();
-        }
+        Arrays.setAll(c.localVariableTable, i -> localVariableTable[i].copy());
         c.setConstantPool(constantPool);
         return c;
     }

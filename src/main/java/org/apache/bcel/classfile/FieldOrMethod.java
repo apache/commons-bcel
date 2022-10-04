@@ -21,6 +21,7 @@ import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
 
@@ -137,10 +138,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         c.attributes = new Attribute[attributes.length];
         c.attributes_count = attributes_count; // init deprecated field
 
-        for (int i = 0; i < attributes.length; i++) {
-            c.attributes[i] = attributes[i].copy(constant_pool);
-        }
-
+        Arrays.setAll(c.attributes, i -> attributes[i].copy(constant_pool));
         return c;
     }
 

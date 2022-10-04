@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -96,9 +97,7 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
         // TODO this could be recoded to use a lower level constructor after creating a copy of the inner classes
         final InnerClasses c = (InnerClasses) clone();
         c.innerClasses = new InnerClass[innerClasses.length];
-        for (int i = 0; i < innerClasses.length; i++) {
-            c.innerClasses[i] = innerClasses[i].copy();
-        }
+        Arrays.setAll(c.innerClasses, i -> innerClasses[i].copy());
         c.setConstantPool(constantPool);
         return c;
     }

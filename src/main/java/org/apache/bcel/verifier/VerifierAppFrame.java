@@ -25,6 +25,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.WindowEvent;
+import java.util.Arrays;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -327,13 +328,11 @@ public class VerifierAppFrame extends JFrame {
                 /*
                  * boolean all3aok = true; boolean all3bok = true; String all3amsg = ""; String all3bmsg = "";
                  */
-                final String[] methodnames = new String[jc.getMethods().length];
-                for (int i = 0; i < jc.getMethods().length; i++) {
-                    methodnames[i] = jc.getMethods()[i].toString().replace('\n', ' ').replace('\t', ' ');
-                }
-                pass3aJList.setListData(methodnames);
+                final String[] methodNames = new String[jc.getMethods().length];
+                Arrays.setAll(methodNames, i -> jc.getMethods()[i].toString().replace('\n', ' ').replace('\t', ' '));
+                pass3aJList.setListData(methodNames);
                 pass3aJList.setSelectionInterval(0, jc.getMethods().length - 1);
-                pass3bJList.setListData(methodnames);
+                pass3bJList.setListData(methodNames);
                 pass3bJList.setSelectionInterval(0, jc.getMethods().length - 1);
             }
         }

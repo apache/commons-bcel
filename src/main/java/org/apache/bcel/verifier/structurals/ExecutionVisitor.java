@@ -139,9 +139,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitAASTORE(final AASTORE o) {
-        stack().pop();
-        stack().pop();
-        stack().pop();
+        stack().pop(3);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -198,17 +196,14 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitBALOAD(final BALOAD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitBASTORE(final BASTORE o) {
-        stack().pop();
-        stack().pop();
-        stack().pop();
+        stack().pop(3);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -220,17 +215,14 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitCALOAD(final CALOAD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitCASTORE(final CASTORE o) {
-        stack().pop();
-        stack().pop();
-        stack().pop();
+        stack().pop(3);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -269,40 +261,34 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitDADD(final DADD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.DOUBLE);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitDALOAD(final DALOAD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.DOUBLE);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitDASTORE(final DASTORE o) {
-        stack().pop();
-        stack().pop();
-        stack().pop();
+        stack().pop(3);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitDCMPG(final DCMPG o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitDCMPL(final DCMPL o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
@@ -315,8 +301,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitDDIV(final DDIV o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.DOUBLE);
     }
 
@@ -329,8 +314,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitDMUL(final DMUL o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.DOUBLE);
     }
 
@@ -344,8 +328,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitDREM(final DREM o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.DOUBLE);
     }
 
@@ -365,8 +348,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitDSUB(final DSUB o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.DOUBLE);
     }
 
@@ -495,40 +477,34 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitFADD(final FADD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.FLOAT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitFALOAD(final FALOAD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.FLOAT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitFASTORE(final FASTORE o) {
-        stack().pop();
-        stack().pop();
-        stack().pop();
+        stack().pop(3);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitFCMPG(final FCMPG o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitFCMPL(final FCMPL o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
@@ -541,8 +517,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitFDIV(final FDIV o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.FLOAT);
     }
 
@@ -555,8 +530,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitFMUL(final FMUL o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.FLOAT);
     }
 
@@ -570,8 +544,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitFREM(final FREM o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.FLOAT);
     }
 
@@ -590,8 +563,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitFSUB(final FSUB o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.FLOAT);
     }
 
@@ -673,33 +645,28 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIADD(final IADD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIALOAD(final IALOAD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIAND(final IAND o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIASTORE(final IASTORE o) {
-        stack().pop();
-        stack().pop();
-        stack().pop();
+        stack().pop(3);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -711,65 +678,56 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIDIV(final IDIV o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIF_ACMPEQ(final IF_ACMPEQ o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIF_ACMPNE(final IF_ACMPNE o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIF_ICMPEQ(final IF_ICMPEQ o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIF_ICMPGE(final IF_ICMPGE o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIF_ICMPGT(final IF_ICMPGT o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIF_ICMPLE(final IF_ICMPLE o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIF_ICMPLT(final IF_ICMPLT o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIF_ICMPNE(final IF_ICMPNE o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -835,8 +793,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIMUL(final IMUL o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
@@ -861,9 +818,7 @@ public class ExecutionVisitor extends EmptyVisitor {
      */
     @Override
     public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
-        for (int i = 0; i < o.getArgumentTypes(cpg).length; i++) {
-            stack().pop();
-        }
+        stack().pop(o.getArgumentTypes(cpg).length);
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
@@ -881,9 +836,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     @Override
     public void visitINVOKEINTERFACE(final INVOKEINTERFACE o) {
         stack().pop(); // objectref
-        for (int i = 0; i < o.getArgumentTypes(cpg).length; i++) {
-            stack().pop();
-        }
+        stack().pop(o.getArgumentTypes(cpg).length);
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
@@ -909,9 +862,7 @@ public class ExecutionVisitor extends EmptyVisitor {
             locals().initializeObject(t);
         }
         stack().pop(); // objectref
-        for (int i = 0; i < o.getArgumentTypes(cpg).length; i++) {
-            stack().pop();
-        }
+        stack().pop(o.getArgumentTypes(cpg).length);
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
@@ -928,9 +879,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitINVOKESTATIC(final INVOKESTATIC o) {
-        for (int i = 0; i < o.getArgumentTypes(cpg).length; i++) {
-            stack().pop();
-        }
+        stack().pop(o.getArgumentTypes(cpg).length);
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
@@ -948,9 +897,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     @Override
     public void visitINVOKEVIRTUAL(final INVOKEVIRTUAL o) {
         stack().pop(); // objectref
-        for (int i = 0; i < o.getArgumentTypes(cpg).length; i++) {
-            stack().pop();
-        }
+        stack().pop(o.getArgumentTypes(cpg).length);
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
         // don't really "jump into" and simulate the invoked
@@ -967,16 +914,14 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIOR(final IOR o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIREM(final IREM o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
@@ -989,16 +934,14 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitISHL(final ISHL o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitISHR(final ISHR o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
@@ -1011,24 +954,21 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitISUB(final ISUB o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIUSHR(final IUSHR o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitIXOR(final IXOR o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
@@ -1069,40 +1009,34 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLADD(final LADD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLALOAD(final LALOAD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLAND(final LAND o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLASTORE(final LASTORE o) {
-        stack().pop();
-        stack().pop();
-        stack().pop();
+        stack().pop(3);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLCMP(final LCMP o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
@@ -1162,8 +1096,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLDIV(final LDIV o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
@@ -1176,8 +1109,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLMUL(final LMUL o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
@@ -1197,16 +1129,14 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLOR(final LOR o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLREM(final LREM o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
@@ -1219,16 +1149,14 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLSHL(final LSHL o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLSHR(final LSHR o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
@@ -1242,24 +1170,21 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLSUB(final LSUB o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLUSHR(final LUSHR o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitLXOR(final LXOR o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.LONG);
     }
 
@@ -1278,9 +1203,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitMULTIANEWARRAY(final MULTIANEWARRAY o) {
-        for (int i = 0; i < o.getDimensions(); i++) {
-            stack().pop();
-        }
+        stack().pop(o.getDimensions());
         stack().push(o.getType(cpg));
     }
 
@@ -1320,8 +1243,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitPUTFIELD(final PUTFIELD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -1346,17 +1268,14 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitSALOAD(final SALOAD o) {
-        stack().pop();
-        stack().pop();
+        stack().pop(2);
         stack().push(Type.INT);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitSASTORE(final SASTORE o) {
-        stack().pop();
-        stack().pop();
-        stack().pop();
+        stack().pop(3);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */

@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -97,9 +98,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
         // lineNumberTable to be made final
         final LineNumberTable c = (LineNumberTable) clone();
         c.lineNumberTable = new LineNumber[lineNumberTable.length];
-        for (int i = 0; i < lineNumberTable.length; i++) {
-            c.lineNumberTable[i] = lineNumberTable[i].copy();
-        }
+        Arrays.setAll(c.lineNumberTable, i -> lineNumberTable[i].copy());
         c.setConstantPool(constantPool);
         return c;
     }

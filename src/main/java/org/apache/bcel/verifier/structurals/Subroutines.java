@@ -72,6 +72,8 @@ public class Subroutines {
          */
         private static final int UNSET = -1;
 
+        private final SubroutineImpl[] EMPTY_ARRAY = {};
+
         /**
          * The Local Variable slot where the first instruction of this subroutine (an ASTORE) stores the JsrInstruction's
          * ReturnAddress in and the RET of this subroutine operates on.
@@ -102,14 +104,14 @@ public class Subroutines {
          *
          * @see #getRecursivelyAccessedLocalsIndices()
          */
-        private void _getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> s, final Subroutine[] subs) {
+        private void _getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> set, final Subroutine[] subs) {
             for (final Subroutine sub : subs) {
                 final int[] lvs = sub.getAccessedLocalsIndices();
                 for (final int lv : lvs) {
-                    s.add(Integer.valueOf(lv));
+                    set.add(Integer.valueOf(lv));
                 }
                 if (sub.subSubs().length != 0) {
-                    _getRecursivelyAccessedLocalsIndicesHelper(s, sub.subSubs());
+                    _getRecursivelyAccessedLocalsIndicesHelper(set, sub.subSubs());
                 }
             }
         }
@@ -205,8 +207,7 @@ public class Subroutines {
             if (this == getTopLevel()) {
                 throw new AssertionViolatedException("getLeavingRET() called on top level pseudo-subroutine.");
             }
-            final InstructionHandle[] jsrs = new InstructionHandle[theJSRs.size()];
-            return theJSRs.toArray(jsrs);
+            return theJSRs.toArray(InstructionHandle.EMPTY_ARRAY);
         }
 
         /*
@@ -214,8 +215,7 @@ public class Subroutines {
          */
         @Override
         public InstructionHandle[] getInstructions() {
-            final InstructionHandle[] ret = new InstructionHandle[instructions.size()];
-            return instructions.toArray(ret);
+            return instructions.toArray(InstructionHandle.EMPTY_ARRAY);
         }
 
         /*
@@ -299,8 +299,7 @@ public class Subroutines {
                     h.add(getSubroutine(targ));
                 }
             }
-            final Subroutine[] ret = new Subroutine[h.size()];
-            return h.toArray(ret);
+            return h.toArray(EMPTY_ARRAY);
         }
 
         /**
@@ -461,7 +460,7 @@ public class Subroutines {
         // we don't want to assign an instruction to two or more Subroutine objects.
         final Set<InstructionHandle> instructions_assigned = new HashSet<>();
 
-        // Graph colouring. Key: InstructionHandle, Value: ColourConstants enum .
+        // Graph coloring. Key: InstructionHandle, Value: ColourConstants enum .
         final Map<InstructionHandle, ColourConstants> colors = new HashMap<>();
 
         final List<InstructionHandle> qList = new ArrayList<>();

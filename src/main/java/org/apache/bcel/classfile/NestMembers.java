@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
 import org.apache.commons.lang3.ArrayUtils;
@@ -124,9 +125,7 @@ public final class NestMembers extends Attribute {
      */
     public String[] getClassNames() {
         final String[] names = new String[classes.length];
-        for (int i = 0; i < classes.length; i++) {
-            names[i] = super.getConstantPool().getConstantString(classes[i], Const.CONSTANT_Class).replace('/', '.');
-        }
+        Arrays.setAll(names, i -> super.getConstantPool().getConstantString(classes[i], Const.CONSTANT_Class).replace('/', '.'));
         return names;
     }
 

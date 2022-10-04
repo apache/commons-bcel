@@ -37,16 +37,20 @@ import org.apache.bcel.Const;
  */
 public final class Unknown extends Attribute {
 
-    private static final Map<String, Unknown> unknownAttributes = new HashMap<>();
+    private static final Unknown[] EMPTY_ARRAY = {};
+    
+    private static final Map<String, Unknown> UNKNOWN_ATTRIBUTES = new HashMap<>();
 
     /**
      * @return array of unknown attributes, but just one for each kind.
      */
     static Unknown[] getUnknownAttributes() {
-        final Unknown[] unknowns = new Unknown[unknownAttributes.size()];
-        unknownAttributes.values().toArray(unknowns);
-        unknownAttributes.clear();
-        return unknowns;
+        try {
+            return UNKNOWN_ATTRIBUTES.values().toArray(EMPTY_ARRAY);
+        } finally {
+            // TODO Does this really make sense?
+            UNKNOWN_ATTRIBUTES.clear();
+        }
     }
 
     private byte[] bytes;
@@ -65,7 +69,7 @@ public final class Unknown extends Attribute {
         super(Const.ATTR_UNKNOWN, name_index, length, constant_pool);
         this.bytes = bytes;
         name = ((ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8)).getBytes();
-        unknownAttributes.put(name, this);
+        UNKNOWN_ATTRIBUTES.put(name, this);
     }
 
     /**

@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
 
@@ -111,24 +112,16 @@ public final class Module extends Attribute {
         final Module c = (Module) clone();
 
         c.requiresTable = new ModuleRequires[requiresTable.length];
-        for (int i = 0; i < requiresTable.length; i++) {
-            c.requiresTable[i] = requiresTable[i].copy();
-        }
+        Arrays.setAll(c.requiresTable, i -> requiresTable[i].copy());
 
         c.exportsTable = new ModuleExports[exportsTable.length];
-        for (int i = 0; i < exportsTable.length; i++) {
-            c.exportsTable[i] = exportsTable[i].copy();
-        }
+        Arrays.setAll(c.exportsTable, i -> exportsTable[i].copy());
 
         c.opensTable = new ModuleOpens[opensTable.length];
-        for (int i = 0; i < opensTable.length; i++) {
-            c.opensTable[i] = opensTable[i].copy();
-        }
+        Arrays.setAll(c.opensTable, i -> opensTable[i].copy());
 
         c.providesTable = new ModuleProvides[providesTable.length];
-        for (int i = 0; i < providesTable.length; i++) {
-            c.providesTable[i] = providesTable[i].copy();
-        }
+        Arrays.setAll(c.providesTable, i -> providesTable[i].copy());
 
         c.setConstantPool(constantPool);
         return c;

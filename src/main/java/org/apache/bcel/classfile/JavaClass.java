@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -47,7 +48,12 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
 
-    static final JavaClass[] EMPTY_ARRAY = {};
+    /**
+     * Empty array.
+     *
+     * @since 6.6.0
+     */
+    public static final JavaClass[] EMPTY_ARRAY = {};
 
     public static final byte HEAP = 1;
     public static final byte FILE = 2;
@@ -176,7 +182,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             interfaces = ArrayUtils.EMPTY_INT_ARRAY;
         }
         if (attributes == null) {
-            attributes = Attribute.EMPTY_ATTRIBUTE_ARRAY;
+            attributes = Attribute.EMPTY_ARRAY;
         }
         if (fields == null) {
             fields = Field.EMPTY_FIELD_ARRAY;
@@ -278,28 +284,21 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @return deep copy of this class
      */
     public JavaClass copy() {
-        JavaClass c = null;
         try {
-            c = (JavaClass) clone();
+            final JavaClass c = (JavaClass) clone();
             c.constantPool = constantPool.copy();
             c.interfaces = interfaces.clone();
             c.interfaceNames = interfaceNames.clone();
             c.fields = new Field[fields.length];
-            for (int i = 0; i < fields.length; i++) {
-                c.fields[i] = fields[i].copy(c.constantPool);
-            }
+            Arrays.setAll(c.fields, i -> fields[i].copy(c.constantPool));
             c.methods = new Method[methods.length];
-            for (int i = 0; i < methods.length; i++) {
-                c.methods[i] = methods[i].copy(c.constantPool);
-            }
+            Arrays.setAll(c.methods, i -> methods[i].copy(c.constantPool));
             c.attributes = new Attribute[attributes.length];
-            for (int i = 0; i < attributes.length; i++) {
-                c.attributes[i] = attributes[i].copy(c.constantPool);
-            }
+            Arrays.setAll(c.attributes, i -> attributes[i].copy(c.constantPool));
+            return c;
         } catch (final CloneNotSupportedException e) {
-            // TODO should this throw?
+            return null;
         }
-        return c;
     }
 
     /**

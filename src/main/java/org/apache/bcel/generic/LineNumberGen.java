@@ -30,6 +30,8 @@ import org.apache.bcel.classfile.LineNumber;
  */
 public class LineNumberGen implements InstructionTargeter, Cloneable {
 
+    static final LineNumberGen[] EMPTY_ARRAY = {};
+
     private InstructionHandle ih;
     private int srcLine;
 

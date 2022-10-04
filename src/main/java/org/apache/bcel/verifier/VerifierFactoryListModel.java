@@ -71,8 +71,7 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver, ListMo
             cache.add(verifier.getClassName());
         }
         for (final ListDataListener listener : listeners) {
-            final ListDataEvent e = new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0, num_of_verifiers - 1);
-            listener.contentsChanged(e);
+            listener.contentsChanged(new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0, num_of_verifiers - 1));
         }
     }
 

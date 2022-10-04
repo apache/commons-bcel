@@ -18,6 +18,7 @@
 package org.apache.bcel.verifier.structurals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,9 +114,7 @@ public class ControlFlowGraph {
 
                 final InstructionHandle[] jsrs = s.getEnteringJsrInstructions();
                 final InstructionHandle[] ret = new InstructionHandle[jsrs.length];
-                for (int i = 0; i < jsrs.length; i++) {
-                    ret[i] = jsrs[i].getNext();
-                }
+                Arrays.setAll(ret, i -> jsrs[i].getNext());
                 return ret;
             }
 
@@ -421,9 +420,7 @@ public class ControlFlowGraph {
      */
     public InstructionContext[] contextsOf(final InstructionHandle[] insts) {
         final InstructionContext[] ret = new InstructionContext[insts.length];
-        for (int i = 0; i < insts.length; i++) {
-            ret[i] = contextOf(insts[i]);
-        }
+        Arrays.setAll(ret, i -> contextOf(insts[i]));
         return ret;
     }
 

@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
 import org.apache.commons.lang3.ArrayUtils;
@@ -106,7 +107,7 @@ public final class Code extends Attribute {
         this.maxLocals = maxLocals;
         this.code = code != null ? code : ArrayUtils.EMPTY_BYTE_ARRAY;
         this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_CODE_EXCEPTION_ARRAY;
-        this.attributes = attributes != null ? attributes : EMPTY_ATTRIBUTE_ARRAY;
+        this.attributes = attributes != null ? attributes : EMPTY_ARRAY;
         super.setLength(calculateLength()); // Adjust length
     }
 
@@ -149,13 +150,9 @@ public final class Code extends Attribute {
         }
         c.setConstantPool(constantPool);
         c.exceptionTable = new CodeException[exceptionTable.length];
-        for (int i = 0; i < exceptionTable.length; i++) {
-            c.exceptionTable[i] = exceptionTable[i].copy();
-        }
+        Arrays.setAll(c.exceptionTable, i -> exceptionTable[i].copy());
         c.attributes = new Attribute[attributes.length];
-        for (int i = 0; i < attributes.length; i++) {
-            c.attributes[i] = attributes[i].copy(constantPool);
-        }
+        Arrays.setAll(c.attributes, i -> attributes[i].copy(constantPool));
         return c;
     }
 
@@ -258,7 +255,7 @@ public final class Code extends Attribute {
      * @param attributes the attributes to set for this Code
      */
     public void setAttributes(final Attribute[] attributes) {
-        this.attributes = attributes != null ? attributes : EMPTY_ATTRIBUTE_ARRAY;
+        this.attributes = attributes != null ? attributes : EMPTY_ARRAY;
         super.setLength(calculateLength()); // Adjust length
     }
 

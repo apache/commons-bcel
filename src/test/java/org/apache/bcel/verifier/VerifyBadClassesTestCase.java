@@ -33,6 +33,7 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -69,7 +70,7 @@ public class VerifyBadClassesTestCase {
         /** The process timeout in milliseconds. Defaults to 30 seconds. */
         final long timeout = 30 * 1000;
 
-        final String[] args = command.toArray(new String[0]);
+        final String[] args = command.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
         final CommandLine cmdLine = new CommandLine(args[0]); // constructor requires executable name
         cmdLine.addArguments(Arrays.copyOfRange(args, 1, args.length));
 

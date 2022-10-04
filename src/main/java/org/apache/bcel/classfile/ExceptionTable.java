@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
 import org.apache.commons.lang3.ArrayUtils;
@@ -125,9 +126,7 @@ public final class ExceptionTable extends Attribute {
      */
     public String[] getExceptionNames() {
         final String[] names = new String[exceptionIndexTable.length];
-        for (int i = 0; i < exceptionIndexTable.length; i++) {
-            names[i] = super.getConstantPool().getConstantString(exceptionIndexTable[i], Const.CONSTANT_Class).replace('/', '.');
-        }
+        Arrays.setAll(names, i -> super.getConstantPool().getConstantString(exceptionIndexTable[i], Const.CONSTANT_Class).replace('/', '.'));
         return names;
     }
 

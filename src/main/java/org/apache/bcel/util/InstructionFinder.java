@@ -79,6 +79,7 @@ public class InstructionFinder {
     private static final int OFFSET = 32767; // char + OFFSET is outside of LATIN-1
     private static final int NO_OPCODES = 256; // Potential number, some are not used
     private static final Map<String, String> map = new HashMap<>();
+
     // Initialize pattern map
     static {
         map.put("arithmeticinstruction",
@@ -142,14 +143,12 @@ public class InstructionFinder {
         map.put("fstore", precompile(Const.FSTORE_0, Const.FSTORE_3, Const.FSTORE));
         map.put("astore", precompile(Const.ASTORE_0, Const.ASTORE_3, Const.ASTORE));
         // Compile strings
-        for (final Map.Entry<String, String> entry : map.entrySet()) {
-            final String key = entry.getKey();
-            final String value = entry.getValue();
+        map.forEach((key, value) -> {
             final char ch = value.charAt(1); // Omit already precompiled patterns
             if (ch < OFFSET) {
                 map.put(key, compilePattern(value)); // precompile all patterns
             }
-        }
+        });
         // Add instruction alias to match anything
         final StringBuilder buf = new StringBuilder("(");
         for (short i = 0; i < NO_OPCODES; i++) {
@@ -216,7 +215,7 @@ public class InstructionFinder {
         }
         for (short i = 0; i < NO_OPCODES; i++) {
             if (pattern.equals(Const.getOpcodeName(i))) {
-                return "" + makeChar(i);
+                return String.valueOf(makeChar(i));
             }
         }
         throw new IllegalArgumentException("Instruction unknown: " + pattern);

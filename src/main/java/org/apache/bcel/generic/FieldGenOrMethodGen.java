@@ -18,6 +18,7 @@
 package org.apache.bcel.generic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.bcel.Const;
@@ -63,6 +64,10 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         super(access_flags);
     }
 
+    protected void addAll(final Attribute[] attrs) {
+        Collections.addAll(attributeList, attrs);
+    }
+
     /**
      * @since 6.0
      */
@@ -90,18 +95,14 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
     public AnnotationEntryGen[] getAnnotationEntries() {
-        final AnnotationEntryGen[] annotations = new AnnotationEntryGen[annotationList.size()];
-        annotationList.toArray(annotations);
-        return annotations;
+        return annotationList.toArray(AnnotationEntryGen.EMPTY_ARRAY);
     }
 
     /**
      * @return all attributes of this method.
      */
     public Attribute[] getAttributes() {
-        final Attribute[] attributes = new Attribute[attributeList.size()];
-        attributeList.toArray(attributes);
-        return attributes;
+        return attributeList.toArray(Attribute.EMPTY_ARRAY);
     }
 
     public ConstantPoolGen getConstantPool() {
