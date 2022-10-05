@@ -126,7 +126,7 @@ public final class ExceptionTable extends Attribute {
      */
     public String[] getExceptionNames() {
         final String[] names = new String[exceptionIndexTable.length];
-        Arrays.setAll(names, i -> super.getConstantPool().getConstantString(exceptionIndexTable[i], Const.CONSTANT_Class).replace('/', '.'));
+        Arrays.setAll(names, i -> Utility.pathToPackage(super.getConstantPool().getConstantString(exceptionIndexTable[i], Const.CONSTANT_Class)));
         return names;
     }
 

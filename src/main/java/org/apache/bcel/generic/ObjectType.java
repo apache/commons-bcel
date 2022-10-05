@@ -20,6 +20,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Denotes reference such as java.lang.String.
@@ -41,7 +42,7 @@ public class ObjectType extends ReferenceType {
      */
     public ObjectType(final String className) {
         super(Const.T_REFERENCE, "L" + className.replace('.', '/') + ";");
-        this.className = className.replace('/', '.');
+        this.className = Utility.pathToPackage(className);
     }
 
     /**

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.verifier.statics.Pass1Verifier;
 import org.apache.bcel.verifier.statics.Pass2Verifier;
 import org.apache.bcel.verifier.statics.Pass3aVerifier;
@@ -61,7 +62,7 @@ public class Verifier {
                         args[index] = args[index].substring(0, dotclasspos);
                     }
                 }
-                args[index] = args[index].replace('/', '.');
+                args[index] = Utility.pathToPackage(args[index]);
                 System.out.println("Now verifying: " + args[index] + "\n");
                 verifyType(args[index]);
                 org.apache.bcel.Repository.clearCache();

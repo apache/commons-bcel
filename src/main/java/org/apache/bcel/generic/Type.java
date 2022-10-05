@@ -237,7 +237,7 @@ public abstract class Type {
             // Utility.typeSignatureToString understands how to parse generic types.
             final String parsedSignature = Utility.typeSignatureToString(signature, false);
             wrap(CONSUMED_CHARS, parsedSignature.length() + 2); // "Lblabla;" `L' and `;' are removed
-            return ObjectType.getInstance(parsedSignature.replace('/', '.'));
+            return ObjectType.getInstance(Utility.pathToPackage(parsedSignature));
         }
         int dim = 0;
         do { // Count dimensions

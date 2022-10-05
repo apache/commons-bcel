@@ -23,6 +23,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Super class for the INVOKExxx family of instructions.
@@ -80,7 +81,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
         final ConstantPool cp = cpg.getConstantPool();
         final ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
         final String className = cp.getConstantString(cmr.getClassIndex(), Const.CONSTANT_Class);
-        return className.replace('/', '.');
+        return Utility.pathToPackage(className);
     }
 
     /**

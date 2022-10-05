@@ -22,6 +22,7 @@ import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * Super class for InvokeInstruction and FieldInstruction, since they have some methods in common!
@@ -60,7 +61,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
             // Turn array classes into java.lang.Object.
             return "java.lang.Object";
         }
-        return className.replace('/', '.');
+        return Utility.pathToPackage(className);
     }
 
     /**
@@ -112,7 +113,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
         if (className.startsWith("[")) {
             return (ArrayType) Type.getType(className);
         }
-        className = className.replace('/', '.');
+        className = Utility.pathToPackage(className);
         return ObjectType.getInstance(className);
     }
 

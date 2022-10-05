@@ -33,6 +33,7 @@ import javax.swing.WindowConstants;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * A class for simple graphical class file verification. Use the main(String []) method with fully qualified class names
@@ -185,7 +186,7 @@ public class VerifyDialog extends JDialog {
         if (dotclasspos != -1) {
             fullyQualifiedClassName = fullyQualifiedClassName.substring(0, dotclasspos);
         }
-        fullyQualifiedClassName = fullyQualifiedClassName.replace('/', '.');
+        fullyQualifiedClassName = Utility.pathToPackage(fullyQualifiedClassName);
         this.className = fullyQualifiedClassName;
         initialize();
     }

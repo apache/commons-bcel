@@ -17,6 +17,8 @@
  */
 package org.apache.bcel.verifier;
 
+import org.apache.bcel.classfile.Utility;
+
 /**
  * The NativeVerifier class implements a main(String[] args) method that's roughly compatible to the one in the Verifier
  * class, but that uses the JVM's internal verifier for its class file verification. This can be used for comparison
@@ -37,7 +39,7 @@ public abstract class NativeVerifier {
         if (dotclasspos != -1) {
             args[0] = args[0].substring(0, dotclasspos);
         }
-        args[0] = args[0].replace('/', '.');
+        args[0] = Utility.pathToPackage(args[0]);
         // System.out.println(args[0]);
         try {
             Class.forName(args[0]);

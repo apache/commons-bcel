@@ -37,6 +37,7 @@ import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * This class is used to build up a constant pool. The user adds constants via `addXXX' methods, `addString',
@@ -165,7 +166,7 @@ public class ConstantPoolGen {
                 } else {
                     final ConstantClass clazz = (ConstantClass) constants[m.getClassIndex()];
                     u8 = (ConstantUtf8) constants[clazz.getNameIndex()];
-                    className = u8.getBytes().replace('/', '.');
+                    className = Utility.pathToPackage(u8.getBytes());
                 }
 
                 final ConstantNameAndType n = (ConstantNameAndType) constants[m.getNameAndTypeIndex()];
@@ -309,7 +310,7 @@ public class ConstantPoolGen {
             final ConstantClass clazz = (ConstantClass) constants[m.getClassIndex()];
             final ConstantNameAndType n = (ConstantNameAndType) constants[m.getNameAndTypeIndex()];
             ConstantUtf8 u8 = (ConstantUtf8) constants[clazz.getNameIndex()];
-            final String className = u8.getBytes().replace('/', '.');
+            final String className = Utility.pathToPackage(u8.getBytes());
             u8 = (ConstantUtf8) constants[n.getNameIndex()];
             final String name = u8.getBytes();
             u8 = (ConstantUtf8) constants[n.getSignatureIndex()];

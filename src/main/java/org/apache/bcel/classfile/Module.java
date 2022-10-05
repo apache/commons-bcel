@@ -207,7 +207,7 @@ public final class Module extends Attribute {
         final ConstantPool cp = super.getConstantPool();
         final StringBuilder buf = new StringBuilder();
         buf.append("Module:\n");
-        buf.append("  name:    ").append(cp.getConstantString(moduleNameIndex, Const.CONSTANT_Module).replace('/', '.')).append("\n");
+        buf.append("  name:    ").append(Utility.pathToPackage(cp.getConstantString(moduleNameIndex, Const.CONSTANT_Module))).append("\n");
         buf.append("  flags:   ").append(String.format("%04x", moduleFlags)).append("\n");
         final String version = moduleVersionIndex == 0 ? "0" : cp.getConstantString(moduleVersionIndex, Const.CONSTANT_Utf8);
         buf.append("  version: ").append(version).append("\n");

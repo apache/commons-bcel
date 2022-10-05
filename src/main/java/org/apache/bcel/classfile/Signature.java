@@ -137,7 +137,7 @@ public final class Signature extends Attribute {
             ch = in.read();
             // System.out.println("within ident:"+ (char)ch);
         } while (ch != -1 && (Character.isJavaIdentifierPart((char) ch) || ch == '/'));
-        buf.append(buf2.toString().replace('/', '.'));
+        buf.append(Utility.pathToPackage(buf2.toString()));
         // System.out.println("regular return ident:"+ (char)ch + ":" + buf2);
         if (ch != -1) {
             in.unread();

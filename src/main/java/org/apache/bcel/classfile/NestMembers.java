@@ -125,7 +125,7 @@ public final class NestMembers extends Attribute {
      */
     public String[] getClassNames() {
         final String[] names = new String[classes.length];
-        Arrays.setAll(names, i -> super.getConstantPool().getConstantString(classes[i], Const.CONSTANT_Class).replace('/', '.'));
+        Arrays.setAll(names, i -> Utility.pathToPackage(super.getConstantPool().getConstantString(classes[i], Const.CONSTANT_Class)));
         return names;
     }
 

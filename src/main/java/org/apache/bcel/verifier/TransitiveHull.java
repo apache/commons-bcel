@@ -19,6 +19,7 @@ package org.apache.bcel.verifier;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * This class has a main method implementing a demonstration program of how to use the VerifierFactoryObserver. It
@@ -40,7 +41,7 @@ public class TransitiveHull implements VerifierFactoryObserver {
         if (dotclasspos != -1) {
             args[0] = args[0].substring(0, dotclasspos);
         }
-        args[0] = args[0].replace('/', '.');
+        args[0] = Utility.pathToPackage(args[0]);
         final TransitiveHull th = new TransitiveHull();
         VerifierFactory.attach(th);
         VerifierFactory.getVerifier(args[0]); // the observer is called back and does the actual trick.

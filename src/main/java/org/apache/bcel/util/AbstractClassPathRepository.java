@@ -22,6 +22,7 @@ import java.io.InputStream;
 
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * This abstract class provides a logic of a loading {@link JavaClass} objects class names via {@link ClassPath}.
@@ -109,7 +110,7 @@ abstract class AbstractClassPathRepository implements Repository {
         if (className == null || className.isEmpty()) {
             throw new IllegalArgumentException("Invalid class name " + className);
         }
-        className = className.replace('/', '.'); // Just in case, canonical form
+        className = Utility.pathToPackage(className); // Just in case, canonical form
         final JavaClass clazz = findClass(className);
         if (clazz != null) {
             return clazz;

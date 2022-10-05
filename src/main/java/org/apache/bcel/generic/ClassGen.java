@@ -34,6 +34,7 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.SourceFile;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -461,13 +462,13 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     public void setClassName(final String name) {
-        className = name.replace('/', '.');
+        className = Utility.pathToPackage(name);
         classNameIndex = cp.addClass(name);
     }
 
     public void setClassNameIndex(final int classNameIndex) {
         this.classNameIndex = classNameIndex;
-        this.className = cp.getConstantPool().getConstantString(classNameIndex, Const.CONSTANT_Class).replace('/', '.');
+        this.className = Utility.pathToPackage(cp.getConstantPool().getConstantString(classNameIndex, Const.CONSTANT_Class));
     }
 
     public void setConstantPool(final ConstantPoolGen constant_pool) {
@@ -502,13 +503,13 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     public void setSuperclassName(final String name) {
-        superClassName = name.replace('/', '.');
+        superClassName = Utility.pathToPackage(name);
         superclassNameIndex = cp.addClass(name);
     }
 
     public void setSuperclassNameIndex(final int superclassNameIndex) {
         this.superclassNameIndex = superclassNameIndex;
-        superClassName = cp.getConstantPool().getConstantString(superclassNameIndex, Const.CONSTANT_Class).replace('/', '.');
+        superClassName = Utility.pathToPackage(cp.getConstantPool().getConstantString(superclassNameIndex, Const.CONSTANT_Class));
     }
 
     /**

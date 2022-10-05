@@ -131,7 +131,7 @@ public final class ModulePackages extends Attribute {
      */
     public String[] getPackageNames() {
         final String[] names = new String[packageIndexTable.length];
-        Arrays.setAll(names, i -> super.getConstantPool().getConstantString(packageIndexTable[i], Const.CONSTANT_Package).replace('/', '.'));
+        Arrays.setAll(names, i -> Utility.pathToPackage(super.getConstantPool().getConstantString(packageIndexTable[i], Const.CONSTANT_Package)));
         return names;
     }
 

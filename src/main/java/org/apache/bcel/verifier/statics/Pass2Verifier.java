@@ -61,6 +61,7 @@ import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.ArrayType;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.Type;
@@ -182,7 +183,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         final ConstantClass cc = (ConstantClass) cp.getConstant(exc_index);
                         // cannot be sure this ConstantClass has already been visited (checked)!
                         checkIndex(cc, cc.getNameIndex(), CONST_Utf8);
-                        final String cname = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes().replace('/', '.');
+                        final String cname = Utility.pathToPackage(((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes());
 
                         Verifier v = VerifierFactory.getVerifier(cname);
                         VerificationResult vr = v.doPass1();
@@ -511,7 +512,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     final ConstantClass cc = (ConstantClass) cp.getConstant(exc_indice);
                     checkIndex(cc, cc.getNameIndex(), CONST_Utf8); // can't be sure this ConstantClass has already been visited (checked)!
                     // convert internal notation on-the-fly to external notation:
-                    final String cname = ((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes().replace('/', '.');
+                    final String cname = Utility.pathToPackage(((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes());
 
                     Verifier v = VerifierFactory.getVerifier(cname);
                     VerificationResult vr = v.doPass1();

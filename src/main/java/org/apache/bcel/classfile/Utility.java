@@ -567,12 +567,23 @@ public abstract class Utility {
      */
     public static String compactClassName(String str, final String prefix, final boolean chopit) {
         final int len = prefix.length();
-        str = str.replace('/', '.'); // Is `/' on all systems, even DOS
+        str = pathToPackage(str); // Is `/' on all systems, even DOS
         // If string starts with `prefix' and contains no further dots
         if (chopit && str.startsWith(prefix) && str.substring(len).indexOf('.') == -1) {
             str = str.substring(len);
         }
         return str;
+    }
+
+    /** 
+     * Converts a path to a package name.
+     *
+     * @param str the source path.
+     * @return a package name.
+     * @since 6.6.0
+     */
+    public static String pathToPackage(final String str) {
+        return str.replace('/', '.');
     }
 
     /**
