@@ -26,6 +26,8 @@ package Mini;
  */
 public class ParseException extends Exception {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * This variable determines which constructor was used to create this object and thereby affects the semantics of the
      * "getMessage" method (see below).

@@ -97,8 +97,7 @@ public final class ConstantPackage extends Constant implements ConstantObject {
      */
     @Override
     public Object getConstantValue(final ConstantPool cp) {
-        final Constant c = cp.getConstant(nameIndex, Const.CONSTANT_Utf8);
-        return ((ConstantUtf8) c).getBytes();
+        return cp.getConstantUtf8(nameIndex).getBytes();
     }
 
     /**

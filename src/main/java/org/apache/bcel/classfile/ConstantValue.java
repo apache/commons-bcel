@@ -136,7 +136,7 @@ public final class ConstantValue extends Attribute {
             break;
         case Const.CONSTANT_String:
             i = ((ConstantString) c).getStringIndex();
-            c = super.getConstantPool().getConstant(i, Const.CONSTANT_Utf8);
+            c = super.getConstantPool().getConstantUtf8(i);
             buf = "\"" + Utility.convertString(((ConstantUtf8) c).getBytes()) + "\"";
             break;
         default:

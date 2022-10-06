@@ -72,7 +72,7 @@ public class EnclosingMethod extends Attribute {
     }
 
     public final ConstantClass getEnclosingClass() {
-        return (ConstantClass) super.getConstantPool().getConstant(classIndex, Const.CONSTANT_Class);
+        return super.getConstantPool().getConstant(classIndex, Const.CONSTANT_Class, ConstantClass.class);
     }
 
     // Accessors
@@ -84,7 +84,7 @@ public class EnclosingMethod extends Attribute {
         if (methodIndex == 0) {
             return null;
         }
-        return (ConstantNameAndType) super.getConstantPool().getConstant(methodIndex, Const.CONSTANT_NameAndType);
+        return super.getConstantPool().getConstant(methodIndex, Const.CONSTANT_NameAndType, ConstantNameAndType.class);
     }
 
     public final int getEnclosingMethodIndex() {

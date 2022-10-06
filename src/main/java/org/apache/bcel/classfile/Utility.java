@@ -575,7 +575,7 @@ public abstract class Utility {
         return str;
     }
 
-    /** 
+    /**
      * Converts a path to a package name.
      *
      * @param str the source path.

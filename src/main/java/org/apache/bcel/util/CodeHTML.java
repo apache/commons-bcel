@@ -223,7 +223,7 @@ final class CodeHTML {
         case Const.PUTFIELD:
         case Const.PUTSTATIC:
             index = bytes.readShort();
-            final ConstantFieldref c1 = (ConstantFieldref) constantPool.getConstant(index, Const.CONSTANT_Fieldref);
+            final ConstantFieldref c1 = constantPool.getConstant(index, Const.CONSTANT_Fieldref, ConstantFieldref.class);
             class_index = c1.getClassIndex();
             name = constantPool.getConstantString(class_index, Const.CONSTANT_Class);
             name = Utility.compactClassName(name, false);
@@ -260,28 +260,28 @@ final class CodeHTML {
                 bytes.readUnsignedByte(); // Reserved
 //                    int nargs = bytes.readUnsignedByte(); // Redundant
 //                    int reserved = bytes.readUnsignedByte(); // Reserved
-                final ConstantInterfaceMethodref c = (ConstantInterfaceMethodref) constantPool.getConstant(m_index, Const.CONSTANT_InterfaceMethodref);
+                final ConstantInterfaceMethodref c = constantPool.getConstant(m_index, Const.CONSTANT_InterfaceMethodref, ConstantInterfaceMethodref.class);
                 class_index = c.getClassIndex();
                 index = c.getNameAndTypeIndex();
                 name = Class2HTML.referenceClass(class_index);
             } else if (opcode == Const.INVOKEDYNAMIC) { // Special treatment needed
                 bytes.readUnsignedByte(); // Reserved
                 bytes.readUnsignedByte(); // Reserved
-                final ConstantInvokeDynamic c = (ConstantInvokeDynamic) constantPool.getConstant(m_index, Const.CONSTANT_InvokeDynamic);
+                final ConstantInvokeDynamic c = constantPool.getConstant(m_index, Const.CONSTANT_InvokeDynamic, ConstantInvokeDynamic.class);
                 index = c.getNameAndTypeIndex();
                 name = "#" + c.getBootstrapMethodAttrIndex();
             } else {
                 // UNDONE: Java8 now allows INVOKESPECIAL and INVOKESTATIC to
                 // reference EITHER a Methodref OR an InterfaceMethodref.
                 // Not sure if that affects this code or not. (markro)
-                final ConstantMethodref c = (ConstantMethodref) constantPool.getConstant(m_index, Const.CONSTANT_Methodref);
+                final ConstantMethodref c = constantPool.getConstant(m_index, Const.CONSTANT_Methodref, ConstantMethodref.class);
                 class_index = c.getClassIndex();
                 index = c.getNameAndTypeIndex();
                 name = Class2HTML.referenceClass(class_index);
             }
             str = Class2HTML.toHTML(constantPool.constantToString(constantPool.getConstant(index, Const.CONSTANT_NameAndType)));
             // Get signature, i.e., types
-            final ConstantNameAndType c2 = (ConstantNameAndType) constantPool.getConstant(index, Const.CONSTANT_NameAndType);
+            final ConstantNameAndType c2 = constantPool.getConstant(index, Const.CONSTANT_NameAndType, ConstantNameAndType.class);
             signature = constantPool.constantToString(c2.getSignatureIndex(), Const.CONSTANT_Utf8);
             final String[] args = Utility.methodSignatureArgumentTypes(signature, false);
             final String type = Utility.methodSignatureReturnType(signature, false);

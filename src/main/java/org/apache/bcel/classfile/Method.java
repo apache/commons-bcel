@@ -21,7 +21,6 @@ import java.io.DataInput;
 import java.io.IOException;
 import java.util.Objects;
 
-import org.apache.bcel.Const;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.BCELComparator;
 
@@ -235,9 +234,9 @@ public final class Method extends FieldOrMethod {
     public String toString() {
         final String access = Utility.accessToString(super.getAccessFlags());
         // Get name and signature from constant pool
-        ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(super.getSignatureIndex(), Const.CONSTANT_Utf8);
+        ConstantUtf8 c = super.getConstantPool().getConstantUtf8(super.getSignatureIndex());
         String signature = c.getBytes();
-        c = (ConstantUtf8) super.getConstantPool().getConstant(super.getNameIndex(), Const.CONSTANT_Utf8);
+        c = super.getConstantPool().getConstantUtf8(super.getNameIndex());
         final String name = c.getBytes();
         signature = Utility.methodSignatureToString(signature, name, access, true, getLocalVariableTable());
         final StringBuilder buf = new StringBuilder(signature);

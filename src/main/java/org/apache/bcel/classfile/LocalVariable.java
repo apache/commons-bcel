@@ -21,7 +21,6 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.bcel.Const;
 import org.apache.bcel.Constants;
 
 /**
@@ -173,9 +172,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @return Variable name.
      */
     public String getName() {
-        ConstantUtf8 c;
-        c = (ConstantUtf8) constantPool.getConstant(nameIndex, Const.CONSTANT_Utf8);
-        return c.getBytes();
+        return constantPool.getConstantUtf8(nameIndex).getBytes();
     }
 
     /**
@@ -196,9 +193,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @return Signature.
      */
     public String getSignature() {
-        ConstantUtf8 c;
-        c = (ConstantUtf8) constantPool.getConstant(signatureIndex, Const.CONSTANT_Utf8);
-        return c.getBytes();
+        return constantPool.getConstantUtf8(signatureIndex).getBytes();
     }
 
     /**

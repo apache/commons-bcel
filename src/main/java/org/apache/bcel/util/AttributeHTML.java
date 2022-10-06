@@ -27,7 +27,6 @@ import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.ConstantPool;
-import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.ConstantValue;
 import org.apache.bcel.classfile.ExceptionTable;
 import org.apache.bcel.classfile.InnerClass;
@@ -153,8 +152,8 @@ final class AttributeHTML implements Closeable {
             // List name, range and type
             printWriter.print("<UL>");
             ((LocalVariableTable) attribute).forEach(var -> {
-                int sigIdx = var.getSignatureIndex();
-                String signature = ((ConstantUtf8) constantPool.getConstant(sigIdx, Const.CONSTANT_Utf8)).getBytes();
+                final int sigIdx = var.getSignatureIndex();
+                String signature = constantPool.getConstantUtf8(sigIdx).getBytes();
                 signature = Utility.signatureToString(signature, false);
                 final int start = var.getStartPC();
                 final int end = start + var.getLength();
@@ -172,7 +171,7 @@ final class AttributeHTML implements Closeable {
                 final String access;
                 index = clazz.getInnerNameIndex();
                 if (index > 0) {
-                    name = ((ConstantUtf8) constantPool.getConstant(index, Const.CONSTANT_Utf8)).getBytes();
+                    name = constantPool.getConstantUtf8(index).getBytes();
                 } else {
                     name = "&lt;anonymous&gt;";
                 }

@@ -52,7 +52,7 @@ final class ConstantHTML {
         this.classPackage = class_package;
         this.constantPool = constantPool;
         this.methods = methods;
-        constants = constantPool.getConstantPool();
+        this.constants = constantPool.getConstantPool();
         try (PrintWriter newPrintWriter = new PrintWriter(dir + className + "_cp.html", charset.name())) {
             printWriter = newPrintWriter;
             constantRef = new String[constants.length];
@@ -106,11 +106,11 @@ final class ConstantHTML {
         case Const.CONSTANT_Methodref:
             // Get class_index and name_and_type_index, depending on type
             if (tag == Const.CONSTANT_Methodref) {
-                final ConstantMethodref c = (ConstantMethodref) constantPool.getConstant(index, Const.CONSTANT_Methodref);
+                final ConstantMethodref c = constantPool.getConstant(index, Const.CONSTANT_Methodref, ConstantMethodref.class);
                 classIndex = c.getClassIndex();
                 nameIndex = c.getNameAndTypeIndex();
             } else {
-                final ConstantInterfaceMethodref c1 = (ConstantInterfaceMethodref) constantPool.getConstant(index, Const.CONSTANT_InterfaceMethodref);
+                final ConstantInterfaceMethodref c1 = constantPool.getConstant(index, Const.CONSTANT_InterfaceMethodref, ConstantInterfaceMethodref.class);
                 classIndex = c1.getClassIndex();
                 nameIndex = c1.getNameAndTypeIndex();
             }
@@ -122,7 +122,7 @@ final class ConstantHTML {
             String shortMethodClass = Utility.compactClassName(methodClass); // I.e., remove java.lang.
             shortMethodClass = Utility.compactClassName(shortMethodClass, classPackage + ".", true); // Remove class package prefix
             // Get method signature
-            final ConstantNameAndType c2 = (ConstantNameAndType) constantPool.getConstant(nameIndex, Const.CONSTANT_NameAndType);
+            final ConstantNameAndType c2 = constantPool.getConstant(nameIndex, Const.CONSTANT_NameAndType, ConstantNameAndType.class);
             final String signature = constantPool.constantToString(c2.getSignatureIndex(), Const.CONSTANT_Utf8);
             // Get array of strings containing the argument types
             final String[] args = Utility.methodSignatureArgumentTypes(signature, false);
@@ -150,7 +150,7 @@ final class ConstantHTML {
             break;
         case Const.CONSTANT_Fieldref:
             // Get class_index and name_and_type_index
-            final ConstantFieldref c3 = (ConstantFieldref) constantPool.getConstant(index, Const.CONSTANT_Fieldref);
+            final ConstantFieldref c3 = constantPool.getConstant(index, Const.CONSTANT_Fieldref, ConstantFieldref.class);
             classIndex = c3.getClassIndex();
             nameIndex = c3.getNameAndTypeIndex();
             // Get method name and its class (compacted)
@@ -169,7 +169,7 @@ final class ConstantHTML {
                 + "<LI><A HREF=\"#cp" + nameIndex + "\">NameAndType(" + nameIndex + ")</A></UL>");
             break;
         case Const.CONSTANT_Class:
-            final ConstantClass c4 = (ConstantClass) constantPool.getConstant(index, Const.CONSTANT_Class);
+            final ConstantClass c4 = constantPool.getConstant(index, Const.CONSTANT_Class, ConstantClass.class);
             nameIndex = c4.getNameIndex();
             final String className2 = constantPool.constantToString(index, tag); // / -> .
             String shortClassName = Utility.compactClassName(className2); // I.e., remove java.lang.
@@ -179,13 +179,13 @@ final class ConstantHTML {
             printWriter.println("<P><TT>" + ref + "</TT><UL>" + "<LI><A HREF=\"#cp" + nameIndex + "\">Name index(" + nameIndex + ")</A></UL>\n");
             break;
         case Const.CONSTANT_String:
-            final ConstantString c5 = (ConstantString) constantPool.getConstant(index, Const.CONSTANT_String);
+            final ConstantString c5 = constantPool.getConstant(index, Const.CONSTANT_String, ConstantString.class);
             nameIndex = c5.getStringIndex();
             final String str = Class2HTML.toHTML(constantPool.constantToString(index, tag));
             printWriter.println("<P><TT>" + str + "</TT><UL>" + "<LI><A HREF=\"#cp" + nameIndex + "\">Name index(" + nameIndex + ")</A></UL>\n");
             break;
         case Const.CONSTANT_NameAndType:
-            final ConstantNameAndType c6 = (ConstantNameAndType) constantPool.getConstant(index, Const.CONSTANT_NameAndType);
+            final ConstantNameAndType c6 = constantPool.getConstant(index, Const.CONSTANT_NameAndType, ConstantNameAndType.class);
             nameIndex = c6.getNameIndex();
             final int signature_index = c6.getSignatureIndex();
             printWriter.println("<P><TT>" + Class2HTML.toHTML(constantPool.constantToString(index, tag)) + "</TT><UL>" + "<LI><A HREF=\"#cp" + nameIndex

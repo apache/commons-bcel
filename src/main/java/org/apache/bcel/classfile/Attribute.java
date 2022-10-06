@@ -103,8 +103,7 @@ public abstract class Attribute implements Cloneable, Node {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via `name_index' indirection
         final int name_index = file.readUnsignedShort();
-        final ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
-        final String name = c.getBytes();
+        final String name = constant_pool.getConstantUtf8(name_index).getBytes();
 
         // Length of data in bytes
         final int length = file.readInt();
@@ -307,8 +306,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @since 6.0
      */
     public String getName() {
-        final ConstantUtf8 c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
-        return c.getBytes();
+        return constant_pool.getConstantUtf8(name_index).getBytes();
     }
 
     /**

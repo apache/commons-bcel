@@ -86,7 +86,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     }
 
     @Override
-    public Attribute copy(ConstantPool constantPool) {
+    public Attribute copy(final ConstantPool constantPool) {
         // TODO Auto-generated method stub
         return null;
     }

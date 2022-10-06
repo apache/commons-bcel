@@ -181,7 +181,7 @@ public final class InnerClass implements Cloneable, Node {
             outerClassName = "";
         }
         if (innerNameIndex != 0) {
-            innerName = ((ConstantUtf8) constantPool.getConstant(innerNameIndex, Const.CONSTANT_Utf8)).getBytes();
+            innerName = constantPool.getConstantUtf8(innerNameIndex).getBytes();
         } else {
             innerName = "(anonymous)";
         }

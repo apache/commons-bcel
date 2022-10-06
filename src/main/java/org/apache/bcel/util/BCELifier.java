@@ -167,7 +167,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
      * Constructs a new instance.
      *
      * @param clazz Java class to "decompile".
-     * @param out where to print the Java program in UTF-8. 
+     * @param out where to print the Java program in UTF-8.
      */
     public BCELifier(final JavaClass clazz, final OutputStream out) {
         this.clazz = clazz;

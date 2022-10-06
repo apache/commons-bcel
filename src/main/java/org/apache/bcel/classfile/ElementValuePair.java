@@ -20,8 +20,6 @@ package org.apache.bcel.classfile;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.bcel.Const;
-
 /**
  * An annotation's element value pair.
  *
@@ -53,8 +51,7 @@ public class ElementValuePair {
     }
 
     public String getNameString() {
-        final ConstantUtf8 c = (ConstantUtf8) constantPool.getConstant(elementNameIndex, Const.CONSTANT_Utf8);
-        return c.getBytes();
+        return constantPool.getConstantUtf8(elementNameIndex).getBytes();
     }
 
     public final ElementValue getValue() {

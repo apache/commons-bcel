@@ -178,7 +178,7 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
         final String className = ccp.getClass(cp);
         add(className);
 
-        final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(ccp.getNameAndTypeIndex(), Constants.CONSTANT_NameAndType);
+        final ConstantNameAndType cnat = cp.getConstant(ccp.getNameAndTypeIndex(), Constants.CONSTANT_NameAndType, ConstantNameAndType.class);
 
         final String signature = cnat.getSignature(cp);
 

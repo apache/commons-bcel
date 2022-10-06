@@ -63,7 +63,7 @@ public class VerifierFactory {
      */
     public static Verifier getVerifier(final String fullyQualifiedClassName) {
         return MAP.computeIfAbsent(fullyQualifiedClassName, k -> {
-            Verifier v = new Verifier(k);
+            final Verifier v = new Verifier(k);
             notify(k);
             return v;
         });

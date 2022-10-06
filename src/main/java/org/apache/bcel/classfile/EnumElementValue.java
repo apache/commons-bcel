@@ -20,8 +20,6 @@ package org.apache.bcel.classfile;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.apache.bcel.Const;
-
 /**
  * @since 6.0
  */
@@ -48,13 +46,11 @@ public class EnumElementValue extends ElementValue {
     }
 
     public String getEnumTypeString() {
-        final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(typeIdx, Const.CONSTANT_Utf8);
-        return cu8.getBytes();// Utility.signatureToString(cu8.getBytes());
+        return super.getConstantPool().getConstantUtf8(typeIdx).getBytes();
     }
 
     public String getEnumValueString() {
-        final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx, Const.CONSTANT_Utf8);
-        return cu8.getBytes();
+        return super.getConstantPool().getConstantUtf8(valueIdx).getBytes();
     }
 
     public int getTypeIndex() {
@@ -67,7 +63,6 @@ public class EnumElementValue extends ElementValue {
 
     @Override
     public String stringifyValue() {
-        final ConstantUtf8 cu8 = (ConstantUtf8) super.getConstantPool().getConstant(valueIdx, Const.CONSTANT_Utf8);
-        return cu8.getBytes();
+        return super.getConstantPool().getConstantUtf8(valueIdx).getBytes();
     }
 }

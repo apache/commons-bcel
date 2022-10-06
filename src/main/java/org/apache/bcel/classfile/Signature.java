@@ -221,8 +221,7 @@ public final class Signature extends Attribute {
      * @return GJ signature.
      */
     public String getSignature() {
-        final ConstantUtf8 c = (ConstantUtf8) super.getConstantPool().getConstant(signatureIndex, Const.CONSTANT_Utf8);
-        return c.getBytes();
+        return super.getConstantPool().getConstantUtf8(signatureIndex).getBytes();
     }
 
     /**

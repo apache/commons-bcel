@@ -122,8 +122,8 @@ public class ClassLoader extends java.lang.ClassLoader {
         }
         // Adapt the class name to the passed value
         final ConstantPool cp = clazz.getConstantPool();
-        final ConstantClass cl = (ConstantClass) cp.getConstant(clazz.getClassNameIndex(), Const.CONSTANT_Class);
-        final ConstantUtf8 name = (ConstantUtf8) cp.getConstant(cl.getNameIndex(), Const.CONSTANT_Utf8);
+        final ConstantClass cl = cp.getConstant(clazz.getClassNameIndex(), Const.CONSTANT_Class, ConstantClass.class);
+        final ConstantUtf8 name = cp.getConstantUtf8(cl.getNameIndex());
         name.setBytes(className.replace('.', '/'));
         return clazz;
     }

@@ -96,7 +96,7 @@ public abstract class Type {
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
             throw new ClassFormatException("Invalid method signature: " + signature, e);
         }
-        Type[] types = new Type[vec.size()];
+        final Type[] types = new Type[vec.size()];
         vec.toArray(types);
         return types;
     }

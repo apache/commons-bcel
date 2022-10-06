@@ -23,8 +23,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.apache.bcel.Const;
-
 /**
  * Abstract super class for fields and methods.
  *
@@ -211,9 +209,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @return Name of object, i.e., method name or field name
      */
     public final String getName() {
-        ConstantUtf8 c;
-        c = (ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8);
-        return c.getBytes();
+        return constant_pool.getConstantUtf8(name_index).getBytes();
     }
 
     /**
@@ -227,9 +223,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @return String representation of object's type signature (java style)
      */
     public final String getSignature() {
-        ConstantUtf8 c;
-        c = (ConstantUtf8) constant_pool.getConstant(signature_index, Const.CONSTANT_Utf8);
-        return c.getBytes();
+        return constant_pool.getConstantUtf8(signature_index).getBytes();
     }
 
     /**

@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.apache.bcel.Const;
-
 /**
  * Represents one annotation in the annotation table
  *
@@ -103,8 +101,7 @@ public class AnnotationEntry implements Node {
      * @return the annotation type name
      */
     public String getAnnotationType() {
-        final ConstantUtf8 c = (ConstantUtf8) constantPool.getConstant(typeIndex, Const.CONSTANT_Utf8);
-        return c.getBytes();
+        return constantPool.getConstantUtf8(typeIndex).getBytes();
     }
 
     /**

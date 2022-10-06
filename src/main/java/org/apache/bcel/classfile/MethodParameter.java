@@ -95,7 +95,7 @@ public class MethodParameter implements Cloneable {
         if (nameIndex == 0) {
             return null;
         }
-        return ((ConstantUtf8) constant_pool.getConstant(nameIndex, Const.CONSTANT_Utf8)).getBytes();
+        return constant_pool.getConstantUtf8(nameIndex).getBytes();
     }
 
     public boolean isFinal() {
