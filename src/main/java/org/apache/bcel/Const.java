@@ -230,6 +230,54 @@ public final class Const {
     public static final short MINOR_13 = 0;
 
     /**
+     * Minor version number of class files for Java 14.
+     *
+     * @see #MAJOR_14
+     * @since 6.4.0
+     */
+    public static final short MINOR_14 = 0;
+
+    /**
+     * Minor version number of class files for Java 15.
+     *
+     * @see #MAJOR_15
+     * @since 6.6.0
+     */
+    public static final short MINOR_15 = 0;
+
+    /**
+     * Minor version number of class files for Java 16.
+     *
+     * @see #MAJOR_16
+     * @since 6.6.0
+     */
+    public static final short MINOR_16 = 0;
+
+    /**
+     * Minor version number of class files for Java 17.
+     *
+     * @see #MAJOR_17
+     * @since 6.6.0
+     */
+    public static final short MINOR_17 = 0;
+
+    /**
+     * Minor version number of class files for Java 18.
+     *
+     * @see #MAJOR_18
+     * @since 6.6.0
+     */
+    public static final short MINOR_18 = 0;
+
+    /**
+     * Minor version number of class files for Java 19.
+     *
+     * @see #MAJOR_19
+     * @since 6.6.0
+     */
+    public static final short MINOR_19 = 0;
+
+    /**
      * Major version number of class files for Java 14.
      *
      * @see #MINOR_14
@@ -238,12 +286,44 @@ public final class Const {
     public static final short MAJOR_14 = 58;
 
     /**
-     * Minor version number of class files for Java 14.
+     * Major version number of class files for Java 15.
      *
-     * @see #MAJOR_14
-     * @since 6.4.0
+     * @see #MINOR_15
+     * @since 6.6.0
      */
-    public static final short MINOR_14 = 0;
+    public static final short MAJOR_15 = 59;
+
+    /**
+     * Major version number of class files for Java 16.
+     *
+     * @see #MINOR_16
+     * @since 6.6.0
+     */
+    public static final short MAJOR_16 = 60;
+
+    /**
+     * Major version number of class files for Java 17.
+     *
+     * @see #MINOR_17
+     * @since 6.6.0
+     */
+    public static final short MAJOR_17 = 61;
+
+    /**
+     * Major version number of class files for Java 18.
+     *
+     * @see #MINOR_18
+     * @since 6.6.0
+     */
+    public static final short MAJOR_18 = 62;
+
+    /**
+     * Major version number of class files for Java 19.
+     *
+     * @see #MINOR_19
+     * @since 6.6.0
+     */
+    public static final short MAJOR_19 = 63;
 
     /**
      * Default major version number. Class file is for Java 1.1.

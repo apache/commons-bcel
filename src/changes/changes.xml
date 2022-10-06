@@ -106,6 +106,16 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make LocalVariableTypeTable implement Iterable&lt;LocalVariable&gt;.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make MethodParameters implement Iterable&lt;MethodParameter&gt;.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Make ParameterAnnotations implement Iterable&lt;ParameterAnnotationEntry&gt;.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_15</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_16</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_17</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_18</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_19</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_15</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_16</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_17</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_18</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_19</action>
       <!-- UPDATES -->
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/cache from 2 to 3.0.9 #88, #93, #110, #119, #149.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/checkout from 2.3.1 to 3.0.2 #59, #66, #73, #108, #115.</action>      
