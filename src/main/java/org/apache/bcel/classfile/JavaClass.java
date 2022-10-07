@@ -434,20 +434,13 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @return class in binary format
      */
     public byte[] getBytes() {
-        final ByteArrayOutputStream s = new ByteArrayOutputStream();
-        final DataOutputStream ds = new DataOutputStream(s);
-        try {
-            dump(ds);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (DataOutputStream dos = new DataOutputStream(baos)) {
+            dump(dos);
         } catch (final IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                ds.close();
-            } catch (final IOException e2) {
-                e2.printStackTrace();
-            }
         }
-        return s.toByteArray();
+        return baos.toByteArray();
     }
 
     /**
