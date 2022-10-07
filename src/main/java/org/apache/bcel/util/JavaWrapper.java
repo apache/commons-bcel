@@ -107,7 +107,7 @@ public class JavaWrapper {
             return;
         }
         try {
-            method.invoke(null, argv);
+            method.invoke(null, (Object[]) argv);
         } catch (final Exception ex) {
             ex.printStackTrace();
         }
