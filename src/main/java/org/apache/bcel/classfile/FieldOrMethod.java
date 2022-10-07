@@ -124,20 +124,16 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @return deep copy of this field
      */
     protected FieldOrMethod copy_(final ConstantPool constantPool) {
-        FieldOrMethod c = null;
-
         try {
-            c = (FieldOrMethod) clone();
+            final FieldOrMethod c = (FieldOrMethod) clone();
+            c.constant_pool = constant_pool;
+            c.attributes = new Attribute[attributes.length];
+            c.attributes_count = attributes_count; // init deprecated field
+            Arrays.setAll(c.attributes, i -> attributes[i].copy(constant_pool));
+            return c;
         } catch (final CloneNotSupportedException e) {
-            // ignored, but will cause NPE ...
+            throw new IllegalStateException(e);
         }
-
-        c.constant_pool = constant_pool;
-        c.attributes = new Attribute[attributes.length];
-        c.attributes_count = attributes_count; // init deprecated field
-
-        Arrays.setAll(c.attributes, i -> attributes[i].copy(constant_pool));
-        return c;
     }
 
     /**
