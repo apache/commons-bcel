@@ -27,7 +27,7 @@ import java.util.TreeMap;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
 
-import org.apache.bcel.Constants;
+import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
@@ -147,7 +147,7 @@ public class Package {
         for (int i = 1; i < pool.getLength(); i++) {
             final Constant cons = pool.getConstant(i);
             // System.out.println("("+i+") " + cons );
-            if (cons != null && cons.getTag() == Constants.CONSTANT_Class) {
+            if (cons != null && cons.getTag() == Const.CONSTANT_Class) {
                 final int idx = ((ConstantClass) pool.getConstant(i)).getNameIndex();
                 final String clas = ((ConstantUtf8) pool.getConstant(idx)).getBytes();
                 addClassString(clas, name);

@@ -20,6 +20,7 @@
 
 package Mini;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.ILOAD;
 import org.apache.bcel.generic.InstructionList;
@@ -97,13 +98,13 @@ public class ASTIdent extends ASTExpr {
 
         is_simple = true; // (Very) simple expression, always true
 
-        if (t == T_UNKNOWN && expected == T_UNKNOWN) {
-            type = T_UNKNOWN;
-        } else if (t == T_UNKNOWN && expected != T_UNKNOWN) {
+        if (t == Const.T_UNKNOWN && expected == Const.T_UNKNOWN) {
+            type = Const.T_UNKNOWN;
+        } else if (t == Const.T_UNKNOWN && expected != Const.T_UNKNOWN) {
             ident.setType(expected);
             type = expected;
         } else {
-            if (t != T_UNKNOWN && expected == T_UNKNOWN) {
+            if (t != Const.T_UNKNOWN && expected == Const.T_UNKNOWN) {
                 ident.setType(t);
             }
             type = t;

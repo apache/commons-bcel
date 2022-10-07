@@ -20,6 +20,8 @@
 
 package Mini;
 
+import org.apache.bcel.Const;
+import org.apache.bcel.Constants;
 import org.apache.bcel.generic.BranchHandle;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.GOTO;
@@ -124,24 +126,24 @@ public class ASTIfExpr extends ASTExpr {
     public int eval(final int expected) {
         int thenType, elseType, ifType;
 
-        if ((ifType = if_expr.eval(T_BOOLEAN)) != T_BOOLEAN) {
-            MiniC.addError(if_expr.getLine(), if_expr.getColumn(), "IF expression is not of type boolean, but " + TYPE_NAMES[ifType] + ".");
+        if ((ifType = if_expr.eval(Const.T_BOOLEAN)) != Const.T_BOOLEAN) {
+            MiniC.addError(if_expr.getLine(), if_expr.getColumn(), "IF expression is not of type boolean, but " + Constants.TYPE_NAMES[ifType] + ".");
         }
 
         thenType = then_expr.eval(expected);
 
-        if (expected != T_UNKNOWN && thenType != expected) {
+        if (expected != Const.T_UNKNOWN && thenType != expected) {
             MiniC.addError(then_expr.getLine(), then_expr.getColumn(),
-                "THEN expression is not of expected type " + TYPE_NAMES[expected] + " but " + TYPE_NAMES[thenType] + ".");
+                    "THEN expression is not of expected type " + Constants.TYPE_NAMES[expected] + " but " + Constants.TYPE_NAMES[thenType] + ".");
         }
 
         if (else_expr != null) {
             elseType = else_expr.eval(expected);
 
-            if (expected != T_UNKNOWN && elseType != expected) {
+            if (expected != Const.T_UNKNOWN && elseType != expected) {
                 MiniC.addError(else_expr.getLine(), else_expr.getColumn(),
-                    "ELSE expression is not of expected type " + TYPE_NAMES[expected] + " but " + TYPE_NAMES[elseType] + ".");
-            } else if (thenType == T_UNKNOWN) {
+                        "ELSE expression is not of expected type " + Constants.TYPE_NAMES[expected] + " but " + Constants.TYPE_NAMES[elseType] + ".");
+            } else if (thenType == Const.T_UNKNOWN) {
                 thenType = elseType;
                 then_expr.setType(elseType);
             }
@@ -151,7 +153,7 @@ public class ASTIfExpr extends ASTExpr {
         }
 
         if (thenType != elseType) {
-            MiniC.addError(line, column, "Type mismatch in THEN-ELSE: " + TYPE_NAMES[thenType] + " vs. " + TYPE_NAMES[elseType] + ".");
+            MiniC.addError(line, column, "Type mismatch in THEN-ELSE: " + Constants.TYPE_NAMES[thenType] + " vs. " + Constants.TYPE_NAMES[elseType] + ".");
         }
 
         type = thenType;

@@ -22,6 +22,7 @@ package Mini;
 
 import java.io.PrintWriter;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.generic.ALOAD;
 import org.apache.bcel.generic.ClassGen;
@@ -44,7 +45,7 @@ import org.apache.bcel.generic.Type;
  * Root node of everything, direct children are nodes of type FunDecl
  *
  */
-public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constants {
+public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniParserTreeConstants {
     public static Node jjtCreate(final MiniParser p, final int id) {
         return new ASTProgram(p, id);
     }
@@ -61,12 +62,12 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         /*
          * Add predefined functions WRITE/READ. WRITE has one arg of type T_INT, both return T_INT.
          */
-        ASTIdent ident = new ASTIdent("WRITE", T_INT, -1, -1);
-        ASTIdent[] args = {new ASTIdent("", T_INT, -1, -1)};
+        ASTIdent ident = new ASTIdent("WRITE", Const.T_INT, -1, -1);
+        ASTIdent[] args = {new ASTIdent("", Const.T_INT, -1, -1)};
         Function fun = new Function(ident, args, true);
         env.put(fun);
 
-        ident = new ASTIdent("READ", T_INT, -1, -1);
+        ident = new ASTIdent("READ", Const.T_INT, -1, -1);
         args = new ASTIdent[0];
         fun = new Function(ident, args, true);
         env.put(fun);
@@ -74,11 +75,11 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         /*
          * Add predefined idents TRUE/FALSE of type T_BOOLEAN
          */
-        ident = new ASTIdent("TRUE", T_BOOLEAN, -1, -1);
+        ident = new ASTIdent("TRUE", Const.T_BOOLEAN, -1, -1);
         Variable var = new Variable(ident, true);
         env.put(var);
 
-        ident = new ASTIdent("FALSE", T_BOOLEAN, -1, -1);
+        ident = new ASTIdent("FALSE", Const.T_BOOLEAN, -1, -1);
         var = new Variable(ident, true);
         env.put(var);
     }
@@ -94,7 +95,8 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         /*
          * private static BufferedReader _in;
          */
-        classGen.addField(new Field(ACC_PRIVATE | ACC_STATIC, cp.addUtf8("_in"), cp.addUtf8("Ljava/io/BufferedReader;"), null, cp.getConstantPool()));
+        classGen.addField(
+                new Field(Const.ACC_PRIVATE | Const.ACC_STATIC, cp.addUtf8("_in"), cp.addUtf8("Ljava/io/BufferedReader;"), null, cp.getConstantPool()));
 
         MethodGen method;
         InstructionList il = new InstructionList();
@@ -118,7 +120,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         /*
          * private static int _readInt() throws IOException
          */
-        method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, Type.NO_ARGS, null, "_readInt", className, il, cp);
+        method = new MethodGen(Const.ACC_STATIC | Const.ACC_PRIVATE | Const.ACC_FINAL, Type.INT, Type.NO_ARGS, null, "_readInt", className, il, cp);
 
         method.addException("java.io.IOException");
 
@@ -146,7 +148,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il.append(new PUSH(cp, 0));
         il.append(InstructionConst.IRETURN); // Reuse objects, if possible
 
-        method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, args, argv, "_writeInt", className, il, cp);
+        method = new MethodGen(Const.ACC_STATIC | Const.ACC_PRIVATE | Const.ACC_FINAL, Type.INT, args, argv, "_writeInt", className, il, cp);
 
         method.setMaxStack(4);
         classGen.addMethod(method.getMethod());
@@ -161,7 +163,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il.append(new INVOKESPECIAL(cp.addMethodref("java.lang.Object", "<init>", "()V")));
         il.append(new RETURN());
 
-        method = new MethodGen(ACC_PUBLIC, Type.VOID, Type.NO_ARGS, null, "<init>", className, il, cp);
+        method = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, null, "<init>", className, il, cp);
 
         method.setMaxStack(1);
         classGen.addMethod(method.getMethod());
@@ -181,7 +183,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il.append(new PUTSTATIC(_in));
         il.append(InstructionConst.RETURN); // Reuse instruction constants
 
-        method = new MethodGen(ACC_STATIC, Type.VOID, Type.NO_ARGS, null, "<clinit>", className, il, cp);
+        method = new MethodGen(Const.ACC_STATIC, Type.VOID, Type.NO_ARGS, null, "<clinit>", className, il, cp);
 
         method.setMaxStack(5);
         classGen.addMethod(method.getMethod());
@@ -246,7 +248,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
             if (pass == 3) { // Final check for unresolved types
                 final ASTIdent name = fun_decl.getName();
 
-                if (name.getType() == T_UNKNOWN) {
+                if (name.getType() == Const.T_UNKNOWN) {
                     MiniC.addError(name.getColumn(), name.getLine(), "Type of function " + name.getName() + " can not be determined (infinite recursion?).");
                 }
             }

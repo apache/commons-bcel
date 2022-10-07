@@ -20,6 +20,7 @@
 
 package Mini;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
@@ -72,7 +73,7 @@ public class ASTInteger extends ASTExpr {
     public int eval(final int expected) {
         is_simple = true; // (Very) simple expression, always true
 
-        return type = T_INT;
+        return type = Const.T_INT;
     }
 
     int getValue() {

@@ -20,6 +20,8 @@
 
 package Mini;
 
+import org.apache.bcel.Const;
+import org.apache.bcel.Constants;
 import org.apache.bcel.generic.BranchHandle;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.GOTO;
@@ -44,7 +46,7 @@ import org.apache.bcel.generic.PUSH;
  * build the parse tree obeying the aritmetical precedences (* stronger than +, etc.) and are discarded in the first
  * pass.
  */
-public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniParserTreeConstants, org.apache.bcel.Constants {
+public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniParserTreeConstants {
     public static Node jjtCreate(final MiniParser p, final int id) {
         return new ASTExpr(p, id);
     }
@@ -71,7 +73,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
      * Not all children shall inherit this, exceptions are ASTIdent and ASTFunAppl, which look up the type in the
      * corresponding environment entry.
      */
-    protected int type = T_UNKNOWN;
+    protected int type = Const.T_UNKNOWN;
 
     /*
      * Special constructor, called from ASTTerm.traverse() and ASTFactor.traverse(), when traverse()ing the parse tree
@@ -295,25 +297,25 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
      * @param expected type
      */
     public int eval(final int expected) {
-        int childType = T_UNKNOWN, t;
+        int childType = Const.T_UNKNOWN, t;
 
         is_simple = true;
 
         // Determine expected node type depending on used operator.
         if (unop != -1) {
             if (unop == MINUS) {
-                childType = type = T_INT; // -
+                childType = type = Const.T_INT; // -
             } else {
-                childType = type = T_BOOLEAN; // !
+                childType = type = Const.T_BOOLEAN; // !
             }
         } else // Compute expected type
         if (kind == PLUS || kind == MINUS || kind == MULT || kind == MOD || kind == DIV) {
-            childType = type = T_INT;
+            childType = type = Const.T_INT;
         } else if (kind == AND || kind == OR) {
-            childType = type = T_BOOLEAN;
+            childType = type = Const.T_BOOLEAN;
         } else { // LEQ, GT, etc.
-            childType = T_INT;
-            type = T_BOOLEAN;
+            childType = Const.T_INT;
+            type = Const.T_BOOLEAN;
         }
 
         // Get type of subexpressions
@@ -321,7 +323,8 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
             t = expr.eval(childType);
 
             if (t != childType) {
-                MiniC.addError(expr.getLine(), expr.getColumn(), "Expression has not expected type " + TYPE_NAMES[childType] + " but " + TYPE_NAMES[t] + ".");
+                MiniC.addError(expr.getLine(), expr.getColumn(),
+                        "Expression has not expected type " + Constants.TYPE_NAMES[childType] + " but " + Constants.TYPE_NAMES[t] + ".");
             }
 
             is_simple = is_simple && expr.isSimple();
@@ -392,7 +395,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
             op = tokenImage[kind];
         }
 
-        return jjtNodeName[id] + "(" + op + ")[" + len + "]<" + TYPE_NAMES[type] + "> @" + line + ", " + column;
+        return jjtNodeName[id] + "(" + op + ")[" + len + "]<" + Constants.TYPE_NAMES[type] + "> @" + line + ", " + column;
     }
 
     /**

@@ -19,7 +19,7 @@
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import org.apache.bcel.Constants;
+import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.ConstantCP;
@@ -178,7 +178,7 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
         final String className = ccp.getClass(cp);
         add(className);
 
-        final ConstantNameAndType cnat = cp.getConstant(ccp.getNameAndTypeIndex(), Constants.CONSTANT_NameAndType, ConstantNameAndType.class);
+        final ConstantNameAndType cnat = cp.getConstant(ccp.getNameAndTypeIndex(), Const.CONSTANT_NameAndType, ConstantNameAndType.class);
 
         final String signature = cnat.getSignature(cp);
 

@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.bcel.Constants;
+import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Code;
@@ -102,7 +102,7 @@ public class listclass {
 
         for (int idx = 0; idx < pool.getLength(); idx++) {
             final Constant c = pool.getConstant(idx);
-            if (c != null && c.getTag() == Constants.CONSTANT_Class) {
+            if (c != null && c.getTag() == Const.CONSTANT_Class) {
                 final ConstantUtf8 c1 = (ConstantUtf8) pool.getConstant(((ConstantClass) c).getNameIndex());
                 buf.setLength(0);
                 buf.append(c1.getBytes());

@@ -23,6 +23,8 @@ package Mini;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
+import org.apache.bcel.Const;
+import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ALOAD;
 import org.apache.bcel.generic.ASTORE;
 import org.apache.bcel.generic.ArrayType;
@@ -47,7 +49,7 @@ import org.apache.bcel.util.InstructionFinder;
 /**
  *
  */
-public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, org.apache.bcel.Constants {
+public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
     private static final InstructionFinder.CodeConstraint my_constraint = match -> {
         final BranchInstruction if_icmp = (BranchInstruction) match[0].getInstruction();
         final GOTO goto_ = (GOTO) match[2].getInstruction();
@@ -162,7 +164,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
 
     private ASTExpr body;
 
-    private int type = T_UNKNOWN;
+    private int type = Const.T_UNKNOWN;
 
     private int line, column;
 
@@ -205,7 +207,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
         String[] arg_names = {"$argv"};
 
         if (fname.equals("main")) {
-            method = new MethodGen(ACC_STATIC | ACC_PUBLIC, Type.VOID, args, arg_names, "main", className, il, cp);
+            method = new MethodGen(Const.ACC_STATIC | Const.ACC_PUBLIC, Type.VOID, args, arg_names, "main", className, il, cp);
 
             main = true;
         } else if (fname.equals("READ") || fname.equals("WRITE")) { // Do nothing
@@ -221,7 +223,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
                 arg_names[i] = argv[i].getName();
             }
 
-            method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, args, arg_names, fname, className, il, cp);
+            method = new MethodGen(Const.ACC_STATIC | Const.ACC_PRIVATE | Const.ACC_FINAL, Type.INT, args, arg_names, fname, className, il, cp);
 
             final LocalVariableGen[] lv = method.getLocalVariables();
             for (int i = 0; i < size; i++) {
@@ -364,15 +366,16 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
         final int expected = name.getType(); // Maybe other function has already called us
         type = body.eval(expected); // And updated the env
 
-        if (expected != T_UNKNOWN && type != expected) {
-            MiniC.addError(line, column, "Function f ist not of type " + TYPE_NAMES[expected] + " as previously assumed, but " + TYPE_NAMES[type]);
+        if (expected != Const.T_UNKNOWN && type != expected) {
+            MiniC.addError(line, column,
+                    "Function f ist not of type " + Constants.TYPE_NAMES[expected] + " as previously assumed, but " + Constants.TYPE_NAMES[type]);
         }
 
         name.setType(type);
 
         is_simple = body.isSimple();
 
-        if (pass == 2 && type == T_UNKNOWN) {
+        if (pass == 2 && type == Const.T_UNKNOWN) {
             is_recursive = true;
         }
 

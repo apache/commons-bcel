@@ -18,15 +18,17 @@
 package Mini;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 
-public class MiniC implements org.apache.bcel.Constants {
+public class MiniC {
     private static Vector<String> errors = null;
     private static Vector<String> warnings = null;
     private static String file = null;
@@ -97,9 +99,9 @@ public class MiniC implements org.apache.bcel.Constants {
                 pass = 0;
 
                 if (j == 0) {
-                    parser = new MiniParser(new java.io.FileInputStream(file_name[0]));
+                    parser = new MiniParser(new FileInputStream(file_name[0]));
                 } else {
-                    MiniParser.ReInit(new java.io.FileInputStream(file_name[j]));
+                    MiniParser.ReInit(new FileInputStream(file_name[j]));
                 }
 
                 int index = file_name[j].lastIndexOf('.');
@@ -141,7 +143,8 @@ public class MiniC implements org.apache.bcel.Constants {
                 if (errors.isEmpty()) {
                     if (byte_code) {
                         System.out.println("Pass 5: Generating byte code ...");
-                        final ClassGen class_gen = new ClassGen(base_name, "java.lang.Object", file_name[j], ACC_PUBLIC | ACC_FINAL | ACC_SUPER, null);
+                        final ClassGen class_gen = new ClassGen(base_name, "java.lang.Object", file_name[j],
+                                Const.ACC_PUBLIC | Const.ACC_FINAL | Const.ACC_SUPER, null);
                         final ConstantPoolGen cp = class_gen.getConstantPool();
 
                         program.byte_code(class_gen, cp);
