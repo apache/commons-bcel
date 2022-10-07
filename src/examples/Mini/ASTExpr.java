@@ -21,7 +21,6 @@
 package Mini;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.Constants;
 import org.apache.bcel.generic.BranchHandle;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.GOTO;
@@ -324,7 +323,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
 
             if (t != childType) {
                 MiniC.addError(expr.getLine(), expr.getColumn(),
-                        "Expression has not expected type " + Constants.TYPE_NAMES[childType] + " but " + Constants.TYPE_NAMES[t] + ".");
+                        "Expression has not expected type " + Const.getTypeName(childType) + " but " + Const.getTypeName(t) + ".");
             }
 
             is_simple = is_simple && expr.isSimple();
@@ -395,7 +394,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
             op = tokenImage[kind];
         }
 
-        return jjtNodeName[id] + "(" + op + ")[" + len + "]<" + Constants.TYPE_NAMES[type] + "> @" + line + ", " + column;
+        return jjtNodeName[id] + "(" + op + ")[" + len + "]<" + Const.getTypeName(type) + "> @" + line + ", " + column;
     }
 
     /**

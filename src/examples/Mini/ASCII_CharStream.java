@@ -22,9 +22,8 @@ import java.io.IOException;
 
 /**
  * An implementation of interface CharStream, where the stream is assumed to contain only ASCII characters (without
- * unicode processing).
+ * Unicode processing).
  */
-
 public final class ASCII_CharStream {
     public static final boolean staticFlag = true;
     static int bufsize;

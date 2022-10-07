@@ -24,7 +24,6 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ALOAD;
 import org.apache.bcel.generic.ASTORE;
 import org.apache.bcel.generic.ArrayType;
@@ -368,7 +367,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
 
         if (expected != Const.T_UNKNOWN && type != expected) {
             MiniC.addError(line, column,
-                    "Function f ist not of type " + Constants.TYPE_NAMES[expected] + " as previously assumed, but " + Constants.TYPE_NAMES[type]);
+                    "Function f ist not of type " + Const.getTypeName(expected) + " as previously assumed, but " + Const.getTypeName(type));
         }
 
         name.setType(type);

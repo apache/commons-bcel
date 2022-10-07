@@ -16,7 +16,6 @@
  *
  */
 
-import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.ConstantClass;
@@ -39,7 +38,7 @@ import org.apache.bcel.generic.PUSH;
  * anything else.
  *
  */
-public final class helloify implements Constants {
+public final class helloify {
 
     private static String className;
     private static ConstantPoolGen cp;

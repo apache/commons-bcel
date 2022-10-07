@@ -21,7 +21,6 @@
 package Mini;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.Constants;
 import org.apache.bcel.generic.BasicType;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.ISTORE;
@@ -122,7 +121,7 @@ public class ASTLetExpr extends ASTExpr {
              */
             exprs[i].code(buf);
 
-            buf.append("    " + Constants.TYPE_NAMES[t] + " " + ident + " = " + ASTFunDecl.pop() + ";\n");
+            buf.append("    " + Const.getTypeName(t) + " " + ident + " = " + ASTFunDecl.pop() + ";\n");
         }
 
         body.code(buf);

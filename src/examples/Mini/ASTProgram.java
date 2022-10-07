@@ -42,8 +42,7 @@ import org.apache.bcel.generic.RETURN;
 import org.apache.bcel.generic.Type;
 
 /**
- * Root node of everything, direct children are nodes of type FunDecl
- *
+ * Root node of everything, direct children are nodes of type FunDecl.
  */
 public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniParserTreeConstants {
     public static Node jjtCreate(final MiniParser p, final int id) {

@@ -19,9 +19,8 @@ package Mini;
 
 /**
  * Represents a function declaration and its arguments. Type information is contained in the ASTIdent fields.
- *
  */
-public class Function implements org.apache.bcel.Constants, EnvEntry {
+public class Function implements EnvEntry {
     private final ASTIdent name; // Reference to the original declaration
     private ASTIdent[] args; // Reference to argument identifiers
 //  private ASTExpr    body;         // Reference to function expression body

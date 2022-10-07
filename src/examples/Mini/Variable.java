@@ -21,7 +21,6 @@ import org.apache.bcel.generic.LocalVariableGen;
 
 /**
  * Represents a variable declared in a LET expression or a FUN declaration.
- *
  */
 public class Variable implements EnvEntry {
     private final ASTIdent name; // Reference to the original declaration

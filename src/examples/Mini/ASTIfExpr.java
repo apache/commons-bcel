@@ -21,7 +21,6 @@
 package Mini;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.Constants;
 import org.apache.bcel.generic.BranchHandle;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.GOTO;
@@ -127,14 +126,14 @@ public class ASTIfExpr extends ASTExpr {
         int thenType, elseType, ifType;
 
         if ((ifType = if_expr.eval(Const.T_BOOLEAN)) != Const.T_BOOLEAN) {
-            MiniC.addError(if_expr.getLine(), if_expr.getColumn(), "IF expression is not of type boolean, but " + Constants.TYPE_NAMES[ifType] + ".");
+            MiniC.addError(if_expr.getLine(), if_expr.getColumn(), "IF expression is not of type boolean, but " + Const.getTypeName(ifType) + ".");
         }
 
         thenType = then_expr.eval(expected);
 
         if (expected != Const.T_UNKNOWN && thenType != expected) {
             MiniC.addError(then_expr.getLine(), then_expr.getColumn(),
-                    "THEN expression is not of expected type " + Constants.TYPE_NAMES[expected] + " but " + Constants.TYPE_NAMES[thenType] + ".");
+                    "THEN expression is not of expected type " + Const.getTypeName(expected) + " but " + Const.getTypeName(thenType) + ".");
         }
 
         if (else_expr != null) {
@@ -142,7 +141,7 @@ public class ASTIfExpr extends ASTExpr {
 
             if (expected != Const.T_UNKNOWN && elseType != expected) {
                 MiniC.addError(else_expr.getLine(), else_expr.getColumn(),
-                        "ELSE expression is not of expected type " + Constants.TYPE_NAMES[expected] + " but " + Constants.TYPE_NAMES[elseType] + ".");
+                        "ELSE expression is not of expected type " + Const.getTypeName(expected) + " but " + Const.getTypeName(elseType) + ".");
             } else if (thenType == Const.T_UNKNOWN) {
                 thenType = elseType;
                 then_expr.setType(elseType);
@@ -153,7 +152,7 @@ public class ASTIfExpr extends ASTExpr {
         }
 
         if (thenType != elseType) {
-            MiniC.addError(line, column, "Type mismatch in THEN-ELSE: " + Constants.TYPE_NAMES[thenType] + " vs. " + Constants.TYPE_NAMES[elseType] + ".");
+            MiniC.addError(line, column, "Type mismatch in THEN-ELSE: " + Const.getTypeName(thenType) + " vs. " + Const.getTypeName(elseType) + ".");
         }
 
         type = thenType;

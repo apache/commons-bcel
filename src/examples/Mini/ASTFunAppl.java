@@ -21,7 +21,6 @@
 package Mini;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.INVOKESTATIC;
 import org.apache.bcel.generic.InstructionList;
@@ -175,7 +174,7 @@ public class ASTFunAppl extends ASTExpr {
 
                 if (expect != Const.T_UNKNOWN && t_e != expect) {
                     MiniC.addError(exprs[i].getLine(), exprs[i].getColumn(), "Argument " + (i + 1) + " in application of " + fname + " is not of type "
-                            + Constants.TYPE_NAMES[expect] + " but " + Constants.TYPE_NAMES[t_e]);
+                            + Const.getTypeName(expect) + " but " + Const.getTypeName(t_e));
                 } else {
                     args[i].setType(t_e); // Update, may be identical
                 }

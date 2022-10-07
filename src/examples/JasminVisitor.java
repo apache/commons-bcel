@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
 
-import org.apache.bcel.Constants;
+import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassParser;
@@ -241,7 +241,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
                     final BranchInstruction bi = (BranchInstruction) inst;
                     ih = bi.getTarget();
                     str = get(ih);
-                    out.println("\t" + Constants.OPCODE_NAMES[bi.getOpcode()] + " " + str);
+                    out.println("\t" + Const.getOpcodeName(bi.getOpcode()) + " " + str);
                 }
             } else {
                 out.println("\t" + inst.toString(cp.getConstantPool()));
