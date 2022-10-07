@@ -26,7 +26,7 @@ public class TokenMgrError extends Error {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Lexical error occured.
+     * Lexical error occurred.
      */
     static final int LEXICAL_ERROR = 0;
 
@@ -95,8 +95,8 @@ public class TokenMgrError extends Error {
     /**
      * Returns a detailed message for the Error when it is thrown by the token manager to indicate a lexical error.
      * Parameters : EOFSeen : indicates if EOF caused the lexicl error curLexState : lexical state in which this error
-     * occured errorLine : line number when the error occured errorColumn : column number when the error occured errorAfter
-     * : prefix that was seen before this error occured curchar : the offending character Note: You can customize the
+     * occurred errorLine : line number when the error occurred errorColumn : column number when the error occurred errorAfter
+     * : prefix that was seen before this error occurred curchar : the offending character Note: You can customize the
      * lexical error message by modifying this method.
      */
     private static String LexicalError(final boolean EOFSeen, final int lexState, final int errorLine, final int errorColumn, final String errorAfter,

@@ -121,7 +121,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /**
      * This method is called by the visitXXX() to notify the acceptor of this InstConstraintVisitor that a constraint
-     * violation has occured. This is done by throwing an instance of a StructuralCodeConstraintException.
+     * violation has occurred. This is done by throwing an instance of a StructuralCodeConstraintException.
      *
      * @throws StructuralCodeConstraintException always.
      */

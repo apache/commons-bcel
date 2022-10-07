@@ -396,7 +396,7 @@ public final class Pass3bVerifier extends PassVerifier {
             final PrintWriter pw = new PrintWriter(sw);
             re.printStackTrace(pw);
 
-            throw new AssertionViolatedException("Some RuntimeException occured while verify()ing class '" + jc.getClassName() + "', method '"
+            throw new AssertionViolatedException("Some RuntimeException occurred while verify()ing class '" + jc.getClassName() + "', method '"
                 + methods[methodNo] + "'. Original RuntimeException's stack trace:\n---\n" + sw + "---\n", re);
         }
         return VerificationResult.VR_OK;
