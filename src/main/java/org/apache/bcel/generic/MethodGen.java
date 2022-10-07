@@ -801,10 +801,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         /*
          * Also updates positions of instructions, i.e., their indices
          */
-        byte[] byteCode = null;
-        if (il != null) {
-            byteCode = il.getByteCode();
-        }
+        byte[] byteCode = il != null ? il.getByteCode() : null;
         LineNumberTable lnt = null;
         LocalVariableTable lvt = null;
         /*
@@ -836,7 +833,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         final CodeException[] cExc = getCodeExceptions();
         final int exc_len = cExc.length * 8; // Every entry takes 8 bytes
         Code code = null;
-        if (il != null && !isAbstract() && !isNative()) {
+        if (byteCode != null && !isAbstract() && !isNative()) {
             // Remove any stale code attribute
             final Attribute[] attributes = getAttributes();
             for (final Attribute a : attributes) {
