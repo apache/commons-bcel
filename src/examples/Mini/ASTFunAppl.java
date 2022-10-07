@@ -29,7 +29,7 @@ import org.apache.bcel.generic.Type;
 /**
  *
  */
-public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants, org.apache.bcel.Constants {
+public class ASTFunAppl extends ASTExpr implements MiniParserTreeConstants {
     public static Node jjtCreate(final MiniParser p, final int id) {
         return new ASTFunAppl(p, id);
     }
