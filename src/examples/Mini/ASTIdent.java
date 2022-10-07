@@ -30,7 +30,7 @@ import org.apache.bcel.generic.PUSH;
 /**
  *
  */
-public class ASTIdent extends ASTExpr implements org.apache.bcel.Constants {
+public class ASTIdent extends ASTExpr {
     public static Node jjtCreate(final MiniParser p, final int id) {
         return new ASTIdent(p, id);
     }

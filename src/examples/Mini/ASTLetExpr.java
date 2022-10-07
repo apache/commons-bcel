@@ -32,7 +32,7 @@ import org.apache.bcel.generic.Type;
 /**
  *
  */
-public class ASTLetExpr extends ASTExpr implements org.apache.bcel.Constants {
+public class ASTLetExpr extends ASTExpr {
     public static Node jjtCreate(final MiniParser p, final int id) {
         return new ASTLetExpr(p, id);
     }

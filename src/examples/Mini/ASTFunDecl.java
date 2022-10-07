@@ -33,7 +33,7 @@ import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.GETSTATIC;
 import org.apache.bcel.generic.GOTO;
 import org.apache.bcel.generic.INVOKEVIRTUAL;
-import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.InstructionTargeter;
@@ -242,9 +242,9 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
                 final LocalVariableGen exc = method.addLocalVariable("$e", eType, null, null);
                 final int slot = exc.getIndex();
 
-                il.append(InstructionConstants.POP);
+                il.append(InstructionConst.POP);
                 pop(); // Remove last element on stack
-                end = il.append(InstructionConstants.RETURN); // Use instruction constants, if possible
+                end = il.append(InstructionConst.RETURN); // Use instruction constants, if possible
 
                 // catch
                 handler = il.append(new ASTORE(slot)); // save exception object
@@ -253,12 +253,12 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants, o
                 push(2);
                 il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/Object;)V")));
                 pop(2);
-                end_handler = il.append(InstructionConstants.RETURN);
+                end_handler = il.append(InstructionConst.RETURN);
                 method.addExceptionHandler(start, end, handler, eType);
                 exc.setStart(handler);
                 exc.setEnd(end_handler);
             } else {
-                il.append(InstructionConstants.IRETURN); // Reuse object to save memory
+                il.append(InstructionConst.IRETURN); // Reuse object to save memory
             }
 
             method.removeNOPs(); // First optimization pass, provided by MethodGen

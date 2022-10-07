@@ -29,7 +29,7 @@ import org.apache.bcel.generic.IF_ICMPGT;
 import org.apache.bcel.generic.IF_ICMPLE;
 import org.apache.bcel.generic.IF_ICMPLT;
 import org.apache.bcel.generic.IF_ICMPNE;
-import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.PUSH;
@@ -110,11 +110,11 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
 
         if (unop != -1) { // Apply unary operand
             if (unop == MINUS) {
-                il.append(InstructionConstants.INEG);
+                il.append(InstructionConst.INEG);
             } else { // == NOT
                 il.append(new PUSH(cp, 1));
                 ASTFunDecl.push(); // Push TRUE
-                il.append(InstructionConstants.IXOR);
+                il.append(InstructionConst.IXOR);
                 ASTFunDecl.pop();
             }
         } else { // Apply binary operand
@@ -124,27 +124,27 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
 
             switch (kind) {
             case PLUS:
-                il.append(InstructionConstants.IADD);
+                il.append(InstructionConst.IADD);
                 ASTFunDecl.pop();
                 break;
             case MINUS:
-                il.append(InstructionConstants.ISUB);
+                il.append(InstructionConst.ISUB);
                 ASTFunDecl.pop();
                 break;
             case MULT:
-                il.append(InstructionConstants.IMUL);
+                il.append(InstructionConst.IMUL);
                 ASTFunDecl.pop();
                 break;
             case DIV:
-                il.append(InstructionConstants.IDIV);
+                il.append(InstructionConst.IDIV);
                 ASTFunDecl.pop();
                 break;
             case AND:
-                il.append(InstructionConstants.IAND);
+                il.append(InstructionConst.IAND);
                 ASTFunDecl.pop();
                 break;
             case OR:
-                il.append(InstructionConstants.IOR);
+                il.append(InstructionConst.IOR);
                 ASTFunDecl.pop();
                 break;
 
@@ -189,7 +189,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
                 il.append(new PUSH(cp, 1));
                 g = il.append(new GOTO(null));
                 bh.setTarget(il.append(new PUSH(cp, 0)));
-                g.setTarget(il.append(InstructionConstants.NOP)); // May be optimized away later
+                g.setTarget(il.append(InstructionConst.NOP)); // May be optimized away later
                 ASTFunDecl.push();
                 break;
 

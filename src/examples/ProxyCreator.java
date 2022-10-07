@@ -19,14 +19,14 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import org.apache.bcel.Constants;
+import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.ALOAD;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.GETSTATIC;
 import org.apache.bcel.generic.INVOKEVIRTUAL;
-import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
@@ -79,10 +79,10 @@ public class ProxyCreator {
         // TODO this is broken; cannot ever be true now that ClassLoader has been dropped
         if (loader.getClass().toString().equals("class org.apache.bcel.util.ClassLoader")) {
             // Real class name will be set by the class loader
-            final ClassGen cg = new ClassGen("foo", "java.lang.Object", "", Constants.ACC_PUBLIC, new String[] {"java.awt.event.ActionListener"});
+            final ClassGen cg = new ClassGen("foo", "java.lang.Object", "", Const.ACC_PUBLIC, new String[] {"java.awt.event.ActionListener"});
 
             // That's important, otherwise newInstance() won't work
-            cg.addEmptyConstructor(Constants.ACC_PUBLIC);
+            cg.addEmptyConstructor(Const.ACC_PUBLIC);
 
             final InstructionList il = new InstructionList();
             final ConstantPoolGen cp = cg.getConstantPool();
@@ -90,20 +90,20 @@ public class ProxyCreator {
 
             final int out = cp.addFieldref("java.lang.System", "out", "Ljava/io/PrintStream;");
             final int println = cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/Object;)V");
-            final MethodGen mg = new MethodGen(Constants.ACC_PUBLIC, Type.VOID, new Type[] {new ObjectType("java.awt.event.ActionEvent")}, null,
+            final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.VOID, new Type[] {new ObjectType("java.awt.event.ActionEvent")}, null,
                 "actionPerformed", "foo", il, cp);
 
             // System.out.println("actionPerformed:" + event);
             il.append(new GETSTATIC(out));
             il.append(factory.createNew("java.lang.StringBuffer"));
-            il.append(InstructionConstants.DUP);
+            il.append(InstructionConst.DUP);
             il.append(new PUSH(cp, "actionPerformed:"));
-            il.append(factory.createInvoke("java.lang.StringBuffer", "<init>", Type.VOID, new Type[] {Type.STRING}, Constants.INVOKESPECIAL));
+            il.append(factory.createInvoke("java.lang.StringBuffer", "<init>", Type.VOID, new Type[] {Type.STRING}, Const.INVOKESPECIAL));
 
             il.append(new ALOAD(1));
             il.append(factory.createAppend(Type.OBJECT));
             il.append(new INVOKEVIRTUAL(println));
-            il.append(InstructionConstants.RETURN);
+            il.append(InstructionConst.RETURN);
 
             mg.stripAttributes(true);
             mg.setMaxStack();

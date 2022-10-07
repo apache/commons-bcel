@@ -24,14 +24,14 @@ import org.apache.bcel.generic.BranchHandle;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.GOTO;
 import org.apache.bcel.generic.IFEQ;
-import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 
 /**
  *
  */
-public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
+public class ASTIfExpr extends ASTExpr {
     public static Node jjtCreate(final MiniParser p, final int id) {
         return new ASTIfExpr(p, id);
     }
@@ -67,7 +67,7 @@ public class ASTIfExpr extends ASTExpr implements org.apache.bcel.Constants {
         il.append(then_code);
         g = il.append(new GOTO(null));
         i.setTarget(il.append(else_code));
-        g.setTarget(il.append(InstructionConstants.NOP)); // May be optimized away later
+        g.setTarget(il.append(InstructionConst.NOP)); // May be optimized away later
     }
 
     /**

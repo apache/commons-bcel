@@ -31,7 +31,7 @@ import org.apache.bcel.generic.ILOAD;
 import org.apache.bcel.generic.INVOKESPECIAL;
 import org.apache.bcel.generic.INVOKESTATIC;
 import org.apache.bcel.generic.INVOKEVIRTUAL;
-import org.apache.bcel.generic.InstructionConstants;
+import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.NEW;
@@ -113,7 +113,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il.append(new GETSTATIC(_in));
         il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.BufferedReader", "readLine", "()Ljava/lang/String;")));
         il.append(new INVOKESTATIC(cp.addMethodref("java.lang.Integer", "parseInt", "(Ljava/lang/String;)I")));
-        il.append(InstructionConstants.IRETURN);
+        il.append(InstructionConst.IRETURN);
 
         /*
          * private static int _readInt() throws IOException
@@ -133,7 +133,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il = new InstructionList();
         il.append(new GETSTATIC(out));
         il.append(new NEW(cp.addClass("java.lang.StringBuffer")));
-        il.append(InstructionConstants.DUP);
+        il.append(InstructionConst.DUP);
         il.append(new PUSH(cp, "Result: "));
         il.append(new INVOKESPECIAL(cp.addMethodref("java.lang.StringBuffer", "<init>", "(Ljava/lang/String;)V")));
 
@@ -144,7 +144,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
 
         il.append(new INVOKEVIRTUAL(cp.addMethodref("java.io.PrintStream", "println", "(Ljava/lang/String;)V")));
         il.append(new PUSH(cp, 0));
-        il.append(InstructionConstants.IRETURN); // Reuse objects, if possible
+        il.append(InstructionConst.IRETURN); // Reuse objects, if possible
 
         method = new MethodGen(ACC_STATIC | ACC_PRIVATE | ACC_FINAL, Type.INT, args, argv, "_writeInt", className, il, cp);
 
@@ -172,14 +172,14 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il.dispose(); // Dispose instruction handles for better memory utilization
         il = new InstructionList();
         il.append(new NEW(cp.addClass("java.io.BufferedReader")));
-        il.append(InstructionConstants.DUP);
+        il.append(InstructionConst.DUP);
         il.append(new NEW(cp.addClass("java.io.InputStreamReader")));
-        il.append(InstructionConstants.DUP);
+        il.append(InstructionConst.DUP);
         il.append(new GETSTATIC(cp.addFieldref("java.lang.System", "in", "Ljava/io/InputStream;")));
         il.append(new INVOKESPECIAL(cp.addMethodref("java.io.InputStreamReader", "<init>", "(Ljava/io/InputStream;)V")));
         il.append(new INVOKESPECIAL(cp.addMethodref("java.io.BufferedReader", "<init>", "(Ljava/io/Reader;)V")));
         il.append(new PUTSTATIC(_in));
-        il.append(InstructionConstants.RETURN); // Reuse instruction constants
+        il.append(InstructionConst.RETURN); // Reuse instruction constants
 
         method = new MethodGen(ACC_STATIC, Type.VOID, Type.NO_ARGS, null, "<clinit>", className, il, cp);
 
