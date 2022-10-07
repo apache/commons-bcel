@@ -70,8 +70,7 @@ public class JavaWrapper {
         final String className = argv[0];
         final String[] newArgv = new String[argv.length - 1];
         System.arraycopy(argv, 1, newArgv, 0, newArgv.length);
-        final JavaWrapper wrapper = new JavaWrapper();
-        wrapper.runMain(className, newArgv);
+        new JavaWrapper().runMain(className, newArgv);
     }
 
     private final java.lang.ClassLoader loader;
