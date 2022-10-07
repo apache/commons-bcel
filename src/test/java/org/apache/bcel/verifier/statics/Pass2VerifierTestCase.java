@@ -17,6 +17,7 @@
 
 package org.apache.bcel.verifier.statics;
 
+import org.apache.bcel.Constants;
 import org.junit.jupiter.api.Test;
 
 public class Pass2VerifierTestCase {
@@ -27,6 +28,6 @@ public class Pass2VerifierTestCase {
     @Test
     public void testReferenceToConstant() {
         @SuppressWarnings("unused")
-        final short referenceToConstant = Pass2Verifier.AALOAD;
+        final short referenceToConstant = Constants.AALOAD;
     }
 }

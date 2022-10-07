@@ -17,6 +17,7 @@
  */
 package org.apache.bcel.classfile;
 
+import org.apache.bcel.Constants;
 import org.junit.jupiter.api.Test;
 
 public class CodeExceptionTestCase {
@@ -27,6 +28,6 @@ public class CodeExceptionTestCase {
     @Test
     public void testReferenceToConstant() {
         @SuppressWarnings("unused")
-        final short referenceToConstant = CodeException.AALOAD;
+        final short referenceToConstant = Constants.AALOAD;
     }
 }
