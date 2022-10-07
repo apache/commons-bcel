@@ -149,13 +149,13 @@ public class MiniC implements org.apache.bcel.Constants {
                         clazz.dump(base_name + ".class");
                     } else {
                         System.out.println("Pass 5: Generating Java code ...");
-                        final PrintWriter out = new PrintWriter(new FileOutputStream(base_name + ".java"));
-                        program.code(out, base_name);
-                        out.close();
+                        try (final PrintWriter out = new PrintWriter(new FileOutputStream(base_name + ".java"))) {
+                            program.code(out, base_name);
+                        }
 
                         System.out.println("Pass 6: Compiling Java code ...");
 
-                        final String[] args = {"javac", base_name + ".java"};
+                        final String[] args = { "javac", base_name + ".java" };
                         // sun.tools.javac.Main compiler = new sun.tools.javac.Main(System.err, "javac");
                         try {
                             final Process p = Runtime.getRuntime().exec(args);

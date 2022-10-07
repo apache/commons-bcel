@@ -213,20 +213,20 @@ public class Package {
         }
 
         // create the jar
-        final JarOutputStream jarFile = new JarOutputStream(new FileOutputStream(defaultJar));
-        jarFile.setLevel(5); // use compression
-        int written = 0;
-        for (final String name : allClasses.keySet()) { // add entries for every class
-            final JavaClass claz = allClasses.get(name);
-            final ZipEntry zipEntry = new ZipEntry(name + ".class");
-            final byte[] bytes = claz.getBytes();
-            final int length = bytes.length;
-            jarFile.putNextEntry(zipEntry);
-            jarFile.write(bytes, 0, length);
-            written += length; // for logging
+        try (final JarOutputStream jarFile = new JarOutputStream(new FileOutputStream(defaultJar))) {
+            jarFile.setLevel(5); // use compression
+            int written = 0;
+            for (final String name : allClasses.keySet()) { // add entries for every class
+                final JavaClass claz = allClasses.get(name);
+                final ZipEntry zipEntry = new ZipEntry(name + ".class");
+                final byte[] bytes = claz.getBytes();
+                final int length = bytes.length;
+                jarFile.putNextEntry(zipEntry);
+                jarFile.write(bytes, 0, length);
+                written += length; // for logging
+            }
+            System.err.println("The jar file contains " + allClasses.size() + " classes and contains " + written + " bytes");
         }
-        jarFile.close();
-        System.err.println("The jar file contains " + allClasses.size() + " classes and contains " + written + " bytes");
 
         if (!notFound.isEmpty()) {
             System.err.println(notFound.size() + " classes could not be found");

@@ -80,9 +80,10 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
             }
 
             final String name = path + className + ".j";
-            final FileOutputStream out = new FileOutputStream(name);
-            new JasminVisitor(java_class, out).disassemble();
-            System.out.println("File dumped to: " + name);
+            try (final FileOutputStream out = new FileOutputStream(name)) {
+                new JasminVisitor(java_class, out).disassemble();
+                System.out.println("File dumped to: " + name);
+            }
         }
     }
 
