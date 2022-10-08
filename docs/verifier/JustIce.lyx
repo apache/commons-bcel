@@ -12029,7 +12029,7 @@ In the Modula-2 programming language
 
 \end_inset 
 
-, this principle is implicitely used, too.
+, this principle is implicitly used, too.
  Basically this is achieved by defining interfaces that only describe what
  the code of a program module does.
  These interface 

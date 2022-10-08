@@ -204,7 +204,7 @@ public final class ClassParser {
     private void readClassInfo() throws IOException, ClassFormatException {
         accessFlags = dataInputStream.readUnsignedShort();
         /*
-         * Interfaces are implicitely abstract, the flag should be set according to the JVM specification.
+         * Interfaces are implicitly abstract, the flag should be set according to the JVM specification.
          */
         if ((accessFlags & Const.ACC_INTERFACE) != 0) {
             accessFlags |= Const.ACC_ABSTRACT;

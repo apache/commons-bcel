@@ -131,7 +131,7 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely defined by the contents of a Java class.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
