@@ -72,7 +72,7 @@
     <commons.jacoco.version>0.8.8</commons.jacoco.version>
     <commons.javadoc.version>3.4.1</commons.javadoc.version>
     <commons.felix.version>5.1.8</commons.felix.version>
-    <commons.spotbugs.plugin.version>4.7.2.0</commons.spotbugs.plugin.version>
+    <commons.spotbugs.plugin.version>4.7.2.1</commons.spotbugs.plugin.version>
     <commons.spotbugs.impl.version>4.7.2</commons.spotbugs.impl.version>    
     <commons.biz.aQute.bndlib.version>6.3.1</commons.biz.aQute.bndlib.version>
     <commons.pmd.version>3.19.0</commons.pmd.version>
