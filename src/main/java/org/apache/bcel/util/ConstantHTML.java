@@ -99,7 +99,7 @@ final class ConstantHTML {
         // The header is always the same
         printWriter.println("<H4> <A NAME=cp" + index + ">" + index + "</A> " + Const.getConstantName(tag) + "</H4>");
         /*
-         * For every constant type get the needed parameters and print them appropiately
+         * For every constant type get the needed parameters and print them appropriately
          */
         switch (tag) {
         case Const.CONSTANT_InterfaceMethodref:

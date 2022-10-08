@@ -68,7 +68,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Read an instruction from (byte code) input stream and return the appropiate object.
+     * Read an instruction from (byte code) input stream and return the appropriate object.
      * <p>
      * If the Instruction is defined in {@link InstructionConst}, then the singleton instance is returned.
      *

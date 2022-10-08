@@ -85,7 +85,7 @@ public class ASTLetExpr extends ASTExpr {
     }
 
     /**
-     * Overrides ASTExpr.closeNode() Cast children nodes to appropiate types.
+     * Overrides ASTExpr.closeNode() Cast children nodes to appropriate types.
      */
     @Override
     public void closeNode() {

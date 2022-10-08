@@ -72,7 +72,7 @@ public class ASTIfExpr extends ASTExpr {
     }
 
     /**
-     * Overrides ASTExpr.closeNode() Cast children nodes Node[] to appropiate type ASTExpr[]
+     * Overrides ASTExpr.closeNode() Cast children nodes Node[] to appropriate type ASTExpr[]
      */
     @Override
     public void closeNode() {

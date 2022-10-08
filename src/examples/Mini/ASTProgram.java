@@ -193,7 +193,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
     }
 
     /**
-     * Overrides SimpleNode.closeNode(). Cast children to appropiate type.
+     * Overrides SimpleNode.closeNode(). Cast children to appropriate type.
      */
     @Override
     public void closeNode() {
@@ -257,7 +257,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
     /**
      * First pass of parse tree.
      *
-     * Put everything into the environment, which is copied appropiately to each recursion level, i.e. each FunDecl gets its
+     * Put everything into the environment, which is copied appropriately to each recursion level, i.e. each FunDecl gets its
      * own copy that it can further manipulate.
      *
      * Checks for name clashes of function declarations.

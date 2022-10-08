@@ -274,7 +274,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
     }
 
     /**
-     * Overrides SimpleNode.closeNode() Cast children to appropiate type.
+     * Overrides SimpleNode.closeNode() Cast children to appropriate type.
      */
     @Override
     public void closeNode() {

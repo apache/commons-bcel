@@ -164,7 +164,7 @@ public class InstructionFinder {
     }
 
     /**
-     * Replace symbolic names of instructions with the appropiate character and remove all white space from string. Meta
+     * Replace symbolic names of instructions with the appropriate character and remove all white space from string. Meta
      * characters such as +, * are ignored.
      *
      * @param pattern The pattern to compile

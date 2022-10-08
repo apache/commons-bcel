@@ -30,7 +30,7 @@ import org.apache.bcel.Const;
 /**
  * Wrapper class that parses a given Java .class file. The method <A href ="#parse">parse</A> returns a
  * <A href ="JavaClass.html"> JavaClass</A> object on success. When an I/O error or an inconsistency occurs an
- * appropiate exception is propagated back to the caller.
+ * appropriate exception is propagated back to the caller.
  *
  * The structure and the names comply, except for a few conveniences, exactly with the
  * <A href="http://docs.oracle.com/javase/specs/"> JVM specification 1.0</a>. See this paper for further details about
