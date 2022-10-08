@@ -13,6 +13,8 @@ way to analyze, create, and manipulate compiled .class files. Classes are
 represented by objects containing all the symbolic information of the given
 class: methods, fields and byte code instructions.
 
+TBD.
+
 NEW FEATURES:
 =============
 
@@ -26,6 +28,16 @@ o           Make LocalVariableTable implement Iterable<LocalVariable>. Thanks to
 o           Make LocalVariableTypeTable implement Iterable<LocalVariable>. Thanks to Gary Gregory.
 o           Make MethodParameters implement Iterable<MethodParameter>. Thanks to Gary Gregory.
 o           Make ParameterAnnotations implement Iterable<ParameterAnnotationEntry>. Thanks to Gary Gregory.
+o           Add Const.MAJOR_15 Thanks to Gary Gregory.
+o           Add Const.MAJOR_16 Thanks to Gary Gregory.
+o           Add Const.MAJOR_17 Thanks to Gary Gregory.
+o           Add Const.MAJOR_18 Thanks to Gary Gregory.
+o           Add Const.MAJOR_19 Thanks to Gary Gregory.
+o           Add Const.MINOR_15 Thanks to Gary Gregory.
+o           Add Const.MINOR_16 Thanks to Gary Gregory.
+o           Add Const.MINOR_17 Thanks to Gary Gregory.
+o           Add Const.MINOR_18 Thanks to Gary Gregory.
+o           Add Const.MINOR_19 Thanks to Gary Gregory.
 
 FIXED BUGS:
 ===========
@@ -65,8 +77,8 @@ o           Fix SpotBugs [ERROR] Medium: new org.apache.bcel.util.ModularRuntime
 CHANGES:
 ========
 
-o           Bump actions/cache from 2 to 3.0.9 #88, #93, #110, #119, #149. Thanks to Dependabot, Gary Gregory.
-o           Bump actions/checkout from 2.3.1 to 3.0.2 #59, #66, #73, #108, #115. Thanks to Dependabot, Gary Gregory.
+o           Bump actions/cache from 2 to 3.0.10 #88, #93, #110, #119, #149, #154. Thanks to Dependabot, Gary Gregory.
+o           Bump actions/checkout from 2.3.1 to 3.1.0 #59, #66, #73, #108, #115, #153. Thanks to Dependabot, Gary Gregory.
 o           Bump actions/setup-java from 1.4.0 to 3.5.1 #62, #67. Thanks to Dependabot, Gary Gregory.
 o           Bump tests from Apache Commons Lang 3.10 to 3.12.0 Thanks to Gary Gregory.
 o           Bump commons-parent from 50 to 54. Thanks to Gary Gregory.
@@ -85,7 +97,7 @@ o           Bump jmh.version from 1.19 to 1.35 #92, #100, #122. Thanks to Depend
 o           Bump maven-javadoc-plugin from 3.2.0 to 3.4.1. Thanks to Gary Gregory.
 o           Bump Bump maven-bundle-plugin from 5.1.1 to 5.1.8. Thanks to Gary Gregory.
 o           Bump taglist-maven-plugin from 2.4 to 3.0.0 #114. Thanks to Dependabot.
-o           Bump spotbugs-maven-plugin from 4.5.3.0 to 4.7.2.0 #128, #132, #136, #144. Thanks to Gary Gregory, Dependabot.
+o           Bump spotbugs-maven-plugin from 4.5.3.0 to 4.7.2.1 #128, #132, #136, #144, #155. Thanks to Gary Gregory, Dependabot.
 o           Bump spotbugs from 4.5.3 to 4.7.1. Thanks to Gary Gregory.
 
 
