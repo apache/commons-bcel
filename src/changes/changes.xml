@@ -117,7 +117,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_18</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_19</action>
       <!-- UPDATES -->
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/cache from 2 to 3.0.9 #88, #93, #110, #119, #149.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/cache from 2 to 3.0.10 #88, #93, #110, #119, #149, #154.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/checkout from 2.3.1 to 3.0.2 #59, #66, #73, #108, #115.</action>      
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump actions/setup-java from 1.4.0 to 3.5.1 #62, #67.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump tests from Apache Commons Lang 3.10 to 3.12.0</action>
