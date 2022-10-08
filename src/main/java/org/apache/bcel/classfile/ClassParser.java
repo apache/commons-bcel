@@ -28,12 +28,12 @@ import java.util.zip.ZipFile;
 import org.apache.bcel.Const;
 
 /**
- * Wrapper class that parses a given Java .class file. The method <A href ="#parse">parse</A> returns a
- * <A href ="JavaClass.html"> JavaClass</A> object on success. When an I/O error or an inconsistency occurs an
+ * Wrapper class that parses a given Java .class file. The method <a href ="#parse">parse</a> returns a
+ * <a href ="JavaClass.html"> JavaClass</a> object on success. When an I/O error or an inconsistency occurs an
  * appropriate exception is propagated back to the caller.
  *
  * The structure and the names comply, except for a few conveniences, exactly with the
- * <A href="http://docs.oracle.com/javase/specs/"> JVM specification 1.0</a>. See this paper for further details about
+ * <a href="http://docs.oracle.com/javase/specs/"> JVM specification 1.0</a>. See this paper for further details about
  * the structure of a bytecode file.
  *
  */
