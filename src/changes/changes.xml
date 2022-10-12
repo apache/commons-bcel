@@ -62,7 +62,7 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.6.0" date="2020-10-08" description="Minor feature and bug fix release.">
+    <release version="6.6.0" date="2022-10-08" description="Minor feature and bug fix release.">
        <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Improve test case coverage; fix Utility.encode bug #46.</action>
       <action issue="BCEL-342" type="fix" dev="ggregory" due-to="Allon Murienik, Gary Gregory">Migrate test suite to JUnit Jupiter #68.</action>
