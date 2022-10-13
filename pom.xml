@@ -47,10 +47,10 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <commons.componentid>bcel</commons.componentid>
     <commons.module.name>org.apache.bcel</commons.module.name>
-    <commons.release.version>6.6.0</commons.release.version>
+    <commons.release.version>6.6.1</commons.release.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <commons.rc.version>RC1</commons.rc.version>
-    <commons.bc.version>6.5.0</commons.bc.version>
+    <commons.bc.version>6.6.0</commons.bc.version>
     <commons.release.desc>(Java 8)</commons.release.desc>
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
     <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
