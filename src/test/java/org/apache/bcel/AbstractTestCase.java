@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Attribute;
@@ -40,7 +41,8 @@ import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
 
 public abstract class AbstractTestCase {
-    private static final boolean verbose = false;
+
+    private static final boolean VERBOSE = false;
 
     protected static final String PACKAGE_BASE_NAME = AbstractTestCase.class.getPackage().getName();
 
@@ -106,7 +108,7 @@ public abstract class AbstractTestCase {
     protected Attribute findAttribute(final String name, final Attribute[] all) {
         final List<Attribute> chosenAttrsList = new ArrayList<>();
         for (final Attribute element : all) {
-            if (verbose) {
+            if (VERBOSE) {
                 System.err.println("Attribute: " + element.getName());
             }
             if (element.getName().equals(name)) {
@@ -118,10 +120,9 @@ public abstract class AbstractTestCase {
     }
 
     protected Attribute[] findAttribute(final String name, final JavaClass clazz) {
-        final Attribute[] all = clazz.getAttributes();
         final List<Attribute> chosenAttrsList = new ArrayList<>();
-        for (final Attribute element : all) {
-            if (verbose) {
+        for (final Attribute element : clazz.getAttributes()) {
+            if (VERBOSE) {
                 System.err.println("Attribute: " + element.getName());
             }
             if (element.getName().equals(name)) {
@@ -132,8 +133,7 @@ public abstract class AbstractTestCase {
     }
 
     protected Method getMethod(final JavaClass cl, final String methodname) {
-        final Method[] methods = cl.getMethods();
-        for (final Method m : methods) {
+        for (final Method m : cl.getMethods()) {
             if (m.getName().equals(methodname)) {
                 return m;
             }
@@ -141,7 +141,7 @@ public abstract class AbstractTestCase {
         return null;
     }
 
-    protected JavaClass getTestClass(final String name) throws ClassNotFoundException {
+    protected JavaClass getTestJavaClass(final String name) throws ClassNotFoundException {
         return SyntheticRepository.getInstance().loadClass(name);
     }
 

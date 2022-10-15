@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase {
     @Override
     protected JavaClass getTestClass() throws ClassNotFoundException {
-        return getTestClass(PACKAGE_BASE_NAME + ".data.MarkedType");
+        return getTestJavaClass(PACKAGE_BASE_NAME + ".data.MarkedType");
     }
 
     @Test

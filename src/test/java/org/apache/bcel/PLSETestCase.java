@@ -46,7 +46,7 @@ public class PLSETestCase extends AbstractTestCase {
      */
     @Test
     public void testB208() throws ClassNotFoundException {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.PLSETestClass");
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.PLSETestClass");
         final ClassGen gen = new ClassGen(clazz);
         final ConstantPoolGen pool = gen.getConstantPool();
         final Method m = gen.getMethodAt(1);
@@ -62,7 +62,7 @@ public class PLSETestCase extends AbstractTestCase {
      */
     @Test
     public void testB262() throws ClassNotFoundException {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.PLSETestEnum");
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.PLSETestEnum");
         final ClassGen gen = new ClassGen(clazz);
         final ConstantPoolGen pool = gen.getConstantPool();
         // get the values() method
@@ -83,7 +83,7 @@ public class PLSETestCase extends AbstractTestCase {
      */
     @Test
     public void testB295() throws Exception {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.PLSETestClass2");
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.PLSETestClass2");
         final ClassGen cg = new ClassGen(clazz);
         final ConstantPoolGen pool = cg.getConstantPool();
         final Method m = cg.getMethodAt(1); // 'main'
@@ -102,7 +102,7 @@ public class PLSETestCase extends AbstractTestCase {
      */
     @Test
     public void testB361() throws Exception {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.LargeMethod");
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.LargeMethod");
         final Method[] methods = clazz.getMethods();
         final Method m = methods[0];
         // System.out.println(m.getName());
@@ -122,7 +122,7 @@ public class PLSETestCase extends AbstractTestCase {
      */
     @Test
     public void testB79() throws ClassNotFoundException {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.PLSETestClass");
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.PLSETestClass");
         final ClassGen gen = new ClassGen(clazz);
         final ConstantPoolGen pool = gen.getConstantPool();
         final Method m = gen.getMethodAt(2);
@@ -141,7 +141,7 @@ public class PLSETestCase extends AbstractTestCase {
     @Test
     public void testCoverage() throws ClassNotFoundException, java.io.IOException {
         // load a class with a wide variety of byte codes - including tableswitch and lookupswitch
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.ConstantPoolX");
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.ConstantPoolX");
         for (final Method m : clazz.getMethods()) {
             final String signature = m.getSignature();
             Utility.methodTypeToSignature(Utility.methodSignatureReturnType(signature), Utility.methodSignatureArgumentTypes(signature)); // discard result

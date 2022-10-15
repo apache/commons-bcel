@@ -80,7 +80,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
     }
 
     private byte[] getBytesFromClass(final String className) throws ClassNotFoundException {
-        final JavaClass clazz = getTestClass(className);
+        final JavaClass clazz = getTestJavaClass(className);
         final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
 
         final Method[] methods = clazz.getMethods();

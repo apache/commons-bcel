@@ -36,7 +36,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
 
     @Test
     public void testConstantToString() throws ClassNotFoundException {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
         final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
         final Method[] methods = clazz.getMethods();
         for (final Method method : methods) {
@@ -52,7 +52,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
 
     @Test
     public void testTooManyConstants() throws ClassNotFoundException {
-        final JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
         final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
         int i = cp.getSize();
         while (i < Const.MAX_CP_ENTRIES - 1) {

@@ -31,9 +31,9 @@ public class EnumAccessFlagTestCase extends AbstractTestCase {
      */
     @Test
     public void testEnumClassSaysItIs() throws ClassNotFoundException {
-        JavaClass clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleEnum");
+        JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleEnum");
         assertTrue(clazz.isEnum(), "Expected SimpleEnum class to say it was an enum - but it didn't !");
-        clazz = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleClass");
+        clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClass");
         assertFalse(clazz.isEnum(), "Expected SimpleClass class to say it was not an enum - but it didn't !");
     }
 }

@@ -437,7 +437,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
      */
     @Test
     public void testModifyingClasses1() throws ClassNotFoundException {
-        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
+        final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
         final ConstantPoolGen cp = cgen.getConstantPool();
         cgen.addAnnotationEntry(createFruitAnnotation(cp, "Pineapple"));
@@ -451,7 +451,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
      */
     @Test
     public void testModifyingClasses2() throws ClassNotFoundException {
-        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
+        final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
         final ConstantPoolGen cp = cgen.getConstantPool();
         cgen.addAnnotationEntry(createCombinedAnnotation(cp));
@@ -469,7 +469,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
      */
     @Test
     public void testTransformClassToClassGen_ArrayAndAnnotationTypes() throws ClassNotFoundException {
-        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME + ".data.AnnotatedWithCombinedAnnotation");
+        final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnnotatedWithCombinedAnnotation");
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
@@ -510,7 +510,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
      */
     @Test
     public void testTransformClassToClassGen_EnumType() throws ClassNotFoundException {
-        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME + ".data.AnnotatedWithEnumClass");
+        final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnnotatedWithEnumClass");
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
@@ -523,7 +523,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
      */
     @Test
     public void testTransformClassToClassGen_SimpleTypes() throws ClassNotFoundException {
-        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
+        final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
@@ -535,7 +535,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
      */
     @Test
     public void testTransformComplexClassToClassGen() throws ClassNotFoundException {
-        final JavaClass jc = getTestClass(PACKAGE_BASE_NAME + ".data.ComplexAnnotatedClass");
+        final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.ComplexAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
         final AnnotationEntryGen[] annotations = cgen.getAnnotationEntries();
