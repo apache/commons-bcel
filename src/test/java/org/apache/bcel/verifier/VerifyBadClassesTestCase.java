@@ -34,6 +34,7 @@ import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang3.ArrayUtils;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -122,6 +123,7 @@ public class VerifyBadClassesTestCase {
      * BCEL-308: NullPointerException in Verifier Pass 3A
      */
     @Test
+    @Disabled("ConstantPool item could be null even when class file is valid")
     public void testB308() {
         testVerify("issue308", "Hello");
     }

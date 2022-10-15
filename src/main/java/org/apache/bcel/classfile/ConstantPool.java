@@ -303,9 +303,6 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
             throw new ClassFormatException("Invalid constant pool reference: " + index + ". Constant pool size is: " + constantPool.length);
         }
         final T c = castTo.cast(constantPool[index]);
-        if (c == null) {
-            throw new ClassFormatException("Constant pool at index " + index + " is null.");
-        }
         return c;
     }
 
