@@ -304,7 +304,16 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
         }
         final T c = castTo.cast(constantPool[index]);
         if (c == null) {
-            throw new ClassFormatException("Constant pool at index " + index + " is null.");
+            if (index == 0) {
+                // the 0th element is always null
+            } else {
+                Constant prev = constantPool[index - 1];
+                if (prev != null && (prev.getTag() == Const.CONSTANT_Double || prev.getTag() == Const.CONSTANT_Long)) {
+                    // OpenJDK will skip index right after the double/long const value
+                } else {
+                    throw new ClassFormatException("Constant pool at index " + index + " is null.");
+                }
+            }
         }
         return c;
     }

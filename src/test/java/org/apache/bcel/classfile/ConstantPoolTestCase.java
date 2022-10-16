@@ -25,6 +25,8 @@ import org.apache.bcel.Const;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.util.ClassPath;
+import org.apache.bcel.util.ClassPathRepository;
 import org.junit.jupiter.api.Test;
 
 public class ConstantPoolTestCase extends AbstractTestCase {
@@ -61,4 +63,34 @@ public class ConstantPoolTestCase extends AbstractTestCase {
         }
         assertThrows(IllegalStateException.class, () -> cp.addLong(0));
     }
+
+    @Test
+    public void doubleConstantWontThrowClassFormatException() throws ClassNotFoundException {
+        ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile");
+        JavaClass c = new ClassPathRepository(cp).loadClass("ClassWithDoubleConstantPoolItem");
+
+        ConstantPool pool = c.getConstantPool();
+        for (int i = 1; i < pool.getLength(); ++i) {
+            pool.getConstant(i);
+        }
+    }
+
+    @Test
+    public void longConstantWontThrowClassFormatException() throws ClassNotFoundException {
+        ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile");
+        JavaClass c = new ClassPathRepository(cp).loadClass("ClassWithLongConstantPoolItem");
+
+        ConstantPool pool = c.getConstantPool();
+        for (int i = 1; i < pool.getLength(); ++i) {
+            pool.getConstant(i);
+        }
+    }
+}
+
+class ClassWithDoubleConstantPoolItem {
+    double d = 42; // here is the key; we need a double constant value
+}
+
+class ClassWithLongConstantPoolItem {
+    long l = 42; // here is the key; we need a double constant value
 }
