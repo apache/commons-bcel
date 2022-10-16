@@ -292,7 +292,9 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Gets constant from constant pool.
      *
+     * @param <T> A {@link Constant} subclass
      * @param index Index in constant pool
+     * @param castTo The {@link Constant} subclass to cast to.
      * @return Constant value
      * @see Constant
      * @throws ClassFormatException if index is invalid
