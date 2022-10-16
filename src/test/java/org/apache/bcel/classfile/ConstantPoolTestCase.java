@@ -17,16 +17,17 @@
 
 package org.apache.bcel.classfile;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.Const;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.util.ClassPath;
+import org.apache.bcel.util.ClassPathRepository;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ConstantPoolTestCase extends AbstractTestCase {
 
@@ -67,4 +68,19 @@ public class ConstantPoolTestCase extends AbstractTestCase {
         }
         assertThrows(IllegalStateException.class, () -> cp.addLong(0));
     }
+
+    @Test
+    public void constantPoolItemWontThrowClassFormatException() throws ClassNotFoundException {
+        ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile");
+        JavaClass c = new ClassPathRepository(cp).loadClass("ClassWithNullConstantPoolItem");
+
+        ConstantPool pool = c.getConstantPool();
+        for (int i = 1; i < pool.getLength(); ++i) {
+            pool.getConstant(i);
+        }
+    }
+}
+
+class ClassWithNullConstantPoolItem {
+    double d = 42; // here is the key; we need a double constant value
 }
