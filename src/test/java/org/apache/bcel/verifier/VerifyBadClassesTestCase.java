@@ -123,7 +123,6 @@ public class VerifyBadClassesTestCase {
      * BCEL-308: NullPointerException in Verifier Pass 3A
      */
     @Test
-    @Disabled("ConstantPool item could be null even when class file is valid")
     public void testB308() {
         testVerify("issue308", "Hello");
     }
