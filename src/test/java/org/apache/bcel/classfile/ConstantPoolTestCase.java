@@ -98,5 +98,5 @@ class ClassWithDoubleConstantPoolItem {
 }
 
 class ClassWithLongConstantPoolItem {
-    long d = 42; // here is the key; we need a double constant value
+    long l = 42; // here is the key; we need a double constant value
 }
