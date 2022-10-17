@@ -64,6 +64,7 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
     <release version="6.6.1" date="20YY-MM-DD" description="Minor feature and bug fix release.">
        <!-- FIX -->
+      <action                  type="fix" dev="ggregory" due-to="Kengo TODA, Gary Gregory">Keep ConstantPool.getConstant(int) backward compatible with v6.5.0 #157.</action>
        <!-- ADD -->
        <!-- UPDATE -->
     </release>

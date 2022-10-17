@@ -292,7 +292,9 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Gets constant from constant pool.
      *
+     * @param <T> A {@link Constant} subclass
      * @param index Index in constant pool
+     * @param castTo The {@link Constant} subclass to cast to.
      * @return Constant value
      * @see Constant
      * @throws ClassFormatException if index is invalid
@@ -304,7 +306,13 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
         }
         final T c = castTo.cast(constantPool[index]);
         if (c == null) {
-            throw new ClassFormatException("Constant pool at index " + index + " is null.");
+            if (index != 0) {
+                // the 0th element is always null
+                final Constant prev = constantPool[index - 1];
+                if (prev == null || prev.getTag() != Const.CONSTANT_Double && prev.getTag() != Const.CONSTANT_Long) {
+                    throw new ClassFormatException("Constant pool at index " + index + " is null.");
+                }
+            }
         }
         return c;
     }

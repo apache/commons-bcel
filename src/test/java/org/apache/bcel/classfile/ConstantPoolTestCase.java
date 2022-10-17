@@ -17,15 +17,29 @@
 
 package org.apache.bcel.classfile;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.IOException;
+import java.util.stream.IntStream;
 
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.Const;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.util.ClassPath;
+import org.apache.bcel.util.ClassPathRepository;
 import org.junit.jupiter.api.Test;
+
+class ClassWithDoubleConstantPoolItem {
+    double d = 42; // here is the key; we need a double constant value
+}
+
+class ClassWithLongConstantPoolItem {
+    long l = 42; // here is the key; we need a double constant value
+}
 
 public class ConstantPoolTestCase extends AbstractTestCase {
 
@@ -47,6 +61,26 @@ public class ConstantPoolTestCase extends AbstractTestCase {
                     // System.out.println(string);
                 }
             }
+        }
+    }
+
+    @Test
+    public void testDoubleConstantWontThrowClassFormatException() throws ClassNotFoundException, IOException {
+        try (final ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
+            final JavaClass c = new ClassPathRepository(cp).loadClass("ClassWithDoubleConstantPoolItem");
+
+            final ConstantPool pool = c.getConstantPool();
+            IntStream.range(0, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> pool.getConstant(i)));
+        }
+    }
+
+    @Test
+    public void testLongConstantWontThrowClassFormatException() throws ClassNotFoundException, IOException {
+        try (final ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
+            final JavaClass c = new ClassPathRepository(cp).loadClass("ClassWithLongConstantPoolItem");
+
+            final ConstantPool pool = c.getConstantPool();
+            IntStream.range(0, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> pool.getConstant(i)));
         }
     }
 
