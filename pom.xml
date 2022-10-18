@@ -90,7 +90,7 @@
 
   <ciManagement>
     <system>GitHub</system>
-    <url>https://github.com/apache/commons-jxpath/actions</url>
+    <url>https://github.com/apache/commons-bcel/actions</url>
   </ciManagement>
 
   <developers>
