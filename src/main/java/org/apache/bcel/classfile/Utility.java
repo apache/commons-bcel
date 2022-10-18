@@ -41,7 +41,6 @@ import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Utility functions that do not really belong to any class in particular.
- *
  */
 // @since 6.0 methods are no longer final
 public abstract class Utility {

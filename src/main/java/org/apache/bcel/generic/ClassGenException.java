@@ -13,13 +13,11 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
 /**
  * Thrown on internal errors. Extends RuntimeException so it hasn't to be declared in the throws clause every time.
- *
  */
 public class ClassGenException extends RuntimeException {
 

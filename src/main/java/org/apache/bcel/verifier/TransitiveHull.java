@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier;
 
@@ -24,7 +23,6 @@ import org.apache.bcel.classfile.Utility;
 /**
  * This class has a main method implementing a demonstration program of how to use the VerifierFactoryObserver. It
  * transitively verifies all class files encountered; this may take up a lot of time and, more notably, memory.
- *
  */
 public class TransitiveHull implements VerifierFactoryObserver {
 

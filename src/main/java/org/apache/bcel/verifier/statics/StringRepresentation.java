@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier.statics;
 
@@ -75,7 +74,6 @@ import org.apache.bcel.verifier.exc.AssertionViolatedException;
  * constraints, but in this case it could be possible for the <B>toString()</B> method to throw a RuntimeException. A
  * (new StringRepresentation(Node n)).toString() never throws any exception. Note that this class also serves as a
  * placeholder for more sophisticated message handling in future versions of JustIce.
- *
  */
 public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor {
     /** The string representation, created by a visitXXX() method, output by toString(). */

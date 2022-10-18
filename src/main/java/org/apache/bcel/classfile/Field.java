@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.classfile;
 
@@ -28,7 +27,6 @@ import org.apache.bcel.util.BCELComparator;
 /**
  * This class represents the field info structure, i.e., the representation for a variable in the class. See JVM
  * specification for details.
- *
  */
 public final class Field extends FieldOrMethod {
 

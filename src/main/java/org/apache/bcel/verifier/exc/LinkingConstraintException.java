@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier.exc;
 
@@ -26,7 +25,6 @@ package org.apache.bcel.verifier.exc;
  * analysis of pass 3 (called pass 3b in JustIce). These are the checks necessary for resolution: Compare pages 142-143
  * ("4.9.1 The Verification Process") and pages 50-51 ("2.17.3 Linking: Verification, Preparation, and Resolution") of
  * the above mentioned book. <B>TODO: At this time, this class is not used in JustIce.</B>
- *
  */
 public class LinkingConstraintException extends StructuralCodeConstraintException {
 

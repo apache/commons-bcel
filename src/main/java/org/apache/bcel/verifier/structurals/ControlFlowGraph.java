@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier.structurals;
 
@@ -38,7 +37,6 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
  * This class represents a control flow graph of a method.
- *
  */
 public class ControlFlowGraph {
 

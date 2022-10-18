@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 import java.io.IOException;
@@ -58,7 +57,6 @@ import org.apache.bcel.generic.Type;
  *     }
  * }
  * </PRE>
- *
  */
 public class HelloWorldBuilder {
     public static void main(final String[] argv) {

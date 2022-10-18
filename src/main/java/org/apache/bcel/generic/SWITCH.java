@@ -13,14 +13,12 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
 /**
  * SWITCH - Branch depending on int value, generates either LOOKUPSWITCH or TABLESWITCH instruction, depending on
  * whether the match values (int[]) can be sorted with no gaps between the numbers.
- *
  */
 public final class SWITCH implements CompoundInstruction {
 

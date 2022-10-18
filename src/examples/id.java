@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 import org.apache.bcel.Repository;
@@ -36,7 +35,6 @@ import org.apache.bcel.generic.MethodGen;
  * diff foo bar | more
  *
  * <pre>
- *
  */
 public class id {
 

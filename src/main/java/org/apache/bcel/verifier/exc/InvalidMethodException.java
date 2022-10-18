@@ -13,14 +13,12 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier.exc;
 
 /**
  * Instances of this class are thrown by BCEL's class file verifier "JustIce" when the verification of a method is
  * requested that does not exist.
- *
  */
 public class InvalidMethodException extends RuntimeException {
 

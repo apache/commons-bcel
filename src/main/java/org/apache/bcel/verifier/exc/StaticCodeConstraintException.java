@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier.exc;
 
@@ -22,7 +21,6 @@ package org.apache.bcel.verifier.exc;
  * the verification pass 3 because of a violation of a static constraint as described in the Java Virtual Machine
  * Specification, 2nd edition, 4.8.1, pages 133-137. The static constraints checking part of pass 3 is called pass 3a in
  * JustIce.
- *
  */
 public abstract class StaticCodeConstraintException extends CodeConstraintException {
     private static final long serialVersionUID = 3858523065007725128L;

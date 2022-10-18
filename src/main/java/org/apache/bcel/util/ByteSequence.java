@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.util;
 
@@ -23,7 +22,6 @@ import java.io.DataInputStream;
 /**
  * Utility class that implements a sequence of bytes which can be read via the `readByte()' method. This is used to
  * implement a wrapper for the Java byte code stream to gain some more readability.
- *
  */
 public final class ByteSequence extends DataInputStream {
 

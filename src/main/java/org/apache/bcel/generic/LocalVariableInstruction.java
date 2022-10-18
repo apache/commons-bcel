@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
@@ -25,7 +24,6 @@ import org.apache.bcel.util.ByteSequence;
 
 /**
  * Abstract super class for instructions dealing with local variables.
- *
  */
 public abstract class LocalVariableInstruction extends Instruction implements TypedInstruction, IndexedInstruction {
 

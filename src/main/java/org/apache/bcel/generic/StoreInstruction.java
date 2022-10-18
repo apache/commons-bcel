@@ -13,13 +13,11 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
 /**
  * Denotes an unparameterized instruction to store a value into a local variable, e.g. ISTORE.
- *
  */
 public abstract class StoreInstruction extends LocalVariableInstruction implements PopInstruction {
 

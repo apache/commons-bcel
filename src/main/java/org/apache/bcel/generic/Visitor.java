@@ -13,14 +13,12 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
 /**
  * Interface implementing the Visitor pattern programming style. I.e., a class that implements this interface can handle
  * all types of instructions with the properly typed methods just by calling the accept() method.
- *
  */
 public interface Visitor {
 

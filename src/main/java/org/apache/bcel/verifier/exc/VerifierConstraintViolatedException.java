@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier.exc;
 
@@ -21,7 +20,6 @@ package org.apache.bcel.verifier.exc;
  * Instances of this class are thrown by BCEL's class file verifier "JustIce" whenever verification proves that some
  * constraint of a class file (as stated in the Java Virtual Machine Specification, Edition 2) is violated. This is
  * roughly equivalent to the VerifyError the JVM-internal verifiers throw.
- *
  */
 public abstract class VerifierConstraintViolatedException extends RuntimeException {
     // /** The name of the offending class that did not pass the verifier. */

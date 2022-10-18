@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
@@ -29,7 +28,6 @@ import org.apache.bcel.Const;
  *
  * The Instructions can also accessed directly under their names, so it's possible to write
  * il.append(Instruction.ICONST_0);
- *
  */
 public final class InstructionConst {
 

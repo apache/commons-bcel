@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier;
 
@@ -26,7 +25,6 @@ import org.apache.bcel.generic.Type;
 
 /**
  * A graphical user interface application demonstrating JustIce.
- *
  */
 public class GraphicalVerifier {
 

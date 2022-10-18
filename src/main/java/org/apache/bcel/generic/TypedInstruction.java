@@ -13,13 +13,11 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
 /**
  * Get the type associated with an instruction, int for ILOAD, or the type of the field of a PUTFIELD instruction, e.g..
- *
  */
 public interface TypedInstruction {
 

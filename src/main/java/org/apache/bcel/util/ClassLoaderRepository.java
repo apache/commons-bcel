@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.util;
 
@@ -31,7 +30,6 @@ import org.apache.bcel.classfile.JavaClass;
  * It loads its data from the ClassLoader implementation passed into its constructor.
  *
  * @see org.apache.bcel.Repository
- *
  */
 public class ClassLoaderRepository implements Repository {
 

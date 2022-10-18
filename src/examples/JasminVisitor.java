@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 import java.io.File;
@@ -53,7 +52,6 @@ import org.apache.bcel.generic.TABLESWITCH;
 
 /**
  * Disassemble Java class object into the <a href="https://jasmin.sourceforge.net"> Jasmin</a> format.
- *
  */
 public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     public static void main(final String[] argv) throws Exception {

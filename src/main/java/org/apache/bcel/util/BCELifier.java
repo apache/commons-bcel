@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.util;
 
@@ -42,7 +41,6 @@ import org.apache.commons.lang3.StringUtils;
  * This class takes a given JavaClass object and converts it to a Java program that creates that very class using BCEL.
  * This gives new users of BCEL a useful example showing how things are done with BCEL. It does not cover all features
  * of BCEL, but tries to mimic hand-written code as close as possible.
- *
  */
 public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 

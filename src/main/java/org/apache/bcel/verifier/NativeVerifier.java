@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier;
 
@@ -23,7 +22,6 @@ import org.apache.bcel.classfile.Utility;
  * The NativeVerifier class implements a main(String[] args) method that's roughly compatible to the one in the Verifier
  * class, but that uses the JVM's internal verifier for its class file verification. This can be used for comparison
  * runs between the JVM-internal verifier and JustIce.
- *
  */
 public abstract class NativeVerifier {
 

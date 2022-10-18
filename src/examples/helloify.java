@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 import org.apache.bcel.classfile.ClassParser;
@@ -36,7 +35,6 @@ import org.apache.bcel.generic.PUSH;
 /**
  * Read class file(s) and patch all of its methods, so that they print "hello" and their name and signature before doing
  * anything else.
- *
  */
 public final class helloify {
 

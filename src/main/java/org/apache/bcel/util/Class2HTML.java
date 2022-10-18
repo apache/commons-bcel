@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.util;
 
@@ -49,7 +48,6 @@ import org.apache.bcel.classfile.Utility;
  *
  * All subfiles reference each other appropriately, e.g. clicking on a method in the Method's frame will jump to the
  * appropriate method in the Code frame.
- *
  */
 public class Class2HTML implements Constants {
 

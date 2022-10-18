@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
@@ -23,7 +22,6 @@ package org.apache.bcel.generic;
  * <PRE>
  * Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt; ..., result
  * </PRE>
- *
  */
 public class DCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 

@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier.structurals;
 
@@ -22,7 +21,6 @@ import java.io.Serializable;
 /**
  * A placeholder class that can be used to create an ObjectType of which has some of the properties arrays have. They
  * implement java.lang.Cloneable and java.io.Serializable and they extend java.lang.Object.
- *
  */
 public class GenericArray implements Cloneable, Serializable {
 

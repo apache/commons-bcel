@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.classfile;
 
@@ -24,7 +23,6 @@ import java.util.stream.Stream;
 /**
  * Traverses a JavaClass with another Visitor object 'piggy-backed' that is applied to all components of a JavaClass
  * object. I.e. this class supplies the traversal strategy, other classes can make use of it.
- *
  */
 public class DescendingVisitor implements Visitor {
     private final JavaClass clazz;

@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
@@ -23,7 +22,6 @@ package org.apache.bcel.generic;
  * <PRE>
  * Stack: ..., word2, word1 -&gt; ..., word2, word1, word2, word1
  * </PRE>
- *
  */
 public class DUP2 extends StackInstruction implements PushInstruction {
 

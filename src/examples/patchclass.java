@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 import org.apache.bcel.classfile.ClassParser;
@@ -25,7 +24,6 @@ import org.apache.bcel.classfile.JavaClass;
  * Patch all Utf8 constants in the given class file <em>file</em>.class and save the result in _<em>file</em>.class.
  *
  * Usage: patch <oldstring> <newstring> files
- *
  */
 public class patchclass {
 

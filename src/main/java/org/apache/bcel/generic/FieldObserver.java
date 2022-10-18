@@ -13,14 +13,12 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
 /**
  * Imnplement this interface if you're interested in changes to a FieldGen object and register yourself with
  * addObserver().
- *
  */
 public interface FieldObserver {
 

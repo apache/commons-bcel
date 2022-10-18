@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.generic;
 
@@ -26,7 +25,6 @@ import org.apache.bcel.classfile.Utility;
 
 /**
  * Super class for InvokeInstruction and FieldInstruction, since they have some methods in common!
- *
  */
 public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
 

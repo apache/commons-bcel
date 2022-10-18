@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier.structurals;
 
@@ -23,7 +22,6 @@ import org.apache.bcel.generic.InstructionHandle;
 
 /**
  * An InstructionContext offers convenient access to information like control flow successors and such.
- *
  */
 public interface InstructionContext {
 

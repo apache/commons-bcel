@@ -13,7 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 package org.apache.bcel.verifier.exc;
 
@@ -24,7 +23,6 @@ package org.apache.bcel.verifier.exc;
  * misleading. Structural constraints are constraints on relationships between Java virtual machine instructions. These
  * are the constraints where data-flow analysis is needed to verify if they hold. The data flow analysis of pass 3 is
  * called pass 3b in JustIce.
- *
  */
 public class StructuralCodeConstraintException extends CodeConstraintException {
     private static final long serialVersionUID = 5406842000007181420L;
