@@ -88,6 +88,11 @@
     </site>
   </distributionManagement>
 
+  <ciManagement>
+    <system>GitHub</system>
+    <url>https://github.com/apache/commons-jxpath/actions</url>
+  </ciManagement>
+
   <developers>
     <developer>
       <name>Dave Brosius</name>
