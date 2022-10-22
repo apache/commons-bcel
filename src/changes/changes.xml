@@ -67,9 +67,10 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Kengo TODA, Gary Gregory">Keep ConstantPool.getConstant(int) backward compatible with v6.5.0 #157.</action>
        <!-- ADD -->
        <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump actions/setup-java from 3.5.1 to 3.6.0 #159.</action>
     </release>
     <release version="6.6.0" date="2022-10-08" description="Minor feature and bug fix release.">
-       <!-- FIX -->
+      <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Improve test case coverage; fix Utility.encode bug #46.</action>
       <action issue="BCEL-342" type="fix" dev="ggregory" due-to="Allon Murienik, Gary Gregory">Migrate test suite to JUnit Jupiter #68.</action>
       <action issue="BCEL-343" type="fix" dev="ggregory" due-to="Allon Murienik, Gary Gregory">JUnit Assertion improvement #69.</action>
