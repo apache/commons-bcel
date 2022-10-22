@@ -131,32 +131,32 @@ public abstract class Repository {
      * @return true, if clazz is an instance of super_class
      * @throws ClassNotFoundException if any superclasses or superinterfaces of clazz can't be found
      */
-    public static boolean instanceOf(final JavaClass clazz, final JavaClass super_class) throws ClassNotFoundException {
-        return clazz.instanceOf(super_class);
+    public static boolean instanceOf(final JavaClass clazz, final JavaClass superclass) throws ClassNotFoundException {
+        return clazz.instanceOf(superclass);
     }
 
     /**
      * @return true, if clazz is an instance of super_class
      * @throws ClassNotFoundException if super_class can't be found
      */
-    public static boolean instanceOf(final JavaClass clazz, final String super_class) throws ClassNotFoundException {
-        return instanceOf(clazz, lookupClass(super_class));
+    public static boolean instanceOf(final JavaClass clazz, final String superclass) throws ClassNotFoundException {
+        return instanceOf(clazz, lookupClass(superclass));
     }
 
     /**
      * @return true, if clazz is an instance of super_class
      * @throws ClassNotFoundException if clazz can't be found
      */
-    public static boolean instanceOf(final String clazz, final JavaClass super_class) throws ClassNotFoundException {
-        return instanceOf(lookupClass(clazz), super_class);
+    public static boolean instanceOf(final String clazz, final JavaClass superclass) throws ClassNotFoundException {
+        return instanceOf(lookupClass(clazz), superclass);
     }
 
     /**
      * @return true, if clazz is an instance of super_class
      * @throws ClassNotFoundException if either clazz or super_class can't be found
      */
-    public static boolean instanceOf(final String clazz, final String super_class) throws ClassNotFoundException {
-        return instanceOf(lookupClass(clazz), lookupClass(super_class));
+    public static boolean instanceOf(final String clazz, final String superclass) throws ClassNotFoundException {
+        return instanceOf(lookupClass(clazz), lookupClass(superclass));
     }
 
     /**
