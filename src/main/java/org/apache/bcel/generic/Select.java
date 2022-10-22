@@ -233,11 +233,11 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * @param fixed_length the fixed_length to set
+     * @param fixedLength the fixed_length to set
      * @since 6.0
      */
-    final void setFixed_length(final int fixed_length) {
-        this.fixed_length = fixed_length;
+    final void setFixed_length(final int fixedLength) {
+        this.fixed_length = fixedLength;
     }
 
     /** @since 6.0 */
