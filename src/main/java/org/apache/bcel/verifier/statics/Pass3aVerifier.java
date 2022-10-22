@@ -16,6 +16,8 @@
  */
 package org.apache.bcel.verifier.statics;
 
+import java.util.Arrays;
+
 import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.Attribute;
@@ -119,7 +121,7 @@ public final class Pass3aVerifier extends PassVerifier {
         }
 
         /**
-         * A utility method to always raise an exeption.
+         * A utility method to always raise an exception.
          */
         private void constraintViolated(final Instruction i, final String message) {
             throw new StaticCodeInstructionOperandConstraintException("Instruction " + tostring(i) + " constraint violated: " + message);
@@ -137,7 +139,7 @@ public final class Pass3aVerifier extends PassVerifier {
             for (final Method element : ms) {
                 if (element.getName().equals(invoke.getMethodName(constantPoolGen))
                     && Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(constantPoolGen))
-                    && objArrayEquals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(constantPoolGen))) {
+                    && Arrays.equals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(constantPoolGen))) {
                     return element;
                 }
             }
@@ -216,24 +218,6 @@ public final class Pass3aVerifier extends PassVerifier {
                 // FIXME: maybe not the best way to handle this
                 throw new AssertionViolatedException("Missing class: " + e, e);
             }
-        }
-
-        /**
-         * A utility method like equals(Object) for arrays. The equality of the elements is based on their equals(Object) method
-         * instead of their object identity.
-         */
-        private boolean objArrayEquals(final Object[] o, final Object[] p) {
-            if (o.length != p.length) {
-                return false;
-            }
-
-            for (int i = 0; i < o.length; i++) {
-                if (!o[i].equals(p[i])) {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
@@ -623,7 +607,7 @@ public final class Pass3aVerifier extends PassVerifier {
                         for (final Method meth2 : meths) {
                             if (meth2.getName().equals(o.getMethodName(constantPoolGen))
                                 && Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen))
-                                && objArrayEquals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) {
+                                && Arrays.equals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) {
                                 meth = meth2;
                                 break;
                             }
