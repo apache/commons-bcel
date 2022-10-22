@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Attribute;
