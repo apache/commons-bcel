@@ -31,12 +31,12 @@ import org.apache.bcel.generic.MethodGen;
  * Try to:
  *
  * <pre>
- * % java id <someclass> % java listclass -code <someclass> &gt; foo % java listclass -code <someclass>.clazz &gt; bar %
+ * % java Id <someclass> % java listclass -code <someclass> &gt; foo % java listclass -code <someclass>.clazz &gt; bar %
  * diff foo bar | more
  *
  * <pre>
  */
-public class id {
+public class Id {
 
     public static void main(final String[] argv) throws Exception {
         JavaClass clazz;

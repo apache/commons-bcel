@@ -36,7 +36,7 @@ import org.apache.bcel.generic.PUSH;
  * Read class file(s) and patch all of its methods, so that they print "hello" and their name and signature before doing
  * anything else.
  */
-public final class helloify {
+public final class Helloify {
 
     private static String className;
     private static ConstantPoolGen cp;

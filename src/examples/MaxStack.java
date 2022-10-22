@@ -26,7 +26,7 @@ import org.apache.bcel.generic.MethodGen;
  * Read class file(s) and examine all of its methods, determining the maximum stack depth used by analyzing control
  * flow.
  */
-public final class maxstack {
+public final class MaxStack {
 
     public static void main(final String[] argv) throws Exception {
         for (final String className : argv) {

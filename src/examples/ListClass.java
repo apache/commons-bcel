@@ -36,7 +36,7 @@ import org.apache.bcel.classfile.Method;
  * Read class file(s) and display its contents. The command line usage is:
  *
  * <pre>
- * java listclass [-constants] [-code] [-brief] [-dependencies] [-nocontents] [-recurse] class... [-exclude <list>]
+ * java ListClass [-constants] [-code] [-brief] [-dependencies] [-nocontents] [-recurse] class... [-exclude <list>]
  * </pre>
  *
  * where
@@ -60,30 +60,30 @@ import org.apache.bcel.classfile.Method;
  * interested in dependency information.</li>
  * </ul>
  * <p>
- * Here's a couple examples of how I typically use listclass:
+ * Here's a couple examples of how I typically use ListClass:
  * </p>
  *
  * <pre>
- * java listclass -code MyClass
+ * java ListClass -code MyClass
  * </pre>
  *
  * Print information about the class and the byte code of the methods
  *
  * <pre>
- * java listclass -nocontents -dependencies MyClass
+ * java ListClass -nocontents -dependencies MyClass
  * </pre>
  *
  * Print a list of all classes which MyClass depends on.
  *
  * <pre>
- * java listclass -nocontents -recurse MyClass -exclude java. javax. sun.
+ * java ListClass -nocontents -recurse MyClass -exclude java. javax. sun.
  * </pre>
  *
  * Print a recursive listing of all classes which MyClass depends on. Do not analyze classes beginning with "java.",
  * "javax.", or "sun.".
  *
  * <pre>
- * java listclass -nocontents -dependencies -recurse MyClass -exclude java.javax. sun.
+ * java ListClass -nocontents -dependencies -recurse MyClass -exclude java.javax. sun.
  * </pre>
  * <p>
  * Print a recursive listing of dependency information for MyClass and its dependents. Do not analyze classes beginning
@@ -92,7 +92,7 @@ import org.apache.bcel.classfile.Method;
  *
  * <a href="mailto:twheeler@objectspace.com">Thomas Wheeler</A>
  */
-public class listclass {
+public class ListClass {
 
     public static String[] getClassDependencies(final ConstantPool pool) {
         final String[] tempArray = new String[pool.getLength()];
@@ -169,7 +169,7 @@ public class listclass {
         if (fileName.isEmpty()) {
             System.err.println("list: No input files specified");
         } else {
-            final listclass listClass = new listclass(code, constants, verbose, classdep, nocontents, recurse, excludeName);
+            final ListClass listClass = new ListClass(code, constants, verbose, classdep, nocontents, recurse, excludeName);
 
             for (final String element : fileName) {
                 name = element;
@@ -216,7 +216,7 @@ public class listclass {
 
     List<String> excludeName;
 
-    public listclass(final boolean code, final boolean constants, final boolean verbose, final boolean classDep, final boolean noContents,
+    public ListClass(final boolean code, final boolean constants, final boolean verbose, final boolean classDep, final boolean noContents,
         final boolean recurse, final List<String> excludeName) {
         this.code = code;
         this.constants = constants;

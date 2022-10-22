@@ -23,9 +23,9 @@ import org.apache.bcel.classfile.JavaClass;
 /**
  * Patch all Utf8 constants in the given class file <em>file</em>.class and save the result in _<em>file</em>.class.
  *
- * Usage: patch <oldstring> <newstring> files
+ * Usage: PatchClass <oldstring> <newstring> files
  */
-public class patchclass {
+public class PatchClass {
 
     public static void main(final String[] argv) throws Exception {
         final String[] fileName = new String[argv.length];
