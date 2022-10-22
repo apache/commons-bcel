@@ -143,8 +143,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         final InstructionHandle tryEnd = il.append(g);
         // We add the exception handler which simply returns from the method.
         final LocalVariableGen varEx = mg.addLocalVariable("ex", Type.getType("Ljava.io.IOException;"), null, null);
-        final int var_ex_slot = varEx.getIndex();
-        final InstructionHandle handler = il.append(new ASTORE(var_ex_slot));
+        final int varExSlot = varEx.getIndex();
+        final InstructionHandle handler = il.append(new ASTORE(varExSlot));
         varEx.setStart(handler);
         varEx.setEnd(il.append(InstructionConst.RETURN));
         mg.addExceptionHandler(tryStart, tryEnd, handler, new ObjectType("java.io.IOException"));

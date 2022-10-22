@@ -128,7 +128,7 @@ public abstract class Repository {
     /**
      * Equivalent to runtime "instanceof" operator.
      *
-     * @return true, if clazz is an instance of super_class
+     * @return true, if clazz is an instance of superclass
      * @throws ClassNotFoundException if any superclasses or superinterfaces of clazz can't be found
      */
     public static boolean instanceOf(final JavaClass clazz, final JavaClass superclass) throws ClassNotFoundException {
@@ -136,15 +136,15 @@ public abstract class Repository {
     }
 
     /**
-     * @return true, if clazz is an instance of super_class
-     * @throws ClassNotFoundException if super_class can't be found
+     * @return true, if clazz is an instance of superclass
+     * @throws ClassNotFoundException if superclass can't be found
      */
     public static boolean instanceOf(final JavaClass clazz, final String superclass) throws ClassNotFoundException {
         return instanceOf(clazz, lookupClass(superclass));
     }
 
     /**
-     * @return true, if clazz is an instance of super_class
+     * @return true, if clazz is an instance of superclass
      * @throws ClassNotFoundException if clazz can't be found
      */
     public static boolean instanceOf(final String clazz, final JavaClass superclass) throws ClassNotFoundException {
@@ -152,8 +152,8 @@ public abstract class Repository {
     }
 
     /**
-     * @return true, if clazz is an instance of super_class
-     * @throws ClassNotFoundException if either clazz or super_class can't be found
+     * @return true, if clazz is an instance of superclass
+     * @throws ClassNotFoundException if either clazz or superclass can't be found
      */
     public static boolean instanceOf(final String clazz, final String superclass) throws ClassNotFoundException {
         return instanceOf(lookupClass(clazz), lookupClass(superclass));

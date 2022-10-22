@@ -153,7 +153,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @return the fixed_length
      * @since 6.0
      */
-    final int getFixed_length() {
+    final int getFixedLength() {
         return fixed_length;
     }
 
@@ -184,7 +184,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @return the match_length
      * @since 6.0
      */
-    final int getMatch_length() {
+    final int getMatchLength() {
         return match_length;
     }
 
@@ -236,7 +236,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param fixedLength the fixed_length to set
      * @since 6.0
      */
-    final void setFixed_length(final int fixedLength) {
+    final void setFixedLength(final int fixedLength) {
         this.fixed_length = fixedLength;
     }
 
@@ -269,7 +269,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param matchLength the match_length to set
      * @since 6.0
      */
-    final int setMatch_length(final int matchLength) {
+    final int setMatchLength(final int matchLength) {
         this.match_length = matchLength;
         return matchLength;
     }

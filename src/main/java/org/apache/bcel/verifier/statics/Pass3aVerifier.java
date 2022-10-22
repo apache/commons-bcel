@@ -137,7 +137,7 @@ public final class Pass3aVerifier extends PassVerifier {
             for (final Method element : ms) {
                 if (element.getName().equals(invoke.getMethodName(constantPoolGen))
                     && Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(constantPoolGen))
-                    && objarrayequals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(constantPoolGen))) {
+                    && objArrayEquals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(constantPoolGen))) {
                     return element;
                 }
             }
@@ -209,7 +209,7 @@ public final class Pass3aVerifier extends PassVerifier {
         /**
          * Utility method to return the max_locals value of the method verified by the surrounding Pass3aVerifier instance.
          */
-        private int max_locals() {
+        private int maxLocals() {
             try {
                 return Repository.lookupClass(myOwner.getClassName()).getMethods()[methodNo].getCode().getMaxLocals();
             } catch (final ClassNotFoundException e) {
@@ -222,7 +222,7 @@ public final class Pass3aVerifier extends PassVerifier {
          * A utility method like equals(Object) for arrays. The equality of the elements is based on their equals(Object) method
          * instead of their object identity.
          */
-        private boolean objarrayequals(final Object[] o, final Object[] p) {
+        private boolean objArrayEquals(final Object[] o, final Object[] p) {
             if (o.length != p.length) {
                 return false;
             }
@@ -243,7 +243,7 @@ public final class Pass3aVerifier extends PassVerifier {
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative.");
             } else {
-                final int maxminus1 = max_locals() - 1;
+                final int maxminus1 = maxLocals() - 1;
                 if (idx > maxminus1) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-1 '" + maxminus1 + "'.");
                 }
@@ -275,7 +275,7 @@ public final class Pass3aVerifier extends PassVerifier {
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative.");
             } else {
-                final int maxminus1 = max_locals() - 1;
+                final int maxminus1 = maxLocals() - 1;
                 if (idx > maxminus1) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-1 '" + maxminus1 + "'.");
                 }
@@ -300,7 +300,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative."
                     + " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             } else {
-                final int maxminus2 = max_locals() - 2;
+                final int maxminus2 = maxLocals() - 2;
                 if (idx > maxminus2) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-2 '" + maxminus2 + "'.");
                 }
@@ -315,7 +315,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative."
                     + " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             } else {
-                final int maxminus2 = max_locals() - 2;
+                final int maxminus2 = maxLocals() - 2;
                 if (idx > maxminus2) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-2 '" + maxminus2 + "'.");
                 }
@@ -403,7 +403,7 @@ public final class Pass3aVerifier extends PassVerifier {
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative.");
             } else {
-                final int maxminus1 = max_locals() - 1;
+                final int maxminus1 = maxLocals() - 1;
                 if (idx > maxminus1) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-1 '" + maxminus1 + "'.");
                 }
@@ -417,7 +417,7 @@ public final class Pass3aVerifier extends PassVerifier {
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative.");
             } else {
-                final int maxminus1 = max_locals() - 1;
+                final int maxminus1 = maxLocals() - 1;
                 if (idx > maxminus1) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-1 '" + maxminus1 + "'.");
                 }
@@ -458,7 +458,7 @@ public final class Pass3aVerifier extends PassVerifier {
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative.");
             } else {
-                final int maxminus1 = max_locals() - 1;
+                final int maxminus1 = maxLocals() - 1;
                 if (idx > maxminus1) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-1 '" + maxminus1 + "'.");
                 }
@@ -472,7 +472,7 @@ public final class Pass3aVerifier extends PassVerifier {
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative.");
             } else {
-                final int maxminus1 = max_locals() - 1;
+                final int maxminus1 = maxLocals() - 1;
                 if (idx > maxminus1) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-1 '" + maxminus1 + "'.");
                 }
@@ -623,7 +623,7 @@ public final class Pass3aVerifier extends PassVerifier {
                         for (final Method meth2 : meths) {
                             if (meth2.getName().equals(o.getMethodName(constantPoolGen))
                                 && Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen))
-                                && objarrayequals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) {
+                                && objArrayEquals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) {
                                 meth = meth2;
                                 break;
                             }
@@ -702,7 +702,7 @@ public final class Pass3aVerifier extends PassVerifier {
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative.");
             } else {
-                final int maxminus1 = max_locals() - 1;
+                final int maxminus1 = maxLocals() - 1;
                 if (idx > maxminus1) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-1 '" + maxminus1 + "'.");
                 }
@@ -747,7 +747,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative."
                     + " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             } else {
-                final int maxminus2 = max_locals() - 2;
+                final int maxminus2 = maxLocals() - 2;
                 if (idx > maxminus2) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-2 '" + maxminus2 + "'.");
                 }
@@ -808,7 +808,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative."
                     + " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             } else {
-                final int maxminus2 = max_locals() - 2;
+                final int maxminus2 = maxLocals() - 2;
                 if (idx > maxminus2) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-2 '" + maxminus2 + "'.");
                 }
@@ -913,7 +913,7 @@ public final class Pass3aVerifier extends PassVerifier {
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative.");
             } else {
-                final int maxminus1 = max_locals() - 1;
+                final int maxminus1 = maxLocals() - 1;
                 if (idx > maxminus1) {
                     constraintViolated(o, "Index '" + idx + "' must not be greater than max_locals-1 '" + maxminus1 + "'.");
                 }
@@ -986,7 +986,7 @@ public final class Pass3aVerifier extends PassVerifier {
         if (lnt != null) {
             final LineNumber[] lineNumbers = lnt.getLineNumberTable();
             final IntList offsets = new IntList();
-            lineNumber_loop: for (final LineNumber lineNumber : lineNumbers) { // may appear in any order.
+            lineNumberLoop: for (final LineNumber lineNumber : lineNumbers) { // may appear in any order.
                 for (final int instructionPosition : instructionPositions) {
                     // TODO: Make this a binary search! The instructionPositions array is naturally ordered!
                     final int offset = lineNumber.getStartPC();
@@ -997,7 +997,7 @@ public final class Pass3aVerifier extends PassVerifier {
                         } else {
                             offsets.add(offset);
                         }
-                        continue lineNumber_loop;
+                        continue lineNumberLoop;
                     }
                 }
                 throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has a LineNumberTable attribute '" + code.getLineNumberTable()

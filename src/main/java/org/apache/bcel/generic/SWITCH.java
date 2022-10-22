@@ -96,9 +96,9 @@ public final class SWITCH implements CompoundInstruction {
     /**
      * @return match is sorted in ascending order with no gap bigger than max_gap?
      */
-    private boolean matchIsOrdered(final int max_gap) {
+    private boolean matchIsOrdered(final int maxGap) {
         for (int i = 1; i < matchLength; i++) {
-            if (match[i] - match[i - 1] > max_gap) {
+            if (match[i] - match[i - 1] > maxGap) {
                 return false;
             }
         }

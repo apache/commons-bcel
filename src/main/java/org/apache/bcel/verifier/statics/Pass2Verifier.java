@@ -84,7 +84,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * A Visitor class that ensures the constant pool satisfies the static constraints. The visitXXX() methods throw
      * ClassConstraintException instances otherwise.
      *
-     * @see #constant_pool_entries_satisfy_static_constraints()
+     * @see #constantPoolEntriesSatisfyStaticConstraints()
      */
     private final class CPESSC_Visitor extends EmptyVisitor {
         private final Class<?> CONST_Class;
@@ -659,9 +659,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 if (outerIdx != 0) {
                     checkIndex(innerClasses, outerIdx, CONST_Class);
                 }
-                final int innername_idx = ic.getInnerNameIndex();
-                if (innername_idx != 0) {
-                    checkIndex(innerClasses, innername_idx, CONST_Utf8);
+                final int innernameIdx = ic.getInnerNameIndex();
+                if (innernameIdx != 0) {
+                    checkIndex(innerClasses, innernameIdx, CONST_Utf8);
                 }
                 int acc = ic.getInnerAccessFlags();
                 acc = acc & ~(Const.ACC_PUBLIC | Const.ACC_PRIVATE | Const.ACC_PROTECTED | Const.ACC_STATIC | Const.ACC_FINAL | Const.ACC_INTERFACE |
@@ -999,7 +999,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * A Visitor class that ensures the ConstantCP-subclassed entries of the constant pool are valid. <B>Precondition:
      * index-style cross referencing in the constant pool must be valid.</B>
      *
-     * @see #constant_pool_entries_satisfy_static_constraints()
+     * @see #constantPoolEntriesSatisfyStaticConstraints()
      * @see org.apache.bcel.classfile.ConstantCP
      */
     private final class FAMRAV_Visitor extends EmptyVisitor {
@@ -1261,7 +1261,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      *
      * @throws ClassConstraintException otherwise.
      */
-    private void constant_pool_entries_satisfy_static_constraints() {
+    private void constantPoolEntriesSatisfyStaticConstraints() {
         try {
             // Most of the consistency is handled internally by BCEL; here
             // we only have to verify if the indices of the constants point
@@ -1300,10 +1300,10 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
                 VerificationResult vr = VerificationResult.VR_OK; // default.
                 try {
-                    constant_pool_entries_satisfy_static_constraints();
-                    field_and_method_refs_are_valid();
-                    every_class_has_an_accessible_superclass();
-                    final_methods_are_not_overridden();
+                    constantPoolEntriesSatisfyStaticConstraints();
+                    fieldAndMethodRefsAreValid();
+                    everyClassHasAnAccessibleSuperclass();
+                    finalMethodsAreNotOverridden();
                 } catch (final ClassConstraintException cce) {
                     vr = new VerificationResult(VerificationResult.VERIFIED_REJECTED, cce.getMessage());
                 }
@@ -1325,7 +1325,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      *
      * @throws ClassConstraintException otherwise.
      */
-    private void every_class_has_an_accessible_superclass() {
+    private void everyClassHasAnAccessibleSuperclass() {
         try {
             final Set<String> hs = new HashSet<>(); // save class names to detect circular inheritance
             JavaClass jc = Repository.lookupClass(myOwner.getClassName());
@@ -1373,9 +1373,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * constant_pool_entries_satisfy_static_constraints() before.</B>
      *
      * @throws ClassConstraintException otherwise.
-     * @see #constant_pool_entries_satisfy_static_constraints()
+     * @see #constantPoolEntriesSatisfyStaticConstraints()
      */
-    private void field_and_method_refs_are_valid() {
+    private void fieldAndMethodRefsAreValid() {
         try {
             final JavaClass jc = Repository.lookupClass(myOwner.getClassName());
             final DescendingVisitor v = new DescendingVisitor(jc, new FAMRAV_Visitor(jc));
@@ -1393,10 +1393,10 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * before (in that order).</B>
      *
      * @throws ClassConstraintException otherwise.
-     * @see #constant_pool_entries_satisfy_static_constraints()
-     * @see #every_class_has_an_accessible_superclass()
+     * @see #constantPoolEntriesSatisfyStaticConstraints()
+     * @see #everyClassHasAnAccessibleSuperclass()
      */
-    private void final_methods_are_not_overridden() {
+    private void finalMethodsAreNotOverridden() {
         try {
             final Map<String, String> hashmap = new HashMap<>();
             JavaClass jc = Repository.lookupClass(myOwner.getClassName());
