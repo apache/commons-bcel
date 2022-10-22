@@ -25,17 +25,17 @@ public abstract class StoreInstruction extends LocalVariableInstruction implemen
      * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise. tag and length are defined in
      * readInstruction and initFromFile, respectively.
      */
-    StoreInstruction(final short canon_tag, final short c_tag) {
-        super(canon_tag, c_tag);
+    StoreInstruction(final short canonTag, final short cTag) {
+        super(canonTag, cTag);
     }
 
     /**
      * @param opcode Instruction opcode
-     * @param c_tag Instruction number for compact version, ASTORE_0, e.g.
+     * @param cTag Instruction number for compact version, ASTORE_0, e.g.
      * @param n local variable index (unsigned short)
      */
-    protected StoreInstruction(final short opcode, final short c_tag, final int n) {
-        super(opcode, c_tag, n);
+    protected StoreInstruction(final short opcode, final short cTag, final int n) {
+        super(opcode, cTag, n);
     }
 
     /**

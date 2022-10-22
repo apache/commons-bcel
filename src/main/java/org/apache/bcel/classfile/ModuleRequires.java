@@ -96,12 +96,12 @@ public final class ModuleRequires implements Cloneable, Node {
     /**
      * @return Resolved string representation
      */
-    public String toString(final ConstantPool constant_pool) {
+    public String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
-        final String module_name = constant_pool.constantToString(requiresIndex, Const.CONSTANT_Module);
-        buf.append(Utility.compactClassName(module_name, false));
+        final String moduleName = constantPool.constantToString(requiresIndex, Const.CONSTANT_Module);
+        buf.append(Utility.compactClassName(moduleName, false));
         buf.append(", ").append(String.format("%04x", requiresFlags));
-        final String version = requiresVersionIndex == 0 ? "0" : constant_pool.getConstantString(requiresVersionIndex, Const.CONSTANT_Utf8);
+        final String version = requiresVersionIndex == 0 ? "0" : constantPool.getConstantString(requiresVersionIndex, Const.CONSTANT_Utf8);
         buf.append(", ").append(version);
         return buf.toString();
     }

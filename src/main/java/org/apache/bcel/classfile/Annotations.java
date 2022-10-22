@@ -65,9 +65,9 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     Annotations(final byte annotationType, final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool,
             final boolean isRuntimeVisible) throws IOException {
         this(annotationType, nameIndex, length, (AnnotationEntry[]) null, constantPool, isRuntimeVisible);
-        final int annotation_table_length = input.readUnsignedShort();
-        annotationTable = new AnnotationEntry[annotation_table_length];
-        for (int i = 0; i < annotation_table_length; i++) {
+        final int annotationTableLength = input.readUnsignedShort();
+        annotationTable = new AnnotationEntry[annotationTableLength];
+        for (int i = 0; i < annotationTableLength; i++) {
             annotationTable[i] = AnnotationEntry.read(input, constantPool, isRuntimeVisible);
         }
     }

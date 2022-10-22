@@ -72,18 +72,18 @@ public class HelloWorldBuilder {
             il, cp);
         final InstructionFactory factory = new InstructionFactory(cg);
 
-        final ObjectType i_stream = new ObjectType("java.io.InputStream");
-        final ObjectType p_stream = new ObjectType("java.io.PrintStream");
+        final ObjectType iStream = new ObjectType("java.io.InputStream");
+        final ObjectType pStream = new ObjectType("java.io.PrintStream");
 
         // Create BufferedReader object and store it in local variable `in'.
         il.append(factory.createNew("java.io.BufferedReader"));
         il.append(InstructionConst.DUP); // Use predefined constant, i.e. flyweight
         il.append(factory.createNew("java.io.InputStreamReader"));
         il.append(InstructionConst.DUP);
-        il.append(factory.createFieldAccess("java.lang.System", "in", i_stream, Const.GETSTATIC));
+        il.append(factory.createFieldAccess("java.lang.System", "in", iStream, Const.GETSTATIC));
 
         // Call constructors, i.e. BufferedReader(InputStreamReader())
-        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {i_stream}, Const.INVOKESPECIAL));
+        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {iStream}, Const.INVOKESPECIAL));
         il.append(factory.createInvoke("java.io.BufferedReader", "<init>", Type.VOID, new Type[] {new ObjectType("java.io.Reader")}, Const.INVOKESPECIAL));
 
         // Create local variable `in'
@@ -98,7 +98,7 @@ public class HelloWorldBuilder {
         lg.setStart(il.append(new ASTORE(name))); // `name' valid from here
 
         // try { ...
-        final InstructionHandle try_start = il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Const.GETSTATIC));
+        final InstructionHandle try_start = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
 
         il.append(new PUSH(cp, "Please enter your name> "));
         il.append(factory.createInvoke("java.io.PrintStream", "print", Type.VOID, new Type[] {Type.STRING}, Const.INVOKEVIRTUAL));
@@ -113,7 +113,7 @@ public class HelloWorldBuilder {
         /*
          * } catch() { ... } Add exception handler: print exception and return from method
          */
-        final InstructionHandle handler = il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Const.GETSTATIC));
+        final InstructionHandle handler = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
         // Little trick in order not to save exception object temporarily
         il.append(InstructionConst.SWAP);
 
@@ -122,7 +122,7 @@ public class HelloWorldBuilder {
         mg.addExceptionHandler(try_start, try_end, handler, new ObjectType("java.io.IOException"));
 
         // Normal code continues, now we can set the branch target of the GOTO that jumps over the handler code.
-        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Const.GETSTATIC));
+        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
         g.setTarget(ih);
 
         // String concatenation compiles to StringBuffer operations.

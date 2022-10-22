@@ -433,30 +433,30 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Replace given field with new one. If the old one does not exist add the new_ field to the class anyway.
      */
-    public void replaceField(final Field old, final Field new_) {
-        if (new_ == null) {
+    public void replaceField(final Field old, final Field newField) {
+        if (newField == null) {
             throw new ClassGenException("Replacement method must not be null");
         }
         final int i = fieldList.indexOf(old);
         if (i < 0) {
-            fieldList.add(new_);
+            fieldList.add(newField);
         } else {
-            fieldList.set(i, new_);
+            fieldList.set(i, newField);
         }
     }
 
     /**
-     * Replace given method with new one. If the old one does not exist add the new_ method to the class anyway.
+     * Replace given method with new one. If the old one does not exist add the newMethod method to the class anyway.
      */
-    public void replaceMethod(final Method old, final Method new_) {
-        if (new_ == null) {
+    public void replaceMethod(final Method old, final Method newMethod) {
+        if (newMethod == null) {
             throw new ClassGenException("Replacement method must not be null");
         }
         final int i = methodList.indexOf(old);
         if (i < 0) {
-            methodList.add(new_);
+            methodList.add(newMethod);
         } else {
-            methodList.set(i, new_);
+            methodList.set(i, newMethod);
         }
     }
 
@@ -470,8 +470,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
         this.className = Utility.pathToPackage(cp.getConstantPool().getConstantString(classNameIndex, Const.CONSTANT_Class));
     }
 
-    public void setConstantPool(final ConstantPoolGen constant_pool) {
-        cp = constant_pool;
+    public void setConstantPool(final ConstantPoolGen constantPool) {
+        cp = constantPool;
     }
 
     /**

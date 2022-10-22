@@ -35,7 +35,7 @@ import org.apache.bcel.util.BCELifier;
 class ClassDumper {
 
     private final FileImageInputStream file;
-    private final String file_name;
+    private final String fileName;
     private int classNameIndex;
     private int superclassNameIndex;
     private int major;
@@ -52,10 +52,10 @@ class ClassDumper {
      * Parses class from the given stream.
      *
      * @param file Input stream
-     * @param file_name File name
+     * @param fileName File name
      */
-    public ClassDumper(final FileImageInputStream file, final String file_name) {
-        this.file_name = file_name;
+    public ClassDumper(final FileImageInputStream file, final String fileName) {
+        this.fileName = fileName;
         this.file = file;
     }
 
@@ -109,13 +109,12 @@ class ClassDumper {
      * @throws ClassFormatException
      */
     private final void processAttributes() throws IOException, ClassFormatException {
-        int attributes_count;
-        attributes_count = file.readUnsignedShort();
-        attributes = new Attribute[attributes_count];
+        final int attributesCount = file.readUnsignedShort();
+        attributes = new Attribute[attributesCount];
 
-        System.out.printf("%nAttributes(%d):%n", attributes_count);
+        System.out.printf("%nAttributes(%d):%n", attributesCount);
 
-        for (int i = 0; i < attributes_count; i++) {
+        for (int i = 0; i < attributesCount; i++) {
             attributes[i] = Attribute.readAttribute(file, constantPool);
             // indent all lines by two spaces
             final String[] lines = attributes[i].toString().split("\\r?\\n");
@@ -140,7 +139,7 @@ class ClassDumper {
             accessFlags |= Const.ACC_ABSTRACT;
         }
         if ((accessFlags & Const.ACC_ABSTRACT) != 0 && (accessFlags & Const.ACC_FINAL) != 0) {
-            throw new ClassFormatException("Class " + file_name + " can't be both final and abstract");
+            throw new ClassFormatException("Class " + fileName + " can't be both final and abstract");
         }
 
         System.out.printf("%nClass info:%n");
@@ -165,14 +164,14 @@ class ClassDumper {
      */
     private final void processConstantPool() throws IOException, ClassFormatException {
         byte tag;
-        final int constant_pool_count = file.readUnsignedShort();
-        constantItems = new Constant[constant_pool_count];
+        final int constantPoolCount = file.readUnsignedShort();
+        constantItems = new Constant[constantPoolCount];
         constantPool = new ConstantPool(constantItems);
 
         // constantPool[0] is unused by the compiler
-        System.out.printf("%nConstant pool(%d):%n", constant_pool_count - 1);
+        System.out.printf("%nConstant pool(%d):%n", constantPoolCount - 1);
 
-        for (int i = 1; i < constant_pool_count; i++) {
+        for (int i = 1; i < constantPoolCount; i++) {
             constantItems[i] = Constant.readConstant(file);
             // i'm sure there is a better way to do this
             if (i < 10) {
@@ -200,24 +199,24 @@ class ClassDumper {
      * @throws ClassFormatException
      */
     private final void processFieldOrMethod() throws IOException, ClassFormatException {
-        final int access_flags = file.readUnsignedShort();
-        final int name_index = file.readUnsignedShort();
-        System.out.printf("  name_index: %d (", name_index);
-        System.out.println(constantToString(name_index) + ")");
-        System.out.println("  accessFlags: " + BCELifier.printFlags(access_flags, BCELifier.FLAGS.METHOD));
-        final int descriptor_index = file.readUnsignedShort();
-        System.out.printf("  descriptor_index: %d (", descriptor_index);
-        System.out.println(constantToString(descriptor_index) + ")");
+        final int accessFlags = file.readUnsignedShort();
+        final int nameIndex = file.readUnsignedShort();
+        System.out.printf("  nameIndex: %d (", nameIndex);
+        System.out.println(constantToString(nameIndex) + ")");
+        System.out.println("  accessFlags: " + BCELifier.printFlags(accessFlags, BCELifier.FLAGS.METHOD));
+        final int descriptorIndex = file.readUnsignedShort();
+        System.out.printf("  descriptorIndex: %d (", descriptorIndex);
+        System.out.println(constantToString(descriptorIndex) + ")");
 
-        final int attributes_count = file.readUnsignedShort();
-        final Attribute[] attributes = new Attribute[attributes_count];
-        System.out.println("  attribute count: " + attributes_count);
+        final int attributesCount = file.readUnsignedShort();
+        final Attribute[] attributes = new Attribute[attributesCount];
+        System.out.println("  attribute count: " + attributesCount);
 
-        for (int i = 0; i < attributes_count; i++) {
+        for (int i = 0; i < attributesCount; i++) {
             // going to peek ahead a bit
             file.mark();
-            final int attribute_name_index = file.readUnsignedShort();
-            final int attribute_length = file.readInt();
+            final int attributeNameIndex = file.readUnsignedShort();
+            final int attributeLength = file.readInt();
             // restore file location
             file.reset();
             // Usefull for debugging
@@ -233,8 +232,8 @@ class ClassDumper {
             final long pos1 = file.getStreamPosition();
             attributes[i] = Attribute.readAttribute(file, constantPool);
             final long pos2 = file.getStreamPosition();
-            if (pos2 - pos1 != attribute_length + 6) {
-                System.out.printf("%nattribute_length: %d pos2-pos1-6: %d pos1: %x(%d) pos2: %x(%d)%n", attribute_length, pos2 - pos1 - 6, pos1, pos1, pos2,
+            if (pos2 - pos1 != attributeLength + 6) {
+                System.out.printf("%nattributeLength: %d pos2-pos1-6: %d pos1: %x(%d) pos2: %x(%d)%n", attributeLength, pos2 - pos1 - 6, pos1, pos1, pos2,
                     pos2);
             }
             System.out.printf("  ");
@@ -249,16 +248,15 @@ class ClassDumper {
      * @throws ClassFormatException
      */
     private final void processFields() throws IOException, ClassFormatException {
-        int fields_count;
-        fields_count = file.readUnsignedShort();
-        fields = new Field[fields_count];
+        final int fieldsCount = file.readUnsignedShort();
+        fields = new Field[fieldsCount];
 
         // sometimes fields[0] is magic used for serialization
-        System.out.printf("%nFields(%d):%n", fields_count);
+        System.out.printf("%nFields(%d):%n", fieldsCount);
 
-        for (int i = 0; i < fields_count; i++) {
+        for (int i = 0; i < fieldsCount; i++) {
             processFieldOrMethod();
-            if (i < fields_count - 1) {
+            if (i < fieldsCount - 1) {
                 System.out.println();
             }
         }
@@ -273,10 +271,10 @@ class ClassDumper {
     private final void processID() throws IOException, ClassFormatException {
         final int magic = file.readInt();
         if (magic != Const.JVM_CLASSFILE_MAGIC) {
-            throw new ClassFormatException(file_name + " is not a Java .class file");
+            throw new ClassFormatException(fileName + " is not a Java .class file");
         }
         System.out.println("Java Class Dump");
-        System.out.println("  file: " + file_name);
+        System.out.println("  file: " + fileName);
         System.out.printf("%nClass header:%n");
         System.out.printf("  magic: %X%n", magic);
     }
@@ -288,13 +286,12 @@ class ClassDumper {
      * @throws ClassFormatException
      */
     private final void processInterfaces() throws IOException, ClassFormatException {
-        int interfaces_count;
-        interfaces_count = file.readUnsignedShort();
-        interfaces = new int[interfaces_count];
+        final int interfacesCount = file.readUnsignedShort();
+        interfaces = new int[interfacesCount];
 
-        System.out.printf("%nInterfaces(%d):%n", interfaces_count);
+        System.out.printf("%nInterfaces(%d):%n", interfacesCount);
 
-        for (int i = 0; i < interfaces_count; i++) {
+        for (int i = 0; i < interfacesCount; i++) {
             interfaces[i] = file.readUnsignedShort();
             // i'm sure there is a better way to do this
             if (i < 10) {
@@ -315,15 +312,14 @@ class ClassDumper {
      * @throws ClassFormatException
      */
     private final void processMethods() throws IOException, ClassFormatException {
-        int methods_count;
-        methods_count = file.readUnsignedShort();
-        methods = new Method[methods_count];
+        final int methodsCount = file.readUnsignedShort();
+        methods = new Method[methodsCount];
 
-        System.out.printf("%nMethods(%d):%n", methods_count);
+        System.out.printf("%nMethods(%d):%n", methodsCount);
 
-        for (int i = 0; i < methods_count; i++) {
+        for (int i = 0; i < methodsCount; i++) {
             processFieldOrMethod();
-            if (i < methods_count - 1) {
+            if (i < methodsCount - 1) {
                 System.out.println();
             }
         }

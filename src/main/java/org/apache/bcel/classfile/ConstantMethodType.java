@@ -49,9 +49,9 @@ public final class ConstantMethodType extends Constant {
         this(file.readUnsignedShort());
     }
 
-    public ConstantMethodType(final int descriptor_index) {
+    public ConstantMethodType(final int descriptorIndex) {
         super(Const.CONSTANT_MethodType);
-        this.descriptorIndex = descriptor_index;
+        this.descriptorIndex = descriptorIndex;
     }
 
     /**
@@ -81,8 +81,8 @@ public final class ConstantMethodType extends Constant {
         return descriptorIndex;
     }
 
-    public void setDescriptorIndex(final int descriptor_index) {
-        this.descriptorIndex = descriptor_index;
+    public void setDescriptorIndex(final int descriptorIndex) {
+        this.descriptorIndex = descriptorIndex;
     }
 
     /**

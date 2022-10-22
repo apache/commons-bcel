@@ -41,17 +41,17 @@ public final class SWITCH implements CompoundInstruction {
      * @param match array of match values (case 2: ... case 7: ..., etc.)
      * @param targets the instructions to be branched to for each case
      * @param target the default target
-     * @param max_gap maximum gap that may between case branches
+     * @param maxGap maximum gap that may between case branches
      */
-    public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target, final int max_gap) {
+    public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target, final int maxGap) {
         this.match = match.clone();
         this.targets = targets.clone();
         if ((matchLength = match.length) < 2) {
             instruction = new TABLESWITCH(match, targets, target);
         } else {
             sort(0, matchLength - 1);
-            if (matchIsOrdered(max_gap)) {
-                fillup(max_gap, target);
+            if (matchIsOrdered(maxGap)) {
+                fillup(maxGap, target);
                 instruction = new TABLESWITCH(this.match, this.targets, target);
             } else {
                 instruction = new LOOKUPSWITCH(this.match, this.targets, target);
@@ -59,29 +59,29 @@ public final class SWITCH implements CompoundInstruction {
         }
     }
 
-    private void fillup(final int max_gap, final InstructionHandle target) {
-        final int max_size = matchLength + matchLength * max_gap;
-        final int[] m_vec = new int[max_size];
-        final InstructionHandle[] t_vec = new InstructionHandle[max_size];
+    private void fillup(final int maxGap, final InstructionHandle target) {
+        final int maxSize = matchLength + matchLength * maxGap;
+        final int[] mVec = new int[maxSize];
+        final InstructionHandle[] tVec = new InstructionHandle[maxSize];
         int count = 1;
-        m_vec[0] = match[0];
-        t_vec[0] = targets[0];
+        mVec[0] = match[0];
+        tVec[0] = targets[0];
         for (int i = 1; i < matchLength; i++) {
             final int prev = match[i - 1];
             final int gap = match[i] - prev;
             for (int j = 1; j < gap; j++) {
-                m_vec[count] = prev + j;
-                t_vec[count] = target;
+                mVec[count] = prev + j;
+                tVec[count] = target;
                 count++;
             }
-            m_vec[count] = match[i];
-            t_vec[count] = targets[i];
+            mVec[count] = match[i];
+            tVec[count] = targets[i];
             count++;
         }
         match = new int[count];
         targets = new InstructionHandle[count];
-        System.arraycopy(m_vec, 0, match, 0, count);
-        System.arraycopy(t_vec, 0, targets, 0, count);
+        System.arraycopy(mVec, 0, match, 0, count);
+        System.arraycopy(tVec, 0, targets, 0, count);
     }
 
     public Instruction getInstruction() {

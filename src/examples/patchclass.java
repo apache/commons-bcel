@@ -28,7 +28,7 @@ import org.apache.bcel.classfile.JavaClass;
 public class patchclass {
 
     public static void main(final String[] argv) throws Exception {
-        final String[] file_name = new String[argv.length];
+        final String[] fileName = new String[argv.length];
         int files = 0;
 
         if (argv.length < 3) {
@@ -37,55 +37,55 @@ public class patchclass {
         }
 
         for (int i = 2; i < argv.length; i++) {
-            file_name[files++] = argv[i];
+            fileName[files++] = argv[i];
         }
 
         for (int i = 0; i < files; i++) {
-            final ClassParser parser = new ClassParser(file_name[i]);
-            final JavaClass java_class = parser.parse();
+            final ClassParser parser = new ClassParser(fileName[i]);
+            final JavaClass javaClass = parser.parse();
 
-            patchIt(argv[0], argv[1], java_class.getConstantPool().getConstantPool());
+            patchIt(argv[0], argv[1], javaClass.getConstantPool().getConstantPool());
 
             // Dump the changed class to a new file
-            java_class.dump("_" + file_name[i]);
-            System.out.println("Results saved in: _" + file_name[i]);
+            javaClass.dump("_" + fileName[i]);
+            System.out.println("Results saved in: _" + fileName[i]);
         }
     }
 
     /*
      * Replace all occurences of string "<em>old</em>" with "<em>replacement</em>" in all Utf8 constants
      */
-    private static void patchIt(final String old, final String replacement, final Constant[] constant_pool) {
+    private static void patchIt(final String old, final String replacement, final Constant[] constantPool) {
         ConstantUtf8 c;
         String str;
-        int index, old_index;
+        int index, oldIndex;
         StringBuilder buf;
 
         // Loop through constant pool
-        for (short i = 0; i < constant_pool.length; i++) {
-            if (constant_pool[i] instanceof ConstantUtf8) { // Utf8 string found
+        for (short i = 0; i < constantPool.length; i++) {
+            if (constantPool[i] instanceof ConstantUtf8) { // Utf8 string found
                 try {
-                    c = (ConstantUtf8) constant_pool[i]; // Get the string
+                    c = (ConstantUtf8) constantPool[i]; // Get the string
                     str = c.getBytes();
 
                     if ((index = str.indexOf(old)) != -1) { // `old' found in str
                         buf = new StringBuilder(); // target buffer
-                        old_index = 0; // String start offset
+                        oldIndex = 0; // String start offset
 
                         // While we have something to replace
-                        while ((index = str.indexOf(old, old_index)) != -1) {
-                            buf.append(str.substring(old_index, index)); // append prefix
+                        while ((index = str.indexOf(old, oldIndex)) != -1) {
+                            buf.append(str.substring(oldIndex, index)); // append prefix
                             buf.append(replacement); // append `replacement'
 
-                            old_index = index + old.length(); // Skip `old'.length chars
+                            oldIndex = index + old.length(); // Skip `old'.length chars
                         }
 
-                        buf.append(str.substring(old_index)); // append rest of string
+                        buf.append(str.substring(oldIndex)); // append rest of string
                         str = buf.toString();
 
                         // Finally push the new string back to the constant pool
                         c = new ConstantUtf8(str);
-                        constant_pool[i] = c;
+                        constantPool[i] = c;
                     }
                 } catch (final StringIndexOutOfBoundsException e) { // Should not occur
                     System.err.println(e);

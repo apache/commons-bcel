@@ -40,23 +40,23 @@ public final class StackMap extends Attribute {
     /**
      * Construct object from input stream.
      *
-     * @param name_index Index of name
+     * @param nameIndex Index of name
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    StackMap(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, (StackMapEntry[]) null, constant_pool);
-        final int map_length = input.readUnsignedShort();
-        table = new StackMapEntry[map_length];
-        for (int i = 0; i < map_length; i++) {
-            table[i] = new StackMapEntry(input, constant_pool);
+    StackMap(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (StackMapEntry[]) null, constantPool);
+        final int mapLength = input.readUnsignedShort();
+        table = new StackMapEntry[mapLength];
+        for (int i = 0; i < mapLength; i++) {
+            table[i] = new StackMapEntry(input, constantPool);
         }
     }
 
     /*
-     * @param name_index Index of name
+     * @param nameIndex Index of name
      *
      * @param length Content length in bytes
      *
@@ -64,8 +64,8 @@ public final class StackMap extends Attribute {
      *
      * @param constant_pool Array of constants
      */
-    public StackMap(final int name_index, final int length, final StackMapEntry[] map, final ConstantPool constant_pool) {
-        super(Const.ATTR_STACK_MAP, name_index, length, constant_pool);
+    public StackMap(final int nameIndex, final int length, final StackMapEntry[] map, final ConstantPool constantPool) {
+        super(Const.ATTR_STACK_MAP, nameIndex, length, constantPool);
         this.table = map;
     }
 

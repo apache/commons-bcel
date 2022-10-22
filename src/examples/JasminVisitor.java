@@ -55,7 +55,7 @@ import org.apache.bcel.generic.TABLESWITCH;
  */
 public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     public static void main(final String[] argv) throws Exception {
-        JavaClass java_class;
+        JavaClass javaClass;
 
         if (argv.length == 0) {
             System.err.println("disassemble: No input files specified");
@@ -63,11 +63,11 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         }
 
         for (final String arg : argv) {
-            if ((java_class = Repository.lookupClass(arg)) == null) {
-                java_class = new ClassParser(arg).parse();
+            if ((javaClass = Repository.lookupClass(arg)) == null) {
+                javaClass = new ClassParser(arg).parse();
             }
 
-            String className = java_class.getClassName();
+            String className = javaClass.getClassName();
             final int index = className.lastIndexOf('.');
             final String path = className.substring(0, index + 1).replace('.', File.separatorChar);
             className = className.substring(index + 1);
@@ -79,7 +79,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
             final String name = path + className + ".j";
             try (final FileOutputStream out = new FileOutputStream(name)) {
-                new JasminVisitor(java_class, out).disassemble();
+                new JasminVisitor(javaClass, out).disassemble();
                 System.out.println("File dumped to: " + name);
             }
         }

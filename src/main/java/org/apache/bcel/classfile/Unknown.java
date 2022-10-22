@@ -59,29 +59,29 @@ public final class Unknown extends Attribute {
     /**
      * Create a non-standard attribute.
      *
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param bytes Attribute contents
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public Unknown(final int name_index, final int length, final byte[] bytes, final ConstantPool constant_pool) {
-        super(Const.ATTR_UNKNOWN, name_index, length, constant_pool);
+    public Unknown(final int nameIndex, final int length, final byte[] bytes, final ConstantPool constantPool) {
+        super(Const.ATTR_UNKNOWN, nameIndex, length, constantPool);
         this.bytes = bytes;
-        name = constant_pool.getConstantUtf8(name_index).getBytes();
+        name = constantPool.getConstantUtf8(nameIndex).getBytes();
         UNKNOWN_ATTRIBUTES.put(name, this);
     }
 
     /**
      * Construct object from input stream.
      *
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    Unknown(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, (byte[]) null, constant_pool);
+    Unknown(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (byte[]) null, constantPool);
         if (length > 0) {
             bytes = new byte[length];
             input.readFully(bytes);

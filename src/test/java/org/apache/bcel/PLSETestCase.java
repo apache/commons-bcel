@@ -129,9 +129,9 @@ public class PLSETestCase extends AbstractTestCase {
         // System.out.println(lvt);
         // System.out.println(lvt.getTableLength());
         final MethodGen mg = new MethodGen(m, gen.getClassName(), pool);
-        final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
+        final LocalVariableTable newLvt = mg.getLocalVariableTable(mg.getConstantPool());
         // System.out.println(new_lvt);
-        assertEquals(lvt.getTableLength(), new_lvt.getTableLength(), "number of locals");
+        assertEquals(lvt.getTableLength(), newLvt.getTableLength(), "number of locals");
     }
 
     /**

@@ -191,15 +191,15 @@ public class FieldGen extends FieldGenOrMethodGen {
      */
     public Field getField() {
         final String signature = getSignature();
-        final int name_index = super.getConstantPool().addUtf8(super.getName());
-        final int signature_index = super.getConstantPool().addUtf8(signature);
+        final int nameIndex = super.getConstantPool().addUtf8(super.getName());
+        final int signatureIndex = super.getConstantPool().addUtf8(signature);
         if (value != null) {
             checkType(super.getType());
             final int index = addConstant();
             addAttribute(new ConstantValue(super.getConstantPool().addUtf8("ConstantValue"), 2, index, super.getConstantPool().getConstantPool())); // sic
         }
         addAnnotationsAsAttribute(super.getConstantPool());
-        return new Field(super.getAccessFlags(), name_index, signature_index, getAttributes(), super.getConstantPool().getConstantPool()); // sic
+        return new Field(super.getAccessFlags(), nameIndex, signatureIndex, getAttributes(), super.getConstantPool().getConstantPool()); // sic
     }
 
     public String getInitValue() {

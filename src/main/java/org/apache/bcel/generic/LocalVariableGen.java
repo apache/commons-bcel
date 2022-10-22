@@ -138,18 +138,18 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * @param cp constant pool
      */
     public LocalVariable getLocalVariable(final ConstantPoolGen cp) {
-        int start_pc = 0;
+        int startPc = 0;
         int length = 0;
         if (start != null && end != null) {
-            start_pc = start.getPosition();
-            length = end.getPosition() - start_pc;
+            startPc = start.getPosition();
+            length = end.getPosition() - startPc;
             if (end.getNext() == null && liveToEnd) {
                 length += end.getInstruction().getLength();
             }
         }
-        final int name_index = cp.addUtf8(name);
-        final int signature_index = cp.addUtf8(type.getSignature());
-        return new LocalVariable(start_pc, length, name_index, signature_index, index, cp.getConstantPool(), origIndex);
+        final int nameIndex = cp.addUtf8(name);
+        final int signatureIndex = cp.addUtf8(type.getSignature());
+        return new LocalVariable(startPc, length, nameIndex, signatureIndex, index, cp.getConstantPool(), origIndex);
     }
 
     @Override
@@ -186,8 +186,8 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         this.index = index;
     }
 
-    public void setLiveToEnd(final boolean live_to_end) {
-        this.liveToEnd = live_to_end;
+    public void setLiveToEnd(final boolean liveToEnd) {
+        this.liveToEnd = liveToEnd;
     }
 
     @Override
@@ -211,22 +211,22 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
     /**
-     * @param old_ih old target, either start or end
-     * @param new_ih new target
+     * @param oldIh old target, either start or end
+     * @param newIh new target
      */
     @Override
-    public void updateTarget(final InstructionHandle old_ih, final InstructionHandle new_ih) {
+    public void updateTarget(final InstructionHandle oldIh, final InstructionHandle newIh) {
         boolean targeted = false;
-        if (start == old_ih) {
+        if (start == oldIh) {
             targeted = true;
-            setStart(new_ih);
+            setStart(newIh);
         }
-        if (end == old_ih) {
+        if (end == oldIh) {
             targeted = true;
-            setEnd(new_ih);
+            setEnd(newIh);
         }
         if (!targeted) {
-            throw new ClassGenException("Not targeting " + old_ih + ", but {" + start + ", " + end + "}");
+            throw new ClassGenException("Not targeting " + oldIh + ", but {" + start + ", " + end + "}");
         }
     }
 }

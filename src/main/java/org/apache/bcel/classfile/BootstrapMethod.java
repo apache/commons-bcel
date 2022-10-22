@@ -62,8 +62,8 @@ public class BootstrapMethod implements Cloneable {
     }
 
     // helper method
-    private BootstrapMethod(final int bootstrap_method_ref, final int num_bootstrap_arguments) {
-        this(bootstrap_method_ref, new int[num_bootstrap_arguments]);
+    private BootstrapMethod(final int bootstrapMethodRef, final int numBootstrapArguments) {
+        this(bootstrapMethodRef, new int[numBootstrapArguments]);
     }
 
     /**
@@ -96,8 +96,8 @@ public class BootstrapMethod implements Cloneable {
     public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(bootstrapMethodRef);
         file.writeShort(bootstrapArguments.length);
-        for (final int bootstrap_argument : bootstrapArguments) {
-            file.writeShort(bootstrap_argument);
+        for (final int bootstrapArgument : bootstrapArguments) {
+            file.writeShort(bootstrapArgument);
         }
     }
 
@@ -149,9 +149,8 @@ public class BootstrapMethod implements Cloneable {
      */
     public final String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
-        String bootstrap_method_name;
-        bootstrap_method_name = constantPool.constantToString(bootstrapMethodRef, Const.CONSTANT_MethodHandle);
-        buf.append(Utility.compactClassName(bootstrap_method_name, false));
+        final String bootstrapMethodName = constantPool.constantToString(bootstrapMethodRef, Const.CONSTANT_MethodHandle);
+        buf.append(Utility.compactClassName(bootstrapMethodName, false));
         final int num_bootstrap_arguments = bootstrapArguments.length;
         if (num_bootstrap_arguments > 0) {
             buf.append("\nMethod Arguments:");

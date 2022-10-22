@@ -77,8 +77,8 @@ public final class Field extends FieldOrMethod {
      *
      * @param file Input stream
      */
-    Field(final DataInput file, final ConstantPool constant_pool) throws IOException, ClassFormatException {
-        super(file, constant_pool);
+    Field(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {
+        super(file, constantPool);
     }
 
     /**
@@ -90,14 +90,14 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * @param access_flags Access rights of field
-     * @param name_index Points to field name in constant pool
-     * @param signature_index Points to encoded signature
+     * @param accessFlags Access rights of field
+     * @param nameIndex Points to field name in constant pool
+     * @param signatureIndex Points to encoded signature
      * @param attributes Collection of attributes
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public Field(final int access_flags, final int name_index, final int signature_index, final Attribute[] attributes, final ConstantPool constant_pool) {
-        super(access_flags, name_index, signature_index, attributes, constant_pool);
+    public Field(final int accessFlags, final int nameIndex, final int signatureIndex, final Attribute[] attributes, final ConstantPool constantPool) {
+        super(accessFlags, nameIndex, signatureIndex, attributes, constantPool);
     }
 
     /**

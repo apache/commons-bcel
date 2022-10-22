@@ -104,15 +104,15 @@ public final class ModuleOpens implements Cloneable, Node {
     /**
      * @return Resolved string representation
      */
-    public String toString(final ConstantPool constant_pool) {
+    public String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
-        final String package_name = constant_pool.constantToString(opensIndex, Const.CONSTANT_Package);
-        buf.append(Utility.compactClassName(package_name, false));
+        final String packageName = constantPool.constantToString(opensIndex, Const.CONSTANT_Package);
+        buf.append(Utility.compactClassName(packageName, false));
         buf.append(", ").append(String.format("%04x", opensFlags));
         buf.append(", to(").append(opensToCount).append("):\n");
         for (final int index : opensToIndex) {
-            final String module_name = constant_pool.getConstantString(index, Const.CONSTANT_Module);
-            buf.append("      ").append(Utility.compactClassName(module_name, false)).append("\n");
+            final String moduleName = constantPool.getConstantString(index, Const.CONSTANT_Module);
+            buf.append("      ").append(Utility.compactClassName(moduleName, false)).append("\n");
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }

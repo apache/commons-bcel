@@ -103,8 +103,8 @@ public final class ModuleProvides implements Cloneable, Node {
      */
     public String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
-        final String interface_name = constantPool.constantToString(providesIndex, Const.CONSTANT_Class);
-        buf.append(Utility.compactClassName(interface_name, false));
+        final String interfaceName = constantPool.constantToString(providesIndex, Const.CONSTANT_Class);
+        buf.append(Utility.compactClassName(interfaceName, false));
         buf.append(", with(").append(providesWithCount).append("):\n");
         for (final int index : providesWithIndex) {
             final String className = constantPool.getConstantString(index, Const.CONSTANT_Class);

@@ -35,27 +35,27 @@ public final class Synthetic extends Attribute {
     private byte[] bytes;
 
     /**
-     * @param name_index Index in constant pool to CONSTANT_Utf8, which should represent the string "Synthetic".
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8, which should represent the string "Synthetic".
      * @param length Content length in bytes - should be zero.
      * @param bytes Attribute contents
-     * @param constant_pool The constant pool this attribute is associated with.
+     * @param constantPool The constant pool this attribute is associated with.
      */
-    public Synthetic(final int name_index, final int length, final byte[] bytes, final ConstantPool constant_pool) {
-        super(Const.ATTR_SYNTHETIC, name_index, length, constant_pool);
+    public Synthetic(final int nameIndex, final int length, final byte[] bytes, final ConstantPool constantPool) {
+        super(Const.ATTR_SYNTHETIC, nameIndex, length, constantPool);
         this.bytes = bytes;
     }
 
     /**
      * Construct object from input stream.
      *
-     * @param name_index Index in constant pool to CONSTANT_Utf8
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    Synthetic(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, (byte[]) null, constant_pool);
+    Synthetic(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (byte[]) null, constantPool);
         if (length > 0) {
             bytes = new byte[length];
             input.readFully(bytes);

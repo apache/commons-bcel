@@ -39,13 +39,13 @@ public final class StackMapType implements Cloneable {
      * @param type type tag as defined in the Constants interface
      * @param index index to constant pool, or byte code offset
      */
-    public StackMapType(final byte type, final int index, final ConstantPool constant_pool) {
+    public StackMapType(final byte type, final int index, final ConstantPool constantPool) {
         if (type < Const.ITEM_Bogus || type > Const.ITEM_NewObject) {
             throw new IllegalArgumentException("Illegal type for StackMapType: " + type);
         }
         this.type = type;
         this.index = index;
-        this.constantPool = constant_pool;
+        this.constantPool = constantPool;
     }
 
     /**
@@ -54,12 +54,12 @@ public final class StackMapType implements Cloneable {
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      */
-    StackMapType(final DataInput file, final ConstantPool constant_pool) throws IOException {
-        this(file.readByte(), -1, constant_pool);
+    StackMapType(final DataInput file, final ConstantPool constantPool) throws IOException {
+        this(file.readByte(), -1, constantPool);
         if (hasIndex()) {
             this.index = file.readShort();
         }
-        this.constantPool = constant_pool;
+        this.constantPool = constantPool;
     }
 
     /**

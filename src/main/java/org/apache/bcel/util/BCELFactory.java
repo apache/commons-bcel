@@ -67,7 +67,7 @@ class BCELFactory extends EmptyVisitor {
     private final PrintWriter printWriter;
     private final ConstantPoolGen constantPoolGen;
 
-    private final Map<Instruction, InstructionHandle> branch_map = new HashMap<>();
+    private final Map<Instruction, InstructionHandle> branchMap = new HashMap<>();
 
     // Memorize BranchInstructions that need an update
     private final List<BranchInstruction> branches = new ArrayList<>();
@@ -101,7 +101,7 @@ class BCELFactory extends EmptyVisitor {
             for (InstructionHandle ih = methodGen.getInstructionList().getStart(); ih != null; ih = ih.getNext()) {
                 final Instruction i = ih.getInstruction();
                 if (i instanceof BranchInstruction) {
-                    branch_map.put(i, ih); // memorize container
+                    branchMap.put(i, ih); // memorize container
                 }
                 if (ih.hasTargeters()) {
                     if (i instanceof BranchInstruction) {
@@ -123,7 +123,7 @@ class BCELFactory extends EmptyVisitor {
 
     private void updateBranchTargets() {
         branches.forEach(bi -> {
-            final BranchHandle bh = (BranchHandle) branch_map.get(bi);
+            final BranchHandle bh = (BranchHandle) branchMap.get(bi);
             final int pos = bh.getPosition();
             final String name = bi.getName() + "_" + pos;
             int targetPos = bh.getTarget().getPosition();
@@ -186,7 +186,7 @@ class BCELFactory extends EmptyVisitor {
 
     @Override
     public void visitBranchInstruction(final BranchInstruction bi) {
-        final BranchHandle bh = (BranchHandle) branch_map.get(bi);
+        final BranchHandle bh = (BranchHandle) branchMap.get(bi);
         final int pos = bh.getPosition();
         final String name = bi.getName() + "_" + pos;
         if (bi instanceof Select) {

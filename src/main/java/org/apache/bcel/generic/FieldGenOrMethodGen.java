@@ -58,8 +58,8 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * @since 6.0
      */
-    protected FieldGenOrMethodGen(final int access_flags) { // TODO could this be package protected?
-        super(access_flags);
+    protected FieldGenOrMethodGen(final int accessFlags) { // TODO could this be package protected?
+        super(accessFlags);
     }
 
     protected void addAll(final Attribute[] attrs) {

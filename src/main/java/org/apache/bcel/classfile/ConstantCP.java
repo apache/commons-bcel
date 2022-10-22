@@ -113,10 +113,10 @@ public abstract class ConstantCP extends Constant {
     }
 
     /**
-     * @param class_index points to Constant_class
+     * @param classIndex points to Constant_class
      */
-    public final void setClassIndex(final int class_index) {
-        this.class_index = class_index;
+    public final void setClassIndex(final int classIndex) {
+        this.class_index = classIndex;
     }
 
     /**

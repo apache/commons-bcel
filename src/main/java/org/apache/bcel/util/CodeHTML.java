@@ -77,15 +77,15 @@ final class CodeHTML {
         final short opcode = (short) bytes.readUnsignedByte();
         String name;
         String signature;
-        int default_offset = 0;
+        int defaultOffset = 0;
         int low;
         int high;
         int index;
-        int class_index;
+        int classIndex;
         int vindex;
         int constant;
-        int[] jump_table;
-        int no_pad_bytes = 0;
+        int[] jumpTable;
+        int noPadBytes = 0;
         int offset;
         final StringBuilder buf = new StringBuilder(256); // CHECKSTYLE IGNORE MagicNumber
         buf.append("<TT>").append(Const.getOpcodeName(opcode)).append("</TT></TD><TD>");
@@ -94,32 +94,32 @@ final class CodeHTML {
          */
         if (opcode == Const.TABLESWITCH || opcode == Const.LOOKUPSWITCH) {
             final int remainder = bytes.getIndex() % 4;
-            no_pad_bytes = remainder == 0 ? 0 : 4 - remainder;
-            for (int i = 0; i < no_pad_bytes; i++) {
+            noPadBytes = remainder == 0 ? 0 : 4 - remainder;
+            for (int i = 0; i < noPadBytes; i++) {
                 bytes.readByte();
             }
             // Both cases have a field default_offset in common
-            default_offset = bytes.readInt();
+            defaultOffset = bytes.readInt();
         }
         switch (opcode) {
         case Const.TABLESWITCH:
             low = bytes.readInt();
             high = bytes.readInt();
-            offset = bytes.getIndex() - 12 - no_pad_bytes - 1;
-            default_offset += offset;
+            offset = bytes.getIndex() - 12 - noPadBytes - 1;
+            defaultOffset += offset;
             buf.append("<TABLE BORDER=1><TR>");
             // Print switch indices in first row (and default)
-            jump_table = new int[high - low + 1];
-            for (int i = 0; i < jump_table.length; i++) {
-                jump_table[i] = offset + bytes.readInt();
+            jumpTable = new int[high - low + 1];
+            for (int i = 0; i < jumpTable.length; i++) {
+                jumpTable[i] = offset + bytes.readInt();
                 buf.append("<TH>").append(low + i).append("</TH>");
             }
             buf.append("<TH>default</TH></TR>\n<TR>");
             // Print target and default indices in second row
-            for (final int element : jump_table) {
+            for (final int element : jumpTable) {
                 buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(element).append("\">").append(element).append("</A></TD>");
             }
-            buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(default_offset).append("\">").append(default_offset)
+            buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(defaultOffset).append("\">").append(defaultOffset)
                 .append("</A></TD></TR>\n</TABLE>\n");
             break;
         /*
@@ -127,23 +127,23 @@ final class CodeHTML {
          */
         case Const.LOOKUPSWITCH:
             final int npairs = bytes.readInt();
-            offset = bytes.getIndex() - 8 - no_pad_bytes - 1;
-            jump_table = new int[npairs];
-            default_offset += offset;
+            offset = bytes.getIndex() - 8 - noPadBytes - 1;
+            jumpTable = new int[npairs];
+            defaultOffset += offset;
             buf.append("<TABLE BORDER=1><TR>");
             // Print switch indices in first row (and default)
             for (int i = 0; i < npairs; i++) {
                 final int match = bytes.readInt();
-                jump_table[i] = offset + bytes.readInt();
+                jumpTable[i] = offset + bytes.readInt();
                 buf.append("<TH>").append(match).append("</TH>");
             }
             buf.append("<TH>default</TH></TR>\n<TR>");
             // Print target and default indices in second row
             for (int i = 0; i < npairs; i++) {
-                buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(jump_table[i]).append("\">").append(jump_table[i])
+                buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(jumpTable[i]).append("\">").append(jumpTable[i])
                     .append("</A></TD>");
             }
-            buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(default_offset).append("\">").append(default_offset)
+            buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(defaultOffset).append("\">").append(defaultOffset)
                 .append("</A></TD></TR>\n</TABLE>\n");
             break;
         /*
@@ -223,8 +223,8 @@ final class CodeHTML {
         case Const.PUTSTATIC:
             index = bytes.readShort();
             final ConstantFieldref c1 = constantPool.getConstant(index, Const.CONSTANT_Fieldref, ConstantFieldref.class);
-            class_index = c1.getClassIndex();
-            name = constantPool.getConstantString(class_index, Const.CONSTANT_Class);
+            classIndex = c1.getClassIndex();
+            name = constantPool.getConstantString(classIndex, Const.CONSTANT_Class);
             name = Utility.compactClassName(name, false);
             index = c1.getNameAndTypeIndex();
             final String field_name = constantPool.constantToString(index, Const.CONSTANT_NameAndType);
@@ -232,7 +232,7 @@ final class CodeHTML {
                 buf.append("<A HREF=\"").append(className).append("_methods.html#field").append(field_name).append("\" TARGET=Methods>").append(field_name)
                     .append("</A>\n");
             } else {
-                buf.append(constantHtml.referenceConstant(class_index)).append(".").append(field_name);
+                buf.append(constantHtml.referenceConstant(classIndex)).append(".").append(field_name);
             }
             break;
         /*
@@ -252,31 +252,31 @@ final class CodeHTML {
         case Const.INVOKEVIRTUAL:
         case Const.INVOKEINTERFACE:
         case Const.INVOKEDYNAMIC:
-            final int m_index = bytes.readShort();
+            final int mIndex = bytes.readShort();
             String str;
             if (opcode == Const.INVOKEINTERFACE) { // Special treatment needed
                 bytes.readUnsignedByte(); // Redundant
                 bytes.readUnsignedByte(); // Reserved
 //                    int nargs = bytes.readUnsignedByte(); // Redundant
 //                    int reserved = bytes.readUnsignedByte(); // Reserved
-                final ConstantInterfaceMethodref c = constantPool.getConstant(m_index, Const.CONSTANT_InterfaceMethodref, ConstantInterfaceMethodref.class);
-                class_index = c.getClassIndex();
+                final ConstantInterfaceMethodref c = constantPool.getConstant(mIndex, Const.CONSTANT_InterfaceMethodref, ConstantInterfaceMethodref.class);
+                classIndex = c.getClassIndex();
                 index = c.getNameAndTypeIndex();
-                name = Class2HTML.referenceClass(class_index);
+                name = Class2HTML.referenceClass(classIndex);
             } else if (opcode == Const.INVOKEDYNAMIC) { // Special treatment needed
                 bytes.readUnsignedByte(); // Reserved
                 bytes.readUnsignedByte(); // Reserved
-                final ConstantInvokeDynamic c = constantPool.getConstant(m_index, Const.CONSTANT_InvokeDynamic, ConstantInvokeDynamic.class);
+                final ConstantInvokeDynamic c = constantPool.getConstant(mIndex, Const.CONSTANT_InvokeDynamic, ConstantInvokeDynamic.class);
                 index = c.getNameAndTypeIndex();
                 name = "#" + c.getBootstrapMethodAttrIndex();
             } else {
                 // UNDONE: Java8 now allows INVOKESPECIAL and INVOKESTATIC to
                 // reference EITHER a Methodref OR an InterfaceMethodref.
                 // Not sure if that affects this code or not. (markro)
-                final ConstantMethodref c = constantPool.getConstant(m_index, Const.CONSTANT_Methodref, ConstantMethodref.class);
-                class_index = c.getClassIndex();
+                final ConstantMethodref c = constantPool.getConstant(mIndex, Const.CONSTANT_Methodref, ConstantMethodref.class);
+                classIndex = c.getClassIndex();
                 index = c.getNameAndTypeIndex();
-                name = Class2HTML.referenceClass(class_index);
+                name = Class2HTML.referenceClass(classIndex);
             }
             str = Class2HTML.toHTML(constantPool.constantToString(constantPool.getConstant(index, Const.CONSTANT_NameAndType)));
             // Get signature, i.e., types
@@ -284,7 +284,7 @@ final class CodeHTML {
             signature = constantPool.constantToString(c2.getSignatureIndex(), Const.CONSTANT_Utf8);
             final String[] args = Utility.methodSignatureArgumentTypes(signature, false);
             final String type = Utility.methodSignatureReturnType(signature, false);
-            buf.append(name).append(".<A HREF=\"").append(className).append("_cp.html#cp").append(m_index).append("\" TARGET=ConstantPool>").append(str)
+            buf.append(name).append(".<A HREF=\"").append(className).append("_cp.html#cp").append(mIndex).append("\" TARGET=ConstantPool>").append(str)
                 .append("</A>").append("(");
             // List arguments
             for (int i = 0; i < args.length; i++) {

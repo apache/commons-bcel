@@ -42,12 +42,12 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
 
     private MethodParameter[] parameters = EMPTY_METHOD_PARAMETER_ARRAY;
 
-    MethodParameters(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        super(Const.ATTR_METHOD_PARAMETERS, name_index, length, constant_pool);
+    MethodParameters(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        super(Const.ATTR_METHOD_PARAMETERS, nameIndex, length, constantPool);
 
-        final int parameters_count = input.readUnsignedByte();
-        parameters = new MethodParameter[parameters_count];
-        for (int i = 0; i < parameters_count; i++) {
+        final int parameterCount = input.readUnsignedByte();
+        parameters = new MethodParameter[parameterCount];
+        for (int i = 0; i < parameterCount; i++) {
             parameters[i] = new MethodParameter(input);
         }
     }

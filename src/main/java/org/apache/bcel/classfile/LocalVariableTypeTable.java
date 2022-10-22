@@ -72,8 +72,8 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
         }
     }
 
-    public LocalVariableTypeTable(final int name_index, final int length, final LocalVariable[] local_variable_table, final ConstantPool constant_pool) {
-        super(Const.ATTR_LOCAL_VARIABLE_TYPE_TABLE, name_index, length, constant_pool);
+    public LocalVariableTypeTable(final int nameIndex, final int length, final LocalVariable[] local_variable_table, final ConstantPool constantPool) {
+        super(Const.ATTR_LOCAL_VARIABLE_TYPE_TABLE, nameIndex, length, constantPool);
         this.localVariableTypeTable = local_variable_table;
     }
 
@@ -90,12 +90,12 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final LocalVariableTypeTable c = (LocalVariableTypeTable) clone();
 
         c.localVariableTypeTable = new LocalVariable[localVariableTypeTable.length];
         Arrays.setAll(c.localVariableTypeTable, i -> localVariableTypeTable[i].copy());
-        c.setConstantPool(constant_pool);
+        c.setConstantPool(constantPool);
         return c;
     }
 
@@ -131,8 +131,8 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
         return Stream.of(localVariableTypeTable).iterator();
     }
 
-    public final void setLocalVariableTable(final LocalVariable[] local_variable_table) {
-        this.localVariableTypeTable = local_variable_table;
+    public final void setLocalVariableTable(final LocalVariable[] localVariableTable) {
+        this.localVariableTypeTable = localVariableTable;
     }
 
     /**

@@ -51,29 +51,29 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     /**
      * Construct object from input stream.
      *
-     * @param name_index Index in constant pool to CONSTANT_Utf8
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    InnerClasses(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, (InnerClass[]) null, constant_pool);
-        final int number_of_classes = input.readUnsignedShort();
-        innerClasses = new InnerClass[number_of_classes];
-        for (int i = 0; i < number_of_classes; i++) {
+    InnerClasses(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (InnerClass[]) null, constantPool);
+        final int classCount = input.readUnsignedShort();
+        innerClasses = new InnerClass[classCount];
+        for (int i = 0; i < classCount; i++) {
             innerClasses[i] = new InnerClass(input);
         }
     }
 
     /**
-     * @param name_index Index in constant pool to CONSTANT_Utf8
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
      * @param innerClasses array of inner classes attributes
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public InnerClasses(final int name_index, final int length, final InnerClass[] innerClasses, final ConstantPool constant_pool) {
-        super(Const.ATTR_INNER_CLASSES, name_index, length, constant_pool);
+    public InnerClasses(final int nameIndex, final int length, final InnerClass[] innerClasses, final ConstantPool constantPool) {
+        super(Const.ATTR_INNER_CLASSES, nameIndex, length, constantPool);
         this.innerClasses = innerClasses != null ? innerClasses : EMPTY_INNER_CLASSE_ARRAY;
     }
 
@@ -111,8 +111,8 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
         file.writeShort(innerClasses.length);
-        for (final InnerClass inner_class : innerClasses) {
-            inner_class.dump(file);
+        for (final InnerClass innerClass : innerClasses) {
+            innerClass.dump(file);
         }
     }
 

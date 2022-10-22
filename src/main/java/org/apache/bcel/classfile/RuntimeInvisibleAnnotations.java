@@ -29,20 +29,20 @@ import org.apache.bcel.Const;
  */
 public class RuntimeInvisibleAnnotations extends Annotations {
     /**
-     * @param name_index Index pointing to the name <em>Code</em>
+     * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public RuntimeInvisibleAnnotations(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        super(Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS, name_index, length, input, constant_pool, false);
+    public RuntimeInvisibleAnnotations(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        super(Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS, nameIndex, length, input, constantPool, false);
     }
 
     /**
      * @return deep copy of this attribute
      */
     @Override
-    public Attribute copy(final ConstantPool constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         return (Attribute) clone();
     }
 

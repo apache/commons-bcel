@@ -184,10 +184,10 @@ public abstract class AccessFlags {
     /**
      * Set access flags aka "modifiers".
      *
-     * @param access_flags Access flags of the object.
+     * @param accessFlags Access flags of the object.
      */
-    public final void setAccessFlags(final int access_flags) {
-        this.access_flags = access_flags;
+    public final void setAccessFlags(final int accessFlags) {
+        this.access_flags = accessFlags;
     }
 
     private void setFlag(final int flag, final boolean set) {
@@ -203,9 +203,9 @@ public abstract class AccessFlags {
     /**
      * Set access flags aka "modifiers".
      *
-     * @param access_flags Access flags of the object.
+     * @param accessFlags Access flags of the object.
      */
-    public final void setModifiers(final int access_flags) {
-        setAccessFlags(access_flags);
+    public final void setModifiers(final int accessFlags) {
+        setAccessFlags(accessFlags);
     }
 }

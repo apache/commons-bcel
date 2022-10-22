@@ -67,14 +67,14 @@ public class JSR extends JsrInstruction implements VariableLengthInstruction {
     }
 
     @Override
-    protected int updatePosition(final int offset, final int max_offset) {
+    protected int updatePosition(final int offset, final int maxOffset) {
         final int i = getTargetOffset(); // Depending on old position value
         setPosition(getPosition() + offset); // Position may be shifted by preceding expansions
-        if (Math.abs(i) >= Short.MAX_VALUE - max_offset) { // to large for short (estimate)
+        if (Math.abs(i) >= Short.MAX_VALUE - maxOffset) { // to large for short (estimate)
             super.setOpcode(org.apache.bcel.Const.JSR_W);
-            final short old_length = (short) super.getLength();
+            final short oldLength = (short) super.getLength();
             super.setLength(5);
-            return super.getLength() - old_length;
+            return super.getLength() - oldLength;
         }
         return 0;
     }

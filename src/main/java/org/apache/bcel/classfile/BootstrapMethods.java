@@ -45,31 +45,31 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     }
 
     /**
-     * @param name_index Index in constant pool to CONSTANT_Utf8
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
      * @param bootstrapMethods array of bootstrap methods
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public BootstrapMethods(final int name_index, final int length, final BootstrapMethod[] bootstrapMethods, final ConstantPool constant_pool) {
-        super(Const.ATTR_BOOTSTRAP_METHODS, name_index, length, constant_pool);
+    public BootstrapMethods(final int nameIndex, final int length, final BootstrapMethod[] bootstrapMethods, final ConstantPool constantPool) {
+        super(Const.ATTR_BOOTSTRAP_METHODS, nameIndex, length, constantPool);
         this.bootstrapMethods = bootstrapMethods;
     }
 
     /**
      * Construct object from Input stream.
      *
-     * @param name_index Index in constant pool to CONSTANT_Utf8
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    BootstrapMethods(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, (BootstrapMethod[]) null, constant_pool);
+    BootstrapMethods(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (BootstrapMethod[]) null, constantPool);
 
-        final int num_bootstrap_methods = input.readUnsignedShort();
-        bootstrapMethods = new BootstrapMethod[num_bootstrap_methods];
-        for (int i = 0; i < num_bootstrap_methods; i++) {
+        final int numBootstrapMethods = input.readUnsignedShort();
+        bootstrapMethods = new BootstrapMethod[numBootstrapMethods];
+        for (int i = 0; i < numBootstrapMethods; i++) {
             bootstrapMethods[i] = new BootstrapMethod(input);
         }
     }
@@ -108,8 +108,8 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
         super.dump(file);
 
         file.writeShort(bootstrapMethods.length);
-        for (final BootstrapMethod bootstrap_method : bootstrapMethods) {
-            bootstrap_method.dump(file);
+        for (final BootstrapMethod bootstrapMethod : bootstrapMethods) {
+            bootstrapMethod.dump(file);
         }
     }
 
@@ -145,11 +145,11 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
             buf.append("\n");
             final int start = buf.length();
             buf.append("  ").append(i).append(": ");
-            final int indent_count = buf.length() - start;
+            final int indentCount = buf.length() - start;
             final String[] lines = bootstrapMethods[i].toString(super.getConstantPool()).split("\\r?\\n");
             buf.append(lines[0]);
             for (int j = 1; j < lines.length; j++) {
-                buf.append("\n").append("          ", 0, indent_count).append(lines[j]);
+                buf.append("\n").append("          ", 0, indentCount).append(lines[j]);
             }
         }
         return buf.toString();

@@ -39,29 +39,29 @@ public final class NestMembers extends Attribute {
     /**
      * Construct object from input stream.
      *
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    NestMembers(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, (int[]) null, constant_pool);
-        final int number_of_classes = input.readUnsignedShort();
-        classes = new int[number_of_classes];
-        for (int i = 0; i < number_of_classes; i++) {
+    NestMembers(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (int[]) null, constantPool);
+        final int classCount = input.readUnsignedShort();
+        classes = new int[classCount];
+        for (int i = 0; i < classCount; i++) {
             classes[i] = input.readUnsignedShort();
         }
     }
 
     /**
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param classes Table of indices in constant pool
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public NestMembers(final int name_index, final int length, final int[] classes, final ConstantPool constant_pool) {
-        super(Const.ATTR_NEST_MEMBERS, name_index, length, constant_pool);
+    public NestMembers(final int nameIndex, final int length, final int[] classes, final ConstantPool constantPool) {
+        super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
         this.classes = classes != null ? classes : ArrayUtils.EMPTY_INT_ARRAY;
     }
 

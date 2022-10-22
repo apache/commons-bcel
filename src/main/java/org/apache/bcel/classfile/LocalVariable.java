@@ -54,8 +54,8 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
      */
-    LocalVariable(final DataInput file, final ConstantPool constant_pool) throws IOException {
-        this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), constant_pool);
+    LocalVariable(final DataInput file, final ConstantPool constantPool) throws IOException {
+        this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), constantPool);
     }
 
     /**

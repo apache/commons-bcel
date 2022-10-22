@@ -56,21 +56,21 @@ public final class ExceptionTable extends Attribute {
      */
     ExceptionTable(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (int[]) null, constantPool);
-        final int number_of_exceptions = input.readUnsignedShort();
-        exceptionIndexTable = new int[number_of_exceptions];
-        for (int i = 0; i < number_of_exceptions; i++) {
+        final int exceptionCount = input.readUnsignedShort();
+        exceptionIndexTable = new int[exceptionCount];
+        for (int i = 0; i < exceptionCount; i++) {
             exceptionIndexTable[i] = input.readUnsignedShort();
         }
     }
 
     /**
-     * @param name_index Index in constant pool
+     * @param nameIndex Index in constant pool
      * @param length Content length in bytes
      * @param exceptionIndexTable Table of indices in constant pool
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public ExceptionTable(final int name_index, final int length, final int[] exceptionIndexTable, final ConstantPool constant_pool) {
-        super(Const.ATTR_EXCEPTIONS, name_index, length, constant_pool);
+    public ExceptionTable(final int nameIndex, final int length, final int[] exceptionIndexTable, final ConstantPool constantPool) {
+        super(Const.ATTR_EXCEPTIONS, nameIndex, length, constantPool);
         this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
     }
 

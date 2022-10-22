@@ -36,18 +36,18 @@ public final class SourceFile extends Attribute {
     /**
      * Construct object from input stream.
      *
-     * @param name_index Index in constant pool to CONSTANT_Utf8
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    SourceFile(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        this(name_index, length, input.readUnsignedShort(), constant_pool);
+    SourceFile(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, input.readUnsignedShort(), constantPool);
     }
 
     /**
-     * @param name_index Index in constant pool to CONSTANT_Utf8, which should represent the string "SourceFile".
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8, which should represent the string "SourceFile".
      * @param length Content length in bytes, the value should be 2.
      * @param constantPool The constant pool that this attribute is associated with.
      * @param sourceFileIndex Index in constant pool to CONSTANT_Utf8. This string will be interpreted as the name of the
@@ -55,8 +55,8 @@ public final class SourceFile extends Attribute {
      *        contqining the file or an absolute path; this information has to be supplied the consumer of this attribute -
      *        in many cases, the JVM.
      */
-    public SourceFile(final int name_index, final int length, final int sourceFileIndex, final ConstantPool constantPool) {
-        super(Const.ATTR_SOURCE_FILE, name_index, length, constantPool);
+    public SourceFile(final int nameIndex, final int length, final int sourceFileIndex, final ConstantPool constantPool) {
+        super(Const.ATTR_SOURCE_FILE, nameIndex, length, constantPool);
         this.sourceFileIndex = sourceFileIndex;
     }
 

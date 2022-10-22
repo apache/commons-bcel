@@ -174,12 +174,12 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
 
                 // In JustIce, the check for correct offsets into the code array is delayed to Pass 3a.
-                final CodeException[] exc_table = obj.getExceptionTable();
-                for (final CodeException element : exc_table) {
-                    final int exc_index = element.getCatchType();
-                    if (exc_index != 0) { // if 0, it catches all Throwables
-                        checkIndex(obj, exc_index, CONST_Class);
-                        final ConstantClass cc = (ConstantClass) cp.getConstant(exc_index);
+                final CodeException[] excTable = obj.getExceptionTable();
+                for (final CodeException element : excTable) {
+                    final int excIndex = element.getCatchType();
+                    if (excIndex != 0) { // if 0, it catches all Throwables
+                        checkIndex(obj, excIndex, CONST_Class);
+                        final ConstantClass cc = (ConstantClass) cp.getConstant(excIndex);
                         // cannot be sure this ConstantClass has already been visited (checked)!
                         checkIndex(cc, cc.getNameIndex(), CONST_Utf8);
                         final String cname = Utility.pathToPackage(((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes());
@@ -221,31 +221,31 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 // Create object for local variables information
                 // This is highly unelegant due to usage of the Visitor pattern.
                 // TODO: rework it.
-                int method_number = -1;
+                int methodNumber = -1;
                 final Method[] ms = Repository.lookupClass(myOwner.getClassName()).getMethods();
                 for (int mn = 0; mn < ms.length; mn++) {
                     if (m == ms[mn]) {
-                        method_number = mn;
+                        methodNumber = mn;
                         break;
                     }
                 }
                 // If the .class file is malformed the loop above may not find a method.
                 // Try matching names instead of pointers.
-                if (method_number < 0) {
+                if (methodNumber < 0) {
                     for (int mn = 0; mn < ms.length; mn++) {
                         if (m.getName().equals(ms[mn].getName())) {
-                            method_number = mn;
+                            methodNumber = mn;
                             break;
                         }
                     }
                 }
 
-                if (method_number < 0) { // Mmmmh. Can we be sure BCEL does not sometimes instantiate new objects?
+                if (methodNumber < 0) { // Mmmmh. Can we be sure BCEL does not sometimes instantiate new objects?
                     throw new AssertionViolatedException("Could not find a known BCEL Method object in the corresponding BCEL JavaClass object.");
                 }
-                localVariablesInfos[method_number] = new LocalVariablesInfo(obj.getMaxLocals());
+                localVariablesInfos[methodNumber] = new LocalVariablesInfo(obj.getMaxLocals());
 
-                int num_of_lvt_attribs = 0;
+                int numOfLvtAttribs = 0;
                 // Now iterate through the attributes the Code attribute has.
                 final Attribute[] atts = obj.getAttributes();
                 for (final Attribute att : atts) {
@@ -299,15 +299,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                             }
 
                             try {
-                                localVariablesInfos[method_number].add(localindex, localname, localvariable.getStartPC(), localvariable.getLength(), t);
+                                localVariablesInfos[methodNumber].add(localindex, localname, localvariable.getStartPC(), localvariable.getLength(), t);
                             } catch (final LocalVariableInfoInconsistentException lviie) {
                                 throw new ClassConstraintException("Conflicting information in LocalVariableTable '" + tostring(lvt)
                                     + "' found in Code attribute '" + tostring(obj) + "' (method '" + tostring(m) + "'). " + lviie.getMessage(), lviie);
                             }
                         } // for all local variables localvariables[i] in the LocalVariableTable attribute atts[a] END
 
-                        num_of_lvt_attribs++;
-                        if (!m.isStatic() && num_of_lvt_attribs > obj.getMaxLocals()) {
+                        numOfLvtAttribs++;
+                        if (!m.isStatic() && numOfLvtAttribs > obj.getMaxLocals()) {
                             throw new ClassConstraintException("Number of LocalVariableTable attributes of Code attribute '" + tostring(obj) + "' (method '"
                                 + tostring(m) + "') exceeds number of local variable slots '" + obj.getMaxLocals()
                                 + "' ('There may be at most one LocalVariableTable attribute per local variable in the Code attribute.').");

@@ -170,7 +170,7 @@ public class ConstantPoolGen {
 
                 final ConstantNameAndType n = (ConstantNameAndType) constants[m.getNameAndTypeIndex()];
                 u8 = (ConstantUtf8) constants[n.getNameIndex()];
-                final String method_name = u8.getBytes();
+                final String methodName = u8.getBytes();
                 u8 = (ConstantUtf8) constants[n.getSignatureIndex()];
                 final String signature = u8.getBytes();
 
@@ -184,7 +184,7 @@ public class ConstantPoolGen {
 
                 sb.append(className);
                 sb.append(delim);
-                sb.append(method_name);
+                sb.append(methodName);
                 sb.append(delim);
                 sb.append(signature);
                 final String key = sb.toString();
@@ -352,23 +352,23 @@ public class ConstantPoolGen {
      * Add a new Fieldref constant to the ConstantPool, if it is not already in there.
      *
      * @param className class name string to add
-     * @param field_name field name string to add
+     * @param fieldName field name string to add
      * @param signature signature string to add
      * @return index of entry
      */
-    public int addFieldref(final String className, final String field_name, final String signature) {
+    public int addFieldref(final String className, final String fieldName, final String signature) {
         int ret;
         int classIndex;
         int nameAndTypeIndex;
-        if ((ret = lookupFieldref(className, field_name, signature)) != -1) {
+        if ((ret = lookupFieldref(className, fieldName, signature)) != -1) {
             return ret; // Already in CP
         }
         adjustSize();
         classIndex = addClass(className);
-        nameAndTypeIndex = addNameAndType(field_name, signature);
+        nameAndTypeIndex = addNameAndType(fieldName, signature);
         ret = index;
         constants[index++] = new ConstantFieldref(classIndex, nameAndTypeIndex);
-        final String key = className + FIELDREF_DELIM + field_name + FIELDREF_DELIM + signature;
+        final String key = className + FIELDREF_DELIM + fieldName + FIELDREF_DELIM + signature;
         if (!cpTable.containsKey(key)) {
             cpTable.put(key, new Index(ret));
         }
@@ -417,23 +417,23 @@ public class ConstantPoolGen {
      * Add a new InterfaceMethodref constant to the ConstantPool, if it is not already in there.
      *
      * @param className class name string to add
-     * @param method_name method name string to add
+     * @param methodName method name string to add
      * @param signature signature string to add
      * @return index of entry
      */
-    public int addInterfaceMethodref(final String className, final String method_name, final String signature) {
+    public int addInterfaceMethodref(final String className, final String methodName, final String signature) {
         int ret;
         int classIndex;
         int nameAndTypeIndex;
-        if ((ret = lookupInterfaceMethodref(className, method_name, signature)) != -1) {
+        if ((ret = lookupInterfaceMethodref(className, methodName, signature)) != -1) {
             return ret; // Already in CP
         }
         adjustSize();
         classIndex = addClass(className);
-        nameAndTypeIndex = addNameAndType(method_name, signature);
+        nameAndTypeIndex = addNameAndType(methodName, signature);
         ret = index;
         constants[index++] = new ConstantInterfaceMethodref(classIndex, nameAndTypeIndex);
-        final String key = className + IMETHODREF_DELIM + method_name + IMETHODREF_DELIM + signature;
+        final String key = className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature;
         if (!cpTable.containsKey(key)) {
             cpTable.put(key, new Index(ret));
         }
@@ -498,16 +498,16 @@ public class ConstantPoolGen {
      */
     public int addNameAndType(final String name, final String signature) {
         int ret;
-        int name_index;
-        int signature_index;
+        int nameIndex;
+        int signatureIndex;
         if ((ret = lookupNameAndType(name, signature)) != -1) {
             return ret; // Already in CP
         }
         adjustSize();
-        name_index = addUtf8(name);
-        signature_index = addUtf8(signature);
+        nameIndex = addUtf8(name);
+        signatureIndex = addUtf8(signature);
         ret = index;
-        constants[index++] = new ConstantNameAndType(name_index, signature_index);
+        constants[index++] = new ConstantNameAndType(nameIndex, signatureIndex);
         final String key = name + NAT_DELIM + signature;
         if (!natTable.containsKey(key)) {
             natTable.put(key, new Index(ret));

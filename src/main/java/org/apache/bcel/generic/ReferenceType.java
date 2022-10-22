@@ -73,22 +73,22 @@ public abstract class ReferenceType extends Type {
         // this and t are ObjectTypes, see above.
         final ObjectType thiz = (ObjectType) this;
         final ObjectType other = (ObjectType) t;
-        final JavaClass[] thiz_sups = Repository.getSuperClasses(thiz.getClassName());
-        final JavaClass[] other_sups = Repository.getSuperClasses(other.getClassName());
-        if (thiz_sups == null || other_sups == null) {
+        final JavaClass[] thizSups = Repository.getSuperClasses(thiz.getClassName());
+        final JavaClass[] otherSups = Repository.getSuperClasses(other.getClassName());
+        if (thizSups == null || otherSups == null) {
             return null;
         }
         // Waaahh...
-        final JavaClass[] this_sups = new JavaClass[thiz_sups.length + 1];
-        final JavaClass[] t_sups = new JavaClass[other_sups.length + 1];
-        System.arraycopy(thiz_sups, 0, this_sups, 1, thiz_sups.length);
-        System.arraycopy(other_sups, 0, t_sups, 1, other_sups.length);
-        this_sups[0] = Repository.lookupClass(thiz.getClassName());
-        t_sups[0] = Repository.lookupClass(other.getClassName());
-        for (final JavaClass t_sup : t_sups) {
-            for (final JavaClass this_sup : this_sups) {
-                if (this_sup.equals(t_sup)) {
-                    return ObjectType.getInstance(this_sup.getClassName());
+        final JavaClass[] thisSups = new JavaClass[thizSups.length + 1];
+        final JavaClass[] tSups = new JavaClass[otherSups.length + 1];
+        System.arraycopy(thizSups, 0, thisSups, 1, thizSups.length);
+        System.arraycopy(otherSups, 0, tSups, 1, otherSups.length);
+        thisSups[0] = Repository.lookupClass(thiz.getClassName());
+        tSups[0] = Repository.lookupClass(other.getClassName());
+        for (final JavaClass tSup : tSups) {
+            for (final JavaClass thisSup : thisSups) {
+                if (thisSup.equals(tSup)) {
+                    return ObjectType.getInstance(thisSup.getClassName());
                 }
             }
         }
@@ -144,22 +144,22 @@ public abstract class ReferenceType extends Type {
         // this and t are ObjectTypes, see above.
         final ObjectType thiz = (ObjectType) this;
         final ObjectType other = (ObjectType) t;
-        final JavaClass[] thiz_sups = Repository.getSuperClasses(thiz.getClassName());
-        final JavaClass[] other_sups = Repository.getSuperClasses(other.getClassName());
-        if (thiz_sups == null || other_sups == null) {
+        final JavaClass[] thizSups = Repository.getSuperClasses(thiz.getClassName());
+        final JavaClass[] otherSups = Repository.getSuperClasses(other.getClassName());
+        if (thizSups == null || otherSups == null) {
             return null;
         }
         // Waaahh...
-        final JavaClass[] this_sups = new JavaClass[thiz_sups.length + 1];
-        final JavaClass[] t_sups = new JavaClass[other_sups.length + 1];
-        System.arraycopy(thiz_sups, 0, this_sups, 1, thiz_sups.length);
-        System.arraycopy(other_sups, 0, t_sups, 1, other_sups.length);
-        this_sups[0] = Repository.lookupClass(thiz.getClassName());
-        t_sups[0] = Repository.lookupClass(other.getClassName());
-        for (final JavaClass t_sup : t_sups) {
-            for (final JavaClass this_sup : this_sups) {
-                if (this_sup.equals(t_sup)) {
-                    return ObjectType.getInstance(this_sup.getClassName());
+        final JavaClass[] thisSups = new JavaClass[thizSups.length + 1];
+        final JavaClass[] tSups = new JavaClass[otherSups.length + 1];
+        System.arraycopy(thizSups, 0, thisSups, 1, thizSups.length);
+        System.arraycopy(otherSups, 0, tSups, 1, otherSups.length);
+        thisSups[0] = Repository.lookupClass(thiz.getClassName());
+        tSups[0] = Repository.lookupClass(other.getClassName());
+        for (final JavaClass tSup : tSups) {
+            for (final JavaClass thisSup : thisSups) {
+                if (thisSup.equals(tSup)) {
+                    return ObjectType.getInstance(thisSup.getClassName());
                 }
             }
         }

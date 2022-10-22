@@ -625,12 +625,12 @@ public class InstructionFactory implements InstructionConstants {
      * @param retType return type of method
      * @param argTypes argument types of method
      * @param kind how to invoke: INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
-     * @param use_interface force use of InterfaceMethodref
+     * @param useInterface force use of InterfaceMethodref
      * @return A new InvokeInstruction.
      * @since 6.5.0
      */
     public InvokeInstruction createInvoke(final String className, final String name, final Type retType, final Type[] argTypes, final short kind,
-        final boolean use_interface) {
+        final boolean useInterface) {
         if (kind != Const.INVOKESPECIAL && kind != Const.INVOKEVIRTUAL && kind != Const.INVOKESTATIC && kind != Const.INVOKEINTERFACE
             && kind != Const.INVOKEDYNAMIC) {
             throw new IllegalArgumentException("Unknown invoke kind: " + kind);
@@ -641,7 +641,7 @@ public class InstructionFactory implements InstructionConstants {
         for (final Type argType : argTypes) {
             nargs += argType.getSize();
         }
-        if (use_interface) {
+        if (useInterface) {
             index = cp.addInterfaceMethodref(className, name, signature);
         } else {
             index = cp.addMethodref(className, name, signature);

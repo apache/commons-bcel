@@ -166,7 +166,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param fileName File name
      * @param major Major compiler version
      * @param minor Minor compiler version
-     * @param access_flags Access rights defined by bit flags
+     * @param accessFlags Access rights defined by bit flags
      * @param constantPool Array of constants
      * @param interfaces Implemented interfaces
      * @param fields Class fields
@@ -174,9 +174,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param attributes Class attributes
      * @param source Read from file or generated in memory?
      */
-    public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major, final int minor, final int access_flags,
+    public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major, final int minor, final int accessFlags,
         final ConstantPool constantPool, int[] interfaces, Field[] fields, Method[] methods, Attribute[] attributes, final byte source) {
-        super(access_flags);
+        super(accessFlags);
         if (interfaces == null) {
             interfaces = ArrayUtils.EMPTY_INT_ARRAY;
         }
@@ -628,9 +628,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         if (this.equals(inter)) {
             return true;
         }
-        final JavaClass[] super_interfaces = getAllInterfaces();
-        for (final JavaClass super_interface : super_interfaces) {
-            if (super_interface.equals(inter)) {
+        final JavaClass[] superInterfaces = getAllInterfaces();
+        for (final JavaClass superInterface : superInterfaces) {
+            if (superInterface.equals(inter)) {
                 return true;
             }
         }
@@ -643,18 +643,18 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @return true if this JavaClass is derived from the super class
      * @throws ClassNotFoundException if superclasses or superinterfaces of this object can't be found
      */
-    public final boolean instanceOf(final JavaClass super_class) throws ClassNotFoundException {
-        if (this.equals(super_class)) {
+    public final boolean instanceOf(final JavaClass superclass) throws ClassNotFoundException {
+        if (this.equals(superclass)) {
             return true;
         }
         final JavaClass[] super_classes = getSuperClasses();
         for (final JavaClass super_classe : super_classes) {
-            if (super_classe.equals(super_class)) {
+            if (super_classe.equals(superclass)) {
                 return true;
             }
         }
-        if (super_class.isInterface()) {
-            return implementationOf(super_class);
+        if (superclass.isInterface()) {
+            return implementationOf(superclass);
         }
         return false;
     }

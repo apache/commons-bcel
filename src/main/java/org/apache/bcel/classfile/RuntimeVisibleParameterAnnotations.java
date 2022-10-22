@@ -29,13 +29,13 @@ import org.apache.bcel.Const;
 public class RuntimeVisibleParameterAnnotations extends ParameterAnnotations {
 
     /**
-     * @param name_index Index pointing to the name <em>Code</em>
+     * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
      * @param input Input stream
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
-    public RuntimeVisibleParameterAnnotations(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
+    public RuntimeVisibleParameterAnnotations(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
         throws IOException {
-        super(Const.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS, name_index, length, input, constant_pool);
+        super(Const.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS, nameIndex, length, input, constantPool);
     }
 }

@@ -233,8 +233,8 @@ public abstract class Utility {
         return (flag & bit) == 0 ? flag : flag ^ bit;
     }
 
-    public static String codeToString(final byte[] code, final ConstantPool constant_pool, final int index, final int length) {
-        return codeToString(code, constant_pool, index, length, true);
+    public static String codeToString(final byte[] code, final ConstantPool constantPool, final int index, final int length) {
+        return codeToString(code, constantPool, index, length, true);
     }
 
     /**
@@ -242,22 +242,22 @@ public abstract class Utility {
      * representation. Decode only `num' opcodes (including their operands), use -1 if you want to decompile everything.
      *
      * @param code byte code array
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @param index offset in `code' array <EM>(number of opcodes, not bytes!)</EM>
      * @param length number of opcodes to decompile, -1 for all
      * @param verbose be verbose, e.g. print constant pool index
      * @return String representation of byte codes
      */
-    public static String codeToString(final byte[] code, final ConstantPool constant_pool, final int index, final int length, final boolean verbose) {
+    public static String codeToString(final byte[] code, final ConstantPool constantPool, final int index, final int length, final boolean verbose) {
         final StringBuilder buf = new StringBuilder(code.length * 20); // Should be sufficient // CHECKSTYLE IGNORE MagicNumber
         try (ByteSequence stream = new ByteSequence(code)) {
             for (int i = 0; i < index; i++) {
-                codeToString(stream, constant_pool, verbose);
+                codeToString(stream, constantPool, verbose);
             }
             for (int i = 0; stream.available() > 0; i++) {
                 if (length < 0 || i < length) {
                     final String indices = fillup(stream.getIndex() + ":", 6, true, ' ');
-                    buf.append(indices).append(codeToString(stream, constant_pool, verbose)).append('\n');
+                    buf.append(indices).append(codeToString(stream, constantPool, verbose)).append('\n');
                 }
             }
         } catch (final IOException e) {
@@ -266,21 +266,21 @@ public abstract class Utility {
         return buf.toString();
     }
 
-    public static String codeToString(final ByteSequence bytes, final ConstantPool constant_pool) throws IOException {
-        return codeToString(bytes, constant_pool, true);
+    public static String codeToString(final ByteSequence bytes, final ConstantPool constantPool) throws IOException {
+        return codeToString(bytes, constantPool, true);
     }
 
     /**
      * Disassemble a stream of byte codes and return the string representation.
      *
      * @param bytes stream of bytes
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      * @param verbose be verbose, e.g. print constant pool index
      * @return String representation of byte code
      *
      * @throws IOException if a failure from reading from the bytes argument occurs
      */
-    public static String codeToString(final ByteSequence bytes, final ConstantPool constant_pool, final boolean verbose) throws IOException {
+    public static String codeToString(final ByteSequence bytes, final ConstantPool constantPool, final boolean verbose) throws IOException {
         final short opcode = (short) bytes.readUnsignedByte();
         int default_offset = 0;
         int low;
@@ -424,7 +424,7 @@ public abstract class Utility {
         case Const.PUTFIELD:
         case Const.PUTSTATIC:
             index = bytes.readUnsignedShort();
-            buf.append("\t\t").append(constant_pool.constantToString(index, Const.CONSTANT_Fieldref)).append(verbose ? " (" + index + ")" : "");
+            buf.append("\t\t").append(constantPool.constantToString(index, Const.CONSTANT_Fieldref)).append(verbose ? " (" + index + ")" : "");
             break;
         /*
          * Operands are references to classes in constant pool
@@ -435,7 +435,7 @@ public abstract class Utility {
             //$FALL-THROUGH$
         case Const.INSTANCEOF:
             index = bytes.readUnsignedShort();
-            buf.append("\t<").append(constant_pool.constantToString(index, Const.CONSTANT_Class)).append(">").append(verbose ? " (" + index + ")" : "");
+            buf.append("\t<").append(constantPool.constantToString(index, Const.CONSTANT_Class)).append(">").append(verbose ? " (" + index + ")" : "");
             break;
         /*
          * Operands are references to methods in constant pool
@@ -443,24 +443,24 @@ public abstract class Utility {
         case Const.INVOKESPECIAL:
         case Const.INVOKESTATIC:
             index = bytes.readUnsignedShort();
-            final Constant c = constant_pool.getConstant(index);
+            final Constant c = constantPool.getConstant(index);
             // With Java8 operand may be either a CONSTANT_Methodref
             // or a CONSTANT_InterfaceMethodref. (markro)
-            buf.append("\t").append(constant_pool.constantToString(index, c.getTag())).append(verbose ? " (" + index + ")" : "");
+            buf.append("\t").append(constantPool.constantToString(index, c.getTag())).append(verbose ? " (" + index + ")" : "");
             break;
         case Const.INVOKEVIRTUAL:
             index = bytes.readUnsignedShort();
-            buf.append("\t").append(constant_pool.constantToString(index, Const.CONSTANT_Methodref)).append(verbose ? " (" + index + ")" : "");
+            buf.append("\t").append(constantPool.constantToString(index, Const.CONSTANT_Methodref)).append(verbose ? " (" + index + ")" : "");
             break;
         case Const.INVOKEINTERFACE:
             index = bytes.readUnsignedShort();
             final int nargs = bytes.readUnsignedByte(); // historical, redundant
-            buf.append("\t").append(constant_pool.constantToString(index, Const.CONSTANT_InterfaceMethodref)).append(verbose ? " (" + index + ")\t" : "")
+            buf.append("\t").append(constantPool.constantToString(index, Const.CONSTANT_InterfaceMethodref)).append(verbose ? " (" + index + ")\t" : "")
                 .append(nargs).append("\t").append(bytes.readUnsignedByte()); // Last byte is a reserved space
             break;
         case Const.INVOKEDYNAMIC:
             index = bytes.readUnsignedShort();
-            buf.append("\t").append(constant_pool.constantToString(index, Const.CONSTANT_InvokeDynamic)).append(verbose ? " (" + index + ")\t" : "")
+            buf.append("\t").append(constantPool.constantToString(index, Const.CONSTANT_InvokeDynamic)).append(verbose ? " (" + index + ")\t" : "")
                 .append(bytes.readUnsignedByte()) // Thrid byte is a reserved space
                 .append(bytes.readUnsignedByte()); // Last byte is a reserved space
             break;
@@ -470,12 +470,12 @@ public abstract class Utility {
         case Const.LDC_W:
         case Const.LDC2_W:
             index = bytes.readUnsignedShort();
-            buf.append("\t\t").append(constant_pool.constantToString(index, constant_pool.getConstant(index).getTag()))
+            buf.append("\t\t").append(constantPool.constantToString(index, constantPool.getConstant(index).getTag()))
                 .append(verbose ? " (" + index + ")" : "");
             break;
         case Const.LDC:
             index = bytes.readUnsignedByte();
-            buf.append("\t\t").append(constant_pool.constantToString(index, constant_pool.getConstant(index).getTag()))
+            buf.append("\t\t").append(constantPool.constantToString(index, constantPool.getConstant(index).getTag()))
                 .append(verbose ? " (" + index + ")" : "");
             break;
         /*
@@ -483,7 +483,7 @@ public abstract class Utility {
          */
         case Const.ANEWARRAY:
             index = bytes.readUnsignedShort();
-            buf.append("\t\t<").append(compactClassName(constant_pool.getConstantString(index, Const.CONSTANT_Class), false)).append(">")
+            buf.append("\t\t<").append(compactClassName(constantPool.getConstantString(index, Const.CONSTANT_Class), false)).append(">")
                 .append(verbose ? " (" + index + ")" : "");
             break;
         /*
@@ -492,7 +492,7 @@ public abstract class Utility {
         case Const.MULTIANEWARRAY: {
             index = bytes.readUnsignedShort();
             final int dimensions = bytes.readUnsignedByte();
-            buf.append("\t<").append(compactClassName(constant_pool.getConstantString(index, Const.CONSTANT_Class), false)).append(">\t").append(dimensions)
+            buf.append("\t<").append(compactClassName(constantPool.getConstantString(index, Const.CONSTANT_Class), false)).append(">\t").append(dimensions)
                 .append(verbose ? " (" + index + ")" : "");
         }
             break;
@@ -974,7 +974,7 @@ public abstract class Utility {
         final StringBuilder buf = new StringBuilder("(");
         String type;
         int index;
-        int var_index = access.contains("static") ? 0 : 1;
+        int varIndex = access.contains("static") ? 0 : 1;
         try {
             // Skip any type arguments to read argument declarations between `(' and `)'
             index = signature.indexOf('(') + 1;
@@ -985,17 +985,17 @@ public abstract class Utility {
                 final String paramType = typeSignatureToString(signature.substring(index), chopit);
                 buf.append(paramType);
                 if (vars != null) {
-                    final LocalVariable l = vars.getLocalVariable(var_index, 0);
+                    final LocalVariable l = vars.getLocalVariable(varIndex, 0);
                     if (l != null) {
                         buf.append(" ").append(l.getName());
                     }
                 } else {
-                    buf.append(" arg").append(var_index);
+                    buf.append(" arg").append(varIndex);
                 }
                 if ("double".equals(paramType) || "long".equals(paramType)) {
-                    var_index += 2;
+                    varIndex += 2;
                 } else {
-                    var_index++;
+                    varIndex++;
                 }
                 buf.append(", ");
                 // corrected concurrent private static field acess
@@ -1096,18 +1096,18 @@ public abstract class Utility {
      */
     public static String replace(String str, final String old, final String new_) {
         int index;
-        int old_index;
+        int oldIndex;
         try {
             if (str.contains(old)) { // `old' found in str
                 final StringBuilder buf = new StringBuilder();
-                old_index = 0; // String start offset
+                oldIndex = 0; // String start offset
                 // While we have something to replace
-                while ((index = str.indexOf(old, old_index)) != -1) {
-                    buf.append(str, old_index, index); // append prefix
+                while ((index = str.indexOf(old, oldIndex)) != -1) {
+                    buf.append(str, oldIndex, index); // append prefix
                     buf.append(new_); // append replacement
-                    old_index = index + old.length(); // Skip `old'.length chars
+                    oldIndex = index + old.length(); // Skip `old'.length chars
                 }
-                buf.append(str.substring(old_index)); // append rest of string
+                buf.append(str.substring(oldIndex)); // append rest of string
                 str = buf.toString();
             }
         } catch (final StringIndexOutOfBoundsException e) { // Should not occur

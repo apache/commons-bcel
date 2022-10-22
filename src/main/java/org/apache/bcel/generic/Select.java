@@ -329,40 +329,40 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * positions and offsets by calling this function.
      *
      * @param offset additional offset caused by preceding (variable length) instructions
-     * @param max_offset the maximum offset that may be caused by these instructions
+     * @param maxOffset the maximum offset that may be caused by these instructions
      * @return additional offset caused by possible change of this instruction's length
      */
     @Override
-    protected int updatePosition(final int offset, final int max_offset) {
+    protected int updatePosition(final int offset, final int maxOffset) {
         setPosition(getPosition() + offset); // Additional offset caused by preceding SWITCHs, GOTOs, etc.
-        final short old_length = (short) super.getLength();
+        final short oldLength = (short) super.getLength();
         /*
          * Alignment on 4-byte-boundary, + 1, because of tag byte.
          */
         padding = (4 - (getPosition() + 1) % 4) % 4;
         super.setLength((short) (fixed_length + padding)); // Update length
-        return super.getLength() - old_length;
+        return super.getLength() - oldLength;
     }
 
     /**
-     * @param old_ih old target
-     * @param new_ih new target
+     * @param oldIh old target
+     * @param newIh new target
      */
     @Override
-    public void updateTarget(final InstructionHandle old_ih, final InstructionHandle new_ih) {
+    public void updateTarget(final InstructionHandle oldIh, final InstructionHandle newIh) {
         boolean targeted = false;
-        if (super.getTarget() == old_ih) {
+        if (super.getTarget() == oldIh) {
             targeted = true;
-            setTarget(new_ih);
+            setTarget(newIh);
         }
         for (int i = 0; i < targets.length; i++) {
-            if (targets[i] == old_ih) {
+            if (targets[i] == oldIh) {
                 targeted = true;
-                setTarget(i, new_ih);
+                setTarget(i, newIh);
             }
         }
         if (!targeted) {
-            throw new ClassGenException("Not targeting " + old_ih);
+            throw new ClassGenException("Not targeting " + oldIh);
         }
     }
 }

@@ -80,11 +80,11 @@ public class ClassLoader extends java.lang.ClassLoader {
     }
 
     /**
-     * @param ignored_packages classes contained in these packages will be loaded with the system class loader
+     * @param ignoredPackages classes contained in these packages will be loaded with the system class loader
      * @param deferTo delegate class loader to use for ignored packages
      */
-    public ClassLoader(final java.lang.ClassLoader deferTo, final String[] ignored_packages) {
-        this(ignored_packages);
+    public ClassLoader(final java.lang.ClassLoader deferTo, final String[] ignoredPackages) {
+        this(ignoredPackages);
         this.repository = new ClassLoaderRepository(deferTo);
     }
 
@@ -137,8 +137,8 @@ public class ClassLoader extends java.lang.ClassLoader {
             /*
              * Second try: Load system class using system class loader. You better don't mess around with them.
              */
-            for (final String ignored_package : ignoredPackages) {
-                if (className.startsWith(ignored_package)) {
+            for (final String ignoredPackage : ignoredPackages) {
+                if (className.startsWith(ignoredPackage)) {
                     cl = getParent().loadClass(className);
                     break;
                 }
