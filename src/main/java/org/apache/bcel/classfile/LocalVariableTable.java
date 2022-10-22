@@ -140,9 +140,9 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     public final LocalVariable getLocalVariable(final int index, final int pc) {
         for (final LocalVariable variable : localVariableTable) {
             if (variable.getIndex() == index) {
-                final int start_pc = variable.getStartPC();
-                final int end_pc = start_pc + variable.getLength();
-                if (pc >= start_pc && pc <= end_pc) {
+                final int startPc = variable.getStartPC();
+                final int endPc = startPc + variable.getLength();
+                if (pc >= startPc && pc <= endPc) {
                     return variable;
                 }
             }

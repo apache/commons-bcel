@@ -90,10 +90,10 @@ public class PLSETestCase extends AbstractTestCase {
         final LocalVariable lv = lvt.getLocalVariable(2, 4); // 'i'
         // System.out.println(lv);
         final MethodGen mg = new MethodGen(m, cg.getClassName(), pool);
-        final LocalVariableTable new_lvt = mg.getLocalVariableTable(mg.getConstantPool());
-        final LocalVariable new_lv = new_lvt.getLocalVariable(2, 4); // 'i'
+        final LocalVariableTable newLvt = mg.getLocalVariableTable(mg.getConstantPool());
+        final LocalVariable newLv = newLvt.getLocalVariable(2, 4); // 'i'
         // System.out.println(new_lv);
-        assertEquals(lv.getLength(), new_lv.getLength(), "live range length");
+        assertEquals(lv.getLength(), newLv.getLength(), "live range length");
     }
 
     /**

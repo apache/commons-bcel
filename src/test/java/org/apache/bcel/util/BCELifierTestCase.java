@@ -66,11 +66,11 @@ public class BCELifierTestCase {
 
         final File workDir = new File("target");
         final File infile = new File(javaClassFileName);
-        final JavaClass java_class = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
-        assertNotNull(java_class);
+        final JavaClass javaClass = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
+        assertNotNull(javaClass);
         final File outfile = new File(workDir, infile.getName().replace(".class", "Creator.java"));
         try (FileOutputStream fos = new FileOutputStream(outfile)) {
-            final BCELifier bcelifier = new BCELifier(java_class, fos);
+            final BCELifier bcelifier = new BCELifier(javaClass, fos);
             bcelifier.start();
         }
         exec(workDir, "javac", "-cp", "classes", outfile.getName(), "-source", "1.8", "-target", "1.8");
@@ -91,9 +91,9 @@ public class BCELifierTestCase {
     @Test
     public void testStart() throws Exception {
         final OutputStream os = new ByteArrayOutputStream();
-        final JavaClass java_class = BCELifier.getJavaClass("Java8Example");
-        assertNotNull(java_class);
-        final BCELifier bcelifier = new BCELifier(java_class, os);
+        final JavaClass javaClass = BCELifier.getJavaClass("Java8Example");
+        assertNotNull(javaClass);
+        final BCELifier bcelifier = new BCELifier(javaClass, os);
         bcelifier.start();
     }
 

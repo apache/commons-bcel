@@ -105,9 +105,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         private final int cplen; // == cp.getLength() -- to save computing power.
         private final DescendingVisitor carrier;
 
-        private final Set<String> field_names = new HashSet<>();
-        private final Set<String> field_names_and_desc = new HashSet<>();
-        private final Set<String> method_names_and_desc = new HashSet<>();
+        private final Set<String> fieldNames = new HashSet<>();
+        private final Set<String> fieldNamesAndDesc = new HashSet<>();
+        private final Set<String> methodNamesAndDesc = new HashSet<>();
 
         private CPESSC_Visitor(final JavaClass jc) {
             this.jc = jc;
@@ -503,12 +503,12 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         "The Exceptions attribute '" + tostring(obj) + "' is not correctly named 'Exceptions' but '" + name + "'.");
                 }
 
-                final int[] exc_indices = obj.getExceptionIndexTable();
+                final int[] excIndices = obj.getExceptionIndexTable();
 
-                for (final int exc_indice : exc_indices) {
-                    checkIndex(obj, exc_indice, CONST_Class);
+                for (final int excIndice : excIndices) {
+                    checkIndex(obj, excIndice, CONST_Class);
 
-                    final ConstantClass cc = (ConstantClass) cp.getConstant(exc_indice);
+                    final ConstantClass cc = (ConstantClass) cp.getConstant(excIndice);
                     checkIndex(cc, cc.getNameIndex(), CONST_Utf8); // can't be sure this ConstantClass has already been visited (checked)!
                     // convert internal notation on-the-fly to external notation:
                     final String cname = Utility.pathToPackage(((ConstantUtf8) cp.getConstant(cc.getNameIndex())).getBytes());
@@ -613,14 +613,14 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             }
 
             final String nameanddesc = name + sig;
-            if (field_names_and_desc.contains(nameanddesc)) {
+            if (fieldNamesAndDesc.contains(nameanddesc)) {
                 throw new ClassConstraintException("No two fields (like '" + tostring(obj) + "') are allowed have same names and descriptors!");
             }
-            if (field_names.contains(name)) {
+            if (fieldNames.contains(name)) {
                 addMessage("More than one field of name '" + name + "' detected (but with different type descriptors). This is very unusual.");
             }
-            field_names_and_desc.add(nameanddesc);
-            field_names.add(name);
+            fieldNamesAndDesc.add(nameanddesc);
+            fieldNames.add(name);
 
             final Attribute[] atts = obj.getAttributes();
             for (final Attribute att : atts) {
@@ -655,9 +655,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             innerClasses.forEach(ic -> {
                 checkIndex(innerClasses, ic.getInnerClassIndex(), CONST_Class);
-                final int outer_idx = ic.getOuterClassIndex();
-                if (outer_idx != 0) {
-                    checkIndex(innerClasses, outer_idx, CONST_Class);
+                final int outerIdx = ic.getOuterClassIndex();
+                if (outerIdx != 0) {
+                    checkIndex(innerClasses, outerIdx, CONST_Class);
                 }
                 final int innername_idx = ic.getInnerNameIndex();
                 if (innername_idx != 0) {
@@ -914,13 +914,13 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             }
 
             final String nameanddesc = name + sig;
-            if (method_names_and_desc.contains(nameanddesc)) {
+            if (methodNamesAndDesc.contains(nameanddesc)) {
                 throw new ClassConstraintException("No two methods (like '" + tostring(obj) + "') are allowed have same names and desciptors!");
             }
-            method_names_and_desc.add(nameanddesc);
+            methodNamesAndDesc.add(nameanddesc);
 
             final Attribute[] atts = obj.getAttributes();
-            int num_code_atts = 0;
+            int numCodeAtts = 0;
             for (final Attribute att : atts) {
                 if (!(att instanceof Code) && !(att instanceof ExceptionTable) && !(att instanceof Synthetic) && !(att instanceof Deprecated)) {
                     addMessage("Attribute '" + tostring(att) + "' as an attribute of Method '" + tostring(obj) + "' is unknown and will therefore be ignored.");
@@ -936,12 +936,12 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                                                                                                                                                  // 4.7.3
                 }
                 if (att instanceof Code) {
-                    num_code_atts++;
+                    numCodeAtts++;
                 }
             }
-            if (!obj.isNative() && !obj.isAbstract() && num_code_atts != 1) {
+            if (!obj.isNative() && !obj.isAbstract() && numCodeAtts != 1) {
                 throw new ClassConstraintException(
-                    "Non-native, non-abstract methods like '" + tostring(obj) + "' must have exactly one Code attribute (found: " + num_code_atts + ").");
+                    "Non-native, non-abstract methods like '" + tostring(obj) + "' must have exactly one Code attribute (found: " + numCodeAtts + ").");
             }
         }
 

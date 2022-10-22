@@ -647,9 +647,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         if (this.equals(superclass)) {
             return true;
         }
-        final JavaClass[] super_classes = getSuperClasses();
-        for (final JavaClass super_classe : super_classes) {
-            if (super_classe.equals(superclass)) {
+        for (final JavaClass clazz : getSuperClasses()) {
+            if (clazz.equals(superclass)) {
                 return true;
             }
         }

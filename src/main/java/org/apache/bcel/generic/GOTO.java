@@ -72,18 +72,18 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
      * variable length instructions.
      *
      * @param offset additional offset caused by preceding (variable length) instructions
-     * @param max_offset the maximum offset that may be caused by these instructions
+     * @param maxOffset the maximum offset that may be caused by these instructions
      * @return additional offset caused by possible change of this instruction's length
      */
     @Override
-    protected int updatePosition(final int offset, final int max_offset) {
+    protected int updatePosition(final int offset, final int maxOffset) {
         final int i = getTargetOffset(); // Depending on old position value
         setPosition(getPosition() + offset); // Position may be shifted by preceding expansions
-        if (Math.abs(i) >= Short.MAX_VALUE - max_offset) { // to large for short (estimate)
+        if (Math.abs(i) >= Short.MAX_VALUE - maxOffset) { // to large for short (estimate)
             super.setOpcode(org.apache.bcel.Const.GOTO_W);
-            final short old_length = (short) super.getLength();
+            final short oldLength = (short) super.getLength();
             super.setLength(5);
-            return super.getLength() - old_length;
+            return super.getLength() - oldLength;
         }
         return 0;
     }

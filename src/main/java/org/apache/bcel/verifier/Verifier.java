@@ -121,8 +121,8 @@ public class Verifier {
      *
      * @see VerifierFactory
      */
-    Verifier(final String fully_qualified_classname) {
-        classname = fully_qualified_classname;
+    Verifier(final String fullyQualifiedClassName) {
+        classname = fullyQualifiedClassName;
         flush();
     }
 
@@ -143,22 +143,22 @@ public class Verifier {
     }
 
     /** Returns the VerificationResult for the given pass. */
-    public VerificationResult doPass3a(final int method_no) {
-        final String key = Integer.toString(method_no);
+    public VerificationResult doPass3a(final int methodNo) {
+        final String key = Integer.toString(methodNo);
         Pass3aVerifier p3av = p3avs.get(key);
         if (p3avs.get(key) == null) {
-            p3av = new Pass3aVerifier(this, method_no);
+            p3av = new Pass3aVerifier(this, methodNo);
             p3avs.put(key, p3av);
         }
         return p3av.verify();
     }
 
     /** Returns the VerificationResult for the given pass. */
-    public VerificationResult doPass3b(final int method_no) {
-        final String key = Integer.toString(method_no);
+    public VerificationResult doPass3b(final int methodNo) {
+        final String key = Integer.toString(methodNo);
         Pass3bVerifier p3bv = p3bvs.get(key);
         if (p3bvs.get(key) == null) {
-            p3bv = new Pass3bVerifier(this, method_no);
+            p3bv = new Pass3bVerifier(this, methodNo);
             p3bvs.put(key, p3bv);
         }
         return p3bv.verify();

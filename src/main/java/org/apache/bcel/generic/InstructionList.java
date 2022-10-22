@@ -1024,7 +1024,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
         }
         first.setPrev(null); // Completely separated from rest of list
         last.setNext(null);
-        final List<InstructionHandle> target_vec = new ArrayList<>();
+        final List<InstructionHandle> targetVec = new ArrayList<>();
         for (InstructionHandle ih = first; ih != null; ih = ih.getNext()) {
             ih.getInstruction().dispose(); // e.g. BranchInstructions release their targets
         }
@@ -1033,7 +1033,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
             next = ih.getNext();
             length--;
             if (ih.hasTargeters()) { // Still got targeters?
-                target_vec.add(ih);
+                targetVec.add(ih);
                 buf.append(ih.toString(true)).append(" ");
                 ih.setNext(ih.setPrev(null));
             } else {
@@ -1041,8 +1041,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
             }
         }
         buf.append("}");
-        if (!target_vec.isEmpty()) {
-            throw new TargetLostException(target_vec.toArray(InstructionHandle.EMPTY_ARRAY), buf.toString());
+        if (!targetVec.isEmpty()) {
+            throw new TargetLostException(targetVec.toArray(InstructionHandle.EMPTY_ARRAY), buf.toString());
         }
     }
 
@@ -1058,13 +1058,13 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Replace all references to the old constant pool with references to the new constant pool
      */
-    public void replaceConstantPool(final ConstantPoolGen old_cp, final ConstantPoolGen new_cp) {
+    public void replaceConstantPool(final ConstantPoolGen oldCp, final ConstantPoolGen newCp) {
         for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
             final Instruction i = ih.getInstruction();
             if (i instanceof CPInstruction) {
                 final CPInstruction ci = (CPInstruction) i;
-                final Constant c = old_cp.getConstant(ci.getIndex());
-                ci.setIndex(new_cp.addConstant(c, old_cp));
+                final Constant c = oldCp.getConstant(ci.getIndex());
+                ci.setIndex(newCp.addConstant(c, oldCp));
             }
         }
     }

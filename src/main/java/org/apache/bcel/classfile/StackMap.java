@@ -62,7 +62,7 @@ public final class StackMap extends Attribute {
      *
      * @param map Table of stack map entries
      *
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
     public StackMap(final int nameIndex, final int length, final StackMapEntry[] map, final ConstantPool constantPool) {
         super(Const.ATTR_STACK_MAP, nameIndex, length, constantPool);
@@ -136,10 +136,10 @@ public final class StackMap extends Attribute {
     @Override
     public String toString() {
         final StringBuilder buf = new StringBuilder("StackMap(");
-        int running_offset = -1; // no +1 on first entry
+        int runningOffset = -1; // no +1 on first entry
         for (int i = 0; i < table.length; i++) {
-            running_offset = table[i].getByteCodeOffset() + running_offset + 1;
-            buf.append(String.format("%n@%03d %s", running_offset, table[i]));
+            runningOffset = table[i].getByteCodeOffset() + runningOffset + 1;
+            buf.append(String.format("%n@%03d %s", runningOffset, table[i]));
             if (i < table.length - 1) {
                 buf.append(", ");
             }

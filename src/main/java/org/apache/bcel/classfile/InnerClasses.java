@@ -144,8 +144,8 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
         buf.append("InnerClasses(");
         buf.append(innerClasses.length);
         buf.append("):\n");
-        for (final InnerClass inner_class : innerClasses) {
-            buf.append(inner_class.toString(super.getConstantPool())).append("\n");
+        for (final InnerClass innerClass : innerClasses) {
+            buf.append(innerClass.toString(super.getConstantPool())).append("\n");
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }

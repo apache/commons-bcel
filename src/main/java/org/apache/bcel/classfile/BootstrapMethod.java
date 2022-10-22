@@ -151,10 +151,10 @@ public class BootstrapMethod implements Cloneable {
         final StringBuilder buf = new StringBuilder();
         final String bootstrapMethodName = constantPool.constantToString(bootstrapMethodRef, Const.CONSTANT_MethodHandle);
         buf.append(Utility.compactClassName(bootstrapMethodName, false));
-        final int num_bootstrap_arguments = bootstrapArguments.length;
-        if (num_bootstrap_arguments > 0) {
+        final int bootstrapArgumentsLen = bootstrapArguments.length;
+        if (bootstrapArgumentsLen > 0) {
             buf.append("\nMethod Arguments:");
-            for (int i = 0; i < num_bootstrap_arguments; i++) {
+            for (int i = 0; i < bootstrapArgumentsLen; i++) {
                 buf.append("\n  ").append(i).append(": ");
                 buf.append(constantPool.constantToString(constantPool.getConstant(bootstrapArguments[i])));
             }

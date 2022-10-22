@@ -73,7 +73,7 @@ final class CodeHTML {
      * @param stream data input stream
      * @return String representation of byte code
      */
-    private String codeToHTML(final ByteSequence bytes, final int method_number) throws IOException {
+    private String codeToHTML(final ByteSequence bytes, final int methodNumber) throws IOException {
         final short opcode = (short) bytes.readUnsignedByte();
         String name;
         String signature;
@@ -117,9 +117,9 @@ final class CodeHTML {
             buf.append("<TH>default</TH></TR>\n<TR>");
             // Print target and default indices in second row
             for (final int element : jumpTable) {
-                buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(element).append("\">").append(element).append("</A></TD>");
+                buf.append("<TD><A HREF=\"#code").append(methodNumber).append("@").append(element).append("\">").append(element).append("</A></TD>");
             }
-            buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(defaultOffset).append("\">").append(defaultOffset)
+            buf.append("<TD><A HREF=\"#code").append(methodNumber).append("@").append(defaultOffset).append("\">").append(defaultOffset)
                 .append("</A></TD></TR>\n</TABLE>\n");
             break;
         /*
@@ -140,10 +140,10 @@ final class CodeHTML {
             buf.append("<TH>default</TH></TR>\n<TR>");
             // Print target and default indices in second row
             for (int i = 0; i < npairs; i++) {
-                buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(jumpTable[i]).append("\">").append(jumpTable[i])
+                buf.append("<TD><A HREF=\"#code").append(methodNumber).append("@").append(jumpTable[i]).append("\">").append(jumpTable[i])
                     .append("</A></TD>");
             }
-            buf.append("<TD><A HREF=\"#code").append(method_number).append("@").append(defaultOffset).append("\">").append(defaultOffset)
+            buf.append("<TD><A HREF=\"#code").append(methodNumber).append("@").append(defaultOffset).append("\">").append(defaultOffset)
                 .append("</A></TD></TR>\n</TABLE>\n");
             break;
         /*
@@ -168,7 +168,7 @@ final class CodeHTML {
         case Const.IF_ICMPNE:
         case Const.JSR:
             index = bytes.getIndex() + bytes.readShort() - 1;
-            buf.append("<A HREF=\"#code").append(method_number).append("@").append(index).append("\">").append(index).append("</A>");
+            buf.append("<A HREF=\"#code").append(methodNumber).append("@").append(index).append("\">").append(index).append("</A>");
             break;
         /*
          * Same for 32-bit wide jumps
@@ -176,7 +176,7 @@ final class CodeHTML {
         case Const.GOTO_W:
         case Const.JSR_W:
             final int windex = bytes.getIndex() + bytes.readInt() - 1;
-            buf.append("<A HREF=\"#code").append(method_number).append("@").append(windex).append("\">").append(windex).append("</A>");
+            buf.append("<A HREF=\"#code").append(methodNumber).append("@").append(windex).append("\">").append(windex).append("</A>");
             break;
         /*
          * Index byte references local variable (register)
@@ -227,12 +227,12 @@ final class CodeHTML {
             name = constantPool.getConstantString(classIndex, Const.CONSTANT_Class);
             name = Utility.compactClassName(name, false);
             index = c1.getNameAndTypeIndex();
-            final String field_name = constantPool.constantToString(index, Const.CONSTANT_NameAndType);
+            final String fieldName = constantPool.constantToString(index, Const.CONSTANT_NameAndType);
             if (name.equals(className)) { // Local field
-                buf.append("<A HREF=\"").append(className).append("_methods.html#field").append(field_name).append("\" TARGET=Methods>").append(field_name)
+                buf.append("<A HREF=\"").append(className).append("_methods.html#field").append(fieldName).append("\" TARGET=Methods>").append(fieldName)
                     .append("</A>\n");
             } else {
-                buf.append(constantHtml.referenceConstant(classIndex)).append(".").append(field_name);
+                buf.append(constantHtml.referenceConstant(classIndex)).append(".").append(fieldName);
             }
             break;
         /*
@@ -404,29 +404,29 @@ final class CodeHTML {
             case Const.LOOKUPSWITCH:
                 // bytes.readByte(); // Skip already read byte
                 final int remainder = bytes.getIndex() % 4;
-                final int no_pad_bytes = remainder == 0 ? 0 : 4 - remainder;
-                int default_offset;
+                final int noPadBytes = remainder == 0 ? 0 : 4 - remainder;
+                int defaultOffset;
                 int offset;
-                for (int j = 0; j < no_pad_bytes; j++) {
+                for (int j = 0; j < noPadBytes; j++) {
                     bytes.readByte();
                 }
                 // Both cases have a field default_offset in common
-                default_offset = bytes.readInt();
+                defaultOffset = bytes.readInt();
                 if (opcode == Const.TABLESWITCH) {
                     final int low = bytes.readInt();
                     final int high = bytes.readInt();
-                    offset = bytes.getIndex() - 12 - no_pad_bytes - 1;
-                    default_offset += offset;
-                    gotoSet.set(default_offset);
+                    offset = bytes.getIndex() - 12 - noPadBytes - 1;
+                    defaultOffset += offset;
+                    gotoSet.set(defaultOffset);
                     for (int j = 0; j < high - low + 1; j++) {
                         index = offset + bytes.readInt();
                         gotoSet.set(index);
                     }
                 } else { // LOOKUPSWITCH
                     final int npairs = bytes.readInt();
-                    offset = bytes.getIndex() - 8 - no_pad_bytes - 1;
-                    default_offset += offset;
-                    gotoSet.set(default_offset);
+                    offset = bytes.getIndex() - 8 - noPadBytes - 1;
+                    defaultOffset += offset;
+                    gotoSet.set(defaultOffset);
                     for (int j = 0; j < npairs; j++) {
 //                            int match = bytes.readInt();
                         bytes.readInt();
@@ -473,7 +473,7 @@ final class CodeHTML {
     /**
      * Write a single method with the byte code associated with it.
      */
-    private void writeMethod(final Method method, final int method_number) throws IOException {
+    private void writeMethod(final Method method, final int methodNumber) throws IOException {
         // Get raw signature
         final String signature = method.getSignature();
         // Get array of strings containing the argument types
@@ -482,14 +482,14 @@ final class CodeHTML {
         final String type = Utility.methodSignatureReturnType(signature, false);
         // Get method name
         final String name = method.getName();
-        final String html_name = Class2HTML.toHTML(name);
+        final String htmlName = Class2HTML.toHTML(name);
         // Get method's access flags
         String access = Utility.accessToString(method.getAccessFlags());
         access = Utility.replace(access, " ", "&nbsp;");
         // Get the method's attributes, the Code Attribute in particular
         final Attribute[] attributes = method.getAttributes();
-        printWriter.print("<P><B><FONT COLOR=\"#FF0000\">" + access + "</FONT>&nbsp;" + "<A NAME=method" + method_number + ">" + Class2HTML.referenceType(type)
-            + "</A>&nbsp<A HREF=\"" + className + "_methods.html#method" + method_number + "\" TARGET=Methods>" + html_name + "</A>(");
+        printWriter.print("<P><B><FONT COLOR=\"#FF0000\">" + access + "</FONT>&nbsp;" + "<A NAME=method" + methodNumber + ">" + Class2HTML.referenceType(type)
+            + "</A>&nbsp<A HREF=\"" + className + "_methods.html#method" + methodNumber + "\" TARGET=Methods>" + htmlName + "</A>(");
         for (int i = 0; i < args.length; i++) {
             printWriter.print(Class2HTML.referenceType(args[i]));
             if (i < args.length - 1) {
@@ -504,7 +504,7 @@ final class CodeHTML {
             for (int i = 0; i < attributes.length; i++) {
                 byte tag = attributes[i].getTag();
                 if (tag != Const.ATTR_UNKNOWN) {
-                    printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#method" + method_number + "@" + i + "\" TARGET=Attributes>"
+                    printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#method" + methodNumber + "@" + i + "\" TARGET=Attributes>"
                         + Const.getAttributeName(tag) + "</A></LI>\n");
                 } else {
                     printWriter.print("<LI>" + attributes[i] + "</LI>");
@@ -516,7 +516,7 @@ final class CodeHTML {
                     printWriter.print("<UL>");
                     for (int j = 0; j < attributes2.length; j++) {
                         tag = attributes2[j].getTag();
-                        printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#" + "method" + method_number + "@" + i + "@" + j
+                        printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#" + "method" + methodNumber + "@" + i + "@" + j
                             + "\" TARGET=Attributes>" + Const.getAttributeName(tag) + "</A></LI>\n");
                     }
                     printWriter.print("</UL>");
@@ -534,18 +534,18 @@ final class CodeHTML {
                 printWriter.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Byte<BR>offset</TH>" + "<TH ALIGN=LEFT>Instruction</TH><TH ALIGN=LEFT>Argument</TH>");
                 while (stream.available() > 0) {
                     final int offset = stream.getIndex();
-                    final String str = codeToHTML(stream, method_number);
+                    final String str = codeToHTML(stream, methodNumber);
                     String anchor = "";
                     /*
                      * Set an anchor mark if this line is targetted by a goto, jsr, etc. Defining an anchor for every line is very
                      * inefficient!
                      */
                     if (gotoSet.get(offset)) {
-                        anchor = "<A NAME=code" + method_number + "@" + offset + "></A>";
+                        anchor = "<A NAME=code" + methodNumber + "@" + offset + "></A>";
                     }
                     String anchor2;
                     if (stream.getIndex() == code.length) {
-                        anchor2 = "<A NAME=code" + method_number + "@" + code.length + ">" + offset + "</A>";
+                        anchor2 = "<A NAME=code" + methodNumber + "@" + code.length + ">" + offset + "</A>";
                     } else {
                         anchor2 = "" + offset;
                     }

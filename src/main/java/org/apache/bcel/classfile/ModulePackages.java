@@ -152,8 +152,8 @@ public final class ModulePackages extends Attribute {
         buf.append(packageIndexTable.length);
         buf.append("):\n");
         for (final int index : packageIndexTable) {
-            final String package_name = super.getConstantPool().getConstantString(index, Const.CONSTANT_Package);
-            buf.append("  ").append(Utility.compactClassName(package_name, false)).append("\n");
+            final String packageName = super.getConstantPool().getConstantString(index, Const.CONSTANT_Package);
+            buf.append("  ").append(Utility.compactClassName(packageName, false)).append("\n");
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }

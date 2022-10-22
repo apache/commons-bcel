@@ -31,8 +31,8 @@ public class LocalVariablesInfo {
     private final LocalVariableInfo[] localVariableInfos;
 
     /** The constructor. */
-    LocalVariablesInfo(final int max_locals) {
-        localVariableInfos = new LocalVariableInfo[max_locals];
+    LocalVariablesInfo(final int maxLocals) {
+        localVariableInfos = new LocalVariableInfo[maxLocals];
         Arrays.setAll(localVariableInfos, i -> new LocalVariableInfo());
     }
 

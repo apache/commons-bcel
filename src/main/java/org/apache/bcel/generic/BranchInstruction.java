@@ -32,12 +32,12 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Used by BranchInstruction, LocalVariableGen, CodeExceptionGen, LineNumberGen
      */
-    static void notifyTarget(final InstructionHandle old_ih, final InstructionHandle new_ih, final InstructionTargeter t) {
-        if (old_ih != null) {
-            old_ih.removeTargeter(t);
+    static void notifyTarget(final InstructionHandle oldIh, final InstructionHandle newIh, final InstructionTargeter t) {
+        if (oldIh != null) {
+            oldIh.removeTargeter(t);
         }
-        if (new_ih != null) {
-            new_ih.addTargeter(t);
+        if (newIh != null) {
+            newIh.addTargeter(t);
         }
     }
 
@@ -233,24 +233,24 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * positions and offsets by calling this function.
      *
      * @param offset additional offset caused by preceding (variable length) instructions
-     * @param max_offset the maximum offset that may be caused by these instructions
+     * @param maxOffset the maximum offset that may be caused by these instructions
      * @return additional offset caused by possible change of this instruction's length
      */
-    protected int updatePosition(final int offset, final int max_offset) {
+    protected int updatePosition(final int offset, final int maxOffset) {
         position += offset;
         return 0;
     }
 
     /**
-     * @param old_ih old target
-     * @param new_ih new target
+     * @param oldIh old target
+     * @param newIh new target
      */
     @Override
-    public void updateTarget(final InstructionHandle old_ih, final InstructionHandle new_ih) {
-        if (target != old_ih) {
-            throw new ClassGenException("Not targeting " + old_ih + ", but " + target);
+    public void updateTarget(final InstructionHandle oldIh, final InstructionHandle newIh) {
+        if (target != oldIh) {
+            throw new ClassGenException("Not targeting " + oldIh + ", but " + target);
         }
-        setTarget(new_ih);
+        setTarget(newIh);
     }
 
 }

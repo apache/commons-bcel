@@ -62,7 +62,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
      *
      * @param lineNumberTable Table of line/numbers pairs
      *
-     * @param constant_pool Array of constants
+     * @param constantPool Array of constants
      */
     public LineNumberTable(final int nameIndex, final int length, final LineNumber[] lineNumberTable, final ConstantPool constantPool) {
         super(Const.ATTR_LINE_NUMBER_TABLE, nameIndex, length, constantPool);

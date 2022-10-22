@@ -377,24 +377,24 @@ public class ControlFlowGraph {
     /**
      * A Control Flow Graph; with additional JustIce checks
      *
-     * @param method_gen the method generator instance
+     * @param methodGen the method generator instance
      */
-    public ControlFlowGraph(final MethodGen method_gen) {
-        this(method_gen, true);
+    public ControlFlowGraph(final MethodGen methodGen) {
+        this(methodGen, true);
     }
 
     /**
      * A Control Flow Graph.
      *
-     * @param method_gen the method generator instance
+     * @param methodGen the method generator instance
      * @param enableJustIceCheck if true, additional JustIce checks are performed
      * @since 6.0
      */
-    public ControlFlowGraph(final MethodGen method_gen, final boolean enableJustIceCheck) {
-        subroutines = new Subroutines(method_gen, enableJustIceCheck);
-        exceptionhandlers = new ExceptionHandlers(method_gen);
+    public ControlFlowGraph(final MethodGen methodGen, final boolean enableJustIceCheck) {
+        subroutines = new Subroutines(methodGen, enableJustIceCheck);
+        exceptionhandlers = new ExceptionHandlers(methodGen);
 
-        final InstructionHandle[] instructionhandles = method_gen.getInstructionList().getInstructionHandles();
+        final InstructionHandle[] instructionhandles = methodGen.getInstructionList().getInstructionHandles();
         for (final InstructionHandle instructionhandle : instructionhandles) {
             instructionContexts.put(instructionhandle, new InstructionContextImpl(instructionhandle));
         }

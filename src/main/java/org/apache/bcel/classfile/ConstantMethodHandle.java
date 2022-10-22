@@ -92,8 +92,8 @@ public final class ConstantMethodHandle extends Constant {
         this.referenceIndex = referenceIndex;
     }
 
-    public void setReferenceKind(final int reference_kind) {
-        this.referenceKind = reference_kind;
+    public void setReferenceKind(final int referenceKind) {
+        this.referenceKind = referenceKind;
     }
 
     /**

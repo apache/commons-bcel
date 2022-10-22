@@ -210,10 +210,10 @@ class BCELFactory extends EmptyVisitor {
             }
             printWriter.println(" }, null);");
         } else {
-            final int t_pos = bh.getTarget().getPosition();
+            final int tPos = bh.getTarget().getPosition();
             String target;
-            if (pos > t_pos) {
-                target = "ih_" + t_pos;
+            if (pos > tPos) {
+                target = "ih_" + tPos;
             } else {
                 branches.add(bi);
                 target = "null";

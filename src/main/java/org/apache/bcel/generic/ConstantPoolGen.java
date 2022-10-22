@@ -466,23 +466,23 @@ public class ConstantPoolGen {
      * Add a new Methodref constant to the ConstantPool, if it is not already in there.
      *
      * @param className class name string to add
-     * @param method_name method name string to add
+     * @param methodName method name string to add
      * @param signature method signature string to add
      * @return index of entry
      */
-    public int addMethodref(final String className, final String method_name, final String signature) {
+    public int addMethodref(final String className, final String methodName, final String signature) {
         int ret;
         int classIndex;
         int nameAndTypeIndex;
-        if ((ret = lookupMethodref(className, method_name, signature)) != -1) {
+        if ((ret = lookupMethodref(className, methodName, signature)) != -1) {
             return ret; // Already in CP
         }
         adjustSize();
-        nameAndTypeIndex = addNameAndType(method_name, signature);
+        nameAndTypeIndex = addNameAndType(methodName, signature);
         classIndex = addClass(className);
         ret = index;
         constants[index++] = new ConstantMethodref(classIndex, nameAndTypeIndex);
-        final String key = className + METHODREF_DELIM + method_name + METHODREF_DELIM + signature;
+        final String key = className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature;
         if (!cpTable.containsKey(key)) {
             cpTable.put(key, new Index(ret));
         }
@@ -697,12 +697,12 @@ public class ConstantPoolGen {
      * Look for ConstantInterfaceMethodref in ConstantPool.
      *
      * @param className Where to find method
-     * @param method_name Guess what
+     * @param methodName Guess what
      * @param signature return and argument types
      * @return index on success, -1 otherwise
      */
-    public int lookupInterfaceMethodref(final String className, final String method_name, final String signature) {
-        final Index index = cpTable.get(className + IMETHODREF_DELIM + method_name + IMETHODREF_DELIM + signature);
+    public int lookupInterfaceMethodref(final String className, final String methodName, final String signature) {
+        final Index index = cpTable.get(className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature);
         return index != null ? index.index : -1;
     }
 
@@ -732,12 +732,12 @@ public class ConstantPoolGen {
      * Look for ConstantMethodref in ConstantPool.
      *
      * @param className Where to find method
-     * @param method_name Guess what
+     * @param methodName Guess what
      * @param signature return and argument types
      * @return index on success, -1 otherwise
      */
-    public int lookupMethodref(final String className, final String method_name, final String signature) {
-        final Index index = cpTable.get(className + METHODREF_DELIM + method_name + METHODREF_DELIM + signature);
+    public int lookupMethodref(final String className, final String methodName, final String signature) {
+        final Index index = cpTable.get(className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature);
         return index != null ? index.index : -1;
     }
 

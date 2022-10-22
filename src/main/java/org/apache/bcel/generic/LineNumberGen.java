@@ -85,8 +85,8 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
         this.ih = instructionHandle;
     }
 
-    public void setSourceLine(final int src_line) { // TODO could be package-protected?
-        this.srcLine = src_line;
+    public void setSourceLine(final int srcLine) { // TODO could be package-protected?
+        this.srcLine = srcLine;
     }
 
     /**

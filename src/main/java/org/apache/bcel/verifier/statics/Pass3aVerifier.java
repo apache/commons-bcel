@@ -333,13 +333,13 @@ public final class Pass3aVerifier extends PassVerifier {
                     constraintViolated(o, "Indexing a constant that's not a CONSTANT_Fieldref but a '" + tostring(c) + "'.");
                 }
 
-                final String field_name = o.getFieldName(constantPoolGen);
+                final String fieldName = o.getFieldName(constantPoolGen);
 
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
                 Field[] fields = jc.getFields();
                 Field f = null;
                 for (final Field field : fields) {
-                    if (field.getName().equals(field_name)) {
+                    if (field.getName().equals(fieldName)) {
                         final Type fType = Type.getType(field.getSignature());
                         final Type oType = o.getType(constantPoolGen);
                         /*
@@ -356,7 +356,7 @@ public final class Pass3aVerifier extends PassVerifier {
                     outer: for (final JavaClass superclass : superclasses) {
                         fields = superclass.getFields();
                         for (final Field field : fields) {
-                            if (field.getName().equals(field_name)) {
+                            if (field.getName().equals(fieldName)) {
                                 final Type fType = Type.getType(field.getSignature());
                                 final Type oType = o.getType(constantPoolGen);
                                 if (fType.equals(oType)) {
@@ -370,7 +370,7 @@ public final class Pass3aVerifier extends PassVerifier {
                         }
                     }
                     if (f == null) {
-                        constraintViolated(o, "Referenced field '" + field_name + "' does not exist in class '" + jc.getClassName() + "'.");
+                        constraintViolated(o, "Referenced field '" + fieldName + "' does not exist in class '" + jc.getClassName() + "'.");
                     }
                 } else {
                     /*
@@ -428,18 +428,18 @@ public final class Pass3aVerifier extends PassVerifier {
         @Override
         public void visitGETSTATIC(final GETSTATIC o) {
             try {
-                final String field_name = o.getFieldName(constantPoolGen);
+                final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
                 final Field[] fields = jc.getFields();
                 Field f = null;
                 for (final Field field : fields) {
-                    if (field.getName().equals(field_name)) {
+                    if (field.getName().equals(fieldName)) {
                         f = field;
                         break;
                     }
                 }
                 if (f == null) {
-                    throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
+                    throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
 
                 if (!f.isStatic()) {
@@ -871,18 +871,18 @@ public final class Pass3aVerifier extends PassVerifier {
         @Override
         public void visitPUTSTATIC(final PUTSTATIC o) {
             try {
-                final String field_name = o.getFieldName(constantPoolGen);
+                final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
                 final Field[] fields = jc.getFields();
                 Field f = null;
                 for (final Field field : fields) {
-                    if (field.getName().equals(field_name)) {
+                    if (field.getName().equals(fieldName)) {
                         f = field;
                         break;
                     }
                 }
                 if (f == null) {
-                    throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
+                    throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
 
                 if (f.isFinal() && !myOwner.getClassName().equals(getObjectType(o).getClassName())) {
@@ -894,10 +894,10 @@ public final class Pass3aVerifier extends PassVerifier {
                     constraintViolated(o, "Referenced field '" + f + "' is not static which it should be.");
                 }
 
-                final String meth_name = Repository.lookupClass(myOwner.getClassName()).getMethods()[methodNo].getName();
+                final String methName = Repository.lookupClass(myOwner.getClassName()).getMethods()[methodNo].getName();
 
                 // If it's an interface, it can be set only in <clinit>.
-                if (!jc.isClass() && !meth_name.equals(Const.STATIC_INITIALIZER_NAME)) {
+                if (!jc.isClass() && !methName.equals(Const.STATIC_INITIALIZER_NAME)) {
                     constraintViolated(o, "Interface field '" + f + "' must be set in a '" + Const.STATIC_INITIALIZER_NAME + "' method.");
                 }
             } catch (final ClassNotFoundException e) {

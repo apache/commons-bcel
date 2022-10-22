@@ -99,13 +99,13 @@ public class FieldGen extends FieldGenOrMethodGen {
      * Declare a field. If it is static (isStatic() == true) and has a basic type like int or String it may have an initial
      * value associated with it as defined by setInitValue().
      *
-     * @param access_flags access qualifiers
+     * @param accessFlags access qualifiers
      * @param type field type
      * @param name field name
      * @param cp constant pool
      */
-    public FieldGen(final int access_flags, final Type type, final String name, final ConstantPoolGen cp) {
-        super(access_flags);
+    public FieldGen(final int accessFlags, final Type type, final String name, final ConstantPoolGen cp) {
+        super(accessFlags);
         setType(type);
         setName(name);
         setConstantPool(cp);

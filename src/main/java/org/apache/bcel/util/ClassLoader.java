@@ -89,10 +89,10 @@ public class ClassLoader extends java.lang.ClassLoader {
     }
 
     /**
-     * @param ignored_packages classes contained in these packages will be loaded with the system class loader
+     * @param ignoredPackages classes contained in these packages will be loaded with the system class loader
      */
-    public ClassLoader(final String[] ignored_packages) {
-        this.ignoredPackages = ignored_packages;
+    public ClassLoader(final String[] ignoredPackages) {
+        this.ignoredPackages = ignoredPackages;
     }
 
     /**
@@ -109,10 +109,10 @@ public class ClassLoader extends java.lang.ClassLoader {
      */
     protected JavaClass createClass(final String className) {
         final int index = className.indexOf(BCEL_TOKEN);
-        final String real_name = className.substring(index + BCEL_TOKEN.length());
+        final String realName = className.substring(index + BCEL_TOKEN.length());
         JavaClass clazz = null;
         try {
-            final byte[] bytes = Utility.decode(real_name, true);
+            final byte[] bytes = Utility.decode(realName, true);
             final ClassParser parser = new ClassParser(new ByteArrayInputStream(bytes), "foo");
             clazz = parser.parse();
         } catch (final IOException e) {

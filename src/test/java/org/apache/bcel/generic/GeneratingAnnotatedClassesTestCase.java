@@ -103,8 +103,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         final MethodGen mg = createMethodGen("main", il, cp);
         final InstructionFactory factory = new InstructionFactory(cg);
         // We now define some often used types:
-        final ObjectType i_stream = new ObjectType("java.io.InputStream");
-        final ObjectType p_stream = new ObjectType("java.io.PrintStream");
+        final ObjectType iStream = new ObjectType("java.io.InputStream");
+        final ObjectType pStream = new ObjectType("java.io.PrintStream");
         // Create variables in and name : We call the constructors, i.e.,
         // execute BufferedReader(InputStreamReader(System.in)) . The reference
         // to the BufferedReader object stays on top of the stack and is stored
@@ -113,8 +113,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         il.append(InstructionConst.DUP); // Use predefined constant
         il.append(factory.createNew("java.io.InputStreamReader"));
         il.append(InstructionConst.DUP);
-        il.append(factory.createFieldAccess("java.lang.System", "in", i_stream, Const.GETSTATIC));
-        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {i_stream}, Const.INVOKESPECIAL));
+        il.append(factory.createFieldAccess("java.lang.System", "in", iStream, Const.GETSTATIC));
+        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {iStream}, Const.INVOKESPECIAL));
         il.append(factory.createInvoke("java.io.BufferedReader", "<init>", Type.VOID, new Type[] {new ObjectType("java.io.Reader")}, Const.INVOKESPECIAL));
         LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType("java.io.BufferedReader"), null, null);
         final int in = lg.getIndex();
@@ -135,22 +135,22 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         // il.append(new ALOAD(in));
         // il.append(factory.createInvoke("java.io.BufferedReader", "readLine",
         // Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
-        final InstructionHandle try_start = il.append(new PUSH(cp, "Andy"));
+        final InstructionHandle tryStart = il.append(new PUSH(cp, "Andy"));
         il.append(new ASTORE(name));
         // Upon normal execution we jump behind exception handler, the target
         // address is not known yet.
         final GOTO g = new GOTO(null);
-        final InstructionHandle try_end = il.append(g);
+        final InstructionHandle tryEnd = il.append(g);
         // We add the exception handler which simply returns from the method.
-        final LocalVariableGen var_ex = mg.addLocalVariable("ex", Type.getType("Ljava.io.IOException;"), null, null);
-        final int var_ex_slot = var_ex.getIndex();
+        final LocalVariableGen varEx = mg.addLocalVariable("ex", Type.getType("Ljava.io.IOException;"), null, null);
+        final int var_ex_slot = varEx.getIndex();
         final InstructionHandle handler = il.append(new ASTORE(var_ex_slot));
-        var_ex.setStart(handler);
-        var_ex.setEnd(il.append(InstructionConst.RETURN));
-        mg.addExceptionHandler(try_start, try_end, handler, new ObjectType("java.io.IOException"));
+        varEx.setStart(handler);
+        varEx.setEnd(il.append(InstructionConst.RETURN));
+        mg.addExceptionHandler(tryStart, tryEnd, handler, new ObjectType("java.io.IOException"));
         // "Normal" code continues, now we can set the branch target of the GOTO
         // .
-        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Const.GETSTATIC));
+        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
         g.setTarget(ih);
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.
@@ -179,8 +179,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         final InstructionFactory factory = new InstructionFactory(cg);
         mg.addAnnotationEntry(createSimpleVisibleAnnotation(mg.getConstantPool()));
         // We now define some often used types:
-        final ObjectType i_stream = new ObjectType("java.io.InputStream");
-        final ObjectType p_stream = new ObjectType("java.io.PrintStream");
+        final ObjectType iStream = new ObjectType("java.io.InputStream");
+        final ObjectType pStream = new ObjectType("java.io.PrintStream");
         // Create variables in and name : We call the constructors, i.e.,
         // execute BufferedReader(InputStreamReader(System.in)) . The reference
         // to the BufferedReader object stays on top of the stack and is stored
@@ -189,8 +189,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         il.append(InstructionConst.DUP); // Use predefined constant
         il.append(factory.createNew("java.io.InputStreamReader"));
         il.append(InstructionConst.DUP);
-        il.append(factory.createFieldAccess("java.lang.System", "in", i_stream, Const.GETSTATIC));
-        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {i_stream}, Const.INVOKESPECIAL));
+        il.append(factory.createFieldAccess("java.lang.System", "in", iStream, Const.GETSTATIC));
+        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {iStream}, Const.INVOKESPECIAL));
         il.append(factory.createInvoke("java.io.BufferedReader", "<init>", Type.VOID, new Type[] {new ObjectType("java.io.Reader")}, Const.INVOKESPECIAL));
         LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType("java.io.BufferedReader"), null, null);
         final int in = lg.getIndex();
@@ -211,22 +211,22 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         // il.append(new ALOAD(in));
         // il.append(factory.createInvoke("java.io.BufferedReader", "readLine",
         // Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
-        final InstructionHandle try_start = il.append(new PUSH(cp, "Andy"));
+        final InstructionHandle tryStart = il.append(new PUSH(cp, "Andy"));
         il.append(new ASTORE(name));
         // Upon normal execution we jump behind exception handler, the target
         // address is not known yet.
         final GOTO g = new GOTO(null);
-        final InstructionHandle try_end = il.append(g);
+        final InstructionHandle tryEnd = il.append(g);
         // We add the exception handler which simply returns from the method.
-        final LocalVariableGen var_ex = mg.addLocalVariable("ex", Type.getType("Ljava.io.IOException;"), null, null);
-        final int var_ex_slot = var_ex.getIndex();
-        final InstructionHandle handler = il.append(new ASTORE(var_ex_slot));
-        var_ex.setStart(handler);
-        var_ex.setEnd(il.append(InstructionConst.RETURN));
-        mg.addExceptionHandler(try_start, try_end, handler, new ObjectType("java.io.IOException"));
+        final LocalVariableGen varEx = mg.addLocalVariable("ex", Type.getType("Ljava.io.IOException;"), null, null);
+        final int varExSlot = varEx.getIndex();
+        final InstructionHandle handler = il.append(new ASTORE(varExSlot));
+        varEx.setStart(handler);
+        varEx.setEnd(il.append(InstructionConst.RETURN));
+        mg.addExceptionHandler(tryStart, tryEnd, handler, new ObjectType("java.io.IOException"));
         // "Normal" code continues, now we can set the branch target of the GOTO
         // .
-        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", p_stream, Const.GETSTATIC));
+        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
         g.setTarget(ih);
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.

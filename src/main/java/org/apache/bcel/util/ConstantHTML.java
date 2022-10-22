@@ -45,10 +45,10 @@ final class ConstantHTML {
     private final Constant[] constants; // The constants in the cp
     private final Method[] methods;
 
-    ConstantHTML(final String dir, final String className, final String class_package, final Method[] methods, final ConstantPool constantPool,
+    ConstantHTML(final String dir, final String className, final String classPackage, final Method[] methods, final ConstantPool constantPool,
         final Charset charset) throws IOException {
         this.className = className;
-        this.classPackage = class_package;
+        this.classPackage = classPackage;
         this.constantPool = constantPool;
         this.methods = methods;
         this.constants = constantPool.getConstantPool();

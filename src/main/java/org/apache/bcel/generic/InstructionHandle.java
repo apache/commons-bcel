@@ -294,10 +294,10 @@ public class InstructionHandle {
      * (byte) positions and offsets by calling this function.
      *
      * @param offset additional offset caused by preceding (variable length) instructions
-     * @param max_offset the maximum offset that may be caused by these instructions
+     * @param maxOffset the maximum offset that may be caused by these instructions
      * @return additional offset caused by possible change of this instruction's length
      */
-    protected int updatePosition(final int offset, final int max_offset) {
+    protected int updatePosition(final int offset, final int maxOffset) {
         i_position += offset;
         return 0;
     }

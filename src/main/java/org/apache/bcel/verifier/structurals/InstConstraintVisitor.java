@@ -125,9 +125,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
      * @throws StructuralCodeConstraintException always.
      */
     private void constraintViolated(final Instruction violator, final String description) {
-        final String fq_classname = violator.getClass().getName();
+        final String fqClassName = violator.getClass().getName();
         throw new StructuralCodeConstraintException(
-            "Instruction " + fq_classname.substring(fq_classname.lastIndexOf('.') + 1) + " constraint violated: " + description);
+            "Instruction " + fqClassName.substring(fqClassName.lastIndexOf('.') + 1) + " constraint violated: " + description);
     }
 
     private ObjectType getObjectType(final FieldInstruction o) {
@@ -1031,13 +1031,13 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 constraintViolated(o, "Stack top should be an object reference that's not an array reference, but is '" + objectref + "'.");
             }
 
-            final String field_name = o.getFieldName(cpg);
+            final String fieldName = o.getFieldName(cpg);
 
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             Field[] fields = jc.getFields();
             Field f = null;
             for (final Field field : fields) {
-                if (field.getName().equals(field_name)) {
+                if (field.getName().equals(fieldName)) {
                     final Type fType = Type.getType(field.getSignature());
                     final Type oType = o.getType(cpg);
                     /*
@@ -1055,7 +1055,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 outer: for (final JavaClass superclass : superclasses) {
                     fields = superclass.getFields();
                     for (final Field field : fields) {
-                        if (field.getName().equals(field_name)) {
+                        if (field.getName().equals(fieldName)) {
                             final Type fType = Type.getType(field.getSignature());
                             final Type oType = o.getType(cpg);
                             if (fType.equals(oType)) {
@@ -1069,7 +1069,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
                     }
                 }
                 if (f == null) {
-                    throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
+                    throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
             }
 
@@ -1651,12 +1651,12 @@ public class InstConstraintVisitor extends EmptyVisitor {
         // constraintViolated(o, "The 'objref' item '"+objref+"' does not implement '"+theInterface+"' as expected.");
         // }
 
-        int counted_count = 1; // 1 for the objectref
+        int countedCount = 1; // 1 for the objectref
         for (int i = 0; i < nargs; i++) {
-            counted_count += argtypes[i].getSize();
+            countedCount += argtypes[i].getSize();
         }
-        if (count != counted_count) {
-            constraintViolated(o, "The 'count' argument should probably read '" + counted_count + "' but is '" + count + "'.");
+        if (count != countedCount) {
+            constraintViolated(o, "The 'count' argument should probably read '" + countedCount + "' but is '" + count + "'.");
         }
     }
 
@@ -1720,7 +1720,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
             if (!(objref instanceof ReferenceType)) {
                 constraintViolated(o, "Expecting a reference type as 'objectref' on the stack, not a '" + objref + "'.");
             }
-            String objref_classname = null;
+            String objRefClassName = null;
             if (!o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME)) {
                 referenceTypeIsInitialized(o, (ReferenceType) objref);
                 if (!(objref instanceof ObjectType)) {
@@ -1731,17 +1731,17 @@ public class InstConstraintVisitor extends EmptyVisitor {
                     }
                 }
 
-                objref_classname = ((ObjectType) objref).getClassName();
+                objRefClassName = ((ObjectType) objref).getClassName();
             } else {
                 if (!(objref instanceof UninitializedObjectType)) {
                     constraintViolated(o, "Expecting an UninitializedObjectType as 'objectref' on the stack, not a '" + objref
                         + "'. Otherwise, you couldn't invoke a method since an array has no methods (not to speak of a return address).");
                 }
-                objref_classname = ((UninitializedObjectType) objref).getInitialized().getClassName();
+                objRefClassName = ((UninitializedObjectType) objref).getInitialized().getClassName();
             }
 
             final String theClass = o.getClassName(cpg);
-            if (!Repository.instanceOf(objref_classname, theClass)) {
+            if (!Repository.instanceOf(objRefClassName, theClass)) {
                 constraintViolated(o, "The 'objref' item '" + objref + "' does not implement '" + theClass + "' as expected.");
             }
 
@@ -1860,11 +1860,11 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 }
             }
 
-            final String objref_classname = ((ObjectType) objref).getClassName();
+            final String objRefClassName = ((ObjectType) objref).getClassName();
 
             final String theClass = o.getClassName(cpg);
 
-            if (!Repository.instanceOf(objref_classname, theClass)) {
+            if (!Repository.instanceOf(objRefClassName, theClass)) {
                 constraintViolated(o, "The 'objref' item '" + objref + "' does not implement '" + theClass + "' as expected.");
             }
         } catch (final ClassNotFoundException e) {
@@ -2505,13 +2505,13 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 constraintViolated(o, "Stack next-to-top should be an object reference that's not an array reference, but is '" + objectref + "'.");
             }
 
-            final String field_name = o.getFieldName(cpg);
+            final String fieldName = o.getFieldName(cpg);
 
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             final Field[] fields = jc.getFields();
             Field f = null;
             for (final Field field : fields) {
-                if (field.getName().equals(field_name)) {
+                if (field.getName().equals(fieldName)) {
                     final Type fType = Type.getType(field.getSignature());
                     final Type oType = o.getType(cpg);
                     /*
@@ -2524,7 +2524,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 }
             }
             if (f == null) {
-                throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
+                throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
             }
 
             final Type value = stack().peek();
@@ -2590,12 +2590,12 @@ public class InstConstraintVisitor extends EmptyVisitor {
     @Override
     public void visitPUTSTATIC(final PUTSTATIC o) {
         try {
-            final String field_name = o.getFieldName(cpg);
+            final String fieldName = o.getFieldName(cpg);
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
             final Field[] fields = jc.getFields();
             Field f = null;
             for (final Field field : fields) {
-                if (field.getName().equals(field_name)) {
+                if (field.getName().equals(fieldName)) {
                     final Type fType = Type.getType(field.getSignature());
                     final Type oType = o.getType(cpg);
                     /*
@@ -2608,7 +2608,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 }
             }
             if (f == null) {
-                throw new AssertionViolatedException("Field '" + field_name + "' not found in " + jc.getClassName());
+                throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
             }
             final Type value = stack().peek();
             final Type t = Type.getType(f.getSignature());

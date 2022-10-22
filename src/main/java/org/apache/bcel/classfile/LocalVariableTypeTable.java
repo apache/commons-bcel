@@ -72,9 +72,9 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
         }
     }
 
-    public LocalVariableTypeTable(final int nameIndex, final int length, final LocalVariable[] local_variable_table, final ConstantPool constantPool) {
+    public LocalVariableTypeTable(final int nameIndex, final int length, final LocalVariable[] localVariableTable, final ConstantPool constantPool) {
         super(Const.ATTR_LOCAL_VARIABLE_TYPE_TABLE, nameIndex, length, constantPool);
-        this.localVariableTypeTable = local_variable_table;
+        this.localVariableTypeTable = localVariableTable;
     }
 
     public LocalVariableTypeTable(final LocalVariableTypeTable c) {

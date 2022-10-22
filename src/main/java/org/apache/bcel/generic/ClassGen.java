@@ -185,14 +185,14 @@ public class ClassGen extends AccessFlags implements Cloneable {
      *
      * Add an empty constructor to this class that does nothing but calling super().
      *
-     * @param access_flags rights for constructor
+     * @param accessFlags rights for constructor
      */
-    public void addEmptyConstructor(final int access_flags) {
+    public void addEmptyConstructor(final int accessFlags) {
         final InstructionList il = new InstructionList();
         il.append(InstructionConst.THIS); // Push `this'
         il.append(new INVOKESPECIAL(cp.addMethodref(superClassName, Const.CONSTRUCTOR_NAME, "()V")));
         il.append(InstructionConst.RETURN);
-        final MethodGen mg = new MethodGen(access_flags, Type.VOID, Type.NO_ARGS, null, Const.CONSTRUCTOR_NAME, className, il, cp);
+        final MethodGen mg = new MethodGen(accessFlags, Type.VOID, Type.NO_ARGS, null, Const.CONSTRUCTOR_NAME, className, il, cp);
         mg.setMaxStack(1);
         addMethod(mg.getMethod());
     }

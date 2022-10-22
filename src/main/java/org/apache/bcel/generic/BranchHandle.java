@@ -85,8 +85,8 @@ public final class BranchHandle extends InstructionHandle {
     }
 
     @Override
-    protected int updatePosition(final int offset, final int max_offset) {
-        final int x = bi.updatePosition(offset, max_offset);
+    protected int updatePosition(final int offset, final int maxOffset) {
+        final int x = bi.updatePosition(offset, maxOffset);
         super.setPosition(bi.getPosition());
         return x;
     }
@@ -94,7 +94,7 @@ public final class BranchHandle extends InstructionHandle {
     /**
      * Update target of instruction.
      */
-    public void updateTarget(final InstructionHandle old_ih, final InstructionHandle new_ih) {
-        bi.updateTarget(old_ih, new_ih);
+    public void updateTarget(final InstructionHandle oldIh, final InstructionHandle newIh) {
+        bi.updateTarget(oldIh, newIh);
     }
 }

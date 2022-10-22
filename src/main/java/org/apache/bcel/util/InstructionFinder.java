@@ -256,9 +256,9 @@ public class InstructionFinder {
     /**
      * @return the matched piece of code as an array of instruction (handles)
      */
-    private InstructionHandle[] getMatch(final int matched_from, final int match_length) {
-        final InstructionHandle[] match = new InstructionHandle[match_length];
-        System.arraycopy(handles, matched_from, match, 0, match_length);
+    private InstructionHandle[] getMatch(final int matchedFrom, final int matchLength) {
+        final InstructionHandle[] match = new InstructionHandle[matchLength];
+        System.arraycopy(handles, matchedFrom, match, 0, matchLength);
         return match;
     }
 
