@@ -586,7 +586,7 @@ public abstract class Utility {
     }
 
     /**
-     * Escape all occurences of newline chars '\n', quotes \", etc.
+     * Escape all occurrences of newline chars '\n', quotes \", etc.
      */
     public static String convertString(final String label) {
         final char[] ch = label.toCharArray();

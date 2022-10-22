@@ -101,7 +101,7 @@ public class OperandStack implements Cloneable {
     }
 
     /**
-     * Replaces all occurences of u in this OperandStack instance with an "initialized" ObjectType.
+     * Replaces all occurrences of u in this OperandStack instance with an "initialized" ObjectType.
      */
     public void initializeObject(final UninitializedObjectType u) {
         for (int i = 0; i < stack.size(); i++) {
