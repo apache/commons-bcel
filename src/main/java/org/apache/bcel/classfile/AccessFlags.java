@@ -33,7 +33,7 @@ public abstract class AccessFlags {
     }
 
     /**
-     * @param a inital access flags
+     * @param a initial access flags
      */
     public AccessFlags(final int a) {
         access_flags = a;
