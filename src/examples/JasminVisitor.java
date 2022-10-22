@@ -143,7 +143,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     @Override
     public void visitCode(final Code code) {
-        int label_counter = 0;
+        int labelCounter = 0;
 
         out.println(".limit stack " + code.getMaxStack());
         out.println(".limit locals " + code.getMaxLocals());
@@ -163,32 +163,32 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
                 if (bi instanceof Select) { // Special cases LOOKUPSWITCH and TABLESWITCH
                     for (final InstructionHandle target : ((Select) bi).getTargets()) {
-                        put(target, "Label" + label_counter++ + ":");
+                        put(target, "Label" + labelCounter++ + ":");
                     }
                 }
 
                 final InstructionHandle ih = bi.getTarget();
-                put(ih, "Label" + label_counter++ + ":");
+                put(ih, "Label" + labelCounter++ + ":");
             }
         }
 
         final LocalVariableGen[] lvs = mg.getLocalVariables();
         for (final LocalVariableGen lv : lvs) {
             InstructionHandle ih = lv.getStart();
-            put(ih, "Label" + label_counter++ + ":");
+            put(ih, "Label" + labelCounter++ + ":");
             ih = lv.getEnd();
-            put(ih, "Label" + label_counter++ + ":");
+            put(ih, "Label" + labelCounter++ + ":");
         }
 
         final CodeExceptionGen[] ehs = mg.getExceptionHandlers();
         for (final CodeExceptionGen c : ehs) {
             InstructionHandle ih = c.getStartPC();
 
-            put(ih, "Label" + label_counter++ + ":");
+            put(ih, "Label" + labelCounter++ + ":");
             ih = c.getEndPC();
-            put(ih, "Label" + label_counter++ + ":");
+            put(ih, "Label" + labelCounter++ + ":");
             ih = c.getHandlerPC();
-            put(ih, "Label" + label_counter++ + ":");
+            put(ih, "Label" + labelCounter++ + ":");
         }
 
         final LineNumberGen[] lns = mg.getLineNumbers();

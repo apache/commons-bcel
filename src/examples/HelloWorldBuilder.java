@@ -98,7 +98,7 @@ public class HelloWorldBuilder {
         lg.setStart(il.append(new ASTORE(name))); // `name' valid from here
 
         // try { ...
-        final InstructionHandle try_start = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
+        final InstructionHandle tryStart = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
 
         il.append(new PUSH(cp, "Please enter your name> "));
         il.append(factory.createInvoke("java.io.PrintStream", "print", Type.VOID, new Type[] {Type.STRING}, Const.INVOKEVIRTUAL));
@@ -108,7 +108,7 @@ public class HelloWorldBuilder {
 
         // Upon normal execution we jump behind exception handler, the target address is not known yet.
         final GOTO g = new GOTO(null);
-        final InstructionHandle try_end = il.append(g);
+        final InstructionHandle tryEnd = il.append(g);
 
         /*
          * } catch() { ... } Add exception handler: print exception and return from method
@@ -119,7 +119,7 @@ public class HelloWorldBuilder {
 
         il.append(factory.createInvoke("java.io.PrintStream", "println", Type.VOID, new Type[] {Type.OBJECT}, Const.INVOKEVIRTUAL));
         il.append(InstructionConst.RETURN);
-        mg.addExceptionHandler(try_start, try_end, handler, new ObjectType("java.io.IOException"));
+        mg.addExceptionHandler(tryStart, tryEnd, handler, new ObjectType("java.io.IOException"));
 
         // Normal code continues, now we can set the branch target of the GOTO that jumps over the handler code.
         final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));

@@ -106,7 +106,7 @@ public final class helloify {
             if (arg.endsWith(".class")) {
                 final JavaClass javaClass = new ClassParser(arg).parse();
                 final ConstantPool constants = javaClass.getConstantPool();
-                final String file_name = arg.substring(0, arg.length() - 6) + "_hello.class";
+                final String fileName = arg.substring(0, arg.length() - 6) + "_hello.class";
                 cp = new ConstantPoolGen(constants);
 
                 helloifyClassName(javaClass);
@@ -122,7 +122,7 @@ public final class helloify {
 
                 // Finally dump it back to a file.
                 javaClass.setConstantPool(cp.getFinalConstantPool());
-                javaClass.dump(file_name);
+                javaClass.dump(fileName);
             }
         }
     }
