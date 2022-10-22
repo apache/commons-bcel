@@ -23,6 +23,7 @@ import org.apache.bcel.Const;
  * as the byte code generating backend of a compiler. You can subclass it to add your own create methods.
  * <p>
  * Note: The static createXXX methods return singleton instances from the {@link InstructionConst} class.
+ * </p>
  *
  * @see Const
  * @see InstructionConst
