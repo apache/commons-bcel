@@ -145,16 +145,16 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param fileName File name
      * @param major Major compiler version
      * @param minor Minor compiler version
-     * @param access_flags Access rights defined by bit flags
+     * @param accessFlags Access rights defined by bit flags
      * @param constantPool Array of constants
      * @param interfaces Implemented interfaces
      * @param fields Class fields
      * @param methods Class methods
      * @param attributes Class attributes
      */
-    public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major, final int minor, final int access_flags,
+    public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major, final int minor, final int accessFlags,
         final ConstantPool constantPool, final int[] interfaces, final Field[] fields, final Method[] methods, final Attribute[] attributes) {
-        this(classNameIndex, superclassNameIndex, fileName, major, minor, access_flags, constantPool, interfaces, fields, methods, attributes, HEAP);
+        this(classNameIndex, superclassNameIndex, fileName, major, minor, accessFlags, constantPool, interfaces, fields, methods, attributes, HEAP);
     }
 
     /**

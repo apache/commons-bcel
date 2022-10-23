@@ -732,15 +732,15 @@ public abstract class Utility {
      *
      * @param str string to format
      * @param length length of desired string
-     * @param left_justify format left or right
+     * @param leftJustify format left or right
      * @param fill fill character
      * @return formatted string
      */
-    public static String fillup(final String str, final int length, final boolean left_justify, final char fill) {
+    public static String fillup(final String str, final int length, final boolean leftJustify, final char fill) {
         final int len = length - str.length();
         final char[] buf = new char[Math.max(len, 0)];
         Arrays.fill(buf, fill);
-        if (left_justify) {
+        if (leftJustify) {
             return str + new String(buf);
         }
         return new String(buf) + str;

@@ -33,7 +33,7 @@ public final class SWITCH implements CompoundInstruction {
 
     /**
      * Template for switch() constructs. If the match array can be sorted in ascending order with gaps no larger than
-     * max_gap between the numbers, a TABLESWITCH instruction is generated, and a LOOKUPSWITCH otherwise. The former may be
+     * maxGap between the numbers, a TABLESWITCH instruction is generated, and a LOOKUPSWITCH otherwise. The former may be
      * more efficient, but needs more space.
      *
      * Note, that the key array always will be sorted, though we leave the original arrays unaltered.
@@ -94,7 +94,7 @@ public final class SWITCH implements CompoundInstruction {
     }
 
     /**
-     * @return match is sorted in ascending order with no gap bigger than max_gap?
+     * @return match is sorted in ascending order with no gap bigger than maxGap?
      */
     private boolean matchIsOrdered(final int maxGap) {
         for (int i = 1; i < matchLength; i++) {
