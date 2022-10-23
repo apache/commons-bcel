@@ -47,7 +47,7 @@ public class LocalVariablesInfo {
      * @throws LocalVariableInfoInconsistentException if the new information conflicts with already gathered information.
      */
     public void add(final int slot, final String name, final int startPc, final int length, final Type type) throws LocalVariableInfoInconsistentException {
-        // The add operation on LocalVariableInfo may throw the '...Inconsistent...' exception, we don't throw it explicitely
+        // The add operation on LocalVariableInfo may throw the '...Inconsistent...' exception, we don't throw it explicitly
         // here.
 
         if (slot < 0 || slot >= localVariableInfos.length) {

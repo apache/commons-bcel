@@ -180,7 +180,7 @@ public abstract class ReferenceType extends Type {
         }
         final ReferenceType T = (ReferenceType) t;
         if (this.equals(Type.NULL)) {
-            return true; // This is not explicitely stated, but clear. Isn't it?
+            return true; // This is not explicitly stated, but clear. Isn't it?
         }
         /*
          * If this is a class type then
