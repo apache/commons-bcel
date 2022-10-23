@@ -17,8 +17,10 @@
 package org.apache.bcel.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
@@ -206,7 +208,7 @@ public class Class2HTML implements Constants {
         }
     }
 
-    private void writeMainHTML(final AttributeHTML attributeHtml, final Charset charset) throws IOException {
+    private void writeMainHTML(final AttributeHTML attributeHtml, final Charset charset) throws FileNotFoundException, UnsupportedEncodingException {
         try (PrintWriter file = new PrintWriter(dir + className + ".html", charset.name())) {
             file.println("<HTML>\n" + "<HEAD><TITLE>Documentation for " + className + "</TITLE>" + "</HEAD>\n" + "<FRAMESET BORDER=1 cols=\"30%,*\">\n"
                 + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n MARGINWIDTH=\"0\" "

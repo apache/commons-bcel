@@ -16,8 +16,9 @@
  */
 package org.apache.bcel.util;
 
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 import org.apache.bcel.Const;
@@ -46,7 +47,7 @@ final class ConstantHTML {
     private final Method[] methods;
 
     ConstantHTML(final String dir, final String className, final String classPackage, final Method[] methods, final ConstantPool constantPool,
-        final Charset charset) throws IOException {
+        final Charset charset) throws FileNotFoundException, UnsupportedEncodingException {
         this.className = className;
         this.classPackage = classPackage;
         this.constantPool = constantPool;

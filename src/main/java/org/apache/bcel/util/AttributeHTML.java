@@ -17,8 +17,9 @@
 package org.apache.bcel.util;
 
 import java.io.Closeable;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 import org.apache.bcel.Const;
@@ -48,7 +49,7 @@ final class AttributeHTML implements Closeable {
     private final ConstantPool constantPool;
 
     AttributeHTML(final String dir, final String className, final ConstantPool constantPool, final ConstantHTML constantHtml, final Charset charset)
-        throws IOException {
+        throws FileNotFoundException, UnsupportedEncodingException {
         this.className = className;
         this.constantPool = constantPool;
         this.constantHtml = constantHtml;
