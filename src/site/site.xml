@@ -43,6 +43,7 @@
       <item name="Used by" href="projects.html"/>
       <item name="Javadoc" href="apidocs/index.html"/>
       <item name="Javadoc Archive" href="https://javadoc.io/doc/org.apache.bcel/bcel/"/>
+      <item name="Security" href="security.html"/>
     </menu>
 
   </body>
