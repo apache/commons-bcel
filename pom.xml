@@ -378,9 +378,6 @@
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
           <linkXRef>true</linkXRef>
-          <rulesets>
-            <ruleset>${basedir}/src/conf/pmd.xml</ruleset>
-          </rulesets>
         </configuration>
       </plugin>
       <plugin>
