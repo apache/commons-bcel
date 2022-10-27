@@ -88,7 +88,6 @@ public class JdkGenericDumpTestCase {
                     final ClassParser classParser = new ClassParser(inputStream, name.toAbsolutePath().toString());
                     assertNotNull(classParser.parse());
                 }
-
             }
         }
 
