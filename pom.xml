@@ -348,6 +348,16 @@
           <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <configuration>
+          <targetJdk>${maven.compiler.target}</targetJdk>
+          <rulesets>
+            <ruleset>${basedir}/src/conf/pmd-ruleset.xml</ruleset>
+          </rulesets>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
