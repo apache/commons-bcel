@@ -123,7 +123,6 @@ public class Verifier {
      */
     Verifier(final String fullyQualifiedClassName) {
         classname = fullyQualifiedClassName;
-        flush();
     }
 
     /** Returns the VerificationResult for the given pass. */
@@ -167,7 +166,6 @@ public class Verifier {
     /**
      * Forget everything known about the class file; that means, really start a new verification of a possibly different
      * class file from BCEL's repository.
-     *
      */
     public void flush() {
         p1v = null;
