@@ -200,7 +200,7 @@ public class Class2HTML implements Constants {
         /*
          * Attributes can't be written in one step, so we just open a file which will be written consequently.
          */
-        try (final AttributeHTML attributeHtml = new AttributeHTML(dir, className, constantPool, constantHtml, charset)) {
+        try (AttributeHTML attributeHtml = new AttributeHTML(dir, className, constantPool, constantHtml, charset)) {
             new MethodHTML(dir, className, methods, javaClass.getFields(), constantHtml, attributeHtml, charset);
             // Write main file (with frames, yuk)
             writeMainHTML(attributeHtml, charset);
