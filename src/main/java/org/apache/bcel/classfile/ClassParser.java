@@ -162,7 +162,7 @@ public final class ClassParser {
                     if (dataInputStream != null) {
                         dataInputStream.close();
                     }
-                } catch (final IOException ioe) {
+                } catch (final IOException ignored) {
                     // ignore close exceptions
                 }
             }
@@ -170,7 +170,7 @@ public final class ClassParser {
                 if (zip != null) {
                     zip.close();
                 }
-            } catch (final IOException ioe) {
+            } catch (final IOException ignored) {
                 // ignore close exceptions
             }
         }

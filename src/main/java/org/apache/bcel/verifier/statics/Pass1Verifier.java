@@ -160,7 +160,7 @@ public final class Pass1Verifier extends PassVerifier {
         if (jc == null) {
             try {
                 jc = Repository.lookupClass(myOwner.getClassName());
-            } catch (final ClassNotFoundException e) {
+            } catch (final ClassNotFoundException ignored) {
                 // FIXME: currently, Pass1Verifier treats jc == null as a special
                 // case, so we don't need to do anything here. A better solution
                 // would be to simply throw the ClassNotFoundException
