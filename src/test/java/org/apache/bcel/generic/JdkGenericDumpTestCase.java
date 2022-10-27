@@ -27,11 +27,13 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
+import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Enumeration;
@@ -56,11 +58,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import com.sun.jna.platform.win32.Advapi32Util;
 
 /**
- * Test that the generic dump() methods work on the JDK classes Reads each class into an instruction list and then dumps
- * the instructions. The output bytes should be the same as the input.
+ * Test that the generic dump() methods work on the JDK classes Reads each class into an instruction list and then dumps the instructions. The output bytes
+ * should be the same as the input.
  * <p>
- * Set the property {@value #EXTRA_JAVA_HOMES} to a {@link File#pathSeparator}-separated list of JRE/JDK paths for
- * additional testing.
+ * Set the property {@value #EXTRA_JAVA_HOMES} to a {@link File#pathSeparator}-separated list of JRE/JDK paths for additional testing.
  * </p>
  * <p>
  * For example:
@@ -68,7 +69,17 @@ import com.sun.jna.platform.win32.Advapi32Util;
  *
  * <pre>
  * mvn test -Dtest=JdkGenericDumpTestCase -DExtraJavaHomes="C:\Program Files\Java\openjdk\jdk-13;C:\Program Files\Java\openjdk\jdk-14"
+ * mvn test -Dtest=JdkGenericDumpTestCase -DExtraJavaRoot="C:\Program Files\Eclipse Adoptium"
  * </pre>
+ * <p>
+ * Where "C:\Program Files\Eclipse Adoptium" contains JDK directories, for example:
+ * </p>
+ * <ul>
+ * <li>jdk-11.0.16.101-hotspot</li>
+ * <li>jdk-17.0.4.101-hotspot</li>
+ * <li>jdk-19.0.0.36-hotspot</li>
+ * <li>jdk-8.0.345.1-hotspot</li>
+ * </ul>
  */
 public class JdkGenericDumpTestCase {
 
@@ -112,6 +123,8 @@ public class JdkGenericDumpTestCase {
 
     private static final String EXTRA_JAVA_HOMES = "ExtraJavaHomes";
 
+    private static final String EXTRA_JAVA_ROOT = "ExtraJavaRoot";
+
     private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     private static final String KEY_JDK = "SOFTWARE\\JavaSoft\\Java Development Kit";
@@ -134,20 +147,25 @@ public class JdkGenericDumpTestCase {
         return new String(hexChars);
     }
 
+    private static Stream<String> extractPathStringStream(final String key) {
+        return Stream.concat(toPathStringStream(System.getProperty(key)), toPathStringStream(System.getenv(key)));
+    }
+
+    /**
+     * Used from {@code @MethodSource}
+     *
+     * @return a stream of Java homes.
+     */
     public static Stream<String> findJavaHomes() {
-        if (SystemUtils.IS_OS_WINDOWS) {
-            final Stream<String> stream = findJavaHomesOnWindows();
-            if (stream.count() > 0) {
-                return findJavaHomesOnWindows();
-            }
-            // Falls back here on CI env like GitHub Actions.
-        }
-        return Stream.of(SystemUtils.JAVA_HOME);
+        final Stream<String> streamW = SystemUtils.IS_OS_WINDOWS ? findJavaHomesOnWindows() : Stream.empty();
+        final Stream<String> streamK = Stream.concat(streamW, getAllJavaHomesFromKeys());
+        final Stream<String> streamJ = StringUtils.isEmpty(SystemUtils.JAVA_HOME) ? Stream.empty() : Stream.of(SystemUtils.JAVA_HOME);
+        return Stream.concat(streamK, streamJ);
     }
 
     private static Stream<String> findJavaHomesOnWindows() {
         return Stream.concat(Stream.of(KEY_JRE, KEY_JRE_9, KEY_JDK, KEY_JDK_9).flatMap(JdkGenericDumpTestCase::getAllJavaHomesOnWindows),
-            getAllJavaHomesFromKey(EXTRA_JAVA_HOMES)).distinct();
+                getAllJavaHomesFromHomesKey(EXTRA_JAVA_HOMES)).distinct();
     }
 
     private static Stream<String> findJavaHomesOnWindows(final String keyJavaHome, final String[] keys) {
@@ -163,15 +181,22 @@ public class JdkGenericDumpTestCase {
         return javaHomes.stream();
     }
 
-    private static Stream<String> getAllJavaHomesFromKey(final String extraJavaHomesKey) {
-        return Stream.concat(getAllJavaHomesFromPath(System.getProperty(extraJavaHomesKey)), getAllJavaHomesFromPath(System.getenv(extraJavaHomesKey)));
+    private static Stream<String> getAllJavaHomesFromHomesKey(final String key) {
+        return extractPathStringStream(key);
     }
 
-    private static Stream<String> getAllJavaHomesFromPath(final String path) {
-        if (StringUtils.isEmpty(path)) {
-            return Stream.empty();
-        }
-        return Stream.of(path.split(File.pathSeparator));
+    private static Stream<String> getAllJavaHomesFromKeys() {
+        return Stream.concat(getAllJavaHomesFromHomesKey(EXTRA_JAVA_HOMES), getAllJavaHomesFromRootKey(EXTRA_JAVA_ROOT));
+    }
+
+    private static Stream<String> getAllJavaHomesFromRootKey(final String key) {
+        return extractPathStringStream(key).flatMap(s -> {
+            try {
+                return Files.find(Paths.get(s), 1, (p, a) -> Files.isDirectory(p)).map(Path::toString);
+            } catch (final IOException e) {
+                throw new UncheckedIOException(e);
+            }
+        });
     }
 
     private static Stream<String> getAllJavaHomesOnWindows(final String keyJre) {
@@ -179,6 +204,13 @@ public class JdkGenericDumpTestCase {
             return findJavaHomesOnWindows(keyJre, Advapi32Util.registryGetKeys(HKEY_LOCAL_MACHINE, keyJre));
         }
         return Stream.empty();
+    }
+
+    private static Stream<String> toPathStringStream(final String path) {
+        if (StringUtils.isEmpty(path)) {
+            return Stream.empty();
+        }
+        return Stream.of(path.split(File.pathSeparator));
     }
 
     private void compare(final String name, final Method method) {
