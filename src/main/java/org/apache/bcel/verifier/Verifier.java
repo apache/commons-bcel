@@ -104,9 +104,11 @@ public class Verifier {
     /**
      * The name of the class this verifier operates on.
      */
-    private final String classname;
+    private final String className;
+
     /** A Pass1Verifier for this Verifier instance. */
     private Pass1Verifier p1v;
+
     /** A Pass2Verifier for this Verifier instance. */
     private Pass2Verifier p2v;
 
@@ -122,7 +124,7 @@ public class Verifier {
      * @see VerifierFactory
      */
     Verifier(final String fullyQualifiedClassName) {
-        classname = fullyQualifiedClassName;
+        className = fullyQualifiedClassName;
     }
 
     /** Returns the VerificationResult for the given pass. */
@@ -182,7 +184,7 @@ public class Verifier {
      * @see VerifierFactory
      */
     public final String getClassName() {
-        return classname;
+        return className;
     }
 
     /**
@@ -204,13 +206,13 @@ public class Verifier {
         for (final Pass3aVerifier pv : p3avs.values()) {
             final int meth = pv.getMethodNo();
             for (final String element : pv.getMessages()) {
-                messages.add("Pass 3a, method " + meth + " ('" + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth] + "'): " + element);
+                messages.add("Pass 3a, method " + meth + " ('" + org.apache.bcel.Repository.lookupClass(className).getMethods()[meth] + "'): " + element);
             }
         }
         for (final Pass3bVerifier pv : p3bvs.values()) {
             final int meth = pv.getMethodNo();
             for (final String element : pv.getMessages()) {
-                messages.add("Pass 3b, method " + meth + " ('" + org.apache.bcel.Repository.lookupClass(classname).getMethods()[meth] + "'): " + element);
+                messages.add("Pass 3b, method " + meth + " ('" + org.apache.bcel.Repository.lookupClass(className).getMethods()[meth] + "'): " + element);
             }
         }
 

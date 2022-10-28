@@ -22,20 +22,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
+import org.junit.jupiter.api.AfterEach;
 
 public abstract class AbstractVerifierTestCase {
 
     public static final String TEST_PACKAGE = AbstractVerifierTestCase.class.getPackage().getName() + ".tests.";
 
+    @AfterEach
+    public void afterEach() {
+        VerifierFactory.clear();
+    }
+    
     /**
      * Asserts that the verification of the given class is OK. If it isn't it throws an AssertionFailedError with the given
      * message.
      *
-     * @param classname simple classname of the class to verify
+     * @param className simple class name of the class to verify
      * @param message message displayed if assertion fails
      */
-    public void assertVerifyOK(final String classname, final String message) throws ClassNotFoundException {
-        final String testClassname = TEST_PACKAGE + classname;
+    public void assertVerifyOK(final String className, final String message) throws ClassNotFoundException {
+        final String testClassname = TEST_PACKAGE + className;
         assertTrue(doAllPasses(testClassname), message);
     }
 
@@ -43,25 +49,25 @@ public abstract class AbstractVerifierTestCase {
      * Asserts that the verification of the given class is rejected. If it isn't it throws an AssertionFailedError with the
      * given message.
      *
-     * @param classname simple classname of the class to verify
+     * @param className simple class name of the class to verify
      * @param message message displayed if assertion fails
      */
-    public void assertVerifyRejected(final String classname, final String message) throws ClassNotFoundException {
-        final String testClassname = TEST_PACKAGE + classname;
+    public void assertVerifyRejected(final String className, final String message) throws ClassNotFoundException {
+        final String testClassname = TEST_PACKAGE + className;
         assertFalse(doAllPasses(testClassname), message);
     }
 
     /**
      * Executes all the verification on the given class.
      *
-     * @param classname name of the class to verify
+     * @param className name of the class to verify
      * @return false if the verification fails, true otherwise
      */
-    public boolean doAllPasses(final String classname) throws ClassNotFoundException {
-        final JavaClass jc = Repository.lookupClass(classname);
+    public boolean doAllPasses(final String className) throws ClassNotFoundException {
+        final JavaClass jc = Repository.lookupClass(className);
         final int nbMethods = jc.getMethods().length;
 
-        final Verifier verifier = VerifierFactory.getVerifier(classname);
+        final Verifier verifier = VerifierFactory.getVerifier(className);
         VerificationResult result = verifier.doPass1();
         if (result.getStatus() != VerificationResult.VERIFIED_OK) {
             return false;
