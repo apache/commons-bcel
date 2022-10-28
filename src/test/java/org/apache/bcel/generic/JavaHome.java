@@ -90,26 +90,35 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of Java jar paths.
-     */
-    public static Stream<Path> streamModulePaths() {
-        return streamJavaHomes().flatMap(JavaHome::streamModules);
-    }
-
-    /**
-     * Used from {@code @MethodSource} for tests.
-     *
      * @return a stream of Java homes.
      */
     public static Stream<JavaHome> streamJavaHomes() {
         return streamJavaHomeString().map(JavaHome::from);
     }
-
     public static Stream<String> streamJavaHomeString() {
         final Stream<String> streamW = SystemUtils.IS_OS_WINDOWS ? streamWindowsStrings() : Stream.empty();
         final Stream<String> streamK = Stream.concat(streamW, streamFromCustomKeys());
         final Stream<String> streamJ = StringUtils.isEmpty(SystemUtils.JAVA_HOME) ? Stream.empty() : Stream.of(SystemUtils.JAVA_HOME);
         return Stream.concat(streamK, streamJ);
+    }
+
+
+    /**
+     * Used from {@code @MethodSource} for tests.
+     *
+     * @return a stream of Java jar paths.
+     */
+    public static Stream<ModularRuntimeImage> streamModularRuntimeImages() {
+        return streamJavaHomes().map(JavaHome::getModularRuntimeImage);
+    }
+
+    /**
+     * Used from {@code @MethodSource} for tests.
+     *
+     * @return a stream of Java jar paths.
+     */
+    public static Stream<Path> streamModulePaths() {
+        return streamJavaHomes().flatMap(JavaHome::streamModules);
     }
 
     private static Stream<String> streamPropertyAndEnvVarValues(final String key) {
@@ -149,20 +158,24 @@ public class JavaHome {
         return find(path, maxDepth, matcher, options);
     }
 
+    ModularRuntimeImage getModularRuntimeImage() {
+        try {
+            return new ModularRuntimeImage(path.toString());
+        } catch (final IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
     Path getPath() {
         return path;
     }
 
-    ModularRuntimeImage getModularRuntimeImage() throws IOException {
-        return new ModularRuntimeImage(path.toString());
+    private Stream<Path> streamEndsWith(final String suffix) {
+        return find(10, (p, a) -> p.toString().endsWith(suffix));
     }
 
     private Stream<Path> streamJars() {
         return streamEndsWith(".jar");
-    }
-
-    private Stream<Path> streamEndsWith(final String suffix) {
-        return find(10, (p, a) -> p.toString().endsWith(suffix));
     }
 
     private Stream<Path> streamModules() {
