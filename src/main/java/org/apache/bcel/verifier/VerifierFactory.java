@@ -48,6 +48,14 @@ public class VerifierFactory {
     }
 
     /**
+     * Clears the factory.
+     */
+    static void clear() {
+        MAP.clear();
+        OBSVERVERS.clear();
+    }
+
+    /**
      * Removes the VerifierFactoryObserver o from the list of observers.
      */
     public static void detach(final VerifierFactoryObserver o) {

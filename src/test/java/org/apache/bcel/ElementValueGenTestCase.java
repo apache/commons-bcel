@@ -51,8 +51,8 @@ public class ElementValueGenTestCase extends AbstractTestCase {
         assertEquals(beforeValue, afterValue, "Deserialization failed");
     }
 
-    private ClassGen createClassGen(final String classname) {
-        return new ClassGen(classname, "java.lang.Object", "<generated>", Const.ACC_PUBLIC | Const.ACC_SUPER, null);
+    private ClassGen createClassGen(final String className) {
+        return new ClassGen(className, "java.lang.Object", "<generated>", Const.ACC_PUBLIC | Const.ACC_SUPER, null);
     }
 
     @Test

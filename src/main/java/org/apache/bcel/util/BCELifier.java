@@ -70,7 +70,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
      */
     public static void main(final String[] argv) throws Exception {
         if (argv.length != 1) {
-            System.out.println("Usage: BCELifier classname");
+            System.out.println("Usage: BCELifier className");
             System.out.println("\tThe class must exist on the classpath");
             return;
         }

@@ -1142,8 +1142,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         public void visitConstantClass(final ConstantClass obj) {
             final Constant c = cp.getConstant(obj.getNameIndex());
             if (c instanceof ConstantUtf8) { // Ignore the case where it's not a ConstantUtf8 here, we'll find out later.
-                final String classname = ((ConstantUtf8) c).getBytes();
-                if (classname.startsWith(jc.getClassName().replace('.', '/') + "$")) {
+                final String className = ((ConstantUtf8) c).getBytes();
+                if (className.startsWith(jc.getClassName().replace('.', '/') + "$")) {
                     hasInnerClass = true;
                 }
             }

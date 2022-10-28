@@ -215,12 +215,12 @@ public class VerifierAppFrame extends JFrame {
     }
 
     void newFileMenuItem_actionPerformed(final ActionEvent e) {
-        final String classname = JOptionPane.showInputDialog("Please enter the fully qualified name of a class or interface to verify:");
-        if (classname == null || classname.isEmpty()) {
+        final String className = JOptionPane.showInputDialog("Please enter the fully qualified name of a class or interface to verify:");
+        if (className == null || className.isEmpty()) {
             return;
         }
-        VerifierFactory.getVerifier(classname); // let observers do the rest.
-        classNamesJList.setSelectedValue(classname, true);
+        VerifierFactory.getVerifier(className); // let observers do the rest.
+        classNamesJList.setSelectedValue(className, true);
     }
 
     synchronized void pass3aJList_valueChanged(final ListSelectionEvent e) {

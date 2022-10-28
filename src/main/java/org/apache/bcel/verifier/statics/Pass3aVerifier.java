@@ -559,8 +559,8 @@ public final class Pass3aVerifier extends PassVerifier {
                 // is therefore resolved/verified.
                 // INVOKEINTERFACE is an InvokeInstruction, the argument and return types are resolved/verified,
                 // too. So are the allowed method names.
-                final String classname = o.getClassName(constantPoolGen);
-                final JavaClass jc = Repository.lookupClass(classname);
+                final String className = o.getClassName(constantPoolGen);
+                final JavaClass jc = Repository.lookupClass(className);
                 final Method m = getMethodRecursive(jc, o);
                 if (m == null) {
                     constraintViolated(o, "Referenced method '" + o.getMethodName(constantPoolGen) + "' with expected signature '"
@@ -583,8 +583,8 @@ public final class Pass3aVerifier extends PassVerifier {
                 // is therefore resolved/verified.
                 // INVOKESPECIAL is an InvokeInstruction, the argument and return types are resolved/verified,
                 // too. So are the allowed method names.
-                final String classname = o.getClassName(constantPoolGen);
-                final JavaClass jc = Repository.lookupClass(classname);
+                final String className = o.getClassName(constantPoolGen);
+                final JavaClass jc = Repository.lookupClass(className);
                 final Method m = getMethodRecursive(jc, o);
                 if (m == null) {
                     constraintViolated(o, "Referenced method '" + o.getMethodName(constantPoolGen) + "' with expected signature '"
@@ -637,8 +637,8 @@ public final class Pass3aVerifier extends PassVerifier {
                 // is therefore resolved/verified.
                 // INVOKESTATIC is an InvokeInstruction, the argument and return types are resolved/verified,
                 // too. So are the allowed method names.
-                final String classname = o.getClassName(constantPoolGen);
-                final JavaClass jc = Repository.lookupClass(classname);
+                final String className = o.getClassName(constantPoolGen);
+                final JavaClass jc = Repository.lookupClass(className);
                 final Method m = getMethodRecursive(jc, o);
                 if (m == null) {
                     constraintViolated(o, "Referenced method '" + o.getMethodName(constantPoolGen) + "' with expected signature '"
@@ -661,8 +661,8 @@ public final class Pass3aVerifier extends PassVerifier {
                 // is therefore resolved/verified.
                 // INVOKEVIRTUAL is an InvokeInstruction, the argument and return types are resolved/verified,
                 // too. So are the allowed method names.
-                final String classname = o.getClassName(constantPoolGen);
-                final JavaClass jc = Repository.lookupClass(classname);
+                final String className = o.getClassName(constantPoolGen);
+                final JavaClass jc = Repository.lookupClass(className);
                 final Method m = getMethodRecursive(jc, o);
                 if (m == null) {
                     constraintViolated(o, "Referenced method '" + o.getMethodName(constantPoolGen) + "' with expected signature '"

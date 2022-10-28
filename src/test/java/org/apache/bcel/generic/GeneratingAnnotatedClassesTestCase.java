@@ -250,8 +250,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
     }
 
     // helper methods
-    private ClassGen createClassGen(final String classname) {
-        return new ClassGen(classname, "java.lang.Object", "<generated>", Const.ACC_PUBLIC | Const.ACC_SUPER, null);
+    private ClassGen createClassGen(final String className) {
+        return new ClassGen(className, "java.lang.Object", "<generated>", Const.ACC_PUBLIC | Const.ACC_SUPER, null);
     }
 
     public AnnotationEntryGen createCombinedAnnotation(final ConstantPoolGen cp) {

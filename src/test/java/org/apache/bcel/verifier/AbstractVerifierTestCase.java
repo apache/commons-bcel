@@ -41,8 +41,8 @@ public abstract class AbstractVerifierTestCase {
      * @param message message displayed if assertion fails
      */
     public void assertVerifyOK(final String className, final String message) throws ClassNotFoundException {
-        final String testClassname = TEST_PACKAGE + className;
-        assertTrue(doAllPasses(testClassname), message);
+        final String testClassName = TEST_PACKAGE + className;
+        assertTrue(doAllPasses(testClassName), message);
     }
 
     /**
