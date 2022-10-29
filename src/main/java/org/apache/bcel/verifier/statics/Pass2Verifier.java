@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.bcel.Const;
@@ -1172,6 +1173,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         /*
          * TODO: implement. Are there any restrictions?
          */
+        Objects.requireNonNull(name, "name");
         return true;
     }
 
