@@ -68,6 +68,7 @@ The <action> type attribute can be add,update,fix,remove.
        <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump actions/setup-java from 3.5.1 to 3.6.0 #159.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs from 4.7.2 to 4.7.3.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump pmd from 6.50.0 to 6.51.0.</action>
     </release>
     <release version="6.6.0" date="2022-10-08" description="Minor feature and bug fix release.">
       <!-- FIX -->
