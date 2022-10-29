@@ -349,14 +349,12 @@ public class ConstantPoolGen {
      */
     public int addFieldref(final String className, final String fieldName, final String signature) {
         final int cpRet;
-        int classIndex;
-        int nameAndTypeIndex;
         if ((cpRet = lookupFieldref(className, fieldName, signature)) != -1) {
             return cpRet; // Already in CP
         }
         adjustSize();
-        classIndex = addClass(className);
-        nameAndTypeIndex = addNameAndType(fieldName, signature);
+        int classIndex = addClass(className);
+        int nameAndTypeIndex = addNameAndType(fieldName, signature);
         final int ret = index;
         constants[index++] = new ConstantFieldref(classIndex, nameAndTypeIndex);
         return computeIfAbsent(cpTable, className + FIELDREF_DELIM + fieldName + FIELDREF_DELIM + signature, ret);
@@ -410,14 +408,12 @@ public class ConstantPoolGen {
      */
     public int addInterfaceMethodref(final String className, final String methodName, final String signature) {
         final int cpRet;
-        int classIndex;
-        int nameAndTypeIndex;
         if ((cpRet = lookupInterfaceMethodref(className, methodName, signature)) != -1) {
             return cpRet; // Already in CP
         }
         adjustSize();
-        classIndex = addClass(className);
-        nameAndTypeIndex = addNameAndType(methodName, signature);
+        int classIndex = addClass(className);
+        int nameAndTypeIndex = addNameAndType(methodName, signature);
         final int ret = index;
         constants[index++] = new ConstantInterfaceMethodref(classIndex, nameAndTypeIndex);
         return computeIfAbsent(cpTable, className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature, ret);
@@ -454,14 +450,12 @@ public class ConstantPoolGen {
      */
     public int addMethodref(final String className, final String methodName, final String signature) {
         final int cpRet;
-        int classIndex;
-        int nameAndTypeIndex;
         if ((cpRet = lookupMethodref(className, methodName, signature)) != -1) {
             return cpRet; // Already in CP
         }
         adjustSize();
-        nameAndTypeIndex = addNameAndType(methodName, signature);
-        classIndex = addClass(className);
+        int nameAndTypeIndex = addNameAndType(methodName, signature);
+        int classIndex = addClass(className);
         final int ret = index;
         constants[index++] = new ConstantMethodref(classIndex, nameAndTypeIndex);
         return computeIfAbsent(cpTable, className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature, ret);
@@ -476,14 +470,12 @@ public class ConstantPoolGen {
      */
     public int addNameAndType(final String name, final String signature) {
         int ret;
-        int nameIndex;
-        int signatureIndex;
         if ((ret = lookupNameAndType(name, signature)) != -1) {
             return ret; // Already in CP
         }
         adjustSize();
-        nameIndex = addUtf8(name);
-        signatureIndex = addUtf8(signature);
+        int nameIndex = addUtf8(name);
+        int signatureIndex = addUtf8(signature);
         ret = index;
         constants[index++] = new ConstantNameAndType(nameIndex, signatureIndex);
         return computeIfAbsent(natTable, name + NAT_DELIM + signature, ret);
