@@ -1398,7 +1398,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      */
     private void finalMethodsAreNotOverridden() {
         try {
-            final Map<String, String> hashmap = new HashMap<>();
+            final Map<String, String> map = new HashMap<>();
             JavaClass jc = Repository.lookupClass(myOwner.getClassName());
 
             int supidx = -1;
@@ -1409,21 +1409,21 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 for (final Method method : methods) {
                     final String nameAndSig = method.getName() + method.getSignature();
 
-                    if (hashmap.containsKey(nameAndSig)) {
+                    if (map.containsKey(nameAndSig)) {
                         if (method.isFinal()) {
                             if (!method.isPrivate()) {
-                                throw new ClassConstraintException("Method '" + nameAndSig + "' in class '" + hashmap.get(nameAndSig)
+                                throw new ClassConstraintException("Method '" + nameAndSig + "' in class '" + map.get(nameAndSig)
                                     + "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + "'.");
                             }
-                            addMessage("Method '" + nameAndSig + "' in class '" + hashmap.get(nameAndSig)
+                            addMessage("Method '" + nameAndSig + "' in class '" + map.get(nameAndSig)
                                 + "' overrides the final (not-overridable) definition in class '" + jc.getClassName()
                                 + "'. This is okay, as the original definition was private; however this constraint leverage"
                                 + " was introduced by JLS 8.4.6 (not vmspec2) and the behavior of the Sun verifiers.");
                         } else if (!method.isStatic()) { // static methods don't inherit
-                            hashmap.put(nameAndSig, jc.getClassName());
+                            map.put(nameAndSig, jc.getClassName());
                         }
                     } else if (!method.isStatic()) { // static methods don't inherit
-                        hashmap.put(nameAndSig, jc.getClassName());
+                        map.put(nameAndSig, jc.getClassName());
                     }
                 }
 
