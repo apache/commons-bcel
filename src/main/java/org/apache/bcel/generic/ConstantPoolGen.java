@@ -258,8 +258,7 @@ public class ConstantPoolGen {
         final ConstantClass c = new ConstantClass(addUtf8(clazz));
         final int ret = index;
         constants[index++] = c;
-        classTable.computeIfAbsent(clazz, k -> Integer.valueOf(ret));
-        return ret;
+        return computeIfAbsent(classTable, clazz, ret);
     }
 
     /**
@@ -349,22 +348,18 @@ public class ConstantPoolGen {
      * @return index of entry
      */
     public int addFieldref(final String className, final String fieldName, final String signature) {
-        int ret;
+        final int cpRet;
         int classIndex;
         int nameAndTypeIndex;
-        if ((ret = lookupFieldref(className, fieldName, signature)) != -1) {
-            return ret; // Already in CP
+        if ((cpRet = lookupFieldref(className, fieldName, signature)) != -1) {
+            return cpRet; // Already in CP
         }
         adjustSize();
         classIndex = addClass(className);
         nameAndTypeIndex = addNameAndType(fieldName, signature);
-        ret = index;
+        final int ret = index;
         constants[index++] = new ConstantFieldref(classIndex, nameAndTypeIndex);
-        final String key = className + FIELDREF_DELIM + fieldName + FIELDREF_DELIM + signature;
-        if (!cpTable.containsKey(key)) {
-            cpTable.put(key, Integer.valueOf(ret));
-        }
-        return ret;
+        return computeIfAbsent(cpTable, className + FIELDREF_DELIM + fieldName + FIELDREF_DELIM + signature, ret);
     }
 
     /**
@@ -414,22 +409,18 @@ public class ConstantPoolGen {
      * @return index of entry
      */
     public int addInterfaceMethodref(final String className, final String methodName, final String signature) {
-        int ret;
+        final int cpRet;
         int classIndex;
         int nameAndTypeIndex;
-        if ((ret = lookupInterfaceMethodref(className, methodName, signature)) != -1) {
-            return ret; // Already in CP
+        if ((cpRet = lookupInterfaceMethodref(className, methodName, signature)) != -1) {
+            return cpRet; // Already in CP
         }
         adjustSize();
         classIndex = addClass(className);
         nameAndTypeIndex = addNameAndType(methodName, signature);
-        ret = index;
+        final int ret = index;
         constants[index++] = new ConstantInterfaceMethodref(classIndex, nameAndTypeIndex);
-        final String key = className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature;
-        if (!cpTable.containsKey(key)) {
-            cpTable.put(key, Integer.valueOf(ret));
-        }
-        return ret;
+        return computeIfAbsent(cpTable, className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature, ret);
     }
 
     /**
@@ -449,7 +440,6 @@ public class ConstantPoolGen {
         index += 2; // Wastes one entry according to spec
         return ret;
     }
-
     public int addMethodref(final MethodGen method) {
         return addMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
@@ -463,22 +453,18 @@ public class ConstantPoolGen {
      * @return index of entry
      */
     public int addMethodref(final String className, final String methodName, final String signature) {
-        int ret;
+        final int cpRet;
         int classIndex;
         int nameAndTypeIndex;
-        if ((ret = lookupMethodref(className, methodName, signature)) != -1) {
-            return ret; // Already in CP
+        if ((cpRet = lookupMethodref(className, methodName, signature)) != -1) {
+            return cpRet; // Already in CP
         }
         adjustSize();
         nameAndTypeIndex = addNameAndType(methodName, signature);
         classIndex = addClass(className);
-        ret = index;
+        final int ret = index;
         constants[index++] = new ConstantMethodref(classIndex, nameAndTypeIndex);
-        final String key = className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature;
-        if (!cpTable.containsKey(key)) {
-            cpTable.put(key, Integer.valueOf(ret));
-        }
-        return ret;
+        return computeIfAbsent(cpTable, className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature, ret);
     }
 
     /**
@@ -500,11 +486,7 @@ public class ConstantPoolGen {
         signatureIndex = addUtf8(signature);
         ret = index;
         constants[index++] = new ConstantNameAndType(nameIndex, signatureIndex);
-        final String key = name + NAT_DELIM + signature;
-        if (!natTable.containsKey(key)) {
-            natTable.put(key, Integer.valueOf(ret));
-        }
-        return ret;
+        return computeIfAbsent(natTable, name + NAT_DELIM + signature, ret);
     }
 
     /**
@@ -523,10 +505,7 @@ public class ConstantPoolGen {
         final ConstantString s = new ConstantString(utf8);
         ret = index;
         constants[index++] = s;
-        if (!stringTable.containsKey(str)) {
-            stringTable.put(str, Integer.valueOf(ret));
-        }
-        return ret;
+        return computeIfAbsent(stringTable, str, ret);
     }
 
     /**
@@ -543,10 +522,7 @@ public class ConstantPoolGen {
         adjustSize();
         ret = index;
         constants[index++] = new ConstantUtf8(n);
-        if (!utf8Table.containsKey(n)) {
-            utf8Table.put(n, Integer.valueOf(ret));
-        }
-        return ret;
+        return computeIfAbsent(utf8Table, n, ret);
     }
 
     /**
@@ -568,6 +544,10 @@ public class ConstantPoolGen {
             constants = new Constant[size];
             System.arraycopy(cs, 0, constants, 0, index);
         }
+    }
+
+    private int computeIfAbsent(final Map<String, Integer> map, final String key, final int value) {
+        return map.computeIfAbsent(key, k -> Integer.valueOf(value));
     }
 
     /**
