@@ -166,7 +166,7 @@ public final class InstructionConst {
     /**
      * Get object via its opcode, for immutable instructions like branch instructions entries are set to null.
      */
-    private static final Instruction[] INSTRUCTIONS = new Instruction[256];
+    static final Instruction[] INSTRUCTIONS = new Instruction[256];
 
     static {
         INSTRUCTIONS[Const.NOP] = NOP;

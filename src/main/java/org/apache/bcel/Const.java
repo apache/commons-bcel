@@ -2825,7 +2825,7 @@ public final class Const {
      * Number of byte code operands for each opcode, i.e., number of bytes after the tag byte itself. Indexed by opcode, so
      * NO_OF_OPERANDS[BIPUSH] = the number of operands for a bipush instruction.
      */
-    private static final short[] NO_OF_OPERANDS = {0/* nop */, 0/* aconst_null */, 0/* iconst_m1 */, 0/* iconst_0 */, 0/* iconst_1 */, 0/* iconst_2 */,
+    static final short[] NO_OF_OPERANDS = {0/* nop */, 0/* aconst_null */, 0/* iconst_m1 */, 0/* iconst_0 */, 0/* iconst_1 */, 0/* iconst_2 */,
         0/* iconst_3 */, 0/* iconst_4 */, 0/* iconst_5 */, 0/* lconst_0 */, 0/* lconst_1 */, 0/* fconst_0 */, 0/* fconst_1 */, 0/* fconst_2 */, 0/* dconst_0 */,
         0/* dconst_1 */, 1/* bipush */, 2/* sipush */, 1/* ldc */, 2/* ldc_w */, 2/* ldc2_w */, 1/* iload */, 1/* lload */, 1/* fload */, 1/* dload */,
         1/* aload */, 0/* iload_0 */, 0/* iload_1 */, 0/* iload_2 */, 0/* iload_3 */, 0/* lload_0 */, 0/* lload_1 */, 0/* lload_2 */, 0/* lload_3 */,
@@ -2858,7 +2858,7 @@ public final class Const {
      * How the byte code operands are to be interpreted for each opcode. Indexed by opcode. TYPE_OF_OPERANDS[ILOAD] = an
      * array of shorts describing the data types for the instruction.
      */
-    private static final short[][] TYPE_OF_OPERANDS = {{}/* nop */, {}/* aconst_null */, {}/* iconst_m1 */, {}/* iconst_0 */, {}/* iconst_1 */,
+    static final short[][] TYPE_OF_OPERANDS = {{}/* nop */, {}/* aconst_null */, {}/* iconst_m1 */, {}/* iconst_0 */, {}/* iconst_1 */,
         {}/* iconst_2 */, {}/* iconst_3 */, {}/* iconst_4 */, {}/* iconst_5 */, {}/* lconst_0 */, {}/* lconst_1 */, {}/* fconst_0 */, {}/* fconst_1 */,
         {}/* fconst_2 */, {}/* dconst_0 */, {}/* dconst_1 */, {T_BYTE}/* bipush */, {T_SHORT}/* sipush */, {T_BYTE}/* ldc */, {T_SHORT}/* ldc_w */,
         {T_SHORT}/* ldc2_w */, {T_BYTE}/* iload */, {T_BYTE}/* lload */, {T_BYTE}/* fload */, {T_BYTE}/* dload */, {T_BYTE}/* aload */, {}/* iload_0 */,
@@ -2891,7 +2891,7 @@ public final class Const {
     /**
      * Names of opcodes. Indexed by opcode. OPCODE_NAMES[ALOAD] = "aload".
      */
-    private static final String[] OPCODE_NAMES = {"nop", "aconst_null", "iconst_m1", "iconst_0", "iconst_1", "iconst_2", "iconst_3", "iconst_4", "iconst_5",
+    static final String[] OPCODE_NAMES = {"nop", "aconst_null", "iconst_m1", "iconst_0", "iconst_1", "iconst_2", "iconst_3", "iconst_4", "iconst_5",
         "lconst_0", "lconst_1", "fconst_0", "fconst_1", "fconst_2", "dconst_0", "dconst_1", "bipush", "sipush", "ldc", "ldc_w", "ldc2_w", "iload", "lload",
         "fload", "dload", "aload", "iload_0", "iload_1", "iload_2", "iload_3", "lload_0", "lload_1", "lload_2", "lload_3", "fload_0", "fload_1", "fload_2",
         "fload_3", "dload_0", "dload_1", "dload_2", "dload_3", "aload_0", "aload_1", "aload_2", "aload_3", "iaload", "laload", "faload", "daload", "aaload",
@@ -2922,7 +2922,7 @@ public final class Const {
      * Number of words consumed on operand stack by instructions. Indexed by opcode. CONSUME_STACK[FALOAD] = number of words
      * consumed from the stack by a faload instruction.
      */
-    private static final int[] CONSUME_STACK = {0/* nop */, 0/* aconst_null */, 0/* iconst_m1 */, 0/* iconst_0 */, 0/* iconst_1 */, 0/* iconst_2 */,
+    static final int[] CONSUME_STACK = {0/* nop */, 0/* aconst_null */, 0/* iconst_m1 */, 0/* iconst_0 */, 0/* iconst_1 */, 0/* iconst_2 */,
         0/* iconst_3 */, 0/* iconst_4 */, 0/* iconst_5 */, 0/* lconst_0 */, 0/* lconst_1 */, 0/* fconst_0 */, 0/* fconst_1 */, 0/* fconst_2 */, 0/* dconst_0 */,
         0/* dconst_1 */, 0/* bipush */, 0/* sipush */, 0/* ldc */, 0/* ldc_w */, 0/* ldc2_w */, 0/* iload */, 0/* lload */, 0/* fload */, 0/* dload */,
         0/* aload */, 0/* iload_0 */, 0/* iload_1 */, 0/* iload_2 */, 0/* iload_3 */, 0/* lload_0 */, 0/* lload_1 */, 0/* lload_2 */, 0/* lload_3 */,
@@ -2955,7 +2955,7 @@ public final class Const {
      * Number of words produced onto operand stack by instructions. Indexed by opcode. CONSUME_STACK[DALOAD] = number of
      * words consumed from the stack by a daload instruction.
      */
-    private static final int[] PRODUCE_STACK = {0/* nop */, 1/* aconst_null */, 1/* iconst_m1 */, 1/* iconst_0 */, 1/* iconst_1 */, 1/* iconst_2 */,
+    static final int[] PRODUCE_STACK = {0/* nop */, 1/* aconst_null */, 1/* iconst_m1 */, 1/* iconst_0 */, 1/* iconst_1 */, 1/* iconst_2 */,
         1/* iconst_3 */, 1/* iconst_4 */, 1/* iconst_5 */, 2/* lconst_0 */, 2/* lconst_1 */, 1/* fconst_0 */, 1/* fconst_1 */, 1/* fconst_2 */, 2/* dconst_0 */,
         2/* dconst_1 */, 1/* bipush */, 1/* sipush */, 1/* ldc */, 1/* ldc_w */, 2/* ldc2_w */, 1/* iload */, 2/* lload */, 1/* fload */, 2/* dload */,
         1/* aload */, 1/* iload_0 */, 1/* iload_1 */, 1/* iload_2 */, 1/* iload_3 */, 2/* lload_0 */, 2/* lload_1 */, 2/* lload_2 */, 2/* lload_3 */,
