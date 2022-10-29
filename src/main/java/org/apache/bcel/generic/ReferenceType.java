@@ -64,36 +64,7 @@ public abstract class ReferenceType extends Type {
             return Type.OBJECT;
             // TODO: Is there a proof of OBJECT being the direct ancestor of every ArrayType?
         }
-        if (this instanceof ObjectType && ((ObjectType) this).referencesInterface() || t instanceof ObjectType && ((ObjectType) t).referencesInterface()) {
-            return Type.OBJECT;
-            // TODO: The above line is correct comparing to the vmspec2. But one could
-            // make class file verification a bit stronger here by using the notion of
-            // superinterfaces or even castability or assignment compatibility.
-        }
-        // this and t are ObjectTypes, see above.
-        final ObjectType thiz = (ObjectType) this;
-        final ObjectType other = (ObjectType) t;
-        final JavaClass[] thizSups = Repository.getSuperClasses(thiz.getClassName());
-        final JavaClass[] otherSups = Repository.getSuperClasses(other.getClassName());
-        if (thizSups == null || otherSups == null) {
-            return null;
-        }
-        // Waaahh...
-        final JavaClass[] thisSups = new JavaClass[thizSups.length + 1];
-        final JavaClass[] tSups = new JavaClass[otherSups.length + 1];
-        System.arraycopy(thizSups, 0, thisSups, 1, thizSups.length);
-        System.arraycopy(otherSups, 0, tSups, 1, otherSups.length);
-        thisSups[0] = Repository.lookupClass(thiz.getClassName());
-        tSups[0] = Repository.lookupClass(other.getClassName());
-        for (final JavaClass tSup : tSups) {
-            for (final JavaClass thisSup : thisSups) {
-                if (thisSup.equals(tSup)) {
-                    return ObjectType.getInstance(thisSup.getClassName());
-                }
-            }
-        }
-        // Huh? Did you ask for Type.OBJECT's superclass??
-        return null;
+        return getFirstCommonSuperclassInternal(t);
     }
 
     /**
@@ -134,6 +105,10 @@ public abstract class ReferenceType extends Type {
             return Type.OBJECT;
             // TODO: Is there a proof of OBJECT being the direct ancestor of every ArrayType?
         }
+        return getFirstCommonSuperclassInternal(t);
+    }
+
+    private ReferenceType getFirstCommonSuperclassInternal(final ReferenceType t) throws ClassNotFoundException {
         if (this instanceof ObjectType && ((ObjectType) this).referencesInterfaceExact()
             || t instanceof ObjectType && ((ObjectType) t).referencesInterfaceExact()) {
             return Type.OBJECT;
