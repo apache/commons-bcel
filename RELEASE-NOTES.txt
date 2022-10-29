@@ -6,7 +6,7 @@
 INTRODUCTION:
 
 The Apache Commons BCEL team is pleased to announce the release of
-Apache Commons BCEL 6.6.1!
+Apache Commons BCEL 6.6.1-SNAPSHOT!
 
 The Byte Code Engineering Library (BCEL) is intended to give users a convenient
 way to analyze, create, and manipulate compiled .class files. Classes are
@@ -25,6 +25,7 @@ CHANGES:
 
 o           Bump actions/setup-java from 3.5.1 to 3.6.0 #159. Thanks to Dependabot.
 o           Bump spotbugs from 4.7.2 to 4.7.3. Thanks to Gary Gregory.
+o           Bump pmd from 6.50.0 to 6.51.0. Thanks to Gary Gregory.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
@@ -55,6 +56,7 @@ Or subscribe to the commons-user mailing list
 The Apache Commons Team
 
 -----------------------------------------------------------------------------
+
 
               Apache Commons BCEL
               Version 6.6.0
