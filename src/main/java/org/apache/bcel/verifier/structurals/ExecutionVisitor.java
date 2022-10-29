@@ -810,13 +810,7 @@ public class ExecutionVisitor extends EmptyVisitor {
         stack().push(Type.INT);
     }
 
-    /**
-     * Symbolically executes the corresponding Java Virtual Machine instruction.
-     *
-     * @since 6.0
-     */
-    @Override
-    public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
+    private void visitInvokedInternals(final InvokeInstruction o) {
         stack().pop(o.getArgumentTypes(cpg).length);
         // We are sure the invoked method will xRETURN eventually
         // We simulate xRETURNs functionality here because we
@@ -829,6 +823,16 @@ public class ExecutionVisitor extends EmptyVisitor {
             }
             stack().push(t);
         }
+    }
+
+    /**
+     * Symbolically executes the corresponding Java Virtual Machine instruction.
+     *
+     * @since 6.0
+     */
+    @Override
+    public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
+        visitInvokedInternals(o);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
@@ -878,18 +882,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
     @Override
     public void visitINVOKESTATIC(final INVOKESTATIC o) {
-        stack().pop(o.getArgumentTypes(cpg).length);
-        // We are sure the invoked method will xRETURN eventually
-        // We simulate xRETURNs functionality here because we
-        // don't really "jump into" and simulate the invoked
-        // method.
-        if (o.getReturnType(cpg) != Type.VOID) {
-            Type t = o.getReturnType(cpg);
-            if (t.equals(Type.BOOLEAN) || t.equals(Type.CHAR) || t.equals(Type.BYTE) || t.equals(Type.SHORT)) {
-                t = Type.INT;
-            }
-            stack().push(t);
-        }
+        visitInvokedInternals(o);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
