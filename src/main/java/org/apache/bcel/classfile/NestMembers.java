@@ -91,8 +91,7 @@ public final class NestMembers extends Attribute {
     public Attribute copy(final ConstantPool constantPool) {
         final NestMembers c = (NestMembers) clone();
         if (classes != null) {
-            c.classes = new int[classes.length];
-            System.arraycopy(classes, 0, c.classes, 0, classes.length);
+            c.classes = classes.clone();
         }
         c.setConstantPool(constantPool);
         return c;

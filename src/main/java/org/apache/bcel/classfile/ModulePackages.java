@@ -90,8 +90,7 @@ public final class ModulePackages extends Attribute {
     public Attribute copy(final ConstantPool constantPool) {
         final ModulePackages c = (ModulePackages) clone();
         if (packageIndexTable != null) {
-            c.packageIndexTable = new int[packageIndexTable.length];
-            System.arraycopy(packageIndexTable, 0, c.packageIndexTable, 0, packageIndexTable.length);
+            c.packageIndexTable = packageIndexTable.clone();
         }
         c.setConstantPool(constantPool);
         return c;

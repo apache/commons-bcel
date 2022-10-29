@@ -144,8 +144,7 @@ public final class Code extends Attribute {
     public Attribute copy(final ConstantPool constantPool) {
         final Code c = (Code) clone();
         if (code != null) {
-            c.code = new byte[code.length];
-            System.arraycopy(code, 0, c.code, 0, code.length);
+            c.code = code.clone();
         }
         c.setConstantPool(constantPool);
         c.exceptionTable = new CodeException[exceptionTable.length];

@@ -89,8 +89,7 @@ public final class Synthetic extends Attribute {
     public Attribute copy(final ConstantPool constantPool) {
         final Synthetic c = (Synthetic) clone();
         if (bytes != null) {
-            c.bytes = new byte[bytes.length];
-            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
+            c.bytes = bytes.clone();
         }
         c.setConstantPool(constantPool);
         return c;
