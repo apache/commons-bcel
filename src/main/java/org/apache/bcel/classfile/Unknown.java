@@ -19,6 +19,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -165,9 +166,9 @@ public final class Unknown extends Attribute {
             return "(Unknown attribute " + name + ")";
         }
         String hex;
-        if (super.getLength() > 10) {
-            final byte[] tmp = new byte[10];
-            System.arraycopy(bytes, 0, tmp, 0, 10);
+        final int limit = 10;
+        if (super.getLength() > limit) {
+            final byte[] tmp = Arrays.copyOf(bytes, limit);
             hex = Utility.toHexString(tmp) + "... (truncated)";
         } else {
             hex = Utility.toHexString(bytes);

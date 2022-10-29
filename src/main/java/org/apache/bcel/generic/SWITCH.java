@@ -16,6 +16,8 @@
  */
 package org.apache.bcel.generic;
 
+import java.util.Arrays;
+
 /**
  * SWITCH - Branch depending on int value, generates either LOOKUPSWITCH or TABLESWITCH instruction, depending on
  * whether the match values (int[]) can be sorted with no gaps between the numbers.
@@ -78,10 +80,8 @@ public final class SWITCH implements CompoundInstruction {
             tVec[count] = targets[i];
             count++;
         }
-        match = new int[count];
-        targets = new InstructionHandle[count];
-        System.arraycopy(mVec, 0, match, 0, count);
-        System.arraycopy(tVec, 0, targets, 0, count);
+        match = Arrays.copyOf(mVec, count);
+        targets = Arrays.copyOf(tVec, count);
     }
 
     public Instruction getInstruction() {

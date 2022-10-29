@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -135,8 +136,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
         } catch (final IOException e) {
             throw new ClassGenException(e.toString(), e);
         }
-        bytePositions = new int[count]; // Trim to proper size
-        System.arraycopy(pos, 0, bytePositions, 0, count);
+        bytePositions = Arrays.copyOf(pos, count); // Trim to proper size
         /*
          * Pass 2: Look for BranchInstruction and update their targets, i.e., convert offsets to instruction handles.
          */

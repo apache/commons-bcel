@@ -23,6 +23,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -49,9 +50,7 @@ public final class PerformanceTest {
             final int n = is.read(b, len, b.length - len);
             if (n == -1) {
                 if (len < b.length) {
-                    final byte[] c = new byte[len];
-                    System.arraycopy(b, 0, c, 0, len);
-                    b = c;
+                    b = Arrays.copyOf(b, len);
                 }
                 return b;
             }

@@ -16,6 +16,7 @@
  */
 package org.apache.bcel.generic;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -215,6 +216,8 @@ public class ConstantPoolGen {
 
     /**
      * Initialize with given constant pool.
+     *
+     * @param cp the constant pool.
      */
     public ConstantPoolGen(final ConstantPool cp) {
         this(cp.getConstantPool());
@@ -563,9 +566,7 @@ public class ConstantPoolGen {
      * @return constant pool with proper length
      */
     public ConstantPool getFinalConstantPool() {
-        final Constant[] cs = new Constant[index];
-        System.arraycopy(constants, 0, cs, 0, index);
-        return new ConstantPool(cs);
+        return new ConstantPool(Arrays.copyOf(constants, index));
     }
 
     private int getIndex(final Map<String, Integer> map, final String key) {

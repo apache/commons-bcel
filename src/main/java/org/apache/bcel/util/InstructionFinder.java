@@ -17,6 +17,7 @@
 package org.apache.bcel.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -257,9 +258,7 @@ public class InstructionFinder {
      * @return the matched piece of code as an array of instruction (handles)
      */
     private InstructionHandle[] getMatch(final int matchedFrom, final int matchLength) {
-        final InstructionHandle[] match = new InstructionHandle[matchLength];
-        System.arraycopy(handles, matchedFrom, match, 0, matchLength);
-        return match;
+        return Arrays.copyOfRange(handles, matchedFrom, matchedFrom + matchLength);
     }
 
     /**

@@ -671,8 +671,7 @@ public abstract class Utility {
             while ((b = gis.read()) >= 0) {
                 tmp[count++] = (byte) b;
             }
-            bytes = new byte[count];
-            System.arraycopy(tmp, 0, bytes, 0, count);
+            bytes = Arrays.copyOf(tmp, count);
         }
         return bytes;
     }

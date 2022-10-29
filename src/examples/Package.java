@@ -34,7 +34,6 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.ClassPath;
-import org.apache.commons.lang3.ArraySorter;
 
 /**
  * Package the client. Creates a jar file in the current directory that contains a minimal set of classes needed to run
