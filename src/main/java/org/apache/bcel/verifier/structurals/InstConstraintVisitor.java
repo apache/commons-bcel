@@ -248,9 +248,11 @@ public class InstConstraintVisitor extends EmptyVisitor {
         indexOfInt(o, index);
         if (!(value instanceof ReferenceType)) {
             constraintViolated(o, "The 'value' is not of a ReferenceType but of type " + value + ".");
-        } else {
-            // referenceTypeIsInitialized(o, (ReferenceType) value);
         }
+        // } else {
+            // referenceTypeIsInitialized(o, (ReferenceType) value);
+        // }
+        //
         // Don't bother further with "referenceTypeIsInitialized()", there are no arrays
         // of an uninitialized object type.
         if (arrayrefOfArrayType(o, arrayref) && !(((ArrayType) arrayref).getElementType() instanceof ReferenceType)) {
@@ -1085,8 +1087,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
                     if (!(t instanceof ObjectType)) {
                         constraintViolated(o, "The 'objectref' must refer to an object that's not an array. Found instead: '" + t + "'.");
                     }
-                    final ObjectType objreftype = (ObjectType) t;
-                    if (!(objreftype.equals(curr) || objreftype.subclassOf(curr))) {
+                    // final ObjectType objreftype = (ObjectType) t;
+                    // if (!(objreftype.equals(curr) || objreftype.subclassOf(curr))) {
                         // TODO: One day move to Staerk-et-al's "Set of object types" instead of "wider" object types
                         // created during the verification.
                         // "Wider" object types don't allow us to check for things like that below.
@@ -1094,7 +1096,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
                         // "and it's a member of the current class or a superclass of the current class."+
                         // " However, the referenced object type '"+stack().peek()+
                         // "' is not the current class or a subclass of the current class.");
-                    }
+                    //}
                 }
             }
 

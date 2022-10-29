@@ -187,27 +187,29 @@ public class ConstantPoolGen {
                 if (!cpTable.containsKey(key)) {
                     cpTable.put(key, Integer.valueOf(i));
                 }
-            } else if (c == null) { // entries may be null
-                // nothing to do
-            } else if (c instanceof ConstantInteger) {
-                // nothing to do
-            } else if (c instanceof ConstantLong) {
-                // nothing to do
-            } else if (c instanceof ConstantFloat) {
-                // nothing to do
-            } else if (c instanceof ConstantDouble) {
-                // nothing to do
-            } else if (c instanceof org.apache.bcel.classfile.ConstantMethodType) {
-                // TODO should this be handled somehow?
-            } else if (c instanceof org.apache.bcel.classfile.ConstantMethodHandle) {
-                // TODO should this be handled somehow?
-            } else if (c instanceof org.apache.bcel.classfile.ConstantModule) {
-                // TODO should this be handled somehow?
-            } else if (c instanceof org.apache.bcel.classfile.ConstantPackage) {
-                // TODO should this be handled somehow?
-            } else {
-                assert false : "Unexpected constant type: " + c.getClass().getName();
-            }
+            } 
+//            else if (c == null) { // entries may be null
+//                // nothing to do
+//            } else if (c instanceof ConstantInteger) {
+//                // nothing to do
+//            } else if (c instanceof ConstantLong) {
+//                // nothing to do
+//            } else if (c instanceof ConstantFloat) {
+//                // nothing to do
+//            } else if (c instanceof ConstantDouble) {
+//                // nothing to do
+//            } else if (c instanceof org.apache.bcel.classfile.ConstantMethodType) {
+//                // TODO should this be handled somehow?
+//            } else if (c instanceof org.apache.bcel.classfile.ConstantMethodHandle) {
+//                // TODO should this be handled somehow?
+//            } else if (c instanceof org.apache.bcel.classfile.ConstantModule) {
+//                // TODO should this be handled somehow?
+//            } else if (c instanceof org.apache.bcel.classfile.ConstantPackage) {
+//                // TODO should this be handled somehow?
+//            } else {
+//                // Not helpful, should throw an exception.
+//                assert false : "Unexpected constant type: " + c.getClass().getName();
+//            }
         }
     }
 

@@ -16,6 +16,8 @@
  */
 package org.apache.bcel.generic;
 
+import java.util.Objects;
+
 import org.apache.bcel.Const;
 
 /**
@@ -30,6 +32,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
      * @param value to be pushed
      */
     public PUSH(final ConstantPoolGen cp, final boolean value) {
+        Objects.requireNonNull(cp, "cp");
         instruction = InstructionConst.getInstruction(Const.ICONST_0 + (value ? 1 : 0));
     }
 

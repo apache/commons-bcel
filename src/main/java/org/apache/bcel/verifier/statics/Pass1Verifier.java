@@ -23,6 +23,7 @@ import org.apache.bcel.verifier.PassVerifier;
 import org.apache.bcel.verifier.VerificationResult;
 import org.apache.bcel.verifier.Verifier;
 import org.apache.bcel.verifier.exc.LoadingException;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This PassVerifier verifies a class file according to pass 1 as described in The Java Virtual Machine Specification,
@@ -174,12 +175,11 @@ public final class Pass1Verifier extends PassVerifier {
      * Currently this returns an empty array of String. One could parse the error messages of BCEL (written to
      * java.lang.System.err) when loading a class file such as detecting unknown attributes or trailing garbage at the end
      * of a class file. However, Markus Dahm does not like the idea so this method is currently useless and therefore marked
-     * as <B>TODO</B>.
+     * as <b>TODO</b>.
      */
     @Override
     public String[] getMessages() {
-        // This method is only here to override the javadoc-comment.
-        return super.getMessages();
+        return ArrayUtils.EMPTY_STRING_ARRAY;
     }
 
 }
