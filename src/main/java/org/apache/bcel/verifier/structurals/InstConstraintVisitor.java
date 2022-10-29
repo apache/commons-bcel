@@ -1709,7 +1709,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
     }
 
-    private Type visitInvokeInternals(final InvokeInstruction o) throws ClassNotFoundException {
+    private int visitInvokeInternals(final InvokeInstruction o) throws ClassNotFoundException {
         final Type t = o.getType(cpg);
         if (t instanceof ObjectType) {
             final String name = ((ObjectType) t).getClassName();
@@ -1745,8 +1745,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 }
             }
         }
-
-        return stack().peek(nargs);
+        return nargs;
     }
 
     /**
@@ -1766,7 +1765,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
             // the o.getClassType(cpg) type has passed pass 2; see visitLoadClass(o).
 
-            Type objref = visitInvokeInternals(o);
+            final int nargs = visitInvokeInternals(o);
+            Type objref = stack().peek(nargs);
             if (objref == Type.NULL) {
                 return;
             }
@@ -1811,42 +1811,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     public void visitINVOKESTATIC(final INVOKESTATIC o) {
         try {
             // Method is not native, otherwise pass 3 would not happen.
-
-            final Type t = o.getType(cpg);
-            if (t instanceof ObjectType) {
-                final String name = ((ObjectType) t).getClassName();
-                final Verifier v = VerifierFactory.getVerifier(name);
-                final VerificationResult vr = v.doPass2();
-                if (vr.getStatus() != VerificationResult.VERIFIED_OK) {
-                    constraintViolated(o, "Class '" + name + "' is referenced, but cannot be loaded and resolved: '" + vr + "'.");
-                }
-            }
-
-            final Type[] argtypes = o.getArgumentTypes(cpg);
-            final int nargs = argtypes.length;
-
-            for (int i = nargs - 1; i >= 0; i--) {
-                final Type fromStack = stack().peek(nargs - 1 - i); // 0 to nargs-1
-                Type fromDesc = argtypes[i];
-                if (fromDesc == Type.BOOLEAN || fromDesc == Type.BYTE || fromDesc == Type.CHAR || fromDesc == Type.SHORT) {
-                    fromDesc = Type.INT;
-                }
-                if (!fromStack.equals(fromDesc)) {
-                    if (fromStack instanceof ReferenceType && fromDesc instanceof ReferenceType) {
-                        final ReferenceType rFromStack = (ReferenceType) fromStack;
-                        final ReferenceType rFromDesc = (ReferenceType) fromDesc;
-                        // TODO: This check can possibly only be done using Staerk-et-al's "set of object types"
-                        // instead of a "wider cast object type" created during verification.
-                        if (!rFromStack.isAssignmentCompatibleWith(rFromDesc)) {
-                            constraintViolated(o,
-                                "Expecting a '" + fromDesc + "' but found a '" + fromStack + "' on the stack (which is not assignment compatible).");
-                        }
-                        referenceTypeIsInitialized(o, rFromStack);
-                    } else {
-                        constraintViolated(o, "Expecting a '" + fromDesc + "' but found a '" + fromStack + "' on the stack.");
-                    }
-                }
-            }
+            visitInvokeInternals(o);
         } catch (final ClassNotFoundException e) {
             // FIXME: maybe not the best way to handle this
             throw new AssertionViolatedException("Missing class: " + e, e);
@@ -1861,7 +1826,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
         try {
             // the o.getClassType(cpg) type has passed pass 2; see visitLoadClass(o).
 
-            Type objref = visitInvokeInternals(o);
+            final int nargs = visitInvokeInternals(o);
+            Type objref = stack().peek(nargs);
             if (objref == Type.NULL) {
                 return;
             }
