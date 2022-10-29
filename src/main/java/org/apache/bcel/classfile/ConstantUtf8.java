@@ -107,7 +107,7 @@ public final class ConstantUtf8 extends Constant {
         Cache.CACHE.clear();
     }
 
-    // for accesss by test code
+    // for access by test code
     static synchronized void clearStats() {
         hits = considered = skipped = created = 0;
     }
@@ -169,7 +169,7 @@ public final class ConstantUtf8 extends Constant {
         return Cache.isEnabled() ? getCachedInstance(value) : new ConstantUtf8(value);
     }
 
-    // for accesss by test code
+    // for access by test code
     static void printStats() {
         final String prefix = "[Apache Commons BCEL]";
         System.err.printf("%s Cache hit %,d/%,d, %d skipped.%n", prefix, hits, considered, skipped);
