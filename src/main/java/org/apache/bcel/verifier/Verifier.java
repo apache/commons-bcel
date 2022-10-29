@@ -143,26 +143,24 @@ public class Verifier {
         return p2v.verify();
     }
 
-    /** Returns the VerificationResult for the given pass. */
+    /**
+     * Returns the VerificationResult for the given pass.
+     * 
+     * @param methodNo The method to verify
+     * @return the VerificationResult 
+     */
     public VerificationResult doPass3a(final int methodNo) {
-        final String key = Integer.toString(methodNo);
-        Pass3aVerifier p3av = p3avs.get(key);
-        if (p3avs.get(key) == null) {
-            p3av = new Pass3aVerifier(this, methodNo);
-            p3avs.put(key, p3av);
-        }
-        return p3av.verify();
+        return p3avs.computeIfAbsent(Integer.toString(methodNo), k -> new Pass3aVerifier(this, methodNo)).verify();
     }
 
-    /** Returns the VerificationResult for the given pass. */
+    /**
+     * Returns the VerificationResult for the given pass.
+     * 
+     * @param methodNo The method to verify
+     * @return the VerificationResult 
+     */
     public VerificationResult doPass3b(final int methodNo) {
-        final String key = Integer.toString(methodNo);
-        Pass3bVerifier p3bv = p3bvs.get(key);
-        if (p3bvs.get(key) == null) {
-            p3bv = new Pass3bVerifier(this, methodNo);
-            p3bvs.put(key, p3bv);
-        }
-        return p3bv.verify();
+        return p3bvs.computeIfAbsent(Integer.toString(methodNo), k -> new Pass3bVerifier(this, methodNo)).verify();
     }
 
     /**
