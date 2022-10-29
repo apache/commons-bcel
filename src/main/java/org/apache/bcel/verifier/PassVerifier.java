@@ -47,14 +47,30 @@ public abstract class PassVerifier {
      * This method adds a (warning) message to the message pool of this PassVerifier. This method is normally only
      * internally used by BCEL's class file verifier "JustIce" and should not be used from the outside.
      *
+     * @param message message to be appended to the message list. 
      * @see #getMessages()
      */
     public void addMessage(final String message) {
         messages.add(message);
     }
 
-    /** Does the real verification work, uncached. */
+    /**
+     * Verifies, not cached.
+     * 
+     * @return The VerificationResult
+     */
     public abstract VerificationResult do_verify();
+
+    /**
+     * Returns the (warning) messages that this PassVerifier accumulated during its do_verify()ing work.
+     *
+     * @return the (warning) messages.
+     * @see #addMessage(String)
+     * @see #do_verify()
+     */
+    public String[] getMessages() {
+        return getMessagesList().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
 
     /**
      * Returns the (warning) messages that this PassVerifier accumulated during its do_verify()ing work.
@@ -62,9 +78,9 @@ public abstract class PassVerifier {
      * @see #addMessage(String)
      * @see #do_verify()
      */
-    public String[] getMessages() {
+    public List<String> getMessagesList() {
         verify(); // create messages if not already done (cached!)
-        return messages.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return messages;
     }
 
     /**
@@ -73,6 +89,7 @@ public abstract class PassVerifier {
      * this result may be returned after every invocation of this method instead of running the verification pass anew;
      * likewise with the result of getMessages().
      *
+     * @return a VerificationResult.
      * @see #getMessages()
      * @see #addMessage(String)
      */

@@ -192,14 +192,10 @@ public class Verifier {
     public String[] getMessages() throws ClassNotFoundException {
         final List<String> messages = new ArrayList<>();
         if (p1v != null) {
-            for (final String element : p1v.getMessages()) {
-                messages.add("Pass 1: " + element);
-            }
+            p1v.getMessagesList().forEach(element -> messages.add("Pass 1: " + element));
         }
         if (p2v != null) {
-            for (final String element : p2v.getMessages()) {
-                messages.add("Pass 2: " + element);
-            }
+            p2v.getMessagesList().forEach(element -> messages.add("Pass 2: " + element));
         }
         for (final Pass3aVerifier pv : p3avs.values()) {
             final int meth = pv.getMethodNo();
