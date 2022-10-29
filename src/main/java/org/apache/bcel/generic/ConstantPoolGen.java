@@ -65,12 +65,15 @@ public class ConstantPoolGen {
     private static final String IMETHODREF_DELIM = "#";
 
     private static final String FIELDREF_DELIM = "&";
+
     private static final String NAT_DELIM = "%"; // Name and Type
+
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
     protected int size;
+
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
@@ -256,17 +259,15 @@ public class ConstantPoolGen {
     }
 
     private int addClass_(final String clazz) {
-        int ret;
-        if ((ret = lookupClass(clazz)) != -1) {
-            return ret; // Already in CP
+        final int cpRet;
+        if ((cpRet = lookupClass(clazz)) != -1) {
+            return cpRet; // Already in CP
         }
         adjustSize();
         final ConstantClass c = new ConstantClass(addUtf8(clazz));
-        ret = index;
+        final int ret = index;
         constants[index++] = c;
-        if (!classTable.containsKey(clazz)) {
-            classTable.put(clazz, new Index(ret));
-        }
+        classTable.computeIfAbsent(clazz, k -> new Index(ret));
         return ret;
     }
 
