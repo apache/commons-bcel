@@ -19,22 +19,23 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 
 /**
- * This interface contains shareable instruction objects.
- *
+ * Contains shareable instruction objects.
+ * <p>
  * In order to save memory you can use some instructions multiply, since they have an immutable state and are directly
  * derived from Instruction. I.e. they have no instance fields that could be changed. Since some of these instructions
  * like ICONST_0 occur very frequently this can save a lot of time and space. This feature is an adaptation of the
  * FlyWeight design pattern, we just use an array instead of a factory.
- *
+ * </p>
+ * <p>
  * The Instructions can also accessed directly under their names, so it's possible to write
  * il.append(Instruction.ICONST_0);
+ * </p>
  */
 public final class InstructionConst {
 
     /**
-     * Predefined instruction objects
-     */
-    /*
+     * Predefined instruction objects.
+     *
      * NOTE these are not currently immutable, because Instruction has mutable protected fields opcode and length.
      */
     public static final Instruction NOP = new NOP();

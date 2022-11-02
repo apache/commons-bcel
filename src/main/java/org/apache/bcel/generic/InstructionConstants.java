@@ -17,7 +17,7 @@
 package org.apache.bcel.generic;
 
 /**
- * This interface contains shareable instruction objects.
+ * Contains shareable instruction objects.
  * <p>
  * In order to save memory you can use some instructions multiply, since they have an immutable state and are directly
  * derived from Instruction. I.e. they have no instance fields that could be changed. Since some of these instructions
@@ -29,11 +29,14 @@ package org.apache.bcel.generic;
  * il.append(Instruction.ICONST_0);
  * </p>
  *
- * @deprecated (since 6.0) Do not use. Use InstructionConst instead.
+ * @deprecated (since 6.0) Do not use. Use {@link InstructionConst} instead.
  */
 @Deprecated
 public interface InstructionConstants {
 
+    /**
+     * Deprecated, consider private and ignore.
+     */
     class Clinit {}
 
     /*
