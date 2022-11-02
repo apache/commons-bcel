@@ -266,21 +266,21 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * @param matchLength the match_length to set
-     * @since 6.0
-     */
-    final int setMatchLength(final int matchLength) {
-        this.match_length = matchLength;
-        return matchLength;
-    }
-
-    /**
      *
      * @param array
      * @since 6.0
      */
     final void setMatches(final int[] array) {
         match = array;
+    }
+
+    /**
+     * @param matchLength the match_length to set
+     * @since 6.0
+     */
+    final int setMatchLength(final int matchLength) {
+        this.match_length = matchLength;
+        return matchLength;
     }
 
     /**

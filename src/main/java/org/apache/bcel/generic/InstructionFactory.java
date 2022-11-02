@@ -30,10 +30,6 @@ import org.apache.bcel.Const;
  */
 public class InstructionFactory implements InstructionConstants {
 
-    private static final String APPEND = "append";
-
-    private static final String FQCN_STRING_BUFFER = "java.lang.StringBuffer";
-
     private static class MethodObject {
 
         final Type[] argTypes;
@@ -48,6 +44,10 @@ public class InstructionFactory implements InstructionConstants {
             this.argTypes = a;
         }
     }
+
+    private static final String APPEND = "append";
+
+    private static final String FQCN_STRING_BUFFER = "java.lang.StringBuffer";
 
     // N.N. These must agree with the order of Constants.T_CHAR through T_LONG
     private static final String[] shortNames = {"C", "F", "D", "B", "S", "I", "L"};

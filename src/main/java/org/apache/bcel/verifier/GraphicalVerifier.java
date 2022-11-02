@@ -28,6 +28,8 @@ import org.apache.bcel.generic.Type;
  */
 public class GraphicalVerifier {
 
+    private static final boolean packFrame = false;
+
     /** Main method. */
     public static void main(final String[] args) {
         try {
@@ -37,8 +39,6 @@ public class GraphicalVerifier {
         }
         new GraphicalVerifier();
     }
-
-    private static final boolean packFrame = false;
 
     /** Constructor. */
     public GraphicalVerifier() {

@@ -575,17 +575,6 @@ public abstract class Utility {
     }
 
     /**
-     * Converts a path to a package name.
-     *
-     * @param str the source path.
-     * @return a package name.
-     * @since 6.6.0
-     */
-    public static String pathToPackage(final String str) {
-        return str.replace('/', '.');
-    }
-
-    /**
      * Escape all occurrences of newline chars '\n', quotes \", etc.
      */
     public static String convertString(final String label) {
@@ -746,6 +735,19 @@ public abstract class Utility {
     }
 
     /**
+     * Return a string for an integer justified left or right and filled up with `fill' characters if necessary.
+     *
+     * @param i integer to format
+     * @param length length of desired string
+     * @param leftJustify format left or right
+     * @param fill fill character
+     * @return formatted int
+     */
+    public static String format(final int i, final int length, final boolean leftJustify, final char fill) {
+        return fillup(Integer.toString(i), length, leftJustify, fill);
+    }
+
+    /**
      * WARNING:
      *
      * There is some nomenclature confusion through much of the BCEL code base with respect to the terms Descriptor and
@@ -768,19 +770,6 @@ public abstract class Utility {
      *      to typeSignatureToString. Also note, that if you only wish to parse the first item in a longer signature string,
      *      you should call typeSignatureToString directly.
      */
-
-    /**
-     * Return a string for an integer justified left or right and filled up with `fill' characters if necessary.
-     *
-     * @param i integer to format
-     * @param length length of desired string
-     * @param leftJustify format left or right
-     * @param fill fill character
-     * @return formatted int
-     */
-    public static String format(final int i, final int length, final boolean leftJustify, final char fill) {
-        return fillup(Integer.toString(i), length, leftJustify, fill);
-    }
 
     /**
      * Parse Java type such as "char", or "java.lang.String[]" and return the signature in byte code format, e.g. "C" or
@@ -1039,6 +1028,17 @@ public abstract class Utility {
         str = getSignature(ret);
         buf.append(")").append(str);
         return buf.toString();
+    }
+
+    /**
+     * Converts a path to a package name.
+     *
+     * @param str the source path.
+     * @return a package name.
+     * @since 6.6.0
+     */
+    public static String pathToPackage(final String str) {
+        return str.replace('/', '.');
     }
 
     private static int pow2(final int n) {
