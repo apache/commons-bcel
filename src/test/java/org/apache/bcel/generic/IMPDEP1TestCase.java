@@ -18,14 +18,16 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IMPDEP1TestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        IMPDEP1 impdep1 = new IMPDEP1();
+        final CountVisitor countVisitor = new CountVisitor();
+        final IMPDEP1 impdep1 = new IMPDEP1();
         impdep1.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitIMPDEP1Count());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitIMPDEP1Count(1);
+        assertEquals(expected, countVisitor);
     }
 }

@@ -18,18 +18,20 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LXORTestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        LXOR lxor = new LXOR();
+        final CountVisitor countVisitor = new CountVisitor();
+        final LXOR lxor = new LXOR();
         lxor.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitTypedInstructionCount());
-        assertEquals(1, countVisitor.getVisitStackProducerCount());
-        assertEquals(1, countVisitor.getVisitStackConsumerCount());
-        assertEquals(1, countVisitor.getVisitArithmeticInstructionCount());
-        assertEquals(1, countVisitor.getVisitLXORCount());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitTypedInstructionCount(1);
+        expected.setVisitStackProducerCount(1);
+        expected.setVisitStackConsumerCount(1);
+        expected.setVisitArithmeticInstructionCount(1);
+        expected.setVisitLXORCount(1);
+        assertEquals(expected, countVisitor);
     }
 }

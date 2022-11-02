@@ -18,18 +18,20 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DNEGTestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        DNEG dneg = new DNEG();
+        final CountVisitor countVisitor = new CountVisitor();
+        final DNEG dneg = new DNEG();
         dneg.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitTypedInstructionCount());
-        assertEquals(1, countVisitor.getVisitStackProducerCount());
-        assertEquals(1, countVisitor.getVisitStackConsumerCount());
-        assertEquals(1, countVisitor.getVisitArithmeticInstructionCount());
-        assertEquals(1, countVisitor.getVisitDNEGCount());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitTypedInstructionCount(1);
+        expected.setVisitStackProducerCount(1);
+        expected.setVisitStackConsumerCount(1);
+        expected.setVisitArithmeticInstructionCount(1);
+        expected.setVisitDNEGCount(1);
+        assertEquals(expected, countVisitor);
     }
 }

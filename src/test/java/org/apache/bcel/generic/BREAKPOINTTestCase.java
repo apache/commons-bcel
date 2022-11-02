@@ -18,14 +18,16 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BREAKPOINTTestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        BREAKPOINT breakpoint = new BREAKPOINT();
+        final CountVisitor countVisitor = new CountVisitor();
+        final BREAKPOINT breakpoint = new BREAKPOINT();
         breakpoint.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitBREAKPOINTCount());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitBREAKPOINTCount(1);
+        assertEquals(expected, countVisitor);
     }
 }

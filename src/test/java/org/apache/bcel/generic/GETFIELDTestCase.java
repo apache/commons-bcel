@@ -18,22 +18,24 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GETFIELDTestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        GETFIELD getfield = new GETFIELD(0);
+        final CountVisitor countVisitor = new CountVisitor();
+        final GETFIELD getfield = new GETFIELD(0);
         getfield.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitExceptionThrowerCount());
-        assertEquals(1, countVisitor.getVisitStackProducerCount());
-        assertEquals(1, countVisitor.getVisitStackConsumerCount());
-        assertEquals(1, countVisitor.getVisitTypedInstructionCount());
-        assertEquals(1, countVisitor.getVisitLoadClassCount());
-        assertEquals(1, countVisitor.getVisitCPInstructionCount());
-        assertEquals(1, countVisitor.getVisitFieldOrMethodCount());
-        assertEquals(1, countVisitor.getVisitFieldInstructionCount());
-        assertEquals(1, countVisitor.getVisitGETFIELDCount());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitExceptionThrowerCount(1);
+        expected.setVisitStackProducerCount(1);
+        expected.setVisitStackConsumerCount(1);
+        expected.setVisitTypedInstructionCount(1);
+        expected.setVisitLoadClassCount(1);
+        expected.setVisitCPInstructionCount(1);
+        expected.setVisitFieldOrMethodCount(1);
+        expected.setVisitFieldInstructionCount(1);
+        expected.setVisitGETFIELDCount(1);
+        assertEquals(expected, countVisitor);
     }
 }

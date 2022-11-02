@@ -18,18 +18,20 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LSHLTestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        LSHL lshl = new LSHL();
+        final CountVisitor countVisitor = new CountVisitor();
+        final LSHL lshl = new LSHL();
         lshl.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitTypedInstructionCount());
-        assertEquals(1, countVisitor.getVisitStackProducerCount());
-        assertEquals(1, countVisitor.getVisitStackConsumerCount());
-        assertEquals(1, countVisitor.getVisitArithmeticInstructionCount());
-        assertEquals(1, countVisitor.getVisitLSHLCount());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitTypedInstructionCount(1);
+        expected.setVisitStackProducerCount(1);
+        expected.setVisitStackConsumerCount(1);
+        expected.setVisitArithmeticInstructionCount(1);
+        expected.setVisitLSHLCount(1);
+        assertEquals(expected, countVisitor);
     }
 }

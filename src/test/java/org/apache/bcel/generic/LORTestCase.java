@@ -18,18 +18,20 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LORTestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        LOR lor = new LOR();
+        final CountVisitor countVisitor = new CountVisitor();
+        final LOR lor = new LOR();
         lor.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitTypedInstructionCount());
-        assertEquals(1, countVisitor.getVisitStackProducerCount());
-        assertEquals(1, countVisitor.getVisitStackConsumerCount());
-        assertEquals(1, countVisitor.getVisitArithmeticInstructionCount());
-        assertEquals(1, countVisitor.getVisitLORCount());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitTypedInstructionCount(1);
+        expected.setVisitStackProducerCount(1);
+        expected.setVisitStackConsumerCount(1);
+        expected.setVisitArithmeticInstructionCount(1);
+        expected.setVisitLORCount(1);
+        assertEquals(expected, countVisitor);
     }
 }

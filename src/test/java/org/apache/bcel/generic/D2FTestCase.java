@@ -18,18 +18,20 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class D2FTestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        D2F d2f = new D2F();
+        final CountVisitor countVisitor = new CountVisitor();
+        final D2F d2f = new D2F();
         d2f.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitTypedInstructionCount());
-        assertEquals(1, countVisitor.getVisitStackProducerCount());
-        assertEquals(1, countVisitor.getVisitStackConsumerCount());
-        assertEquals(1, countVisitor.getVisitConversionInstructionCount());
-        assertEquals(1, countVisitor.getVisitD2FCount());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitTypedInstructionCount(1);
+        expected.setVisitStackProducerCount(1);
+        expected.setVisitStackConsumerCount(1);
+        expected.setVisitConversionInstructionCount(1);
+        expected.setVisitD2FCount(1);
+        assertEquals(expected, countVisitor);
     }
 }

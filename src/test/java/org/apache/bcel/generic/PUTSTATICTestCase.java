@@ -18,22 +18,24 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PUTSTATICTestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        PUTSTATIC putstatic = new PUTSTATIC(0);
+        final CountVisitor countVisitor = new CountVisitor();
+        final PUTSTATIC putstatic = new PUTSTATIC(0);
         putstatic.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitExceptionThrowerCount());
-        assertEquals(1, countVisitor.getVisitStackConsumerCount());
-        assertEquals(1, countVisitor.getVisitPopInstructionCount());
-        assertEquals(1, countVisitor.getVisitTypedInstructionCount());
-        assertEquals(1, countVisitor.getVisitLoadClassCount());
-        assertEquals(1, countVisitor.getVisitCPInstructionCount());
-        assertEquals(1, countVisitor.getVisitFieldOrMethodCount());
-        assertEquals(1, countVisitor.getVisitFieldInstructionCount());
-        assertEquals(1, countVisitor.getVisitPUTSTATICCount());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitExceptionThrowerCount(1);
+        expected.setVisitStackConsumerCount(1);
+        expected.setVisitPopInstructionCount(1);
+        expected.setVisitTypedInstructionCount(1);
+        expected.setVisitLoadClassCount(1);
+        expected.setVisitCPInstructionCount(1);
+        expected.setVisitFieldOrMethodCount(1);
+        expected.setVisitFieldInstructionCount(1);
+        expected.setVisitPUTSTATICCount(1);
+        assertEquals(expected, countVisitor);
     }
 }

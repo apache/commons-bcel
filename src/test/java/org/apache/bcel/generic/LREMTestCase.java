@@ -18,19 +18,21 @@ package org.apache.bcel.generic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LREMTestCase {
     @Test
     public void accept() {
-        CountVisitor countVisitor = new CountVisitor();
-        LREM lrem = new LREM();
+        final CountVisitor countVisitor = new CountVisitor();
+        final LREM lrem = new LREM();
         lrem.accept(countVisitor);
-        assertEquals(1, countVisitor.getVisitExceptionThrowerCount());
-        assertEquals(1, countVisitor.getVisitTypedInstructionCount());
-        assertEquals(1, countVisitor.getVisitStackProducerCount());
-        assertEquals(1, countVisitor.getVisitStackConsumerCount());
-        assertEquals(1, countVisitor.getVisitArithmeticInstructionCount());
-        assertEquals(1, countVisitor.getVisitLREMCount());
+        final CountVisitor expected = new CountVisitor();
+        expected.setVisitExceptionThrowerCount(1);
+        expected.setVisitTypedInstructionCount(1);
+        expected.setVisitStackProducerCount(1);
+        expected.setVisitStackConsumerCount(1);
+        expected.setVisitArithmeticInstructionCount(1);
+        expected.setVisitLREMCount(1);
+        assertEquals(expected, countVisitor);
     }
 }
