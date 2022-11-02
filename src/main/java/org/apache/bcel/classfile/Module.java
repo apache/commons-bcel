@@ -102,7 +102,81 @@ public final class Module extends Attribute {
         v.visitModule(this);
     }
 
-    // TODO add more getters and setters?
+    /**
+     * 
+     * @param cp Array of constants
+     * @return version from constant pool, "0" if version index is 0
+     */
+    public String getVersion(final ConstantPool cp) {
+        return moduleVersionIndex == 0 ? "0" : cp.getConstantString(moduleVersionIndex, Const.CONSTANT_Utf8);
+    }
+
+    /**
+     * 
+     * @return module flags
+     */
+    public int getModuleFlags() {
+        return moduleFlags;
+    }
+
+    /**
+     * 
+     * @param cp Array of constants
+     * @return module name
+     */
+    public String getModuleName(final ConstantPool cp) {
+        return cp.getConstantString(moduleNameIndex, Const.CONSTANT_Module);
+    }
+
+    /**
+     * @return the moduleNameIndex
+     */
+    public int getModuleNameIndex() {
+        return moduleNameIndex;
+    }
+
+    /**
+     * @return the moduleVersionIndex
+     */
+    public int getModuleVersionIndex() {
+        return moduleVersionIndex;
+    }
+
+    /**
+     * @return the usesCount
+     */
+    public int getUsesCount() {
+        return usesCount;
+    }
+
+    /**
+     * @return the usesIndex
+     */
+    public int[] getUsesIndex() {
+        return usesIndex;
+    }
+
+    /**
+     * 
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @param compactClassName false for original constant pool value, true to replace '/' with '.'
+     * @return array of used class names
+     */
+    public String[] getUsedClassNames(final ConstantPool constantPool, final boolean compactClassName) {
+        String[] usedClassNames = new String[usesCount];
+        for (int i = 0; i < usesCount; i++) {
+            usedClassNames[i] = getClassNameAtIndex(constantPool, usesIndex[i], compactClassName);
+        }
+        return usedClassNames;
+    }
+
+    private static String getClassNameAtIndex(final ConstantPool cp, final int index, final boolean compactClassName) {
+        String className = cp.getConstantString(index, Const.CONSTANT_Class);
+        if (compactClassName) {
+            return Utility.compactClassName(className, false);
+        }
+        return className;
+    }
 
     /**
      * @return deep copy of this attribute
@@ -207,9 +281,9 @@ public final class Module extends Attribute {
         final ConstantPool cp = super.getConstantPool();
         final StringBuilder buf = new StringBuilder();
         buf.append("Module:\n");
-        buf.append("  name:    ").append(Utility.pathToPackage(cp.getConstantString(moduleNameIndex, Const.CONSTANT_Module))).append("\n");
+        buf.append("  name:    ").append(Utility.pathToPackage(getModuleName(cp))).append("\n");
         buf.append("  flags:   ").append(String.format("%04x", moduleFlags)).append("\n");
-        final String version = moduleVersionIndex == 0 ? "0" : cp.getConstantString(moduleVersionIndex, Const.CONSTANT_Utf8);
+        final String version = getVersion(cp);
         buf.append("  version: ").append(version).append("\n");
 
         buf.append("  requires(").append(requiresTable.length).append("):\n");
@@ -229,8 +303,8 @@ public final class Module extends Attribute {
 
         buf.append("  uses(").append(usesIndex.length).append("):\n");
         for (final int index : usesIndex) {
-            final String className = cp.getConstantString(index, Const.CONSTANT_Class);
-            buf.append("    ").append(Utility.compactClassName(className, false)).append("\n");
+            final String className = getClassNameAtIndex(cp, index, true);
+            buf.append("    ").append(className).append("\n");
         }
 
         buf.append("  provides(").append(providesTable.length).append("):\n");

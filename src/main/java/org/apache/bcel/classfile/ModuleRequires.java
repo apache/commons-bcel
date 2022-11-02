@@ -49,6 +49,42 @@ public final class ModuleRequires implements Cloneable, Node {
     }
 
     /**
+     * @return the requiresIndex
+     */
+    public int getRequiresIndex() {
+        return requiresIndex;
+    }
+
+    /**
+     * @return the requiresFlags
+     */
+    public int getRequiresFlags() {
+        return requiresFlags;
+    }
+
+    /**
+     * @return the requiresVersionIndex
+     */
+    public int getRequiresVersionIndex() {
+        return requiresVersionIndex;
+    }
+
+    /**
+     * @return requires version
+     */
+    public String getVersion(final ConstantPool constantPool) {
+        return requiresVersionIndex == 0 ? "0" : constantPool.getConstantString(requiresVersionIndex, Const.CONSTANT_Utf8);
+    }
+
+    /**
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @return module name
+     */
+    public String getModuleName(final ConstantPool constantPool) {
+        return constantPool.constantToString(requiresIndex, Const.CONSTANT_Module);
+    }
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
@@ -58,8 +94,6 @@ public final class ModuleRequires implements Cloneable, Node {
     public void accept(final Visitor v) {
         v.visitModuleRequires(this);
     }
-
-    // TODO add more getters and setters?
 
     /**
      * @return deep copy of this object
@@ -98,10 +132,10 @@ public final class ModuleRequires implements Cloneable, Node {
      */
     public String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
-        final String moduleName = constantPool.constantToString(requiresIndex, Const.CONSTANT_Module);
-        buf.append(Utility.compactClassName(moduleName, false));
+        final String moduleName = getModuleName(constantPool);
+        buf.append(moduleName);
         buf.append(", ").append(String.format("%04x", requiresFlags));
-        final String version = requiresVersionIndex == 0 ? "0" : constantPool.getConstantString(requiresVersionIndex, Const.CONSTANT_Utf8);
+        final String version = getVersion(constantPool);
         buf.append(", ").append(version);
         return buf.toString();
     }

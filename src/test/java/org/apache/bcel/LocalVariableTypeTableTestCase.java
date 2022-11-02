@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ACONST_NULL;
 import org.apache.bcel.generic.ALOAD;
@@ -32,6 +33,7 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.LocalVariableGen;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class LocalVariableTypeTableTestCase extends AbstractTestCase {
@@ -142,5 +144,17 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         method.invoke(null, "c1", "c2");
         method = cls.getDeclaredMethod("d", List.class, String.class);
         method.invoke(null, new LinkedList<String>(), "d2");
+    }
+
+    @Test
+    public void testGetLocalVariableTypeTable() throws ClassNotFoundException {
+        JavaClass testJavaClass = getTestJavaClass("org/apache/commons/lang3/function/TriFunction");
+        String expectedToString = "LocalVariableTypes(startPc = 0, length = 17, index = 0:org.apache.commons.lang3.function.TriFunction<T, U, V, R> this)";
+        for (Method method : testJavaClass.getMethods()) {
+            if ("lambda$andThen$0".equals(method.getName())) {
+                LocalVariableTypeTable localVariableTypeTable = method.getLocalVariableTypeTable();
+                Assertions.assertEquals(expectedToString, localVariableTypeTable.toString());
+            }
+        }
     }
 }

@@ -194,6 +194,17 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
+     * @return LocalVariableTypeTable of code attribute if any, i.e. the call is forwarded to the Code atribute.
+     */
+    public LocalVariableTypeTable getLocalVariableTypeTable() {
+        final Code code = getCode();
+        if (code == null) {
+            return null;
+        }
+        return code.getLocalVariableTypeTable();
+    }
+    
+    /**
      * @return Annotations on the parameters of a method
      * @since 6.0
      */

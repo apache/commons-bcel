@@ -54,6 +54,60 @@ public final class ModuleExports implements Cloneable, Node {
     }
 
     /**
+     * @return the exportsIndex
+     */
+    public int getExportsIndex() {
+        return exportsIndex;
+    }
+
+    /**
+     * @return the exportsFlags
+     */
+    public int getExportsFlags() {
+        return exportsFlags;
+    }
+
+    /**
+     * @return the exportsToCount
+     */
+    public int getExportsToCount() {
+        return exportsToCount;
+    }
+
+    /**
+     * @return the exportsToIndex
+     */
+    public int[] getExportsToIndex() {
+        return exportsToIndex;
+    }
+
+    /**
+     * 
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @return array of module names following 'exports to'
+     */
+    public String[] getToModuleNames(final ConstantPool constantPool) {
+        String[] toModuleNames = new String[exportsToCount];
+        for (int i = 0; i < exportsToCount; i++) {
+            toModuleNames[i] = getToModuleNameAtIndex(constantPool, exportsToIndex[i]);
+        }
+        return toModuleNames;
+    }
+
+    private static String getToModuleNameAtIndex(final ConstantPool constantPool, final int index) {
+        return constantPool.getConstantString(index, Const.CONSTANT_Module);
+    }
+
+    /**
+     * 
+     * @param constantPool the constant pool from the ClassFile
+     * @return the exported package name
+     */
+    public String getPackageName(final ConstantPool constantPool) {
+        return constantPool.constantToString(exportsIndex, Const.CONSTANT_Package);
+    }
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
@@ -63,8 +117,6 @@ public final class ModuleExports implements Cloneable, Node {
     public void accept(final Visitor v) {
         v.visitModuleExports(this);
     }
-
-    // TODO add more getters and setters?
 
     /**
      * @return deep copy of this object
@@ -106,13 +158,13 @@ public final class ModuleExports implements Cloneable, Node {
      */
     public String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
-        final String packageName = constantPool.constantToString(exportsIndex, Const.CONSTANT_Package);
-        buf.append(Utility.compactClassName(packageName, false));
+        final String packageName = getPackageName(constantPool);
+        buf.append(packageName);
         buf.append(", ").append(String.format("%04x", exportsFlags));
         buf.append(", to(").append(exportsToCount).append("):\n");
         for (final int index : exportsToIndex) {
-            final String moduleName = constantPool.getConstantString(index, Const.CONSTANT_Module);
-            buf.append("      ").append(Utility.compactClassName(moduleName, false)).append("\n");
+            final String moduleName = getToModuleNameAtIndex(constantPool, index);
+            buf.append("      ").append(moduleName).append("\n");
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }

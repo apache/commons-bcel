@@ -234,6 +234,18 @@ public final class Code extends Attribute {
         }
         return null;
     }
+    
+    /**
+     * @return LocalVariableTypeTable of Code, if it has one
+     */
+    public LocalVariableTypeTable getLocalVariableTypeTable() {
+        for (final Attribute attribute : attributes) {
+            if (attribute instanceof LocalVariableTypeTable) {
+                return (LocalVariableTypeTable) attribute;
+            }
+        }
+        return null;
+    }
 
     /**
      * @return Number of local variables.
