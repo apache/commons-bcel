@@ -7,15 +7,15 @@
     * to you under the Apache License, Version 2.0 (the
     * "License"); you may not use this file except in compliance
     * with the License.  You may obtain a copy of the License at
-    * 
+    *
     *   http://www.apache.org/licenses/LICENSE-2.0
-    * 
+    *
     * Unless required by applicable law or agreed to in writing,
     * software distributed under the License is distributed on an
     * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
     * KIND, either express or implied.  See the License for the
     * specific language governing permissions and limitations
-    * under the License.    
+    * under the License.
 -->
 <document>
   <properties>
@@ -23,7 +23,7 @@
   </properties>
 
   <body>
- 
+
   <section name="Introduction">
     <p>
       The <a href="https://java.sun.com/">Java</a> language has become
@@ -67,9 +67,9 @@
     <p>
       This manual is structured as follows: We give a brief description
       of the Java Virtual Machine and the class file format in <a
-            href="jvm.html">section 2</a>. <a href="bcel-api.html">Section 3</a> 
+            href="jvm.html">section 2</a>. <a href="bcel-api.html">Section 3</a>
       introduces the <font face="helvetica,arial">BCEL</font> API.
-      <a href="application-areas.html">Section 4</a> describes some typical 
+      <a href="application-areas.html">Section 4</a> describes some typical
       application areas and example projects. The appendix contains code examples
       that are to long to be presented in the main part of this paper. All examples
       are included in the down-loadable distribution.
@@ -77,5 +77,5 @@
   </section>
 
   </body>
-  
+
 </document>

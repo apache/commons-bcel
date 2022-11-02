@@ -47,7 +47,7 @@ public abstract class PassVerifier {
      * This method adds a (warning) message to the message pool of this PassVerifier. This method is normally only
      * internally used by BCEL's class file verifier "JustIce" and should not be used from the outside.
      *
-     * @param message message to be appended to the message list. 
+     * @param message message to be appended to the message list.
      * @see #getMessages()
      */
     public void addMessage(final String message) {
@@ -56,7 +56,7 @@ public abstract class PassVerifier {
 
     /**
      * Verifies, not cached.
-     * 
+     *
      * @return The VerificationResult
      */
     public abstract VerificationResult do_verify();

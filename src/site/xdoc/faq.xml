@@ -7,22 +7,22 @@
     * to you under the Apache License, Version 2.0 (the
     * "License"); you may not use this file except in compliance
     * with the License.  You may obtain a copy of the License at
-    * 
+    *
     *   http://www.apache.org/licenses/LICENSE-2.0
-    * 
+    *
     * Unless required by applicable law or agreed to in writing,
     * software distributed under the License is distributed on an
     * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
     * KIND, either express or implied.  See the License for the
     * specific language governing permissions and limitations
-    * under the License.    
+    * under the License.
 -->
 
 <document>
 
   <properties>
     <title>BCEL FAQ</title>
-  </properties> 
+  </properties>
 
   <body>
 
@@ -41,7 +41,7 @@
       <br/>
       <b>A: </b>BCEL was (deliberately) not designed for thread
       safety. See "Concurrent Programming in Java", by Doug Lea,
-      for an excellent reference on how to build thread-safe wrappers and 
+      for an excellent reference on how to build thread-safe wrappers and
       <a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/further.html">more</a>.
     </p>
 
@@ -50,7 +50,7 @@
       <br/>
       <b>A: </b> Yes, this is covered by the <a
       href="https://www.apache.org/licenses/">Apache License</a>, if you add a note about the original
-      author and where to find the sources, i.e., 
+      author and where to find the sources, i.e.,
       <a href="https://commons.apache.org/bcel/">https://commons.apache.org/bcel/</a>
     </p>
 
@@ -86,7 +86,7 @@
        <pre>
        java org.apache.bcel.verifier.Verifier &lt;your class&gt;</pre>
     </p>
-    
+
     </section>
 <!--
     <p>

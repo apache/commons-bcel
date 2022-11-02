@@ -133,7 +133,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump biz.aQute.bndlib from 5.1.0 to 6.3.1, #54, #72, #81, #111.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump maven-surefire-plugin from 3.0.0-M4 to 3.0.0-M7 #53, #124, #129.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump maven-checkstyle-plugin from 3.1.0 to 3.2.0, #77, #141.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump Jacoco from 0.8.5 to 0.8.8.</action>      
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump Jacoco from 0.8.5 to 0.8.8.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump commons-io from 2.7 to 2.11.0 #65, #96.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump exec-maven-plugin from 1.6.0 to 3.1.0 #51, #134.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons.japicmp.version from 0.14.3 to 0.16.0.</action>
@@ -168,11 +168,11 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-339" type="update" dev="ggregory" due-to="Gary Gregory">Throw IllegalArgumentException, IllegalStateException, UnsupportedOperationException instead of RuntimeException.</action>
       <action                  type="update" dev="ggregory" due-to="Mark Roberts">Make some annotation methods public (#45).</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix ConcurrentModificationException in the maven-bundle-plugin:4.2.1:manifest on Java 15-ea.</action>
-    </release> 
+    </release>
     <release version="6.4.1" date="2019-09-26" description="Bug fix release.">
       <action issue="BCEL-328" type="fix" dev="ggregory" due-to="Gary Gregory, Mark Roberts">java.util.EmptyStackException at org.apache.bcel.classfile.DescendingVisitor.visitModule (DescendingVisitor.java:592).</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update build from Checkstyle Maven Plugin 3.0.0 to 3.1.0.</action>
-    </release>  
+    </release>
     <release version="6.4.0" date="2019-09-20" description="Feature and bug fix release.">
       <action issue="BCEL-316" type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Attribute class and subclasses should NOT log to the console by default.</action>
       <action issue="BCEL-278" type="fix" dev="ggregory" due-to="Valery Barysoky">InvokeInstruction.toString(final ConstantPool cp) throws NoSuchElementException #11.</action>
@@ -204,9 +204,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Mark Thomas, Gary Gregory">Initial support for Java 11</action>
       <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added org.apache.bcel.classfile.Visitor.visitConstantDynamic(ConstantDynamic)</action>
       <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added org.apache.bcel.classfile.ConstantDynamic</action>
-      <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added fields in org.apache.bcel.Const for Java 9, 10, and 11.</action>      
-      <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added fields in org.apache.bcel.Const for Java 12 and 13 based on Java Early Access releases.</action>      
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update Java requirement from Java 7 to Java 8.</action>      
+      <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added fields in org.apache.bcel.Const for Java 9, 10, and 11.</action>
+      <action                  type="add" dev="ggregory" due-to="Mark Thomas">Added fields in org.apache.bcel.Const for Java 12 and 13 based on Java Early Access releases.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Update Java requirement from Java 7 to Java 8.</action>
     </release>
 
     <release version="6.2" date="2017-12-08" description="Experimental Java 9 Support">

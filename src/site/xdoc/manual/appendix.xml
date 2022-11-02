@@ -7,15 +7,15 @@
     * to you under the Apache License, Version 2.0 (the
     * "License"); you may not use this file except in compliance
     * with the License.  You may obtain a copy of the License at
-    * 
+    *
     *   http://www.apache.org/licenses/LICENSE-2.0
-    * 
+    *
     * Unless required by applicable law or agreed to in writing,
     * software distributed under the License is distributed on an
     * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
     * KIND, either express or implied.  See the License for the
     * specific language governing permissions and limitations
-    * under the License.    
+    * under the License.
 -->
 <document>
   <properties>
@@ -266,17 +266,17 @@ public class Peephole {
             JavaClass clazz  = Repository.lookupClass(argv[0]);
             Method[] methods = clazz.getMethods();
             ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
-    
+
             for (int i = 0; i &lt; methods.length; i++) {
                 if (!(methods[i].isAbstract() || methods[i].isNative())) {
                     MethodGen mg = new MethodGen(methods[i], clazz.getClassName(), cp);
                     Method stripped = removeNOPs(mg);
-        
+
                     if (stripped != null)      // Any NOPs stripped?
                         methods[i] = stripped; // Overwrite with stripped method
                   }
             }
-    
+
             // Dump the class to "class name"_.class
             clazz.setConstantPool(cp.getFinalConstantPool());
             clazz.dump(clazz.getClassName() + "_.class");
@@ -291,19 +291,19 @@ public class Peephole {
         String pat = "NOP+"; // Find at least one NOP
         InstructionHandle next = null;
         int count = 0;
-        
+
         for (Iterator iter = f.search(pat); iter.hasNext();) {
             InstructionHandle[] match = (InstructionHandle[]) iter.next();
             InstructionHandle first = match[0];
             InstructionHandle last  = match[match.length - 1];
-            
+
             // Some nasty Java compilers may add NOP at end of method.
             if ((next = last.getNext()) == null) {
                 break;
             }
-            
+
             count += match.length;
-            
+
             /**
              * Delete NOPs and redirect any references to them to the following (non-nop) instruction.
              */
@@ -352,13 +352,13 @@ public class Peephole {
         </a>
       </p>
     </subsection>
-      
+
     <subsection name="Verifier">
-      
+
       <h4>Running a console based verifier</h4>
 
       <source>
-java org.apache.bcel.verifier.Verifier fully.qualified.class.Name          
+java org.apache.bcel.verifier.Verifier fully.qualified.class.Name
       </source>
 
       lets JustIce work standalone.
