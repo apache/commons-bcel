@@ -188,7 +188,7 @@ public class ConstantPoolGen {
                 if (!cpTable.containsKey(key)) {
                     cpTable.put(key, Integer.valueOf(i));
                 }
-            } 
+            }
 //            else if (c == null) { // entries may be null
 //                // nothing to do
 //            } else if (c instanceof ConstantInteger) {

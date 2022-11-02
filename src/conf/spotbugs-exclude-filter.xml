@@ -37,7 +37,7 @@
     <Class name="~.*\.classfile\.CodeException" />
     <Bug pattern="NM_CLASS_NOT_EXCEPTION" />
   </Match>
-  
+
   <!-- Ignore GC here -->
   <Match>
     <Class name="~.*\.verifier\.TransitiveHull" />

@@ -30,7 +30,7 @@ public class VerifierTestCase {
     public void afterEach() {
         VerifierFactory.clear();
     }
-    
+
     @Test
     public void testDefaultMethodValidation() {
         final String className = Collection.class.getName();
