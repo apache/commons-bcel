@@ -45,7 +45,7 @@ Feedback
 
 Open source works best when you give feedback:
 
-    https://commons.apache.org/bcel
+    https://commons.apache.org/proper/commons-bcel
 
 Please direct all bug reports to JIRA:
 
