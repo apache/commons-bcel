@@ -372,37 +372,19 @@ public class ClassPath implements Closeable {
         @Override
         ClassFile getClassFile(final String name, final String suffix) {
             // don't use a for each loop to avoid creating an iterator for the GC to collect.
-            for (final JrtModule module : modules) {
-                final ClassFile classFile = module.getClassFile(name, suffix);
-                if (classFile != null) {
-                    return classFile;
-                }
-            }
-            return null;
+            return Arrays.stream(modules).map(module -> module.getClassFile(name, suffix)).filter(Objects::nonNull).findFirst().orElse(null);
         }
 
         @Override
         URL getResource(final String name) {
             // don't use a for each loop to avoid creating an iterator for the GC to collect.
-            for (final JrtModule module : modules) {
-                final URL url = module.getResource(name);
-                if (url != null) {
-                    return url;
-                }
-            }
-            return null;
+            return Arrays.stream(modules).map(module -> module.getResource(name)).filter(Objects::nonNull).findFirst().orElse(null);
         }
 
         @Override
         InputStream getResourceAsStream(final String name) {
             // don't use a for each loop to avoid creating an iterator for the GC to collect.
-            for (final JrtModule module : modules) {
-                final InputStream inputStream = module.getResourceAsStream(name);
-                if (inputStream != null) {
-                    return inputStream;
-                }
-            }
-            return null;
+            return Arrays.stream(modules).map(module -> module.getResourceAsStream(name)).filter(Objects::nonNull).findFirst().orElse(null);
         }
 
         @Override
@@ -663,13 +645,7 @@ public class ClassPath implements Closeable {
     }
 
     private ClassFile getClassFileInternal(final String name, final String suffix) {
-        for (final AbstractPathEntry path : paths) {
-            final ClassFile cf = path.getClassFile(name, suffix);
-            if (cf != null) {
-                return cf;
-            }
-        }
-        return null;
+        return Arrays.stream(paths).map(path -> path.getClassFile(name, suffix)).filter(Objects::nonNull).findFirst().orElse(null);
     }
 
     /**

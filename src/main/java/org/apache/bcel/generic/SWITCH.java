@@ -17,6 +17,7 @@
 package org.apache.bcel.generic;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 /**
  * SWITCH - Branch depending on int value, generates either LOOKUPSWITCH or TABLESWITCH instruction, depending on
@@ -97,12 +98,7 @@ public final class SWITCH implements CompoundInstruction {
      * @return match is sorted in ascending order with no gap bigger than maxGap?
      */
     private boolean matchIsOrdered(final int maxGap) {
-        for (int i = 1; i < matchLength; i++) {
-            if (match[i] - match[i - 1] > maxGap) {
-                return false;
-            }
-        }
-        return true;
+        return IntStream.range(1, matchLength).noneMatch(i -> match[i] - match[i - 1] > maxGap);
     }
 
     /**

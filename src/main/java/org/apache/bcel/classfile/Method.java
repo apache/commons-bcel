@@ -18,6 +18,7 @@ package org.apache.bcel.classfile;
 
 import java.io.DataInput;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 import org.apache.bcel.generic.Type;
@@ -150,12 +151,7 @@ public final class Method extends FieldOrMethod {
      * @return Code attribute of method, if any
      */
     public Code getCode() {
-        for (final Attribute attribute : super.getAttributes()) {
-            if (attribute instanceof Code) {
-                return (Code) attribute;
-            }
-        }
-        return null;
+        return (Code) Arrays.stream(super.getAttributes()).filter(attribute -> attribute instanceof Code).findFirst().orElse(null);
     }
 
     /**
@@ -163,12 +159,7 @@ public final class Method extends FieldOrMethod {
      *         handlers!
      */
     public ExceptionTable getExceptionTable() {
-        for (final Attribute attribute : super.getAttributes()) {
-            if (attribute instanceof ExceptionTable) {
-                return (ExceptionTable) attribute;
-            }
-        }
-        return null;
+        return (ExceptionTable) Arrays.stream(super.getAttributes()).filter(attribute -> attribute instanceof ExceptionTable).findFirst().orElse(null);
     }
 
     /**

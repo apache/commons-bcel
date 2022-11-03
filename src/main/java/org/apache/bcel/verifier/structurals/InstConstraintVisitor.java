@@ -37,6 +37,8 @@ import org.apache.bcel.verifier.VerifierFactory;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
+import java.util.stream.IntStream;
+
 /**
  * A Visitor class testing for valid preconditions of JVM instructions. The instance of this class will throw a
  * StructuralCodeConstraintException instance if an instruction is visitXXX()ed which has preconditions that are not
@@ -1701,9 +1703,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         // }
 
         int countedCount = 1; // 1 for the objectref
-        for (int i = 0; i < nargs; i++) {
-            countedCount += argtypes[i].getSize();
-        }
+        countedCount += IntStream.range(0, nargs).map(i -> argtypes[i].getSize()).sum();
         if (count != countedCount) {
             constraintViolated(o, "The 'count' argument should probably read '" + countedCount + "' but is '" + count + "'.");
         }

@@ -25,6 +25,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.generic.ClassGenException;
@@ -335,13 +336,8 @@ public class InstructionFinder {
      */
     public final Iterator<InstructionHandle[]> search(final String pattern, final InstructionHandle from, final CodeConstraint constraint) {
         final String search = compilePattern(pattern);
-        int start = -1;
-        for (int i = 0; i < handles.length; i++) {
-            if (handles[i] == from) {
-                start = i; // Where to start search from (index)
-                break;
-            }
-        }
+        int start = IntStream.range(0, handles.length).filter(i -> handles[i] == from).findFirst().orElse(-1);
+        // Where to start search from (index)
         if (start == -1) {
             throw new ClassGenException("Instruction handle " + from + " not found in instruction list.");
         }

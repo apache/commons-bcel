@@ -18,6 +18,7 @@ package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.bcel.util.ByteSequence;
 
@@ -115,12 +116,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
         if (super.getTarget() == ih) {
             return true;
         }
-        for (final InstructionHandle target2 : targets) {
-            if (target2 == ih) {
-                return true;
-            }
-        }
-        return false;
+        return Arrays.stream(targets).anyMatch(target2 -> target2 == ih);
     }
 
     /**

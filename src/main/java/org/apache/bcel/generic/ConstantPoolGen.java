@@ -19,6 +19,8 @@ package org.apache.bcel.generic;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Constant;
@@ -758,10 +760,7 @@ public class ConstantPoolGen {
      */
     @Override
     public String toString() {
-        final StringBuilder buf = new StringBuilder();
-        for (int i = 1; i < index; i++) {
-            buf.append(i).append(")").append(constants[i]).append("\n");
-        }
-        return buf.toString();
+        final String buf = IntStream.range(1, index).mapToObj(i -> i + ")" + constants[i] + "\n").collect(Collectors.joining());
+        return buf;
     }
 }

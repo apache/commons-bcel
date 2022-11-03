@@ -19,6 +19,7 @@ package org.apache.bcel.util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.BitSet;
 
 import org.apache.bcel.Const;
@@ -384,16 +385,12 @@ final class CodeHTML {
             }
             // Look for local variables and their range
             final Attribute[] attributes = code.getAttributes();
-            for (final Attribute attribute : attributes) {
-                if (attribute.getTag() == Const.ATTR_LOCAL_VARIABLE_TABLE) {
-                    ((LocalVariableTable) attribute).forEach(var -> {
-                        final int start = var.getStartPC();
-                        gotoSet.set(start);
-                        gotoSet.set(start + var.getLength());
-                    });
-                    break;
-                }
-            }
+            Arrays.stream(attributes).filter(attribute -> attribute.getTag() == Const.ATTR_LOCAL_VARIABLE_TABLE)
+                    .findFirst().ifPresent(attribute -> ((LocalVariableTable) attribute).forEach(var -> {
+                final int start = var.getStartPC();
+                gotoSet.set(start);
+                gotoSet.set(start + var.getLength());
+            }));
         }
         // Get target addresses from GOTO, JSR, TABLESWITCH, etc.
         while (bytes.available() > 0) {

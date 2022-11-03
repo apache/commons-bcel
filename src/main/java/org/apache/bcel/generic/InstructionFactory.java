@@ -18,6 +18,8 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Const;
 
+import java.util.Arrays;
+
 /**
  * Instances of this class may be used, e.g., to generate typed versions of instructions. Its main purpose is to be used
  * as the byte code generating backend of a compiler. You can subclass it to add your own create methods.
@@ -636,11 +638,9 @@ public class InstructionFactory implements InstructionConstants {
             throw new IllegalArgumentException("Unknown invoke kind: " + kind);
         }
         int index;
-        int nargs = 0;
+        int nargs;
         final String signature = Type.getMethodSignature(retType, argTypes);
-        for (final Type argType : argTypes) {
-            nargs += argType.getSize();
-        }
+        nargs = Arrays.stream(argTypes).mapToInt(Type::getSize).sum();
         if (useInterface) {
             index = cp.addInterfaceMethodref(className, name, signature);
         } else {

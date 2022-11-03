@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.IntStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -707,12 +708,7 @@ public abstract class Utility {
         if ((size = a.length) != b.length) {
             return false;
         }
-        for (int i = 0; i < size; i++) {
-            if (a[i] != b[i]) {
-                return false;
-            }
-        }
-        return true;
+        return IntStream.range(0, size).noneMatch(i -> a[i] != b[i]);
     }
 
     /**

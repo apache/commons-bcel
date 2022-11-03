@@ -136,15 +136,10 @@ public final class Pass3aVerifier extends PassVerifier {
          */
         private Method getMethod(final JavaClass jc, final InvokeInstruction invoke) {
             final Method[] ms = jc.getMethods();
-            for (final Method element : ms) {
-                if (element.getName().equals(invoke.getMethodName(constantPoolGen))
+            return Arrays.stream(ms).filter(element -> element.getName().equals(invoke.getMethodName(constantPoolGen))
                     && Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(constantPoolGen))
-                    && Arrays.equals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(constantPoolGen))) {
-                    return element;
-                }
-            }
+                    && Arrays.equals(Type.getArgumentTypes(element.getSignature()), invoke.getArgumentTypes(constantPoolGen))).findFirst().orElse(null);
 
-            return null;
         }
 
         /**
@@ -415,13 +410,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
                 final Field[] fields = jc.getFields();
-                Field f = null;
-                for (final Field field : fields) {
-                    if (field.getName().equals(fieldName)) {
-                        f = field;
-                        break;
-                    }
-                }
+                Field f = Arrays.stream(fields).filter(field -> field.getName().equals(fieldName)).findFirst().orElse(null);
                 if (f == null) {
                     throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
@@ -604,14 +593,9 @@ public final class Pass3aVerifier extends PassVerifier {
                         current = Repository.lookupClass(current.getSuperclassName());
 
                         final Method[] meths = current.getMethods();
-                        for (final Method meth2 : meths) {
-                            if (meth2.getName().equals(o.getMethodName(constantPoolGen))
+                        meth = Arrays.stream(meths).filter(meth2 -> meth2.getName().equals(o.getMethodName(constantPoolGen))
                                 && Type.getReturnType(meth2.getSignature()).equals(o.getReturnType(constantPoolGen))
-                                && Arrays.equals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))) {
-                                meth = meth2;
-                                break;
-                            }
-                        }
+                                && Arrays.equals(Type.getArgumentTypes(meth2.getSignature()), o.getArgumentTypes(constantPoolGen))).findFirst().orElse(meth);
                         if (meth != null) {
                             break;
                         }
@@ -858,13 +842,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
                 final Field[] fields = jc.getFields();
-                Field f = null;
-                for (final Field field : fields) {
-                    if (field.getName().equals(fieldName)) {
-                        f = field;
-                        break;
-                    }
-                }
+                Field f = Arrays.stream(fields).filter(field -> field.getName().equals(fieldName)).findFirst().orElse(null);
                 if (f == null) {
                     throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
@@ -916,12 +894,7 @@ public final class Pass3aVerifier extends PassVerifier {
 
     /** A small utility method returning if a given int i is in the given int[] ints. */
     private static boolean contains(final int[] ints, final int i) {
-        for (final int k : ints) {
-            if (k == i) {
-                return true;
-            }
-        }
-        return false;
+        return Arrays.stream(ints).anyMatch(k -> k == i);
     }
 
     /** The Verifier that created this. */

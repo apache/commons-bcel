@@ -251,24 +251,14 @@ public class ClassGen extends AccessFlags implements Cloneable {
      * @return field object with given name, or null
      */
     public Field containsField(final String name) {
-        for (final Field f : fieldList) {
-            if (f.getName().equals(name)) {
-                return f;
-            }
-        }
-        return null;
+        return fieldList.stream().filter(f -> f.getName().equals(name)).findFirst().orElse(null);
     }
 
     /**
      * @return method object with given name and signature, or null
      */
     public Method containsMethod(final String name, final String signature) {
-        for (final Method m : methodList) {
-            if (m.getName().equals(name) && m.getSignature().equals(signature)) {
-                return m;
-            }
-        }
-        return null;
+        return methodList.stream().filter(m -> m.getName().equals(name) && m.getSignature().equals(signature)).findFirst().orElse(null);
     }
 
     /**

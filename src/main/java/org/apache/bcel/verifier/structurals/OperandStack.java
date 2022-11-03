@@ -17,6 +17,7 @@
 package org.apache.bcel.verifier.structurals;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.ReferenceType;
@@ -232,10 +233,7 @@ public class OperandStack implements Cloneable {
          * XXX change this to a better implementation using a variable that keeps track of the actual slotsUsed()-value
          * monitoring all push()es and pop()s.
          */
-        int slots = 0;
-        for (int i = 0; i < stack.size(); i++) {
-            slots += peek(i).getSize();
-        }
+        int slots = IntStream.range(0, stack.size()).map(i -> peek(i).getSize()).sum();
         return slots;
     }
 
