@@ -103,7 +103,7 @@ public class UtilityTestCase {
         assertEquals("\\n", Utility.convertString("\n"));
         assertEquals("\\r", Utility.convertString("\r"));
         assertEquals("\\\"", Utility.convertString("\""));
-        assertEquals("\\\'", Utility.convertString("\'"));
+        assertEquals("\\'", Utility.convertString("'"));
         assertEquals("\\\\", Utility.convertString("\\"));
         assertEquals("abc", Utility.convertString("abc"));
     }
@@ -122,11 +122,11 @@ public class UtilityTestCase {
 
     @Test
     public void testSearchOpcode() {
-        assertEquals(Const.ALOAD,Utility.searchOpcode("aload"));
-        assertEquals(Const.NOP,Utility.searchOpcode("nop"));
-        assertEquals(Const.BREAKPOINT,Utility.searchOpcode("breakpoint"));
-        assertEquals(Const.IMPDEP2,Utility.searchOpcode("impdep2"));
-        assertEquals(Const.I2D,Utility.searchOpcode("I2D"), "case insensitive");
-        assertEquals(Const.UNDEFINED,Utility.searchOpcode("???"), "not found");
+        assertEquals(Const.ALOAD, Utility.searchOpcode("aload"));
+        assertEquals(Const.NOP, Utility.searchOpcode("nop"));
+        assertEquals(Const.BREAKPOINT, Utility.searchOpcode("breakpoint"));
+        assertEquals(Const.IMPDEP2, Utility.searchOpcode("impdep2"));
+        assertEquals(Const.I2D, Utility.searchOpcode("I2D"), "case insensitive");
+        assertEquals(Const.UNDEFINED, Utility.searchOpcode("???"), "not found");
     }
 }

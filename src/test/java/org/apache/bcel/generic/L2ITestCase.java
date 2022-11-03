@@ -27,11 +27,11 @@ public class L2ITestCase {
         final L2I l2i = new L2I();
         l2i.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitStackProducerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitConversionInstructionCount(1);
-        expected.setVisitL2ICount(1);
+        expected.setTypedInstruction(1);
+        expected.setStackProducer(1);
+        expected.setStackConsumer(1);
+        expected.setConversionInstruction(1);
+        expected.setL2I(1);
         assertEquals(expected, countVisitor);
     }
 }

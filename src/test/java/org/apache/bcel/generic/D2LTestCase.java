@@ -27,11 +27,11 @@ public class D2LTestCase {
         final D2L d2l = new D2L();
         d2l.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitStackProducerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitConversionInstructionCount(1);
-        expected.setVisitD2LCount(1);
+        expected.setTypedInstruction(1);
+        expected.setStackProducer(1);
+        expected.setStackConsumer(1);
+        expected.setConversionInstruction(1);
+        expected.setD2L(1);
         assertEquals(expected, countVisitor);
     }
 

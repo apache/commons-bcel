@@ -27,7 +27,7 @@ public class BREAKPOINTTestCase {
         final BREAKPOINT breakpoint = new BREAKPOINT();
         breakpoint.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitBREAKPOINTCount(1);
+        expected.setBREAKPOINT(1);
         assertEquals(expected, countVisitor);
     }
 }

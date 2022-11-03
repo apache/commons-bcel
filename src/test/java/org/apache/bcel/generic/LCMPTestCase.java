@@ -27,10 +27,10 @@ public class LCMPTestCase {
         final LCMP lcmp = new LCMP();
         lcmp.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitStackProducerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitLCMPCount(1);
+        expected.setTypedInstruction(1);
+        expected.setStackProducer(1);
+        expected.setStackConsumer(1);
+        expected.setLcmp(1);
         assertEquals(expected, countVisitor);
     }
 }

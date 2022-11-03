@@ -27,11 +27,11 @@ public class F2DTestCase {
         final F2D f2d = new F2D();
         f2d.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitStackProducerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitConversionInstructionCount(1);
-        expected.setVisitF2DCount(1);
+        expected.setTypedInstruction(1);
+        expected.setStackProducer(1);
+        expected.setStackConsumer(1);
+        expected.setConversionInstruction(1);
+        expected.setF2D(1);
         assertEquals(expected, countVisitor);
     }
 

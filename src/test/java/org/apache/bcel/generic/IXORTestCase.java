@@ -27,11 +27,11 @@ public class IXORTestCase {
         final IXOR ixor = new IXOR();
         ixor.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitStackProducerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitArithmeticInstructionCount(1);
-        expected.setVisitIXORCount(1);
+        expected.setTypedInstruction(1);
+        expected.setStackProducer(1);
+        expected.setStackConsumer(1);
+        expected.setArithmeticInstruction(1);
+        expected.setIxor(1);
         assertEquals(expected, countVisitor);
     }
 }

@@ -27,7 +27,7 @@ public class IMPDEP2TestCase {
         final IMPDEP2 impdep2 = new IMPDEP2();
         impdep2.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitIMPDEP2Count(1);
+        expected.setImpdep2(1);
         assertEquals(expected, countVisitor);
     }
 }

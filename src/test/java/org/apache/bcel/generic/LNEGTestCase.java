@@ -27,11 +27,11 @@ public class LNEGTestCase {
         final LNEG lneg = new LNEG();
         lneg.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitStackProducerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitArithmeticInstructionCount(1);
-        expected.setVisitLNEGCount(1);
+        expected.setTypedInstruction(1);
+        expected.setStackProducer(1);
+        expected.setStackConsumer(1);
+        expected.setArithmeticInstruction(1);
+        expected.setLneg(1);
         assertEquals(expected, countVisitor);
     }
 }

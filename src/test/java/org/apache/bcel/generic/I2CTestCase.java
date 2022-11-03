@@ -27,11 +27,11 @@ public class I2CTestCase {
         final I2C i2c = new I2C();
         i2c.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitStackProducerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitConversionInstructionCount(1);
-        expected.setVisitI2CCount(1);
+        expected.setTypedInstruction(1);
+        expected.setStackProducer(1);
+        expected.setStackConsumer(1);
+        expected.setConversionInstruction(1);
+        expected.setI2C(1);
         assertEquals(expected, countVisitor);
     }
 }

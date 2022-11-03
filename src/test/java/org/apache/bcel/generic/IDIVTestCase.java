@@ -27,12 +27,12 @@ public class IDIVTestCase {
         final IDIV idiv = new IDIV();
         idiv.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitExceptionThrowerCount(1);
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitStackProducerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitArithmeticInstructionCount(1);
-        expected.setVisitIDIVCount(1);
+        expected.setExceptionThrower(1);
+        expected.setTypedInstruction(1);
+        expected.setStackProducer(1);
+        expected.setStackConsumer(1);
+        expected.setArithmeticInstruction(1);
+        expected.setIdiv(1);
         assertEquals(expected, countVisitor);
     }
 

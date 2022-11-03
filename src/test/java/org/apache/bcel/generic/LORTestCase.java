@@ -27,11 +27,11 @@ public class LORTestCase {
         final LOR lor = new LOR();
         lor.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitStackProducerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitArithmeticInstructionCount(1);
-        expected.setVisitLORCount(1);
+        expected.setTypedInstruction(1);
+        expected.setStackProducer(1);
+        expected.setStackConsumer(1);
+        expected.setArithmeticInstruction(1);
+        expected.setLor(1);
         assertEquals(expected, countVisitor);
     }
 }

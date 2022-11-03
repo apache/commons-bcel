@@ -27,15 +27,15 @@ public class PUTFIELDTestCase {
         final PUTFIELD putfield = new PUTFIELD(0);
         putfield.accept(countVisitor);
         final CountVisitor expected = new CountVisitor();
-        expected.setVisitExceptionThrowerCount(1);
-        expected.setVisitStackConsumerCount(1);
-        expected.setVisitPopInstructionCount(1);
-        expected.setVisitTypedInstructionCount(1);
-        expected.setVisitLoadClassCount(1);
-        expected.setVisitCPInstructionCount(1);
-        expected.setVisitFieldOrMethodCount(1);
-        expected.setVisitFieldInstructionCount(1);
-        expected.setVisitPUTFIELDCount(1);
+        expected.setExceptionThrower(1);
+        expected.setStackConsumer(1);
+        expected.setPopInstruction(1);
+        expected.setTypedInstruction(1);
+        expected.setLoadClass(1);
+        expected.setCpInstruction(1);
+        expected.setFieldOrMethod(1);
+        expected.setFieldInstruction(1);
+        expected.setPutfield(1);
         assertEquals(expected, countVisitor);
     }
 }

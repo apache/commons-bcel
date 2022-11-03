@@ -19,2540 +19,2726 @@ package org.apache.bcel.generic;
 import java.util.Objects;
 
 public class CountVisitor implements Visitor {
+    private int aaload;
+    private int aastore;
+    private int aconst_null;
+    private int allocationInstruction;
+    private int aload;
+    private int anewarray;
+    private int areturn;
+    private int arithmeticInstruction;
+    private int arrayInstruction;
+    private int arraylength;
+    private int astore;
+    private int athrow;
+    private int baload;
+    private int bastore;
+    private int bipush;
+    private int branchInstruction;
+    private int BREAKPOINT;
+    private int caload;
+    private int castore;
+    private int checkcast;
+    private int constantPushInstruction;
+    private int conversionInstruction;
+    private int cpInstruction;
+    private int d2F;
+    private int d2I;
+    private int d2L;
+    private int dadd;
+    private int daload;
+    private int dastore;
+    private int dcmpg;
+    private int dcmpl;
+    private int dconst;
+    private int ddiv;
+    private int dload;
+    private int dmul;
+    private int dneg;
+    private int drem;
+    private int dreturn;
+    private int dstore;
+    private int dsub;
+    private int dup;
+    private int dup_x1;
+    private int dup_x2;
+    private int dup2;
+    private int dup2_x1;
+    private int dup2_x2;
+    private int exceptionThrower;
+    private int f2D;
+    private int f2I;
+    private int f2L;
+    private int fadd;
+    private int faload;
+    private int fastore;
+    private int fcmpg;
+    private int fcmpl;
+    private int fconst;
+    private int fdiv;
+    private int fieldInstruction;
+    private int fieldOrMethod;
+    private int fload;
+    private int fmul;
+    private int fneg;
+    private int frem;
+    private int freturn;
+    private int fstore;
+    private int fsub;
+    private int getfield;
+    private int getstatic;
+    private int goTo;
+    private int goTo_w;
+    private int gotoInstruction;
+    private int i2B;
+    private int i2C;
+    private int i2D;
+    private int i2F;
+    private int i2L;
+    private int i2S;
+    private int iadd;
+    private int iaload;
+    private int iand;
+    private int iastore;
+    private int iconst;
+    private int idiv;
+    private int if_acmpeq;
+    private int if_acmpne;
+    private int if_icmpeq;
+    private int if_icmpge;
+    private int if_icmpgt;
+    private int if_icmple;
+    private int if_icmplt;
+    private int if_icmpne;
+    private int ifeq;
+    private int ifge;
+    private int ifgt;
+    private int ifInstruction;
+    private int ifle;
+    private int iflt;
+    private int ifne;
+    private int ifnonnull;
+    private int ifnull;
+    private int iinc;
+    private int iload;
+    private int impdep1;
+    private int impdep2;
+    private int imul;
+    private int ineg;
+    private int instanceOf;
+    private int invokedynamic;
+    private int invokeInstruction;
+    private int invokeinterface;
+    private int invokespecial;
+    private int invokestatic;
+    private int invokevirtual;
+    private int ior;
+    private int irem;
+    private int ireturn;
+    private int ishl;
+    private int ishr;
+    private int istore;
+    private int isub;
+    private int iushr;
+    private int ixor;
+    private int jsr;
+    private int jsr_w;
+    private int jsrInstruction;
+    private int l2D;
+    private int l2F;
+    private int l2I;
+    private int ladd;
+    private int laload;
+    private int land;
+    private int lastore;
+    private int lcmp;
+    private int lconst;
+    private int ldc;
+    private int ldc2_w;
+    private int ldiv;
+    private int lload;
+    private int lmul;
+    private int lneg;
+    private int loadClass;
+    private int loadInstruction;
+    private int localVariableInstruction;
+    private int lookupswitch;
+    private int lor;
+    private int lrem;
+    private int lreturn;
+    private int lshl;
+    private int lshr;
+    private int lstore;
+    private int lsub;
+    private int lushr;
+    private int lxor;
+    private int monitorenter;
+    private int monitorexit;
+    private int multianewarray;
+    private int nEW;
+    private int newarray;
+    private int nop;
+    private int pop;
+    private int pop2;
+    private int popInstruction;
+    private int pushInstruction;
+    private int putfield;
+    private int putstatic;
+    private int ret;
+    private int rETURN;
+    private int returnInstruction;
+    private int saload;
+    private int sastore;
+    private int select;
+    private int sipush;
+    private int stackConsumer;
+    private int stackInstruction;
+    private int stackProducer;
+    private int storeInstruction;
+    private int swap;
+    private int tableswitch;
+    private int typedInstruction;
+    private int unconditionalBranch;
+    private int variableLengthInstruction;
+
+    @Override
+    public String toString() {
+        return "CountVisitor{" +
+                "aaload=" + aaload +
+                ", aastore=" + aastore +
+                ", aconst_null=" + aconst_null +
+                ", allocationInstruction=" + allocationInstruction +
+                ", aload=" + aload +
+                ", anewarray=" + anewarray +
+                ", areturn=" + areturn +
+                ", arithmeticInstruction=" + arithmeticInstruction +
+                ", arrayInstruction=" + arrayInstruction +
+                ", arraylength=" + arraylength +
+                ", astore=" + astore +
+                ", athrow=" + athrow +
+                ", baload=" + baload +
+                ", bastore=" + bastore +
+                ", bipush=" + bipush +
+                ", branchInstruction=" + branchInstruction +
+                ", BREAKPOINT=" + BREAKPOINT +
+                ", caload=" + caload +
+                ", castore=" + castore +
+                ", checkcast=" + checkcast +
+                ", constantPushInstruction=" + constantPushInstruction +
+                ", conversionInstruction=" + conversionInstruction +
+                ", cpInstruction=" + cpInstruction +
+                ", d2F=" + d2F +
+                ", d2I=" + d2I +
+                ", d2L=" + d2L +
+                ", dadd=" + dadd +
+                ", daload=" + daload +
+                ", dastore=" + dastore +
+                ", dcmpg=" + dcmpg +
+                ", dcmpl=" + dcmpl +
+                ", dconst=" + dconst +
+                ", ddiv=" + ddiv +
+                ", dload=" + dload +
+                ", dmul=" + dmul +
+                ", dneg=" + dneg +
+                ", drem=" + drem +
+                ", dreturn=" + dreturn +
+                ", dstore=" + dstore +
+                ", dsub=" + dsub +
+                ", dup=" + dup +
+                ", dup_x1=" + dup_x1 +
+                ", dup_x2=" + dup_x2 +
+                ", dup2=" + dup2 +
+                ", dup2_x1=" + dup2_x1 +
+                ", dup2_x2=" + dup2_x2 +
+                ", exceptionThrower=" + exceptionThrower +
+                ", f2D=" + f2D +
+                ", f2I=" + f2I +
+                ", f2L=" + f2L +
+                ", fadd=" + fadd +
+                ", faload=" + faload +
+                ", fastore=" + fastore +
+                ", fcmpg=" + fcmpg +
+                ", fcmpl=" + fcmpl +
+                ", fconst=" + fconst +
+                ", fdiv=" + fdiv +
+                ", fieldInstruction=" + fieldInstruction +
+                ", fieldOrMethod=" + fieldOrMethod +
+                ", fload=" + fload +
+                ", fmul=" + fmul +
+                ", fneg=" + fneg +
+                ", frem=" + frem +
+                ", freturn=" + freturn +
+                ", fstore=" + fstore +
+                ", fsub=" + fsub +
+                ", getfield=" + getfield +
+                ", getstatic=" + getstatic +
+                ", goTo=" + goTo +
+                ", goTo_w=" + goTo_w +
+                ", gotoInstruction=" + gotoInstruction +
+                ", i2B=" + i2B +
+                ", i2C=" + i2C +
+                ", i2D=" + i2D +
+                ", i2F=" + i2F +
+                ", i2L=" + i2L +
+                ", i2S=" + i2S +
+                ", iadd=" + iadd +
+                ", iaload=" + iaload +
+                ", iand=" + iand +
+                ", iastore=" + iastore +
+                ", iconst=" + iconst +
+                ", idiv=" + idiv +
+                ", if_acmpeq=" + if_acmpeq +
+                ", if_acmpne=" + if_acmpne +
+                ", if_icmpeq=" + if_icmpeq +
+                ", if_icmpge=" + if_icmpge +
+                ", if_icmpgt=" + if_icmpgt +
+                ", if_icmple=" + if_icmple +
+                ", if_icmplt=" + if_icmplt +
+                ", if_icmpne=" + if_icmpne +
+                ", ifeq=" + ifeq +
+                ", ifge=" + ifge +
+                ", ifgt=" + ifgt +
+                ", ifInstruction=" + ifInstruction +
+                ", ifle=" + ifle +
+                ", iflt=" + iflt +
+                ", ifne=" + ifne +
+                ", ifnonnull=" + ifnonnull +
+                ", ifnull=" + ifnull +
+                ", iinc=" + iinc +
+                ", iload=" + iload +
+                ", impdep1=" + impdep1 +
+                ", impdep2=" + impdep2 +
+                ", imul=" + imul +
+                ", ineg=" + ineg +
+                ", instanceOf=" + instanceOf +
+                ", invokedynamic=" + invokedynamic +
+                ", invokeInstruction=" + invokeInstruction +
+                ", invokeinterface=" + invokeinterface +
+                ", invokespecial=" + invokespecial +
+                ", invokestatic=" + invokestatic +
+                ", invokevirtual=" + invokevirtual +
+                ", ior=" + ior +
+                ", irem=" + irem +
+                ", ireturn=" + ireturn +
+                ", ishl=" + ishl +
+                ", ishr=" + ishr +
+                ", istore=" + istore +
+                ", isub=" + isub +
+                ", iushr=" + iushr +
+                ", ixor=" + ixor +
+                ", jsr=" + jsr +
+                ", jsr_w=" + jsr_w +
+                ", jsrInstruction=" + jsrInstruction +
+                ", l2D=" + l2D +
+                ", l2F=" + l2F +
+                ", l2I=" + l2I +
+                ", ladd=" + ladd +
+                ", laload=" + laload +
+                ", land=" + land +
+                ", lastore=" + lastore +
+                ", lcmp=" + lcmp +
+                ", lconst=" + lconst +
+                ", ldc=" + ldc +
+                ", ldc2_w=" + ldc2_w +
+                ", ldiv=" + ldiv +
+                ", lload=" + lload +
+                ", lmul=" + lmul +
+                ", lneg=" + lneg +
+                ", loadClass=" + loadClass +
+                ", loadInstruction=" + loadInstruction +
+                ", localVariableInstruction=" + localVariableInstruction +
+                ", lookupswitch=" + lookupswitch +
+                ", lor=" + lor +
+                ", lrem=" + lrem +
+                ", lreturn=" + lreturn +
+                ", lshl=" + lshl +
+                ", lshr=" + lshr +
+                ", lstore=" + lstore +
+                ", lsub=" + lsub +
+                ", lushr=" + lushr +
+                ", lxor=" + lxor +
+                ", monitorenter=" + monitorenter +
+                ", monitorexit=" + monitorexit +
+                ", multianewarray=" + multianewarray +
+                ", nEW=" + nEW +
+                ", newarray=" + newarray +
+                ", nop=" + nop +
+                ", pop=" + pop +
+                ", pop2=" + pop2 +
+                ", popInstruction=" + popInstruction +
+                ", pushInstruction=" + pushInstruction +
+                ", putfield=" + putfield +
+                ", putstatic=" + putstatic +
+                ", ret=" + ret +
+                ", rETURN=" + rETURN +
+                ", returnInstruction=" + returnInstruction +
+                ", saload=" + saload +
+                ", sastore=" + sastore +
+                ", select=" + select +
+                ", sipush=" + sipush +
+                ", stackConsumer=" + stackConsumer +
+                ", stackInstruction=" + stackInstruction +
+                ", stackProducer=" + stackProducer +
+                ", storeInstruction=" + storeInstruction +
+                ", swap=" + swap +
+                ", tableswitch=" + tableswitch +
+                ", typedInstruction=" + typedInstruction +
+                ", unconditionalBranch=" + unconditionalBranch +
+                ", variableLengthInstruction=" + variableLengthInstruction +
+                '}';
+    }
+
+    public int getAaload() {
+        return aaload;
+    }
+
+    public void setAaload(int aaload) {
+        this.aaload = aaload;
+    }
+
+    public int getAastore() {
+        return aastore;
+    }
+
+    public void setAastore(int aastore) {
+        this.aastore = aastore;
+    }
+
+    public int getAconst_null() {
+        return aconst_null;
+    }
+
+    public void setAconst_null(int aconst_null) {
+        this.aconst_null = aconst_null;
+    }
+
+    public int getAllocationInstruction() {
+        return allocationInstruction;
+    }
+
+    public void setAllocationInstruction(int allocationInstruction) {
+        this.allocationInstruction = allocationInstruction;
+    }
+
+    public int getAload() {
+        return aload;
+    }
+
+    public void setAload(int aload) {
+        this.aload = aload;
+    }
+
+    public int getAnewarray() {
+        return anewarray;
+    }
+
+    public void setAnewarray(int anewarray) {
+        this.anewarray = anewarray;
+    }
+
+    public int getAreturn() {
+        return areturn;
+    }
+
+    public void setAreturn(int areturn) {
+        this.areturn = areturn;
+    }
+
+    public int getArithmeticInstruction() {
+        return arithmeticInstruction;
+    }
+
+    public void setArithmeticInstruction(int arithmeticInstruction) {
+        this.arithmeticInstruction = arithmeticInstruction;
+    }
+
+    public int getArrayInstruction() {
+        return arrayInstruction;
+    }
+
+    public void setArrayInstruction(int arrayInstruction) {
+        this.arrayInstruction = arrayInstruction;
+    }
+
+    public int getArraylength() {
+        return arraylength;
+    }
+
+    public void setArraylength(int arraylength) {
+        this.arraylength = arraylength;
+    }
+
+    public int getAstore() {
+        return astore;
+    }
+
+    public void setAstore(int astore) {
+        this.astore = astore;
+    }
+
+    public int getAthrow() {
+        return athrow;
+    }
+
+    public void setAthrow(int athrow) {
+        this.athrow = athrow;
+    }
+
+    public int getBaload() {
+        return baload;
+    }
+
+    public void setBaload(int baload) {
+        this.baload = baload;
+    }
+
+    public int getBastore() {
+        return bastore;
+    }
+
+    public void setBastore(int bastore) {
+        this.bastore = bastore;
+    }
+
+    public int getBipush() {
+        return bipush;
+    }
+
+    public void setBipush(int bipush) {
+        this.bipush = bipush;
+    }
+
+    public int getBranchInstruction() {
+        return branchInstruction;
+    }
+
+    public void setBranchInstruction(int branchInstruction) {
+        this.branchInstruction = branchInstruction;
+    }
+
+    public int getBREAKPOINT() {
+        return BREAKPOINT;
+    }
+
+    public void setBREAKPOINT(int BREAKPOINT) {
+        this.BREAKPOINT = BREAKPOINT;
+    }
+
+    public int getCaload() {
+        return caload;
+    }
+
+    public void setCaload(int caload) {
+        this.caload = caload;
+    }
+
+    public int getCastore() {
+        return castore;
+    }
+
+    public void setCastore(int castore) {
+        this.castore = castore;
+    }
+
+    public int getCheckcast() {
+        return checkcast;
+    }
+
+    public void setCheckcast(int checkcast) {
+        this.checkcast = checkcast;
+    }
 
-    private int visitAALOADCount;
-    private int visitAASTORECount;
-    private int visitACONST_NULLCount;
-    private int visitAllocationInstructionCount;
-    private int visitALOADCount;
-    private int visitANEWARRAYCount;
-    private int visitARETURNCount;
-    private int visitArithmeticInstructionCount;
-    private int visitArrayInstructionCount;
-    private int visitARRAYLENGTHCount;
-    private int visitASTORECount;
-    private int visitATHROWCount;
-    private int visitBALOADCount;
-    private int visitBASTORECount;
-    private int visitBIPUSHCount;
-    private int visitBranchInstructionCount;
-    private int visitBREAKPOINTCount;
-    private int visitCALOADCount;
-    private int visitCASTORECount;
-    private int visitCHECKCASTCount;
-    private int visitConstantPushInstructionCount;
-    private int visitConversionInstructionCount;
-    private int visitCPInstructionCount;
-    private int visitD2FCount;
-    private int visitD2ICount;
-    private int visitD2LCount;
-    private int visitDADDCount;
-    private int visitDALOADCount;
-    private int visitDASTORECount;
-    private int visitDCMPGCount;
-    private int visitDCMPLCount;
-    private int visitDCONSTCount;
-    private int visitDDIVCount;
-    private int visitDLOADCount;
-    private int visitDMULCount;
-    private int visitDNEGCount;
-    private int visitDREMCount;
-    private int visitDRETURNCount;
-    private int visitDSTORECount;
-    private int visitDSUBCount;
-    private int visitDUPCount;
-    private int visitDUP_X1Count;
-    private int visitDUP_X2Count;
-    private int visitDUP2Count;
-    private int visitDUP2_X1Count;
-    private int visitDUP2_X2Count;
-    private int visitExceptionThrowerCount;
-    private int visitF2DCount;
-    private int visitF2ICount;
-    private int visitF2LCount;
-    private int visitFADDCount;
-    private int visitFALOADCount;
-    private int visitFASTORECount;
-    private int visitFCMPGCount;
-    private int visitFCMPLCount;
-    private int visitFCONSTCount;
-    private int visitFDIVCount;
-    private int visitFieldInstructionCount;
-    private int visitFieldOrMethodCount;
-    private int visitFLOADCount;
-    private int visitFMULCount;
-    private int visitFNEGCount;
-    private int visitFREMCount;
-    private int visitFRETURNCount;
-    private int visitFSTORECount;
-    private int visitFSUBCount;
-    private int visitGETFIELDCount;
-    private int visitGETSTATICCount;
-    private int visitGOTOCount;
-    private int visitGOTO_WCount;
-    private int visitGotoInstructionCount;
-    private int visitI2BCount;
-    private int visitI2CCount;
-    private int visitI2DCount;
-    private int visitI2FCount;
-    private int visitI2LCount;
-    private int visitI2SCount;
-    private int visitIADDCount;
-    private int visitIALOADCount;
-    private int visitIANDCount;
-    private int visitIASTORECount;
-    private int visitICONSTCount;
-    private int visitIDIVCount;
-    private int visitIF_ACMPEQCount;
-    private int visitIF_ACMPNECount;
-    private int visitIF_ICMPEQCount;
-    private int visitIF_ICMPGECount;
-    private int visitIF_ICMPGTCount;
-    private int visitIF_ICMPLECount;
-    private int visitIF_ICMPLTCount;
-    private int visitIF_ICMPNECount;
-    private int visitIFEQCount;
-    private int visitIFGECount;
-    private int visitIFGTCount;
-    private int visitIfInstructionCount;
-    private int visitIFLECount;
-    private int visitIFLTCount;
-    private int visitIFNECount;
-    private int visitIFNONNULLCount;
-    private int visitIFNULLCount;
-    private int visitIINCCount;
-    private int visitILOADCount;
-    private int visitIMPDEP1Count;
-    private int visitIMPDEP2Count;
-    private int visitIMULCount;
-    private int visitINEGCount;
-    private int visitINSTANCEOFCount;
-    private int visitINVOKEDYNAMICCount;
-    private int visitInvokeInstructionCount;
-    private int visitINVOKEINTERFACECount;
-    private int visitINVOKESPECIALCount;
-    private int visitINVOKESTATICCount;
-    private int visitINVOKEVIRTUALCount;
-    private int visitIORCount;
-    private int visitIREMCount;
-    private int visitIRETURNCount;
-    private int visitISHLCount;
-    private int visitISHRCount;
-    private int visitISTORECount;
-    private int visitISUBCount;
-    private int visitIUSHRCount;
-    private int visitIXORCount;
-    private int visitJSRCount;
-    private int visitJSR_WCount;
-    private int visitJsrInstructionCount;
-    private int visitL2DCount;
-    private int visitL2FCount;
-    private int visitL2ICount;
-    private int visitLADDCount;
-    private int visitLALOADCount;
-    private int visitLANDCount;
-    private int visitLASTORECount;
-    private int visitLCMPCount;
-    private int visitLCONSTCount;
-    private int visitLDCCount;
-    private int visitLDC2_WCount;
-    private int visitLDIVCount;
-    private int visitLLOADCount;
-    private int visitLMULCount;
-    private int visitLNEGCount;
-    private int visitLoadClassCount;
-    private int visitLoadInstructionCount;
-    private int visitLocalVariableInstructionCount;
-    private int visitLOOKUPSWITCHCount;
-    private int visitLORCount;
-    private int visitLREMCount;
-    private int visitLRETURNCount;
-    private int visitLSHLCount;
-    private int visitLSHRCount;
-    private int visitLSTORECount;
-    private int visitLSUBCount;
-    private int visitLUSHRCount;
-    private int visitLXORCount;
-    private int visitMONITORENTERCount;
-    private int visitMONITOREXITCount;
-    private int visitMULTIANEWARRAYCount;
-    private int visitNEWCount;
-    private int visitNEWARRAYCount;
-    private int visitNOPCount;
-    private int visitPOPCount;
-    private int visitPOP2Count;
-    private int visitPopInstructionCount;
-    private int visitPushInstructionCount;
-    private int visitPUTFIELDCount;
-    private int visitPUTSTATICCount;
-    private int visitRETCount;
-    private int visitRETURNCount;
-    private int visitReturnInstructionCount;
-    private int visitSALOADCount;
-    private int visitSASTORECount;
-    private int visitSelectCount;
-    private int visitSIPUSHCount;
-    private int visitStackConsumerCount;
-    private int visitStackInstructionCount;
-    private int visitStackProducerCount;
-    private int visitStoreInstructionCount;
-    private int visitSWAPCount;
-    private int visitTABLESWITCHCount;
-    private int visitTypedInstructionCount;
-    private int visitUnconditionalBranchCount;
-    private int visitVariableLengthInstructionCount;
-
-    public int getVisitAALOADCount() {
-        return visitAALOADCount;
-    }
-
-    public void setVisitAALOADCount(int visitAALOADCount) {
-        this.visitAALOADCount = visitAALOADCount;
-    }
-
-    public int getVisitAASTORECount() {
-        return visitAASTORECount;
-    }
-
-    public void setVisitAASTORECount(int visitAASTORECount) {
-        this.visitAASTORECount = visitAASTORECount;
-    }
-
-    public int getVisitACONST_NULLCount() {
-        return visitACONST_NULLCount;
-    }
-
-    public void setVisitACONST_NULLCount(int visitACONST_NULLCount) {
-        this.visitACONST_NULLCount = visitACONST_NULLCount;
-    }
-
-    public int getVisitAllocationInstructionCount() {
-        return visitAllocationInstructionCount;
-    }
-
-    public void setVisitAllocationInstructionCount(int visitAllocationInstructionCount) {
-        this.visitAllocationInstructionCount = visitAllocationInstructionCount;
-    }
-
-    public int getVisitALOADCount() {
-        return visitALOADCount;
-    }
-
-    public void setVisitALOADCount(int visitALOADCount) {
-        this.visitALOADCount = visitALOADCount;
-    }
-
-    public int getVisitANEWARRAYCount() {
-        return visitANEWARRAYCount;
-    }
-
-    public void setVisitANEWARRAYCount(int visitANEWARRAYCount) {
-        this.visitANEWARRAYCount = visitANEWARRAYCount;
-    }
-
-    public int getVisitARETURNCount() {
-        return visitARETURNCount;
-    }
-
-    public void setVisitARETURNCount(int visitARETURNCount) {
-        this.visitARETURNCount = visitARETURNCount;
-    }
-
-    public int getVisitArithmeticInstructionCount() {
-        return visitArithmeticInstructionCount;
-    }
-
-    public void setVisitArithmeticInstructionCount(int visitArithmeticInstructionCount) {
-        this.visitArithmeticInstructionCount = visitArithmeticInstructionCount;
-    }
-
-    public int getVisitArrayInstructionCount() {
-        return visitArrayInstructionCount;
-    }
-
-    public void setVisitArrayInstructionCount(int visitArrayInstructionCount) {
-        this.visitArrayInstructionCount = visitArrayInstructionCount;
-    }
-
-    public int getVisitARRAYLENGTHCount() {
-        return visitARRAYLENGTHCount;
-    }
-
-    public void setVisitARRAYLENGTHCount(int visitARRAYLENGTHCount) {
-        this.visitARRAYLENGTHCount = visitARRAYLENGTHCount;
-    }
-
-    public int getVisitASTORECount() {
-        return visitASTORECount;
-    }
-
-    public void setVisitASTORECount(int visitASTORECount) {
-        this.visitASTORECount = visitASTORECount;
-    }
-
-    public int getVisitATHROWCount() {
-        return visitATHROWCount;
-    }
-
-    public void setVisitATHROWCount(int visitATHROWCount) {
-        this.visitATHROWCount = visitATHROWCount;
-    }
-
-    public int getVisitBALOADCount() {
-        return visitBALOADCount;
-    }
-
-    public void setVisitBALOADCount(int visitBALOADCount) {
-        this.visitBALOADCount = visitBALOADCount;
-    }
-
-    public int getVisitBASTORECount() {
-        return visitBASTORECount;
-    }
-
-    public void setVisitBASTORECount(int visitBASTORECount) {
-        this.visitBASTORECount = visitBASTORECount;
-    }
-
-    public int getVisitBIPUSHCount() {
-        return visitBIPUSHCount;
-    }
-
-    public void setVisitBIPUSHCount(int visitBIPUSHCount) {
-        this.visitBIPUSHCount = visitBIPUSHCount;
-    }
-
-    public int getVisitBranchInstructionCount() {
-        return visitBranchInstructionCount;
-    }
-
-    public void setVisitBranchInstructionCount(int visitBranchInstructionCount) {
-        this.visitBranchInstructionCount = visitBranchInstructionCount;
-    }
-
-    public int getVisitBREAKPOINTCount() {
-        return visitBREAKPOINTCount;
-    }
-
-    public void setVisitBREAKPOINTCount(int visitBREAKPOINTCount) {
-        this.visitBREAKPOINTCount = visitBREAKPOINTCount;
-    }
-
-    public int getVisitCALOADCount() {
-        return visitCALOADCount;
-    }
-
-    public void setVisitCALOADCount(int visitCALOADCount) {
-        this.visitCALOADCount = visitCALOADCount;
-    }
-
-    public int getVisitCASTORECount() {
-        return visitCASTORECount;
-    }
-
-    public void setVisitCASTORECount(int visitCASTORECount) {
-        this.visitCASTORECount = visitCASTORECount;
-    }
-
-    public int getVisitCHECKCASTCount() {
-        return visitCHECKCASTCount;
-    }
-
-    public void setVisitCHECKCASTCount(int visitCHECKCASTCount) {
-        this.visitCHECKCASTCount = visitCHECKCASTCount;
-    }
-
-    public int getVisitConstantPushInstructionCount() {
-        return visitConstantPushInstructionCount;
+    public int getConstantPushInstruction() {
+        return constantPushInstruction;
     }
 
-    public void setVisitConstantPushInstructionCount(int visitConstantPushInstructionCount) {
-        this.visitConstantPushInstructionCount = visitConstantPushInstructionCount;
+    public void setConstantPushInstruction(int constantPushInstruction) {
+        this.constantPushInstruction = constantPushInstruction;
     }
 
-    public int getVisitConversionInstructionCount() {
-        return visitConversionInstructionCount;
+    public int getConversionInstruction() {
+        return conversionInstruction;
     }
 
-    public void setVisitConversionInstructionCount(int visitConversionInstructionCount) {
-        this.visitConversionInstructionCount = visitConversionInstructionCount;
+    public void setConversionInstruction(int conversionInstruction) {
+        this.conversionInstruction = conversionInstruction;
     }
 
-    public int getVisitCPInstructionCount() {
-        return visitCPInstructionCount;
+    public int getCpInstruction() {
+        return cpInstruction;
     }
 
-    public void setVisitCPInstructionCount(int visitCPInstructionCount) {
-        this.visitCPInstructionCount = visitCPInstructionCount;
+    public void setCpInstruction(int cpInstruction) {
+        this.cpInstruction = cpInstruction;
     }
 
-    public int getVisitD2FCount() {
-        return visitD2FCount;
+    public int getD2F() {
+        return d2F;
     }
 
-    public void setVisitD2FCount(int visitD2FCount) {
-        this.visitD2FCount = visitD2FCount;
+    public void setD2F(int d2F) {
+        this.d2F = d2F;
     }
 
-    public int getVisitD2ICount() {
-        return visitD2ICount;
+    public int getD2I() {
+        return d2I;
     }
 
-    public void setVisitD2ICount(int visitD2ICount) {
-        this.visitD2ICount = visitD2ICount;
+    public void setD2I(int d2I) {
+        this.d2I = d2I;
     }
 
-    public int getVisitD2LCount() {
-        return visitD2LCount;
+    public int getD2L() {
+        return d2L;
     }
 
-    public void setVisitD2LCount(int visitD2LCount) {
-        this.visitD2LCount = visitD2LCount;
+    public void setD2L(int d2L) {
+        this.d2L = d2L;
     }
 
-    public int getVisitDADDCount() {
-        return visitDADDCount;
+    public int getDadd() {
+        return dadd;
     }
 
-    public void setVisitDADDCount(int visitDADDCount) {
-        this.visitDADDCount = visitDADDCount;
+    public void setDadd(int dadd) {
+        this.dadd = dadd;
     }
 
-    public int getVisitDALOADCount() {
-        return visitDALOADCount;
+    public int getDaload() {
+        return daload;
     }
 
-    public void setVisitDALOADCount(int visitDALOADCount) {
-        this.visitDALOADCount = visitDALOADCount;
+    public void setDaload(int daload) {
+        this.daload = daload;
     }
 
-    public int getVisitDASTORECount() {
-        return visitDASTORECount;
+    public int getDastore() {
+        return dastore;
     }
 
-    public void setVisitDASTORECount(int visitDASTORECount) {
-        this.visitDASTORECount = visitDASTORECount;
+    public void setDastore(int dastore) {
+        this.dastore = dastore;
     }
 
-    public int getVisitDCMPGCount() {
-        return visitDCMPGCount;
+    public int getDcmpg() {
+        return dcmpg;
     }
 
-    public void setVisitDCMPGCount(int visitDCMPGCount) {
-        this.visitDCMPGCount = visitDCMPGCount;
+    public void setDcmpg(int dcmpg) {
+        this.dcmpg = dcmpg;
     }
 
-    public int getVisitDCMPLCount() {
-        return visitDCMPLCount;
+    public int getDcmpl() {
+        return dcmpl;
     }
 
-    public void setVisitDCMPLCount(int visitDCMPLCount) {
-        this.visitDCMPLCount = visitDCMPLCount;
+    public void setDcmpl(int dcmpl) {
+        this.dcmpl = dcmpl;
     }
 
-    public int getVisitDCONSTCount() {
-        return visitDCONSTCount;
+    public int getDconst() {
+        return dconst;
     }
 
-    public void setVisitDCONSTCount(int visitDCONSTCount) {
-        this.visitDCONSTCount = visitDCONSTCount;
+    public void setDconst(int dconst) {
+        this.dconst = dconst;
     }
 
-    public int getVisitDDIVCount() {
-        return visitDDIVCount;
+    public int getDdiv() {
+        return ddiv;
     }
 
-    public void setVisitDDIVCount(int visitDDIVCount) {
-        this.visitDDIVCount = visitDDIVCount;
+    public void setDdiv(int ddiv) {
+        this.ddiv = ddiv;
     }
 
-    public int getVisitDLOADCount() {
-        return visitDLOADCount;
+    public int getDload() {
+        return dload;
     }
 
-    public void setVisitDLOADCount(int visitDLOADCount) {
-        this.visitDLOADCount = visitDLOADCount;
+    public void setDload(int dload) {
+        this.dload = dload;
     }
 
-    public int getVisitDMULCount() {
-        return visitDMULCount;
+    public int getDmul() {
+        return dmul;
     }
 
-    public void setVisitDMULCount(int visitDMULCount) {
-        this.visitDMULCount = visitDMULCount;
+    public void setDmul(int dmul) {
+        this.dmul = dmul;
     }
 
-    public int getVisitDNEGCount() {
-        return visitDNEGCount;
+    public int getDneg() {
+        return dneg;
     }
 
-    public void setVisitDNEGCount(int visitDNEGCount) {
-        this.visitDNEGCount = visitDNEGCount;
+    public void setDneg(int dneg) {
+        this.dneg = dneg;
     }
 
-    public int getVisitDREMCount() {
-        return visitDREMCount;
+    public int getDrem() {
+        return drem;
     }
 
-    public void setVisitDREMCount(int visitDREMCount) {
-        this.visitDREMCount = visitDREMCount;
+    public void setDrem(int drem) {
+        this.drem = drem;
     }
 
-    public int getVisitDRETURNCount() {
-        return visitDRETURNCount;
+    public int getDreturn() {
+        return dreturn;
     }
 
-    public void setVisitDRETURNCount(int visitDRETURNCount) {
-        this.visitDRETURNCount = visitDRETURNCount;
+    public void setDreturn(int dreturn) {
+        this.dreturn = dreturn;
     }
 
-    public int getVisitDSTORECount() {
-        return visitDSTORECount;
+    public int getDstore() {
+        return dstore;
     }
 
-    public void setVisitDSTORECount(int visitDSTORECount) {
-        this.visitDSTORECount = visitDSTORECount;
+    public void setDstore(int dstore) {
+        this.dstore = dstore;
     }
 
-    public int getVisitDSUBCount() {
-        return visitDSUBCount;
+    public int getDsub() {
+        return dsub;
     }
 
-    public void setVisitDSUBCount(int visitDSUBCount) {
-        this.visitDSUBCount = visitDSUBCount;
+    public void setDsub(int dsub) {
+        this.dsub = dsub;
     }
 
-    public int getVisitDUPCount() {
-        return visitDUPCount;
+    public int getDup() {
+        return dup;
     }
 
-    public void setVisitDUPCount(int visitDUPCount) {
-        this.visitDUPCount = visitDUPCount;
+    public void setDup(int dup) {
+        this.dup = dup;
     }
 
-    public int getVisitDUP_X1Count() {
-        return visitDUP_X1Count;
+    public int getDup_x1() {
+        return dup_x1;
     }
 
-    public void setVisitDUP_X1Count(int visitDUP_X1Count) {
-        this.visitDUP_X1Count = visitDUP_X1Count;
+    public void setDup_x1(int dup_x1) {
+        this.dup_x1 = dup_x1;
     }
 
-    public int getVisitDUP_X2Count() {
-        return visitDUP_X2Count;
+    public int getDup_x2() {
+        return dup_x2;
     }
 
-    public void setVisitDUP_X2Count(int visitDUP_X2Count) {
-        this.visitDUP_X2Count = visitDUP_X2Count;
+    public void setDup_x2(int dup_x2) {
+        this.dup_x2 = dup_x2;
     }
 
-    public int getVisitDUP2Count() {
-        return visitDUP2Count;
+    public int getDup2() {
+        return dup2;
     }
 
-    public void setVisitDUP2Count(int visitDUP2Count) {
-        this.visitDUP2Count = visitDUP2Count;
+    public void setDup2(int dup2) {
+        this.dup2 = dup2;
     }
 
-    public int getVisitDUP2_X1Count() {
-        return visitDUP2_X1Count;
+    public int getDup2_x1() {
+        return dup2_x1;
     }
 
-    public void setVisitDUP2_X1Count(int visitDUP2_X1Count) {
-        this.visitDUP2_X1Count = visitDUP2_X1Count;
+    public void setDup2_x1(int dup2_x1) {
+        this.dup2_x1 = dup2_x1;
     }
 
-    public int getVisitDUP2_X2Count() {
-        return visitDUP2_X2Count;
+    public int getDup2_x2() {
+        return dup2_x2;
     }
 
-    public void setVisitDUP2_X2Count(int visitDUP2_X2Count) {
-        this.visitDUP2_X2Count = visitDUP2_X2Count;
+    public void setDup2_x2(int dup2_x2) {
+        this.dup2_x2 = dup2_x2;
     }
 
-    public int getVisitExceptionThrowerCount() {
-        return visitExceptionThrowerCount;
+    public int getExceptionThrower() {
+        return exceptionThrower;
     }
 
-    public void setVisitExceptionThrowerCount(int visitExceptionThrowerCount) {
-        this.visitExceptionThrowerCount = visitExceptionThrowerCount;
+    public void setExceptionThrower(int exceptionThrower) {
+        this.exceptionThrower = exceptionThrower;
     }
 
-    public int getVisitF2DCount() {
-        return visitF2DCount;
+    public int getF2D() {
+        return f2D;
     }
 
-    public void setVisitF2DCount(int visitF2DCount) {
-        this.visitF2DCount = visitF2DCount;
+    public void setF2D(int f2D) {
+        this.f2D = f2D;
     }
 
-    public int getVisitF2ICount() {
-        return visitF2ICount;
+    public int getF2I() {
+        return f2I;
     }
 
-    public void setVisitF2ICount(int visitF2ICount) {
-        this.visitF2ICount = visitF2ICount;
+    public void setF2I(int f2I) {
+        this.f2I = f2I;
     }
 
-    public int getVisitF2LCount() {
-        return visitF2LCount;
+    public int getF2L() {
+        return f2L;
     }
 
-    public void setVisitF2LCount(int visitF2LCount) {
-        this.visitF2LCount = visitF2LCount;
+    public void setF2L(int f2L) {
+        this.f2L = f2L;
     }
 
-    public int getVisitFADDCount() {
-        return visitFADDCount;
+    public int getFadd() {
+        return fadd;
     }
 
-    public void setVisitFADDCount(int visitFADDCount) {
-        this.visitFADDCount = visitFADDCount;
+    public void setFadd(int fadd) {
+        this.fadd = fadd;
     }
 
-    public int getVisitFALOADCount() {
-        return visitFALOADCount;
+    public int getFaload() {
+        return faload;
     }
 
-    public void setVisitFALOADCount(int visitFALOADCount) {
-        this.visitFALOADCount = visitFALOADCount;
+    public void setFaload(int faload) {
+        this.faload = faload;
     }
 
-    public int getVisitFASTORECount() {
-        return visitFASTORECount;
+    public int getFastore() {
+        return fastore;
     }
 
-    public void setVisitFASTORECount(int visitFASTORECount) {
-        this.visitFASTORECount = visitFASTORECount;
+    public void setFastore(int fastore) {
+        this.fastore = fastore;
     }
 
-    public int getVisitFCMPGCount() {
-        return visitFCMPGCount;
+    public int getFcmpg() {
+        return fcmpg;
     }
 
-    public void setVisitFCMPGCount(int visitFCMPGCount) {
-        this.visitFCMPGCount = visitFCMPGCount;
+    public void setFcmpg(int fcmpg) {
+        this.fcmpg = fcmpg;
     }
 
-    public int getVisitFCMPLCount() {
-        return visitFCMPLCount;
+    public int getFcmpl() {
+        return fcmpl;
     }
 
-    public void setVisitFCMPLCount(int visitFCMPLCount) {
-        this.visitFCMPLCount = visitFCMPLCount;
+    public void setFcmpl(int fcmpl) {
+        this.fcmpl = fcmpl;
     }
 
-    public int getVisitFCONSTCount() {
-        return visitFCONSTCount;
+    public int getFconst() {
+        return fconst;
     }
 
-    public void setVisitFCONSTCount(int visitFCONSTCount) {
-        this.visitFCONSTCount = visitFCONSTCount;
+    public void setFconst(int fconst) {
+        this.fconst = fconst;
     }
 
-    public int getVisitFDIVCount() {
-        return visitFDIVCount;
+    public int getFdiv() {
+        return fdiv;
     }
 
-    public void setVisitFDIVCount(int visitFDIVCount) {
-        this.visitFDIVCount = visitFDIVCount;
+    public void setFdiv(int fdiv) {
+        this.fdiv = fdiv;
     }
 
-    public int getVisitFieldInstructionCount() {
-        return visitFieldInstructionCount;
+    public int getFieldInstruction() {
+        return fieldInstruction;
     }
 
-    public void setVisitFieldInstructionCount(int visitFieldInstructionCount) {
-        this.visitFieldInstructionCount = visitFieldInstructionCount;
+    public void setFieldInstruction(int fieldInstruction) {
+        this.fieldInstruction = fieldInstruction;
     }
 
-    public int getVisitFieldOrMethodCount() {
-        return visitFieldOrMethodCount;
+    public int getFieldOrMethod() {
+        return fieldOrMethod;
     }
 
-    public void setVisitFieldOrMethodCount(int visitFieldOrMethodCount) {
-        this.visitFieldOrMethodCount = visitFieldOrMethodCount;
+    public void setFieldOrMethod(int fieldOrMethod) {
+        this.fieldOrMethod = fieldOrMethod;
     }
 
-    public int getVisitFLOADCount() {
-        return visitFLOADCount;
+    public int getFload() {
+        return fload;
     }
 
-    public void setVisitFLOADCount(int visitFLOADCount) {
-        this.visitFLOADCount = visitFLOADCount;
+    public void setFload(int fload) {
+        this.fload = fload;
     }
 
-    public int getVisitFMULCount() {
-        return visitFMULCount;
+    public int getFmul() {
+        return fmul;
     }
 
-    public void setVisitFMULCount(int visitFMULCount) {
-        this.visitFMULCount = visitFMULCount;
+    public void setFmul(int fmul) {
+        this.fmul = fmul;
     }
 
-    public int getVisitFNEGCount() {
-        return visitFNEGCount;
+    public int getFneg() {
+        return fneg;
     }
 
-    public void setVisitFNEGCount(int visitFNEGCount) {
-        this.visitFNEGCount = visitFNEGCount;
+    public void setFneg(int fneg) {
+        this.fneg = fneg;
     }
 
-    public int getVisitFREMCount() {
-        return visitFREMCount;
+    public int getFrem() {
+        return frem;
     }
 
-    public void setVisitFREMCount(int visitFREMCount) {
-        this.visitFREMCount = visitFREMCount;
+    public void setFrem(int frem) {
+        this.frem = frem;
     }
 
-    public int getVisitFRETURNCount() {
-        return visitFRETURNCount;
+    public int getFreturn() {
+        return freturn;
     }
 
-    public void setVisitFRETURNCount(int visitFRETURNCount) {
-        this.visitFRETURNCount = visitFRETURNCount;
+    public void setFreturn(int freturn) {
+        this.freturn = freturn;
     }
 
-    public int getVisitFSTORECount() {
-        return visitFSTORECount;
+    public int getFstore() {
+        return fstore;
     }
 
-    public void setVisitFSTORECount(int visitFSTORECount) {
-        this.visitFSTORECount = visitFSTORECount;
+    public void setFstore(int fstore) {
+        this.fstore = fstore;
     }
 
-    public int getVisitFSUBCount() {
-        return visitFSUBCount;
+    public int getFsub() {
+        return fsub;
     }
 
-    public void setVisitFSUBCount(int visitFSUBCount) {
-        this.visitFSUBCount = visitFSUBCount;
+    public void setFsub(int fsub) {
+        this.fsub = fsub;
     }
 
-    public int getVisitGETFIELDCount() {
-        return visitGETFIELDCount;
+    public int getGetfield() {
+        return getfield;
     }
 
-    public void setVisitGETFIELDCount(int visitGETFIELDCount) {
-        this.visitGETFIELDCount = visitGETFIELDCount;
+    public void setGetfield(int getfield) {
+        this.getfield = getfield;
     }
 
-    public int getVisitGETSTATICCount() {
-        return visitGETSTATICCount;
+    public int getGetstatic() {
+        return getstatic;
     }
 
-    public void setVisitGETSTATICCount(int visitGETSTATICCount) {
-        this.visitGETSTATICCount = visitGETSTATICCount;
+    public void setGetstatic(int getstatic) {
+        this.getstatic = getstatic;
     }
 
-    public int getVisitGOTOCount() {
-        return visitGOTOCount;
+    public int getGoTo() {
+        return goTo;
     }
 
-    public void setVisitGOTOCount(int visitGOTOCount) {
-        this.visitGOTOCount = visitGOTOCount;
+    public void setGoTo(int goTo) {
+        this.goTo = goTo;
     }
 
-    public int getVisitGOTO_WCount() {
-        return visitGOTO_WCount;
+    public int getGoTo_w() {
+        return goTo_w;
     }
 
-    public void setVisitGOTO_WCount(int visitGOTO_WCount) {
-        this.visitGOTO_WCount = visitGOTO_WCount;
+    public void setGoTo_w(int goTo_w) {
+        this.goTo_w = goTo_w;
     }
 
-    public int getVisitGotoInstructionCount() {
-        return visitGotoInstructionCount;
+    public int getGotoInstruction() {
+        return gotoInstruction;
     }
 
-    public void setVisitGotoInstructionCount(int visitGotoInstructionCount) {
-        this.visitGotoInstructionCount = visitGotoInstructionCount;
+    public void setGotoInstruction(int gotoInstruction) {
+        this.gotoInstruction = gotoInstruction;
     }
 
-    public int getVisitI2BCount() {
-        return visitI2BCount;
+    public int getI2B() {
+        return i2B;
     }
 
-    public void setVisitI2BCount(int visitI2BCount) {
-        this.visitI2BCount = visitI2BCount;
+    public void setI2B(int i2B) {
+        this.i2B = i2B;
     }
 
-    public int getVisitI2CCount() {
-        return visitI2CCount;
+    public int getI2C() {
+        return i2C;
     }
 
-    public void setVisitI2CCount(int visitI2CCount) {
-        this.visitI2CCount = visitI2CCount;
+    public void setI2C(int i2C) {
+        this.i2C = i2C;
     }
 
-    public int getVisitI2DCount() {
-        return visitI2DCount;
+    public int getI2D() {
+        return i2D;
     }
 
-    public void setVisitI2DCount(int visitI2DCount) {
-        this.visitI2DCount = visitI2DCount;
+    public void setI2D(int i2D) {
+        this.i2D = i2D;
     }
 
-    public int getVisitI2FCount() {
-        return visitI2FCount;
+    public int getI2F() {
+        return i2F;
     }
 
-    public void setVisitI2FCount(int visitI2FCount) {
-        this.visitI2FCount = visitI2FCount;
+    public void setI2F(int i2F) {
+        this.i2F = i2F;
     }
 
-    public int getVisitI2LCount() {
-        return visitI2LCount;
+    public int getI2L() {
+        return i2L;
     }
 
-    public void setVisitI2LCount(int visitI2LCount) {
-        this.visitI2LCount = visitI2LCount;
+    public void setI2L(int i2L) {
+        this.i2L = i2L;
     }
 
-    public int getVisitI2SCount() {
-        return visitI2SCount;
+    public int getI2S() {
+        return i2S;
     }
 
-    public void setVisitI2SCount(int visitI2SCount) {
-        this.visitI2SCount = visitI2SCount;
+    public void setI2S(int i2S) {
+        this.i2S = i2S;
     }
 
-    public int getVisitIADDCount() {
-        return visitIADDCount;
+    public int getIadd() {
+        return iadd;
     }
 
-    public void setVisitIADDCount(int visitIADDCount) {
-        this.visitIADDCount = visitIADDCount;
+    public void setIadd(int iadd) {
+        this.iadd = iadd;
     }
 
-    public int getVisitIALOADCount() {
-        return visitIALOADCount;
+    public int getIaload() {
+        return iaload;
     }
 
-    public void setVisitIALOADCount(int visitIALOADCount) {
-        this.visitIALOADCount = visitIALOADCount;
+    public void setIaload(int iaload) {
+        this.iaload = iaload;
     }
 
-    public int getVisitIANDCount() {
-        return visitIANDCount;
+    public int getIand() {
+        return iand;
     }
 
-    public void setVisitIANDCount(int visitIANDCount) {
-        this.visitIANDCount = visitIANDCount;
+    public void setIand(int iand) {
+        this.iand = iand;
     }
 
-    public int getVisitIASTORECount() {
-        return visitIASTORECount;
+    public int getIastore() {
+        return iastore;
     }
 
-    public void setVisitIASTORECount(int visitIASTORECount) {
-        this.visitIASTORECount = visitIASTORECount;
+    public void setIastore(int iastore) {
+        this.iastore = iastore;
     }
 
-    public int getVisitICONSTCount() {
-        return visitICONSTCount;
+    public int getIconst() {
+        return iconst;
     }
 
-    public void setVisitICONSTCount(int visitICONSTCount) {
-        this.visitICONSTCount = visitICONSTCount;
+    public void setIconst(int iconst) {
+        this.iconst = iconst;
     }
 
-    public int getVisitIDIVCount() {
-        return visitIDIVCount;
+    public int getIdiv() {
+        return idiv;
     }
 
-    public void setVisitIDIVCount(int visitIDIVCount) {
-        this.visitIDIVCount = visitIDIVCount;
+    public void setIdiv(int idiv) {
+        this.idiv = idiv;
     }
 
-    public int getVisitIF_ACMPEQCount() {
-        return visitIF_ACMPEQCount;
+    public int getIf_acmpeq() {
+        return if_acmpeq;
     }
 
-    public void setVisitIF_ACMPEQCount(int visitIF_ACMPEQCount) {
-        this.visitIF_ACMPEQCount = visitIF_ACMPEQCount;
+    public void setIf_acmpeq(int if_acmpeq) {
+        this.if_acmpeq = if_acmpeq;
     }
 
-    public int getVisitIF_ACMPNECount() {
-        return visitIF_ACMPNECount;
+    public int getIf_acmpne() {
+        return if_acmpne;
     }
 
-    public void setVisitIF_ACMPNECount(int visitIF_ACMPNECount) {
-        this.visitIF_ACMPNECount = visitIF_ACMPNECount;
+    public void setIf_acmpne(int if_acmpne) {
+        this.if_acmpne = if_acmpne;
     }
 
-    public int getVisitIF_ICMPEQCount() {
-        return visitIF_ICMPEQCount;
+    public int getIf_icmpeq() {
+        return if_icmpeq;
     }
 
-    public void setVisitIF_ICMPEQCount(int visitIF_ICMPEQCount) {
-        this.visitIF_ICMPEQCount = visitIF_ICMPEQCount;
+    public void setIf_icmpeq(int if_icmpeq) {
+        this.if_icmpeq = if_icmpeq;
     }
 
-    public int getVisitIF_ICMPGECount() {
-        return visitIF_ICMPGECount;
+    public int getIf_icmpge() {
+        return if_icmpge;
     }
 
-    public void setVisitIF_ICMPGECount(int visitIF_ICMPGECount) {
-        this.visitIF_ICMPGECount = visitIF_ICMPGECount;
+    public void setIf_icmpge(int if_icmpge) {
+        this.if_icmpge = if_icmpge;
     }
 
-    public int getVisitIF_ICMPGTCount() {
-        return visitIF_ICMPGTCount;
+    public int getIf_icmpgt() {
+        return if_icmpgt;
     }
 
-    public void setVisitIF_ICMPGTCount(int visitIF_ICMPGTCount) {
-        this.visitIF_ICMPGTCount = visitIF_ICMPGTCount;
+    public void setIf_icmpgt(int if_icmpgt) {
+        this.if_icmpgt = if_icmpgt;
     }
 
-    public int getVisitIF_ICMPLECount() {
-        return visitIF_ICMPLECount;
+    public int getIf_icmple() {
+        return if_icmple;
     }
 
-    public void setVisitIF_ICMPLECount(int visitIF_ICMPLECount) {
-        this.visitIF_ICMPLECount = visitIF_ICMPLECount;
+    public void setIf_icmple(int if_icmple) {
+        this.if_icmple = if_icmple;
     }
 
-    public int getVisitIF_ICMPLTCount() {
-        return visitIF_ICMPLTCount;
+    public int getIf_icmplt() {
+        return if_icmplt;
     }
 
-    public void setVisitIF_ICMPLTCount(int visitIF_ICMPLTCount) {
-        this.visitIF_ICMPLTCount = visitIF_ICMPLTCount;
+    public void setIf_icmplt(int if_icmplt) {
+        this.if_icmplt = if_icmplt;
     }
 
-    public int getVisitIF_ICMPNECount() {
-        return visitIF_ICMPNECount;
+    public int getIf_icmpne() {
+        return if_icmpne;
     }
 
-    public void setVisitIF_ICMPNECount(int visitIF_ICMPNECount) {
-        this.visitIF_ICMPNECount = visitIF_ICMPNECount;
+    public void setIf_icmpne(int if_icmpne) {
+        this.if_icmpne = if_icmpne;
     }
 
-    public int getVisitIFEQCount() {
-        return visitIFEQCount;
+    public int getIfeq() {
+        return ifeq;
     }
 
-    public void setVisitIFEQCount(int visitIFEQCount) {
-        this.visitIFEQCount = visitIFEQCount;
+    public void setIfeq(int ifeq) {
+        this.ifeq = ifeq;
     }
 
-    public int getVisitIFGECount() {
-        return visitIFGECount;
+    public int getIfge() {
+        return ifge;
     }
 
-    public void setVisitIFGECount(int visitIFGECount) {
-        this.visitIFGECount = visitIFGECount;
+    public void setIfge(int ifge) {
+        this.ifge = ifge;
     }
 
-    public int getVisitIFGTCount() {
-        return visitIFGTCount;
+    public int getIfgt() {
+        return ifgt;
     }
 
-    public void setVisitIFGTCount(int visitIFGTCount) {
-        this.visitIFGTCount = visitIFGTCount;
+    public void setIfgt(int ifgt) {
+        this.ifgt = ifgt;
     }
 
-    public int getVisitIfInstructionCount() {
-        return visitIfInstructionCount;
+    public int getIfInstruction() {
+        return ifInstruction;
     }
 
-    public void setVisitIfInstructionCount(int visitIfInstructionCount) {
-        this.visitIfInstructionCount = visitIfInstructionCount;
+    public void setIfInstruction(int ifInstruction) {
+        this.ifInstruction = ifInstruction;
     }
 
-    public int getVisitIFLECount() {
-        return visitIFLECount;
+    public int getIfle() {
+        return ifle;
     }
 
-    public void setVisitIFLECount(int visitIFLECount) {
-        this.visitIFLECount = visitIFLECount;
+    public void setIfle(int ifle) {
+        this.ifle = ifle;
     }
 
-    public int getVisitIFLTCount() {
-        return visitIFLTCount;
+    public int getIflt() {
+        return iflt;
     }
 
-    public void setVisitIFLTCount(int visitIFLTCount) {
-        this.visitIFLTCount = visitIFLTCount;
+    public void setIflt(int iflt) {
+        this.iflt = iflt;
     }
 
-    public int getVisitIFNECount() {
-        return visitIFNECount;
+    public int getIfne() {
+        return ifne;
     }
 
-    public void setVisitIFNECount(int visitIFNECount) {
-        this.visitIFNECount = visitIFNECount;
+    public void setIfne(int ifne) {
+        this.ifne = ifne;
     }
 
-    public int getVisitIFNONNULLCount() {
-        return visitIFNONNULLCount;
+    public int getIfnonnull() {
+        return ifnonnull;
     }
 
-    public void setVisitIFNONNULLCount(int visitIFNONNULLCount) {
-        this.visitIFNONNULLCount = visitIFNONNULLCount;
+    public void setIfnonnull(int ifnonnull) {
+        this.ifnonnull = ifnonnull;
     }
 
-    public int getVisitIFNULLCount() {
-        return visitIFNULLCount;
+    public int getIfnull() {
+        return ifnull;
     }
 
-    public void setVisitIFNULLCount(int visitIFNULLCount) {
-        this.visitIFNULLCount = visitIFNULLCount;
+    public void setIfnull(int ifnull) {
+        this.ifnull = ifnull;
     }
 
-    public int getVisitIINCCount() {
-        return visitIINCCount;
+    public int getIinc() {
+        return iinc;
     }
 
-    public void setVisitIINCCount(int visitIINCCount) {
-        this.visitIINCCount = visitIINCCount;
+    public void setIinc(int iinc) {
+        this.iinc = iinc;
     }
 
-    public int getVisitILOADCount() {
-        return visitILOADCount;
+    public int getIload() {
+        return iload;
     }
 
-    public void setVisitILOADCount(int visitILOADCount) {
-        this.visitILOADCount = visitILOADCount;
+    public void setIload(int iload) {
+        this.iload = iload;
     }
 
-    public int getVisitIMPDEP1Count() {
-        return visitIMPDEP1Count;
+    public int getImpdep1() {
+        return impdep1;
     }
 
-    public void setVisitIMPDEP1Count(int visitIMPDEP1Count) {
-        this.visitIMPDEP1Count = visitIMPDEP1Count;
+    public void setImpdep1(int impdep1) {
+        this.impdep1 = impdep1;
     }
 
-    public int getVisitIMPDEP2Count() {
-        return visitIMPDEP2Count;
+    public int getImpdep2() {
+        return impdep2;
     }
 
-    public void setVisitIMPDEP2Count(int visitIMPDEP2Count) {
-        this.visitIMPDEP2Count = visitIMPDEP2Count;
+    public void setImpdep2(int impdep2) {
+        this.impdep2 = impdep2;
     }
 
-    public int getVisitIMULCount() {
-        return visitIMULCount;
+    public int getImul() {
+        return imul;
     }
 
-    public void setVisitIMULCount(int visitIMULCount) {
-        this.visitIMULCount = visitIMULCount;
+    public void setImul(int imul) {
+        this.imul = imul;
     }
 
-    public int getVisitINEGCount() {
-        return visitINEGCount;
+    public int getIneg() {
+        return ineg;
     }
 
-    public void setVisitINEGCount(int visitINEGCount) {
-        this.visitINEGCount = visitINEGCount;
+    public void setIneg(int ineg) {
+        this.ineg = ineg;
     }
 
-    public int getVisitINSTANCEOFCount() {
-        return visitINSTANCEOFCount;
+    public int getInstanceOf() {
+        return instanceOf;
     }
 
-    public void setVisitINSTANCEOFCount(int visitINSTANCEOFCount) {
-        this.visitINSTANCEOFCount = visitINSTANCEOFCount;
+    public void setInstanceOf(int instanceOf) {
+        this.instanceOf = instanceOf;
     }
 
-    public int getVisitINVOKEDYNAMICCount() {
-        return visitINVOKEDYNAMICCount;
+    public int getInvokedynamic() {
+        return invokedynamic;
     }
 
-    public void setVisitINVOKEDYNAMICCount(int visitINVOKEDYNAMICCount) {
-        this.visitINVOKEDYNAMICCount = visitINVOKEDYNAMICCount;
+    public void setInvokedynamic(int invokedynamic) {
+        this.invokedynamic = invokedynamic;
     }
 
-    public int getVisitInvokeInstructionCount() {
-        return visitInvokeInstructionCount;
+    public int getInvokeInstruction() {
+        return invokeInstruction;
     }
 
-    public void setVisitInvokeInstructionCount(int visitInvokeInstructionCount) {
-        this.visitInvokeInstructionCount = visitInvokeInstructionCount;
+    public void setInvokeInstruction(int invokeInstruction) {
+        this.invokeInstruction = invokeInstruction;
     }
 
-    public int getVisitINVOKEINTERFACECount() {
-        return visitINVOKEINTERFACECount;
+    public int getInvokeinterface() {
+        return invokeinterface;
     }
 
-    public void setVisitINVOKEINTERFACECount(int visitINVOKEINTERFACECount) {
-        this.visitINVOKEINTERFACECount = visitINVOKEINTERFACECount;
+    public void setInvokeinterface(int invokeinterface) {
+        this.invokeinterface = invokeinterface;
     }
 
-    public int getVisitINVOKESPECIALCount() {
-        return visitINVOKESPECIALCount;
+    public int getInvokespecial() {
+        return invokespecial;
     }
 
-    public void setVisitINVOKESPECIALCount(int visitINVOKESPECIALCount) {
-        this.visitINVOKESPECIALCount = visitINVOKESPECIALCount;
+    public void setInvokespecial(int invokespecial) {
+        this.invokespecial = invokespecial;
     }
 
-    public int getVisitINVOKESTATICCount() {
-        return visitINVOKESTATICCount;
+    public int getInvokestatic() {
+        return invokestatic;
     }
 
-    public void setVisitINVOKESTATICCount(int visitINVOKESTATICCount) {
-        this.visitINVOKESTATICCount = visitINVOKESTATICCount;
+    public void setInvokestatic(int invokestatic) {
+        this.invokestatic = invokestatic;
     }
 
-    public int getVisitINVOKEVIRTUALCount() {
-        return visitINVOKEVIRTUALCount;
+    public int getInvokevirtual() {
+        return invokevirtual;
     }
 
-    public void setVisitINVOKEVIRTUALCount(int visitINVOKEVIRTUALCount) {
-        this.visitINVOKEVIRTUALCount = visitINVOKEVIRTUALCount;
+    public void setInvokevirtual(int invokevirtual) {
+        this.invokevirtual = invokevirtual;
     }
 
-    public int getVisitIORCount() {
-        return visitIORCount;
+    public int getIor() {
+        return ior;
     }
 
-    public void setVisitIORCount(int visitIORCount) {
-        this.visitIORCount = visitIORCount;
+    public void setIor(int ior) {
+        this.ior = ior;
     }
 
-    public int getVisitIREMCount() {
-        return visitIREMCount;
+    public int getIrem() {
+        return irem;
     }
 
-    public void setVisitIREMCount(int visitIREMCount) {
-        this.visitIREMCount = visitIREMCount;
+    public void setIrem(int irem) {
+        this.irem = irem;
     }
 
-    public int getVisitIRETURNCount() {
-        return visitIRETURNCount;
+    public int getIreturn() {
+        return ireturn;
     }
 
-    public void setVisitIRETURNCount(int visitIRETURNCount) {
-        this.visitIRETURNCount = visitIRETURNCount;
+    public void setIreturn(int ireturn) {
+        this.ireturn = ireturn;
     }
 
-    public int getVisitISHLCount() {
-        return visitISHLCount;
+    public int getIshl() {
+        return ishl;
     }
 
-    public void setVisitISHLCount(int visitISHLCount) {
-        this.visitISHLCount = visitISHLCount;
+    public void setIshl(int ishl) {
+        this.ishl = ishl;
     }
 
-    public int getVisitISHRCount() {
-        return visitISHRCount;
+    public int getIshr() {
+        return ishr;
     }
 
-    public void setVisitISHRCount(int visitISHRCount) {
-        this.visitISHRCount = visitISHRCount;
+    public void setIshr(int ishr) {
+        this.ishr = ishr;
     }
 
-    public int getVisitISTORECount() {
-        return visitISTORECount;
+    public int getIstore() {
+        return istore;
     }
 
-    public void setVisitISTORECount(int visitISTORECount) {
-        this.visitISTORECount = visitISTORECount;
+    public void setIstore(int istore) {
+        this.istore = istore;
     }
 
-    public int getVisitISUBCount() {
-        return visitISUBCount;
+    public int getIsub() {
+        return isub;
     }
 
-    public void setVisitISUBCount(int visitISUBCount) {
-        this.visitISUBCount = visitISUBCount;
+    public void setIsub(int isub) {
+        this.isub = isub;
     }
 
-    public int getVisitIUSHRCount() {
-        return visitIUSHRCount;
+    public int getIushr() {
+        return iushr;
     }
 
-    public void setVisitIUSHRCount(int visitIUSHRCount) {
-        this.visitIUSHRCount = visitIUSHRCount;
+    public void setIushr(int iushr) {
+        this.iushr = iushr;
     }
 
-    public int getVisitIXORCount() {
-        return visitIXORCount;
+    public int getIxor() {
+        return ixor;
     }
 
-    public void setVisitIXORCount(int visitIXORCount) {
-        this.visitIXORCount = visitIXORCount;
+    public void setIxor(int ixor) {
+        this.ixor = ixor;
     }
 
-    public int getVisitJSRCount() {
-        return visitJSRCount;
+    public int getJsr() {
+        return jsr;
     }
 
-    public void setVisitJSRCount(int visitJSRCount) {
-        this.visitJSRCount = visitJSRCount;
+    public void setJsr(int jsr) {
+        this.jsr = jsr;
     }
 
-    public int getVisitJSR_WCount() {
-        return visitJSR_WCount;
+    public int getJsr_w() {
+        return jsr_w;
     }
 
-    public void setVisitJSR_WCount(int visitJSR_WCount) {
-        this.visitJSR_WCount = visitJSR_WCount;
+    public void setJsr_w(int jsr_w) {
+        this.jsr_w = jsr_w;
     }
 
-    public int getVisitJsrInstructionCount() {
-        return visitJsrInstructionCount;
+    public int getJsrInstruction() {
+        return jsrInstruction;
     }
 
-    public void setVisitJsrInstructionCount(int visitJsrInstructionCount) {
-        this.visitJsrInstructionCount = visitJsrInstructionCount;
+    public void setJsrInstruction(int jsrInstruction) {
+        this.jsrInstruction = jsrInstruction;
     }
 
-    public int getVisitL2DCount() {
-        return visitL2DCount;
+    public int getL2D() {
+        return l2D;
     }
 
-    public void setVisitL2DCount(int visitL2DCount) {
-        this.visitL2DCount = visitL2DCount;
+    public void setL2D(int l2D) {
+        this.l2D = l2D;
     }
 
-    public int getVisitL2FCount() {
-        return visitL2FCount;
+    public int getL2F() {
+        return l2F;
     }
 
-    public void setVisitL2FCount(int visitL2FCount) {
-        this.visitL2FCount = visitL2FCount;
+    public void setL2F(int l2F) {
+        this.l2F = l2F;
     }
 
-    public int getVisitL2ICount() {
-        return visitL2ICount;
+    public int getL2I() {
+        return l2I;
     }
 
-    public void setVisitL2ICount(int visitL2ICount) {
-        this.visitL2ICount = visitL2ICount;
+    public void setL2I(int l2I) {
+        this.l2I = l2I;
     }
 
-    public int getVisitLADDCount() {
-        return visitLADDCount;
+    public int getLadd() {
+        return ladd;
     }
 
-    public void setVisitLADDCount(int visitLADDCount) {
-        this.visitLADDCount = visitLADDCount;
+    public void setLadd(int ladd) {
+        this.ladd = ladd;
     }
 
-    public int getVisitLALOADCount() {
-        return visitLALOADCount;
+    public int getLaload() {
+        return laload;
     }
 
-    public void setVisitLALOADCount(int visitLALOADCount) {
-        this.visitLALOADCount = visitLALOADCount;
+    public void setLaload(int laload) {
+        this.laload = laload;
     }
 
-    public int getVisitLANDCount() {
-        return visitLANDCount;
+    public int getLand() {
+        return land;
     }
 
-    public void setVisitLANDCount(int visitLANDCount) {
-        this.visitLANDCount = visitLANDCount;
+    public void setLand(int land) {
+        this.land = land;
     }
 
-    public int getVisitLASTORECount() {
-        return visitLASTORECount;
+    public int getLastore() {
+        return lastore;
     }
 
-    public void setVisitLASTORECount(int visitLASTORECount) {
-        this.visitLASTORECount = visitLASTORECount;
+    public void setLastore(int lastore) {
+        this.lastore = lastore;
     }
 
-    public int getVisitLCMPCount() {
-        return visitLCMPCount;
+    public int getLcmp() {
+        return lcmp;
     }
 
-    public void setVisitLCMPCount(int visitLCMPCount) {
-        this.visitLCMPCount = visitLCMPCount;
+    public void setLcmp(int lcmp) {
+        this.lcmp = lcmp;
     }
 
-    public int getVisitLCONSTCount() {
-        return visitLCONSTCount;
+    public int getLconst() {
+        return lconst;
     }
 
-    public void setVisitLCONSTCount(int visitLCONSTCount) {
-        this.visitLCONSTCount = visitLCONSTCount;
+    public void setLconst(int lconst) {
+        this.lconst = lconst;
     }
 
-    public int getVisitLDCCount() {
-        return visitLDCCount;
+    public int getLdc() {
+        return ldc;
     }
 
-    public void setVisitLDCCount(int visitLDCCount) {
-        this.visitLDCCount = visitLDCCount;
+    public void setLdc(int ldc) {
+        this.ldc = ldc;
     }
 
-    public int getVisitLDC2_WCount() {
-        return visitLDC2_WCount;
+    public int getLdc2_w() {
+        return ldc2_w;
     }
 
-    public void setVisitLDC2_WCount(int visitLDC2_WCount) {
-        this.visitLDC2_WCount = visitLDC2_WCount;
+    public void setLdc2_w(int ldc2_w) {
+        this.ldc2_w = ldc2_w;
     }
 
-    public int getVisitLDIVCount() {
-        return visitLDIVCount;
+    public int getLdiv() {
+        return ldiv;
     }
 
-    public void setVisitLDIVCount(int visitLDIVCount) {
-        this.visitLDIVCount = visitLDIVCount;
+    public void setLdiv(int ldiv) {
+        this.ldiv = ldiv;
     }
 
-    public int getVisitLLOADCount() {
-        return visitLLOADCount;
+    public int getLload() {
+        return lload;
     }
 
-    public void setVisitLLOADCount(int visitLLOADCount) {
-        this.visitLLOADCount = visitLLOADCount;
+    public void setLload(int lload) {
+        this.lload = lload;
     }
 
-    public int getVisitLMULCount() {
-        return visitLMULCount;
+    public int getLmul() {
+        return lmul;
     }
 
-    public void setVisitLMULCount(int visitLMULCount) {
-        this.visitLMULCount = visitLMULCount;
+    public void setLmul(int lmul) {
+        this.lmul = lmul;
     }
 
-    public int getVisitLNEGCount() {
-        return visitLNEGCount;
+    public int getLneg() {
+        return lneg;
     }
 
-    public void setVisitLNEGCount(int visitLNEGCount) {
-        this.visitLNEGCount = visitLNEGCount;
+    public void setLneg(int lneg) {
+        this.lneg = lneg;
     }
 
-    public int getVisitLoadClassCount() {
-        return visitLoadClassCount;
+    public int getLoadClass() {
+        return loadClass;
     }
 
-    public void setVisitLoadClassCount(int visitLoadClassCount) {
-        this.visitLoadClassCount = visitLoadClassCount;
+    public void setLoadClass(int loadClass) {
+        this.loadClass = loadClass;
     }
 
-    public int getVisitLoadInstructionCount() {
-        return visitLoadInstructionCount;
+    public int getLoadInstruction() {
+        return loadInstruction;
     }
 
-    public void setVisitLoadInstructionCount(int visitLoadInstructionCount) {
-        this.visitLoadInstructionCount = visitLoadInstructionCount;
+    public void setLoadInstruction(int loadInstruction) {
+        this.loadInstruction = loadInstruction;
     }
 
-    public int getVisitLocalVariableInstructionCount() {
-        return visitLocalVariableInstructionCount;
+    public int getLocalVariableInstruction() {
+        return localVariableInstruction;
     }
 
-    public void setVisitLocalVariableInstructionCount(int visitLocalVariableInstructionCount) {
-        this.visitLocalVariableInstructionCount = visitLocalVariableInstructionCount;
+    public void setLocalVariableInstruction(int localVariableInstruction) {
+        this.localVariableInstruction = localVariableInstruction;
     }
 
-    public int getVisitLOOKUPSWITCHCount() {
-        return visitLOOKUPSWITCHCount;
+    public int getLookupswitch() {
+        return lookupswitch;
     }
 
-    public void setVisitLOOKUPSWITCHCount(int visitLOOKUPSWITCHCount) {
-        this.visitLOOKUPSWITCHCount = visitLOOKUPSWITCHCount;
+    public void setLookupswitch(int lookupswitch) {
+        this.lookupswitch = lookupswitch;
     }
 
-    public int getVisitLORCount() {
-        return visitLORCount;
+    public int getLor() {
+        return lor;
     }
 
-    public void setVisitLORCount(int visitLORCount) {
-        this.visitLORCount = visitLORCount;
+    public void setLor(int lor) {
+        this.lor = lor;
     }
 
-    public int getVisitLREMCount() {
-        return visitLREMCount;
+    public int getLrem() {
+        return lrem;
     }
 
-    public void setVisitLREMCount(int visitLREMCount) {
-        this.visitLREMCount = visitLREMCount;
+    public void setLrem(int lrem) {
+        this.lrem = lrem;
     }
 
-    public int getVisitLRETURNCount() {
-        return visitLRETURNCount;
+    public int getLreturn() {
+        return lreturn;
     }
 
-    public void setVisitLRETURNCount(int visitLRETURNCount) {
-        this.visitLRETURNCount = visitLRETURNCount;
+    public void setLreturn(int lreturn) {
+        this.lreturn = lreturn;
     }
 
-    public int getVisitLSHLCount() {
-        return visitLSHLCount;
+    public int getLshl() {
+        return lshl;
     }
 
-    public void setVisitLSHLCount(int visitLSHLCount) {
-        this.visitLSHLCount = visitLSHLCount;
+    public void setLshl(int lshl) {
+        this.lshl = lshl;
     }
 
-    public int getVisitLSHRCount() {
-        return visitLSHRCount;
+    public int getLshr() {
+        return lshr;
     }
 
-    public void setVisitLSHRCount(int visitLSHRCount) {
-        this.visitLSHRCount = visitLSHRCount;
+    public void setLshr(int lshr) {
+        this.lshr = lshr;
     }
 
-    public int getVisitLSTORECount() {
-        return visitLSTORECount;
+    public int getLstore() {
+        return lstore;
     }
 
-    public void setVisitLSTORECount(int visitLSTORECount) {
-        this.visitLSTORECount = visitLSTORECount;
+    public void setLstore(int lstore) {
+        this.lstore = lstore;
     }
 
-    public int getVisitLSUBCount() {
-        return visitLSUBCount;
+    public int getLsub() {
+        return lsub;
     }
 
-    public void setVisitLSUBCount(int visitLSUBCount) {
-        this.visitLSUBCount = visitLSUBCount;
+    public void setLsub(int lsub) {
+        this.lsub = lsub;
     }
 
-    public int getVisitLUSHRCount() {
-        return visitLUSHRCount;
+    public int getLushr() {
+        return lushr;
     }
 
-    public void setVisitLUSHRCount(int visitLUSHRCount) {
-        this.visitLUSHRCount = visitLUSHRCount;
+    public void setLushr(int lushr) {
+        this.lushr = lushr;
     }
 
-    public int getVisitLXORCount() {
-        return visitLXORCount;
+    public int getLxor() {
+        return lxor;
     }
 
-    public void setVisitLXORCount(int visitLXORCount) {
-        this.visitLXORCount = visitLXORCount;
+    public void setLxor(int lxor) {
+        this.lxor = lxor;
     }
 
-    public int getVisitMONITORENTERCount() {
-        return visitMONITORENTERCount;
+    public int getMonitorenter() {
+        return monitorenter;
     }
 
-    public void setVisitMONITORENTERCount(int visitMONITORENTERCount) {
-        this.visitMONITORENTERCount = visitMONITORENTERCount;
+    public void setMonitorenter(int monitorenter) {
+        this.monitorenter = monitorenter;
     }
 
-    public int getVisitMONITOREXITCount() {
-        return visitMONITOREXITCount;
+    public int getMonitorexit() {
+        return monitorexit;
     }
 
-    public void setVisitMONITOREXITCount(int visitMONITOREXITCount) {
-        this.visitMONITOREXITCount = visitMONITOREXITCount;
+    public void setMonitorexit(int monitorexit) {
+        this.monitorexit = monitorexit;
     }
 
-    public int getVisitMULTIANEWARRAYCount() {
-        return visitMULTIANEWARRAYCount;
+    public int getMultianewarray() {
+        return multianewarray;
     }
 
-    public void setVisitMULTIANEWARRAYCount(int visitMULTIANEWARRAYCount) {
-        this.visitMULTIANEWARRAYCount = visitMULTIANEWARRAYCount;
+    public void setMultianewarray(int multianewarray) {
+        this.multianewarray = multianewarray;
     }
 
-    public int getVisitNEWCount() {
-        return visitNEWCount;
+    public int getnEW() {
+        return nEW;
     }
 
-    public void setVisitNEWCount(int visitNEWCount) {
-        this.visitNEWCount = visitNEWCount;
+    public void setnEW(int nEW) {
+        this.nEW = nEW;
     }
 
-    public int getVisitNEWARRAYCount() {
-        return visitNEWARRAYCount;
+    public int getNewarray() {
+        return newarray;
     }
 
-    public void setVisitNEWARRAYCount(int visitNEWARRAYCount) {
-        this.visitNEWARRAYCount = visitNEWARRAYCount;
+    public void setNewarray(int newarray) {
+        this.newarray = newarray;
     }
 
-    public int getVisitNOPCount() {
-        return visitNOPCount;
+    public int getNop() {
+        return nop;
     }
 
-    public void setVisitNOPCount(int visitNOPCount) {
-        this.visitNOPCount = visitNOPCount;
+    public void setNop(int nop) {
+        this.nop = nop;
     }
 
-    public int getVisitPOPCount() {
-        return visitPOPCount;
+    public int getPop() {
+        return pop;
     }
 
-    public void setVisitPOPCount(int visitPOPCount) {
-        this.visitPOPCount = visitPOPCount;
+    public void setPop(int pop) {
+        this.pop = pop;
     }
 
-    public int getVisitPOP2Count() {
-        return visitPOP2Count;
+    public int getPop2() {
+        return pop2;
     }
 
-    public void setVisitPOP2Count(int visitPOP2Count) {
-        this.visitPOP2Count = visitPOP2Count;
+    public void setPop2(int pop2) {
+        this.pop2 = pop2;
     }
 
-    public int getVisitPopInstructionCount() {
-        return visitPopInstructionCount;
+    public int getPopInstruction() {
+        return popInstruction;
     }
 
-    public void setVisitPopInstructionCount(int visitPopInstructionCount) {
-        this.visitPopInstructionCount = visitPopInstructionCount;
+    public void setPopInstruction(int popInstruction) {
+        this.popInstruction = popInstruction;
     }
 
-    public int getVisitPushInstructionCount() {
-        return visitPushInstructionCount;
+    public int getPushInstruction() {
+        return pushInstruction;
     }
 
-    public void setVisitPushInstructionCount(int visitPushInstructionCount) {
-        this.visitPushInstructionCount = visitPushInstructionCount;
+    public void setPushInstruction(int pushInstruction) {
+        this.pushInstruction = pushInstruction;
     }
 
-    public int getVisitPUTFIELDCount() {
-        return visitPUTFIELDCount;
+    public int getPutfield() {
+        return putfield;
     }
 
-    public void setVisitPUTFIELDCount(int visitPUTFIELDCount) {
-        this.visitPUTFIELDCount = visitPUTFIELDCount;
+    public void setPutfield(int putfield) {
+        this.putfield = putfield;
     }
 
-    public int getVisitPUTSTATICCount() {
-        return visitPUTSTATICCount;
+    public int getPutstatic() {
+        return putstatic;
     }
 
-    public void setVisitPUTSTATICCount(int visitPUTSTATICCount) {
-        this.visitPUTSTATICCount = visitPUTSTATICCount;
+    public void setPutstatic(int putstatic) {
+        this.putstatic = putstatic;
     }
 
-    public int getVisitRETCount() {
-        return visitRETCount;
+    public int getRet() {
+        return ret;
     }
 
-    public void setVisitRETCount(int visitRETCount) {
-        this.visitRETCount = visitRETCount;
+    public void setRet(int ret) {
+        this.ret = ret;
     }
 
-    public int getVisitRETURNCount() {
-        return visitRETURNCount;
+    public int getrETURN() {
+        return rETURN;
     }
 
-    public void setVisitRETURNCount(int visitRETURNCount) {
-        this.visitRETURNCount = visitRETURNCount;
+    public void setrETURN(int rETURN) {
+        this.rETURN = rETURN;
     }
 
-    public int getVisitReturnInstructionCount() {
-        return visitReturnInstructionCount;
+    public int getReturnInstruction() {
+        return returnInstruction;
     }
 
-    public void setVisitReturnInstructionCount(int visitReturnInstructionCount) {
-        this.visitReturnInstructionCount = visitReturnInstructionCount;
+    public void setReturnInstruction(int returnInstruction) {
+        this.returnInstruction = returnInstruction;
     }
 
-    public int getVisitSALOADCount() {
-        return visitSALOADCount;
+    public int getSaload() {
+        return saload;
     }
 
-    public void setVisitSALOADCount(int visitSALOADCount) {
-        this.visitSALOADCount = visitSALOADCount;
+    public void setSaload(int saload) {
+        this.saload = saload;
     }
 
-    public int getVisitSASTORECount() {
-        return visitSASTORECount;
+    public int getSastore() {
+        return sastore;
     }
 
-    public void setVisitSASTORECount(int visitSASTORECount) {
-        this.visitSASTORECount = visitSASTORECount;
+    public void setSastore(int sastore) {
+        this.sastore = sastore;
     }
 
-    public int getVisitSelectCount() {
-        return visitSelectCount;
+    public int getSelect() {
+        return select;
     }
 
-    public void setVisitSelectCount(int visitSelectCount) {
-        this.visitSelectCount = visitSelectCount;
+    public void setSelect(int select) {
+        this.select = select;
     }
 
-    public int getVisitSIPUSHCount() {
-        return visitSIPUSHCount;
+    public int getSipush() {
+        return sipush;
     }
 
-    public void setVisitSIPUSHCount(int visitSIPUSHCount) {
-        this.visitSIPUSHCount = visitSIPUSHCount;
+    public void setSipush(int sipush) {
+        this.sipush = sipush;
     }
 
-    public int getVisitStackConsumerCount() {
-        return visitStackConsumerCount;
+    public int getStackConsumer() {
+        return stackConsumer;
     }
 
-    public void setVisitStackConsumerCount(int visitStackConsumerCount) {
-        this.visitStackConsumerCount = visitStackConsumerCount;
+    public void setStackConsumer(int stackConsumer) {
+        this.stackConsumer = stackConsumer;
     }
 
-    public int getVisitStackInstructionCount() {
-        return visitStackInstructionCount;
+    public int getStackInstruction() {
+        return stackInstruction;
     }
 
-    public void setVisitStackInstructionCount(int visitStackInstructionCount) {
-        this.visitStackInstructionCount = visitStackInstructionCount;
+    public void setStackInstruction(int stackInstruction) {
+        this.stackInstruction = stackInstruction;
     }
 
-    public int getVisitStackProducerCount() {
-        return visitStackProducerCount;
+    public int getStackProducer() {
+        return stackProducer;
     }
 
-    public void setVisitStackProducerCount(int visitStackProducerCount) {
-        this.visitStackProducerCount = visitStackProducerCount;
+    public void setStackProducer(int stackProducer) {
+        this.stackProducer = stackProducer;
     }
 
-    public int getVisitStoreInstructionCount() {
-        return visitStoreInstructionCount;
+    public int getStoreInstruction() {
+        return storeInstruction;
     }
 
-    public void setVisitStoreInstructionCount(int visitStoreInstructionCount) {
-        this.visitStoreInstructionCount = visitStoreInstructionCount;
+    public void setStoreInstruction(int storeInstruction) {
+        this.storeInstruction = storeInstruction;
     }
 
-    public int getVisitSWAPCount() {
-        return visitSWAPCount;
+    public int getSwap() {
+        return swap;
     }
 
-    public void setVisitSWAPCount(int visitSWAPCount) {
-        this.visitSWAPCount = visitSWAPCount;
+    public void setSwap(int swap) {
+        this.swap = swap;
     }
 
-    public int getVisitTABLESWITCHCount() {
-        return visitTABLESWITCHCount;
+    public int getTableswitch() {
+        return tableswitch;
     }
 
-    public void setVisitTABLESWITCHCount(int visitTABLESWITCHCount) {
-        this.visitTABLESWITCHCount = visitTABLESWITCHCount;
+    public void setTableswitch(int tableswitch) {
+        this.tableswitch = tableswitch;
     }
 
-    public int getVisitTypedInstructionCount() {
-        return visitTypedInstructionCount;
+    public int getTypedInstruction() {
+        return typedInstruction;
     }
 
-    public void setVisitTypedInstructionCount(int visitTypedInstructionCount) {
-        this.visitTypedInstructionCount = visitTypedInstructionCount;
+    public void setTypedInstruction(int typedInstruction) {
+        this.typedInstruction = typedInstruction;
     }
 
-    public int getVisitUnconditionalBranchCount() {
-        return visitUnconditionalBranchCount;
+    public int getUnconditionalBranch() {
+        return unconditionalBranch;
     }
 
-    public void setVisitUnconditionalBranchCount(int visitUnconditionalBranchCount) {
-        this.visitUnconditionalBranchCount = visitUnconditionalBranchCount;
+    public void setUnconditionalBranch(int unconditionalBranch) {
+        this.unconditionalBranch = unconditionalBranch;
     }
 
-    public int getVisitVariableLengthInstructionCount() {
-        return visitVariableLengthInstructionCount;
+    public int getVariableLengthInstruction() {
+        return variableLengthInstruction;
     }
 
-    public void setVisitVariableLengthInstructionCount(int visitVariableLengthInstructionCount) {
-        this.visitVariableLengthInstructionCount = visitVariableLengthInstructionCount;
+    public void setVariableLengthInstruction(int variableLengthInstruction) {
+        this.variableLengthInstruction = variableLengthInstruction;
     }
 
     @Override
     public void visitAALOAD(AALOAD obj) {
-        visitAALOADCount++;
+        aaload++;
     }
 
     @Override
     public void visitAASTORE(AASTORE obj) {
-        visitAASTORECount++;
+        aastore++;
     }
 
     @Override
     public void visitACONST_NULL(ACONST_NULL obj) {
-        visitACONST_NULLCount++;
+        aconst_null++;
     }
 
     @Override
     public void visitAllocationInstruction(AllocationInstruction obj) {
-        visitAllocationInstructionCount++;
+        allocationInstruction++;
     }
 
     @Override
     public void visitALOAD(ALOAD obj) {
-        visitALOADCount++;
+        aload++;
     }
 
     @Override
     public void visitANEWARRAY(ANEWARRAY obj) {
-        visitANEWARRAYCount++;
+        anewarray++;
     }
 
     @Override
     public void visitARETURN(ARETURN obj) {
-        visitARETURNCount++;
+        areturn++;
     }
 
     @Override
     public void visitArithmeticInstruction(ArithmeticInstruction obj) {
-        visitArithmeticInstructionCount++;
+        arithmeticInstruction++;
     }
 
     @Override
     public void visitArrayInstruction(ArrayInstruction obj) {
-        visitArrayInstructionCount++;
+        arrayInstruction++;
     }
 
     @Override
     public void visitARRAYLENGTH(ARRAYLENGTH obj) {
-        visitARRAYLENGTHCount++;
+        arraylength++;
     }
 
     @Override
     public void visitASTORE(ASTORE obj) {
-        visitASTORECount++;
+        astore++;
     }
 
     @Override
     public void visitATHROW(ATHROW obj) {
-        visitATHROWCount++;
+        athrow++;
     }
 
     @Override
     public void visitBALOAD(BALOAD obj) {
-        visitBALOADCount++;
+        baload++;
     }
 
     @Override
     public void visitBASTORE(BASTORE obj) {
-        visitBASTORECount++;
+        bastore++;
     }
 
     @Override
     public void visitBIPUSH(BIPUSH obj) {
-        visitBIPUSHCount++;
+        bipush++;
     }
 
     @Override
     public void visitBranchInstruction(BranchInstruction obj) {
-        visitBranchInstructionCount++;
+        branchInstruction++;
     }
 
     @Override
     public void visitBREAKPOINT(BREAKPOINT obj) {
-        visitBREAKPOINTCount++;
+        BREAKPOINT++;
     }
 
     @Override
     public void visitCALOAD(CALOAD obj) {
-        visitCALOADCount++;
+        caload++;
     }
 
     @Override
     public void visitCASTORE(CASTORE obj) {
-        visitCASTORECount++;
+        castore++;
     }
 
     @Override
     public void visitCHECKCAST(CHECKCAST obj) {
-        visitCHECKCASTCount++;
+        checkcast++;
     }
 
     @Override
     public void visitConstantPushInstruction(ConstantPushInstruction obj) {
-        visitConstantPushInstructionCount++;
+        constantPushInstruction++;
     }
 
     @Override
     public void visitConversionInstruction(ConversionInstruction obj) {
-        visitConversionInstructionCount++;
+        conversionInstruction++;
     }
 
     @Override
     public void visitCPInstruction(CPInstruction obj) {
-        visitCPInstructionCount++;
+        cpInstruction++;
     }
 
     @Override
     public void visitD2F(D2F obj) {
-        visitD2FCount++;
+        d2F++;
     }
 
     @Override
     public void visitD2I(D2I obj) {
-        visitD2ICount++;
+        d2I++;
     }
 
     @Override
     public void visitD2L(D2L obj) {
-        visitD2LCount++;
+        d2L++;
     }
 
     @Override
     public void visitDADD(DADD obj) {
-        visitDADDCount++;
+        dadd++;
     }
 
     @Override
     public void visitDALOAD(DALOAD obj) {
-        visitDALOADCount++;
+        daload++;
     }
 
     @Override
     public void visitDASTORE(DASTORE obj) {
-        visitDASTORECount++;
+        dastore++;
     }
 
     @Override
     public void visitDCMPG(DCMPG obj) {
-        visitDCMPGCount++;
+        dcmpg++;
     }
 
     @Override
     public void visitDCMPL(DCMPL obj) {
-        visitDCMPLCount++;
+        dcmpl++;
     }
 
     @Override
     public void visitDCONST(DCONST obj) {
-        visitDCONSTCount++;
+        dconst++;
     }
 
     @Override
     public void visitDDIV(DDIV obj) {
-        visitDDIVCount++;
+        ddiv++;
     }
 
     @Override
     public void visitDLOAD(DLOAD obj) {
-        visitDLOADCount++;
+        dload++;
     }
 
     @Override
     public void visitDMUL(DMUL obj) {
-        visitDMULCount++;
+        dmul++;
     }
 
     @Override
     public void visitDNEG(DNEG obj) {
-        visitDNEGCount++;
+        dneg++;
     }
 
     @Override
     public void visitDREM(DREM obj) {
-        visitDREMCount++;
+        drem++;
     }
 
     @Override
     public void visitDRETURN(DRETURN obj) {
-        visitDRETURNCount++;
+        dreturn++;
     }
 
     @Override
     public void visitDSTORE(DSTORE obj) {
-        visitDSTORECount++;
+        dstore++;
     }
 
     @Override
     public void visitDSUB(DSUB obj) {
-        visitDSUBCount++;
+        dsub++;
     }
 
     @Override
     public void visitDUP(DUP obj) {
-        visitDUPCount++;
+        dup++;
     }
 
     @Override
     public void visitDUP_X1(DUP_X1 obj) {
-        visitDUP_X1Count++;
+        dup_x1++;
     }
 
     @Override
     public void visitDUP_X2(DUP_X2 obj) {
-        visitDUP_X2Count++;
+        dup_x2++;
     }
 
     @Override
     public void visitDUP2(DUP2 obj) {
-        visitDUP2Count++;
+        dup2++;
     }
 
     @Override
     public void visitDUP2_X1(DUP2_X1 obj) {
-        visitDUP2_X1Count++;
+        dup2_x1++;
     }
 
     @Override
     public void visitDUP2_X2(DUP2_X2 obj) {
-        visitDUP2_X2Count++;
+        dup2_x2++;
     }
 
     @Override
     public void visitExceptionThrower(ExceptionThrower obj) {
-        visitExceptionThrowerCount++;
+        exceptionThrower++;
     }
 
     @Override
     public void visitF2D(F2D obj) {
-        visitF2DCount++;
+        f2D++;
     }
 
     @Override
     public void visitF2I(F2I obj) {
-        visitF2ICount++;
+        f2I++;
     }
 
     @Override
     public void visitF2L(F2L obj) {
-        visitF2LCount++;
+        f2L++;
     }
 
     @Override
     public void visitFADD(FADD obj) {
-        visitFADDCount++;
+        fadd++;
     }
 
     @Override
     public void visitFALOAD(FALOAD obj) {
-        visitFALOADCount++;
+        faload++;
     }
 
     @Override
     public void visitFASTORE(FASTORE obj) {
-        visitFASTORECount++;
+        fastore++;
     }
 
     @Override
     public void visitFCMPG(FCMPG obj) {
-        visitFCMPGCount++;
+        fcmpg++;
     }
 
     @Override
     public void visitFCMPL(FCMPL obj) {
-        visitFCMPLCount++;
+        fcmpl++;
     }
 
     @Override
     public void visitFCONST(FCONST obj) {
-        visitFCONSTCount++;
+        fconst++;
     }
 
     @Override
     public void visitFDIV(FDIV obj) {
-        visitFDIVCount++;
+        fdiv++;
     }
 
     @Override
     public void visitFieldInstruction(FieldInstruction obj) {
-        visitFieldInstructionCount++;
+        fieldInstruction++;
     }
 
     @Override
     public void visitFieldOrMethod(FieldOrMethod obj) {
-        visitFieldOrMethodCount++;
+        fieldOrMethod++;
     }
 
     @Override
     public void visitFLOAD(FLOAD obj) {
-        visitFLOADCount++;
+        fload++;
     }
 
     @Override
     public void visitFMUL(FMUL obj) {
-        visitFMULCount++;
+        fmul++;
     }
 
     @Override
     public void visitFNEG(FNEG obj) {
-        visitFNEGCount++;
+        fneg++;
     }
 
     @Override
     public void visitFREM(FREM obj) {
-        visitFREMCount++;
+        frem++;
     }
 
     @Override
     public void visitFRETURN(FRETURN obj) {
-        visitFRETURNCount++;
+        freturn++;
     }
 
     @Override
     public void visitFSTORE(FSTORE obj) {
-        visitFSTORECount++;
+        fstore++;
     }
 
     @Override
     public void visitFSUB(FSUB obj) {
-        visitFSUBCount++;
+        fsub++;
     }
 
     @Override
     public void visitGETFIELD(GETFIELD obj) {
-        visitGETFIELDCount++;
+        getfield++;
     }
 
     @Override
     public void visitGETSTATIC(GETSTATIC obj) {
-        visitGETSTATICCount++;
+        getstatic++;
     }
 
     @Override
     public void visitGOTO(GOTO obj) {
-        visitGOTOCount++;
+        goTo++;
     }
 
     @Override
     public void visitGOTO_W(GOTO_W obj) {
-        visitGOTO_WCount++;
+        goTo_w++;
     }
 
     @Override
     public void visitGotoInstruction(GotoInstruction obj) {
-        visitGotoInstructionCount++;
+        gotoInstruction++;
     }
 
     @Override
     public void visitI2B(I2B obj) {
-        visitI2BCount++;
+        i2B++;
     }
 
     @Override
     public void visitI2C(I2C obj) {
-        visitI2CCount++;
+        i2C++;
     }
 
     @Override
     public void visitI2D(I2D obj) {
-        visitI2DCount++;
+        i2D++;
     }
 
     @Override
     public void visitI2F(I2F obj) {
-        visitI2FCount++;
+        i2F++;
     }
 
     @Override
     public void visitI2L(I2L obj) {
-        visitI2LCount++;
+        i2L++;
     }
 
     @Override
     public void visitI2S(I2S obj) {
-        visitI2SCount++;
+        i2S++;
     }
 
     @Override
     public void visitIADD(IADD obj) {
-        visitIADDCount++;
+        iadd++;
     }
 
     @Override
     public void visitIALOAD(IALOAD obj) {
-        visitIALOADCount++;
+        iaload++;
     }
 
     @Override
     public void visitIAND(IAND obj) {
-        visitIANDCount++;
+        iand++;
     }
 
     @Override
     public void visitIASTORE(IASTORE obj) {
-        visitIASTORECount++;
+        iastore++;
     }
 
     @Override
     public void visitICONST(ICONST obj) {
-        visitICONSTCount++;
+        iconst++;
     }
 
     @Override
     public void visitIDIV(IDIV obj) {
-        visitIDIVCount++;
+        idiv++;
     }
 
     @Override
     public void visitIF_ACMPEQ(IF_ACMPEQ obj) {
-        visitIF_ACMPEQCount++;
+        if_acmpeq++;
     }
 
     @Override
     public void visitIF_ACMPNE(IF_ACMPNE obj) {
-        visitIF_ACMPNECount++;
+        if_acmpne++;
     }
 
     @Override
     public void visitIF_ICMPEQ(IF_ICMPEQ obj) {
-        visitIF_ICMPEQCount++;
+        if_icmpeq++;
     }
 
     @Override
     public void visitIF_ICMPGE(IF_ICMPGE obj) {
-        visitIF_ICMPGECount++;
+        if_icmpge++;
     }
 
     @Override
     public void visitIF_ICMPGT(IF_ICMPGT obj) {
-        visitIF_ICMPGTCount++;
+        if_icmpgt++;
     }
 
     @Override
     public void visitIF_ICMPLE(IF_ICMPLE obj) {
-        visitIF_ICMPLECount++;
+        if_icmple++;
     }
 
     @Override
     public void visitIF_ICMPLT(IF_ICMPLT obj) {
-        visitIF_ICMPLTCount++;
+        if_icmplt++;
     }
 
     @Override
     public void visitIF_ICMPNE(IF_ICMPNE obj) {
-        visitIF_ICMPNECount++;
+        if_icmpne++;
     }
 
     @Override
     public void visitIFEQ(IFEQ obj) {
-        visitIFEQCount++;
+        ifeq++;
     }
 
     @Override
     public void visitIFGE(IFGE obj) {
-        visitIFGECount++;
+        ifge++;
     }
 
     @Override
     public void visitIFGT(IFGT obj) {
-        visitIFGTCount++;
+        ifgt++;
     }
 
     @Override
     public void visitIfInstruction(IfInstruction obj) {
-        visitIfInstructionCount++;
+        ifInstruction++;
     }
 
     @Override
     public void visitIFLE(IFLE obj) {
-        visitIFLECount++;
+        ifle++;
     }
 
     @Override
     public void visitIFLT(IFLT obj) {
-        visitIFLTCount++;
+        iflt++;
     }
 
     @Override
     public void visitIFNE(IFNE obj) {
-        visitIFNECount++;
+        ifne++;
     }
 
     @Override
     public void visitIFNONNULL(IFNONNULL obj) {
-        visitIFNONNULLCount++;
+        ifnonnull++;
     }
 
     @Override
     public void visitIFNULL(IFNULL obj) {
-        visitIFNULLCount++;
+        ifnull++;
     }
 
     @Override
     public void visitIINC(IINC obj) {
-        visitIINCCount++;
+        iinc++;
     }
 
     @Override
     public void visitILOAD(ILOAD obj) {
-        visitILOADCount++;
+        iload++;
     }
 
     @Override
     public void visitIMPDEP1(IMPDEP1 obj) {
-        visitIMPDEP1Count++;
+        impdep1++;
     }
 
     @Override
     public void visitIMPDEP2(IMPDEP2 obj) {
-        visitIMPDEP2Count++;
+        impdep2++;
     }
 
     @Override
     public void visitIMUL(IMUL obj) {
-        visitIMULCount++;
+        imul++;
     }
 
     @Override
     public void visitINEG(INEG obj) {
-        visitINEGCount++;
+        ineg++;
     }
 
     @Override
     public void visitINSTANCEOF(INSTANCEOF obj) {
-        visitINSTANCEOFCount++;
+        instanceOf++;
     }
 
     @Override
     public void visitINVOKEDYNAMIC(INVOKEDYNAMIC obj) {
-        visitINVOKEDYNAMICCount++;
+        invokedynamic++;
     }
 
     @Override
     public void visitInvokeInstruction(InvokeInstruction obj) {
-        visitInvokeInstructionCount++;
+        invokeInstruction++;
     }
 
     @Override
     public void visitINVOKEINTERFACE(INVOKEINTERFACE obj) {
-        visitINVOKEINTERFACECount++;
+        invokeinterface++;
     }
 
     @Override
     public void visitINVOKESPECIAL(INVOKESPECIAL obj) {
-        visitINVOKESPECIALCount++;
+        invokespecial++;
     }
 
     @Override
     public void visitINVOKESTATIC(INVOKESTATIC obj) {
-        visitINVOKESTATICCount++;
+        invokestatic++;
     }
 
     @Override
     public void visitINVOKEVIRTUAL(INVOKEVIRTUAL obj) {
-        visitINVOKEVIRTUALCount++;
+        invokevirtual++;
     }
 
     @Override
     public void visitIOR(IOR obj) {
-        visitIORCount++;
+        ior++;
     }
 
     @Override
     public void visitIREM(IREM obj) {
-        visitIREMCount++;
+        irem++;
     }
 
     @Override
     public void visitIRETURN(IRETURN obj) {
-        visitIRETURNCount++;
+        ireturn++;
     }
 
     @Override
     public void visitISHL(ISHL obj) {
-        visitISHLCount++;
+        ishl++;
     }
 
     @Override
     public void visitISHR(ISHR obj) {
-        visitISHRCount++;
+        ishr++;
     }
 
     @Override
     public void visitISTORE(ISTORE obj) {
-        visitISTORECount++;
+        istore++;
     }
 
     @Override
     public void visitISUB(ISUB obj) {
-        visitISUBCount++;
+        isub++;
     }
 
     @Override
     public void visitIUSHR(IUSHR obj) {
-        visitIUSHRCount++;
+        iushr++;
     }
 
     @Override
     public void visitIXOR(IXOR obj) {
-        visitIXORCount++;
+        ixor++;
     }
 
     @Override
     public void visitJSR(JSR obj) {
-        visitJSRCount++;
+        jsr++;
     }
 
     @Override
     public void visitJSR_W(JSR_W obj) {
-        visitJSR_WCount++;
+        jsr_w++;
     }
 
     @Override
     public void visitJsrInstruction(JsrInstruction obj) {
-        visitJsrInstructionCount++;
+        jsrInstruction++;
     }
 
     @Override
     public void visitL2D(L2D obj) {
-        visitL2DCount++;
+        l2D++;
     }
 
     @Override
     public void visitL2F(L2F obj) {
-        visitL2FCount++;
+        l2F++;
     }
 
     @Override
     public void visitL2I(L2I obj) {
-        visitL2ICount++;
+        l2I++;
     }
 
     @Override
     public void visitLADD(LADD obj) {
-        visitLADDCount++;
+        ladd++;
     }
 
     @Override
     public void visitLALOAD(LALOAD obj) {
-        visitLALOADCount++;
+        laload++;
     }
 
     @Override
     public void visitLAND(LAND obj) {
-        visitLANDCount++;
+        land++;
     }
 
     @Override
     public void visitLASTORE(LASTORE obj) {
-        visitLASTORECount++;
+        lastore++;
     }
 
     @Override
     public void visitLCMP(LCMP obj) {
-        visitLCMPCount++;
+        lcmp++;
     }
 
     @Override
     public void visitLCONST(LCONST obj) {
-        visitLCONSTCount++;
+        lconst++;
     }
 
     @Override
     public void visitLDC(LDC obj) {
-        visitLDCCount++;
+        ldc++;
     }
 
     @Override
     public void visitLDC2_W(LDC2_W obj) {
-        visitLDC2_WCount++;
+        ldc2_w++;
     }
 
     @Override
     public void visitLDIV(LDIV obj) {
-        visitLDIVCount++;
+        ldiv++;
     }
 
     @Override
     public void visitLLOAD(LLOAD obj) {
-        visitLLOADCount++;
+        lload++;
     }
 
     @Override
     public void visitLMUL(LMUL obj) {
-        visitLMULCount++;
+        lmul++;
     }
 
     @Override
     public void visitLNEG(LNEG obj) {
-        visitLNEGCount++;
+        lneg++;
     }
 
     @Override
     public void visitLoadClass(LoadClass obj) {
-        visitLoadClassCount++;
+        loadClass++;
     }
 
     @Override
     public void visitLoadInstruction(LoadInstruction obj) {
-        visitLoadInstructionCount++;
+        loadInstruction++;
     }
 
     @Override
     public void visitLocalVariableInstruction(LocalVariableInstruction obj) {
-        visitLocalVariableInstructionCount++;
+        localVariableInstruction++;
     }
 
     @Override
     public void visitLOOKUPSWITCH(LOOKUPSWITCH obj) {
-        visitLOOKUPSWITCHCount++;
+        lookupswitch++;
     }
 
     @Override
     public void visitLOR(LOR obj) {
-        visitLORCount++;
+        lor++;
     }
 
     @Override
     public void visitLREM(LREM obj) {
-        visitLREMCount++;
+        lrem++;
     }
 
     @Override
     public void visitLRETURN(LRETURN obj) {
-        visitLRETURNCount++;
+        lreturn++;
     }
 
     @Override
     public void visitLSHL(LSHL obj) {
-        visitLSHLCount++;
+        lshl++;
     }
 
     @Override
     public void visitLSHR(LSHR obj) {
-        visitLSHRCount++;
+        lshr++;
     }
 
     @Override
     public void visitLSTORE(LSTORE obj) {
-        visitLSTORECount++;
+        lstore++;
     }
 
     @Override
     public void visitLSUB(LSUB obj) {
-        visitLSUBCount++;
+        lsub++;
     }
 
     @Override
     public void visitLUSHR(LUSHR obj) {
-        visitLUSHRCount++;
+        lushr++;
     }
 
     @Override
     public void visitLXOR(LXOR obj) {
-        visitLXORCount++;
+        lxor++;
     }
 
     @Override
     public void visitMONITORENTER(MONITORENTER obj) {
-        visitMONITORENTERCount++;
+        monitorenter++;
     }
 
     @Override
     public void visitMONITOREXIT(MONITOREXIT obj) {
-        visitMONITOREXITCount++;
+        monitorexit++;
     }
 
     @Override
     public void visitMULTIANEWARRAY(MULTIANEWARRAY obj) {
-        visitMULTIANEWARRAYCount++;
+        multianewarray++;
     }
 
     @Override
     public void visitNEW(NEW obj) {
-        visitNEWCount++;
+        nEW++;
     }
 
     @Override
     public void visitNEWARRAY(NEWARRAY obj) {
-        visitNEWARRAYCount++;
+        newarray++;
     }
 
     @Override
     public void visitNOP(NOP obj) {
-        visitNOPCount++;
+        nop++;
     }
 
     @Override
     public void visitPOP(POP obj) {
-        visitPOPCount++;
+        pop++;
     }
 
     @Override
     public void visitPOP2(POP2 obj) {
-        visitPOP2Count++;
+        pop2++;
     }
 
     @Override
     public void visitPopInstruction(PopInstruction obj) {
-        visitPopInstructionCount++;
+        popInstruction++;
     }
 
     @Override
     public void visitPushInstruction(PushInstruction obj) {
-        visitPushInstructionCount++;
+        pushInstruction++;
     }
 
     @Override
     public void visitPUTFIELD(PUTFIELD obj) {
-        visitPUTFIELDCount++;
+        putfield++;
     }
 
     @Override
     public void visitPUTSTATIC(PUTSTATIC obj) {
-        visitPUTSTATICCount++;
+        putstatic++;
     }
 
     @Override
     public void visitRET(RET obj) {
-        visitRETCount++;
+        ret++;
     }
 
     @Override
     public void visitRETURN(RETURN obj) {
-        visitRETURNCount++;
+        rETURN++;
     }
 
     @Override
     public void visitReturnInstruction(ReturnInstruction obj) {
-        visitReturnInstructionCount++;
+        returnInstruction++;
     }
 
     @Override
     public void visitSALOAD(SALOAD obj) {
-        visitSALOADCount++;
+        saload++;
     }
 
     @Override
     public void visitSASTORE(SASTORE obj) {
-        visitSASTORECount++;
+        sastore++;
     }
 
     @Override
     public void visitSelect(Select obj) {
-        visitSelectCount++;
+        select++;
     }
 
     @Override
     public void visitSIPUSH(SIPUSH obj) {
-        visitSIPUSHCount++;
+        sipush++;
     }
 
     @Override
     public void visitStackConsumer(StackConsumer obj) {
-        visitStackConsumerCount++;
+        stackConsumer++;
     }
 
     @Override
     public void visitStackInstruction(StackInstruction obj) {
-        visitStackInstructionCount++;
+        stackInstruction++;
     }
 
     @Override
     public void visitStackProducer(StackProducer obj) {
-        visitStackProducerCount++;
+        stackProducer++;
     }
 
     @Override
     public void visitStoreInstruction(StoreInstruction obj) {
-        visitStoreInstructionCount++;
+        storeInstruction++;
     }
 
     @Override
     public void visitSWAP(SWAP obj) {
-        visitSWAPCount++;
+        swap++;
     }
 
     @Override
     public void visitTABLESWITCH(TABLESWITCH obj) {
-        visitTABLESWITCHCount++;
+        tableswitch++;
     }
 
     @Override
     public void visitTypedInstruction(TypedInstruction obj) {
-        visitTypedInstructionCount++;
+        typedInstruction++;
     }
 
     @Override
     public void visitUnconditionalBranch(UnconditionalBranch obj) {
-        visitUnconditionalBranchCount++;
+        unconditionalBranch++;
     }
 
     @Override
     public void visitVariableLengthInstruction(VariableLengthInstruction obj) {
-        visitVariableLengthInstructionCount++;
+        variableLengthInstruction++;
     }
 
     @Override
@@ -2560,559 +2746,373 @@ public class CountVisitor implements Visitor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CountVisitor that = (CountVisitor) o;
-        return visitAALOADCount == that.visitAALOADCount
-                && visitAASTORECount == that.visitAASTORECount
-                && visitACONST_NULLCount == that.visitACONST_NULLCount
-                && visitAllocationInstructionCount == that.visitAllocationInstructionCount
-                && visitALOADCount == that.visitALOADCount
-                && visitANEWARRAYCount == that.visitANEWARRAYCount
-                && visitARETURNCount == that.visitARETURNCount
-                && visitArithmeticInstructionCount == that.visitArithmeticInstructionCount
-                && visitArrayInstructionCount == that.visitArrayInstructionCount
-                && visitARRAYLENGTHCount == that.visitARRAYLENGTHCount
-                && visitASTORECount == that.visitASTORECount
-                && visitATHROWCount == that.visitATHROWCount
-                && visitBALOADCount == that.visitBALOADCount
-                && visitBASTORECount == that.visitBASTORECount
-                && visitBIPUSHCount == that.visitBIPUSHCount
-                && visitBranchInstructionCount == that.visitBranchInstructionCount
-                && visitBREAKPOINTCount == that.visitBREAKPOINTCount
-                && visitCALOADCount == that.visitCALOADCount
-                && visitCASTORECount == that.visitCASTORECount
-                && visitCHECKCASTCount == that.visitCHECKCASTCount
-                && visitConstantPushInstructionCount == that.visitConstantPushInstructionCount
-                && visitConversionInstructionCount == that.visitConversionInstructionCount
-                && visitCPInstructionCount == that.visitCPInstructionCount
-                && visitD2FCount == that.visitD2FCount
-                && visitD2ICount == that.visitD2ICount
-                && visitD2LCount == that.visitD2LCount
-                && visitDADDCount == that.visitDADDCount
-                && visitDALOADCount == that.visitDALOADCount
-                && visitDASTORECount == that.visitDASTORECount
-                && visitDCMPGCount == that.visitDCMPGCount
-                && visitDCMPLCount == that.visitDCMPLCount
-                && visitDCONSTCount == that.visitDCONSTCount
-                && visitDDIVCount == that.visitDDIVCount
-                && visitDLOADCount == that.visitDLOADCount
-                && visitDMULCount == that.visitDMULCount
-                && visitDNEGCount == that.visitDNEGCount
-                && visitDREMCount == that.visitDREMCount
-                && visitDRETURNCount == that.visitDRETURNCount
-                && visitDSTORECount == that.visitDSTORECount
-                && visitDSUBCount == that.visitDSUBCount
-                && visitDUPCount == that.visitDUPCount
-                && visitDUP_X1Count == that.visitDUP_X1Count
-                && visitDUP_X2Count == that.visitDUP_X2Count
-                && visitDUP2Count == that.visitDUP2Count
-                && visitDUP2_X1Count == that.visitDUP2_X1Count
-                && visitDUP2_X2Count == that.visitDUP2_X2Count
-                && visitExceptionThrowerCount == that.visitExceptionThrowerCount
-                && visitF2DCount == that.visitF2DCount
-                && visitF2ICount == that.visitF2ICount
-                && visitF2LCount == that.visitF2LCount
-                && visitFADDCount == that.visitFADDCount
-                && visitFALOADCount == that.visitFALOADCount
-                && visitFASTORECount == that.visitFASTORECount
-                && visitFCMPGCount == that.visitFCMPGCount
-                && visitFCMPLCount == that.visitFCMPLCount
-                && visitFCONSTCount == that.visitFCONSTCount
-                && visitFDIVCount == that.visitFDIVCount
-                && visitFieldInstructionCount == that.visitFieldInstructionCount
-                && visitFieldOrMethodCount == that.visitFieldOrMethodCount
-                && visitFLOADCount == that.visitFLOADCount
-                && visitFMULCount == that.visitFMULCount
-                && visitFNEGCount == that.visitFNEGCount
-                && visitFREMCount == that.visitFREMCount
-                && visitFRETURNCount == that.visitFRETURNCount
-                && visitFSTORECount == that.visitFSTORECount
-                && visitFSUBCount == that.visitFSUBCount
-                && visitGETFIELDCount == that.visitGETFIELDCount
-                && visitGETSTATICCount == that.visitGETSTATICCount
-                && visitGOTOCount == that.visitGOTOCount
-                && visitGOTO_WCount == that.visitGOTO_WCount
-                && visitGotoInstructionCount == that.visitGotoInstructionCount
-                && visitI2BCount == that.visitI2BCount
-                && visitI2CCount == that.visitI2CCount
-                && visitI2DCount == that.visitI2DCount
-                && visitI2FCount == that.visitI2FCount
-                && visitI2LCount == that.visitI2LCount
-                && visitI2SCount == that.visitI2SCount
-                && visitIADDCount == that.visitIADDCount
-                && visitIALOADCount == that.visitIALOADCount
-                && visitIANDCount == that.visitIANDCount
-                && visitIASTORECount == that.visitIASTORECount
-                && visitICONSTCount == that.visitICONSTCount
-                && visitIDIVCount == that.visitIDIVCount
-                && visitIF_ACMPEQCount == that.visitIF_ACMPEQCount
-                && visitIF_ACMPNECount == that.visitIF_ACMPNECount
-                && visitIF_ICMPEQCount == that.visitIF_ICMPEQCount
-                && visitIF_ICMPGECount == that.visitIF_ICMPGECount
-                && visitIF_ICMPGTCount == that.visitIF_ICMPGTCount
-                && visitIF_ICMPLECount == that.visitIF_ICMPLECount
-                && visitIF_ICMPLTCount == that.visitIF_ICMPLTCount
-                && visitIF_ICMPNECount == that.visitIF_ICMPNECount
-                && visitIFEQCount == that.visitIFEQCount
-                && visitIFGECount == that.visitIFGECount
-                && visitIFGTCount == that.visitIFGTCount
-                && visitIfInstructionCount == that.visitIfInstructionCount
-                && visitIFLECount == that.visitIFLECount
-                && visitIFLTCount == that.visitIFLTCount
-                && visitIFNECount == that.visitIFNECount
-                && visitIFNONNULLCount == that.visitIFNONNULLCount
-                && visitIFNULLCount == that.visitIFNULLCount
-                && visitIINCCount == that.visitIINCCount
-                && visitILOADCount == that.visitILOADCount
-                && visitIMPDEP1Count == that.visitIMPDEP1Count
-                && visitIMPDEP2Count == that.visitIMPDEP2Count
-                && visitIMULCount == that.visitIMULCount
-                && visitINEGCount == that.visitINEGCount
-                && visitINSTANCEOFCount == that.visitINSTANCEOFCount
-                && visitINVOKEDYNAMICCount == that.visitINVOKEDYNAMICCount
-                && visitInvokeInstructionCount == that.visitInvokeInstructionCount
-                && visitINVOKEINTERFACECount == that.visitINVOKEINTERFACECount
-                && visitINVOKESPECIALCount == that.visitINVOKESPECIALCount
-                && visitINVOKESTATICCount == that.visitINVOKESTATICCount
-                && visitINVOKEVIRTUALCount == that.visitINVOKEVIRTUALCount
-                && visitIORCount == that.visitIORCount
-                && visitIREMCount == that.visitIREMCount
-                && visitIRETURNCount == that.visitIRETURNCount
-                && visitISHLCount == that.visitISHLCount
-                && visitISHRCount == that.visitISHRCount
-                && visitISTORECount == that.visitISTORECount
-                && visitISUBCount == that.visitISUBCount
-                && visitIUSHRCount == that.visitIUSHRCount
-                && visitIXORCount == that.visitIXORCount
-                && visitJSRCount == that.visitJSRCount
-                && visitJSR_WCount == that.visitJSR_WCount
-                && visitJsrInstructionCount == that.visitJsrInstructionCount
-                && visitL2DCount == that.visitL2DCount
-                && visitL2FCount == that.visitL2FCount
-                && visitL2ICount == that.visitL2ICount
-                && visitLADDCount == that.visitLADDCount
-                && visitLALOADCount == that.visitLALOADCount
-                && visitLANDCount == that.visitLANDCount
-                && visitLASTORECount == that.visitLASTORECount
-                && visitLCMPCount == that.visitLCMPCount
-                && visitLCONSTCount == that.visitLCONSTCount
-                && visitLDCCount == that.visitLDCCount
-                && visitLDC2_WCount == that.visitLDC2_WCount
-                && visitLDIVCount == that.visitLDIVCount
-                && visitLLOADCount == that.visitLLOADCount
-                && visitLMULCount == that.visitLMULCount
-                && visitLNEGCount == that.visitLNEGCount
-                && visitLoadClassCount == that.visitLoadClassCount
-                && visitLoadInstructionCount == that.visitLoadInstructionCount
-                && visitLocalVariableInstructionCount == that.visitLocalVariableInstructionCount
-                && visitLOOKUPSWITCHCount == that.visitLOOKUPSWITCHCount
-                && visitLORCount == that.visitLORCount
-                && visitLREMCount == that.visitLREMCount
-                && visitLRETURNCount == that.visitLRETURNCount
-                && visitLSHLCount == that.visitLSHLCount
-                && visitLSHRCount == that.visitLSHRCount
-                && visitLSTORECount == that.visitLSTORECount
-                && visitLSUBCount == that.visitLSUBCount
-                && visitLUSHRCount == that.visitLUSHRCount
-                && visitLXORCount == that.visitLXORCount
-                && visitMONITORENTERCount == that.visitMONITORENTERCount
-                && visitMONITOREXITCount == that.visitMONITOREXITCount
-                && visitMULTIANEWARRAYCount == that.visitMULTIANEWARRAYCount
-                && visitNEWCount == that.visitNEWCount
-                && visitNEWARRAYCount == that.visitNEWARRAYCount
-                && visitNOPCount == that.visitNOPCount
-                && visitPOPCount == that.visitPOPCount
-                && visitPOP2Count == that.visitPOP2Count
-                && visitPopInstructionCount == that.visitPopInstructionCount
-                && visitPushInstructionCount == that.visitPushInstructionCount
-                && visitPUTFIELDCount == that.visitPUTFIELDCount
-                && visitPUTSTATICCount == that.visitPUTSTATICCount
-                && visitRETCount == that.visitRETCount
-                && visitRETURNCount == that.visitRETURNCount
-                && visitReturnInstructionCount == that.visitReturnInstructionCount
-                && visitSALOADCount == that.visitSALOADCount
-                && visitSASTORECount == that.visitSASTORECount
-                && visitSelectCount == that.visitSelectCount
-                && visitSIPUSHCount == that.visitSIPUSHCount
-                && visitStackConsumerCount == that.visitStackConsumerCount
-                && visitStackInstructionCount == that.visitStackInstructionCount
-                && visitStackProducerCount == that.visitStackProducerCount
-                && visitStoreInstructionCount == that.visitStoreInstructionCount
-                && visitSWAPCount == that.visitSWAPCount
-                && visitTABLESWITCHCount == that.visitTABLESWITCHCount
-                && visitTypedInstructionCount == that.visitTypedInstructionCount
-                && visitUnconditionalBranchCount == that.visitUnconditionalBranchCount
-                && visitVariableLengthInstructionCount == that.visitVariableLengthInstructionCount;
+        return aaload == that.aaload &&
+                aastore == that.aastore &&
+                aconst_null == that.aconst_null &&
+                allocationInstruction == that.allocationInstruction &&
+                aload == that.aload &&
+                anewarray == that.anewarray &&
+                areturn == that.areturn &&
+                arithmeticInstruction == that.arithmeticInstruction &&
+                arrayInstruction == that.arrayInstruction &&
+                arraylength == that.arraylength &&
+                astore == that.astore &&
+                athrow == that.athrow &&
+                baload == that.baload &&
+                bastore == that.bastore &&
+                bipush == that.bipush &&
+                branchInstruction == that.branchInstruction &&
+                BREAKPOINT == that.BREAKPOINT &&
+                caload == that.caload &&
+                castore == that.castore &&
+                checkcast == that.checkcast &&
+                constantPushInstruction == that.constantPushInstruction &&
+                conversionInstruction == that.conversionInstruction &&
+                cpInstruction == that.cpInstruction &&
+                d2F == that.d2F &&
+                d2I == that.d2I &&
+                d2L == that.d2L &&
+                dadd == that.dadd &&
+                daload == that.daload &&
+                dastore == that.dastore &&
+                dcmpg == that.dcmpg &&
+                dcmpl == that.dcmpl &&
+                dconst == that.dconst &&
+                ddiv == that.ddiv &&
+                dload == that.dload &&
+                dmul == that.dmul &&
+                dneg == that.dneg &&
+                drem == that.drem &&
+                dreturn == that.dreturn &&
+                dstore == that.dstore &&
+                dsub == that.dsub &&
+                dup == that.dup &&
+                dup_x1 == that.dup_x1 &&
+                dup_x2 == that.dup_x2 &&
+                dup2 == that.dup2 &&
+                dup2_x1 == that.dup2_x1 &&
+                dup2_x2 == that.dup2_x2 &&
+                exceptionThrower == that.exceptionThrower &&
+                f2D == that.f2D &&
+                f2I == that.f2I &&
+                f2L == that.f2L &&
+                fadd == that.fadd &&
+                faload == that.faload &&
+                fastore == that.fastore &&
+                fcmpg == that.fcmpg &&
+                fcmpl == that.fcmpl &&
+                fconst == that.fconst &&
+                fdiv == that.fdiv &&
+                fieldInstruction == that.fieldInstruction &&
+                fieldOrMethod == that.fieldOrMethod &&
+                fload == that.fload &&
+                fmul == that.fmul &&
+                fneg == that.fneg &&
+                frem == that.frem &&
+                freturn == that.freturn &&
+                fstore == that.fstore &&
+                fsub == that.fsub &&
+                getfield == that.getfield &&
+                getstatic == that.getstatic &&
+                goTo == that.goTo &&
+                goTo_w == that.goTo_w &&
+                gotoInstruction == that.gotoInstruction &&
+                i2B == that.i2B &&
+                i2C == that.i2C &&
+                i2D == that.i2D &&
+                i2F == that.i2F &&
+                i2L == that.i2L &&
+                i2S == that.i2S &&
+                iadd == that.iadd &&
+                iaload == that.iaload &&
+                iand == that.iand &&
+                iastore == that.iastore &&
+                iconst == that.iconst &&
+                idiv == that.idiv &&
+                if_acmpeq == that.if_acmpeq &&
+                if_acmpne == that.if_acmpne &&
+                if_icmpeq == that.if_icmpeq &&
+                if_icmpge == that.if_icmpge &&
+                if_icmpgt == that.if_icmpgt &&
+                if_icmple == that.if_icmple &&
+                if_icmplt == that.if_icmplt &&
+                if_icmpne == that.if_icmpne &&
+                ifeq == that.ifeq &&
+                ifge == that.ifge &&
+                ifgt == that.ifgt &&
+                ifInstruction == that.ifInstruction &&
+                ifle == that.ifle &&
+                iflt == that.iflt &&
+                ifne == that.ifne &&
+                ifnonnull == that.ifnonnull &&
+                ifnull == that.ifnull &&
+                iinc == that.iinc &&
+                iload == that.iload &&
+                impdep1 == that.impdep1 &&
+                impdep2 == that.impdep2 &&
+                imul == that.imul &&
+                ineg == that.ineg &&
+                instanceOf == that.instanceOf &&
+                invokedynamic == that.invokedynamic &&
+                invokeInstruction == that.invokeInstruction &&
+                invokeinterface == that.invokeinterface &&
+                invokespecial == that.invokespecial &&
+                invokestatic == that.invokestatic &&
+                invokevirtual == that.invokevirtual &&
+                ior == that.ior &&
+                irem == that.irem &&
+                ireturn == that.ireturn &&
+                ishl == that.ishl &&
+                ishr == that.ishr &&
+                istore == that.istore &&
+                isub == that.isub &&
+                iushr == that.iushr &&
+                ixor == that.ixor &&
+                jsr == that.jsr &&
+                jsr_w == that.jsr_w &&
+                jsrInstruction == that.jsrInstruction &&
+                l2D == that.l2D &&
+                l2F == that.l2F &&
+                l2I == that.l2I &&
+                ladd == that.ladd &&
+                laload == that.laload &&
+                land == that.land &&
+                lastore == that.lastore &&
+                lcmp == that.lcmp &&
+                lconst == that.lconst &&
+                ldc == that.ldc &&
+                ldc2_w == that.ldc2_w &&
+                ldiv == that.ldiv &&
+                lload == that.lload &&
+                lmul == that.lmul &&
+                lneg == that.lneg &&
+                loadClass == that.loadClass &&
+                loadInstruction == that.loadInstruction &&
+                localVariableInstruction == that.localVariableInstruction &&
+                lookupswitch == that.lookupswitch &&
+                lor == that.lor &&
+                lrem == that.lrem &&
+                lreturn == that.lreturn &&
+                lshl == that.lshl &&
+                lshr == that.lshr &&
+                lstore == that.lstore &&
+                lsub == that.lsub &&
+                lushr == that.lushr &&
+                lxor == that.lxor &&
+                monitorenter == that.monitorenter &&
+                monitorexit == that.monitorexit &&
+                multianewarray == that.multianewarray &&
+                nEW == that.nEW &&
+                newarray == that.newarray &&
+                nop == that.nop &&
+                pop == that.pop &&
+                pop2 == that.pop2 &&
+                popInstruction == that.popInstruction &&
+                pushInstruction == that.pushInstruction &&
+                putfield == that.putfield &&
+                putstatic == that.putstatic &&
+                ret == that.ret &&
+                rETURN == that.rETURN &&
+                returnInstruction == that.returnInstruction &&
+                saload == that.saload &&
+                sastore == that.sastore &&
+                select == that.select &&
+                sipush == that.sipush &&
+                stackConsumer == that.stackConsumer &&
+                stackInstruction == that.stackInstruction &&
+                stackProducer == that.stackProducer &&
+                storeInstruction == that.storeInstruction &&
+                swap == that.swap &&
+                tableswitch == that.tableswitch &&
+                typedInstruction == that.typedInstruction &&
+                unconditionalBranch == that.unconditionalBranch &&
+                variableLengthInstruction == that.variableLengthInstruction;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(visitAALOADCount
-                , visitAASTORECount
-                , visitACONST_NULLCount
-                , visitAllocationInstructionCount
-                , visitALOADCount
-                , visitANEWARRAYCount
-                , visitARETURNCount
-                , visitArithmeticInstructionCount
-                , visitArrayInstructionCount
-                , visitARRAYLENGTHCount
-                , visitASTORECount
-                , visitATHROWCount
-                , visitBALOADCount
-                , visitBASTORECount
-                , visitBIPUSHCount
-                , visitBranchInstructionCount
-                , visitBREAKPOINTCount
-                , visitCALOADCount
-                , visitCASTORECount
-                , visitCHECKCASTCount
-                , visitConstantPushInstructionCount
-                , visitConversionInstructionCount
-                , visitCPInstructionCount
-                , visitD2FCount
-                , visitD2ICount
-                , visitD2LCount
-                , visitDADDCount
-                , visitDALOADCount
-                , visitDASTORECount
-                , visitDCMPGCount
-                , visitDCMPLCount
-                , visitDCONSTCount
-                , visitDDIVCount
-                , visitDLOADCount
-                , visitDMULCount
-                , visitDNEGCount
-                , visitDREMCount
-                , visitDRETURNCount
-                , visitDSTORECount
-                , visitDSUBCount
-                , visitDUPCount
-                , visitDUP_X1Count
-                , visitDUP_X2Count
-                , visitDUP2Count
-                , visitDUP2_X1Count
-                , visitDUP2_X2Count
-                , visitExceptionThrowerCount
-                , visitF2DCount
-                , visitF2ICount
-                , visitF2LCount
-                , visitFADDCount
-                , visitFALOADCount
-                , visitFASTORECount
-                , visitFCMPGCount
-                , visitFCMPLCount
-                , visitFCONSTCount
-                , visitFDIVCount
-                , visitFieldInstructionCount
-                , visitFieldOrMethodCount
-                , visitFLOADCount
-                , visitFMULCount
-                , visitFNEGCount
-                , visitFREMCount
-                , visitFRETURNCount
-                , visitFSTORECount
-                , visitFSUBCount
-                , visitGETFIELDCount
-                , visitGETSTATICCount
-                , visitGOTOCount
-                , visitGOTO_WCount
-                , visitGotoInstructionCount
-                , visitI2BCount
-                , visitI2CCount
-                , visitI2DCount
-                , visitI2FCount
-                , visitI2LCount
-                , visitI2SCount
-                , visitIADDCount
-                , visitIALOADCount
-                , visitIANDCount
-                , visitIASTORECount
-                , visitICONSTCount
-                , visitIDIVCount
-                , visitIF_ACMPEQCount
-                , visitIF_ACMPNECount
-                , visitIF_ICMPEQCount
-                , visitIF_ICMPGECount
-                , visitIF_ICMPGTCount
-                , visitIF_ICMPLECount
-                , visitIF_ICMPLTCount
-                , visitIF_ICMPNECount
-                , visitIFEQCount
-                , visitIFGECount
-                , visitIFGTCount
-                , visitIfInstructionCount
-                , visitIFLECount
-                , visitIFLTCount
-                , visitIFNECount
-                , visitIFNONNULLCount
-                , visitIFNULLCount
-                , visitIINCCount
-                , visitILOADCount
-                , visitIMPDEP1Count
-                , visitIMPDEP2Count
-                , visitIMULCount
-                , visitINEGCount
-                , visitINSTANCEOFCount
-                , visitINVOKEDYNAMICCount
-                , visitInvokeInstructionCount
-                , visitINVOKEINTERFACECount
-                , visitINVOKESPECIALCount
-                , visitINVOKESTATICCount
-                , visitINVOKEVIRTUALCount
-                , visitIORCount
-                , visitIREMCount
-                , visitIRETURNCount
-                , visitISHLCount
-                , visitISHRCount
-                , visitISTORECount
-                , visitISUBCount
-                , visitIUSHRCount
-                , visitIXORCount
-                , visitJSRCount
-                , visitJSR_WCount
-                , visitJsrInstructionCount
-                , visitL2DCount
-                , visitL2FCount
-                , visitL2ICount
-                , visitLADDCount
-                , visitLALOADCount
-                , visitLANDCount
-                , visitLASTORECount
-                , visitLCMPCount
-                , visitLCONSTCount
-                , visitLDCCount
-                , visitLDC2_WCount
-                , visitLDIVCount
-                , visitLLOADCount
-                , visitLMULCount
-                , visitLNEGCount
-                , visitLoadClassCount
-                , visitLoadInstructionCount
-                , visitLocalVariableInstructionCount
-                , visitLOOKUPSWITCHCount
-                , visitLORCount
-                , visitLREMCount
-                , visitLRETURNCount
-                , visitLSHLCount
-                , visitLSHRCount
-                , visitLSTORECount
-                , visitLSUBCount
-                , visitLUSHRCount
-                , visitLXORCount
-                , visitMONITORENTERCount
-                , visitMONITOREXITCount
-                , visitMULTIANEWARRAYCount
-                , visitNEWCount
-                , visitNEWARRAYCount
-                , visitNOPCount
-                , visitPOPCount
-                , visitPOP2Count
-                , visitPopInstructionCount
-                , visitPushInstructionCount
-                , visitPUTFIELDCount
-                , visitPUTSTATICCount
-                , visitRETCount
-                , visitRETURNCount
-                , visitReturnInstructionCount
-                , visitSALOADCount
-                , visitSASTORECount
-                , visitSelectCount
-                , visitSIPUSHCount
-                , visitStackConsumerCount
-                , visitStackInstructionCount
-                , visitStackProducerCount
-                , visitStoreInstructionCount
-                , visitSWAPCount
-                , visitTABLESWITCHCount
-                , visitTypedInstructionCount
-                , visitUnconditionalBranchCount
-                , visitVariableLengthInstructionCount);
+        return Objects.hash(aaload,
+                aastore,
+                aconst_null,
+                allocationInstruction,
+                aload,
+                anewarray,
+                areturn,
+                arithmeticInstruction,
+                arrayInstruction,
+                arraylength,
+                astore,
+                athrow,
+                baload,
+                bastore,
+                bipush,
+                branchInstruction,
+                BREAKPOINT,
+                caload,
+                castore,
+                checkcast,
+                constantPushInstruction,
+                conversionInstruction,
+                cpInstruction,
+                d2F,
+                d2I,
+                d2L,
+                dadd,
+                daload,
+                dastore,
+                dcmpg,
+                dcmpl,
+                dconst,
+                ddiv,
+                dload,
+                dmul,
+                dneg,
+                drem,
+                dreturn,
+                dstore,
+                dsub,
+                dup,
+                dup_x1,
+                dup_x2,
+                dup2,
+                dup2_x1,
+                dup2_x2,
+                exceptionThrower,
+                f2D,
+                f2I,
+                f2L,
+                fadd,
+                faload,
+                fastore,
+                fcmpg,
+                fcmpl,
+                fconst,
+                fdiv,
+                fieldInstruction,
+                fieldOrMethod,
+                fload,
+                fmul,
+                fneg,
+                frem,
+                freturn,
+                fstore,
+                fsub,
+                getfield,
+                getstatic,
+                goTo,
+                goTo_w,
+                gotoInstruction,
+                i2B,
+                i2C,
+                i2D,
+                i2F,
+                i2L,
+                i2S,
+                iadd,
+                iaload,
+                iand,
+                iastore,
+                iconst,
+                idiv,
+                if_acmpeq,
+                if_acmpne,
+                if_icmpeq,
+                if_icmpge,
+                if_icmpgt,
+                if_icmple,
+                if_icmplt,
+                if_icmpne,
+                ifeq,
+                ifge,
+                ifgt,
+                ifInstruction,
+                ifle,
+                iflt,
+                ifne,
+                ifnonnull,
+                ifnull,
+                iinc,
+                iload,
+                impdep1,
+                impdep2,
+                imul,
+                ineg,
+                instanceOf,
+                invokedynamic,
+                invokeInstruction,
+                invokeinterface,
+                invokespecial,
+                invokestatic,
+                invokevirtual,
+                ior,
+                irem,
+                ireturn,
+                ishl,
+                ishr,
+                istore,
+                isub,
+                iushr,
+                ixor,
+                jsr,
+                jsr_w,
+                jsrInstruction,
+                l2D,
+                l2F,
+                l2I,
+                ladd,
+                laload,
+                land,
+                lastore,
+                lcmp,
+                lconst,
+                ldc,
+                ldc2_w,
+                ldiv,
+                lload,
+                lmul,
+                lneg,
+                loadClass,
+                loadInstruction,
+                localVariableInstruction,
+                lookupswitch,
+                lor,
+                lrem,
+                lreturn,
+                lshl,
+                lshr,
+                lstore,
+                lsub,
+                lushr,
+                lxor,
+                monitorenter,
+                monitorexit,
+                multianewarray,
+                nEW,
+                newarray,
+                nop,
+                pop,
+                pop2,
+                popInstruction,
+                pushInstruction,
+                putfield,
+                putstatic,
+                ret,
+                rETURN,
+                returnInstruction,
+                saload,
+                sastore,
+                select,
+                sipush,
+                stackConsumer,
+                stackInstruction,
+                stackProducer,
+                storeInstruction,
+                swap,
+                tableswitch,
+                typedInstruction,
+                unconditionalBranch,
+                variableLengthInstruction);
     }
 
-    @Override
-    public String toString() {
-        return "CountVisitor{" +
-                "visitAALOADCount=" + visitAALOADCount +
-                ", visitAASTORECount=" + visitAASTORECount +
-                ", visitACONST_NULLCount=" + visitACONST_NULLCount +
-                ", visitAllocationInstructionCount=" + visitAllocationInstructionCount +
-                ", visitALOADCount=" + visitALOADCount +
-                ", visitANEWARRAYCount=" + visitANEWARRAYCount +
-                ", visitARETURNCount=" + visitARETURNCount +
-                ", visitArithmeticInstructionCount=" + visitArithmeticInstructionCount +
-                ", visitArrayInstructionCount=" + visitArrayInstructionCount +
-                ", visitARRAYLENGTHCount=" + visitARRAYLENGTHCount +
-                ", visitASTORECount=" + visitASTORECount +
-                ", visitATHROWCount=" + visitATHROWCount +
-                ", visitBALOADCount=" + visitBALOADCount +
-                ", visitBASTORECount=" + visitBASTORECount +
-                ", visitBIPUSHCount=" + visitBIPUSHCount +
-                ", visitBranchInstructionCount=" + visitBranchInstructionCount +
-                ", visitBREAKPOINTCount=" + visitBREAKPOINTCount +
-                ", visitCALOADCount=" + visitCALOADCount +
-                ", visitCASTORECount=" + visitCASTORECount +
-                ", visitCHECKCASTCount=" + visitCHECKCASTCount +
-                ", visitConstantPushInstructionCount=" + visitConstantPushInstructionCount +
-                ", visitConversionInstructionCount=" + visitConversionInstructionCount +
-                ", visitCPInstructionCount=" + visitCPInstructionCount +
-                ", visitD2FCount=" + visitD2FCount +
-                ", visitD2ICount=" + visitD2ICount +
-                ", visitD2LCount=" + visitD2LCount +
-                ", visitDADDCount=" + visitDADDCount +
-                ", visitDALOADCount=" + visitDALOADCount +
-                ", visitDASTORECount=" + visitDASTORECount +
-                ", visitDCMPGCount=" + visitDCMPGCount +
-                ", visitDCMPLCount=" + visitDCMPLCount +
-                ", visitDCONSTCount=" + visitDCONSTCount +
-                ", visitDDIVCount=" + visitDDIVCount +
-                ", visitDLOADCount=" + visitDLOADCount +
-                ", visitDMULCount=" + visitDMULCount +
-                ", visitDNEGCount=" + visitDNEGCount +
-                ", visitDREMCount=" + visitDREMCount +
-                ", visitDRETURNCount=" + visitDRETURNCount +
-                ", visitDSTORECount=" + visitDSTORECount +
-                ", visitDSUBCount=" + visitDSUBCount +
-                ", visitDUPCount=" + visitDUPCount +
-                ", visitDUP_X1Count=" + visitDUP_X1Count +
-                ", visitDUP_X2Count=" + visitDUP_X2Count +
-                ", visitDUP2Count=" + visitDUP2Count +
-                ", visitDUP2_X1Count=" + visitDUP2_X1Count +
-                ", visitDUP2_X2Count=" + visitDUP2_X2Count +
-                ", visitExceptionThrowerCount=" + visitExceptionThrowerCount +
-                ", visitF2DCount=" + visitF2DCount +
-                ", visitF2ICount=" + visitF2ICount +
-                ", visitF2LCount=" + visitF2LCount +
-                ", visitFADDCount=" + visitFADDCount +
-                ", visitFALOADCount=" + visitFALOADCount +
-                ", visitFASTORECount=" + visitFASTORECount +
-                ", visitFCMPGCount=" + visitFCMPGCount +
-                ", visitFCMPLCount=" + visitFCMPLCount +
-                ", visitFCONSTCount=" + visitFCONSTCount +
-                ", visitFDIVCount=" + visitFDIVCount +
-                ", visitFieldInstructionCount=" + visitFieldInstructionCount +
-                ", visitFieldOrMethodCount=" + visitFieldOrMethodCount +
-                ", visitFLOADCount=" + visitFLOADCount +
-                ", visitFMULCount=" + visitFMULCount +
-                ", visitFNEGCount=" + visitFNEGCount +
-                ", visitFREMCount=" + visitFREMCount +
-                ", visitFRETURNCount=" + visitFRETURNCount +
-                ", visitFSTORECount=" + visitFSTORECount +
-                ", visitFSUBCount=" + visitFSUBCount +
-                ", visitGETFIELDCount=" + visitGETFIELDCount +
-                ", visitGETSTATICCount=" + visitGETSTATICCount +
-                ", visitGOTOCount=" + visitGOTOCount +
-                ", visitGOTO_WCount=" + visitGOTO_WCount +
-                ", visitGotoInstructionCount=" + visitGotoInstructionCount +
-                ", visitI2BCount=" + visitI2BCount +
-                ", visitI2CCount=" + visitI2CCount +
-                ", visitI2DCount=" + visitI2DCount +
-                ", visitI2FCount=" + visitI2FCount +
-                ", visitI2LCount=" + visitI2LCount +
-                ", visitI2SCount=" + visitI2SCount +
-                ", visitIADDCount=" + visitIADDCount +
-                ", visitIALOADCount=" + visitIALOADCount +
-                ", visitIANDCount=" + visitIANDCount +
-                ", visitIASTORECount=" + visitIASTORECount +
-                ", visitICONSTCount=" + visitICONSTCount +
-                ", visitIDIVCount=" + visitIDIVCount +
-                ", visitIF_ACMPEQCount=" + visitIF_ACMPEQCount +
-                ", visitIF_ACMPNECount=" + visitIF_ACMPNECount +
-                ", visitIF_ICMPEQCount=" + visitIF_ICMPEQCount +
-                ", visitIF_ICMPGECount=" + visitIF_ICMPGECount +
-                ", visitIF_ICMPGTCount=" + visitIF_ICMPGTCount +
-                ", visitIF_ICMPLECount=" + visitIF_ICMPLECount +
-                ", visitIF_ICMPLTCount=" + visitIF_ICMPLTCount +
-                ", visitIF_ICMPNECount=" + visitIF_ICMPNECount +
-                ", visitIFEQCount=" + visitIFEQCount +
-                ", visitIFGECount=" + visitIFGECount +
-                ", visitIFGTCount=" + visitIFGTCount +
-                ", visitIfInstructionCount=" + visitIfInstructionCount +
-                ", visitIFLECount=" + visitIFLECount +
-                ", visitIFLTCount=" + visitIFLTCount +
-                ", visitIFNECount=" + visitIFNECount +
-                ", visitIFNONNULLCount=" + visitIFNONNULLCount +
-                ", visitIFNULLCount=" + visitIFNULLCount +
-                ", visitIINCCount=" + visitIINCCount +
-                ", visitILOADCount=" + visitILOADCount +
-                ", visitIMPDEP1Count=" + visitIMPDEP1Count +
-                ", visitIMPDEP2Count=" + visitIMPDEP2Count +
-                ", visitIMULCount=" + visitIMULCount +
-                ", visitINEGCount=" + visitINEGCount +
-                ", visitINSTANCEOFCount=" + visitINSTANCEOFCount +
-                ", visitINVOKEDYNAMICCount=" + visitINVOKEDYNAMICCount +
-                ", visitInvokeInstructionCount=" + visitInvokeInstructionCount +
-                ", visitINVOKEINTERFACECount=" + visitINVOKEINTERFACECount +
-                ", visitINVOKESPECIALCount=" + visitINVOKESPECIALCount +
-                ", visitINVOKESTATICCount=" + visitINVOKESTATICCount +
-                ", visitINVOKEVIRTUALCount=" + visitINVOKEVIRTUALCount +
-                ", visitIORCount=" + visitIORCount +
-                ", visitIREMCount=" + visitIREMCount +
-                ", visitIRETURNCount=" + visitIRETURNCount +
-                ", visitISHLCount=" + visitISHLCount +
-                ", visitISHRCount=" + visitISHRCount +
-                ", visitISTORECount=" + visitISTORECount +
-                ", visitISUBCount=" + visitISUBCount +
-                ", visitIUSHRCount=" + visitIUSHRCount +
-                ", visitIXORCount=" + visitIXORCount +
-                ", visitJSRCount=" + visitJSRCount +
-                ", visitJSR_WCount=" + visitJSR_WCount +
-                ", visitJsrInstructionCount=" + visitJsrInstructionCount +
-                ", visitL2DCount=" + visitL2DCount +
-                ", visitL2FCount=" + visitL2FCount +
-                ", visitL2ICount=" + visitL2ICount +
-                ", visitLADDCount=" + visitLADDCount +
-                ", visitLALOADCount=" + visitLALOADCount +
-                ", visitLANDCount=" + visitLANDCount +
-                ", visitLASTORECount=" + visitLASTORECount +
-                ", visitLCMPCount=" + visitLCMPCount +
-                ", visitLCONSTCount=" + visitLCONSTCount +
-                ", visitLDCCount=" + visitLDCCount +
-                ", visitLDC2_WCount=" + visitLDC2_WCount +
-                ", visitLDIVCount=" + visitLDIVCount +
-                ", visitLLOADCount=" + visitLLOADCount +
-                ", visitLMULCount=" + visitLMULCount +
-                ", visitLNEGCount=" + visitLNEGCount +
-                ", visitLoadClassCount=" + visitLoadClassCount +
-                ", visitLoadInstructionCount=" + visitLoadInstructionCount +
-                ", visitLocalVariableInstructionCount=" + visitLocalVariableInstructionCount +
-                ", visitLOOKUPSWITCHCount=" + visitLOOKUPSWITCHCount +
-                ", visitLORCount=" + visitLORCount +
-                ", visitLREMCount=" + visitLREMCount +
-                ", visitLRETURNCount=" + visitLRETURNCount +
-                ", visitLSHLCount=" + visitLSHLCount +
-                ", visitLSHRCount=" + visitLSHRCount +
-                ", visitLSTORECount=" + visitLSTORECount +
-                ", visitLSUBCount=" + visitLSUBCount +
-                ", visitLUSHRCount=" + visitLUSHRCount +
-                ", visitLXORCount=" + visitLXORCount +
-                ", visitMONITORENTERCount=" + visitMONITORENTERCount +
-                ", visitMONITOREXITCount=" + visitMONITOREXITCount +
-                ", visitMULTIANEWARRAYCount=" + visitMULTIANEWARRAYCount +
-                ", visitNEWCount=" + visitNEWCount +
-                ", visitNEWARRAYCount=" + visitNEWARRAYCount +
-                ", visitNOPCount=" + visitNOPCount +
-                ", visitPOPCount=" + visitPOPCount +
-                ", visitPOP2Count=" + visitPOP2Count +
-                ", visitPopInstructionCount=" + visitPopInstructionCount +
-                ", visitPushInstructionCount=" + visitPushInstructionCount +
-                ", visitPUTFIELDCount=" + visitPUTFIELDCount +
-                ", visitPUTSTATICCount=" + visitPUTSTATICCount +
-                ", visitRETCount=" + visitRETCount +
-                ", visitRETURNCount=" + visitRETURNCount +
-                ", visitReturnInstructionCount=" + visitReturnInstructionCount +
-                ", visitSALOADCount=" + visitSALOADCount +
-                ", visitSASTORECount=" + visitSASTORECount +
-                ", visitSelectCount=" + visitSelectCount +
-                ", visitSIPUSHCount=" + visitSIPUSHCount +
-                ", visitStackConsumerCount=" + visitStackConsumerCount +
-                ", visitStackInstructionCount=" + visitStackInstructionCount +
-                ", visitStackProducerCount=" + visitStackProducerCount +
-                ", visitStoreInstructionCount=" + visitStoreInstructionCount +
-                ", visitSWAPCount=" + visitSWAPCount +
-                ", visitTABLESWITCHCount=" + visitTABLESWITCHCount +
-                ", visitTypedInstructionCount=" + visitTypedInstructionCount +
-                ", visitUnconditionalBranchCount=" + visitUnconditionalBranchCount +
-                ", visitVariableLengthInstructionCount=" + visitVariableLengthInstructionCount +
-                '}';
-    }
 }
 
