@@ -21,7 +21,7 @@ import java.util.Objects;
 public class CountVisitor implements Visitor {
     private int aaload;
     private int aastore;
-    private int aconst_null;
+    private int aconstNull;
     private int allocationInstruction;
     private int aload;
     private int anewarray;
@@ -35,7 +35,7 @@ public class CountVisitor implements Visitor {
     private int bastore;
     private int bipush;
     private int branchInstruction;
-    private int BREAKPOINT;
+    private int breakpoint;
     private int caload;
     private int castore;
     private int checkcast;
@@ -60,11 +60,11 @@ public class CountVisitor implements Visitor {
     private int dstore;
     private int dsub;
     private int dup;
-    private int dup_x1;
-    private int dup_x2;
+    private int dupX1;
+    private int dupX2;
     private int dup2;
-    private int dup2_x1;
-    private int dup2_x2;
+    private int dup2X1;
+    private int dup2X2;
     private int exceptionThrower;
     private int f2D;
     private int f2I;
@@ -87,8 +87,9 @@ public class CountVisitor implements Visitor {
     private int fsub;
     private int getfield;
     private int getstatic;
+    // TBC
     private int goTo;
-    private int goTo_w;
+    private int gotoW;
     private int gotoInstruction;
     private int i2B;
     private int i2C;
@@ -102,14 +103,14 @@ public class CountVisitor implements Visitor {
     private int iastore;
     private int iconst;
     private int idiv;
-    private int if_acmpeq;
-    private int if_acmpne;
-    private int if_icmpeq;
-    private int if_icmpge;
-    private int if_icmpgt;
-    private int if_icmple;
-    private int if_icmplt;
-    private int if_icmpne;
+    private int ifAcmpeq;
+    private int ifAcmpne;
+    private int ifIcmpeq;
+    private int ifIcmpge;
+    private int ifIcmpgt;
+    private int ifIcmple;
+    private int ifIcmplt;
+    private int ifIcmpne;
     private int ifeq;
     private int ifge;
     private int ifgt;
@@ -142,7 +143,7 @@ public class CountVisitor implements Visitor {
     private int iushr;
     private int ixor;
     private int jsr;
-    private int jsr_w;
+    private int jsrW;
     private int jsrInstruction;
     private int l2D;
     private int l2F;
@@ -154,7 +155,7 @@ public class CountVisitor implements Visitor {
     private int lcmp;
     private int lconst;
     private int ldc;
-    private int ldc2_w;
+    private int ldc2W;
     private int ldiv;
     private int lload;
     private int lmul;
@@ -175,6 +176,7 @@ public class CountVisitor implements Visitor {
     private int monitorenter;
     private int monitorexit;
     private int multianewarray;
+    // TBC
     private int nEW;
     private int newarray;
     private int nop;
@@ -185,6 +187,7 @@ public class CountVisitor implements Visitor {
     private int putfield;
     private int putstatic;
     private int ret;
+    // TBC
     private int rETURN;
     private int returnInstruction;
     private int saload;
@@ -206,7 +209,7 @@ public class CountVisitor implements Visitor {
         return "CountVisitor{" +
                 "aaload=" + aaload +
                 ", aastore=" + aastore +
-                ", aconst_null=" + aconst_null +
+                ", aconstNull=" + aconstNull +
                 ", allocationInstruction=" + allocationInstruction +
                 ", aload=" + aload +
                 ", anewarray=" + anewarray +
@@ -220,7 +223,7 @@ public class CountVisitor implements Visitor {
                 ", bastore=" + bastore +
                 ", bipush=" + bipush +
                 ", branchInstruction=" + branchInstruction +
-                ", BREAKPOINT=" + BREAKPOINT +
+                ", breakpoint=" + breakpoint +
                 ", caload=" + caload +
                 ", castore=" + castore +
                 ", checkcast=" + checkcast +
@@ -245,11 +248,11 @@ public class CountVisitor implements Visitor {
                 ", dstore=" + dstore +
                 ", dsub=" + dsub +
                 ", dup=" + dup +
-                ", dup_x1=" + dup_x1 +
-                ", dup_x2=" + dup_x2 +
+                ", dupX1=" + dupX1 +
+                ", dupX2=" + dupX2 +
                 ", dup2=" + dup2 +
-                ", dup2_x1=" + dup2_x1 +
-                ", dup2_x2=" + dup2_x2 +
+                ", dup2X1=" + dup2X1 +
+                ", dup2X2=" + dup2X2 +
                 ", exceptionThrower=" + exceptionThrower +
                 ", f2D=" + f2D +
                 ", f2I=" + f2I +
@@ -273,7 +276,7 @@ public class CountVisitor implements Visitor {
                 ", getfield=" + getfield +
                 ", getstatic=" + getstatic +
                 ", goTo=" + goTo +
-                ", goTo_w=" + goTo_w +
+                ", gotoW=" + gotoW +
                 ", gotoInstruction=" + gotoInstruction +
                 ", i2B=" + i2B +
                 ", i2C=" + i2C +
@@ -287,14 +290,14 @@ public class CountVisitor implements Visitor {
                 ", iastore=" + iastore +
                 ", iconst=" + iconst +
                 ", idiv=" + idiv +
-                ", if_acmpeq=" + if_acmpeq +
-                ", if_acmpne=" + if_acmpne +
-                ", if_icmpeq=" + if_icmpeq +
-                ", if_icmpge=" + if_icmpge +
-                ", if_icmpgt=" + if_icmpgt +
-                ", if_icmple=" + if_icmple +
-                ", if_icmplt=" + if_icmplt +
-                ", if_icmpne=" + if_icmpne +
+                ", ifAcmpeq=" + ifAcmpeq +
+                ", ifAcmpne=" + ifAcmpne +
+                ", ifIcmpeq=" + ifIcmpeq +
+                ", ifIcmpge=" + ifIcmpge +
+                ", ifIcmpgt=" + ifIcmpgt +
+                ", ifIcmple=" + ifIcmple +
+                ", ifIcmplt=" + ifIcmplt +
+                ", ifIcmpne=" + ifIcmpne +
                 ", ifeq=" + ifeq +
                 ", ifge=" + ifge +
                 ", ifgt=" + ifgt +
@@ -327,7 +330,7 @@ public class CountVisitor implements Visitor {
                 ", iushr=" + iushr +
                 ", ixor=" + ixor +
                 ", jsr=" + jsr +
-                ", jsr_w=" + jsr_w +
+                ", jsrW=" + jsrW +
                 ", jsrInstruction=" + jsrInstruction +
                 ", l2D=" + l2D +
                 ", l2F=" + l2F +
@@ -339,7 +342,7 @@ public class CountVisitor implements Visitor {
                 ", lcmp=" + lcmp +
                 ", lconst=" + lconst +
                 ", ldc=" + ldc +
-                ", ldc2_w=" + ldc2_w +
+                ", ldc2W=" + ldc2W +
                 ", ldiv=" + ldiv +
                 ", lload=" + lload +
                 ", lmul=" + lmul +
@@ -404,12 +407,12 @@ public class CountVisitor implements Visitor {
         this.aastore = aastore;
     }
 
-    public int getAconst_null() {
-        return aconst_null;
+    public int getAconstNull() {
+        return aconstNull;
     }
 
-    public void setAconst_null(int aconst_null) {
-        this.aconst_null = aconst_null;
+    public void setAconstNull(int aconstNull) {
+        this.aconstNull = aconstNull;
     }
 
     public int getAllocationInstruction() {
@@ -516,12 +519,12 @@ public class CountVisitor implements Visitor {
         this.branchInstruction = branchInstruction;
     }
 
-    public int getBREAKPOINT() {
-        return BREAKPOINT;
+    public int getBreakpoint() {
+        return breakpoint;
     }
 
-    public void setBREAKPOINT(int BREAKPOINT) {
-        this.BREAKPOINT = BREAKPOINT;
+    public void setBreakpoint(int breakpoint) {
+        this.breakpoint = breakpoint;
     }
 
     public int getCaload() {
@@ -716,20 +719,20 @@ public class CountVisitor implements Visitor {
         this.dup = dup;
     }
 
-    public int getDup_x1() {
-        return dup_x1;
+    public int getDupX1() {
+        return dupX1;
     }
 
-    public void setDup_x1(int dup_x1) {
-        this.dup_x1 = dup_x1;
+    public void setDupX1(int dupX1) {
+        this.dupX1 = dupX1;
     }
 
-    public int getDup_x2() {
-        return dup_x2;
+    public int getDupX2() {
+        return dupX2;
     }
 
-    public void setDup_x2(int dup_x2) {
-        this.dup_x2 = dup_x2;
+    public void setDupX2(int dupX2) {
+        this.dupX2 = dupX2;
     }
 
     public int getDup2() {
@@ -740,20 +743,20 @@ public class CountVisitor implements Visitor {
         this.dup2 = dup2;
     }
 
-    public int getDup2_x1() {
-        return dup2_x1;
+    public int getDup2X1() {
+        return dup2X1;
     }
 
-    public void setDup2_x1(int dup2_x1) {
-        this.dup2_x1 = dup2_x1;
+    public void setDup2X1(int dup2X1) {
+        this.dup2X1 = dup2X1;
     }
 
-    public int getDup2_x2() {
-        return dup2_x2;
+    public int getDup2X2() {
+        return dup2X2;
     }
 
-    public void setDup2_x2(int dup2_x2) {
-        this.dup2_x2 = dup2_x2;
+    public void setDup2X2(int dup2X2) {
+        this.dup2X2 = dup2X2;
     }
 
     public int getExceptionThrower() {
@@ -940,12 +943,12 @@ public class CountVisitor implements Visitor {
         this.goTo = goTo;
     }
 
-    public int getGoTo_w() {
-        return goTo_w;
+    public int getGotoW() {
+        return gotoW;
     }
 
-    public void setGoTo_w(int goTo_w) {
-        this.goTo_w = goTo_w;
+    public void setGotoW(int gotoW) {
+        this.gotoW = gotoW;
     }
 
     public int getGotoInstruction() {
@@ -1052,68 +1055,68 @@ public class CountVisitor implements Visitor {
         this.idiv = idiv;
     }
 
-    public int getIf_acmpeq() {
-        return if_acmpeq;
+    public int getIfAcmpeq() {
+        return ifAcmpeq;
     }
 
-    public void setIf_acmpeq(int if_acmpeq) {
-        this.if_acmpeq = if_acmpeq;
+    public void setIfAcmpeq(int ifAcmpeq) {
+        this.ifAcmpeq = ifAcmpeq;
     }
 
-    public int getIf_acmpne() {
-        return if_acmpne;
+    public int getIfAcmpne() {
+        return ifAcmpne;
     }
 
-    public void setIf_acmpne(int if_acmpne) {
-        this.if_acmpne = if_acmpne;
+    public void setIfAcmpne(int ifAcmpne) {
+        this.ifAcmpne = ifAcmpne;
     }
 
-    public int getIf_icmpeq() {
-        return if_icmpeq;
+    public int getIfIcmpeq() {
+        return ifIcmpeq;
     }
 
-    public void setIf_icmpeq(int if_icmpeq) {
-        this.if_icmpeq = if_icmpeq;
+    public void setIfIcmpeq(int ifIcmpeq) {
+        this.ifIcmpeq = ifIcmpeq;
     }
 
-    public int getIf_icmpge() {
-        return if_icmpge;
+    public int getIfIcmpge() {
+        return ifIcmpge;
     }
 
-    public void setIf_icmpge(int if_icmpge) {
-        this.if_icmpge = if_icmpge;
+    public void setIfIcmpge(int ifIcmpge) {
+        this.ifIcmpge = ifIcmpge;
     }
 
-    public int getIf_icmpgt() {
-        return if_icmpgt;
+    public int getIfIcmpgt() {
+        return ifIcmpgt;
     }
 
-    public void setIf_icmpgt(int if_icmpgt) {
-        this.if_icmpgt = if_icmpgt;
+    public void setIfIcmpgt(int ifIcmpgt) {
+        this.ifIcmpgt = ifIcmpgt;
     }
 
-    public int getIf_icmple() {
-        return if_icmple;
+    public int getIfIcmple() {
+        return ifIcmple;
     }
 
-    public void setIf_icmple(int if_icmple) {
-        this.if_icmple = if_icmple;
+    public void setIfIcmple(int ifIcmple) {
+        this.ifIcmple = ifIcmple;
     }
 
-    public int getIf_icmplt() {
-        return if_icmplt;
+    public int getIfIcmplt() {
+        return ifIcmplt;
     }
 
-    public void setIf_icmplt(int if_icmplt) {
-        this.if_icmplt = if_icmplt;
+    public void setIfIcmplt(int ifIcmplt) {
+        this.ifIcmplt = ifIcmplt;
     }
 
-    public int getIf_icmpne() {
-        return if_icmpne;
+    public int getIfIcmpne() {
+        return ifIcmpne;
     }
 
-    public void setIf_icmpne(int if_icmpne) {
-        this.if_icmpne = if_icmpne;
+    public void setIfIcmpne(int ifIcmpne) {
+        this.ifIcmpne = ifIcmpne;
     }
 
     public int getIfeq() {
@@ -1372,12 +1375,12 @@ public class CountVisitor implements Visitor {
         this.jsr = jsr;
     }
 
-    public int getJsr_w() {
-        return jsr_w;
+    public int getJsrW() {
+        return jsrW;
     }
 
-    public void setJsr_w(int jsr_w) {
-        this.jsr_w = jsr_w;
+    public void setJsrW(int jsrW) {
+        this.jsrW = jsrW;
     }
 
     public int getJsrInstruction() {
@@ -1468,12 +1471,12 @@ public class CountVisitor implements Visitor {
         this.ldc = ldc;
     }
 
-    public int getLdc2_w() {
-        return ldc2_w;
+    public int getLdc2W() {
+        return ldc2W;
     }
 
-    public void setLdc2_w(int ldc2_w) {
-        this.ldc2_w = ldc2_w;
+    public void setLdc2W(int ldc2W) {
+        this.ldc2W = ldc2W;
     }
 
     public int getLdiv() {
@@ -1848,7 +1851,7 @@ public class CountVisitor implements Visitor {
 
     @Override
     public void visitACONST_NULL(ACONST_NULL obj) {
-        aconst_null++;
+        aconstNull++;
     }
 
     @Override
@@ -1918,7 +1921,7 @@ public class CountVisitor implements Visitor {
 
     @Override
     public void visitBREAKPOINT(BREAKPOINT obj) {
-        BREAKPOINT++;
+        breakpoint++;
     }
 
     @Override
@@ -2043,12 +2046,12 @@ public class CountVisitor implements Visitor {
 
     @Override
     public void visitDUP_X1(DUP_X1 obj) {
-        dup_x1++;
+        dupX1++;
     }
 
     @Override
     public void visitDUP_X2(DUP_X2 obj) {
-        dup_x2++;
+        dupX2++;
     }
 
     @Override
@@ -2058,12 +2061,12 @@ public class CountVisitor implements Visitor {
 
     @Override
     public void visitDUP2_X1(DUP2_X1 obj) {
-        dup2_x1++;
+        dup2X1++;
     }
 
     @Override
     public void visitDUP2_X2(DUP2_X2 obj) {
-        dup2_x2++;
+        dup2X2++;
     }
 
     @Override
@@ -2183,7 +2186,7 @@ public class CountVisitor implements Visitor {
 
     @Override
     public void visitGOTO_W(GOTO_W obj) {
-        goTo_w++;
+        gotoW++;
     }
 
     @Override
@@ -2253,42 +2256,42 @@ public class CountVisitor implements Visitor {
 
     @Override
     public void visitIF_ACMPEQ(IF_ACMPEQ obj) {
-        if_acmpeq++;
+        ifAcmpeq++;
     }
 
     @Override
     public void visitIF_ACMPNE(IF_ACMPNE obj) {
-        if_acmpne++;
+        ifAcmpne++;
     }
 
     @Override
     public void visitIF_ICMPEQ(IF_ICMPEQ obj) {
-        if_icmpeq++;
+        ifIcmpeq++;
     }
 
     @Override
     public void visitIF_ICMPGE(IF_ICMPGE obj) {
-        if_icmpge++;
+        ifIcmpge++;
     }
 
     @Override
     public void visitIF_ICMPGT(IF_ICMPGT obj) {
-        if_icmpgt++;
+        ifIcmpgt++;
     }
 
     @Override
     public void visitIF_ICMPLE(IF_ICMPLE obj) {
-        if_icmple++;
+        ifIcmple++;
     }
 
     @Override
     public void visitIF_ICMPLT(IF_ICMPLT obj) {
-        if_icmplt++;
+        ifIcmplt++;
     }
 
     @Override
     public void visitIF_ICMPNE(IF_ICMPNE obj) {
-        if_icmpne++;
+        ifIcmpne++;
     }
 
     @Override
@@ -2453,7 +2456,7 @@ public class CountVisitor implements Visitor {
 
     @Override
     public void visitJSR_W(JSR_W obj) {
-        jsr_w++;
+        jsrW++;
     }
 
     @Override
@@ -2513,7 +2516,7 @@ public class CountVisitor implements Visitor {
 
     @Override
     public void visitLDC2_W(LDC2_W obj) {
-        ldc2_w++;
+        ldc2W++;
     }
 
     @Override
@@ -2748,7 +2751,7 @@ public class CountVisitor implements Visitor {
         CountVisitor that = (CountVisitor) o;
         return aaload == that.aaload &&
                 aastore == that.aastore &&
-                aconst_null == that.aconst_null &&
+                aconstNull == that.aconstNull &&
                 allocationInstruction == that.allocationInstruction &&
                 aload == that.aload &&
                 anewarray == that.anewarray &&
@@ -2762,7 +2765,7 @@ public class CountVisitor implements Visitor {
                 bastore == that.bastore &&
                 bipush == that.bipush &&
                 branchInstruction == that.branchInstruction &&
-                BREAKPOINT == that.BREAKPOINT &&
+                breakpoint == that.breakpoint &&
                 caload == that.caload &&
                 castore == that.castore &&
                 checkcast == that.checkcast &&
@@ -2787,11 +2790,11 @@ public class CountVisitor implements Visitor {
                 dstore == that.dstore &&
                 dsub == that.dsub &&
                 dup == that.dup &&
-                dup_x1 == that.dup_x1 &&
-                dup_x2 == that.dup_x2 &&
+                dupX1 == that.dupX1 &&
+                dupX2 == that.dupX2 &&
                 dup2 == that.dup2 &&
-                dup2_x1 == that.dup2_x1 &&
-                dup2_x2 == that.dup2_x2 &&
+                dup2X1 == that.dup2X1 &&
+                dup2X2 == that.dup2X2 &&
                 exceptionThrower == that.exceptionThrower &&
                 f2D == that.f2D &&
                 f2I == that.f2I &&
@@ -2815,7 +2818,7 @@ public class CountVisitor implements Visitor {
                 getfield == that.getfield &&
                 getstatic == that.getstatic &&
                 goTo == that.goTo &&
-                goTo_w == that.goTo_w &&
+                gotoW == that.gotoW &&
                 gotoInstruction == that.gotoInstruction &&
                 i2B == that.i2B &&
                 i2C == that.i2C &&
@@ -2829,14 +2832,14 @@ public class CountVisitor implements Visitor {
                 iastore == that.iastore &&
                 iconst == that.iconst &&
                 idiv == that.idiv &&
-                if_acmpeq == that.if_acmpeq &&
-                if_acmpne == that.if_acmpne &&
-                if_icmpeq == that.if_icmpeq &&
-                if_icmpge == that.if_icmpge &&
-                if_icmpgt == that.if_icmpgt &&
-                if_icmple == that.if_icmple &&
-                if_icmplt == that.if_icmplt &&
-                if_icmpne == that.if_icmpne &&
+                ifAcmpeq == that.ifAcmpeq &&
+                ifAcmpne == that.ifAcmpne &&
+                ifIcmpeq == that.ifIcmpeq &&
+                ifIcmpge == that.ifIcmpge &&
+                ifIcmpgt == that.ifIcmpgt &&
+                ifIcmple == that.ifIcmple &&
+                ifIcmplt == that.ifIcmplt &&
+                ifIcmpne == that.ifIcmpne &&
                 ifeq == that.ifeq &&
                 ifge == that.ifge &&
                 ifgt == that.ifgt &&
@@ -2869,7 +2872,7 @@ public class CountVisitor implements Visitor {
                 iushr == that.iushr &&
                 ixor == that.ixor &&
                 jsr == that.jsr &&
-                jsr_w == that.jsr_w &&
+                jsrW == that.jsrW &&
                 jsrInstruction == that.jsrInstruction &&
                 l2D == that.l2D &&
                 l2F == that.l2F &&
@@ -2881,7 +2884,7 @@ public class CountVisitor implements Visitor {
                 lcmp == that.lcmp &&
                 lconst == that.lconst &&
                 ldc == that.ldc &&
-                ldc2_w == that.ldc2_w &&
+                ldc2W == that.ldc2W &&
                 ldiv == that.ldiv &&
                 lload == that.lload &&
                 lmul == that.lmul &&
@@ -2933,7 +2936,7 @@ public class CountVisitor implements Visitor {
     public int hashCode() {
         return Objects.hash(aaload,
                 aastore,
-                aconst_null,
+                aconstNull,
                 allocationInstruction,
                 aload,
                 anewarray,
@@ -2947,7 +2950,7 @@ public class CountVisitor implements Visitor {
                 bastore,
                 bipush,
                 branchInstruction,
-                BREAKPOINT,
+                breakpoint,
                 caload,
                 castore,
                 checkcast,
@@ -2972,11 +2975,11 @@ public class CountVisitor implements Visitor {
                 dstore,
                 dsub,
                 dup,
-                dup_x1,
-                dup_x2,
+                dupX1,
+                dupX2,
                 dup2,
-                dup2_x1,
-                dup2_x2,
+                dup2X1,
+                dup2X2,
                 exceptionThrower,
                 f2D,
                 f2I,
@@ -3000,7 +3003,7 @@ public class CountVisitor implements Visitor {
                 getfield,
                 getstatic,
                 goTo,
-                goTo_w,
+                gotoW,
                 gotoInstruction,
                 i2B,
                 i2C,
@@ -3014,14 +3017,14 @@ public class CountVisitor implements Visitor {
                 iastore,
                 iconst,
                 idiv,
-                if_acmpeq,
-                if_acmpne,
-                if_icmpeq,
-                if_icmpge,
-                if_icmpgt,
-                if_icmple,
-                if_icmplt,
-                if_icmpne,
+                ifAcmpeq,
+                ifAcmpne,
+                ifIcmpeq,
+                ifIcmpge,
+                ifIcmpgt,
+                ifIcmple,
+                ifIcmplt,
+                ifIcmpne,
                 ifeq,
                 ifge,
                 ifgt,
@@ -3054,7 +3057,7 @@ public class CountVisitor implements Visitor {
                 iushr,
                 ixor,
                 jsr,
-                jsr_w,
+                jsrW,
                 jsrInstruction,
                 l2D,
                 l2F,
@@ -3066,7 +3069,7 @@ public class CountVisitor implements Visitor {
                 lcmp,
                 lconst,
                 ldc,
-                ldc2_w,
+                ldc2W,
                 ldiv,
                 lload,
                 lmul,
