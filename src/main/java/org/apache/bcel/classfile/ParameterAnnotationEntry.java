@@ -20,8 +20,9 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * represents one parameter annotation in the parameter annotation table
@@ -34,13 +35,11 @@ public class ParameterAnnotationEntry implements Node {
 
     public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attrs) {
         // Find attributes that contain parameter annotation data
-        final List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
-        for (final Attribute attribute : attrs) {
-            if (attribute instanceof ParameterAnnotations) {
-                final ParameterAnnotations runtimeAnnotations = (ParameterAnnotations) attribute;
-                Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getParameterAnnotationEntries());
-            }
-        }
+        final List<ParameterAnnotationEntry> accumulatedAnnotations = Arrays.stream(attrs).
+                filter(attribute -> attribute instanceof ParameterAnnotations).
+                map(attribute -> (ParameterAnnotations) attribute).
+                flatMap(runtimeAnnotations -> Arrays.stream(runtimeAnnotations.getParameterAnnotationEntries())).
+                collect(Collectors.toCollection(() -> new ArrayList<>(attrs.length)));
         return accumulatedAnnotations.toArray(ParameterAnnotationEntry.EMPTY_ARRAY);
     }
 

@@ -109,13 +109,8 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
     }
 
     public final LocalVariable getLocalVariable(final int index) {
-        for (final LocalVariable variable : localVariableTypeTable) {
-            if (variable.getIndex() == index) {
-                return variable;
-            }
-        }
+        return Arrays.stream(localVariableTypeTable).filter(variable -> variable.getIndex() == index).findFirst().orElse(null);
 
-        return null;
     }
 
     public final LocalVariable[] getLocalVariableTypeTable() {

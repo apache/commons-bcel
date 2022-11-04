@@ -18,6 +18,9 @@ package org.apache.bcel.generic;
 
 import org.apache.bcel.Const;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 /**
  * Denotes array type, such as int[][]
  */
@@ -67,12 +70,8 @@ public final class ArrayType extends ReferenceType {
             basicType = type;
             break;
         }
-        final StringBuilder buf = new StringBuilder();
-        for (int i = 0; i < this.dimensions; i++) {
-            buf.append('[');
-        }
-        buf.append(basicType.getSignature());
-        super.setSignature(buf.toString());
+        final String buf = IntStream.range(0, this.dimensions).mapToObj(i -> "[").collect(Collectors.joining("", "", basicType.getSignature()));
+        super.setSignature(buf);
     }
 
     /**

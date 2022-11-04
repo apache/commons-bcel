@@ -128,9 +128,8 @@ public final class Code extends Attribute {
     private int calculateLength() {
         int len = 0;
         if (attributes != null) {
-            for (final Attribute attribute : attributes) {
-                len += attribute.getLength() + 6 /* attribute header size */;
-            }
+            /* attribute header size */
+            len = Arrays.stream(attributes).mapToInt(attribute -> attribute.getLength() + 6).sum();
         }
         return len + getInternalLength();
     }
@@ -215,24 +214,14 @@ public final class Code extends Attribute {
      * @return LineNumberTable of Code, if it has one
      */
     public LineNumberTable getLineNumberTable() {
-        for (final Attribute attribute : attributes) {
-            if (attribute instanceof LineNumberTable) {
-                return (LineNumberTable) attribute;
-            }
-        }
-        return null;
+        return (LineNumberTable) Arrays.stream(attributes).filter(attribute -> attribute instanceof LineNumberTable).findFirst().orElse(null);
     }
 
     /**
      * @return LocalVariableTable of Code, if it has one
      */
     public LocalVariableTable getLocalVariableTable() {
-        for (final Attribute attribute : attributes) {
-            if (attribute instanceof LocalVariableTable) {
-                return (LocalVariableTable) attribute;
-            }
-        }
-        return null;
+        return (LocalVariableTable) Arrays.stream(attributes).filter(attribute -> attribute instanceof LocalVariableTable).findFirst().orElse(null);
     }
 
     /**

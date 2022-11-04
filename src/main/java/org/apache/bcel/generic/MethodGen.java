@@ -24,6 +24,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -825,10 +826,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         /*
          * Each attribute causes 6 additional header bytes
          */
-        int attrsLen = 0;
-        for (final Attribute codeAttr : codeAttrs) {
-            attrsLen += codeAttr.getLength() + 6;
-        }
+        int attrsLen = Arrays.stream(codeAttrs).mapToInt(codeAttr -> codeAttr.getLength() + 6).sum();
         final CodeException[] cExc = getCodeExceptions();
         final int excLen = cExc.length * 8; // Every entry takes 8 bytes
         Code code = null;
@@ -896,10 +894,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     private List<AnnotationEntryGen> makeMutableVersion(final AnnotationEntry[] mutableArray) {
-        final List<AnnotationEntryGen> result = new ArrayList<>();
-        for (final AnnotationEntry element : mutableArray) {
-            result.add(new AnnotationEntryGen(element, getConstantPool(), false));
-        }
+        final List<AnnotationEntryGen> result = Arrays.stream(mutableArray).
+                map(element -> new AnnotationEntryGen(element, getConstantPool(), false)).
+                collect(Collectors.toList());
         return result;
     }
 
@@ -1063,9 +1060,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         if (il != null) {
             int max = isStatic() ? 0 : 1;
             if (argTypes != null) {
-                for (final Type argType : argTypes) {
-                    max += argType.getSize();
-                }
+                max += Arrays.stream(argTypes).mapToInt(Type::getSize).sum();
             }
             for (InstructionHandle ih = il.getStart(); ih != null; ih = ih.getNext()) {
                 final Instruction ins = ih.getInstruction();

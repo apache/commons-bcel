@@ -18,6 +18,7 @@ package org.apache.bcel.classfile;
 
 import java.io.DataInput;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 import org.apache.bcel.Const;
@@ -133,12 +134,8 @@ public final class Field extends FieldOrMethod {
      * @return constant value associated with this field (may be null)
      */
     public ConstantValue getConstantValue() {
-        for (final Attribute attribute : super.getAttributes()) {
-            if (attribute.getTag() == Const.ATTR_CONSTANT_VALUE) {
-                return (ConstantValue) attribute;
-            }
-        }
-        return null;
+        return (ConstantValue) Arrays.stream(super.getAttributes()).
+                filter(attribute -> attribute.getTag() == Const.ATTR_CONSTANT_VALUE).findFirst().orElse(null);
     }
 
     /**

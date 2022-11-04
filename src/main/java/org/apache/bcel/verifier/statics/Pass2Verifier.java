@@ -22,6 +22,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.Constants;
@@ -222,23 +223,13 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 // Create object for local variables information
                 // This is highly unelegant due to usage of the Visitor pattern.
                 // TODO: rework it.
-                int methodNumber = -1;
+                int methodNumber;
                 final Method[] ms = Repository.lookupClass(myOwner.getClassName()).getMethods();
-                for (int mn = 0; mn < ms.length; mn++) {
-                    if (m == ms[mn]) {
-                        methodNumber = mn;
-                        break;
-                    }
-                }
+                methodNumber = IntStream.range(0, ms.length).filter(mn -> m == ms[mn]).findFirst().orElse(-1);
                 // If the .class file is malformed the loop above may not find a method.
                 // Try matching names instead of pointers.
                 if (methodNumber < 0) {
-                    for (int mn = 0; mn < ms.length; mn++) {
-                        if (m.getName().equals(ms[mn].getName())) {
-                            methodNumber = mn;
-                            break;
-                        }
-                    }
+                    methodNumber = IntStream.range(0, ms.length).filter(mn -> m.getName().equals(ms[mn].getName())).findFirst().orElse(methodNumber);
                 }
 
                 if (methodNumber < 0) { // Mmmmh. Can we be sure BCEL does not sometimes instantiate new objects?
@@ -1207,12 +1198,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             return false;
         }
 
-        for (int i = 1; i < name.length(); i++) {
-            if (!Character.isJavaIdentifierPart(name.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
+        return IntStream.range(1, name.length()).allMatch(i -> Character.isJavaIdentifierPart(name.charAt(i)));
     }
 
     /**

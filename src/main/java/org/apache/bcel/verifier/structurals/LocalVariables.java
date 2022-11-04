@@ -17,6 +17,8 @@
 package org.apache.bcel.verifier.structurals;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.apache.bcel.generic.ReferenceType;
 import org.apache.bcel.generic.Type;
@@ -64,13 +66,8 @@ public class LocalVariables implements Cloneable {
         if (this.locals.length != lv.locals.length) {
             return false;
         }
-        for (int i = 0; i < this.locals.length; i++) {
-            if (!this.locals[i].equals(lv.locals[i])) {
-                // System.out.println(this.locals[i]+" is not "+lv.locals[i]);
-                return false;
-            }
-        }
-        return true;
+        // System.out.println(this.locals[i]+" is not "+lv.locals[i]);
+        return IntStream.range(0, this.locals.length).allMatch(i -> this.locals[i].equals(lv.locals[i]));
     }
 
     /**
@@ -203,13 +200,7 @@ public class LocalVariables implements Cloneable {
      */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < locals.length; i++) {
-            sb.append(Integer.toString(i));
-            sb.append(": ");
-            sb.append(locals[i]);
-            sb.append("\n");
-        }
-        return sb.toString();
+        final String sb = IntStream.range(0, locals.length).mapToObj(i -> Integer.toString(i) + ": " + locals[i] + "\n").collect(Collectors.joining());
+        return sb;
     }
 }

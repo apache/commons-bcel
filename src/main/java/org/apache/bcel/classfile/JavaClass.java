@@ -201,12 +201,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         this.attributes = attributes;
         this.source = source;
         // Get source file name if available
-        for (final Attribute attribute : attributes) {
-            if (attribute instanceof SourceFile) {
-                sourceFileName = ((SourceFile) attribute).getSourceFileName();
-                break;
-            }
-        }
+        sourceFileName = Arrays.stream(attributes).filter(attribute -> attribute instanceof SourceFile).findFirst()
+                .map(attribute -> ((SourceFile) attribute).getSourceFileName()).orElse(sourceFileName);
         /*
          * According to the specification the following entries must be of type `ConstantClass' but we check that anyway via the
          * `ConstPool.getConstant' method.
@@ -515,12 +511,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @return A {@link Method} corresponding to java.lang.reflect.Method if any
      */
     public Method getMethod(final java.lang.reflect.Method m) {
-        for (final Method method : methods) {
-            if (m.getName().equals(method.getName()) && m.getModifiers() == method.getModifiers() && Type.getSignature(m).equals(method.getSignature())) {
-                return method;
-            }
-        }
-        return null;
+        return Arrays.stream(methods).filter(method -> m.getName().equals(method.getName())
+                && m.getModifiers() == method.getModifiers() && Type.getSignature(m).equals(method.getSignature())).findFirst().orElse(null);
     }
 
     /**
@@ -629,12 +621,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             return true;
         }
         final JavaClass[] superInterfaces = getAllInterfaces();
-        for (final JavaClass superInterface : superInterfaces) {
-            if (superInterface.equals(inter)) {
-                return true;
-            }
-        }
-        return false;
+        return Arrays.stream(superInterfaces).anyMatch(superInterface -> superInterface.equals(inter));
     }
 
     /**

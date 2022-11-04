@@ -21,6 +21,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.apache.bcel.Const;
 
@@ -419,10 +421,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      */
     @Override
     public String toString() {
-        final StringBuilder buf = new StringBuilder();
-        for (int i = 1; i < constantPool.length; i++) {
-            buf.append(i).append(")").append(constantPool[i]).append("\n");
-        }
-        return buf.toString();
+        final String buf = IntStream.range(1, constantPool.length).mapToObj(i -> i + ")" + constantPool[i] + "\n").collect(Collectors.joining());
+        return buf;
     }
 }

@@ -17,11 +17,13 @@
 package org.apache.bcel.verifier.structurals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.bcel.generic.ASTORE;
 import org.apache.bcel.generic.ATHROW;
@@ -231,11 +233,9 @@ public class Subroutines {
         /* Satisfies Subroutine.getRecursivelyAccessedLocalsIndices(). */
         @Override
         public int[] getRecursivelyAccessedLocalsIndices() {
-            final Set<Integer> s = new HashSet<>();
+            final Set<Integer> s;
             final int[] lvs = getAccessedLocalsIndices();
-            for (final int lv : lvs) {
-                s.add(Integer.valueOf(lv));
-            }
+            s = Arrays.stream(lvs).boxed().collect(Collectors.toSet());
             _getRecursivelyAccessedLocalsIndicesHelper(s, this.subSubs());
             final int[] ret = new int[s.size()];
             int j = -1;
@@ -289,15 +289,10 @@ public class Subroutines {
          */
         @Override
         public Subroutine[] subSubs() {
-            final Set<Subroutine> h = new HashSet<>();
+            final Set<Subroutine> h = instructions.stream().map(InstructionHandle::getInstruction).
+                    filter(inst -> inst instanceof JsrInstruction).map(inst -> ((JsrInstruction) inst).getTarget()).
+                    map(Subroutines.this::getSubroutine).collect(Collectors.toSet());
 
-            for (final InstructionHandle ih : instructions) {
-                final Instruction inst = ih.getInstruction();
-                if (inst instanceof JsrInstruction) {
-                    final InstructionHandle targ = ((JsrInstruction) inst).getTarget();
-                    h.add(getSubroutine(targ));
-                }
-            }
             return h.toArray(EMPTY_ARRAY);
         }
 
@@ -422,13 +417,9 @@ public class Subroutines {
         TOPLEVEL = new SubroutineImpl();
 
         // Calculate "real" subroutines.
-        final Set<InstructionHandle> subLeaders = new HashSet<>(); // Elements: InstructionHandle
-        for (final InstructionHandle element : all) {
-            final Instruction inst = element.getInstruction();
-            if (inst instanceof JsrInstruction) {
-                subLeaders.add(((JsrInstruction) inst).getTarget());
-            }
-        }
+        final Set<InstructionHandle> subLeaders = Arrays.stream(all).map(InstructionHandle::getInstruction).
+                filter(inst -> inst instanceof JsrInstruction).map(inst -> ((JsrInstruction) inst).getTarget()).
+                collect(Collectors.toSet()); // Elements: InstructionHandle
 
         // Build up the database.
         for (final InstructionHandle astore : subLeaders) {

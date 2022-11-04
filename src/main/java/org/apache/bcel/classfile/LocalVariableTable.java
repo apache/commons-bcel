@@ -122,12 +122,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
      */
     @java.lang.Deprecated
     public final LocalVariable getLocalVariable(final int index) {
-        for (final LocalVariable variable : localVariableTable) {
-            if (variable.getIndex() == index) {
-                return variable;
-            }
-        }
-        return null;
+        return Arrays.stream(localVariableTable).filter(variable -> variable.getIndex() == index).findFirst().orElse(null);
     }
 
     /**
