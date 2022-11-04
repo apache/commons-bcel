@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LXORTestCase {
     @Test
     public void accept() {
-        final CountVisitor countVisitor = new CountVisitor();
+        final CountingVisitor countVisitor = new CountingVisitor();
         final LXOR lxor = new LXOR();
         lxor.accept(countVisitor);
-        final CountVisitor expected = new CountVisitor();
+        final CountingVisitor expected = new CountingVisitor();
         expected.setTypedInstruction(1);
         expected.setStackProducer(1);
         expected.setStackConsumer(1);

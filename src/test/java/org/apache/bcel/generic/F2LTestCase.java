@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class F2LTestCase {
     @Test
     public void accept() {
-        final CountVisitor countVisitor = new CountVisitor();
+        final CountingVisitor countVisitor = new CountingVisitor();
         final F2L f2l = new F2L();
         f2l.accept(countVisitor);
-        final CountVisitor expected = new CountVisitor();
+        final CountingVisitor expected = new CountingVisitor();
         expected.setTypedInstruction(1);
         expected.setStackProducer(1);
         expected.setStackConsumer(1);

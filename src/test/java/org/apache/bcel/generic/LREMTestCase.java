@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LREMTestCase {
     @Test
     public void accept() {
-        final CountVisitor countVisitor = new CountVisitor();
+        final CountingVisitor countVisitor = new CountingVisitor();
         final LREM lrem = new LREM();
         lrem.accept(countVisitor);
-        final CountVisitor expected = new CountVisitor();
+        final CountingVisitor expected = new CountingVisitor();
         expected.setExceptionThrower(1);
         expected.setTypedInstruction(1);
         expected.setStackProducer(1);

@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BREAKPOINTTestCase {
     @Test
     public void accept() {
-        final CountVisitor countVisitor = new CountVisitor();
+        final CountingVisitor countVisitor = new CountingVisitor();
         final BREAKPOINT breakpoint = new BREAKPOINT();
         breakpoint.accept(countVisitor);
-        final CountVisitor expected = new CountVisitor();
+        final CountingVisitor expected = new CountingVisitor();
         expected.setBreakpoint(1);
         assertEquals(expected, countVisitor);
     }

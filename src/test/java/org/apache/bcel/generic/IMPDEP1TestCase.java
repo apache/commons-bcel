@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class IMPDEP1TestCase {
     @Test
     public void accept() {
-        final CountVisitor countVisitor = new CountVisitor();
+        final CountingVisitor countVisitor = new CountingVisitor();
         final IMPDEP1 impdep1 = new IMPDEP1();
         impdep1.accept(countVisitor);
-        final CountVisitor expected = new CountVisitor();
+        final CountingVisitor expected = new CountingVisitor();
         expected.setImpdep1(1);
         assertEquals(expected, countVisitor);
     }

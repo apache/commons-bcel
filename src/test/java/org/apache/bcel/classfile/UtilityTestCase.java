@@ -28,6 +28,72 @@ import org.junit.jupiter.api.Test;
 public class UtilityTestCase {
 
     @Test
+    public void testClearBit() {
+        assertEquals(0, Utility.clearBit(0, 0));
+        assertEquals(0, Utility.clearBit(1, 0), "1 bit 0 set to 0 -> 0");
+        assertEquals(1, Utility.clearBit(1, 1), "1 bit 1 is 0 hence no change");
+        assertEquals(8, Utility.clearBit(8, 4), "1000 only has 4 bit hence no change");
+        assertEquals(1, Utility.clearBit(9, 3), "1001 bit 3 set to 0 -> 0001");
+        assertEquals(-2, Utility.clearBit(-1, 0), "111...11 set bit 0 to 0 -> 111..10");
+        assertEquals(0, Utility.clearBit(Integer.MIN_VALUE, 31), "100...00 set bit 31 to 0 -> 000..00");
+    }
+
+    @Test
+    public void testConvertString() {
+        assertEquals("\\n", Utility.convertString("\n"));
+        assertEquals("\\r", Utility.convertString("\r"));
+        assertEquals("\\\"", Utility.convertString("\""));
+        assertEquals("\\'", Utility.convertString("'"));
+        assertEquals("\\\\", Utility.convertString("\\"));
+        assertEquals("abc", Utility.convertString("abc"));
+    }
+
+    @Test
+    public void testIsSet() {
+        assertTrue(Utility.isSet(1, 0));
+        assertTrue(Utility.isSet(7, 1));
+        assertTrue(Utility.isSet(8, 3));
+        assertTrue(Utility.isSet(9, 0));
+        assertTrue(Utility.isSet(Integer.MIN_VALUE, 31));
+        assertFalse(Utility.isSet(0, 0));
+        assertFalse(Utility.isSet(8, 4));
+        assertFalse(Utility.isSet(9, 1));
+    }
+
+    @Test
+    public void testPrintArray() {
+        assertEquals(null, Utility.printArray(null, false, false));
+        assertEquals("", Utility.printArray(new Object[0], false, false));
+        assertEquals("{}", Utility.printArray(new Object[0], true, false));
+        assertEquals("null", Utility.printArray(new Object[]{null}, false, false));
+        assertEquals("a, b", Utility.printArray(new String[]{"a", "b"}, false, false));
+        assertEquals("{a, b}", Utility.printArray(new String[]{"a", "b"}, true, false));
+        assertEquals("\"a\", \"b\"", Utility.printArray(new String[]{"a", "b"}, false, true));
+        assertEquals("{\"a\", \"b\"}", Utility.printArray(new String[]{"a", "b"}, true, true));
+    }
+
+    @Test
+    public void testSearchOpcode() {
+        assertEquals(Const.ALOAD, Utility.searchOpcode("aload"));
+        assertEquals(Const.NOP, Utility.searchOpcode("nop"));
+        assertEquals(Const.BREAKPOINT, Utility.searchOpcode("breakpoint"));
+        assertEquals(Const.IMPDEP2, Utility.searchOpcode("impdep2"));
+        assertEquals(Const.I2D, Utility.searchOpcode("I2D"), "case insensitive");
+        assertEquals(Const.UNDEFINED, Utility.searchOpcode("???"), "not found");
+    }
+
+    @Test
+    public void testSetBit() {
+        assertEquals(1, Utility.setBit(0, 0), "0 bit 0 set to 1 -> 1");
+        assertEquals(1, Utility.setBit(1, 0), "1 bit 0 is 1 hence no change");
+        assertEquals(3, Utility.setBit(1, 1), "1 bit 1 set to 1 -> 3");
+        assertEquals(8, Utility.setBit(8, 3), "1000 bit 3 is 1 hence no change");
+        assertEquals(9, Utility.setBit(1, 3), "0001 bit 3 set to 1 -> 1001");
+        assertEquals(-1, Utility.setBit(-2, 0), "111...10 set bit 0 to 1 -> 111..11");
+        assertEquals(Integer.MIN_VALUE, Utility.setBit(0, 31), "000...00 set bit 31 to 0 -> 100..00");
+    }
+
+    @Test
     public void testSignatureToStringWithGenerics() throws Exception {
         // tests for BCEL-197
         assertEquals("java.util.Map<X, java.util.List<Y>>", Utility.signatureToString("Ljava/util/Map<TX;Ljava/util/List<TY;>;>;"), "generic signature");
@@ -62,71 +128,5 @@ public class UtilityTestCase {
             "class signature");
         assertEquals("<K extends Object, V extends Object> extends Object",
             Utility.signatureToString("<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;"), "class signature");
-    }
-
-    @Test
-    public void testClearBit() {
-        assertEquals(0, Utility.clearBit(0, 0));
-        assertEquals(0, Utility.clearBit(1, 0), "1 bit 0 set to 0 -> 0");
-        assertEquals(1, Utility.clearBit(1, 1), "1 bit 1 is 0 hence no change");
-        assertEquals(8, Utility.clearBit(8, 4), "1000 only has 4 bit hence no change");
-        assertEquals(1, Utility.clearBit(9, 3), "1001 bit 3 set to 0 -> 0001");
-        assertEquals(-2, Utility.clearBit(-1, 0), "111...11 set bit 0 to 0 -> 111..10");
-        assertEquals(0, Utility.clearBit(Integer.MIN_VALUE, 31), "100...00 set bit 31 to 0 -> 000..00");
-    }
-
-    @Test
-    public void testSetBit() {
-        assertEquals(1, Utility.setBit(0, 0), "0 bit 0 set to 1 -> 1");
-        assertEquals(1, Utility.setBit(1, 0), "1 bit 0 is 1 hence no change");
-        assertEquals(3, Utility.setBit(1, 1), "1 bit 1 set to 1 -> 3");
-        assertEquals(8, Utility.setBit(8, 3), "1000 bit 3 is 1 hence no change");
-        assertEquals(9, Utility.setBit(1, 3), "0001 bit 3 set to 1 -> 1001");
-        assertEquals(-1, Utility.setBit(-2, 0), "111...10 set bit 0 to 1 -> 111..11");
-        assertEquals(Integer.MIN_VALUE, Utility.setBit(0, 31), "000...00 set bit 31 to 0 -> 100..00");
-    }
-
-    @Test
-    public void testIsSet() {
-        assertTrue(Utility.isSet(1, 0));
-        assertTrue(Utility.isSet(7, 1));
-        assertTrue(Utility.isSet(8, 3));
-        assertTrue(Utility.isSet(9, 0));
-        assertTrue(Utility.isSet(Integer.MIN_VALUE, 31));
-        assertFalse(Utility.isSet(0, 0));
-        assertFalse(Utility.isSet(8, 4));
-        assertFalse(Utility.isSet(9, 1));
-    }
-
-    @Test
-    public void testConvertString() {
-        assertEquals("\\n", Utility.convertString("\n"));
-        assertEquals("\\r", Utility.convertString("\r"));
-        assertEquals("\\\"", Utility.convertString("\""));
-        assertEquals("\\'", Utility.convertString("'"));
-        assertEquals("\\\\", Utility.convertString("\\"));
-        assertEquals("abc", Utility.convertString("abc"));
-    }
-
-    @Test
-    public void testPrintArray() {
-        assertEquals(null, Utility.printArray(null, false, false));
-        assertEquals("", Utility.printArray(new Object[0], false, false));
-        assertEquals("{}", Utility.printArray(new Object[0], true, false));
-        assertEquals("null", Utility.printArray(new Object[]{null}, false, false));
-        assertEquals("a, b", Utility.printArray(new String[]{"a", "b"}, false, false));
-        assertEquals("{a, b}", Utility.printArray(new String[]{"a", "b"}, true, false));
-        assertEquals("\"a\", \"b\"", Utility.printArray(new String[]{"a", "b"}, false, true));
-        assertEquals("{\"a\", \"b\"}", Utility.printArray(new String[]{"a", "b"}, true, true));
-    }
-
-    @Test
-    public void testSearchOpcode() {
-        assertEquals(Const.ALOAD, Utility.searchOpcode("aload"));
-        assertEquals(Const.NOP, Utility.searchOpcode("nop"));
-        assertEquals(Const.BREAKPOINT, Utility.searchOpcode("breakpoint"));
-        assertEquals(Const.IMPDEP2, Utility.searchOpcode("impdep2"));
-        assertEquals(Const.I2D, Utility.searchOpcode("I2D"), "case insensitive");
-        assertEquals(Const.UNDEFINED, Utility.searchOpcode("???"), "not found");
     }
 }

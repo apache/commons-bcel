@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PUTSTATICTestCase {
     @Test
     public void accept() {
-        final CountVisitor countVisitor = new CountVisitor();
+        final CountingVisitor countVisitor = new CountingVisitor();
         final PUTSTATIC putstatic = new PUTSTATIC(0);
         putstatic.accept(countVisitor);
-        final CountVisitor expected = new CountVisitor();
+        final CountingVisitor expected = new CountingVisitor();
         expected.setExceptionThrower(1);
         expected.setStackConsumer(1);
         expected.setPopInstruction(1);

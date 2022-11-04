@@ -76,7 +76,7 @@ import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.classfile.Visitor;
 
-public class CounterVisitor implements Visitor {
+public class CountingVisitor implements Visitor {
     // CHECKSTYLE:OFF (public mutable fields in test code)
     public int unknownCount;
 

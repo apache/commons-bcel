@@ -19,28 +19,28 @@ package org.apache.bcel;
 
 import org.apache.bcel.classfile.DescendingVisitor;
 import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.visitors.CounterVisitor;
+import org.apache.bcel.visitors.CountingVisitor;
 import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractCounterVisitorTestCase extends AbstractTestCase {
-    private CounterVisitor visitor;
+    private CountingVisitor visitor;
 
     protected abstract JavaClass getTestClass() throws ClassNotFoundException;
 
-    public CounterVisitor getVisitor() {
+    public CountingVisitor getVisitor() {
         if (visitor == null) {
-            visitor = new CounterVisitor();
+            visitor = new CountingVisitor();
         }
         return visitor;
     }
 
     @BeforeEach
     public void setUp() throws ClassNotFoundException {
-        visitor = new CounterVisitor();
+        visitor = new CountingVisitor();
         new DescendingVisitor(getTestClass(), getVisitor()).visit();
     }
 
-    public void setVisitor(final CounterVisitor visitor) {
+    public void setVisitor(final CountingVisitor visitor) {
         this.visitor = visitor;
     }
 }
