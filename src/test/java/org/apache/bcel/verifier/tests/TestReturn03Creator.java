@@ -31,16 +31,20 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
 
-public class TestReturn03Creator extends TestCreator {
+public abstract class TestReturn03Creator extends TestCreator {
     private final InstructionFactory _factory;
     private final ConstantPoolGen _cp;
     private final ClassGen _cg;
+    private final Type returnType;
+    private final String genClassSuffix;
 
-    public TestReturn03Creator() {
-        _cg = new ClassGen(TEST_PACKAGE + ".TestReturn03", "java.lang.Object", "TestReturn03.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+    protected TestReturn03Creator(final Type returnType, final String genClassSuffix) {
+        _cg = new ClassGen(TEST_PACKAGE + ".TestReturn03" + genClassSuffix, "java.lang.Object", "TestReturn03.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
 
         _cp = _cg.getConstantPool();
         _factory = new InstructionFactory(_cg, _cp);
+        this.returnType = returnType;
+        this.genClassSuffix = genClassSuffix;
     }
 
     @Override
@@ -68,11 +72,11 @@ public class TestReturn03Creator extends TestCreator {
     private void createMethod_1() {
         final InstructionList il = new InstructionList();
         final MethodGen method = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, Type.NO_ARGS, new String[] {}, "test3",
-            TEST_PACKAGE + ".TestReturn03", il, _cp);
+            TEST_PACKAGE + ".TestReturn03" + genClassSuffix, il, _cp);
 
         final InstructionHandle ih_0 = il.append(InstructionConst.ACONST_NULL);
         assertNotNull(ih_0); // TODO why is this not used
-        il.append(InstructionFactory.createReturn(Type.OBJECT));
+        il.append(InstructionFactory.createReturn(returnType));
         method.setMaxStack();
         method.setMaxLocals();
         _cg.addMethod(method.getMethod());

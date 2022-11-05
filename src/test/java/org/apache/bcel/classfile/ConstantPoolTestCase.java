@@ -18,6 +18,7 @@
 package org.apache.bcel.classfile;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -43,7 +44,7 @@ class ClassWithLongConstantPoolItem {
 
 public class ConstantPoolTestCase extends AbstractTestCase {
 
-    private InstructionHandle[] getInstructionHandles(final JavaClass clazz, final ConstantPoolGen cp, final Method method) {
+    private static InstructionHandle[] getInstructionHandles(final JavaClass clazz, final ConstantPoolGen cp, final Method method) {
         final MethodGen methodGen = new MethodGen(method, clazz.getClassName(), cp);
         return methodGen.getInstructionList().getInstructionHandles();
     }
@@ -56,31 +57,63 @@ public class ConstantPoolTestCase extends AbstractTestCase {
         for (final Method method : methods) {
             if (method.getName().equals("<init>")) {
                 for (final InstructionHandle instructionHandle : getInstructionHandles(clazz, cp, method)) {
-                    assertNotNull(instructionHandle.getInstruction().toString(cp.getConstantPool()));
-                    // TODO Need real assertions.
-                    // System.out.println(string);
+                    final String instruction = instructionHandle.getInstruction().toString(cp.getConstantPool());
+                    assertNotNull(instruction);
+                    switch (instructionHandle.getPosition()) {
+                        case 0:
+                            assertEquals("aload_0", instruction);
+                            break;
+                        case 1:
+                            assertEquals("invokespecial java/lang/Object/<init>()V", instruction);
+                            break;
+                        case 4:
+                            assertEquals("return", instruction);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
     }
 
     @Test
-    public void testDoubleConstantWontThrowClassFormatException() throws ClassNotFoundException, IOException {
+    public void testClassWithDoubleConstantPoolItem() throws ClassNotFoundException, IOException {
         try (final ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
-            final JavaClass c = new ClassPathRepository(cp).loadClass("ClassWithDoubleConstantPoolItem");
-
+            final ClassWithDoubleConstantPoolItem classWithDoubleConstantPoolItem = new ClassWithDoubleConstantPoolItem();
+            final JavaClass c = new ClassPathRepository(cp).loadClass(classWithDoubleConstantPoolItem.getClass());
+            final Field[] fields = c.getFields();
+            assertNotNull(fields);
+            assertEquals(1, fields.length);
+            assertEquals(ClassWithDoubleConstantPoolItem.class.getDeclaredFields()[0].getName(), fields[0].getName());
             final ConstantPool pool = c.getConstantPool();
-            IntStream.range(0, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> pool.getConstant(i)));
+            IntStream.range(0, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> {
+                final Constant constant = pool.getConstant(i);
+                if (constant instanceof ConstantDouble) {
+                    assertEquals(classWithDoubleConstantPoolItem.d, ((ConstantDouble) constant).getBytes());
+                }
+                return constant;
+            }));
         }
     }
 
     @Test
-    public void testLongConstantWontThrowClassFormatException() throws ClassNotFoundException, IOException {
+    public void testClassWithLongConstantPoolItem() throws ClassNotFoundException, IOException {
         try (final ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
-            final JavaClass c = new ClassPathRepository(cp).loadClass("ClassWithLongConstantPoolItem");
-
+            final ClassWithLongConstantPoolItem classWithLongConstantPoolItem = new ClassWithLongConstantPoolItem();
+            final JavaClass c = new ClassPathRepository(cp).loadClass(classWithLongConstantPoolItem.getClass());
+            final Field[] fields = c.getFields();
+            assertNotNull(fields);
+            assertEquals(1, fields.length);
+            assertEquals(ClassWithLongConstantPoolItem.class.getDeclaredFields()[0].getName(), fields[0].getName());
             final ConstantPool pool = c.getConstantPool();
-            IntStream.range(0, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> pool.getConstant(i)));
+            IntStream.range(0, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> {
+                final Constant constant = pool.getConstant(i);
+                if (constant instanceof ConstantLong) {
+                    assertEquals(classWithLongConstantPoolItem.l, ((ConstantLong) constant).getBytes());
+                }
+                return constant;
+            }));
         }
     }
 
