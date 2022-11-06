@@ -99,23 +99,6 @@ public class Subroutines {
         }
 
         /**
-         * A recursive helper method for getRecursivelyAccessedLocalsIndices().
-         *
-         * @see #getRecursivelyAccessedLocalsIndices()
-         */
-        private void _getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> set, final Subroutine[] subs) {
-            for (final Subroutine sub : subs) {
-                final int[] lvs = sub.getAccessedLocalsIndices();
-                for (final int lv : lvs) {
-                    set.add(Integer.valueOf(lv));
-                }
-                if (sub.subSubs().length != 0) {
-                    _getRecursivelyAccessedLocalsIndicesHelper(set, sub.subSubs());
-                }
-            }
-        }
-
-        /**
          * Adds a new JSR or JSR_W that has this subroutine as its target.
          */
         public void addEnteringJsrInstruction(final InstructionHandle jsrInst) {
@@ -236,7 +219,7 @@ public class Subroutines {
             for (final int lv : lvs) {
                 s.add(Integer.valueOf(lv));
             }
-            _getRecursivelyAccessedLocalsIndicesHelper(s, this.subSubs());
+            getRecursivelyAccessedLocalsIndicesHelper(s, this.subSubs());
             final int[] ret = new int[s.size()];
             int j = -1;
             for (final Integer index : s) {
@@ -244,6 +227,23 @@ public class Subroutines {
                 ret[j] = index.intValue();
             }
             return ret;
+        }
+
+        /**
+         * A recursive helper method for getRecursivelyAccessedLocalsIndices().
+         *
+         * @see #getRecursivelyAccessedLocalsIndices()
+         */
+        private void getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> set, final Subroutine[] subs) {
+            for (final Subroutine sub : subs) {
+                final int[] lvs = sub.getAccessedLocalsIndices();
+                for (final int lv : lvs) {
+                    set.add(Integer.valueOf(lv));
+                }
+                if (sub.subSubs().length != 0) {
+                    getRecursivelyAccessedLocalsIndicesHelper(set, sub.subSubs());
+                }
+            }
         }
 
         /**
@@ -519,16 +519,16 @@ public class Subroutines {
             // Now make sure no instruction of a Subroutine is protected by exception handling code
             // as is mandated by JustIces notion of subroutines.
             for (final CodeExceptionGen handler : handlers) {
-                InstructionHandle _protected = handler.getStartPC();
-                while (_protected != handler.getEndPC().getNext()) {
+                InstructionHandle protectedIh = handler.getStartPC();
+                while (protectedIh != handler.getEndPC().getNext()) {
                     // Note the inclusive/inclusive notation of "generic API" exception handlers!
                     for (final Subroutine sub : subroutines.values()) {
-                        if (sub != subroutines.get(all[0]) && sub.contains(_protected)) {
-                            throw new StructuralCodeConstraintException("Subroutine instruction '" + _protected + "' is protected by an exception handler, '"
+                        if (sub != subroutines.get(all[0]) && sub.contains(protectedIh)) {
+                            throw new StructuralCodeConstraintException("Subroutine instruction '" + protectedIh + "' is protected by an exception handler, '"
                                 + handler + "'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
                         }
                     }
-                    _protected = _protected.getNext();
+                    protectedIh = protectedIh.getNext();
                 }
             }
         }

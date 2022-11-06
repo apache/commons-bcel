@@ -130,12 +130,12 @@ public class ConstantPoolGen {
                 }
             } else if (c instanceof ConstantNameAndType) {
                 final ConstantNameAndType n = (ConstantNameAndType) c;
-                final ConstantUtf8 u8 = (ConstantUtf8) constants[n.getNameIndex()];
-                final ConstantUtf8 u8_2 = (ConstantUtf8) constants[n.getSignatureIndex()];
+                final ConstantUtf8 u8NameIdx = (ConstantUtf8) constants[n.getNameIndex()];
+                final ConstantUtf8 u8SigIdx = (ConstantUtf8) constants[n.getSignatureIndex()];
 
-                sb.append(u8.getBytes());
+                sb.append(u8NameIdx.getBytes());
                 sb.append(NAT_DELIM);
-                sb.append(u8_2.getBytes());
+                sb.append(u8SigIdx.getBytes());
                 final String key = sb.toString();
                 sb.delete(0, sb.length());
 
