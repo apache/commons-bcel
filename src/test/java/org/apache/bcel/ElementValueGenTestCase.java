@@ -71,7 +71,7 @@ public class ElementValueGenTestCase extends AbstractTestCase {
     public void testCreateByteElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
-        final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_CHAR, cp, (byte) 'z');
+        final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_BYTE, cp, (byte) 'z');
         // Creation of an element like that should leave a new entry in the
         // cpool
         final int idx = cp.lookupInteger((byte) 'z');
