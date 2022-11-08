@@ -44,7 +44,7 @@ Apache Commons BCEL
 ===================
 
 [![GitHub Actions Status](https://github.com/apache/commons-bcel/workflows/Java%20CI/badge.svg)](https://github.com/apache/commons-bcel/actions)
-[![Coverage Status](https://codecov.io/gh/apache/commons-bcel/branch/master/graph/badge.svg)](https://app.codecov.io/gh/apache/commons-bcel)
+[![Coverage Status](https://codecov.io/gh/apache/commons-bcel/branch/master/graph/badge.svg)](https://app.codecov.io/gh/apache/commons-bcel/tree/master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/?gav=true)
 [![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.6.1.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.6.1)
 [![CodeQL](https://github.com/apache/commons-bcel/workflows/CodeQL/badge.svg)](hhttps://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml?query=workflow%3ACodeQL)
