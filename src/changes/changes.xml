@@ -63,16 +63,16 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.6.2" date="20YY-MM-DD" description="Maintenance and bug fix release.">
-       <!-- FIX -->
+      <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="nbauma109, Gary Gregory">Typo in SimpleElementValue error message #161.</action>
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Fix small performance bug in org.apache.bcel.verifier.structurals.ExceptionHandlers.ExceptionHandlers(MethodGen).</action>
       <action                  type="fix" dev="ggregory" due-to="Sam Ng, Gary Gregory">Improve test coverage to bcel/generic and UtilityTest #162.</action>
-       <!-- UPDATE -->
+      <!-- UPDATE -->
     </release>
     <release version="6.6.1" date="2022-10-29" description="Maintenance and bug fix release.">
-       <!-- FIX -->
+      <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Kengo TODA, Gary Gregory">Keep ConstantPool.getConstant(int) backward compatible with 6.5.0 #157.</action>
-       <!-- UPDATE -->
+      <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump actions/setup-java from 3.5.1 to 3.6.0 #159.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs from 4.7.2 to 4.7.3.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugub from 4.7.2.1 to 4.7.2.2.</action>
