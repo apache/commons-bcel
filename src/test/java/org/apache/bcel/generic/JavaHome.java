@@ -150,7 +150,6 @@ public class JavaHome {
     private final Path path;
 
     private JavaHome(final Path path) {
-        super();
         this.path = Objects.requireNonNull(path, "path");
     }
 
