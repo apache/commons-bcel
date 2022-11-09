@@ -800,7 +800,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         /*
          * Also updates positions of instructions, i.e., their indices
          */
-        byte[] byteCode = il != null ? il.getByteCode() : null;
+        final byte[] byteCode = il != null ? il.getByteCode() : null;
         LineNumberTable lnt = null;
         LocalVariableTable lvt = null;
         /*

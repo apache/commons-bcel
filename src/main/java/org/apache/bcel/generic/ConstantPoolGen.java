@@ -358,8 +358,8 @@ public class ConstantPoolGen {
             return cpRet; // Already in CP
         }
         adjustSize();
-        int classIndex = addClass(className);
-        int nameAndTypeIndex = addNameAndType(fieldName, signature);
+        final int classIndex = addClass(className);
+        final int nameAndTypeIndex = addNameAndType(fieldName, signature);
         final int ret = index;
         constants[index++] = new ConstantFieldref(classIndex, nameAndTypeIndex);
         return computeIfAbsent(cpTable, className + FIELDREF_DELIM + fieldName + FIELDREF_DELIM + signature, ret);
@@ -417,8 +417,8 @@ public class ConstantPoolGen {
             return cpRet; // Already in CP
         }
         adjustSize();
-        int classIndex = addClass(className);
-        int nameAndTypeIndex = addNameAndType(methodName, signature);
+        final int classIndex = addClass(className);
+        final int nameAndTypeIndex = addNameAndType(methodName, signature);
         final int ret = index;
         constants[index++] = new ConstantInterfaceMethodref(classIndex, nameAndTypeIndex);
         return computeIfAbsent(cpTable, className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature, ret);
@@ -459,8 +459,8 @@ public class ConstantPoolGen {
             return cpRet; // Already in CP
         }
         adjustSize();
-        int nameAndTypeIndex = addNameAndType(methodName, signature);
-        int classIndex = addClass(className);
+        final int nameAndTypeIndex = addNameAndType(methodName, signature);
+        final int classIndex = addClass(className);
         final int ret = index;
         constants[index++] = new ConstantMethodref(classIndex, nameAndTypeIndex);
         return computeIfAbsent(cpTable, className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature, ret);
@@ -479,8 +479,8 @@ public class ConstantPoolGen {
             return ret; // Already in CP
         }
         adjustSize();
-        int nameIndex = addUtf8(name);
-        int signatureIndex = addUtf8(signature);
+        final int nameIndex = addUtf8(name);
+        final int signatureIndex = addUtf8(signature);
         ret = index;
         constants[index++] = new ConstantNameAndType(nameIndex, signatureIndex);
         return computeIfAbsent(natTable, name + NAT_DELIM + signature, ret);
