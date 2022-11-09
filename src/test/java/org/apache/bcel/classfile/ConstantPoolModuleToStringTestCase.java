@@ -473,7 +473,7 @@ public class ConstantPoolModuleToStringTestCase {
             }
         }
     }
-    
+
     @ParameterizedTest
     @ValueSource(strings = {
     // @formatter:off
@@ -490,7 +490,7 @@ public class ConstantPoolModuleToStringTestCase {
     public void testClass(final String className) throws Exception {
         testJavaClass(SyntheticRepository.getInstance().loadClass(className));
     }
-    
+
     private static void test(final InputStream inputStream) throws IOException {
         final ClassParser classParser = new ClassParser(inputStream, "module-info.class");
         final JavaClass javaClass = classParser.parse();
