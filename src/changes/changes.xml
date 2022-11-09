@@ -65,7 +65,7 @@ The <action> type attribute can be add,update,fix,remove.
     <release version="6.6.2" date="20YY-MM-DD" description="Maintenance and bug fix release.">
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="nbauma109, Gary Gregory">Typo in SimpleElementValue error message #161.</action>
-      <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Fix small performance bug in org.apache.bcel.verifier.structurals.ExceptionHandlers.ExceptionHandlers(MethodGen).</action>
+      <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Fix code duplication in org.apache.bcel.verifier.structurals.ExceptionHandlers.ExceptionHandlers(MethodGen).</action>
       <action                  type="fix" dev="ggregory" due-to="Sam Ng, Gary Gregory">Improve test coverage to bcel/generic and UtilityTest #162.</action>
       <!-- UPDATE -->
     </release>
