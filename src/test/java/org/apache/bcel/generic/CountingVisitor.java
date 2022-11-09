@@ -202,14 +202,17 @@ public class CountingVisitor implements Visitor {
     private int variableLengthInstruction;
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        CountingVisitor other = (CountingVisitor) obj;
+        }
+        final CountingVisitor other = (CountingVisitor) obj;
         return aaload == other.aaload && aastore == other.aastore && aconstNull == other.aconstNull && allocationInstruction == other.allocationInstruction
                 && aload == other.aload && anewarray == other.anewarray && areturn == other.areturn && arithmeticInstruction == other.arithmeticInstruction
                 && arrayInstruction == other.arrayInstruction && arraylength == other.arraylength && astore == other.astore && athrow == other.athrow
@@ -994,727 +997,727 @@ public class CountingVisitor implements Visitor {
                 variableLengthInstruction);
     }
 
-    public void setAaload(int aaload) {
+    public void setAaload(final int aaload) {
         this.aaload = aaload;
     }
 
-    public void setAastore(int aastore) {
+    public void setAastore(final int aastore) {
         this.aastore = aastore;
     }
 
-    public void setAconstNull(int aconstNull) {
+    public void setAconstNull(final int aconstNull) {
         this.aconstNull = aconstNull;
     }
 
-    public void setAllocationInstruction(int allocationInstruction) {
+    public void setAllocationInstruction(final int allocationInstruction) {
         this.allocationInstruction = allocationInstruction;
     }
 
-    public void setAload(int aload) {
+    public void setAload(final int aload) {
         this.aload = aload;
     }
 
-    public void setAnewarray(int anewarray) {
+    public void setAnewarray(final int anewarray) {
         this.anewarray = anewarray;
     }
 
-    public void setAreturn(int areturn) {
+    public void setAreturn(final int areturn) {
         this.areturn = areturn;
     }
 
-    public void setArithmeticInstruction(int arithmeticInstruction) {
+    public void setArithmeticInstruction(final int arithmeticInstruction) {
         this.arithmeticInstruction = arithmeticInstruction;
     }
 
-    public void setArrayInstruction(int arrayInstruction) {
+    public void setArrayInstruction(final int arrayInstruction) {
         this.arrayInstruction = arrayInstruction;
     }
 
-    public void setArraylength(int arraylength) {
+    public void setArraylength(final int arraylength) {
         this.arraylength = arraylength;
     }
 
-    public void setAstore(int astore) {
+    public void setAstore(final int astore) {
         this.astore = astore;
     }
 
-    public void setAthrow(int athrow) {
+    public void setAthrow(final int athrow) {
         this.athrow = athrow;
     }
 
-    public void setBaload(int baload) {
+    public void setBaload(final int baload) {
         this.baload = baload;
     }
 
-    public void setBastore(int bastore) {
+    public void setBastore(final int bastore) {
         this.bastore = bastore;
     }
 
-    public void setBipush(int bipush) {
+    public void setBipush(final int bipush) {
         this.bipush = bipush;
     }
 
-    public void setBranchInstruction(int branchInstruction) {
+    public void setBranchInstruction(final int branchInstruction) {
         this.branchInstruction = branchInstruction;
     }
 
-    public void setBreakpoint(int breakpoint) {
+    public void setBreakpoint(final int breakpoint) {
         this.breakpoint = breakpoint;
     }
 
-    public void setCaload(int caload) {
+    public void setCaload(final int caload) {
         this.caload = caload;
     }
 
-    public void setCastore(int castore) {
+    public void setCastore(final int castore) {
         this.castore = castore;
     }
 
-    public void setCheckcast(int checkcast) {
+    public void setCheckcast(final int checkcast) {
         this.checkcast = checkcast;
     }
 
-    public void setConstantPushInstruction(int constantPushInstruction) {
+    public void setConstantPushInstruction(final int constantPushInstruction) {
         this.constantPushInstruction = constantPushInstruction;
     }
 
-    public void setConversionInstruction(int conversionInstruction) {
+    public void setConversionInstruction(final int conversionInstruction) {
         this.conversionInstruction = conversionInstruction;
     }
 
-    public void setCpInstruction(int cpInstruction) {
+    public void setCpInstruction(final int cpInstruction) {
         this.cpInstruction = cpInstruction;
     }
 
-    public void setD2F(int d2F) {
+    public void setD2F(final int d2F) {
         this.d2F = d2F;
     }
 
-    public void setD2I(int d2I) {
+    public void setD2I(final int d2I) {
         this.d2I = d2I;
     }
 
-    public void setD2L(int d2L) {
+    public void setD2L(final int d2L) {
         this.d2L = d2L;
     }
 
-    public void setDadd(int dadd) {
+    public void setDadd(final int dadd) {
         this.dadd = dadd;
     }
 
-    public void setDaload(int daload) {
+    public void setDaload(final int daload) {
         this.daload = daload;
     }
 
-    public void setDastore(int dastore) {
+    public void setDastore(final int dastore) {
         this.dastore = dastore;
     }
 
-    public void setDcmpg(int dcmpg) {
+    public void setDcmpg(final int dcmpg) {
         this.dcmpg = dcmpg;
     }
 
-    public void setDcmpl(int dcmpl) {
+    public void setDcmpl(final int dcmpl) {
         this.dcmpl = dcmpl;
     }
 
-    public void setDconst(int dconst) {
+    public void setDconst(final int dconst) {
         this.dconst = dconst;
     }
 
-    public void setDdiv(int ddiv) {
+    public void setDdiv(final int ddiv) {
         this.ddiv = ddiv;
     }
 
-    public void setDload(int dload) {
+    public void setDload(final int dload) {
         this.dload = dload;
     }
 
-    public void setDmul(int dmul) {
+    public void setDmul(final int dmul) {
         this.dmul = dmul;
     }
 
-    public void setDneg(int dneg) {
+    public void setDneg(final int dneg) {
         this.dneg = dneg;
     }
 
-    public void setDrem(int drem) {
+    public void setDrem(final int drem) {
         this.drem = drem;
     }
 
-    public void setDreturn(int dreturn) {
+    public void setDreturn(final int dreturn) {
         this.dreturn = dreturn;
     }
 
-    public void setDstore(int dstore) {
+    public void setDstore(final int dstore) {
         this.dstore = dstore;
     }
 
-    public void setDsub(int dsub) {
+    public void setDsub(final int dsub) {
         this.dsub = dsub;
     }
 
-    public void setDup(int dup) {
+    public void setDup(final int dup) {
         this.dup = dup;
     }
 
-    public void setDup2(int dup2) {
+    public void setDup2(final int dup2) {
         this.dup2 = dup2;
     }
 
-    public void setDup2X1(int dup2X1) {
+    public void setDup2X1(final int dup2X1) {
         this.dup2X1 = dup2X1;
     }
 
-    public void setDup2X2(int dup2X2) {
+    public void setDup2X2(final int dup2X2) {
         this.dup2X2 = dup2X2;
     }
 
-    public void setDupX1(int dupX1) {
+    public void setDupX1(final int dupX1) {
         this.dupX1 = dupX1;
     }
 
-    public void setDupX2(int dupX2) {
+    public void setDupX2(final int dupX2) {
         this.dupX2 = dupX2;
     }
 
-    public void setExceptionThrower(int exceptionThrower) {
+    public void setExceptionThrower(final int exceptionThrower) {
         this.exceptionThrower = exceptionThrower;
     }
 
-    public void setF2D(int f2D) {
+    public void setF2D(final int f2D) {
         this.f2D = f2D;
     }
 
-    public void setF2I(int f2I) {
+    public void setF2I(final int f2I) {
         this.f2I = f2I;
     }
 
-    public void setF2L(int f2L) {
+    public void setF2L(final int f2L) {
         this.f2L = f2L;
     }
 
-    public void setFadd(int fadd) {
+    public void setFadd(final int fadd) {
         this.fadd = fadd;
     }
 
-    public void setFaload(int faload) {
+    public void setFaload(final int faload) {
         this.faload = faload;
     }
 
-    public void setFastore(int fastore) {
+    public void setFastore(final int fastore) {
         this.fastore = fastore;
     }
 
-    public void setFcmpg(int fcmpg) {
+    public void setFcmpg(final int fcmpg) {
         this.fcmpg = fcmpg;
     }
 
-    public void setFcmpl(int fcmpl) {
+    public void setFcmpl(final int fcmpl) {
         this.fcmpl = fcmpl;
     }
 
-    public void setFconst(int fconst) {
+    public void setFconst(final int fconst) {
         this.fconst = fconst;
     }
 
-    public void setFdiv(int fdiv) {
+    public void setFdiv(final int fdiv) {
         this.fdiv = fdiv;
     }
 
-    public void setFieldInstruction(int fieldInstruction) {
+    public void setFieldInstruction(final int fieldInstruction) {
         this.fieldInstruction = fieldInstruction;
     }
 
-    public void setFieldOrMethod(int fieldOrMethod) {
+    public void setFieldOrMethod(final int fieldOrMethod) {
         this.fieldOrMethod = fieldOrMethod;
     }
 
-    public void setFload(int fload) {
+    public void setFload(final int fload) {
         this.fload = fload;
     }
 
-    public void setFmul(int fmul) {
+    public void setFmul(final int fmul) {
         this.fmul = fmul;
     }
 
-    public void setFneg(int fneg) {
+    public void setFneg(final int fneg) {
         this.fneg = fneg;
     }
 
-    public void setFrem(int frem) {
+    public void setFrem(final int frem) {
         this.frem = frem;
     }
 
-    public void setFreturn(int freturn) {
+    public void setFreturn(final int freturn) {
         this.freturn = freturn;
     }
 
-    public void setFstore(int fstore) {
+    public void setFstore(final int fstore) {
         this.fstore = fstore;
     }
 
-    public void setFsub(int fsub) {
+    public void setFsub(final int fsub) {
         this.fsub = fsub;
     }
 
-    public void setGetfield(int getfield) {
+    public void setGetfield(final int getfield) {
         this.getfield = getfield;
     }
 
-    public void setGetstatic(int getstatic) {
+    public void setGetstatic(final int getstatic) {
         this.getstatic = getstatic;
     }
 
-    public void setGoTo(int goTo) {
+    public void setGoTo(final int goTo) {
         this.goTo = goTo;
     }
 
-    public void setGotoInstruction(int gotoInstruction) {
+    public void setGotoInstruction(final int gotoInstruction) {
         this.gotoInstruction = gotoInstruction;
     }
 
-    public void setGotoW(int gotoW) {
+    public void setGotoW(final int gotoW) {
         this.gotoW = gotoW;
     }
 
-    public void setI2B(int i2B) {
+    public void setI2B(final int i2B) {
         this.i2B = i2B;
     }
 
-    public void setI2C(int i2C) {
+    public void setI2C(final int i2C) {
         this.i2C = i2C;
     }
 
-    public void setI2D(int i2D) {
+    public void setI2D(final int i2D) {
         this.i2D = i2D;
     }
 
-    public void setI2F(int i2F) {
+    public void setI2F(final int i2F) {
         this.i2F = i2F;
     }
 
-    public void setI2L(int i2L) {
+    public void setI2L(final int i2L) {
         this.i2L = i2L;
     }
 
-    public void setI2S(int i2S) {
+    public void setI2S(final int i2S) {
         this.i2S = i2S;
     }
 
-    public void setIadd(int iadd) {
+    public void setIadd(final int iadd) {
         this.iadd = iadd;
     }
 
-    public void setIaload(int iaload) {
+    public void setIaload(final int iaload) {
         this.iaload = iaload;
     }
 
-    public void setIand(int iand) {
+    public void setIand(final int iand) {
         this.iand = iand;
     }
 
-    public void setIastore(int iastore) {
+    public void setIastore(final int iastore) {
         this.iastore = iastore;
     }
 
-    public void setIconst(int iconst) {
+    public void setIconst(final int iconst) {
         this.iconst = iconst;
     }
 
-    public void setIdiv(int idiv) {
+    public void setIdiv(final int idiv) {
         this.idiv = idiv;
     }
 
-    public void setIfAcmpeq(int ifAcmpeq) {
+    public void setIfAcmpeq(final int ifAcmpeq) {
         this.ifAcmpeq = ifAcmpeq;
     }
 
-    public void setIfAcmpne(int ifAcmpne) {
+    public void setIfAcmpne(final int ifAcmpne) {
         this.ifAcmpne = ifAcmpne;
     }
 
-    public void setIfeq(int ifeq) {
+    public void setIfeq(final int ifeq) {
         this.ifeq = ifeq;
     }
 
-    public void setIfge(int ifge) {
+    public void setIfge(final int ifge) {
         this.ifge = ifge;
     }
 
-    public void setIfgt(int ifgt) {
+    public void setIfgt(final int ifgt) {
         this.ifgt = ifgt;
     }
 
-    public void setIfIcmpeq(int ifIcmpeq) {
+    public void setIfIcmpeq(final int ifIcmpeq) {
         this.ifIcmpeq = ifIcmpeq;
     }
 
-    public void setIfIcmpge(int ifIcmpge) {
+    public void setIfIcmpge(final int ifIcmpge) {
         this.ifIcmpge = ifIcmpge;
     }
 
-    public void setIfIcmpgt(int ifIcmpgt) {
+    public void setIfIcmpgt(final int ifIcmpgt) {
         this.ifIcmpgt = ifIcmpgt;
     }
 
-    public void setIfIcmple(int ifIcmple) {
+    public void setIfIcmple(final int ifIcmple) {
         this.ifIcmple = ifIcmple;
     }
 
-    public void setIfIcmplt(int ifIcmplt) {
+    public void setIfIcmplt(final int ifIcmplt) {
         this.ifIcmplt = ifIcmplt;
     }
 
-    public void setIfIcmpne(int ifIcmpne) {
+    public void setIfIcmpne(final int ifIcmpne) {
         this.ifIcmpne = ifIcmpne;
     }
 
-    public void setIfInstruction(int ifInstruction) {
+    public void setIfInstruction(final int ifInstruction) {
         this.ifInstruction = ifInstruction;
     }
 
-    public void setIfle(int ifle) {
+    public void setIfle(final int ifle) {
         this.ifle = ifle;
     }
 
-    public void setIflt(int iflt) {
+    public void setIflt(final int iflt) {
         this.iflt = iflt;
     }
 
-    public void setIfne(int ifne) {
+    public void setIfne(final int ifne) {
         this.ifne = ifne;
     }
 
-    public void setIfnonnull(int ifnonnull) {
+    public void setIfnonnull(final int ifnonnull) {
         this.ifnonnull = ifnonnull;
     }
 
-    public void setIfnull(int ifnull) {
+    public void setIfnull(final int ifnull) {
         this.ifnull = ifnull;
     }
 
-    public void setIinc(int iinc) {
+    public void setIinc(final int iinc) {
         this.iinc = iinc;
     }
 
-    public void setIload(int iload) {
+    public void setIload(final int iload) {
         this.iload = iload;
     }
 
-    public void setImpdep1(int impdep1) {
+    public void setImpdep1(final int impdep1) {
         this.impdep1 = impdep1;
     }
 
-    public void setImpdep2(int impdep2) {
+    public void setImpdep2(final int impdep2) {
         this.impdep2 = impdep2;
     }
 
-    public void setImul(int imul) {
+    public void setImul(final int imul) {
         this.imul = imul;
     }
 
-    public void setIneg(int ineg) {
+    public void setIneg(final int ineg) {
         this.ineg = ineg;
     }
 
-    public void setInstanceOf(int instanceOf) {
+    public void setInstanceOf(final int instanceOf) {
         this.instanceOf = instanceOf;
     }
 
-    public void setInvokedynamic(int invokedynamic) {
+    public void setInvokedynamic(final int invokedynamic) {
         this.invokedynamic = invokedynamic;
     }
 
-    public void setInvokeInstruction(int invokeInstruction) {
+    public void setInvokeInstruction(final int invokeInstruction) {
         this.invokeInstruction = invokeInstruction;
     }
 
-    public void setInvokeinterface(int invokeinterface) {
+    public void setInvokeinterface(final int invokeinterface) {
         this.invokeinterface = invokeinterface;
     }
 
-    public void setInvokespecial(int invokespecial) {
+    public void setInvokespecial(final int invokespecial) {
         this.invokespecial = invokespecial;
     }
 
-    public void setInvokestatic(int invokestatic) {
+    public void setInvokestatic(final int invokestatic) {
         this.invokestatic = invokestatic;
     }
 
-    public void setInvokevirtual(int invokevirtual) {
+    public void setInvokevirtual(final int invokevirtual) {
         this.invokevirtual = invokevirtual;
     }
 
-    public void setIor(int ior) {
+    public void setIor(final int ior) {
         this.ior = ior;
     }
 
-    public void setIrem(int irem) {
+    public void setIrem(final int irem) {
         this.irem = irem;
     }
 
-    public void setIreturn(int ireturn) {
+    public void setIreturn(final int ireturn) {
         this.ireturn = ireturn;
     }
 
-    public void setIshl(int ishl) {
+    public void setIshl(final int ishl) {
         this.ishl = ishl;
     }
 
-    public void setIshr(int ishr) {
+    public void setIshr(final int ishr) {
         this.ishr = ishr;
     }
 
-    public void setIstore(int istore) {
+    public void setIstore(final int istore) {
         this.istore = istore;
     }
 
-    public void setIsub(int isub) {
+    public void setIsub(final int isub) {
         this.isub = isub;
     }
 
-    public void setIushr(int iushr) {
+    public void setIushr(final int iushr) {
         this.iushr = iushr;
     }
 
-    public void setIxor(int ixor) {
+    public void setIxor(final int ixor) {
         this.ixor = ixor;
     }
 
-    public void setJsr(int jsr) {
+    public void setJsr(final int jsr) {
         this.jsr = jsr;
     }
 
-    public void setJsrInstruction(int jsrInstruction) {
+    public void setJsrInstruction(final int jsrInstruction) {
         this.jsrInstruction = jsrInstruction;
     }
 
-    public void setJsrW(int jsrW) {
+    public void setJsrW(final int jsrW) {
         this.jsrW = jsrW;
     }
 
-    public void setL2D(int l2D) {
+    public void setL2D(final int l2D) {
         this.l2D = l2D;
     }
 
-    public void setL2F(int l2F) {
+    public void setL2F(final int l2F) {
         this.l2F = l2F;
     }
 
-    public void setL2I(int l2I) {
+    public void setL2I(final int l2I) {
         this.l2I = l2I;
     }
 
-    public void setLadd(int ladd) {
+    public void setLadd(final int ladd) {
         this.ladd = ladd;
     }
 
-    public void setLaload(int laload) {
+    public void setLaload(final int laload) {
         this.laload = laload;
     }
 
-    public void setLand(int land) {
+    public void setLand(final int land) {
         this.land = land;
     }
 
-    public void setLastore(int lastore) {
+    public void setLastore(final int lastore) {
         this.lastore = lastore;
     }
 
-    public void setLcmp(int lcmp) {
+    public void setLcmp(final int lcmp) {
         this.lcmp = lcmp;
     }
 
-    public void setLconst(int lconst) {
+    public void setLconst(final int lconst) {
         this.lconst = lconst;
     }
 
-    public void setLdc(int ldc) {
+    public void setLdc(final int ldc) {
         this.ldc = ldc;
     }
 
-    public void setLdc2W(int ldc2W) {
+    public void setLdc2W(final int ldc2W) {
         this.ldc2W = ldc2W;
     }
 
-    public void setLdiv(int ldiv) {
+    public void setLdiv(final int ldiv) {
         this.ldiv = ldiv;
     }
 
-    public void setLload(int lload) {
+    public void setLload(final int lload) {
         this.lload = lload;
     }
 
-    public void setLmul(int lmul) {
+    public void setLmul(final int lmul) {
         this.lmul = lmul;
     }
 
-    public void setLneg(int lneg) {
+    public void setLneg(final int lneg) {
         this.lneg = lneg;
     }
 
-    public void setLoadClass(int loadClass) {
+    public void setLoadClass(final int loadClass) {
         this.loadClass = loadClass;
     }
 
-    public void setLoadInstruction(int loadInstruction) {
+    public void setLoadInstruction(final int loadInstruction) {
         this.loadInstruction = loadInstruction;
     }
 
-    public void setLocalVariableInstruction(int localVariableInstruction) {
+    public void setLocalVariableInstruction(final int localVariableInstruction) {
         this.localVariableInstruction = localVariableInstruction;
     }
 
-    public void setLookupswitch(int lookupswitch) {
+    public void setLookupswitch(final int lookupswitch) {
         this.lookupswitch = lookupswitch;
     }
 
-    public void setLor(int lor) {
+    public void setLor(final int lor) {
         this.lor = lor;
     }
 
-    public void setLrem(int lrem) {
+    public void setLrem(final int lrem) {
         this.lrem = lrem;
     }
 
-    public void setLreturn(int lreturn) {
+    public void setLreturn(final int lreturn) {
         this.lreturn = lreturn;
     }
 
-    public void setLshl(int lshl) {
+    public void setLshl(final int lshl) {
         this.lshl = lshl;
     }
 
-    public void setLshr(int lshr) {
+    public void setLshr(final int lshr) {
         this.lshr = lshr;
     }
 
-    public void setLstore(int lstore) {
+    public void setLstore(final int lstore) {
         this.lstore = lstore;
     }
 
-    public void setLsub(int lsub) {
+    public void setLsub(final int lsub) {
         this.lsub = lsub;
     }
 
-    public void setLushr(int lushr) {
+    public void setLushr(final int lushr) {
         this.lushr = lushr;
     }
 
-    public void setLxor(int lxor) {
+    public void setLxor(final int lxor) {
         this.lxor = lxor;
     }
 
-    public void setMonitorenter(int monitorenter) {
+    public void setMonitorenter(final int monitorenter) {
         this.monitorenter = monitorenter;
     }
 
-    public void setMonitorexit(int monitorexit) {
+    public void setMonitorexit(final int monitorexit) {
         this.monitorexit = monitorexit;
     }
 
-    public void setMultianewarray(int multianewarray) {
+    public void setMultianewarray(final int multianewarray) {
         this.multianewarray = multianewarray;
     }
 
-    public void setnEW(int nEW) {
+    public void setnEW(final int nEW) {
         this.newCount = nEW;
     }
 
-    public void setNewarray(int newarray) {
+    public void setNewarray(final int newarray) {
         this.newarray = newarray;
     }
 
-    public void setNop(int nop) {
+    public void setNop(final int nop) {
         this.nop = nop;
     }
 
-    public void setPop(int pop) {
+    public void setPop(final int pop) {
         this.pop = pop;
     }
 
-    public void setPop2(int pop2) {
+    public void setPop2(final int pop2) {
         this.pop2 = pop2;
     }
 
-    public void setPopInstruction(int popInstruction) {
+    public void setPopInstruction(final int popInstruction) {
         this.popInstruction = popInstruction;
     }
 
-    public void setPushInstruction(int pushInstruction) {
+    public void setPushInstruction(final int pushInstruction) {
         this.pushInstruction = pushInstruction;
     }
 
-    public void setPutfield(int putfield) {
+    public void setPutfield(final int putfield) {
         this.putfield = putfield;
     }
 
-    public void setPutstatic(int putstatic) {
+    public void setPutstatic(final int putstatic) {
         this.putstatic = putstatic;
     }
 
-    public void setRet(int ret) {
+    public void setRet(final int ret) {
         this.ret = ret;
     }
 
-    public void setrETURN(int rETURN) {
+    public void setrETURN(final int rETURN) {
         this.returnCount = rETURN;
     }
 
-    public void setReturnInstruction(int returnInstruction) {
+    public void setReturnInstruction(final int returnInstruction) {
         this.returnInstruction = returnInstruction;
     }
 
-    public void setSaload(int saload) {
+    public void setSaload(final int saload) {
         this.saload = saload;
     }
 
-    public void setSastore(int sastore) {
+    public void setSastore(final int sastore) {
         this.sastore = sastore;
     }
 
-    public void setSelect(int select) {
+    public void setSelect(final int select) {
         this.select = select;
     }
 
-    public void setSipush(int sipush) {
+    public void setSipush(final int sipush) {
         this.sipush = sipush;
     }
 
-    public void setStackConsumer(int stackConsumer) {
+    public void setStackConsumer(final int stackConsumer) {
         this.stackConsumer = stackConsumer;
     }
 
-    public void setStackInstruction(int stackInstruction) {
+    public void setStackInstruction(final int stackInstruction) {
         this.stackInstruction = stackInstruction;
     }
 
-    public void setStackProducer(int stackProducer) {
+    public void setStackProducer(final int stackProducer) {
         this.stackProducer = stackProducer;
     }
 
-    public void setStoreInstruction(int storeInstruction) {
+    public void setStoreInstruction(final int storeInstruction) {
         this.storeInstruction = storeInstruction;
     }
 
-    public void setSwap(int swap) {
+    public void setSwap(final int swap) {
         this.swap = swap;
     }
 
-    public void setTableswitch(int tableswitch) {
+    public void setTableswitch(final int tableswitch) {
         this.tableswitch = tableswitch;
     }
 
-    public void setTypedInstruction(int typedInstruction) {
+    public void setTypedInstruction(final int typedInstruction) {
         this.typedInstruction = typedInstruction;
     }
 
-    public void setUnconditionalBranch(int unconditionalBranch) {
+    public void setUnconditionalBranch(final int unconditionalBranch) {
         this.unconditionalBranch = unconditionalBranch;
     }
 
-    public void setVariableLengthInstruction(int variableLengthInstruction) {
+    public void setVariableLengthInstruction(final int variableLengthInstruction) {
         this.variableLengthInstruction = variableLengthInstruction;
     }
 
@@ -1758,907 +1761,907 @@ public class CountingVisitor implements Visitor {
     }
 
     @Override
-    public void visitAALOAD(AALOAD obj) {
+    public void visitAALOAD(final AALOAD obj) {
         aaload++;
     }
 
     @Override
-    public void visitAASTORE(AASTORE obj) {
+    public void visitAASTORE(final AASTORE obj) {
         aastore++;
     }
 
     @Override
-    public void visitACONST_NULL(ACONST_NULL obj) {
+    public void visitACONST_NULL(final ACONST_NULL obj) {
         aconstNull++;
     }
 
     @Override
-    public void visitAllocationInstruction(AllocationInstruction obj) {
+    public void visitAllocationInstruction(final AllocationInstruction obj) {
         allocationInstruction++;
     }
 
     @Override
-    public void visitALOAD(ALOAD obj) {
+    public void visitALOAD(final ALOAD obj) {
         aload++;
     }
 
     @Override
-    public void visitANEWARRAY(ANEWARRAY obj) {
+    public void visitANEWARRAY(final ANEWARRAY obj) {
         anewarray++;
     }
 
     @Override
-    public void visitARETURN(ARETURN obj) {
+    public void visitARETURN(final ARETURN obj) {
         areturn++;
     }
 
     @Override
-    public void visitArithmeticInstruction(ArithmeticInstruction obj) {
+    public void visitArithmeticInstruction(final ArithmeticInstruction obj) {
         arithmeticInstruction++;
     }
 
     @Override
-    public void visitArrayInstruction(ArrayInstruction obj) {
+    public void visitArrayInstruction(final ArrayInstruction obj) {
         arrayInstruction++;
     }
 
     @Override
-    public void visitARRAYLENGTH(ARRAYLENGTH obj) {
+    public void visitARRAYLENGTH(final ARRAYLENGTH obj) {
         arraylength++;
     }
 
     @Override
-    public void visitASTORE(ASTORE obj) {
+    public void visitASTORE(final ASTORE obj) {
         astore++;
     }
 
     @Override
-    public void visitATHROW(ATHROW obj) {
+    public void visitATHROW(final ATHROW obj) {
         athrow++;
     }
 
     @Override
-    public void visitBALOAD(BALOAD obj) {
+    public void visitBALOAD(final BALOAD obj) {
         baload++;
     }
 
     @Override
-    public void visitBASTORE(BASTORE obj) {
+    public void visitBASTORE(final BASTORE obj) {
         bastore++;
     }
 
     @Override
-    public void visitBIPUSH(BIPUSH obj) {
+    public void visitBIPUSH(final BIPUSH obj) {
         bipush++;
     }
 
     @Override
-    public void visitBranchInstruction(BranchInstruction obj) {
+    public void visitBranchInstruction(final BranchInstruction obj) {
         branchInstruction++;
     }
 
     @Override
-    public void visitBREAKPOINT(BREAKPOINT obj) {
+    public void visitBREAKPOINT(final BREAKPOINT obj) {
         breakpoint++;
     }
 
     @Override
-    public void visitCALOAD(CALOAD obj) {
+    public void visitCALOAD(final CALOAD obj) {
         caload++;
     }
 
     @Override
-    public void visitCASTORE(CASTORE obj) {
+    public void visitCASTORE(final CASTORE obj) {
         castore++;
     }
 
     @Override
-    public void visitCHECKCAST(CHECKCAST obj) {
+    public void visitCHECKCAST(final CHECKCAST obj) {
         checkcast++;
     }
 
     @Override
-    public void visitConstantPushInstruction(ConstantPushInstruction obj) {
+    public void visitConstantPushInstruction(final ConstantPushInstruction obj) {
         constantPushInstruction++;
     }
 
     @Override
-    public void visitConversionInstruction(ConversionInstruction obj) {
+    public void visitConversionInstruction(final ConversionInstruction obj) {
         conversionInstruction++;
     }
 
     @Override
-    public void visitCPInstruction(CPInstruction obj) {
+    public void visitCPInstruction(final CPInstruction obj) {
         cpInstruction++;
     }
 
     @Override
-    public void visitD2F(D2F obj) {
+    public void visitD2F(final D2F obj) {
         d2F++;
     }
 
     @Override
-    public void visitD2I(D2I obj) {
+    public void visitD2I(final D2I obj) {
         d2I++;
     }
 
     @Override
-    public void visitD2L(D2L obj) {
+    public void visitD2L(final D2L obj) {
         d2L++;
     }
 
     @Override
-    public void visitDADD(DADD obj) {
+    public void visitDADD(final DADD obj) {
         dadd++;
     }
 
     @Override
-    public void visitDALOAD(DALOAD obj) {
+    public void visitDALOAD(final DALOAD obj) {
         daload++;
     }
 
     @Override
-    public void visitDASTORE(DASTORE obj) {
+    public void visitDASTORE(final DASTORE obj) {
         dastore++;
     }
 
     @Override
-    public void visitDCMPG(DCMPG obj) {
+    public void visitDCMPG(final DCMPG obj) {
         dcmpg++;
     }
 
     @Override
-    public void visitDCMPL(DCMPL obj) {
+    public void visitDCMPL(final DCMPL obj) {
         dcmpl++;
     }
 
     @Override
-    public void visitDCONST(DCONST obj) {
+    public void visitDCONST(final DCONST obj) {
         dconst++;
     }
 
     @Override
-    public void visitDDIV(DDIV obj) {
+    public void visitDDIV(final DDIV obj) {
         ddiv++;
     }
 
     @Override
-    public void visitDLOAD(DLOAD obj) {
+    public void visitDLOAD(final DLOAD obj) {
         dload++;
     }
 
     @Override
-    public void visitDMUL(DMUL obj) {
+    public void visitDMUL(final DMUL obj) {
         dmul++;
     }
 
     @Override
-    public void visitDNEG(DNEG obj) {
+    public void visitDNEG(final DNEG obj) {
         dneg++;
     }
 
     @Override
-    public void visitDREM(DREM obj) {
+    public void visitDREM(final DREM obj) {
         drem++;
     }
 
     @Override
-    public void visitDRETURN(DRETURN obj) {
+    public void visitDRETURN(final DRETURN obj) {
         dreturn++;
     }
 
     @Override
-    public void visitDSTORE(DSTORE obj) {
+    public void visitDSTORE(final DSTORE obj) {
         dstore++;
     }
 
     @Override
-    public void visitDSUB(DSUB obj) {
+    public void visitDSUB(final DSUB obj) {
         dsub++;
     }
 
     @Override
-    public void visitDUP(DUP obj) {
+    public void visitDUP(final DUP obj) {
         dup++;
     }
 
     @Override
-    public void visitDUP_X1(DUP_X1 obj) {
+    public void visitDUP_X1(final DUP_X1 obj) {
         dupX1++;
     }
 
     @Override
-    public void visitDUP_X2(DUP_X2 obj) {
+    public void visitDUP_X2(final DUP_X2 obj) {
         dupX2++;
     }
 
     @Override
-    public void visitDUP2(DUP2 obj) {
+    public void visitDUP2(final DUP2 obj) {
         dup2++;
     }
 
     @Override
-    public void visitDUP2_X1(DUP2_X1 obj) {
+    public void visitDUP2_X1(final DUP2_X1 obj) {
         dup2X1++;
     }
 
     @Override
-    public void visitDUP2_X2(DUP2_X2 obj) {
+    public void visitDUP2_X2(final DUP2_X2 obj) {
         dup2X2++;
     }
 
     @Override
-    public void visitExceptionThrower(ExceptionThrower obj) {
+    public void visitExceptionThrower(final ExceptionThrower obj) {
         exceptionThrower++;
     }
 
     @Override
-    public void visitF2D(F2D obj) {
+    public void visitF2D(final F2D obj) {
         f2D++;
     }
 
     @Override
-    public void visitF2I(F2I obj) {
+    public void visitF2I(final F2I obj) {
         f2I++;
     }
 
     @Override
-    public void visitF2L(F2L obj) {
+    public void visitF2L(final F2L obj) {
         f2L++;
     }
 
     @Override
-    public void visitFADD(FADD obj) {
+    public void visitFADD(final FADD obj) {
         fadd++;
     }
 
     @Override
-    public void visitFALOAD(FALOAD obj) {
+    public void visitFALOAD(final FALOAD obj) {
         faload++;
     }
 
     @Override
-    public void visitFASTORE(FASTORE obj) {
+    public void visitFASTORE(final FASTORE obj) {
         fastore++;
     }
 
     @Override
-    public void visitFCMPG(FCMPG obj) {
+    public void visitFCMPG(final FCMPG obj) {
         fcmpg++;
     }
 
     @Override
-    public void visitFCMPL(FCMPL obj) {
+    public void visitFCMPL(final FCMPL obj) {
         fcmpl++;
     }
 
     @Override
-    public void visitFCONST(FCONST obj) {
+    public void visitFCONST(final FCONST obj) {
         fconst++;
     }
 
     @Override
-    public void visitFDIV(FDIV obj) {
+    public void visitFDIV(final FDIV obj) {
         fdiv++;
     }
 
     @Override
-    public void visitFieldInstruction(FieldInstruction obj) {
+    public void visitFieldInstruction(final FieldInstruction obj) {
         fieldInstruction++;
     }
 
     @Override
-    public void visitFieldOrMethod(FieldOrMethod obj) {
+    public void visitFieldOrMethod(final FieldOrMethod obj) {
         fieldOrMethod++;
     }
 
     @Override
-    public void visitFLOAD(FLOAD obj) {
+    public void visitFLOAD(final FLOAD obj) {
         fload++;
     }
 
     @Override
-    public void visitFMUL(FMUL obj) {
+    public void visitFMUL(final FMUL obj) {
         fmul++;
     }
 
     @Override
-    public void visitFNEG(FNEG obj) {
+    public void visitFNEG(final FNEG obj) {
         fneg++;
     }
 
     @Override
-    public void visitFREM(FREM obj) {
+    public void visitFREM(final FREM obj) {
         frem++;
     }
 
     @Override
-    public void visitFRETURN(FRETURN obj) {
+    public void visitFRETURN(final FRETURN obj) {
         freturn++;
     }
 
     @Override
-    public void visitFSTORE(FSTORE obj) {
+    public void visitFSTORE(final FSTORE obj) {
         fstore++;
     }
 
     @Override
-    public void visitFSUB(FSUB obj) {
+    public void visitFSUB(final FSUB obj) {
         fsub++;
     }
 
     @Override
-    public void visitGETFIELD(GETFIELD obj) {
+    public void visitGETFIELD(final GETFIELD obj) {
         getfield++;
     }
 
     @Override
-    public void visitGETSTATIC(GETSTATIC obj) {
+    public void visitGETSTATIC(final GETSTATIC obj) {
         getstatic++;
     }
 
     @Override
-    public void visitGOTO(GOTO obj) {
+    public void visitGOTO(final GOTO obj) {
         goTo++;
     }
 
     @Override
-    public void visitGOTO_W(GOTO_W obj) {
+    public void visitGOTO_W(final GOTO_W obj) {
         gotoW++;
     }
 
     @Override
-    public void visitGotoInstruction(GotoInstruction obj) {
+    public void visitGotoInstruction(final GotoInstruction obj) {
         gotoInstruction++;
     }
 
     @Override
-    public void visitI2B(I2B obj) {
+    public void visitI2B(final I2B obj) {
         i2B++;
     }
 
     @Override
-    public void visitI2C(I2C obj) {
+    public void visitI2C(final I2C obj) {
         i2C++;
     }
 
     @Override
-    public void visitI2D(I2D obj) {
+    public void visitI2D(final I2D obj) {
         i2D++;
     }
 
     @Override
-    public void visitI2F(I2F obj) {
+    public void visitI2F(final I2F obj) {
         i2F++;
     }
 
     @Override
-    public void visitI2L(I2L obj) {
+    public void visitI2L(final I2L obj) {
         i2L++;
     }
 
     @Override
-    public void visitI2S(I2S obj) {
+    public void visitI2S(final I2S obj) {
         i2S++;
     }
 
     @Override
-    public void visitIADD(IADD obj) {
+    public void visitIADD(final IADD obj) {
         iadd++;
     }
 
     @Override
-    public void visitIALOAD(IALOAD obj) {
+    public void visitIALOAD(final IALOAD obj) {
         iaload++;
     }
 
     @Override
-    public void visitIAND(IAND obj) {
+    public void visitIAND(final IAND obj) {
         iand++;
     }
 
     @Override
-    public void visitIASTORE(IASTORE obj) {
+    public void visitIASTORE(final IASTORE obj) {
         iastore++;
     }
 
     @Override
-    public void visitICONST(ICONST obj) {
+    public void visitICONST(final ICONST obj) {
         iconst++;
     }
 
     @Override
-    public void visitIDIV(IDIV obj) {
+    public void visitIDIV(final IDIV obj) {
         idiv++;
     }
 
     @Override
-    public void visitIF_ACMPEQ(IF_ACMPEQ obj) {
+    public void visitIF_ACMPEQ(final IF_ACMPEQ obj) {
         ifAcmpeq++;
     }
 
     @Override
-    public void visitIF_ACMPNE(IF_ACMPNE obj) {
+    public void visitIF_ACMPNE(final IF_ACMPNE obj) {
         ifAcmpne++;
     }
 
     @Override
-    public void visitIF_ICMPEQ(IF_ICMPEQ obj) {
+    public void visitIF_ICMPEQ(final IF_ICMPEQ obj) {
         ifIcmpeq++;
     }
 
     @Override
-    public void visitIF_ICMPGE(IF_ICMPGE obj) {
+    public void visitIF_ICMPGE(final IF_ICMPGE obj) {
         ifIcmpge++;
     }
 
     @Override
-    public void visitIF_ICMPGT(IF_ICMPGT obj) {
+    public void visitIF_ICMPGT(final IF_ICMPGT obj) {
         ifIcmpgt++;
     }
 
     @Override
-    public void visitIF_ICMPLE(IF_ICMPLE obj) {
+    public void visitIF_ICMPLE(final IF_ICMPLE obj) {
         ifIcmple++;
     }
 
     @Override
-    public void visitIF_ICMPLT(IF_ICMPLT obj) {
+    public void visitIF_ICMPLT(final IF_ICMPLT obj) {
         ifIcmplt++;
     }
 
     @Override
-    public void visitIF_ICMPNE(IF_ICMPNE obj) {
+    public void visitIF_ICMPNE(final IF_ICMPNE obj) {
         ifIcmpne++;
     }
 
     @Override
-    public void visitIFEQ(IFEQ obj) {
+    public void visitIFEQ(final IFEQ obj) {
         ifeq++;
     }
 
     @Override
-    public void visitIFGE(IFGE obj) {
+    public void visitIFGE(final IFGE obj) {
         ifge++;
     }
 
     @Override
-    public void visitIFGT(IFGT obj) {
+    public void visitIFGT(final IFGT obj) {
         ifgt++;
     }
 
     @Override
-    public void visitIfInstruction(IfInstruction obj) {
+    public void visitIfInstruction(final IfInstruction obj) {
         ifInstruction++;
     }
 
     @Override
-    public void visitIFLE(IFLE obj) {
+    public void visitIFLE(final IFLE obj) {
         ifle++;
     }
 
     @Override
-    public void visitIFLT(IFLT obj) {
+    public void visitIFLT(final IFLT obj) {
         iflt++;
     }
 
     @Override
-    public void visitIFNE(IFNE obj) {
+    public void visitIFNE(final IFNE obj) {
         ifne++;
     }
 
     @Override
-    public void visitIFNONNULL(IFNONNULL obj) {
+    public void visitIFNONNULL(final IFNONNULL obj) {
         ifnonnull++;
     }
 
     @Override
-    public void visitIFNULL(IFNULL obj) {
+    public void visitIFNULL(final IFNULL obj) {
         ifnull++;
     }
 
     @Override
-    public void visitIINC(IINC obj) {
+    public void visitIINC(final IINC obj) {
         iinc++;
     }
 
     @Override
-    public void visitILOAD(ILOAD obj) {
+    public void visitILOAD(final ILOAD obj) {
         iload++;
     }
 
     @Override
-    public void visitIMPDEP1(IMPDEP1 obj) {
+    public void visitIMPDEP1(final IMPDEP1 obj) {
         impdep1++;
     }
 
     @Override
-    public void visitIMPDEP2(IMPDEP2 obj) {
+    public void visitIMPDEP2(final IMPDEP2 obj) {
         impdep2++;
     }
 
     @Override
-    public void visitIMUL(IMUL obj) {
+    public void visitIMUL(final IMUL obj) {
         imul++;
     }
 
     @Override
-    public void visitINEG(INEG obj) {
+    public void visitINEG(final INEG obj) {
         ineg++;
     }
 
     @Override
-    public void visitINSTANCEOF(INSTANCEOF obj) {
+    public void visitINSTANCEOF(final INSTANCEOF obj) {
         instanceOf++;
     }
 
     @Override
-    public void visitINVOKEDYNAMIC(INVOKEDYNAMIC obj) {
+    public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC obj) {
         invokedynamic++;
     }
 
     @Override
-    public void visitInvokeInstruction(InvokeInstruction obj) {
+    public void visitInvokeInstruction(final InvokeInstruction obj) {
         invokeInstruction++;
     }
 
     @Override
-    public void visitINVOKEINTERFACE(INVOKEINTERFACE obj) {
+    public void visitINVOKEINTERFACE(final INVOKEINTERFACE obj) {
         invokeinterface++;
     }
 
     @Override
-    public void visitINVOKESPECIAL(INVOKESPECIAL obj) {
+    public void visitINVOKESPECIAL(final INVOKESPECIAL obj) {
         invokespecial++;
     }
 
     @Override
-    public void visitINVOKESTATIC(INVOKESTATIC obj) {
+    public void visitINVOKESTATIC(final INVOKESTATIC obj) {
         invokestatic++;
     }
 
     @Override
-    public void visitINVOKEVIRTUAL(INVOKEVIRTUAL obj) {
+    public void visitINVOKEVIRTUAL(final INVOKEVIRTUAL obj) {
         invokevirtual++;
     }
 
     @Override
-    public void visitIOR(IOR obj) {
+    public void visitIOR(final IOR obj) {
         ior++;
     }
 
     @Override
-    public void visitIREM(IREM obj) {
+    public void visitIREM(final IREM obj) {
         irem++;
     }
 
     @Override
-    public void visitIRETURN(IRETURN obj) {
+    public void visitIRETURN(final IRETURN obj) {
         ireturn++;
     }
 
     @Override
-    public void visitISHL(ISHL obj) {
+    public void visitISHL(final ISHL obj) {
         ishl++;
     }
 
     @Override
-    public void visitISHR(ISHR obj) {
+    public void visitISHR(final ISHR obj) {
         ishr++;
     }
 
     @Override
-    public void visitISTORE(ISTORE obj) {
+    public void visitISTORE(final ISTORE obj) {
         istore++;
     }
 
     @Override
-    public void visitISUB(ISUB obj) {
+    public void visitISUB(final ISUB obj) {
         isub++;
     }
 
     @Override
-    public void visitIUSHR(IUSHR obj) {
+    public void visitIUSHR(final IUSHR obj) {
         iushr++;
     }
 
     @Override
-    public void visitIXOR(IXOR obj) {
+    public void visitIXOR(final IXOR obj) {
         ixor++;
     }
 
     @Override
-    public void visitJSR(JSR obj) {
+    public void visitJSR(final JSR obj) {
         jsr++;
     }
 
     @Override
-    public void visitJSR_W(JSR_W obj) {
+    public void visitJSR_W(final JSR_W obj) {
         jsrW++;
     }
 
     @Override
-    public void visitJsrInstruction(JsrInstruction obj) {
+    public void visitJsrInstruction(final JsrInstruction obj) {
         jsrInstruction++;
     }
 
     @Override
-    public void visitL2D(L2D obj) {
+    public void visitL2D(final L2D obj) {
         l2D++;
     }
 
     @Override
-    public void visitL2F(L2F obj) {
+    public void visitL2F(final L2F obj) {
         l2F++;
     }
 
     @Override
-    public void visitL2I(L2I obj) {
+    public void visitL2I(final L2I obj) {
         l2I++;
     }
 
     @Override
-    public void visitLADD(LADD obj) {
+    public void visitLADD(final LADD obj) {
         ladd++;
     }
 
     @Override
-    public void visitLALOAD(LALOAD obj) {
+    public void visitLALOAD(final LALOAD obj) {
         laload++;
     }
 
     @Override
-    public void visitLAND(LAND obj) {
+    public void visitLAND(final LAND obj) {
         land++;
     }
 
     @Override
-    public void visitLASTORE(LASTORE obj) {
+    public void visitLASTORE(final LASTORE obj) {
         lastore++;
     }
 
     @Override
-    public void visitLCMP(LCMP obj) {
+    public void visitLCMP(final LCMP obj) {
         lcmp++;
     }
 
     @Override
-    public void visitLCONST(LCONST obj) {
+    public void visitLCONST(final LCONST obj) {
         lconst++;
     }
 
     @Override
-    public void visitLDC(LDC obj) {
+    public void visitLDC(final LDC obj) {
         ldc++;
     }
 
     @Override
-    public void visitLDC2_W(LDC2_W obj) {
+    public void visitLDC2_W(final LDC2_W obj) {
         ldc2W++;
     }
 
     @Override
-    public void visitLDIV(LDIV obj) {
+    public void visitLDIV(final LDIV obj) {
         ldiv++;
     }
 
     @Override
-    public void visitLLOAD(LLOAD obj) {
+    public void visitLLOAD(final LLOAD obj) {
         lload++;
     }
 
     @Override
-    public void visitLMUL(LMUL obj) {
+    public void visitLMUL(final LMUL obj) {
         lmul++;
     }
 
     @Override
-    public void visitLNEG(LNEG obj) {
+    public void visitLNEG(final LNEG obj) {
         lneg++;
     }
 
     @Override
-    public void visitLoadClass(LoadClass obj) {
+    public void visitLoadClass(final LoadClass obj) {
         loadClass++;
     }
 
     @Override
-    public void visitLoadInstruction(LoadInstruction obj) {
+    public void visitLoadInstruction(final LoadInstruction obj) {
         loadInstruction++;
     }
 
     @Override
-    public void visitLocalVariableInstruction(LocalVariableInstruction obj) {
+    public void visitLocalVariableInstruction(final LocalVariableInstruction obj) {
         localVariableInstruction++;
     }
 
     @Override
-    public void visitLOOKUPSWITCH(LOOKUPSWITCH obj) {
+    public void visitLOOKUPSWITCH(final LOOKUPSWITCH obj) {
         lookupswitch++;
     }
 
     @Override
-    public void visitLOR(LOR obj) {
+    public void visitLOR(final LOR obj) {
         lor++;
     }
 
     @Override
-    public void visitLREM(LREM obj) {
+    public void visitLREM(final LREM obj) {
         lrem++;
     }
 
     @Override
-    public void visitLRETURN(LRETURN obj) {
+    public void visitLRETURN(final LRETURN obj) {
         lreturn++;
     }
 
     @Override
-    public void visitLSHL(LSHL obj) {
+    public void visitLSHL(final LSHL obj) {
         lshl++;
     }
 
     @Override
-    public void visitLSHR(LSHR obj) {
+    public void visitLSHR(final LSHR obj) {
         lshr++;
     }
 
     @Override
-    public void visitLSTORE(LSTORE obj) {
+    public void visitLSTORE(final LSTORE obj) {
         lstore++;
     }
 
     @Override
-    public void visitLSUB(LSUB obj) {
+    public void visitLSUB(final LSUB obj) {
         lsub++;
     }
 
     @Override
-    public void visitLUSHR(LUSHR obj) {
+    public void visitLUSHR(final LUSHR obj) {
         lushr++;
     }
 
     @Override
-    public void visitLXOR(LXOR obj) {
+    public void visitLXOR(final LXOR obj) {
         lxor++;
     }
 
     @Override
-    public void visitMONITORENTER(MONITORENTER obj) {
+    public void visitMONITORENTER(final MONITORENTER obj) {
         monitorenter++;
     }
 
     @Override
-    public void visitMONITOREXIT(MONITOREXIT obj) {
+    public void visitMONITOREXIT(final MONITOREXIT obj) {
         monitorexit++;
     }
 
     @Override
-    public void visitMULTIANEWARRAY(MULTIANEWARRAY obj) {
+    public void visitMULTIANEWARRAY(final MULTIANEWARRAY obj) {
         multianewarray++;
     }
 
     @Override
-    public void visitNEW(NEW obj) {
+    public void visitNEW(final NEW obj) {
         newCount++;
     }
 
     @Override
-    public void visitNEWARRAY(NEWARRAY obj) {
+    public void visitNEWARRAY(final NEWARRAY obj) {
         newarray++;
     }
 
     @Override
-    public void visitNOP(NOP obj) {
+    public void visitNOP(final NOP obj) {
         nop++;
     }
 
     @Override
-    public void visitPOP(POP obj) {
+    public void visitPOP(final POP obj) {
         pop++;
     }
 
     @Override
-    public void visitPOP2(POP2 obj) {
+    public void visitPOP2(final POP2 obj) {
         pop2++;
     }
 
     @Override
-    public void visitPopInstruction(PopInstruction obj) {
+    public void visitPopInstruction(final PopInstruction obj) {
         popInstruction++;
     }
 
     @Override
-    public void visitPushInstruction(PushInstruction obj) {
+    public void visitPushInstruction(final PushInstruction obj) {
         pushInstruction++;
     }
 
     @Override
-    public void visitPUTFIELD(PUTFIELD obj) {
+    public void visitPUTFIELD(final PUTFIELD obj) {
         putfield++;
     }
 
     @Override
-    public void visitPUTSTATIC(PUTSTATIC obj) {
+    public void visitPUTSTATIC(final PUTSTATIC obj) {
         putstatic++;
     }
 
     @Override
-    public void visitRET(RET obj) {
+    public void visitRET(final RET obj) {
         ret++;
     }
 
     @Override
-    public void visitRETURN(RETURN obj) {
+    public void visitRETURN(final RETURN obj) {
         returnCount++;
     }
 
     @Override
-    public void visitReturnInstruction(ReturnInstruction obj) {
+    public void visitReturnInstruction(final ReturnInstruction obj) {
         returnInstruction++;
     }
 
     @Override
-    public void visitSALOAD(SALOAD obj) {
+    public void visitSALOAD(final SALOAD obj) {
         saload++;
     }
 
     @Override
-    public void visitSASTORE(SASTORE obj) {
+    public void visitSASTORE(final SASTORE obj) {
         sastore++;
     }
 
     @Override
-    public void visitSelect(Select obj) {
+    public void visitSelect(final Select obj) {
         select++;
     }
 
     @Override
-    public void visitSIPUSH(SIPUSH obj) {
+    public void visitSIPUSH(final SIPUSH obj) {
         sipush++;
     }
 
     @Override
-    public void visitStackConsumer(StackConsumer obj) {
+    public void visitStackConsumer(final StackConsumer obj) {
         stackConsumer++;
     }
 
     @Override
-    public void visitStackInstruction(StackInstruction obj) {
+    public void visitStackInstruction(final StackInstruction obj) {
         stackInstruction++;
     }
 
     @Override
-    public void visitStackProducer(StackProducer obj) {
+    public void visitStackProducer(final StackProducer obj) {
         stackProducer++;
     }
 
     @Override
-    public void visitStoreInstruction(StoreInstruction obj) {
+    public void visitStoreInstruction(final StoreInstruction obj) {
         storeInstruction++;
     }
 
     @Override
-    public void visitSWAP(SWAP obj) {
+    public void visitSWAP(final SWAP obj) {
         swap++;
     }
 
     @Override
-    public void visitTABLESWITCH(TABLESWITCH obj) {
+    public void visitTABLESWITCH(final TABLESWITCH obj) {
         tableswitch++;
     }
 
     @Override
-    public void visitTypedInstruction(TypedInstruction obj) {
+    public void visitTypedInstruction(final TypedInstruction obj) {
         typedInstruction++;
     }
 
     @Override
-    public void visitUnconditionalBranch(UnconditionalBranch obj) {
+    public void visitUnconditionalBranch(final UnconditionalBranch obj) {
         unconditionalBranch++;
     }
 
     @Override
-    public void visitVariableLengthInstruction(VariableLengthInstruction obj) {
+    public void visitVariableLengthInstruction(final VariableLengthInstruction obj) {
         variableLengthInstruction++;
     }
 
