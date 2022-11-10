@@ -18,9 +18,22 @@
 package org.apache.bcel.verifier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Enumeration;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
-import java.util.Collection;
-
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.NestHost;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.statics.StringRepresentation;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,10 +44,10 @@ public class VerifierTestCase {
         VerifierFactory.clear();
     }
 
-    @Test
-    public void testDefaultMethodValidation() {
-        final String className = Collection.class.getName();
-
+    private static void testDefaultMethodValidation(final String className, final String... excludes) throws ClassNotFoundException {
+        if (StringUtils.endsWithAny(className, excludes)) {
+            return;
+        }
         final Verifier verifier = VerifierFactory.getVerifier(className);
         VerificationResult result = verifier.doPass1();
 
@@ -43,5 +56,77 @@ public class VerifierTestCase {
         result = verifier.doPass2();
 
         assertEquals(VerificationResult.VERIFIED_OK, result.getStatus(), "Pass 2 verification of " + className + " failed: " + result.getMessage());
+
+        if (result == VerificationResult.VR_OK) {
+            final JavaClass jc = org.apache.bcel.Repository.lookupClass(className);
+            for (int i = 0; i < jc.getMethods().length; i++) {
+                result = verifier.doPass3a(i);
+                assertEquals(VerificationResult.VR_OK, result, "Pass 3a, method number " + i + " ['" + jc.getMethods()[i] + "']:\n" + result);
+                result = verifier.doPass3b(i);
+                assertEquals(VerificationResult.VR_OK, result, "Pass 3b, method number " + i + " ['" + jc.getMethods()[i] + "']:\n" + result);
+            }
+        }
+    }
+
+    private static File getJarFile(final Class<?> clazz) throws URISyntaxException {
+        return new File(clazz.getProtectionDomain().getCodeSource().getLocation().toURI());
+    }
+
+    private static void testJarFile(final File file, final String... excludes) throws IOException, ClassNotFoundException {
+        try (JarFile jarFile = new JarFile(file)) {
+            final Enumeration<JarEntry> entries = jarFile.entries();
+            while (entries.hasMoreElements()) {
+                final JarEntry jarEntry = entries.nextElement();
+                String entryName = jarEntry.getName();
+                if (entryName.endsWith(".class")) {
+                    entryName = entryName.replaceFirst("\\.class$", "");
+                    entryName = Utility.compactClassName(entryName, false);
+                    testDefaultMethodValidation(entryName, excludes);
+                }
+            }
+        }
+    }
+
+    private static void testNestHostWithJavaVersion(final String className) throws ClassNotFoundException {
+        final String version = System.getProperty("java.version");
+        assertNotNull(version);
+        try {
+            testDefaultMethodValidation(className);
+            assertTrue(version.startsWith("1."));
+        } catch (final AssertionViolatedException e) {
+            assertFalse(version.startsWith("1."));
+            final StringBuilder expectedMessage = new StringBuilder();
+            expectedMessage.append("INTERNAL ERROR: Please adapt '");
+            expectedMessage.append(StringRepresentation.class);
+            expectedMessage.append("' to deal with objects of class '");
+            expectedMessage.append(NestHost.class);
+            expectedMessage.append("'.");
+            assertEquals(expectedMessage.toString(), e.getCause().getMessage());
+        }
+    }
+
+    @Test
+    public void testCollection() throws ClassNotFoundException {
+        testDefaultMethodValidation("java.util.Collection");
+    }
+    
+    @Test
+    public void testArrayUtils() throws ClassNotFoundException {
+        testNestHostWithJavaVersion("org.apache.commons.lang.ArrayUtils");
+    }
+    
+    @Test
+    public void testDefinitionImpl() throws ClassNotFoundException {
+        testNestHostWithJavaVersion("com.ibm.wsdl.DefinitionImpl");
+    }
+    
+    @Test
+    public void testCommonsLang1() throws IOException, URISyntaxException, ClassNotFoundException {
+        testJarFile(getJarFile(org.apache.commons.lang.StringUtils.class), "ArrayUtils", "SerializationUtils");
+    }
+
+    @Test
+    public void testWSDL() throws IOException, URISyntaxException, ClassNotFoundException {
+        testJarFile(getJarFile(javax.wsdl.Port.class), "WSDLReaderImpl",  "DefinitionImpl");
     }
 }

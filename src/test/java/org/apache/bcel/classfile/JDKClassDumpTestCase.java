@@ -29,6 +29,8 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.apache.bcel.generic.JavaHome;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -54,7 +56,7 @@ public class JDKClassDumpTestCase {
     }
 
     private void testJar(final Path path) throws Exception {
-        try (final JarFile jar = new JarFile(path.toFile())) {
+        try (JarFile jar = new JarFile(path.toFile())) {
             System.out.println("Parsing " + jar.getName());
             final Enumeration<JarEntry> en = jar.entries();
             while (en.hasMoreElements()) {
@@ -75,5 +77,9 @@ public class JDKClassDumpTestCase {
     public void testPerformance(final Path path) throws Exception {
         assertDoesNotThrow(() -> testJar(path));
     }
-
+    
+    @Test
+    public void testPerformanceJmod() throws Exception {
+        JavaHome.streamModulePath().forEach(path -> assertDoesNotThrow(() -> testJar(path)));
+    }
 }
