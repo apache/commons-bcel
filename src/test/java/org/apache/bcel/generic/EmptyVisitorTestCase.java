@@ -16,14 +16,14 @@
  */
 package org.apache.bcel.generic;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 class EmptyVisitorTestCase {
 
@@ -49,7 +49,9 @@ class EmptyVisitorTestCase {
         "java.awt.GradientPaintContext",                 // contains instruction DREM
         "java.util.concurrent.atomic.DoubleAccumulator", // contains instruction DUP2_X1
         "java.util.Hashtable",                           // contains instruction FNEG
-        "javax.swing.text.html.CSS"                      // contains instruction DUP2_X2
+        "javax.swing.text.html.CSS",                     // contains instruction DUP2_X2
+        "org.apache.bcel.generic.LargeJump",             // contains instruction GOTO_W
+        "org.apache.commons.lang.SerializationUtils"     // contains instruction JSR
     // @formatter:on
     })
     public void test(final String className) throws ClassNotFoundException {
