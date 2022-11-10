@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiPredicate;
+import java.util.jar.JarFile;
 import java.util.stream.Stream;
 
 import org.apache.bcel.util.ModularRuntimeImage;
@@ -84,10 +85,19 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
+     * @return a stream of JarFile.
+     */
+    public static Stream<JarFile> streamJarFiles() {
+        return streamJavaHomes().flatMap(JavaHome::streamJarFilesByExt);
+    }
+
+    /**
+     * Used from {@code @MethodSource} for tests.
+     *
      * @return a stream of Java jar paths.
      */
     public static Stream<Path> streamJarPaths() {
-        return streamJavaHomes().flatMap(JavaHome::streamJars);
+        return streamJavaHomes().flatMap(JavaHome::streamJarPathsByExt);
     }
 
     /**
@@ -126,7 +136,7 @@ public class JavaHome {
      * @return a stream of Java jar paths.
      */
     public static Stream<Path> streamModulePaths() {
-        return streamJavaHomes().flatMap(JavaHome::streamModules);
+        return streamJavaHomes().flatMap(JavaHome::streamModulesByExt);
     }
 
     private static Stream<String> streamPropertyAndEnvVarValues(final String key) {
@@ -181,12 +191,24 @@ public class JavaHome {
         return find(10, (p, a) -> p.toString().endsWith(suffix));
     }
 
-    private Stream<Path> streamJars() {
+    private Stream<JarFile> streamJarFilesByExt() {
+        return streamJarPathsByExt().map(this::toJarFile);
+    }
+
+    private Stream<Path> streamJarPathsByExt() {
         return streamEndsWith(".jar");
     }
 
-    private Stream<Path> streamModules() {
+    private Stream<Path> streamModulesByExt() {
         return streamEndsWith(".jmod");
+    }
+
+    private JarFile toJarFile(final Path path) {
+        try {
+            return new JarFile(path.toFile());
+        } catch (final IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     @Override
