@@ -39,6 +39,9 @@ import org.apache.commons.lang3.SystemUtils;
 
 import com.sun.jna.platform.win32.Advapi32Util;
 
+/**
+ * Used from {@code @MethodSource} for tests.
+ */
 public class JavaHome {
 
     private static final String EXTRA_JAVA_HOMES = "ExtraJavaHomes";
@@ -95,13 +98,18 @@ public class JavaHome {
     public static Stream<JavaHome> streamJavaHomes() {
         return streamJavaHomeString().map(JavaHome::from);
     }
+
+    /**
+     * Used from {@code @MethodSource} for tests.
+     *
+     * @return a stream of Java homes.
+     */
     public static Stream<String> streamJavaHomeString() {
         final Stream<String> streamW = SystemUtils.IS_OS_WINDOWS ? streamWindowsStrings() : Stream.empty();
         final Stream<String> streamK = Stream.concat(streamW, streamFromCustomKeys());
         final Stream<String> streamJ = StringUtils.isEmpty(SystemUtils.JAVA_HOME) ? Stream.empty() : Stream.of(SystemUtils.JAVA_HOME);
         return Stream.concat(streamK, streamJ);
     }
-
 
     /**
      * Used from {@code @MethodSource} for tests.
