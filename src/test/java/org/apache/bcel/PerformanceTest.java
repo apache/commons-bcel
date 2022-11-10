@@ -71,7 +71,7 @@ public final class PerformanceTest {
         final NanoTimer mserTime = new NanoTimer();
         final NanoTimer serTime = new NanoTimer();
 
-        System.out.println("parsing " + lib);
+        System.out.println("Parsing " + lib);
 
         total.start();
         try (JarFile jar = new JarFile(lib)) {
