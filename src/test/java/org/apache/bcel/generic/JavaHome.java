@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiPredicate;
+import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Stream;
 
@@ -87,8 +88,17 @@ public class JavaHome {
      *
      * @return a stream of JarFile.
      */
-    public static Stream<JarFile> streamJarFiles() {
-        return streamJavaHomes().flatMap(JavaHome::streamJarFilesByExt);
+    public static Stream<JarEntry> streamJarEntry() {
+        return streamJavaHome().flatMap(JavaHome::streamJarEntryByExt);
+    }
+
+    /**
+     * Used from {@code @MethodSource} for tests.
+     *
+     * @return a stream of JarFile.
+     */
+    public static Stream<JarFile> streamJarFile() {
+        return streamJavaHome().flatMap(JavaHome::streamJarFileByExt);
     }
 
     /**
@@ -96,8 +106,8 @@ public class JavaHome {
      *
      * @return a stream of Java jar paths.
      */
-    public static Stream<Path> streamJarPaths() {
-        return streamJavaHomes().flatMap(JavaHome::streamJarPathsByExt);
+    public static Stream<Path> streamJarPath() {
+        return streamJavaHome().flatMap(JavaHome::streamJarPathByExt);
     }
 
     /**
@@ -105,7 +115,7 @@ public class JavaHome {
      *
      * @return a stream of Java homes.
      */
-    public static Stream<JavaHome> streamJavaHomes() {
+    public static Stream<JavaHome> streamJavaHome() {
         return streamJavaHomeString().map(JavaHome::from);
     }
 
@@ -126,8 +136,8 @@ public class JavaHome {
      *
      * @return a stream of Java jar paths.
      */
-    public static Stream<ModularRuntimeImage> streamModularRuntimeImages() {
-        return streamJavaHomes().map(JavaHome::getModularRuntimeImage);
+    public static Stream<ModularRuntimeImage> streamModularRuntimeImage() {
+        return streamJavaHome().map(JavaHome::getModularRuntimeImage);
     }
 
     /**
@@ -135,8 +145,8 @@ public class JavaHome {
      *
      * @return a stream of Java jar paths.
      */
-    public static Stream<Path> streamModulePaths() {
-        return streamJavaHomes().flatMap(JavaHome::streamModulesByExt);
+    public static Stream<Path> streamModulePath() {
+        return streamJavaHome().flatMap(JavaHome::streamModuleByExt);
     }
 
     private static Stream<String> streamPropertyAndEnvVarValues(final String key) {
@@ -191,15 +201,19 @@ public class JavaHome {
         return find(10, (p, a) -> p.toString().endsWith(suffix));
     }
 
-    private Stream<JarFile> streamJarFilesByExt() {
-        return streamJarPathsByExt().map(this::toJarFile);
+    private Stream<JarEntry> streamJarEntryByExt() {
+        return streamJarFileByExt().flatMap(JarFile::stream);
     }
 
-    private Stream<Path> streamJarPathsByExt() {
+    private Stream<JarFile> streamJarFileByExt() {
+        return streamJarPathByExt().map(this::toJarFile);
+    }
+
+    private Stream<Path> streamJarPathByExt() {
         return streamEndsWith(".jar");
     }
 
-    private Stream<Path> streamModulesByExt() {
+    private Stream<Path> streamModuleByExt() {
         return streamEndsWith(".jmod");
     }
 

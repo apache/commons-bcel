@@ -42,7 +42,7 @@ public class ModularRuntimeImageTestCase {
     }
 
     @ParameterizedTest
-    @MethodSource("org.apache.bcel.generic.JavaHome#streamModularRuntimeImages")
+    @MethodSource("org.apache.bcel.generic.JavaHome#streamModularRuntimeImage")
     public void testListJreModule(final ModularRuntimeImage modularRuntimeImage) throws IOException {
         final List<Path> listEntries = modularRuntimeImage.list(ModularRuntimeImage.MODULES_PATH + "/java.base");
         assertFalse(listEntries.isEmpty());
@@ -50,7 +50,7 @@ public class ModularRuntimeImageTestCase {
     }
 
     @ParameterizedTest
-    @MethodSource("org.apache.bcel.generic.JavaHome#streamModularRuntimeImages")
+    @MethodSource("org.apache.bcel.generic.JavaHome#streamModularRuntimeImage")
     public void testListJreModulePackageDir(final ModularRuntimeImage modularRuntimeImage) throws IOException {
         final List<Path> listEntries = modularRuntimeImage.list(ModularRuntimeImage.MODULES_PATH + "/java.base/java/lang");
         assertFalse(listEntries.isEmpty());
@@ -58,7 +58,7 @@ public class ModularRuntimeImageTestCase {
     }
 
     @ParameterizedTest
-    @MethodSource("org.apache.bcel.generic.JavaHome#streamModularRuntimeImages")
+    @MethodSource("org.apache.bcel.generic.JavaHome#streamModularRuntimeImage")
     public void testListJreModules(final ModularRuntimeImage modularRuntimeImage) throws IOException {
         final List<Path> listEntries = modularRuntimeImage.list(ModularRuntimeImage.MODULES_PATH);
         assertFalse(listEntries.isEmpty());
@@ -66,7 +66,7 @@ public class ModularRuntimeImageTestCase {
     }
 
     @ParameterizedTest
-    @MethodSource("org.apache.bcel.generic.JavaHome#streamModularRuntimeImages")
+    @MethodSource("org.apache.bcel.generic.JavaHome#streamModularRuntimeImage")
     public void testListJrePackages(final ModularRuntimeImage modularRuntimeImage) throws IOException {
         final List<Path> listEntries = modularRuntimeImage.list(ModularRuntimeImage.PACKAGES_PATH);
         assertFalse(listEntries.isEmpty());

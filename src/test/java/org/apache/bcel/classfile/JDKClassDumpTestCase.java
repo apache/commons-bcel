@@ -24,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -52,24 +53,26 @@ public class JDKClassDumpTestCase {
         }
     }
 
-    private void testJar(final JarFile jar) throws Exception {
-        System.out.println("Parsing " + jar.getName());
-        final Enumeration<JarEntry> en = jar.entries();
-        while (en.hasMoreElements()) {
-            final JarEntry e = en.nextElement();
-            final String name = e.getName();
-            if (name.endsWith(".class")) {
-                // System.out.println("Parsing " + name);
-                try (InputStream inputStream1 = jar.getInputStream(e); InputStream inputStream2 = jar.getInputStream(e);) {
-                    compare(new ClassParser(inputStream1, name).parse(), inputStream2, name);
+    private void testJar(final Path path) throws Exception {
+        try (final JarFile jar = new JarFile(path.toFile())) {
+            System.out.println("Parsing " + jar.getName());
+            final Enumeration<JarEntry> en = jar.entries();
+            while (en.hasMoreElements()) {
+                final JarEntry e = en.nextElement();
+                final String name = e.getName();
+                if (name.endsWith(".class")) {
+                    // System.out.println("Parsing " + name);
+                    try (InputStream inputStream1 = jar.getInputStream(e); InputStream inputStream2 = jar.getInputStream(e);) {
+                        compare(new ClassParser(inputStream1, name).parse(), inputStream2, name);
+                    }
                 }
             }
         }
     }
 
     @ParameterizedTest
-    @MethodSource("org.apache.bcel.generic.JavaHome#streamJarFiles")
-    public void testPerformance(final JarFile path) throws Exception {
+    @MethodSource("org.apache.bcel.generic.JavaHome#streamJarPath")
+    public void testPerformance(final Path path) throws Exception {
         assertDoesNotThrow(() -> testJar(path));
     }
 
