@@ -485,7 +485,7 @@
     <dependency>
       <groupId>wsdl4j</groupId>
       <artifactId>wsdl4j</artifactId>
-      <version>1.5.3</version>
+      <version>1.6.3</version>
       <scope>test</scope>
     </dependency>
     <!-- END very old jars for Justice verifier -->
