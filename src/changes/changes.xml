@@ -76,6 +76,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Deprecated constructors now throw ClassFormatException on invalid length input.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Attribute constructors now throw ClassFormatException on invalid name index input.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.ConstantValue constructors now throw ClassFormatException on invalid length input.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.EnclosingMethod constructors now throw ClassFormatException on invalid length, class index, or method index input.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugin from 4.7.2.2 to 4.7.3.0 #167.</action>
     </release>

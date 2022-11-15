@@ -21,6 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This attribute exists for local or anonymous classes and ... there can be only one.
@@ -48,10 +49,10 @@ public class EnclosingMethod extends Attribute {
         this(nameIndex, len, input.readUnsignedShort(), input.readUnsignedShort(), cpool);
     }
 
-    private EnclosingMethod(final int nameIndex, final int len, final int classIdx, final int methodIdx, final ConstantPool cpool) {
-        super(Const.ATTR_ENCLOSING_METHOD, nameIndex, len, cpool);
-        classIndex = classIdx;
-        methodIndex = methodIdx;
+    private EnclosingMethod(final int nameIndex, final int len, final int classIndex, final int methodIndex, final ConstantPool cpool) {
+        super(Const.ATTR_ENCLOSING_METHOD, nameIndex, Args.require(len, 4, "EnclosingMethod attribute length"), cpool);
+        this.classIndex = Args.requireU2(classIndex, 0, cpool.getLength(), "EnclosingMethod class index");
+        this.methodIndex = Args.requireU2(methodIndex, "EnclosingMethod method index");
     }
 
     @Override
