@@ -43,7 +43,7 @@ public class Args {
     }
 
     /**
-     * Requires a non-0 value.
+     * Requires a 0 value.
      *
      * @param value   The value to test.
      * @param message The message prefix
