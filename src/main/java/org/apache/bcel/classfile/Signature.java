@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a reference to a GJ attribute.
@@ -172,7 +173,7 @@ public final class Signature extends Attribute {
      * @param constantPool Array of constants
      */
     public Signature(final int nameIndex, final int length, final int signatureIndex, final ConstantPool constantPool) {
-        super(Const.ATTR_SIGNATURE, nameIndex, length, constantPool);
+        super(Const.ATTR_SIGNATURE, nameIndex, Args.require(length, 2, "Signature length attribute"), constantPool);
         this.signatureIndex = signatureIndex;
     }
 
