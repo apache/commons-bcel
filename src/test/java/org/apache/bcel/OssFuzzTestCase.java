@@ -28,6 +28,12 @@ import org.junit.jupiter.api.Test;
 public class OssFuzzTestCase {
 
     @Test
+    public void testIssue51989() throws Exception {
+        testOssFuzzReproducer("51989");
+    }
+
+
+    @Test
     public void testIssue52168() throws Exception {
         testOssFuzzReproducer("52168");
     }

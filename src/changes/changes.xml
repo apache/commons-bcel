@@ -69,6 +69,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Sam Ng, Gary Gregory">Improve test coverage to bcel/generic and UtilityTest #162.</action>
       <action                  type="fix" dev="ggregory" due-to="nbauma109, Gary Gregory">Code coverage and unit tests on the verifier #166.</action>
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">References to constant pool entries that are not of the expected type should throw ClassFormatException, not ClassCastException</action>
+      <action                  type="fix" dev="markt" due-to="OSS-Fuzz">When parsing an invalid class, ensure ClassParser.parse() throws ClassFormatException, not IllegalArgumentException</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugin from 4.7.2.2 to 4.7.3.0 #167.</action>
     </release>
