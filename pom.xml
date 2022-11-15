@@ -348,8 +348,8 @@
           <threshold>Normal</threshold>
           <effort>Default</effort>
           <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
-          <!-- Hacky: Don't add issues, we have 15 now --> 
-          <maxAllowedViolations>15</maxAllowedViolations>
+          <!-- Hacky: Don't add SpotBugs errors, we have 15 on Java 8, 17 on Java 11 and up --> 
+          <maxAllowedViolations>17</maxAllowedViolations>
         </configuration>
       </plugin>
       <plugin>
