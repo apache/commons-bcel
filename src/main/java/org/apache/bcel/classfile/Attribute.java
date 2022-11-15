@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * Abstract super class for <em>Attribute</em> objects. Currently the <em>ConstantValue</em>, <em>SourceFile</em>,
@@ -239,7 +240,7 @@ public abstract class Attribute implements Cloneable, Node {
 
     protected Attribute(final byte tag, final int nameIndex, final int length, final ConstantPool constantPool) {
         this.tag = tag;
-        this.name_index = nameIndex;
+        this.name_index = Args.requireU2(nameIndex, 0, constantPool.getLength(), "Invalid name index");
         this.length = length;
         this.constant_pool = constantPool;
     }

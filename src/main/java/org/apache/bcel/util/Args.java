@@ -42,6 +42,28 @@ public class Args {
     }
 
     /**
+     * Requires a u2 value of at least {@code min} and not above {@code max}.
+     *
+     * @param value   The value to test.
+     * @param min     The minimum required u2 value.
+     * @param max     The maximum required u2 value.
+     * @param message The message prefix
+     * @return The value to test.
+     */
+    public static int requireU2(final int value, final int min, final int max, final String message) {
+        if (max > Const.MAX_SHORT) {
+            throw new IllegalArgumentException(String.format("Programming error: %,d > %,d", max, Const.MAX_SHORT));
+        }
+        if (min < 0) {
+            throw new IllegalArgumentException(String.format("Programming error: %,d < 0", min));
+        }
+        if (value < min || value > max) {
+            throw new ClassFormatException(String.format("%s [Value out of range (%,d - %,d) for type u2: %,d]", message, min, Const.MAX_SHORT, value));
+        }
+        return value;
+    }
+
+    /**
      * Requires a u2 value of at least {@code min}.
      *
      * @param value   The value to test.
@@ -50,10 +72,7 @@ public class Args {
      * @return The value to test.
      */
     public static int requireU2(final int value, final int min, final String message) {
-        if (value < min || value > Const.MAX_SHORT) {
-            throw new ClassFormatException(String.format("%s [Value out of range (%,d - %,d) for type u2: %,d]", message, min, Const.MAX_SHORT, value));
-        }
-        return value;
+        return requireU2(value, 0, Const.MAX_SHORT, message);
     }
 
     /**
