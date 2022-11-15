@@ -304,7 +304,8 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
             throw new ClassFormatException("Invalid constant pool reference using index: " + index + ". Constant pool size is: " + constantPool.length);
         }
         if (constantPool[index] != null && !castTo.isAssignableFrom(constantPool[index].getClass())) {
-            throw new ClassFormatException("Invalid constant pool reference at index: " + index + ". Expected " + castTo + " but was " + constantPool[index].getClass());
+            throw new ClassFormatException("Invalid constant pool reference at index: " + index +
+                    ". Expected " + castTo + " but was " + constantPool[index].getClass());
         }
         // Previous check ensures this won't throw a ClassCastException
         final T c = castTo.cast(constantPool[index]);
