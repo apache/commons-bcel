@@ -29,7 +29,7 @@ public class AnnotationElementValue extends ElementValue {
     public AnnotationElementValue(final int type, final AnnotationEntry annotationEntry, final ConstantPool cpool) {
         super(type, cpool);
         if (type != ANNOTATION) {
-            throw new IllegalArgumentException("Only element values of type annotation can be built with this ctor - type specified: " + type);
+            throw new ClassFormatException("Only element values of type annotation can be built with this ctor - type specified: " + type);
         }
         this.annotationEntry = annotationEntry;
     }

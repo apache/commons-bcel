@@ -25,20 +25,14 @@ import java.io.IOException;
  * @since 6.0
  */
 public abstract class ElementValue {
+
     public static final byte STRING = 's';
-
     public static final byte ENUM_CONSTANT = 'e';
-
     public static final byte CLASS = 'c';
-
     public static final byte ANNOTATION = '@';
-
     public static final byte ARRAY = '[';
-
     public static final byte PRIMITIVE_INT = 'I';
-
     public static final byte PRIMITIVE_BYTE = 'B';
-
     public static final byte PRIMITIVE_CHAR = 'C';
     public static final byte PRIMITIVE_DOUBLE = 'D';
     public static final byte PRIMITIVE_FLOAT = 'F';
@@ -79,7 +73,7 @@ public abstract class ElementValue {
             return new ArrayElementValue(ARRAY, evalues, cpool);
 
         default:
-            throw new IllegalArgumentException("Unexpected element value kind in annotation: " + type);
+            throw new ClassFormatException("Unexpected element value kind in annotation: " + type);
         }
     }
 

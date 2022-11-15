@@ -155,8 +155,6 @@ public final class ClassParser {
             // System.err.println(bytes + " extra bytes: " + Utility.toHexString(buf));
             // }
             // }
-        } catch (IllegalArgumentException e) {
-            throw new ClassFormatException(e.getMessage(), e);
         } finally {
             // Read everything of interest, so close the file
             if (fileOwned) {
