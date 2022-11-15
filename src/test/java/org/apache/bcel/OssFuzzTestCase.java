@@ -32,18 +32,16 @@ public class OssFuzzTestCase {
         testOssFuzzReproducer("51989");
     }
 
-
     @Test
     public void testIssue52168() throws Exception {
         testOssFuzzReproducer("52168");
     }
 
-
-    private void testOssFuzzReproducer(String issue) throws Exception {
-        File reproducerFile = new File("target/test-classes/ossfuzz/issue" + issue + "/Test.class");
-        FileInputStream reproducerInputStream = new FileInputStream(reproducerFile);
-
-        ClassParser cp = new ClassParser(reproducerInputStream, "Test");
-        assertThrows(ClassFormatException.class, () -> cp.parse());
+    private void testOssFuzzReproducer(final String issue) throws Exception {
+        final File reproducerFile = new File("target/test-classes/ossfuzz/issue" + issue + "/Test.class");
+        try (final FileInputStream reproducerInputStream = new FileInputStream(reproducerFile)) {
+            final ClassParser cp = new ClassParser(reproducerInputStream, "Test");
+            assertThrows(ClassFormatException.class, () -> cp.parse());
+        }
     }
 }
