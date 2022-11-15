@@ -220,7 +220,7 @@
   </scm>
 
   <build>
-    <defaultGoal>clean verify apache-rat:check japicmp:cmp checkstyle:check pmd:check javadoc:javadoc</defaultGoal>
+    <defaultGoal>clean verify apache-rat:check japicmp:cmp checkstyle:check pmd:check spotbugs:check javadoc:javadoc</defaultGoal>
     <plugins>
       <plugin>
         <groupId>org.apache.felix</groupId>
@@ -348,6 +348,8 @@
           <threshold>Normal</threshold>
           <effort>Default</effort>
           <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
+          <!-- Hacky: Don't add issues, we have 15 now --> 
+          <maxAllowedViolations>15</maxAllowedViolations>
         </configuration>
       </plugin>
       <plugin>
