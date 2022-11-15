@@ -186,10 +186,7 @@ public abstract class Repository {
      */
     public static ClassPath.ClassFile lookupClassFile(final String className) {
         try (ClassPath path = repository.getClassPath()) {
-            if (path == null) {
-                return null;
-            }
-            return path.getClassFile(className);
+            return path == null ? null : path.getClassFile(className);
         } catch (final IOException e) {
             return null;
         }
