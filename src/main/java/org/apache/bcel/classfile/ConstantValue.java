@@ -21,6 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a constant value, i.e., a default value for initializing
@@ -60,7 +61,7 @@ public final class ConstantValue extends Attribute {
      * @param constantPool Array of constants
      */
     public ConstantValue(final int nameIndex, final int length, final int constantValueIndex, final ConstantPool constantPool) {
-        super(Const.ATTR_CONSTANT_VALUE, nameIndex, length, constantPool);
+        super(Const.ATTR_CONSTANT_VALUE, nameIndex, Args.require(2, length, "Invalid constant value attribute length"), constantPool);
         this.constantValueIndex = constantValueIndex;
     }
 

@@ -28,6 +28,21 @@ import org.apache.bcel.classfile.ClassFormatException;
 public class Args {
 
     /**
+     * Requires a specific value.
+     *
+     * @param value    The value to test.
+     * @param required The required value.
+     * @param message  The message prefix
+     * @return The value to test.
+     */
+    public static int require(final int value, final int required, final String message) {
+        if (value != required) {
+            throw new ClassFormatException(String.format("%s [Value must be 0: %,d]", message, value));
+        }
+        return value;
+    }
+
+    /**
      * Requires a non-0 value.
      *
      * @param value   The value to test.
@@ -35,10 +50,7 @@ public class Args {
      * @return The value to test.
      */
     public static int require0(final int value, final String message) {
-        if (value != 0) {
-            throw new ClassFormatException(String.format("%s [Value must be 0: %,d]", message, value));
-        }
-        return value;
+        return require(value, 0, message);
     }
 
     /**
