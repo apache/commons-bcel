@@ -68,7 +68,7 @@ public class JavaHome {
             final FileVisitOption... options) {
         try {
             // TODO Replace with Apache Commons IO UncheckedFiles later.
-            return Files.find(start, maxDepth, matcher, options);
+            return Files.exists(start) ? Files.find(start, maxDepth, matcher, options) : Stream.empty();
         } catch (final IOException e) {
             throw new UncheckedIOException(e);
         }
