@@ -21,6 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class is derived from <em>Attribute</em> and declares this class as `synthetic', i.e., it needs special
@@ -41,7 +42,7 @@ public final class Synthetic extends Attribute {
      * @param constantPool The constant pool this attribute is associated with.
      */
     public Synthetic(final int nameIndex, final int length, final byte[] bytes, final ConstantPool constantPool) {
-        super(Const.ATTR_SYNTHETIC, nameIndex, length, constantPool);
+        super(Const.ATTR_SYNTHETIC, nameIndex, Args.require0(length, "Synthetic attribute length"), constantPool);
         this.bytes = bytes;
     }
 
