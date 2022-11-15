@@ -48,7 +48,17 @@ public class JavaHome {
 
     private static final String EXTRA_JAVA_HOMES = "ExtraJavaHomes";
 
+    /** A folder containing Java homes, for example, on Windows "C:/Program Files/Eclipse Adoptium/" */
     private static final String EXTRA_JAVA_ROOT = "ExtraJavaRoot";
+
+    /** The default home for Java installs on Windows for Eclipse Adoptium. */
+    private static final String ADOPTIUM_WINDOWS = "C:/Program Files/Eclipse Adoptium/";
+
+    /** The default home for Java installs on Windows for Eclipse Oracle. */
+    private static final String ORACLE_WINDOWS = "C:/Program Files/Java/";
+
+    private static final String EXTRA_JAVA_ROOT_DEFAULT = ADOPTIUM_WINDOWS + File.pathSeparator + ORACLE_WINDOWS;
+
     private static final String KEY_JDK = "SOFTWARE\\JavaSoft\\Java Development Kit";
     private static final String KEY_JDK_9 = "SOFTWARE\\JavaSoft\\JDK";
     private static final String KEY_JRE = "SOFTWARE\\JavaSoft\\Java Runtime Environment";
@@ -75,12 +85,13 @@ public class JavaHome {
         return Stream.empty();
     }
 
-    private static Stream<String> streamFromCustomKey(final String key) {
-        return streamPropertyAndEnvVarValues(key).flatMap(s -> find(Paths.get(s), 1, (p, a) -> Files.isDirectory(p)).map(Path::toString));
+    private static Stream<String> streamFromCustomKey(final String key, final String defaultValue) {
+        return streamPropertyAndEnvVarValues(key, defaultValue).flatMap(s -> find(Paths.get(s), 1, (p, a) -> Files.isDirectory(p)).map(Path::toString));
     }
 
     private static Stream<String> streamFromCustomKeys() {
-        return Stream.concat(streamPropertyAndEnvVarValues(EXTRA_JAVA_HOMES), streamFromCustomKey(EXTRA_JAVA_ROOT));
+        final String defaultRoot = SystemUtils.IS_OS_WINDOWS ? EXTRA_JAVA_ROOT_DEFAULT : null;
+        return Stream.concat(streamPropertyAndEnvVarValues(EXTRA_JAVA_HOMES, null), streamFromCustomKey(EXTRA_JAVA_ROOT, defaultRoot));
     }
 
     /**
@@ -149,8 +160,8 @@ public class JavaHome {
         return streamJavaHome().flatMap(JavaHome::streamModuleByExt);
     }
 
-    private static Stream<String> streamPropertyAndEnvVarValues(final String key) {
-        return Stream.concat(toPathStringStream(System.getProperty(key)), toPathStringStream(System.getenv(key)));
+    private static Stream<String> streamPropertyAndEnvVarValues(final String key, final String defaultValue) {
+        return Stream.concat(toPathStringStream(System.getProperty(key, defaultValue)), toPathStringStream(System.getenv(key)));
     }
 
     private static Stream<String> streamWindowsJavaHomes(final String keyJavaHome, final String[] keys) {
@@ -168,7 +179,7 @@ public class JavaHome {
 
     private static Stream<String> streamWindowsStrings() {
         return Stream.concat(Stream.of(KEY_JRE, KEY_JRE_9, KEY_JDK, KEY_JDK_9).flatMap(JavaHome::streamAllWindowsJavaHomes),
-                streamPropertyAndEnvVarValues(EXTRA_JAVA_HOMES)).distinct();
+                streamPropertyAndEnvVarValues(EXTRA_JAVA_HOMES, null)).distinct();
     }
 
     private static Stream<String> toPathStringStream(final String path) {
