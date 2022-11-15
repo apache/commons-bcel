@@ -21,6 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a reference to the source file of this class. At most
@@ -56,8 +57,8 @@ public final class SourceFile extends Attribute {
      *        in many cases, the JVM.
      */
     public SourceFile(final int nameIndex, final int length, final int sourceFileIndex, final ConstantPool constantPool) {
-        super(Const.ATTR_SOURCE_FILE, nameIndex, length, constantPool);
-        this.sourceFileIndex = sourceFileIndex;
+        super(Const.ATTR_SOURCE_FILE, nameIndex, Args.require(length, 2, "SourceFile length attribute"), constantPool);
+        this.sourceFileIndex = Args.requireU2(sourceFileIndex, 0, constantPool.getLength(), "SourceFile source file index");
     }
 
     /**
