@@ -66,7 +66,7 @@ public final class Code extends Attribute {
     Code(final int nameIndex, final int length, final DataInput file, final ConstantPool constantPool) throws IOException {
         // Initialize with some default values which will be overwritten later
         this(nameIndex, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null, constantPool);
-        final int codeLength = Args.requireU2(file.readInt(), 1, "Invalid length for Code attribute");
+        final int codeLength = Args.requireU2(file.readInt(), 1, "Code length attribute");
         code = new byte[codeLength]; // Read byte code
         file.readFully(code);
         /*

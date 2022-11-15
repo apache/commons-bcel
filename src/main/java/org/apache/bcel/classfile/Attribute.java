@@ -240,7 +240,7 @@ public abstract class Attribute implements Cloneable, Node {
 
     protected Attribute(final byte tag, final int nameIndex, final int length, final ConstantPool constantPool) {
         this.tag = tag;
-        this.name_index = Args.requireU2(nameIndex, 0, constantPool.getLength(), "Invalid name index");
+        this.name_index = Args.requireU2(nameIndex, 0, constantPool.getLength(), getClass().getSimpleName() + " name index");
         this.length = length;
         this.constant_pool = constantPool;
     }
