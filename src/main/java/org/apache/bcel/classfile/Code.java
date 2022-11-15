@@ -48,9 +48,12 @@ public final class Code extends Attribute {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
      * physical copy.
+     *
+     * @param code The source Code.
      */
-    public Code(final Code c) {
-        this(c.getNameIndex(), c.getLength(), c.getMaxStack(), c.getMaxLocals(), c.getCode(), c.getExceptionTable(), c.getAttributes(), c.getConstantPool());
+    public Code(final Code code) {
+        this(code.getNameIndex(), code.getLength(), code.getMaxStack(), code.getMaxLocals(), code.getCode(), code.getExceptionTable(), code.getAttributes(),
+                code.getConstantPool());
     }
 
     /**
@@ -63,8 +66,9 @@ public final class Code extends Attribute {
         // Initialize with some default values which will be overwritten later
         this(nameIndex, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null, constantPool);
         final int codeLength = file.readInt();
-        if (codeLength < 1 || codeLength > 65535) {
-            throw new ClassFormatException("Invalid length " + codeLength + " for Code attribute. Must be greater than zero and less than 65536.");
+        if (codeLength < 1 || codeLength > Const.MAX_SHORT) {
+            throw new ClassFormatException(
+                    String.format("Invalid length %,d for Code attribute. Must be greater than zero and less than %,d.", codeLength, Const.MAX_SHORT));
         }
         code = new byte[codeLength]; // Read byte code
         file.readFully(code);
@@ -299,6 +303,9 @@ public final class Code extends Attribute {
     }
 
     /**
+     * Converts this object to a String.
+     *
+     * @param verbose Provides verbose output when true.
      * @return String representation of code chunk.
      */
     public String toString(final boolean verbose) {
