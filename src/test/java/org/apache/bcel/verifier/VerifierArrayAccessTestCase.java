@@ -18,14 +18,15 @@
 package org.apache.bcel.verifier;
 
 import java.io.IOException;
+
 import org.apache.bcel.verifier.tests.TestArrayAccess02Creator;
 import org.apache.bcel.verifier.tests.TestArrayAccess03Creator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04DoubleCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04FloatCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04IntCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04LongCreator;
-import org.apache.bcel.verifier.tests.TestArrayAccess04UnknownCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04ShortCreator;
+import org.apache.bcel.verifier.tests.TestArrayAccess04UnknownCreator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

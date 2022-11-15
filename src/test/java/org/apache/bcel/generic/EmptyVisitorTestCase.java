@@ -16,14 +16,14 @@
  */
 package org.apache.bcel.generic;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 class EmptyVisitorTestCase {
 
