@@ -61,7 +61,7 @@ public final class ConstantValue extends Attribute {
      * @param constantPool Array of constants
      */
     public ConstantValue(final int nameIndex, final int length, final int constantValueIndex, final ConstantPool constantPool) {
-        super(Const.ATTR_CONSTANT_VALUE, nameIndex, Args.require(2, length, "ConstantValue attribute length"), constantPool);
+        super(Const.ATTR_CONSTANT_VALUE, nameIndex, Args.require(length, 2, "ConstantValue attribute length"), constantPool);
         this.constantValueIndex = constantValueIndex;
     }
 
