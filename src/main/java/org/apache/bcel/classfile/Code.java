@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -65,11 +66,7 @@ public final class Code extends Attribute {
     Code(final int nameIndex, final int length, final DataInput file, final ConstantPool constantPool) throws IOException {
         // Initialize with some default values which will be overwritten later
         this(nameIndex, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null, constantPool);
-        final int codeLength = file.readInt();
-        if (codeLength < 1 || codeLength > Const.MAX_SHORT) {
-            throw new ClassFormatException(
-                    String.format("Invalid length %,d for Code attribute. Must be greater than zero and less than %,d.", codeLength, Const.MAX_SHORT));
-        }
+        final int codeLength = Args.requireU2(file.readInt(), 1, "Invalid length for Code attribute");
         code = new byte[codeLength]; // Read byte code
         file.readFully(code);
         /*
