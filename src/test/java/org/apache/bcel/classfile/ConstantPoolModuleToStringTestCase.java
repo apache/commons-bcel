@@ -449,17 +449,21 @@ public class ConstantPoolModuleToStringTestCase {
         }
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {
-    // @formatter:off
-        "src/test/resources/jpms/java11/commons-io/module-info.class",
-        "src/test/resources/jpms/java17/commons-io/module-info.class",
-        "src/test/resources/jpms/java18/commons-io/module-info.class",
-        "src/test/resources/jpms/java19-ea/commons-io/module-info.class"})
-    // @formatter:on
-    public void test(final String first) throws Exception {
-        try (final InputStream inputStream = Files.newInputStream(Paths.get(first))) {
-            test(inputStream);
+    private static void test(final InputStream inputStream) throws IOException {
+        final ClassParser classParser = new ClassParser(inputStream, "module-info.class");
+        final JavaClass javaClass = classParser.parse();
+        testJavaClass(javaClass);
+    }
+
+    private static void testJavaClass(final JavaClass javaClass) {
+        final ConstantPool constantPool = javaClass.getConstantPool();
+        final ToStringVisitor visitor = new ToStringVisitor(constantPool);
+        final DescendingVisitor descendingVisitor = new DescendingVisitor(javaClass, visitor);
+        try {
+            javaClass.accept(descendingVisitor);
+            assertNotNull(visitor.toString());
+        } catch (Exception | Error e) {
+            fail(visitor.toString(), e);
         }
     }
 
@@ -471,6 +475,20 @@ public class ConstantPoolModuleToStringTestCase {
             try (InputStream inputStream = url.openStream()) {
                 test(inputStream);
             }
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "src/test/resources/jpms/java11/commons-io/module-info.class",
+        "src/test/resources/jpms/java17/commons-io/module-info.class",
+        "src/test/resources/jpms/java18/commons-io/module-info.class",
+        "src/test/resources/jpms/java19-ea/commons-io/module-info.class"})
+    // @formatter:on
+    public void test(final String first) throws Exception {
+        try (final InputStream inputStream = Files.newInputStream(Paths.get(first))) {
+            test(inputStream);
         }
     }
 
@@ -489,23 +507,5 @@ public class ConstantPoolModuleToStringTestCase {
     // @formatter:on
     public void testClass(final String className) throws Exception {
         testJavaClass(SyntheticRepository.getInstance().loadClass(className));
-    }
-
-    private static void test(final InputStream inputStream) throws IOException {
-        final ClassParser classParser = new ClassParser(inputStream, "module-info.class");
-        final JavaClass javaClass = classParser.parse();
-        testJavaClass(javaClass);
-    }
-
-    private static void testJavaClass(final JavaClass javaClass) {
-        final ConstantPool constantPool = javaClass.getConstantPool();
-        final ToStringVisitor visitor = new ToStringVisitor(constantPool);
-        final DescendingVisitor descendingVisitor = new DescendingVisitor(javaClass, visitor);
-        try {
-            javaClass.accept(descendingVisitor);
-            assertNotNull(visitor.toString());
-        } catch (Exception | Error e) {
-            fail(visitor.toString(), e);
-        }
     }
 }

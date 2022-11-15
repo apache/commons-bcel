@@ -50,34 +50,6 @@ public class ConstantPoolTestCase extends AbstractTestCase {
     }
 
     @Test
-    public void testConstantToString() throws ClassNotFoundException {
-        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
-        final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
-        final Method[] methods = clazz.getMethods();
-        for (final Method method : methods) {
-            if (method.getName().equals("<init>")) {
-                for (final InstructionHandle instructionHandle : getInstructionHandles(clazz, cp, method)) {
-                    final String instruction = instructionHandle.getInstruction().toString(cp.getConstantPool());
-                    assertNotNull(instruction);
-                    switch (instructionHandle.getPosition()) {
-                        case 0:
-                            assertEquals("aload_0", instruction);
-                            break;
-                        case 1:
-                            assertEquals("invokespecial java/lang/Object/<init>()V", instruction);
-                            break;
-                        case 4:
-                            assertEquals("return", instruction);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
-    }
-
-    @Test
     public void testClassWithDoubleConstantPoolItem() throws ClassNotFoundException, IOException {
         try (final ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
             final ClassWithDoubleConstantPoolItem classWithDoubleConstantPoolItem = new ClassWithDoubleConstantPoolItem();
@@ -114,6 +86,34 @@ public class ConstantPoolTestCase extends AbstractTestCase {
                 }
                 return constant;
             }));
+        }
+    }
+
+    @Test
+    public void testConstantToString() throws ClassNotFoundException {
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
+        final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
+        final Method[] methods = clazz.getMethods();
+        for (final Method method : methods) {
+            if (method.getName().equals("<init>")) {
+                for (final InstructionHandle instructionHandle : getInstructionHandles(clazz, cp, method)) {
+                    final String instruction = instructionHandle.getInstruction().toString(cp.getConstantPool());
+                    assertNotNull(instruction);
+                    switch (instructionHandle.getPosition()) {
+                        case 0:
+                            assertEquals("aload_0", instruction);
+                            break;
+                        case 1:
+                            assertEquals("invokespecial java/lang/Object/<init>()V", instruction);
+                            break;
+                        case 4:
+                            assertEquals("return", instruction);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
     }
 

@@ -63,17 +63,17 @@ class EmptyVisitorTestCase {
                 for (final InstructionHandle instructionHandle : instructionList) {
                     instructionHandle.accept(new EmptyVisitor() {
                         @Override
+                        public void visitBREAKPOINT(final BREAKPOINT obj) {
+                            fail(RESERVED_OPCODE);
+                        }
+
+                        @Override
                         public void visitIMPDEP1(final IMPDEP1 obj) {
                             fail(RESERVED_OPCODE);
                         }
 
                         @Override
                         public void visitIMPDEP2(final IMPDEP2 obj) {
-                            fail(RESERVED_OPCODE);
-                        }
-
-                        @Override
-                        public void visitBREAKPOINT(final BREAKPOINT obj) {
                             fail(RESERVED_OPCODE);
                         }
                     });
