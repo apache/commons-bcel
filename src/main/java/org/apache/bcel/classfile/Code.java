@@ -63,6 +63,9 @@ public final class Code extends Attribute {
         // Initialize with some default values which will be overwritten later
         this(nameIndex, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null, constantPool);
         final int codeLength = file.readInt();
+        if (codeLength < 1 || codeLength > 65535) {
+            throw new ClassFormatException("Invalid length " + codeLength + " for Code attribute. Must be greater than zero and less than 65536.");
+        }
         code = new byte[codeLength]; // Read byte code
         file.readFully(code);
         /*
