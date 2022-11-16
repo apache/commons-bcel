@@ -37,20 +37,20 @@ public final class Pass1Verifier extends PassVerifier {
      *
      * @see #getJavaClass()
      */
-    private JavaClass jc;
+    private JavaClass javaClass;
 
     /**
      * The Verifier that created this.
      */
-    private final Verifier myOwner;
+    private final Verifier verifier;
 
     /**
      * Should only be instantiated by a Verifier.
      *
      * @see Verifier
      */
-    public Pass1Verifier(final Verifier owner) {
-        myOwner = owner;
+    public Pass1Verifier(final Verifier verifier) {
+        this.verifier = verifier;
     }
 
     /**
@@ -131,9 +131,9 @@ public final class Pass1Verifier extends PassVerifier {
             // This test should be much more complicated. It needs to take the class name, remove any portion at the
             // end that matches the file name and then see if the remainder matches anything on the class path.
             // Dumb test for now, see if the class name ends with the file name.
-            if (jc != null && !myOwner.getClassName().equals(jc.getClassName()) && !jc.getClassName().endsWith(myOwner.getClassName())) {
+            if (jc != null && !verifier.getClassName().equals(jc.getClassName()) && !jc.getClassName().endsWith(verifier.getClassName())) {
                 throw new LoadingException("Wrong name: the internal name of the .class file '" + jc.getClassName() + "' does not match the file's name '"
-                    + myOwner.getClassName() + "'.");
+                    + verifier.getClassName() + "'.");
             }
         } catch (final LoadingException | ClassFormatException e) {
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, e.getMessage());
@@ -158,9 +158,9 @@ public final class Pass1Verifier extends PassVerifier {
      * it's not really needed!
      */
     private JavaClass getJavaClass() {
-        if (jc == null) {
+        if (javaClass == null) {
             try {
-                jc = Repository.lookupClass(myOwner.getClassName());
+                javaClass = Repository.lookupClass(verifier.getClassName());
             } catch (final ClassNotFoundException ignored) {
                 // FIXME: currently, Pass1Verifier treats jc == null as a special
                 // case, so we don't need to do anything here. A better solution
@@ -168,7 +168,7 @@ public final class Pass1Verifier extends PassVerifier {
                 // out of this method.
             }
         }
-        return jc;
+        return javaClass;
     }
 
     /**

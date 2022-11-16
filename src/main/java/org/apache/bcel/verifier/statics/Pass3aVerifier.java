@@ -213,7 +213,7 @@ public final class Pass3aVerifier extends PassVerifier {
          */
         private int maxLocals() {
             try {
-                return Repository.lookupClass(myOwner.getClassName()).getMethods()[methodNo].getCode().getMaxLocals();
+                return Repository.lookupClass(verifier.getClassName()).getMethods()[methodNo].getCode().getMaxLocals();
             } catch (final ClassNotFoundException e) {
                 // FIXME: maybe not the best way to handle this
                 throw new AssertionViolatedException("Missing class: " + e, e);
@@ -591,7 +591,7 @@ public final class Pass3aVerifier extends PassVerifier {
                         + o.getSignature(constantPoolGen) + "' not found in class '" + jc.getClassName() + "'.");
                 }
 
-                JavaClass current = Repository.lookupClass(myOwner.getClassName());
+                JavaClass current = Repository.lookupClass(verifier.getClassName());
                 if (current.isSuper() && Repository.instanceOf(current, jc) && !current.equals(jc)
                     && !o.getMethodName(constantPoolGen).equals(Const.CONSTRUCTOR_NAME)) {
                     // Special lookup procedure for ACC_SUPER classes.
@@ -869,8 +869,8 @@ public final class Pass3aVerifier extends PassVerifier {
                     throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
 
-                if (f.isFinal() && !myOwner.getClassName().equals(getObjectType(o).getClassName())) {
-                    constraintViolated(o, "Referenced field '" + f + "' is final and must therefore be declared in the current class '" + myOwner.getClassName()
+                if (f.isFinal() && !verifier.getClassName().equals(getObjectType(o).getClassName())) {
+                    constraintViolated(o, "Referenced field '" + f + "' is final and must therefore be declared in the current class '" + verifier.getClassName()
                         + "' which is not the case: it is declared in '" + o.getReferenceType(constantPoolGen) + "'.");
                 }
 
@@ -878,7 +878,7 @@ public final class Pass3aVerifier extends PassVerifier {
                     constraintViolated(o, "Referenced field '" + f + "' is not static which it should be.");
                 }
 
-                final String methName = Repository.lookupClass(myOwner.getClassName()).getMethods()[methodNo].getName();
+                final String methName = Repository.lookupClass(verifier.getClassName()).getMethods()[methodNo].getName();
 
                 // If it's an interface, it can be set only in <clinit>.
                 if (!jc.isClass() && !methName.equals(Const.STATIC_INITIALIZER_NAME)) {
@@ -925,7 +925,7 @@ public final class Pass3aVerifier extends PassVerifier {
     }
 
     /** The Verifier that created this. */
-    private final Verifier myOwner;
+    private final Verifier verifier;
 
     /**
      * The method number to verify. This is the index in the array returned by JavaClass.getMethods().
@@ -945,8 +945,8 @@ public final class Pass3aVerifier extends PassVerifier {
     private Code code;
 
     /** Should only be instantiated by a Verifier. */
-    public Pass3aVerifier(final Verifier owner, final int methodNo) {
-        myOwner = owner;
+    public Pass3aVerifier(final Verifier verifier, final int methodNo) {
+        this.verifier = verifier;
         this.methodNo = methodNo;
     }
 
@@ -1059,10 +1059,10 @@ public final class Pass3aVerifier extends PassVerifier {
     @Override
     public VerificationResult do_verify() {
         try {
-            if (myOwner.doPass2().equals(VerificationResult.VR_OK)) {
+            if (verifier.doPass2().equals(VerificationResult.VR_OK)) {
                 // Okay, class file was loaded correctly by Pass 1
                 // and satisfies static constraints of Pass 2.
-                final JavaClass jc = Repository.lookupClass(myOwner.getClassName());
+                final JavaClass jc = Repository.lookupClass(verifier.getClassName());
                 final Method[] methods = jc.getMethods();
                 if (methodNo >= methods.length) {
                     throw new InvalidMethodException("METHOD DOES NOT EXIST!");
@@ -1205,7 +1205,7 @@ public final class Pass3aVerifier extends PassVerifier {
 
             // TODO: Implement as much as possible here. BCEL does _not_ check everything.
 
-            final ConstantPoolGen cpg = new ConstantPoolGen(Repository.lookupClass(myOwner.getClassName()).getConstantPool());
+            final ConstantPoolGen cpg = new ConstantPoolGen(Repository.lookupClass(verifier.getClassName()).getConstantPool());
             final InstOperandConstraintVisitor v = new InstOperandConstraintVisitor(cpg);
 
             // Checks for the things BCEL does _not_ handle itself.
