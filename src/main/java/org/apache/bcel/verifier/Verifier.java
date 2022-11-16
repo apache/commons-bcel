@@ -43,6 +43,9 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class Verifier {
 
+    static final String NAME = "Apache Commons BCEL";
+    static final String BANNER = NAME + "\nhttps://commons.apache.org/bcel\n";
+
     static final Verifier[] EMPTY_ARRAY = {};
 
     /**
@@ -52,7 +55,7 @@ public class Verifier {
      * put the classes into the BCEL Repository yourself (via 'addClass(JavaClass)').
      */
     public static void main(final String[] args) {
-        System.out.println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<https://commons.apache.org/bcel>\n");
+        System.out.println(BANNER);
         for (int index = 0; index < args.length; index++) {
             try {
                 if (args[index].endsWith(JavaClass.EXTENSION)) {

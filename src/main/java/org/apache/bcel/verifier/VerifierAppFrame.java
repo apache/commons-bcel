@@ -52,8 +52,6 @@ import org.apache.commons.lang3.ArrayUtils;
 public class VerifierAppFrame extends JFrame {
 
     private static final long serialVersionUID = -542458133073307640L;
-    private static final String JUSTICE_VERSION = "JustIce by Enver Haase";
-
     private JPanel contentPane;
     private final JSplitPane jSplitPane1 = new JSplitPane();
     private final JPanel jPanel1 = new JPanel();
@@ -103,9 +101,7 @@ public class VerifierAppFrame extends JFrame {
     }
 
     void aboutMenuItem_actionPerformed(final ActionEvent e) {
-        JOptionPane.showMessageDialog(this,
-            "JustIce is a Java class file verifier.\n" + "It was implemented by Enver Haase in 2001, 2002.\n<https://commons.apache.org/bcel/>",
-            JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, Verifier.BANNER, Verifier.NAME, JOptionPane.INFORMATION_MESSAGE);
     }
 
     synchronized void classNamesJList_valueChanged(final ListSelectionEvent e) {
@@ -343,7 +339,7 @@ public class VerifierAppFrame extends JFrame {
             allmsgs.append(msgs[i]).append("\n\n");
         }
         messagesTextPane.setText(allmsgs.toString());
-        setTitle(currentClass + " - " + JUSTICE_VERSION);
+        setTitle(currentClass + " - " + Verifier.NAME);
     }
 
     void whatisMenuItem_actionPerformed(final ActionEvent e) {
@@ -352,7 +348,7 @@ public class VerifierAppFrame extends JFrame {
                 + " The Java Virtual Machine Specification.\nThese are (in that order):"
                 + " Pass one, Pass two, Pass three (before data flow analysis), Pass three (data flow analysis).\n"
                 + "The bottom box to the right shows (warning) messages; warnings do not cause a class to be rejected.",
-            JUSTICE_VERSION, JOptionPane.INFORMATION_MESSAGE);
+            Verifier.NAME, JOptionPane.INFORMATION_MESSAGE);
     }
 
 }
