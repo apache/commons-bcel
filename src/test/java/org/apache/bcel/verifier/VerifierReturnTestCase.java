@@ -31,7 +31,7 @@ import org.apache.bcel.verifier.tests.TestReturn03UnknownCreator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class VerifierReturnTestCase extends AbstractVerifierTestCase {
+public class VerifierReturnTestCase extends AbstractVerifierTestCase {
 
     @Test
     public void testInvalidReturn() throws IOException, ClassNotFoundException {

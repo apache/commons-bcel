@@ -870,8 +870,8 @@ public final class Pass3aVerifier extends PassVerifier {
                 }
 
                 if (f.isFinal() && !verifier.getClassName().equals(getObjectType(o).getClassName())) {
-                    constraintViolated(o, "Referenced field '" + f + "' is final and must therefore be declared in the current class '" + verifier.getClassName()
-                        + "' which is not the case: it is declared in '" + o.getReferenceType(constantPoolGen) + "'.");
+                    constraintViolated(o, "Referenced field '" + f + "' is final and must therefore be declared in the current class '"
+                            + verifier.getClassName() + "' which is not the case: it is declared in '" + o.getReferenceType(constantPoolGen) + "'.");
                 }
 
                 if (!f.isStatic()) {
