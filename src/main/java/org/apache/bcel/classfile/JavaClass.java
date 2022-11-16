@@ -396,6 +396,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /**
      * Get all interfaces implemented by this JavaClass (transitively).
+     *
+     * @throws ClassNotFoundException if any of the class's superclasses or interfaces can't be found.
      */
     public JavaClass[] getAllInterfaces() throws ClassNotFoundException {
         final ClassQueue queue = new ClassQueue();
@@ -501,6 +503,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /**
      * Get interfaces directly implemented by this JavaClass.
+     *
+     * @throws ClassNotFoundException if any of the class's interfaces can't be found.
      */
     public JavaClass[] getInterfaces() throws ClassNotFoundException {
         final String[] interfaces = getInterfaceNames();
