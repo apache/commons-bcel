@@ -28,11 +28,13 @@ import org.apache.bcel.Const;
  * @since 6.0
  */
 public class RuntimeInvisibleAnnotations extends Annotations {
+
     /**
      * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
      * @param input Input stream
      * @param constantPool Array of constants
+     * @throws IOException Thrown when an I/O exception of some sort has occurred.
      */
     public RuntimeInvisibleAnnotations(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         super(Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS, nameIndex, length, input, constantPool, false);

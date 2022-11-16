@@ -72,6 +72,7 @@ public abstract class Instruction implements Cloneable {
      *
      * @param bytes input stream bytes
      * @return instruction object being read
+     * @throws IOException Thrown when an I/O exception of some sort has occurred.
      * @see InstructionConst#getInstruction(int)
      */
     // @since 6.0 no longer final
@@ -477,6 +478,7 @@ public abstract class Instruction implements Cloneable {
      * Dump instruction as byte code to stream out.
      *
      * @param out Output stream
+     * @throws IOException Thrown when an I/O exception of some sort has occurred.
      */
     public void dump(final DataOutputStream out) throws IOException {
         out.writeByte(opcode); // Common for all instructions

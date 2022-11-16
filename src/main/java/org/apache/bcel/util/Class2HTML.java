@@ -178,6 +178,7 @@ public class Class2HTML implements Constants {
      *
      * @param javaClass The class to write
      * @param dir The directory to put the files in
+     * @throws IOException Thrown when an I/O exception of some sort has occurred.
      */
     public Class2HTML(final JavaClass javaClass, final String dir) throws IOException {
         this(javaClass, dir, StandardCharsets.UTF_8);
