@@ -25,7 +25,7 @@ import org.apache.bcel.generic.Type;
 public final class LONG_Upper extends Type {
 
     /** The one and only instance of this class. */
-    private static final LONG_Upper singleton = new LONG_Upper();
+    private static final LONG_Upper INSTANCE = new LONG_Upper();
 
     /**
      * Gets the single instance of this class.
@@ -33,7 +33,7 @@ public final class LONG_Upper extends Type {
      * @return the single instance of this class.
      */
     public static LONG_Upper theInstance() {
-        return singleton;
+        return INSTANCE;
     }
 
     /** The constructor; this class must not be instantiated from the outside. */

@@ -25,7 +25,7 @@ import org.apache.bcel.generic.Type;
 public final class DOUBLE_Upper extends Type {
 
     /** The one and only instance of this class. */
-    private static final DOUBLE_Upper singleton = new DOUBLE_Upper();
+    private static final DOUBLE_Upper INSTANCE = new DOUBLE_Upper();
 
     /**
      * Gets the single instance of this class.
@@ -33,7 +33,7 @@ public final class DOUBLE_Upper extends Type {
      * @return the single instance of this class.
      */
     public static DOUBLE_Upper theInstance() {
-        return singleton;
+        return INSTANCE;
     }
 
     /** The constructor; this class must not be instantiated from the outside. */
