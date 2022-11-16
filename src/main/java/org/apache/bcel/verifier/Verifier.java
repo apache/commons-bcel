@@ -191,6 +191,8 @@ public class Verifier {
     /**
      * This returns all the (warning) messages collected during verification. A prefix shows from which verifying pass a
      * message originates.
+     *
+     * @throws ClassNotFoundException if this class can't be found.
      */
     public String[] getMessages() throws ClassNotFoundException {
         final List<String> messages = new ArrayList<>();

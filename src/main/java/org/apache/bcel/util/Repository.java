@@ -42,12 +42,16 @@ public interface Repository {
     ClassPath getClassPath();
 
     /**
-     * Finds the JavaClass instance for the given run-time class object
+     * Finds the JavaClass instance for the given run-time class object.
+     *
+     * @throws ClassNotFoundException if the class can't be found.
      */
     JavaClass loadClass(Class<?> clazz) throws ClassNotFoundException;
 
     /**
      * Finds the class with the name provided, if the class isn't there, make an attempt to load it.
+     *
+     * @throws ClassNotFoundException if the class can't be found.
      */
     JavaClass loadClass(String className) throws ClassNotFoundException;
 
