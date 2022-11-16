@@ -245,7 +245,7 @@ public class ListClass {
                 }
             }
 
-            if (name.endsWith(".class")) {
+            if (name.endsWith(JavaClass.EXTENSION)) {
                 javaClass = new ClassParser(name).parse(); // May throw IOException
             } else {
                 javaClass = Repository.lookupClass(name);

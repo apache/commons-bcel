@@ -103,7 +103,7 @@ public final class Helloify {
 
     public static void main(final String[] argv) throws Exception {
         for (final String arg : argv) {
-            if (arg.endsWith(".class")) {
+            if (arg.endsWith(JavaClass.EXTENSION)) {
                 final JavaClass javaClass = new ClassParser(arg).parse();
                 final ConstantPool constants = javaClass.getConstantPool();
                 final String fileName = arg.substring(0, arg.length() - 6) + "_hello.class";

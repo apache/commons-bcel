@@ -182,7 +182,7 @@ public class VerifyDialog extends JDialog {
      * @param fullyQualifiedClassName java.lang.String
      */
     public VerifyDialog(String fullyQualifiedClassName) {
-        final int dotclasspos = fullyQualifiedClassName.lastIndexOf(".class");
+        final int dotclasspos = fullyQualifiedClassName.lastIndexOf(JavaClass.EXTENSION);
         if (dotclasspos != -1) {
             fullyQualifiedClassName = fullyQualifiedClassName.substring(0, dotclasspos);
         }

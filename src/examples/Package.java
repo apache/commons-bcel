@@ -173,7 +173,7 @@ public class Package {
                 continue;
             }
             String clName = arg;
-            if (clName.endsWith(".class")) {
+            if (clName.endsWith(JavaClass.EXTENSION)) {
                 clName = clName.substring(0, clName.length() - 6);
             }
             clName = clName.replace('.', '/');
@@ -216,7 +216,7 @@ public class Package {
             int written = 0;
             for (final String name : allClasses.keySet()) { // add entries for every class
                 final JavaClass claz = allClasses.get(name);
-                final ZipEntry zipEntry = new ZipEntry(name + ".class");
+                final ZipEntry zipEntry = new ZipEntry(name + JavaClass.EXTENSION);
                 final byte[] bytes = claz.getBytes();
                 final int length = bytes.length;
                 jarFile.putNextEntry(zipEntry);

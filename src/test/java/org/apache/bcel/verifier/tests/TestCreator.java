@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 
+import org.apache.bcel.classfile.JavaClass;
+
 public abstract class TestCreator {
 
     // Common package base name for generated test classes
@@ -46,7 +48,7 @@ public abstract class TestCreator {
 
     private String getClassName() {
         final String name = getClass().getName();
-        return name.substring(name.lastIndexOf('.') + 1).replace("Creator", ".class");
+        return name.substring(name.lastIndexOf('.') + 1).replace("Creator", JavaClass.EXTENSION);
     }
 
     private File getPackageFolder() throws IOException {

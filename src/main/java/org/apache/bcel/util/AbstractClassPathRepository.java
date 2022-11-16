@@ -75,7 +75,7 @@ abstract class AbstractClassPathRepository implements Repository {
             name = name.substring(i + 1);
         }
 
-        try (InputStream clsStream = clazz.getResourceAsStream(name + ".class")) {
+        try (InputStream clsStream = clazz.getResourceAsStream(name + JavaClass.EXTENSION)) {
             return loadClass(clsStream, className);
         } catch (final IOException e) {
             return null;

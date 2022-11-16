@@ -35,7 +35,7 @@ public class TransitiveHull implements VerifierFactoryObserver {
             System.out.println("Need exactly one argument: The root class to verify.");
             System.exit(1);
         }
-        final int dotclasspos = args[0].lastIndexOf(".class");
+        final int dotclasspos = args[0].lastIndexOf(JavaClass.EXTENSION);
         if (dotclasspos != -1) {
             args[0] = args[0].substring(0, dotclasspos);
         }

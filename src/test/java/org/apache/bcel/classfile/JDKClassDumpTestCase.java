@@ -62,7 +62,7 @@ public class JDKClassDumpTestCase {
             while (en.hasMoreElements()) {
                 final JarEntry e = en.nextElement();
                 final String name = e.getName();
-                if (name.endsWith(".class")) {
+                if (name.endsWith(JavaClass.EXTENSION)) {
                     // System.out.println("Parsing " + name);
                     try (InputStream inputStream1 = jar.getInputStream(e); InputStream inputStream2 = jar.getInputStream(e);) {
                         compare(new ClassParser(inputStream1, name).parse(), inputStream2, name);

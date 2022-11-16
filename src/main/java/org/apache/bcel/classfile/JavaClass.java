@@ -48,6 +48,13 @@ import org.apache.commons.lang3.ArrayUtils;
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
 
     /**
+     * The standard class file extension.
+     *
+     * @since 6.6.2
+     */
+    public static final String EXTENSION = ".class";
+
+    /**
      * Empty array.
      *
      * @since 6.6.0

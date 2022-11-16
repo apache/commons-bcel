@@ -66,9 +66,9 @@ public class BCELifierTestCase {
 
         final File workDir = new File("target");
         final File infile = new File(javaClassFileName);
-        final JavaClass javaClass = BCELifier.getJavaClass(infile.getName().replace(".class", ""));
+        final JavaClass javaClass = BCELifier.getJavaClass(infile.getName().replace(JavaClass.EXTENSION, ""));
         assertNotNull(javaClass);
-        final File outfile = new File(workDir, infile.getName().replace(".class", "Creator.java"));
+        final File outfile = new File(workDir, infile.getName().replace(JavaClass.EXTENSION, "Creator.java"));
         try (FileOutputStream fos = new FileOutputStream(outfile)) {
             final BCELifier bcelifier = new BCELifier(javaClass, fos);
             bcelifier.start();

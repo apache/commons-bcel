@@ -39,6 +39,8 @@ import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.bcel.classfile.JavaClass;
+
 /**
  * Loads class files from the CLASSPATH. Inspired by sun.tools.ClassPath.
  */
@@ -603,7 +605,7 @@ public class ClassPath implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     public byte[] getBytes(final String name) throws IOException {
-        return getBytes(name, ".class");
+        return getBytes(name, JavaClass.EXTENSION);
     }
 
     /**
@@ -635,7 +637,7 @@ public class ClassPath implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     public ClassFile getClassFile(final String name) throws IOException {
-        return getClassFile(name, ".class");
+        return getClassFile(name, JavaClass.EXTENSION);
     }
 
     /**
@@ -678,7 +680,7 @@ public class ClassPath implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     public InputStream getInputStream(final String name) throws IOException {
-        return getInputStream(packageToFolder(name), ".class");
+        return getInputStream(packageToFolder(name), JavaClass.EXTENSION);
     }
 
     /**

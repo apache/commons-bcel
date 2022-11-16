@@ -61,7 +61,7 @@ public class BCELBenchmark {
         return new IteratorIterable<>(new FilterIterator<>(new EnumerationIterator<>(jar.entries()), new Predicate<JarEntry>() {
             @Override
             public boolean evaluate(JarEntry entry) {
-                return entry.getName().endsWith(".class");
+                return entry.getName().endsWith(JavaClass.EXTENSION);
             }
         }));
     }

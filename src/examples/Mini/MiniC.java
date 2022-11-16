@@ -148,7 +148,7 @@ public class MiniC {
 
                         program.byte_code(class_gen, cp);
                         final JavaClass clazz = class_gen.getJavaClass();
-                        clazz.dump(base_name + ".class");
+                        clazz.dump(base_name + JavaClass.EXTENSION);
                     } else {
                         System.out.println("Pass 5: Generating Java code ...");
                         try (final PrintWriter out = new PrintWriter(new FileOutputStream(base_name + ".java"))) {

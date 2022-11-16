@@ -155,7 +155,7 @@ public class JdkGenericDumpTestCase {
             while (en.hasMoreElements()) {
                 final JarEntry jarEntry = en.nextElement();
                 final String name = jarEntry.getName();
-                if (name.endsWith(".class")) {
+                if (name.endsWith(JavaClass.EXTENSION)) {
                     // System.out.println("- " + name);
                     try (InputStream inputStream = jar.getInputStream(jarEntry)) {
                         final ClassParser classParser = new ClassParser(inputStream, name);

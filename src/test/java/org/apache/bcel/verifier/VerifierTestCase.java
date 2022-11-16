@@ -74,7 +74,7 @@ public class VerifierTestCase {
             while (entries.hasMoreElements()) {
                 final JarEntry jarEntry = entries.nextElement();
                 String entryName = jarEntry.getName();
-                if (entryName.endsWith(".class")) {
+                if (entryName.endsWith(JavaClass.EXTENSION)) {
                     entryName = entryName.replaceFirst("\\.class$", "");
                     entryName = Utility.compactClassName(entryName, false);
                     testDefaultMethodValidation(entryName, excludes);

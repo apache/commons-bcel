@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
@@ -187,7 +188,7 @@ public class VerifyBadClassesTestCase {
         final String testDir = baseDir + (directory.isEmpty() ? "" : "/" + directory);
 
         final File origFile = new File(testDir + "/" + className + ".classx");
-        final File testFile = new File(testDir + "/" + className + ".class");
+        final File testFile = new File(testDir + "/" + className + JavaClass.EXTENSION);
 
         if (!origFile.renameTo(testFile)) {
             fail("Failed to rename orig file");

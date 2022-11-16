@@ -79,7 +79,7 @@ public class ClassLoaderRepository implements Repository {
         if (RC != null) {
             return RC;
         }
-        try (InputStream is = loader.getResourceAsStream(classFile + ".class")) {
+        try (InputStream is = loader.getResourceAsStream(classFile + JavaClass.EXTENSION)) {
             if (is == null) {
                 throw new ClassNotFoundException(className + " not found.");
             }

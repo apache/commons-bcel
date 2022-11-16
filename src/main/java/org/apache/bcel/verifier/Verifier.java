@@ -55,8 +55,8 @@ public class Verifier {
         System.out.println("JustIce by Enver Haase, (C) 2001-2002.\n<http://bcel.sourceforge.net>\n<https://commons.apache.org/bcel>\n");
         for (int index = 0; index < args.length; index++) {
             try {
-                if (args[index].endsWith(".class")) {
-                    final int dotclasspos = args[index].lastIndexOf(".class");
+                if (args[index].endsWith(JavaClass.EXTENSION)) {
+                    final int dotclasspos = args[index].lastIndexOf(JavaClass.EXTENSION);
                     if (dotclasspos != -1) {
                         args[index] = args[index].substring(0, dotclasspos);
                     }

@@ -79,7 +79,7 @@ public final class PerformanceTest {
 
             while (en.hasMoreElements()) {
                 final JarEntry e = (JarEntry) en.nextElement();
-                if (e.getName().endsWith(".class")) {
+                if (e.getName().endsWith(JavaClass.EXTENSION)) {
                     byte[] bytes;
                     try (InputStream in = jar.getInputStream(e)) {
                         bytes = read(in);
