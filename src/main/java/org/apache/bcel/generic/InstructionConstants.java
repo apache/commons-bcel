@@ -56,7 +56,7 @@ public interface InstructionConstants {
     Instruction FCONST_0 = InstructionConst.FCONST_0;
     Instruction FCONST_1 = InstructionConst.FCONST_1;
     Instruction FCONST_2 = InstructionConst.FCONST_2;
-    Instruction DCONST_0 = InstructionConst.FCONST_2;
+    Instruction DCONST_0 = InstructionConst.DCONST_0;
     Instruction DCONST_1 = InstructionConst.DCONST_1;
     ArrayInstruction IALOAD = InstructionConst.IALOAD;
     ArrayInstruction LALOAD = InstructionConst.LALOAD;
@@ -155,7 +155,7 @@ public interface InstructionConstants {
      * values, e.g. call setIndex().
      */
     LocalVariableInstruction THIS = InstructionConst.THIS;
-    LocalVariableInstruction ALOAD_0 = THIS;
+    LocalVariableInstruction ALOAD_0 = InstructionConst.ALOAD_0;
     LocalVariableInstruction ALOAD_1 = InstructionConst.ALOAD_1;
     LocalVariableInstruction ALOAD_2 = InstructionConst.ALOAD_2;
     LocalVariableInstruction ILOAD_0 = InstructionConst.ILOAD_0;
