@@ -31,6 +31,7 @@ public abstract class AbstractVerifierTestCase {
     @AfterEach
     public void afterEach() {
         VerifierFactory.clear();
+        Repository.clearCache();
     }
 
     /**
