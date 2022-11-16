@@ -692,7 +692,8 @@ public class ClassPath implements Closeable {
     public InputStream getInputStream(final String name, final String suffix) throws IOException {
         InputStream inputStream = null;
         try {
-            inputStream = getClass().getClassLoader().getResourceAsStream(name + suffix); // may return null
+            final java.lang.ClassLoader classLoader = getClass().getClassLoader();
+            inputStream = classLoader == null ? null : classLoader.getResourceAsStream(name + suffix); // may return null
         } catch (final Exception ignored) {
             // ignored
         }
