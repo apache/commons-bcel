@@ -35,6 +35,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Stream;
 
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.ModularRuntimeImage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -101,6 +103,24 @@ public class JavaHome {
      */
     public static Stream<JarEntry> streamJarEntry() {
         return streamJavaHome().flatMap(JavaHome::streamJarEntryByExt);
+    }
+
+    /**
+     * Used from {@code @MethodSource} for tests.
+     *
+     * @return a stream of JarFile.
+     */
+    public static Stream<JarEntry> streamJarEntryClass() {
+        return streamJavaHome().flatMap(JavaHome::streamJarEntryByExtClass);
+    }
+
+    /**
+     * Used from {@code @MethodSource} for tests.
+     *
+     * @return a stream of JarFile.
+     */
+    public static Stream<String> streamJarEntryClassName() {
+        return streamJavaHome().flatMap(JavaHome::streamJarEntryByExtClassName);
     }
 
     /**
@@ -214,6 +234,14 @@ public class JavaHome {
 
     private Stream<JarEntry> streamJarEntryByExt() {
         return streamJarFileByExt().flatMap(JarFile::stream);
+    }
+
+    private Stream<JarEntry> streamJarEntryByExtClass() {
+        return streamJarEntryByExt().filter(je -> je.getName().endsWith(JavaClass.EXTENSION));
+    }
+
+    private Stream<String> streamJarEntryByExtClassName() {
+        return streamJarEntryByExtClass().map(je -> Utility.pathToPackage(je.getName().substring(0, je.getName().indexOf(JavaClass.EXTENSION))));
     }
 
     private Stream<JarFile> streamJarFileByExt() {
