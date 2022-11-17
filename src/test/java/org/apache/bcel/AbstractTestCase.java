@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.AnnotationEntryGen;
@@ -37,6 +38,7 @@ import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.SimpleElementValueGen;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
+import org.apache.bcel.verifier.VerifierFactory;
 
 public abstract class AbstractTestCase {
 
@@ -49,6 +51,12 @@ public abstract class AbstractTestCase {
 
     // package base name in signature format, i.e. with '/' separators instead of '.'
     protected static final String PACKAGE_BASE_SIG = PACKAGE_BASE_NAME.replace('.', '/');
+
+    public static void clear() {
+        VerifierFactory.clear();
+        Repository.clearCache();
+        ConstantUtf8.clearCache();
+    }
 
     public AnnotationEntryGen createFruitAnnotationEntry(final ConstantPoolGen cp, final String aFruit, final boolean visibility) {
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.STRING, cp, aFruit);

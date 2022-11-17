@@ -20,6 +20,7 @@ package org.apache.bcel.verifier;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.AfterEach;
@@ -30,8 +31,7 @@ public abstract class AbstractVerifierTestCase {
 
     @AfterEach
     public void afterEach() {
-        VerifierFactory.clear();
-        Repository.clearCache();
+        AbstractTestCase.clear();
     }
 
     /**

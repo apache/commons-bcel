@@ -49,8 +49,10 @@ public class VerifierFactory {
 
     /**
      * Clears the factory.
+     *
+     * @since 6.6.2
      */
-    static void clear() {
+    public static void clear() {
         MAP.clear();
         OBSVERVERS.clear();
     }
