@@ -17,6 +17,8 @@
 
 package org.apache.bcel.verifier;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -25,21 +27,10 @@ public class VerifyJavaHomesTestCase extends AbstractVerifierTestCase {
 
     static int count;
 
+    boolean logStep = Boolean.getBoolean("BCEL.logStep");
+
     /**
      * Eventually runs out of memory? Super now calls VerifierFactory.clear();
-     * 
-     * <pre>
-      164800................................................................................
-      165600...........Exception in thread "fork-1-event-thread" .java.lang.OutOfMemoryError: Java heap space
-        Exception in thread "fork-1-event-thread" java.lang.OutOfMemoryError: Java heap space
-        at java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:68)
-        at java.lang.StringBuilder.<init>(StringBuilder.java:106)
-        at org.apache.maven.surefire.api.stream.AbstractStreamDecoder.toString(AbstractStreamDecoder.java:364)
-        at org.apache.maven.surefire.api.stream.AbstractStreamDecoder.readString(AbstractStreamDecoder.java:336)
-        at org.apache.maven.surefire.api.stream.AbstractStreamDecoder.readString(AbstractStreamDecoder.java:196)
-        at org.apache.maven.surefire.stream.EventDecoder.decode(EventDecoder.java:176)
-        at org.apache.maven.plugin.surefire.extensions.EventConsumerThread.run(EventConsumerThread.java:73)
-     * </pre>
      * 
      * @param name
      * @throws ClassNotFoundException
@@ -52,15 +43,19 @@ public class VerifyJavaHomesTestCase extends AbstractVerifierTestCase {
         // System.out.println(jarEntry.getName());
         // Skip $ classes for now
         count++;
-        if (count % 10 == 0) {
-            System.out.print('.');
-        }
-        if (count % 800 == 0) {
-            System.out.println();
-            System.out.print(count);
+        if (logStep) {
+            System.out.printf("%,d %s%n", count, name);
+        } else {
+            if (count % 10 == 0) {
+                System.out.print('.');
+            }
+            if (count % 800 == 0) {
+                System.out.println();
+                System.out.print(count);
+            }
         }
         if (!name.contains("$")) {
-            doAllPasses(name);
+            assertTrue(doAllPasses(name));
         }
     }
 
