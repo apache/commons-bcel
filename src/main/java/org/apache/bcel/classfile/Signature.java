@@ -243,7 +243,6 @@ public final class Signature extends Attribute {
      */
     @Override
     public String toString() {
-        final String s = getSignature();
-        return "Signature: " + s;
+        return "Signature: " + getSignature();
     }
 }
