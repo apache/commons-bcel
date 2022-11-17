@@ -28,6 +28,7 @@ public class VerifyJavaHomesTestCase extends AbstractVerifierTestCase {
     static int count;
 
     boolean logStep = Boolean.getBoolean("BCEL.logStep");
+    boolean logQuiet = Boolean.getBoolean("BCEL.logQuiet");
 
     /**
      * Eventually runs out of memory? Super now calls VerifierFactory.clear();
@@ -45,7 +46,7 @@ public class VerifyJavaHomesTestCase extends AbstractVerifierTestCase {
         count++;
         if (logStep) {
             System.out.printf("%,d %s%n", count, name);
-        } else {
+        } else if (!logQuiet) {
             if (count % 10 == 0) {
                 System.out.print('.');
             }
