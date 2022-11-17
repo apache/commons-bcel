@@ -44,7 +44,7 @@ public class PLSETestCase extends AbstractTestCase {
      * BCEL-208: A couple of methods in MethodGen.java need to test for an empty instruction list.
      */
     @Test
-    public void testB208() throws ClassNotFoundException {
+    public void testBCEL208() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.PLSETestClass");
         final ClassGen gen = new ClassGen(clazz);
         final ConstantPoolGen pool = gen.getConstantPool();
@@ -60,7 +60,7 @@ public class PLSETestCase extends AbstractTestCase {
      * BCEL-262:
      */
     @Test
-    public void testB262() throws ClassNotFoundException {
+    public void testBCEL262() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.PLSETestEnum");
         final ClassGen gen = new ClassGen(clazz);
         final ConstantPoolGen pool = gen.getConstantPool();
@@ -81,7 +81,7 @@ public class PLSETestCase extends AbstractTestCase {
      * BCEL-295:
      */
     @Test
-    public void testB295() throws Exception {
+    public void testBCEL295() throws Exception {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.PLSETestClass2");
         final ClassGen cg = new ClassGen(clazz);
         final ConstantPoolGen pool = cg.getConstantPool();
@@ -100,7 +100,7 @@ public class PLSETestCase extends AbstractTestCase {
      * BCEL-361: LineNumber.toString() treats code offset as signed
      */
     @Test
-    public void testB361() throws Exception {
+    public void testBCEL361() throws Exception {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.LargeMethod");
         final Method[] methods = clazz.getMethods();
         final Method m = methods[0];
@@ -120,7 +120,7 @@ public class PLSETestCase extends AbstractTestCase {
      * BCEL-79:
      */
     @Test
-    public void testB79() throws ClassNotFoundException {
+    public void testBCEL79() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.PLSETestClass");
         final ClassGen gen = new ClassGen(clazz);
         final ConstantPoolGen pool = gen.getConstantPool();
