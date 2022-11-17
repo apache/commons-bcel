@@ -223,7 +223,6 @@ public abstract class Type {
      * @param signature signature string such as Ljava/lang/String;
      * @return type object
      */
-    // @since 6.0 no longer final
     public static Type getType(final String signature) throws StringIndexOutOfBoundsException {
         final byte type = Utility.typeOfSignature(signature);
         if (type <= Const.T_VOID) {
