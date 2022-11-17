@@ -307,9 +307,9 @@ public abstract class Type {
     @Deprecated
     protected String signature; // signature for the type TODO should be private
 
-    protected Type(final byte t, final String s) {
-        type = t;
-        signature = s;
+    protected Type(final byte type, final String signature) {
+        this.type = type;
+        this.signature = signature;
     }
 
     /**
