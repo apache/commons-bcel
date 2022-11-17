@@ -50,7 +50,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * The standard class file extension.
      *
-     * @since 6.6.2
+     * @since 6.7.0
      */
     public static final String EXTENSION = ".class";
 

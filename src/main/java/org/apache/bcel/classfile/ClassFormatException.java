@@ -60,7 +60,7 @@ public class ClassFormatException extends RuntimeException {
      *
      * @param cause the cause (which is saved for later retrieval by the {@link #getCause()} method). (A {@code null} value is permitted, and indicates that the
      *              cause is nonexistent or unknown.)
-     * @since 6.6.2
+     * @since 6.7.0
      */
     public ClassFormatException(final Throwable cause) {
         super(cause);

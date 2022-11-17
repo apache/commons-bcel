@@ -23,7 +23,7 @@ import org.apache.bcel.classfile.ClassFormatException;
 /**
  * Argument validation.
  *
- * @since 6.6.2
+ * @since 6.7.0
  */
 public class Args {
 
