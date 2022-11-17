@@ -747,12 +747,12 @@ public final class Pass3aVerifier extends PassVerifier {
         @Override
         public void visitLoadClass(final LoadClass loadClass) {
             final ObjectType t = loadClass.getLoadClassType(constantPoolGen);
-            if (t != null) {// null means "no class is loaded"
+            if (t != null) { // null means "no class is loaded"
                 final Verifier v = VerifierFactory.getVerifier(t.getClassName());
                 final VerificationResult vr = v.doPass1();
                 if (vr.getStatus() != VerificationResult.VERIFIED_OK) {
                     constraintViolated((Instruction) loadClass,
-                        "Class '" + loadClass.getLoadClassType(constantPoolGen).getClassName() + "' is referenced, but cannot be loaded: '" + vr + "'.");
+                            "Class '" + loadClass.getLoadClassType(constantPoolGen).getClassName() + "' is referenced, but cannot be loaded: '" + vr + "'.");
                 }
             }
         }
