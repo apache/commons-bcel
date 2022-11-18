@@ -103,6 +103,7 @@ public final class ArrayType extends ReferenceType {
      * @return name of referenced class.
      * @since 6.7.0
      */
+    @Override
     public String getClassName() {
         return signature;
     }

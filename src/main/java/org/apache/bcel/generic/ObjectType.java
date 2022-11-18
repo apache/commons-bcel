@@ -74,6 +74,7 @@ public class ObjectType extends ReferenceType {
     /**
      * @return name of referenced class
      */
+    @Override
     public String getClassName() {
         return className;
     }

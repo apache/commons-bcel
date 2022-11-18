@@ -119,6 +119,10 @@ public abstract class Type {
         return res;
     }
 
+    public String getClassName() {
+        return toString();
+    }
+
     /**
      * Convert type to Java method signature, e.g. int[] f(java.lang.String x) becomes (Ljava/lang/String;)[I
      *
