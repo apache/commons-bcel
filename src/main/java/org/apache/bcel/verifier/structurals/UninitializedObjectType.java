@@ -30,10 +30,14 @@ public class UninitializedObjectType extends ReferenceType implements Constants 
     /** The "initialized" version. */
     private final ObjectType initialized;
 
-    /** Creates a new instance. */
-    public UninitializedObjectType(final ObjectType t) {
-        super(Const.T_UNKNOWN, "<UNINITIALIZED OBJECT OF TYPE '" + t.getClassName() + "'>");
-        initialized = t;
+    /**
+     * Creates a new instance.
+     *
+     * @param objectType uninitialized object type.
+     */
+    public UninitializedObjectType(final ObjectType objectType) {
+        super(Const.T_UNKNOWN, "<UNINITIALIZED OBJECT OF TYPE '" + objectType.getClassName() + "'>");
+        initialized = objectType;
     }
 
     /**
@@ -52,6 +56,8 @@ public class UninitializedObjectType extends ReferenceType implements Constants 
     /**
      * Returns the ObjectType of the same class as the one of the uninitialized object represented by this
      * UninitializedObjectType instance.
+     *
+     * @return the ObjectType.
      */
     public ObjectType getInitialized() {
         return initialized;
