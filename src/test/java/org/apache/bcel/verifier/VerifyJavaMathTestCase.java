@@ -29,11 +29,11 @@ public class VerifyJavaMathTestCase extends AbstractVerifierTestCase {
     public void testBigDecimal() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.math.BigDecimal"));
     }
-    
+
     @Test
     @Disabled
     public void testBigInteger() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.math.BigInteger"));
     }
-    
+
 }
