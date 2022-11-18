@@ -87,6 +87,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid internal NPE in org.apache.bcel.util.ClassPath.getInputStream(String, String).</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugin from 4.7.2.2 to 4.7.3.0 #167.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jmh.version from 1.35 to 1.36 #170.</action>
     </release>
     <release version="6.6.1" date="2022-10-29" description="Maintenance and bug fix release.">
       <!-- FIX -->
