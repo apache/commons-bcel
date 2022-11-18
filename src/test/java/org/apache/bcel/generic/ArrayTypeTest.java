@@ -52,10 +52,24 @@ public class ArrayTypeTest {
     }
 
     @Test
-    public void testGetSignature() {
+    public void testGetSignatureDim1() {
         final ArrayType objectType = new ArrayType(Type.BYTE, 1);
         assertEquals("[B", objectType.getSignature());
         assertEquals(byte[].class.getName(), objectType.getSignature());
+    }
+
+    @Test
+    public void testGetSignatureDim2() {
+        final ArrayType objectType = new ArrayType(Type.BYTE, 2);
+        assertEquals("[[B", objectType.getSignature());
+        assertEquals(byte[][].class.getName(), objectType.getSignature());
+    }
+
+    @Test
+    public void testGetSignatureDim4() {
+        final ArrayType objectType = new ArrayType(Type.BYTE, 4);
+        assertEquals("[[[[B", objectType.getSignature());
+        assertEquals(byte[][][][].class.getName(), objectType.getSignature());
     }
 
     @Test
