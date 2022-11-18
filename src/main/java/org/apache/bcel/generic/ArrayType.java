@@ -30,6 +30,7 @@ public final class ArrayType extends ReferenceType {
      * Convenience constructor for array type, e.g. int[]
      *
      * @param type array type, e.g. T_INT
+     * @param dimensions array dimensions
      */
     public ArrayType(final byte type, final int dimensions) {
         this(BasicType.getType(type), dimensions);
@@ -39,6 +40,7 @@ public final class ArrayType extends ReferenceType {
      * Convenience constructor for reference array type, e.g. Object[]
      *
      * @param className complete name of class (java.lang.String, e.g.)
+     * @param dimensions array dimensions
      */
     public ArrayType(final String className, final int dimensions) {
         this(ObjectType.getInstance(className), dimensions);
@@ -48,6 +50,7 @@ public final class ArrayType extends ReferenceType {
      * Constructor for array of given type
      *
      * @param type type of array (may be an array itself)
+     * @param dimensions array dimensions
      */
     public ArrayType(final Type type, final int dimensions) {
         super(Const.T_ARRAY, "<dummy>");
