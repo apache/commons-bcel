@@ -95,6 +95,16 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
+     * Gets the name of referenced class.
+     *
+     * @return name of referenced class.
+     * @since 6.7.0
+     */
+    public String getClassName() {
+        return signature;
+    }
+
+    /**
      * @return number of dimensions of array
      */
     public int getDimensions() {

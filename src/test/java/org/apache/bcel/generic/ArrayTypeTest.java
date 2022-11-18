@@ -31,6 +31,13 @@ public class ArrayTypeTest {
     }
 
     @Test
+    public void testGetClassName() {
+        final ArrayType objectType = new ArrayType(Type.BYTE, 1);
+        assertEquals("[B", objectType.getClassName());
+        assertEquals(byte[].class.getName(), objectType.getClassName());
+    }
+
+    @Test
     public void testGetDimensions() {
         final int dimensions = 1;
         final ArrayType objectType = new ArrayType(Type.BYTE, dimensions);
