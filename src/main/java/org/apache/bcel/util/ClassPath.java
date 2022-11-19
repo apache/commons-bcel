@@ -36,6 +36,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -496,14 +497,7 @@ public class ClassPath implements Closeable {
             }
         }
 
-        final StringBuilder buf = new StringBuilder();
-        String separator = "";
-        for (final String path : list) {
-            buf.append(separator);
-            separator = File.pathSeparator;
-            buf.append(path);
-        }
-        return buf.toString();
+        return list.stream().collect(Collectors.joining(File.pathSeparator));
     }
 
     private static void getPathComponents(final String path, final List<String> list) {
