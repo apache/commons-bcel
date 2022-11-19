@@ -57,12 +57,10 @@ public final class StackMapEntry implements Node, Cloneable {
             byteCodeOffset = frameType - Const.SAME_FRAME;
         } else if (frameType >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME && frameType <= Const.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             byteCodeOffset = frameType - Const.SAME_LOCALS_1_STACK_ITEM_FRAME;
-            typesOfStackItems = new StackMapType[1];
-            typesOfStackItems[0] = new StackMapType(dataInput, constantPool);
+            typesOfStackItems = new StackMapType[] { new StackMapType(dataInput, constantPool) };
         } else if (frameType == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             byteCodeOffset = dataInput.readShort();
-            typesOfStackItems = new StackMapType[1];
-            typesOfStackItems[0] = new StackMapType(dataInput, constantPool);
+            typesOfStackItems = new StackMapType[] { new StackMapType(dataInput, constantPool) };
         } else if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX) {
             byteCodeOffset = dataInput.readShort();
         } else if (frameType == Const.SAME_FRAME_EXTENDED) {
