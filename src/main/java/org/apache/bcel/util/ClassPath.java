@@ -525,7 +525,7 @@ public class ClassPath implements Closeable {
 
     private final String classPath;
 
-    private ClassPath parent;
+    private final ClassPath parent;
 
     private final AbstractPathEntry[] paths;
 
@@ -539,18 +539,9 @@ public class ClassPath implements Closeable {
         this(getClassPath());
     }
 
-    public ClassPath(final ClassPath parent, final String classPath) {
-        this(classPath);
-        this.parent = parent;
-    }
-
-    /**
-     * Search for classes in given path.
-     *
-     * @param classPath
-     */
     @SuppressWarnings("resource")
-    public ClassPath(final String classPath) {
+    public ClassPath(final ClassPath parent, final String classPath) {
+        this.parent = parent;
         this.classPath = classPath;
         final List<AbstractPathEntry> list = new ArrayList<>();
         for (final StringTokenizer tokenizer = new StringTokenizer(classPath, File.pathSeparator); tokenizer.hasMoreTokens();) {
@@ -578,6 +569,16 @@ public class ClassPath implements Closeable {
         }
         paths = new AbstractPathEntry[list.size()];
         list.toArray(paths);
+
+    }
+
+    /**
+     * Search for classes in given path.
+     *
+     * @param classPath
+     */
+    public ClassPath(final String classPath) {
+        this(null, classPath);
     }
 
     @Override
