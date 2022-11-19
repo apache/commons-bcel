@@ -503,7 +503,7 @@ public class ClassPath implements Closeable {
             separator = File.pathSeparator;
             buf.append(path);
         }
-        return buf.toString().intern();
+        return buf.toString();
     }
 
     private static void getPathComponents(final String path, final List<String> list) {
