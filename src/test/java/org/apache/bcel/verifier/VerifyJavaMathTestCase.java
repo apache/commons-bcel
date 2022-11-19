@@ -22,16 +22,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 public class VerifyJavaMathTestCase extends AbstractVerifierTestCase {
 
     @Test
-    @Disabled
     public void testBigDecimal() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.math.BigDecimal"));
     }
 
     @Test
-    @Disabled
     public void testBigInteger() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.math.BigInteger"));
     }

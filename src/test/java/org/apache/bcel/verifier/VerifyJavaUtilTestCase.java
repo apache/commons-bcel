@@ -22,22 +22,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 public class VerifyJavaUtilTestCase extends AbstractVerifierTestCase {
 
     @Test
-    @Disabled
     public void testHashMap() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.util.HashMap"));
     }
     
     @Test
-    @Disabled
     public void testLinkedHashMap() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.util.LinkedHashMap"));
     }
     
     @Test
-    @Disabled
     public void testTreeMap() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.util.TreeMap"));
     }
