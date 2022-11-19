@@ -40,10 +40,7 @@ public final class StackMapType implements Cloneable {
      * @param index index to constant pool, or byte code offset
      */
     public StackMapType(final byte type, final int index, final ConstantPool constantPool) {
-        if (type < Const.ITEM_Bogus || type > Const.ITEM_NewObject) {
-            throw new IllegalArgumentException("Illegal type for StackMapType: " + type);
-        }
-        this.type = type;
+        this.type = checkType(type);
         this.index = index;
         this.constantPool = constantPool;
     }
@@ -60,6 +57,13 @@ public final class StackMapType implements Cloneable {
             this.index = file.readShort();
         }
         this.constantPool = constantPool;
+    }
+
+    private byte checkType(final byte t) {
+        if (t < Const.ITEM_Bogus || t > Const.ITEM_NewObject) {
+            throw new IllegalArgumentException("Illegal type for StackMapType: " + t);
+        }
+        return t;
     }
 
     /**
@@ -138,10 +142,7 @@ public final class StackMapType implements Cloneable {
     }
 
     public void setType(final byte t) {
-        if (t < Const.ITEM_Bogus || t > Const.ITEM_NewObject) {
-            throw new IllegalArgumentException("Illegal type for StackMapType: " + t);
-        }
-        type = t;
+        type = checkType(t);
     }
 
     /**
