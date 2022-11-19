@@ -59,11 +59,11 @@ public final class StackMapType implements Cloneable {
         this.constantPool = constantPool;
     }
 
-    private byte checkType(final byte t) {
-        if (t < Const.ITEM_Bogus || t > Const.ITEM_NewObject) {
-            throw new IllegalArgumentException("Illegal type for StackMapType: " + t);
+    private byte checkType(final byte type) {
+        if (type < Const.ITEM_Bogus || type > Const.ITEM_NewObject) {
+            throw new IllegalArgumentException("Illegal type for StackMapType: " + type);
         }
-        return t;
+        return type;
     }
 
     /**
