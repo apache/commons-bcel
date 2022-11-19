@@ -93,20 +93,20 @@ public abstract class Attribute implements Cloneable, Node {
      * @see Field
      * @see Method
      *
-     * @param file Input stream
+     * @param dataInput Input stream
      * @param constantPool Array of constants
      * @return Attribute
      * @throws IOException if an I/O error occurs.
      * @since 6.0
      */
-    public static Attribute readAttribute(final DataInput file, final ConstantPool constantPool) throws IOException {
+    public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via `name_index' indirection
-        final int nameIndex = file.readUnsignedShort();
+        final int nameIndex = dataInput.readUnsignedShort();
         final String name = constantPool.getConstantUtf8(nameIndex).getBytes();
 
         // Length of data in bytes
-        final int length = file.readInt();
+        final int length = dataInput.readInt();
 
         // Compare strings to find known attribute
         for (byte i = 0; i < Const.KNOWN_ATTRIBUTES; i++) {
@@ -121,68 +121,68 @@ public abstract class Attribute implements Cloneable, Node {
         case Const.ATTR_UNKNOWN:
             final Object r = READERS.get(name);
             if (r instanceof UnknownAttributeReader) {
-                return ((UnknownAttributeReader) r).createAttribute(nameIndex, length, file, constantPool);
+                return ((UnknownAttributeReader) r).createAttribute(nameIndex, length, dataInput, constantPool);
             }
-            return new Unknown(nameIndex, length, file, constantPool);
+            return new Unknown(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_CONSTANT_VALUE:
-            return new ConstantValue(nameIndex, length, file, constantPool);
+            return new ConstantValue(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_SOURCE_FILE:
-            return new SourceFile(nameIndex, length, file, constantPool);
+            return new SourceFile(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_CODE:
-            return new Code(nameIndex, length, file, constantPool);
+            return new Code(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_EXCEPTIONS:
-            return new ExceptionTable(nameIndex, length, file, constantPool);
+            return new ExceptionTable(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_LINE_NUMBER_TABLE:
-            return new LineNumberTable(nameIndex, length, file, constantPool);
+            return new LineNumberTable(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_LOCAL_VARIABLE_TABLE:
-            return new LocalVariableTable(nameIndex, length, file, constantPool);
+            return new LocalVariableTable(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_INNER_CLASSES:
-            return new InnerClasses(nameIndex, length, file, constantPool);
+            return new InnerClasses(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_SYNTHETIC:
-            return new Synthetic(nameIndex, length, file, constantPool);
+            return new Synthetic(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_DEPRECATED:
-            return new Deprecated(nameIndex, length, file, constantPool);
+            return new Deprecated(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_PMG:
-            return new PMGClass(nameIndex, length, file, constantPool);
+            return new PMGClass(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_SIGNATURE:
-            return new Signature(nameIndex, length, file, constantPool);
+            return new Signature(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_STACK_MAP:
             // old style stack map: unneeded for JDK5 and below;
             // illegal(?) for JDK6 and above. So just delete with a warning.
             println("Warning: Obsolete StackMap attribute ignored.");
-            return new Unknown(nameIndex, length, file, constantPool);
+            return new Unknown(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_RUNTIME_VISIBLE_ANNOTATIONS:
-            return new RuntimeVisibleAnnotations(nameIndex, length, file, constantPool);
+            return new RuntimeVisibleAnnotations(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS:
-            return new RuntimeInvisibleAnnotations(nameIndex, length, file, constantPool);
+            return new RuntimeInvisibleAnnotations(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS:
-            return new RuntimeVisibleParameterAnnotations(nameIndex, length, file, constantPool);
+            return new RuntimeVisibleParameterAnnotations(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS:
-            return new RuntimeInvisibleParameterAnnotations(nameIndex, length, file, constantPool);
+            return new RuntimeInvisibleParameterAnnotations(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_ANNOTATION_DEFAULT:
-            return new AnnotationDefault(nameIndex, length, file, constantPool);
+            return new AnnotationDefault(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_LOCAL_VARIABLE_TYPE_TABLE:
-            return new LocalVariableTypeTable(nameIndex, length, file, constantPool);
+            return new LocalVariableTypeTable(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_ENCLOSING_METHOD:
-            return new EnclosingMethod(nameIndex, length, file, constantPool);
+            return new EnclosingMethod(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_STACK_MAP_TABLE:
             // read new style stack map: StackMapTable. The rest of the code
             // calls this a StackMap for historical reasons.
-            return new StackMap(nameIndex, length, file, constantPool);
+            return new StackMap(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_BOOTSTRAP_METHODS:
-            return new BootstrapMethods(nameIndex, length, file, constantPool);
+            return new BootstrapMethods(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_METHOD_PARAMETERS:
-            return new MethodParameters(nameIndex, length, file, constantPool);
+            return new MethodParameters(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_MODULE:
-            return new Module(nameIndex, length, file, constantPool);
+            return new Module(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_MODULE_PACKAGES:
-            return new ModulePackages(nameIndex, length, file, constantPool);
+            return new ModulePackages(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_MODULE_MAIN_CLASS:
-            return new ModuleMainClass(nameIndex, length, file, constantPool);
+            return new ModuleMainClass(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_NEST_HOST:
-            return new NestHost(nameIndex, length, file, constantPool);
+            return new NestHost(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_NEST_MEMBERS:
-            return new NestMembers(nameIndex, length, file, constantPool);
+            return new NestMembers(nameIndex, length, dataInput, constantPool);
         default:
             // Never reached
             throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);
@@ -196,13 +196,13 @@ public abstract class Attribute implements Cloneable, Node {
      * @see Field
      * @see Method
      *
-     * @param file Input stream
+     * @param dataInputStream Input stream
      * @param constantPool Array of constants
      * @return Attribute
      * @throws IOException if an I/O error occurs.
      */
-    public static Attribute readAttribute(final DataInputStream file, final ConstantPool constantPool) throws IOException {
-        return readAttribute((DataInput) file, constantPool);
+    public static Attribute readAttribute(final DataInputStream dataInputStream, final ConstantPool constantPool) throws IOException {
+        return readAttribute((DataInput) dataInputStream, constantPool);
     }
 
     /**

@@ -42,16 +42,16 @@ public final class StackMap extends Attribute {
      *
      * @param nameIndex Index of name
      * @param length Content length in bytes
-     * @param input Input stream
+     * @param dataInput Input stream
      * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    StackMap(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+    StackMap(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (StackMapEntry[]) null, constantPool);
-        final int mapLength = input.readUnsignedShort();
+        final int mapLength = dataInput.readUnsignedShort();
         table = new StackMapEntry[mapLength];
         for (int i = 0; i < mapLength; i++) {
-            table[i] = new StackMapEntry(input, constantPool);
+            table[i] = new StackMapEntry(dataInput, constantPool);
         }
     }
 

@@ -47,44 +47,44 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Construct object from input stream.
      *
-     * @param input Input stream
+     * @param dataInput Input stream
      * @throws IOException if an I/O error occurs.
      */
-    StackMapEntry(final DataInput input, final ConstantPool constantPool) throws IOException {
-        this(input.readByte() & 0xFF, -1, null, null, constantPool);
+    StackMapEntry(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
+        this(dataInput.readByte() & 0xFF, -1, null, null, constantPool);
 
         if (frameType >= Const.SAME_FRAME && frameType <= Const.SAME_FRAME_MAX) {
             byteCodeOffset = frameType - Const.SAME_FRAME;
         } else if (frameType >= Const.SAME_LOCALS_1_STACK_ITEM_FRAME && frameType <= Const.SAME_LOCALS_1_STACK_ITEM_FRAME_MAX) {
             byteCodeOffset = frameType - Const.SAME_LOCALS_1_STACK_ITEM_FRAME;
             typesOfStackItems = new StackMapType[1];
-            typesOfStackItems[0] = new StackMapType(input, constantPool);
+            typesOfStackItems[0] = new StackMapType(dataInput, constantPool);
         } else if (frameType == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
-            byteCodeOffset = input.readShort();
+            byteCodeOffset = dataInput.readShort();
             typesOfStackItems = new StackMapType[1];
-            typesOfStackItems[0] = new StackMapType(input, constantPool);
+            typesOfStackItems[0] = new StackMapType(dataInput, constantPool);
         } else if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX) {
-            byteCodeOffset = input.readShort();
+            byteCodeOffset = dataInput.readShort();
         } else if (frameType == Const.SAME_FRAME_EXTENDED) {
-            byteCodeOffset = input.readShort();
+            byteCodeOffset = dataInput.readShort();
         } else if (frameType >= Const.APPEND_FRAME && frameType <= Const.APPEND_FRAME_MAX) {
-            byteCodeOffset = input.readShort();
+            byteCodeOffset = dataInput.readShort();
             final int numberOfLocals = frameType - 251;
             typesOfLocals = new StackMapType[numberOfLocals];
             for (int i = 0; i < numberOfLocals; i++) {
-                typesOfLocals[i] = new StackMapType(input, constantPool);
+                typesOfLocals[i] = new StackMapType(dataInput, constantPool);
             }
         } else if (frameType == Const.FULL_FRAME) {
-            byteCodeOffset = input.readShort();
-            final int numberOfLocals = input.readShort();
+            byteCodeOffset = dataInput.readShort();
+            final int numberOfLocals = dataInput.readShort();
             typesOfLocals = new StackMapType[numberOfLocals];
             for (int i = 0; i < numberOfLocals; i++) {
-                typesOfLocals[i] = new StackMapType(input, constantPool);
+                typesOfLocals[i] = new StackMapType(dataInput, constantPool);
             }
-            final int numberOfStackItems = input.readShort();
+            final int numberOfStackItems = dataInput.readShort();
             typesOfStackItems = new StackMapType[numberOfStackItems];
             for (int i = 0; i < numberOfStackItems; i++) {
-                typesOfStackItems[i] = new StackMapType(input, constantPool);
+                typesOfStackItems[i] = new StackMapType(dataInput, constantPool);
             }
         } else {
             /* Can't happen */
