@@ -527,7 +527,7 @@ public class ClassPath implements Closeable {
 
     private final ClassPath parent;
 
-    private final AbstractPathEntry[] paths;
+    private final List<AbstractPathEntry> paths;
 
     /**
      * Search for classes in CLASSPATH.
@@ -543,7 +543,7 @@ public class ClassPath implements Closeable {
     public ClassPath(final ClassPath parent, final String classPath) {
         this.parent = parent;
         this.classPath = classPath;
-        final List<AbstractPathEntry> list = new ArrayList<>();
+        this.paths = new ArrayList<>();
         for (final StringTokenizer tokenizer = new StringTokenizer(classPath, File.pathSeparator); tokenizer.hasMoreTokens();) {
             final String path = tokenizer.nextToken();
             if (!path.isEmpty()) {
@@ -551,13 +551,13 @@ public class ClassPath implements Closeable {
                 try {
                     if (file.exists()) {
                         if (file.isDirectory()) {
-                            list.add(new Dir(path));
+                            paths.add(new Dir(path));
                         } else if (path.endsWith(".jmod")) {
-                            list.add(new Module(new ZipFile(file)));
+                            paths.add(new Module(new ZipFile(file)));
                         } else if (path.endsWith(ModularRuntimeImage.MODULES_PATH)) {
-                            list.add(new JrtModules(ModularRuntimeImage.MODULES_PATH));
+                            paths.add(new JrtModules(ModularRuntimeImage.MODULES_PATH));
                         } else {
-                            list.add(new Jar(new ZipFile(file)));
+                            paths.add(new Jar(new ZipFile(file)));
                         }
                     }
                 } catch (final IOException e) {
@@ -567,9 +567,6 @@ public class ClassPath implements Closeable {
                 }
             }
         }
-        paths = new AbstractPathEntry[list.size()];
-        list.toArray(paths);
-
     }
 
     /**
@@ -583,12 +580,9 @@ public class ClassPath implements Closeable {
 
     @Override
     public void close() throws IOException {
-        if (paths != null) {
-            for (final AbstractPathEntry path : paths) {
-                path.close();
-            }
+        for (final AbstractPathEntry path : paths) {
+            path.close();
         }
-
     }
 
     @Override
