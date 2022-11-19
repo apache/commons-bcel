@@ -32,7 +32,6 @@ import java.util.Map;
  */
 public class SyntheticRepository extends MemorySensitiveClassPathRepository {
 
-    // private static final String DEFAULT_PATH = ClassPath.getClassPath();
     private static final Map<ClassPath, SyntheticRepository> MAP = new HashMap<>(); // CLASSPATH X REPOSITORY
 
     public static SyntheticRepository getInstance() {
