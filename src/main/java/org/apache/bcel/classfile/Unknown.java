@@ -20,8 +20,6 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.bcel.Const;
 
@@ -31,27 +29,10 @@ import org.apache.bcel.Const;
  * application-specific attributes should create an {@link UnknownAttributeReader} implementation and attach it via
  * {@link Attribute#addAttributeReader(String, UnknownAttributeReader)}.
  *
- *
  * @see Attribute
  * @see UnknownAttributeReader
  */
 public final class Unknown extends Attribute {
-
-    private static final Unknown[] EMPTY_ARRAY = {};
-
-    private static final Map<String, Unknown> UNKNOWN_ATTRIBUTES = new HashMap<>();
-
-    /**
-     * @return array of unknown attributes, but just one for each kind.
-     */
-    static Unknown[] getUnknownAttributes() {
-        try {
-            return UNKNOWN_ATTRIBUTES.values().toArray(EMPTY_ARRAY);
-        } finally {
-            // TODO Does this really make sense?
-            UNKNOWN_ATTRIBUTES.clear();
-        }
-    }
 
     private byte[] bytes;
 
@@ -69,7 +50,6 @@ public final class Unknown extends Attribute {
         super(Const.ATTR_UNKNOWN, nameIndex, length, constantPool);
         this.bytes = bytes;
         name = constantPool.getConstantUtf8(nameIndex).getBytes();
-        UNKNOWN_ATTRIBUTES.put(name, this);
     }
 
     /**
