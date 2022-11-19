@@ -72,9 +72,11 @@ public final class Unknown extends Attribute {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a
      * physical copy.
+     *
+     * @param unknown Source.
      */
-    public Unknown(final Unknown c) {
-        this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
+    public Unknown(final Unknown unknown) {
+        this(unknown.getNameIndex(), unknown.getLength(), unknown.getBytes(), unknown.getConstantPool());
     }
 
     /**
