@@ -45,7 +45,7 @@ public final class ConstantInvokeDynamic extends ConstantCP {
      * @throws IOException if an I/O error occurs.
      */
     ConstantInvokeDynamic(final DataInput file) throws IOException {
-        this(file.readShort(), file.readShort());
+        this(file.readUnsignedShort(), file.readUnsignedShort());
     }
 
     public ConstantInvokeDynamic(final int bootstrapMethodAttrIndex, final int nameAndTypeIndex) {
