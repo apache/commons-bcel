@@ -536,7 +536,7 @@ public class ClassPath implements Closeable {
     @SuppressWarnings("resource")
     public ClassPath(final ClassPath parent, final String classPathString) {
         this.parent = parent;
-        this.classPathString = classPathString;
+        this.classPathString = Objects.requireNonNull(classPathString, "classPathString");
         this.paths = new ArrayList<>();
         for (final StringTokenizer tokenizer = new StringTokenizer(classPathString, File.pathSeparator); tokenizer.hasMoreTokens();) {
             final String path = tokenizer.nextToken();
@@ -580,12 +580,18 @@ public class ClassPath implements Closeable {
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (o instanceof ClassPath) {
-            final ClassPath cp = (ClassPath) o;
-            return classPathString.equals(cp.toString());
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
-        return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ClassPath other = (ClassPath) obj;
+        return Objects.equals(classPathString, other.classPathString);
     }
 
     /**
@@ -767,9 +773,6 @@ public class ClassPath implements Closeable {
 
     @Override
     public int hashCode() {
-        if (parent != null) {
-            return classPathString.hashCode() + parent.hashCode();
-        }
         return classPathString.hashCode();
     }
 
