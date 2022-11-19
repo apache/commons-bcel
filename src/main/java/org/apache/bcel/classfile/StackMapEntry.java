@@ -26,7 +26,9 @@ import org.apache.bcel.Const;
 
 /**
  * This class represents a stack map entry recording the types of local variables and the of stack items at a given
- * byte code offset. See CLDC specification 5.3.1.2
+ * byte code offset. See CLDC specification 5.3.1.2.
+ *
+ * See also https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.4
  *
  * @see StackMap
  * @see StackMapType
@@ -59,27 +61,27 @@ public final class StackMapEntry implements Node, Cloneable {
             byteCodeOffset = frameType - Const.SAME_LOCALS_1_STACK_ITEM_FRAME;
             typesOfStackItems = new StackMapType[] { new StackMapType(dataInput, constantPool) };
         } else if (frameType == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
-            byteCodeOffset = dataInput.readShort();
+            byteCodeOffset = dataInput.readUnsignedShort();
             typesOfStackItems = new StackMapType[] { new StackMapType(dataInput, constantPool) };
         } else if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX) {
-            byteCodeOffset = dataInput.readShort();
+            byteCodeOffset = dataInput.readUnsignedShort();
         } else if (frameType == Const.SAME_FRAME_EXTENDED) {
-            byteCodeOffset = dataInput.readShort();
+            byteCodeOffset = dataInput.readUnsignedShort();
         } else if (frameType >= Const.APPEND_FRAME && frameType <= Const.APPEND_FRAME_MAX) {
-            byteCodeOffset = dataInput.readShort();
+            byteCodeOffset = dataInput.readUnsignedShort();
             final int numberOfLocals = frameType - 251;
             typesOfLocals = new StackMapType[numberOfLocals];
             for (int i = 0; i < numberOfLocals; i++) {
                 typesOfLocals[i] = new StackMapType(dataInput, constantPool);
             }
         } else if (frameType == Const.FULL_FRAME) {
-            byteCodeOffset = dataInput.readShort();
-            final int numberOfLocals = dataInput.readShort();
+            byteCodeOffset = dataInput.readUnsignedShort();
+            final int numberOfLocals = dataInput.readUnsignedShort();
             typesOfLocals = new StackMapType[numberOfLocals];
             for (int i = 0; i < numberOfLocals; i++) {
                 typesOfLocals[i] = new StackMapType(dataInput, constantPool);
             }
-            final int numberOfStackItems = dataInput.readShort();
+            final int numberOfStackItems = dataInput.readUnsignedShort();
             typesOfStackItems = new StackMapType[numberOfStackItems];
             for (int i = 0; i < numberOfStackItems; i++) {
                 typesOfStackItems[i] = new StackMapType(dataInput, constantPool);
