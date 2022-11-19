@@ -66,6 +66,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.ClassFormatException.ClassFormatException(Throwable).</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.JavaClass.EXTENSION.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.Module.EXTENSION.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.util.Args.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.generic.ArrayType.getClassName().</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.generic.Type.getClassName().</action>

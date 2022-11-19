@@ -435,7 +435,7 @@ public class ClassPath implements Closeable {
 
     private static final FilenameFilter MODULES_FILTER = (dir, name) -> {
         name = name.toLowerCase(Locale.ENGLISH);
-        return name.endsWith(".jmod");
+        return name.endsWith(org.apache.bcel.classfile.Module.EXTENSION);
     };
 
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath(getClassPath());
@@ -546,7 +546,7 @@ public class ClassPath implements Closeable {
                     if (file.exists()) {
                         if (file.isDirectory()) {
                             paths.add(new Dir(path));
-                        } else if (path.endsWith(".jmod")) {
+                        } else if (path.endsWith(org.apache.bcel.classfile.Module.EXTENSION)) {
                             paths.add(new Module(new ZipFile(file)));
                         } else if (path.endsWith(ModularRuntimeImage.MODULES_PATH)) {
                             paths.add(new JrtModules(ModularRuntimeImage.MODULES_PATH));

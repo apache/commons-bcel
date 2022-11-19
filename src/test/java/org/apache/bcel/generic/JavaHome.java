@@ -36,6 +36,7 @@ import java.util.jar.JarFile;
 import java.util.stream.Stream;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Module;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.ModularRuntimeImage;
 import org.apache.commons.lang3.StringUtils;
@@ -253,7 +254,7 @@ public class JavaHome {
     }
 
     private Stream<Path> streamModuleByExt() {
-        return streamEndsWith(".jmod");
+        return streamEndsWith(Module.EXTENSION);
     }
 
     private JarFile toJarFile(final Path path) {
