@@ -137,12 +137,12 @@ public final class StackMapType implements Cloneable {
         this.constantPool = constantPool;
     }
 
-    public void setIndex(final int t) {
-        index = t;
+    public void setIndex(final int index) {
+        this.index = index;
     }
 
-    public void setType(final byte t) {
-        type = checkType(t);
+    public void setType(final byte type) {
+        this.type = checkType(type);
     }
 
     /**
