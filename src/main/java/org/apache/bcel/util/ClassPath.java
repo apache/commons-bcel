@@ -517,7 +517,7 @@ public class ClassPath implements Closeable {
         return name.replace('.', '/');
     }
 
-    private final String classPath;
+    private final String classPathString;
 
     private final ClassPath parent;
 
@@ -534,11 +534,11 @@ public class ClassPath implements Closeable {
     }
 
     @SuppressWarnings("resource")
-    public ClassPath(final ClassPath parent, final String classPath) {
+    public ClassPath(final ClassPath parent, final String classPathString) {
         this.parent = parent;
-        this.classPath = classPath;
+        this.classPathString = classPathString;
         this.paths = new ArrayList<>();
-        for (final StringTokenizer tokenizer = new StringTokenizer(classPath, File.pathSeparator); tokenizer.hasMoreTokens();) {
+        for (final StringTokenizer tokenizer = new StringTokenizer(classPathString, File.pathSeparator); tokenizer.hasMoreTokens();) {
             final String path = tokenizer.nextToken();
             if (!path.isEmpty()) {
                 final File file = new File(path);
@@ -583,7 +583,7 @@ public class ClassPath implements Closeable {
     public boolean equals(final Object o) {
         if (o instanceof ClassPath) {
             final ClassPath cp = (ClassPath) o;
-            return classPath.equals(cp.toString());
+            return classPathString.equals(cp.toString());
         }
         return false;
     }
@@ -768,9 +768,9 @@ public class ClassPath implements Closeable {
     @Override
     public int hashCode() {
         if (parent != null) {
-            return classPath.hashCode() + parent.hashCode();
+            return classPathString.hashCode() + parent.hashCode();
         }
-        return classPath.hashCode();
+        return classPathString.hashCode();
     }
 
     /**
@@ -779,8 +779,8 @@ public class ClassPath implements Closeable {
     @Override
     public String toString() {
         if (parent != null) {
-            return parent + File.pathSeparator + classPath;
+            return parent + File.pathSeparator + classPathString;
         }
-        return classPath;
+        return classPathString;
     }
 }
