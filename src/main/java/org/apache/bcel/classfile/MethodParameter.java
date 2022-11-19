@@ -30,7 +30,7 @@ import org.apache.bcel.Const;
  *      The MethodParameters Attribute</a>
  * @since 6.0
  */
-public class MethodParameter implements Cloneable {
+public class MethodParameter implements Cloneable, Node {
 
     /** Index of the CONSTANT_Utf8_info structure in the constant_pool table representing the name of the parameter */
     private int nameIndex;
@@ -53,6 +53,7 @@ public class MethodParameter implements Cloneable {
         accessFlags = input.readUnsignedShort();
     }
 
+    @Override
     public void accept(final Visitor v) {
         v.visitMethodParameter(this);
     }

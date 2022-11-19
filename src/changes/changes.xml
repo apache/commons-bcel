@@ -69,6 +69,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.util.Args.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.generic.ArrayType.getClassName().</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.generic.Type.getClassName().</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory, Mark Roberts">org.apache.bcel.classfile.MethodParameter now implements org.apache.bcel.classfile.Node.</action>
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="nbauma109, Gary Gregory">Typo in SimpleElementValue error message #161.</action>
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Fix code duplication in org.apache.bcel.verifier.structurals.ExceptionHandlers.ExceptionHandlers(MethodGen).</action>
