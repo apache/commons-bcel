@@ -177,7 +177,9 @@ public class Package {
                 clName = clName.substring(0, clName.length() - 6);
             }
             clName = clName.replace('.', '/');
-            clazz = new ClassParser(classPath.getInputStream(clName), clName).parse();
+            try (final InputStream inputStream = classPath.getInputStream(clName)) {
+                clazz = new ClassParser(inputStream, clName).parse();
+            }
             // here we create the root set of classes to process
             addDependents(clazz);
             System.out.println("Packaging for class: " + clName);
@@ -196,8 +198,8 @@ public class Package {
             final String name = dependents.firstKey();
             final String from = dependents.remove(name);
             if (allClasses.get(name) == null) {
-                try (final InputStream is = classPath.getInputStream(name)) {
-                    clazz = new ClassParser(is, name).parse();
+                try (final InputStream inputStream = classPath.getInputStream(name)) {
+                    clazz = new ClassParser(inputStream, name).parse();
                     addDependents(clazz);
                 } catch (final IOException e) {
                     // System.err.println("Error, class not found " + name );
