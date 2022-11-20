@@ -150,6 +150,20 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     }
 
     /**
+     * Pushes an array type constant, i.e. int[].class, String[].class, etc...
+     * @param cp generated constant pool
+     * @param value to be pushed
+     * @since 6.7.0
+     */
+    public PUSH(final ConstantPoolGen cp, final ArrayType value) {
+        if (value == null) {
+            instruction = InstructionConst.ACONST_NULL;
+        } else {
+            instruction = new LDC(cp.addArrayClass(value));
+        }
+    }
+
+    /**
      * @param cp Constant pool
      * @param value to be pushed
      */

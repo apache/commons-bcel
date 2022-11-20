@@ -22,6 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -181,5 +183,20 @@ public abstract class AbstractTestCase {
             System.err.println("Non-empty directory: " + testDir);
         }
         return b;
+    }
+
+    /**
+     * Get javaagent property of current running jvm.
+     * @return javaagent property of current running jvm, null if not set.
+     */
+    protected String getJavaAgent() {
+        RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+        List<String> jvmArgs = runtimeMXBean.getInputArguments();
+        for (String arg : jvmArgs) {
+            if (arg.startsWith("-javaagent")) {
+                return arg;
+            }
+        }
+        return null;
     }
 }

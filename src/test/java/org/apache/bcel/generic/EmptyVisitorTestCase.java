@@ -46,6 +46,7 @@ class EmptyVisitorTestCase {
         "java.lang.invoke.LambdaForm",                   // contains instruction MULTIANEWARRAY,
         "java.nio.Bits",                                 // contains instruction POP2,
         "java.nio.HeapShortBuffer",                      // contains instruction SALOAD, SASTORE
+        "Java8Example2",                                 // contains instruction FREM
         "java.awt.GradientPaintContext",                 // contains instruction DREM
         "java.util.concurrent.atomic.DoubleAccumulator", // contains instruction DUP2_X1
         "java.util.Hashtable",                           // contains instruction FNEG
