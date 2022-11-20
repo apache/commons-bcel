@@ -45,7 +45,7 @@ public class ObjectType extends ReferenceType {
      * @param className fully qualified class name, e.g. java.lang.String
      */
     public ObjectType(final String className) {
-        super(Const.T_REFERENCE, "L" + className.replace('.', '/') + ";");
+        super(Const.T_REFERENCE, "L" + Utility.packageToPath(className) + ";");
         this.className = Utility.pathToPackage(className);
     }
 

@@ -33,6 +33,7 @@ import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.ClassPath;
 
 /**
@@ -139,7 +140,7 @@ public class Package {
      * in allClasses
      */
     void addDependents(final JavaClass clazz) throws IOException {
-        final String name = clazz.getClassName().replace('.', '/');
+        final String name = Utility.packageToPath(clazz.getClassName());
         allClasses.put(name, clazz);
         final ConstantPool pool = clazz.getConstantPool();
         for (int i = 1; i < pool.getLength(); i++) {
@@ -176,7 +177,7 @@ public class Package {
             if (clName.endsWith(JavaClass.EXTENSION)) {
                 clName = clName.substring(0, clName.length() - JavaClass.EXTENSION.length());
             }
-            clName = clName.replace('.', '/');
+            clName = Utility.packageToPath(clName);
             try (final InputStream inputStream = classPath.getInputStream(clName)) {
                 clazz = new ClassParser(inputStream, clName).parse();
             }

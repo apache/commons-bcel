@@ -586,7 +586,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public String getSourceFilePath() {
         final StringBuilder outFileName = new StringBuilder();
         if (!packageName.isEmpty()) {
-            outFileName.append(packageName.replace('.', '/'));
+            outFileName.append(Utility.packageToPath(packageName));
             outFileName.append('/');
         }
         outFileName.append(sourceFileName);

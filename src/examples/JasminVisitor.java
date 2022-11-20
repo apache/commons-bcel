@@ -251,7 +251,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         for (final CodeExceptionGen c : ehs) {
             final ObjectType caught = c.getCatchType();
             final String className = caught == null ? // catch any exception, used when compiling finally
-                "all" : caught.getClassName().replace('.', '/');
+                "all" : Utility.packageToPath(caught.getClassName());
 
             out.println(".catch " + className + " from " + get(c.getStartPC()) + " to " + get(c.getEndPC()) + " using " + get(c.getHandlerPC()));
         }
@@ -272,7 +272,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     @Override
     public void visitExceptionTable(final ExceptionTable e) {
         for (final String name : e.getExceptionNames()) {
-            out.println(".throws " + name.replace('.', '/'));
+            out.println(".throws " + Utility.packageToPath(name));
         }
 
         printEndMethod(e);
@@ -294,11 +294,11 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
         out.println(".source " + clazz.getSourceFileName());
         out.println("." + Utility.classOrInterface(clazz.getAccessFlags()) + " " + Utility.accessToString(clazz.getAccessFlags(), true) + " "
-            + clazz.getClassName().replace('.', '/'));
-        out.println(".super " + clazz.getSuperclassName().replace('.', '/'));
+            + Utility.packageToPath(clazz.getClassName()));
+        out.println(".super " + Utility.packageToPath(clazz.getSuperclassName()));
 
         for (final String iface : clazz.getInterfaceNames()) {
-            out.println(".implements " + iface.replace('.', '/'));
+            out.println(".implements " + Utility.packageToPath(iface));
         }
 
         out.print("\n");

@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 
 /**
  * The repository maintains information about which classes have been loaded.
@@ -74,7 +75,7 @@ public class ClassLoaderRepository implements Repository {
      */
     @Override
     public JavaClass loadClass(final String className) throws ClassNotFoundException {
-        final String classFile = className.replace('.', '/');
+        final String classFile = Utility.packageToPath(className);
         JavaClass RC = findClass(className);
         if (RC != null) {
             return RC;

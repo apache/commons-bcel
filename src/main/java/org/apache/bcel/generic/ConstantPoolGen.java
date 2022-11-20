@@ -251,7 +251,7 @@ public class ConstantPoolGen {
      * @return index of entry
      */
     public int addClass(final String str) {
-        return addClass_(str.replace('.', '/'));
+        return addClass_(Utility.packageToPath(str));
     }
 
     private int addClass_(final String clazz) {
@@ -587,7 +587,7 @@ public class ConstantPoolGen {
      * @return index on success, -1 otherwise
      */
     public int lookupClass(final String str) {
-        return getIndex(classTable, str.replace('.', '/'));
+        return getIndex(classTable, Utility.packageToPath(str));
     }
 
     /**

@@ -123,7 +123,7 @@ public class ClassLoader extends java.lang.ClassLoader {
         final ConstantPool cp = clazz.getConstantPool();
         final ConstantClass cl = cp.getConstant(clazz.getClassNameIndex(), Const.CONSTANT_Class, ConstantClass.class);
         final ConstantUtf8 name = cp.getConstantUtf8(cl.getNameIndex());
-        name.setBytes(className.replace('.', '/'));
+        name.setBytes(Utility.packageToPath(className));
         return clazz;
     }
 

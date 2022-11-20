@@ -825,7 +825,7 @@ public abstract class Utility {
             }
         }
         if (!found) {
-            buf.append('L').append(type.replace('.', '/')).append(';');
+            buf.append('L').append(packageToPath(type)).append(';');
         }
         return buf.toString();
     }
@@ -1028,6 +1028,17 @@ public abstract class Utility {
         str = getSignature(ret);
         buf.append(")").append(str);
         return buf.toString();
+    }
+
+    /**
+     * Converts '.'s to '/'s.
+     *
+     * @param name Source
+     * @return converted value
+     * @since 6.7.0
+     */
+    public static String packageToPath(final String name) {
+        return name.replace('.', '/');
     }
 
     /**

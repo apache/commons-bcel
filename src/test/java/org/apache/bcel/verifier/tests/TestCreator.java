@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.net.URISyntaxException;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 
 public abstract class TestCreator {
 
@@ -56,6 +57,6 @@ public abstract class TestCreator {
     }
 
     protected String getPackageName() {
-        return getClass().getPackage().getName().replace('.', '/');
+        return Utility.packageToPath(getClass().getPackage().getName());
     }
 }

@@ -22,6 +22,7 @@ import java.io.IOException;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantPool;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.ByteSequence;
 
 /**
@@ -132,7 +133,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
         final Constant c = cp.getConstant(index);
         String str = cp.constantToString(c);
         if (c instanceof ConstantClass) {
-            str = str.replace('.', '/');
+            str = Utility.packageToPath(str);
         }
         return org.apache.bcel.Const.getOpcodeName(super.getOpcode()) + " " + str;
     }

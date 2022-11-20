@@ -128,7 +128,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
         final StringBuilder sb = new StringBuilder(opcodeName);
         if (tok.hasMoreTokens()) {
             sb.append(" ");
-            sb.append(tok.nextToken().replace('.', '/'));
+            sb.append(Utility.packageToPath(tok.nextToken()));
             if (tok.hasMoreTokens()) {
                 sb.append(tok.nextToken());
             }

@@ -31,6 +31,7 @@ import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.AnnotationEntryGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.ElementValueGen;
@@ -51,7 +52,7 @@ public abstract class AbstractTestCase {
     protected static final File TESTDATA = new File("target", "testdata");
 
     // package base name in signature format, i.e. with '/' separators instead of '.'
-    protected static final String PACKAGE_BASE_SIG = PACKAGE_BASE_NAME.replace('.', '/');
+    protected static final String PACKAGE_BASE_SIG = Utility.packageToPath(PACKAGE_BASE_NAME);
 
     public static void clear() {
         VerifierFactory.clear();

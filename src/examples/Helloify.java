@@ -51,7 +51,7 @@ public final class Helloify {
         int index = javaClass.getClassNameIndex();
 
         index = ((ConstantClass) cp.getConstant(index)).getNameIndex();
-        cp.setConstant(index, new ConstantUtf8(className.replace('.', '/')));
+        cp.setConstant(index, new ConstantUtf8(Utility.packageToPath(className)));
     }
 
     /**
