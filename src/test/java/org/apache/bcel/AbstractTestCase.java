@@ -140,6 +140,16 @@ public abstract class AbstractTestCase {
         return chosenAttrsList.toArray(Attribute.EMPTY_ARRAY);
     }
 
+    /**
+     * Gets the javaagent input argument of the current running JVM.
+     *
+     * @return javaagent input argument of the current running JVM, null if not set.
+     */
+    protected String getJavaAgent() {
+        final List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
+        return jvmArgs.stream().filter(arg -> arg.startsWith("-javaagent")).findFirst().orElse(null);
+    }
+
     protected Method getMethod(final JavaClass cl, final String methodname) {
         for (final Method m : cl.getMethods()) {
             if (m.getName().equals(methodname)) {
@@ -185,19 +195,4 @@ public abstract class AbstractTestCase {
         return b;
     }
 
-    /**
-     * Gets the javaagent input argument of the current running JVM.
-     *
-     * @return javaagent input argument of the current running JVM, null if not set.
-     */
-    protected String getJavaAgent() {
-        RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
-        List<String> jvmArgs = runtimeMXBean.getInputArguments();
-        for (String arg : jvmArgs) {
-            if (arg.startsWith("-javaagent")) {
-                return arg;
-            }
-        }
-        return null;
-    }
 }
