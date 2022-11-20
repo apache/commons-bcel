@@ -39,8 +39,8 @@ public class HelloWorldCreator {
 
     public HelloWorldCreator() {
         cg = new ClassGen(ORG_APACHE_BCEL_HELLO_WORLD, "java.lang.Object", "HelloWorld.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
-        cg.setMajor(52);
-        cg.setMinor(0);
+        cg.setMajor(Const.MAJOR_1_8);
+        cg.setMinor(Const.MINOR_1_8);
 
         cp = cg.getConstantPool();
         factory = new InstructionFactory(cg, cp);
