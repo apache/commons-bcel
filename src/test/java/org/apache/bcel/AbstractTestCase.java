@@ -186,8 +186,9 @@ public abstract class AbstractTestCase {
     }
 
     /**
-     * Get javaagent property of current running jvm.
-     * @return javaagent property of current running jvm, null if not set.
+     * Gets the javaagent input argument of the current running JVM.
+     *
+     * @return javaagent input argument of the current running JVM, null if not set.
      */
     protected String getJavaAgent() {
         RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
