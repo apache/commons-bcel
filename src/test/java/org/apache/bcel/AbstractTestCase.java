@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,6 +139,16 @@ public abstract class AbstractTestCase {
         return chosenAttrsList.toArray(Attribute.EMPTY_ARRAY);
     }
 
+    /**
+     * Gets the javaagent input argument of the current running JVM.
+     *
+     * @return javaagent input argument of the current running JVM, null if not set.
+     */
+    protected String getJavaAgent() {
+        final List<String> jvmArgs = ManagementFactory.getRuntimeMXBean().getInputArguments();
+        return jvmArgs.stream().filter(arg -> arg.startsWith("-javaagent")).findFirst().orElse(null);
+    }
+
     protected Method getMethod(final JavaClass cl, final String methodname) {
         for (final Method m : cl.getMethods()) {
             if (m.getName().equals(methodname)) {
@@ -182,4 +193,5 @@ public abstract class AbstractTestCase {
         }
         return b;
     }
+
 }

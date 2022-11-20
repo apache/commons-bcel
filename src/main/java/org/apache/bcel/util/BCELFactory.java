@@ -85,12 +85,35 @@ class BCELFactory extends EmptyVisitor {
         } else if (value instanceof Character) {
             embed = "(char)0x" + Integer.toHexString(((Character) value).charValue());
         } else if (value instanceof Float) {
-            embed += "f";
+            final Float f = (Float) value;
+            if (Float.isNaN(f)) {
+                embed = "Float.NaN";
+            } else if (f == Float.POSITIVE_INFINITY) {
+                embed = "Float.POSITIVE_INFINITY";
+            } else if (f == Float.NEGATIVE_INFINITY) {
+                embed = "Float.NEGATIVE_INFINITY";
+            } else {
+                embed += "f";
+            }
+        }  else if (value instanceof Double) {
+            final Double d = (Double) value;
+            if (Double.isNaN(d)) {
+                embed = "Double.NaN";
+            } else if (d == Double.POSITIVE_INFINITY) {
+                embed = "Double.POSITIVE_INFINITY";
+            } else if (d == Double.NEGATIVE_INFINITY) {
+                embed = "Double.NEGATIVE_INFINITY";
+            } else {
+                embed += "d";
+            }
         } else if (value instanceof Long) {
             embed += "L";
         } else if (value instanceof ObjectType) {
             final ObjectType ot = (ObjectType) value;
             embed = "new ObjectType(\"" + ot.getClassName() + "\")";
+        } else if (value instanceof ArrayType) {
+            final ArrayType at = (ArrayType) value;
+            embed = "new ArrayType(" + BCELifier.printType(at.getBasicType()) + ", " + at.getDimensions() + ")";
         }
 
         printWriter.println("il.append(new PUSH(_cp, " + embed + "));");
@@ -164,11 +187,12 @@ class BCELFactory extends EmptyVisitor {
         case Const.MULTIANEWARRAY:
             dim = ((MULTIANEWARRAY) i).getDimensions();
             //$FALL-THROUGH$
-        case Const.ANEWARRAY:
         case Const.NEWARRAY:
             if (type instanceof ArrayType) {
                 type = ((ArrayType) type).getBasicType();
             }
+            //$FALL-THROUGH$
+        case Const.ANEWARRAY:
             printWriter.println("il.append(_factory.createNewArray(" + BCELifier.printType(type) + ", (short) " + dim + "));");
             break;
         default:
@@ -252,7 +276,7 @@ class BCELFactory extends EmptyVisitor {
     @Override
     public void visitINSTANCEOF(final INSTANCEOF i) {
         final Type type = i.getType(constantPoolGen);
-        printWriter.println("il.append(new INSTANCEOF(_cp.addClass(" + BCELifier.printType(type) + ")));");
+        printWriter.println("il.append(_factory.createInstanceOf(" + BCELifier.printType(type) + "));");
     }
 
     private boolean visitInstruction(final Instruction i) {
@@ -299,7 +323,7 @@ class BCELFactory extends EmptyVisitor {
 
     @Override
     public void visitRET(final RET i) {
-        printWriter.println("il.append(new RET(" + i.getIndex() + ")));");
+        printWriter.println("il.append(new RET(" + i.getIndex() + "));");
     }
 
     @Override

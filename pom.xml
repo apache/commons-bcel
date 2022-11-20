@@ -362,6 +362,29 @@
           </rulesets>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>merge-all-jacoco</id>
+            <goals>
+              <goal>merge</goal>
+            </goals>
+            <phase>install</phase>
+            <configuration> 
+              <fileSets>
+                <fileSet>
+                  <directory>${project.build.directory}</directory>
+                  <includes>
+                    <include>*.exec</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </configuration> 
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 

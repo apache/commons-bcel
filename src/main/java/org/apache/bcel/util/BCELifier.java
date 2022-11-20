@@ -27,6 +27,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.ExceptionTable;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
@@ -211,7 +212,27 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
             "    field = new FieldGen(" + printFlags(field.getAccessFlags()) + ", " + printType(field.getSignature()) + ", \"" + field.getName() + "\", _cp);");
         final ConstantValue cv = field.getConstantValue();
         if (cv != null) {
-            printWriter.println("    field.setInitValue(" + cv + ")");
+            printWriter.print("    field.setInitValue(");
+            if (field.getType() == Type.CHAR) {
+                printWriter.print("(char)");
+            }
+            if (field.getType() == Type.SHORT) {
+                printWriter.print("(short)");
+            }
+            if (field.getType() == Type.BYTE) {
+                printWriter.print("(byte)");
+            }
+            printWriter.print(cv);
+            if (field.getType() == Type.LONG) {
+                printWriter.print("L");
+            }
+            if (field.getType() == Type.FLOAT) {
+                printWriter.print("F");
+            }
+            if (field.getType() == Type.DOUBLE) {
+                printWriter.print("D");
+            }
+            printWriter.println(");");
         }
         printWriter.println("    _cg.addField(field.getField());");
     }
@@ -222,7 +243,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         final String superName = clazz.getSuperclassName();
         final String packageName = clazz.getPackageName();
         final String inter = Utility.printArray(clazz.getInterfaceNames(), false, true);
-        if (StringUtils.isNotEmpty(inter)) {
+        if (StringUtils.isNotEmpty(packageName)) {
             className = className.substring(packageName.length() + 1);
             printWriter.println("package " + packageName + ";");
             printWriter.println();
@@ -276,6 +297,15 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         printWriter.println("    MethodGen method = new MethodGen(" + printFlags(method.getAccessFlags(), FLAGS.METHOD) + ", " + printType(mg.getReturnType())
             + ", " + printArgumentTypes(mg.getArgumentTypes()) + ", " + "new String[] { " + Utility.printArray(mg.getArgumentNames(), false, true) + " }, \""
             + method.getName() + "\", \"" + clazz.getClassName() + "\", il, _cp);");
+        final ExceptionTable exceptionTable = method.getExceptionTable();
+        if (exceptionTable != null) {
+            final String[] exceptionNames = exceptionTable.getExceptionNames();
+            for (final String exceptionName : exceptionNames) {
+                printWriter.print("    method.addException(\"");
+                printWriter.print(exceptionName);
+                printWriter.println("\");");
+            }
+        }
         printWriter.println();
         final BCELFactory factory = new BCELFactory(mg, printWriter);
         factory.start();

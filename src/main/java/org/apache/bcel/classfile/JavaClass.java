@@ -571,10 +571,26 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return absolute path to file where this class was read from
+     * @return file name where this class was read from
      */
     public String getSourceFileName() {
         return sourceFileName;
+    }
+
+    /**
+     * Gets the source file path including the package path.
+     *
+     * @return path to original source file of parsed class, relative to original source directory.
+     * @since 6.7.0
+     */
+    public String getSourceFilePath() {
+        final StringBuilder outFileName = new StringBuilder();
+        if (!packageName.isEmpty()) {
+            outFileName.append(packageName.replace('.', '/'));
+            outFileName.append('/');
+        }
+        outFileName.append(sourceFileName);
+        return outFileName.toString();
     }
 
     /**

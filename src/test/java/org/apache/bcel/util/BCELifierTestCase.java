@@ -22,14 +22,22 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.OutputStream;
-
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.HelloWorldCreator;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-public class BCELifierTestCase {
+public class BCELifierTestCase extends AbstractTestCase {
+
+    private static final String EOL = System.lineSeparator();
+    public static final String CLASSPATH = System.getProperty("java.class.path") + File.pathSeparator + ".";
 
     // Canonicalise the javap output so it compares better
     private String canonHashRef(String input) {
@@ -43,38 +51,49 @@ public class BCELifierTestCase {
         // System.err.println(java.util.Arrays.toString(args));
         final ProcessBuilder pb = new ProcessBuilder(args);
         pb.directory(workDir);
+        pb.redirectErrorStream(true);
         final Process proc = pb.start();
-        try (BufferedInputStream is = new BufferedInputStream(proc.getInputStream()); InputStream es = proc.getErrorStream()) {
-            proc.waitFor();
+        try (BufferedInputStream is = new BufferedInputStream(proc.getInputStream())) {
             final byte[] buff = new byte[2048];
             int len;
-            while ((len = es.read(buff)) != -1) {
-                System.err.print(new String(buff, 0, len));
-            }
 
             final StringBuilder sb = new StringBuilder();
             while ((len = is.read(buff)) != -1) {
                 sb.append(new String(buff, 0, len));
             }
-            return sb.toString();
+            String output = sb.toString();
+            assertEquals(0, proc.waitFor(), output);
+            return output;
         }
     }
 
     private void testClassOnPath(final String javaClassFileName) throws Exception {
-        // Get javap of the input class
-        final String initial = exec(null, "javap", "-p", "-c", javaClassFileName);
-
         final File workDir = new File("target");
         final File infile = new File(javaClassFileName);
         final JavaClass javaClass = BCELifier.getJavaClass(infile.getName().replace(JavaClass.EXTENSION, ""));
         assertNotNull(javaClass);
-        final File outfile = new File(workDir, infile.getName().replace(JavaClass.EXTENSION, "Creator.java"));
-        try (FileOutputStream fos = new FileOutputStream(outfile)) {
-            final BCELifier bcelifier = new BCELifier(javaClass, fos);
-            bcelifier.start();
+
+        // Get javap of the input class
+        final String initial = exec(null, "javap", "-cp", CLASSPATH, "-p", "-c", javaClass.getClassName());
+        String outFileName = javaClass.getSourceFilePath().replace(".java", "Creator.java");
+        final File outfile = new File(workDir, outFileName);
+        Files.createDirectories(outfile.getParentFile().toPath());
+        final String javaAgent = getJavaAgent();
+        String creatorSourceContents = null;
+        if (javaAgent == null) {
+            creatorSourceContents = exec(workDir, "java", "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier", javaClass.getClassName());
+        } else {
+            String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + infile.getName() + ".exec");
+            creatorSourceContents = exec(workDir, "java", runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier", javaClass.getClassName());
         }
-        exec(workDir, "javac", "-cp", "classes", outfile.getName(), "-source", "1.8", "-target", "1.8");
-        exec(workDir, "java", "-cp", "." + File.pathSeparator + "classes", outfile.getName().replace(".java", ""));
+        Files.write(outfile.toPath(), creatorSourceContents.getBytes(StandardCharsets.UTF_8));
+        assertEquals("", exec(workDir, "javac", "-cp", CLASSPATH, outFileName.toString()));
+        if (javaAgent == null) {
+            assertEquals("", exec(workDir, "java", "-cp", CLASSPATH, javaClass.getClassName() + "Creator"));
+        } else {
+            String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + Utility.pathToPackage(outFileName) + ".exec");
+            assertEquals("", exec(workDir, "java", runtimeExecJavaAgent, "-cp", CLASSPATH, javaClass.getClassName() + "Creator"));
+        }
         final String output = exec(workDir, "javap", "-p", "-c", infile.getName());
         assertEquals(canonHashRef(initial), canonHashRef(output));
     }
@@ -83,9 +102,22 @@ public class BCELifierTestCase {
      * Dump a class using "javap" and compare with the same class recreated using BCELifier, "javac", "java" and dumped with
      * "javap" TODO: detect if JDK present and skip test if not
      */
-    @Test
-    public void testJavapCompare() throws Exception {
-        testClassOnPath("target/test-classes/Java8Example.class");
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "org.apache.commons.lang.math.Fraction.class",
+        "org.apache.commons.lang.exception.NestableDelegate.class",
+        "org.apache.commons.lang.builder.CompareToBuilder.class",
+        "org.apache.commons.lang.builder.ToStringBuilder.class",
+        "org.apache.commons.lang.SerializationUtils.class",
+        "org.apache.commons.lang.ArrayUtils.class",
+        "target/test-classes/Java8Example.class",
+        "target/test-classes/Java8Example2.class",
+        "target/test-classes/Java4Example.class"
+    // @formatter:on
+    })
+    public void testJavapCompare(final String pathToClass) throws Exception {
+        testClassOnPath(pathToClass);
     }
 
     @Test
@@ -97,4 +129,30 @@ public class BCELifierTestCase {
         bcelifier.start();
     }
 
+    @Test
+    public void testMainNoArg() throws Exception {
+        final PrintStream sysout = System.out;
+        try {
+            final ByteArrayOutputStream out = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(out));
+            BCELifier.main(new String[0]);
+            final String outputNoArgs = new String(out.toByteArray());
+            assertEquals("Usage: BCELifier className" + EOL + "\tThe class must exist on the classpath" + EOL, outputNoArgs);
+        } finally {
+            System.setOut(sysout);
+        }
+    }
+
+    @Test
+    public void testHelloWorld() throws Exception {
+        HelloWorldCreator.main(new String[] {});
+        final File workDir = new File("target");
+        final String javaAgent = getJavaAgent();
+        if (javaAgent == null) {
+            assertEquals("Hello World!" + EOL, exec(workDir, "java", "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
+        } else {
+            String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.HelloWorld.exec");
+            assertEquals("Hello World!" + EOL, exec(workDir, "java", runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
+        }
+    }
 }
