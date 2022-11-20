@@ -61,7 +61,7 @@ public final class StackMapType implements Cloneable {
 
     private byte checkType(final byte type) {
         if (type < Const.ITEM_Bogus || type > Const.ITEM_NewObject) {
-            throw new IllegalArgumentException("Illegal type for StackMapType: " + type);
+            throw new ClassFormatException("Illegal type for StackMapType: " + type);
         }
         return type;
     }
