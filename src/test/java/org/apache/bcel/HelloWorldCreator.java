@@ -33,8 +33,17 @@ import java.nio.file.Paths;
 
 public class HelloWorldCreator {
     private static final String ORG_APACHE_BCEL_HELLO_WORLD = "org.apache.bcel.HelloWorld";
+    public static void main(String[] args) throws Exception {
+        org.apache.bcel.HelloWorldCreator creator = new org.apache.bcel.HelloWorldCreator();
+        Path path = Paths.get("target/test-classes/org/apache/bcel/HelloWorld.class");
+        Files.deleteIfExists(path);
+        try (OutputStream out = Files.newOutputStream(path)) {
+            creator.create(out);
+        }
+    }
     private InstructionFactory factory;
     private ConstantPoolGen cp;
+
     private ClassGen cg;
 
     public HelloWorldCreator() {
@@ -75,14 +84,5 @@ public class HelloWorldCreator {
         method.setMaxLocals();
         cg.addMethod(method.getMethod());
         il.dispose();
-    }
-
-    public static void main(String[] args) throws Exception {
-        org.apache.bcel.HelloWorldCreator creator = new org.apache.bcel.HelloWorldCreator();
-        Path path = Paths.get("target/test-classes/org/apache/bcel/HelloWorld.class");
-        Files.deleteIfExists(path);
-        try (OutputStream out = Files.newOutputStream(path)) {
-            creator.create(out);
-        }
     }
 }

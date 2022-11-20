@@ -98,6 +98,19 @@ public class BCELifierTestCase extends AbstractTestCase {
         assertEquals(canonHashRef(initial), canonHashRef(output));
     }
 
+    @Test
+    public void testHelloWorld() throws Exception {
+        HelloWorldCreator.main(new String[] {});
+        final File workDir = new File("target");
+        final String javaAgent = getJavaAgent();
+        if (javaAgent == null) {
+            assertEquals("Hello World!" + EOL, exec(workDir, "java", "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
+        } else {
+            String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.HelloWorld.exec");
+            assertEquals("Hello World!" + EOL, exec(workDir, "java", runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
+        }
+    }
+
     /*
      * Dump a class using "javap" and compare with the same class recreated using BCELifier, "javac", "java" and dumped with
      * "javap" TODO: detect if JDK present and skip test if not
@@ -121,15 +134,6 @@ public class BCELifierTestCase extends AbstractTestCase {
     }
 
     @Test
-    public void testStart() throws Exception {
-        final OutputStream os = new ByteArrayOutputStream();
-        final JavaClass javaClass = BCELifier.getJavaClass("Java8Example");
-        assertNotNull(javaClass);
-        final BCELifier bcelifier = new BCELifier(javaClass, os);
-        bcelifier.start();
-    }
-
-    @Test
     public void testMainNoArg() throws Exception {
         final PrintStream sysout = System.out;
         try {
@@ -144,15 +148,11 @@ public class BCELifierTestCase extends AbstractTestCase {
     }
 
     @Test
-    public void testHelloWorld() throws Exception {
-        HelloWorldCreator.main(new String[] {});
-        final File workDir = new File("target");
-        final String javaAgent = getJavaAgent();
-        if (javaAgent == null) {
-            assertEquals("Hello World!" + EOL, exec(workDir, "java", "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
-        } else {
-            String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.HelloWorld.exec");
-            assertEquals("Hello World!" + EOL, exec(workDir, "java", runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
-        }
+    public void testStart() throws Exception {
+        final OutputStream os = new ByteArrayOutputStream();
+        final JavaClass javaClass = BCELifier.getJavaClass("Java8Example");
+        assertNotNull(javaClass);
+        final BCELifier bcelifier = new BCELifier(javaClass, os);
+        bcelifier.start();
     }
 }
