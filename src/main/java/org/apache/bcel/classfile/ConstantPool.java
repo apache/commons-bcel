@@ -373,7 +373,6 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
             break;
         case Const.CONSTANT_Utf8:
             return getConstantUtf8(index).getBytes();
-        // fallthrough
         default:
             throw new IllegalArgumentException("getConstantString called with illegal tag " + tag);
         }
