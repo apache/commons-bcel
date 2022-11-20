@@ -174,7 +174,7 @@ public class Package {
             }
             String clName = arg;
             if (clName.endsWith(JavaClass.EXTENSION)) {
-                clName = clName.substring(0, clName.length() - 6);
+                clName = clName.substring(0, clName.length() - JavaClass.EXTENSION.length());
             }
             clName = clName.replace('.', '/');
             try (final InputStream inputStream = classPath.getInputStream(clName)) {
