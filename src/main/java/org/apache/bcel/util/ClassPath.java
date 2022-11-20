@@ -670,6 +670,10 @@ public class ClassPath implements Closeable {
     }
 
     /**
+     * Gets an InputStream.
+     * <p>
+     * The caller is responsible for closing the InputStream.
+     * </p>
      * @param name fully qualified class name, e.g. java.lang.String
      * @return input stream for class
      * @throws IOException if an I/O error occurs.
@@ -679,23 +683,26 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * Return stream for class or resource on CLASSPATH.
+     * Gets an InputStream for a class or resource on the classpath.
+     * <p>
+     * The caller is responsible for closing the InputStream.
+     * </p>
      *
-     * @param name fully qualified file name, e.g. java/lang/String
+     * @param name   fully qualified file name, e.g. java/lang/String
      * @param suffix file name ends with suff, e.g. .java
      * @return input stream for file on class path
      * @throws IOException if an I/O error occurs.
      */
     public InputStream getInputStream(final String name, final String suffix) throws IOException {
-        InputStream inputStream = null;
         try {
             final java.lang.ClassLoader classLoader = getClass().getClassLoader();
-            inputStream = classLoader == null ? null : classLoader.getResourceAsStream(name + suffix); // may return null
+            @SuppressWarnings("resource") // closed by caller
+            InputStream inputStream = classLoader == null ? null : classLoader.getResourceAsStream(name + suffix);
+            if (inputStream != null) {
+                return inputStream;
+            }
         } catch (final Exception ignored) {
             // ignored
-        }
-        if (inputStream != null) {
-            return inputStream;
         }
         return getClassFile(name, suffix).getInputStream();
     }
