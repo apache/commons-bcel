@@ -72,6 +72,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.generic.Type.getClassName().</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.Utility.packageToPath(String).</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory, Mark Roberts">org.apache.bcel.classfile.MethodParameter now implements org.apache.bcel.classfile.Node.</action>
+      <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add org.apache.bcel.classfile.JavaClass.getSourceFilePath().</action>
+      <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add org.apache.bcel.generic.PUSH.PUSH(ConstantPoolGen, ArrayType).</action>
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="nbauma109, Gary Gregory">Typo in SimpleElementValue error message #161.</action>
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Fix code duplication in org.apache.bcel.verifier.structurals.ExceptionHandlers.ExceptionHandlers(MethodGen).</action>
@@ -95,6 +97,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.ConstantInvokeDynamic.ConstantInvokeDynamic(DataInput).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.util.ClassPath hashCode() and equals() don't match.</action>
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">org.apache.bcel.classfile.StackMapType constructors now throw ClassFormatException on invalid input.</action>
+      <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Code coverage and bug fixes for bcelifier #171.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugin from 4.7.2.2 to 4.7.3.0 #167.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jmh.version from 1.35 to 1.36 #170.</action>
