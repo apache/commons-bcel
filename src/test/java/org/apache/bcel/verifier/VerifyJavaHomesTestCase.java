@@ -32,7 +32,7 @@ public class VerifyJavaHomesTestCase extends AbstractVerifierTestCase {
 
     /**
      * Eventually runs out of memory? Super now calls VerifierFactory.clear();
-     * 
+     *
      * @param name
      * @throws ClassNotFoundException
      */

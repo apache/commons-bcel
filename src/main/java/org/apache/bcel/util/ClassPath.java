@@ -580,7 +580,7 @@ public class ClassPath implements Closeable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -590,7 +590,7 @@ public class ClassPath implements Closeable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ClassPath other = (ClassPath) obj;
+        final ClassPath other = (ClassPath) obj;
         return Objects.equals(classPathString, other.classPathString);
     }
 
@@ -697,6 +697,7 @@ public class ClassPath implements Closeable {
         try {
             final java.lang.ClassLoader classLoader = getClass().getClassLoader();
             @SuppressWarnings("resource") // closed by caller
+            final
             InputStream inputStream = classLoader == null ? null : classLoader.getResourceAsStream(name + suffix);
             if (inputStream != null) {
                 return inputStream;

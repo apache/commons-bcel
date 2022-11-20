@@ -77,7 +77,7 @@ public class JDKClassDumpTestCase {
     public void testPerformance(final Path path) throws Exception {
         assertDoesNotThrow(() -> testJar(path));
     }
-    
+
     @Test
     public void testPerformanceJmod() throws Exception {
         JavaHome.streamModulePath().forEach(path -> assertDoesNotThrow(() -> testJar(path)));

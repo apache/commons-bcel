@@ -110,17 +110,17 @@ public class VerifierTestCase {
     public void testArrayUtils() throws ClassNotFoundException {
         testNestHostWithJavaVersion("org.apache.commons.lang.ArrayUtils");
     }
-    
+
     @Test
     public void testCollection() throws ClassNotFoundException {
         testDefaultMethodValidation("java.util.Collection");
     }
-    
+
     @Test
     public void testCommonsLang1() throws IOException, URISyntaxException, ClassNotFoundException {
         testJarFile(getJarFile(org.apache.commons.lang.StringUtils.class), "ArrayUtils", "SerializationUtils");
     }
-    
+
     @Test
     public void testDefinitionImpl() throws ClassNotFoundException {
         testNestHostWithJavaVersion("com.ibm.wsdl.DefinitionImpl");
