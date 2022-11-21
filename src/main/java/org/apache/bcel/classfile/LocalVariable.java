@@ -21,6 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Constants;
+import org.apache.bcel.util.Args;
 
 /**
  * This class represents a local variable within a method. It contains its scope, name, signature and index on the
@@ -46,7 +47,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
                         * Variable is index'th local variable on this method's frame.
                         */
     private ConstantPool constantPool;
-    private int origIndex; // never changes; used to match up with LocalVariableTypeTable entries
+    private final int origIndex; // never changes; used to match up with LocalVariableTypeTable entries
 
     /**
      * Constructs object from file stream.
@@ -67,13 +68,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @param constantPool Array of constants
      */
     public LocalVariable(final int startPc, final int length, final int nameIndex, final int signatureIndex, final int index, final ConstantPool constantPool) {
-        this.startPc = startPc;
-        this.length = length;
-        this.nameIndex = nameIndex;
-        this.signatureIndex = signatureIndex;
-        this.index = index;
-        this.constantPool = constantPool;
-        this.origIndex = index;
+        this(startPc, length, nameIndex, signatureIndex, index, constantPool, index);
     }
 
     /**
@@ -87,13 +82,13 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      */
     public LocalVariable(final int startPc, final int length, final int nameIndex, final int signatureIndex, final int index, final ConstantPool constantPool,
         final int origIndex) {
-        this.startPc = startPc;
-        this.length = length;
-        this.nameIndex = nameIndex;
-        this.signatureIndex = signatureIndex;
-        this.index = index;
+        this.startPc = Args.requireU2(startPc, "startPc");
+        this.length = Args.requireU2(length, "length");
+        this.nameIndex = Args.requireU2(nameIndex, "nameIndex");
+        this.signatureIndex = Args.requireU2(signatureIndex, "signatureIndex");
+        this.index = Args.requireU2(index, "index");
+        this.origIndex = Args.requireU2(origIndex, "origIndex");
         this.constantPool = constantPool;
-        this.origIndex = origIndex;
     }
 
     /**
@@ -105,7 +100,6 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     public LocalVariable(final LocalVariable localVariable) {
         this(localVariable.getStartPC(), localVariable.getLength(), localVariable.getNameIndex(), localVariable.getSignatureIndex(), localVariable.getIndex(),
             localVariable.getConstantPool());
-        this.origIndex = localVariable.getOrigIndex();
     }
 
     /**
