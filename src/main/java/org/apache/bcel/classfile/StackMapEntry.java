@@ -30,6 +30,17 @@ import org.apache.bcel.Const;
  *
  * See also https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.4
  *
+ * <pre>
+ * union stack_map_frame {
+ *   same_frame;
+ *   same_locals_1_stack_item_frame;
+ *   same_locals_1_stack_item_frame_extended;
+ *   chop_frame;
+ *   same_frame_extended;
+ *   append_frame;
+ *   full_frame;
+ * }
+ * </pre>
  * @see StackMap
  * @see StackMapType
  */
