@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -62,6 +63,7 @@ public final class ModulePackages extends Attribute {
     public ModulePackages(final int nameIndex, final int length, final int[] packageIndexTable, final ConstantPool constantPool) {
         super(Const.ATTR_MODULE_PACKAGES, nameIndex, length, constantPool);
         this.packageIndexTable = packageIndexTable != null ? packageIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
+        Args.requireU2(this.packageIndexTable.length, "packageIndexTable.length");
     }
 
     /**
