@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class is derived from <em>Attribute</em> and denotes that this class is an Inner class of another. to the source
@@ -75,6 +76,7 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     public InnerClasses(final int nameIndex, final int length, final InnerClass[] innerClasses, final ConstantPool constantPool) {
         super(Const.ATTR_INNER_CLASSES, nameIndex, length, constantPool);
         this.innerClasses = innerClasses != null ? innerClasses : EMPTY_INNER_CLASSE_ARRAY;
+        Args.requireU2(this.innerClasses.length, "innerClasses.length");
     }
 
     /**
