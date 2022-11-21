@@ -29,6 +29,15 @@ import org.apache.bcel.Const;
  * <a href="http://java.sun.com/products/cldc/">KVM</a> and contained within the Code attribute of a method. See CLDC
  * specification �5.3.1.2
  *
+ * <pre>
+ * StackMapTable_attribute {
+ *   u2              attribute_name_index;
+ *   u4              attribute_length;
+ *   u2              number_of_entries;
+ *   stack_map_frame entries[number_of_entries];
+ * }
+ * </pre>
+ *
  * @see Code
  * @see StackMapEntry
  * @see StackMapType
