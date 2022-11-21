@@ -54,6 +54,20 @@ public class Args {
     }
 
     /**
+     * Requires a u1 value.
+     *
+     * @param value   The value to test.
+     * @param message The message prefix
+     * @return The value to test.
+     */
+    public static int requireU1(final int value, final String message) {
+        if (value < 0 || value > Const.MAX_BYTE) {
+            throw new ClassFormatException(String.format("%s [Value out of range (0 - %,d) for type u1: %,d]", message, Const.MAX_BYTE, value));
+        }
+        return value;
+    }
+
+    /**
      * Requires a u2 value of at least {@code min} and not above {@code max}.
      *
      * @param value   The value to test.
@@ -96,5 +110,19 @@ public class Args {
      */
     public static int requireU2(final int value, final String message) {
         return requireU2(value, 0, message);
+    }
+
+    /**
+     * Requires a u4 value.
+     *
+     * @param value   The value to test.
+     * @param message The message prefix
+     * @return The value to test.
+     */
+    public static int requireU4(final int value, final String message) {
+        if (value < 0) {
+            throw new ClassFormatException(String.format("%s [Value out of range (0 - %,d) for type u4: %,d]", message, Integer.MAX_VALUE, value));
+        }
+        return value;
     }
 }
