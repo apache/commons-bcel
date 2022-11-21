@@ -125,8 +125,8 @@ public final class Code extends Attribute {
     public Code(final int nameIndex, final int length, final int maxStack, final int maxLocals, final byte[] code, final CodeException[] exceptionTable,
         final Attribute[] attributes, final ConstantPool constantPool) {
         super(Const.ATTR_CODE, nameIndex, length, constantPool);
-        this.maxStack = maxStack;
-        this.maxLocals = maxLocals;
+        this.maxStack = Args.requireU2(maxStack, "maxStack");
+        this.maxLocals = Args.requireU2(maxLocals, "maxLocals");
         this.code = code != null ? code : ArrayUtils.EMPTY_BYTE_ARRAY;
         this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_CODE_EXCEPTION_ARRAY;
         this.attributes = attributes != null ? attributes : EMPTY_ARRAY;
