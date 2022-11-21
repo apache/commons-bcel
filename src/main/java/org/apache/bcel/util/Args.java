@@ -121,7 +121,7 @@ public class Args {
      */
     public static int requireU4(final int value, final String message) {
         if (value < 0) {
-            throw new ClassFormatException(String.format("%s [Value out of range (0 - %,d) for type u4: %,d]", message, Integer.MAX_VALUE, value));
+            throw new ClassFormatException(String.format("%s [Value out of range (0 - %,d) for type u4: %,d]", message, Integer.MAX_VALUE, value & 0xFFFFFFFFL));
         }
         return value;
     }
