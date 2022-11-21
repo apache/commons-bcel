@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class is derived from <em>Attribute</em> and indicates the main class of a module. There may be at most one
@@ -55,7 +56,7 @@ public final class ModuleMainClass extends Attribute {
      */
     public ModuleMainClass(final int nameIndex, final int length, final int mainClassIndex, final ConstantPool constantPool) {
         super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
-        this.mainClassIndex = mainClassIndex;
+        this.mainClassIndex = Args.requireU2(mainClassIndex, "mainClassIndex");
     }
 
     /**
