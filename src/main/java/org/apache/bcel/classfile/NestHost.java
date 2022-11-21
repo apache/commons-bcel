@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class is derived from <em>Attribute</em> and records the nest host of the nest to which the current class or
@@ -55,7 +56,7 @@ public final class NestHost extends Attribute {
      */
     public NestHost(final int nameIndex, final int length, final int hostClassIndex, final ConstantPool constantPool) {
         super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
-        this.hostClassIndex = hostClassIndex;
+        this.hostClassIndex = Args.requireU2(hostClassIndex, "hostClassIndex");
     }
 
     /**
