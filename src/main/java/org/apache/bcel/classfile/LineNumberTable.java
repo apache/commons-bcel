@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class represents a table of line numbers for debugging purposes. This attribute is used by the <em>Code</em>
@@ -66,7 +67,8 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
      */
     public LineNumberTable(final int nameIndex, final int length, final LineNumber[] lineNumberTable, final ConstantPool constantPool) {
         super(Const.ATTR_LINE_NUMBER_TABLE, nameIndex, length, constantPool);
-        this.lineNumberTable = lineNumberTable;
+        this.lineNumberTable = lineNumberTable != null ? lineNumberTable : LineNumber.EMPTY_ARRAY;
+        Args.requireU2(this.lineNumberTable.length, "lineNumberTable.length");
     }
 
     /*

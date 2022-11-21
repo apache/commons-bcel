@@ -20,6 +20,8 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.util.Args;
+
 /**
  * This class represents a (PC offset, line number) pair, i.e., a line number in the source that corresponds to a
  * relative address in the byte code. This is used for debugging purposes.
@@ -28,11 +30,13 @@ import java.io.IOException;
  */
 public final class LineNumber implements Cloneable, Node {
 
+    static final LineNumber[] EMPTY_ARRAY = {};
+
     /** Program Counter (PC) corresponds to line */
-    private short startPc;
+    private int startPc;
 
     /** number in source file */
-    private short lineNumber;
+    private int lineNumber;
 
     /**
      * Construct object from file stream.
@@ -49,8 +53,8 @@ public final class LineNumber implements Cloneable, Node {
      * @param lineNumber line number in source file
      */
     public LineNumber(final int startPc, final int lineNumber) {
-        this.startPc = (short) startPc;
-        this.lineNumber = (short) lineNumber;
+        this.startPc = Args.requireU2(startPc, "startPc");
+        this.lineNumber = Args.requireU2(lineNumber, "lineNumber");
     }
 
     /**
