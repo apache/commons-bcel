@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 // The new table is used when generic types are about...
 
@@ -72,9 +73,10 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
         }
     }
 
-    public LocalVariableTypeTable(final int nameIndex, final int length, final LocalVariable[] localVariableTable, final ConstantPool constantPool) {
+    public LocalVariableTypeTable(final int nameIndex, final int length, final LocalVariable[] localVariableTypeTable, final ConstantPool constantPool) {
         super(Const.ATTR_LOCAL_VARIABLE_TYPE_TABLE, nameIndex, length, constantPool);
-        this.localVariableTypeTable = localVariableTable;
+        this.localVariableTypeTable = localVariableTypeTable != null ? localVariableTypeTable : LocalVariable.EMPTY_ARRAY;
+        Args.requireU2(this.localVariableTypeTable.length, "localVariableTypeTable.length");
     }
 
     public LocalVariableTypeTable(final LocalVariableTypeTable c) {
