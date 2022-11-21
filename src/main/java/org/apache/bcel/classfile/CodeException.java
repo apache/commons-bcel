@@ -35,25 +35,34 @@ public final class CodeException implements Cloneable, Node, Constants {
      * Empty array.
      */
     static final CodeException[] EMPTY_CODE_EXCEPTION_ARRAY = {};
-    private int startPc; // Range in the code the exception handler is
-    private int endPc; // active. startPc is inclusive, endPc exclusive
-    private int handlerPc; /*
-                            * Starting address of exception handler, i.e., an offset from start of code.
-                            */
 
-    private int catchType; /*
-                            * If this is zero the handler catches any exception, otherwise it points to the exception class which is to be caught.
-                            */
+    /** Range in the code the exception handler. */
+    private int startPc;
+
+    /** active. startPc is inclusive, endPc exclusive. */
+    private int endPc;
 
     /**
-     * Initialize from another object.
+     * Starting address of exception handler, i.e., an offset from start of code.
+     */
+    private int handlerPc;
+
+    /*
+     * If this is zero the handler catches any exception, otherwise it points to the exception class which is to be caught.
+     */
+    private int catchType;
+
+    /**
+     * Constructs a new instance from another instance.
+     *
+     * @param c Source for copying.
      */
     public CodeException(final CodeException c) {
         this(c.getStartPC(), c.getEndPC(), c.getHandlerPC(), c.getCatchType());
     }
 
     /**
-     * Construct object from file stream.
+     * Constructs a new instance from a DataInput.
      *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
@@ -63,6 +72,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * Constructs a new instance.
+     *
      * @param startPc Range in the code the exception handler is active, startPc is inclusive while
      * @param endPc is exclusive
      * @param handlerPc Starting address of exception handler, i.e., an offset from start of code.
@@ -100,7 +111,7 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
-     * Dump code exception to file stream in binary format.
+     * Dumps code exception to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.
@@ -181,6 +192,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * @param cp constant pool source.
+     * @param verbose Output more if true.
      * @return String representation.
      */
     public String toString(final ConstantPool cp, final boolean verbose) {
