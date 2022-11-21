@@ -129,6 +129,7 @@ public final class Code extends Attribute {
         this.maxLocals = Args.requireU2(maxLocals, "maxLocals");
         this.code = code != null ? code : ArrayUtils.EMPTY_BYTE_ARRAY;
         this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_CODE_EXCEPTION_ARRAY;
+        Args.requireU2(this.exceptionTable.length, "exceptionTable.length");
         this.attributes = attributes != null ? attributes : EMPTY_ARRAY;
         super.setLength(calculateLength()); // Adjust length
     }
