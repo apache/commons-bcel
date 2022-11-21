@@ -37,6 +37,8 @@ import org.apache.bcel.util.Args;
  */
 public final class LocalVariable implements Cloneable, Node, Constants {
 
+    static final LocalVariable[] EMPTY_ARRAY = {};
+
     /** Range in which the variable is valid. */
     private int startPc;
 

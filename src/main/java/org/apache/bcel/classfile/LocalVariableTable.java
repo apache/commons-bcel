@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class represents colection of local variables in a method. This attribute is contained in the <em>Code</em>
@@ -62,7 +63,8 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
      */
     public LocalVariableTable(final int nameIndex, final int length, final LocalVariable[] localVariableTable, final ConstantPool constantPool) {
         super(Const.ATTR_LOCAL_VARIABLE_TABLE, nameIndex, length, constantPool);
-        this.localVariableTable = localVariableTable;
+        this.localVariableTable = localVariableTable != null ? localVariableTable : LocalVariable.EMPTY_ARRAY;
+        Args.requireU2(this.localVariableTable.length, "localVariableTable.length");
     }
 
     /**
