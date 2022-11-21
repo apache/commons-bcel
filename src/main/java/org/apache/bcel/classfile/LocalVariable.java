@@ -37,17 +37,28 @@ import org.apache.bcel.util.Args;
  */
 public final class LocalVariable implements Cloneable, Node, Constants {
 
-    private int startPc; // Range in which the variable is valid
+    /** Range in which the variable is valid. */
+    private int startPc;
+
     private int length;
-    private int nameIndex; // Index in constant pool of variable name
-    // Technically, a decscriptor_index for a local variable table entry
-    // and a signatureIndex for a local variable type table entry.
-    private int signatureIndex; // Index of variable signature
-    private int index; /*
-                        * Variable is index'th local variable on this method's frame.
-                        */
+
+    /** Index in constant pool of variable name. */
+    private int nameIndex;
+
+    /**
+     * Technically, a decscriptor_index for a local variable table entry and a signatureIndex for a local variable type table entry. Index of variable signature
+     */
+    private int signatureIndex;
+
+    /*
+     * Variable is index'th local variable on this method's frame.
+     */
+    private int index;
+
     private ConstantPool constantPool;
-    private final int origIndex; // never changes; used to match up with LocalVariableTypeTable entries
+
+    /** Never changes; used to match up with LocalVariableTypeTable entries. */
+    private final int origIndex;
 
     /**
      * Constructs object from file stream.
