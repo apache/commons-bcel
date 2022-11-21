@@ -33,6 +33,25 @@ import org.apache.commons.lang3.ArrayUtils;
  * This attribute has attributes itself, namely <em>LineNumberTable</em> which is used for debugging purposes and
  * <em>LocalVariableTable</em> which contains information about the local variables.
  *
+ * <pre>
+ * Code_attribute {
+ *   u2 attribute_name_index;
+ *   u4 attribute_length;
+ *   u2 max_stack;
+ *   u2 max_locals;
+ *   u4 code_length;
+ *   u1 code[code_length];
+ *   u2 exception_table_length;
+ *   {
+ *     u2 start_pc;
+ *     u2 end_pc;
+ *     u2 handler_pc;
+ *     u2 catch_type;
+ *   } exception_table[exception_table_length];
+ *   u2 attributes_count;
+ *   attribute_info attributes[attributes_count];
+ * }
+ * </pre>
  * @see Attribute
  * @see CodeException
  * @see LineNumberTable
@@ -66,7 +85,7 @@ public final class Code extends Attribute {
     Code(final int nameIndex, final int length, final DataInput file, final ConstantPool constantPool) throws IOException {
         // Initialize with some default values which will be overwritten later
         this(nameIndex, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null, constantPool);
-        final int codeLength = Args.requireU2(file.readInt(), 1, "Code length attribute");
+        final int codeLength = Args.requireU4(file.readInt(), 1, "Code length attribute");
         code = new byte[codeLength]; // Read byte code
         file.readFully(code);
         /*
