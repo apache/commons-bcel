@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -80,6 +81,7 @@ public final class ExceptionTable extends Attribute {
     public ExceptionTable(final int nameIndex, final int length, final int[] exceptionIndexTable, final ConstantPool constantPool) {
         super(Const.ATTR_EXCEPTIONS, nameIndex, length, constantPool);
         this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
+        Args.requireU2(this.exceptionIndexTable.length, "exceptionIndexTable.length");
     }
 
     /**
