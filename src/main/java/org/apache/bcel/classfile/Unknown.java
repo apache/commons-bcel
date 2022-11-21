@@ -66,6 +66,14 @@ public final class Unknown extends Attribute {
         if (length > 0) {
             bytes = new byte[length];
             input.readFully(bytes);
+        } else if (length < 0) {
+            // Length is defined in the JVM specification as an unsigned 4 byte
+            // integer but is read as a signed integer. This is not an issue as
+            // the JRE API consistently uses byte[] or ByteBuffer for classes.
+            // Therefore treat any negative number here as a format error.
+            throw new ClassFormatException(String.format(
+                    "Invalid length %,d for Unknown attribute. Must be greater than or equal to zero and less than %,d",
+                    length & 0xFFFFFFFFL, Integer.MAX_VALUE));
         }
     }
 
