@@ -21,6 +21,8 @@ import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.Const;
+
 /**
  * @since 6.0
  */
@@ -44,6 +46,9 @@ public abstract class ElementValue {
         return readElementValue(input, cpool, 0);
     }
 
+    /**
+     * @since 6.7.0
+     */
     public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, int arrayNesting)
             throws IOException {
         final byte type = input.readByte();
@@ -71,9 +76,9 @@ public abstract class ElementValue {
 
         case ARRAY:
             arrayNesting++;
-            if (arrayNesting > 255) {
+            if (arrayNesting > Const.MAX_ARRAY_DIMENSIONS) {
                 // JVM spec 4.4.1
-                throw new ClassFormatException("Arrays are only valid if they represent 255 or fewer dimensions.");
+                throw new ClassFormatException(String.format("Arrays are only valid if they represent %,d or fewer dimensions.", Const.MAX_ARRAY_DIMENSIONS));
             }
             final int numArrayVals = input.readUnsignedShort();
             final ElementValue[] evalues = new ElementValue[numArrayVals];
