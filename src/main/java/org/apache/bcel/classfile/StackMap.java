@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class represents a stack map attribute used for preverification of Java classes for the
@@ -73,9 +74,10 @@ public final class StackMap extends Attribute {
      *
      * @param constantPool Array of constants
      */
-    public StackMap(final int nameIndex, final int length, final StackMapEntry[] map, final ConstantPool constantPool) {
+    public StackMap(final int nameIndex, final int length, final StackMapEntry[] table, final ConstantPool constantPool) {
         super(Const.ATTR_STACK_MAP, nameIndex, length, constantPool);
-        this.table = map;
+        this.table = table != null ? table : StackMapEntry.EMPTY_ARRAY;
+        Args.requireU2(this.table.length, "table.length");
     }
 
     /**
@@ -117,7 +119,7 @@ public final class StackMap extends Attribute {
     }
 
     public int getMapLength() {
-        return table == null ? 0 : table.length;
+        return table.length;
     }
 
     /**
@@ -131,7 +133,7 @@ public final class StackMap extends Attribute {
      * @param table Array of stack map entries
      */
     public void setStackMap(final StackMapEntry[] table) {
-        this.table = table;
+        this.table = table != null ? table : StackMapEntry.EMPTY_ARRAY;
         int len = 2; // Length of 'number_of_entries' field prior to the array of stack maps
         for (final StackMapEntry element : table) {
             len += element.getMapEntrySize();

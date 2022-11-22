@@ -31,6 +31,8 @@ import org.apache.bcel.Const;
  */
 public final class StackMapType implements Cloneable {
 
+    static final StackMapType[] EMPTY_ARRAY = {};
+
     private byte type;
     private int index = -1; // Index to CONSTANT_Class or offset
     private ConstantPool constantPool;

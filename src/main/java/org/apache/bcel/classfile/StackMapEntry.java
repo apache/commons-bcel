@@ -46,10 +46,7 @@ import org.apache.bcel.Const;
  */
 public final class StackMapEntry implements Node, Cloneable {
 
-    /**
-     * Empty array.
-     */
-    private static final StackMapType[] EMPTY_STACK_MAP_TYPE_ARRAY = {};
+    static final StackMapEntry[] EMPTY_ARRAY = {};
 
     private int frameType;
     private int byteCodeOffset;
@@ -118,8 +115,8 @@ public final class StackMapEntry implements Node, Cloneable {
     public StackMapEntry(final int byteCodeOffset, final int numberOfLocals, final StackMapType[] typesOfLocals, final int numberOfStackItems,
         final StackMapType[] typesOfStackItems, final ConstantPool constantPool) {
         this.byteCodeOffset = byteCodeOffset;
-        this.typesOfLocals = typesOfLocals != null ? typesOfLocals : EMPTY_STACK_MAP_TYPE_ARRAY;
-        this.typesOfStackItems = typesOfStackItems != null ? typesOfStackItems : EMPTY_STACK_MAP_TYPE_ARRAY;
+        this.typesOfLocals = typesOfLocals != null ? typesOfLocals : StackMapType.EMPTY_ARRAY;
+        this.typesOfStackItems = typesOfStackItems != null ? typesOfStackItems : StackMapType.EMPTY_ARRAY;
         this.constantPool = constantPool;
         if (numberOfLocals < 0) {
             throw new IllegalArgumentException("numberOfLocals < 0");
@@ -142,8 +139,8 @@ public final class StackMapEntry implements Node, Cloneable {
         final ConstantPool constantPool) {
         this.frameType = tag;
         this.byteCodeOffset = byteCodeOffset;
-        this.typesOfLocals = typesOfLocals != null ? typesOfLocals : EMPTY_STACK_MAP_TYPE_ARRAY;
-        this.typesOfStackItems = typesOfStackItems != null ? typesOfStackItems : EMPTY_STACK_MAP_TYPE_ARRAY;
+        this.typesOfLocals = typesOfLocals != null ? typesOfLocals : StackMapType.EMPTY_ARRAY;
+        this.typesOfStackItems = typesOfStackItems != null ? typesOfStackItems : StackMapType.EMPTY_ARRAY;
         this.constantPool = constantPool;
     }
 
@@ -350,11 +347,11 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     public void setTypesOfLocals(final StackMapType[] types) {
-        typesOfLocals = types != null ? types : EMPTY_STACK_MAP_TYPE_ARRAY;
+        typesOfLocals = types != null ? types : StackMapType.EMPTY_ARRAY;
     }
 
     public void setTypesOfStackItems(final StackMapType[] types) {
-        typesOfStackItems = types != null ? types : EMPTY_STACK_MAP_TYPE_ARRAY;
+        typesOfStackItems = types != null ? types : StackMapType.EMPTY_ARRAY;
     }
 
     /**
