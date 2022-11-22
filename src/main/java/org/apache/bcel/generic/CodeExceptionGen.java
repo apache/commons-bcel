@@ -79,7 +79,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     /**
      * Get CodeException object.<BR>
      *
-     * This relies on that the instruction list has already been dumped to byte code or that the `setPositions' methods
+     * This relies on that the instruction list has already been dumped to byte code or that the 'setPositions' methods
      * has been called for the instruction list.
      *
      * @param cp constant pool

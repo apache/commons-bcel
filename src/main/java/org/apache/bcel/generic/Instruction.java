@@ -447,8 +447,8 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Use with caution, since `BranchInstruction's have a `target' reference which is not copied correctly (only basic
-     * types are). This also applies for `Select' instructions with their multiple branch targets.
+     * Use with caution, since 'BranchInstruction's have a 'target' reference which is not copied correctly (only basic
+     * types are). This also applies for 'Select' instructions with their multiple branch targets.
      *
      * @see BranchInstruction
      * @return (shallow) copy of an instruction

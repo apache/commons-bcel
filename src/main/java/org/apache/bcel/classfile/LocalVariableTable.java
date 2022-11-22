@@ -56,7 +56,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     }
 
     /**
-     * @param nameIndex Index in constant pool to `LocalVariableTable'
+     * @param nameIndex Index in constant pool to 'LocalVariableTable'
      * @param length Content length in bytes
      * @param localVariableTable Table of local variables
      * @param constantPool Array of constants

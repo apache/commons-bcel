@@ -98,7 +98,7 @@ public final class Code extends Attribute {
             exceptionTable[i] = new CodeException(file);
         }
         /*
-         * Read all attributes, currently `LineNumberTable' and `LocalVariableTable'
+         * Read all attributes, currently 'LineNumberTable' and 'LocalVariableTable'
          */
         final int attributesCount = file.readUnsignedShort();
         attributes = new Attribute[attributesCount];

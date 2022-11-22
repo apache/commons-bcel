@@ -76,7 +76,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * (Match, target) pairs for switch. `Match' and `targets' must have the same length of course.
+     * (Match, target) pairs for switch. 'Match' and 'targets' must have the same length of course.
      *
      * @param match array of matching values
      * @param targets instruction targets
@@ -284,7 +284,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * Set branch target for `i'th case
+     * Set branch target for 'i'th case
      */
     public void setTarget(final int i, final InstructionHandle target) { // TODO could be package-protected?
         notifyTarget(targets[i], target, this);
@@ -325,7 +325,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * position.
      *
      * Called by InstructionList.setPositions when setting the position for every instruction. In the presence of variable
-     * length instructions `setPositions' performs multiple passes over the instruction list to calculate the correct (byte)
+     * length instructions 'setPositions' performs multiple passes over the instruction list to calculate the correct (byte)
      * positions and offsets by calling this function.
      *
      * @param offset additional offset caused by preceding (variable length) instructions

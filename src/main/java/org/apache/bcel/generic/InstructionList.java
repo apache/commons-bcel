@@ -458,8 +458,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Remove instructions from instruction `from' to instruction `to' contained in this list. The user must ensure that
-     * `from' is an instruction before `to', or risk havoc. The corresponding Instruction handles must not be reused!
+     * Remove instructions from instruction 'from' to instruction 'to' contained in this list. The user must ensure that
+     * 'from' is an instruction before 'to', or risk havoc. The corresponding Instruction handles must not be reused!
      *
      * @param from where to start deleting (inclusive)
      * @param to where to end deleting (inclusive)
@@ -486,8 +486,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Remove instructions from instruction `from' to instruction `to' contained in this list. The user must ensure that
-     * `from' is an instruction before `to', or risk havoc. The corresponding Instruction handles must not be reused!
+     * Remove instructions from instruction 'from' to instruction 'to' contained in this list. The user must ensure that
+     * 'from' is an instruction before 'to', or risk havoc. The corresponding Instruction handles must not be reused!
      *
      * @param from where to start deleting (inclusive)
      * @param to where to end deleting (inclusive)
@@ -993,7 +993,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Remove from instruction `prev' to instruction `next' both contained in this list. Throws TargetLostException when one
+     * Remove from instruction 'prev' to instruction 'next' both contained in this list. Throws TargetLostException when one
      * of the removed instruction handles is still being targeted.
      *
      * @param prev where to start deleting (predecessor, exclusive)

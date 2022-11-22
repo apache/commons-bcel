@@ -109,7 +109,7 @@ public abstract class Attribute implements Cloneable, Node {
      */
     public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
-        // Get class name from constant pool via `name_index' indirection
+        // Get class name from constant pool via 'name_index' indirection
         final int nameIndex = dataInput.readUnsignedShort();
         final String name = constantPool.getConstantUtf8(nameIndex).getBytes();
 
@@ -124,7 +124,7 @@ public abstract class Attribute implements Cloneable, Node {
             }
         }
 
-        // Call proper constructor, depending on `tag'
+        // Call proper constructor, depending on 'tag'
         switch (tag) {
         case Const.ATTR_UNKNOWN:
             final Object r = READERS.get(name);

@@ -37,7 +37,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     private boolean liveToEnd;
 
     /**
-     * Generate a local variable that with index `index'. Note that double and long variables need two indexs. Index indices
+     * Generate a local variable that with index 'index'. Note that double and long variables need two indexs. Index indices
      * have to be provided by the user.
      *
      * @param index index of local variable
@@ -60,7 +60,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
     /**
-     * Generates a local variable that with index `index'. Note that double and long variables need two indexs. Index
+     * Generates a local variable that with index 'index'. Note that double and long variables need two indexs. Index
      * indices have to be provided by the user.
      *
      * @param index index of local variable
@@ -128,7 +128,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * Gets LocalVariable object.
      *
-     * This relies on that the instruction list has already been dumped to byte code or that the `setPositions' methods
+     * This relies on that the instruction list has already been dumped to byte code or that the 'setPositions' methods
      * has been called for the instruction list.
      *
      * Note that due to the conversion from byte code offset to InstructionHandle, it is impossible to tell the difference

@@ -290,14 +290,14 @@ public class InstructionFinder {
      *
      * @param pattern the instruction pattern to search for, case is ignored
      * @param constraint constraints to be checked on matching code
-     * @return instruction handle or `null' if the match failed
+     * @return instruction handle or 'null' if the match failed
      */
     public final Iterator<InstructionHandle[]> search(final String pattern, final CodeConstraint constraint) {
         return search(pattern, il.getStart(), constraint);
     }
 
     /**
-     * Start search beginning from `from'.
+     * Start search beginning from 'from'.
      *
      * @param pattern the instruction pattern to search for, where case is ignored
      * @param from where to start the search in the instruction list

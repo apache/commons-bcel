@@ -82,7 +82,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     };
 
     /*
-     * Print debug information depending on `JavaClass.debug'
+     * Print debug information depending on 'JavaClass.debug'
      */
     static void Debug(final String str) {
         if (debug) {
@@ -215,8 +215,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             }
         }
         /*
-         * According to the specification the following entries must be of type `ConstantClass' but we check that anyway via the
-         * `ConstPool.getConstant' method.
+         * According to the specification the following entries must be of type 'ConstantClass' but we check that anyway via the
+         * 'ConstPool.getConstant' method.
          */
         className = constantPool.getConstantString(classNameIndex, Const.CONSTANT_Class);
         className = Utility.compactClassName(className, false);

@@ -68,16 +68,16 @@ public class PatchClass {
                     c = (ConstantUtf8) constantPool[i]; // Get the string
                     str = c.getBytes();
 
-                    if ((index = str.indexOf(old)) != -1) { // `old' found in str
+                    if ((index = str.indexOf(old)) != -1) { // 'old' found in str
                         buf = new StringBuilder(); // target buffer
                         oldIndex = 0; // String start offset
 
                         // While we have something to replace
                         while ((index = str.indexOf(old, oldIndex)) != -1) {
                             buf.append(str.substring(oldIndex, index)); // append prefix
-                            buf.append(replacement); // append `replacement'
+                            buf.append(replacement); // append 'replacement'
 
-                            oldIndex = index + old.length(); // Skip `old'.length chars
+                            oldIndex = index + old.length(); // Skip 'old'.length chars
                         }
 
                         buf.append(str.substring(oldIndex)); // append rest of string

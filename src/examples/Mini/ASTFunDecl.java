@@ -165,7 +165,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
 
     private int line, column;
 
-    private boolean is_simple; // true, if simple expression like `12 + f(a)'
+    private boolean is_simple; // true, if simple expression like '12 + f(a)'
 
     private boolean is_recursive; // Not used yet, TODO
 
@@ -200,7 +200,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
         final String fname = name.getName();
         final InstructionList il = new InstructionList();
 
-        Type[] args = {new ArrayType(Type.STRING, 1)}; // default for `main'
+        Type[] args = {new ArrayType(Type.STRING, 1)}; // default for 'main'
         String[] arg_names = {"$argv"};
 
         if (fname.equals("main")) {
@@ -466,7 +466,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
 
         /*
          * Update entry of this function, i.e. set argument references. The entry is already in there by garantuee, but may be
-         * of wrong type, i.e. the user defined a function `TRUE', e.g. and `TRUE' is of type `Variable'.
+         * of wrong type, i.e. the user defined a function 'TRUE', e.g. and 'TRUE' is of type 'Variable'.
          */
         try {
             final Function fun = (Function) env.get(name.getName());

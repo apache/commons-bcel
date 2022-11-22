@@ -24,8 +24,8 @@ import java.util.Vector;
  * That environment contains all function definitions and identifiers. Hash keys are Strings (identifiers), which are
  * mapped to a table index.
  *
- * The table consists of `SIZE' fields which have `SLOTS' subfields. Thus the maximum number of storable items is
- * `SLOTS' * `SIZE'.
+ * The table consists of 'SIZE' fields which have 'SLOTS' subfields. Thus the maximum number of storable items is
+ * 'SLOTS' * 'SIZE'.
  */
 public class Environment implements Cloneable {
     private static final int SIZE = 127; // Prime number large enough for most cases

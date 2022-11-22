@@ -74,8 +74,8 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
     /**
-     * Add an attribute to this method. Currently, the JVM knows about the `Code', `ConstantValue', `Synthetic' and
-     * `Exceptions' attributes. Other attributes will be ignored by the JVM but do no harm.
+     * Add an attribute to this method. Currently, the JVM knows about the 'Code', 'ConstantValue', 'Synthetic' and
+     * 'Exceptions' attributes. Other attributes will be ignored by the JVM but do no harm.
      *
      * @param a attribute to be added
      */

@@ -40,9 +40,9 @@ import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.Utility;
 
 /**
- * This class is used to build up a constant pool. The user adds constants via `addXXX' methods, `addString',
- * `addClass', etc.. These methods return an index into the constant pool. Finally, `getFinalConstantPool()' returns the
- * constant pool built up. Intermediate versions of the constant pool can be obtained with `getConstantPool()'. A
+ * This class is used to build up a constant pool. The user adds constants via 'addXXX' methods, 'addString',
+ * 'addClass', etc.. These methods return an index into the constant pool. Finally, 'getFinalConstantPool()' returns the
+ * constant pool built up. Intermediate versions of the constant pool can be obtained with 'getConstantPool()'. A
  * constant pool has capacity for Constants.MAX_SHORT entries. Note that the first (0) is used by the JVM and that
  * Double and Long constants need two slots.
  *
@@ -581,7 +581,7 @@ public class ConstantPoolGen {
     }
 
     /**
-     * Look for ConstantClass in ConstantPool named `str'.
+     * Look for ConstantClass in ConstantPool named 'str'.
      *
      * @param str String to search for
      * @return index on success, -1 otherwise
@@ -720,7 +720,7 @@ public class ConstantPoolGen {
     }
 
     /**
-     * Look for ConstantString in ConstantPool containing String `str'.
+     * Look for ConstantString in ConstantPool containing String 'str'.
      *
      * @param str String to search for
      * @return index on success, -1 otherwise
