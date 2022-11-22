@@ -77,7 +77,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @param length ... is valid
      * @param nameIndex Index in constant pool of variable name
      * @param signatureIndex Index of variable's signature
-     * @param index Variable is `index'th local variable on the method's frame
+     * @param index Variable is 'index'th local variable on the method's frame
      * @param constantPool Array of constants
      */
     public LocalVariable(final int startPc, final int length, final int nameIndex, final int signatureIndex, final int index, final ConstantPool constantPool) {
@@ -89,9 +89,9 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * @param length ... is valid
      * @param nameIndex Index in constant pool of variable name
      * @param signatureIndex Index of variable's signature
-     * @param index Variable is `index'th local variable on the method's frame
+     * @param index Variable is 'index'th local variable on the method's frame
      * @param constantPool Array of constants
-     * @param origIndex Variable is `index'th local variable on the method's frame prior to any changes
+     * @param origIndex Variable is 'index'th local variable on the method's frame prior to any changes
      */
     public LocalVariable(final int startPc, final int length, final int nameIndex, final int signatureIndex, final int index, final ConstantPool constantPool,
         final int origIndex) {

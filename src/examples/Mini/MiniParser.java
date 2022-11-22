@@ -993,7 +993,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
     }
 
     /*
-     * A program consists of a number of function declarations with a distinguished function `main' that starts the program.
+     * A program consists of a number of function declarations with a distinguished function 'main' that starts the program.
      */
     static public void Program() throws ParseException {
         /* @bgen(jjtree) Program */

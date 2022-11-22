@@ -436,7 +436,7 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * Create reference to `this'
+     * Create reference to 'this'
      */
     public static Instruction createThis() {
         return new ALOAD(0);

@@ -24,6 +24,28 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
+ * The element_value structure is documented at https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.7.16.1
+ *
+ * <pre>
+ * element_value {
+ *    u1 tag;
+ *    union {
+ *        u2 const_value_index;
+ *
+ *        {   u2 type_name_index;
+ *            u2 const_name_index;
+ *        } enum_const_value;
+ *
+ *        u2 class_info_index;
+ *
+ *        annotation annotation_value;
+ *
+ *        {   u2            num_values;
+ *            element_value values[num_values];
+ *        } array_value;
+ *    } value;
+ *}
+ *</pre>
  * @since 6.0
  */
 public abstract class ElementValue {
@@ -42,17 +64,32 @@ public abstract class ElementValue {
     public static final byte PRIMITIVE_SHORT = 'S';
     public static final byte PRIMITIVE_BOOLEAN = 'Z';
 
+    /**
+     * Reads an {@code element_value} as an {@code ElementValue}.
+     *
+     * @param input Raw data input.
+     * @param cpool Constant pool.
+     * @return a new ElementValue.
+     * @throws IOException if an I/O error occurs.
+     */
     public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool) throws IOException {
         return readElementValue(input, cpool, 0);
     }
 
     /**
+     * Reads an {@code element_value} as an {@code ElementValue}.
+     *
+     * @param input Raw data input.
+     * @param cpool Constant pool.
+     * @param arrayNesting level of current array nesting.
+     * @return a new ElementValue.
+     * @throws IOException if an I/O error occurs.
      * @since 6.7.0
      */
     public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, int arrayNesting)
             throws IOException {
-        final byte type = input.readByte();
-        switch (type) {
+        final byte tag = input.readByte();
+        switch (tag) {
         case PRIMITIVE_BYTE:
         case PRIMITIVE_CHAR:
         case PRIMITIVE_DOUBLE:
@@ -62,7 +99,7 @@ public abstract class ElementValue {
         case PRIMITIVE_SHORT:
         case PRIMITIVE_BOOLEAN:
         case STRING:
-            return new SimpleElementValue(type, input.readUnsignedShort(), cpool);
+            return new SimpleElementValue(tag, input.readUnsignedShort(), cpool);
 
         case ENUM_CONSTANT:
             return new EnumElementValue(ENUM_CONSTANT, input.readUnsignedShort(), input.readUnsignedShort(), cpool);
@@ -88,7 +125,7 @@ public abstract class ElementValue {
             return new ArrayElementValue(ARRAY, evalues, cpool);
 
         default:
-            throw new ClassFormatException("Unexpected element value kind in annotation: " + type);
+            throw new ClassFormatException("Unexpected element value tag in annotation: " + tag);
         }
     }
 

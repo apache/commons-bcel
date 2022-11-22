@@ -290,7 +290,7 @@ public class InstructionHandle {
 
     /**
      * Called by InstructionList.setPositions when setting the position for every instruction. In the presence of variable
-     * length instructions `setPositions()' performs multiple passes over the instruction list to calculate the correct
+     * length instructions 'setPositions()' performs multiple passes over the instruction list to calculate the correct
      * (byte) positions and offsets by calling this function.
      *
      * @param offset additional offset caused by preceding (variable length) instructions

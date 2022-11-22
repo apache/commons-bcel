@@ -157,7 +157,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
         il.dispose(); // Dispose instruction handles for better memory utilization
 
         il = new InstructionList();
-        il.append(new ALOAD(0)); // Push `this'
+        il.append(new ALOAD(0)); // Push 'this'
         il.append(new INVOKESPECIAL(cp.addMethodref("java.lang.Object", "<init>", "()V")));
         il.append(new RETURN());
 
@@ -279,7 +279,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
                 if (fun != null) {
                     MiniC.addError(f.getLine(), f.getColumn(), "Redeclaration of " + fun + ".");
                 } else {
-                    env.put(new Function(name, null)); // `args' will be set by FunDecl.traverse()
+                    env.put(new Function(name, null)); // 'args' will be set by FunDecl.traverse()
                 }
 
             }
@@ -288,7 +288,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
             for (int i = 0; i < fun_decls.length; i++) {
                 fun_decls[i] = fun_decls[i].traverse((Environment) env.clone());
 
-                // Look for `main' routine
+                // Look for 'main' routine
                 fname = fun_decls[i].getName().getName();
                 if (fname.equals("main")) {
                     main = (Function) env.get(fname);
@@ -296,7 +296,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
             }
 
             if (main == null) {
-                MiniC.addError(0, 0, "You didn't declare a `main' function.");
+                MiniC.addError(0, 0, "You didn't declare a 'main' function.");
             } else if (main.getNoArgs() != 0) {
                 MiniC.addError(main.getLine(), main.getColumn(), "Main function has too many arguments declared.");
             }

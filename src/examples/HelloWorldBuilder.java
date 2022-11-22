@@ -75,7 +75,7 @@ public class HelloWorldBuilder {
         final ObjectType iStream = new ObjectType("java.io.InputStream");
         final ObjectType pStream = new ObjectType("java.io.PrintStream");
 
-        // Create BufferedReader object and store it in local variable `in'.
+        // Create BufferedReader object and store it in local variable 'in'.
         il.append(factory.createNew("java.io.BufferedReader"));
         il.append(InstructionConst.DUP); // Use predefined constant, i.e. flyweight
         il.append(factory.createNew("java.io.InputStreamReader"));
@@ -86,16 +86,16 @@ public class HelloWorldBuilder {
         il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {iStream}, Const.INVOKESPECIAL));
         il.append(factory.createInvoke("java.io.BufferedReader", "<init>", Type.VOID, new Type[] {new ObjectType("java.io.Reader")}, Const.INVOKESPECIAL));
 
-        // Create local variable `in'
+        // Create local variable 'in'
         LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType("java.io.BufferedReader"), null, null);
         final int in = lg.getIndex();
-        lg.setStart(il.append(new ASTORE(in))); // `i' valid from here
+        lg.setStart(il.append(new ASTORE(in))); // 'i' valid from here
 
-        // Create local variable `name'
+        // Create local variable 'name'
         lg = mg.addLocalVariable("name", Type.STRING, null, null);
         final int name = lg.getIndex();
         il.append(InstructionConst.ACONST_NULL);
-        lg.setStart(il.append(new ASTORE(name))); // `name' valid from here
+        lg.setStart(il.append(new ASTORE(name))); // 'name' valid from here
 
         // try { ...
         final InstructionHandle tryStart = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
