@@ -41,6 +41,11 @@ public abstract class ElementValue {
     public static final byte PRIMITIVE_BOOLEAN = 'Z';
 
     public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool) throws IOException {
+        return readElementValue(input, cpool, 0);
+    }
+
+    public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, int arrayNesting)
+            throws IOException {
         final byte type = input.readByte();
         switch (type) {
         case PRIMITIVE_BYTE:
@@ -65,10 +70,15 @@ public abstract class ElementValue {
             return new AnnotationElementValue(ANNOTATION, AnnotationEntry.read(input, cpool, false), cpool);
 
         case ARRAY:
+            arrayNesting++;
+            if (arrayNesting > 255) {
+                // JVM spec 4.4.1
+                throw new ClassFormatException("Arrays are only valid if they represent 255 or fewer dimensions.");
+            }
             final int numArrayVals = input.readUnsignedShort();
             final ElementValue[] evalues = new ElementValue[numArrayVals];
             for (int j = 0; j < numArrayVals; j++) {
-                evalues[j] = ElementValue.readElementValue(input, cpool);
+                evalues[j] = ElementValue.readElementValue(input, cpool, arrayNesting);
             }
             return new ArrayElementValue(ARRAY, evalues, cpool);
 

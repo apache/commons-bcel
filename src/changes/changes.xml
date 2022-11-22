@@ -104,6 +104,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.InnerClasses constructors now throw ClassFormatException on invalid input.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.LineNumber constructors now throw ClassFormatException on invalid input.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.LocalVariable constructors now throw ClassFormatException on invalid input.</action>
+      <action                  type="fix" dev="markt" due-to="OSS-Fuzz">When parsing class files, limit arrays to no more than 255 dimensions as per section 4.4.1 of the JVM specification</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugin from 4.7.2.2 to 4.7.3.0 #167.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jmh.version from 1.35 to 1.36 #170.</action>

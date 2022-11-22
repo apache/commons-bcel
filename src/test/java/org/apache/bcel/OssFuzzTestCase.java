@@ -56,6 +56,11 @@ public class OssFuzzTestCase {
         testOssFuzzReproducer("53544a");
     }
 
+    @Test
+    public void testIssue53620() throws Exception {
+        testOssFuzzReproducer("53620");
+    }
+
     private void testOssFuzzReproducer(final String issue) throws Exception {
         final File reproducerFile = new File("target/test-classes/ossfuzz/issue" + issue + "/Test.class");
         try (final FileInputStream reproducerInputStream = new FileInputStream(reproducerFile)) {
