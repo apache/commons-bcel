@@ -18,6 +18,7 @@ package org.apache.bcel.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -205,18 +206,17 @@ public class BCELifierTestCase extends AbstractTestCase {
         final File workDir = new File("target");
         final Pattern pattern = Pattern.compile("([a-z]{3,5}) ([-+]?\\d*\\.?\\d+) ([-+]?\\d*\\.?\\d+) = ([-+]?\\d*\\.?\\d+)");
         final Matcher matcher = pattern.matcher(exp);
-        if (matcher.matches()) {
-            final String op = matcher.group(1);
-            final String a = matcher.group(2);
-            final String b = matcher.group(3);
-            final String expected = matcher.group(4);
-            final String javaAgent = getJavaAgent();
-            if (javaAgent == null) {
-                assertEquals(expected + EOL, exec(workDir, "java", "-noverify", "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
-            } else {
-                final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.generic.BinaryOp.exec");
-                assertEquals(expected + EOL, exec(workDir, "java", "-noverify", runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
-            }
+        assertTrue(matcher.matches());
+        final String op = matcher.group(1);
+        final String a = matcher.group(2);
+        final String b = matcher.group(3);
+        final String expected = matcher.group(4);
+        final String javaAgent = getJavaAgent();
+        if (javaAgent == null) {
+            assertEquals(expected + EOL, exec(workDir, "java", "-noverify", "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
+        } else {
+            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.generic.BinaryOp.exec");
+            assertEquals(expected + EOL, exec(workDir, "java", "-noverify", runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
         }
     }
 }
