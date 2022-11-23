@@ -67,6 +67,8 @@ public final class Synthetic extends Attribute {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     public Synthetic(final Synthetic c) {
         this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());

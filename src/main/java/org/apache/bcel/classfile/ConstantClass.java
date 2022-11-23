@@ -33,6 +33,8 @@ public final class ConstantClass extends Constant implements ConstantObject {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantClass(final ConstantClass c) {
         this(c.getNameIndex());

@@ -70,6 +70,8 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     public LocalVariableTable(final LocalVariableTable c) {
         this(c.getNameIndex(), c.getLength(), c.getLocalVariableTable(), c.getConstantPool());

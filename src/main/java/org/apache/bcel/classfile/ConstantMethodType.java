@@ -34,6 +34,8 @@ public final class ConstantMethodType extends Constant {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantMethodType(final ConstantMethodType c) {
         this(c.getDescriptorIndex());
