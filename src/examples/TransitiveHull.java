@@ -18,8 +18,6 @@
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import javax.swing.text.Utilities;
-
 import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;

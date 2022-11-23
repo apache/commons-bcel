@@ -26,6 +26,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.HelloWorldCreator;
 import org.apache.bcel.classfile.JavaClass;
