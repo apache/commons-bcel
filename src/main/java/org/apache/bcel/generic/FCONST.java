@@ -25,12 +25,13 @@ package org.apache.bcel.generic;
  */
 public class FCONST extends Instruction implements ConstantPushInstruction {
 
-    private float value;
+    private final float value;
 
     /**
      * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     FCONST() {
+        this(0);
     }
 
     public FCONST(final float f) {
