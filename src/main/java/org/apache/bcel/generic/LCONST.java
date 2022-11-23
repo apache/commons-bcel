@@ -25,12 +25,13 @@ package org.apache.bcel.generic;
  */
 public class LCONST extends Instruction implements ConstantPushInstruction {
 
-    private long value;
+    private final long value;
 
     /**
      * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     LCONST() {
+        this(0);
     }
 
     public LCONST(final long l) {
