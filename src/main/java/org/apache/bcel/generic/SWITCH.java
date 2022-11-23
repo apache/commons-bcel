@@ -24,8 +24,7 @@ import java.util.Arrays;
  */
 public final class SWITCH implements CompoundInstruction {
 
-    private int[] match;
-    private InstructionHandle[] targets;
+    private final int[] match;
     private final Select instruction;
     private final int matchLength;
 
@@ -46,42 +45,39 @@ public final class SWITCH implements CompoundInstruction {
      * @param maxGap maximum gap that may between case branches
      */
     public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target, final int maxGap) {
-        this.match = match.clone();
-        this.targets = targets.clone();
+        int[] matchCopy = match.clone();
+        InstructionHandle[] targetsCopy = targets.clone();
         if ((matchLength = match.length) < 2) {
             instruction = new TABLESWITCH(match, targets, target);
         } else {
-            sort(0, matchLength - 1);
+            sort(0, matchLength - 1, targetsCopy);
             if (matchIsOrdered(maxGap)) {
-                fillup(maxGap, target);
-                instruction = new TABLESWITCH(this.match, this.targets, target);
+                final int maxSize = matchLength + matchLength * maxGap;
+                final int[] mVec = new int[maxSize];
+                final InstructionHandle[] tVec = new InstructionHandle[maxSize];
+                int count = 1;
+                mVec[0] = match[0];
+                tVec[0] = targets[0];
+                for (int i = 1; i < matchLength; i++) {
+                    final int prev = match[i - 1];
+                    final int gap = match[i] - prev;
+                    for (int j = 1; j < gap; j++) {
+                        mVec[count] = prev + j;
+                        tVec[count] = target;
+                        count++;
+                    }
+                    mVec[count] = match[i];
+                    tVec[count] = targets[i];
+                    count++;
+                }
+                matchCopy = Arrays.copyOf(mVec, count);
+                targetsCopy = Arrays.copyOf(tVec, count);
+                instruction = new TABLESWITCH(matchCopy, targetsCopy, target);
             } else {
-                instruction = new LOOKUPSWITCH(this.match, this.targets, target);
+                instruction = new LOOKUPSWITCH(matchCopy, targetsCopy, target);
             }
         }
-    }
-
-    private void fillup(final int maxGap, final InstructionHandle target) {
-        final int maxSize = matchLength + matchLength * maxGap;
-        final int[] mVec = new int[maxSize];
-        final InstructionHandle[] tVec = new InstructionHandle[maxSize];
-        int count = 1;
-        mVec[0] = match[0];
-        tVec[0] = targets[0];
-        for (int i = 1; i < matchLength; i++) {
-            final int prev = match[i - 1];
-            final int gap = match[i] - prev;
-            for (int j = 1; j < gap; j++) {
-                mVec[count] = prev + j;
-                tVec[count] = target;
-                count++;
-            }
-            mVec[count] = match[i];
-            tVec[count] = targets[i];
-            count++;
-        }
-        match = Arrays.copyOf(mVec, count);
-        targets = Arrays.copyOf(tVec, count);
+        this.match = matchCopy;
     }
 
     public Instruction getInstruction() {
@@ -108,7 +104,7 @@ public final class SWITCH implements CompoundInstruction {
     /**
      * Sort match and targets array with QuickSort.
      */
-    private void sort(final int l, final int r) {
+    private void sort(final int l, final int r, final InstructionHandle[] targets) {
         int i = l;
         int j = r;
         int h;
@@ -133,10 +129,10 @@ public final class SWITCH implements CompoundInstruction {
             }
         } while (i <= j);
         if (l < j) {
-            sort(l, j);
+            sort(l, j, targets);
         }
         if (i < r) {
-            sort(i, r);
+            sort(i, r, targets);
         }
     }
 }
