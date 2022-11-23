@@ -203,7 +203,7 @@ public class BCELifierTestCase extends AbstractTestCase {
     public void testBinaryOp(final String exp) throws Exception {
         BinaryOpCreator.main(new String[] {});
         final File workDir = new File("target");
-        final Pattern pattern = Pattern.compile("([a-z]{4,5}) ([-+]?\\d*\\.?\\d+) ([-+]?\\d*\\.?\\d+) = ([-+]?\\d*\\.?\\d+)");
+        final Pattern pattern = Pattern.compile("([a-z]{3,5}) ([-+]?\\d*\\.?\\d+) ([-+]?\\d*\\.?\\d+) = ([-+]?\\d*\\.?\\d+)");
         final Matcher matcher = pattern.matcher(exp);
         if (matcher.matches()) {
             final String op = matcher.group(1);
