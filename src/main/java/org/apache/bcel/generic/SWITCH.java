@@ -25,6 +25,18 @@ import java.util.Arrays;
 public final class SWITCH implements CompoundInstruction {
 
     /**
+     * @return match is sorted in ascending order with no gap bigger than maxGap?
+     */
+    private static boolean matchIsOrdered(final int[] match, final int matchLength, final int maxGap) {
+        for (int i = 1; i < matchLength; i++) {
+            if (match[i] - match[i - 1] > maxGap) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Sorts match and targets array with QuickSort.
      */
     private static void sort(final int l, final int r, final int[] match, final InstructionHandle[] targets) {
@@ -58,9 +70,8 @@ public final class SWITCH implements CompoundInstruction {
             sort(i, r, match, targets);
         }
     }
-    private final int[] match;
+
     private final Select instruction;
-    private final int matchLength;
 
     public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target) {
         this(match, targets, target, 1);
@@ -79,13 +90,14 @@ public final class SWITCH implements CompoundInstruction {
      * @param maxGap maximum gap that may between case branches
      */
     public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target, final int maxGap) {
-        int[] matchCopy = match.clone();
-        InstructionHandle[] targetsCopy = targets.clone();
-        if ((matchLength = match.length) < 2) {
+        int[] matchClone = match.clone();
+        final InstructionHandle[] targetsClone = targets.clone();
+        final int matchLength = match.length;
+        if (matchLength < 2) {
             instruction = new TABLESWITCH(match, targets, target);
         } else {
-            sort(0, matchLength - 1, matchCopy, targetsCopy);
-            if (matchIsOrdered(maxGap)) {
+            sort(0, matchLength - 1, matchClone, targetsClone);
+            if (matchIsOrdered(matchClone, matchLength, maxGap)) {
                 final int maxSize = matchLength + matchLength * maxGap;
                 final int[] mVec = new int[maxSize];
                 final InstructionHandle[] tVec = new InstructionHandle[maxSize];
@@ -104,14 +116,11 @@ public final class SWITCH implements CompoundInstruction {
                     tVec[count] = targets[i];
                     count++;
                 }
-                matchCopy = Arrays.copyOf(mVec, count);
-                targetsCopy = Arrays.copyOf(tVec, count);
-                instruction = new TABLESWITCH(matchCopy, targetsCopy, target);
+                instruction = new TABLESWITCH(Arrays.copyOf(mVec, count), Arrays.copyOf(tVec, count), target);
             } else {
-                instruction = new LOOKUPSWITCH(matchCopy, targetsCopy, target);
+                instruction = new LOOKUPSWITCH(matchClone, targetsClone, target);
             }
         }
-        this.match = matchCopy;
     }
 
     public Instruction getInstruction() {
@@ -121,17 +130,5 @@ public final class SWITCH implements CompoundInstruction {
     @Override
     public InstructionList getInstructionList() {
         return new InstructionList(instruction);
-    }
-
-    /**
-     * @return match is sorted in ascending order with no gap bigger than maxGap?
-     */
-    private boolean matchIsOrdered(final int maxGap) {
-        for (int i = 1; i < matchLength; i++) {
-            if (match[i] - match[i - 1] > maxGap) {
-                return false;
-            }
-        }
-        return true;
     }
 }
