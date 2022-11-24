@@ -24,6 +24,40 @@ import java.util.Arrays;
  */
 public final class SWITCH implements CompoundInstruction {
 
+    /**
+     * Sorts match and targets array with QuickSort.
+     */
+    private static void sort(final int l, final int r, final int[] match, final InstructionHandle[] targets) {
+        int i = l;
+        int j = r;
+        int h;
+        final int m = match[l + r >>> 1];
+        InstructionHandle h2;
+        do {
+            while (match[i] < m) {
+                i++;
+            }
+            while (m < match[j]) {
+                j--;
+            }
+            if (i <= j) {
+                h = match[i];
+                match[i] = match[j];
+                match[j] = h; // Swap elements
+                h2 = targets[i];
+                targets[i] = targets[j];
+                targets[j] = h2; // Swap instructions, too
+                i++;
+                j--;
+            }
+        } while (i <= j);
+        if (l < j) {
+            sort(l, j, match, targets);
+        }
+        if (i < r) {
+            sort(i, r, match, targets);
+        }
+    }
     private final int[] match;
     private final Select instruction;
     private final int matchLength;
@@ -50,7 +84,7 @@ public final class SWITCH implements CompoundInstruction {
         if ((matchLength = match.length) < 2) {
             instruction = new TABLESWITCH(match, targets, target);
         } else {
-            sort(0, matchLength - 1, targetsCopy);
+            sort(0, matchLength - 1, matchCopy, targetsCopy);
             if (matchIsOrdered(maxGap)) {
                 final int maxSize = matchLength + matchLength * maxGap;
                 final int[] mVec = new int[maxSize];
@@ -99,40 +133,5 @@ public final class SWITCH implements CompoundInstruction {
             }
         }
         return true;
-    }
-
-    /**
-     * Sort match and targets array with QuickSort.
-     */
-    private void sort(final int l, final int r, final InstructionHandle[] targets) {
-        int i = l;
-        int j = r;
-        int h;
-        final int m = match[l + r >>> 1];
-        InstructionHandle h2;
-        do {
-            while (match[i] < m) {
-                i++;
-            }
-            while (m < match[j]) {
-                j--;
-            }
-            if (i <= j) {
-                h = match[i];
-                match[i] = match[j];
-                match[j] = h; // Swap elements
-                h2 = targets[i];
-                targets[i] = targets[j];
-                targets[j] = h2; // Swap instructions, too
-                i++;
-                j--;
-            }
-        } while (i <= j);
-        if (l < j) {
-            sort(l, j, targets);
-        }
-        if (i < r) {
-            sort(i, r, targets);
-        }
     }
 }
