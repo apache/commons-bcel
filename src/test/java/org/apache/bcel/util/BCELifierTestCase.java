@@ -36,8 +36,6 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.BinaryOpCreator;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledForJreRange;
-import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -200,7 +198,6 @@ public class BCELifierTestCase extends AbstractTestCase {
         "drem 3 2 = 1.0"
     // @formatter:on
     })
-    @DisabledForJreRange(min = JRE.JAVA_13)
     public void testBinaryOp(final String exp) throws Exception {
         BinaryOpCreator.main(new String[] {});
         final File workDir = new File("target");
@@ -213,10 +210,10 @@ public class BCELifierTestCase extends AbstractTestCase {
         final String expected = matcher.group(4);
         final String javaAgent = getJavaAgent();
         if (javaAgent == null) {
-            assertEquals(expected + EOL, exec(workDir, "java", "-noverify", "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
+            assertEquals(expected + EOL, exec(workDir, "java", "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
         } else {
             final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.generic.BinaryOp.exec");
-            assertEquals(expected + EOL, exec(workDir, "java", "-noverify", runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
+            assertEquals(expected + EOL, exec(workDir, "java", runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
         }
     }
 }
