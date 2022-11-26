@@ -702,19 +702,6 @@ public abstract class Utility {
         return caw.toString();
     }
 
-    static boolean equals(final byte[] a, final byte[] b) {
-        int size;
-        if ((size = a.length) != b.length) {
-            return false;
-        }
-        for (int i = 0; i < size; i++) {
-            if (a[i] != b[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     /**
      * Fillup char with up to length characters with char 'fill' and justify it left or right.
      *
