@@ -943,18 +943,17 @@ public class InstConstraintVisitor extends EmptyVisitor {
             shouldBe = Type.INT;
         }
         if (t instanceof ReferenceType) {
-            ReferenceType rValue = null;
             if (value instanceof ReferenceType) {
-                rValue = (ReferenceType) value;
+                ReferenceType rValue = (ReferenceType) value;
                 referenceTypeIsInitialized(o, rValue);
+                // TODO: This can possibly only be checked using Staerk-et-al's "set-of-object types", not
+                // using "wider cast object types" created during verification.
+                // Comment it out if you encounter problems. See also the analogon at visitPUTFIELD|visitPUTSTATIC.
+                if (!rValue.isAssignmentCompatibleWith(shouldBe)) {
+                    constraintViolated(o, "The stack top type '" + value + "' is not assignment compatible with '" + shouldBe + "'.");
+                }
             } else {
                 constraintViolated(o, "The stack top type '" + value + "' is not of a reference type as expected.");
-            }
-            // TODO: This can possibly only be checked using Staerk-et-al's "set-of-object types", not
-            // using "wider cast object types" created during verification.
-            // Comment it out if you encounter problems. See also the analogon at visitPUTFIELD|visitPUTSTATIC.
-            if (!rValue.isAssignmentCompatibleWith(shouldBe)) {
-                constraintViolated(o, "The stack top type '" + value + "' is not assignment compatible with '" + shouldBe + "'.");
             }
         } else if (shouldBe != value) {
             constraintViolated(o, "The stack top type '" + value + "' is not of type '" + shouldBe + "' as expected.");
