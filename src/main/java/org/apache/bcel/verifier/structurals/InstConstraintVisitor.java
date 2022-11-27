@@ -938,26 +938,26 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
         final Type value = stack().peek();
         final Type t = Type.getType(f.getSignature());
-        Type shouldbe = t;
-        if (shouldbe == Type.BOOLEAN || shouldbe == Type.BYTE || shouldbe == Type.CHAR || shouldbe == Type.SHORT) {
-            shouldbe = Type.INT;
+        Type shouldBe = t;
+        if (shouldBe == Type.BOOLEAN || shouldBe == Type.BYTE || shouldBe == Type.CHAR || shouldBe == Type.SHORT) {
+            shouldBe = Type.INT;
         }
         if (t instanceof ReferenceType) {
-            ReferenceType rvalue = null;
+            ReferenceType rValue = null;
             if (value instanceof ReferenceType) {
-                rvalue = (ReferenceType) value;
-                referenceTypeIsInitialized(o, rvalue);
+                rValue = (ReferenceType) value;
+                referenceTypeIsInitialized(o, rValue);
             } else {
                 constraintViolated(o, "The stack top type '" + value + "' is not of a reference type as expected.");
             }
             // TODO: This can possibly only be checked using Staerk-et-al's "set-of-object types", not
             // using "wider cast object types" created during verification.
             // Comment it out if you encounter problems. See also the analogon at visitPUTFIELD|visitPUTSTATIC.
-            if (!rvalue.isAssignmentCompatibleWith(shouldbe)) {
-                constraintViolated(o, "The stack top type '" + value + "' is not assignment compatible with '" + shouldbe + "'.");
+            if (!rValue.isAssignmentCompatibleWith(shouldBe)) {
+                constraintViolated(o, "The stack top type '" + value + "' is not assignment compatible with '" + shouldBe + "'.");
             }
-        } else if (shouldbe != value) {
-            constraintViolated(o, "The stack top type '" + value + "' is not of type '" + shouldbe + "' as expected.");
+        } else if (shouldBe != value) {
+            constraintViolated(o, "The stack top type '" + value + "' is not of type '" + shouldBe + "' as expected.");
         }
         return f;
     }
