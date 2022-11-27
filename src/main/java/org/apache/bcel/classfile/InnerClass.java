@@ -47,6 +47,8 @@ public final class InnerClass implements Cloneable, Node {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public InnerClass(final InnerClass c) {
         this(c.getInnerClassIndex(), c.getOuterClassIndex(), c.getInnerNameIndex(), c.getInnerAccessFlags());

@@ -89,7 +89,7 @@ public class ConstantPoolGen {
     private final Map<String, Integer> cpTable = new HashMap<>();
 
     /**
-     * Create empty constant pool.
+     * Constructs a new empty constant pool.
      */
     public ConstantPoolGen() {
         size = DEFAULT_BUFFER_SIZE;
@@ -97,7 +97,7 @@ public class ConstantPoolGen {
     }
 
     /**
-     * Initialize with given array of constants.
+     * Constructs a new instance with the given array of constants.
      *
      * @param cs array of given constants, new ones will be appended
      */
@@ -215,7 +215,7 @@ public class ConstantPoolGen {
     }
 
     /**
-     * Initialize with given constant pool.
+     * Constructs a new instance with the given constant pool.
      *
      * @param cp the constant pool.
      */
@@ -267,41 +267,45 @@ public class ConstantPoolGen {
     }
 
     /**
-     * Import constant from another ConstantPool and return new index.
+     * Adds a constant from another ConstantPool and returns the new index.
+     *
+     * @param constant The constant to add.
+     * @param cpGen Source pool.
+     * @return index of entry
      */
-    public int addConstant(final Constant c, final ConstantPoolGen cp) {
-        final Constant[] constants = cp.getConstantPool().getConstantPool();
-        switch (c.getTag()) {
+    public int addConstant(final Constant constant, final ConstantPoolGen cpGen) {
+        final Constant[] constants = cpGen.getConstantPool().getConstantPool();
+        switch (constant.getTag()) {
         case Const.CONSTANT_String: {
-            final ConstantString s = (ConstantString) c;
+            final ConstantString s = (ConstantString) constant;
             final ConstantUtf8 u8 = (ConstantUtf8) constants[s.getStringIndex()];
             return addString(u8.getBytes());
         }
         case Const.CONSTANT_Class: {
-            final ConstantClass s = (ConstantClass) c;
+            final ConstantClass s = (ConstantClass) constant;
             final ConstantUtf8 u8 = (ConstantUtf8) constants[s.getNameIndex()];
             return addClass(u8.getBytes());
         }
         case Const.CONSTANT_NameAndType: {
-            final ConstantNameAndType n = (ConstantNameAndType) c;
+            final ConstantNameAndType n = (ConstantNameAndType) constant;
             final ConstantUtf8 u8 = (ConstantUtf8) constants[n.getNameIndex()];
             final ConstantUtf8 u8_2 = (ConstantUtf8) constants[n.getSignatureIndex()];
             return addNameAndType(u8.getBytes(), u8_2.getBytes());
         }
         case Const.CONSTANT_Utf8:
-            return addUtf8(((ConstantUtf8) c).getBytes());
+            return addUtf8(((ConstantUtf8) constant).getBytes());
         case Const.CONSTANT_Double:
-            return addDouble(((ConstantDouble) c).getBytes());
+            return addDouble(((ConstantDouble) constant).getBytes());
         case Const.CONSTANT_Float:
-            return addFloat(((ConstantFloat) c).getBytes());
+            return addFloat(((ConstantFloat) constant).getBytes());
         case Const.CONSTANT_Long:
-            return addLong(((ConstantLong) c).getBytes());
+            return addLong(((ConstantLong) constant).getBytes());
         case Const.CONSTANT_Integer:
-            return addInteger(((ConstantInteger) c).getBytes());
+            return addInteger(((ConstantInteger) constant).getBytes());
         case Const.CONSTANT_InterfaceMethodref:
         case Const.CONSTANT_Methodref:
         case Const.CONSTANT_Fieldref: {
-            final ConstantCP m = (ConstantCP) c;
+            final ConstantCP m = (ConstantCP) constant;
             final ConstantClass clazz = (ConstantClass) constants[m.getClassIndex()];
             final ConstantNameAndType n = (ConstantNameAndType) constants[m.getNameAndTypeIndex()];
             ConstantUtf8 u8 = (ConstantUtf8) constants[clazz.getNameIndex()];
@@ -310,7 +314,7 @@ public class ConstantPoolGen {
             final String name = u8.getBytes();
             u8 = (ConstantUtf8) constants[n.getSignatureIndex()];
             final String signature = u8.getBytes();
-            switch (c.getTag()) {
+            switch (constant.getTag()) {
             case Const.CONSTANT_InterfaceMethodref:
                 return addInterfaceMethodref(className, name, signature);
             case Const.CONSTANT_Methodref:
@@ -318,11 +322,11 @@ public class ConstantPoolGen {
             case Const.CONSTANT_Fieldref:
                 return addFieldref(className, name, signature);
             default: // Never reached
-                throw new IllegalArgumentException("Unknown constant type " + c);
+                throw new IllegalArgumentException("Unknown constant type " + constant);
             }
         }
         default: // Never reached
-            throw new IllegalArgumentException("Unknown constant type " + c);
+            throw new IllegalArgumentException("Unknown constant type " + constant);
         }
     }
 

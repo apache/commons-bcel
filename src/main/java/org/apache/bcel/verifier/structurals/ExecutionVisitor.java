@@ -112,11 +112,11 @@ public class ExecutionVisitor extends EmptyVisitor {
 
     /// ** Symbolically executes the corresponding Java Virtual Machine instruction. */
     // public void visitWIDE(WIDE o) {
-    // The WIDE instruction is modelled as a flag
+    // The WIDE instruction is modeled as a flag
     // of the embedded instructions in BCEL.
     // Therefore BCEL checks for possible errors
     // when parsing in the .class file: We don't
-    // have even the possibilty to care for WIDE
+    // have even the possibility to care for WIDE
     // here.
     // }
 

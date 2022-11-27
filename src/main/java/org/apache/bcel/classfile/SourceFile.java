@@ -64,6 +64,8 @@ public final class SourceFile extends Attribute {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     public SourceFile(final SourceFile c) {
         this(c.getNameIndex(), c.getLength(), c.getSourceFileIndex(), c.getConstantPool());

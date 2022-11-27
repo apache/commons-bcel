@@ -28,6 +28,8 @@ public final class ConstantFieldref extends ConstantCP {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantFieldref(final ConstantFieldref c) {
         super(Const.CONSTANT_Fieldref, c.getClassIndex(), c.getNameAndTypeIndex());

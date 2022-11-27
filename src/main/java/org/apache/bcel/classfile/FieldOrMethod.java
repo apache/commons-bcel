@@ -97,6 +97,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     protected FieldOrMethod(final FieldOrMethod c) {
         this(c.getAccessFlags(), c.getNameIndex(), c.getSignatureIndex(), c.getAttributes(), c.getConstantPool());

@@ -73,6 +73,8 @@ public abstract class ConstantCP extends Constant {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantCP(final ConstantCP c) {
         this(c.getTag(), c.getClassIndex(), c.getNameAndTypeIndex());

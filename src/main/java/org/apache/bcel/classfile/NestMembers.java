@@ -70,6 +70,8 @@ public final class NestMembers extends Attribute {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     public NestMembers(final NestMembers c) {
         this(c.getNameIndex(), c.getLength(), c.getClasses(), c.getConstantPool());

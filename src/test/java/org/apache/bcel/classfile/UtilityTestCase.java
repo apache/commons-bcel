@@ -19,10 +19,13 @@ package org.apache.bcel.classfile;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.Repository;
 import org.junit.jupiter.api.Test;
+import java.util.Arrays;
 
 public class UtilityTestCase {
 
@@ -127,5 +130,45 @@ public class UtilityTestCase {
             "class signature");
         assertEquals("<K extends Object, V extends Object> extends Object",
             Utility.signatureToString("<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;"), "class signature");
+    }
+
+    @Test
+    public void testCodeToString() throws Exception {
+        class CodeToString {
+            int[][] a = new int[0][0];
+
+            CodeToString() {
+                if (a instanceof int[][]) {
+                    System.out.print(Arrays.asList(a).size());
+                }
+            }
+        }
+        final JavaClass javaClass = Repository.lookupClass(CodeToString.class);
+        assertNotNull(javaClass);
+        for (final Method method : javaClass.getMethods()) {
+            assertEquals("<init>", method.getName());
+            final String code = method.getCode().toString(false);
+            assertTrue(code.contains("0:    aload_0"), code);
+            assertTrue(code.contains("1:    aload_1"), code);
+            assertTrue(code.contains("2:    putfield\t\torg.apache.bcel.classfile.UtilityTestCase$1CodeToString.this$0 Lorg/apache/bcel/classfile/UtilityTestCase;"), code);
+            assertTrue(code.contains("5:    aload_0"), code);
+            assertTrue(code.contains("6:    invokespecial\tjava.lang.Object.<init> ()V"), code);
+            assertTrue(code.contains("9:    aload_0"), code);
+            assertTrue(code.contains("10:   iconst_0"), code);
+            assertTrue(code.contains("11:   iconst_0"), code);
+            assertTrue(code.contains("12:   multianewarray\t<[[I>\t2"), code);
+            assertTrue(code.contains("16:   putfield\t\torg.apache.bcel.classfile.UtilityTestCase$1CodeToString.a [[I"), code);
+            assertTrue(code.contains("19:   aload_0"), code);
+            assertTrue(code.contains("20:   getfield\t\torg.apache.bcel.classfile.UtilityTestCase$1CodeToString.a [[I"), code);
+            assertTrue(code.contains("23:   instanceof\t<[[I>"), code);
+            assertTrue(code.contains("26:   ifeq\t\t#47"), code);
+            assertTrue(code.contains("29:   getstatic\t\tjava.lang.System.out Ljava/io/PrintStream;"), code);
+            assertTrue(code.contains("32:   aload_0"), code);
+            assertTrue(code.contains("33:   getfield\t\torg.apache.bcel.classfile.UtilityTestCase$1CodeToString.a [[I"), code);
+            assertTrue(code.contains("36:   invokestatic\tjava.util.Arrays.asList ([Ljava/lang/Object;)Ljava/util/List;"), code);
+            assertTrue(code.contains("39:   invokeinterface\tjava.util.List.size ()I1\t0"), code);
+            assertTrue(code.contains("44:   invokevirtual\tjava.io.PrintStream.print (I)V"), code);
+            assertTrue(code.contains("47:   return"), code);
+        }
     }
 }

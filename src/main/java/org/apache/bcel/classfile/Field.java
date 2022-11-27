@@ -84,6 +84,8 @@ public final class Field extends FieldOrMethod {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     public Field(final Field c) {
         super(c);
