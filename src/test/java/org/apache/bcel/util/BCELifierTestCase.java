@@ -18,6 +18,7 @@ package org.apache.bcel.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,11 +27,14 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.HelloWorldCreator;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.BinaryOpCreator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -155,5 +159,61 @@ public class BCELifierTestCase extends AbstractTestCase {
         assertNotNull(javaClass);
         final BCELifier bcelifier = new BCELifier(javaClass, os);
         bcelifier.start();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "iadd 3 2 = 5",
+        "isub 3 2 = 1",
+        "imul 3 2 = 6",
+        "idiv 3 2 = 1",
+        "irem 3 2 = 1",
+        "iand 3 2 = 2",
+        "ior 3 2 = 3",
+        "ixor 3 2 = 1",
+        "ishl 4 1 = 8",
+        "ishr 4 1 = 2",
+        "iushr 4 1 = 2",
+        "ladd 3 2 = 5",
+        "lsub 3 2 = 1",
+        "lmul 3 2 = 6",
+        "ldiv 3 2 = 1",
+        "lrem 3 2 = 1",
+        "land 3 2 = 2",
+        "lor 3 2 = 3",
+        "lxor 3 2 = 1",
+        "lshl 4 1 = 8",
+        "lshr 4 1 = 2",
+        "lushr 4 1 = 2",
+        "fadd 3 2 = 5.0",
+        "fsub 3 2 = 1.0",
+        "fmul 3 2 = 6.0",
+        "fdiv 3 2 = 1.5",
+        "frem 3 2 = 1.0",
+        "dadd 3 2 = 5.0",
+        "dsub 3 2 = 1.0",
+        "dmul 3 2 = 6.0",
+        "ddiv 3 2 = 1.5",
+        "drem 3 2 = 1.0"
+    // @formatter:on
+    })
+    public void testBinaryOp(final String exp) throws Exception {
+        BinaryOpCreator.main(new String[] {});
+        final File workDir = new File("target");
+        final Pattern pattern = Pattern.compile("([a-z]{3,5}) ([-+]?\\d*\\.?\\d+) ([-+]?\\d*\\.?\\d+) = ([-+]?\\d*\\.?\\d+)");
+        final Matcher matcher = pattern.matcher(exp);
+        assertTrue(matcher.matches());
+        final String op = matcher.group(1);
+        final String a = matcher.group(2);
+        final String b = matcher.group(3);
+        final String expected = matcher.group(4);
+        final String javaAgent = getJavaAgent();
+        if (javaAgent == null) {
+            assertEquals(expected + EOL, exec(workDir, "java", "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
+        } else {
+            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.generic.BinaryOp.exec");
+            assertEquals(expected + EOL, exec(workDir, "java", runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
+        }
     }
 }
