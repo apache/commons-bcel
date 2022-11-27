@@ -61,6 +61,8 @@ public final class PMGClass extends Attribute {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
      * physical copy.
+     *
+     * @param pgmClass Source to copy.
      */
     public PMGClass(final PMGClass pgmClass) {
         this(pgmClass.getNameIndex(), pgmClass.getLength(), pgmClass.getPMGIndex(), pgmClass.getPMGClassIndex(), pgmClass.getConstantPool());

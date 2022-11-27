@@ -35,6 +35,8 @@ public final class ConstantMethodHandle extends Constant {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantMethodHandle(final ConstantMethodHandle c) {
         this(c.getReferenceKind(), c.getReferenceIndex());

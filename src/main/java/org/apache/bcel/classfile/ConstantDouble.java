@@ -33,6 +33,8 @@ public final class ConstantDouble extends Constant implements ConstantObject {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantDouble(final ConstantDouble c) {
         this(c.getBytes());

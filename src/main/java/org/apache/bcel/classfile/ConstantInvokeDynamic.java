@@ -33,6 +33,8 @@ public final class ConstantInvokeDynamic extends ConstantCP {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantInvokeDynamic(final ConstantInvokeDynamic c) {
         this(c.getBootstrapMethodAttrIndex(), c.getNameAndTypeIndex());

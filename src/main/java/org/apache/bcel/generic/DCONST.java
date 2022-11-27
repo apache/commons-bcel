@@ -25,12 +25,13 @@ package org.apache.bcel.generic;
  */
 public class DCONST extends Instruction implements ConstantPushInstruction {
 
-    private double value;
+    private final double value;
 
     /**
      * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     DCONST() {
+        this(0);
     }
 
     public DCONST(final double f) {

@@ -69,6 +69,8 @@ public final class ModulePackages extends Attribute {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     public ModulePackages(final ModulePackages c) {
         this(c.getNameIndex(), c.getLength(), c.getPackageIndexTable(), c.getConstantPool());

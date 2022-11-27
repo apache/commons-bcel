@@ -33,7 +33,7 @@ public abstract class Instruction implements Cloneable {
     private static InstructionComparator cmp = InstructionComparator.DEFAULT;
 
     /**
-     * Get Comparator object used in the equals() method to determine equality of instructions.
+     * Gets Comparator object used in the equals() method to determine equality of instructions.
      *
      * @return currently used comparator for equals()
      * @deprecated (6.0) use the built in comparator, or wrap this class in another object that implements these methods
@@ -44,7 +44,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Check if the value can fit in a byte (signed)
+     * Tests if the value can fit in a byte (signed)
      *
      * @param value the value to check
      * @return true if the value is in range
@@ -55,7 +55,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Check if the value can fit in a short (signed)
+     * Tests if the value can fit in a short (signed)
      *
      * @param value the value to check
      * @return true if the value is in range
@@ -66,10 +66,10 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Read an instruction from (byte code) input stream and return the appropriate object.
+     * Reads an instruction from (byte code) input stream and return the appropriate object.
      * <p>
      * If the Instruction is defined in {@link InstructionConst}, then the singleton instance is returned.
-     *
+     * </p>
      * @param bytes input stream bytes
      * @return instruction object being read
      * @throws IOException Thrown when an I/O exception of some sort has occurred.
@@ -395,7 +395,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Set comparator to be used for equals().
+     * Sets comparator to be used for equals().
      *
      * @deprecated (6.0) use the built in comparator, or wrap this class in another object that implements these methods
      */
@@ -475,7 +475,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Dump instruction as byte code to stream out.
+     * Dumps instruction as byte code to stream out.
      *
      * @param out Output stream
      * @throws IOException Thrown when an I/O exception of some sort has occurred.
@@ -485,7 +485,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Check for equality, delegated to comparator
+     * Tests for equality, delegated to comparator
      *
      * @return true if that is an Instruction and has the same opcode
      */
@@ -516,7 +516,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * calculate the hashCode of this object
+     * Gets the hashCode of this object.
      *
      * @return the hashCode
      * @since 6.0
@@ -527,7 +527,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Reads needed data (e.g. index) from file.
      *
      * @param bytes byte sequence to read from
      * @param wide "wide" instruction flag

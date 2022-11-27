@@ -38,6 +38,8 @@ public final class ConstantPackage extends Constant implements ConstantObject {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantPackage(final ConstantPackage c) {
         this(c.getNameIndex());

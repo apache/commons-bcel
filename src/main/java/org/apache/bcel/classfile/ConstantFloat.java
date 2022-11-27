@@ -34,6 +34,8 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     public ConstantFloat(final ConstantFloat c) {
         this(c.getBytes());

@@ -34,6 +34,8 @@ public final class ConstantDynamic extends ConstantCP {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantDynamic(final ConstantDynamic c) {
         this(c.getBootstrapMethodAttrIndex(), c.getNameAndTypeIndex());

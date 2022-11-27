@@ -33,6 +33,8 @@ public final class ConstantString extends Constant implements ConstantObject {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantString(final ConstantString c) {
         this(c.getStringIndex());

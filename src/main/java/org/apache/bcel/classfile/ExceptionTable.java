@@ -49,6 +49,8 @@ public final class ExceptionTable extends Attribute {
     /**
      * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     public ExceptionTable(final ExceptionTable c) {
         this(c.getNameIndex(), c.getLength(), c.getExceptionIndexTable(), c.getConstantPool());

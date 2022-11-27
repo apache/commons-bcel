@@ -28,6 +28,8 @@ public final class ConstantMethodref extends ConstantCP {
 
     /**
      * Initialize from another object.
+     *
+     * @param c Source to copy.
      */
     public ConstantMethodref(final ConstantMethodref c) {
         super(Const.CONSTANT_Methodref, c.getClassIndex(), c.getNameAndTypeIndex());

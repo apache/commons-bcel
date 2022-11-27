@@ -62,6 +62,8 @@ public final class NestHost extends Attribute {
     /**
      * Initializes from another object. Note that both objects use the same references (shallow copy). Use copy() for a
      * physical copy.
+     *
+     * @param c Source to copy.
      */
     public NestHost(final NestHost c) {
         this(c.getNameIndex(), c.getLength(), c.getHostClassIndex(), c.getConstantPool());

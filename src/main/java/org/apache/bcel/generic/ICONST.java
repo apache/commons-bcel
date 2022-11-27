@@ -25,12 +25,13 @@ package org.apache.bcel.generic;
  */
 public class ICONST extends Instruction implements ConstantPushInstruction {
 
-    private int value;
+    private final int value;
 
     /**
      * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     ICONST() {
+        this(0);
     }
 
     public ICONST(final int i) {
