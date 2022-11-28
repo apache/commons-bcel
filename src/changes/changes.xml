@@ -62,7 +62,7 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.7.0" date="20YY-MM-DD" description="Maintenance and bug fix release.">
+    <release version="6.7.0" date="2022-11-28" description="Maintenance and bug fix release.">
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.ClassFormatException.ClassFormatException(Throwable).</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.JavaClass.EXTENSION.</action>
