@@ -31,7 +31,7 @@ import org.apache.bcel.Const;
  */
 public final class StackMapType implements Node, Cloneable {
 
-    static final StackMapType[] EMPTY_ARRAY = {}; // package visibility as BCELifier code generator writes calls to constructor translating null to EMPTY_ARRAY
+    public static final StackMapType[] EMPTY_ARRAY = {}; // BCELifier code generator writes calls to constructor translating null to EMPTY_ARRAY
 
     private byte type;
     private int index = -1; // Index to CONSTANT_Class or offset
