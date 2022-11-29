@@ -72,6 +72,7 @@ import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
 import org.apache.bcel.classfile.StackMapEntry;
+import org.apache.bcel.classfile.StackMapType;
 import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.classfile.Visitor;
@@ -83,6 +84,8 @@ public class CountingVisitor implements Visitor {
     public int syntheticCount;
 
     public int stackMapEntryCount;
+
+    public int stackMapTypeCount;
 
     public int stackMapCount;
 
@@ -495,6 +498,14 @@ public class CountingVisitor implements Visitor {
     @Override
     public void visitStackMapEntry(final StackMapEntry obj) {
         stackMapEntryCount++;
+    }
+
+    /**
+     * @since 6.7.1
+     */
+    @Override
+    public void visitStackMapType(final StackMapType obj) {
+        stackMapTypeCount++;
     }
 
     @Override

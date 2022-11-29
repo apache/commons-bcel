@@ -29,9 +29,9 @@ import org.apache.bcel.Const;
  * @see StackMap
  * @see Const
  */
-public final class StackMapType implements Cloneable {
+public final class StackMapType implements Node, Cloneable {
 
-    public static final StackMapType[] EMPTY_ARRAY = {}; // must be public because BCELifier code generator writes calls to it
+    static final StackMapType[] EMPTY_ARRAY = {}; // package visibility as BCELifier code generator writes calls to constructor translating null to EMPTY_ARRAY
 
     private byte type;
     private int index = -1; // Index to CONSTANT_Class or offset
@@ -59,6 +59,18 @@ public final class StackMapType implements Cloneable {
             this.index = file.readUnsignedShort();
         }
         this.constantPool = constantPool;
+    }
+
+    /**
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
+     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     *
+     * @param v Visitor object
+     * @since 6.7.1
+     */
+    @Override
+    public void accept(final Visitor v) {
+        v.visitStackMapType(this);
     }
 
     private byte checkType(final byte type) {
@@ -124,12 +136,21 @@ public final class StackMapType implements Cloneable {
             if (index < 0) {
                 return ", class=<unknown>";
             }
-            return ", class=" + constantPool.constantToString(index, Const.CONSTANT_Class);
+            return ", class=" + getClassName();
         }
         if (type == Const.ITEM_NewObject) {
             return ", offset=" + index;
         }
         return "";
+    }
+
+    /**
+     * Gets the class name of this StackMapType from the constant pool at index position.
+     * @return the fully qualified name of the class for this StackMapType.
+     * @since 6.7.1
+     */
+    public String getClassName() {
+        return constantPool.constantToString(index, Const.CONSTANT_Class);
     }
 
     /**

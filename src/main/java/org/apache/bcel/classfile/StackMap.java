@@ -135,7 +135,7 @@ public final class StackMap extends Attribute {
     public void setStackMap(final StackMapEntry[] table) {
         this.table = table != null ? table : StackMapEntry.EMPTY_ARRAY;
         int len = 2; // Length of 'number_of_entries' field prior to the array of stack maps
-        for (final StackMapEntry element : this.table) {
+        for (final StackMapEntry element : table) {
             len += element.getMapEntrySize();
         }
         setLength(len);

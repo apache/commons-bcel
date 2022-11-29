@@ -26,16 +26,21 @@ import java.util.Locale;
 import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.ConstantValue;
 import org.apache.bcel.classfile.ExceptionTable;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.StackMap;
+import org.apache.bcel.classfile.StackMapEntry;
+import org.apache.bcel.classfile.StackMapType;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.ArrayType;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -306,6 +311,13 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
                 printWriter.println("\");");
             }
         }
+        final Code code = method.getCode();
+        if (code != null) {
+            final StackMap stackMap = code.getStackMap();
+            if (stackMap != null) {
+                stackMap.accept(this);
+            }
+        }
         printWriter.println();
         final BCELFactory factory = new BCELFactory(mg, printWriter);
         factory.start();
@@ -313,5 +325,79 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         printWriter.println("    method.setMaxLocals();");
         printWriter.println("    _cg.addMethod(method.getMethod());");
         printWriter.println("    il.dispose();");
+    }
+
+    @Override
+    public void visitStackMap(final StackMap stackMap) {
+        super.visitStackMap(stackMap);
+        printWriter.print("    method.addCodeAttribute(");
+        printWriter.print("new StackMap(_cp.addUtf8(\"");
+        printWriter.print(stackMap.getName());
+        printWriter.print("\"), ");
+        printWriter.print(stackMap.getLength());
+        printWriter.print(", ");
+        printWriter.print("new StackMapEntry[] {");
+        final StackMapEntry[] table = stackMap.getStackMap();
+        for (int i = 0; i < table.length; i++) {
+            table[i].accept(this);
+            if (i < table.length - 1) {
+                printWriter.print(", ");
+            } else {
+                printWriter.print(" }");
+            }
+        }
+        printWriter.print(", _cp.getConstantPool())");
+        printWriter.println(");");
+    }
+
+    @Override
+    public void visitStackMapEntry(final StackMapEntry stackMapEntry) {
+        super.visitStackMapEntry(stackMapEntry);
+        printWriter.print("new StackMapEntry(");
+        printWriter.print(stackMapEntry.getFrameType());
+        printWriter.print(", ");
+        printWriter.print(stackMapEntry.getByteCodeOffset());
+        printWriter.print(", ");
+        visitStackMapTypeArray(stackMapEntry.getTypesOfLocals());
+        printWriter.print(", ");
+        visitStackMapTypeArray(stackMapEntry.getTypesOfStackItems());
+        printWriter.print(", _cp.getConstantPool())");
+    }
+
+    /**
+     * Visits a {@link StackMapType} object.
+     * @param stackMapType object to visit
+     * @since 6.7.1
+     */
+    @Override
+    public void visitStackMapType(final StackMapType stackMapType) {
+        super.visitStackMapType(stackMapType);
+        printWriter.print("new StackMapType((byte)");
+        printWriter.print(stackMapType.getType());
+        printWriter.print(", ");
+        if (stackMapType.hasIndex()) {
+            printWriter.print("_cp.addClass(\"");
+            printWriter.print(stackMapType.getClassName());
+            printWriter.print("\")");
+        } else {
+            printWriter.print("-1");
+        }
+        printWriter.print(", _cp.getConstantPool())");
+    }
+
+    private void visitStackMapTypeArray(final StackMapType[] types) {
+        if (ArrayUtils.isEmpty(types)) {
+            printWriter.print("null"); // null translates to StackMapType.EMPTY_ARRAY
+        } else {
+            printWriter.print("new StackMapType[] {");
+            for (int i = 0; i < types.length; i++) {
+                types[i].accept(this);
+                if (i < types.length -1) {
+                    printWriter.print(", ");
+                } else {
+                    printWriter.print(" }");
+                }
+            }
+        }
     }
 }

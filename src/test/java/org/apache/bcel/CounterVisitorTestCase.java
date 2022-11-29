@@ -204,6 +204,11 @@ public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase {
     }
 
     @Test
+    public void testStackMapTypeCount() {
+        assertEquals(0, getVisitor().stackMapTypeCount, "stackMapTypeCount");
+    }
+
+    @Test
     public void testSyntheticCount() {
         assertEquals(0, getVisitor().syntheticCount, "syntheticCount");
     }

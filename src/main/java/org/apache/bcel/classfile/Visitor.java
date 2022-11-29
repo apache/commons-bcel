@@ -225,6 +225,13 @@ public interface Visitor {
 
     void visitStackMapEntry(StackMapEntry obj);
 
+    /**
+     * Visits a {@link StackMapType} object.
+     * @param obj object to visit
+     * @since 6.7.1
+     */
+    void visitStackMapType(StackMapType obj);
+
     void visitSynthetic(Synthetic obj);
 
     void visitUnknown(Unknown obj);
