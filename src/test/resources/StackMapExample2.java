@@ -1,3 +1,7 @@
+/*
+ * Another version of StackMapExample using 2 types of locals String and int
+ * instead of just String. 
+ */
 public class StackMapExample2 {
 
     public static void main(String[] args) {
