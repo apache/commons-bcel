@@ -133,7 +133,7 @@ public class VerifierTestCase {
 
     @Test
     public void testObjectBrowser() throws ClassNotFoundException {
-        testDefaultMethodValidation("groovy.inspect.swingui.ObjectBrowser"); // contains SWAP instruction
+        testDefaultMethodValidation("com.google.protobuf.Utf8$UnpairedSurrogateException"); // contains SWAP instruction
     }
     
     @Test
