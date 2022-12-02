@@ -125,7 +125,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Kengo TODA, Gary Gregory">Keep ConstantPool.getConstant(int) backward compatible with 6.5.0 #157.</action>
       <!-- UPDATE -->
-      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump actions/setup-java from 3.5.1 to 3.6.0 #159.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump actions/setup-java from 3.5.1 to 3.7.0 #159, #179.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs from 4.7.2 to 4.7.3.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugub from 4.7.2.1 to 4.7.2.2.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump pmd from 6.50.0 to 6.51.0.</action>
