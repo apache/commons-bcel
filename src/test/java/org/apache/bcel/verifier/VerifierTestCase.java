@@ -132,7 +132,7 @@ public class VerifierTestCase {
     }
 
     @Test
-    public void testObjectBrowser() throws ClassNotFoundException {
+    public void testUtf8UnpairedSurrogateException() throws ClassNotFoundException {
         testDefaultMethodValidation("com.google.protobuf.Utf8$UnpairedSurrogateException"); // contains SWAP instruction
     }
     
