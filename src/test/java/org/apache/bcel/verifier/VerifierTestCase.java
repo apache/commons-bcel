@@ -137,6 +137,11 @@ public class VerifierTestCase {
     }
     
     @Test
+    public void testUnionInputStream() throws ClassNotFoundException {
+        testDefaultMethodValidation("org.eclipse.jgit.util.io.UnionInputStream"); // contains null ATHROW
+    }
+
+    @Test
     public void testWSDL() throws IOException, URISyntaxException, ClassNotFoundException {
         testJarFile(getJarFile(javax.wsdl.Port.class), "WSDLReaderImpl",  "DefinitionImpl");
     }
