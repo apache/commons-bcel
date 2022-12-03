@@ -513,6 +513,12 @@
       <version>1.5.3</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all-minimal</artifactId>
+      <version>1.5.8</version>
+      <scope>test</scope>
+    </dependency>
     <!-- END very old jars for Justice verifier -->
   </dependencies>
 

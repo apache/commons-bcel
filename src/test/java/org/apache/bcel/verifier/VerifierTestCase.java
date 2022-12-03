@@ -135,7 +135,12 @@ public class VerifierTestCase {
     public void testUtf8UnpairedSurrogateException() throws ClassNotFoundException {
         testDefaultMethodValidation("com.google.protobuf.Utf8$UnpairedSurrogateException"); // contains SWAP instruction
     }
-    
+
+    @Test
+    public void testObjectBrowser() throws ClassNotFoundException {
+        testDefaultMethodValidation("groovy.inspect.swingui.ObjectBrowser"); // contains SWAP instruction
+    }
+
     @Test
     public void testUnionInputStream() throws ClassNotFoundException {
         testDefaultMethodValidation("org.eclipse.jgit.util.io.UnionInputStream"); // contains null ATHROW
