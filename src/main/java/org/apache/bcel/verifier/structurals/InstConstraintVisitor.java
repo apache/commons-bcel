@@ -918,21 +918,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     private Field visitFieldInstructionInternals(final FieldInstruction o) throws ClassNotFoundException {
         final String fieldName = o.getFieldName(cpg);
         final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-        final Field[] fields = jc.getFields();
-        Field f = null;
-        for (final Field field : fields) {
-            if (field.getName().equals(fieldName)) {
-                final Type fType = Type.getType(field.getSignature());
-                final Type oType = o.getType(cpg);
-                /*
-                 * TODO: Check if assignment compatibility is sufficient. What does Sun do?
-                 */
-                if (fType.equals(oType)) {
-                    f = field;
-                    break;
-                }
-            }
-        }
+        final Field f = jc.findFieldByNameAndType(fieldName, o.getType(cpg));
         if (f == null) {
             throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
         }
@@ -944,7 +930,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
         if (t instanceof ReferenceType) {
             if (value instanceof ReferenceType) {
-                ReferenceType rValue = (ReferenceType) value;
+                final ReferenceType rValue = (ReferenceType) value;
                 referenceTypeIsInitialized(o, rValue);
                 // TODO: This can possibly only be checked using Staerk-et-al's "set-of-object types", not
                 // using "wider cast object types" created during verification.
@@ -1054,43 +1040,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
             final String fieldName = o.getFieldName(cpg);
 
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-            Field[] fields = jc.getFields();
-            Field f = null;
-            for (final Field field : fields) {
-                if (field.getName().equals(fieldName)) {
-                    final Type fType = Type.getType(field.getSignature());
-                    final Type oType = o.getType(cpg);
-                    /*
-                     * TODO: Check if assignment compatibility is sufficient. What does Sun do?
-                     */
-                    if (fType.equals(oType)) {
-                        f = field;
-                        break;
-                    }
-                }
-            }
-
+            final Field f = jc.findFieldByNameAndType(fieldName, o.getType(cpg));
             if (f == null) {
-                final JavaClass[] superclasses = jc.getSuperClasses();
-                outer: for (final JavaClass superclass : superclasses) {
-                    fields = superclass.getFields();
-                    for (final Field field : fields) {
-                        if (field.getName().equals(fieldName)) {
-                            final Type fType = Type.getType(field.getSignature());
-                            final Type oType = o.getType(cpg);
-                            if (fType.equals(oType)) {
-                                f = field;
-                                if ((f.getAccessFlags() & (Const.ACC_PUBLIC | Const.ACC_PROTECTED)) == 0) {
-                                    f = null;
-                                }
-                                break outer;
-                            }
-                        }
-                    }
-                }
-                if (f == null) {
-                    throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
-                }
+                throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
             }
 
             if (f.isProtected()) {
@@ -2455,7 +2407,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         try {
 
             final Type objectref = stack().peek(1);
-            if (!(objectref instanceof ObjectType || objectref == Type.NULL)) {
+            if (!(objectref instanceof ObjectType || objectref instanceof UninitializedObjectType || objectref == Type.NULL)) {
                 constraintViolated(o, "Stack next-to-top should be an object reference that's not an array reference, but is '" + objectref + "'.");
             }
 

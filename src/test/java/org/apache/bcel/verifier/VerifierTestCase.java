@@ -138,7 +138,17 @@ public class VerifierTestCase {
 
     @Test
     public void testObjectBrowser() throws ClassNotFoundException {
-        testDefaultMethodValidation("groovy.inspect.swingui.ObjectBrowser"); // contains SWAP instruction
+        testDefaultMethodValidation("groovy.inspect.swingui.ObjectBrowser"); // RETURN lies in dead code
+    }
+
+    @Test
+    public void testWritableClosure() throws ClassNotFoundException {
+        testDefaultMethodValidation("groovy.lang.Closure$WritableClosure"); // PUTFIELD UninitializedObjectType
+    }
+
+    @Test
+    public void testMakeGrammar() throws ClassNotFoundException {
+        testDefaultMethodValidation("groovyjarjarantlr.MakeGrammar"); // GETFIELD / PUTFIELD of package-private
     }
 
     @Test

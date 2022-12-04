@@ -320,59 +320,9 @@ public final class Pass3aVerifier extends PassVerifier {
                 final String fieldName = o.getFieldName(constantPoolGen);
 
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-                Field[] fields = jc.getFields();
-                Field f = null;
-                for (final Field field : fields) {
-                    if (field.getName().equals(fieldName)) {
-                        final Type fType = Type.getType(field.getSignature());
-                        final Type oType = o.getType(constantPoolGen);
-                        /*
-                         * TODO: Check if assignment compatibility is sufficient. What does Sun do?
-                         */
-                        if (fType.equals(oType)) {
-                            f = field;
-                            break;
-                        }
-                    }
-                }
+                final Field f = jc.findFieldByNameAndType(fieldName, o.getType(constantPoolGen));
                 if (f == null) {
-                    final JavaClass[] superclasses = jc.getSuperClasses();
-                    outer: for (final JavaClass superclass : superclasses) {
-                        fields = superclass.getFields();
-                        for (final Field field : fields) {
-                            if (field.getName().equals(fieldName)) {
-                                final Type fType = Type.getType(field.getSignature());
-                                final Type oType = o.getType(constantPoolGen);
-                                if (fType.equals(oType)) {
-                                    f = field;
-                                    if ((f.getAccessFlags() & (Const.ACC_PUBLIC | Const.ACC_PROTECTED)) == 0) {
-                                        f = null;
-                                    }
-                                    break outer;
-                                }
-                            }
-                        }
-                    }
-                    if (f == null) {
-                        constraintViolated(o, "Referenced field '" + fieldName + "' does not exist in class '" + jc.getClassName() + "'.");
-                    }
-                } else {
-                    /*
-                     * TODO: Check if assignment compatibility is sufficient. What does Sun do?
-                     */
-                    Type.getType(f.getSignature());
-                    o.getType(constantPoolGen);
-//                Type f_type = Type.getType(f.getSignature());
-//                Type o_type = o.getType(cpg);
-
-                    // Argh. Sun's implementation allows us to have multiple fields of
-                    // the same name but with a different signature.
-                    // if (! f_type.equals(o_type)) {
-                    // constraintViolated(o,
-                    // "Referenced field '"+field_name+"' has type '"+f_type+"' instead of '"+o_type+"' as expected.");
-                    // }
-
-                    /* TODO: Check for access modifiers here. */
+                    constraintViolated(o, "Referenced field '" + fieldName + "' does not exist in class '" + jc.getClassName() + "'.");
                 }
             } catch (final ClassNotFoundException e) {
                 // FIXME: maybe not the best way to handle this
@@ -414,14 +364,7 @@ public final class Pass3aVerifier extends PassVerifier {
             try {
                 final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-                final Field[] fields = jc.getFields();
-                Field f = null;
-                for (final Field field : fields) {
-                    if (field.getName().equals(fieldName)) {
-                        f = field;
-                        break;
-                    }
-                }
+                final Field f = jc.findFieldByNameAndType(fieldName, o.getType(constantPoolGen));
                 if (f == null) {
                     throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
@@ -857,14 +800,7 @@ public final class Pass3aVerifier extends PassVerifier {
             try {
                 final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-                final Field[] fields = jc.getFields();
-                Field f = null;
-                for (final Field field : fields) {
-                    if (field.getName().equals(fieldName)) {
-                        f = field;
-                        break;
-                    }
-                }
+                final Field f = jc.findFieldByNameAndType(fieldName, o.getType(constantPoolGen));
                 if (f == null) {
                     throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }

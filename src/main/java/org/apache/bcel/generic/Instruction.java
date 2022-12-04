@@ -588,7 +588,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * @return mnemonic for instruction with sumbolic references resolved
+     * @return mnemonic for instruction with symbolic references resolved
      */
     public String toString(final ConstantPool cp) {
         return toString(false);

@@ -230,7 +230,7 @@ public class ExecutionVisitor extends EmptyVisitor {
         // It's possibly wrong to do so, but SUN's
         // ByteCode verifier seems to do (only) this, too.
         // TODO: One could use a sophisticated analysis here to check
-        // if a type cannot possibly be cated to another and by
+        // if a type cannot possibly be cast to another and by
         // so doing predict the ClassCastException at run-time.
         stack().pop();
         stack().push(o.getType(cpg));
