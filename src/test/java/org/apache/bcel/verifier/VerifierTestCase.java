@@ -33,6 +33,8 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.NestHost;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
+import org.apache.bcel.verifier.input.FieldVerifierChildClass;
+import org.apache.bcel.verifier.input.StaticFieldVerifierChildClass;
 import org.apache.bcel.verifier.statics.StringRepresentation;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -106,6 +108,16 @@ public class VerifierTestCase {
         VerifierFactory.clear();
     }
 
+    @Test
+    public void testPackagePrivateField() throws ClassNotFoundException {
+        testDefaultMethodValidation(FieldVerifierChildClass.class.getName());
+    }
+    
+    @Test
+    public void testPackagePrivateStaticField() throws ClassNotFoundException {
+        testDefaultMethodValidation(StaticFieldVerifierChildClass.class.getName());
+    }
+    
     @Test
     public void testArrayUtils() throws ClassNotFoundException {
         testNestHostWithJavaVersion("org.apache.commons.lang.ArrayUtils");
