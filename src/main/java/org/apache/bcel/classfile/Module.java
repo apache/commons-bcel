@@ -103,67 +103,79 @@ public final class Module extends Attribute {
     }
 
     /**
-     * 
+     * Gets version for this module.
      * @param cp Array of constants
      * @return version from constant pool, "0" if version index is 0
+     * @since 6.7.1
      */
     public String getVersion(final ConstantPool cp) {
         return moduleVersionIndex == 0 ? "0" : cp.getConstantString(moduleVersionIndex, Const.CONSTANT_Utf8);
     }
 
     /**
-     * 
+     * Gets flags for this module.
      * @return module flags
+     * @since 6.7.1
      */
     public int getModuleFlags() {
         return moduleFlags;
     }
 
     /**
-     * 
+     * Gets module name.
      * @param cp Array of constants
      * @return module name
+     * @since 6.7.1
      */
     public String getModuleName(final ConstantPool cp) {
         return cp.getConstantString(moduleNameIndex, Const.CONSTANT_Module);
     }
 
     /**
+     * Gets module name index.
      * @return the moduleNameIndex
+     * @since 6.7.1
      */
     public int getModuleNameIndex() {
         return moduleNameIndex;
     }
 
     /**
+     * Gets module version index.
      * @return the moduleVersionIndex
+     * @since 6.7.1
      */
     public int getModuleVersionIndex() {
         return moduleVersionIndex;
     }
 
     /**
+     * Gets count of uses.
      * @return the usesCount
+     * @since 6.7.1
      */
     public int getUsesCount() {
         return usesCount;
     }
 
     /**
+     * Gets index of uses.
      * @return the usesIndex
+     * @since 6.7.1
      */
     public int[] getUsesIndex() {
         return usesIndex;
     }
 
     /**
-     * 
+     * Gets the array of class names for this module's uses.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @param compactClassName false for original constant pool value, true to replace '/' with '.'
      * @return array of used class names
+     * @since 6.7.1
      */
     public String[] getUsedClassNames(final ConstantPool constantPool, final boolean compactClassName) {
-        String[] usedClassNames = new String[usesCount];
+        final String[] usedClassNames = new String[usesCount];
         for (int i = 0; i < usesCount; i++) {
             usedClassNames[i] = getClassNameAtIndex(constantPool, usesIndex[i], compactClassName);
         }
@@ -171,7 +183,7 @@ public final class Module extends Attribute {
     }
 
     private static String getClassNameAtIndex(final ConstantPool cp, final int index, final boolean compactClassName) {
-        String className = cp.getConstantString(index, Const.CONSTANT_Class);
+        final String className = cp.getConstantString(index, Const.CONSTANT_Class);
         if (compactClassName) {
             return Utility.compactClassName(className, false);
         }

@@ -52,34 +52,41 @@ public final class ModuleProvides implements Cloneable, Node {
     }
 
     /**
+     * Gets the index for this ModuleProvides.
      * @return the providesIndex
+     * @since 6.7.1
      */
     public int getProvidesIndex() {
         return providesIndex;
     }
 
     /**
+     * Gets the number of provides.
      * @return the providesWithCount
+     * @since 6.7.1
      */
     public int getProvidesWithCount() {
         return providesWithCount;
     }
 
     /**
+     * Gets the array of indexes for the 'provides with' clause.
      * @return the providesWithIndex
+     * @since 6.7.1
      */
     public int[] getProvidesWithIndex() {
         return providesWithIndex;
     }
 
     /**
-     * 
+     * Gets the array of implementation class names for this ModuleProvides.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @param compactClassName false for original constant pool value, true to replace '/' with '.'
      * @return array of implementation class names
+     * @since 6.7.1
      */
     public String[] getImplementationClassNames(final ConstantPool constantPool, final boolean compactClassName) {
-        String[] implementationClassNames = new String[providesWithCount];
+        final String[] implementationClassNames = new String[providesWithCount];
         for (int i = 0; i < providesWithCount; i++) {
             implementationClassNames[i] = getImplementationClassNameAtIndex(constantPool, providesWithIndex[i], compactClassName);
         }
@@ -87,7 +94,7 @@ public final class ModuleProvides implements Cloneable, Node {
     }
 
     private static String getImplementationClassNameAtIndex(final ConstantPool constantPool, final int index, final boolean compactClassName) {
-        String className = constantPool.getConstantString(index, Const.CONSTANT_Class);
+        final String className = constantPool.getConstantString(index, Const.CONSTANT_Class);
         if (compactClassName) {
             return Utility.compactClassName(className, false);
         }
@@ -95,9 +102,10 @@ public final class ModuleProvides implements Cloneable, Node {
     }
 
     /**
-     * 
+     * Gets the interface name for this ModuleProvides.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return interface name
+     * @since 6.7.1
      */
     public String getInterfaceName(final ConstantPool constantPool) {
         return constantPool.constantToString(providesIndex, Const.CONSTANT_Class);

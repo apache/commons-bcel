@@ -54,40 +54,49 @@ public final class ModuleExports implements Cloneable, Node {
     }
 
     /**
+     * Gets the index for this ModuleExports.
      * @return the exportsIndex
+     * @since 6.7.1
      */
     public int getExportsIndex() {
         return exportsIndex;
     }
 
     /**
+     * Gets the flags for this ModuleExports.
      * @return the exportsFlags
+     * @since 6.7.1
      */
     public int getExportsFlags() {
         return exportsFlags;
     }
 
     /**
+     * Gets the number of exports for this ModuleExports.
      * @return the exportsToCount
+     * @since 6.7.1
      */
     public int getExportsToCount() {
         return exportsToCount;
     }
 
     /**
+     * Gets an array of indexes for this ModuleExports' 'exports to'.
      * @return the exportsToIndex
+     * @since 6.7.1
      */
     public int[] getExportsToIndex() {
         return exportsToIndex;
     }
 
     /**
-     * 
+     * Gets an array of module names for this ModuleExports.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return array of module names following 'exports to'
+     * @since 6.7.1
      */
     public String[] getToModuleNames(final ConstantPool constantPool) {
-        String[] toModuleNames = new String[exportsToCount];
+        final String[] toModuleNames = new String[exportsToCount];
         for (int i = 0; i < exportsToCount; i++) {
             toModuleNames[i] = getToModuleNameAtIndex(constantPool, exportsToIndex[i]);
         }
@@ -99,9 +108,10 @@ public final class ModuleExports implements Cloneable, Node {
     }
 
     /**
-     * 
+     * Gets the exported package name.
      * @param constantPool the constant pool from the ClassFile
      * @return the exported package name
+     * @since 6.7.1
      */
     public String getPackageName(final ConstantPool constantPool) {
         return constantPool.constantToString(exportsIndex, Const.CONSTANT_Package);
