@@ -205,7 +205,7 @@ public final class Method extends FieldOrMethod {
         }
         return code.getLocalVariableTypeTable();
     }
-    
+
     /**
      * @return Annotations on the parameters of a method
      * @since 6.0

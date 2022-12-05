@@ -234,7 +234,7 @@ public final class Code extends Attribute {
         }
         return null;
     }
-    
+
     /**
      * Gets the local variable type table attribute {@link LocalVariableTypeTable}.
      * @return LocalVariableTypeTable of Code, if it has one, null otherwise.
