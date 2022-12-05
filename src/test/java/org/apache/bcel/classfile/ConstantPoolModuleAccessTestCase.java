@@ -17,6 +17,8 @@
 package org.apache.bcel.classfile;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnJre;
+import org.junit.jupiter.api.condition.JRE;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -32,13 +34,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 /**
  * Tests {@code module-info.class} files.
  */
-class ConstantPoolModuleAccessTestCase {
+public class ConstantPoolModuleAccessTestCase {
 
     @Test
-    void testJREModules() throws Exception {
-        Enumeration<URL> moduleURLs = getClass().getClassLoader().getResources("module-info.class");
+    @DisabledOnJre(value = JRE.JAVA_8)
+    public void testJREModules() throws Exception {
+        final Enumeration<URL> moduleURLs = getClass().getClassLoader().getResources("module-info.class");
         while (moduleURLs.hasMoreElements()) {
-            URL url = moduleURLs.nextElement();
+            final URL url = moduleURLs.nextElement();
             try (InputStream inputStream = url.openStream()) {
                 final ClassParser classParser = new ClassParser(inputStream, "module-info.class");
                 final JavaClass javaClass = classParser.parse();
@@ -46,13 +49,13 @@ class ConstantPoolModuleAccessTestCase {
                 final StringBuilder sb = new StringBuilder();
                 final EmptyVisitor visitor = new EmptyVisitor() {
                     @Override
-                    public void visitModule(Module obj) {
-                        String[] usedClassNames = obj.getUsedClassNames(constantPool, true);
+                    public void visitModule(final Module obj) {
+                        final String[] usedClassNames = obj.getUsedClassNames(constantPool, true);
                         if (url.getPath().contains("junit-jupiter-engine")) {
                             assertEquals(1, usedClassNames.length);
                             assertEquals("org.junit.jupiter.api.extension.Extension", usedClassNames[0]);
                         } else if (url.getPath().contains("junit-platform-launcher")) {
-                            List<String> expected = new ArrayList<>();
+                            final List<String> expected = new ArrayList<>();
                             expected.add("org.junit.platform.engine.TestEngine");
                             expected.add("org.junit.platform.launcher.LauncherDiscoveryListener");
                             expected.add("org.junit.platform.launcher.LauncherSessionListener");
@@ -66,11 +69,11 @@ class ConstantPoolModuleAccessTestCase {
                     }
 
                     @Override
-                    public void visitModuleExports(ModuleExports obj) {
-                        String packageName = obj.getPackageName(constantPool);
-                        String[] toModuleNames = obj.getToModuleNames(constantPool);
+                    public void visitModuleExports(final ModuleExports obj) {
+                        final String packageName = obj.getPackageName(constantPool);
+                        final String[] toModuleNames = obj.getToModuleNames(constantPool);
                         if (url.getPath().contains("junit-platform-commons")) {
-                            List<String> expected = new ArrayList<>();
+                            final List<String> expected = new ArrayList<>();
                             expected.add("org.junit.jupiter.api");
                             expected.add("org.junit.jupiter.engine");
                             expected.add("org.junit.jupiter.migrationsupport");
@@ -100,9 +103,9 @@ class ConstantPoolModuleAccessTestCase {
                     }
 
                     @Override
-                    public void visitModuleProvides(ModuleProvides obj) {
-                        String interfaceName = obj.getInterfaceName(constantPool);
-                        String[] implementationClassNames = obj.getImplementationClassNames(constantPool, true);
+                    public void visitModuleProvides(final ModuleProvides obj) {
+                        final String interfaceName = obj.getInterfaceName(constantPool);
+                        final String[] implementationClassNames = obj.getImplementationClassNames(constantPool, true);
                         if (url.getPath().contains("junit-jupiter-engine")) {
                             assertEquals("org.junit.platform.engine.TestEngine", interfaceName);
                             assertEquals(1, implementationClassNames.length);
@@ -116,9 +119,9 @@ class ConstantPoolModuleAccessTestCase {
                     }
                     
                     @Override
-                    public void visitModuleOpens(ModuleOpens obj) {
-                        String packageName = obj.getPackageName(constantPool);
-                        String[] toModuleNames = obj.getToModuleNames(constantPool);
+                    public void visitModuleOpens(final ModuleOpens obj) {
+                        final String packageName = obj.getPackageName(constantPool);
+                        final String[] toModuleNames = obj.getToModuleNames(constantPool);
                         if (url.getPath().contains("junit-jupiter-engine")) {
                             assertEquals("org.junit.jupiter.engine.extension", packageName);
                             assertEquals(1, toModuleNames.length);
@@ -133,10 +136,10 @@ class ConstantPoolModuleAccessTestCase {
                     }
                     
                     @Override
-                    public void visitModuleRequires(ModuleRequires obj) {
+                    public void visitModuleRequires(final ModuleRequires obj) {
                         if (url.getPath().contains("junit-jupiter-engine")) {
-                            String moduleName = obj.getModuleName(constantPool);
-                            List<String> expected = new ArrayList<>();
+                            final String moduleName = obj.getModuleName(constantPool);
+                            final List<String> expected = new ArrayList<>();
                             expected.add("java.base");
                             expected.add("org.apiguardian.api");
                             expected.add("org.junit.jupiter.api");
