@@ -260,6 +260,20 @@ public final class Code extends Attribute {
     }
 
     /**
+     * Gets the local variable type table attribute {@link LocalVariableTypeTable}.
+     * @return LocalVariableTypeTable of Code, if it has one, null otherwise.
+     * @since 6.7.1
+     */
+    public LocalVariableTypeTable getLocalVariableTypeTable() {
+        for (final Attribute attribute : attributes) {
+            if (attribute instanceof LocalVariableTypeTable) {
+                return (LocalVariableTypeTable) attribute;
+            }
+        }
+        return null;
+    }
+
+    /**
      * @return Number of local variables.
      */
     public int getMaxLocals() {

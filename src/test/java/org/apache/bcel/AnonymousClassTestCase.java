@@ -17,9 +17,12 @@
 
 package org.apache.bcel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.apache.bcel.classfile.InnerClass;
+import org.apache.bcel.classfile.InnerClasses;
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
@@ -45,6 +48,14 @@ public class AnonymousClassTestCase extends AbstractTestCase {
         assertFalse(clazz.isNested(), "regular outer classes are not nested");
     }
 
+    @Test
+    public void testRegularClassInnerClasses() throws ClassNotFoundException {
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnonymousClassTest");
+        InnerClasses innerClasses = clazz.getAttribute(Const.ATTR_INNER_CLASSES);
+        InnerClass[] innerClassArray = innerClasses.getInnerClasses();
+        assertEquals(3, innerClassArray.length);
+    }
+    
     @Test
     public void testStaticInnerClassIsNotAnonymous() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnonymousClassTest$Y");

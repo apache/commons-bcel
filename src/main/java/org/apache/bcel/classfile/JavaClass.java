@@ -439,6 +439,22 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets attribute for given tag.
+     * @return Attribute for given tag, null if not found.
+     * Refer to {@link org.apache.bcel.Const#ATTR_UNKNOWN} constants named ATTR_* for possible values.
+     * @since 6.7.1
+     */
+    @SuppressWarnings("unchecked")
+    public final <T extends Attribute> T getAttribute(final byte tag) {
+        for (final Attribute attribute : getAttributes()) {
+            if (attribute.getTag() == tag) {
+                return (T) attribute;
+            }
+        }
+        return null;
+    }
+
+    /**
      * @return class in binary format
      */
     public byte[] getBytes() {
