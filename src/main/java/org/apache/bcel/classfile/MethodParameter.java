@@ -25,6 +25,9 @@ import org.apache.bcel.Const;
 
 /**
  * Entry of the parameters table.
+ * <p>
+ * Implements {@link Node} as of 6.7.0.
+ * </p>
  *
  * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.24"> The class File Format :
  *      The MethodParameters Attribute</a>
