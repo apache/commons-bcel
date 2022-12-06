@@ -45,7 +45,7 @@ public class MethodParameter implements Cloneable, Node {
     }
 
     /**
-     * Construct object from input stream.
+     * Constructs an instance from a DataInput.
      *
      * @param input Input stream
      * @throws IOException if an I/O error occurs.
@@ -74,7 +74,7 @@ public class MethodParameter implements Cloneable, Node {
     }
 
     /**
-     * Dump object to file stream on binary format.
+     * Dumps object to file stream on binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.
@@ -93,7 +93,10 @@ public class MethodParameter implements Cloneable, Node {
     }
 
     /**
-     * Returns the name of the parameter.
+     * Gets the name of the parameter.
+     *
+     * @param constantPool The pool to query.
+     * @return Constant from the given pool.
      */
     public String getParameterName(final ConstantPool constantPool) {
         if (nameIndex == 0) {
