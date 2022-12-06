@@ -33,8 +33,10 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.LocalVariableGen;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class LocalVariableTypeTableTestCase extends AbstractTestCase {
 
@@ -148,12 +150,15 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
 
     @Test
     public void testGetLocalVariableTypeTable() throws ClassNotFoundException {
-        JavaClass testJavaClass = getTestJavaClass("org/apache/commons/lang3/function/TriFunction");
-        String expectedToString = "LocalVariableTypes(startPc = 0, length = 17, index = 0:org.apache.commons.lang3.function.TriFunction<T, U, V, R> this)";
-        for (Method method : testJavaClass.getMethods()) {
+        final JavaClass testJavaClass = getTestJavaClass("org/apache/commons/lang3/function/TriFunction");
+        final String expectedToString = "LocalVariableTypes(startPc = 0, length = 17, index = 0:org.apache.commons.lang3.function.TriFunction<T, U, V, R> this)";
+        for (final Method method : testJavaClass.getMethods()) {
             if ("lambda$andThen$0".equals(method.getName())) {
-                LocalVariableTypeTable localVariableTypeTable = method.getLocalVariableTypeTable();
-                Assertions.assertEquals(expectedToString, localVariableTypeTable.toString());
+                final LocalVariableTypeTable localVariableTypeTable = method.getLocalVariableTypeTable();
+                assertEquals(expectedToString, localVariableTypeTable.toString());
+            }
+            if ("apply".equals(method.getName())) {
+                assertNull(method.getLocalVariableTypeTable());
             }
         }
     }
