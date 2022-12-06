@@ -120,15 +120,6 @@ public final class Module extends Attribute {
     }
 
     /**
-     * Gets flags for this module.
-     * @return module flags
-     * @since 6.7.1
-     */
-    public int getModuleFlags() {
-        return moduleFlags;
-    }
-
-    /**
      * Gets module name.
      * @param cp Array of constants
      * @return module name
@@ -136,42 +127,6 @@ public final class Module extends Attribute {
      */
     public String getModuleName(final ConstantPool cp) {
         return cp.getConstantString(moduleNameIndex, Const.CONSTANT_Module);
-    }
-
-    /**
-     * Gets module name index.
-     * @return the moduleNameIndex
-     * @since 6.7.1
-     */
-    public int getModuleNameIndex() {
-        return moduleNameIndex;
-    }
-
-    /**
-     * Gets module version index.
-     * @return the moduleVersionIndex
-     * @since 6.7.1
-     */
-    public int getModuleVersionIndex() {
-        return moduleVersionIndex;
-    }
-
-    /**
-     * Gets count of uses.
-     * @return the usesCount
-     * @since 6.7.1
-     */
-    public int getUsesCount() {
-        return usesCount;
-    }
-
-    /**
-     * Gets index of uses.
-     * @return the usesIndex
-     * @since 6.7.1
-     */
-    public int[] getUsesIndex() {
-        return usesIndex;
     }
 
     /**

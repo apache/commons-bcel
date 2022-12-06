@@ -49,33 +49,6 @@ public final class ModuleRequires implements Cloneable, Node {
     }
 
     /**
-     * Gets the index for this ModuleRequires.
-     * @return the requiresIndex
-     * @since 6.7.1
-     */
-    public int getRequiresIndex() {
-        return requiresIndex;
-    }
-
-    /**
-     * Gets the flags for this ModuleRequires.
-     * @return the requiresFlags
-     * @since 6.7.1
-     */
-    public int getRequiresFlags() {
-        return requiresFlags;
-    }
-
-    /**
-     * Gets the required version index.
-     * @return the requiresVersionIndex
-     * @since 6.7.1
-     */
-    public int getRequiresVersionIndex() {
-        return requiresVersionIndex;
-    }
-
-    /**
      * Gets the required version from the constant pool.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return required version, "0" if version index is 0.

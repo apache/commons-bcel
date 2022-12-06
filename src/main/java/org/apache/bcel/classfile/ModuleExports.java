@@ -54,42 +54,6 @@ public final class ModuleExports implements Cloneable, Node {
     }
 
     /**
-     * Gets the index for this ModuleExports.
-     * @return the exportsIndex
-     * @since 6.7.1
-     */
-    public int getExportsIndex() {
-        return exportsIndex;
-    }
-
-    /**
-     * Gets the flags for this ModuleExports.
-     * @return the exportsFlags
-     * @since 6.7.1
-     */
-    public int getExportsFlags() {
-        return exportsFlags;
-    }
-
-    /**
-     * Gets the number of exports for this ModuleExports.
-     * @return the exportsToCount
-     * @since 6.7.1
-     */
-    public int getExportsToCount() {
-        return exportsToCount;
-    }
-
-    /**
-     * Gets an array of indexes for this ModuleExports' 'exports to'.
-     * @return the exportsToIndex
-     * @since 6.7.1
-     */
-    public int[] getExportsToIndex() {
-        return exportsToIndex;
-    }
-
-    /**
      * Gets an array of module names for this ModuleExports.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return array of module names following 'exports to'

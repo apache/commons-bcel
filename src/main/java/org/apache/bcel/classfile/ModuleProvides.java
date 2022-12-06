@@ -52,33 +52,6 @@ public final class ModuleProvides implements Cloneable, Node {
     }
 
     /**
-     * Gets the index for this ModuleProvides.
-     * @return the providesIndex
-     * @since 6.7.1
-     */
-    public int getProvidesIndex() {
-        return providesIndex;
-    }
-
-    /**
-     * Gets the number of provides.
-     * @return the providesWithCount
-     * @since 6.7.1
-     */
-    public int getProvidesWithCount() {
-        return providesWithCount;
-    }
-
-    /**
-     * Gets the array of indexes for the 'provides with' clause.
-     * @return the providesWithIndex
-     * @since 6.7.1
-     */
-    public int[] getProvidesWithIndex() {
-        return providesWithIndex;
-    }
-
-    /**
      * Gets the array of implementation class names for this ModuleProvides.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @param compactClassName false for original constant pool value, true to replace '/' with '.'
