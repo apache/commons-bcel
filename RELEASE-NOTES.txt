@@ -1,4 +1,117 @@
               Apache Commons BCEL
+              Version 6.7.0
+              RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.7.0!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+Maintenance and bug fix release.
+
+NEW FEATURES:
+=============
+
+o           Add org.apache.bcel.classfile.ClassFormatException.ClassFormatException(Throwable). Thanks to Gary Gregory.
+o           Add org.apache.bcel.classfile.JavaClass.EXTENSION. Thanks to Gary Gregory.
+o           Add org.apache.bcel.classfile.Module.EXTENSION. Thanks to Gary Gregory.
+o           Add org.apache.bcel.util.Args. Thanks to Gary Gregory.
+o           Add org.apache.bcel.generic.ArrayType.getClassName(). Thanks to Gary Gregory.
+o           Add org.apache.bcel.generic.Type.getClassName(). Thanks to Gary Gregory.
+o           Add org.apache.bcel.classfile.Utility.packageToPath(String). Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.MethodParameter now implements org.apache.bcel.classfile.Node. Thanks to Gary Gregory, Mark Roberts.
+o           Add org.apache.bcel.classfile.JavaClass.getSourceFilePath(). Thanks to nbauma109, Gary Gregory.
+o           Add org.apache.bcel.generic.PUSH.PUSH(ConstantPoolGen, ArrayType). Thanks to nbauma109, Gary Gregory.
+
+FIXED BUGS:
+===========
+
+o           Avoid internal NPE in org.apache.bcel.util.ClassPath.getInputStream(String, String). Thanks to Gary Gregory.
+o           InstructionConstants.ALOAD_0 value is wrong (regression from 6.6.0). Thanks to Gary Gregory.
+o           InstructionConstants.DCONST_0 value is wrong (regression from 6.6.0). Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.Attribute constructors now throw ClassFormatException on invalid name index input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.CodeException constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.ConstantInvokeDynamic.ConstantInvokeDynamic(DataInput). Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.ConstantValue constructors now throw ClassFormatException on invalid length input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.Deprecated constructors now throw ClassFormatException on invalid length input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.EnclosingMethod constructors now throw ClassFormatException on invalid length, class index, or method index input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.ExceptionTable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.InnerClasses constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.LineNumber constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.LocalVariable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.LocalVariableTable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.LocalVariableTypeTable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.ModuleMainClass constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.ModulePackages constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.NestHost constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.NestMembers constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.Signature constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.SourceFile constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.StackMap constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.StackMapEntry.StackMapEntry(DataInput, ConstantPool) reads signed instead of unsigned shorts from its DataInput. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.StackMapType.StackMapType(DataInput, ConstantPool) reads signed instead of unsigned shorts from its DataInput. Thanks to Gary Gregory.
+o           org.apache.bcel.classfile.Synthetic constructors now throw ClassFormatException on invalid length input. Thanks to Gary Gregory.
+o           org.apache.bcel.util.ClassPath hashCode() and equals() don't match. Thanks to Gary Gregory.
+o           Fix code duplication in org.apache.bcel.verifier.structurals.ExceptionHandlers.ExceptionHandlers(MethodGen). Thanks to Mark Roberts, Gary Gregory.
+o           Improve test coverage to bcel/generic and UtilityTest #162. Thanks to Sam Ng, Gary Gregory.
+o           Code coverage and bug fixes for bcelifier #171. Thanks to nbauma109, Gary Gregory.
+o           Code coverage and unit tests on the verifier #166. Thanks to nbauma109, Gary Gregory.
+o           Typo in SimpleElementValue error message #161. Thanks to nbauma109, Gary Gregory.
+o           org.apache.bcel.classfile.Attribute constructors now throw ClassFormatException on invalid length input. Thanks to Mark Thomas, Gary Gregory.
+o           References to constant pool entries that are not of the expected type should throw ClassFormatException, not ClassCastException. Thanks to OSS-Fuzz.
+o           When parsing an invalid class, ensure ClassParser.parse() throws ClassFormatException, not IllegalArgumentException. Thanks to OSS-Fuzz.
+o           org.apache.bcel.classfile.Code constructors now throw ClassFormatException on invalid input. Thanks to OSS-Fuzz.
+o           org.apache.bcel.classfile.StackMapType constructors now throw ClassFormatException on invalid input. Thanks to OSS-Fuzz.
+o           When parsing class files, limit arrays to no more than 255 dimensions as per section 4.4.1 of the JVM specification. Thanks to OSS-Fuzz.
+o           Tests and coverage for Utility class #175. Thanks to nbauma109.
+o           Unit tests and coverage for binary operations #174. Thanks to nbauma109.
+o           Fix possible NullPointerException in org.apache.bcel.classfile.StackMap.setStackMap(StackMapEntry[]). Thanks to Gary Gregory.
+
+CHANGES:
+========
+
+o           Bump spotbugs-maven-plugin from 4.7.2.2 to 4.7.3.0 #167. Thanks to Gary Gregory.
+o           Bump jmh.version from 1.35 to 1.36 #170. Thanks to Dependabot.
+o           Bump pmd from 6.51.0 to 6.52.0. Thanks to Gary Gregory.
+o           Bump japicmp from 0.16.0 to 0.17.1. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BCEL
               Version 6.6.1
               RELEASE NOTES
 
@@ -6,7 +119,7 @@
 INTRODUCTION:
 
 The Apache Commons BCEL team is pleased to announce the release of
-Apache Commons BCEL 6.6.1-SNAPSHOT!
+Apache Commons BCEL 6.6.1!
 
 The Byte Code Engineering Library (BCEL) is intended to give users a convenient
 way to analyze, create, and manipulate compiled .class files. Classes are

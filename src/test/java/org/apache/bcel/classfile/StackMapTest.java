@@ -14,13 +14,23 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.apache.bcel.generic;
+
+package org.apache.bcel.classfile;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
- * Denotes an instruction to perform an unconditional branch, i.e., GOTO, JSR.
- *
- * @see GOTO
- * @see JSR
+ * Tests {@link StackMap}.
  */
-public interface UnconditionalBranch {
+public class StackMapTest {
+
+    @Test
+    public void testSetStackMap() {
+        final StackMap stackMap = new StackMap(0, 0, StackMapEntry.EMPTY_ARRAY, new ConstantPool(new Constant[] { new ConstantLong(0) }));
+        // No NPE
+        stackMap.setStackMap(null);
+        assertArrayEquals(StackMapEntry.EMPTY_ARRAY, stackMap.getStackMap());
+    }
 }

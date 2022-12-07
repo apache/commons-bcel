@@ -71,7 +71,7 @@ public class InstructionHandle {
 
     private Map<Object, Object> attributes;
 
-    /* private */protected InstructionHandle(final Instruction i) {
+    protected InstructionHandle(final Instruction i) {
         setInstruction(i);
     }
 

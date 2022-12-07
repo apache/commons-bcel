@@ -503,9 +503,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     public void dispose() {
         // Traverse in reverse order, because ih.next is overwritten
         for (InstructionHandle ih = end; ih != null; ih = ih.getPrev()) {
-            /*
-             * Causes BranchInstructions to release target and targeters, because it calls dispose() on the contained instruction.
-             */
+            // Causes BranchInstructions to release target and targeters, because it calls dispose() on the contained instruction.
             ih.dispose();
         }
         clear();
@@ -1024,7 +1022,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
         }
         first.setPrev(null); // Completely separated from rest of list
         last.setNext(null);
-        final List<InstructionHandle> targetVec = new ArrayList<>();
+        final List<InstructionHandle> targetList = new ArrayList<>();
         for (InstructionHandle ih = first; ih != null; ih = ih.getNext()) {
             ih.getInstruction().dispose(); // e.g. BranchInstructions release their targets
         }
@@ -1033,7 +1031,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
             next = ih.getNext();
             length--;
             if (ih.hasTargeters()) { // Still got targeters?
-                targetVec.add(ih);
+                targetList.add(ih);
                 buf.append(ih.toString(true)).append(" ");
                 ih.setNext(ih.setPrev(null));
             } else {
@@ -1041,8 +1039,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
             }
         }
         buf.append("}");
-        if (!targetVec.isEmpty()) {
-            throw new TargetLostException(targetVec.toArray(InstructionHandle.EMPTY_ARRAY), buf.toString());
+        if (!targetList.isEmpty()) {
+            throw new TargetLostException(targetList.toArray(InstructionHandle.EMPTY_ARRAY), buf.toString());
         }
     }
 

@@ -62,7 +62,13 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
-    <release version="6.7.0" date="20YY-MM-DD" description="Maintenance and bug fix release.">
+    <release version="6.7.1" date="TBD" description="Maintenance and bug fix release.">
+      <!-- ADD -->
+      <!-- FIX -->
+      <action                  type="fix" dev="markt" due-to="OSS-Fuzz">When parsing an class with an invalid constant reference, ensure ClassParser.parse() throws ClassFormatException, not NullPointerException.</action>
+      <!-- UPDATE -->
+    </release>
+    <release version="6.7.0" date="2022-11-28" description="Maintenance and bug fix release.">
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.ClassFormatException.ClassFormatException(Throwable).</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add org.apache.bcel.classfile.JavaClass.EXTENSION.</action>
@@ -114,16 +120,18 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">When parsing class files, limit arrays to no more than 255 dimensions as per section 4.4.1 of the JVM specification.</action>
       <action                  type="fix" dev="ggregory" due-to="nbauma109">Tests and coverage for Utility class #175.</action>
       <action                  type="fix" dev="ggregory" due-to="nbauma109">Unit tests and coverage for binary operations #174.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix possible NullPointerException in org.apache.bcel.classfile.StackMap.setStackMap(StackMapEntry[]).</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugin from 4.7.2.2 to 4.7.3.0 #167.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jmh.version from 1.35 to 1.36 #170.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump pmd from 6.51.0 to 6.52.0.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump japicmp from 0.16.0 to 0.17.1.</action>
     </release>
     <release version="6.6.1" date="2022-10-29" description="Maintenance and bug fix release.">
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Kengo TODA, Gary Gregory">Keep ConstantPool.getConstant(int) backward compatible with 6.5.0 #157.</action>
       <!-- UPDATE -->
-      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump actions/setup-java from 3.5.1 to 3.6.0 #159.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump actions/setup-java from 3.5.1 to 3.7.0 #159, #179.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs from 4.7.2 to 4.7.3.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugub from 4.7.2.1 to 4.7.2.2.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump pmd from 6.50.0 to 6.51.0.</action>
