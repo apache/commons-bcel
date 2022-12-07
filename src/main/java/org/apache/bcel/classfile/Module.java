@@ -120,6 +120,15 @@ public final class Module extends Attribute {
     }
 
     /**
+     * Gets flags for this module.
+     * @return module flags
+     * @since 6.7.1
+     */
+    public int getModuleFlags() {
+        return moduleFlags;
+    }
+
+    /**
      * Gets module name.
      * @param cp Array of constants
      * @return module name

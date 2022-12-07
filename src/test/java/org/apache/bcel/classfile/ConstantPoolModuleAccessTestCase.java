@@ -23,7 +23,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -45,6 +47,7 @@ public class ConstantPoolModuleAccessTestCase {
                 final EmptyVisitor visitor = new EmptyVisitor() {
                     @Override
                     public void visitModule(final Module obj) {
+                        assertEquals(0, obj.getModuleFlags(), url.toString());
                         final String[] usedClassNames = obj.getUsedClassNames(constantPool, true);
                         if (url.getPath().contains("junit-jupiter-engine")) {
                             assertEquals(1, usedClassNames.length);
@@ -245,6 +248,7 @@ public class ConstantPoolModuleAccessTestCase {
 
                     @Override
                     public void visitModuleExports(final ModuleExports obj) {
+                        assertEquals(0, obj.getExportsFlags(), url.toString());
                         final String packageName = obj.getPackageName(constantPool);
                         final String[] toModuleNames = obj.getToModuleNames(constantPool);
                         if (url.getPath().contains("junit-platform-commons")) {
@@ -295,6 +299,7 @@ public class ConstantPoolModuleAccessTestCase {
 
                     @Override
                     public void visitModuleOpens(final ModuleOpens obj) {
+                        assertEquals(0, obj.getOpensFlags(), url.toString());
                         final String packageName = obj.getPackageName(constantPool);
                         final String[] toModuleNames = obj.getToModuleNames(constantPool);
                         if (url.getPath().contains("junit-jupiter-engine")) {
@@ -314,14 +319,15 @@ public class ConstantPoolModuleAccessTestCase {
                     public void visitModuleRequires(final ModuleRequires obj) {
                         if (url.getPath().contains("junit-jupiter-engine")) {
                             final String moduleName = obj.getModuleName(constantPool);
-                            final List<String> expected = new ArrayList<>();
-                            expected.add("java.base");
-                            expected.add("org.apiguardian.api");
-                            expected.add("org.junit.jupiter.api");
-                            expected.add("org.junit.platform.commons");
-                            expected.add("org.junit.platform.engine");
-                            expected.add("org.opentest4j");
-                            assertTrue(expected.contains(moduleName));
+                            final Map<String, Integer> expected = new HashMap<>();
+                            expected.put("java.base", 32768);
+                            expected.put("org.apiguardian.api", 64);
+                            expected.put("org.junit.jupiter.api", 0);
+                            expected.put("org.junit.platform.commons", 0);
+                            expected.put("org.junit.platform.engine", 0);
+                            expected.put("org.opentest4j", 0);
+                            assertTrue(expected.containsKey(moduleName));
+                            assertEquals(expected.get(moduleName), obj.getRequiresFlags(), moduleName);
                         }
                         super.visitModuleRequires(obj);
                     }

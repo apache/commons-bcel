@@ -54,6 +54,15 @@ public final class ModuleOpens implements Cloneable, Node {
     }
 
     /**
+     * Gets the flags for this ModuleOpens.
+     * @return the opensFlags
+     * @since 6.7.1
+     */
+    public int getOpensFlags() {
+        return opensFlags;
+    }
+
+    /**
      * Gets an array of module names for this ModuleOpens.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return array of module names following 'opens to'
