@@ -292,7 +292,9 @@ public class AnnotationEntryGen {
     }
 
     /**
-     * Returns list of ElementNameValuePair objects
+     * Returns list of ElementNameValuePair objects.
+     *
+     * @return list of ElementNameValuePair objects.
      */
     public List<ElementValuePairGen> getValues() {
         return evs;

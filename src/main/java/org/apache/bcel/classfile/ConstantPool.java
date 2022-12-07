@@ -282,7 +282,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      */
     public <T extends Constant> T getConstant(final int index, final byte tag, final Class<T> castTo) throws ClassFormatException {
         final T c = getConstant(index);
-        if (c.getTag() != tag) {
+        if (c == null || c.getTag() != tag) {
             throw new ClassFormatException("Expected class '" + Const.getConstantName(tag) + "' at index " + index + " and got " + c);
         }
         return c;
