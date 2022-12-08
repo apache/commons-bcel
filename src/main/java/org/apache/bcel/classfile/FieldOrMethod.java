@@ -16,6 +16,8 @@
  */
 package org.apache.bcel.classfile;
 
+import org.apache.bcel.Const;
+
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -50,6 +52,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     @java.lang.Deprecated
     protected int attributes_count; // No. of attributes
+
+    private int declaringClassNameIndex;
 
     // @since 6.0
     private AnnotationEntry[] annotationEntries; // annotations defined on the field or method
@@ -256,5 +260,21 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      */
     public final void setSignatureIndex(final int signatureIndex) {
         this.signature_index = signatureIndex;
+    }
+
+    /**
+     * Gets the declaring class name of this field or method.
+     * @return the declaring class name of this field or method.
+     * @since 6.7.1
+     */
+    public String getDeclaringClassName() {
+        return Utility.pathToPackage(constant_pool.getConstantString(declaringClassNameIndex, Const.CONSTANT_Class));
+    }
+
+    /*
+     * For internal use, called by the class parser.
+     */
+    void setDeclaringClassNameIndex(int declaringClassNameIndex) {
+        this.declaringClassNameIndex = declaringClassNameIndex;
     }
 }
