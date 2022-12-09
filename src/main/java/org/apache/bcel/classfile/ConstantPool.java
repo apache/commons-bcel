@@ -83,6 +83,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
         constantPool = new Constant[constantPoolCount];
         /*
          * constantPool[0] is unused by the compiler and may be used freely by the implementation.
+         * constantPool[0] is currently unused by the implementation.
          */
         for (int i = 1; i < constantPoolCount; i++) {
             constantPool[i] = Constant.readConstant(input);
@@ -300,7 +301,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @since 6.6.0
      */
     public <T extends Constant> T getConstant(final int index, final Class<T> castTo) throws ClassFormatException {
-        if (index >= constantPool.length || index < 0) {
+        if (index >= constantPool.length || index < 1) {
             throw new ClassFormatException("Invalid constant pool reference using index: " + index + ". Constant pool size is: " + constantPool.length);
         }
         if (constantPool[index] != null && !castTo.isAssignableFrom(constantPool[index].getClass())) {
@@ -309,9 +310,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
         }
         // Previous check ensures this won't throw a ClassCastException
         final T c = castTo.cast(constantPool[index]);
-        if (c == null
-            // the 0th element is always null
-            && index != 0) {
+        if (c == null) {
             final Constant prev = constantPool[index - 1];
             if (prev == null || prev.getTag() != Const.CONSTANT_Double && prev.getTag() != Const.CONSTANT_Long) {
                 throw new ClassFormatException("Constant pool at index " + index + " is null.");
