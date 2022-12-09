@@ -66,6 +66,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- ADD -->
       <!-- FIX -->
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">When parsing an class with an invalid constant reference, ensure ClassParser.parse() throws ClassFormatException, not NullPointerException.</action>
+      <action                  type="fix" dev="markt" due-to="OSS-Fuzz">Ensure that references to a constant pool entry with index zero trigger a ClassFormatException, not a NullPointerException.</action>
       <!-- UPDATE -->
     </release>
     <release version="6.7.0" date="2022-11-28" description="Maintenance and bug fix release.">
