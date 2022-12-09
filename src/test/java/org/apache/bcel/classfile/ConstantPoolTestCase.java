@@ -59,7 +59,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
             assertEquals(1, fields.length);
             assertEquals(ClassWithDoubleConstantPoolItem.class.getDeclaredFields()[0].getName(), fields[0].getName());
             final ConstantPool pool = c.getConstantPool();
-            IntStream.range(0, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> {
+            IntStream.range(1, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> {
                 final Constant constant = pool.getConstant(i);
                 if (constant instanceof ConstantDouble) {
                     assertEquals(classWithDoubleConstantPoolItem.d, ((ConstantDouble) constant).getBytes());
@@ -79,7 +79,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
             assertEquals(1, fields.length);
             assertEquals(ClassWithLongConstantPoolItem.class.getDeclaredFields()[0].getName(), fields[0].getName());
             final ConstantPool pool = c.getConstantPool();
-            IntStream.range(0, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> {
+            IntStream.range(1, pool.getLength()).forEach(i -> assertDoesNotThrow(() -> {
                 final Constant constant = pool.getConstant(i);
                 if (constant instanceof ConstantLong) {
                     assertEquals(classWithLongConstantPoolItem.l, ((ConstantLong) constant).getBytes());
