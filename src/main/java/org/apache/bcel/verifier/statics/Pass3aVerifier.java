@@ -609,7 +609,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 final String className = o.getClassName(constantPoolGen);
                 JavaClass jc;
                 if (className.charAt(0) == '[') { // array type, e.g. invoke can be someArray.clone()
-                    jc = Repository.lookupClass("java.lang.Object"); 
+                    jc = Repository.lookupClass("java.lang.Object");
                 } else {
                     jc = Repository.lookupClass(className);
                 }
