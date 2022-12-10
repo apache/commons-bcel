@@ -40,6 +40,8 @@ import org.apache.bcel.verifier.statics.StringRepresentation;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
 public class VerifierTestCase {
 
@@ -140,8 +142,15 @@ public class VerifierTestCase {
     }
 
     @Test
-    public void testObjectInputStream() {
-        assertThrowsExactly(UnsupportedOperationException.class, () -> testDefaultMethodValidation("java.io.ObjectInputStream"));
+    @DisabledForJreRange(min = JRE.JAVA_9)
+    public void testObjectInputStreamJDK8() {
+        assertThrowsExactly(UnsupportedOperationException.class, () -> testNestHostWithJavaVersion("java.io.ObjectInputStream"));
+    }
+
+    @Test
+    @DisabledForJreRange(max = JRE.JAVA_8)
+    public void testObjectInputStream() throws ClassNotFoundException {
+        testNestHostWithJavaVersion("java.io.ObjectInputStream");
     }
 
     @Test
