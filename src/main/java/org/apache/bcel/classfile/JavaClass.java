@@ -329,9 +329,20 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         }
 
         final JavaClass superclass = getSuperClass();
-        final Field f = superclass.findFieldByNameAndType(fieldName, fieldType);
-        if (f != null && (f.isPublic() || f.isProtected() || !f.isPrivate() && packageName.equals(superclass.getPackageName()))) {
-            return f;
+        if (superclass != null && !"java.lang.Object".equals(superclass.getClassName())) {
+            final Field f = superclass.findFieldByNameAndType(fieldName, fieldType);
+            if (f != null && (f.isPublic() || f.isProtected() || !f.isPrivate() && packageName.equals(superclass.getPackageName()))) {
+                return f;
+            }
+        }
+        JavaClass[] implementedInterfaces = getInterfaces();
+        if (implementedInterfaces != null) {
+            for (JavaClass implementedInterface : implementedInterfaces) {
+                final Field f = implementedInterface.findFieldByNameAndType(fieldName, fieldType);
+                if (f != null) {
+                    return f;
+                }
+            }
         }
         return null;
     }

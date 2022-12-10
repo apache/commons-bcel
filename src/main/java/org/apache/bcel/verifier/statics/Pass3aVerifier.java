@@ -25,12 +25,14 @@ import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
 import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
 import org.apache.bcel.classfile.ConstantInterfaceMethodref;
+import org.apache.bcel.classfile.ConstantInvokeDynamic;
 import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
@@ -444,8 +446,8 @@ public final class Pass3aVerifier extends PassVerifier {
                 }
             } else {
                 final Constant c = constantPoolGen.getConstant(o.getIndex());
-                if (!(c instanceof ConstantInterfaceMethodref)) {
-                    constraintViolated(o, "Indexing a constant that's not a CONSTANT_InterfaceMethodref but a '" + tostring(c) + "'.");
+                if (!(c instanceof ConstantInterfaceMethodref) && !(c instanceof ConstantInvokeDynamic)) {
+                    constraintViolated(o, "Indexing a constant that's not a CONSTANT_InterfaceMethodref/InvokeDynamic but a '" + tostring(c) + "'.");
                 }
                 // TODO: From time to time check if BCEL allows to detect if the
                 // 'count' operand is consistent with the information in the
@@ -453,7 +455,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 // By now, BCEL hides those two operands because they're superfluous.
 
                 // Invoked method must not be <init> or <clinit>
-                final ConstantNameAndType cnat = (ConstantNameAndType) constantPoolGen.getConstant(((ConstantInterfaceMethodref) c).getNameAndTypeIndex());
+                final ConstantNameAndType cnat = (ConstantNameAndType) constantPoolGen.getConstant(((ConstantCP) c).getNameAndTypeIndex());
                 final String name = ((ConstantUtf8) constantPoolGen.getConstant(cnat.getNameIndex())).getBytes();
                 if (name.equals(Const.CONSTRUCTOR_NAME)) {
                     constraintViolated(o, "Method to invoke must not be '" + Const.CONSTRUCTOR_NAME + "'.");
@@ -605,7 +607,12 @@ public final class Pass3aVerifier extends PassVerifier {
                 // INVOKEVIRTUAL is an InvokeInstruction, the argument and return types are resolved/verified,
                 // too. So are the allowed method names.
                 final String className = o.getClassName(constantPoolGen);
-                final JavaClass jc = Repository.lookupClass(className);
+                JavaClass jc;
+                if (className.charAt(0) == '[') { // array type, e.g. invoke can be someArray.clone()
+                    jc = Repository.lookupClass("java.lang.Object"); 
+                } else {
+                    jc = Repository.lookupClass(className);
+                }
                 final Method m = getMethodRecursive(jc, o);
                 if (m == null) {
                     constraintViolated(o, "Referenced method '" + o.getMethodName(constantPoolGen) + "' with expected signature '"
