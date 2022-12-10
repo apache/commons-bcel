@@ -113,12 +113,12 @@ public class VerifierTestCase {
     public void testPackagePrivateField() throws ClassNotFoundException {
         testDefaultMethodValidation(FieldVerifierChildClass.class.getName());
     }
-    
+
     @Test
     public void testPackagePrivateStaticField() throws ClassNotFoundException {
         testDefaultMethodValidation(StaticFieldVerifierChildClass.class.getName());
     }
-    
+
     @Test
     public void testArrayUtils() throws ClassNotFoundException {
         testNestHostWithJavaVersion("org.apache.commons.lang.ArrayUtils");
