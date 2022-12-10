@@ -20,6 +20,7 @@ package org.apache.bcel.verifier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -136,6 +137,11 @@ public class VerifierTestCase {
     @Test
     public void testDefinitionImpl() throws ClassNotFoundException {
         testNestHostWithJavaVersion("com.ibm.wsdl.DefinitionImpl");
+    }
+
+    @Test
+    public void testObjectInputStream() {
+        assertThrowsExactly(UnsupportedOperationException.class, () -> testDefaultMethodValidation("java.io.ObjectInputStream"));
     }
 
     @Test
