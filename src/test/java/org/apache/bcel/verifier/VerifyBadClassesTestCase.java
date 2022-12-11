@@ -187,8 +187,8 @@ public class VerifyBadClassesTestCase {
         final String baseDir = "target/test-classes";
         final String testDir = baseDir + (directory.isEmpty() ? "" : "/" + directory);
 
-        final File origFile = new File(testDir + "/" + className + ".classx");
-        final File testFile = new File(testDir + "/" + className + JavaClass.EXTENSION);
+        final File origFile = new File(testDir, className + ".classx");
+        final File testFile = new File(testDir, className + JavaClass.EXTENSION);
 
         if (!origFile.renameTo(testFile)) {
             fail("Failed to rename orig file");
