@@ -22,6 +22,8 @@ import java.lang.reflect.Constructor;
 /*
  * A test for SWAP instruction.
  * To be compiled with Eclipse Compiler (ecj) with source/target 1.4.
+ * This is a requirement for SWAP instruction to be generated.
+ * If compiled with javac source/target 1.1+ or ecj source/target 1.5+, no SWAP instruction is generated.
  */
 public class SWAP {
     public static Constructor getTestConstructor(final Class theClass) throws NoSuchMethodException {

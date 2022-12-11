@@ -18,12 +18,22 @@
 package org.apache.bcel.verifier;
 
 import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.EmptyVisitor;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.SWAP;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,5 +69,25 @@ public class VerifierMainTestCase extends AbstractTestCase {
             assertEquals(0, StringUtils.countMatches(output, "VERIFIED_REJECTED"), output);
             assertEquals(6, StringUtils.countMatches(output, "VERIFIED_OK"), output);
         }
+        // Class has passed the JustIce verifier, but now we need to ensure that the SWAP instruction is in the compiled class.
+        final List<SWAP> swapInstructionsList = new ArrayList<>();
+        final EmptyVisitor swapCollector = new EmptyVisitor() {
+            @Override
+            public void visitSWAP(final SWAP obj) {
+                swapInstructionsList.add(obj);
+                super.visitSWAP(obj);
+            }
+        };        
+        try (InputStream in = Files.newInputStream(Paths.get("target/test-classes/org/apache/bcel/data/SWAP.class"))) {
+            final ClassParser classParser = new ClassParser(in, "SWAP.class");
+            final JavaClass javaClass = classParser.parse();
+            final Method method = javaClass.getMethod(org.apache.bcel.data.SWAP.class.getMethod("getTestConstructor", Class.class));
+            final byte[] code = method.getCode().getCode();
+            final InstructionList instructionList = new InstructionList(code);
+            for (final InstructionHandle instructionHandle : instructionList) {
+                instructionHandle.accept(swapCollector);
+            }
+        }
+        assertEquals(1, swapInstructionsList.size());
     }
 }
