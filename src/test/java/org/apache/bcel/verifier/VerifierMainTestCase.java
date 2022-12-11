@@ -44,7 +44,7 @@ public class VerifierMainTestCase extends AbstractTestCase {
         args.add("-cp");
         args.add(System.getProperty("java.class.path"));
         args.add("org.apache.bcel.verifier.Verifier");
-        args.add("org.apache.bcel.data.SWAP");
+        args.add("org/apache/bcel/data/SWAP.class");
         final ProcessBuilder pb = new ProcessBuilder(args);
         pb.redirectErrorStream(true);
         final Process p = pb.start();
