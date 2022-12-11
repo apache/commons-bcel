@@ -514,6 +514,12 @@
       <scope>test</scope>
     </dependency>
     <!-- END very old jars for Justice verifier -->
+    <dependency>
+      <groupId>org.eclipse.jdt</groupId>
+      <artifactId>ecj</artifactId>
+      <version>3.26.0</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <profiles>
