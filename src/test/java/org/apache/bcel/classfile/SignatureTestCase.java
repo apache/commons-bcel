@@ -18,8 +18,10 @@ package org.apache.bcel.classfile;
 
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.Repository;
+import org.apache.bcel.generic.Type;
 import org.junit.jupiter.api.Test;
 
+import java.io.DataInput;
 import java.util.Map;
 import java.util.Optional;
 
@@ -59,5 +61,20 @@ public class SignatureTestCase extends AbstractTestCase {
     public void testBadSignatures() throws Exception {
         assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate("<"));
         assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate("<>"));
+    }
+
+    @Test
+    public void testType() throws Exception {
+        assertEquals("(I)I", Type.getSignature(Math.class.getMethod("abs", int.class)));
+        assertEquals("(J)J", Type.getSignature(Math.class.getMethod("abs", long.class)));
+        assertEquals("(D)D", Type.getSignature(Math.class.getMethod("abs", double.class)));
+        assertEquals("(F)F", Type.getSignature(Math.class.getMethod("abs", float.class)));
+        assertEquals("(Ljava/lang/String;)[Ljava/lang/String;", Type.getSignature(String.class.getMethod("split", String.class)));
+        assertEquals("(I)C", Type.getSignature(String.class.getMethod("charAt", int.class)));
+        assertEquals("()Ljava/lang/String;", Type.getSignature(String.class.getMethod("trim")));
+        assertEquals("()V", Type.getSignature(Object.class.getMethod("notify")));
+        assertEquals("(Ljava/lang/Object;)Z", Type.getSignature(Object.class.getMethod("equals", Object.class)));
+        assertEquals("()B", Type.getSignature(DataInput.class.getMethod("readByte")));
+        assertEquals("()S", Type.getSignature(DataInput.class.getMethod("readShort")));
     }
 }
