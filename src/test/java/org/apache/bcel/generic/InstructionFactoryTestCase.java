@@ -46,7 +46,7 @@ public class InstructionFactoryTestCase extends AbstractTestCase {
         assertEquals(InstructionConst.AALOAD, createArrayLoad(Type.OBJECT));
         assertEquals(InstructionConst.AALOAD, createArrayLoad(Type.getType("[I")));
     }
-
+    
     @Test
     public void testArrayStore() throws Exception {
         assertEquals(InstructionConst.BASTORE, createArrayStore(Type.BOOLEAN));
@@ -80,5 +80,19 @@ public class InstructionFactoryTestCase extends AbstractTestCase {
         assertThrowsExactly(IllegalArgumentException.class, () -> factory.createCast(Type.UNKNOWN, Type.UNKNOWN));
         assertThrowsExactly(IllegalArgumentException.class, () -> factory.createFieldAccess("java.lang.System", "out", new ObjectType("java.io.PrintStream"), Const.NOP));
         assertThrowsExactly(IllegalArgumentException.class, () -> factory.createInvoke("java.io.PrintStream", "println", Type.VOID, new Type[] { Type.STRING }, Const.NOP));
+    }
+
+    @Test
+    public void testNull() throws Exception {
+        assertEquals(InstructionConst.ICONST_0, createNull(Type.BOOLEAN));
+        assertEquals(InstructionConst.ICONST_0, createNull(Type.BYTE));
+        assertEquals(InstructionConst.ICONST_0, createNull(Type.CHAR));
+        assertEquals(InstructionConst.ICONST_0, createNull(Type.SHORT));
+        assertEquals(InstructionConst.ICONST_0, createNull(Type.INT));
+        assertEquals(InstructionConst.FCONST_0, createNull(Type.FLOAT));
+        assertEquals(InstructionConst.DCONST_0, createNull(Type.DOUBLE));
+        assertEquals(InstructionConst.LCONST_0, createNull(Type.LONG));
+        assertEquals(InstructionConst.ACONST_NULL, createNull(Type.OBJECT));
+        assertEquals(InstructionConst.ACONST_NULL, createNull(Type.getType("[I")));
     }
 }
