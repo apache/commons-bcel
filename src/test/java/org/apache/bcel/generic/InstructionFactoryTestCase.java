@@ -92,6 +92,7 @@ public class InstructionFactoryTestCase extends AbstractTestCase {
         assertEquals(InstructionConst.FCONST_0, createNull(Type.FLOAT));
         assertEquals(InstructionConst.DCONST_0, createNull(Type.DOUBLE));
         assertEquals(InstructionConst.LCONST_0, createNull(Type.LONG));
+        assertEquals(InstructionConst.NOP, createNull(Type.VOID));
         assertEquals(InstructionConst.ACONST_NULL, createNull(Type.OBJECT));
         assertEquals(InstructionConst.ACONST_NULL, createNull(Type.getType("[I")));
     }
