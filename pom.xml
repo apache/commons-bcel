@@ -514,6 +514,13 @@
       <scope>test</scope>
     </dependency>
     <!-- END very old jars for Justice verifier -->
+    <dependency>
+      <!-- Eclipse compiler: useful to generate specific .class file patterns -->
+      <groupId>org.eclipse.jdt</groupId>
+      <artifactId>ecj</artifactId>
+      <version>3.26.0</version> <!-- last JDK8-compatible version -->
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <profiles>
