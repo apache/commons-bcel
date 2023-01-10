@@ -67,8 +67,6 @@
     <checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
     <jna.version>5.12.1</jna.version>
     <japicmp.skip>false</japicmp.skip>
-    <commons.spotbugs.plugin.version>4.7.3.0</commons.spotbugs.plugin.version>
-    <commons.spotbugs.impl.version>4.7.3</commons.spotbugs.impl.version>    
   </properties>
 
   <distributionManagement>
