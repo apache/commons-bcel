@@ -68,7 +68,6 @@
     <jna.version>5.12.1</jna.version>
     <commons.japicmp.version>0.17.1</commons.japicmp.version>
     <japicmp.skip>false</japicmp.skip>
-    <commons.javadoc.version>3.4.1</commons.javadoc.version>
     <commons.felix.version>5.1.8</commons.felix.version>
     <commons.spotbugs.plugin.version>4.7.3.0</commons.spotbugs.plugin.version>
     <commons.spotbugs.impl.version>4.7.3</commons.spotbugs.impl.version>    
