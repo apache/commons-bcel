@@ -77,7 +77,6 @@
     <commons.biz.aQute.bndlib.version>6.3.1</commons.biz.aQute.bndlib.version>
     <commons.pmd.version>3.19.0</commons.pmd.version>
     <commons.pmd-impl.version>6.52.0</commons.pmd-impl.version>
-    <commons.junit.version>5.9.1</commons.junit.version>
   </properties>
 
   <distributionManagement>
