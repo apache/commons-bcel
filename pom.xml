@@ -69,7 +69,6 @@
     <japicmp.skip>false</japicmp.skip>
     <commons.spotbugs.plugin.version>4.7.3.0</commons.spotbugs.plugin.version>
     <commons.spotbugs.impl.version>4.7.3</commons.spotbugs.impl.version>    
-    <commons.pmd-impl.version>6.52.0</commons.pmd-impl.version>
   </properties>
 
   <distributionManagement>
