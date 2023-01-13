@@ -64,7 +64,6 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
     <jna.version>5.12.1</jna.version>
     <japicmp.skip>false</japicmp.skip>
   </properties>
