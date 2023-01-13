@@ -161,7 +161,7 @@ public class SimpleElementValueGen extends ElementValueGen {
             dos.writeShort(idx);
             break;
         default:
-            throw new IllegalStateException("SimpleElementValueGen doesnt know how to write out type " + super.getElementValueType());
+            throw new IllegalStateException("SimpleElementValueGen doesn't know how to write out type " + super.getElementValueType());
         }
     }
 
