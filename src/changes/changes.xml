@@ -72,6 +72,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="nbauma109">Verifier: test and coverage for SWAP instruction #188.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 54 to 56 #189, #198.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.12.1 to 5.13.0 #203.</action>
     </release>
     <release version="6.7.0" date="2022-11-28" description="Maintenance and bug fix release.">
       <!-- ADD -->
