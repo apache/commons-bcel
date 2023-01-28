@@ -86,7 +86,7 @@ public final class ClassParser {
     /**
      * Parses class from given .class file in a ZIP-archive
      *
-     * @param zipFile zip file name
+     * @param zipFile ZIP file name
      * @param fileName file name
      */
     public ClassParser(final String zipFile, final String fileName) {
