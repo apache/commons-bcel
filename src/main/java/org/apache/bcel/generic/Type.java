@@ -89,7 +89,7 @@ public abstract class Type {
             }
             while (signature.charAt(index) != ')') {
                 vec.add(getType(signature.substring(index)));
-                // corrected concurrent private static field acess
+                // corrected concurrent private static field access
                 index += unwrap(CONSUMED_CHARS); // update position
             }
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
@@ -227,7 +227,7 @@ public abstract class Type {
     public static Type getType(final String signature) throws StringIndexOutOfBoundsException {
         final byte type = Utility.typeOfSignature(signature);
         if (type <= Const.T_VOID) {
-            // corrected concurrent private static field acess
+            // corrected concurrent private static field access
             wrap(CONSUMED_CHARS, 1);
             return BasicType.getType(type);
         }
@@ -243,7 +243,7 @@ public abstract class Type {
         } while (signature.charAt(dim) == '[');
         // Recurse, but just once, if the signature is ok
         final Type t = getType(signature.substring(dim));
-        // corrected concurrent private static field acess
+        // corrected concurrent private static field access
         // consumed_chars += dim; // update counter - is replaced by
         final int temp = unwrap(CONSUMED_CHARS) + dim;
         wrap(CONSUMED_CHARS, temp);
