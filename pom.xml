@@ -502,6 +502,12 @@
       <version>3.26.0</version> <!-- last JDK8-compatible version -->
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>1.8.10</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <profiles>

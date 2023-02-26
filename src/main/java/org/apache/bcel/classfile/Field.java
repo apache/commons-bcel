@@ -144,10 +144,12 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
+     * See https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.2.2
+     *
      * @return type of field
      */
     public Type getType() {
-        return Type.getReturnType(getSignature());
+        return Type.getType(getSignature());
     }
 
     /**
