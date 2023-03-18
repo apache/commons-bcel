@@ -36,32 +36,31 @@ public class AnnotationEntryTest {
 
     @Test
     public void testGetElementValuePairs() {
-        AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
+        final AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
         assertArrayEquals(EMPTY_ARRAY, annotationEntry.getElementValuePairs());
     }
 
-
     @Test
     public void testGetNumElementValuePairs() {
-        AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
+        final AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
         assertEquals(0, annotationEntry.getNumElementValuePairs());
     }
 
     @Test
     public void testAddElementNameValuePair() {
-        AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
+        final AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
         annotationEntry.addElementNameValuePair(new ElementValuePair(0, new SimpleElementValue(0, 0, null), null));
         assertEquals(1, annotationEntry.getNumElementValuePairs());
     }
-    
+
     @Test
     public void testDump() {
-        AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        final AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
             annotationEntry.dump(new DataOutputStream(out));
             assertArrayEquals(new byte[4], out.toByteArray());
-        } catch (IOException e) {
+        } catch (final IOException e) {
             fail(e);
         }
     }
