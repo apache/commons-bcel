@@ -28,23 +28,8 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class AnnotationEntryTest {
-
-    static final ElementValuePair[] EMPTY_ARRAY = {};
-
-    @Test
-    public void testGetElementValuePairs() {
-        final AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
-        assertArrayEquals(EMPTY_ARRAY, annotationEntry.getElementValuePairs());
-    }
-
-    @Test
-    public void testGetNumElementValuePairs() {
-        final AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
-        assertEquals(0, annotationEntry.getNumElementValuePairs());
-    }
 
     @Test
     public void testAddElementNameValuePair() {
@@ -54,14 +39,19 @@ public class AnnotationEntryTest {
     }
 
     @Test
-    public void testDump() {
-        final AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
+    public void testDump() throws IOException {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        try {
-            annotationEntry.dump(new DataOutputStream(out));
-            assertArrayEquals(new byte[4], out.toByteArray());
-        } catch (final IOException e) {
-            fail(e);
-        }
+        new AnnotationEntry(0, null, false).dump(new DataOutputStream(out));
+        assertArrayEquals(new byte[4], out.toByteArray());
+    }
+
+    @Test
+    public void testGetElementValuePairs() {
+        assertEquals(0, new AnnotationEntry(0, null, false).getElementValuePairs().length);
+    }
+
+    @Test
+    public void testGetNumElementValuePairs() {
+        assertEquals(0, new AnnotationEntry(0, null, false).getNumElementValuePairs());
     }
 }
