@@ -29,6 +29,9 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests {@link AnnotationEntry}.
+ */
 public class AnnotationEntryTest {
 
     @Test
