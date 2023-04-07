@@ -67,6 +67,7 @@ The <action> type attribute can be add,update,fix,remove.
     <release version="6.8.0" date="TBD" description="Maintenance and bug fix release.">
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use InvalidMethodSignatureException extending ClassFormatException.</action>
+      <action                  type="add" dev="ggregory" due-to="nbauma109">Increase code coverage in Class2HTMLTestCase with new test input Java4Example #186.</action>
       <!-- FIX -->
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">When parsing an class with an invalid constant reference, ensure ClassParser.parse() throws ClassFormatException, not NullPointerException.</action>
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">Ensure that references to a constant pool entry with index zero trigger a ClassFormatException, not a NullPointerException.</action>
