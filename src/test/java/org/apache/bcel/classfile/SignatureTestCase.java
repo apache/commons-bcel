@@ -28,6 +28,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+/**
+ *  Tests signatures, including primitives, generics, and bad signatures for exceptions.
+ */
 public class SignatureTestCase extends AbstractTestCase {
 
     void testMethod(final JavaClass jc, final String expected, final Class<?> clazz, final String methodName, final Class<?>... paramTypes) throws Exception {
