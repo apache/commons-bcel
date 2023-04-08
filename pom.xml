@@ -27,13 +27,13 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>54</version>
+    <version>56</version>
   </parent>
 
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
   <packaging>jar</packaging>
-  <version>6.7.1-SNAPSHOT</version>
+  <version>6.8.0-SNAPSHOT</version>
   <name>Apache Commons BCEL</name>
   <description>Apache Commons Bytecode Engineering Library</description>
 
@@ -47,10 +47,10 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <commons.componentid>bcel</commons.componentid>
     <commons.module.name>org.apache.bcel</commons.module.name>
-    <commons.release.version>6.7.0</commons.release.version>
+    <commons.release.version>6.8.0</commons.release.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <commons.rc.version>RC1</commons.rc.version>
-    <commons.bc.version>6.6.1</commons.bc.version>
+    <commons.bc.version>6.7.0</commons.bc.version>
     <commons.release.desc>(Java 8)</commons.release.desc>
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
     <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
@@ -64,20 +64,8 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <commons.surefire.version>3.0.0-M7</commons.surefire.version>
-    <checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
-    <jna.version>5.12.1</jna.version>
-    <commons.japicmp.version>0.17.1</commons.japicmp.version>
+    <jna.version>5.13.0</jna.version>
     <japicmp.skip>false</japicmp.skip>
-    <commons.jacoco.version>0.8.8</commons.jacoco.version>
-    <commons.javadoc.version>3.4.1</commons.javadoc.version>
-    <commons.felix.version>5.1.8</commons.felix.version>
-    <commons.spotbugs.plugin.version>4.7.3.0</commons.spotbugs.plugin.version>
-    <commons.spotbugs.impl.version>4.7.3</commons.spotbugs.impl.version>    
-    <commons.biz.aQute.bndlib.version>6.3.1</commons.biz.aQute.bndlib.version>
-    <commons.pmd.version>3.19.0</commons.pmd.version>
-    <commons.pmd-impl.version>6.52.0</commons.pmd-impl.version>
-    <commons.junit.version>5.9.1</commons.junit.version>
   </properties>
 
   <distributionManagement>
@@ -287,13 +275,10 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <systemProperties>
-            <property>
-              <!-- Suppress the stats, but keep the test as it exercises the code -->
-              <name>PerformanceTest.report</name>
-              <value>false</value>
-            </property>
-          </systemProperties>
+  	      <systemPropertyVariables>
+            <!-- Suppress the stats, but keep the test as it exercises the code -->
+			<PerformanceTest.report>false</PerformanceTest.report>
+		  </systemPropertyVariables>
           <includes>
             <include>**/*TestCase.java</include>
             <include>**/PerformanceTest.java</include>
@@ -328,7 +313,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${checkstyle.plugin.version}</version>
         <configuration>
           <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
           <!-- Needed to define config_loc -->
@@ -343,7 +327,6 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>${commons.spotbugs.plugin.version}</version>
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
@@ -393,7 +376,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${checkstyle.plugin.version}</version>
         <configuration>
           <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
           <!-- Needed to define config_loc -->
@@ -454,7 +436,6 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>${commons.spotbugs.plugin.version}</version>
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
@@ -514,6 +495,19 @@
       <scope>test</scope>
     </dependency>
     <!-- END very old jars for Justice verifier -->
+    <dependency>
+      <!-- Eclipse compiler: useful to generate specific .class file patterns -->
+      <groupId>org.eclipse.jdt</groupId>
+      <artifactId>ecj</artifactId>
+      <version>3.26.0</version> <!-- last JDK8-compatible version -->
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>1.8.10</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <profiles>

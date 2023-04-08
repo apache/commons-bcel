@@ -111,7 +111,7 @@ public class Class2HTML implements Constants {
                 if (zipFile == null) {
                     parser = new ClassParser(fileName[i]); // Create parser object from file
                 } else {
-                    parser = new ClassParser(zipFile, fileName[i]); // Create parser object from zip file
+                    parser = new ClassParser(zipFile, fileName[i]); // Create parser object from ZIP file
                 }
                 javaClass = parser.parse();
                 new Class2HTML(javaClass, dir);

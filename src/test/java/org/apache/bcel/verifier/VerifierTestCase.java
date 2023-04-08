@@ -132,7 +132,7 @@ public class VerifierTestCase {
     }
 
     @Test
-    public void testCommonsLang1() throws IOException, URISyntaxException, ClassNotFoundException {
+    public void testCommonsLang2() throws IOException, URISyntaxException, ClassNotFoundException {
         testJarFile(getJarFile(org.apache.commons.lang.StringUtils.class), "ArrayUtils", "SerializationUtils");
     }
 
@@ -151,6 +151,10 @@ public class VerifierTestCase {
     @DisabledForJreRange(max = JRE.JAVA_8)
     public void testObjectInputStream() throws ClassNotFoundException {
         testNestHostWithJavaVersion("java.io.ObjectInputStream");
+
+    @Test
+    public void testJvmOpCodes() throws ClassNotFoundException {
+    	testDefaultMethodValidation("org.apache.bcel.verifier.tests.JvmOpCodes");
     }
 
     @Test
