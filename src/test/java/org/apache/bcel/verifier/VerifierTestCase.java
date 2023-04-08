@@ -117,13 +117,18 @@ public class VerifierTestCase {
     }
 
     @Test
-    public void testCommonsLang1() throws IOException, URISyntaxException, ClassNotFoundException {
+    public void testCommonsLang2() throws IOException, URISyntaxException, ClassNotFoundException {
         testJarFile(getJarFile(org.apache.commons.lang.StringUtils.class), "ArrayUtils", "SerializationUtils");
     }
 
     @Test
     public void testDefinitionImpl() throws ClassNotFoundException {
         testNestHostWithJavaVersion("com.ibm.wsdl.DefinitionImpl");
+    }
+
+    @Test
+    public void testJvmOpCodes() throws ClassNotFoundException {
+    	testDefaultMethodValidation("org.apache.bcel.verifier.tests.JvmOpCodes");
     }
 
     @Test
