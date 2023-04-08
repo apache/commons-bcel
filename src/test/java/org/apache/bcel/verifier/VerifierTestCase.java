@@ -151,6 +151,7 @@ public class VerifierTestCase {
     @DisabledForJreRange(max = JRE.JAVA_8)
     public void testObjectInputStream() throws ClassNotFoundException {
         testNestHostWithJavaVersion("java.io.ObjectInputStream");
+    }
 
     @Test
     public void testJvmOpCodes() throws ClassNotFoundException {
