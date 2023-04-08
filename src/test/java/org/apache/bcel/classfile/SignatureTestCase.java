@@ -33,6 +33,22 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
  */
 public class SignatureTestCase extends AbstractTestCase {
 
+    @Test
+    public void testBadSignatures() throws Exception {
+        assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate("<"));
+        assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate("<>"));
+    }
+
+    @Test
+    public void testMap() throws Exception {
+        final JavaClass jc = Repository.lookupClass(Map.class);
+        final Signature classSignature = (Signature) findAttribute("Signature", jc.getAttributes());
+        final String translatedSignature = Signature.translate(classSignature.getSignature());
+        assertEquals("<K, V>java.lang.Object", translatedSignature);
+        testMethod(jc, "(java.lang.Object)V", Map.class, "get", Object.class);
+        testMethod(jc, "(K, V)V", Map.class, "put", Object.class, Object.class);
+    }
+
     void testMethod(final JavaClass jc, final String expected, final Class<?> clazz, final String methodName, final Class<?>... paramTypes) throws Exception {
         final Method method = jc.getMethod(clazz.getMethod(methodName, paramTypes));
         final String methodSignature = Optional.ofNullable(method.getGenericSignature()).orElse(method.getSignature());
@@ -48,22 +64,6 @@ public class SignatureTestCase extends AbstractTestCase {
         assertEquals("java.lang.Object", translatedSignature);
         testMethod(jc, "()java.lang.String", String.class, "trim");
 
-    }
-
-    @Test
-    public void testMap() throws Exception {
-        final JavaClass jc = Repository.lookupClass(Map.class);
-        final Signature classSignature = (Signature) findAttribute("Signature", jc.getAttributes());
-        final String translatedSignature = Signature.translate(classSignature.getSignature());
-        assertEquals("<K, V>java.lang.Object", translatedSignature);
-        testMethod(jc, "(java.lang.Object)V", Map.class, "get", Object.class);
-        testMethod(jc, "(K, V)V", Map.class, "put", Object.class, Object.class);
-    }
-
-    @Test
-    public void testBadSignatures() throws Exception {
-        assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate("<"));
-        assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate("<>"));
     }
 
     @Test
