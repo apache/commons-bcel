@@ -25,14 +25,12 @@ import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.Constant;
-import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
 import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
 import org.apache.bcel.classfile.ConstantInterfaceMethodref;
-import org.apache.bcel.classfile.ConstantInvokeDynamic;
 import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
@@ -322,9 +320,59 @@ public final class Pass3aVerifier extends PassVerifier {
                 final String fieldName = o.getFieldName(constantPoolGen);
 
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-                final Field f = jc.findField(fieldName, o.getType(constantPoolGen));
+                Field[] fields = jc.getFields();
+                Field f = null;
+                for (final Field field : fields) {
+                    if (field.getName().equals(fieldName)) {
+                        final Type fType = Type.getType(field.getSignature());
+                        final Type oType = o.getType(constantPoolGen);
+                        /*
+                         * TODO: Check if assignment compatibility is sufficient. What does Sun do?
+                         */
+                        if (fType.equals(oType)) {
+                            f = field;
+                            break;
+                        }
+                    }
+                }
                 if (f == null) {
-                    constraintViolated(o, "Referenced field '" + fieldName + "' does not exist in class '" + jc.getClassName() + "'.");
+                    final JavaClass[] superclasses = jc.getSuperClasses();
+                    outer: for (final JavaClass superclass : superclasses) {
+                        fields = superclass.getFields();
+                        for (final Field field : fields) {
+                            if (field.getName().equals(fieldName)) {
+                                final Type fType = Type.getType(field.getSignature());
+                                final Type oType = o.getType(constantPoolGen);
+                                if (fType.equals(oType)) {
+                                    f = field;
+                                    if ((f.getAccessFlags() & (Const.ACC_PUBLIC | Const.ACC_PROTECTED)) == 0) {
+                                        f = null;
+                                    }
+                                    break outer;
+                                }
+                            }
+                        }
+                    }
+                    if (f == null) {
+                        constraintViolated(o, "Referenced field '" + fieldName + "' does not exist in class '" + jc.getClassName() + "'.");
+                    }
+                } else {
+                    /*
+                     * TODO: Check if assignment compatibility is sufficient. What does Sun do?
+                     */
+                    Type.getType(f.getSignature());
+                    o.getType(constantPoolGen);
+//                Type f_type = Type.getType(f.getSignature());
+//                Type o_type = o.getType(cpg);
+
+                    // Argh. Sun's implementation allows us to have multiple fields of
+                    // the same name but with a different signature.
+                    // if (! f_type.equals(o_type)) {
+                    // constraintViolated(o,
+                    // "Referenced field '"+field_name+"' has type '"+f_type+"' instead of '"+o_type+"' as expected.");
+                    // }
+
+                    /* TODO: Check for access modifiers here. */
                 }
             } catch (final ClassNotFoundException e) {
                 // FIXME: maybe not the best way to handle this
@@ -366,7 +414,14 @@ public final class Pass3aVerifier extends PassVerifier {
             try {
                 final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-                final Field f = jc.findField(fieldName, o.getType(constantPoolGen));
+                final Field[] fields = jc.getFields();
+                Field f = null;
+                for (final Field field : fields) {
+                    if (field.getName().equals(fieldName)) {
+                        f = field;
+                        break;
+                    }
+                }
                 if (f == null) {
                     throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
@@ -446,8 +501,8 @@ public final class Pass3aVerifier extends PassVerifier {
                 }
             } else {
                 final Constant c = constantPoolGen.getConstant(o.getIndex());
-                if (!(c instanceof ConstantInterfaceMethodref) && !(c instanceof ConstantInvokeDynamic)) {
-                    constraintViolated(o, "Indexing a constant that's not a CONSTANT_InterfaceMethodref/InvokeDynamic but a '" + tostring(c) + "'.");
+                if (!(c instanceof ConstantInterfaceMethodref)) {
+                    constraintViolated(o, "Indexing a constant that's not a CONSTANT_InterfaceMethodref but a '" + tostring(c) + "'.");
                 }
                 // TODO: From time to time check if BCEL allows to detect if the
                 // 'count' operand is consistent with the information in the
@@ -455,7 +510,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 // By now, BCEL hides those two operands because they're superfluous.
 
                 // Invoked method must not be <init> or <clinit>
-                final ConstantNameAndType cnat = (ConstantNameAndType) constantPoolGen.getConstant(((ConstantCP) c).getNameAndTypeIndex());
+                final ConstantNameAndType cnat = (ConstantNameAndType) constantPoolGen.getConstant(((ConstantInterfaceMethodref) c).getNameAndTypeIndex());
                 final String name = ((ConstantUtf8) constantPoolGen.getConstant(cnat.getNameIndex())).getBytes();
                 if (name.equals(Const.CONSTRUCTOR_NAME)) {
                     constraintViolated(o, "Method to invoke must not be '" + Const.CONSTRUCTOR_NAME + "'.");
@@ -607,12 +662,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 // INVOKEVIRTUAL is an InvokeInstruction, the argument and return types are resolved/verified,
                 // too. So are the allowed method names.
                 final String className = o.getClassName(constantPoolGen);
-                JavaClass jc;
-                if (className.charAt(0) == '[') { // array type, e.g. invoke can be someArray.clone()
-                    jc = Repository.lookupClass("java.lang.Object");
-                } else {
-                    jc = Repository.lookupClass(className);
-                }
+                final JavaClass jc = Repository.lookupClass(className);
                 final Method m = getMethodRecursive(jc, o);
                 if (m == null) {
                     constraintViolated(o, "Referenced method '" + o.getMethodName(constantPoolGen) + "' with expected signature '"
@@ -807,7 +857,14 @@ public final class Pass3aVerifier extends PassVerifier {
             try {
                 final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-                final Field f = jc.findField(fieldName, o.getType(constantPoolGen));
+                final Field[] fields = jc.getFields();
+                Field f = null;
+                for (final Field field : fields) {
+                    if (field.getName().equals(fieldName)) {
+                        f = field;
+                        break;
+                    }
+                }
                 if (f == null) {
                     throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
