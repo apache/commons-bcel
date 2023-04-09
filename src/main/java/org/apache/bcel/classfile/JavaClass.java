@@ -313,7 +313,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param fieldType the field type to find
      * @return field matching given name and type, null if field is not found or not accessible from this class.
      * @throws ClassNotFoundException
-     * @since 6.7.1
+     * @since 6.8.0
      */
     public Field findFieldByNameAndType(final String fieldName, final Type fieldType) throws ClassNotFoundException {
         for (final Field field : fields) {
