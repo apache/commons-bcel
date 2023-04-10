@@ -105,9 +105,8 @@ public class ConstantPoolGen {
         final StringBuilder sb = new StringBuilder(DEFAULT_BUFFER_SIZE);
 
         size = Math.min(Math.max(DEFAULT_BUFFER_SIZE, cs.length + 64), Const.MAX_CP_ENTRIES + 1);
-        constants = new Constant[size];
+        constants = Arrays.copyOf(cs, size);
 
-        System.arraycopy(cs, 0, constants, 0, cs.length);
         if (cs.length > 0) {
             index = cs.length;
         }
@@ -538,12 +537,12 @@ public class ConstantPoolGen {
         }
 
         if (index + 3 >= size) {
-            final Constant[] cs = constants;
+            final Constant[] tmp = constants;
             size *= 2;
             // the constant array shall not exceed the size of the constant pool
             size = Math.min(size, Const.MAX_CP_ENTRIES + 1);
             constants = new Constant[size];
-            System.arraycopy(cs, 0, constants, 0, index);
+            System.arraycopy(tmp, 0, constants, 0, index);
         }
     }
 

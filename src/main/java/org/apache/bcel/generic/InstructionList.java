@@ -1149,8 +1149,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
             pos[count++] = index;
             index += i.getLength();
         }
-        bytePositions = new int[count]; // Trim to proper size
-        System.arraycopy(pos, 0, bytePositions, 0, count);
+        bytePositions = Arrays.copyOfRange(pos, 0, count); // Trim to proper size
     }
 
     /**

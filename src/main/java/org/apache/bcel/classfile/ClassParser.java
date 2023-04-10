@@ -52,7 +52,7 @@ public final class ClassParser {
     private Field[] fields; // class fields, i.e., its variables
     private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
-    private final boolean isZip; // Loaded from zip file
+    private final boolean isZip; // Loaded from ZIP file
 
     /**
      * Parses class from the given stream.
@@ -86,7 +86,7 @@ public final class ClassParser {
     /**
      * Parses class from given .class file in a ZIP-archive
      *
-     * @param zipFile zip file name
+     * @param zipFile ZIP file name
      * @param fileName file name
      */
     public ClassParser(final String zipFile, final String fileName) {
