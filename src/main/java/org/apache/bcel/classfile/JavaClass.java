@@ -308,6 +308,46 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Finds a visible field by name and type in this class and its super classes.
+     * @param fieldName the field name to find
+     * @param fieldType the field type to find
+     * @return field matching given name and type, null if field is not found or not accessible from this class.
+     * @throws ClassNotFoundException
+     * @since 6.8.0
+     */
+    public Field findFieldByNameAndType(final String fieldName, final Type fieldType) throws ClassNotFoundException {
+        for (final Field field : fields) {
+            if (field.getName().equals(fieldName)) {
+                final Type fType = Type.getType(field.getSignature());
+                /*
+                 * TODO: Check if assignment compatibility is sufficient. What does Sun do?
+                 */
+                if (fType.equals(fieldType)) {
+                    return field;
+                }
+            }
+        }
+
+        final JavaClass superclass = getSuperClass();
+        if (superclass != null && !"java.lang.Object".equals(superclass.getClassName())) {
+            final Field f = superclass.findFieldByNameAndType(fieldName, fieldType);
+            if (f != null && (f.isPublic() || f.isProtected() || !f.isPrivate() && packageName.equals(superclass.getPackageName()))) {
+                return f;
+            }
+        }
+        JavaClass[] implementedInterfaces = getInterfaces();
+        if (implementedInterfaces != null) {
+            for (JavaClass implementedInterface : implementedInterfaces) {
+                final Field f = implementedInterface.findFieldByNameAndType(fieldName, fieldType);
+                if (f != null) {
+                    return f;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * Dump Java class to output stream in binary format.
      *
      * @param file Output stream

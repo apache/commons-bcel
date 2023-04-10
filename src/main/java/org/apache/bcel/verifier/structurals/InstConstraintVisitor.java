@@ -918,21 +918,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     private Field visitFieldInstructionInternals(final FieldInstruction o) throws ClassNotFoundException {
         final String fieldName = o.getFieldName(cpg);
         final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-        final Field[] fields = jc.getFields();
-        Field f = null;
-        for (final Field field : fields) {
-            if (field.getName().equals(fieldName)) {
-                final Type fType = Type.getType(field.getSignature());
-                final Type oType = o.getType(cpg);
-                /*
-                 * TODO: Check if assignment compatibility is sufficient. What does Sun do?
-                 */
-                if (fType.equals(oType)) {
-                    f = field;
-                    break;
-                }
-            }
-        }
+        final Field f = jc.findFieldByNameAndType(fieldName, o.getType(cpg));
         if (f == null) {
             throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
         }
@@ -1054,43 +1040,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
             final String fieldName = o.getFieldName(cpg);
 
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-            Field[] fields = jc.getFields();
-            Field f = null;
-            for (final Field field : fields) {
-                if (field.getName().equals(fieldName)) {
-                    final Type fType = Type.getType(field.getSignature());
-                    final Type oType = o.getType(cpg);
-                    /*
-                     * TODO: Check if assignment compatibility is sufficient. What does Sun do?
-                     */
-                    if (fType.equals(oType)) {
-                        f = field;
-                        break;
-                    }
-                }
-            }
-
+            final Field f = jc.findFieldByNameAndType(fieldName, o.getType(cpg));
             if (f == null) {
-                final JavaClass[] superclasses = jc.getSuperClasses();
-                outer: for (final JavaClass superclass : superclasses) {
-                    fields = superclass.getFields();
-                    for (final Field field : fields) {
-                        if (field.getName().equals(fieldName)) {
-                            final Type fType = Type.getType(field.getSignature());
-                            final Type oType = o.getType(cpg);
-                            if (fType.equals(oType)) {
-                                f = field;
-                                if ((f.getAccessFlags() & (Const.ACC_PUBLIC | Const.ACC_PROTECTED)) == 0) {
-                                    f = null;
-                                }
-                                break outer;
-                            }
-                        }
-                    }
-                }
-                if (f == null) {
-                    throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
-                }
+                throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
             }
 
             if (f.isProtected()) {
@@ -1818,7 +1770,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
             final String theClass = o.getClassName(cpg);
 
-            if (!Repository.instanceOf(objRefClassName, theClass)) {
+            if (objref != GENERIC_ARRAY && !Repository.instanceOf(objRefClassName, theClass)) {
                 constraintViolated(o, "The 'objref' item '" + objref + "' does not implement '" + theClass + "' as expected.");
             }
         } catch (final ClassNotFoundException e) {
