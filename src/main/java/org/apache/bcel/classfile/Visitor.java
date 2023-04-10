@@ -230,7 +230,9 @@ public interface Visitor {
      * @param obj object to visit
      * @since 6.8.0
      */
-    void visitStackMapType(StackMapType obj);
+    default void visitStackMapType(StackMapType obj) {
+      // empty
+    }
 
     void visitSynthetic(Synthetic obj);
 
