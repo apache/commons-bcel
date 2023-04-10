@@ -66,7 +66,7 @@ public final class StackMapType implements Node, Cloneable {
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
-     * @since 6.7.1
+     * @since 6.8.0
      */
     @Override
     public void accept(final Visitor v) {
@@ -147,7 +147,7 @@ public final class StackMapType implements Node, Cloneable {
     /**
      * Gets the class name of this StackMapType from the constant pool at index position.
      * @return the fully qualified name of the class for this StackMapType.
-     * @since 6.7.1
+     * @since 6.8.0
      */
     public String getClassName() {
         return constantPool.constantToString(index, Const.CONSTANT_Class);
