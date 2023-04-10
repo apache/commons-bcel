@@ -501,7 +501,7 @@ public class CountingVisitor implements Visitor {
     }
 
     /**
-     * @since 6.7.1
+     * @since 6.8.0
      */
     @Override
     public void visitStackMapType(final StackMapType obj) {
