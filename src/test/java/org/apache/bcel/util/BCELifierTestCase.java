@@ -218,7 +218,7 @@ public class BCELifierTestCase extends AbstractTestCase {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "StackMapExample","StackMapExample2" })
+    @ValueSource(strings = { "StackMapExample", "StackMapExample2" })
     public void testStackMap(final String className) throws Exception {
         testJavapCompare(className);
         final File workDir = new File("target");
