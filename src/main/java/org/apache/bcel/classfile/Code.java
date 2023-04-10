@@ -250,7 +250,7 @@ public final class Code extends Attribute {
     /**
      * Finds the attribute of {@link StackMap} instance.
      * @return StackMap of Code, if it has one, else null.
-     * @since 6.7.1
+     * @since 6.8.0
      */
     public StackMap getStackMap() {
         for (final Attribute attribute : attributes) {
