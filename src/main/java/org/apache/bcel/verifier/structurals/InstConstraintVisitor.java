@@ -918,7 +918,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     private Field visitFieldInstructionInternals(final FieldInstruction o) throws ClassNotFoundException {
         final String fieldName = o.getFieldName(cpg);
         final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-        final Field f = jc.findFieldByNameAndType(fieldName, o.getType(cpg));
+        final Field f = jc.findField(fieldName, o.getType(cpg));
         if (f == null) {
             throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
         }
@@ -1040,7 +1040,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
             final String fieldName = o.getFieldName(cpg);
 
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-            final Field f = jc.findFieldByNameAndType(fieldName, o.getType(cpg));
+            final Field f = jc.findField(fieldName, o.getType(cpg));
             if (f == null) {
                 throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
             }

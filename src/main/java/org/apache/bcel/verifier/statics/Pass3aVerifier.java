@@ -322,7 +322,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 final String fieldName = o.getFieldName(constantPoolGen);
 
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-                final Field f = jc.findFieldByNameAndType(fieldName, o.getType(constantPoolGen));
+                final Field f = jc.findField(fieldName, o.getType(constantPoolGen));
                 if (f == null) {
                     constraintViolated(o, "Referenced field '" + fieldName + "' does not exist in class '" + jc.getClassName() + "'.");
                 }
@@ -366,7 +366,7 @@ public final class Pass3aVerifier extends PassVerifier {
             try {
                 final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-                final Field f = jc.findFieldByNameAndType(fieldName, o.getType(constantPoolGen));
+                final Field f = jc.findField(fieldName, o.getType(constantPoolGen));
                 if (f == null) {
                     throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
@@ -807,7 +807,7 @@ public final class Pass3aVerifier extends PassVerifier {
             try {
                 final String fieldName = o.getFieldName(constantPoolGen);
                 final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
-                final Field f = jc.findFieldByNameAndType(fieldName, o.getType(constantPoolGen));
+                final Field f = jc.findField(fieldName, o.getType(constantPoolGen));
                 if (f == null) {
                     throw new AssertionViolatedException("Field '" + fieldName + "' not found in " + jc.getClassName());
                 }
