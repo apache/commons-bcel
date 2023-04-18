@@ -30,7 +30,7 @@ package org.apache.bcel.generic;
  *     ...
  *     try {
  *         il.delete(start_ih, end_ih);
- *     } catch(TargetLostException e) {
+ *     } catch (TargetLostException e) {
  *         for (InstructionHandle target : e.getTargets()) {
  *             for (InstructionTargeter targeter : target.getTargeters()) {
  *                 targeter.updateTarget(target, new_target);

@@ -89,7 +89,7 @@ public final class Code extends Attribute {
         code = new byte[codeLength]; // Read byte code
         file.readFully(code);
         /*
-         * Read exception table that contains all regions where an exception handler is active, i.e., a try { ... } catch()
+         * Read exception table that contains all regions where an exception handler is active, i.e., a try { ... } catch ()
          * block.
          */
         final int exceptionTableLength = file.readUnsignedShort();

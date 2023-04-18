@@ -331,7 +331,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
             out.println(expr);
 
             if (main) {
-                out.println("    } catch(Exception e) { System.err.println(e); }\n  }\n");
+                out.println("    } catch (Exception e) { System.err.println(e); }\n  }\n");
             } else {
                 out.println("\n    return " + pop() + ";\n  }\n");
             }

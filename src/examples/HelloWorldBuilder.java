@@ -111,7 +111,7 @@ public class HelloWorldBuilder {
         final InstructionHandle tryEnd = il.append(g);
 
         /*
-         * } catch() { ... } Add exception handler: print exception and return from method
+         * } catch () { ... } Add exception handler: print exception and return from method
          */
         final InstructionHandle handler = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
         // Little trick in order not to save exception object temporarily
