@@ -72,6 +72,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="nbauma109">Added signature test cases for class/method, and bad signatures #182.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_20.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_20.</action>
+      <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory, Mark Roberts">[Bcelifier] stackmap support to pass JDK verifier #177.</action>
       <!-- FIX -->
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">When parsing an class with an invalid constant reference, ensure ClassParser.parse() throws ClassFormatException, not NullPointerException.</action>
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">Ensure that references to a constant pool entry with index zero trigger a ClassFormatException, not a NullPointerException.</action>
