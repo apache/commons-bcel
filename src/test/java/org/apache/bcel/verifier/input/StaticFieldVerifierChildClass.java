@@ -19,32 +19,32 @@ package org.apache.bcel.verifier.input;
 
 public class StaticFieldVerifierChildClass extends StaticFieldVerifierSuperClass {
 
-    @SuppressWarnings("static-access")
-    public StaticFieldVerifierChildClass(final StaticFieldVerifierChildClass c) {
-        super(c.publicField, c.getPrivateField(), c.protectedField, c.packagePrivateField);
-    }
-
-    public static int getPublicField() {
-        return publicField;
-    }
-
-    public static void setPublicField(final int publicField) {
-        StaticFieldVerifierChildClass.publicField = publicField;
+    public static int getPackagePrivateField() {
+        return packagePrivateField;
     }
 
     public static int getProtectedField() {
         return protectedField;
     }
 
-    public static void setProtectedField(final int protectedField) {
-        StaticFieldVerifierChildClass.protectedField = protectedField;
-    }
-
-    public static int getPackagePrivateField() {
-        return packagePrivateField;
+    public static int getPublicField() {
+        return publicField;
     }
 
     public static void setPackagePrivateField(final int packagePrivateField) {
         StaticFieldVerifierChildClass.packagePrivateField = packagePrivateField;
+    }
+
+    public static void setProtectedField(final int protectedField) {
+        StaticFieldVerifierChildClass.protectedField = protectedField;
+    }
+
+    public static void setPublicField(final int publicField) {
+        StaticFieldVerifierChildClass.publicField = publicField;
+    }
+
+    @SuppressWarnings("static-access")
+    public StaticFieldVerifierChildClass(final StaticFieldVerifierChildClass c) {
+        super(c.publicField, c.getPrivateField(), c.protectedField, c.packagePrivateField);
     }
 }

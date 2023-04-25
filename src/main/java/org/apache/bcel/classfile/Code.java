@@ -248,20 +248,6 @@ public final class Code extends Attribute {
     }
 
     /**
-     * Finds the attribute of {@link StackMap} instance.
-     * @return StackMap of Code, if it has one, else null.
-     * @since 6.8.0
-     */
-    public StackMap getStackMap() {
-        for (final Attribute attribute : attributes) {
-            if (attribute instanceof StackMap) {
-                return (StackMap) attribute;
-            }
-        }
-        return null;
-    }
-
-    /**
      * @return LocalVariableTable of Code, if it has one
      */
     public LocalVariableTable getLocalVariableTable() {
@@ -285,6 +271,20 @@ public final class Code extends Attribute {
      */
     public int getMaxStack() {
         return maxStack;
+    }
+
+    /**
+     * Finds the attribute of {@link StackMap} instance.
+     * @return StackMap of Code, if it has one, else null.
+     * @since 6.8.0
+     */
+    public StackMap getStackMap() {
+        for (final Attribute attribute : attributes) {
+            if (attribute instanceof StackMap) {
+                return (StackMap) attribute;
+            }
+        }
+        return null;
     }
 
     /**

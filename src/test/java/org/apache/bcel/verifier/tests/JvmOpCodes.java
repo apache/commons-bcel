@@ -44,11 +44,17 @@ public class JvmOpCodes {
     long l1, l2;
 
     /**
-     * Tests {@link DUP2_X1}.
+     * Tests {@link DNEG}.
      */
-    void dup2x1(String[] s) {
-        s[0] += "s"; // Form 1
-        l2 = l1 = 1; // Form 2
+    double dneg(double a) {
+        return -a;
+    }
+
+    /**
+     * Tests {@link DREM}.
+     */
+    double drem(double a, double b) {
+        return a % b;
     }
 
     /**
@@ -56,6 +62,14 @@ public class JvmOpCodes {
      */
     long dup2(long a) {
         return a = a + 1;
+    }
+
+    /**
+     * Tests {@link DUP2_X1}.
+     */
+    void dup2x1(String[] s) {
+        s[0] += "s"; // Form 1
+        l2 = l1 = 1; // Form 2
     }
 
     /**
@@ -73,6 +87,48 @@ public class JvmOpCodes {
     }
 
     /**
+     * Tests {@link FADD}.
+     */
+    float fadd(float a, float b) {
+        return a + b;
+    }
+
+    /**
+     * Tests {@link FNEG}.
+     */
+    float fneg(float a) {
+        return -a;
+    }
+
+    /**
+     * Tests {@link FREM}.
+     */
+    float frem(float a, float b) {
+        return a % b;
+    }
+
+    /**
+     * Tests {@link FSUB}.
+     */
+    float fsub(float a, float b) {
+        return a - b;
+    }
+
+    /**
+     * Tests {@link IUSHR}.
+     */
+    int iushr(int a, int b) {
+        return a >>> b;
+    }
+
+    /**
+     * Tests {@link LAND}.
+     */
+    long land(long a, long b) {
+        return a & b;
+    }
+
+    /**
      * Tests {@link LNEG}.
      */
     long lneg(long a) {
@@ -87,27 +143,6 @@ public class JvmOpCodes {
     }
 
     /**
-     * Tests {@link LAND}.
-     */
-    long land(long a, long b) {
-        return a & b;
-    }
-
-    /**
-     * Tests {@link LUSHR}.
-     */
-    long lushr(long a, long b) {
-        return a >>> b;
-    }
-
-    /**
-     * Tests {@link IUSHR}.
-     */
-    int iushr(int a, int b) {
-        return a >>> b;
-    }
-
-    /**
      * Tests {@link LSHL}.
      */
     long lshl(long a, long b) {
@@ -115,45 +150,10 @@ public class JvmOpCodes {
     }
 
     /**
-     * Tests {@link FSUB}.
+     * Tests {@link LUSHR}.
      */
-    float fsub(float a, float b) {
-        return a - b;
-    }
-
-    /**
-     * Tests {@link FADD}.
-     */
-    float fadd(float a, float b) {
-        return a + b;
-    }
-
-    /**
-     * Tests {@link FREM}.
-     */
-    float frem(float a, float b) {
-        return a % b;
-    }
-
-    /**
-     * Tests {@link FNEG}.
-     */
-    float fneg(float a) {
-        return -a;
-    }
-
-    /**
-     * Tests {@link DREM}.
-     */
-    double drem(double a, double b) {
-        return a % b;
-    }
-
-    /**
-     * Tests {@link DNEG}.
-     */
-    double dneg(double a) {
-        return -a;
+    long lushr(long a, long b) {
+        return a >>> b;
     }
 
     /**

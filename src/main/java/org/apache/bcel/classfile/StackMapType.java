@@ -106,6 +106,15 @@ public final class StackMapType implements Node, Cloneable {
     }
 
     /**
+     * Gets the class name of this StackMapType from the constant pool at index position.
+     * @return the fully qualified name of the class for this StackMapType.
+     * @since 6.8.0
+     */
+    public String getClassName() {
+        return constantPool.constantToString(index, Const.CONSTANT_Class);
+    }
+
+    /**
      * @return Constant pool used by this object.
      */
     public ConstantPool getConstantPool() {
@@ -142,15 +151,6 @@ public final class StackMapType implements Node, Cloneable {
             return ", offset=" + index;
         }
         return "";
-    }
-
-    /**
-     * Gets the class name of this StackMapType from the constant pool at index position.
-     * @return the fully qualified name of the class for this StackMapType.
-     * @since 6.8.0
-     */
-    public String getClassName() {
-        return constantPool.constantToString(index, Const.CONSTANT_Class);
     }
 
     /**

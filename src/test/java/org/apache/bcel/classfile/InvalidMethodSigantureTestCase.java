@@ -50,15 +50,15 @@ final class test$method name with () in it$1 extends kotlin.jvm.internal.Lambda 
  */
 public class InvalidMethodSigantureTestCase {
 
-    private static final String CLASS_NAME = "test$method name with () in it$1";
-    private static final String SRC_TEST_RESOURCES_KOTLIN = "src/test/resources/kotlin/";
-
     class TestVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         @Override
         public void visitField(final Field field) {
             field.getType();
         }
     }
+    private static final String CLASS_NAME = "test$method name with () in it$1";
+
+    private static final String SRC_TEST_RESOURCES_KOTLIN = "src/test/resources/kotlin/";
 
     @Test
     public void testLoadClass() throws Exception {

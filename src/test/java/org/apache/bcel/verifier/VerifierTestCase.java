@@ -112,16 +112,6 @@ public class VerifierTestCase {
     }
 
     @Test
-    public void testPackagePrivateField() throws ClassNotFoundException {
-        testDefaultMethodValidation(FieldVerifierChildClass.class.getName());
-    }
-
-    @Test
-    public void testPackagePrivateStaticField() throws ClassNotFoundException {
-        testDefaultMethodValidation(StaticFieldVerifierChildClass.class.getName());
-    }
-
-    @Test
     public void testArrayUtils() throws ClassNotFoundException {
         testNestHostWithJavaVersion("org.apache.commons.lang.ArrayUtils");
     }
@@ -142,9 +132,8 @@ public class VerifierTestCase {
     }
 
     @Test
-    @DisabledForJreRange(min = JRE.JAVA_9)
-    public void testObjectInputStreamJDK8() {
-        assertThrowsExactly(UnsupportedOperationException.class, () -> testNestHostWithJavaVersion("java.io.ObjectInputStream"));
+    public void testJvmOpCodes() throws ClassNotFoundException {
+    	testDefaultMethodValidation("org.apache.bcel.verifier.tests.JvmOpCodes");
     }
 
     @Test
@@ -154,8 +143,19 @@ public class VerifierTestCase {
     }
 
     @Test
-    public void testJvmOpCodes() throws ClassNotFoundException {
-    	testDefaultMethodValidation("org.apache.bcel.verifier.tests.JvmOpCodes");
+    @DisabledForJreRange(min = JRE.JAVA_9)
+    public void testObjectInputStreamJDK8() {
+        assertThrowsExactly(UnsupportedOperationException.class, () -> testNestHostWithJavaVersion("java.io.ObjectInputStream"));
+    }
+
+    @Test
+    public void testPackagePrivateField() throws ClassNotFoundException {
+        testDefaultMethodValidation(FieldVerifierChildClass.class.getName());
+    }
+
+    @Test
+    public void testPackagePrivateStaticField() throws ClassNotFoundException {
+        testDefaultMethodValidation(StaticFieldVerifierChildClass.class.getName());
     }
 
     @Test

@@ -23,27 +23,27 @@ public class FieldVerifierChildClass extends FieldVerifierSuperClass {
         super(c.publicField, c.getPrivateField(), c.protectedField, c.packagePrivateField);
     }
 
-    public int getPublicField() {
-        return publicField;
-    }
-
-    public void setPublicField(final int publicField) {
-        this.publicField = publicField;
+    public int getPackagePrivateField() {
+        return packagePrivateField;
     }
 
     public int getProtectedField() {
         return protectedField;
     }
 
-    public void setProtectedField(final int protectedField) {
-        this.protectedField = protectedField;
-    }
-
-    public int getPackagePrivateField() {
-        return packagePrivateField;
+    public int getPublicField() {
+        return publicField;
     }
 
     public void setPackagePrivateField(final int packagePrivateField) {
         this.packagePrivateField = packagePrivateField;
+    }
+
+    public void setProtectedField(final int protectedField) {
+        this.protectedField = protectedField;
+    }
+
+    public void setPublicField(final int publicField) {
+        this.publicField = publicField;
     }
 }
