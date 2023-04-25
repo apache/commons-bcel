@@ -528,6 +528,20 @@ public class DescendingVisitor implements Visitor {
     public void visitStackMapEntry(final StackMapEntry var) {
         stack.push(var);
         var.accept(visitor);
+        accept(var.getTypesOfLocals());
+        accept(var.getTypesOfStackItems());
+        stack.pop();
+    }
+
+    /**
+     * Visits a {@link StackMapType} object.
+     * @param var object to visit
+     * @since 6.8.0
+     */
+    @Override
+    public void visitStackMapType(final StackMapType var) {
+        stack.push(var);
+        var.accept(visitor);
         stack.pop();
     }
 
