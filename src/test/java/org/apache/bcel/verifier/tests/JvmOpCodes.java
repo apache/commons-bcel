@@ -46,14 +46,14 @@ public class JvmOpCodes {
     /**
      * Tests {@link DNEG}.
      */
-    double dneg(double a) {
+    double dneg(final double a) {
         return -a;
     }
 
     /**
      * Tests {@link DREM}.
      */
-    double drem(double a, double b) {
+    double drem(final double a, final double b) {
         return a % b;
     }
 
@@ -67,7 +67,7 @@ public class JvmOpCodes {
     /**
      * Tests {@link DUP2_X1}.
      */
-    void dup2x1(String[] s) {
+    void dup2x1(final String[] s) {
         s[0] += "s"; // Form 1
         l2 = l1 = 1; // Form 2
     }
@@ -75,84 +75,84 @@ public class JvmOpCodes {
     /**
      * Tests {@link DUP2_X2}.
      */
-    long dup2x2(long[] array, int i, long l) {
+    long dup2x2(final long[] array, final int i, final long l) {
         return array[i] = l;
     }
 
     /**
      * Tests {@link DUP_X2}.
      */
-    int dupx2(int[] array, int i, int l) {
+    int dupx2(final int[] array, final int i, final int l) {
         return array[i] = l;
     }
 
     /**
      * Tests {@link FADD}.
      */
-    float fadd(float a, float b) {
+    float fadd(final float a, final float b) {
         return a + b;
     }
 
     /**
      * Tests {@link FNEG}.
      */
-    float fneg(float a) {
+    float fneg(final float a) {
         return -a;
     }
 
     /**
      * Tests {@link FREM}.
      */
-    float frem(float a, float b) {
+    float frem(final float a, final float b) {
         return a % b;
     }
 
     /**
      * Tests {@link FSUB}.
      */
-    float fsub(float a, float b) {
+    float fsub(final float a, final float b) {
         return a - b;
     }
 
     /**
      * Tests {@link IUSHR}.
      */
-    int iushr(int a, int b) {
+    int iushr(final int a, final int b) {
         return a >>> b;
     }
 
     /**
      * Tests {@link LAND}.
      */
-    long land(long a, long b) {
+    long land(final long a, final long b) {
         return a & b;
     }
 
     /**
      * Tests {@link LNEG}.
      */
-    long lneg(long a) {
+    long lneg(final long a) {
         return -a;
     }
 
     /**
      * Tests {@link LOR}.
      */
-    long lor(long a, long b) {
+    long lor(final long a, final long b) {
         return a | b;
     }
 
     /**
      * Tests {@link LSHL}.
      */
-    long lshl(long a, long b) {
+    long lshl(final long a, final long b) {
         return a << b;
     }
 
     /**
      * Tests {@link LUSHR}.
      */
-    long lushr(long a, long b) {
+    long lushr(final long a, final long b) {
         return a >>> b;
     }
 

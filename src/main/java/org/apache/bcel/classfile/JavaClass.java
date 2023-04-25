@@ -422,9 +422,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                 return f;
             }
         }
-        JavaClass[] implementedInterfaces = getInterfaces();
+        final JavaClass[] implementedInterfaces = getInterfaces();
         if (implementedInterfaces != null) {
-            for (JavaClass implementedInterface : implementedInterfaces) {
+            for (final JavaClass implementedInterface : implementedInterfaces) {
                 final Field f = implementedInterface.findField(fieldName, fieldType);
                 if (f != null) {
                     return f;

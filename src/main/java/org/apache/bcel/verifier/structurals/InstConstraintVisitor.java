@@ -930,7 +930,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
         if (t instanceof ReferenceType) {
             if (value instanceof ReferenceType) {
-                ReferenceType rValue = (ReferenceType) value;
+                final ReferenceType rValue = (ReferenceType) value;
                 referenceTypeIsInitialized(o, rValue);
                 // TODO: This can possibly only be checked using Staerk-et-al's "set-of-object types", not
                 // using "wider cast object types" created during verification.

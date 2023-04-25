@@ -63,7 +63,7 @@ public class AnnotationEntry implements Node {
 
     private final boolean isRuntimeVisible;
 
-    private List<ElementValuePair> elementValuePairs;
+    private final List<ElementValuePair> elementValuePairs;
 
     public AnnotationEntry(final int typeIndex, final ConstantPool constantPool, final boolean isRuntimeVisible) {
         this.typeIndex = typeIndex;

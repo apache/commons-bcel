@@ -47,7 +47,7 @@ public class InstructionFactoryTestCase extends AbstractTestCase {
         assertEquals(InstructionConst.AALOAD, createArrayLoad(Type.OBJECT));
         assertEquals(InstructionConst.AALOAD, createArrayLoad(Type.getType("[I")));
     }
-    
+
     @Test
     public void testArrayStore() throws Exception {
         assertEquals(InstructionConst.BASTORE, createArrayStore(Type.BOOLEAN));

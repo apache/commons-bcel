@@ -43,7 +43,7 @@ public class VerifierMainTestCase extends AbstractTestCase {
 
     @Test
     public void testSWAP() throws Exception {
-        final String[] argv = new String[] { "src/test/java/org/apache/bcel/data/SWAP.java", "-g", "-source", "1.4", "-target", "1.4", "-d", "target/test-classes" };
+        final String[] argv = { "src/test/java/org/apache/bcel/data/SWAP.java", "-g", "-source", "1.4", "-target", "1.4", "-d", "target/test-classes" };
         new Main(new PrintWriter(System.out), new PrintWriter(System.err), false/*systemExit*/, null/*options*/, null/*progress*/).compile(argv);
         final String javaAgent = getJavaAgent();
         final List<String> args = new ArrayList<>();
@@ -77,7 +77,7 @@ public class VerifierMainTestCase extends AbstractTestCase {
                 swapInstructionsList.add(obj);
                 super.visitSWAP(obj);
             }
-        };        
+        };
         try (InputStream in = Files.newInputStream(Paths.get("target/test-classes/org/apache/bcel/data/SWAP.class"))) {
             final ClassParser classParser = new ClassParser(in, "SWAP.class");
             final JavaClass javaClass = classParser.parse();
