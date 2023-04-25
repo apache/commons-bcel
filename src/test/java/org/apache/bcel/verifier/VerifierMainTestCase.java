@@ -17,6 +17,16 @@
 
 package org.apache.bcel.verifier;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.bcel.AbstractTestCase;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
@@ -28,16 +38,6 @@ import org.apache.bcel.generic.SWAP;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.junit.jupiter.api.Test;
-
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VerifierMainTestCase extends AbstractTestCase {
 

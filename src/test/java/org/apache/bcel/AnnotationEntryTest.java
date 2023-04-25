@@ -17,17 +17,17 @@
 
 package org.apache.bcel;
 
-import org.apache.bcel.classfile.AnnotationEntry;
-import org.apache.bcel.classfile.ElementValuePair;
-import org.apache.bcel.classfile.SimpleElementValue;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.apache.bcel.classfile.AnnotationEntry;
+import org.apache.bcel.classfile.ElementValuePair;
+import org.apache.bcel.classfile.SimpleElementValue;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link AnnotationEntry}.

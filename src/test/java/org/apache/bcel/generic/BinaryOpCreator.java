@@ -16,17 +16,17 @@
  */
 package org.apache.bcel.generic;
 
-import org.apache.bcel.Const;
-import org.apache.bcel.classfile.StackMap;
-import org.apache.bcel.classfile.StackMapEntry;
-import org.apache.bcel.classfile.StackMapType;
-import org.apache.commons.lang.ArrayUtils;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.StackMap;
+import org.apache.bcel.classfile.StackMapEntry;
+import org.apache.bcel.classfile.StackMapType;
+import org.apache.commons.lang.ArrayUtils;
 
 public class BinaryOpCreator {
 

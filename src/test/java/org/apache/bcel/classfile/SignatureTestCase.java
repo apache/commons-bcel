@@ -16,17 +16,17 @@
  */
 package org.apache.bcel.classfile;
 
-import org.apache.bcel.AbstractTestCase;
-import org.apache.bcel.Repository;
-import org.apache.bcel.generic.Type;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import java.io.DataInput;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.Repository;
+import org.apache.bcel.generic.Type;
+import org.junit.jupiter.api.Test;
 
 /**
  *  Tests signatures, including primitives, generics, and bad signatures for exceptions.

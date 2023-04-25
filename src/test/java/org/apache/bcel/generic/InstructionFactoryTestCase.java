@@ -16,11 +16,6 @@
  */
 package org.apache.bcel.generic;
 
-import org.apache.bcel.AbstractTestCase;
-import org.apache.bcel.Const;
-import org.apache.bcel.Repository;
-import org.junit.jupiter.api.Test;
-
 import static org.apache.bcel.generic.InstructionFactory.createArrayLoad;
 import static org.apache.bcel.generic.InstructionFactory.createArrayStore;
 import static org.apache.bcel.generic.InstructionFactory.createBinaryOperation;
@@ -29,7 +24,13 @@ import static org.apache.bcel.generic.InstructionFactory.createLoad;
 import static org.apache.bcel.generic.InstructionFactory.createNull;
 import static org.apache.bcel.generic.InstructionFactory.createReturn;
 import static org.apache.bcel.generic.InstructionFactory.createStore;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+
+import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.Const;
+import org.apache.bcel.Repository;
+import org.junit.jupiter.api.Test;
 
 public class InstructionFactoryTestCase extends AbstractTestCase {
 
