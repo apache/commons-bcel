@@ -676,8 +676,8 @@ public final class Const {
     /**
      * Marks a constant pool entry as dynamically computed.
      *
-     * @see <a href="https://bugs.openjdk.java.net/secure/attachment/74618/constant-dynamic.html"> Change request for JEP
-     *      309</a>
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.10"> The Constant Pool in The
+     *      Java Virtual Machine Specification</a>
      * @since 6.3
      */
     public static final byte CONSTANT_Dynamic = 17;
