@@ -77,7 +77,7 @@ public class OssFuzzTestCase {
     }
 
     private void testOssFuzzReproducer(final String issue) throws Exception {
-        final File reproducerFile = new File("target/test-classes/ossfuzz/issue" + issue + "/Test.class");
+        final File reproducerFile = new File("target/test-classes/ossfuzz/issue" + issue + "/Test.classx");
         try (final FileInputStream reproducerInputStream = new FileInputStream(reproducerFile)) {
             final ClassParser cp = new ClassParser(reproducerInputStream, "Test");
             assertThrows(ClassFormatException.class, () -> cp.parse());
