@@ -27,7 +27,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>57</version>
+    <version>56</version>
   </parent>
 
   <groupId>org.apache.bcel</groupId>
@@ -210,18 +210,6 @@
   <build>
     <defaultGoal>clean verify apache-rat:check japicmp:cmp checkstyle:check pmd:check spotbugs:check javadoc:javadoc</defaultGoal>
     <plugins>
-      <plugin>
-        <groupId>org.cyclonedx</groupId>
-        <artifactId>cyclonedx-maven-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-dependency-analyzer</artifactId>
-            <version>1.13.2-SNAPSHOT</version>
-<!--            <version>1.13.1</version>-->
-          </dependency>
-		</dependencies>
-      </plugin>		
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
