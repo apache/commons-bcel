@@ -25,6 +25,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.InvalidMethodSignatureException;
 import org.apache.bcel.classfile.Utility;
+import org.apache.commons.lang3.Validate;
 
 /**
  * Abstract super class for all possible java types, namely basic types such as int, object types like String and array
@@ -363,6 +364,22 @@ public abstract class Type {
     @Override
     public int hashCode() {
         return type ^ signature.hashCode();
+    }
+
+    static String internalTypeNametoSignature(final String internalTypeName) {
+        Validate.notEmpty(internalTypeName, "Cannot call org.apache.bcel.generic.Type.internalTypeNametoSignature(String) on empty internalTypeName");
+        switch(internalTypeName.charAt(0)) {
+            case '[':
+                return internalTypeName;
+            case 'L':
+            case 'T':
+                if (internalTypeName.charAt(internalTypeName.length() - 1) == ';') {
+                    return internalTypeName;
+                }
+            // fall through
+            default:
+                return 'L' + internalTypeName + ';';
+        }
     }
 
     /**
