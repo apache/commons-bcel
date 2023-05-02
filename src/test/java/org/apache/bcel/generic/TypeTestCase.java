@@ -86,4 +86,16 @@ public class TypeTestCase {
             }
         }
     }
+
+    @Test
+    public void testInternalTypeNametoSignature() {
+        assertEquals(null, Type.internalTypeNametoSignature(null));
+        assertEquals("", Type.internalTypeNametoSignature(""));
+        assertEquals("TT;", Type.internalTypeNametoSignature("TT;"));
+        assertEquals("Ljava/lang/String;", Type.internalTypeNametoSignature("Ljava/lang/String;"));
+        assertEquals("[Ljava/lang/String;", Type.internalTypeNametoSignature("[Ljava/lang/String;"));
+        assertEquals("Ljava/lang/String;", Type.internalTypeNametoSignature("java/lang/String"));
+        assertEquals("I", Type.internalTypeNametoSignature("I"));
+        assertEquals("LA;", Type.internalTypeNametoSignature("A"));
+    }
 }
