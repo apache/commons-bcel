@@ -376,7 +376,7 @@ public abstract class Type {
                 if (internalTypeName.charAt(internalTypeName.length() - 1) == ';') {
                     return internalTypeName;
                 }
-            // fall through
+                return 'L' + internalTypeName + ';';
             default:
                 return 'L' + internalTypeName + ';';
         }
