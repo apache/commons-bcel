@@ -366,7 +366,7 @@ public abstract class Type {
         return type ^ signature.hashCode();
     }
 
-    static String internalTypeNametoSignature(final String internalTypeName) {
+    static String internalTypeNameToSignature(final String internalTypeName) {
         if (StringUtils.isEmpty(internalTypeName) || StringUtils.equalsAny(internalTypeName, "B", "C", "D", "F", "I", "J", "S", "Z")) {
             return internalTypeName;
         }
