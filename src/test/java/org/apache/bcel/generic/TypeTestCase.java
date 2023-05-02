@@ -96,6 +96,6 @@ public class TypeTestCase {
         assertEquals("[Ljava/lang/String;", Type.internalTypeNametoSignature("[Ljava/lang/String;"));
         assertEquals("Ljava/lang/String;", Type.internalTypeNametoSignature("java/lang/String"));
         assertEquals("I", Type.internalTypeNametoSignature("I"));
-        assertEquals("LA;", Type.internalTypeNametoSignature("A"));
+        assertEquals("LT;", Type.internalTypeNametoSignature("T"));
     }
 }
