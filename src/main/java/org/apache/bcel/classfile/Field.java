@@ -153,7 +153,7 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * Return value as defined by given BCELComparator strategy. By default return the hashcode of the field's name XOR
+     * Return value as defined by given BCELComparator strategy. By default return the hash code of the field's name XOR
      * signature.
      *
      * @see Object#hashCode()

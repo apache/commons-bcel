@@ -33,10 +33,10 @@ public interface BCELComparator {
     boolean equals(Object THIS, Object THAT);
 
     /**
-     * Return hashcode for THIS.hashCode()
+     * Return hash code for THIS.hashCode()
      *
      * @param THIS
-     * @return hashcode for THIS.hashCode()
+     * @return hash code for THIS.hashCode()
      */
     int hashCode(Object THIS);
 }

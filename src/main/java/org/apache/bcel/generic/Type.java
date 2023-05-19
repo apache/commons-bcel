@@ -358,7 +358,7 @@ public abstract class Type {
     }
 
     /**
-     * @return hashcode of Type
+     * @return hash code of Type
      */
     @Override
     public int hashCode() {

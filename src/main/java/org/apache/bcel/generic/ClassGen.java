@@ -376,7 +376,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * Return value as defined by given BCELComparator strategy. By default return the hashcode of the class name.
+     * Return value as defined by given BCELComparator strategy. By default return the hash code of the class name.
      *
      * @see Object#hashCode()
      */
