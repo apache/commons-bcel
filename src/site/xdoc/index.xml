@@ -78,7 +78,7 @@
         <li>Inspect the <a href="bcel5-bcel6-clirr-report.html">extended Clirr report</a> comparing 5.2 with 6.x</li>
       </ul>
       <p>
-        Alternatively you can pull it from the central Maven repositories through a <a href="dependency-info.html">dependency</a>.
+        Alternatively, you can pull it from the central Maven repositories through a <a href="dependency-info.html">dependency</a>.
       </p>
 
     </section>
