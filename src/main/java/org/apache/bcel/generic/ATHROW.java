@@ -25,7 +25,7 @@ import org.apache.bcel.ExceptionConst;
  * Stack: ..., objectref -&gt; objectref
  * </PRE>
  */
-public class ATHROW extends Instruction implements UnconditionalBranch, ExceptionThrower {
+public class ATHROW extends Instruction implements UnconditionalBranch, ExceptionThrower, StackConsumer {
 
     /**
      * Throw exception
@@ -44,6 +44,7 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
     public void accept(final Visitor v) {
         v.visitUnconditionalBranch(this);
         v.visitExceptionThrower(this);
+        v.visitStackConsumer(this);
         v.visitATHROW(this);
     }
 
