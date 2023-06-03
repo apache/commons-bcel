@@ -29,10 +29,12 @@ import org.junit.jupiter.api.Test;
  * the corresponding constant is found after parsing.
  */
 public class JiraBcel362TestCase extends AbstractTestCase {
+
     @Test
     public void testProcessConstantPoolWithCondyEntry() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass("issue362.Bcel362");
         final ConstantPoolGen constantPoolGen = assertDoesNotThrow(() -> new ConstantPoolGen(clazz.getConstantPool()));
         assertTrue(constantPoolGen.lookupUtf8("$jacocoData") != -1);
     }
+
 }
