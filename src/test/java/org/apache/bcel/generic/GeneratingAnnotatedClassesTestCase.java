@@ -390,7 +390,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         i = mg.getAnnotationEntries().length;
         assertEquals(1, i, "Wrong number of annotations on the main 'MethodGen'");
 
-        assertTrue(wipe("temp1", "HelloWorld.class"));
+        assertTrue(delete("temp1", "HelloWorld.class"));
     }
 
     /**
@@ -427,8 +427,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         assertEquals(1, mainMethod2.getAnnotationEntries().length, "Wrong number of annotations on the 'MethodGen'");
         mainMethod2.removeAnnotationEntries();
         assertEquals(0, mainMethod2.getAnnotationEntries().length, 0, "Wrong number of annotations on the 'MethodGen'");
-        assertTrue(wipe("temp2", "HelloWorld.class"));
-        assertTrue(wipe("temp3", "HelloWorld.class"));
+        assertTrue(delete("temp2", "HelloWorld.class"));
+        assertTrue(delete("temp3", "HelloWorld.class"));
     }
 
     /**
@@ -442,7 +442,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         cgen.addAnnotationEntry(createFruitAnnotation(cp, "Pineapple"));
         assertEquals(2, cgen.getAnnotationEntries().length, "Wrong number of annotations");
         dumpClass(cgen, "SimpleAnnotatedClass.class");
-        assertTrue(wipe("SimpleAnnotatedClass.class"));
+        assertTrue(delete("SimpleAnnotatedClass.class"));
     }
 
     /**
@@ -458,7 +458,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         dumpClass(cgen, "SimpleAnnotatedClass.class");
         final JavaClass jc2 = getClassFrom(".", "SimpleAnnotatedClass");
         jc2.getAnnotationEntries();
-        assertTrue(wipe("SimpleAnnotatedClass.class"));
+        assertTrue(delete("SimpleAnnotatedClass.class"));
         // System.err.println(jc2.toString());
     }
 

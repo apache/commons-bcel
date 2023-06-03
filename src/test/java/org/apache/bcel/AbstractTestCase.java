@@ -85,6 +85,38 @@ public abstract class AbstractTestCase {
         return new File(TESTDATA, name);
     }
 
+    /**
+     * Deletes a file under the TESTDATA directory
+     *
+     * @param name
+     * @return
+     */
+    protected boolean delete(final String name) {
+        return new File(TESTDATA, name).delete();
+    }
+
+    /**
+     * Deletes a directory and file under the TESTDATA directory
+     *
+     * @param dir
+     * @param name
+     * @return true if the file was deleted
+     */
+    protected boolean delete(final String dir, final String name) {
+        // The parameter is relative to the TESTDATA dir
+        final boolean b = delete(dir + File.separator + name);
+        final File testDir = new File(TESTDATA, dir);
+        final String[] files = testDir.list();
+        if (files == null || files.length == 0) {
+            if (!testDir.delete()) {
+                System.err.println("Failed to remove: " + testDir);
+            }
+        } else {
+            System.err.println("Non-empty directory: " + testDir);
+        }
+        return b;
+    }
+
     protected String dumpAnnotationEntries(final AnnotationEntry[] as) {
         final StringBuilder result = new StringBuilder();
         result.append("[");
@@ -161,38 +193,6 @@ public abstract class AbstractTestCase {
 
     protected JavaClass getTestJavaClass(final String name) throws ClassNotFoundException {
         return SyntheticRepository.getInstance().loadClass(name);
-    }
-
-    /**
-     * Delete a file under the TESTDATA directory
-     *
-     * @param name
-     * @return
-     */
-    protected boolean wipe(final String name) {
-        return new File(TESTDATA, name).delete();
-    }
-
-    /**
-     * Delete a directory and file under the TESTDATA directory
-     *
-     * @param dir
-     * @param name
-     * @return true if the file was deleted
-     */
-    protected boolean wipe(final String dir, final String name) {
-        // The parameter is relative to the TESTDATA dir
-        final boolean b = wipe(dir + File.separator + name);
-        final File testDir = new File(TESTDATA, dir);
-        final String[] files = testDir.list();
-        if (files == null || files.length == 0) {
-            if (!testDir.delete()) {
-                System.err.println("Failed to remove: " + testDir);
-            }
-        } else {
-            System.err.println("Non-empty directory: " + testDir);
-        }
-        return b;
     }
 
 }
