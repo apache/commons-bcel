@@ -17,15 +17,24 @@
 
 package org.apache.bcel.verifier;
 
+import org.apache.bcel.AbstractTestCase;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Tests BCEL-369.
  */
-public class JiraBcel369TestCase {
+public class JiraBcel369TestCase extends AbstractTestCase {
 
     @Test
-    public void testBcel369() throws ClassNotFoundException {
+    public void testCompileAndVerify() throws ClassNotFoundException {
         Verifier.verifyType(org.apache.bcel.verifier.JiraBcel369TestFixture.class.getName());
     }
+
+    @Test
+    @Disabled
+    public void testCompiledClass() throws ClassNotFoundException {
+        Verifier.verifyType("issue369.Test");
+    }
+
 }
