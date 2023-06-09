@@ -86,7 +86,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 54 to 58 #189, #198, #222.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.12.1 to 5.13.0 #203.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump kotlin-stdlib from 1.8.10 to 1.8.21 #217, #219.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump kotlin-stdlib from 1.8.10 to 1.8.22 #217, #219, #227.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump commons-io from 2.11.0 to 2.13.0.</action>
     </release>
     <release version="6.7.0" date="2022-11-28" description="Maintenance and bug fix release.">
