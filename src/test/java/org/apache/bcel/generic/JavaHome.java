@@ -39,6 +39,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Module;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.ModularRuntimeImage;
+import org.apache.commons.io.function.Uncheck;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
@@ -69,12 +70,8 @@ public class JavaHome {
 
     private static Stream<Path> find(final Path start, final int maxDepth, final BiPredicate<Path, BasicFileAttributes> matcher,
             final FileVisitOption... options) {
-        try {
-            // TODO Replace with Apache Commons IO UncheckedFiles later.
-            return Files.exists(start) ? Files.find(start, maxDepth, matcher, options) : Stream.empty();
-        } catch (final IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        // TODO Apache Commons 2.14.0: Use FilesUncheck 
+        return Files.exists(start) ? Uncheck.apply(Files::find, start, maxDepth, matcher, options) : Stream.empty();
     }
 
     private static JavaHome from(final String javaHome) {
