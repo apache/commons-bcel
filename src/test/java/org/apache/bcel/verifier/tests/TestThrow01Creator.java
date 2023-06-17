@@ -26,15 +26,13 @@ public class TestThrow01Creator extends TestCreator {
     private final ClassGen cg;
 
     public TestThrow01Creator() {
-        cg = new ClassGen(TEST_PACKAGE + ".TestThrow01", "java.lang.Object",
-                "TestThrow01.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[]{});
+        cg = new ClassGen(TEST_PACKAGE + ".TestThrow01", "java.lang.Object", "TestThrow01.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
     }
 
     @Override
-    public void create(OutputStream out) throws IOException {
-        InstructionList il = new InstructionList();
-       MethodGen method = new MethodGen(Const.ACC_STATIC, Type.VOID, Type.NO_ARGS,
-                new String[0], "b", cg.getClassName(), il, cg.getConstantPool());
+    public void create(final OutputStream out) throws IOException {
+        final InstructionList il = new InstructionList();
+        final MethodGen method = new MethodGen(Const.ACC_STATIC, Type.VOID, Type.NO_ARGS, new String[0], "b", cg.getClassName(), il, cg.getConstantPool());
         il.append(InstructionConst.getInstruction(Const.ATHROW));
         method.setMaxStack();
         method.setMaxLocals();
