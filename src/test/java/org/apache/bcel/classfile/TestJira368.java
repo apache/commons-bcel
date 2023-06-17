@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
 
+import org.apache.bcel.generic.InstructionList;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -33,20 +34,24 @@ public class TestJira368 {
     }
 
     @Test
-    public void testMethodCodeStringBrief() throws Exception {
+    public void testInstructionListStringBrief() throws Exception {
         for (Method method : parseJavaClass().getMethods()) {
-            final String string = method.getCode().toString(false);
-            // System.out.println(string);
-            assertNotNull(string);
+            if (!method.isAbstract() && !method.isNative()) {
+                final InstructionList instructionList = new InstructionList(method.getCode().getCode());
+                final String string = instructionList.toString(false);
+                assertNotNull(string);
+            }
         }
     }
 
     @Test
-    public void testMethodCodeStringVerbose() throws Exception {
+    public void testInstructionListStringVerbose() throws Exception {
         for (Method method : parseJavaClass().getMethods()) {
-            final String string = method.getCode().toString(true);
-            // System.out.println(string);
-            assertNotNull(string);
+            if (!method.isAbstract() && !method.isNative()) {
+                final InstructionList instructionList = new InstructionList(method.getCode().getCode());
+                final String string = instructionList.toString(true);
+                assertNotNull(string);
+            }
         }
     }
 
