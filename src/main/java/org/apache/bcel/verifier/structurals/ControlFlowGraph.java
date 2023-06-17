@@ -259,9 +259,6 @@ public class ControlFlowGraph {
             return org.getClone();
         }
 
-        /*
-         * Fulfils the contract of InstructionContext.getInstruction().
-         */
         @Override
         public InstructionHandle getInstruction() {
             return instruction;
@@ -287,13 +284,11 @@ public class ControlFlowGraph {
             return org.getClone();
         }
 
-        /* Satisfies InstructionContext.getSuccessors(). */
         @Override
         public InstructionContext[] getSuccessors() {
             return contextsOf(_getSuccessors());
         }
 
-        /* Satisfies InstructionContext.getTag(). */
         @Override
         public int getTag() {
             return TAG;
