@@ -32,7 +32,6 @@ public class JiraBcel369TestCase extends AbstractTestCase {
     }
 
     @Test
-    @Disabled
     public void testCompiledClass() throws ClassNotFoundException {
         Verifier.verifyType("issue369.Test");
     }
