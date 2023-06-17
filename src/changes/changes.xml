@@ -82,7 +82,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Jason Copenhaver, Gary Gregory">Exception parsing Kotlin class with 'fun `method name with () in it`()' #205.</action>
       <action                  type="fix" dev="ggregory" due-to="nbauma109, Gary Gregory">Fix null pointers in AnnotationEntry #213.</action>
       <action                  type="fix" dev="ggregory" due-to="nbauma109">Field not found, search field in both super class and implemented interfaces (5x duplicated code to find field by name and type is refactored to a new method and now supports package-private) #181.</action>
-      <action issue="BCEL-366" type="fix" dev="ggregory" due-to="Slawomir Jaranowski">Use alternative name for broken classes under test (#220).</action>
+      <action issue="BCEL-366" type="fix" dev="ggregory" due-to="Slawomir Jaranowski">Use alternative name for broken classes under test #220.</action>
+      <action issue="BCEL-367" type="fix" dev="ggregory" due-to="Katherine Hough, Gary Gregory"> Fixes java.lang.IndexOutOfBoundsException for ATHROW on empty stack #223.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 54 to 58 #189, #198, #222.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.12.1 to 5.13.0 #203.</action>
