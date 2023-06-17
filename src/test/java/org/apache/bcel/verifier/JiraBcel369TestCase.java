@@ -18,7 +18,6 @@
 package org.apache.bcel.verifier;
 
 import org.apache.bcel.AbstractTestCase;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
