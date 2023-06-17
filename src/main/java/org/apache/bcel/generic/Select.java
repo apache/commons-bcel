@@ -310,7 +310,11 @@ public abstract class Select extends BranchInstruction implements VariableLength
             for (int i = 0; i < match_length; i++) {
                 String s = "null";
                 if (targets[i] != null) {
-                    s = targets[i].getInstruction().toString();
+                    if (targets[i].getInstruction() == this) {
+                        s = "<points to itself>";
+                    } else {
+                        s = targets[i].getInstruction().toString();
+                    }
                 }
                 buf.append("(").append(match[i]).append(", ").append(s).append(" = {").append(indices[i]).append("})");
             }
