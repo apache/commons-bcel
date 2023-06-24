@@ -20,8 +20,6 @@ package org.apache.bcel.generic;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -215,11 +213,7 @@ public class JavaHome {
     }
 
     ModularRuntimeImage getModularRuntimeImage() {
-        try {
-            return new ModularRuntimeImage(path.toString());
-        } catch (final IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        return Uncheck.get(() -> new ModularRuntimeImage(path.toString()));
     }
 
     Path getPath() {
@@ -255,11 +249,7 @@ public class JavaHome {
     }
 
     private JarFile toJarFile(final Path path) {
-        try {
-            return new JarFile(path.toFile());
-        } catch (final IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        return Uncheck.get(() -> new JarFile(path.toFile()));
     }
 
     @Override

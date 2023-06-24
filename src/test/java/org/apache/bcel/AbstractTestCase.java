@@ -20,8 +20,6 @@ package org.apache.bcel;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +39,7 @@ import org.apache.bcel.generic.SimpleElementValueGen;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
 import org.apache.bcel.verifier.VerifierFactory;
+import org.apache.commons.io.function.Uncheck;
 
 public abstract class AbstractTestCase {
 
@@ -70,11 +69,11 @@ public abstract class AbstractTestCase {
     }
 
     public SyntheticRepository createRepos(final String cpentry) {
-        try (ClassPath cp = new ClassPath("target" + File.separator + "testdata" + File.separator + cpentry + File.separator)) {
-            return SyntheticRepository.getInstance(cp);
-        } catch (final IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        return Uncheck.get(() -> {
+            try (ClassPath cp = new ClassPath("target" + File.separator + "testdata" + File.separator + cpentry + File.separator)) {
+                return SyntheticRepository.getInstance(cp);
+            }
+        });
     }
 
     /**
@@ -89,7 +88,7 @@ public abstract class AbstractTestCase {
      * Deletes a file under the TESTDATA directory
      *
      * @param name
-     * @return
+     * @return See {@link File#delete()}.
      */
     protected boolean delete(final String name) {
         return new File(TESTDATA, name).delete();
