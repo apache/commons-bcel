@@ -8403,7 +8403,7 @@ _w}
  instructions have possibly not been symbolically executed yet and thus
  bear no type information at the time of merging.
  In this scenario, an instruction in a subroutine plays multiple roles;
- one for each occurence of a 
+ one for each occurrence of a 
 \latex latex 
 
 \backslash 
