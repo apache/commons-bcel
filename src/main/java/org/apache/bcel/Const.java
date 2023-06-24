@@ -745,10 +745,10 @@ public final class Const {
      * <p>
      * One of the limitations of the Java Virtual Machine. Note vmspec2 page 152 ("Limitations") says:
      * </p>
-     * <quote> "The amount of code per non-native, non-abstract method is limited to 65536 bytes by the sizes of the indices in the exception_table of the Code
+     * <pre>"The amount of code per non-native, non-abstract method is limited to 65536 bytes by the sizes of the indices in the exception_table of the Code
      * attribute (§4.7.3), in the LineNumberTable attribute (§4.7.8), and in the LocalVariableTable attribute (§4.7.9)." However this should be taken as an
      * upper limit rather than the defined maximum. On page 134 (4.8.1 Static Constants) of the same spec, it says: "The value of the code_length item must be
-     * less than 65536." </quote>
+     * less than 65536."</pre>
      * <p>
      * The entry in the Limitations section has been removed from later versions of the specification; it is not present in the Java SE 8 edition.
      * </p>
@@ -3121,7 +3121,7 @@ public final class Const {
         "newInvokeSpecial", "invokeInterface"};
 
     /**
-     * @param index
+     * @param index index into {@code ACCESS_NAMES}.
      * @return the ACCESS_NAMES entry at the given index
      * @since 6.0
      */
@@ -3131,7 +3131,7 @@ public final class Const {
 
     /**
      *
-     * @param index
+     * @param index index into {@code ACCESS_NAMES}.
      * @return the attribute name
      * @since 6.0
      */
@@ -3142,7 +3142,7 @@ public final class Const {
     /**
      * The primitive class names corresponding to the T_XX constants, e.g., CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
      *
-     * @param index
+     * @param index index into {@code CLASS_TYPE_NAMES}.
      * @return the class name
      * @since 6.0
      */
@@ -3152,7 +3152,7 @@ public final class Const {
 
     /**
      *
-     * @param index
+     * @param index index into {@code CONSTANT_NAMES}.
      * @return the CONSTANT_NAMES entry at the given index
      * @since 6.0
      */
@@ -3164,7 +3164,7 @@ public final class Const {
 
     /**
      *
-     * @param index
+     * @param index index into {@code CONSUME_STACK}.
      * @return Number of words consumed on operand stack
      * @since 6.0
      */
@@ -3181,7 +3181,7 @@ public final class Const {
 
     /**
      *
-     * @param index
+     * @param index index into {@code ITEM_NAMES}.
      * @return the item name
      * @since 6.0
      */
@@ -3191,7 +3191,7 @@ public final class Const {
 
     /**
      *
-     * @param index
+     * @param index index into {@code METHODHANDLE_NAMES}.
      * @return the method handle name
      * @since 6.0
      */
@@ -3201,7 +3201,7 @@ public final class Const {
 
     /**
      *
-     * @param index
+     * @param index index into {@code NO_OF_OPERANDS}.
      * @return Number of byte code operands
      * @since 6.0
      */
