@@ -289,7 +289,7 @@ public abstract class Attribute implements Cloneable, Node {
         try {
             attr = (Attribute) super.clone();
         } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
+            throw new UnsupportedOperationException("Clone Not Supported", e); // never happens
         }
         return attr;
     }

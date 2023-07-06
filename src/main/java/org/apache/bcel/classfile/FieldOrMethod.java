@@ -132,7 +132,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
             Arrays.setAll(c.attributes, i -> attributes[i].copy(constantPool));
             return c;
         } catch (final CloneNotSupportedException e) {
-            throw new IllegalStateException(e);
+            throw new UnsupportedOperationException(e);
         }
     }
 

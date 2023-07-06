@@ -163,7 +163,7 @@ public final class StackMapEntry implements Node, Cloneable {
         try {
             e = (StackMapEntry) clone();
         } catch (final CloneNotSupportedException ex) {
-            throw new Error("Clone Not Supported");
+            throw new UnsupportedOperationException("Clone Not Supported", ex);
         }
 
         e.typesOfLocals = new StackMapType[typesOfLocals.length];
