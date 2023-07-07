@@ -136,10 +136,7 @@ public class InstructionHandle {
      * @param key the key object to store/retrieve the attribute
      */
     public Object getAttribute(final Object key) {
-        if (attributes != null) {
-            return attributes.get(key);
-        }
-        return null;
+        return attributes != null ? attributes.get(key) : null;
     }
 
     /**
