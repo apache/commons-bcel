@@ -752,7 +752,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     "The LineNumberTable attribute '" + tostring(obj) + "' is not correctly named 'LineNumberTable' but '" + name + "'.");
             }
 
-            // In JustIce,this check is delayed to Pass 3a.
+            // In JustIce, this check is delayed to Pass 3a.
             // LineNumber[] linenumbers = obj.getLineNumberTable();
             // ...validity check...
 
@@ -771,7 +771,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
         @Override
         public void visitLocalVariableTable(final LocalVariableTable obj) {// vmspec2 4.7.9
-            // In JustIce,this check is partially delayed to Pass 3a.
+            // In JustIce, this check is partially delayed to Pass 3a.
             // The other part can be found in the visitCode(Code) method.
         }
 
