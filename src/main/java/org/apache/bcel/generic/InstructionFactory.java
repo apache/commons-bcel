@@ -49,7 +49,9 @@ public class InstructionFactory implements InstructionConstants {
 
     private static final String FQCN_STRING_BUFFER = "java.lang.StringBuffer";
 
-    // N.N. These must agree with the order of Constants.T_CHAR through T_LONG
+    /**
+     * These must agree with the order of Constants.T_CHAR through T_LONG.
+     */
     private static final String[] SHORT_NAMES = {"C", "F", "D", "B", "S", "I", "L"};
 
     private static final MethodObject[] APPEND_METHOD_OBJECTS = {
