@@ -86,7 +86,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-367" type="fix" dev="ggregory" due-to="Katherine Hough, Gary Gregory">Fixes java.lang.IndexOutOfBoundsException for ATHROW on empty stack #223.</action>
       <action issue="BCEL-368" type="fix" dev="ggregory" due-to="Katherine Hough, Gary Gregory">Fixes java.lang.StackOverflowError in Select#toString(boolean) #229.</action>
       <!-- UPDATE -->
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 54 to 58 #189, #198, #222.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 54 to 59 #189, #198, #222.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.12.1 to 5.13.0 #203.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump kotlin-stdlib from 1.8.10 to 1.8.22 #217, #219, #227.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump commons-io from 2.11.0 to 2.13.0.</action>
