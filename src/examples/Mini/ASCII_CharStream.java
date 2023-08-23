@@ -109,8 +109,8 @@ public final class ASCII_CharStream {
 
     static private void ExpandBuff(final boolean wrapAround) {
         final char[] newbuffer = new char[bufsize + 2048];
-        final int newbufline[] = new int[bufsize + 2048];
-        final int newbufcolumn[] = new int[bufsize + 2048];
+        final int[] newbufline = new int[bufsize + 2048];
+        final int[] newbufcolumn = new int[bufsize + 2048];
 
         try {
             if (wrapAround) {
