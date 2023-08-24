@@ -146,11 +146,11 @@ public final class ClassParser {
             // for (int i=0; i < u.length; i++)
             // System.err.println("WARNING: " + u[i]);
             // Everything should have been read now
-            // if(file.available() > 0) {
+            // if (file.available() > 0) {
             // int bytes = file.available();
             // byte[] buf = new byte[bytes];
             // file.read(buf);
-            // if(!(isZip && (buf.length == 1))) {
+            // if (!(isZip && (buf.length == 1))) {
             // System.err.println("WARNING: Trailing garbage at end of " + fileName);
             // System.err.println(bytes + " extra bytes: " + Utility.toHexString(buf));
             // }

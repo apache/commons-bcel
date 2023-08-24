@@ -114,7 +114,7 @@ public class InstructionHandle {
         if (targeters == null) {
             targeters = new HashSet<>();
         }
-        // if(!targeters.contains(t))
+        // if (!targeters.contains(t))
         targeters.add(t);
     }
 
