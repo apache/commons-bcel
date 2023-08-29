@@ -367,7 +367,7 @@ public abstract class Type {
     }
 
     static String internalTypeNameToSignature(final String internalTypeName) {
-        if (StringUtils.isEmpty(internalTypeName) || StringUtils.equalsAny(internalTypeName, "B", "C", "D", "F", "I", "J", "S", "Z")) {
+        if (StringUtils.isEmpty(internalTypeName) || StringUtils.equalsAny(internalTypeName, Const.SHORT_TYPE_NAMES)) {
             return internalTypeName;
         }
         switch(internalTypeName.charAt(0)) {
