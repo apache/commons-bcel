@@ -370,7 +370,7 @@ public abstract class Type {
         if (StringUtils.isEmpty(internalTypeName) || StringUtils.equalsAny(internalTypeName, Const.SHORT_TYPE_NAMES)) {
             return internalTypeName;
         }
-        switch(internalTypeName.charAt(0)) {
+        switch (internalTypeName.charAt(0)) {
             case '[':
                 return internalTypeName;
             case 'L':
