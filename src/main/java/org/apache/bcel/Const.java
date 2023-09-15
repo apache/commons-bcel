@@ -2848,7 +2848,7 @@ public final class Const {
     /**
      * The signature characters corresponding to primitive types, e.g., SHORT_TYPE_NAMES[T_INT] = "I"
      */
-    private static final String[] SHORT_TYPE_NAMES = {ILLEGAL_TYPE, ILLEGAL_TYPE, ILLEGAL_TYPE, ILLEGAL_TYPE, "Z", "C", "F", "D", "B", "S", "I", "J", "V",
+    public static final String[] SHORT_TYPE_NAMES = {ILLEGAL_TYPE, ILLEGAL_TYPE, ILLEGAL_TYPE, ILLEGAL_TYPE, "Z", "C", "F", "D", "B", "S", "I", "J", "V",
         ILLEGAL_TYPE, ILLEGAL_TYPE, ILLEGAL_TYPE};
 
     /**

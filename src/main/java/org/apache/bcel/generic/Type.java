@@ -25,6 +25,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.InvalidMethodSignatureException;
 import org.apache.bcel.classfile.Utility;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Abstract super class for all possible java types, namely basic types such as int, object types like String and array
@@ -180,7 +181,7 @@ public abstract class Type {
     public static Type getType(final Class<?> cls) {
         Objects.requireNonNull(cls, "cls");
         /*
-         * That's an amzingly easy case, because getName() returns the signature. That's what we would have liked anyway.
+         * That's an amazingly easy case, because getName() returns the signature. That's what we would have liked anyway.
          */
         if (cls.isArray()) {
             return getType(cls.getName());
@@ -363,6 +364,24 @@ public abstract class Type {
     @Override
     public int hashCode() {
         return type ^ signature.hashCode();
+    }
+
+    static String internalTypeNameToSignature(final String internalTypeName) {
+        if (StringUtils.isEmpty(internalTypeName) || StringUtils.equalsAny(internalTypeName, Const.SHORT_TYPE_NAMES)) {
+            return internalTypeName;
+        }
+        switch (internalTypeName.charAt(0)) {
+            case '[':
+                return internalTypeName;
+            case 'L':
+            case 'T':
+                if (internalTypeName.charAt(internalTypeName.length() - 1) == ';') {
+                    return internalTypeName;
+                }
+                return 'L' + internalTypeName + ';';
+            default:
+                return 'L' + internalTypeName + ';';
+        }
     }
 
     /**

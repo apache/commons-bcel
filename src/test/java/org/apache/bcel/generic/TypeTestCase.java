@@ -16,9 +16,16 @@
  */
 package org.apache.bcel.generic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TypeTestCase {
     @Test
@@ -32,4 +39,63 @@ public class TypeTestCase {
         assertEquals(expectedValue, actualValue, "Type.getType");
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "java/io/Externalizable",
+        "java/io/ObjectOutputStream",
+        "java/io/Serializable",
+        "java/lang/Cloneable",
+        "java/lang/RuntimeException",
+        "java/lang/String",
+        "java/lang/System",
+        "java/lang/Throwable",
+        "java/net/URI",
+        "java/sql/Statement",
+        "java/util/ArrayList",
+        "java/util/Calendar",
+        "java/util/EnumMap",
+        "java/util/HashSet",
+        "java/util/Iterator",
+        "java/util/LinkedList",
+        "java/util/List",
+        "java/util/Map",
+        "java/util/concurrent/ConcurrentMap",
+        "java/util/concurrent/ExecutorService",
+        "org/apache/bcel/classfile/JavaClass",
+        "org/apache/bcel/classfile/Method",
+        "org/apache/bcel/classfile/Synthetic",
+        "org/apache/bcel/generic/ConstantPoolGen",
+        "org/apache/bcel/generic/MethodGen"})
+    // @formatter:on
+    public void testLDC(final String className) throws Exception {
+        final JavaClass jc = Repository.lookupClass(className);
+        final ConstantPoolGen cpg = new ConstantPoolGen(jc.getConstantPool());
+        for (final Method method : jc.getMethods()) {
+            final Code code = method.getCode();
+            if (code != null) {
+                final InstructionList instructionList = new InstructionList(code.getCode());
+                for (final InstructionHandle instructionHandle : instructionList) {
+                    instructionHandle.accept(new EmptyVisitor() {
+                        @Override
+                        public void visitLDC(LDC obj) {
+                            assertNotNull(obj.getValue(cpg));
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testInternalTypeNametoSignature() {
+        assertEquals(null, Type.internalTypeNameToSignature(null));
+        assertEquals("", Type.internalTypeNameToSignature(""));
+        assertEquals("TT;", Type.internalTypeNameToSignature("TT;"));
+        assertEquals("Ljava/lang/String;", Type.internalTypeNameToSignature("Ljava/lang/String;"));
+        assertEquals("[Ljava/lang/String;", Type.internalTypeNameToSignature("[Ljava/lang/String;"));
+        assertEquals("Ljava/lang/String;", Type.internalTypeNameToSignature("java/lang/String"));
+        assertEquals("I", Type.internalTypeNameToSignature("I"));
+        assertEquals("LT;", Type.internalTypeNameToSignature("T"));
+    }
 }
