@@ -1080,7 +1080,7 @@ public final class Pass3aVerifier extends PassVerifier {
         // array in vmspec2), together with pass 1 (reading code_length bytes and
         // interpreting them as code[]). So this must not be checked again here.
 
-        if (code.getCode().length >= Const.MAX_CODE_SIZE) {// length must be LESS than the max
+        if (code.getCode().length >= Const.MAX_CODE_SIZE) { // length must be LESS than the max
             throw new StaticCodeInstructionConstraintException(
                 "Code array in code attribute '" + tostring(code) + "' too big: must be smaller than " + Const.MAX_CODE_SIZE + "65536 bytes.");
         }

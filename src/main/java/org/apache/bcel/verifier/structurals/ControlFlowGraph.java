@@ -178,7 +178,7 @@ public class ControlFlowGraph {
             }
 
             Frame inF = inFrames.get(lastExecutionJSR());
-            if (inF == null) {// no incoming frame was set, so set it.
+            if (inF == null) { // no incoming frame was set, so set it.
                 inFrames.put(lastExecutionJSR(), inFrame);
                 inF = inFrame;
             } else if (inF.equals(inFrame) || !mergeInFrames(inFrame)) { // if there was an "old" inFrame

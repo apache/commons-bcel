@@ -228,7 +228,7 @@ public final class Pass3bVerifier extends PassVerifier {
                     final ArrayList<InstructionContext> newchainClone = (ArrayList<InstructionContext>) newchain.clone();
                     icq.add(theSuccessor, newchainClone);
                 }
-            } else {// "not a ret"
+            } else { // "not a ret"
 
                 // Normal successors. Add them to the queue of successors.
                 final InstructionContext[] succs = u.getSuccessors();

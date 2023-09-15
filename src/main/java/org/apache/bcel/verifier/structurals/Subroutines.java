@@ -332,7 +332,7 @@ public class Subroutines {
             return ret.toString();
         }
 
-    }// end Inner Class SubrouteImpl
+    } // end Inner Class SubrouteImpl
 
     /**
      * A utility method that calculates the successors of a given InstructionHandle <B>in the same subroutine</B>. That
@@ -510,7 +510,7 @@ public class Subroutines {
                     instructionsAssigned.add(element);
                 }
             }
-            if (actual != all[0]) {// If we don't deal with the top-level 'subroutine'
+            if (actual != all[0]) { // If we don't deal with the top-level 'subroutine'
                 ((SubroutineImpl) getSubroutine(actual)).setLeavingRET();
             }
         }
