@@ -203,10 +203,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
     public String getInitValue() {
-        if (value != null) {
-            return value.toString();
-        }
-        return null;
+        return Objects.toString(value, null);
     }
 
     @Override
