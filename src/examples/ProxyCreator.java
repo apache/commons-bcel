@@ -59,7 +59,7 @@ public class ProxyCreator {
     public static Object createProxy(final String pack, final String className) {
         try {
             final Class<?> cl = Class.forName(pack + "$$BCEL$$" + className);
-            return cl.newInstance();
+            return cl.getConstructor().newInstance();
         } catch (final Exception e) {
             e.printStackTrace();
         }

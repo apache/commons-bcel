@@ -516,7 +516,7 @@ public class InstructionFactory implements InstructionConstants {
             final String name = "org.apache.bcel.generic." + SHORT_NAMES[src - Const.T_CHAR] + "2" + SHORT_NAMES[dest - Const.T_CHAR];
             Instruction i = null;
             try {
-                i = (Instruction) Class.forName(name).newInstance();
+                i = (Instruction) Class.forName(name).getConstructor().newInstance();
             } catch (final Exception e) {
                 throw new IllegalArgumentException("Could not find instruction: " + name, e);
             }
