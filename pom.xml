@@ -55,7 +55,6 @@
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
     <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
     <commons.releaseManagerName>Gary Gregory</commons.releaseManagerName>    
-    <commons.releaseManagerKey>86fdc7e2a11262cb</commons.releaseManagerKey>
     <!-- Configuration properties for the OSGi maven-bundle-plugin -->
     <commons.osgi.symbolicName>org.apache.${commons.componentid}</commons.osgi.symbolicName>
     <commons.osgi.export>org.apache.bcel.*;version=${project.version};-noimport:=true</commons.osgi.export>
