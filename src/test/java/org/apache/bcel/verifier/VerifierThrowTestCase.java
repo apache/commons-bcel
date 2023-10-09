@@ -17,10 +17,10 @@
 
 package org.apache.bcel.verifier;
 
+import java.io.IOException;
+
 import org.apache.bcel.verifier.tests.TestThrow01Creator;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 public class VerifierThrowTestCase extends AbstractVerifierTestCase {
     @Test

@@ -16,11 +16,15 @@
  */
 package org.apache.bcel.verifier.tests;
 
-import org.apache.bcel.Const;
-import org.apache.bcel.generic.*;
-
 import java.io.IOException;
 import java.io.OutputStream;
+
+import org.apache.bcel.Const;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.InstructionConst;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.Type;
 
 public class TestThrow01Creator extends TestCreator {
     private final ClassGen cg;
