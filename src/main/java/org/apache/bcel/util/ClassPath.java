@@ -172,7 +172,7 @@ public class ClassPath implements Closeable {
         long getTime();
     }
 
-    private static class Dir extends AbstractPathEntry {
+    private static final class Dir extends AbstractPathEntry {
 
         private final String dir;
 
@@ -254,7 +254,7 @@ public class ClassPath implements Closeable {
         }
     }
 
-    private static class Jar extends AbstractZip {
+    private static final class Jar extends AbstractZip {
 
         Jar(final ZipFile zip) {
             super(zip);
@@ -267,7 +267,7 @@ public class ClassPath implements Closeable {
 
     }
 
-    private static class JrtModule extends AbstractPathEntry {
+    private static final class JrtModule extends AbstractPathEntry {
 
         private final Path modulePath;
 
@@ -350,7 +350,7 @@ public class ClassPath implements Closeable {
 
     }
 
-    private static class JrtModules extends AbstractPathEntry {
+    private static final class JrtModules extends AbstractPathEntry {
 
         private final ModularRuntimeImage modularRuntimeImage;
         private final JrtModule[] modules;
@@ -416,7 +416,7 @@ public class ClassPath implements Closeable {
 
     }
 
-    private static class Module extends AbstractZip {
+    private static final class Module extends AbstractZip {
 
         Module(final ZipFile zip) {
             super(zip);

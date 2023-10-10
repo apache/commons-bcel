@@ -57,7 +57,7 @@ import org.apache.bcel.Const;
  */
 public final class ConstantUtf8 extends Constant {
 
-    private static class Cache {
+    private static final class Cache {
 
         private static final boolean BCEL_STATISTICS = Boolean.getBoolean(SYS_PROP_STATISTICS);
         private static final int MAX_ENTRIES = Integer.getInteger(SYS_PROP_CACHE_MAX_ENTRIES, 0).intValue();

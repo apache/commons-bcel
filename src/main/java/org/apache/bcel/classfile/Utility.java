@@ -48,7 +48,7 @@ public abstract class Utility {
     /**
      * Decode characters into bytes. Used by <a href="Utility.html#decode(java.lang.String, boolean)">decode()</a>
      */
-    private static class JavaReader extends FilterReader {
+    private static final class JavaReader extends FilterReader {
 
         public JavaReader(final Reader in) {
             super(in);
@@ -88,7 +88,7 @@ public abstract class Utility {
      * Encode bytes into valid java identifier characters. Used by
      * <a href="Utility.html#encode(byte[], boolean)">encode()</a>
      */
-    private static class JavaWriter extends FilterWriter {
+    private static final class JavaWriter extends FilterWriter {
 
         public JavaWriter(final Writer out) {
             super(out);

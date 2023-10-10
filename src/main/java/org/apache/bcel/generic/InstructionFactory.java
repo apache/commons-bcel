@@ -30,7 +30,7 @@ import org.apache.bcel.Const;
  */
 public class InstructionFactory implements InstructionConstants {
 
-    private static class MethodObject {
+    private static final class MethodObject {
 
         final Type[] argTypes;
         final Type resultType;
