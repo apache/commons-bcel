@@ -100,11 +100,11 @@ public class VerifierAppFrame extends JFrame {
         }
     }
 
-    void aboutMenuItem_actionPerformed(final ActionEvent e) {
+    void aboutMenuItemActionPerformed(final ActionEvent e) {
         JOptionPane.showMessageDialog(this, Verifier.BANNER, Verifier.NAME, JOptionPane.INFORMATION_MESSAGE);
     }
 
-    synchronized void classNamesJList_valueChanged(final ListSelectionEvent e) {
+    synchronized void classNamesJListValueChanged(final ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) {
             return;
         }
@@ -148,7 +148,7 @@ public class VerifierAppFrame extends JFrame {
         jScrollPane1.getViewport().setBackground(Color.red);
         messagesScrollPane.getViewport().setBackground(Color.red);
         messagesScrollPane.setPreferredSize(new Dimension(10, 10));
-        classNamesJList.addListSelectionListener(this::classNamesJList_valueChanged);
+        classNamesJList.addListSelectionListener(this::classNamesJListValueChanged);
         classNamesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setBorder(BorderFactory.createLineBorder(Color.black));
         jScrollPane3.setPreferredSize(new Dimension(100, 100));
@@ -166,16 +166,16 @@ public class VerifierAppFrame extends JFrame {
         messagesTextPane.setEditable(false);
         newFileMenuItem.setText("New...");
         newFileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(78, InputEvent.CTRL_MASK, true));
-        newFileMenuItem.addActionListener(this::newFileMenuItem_actionPerformed);
+        newFileMenuItem.addActionListener(this::newFileMenuItemActionPerformed);
         pass3aTextPane.setEditable(false);
         pass3bTextPane.setEditable(false);
         pass3aJList.addListSelectionListener(this::pass3aJList_valueChanged);
         pass3bJList.addListSelectionListener(this::pass3bJList_valueChanged);
         jMenu2.setText("Help");
         whatisMenuItem.setText("What is...");
-        whatisMenuItem.addActionListener(this::whatisMenuItem_actionPerformed);
+        whatisMenuItem.addActionListener(this::whatisMenuItemActionPerformed);
         aboutMenuItem.setText("About");
-        aboutMenuItem.addActionListener(this::aboutMenuItem_actionPerformed);
+        aboutMenuItem.addActionListener(this::aboutMenuItemActionPerformed);
         jSplitPane2.add(messagesPanel, JSplitPane.BOTTOM);
         messagesPanel.add(messagesScrollPane, null);
         messagesScrollPane.getViewport().add(messagesTextPane, null);
@@ -210,7 +210,7 @@ public class VerifierAppFrame extends JFrame {
         jSplitPane4.setDividerLocation(150);
     }
 
-    void newFileMenuItem_actionPerformed(final ActionEvent e) {
+    void newFileMenuItemActionPerformed(final ActionEvent e) {
         final String className = JOptionPane.showInputDialog("Please enter the fully qualified name of a class or interface to verify:");
         if (className == null || className.isEmpty()) {
             return;
@@ -342,7 +342,7 @@ public class VerifierAppFrame extends JFrame {
         setTitle(currentClass + " - " + Verifier.NAME);
     }
 
-    void whatisMenuItem_actionPerformed(final ActionEvent e) {
+    void whatisMenuItemActionPerformed(final ActionEvent e) {
         JOptionPane.showMessageDialog(this,
             "The upper four boxes to the right reflect verification passes according to"
                 + " The Java Virtual Machine Specification.\nThese are (in that order):"
