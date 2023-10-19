@@ -1573,12 +1573,12 @@ public class InstConstraintVisitor extends EmptyVisitor {
             }
         }
 
-        final Type[] argtypes = o.getArgumentTypes(cpg);
-        final int nargs = argtypes.length;
+        final Type[] argTypes = o.getArgumentTypes(cpg);
+        final int argCount = argTypes.length;
 
-        for (int i = nargs - 1; i >= 0; i--) {
-            final Type fromStack = stack().peek(nargs - 1 - i); // 0 to nargs-1
-            Type fromDesc = argtypes[i];
+        for (int i = argCount - 1; i >= 0; i--) {
+            final Type fromStack = stack().peek(argCount - 1 - i); // 0 to argCount - 1
+            Type fromDesc = argTypes[i];
             if (fromDesc == Type.BOOLEAN || fromDesc == Type.BYTE || fromDesc == Type.CHAR || fromDesc == Type.SHORT) {
                 fromDesc = Type.INT;
             }
@@ -1599,33 +1599,33 @@ public class InstConstraintVisitor extends EmptyVisitor {
             }
         }
 
-        Type objref = stack().peek(nargs);
-        if (objref == Type.NULL) {
+        Type objRef = stack().peek(argCount);
+        if (objRef == Type.NULL) {
             return;
         }
-        if (!(objref instanceof ReferenceType)) {
-            constraintViolated(o, "Expecting a reference type as 'objectref' on the stack, not a '" + objref + "'.");
+        if (!(objRef instanceof ReferenceType)) {
+            constraintViolated(o, "Expecting a reference type as 'objectref' on the stack, not a '" + objRef + "'.");
         }
-        referenceTypeIsInitialized(o, (ReferenceType) objref);
-        if (!(objref instanceof ObjectType)) {
-            if (!(objref instanceof ArrayType)) { // could be a ReturnaddressType
-                constraintViolated(o, "Expecting an ObjectType as 'objectref' on the stack, not a '" + objref + "'.");
+        referenceTypeIsInitialized(o, (ReferenceType) objRef);
+        if (!(objRef instanceof ObjectType)) {
+            if (!(objRef instanceof ArrayType)) { // could be a ReturnaddressType
+                constraintViolated(o, "Expecting an ObjectType as 'objectref' on the stack, not a '" + objRef + "'.");
             } else {
-                objref = GENERIC_ARRAY;
+                objRef = GENERIC_ARRAY;
             }
         }
 
-        // String objref_classname = ((ObjectType) objref).getClassName();
+        // String objRefClassName = ((ObjectType) objRef).getClassName();
         // String theInterface = o.getClassName(cpg);
         // TODO: This can only be checked if we're using Staerk-et-al's "set of object types"
         // instead of "wider cast object types" generated during verification.
-        // if ( ! Repository.implementationOf(objref_classname, theInterface) ) {
-        // constraintViolated(o, "The 'objref' item '"+objref+"' does not implement '"+theInterface+"' as expected.");
+        // if ( ! Repository.implementationOf(objRefClassName, theInterface) ) {
+        // constraintViolated(o, "The 'objRef' item '" + objRef + "' does not implement '" + theInterface + "' as expected.");
         // }
 
         int countedCount = 1; // 1 for the objectref
-        for (int i = 0; i < nargs; i++) {
-            countedCount += argtypes[i].getSize();
+        for (int i = 0; i < argCount; i++) {
+            countedCount += argTypes[i].getSize();
         }
         if (count != countedCount) {
             constraintViolated(o, "The 'count' argument should probably read '" + countedCount + "' but is '" + count + "'.");
