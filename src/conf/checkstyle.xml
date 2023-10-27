@@ -68,6 +68,7 @@ limitations under the License.
 
   <module name="TreeWalker">
 
+    <module name="ExplicitInitializationCheck" />
     <!-- Checks for Naming Conventions.                  -->
     <!-- See http://checkstyle.sf.net/config_naming.html -->
     <!-- allow CONSTANT_Long etc -->
