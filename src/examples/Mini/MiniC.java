@@ -28,10 +28,10 @@ import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 
 public class MiniC {
-    private static Vector<String> errors = null;
-    private static Vector<String> warnings = null;
-    private static String file = null;
-    private static int pass = 0;
+    private static Vector<String> errors;
+    private static Vector<String> warnings;
+    private static String file;
+    private static int pass;
 
     final static void addError(final int line, final int column, final String err) {
         if (pass != 2) {
