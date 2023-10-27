@@ -48,7 +48,7 @@ public class Environment implements Cloneable {
     private final int size; // The table is an array of
     private final Vector<EnvEntry>[] table; // Vectors
 
-    private int elements = 0;
+    private int elements;
 
     public Environment() {
         this(SIZE);

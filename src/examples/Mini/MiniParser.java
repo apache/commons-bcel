@@ -28,7 +28,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
     protected static JJTMiniParserState jjtree = new JJTMiniParserState();
 
     private static Token expr_token;
-    static private boolean jj_initialized_once = false;
+    static private boolean jj_initialized_once;
 
     static public MiniParserTokenManager token_source;
 
@@ -42,7 +42,7 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
 
     static private int jj_la;
 
-    static public boolean lookingAhead = false;
+    static public boolean lookingAhead;
 
     // static private boolean jj_semLA;
     static private int jj_gen;
@@ -56,9 +56,9 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
 
     static final private JJCalls[] jj_2_rtns = new JJCalls[1];
 
-    static private boolean jj_rescan = false;
+    static private boolean jj_rescan;
 
-    static private int jj_gc = 0;
+    static private int jj_gc;
 
     static private java.util.Vector<int[]> jj_expentries = new java.util.Vector<>();
 

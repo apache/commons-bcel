@@ -32,17 +32,17 @@ public final class ASCII_CharStream {
     static private int bufline[];
     static private int bufcolumn[];
 
-    static private int column = 0;
+    static private int column;
     static private int line = 1;
 
-    static private boolean prevCharIsCR = false;
-    static private boolean prevCharIsLF = false;
+    static private boolean prevCharIsCR;
+    static private boolean prevCharIsLF;
 
     static private java.io.Reader inputStream;
 
     static private char[] buffer;
-    static private int maxNextCharInd = 0;
-    static private int inBuf = 0;
+    static private int maxNextCharInd;
+    static private int inBuf;
 
     /**
      * Method to adjust line and column numbers for the start of a token.<BR>
