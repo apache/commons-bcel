@@ -48,7 +48,7 @@ Apache Commons BCEL
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/?gav=true)
 [![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.7.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.7.0)
 [![CodeQL](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-text/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-text)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel)
 
 Apache Commons Bytecode Engineering Library
 
