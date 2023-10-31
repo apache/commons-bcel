@@ -131,7 +131,7 @@ public class InstructionHandle {
     }
 
     /**
-     * Get attribute of an instruction handle.
+     * Gets attribute of an instruction handle.
      *
      * @param key the key object to store/retrieve the attribute
      */

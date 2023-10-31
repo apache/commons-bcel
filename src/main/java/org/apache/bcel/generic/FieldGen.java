@@ -187,7 +187,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Get field object after having set up all necessary values.
+     * Gets field object after having set up all necessary values.
      */
     public Field getField() {
         final String signature = getSignature();

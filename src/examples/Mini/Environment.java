@@ -110,7 +110,7 @@ public class Environment implements Cloneable {
     }
 
     /**
-     * Get entry from hash table.
+     * Gets entry from hash table.
      */
     public EnvEntry get(final String key) {
         int hash;

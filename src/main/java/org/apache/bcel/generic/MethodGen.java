@@ -787,7 +787,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Get method object. Never forget to call setMaxStack() or setMaxStack(max), respectively, before calling this method
+     * Gets method object. Never forget to call setMaxStack() or setMaxStack(max), respectively, before calling this method
      * (the same applies for max locals).
      *
      * @return method object
