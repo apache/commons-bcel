@@ -34,7 +34,7 @@ import org.apache.bcel.generic.PUSH;
 import org.apache.bcel.generic.Type;
 
 /**
- * Dynamically creates and uses a proxy for {@code java.awt.event.ActionListener} via the classloader mechanism if
+ * Dynamically creates and uses a proxy for {@code java.awt.event.ActionListener} via the class loader mechanism if
  * called with
  *
  * <pre>
