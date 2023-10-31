@@ -240,7 +240,7 @@ public class InstructionHandle {
     }
 
     /**
-     * Set the position, i.e., the byte code offset of the contained instruction.
+     * Sets the position, i.e., the byte code offset of the contained instruction.
      */
     void setPosition(final int pos) {
         i_position = pos;

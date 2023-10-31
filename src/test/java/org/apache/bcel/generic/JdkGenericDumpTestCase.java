@@ -52,7 +52,7 @@ import org.junit.jupiter.params.provider.MethodSource;
  * Test that the generic dump() methods work on the JDK classes Reads each class into an instruction list and then dumps the instructions. The output bytes
  * should be the same as the input.
  * <p>
- * Set the property {@value JavaHome#EXTRA_JAVA_HOMES} to a {@link File#pathSeparator}-separated list of JRE/JDK paths for additional testing.
+ * Sets the property {@value JavaHome#EXTRA_JAVA_HOMES} to a {@link File#pathSeparator}-separated list of JRE/JDK paths for additional testing.
  * </p>
  * <p>
  * For example:

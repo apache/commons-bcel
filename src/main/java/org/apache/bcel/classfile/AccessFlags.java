@@ -182,7 +182,7 @@ public abstract class AccessFlags {
     }
 
     /**
-     * Set access flags aka "modifiers".
+     * Sets access flags aka "modifiers".
      *
      * @param accessFlags Access flags of the object.
      */
@@ -201,7 +201,7 @@ public abstract class AccessFlags {
     }
 
     /**
-     * Set access flags aka "modifiers".
+     * Sets access flags aka "modifiers".
      *
      * @param accessFlags Access flags of the object.
      */

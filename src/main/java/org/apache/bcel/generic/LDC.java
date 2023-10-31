@@ -124,7 +124,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     }
 
     /**
-     * Set the index to constant pool and adjust size.
+     * Sets the index to constant pool and adjust size.
      */
     @Override
     public final void setIndex(final int index) {

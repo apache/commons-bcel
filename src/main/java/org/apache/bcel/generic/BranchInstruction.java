@@ -183,7 +183,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     }
 
     /**
-     * Set branch target
+     * Sets branch target
      *
      * @param target branch target
      */

@@ -1083,7 +1083,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Set maximum number of local variables.
+     * Sets maximum number of local variables.
      */
     public void setMaxLocals(final int m) {
         maxLocals = m;
@@ -1101,7 +1101,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Set maximum stack size for this method.
+     * Sets maximum stack size for this method.
      */
     public void setMaxStack(final int m) { // TODO could be package-protected?
         maxStack = m;

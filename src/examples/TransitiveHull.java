@@ -133,7 +133,7 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     /**
-     * Set the value of ignored.
+     * Sets the value of ignored.
      *
      * @param v Value to assign to ignored.
      */

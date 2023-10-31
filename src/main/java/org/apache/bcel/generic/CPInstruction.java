@@ -99,7 +99,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     }
 
     /**
-     * Set the index to constant pool.
+     * Sets the index to constant pool.
      *
      * @param index in constant pool.
      */

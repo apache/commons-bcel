@@ -288,7 +288,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Set (optional) initial value of field, otherwise it will be set to null/0/false by the JVM automatically.
+     * Sets (optional) initial value of field, otherwise it will be set to null/0/false by the JVM automatically.
      */
     public void setInitValue(final String str) {
         checkType(ObjectType.getInstance("java.lang.String"));

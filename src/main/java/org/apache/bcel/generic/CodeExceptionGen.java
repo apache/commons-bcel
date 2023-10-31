@@ -116,7 +116,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /*
-     * Set end of handler
+     * Sets end of handler
      *
      * @param endPc End of handled region (inclusive)
      */
@@ -126,7 +126,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /*
-     * Set handler code
+     * Sets handler code
      *
      * @param handlerPc Start of handler
      */
@@ -136,7 +136,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /*
-     * Set start of handler
+     * Sets start of handler
      *
      * @param startPc Start of handled region (inclusive)
      */

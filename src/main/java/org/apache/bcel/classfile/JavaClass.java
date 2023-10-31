@@ -785,7 +785,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Set File name of class, aka SourceFile attribute value
+     * Sets File name of class, aka SourceFile attribute value
      */
     public void setFileName(final String fileName) {
         this.fileName = fileName;
@@ -834,7 +834,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Set absolute path to file this class was read from.
+     * Sets absolute path to file this class was read from.
      */
     public void setSourceFileName(final String sourceFileName) {
         this.sourceFileName = sourceFileName;

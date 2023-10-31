@@ -475,7 +475,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * Set major version number of class file, default value is 45 (JDK 1.1)
+     * Sets major version number of class file, default value is 45 (JDK 1.1)
      *
      * @param major major version number
      */
@@ -493,7 +493,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * Set minor version number of class file, default value is 3 (JDK 1.1)
+     * Sets minor version number of class file, default value is 3 (JDK 1.1)
      *
      * @param minor minor version number
      */

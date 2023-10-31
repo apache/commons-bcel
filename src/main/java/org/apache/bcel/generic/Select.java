@@ -284,7 +284,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * Set branch target for 'i'th case
+     * Sets branch target for 'i'th case
      */
     public void setTarget(final int i, final InstructionHandle target) { // TODO could be package-protected?
         notifyTarget(targets[i], target, this);
