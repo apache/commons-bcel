@@ -46,7 +46,7 @@ public class ControlFlowGraph {
     private class InstructionContextImpl implements InstructionContext {
 
         /**
-         * The TAG field is here for external temporary flagging, such as graph colouring.
+         * The TAG field is here for external temporary flagging, such as graph coloring.
          *
          * @see #getTag()
          * @see #setTag(int)
