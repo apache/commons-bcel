@@ -51,7 +51,7 @@
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <commons.rc.version>RC1</commons.rc.version>
     <commons.bc.version>6.7.0</commons.bc.version>
-    <commons.release.desc>(Java 8)</commons.release.desc>
+    <commons.release.desc>(Java 8 or above)</commons.release.desc>
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
     <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
     <!-- Configuration properties for the OSGi maven-bundle-plugin -->
