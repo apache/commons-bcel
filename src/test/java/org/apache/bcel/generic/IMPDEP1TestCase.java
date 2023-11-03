@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class IMPDEP1TestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IMPDEP1 impdep1 = new IMPDEP1();
         impdep1.accept(countVisitor);

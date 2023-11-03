@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class IADDTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IADD iadd = new IADD();
         iadd.accept(countVisitor);

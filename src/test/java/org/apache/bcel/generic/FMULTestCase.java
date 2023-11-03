@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class FMULTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final FMUL fmul = new FMUL();
         fmul.accept(countVisitor);

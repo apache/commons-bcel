@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class LDIVTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LDIV ldiv = new LDIV();
         ldiv.accept(countVisitor);

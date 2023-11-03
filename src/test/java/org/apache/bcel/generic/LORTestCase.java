@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class LORTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LOR lor = new LOR();
         lor.accept(countVisitor);

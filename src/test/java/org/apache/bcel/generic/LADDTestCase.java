@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class LADDTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LADD ladd = new LADD();
         ladd.accept(countVisitor);

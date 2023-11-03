@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class L2DTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final L2D l2d = new L2D();
         l2d.accept(countVisitor);

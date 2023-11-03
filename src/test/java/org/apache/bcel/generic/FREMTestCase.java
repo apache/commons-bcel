@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class FREMTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final FREM frem = new FREM();
         frem.accept(countVisitor);

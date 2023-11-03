@@ -39,6 +39,18 @@ public class TypeTestCase {
         assertEquals(expectedValue, actualValue, "Type.getType");
     }
 
+    @Test
+    public void testInternalTypeNametoSignature() {
+        assertEquals(null, Type.internalTypeNameToSignature(null));
+        assertEquals("", Type.internalTypeNameToSignature(""));
+        assertEquals("TT;", Type.internalTypeNameToSignature("TT;"));
+        assertEquals("Ljava/lang/String;", Type.internalTypeNameToSignature("Ljava/lang/String;"));
+        assertEquals("[Ljava/lang/String;", Type.internalTypeNameToSignature("[Ljava/lang/String;"));
+        assertEquals("Ljava/lang/String;", Type.internalTypeNameToSignature("java/lang/String"));
+        assertEquals("I", Type.internalTypeNameToSignature("I"));
+        assertEquals("LT;", Type.internalTypeNameToSignature("T"));
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {
     // @formatter:off
@@ -85,17 +97,5 @@ public class TypeTestCase {
                 }
             }
         }
-    }
-
-    @Test
-    public void testInternalTypeNametoSignature() {
-        assertEquals(null, Type.internalTypeNameToSignature(null));
-        assertEquals("", Type.internalTypeNameToSignature(""));
-        assertEquals("TT;", Type.internalTypeNameToSignature("TT;"));
-        assertEquals("Ljava/lang/String;", Type.internalTypeNameToSignature("Ljava/lang/String;"));
-        assertEquals("[Ljava/lang/String;", Type.internalTypeNameToSignature("[Ljava/lang/String;"));
-        assertEquals("Ljava/lang/String;", Type.internalTypeNameToSignature("java/lang/String"));
-        assertEquals("I", Type.internalTypeNameToSignature("I"));
-        assertEquals("LT;", Type.internalTypeNameToSignature("T"));
     }
 }

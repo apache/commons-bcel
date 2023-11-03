@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class ISUBTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final ISUB isub = new ISUB();
         isub.accept(countVisitor);

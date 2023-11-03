@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class GETFIELDTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final GETFIELD getfield = new GETFIELD(0);
         getfield.accept(countVisitor);

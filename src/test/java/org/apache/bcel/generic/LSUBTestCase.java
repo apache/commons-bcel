@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class LSUBTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LSUB lsub = new LSUB();
         lsub.accept(countVisitor);

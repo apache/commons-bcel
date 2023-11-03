@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class DMULTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final DMUL dmul = new DMUL();
         dmul.accept(countVisitor);

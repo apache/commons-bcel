@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class IXORTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IXOR ixor = new IXOR();
         ixor.accept(countVisitor);

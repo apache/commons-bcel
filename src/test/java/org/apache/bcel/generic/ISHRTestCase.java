@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class ISHRTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final ISHR ishr = new ISHR();
         ishr.accept(countVisitor);

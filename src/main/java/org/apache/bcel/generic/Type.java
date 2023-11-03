@@ -284,6 +284,24 @@ public abstract class Type {
         return encode(1, index + 1);
     }
 
+    static String internalTypeNameToSignature(final String internalTypeName) {
+        if (StringUtils.isEmpty(internalTypeName) || StringUtils.equalsAny(internalTypeName, Const.SHORT_TYPE_NAMES)) {
+            return internalTypeName;
+        }
+        switch (internalTypeName.charAt(0)) {
+            case '[':
+                return internalTypeName;
+            case 'L':
+            case 'T':
+                if (internalTypeName.charAt(internalTypeName.length() - 1) == ';') {
+                    return internalTypeName;
+                }
+                return 'L' + internalTypeName + ';';
+            default:
+                return 'L' + internalTypeName + ';';
+        }
+    }
+
     static int size(final int coded) {
         return coded & 3;
     }
@@ -364,24 +382,6 @@ public abstract class Type {
     @Override
     public int hashCode() {
         return type ^ signature.hashCode();
-    }
-
-    static String internalTypeNameToSignature(final String internalTypeName) {
-        if (StringUtils.isEmpty(internalTypeName) || StringUtils.equalsAny(internalTypeName, Const.SHORT_TYPE_NAMES)) {
-            return internalTypeName;
-        }
-        switch (internalTypeName.charAt(0)) {
-            case '[':
-                return internalTypeName;
-            case 'L':
-            case 'T':
-                if (internalTypeName.charAt(internalTypeName.length() - 1) == ';') {
-                    return internalTypeName;
-                }
-                return 'L' + internalTypeName + ';';
-            default:
-                return 'L' + internalTypeName + ';';
-        }
     }
 
     /**

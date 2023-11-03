@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class IMULTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IMUL imul = new IMUL();
         imul.accept(countVisitor);

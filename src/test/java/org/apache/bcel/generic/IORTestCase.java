@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class IORTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IOR ior = new IOR();
         ior.accept(countVisitor);
