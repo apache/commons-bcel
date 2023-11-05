@@ -113,7 +113,7 @@ public final class Pass3aVerifier extends PassVerifier {
     /**
      * This visitor class does the actual checking for the instruction operand's constraints.
      */
-    private class InstOperandConstraintVisitor extends org.apache.bcel.generic.EmptyVisitor {
+    private final class InstOperandConstraintVisitor extends org.apache.bcel.generic.EmptyVisitor {
         /** The ConstantPoolGen instance this Visitor operates on. */
         private final ConstantPoolGen constantPoolGen;
 

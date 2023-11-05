@@ -64,7 +64,7 @@ public class Subroutines {
     /**
      * This inner class implements the Subroutine interface.
      */
-    private class SubroutineImpl implements Subroutine {
+    private final class SubroutineImpl implements Subroutine {
         /**
          * UNSET, a symbol for an uninitialized localVariable field. This is used for the "top-level" Subroutine; i.e. no
          * subroutine.
