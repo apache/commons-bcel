@@ -28,7 +28,7 @@ import org.apache.commons.lang3.SystemUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class EmptyVisitorTestCase {
+final class EmptyVisitorTestCase {
 
     /*
      * https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-6.html#jvms-6.2

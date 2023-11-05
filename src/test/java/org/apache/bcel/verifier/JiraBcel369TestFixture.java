@@ -17,7 +17,7 @@
 
 package org.apache.bcel.verifier;
 
-class JiraBcel369TestFixture {
+final class JiraBcel369TestFixture {
 
     public JiraBcel369TestFixture(int i) {
         try {

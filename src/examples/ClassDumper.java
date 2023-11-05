@@ -32,7 +32,7 @@ import org.apache.bcel.util.BCELifier;
 /**
  * Display Java .class file data. Output is based on javap tool. Built using the BCEL libary.
  */
-class ClassDumper {
+final class ClassDumper {
 
     private final FileImageInputStream file;
     private final String fileName;
@@ -341,7 +341,7 @@ class ClassDumper {
 
 }
 
-class DumpClass {
+final class DumpClass {
 
     public static void main(final String[] args) throws IOException {
 

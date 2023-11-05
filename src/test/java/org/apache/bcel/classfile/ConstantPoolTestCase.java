@@ -33,11 +33,11 @@ import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.ClassPathRepository;
 import org.junit.jupiter.api.Test;
 
-class ClassWithDoubleConstantPoolItem {
+final class ClassWithDoubleConstantPoolItem {
     double d = 42; // here is the key; we need a double constant value
 }
 
-class ClassWithLongConstantPoolItem {
+final class ClassWithLongConstantPoolItem {
     long l = 42; // here is the key; we need a double constant value
 }
 

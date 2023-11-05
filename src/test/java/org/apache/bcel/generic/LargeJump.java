@@ -16,7 +16,7 @@
  */
 package org.apache.bcel.generic;
 
-class LargeJump {
+final class LargeJump {
     public static void methodWithLargeJump(final int i) {
         for (; i == 0;) {
             try {

@@ -50,7 +50,7 @@ final class test$method name with () in it$1 extends kotlin.jvm.internal.Lambda 
  */
 public class InvalidMethodSigantureTestCase {
 
-    class TestVisitor extends org.apache.bcel.classfile.EmptyVisitor {
+    final class TestVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         @Override
         public void visitField(final Field field) {
             field.getType();

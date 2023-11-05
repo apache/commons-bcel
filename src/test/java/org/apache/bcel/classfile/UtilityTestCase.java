@@ -43,7 +43,7 @@ public class UtilityTestCase {
 
     @Test
     public void testCodeToString() throws Exception {
-        class CodeToString {
+        final class CodeToString {
             int[][] a = new int[0][0];
 
             CodeToString() {

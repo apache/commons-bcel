@@ -60,7 +60,7 @@ import org.apache.bcel.generic.Type;
  *
  * @see BCELifier
  */
-class BCELFactory extends EmptyVisitor {
+final class BCELFactory extends EmptyVisitor {
 
     private static final String CONSTANT_PREFIX = Const.class.getSimpleName() + ".";
     private final MethodGen methodGen;
