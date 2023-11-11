@@ -39,7 +39,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
     private LineNumber[] lineNumberTable; // Table of line/numbers pairs
 
     /**
-     * Construct object from input stream.
+     * Constructs object from input stream.
      *
      * @param nameIndex Index of name
      * @param length Content length in bytes

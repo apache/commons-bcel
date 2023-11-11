@@ -48,7 +48,7 @@ public final class StackMap extends Attribute {
     private StackMapEntry[] table; // Table of stack map entries
 
     /**
-     * Construct object from input stream.
+     * Constructs object from input stream.
      *
      * @param nameIndex Index of name
      * @param length Content length in bytes

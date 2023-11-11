@@ -55,7 +55,7 @@ public final class StackMapEntry implements Node, Cloneable {
     private ConstantPool constantPool;
 
     /**
-     * Construct object from input stream.
+     * Constructs object from input stream.
      *
      * @param dataInput Input stream
      * @throws IOException if an I/O error occurs.

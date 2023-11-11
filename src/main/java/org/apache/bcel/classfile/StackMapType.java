@@ -48,7 +48,7 @@ public final class StackMapType implements Node, Cloneable {
     }
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.

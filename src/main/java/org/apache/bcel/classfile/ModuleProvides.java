@@ -37,7 +37,7 @@ public final class ModuleProvides implements Cloneable, Node {
     private final int[] providesWithIndex; // points to CONSTANT_Class_info
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      *
      * @param file Input stream
      * @throws IOException if an I/O Exception occurs in readUnsignedShort

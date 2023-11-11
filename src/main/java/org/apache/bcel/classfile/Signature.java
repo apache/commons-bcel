@@ -155,7 +155,7 @@ public final class Signature extends Attribute {
     private int signatureIndex;
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      *
      * @param nameIndex Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes

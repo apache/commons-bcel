@@ -73,7 +73,7 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      *
      * @param file Input stream
      */

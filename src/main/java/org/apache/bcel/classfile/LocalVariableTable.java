@@ -38,7 +38,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     private LocalVariable[] localVariableTable; // variables
 
     /**
-     * Construct object from input stream.
+     * Constructs object from input stream.
      *
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes

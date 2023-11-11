@@ -58,7 +58,7 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     }
 
     /**
-     * Construct object from Input stream.
+     * Constructs object from Input stream.
      *
      * @param nameIndex Index in constant pool to CONSTANT_Utf8
      * @param length Content length in bytes

@@ -38,7 +38,7 @@ public final class NestMembers extends Attribute {
     private int[] classes;
 
     /**
-     * Construct object from input stream.
+     * Constructs object from input stream.
      *
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes
