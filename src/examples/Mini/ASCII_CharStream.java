@@ -237,28 +237,28 @@ public final class ASCII_CharStream {
         return c;
     }
 
-    static public void ReInit(final java.io.InputStream dstream, final int startline, final int startcolumn) {
-        ReInit(dstream, startline, startcolumn, 4096);
+    static public void ReInit(final java.io.InputStream dstream, final int startline, final int startColumn) {
+        ReInit(dstream, startline, startColumn, 4096);
     }
 
-    static public void ReInit(final java.io.InputStream dstream, final int startline, final int startcolumn, final int buffersize) {
-        ReInit(new java.io.InputStreamReader(dstream), startline, startcolumn, 4096);
+    static public void ReInit(final java.io.InputStream dstream, final int startline, final int startColumn, final int bufferSize) {
+        ReInit(new java.io.InputStreamReader(dstream), startline, startColumn, 4096);
     }
 
-    static public void ReInit(final java.io.Reader dstream, final int startline, final int startcolumn) {
-        ReInit(dstream, startline, startcolumn, 4096);
+    static public void ReInit(final java.io.Reader dstream, final int startline, final int startColumn) {
+        ReInit(dstream, startline, startColumn, 4096);
     }
 
-    static public void ReInit(final java.io.Reader dstream, final int startline, final int startcolumn, final int buffersize) {
+    static public void ReInit(final java.io.Reader dstream, final int startline, final int startColumn, final int bufferSize) {
         inputStream = dstream;
         line = startline;
-        column = startcolumn - 1;
+        column = startColumn - 1;
 
-        if (buffer == null || buffersize != buffer.length) {
-            available = bufsize = buffersize;
-            buffer = new char[buffersize];
-            bufline = new int[buffersize];
-            bufcolumn = new int[buffersize];
+        if (buffer == null || bufferSize != buffer.length) {
+            available = bufsize = bufferSize;
+            buffer = new char[bufferSize];
+            bufline = new int[bufferSize];
+            bufcolumn = new int[bufferSize];
         }
         prevCharIsLF = prevCharIsCR = false;
         tokenBegin = inBuf = maxNextCharInd = 0;
@@ -299,31 +299,31 @@ public final class ASCII_CharStream {
         bufcolumn[bufpos] = column;
     }
 
-    public ASCII_CharStream(final java.io.InputStream dstream, final int startline, final int startcolumn) {
-        this(dstream, startline, startcolumn, 4096);
+    public ASCII_CharStream(final java.io.InputStream dstream, final int startline, final int startColumn) {
+        this(dstream, startline, startColumn, 4096);
     }
 
-    public ASCII_CharStream(final java.io.InputStream dstream, final int startline, final int startcolumn, final int buffersize) {
-        this(new java.io.InputStreamReader(dstream), startline, startcolumn, 4096);
+    public ASCII_CharStream(final java.io.InputStream dstream, final int startline, final int startColumn, final int bufferSize) {
+        this(new java.io.InputStreamReader(dstream), startline, startColumn, 4096);
     }
 
-    public ASCII_CharStream(final java.io.Reader dstream, final int startline, final int startcolumn) {
-        this(dstream, startline, startcolumn, 4096);
+    public ASCII_CharStream(final java.io.Reader dstream, final int startline, final int startColumn) {
+        this(dstream, startline, startColumn, 4096);
     }
 
-    public ASCII_CharStream(final java.io.Reader dstream, final int startline, final int startcolumn, final int buffersize) {
+    public ASCII_CharStream(final java.io.Reader dstream, final int startline, final int startColumn, final int bufferSize) {
         if (inputStream != null) {
             throw new Error("\n   ERROR: Second call to the constructor of a static ASCII_CharStream.  You must\n"
                 + "       either use ReInit() or set the JavaCC option STATIC to false\n" + "       during the generation of this class.");
         }
         inputStream = dstream;
         line = startline;
-        column = startcolumn - 1;
+        column = startColumn - 1;
 
-        available = bufsize = buffersize;
-        buffer = new char[buffersize];
-        bufline = new int[buffersize];
-        bufcolumn = new int[buffersize];
+        available = bufsize = bufferSize;
+        buffer = new char[bufferSize];
+        bufline = new int[bufferSize];
+        bufcolumn = new int[bufferSize];
     }
 
 }
