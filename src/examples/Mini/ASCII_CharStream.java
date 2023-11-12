@@ -237,21 +237,21 @@ public final class ASCII_CharStream {
         return c;
     }
 
-    static public void ReInit(final java.io.InputStream dstream, final int startline, final int startColumn) {
-        ReInit(dstream, startline, startColumn, 4096);
+    static public void ReInit(final java.io.InputStream dstream, final int startLine, final int startColumn) {
+        ReInit(dstream, startLine, startColumn, 4096);
     }
 
-    static public void ReInit(final java.io.InputStream dstream, final int startline, final int startColumn, final int bufferSize) {
-        ReInit(new java.io.InputStreamReader(dstream), startline, startColumn, 4096);
+    static public void ReInit(final java.io.InputStream dstream, final int startLine, final int startColumn, final int bufferSize) {
+        ReInit(new java.io.InputStreamReader(dstream), startLine, startColumn, 4096);
     }
 
-    static public void ReInit(final java.io.Reader dstream, final int startline, final int startColumn) {
-        ReInit(dstream, startline, startColumn, 4096);
+    static public void ReInit(final java.io.Reader dstream, final int startLine, final int startColumn) {
+        ReInit(dstream, startLine, startColumn, 4096);
     }
 
-    static public void ReInit(final java.io.Reader dstream, final int startline, final int startColumn, final int bufferSize) {
+    static public void ReInit(final java.io.Reader dstream, final int startLine, final int startColumn, final int bufferSize) {
         inputStream = dstream;
-        line = startline;
+        line = startLine;
         column = startColumn - 1;
 
         if (buffer == null || bufferSize != buffer.length) {
@@ -299,25 +299,25 @@ public final class ASCII_CharStream {
         bufcolumn[bufpos] = column;
     }
 
-    public ASCII_CharStream(final java.io.InputStream dstream, final int startline, final int startColumn) {
-        this(dstream, startline, startColumn, 4096);
+    public ASCII_CharStream(final java.io.InputStream dstream, final int startLine, final int startColumn) {
+        this(dstream, startLine, startColumn, 4096);
     }
 
-    public ASCII_CharStream(final java.io.InputStream dstream, final int startline, final int startColumn, final int bufferSize) {
-        this(new java.io.InputStreamReader(dstream), startline, startColumn, 4096);
+    public ASCII_CharStream(final java.io.InputStream dstream, final int startLine, final int startColumn, final int bufferSize) {
+        this(new java.io.InputStreamReader(dstream), startLine, startColumn, 4096);
     }
 
-    public ASCII_CharStream(final java.io.Reader dstream, final int startline, final int startColumn) {
-        this(dstream, startline, startColumn, 4096);
+    public ASCII_CharStream(final java.io.Reader dstream, final int startLine, final int startColumn) {
+        this(dstream, startLine, startColumn, 4096);
     }
 
-    public ASCII_CharStream(final java.io.Reader dstream, final int startline, final int startColumn, final int bufferSize) {
+    public ASCII_CharStream(final java.io.Reader dstream, final int startLine, final int startColumn, final int bufferSize) {
         if (inputStream != null) {
             throw new Error("\n   ERROR: Second call to the constructor of a static ASCII_CharStream.  You must\n"
                 + "       either use ReInit() or set the JavaCC option STATIC to false\n" + "       during the generation of this class.");
         }
         inputStream = dstream;
-        line = startline;
+        line = startLine;
         column = startColumn - 1;
 
         available = bufsize = bufferSize;
