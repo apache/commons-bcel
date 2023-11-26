@@ -28,7 +28,7 @@ import org.apache.bcel.classfile.Utility;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Abstract super class for all possible java types, namely basic types such as int, object types like String and array
+ * Abstract super class for all possible Java types, namely basic types such as int, object types like String and array
  * types, e.g. int[]
  */
 public abstract class Type {

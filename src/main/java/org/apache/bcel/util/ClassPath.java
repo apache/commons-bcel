@@ -635,7 +635,7 @@ public class ClassPath implements Closeable {
     /**
      * @param name fully qualified file name, e.g. java/lang/String
      * @param suffix file name ends with suff, e.g. .java
-     * @return class file for the java class
+     * @return class file for the Java class
      * @throws IOException if an I/O error occurs.
      */
     public ClassFile getClassFile(final String name, final String suffix) throws IOException {

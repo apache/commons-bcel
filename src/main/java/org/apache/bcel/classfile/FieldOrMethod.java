@@ -216,7 +216,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     }
 
     /**
-     * @return String representation of object's type signature (java style)
+     * @return String representation of object's type signature (Java style)
      */
     public final String getSignature() {
         return constant_pool.getConstantUtf8(signature_index).getBytes();

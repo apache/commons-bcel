@@ -85,7 +85,7 @@ public abstract class Utility {
     }
 
     /**
-     * Encode bytes into valid java identifier characters. Used by
+     * Encode bytes into valid Java identifier characters. Used by
      * <a href="Utility.html#encode(byte[], boolean)">encode()</a>
      */
     private static final class JavaWriter extends FilterWriter {

@@ -67,7 +67,7 @@ final class ClassDumper {
     /**
      * Parses the given Java class file and return an object that represents the contained data, i.e., constants, methods,
      * fields and commands. A <em>ClassFormatException</em> is raised, if the file is not a valid .class file. (This does
-     * not include verification of the byte code as it is performed by the java interpreter).
+     * not include verification of the byte code as it is performed by the Java interpreter).
      *
      * @throws IOException
      * @throws ClassFormatException

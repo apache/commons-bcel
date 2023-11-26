@@ -38,7 +38,7 @@ import org.apache.bcel.util.BCELComparator;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * Template class for building up a java class. May be initialized with an existing java class (file).
+ * Template class for building up a java class. May be initialized with an existing Java class (file).
  *
  * @see JavaClass
  */
