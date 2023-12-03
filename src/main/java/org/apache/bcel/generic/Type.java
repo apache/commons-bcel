@@ -397,14 +397,6 @@ public abstract class Type {
         return this;
     }
 
-    /*
-     * Currently only used by the ArrayType constructor. The signature has a complicated dependency on other parameter so
-     * it's tricky to do it in a call to the super ctor.
-     */
-    void setSignature(final String signature) {
-        this.signature = signature;
-    }
-
     /**
      * @return Type string, e.g. 'int[]'
      */
