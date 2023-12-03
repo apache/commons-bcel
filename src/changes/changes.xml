@@ -76,6 +76,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_21.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory, Mark Roberts">[Bcelifier] stackmap support to pass JDK verifier #177.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Class org.apache.bcel.util.ClassVector defines non-transient non-serializable instance field vec [org.apache.bcel.util.ClassVector] In ClassVector.java SE_BAD_FIELD.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Switch statement found in org.apache.bcel.util.BCELFactory.visitAllocationInstruction(AllocationInstruction) where one case falls through to the next case [org.apache.bcel.util.BCELFactory, org.apache.bcel.util.BCELFactory] At BCELFactory.java:[lines 188-191]Another occurrence at BCELFactory.java:[lines 192-196] SF_SWITCH_FALLTHROUGH.</action>      
       <!-- FIX -->
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">When parsing an class with an invalid constant reference, ensure ClassParser.parse() throws ClassFormatException, not NullPointerException.</action>
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">Ensure that references to a constant pool entry with index zero trigger a ClassFormatException, not a NullPointerException.</action>

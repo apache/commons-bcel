@@ -432,7 +432,9 @@ public abstract class Utility {
         case Const.NEW:
         case Const.CHECKCAST:
             buf.append("\t");
-            //$FALL-THROUGH$
+            index = bytes.readUnsignedShort();
+            buf.append("\t<").append(constantPool.constantToString(index, Const.CONSTANT_Class)).append(">").append(verbose ? " (" + index + ")" : "");
+            break;
         case Const.INSTANCEOF:
             index = bytes.readUnsignedShort();
             buf.append("\t<").append(constantPool.constantToString(index, Const.CONSTANT_Class)).append(">").append(verbose ? " (" + index + ")" : "");
