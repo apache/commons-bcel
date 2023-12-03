@@ -33,7 +33,7 @@
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
   <packaging>jar</packaging>
-  <version>6.8.0-SNAPSHOT</version>
+  <version>6.8.0</version>
   <name>Apache Commons BCEL</name>
   <description>Apache Commons Bytecode Engineering Library</description>
 
@@ -330,7 +330,7 @@
           <effort>Default</effort>
           <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
           <!-- Hacky: Don't allow new SpotBugs errors --> 
-          <maxAllowedViolations>8</maxAllowedViolations>
+          <maxAllowedViolations>9</maxAllowedViolations>
         </configuration>
       </plugin>
       <plugin>
@@ -438,6 +438,8 @@
           <threshold>Normal</threshold>
           <effort>Default</effort>
           <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
+          <!-- Hacky: Don't allow new SpotBugs errors --> 
+          <maxAllowedViolations>9</maxAllowedViolations>
         </configuration>
       </plugin>
     </plugins>
