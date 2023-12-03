@@ -26,6 +26,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd"><!-- N.B. Using wild-card class names so exclusions work regardless of the top-level package -->
 
+  <!-- https://github.com/spotbugs/spotbugs/issues/2710 -->
+  <Match>
+    <Class name="~.*" />
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+  </Match>
+
   <!-- Waiting on BCEL-252 -->
   <Match>
     <Class name="~.*\.util\.Class2HTML" />
@@ -52,6 +58,14 @@
       <Class name="~.*\.verifier\.structurals\.LocalVariables"/>
       <Class name="~.*\.verifier\.structurals\.OperandStack"/>
     </Or>
+  </Match>
+
+  <!-- Binary compatibility -->
+  <Match>
+    <Bug pattern="EI_EXPOSE_STATIC_REP2"/>
+    <Method name="clone"/>
+    <Class name="org\.apache\.bcel\.Repository"/>
+    <Method name="setRepository"/>
   </Match>
 
   <!-- Reason: TODO, perhaps? -->

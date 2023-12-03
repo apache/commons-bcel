@@ -27,7 +27,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>64</version>
+    <version>65</version>
   </parent>
 
   <groupId>org.apache.bcel</groupId>
@@ -329,8 +329,8 @@
           <threshold>Normal</threshold>
           <effort>Default</effort>
           <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
-          <!-- Hacky: Don't add SpotBugs errors, we have 15 on Java 8, 17 on Java 11 and up --> 
-          <maxAllowedViolations>17</maxAllowedViolations>
+          <!-- Hacky: Don't allow new SpotBugs errors --> 
+          <maxAllowedViolations>8</maxAllowedViolations>
         </configuration>
       </plugin>
       <plugin>
