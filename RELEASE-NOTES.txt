@@ -1,4 +1,93 @@
               Apache Commons BCEL
+              Version 6.8.0
+              RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.8.0!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+Maintenance and bug fix release.
+
+NEW FEATURES:
+=============
+
+o           Add and use InvalidMethodSignatureException extending ClassFormatException. Thanks to Gary Gregory.
+o           Increase code coverage in Class2HTMLTestCase with new test input Java4Example #186. Thanks to nbauma109.
+o           Add verifier tests on some opcodes #180. Thanks to nbauma109.
+o           Added signature test cases for class/method, and bad signatures #182. Thanks to nbauma109.
+o           Add Const.MAJOR_20. Thanks to Gary Gregory.
+o           Add Const.MINOR_20. Thanks to Gary Gregory.
+o           Add Const.MAJOR_21. Thanks to Gary Gregory.
+o           Add Const.MINOR_21. Thanks to Gary Gregory.
+o           [Bcelifier] stackmap support to pass JDK verifier #177. Thanks to nbauma109, Gary Gregory, Mark Roberts.
+o           Fix SpotBugs [ERROR] Class org.apache.bcel.util.ClassVector defines non-transient non-serializable instance field vec [org.apache.bcel.util.ClassVector] In ClassVector.java SE_BAD_FIELD. Thanks to Gary Gregory.
+o           Fix SpotBugs [ERROR] Switch statement found in org.apache.bcel.util.BCELFactory.visitAllocationInstruction(AllocationInstruction) where one case falls through to the next case [org.apache.bcel.util.BCELFactory, org.apache.bcel.util.BCELFactory] At BCELFactory.java:[lines 188-191]Another occurrence at BCELFactory.java:[lines 192-196] SF_SWITCH_FALLTHROUGH. Thanks to Gary Gregory.
+
+FIXED BUGS:
+===========
+
+o           When parsing an class with an invalid constant reference, ensure ClassParser.parse() throws ClassFormatException, not NullPointerException. Thanks to OSS-Fuzz.
+o           Ensure that references to a constant pool entry with index zero trigger a ClassFormatException, not a NullPointerException. Thanks to OSS-Fuzz.
+o           Ensure that references to the unused constant pool entry after a long/double entry triggers a ClassFormatException, not a NullPointerException. Thanks to OSS-Fuzz.
+o           Test and coverage of InstructionFactory #190. Thanks to nbauma109.
+o           Verifier: test and coverage for SWAP instruction #188. Thanks to nbauma109.
+o           Exception parsing Kotlin class with 'fun `method name with () in it`()' #205. Thanks to Jason Copenhaver, Gary Gregory.
+o           Fix null pointers in AnnotationEntry #213. Thanks to nbauma109, Gary Gregory.
+o           Field not found, search field in both super class and implemented interfaces (5x duplicated code to find field by name and type is refactored to a new method and now supports package-private) #181. Thanks to nbauma109.
+o BCEL-366: Use alternative name for broken classes under test #220. Thanks to Slawomir Jaranowski.
+o BCEL-367: Fixes java.lang.IndexOutOfBoundsException for ATHROW on empty stack #223. Thanks to Katherine Hough, Gary Gregory.
+o BCEL-368: Fixes java.lang.StackOverflowError in Select#toString(boolean) #229. Thanks to Katherine Hough, Gary Gregory.
+o           Fix for type.getType(...) use on non-signature type names #221. Thanks to nbauma109, Judit Knoll, Gary Gregory.
+o           Fix EmptyVisitorTestCase on Java 21. Thanks to Gary Gregory.
+
+CHANGES:
+========
+
+o           Bump commons-parent from 54 to 65 #189, #198, #222. Thanks to Gary Gregory, Dependabot.
+o           Bump jna.version from 5.12.1 to 5.13.0 #203. Thanks to Dependabot.
+o           Bump kotlin-stdlib from 1.8.10 to 1.9.21 #217, #219, #227, #231, #235, #245, #247. Thanks to Dependabot.
+o           Bump commons-io from 2.11.0 to 2.15.1. Thanks to Dependabot.
+o           Bump commons-lang3 from 3.12.0 to 3.14.0. Thanks to Gary Gregory.
+o           Bump org.codehaus.mojo:exec-maven-plugin from 3.1.0 to 3.1.1 #246. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BCEL
               Version 6.7.0
               RELEASE NOTES
 
