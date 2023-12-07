@@ -33,7 +33,7 @@
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
   <packaging>jar</packaging>
-  <version>6.8.0</version>
+  <version>6.8.1-SNAPSHOT</version>
   <name>Apache Commons BCEL</name>
   <description>Apache Commons Bytecode Engineering Library</description>
 
@@ -48,6 +48,7 @@
     <commons.componentid>bcel</commons.componentid>
     <commons.module.name>org.apache.bcel</commons.module.name>
     <commons.release.version>6.8.0</commons.release.version>
+    <commons.release.next>6.8.1</commons.release.next>
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <commons.rc.version>RC1</commons.rc.version>
     <commons.bc.version>6.7.0</commons.bc.version>
