@@ -64,6 +64,8 @@ The <action> type attribute can be add,update,fix,remove.
    -->
 
   <body>
+    <release version="6.8.1" date="202Y-MM-DD" description="Maintenance and bug fix release.">
+    </release>
     <release version="6.8.0" date="2023-12-03" description="Maintenance and bug fix release.">
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use InvalidMethodSignatureException extending ClassFormatException.</action>
