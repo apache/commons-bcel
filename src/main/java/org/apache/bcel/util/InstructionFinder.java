@@ -369,7 +369,7 @@ public class InstructionFinder {
 //    }
 
 //    private static final String pattern2string( String pattern, boolean make_string ) {
-//        StringBuffer buf = new StringBuffer();
+//        StringBuilder buf = new StringBuilder();
 //        for (int i = 0; i < pattern.length(); i++) {
 //            char ch = pattern.charAt(i);
 //            if (ch >= OFFSET) {

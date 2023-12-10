@@ -317,7 +317,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
         }
 
         if (!ignore) {
-            final StringBuffer buf = new StringBuffer();
+            final StringBuilder buf = new StringBuilder();
 
             body.code(buf);
             out.println(getVarDecls());
