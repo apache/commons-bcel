@@ -398,7 +398,7 @@ public class Subroutines {
     // CHECKSTYLE:ON
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param mg A MethodGen object representing method to create the Subroutine objects of. Assumes that JustIce strict
      *        checks are needed.
@@ -408,7 +408,7 @@ public class Subroutines {
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param mg A MethodGen object representing method to create the Subroutine objects of.
      * @param enableJustIceCheck whether to enable additional JustIce checks

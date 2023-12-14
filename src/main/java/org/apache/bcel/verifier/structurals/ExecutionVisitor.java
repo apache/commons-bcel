@@ -70,7 +70,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     private ConstantPoolGen cpg;
 
     /**
-     * Constructor. Constructs a new instance of this class.
+     * Constructs a new instance of this class.
      */
     public ExecutionVisitor() {
     }

@@ -90,7 +90,7 @@ public class VerifierAppFrame extends JFrame {
     private final JMenuItem whatisMenuItem = new JMenuItem();
     private final JMenuItem aboutMenuItem = new JMenuItem();
 
-    /** Constructor. */
+    /** Constructs a new instance. */
     public VerifierAppFrame() {
         enableEvents(AWTEvent.WINDOW_EVENT_MASK);
         try {
