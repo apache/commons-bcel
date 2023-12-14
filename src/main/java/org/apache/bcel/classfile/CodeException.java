@@ -60,7 +60,7 @@ public final class CodeException implements Cloneable, Node, Constants {
     /** Range in the code the exception handler. */
     private int startPc;
 
-    /** active. startPc is inclusive, endPc exclusive. */
+    /** Active. startPc is inclusive, endPc exclusive. */
     private int endPc;
 
     /**
