@@ -65,7 +65,10 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="6.8.1" date="202Y-MM-DD" description="Maintenance and bug fix release.">
+      <!-- FIX  -->
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal StringBuffer with StringBuilder.</action>
+      <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.13.0 to 5.14.0 #250.</action>
     </release>
     <release version="6.8.0" date="2023-12-03" description="Maintenance and bug fix release.">
       <!-- ADD -->
