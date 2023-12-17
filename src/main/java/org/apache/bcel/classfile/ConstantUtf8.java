@@ -178,6 +178,11 @@ public final class ConstantUtf8 extends Constant {
             Cache.MAX_ENTRY_SIZE);
     }
 
+    // Avoid Spotbugs complaint about Write to static field
+    private static void countCreated() {
+        created++;
+    }
+
     private final String value;
 
     /**
@@ -198,7 +203,7 @@ public final class ConstantUtf8 extends Constant {
     ConstantUtf8(final DataInput dataInput) throws IOException {
         super(Const.CONSTANT_Utf8);
         value = dataInput.readUTF();
-        created++;
+        countCreated();
     }
 
     /**
@@ -207,7 +212,7 @@ public final class ConstantUtf8 extends Constant {
     public ConstantUtf8(final String value) {
         super(Const.CONSTANT_Utf8);
         this.value = Objects.requireNonNull(value, "value");
-        created++;
+        countCreated();
     }
 
     /**
