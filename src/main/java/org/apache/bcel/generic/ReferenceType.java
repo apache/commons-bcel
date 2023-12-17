@@ -56,8 +56,8 @@ public abstract class ReferenceType extends Type {
             return this;
             /*
              * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by Type.NULL so we can also
-             * say all the objects referenced by Type.NULL were derived from java.lang.Object. However, the Java Language's
-             * "instanceof" operator proves us wrong: "null" is not referring to an instance of java.lang.Object :)
+             * say all the objects referenced by Type.NULL were derived from {@link Object}. However, the Java Language's
+             * "instanceof" operator proves us wrong: "null" is not referring to an instance of {@link Object} :)
              */
         }
         if (this instanceof ArrayType || t instanceof ArrayType) {
@@ -87,8 +87,8 @@ public abstract class ReferenceType extends Type {
             return this;
             /*
              * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by Type.NULL so we can also
-             * say all the objects referenced by Type.NULL were derived from java.lang.Object. However, the Java Language's
-             * "instanceof" operator proves us wrong: "null" is not referring to an instance of java.lang.Object :)
+             * say all the objects referenced by Type.NULL were derived from {@link Object}. However, the Java Language's
+             * "instanceof" operator proves us wrong: "null" is not referring to an instance of {@link Object} :)
              */
         }
         /* This code is from a bug report by Konstantin Shagin <konst@cs.technion.ac.il> */

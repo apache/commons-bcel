@@ -173,7 +173,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert runtime java.lang.Class to BCEL Type object.
+     * Convert runtime {@link Class} to BCEL Type object.
      *
      * @param cls Java class
      * @return corresponding Type object
@@ -252,7 +252,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert runtime java.lang.Class[] to BCEL Type objects.
+     * Convert runtime {@code java.lang.Class[]} to BCEL Type objects.
      *
      * @param classes an array of runtime class objects
      * @return array of corresponding Type objects

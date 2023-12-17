@@ -1321,7 +1321,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
     /**
      * Ensures that every class has a super class and that <B>final</B> classes are not subclassed. This means, the class
-     * this Pass2Verifier operates on has proper super classes (transitively) up to java.lang.Object. The reason for really
+     * this Pass2Verifier operates on has proper super classes (transitively) up to {@link Object}. The reason for really
      * loading (and Pass1-verifying) all of those classes here is that we need them in Pass2 anyway to verify no final
      * methods are overridden (that could be declared anywhere in the ancestor hierarchy).
      *

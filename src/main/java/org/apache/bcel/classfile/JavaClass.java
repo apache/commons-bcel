@@ -634,7 +634,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return the superclass for this JavaClass object, or null if this is java.lang.Object
+     * @return the superclass for this JavaClass object, or null if this is {@link Object}
      * @throws ClassNotFoundException if the superclass can't be found
      */
     public JavaClass getSuperClass() throws ClassNotFoundException {
@@ -658,8 +658,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * returns the super class name of this class. In the case that this class is java.lang.Object, it will return itself
-     * (java.lang.Object). This is probably incorrect but isn't fixed at this time to not break existing clients.
+     * returns the super class name of this class. In the case that this class is {@link Object}, it will return itself
+     * ({@link Object}). This is probably incorrect but isn't fixed at this time to not break existing clients.
      *
      * @return Superclass name.
      */

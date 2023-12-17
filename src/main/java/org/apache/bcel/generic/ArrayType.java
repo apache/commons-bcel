@@ -39,7 +39,7 @@ public final class ArrayType extends ReferenceType {
     /**
      * Convenience constructor for reference array type, e.g. Object[]
      *
-     * @param className complete name of class (java.lang.String, e.g.)
+     * @param className complete name of class ({@link String}, for example)
      * @param dimensions array dimensions
      */
     public ArrayType(final String className, final int dimensions) {
