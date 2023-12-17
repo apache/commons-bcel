@@ -330,8 +330,6 @@
           <threshold>Normal</threshold>
           <effort>Default</effort>
           <excludeFilterFile>src/conf/spotbugs-exclude-filter.xml</excludeFilterFile>
-          <!-- Hacky: Don't allow new SpotBugs errors --> 
-          <maxAllowedViolations>9</maxAllowedViolations>
         </configuration>
       </plugin>
       <plugin>
