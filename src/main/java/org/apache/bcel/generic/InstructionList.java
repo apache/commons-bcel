@@ -1129,6 +1129,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
             case Const.LOOKUPSWITCH:
                 maxAdditionalBytes += 3;
                 break;
+            default:
+                // TODO should this be an error?
+                break;
             }
             index += i.getLength();
         }
