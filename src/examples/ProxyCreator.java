@@ -34,7 +34,7 @@ import org.apache.bcel.generic.PUSH;
 import org.apache.bcel.generic.Type;
 
 /**
- * Dynamically creates and uses a proxy for {@code java.awt.event.ActionListener} via the class loader mechanism if
+ * Dynamically creates and uses a proxy for {@link java.awt.event.ActionListener} via the class loader mechanism if
  * called with
  *
  * <pre>
@@ -45,7 +45,7 @@ import org.apache.bcel.generic.Type;
  * however in big ugly class name, so for many cases it will be more sufficient to put some clever creation code into
  * the class loader.
  * <p>
- * This is comparable to the mechanism provided via {@code java.lang.reflect.Proxy}, but much more flexible.
+ * This is comparable to the mechanism provided via {@link java.lang.reflect.Proxy}, but much more flexible.
  * </p>
  *
  * @see org.apache.bcel.util.JavaWrapper
