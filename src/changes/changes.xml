@@ -70,6 +70,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump GitHub various actions for CI builds.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.13.0 to 5.14.0 #250.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.21 to 1.9.22 #252.</action>
     </release>
     <release version="6.8.0" date="2023-12-03" description="Maintenance and bug fix release.">
       <!-- ADD -->
