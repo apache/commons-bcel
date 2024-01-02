@@ -78,7 +78,8 @@ public class TypeTestCase {
         "org/apache/bcel/classfile/Method",
         "org/apache/bcel/classfile/Synthetic",
         "org/apache/bcel/generic/ConstantPoolGen",
-        "org/apache/bcel/generic/MethodGen"})
+        "org/apache/bcel/generic/MethodGen",
+        "com/foo/Foo"})
     // @formatter:on
     public void testLDC(final String className) throws Exception {
         final JavaClass jc = Repository.lookupClass(className);
