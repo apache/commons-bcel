@@ -21,6 +21,7 @@ import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantDynamic;
 import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
@@ -2030,9 +2031,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
         // visitCPInstruction is called first.
 
         final Constant c = cpg.getConstant(o.getIndex());
-        if (!(c instanceof ConstantInteger || c instanceof ConstantFloat || c instanceof ConstantString || c instanceof ConstantClass)) {
+        if (!(c instanceof ConstantInteger || c instanceof ConstantFloat || c instanceof ConstantString || c instanceof ConstantClass || c instanceof ConstantDynamic)) {
             constraintViolated(o,
-                "Referenced constant should be a CONSTANT_Integer, a CONSTANT_Float, a CONSTANT_String or a CONSTANT_Class, but is '" + c + "'.");
+                "Referenced constant should be a CONSTANT_Integer, a CONSTANT_Float, a CONSTANT_String, a CONSTANT_Class, or a CONSTANT_Dynamic but is '" + c + "'.");
         }
     }
 
