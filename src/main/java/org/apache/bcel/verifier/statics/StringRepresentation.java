@@ -430,9 +430,4 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     public void visitUnknown(final Unknown obj) {
         tostring = toString(obj);
     }
-    
-    @Override
-    public void visitNestHost(NestHost obj) {
-        tostring = toString(obj);
-    }
 }

@@ -39,7 +39,6 @@ public class JiraBcel370TestCase extends AbstractTestCase {
     @ParameterizedTest
     @ValueSource(strings = {
     // @formatter:off
-        "com.puppycrawl.tools.checkstyle.grammar.java.JavaLanguageParser$ClassBlockContext",
         "com.foo.Foo"
     })
     // @formatter:on
