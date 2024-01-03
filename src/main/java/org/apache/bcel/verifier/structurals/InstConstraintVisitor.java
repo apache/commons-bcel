@@ -2031,13 +2031,13 @@ public class InstConstraintVisitor extends EmptyVisitor {
         // visitCPInstruction is called first.
 
         final Constant c = cpg.getConstant(o.getIndex());
-        if (!(c instanceof ConstantInteger 
-                || c instanceof ConstantFloat 
-                || c instanceof ConstantString 
-                || c instanceof ConstantClass 
+        if (!(c instanceof ConstantInteger
+                || c instanceof ConstantFloat
+                || c instanceof ConstantString
+                || c instanceof ConstantClass
                 || c instanceof ConstantDynamic)) {
             constraintViolated(o,
-                "Referenced constant should be a CONSTANT_Integer, a CONSTANT_Float, a CONSTANT_String, a CONSTANT_Class, or a CONSTANT_Dynamic but is '" 
+                "Referenced constant should be a CONSTANT_Integer, a CONSTANT_Float, a CONSTANT_String, a CONSTANT_Class, or a CONSTANT_Dynamic but is '"
                         + c + "'.");
         }
     }
