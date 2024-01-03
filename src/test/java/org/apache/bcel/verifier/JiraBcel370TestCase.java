@@ -17,17 +17,64 @@
 
 package org.apache.bcel.verifier;
 
+import java.io.File;
+import java.io.FileInputStream;
+
 import org.apache.bcel.AbstractTestCase;
-import org.junit.jupiter.api.Test;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.EmptyVisitor;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.LDC;
+import org.apache.bcel.generic.MethodGen;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * Tests BCEL-370.
  */
 public class JiraBcel370TestCase extends AbstractTestCase {
-    @Test
-    public void testCompiledClass() throws ClassNotFoundException {
-        Verifier.verifyType("com.puppycrawl.tools.checkstyle.grammar.java.JavaLanguageParser$ClassBlockContext");
-        Verifier.verifyType("com.foo.Foo");
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "com.puppycrawl.tools.checkstyle.grammar.java.JavaLanguageParser$ClassBlockContext",
+        "com.foo.Foo"
+    })
+    // @formatter:on
+    public void testVerify(String className) throws ClassNotFoundException {
+        // Without the changes to the verifier this fails because it doesn't allow LDC CONSTANT_Dynamic
+        Verifier.verifyType(className);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "target/test-classes/com/puppycrawl/tools/checkstyle/grammar/java/JavaLanguageParser$ClassBlockContext.class",
+        "target/test-classes/com/foo/Foo.class"
+    })
+    // @formatter:on
+    public void testLdcGetType(final String classFileName) throws Exception {
+        try (FileInputStream file = new FileInputStream(classFileName)) {
+            final ClassParser parser = new ClassParser(file, new File(classFileName).getName());
+            JavaClass clazz = parser.parse();
+            
+            Method[] methods = clazz.getMethods();
+            
+            ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
+            MethodGen methodGen = new MethodGen(methods[0], classFileName, cp);
+            
+            // The first instruction is an LDC CONSTANT_Dynamic added by Jacoco
+            Instruction instruction = methodGen.getInstructionList().getInstructions()[0];
+
+            instruction.accept(new EmptyVisitor() {
+                @Override
+                public void visitLDC(LDC ldc) {
+                    // Without the change to LDC.getType() this fails because the tag is CONSTANT_Dynamic
+                    ldc.getType(cp);
+                }
+            });
+        }
+    }
 }
