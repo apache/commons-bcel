@@ -67,6 +67,7 @@ The <action> type attribute can be add,update,fix,remove.
     <release version="6.8.1" date="202Y-MM-DD" description="Maintenance and bug fix release.">
       <!-- FIX  -->
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of StringBuffer with StringBuilder.</action>
+      <action issue="BCEL-370" type="fix" dev="ggregory" due-to="Gary Gregory">CONSTANT_Dynamic is not handled in LDC #254.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump GitHub various actions for CI builds.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.13.0 to 5.14.0 #250.</action>
